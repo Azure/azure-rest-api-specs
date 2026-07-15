@@ -60,6 +60,15 @@ directive:
     where: $.paths
     from: applications.json
     reason: Suppression of OperationsAPI as it doesn't apply to this specific file.
+  - suppress: OperationsAPIImplementation
+    from: datascanners.json
+    reason: >-
+      The Microsoft.Security operations API (the standard
+      /providers/Microsoft.Security/operations list) is owned by a separate
+      TypeSpec project (OperationsAPI, which emits security-Operations.json) and
+      is shared across the resource provider. This spec defines only the
+      datascanners resource type and intentionally does not redefine that shared
+      operations API.
   - suppress: TopLevelResourcesListBySubscription
     where: $.definitions.Pricing
     from: pricings.json
@@ -189,7 +198,6 @@ These settings apply only when `--tag=package-2026-08` is specified on the comma
 ```yaml $(tag) == 'package-2026-08'
 input-file:
   - stable/2026-08-01/datascanners.json
-  - stable/2026-08-01/security-Operations.json
 ```
 
 ### Tag: package-2026-01

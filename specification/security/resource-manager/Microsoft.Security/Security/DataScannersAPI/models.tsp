@@ -15,6 +15,8 @@ namespace DataScannersAPI;
 /**
  * Data scanner resource properties.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "The data scanner is an identity-only resource; its backend contract (ScannerResource) exposes no properties beyond the managed identity, so the properties bag is intentionally empty."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "The data scanner backend (ScannerResource) is identity-only and does not expose a provisioningState; its create, read, and delete operations are synchronous."
 model DataScannerProperties {}
 
 /**
