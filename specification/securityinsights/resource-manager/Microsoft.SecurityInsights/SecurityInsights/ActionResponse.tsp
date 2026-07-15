@@ -30,6 +30,51 @@ model ActionResponse
   etag?: string;
 }
 
+alias ActionResponsesOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+
+    /** the provider namespace */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.OperationalInsights";
+
+    /**
+     * The name of the monitor workspace.
+     */
+    @segment("workspaces")
+    @key
+    @path
+    @minLength(1)
+    @maxLength(90)
+    @pattern("^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$")
+    workspaceName: string;
+
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /**
+     * Alert rule ID
+     */
+    @path
+    @key
+    @segment("alertRules")
+    ruleId: string;
+  },
+  {
+    /**
+     * Action ID
+     */
+    @path
+    @key
+    @segment("actions")
+    actionId: string;
+  },
+  ErrorType = CloudError
+>;
+
 @armResourceOperations(#{ omitTags: true })
 interface ActionResponses {
   /**
@@ -49,16 +94,12 @@ interface ActionResponses {
   @autoRoute
   @put
   @tag("Actions")
-  createOrUpdate is Azure.ResourceManager.Foundations.ArmCreateOperation<
-    Azure.ResourceManager.Extension.ExtensionInstanceParameters<
-      OperationalInsights,
-      ActionResponse
-    >,
-    ActionRequest,
-
+  createOrUpdate is ActionResponsesOps.CreateOrUpdateSync<
+    Resource = ActionResponse,
+    Request = ActionRequest,
+    Response =
       | ArmResourceUpdatedResponse<ActionResponse>
-      | ArmResourceCreatedSyncResponse<ActionResponse>,
-    ErrorResponse = CloudError
+      | ArmResourceCreatedSyncResponse<ActionResponse>
   >;
 
   /**
