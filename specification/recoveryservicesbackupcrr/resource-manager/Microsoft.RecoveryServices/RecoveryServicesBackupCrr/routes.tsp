@@ -55,9 +55,6 @@ interface BackupUsageSummariesCRROperationGroup {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 @tag("AadProperties")
 interface AadPropertiesOperationGroup {
-  /**
-   * Fetches the AAD properties from target region BCM stamp.
-   */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Fetches the AAD properties from target region BCM stamp.")
   @operationId("AadProperties_Get")
@@ -88,9 +85,6 @@ interface AadPropertiesOperationGroup {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 @tag("CrossRegionRestore")
 interface CrossRegionRestoreOperationGroup {
-  /**
-   * Restores the specified backed up data in a different region as compared to where the data is backed up.
-   */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Restores the specified backed up data in a different region as compared to where the data is backed up.")
   @operationId("CrossRegionRestore_Trigger")
@@ -123,9 +117,6 @@ interface CrossRegionRestoreOperationGroup {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 @tag("CrrJobDetails")
 interface BackupCrrJobDetailsOperationGroup {
-  /**
-   * Get CRR job details from target region.
-   */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Get CRR job details from target region.")
   @operationId("BackupCrrJobDetails_Get")
@@ -153,9 +144,6 @@ interface BackupCrrJobDetailsOperationGroup {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 @tag("BackupCrrJobs")
 interface BackupCrrJobsOperationGroup {
-  /**
-   * Gets the list of CRR jobs from the target region.
-   */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Gets the list of CRR jobs from the target region.")
   @operationId("BackupCrrJobs_List")

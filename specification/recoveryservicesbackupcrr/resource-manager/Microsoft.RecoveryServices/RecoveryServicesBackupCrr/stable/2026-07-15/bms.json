@@ -81,7 +81,6 @@
           "AadProperties"
         ],
         "summary": "Fetches the AAD properties from target region BCM stamp.",
-        "description": "Fetches the AAD properties from target region BCM stamp.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -133,7 +132,6 @@
           "CrossRegionRestore"
         ],
         "summary": "Restores the specified backed up data in a different region as compared to where the data is backed up.",
-        "description": "Restores the specified backed up data in a different region as compared to where the data is backed up.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -193,7 +191,6 @@
           "CrrJobDetails"
         ],
         "summary": "Get CRR job details from target region.",
-        "description": "Get CRR job details from target region.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -246,7 +243,6 @@
           "BackupCrrJobs"
         ],
         "summary": "Gets the list of CRR jobs from the target region.",
-        "description": "Gets the list of CRR jobs from the target region.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -628,7 +624,8 @@
             }
           },
           "400": {
-            "description": "Azure operation completed successfully."
+            "description": "BadRequest",
+            "x-ms-error-response": true
           },
           "default": {
             "description": "An unexpected error response.",
@@ -959,6 +956,10 @@
           "$ref": "#/definitions/Resource"
         }
       ]
+    },
+    "AccessTokenBadRequestResponse": {
+      "type": "object",
+      "description": "BadRequest"
     },
     "Azure.Core.azureLocation": {
       "type": "string",
