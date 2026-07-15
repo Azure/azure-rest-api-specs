@@ -216,11 +216,7 @@ model RedisCommonPropertiesRedisConfigurationRecordString {
 @@clientOption(
   RedisFirewallRule,
   "resource-name-constraint",
-  #{
-    minLength: 1,
-    maxLength: 256,
-    pattern: "^[a-zA-Z0-9]+$",
-  },
+  #{ minLength: 1, maxLength: 256, pattern: "^[a-zA-Z0-9]+$" },
   "csharp"
 );
 #suppress "@azure-tools/typespec-client-generator-core/client-option" "RBAC roles for provisioning"
