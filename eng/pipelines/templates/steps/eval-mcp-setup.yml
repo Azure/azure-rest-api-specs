@@ -8,8 +8,11 @@
 # eng/common/pipelines/templates/steps/eval-mcp-setup.yml's `checkout: <repository-resource>` +
 # resources.repositories + endpoint requirement entirely, so no ADO-admin action is needed.
 #
-# Only fetches the top-level files + /eng + /tools/azsdk-cli (sparse checkout) -- add to `Paths`
-# below if the MCP server build ever needs other azure-sdk-tools directories.
+# Fetches the top-level files + /eng + the whole /tools directory (sparse checkout), not just
+# /tools/azsdk-cli: Azure.Sdk.Tools.Cli.csproj has project references to sibling projects (e.g.
+# ../../codeowners-utils/Azure.Sdk.Tools.CodeownersUtils), so pulling only azsdk-cli fails restore
+# with CS0234/CS0246 errors (confirmed by a real pipeline run). Add more top-level paths below if
+# the MCP server build ever needs directories outside /tools too.
 
 parameters:
   - name: TestType
@@ -30,7 +33,7 @@ steps:
       SkipCheckoutNone: true
       TokenToUseForAuth: $(azuresdk-copilot-github-pat)
       Paths:
-        - '/tools/azsdk-cli'
+        - '/tools'
       Repositories:
         - Name: Azure/azure-sdk-tools
           Commitish: main
