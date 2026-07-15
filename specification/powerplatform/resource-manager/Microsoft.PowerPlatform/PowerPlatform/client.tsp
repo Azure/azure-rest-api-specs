@@ -42,6 +42,11 @@ using TypeSpec.Http;
 @@clientName(KeyVaultProperties, "PowerPlatformKeyVaultProperties", "csharp");
 @@clientName(KeyVaultProperties.id, "VaultUri", "csharp");
 @@clientName(keyProperties, "PowerPlatformKeyProperties", "csharp");
+@@clientName(
+  VirtualNetworkProperties,
+  "PowerPlatformVirtualNetworkProperties",
+  "csharp"
+);
 @@alternateType(
   EnterprisePolicyIdentity.systemAssignedIdentityPrincipalId,
   uuid,
@@ -50,6 +55,7 @@ using TypeSpec.Http;
 @@alternateType(EnterprisePolicyIdentity.tenantId, uuid, "csharp");
 @@alternateType(PrivateEndpoint.id, armResourceIdentifier, "csharp");
 @@alternateType(KeyVaultProperties.id, url, "csharp");
+@@alternateType(VirtualNetworkProperties.id, armResourceIdentifier, "csharp");
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
