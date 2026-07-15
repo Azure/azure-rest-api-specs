@@ -45,3 +45,14 @@ using Microsoft.Education;
 
 @@clientName(GrantType, "EducationGrantType", "csharp");
 @@clientName(GrantStatus, "EducationGrantStatus", "csharp");
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "workaround: avoid "
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  LabProperties.totalBudget,
+  "!csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  LabProperties.totalAllocatedBudget,
+  "!csharp"
+);
