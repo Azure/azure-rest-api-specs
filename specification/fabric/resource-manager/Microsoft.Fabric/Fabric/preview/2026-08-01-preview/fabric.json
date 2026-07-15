@@ -741,16 +741,6 @@
       "type": "string",
       "description": "Represents an Azure geography region where supported resource providers live."
     },
-    "BillingProperties": {
-      "type": "object",
-      "description": "The billing properties of the Fabric capacity resource.",
-      "properties": {
-        "overage": {
-          "$ref": "#/definitions/OverageBillingSettings",
-          "description": "The overage billing settings for the Fabric capacity resource."
-        }
-      }
-    },
     "CapacityAdministration": {
       "type": "object",
       "description": "The administration properties of the Fabric capacity resource",
@@ -826,9 +816,9 @@
           "description": "The current state of Microsoft Fabric resource. The state is to indicate more states outside of resource provisioning.",
           "readOnly": true
         },
-        "billing": {
-          "$ref": "#/definitions/BillingProperties",
-          "description": "The billing properties of the Fabric capacity resource."
+        "overageBilling": {
+          "$ref": "#/definitions/OverageBillingProperties",
+          "description": "The overage billing properties of the Fabric capacity resource."
         },
         "administration": {
           "$ref": "#/definitions/CapacityAdministration",
@@ -865,9 +855,9 @@
       "type": "object",
       "description": "The updatable properties of the FabricCapacity.",
       "properties": {
-        "billing": {
-          "$ref": "#/definitions/BillingProperties",
-          "description": "The billing properties of the Fabric capacity resource."
+        "overageBilling": {
+          "$ref": "#/definitions/OverageBillingProperties",
+          "description": "The overage billing properties of the Fabric capacity resource."
         },
         "administration": {
           "$ref": "#/definitions/CapacityAdministration",
@@ -875,9 +865,9 @@
         }
       }
     },
-    "OverageBillingNotificationSettings": {
+    "OverageBillingNotificationProperties": {
       "type": "object",
-      "description": "The notification settings for overage billing.",
+      "description": "The notification properties for overage billing.",
       "properties": {
         "email": {
           "$ref": "#/definitions/OverageBillingNotificationState",
@@ -909,9 +899,9 @@
         ]
       }
     },
-    "OverageBillingSettings": {
+    "OverageBillingProperties": {
       "type": "object",
-      "description": "The overage billing settings for the Fabric capacity resource",
+      "description": "The overage billing properties of the Fabric capacity resource",
       "properties": {
         "state": {
           "$ref": "#/definitions/OverageBillingState",
@@ -920,12 +910,12 @@
         "thresholdCapacityUnitHours": {
           "type": "integer",
           "format": "int32",
-          "description": "When overage Capacity Units accrued in a 24-hour rolling window exceed this threshold, the capacity is throttled.",
+          "description": "24-hour rolling threshold for capacity overage. Reaching this threshold results in capacity throttling.",
           "minimum": 0
         },
         "notifications": {
-          "$ref": "#/definitions/OverageBillingNotificationSettings",
-          "description": "The notification settings for overage billing."
+          "$ref": "#/definitions/OverageBillingNotificationProperties",
+          "description": "The notification properties for overage billing."
         }
       }
     },

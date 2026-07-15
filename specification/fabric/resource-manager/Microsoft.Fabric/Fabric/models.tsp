@@ -22,9 +22,9 @@ model FabricCapacityProperties {
   @visibility(Lifecycle.Read)
   state?: ResourceState;
 
-  @doc("The billing properties of the Fabric capacity resource.")
+  @doc("The overage billing properties of the Fabric capacity resource.")
   @added(Microsoft.Fabric.Versions.v2026_08_01_preview)
-  billing?: BillingProperties;
+  overageBilling?: OverageBillingProperties;
 
   @doc("The capacity administration")
   administration: CapacityAdministration;
@@ -47,19 +47,19 @@ union RpSkuTier {
   fabric: "Fabric",
 }
 
-@doc("The overage billing settings for the Fabric capacity resource")
+@doc("The overage billing properties of the Fabric capacity resource")
 @added(Microsoft.Fabric.Versions.v2026_08_01_preview)
-model OverageBillingSettings {
+model OverageBillingProperties {
   @doc("The overage billing state for the Fabric capacity resource.")
   state?: OverageBillingState;
 
-  @doc("When overage Capacity Units accrued in a 24-hour rolling window exceed this threshold, the capacity is throttled.")
+  @doc("24-hour rolling threshold for capacity overage. Reaching this threshold results in capacity throttling.")
   @minValue(0)
   @encodedName("application/json", "thresholdCapacityUnitHours")
   thresholdCapacityUnitHours?: int32;
 
-  @doc("The notification settings for overage billing.")
-  notifications?: OverageBillingNotificationSettings;
+  @doc("The notification properties for overage billing.")
+  notifications?: OverageBillingNotificationProperties;
 }
 
 @doc("The overage billing state for the Fabric capacity resource.")
@@ -74,9 +74,9 @@ union OverageBillingState {
   string,
 }
 
-@doc("The notification settings for overage billing.")
+@doc("The notification properties for overage billing.")
 @added(Microsoft.Fabric.Versions.v2026_08_01_preview)
-model OverageBillingNotificationSettings {
+model OverageBillingNotificationProperties {
   @doc("The notification state for overage billing.")
   email?: OverageBillingNotificationState;
 }
@@ -97,13 +97,6 @@ union OverageBillingNotificationState {
 model CapacityAdministration {
   @doc("An array of administrator user identities.")
   members: Array<string>;
-}
-
-@doc("The billing properties of the Fabric capacity resource.")
-@added(Microsoft.Fabric.Versions.v2026_08_01_preview)
-model BillingProperties {
-  @doc("The overage billing settings for the Fabric capacity resource.")
-  overage?: OverageBillingSettings;
 }
 
 @doc("The provisioning state of the Fabric capacity resource.")
