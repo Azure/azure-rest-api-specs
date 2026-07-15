@@ -33,48 +33,6 @@
     }
   },
   "responses": {
-    "200": {
-      "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/arcDeployments/qwen-template-arc",
-        "name": "qwen-template-arc",
-        "type": "Microsoft.CognitiveServices/accounts/arcDeployments",
-        "etag": "\"0x8D...\"",
-        "properties": {
-          "model": {
-            "format": "OpenAI",
-            "name": "qwen3"
-          },
-          "extensionId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.Kubernetes/connectedClusters/edge-cluster/providers/Microsoft.KubernetesConfiguration/extensions/inference-operator",
-          "runtime": "vllm",
-          "compute": "gpu",
-          "replicas": 2,
-          "resources": {
-            "limits": {
-              "gpu": 5
-            }
-          },
-          "nodeSelector": {
-            "agentpool": "a100"
-          },
-          "deploymentTemplate": "azureml://registries/azureml-openai-oss/deploymenttemplates/vllm-qwen--qwen3-5-0-8b/versions/1",
-          "vllmParameters": {
-            "tensorParallelSize": 2,
-            "maxModelLen": 8192,
-            "gpuMemoryUtilization": 0.9,
-            "enforceEager": false
-          },
-          "provisioningState": "Succeeded",
-          "deploymentState": "Running",
-          "raiPolicyName": "Microsoft.DefaultV2",
-          "capabilities": {
-            "chatCompletion": "true"
-          }
-        },
-        "sku": {
-          "name": "Arc"
-        }
-      }
-    },
     "201": {
       "headers": {
         "azure-asyncoperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CognitiveServices/locations/eastus/operationResults/00000000-0000-0000-0000-000000000011?api-version=2026-07-15-preview",

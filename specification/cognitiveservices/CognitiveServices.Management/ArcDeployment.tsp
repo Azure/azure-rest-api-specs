@@ -40,7 +40,6 @@ model ArcDeployment
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "CogSvc uses lowercase 'etag' field name, matching existing deployment resources."
   @visibility(Lifecycle.Read)
   etag?: string;
-
 }
 
 alias ArcDeploymentCreateLroHeaders = ArmCombinedLroHeaders<
@@ -91,11 +90,11 @@ interface ArcDeployments {
     ArcDeployment,
     LroHeaders = ArmCombinedLroHeaders<ArmOperationStatus, void>,
     Response =
-        | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders<
+      | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders<
           ArmOperationStatus,
           void
         >>
-        | ArmDeletedNoContentResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -211,8 +210,8 @@ model ArcDeploymentProperties {
 /**
  * The object used to update an Arc deployment.
  */
-@added(Versions.v2026_07_15_preview)
 #suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "Arc deployment SKU is immutable after create; PATCH only supports replicas, resources, and nodeSelector."
+@added(Versions.v2026_07_15_preview)
 model ArcDeploymentUpdate {
   /**
    * Properties that can be updated on an Arc deployment.
@@ -276,7 +275,6 @@ union ArcDeploymentComputeType {
    * CPU compute.
    */
   cpu: "cpu",
-
 }
 
 /**
