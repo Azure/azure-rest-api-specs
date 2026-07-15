@@ -46,12 +46,13 @@ using Microsoft.Education;
 @@clientName(GrantType, "EducationGrantType", "csharp");
 @@clientName(GrantStatus, "EducationGrantStatus", "csharp");
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "workaround: avoid "
+// TODO: exclude csharp flatten for now, see issue https://github.com/Azure/azure-sdk-for-net/issues/60644
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "workaround avoid generating duplicate members"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   LabProperties.totalBudget,
   "!csharp"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "workaround avoid generating duplicate members"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   LabProperties.totalAllocatedBudget,
   "!csharp"
