@@ -1133,7 +1133,7 @@ model ClaimRequest {
   /**
    * The Azure resource ID of the resource claiming ownership of this disk.
    */
-  ownerResource: string;
+  ownerResource: Azure.Core.armResourceIdentifier;
 }
 
 /**
@@ -1144,7 +1144,7 @@ model UnclaimRequest {
   /**
    * The Azure resource ID of the resource releasing ownership of this disk.
    */
-  ownerResource: string;
+  ownerResource: Azure.Core.armResourceIdentifier;
 
   /**
    * Indicates whether the unclaim operation should be forced.
