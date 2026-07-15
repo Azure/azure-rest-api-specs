@@ -462,12 +462,14 @@ model OidcIssuerProfile {
   /**
    * The issuer url for hybrid clusters connected to Arc used for the workload identity feature.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   issuerUrl?: string;
 
   /**
    * The issuer url for public cloud clusters - AKS, EKS, GKE - used for the workload identity feature.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   selfHostedIssuerUrl?: string;
 }
 
