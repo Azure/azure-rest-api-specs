@@ -101,6 +101,7 @@ model ValidationIssue {
   @doc("The recommendation for resolving the issue.")
   recommendationMessage: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   @doc("The URL related to resolving the issue.")
   recommendationUrl?: url;
