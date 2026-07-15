@@ -34,6 +34,7 @@ import "./CdnWebApplicationFirewallPolicy.tsp";
 import "./WebAgent.tsp";
 import "./KnowledgeSource.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
