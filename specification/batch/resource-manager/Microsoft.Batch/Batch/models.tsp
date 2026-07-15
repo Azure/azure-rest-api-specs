@@ -264,6 +264,7 @@ enum AuthenticationMode {
   /**
    * The authentication mode using task authentication tokens.
    */
+  @removed(Versions.v2026_08_01)
   TaskAuthenticationToken,
 }
 
