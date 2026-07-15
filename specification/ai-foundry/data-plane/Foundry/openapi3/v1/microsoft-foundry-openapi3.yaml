@@ -38214,7 +38214,10 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AgentEndpointAuthorizationScheme'
-          description: The authorization schemes supported by the agent endpoint
+          description: |-
+            The authorization schemes supported by the agent endpoint.
+            When no Entra scheme is present (or its `sign_in` is unset), the endpoint defaults to the
+            'auto' Entra sign-in mode, validating inbound tokens against the Foundry application.
     AgentEndpointConfigUpdate:
       type: object
       properties:
@@ -38230,7 +38233,10 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AgentEndpointAuthorizationScheme'
-          description: The authorization schemes supported by the agent endpoint
+          description: |-
+            The authorization schemes supported by the agent endpoint.
+            When no Entra scheme is present (or its `sign_in` is unset), the endpoint defaults to the
+            'auto' Entra sign-in mode, validating inbound tokens against the Foundry application.
     AgentEndpointProtocol:
       anyOf:
         - type: string

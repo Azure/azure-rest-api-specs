@@ -715,7 +715,11 @@ model AgentEndpointConfig {
   @doc("Per-protocol configuration for the agent endpoint.")
   protocol_configuration?: ProtocolConfiguration;
 
-  @doc("The authorization schemes supported by the agent endpoint")
+  @doc("""
+    The authorization schemes supported by the agent endpoint.
+    When no Entra scheme is present (or its `sign_in` is unset), the endpoint defaults to the
+    'auto' Entra sign-in mode, validating inbound tokens against the Foundry application.
+    """)
   authorization_schemes?: AgentEndpointAuthorizationScheme[];
 }
 
