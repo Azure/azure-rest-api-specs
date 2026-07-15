@@ -79,6 +79,7 @@ using Http;
 );
 
 @@clientName(WebPubSubResource, "WebPubSub", "csharp");
+@@clientName(WebPubSubResource, "ResourceInfo", "go");
 @@clientName(WebPubSubProperties.disableAadAuth, "IsAadAuthDisabled", "csharp");
 @@clientName(WebPubSubTlsSettings.clientCertEnabled,
   "IsClientCertEnabled",
