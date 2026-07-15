@@ -38,20 +38,14 @@
                 "agentpool": "cpu"
               },
               "provisioningState": "Succeeded",
-              "provisioningDetails": {
-                "message": "Deployment is healthy and serving traffic.",
-                "lastOperationTimestamp": "2026-07-15T14:45:00Z"
-              },
-              "inferenceEndpoint": "https://edge-cluster.eastus.inference.ml.azure.com",
+              "deploymentState": "Running",
+              "raiPolicyName": "Microsoft.DefaultV2",
               "capabilities": {
                 "chatCompletion": "true"
               }
             },
             "sku": {
               "name": "Arc"
-            },
-            "tags": {
-              "env": "production"
             }
           },
           {
@@ -68,9 +62,6 @@
               "compute": "gpu",
               "replicas": 2,
               "resources": {
-                "requests": {
-                  "gpu": 1
-                },
                 "limits": {
                   "gpu": 5
                 }
@@ -86,24 +77,18 @@
                 "enforceEager": false
               },
               "provisioningState": "Succeeded",
-              "provisioningDetails": {
-                "message": "Deployment is healthy and serving traffic.",
-                "lastOperationTimestamp": "2026-07-15T14:45:00Z"
-              },
-              "inferenceEndpoint": "https://edge-cluster.eastus.inference.ml.azure.com",
+              "deploymentState": "Running",
+              "raiPolicyName": "Microsoft.DefaultV2",
               "capabilities": {
                 "chatCompletion": "true"
               }
             },
             "sku": {
               "name": "Arc"
-            },
-            "tags": {
-              "env": "production"
             }
           }
         ],
-        "nextLink": null
+        "nextLink": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/arcDeployments?api-version=2026-07-15-preview&$skipToken=next"
       }
     }
   }

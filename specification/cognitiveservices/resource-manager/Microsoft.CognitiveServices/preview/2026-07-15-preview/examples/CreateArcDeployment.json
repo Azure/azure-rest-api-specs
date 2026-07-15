@@ -33,9 +33,6 @@
       },
       "sku": {
         "name": "Arc"
-      },
-      "tags": {
-        "env": "production"
       }
     }
   },
@@ -69,27 +66,21 @@
             "agentpool": "cpu"
           },
           "provisioningState": "Succeeded",
-          "provisioningDetails": {
-            "message": "Deployment is healthy and serving traffic.",
-            "lastOperationTimestamp": "2026-07-15T14:45:00Z"
-          },
-          "inferenceEndpoint": "https://edge-cluster.eastus.inference.ml.azure.com",
+          "deploymentState": "Running",
+          "raiPolicyName": "Microsoft.DefaultV2",
           "capabilities": {
             "chatCompletion": "true"
           }
         },
         "sku": {
           "name": "Arc"
-        },
-        "tags": {
-          "env": "production"
         }
       }
     },
     "201": {
       "headers": {
         "azure-asyncoperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CognitiveServices/locations/eastus/operationResults/00000000-0000-0000-0000-000000000010?api-version=2026-07-15-preview",
-        "retry-after": "30"
+        "location": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CognitiveServices/locations/eastus/operationResults/00000000-0000-0000-0000-000000000010?operationResultResponseType=Location&api-version=2026-07-15-preview"
       },
       "body": {
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/arcDeployments/phi-3-arc",
@@ -118,16 +109,11 @@
             "agentpool": "cpu"
           },
           "provisioningState": "Creating",
-          "provisioningDetails": {
-            "message": "Scheduling pods on Arc cluster.",
-            "lastOperationTimestamp": "2026-07-15T14:30:00Z"
-          }
+          "deploymentState": "Running",
+          "raiPolicyName": "Microsoft.DefaultV2"
         },
         "sku": {
           "name": "Arc"
-        },
-        "tags": {
-          "env": "production"
         }
       }
     }

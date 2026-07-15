@@ -20,19 +20,19 @@ namespace Microsoft.CognitiveServices;
 @added(Versions.v2026_07_15_preview)
 @parentResource(Account)
 model ArcDeployment
-  is Azure.ResourceManager.ProxyResource<ArcDeploymentProperties> {
+  is Azure.ResourceManager.ProxyResource<ArcDeploymentProperties, false> {
   ...ResourceNameParameter<
     Resource = ArcDeployment,
     KeyName = "deploymentName",
     SegmentName = "arcDeployments",
-    NamePattern = "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+    NamePattern = "^[a-z0-9]([-a-z0-9]{0,61}[a-z0-9])?$"
   >;
 
   /**
    * The Arc deployment SKU. Only the SKU name is required for Arc deployments.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "CogSvc defines its own SKU envelope for deployment resources."
-  sku?: ArcDeploymentSku;
+  sku: ArcDeploymentSku;
 
   /**
    * Resource Etag.
@@ -41,14 +41,12 @@ model ArcDeployment
   @visibility(Lifecycle.Read)
   etag?: string;
 
-  /**
-   * Resource tags.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing deployment resources define tags on the resource envelope for backward compatibility."
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<tags> type is used to support extensible resource tags."
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  tags?: Record<string>;
 }
+
+alias ArcDeploymentCreateLroHeaders = ArmCombinedLroHeaders<
+  ArmOperationStatus,
+  ArcDeployment
+>;
 
 @added(Versions.v2026_07_15_preview)
 @armResourceOperations
@@ -61,7 +59,15 @@ interface ArcDeployments {
   /**
    * Creates an Arc deployment associated with the Cognitive Services account.
    */
-  create is ArmResourceCreateOrReplaceAsync<ArcDeployment>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Arc deployment PUT is create-only; updates are supported through PATCH."
+  create is ArmResourceCreateOrReplaceAsync<
+    ArcDeployment,
+    LroHeaders = ArcDeploymentCreateLroHeaders,
+    Response = ArmResourceCreatedResponse<
+      ArcDeployment,
+      ArcDeploymentCreateLroHeaders
+    >
+  >;
 
   /**
    * Updates the specified Arc deployment associated with the Cognitive Services account.
@@ -74,7 +80,6 @@ interface ArcDeployments {
       ArcDeployment,
       string
     > &
-      Azure.Core.Foundations.RetryAfterHeader &
       ArmAsyncOperationHeader,
     PatchModel = ArcDeploymentUpdate
   >;
@@ -84,15 +89,13 @@ interface ArcDeployments {
    */
   delete is ArmResourceDeleteWithoutOkAsync<
     ArcDeployment,
-    LroHeaders = ArmCombinedLroHeaders<ArmOperationStatus, void> &
-      Azure.Core.Foundations.RetryAfterHeader,
+    LroHeaders = ArmCombinedLroHeaders<ArmOperationStatus, void>,
     Response =
-      | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders<
+        | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders<
           ArmOperationStatus,
           void
-        > &
-          Azure.Core.Foundations.RetryAfterHeader>
-      | ArmDeletedNoContentResponse
+        >>
+        | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -116,10 +119,14 @@ model ArcDeploymentProperties {
   `model`: ArcDeploymentModel;
 
   /**
-   * Full Azure resource ID of the Arc-enabled Kubernetes cluster extension. Required on creation and immutable after creation.
+   * Full Azure resource ID of the Foundry inference extension on the target Arc-enabled Kubernetes cluster. Required on creation and immutable after creation.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  extensionId: string;
+  extensionId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.KubernetesConfiguration/extensions";
+    }
+  ]>;
 
   /**
    * Inference runtime. Required on creation and immutable after creation.
@@ -151,6 +158,7 @@ model ArcDeploymentProperties {
    * Physical replica count on the Arc cluster.
    */
   @minValue(1)
+  @maxValue(100)
   replicas: int32;
 
   /**
@@ -163,6 +171,16 @@ model ArcDeploymentProperties {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<nodeSelector> type is used because Kubernetes node label keys are user-defined."
   nodeSelector?: Record<string>;
+
+  /**
+   * The deployment state.
+   */
+  deploymentState?: DeploymentState;
+
+  /**
+   * The name of RAI policy.
+   */
+  raiPolicyName?: string;
 
   /**
    * Read-only. Current provisioning state.
@@ -194,15 +212,8 @@ model ArcDeploymentProperties {
  * The object used to update an Arc deployment.
  */
 @added(Versions.v2026_07_15_preview)
-#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "Arc deployment SKU is immutable after create; PATCH only supports tags plus replicas, resources, and nodeSelector."
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "Arc deployment SKU is immutable after create; PATCH only supports replicas, resources, and nodeSelector."
 model ArcDeploymentUpdate {
-  /**
-   * Resource tags.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<tags> type is used to support extensible resource tags."
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  tags?: Record<string>;
-
   /**
    * Properties that can be updated on an Arc deployment.
    */
@@ -218,6 +229,7 @@ model ArcDeploymentUpdateProperties {
    * Physical replica count on the Arc cluster.
    */
   @minValue(1)
+  @maxValue(100)
   replicas?: int32;
 
   /**
@@ -240,12 +252,12 @@ model ArcDeploymentModel {
   /**
    * Deployment model format.
    */
-  format?: string;
+  format: string;
 
   /**
    * Deployment model name.
    */
-  name?: string;
+  name: string;
 }
 
 /**
@@ -291,9 +303,9 @@ union ArcDeploymentRuntime {
 @added(Versions.v2026_07_15_preview)
 model ArcDeploymentKubernetesResources {
   /**
-   * Kubernetes resource requests for each deployment replica.
+   * Kubernetes CPU and memory resource requests for each deployment replica.
    */
-  requests?: ArcDeploymentResourceRequirements;
+  requests?: ArcDeploymentCpuMemoryResourceRequirements;
 
   /**
    * Kubernetes resource limits for each deployment replica.
@@ -302,27 +314,44 @@ model ArcDeploymentKubernetesResources {
 }
 
 /**
+ * CPU and memory resource requirements for an Arc deployment replica.
+ */
+@added(Versions.v2026_07_15_preview)
+model ArcDeploymentCpuMemoryResourceRequirements {
+  /**
+   * Kubernetes CPU quantity string, for example 500m, 2, 4, or 8.
+   */
+  cpu: string;
+
+  /**
+   * Kubernetes memory quantity string, for example 512Mi, 2Gi, or 16Gi.
+   */
+  memory: string;
+}
+
+/**
  * Kubernetes resource requirements for an Arc deployment replica.
- * Specify either cpu and memory together, or gpu. Do not combine CPU/memory and GPU in the same resource requirement.
+ * Specify either cpu and memory together, or gpu. GPU is supported only in limits, not requests.
  */
 @added(Versions.v2026_07_15_preview)
 model ArcDeploymentResourceRequirements {
   /**
    * Kubernetes CPU quantity string, for example 500m, 2, 4, or 8.
-   * Required when specifying CPU and memory resources. Do not specify with gpu.
+   * Required with memory when specifying CPU and memory limits. Do not specify with gpu.
    */
   cpu?: string;
 
   /**
    * Kubernetes memory quantity string, for example 512Mi, 2Gi, or 16Gi.
-   * Required when specifying CPU and memory resources. Do not specify with gpu.
+   * Required with cpu when specifying CPU and memory limits. Do not specify with gpu.
    */
   memory?: string;
 
   /**
    * Kubernetes GPU quantity, for example 1, 2, or 5.
-   * Required when specifying GPU resources. Do not specify with cpu or memory.
+   * Required when specifying GPU limits. Do not specify with cpu or memory.
    */
+  @minValue(1)
   gpu?: int32;
 }
 
@@ -358,7 +387,7 @@ model ArcDeploymentListResult {
    */
   @pageItems
   @visibility(Lifecycle.Read)
-  value?: ArcDeployment[];
+  value: ArcDeployment[];
 }
 
 /**
@@ -369,7 +398,7 @@ model ArcDeploymentSku {
   /**
    * The name of the Arc deployment SKU. Must be Arc.
    */
-  name: string;
+  name: "Arc";
 }
 
 /**
@@ -382,7 +411,7 @@ model ArcDeploymentVllmParameters {
 
 @@doc(
   ArcDeployment.name,
-  "The name of the Arc deployment associated with the Cognitive Services Account."
+  "The name of the Arc deployment associated with the Cognitive Services Account. The name must be unique within the account across deployments, managedComputeDeployments, and arcDeployments."
 );
 @@encodedName(ArcDeployment.etag, "application/json", "etag");
 @@doc(
