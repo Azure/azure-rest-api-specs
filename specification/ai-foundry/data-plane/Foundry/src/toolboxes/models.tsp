@@ -68,35 +68,23 @@ alias ToolFields<Source> = {
   ...OmitProperties<Source, "name" | "description" | "type" | "tool_configs">;
 };
 
-alias ToolboxCodeInterpreterToolType = "code_interpreter";
-alias ToolboxFileSearchToolType = "file_search";
-alias ToolboxWebSearchToolType = "web_search";
-alias ToolboxMCPToolType = "mcp";
-alias ToolboxAzureAISearchToolType = "azure_ai_search";
-alias ToolboxOpenApiToolType = "openapi";
-alias ToolboxA2APreviewToolType = "a2a_preview";
-alias ToolboxBrowserAutomationPreviewToolType = "browser_automation_preview";
-alias ToolboxReminderPreviewToolType = "reminder_preview";
-alias ToolboxWorkIQPreviewToolType = "work_iq_preview";
-alias ToolboxFabricIQPreviewToolType = "fabric_iq_preview";
-alias ToolboxSearchPreviewToolType = "toolbox_search_preview";
-
 /**
  * Supported tool types for tools stored in a toolbox.
  */
 union ToolboxToolType {
-  code_interpreter: ToolboxCodeInterpreterToolType,
-  file_search: ToolboxFileSearchToolType,
-  web_search: ToolboxWebSearchToolType,
-  mcp: ToolboxMCPToolType,
-  azure_ai_search: ToolboxAzureAISearchToolType,
-  openapi: ToolboxOpenApiToolType,
-  a2a_preview: ToolboxA2APreviewToolType,
-  browser_automation_preview: ToolboxBrowserAutomationPreviewToolType,
-  reminder_preview: ToolboxReminderPreviewToolType,
-  work_iq_preview: ToolboxWorkIQPreviewToolType,
-  fabric_iq_preview: ToolboxFabricIQPreviewToolType,
-  toolbox_search_preview: ToolboxSearchPreviewToolType,
+  string,
+  code_interpreter: "code_interpreter",
+  file_search: "file_search",
+  web_search: "web_search",
+  mcp: "mcp",
+  azure_ai_search: "azure_ai_search",
+  openapi: "openapi",
+  a2a_preview: "a2a_preview",
+  browser_automation_preview: "browser_automation_preview",
+  reminder_preview: "reminder_preview",
+  work_iq_preview: "work_iq_preview",
+  fabric_iq_preview: "fabric_iq_preview",
+  toolbox_search_preview: "toolbox_search_preview",
 }
 
 /**
@@ -117,8 +105,7 @@ model ToolboxTool {
  * A code interpreter tool stored in a toolbox.
  */
 model CodeInterpreterToolboxTool extends ToolboxTool {
-  type: ToolboxCodeInterpreterToolType;
-
+  type: ToolboxToolType.code_interpreter;
   ...ToolFields<OpenAI.CodeInterpreterTool>;
 }
 
@@ -126,20 +113,15 @@ model CodeInterpreterToolboxTool extends ToolboxTool {
  * A file search tool stored in a toolbox.
  */
 model FileSearchToolboxTool extends ToolboxTool {
-  type: ToolboxFileSearchToolType;
-
-  ...WithFieldsOptional<
-    ToolFields<OpenAI.FileSearchTool>,
-    "vector_store_ids"
-  >;
+  type: ToolboxToolType.file_search;
+  ...WithFieldsOptional<ToolFields<OpenAI.FileSearchTool>, "vector_store_ids">;
 }
 
 /**
  * A web search tool stored in a toolbox.
  */
 model WebSearchToolboxTool extends ToolboxTool {
-  type: ToolboxWebSearchToolType;
-
+  type: ToolboxToolType.web_search;
   ...ToolFields<OpenAI.WebSearchTool>;
 }
 
@@ -147,8 +129,7 @@ model WebSearchToolboxTool extends ToolboxTool {
  * An MCP tool stored in a toolbox.
  */
 model MCPToolboxTool extends ToolboxTool {
-  type: ToolboxMCPToolType;
-
+  type: ToolboxToolType.mcp;
   ...ToolFields<OpenAI.MCPTool>;
 }
 
@@ -156,8 +137,7 @@ model MCPToolboxTool extends ToolboxTool {
  * An Azure AI Search tool stored in a toolbox.
  */
 model AzureAISearchToolboxTool extends ToolboxTool {
-  type: ToolboxAzureAISearchToolType;
-
+  type: ToolboxToolType.azure_ai_search;
   ...ToolFields<AzureAISearchTool>;
 }
 
@@ -165,8 +145,7 @@ model AzureAISearchToolboxTool extends ToolboxTool {
  * An OpenAPI tool stored in a toolbox.
  */
 model OpenApiToolboxTool extends ToolboxTool {
-  type: ToolboxOpenApiToolType;
-
+  type: ToolboxToolType.openapi;
   ...ToolFields<OpenApiTool>;
 }
 
@@ -175,8 +154,7 @@ model OpenApiToolboxTool extends ToolboxTool {
  */
 @extension("x-ms-foundry-meta", PreviewTool)
 model A2APreviewToolboxTool extends ToolboxTool {
-  type: ToolboxA2APreviewToolType;
-
+  type: ToolboxToolType.a2a_preview;
   ...ToolFields<A2APreviewTool>;
 }
 
@@ -185,8 +163,7 @@ model A2APreviewToolboxTool extends ToolboxTool {
  */
 @extension("x-ms-foundry-meta", PreviewTool)
 model BrowserAutomationPreviewToolboxTool extends ToolboxTool {
-  type: ToolboxBrowserAutomationPreviewToolType;
-
+  type: ToolboxToolType.browser_automation_preview;
   ...ToolFields<BrowserAutomationPreviewTool>;
 }
 
@@ -195,7 +172,7 @@ model BrowserAutomationPreviewToolboxTool extends ToolboxTool {
  */
 @extension("x-ms-foundry-meta", PreviewTool)
 model ReminderPreviewToolboxTool extends ToolboxTool {
-  type: ToolboxReminderPreviewToolType;
+  type: ToolboxToolType.reminder_preview;
 }
 
 /**
@@ -203,8 +180,7 @@ model ReminderPreviewToolboxTool extends ToolboxTool {
  */
 @extension("x-ms-foundry-meta", PreviewTool)
 model WorkIQPreviewToolboxTool extends ToolboxTool {
-  type: ToolboxWorkIQPreviewToolType;
-
+  type: ToolboxToolType.work_iq_preview;
   ...ToolFields<WorkIQPreviewTool>;
 }
 
@@ -213,8 +189,7 @@ model WorkIQPreviewToolboxTool extends ToolboxTool {
  */
 @extension("x-ms-foundry-meta", PreviewTool)
 model FabricIQPreviewToolboxTool extends ToolboxTool {
-  type: ToolboxFabricIQPreviewToolType;
-
+  type: ToolboxToolType.fabric_iq_preview;
   ...ToolFields<FabricIQPreviewTool>;
 }
 
@@ -226,7 +201,7 @@ model ToolboxSearchPreviewToolboxTool extends ToolboxTool {
   /**
    * The type of the tool. Always `toolbox_search_preview`.
    */
-  type: ToolboxSearchPreviewToolType;
+  type: ToolboxToolType.toolbox_search_preview;
 }
 @doc("Policy configuration for a toolbox, including content safety and other governance settings.")
 model ToolboxPolicies {
