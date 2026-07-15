@@ -78,6 +78,7 @@ model SystemAssignedIdentityProperties {
   /**
    *  The ManagedServiceIdentity DataPlane URL that can be queried to obtain the identity credentials.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   clientSecretUrl?: string;
 }

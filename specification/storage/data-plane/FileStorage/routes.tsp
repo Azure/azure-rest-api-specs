@@ -1115,6 +1115,7 @@ interface File {
       @header("x-ms-source-range") sourceRange?: string;
 
       /** Only update is supported. */
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
       @header("x-ms-write")
       fileRangeWriteFromUrl: FileRangeWriteFromUrlType = FileRangeWriteFromUrlType.update;
 
