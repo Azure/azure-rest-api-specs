@@ -1,0 +1,253 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.App SreAgent management service",
+    "version": "2026-06-01-preview",
+    "description": "Microsoft.App Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "POST"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.App/startDebugSession": {
+      "post": {
+        "operationId": "DebugSessionOperations_StartDebugSession",
+        "tags": [
+          "POST"
+        ],
+        "summary": "Start a debug session",
+        "description": "Start a debug session for a set of resources across the participating\nsubscriptions. The action is a subscription-level provider action rooted at\nthe URL subscription; every requested resource must belong to the URL\nsubscription or to one of the declared additional subscriptions.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StartDebugSessionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/StartDebugSessionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StartDebugSession": {
+            "$ref": "./examples/StartDebugSession.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DebugSessionAuthorizationMode": {
+      "type": "string",
+      "description": "The mode used to authorize a debug session.",
+      "enum": [
+        "ArmParticipatingSubscriptionRead"
+      ],
+      "x-ms-enum": {
+        "name": "DebugSessionAuthorizationMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ArmParticipatingSubscriptionRead",
+            "value": "ArmParticipatingSubscriptionRead",
+            "description": "The debug session was authorized by evaluating subscription read access\nacross every participating subscription."
+          }
+        ]
+      }
+    },
+    "DebugSessionDisposition": {
+      "type": "string",
+      "description": "Indicates whether a debug session was newly created or resumed.",
+      "enum": [
+        "Created",
+        "Resumed"
+      ],
+      "x-ms-enum": {
+        "name": "DebugSessionDisposition",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Created",
+            "value": "Created",
+            "description": "The call created a new debug session."
+          },
+          {
+            "name": "Resumed",
+            "value": "Resumed",
+            "description": "The call returned an existing matching debug session."
+          }
+        ]
+      }
+    },
+    "DebugSessionSandbox": {
+      "type": "object",
+      "description": "The sandbox connection details for a debug session.",
+      "properties": {
+        "sandboxId": {
+          "type": "string",
+          "description": "The identifier of the provisioned sandbox."
+        },
+        "endpoint": {
+          "type": "string",
+          "format": "uri",
+          "description": "The WebSocket endpoint used to connect to the debug sandbox."
+        },
+        "expiresAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the sandbox connection expires."
+        }
+      },
+      "required": [
+        "sandboxId",
+        "endpoint",
+        "expiresAt"
+      ]
+    },
+    "StartDebugSessionRequest": {
+      "type": "object",
+      "description": "The request body for starting a debug session.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StartDebugSessionRequestProperties",
+          "description": "The properties of the debug session to start."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "StartDebugSessionRequestProperties": {
+      "type": "object",
+      "description": "The properties used to start a debug session.",
+      "properties": {
+        "additionalSubscriptionResourceIds": {
+          "type": "array",
+          "description": "The full `/subscriptions/{subscriptionId}` resource IDs of the other\nsubscriptions participating in the debug session. The subscription in the\naction URL is always a participant and must not be repeated here.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
+        },
+        "armResourceIds": {
+          "type": "array",
+          "description": "The non-empty list of exact ARM resource IDs authorized for the debug\nsession. Every resource must belong to the URL subscription or to one of the\nsubscriptions listed in `additionalSubscriptionResourceIds`.",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
+        }
+      },
+      "required": [
+        "armResourceIds"
+      ]
+    },
+    "StartDebugSessionResponse": {
+      "type": "object",
+      "description": "The result of starting a debug session.",
+      "properties": {
+        "sessionId": {
+          "type": "string",
+          "description": "The unique identifier of the debug session."
+        },
+        "sessionDisposition": {
+          "$ref": "#/definitions/DebugSessionDisposition",
+          "description": "Indicates whether this call created a new debug session or resumed an existing one."
+        },
+        "authorizationMode": {
+          "$ref": "#/definitions/DebugSessionAuthorizationMode",
+          "description": "The mode used to authorize the debug session."
+        },
+        "participatingSubscriptionResourceIds": {
+          "type": "array",
+          "description": "The full `/subscriptions/{subscriptionId}` resource IDs of every\nsubscription participating in the debug session, including the URL\nsubscription.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
+        },
+        "authorizedResourceIds": {
+          "type": "array",
+          "description": "The list of ARM resource IDs authorized for the debug session.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
+        },
+        "sandbox": {
+          "$ref": "#/definitions/DebugSessionSandbox",
+          "description": "The sandbox connection details for the debug session."
+        }
+      },
+      "required": [
+        "sessionId",
+        "sessionDisposition",
+        "authorizationMode",
+        "participatingSubscriptionResourceIds",
+        "authorizedResourceIds",
+        "sandbox"
+      ]
+    }
+  },
+  "parameters": {}
+}
