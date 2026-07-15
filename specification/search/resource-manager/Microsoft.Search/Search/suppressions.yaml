@@ -38,7 +38,3 @@
 - tool: TypeSpecRequirement
   path: ./stable/2023-11-01/*.json
   reason: Brownfield service not ready to migrate
-# Swagger Avocado suppressions
-- tool: Swagger Avocado
-  path: ./preview/2026-03-01-preview/search.json
-  reason: The /providers/Microsoft.Search/offerings collection-style GET API was replaced by the action-style POST /providers/Microsoft.Search/fetchOfferings in 2026-09-01-preview (the default tag) as an intentional breaking change to align with ARM RPC guidance. The path is therefore absent from the default tag, causing MISSING_APIS_IN_DEFAULT_TAG.
