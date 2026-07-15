@@ -3,6 +3,7 @@ import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 
+@@clientName(VoiceLive.AzureRealtimeNativeVoice.type, "Kind", "csharp");
 @@clientName(
   VoiceLive.RequestSession.parallel_tool_calls,
   "AllowParallelToolCalls",
