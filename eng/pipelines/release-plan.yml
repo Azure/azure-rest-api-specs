@@ -85,6 +85,13 @@ stages:
                 npm exec --no -- create-release-plan @nodeArgs
 
           - pwsh: |
+              # set variable SkipSDKGeneration to true by default
+              Write-Host "##vso[task.setvariable variable=SkipSDKGeneration]true"
+            name: setDefaultSkipSDKGeneration
+            displayName: "Set default SkipSDKGeneration variable"
+            condition: succeededOrFailed()
+
+          - pwsh: |
               $outputPath = "$(Build.ArtifactStagingDirectory)/release-plan/release-plan.json"
               if (!(Test-Path $outputPath)) {
                 Write-Host "release-plan.json not found. Setting SkipSDKGeneration to true."
@@ -99,26 +106,27 @@ stages:
             displayName: "Ensure release plan artifact file exists"
             condition: succeededOrFailed()
 
-          - task: AzureCLI@2
-            displayName: "Update SDK details for eligible release plans"
-            condition: and(succeeded(), ne(variables['SkipSDKGeneration'], 'true'))
-            env:
-              ${{ if eq(parameters['Test-release-Plan'], true) }}:
-                AZSDKTOOLS_AGENT_TESTING: "true"
-            inputs:
-              azureSubscription: opensource-api-connection
-              scriptType: pscore
-              scriptLocation: inlineScript
-              inlineScript: |
-                $ErrorActionPreference = "Stop"
+          - ${{ if eq(variables['SkipSDKGeneration'], 'true') }}:
+            - task: AzureCLI@2
+              displayName: "Update SDK details for eligible release plans"
+              condition: and(succeeded(), ne(variables['SkipSDKGeneration'], 'true'))
+              env:
+                ${{ if eq(parameters['Test-release-Plan'], true) }}:
+                  AZSDKTOOLS_AGENT_TESTING: "true"
+              inputs:
+                azureSubscription: opensource-api-connection
+                scriptType: pscore
+                scriptLocation: inlineScript
+                inlineScript: |
+                  $ErrorActionPreference = "Stop"
 
-                $artifactPath = "$(Build.ArtifactStagingDirectory)/release-plan/release-plan.json"
-                if (!(Test-Path $artifactPath)) {
-                  Write-Host "Release plan artifact not found. Skipping update-sdk-details."
-                  exit 0
-                }
+                  $artifactPath = "$(Build.ArtifactStagingDirectory)/release-plan/release-plan.json"
+                  if (!(Test-Path $artifactPath)) {
+                    Write-Host "Release plan artifact not found. Skipping update-sdk-details."
+                    exit 0
+                  }
 
-                npm exec --no -- update-sdk-details --artifact-file $artifactPath --workspace "$(Build.SourcesDirectory)"
+                  npm exec --no -- update-sdk-details --artifact-file $artifactPath --workspace "$(Build.SourcesDirectory)"
 
           - task: PublishPipelineArtifact@1
             displayName: "Publish release plan details artifact"
@@ -131,7 +139,7 @@ stages:
   - stage: GenerateSdk
     displayName: "Stage : Generate SDK"
     dependsOn: ReleasePlanCreation
-    condition: and(succeeded(), ne(stageDependencies.ReleasePlanCreation.ReleasePlan.outputs['setReleasePlanArtifactState.SkipSDKGeneration'], 'true'))
+    condition: and(succeeded(), ne(dependencies.ReleasePlanCreation.outputs['ReleasePlan.setReleasePlanArtifactState.SkipSDKGeneration'], 'true'))
     jobs:
       - job: GenerateSdk
         displayName: Generate SDK from Release Plan
