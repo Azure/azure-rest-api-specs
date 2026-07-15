@@ -38,20 +38,32 @@ extends:
   template: /eng/pipelines/templates/stages/cross-repo-eval-entrypoint.yml
   parameters:
     vallyRoot: .github/skills
-    # Two patterns needed to cover every eval under <skill>/evals/: trigger suites are named
-    # trigger.eval.yaml (matches */evals/*.eval.yaml); capability suites are named plainly
-    # eval.yaml (doesn't match the *.eval.yaml glob, since there's no name segment before the
-    # dot) and need the second pattern. Together these cover every skill that currently has an
-    # evals/ folder. NOT covered by this pipeline (structurally incompatible, not a glob gap):
-    #   - .github/skills/evals/arm-api-reviewer/ — a separate, independently-owned suite with its
-    #     own .vally.yaml, vally/eval-*.yaml naming, and run-evals.ps1 orchestration. It targets
-    #     real ARM OpenAPI fixtures, not a `.github/skills/<name>/SKILL.md` skill, so it doesn't
-    #     fit the vallyRoot/evalGlobs model here. Folding it in needs its own pipeline wiring.
-    #   - azure-api-review, openai-typespec-update: no *.eval.yaml/eval.yaml files exist yet
-    #     (openai-typespec-update is still on the old Waza eval.yaml + tasks/ format) — nothing
-    #     for any glob to pick up until those are migrated to Vally.
+    # Three patterns, all rooted at .github/skills so every suite shares one Prepare/Eval/Summary
+    # run (collect-stimuli.ts shards by `area` tag, falling back to parent folder name when a file
+    # has none -- so these three groups land in distinct shards automatically, no manual splitting
+    # needed):
+    #   - '*/evals/*.eval.yaml'  — trigger suites, named trigger.eval.yaml, one per skill.
+    #   - '*/evals/eval.yaml'    — capability suites, named plainly eval.yaml (doesn't match the
+    #                              *.eval.yaml glob above, since there's no name segment before
+    #                              the dot).
+    #   - 'evals/arm-api-reviewer/vally/eval-*.yaml' — the ARM API Reviewer suite (55 stimuli /
+    #                              17 files). It's independently owned (own nested .vally.yaml,
+    #                              own fixtures/, own run-evals.ps1 for local/manual runs) but
+    #                              vallyRoot is a shared ancestor of both trees, so its files glob
+    #                              in here too instead of needing a second pipeline -- eval-shard
+    #                              only supports one Prepare stage per pipeline (its matrix read
+    #                              is `stageDependencies.Prepare...`, not parameterized), so a
+    #                              second top-level pipeline was the only other option.
+    #     No MCP server is needed for it (skill-invocation/output-matches graders against inline
+    #     environment.files fixtures only) -- it simply doesn't reference the mock MCP server
+    #     this pipeline's TestType: mock (default) builds, same as any other skill-invocation-only
+    #     eval file here.
+    #     NOT covered by this pipeline (no glob gap, just no eval files yet): azure-api-review,
+    #     openai-typespec-update (still on the old Waza eval.yaml + tasks/ format).
     evalGlobs:
       - '*/evals/*.eval.yaml'
       - '*/evals/eval.yaml'
-    # Per-shard job timeout (report-only tier).
-    shardTimeoutInMinutes: 20
+      - 'evals/arm-api-reviewer/vally/eval-*.yaml'
+    # Per-shard job timeout. Raised from 20 to 45m to cover the ARM suite's single fallback shard
+    # (17 files / 55 stimuli, no `area` tags to split further).
+    shardTimeoutInMinutes: 45

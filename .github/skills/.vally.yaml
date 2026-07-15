@@ -5,6 +5,11 @@
 # environments), pared down to the skill folders that exist in this repo.
 
 paths:
+  # "." so skill auto-discovery finds every `<name>/SKILL.md` directly under this directory --
+  # needed by the ARM API Reviewer suite below, which relies on auto-discovery rather than
+  # declaring `environment.skills` per eval file (see evals/arm-api-reviewer/.vally.yaml, which
+  # points back here via "../../../skills/" for its own standalone/local runs).
+  skills: "."
   evals:
     - azsdk-common-apiview-feedback-resolution/evals/
     - azsdk-common-generate-sdk-locally/evals/
@@ -12,6 +17,7 @@ paths:
     - azsdk-common-pipeline-fixer/evals/
     - azsdk-common-prepare-release-plan/evals/
     - azsdk-common-sdk-release/evals/
+    - evals/arm-api-reviewer/vally/
   results: results/
   evalFilenames: ["eval.yaml", "*.eval.yaml"]
 
