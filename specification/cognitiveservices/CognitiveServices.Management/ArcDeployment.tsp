@@ -234,7 +234,7 @@ model ArcDeploymentUpdateProperties {
   /**
    * Per-replica Kubernetes resource requests and limits.
    */
-  resources?: ArcDeploymentKubernetesResources;
+  resources?: ArcDeploymentPatchKubernetesResources;
 
   /**
    * Kubernetes node selector key-value map used to schedule pods onto nodes with matching labels.
@@ -312,6 +312,22 @@ model ArcDeploymentKubernetesResources {
 }
 
 /**
+ * Per-replica Kubernetes resource requests and limits for an Arc deployment update.
+ */
+@added(Versions.v2026_07_15_preview)
+model ArcDeploymentPatchKubernetesResources {
+  /**
+   * Kubernetes CPU and memory resource requests for each deployment replica.
+   */
+  requests?: ArcDeploymentPatchCpuMemoryResourceRequirements;
+
+  /**
+   * Kubernetes resource limits for each deployment replica.
+   */
+  limits?: ArcDeploymentResourceRequirements;
+}
+
+/**
  * CPU and memory resource requirements for an Arc deployment replica.
  */
 @added(Versions.v2026_07_15_preview)
@@ -325,6 +341,22 @@ model ArcDeploymentCpuMemoryResourceRequirements {
    * Kubernetes memory quantity string, for example 512Mi, 2Gi, or 16Gi.
    */
   memory: string;
+}
+
+/**
+ * CPU and memory resource requirements for an Arc deployment replica update.
+ */
+@added(Versions.v2026_07_15_preview)
+model ArcDeploymentPatchCpuMemoryResourceRequirements {
+  /**
+   * Kubernetes CPU quantity string, for example 500m, 2, 4, or 8.
+   */
+  cpu?: string;
+
+  /**
+   * Kubernetes memory quantity string, for example 512Mi, 2Gi, or 16Gi.
+   */
+  memory?: string;
 }
 
 /**

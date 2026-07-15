@@ -12913,6 +12913,34 @@
         "name"
       ]
     },
+    "ArcDeploymentPatchCpuMemoryResourceRequirements": {
+      "type": "object",
+      "description": "CPU and memory resource requirements for an Arc deployment replica update.",
+      "properties": {
+        "cpu": {
+          "type": "string",
+          "description": "Kubernetes CPU quantity string, for example 500m, 2, 4, or 8."
+        },
+        "memory": {
+          "type": "string",
+          "description": "Kubernetes memory quantity string, for example 512Mi, 2Gi, or 16Gi."
+        }
+      }
+    },
+    "ArcDeploymentPatchKubernetesResources": {
+      "type": "object",
+      "description": "Per-replica Kubernetes resource requests and limits for an Arc deployment update.",
+      "properties": {
+        "requests": {
+          "$ref": "#/definitions/ArcDeploymentPatchCpuMemoryResourceRequirements",
+          "description": "Kubernetes CPU and memory resource requests for each deployment replica."
+        },
+        "limits": {
+          "$ref": "#/definitions/ArcDeploymentResourceRequirements",
+          "description": "Kubernetes resource limits for each deployment replica."
+        }
+      }
+    },
     "ArcDeploymentProperties": {
       "type": "object",
       "description": "Properties of a Cognitive Services Arc deployment.",
@@ -13129,7 +13157,7 @@
           "maximum": 100
         },
         "resources": {
-          "$ref": "#/definitions/ArcDeploymentKubernetesResources",
+          "$ref": "#/definitions/ArcDeploymentPatchKubernetesResources",
           "description": "Per-replica Kubernetes resource requests and limits."
         },
         "nodeSelector": {

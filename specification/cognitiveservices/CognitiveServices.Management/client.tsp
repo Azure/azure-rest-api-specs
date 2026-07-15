@@ -71,7 +71,7 @@ op checkSkuAvailabilityCustom(
   ...SubscriptionIdParameter,
   ...SubscriptionActionScope,
   ...Azure.ResourceManager.Legacy.Provider,
-  location: string,
+  ...LocationParameter,
   skus: string[],
   type: string,
   kind: string,

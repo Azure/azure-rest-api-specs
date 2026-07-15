@@ -69,6 +69,18 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}"].put
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/connections/{connectionName}"].put
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/connections/{connectionName}"].put
+  - code: ProvisioningStateSpecifiedForLROPut
+    reason: Arc deployment PUT is intentionally create-only and returns only 201 for accepted creates; updates are supported through PATCH.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/arcDeployments/{deploymentName}"].put
+  - code: PutResponseCodes
+    reason: Arc deployment PUT is intentionally create-only; updates to existing Arc deployments are supported through PATCH.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/arcDeployments/{deploymentName}"].put
+  - code: PatchSkuProperty
+    reason: Arc deployment SKU is immutable after create; PATCH only supports replicas, resources, and nodeSelector.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/arcDeployments/{deploymentName}"].patch.parameters[5]
   - code: PatchResponseCodes
     reason: This is existing behavior in all other APIs and already in stable version, will keep the same.
     where:
@@ -168,6 +180,7 @@ suppressions:
       - $.definitions.ArcDeploymentProperties.properties.nodeSelector
       - $.definitions.ArcDeploymentProperties.properties.capabilities
       - $.definitions.ArcDeploymentVllmParameters
+      - $.definitions.ArcDeploymentVllmParameters.additionalProperties
 ```
 ### Tag: package-2026-07-01
 
