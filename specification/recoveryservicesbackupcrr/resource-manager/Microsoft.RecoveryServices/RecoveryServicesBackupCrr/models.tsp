@@ -1333,7 +1333,7 @@ model TargetAFSRestoreInfo {
 /**
  * IaaS VM workload-specific backup item representing the Classic Compute VM.
  */
-model AzureIaaSClassicComputeVMProtectedItem extends AzureIaaSVMProtectedItem {
+model AzureIaaSClassicComputeVMProtectedItem extends ProtectedItem {
   /**
    * backup item type.
    */
@@ -1343,8 +1343,12 @@ model AzureIaaSClassicComputeVMProtectedItem extends AzureIaaSVMProtectedItem {
 /**
  * IaaS VM workload-specific backup item.
  */
-@discriminator("protectedItemType")
 model AzureIaaSVMProtectedItem extends ProtectedItem {
+  /**
+   * backup item type.
+   */
+  protectedItemType: "AzureIaaSVMProtectedItem";
+
   /**
    * Friendly name of the VM represented by this backup item.
    */
@@ -1402,9 +1406,7 @@ model AzureIaaSVMProtectedItem extends ProtectedItem {
    */
   extendedInfo?: AzureIaaSVMProtectedItemExtendedInfo;
 
-  /**
-   * Extended Properties for Azure IaasVM Backup.
-   */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Original 2023-01-15 property had no description; keep it faithful."
   extendedProperties?: ExtendedProperties;
 }
 
@@ -1461,7 +1463,7 @@ model DiskExclusionProperties {
 /**
  * IaaS VM workload-specific backup item representing the Azure Resource Manager VM.
  */
-model AzureIaaSComputeVMProtectedItem extends AzureIaaSVMProtectedItem {
+model AzureIaaSComputeVMProtectedItem extends ProtectedItem {
   /**
    * backup item type.
    */
@@ -1762,8 +1764,12 @@ model AzureStorageJobTaskDetails {
 /**
  * Azure VM workload-specific protected item.
  */
-@discriminator("protectedItemType")
 model AzureVmWorkloadProtectedItem extends ProtectedItem {
+  /**
+   * backup item type.
+   */
+  protectedItemType: "AzureVmWorkloadProtectedItem";
+
   /**
    * Friendly name of the DB represented by this backup item.
    */
@@ -1879,8 +1885,7 @@ model AzureVmWorkloadProtectedItemExtendedInfo {
 /**
  * Azure VM workload-specific protected item representing SAP ASE Database.
  */
-model AzureVmWorkloadSAPAseDatabaseProtectedItem
-  extends AzureVmWorkloadProtectedItem {
+model AzureVmWorkloadSAPAseDatabaseProtectedItem extends ProtectedItem {
   /**
    * backup item type.
    */
@@ -1890,8 +1895,7 @@ model AzureVmWorkloadSAPAseDatabaseProtectedItem
 /**
  * Azure VM workload-specific protected item representing SAP HANA Database.
  */
-model AzureVmWorkloadSAPHanaDatabaseProtectedItem
-  extends AzureVmWorkloadProtectedItem {
+model AzureVmWorkloadSAPHanaDatabaseProtectedItem extends ProtectedItem {
   /**
    * backup item type.
    */
@@ -1901,8 +1905,7 @@ model AzureVmWorkloadSAPHanaDatabaseProtectedItem
 /**
  * Azure VM workload-specific protected item representing SQL Database.
  */
-model AzureVmWorkloadSQLDatabaseProtectedItem
-  extends AzureVmWorkloadProtectedItem {
+model AzureVmWorkloadSQLDatabaseProtectedItem extends ProtectedItem {
   /**
    * backup item type.
    */
@@ -2013,12 +2016,16 @@ model AzureWorkloadJobTaskDetails {
 /**
  * Recovery point specific to PointInTime
  */
-@discriminator("objectType")
-model AzureWorkloadPointInTimeRecoveryPoint extends AzureWorkloadRecoveryPoint {
+model AzureWorkloadPointInTimeRecoveryPoint extends RecoveryPoint {
   /**
    * List of log ranges
    */
   timeRanges?: PointInTimeRange[];
+
+  /**
+   * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
+   */
+  objectType: "AzureWorkloadPointInTimeRecoveryPoint";
 }
 
 /**
@@ -2041,8 +2048,12 @@ model PointInTimeRange {
 /**
  * Workload specific recovery point, specifically encapsulates full/diff recovery point
  */
-@discriminator("objectType")
 model AzureWorkloadRecoveryPoint extends RecoveryPoint {
+  /**
+   * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
+   */
+  objectType: "AzureWorkloadRecoveryPoint";
+
   /**
    * UTC time at which recovery point was created
    */
@@ -2105,8 +2116,7 @@ model RecoveryPointMoveReadinessInfo {
 /**
  * AzureWorkload SAP Hana -specific restore. Specifically for PointInTime/Log restore
  */
-model AzureWorkloadPointInTimeRestoreRequest
-  extends AzureWorkloadRestoreRequest {
+model AzureWorkloadPointInTimeRestoreRequest extends RestoreRequest {
   /**
    * PointInTime value
    */
@@ -2122,8 +2132,12 @@ model AzureWorkloadPointInTimeRestoreRequest
 /**
  * AzureWorkload-specific restore.
  */
-@discriminator("objectType")
 model AzureWorkloadRestoreRequest extends RestoreRequest {
+  /**
+   * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
+   */
+  objectType: "AzureWorkloadRestoreRequest";
+
   /**
    * Type of this recovery.
    */
@@ -2185,8 +2199,7 @@ model TargetRestoreInfo {
 /**
  * Recovery point specific to PointInTime in SAPHana
  */
-model AzureWorkloadSAPHanaPointInTimeRecoveryPoint
-  extends AzureWorkloadPointInTimeRecoveryPoint {
+model AzureWorkloadSAPHanaPointInTimeRecoveryPoint extends RecoveryPoint {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
    */
@@ -2196,8 +2209,7 @@ model AzureWorkloadSAPHanaPointInTimeRecoveryPoint
 /**
  * AzureWorkload SAP Hana -specific restore. Specifically for PointInTime/Log restore
  */
-model AzureWorkloadSAPHanaPointInTimeRestoreRequest
-  extends AzureWorkloadSAPHanaRestoreRequest {
+model AzureWorkloadSAPHanaPointInTimeRestoreRequest extends RestoreRequest {
   /**
    * PointInTime value
    */
@@ -2213,13 +2225,17 @@ model AzureWorkloadSAPHanaPointInTimeRestoreRequest
 /**
  * AzureWorkload SAP Hana-specific restore.
  */
-@discriminator("objectType")
-model AzureWorkloadSAPHanaRestoreRequest extends AzureWorkloadRestoreRequest {}
+model AzureWorkloadSAPHanaRestoreRequest extends RestoreRequest {
+  /**
+   * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
+   */
+  objectType: "AzureWorkloadSAPHanaRestoreRequest";
+}
 
 /**
  * SAPHana specific recoverypoint, specifically encapsulates full/diff recoverypoints
  */
-model AzureWorkloadSAPHanaRecoveryPoint extends AzureWorkloadRecoveryPoint {
+model AzureWorkloadSAPHanaRecoveryPoint extends RecoveryPoint {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
    */
@@ -2229,8 +2245,7 @@ model AzureWorkloadSAPHanaRecoveryPoint extends AzureWorkloadRecoveryPoint {
 /**
  * Recovery point specific to PointInTime
  */
-model AzureWorkloadSQLPointInTimeRecoveryPoint
-  extends AzureWorkloadSQLRecoveryPoint {
+model AzureWorkloadSQLPointInTimeRecoveryPoint extends RecoveryPoint {
   /**
    * List of log ranges
    */
@@ -2245,8 +2260,12 @@ model AzureWorkloadSQLPointInTimeRecoveryPoint
 /**
  * SQL specific recoverypoint, specifically encapsulates full/diff recoverypoint along with extended info
  */
-@discriminator("objectType")
-model AzureWorkloadSQLRecoveryPoint extends AzureWorkloadRecoveryPoint {
+model AzureWorkloadSQLRecoveryPoint extends RecoveryPoint {
+  /**
+   * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
+   */
+  objectType: "AzureWorkloadSQLRecoveryPoint";
+
   /**
    * Extended Info that provides data directory details. Will be populated in two cases:
    * When a specific recovery point is accessed using GetRecoveryPoint
@@ -2296,8 +2315,7 @@ model SQLDataDirectory {
 /**
  * AzureWorkload SQL -specific restore. Specifically for PointInTime/Log restore
  */
-model AzureWorkloadSQLPointInTimeRestoreRequest
-  extends AzureWorkloadSQLRestoreRequest {
+model AzureWorkloadSQLPointInTimeRestoreRequest extends RestoreRequest {
   /**
    * PointInTime value
    */
@@ -2313,8 +2331,12 @@ model AzureWorkloadSQLPointInTimeRestoreRequest
 /**
  * AzureWorkload SQL -specific restore. Specifically for full/diff restore
  */
-@discriminator("objectType")
-model AzureWorkloadSQLRestoreRequest extends AzureWorkloadRestoreRequest {
+model AzureWorkloadSQLRestoreRequest extends RestoreRequest {
+  /**
+   * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
+   */
+  objectType: "AzureWorkloadSQLRestoreRequest";
+
   /**
    * Default option set to true. If this is set to false, alternate data directory must be provided
    */
