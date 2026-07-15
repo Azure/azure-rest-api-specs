@@ -5198,6 +5198,12 @@ model VirtualMachineScaleSetVMProperties {
    */
   @added(Versions.v2026_03_01)
   interconnectBlockProfile?: InterconnectBlockProfile;
+
+  /**
+   * Specifies information about the capacity reservation that is used to allocate the virtual machine scale set VM instance. The capacity reservation group is inherited from the parent virtual machine scale set and cannot be changed on the individual scale set VM instance. Minimum api-version: 2026-04-01.
+   */
+  @added(Versions.v2026_04_01)
+  capacityReservation?: CapacityReservationProfile;
 }
 
 /**
