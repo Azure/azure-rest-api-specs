@@ -7,6 +7,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using Microsoft.Common;
 
 namespace ActionGroupsApi;
 
@@ -20,27 +21,6 @@ union IncidentManagementService {
    * Icm
    */
   Icm: "Icm",
-}
-
-/**
- * Indicates the status of the receiver. Receivers that are not Enabled will not receive any communications.
- */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-enum ReceiverStatus {
-  /**
-   * NotSpecified
-   */
-  NotSpecified,
-
-  /**
-   * Enabled
-   */
-  Enabled,
-
-  /**
-   * Disabled
-   */
-  Disabled,
 }
 
 /**
@@ -133,58 +113,6 @@ model ActionGroup {
 }
 
 /**
- * An email receiver.
- */
-model EmailReceiver {
-  /**
-   * The name of the email receiver. Names must be unique across all receivers within an action group.
-   */
-  name: string;
-
-  /**
-   * The email address of this receiver.
-   */
-  emailAddress: string;
-
-  /**
-   * Indicates whether to use common alert schema.
-   */
-  useCommonAlertSchema?: boolean = false;
-
-  /**
-   * The receiver status of the e-mail.
-   */
-  @visibility(Lifecycle.Read)
-  status?: ReceiverStatus;
-}
-
-/**
- * An SMS receiver.
- */
-model SmsReceiver {
-  /**
-   * The name of the SMS receiver. Names must be unique across all receivers within an action group.
-   */
-  name: string;
-
-  /**
-   * The country code of the SMS receiver.
-   */
-  countryCode: string;
-
-  /**
-   * The phone number of the SMS receiver.
-   */
-  phoneNumber: string;
-
-  /**
-   * The status of the receiver.
-   */
-  @visibility(Lifecycle.Read)
-  status?: ReceiverStatus;
-}
-
-/**
  * A webhook receiver.
  */
 model WebhookReceiver {
@@ -260,21 +188,6 @@ model ItsmReceiver {
 }
 
 /**
- * The Azure mobile App push notification receiver.
- */
-model AzureAppPushReceiver {
-  /**
-   * The name of the Azure mobile app push receiver. Names must be unique across all receivers within an action group.
-   */
-  name: string;
-
-  /**
-   * The email address registered for the Azure mobile app.
-   */
-  emailAddress: string;
-}
-
-/**
  * The Azure Automation Runbook notification receiver.
  */
 model AutomationRunbookReceiver {
@@ -317,26 +230,6 @@ model AutomationRunbookReceiver {
    * The principal id of the managed identity. The value can be "None", "SystemAssigned"
    */
   managedIdentity?: string;
-}
-
-/**
- * A voice receiver.
- */
-model VoiceReceiver {
-  /**
-   * The name of the voice receiver. Names must be unique across all receivers within an action group.
-   */
-  name: string;
-
-  /**
-   * The country code of the voice receiver.
-   */
-  countryCode: string;
-
-  /**
-   * The phone number of the voice receiver.
-   */
-  phoneNumber: string;
 }
 
 /**
@@ -569,16 +462,6 @@ model ActionGroupPatchBody {
 }
 
 /**
- * An Azure action group for patch operations.
- */
-model ActionGroupPatch {
-  /**
-   * Indicates whether this action group is enabled. If an action group is not enabled, then none of its actions will be activated.
-   */
-  enabled?: boolean = true;
-}
-
-/**
  * The request body which contain contact detail metadata
  */
 model NotificationRequestBody {
@@ -690,21 +573,6 @@ model TestNotificationDetailsResponse {
    */
   @identifiers(#[])
   actionDetails?: ActionDetail[];
-}
-
-/**
- * The context info
- */
-model Context {
-  /**
-   * The source of the notification request
-   */
-  notificationSource?: string;
-
-  /**
-   * The context id type
-   */
-  contextType?: string;
 }
 
 /**
