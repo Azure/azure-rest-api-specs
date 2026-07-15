@@ -614,6 +614,7 @@ model CustomerManagedKeyEncryptionProperties {
   keyEncryptionKeyIdentity?: KeyEncryptionKeyIdentity;
 
   /** The URI of the key vault key used for encryption. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @madeOptional(Versions.v2025_08_01_preview)
   keyEncryptionKeyUrl?: string;
 }
