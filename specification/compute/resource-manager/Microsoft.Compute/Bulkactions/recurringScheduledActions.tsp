@@ -17,7 +17,7 @@ namespace Microsoft.Compute;
 // ScheduledActions (SA) — the recurring `scheduledActions` resource
 // family, folded into the BulkActions project.
 //
-// NAMING NOTE: SA collision-renames take the `AutoActions*`
+// NAMING NOTE: SA collision-renames take the `RecurringScheduledActions*`
 // prefix because BulkActions already claimed
 // `ScheduledAction*` for its own shared types.
 // =====================================================================
@@ -191,11 +191,11 @@ union ResourceOperationStatus {
 
 // NAMING NOTE: renamed from `ProvisioningState` to avoid colliding with the
 // BulkActions LaunchBulkInstancesOperation `ProvisioningState`; takes the
-// `AutoActions*` identity (see file header).
+// `RecurringScheduledActions*` identity (see file header).
 @added(Versions.`2026-07-06-preview`)
 @doc("Provisioning state of the scheduled action resource.")
 @lroStatus
-union AutoActionsProvisioningState {
+union RecurringScheduledActionsProvisioningState {
   ResourceProvisioningState,
 
   @doc("Resource is being deleted.")
@@ -414,7 +414,7 @@ model ScheduledActionProperties {
 
   @doc("The status of the last provisioning operation performed on the resource.")
   @visibility(Lifecycle.Read)
-  provisioningState?: AutoActionsProvisioningState;
+  provisioningState?: RecurringScheduledActionsProvisioningState;
 }
 
 @added(Versions.`2026-07-06-preview`)
@@ -446,7 +446,7 @@ model ScheduledActionPropertiesUpdate {
 
   @doc("The status of the last provisioning operation performed on the resource.")
   @visibility(Lifecycle.Read)
-  provisioningState?: AutoActionsProvisioningState;
+  provisioningState?: RecurringScheduledActionsProvisioningState;
 }
 
 @added(Versions.`2026-07-06-preview`)

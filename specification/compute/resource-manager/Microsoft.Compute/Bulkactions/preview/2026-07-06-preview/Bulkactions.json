@@ -3312,43 +3312,6 @@
         ]
       }
     },
-    "AutoActionsProvisioningState": {
-      "type": "string",
-      "description": "Provisioning state of the scheduled action resource.",
-      "enum": [
-        "Succeeded",
-        "Failed",
-        "Canceled",
-        "Deleting"
-      ],
-      "x-ms-enum": {
-        "name": "AutoActionsProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Resource has been created."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Resource creation failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Resource creation was canceled."
-          },
-          {
-            "name": "Deleting",
-            "value": "Deleting",
-            "description": "Resource is being deleted."
-          }
-        ]
-      },
-      "readOnly": true
-    },
     "Azure.Core.Foundations.Error": {
       "type": "object",
       "description": "The error object.",
@@ -6635,6 +6598,43 @@
         ]
       }
     },
+    "RecurringScheduledActionsProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state of the scheduled action resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "RecurringScheduledActionsProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Resource is being deleted."
+          }
+        ]
+      },
+      "readOnly": true
+    },
     "ReimagePayload": {
       "type": "object",
       "description": "Reimage payload with common profile and per-resource overrides",
@@ -7477,7 +7477,7 @@
           "default": false
         },
         "provisioningState": {
-          "$ref": "#/definitions/AutoActionsProvisioningState",
+          "$ref": "#/definitions/RecurringScheduledActionsProvisioningState",
           "description": "The status of the last provisioning operation performed on the resource.",
           "readOnly": true
         }
@@ -7722,7 +7722,7 @@
           "default": false
         },
         "provisioningState": {
-          "$ref": "#/definitions/AutoActionsProvisioningState",
+          "$ref": "#/definitions/RecurringScheduledActionsProvisioningState",
           "description": "The status of the last provisioning operation performed on the resource.",
           "readOnly": true
         },
