@@ -1145,11 +1145,6 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
 );
 @@clientName(Role.db, "DBName", "csharp");
 @@clientName(RoleDefinitionType, "CosmosDBSqlRoleDefinitionType", "csharp");
-@@clientName(
-  ScheduledEventStrategy,
-  "CassandraScheduledEventStrategy",
-  "csharp"
-);
 @@clientName(SeedNode, "CassandraDataCenterSeedNode", "csharp");
 @@clientName(SeedNode.ipAddress, "IPAddress", "csharp");
 @@clientName(ServiceResource, "CosmosDBService", "csharp");
@@ -1679,7 +1674,7 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
   "CassandraViewConfig",
   "csharp"
 );
-@@clientName(ARMProxyResource, "CosmosDBProxyResource", "csharp");
+@@clientName(ARMProxyResource, "ArmProxyResource", "csharp");
 @@clientName(ARMResourceProperties, "ArmResourceProperties", "csharp");
 @@clientName(
   MaterializedViewDefinition,
