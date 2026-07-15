@@ -19,6 +19,7 @@ model SubResource {
 @added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Describes a reference to Key Vault Secret")
 model KeyVaultSecretReference {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("The URL referencing a secret in a Key Vault.")
   secretUrl: string;
 

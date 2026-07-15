@@ -2,6 +2,9 @@ parameters:
   service-dir:
     default: "sdk/applicationinsights"
 options:
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.ApplicationInsights"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-applicationinsights"
     namespace: "azure.mgmt.applicationinsights"
@@ -35,3 +38,4 @@ options:
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"
