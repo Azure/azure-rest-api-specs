@@ -3312,43 +3312,6 @@
         ]
       }
     },
-    "AutoActionsProvisioningState": {
-      "type": "string",
-      "description": "Provisioning state of the scheduled action resource.",
-      "enum": [
-        "Succeeded",
-        "Failed",
-        "Canceled",
-        "Deleting"
-      ],
-      "x-ms-enum": {
-        "name": "AutoActionsProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Resource has been created."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Resource creation failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Resource creation was canceled."
-          },
-          {
-            "name": "Deleting",
-            "value": "Deleting",
-            "description": "Resource is being deleted."
-          }
-        ]
-      },
-      "readOnly": true
-    },
     "Azure.Core.Foundations.Error": {
       "type": "object",
       "description": "The error object.",
@@ -4198,36 +4161,6 @@
       "description": "Represents the possible days in a month",
       "minimum": 1,
       "maximum": 31
-    },
-    "DeadlineType": {
-      "type": "string",
-      "description": "The types of deadlines supported by Bulkactions",
-      "enum": [
-        "Unknown",
-        "InitiateAt",
-        "CompleteBy"
-      ],
-      "x-ms-enum": {
-        "name": "DeadlineType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Unknown",
-            "value": "Unknown",
-            "description": "Default value of Unknown."
-          },
-          {
-            "name": "InitiateAt",
-            "value": "InitiateAt",
-            "description": "Initiate the operation at the given deadline."
-          },
-          {
-            "name": "CompleteBy",
-            "value": "CompleteBy",
-            "description": "Complete the operation by the given deadline."
-          }
-        ]
-      }
     },
     "DeallocateResourceOperationResponse": {
       "type": "object",
@@ -6636,6 +6569,155 @@
         ]
       }
     },
+    "RecurringScheduledActionsDeadlineType": {
+      "type": "string",
+      "description": "The type of deadline the scheduled action follows for its schedule.",
+      "enum": [
+        "Unknown",
+        "InitiateAt",
+        "CompleteBy"
+      ],
+      "x-ms-enum": {
+        "name": "RecurringScheduledActionsDeadlineType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Default value of Unknown."
+          },
+          {
+            "name": "InitiateAt",
+            "value": "InitiateAt",
+            "description": "Initiate the operation at the given deadline."
+          },
+          {
+            "name": "CompleteBy",
+            "value": "CompleteBy",
+            "description": "Complete the operation by the given deadline."
+          }
+        ]
+      }
+    },
+    "RecurringScheduledActionsExecutionParameters": {
+      "type": "object",
+      "description": "The execution parameters the scheduled action is supposed to follow",
+      "properties": {
+        "optimizationPreference": {
+          "$ref": "#/definitions/OptimizationPreference",
+          "description": "Details that could optimize the user's request"
+        },
+        "retryPolicy": {
+          "$ref": "#/definitions/RecurringScheduledActionsRetryPolicy",
+          "description": "Retry policy the user can pass"
+        }
+      }
+    },
+    "RecurringScheduledActionsProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state of the scheduled action resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "RecurringScheduledActionsProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Resource is being deleted."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "RecurringScheduledActionsResourceOperationType": {
+      "type": "string",
+      "description": "The resource operation to take on a scheduled-action failure.",
+      "enum": [
+        "Unknown",
+        "Start",
+        "Deallocate",
+        "Hibernate",
+        "Create",
+        "Delete"
+      ],
+      "x-ms-enum": {
+        "name": "RecurringScheduledActionsResourceOperationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "The default value for this enum type"
+          },
+          {
+            "name": "Start",
+            "value": "Start",
+            "description": "Start operations on the resources"
+          },
+          {
+            "name": "Deallocate",
+            "value": "Deallocate",
+            "description": "Deallocate operations on the resources"
+          },
+          {
+            "name": "Hibernate",
+            "value": "Hibernate",
+            "description": "Hibernate operations on the resources"
+          },
+          {
+            "name": "Create",
+            "value": "Create",
+            "description": "Create operations on the resources"
+          },
+          {
+            "name": "Delete",
+            "value": "Delete",
+            "description": "Delete operations on the resources"
+          }
+        ]
+      }
+    },
+    "RecurringScheduledActionsRetryPolicy": {
+      "type": "object",
+      "description": "Retry policy the scheduled action can pass",
+      "properties": {
+        "retryCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Retry count for the request"
+        },
+        "retryWindowInMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Retry window in minutes for the request"
+        },
+        "onFailureAction": {
+          "$ref": "#/definitions/RecurringScheduledActionsResourceOperationType",
+          "description": "Action to take on failure"
+        }
+      }
+    },
     "ReimagePayload": {
       "type": "object",
       "description": "Reimage payload with common profile and per-resource overrides",
@@ -7478,7 +7560,7 @@
           "default": false
         },
         "provisioningState": {
-          "$ref": "#/definitions/AutoActionsProvisioningState",
+          "$ref": "#/definitions/RecurringScheduledActionsProvisioningState",
           "description": "The status of the last provisioning operation performed on the resource.",
           "readOnly": true
         }
@@ -7723,7 +7805,7 @@
           "default": false
         },
         "provisioningState": {
-          "$ref": "#/definitions/AutoActionsProvisioningState",
+          "$ref": "#/definitions/RecurringScheduledActionsProvisioningState",
           "description": "The status of the last provisioning operation performed on the resource.",
           "readOnly": true
         },
@@ -7794,11 +7876,11 @@
           }
         },
         "executionParameters": {
-          "$ref": "#/definitions/ExecutionParameters",
+          "$ref": "#/definitions/RecurringScheduledActionsExecutionParameters",
           "description": "The execution parameters the scheduled action is supposed to follow"
         },
         "deadlineType": {
-          "$ref": "#/definitions/DeadlineType",
+          "$ref": "#/definitions/RecurringScheduledActionsDeadlineType",
           "description": "The type of deadline the scheduled action is supposed to follow for the schedule. If no value is passed, it will default to InitiateAt."
         }
       },
@@ -7842,11 +7924,11 @@
           }
         },
         "executionParameters": {
-          "$ref": "#/definitions/ExecutionParameters",
+          "$ref": "#/definitions/RecurringScheduledActionsExecutionParameters",
           "description": "The execution parameters the scheduled action is supposed to follow"
         },
         "deadlineType": {
-          "$ref": "#/definitions/DeadlineType",
+          "$ref": "#/definitions/RecurringScheduledActionsDeadlineType",
           "description": "The type of deadline the scheduled action is supposed to follow for the schedule. If no value is passed, it will default to InitiateAt."
         }
       }
