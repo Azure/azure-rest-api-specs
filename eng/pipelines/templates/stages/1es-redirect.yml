@@ -1,0 +1,33 @@
+# Shared 1ES stage-list redirect: selects the Official (internal project, non-PR) vs Unofficial
+# 1ES pipeline template so callers only ever author a plain `stages:` list. This is the repo-local
+# SWAP POINT that eng/common's stage archetypes (e.g. archetype-eval.yml) extend by convention.
+
+resources:
+  repositories:
+    - repository: 1ESPipelineTemplates
+      type: git
+      name: 1ESPipelineTemplates/1ESPipelineTemplates
+      ref: refs/tags/release
+
+parameters:
+  - name: stages
+    type: stageList
+    default: []
+  - name: Use1ESOfficial
+    type: boolean
+    default: true
+
+extends:
+  ${{ if and(parameters.Use1ESOfficial, eq(variables['System.TeamProject'], 'internal')) }}:
+    template: v1/1ES.Official.PipelineTemplate.yml@1ESPipelineTemplates
+  ${{ else }}:
+    template: v1/1ES.Unofficial.PipelineTemplate.yml@1ESPipelineTemplates
+  parameters:
+    settings:
+      skipBuildTagsForGitHubPullRequests: true
+    sdl:
+      sourceAnalysisPool:
+        name: $(LINUXPOOL)
+        image: $(LINUXVMIMAGE)
+        os: linux
+    stages: ${{ parameters.stages }}

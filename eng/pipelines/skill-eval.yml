@@ -1,0 +1,65 @@
+# Skill-compliance eval CI: runs the per-skill Vally evals under .github/skills (one job per
+# skill), using the shared eval framework synced from azure-sdk-tools under eng/common. This is
+# the repo-local thin entrypoint; the framework itself (archetype/jobs/scripts) lives in
+# eng/common and is not repo-specific.
+#
+# Pilot scope: hermetic mock scenarios only, scheduled/manual runs (no `pr` trigger yet), per the
+# "begin with hermetic mock scenarios and scheduled/manual runs" acceptance criterion in
+# https://github.com/Azure/azure-sdk-tools/issues/16347.
+
+resources:
+  repositories:
+    # Cross-repo MCP build source: the mock MCP server lives in azure-sdk-tools, not this repo.
+    # BLOCKING UNKNOWN: the GitHub service-connection name below is a placeholder. An ADO project
+    # admin needs to confirm or create a GitHub service connection authorized for Azure/azure-sdk-tools
+    # in this project before this pipeline can run.
+    - repository: azure-sdk-tools
+      type: github
+      name: Azure/azure-sdk-tools
+      endpoint: <TBD-github-service-connection>
+
+trigger: none
+pr: none
+
+# Scheduled pilot run. Cadence is a placeholder (daily) pending confirmation.
+schedules:
+  - cron: '0 8 * * *'
+    displayName: 'Daily skill-eval pilot run'
+    branches:
+      include:
+        - main
+    always: true
+
+variables:
+  # Managed-pool image selection (LINUXPOOL/LINUXVMIMAGE). Repo-local.
+  - template: /eng/pipelines/templates/variables/image.yml
+  # Provides the secret azuresdk-copilot-github-pat, mapped into GITHUB_TOKEN in the invoke step.
+  # Already exists in this ADO project.
+  - group: AzSDK_Eval_Variable_group
+
+extends:
+  template: /eng/common/pipelines/templates/stages/archetype-eval.yml
+  parameters:
+    # Shared mock/live builder; select the mock tier.
+    mcpSetupTemplate: /eng/common/pipelines/templates/steps/eval-mcp-setup.yml
+    TestType: mock
+    # Cross-repo MCP build: side-checkout azure-sdk-tools via the repository resource above.
+    toolsRepo: azure-sdk-tools
+    vallyRoot: .github/skills
+    # Two patterns needed to cover every eval under <skill>/evals/: trigger suites are named
+    # trigger.eval.yaml (matches */evals/*.eval.yaml); capability suites are named plainly
+    # eval.yaml (doesn't match the *.eval.yaml glob, since there's no name segment before the
+    # dot) and need the second pattern. Together these cover every skill that currently has an
+    # evals/ folder. NOT covered by this pipeline (structurally incompatible, not a glob gap):
+    #   - .github/skills/evals/arm-api-reviewer/ — a separate, independently-owned suite with its
+    #     own .vally.yaml, vally/eval-*.yaml naming, and run-evals.ps1 orchestration. It targets
+    #     real ARM OpenAPI fixtures, not a `.github/skills/<name>/SKILL.md` skill, so it doesn't
+    #     fit the vallyRoot/evalGlobs model here. Folding it in needs its own pipeline wiring.
+    #   - azure-api-review, openai-typespec-update: no *.eval.yaml/eval.yaml files exist yet
+    #     (openai-typespec-update is still on the old Waza eval.yaml + tasks/ format) — nothing
+    #     for any glob to pick up until those are migrated to Vally.
+    evalGlobs:
+      - '*/evals/*.eval.yaml'
+      - '*/evals/eval.yaml'
+    # Per-shard job timeout (report-only tier).
+    shardTimeoutInMinutes: 20

@@ -1,0 +1,38 @@
+name: Skill Evaluations
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/skills/**'
+      - 'eng/skill-eval/**'
+      - '.github/workflows/skill-eval.yml'
+  pull_request:
+    paths:
+      - '.github/skills/**'
+      - 'eng/skill-eval/**'
+      - '.github/workflows/skill-eval.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check-skills:
+    name: Skill Compliance Check (Vally lint)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: eng/skill-eval/package-lock.json
+
+      - name: Install Vally CLI (pinned via lockfile)
+        working-directory: eng/skill-eval
+        run: npm ci
+
+      - name: Lint skills
+        run: ./eng/skill-eval/node_modules/.bin/vally lint .
