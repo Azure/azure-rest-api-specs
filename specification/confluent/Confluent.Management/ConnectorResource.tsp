@@ -15,8 +15,10 @@ namespace Microsoft.Confluent;
  * Details of connector record
  */
 @parentResource(SCClusterRecord)
-model ConnectorResource
-  is Azure.ResourceManager.ProxyResource<ConnectorResourceProperties, false> {
+model ConnectorResource is Azure.ResourceManager.ProxyResource<
+  ConnectorResourceProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = ConnectorResource,
     KeyName = "connectorName",
