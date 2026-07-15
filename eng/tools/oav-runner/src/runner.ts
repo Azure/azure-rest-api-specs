@@ -144,6 +144,25 @@ async function getFiles(rootDirectory: string, directory: string): Promise<strin
     .filter((d) => d.includes("specification" + path.sep));
 }
 
+async function supportsOavValidation(filePath: string): Promise<boolean> {
+  try {
+    const fileContent = await fs.promises.readFile(filePath, { encoding: "utf8" });
+    const document = JSON.parse(fileContent) as {
+      openapi?: unknown;
+      swagger?: unknown;
+    } | null;
+
+    return !(
+      document &&
+      typeof document === "object" &&
+      "openapi" in document &&
+      !("swagger" in document)
+    );
+  } catch {
+    return true;
+  }
+}
+
 export async function processFilesToSpecificationList(
   rootDirectory: string,
   files: string[],
@@ -177,6 +196,9 @@ export async function processFilesToSpecificationList(
       const visibleSwaggerFiles = await getFiles(rootDirectory, swaggerDir);
 
       for (const swaggerFile of visibleSwaggerFiles) {
+        if (!(await supportsOavValidation(path.join(rootDirectory, swaggerFile)))) {
+          continue;
+        }
         if (!cachedSwaggerSpecs.has(swaggerFile)) {
           const swaggerModel = new Swagger(path.join(rootDirectory, swaggerFile));
           try {
@@ -206,7 +228,11 @@ export async function processFilesToSpecificationList(
     }
 
     // finally handle our base case where the file we're examining is itself a swagger file
-    if (swagger(file) && fs.existsSync(absoluteFilePath)) {
+    if (
+      swagger(file) &&
+      fs.existsSync(absoluteFilePath) &&
+      (await supportsOavValidation(absoluteFilePath))
+    ) {
       resultFiles.push(file);
     }
   }
