@@ -4,6 +4,8 @@ info:
   version: v1
 tags:
   - name: Agent Conversations
+  - name: Voice Agents
+  - name: Voice Agent Versions
   - name: Responses Root
     description: Responses
   - name: Responses
@@ -517,7 +519,6 @@ paths:
           - WorkflowAgents=V1Preview
           - ExternalAgents=V1Preview
           - DraftAgents=V1Preview
-          - PromptVoiceAgents=V1Preview
       tags:
         - Agents
       requestBody:
@@ -1201,884 +1202,6 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agent Invocations WebSocket
-  /agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}:
-    get:
-      operationId: AgentEndpointConversations_getAgentConversation
-      summary: Get a voice agent conversation
-      description: |-
-        Retrieves a single conversation recorded for the specified voice agent endpoint by its id.
-        Returns `404` when the conversation was not persisted (`store = false`) or does not exist.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - PromptVoiceAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the agent.
-          schema:
-            type: string
-        - name: conversation_id
-          in: path
-          required: true
-          description: The id of the conversation to retrieve.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/VoiceConversation'
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Conversations
-      x-ms-foundry-meta:
-        required_previews:
-          - PromptVoiceAgents=V1Preview
-    delete:
-      operationId: AgentEndpointConversations_deleteAgentConversation
-      summary: Delete a voice agent conversation
-      description: |-
-        Deletes a conversation and all of its stored data — responses, items, and any audio (cascade). This is
-        the customer's explicit data-deletion control for voice conversations.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - PromptVoiceAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the agent.
-          schema:
-            type: string
-        - name: conversation_id
-          in: path
-          required: true
-          description: The id of the conversation to delete.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/VoiceDeletedConversation'
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Conversations
-      x-ms-foundry-meta:
-        required_previews:
-          - PromptVoiceAgents=V1Preview
-  /agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/audio:
-    get:
-      operationId: AgentEndpointConversations_getAgentConversationAudio
-      summary: Get a voice agent conversation's merged recording metadata
-      description: |-
-        Returns metadata for the whole-call merged stereo recording (user audio on the left channel, agent audio
-        on the right). The common metadata (format, sample rate, channels, channel layout, duration) is returned
-        for both Foundry-managed and bring-your-own-storage (BYOS) recordings; for BYOS the response additionally
-        includes `blob_path`, a direct path into the customer's own storage (no SAS) that the customer downloads
-        with their own credentials. The recording is built once from the per-turn segments after the session ends;
-        a request against an in-progress session returns `409`. Requires the conversation to have persisted audio
-        (`store = true`); otherwise returns `404`.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - PromptVoiceAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the agent.
-          schema:
-            type: string
-        - name: conversation_id
-          in: path
-          required: true
-          description: The id of the conversation whose merged recording metadata is retrieved.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/VoiceRecordingResponse'
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Conversations
-      x-ms-foundry-meta:
-        required_previews:
-          - PromptVoiceAgents=V1Preview
-  /agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/audio/content:
-    get:
-      operationId: AgentEndpointConversations_getAgentConversationAudioContent
-      summary: Stream a voice agent conversation's merged recording
-      description: |-
-        Streams the whole-call merged stereo recording as a WAV (`audio/wav`) byte stream through the service
-        (no SAS URL). This route serves Foundry-managed storage only. For bring-your-own-storage (BYOS)
-        recordings the bytes are not proxied — the caller must download directly from customer storage using the
-        `blob_path` returned by the metadata route — so this route returns `409 Conflict` for BYOS recordings.
-        A request against an in-progress session also returns `409` (a distinct condition: session-not-ended
-        versus BYOS-download-required). A conversation without persisted audio (`store = false`) returns `404`.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - PromptVoiceAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the agent.
-          schema:
-            type: string
-        - name: conversation_id
-          in: path
-          required: true
-          description: The id of the conversation whose merged recording is streamed.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: A streamed WAV (`audio/wav`) audio response. The bytes are streamed through the service; no SAS URL is returned.
-          content:
-            audio/wav:
-              schema:
-                contentMediaType: audio/wav
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Conversations
-      x-ms-foundry-meta:
-        required_previews:
-          - PromptVoiceAgents=V1Preview
-  /agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items:
-    get:
-      operationId: AgentEndpointConversations_listAgentConversationItems
-      summary: List items in a voice agent conversation
-      description: |-
-        Returns a paged collection of items — the complete ordered conversation history, including user input,
-        assistant output, and client-created tool outputs (transcripts + tool events). Returns `404` when the
-        conversation was not persisted (`store = false`).
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - PromptVoiceAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the agent.
-          schema:
-            type: string
-        - name: conversation_id
-          in: path
-          required: true
-          description: The id of the conversation whose items are listed.
-          schema:
-            type: string
-        - name: limit
-          in: query
-          required: false
-          description: |-
-            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
-            default is 20.
-          schema:
-            type: integer
-            format: int32
-            default: 20
-          explode: false
-        - name: order
-          in: query
-          required: false
-          description: |-
-            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
-            for descending order.
-          schema:
-            $ref: '#/components/schemas/PageOrder'
-          explode: false
-        - name: after
-          in: query
-          required: false
-          description: |-
-            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
-            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
-            subsequent call can include after=obj_foo in order to fetch the next page of the list.
-          schema:
-            type: string
-          explode: false
-        - name: before
-          in: query
-          required: false
-          description: |-
-            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
-            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
-            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
-          schema:
-            type: string
-          explode: false
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                  - data
-                  - has_more
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/VoiceConversationItem'
-                    description: The requested list of items.
-                  first_id:
-                    type: string
-                    description: The first ID represented in this list.
-                  last_id:
-                    type: string
-                    description: The last ID represented in this list.
-                  has_more:
-                    type: boolean
-                    description: A value indicating whether there are additional values available not captured in this list.
-                description: The response data for a requested list of items.
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Conversations
-      x-ms-foundry-meta:
-        required_previews:
-          - PromptVoiceAgents=V1Preview
-  /agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}:
-    get:
-      operationId: AgentEndpointConversations_getAgentConversationItem
-      summary: Get a voice agent conversation item
-      description: |-
-        Retrieves a single item from the specified conversation by its id, including its transcript. An
-        `input_audio`/`output_audio` content part indicates that audio is available for the item; the canonical per-item
-        audio metadata is the `/items/{item_id}/audio` resource, and the bytes are streamed by
-        `/items/{item_id}/audio/content`. Returns `404` when the conversation or item was not persisted
-        (`store = false`).
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - PromptVoiceAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the agent.
-          schema:
-            type: string
-        - name: conversation_id
-          in: path
-          required: true
-          description: The id of the conversation that contains the item.
-          schema:
-            type: string
-        - name: item_id
-          in: path
-          required: true
-          description: The id of the conversation item to retrieve.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/VoiceConversationItem'
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Conversations
-      x-ms-foundry-meta:
-        required_previews:
-          - PromptVoiceAgents=V1Preview
-  /agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}/audio:
-    get:
-      operationId: AgentEndpointConversations_getAgentConversationItemAudio
-      summary: Get a voice agent conversation item's audio metadata
-      description: |-
-        Returns metadata for a single conversation item's audio segment, including the common playback facts
-        (role, format/codec, sample rate, channels, offset, duration) for both Foundry-managed and
-        bring-your-own-storage (BYOS) recordings; for BYOS the response additionally includes `blob_path`, a direct
-        path into the customer's own storage (no SAS) that the customer downloads with their own credentials.
-        Requires the conversation to have persisted audio (`store = true`); returns `404` when the conversation,
-        item, or its audio was not persisted.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - PromptVoiceAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the agent.
-          schema:
-            type: string
-        - name: conversation_id
-          in: path
-          required: true
-          description: The id of the conversation that contains the item.
-          schema:
-            type: string
-        - name: item_id
-          in: path
-          required: true
-          description: The id of the conversation item whose audio metadata is retrieved.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/VoiceItemAudioResponse'
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Conversations
-      x-ms-foundry-meta:
-        required_previews:
-          - PromptVoiceAgents=V1Preview
-  /agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}/audio/content:
-    get:
-      operationId: AgentEndpointConversations_getAgentConversationItemAudioContent
-      summary: Stream a voice agent conversation item's audio
-      description: |-
-        Streams a single conversation item's audio as a WAV (`audio/wav`) byte stream through the service (no SAS
-        URL). This route serves Foundry-managed storage only. For bring-your-own-storage (BYOS) recordings the
-        bytes are not proxied — the caller must download directly from customer storage using the `blob_path`
-        returned by the item's `/audio` metadata route — so this route returns `409 Conflict` for BYOS recordings.
-        Returns `404` when the conversation, item, or its audio was not persisted (`store = false`).
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - PromptVoiceAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the agent.
-          schema:
-            type: string
-        - name: conversation_id
-          in: path
-          required: true
-          description: The id of the conversation that contains the item.
-          schema:
-            type: string
-        - name: item_id
-          in: path
-          required: true
-          description: The id of the conversation item whose audio is streamed.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: A streamed WAV (`audio/wav`) audio response. The bytes are streamed through the service; no SAS URL is returned.
-          content:
-            audio/wav:
-              schema:
-                contentMediaType: audio/wav
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Conversations
-      x-ms-foundry-meta:
-        required_previews:
-          - PromptVoiceAgents=V1Preview
-  /agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/responses:
-    get:
-      operationId: AgentEndpointConversations_listAgentConversationResponses
-      summary: List responses in a voice agent conversation
-      description: |-
-        Returns a paged collection of the responses (model inference turns) recorded for the specified
-        conversation. The per-response `output` projection may be omitted here; use the response-items route
-        for the canonical paged output. Returns `404` when the conversation was not persisted (`store = false`).
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - PromptVoiceAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the agent.
-          schema:
-            type: string
-        - name: conversation_id
-          in: path
-          required: true
-          description: The id of the conversation whose responses are listed.
-          schema:
-            type: string
-        - name: limit
-          in: query
-          required: false
-          description: |-
-            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
-            default is 20.
-          schema:
-            type: integer
-            format: int32
-            default: 20
-          explode: false
-        - name: order
-          in: query
-          required: false
-          description: |-
-            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
-            for descending order.
-          schema:
-            $ref: '#/components/schemas/PageOrder'
-          explode: false
-        - name: after
-          in: query
-          required: false
-          description: |-
-            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
-            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
-            subsequent call can include after=obj_foo in order to fetch the next page of the list.
-          schema:
-            type: string
-          explode: false
-        - name: before
-          in: query
-          required: false
-          description: |-
-            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
-            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
-            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
-          schema:
-            type: string
-          explode: false
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                  - data
-                  - has_more
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/VoiceResponse'
-                    description: The requested list of items.
-                  first_id:
-                    type: string
-                    description: The first ID represented in this list.
-                  last_id:
-                    type: string
-                    description: The last ID represented in this list.
-                  has_more:
-                    type: boolean
-                    description: A value indicating whether there are additional values available not captured in this list.
-                description: The response data for a requested list of items.
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Conversations
-      x-ms-foundry-meta:
-        required_previews:
-          - PromptVoiceAgents=V1Preview
-  /agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/responses/{response_id}:
-    get:
-      operationId: AgentEndpointConversations_getAgentConversationResponse
-      summary: Get a voice agent conversation response
-      description: |-
-        Retrieves a single response from the specified conversation by its id, including its `output` items,
-        `usage`, and status. Returns `404` when the conversation or response was not persisted (`store = false`).
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - PromptVoiceAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the agent.
-          schema:
-            type: string
-        - name: conversation_id
-          in: path
-          required: true
-          description: The id of the conversation that contains the response.
-          schema:
-            type: string
-        - name: response_id
-          in: path
-          required: true
-          description: The id of the response to retrieve.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/VoiceResponse'
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Conversations
-      x-ms-foundry-meta:
-        required_previews:
-          - PromptVoiceAgents=V1Preview
-  /agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/responses/{response_id}/items:
-    get:
-      operationId: AgentEndpointConversations_listAgentConversationResponseItems
-      summary: List items produced by a voice agent conversation response
-      description: |-
-        Returns a paged collection of the output items produced by a specific response (the response's output
-        projection). For the complete ordered conversation history — including user input and client-created
-        tool outputs — use the conversation items route instead. Returns `404` when the conversation or
-        response was not persisted (`store = false`).
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - PromptVoiceAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the agent.
-          schema:
-            type: string
-        - name: conversation_id
-          in: path
-          required: true
-          description: The id of the conversation that contains the response.
-          schema:
-            type: string
-        - name: response_id
-          in: path
-          required: true
-          description: The id of the response whose output items are listed.
-          schema:
-            type: string
-        - name: limit
-          in: query
-          required: false
-          description: |-
-            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
-            default is 20.
-          schema:
-            type: integer
-            format: int32
-            default: 20
-          explode: false
-        - name: order
-          in: query
-          required: false
-          description: |-
-            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
-            for descending order.
-          schema:
-            $ref: '#/components/schemas/PageOrder'
-          explode: false
-        - name: after
-          in: query
-          required: false
-          description: |-
-            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
-            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
-            subsequent call can include after=obj_foo in order to fetch the next page of the list.
-          schema:
-            type: string
-          explode: false
-        - name: before
-          in: query
-          required: false
-          description: |-
-            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
-            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
-            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
-          schema:
-            type: string
-          explode: false
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                  - data
-                  - has_more
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/VoiceConversationItem'
-                    description: The requested list of items.
-                  first_id:
-                    type: string
-                    description: The first ID represented in this list.
-                  last_id:
-                    type: string
-                    description: The last ID represented in this list.
-                  has_more:
-                    type: boolean
-                    description: A value indicating whether there are additional values available not captured in this list.
-                description: The response data for a requested list of items.
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Conversations
-      x-ms-foundry-meta:
-        required_previews:
-          - PromptVoiceAgents=V1Preview
   /agents/{agent_name}/endpoint/sessions:
     post:
       operationId: Agents_createSession
@@ -2740,7 +1863,6 @@ paths:
           - WorkflowAgents=V1Preview
           - ExternalAgents=V1Preview
           - DraftAgents=V1Preview
-          - PromptVoiceAgents=V1Preview
       tags:
         - Agent Versions
       requestBody:
@@ -3187,61 +2309,6 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agents
-  /agents:generate:
-    post:
-      operationId: Agents_generateAgent
-      summary: Generate an agent
-      description: |-
-        Generates and creates an agent from high-level, kind-specific inputs. Currently, `prompt_voice` is the only
-        supported kind. For a voice-first prompt agent, the operation expands a natural-language goal into a full,
-        editable definition, creates the agent through the standard create path, and returns the created `AgentObject`.
-        The caller can edit or override the generated fields afterward through normal versioning.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - PromptVoiceAgents=V1Preview
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgentObject'
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agents
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/GenerateAgentRequest'
-      x-ms-foundry-meta:
-        required_previews:
-          - PromptVoiceAgents=V1Preview
   /agents:import:
     post:
       operationId: Agents_createAgentFromManifest
@@ -38590,6 +37657,1547 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Toolboxes
+  /voice-agents:
+    post:
+      operationId: VoiceAgents_createVoiceAgent
+      summary: Create a voice agent
+      description: Creates a new voice-first prompt agent, or a new version of an existing one.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - PromptVoiceAgents=V1Preview
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VoiceAgentObject'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Voice Agents
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateVoiceAgentRequest'
+      x-ms-foundry-meta:
+        required_previews:
+          - PromptVoiceAgents=V1Preview
+    get:
+      operationId: VoiceAgents_listVoiceAgents
+      summary: List voice agents
+      description: Returns a paged collection of voice agents.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - PromptVoiceAgents=V1Preview
+        - name: limit
+          in: query
+          required: false
+          description: |-
+            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+            default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: |-
+            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
+            for descending order.
+          schema:
+            $ref: '#/components/schemas/PageOrder'
+          explode: false
+        - name: after
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: before
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - has_more
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/VoiceAgentObject'
+                    description: The requested list of items.
+                  first_id:
+                    type: string
+                    description: The first ID represented in this list.
+                  last_id:
+                    type: string
+                    description: The last ID represented in this list.
+                  has_more:
+                    type: boolean
+                    description: A value indicating whether there are additional values available not captured in this list.
+                description: The response data for a requested list of items.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Voice Agents
+      x-ms-foundry-meta:
+        required_previews:
+          - PromptVoiceAgents=V1Preview
+  /voice-agents/{agent_name}:
+    get:
+      operationId: VoiceAgents_getVoiceAgent
+      summary: Get a voice agent
+      description: Retrieves a voice agent by its unique name.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - PromptVoiceAgents=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the voice agent to retrieve.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VoiceAgentObject'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Voice Agents
+      x-ms-foundry-meta:
+        required_previews:
+          - PromptVoiceAgents=V1Preview
+    post:
+      operationId: VoiceAgents_updateVoiceAgent
+      summary: Update a voice agent
+      description: |-
+        Updates a voice agent by adding a new version if there are any changes to the agent definition.
+        If no changes, returns the existing agent version.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - PromptVoiceAgents=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the voice agent to update.
+          schema:
+            type: string
+            maxLength: 63
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VoiceAgentObject'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Voice Agents
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateVoiceAgentRequest'
+      x-ms-foundry-meta:
+        required_previews:
+          - PromptVoiceAgents=V1Preview
+    delete:
+      operationId: VoiceAgents_deleteVoiceAgent
+      summary: Delete a voice agent
+      description: Deletes a voice agent and all of its versions.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - PromptVoiceAgents=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the voice agent to delete.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteAgentResponse'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Voice Agents
+      x-ms-foundry-meta:
+        required_previews:
+          - PromptVoiceAgents=V1Preview
+  /voice-agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}:
+    get:
+      operationId: AgentEndpointConversations_getAgentConversation
+      summary: Get a voice agent conversation
+      description: |-
+        Retrieves a single conversation recorded for the specified voice agent endpoint by its id.
+        Returns `404` when the conversation was not persisted (`store = false`) or does not exist.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - PromptVoiceAgents=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the agent.
+          schema:
+            type: string
+        - name: conversation_id
+          in: path
+          required: true
+          description: The id of the conversation to retrieve.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VoiceConversation'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Conversations
+      x-ms-foundry-meta:
+        required_previews:
+          - PromptVoiceAgents=V1Preview
+    delete:
+      operationId: AgentEndpointConversations_deleteAgentConversation
+      summary: Delete a voice agent conversation
+      description: |-
+        Deletes a conversation and all of its stored data — responses, items, and any audio (cascade). This is
+        the customer's explicit data-deletion control for voice conversations.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - PromptVoiceAgents=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the agent.
+          schema:
+            type: string
+        - name: conversation_id
+          in: path
+          required: true
+          description: The id of the conversation to delete.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VoiceDeletedConversation'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Conversations
+      x-ms-foundry-meta:
+        required_previews:
+          - PromptVoiceAgents=V1Preview
+  /voice-agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/audio:
+    get:
+      operationId: AgentEndpointConversations_getAgentConversationAudio
+      summary: Get a voice agent conversation's merged recording metadata
+      description: |-
+        Returns metadata for the whole-call merged stereo recording (user audio on the left channel, agent audio
+        on the right). The common metadata (format, sample rate, channels, channel layout, duration) is returned
+        for both Foundry-managed and bring-your-own-storage (BYOS) recordings; for BYOS the response additionally
+        includes `blob_path`, a direct path into the customer's own storage (no SAS) that the customer downloads
+        with their own credentials. The recording is built once from the per-turn segments after the session ends;
+        a request against an in-progress session returns `409`. Requires the conversation to have persisted audio
+        (`store = true`); otherwise returns `404`.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - PromptVoiceAgents=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the agent.
+          schema:
+            type: string
+        - name: conversation_id
+          in: path
+          required: true
+          description: The id of the conversation whose merged recording metadata is retrieved.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VoiceRecordingResponse'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Conversations
+      x-ms-foundry-meta:
+        required_previews:
+          - PromptVoiceAgents=V1Preview
+  /voice-agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/audio/content:
+    get:
+      operationId: AgentEndpointConversations_getAgentConversationAudioContent
+      summary: Stream a voice agent conversation's merged recording
+      description: |-
+        Streams the whole-call merged stereo recording as a WAV (`audio/wav`) byte stream through the service
+        (no SAS URL). This route serves Foundry-managed storage only. For bring-your-own-storage (BYOS)
+        recordings the bytes are not proxied — the caller must download directly from customer storage using the
+        `blob_path` returned by the metadata route — so this route returns `409 Conflict` for BYOS recordings.
+        A request against an in-progress session also returns `409` (a distinct condition: session-not-ended
+        versus BYOS-download-required). A conversation without persisted audio (`store = false`) returns `404`.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - PromptVoiceAgents=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the agent.
+          schema:
+            type: string
+        - name: conversation_id
+          in: path
+          required: true
+          description: The id of the conversation whose merged recording is streamed.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: A streamed WAV (`audio/wav`) audio response. The bytes are streamed through the service; no SAS URL is returned.
+          content:
+            audio/wav:
+              schema:
+                contentMediaType: audio/wav
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Conversations
+      x-ms-foundry-meta:
+        required_previews:
+          - PromptVoiceAgents=V1Preview
+  /voice-agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items:
+    get:
+      operationId: AgentEndpointConversations_listAgentConversationItems
+      summary: List items in a voice agent conversation
+      description: |-
+        Returns a paged collection of items — the complete ordered conversation history, including user input,
+        assistant output, and client-created tool outputs (transcripts + tool events). Returns `404` when the
+        conversation was not persisted (`store = false`).
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - PromptVoiceAgents=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the agent.
+          schema:
+            type: string
+        - name: conversation_id
+          in: path
+          required: true
+          description: The id of the conversation whose items are listed.
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          description: |-
+            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+            default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: |-
+            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
+            for descending order.
+          schema:
+            $ref: '#/components/schemas/PageOrder'
+          explode: false
+        - name: after
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: before
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - has_more
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/VoiceConversationItem'
+                    description: The requested list of items.
+                  first_id:
+                    type: string
+                    description: The first ID represented in this list.
+                  last_id:
+                    type: string
+                    description: The last ID represented in this list.
+                  has_more:
+                    type: boolean
+                    description: A value indicating whether there are additional values available not captured in this list.
+                description: The response data for a requested list of items.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Conversations
+      x-ms-foundry-meta:
+        required_previews:
+          - PromptVoiceAgents=V1Preview
+  /voice-agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}:
+    get:
+      operationId: AgentEndpointConversations_getAgentConversationItem
+      summary: Get a voice agent conversation item
+      description: |-
+        Retrieves a single item from the specified conversation by its id, including its transcript. An
+        `input_audio`/`output_audio` content part indicates that audio is available for the item; the canonical per-item
+        audio metadata is the `/items/{item_id}/audio` resource, and the bytes are streamed by
+        `/items/{item_id}/audio/content`. Returns `404` when the conversation or item was not persisted
+        (`store = false`).
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - PromptVoiceAgents=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the agent.
+          schema:
+            type: string
+        - name: conversation_id
+          in: path
+          required: true
+          description: The id of the conversation that contains the item.
+          schema:
+            type: string
+        - name: item_id
+          in: path
+          required: true
+          description: The id of the conversation item to retrieve.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VoiceConversationItem'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Conversations
+      x-ms-foundry-meta:
+        required_previews:
+          - PromptVoiceAgents=V1Preview
+  /voice-agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}/audio:
+    get:
+      operationId: AgentEndpointConversations_getAgentConversationItemAudio
+      summary: Get a voice agent conversation item's audio metadata
+      description: |-
+        Returns metadata for a single conversation item's audio segment, including the common playback facts
+        (role, format/codec, sample rate, channels, offset, duration) for both Foundry-managed and
+        bring-your-own-storage (BYOS) recordings; for BYOS the response additionally includes `blob_path`, a direct
+        path into the customer's own storage (no SAS) that the customer downloads with their own credentials.
+        Requires the conversation to have persisted audio (`store = true`); returns `404` when the conversation,
+        item, or its audio was not persisted.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - PromptVoiceAgents=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the agent.
+          schema:
+            type: string
+        - name: conversation_id
+          in: path
+          required: true
+          description: The id of the conversation that contains the item.
+          schema:
+            type: string
+        - name: item_id
+          in: path
+          required: true
+          description: The id of the conversation item whose audio metadata is retrieved.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VoiceItemAudioResponse'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Conversations
+      x-ms-foundry-meta:
+        required_previews:
+          - PromptVoiceAgents=V1Preview
+  /voice-agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}/audio/content:
+    get:
+      operationId: AgentEndpointConversations_getAgentConversationItemAudioContent
+      summary: Stream a voice agent conversation item's audio
+      description: |-
+        Streams a single conversation item's audio as a WAV (`audio/wav`) byte stream through the service (no SAS
+        URL). This route serves Foundry-managed storage only. For bring-your-own-storage (BYOS) recordings the
+        bytes are not proxied — the caller must download directly from customer storage using the `blob_path`
+        returned by the item's `/audio` metadata route — so this route returns `409 Conflict` for BYOS recordings.
+        Returns `404` when the conversation, item, or its audio was not persisted (`store = false`).
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - PromptVoiceAgents=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the agent.
+          schema:
+            type: string
+        - name: conversation_id
+          in: path
+          required: true
+          description: The id of the conversation that contains the item.
+          schema:
+            type: string
+        - name: item_id
+          in: path
+          required: true
+          description: The id of the conversation item whose audio is streamed.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: A streamed WAV (`audio/wav`) audio response. The bytes are streamed through the service; no SAS URL is returned.
+          content:
+            audio/wav:
+              schema:
+                contentMediaType: audio/wav
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Conversations
+      x-ms-foundry-meta:
+        required_previews:
+          - PromptVoiceAgents=V1Preview
+  /voice-agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/responses:
+    get:
+      operationId: AgentEndpointConversations_listAgentConversationResponses
+      summary: List responses in a voice agent conversation
+      description: |-
+        Returns a paged collection of the responses (model inference turns) recorded for the specified
+        conversation. The per-response `output` projection may be omitted here; use the response-items route
+        for the canonical paged output. Returns `404` when the conversation was not persisted (`store = false`).
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - PromptVoiceAgents=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the agent.
+          schema:
+            type: string
+        - name: conversation_id
+          in: path
+          required: true
+          description: The id of the conversation whose responses are listed.
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          description: |-
+            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+            default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: |-
+            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
+            for descending order.
+          schema:
+            $ref: '#/components/schemas/PageOrder'
+          explode: false
+        - name: after
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: before
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - has_more
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/VoiceResponse'
+                    description: The requested list of items.
+                  first_id:
+                    type: string
+                    description: The first ID represented in this list.
+                  last_id:
+                    type: string
+                    description: The last ID represented in this list.
+                  has_more:
+                    type: boolean
+                    description: A value indicating whether there are additional values available not captured in this list.
+                description: The response data for a requested list of items.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Conversations
+      x-ms-foundry-meta:
+        required_previews:
+          - PromptVoiceAgents=V1Preview
+  /voice-agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/responses/{response_id}:
+    get:
+      operationId: AgentEndpointConversations_getAgentConversationResponse
+      summary: Get a voice agent conversation response
+      description: |-
+        Retrieves a single response from the specified conversation by its id, including its `output` items,
+        `usage`, and status. Returns `404` when the conversation or response was not persisted (`store = false`).
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - PromptVoiceAgents=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the agent.
+          schema:
+            type: string
+        - name: conversation_id
+          in: path
+          required: true
+          description: The id of the conversation that contains the response.
+          schema:
+            type: string
+        - name: response_id
+          in: path
+          required: true
+          description: The id of the response to retrieve.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VoiceResponse'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Conversations
+      x-ms-foundry-meta:
+        required_previews:
+          - PromptVoiceAgents=V1Preview
+  /voice-agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/responses/{response_id}/items:
+    get:
+      operationId: AgentEndpointConversations_listAgentConversationResponseItems
+      summary: List items produced by a voice agent conversation response
+      description: |-
+        Returns a paged collection of the output items produced by a specific response (the response's output
+        projection). For the complete ordered conversation history — including user input and client-created
+        tool outputs — use the conversation items route instead. Returns `404` when the conversation or
+        response was not persisted (`store = false`).
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - PromptVoiceAgents=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the agent.
+          schema:
+            type: string
+        - name: conversation_id
+          in: path
+          required: true
+          description: The id of the conversation that contains the response.
+          schema:
+            type: string
+        - name: response_id
+          in: path
+          required: true
+          description: The id of the response whose output items are listed.
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          description: |-
+            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+            default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: |-
+            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
+            for descending order.
+          schema:
+            $ref: '#/components/schemas/PageOrder'
+          explode: false
+        - name: after
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: before
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - has_more
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/VoiceConversationItem'
+                    description: The requested list of items.
+                  first_id:
+                    type: string
+                    description: The first ID represented in this list.
+                  last_id:
+                    type: string
+                    description: The last ID represented in this list.
+                  has_more:
+                    type: boolean
+                    description: A value indicating whether there are additional values available not captured in this list.
+                description: The response data for a requested list of items.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Conversations
+      x-ms-foundry-meta:
+        required_previews:
+          - PromptVoiceAgents=V1Preview
+  /voice-agents/{agent_name}/versions:
+    post:
+      operationId: VoiceAgents_createVoiceAgentVersion
+      summary: Create a voice agent version
+      description: Creates a new version for the specified voice agent and returns the created version resource.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - PromptVoiceAgents=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the voice agent.
+          schema:
+            type: string
+            maxLength: 63
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VoiceAgentVersionObject'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Voice Agent Versions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateVoiceAgentVersionRequest'
+      x-ms-foundry-meta:
+        required_previews:
+          - PromptVoiceAgents=V1Preview
+    get:
+      operationId: VoiceAgents_listVoiceAgentVersions
+      summary: List voice agent versions
+      description: Returns a paged collection of versions for the specified voice agent.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - PromptVoiceAgents=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the voice agent to retrieve versions for.
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          description: |-
+            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+            default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: |-
+            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
+            for descending order.
+          schema:
+            $ref: '#/components/schemas/PageOrder'
+          explode: false
+        - name: after
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: before
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: include_drafts
+          in: query
+          required: false
+          description: (Preview) Whether to include draft versions in the listing. The service defaults to `false` if a value is not specified by the caller (only non-draft versions are returned).
+          schema:
+            type: boolean
+            x-ms-foundry-meta:
+              conditional_previews:
+                - DraftAgents=V1Preview
+            default: false
+          x-ms-foundry-meta:
+            conditional_previews:
+              - DraftAgents=V1Preview
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - has_more
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/VoiceAgentVersionObject'
+                    description: The requested list of items.
+                  first_id:
+                    type: string
+                    description: The first ID represented in this list.
+                  last_id:
+                    type: string
+                    description: The last ID represented in this list.
+                  has_more:
+                    type: boolean
+                    description: A value indicating whether there are additional values available not captured in this list.
+                description: The response data for a requested list of items.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Voice Agent Versions
+      x-ms-foundry-meta:
+        required_previews:
+          - PromptVoiceAgents=V1Preview
+  /voice-agents/{agent_name}/versions/{agent_version}:
+    get:
+      operationId: VoiceAgents_getVoiceAgentVersion
+      summary: Get a voice agent version
+      description: Retrieves the specified version of a voice agent by its agent name and version identifier.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - PromptVoiceAgents=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the voice agent to retrieve.
+          schema:
+            type: string
+        - name: agent_version
+          in: path
+          required: true
+          description: The version of the voice agent to retrieve.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VoiceAgentVersionObject'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Voice Agent Versions
+      x-ms-foundry-meta:
+        required_previews:
+          - PromptVoiceAgents=V1Preview
+    delete:
+      operationId: VoiceAgents_deleteVoiceAgentVersion
+      summary: Delete a voice agent version
+      description: Deletes a specific version of a voice agent.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - PromptVoiceAgents=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the voice agent to delete.
+          schema:
+            type: string
+        - name: agent_version
+          in: path
+          required: true
+          description: The version of the voice agent to delete.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteAgentVersionResponse'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Voice Agent Versions
+      x-ms-foundry-meta:
+        required_previews:
+          - PromptVoiceAgents=V1Preview
+  /voice-agents:generate_voice:
+    post:
+      operationId: VoiceAgents_generateVoiceAgent
+      summary: Generate a voice agent
+      description: |-
+        Generates and creates a voice-first prompt agent from high-level inputs plus a natural-language goal.
+        The operation expands the goal into a full, editable definition, creates the agent through the standard
+        voice create path, and returns the created `VoiceAgentObject`. The caller can edit or override the
+        generated fields afterward through normal versioning.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - PromptVoiceAgents=V1Preview
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VoiceAgentObject'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Voice Agents
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateVoiceAgentRequest'
+      x-ms-foundry-meta:
+        required_previews:
+          - PromptVoiceAgents=V1Preview
 security:
   - OAuth2Auth:
       - https://ai.azure.com/.default
@@ -39102,7 +39710,6 @@ components:
         mapping:
           hosted: '#/components/schemas/HostedAgentDefinition'
           prompt: '#/components/schemas/PromptAgentDefinition'
-          prompt_voice: '#/components/schemas/PromptVoiceAgentDefinition'
           workflow: '#/components/schemas/WorkflowAgentDefinition'
           external: '#/components/schemas/ExternalAgentDefinition'
     AgentDefinitionOptInKeys:
@@ -39277,7 +39884,6 @@ components:
             - hosted
             - workflow
             - external
-            - prompt_voice
     AgentObject:
       type: object
       required:
@@ -41521,7 +42127,6 @@ components:
               - WorkflowAgents=V1Preview
               - ExternalAgents=V1Preview
               - DraftAgents=V1Preview
-              - PromptVoiceAgents=V1Preview
         blueprint_reference:
           allOf:
             - $ref: '#/components/schemas/AgentBlueprintReference'
@@ -41546,7 +42151,6 @@ components:
           - WorkflowAgents=V1Preview
           - ExternalAgents=V1Preview
           - DraftAgents=V1Preview
-          - PromptVoiceAgents=V1Preview
     CreateAgentSessionRequest:
       type: object
       required:
@@ -41661,7 +42265,6 @@ components:
               - WorkflowAgents=V1Preview
               - ExternalAgents=V1Preview
               - DraftAgents=V1Preview
-              - PromptVoiceAgents=V1Preview
         blueprint_reference:
           allOf:
             - $ref: '#/components/schemas/AgentBlueprintReference'
@@ -41757,6 +42360,108 @@ components:
           description: Whether to set this version as the default. Defaults to false.
       required:
         - files
+    CreateVoiceAgentRequest:
+      type: object
+      required:
+        - name
+        - definition
+      properties:
+        name:
+          type: string
+          maxLength: 63
+          description: |-
+            The unique name that identifies the agent. Name can be used to retrieve/update/delete the agent.
+            - Must start and end with alphanumeric characters,
+            - Can contain hyphens in the middle
+            - Must not exceed 63 characters.
+        state:
+          allOf:
+            - $ref: '#/components/schemas/AgentState'
+          description: The initial operational state of the agent. Defaults to 'enabled' if not specified.
+          default: enabled
+        metadata:
+          type: object
+          unevaluatedProperties:
+            type: string
+          description: |-
+            Set of 16 key-value pairs that can be attached to an object. This can be
+            useful for storing additional information about the object in a structured
+            format, and querying for objects via API or the dashboard.
+
+            Keys are strings with a maximum length of 64 characters. Values are strings
+            with a maximum length of 512 characters.
+          x-oaiTypeLabel: map
+        description:
+          type: string
+          maxLength: 512
+          description: A human-readable description of the agent.
+        blueprint_reference:
+          allOf:
+            - $ref: '#/components/schemas/AgentBlueprintReference'
+          description: The blueprint reference for the agent.
+        draft:
+          type: boolean
+          description: (Preview) Whether this agent version is a draft (candidate) rather than a release. The service defaults to `false` if a value is not specified by the caller. Draft versions are recorded but excluded from default 'latest' resolution and are not auto-promoted.
+          x-ms-foundry-meta:
+            conditional_previews:
+              - DraftAgents=V1Preview
+          default: false
+        definition:
+          allOf:
+            - $ref: '#/components/schemas/PromptVoiceAgentDefinition'
+          description: The voice-first prompt agent definition.
+        agent_endpoint:
+          allOf:
+            - $ref: '#/components/schemas/AgentEndpointConfig'
+          description: An optional endpoint configuration. If not specified, a default endpoint configuration will be set for the agent
+        agent_card:
+          allOf:
+            - $ref: '#/components/schemas/AgentCard'
+          description: Optional agent card for the agent
+      description: The request to create a voice-first prompt agent.
+      x-ms-foundry-meta:
+        required_previews:
+          - PromptVoiceAgents=V1Preview
+    CreateVoiceAgentVersionRequest:
+      type: object
+      required:
+        - definition
+      properties:
+        metadata:
+          type: object
+          unevaluatedProperties:
+            type: string
+          description: |-
+            Set of 16 key-value pairs that can be attached to an object. This can be
+            useful for storing additional information about the object in a structured
+            format, and querying for objects via API or the dashboard.
+
+            Keys are strings with a maximum length of 64 characters. Values are strings
+            with a maximum length of 512 characters.
+          x-oaiTypeLabel: map
+        description:
+          type: string
+          maxLength: 512
+          description: A human-readable description of the agent.
+        blueprint_reference:
+          allOf:
+            - $ref: '#/components/schemas/AgentBlueprintReference'
+          description: The blueprint reference for the agent.
+        draft:
+          type: boolean
+          description: (Preview) Whether this agent version is a draft (candidate) rather than a release. The service defaults to `false` if a value is not specified by the caller. Draft versions are recorded but excluded from default 'latest' resolution and are not auto-promoted.
+          x-ms-foundry-meta:
+            conditional_previews:
+              - DraftAgents=V1Preview
+          default: false
+        definition:
+          allOf:
+            - $ref: '#/components/schemas/PromptVoiceAgentDefinition'
+          description: The voice-first prompt agent definition.
+      description: The request to create a new version of a voice-first prompt agent.
+      x-ms-foundry-meta:
+        required_previews:
+          - PromptVoiceAgents=V1Preview
     CredentialType:
       anyOf:
         - type: string
@@ -44663,41 +45368,20 @@ components:
           type: string
           description: The arguments to call the function with, as generated by the model in JSON format.
       description: Details of a function tool call.
-    GenerateAgentRequest:
+    GenerateVoiceAgentRequest:
       type: object
       required:
-        - kind
         - name
-      properties:
-        kind:
-          allOf:
-            - $ref: '#/components/schemas/AgentKind'
-          description: The kind of agent to generate.
-        name:
-          type: string
-          description: The unique name for the agent to create.
-      discriminator:
-        propertyName: kind
-        mapping:
-          prompt_voice: '#/components/schemas/GeneratePromptVoiceAgentRequest'
-      description: |-
-        The request for guided agent authoring (`POST /agents:generate`). The `kind` discriminator selects the
-        kind-specific generation inputs. Currently, only `prompt_voice` is supported.
-    GeneratePromptVoiceAgentRequest:
-      type: object
-      required:
-        - kind
         - model_type
         - model
         - agent_type
         - use_case
         - goal
       properties:
-        kind:
+        name:
           type: string
-          enum:
-            - prompt_voice
-          description: The kind of agent to generate.
+          maxLength: 63
+          description: The unique name for the agent to create.
         model_type:
           allOf:
             - $ref: '#/components/schemas/VoiceModelType'
@@ -44726,18 +45410,16 @@ components:
           description: Optional tools carried through verbatim onto the generated agent (see `VoiceAgentTool`).
         draft:
           type: boolean
-          description: (Preview) When `true`, the generated `prompt_voice` agent is created as a draft — an editable, unpublished version the caller can review and refine before publishing it via the standard create/version path. The service defaults to `false` if a value is not specified by the caller, in which case the agent is created and published normally.
+          description: (Preview) When `true`, the generated voice agent is created as a draft — an editable, unpublished version the caller can review and refine before publishing it via the standard create/version path. The service defaults to `false` if a value is not specified by the caller, in which case the agent is created and published normally.
           x-ms-foundry-meta:
             conditional_previews:
               - DraftAgents=V1Preview
           default: false
-      allOf:
-        - $ref: '#/components/schemas/GenerateAgentRequest'
       description: |-
         The inputs for generating a voice-first prompt agent. A few high-level inputs plus a natural-language `goal`
-        are expanded into a full, editable `PromptVoiceAgentDefinition`, which is then created via the standard agent
-        create path. The generated `instructions` and audio/voice settings are stored as separate fields on the resulting
-        agent definition, so the caller can edit or override any of them afterward via normal versioning.
+        are expanded into a full, editable `PromptVoiceAgentDefinition`, which is then created via the standard voice
+        agent create path. The generated `instructions` and audio/voice settings are stored as separate fields on the
+        resulting agent definition, so the caller can edit or override any of them afterward via normal versioning.
       x-ms-foundry-meta:
         required_previews:
           - PromptVoiceAgents=V1Preview
@@ -71451,8 +72133,6 @@ components:
       discriminator:
         propertyName: type
         mapping:
-          function: '#/components/schemas/OpenAI.FunctionTool'
-          mcp: '#/components/schemas/OpenAI.MCPTool'
           bing_grounding: '#/components/schemas/BingGroundingTool'
           fabric_dataagent_preview: '#/components/schemas/MicrosoftFabricPreviewTool'
           sharepoint_grounding_preview: '#/components/schemas/SharepointPreviewTool'
@@ -71466,6 +72146,8 @@ components:
           work_iq_preview: '#/components/schemas/WorkIQPreviewTool'
           fabric_iq_preview: '#/components/schemas/FabricIQPreviewTool'
           memory_search_preview: '#/components/schemas/MemorySearchPreviewTool'
+          function: '#/components/schemas/OpenAI.FunctionTool'
+          mcp: '#/components/schemas/OpenAI.MCPTool'
           code_interpreter: '#/components/schemas/OpenAI.CodeInterpreterTool'
           file_search: '#/components/schemas/OpenAI.FileSearchTool'
           computer_use_preview: '#/components/schemas/OpenAI.ComputerUsePreviewTool'
@@ -74332,6 +75014,11 @@ components:
           type: string
           enum:
             - prompt_voice
+          description: The kind discriminator for a voice-first prompt agent definition. Always `prompt_voice`.
+        rai_config:
+          allOf:
+            - $ref: '#/components/schemas/RaiConfig'
+          description: Configuration for Responsible AI (RAI) content filtering and safety features.
         model_type:
           allOf:
             - $ref: '#/components/schemas/VoiceModelType'
@@ -74387,8 +75074,6 @@ components:
             time-to-first-audio, inter-token latency, interruption) is observability-only (customer trace / App Insights) and
             is not part of the persisted conversation content.
           default: false
-      allOf:
-        - $ref: '#/components/schemas/AgentDefinition'
       description: |-
         The voice-first prompt agent definition. A declarative agent kind whose configuration (model, prompt, audio stack,
         tools, optional avatar) drives a managed speech-to-speech experience powered by the managed Voice Live backend.
@@ -76688,7 +77373,6 @@ components:
               - WorkflowAgents=V1Preview
               - ExternalAgents=V1Preview
               - DraftAgents=V1Preview
-              - PromptVoiceAgents=V1Preview
         blueprint_reference:
           allOf:
             - $ref: '#/components/schemas/AgentBlueprintReference'
@@ -76698,7 +77382,6 @@ components:
           - WorkflowAgents=V1Preview
           - ExternalAgents=V1Preview
           - DraftAgents=V1Preview
-          - PromptVoiceAgents=V1Preview
     UpdateEvalParametersBody:
       type: object
       properties:
@@ -76738,6 +77421,39 @@ components:
         default_version:
           type: string
           description: The version identifier that the toolbox should point to. When set, the toolbox's default version will resolve to this version instead of the latest.
+    UpdateVoiceAgentRequest:
+      type: object
+      required:
+        - definition
+      properties:
+        metadata:
+          type: object
+          unevaluatedProperties:
+            type: string
+          description: |-
+            Set of 16 key-value pairs that can be attached to an object. This can be
+            useful for storing additional information about the object in a structured
+            format, and querying for objects via API or the dashboard.
+
+            Keys are strings with a maximum length of 64 characters. Values are strings
+            with a maximum length of 512 characters.
+          x-oaiTypeLabel: map
+        description:
+          type: string
+          maxLength: 512
+          description: A human-readable description of the agent.
+        blueprint_reference:
+          allOf:
+            - $ref: '#/components/schemas/AgentBlueprintReference'
+          description: The blueprint reference for the agent.
+        definition:
+          allOf:
+            - $ref: '#/components/schemas/PromptVoiceAgentDefinition'
+          description: The voice-first prompt agent definition.
+      description: The request to update a voice-first prompt agent by adding a new version.
+      x-ms-foundry-meta:
+        required_previews:
+          - PromptVoiceAgents=V1Preview
     UserProfileMemoryItem:
       type: object
       required:
@@ -76829,6 +77545,65 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/VersionSelectionRule'
+    VoiceAgentObject:
+      type: object
+      required:
+        - object
+        - id
+        - name
+        - state
+        - versions
+      properties:
+        object:
+          type: string
+          enum:
+            - agent
+          description: The object type, which is always 'agent'.
+        id:
+          type: string
+          description: The unique identifier of the agent.
+        name:
+          type: string
+          maxLength: 63
+          description: The name of the agent.
+        state:
+          allOf:
+            - $ref: '#/components/schemas/AgentState'
+          description: The operational state of the agent. Controls whether the agent endpoint accepts or rejects requests.
+          readOnly: true
+        agent_endpoint:
+          allOf:
+            - $ref: '#/components/schemas/AgentEndpointConfig'
+          description: The endpoint configuration for the agent
+        instance_identity:
+          allOf:
+            - $ref: '#/components/schemas/AgentIdentity'
+          description: The instance identity of the agent
+          readOnly: true
+        blueprint:
+          allOf:
+            - $ref: '#/components/schemas/AgentIdentity'
+          description: The blueprint for the agent
+          readOnly: true
+        blueprint_reference:
+          allOf:
+            - $ref: '#/components/schemas/AgentBlueprintReference'
+          description: The blueprint for the agent
+          readOnly: true
+        agent_card:
+          $ref: '#/components/schemas/AgentCard'
+        versions:
+          type: object
+          properties:
+            latest:
+              $ref: '#/components/schemas/VoiceAgentVersionObject'
+          required:
+            - latest
+          description: The latest version of the voice agent.
+      description: A voice-first prompt agent. Mirrors `AgentObject`, but its latest version is a `VoiceAgentVersionObject`.
+      x-ms-foundry-meta:
+        required_previews:
+          - PromptVoiceAgents=V1Preview
     VoiceAgentTool:
       anyOf:
         - $ref: '#/components/schemas/OpenAI.FunctionTool'
@@ -76871,6 +77646,92 @@ components:
       description: |-
         The scenario-template catalog entry a guided-authoring request specializes the generated voice agent for.
         Extensible: additional use cases may be added over time.
+      x-ms-foundry-meta:
+        required_previews:
+          - PromptVoiceAgents=V1Preview
+    VoiceAgentVersionObject:
+      type: object
+      required:
+        - metadata
+        - object
+        - id
+        - name
+        - version
+        - created_at
+        - definition
+      properties:
+        metadata:
+          anyOf:
+            - type: object
+              unevaluatedProperties:
+                type: string
+            - type: 'null'
+          description: |-
+            Set of 16 key-value pairs that can be attached to an object. This can be
+            useful for storing additional information about the object in a structured
+            format, and querying for objects via API or the dashboard.
+
+            Keys are strings with a maximum length of 64 characters. Values are strings
+            with a maximum length of 512 characters.
+          x-oaiTypeLabel: map
+        object:
+          type: string
+          enum:
+            - agent.version
+          description: The object type, which is always 'agent.version'.
+        id:
+          type: string
+          description: The unique identifier of the agent version.
+        name:
+          type: string
+          maxLength: 256
+          description: The name of the agent. Name can be used to retrieve/update/delete the agent.
+        version:
+          type: string
+          description: The version identifier of the agent. Agents are immutable and every update creates a new version while keeping the name same.
+        description:
+          type: string
+          maxLength: 512
+          description: A human-readable description of the agent.
+        created_at:
+          allOf:
+            - $ref: '#/components/schemas/FoundryTimestamp'
+          description: The Unix timestamp (seconds) when the agent was created.
+        draft:
+          type: boolean
+          description: Whether this agent version is a draft (candidate) rather than a release. Draft versions are recorded but excluded from default 'latest' resolution and are not auto-promoted. Defaults to false.
+          x-ms-foundry-meta:
+            conditional_previews:
+              - DraftAgents=V1Preview
+          default: false
+        status:
+          allOf:
+            - $ref: '#/components/schemas/AgentVersionStatus'
+          description: The provisioning status of the agent version. Defaults to 'active' for non-hosted agents. For hosted agents, reflects infrastructure readiness.
+        instance_identity:
+          allOf:
+            - $ref: '#/components/schemas/AgentIdentity'
+          description: The instance identity of the agent
+          readOnly: true
+        blueprint:
+          allOf:
+            - $ref: '#/components/schemas/AgentIdentity'
+          description: The blueprint for the agent
+          readOnly: true
+        blueprint_reference:
+          allOf:
+            - $ref: '#/components/schemas/AgentBlueprintReference'
+          description: The blueprint for the agent
+          readOnly: true
+        agent_guid:
+          type: string
+          description: The unique GUID identifier of the agent.
+          readOnly: true
+        definition:
+          allOf:
+            - $ref: '#/components/schemas/PromptVoiceAgentDefinition'
+          description: The voice-first prompt agent definition for this version.
+      description: A voice-first prompt agent version. Mirrors `AgentVersionObject`, but its `definition` is always a `PromptVoiceAgentDefinition`.
       x-ms-foundry-meta:
         required_previews:
           - PromptVoiceAgents=V1Preview
