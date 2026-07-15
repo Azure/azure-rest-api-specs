@@ -622,6 +622,26 @@ union ManagedHsmSkuNameV2 {
 
   /** Custom_C10 SKU */
   Custom_C10: "Custom_C10",
+
+  /** Standard_B1v2 SKU */
+  @Versioning.added(KeyVault.Versions.v2026_05_15_preview)
+  Standard_B1v2: "Standard_B1v2",
+
+  /** Standard_B5v2 SKU */
+  @Versioning.added(KeyVault.Versions.v2026_05_15_preview)
+  Standard_B5v2: "Standard_B5v2",
+
+  /** Standard_B10v2 SKU */
+  @Versioning.added(KeyVault.Versions.v2026_05_15_preview)
+  Standard_B10v2: "Standard_B10v2",
+
+  /** Standard_B15v2 SKU */
+  @Versioning.added(KeyVault.Versions.v2026_05_15_preview)
+  Standard_B15v2: "Standard_B15v2",
+
+  /** Standard_B20v2 SKU */
+  @Versioning.added(KeyVault.Versions.v2026_05_15_preview)
+  Standard_B20v2: "Standard_B20v2",
 }
 
 /**
