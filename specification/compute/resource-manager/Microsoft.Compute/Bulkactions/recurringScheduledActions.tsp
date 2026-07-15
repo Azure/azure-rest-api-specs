@@ -3,7 +3,6 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "./models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -239,6 +238,76 @@ model NotificationProperties {
 
 @@identifiers(Azure.Core.Foundations.Error.details, #[]);
 
+// ------------------ SA-owned execution/retry types (forked, no BA coupling) ------------------
+// Forked from the BulkActions shared `models.tsp` so the ScheduledActions surface does NOT
+// couple to the BulkActions type pool: a BulkActions change to its shared types can no longer
+// alter the SA contract. Bulk-VM-specific leakage is intentionally dropped — `verifyVmAgentHealth`
+// (an executeStart concept) and the `GetInstanceView` operation value. Names take the
+// `RecurringScheduledActions*` collision-rename prefix (see file header), since these coexist in
+// the `Microsoft.Compute` namespace with the BulkActions originals.
+
+@added(Versions.`2026-07-06-preview`)
+@doc("The type of deadline the scheduled action follows for its schedule.")
+union RecurringScheduledActionsDeadlineType {
+  @doc("Default value of Unknown.")
+  Unknown: "Unknown",
+
+  @doc("Initiate the operation at the given deadline.")
+  InitiateAt: "InitiateAt",
+
+  @doc("Complete the operation by the given deadline.")
+  CompleteBy: "CompleteBy",
+
+  string,
+}
+
+@added(Versions.`2026-07-06-preview`)
+@doc("The resource operation to take on a scheduled-action failure.")
+union RecurringScheduledActionsResourceOperationType {
+  @doc("The default value for this enum type")
+  Unknown: "Unknown",
+
+  @doc("Start operations on the resources")
+  Start: "Start",
+
+  @doc("Deallocate operations on the resources")
+  Deallocate: "Deallocate",
+
+  @doc("Hibernate operations on the resources")
+  Hibernate: "Hibernate",
+
+  @doc("Create operations on the resources")
+  Create: "Create",
+
+  @doc("Delete operations on the resources")
+  Delete: "Delete",
+
+  string,
+}
+
+@added(Versions.`2026-07-06-preview`)
+@doc("Retry policy the scheduled action can pass")
+model RecurringScheduledActionsRetryPolicy {
+  @doc("Retry count for the request")
+  retryCount?: int32;
+
+  @doc("Retry window in minutes for the request")
+  retryWindowInMinutes?: int32;
+
+  @doc("Action to take on failure")
+  onFailureAction?: RecurringScheduledActionsResourceOperationType;
+}
+
+@added(Versions.`2026-07-06-preview`)
+@doc("The execution parameters the scheduled action is supposed to follow")
+model RecurringScheduledActionsExecutionParameters {
+  @doc("Details that could optimize the user's request")
+  optimizationPreference?: OptimizationPreference;
+
+  @doc("Retry policy the user can pass")
+  retryPolicy?: RecurringScheduledActionsRetryPolicy;
+}
+
 // ------------------ ScheduledAction resource + models ------------------
 
 @added(Versions.`2026-07-06-preview`)
@@ -260,10 +329,10 @@ model ScheduledActionsSchedule {
   requestedDaysOfTheMonth?: DayOfTheMonth[];
 
   @doc("The execution parameters the scheduled action is supposed to follow")
-  executionParameters?: ExecutionParameters;
+  executionParameters?: RecurringScheduledActionsExecutionParameters;
 
   @doc("The type of deadline the scheduled action is supposed to follow for the schedule. If no value is passed, it will default to InitiateAt.")
-  deadlineType?: DeadlineType;
+  deadlineType?: RecurringScheduledActionsDeadlineType;
 }
 
 @added(Versions.`2026-07-06-preview`)
