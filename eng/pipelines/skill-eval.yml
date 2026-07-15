@@ -1,22 +1,13 @@
 # Skill-compliance eval CI: runs the per-skill Vally evals under .github/skills (one job per
 # skill), using the shared eval framework synced from azure-sdk-tools under eng/common. This is
 # the repo-local thin entrypoint; the framework itself (archetype/jobs/scripts) lives in
-# eng/common and is not repo-specific.
+# eng/common and is not repo-specific. The cross-repo MCP build + resources.repositories
+# boilerplate lives in the reusable /eng/pipelines/templates/stages/cross-repo-eval-entrypoint.yml
+# template below, so this file only supplies the values specific to this pipeline.
 #
 # Pilot scope: hermetic mock scenarios only, scheduled/manual runs (no `pr` trigger yet), per the
 # "begin with hermetic mock scenarios and scheduled/manual runs" acceptance criterion in
 # https://github.com/Azure/azure-sdk-tools/issues/16347.
-
-resources:
-  repositories:
-    # Cross-repo MCP build source: the mock MCP server lives in azure-sdk-tools, not this repo.
-    # BLOCKING UNKNOWN: the GitHub service-connection name below is a placeholder. An ADO project
-    # admin needs to confirm or create a GitHub service connection authorized for Azure/azure-sdk-tools
-    # in this project before this pipeline can run.
-    - repository: azure-sdk-tools
-      type: github
-      name: Azure/azure-sdk-tools
-      endpoint: <TBD-github-service-connection>
 
 trigger: none
 pr: none
@@ -38,13 +29,12 @@ variables:
   - group: AzSDK_Eval_Variable_group
 
 extends:
-  template: /eng/common/pipelines/templates/stages/archetype-eval.yml
+  template: /eng/pipelines/templates/stages/cross-repo-eval-entrypoint.yml
   parameters:
-    # Shared mock/live builder; select the mock tier.
-    mcpSetupTemplate: /eng/common/pipelines/templates/steps/eval-mcp-setup.yml
-    TestType: mock
-    # Cross-repo MCP build: side-checkout azure-sdk-tools via the repository resource above.
-    toolsRepo: azure-sdk-tools
+    # BLOCKING UNKNOWN: placeholder. An ADO project admin needs to confirm or create a GitHub
+    # service connection authorized for Azure/azure-sdk-tools in this project and supply its name
+    # here before this pipeline can run.
+    githubServiceConnection: <TBD-github-service-connection>
     vallyRoot: .github/skills
     # Two patterns needed to cover every eval under <skill>/evals/: trigger suites are named
     # trigger.eval.yaml (matches */evals/*.eval.yaml); capability suites are named plainly
