@@ -89,23 +89,11 @@ model CreateAgentRequest {
 
   @doc("Optional agent card for the agent")
   agent_card?: AgentCard;
-
-  @doc("The Entra sign-in mode for the agent. Defaults to 'foundry' when not specified.")
-  sign_in_mode?: AgentSignInMode = AgentSignInMode.foundry;
-
-  @doc("Rules for validating inbound bearer tokens presented to the agent endpoint. Applies only when `sign_in_mode` is 'blueprint'; ignored in 'foundry' mode.")
-  token_validation_rules?: AgentTokenValidationRules;
 }
 
 @extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
 model UpdateAgentRequest {
   ...OmitProperties<CreateAgentVersionRequest, "draft">;
-
-  @doc("The Entra sign-in mode for the agent. Defaults to 'foundry' when not specified.")
-  sign_in_mode?: AgentSignInMode = AgentSignInMode.foundry;
-
-  @doc("Rules for validating inbound bearer tokens presented to the agent endpoint. Applies only when `sign_in_mode` is 'blueprint'; ignored in 'foundry' mode.")
-  token_validation_rules?: AgentTokenValidationRules;
 }
 
 model PatchAgentRequest {
@@ -133,35 +121,6 @@ union AgentState {
 
   @doc("Agent endpoint rejects all requests.")
   disabled: "disabled",
-}
-
-@doc("The sign-in mode governing which Entra application the agent endpoint uses to authorize inbound tokens.")
-union AgentSignInMode {
-  string,
-
-  @doc("Foundry sign-in using the default Foundry application (ai.azure.com). This is the default when a sign-in configuration is not specified.")
-  foundry: "foundry",
-
-  @doc("Agent-blueprint sign-in. The agent endpoint authorizes inbound tokens against the agent's blueprint application.")
-  blueprint: "blueprint",
-}
-
-@doc("""
-  Rules used to validate inbound bearer tokens presented to the agent endpoint.
-  These rules apply only when the agent `sign_in_mode` is 'blueprint'; they are ignored in
-  'foundry' sign-in mode. Each list is defaulted to a single value when the agent is switched to
-  the 'blueprint' sign-in mode (audience = blueprint resource URI, tenant = subscription tenant,
-  required scope = default scope declared on the blueprint).
-  """)
-model AgentTokenValidationRules {
-  @doc("The set of accepted token audiences (the `aud` claim). Typically the agent blueprint resource URI (e.g. `api://{agentBlueprintId}`).")
-  allowed_audiences?: string[];
-
-  @doc("The set of accepted token tenants (the `tid` claim). Typically the subscription tenant.")
-  allowed_tenants?: string[];
-
-  @doc("The scopes (the `scp` claim) that must all be present on an inbound token. Typically the default scope declared on the agent blueprint.")
-  required_scopes?: string[];
 }
 
 model AgentObject {
@@ -200,12 +159,6 @@ model AgentObject {
   blueprint_reference?: AgentBlueprintReference;
 
   agent_card?: AgentCard;
-
-  @doc("The Entra sign-in mode for the agent. Defaults to 'foundry' when not specified.")
-  sign_in_mode?: AgentSignInMode = AgentSignInMode.foundry;
-
-  @doc("Rules for validating inbound bearer tokens presented to the agent endpoint. Applies only when `sign_in_mode` is 'blueprint'; ignored in 'foundry' mode.")
-  token_validation_rules?: AgentTokenValidationRules;
 }
 
 model AgentVersionObject {
@@ -632,6 +585,59 @@ model AgentEndpointAuthorizationScheme {
 
 model EntraAuthorizationScheme extends AgentEndpointAuthorizationScheme {
   type: AgentEndpointAuthorizationSchemeType.Entra;
+
+  @doc("The Entra sign-in configuration governing how the agent endpoint validates inbound tokens. Defaults to the platform default behavior ('auto' mode) when not specified.")
+  sign_in?: EntraSignInConfig;
+}
+
+@doc("The Entra sign-in mode governing which Entra application the agent endpoint validates inbound tokens against.")
+union EntraSignInMode {
+  string,
+
+  @doc("Automatic sign-in using the Foundry application (ai.azure.com). This is the default when a sign-in configuration is not specified.")
+  auto: "auto",
+
+  @doc("Agent-blueprint sign-in. The agent endpoint validates inbound tokens against the agent's blueprint application.")
+  blueprint: "blueprint",
+}
+
+@doc("Entra sign-in configuration for the agent endpoint. The `mode` property discriminates the concrete configuration type.")
+@discriminator("mode")
+model EntraSignInConfig {
+  @doc("The Entra sign-in mode.")
+  mode: EntraSignInMode;
+}
+
+@doc("Automatic Entra sign-in configuration. The agent endpoint validates inbound tokens against the Foundry application (ai.azure.com).")
+model AutoEntraSignInConfig extends EntraSignInConfig {
+  @doc("The Entra sign-in mode. Always 'auto'.")
+  mode: EntraSignInMode.auto;
+}
+
+@doc("Agent-blueprint Entra sign-in configuration. The agent endpoint validates inbound tokens against the agent's blueprint application.")
+model BlueprintEntraSignInConfig extends EntraSignInConfig {
+  @doc("The Entra sign-in mode. Always 'blueprint'.")
+  mode: EntraSignInMode.blueprint;
+
+  @doc("The validation applied to inbound bearer tokens presented to the agent endpoint in blueprint sign-in mode.")
+  validation?: EntraValidationConfiguration;
+}
+
+@doc("""
+  Validation applied to an inbound bearer token addressed to the agent's blueprint audience.
+  Each list is defaulted to a single value when the agent is switched to the 'blueprint' sign-in
+  mode (audience = blueprint resource URI, tenant = subscription tenant, required scope = default
+  scope declared on the blueprint).
+  """)
+model EntraValidationConfiguration {
+  @doc("The set of accepted token audiences (the `aud` claim). Typically the agent blueprint resource URI (e.g. `api://{agentBlueprintId}`).")
+  allowed_audiences?: string[];
+
+  @doc("The set of accepted token tenants (the `tid` claim). Typically the subscription tenant.")
+  allowed_tenants?: string[];
+
+  @doc("The scopes (the `scp` claim) that must all be present on an inbound token. Typically the default scope declared on the agent blueprint.")
+  required_scopes?: string[];
 }
 
 model BotServiceAuthorizationScheme extends AgentEndpointAuthorizationScheme {

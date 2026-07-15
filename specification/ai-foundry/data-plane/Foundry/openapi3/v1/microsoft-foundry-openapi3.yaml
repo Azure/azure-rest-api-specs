@@ -38394,15 +38394,6 @@ components:
           readOnly: true
         agent_card:
           $ref: '#/components/schemas/AgentCard'
-        sign_in_mode:
-          allOf:
-            - $ref: '#/components/schemas/AgentSignInMode'
-          description: The Entra sign-in mode for the agent. Defaults to 'foundry' when not specified.
-          default: foundry
-        token_validation_rules:
-          allOf:
-            - $ref: '#/components/schemas/AgentTokenValidationRules'
-          description: Rules for validating inbound bearer tokens presented to the agent endpoint. Applies only when `sign_in_mode` is 'blueprint'; ignored in 'foundry' mode.
     AgentReference:
       type: object
       required:
@@ -38471,14 +38462,6 @@ components:
             - deleted
             - expired
       description: The status of an agent session.
-    AgentSignInMode:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - foundry
-            - blueprint
-      description: The sign-in mode governing which Entra application the agent endpoint uses to authorize inbound tokens.
     AgentState:
       anyOf:
         - type: string
@@ -38537,30 +38520,6 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
-    AgentTokenValidationRules:
-      type: object
-      properties:
-        allowed_audiences:
-          type: array
-          items:
-            type: string
-          description: The set of accepted token audiences (the `aud` claim). Typically the agent blueprint resource URI (e.g. `api://{agentBlueprintId}`).
-        allowed_tenants:
-          type: array
-          items:
-            type: string
-          description: The set of accepted token tenants (the `tid` claim). Typically the subscription tenant.
-        required_scopes:
-          type: array
-          items:
-            type: string
-          description: The scopes (the `scp` claim) that must all be present on an inbound token. Typically the default scope declared on the agent blueprint.
-      description: |-
-        Rules used to validate inbound bearer tokens presented to the agent endpoint.
-        These rules apply only when the agent `sign_in_mode` is 'blueprint'; they are ignored in
-        'foundry' sign-in mode. Each list is defaulted to a single value when the agent is switched to
-        the 'blueprint' sign-in mode (audience = blueprint resource URI, tenant = subscription tenant,
-        required scope = default scope declared on the blueprint).
     AgentVersionObject:
       type: object
       required:
@@ -38758,6 +38717,19 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - RedTeams=V1Preview
+    AutoEntraSignInConfig:
+      type: object
+      required:
+        - mode
+      properties:
+        mode:
+          type: string
+          enum:
+            - auto
+          description: The Entra sign-in mode. Always 'auto'.
+      allOf:
+        - $ref: '#/components/schemas/EntraSignInConfig'
+      description: Automatic Entra sign-in configuration. The agent endpoint validates inbound tokens against the Foundry application (ai.azure.com).
     Azure.Core.Foundations.Error:
       type: object
       required:
@@ -39879,6 +39851,23 @@ components:
             - $ref: '#/components/schemas/SasCredential'
           description: Credential info to access the storage account.
       description: Blob reference details.
+    BlueprintEntraSignInConfig:
+      type: object
+      required:
+        - mode
+      properties:
+        mode:
+          type: string
+          enum:
+            - blueprint
+          description: The Entra sign-in mode. Always 'blueprint'.
+        validation:
+          allOf:
+            - $ref: '#/components/schemas/EntraValidationConfiguration'
+          description: The validation applied to inbound bearer tokens presented to the agent endpoint in blueprint sign-in mode.
+      allOf:
+        - $ref: '#/components/schemas/EntraSignInConfig'
+      description: Agent-blueprint Entra sign-in configuration. The agent endpoint validates inbound tokens against the agent's blueprint application.
     BotServiceAuthorizationScheme:
       type: object
       required:
@@ -40597,15 +40586,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/AgentCard'
           description: Optional agent card for the agent
-        sign_in_mode:
-          allOf:
-            - $ref: '#/components/schemas/AgentSignInMode'
-          description: The Entra sign-in mode for the agent. Defaults to 'foundry' when not specified.
-          default: foundry
-        token_validation_rules:
-          allOf:
-            - $ref: '#/components/schemas/AgentTokenValidationRules'
-          description: Rules for validating inbound bearer tokens presented to the agent endpoint. Applies only when `sign_in_mode` is 'blueprint'; ignored in 'foundry' mode.
       x-ms-foundry-meta:
         conditional_previews:
           - WorkflowAgents=V1Preview
@@ -41685,6 +41665,10 @@ components:
           type: string
           enum:
             - Entra
+        sign_in:
+          allOf:
+            - $ref: '#/components/schemas/EntraSignInConfig'
+          description: The Entra sign-in configuration governing how the agent endpoint validates inbound tokens. Defaults to the platform default behavior ('auto' mode) when not specified.
       allOf:
         - $ref: '#/components/schemas/AgentEndpointAuthorizationScheme'
     EntraIDCredentials:
@@ -41701,6 +41685,52 @@ components:
       allOf:
         - $ref: '#/components/schemas/BaseCredentials'
       description: Entra ID credential definition
+    EntraSignInConfig:
+      type: object
+      required:
+        - mode
+      properties:
+        mode:
+          allOf:
+            - $ref: '#/components/schemas/EntraSignInMode'
+          description: The Entra sign-in mode.
+      discriminator:
+        propertyName: mode
+        mapping:
+          auto: '#/components/schemas/AutoEntraSignInConfig'
+          blueprint: '#/components/schemas/BlueprintEntraSignInConfig'
+      description: Entra sign-in configuration for the agent endpoint. The `mode` property discriminates the concrete configuration type.
+    EntraSignInMode:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - auto
+            - blueprint
+      description: The Entra sign-in mode governing which Entra application the agent endpoint validates inbound tokens against.
+    EntraValidationConfiguration:
+      type: object
+      properties:
+        allowed_audiences:
+          type: array
+          items:
+            type: string
+          description: The set of accepted token audiences (the `aud` claim). Typically the agent blueprint resource URI (e.g. `api://{agentBlueprintId}`).
+        allowed_tenants:
+          type: array
+          items:
+            type: string
+          description: The set of accepted token tenants (the `tid` claim). Typically the subscription tenant.
+        required_scopes:
+          type: array
+          items:
+            type: string
+          description: The scopes (the `scp` claim) that must all be present on an inbound token. Typically the default scope declared on the agent blueprint.
+      description: |-
+        Validation applied to an inbound bearer token addressed to the agent's blueprint audience.
+        Each list is defaulted to a single value when the agent is switched to the 'blueprint' sign-in
+        mode (audience = blueprint resource URI, tenant = subscription tenant, required scope = default
+        scope declared on the blueprint).
     Eval:
       type: object
       required:
@@ -75082,15 +75112,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/AgentBlueprintReference'
           description: The blueprint reference for the agent.
-        sign_in_mode:
-          allOf:
-            - $ref: '#/components/schemas/AgentSignInMode'
-          description: The Entra sign-in mode for the agent. Defaults to 'foundry' when not specified.
-          default: foundry
-        token_validation_rules:
-          allOf:
-            - $ref: '#/components/schemas/AgentTokenValidationRules'
-          description: Rules for validating inbound bearer tokens presented to the agent endpoint. Applies only when `sign_in_mode` is 'blueprint'; ignored in 'foundry' mode.
       x-ms-foundry-meta:
         conditional_previews:
           - WorkflowAgents=V1Preview
