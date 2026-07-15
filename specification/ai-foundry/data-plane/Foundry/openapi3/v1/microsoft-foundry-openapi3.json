@@ -26750,7 +26750,7 @@
             "items": {
               "$ref": "#/components/schemas/AgentEndpointAuthorizationScheme"
             },
-            "description": "The authorization schemes supported by the agent endpoint.\nWhen no Entra scheme is present (or its `sign_in` is unset), the endpoint defaults to the\n'auto' Entra sign-in mode, validating inbound tokens against the Foundry application."
+            "description": "The authorization schemes supported by the agent endpoint.\nWhen no Entra scheme is present (or its `sign_in` is unset), the endpoint defaults to the\n'foundry' Entra sign-in mode, validating inbound tokens against the Foundry application."
           }
         }
       },
@@ -26778,7 +26778,7 @@
             "items": {
               "$ref": "#/components/schemas/AgentEndpointAuthorizationScheme"
             },
-            "description": "The authorization schemes supported by the agent endpoint.\nWhen no Entra scheme is present (or its `sign_in` is unset), the endpoint defaults to the\n'auto' Entra sign-in mode, validating inbound tokens against the Foundry application."
+            "description": "The authorization schemes supported by the agent endpoint.\nWhen no Entra scheme is present (or its `sign_in` is unset), the endpoint defaults to the\n'foundry' Entra sign-in mode, validating inbound tokens against the Foundry application."
           }
         }
       },
@@ -27519,27 +27519,6 @@
             "RedTeams=V1Preview"
           ]
         }
-      },
-      "AutoEntraSignInConfig": {
-        "type": "object",
-        "required": [
-          "mode"
-        ],
-        "properties": {
-          "mode": {
-            "type": "string",
-            "enum": [
-              "auto"
-            ],
-            "description": "The Entra sign-in mode. Always 'auto'."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/EntraSignInConfig"
-          }
-        ],
-        "description": "Automatic Entra sign-in configuration. The agent endpoint validates inbound tokens against the Foundry application (ai.azure.com)."
       },
       "Azure.Core.Foundations.Error": {
         "type": "object",
@@ -31944,7 +31923,7 @@
                 "$ref": "#/components/schemas/EntraSignInConfig"
               }
             ],
-            "description": "The Entra sign-in configuration governing how the agent endpoint validates inbound tokens. Defaults to the platform default behavior ('auto' mode) when not specified."
+            "description": "The Entra sign-in configuration governing how the agent endpoint validates inbound tokens. Defaults to the platform default behavior ('foundry' mode) when not specified."
           }
         },
         "allOf": [
@@ -31993,7 +31972,7 @@
         "discriminator": {
           "propertyName": "mode",
           "mapping": {
-            "auto": "#/components/schemas/AutoEntraSignInConfig",
+            "foundry": "#/components/schemas/FoundryEntraSignInConfig",
             "blueprint": "#/components/schemas/BlueprintEntraSignInConfig"
           }
         },
@@ -32007,7 +31986,7 @@
           {
             "type": "string",
             "enum": [
-              "auto",
+              "foundry",
               "blueprint"
             ]
           }
@@ -34587,6 +34566,27 @@
           }
         ],
         "description": "FileDatasetVersion Definition"
+      },
+      "FoundryEntraSignInConfig": {
+        "type": "object",
+        "required": [
+          "mode"
+        ],
+        "properties": {
+          "mode": {
+            "type": "string",
+            "enum": [
+              "foundry"
+            ],
+            "description": "The Entra sign-in mode. Always 'foundry'."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntraSignInConfig"
+          }
+        ],
+        "description": "Foundry Entra sign-in configuration. The agent endpoint validates inbound tokens against the Foundry application (ai.azure.com)."
       },
       "FoundryModelArtifactProfileCategory": {
         "anyOf": [

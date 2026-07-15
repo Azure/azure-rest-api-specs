@@ -38217,7 +38217,7 @@ components:
           description: |-
             The authorization schemes supported by the agent endpoint.
             When no Entra scheme is present (or its `sign_in` is unset), the endpoint defaults to the
-            'auto' Entra sign-in mode, validating inbound tokens against the Foundry application.
+            'foundry' Entra sign-in mode, validating inbound tokens against the Foundry application.
     AgentEndpointConfigUpdate:
       type: object
       properties:
@@ -38236,7 +38236,7 @@ components:
           description: |-
             The authorization schemes supported by the agent endpoint.
             When no Entra scheme is present (or its `sign_in` is unset), the endpoint defaults to the
-            'auto' Entra sign-in mode, validating inbound tokens against the Foundry application.
+            'foundry' Entra sign-in mode, validating inbound tokens against the Foundry application.
     AgentEndpointProtocol:
       anyOf:
         - type: string
@@ -38723,19 +38723,6 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - RedTeams=V1Preview
-    AutoEntraSignInConfig:
-      type: object
-      required:
-        - mode
-      properties:
-        mode:
-          type: string
-          enum:
-            - auto
-          description: The Entra sign-in mode. Always 'auto'.
-      allOf:
-        - $ref: '#/components/schemas/EntraSignInConfig'
-      description: Automatic Entra sign-in configuration. The agent endpoint validates inbound tokens against the Foundry application (ai.azure.com).
     Azure.Core.Foundations.Error:
       type: object
       required:
@@ -41674,7 +41661,7 @@ components:
         sign_in:
           allOf:
             - $ref: '#/components/schemas/EntraSignInConfig'
-          description: The Entra sign-in configuration governing how the agent endpoint validates inbound tokens. Defaults to the platform default behavior ('auto' mode) when not specified.
+          description: The Entra sign-in configuration governing how the agent endpoint validates inbound tokens. Defaults to the platform default behavior ('foundry' mode) when not specified.
       allOf:
         - $ref: '#/components/schemas/AgentEndpointAuthorizationScheme'
     EntraIDCredentials:
@@ -41703,7 +41690,7 @@ components:
       discriminator:
         propertyName: mode
         mapping:
-          auto: '#/components/schemas/AutoEntraSignInConfig'
+          foundry: '#/components/schemas/FoundryEntraSignInConfig'
           blueprint: '#/components/schemas/BlueprintEntraSignInConfig'
       description: Entra sign-in configuration for the agent endpoint. The `mode` property discriminates the concrete configuration type.
     EntraSignInMode:
@@ -41711,7 +41698,7 @@ components:
         - type: string
         - type: string
           enum:
-            - auto
+            - foundry
             - blueprint
       description: The Entra sign-in mode governing which Entra application the agent endpoint validates inbound tokens against.
     EntraValidationConfiguration:
@@ -43672,6 +43659,19 @@ components:
       allOf:
         - $ref: '#/components/schemas/DatasetVersionUpdate'
       description: FileDatasetVersion Definition
+    FoundryEntraSignInConfig:
+      type: object
+      required:
+        - mode
+      properties:
+        mode:
+          type: string
+          enum:
+            - foundry
+          description: The Entra sign-in mode. Always 'foundry'.
+      allOf:
+        - $ref: '#/components/schemas/EntraSignInConfig'
+      description: Foundry Entra sign-in configuration. The agent endpoint validates inbound tokens against the Foundry application (ai.azure.com).
     FoundryModelArtifactProfileCategory:
       anyOf:
         - type: string

@@ -586,7 +586,7 @@ model AgentEndpointAuthorizationScheme {
 model EntraAuthorizationScheme extends AgentEndpointAuthorizationScheme {
   type: AgentEndpointAuthorizationSchemeType.Entra;
 
-  @doc("The Entra sign-in configuration governing how the agent endpoint validates inbound tokens. Defaults to the platform default behavior ('auto' mode) when not specified.")
+  @doc("The Entra sign-in configuration governing how the agent endpoint validates inbound tokens. Defaults to the platform default behavior ('foundry' mode) when not specified.")
   sign_in?: EntraSignInConfig;
 }
 
@@ -594,8 +594,8 @@ model EntraAuthorizationScheme extends AgentEndpointAuthorizationScheme {
 union EntraSignInMode {
   string,
 
-  @doc("Automatic sign-in using the Foundry application (ai.azure.com). This is the default when a sign-in configuration is not specified.")
-  auto: "auto",
+  @doc("Sign-in using the Foundry application (ai.azure.com). Inbound tokens are validated against the Foundry application audience. This is the default when a sign-in configuration is not specified.")
+  foundry: "foundry",
 
   @doc("Agent-blueprint sign-in. The agent endpoint validates inbound tokens against the agent's blueprint application.")
   blueprint: "blueprint",
@@ -608,10 +608,10 @@ model EntraSignInConfig {
   mode: EntraSignInMode;
 }
 
-@doc("Automatic Entra sign-in configuration. The agent endpoint validates inbound tokens against the Foundry application (ai.azure.com).")
-model AutoEntraSignInConfig extends EntraSignInConfig {
-  @doc("The Entra sign-in mode. Always 'auto'.")
-  mode: EntraSignInMode.auto;
+@doc("Foundry Entra sign-in configuration. The agent endpoint validates inbound tokens against the Foundry application (ai.azure.com).")
+model FoundryEntraSignInConfig extends EntraSignInConfig {
+  @doc("The Entra sign-in mode. Always 'foundry'.")
+  mode: EntraSignInMode.foundry;
 }
 
 @doc("Agent-blueprint Entra sign-in configuration. The agent endpoint validates inbound tokens against the agent's blueprint application.")
@@ -718,7 +718,7 @@ model AgentEndpointConfig {
   @doc("""
     The authorization schemes supported by the agent endpoint.
     When no Entra scheme is present (or its `sign_in` is unset), the endpoint defaults to the
-    'auto' Entra sign-in mode, validating inbound tokens against the Foundry application.
+    'foundry' Entra sign-in mode, validating inbound tokens against the Foundry application.
     """)
   authorization_schemes?: AgentEndpointAuthorizationScheme[];
 }
