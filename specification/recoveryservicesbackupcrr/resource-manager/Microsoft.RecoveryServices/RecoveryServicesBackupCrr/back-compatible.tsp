@@ -88,14 +88,6 @@ using Microsoft.RecoveryServices;
   AzureWorkloadSQLRestoreRequest
 );
 
-// The legacy CRR envelope model is named `Resource` to stay wire-faithful to the
-// frozen 2023-01-15 swagger (definition name "Resource"). That name collides with
-// the ARM common-types `Resource` in the SDK client scope (duplicate-client-name).
-// Rename it consistently across all generated SDK languages (csharp, java, python,
-// javascript, go). The autorest emitter is intentionally not in scope, so the
-// emitted swagger definition remains "Resource".
-@@clientName(Resource, "CrrResource", "csharp,java,python,javascript,go");
-
 @@clientLocation(
   BackupResourceConfigResources.get,
   "BackupResourceStorageConfigs"

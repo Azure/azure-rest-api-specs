@@ -17,6 +17,7 @@ import "./VirtualResource.tsp";
 import "./BackupResourceConfigResource.tsp";
 import "./RecoveryPointResource.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -30,7 +31,7 @@ using TypeSpec.Versioning;
 @armProviderNamespace
 @service(#{ title: "Recovery Services Backup CRR Client" })
 @versioned(Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
 namespace Microsoft.RecoveryServices;
 
 /**
