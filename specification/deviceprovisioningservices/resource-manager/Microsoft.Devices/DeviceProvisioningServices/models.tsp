@@ -376,6 +376,7 @@ model IotDpsPropertiesDescription {
   /**
    * The Device Registry namespace that is linked to the provisioning service.
    */
+  @removed(Versions.v2026_08_01)
   deviceRegistryNamespace?: DeviceRegistryNamespaceDescription;
 
   /**
