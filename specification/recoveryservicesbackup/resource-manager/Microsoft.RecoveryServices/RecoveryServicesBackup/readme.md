@@ -41,7 +41,7 @@ tag: package-passivestamp-2023-01-15
 ```
 
 ```yaml $(package-activestamp)
-tag: package-2026-05-01
+tag: package-2026-07-01
 ```
 
 ### Validations

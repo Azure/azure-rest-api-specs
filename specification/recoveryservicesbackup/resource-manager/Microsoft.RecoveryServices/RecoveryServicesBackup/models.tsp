@@ -6200,12 +6200,20 @@ model DataDiskEncryptionSettings {
   /**
    * Disk Encryption Set Id for Secured VM Data Disk. This will be used for all data disks if perDiskEncryptionSetIds is not provided. If perDiskEncryptionSetIds is provided, this will be ignored.
    */
-  dataDiskEncryptionSetId?: string;
+  dataDiskEncryptionSetId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.Compute/diskEncryptionSets";
+    }
+  ]>;
 
   /**
    * Managed Identity resource Id used to encrypt the data disk during restore.
    */
-  dataDiskEncryptionIdentity?: string;
+  dataDiskEncryptionIdentity?: armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
 }
 
 /**
@@ -6221,7 +6229,11 @@ model PerDiskEncryptionSetId {
   /**
    *  Disk Encryption Set Id for Secured VM Data Disk
    */
-  diskEncryptionSetId?: string;
+  diskEncryptionSetId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.Compute/diskEncryptionSets";
+    }
+  ]>;
 }
 
 /**
