@@ -41,7 +41,7 @@ alias SecurityTaskOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @path
     @segment("locations")
     @key
-    ascLocation: string;
+    ascLocation: Azure.Core.azureLocation;
   },
   {
     /** Name of the task object, will be a GUID */
@@ -62,7 +62,7 @@ alias SecurityTaskBuildingOps = Azure.ResourceManager.Legacy.RoutedOperations<
     @path
     @segment("locations")
     @key
-    ascLocation: string;
+    ascLocation: Azure.Core.azureLocation;
   },
   {
     /** Name of the task object, will be a GUID */
@@ -134,7 +134,7 @@ alias TaskOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @path
     @segment("locations")
     @key
-    ascLocation: string;
+    ascLocation: Azure.Core.azureLocation;
   },
   {
     /** Name of the task object, will be a GUID */
@@ -155,7 +155,7 @@ alias TaskBuildingOps = Azure.ResourceManager.Legacy.RoutedOperations<
     @path
     @segment("locations")
     @key
-    ascLocation: string;
+    ascLocation: Azure.Core.azureLocation;
   },
   {
     /** Name of the task object, will be a GUID */

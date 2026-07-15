@@ -535,6 +535,9 @@
         "x-ms-examples": {
           "Get Recovery Services Resource": {
             "$ref": "./examples/GETVault.json"
+          },
+          "Get Recovery Services Vault With Region Of Choice Settings": {
+            "$ref": "./examples/GETVault_WithRegionOfChoiceSettings.json"
           }
         }
       },
@@ -623,6 +626,9 @@
           },
           "Create or Update Vault With Redundancy Setting": {
             "$ref": "./examples/PUTVault_WithRedundancySettings.json"
+          },
+          "Create or Update Vault With Region Of Choice Settings": {
+            "$ref": "./examples/PUTVault_WithRegionOfChoiceSettings.json"
           },
           "Create or Update Vault performing critical operation With MUA": {
             "$ref": "./examples/PUTVault_ResourceGuardEnabled.json"
@@ -736,6 +742,9 @@
           },
           "Update Vault With Redundancy Setting": {
             "$ref": "./examples/PATCHVault_WithRedundancySettings.json"
+          },
+          "Update Vault With Region Of Choice Settings": {
+            "$ref": "./examples/PATCHVault_WithRegionOfChoiceSettings.json"
           },
           "Update Vault With Source scan configuration": {
             "$ref": "./examples/PATCHVault_WithSourceScanConfiguration.json"
@@ -2632,6 +2641,16 @@
         }
       }
     },
+    "RegionOfChoiceSettings": {
+      "type": "object",
+      "description": "Region of choice settings at vault level.\nThis setting allows customers to configure backups for datasources from different region.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/State",
+          "description": "The status of region of choice settings - Enabled or Disabled."
+        }
+      }
+    },
     "ReplicationUsage": {
       "type": "object",
       "description": "Replication usages of a vault.",
@@ -3525,6 +3544,10 @@
           "items": {
             "type": "string"
           }
+        },
+        "regionOfChoiceSettings": {
+          "$ref": "#/definitions/RegionOfChoiceSettings",
+          "description": "Region of choice settings for this vault."
         }
       }
     },

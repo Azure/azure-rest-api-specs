@@ -7,6 +7,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Versioning;
+using Azure.Core;
 
 namespace Microsoft.RecoveryServices;
 
@@ -158,6 +159,20 @@ union AcquireStorageAccountLock {
 }
 
 /**
+ * Whether access to the storage account is key-based or identity-based.
+ */
+@added(Versions.v2026_05_31_preview)
+union AccessType {
+  string,
+
+  /** Access using storage account keys. */
+  KeyBased: "KeyBased",
+
+  /** Access using managed identity. */
+  IdentityBased: "IdentityBased",
+}
+
+/**
  * Support status of feature
  */
 union SupportStatus {
@@ -270,6 +285,10 @@ union SoftDeleteFeatureState {
  */
 @added(Versions.v2026_01_31_preview)
 @removed(Versions.v2026_02_01)
+@added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_31_preview)
+@added(Versions.v2026_07_01)
 union SourceSideScanStatus {
   string,
 
@@ -281,6 +300,35 @@ union SourceSideScanStatus {
 
   /** Source side scan is not applicable */
   NotApplicable: "NotApplicable",
+
+  /** Source side scan configuration failed */
+  @added(Versions.v2026_07_01)
+  ConfigurationFailed: "ConfigurationFailed",
+}
+
+/**
+ * Source scan configuration status for enabling or disabling source scan
+ */
+@added(Versions.v2026_07_01)
+union SourceScanAction {
+  string,
+
+  /** Enable source scan */
+  Enable: "Enable",
+
+  /** Disable source scan */
+  Disable: "Disable",
+}
+
+/**
+ * Request to configure source scan for a protected item
+ */
+@added(Versions.v2026_07_01)
+model ProtectedItemConfigureSourceScanRequest {
+  /**
+   * Source scan action to perform
+   */
+  sourceScanAction?: SourceScanAction;
 }
 
 /**
@@ -288,6 +336,10 @@ union SourceSideScanStatus {
  */
 @added(Versions.v2026_01_31_preview)
 @removed(Versions.v2026_02_01)
+@added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_31_preview)
+@added(Versions.v2026_07_01)
 union SourceSideScanSummary {
   string,
 
@@ -302,6 +354,10 @@ union SourceSideScanSummary {
 
   /** Scan summary indicates healthy state */
   Healthy: "Healthy",
+
+  /** No threats reported */
+  @added(Versions.v2026_07_01)
+  NoThreatsReported: "NoThreatsReported",
 }
 
 /**
@@ -309,6 +365,10 @@ union SourceSideScanSummary {
  */
 @added(Versions.v2026_01_31_preview)
 @removed(Versions.v2026_02_01)
+@added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_31_preview)
+@added(Versions.v2026_07_01)
 model SourceSideScanInfo {
   /**
    * Threat status of the container
@@ -326,6 +386,10 @@ model SourceSideScanInfo {
  */
 @added(Versions.v2026_01_31_preview)
 @removed(Versions.v2026_02_01)
+@added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_31_preview)
+@added(Versions.v2026_07_01)
 union ThreatStatus {
   string,
 
@@ -350,6 +414,10 @@ union ThreatStatus {
  */
 @added(Versions.v2026_01_31_preview)
 @removed(Versions.v2026_02_01)
+@added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_31_preview)
+@added(Versions.v2026_07_01)
 union ThreatState {
   string,
 
@@ -371,6 +439,10 @@ union ThreatState {
  */
 @added(Versions.v2026_01_31_preview)
 @removed(Versions.v2026_02_01)
+@added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_31_preview)
+@added(Versions.v2026_07_01)
 union ThreatSeverity {
   string,
 
@@ -392,6 +464,10 @@ union ThreatSeverity {
  */
 @added(Versions.v2026_01_31_preview)
 @removed(Versions.v2026_02_01)
+@added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_31_preview)
+@added(Versions.v2026_07_01)
 model ThreatInfo {
   /**
    * Threat Subject
@@ -740,6 +816,9 @@ union PolicyType {
  */
 @added(Versions.v2026_01_31_preview)
 @removed(Versions.v2026_02_01)
+@added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_31_preview)
 union VMWorkloadPolicyType {
   string,
 
@@ -850,6 +929,9 @@ union ProtectedItemState {
  */
 @added(Versions.v2026_01_31_preview)
 @removed(Versions.v2026_02_01)
+@added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_31_preview)
 union ProtectionLevel {
   string,
 
@@ -865,6 +947,9 @@ union ProtectionLevel {
  */
 @added(Versions.v2026_01_31_preview)
 @removed(Versions.v2026_02_01)
+@added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_31_preview)
 union InstanceProtectionReadiness {
   string,
 
@@ -1009,11 +1094,17 @@ union RestorePointQueryType {
   /** Snapshot restore point type */
   @added(Versions.v2026_01_31_preview)
   @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_03_31_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_31_preview)
   Snapshot: "Snapshot",
 
   /** Full, differential, and snapshot restore point types */
   @added(Versions.v2026_01_31_preview)
   @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_03_31_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_31_preview)
   FullDifferentialAndSnapshot: "FullDifferentialAndSnapshot",
 }
 
@@ -1301,6 +1392,9 @@ union ContainerType {
   /** HANA scale-out container type */
   @added(Versions.v2026_01_31_preview)
   @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_03_31_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_31_preview)
   HanaScaleoutContainer: "HanaScaleoutContainer",
 }
 
@@ -2377,6 +2471,13 @@ model ProtectedItem {
   softDeleteRetentionPeriodInDays?: int32;
 
   /**
+   * Source location of the protected item datasource.
+   */
+  @added(Versions.v2026_07_01)
+  @visibility(Lifecycle.Read)
+  sourceLocation?: string;
+
+  /**
    * ID of the vault which protects this item
    */
   @visibility(Lifecycle.Read)
@@ -2387,6 +2488,10 @@ model ProtectedItem {
    */
   @added(Versions.v2026_01_31_preview)
   @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_03_31_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_31_preview)
+  @added(Versions.v2026_07_01)
   sourceSideScanInfo?: SourceSideScanInfo;
 }
 
@@ -2419,6 +2524,10 @@ model RecoveryPoint {
    */
   @added(Versions.v2026_01_31_preview)
   @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_03_31_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_31_preview)
+  @added(Versions.v2026_07_01)
   threatStatus?: ThreatStatus;
 
   /**
@@ -2426,6 +2535,10 @@ model RecoveryPoint {
    */
   @added(Versions.v2026_01_31_preview)
   @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_03_31_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_31_preview)
+  @added(Versions.v2026_07_01)
   @identifiers(#[])
   threatInfo?: ThreatInfo[];
 }
@@ -2918,6 +3031,13 @@ model ProtectionContainer {
    * Type of the protectable object associated with this container
    */
   protectableObjectType?: string;
+
+  /**
+   * Source location of the container
+   */
+  @added(Versions.v2026_07_01)
+  @visibility(Lifecycle.Read)
+  sourceLocation?: string;
 }
 
 /**
@@ -3226,6 +3346,9 @@ model UnlockDeleteResponse {
  */
 @added(Versions.v2026_01_31_preview)
 @removed(Versions.v2026_02_01)
+@added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_31_preview)
 model UpdateRecoveryPointRequest {
   /**
    * Resource properties.
@@ -3238,6 +3361,9 @@ model UpdateRecoveryPointRequest {
  */
 @added(Versions.v2026_01_31_preview)
 @removed(Versions.v2026_02_01)
+@added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_31_preview)
 model PatchRecoveryPointInput {
   /**
    * Properties of Recovery Point
@@ -3250,6 +3376,9 @@ model PatchRecoveryPointInput {
  */
 @added(Versions.v2026_01_31_preview)
 @removed(Versions.v2026_02_01)
+@added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_31_preview)
 model PatchRecoveryPointPropertiesInput {
   /**
    * Expiry time of Recovery Point in UTC.
@@ -3557,6 +3686,12 @@ model AzureFileShareRestoreRequest extends RestoreRequest {
   targetDetails?: TargetAFSRestoreInfo;
 
   /**
+   * Managed identity information required to access the storage account.
+   */
+  @added(Versions.v2026_05_31_preview)
+  identityInfo?: IdentityInfo;
+
+  /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
    */
   objectType: "AzureFileShareRestoreRequest";
@@ -3612,6 +3747,9 @@ model AzureVmWorkloadProtectionPolicy extends ProtectionPolicy {
    */
   @added(Versions.v2026_01_31_preview)
   @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_03_31_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_31_preview)
   vmWorkloadPolicyType?: VMWorkloadPolicyType;
 
   /**
@@ -4657,6 +4795,9 @@ model AzureVmWorkloadSQLDatabaseProtectedItem extends ProtectedItem {
    */
   @added(Versions.v2026_01_31_preview)
   @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_03_31_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_31_preview)
   parentProtectedItem?: string;
 
   /**
@@ -4664,6 +4805,9 @@ model AzureVmWorkloadSQLDatabaseProtectedItem extends ProtectedItem {
    */
   @added(Versions.v2026_01_31_preview)
   @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_03_31_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_31_preview)
   protectionLevel?: ProtectionLevel;
 }
 
@@ -4673,6 +4817,9 @@ model AzureVmWorkloadSQLDatabaseProtectedItem extends ProtectedItem {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SQL acronym in naming"
 @added(Versions.v2026_01_31_preview)
 @removed(Versions.v2026_02_01)
+@added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_31_preview)
 model AzureVmWorkloadSQLInstanceProtectedItem extends ProtectedItem {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -5197,6 +5344,9 @@ model AzureWorkloadSQLRecoveryPointExtendedInfo {
    */
   @added(Versions.v2026_01_31_preview)
   @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_03_31_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_31_preview)
   @identifiers(#[])
   includedDatabases?: DatabaseInRP[];
 }
@@ -5310,6 +5460,7 @@ model BEKDetails {
   /**
    * Secret is BEK.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   secretUrl?: string;
 
   /**
@@ -5365,6 +5516,9 @@ model BmsrpQueryObject {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving existing API naming convention from prior swagger versions"
   @added(Versions.v2026_01_31_preview)
   @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_03_31_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_31_preview)
   baseSnapshotRPId?: string;
 
   /**
@@ -5373,6 +5527,9 @@ model BmsrpQueryObject {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving existing API naming convention from prior swagger versions"
   @added(Versions.v2026_01_31_preview)
   @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_03_31_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_31_preview)
   baseRPDatasourceId?: string;
 
   /**
@@ -5381,6 +5538,9 @@ model BmsrpQueryObject {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving existing API naming convention from prior swagger versions"
   @added(Versions.v2026_01_31_preview)
   @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_03_31_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_31_preview)
   getLatestRPOnly?: boolean;
 }
 
@@ -5689,11 +5849,13 @@ model EncryptionDetails {
   /**
    * Key Url.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   kekUrl?: string;
 
   /**
    * Secret Url.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   secretKeyUrl?: string;
 
   /**
@@ -5714,6 +5876,7 @@ model ExportJobsOperationResultInfo extends OperationResultInfoBase {
   /**
    * URL of the blob into which the serialized string of list of jobs is exported.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   blobUrl?: string;
 
   /**
@@ -5725,6 +5888,7 @@ model ExportJobsOperationResultInfo extends OperationResultInfoBase {
   /**
    * URL of the blob into which the ExcelFile is uploaded.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   excelFileBlobUrl?: string;
 
   /**
@@ -5798,6 +5962,9 @@ model DailySchedule {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving original API naming convention"
 @added(Versions.v2026_01_31_preview)
 @removed(Versions.v2026_02_01)
+@added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_31_preview)
 model DatabaseInRP {
   /**
    * Datasource Id for the database.
@@ -6114,6 +6281,7 @@ model KEKDetails {
   /**
    * Key is KEK.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   keyUrl?: string;
 
   /**
@@ -7534,6 +7702,20 @@ model AzureStorageContainer extends ProtectionContainer {
   operationType?: OperationType;
 
   /**
+   * Whether access to the storage account is key-based or identity-based.
+   * When `IdentityBased`, `identityInfo` must be provided to identify the
+   * managed identity used to access the storage account.
+   */
+  @added(Versions.v2026_05_31_preview)
+  accessType?: AccessType;
+
+  /**
+   * Managed identity information required to access the storage account.
+   */
+  @added(Versions.v2026_05_31_preview)
+  identityInfo?: IdentityInfo;
+
+  /**
    * Type of the container. The value of this property for: 1. Compute Azure VM is Microsoft.Compute/virtualMachines 2.
    * Classic Compute Azure VM is Microsoft.ClassicCompute/virtualMachines 3. Windows machines (like MAB, DPM etc) is
    * Windows 4. Azure SQL instance is AzureSqlContainer. 5. Storage containers is StorageContainer. 6. Azure workload
@@ -7830,6 +8012,9 @@ model AzureVmWorkloadSAPHanaHSRProtectableItem extends WorkloadProtectableItem {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SAP acronym in naming"
 @added(Versions.v2026_01_31_preview)
 @removed(Versions.v2026_02_01)
+@added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_31_preview)
 model AzureVmWorkloadSAPHanaScaleoutProtectableItem
   extends WorkloadProtectableItem {
   /**
@@ -8841,4 +9026,283 @@ model ClientDiscoveryResponse {
    */
   @nextLink
   nextLink?: string;
+}
+
+// ============================================================
+// Cross-Tenant Restore (CTR) Models — added in v2026_03_31_preview
+// ============================================================
+
+/**
+ * Provisioning state of cross-tenant resources. Wraps the standard
+ * `ResourceProvisioningState` (Succeeded / Failed / Canceled) and adds the
+ * non-terminal states emitted by the RP.
+ */
+@Azure.Core.lroStatus
+@added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_31_preview)
+union CrossTenantProvisioningState {
+  string,
+  ResourceProvisioningState,
+
+  /** Initial provisioning in progress. */
+  Provisioning: "Provisioning",
+
+  /** Update in progress. */
+  Updating: "Updating",
+
+  /** Deletion in progress. */
+  Deleting: "Deleting",
+
+  /** Request accepted, processing not yet started. */
+  Accepted: "Accepted",
+}
+
+/**
+ * Cross-tenant vault mapping properties for cross-tenant restore.
+ * Represents the configuration linking a source vault to a target vault across tenants.
+ */
+@added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_31_preview)
+model CrossTenantVaultMappingProperties {
+  /**
+   * ARM resource ID of the source vault.
+   */
+  sourceVaultId: armResourceIdentifier<[
+    {
+      type: "Microsoft.RecoveryServices/vaults";
+    }
+  ]>;
+
+  /**
+   * Tenant ID of the source vault for cross-tenant mapping.
+   */
+  @visibility(Lifecycle.Read)
+  sourceTenantId?: uuid;
+
+  /**
+   * Name of the mapping.
+   */
+  @visibility(Lifecycle.Read)
+  mappingName?: string;
+
+  /**
+   * Timestamp when the mapping was created.
+   */
+  @visibility(Lifecycle.Read)
+  createdTime?: utcDateTime;
+
+  /**
+   * ResourceGuardOperationRequests on which LAC check will be performed.
+   */
+  resourceGuardOperationRequests?: armResourceIdentifier[];
+
+  /**
+   * Provisioning state of the resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: CrossTenantProvisioningState;
+}
+
+/**
+ * Request to remove a cross-tenant vault mapping for cross-tenant restore.
+ */
+@added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_31_preview)
+model RemoveCrossTenantVaultMappingRequest {
+  /**
+   * ResourceGuardOperationRequests on which LAC check will be performed.
+   */
+  resourceGuardOperationRequests?: armResourceIdentifier[];
+}
+
+/**
+ * State of a vault mapping.
+ */
+@added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_31_preview)
+union VaultMappingState {
+  string,
+
+  /** The mapping is active. */
+  Active: "Active",
+
+  /** The mapping is inactive. */
+  Inactive: "Inactive",
+}
+
+/**
+ * Response for CheckVaultMappingStatus API.
+ * Contains information about whether a source vault is mapped to a target vault.
+ */
+@added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_31_preview)
+model CrossTenantVaultMappingStatusResponse {
+  /**
+   * Mapping name (if mapped).
+   */
+  mappingName?: string;
+
+  /**
+   * Current state of the mapping.
+   */
+  mappingState?: VaultMappingState;
+}
+
+/**
+ * Request to generate a vault credential certificate for cross-tenant restore.
+ */
+@added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_31_preview)
+model VaultCredentialCertificateRequest {
+  /**
+   * Options for certificate generation.
+   */
+  certificateCreateOptions?: VaultCredentialCertificateCreateOptions;
+}
+
+/**
+ * Options for self-signed certificate generation.
+ */
+@added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_31_preview)
+model VaultCredentialCertificateCreateOptions {
+  /**
+   * Validity period of the generated certificate in hours.
+   */
+  validityInHours?: int32;
+}
+
+/**
+ * Response containing the generated vault credential certificate
+ * and associated AAD identity details for MARS agent registration.
+ */
+@added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_31_preview)
+model VaultCredentialCertificateResponse
+  is Azure.ResourceManager.ProxyResource<VaultCredentialCertificateProperties> {
+  /**
+   * The name of the vault credential certificate resource.
+   */
+  @key("vaultCredentialCertificateName")
+  @TypeSpec.Rest.segment("vaultCredentials")
+  @pattern(".*")
+  @TypeSpec.Http.path
+  @visibility(Lifecycle.Read)
+  name: string;
+}
+
+/**
+ * Authentication type used by the vault credential certificate.
+ */
+@added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_31_preview)
+union AuthType {
+  string,
+
+  /** Microsoft Entra ID (Azure Active Directory) authentication. */
+  AzureActiveDirectory: "AzureActiveDirectory",
+}
+
+/**
+ * Properties of the vault credential certificate including the certificate data
+ * and AAD service principal identity details required by MARS agent.
+ */
+@added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_31_preview)
+model VaultCredentialCertificateProperties {
+  /**
+   * Authentication type.
+   */
+  authType?: AuthType;
+
+  /**
+   * Base64-encoded certificate data.
+   */
+  certificate?: string;
+
+  /**
+   * IDM resource ID of the vault.
+   */
+  resourceId?: int64;
+
+  /**
+   * String form of the IDM resource ID.
+   */
+  serviceResourceId?: string;
+
+  /**
+   * AAD authority URL.
+   */
+  aadAuthority?: url;
+
+  /**
+   * AAD tenant ID of the source vault.
+   */
+  aadTenantId?: uuid;
+
+  /**
+   * Service principal client ID for the vault.
+   */
+  servicePrincipalClientId?: uuid;
+
+  /**
+   * Service principal object ID for the vault.
+   */
+  servicePrincipalObjectId?: uuid;
+
+  /**
+   * Azure management endpoint audience.
+   */
+  azureManagementEndpointAudience?: string;
+
+  /**
+   * AAD audience URI for the vault.
+   */
+  aadAudience?: url;
+
+  /**
+   * Certificate subject.
+   */
+  subject?: string;
+
+  /**
+   * Certificate issuer.
+   */
+  issuer?: string;
+
+  /**
+   * Certificate thumbprint.
+   */
+  thumbprint?: string;
+
+  /**
+   * Certificate validity start date.
+   */
+  validFrom?: utcDateTime;
+
+  /**
+   * Certificate validity end date.
+   */
+  validTo?: utcDateTime;
+
+  /**
+   * Certificate friendly name.
+   */
+  friendlyName?: string;
+
+  /**
+   * Provisioning state of the vault credential certificate.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: CrossTenantProvisioningState;
 }

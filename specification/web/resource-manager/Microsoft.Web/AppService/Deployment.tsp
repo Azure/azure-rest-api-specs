@@ -51,7 +51,8 @@ interface DeploymentOps
         @segment("deployments")
         @key
         id: string,
-      }
+      },
+      ResourceName = "SiteDeployment"
     > {}
 
 @tag("WebApps")
@@ -136,7 +137,8 @@ interface DeploymentOperationGroupOps
         @segment("deployments")
         @key
         id: string,
-      }
+      },
+      ResourceName = "SiteSlotDeployment"
     > {}
 
 @tag("WebApps")

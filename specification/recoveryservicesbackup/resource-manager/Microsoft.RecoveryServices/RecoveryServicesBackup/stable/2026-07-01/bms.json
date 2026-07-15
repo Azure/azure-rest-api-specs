@@ -73,6 +73,9 @@
       "name": "Backups"
     },
     {
+      "name": "ConfigureSourceScan"
+    },
+    {
       "name": "RecoveryPointsRecommendedForMove"
     },
     {
@@ -1723,6 +1726,104 @@
             "$ref": "./examples/Common/TriggerBackup_Post.json"
           }
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/configureSourceScan": {
+      "post": {
+        "operationId": "ConfigureSourceScan_Execute",
+        "tags": [
+          "ConfigureSourceScan"
+        ],
+        "description": "Configures source scan for a protected item. This is an asynchronous operation. To know the status of the\noperation, call GetProtectedItemOperationResult API.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the VaultResource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "The name of the BackupFabricResource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "containerName",
+            "in": "path",
+            "description": "Name of the container whose details need to be fetched.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "protectedItemName",
+            "in": "path",
+            "description": "Backed up item name whose details are to be fetched.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProtectedItemConfigureSourceScanRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Configure Source Scan for Protected Item": {
+            "$ref": "./examples/AzureIaasVm/ConfigureSourceScan.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/operationResults/{operationId}": {
@@ -12377,16 +12478,35 @@
           "format": "int32",
           "description": "Soft delete retention period in days"
         },
+        "sourceLocation": {
+          "type": "string",
+          "description": "Source location of the protected item datasource.",
+          "readOnly": true
+        },
         "vaultId": {
           "type": "string",
           "description": "ID of the vault which protects this item",
           "readOnly": true
+        },
+        "sourceSideScanInfo": {
+          "$ref": "#/definitions/SourceSideScanInfo",
+          "description": "Source side threat information"
         }
       },
       "discriminator": "protectedItemType",
       "required": [
         "protectedItemType"
       ]
+    },
+    "ProtectedItemConfigureSourceScanRequest": {
+      "type": "object",
+      "description": "Request to configure source scan for a protected item",
+      "properties": {
+        "sourceScanAction": {
+          "$ref": "#/definitions/SourceScanAction",
+          "description": "Source scan action to perform"
+        }
+      }
     },
     "ProtectedItemHealthStatus": {
       "type": "string",
@@ -12593,6 +12713,11 @@
         "protectableObjectType": {
           "type": "string",
           "description": "Type of the protectable object associated with this container"
+        },
+        "sourceLocation": {
+          "type": "string",
+          "description": "Source location of the container",
+          "readOnly": true
         }
       },
       "discriminator": "containerType",
@@ -13063,6 +13188,18 @@
         "objectType": {
           "type": "string",
           "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types."
+        },
+        "threatStatus": {
+          "$ref": "#/definitions/ThreatStatus",
+          "description": "Threat status of the recovery point"
+        },
+        "threatInfo": {
+          "type": "array",
+          "description": "Recovery point threat information.",
+          "items": {
+            "$ref": "#/definitions/ThreatInfo"
+          },
+          "x-ms-identifiers": []
         }
       },
       "discriminator": "objectType",
@@ -14112,6 +14249,122 @@
         ]
       }
     },
+    "SourceScanAction": {
+      "type": "string",
+      "description": "Source scan configuration status for enabling or disabling source scan",
+      "enum": [
+        "Enable",
+        "Disable"
+      ],
+      "x-ms-enum": {
+        "name": "SourceScanAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enable",
+            "value": "Enable",
+            "description": "Enable source scan"
+          },
+          {
+            "name": "Disable",
+            "value": "Disable",
+            "description": "Disable source scan"
+          }
+        ]
+      }
+    },
+    "SourceSideScanInfo": {
+      "type": "object",
+      "description": "Source side threat information",
+      "properties": {
+        "sourceSideScanStatus": {
+          "$ref": "#/definitions/SourceSideScanStatus",
+          "description": "Threat status of the container"
+        },
+        "sourceSideScanSummary": {
+          "$ref": "#/definitions/SourceSideScanSummary",
+          "description": "Threat summary for the container"
+        }
+      }
+    },
+    "SourceSideScanStatus": {
+      "type": "string",
+      "description": "Threat status of the container",
+      "enum": [
+        "Configured",
+        "NotConfigured",
+        "NotApplicable",
+        "ConfigurationFailed"
+      ],
+      "x-ms-enum": {
+        "name": "SourceSideScanStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Configured",
+            "value": "Configured",
+            "description": "Source side scan is configured"
+          },
+          {
+            "name": "NotConfigured",
+            "value": "NotConfigured",
+            "description": "Source side scan is not configured"
+          },
+          {
+            "name": "NotApplicable",
+            "value": "NotApplicable",
+            "description": "Source side scan is not applicable"
+          },
+          {
+            "name": "ConfigurationFailed",
+            "value": "ConfigurationFailed",
+            "description": "Source side scan configuration failed"
+          }
+        ]
+      }
+    },
+    "SourceSideScanSummary": {
+      "type": "string",
+      "description": "Threat summary for the container",
+      "enum": [
+        "Unknown",
+        "NotApplicable",
+        "Suspicious",
+        "Healthy",
+        "NoThreatsReported"
+      ],
+      "x-ms-enum": {
+        "name": "SourceSideScanSummary",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Scan summary is unknown"
+          },
+          {
+            "name": "NotApplicable",
+            "value": "NotApplicable",
+            "description": "Scan summary is not applicable"
+          },
+          {
+            "name": "Suspicious",
+            "value": "Suspicious",
+            "description": "Scan summary is suspicious"
+          },
+          {
+            "name": "Healthy",
+            "value": "Healthy",
+            "description": "Scan summary indicates healthy state"
+          },
+          {
+            "name": "NoThreatsReported",
+            "value": "NoThreatsReported",
+            "description": "No threats reported"
+          }
+        ]
+      }
+    },
     "StorageType": {
       "type": "string",
       "description": "Storage type",
@@ -14303,6 +14556,168 @@
           "type": "string",
           "description": "Target directory location for restore as files."
         }
+      }
+    },
+    "ThreatInfo": {
+      "type": "object",
+      "description": "Recovery Point Threat information",
+      "properties": {
+        "threatTitle": {
+          "type": "string",
+          "description": "Threat Subject",
+          "readOnly": true
+        },
+        "threatDescription": {
+          "type": "string",
+          "description": "Threat Description",
+          "readOnly": true
+        },
+        "lastUpdatedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the last (latest)threat information was sent",
+          "readOnly": true
+        },
+        "threatState": {
+          "$ref": "#/definitions/ThreatState",
+          "description": "Threat Status Types"
+        },
+        "threatStartTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start timestamp of the threat",
+          "readOnly": true
+        },
+        "threatEndTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End timestamp of the threat",
+          "readOnly": true
+        },
+        "threatURI": {
+          "type": "string",
+          "format": "uri",
+          "description": "threat details link",
+          "readOnly": true
+        },
+        "threatSeverity": {
+          "$ref": "#/definitions/ThreatSeverity",
+          "description": "Threat Severity Types"
+        }
+      }
+    },
+    "ThreatSeverity": {
+      "type": "string",
+      "description": "Threat Severity Types",
+      "enum": [
+        "Critical",
+        "High",
+        "Warning",
+        "Informational"
+      ],
+      "x-ms-enum": {
+        "name": "ThreatSeverity",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Critical",
+            "value": "Critical",
+            "description": "Critical severity level"
+          },
+          {
+            "name": "High",
+            "value": "High",
+            "description": "High severity level"
+          },
+          {
+            "name": "Warning",
+            "value": "Warning",
+            "description": "Warning severity level"
+          },
+          {
+            "name": "Informational",
+            "value": "Informational",
+            "description": "Informational severity level"
+          }
+        ]
+      }
+    },
+    "ThreatState": {
+      "type": "string",
+      "description": "Threat Status Types",
+      "enum": [
+        "Active",
+        "InProgress",
+        "Ignored",
+        "Resolved"
+      ],
+      "x-ms-enum": {
+        "name": "ThreatState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "Threat is active"
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "Threat remediation is in progress"
+          },
+          {
+            "name": "Ignored",
+            "value": "Ignored",
+            "description": "Threat has been ignored"
+          },
+          {
+            "name": "Resolved",
+            "value": "Resolved",
+            "description": "Threat has been resolved"
+          }
+        ]
+      }
+    },
+    "ThreatStatus": {
+      "type": "string",
+      "description": "Threat status of the recovery point",
+      "enum": [
+        "Unknown",
+        "Healthy",
+        "UnHealthy",
+        "Warning",
+        "NotAvailable"
+      ],
+      "x-ms-enum": {
+        "name": "ThreatStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Threat status is unknown"
+          },
+          {
+            "name": "Healthy",
+            "value": "Healthy",
+            "description": "Recovery point is healthy"
+          },
+          {
+            "name": "UnHealthy",
+            "value": "UnHealthy",
+            "description": "Recovery point is unhealthy"
+          },
+          {
+            "name": "Warning",
+            "value": "Warning",
+            "description": "Recovery point has warning-level threats"
+          },
+          {
+            "name": "NotAvailable",
+            "value": "NotAvailable",
+            "description": "Threat status is not available"
+          }
+        ]
       }
     },
     "TieringCostInfo": {

@@ -48,7 +48,9 @@ interface DataContainerOps
         @segment("data")
         @key
         name: string,
-      }
+      },
+      ErrorResponse,
+      "MachineLearningRegistryDataContainer"
     > {}
 
 @armResourceOperations
@@ -74,7 +76,9 @@ interface DataContainerwithNamePatternOps
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
         name: string,
-      }
+      },
+      ErrorResponse,
+      "MachineLearningRegistryDataContainer"
     > {}
 
 @armResourceOperations
@@ -170,7 +174,9 @@ interface DataContainerOperationGroupOps
         @segment("data")
         @key
         name: string,
-      }
+      },
+      ErrorResponse,
+      "MachineLearningDataContainer"
     > {}
 
 @armResourceOperations

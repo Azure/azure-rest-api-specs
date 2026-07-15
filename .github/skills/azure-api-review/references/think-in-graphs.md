@@ -179,7 +179,7 @@ In summary-text mode the Reviewer:
   graph; each finding body carries
   `Source: structural-analysis (graph downgraded)` so the human sees
   that the analysis was performed.
-- Sets `graphs-produced: downgraded` in Critic Input #9.
+- Sets `Graphs: false` in Critic Input #9. (The deprecated `graphs-produced: downgraded` value is still accepted by the Critic but is treated equivalently.)
 
 Under `downgraded`, the Critic still independently re-derives the
 sensitive-data-flow view in summary form (rendering cost is irrelevant
@@ -201,28 +201,27 @@ recovery"](../../../agents/arm-api-reviewer.agent.md#step-35-api-graph--data-flo
 
 1. **Retry with smaller scope** (per-namespace partitioning, then
    merge). Default; most failures resolve here.
-2. **Continue with `graphs-produced: degraded`**, render the required
+2. **Continue with `Graphs: false` + failure banner**, render the required
    `[!CAUTION]` failure banner at the top of the Step 6 report, and
    proceed. The Critic records `Graph integrity = N/A` but is required
    to flag the missing banner as `missing-step35-banner` if the
-   Reviewer suppresses it.
+   Reviewer suppresses it. (The deprecated `graphs-produced: degraded` value is still accepted by the Critic but treated equivalently.)
 3. **Abort** only on explicit human direction (e.g., the PR touches
    secret-bearing properties where Step 3.5 is the primary detection
    mechanism).
 
-`graphs-produced: degraded` is **distinct** from `false` (which is
-reserved for fast-path-by-design and is silent). `degraded` is never
-silent: the banner makes the missing analysis visible to every human
-reading the report.
+`Graphs: false` with the caution banner is **distinct** from `Graphs: false`
+without a banner (which is reserved for fast-path-by-design and is silent).
+The banner makes the missing analysis visible to every human reading the report.
 
 ## When this step is skipped
 
 Step 3.5 is **skipped on the fast-path track** (examples-only PRs,
 description-only edits, non-AutoRest readme edits). In that case the
-Reviewer MUST tell the Critic via Input #9 (`graphs-produced: false`),
+Reviewer MUST tell the Critic via Input #9 (`Graphs: false`, no banner),
 and the Critic records `Graph integrity = N/A` instead of attempting to
 diff against absent graphs. Step 3.5 is **never** skipped on the
 full-review track; on extreme-scale full-review PRs use the
-`downgraded` mode above, and on derivation failure use the `degraded`
-mode (see "When graph derivation fails on a full-review PR" above)
+downgraded-rendering mode above, and on derivation failure use `Graphs: false`
+with the caution banner (see "When graph derivation fails on a full-review PR" above)
 rather than skipping silently.

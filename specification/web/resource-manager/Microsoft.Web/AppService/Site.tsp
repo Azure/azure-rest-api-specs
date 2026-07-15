@@ -54,7 +54,8 @@ interface SiteOps
         @segment("sites")
         @key
         name: string,
-      }
+      },
+      ResourceName = "WebSite"
     > {}
 
 @armResourceOperations
@@ -96,7 +97,8 @@ interface WorkflowRegenerateAccessKeyOps
         @segment("workflows")
         @key
         workflowName: string,
-      }
+      },
+      ResourceName = "WorkflowAccessKey"
     > {}
 
 @tag("WebApps")
@@ -406,7 +408,6 @@ interface Sites {
   /**
    * Description for Gets the Git/FTP publishing credentials of an app.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets the Git/FTP publishing credentials of an app.")
   @action("config/publishingcredentials/list")
@@ -835,6 +836,7 @@ interface Sites {
       /**
        * The Blob URL to store capture file.
        */
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
       @query("sasUrl")
       sasUrl?: string;
     },
@@ -873,6 +875,7 @@ interface Sites {
       /**
        * The Blob URL to store capture file.
        */
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
       @query("sasUrl")
       sasUrl?: string;
     },
@@ -1252,6 +1255,7 @@ interface Sites {
       /**
        * The Blob URL to store capture file.
        */
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
       @query("sasUrl")
       sasUrl?: string;
     },
@@ -1503,7 +1507,8 @@ interface WebAppOps
         @segment("slots")
         @key
         slot: string,
-      }
+      },
+      ResourceName = "WebSiteSlot"
     > {}
 
 alias ActionParameterSlotWebAppOps = Azure.ResourceManager.Legacy.RoutedOperations<
@@ -1871,7 +1876,6 @@ interface WebApps {
    * Description for Gets the Git/FTP publishing credentials of an app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets the Git/FTP publishing credentials of an app.")
   @action("config/publishingcredentials/list")
   listPublishingCredentialsSlot is Azure.ResourceManager.ArmResourceActionAsyncBase<
@@ -2197,6 +2201,7 @@ interface WebApps {
       /**
        * The Blob URL to store capture file.
        */
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
       @query("sasUrl")
       sasUrl?: string;
     },
@@ -2235,6 +2240,7 @@ interface WebApps {
       /**
        * The Blob URL to store capture file.
        */
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
       @query("sasUrl")
       sasUrl?: string;
     },
@@ -2615,6 +2621,7 @@ interface WebApps {
       /**
        * The Blob URL to store capture file.
        */
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
       @query("sasUrl")
       sasUrl?: string;
     },

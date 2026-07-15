@@ -82,6 +82,7 @@ model OfferProperties {
   @doc("The content version")
   contentVersion?: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("The content url")
   contentUrl?: string;
 

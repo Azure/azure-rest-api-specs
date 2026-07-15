@@ -24,8 +24,9 @@ options:
     generate-test: true
     generate-sample: true
   "@azure-typespec/http-client-csharp-mgmt":
-    namespace: "Azure.ResourceManager.CloudHealth"
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    package-name: "Azure.ResourceManager.CloudHealth"
+    namespace: "{package-name}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{package-name}"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/cloudhealth"
     emitter-output-dir: "{output-dir}/{service-dir}/armcloudhealth"
@@ -42,4 +43,6 @@ options:
     service-name: "CloudHealth"
     flavor: "azure"
 linter:
-  extends: ["@azure-tools/typespec-azure-rulesets/resource-manager"]
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"
