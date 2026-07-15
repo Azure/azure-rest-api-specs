@@ -13,8 +13,8 @@ import yaml from "js-yaml";
 import checkLabel from "../../src/protected-labels/check-label.js";
 
 const protectedLabelsConfig = {
-  "BreakingChange-Approved-Benign": ["ArthurMa1978", "m-nash"],
-  "Versioning-Approved-BugFix": ["ArthurMa1978", "m-nash"],
+  "BreakingChange-Approved-Benign": ["user1", "user2"],
+  "Versioning-Approved-BugFix": ["user1", "user2"],
 };
 
 function setupMocks() {
@@ -42,8 +42,11 @@ function createLabeledPayload({ labelName, actor }) {
 }
 
 describe("checkLabel", () => {
+  /** @type {import("../mocks.js").GitHub & ReturnType<typeof createMockGithub>} */
   let github;
+  /** @type {import("../mocks.js").Core} */
   let core;
+  /** @type {import("../mocks.js").Context} */
   let context;
 
   beforeEach(() => {
@@ -96,7 +99,7 @@ describe("checkLabel", () => {
     it("allows authorized user to keep label", async () => {
       context.payload = createLabeledPayload({
         labelName: "BreakingChange-Approved-Benign",
-        actor: "ArthurMa1978",
+        actor: "user1",
       });
 
       await checkLabel({ github, context, core });
@@ -108,7 +111,7 @@ describe("checkLabel", () => {
     it("is case-insensitive for username comparison", async () => {
       context.payload = createLabeledPayload({
         labelName: "BreakingChange-Approved-Benign",
-        actor: "arthurma1978",
+        actor: "User1",
       });
 
       await checkLabel({ github, context, core });
@@ -119,7 +122,7 @@ describe("checkLabel", () => {
     it("removes label and posts warning for unauthorized user", async () => {
       context.payload = createLabeledPayload({
         labelName: "BreakingChange-Approved-Benign",
-        actor: "service-team-dev",
+        actor: "unauthorized-user",
       });
 
       await checkLabel({ github, context, core });
@@ -132,7 +135,8 @@ describe("checkLabel", () => {
       });
       expect(github.rest.issues.createComment).toHaveBeenCalledWith(
         expect.objectContaining({
-          body: expect.stringContaining("@service-team-dev is not authorized"),
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+          body: expect.stringContaining("@unauthorized-user is not authorized"),
         }),
       );
     });
