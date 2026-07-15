@@ -5393,6 +5393,30 @@
     }
   },
   "definitions": {
+    "AccessType": {
+      "type": "string",
+      "description": "Whether access to the storage account is key-based or identity-based.",
+      "enum": [
+        "KeyBased",
+        "IdentityBased"
+      ],
+      "x-ms-enum": {
+        "name": "AccessType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "KeyBased",
+            "value": "KeyBased",
+            "description": "Access using storage account keys."
+          },
+          {
+            "name": "IdentityBased",
+            "value": "IdentityBased",
+            "description": "Access using managed identity."
+          }
+        ]
+      }
+    },
     "AcquireStorageAccountLock": {
       "type": "string",
       "description": "Whether storage account lock is to be acquired for this container or not.",
@@ -5615,6 +5639,10 @@
         "targetDetails": {
           "$ref": "#/definitions/TargetAFSRestoreInfo",
           "description": "Target File Share Details"
+        },
+        "identityInfo": {
+          "$ref": "#/definitions/IdentityInfo",
+          "description": "Managed identity information required to access the storage account."
         }
       },
       "allOf": [
@@ -6300,6 +6328,14 @@
         "operationType": {
           "$ref": "#/definitions/OperationType",
           "description": "Re-Do Operation"
+        },
+        "accessType": {
+          "$ref": "#/definitions/AccessType",
+          "description": "Whether access to the storage account is key-based or identity-based.\nWhen `IdentityBased`, `identityInfo` must be provided to identify the\nmanaged identity used to access the storage account."
+        },
+        "identityInfo": {
+          "$ref": "#/definitions/IdentityInfo",
+          "description": "Managed identity information required to access the storage account."
         }
       },
       "allOf": [
@@ -9090,11 +9126,27 @@
         },
         "dataDiskEncryptionSetId": {
           "type": "string",
-          "description": "Disk Encryption Set Id for Secured VM Data Disk. This will be used for all data disks if perDiskEncryptionSetIds is not provided. If perDiskEncryptionSetIds is provided, this will be ignored."
+          "format": "arm-id",
+          "description": "Disk Encryption Set Id for Secured VM Data Disk. This will be used for all data disks if perDiskEncryptionSetIds is not provided. If perDiskEncryptionSetIds is provided, this will be ignored.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Compute/diskEncryptionSets"
+              }
+            ]
+          }
         },
         "dataDiskEncryptionIdentity": {
           "type": "string",
-          "description": "Managed Identity resource Id used to encrypt the data disk during restore."
+          "format": "arm-id",
+          "description": "Managed Identity resource Id used to encrypt the data disk during restore.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
         }
       }
     },
@@ -11970,7 +12022,15 @@
         },
         "diskEncryptionSetId": {
           "type": "string",
-          "description": "Disk Encryption Set Id for Secured VM Data Disk"
+          "format": "arm-id",
+          "description": "Disk Encryption Set Id for Secured VM Data Disk",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Compute/diskEncryptionSets"
+              }
+            ]
+          }
         }
       }
     },

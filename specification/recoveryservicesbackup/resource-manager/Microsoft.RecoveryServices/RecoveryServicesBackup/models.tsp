@@ -819,6 +819,7 @@ union PolicyType {
 @added(Versions.v2026_03_31_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
+@removed(Versions.v2026_07_01)
 union VMWorkloadPolicyType {
   string,
 
@@ -932,6 +933,7 @@ union ProtectedItemState {
 @added(Versions.v2026_03_31_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
+@removed(Versions.v2026_07_01)
 union ProtectionLevel {
   string,
 
@@ -950,6 +952,7 @@ union ProtectionLevel {
 @added(Versions.v2026_03_31_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
+@removed(Versions.v2026_07_01)
 union InstanceProtectionReadiness {
   string,
 
@@ -1097,6 +1100,7 @@ union RestorePointQueryType {
   @added(Versions.v2026_03_31_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_31_preview)
+  @removed(Versions.v2026_07_01)
   Snapshot: "Snapshot",
 
   /** Full, differential, and snapshot restore point types */
@@ -1105,6 +1109,7 @@ union RestorePointQueryType {
   @added(Versions.v2026_03_31_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_31_preview)
+  @removed(Versions.v2026_07_01)
   FullDifferentialAndSnapshot: "FullDifferentialAndSnapshot",
 }
 
@@ -1395,6 +1400,7 @@ union ContainerType {
   @added(Versions.v2026_03_31_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_31_preview)
+  @removed(Versions.v2026_07_01)
   HanaScaleoutContainer: "HanaScaleoutContainer",
 }
 
@@ -3349,6 +3355,7 @@ model UnlockDeleteResponse {
 @added(Versions.v2026_03_31_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
+@removed(Versions.v2026_07_01)
 model UpdateRecoveryPointRequest {
   /**
    * Resource properties.
@@ -3364,6 +3371,7 @@ model UpdateRecoveryPointRequest {
 @added(Versions.v2026_03_31_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
+@removed(Versions.v2026_07_01)
 model PatchRecoveryPointInput {
   /**
    * Properties of Recovery Point
@@ -3379,6 +3387,7 @@ model PatchRecoveryPointInput {
 @added(Versions.v2026_03_31_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
+@removed(Versions.v2026_07_01)
 model PatchRecoveryPointPropertiesInput {
   /**
    * Expiry time of Recovery Point in UTC.
@@ -3750,6 +3759,7 @@ model AzureVmWorkloadProtectionPolicy extends ProtectionPolicy {
   @added(Versions.v2026_03_31_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_31_preview)
+  @removed(Versions.v2026_07_01)
   vmWorkloadPolicyType?: VMWorkloadPolicyType;
 
   /**
@@ -4798,6 +4808,7 @@ model AzureVmWorkloadSQLDatabaseProtectedItem extends ProtectedItem {
   @added(Versions.v2026_03_31_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_31_preview)
+  @removed(Versions.v2026_07_01)
   parentProtectedItem?: string;
 
   /**
@@ -4808,6 +4819,7 @@ model AzureVmWorkloadSQLDatabaseProtectedItem extends ProtectedItem {
   @added(Versions.v2026_03_31_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_31_preview)
+  @removed(Versions.v2026_07_01)
   protectionLevel?: ProtectionLevel;
 }
 
@@ -4820,6 +4832,7 @@ model AzureVmWorkloadSQLDatabaseProtectedItem extends ProtectedItem {
 @added(Versions.v2026_03_31_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
+@removed(Versions.v2026_07_01)
 model AzureVmWorkloadSQLInstanceProtectedItem extends ProtectedItem {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -5347,6 +5360,7 @@ model AzureWorkloadSQLRecoveryPointExtendedInfo {
   @added(Versions.v2026_03_31_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_31_preview)
+  @removed(Versions.v2026_07_01)
   @identifiers(#[])
   includedDatabases?: DatabaseInRP[];
 }
@@ -5519,6 +5533,7 @@ model BmsrpQueryObject {
   @added(Versions.v2026_03_31_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_31_preview)
+  @removed(Versions.v2026_07_01)
   baseSnapshotRPId?: string;
 
   /**
@@ -5530,6 +5545,7 @@ model BmsrpQueryObject {
   @added(Versions.v2026_03_31_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_31_preview)
+  @removed(Versions.v2026_07_01)
   baseRPDatasourceId?: string;
 
   /**
@@ -5541,6 +5557,7 @@ model BmsrpQueryObject {
   @added(Versions.v2026_03_31_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_31_preview)
+  @removed(Versions.v2026_07_01)
   getLatestRPOnly?: boolean;
 }
 
@@ -5965,6 +5982,7 @@ model DailySchedule {
 @added(Versions.v2026_03_31_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
+@removed(Versions.v2026_07_01)
 model DatabaseInRP {
   /**
    * Datasource Id for the database.
@@ -8015,6 +8033,7 @@ model AzureVmWorkloadSAPHanaHSRProtectableItem extends WorkloadProtectableItem {
 @added(Versions.v2026_03_31_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
+@removed(Versions.v2026_07_01)
 model AzureVmWorkloadSAPHanaScaleoutProtectableItem
   extends WorkloadProtectableItem {
   /**
@@ -9041,6 +9060,7 @@ model ClientDiscoveryResponse {
 @added(Versions.v2026_03_31_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
+@removed(Versions.v2026_07_01)
 union CrossTenantProvisioningState {
   string,
   ResourceProvisioningState,
@@ -9065,6 +9085,7 @@ union CrossTenantProvisioningState {
 @added(Versions.v2026_03_31_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
+@removed(Versions.v2026_07_01)
 model CrossTenantVaultMappingProperties {
   /**
    * ARM resource ID of the source vault.
@@ -9111,6 +9132,7 @@ model CrossTenantVaultMappingProperties {
 @added(Versions.v2026_03_31_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
+@removed(Versions.v2026_07_01)
 model RemoveCrossTenantVaultMappingRequest {
   /**
    * ResourceGuardOperationRequests on which LAC check will be performed.
@@ -9124,6 +9146,7 @@ model RemoveCrossTenantVaultMappingRequest {
 @added(Versions.v2026_03_31_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
+@removed(Versions.v2026_07_01)
 union VaultMappingState {
   string,
 
@@ -9141,6 +9164,7 @@ union VaultMappingState {
 @added(Versions.v2026_03_31_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
+@removed(Versions.v2026_07_01)
 model CrossTenantVaultMappingStatusResponse {
   /**
    * Mapping name (if mapped).
@@ -9159,6 +9183,7 @@ model CrossTenantVaultMappingStatusResponse {
 @added(Versions.v2026_03_31_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
+@removed(Versions.v2026_07_01)
 model VaultCredentialCertificateRequest {
   /**
    * Options for certificate generation.
@@ -9172,6 +9197,7 @@ model VaultCredentialCertificateRequest {
 @added(Versions.v2026_03_31_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
+@removed(Versions.v2026_07_01)
 model VaultCredentialCertificateCreateOptions {
   /**
    * Validity period of the generated certificate in hours.
@@ -9186,6 +9212,7 @@ model VaultCredentialCertificateCreateOptions {
 @added(Versions.v2026_03_31_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
+@removed(Versions.v2026_07_01)
 model VaultCredentialCertificateResponse
   is Azure.ResourceManager.ProxyResource<VaultCredentialCertificateProperties> {
   /**
@@ -9205,6 +9232,7 @@ model VaultCredentialCertificateResponse
 @added(Versions.v2026_03_31_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
+@removed(Versions.v2026_07_01)
 union AuthType {
   string,
 
@@ -9219,6 +9247,7 @@ union AuthType {
 @added(Versions.v2026_03_31_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
+@removed(Versions.v2026_07_01)
 model VaultCredentialCertificateProperties {
   /**
    * Authentication type.
