@@ -77,7 +77,7 @@ union OverageBillingState {
 @doc("The notification properties for overage billing.")
 @added(Microsoft.Fabric.Versions.v2026_08_01_preview)
 model OverageBillingNotificationProperties {
-  @doc("The notification state for overage billing.")
+  @doc("The email notification state for overage billing.")
   email?: OverageBillingNotificationState;
 }
 
