@@ -2900,6 +2900,7 @@ model HostInfo {
   /**
    * The effective disk encryption key URL used by the host
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   effectiveDiskEncryptionKeyUrl?: string;
 }
 
