@@ -1727,6 +1727,7 @@ interface PageBlob {
       prevsnapshot?: string;
 
       /** Specifies the previous snapshot URL to be compared in the diff. */
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
       @header("x-ms-previous-snapshot-url")
       prevSnapshotUrl?: string;
 
