@@ -24,6 +24,16 @@ export interface AzsdkGenerateResponse {
   duration?: number;
 }
 
+export interface AzsdkSdkBreakingChange {
+  breakingchange: string;
+  category: string;
+  resolution?: string;
+}
+
+export interface AzsdkDetectBreakingchangeResponse {
+  hasBreakingChanges: boolean;
+  breakingChanges?: AzsdkSdkBreakingChange[];
+}
 /**
  * Response shape from `azsdk pkg build --output json`.
  */
@@ -104,6 +114,7 @@ export function parseAzsdkResponse<T>(output: string): T {
  */
 export function buildExecutionReport(
   generateResponse: AzsdkGenerateResponse | undefined,
+  breakingchangeResponse: AzsdkDetectBreakingchangeResponse | undefined,
   packResponse: AzsdkPackResponse | undefined,
   emitterCheck: EmitterCheckResult,
   buildResponse?: AzsdkBuildResponse,
@@ -138,6 +149,8 @@ export function buildExecutionReport(
     apiViewArtifact: undefined,
     // Deferred fields:
     // shouldLabelBreakingChange: undefined,
+    shouldLabelBreakingChange: breakingchangeResponse?.hasBreakingChanges,
+    breakingchanges: breakingchangeResponse?.breakingChanges,
   };
 
   return {

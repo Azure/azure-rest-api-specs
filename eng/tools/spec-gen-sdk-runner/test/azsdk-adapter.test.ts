@@ -135,7 +135,7 @@ describe("buildExecutionReport", () => {
   };
 
   test("returns notEnabled when emitter is disabled", () => {
-    const report = buildExecutionReport(undefined, undefined, disabledEmitter);
+    const report = buildExecutionReport(undefined, undefined, undefined, disabledEmitter);
     expect(report.executionResult).toBe("notEnabled");
     expect(report.packages).toHaveLength(0);
     expect(report.generateFromTypeSpec).toBe(true);
@@ -144,6 +144,7 @@ describe("buildExecutionReport", () => {
   test("returns succeeded when all steps succeed", () => {
     const report = buildExecutionReport(
       succeededGenerate,
+      undefined,
       succeededPack,
       enabledEmitter,
       succeededBuild,
@@ -155,23 +156,24 @@ describe("buildExecutionReport", () => {
   });
 
   test("returns failed when generate fails", () => {
-    const report = buildExecutionReport(failedGenerate, undefined, enabledEmitter);
+    const report = buildExecutionReport(failedGenerate, undefined, undefined, enabledEmitter);
     expect(report.executionResult).toBe("failed");
   });
 
   test("returns failed when generate response is undefined", () => {
-    const report = buildExecutionReport(undefined, undefined, enabledEmitter);
+    const report = buildExecutionReport(undefined, undefined, undefined, enabledEmitter);
     expect(report.executionResult).toBe("failed");
   });
 
   test("returns failed when build fails", () => {
-    const report = buildExecutionReport(succeededGenerate, undefined, enabledEmitter, failedBuild);
+    const report = buildExecutionReport(succeededGenerate, undefined, undefined, enabledEmitter, failedBuild);
     expect(report.executionResult).toBe("failed");
   });
 
   test("returns failed when pack fails", () => {
     const report = buildExecutionReport(
       succeededGenerate,
+      undefined,
       failedPack,
       enabledEmitter,
       succeededBuild,
@@ -180,13 +182,14 @@ describe("buildExecutionReport", () => {
   });
 
   test("returns succeeded when build is skipped (Python)", () => {
-    const report = buildExecutionReport(succeededGenerate, succeededPack, enabledEmitter);
+    const report = buildExecutionReport(succeededGenerate, undefined, succeededPack, enabledEmitter);
     expect(report.executionResult).toBe("succeeded");
   });
 
   test("stagedArtifactsFolder is undefined (deferred) even with pack response", () => {
     const report = buildExecutionReport(
       succeededGenerate,
+      undefined,
       succeededPack,
       enabledEmitter,
       succeededBuild,
@@ -197,6 +200,7 @@ describe("buildExecutionReport", () => {
   test("stagedArtifactsFolder is undefined when no pack response", () => {
     const report = buildExecutionReport(
       succeededGenerate,
+      undefined,
       undefined,
       enabledEmitter,
       succeededBuild,
@@ -214,6 +218,7 @@ describe("buildExecutionReport", () => {
     };
     const report = buildExecutionReport(
       succeededGenerate,
+      undefined,
       packNoMessage,
       enabledEmitter,
       succeededBuild,
@@ -227,7 +232,7 @@ describe("buildExecutionReport", () => {
       packageName: "emitter-package-name",
       languageKey: "rust",
     };
-    const report = buildExecutionReport(succeededGenerate, undefined, emitter);
+    const report = buildExecutionReport(succeededGenerate, undefined, undefined, emitter);
     expect(report.packages[0].packageName).toBe("emitter-package-name");
   });
 
@@ -236,7 +241,7 @@ describe("buildExecutionReport", () => {
       enabled: true,
       languageKey: "rust",
     };
-    const report = buildExecutionReport(succeededGenerate, undefined, emitter);
+    const report = buildExecutionReport(succeededGenerate, undefined, undefined, emitter);
     expect(report.packages[0].packageName).toBe("test-package");
   });
 });

@@ -10,8 +10,9 @@ steps:
     inputs:
       targetType: 'inline'
       script: |
-        & "${{ parameters.SourceRootPath }}/eng/common/mcp/azure-sdk-mcp.ps1" -InstallDirectory ${{ parameters.InstallDirectory }}
+        & "${{ parameters.SourceRootPath }}/eng/common/mcp/download-azsdk.ps1" -UpdatePathInProfile -InstallDirectory ${{ parameters.InstallDirectory }}
         $azsdkPath = Join-Path "${{ parameters.InstallDirectory }}" "azsdk$(if ($IsWindows) { '.exe' } else { '' })"
+        chmod +x $azsdkPath
         Write-Host "##vso[task.setvariable variable=AZSDK]$azsdkPath"
         Write-Host "Set AZSDK variable to: $azsdkPath"
       pwsh: true
