@@ -26915,31 +26915,8 @@
           "client_id": {
             "type": "string",
             "description": "The client ID of the agent instance. Also referred to as the instance ID"
-          },
-          "status": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/AgentIdentityStatus"
-              }
-            ],
-            "description": "The status of the agent identity. Present for both the agent instance identity and the agent blueprint."
           }
         }
-      },
-      "AgentIdentityStatus": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "active",
-              "disabled"
-            ]
-          }
-        ],
-        "description": "The status of an agent identity, applicable to both the agent instance identity and the agent blueprint."
       },
       "AgentKind": {
         "anyOf": [
@@ -75039,12 +75016,6 @@
               }
             ],
             "description": "Evaluation granularity. Null/omitted means per-item single-turn. Set to 'conversation' for per-conversation multi-turn simulation scoring."
-          },
-          "max_stalls": {
-            "type": "integer",
-            "format": "int32",
-            "minimum": 1,
-            "description": "Maximum number of consecutive reflective minibatch rejections before stopping early. A 'stall' occurs when the optimizer proposes a prompt change, evaluates it on a small subset, and the score does not improve — so no full validation-set evaluation is triggered. The counter resets whenever a minibatch passes and its full-validation score beats the current best. Only a sustained plateau of `max_stalls` consecutive minibatch failures triggers the stop. When omitted, the optimizer uses its internal default. Must be >= 1 when set."
           }
         },
         "description": "Tuning knobs and run-mode for an optimization job.",
@@ -78404,27 +78375,6 @@
         },
         "description": "A project connection resource."
       },
-      "ToolSearchToolboxTool": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "toolbox_search"
-            ],
-            "description": "The type of the tool. Always `toolbox_search`."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/ToolboxTool"
-          }
-        ],
-        "description": "A toolbox search tool stored in a toolbox."
-      },
       "ToolUseFineTuningDataGenerationJobOptions": {
         "type": "object",
         "required": [
@@ -78612,8 +78562,7 @@
             "reminder_preview": "#/components/schemas/ReminderPreviewToolboxTool",
             "work_iq_preview": "#/components/schemas/WorkIQPreviewToolboxTool",
             "fabric_iq_preview": "#/components/schemas/FabricIQPreviewToolboxTool",
-            "toolbox_search_preview": "#/components/schemas/ToolboxSearchPreviewToolboxTool",
-            "toolbox_search": "#/components/schemas/ToolSearchToolboxTool"
+            "toolbox_search_preview": "#/components/schemas/ToolboxSearchPreviewToolboxTool"
           }
         },
         "description": "An abstract representation of a tool stored in a toolbox."
@@ -78632,7 +78581,6 @@
           "reminder_preview",
           "work_iq_preview",
           "fabric_iq_preview",
-          "toolbox_search",
           "toolbox_search_preview"
         ],
         "description": "Supported tool types for tools stored in a toolbox."
