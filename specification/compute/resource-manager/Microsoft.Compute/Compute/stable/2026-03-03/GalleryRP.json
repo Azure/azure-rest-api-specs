@@ -5140,7 +5140,7 @@
         "consumptionEndTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The timestamp at which a soft-deleted gallery image version transitions to a simulated hard-deleted state and can no longer be consumed. It is calculated from the soft-deleted time plus the retention period, and is not present for active gallery image versions. In dateTime offset format.",
+          "description": "The timestamp after which a soft-deleted gallery image version is no longer consumable for VM/VMSS creation or VMSS scale out. It is calculated from the soft-deleted time plus the retention period, and is not present for active gallery image versions. In dateTime offset format.",
           "readOnly": true
         },
         "imageState": {
@@ -6340,7 +6340,7 @@
           {
             "name": "SoftDeleted",
             "value": "SoftDeleted",
-            "description": "The gallery image version has been soft-deleted. It is available for use only when a specific version is requested, and it will not be referenced by the latest version."
+            "description": "The gallery image version has been soft-deleted. It is available for use only when a specific version is requested, and it will not be resolved as the latest version."
           }
         ]
       }
@@ -7069,7 +7069,7 @@
         "consumptionEndTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The timestamp at which a soft-deleted gallery image version transitions to a simulated hard-deleted state and can no longer be consumed. It is calculated from the soft-deleted time plus the retention period. In dateTime offset format.",
+          "description": "The timestamp after which a soft-deleted gallery image version is no longer consumable for VM/VMSS creation or VMSS scale out. It is calculated from the soft-deleted time plus the retention period. In dateTime offset format.",
           "readOnly": true
         },
         "hardDeletionTargetTime": {
@@ -7809,7 +7809,7 @@
         "consumptionEndTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The timestamp at which a soft-deleted gallery image version transitions to a simulated hard-deleted state and can no longer be consumed. It is calculated from the soft-deleted time plus the retention period, and is not present for active gallery image versions. In dateTime offset format.",
+          "description": "The timestamp after which a soft-deleted gallery image version is no longer consumable for VM/VMSS creation or VMSS scale out. It is calculated from the soft-deleted time plus the retention period, and is not present for active gallery image versions. In dateTime offset format.",
           "readOnly": true
         },
         "imageState": {

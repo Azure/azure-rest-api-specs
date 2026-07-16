@@ -1824,7 +1824,7 @@ model GallerySoftDeletedResourceProperties {
   softDeletedTime?: string;
 
   /**
-   * The timestamp at which a soft-deleted gallery image version transitions to a simulated hard-deleted state and can no longer be consumed. It is calculated from the soft-deleted time plus the retention period. In dateTime offset format.
+   * The timestamp after which a soft-deleted gallery image version is no longer consumable for VM/VMSS creation or VMSS scale out. It is calculated from the soft-deleted time plus the retention period. In dateTime offset format.
    */
   @added(Versions.v2026_03_03)
   @visibility(Lifecycle.Read)
@@ -2440,7 +2440,7 @@ union GalleryImageVersionState {
   Active: "Active",
 
   /**
-   * The gallery image version has been soft-deleted. It is available for use only when a specific version is requested, and it will not be referenced by the latest version.
+   * The gallery image version has been soft-deleted. It is available for use only when a specific version is requested, and it will not be resolved as the latest version.
    */
   SoftDeleted: "SoftDeleted",
 }
@@ -2479,7 +2479,7 @@ model SharedGalleryImageVersionProperties {
   artifactTags?: Record<string>;
 
   /**
-   * The timestamp at which a soft-deleted gallery image version transitions to a simulated hard-deleted state and can no longer be consumed. It is calculated from the soft-deleted time plus the retention period, and is not present for active gallery image versions. In dateTime offset format.
+   * The timestamp after which a soft-deleted gallery image version is no longer consumable for VM/VMSS creation or VMSS scale out. It is calculated from the soft-deleted time plus the retention period, and is not present for active gallery image versions. In dateTime offset format.
    */
   @added(Versions.v2026_03_03)
   @visibility(Lifecycle.Read)
@@ -2773,7 +2773,7 @@ model CommunityGalleryImageVersionProperties {
   artifactTags?: Record<string>;
 
   /**
-   * The timestamp at which a soft-deleted gallery image version transitions to a simulated hard-deleted state and can no longer be consumed. It is calculated from the soft-deleted time plus the retention period, and is not present for active gallery image versions. In dateTime offset format.
+   * The timestamp after which a soft-deleted gallery image version is no longer consumable for VM/VMSS creation or VMSS scale out. It is calculated from the soft-deleted time plus the retention period, and is not present for active gallery image versions. In dateTime offset format.
    */
   @added(Versions.v2026_03_03)
   @visibility(Lifecycle.Read)
