@@ -42,6 +42,12 @@ using Microsoft.Synapse;
   "kustoPoolResourceId"
 );
 
+@@clientName(Resource, "SynapseResource");
+@@clientName(
+  ResourceProvisioningState,
+  "SynapseResourceProvisioningState"
+);
+
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(KustoPoolPrivateLinkResources.properties);
 
