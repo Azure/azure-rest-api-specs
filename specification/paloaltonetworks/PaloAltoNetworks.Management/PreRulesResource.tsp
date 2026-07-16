@@ -15,8 +15,10 @@ namespace PaloAltoNetworks.Cloudngfw;
  * PreRulestack rule list
  */
 @parentResource(GlobalRulestackResource)
-model PreRulesResource
-  is Azure.ResourceManager.ProxyResource<RuleEntry, false> {
+model PreRulesResource is Azure.ResourceManager.ProxyResource<
+  RuleEntry,
+  false
+> {
   ...ResourceNameParameter<
     Resource = PreRulesResource,
     KeyName = "priority",

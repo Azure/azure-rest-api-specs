@@ -15,8 +15,10 @@ namespace PaloAltoNetworks.Cloudngfw;
  * LocalRulestack rule list
  */
 @parentResource(LocalRulestackResource)
-model LocalRulesResource
-  is Azure.ResourceManager.ProxyResource<RuleEntry, false> {
+model LocalRulesResource is Azure.ResourceManager.ProxyResource<
+  RuleEntry,
+  false
+> {
   ...ResourceNameParameter<
     Resource = LocalRulesResource,
     KeyName = "priority",
