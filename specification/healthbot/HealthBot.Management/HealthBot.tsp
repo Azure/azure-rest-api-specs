@@ -12,8 +12,10 @@ namespace Microsoft.HealthBot;
 /**
  * Azure Health Bot resource definition
  */
-model HealthBot
-  is Azure.ResourceManager.TrackedResource<HealthBotProperties, true> {
+model HealthBot is Azure.ResourceManager.TrackedResource<
+  HealthBotProperties,
+  true
+> {
   ...ResourceNameParameter<
     Resource = HealthBot,
     KeyName = "botName",

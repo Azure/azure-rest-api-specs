@@ -15,8 +15,10 @@ namespace Microsoft.AzureArcData;
  * A failover group resource.
  */
 @parentResource(SqlManagedInstance)
-model FailoverGroupResource
-  is Azure.ResourceManager.ProxyResource<FailoverGroupProperties, false> {
+model FailoverGroupResource is Azure.ResourceManager.ProxyResource<
+  FailoverGroupProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = FailoverGroupResource,
     KeyName = "failoverGroupName",
