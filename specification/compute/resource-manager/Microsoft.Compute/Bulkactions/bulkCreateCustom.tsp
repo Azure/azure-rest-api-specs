@@ -258,7 +258,7 @@ model BulkCreateCustomListResult {
 
   @nextLink
   @doc("The URL to get the next set of results.")
-  nextLink?: string;
+  nextLink?: url;
 }
 
 // ============================================================
