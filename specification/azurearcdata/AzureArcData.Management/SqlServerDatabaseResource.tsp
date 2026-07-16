@@ -15,11 +15,10 @@ namespace Microsoft.AzureArcData;
  * Arc Sql Server database
  */
 @parentResource(SqlServerInstance)
-model SqlServerDatabaseResource
-  is Azure.ResourceManager.TrackedResource<
-    SqlServerDatabaseResourceProperties,
-    false
-  > {
+model SqlServerDatabaseResource is Azure.ResourceManager.TrackedResource<
+  SqlServerDatabaseResourceProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = SqlServerDatabaseResource,
     KeyName = "databaseName",

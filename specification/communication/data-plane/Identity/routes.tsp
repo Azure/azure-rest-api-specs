@@ -169,15 +169,14 @@ interface TeamsExtensionOperations {
       @body
       body: TeamsExtensionAssignmentCreateOrUpdateRequest;
     },
-
-      | {
-          @statusCode statusCode: 200;
-          @body result: TeamsExtensionAssignmentResponse;
-        }
-      | {
-          @statusCode statusCode: 201;
-          @body result: TeamsExtensionAssignmentResponse;
-        }
+    | {
+        @statusCode statusCode: 200;
+        @body result: TeamsExtensionAssignmentResponse;
+      }
+    | {
+        @statusCode statusCode: 201;
+        @body result: TeamsExtensionAssignmentResponse;
+      }
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Brownfield conversion from existing swagger"
