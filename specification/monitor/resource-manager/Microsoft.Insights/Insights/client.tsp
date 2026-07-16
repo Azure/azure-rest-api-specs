@@ -14,6 +14,9 @@ import "./ScheduledQueryRuleApi/main.tsp";
 import "./MetricBaselinesApi/main.tsp";
 import "./ActionGroupsApi/main.tsp";
 import "./NetworkSecurityPerimeterApi/main.tsp";
+import "./TenantActionGroups/main.tsp";
+import "./VmInsightsOnboarding/main.tsp";
+import "./DiagnosticsSettings/main.tsp";
 import "./Common/main.tsp";
 
 using Azure.ClientGenerator.Core;
@@ -34,6 +37,9 @@ using Microsoft.Common;
 using PrivateLinkScopesApi;
 using MetricsApi;
 using ServiceDiagnosticsSettingsApi;
+using TenantActionGroups;
+using VmInsightsOnboarding;
+using DiagnosticsSettings;
 
 #suppress "@azure-tools/typespec-client-generator-core/inconsistent-multiple-service-dependency" "temporarily suppressing"
 @client({
@@ -52,7 +58,10 @@ using ServiceDiagnosticsSettingsApi;
     ScheduledQueryRuleApi,
     MetricBaselinesApi,
     ActionGroupsApi,
-    NetworkSecurityPerimeterApi
+    NetworkSecurityPerimeterApi,
+    TenantActionGroups,
+    VmInsightsOnboarding,
+    DiagnosticsSettings
   ],
   autoMergeService: true,
 })
@@ -79,11 +88,11 @@ namespace Microsoft.InsightsCombinedClient;
   "csharp"
 );
 @@clientName(
-  ActionGroupsApi.ActionGroupPatch,
+  Microsoft.Common.ActionGroupPatch,
   "ActionGroupPatchProperties",
   "csharp"
 );
-@@clientName(ActionGroupsApi.ActionGroupPatch.enabled, "IsEnabled", "csharp");
+@@clientName(Microsoft.Common.ActionGroupPatch.enabled, "IsEnabled", "csharp");
 @@clientName(
   ActionGroupsApi.NotificationRequestBody,
   "NotificationContent",
@@ -94,7 +103,7 @@ namespace Microsoft.InsightsCombinedClient;
   "NotificationStatus",
   "csharp"
 );
-@@clientName(ActionGroupsApi.Context, "NotificationContext", "csharp");
+@@clientName(Microsoft.Common.Context, "NotificationContext", "csharp");
 @@clientName(
   ActionGroupsApi.ActionDetail,
   "NotificationActionDetail",
@@ -628,6 +637,11 @@ namespace Microsoft.InsightsCombinedClient;
   "csharp"
 );
 @@clientName(
+  DataCollectionApi.DataSourcesSpec.performanceCountersOTel,
+  "PerformanceCountersOtel",
+  "csharp"
+);
+@@clientName(
   DataCollectionApi.DataFlow.captureOverflow,
   "ShouldCaptureOverflow",
   "csharp"
@@ -851,8 +865,8 @@ namespace Microsoft.InsightsCombinedClient;
   "ActivityLogAlertAnyOfOrLeafCondition",
   "csharp"
 );
-@@clientName(ActionGroupsApi.EmailReceiver, "MonitorEmailReceiver", "csharp");
-@@clientName(ActionGroupsApi.SmsReceiver, "MonitorSmsReceiver", "csharp");
+@@clientName(Microsoft.Common.EmailReceiver, "MonitorEmailReceiver", "csharp");
+@@clientName(Microsoft.Common.SmsReceiver, "MonitorSmsReceiver", "csharp");
 @@clientName(
   ActionGroupsApi.WebhookReceiver,
   "MonitorWebhookReceiver",
@@ -860,7 +874,7 @@ namespace Microsoft.InsightsCombinedClient;
 );
 @@clientName(ActionGroupsApi.ItsmReceiver, "MonitorItsmReceiver", "csharp");
 @@clientName(
-  ActionGroupsApi.AzureAppPushReceiver,
+  Microsoft.Common.AzureAppPushReceiver,
   "MonitorAzureAppPushReceiver",
   "csharp"
 );
@@ -869,7 +883,7 @@ namespace Microsoft.InsightsCombinedClient;
   "MonitorAutomationRunbookReceiver",
   "csharp"
 );
-@@clientName(ActionGroupsApi.VoiceReceiver, "MonitorVoiceReceiver", "csharp");
+@@clientName(Microsoft.Common.VoiceReceiver, "MonitorVoiceReceiver", "csharp");
 @@clientName(
   ActionGroupsApi.LogicAppReceiver,
   "MonitorLogicAppReceiver",
@@ -905,7 +919,41 @@ namespace Microsoft.InsightsCombinedClient;
   "MonitorIncidentManagementService",
   "csharp"
 );
-@@clientName(ActionGroupsApi.ReceiverStatus, "MonitorReceiverStatus", "csharp");
+@@clientName(
+  Microsoft.Common.ReceiverStatus,
+  "MonitorReceiverStatus",
+  "csharp"
+);
+
+// These models collide by name across TenantActionGroups and ActionGroupsApi,
+// but their shapes differ, so they must remain separate models. Rename the
+// TenantActionGroups versions for the JS emitter (@clientName, per the compiler
+// warning) instead of merging them:
+//   - WebhookReceiver: ActionGroupsApi adds a `managedIdentity` property.
+//   - ActionGroupPatchBody: ActionGroupsApi adds an `identity` property.
+//   - ActionDetail: property names differ (camelCase here vs PascalCase there).
+//   - TestNotificationDetailsResponse: references the differing ActionDetail.
+@@clientName(
+  TenantActionGroups.WebhookReceiver,
+  "TenantActionGroupWebhookReceiver",
+  "java,javascript,python,go"
+);
+@@clientName(
+  TenantActionGroups.ActionGroupPatchBody,
+  "TenantActionGroupPatchBody",
+  "java,javascript,python,go"
+);
+@@clientName(
+  TenantActionGroups.ActionDetail,
+  "TenantActionGroupActionDetail",
+  "java,javascript,python,go"
+);
+@@clientName(
+  TenantActionGroups.TestNotificationDetailsResponse,
+  "TenantActionGroupTestNotificationDetailsResponse",
+  "java,javascript,python,go"
+);
+
 @@clientName(
   DataCollectionApi.KnownDataCollectionEndpointResourceKind,
   "DataCollectionEndpointResourceKind",
@@ -1396,7 +1444,24 @@ model MetricSettings {
 @@alternateType(
   ServiceDiagnosticsSettingsApi.MetricSettings,
   MetricSettings,
-  "csharp,java,python,javascript"
+  "csharp"
+);
+// For JS, redirect straight to DiagnosticsSettings.DiagnosticsMetricSettings (identical to the
+// local MetricSettings) so the local Microsoft.InsightsCombinedClient.MetricSettings
+// is not emitted and no longer collides with DiagnosticsSettings.DiagnosticsMetricSettings.
+// Python flattens models into a single module like JS, so it takes the same redirect.
+// Java: use the newer 2021-05-01-preview DiagnosticsSettings model as the canonical
+// MetricSettings; ServiceDiagnosticsSettingsApi (2016-09-01) redirects to it, so its own
+// MetricSettings is not emitted.
+@@alternateType(
+  ServiceDiagnosticsSettingsApi.MetricSettings,
+  DiagnosticsSettings.DiagnosticsMetricSettings,
+  "java,javascript,python,go"
+);
+@@clientName(
+  DiagnosticsSettings.DiagnosticsMetricSettings,
+  "MetricSettings",
+  "java,javascript,go"
 );
 
 /**
@@ -1428,7 +1493,24 @@ model LogSettings {
 @@alternateType(
   ServiceDiagnosticsSettingsApi.LogSettings,
   LogSettings,
-  "csharp,java,python"
+  "csharp"
+);
+// For JS, redirect straight to DiagnosticsSettings.DiagnosticsLogSettings (identical to the local
+// LogSettings) so ServiceDiagnosticsSettingsApi.LogSettings no longer collides with
+// DiagnosticsSettings.DiagnosticsLogSettings.
+// Python flattens models into a single module like JS, so it takes the same redirect.
+// Java: use the newer 2021-05-01-preview DiagnosticsSettings model as the canonical
+// LogSettings; ServiceDiagnosticsSettingsApi (2016-09-01) redirects to it, so its own
+// LogSettings is not emitted.
+@@alternateType(
+  ServiceDiagnosticsSettingsApi.LogSettings,
+  DiagnosticsSettings.DiagnosticsLogSettings,
+  "java,javascript,python,go"
+);
+@@clientName(
+  DiagnosticsSettings.DiagnosticsLogSettings,
+  "LogSettings",
+  "java,javascript,go"
 );
 
 @@clientLocation(
@@ -1495,7 +1577,12 @@ model AccessRulePropertiesSubscriptionsItem {
 @@alternateType(
   Azure.ResourceManager.CommonTypes.AccessRuleProperties.subscriptions,
   AccessRulePropertiesSubscriptionsItem[],
-  "csharp,go"
+  "csharp"
+);
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.AccessRuleProperties.subscriptions,
+  AccessRulePropertiesSubscriptionsItem,
+  "go"
 );
 @@clientName(
   Azure.ResourceManager.CommonTypes.ErrorDetail,
@@ -1630,4 +1717,16 @@ op PrivateLinkScopeOperationStatusGetCustomized(
   Microsoft.Common.CommonErrorResponse,
   "ErrorResponseCommon",
   "python"
+);
+
+@@clientLocation(
+  VMInsightsOnboardingStatuses.getOnboardingStatus,
+  "$DO_NOT_NORMALIZE$vMInsights",
+  "javascript"
+);
+
+@@clientName(
+  xmsClientTenantIdParameter.`x-ms-client-tenant-id`,
+  "xmsClientTenantId",
+  "go"
 );

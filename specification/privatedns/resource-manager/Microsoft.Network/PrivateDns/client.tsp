@@ -5,6 +5,7 @@ using Microsoft.Network;
 
 @@clientName(Microsoft.Network, "PrivateDnsManagementClient", "javascript");
 @@clientName(Microsoft.Network, "PrivateDnsManagementClient", "java");
+@@clientName(Microsoft.Network, "PrivateDnsManagementClient", "python");
 
 // Add .NET SDK config
 #suppress "@azure-tools/typespec-client-generator-core/client-option" "Customize generated C# resource names for expanded Private DNS record-set resources."

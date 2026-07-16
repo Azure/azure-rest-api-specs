@@ -15,8 +15,10 @@ namespace PaloAltoNetworks.Cloudngfw;
  * GlobalRulestack Certificate Object
  */
 @parentResource(GlobalRulestackResource)
-model CertificateObjectGlobalRulestackResource
-  is Azure.ResourceManager.ProxyResource<CertificateObject, false> {
+model CertificateObjectGlobalRulestackResource is Azure.ResourceManager.ProxyResource<
+  CertificateObject,
+  false
+> {
   ...ResourceNameParameter<
     Resource = CertificateObjectGlobalRulestackResource,
     KeyName = "name",

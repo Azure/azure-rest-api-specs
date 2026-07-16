@@ -15,8 +15,10 @@ namespace Microsoft.DataBoxEdge;
  * The bandwidth schedule details.
  */
 @parentResource(DataBoxEdgeDevice)
-model BandwidthSchedule
-  is Azure.ResourceManager.ProxyResource<BandwidthScheduleProperties, false> {
+model BandwidthSchedule is Azure.ResourceManager.ProxyResource<
+  BandwidthScheduleProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = BandwidthSchedule,
     KeyName = "name",

@@ -8,8 +8,10 @@ using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
 @doc("The Access Control List resource definition.")
-model AccessControlList
-  is Azure.ResourceManager.TrackedResource<AccessControlListProperties, false> {
+model AccessControlList is Azure.ResourceManager.TrackedResource<
+  AccessControlListProperties,
+  false
+> {
   @doc("Name of the Access Control List.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
