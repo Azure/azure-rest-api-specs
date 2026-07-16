@@ -33,12 +33,13 @@ import "./TasksAPI/main.tsp";
 import "./csharp-arm-models.tsp";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
+import "@typespec/http";
 import "@typespec/versioning";
 
 using Azure.ClientGenerator.Core;
 using Azure.ClientGenerator.Core.Legacy;
 using TypeSpec.Versioning;
-using TypeSpec.Http;
+using Http;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.Core;
@@ -270,6 +271,8 @@ op privateEndpointConnectionsGetCustomization(
   ...Azure.ResourceManager.Legacy.Provider,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ...PrivateLinkNameParameter,
+
+  @path
   privateEndpointConnectionName: string,
 ): ArmResponse<Azure.ResourceManager.PrivateEndpointConnection> | ErrorResponse;
 
@@ -288,8 +291,11 @@ op privateEndpointConnectionsCreateOrUpdateCustomization(
   ...Azure.ResourceManager.Legacy.Provider,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ...PrivateLinkNameParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @path
   privateEndpointConnectionName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resource: PrivateLinksAPI.PrivateEndpointConnection,
 ):
@@ -321,7 +327,9 @@ op privateEndpointConnectionsDeleteCustomization(
   ...Azure.ResourceManager.Legacy.Provider,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ...PrivateLinkNameParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @path
   privateEndpointConnectionName: string,
 ):
   | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
@@ -361,7 +369,9 @@ op privateLinkResourcesGetCustomization(
   ...Azure.ResourceManager.Legacy.Provider,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ...PrivateLinkNameParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @path
   groupId: string,
 ): ArmResponse<PrivateLinkGroupResource> | ErrorResponse;
 

@@ -20,20 +20,20 @@ jobs:
 
     steps:
       - name: Checkout eng
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           sparse-checkout: |
             eng/
             .github/
 
       - name: Checkout 'after' state
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 2
           path: after
 
       - name: Checkout 'before' state
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           ref: ${{ github.event.pull_request.base.sha }}
           path: before
