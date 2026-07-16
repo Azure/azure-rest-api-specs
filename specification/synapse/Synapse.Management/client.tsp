@@ -108,6 +108,7 @@ using Microsoft.Synapse;
 @@flattenProperty(IpFirewallRuleInfo.properties);
 
 @@clientName(Keys.createOrUpdate::parameters.resource, "keyProperties");
+@@clientName(Key, "SynapseKey");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(Key.properties);
 
@@ -314,6 +315,7 @@ using Microsoft.Synapse;
 @@clientName(Workspaces.createOrUpdate::parameters.resource, "workspaceInfo");
 @@clientName(Workspaces.update::parameters.properties, "workspacePatchInfo");
 @@clientName(Workspaces.replaceAll::parameters.body, "request");
+@@clientName(Workspace, "SynapseWorkspace");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(Workspace.properties);
 
@@ -403,6 +405,7 @@ using Microsoft.Synapse;
 
 @@clientName(Databases.createOrUpdate::parameters.resource, "parameters");
 @@clientName(Databases.update::parameters.properties, "parameters");
+@@clientName(Database, "SynapseDatabase");
 @@clientName(
   Databases.checkNameAvailability::parameters.body,
   "dataConnectionName"
