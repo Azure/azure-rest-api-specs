@@ -13,11 +13,10 @@ namespace Microsoft.AzureArcData;
 /**
  * A SqlManagedInstance.
  */
-model SqlManagedInstance
-  is Azure.ResourceManager.TrackedResource<
-    SqlManagedInstanceProperties,
-    false
-  > {
+model SqlManagedInstance is Azure.ResourceManager.TrackedResource<
+  SqlManagedInstanceProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = SqlManagedInstance,
     KeyName = "sqlManagedInstanceName",

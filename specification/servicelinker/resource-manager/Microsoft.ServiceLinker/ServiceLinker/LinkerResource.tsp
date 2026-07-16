@@ -12,8 +12,10 @@ namespace Microsoft.ServiceLinker;
 /**
  * Linker of source and target resource
  */
-model LinkerResource
-  is Azure.ResourceManager.ExtensionResource<LinkerProperties, false> {
+model LinkerResource is Azure.ResourceManager.ExtensionResource<
+  LinkerProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = LinkerResource,
     KeyName = "linkerName",

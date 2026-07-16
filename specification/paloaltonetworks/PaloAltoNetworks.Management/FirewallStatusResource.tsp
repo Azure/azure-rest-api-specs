@@ -16,8 +16,10 @@ namespace PaloAltoNetworks.Cloudngfw;
  */
 @singleton("default")
 @parentResource(FirewallResource)
-model FirewallStatusResource
-  is Azure.ResourceManager.ProxyResource<FirewallStatusProperty, false> {
+model FirewallStatusResource is Azure.ResourceManager.ProxyResource<
+  FirewallStatusProperty,
+  false
+> {
   ...ResourceNameParameter<
     Resource = FirewallStatusResource,
     KeyName = "status",

@@ -9,8 +9,10 @@ using TypeSpec.Versioning;
 namespace Microsoft.ManagedNetworkFabric;
 @doc("The NetworkDeviceSku resource definition.")
 @subscriptionResource
-model NetworkDeviceSku
-  is Azure.ResourceManager.ProxyResource<NetworkDeviceSkuProperties, false> {
+model NetworkDeviceSku is Azure.ResourceManager.ProxyResource<
+  NetworkDeviceSkuProperties,
+  false
+> {
   @doc("Name of the Network Device SKU.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path

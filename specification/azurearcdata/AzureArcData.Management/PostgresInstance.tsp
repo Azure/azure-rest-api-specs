@@ -13,8 +13,10 @@ namespace Microsoft.AzureArcData;
 /**
  * A Postgres Instance.
  */
-model PostgresInstance
-  is Azure.ResourceManager.TrackedResource<PostgresInstanceProperties, false> {
+model PostgresInstance is Azure.ResourceManager.TrackedResource<
+  PostgresInstanceProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = PostgresInstance,
     KeyName = "postgresInstanceName",
