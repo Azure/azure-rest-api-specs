@@ -13,8 +13,10 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.ProviderHub;
 
 @parentResource(ProviderRegistration)
-model CustomRollout
-  is Azure.ResourceManager.ProxyResource<CustomRolloutProperties, false> {
+model CustomRollout is Azure.ResourceManager.ProxyResource<
+  CustomRolloutProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = CustomRollout,
     KeyName = "rolloutName",

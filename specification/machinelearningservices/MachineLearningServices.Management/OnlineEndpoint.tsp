@@ -13,8 +13,10 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.MachineLearningServices;
 
 @parentResource(Workspace)
-model OnlineEndpoint
-  is Azure.ResourceManager.TrackedResource<OnlineEndpointProperties, false> {
+model OnlineEndpoint is Azure.ResourceManager.TrackedResource<
+  OnlineEndpointProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = OnlineEndpoint,
     KeyName = "endpointName",
