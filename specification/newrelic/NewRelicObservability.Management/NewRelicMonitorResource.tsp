@@ -11,8 +11,10 @@ namespace NewRelic.Observability;
 /**
  * A Monitor Resource by NewRelic
  */
-model NewRelicMonitorResource
-  is Azure.ResourceManager.TrackedResource<MonitorProperties, false> {
+model NewRelicMonitorResource is Azure.ResourceManager.TrackedResource<
+  MonitorProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = NewRelicMonitorResource,
     KeyName = "monitorName",
@@ -115,10 +117,9 @@ interface NewRelicMonitorResources {
   switchBilling is ArmResourceActionSync<
     NewRelicMonitorResource,
     SwitchBillingRequest,
-
-      | ArmResponse<NewRelicMonitorResource>
-      | (AcceptedResponse & Azure.Core.Foundations.RetryAfterHeader)
-      | NoContentResponse
+    | ArmResponse<NewRelicMonitorResource>
+    | (AcceptedResponse & Azure.Core.Foundations.RetryAfterHeader)
+    | NoContentResponse
   >;
 
   /**

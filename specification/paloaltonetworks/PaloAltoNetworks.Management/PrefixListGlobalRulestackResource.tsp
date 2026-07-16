@@ -15,8 +15,10 @@ namespace PaloAltoNetworks.Cloudngfw;
  * GlobalRulestack prefixList
  */
 @parentResource(GlobalRulestackResource)
-model PrefixListGlobalRulestackResource
-  is Azure.ResourceManager.ProxyResource<PrefixObject, false> {
+model PrefixListGlobalRulestackResource is Azure.ResourceManager.ProxyResource<
+  PrefixObject,
+  false
+> {
   ...ResourceNameParameter<
     Resource = PrefixListGlobalRulestackResource,
     KeyName = "name",

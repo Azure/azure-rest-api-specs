@@ -27,13 +27,12 @@ model RelayNamespace
 @@maxLength(RelayNamespaceNameParameter.name, 50);
 @@minLength(RelayNamespaceNameParameter.name, 6);
 @@doc(RelayNamespaceNameParameter.name, "The namespace name");
-model RelayNamespaceNameParameter
-  is ResourceNameParameter<
-    Resource = RelayNamespace,
-    KeyName = "namespaceName",
-    SegmentName = "namespaces",
-    NamePattern = ""
-  >;
+model RelayNamespaceNameParameter is ResourceNameParameter<
+  Resource = RelayNamespace,
+  KeyName = "namespaceName",
+  SegmentName = "namespaces",
+  NamePattern = ""
+>;
 
 @armResourceOperations
 interface RelayNamespaces {

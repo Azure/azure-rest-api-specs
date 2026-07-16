@@ -8,11 +8,10 @@ using TypeSpec.Versioning;
 namespace Microsoft.ManagedNetworkFabric;
 @doc("Defines the NetworkBootstrapInterface resource.")
 @parentResource(NetworkBootstrapDevice)
-model NetworkBootstrapInterface
-  is Azure.ResourceManager.ProxyResource<
-    NetworkBootstrapInterfaceProperties,
-    false
-  > {
+model NetworkBootstrapInterface is Azure.ResourceManager.ProxyResource<
+  NetworkBootstrapInterfaceProperties,
+  false
+> {
   @doc("Name of the Network Bootstrap Interface.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
