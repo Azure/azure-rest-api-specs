@@ -83,7 +83,6 @@ using Microsoft.EventHub;
 @@clientName(Encryption.keySource, "KeySource", "csharp");
 @@clientName(SchemaType, "EventHubsSchemaType", "csharp");
 @@clientName(SchemaCompatibility, "EventHubsSchemaCompatibility", "csharp");
-@@clientName(IpAddressType, "EventHubsIPAddressType", "csharp");
 @@clientName(ClusterProperties.createdAt, "CreatedOn", "csharp");
 @@alternateType(ClusterProperties.createdAt, utcDateTime, "csharp");
 @@clientName(ClusterProperties.updatedAt, "UpdatedOn", "csharp");
@@ -407,7 +406,7 @@ using Microsoft.EventHub;
   "csharp"
 );
 @@clientName(NetworkRuleSetProperties.ipRules, "IPRules", "csharp");
-@@clientName(IpAddressType, "EventHubIPAddressType", "csharp");
+@@clientName(IpAddressType, "EventHubsIPAddressType", "csharp");
 @@clientName(EHNamespaceProperties.ipAddressType, "IPAddressType", "csharp");
 @@clientName(NamespaceReplicaLocation.roleType, "RoleType", "csharp");
 @@clientName(
