@@ -179,3 +179,16 @@ using Microsoft.Confluent;
 @@clientName(TopicRecords.create::parameters.resource, "body");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(TopicRecord.properties);
+
+// SaaS Operations
+@@clientLocation(OrganizationResources.linkSaaS, "Organization", "!csharp");
+@@clientLocation(
+  OrganizationResources.latestLinkedSaaS,
+  "Organization",
+  "!csharp"
+);
+@@clientLocation(
+  SaaSOperationGroup.activateResource,
+  "Organization",
+  "!csharp"
+);
