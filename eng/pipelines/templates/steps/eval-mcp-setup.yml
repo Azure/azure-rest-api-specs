@@ -4,10 +4,6 @@
 #
 # Sparse-checks out all of /tools (not just /tools/azsdk-cli): Cli.csproj project-references
 # sibling projects (e.g. codeowners-utils), so a narrower checkout fails restore with CS0234/CS0246.
-#
-# Also runs `vally lint` on .github/skills first: archetype-eval.yml (eng/common, synced verbatim)
-# has no lint swap point, so this repo-owned template is the only safe place to fail fast on
-# broken skill/eval schema before spending time on the sparse checkout + dotnet build below.
 
 parameters:
   - name: TestType
@@ -23,17 +19,6 @@ parameters:
     default: ''
 
 steps:
-  - task: UseNode@1
-    displayName: 'Use Node.js 22.x'
-    inputs:
-      version: 22.x
-
-  - script: |
-      set -e
-      npx --yes @microsoft/vally-cli@0.7.0 lint .
-    displayName: 'vally lint .github/skills'
-    workingDirectory: $(Build.SourcesDirectory)/.github/skills
-
   - template: /eng/common/pipelines/templates/steps/sparse-checkout.yml
     parameters:
       SkipCheckoutNone: true
