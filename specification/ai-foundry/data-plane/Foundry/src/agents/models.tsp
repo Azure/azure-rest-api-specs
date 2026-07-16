@@ -587,7 +587,7 @@ model EntraAuthorizationScheme extends AgentEndpointAuthorizationScheme {
   type: AgentEndpointAuthorizationSchemeType.Entra;
 
   @doc("The Entra sign-in configuration governing how the agent endpoint validates inbound tokens. Defaults to the platform default behavior ('foundry' mode) when not specified.")
-  sign_in?: EntraSignInConfig;
+  sign_in_config?: EntraSignInConfig;
 }
 
 @doc("The Entra sign-in mode governing which Entra application the agent endpoint validates inbound tokens against.")
@@ -717,7 +717,7 @@ model AgentEndpointConfig {
 
   @doc("""
     The authorization schemes supported by the agent endpoint.
-    When no Entra scheme is present (or its `sign_in` is unset), the endpoint defaults to the
+    When no Entra scheme is present (or its `sign_in_config` is unset), the endpoint defaults to the
     'foundry' Entra sign-in mode, validating inbound tokens against the Foundry application.
     """)
   authorization_schemes?: AgentEndpointAuthorizationScheme[];

@@ -38216,7 +38216,7 @@ components:
             $ref: '#/components/schemas/AgentEndpointAuthorizationScheme'
           description: |-
             The authorization schemes supported by the agent endpoint.
-            When no Entra scheme is present (or its `sign_in` is unset), the endpoint defaults to the
+            When no Entra scheme is present (or its `sign_in_config` is unset), the endpoint defaults to the
             'foundry' Entra sign-in mode, validating inbound tokens against the Foundry application.
     AgentEndpointConfigUpdate:
       type: object
@@ -38235,7 +38235,7 @@ components:
             $ref: '#/components/schemas/AgentEndpointAuthorizationScheme'
           description: |-
             The authorization schemes supported by the agent endpoint.
-            When no Entra scheme is present (or its `sign_in` is unset), the endpoint defaults to the
+            When no Entra scheme is present (or its `sign_in_config` is unset), the endpoint defaults to the
             'foundry' Entra sign-in mode, validating inbound tokens against the Foundry application.
     AgentEndpointProtocol:
       anyOf:
@@ -41658,7 +41658,7 @@ components:
           type: string
           enum:
             - Entra
-        sign_in:
+        sign_in_config:
           allOf:
             - $ref: '#/components/schemas/EntraSignInConfig'
           description: The Entra sign-in configuration governing how the agent endpoint validates inbound tokens. Defaults to the platform default behavior ('foundry' mode) when not specified.
