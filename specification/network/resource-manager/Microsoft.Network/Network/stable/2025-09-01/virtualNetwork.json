@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "WebApplicationFirewallManagement",
+    "title": "NetworkManagementClient",
     "version": "2025-09-01",
-    "description": "APIs to manage web application firewall rules.",
+    "description": "APIs to manage Microsoft Azure network resources.",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -164,6 +164,9 @@
     },
     {
       "name": "Usages"
+    },
+    {
+      "name": "AddressPrefixSets"
     }
   ],
   "paths": {
@@ -2071,6 +2074,259 @@
         "x-ms-examples": {
           "Delete application security group": {
             "$ref": "./examples/ApplicationSecurityGroupDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationSecurityGroups/{applicationSecurityGroupName}/addressPrefixSets": {
+      "get": {
+        "operationId": "AddressPrefixSets_List",
+        "tags": [
+          "AddressPrefixSets"
+        ],
+        "description": "Gets all address prefix sets in an application security group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "applicationSecurityGroupName",
+            "in": "path",
+            "description": "The name of the application security group.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AddressPrefixSetListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List address prefix sets": {
+            "$ref": "./examples/AddressPrefixSetList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationSecurityGroups/{applicationSecurityGroupName}/addressPrefixSets/{addressPrefixSetName}": {
+      "get": {
+        "operationId": "AddressPrefixSets_Get",
+        "tags": [
+          "AddressPrefixSets"
+        ],
+        "description": "Gets the specified address prefix set.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "applicationSecurityGroupName",
+            "in": "path",
+            "description": "The name of the application security group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "addressPrefixSetName",
+            "in": "path",
+            "description": "The name of the address prefix set.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9_.-]{0,78}[a-zA-Z0-9_])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AddressPrefixSet"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get address prefix set": {
+            "$ref": "./examples/AddressPrefixSetGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AddressPrefixSets_CreateOrUpdate",
+        "tags": [
+          "AddressPrefixSets"
+        ],
+        "description": "Creates or updates an address prefix set.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "applicationSecurityGroupName",
+            "in": "path",
+            "description": "The name of the application security group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "addressPrefixSetName",
+            "in": "path",
+            "description": "The name of the address prefix set.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9_.-]{0,78}[a-zA-Z0-9_])?$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Parameters supplied to the create or update address prefix set operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddressPrefixSet"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'AddressPrefixSet' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AddressPrefixSet"
+            }
+          },
+          "201": {
+            "description": "Resource 'AddressPrefixSet' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AddressPrefixSet"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create address prefix set": {
+            "$ref": "./examples/AddressPrefixSetCreate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/AddressPrefixSet"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "AddressPrefixSets_Delete",
+        "tags": [
+          "AddressPrefixSets"
+        ],
+        "description": "Deletes the specified address prefix set.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "applicationSecurityGroupName",
+            "in": "path",
+            "description": "The name of the application security group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "addressPrefixSetName",
+            "in": "path",
+            "description": "The name of the address prefix set.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9_.-]{0,78}[a-zA-Z0-9_])?$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete address prefix set": {
+            "$ref": "./examples/AddressPrefixSetDelete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -14141,6 +14397,78 @@
     }
   },
   "definitions": {
+    "AddressPrefixSet": {
+      "type": "object",
+      "description": "Address prefix set child resource of an application security group.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AddressPrefixSetPropertiesFormat",
+          "description": "Properties of the address prefix set."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the resource.",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "description": "The system metadata related to this resource.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/Common.SubResourceModel"
+        }
+      ]
+    },
+    "AddressPrefixSetListResult": {
+      "type": "object",
+      "description": "The response of a AddressPrefixSet list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AddressPrefixSet items on this page",
+          "items": {
+            "$ref": "#/definitions/AddressPrefixSet"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AddressPrefixSetPropertiesFormat": {
+      "type": "object",
+      "description": "Properties of address prefix set.",
+      "properties": {
+        "addressPrefixes": {
+          "type": "array",
+          "description": "The list of address prefixes in CIDR notation. Supports both IPv4 and IPv6 CIDR notation (e.g. '10.0.0.0/16', '2001:db8::/32').",
+          "items": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/Common.ProvisioningState",
+          "description": "The provisioning state of the address prefix set resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "addressPrefixes"
+      ]
+    },
     "ApplicationSecurityGroupListResult": {
       "type": "object",
       "description": "The response of a ApplicationSecurityGroup list operation.",
@@ -14999,6 +15327,18 @@
         "tag": {
           "type": "string",
           "description": "The value of the IP tag associated with the public IP. Example: SQL."
+        },
+        "firstPartyServiceTagId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of the first party service tag associated with the IP tag.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/firstPartyServiceTags"
+              }
+            ]
+          }
         }
       }
     },
@@ -16174,6 +16514,11 @@
         "deleteOption": {
           "$ref": "./common.json#/definitions/Common.DeleteOptions",
           "description": "Specify what happens to the public IP address when the VM using it is deleted"
+        },
+        "upgradedToV2": {
+          "type": "boolean",
+          "description": "Whether the public IP address SKU has been upgraded from Standard to StandardV2.",
+          "readOnly": true
         }
       }
     },
@@ -19645,6 +19990,11 @@
         "natGateway": {
           "$ref": "#/definitions/Common.NatGateway",
           "description": "NatGateway of Public IP Prefix."
+        },
+        "upgradedToV2": {
+          "type": "boolean",
+          "description": "Whether the public IP prefix SKU has been upgraded from Standard to StandardV2.",
+          "readOnly": true
         }
       }
     },
