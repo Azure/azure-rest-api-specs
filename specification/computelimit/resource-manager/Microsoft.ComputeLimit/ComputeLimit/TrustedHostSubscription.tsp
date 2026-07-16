@@ -11,7 +11,7 @@ namespace Microsoft.ComputeLimit;
 
 /** A host subscription trusted by a guest subscription. */
 @parentResource(SubscriptionLocationResource)
-@added(Versions.v2026_07_30)
+@added(Versions.v2026_07_31)
 model TrustedHostSubscription is ProxyResource<never> {
   ...ResourceNameParameter<
     Resource = TrustedHostSubscription,
@@ -23,7 +23,7 @@ model TrustedHostSubscription is ProxyResource<never> {
 
 /** Location-scoped operations for trusted host subscriptions. */
 @armResourceOperations
-@added(Versions.v2026_07_30)
+@added(Versions.v2026_07_31)
 interface TrustedHostSubscriptions {
   /**
    * Adds a host subscription to the guest subscription's trusted hosts.
@@ -38,5 +38,5 @@ interface TrustedHostSubscriptions {
   /**
    * Lists all host subscriptions trusted by the guest subscription in a location.
    */
-  list is ArmResourceListAtScope<TrustedHostSubscription>;
+  listByParent is ArmResourceListByParent<TrustedHostSubscription>;
 }
