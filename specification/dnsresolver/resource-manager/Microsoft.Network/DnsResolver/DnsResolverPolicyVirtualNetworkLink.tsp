@@ -14,11 +14,10 @@ namespace Microsoft.Network;
  * Describes a DNS resolver policy virtual network link.
  */
 @parentResource(DnsResolverPolicy)
-model DnsResolverPolicyVirtualNetworkLink
-  is Azure.ResourceManager.TrackedResource<
-    DnsResolverPolicyVirtualNetworkLinkProperties,
-    false
-  > {
+model DnsResolverPolicyVirtualNetworkLink is Azure.ResourceManager.TrackedResource<
+  DnsResolverPolicyVirtualNetworkLinkProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = DnsResolverPolicyVirtualNetworkLink,
     KeyName = "dnsResolverPolicyVirtualNetworkLinkName",

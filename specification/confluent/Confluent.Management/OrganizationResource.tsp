@@ -2,22 +2,23 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Confluent;
 /**
  * Organization resource.
  */
-model OrganizationResource
-  is Azure.ResourceManager.TrackedResource<
-    OrganizationResourceProperties,
-    false
-  > {
+model OrganizationResource is Azure.ResourceManager.TrackedResource<
+  OrganizationResourceProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = OrganizationResource,
     KeyName = "organizationName",
@@ -333,6 +334,32 @@ interface OrganizationResources {
     ArmResponse<AccessRoleBindingNameListSuccessResponse>,
     Error = ResourceProviderDefaultErrorResponse
   >;
+
+  /**
+   * Links a new SaaS to the Confluent organization of the underlying resource.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Using @summary from @typespec/openapi to provide a concise operation summary for the linkSaaS action endpoint"
+  @added(Microsoft.Confluent.Versions.v2026_06_02_preview)
+  @summary("Links a new SaaS to the Confluent organization of the underlying resource.")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  linkSaaS is ArmResourceActionAsync<
+    OrganizationResource,
+    SaaSData,
+    ArmResponse<OrganizationResource>,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = OrganizationResource> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  /**
+   * Returns the latest SaaS linked to the Confluent organization of the underlying resource.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "OpenAPI module is imported and in scope for this interface; suppression prevents false positive from the no-openapi lint rule"
+  @added(Microsoft.Confluent.Versions.v2026_06_02_preview)
+  latestLinkedSaaS is ArmResourceActionSync<
+    OrganizationResource,
+    void,
+    ArmResponse<LatestLinkedSaaSResponse>
+  >;
 }
 
 @@doc(OrganizationResource.name, "Organization resource name");
@@ -385,3 +412,21 @@ interface OrganizationResources {
   OrganizationResources.listRoleBindingNameList::parameters.body,
   "List Access Request Model"
 );
+@@doc(OrganizationResources.linkSaaS::parameters.body, "SaaS data for linking");
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "SaaS activation is a subscription-level action"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is an established abbreviation"
+@added(Microsoft.Confluent.Versions.v2026_06_02_preview)
+interface SaaSOperationGroup {
+  /**
+   * Resolve the token to get the SaaS resource ID and activate the SaaS resource
+   */
+  @autoRoute
+  @action("activateSaaS")
+  activateResource is ArmProviderActionAsync<
+    Request = ActivateSaaSParameterRequest,
+    Response = SaaSResourceDetailsResponse,
+    Scope = SubscriptionActionScope,
+    Parameters = {}
+  >;
+}

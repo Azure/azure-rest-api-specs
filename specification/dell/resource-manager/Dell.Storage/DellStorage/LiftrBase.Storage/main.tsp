@@ -74,6 +74,7 @@ model FileSystemResourceProperties {
   /**
    * OneFS url
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   oneFsUrl?: string;
 
   /**

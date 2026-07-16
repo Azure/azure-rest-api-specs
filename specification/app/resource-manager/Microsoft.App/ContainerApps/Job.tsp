@@ -135,10 +135,9 @@ interface Jobs {
   start is ArmResourceActionAsyncBase<
     Job,
     JobExecutionTemplate,
-
-      | ArmResponse<JobExecutionBase>
-      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = JobExecutionBase> &
-          Azure.Core.Foundations.RetryAfterHeader>,
+    | ArmResponse<JobExecutionBase>
+    | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = JobExecutionBase> &
+        Azure.Core.Foundations.RetryAfterHeader>,
     DefaultBaseParameters<Job>,
     OptionalRequestBody = true,
     Error = DefaultErrorResponse
@@ -153,10 +152,9 @@ interface Jobs {
   stopMultipleExecutions is ArmResourceActionAsyncBase<
     Job,
     void,
-
-      | ArmResponse<ContainerAppJobExecutions>
-      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ContainerAppJobExecutions> &
-          Azure.Core.Foundations.RetryAfterHeader>,
+    | ArmResponse<ContainerAppJobExecutions>
+    | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ContainerAppJobExecutions> &
+        Azure.Core.Foundations.RetryAfterHeader>,
     DefaultBaseParameters<Job>,
     Error = DefaultErrorResponse
   >;
@@ -183,11 +181,10 @@ interface Jobs {
   resume is ArmResourceActionAsyncBase<
     Job,
     void,
-
-      | ArmResponse<Job>
-      | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = Job> &
-          ArmLroLocationHeader<FinalResult = Job> &
-          Azure.Core.Foundations.RetryAfterHeader>,
+    | ArmResponse<Job>
+    | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = Job> &
+        ArmLroLocationHeader<FinalResult = Job> &
+        Azure.Core.Foundations.RetryAfterHeader>,
     DefaultBaseParameters<Job>
   >;
 
@@ -201,11 +198,10 @@ interface Jobs {
   suspend is ArmResourceActionAsyncBase<
     Job,
     void,
-
-      | ArmResponse<Job>
-      | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = Job> &
-          ArmLroLocationHeader<FinalResult = Job> &
-          Azure.Core.Foundations.RetryAfterHeader>,
+    | ArmResponse<Job>
+    | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = Job> &
+        ArmLroLocationHeader<FinalResult = Job> &
+        Azure.Core.Foundations.RetryAfterHeader>,
     DefaultBaseParameters<Job>
   >;
 
@@ -245,10 +241,9 @@ interface Jobs {
   stopExecution is ArmResourceActionAsyncBase<
     JobExecution,
     void,
-
-      | OkResponse
-      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
-          Azure.Core.Foundations.RetryAfterHeader>,
+    | OkResponse
+    | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
+        Azure.Core.Foundations.RetryAfterHeader>,
     DefaultBaseParameters<Job>,
     Error = DefaultErrorResponse
   >;

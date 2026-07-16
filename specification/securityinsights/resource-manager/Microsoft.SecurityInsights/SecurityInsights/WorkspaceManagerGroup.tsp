@@ -8,6 +8,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.SecurityInsights;
 /**
@@ -92,3 +93,6 @@ interface WorkspaceManagerGroups {
   WorkspaceManagerGroups.createOrUpdate::parameters.resource,
   "The workspace manager group object"
 );
+
+@@added(WorkspaceManagerGroup, Versions.v2025_10_01_preview);
+@@added(WorkspaceManagerGroups, Versions.v2025_10_01_preview);
