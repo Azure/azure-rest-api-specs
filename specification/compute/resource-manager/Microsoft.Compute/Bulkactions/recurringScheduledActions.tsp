@@ -233,7 +233,7 @@ model NotificationProperties {
   language: Language;
 
   @doc("Tells if the notification is enabled or not.")
-  disabled?: boolean = false;
+  disabled?: boolean;
 }
 
 @@identifiers(Azure.Core.Foundations.Error.details, #[]);
@@ -463,11 +463,11 @@ model ScheduledActionProperties {
   @doc("The action the scheduled action should perform in the resources")
   actionType: ScheduledActionType;
 
-  #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
+  #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Scheduled actions execute at a customer-provided local (wall-clock) time; the UTC offset carries the caller's timezone and must be preserved, so offsetDateTime is required."
   @doc("The time which the scheduled action is supposed to start running")
   startTime: offsetDateTime;
 
-  #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
+  #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Scheduled actions execute at a customer-provided local (wall-clock) time; the UTC offset carries the caller's timezone and must be preserved, so offsetDateTime is required."
   @doc("The time when the scheduled action is supposed to stop scheduling")
   endTime?: offsetDateTime;
 
@@ -479,7 +479,7 @@ model ScheduledActionProperties {
   notificationSettings: Array<NotificationProperties>;
 
   @doc("Tell if the scheduled action is disabled or not")
-  disabled?: boolean = false;
+  disabled?: boolean;
 
   @doc("The status of the last provisioning operation performed on the resource.")
   @visibility(Lifecycle.Read)
@@ -495,11 +495,11 @@ model ScheduledActionPropertiesUpdate {
   @doc("The action the scheduled action should perform in the resources")
   actionType: ScheduledActionType;
 
-  #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
+  #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Scheduled actions execute at a customer-provided local (wall-clock) time; the UTC offset carries the caller's timezone and must be preserved, so offsetDateTime is required."
   @doc("The time which the scheduled action is supposed to start running")
   startTime: offsetDateTime;
 
-  #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
+  #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Scheduled actions execute at a customer-provided local (wall-clock) time; the UTC offset carries the caller's timezone and must be preserved, so offsetDateTime is required."
   @doc("The time when the scheduled action is supposed to stop scheduling")
   endTime?: offsetDateTime;
 
@@ -511,7 +511,7 @@ model ScheduledActionPropertiesUpdate {
   notificationSettings: Array<NotificationProperties>;
 
   @doc("Tell if the scheduled action is disabled or not")
-  disabled?: boolean = false;
+  disabled?: boolean;
 
   @doc("The status of the last provisioning operation performed on the resource.")
   @visibility(Lifecycle.Read)
@@ -632,7 +632,7 @@ model OccurrenceResourceListResponse is Azure.Core.Page<OccurrenceResource>;
 @added(Versions.`2026-07-06-preview`)
 @doc("Request to ask for a delay in an occurrence, delay should be set to client local time eg (PST) 2025-05-30T06:35:00-07:00")
 model DelayRequest {
-  #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
+  #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Scheduled actions execute at a customer-provided local (wall-clock) time; the UTC offset carries the caller's timezone and must be preserved, so offsetDateTime is required."
   @doc("The exact time to delay the operations to")
   delay: offsetDateTime;
 
@@ -682,7 +682,7 @@ model OccurrenceExtensionProperties {
 model OccurrenceExtensionResource
   is ExtensionResource<OccurrenceExtensionProperties> {
   ...ResourceNameParameter<
-    OccurrenceProperties,
+    OccurrenceExtensionResource,
     SegmentName = "associatedOccurrences"
   >;
 }
