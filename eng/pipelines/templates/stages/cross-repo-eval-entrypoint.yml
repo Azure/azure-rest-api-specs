@@ -2,10 +2,6 @@
 # outside azure-sdk-tools doesn't have to hand-roll its own `extends: archetype-eval.yml` wiring.
 # Lives under eng/pipelines/, not eng/common/, since eng/common/** is synced verbatim from
 # azure-sdk-tools and would drop repo-local additions on the next sync.
-#
-# No ADO GitHub service connection needed: mcpSetupTemplate defaults to this repo's own
-# eval-mcp-setup.yml, which side-checks-out azure-sdk-tools via sparse-checkout.yml with a PAT
-# (same pattern as swagger-api-doc-preview.yml / archetype-spec-gen-sdk.yml).
 
 parameters:
   - name: mcpSetupTemplate
