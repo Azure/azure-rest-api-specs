@@ -13,20 +13,21 @@ namespace Microsoft.NetworkCloud;
 /**
  * The name of the bare metal machine.
  */
-model BareMetalMachineNameParameter
-  is ResourceNameParameter<
-    Resource = BareMetalMachine,
-    KeyName = "bareMetalMachineName",
-    SegmentName = "bareMetalMachines",
-    NamePattern = "^([a-zA-Z0-9][a-zA-Z0-9]{0,62}[a-zA-Z0-9])$"
-  >;
+model BareMetalMachineNameParameter is ResourceNameParameter<
+  Resource = BareMetalMachine,
+  KeyName = "bareMetalMachineName",
+  SegmentName = "bareMetalMachines",
+  NamePattern = "^([a-zA-Z0-9][a-zA-Z0-9]{0,62}[a-zA-Z0-9])$"
+>;
 
 /**
  * BareMetalMachine represents the physical machine in the rack.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "legacy resource using legacy features"
-model BareMetalMachine
-  is Azure.ResourceManager.TrackedResource<BareMetalMachineProperties, false> {
+model BareMetalMachine is Azure.ResourceManager.TrackedResource<
+  BareMetalMachineProperties,
+  false
+> {
   ...BareMetalMachineNameParameter;
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
   ...RequiredExtendedLocationProperty;

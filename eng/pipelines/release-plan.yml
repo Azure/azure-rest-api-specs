@@ -87,15 +87,21 @@ stages:
           - pwsh: |
               $outputPath = "$(Build.ArtifactStagingDirectory)/release-plan/release-plan.json"
               if (!(Test-Path $outputPath)) {
+                Write-Host "release-plan.json not found. Setting SkipSDKGeneration to true."
+                Write-Host "##vso[task.setvariable variable=SkipSDKGeneration;isOutput=true]true"
                 New-Item -ItemType Directory -Force -Path (Split-Path $outputPath -Parent) | Out-Null
                 '{"outcome":"not_found","releasePlan":null,"details":{}}' | Out-File -FilePath $outputPath -Encoding utf8
+              } else {
+                Write-Host "release-plan.json found. Setting SkipSDKGeneration to false."
+                Write-Host "##vso[task.setvariable variable=SkipSDKGeneration;isOutput=true]false"
               }
+            name: setReleasePlanArtifactState
             displayName: "Ensure release plan artifact file exists"
             condition: succeededOrFailed()
 
           - task: AzureCLI@2
             displayName: "Update SDK details for eligible release plans"
-            condition: succeeded()
+            condition: and(succeeded(), ne(variables['SkipSDKGeneration'], 'true'))
             env:
               ${{ if eq(parameters['Test-release-Plan'], true) }}:
                 AZSDKTOOLS_AGENT_TESTING: "true"
@@ -125,7 +131,7 @@ stages:
   - stage: GenerateSdk
     displayName: "Stage : Generate SDK"
     dependsOn: ReleasePlanCreation
-    condition: succeeded()
+    condition: and(succeeded(), ne(dependencies.ReleasePlanCreation.outputs['ReleasePlan.setReleasePlanArtifactState.SkipSDKGeneration'], 'true'))
     jobs:
       - job: GenerateSdk
         displayName: Generate SDK from Release Plan

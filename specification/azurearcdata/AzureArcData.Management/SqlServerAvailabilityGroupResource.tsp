@@ -15,11 +15,10 @@ namespace Microsoft.AzureArcData;
  * Arc Sql Server Availability Group
  */
 @parentResource(SqlServerInstance)
-model SqlServerAvailabilityGroupResource
-  is Azure.ResourceManager.TrackedResource<
-    SqlServerAvailabilityGroupResourceProperties,
-    false
-  > {
+model SqlServerAvailabilityGroupResource is Azure.ResourceManager.TrackedResource<
+  SqlServerAvailabilityGroupResourceProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = SqlServerAvailabilityGroupResource,
     KeyName = "availabilityGroupName",

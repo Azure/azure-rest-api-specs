@@ -7,8 +7,10 @@ using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
 @doc("The Network Tap resource definition.")
-model NetworkTap
-  is Azure.ResourceManager.TrackedResource<NetworkTapProperties, false> {
+model NetworkTap is Azure.ResourceManager.TrackedResource<
+  NetworkTapProperties,
+  false
+> {
   @doc("Name of the Network Tap.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path

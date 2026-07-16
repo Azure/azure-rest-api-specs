@@ -15,11 +15,10 @@ namespace Dynatrace.Observability;
  * Single sign-on configurations for a given monitor resource.
  */
 @parentResource(MonitorResource)
-model DynatraceSingleSignOnResource
-  is Azure.ResourceManager.ProxyResource<
-    DynatraceSingleSignOnProperties,
-    false
-  > {
+model DynatraceSingleSignOnResource is Azure.ResourceManager.ProxyResource<
+  DynatraceSingleSignOnProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = DynatraceSingleSignOnResource,
     KeyName = "configurationName",
