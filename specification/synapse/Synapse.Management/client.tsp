@@ -93,6 +93,10 @@ using Microsoft.Synapse;
   AzureADOnlyAuthentications.create::parameters.resource,
   "AzureADOnlyAuthenticationInfo"
 );
+@@clientName(
+  AzureADOnlyAuthenticationProperties.azureADOnlyAuthentication,
+  "IsAadOnlyAuthenticationEnabled"
+);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(AzureADOnlyAuthentication.properties);
 
@@ -243,6 +247,7 @@ using Microsoft.Synapse;
   DataMaskingRules.createOrUpdate::parameters.resource,
   "parameters"
 );
+@@clientName(DataMaskingRuleProperties.id, "RuleId");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(DataMaskingRule.properties);
 
@@ -346,6 +351,7 @@ using Microsoft.Synapse;
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(LibraryResource.properties);
+@@clientName(LibraryInfo.name, "NamePropertiesName");
 
 @@clientName(
   IntegrationRuntimeResources.create::parameters.resource,
