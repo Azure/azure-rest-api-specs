@@ -13,10 +13,40 @@ options:
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     examples-dir: "{project-root}/examples"
     version: "2021-06-01-preview"
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.Synapse"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-typespec/http-client-csharp-provisioning":
     namespace: "Azure.Provisioning.Synapse"
     emitter-output-dir: "{output-dir}/{service-dir}/Azure.Provisioning.Synapse"
     api-version: "2021-06-01-preview"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-synapse"
+    namespace: "azure.mgmt.synapse"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-synapse"
+    namespace: "com.azure.resourcemanager.synapse"
+    service-name: "synapse"
+    flavor: "azure"
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-synapse"
+    flavor: "azure"
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-synapse"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/synapse"
+    emitter-output-dir: "{output-dir}/{service-dir}/armsynapse"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armsynapse"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
