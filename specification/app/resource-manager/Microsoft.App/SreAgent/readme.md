@@ -35,7 +35,17 @@ suppressions:
   - code: MissingSegmentsInNestedResourceListOperation
     reason: The parent resource Get call is defined in a separate file.
     from: sreagent.json
-    
+  - code: AvoidAdditionalProperties
+    reason: These existing extensibility dictionaries carry forward unchanged from the stable API.
+    where:
+      - $.definitions.AgentConnectorProperties.properties.extendedProperties
+      - $.definitions.AgentSpaceConnectorProperties.properties.extendedProperties
+      - $.definitions.Connector.properties.extendedProperties
+  - code: TrackedResourcePatchOperation
+    reason: Agent Session tags and target scope are immutable after creation by design; callers must delete and recreate the resource to change them.
+    where:
+      - $.definitions.AgentSession
+
 ```
 
 ### Tag: package-2026-08-01-preview
@@ -44,6 +54,14 @@ These settings apply only when `--tag=package-2026-08-01-preview` is specified o
 ```yaml $(tag) == 'package-2026-08-01-preview'
 input-file:
   - preview/2026-08-01-preview/sreagent.json
+directive:
+  - suppress: AvoidAdditionalProperties
+    from: sreagent.json
+    reason: These existing extensibility dictionaries carry forward unchanged from the stable API.
+    where:
+    - $.definitions.AgentConnectorProperties.properties.extendedProperties
+    - $.definitions.AgentSpaceConnectorProperties.properties.extendedProperties
+    - $.definitions.Connector.properties.extendedProperties
 ```
 
 ### Tag: package-2026-01-01

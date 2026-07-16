@@ -23,7 +23,7 @@ model AgentSessionProperties {
 
   /** Additional subscription identifiers that the Agent Session may inspect. */
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  additionalSubscriptionIds: uuid[];
+  additionalSubscriptionIds: string[];
 
   /** The provisioning state of the persistent Agent Session resource. */
   @visibility(Lifecycle.Read)
