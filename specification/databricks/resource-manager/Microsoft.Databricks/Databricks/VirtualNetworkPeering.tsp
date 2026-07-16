@@ -15,11 +15,10 @@ namespace Microsoft.Databricks;
  * Peerings in a VirtualNetwork resource
  */
 @parentResource(Workspace)
-model VirtualNetworkPeering
-  is Azure.ResourceManager.ProxyResource<
-    VirtualNetworkPeeringPropertiesFormat,
-    false
-  > {
+model VirtualNetworkPeering is Azure.ResourceManager.ProxyResource<
+  VirtualNetworkPeeringPropertiesFormat,
+  false
+> {
   ...ResourceNameParameter<
     Resource = VirtualNetworkPeering,
     KeyName = "peeringName",

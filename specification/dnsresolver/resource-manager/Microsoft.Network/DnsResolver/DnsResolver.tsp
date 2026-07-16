@@ -13,8 +13,10 @@ namespace Microsoft.Network;
 /**
  * Describes a DNS resolver.
  */
-model DnsResolver
-  is Azure.ResourceManager.TrackedResource<DnsResolverProperties, false> {
+model DnsResolver is Azure.ResourceManager.TrackedResource<
+  DnsResolverProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = DnsResolver,
     KeyName = "dnsResolverName",

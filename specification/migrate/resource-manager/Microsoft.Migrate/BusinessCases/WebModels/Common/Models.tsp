@@ -243,6 +243,7 @@ model DistributionByVirtualization {
 
 @doc("Download URL for assessment report.")
 model ReportDownloadUrl {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("Hyperlink to download report.")
   @visibility(Lifecycle.Read)
   businessCaseReportUrl?: string;

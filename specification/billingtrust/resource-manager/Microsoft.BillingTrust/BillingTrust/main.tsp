@@ -570,15 +570,15 @@ interface Assessments {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Assessment,
-    LroHeaders = Azure.ResourceManager.ArmCombinedLroHeaders &
+    LroHeaders = Azure.ResourceManager.ArmCombinedLroHeaders<FinalResult = Assessment> &
       Azure.Core.Foundations.RetryAfterHeader,
     Response =
       | (ArmResourceUpdatedResponse<Assessment> &
-          Azure.ResourceManager.ArmCombinedLroHeaders &
+          Azure.ResourceManager.ArmCombinedLroHeaders<FinalResult = Assessment> &
           Azure.Core.Foundations.RetryAfterHeader)
       | ArmResourceCreatedResponse<
           Assessment,
-          Azure.ResourceManager.ArmCombinedLroHeaders &
+          Azure.ResourceManager.ArmCombinedLroHeaders<FinalResult = Assessment> &
             Azure.Core.Foundations.RetryAfterHeader
         >
   >;
