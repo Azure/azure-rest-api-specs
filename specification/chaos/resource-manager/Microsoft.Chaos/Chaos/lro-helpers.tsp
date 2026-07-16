@@ -20,7 +20,9 @@ namespace Microsoft.Chaos;
  * @template BaseParameters Optional. Allows overriding the parameters for the operation
  */
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "template"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "template"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "template"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Custom LRO operation with specific response codes"
 @autoRoute
 @armResourceAction(Resource)
@@ -58,7 +60,9 @@ op ArmResourceActionAsyncWithLocation<
  * @template BaseParameters Optional. Allows overriding the parameters for the operation
  */
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "template"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "template"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "template"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Custom LRO operation with specific response codes"
 @autoRoute
 @armResourceAction(Resource)
@@ -93,7 +97,9 @@ op ArmResourceActionNoContentAsyncWithLocationResult<
  * @template BaseParameters Optional. Allows overriding the parameters for the operation
  */
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "template"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "template"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "template"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Custom LRO operation with specific response codes"
 @autoRoute
 @armResourceAction(Resource)

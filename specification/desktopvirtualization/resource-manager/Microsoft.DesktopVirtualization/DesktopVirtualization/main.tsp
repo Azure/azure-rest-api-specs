@@ -51,7 +51,9 @@ namespace Microsoft.DesktopVirtualization;
  *   GET "/providers/Microsoft.ContosoProviderHub/operations"
  */
 interface Operations {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "This is the standard operations interface for our service"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "This is the standard operations interface for our service"
   @tag("Operations")
   @autoRoute
   @doc("List the operations for the provider")

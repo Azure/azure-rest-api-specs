@@ -38,7 +38,9 @@ model ResourceList<
 /**
  * Just like ArmResourceActionSync, but with no request body.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface"
 @autoRoute
 @armResourceAction(TResource)
 @post
@@ -53,7 +55,9 @@ op ArmResourceActionSyncNoRequestBody<
 /**
  * Like ArmResourceActionAsync, but with no request body and ArmNoContentResponse.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface"
 op ArmResourceActionNoContentAsyncNoRequestBody<
   TResource extends Azure.ResourceManager.Foundations.Resource,
   TBaseParameters extends TypeSpec.Reflection.Model = Foundations.BaseParameters<TResource>
@@ -68,7 +72,9 @@ op ArmResourceActionNoContentAsyncNoRequestBody<
 /**
  * Just like ArmAcceptedLroResponse, but with a ResponseBody.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface"
 @doc(Description)
 model ArmAcceptedLroResponseWithResponseBody<
   ResponseBody,

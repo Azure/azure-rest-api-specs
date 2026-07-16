@@ -28,7 +28,9 @@ interface AvailabilityStatuses {
   /**
    * Gets current availability status for a single resource
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "This is a non-resource operation"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "This is a non-resource operation"
   @tag("AvailabilityStatuses")
   @get
   @route("/{+resourceUri}/providers/Microsoft.ResourceHealth/availabilityStatuses/current")
@@ -137,7 +139,9 @@ interface ChildAvailabilityStatuses {
   /**
    * Gets current availability status for a single resource
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "This is a non-resource operation"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "This is a non-resource operation"
   @tag("ChildAvailabilityStatuses")
   @get
   @route("/{+resourceUri}/providers/Microsoft.ResourceHealth/childAvailabilityStatuses/current")

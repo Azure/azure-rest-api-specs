@@ -329,7 +329,9 @@ interface IotHubDescriptionOperationGroup {
   /**
    * Get the statistics from an IoT hub.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "This is a non-standard ARM action (IotHubStats) on the IoT hub resource, retained to match the published API routing."
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "This is a non-standard ARM action (IotHubStats) on the IoT hub resource, retained to match the published API routing."
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/IotHubStats")
   @get
   @summary("Get the statistics from an IoT hub")

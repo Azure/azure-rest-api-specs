@@ -47,7 +47,9 @@ enum Versions {
 
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
 interface Operations {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "non-standard operations"
   @tag("Operations")
   @autoRoute
   @Azure.ResourceManager.Private.armUpdateProviderNamespace

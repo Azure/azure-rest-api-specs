@@ -8,7 +8,9 @@ using TypeSpec.Versioning;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
 @added(Versions.v2024_09_01)
 interface Skus {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface"
   @doc("A list of SKUs.")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.AVS/skus")
   @get

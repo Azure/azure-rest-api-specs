@@ -264,7 +264,9 @@ interface AgriService {
 
 // note this is a template for an empty body resource action, which will be added to the library at some point
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "This is a template"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "This is a template"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "This is a template"
 @armResourceAction(TResource)
 @post
 op ArmResourceListActionSync<

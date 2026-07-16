@@ -26,7 +26,9 @@ interface ScenarioRuns {
    * this URL; clients must keep polling until they receive 200, which carries
    * the final ScenarioRun body.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "LRO polling endpoint that returns body in both 200 and 202 responses."
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "LRO polling endpoint that returns body in both 200 and 202 responses."
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "LRO polling endpoint returns body in 202 to reflect the current run state."
   get is ArmResourceRead<
     ScenarioRun,
