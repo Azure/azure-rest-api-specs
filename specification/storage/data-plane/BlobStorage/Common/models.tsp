@@ -1467,6 +1467,19 @@ model ArrowField {
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Existing API"
 model ParquetConfiguration is Record<unknown>;
 
+/** Specifies the format in which a blob listing should be returned. */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Distinct SDK-facing members (Auto, Arrow) must map to the same Accept header value, which a union cannot express because it deduplicates identical values."
+enum ListBlobsAcceptFormat {
+  /** Let the SDK choose the best available format. Currently emits the Apache Arrow stream, falling back to XML if Arrow is unavailable. */
+  Auto: "application/vnd.apache.arrow.stream,application/xml",
+
+  /** Return the listing as an Apache Arrow stream, falling back to XML if Arrow is unavailable. */
+  Arrow: "application/vnd.apache.arrow.stream,application/xml",
+
+  /** Return the listing as XML. */
+  Xml: "application/xml",
+}
+
 /** The query format type. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 @Xml.name("Type")

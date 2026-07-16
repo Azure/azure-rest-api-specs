@@ -645,10 +645,10 @@ interface Container {
   @route("?restype=container&comp=list")
   listBlobFlatSegmentApacheArrow is StorageOperationResponseBody<
     {
-      /** The Accept header indicating the response should be returned as an Apache Arrow stream, falling back to XML otherwise. */
+      /** The Accept header indicating the format in which the response should be returned. */
       #suppress "@typespec/http/content-type-ignored" "Raw response, deserialized by client"
       @header("accept")
-      accept: "application/vnd.apache.arrow.stream,application/xml";
+      accept: ListBlobsAcceptFormat;
 
       ...PrefixParameter;
       ...MarkerParameter;
