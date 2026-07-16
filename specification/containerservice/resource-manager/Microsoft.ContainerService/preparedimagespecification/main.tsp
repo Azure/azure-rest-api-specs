@@ -1,6 +1,7 @@
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./operations.tsp";
+import "./client.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Versioning;

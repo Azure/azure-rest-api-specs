@@ -13,21 +13,22 @@ namespace Microsoft.NetworkCloud;
  * The name of the Kubernetes version resource.
  */
 @added(Versions.v2026_01_01_preview)
-model KubernetesVersionNameParameter
-  is ResourceNameParameter<
-    Resource = KubernetesVersion,
-    KeyName = "kubernetesVersionName",
-    SegmentName = "kubernetesVersions",
-    NamePattern = "^default$"
-  >;
+model KubernetesVersionNameParameter is ResourceNameParameter<
+  Resource = KubernetesVersion,
+  KeyName = "kubernetesVersionName",
+  SegmentName = "kubernetesVersions",
+  NamePattern = "^default$"
+>;
 
 /**
  * KubernetesVersion represents the available Kubernetes versions for a cluster.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "legacy resource using legacy features"
 @added(Versions.v2026_01_01_preview)
-model KubernetesVersion
-  is Azure.ResourceManager.TrackedResource<KubernetesVersionProperties, false> {
+model KubernetesVersion is Azure.ResourceManager.TrackedResource<
+  KubernetesVersionProperties,
+  false
+> {
   ...KubernetesVersionNameParameter;
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
   ...RequiredExtendedLocationProperty;

@@ -23,8 +23,10 @@ model AssessedSqlMachineV3 is ProxyResource<AssessedSqlMachineV3Properties> {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "AvsAssessedMachine doesn't have a PUT and hence no need for provisioning state. It is always hydrated by the service."
 @doc("Assessed SQL machine properties.")
-model AssessedSqlMachineV3Properties
-  is AssessedWorkloadProperties<Linkages, SqlMachineRecommendations> {
+model AssessedSqlMachineV3Properties is AssessedWorkloadProperties<
+  Linkages,
+  SqlMachineRecommendations
+> {
   @doc("The sql instance extended details.")
   @visibility(Lifecycle.Read)
   extendedDetails?: SqlMachineExtendedDetails;
@@ -120,12 +122,11 @@ model SqlMachineExtendedDetails {
 }
 
 @doc("Recommendations for assessed sql entities.")
-model SqlMachineRecommendations
-  is Recommendations<
-    MigrationIssues,
-    MigrationSuitability,
-    Skus<MigrationSuitability>
-  > {
+model SqlMachineRecommendations is Recommendations<
+  MigrationIssues,
+  MigrationSuitability,
+  Skus<MigrationSuitability>
+> {
   @doc("Gets the list of migration guidelines applicable to this target.")
   @visibility(Lifecycle.Read)
   @identifiers(#[])

@@ -14,8 +14,10 @@ namespace Microsoft.SecurityInsights;
 /**
  * Represents a SourceControl in Azure Security Insights.
  */
-model SourceControl
-  is Azure.ResourceManager.ProxyResource<SourceControlProperties, false> {
+model SourceControl is Azure.ResourceManager.ProxyResource<
+  SourceControlProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = SourceControl,
     KeyName = "sourceControlId",
