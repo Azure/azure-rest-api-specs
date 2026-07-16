@@ -89,6 +89,9 @@
     },
     {
       "name": "ScenarioRuns"
+    },
+    {
+      "name": "Connections"
     }
   ],
   "paths": {
@@ -2825,6 +2828,239 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/connections": {
+      "get": {
+        "operationId": "Connections_ListAll",
+        "tags": [
+          "Connections"
+        ],
+        "description": "Get a list of connections.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "String that represents a Workspace resource name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[^<>%&:?#/\\\\]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a list of connections.": {
+            "$ref": "./examples/Connections_ListAll.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/connections/{connectionName}": {
+      "get": {
+        "operationId": "Connections_Get",
+        "tags": [
+          "Connections"
+        ],
+        "description": "Get a connection.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "String that represents a Workspace resource name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[^<>%&:?#/\\\\]+$"
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "description": "Name of the connection.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[^<>%&:?#/\\\\]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Connection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a connection.": {
+            "$ref": "./examples/Connections_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Connections_CreateOrUpdate",
+        "tags": [
+          "Connections"
+        ],
+        "description": "Create or update a connection.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "String that represents a Workspace resource name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[^<>%&:?#/\\\\]+$"
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "description": "Name of the connection.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[^<>%&:?#/\\\\]+$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Connection resource to be created or updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Connection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Connection' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Connection"
+            }
+          },
+          "201": {
+            "description": "Resource 'Connection' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Connection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a connection.": {
+            "$ref": "./examples/Connections_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Connections_Delete",
+        "tags": [
+          "Connections"
+        ],
+        "description": "Delete a connection.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "String that represents a Workspace resource name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[^<>%&:?#/\\\\]+$"
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "description": "Name of the connection.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[^<>%&:?#/\\\\]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a connection in a workspace.": {
+            "$ref": "./examples/Connections_Delete.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/discover": {
       "post": {
         "operationId": "Workspaces_Discover",
@@ -4791,6 +5027,162 @@
             "type": "string"
           }
         }
+      }
+    },
+    "Connection": {
+      "type": "object",
+      "description": "Model that represents a connection between a workspace and a target resource.\nA connection provisions and tracks the trust relationship used to reach the\ndata plane of a target resource for fault injection.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConnectionProperties",
+          "description": "The properties of the connection."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ConnectionKind": {
+      "type": "string",
+      "description": "The kind of connection, indicating the actor type used to reach the target resource's data plane.",
+      "enum": [
+        "AksExtension",
+        "ChaosAgent",
+        "Csfi"
+      ],
+      "x-ms-enum": {
+        "name": "ConnectionKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AksExtension",
+            "value": "AksExtension",
+            "description": "A connection backed by the Chaos AKS cluster extension."
+          },
+          {
+            "name": "ChaosAgent",
+            "value": "ChaosAgent",
+            "description": "A connection backed by the Chaos agent installed on the target resource."
+          },
+          {
+            "name": "Csfi",
+            "value": "Csfi",
+            "description": "A connection backed by Cloud Service Fundamentals Infrastructure (CSFI)."
+          }
+        ]
+      }
+    },
+    "ConnectionListResult": {
+      "type": "object",
+      "description": "Model that represents a list of connections and a link for pagination.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Connection items on this page",
+          "items": {
+            "$ref": "#/definitions/Connection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ConnectionProperties": {
+      "type": "object",
+      "description": "Model that represents the properties of a connection.\n\nThe schema is flat and discriminated by `kind`. Optional fields form the\nsuperset across all connection kinds; which fields are required is\nvalidated by the service per kind.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/ConnectionKind",
+          "description": "The kind of connection, indicating the actor type used to reach the target resource's data plane."
+        },
+        "targetResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The fully qualified Azure resource ID of the target resource this connection is established with."
+        },
+        "principalId": {
+          "type": "string",
+          "description": "The Microsoft Entra principal (object) ID of the identity used by the connection."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The Microsoft Entra tenant ID that the connection identity belongs to."
+        },
+        "certificateSubjectName": {
+          "type": "string",
+          "description": "The subject name of the certificate used to authenticate the connection."
+        },
+        "certificateIssuer": {
+          "type": "string",
+          "description": "The issuer of the certificate used to authenticate the connection."
+        },
+        "dstsPrincipal": {
+          "type": "string",
+          "description": "The dSTS principal name used to authenticate the connection."
+        },
+        "dataPlaneEndpoint": {
+          "type": "string",
+          "description": "The data plane endpoint of the target resource that this connection reaches.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/ConnectionStatus",
+          "description": "The current status of the connection.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The most recent provisioning state for the connection resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "kind",
+        "targetResourceId"
+      ]
+    },
+    "ConnectionStatus": {
+      "type": "string",
+      "description": "The status of a connection.",
+      "enum": [
+        "Pending",
+        "Connected",
+        "Disconnected",
+        "Revoked"
+      ],
+      "x-ms-enum": {
+        "name": "ConnectionStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "The connection has been created but the trust relationship is not yet established."
+          },
+          {
+            "name": "Connected",
+            "value": "Connected",
+            "description": "The connection is established and the target resource's data plane is reachable."
+          },
+          {
+            "name": "Disconnected",
+            "value": "Disconnected",
+            "description": "The connection is no longer reachable."
+          },
+          {
+            "name": "Revoked",
+            "value": "Revoked",
+            "description": "The connection's credentials have been revoked."
+          }
+        ]
       }
     },
     "ContinuousAction": {
