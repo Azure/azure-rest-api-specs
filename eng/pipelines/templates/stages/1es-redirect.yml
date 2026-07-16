@@ -26,15 +26,15 @@ extends:
     settings:
       skipBuildTagsForGitHubPullRequests: true
     sdl:
+      # Every azure-sdk-for-* repo's 1es-redirect.yml points sourceAnalysisPool at Windows
+      # regardless of the main build's OS - it's a separate job, and Windows-only SDL tools
+      # (e.g. AntiMalware, which requires Windows Defender) need it. Tried disabling AntiMalware
+      # for a Linux sourceAnalysisPool instead (antimalwareScan.enabled: false, then
+      # enableAllTools: false) but: the former only suppressed the Binary-scan pass (Source-scan
+      # still ran and failed with ConfigurationPathNotFoundException: antimalware-linux), and the
+      # latter isn't a valid field in the Official template. Matching the org-standard pattern.
       sourceAnalysisPool:
-        name: $(LINUXPOOL)
-        image: $(LINUXVMIMAGE)
-        os: linux
-      # sourceAnalysisPool is Linux-only: Windows-only SDL tools (e.g. AntiMalware, which requires
-      # Windows Defender) can never run here. antimalwareScan.enabled: false alone wasn't enough -
-      # it only suppressed the Binary-scan pass; the Source-scan pass still ran and failed with
-      # ConfigurationPathNotFoundException: antimalware-linux. Comprehensive SDL/Guardian scanning
-      # already happens via the dedicated /eng/pipelines/guardian.yml pipeline on a Windows pool,
-      # so disable all SDL tools here instead of re-enabling them one by one.
-      enableAllTools: false
+        name: $(WINDOWSPOOL)
+        image: $(WINDOWSVMIMAGE)
+        os: windows
     stages: ${{ parameters.stages }}
