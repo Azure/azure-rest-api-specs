@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "subscriptionId": "01234567-89ab-4def-0123-456789abcdef",
+    "resourceGroupName": "ExampleResourceGroup",
+    "workspaceName": "ExampleWorkspace",
+    "sqlPoolName": "ExampleSqlPool",
+    "api-version": "2021-06-01",
+    "metadataSyncConfiguration": {
+      "properties": {
+        "enabled": true
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/01234567-89ab-4def-0123-456789abcdef/resourceGroups/ExampleResourceGroup/providers/Microsoft.Synapse/workspaces/ExampleWorkspace/bigDataPools/ExamplePool/metadataSync/config",
+        "type": "Microsoft.Synapse/workspaces/bigDataPools/metadataSync/config",
+        "name": "config",
+        "properties": {
+          "enabled": true
+        }
+      }
+    },
+    "404": {},
+    "default": {
+      "body": {
+        "error": {
+          "code": "Error code",
+          "message": "Error message"
+        }
+      }
+    }
+  }
+}

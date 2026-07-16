@@ -224,7 +224,7 @@
       ]
     },
     "LakeHouseLocation": {
-      "description": "The location of Microsoft Fabric Lakehouse Files dataset.",
+      "description": "The location of Microsoft Fabric LakeHouse Files dataset.",
       "type": "object",
       "allOf": [
         {
@@ -897,36 +897,6 @@
         "compression": {
           "description": "The data compression method used for the binary dataset.",
           "$ref": "#/definitions/DatasetCompression"
-        }
-      },
-      "required": [
-        "location"
-      ]
-    },
-    "IcebergDataset": {
-      "x-ms-discriminator-value": "Iceberg",
-      "description": "Iceberg dataset.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Dataset"
-        }
-      ],
-      "properties": {
-        "typeProperties": {
-          "description": "Iceberg dataset properties.",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/IcebergDatasetTypeProperties"
-        }
-      }
-    },
-    "IcebergDatasetTypeProperties": {
-      "description": "Iceberg dataset properties.",
-      "type": "object",
-      "properties": {
-        "location": {
-          "$ref": "#/definitions/DatasetLocation",
-          "description": "The location of the iceberg storage. Setting a file name is not allowed for iceberg format."
         }
       },
       "required": [
@@ -2935,25 +2905,7 @@
         "typeProperties": {
           "description": "Properties specific to this dataset type.",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/JiraDatasetTypeProperties"
-        }
-      }
-    },
-    "JiraDatasetTypeProperties": {
-      "description": "Jira Dataset Properties",
-      "type": "object",
-      "properties": {
-        "tableName": {
-          "type": "object",
-          "description": "This property is only supported in Jira V1 Dataset, please consider upgrading to V2 dataset."
-        },
-        "table": {
-          "type": "object",
-          "description": "The schema name of the Jira, applies only for Jira V2 dataset. Type: string (or Expression with resultType string)."
-        },
-        "schema": {
-          "type": "object",
-          "description": "The table name of the Jira, applies only for Jira V2 dataset. Type: string (or Expression with resultType string)."
+          "$ref": "#/definitions/GenericDatasetTypeProperties"
         }
       }
     },
@@ -3563,8 +3515,8 @@
       }
     },
     "LakeHouseTableDataset": {
-      "x-ms-discriminator-value": "LakehouseTable",
-      "description": "Microsoft Fabric Lakehouse Table.",
+      "x-ms-discriminator-value": "LakeHouseTable",
+      "description": "Microsoft Fabric LakeHouse Table.",
       "type": "object",
       "allOf": [
         {
@@ -3573,23 +3525,19 @@
       ],
       "properties": {
         "typeProperties": {
-          "description": "Microsoft Fabric Lakehouse Table dataset properties.",
+          "description": "Microsoft Fabric LakeHouse Table dataset properties.",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/LakeHouseTableDatasetTypeProperties"
         }
       }
     },
     "LakeHouseTableDatasetTypeProperties": {
-      "description": "Microsoft Fabric Lakehouse Table dataset properties.",
+      "description": "Microsoft Fabric LakeHouse Table dataset properties.",
       "type": "object",
       "properties": {
-        "schema": {
-          "type": "object",
-          "description": "The schema name of Microsoft Fabric Lakehouse Table. Type: string (or Expression with resultType string)."
-        },
         "table": {
           "type": "object",
-          "description": "The name of Microsoft Fabric Lakehouse Table. Type: string (or Expression with resultType string)."
+          "description": "The name of Microsoft Fabric LakeHouse Table. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -3699,29 +3647,7 @@
         "typeProperties": {
           "description": "Properties specific to this dataset type.",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ServiceNowV2DatasetTypeProperties"
-        }
-      }
-    },
-    "ServiceNowV2DatasetTypeProperties": {
-      "description": "Properties specific to this dataset type.",
-      "type": "object",
-      "properties": {
-        "tableName": {
-          "type": "object",
-          "description": "The table name. Type: string (or Expression with resultType string)."
-        },
-        "valueType": {
-          "description": "Type of value copied from source.",
-          "type": "string",
-          "enum": [
-            "actual",
-            "display"
-          ],
-          "x-ms-enum": {
-            "name": "ValueType",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/GenericDatasetTypeProperties"
         }
       }
     }
