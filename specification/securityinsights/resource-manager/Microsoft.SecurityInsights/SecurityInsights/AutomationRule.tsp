@@ -12,8 +12,10 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.SecurityInsights;
 
-model AutomationRule
-  is Azure.ResourceManager.ProxyResource<AutomationRuleProperties, false> {
+model AutomationRule is Azure.ResourceManager.ProxyResource<
+  AutomationRuleProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = AutomationRule,
     KeyName = "automationRuleId",

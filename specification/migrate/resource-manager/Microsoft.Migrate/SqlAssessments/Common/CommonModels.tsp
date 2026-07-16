@@ -462,12 +462,11 @@ model SqlAvailabilityGroupDataOverview {
 }
 
 @doc("Recommendations for assessed sql entities.")
-model SqlEntityRecommendations
-  is Recommendations<
-    SqlAssessmentMigrationIssue,
-    MigrationSuitability,
-    Skus<MigrationSuitability>
-  > {
+model SqlEntityRecommendations is Recommendations<
+  SqlAssessmentMigrationIssue,
+  MigrationSuitability,
+  Skus<MigrationSuitability>
+> {
   @doc("Gets a value indicating whether replicas should be provisioned.")
   @visibility(Lifecycle.Read)
   shouldProvisionReplicas?: boolean;

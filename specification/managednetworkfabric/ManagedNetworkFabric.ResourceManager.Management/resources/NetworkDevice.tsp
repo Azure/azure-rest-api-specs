@@ -8,8 +8,10 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.ManagedNetworkFabric;
 @doc("The Network Device resource definition.")
-model NetworkDevice
-  is Azure.ResourceManager.TrackedResource<NetworkDeviceProperties, false> {
+model NetworkDevice is Azure.ResourceManager.TrackedResource<
+  NetworkDeviceProperties,
+  false
+> {
   @doc("Name of the Network Device.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
