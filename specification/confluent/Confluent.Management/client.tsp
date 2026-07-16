@@ -11,6 +11,21 @@ using Microsoft.Confluent;
   "ConfluentManagementClient",
   "javascript,python"
 );
+
+#suppress "experimental-feature" "exact"
+@@clientName(
+  ConnectorClass.AZURECOSMOSV2SINK,
+  exact("AZURECOSMOSV2SINK"),
+  "python"
+);
+
+#suppress "experimental-feature" "exact"
+@@clientName(
+  ConnectorClass.AZURECOSMOSV2SOURCE,
+  exact("AZURECOSMOSV2SOURCE"),
+  "python"
+);
+
 // Added Java Configuration to pass specs CI check.
 // Need to revisit before SDK release.
 @@clientName(APIKeyResourceEntity, "ApiKeyResourceEntity", "java,csharp");

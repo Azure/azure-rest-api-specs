@@ -1794,6 +1794,7 @@ alias SourceRangeParameterRequired = {
 /** The source URL parameter. */
 alias SourceUrlParameter = {
   /** Specifies the URL of the source. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @header("x-ms-copy-source")
   sourceUrl: string;
 };
@@ -2857,4 +2858,11 @@ alias ListBlobsStartFrom = {
   @added(Versions.v2026_02_06)
   @query
   startFrom?: string;
+};
+
+alias ListBlobsEndBefore = {
+  /** Filters the results to return only names that are ordered before this value. Currently only applies to Apache Arrow scenario. */
+  @added(Versions.v2026_12_06)
+  @query
+  endBefore?: string;
 };

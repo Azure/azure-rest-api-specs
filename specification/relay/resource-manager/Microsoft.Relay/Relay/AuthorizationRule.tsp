@@ -27,13 +27,12 @@ model AuthorizationRule
 
 @@minLength(AuthorizationRuleNameParameter.name, 1);
 @@doc(AuthorizationRuleNameParameter.name, "The authorization rule name.");
-model AuthorizationRuleNameParameter
-  is ResourceNameParameter<
-    Resource = AuthorizationRule,
-    KeyName = "authorizationRuleName",
-    SegmentName = "authorizationRules",
-    NamePattern = ""
-  >;
+model AuthorizationRuleNameParameter is ResourceNameParameter<
+  Resource = AuthorizationRule,
+  KeyName = "authorizationRuleName",
+  SegmentName = "authorizationRules",
+  NamePattern = ""
+>;
 
 @armResourceOperations
 interface AuthorizationRuleOps

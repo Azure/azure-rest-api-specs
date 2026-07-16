@@ -1,4 +1,4 @@
-﻿import "@typespec/rest";
+import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
@@ -893,6 +893,7 @@ model KnowledgeBaseAzureBlobReference extends KnowledgeBaseReference {
   type: KnowledgeBaseReferenceType.azureBlob;
 
   /** The blob URL for the reference. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   blobUrl?: string;
 
   /** The sensitivity label information for the reference. */
@@ -909,6 +910,7 @@ model KnowledgeBaseIndexedSharePointReference extends KnowledgeBaseReference {
   type: KnowledgeBaseReferenceType.indexedSharePoint;
 
   /** The document URL for the reference. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   docUrl?: string;
 
   /** The sensitivity label information for the reference. */
@@ -923,6 +925,7 @@ model KnowledgeBaseIndexedOneLakeReference extends KnowledgeBaseReference {
   type: KnowledgeBaseReferenceType.indexedOneLake;
 
   /** The document URL for the reference. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   docUrl?: string;
 
   /** The sensitivity label information for the reference. */
@@ -952,6 +955,7 @@ model KnowledgeBaseRemoteSharePointReference extends KnowledgeBaseReference {
   type: KnowledgeBaseReferenceType.remoteSharePoint;
 
   /** The url the reference data originated from. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   webUrl?: url;
 
   /** Information about the sensitivity label applied to the SharePoint document. */
@@ -982,6 +986,7 @@ model KnowledgeBaseWorkIQReference extends KnowledgeBaseReference {
 @added(Versions.v2026_05_01_preview)
 model WorkIQAttribution {
   /** The URL for the attribution. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   seeMoreWebUrl?: url;
 }
 
@@ -1046,6 +1051,7 @@ model KnowledgeBaseIndexedSqlReference extends KnowledgeBaseReference {
   type: KnowledgeBaseReferenceType.indexedSql;
 
   /** The document URL for the reference. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   docUrl?: string;
 }
 
