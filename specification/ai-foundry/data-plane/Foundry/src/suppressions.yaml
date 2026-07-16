@@ -5,17 +5,31 @@
     - "./sdk-csharp-azure-ai-agent-contracts"
 - tool: TypeSpecValidation
   reason: >
-     .NET Client libraries are not using the azure-typespec emitters.
+     .NET Client library configs do not include Java/TS/Python config.
   rules: [SdkTspConfigValidation]
+  sub-rules:
+    - "options.@azure-tools/typespec-java.emitter-output-dir"
+    - "options.@azure-tools/typespec-ts.package-details.name"
+    - "options.@azure-tools/typespec-python.emitter-output-dir"
   paths:
     - "./sdk-csharp-azure-ai-extensions-openai/tspconfig.yaml"
     - "./sdk-csharp-azure-ai-projects/tspconfig.yaml"
     - "./sdk-csharp-azure-ai-projects-agents/tspconfig.yaml"
 - tool: TypeSpecValidation
   reason: >
-     Java Client library config does not include TS/Python config; the inverse is true for the TS/Python client library config, so we need to skip.
+     Java Client library config does not include TS/Python config.
   rules: [SdkTspConfigValidation]
+  sub-rules:
+    - "options.@azure-tools/typespec-ts.package-details.name"
+    - "options.@azure-tools/typespec-python.emitter-output-dir"
   paths:
     - "./sdk-java-azure-ai-agents/tspconfig.yaml"
     - "./sdk-java-azure-ai-projects/tspconfig.yaml"
+- tool: TypeSpecValidation
+  reason: >
+     TS/Python client library config does not include Java config.
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - "options.@azure-tools/typespec-java.emitter-output-dir"
+  paths:
     - "./sdk-python-js-azure-ai-projects/tspconfig.yaml"

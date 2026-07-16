@@ -296,8 +296,10 @@ model EvaluatorGenerationTokenUsage {
 
 @doc("Evaluator Generation Job resource — a long-running job that generates rubric-based evaluator definitions from source materials. On success, the result is the persisted EvaluatorVersion.")
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
-model EvaluatorGenerationJob
-  is JobLike<EvaluatorVersion, EvaluatorGenerationInputs> {
+model EvaluatorGenerationJob is JobLike<
+  EvaluatorVersion,
+  EvaluatorGenerationInputs
+> {
   @doc("The timestamp when the job was created, represented in Unix time (seconds since January 1, 1970).")
   @visibility(Lifecycle.Read)
   created_at: FoundryTimestamp;
