@@ -8435,6 +8435,20 @@
         "value"
       ]
     },
+    "AFDDomainMtlsParameters": {
+      "type": "object",
+      "description": "Contains the properties to configure mutual TLS for a custom domain with FQDN. Mutual TLS cannot be configured for custom domains with wildcard host names.",
+      "properties": {
+        "scenario": {
+          "$ref": "#/definitions/MtlsScenarioType",
+          "description": "Supported scenarios for establishing mTLS connection."
+        }
+      },
+      "discriminator": "scenario",
+      "required": [
+        "scenario"
+      ]
+    },
     "AFDDomainProperties": {
       "type": "object",
       "description": "The JSON object that contains the properties of the domain to create.",
@@ -8447,6 +8461,10 @@
         "tlsSettings": {
           "$ref": "#/definitions/AFDDomainHttpsParameters",
           "description": "The configuration specifying how to enable HTTPS for the domain - using AzureFrontDoor managed certificate or user's own certificate. If not specified, enabling ssl uses AzureFrontDoor managed certificate by default."
+        },
+        "mtlsSettings": {
+          "$ref": "#/definitions/AFDDomainMtlsParameters",
+          "description": "The configuration specifying how to enable mutual TLS for the domain, including specifying allowed FQDNs and which server certificate(s) to use."
         },
         "azureDnsZone": {
           "$ref": "#/definitions/ResourceReference",
@@ -8515,6 +8533,10 @@
           "$ref": "#/definitions/AFDDomainHttpsParameters",
           "description": "The configuration specifying how to enable HTTPS for the domain - using AzureFrontDoor managed certificate or user's own certificate. If not specified, enabling ssl uses AzureFrontDoor managed certificate by default."
         },
+        "mtlsSettings": {
+          "$ref": "#/definitions/AFDDomainMtlsParameters",
+          "description": "The configuration specifying how to enable mutual TLS for the domain, including specifying allowed FQDNs and which server certificate(s) to use."
+        },
         "azureDnsZone": {
           "$ref": "#/definitions/ResourceReference",
           "description": "Resource reference to the Azure DNS zone"
@@ -8575,6 +8597,10 @@
           "$ref": "#/definitions/EnabledState",
           "description": "Whether to enable use of this rule. Permitted values are 'Enabled' or 'Disabled'"
         },
+        "enforceMtls": {
+          "$ref": "#/definitions/EnforceMtlsEnabledState",
+          "description": "Set to Disabled by default. If set to Enabled, only custom domains with mTLS enabled can be added to child Route resources."
+        },
         "provisioningState": {
           "$ref": "#/definitions/AfdProvisioningState",
           "description": "Provisioning status",
@@ -8607,6 +8633,10 @@
         "enabledState": {
           "$ref": "#/definitions/EnabledState",
           "description": "Whether to enable use of this rule. Permitted values are 'Enabled' or 'Disabled'"
+        },
+        "enforceMtls": {
+          "$ref": "#/definitions/EnforceMtlsEnabledState",
+          "description": "Set to Disabled by default. If set to Enabled, only custom domains with mTLS enabled can be added to child Route resources."
         }
       }
     },
@@ -9296,6 +9326,86 @@
         }
       }
     },
+    "AfdSecretMtlsCertificateChain": {
+      "type": "object",
+      "description": "Server-side certificate used for mTLS validation",
+      "properties": {
+        "secretSource": {
+          "$ref": "#/definitions/ResourceReference",
+          "description": "Resource reference to the Azure Key Vault secret. Expected to be in format of /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/secrets/{secretName}"
+        },
+        "secretVersion": {
+          "type": "string",
+          "description": "Version of the secret to be used"
+        },
+        "expirationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Soonest expiration date among certificates in customer's certificate chain in ISO 8601 compliant format yyyy-MM-ddTHH:mm:ss.fffffffK in UTC",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "secretSource",
+        "secretVersion"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SecretParameters"
+        }
+      ],
+      "x-ms-discriminator-value": "MtlsCertificateChain"
+    },
+    "AfdUrlSigningAction": {
+      "type": "object",
+      "description": "Defines the url signing action for the delivery rule.",
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/AfdUrlSigningActionParameters",
+          "description": "Defines the parameters for the action."
+        }
+      },
+      "required": [
+        "parameters"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleAction"
+        }
+      ],
+      "x-ms-discriminator-value": "AfdUrlSigning"
+    },
+    "AfdUrlSigningActionParameters": {
+      "type": "object",
+      "description": "Defines the parameters for the Url Signing action.",
+      "properties": {
+        "typeName": {
+          "$ref": "#/definitions/TypeName"
+        },
+        "keyGroupReference": {
+          "$ref": "#/definitions/ResourceReference",
+          "description": "Resource reference to the Azure Key Vault secret. Expected to be in format of /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/keyGroups/{keyGroupName}"
+        },
+        "algorithm": {
+          "$ref": "#/definitions/Algorithm",
+          "description": "Algorithm to use for URL signing"
+        },
+        "parameterNameOverride": {
+          "type": "array",
+          "description": "Defines which query string parameters in the url to be considered for expires, key id etc.",
+          "items": {
+            "$ref": "#/definitions/UrlSigningParamIdentifier"
+          },
+          "x-ms-identifiers": [
+            "paramName"
+          ]
+        }
+      },
+      "required": [
+        "typeName",
+        "keyGroupReference"
+      ]
+    },
     "Algorithm": {
       "type": "string",
       "description": "Algorithm to use for URL signing",
@@ -9870,6 +9980,28 @@
         ]
       }
     },
+    "CertificateRevocationCheckEnabledState": {
+      "type": "string",
+      "description": "Set to Enabled by default. If set to Disabled, revocation status of client certificate chain will be checked before establishing mutual TLS connection.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "CertificateRevocationCheckEnabledState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled"
+          }
+        ]
+      }
+    },
     "CertificateSource": {
       "type": "string",
       "description": "Defines the source of the SSL certificate.",
@@ -10048,6 +10180,82 @@
         }
       }
     },
+    "ClientCertificateRequiredAndOriginValidatesAdvancedSettings": {
+      "type": "object",
+      "description": "Advanced settings for MtlsScenarioType enum value: ClientCertificateRequiredAndOriginValidates.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AFDDomainMtlsParameters"
+        }
+      ],
+      "x-ms-discriminator-value": "ClientCertificateRequiredAndOriginValidates"
+    },
+    "ClientCertificateRequiredAndValidatedAdvancedSettings": {
+      "type": "object",
+      "description": "Advanced settings for MtlsScenarioType enum value: ClientCertificateRequiredAndValidated.",
+      "properties": {
+        "secrets": {
+          "type": "array",
+          "description": "List of one or two of Resource References (ie. subs/rg/profile/secret) to Secrets of type MtlsCertificateChain to use in mutual TLS handshake as the trusted issuer certificate chain.",
+          "items": {
+            "$ref": "#/definitions/ResourceReference"
+          }
+        },
+        "allowedFqdns": {
+          "type": "array",
+          "description": "List of FQDNs that will be accepted for mutual TLS validation.",
+          "items": {
+            "$ref": "#/definitions/Fqdn"
+          }
+        },
+        "certificateRevocationCheck": {
+          "$ref": "#/definitions/CertificateRevocationCheckEnabledState",
+          "description": "Set to Enabled by default. If set to Disabled, revocation status of client certificate chain will be checked before establishing mutual TLS connection."
+        }
+      },
+      "required": [
+        "secrets"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AFDDomainMtlsParameters"
+        }
+      ],
+      "x-ms-discriminator-value": "ClientCertificateRequiredAndValidated"
+    },
+    "ClientCertificateValidatedIfPresentedAdvancedSettings": {
+      "type": "object",
+      "description": "Advanced settings for MtlsScenarioType enum value: ClientCertificateValidatedIfPresented.",
+      "properties": {
+        "secrets": {
+          "type": "array",
+          "description": "List of one or two of Resource References (ie. subs/rg/profile/secret) to Secrets of type MtlsCertificateChain to use in mutual TLS handshake as the trusted issuer certificate chain.",
+          "items": {
+            "$ref": "#/definitions/ResourceReference"
+          }
+        },
+        "allowedFqdns": {
+          "type": "array",
+          "description": "List of FQDNs that will be accepted for mutual TLS validation.",
+          "items": {
+            "$ref": "#/definitions/Fqdn"
+          }
+        },
+        "certificateRevocationCheck": {
+          "$ref": "#/definitions/CertificateRevocationCheckEnabledState",
+          "description": "Set to Enabled by default. If set to Disabled, revocation status of client certificate chain will be checked before establishing mutual TLS connection."
+        }
+      },
+      "required": [
+        "secrets"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AFDDomainMtlsParameters"
+        }
+      ],
+      "x-ms-discriminator-value": "ClientCertificateValidatedIfPresented"
+    },
     "ClientPortMatchConditionParameters": {
       "type": "object",
       "description": "Defines the parameters for ClientPort match conditions",
@@ -10147,6 +10355,16 @@
           }
         ]
       }
+    },
+    "CompleteMtlsPassthroughToOriginAdvancedSettings": {
+      "type": "object",
+      "description": "Advanced settings for MtlsScenarioType enum value: CompleteMtlsPassthroughToOrigin.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AFDDomainMtlsParameters"
+        }
+      ],
+      "x-ms-discriminator-value": "CompleteMtlsPassthroughToOrigin"
     },
     "Components18OrqelSchemasWafmetricsresponsePropertiesSeriesItemsPropertiesDataItems": {
       "type": "object",
@@ -10984,7 +11202,9 @@
         "UrlRewrite",
         "UrlSigning",
         "OriginGroupOverride",
-        "RouteConfigurationOverride"
+        "RouteConfigurationOverride",
+        "EdgeAction",
+        "AfdUrlSigning"
       ],
       "x-ms-enum": {
         "name": "DeliveryRuleActionName",
@@ -11025,6 +11245,14 @@
           {
             "name": "RouteConfigurationOverride",
             "value": "RouteConfigurationOverride"
+          },
+          {
+            "name": "EdgeAction",
+            "value": "EdgeAction"
+          },
+          {
+            "name": "AfdUrlSigning",
+            "value": "AfdUrlSigning"
           }
         ]
       }
@@ -11052,7 +11280,8 @@
         "DeliveryRuleHeaderActionParameters",
         "DeliveryRuleCacheExpirationActionParameters",
         "DeliveryRuleCacheKeyQueryStringBehaviorActionParameters",
-        "DeliveryRuleRouteConfigurationOverrideActionParameters"
+        "DeliveryRuleRouteConfigurationOverrideActionParameters",
+        "DeliveryRuleEdgeActionParameters"
       ],
       "x-ms-enum": {
         "name": "DeliveryRuleActionParametersType",
@@ -11089,6 +11318,10 @@
           {
             "name": "DeliveryRuleRouteConfigurationOverrideActionParameters",
             "value": "DeliveryRuleRouteConfigurationOverrideActionParameters"
+          },
+          {
+            "name": "DeliveryRuleEdgeActionParameters",
+            "value": "DeliveryRuleEdgeActionParameters"
           }
         ]
       }
@@ -11301,6 +11534,30 @@
         }
       ],
       "x-ms-discriminator-value": "Cookies"
+    },
+    "DeliveryRuleEdgeActionParameters": {
+      "type": "object",
+      "description": "Defines the parameters for the edge action.",
+      "properties": {
+        "edgeActionReference": {
+          "$ref": "#/definitions/ResourceReference",
+          "description": "defines the edge action that will be invoked."
+        },
+        "invocationPoint": {
+          "$ref": "#/definitions/InvocationPoint",
+          "description": "Defines at which point in the request processing pipeline the edge action will be invoked."
+        }
+      },
+      "required": [
+        "edgeActionReference",
+        "invocationPoint"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleActionParameters"
+        }
+      ],
+      "x-ms-discriminator-value": "DeliveryRuleEdgeActionParameters"
     },
     "DeliveryRuleHostNameCondition": {
       "type": "object",
@@ -11831,6 +12088,25 @@
         ]
       }
     },
+    "EdgeAction": {
+      "type": "object",
+      "description": "Defines the edge action for the delivery rule.",
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/DeliveryRuleEdgeActionParameters",
+          "description": "Defines the parameters for the action."
+        }
+      },
+      "required": [
+        "parameters"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleAction"
+        }
+      ],
+      "x-ms-discriminator-value": "EdgeAction"
+    },
     "EdgeNode": {
       "type": "object",
       "description": "Edgenode is a global Point of Presence (POP) location used to deliver CDN content to end users.",
@@ -12224,6 +12500,28 @@
         }
       }
     },
+    "EnforceMtlsEnabledState": {
+      "type": "string",
+      "description": "Set to Disabled by default. If set to Enabled, only custom domains with mTLS enabled can be added to child Route resources.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "EnforceMtlsEnabledState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled"
+          }
+        ]
+      }
+    },
     "ForwardingProtocol": {
       "type": "string",
       "description": "Protocol this rule will use when forwarding traffic to backends.",
@@ -12250,6 +12548,10 @@
           }
         ]
       }
+    },
+    "Fqdn": {
+      "type": "string",
+      "pattern": "^((?!xn--)[a-zA-Z0-9]([a-zA-Z0-9\\-]{0,61}[a-zA-Z0-9])?\\.)+[a-zA-Z]{2,61}$"
     },
     "GeoFilter": {
       "type": "object",
@@ -12553,6 +12855,28 @@
           {
             "name": "Equal",
             "value": "Equal"
+          }
+        ]
+      }
+    },
+    "InvocationPoint": {
+      "type": "string",
+      "description": "Defines at which point in the request processing pipeline the edge action will be invoked.",
+      "enum": [
+        "ClientRequest",
+        "OriginRequest"
+      ],
+      "x-ms-enum": {
+        "name": "InvocationPoint",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ClientRequest",
+            "value": "ClientRequest"
+          },
+          {
+            "name": "OriginRequest",
+            "value": "OriginRequest"
           }
         ]
       }
@@ -13550,6 +13874,38 @@
         "modelAsString": false
       }
     },
+    "MtlsScenarioType": {
+      "type": "string",
+      "description": "Supported scenarios for establishing mTLS connection.",
+      "enum": [
+        "ClientCertificateRequiredAndValidated",
+        "ClientCertificateRequiredAndOriginValidates",
+        "ClientCertificateValidatedIfPresented",
+        "CompleteMtlsPassthroughToOrigin"
+      ],
+      "x-ms-enum": {
+        "name": "MtlsScenarioType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ClientCertificateRequiredAndValidated",
+            "value": "ClientCertificateRequiredAndValidated"
+          },
+          {
+            "name": "ClientCertificateRequiredAndOriginValidates",
+            "value": "ClientCertificateRequiredAndOriginValidates"
+          },
+          {
+            "name": "ClientCertificateValidatedIfPresented",
+            "value": "ClientCertificateValidatedIfPresented"
+          },
+          {
+            "name": "CompleteMtlsPassthroughToOrigin",
+            "value": "CompleteMtlsPassthroughToOrigin"
+          }
+        ]
+      }
+    },
     "Operation": {
       "type": "object",
       "description": "CDN REST API operation",
@@ -13778,7 +14134,35 @@
           "type": "string",
           "format": "uri",
           "description": "The scope used when requesting token from Microsoft Entra. For example, for Azure Blob Storage, scope could be \"https://storage.azure.com/.default\"."
+        },
+        "tokenDestinationHeader": {
+          "$ref": "#/definitions/OriginAuthenticationTokenDestinationHeader",
+          "description": "The HTTP request header where the origin authentication token will be placed when forwarding the request to the origin. If not specified, the service will use the `Authorization` header for backward compatibility."
         }
+      }
+    },
+    "OriginAuthenticationTokenDestinationHeader": {
+      "type": "string",
+      "description": "The HTTP request header where the origin authentication token is placed when forwarding the request to the origin.",
+      "enum": [
+        "Authorization",
+        "X-Azure-Authorization"
+      ],
+      "x-ms-enum": {
+        "name": "OriginAuthenticationTokenDestinationHeader",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Authorization",
+            "value": "Authorization",
+            "description": "Place the token in the standard `Authorization` request header (default behavior)."
+          },
+          {
+            "name": "XAzureAuthorization",
+            "value": "X-Azure-Authorization",
+            "description": "Place the token in the `X-Azure-Authorization` request header to avoid conflicts with an existing `Authorization` header set by the client."
+          }
+        ]
       }
     },
     "OriginAuthenticationType": {
@@ -16746,7 +17130,8 @@
         "UrlSigningKey",
         "CustomerCertificate",
         "ManagedCertificate",
-        "AzureFirstPartyManagedCertificate"
+        "AzureFirstPartyManagedCertificate",
+        "MtlsCertificateChain"
       ],
       "x-ms-enum": {
         "name": "SecretType",
@@ -16767,6 +17152,10 @@
           {
             "name": "AzureFirstPartyManagedCertificate",
             "value": "AzureFirstPartyManagedCertificate"
+          },
+          {
+            "name": "MtlsCertificateChain",
+            "value": "MtlsCertificateChain"
           }
         ]
       }
@@ -16897,6 +17286,13 @@
           "items": {
             "type": "string"
           }
+        },
+        "routes": {
+          "type": "array",
+          "description": "List of routes.",
+          "items": {
+            "$ref": "#/definitions/ResourceReference"
+          }
         }
       }
     },
@@ -16915,6 +17311,10 @@
             "$ref": "#/definitions/SecurityPolicyWebApplicationFirewallAssociation"
           },
           "x-ms-identifiers": []
+        },
+        "isProfileLevel": {
+          "type": "boolean",
+          "description": "Indicates if this is a profile-level WAF policy."
         }
       },
       "allOf": [
@@ -17457,6 +17857,22 @@
           {
             "name": "RemoveNulls",
             "value": "RemoveNulls"
+          }
+        ]
+      }
+    },
+    "TypeName": {
+      "type": "string",
+      "enum": [
+        "DeliveryRuleAfdUrlSigningActionParameters"
+      ],
+      "x-ms-enum": {
+        "name": "TypeName",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DeliveryRuleAfdUrlSigningActionParameters",
+            "value": "DeliveryRuleAfdUrlSigningActionParameters"
           }
         ]
       }
