@@ -1,10 +1,9 @@
 import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
-import "@typespec/openapi";
 
 using Azure.ClientGenerator.Core;
+using Azure.ClientGenerator.Core.Legacy;
 using Microsoft.Synapse;
-using TypeSpec.OpenAPI;
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(AvailableRpOperation.properties);
