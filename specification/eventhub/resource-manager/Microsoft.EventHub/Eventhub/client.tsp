@@ -83,6 +83,7 @@ using Microsoft.EventHub;
 @@clientName(Encryption.keySource, "KeySource", "csharp");
 @@clientName(SchemaType, "EventHubsSchemaType", "csharp");
 @@clientName(SchemaCompatibility, "EventHubsSchemaCompatibility", "csharp");
+@@clientName(IpAddressType, "EventHubsIPAddressType", "csharp");
 @@clientName(ClusterProperties.createdAt, "CreatedOn", "csharp");
 @@alternateType(ClusterProperties.createdAt, utcDateTime, "csharp");
 @@clientName(ClusterProperties.updatedAt, "UpdatedOn", "csharp");
@@ -174,7 +175,7 @@ using Microsoft.EventHub;
   "EventHubsNamespaceGeoDataReplicationProperties",
   "csharp"
 );
-@@clientName(GeoDRRoleType, "EventHubsNamespaceGeoDRRoleType", "csharp");
+@@clientName(GeoDRRoleType, "EventHubsNamespaceGeoDrRoleType", "csharp");
 @@alternateType(
   NamespaceReplicaLocation.clusterArmId,
   Azure.Core.armResourceIdentifier,
@@ -185,6 +186,11 @@ using Microsoft.EventHub;
 @@clientName(
   NamespaceReplicaLocation,
   "EventHubsNamespaceReplicaLocation",
+  "csharp"
+);
+@@clientName(
+  NetworkRuleSetListResult,
+  "EventHubsNetworkRuleSetListResult",
   "csharp"
 );
 @@clientName(ErrorDetail, "EventHubsErrorDetail", "csharp");
