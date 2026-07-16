@@ -169,6 +169,7 @@ model GetDependencyViewForAllMachinesOperationResult {
 @doc("Model representing properties returned upon successful completion of the export dependencies asynchronous operation.")
 @added(Versions.v2025_07_01_preview)
 model GetDependencyViewForAllMachinesResultProperties {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("The SAS URI of the blob containing the layout file for the multi-server view.")
   layoutFileSasUrl: string;
 }

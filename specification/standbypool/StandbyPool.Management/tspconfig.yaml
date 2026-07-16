@@ -1,6 +1,7 @@
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"
 parameters:
   "service-dir":
     default: "sdk/standbypool"
@@ -24,6 +25,10 @@ options:
   "@azure-typespec/http-client-csharp-mgmt":
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: "Azure.ResourceManager.StandbyPool"
+  "@azure-typespec/http-client-csharp-provisioning":
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.Provisioning.StandbyPool"
+    namespace: "Azure.Provisioning.StandbyPool"
+    api-version: "2025-10-01"
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
     emitter-output-dir: "{output-dir}/{service-dir}/arm-standbypool"

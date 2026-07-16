@@ -17,8 +17,10 @@ namespace Microsoft.Storage;
  */
 @parentResource(StorageAccount)
 @added(Versions.v2025_08_01)
-model Connector
-  is Azure.ResourceManager.TrackedResource<StorageConnectorProperties, false> {
+model Connector is Azure.ResourceManager.TrackedResource<
+  StorageConnectorProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = Connector,
     KeyName = "connectorName",
