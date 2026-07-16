@@ -1,8 +1,10 @@
 import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
+import "@typespec/openapi";
 
 using Azure.ClientGenerator.Core;
 using Microsoft.Synapse;
+using TypeSpec.OpenAPI;
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(AvailableRpOperation.properties);
@@ -143,7 +145,7 @@ using Microsoft.Synapse;
 @@flattenProperty(GeoBackupPolicy.properties);
 
 @@clientName(
-  DataWarehouseUserActivitiesOperationGroup,
+  SqlPoolDataWarehouseUserActivities,
   "DataWarehouseUserActivities"
 );
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
@@ -155,7 +157,7 @@ using Microsoft.Synapse;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(ReplicationLink.properties);
 
-@@clientName(MaintenanceWindowsOperationGroup, "MaintenanceWindows");
+@@clientName(SqlPoolMaintenanceWindows, "MaintenanceWindows");
 @@clientName(
   SqlPoolMaintenanceWindows.createOrUpdate::parameters.resource,
   "parameters"
@@ -164,7 +166,7 @@ using Microsoft.Synapse;
 @@flattenProperty(MaintenanceWindows.properties);
 
 @@clientName(
-  MaintenanceWindowOptionsOperationGroup,
+  SqlPoolMaintenanceWindowOptions,
   "MaintenanceWindowOptions"
 );
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
@@ -292,7 +294,7 @@ using Microsoft.Synapse;
 @@flattenProperty(RecoverableSqlPool.properties);
 
 @@clientName(
-  DedicatedSQLminimalTlsSettingsOperationGroup,
+  WorkspaceManagedSqlServerDedicatedSQLMinimalTlsSettings,
   "DedicatedSQLminimalTlsSettings"
 );
 @@clientName(
