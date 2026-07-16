@@ -38,8 +38,10 @@ import "./ExpressRouteCrossConnection.tsp";
 import "./ExpressRoutePortsLocation.tsp";
 import "./ExpressRoutePort.tsp";
 import "./ExpressRoutePortAuthorization.tsp";
+import "./ExpressRouteLag.tsp";
 import "./FirewallPolicy.tsp";
 import "./FirewallPolicyRuleCollectionGroup.tsp";
+import "./FirewallPolicyKubeSelectorGroup.tsp";
 import "./SignaturesOverrides.tsp";
 import "./FirewallPolicyDraft.tsp";
 import "./FirewallPolicyRuleCollectionGroupDraft.tsp";
@@ -83,6 +85,10 @@ import "./NspAssociation.tsp";
 import "./NspLink.tsp";
 import "./NspLinkReference.tsp";
 import "./NspLoggingConfiguration.tsp";
+import "./NeuroShield.tsp";
+import "./NeuroShieldProtectedResource.tsp";
+import "./NeuroShieldFinding.tsp";
+import "./NeuroShieldMitigation.tsp";
 import "./ReachabilityAnalysisIntent.tsp";
 import "./ReachabilityAnalysisRun.tsp";
 import "./VerifierWorkspace.tsp";
@@ -136,6 +142,8 @@ import "./routes.tsp";
 import "./VirtualNetworkAppliance.tsp";
 import "./ServiceGateway.tsp";
 import "./InterconnectGroup.tsp";
+import "./FirstPartyServiceTag.tsp";
+import "./AddressPrefixSet.tsp";
 import "../Common/main.tsp";
 
 using TypeSpec.Rest;
@@ -146,11 +154,11 @@ using Azure.ResourceManager;
 using TypeSpec.Versioning;
 using Common;
 /**
- * APIs to manage web application firewall rules.
+ * APIs to manage Microsoft Azure network resources.
  */
 @Azure.ResourceManager.Legacy.features(Features)
 @armProviderNamespace
-@service(#{ title: "WebApplicationFirewallManagement" })
+@service(#{ title: "NetworkManagementClient" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.Network;
@@ -176,6 +184,13 @@ enum Versions {
    */
   @useDependency(Common.Versions.v2025_09_01)
   v2025_09_01: "2025-09-01",
+
+  /**
+   * The 2026-06-01-preview API version.
+   */
+  @Azure.Core.previewVersion
+  @useDependency(Common.Versions.v2026_06_01_preview)
+  v2026_06_01_preview: "2026-06-01-preview",
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
