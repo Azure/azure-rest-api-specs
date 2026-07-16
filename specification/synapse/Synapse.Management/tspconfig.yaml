@@ -1,0 +1,40 @@
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    use-read-only-status-schema: true
+    omit-unreachable-types: true
+    emitter-output-dir: "{project-root}/.."
+    azure-resource-provider-folder: "resource-manager"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
+    examples-dir: "{project-root}/examples"
+  "@azure-typespec/http-client-csharp-provisioning":
+    namespace: "Azure.Provisioning.Synapse"
+    emitter-output-dir: "{project-root}/Azure.Provisioning.Synapse"
+    api-version: "2021-06-01"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+  disable:
+    "@azure-tools/typespec-azure-core/casing-style": "Preserve the existing Synapse Swagger API."
+    "@azure-tools/typespec-azure-core/composition-over-inheritance": "Preserve the existing Synapse Swagger API."
+    "@azure-tools/typespec-azure-core/documentation-required": "Preserve the existing Synapse Swagger API."
+    "@azure-tools/typespec-azure-core/no-openapi": "Preserve the existing Synapse Swagger API."
+    "@azure-tools/typespec-azure-core/no-string-discriminator": "Preserve the existing Synapse Swagger API."
+    "@azure-tools/typespec-azure-core/no-unknown": "Preserve the existing Synapse Swagger API."
+    "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes": "Preserve the existing Synapse Swagger API."
+    "@azure-tools/typespec-azure-resource-manager/arm-no-record": "Preserve the existing Synapse Swagger API."
+    "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes": "Preserve the existing Synapse Swagger API."
+    "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property": "Preserve the existing Synapse Swagger API."
+    "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response": "Preserve the existing Synapse Swagger API."
+    "@azure-tools/typespec-azure-resource-manager/arm-resource-patch": "Preserve the existing Synapse Swagger API."
+    "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state": "Preserve the existing Synapse Swagger API."
+    "@azure-tools/typespec-azure-resource-manager/empty-updateable-properties": "Preserve the existing Synapse Swagger API."
+    "@azure-tools/typespec-azure-resource-manager/lro-location-header": "Preserve the existing Synapse Swagger API."
+    "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers": "Preserve the existing Synapse Swagger API."
+    "@azure-tools/typespec-azure-resource-manager/no-empty-model": "Preserve the existing Synapse Swagger API."
+    "@azure-tools/typespec-azure-resource-manager/no-override-props": "Preserve the existing Synapse Swagger API."
+    "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation": "Preserve the existing Synapse Swagger API."
+    "@azure-tools/typespec-azure-resource-manager/no-response-body": "Preserve the existing Synapse Swagger API."
+    "@azure-tools/typespec-azure-resource-manager/secret-prop": "Preserve the existing Synapse Swagger API."
+    "@azure-tools/typespec-azure-resource-manager/version-progression": "Preserve the existing Synapse Swagger API."
