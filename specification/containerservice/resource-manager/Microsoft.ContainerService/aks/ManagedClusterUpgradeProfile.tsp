@@ -20,11 +20,10 @@ namespace Microsoft.ContainerService;
  */
 @singleton("default")
 @parentResource(ManagedCluster)
-model ManagedClusterUpgradeProfile
-  is Azure.ResourceManager.ProxyResource<
-    ManagedClusterUpgradeProfileProperties,
-    false
-  > {
+model ManagedClusterUpgradeProfile is Azure.ResourceManager.ProxyResource<
+  ManagedClusterUpgradeProfileProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = ManagedClusterUpgradeProfile,
     KeyName = "upgradeProfile",

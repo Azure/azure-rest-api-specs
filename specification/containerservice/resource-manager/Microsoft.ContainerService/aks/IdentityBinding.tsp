@@ -231,6 +231,7 @@ model IdentityBindingOidcIssuerProfile {
   /**
    * The OIDC issuer URL of the IdentityBinding.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   oidcIssuerUrl?: url;
 }

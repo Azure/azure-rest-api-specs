@@ -1227,6 +1227,7 @@ model PolicyMetadataSlimProperties {
   /**
    * Url for getting additional content about the resource metadata.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   additionalContentUrl?: string;
 

@@ -13,8 +13,10 @@ namespace Microsoft.AzureArcData;
 /**
  * Data controller resource
  */
-model DataControllerResource
-  is Azure.ResourceManager.TrackedResource<DataControllerProperties, false> {
+model DataControllerResource is Azure.ResourceManager.TrackedResource<
+  DataControllerProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = DataControllerResource,
     KeyName = "dataControllerName",
