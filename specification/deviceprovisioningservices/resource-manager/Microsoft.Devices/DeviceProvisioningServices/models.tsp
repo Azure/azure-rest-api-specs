@@ -376,7 +376,7 @@ model IotDpsPropertiesDescription {
   /**
    * The Device Registry namespace that is linked to the provisioning service.
    */
-  @removed(Versions.v2026_08_01)
+  @removed(Versions.v2026_08_31)
   deviceRegistryNamespace?: DeviceRegistryNamespaceDescription;
 
   /**
@@ -422,7 +422,7 @@ model IotDpsPropertiesDescription {
   /**
    * Disables all authentication methods other than Azure RBAC.
    */
-  @added(Versions.v2026_08_01)
+  @added(Versions.v2026_08_31)
   disableLocalAuth?: boolean = false;
 }
 

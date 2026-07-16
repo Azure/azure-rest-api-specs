@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2026-08` is specified on the comma
 
 ```yaml $(tag) == 'package-2026-08'
 input-file:
-  - stable/2026-08-01/iotdps.json
+  - stable/2026-08-31/iotdps.json
 ```
 
 ### Tag: package-preview-2026-03
