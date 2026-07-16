@@ -15,8 +15,10 @@ namespace Microsoft.StorageMover;
  * The Job Definition resource.
  */
 @parentResource(Project)
-model JobDefinition
-  is Azure.ResourceManager.ProxyResource<JobDefinitionProperties, false> {
+model JobDefinition is Azure.ResourceManager.ProxyResource<
+  JobDefinitionProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = JobDefinition,
     KeyName = "jobDefinitionName",

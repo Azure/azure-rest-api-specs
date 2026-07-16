@@ -8,11 +8,10 @@ using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
 @doc("The Network Fabric Controller resource definition.")
-model NetworkFabricController
-  is Azure.ResourceManager.TrackedResource<
-    NetworkFabricControllerProperties,
-    false
-  > {
+model NetworkFabricController is Azure.ResourceManager.TrackedResource<
+  NetworkFabricControllerProperties,
+  false
+> {
   @doc("Name of the Network Fabric Controller.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
