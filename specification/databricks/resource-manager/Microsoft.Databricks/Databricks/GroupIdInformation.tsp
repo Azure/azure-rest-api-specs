@@ -15,8 +15,10 @@ namespace Microsoft.Databricks;
  * The group information for creating a private endpoint on a workspace
  */
 @parentResource(Workspace)
-model GroupIdInformation
-  is Azure.ResourceManager.ProxyResource<GroupIdInformationProperties, false> {
+model GroupIdInformation is Azure.ResourceManager.ProxyResource<
+  GroupIdInformationProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = GroupIdInformation,
     KeyName = "groupId",

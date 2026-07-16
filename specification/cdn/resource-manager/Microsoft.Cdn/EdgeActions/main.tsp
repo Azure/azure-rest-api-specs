@@ -95,10 +95,9 @@ interface EdgeActions {
     Azure.ResourceManager.Foundations.BaseParameters<EdgeAction>,
     ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader,
     {},
-
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse
+    | ArmDeletedResponse
+    | ArmDeleteAcceptedLroResponse
+    | ArmDeletedNoContentResponse
   >;
   listByResourceGroup is ArmResourceListByParent<EdgeAction>;
   listBySubscription is ArmListBySubscription<EdgeAction>;
@@ -135,10 +134,9 @@ interface EdgeActionVersions {
     Azure.ResourceManager.Foundations.BaseParameters<EdgeActionVersion>,
     ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader,
     {},
-
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse
+    | ArmDeletedResponse
+    | ArmDeleteAcceptedLroResponse
+    | ArmDeletedNoContentResponse
   >;
   listByEdgeAction is ArmResourceListByParent<EdgeActionVersion>;
   deployVersionCode is ArmResourceActionAsync<
@@ -188,10 +186,9 @@ interface EdgeActionExecutionFilters {
     Azure.ResourceManager.Foundations.BaseParameters<EdgeActionExecutionFilter>,
     ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader,
     {},
-
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse
+    | ArmDeletedResponse
+    | ArmDeleteAcceptedLroResponse
+    | ArmDeletedNoContentResponse
   >;
   listByEdgeAction is ArmResourceListByParent<EdgeActionExecutionFilter>;
 }

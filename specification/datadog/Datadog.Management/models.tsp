@@ -1006,6 +1006,7 @@ model DatadogSingleSignOnProperties {
   /**
    * The login URL specific to this Datadog Organization.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   singleSignOnUrl?: string;
 }
