@@ -11,8 +11,10 @@ namespace PolicyInsightsApi;
  * An attestation resource.
  */
 @subscriptionResource
-model Attestation
-  is Azure.ResourceManager.ProxyResource<AttestationProperties, false> {
+model Attestation is Azure.ResourceManager.ProxyResource<
+  AttestationProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = Attestation,
     KeyName = "attestationName",

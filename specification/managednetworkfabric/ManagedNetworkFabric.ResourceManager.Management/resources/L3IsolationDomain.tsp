@@ -9,8 +9,10 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.ManagedNetworkFabric;
 @doc("The L3 Isolation Domain resource definition.")
-model L3IsolationDomain
-  is Azure.ResourceManager.TrackedResource<L3IsolationDomainProperties, false> {
+model L3IsolationDomain is Azure.ResourceManager.TrackedResource<
+  L3IsolationDomainProperties,
+  false
+> {
   @doc("Name of the L3 Isolation Domain.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
