@@ -17,8 +17,10 @@ namespace Microsoft.StorageMover;
  * The Endpoint resource, which contains information about file sources and targets.
  */
 @parentResource(StorageMover)
-model Endpoint
-  is Azure.ResourceManager.ProxyResource<EndpointBaseProperties, false> {
+model Endpoint is Azure.ResourceManager.ProxyResource<
+  EndpointBaseProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = Endpoint,
     KeyName = "endpointName",

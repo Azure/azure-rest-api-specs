@@ -2498,7 +2498,7 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(MongoIndex.key, "!autorest,!javascript");
+@@Legacy.flattenProperty(MongoIndex.key, "!autorest,!javascript,!java");
 
 // Restorable* "GetResult" models declare id/name/type inline rather than
 // extending CommonTypes.Resource, so the generator cannot infer them as ARM
