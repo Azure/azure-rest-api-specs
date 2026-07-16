@@ -53,19 +53,15 @@ interface ServerFarmSiloResources {
   /**
    * Creates or updates a silo for an App Service plan.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "The ServerFarmSilo service returns 202 Accepted (not 201 Created) from its long-running create-or-update PUT; the contract is modeled to match the service's actual response codes."
   createOrUpdateServerFarmSilo is ArmResourceCreateOrReplaceAsync<
     ServerFarmSilo,
-    Response =
-      | ArmResourceUpdatedResponse<ServerFarmSilo>
-      | ArmAcceptedLroResponse,
     Error = DefaultErrorResponse
   >;
 
   /**
    * Deletes a silo for an App Service plan.
    */
-  deleteServerFarmSilo is ArmResourceDeleteSync<
+  deleteServerFarmSilo is ArmResourceDeleteWithoutOkAsync<
     ServerFarmSilo,
     Error = DefaultErrorResponse
   >;

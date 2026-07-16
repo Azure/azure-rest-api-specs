@@ -16509,6 +16509,7 @@ model StaticSitesOperationStatus {
 /**
  * Defines provisioning states for silo resources.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "The App Service Active Backup silo controller defines only InProgress, Succeeded, Failed, and Deleting states and never returns a Canceled terminal state; the enum matches the implemented service contract."
 @added(Versions.v2026_08_01)
 union SiloProvisioningState {
   string,
@@ -16527,11 +16528,6 @@ union SiloProvisioningState {
    * Provisioning failed.
    */
   Failed: "Failed",
-
-  /**
-   * Provisioning was canceled.
-   */
-  Canceled: "Canceled",
 
   /**
    * Resource is being deleted asynchronously.
@@ -16640,12 +16636,6 @@ model SiteSiloProperties {
   networkingOverride?: SiloNetworkingOverride;
 
   /**
-   * Application setting overrides for the silo.
-   */
-  @identifiers(#["name"])
-  appSettingsOverrides?: NameValuePair[];
-
-  /**
    * Provisioning state of the silo.
    */
   @visibility(Lifecycle.Read)
@@ -16657,10 +16647,10 @@ model SiteSiloProperties {
   followLastKnownGood?: boolean;
 
   /**
-   * Short identifier of the revision currently applied to this silo.
+   * Monotonic revision number currently applied to this silo.
    */
   @visibility(Lifecycle.Read)
-  revisionId?: string;
+  revisionNumber?: int64;
 
   /**
    * Default host name of the silo site.

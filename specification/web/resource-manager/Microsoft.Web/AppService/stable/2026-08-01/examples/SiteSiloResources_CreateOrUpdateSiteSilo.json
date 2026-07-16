@@ -15,12 +15,6 @@
         "networkingOverride": {
           "vnetIntegrationOverride": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/silo-subnet"
         },
-        "appSettingsOverrides": [
-          {
-            "name": "WEBSITE_TIME_ZONE",
-            "value": "Pacific Standard Time"
-          }
-        ],
         "followLastKnownGood": false
       }
     }
@@ -40,12 +34,6 @@
           "networkingOverride": {
             "vnetIntegrationOverride": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/silo-subnet"
           },
-          "appSettingsOverrides": [
-            {
-              "name": "WEBSITE_TIME_ZONE",
-              "value": "Pacific Standard Time"
-            }
-          ],
           "provisioningState": "Succeeded",
           "followLastKnownGood": false,
           "defaultHostName": "sitef6141-silo1.azurewebsites.net",
@@ -56,9 +44,23 @@
         }
       }
     },
-    "202": {
-      "headers": {
-        "Location": "https://management.azure.com/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/providers/Microsoft.Web/locations/EastUS/operationResults/silo1?api-version=2026-08-01"
+    "201": {
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Web/sites/sitef6141/silos/silo1",
+        "name": "silo1",
+        "type": "Microsoft.Web/sites/silos",
+        "properties": {
+          "siloLocation": "West US 2",
+          "primarySiteName": "sitef6141",
+          "primaryLocation": "East US",
+          "endpointStatus": "Enabled",
+          "trafficMode": "Active",
+          "networkingOverride": {
+            "vnetIntegrationOverride": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/silo-subnet"
+          },
+          "provisioningState": "InProgress",
+          "followLastKnownGood": false
+        }
       }
     }
   },

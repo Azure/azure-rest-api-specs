@@ -6573,12 +6573,15 @@
               "$ref": "#/definitions/ServerFarmSilo"
             }
           },
-          "202": {
-            "description": "Resource operation accepted.",
+          "201": {
+            "description": "Resource 'ServerFarmSilo' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ServerFarmSilo"
+            },
             "headers": {
-              "Location": {
+              "Azure-AsyncOperation": {
                 "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+                "description": "A link to the status monitor"
               },
               "Retry-After": {
                 "type": "integer",
@@ -6600,7 +6603,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/ServerFarmSilo"
         },
         "x-ms-long-running-operation": true
       },
@@ -6637,8 +6641,19 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
           },
           "204": {
             "description": "Resource does not exist."
@@ -6654,7 +6669,11 @@
           "Delete a silo of an App Service plan": {
             "$ref": "./examples/ServerFarmSiloResources_DeleteServerFarmSilo.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/sites": {
@@ -19491,12 +19510,15 @@
               "$ref": "#/definitions/SiteSilo"
             }
           },
-          "202": {
-            "description": "Resource operation accepted.",
+          "201": {
+            "description": "Resource 'SiteSilo' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SiteSilo"
+            },
             "headers": {
-              "Location": {
+              "Azure-AsyncOperation": {
                 "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+                "description": "A link to the status monitor"
               },
               "Retry-After": {
                 "type": "integer",
@@ -19518,7 +19540,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/SiteSilo"
         },
         "x-ms-long-running-operation": true
       },
@@ -19555,8 +19578,19 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
           },
           "204": {
             "description": "Resource does not exist."
@@ -19572,7 +19606,11 @@
           "Delete a silo of a web app": {
             "$ref": "./examples/SiteSiloResources_DeleteSiteSilo.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/sitecontainers": {
@@ -51237,7 +51275,6 @@
         "InProgress",
         "Succeeded",
         "Failed",
-        "Canceled",
         "Deleting"
       ],
       "x-ms-enum": {
@@ -51258,11 +51295,6 @@
             "name": "Failed",
             "value": "Failed",
             "description": "Provisioning failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Provisioning was canceled."
           },
           {
             "name": "Deleting",
@@ -53262,16 +53294,6 @@
           "$ref": "#/definitions/SiloNetworkingOverride",
           "description": "Networking overrides for the silo."
         },
-        "appSettingsOverrides": {
-          "type": "array",
-          "description": "Application setting overrides for the silo.",
-          "items": {
-            "$ref": "#/definitions/NameValuePair"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        },
         "provisioningState": {
           "$ref": "#/definitions/SiloProvisioningState",
           "description": "Provisioning state of the silo.",
@@ -53281,9 +53303,10 @@
           "type": "boolean",
           "description": "Whether the silo should follow the last known good revision."
         },
-        "revisionId": {
-          "type": "string",
-          "description": "Short identifier of the revision currently applied to this silo.",
+        "revisionNumber": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Monotonic revision number currently applied to this silo.",
           "readOnly": true
         },
         "defaultHostName": {
