@@ -30,7 +30,11 @@ extends:
         name: $(LINUXPOOL)
         image: $(LINUXVMIMAGE)
         os: linux
-      # Windows-only scanner; sourceAnalysisPool is Linux-only, so it can never run here.
-      antimalwareScan:
-        enabled: false
+      # sourceAnalysisPool is Linux-only: Windows-only SDL tools (e.g. AntiMalware, which requires
+      # Windows Defender) can never run here. antimalwareScan.enabled: false alone wasn't enough -
+      # it only suppressed the Binary-scan pass; the Source-scan pass still ran and failed with
+      # ConfigurationPathNotFoundException: antimalware-linux. Comprehensive SDL/Guardian scanning
+      # already happens via the dedicated /eng/pipelines/guardian.yml pipeline on a Windows pool,
+      # so disable all SDL tools here instead of re-enabling them one by one.
+      enableAllTools: false
     stages: ${{ parameters.stages }}
