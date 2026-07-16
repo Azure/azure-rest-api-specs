@@ -54,12 +54,11 @@ namespace ComputeGallery {
       Azure.ResourceManager.Foundations.DefaultBaseParameters<GalleryScriptVersion>,
       GalleryScriptVersionLroHeaders,
       {},
-
-        | ArmResourceUpdatedResponse<GalleryScriptVersion>
-        | ArmResourceCreatedResponse<
-            GalleryScriptVersion,
-            GalleryScriptVersionLroHeaders
-          >
+      | ArmResourceUpdatedResponse<GalleryScriptVersion>
+      | ArmResourceCreatedResponse<
+          GalleryScriptVersion,
+          GalleryScriptVersionLroHeaders
+        >
     >;
 
     /**
@@ -74,12 +73,11 @@ namespace ComputeGallery {
       Azure.ResourceManager.Foundations.DefaultBaseParameters<GalleryScriptVersion>,
       GalleryScriptVersionLroHeaders,
       {},
-
-        | ArmResponse<GalleryScriptVersion>
-        | ArmAcceptedLroResponse<
-            "Resource update request accepted.",
-            GalleryScriptVersionLroHeaders
-          >
+      | ArmResponse<GalleryScriptVersion>
+      | ArmAcceptedLroResponse<
+          "Resource update request accepted.",
+          GalleryScriptVersionLroHeaders
+        >
     >;
 
     /**
@@ -93,9 +91,8 @@ namespace ComputeGallery {
       Azure.ResourceManager.Foundations.DefaultBaseParameters<GalleryScriptVersion>,
       GalleryScriptVersionLroHeaders,
       {},
-
-        | ArmDeleteAcceptedLroResponse<GalleryScriptVersionLroHeaders<void>>
-        | ArmDeletedNoContentResponse
+      | ArmDeleteAcceptedLroResponse<GalleryScriptVersionLroHeaders<void>>
+      | ArmDeletedNoContentResponse
     >;
 
     /**

@@ -14,8 +14,10 @@ namespace PaloAltoNetworks.Cloudngfw;
  * PaloAltoNetworks GlobalRulestack
  */
 @tenantResource
-model GlobalRulestackResource
-  is Azure.ResourceManager.ProxyResource<RulestackProperties, false> {
+model GlobalRulestackResource is Azure.ResourceManager.ProxyResource<
+  RulestackProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = GlobalRulestackResource,
     KeyName = "globalRulestackName",
