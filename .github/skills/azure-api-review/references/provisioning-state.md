@@ -42,7 +42,13 @@ If no `provisioningState` is returned in a response, ARM assumes `Succeeded`.
 `provisioningState` **MUST** be marked as read-only:
 
 - **OpenAPI JSON:** `"readOnly": true`
-- **TypeSpec:** `@visibility(Lifecycle.Read)`
+- **TypeSpec:** Set `use-read-only-status-schema: true` in the
+  `@azure-tools/typespec-autorest` emitter options (default `false`).
+  Without it, the `ProvisioningStateMustBeReadOnly` LintDiff check fails. With it, the emitter stamps `readOnly: true`
+  onto the status **schema definition** itself, which is what the check inspects. The emitter auto-recognizes a schema
+  as an LRO status schema when its members are **named** `Succeeded`, `Failed`, and `Canceled` (which
+  `ResourceProvisioningState` supplies);
+  See the "`ProvisioningStateMustBeReadOnly` -- Emitter Workaround" section below.
 
 If a user includes `provisioningState` in a PUT request body (e.g.,
 after a GET round-trip), the RP **MUST** treat it as read-only. If the
@@ -126,3 +132,75 @@ union ProvisioningState {
 The `string` base type is included via `ResourceProvisioningState` to keep the enum extensible.
 
 **Reference:** [TypeSpec Azure -- Resource Provisioning State](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations)
+
+---
+
+## `ProvisioningStateMustBeReadOnly` -- Emitter Workaround (`use-read-only-status-schema`)
+
+Apply this whenever a PR **suppresses** the
+`ProvisioningStateMustBeReadOnly` linter rule, or whenever **LintDiff
+fails** with `ProvisioningStateMustBeReadOnly`. Recommend the emitter
+workaround below instead of (or before) adding or keeping a suppression.
+
+**Root cause.** The rule fires because `azure-openapi-validator` and
+`oav` ignore siblings of `$ref`. When the emitter produces
+`provisioningState` as
+`{ "$ref": "#/definitions/ProvisioningState", "readOnly": true }`, the
+`readOnly: true` sibling is dropped per JSON Schema semantics, so the
+linter sees a `provisioningState` that is not read-only -- even though
+the TypeSpec source correctly marks it `@visibility(Lifecycle.Read)`.
+References:
+
+- [Troubleshoot: ProvisioningStateMustBeReadOnly (official) -- azure.github.io/typespec-azure](https://azure.github.io/typespec-azure/docs/troubleshoot/status-read-only-error)
+- [[ProvisioningStateMustBeReadOnly] Rule ignores siblings of $ref -- Azure/azure-openapi-validator#637](https://github.com/Azure/azure-openapi-validator/issues/637)
+- [Support $ref siblings -- Azure/oav#848](https://github.com/Azure/oav/issues/848)
+- [Discussion -- Azure/azure-sdk-tools#6191](https://github.com/Azure/azure-sdk-tools/issues/6191)
+
+**Recommended fix (TypeSpec projects).** Add
+`use-read-only-status-schema: true` to the `@azure-tools/typespec-autorest`
+emitter options in `tspconfig.yaml`. With this option the emitter
+generates a dedicated read-only status schema (without the
+`$ref`-sibling `readOnly` pattern) that the linter recognizes, so the
+suppression is no longer needed:
+
+```yaml
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "resource-manager"
+    emitter-output-dir: "{project-root}/.."
+    examples-directory: examples
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/<service>.json"
+    omit-unreachable-types: true
+    use-read-only-status-schema: true
+```
+
+Only the `use-read-only-status-schema: true` line is required; the
+surrounding keys are the emitter block the project typically already
+has. If the project's `tspconfig.yaml` has no
+`@azure-tools/typespec-autorest` options block, add one.
+
+**The ARM scaffolding template enables this option automatically**, so a
+failing check usually means an older or hand-configured `tspconfig.yaml`.
+
+**How recognition works (and a silent-failure trap).** With the option on,
+the emitter stamps `readOnly: true` onto any `enum`/`union` it recognizes as
+an LRO status schema. Recognition is **by member name**: the members must be
+named `Succeeded`, `Failed`, and `Canceled` (the emitter matches the
+member/variant name, not its value), which `ResourceProvisioningState`
+supplies. `@Azure.Core.lroStatus` does **not** participate -- adding it
+changes nothing.
+
+**How to apply during review:**
+
+- **Suppression present (new or carried-over):** recommend adding
+  `use-read-only-status-schema: true`, then -- once the swagger is
+  regenerated -- removing the `ProvisioningStateMustBeReadOnly`
+  suppression (subject to the removal-safety rule
+  RPC-SUPPRESS-REMOVE-SAFELY). Note it is a **project-wide** option, so
+  it clears every `ProvisioningStateMustBeReadOnly` suppression in the
+  project, not just the one under review.
+- **LintDiff failure with no suppression yet:** recommend the emitter
+  option as the fix rather than adding a suppression.
+- **Handwritten OpenAPI (no TypeSpec):** the emitter option does not
+  apply. Inline the enum (drop the `$ref`) or wrap it in `allOf` so
+  `readOnly: true` is honored on the emitted schema.
