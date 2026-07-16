@@ -234,7 +234,7 @@ model ToolboxSearchPreviewToolboxTool extends ToolboxTool {
 /**
  * A toolbox search tool stored in a toolbox.
  */
-model ToolboxSearchToolboxTool extends ToolboxTool {
+model ToolSearchToolboxTool extends ToolboxTool {
   /**
    * The type of the tool. Always `toolbox_search`.
    */

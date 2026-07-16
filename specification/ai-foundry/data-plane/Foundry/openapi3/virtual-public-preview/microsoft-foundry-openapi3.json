@@ -83170,6 +83170,27 @@
         },
         "description": "A project connection resource."
       },
+      "ToolSearchToolboxTool": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "toolbox_search"
+            ],
+            "description": "The type of the tool. Always `toolbox_search`."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ToolboxTool"
+          }
+        ],
+        "description": "A toolbox search tool stored in a toolbox."
+      },
       "ToolUseFineTuningDataGenerationJobOptions": {
         "type": "object",
         "required": [
@@ -83259,27 +83280,6 @@
             "preview_tool"
           ]
         }
-      },
-      "ToolboxSearchToolboxTool": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "toolbox_search"
-            ],
-            "description": "The type of the tool. Always `toolbox_search`."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/ToolboxTool"
-          }
-        ],
-        "description": "A toolbox search tool stored in a toolbox."
       },
       "ToolboxSkill": {
         "type": "object",
@@ -83379,7 +83379,7 @@
             "work_iq_preview": "#/components/schemas/WorkIQPreviewToolboxTool",
             "fabric_iq_preview": "#/components/schemas/FabricIQPreviewToolboxTool",
             "toolbox_search_preview": "#/components/schemas/ToolboxSearchPreviewToolboxTool",
-            "toolbox_search": "#/components/schemas/ToolboxSearchToolboxTool"
+            "toolbox_search": "#/components/schemas/ToolSearchToolboxTool"
           }
         },
         "description": "An abstract representation of a tool stored in a toolbox."
