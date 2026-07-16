@@ -9,8 +9,10 @@ using TypeSpec.Versioning;
 namespace Microsoft.ManagedNetworkFabric;
 @doc("The Network Fabric resource definition.")
 @added(Versions.v2025_07_15)
-model NetworkFabric
-  is Azure.ResourceManager.TrackedResource<NetworkFabricProperties, false> {
+model NetworkFabric is Azure.ResourceManager.TrackedResource<
+  NetworkFabricProperties,
+  false
+> {
   @doc("Name of the Network Fabric.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
@@ -32,8 +34,10 @@ model NetworkFabric
 @doc("The Network Fabric resource definition.")
 @removed(Versions.v2025_07_15)
 @renamedFrom(Versions.v2025_07_15, "NetworkFabric")
-model NetworkFabricDeprecated
-  is Azure.ResourceManager.TrackedResource<NetworkFabricProperties, false> {
+model NetworkFabricDeprecated is Azure.ResourceManager.TrackedResource<
+  NetworkFabricProperties,
+  false
+> {
   @doc("Name of the Network Fabric.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path

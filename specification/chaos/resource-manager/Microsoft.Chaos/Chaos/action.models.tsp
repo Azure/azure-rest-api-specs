@@ -31,8 +31,10 @@ model Action is Azure.ResourceManager.ProxyResource<ActionProperties, false> {
  */
 @parentResource(Action)
 @added(Microsoft.Chaos.Versions.v2026_05_01_preview)
-model ActionVersion
-  is Azure.ResourceManager.ProxyResource<ActionProperties, false> {
+model ActionVersion is Azure.ResourceManager.ProxyResource<
+  ActionProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = ActionVersion,
     KeyName = "versionName",

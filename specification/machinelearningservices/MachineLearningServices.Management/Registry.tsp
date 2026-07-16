@@ -11,8 +11,10 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.MachineLearningServices;
 
-model Registry
-  is Azure.ResourceManager.TrackedResource<RegistryProperties, false> {
+model Registry is Azure.ResourceManager.TrackedResource<
+  RegistryProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = Registry,
     KeyName = "registryName",
