@@ -32,8 +32,9 @@ interface KnowledgeRetrieval {
       @body
       retrievalRequest: KnowledgeBaseRetrievalRequest;
     } & ClientRequestIdHeader,
-    | KnowledgeBaseRetrievalSuccessResponse
-    | KnowledgeBaseRetrievalPartialResponse,
+
+      | KnowledgeBaseRetrievalSuccessResponse
+      | KnowledgeBaseRetrievalPartialResponse,
     {},
     ErrorResponse
   >;

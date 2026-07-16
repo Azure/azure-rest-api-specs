@@ -997,6 +997,7 @@ model KnowledgeBaseSearchIndexReference extends KnowledgeBaseReference {
   searchSensitivityLabelInfo?: PurviewSensitivityLabelInfo;
 
   /** A Search-owned URL that points at the backing document for this reference, usable as a citation target. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Pre-existing API contract and shipped name with url"
   @added(Versions.v2026_08_01_preview)
   citationUrl?: url;
 }
@@ -1008,6 +1009,7 @@ model KnowledgeBaseAzureBlobReference extends KnowledgeBaseReference {
   type: KnowledgeBaseReferenceType.azureBlob;
 
   /** The blob URL for the reference. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Pre-existing API contract and shipped name with url"
   blobUrl?: string;
 
   /** The sensitivity label information for the reference. */
@@ -1015,6 +1017,7 @@ model KnowledgeBaseAzureBlobReference extends KnowledgeBaseReference {
   searchSensitivityLabelInfo?: PurviewSensitivityLabelInfo;
 
   /** A Search-owned URL that points at the backing document for this reference, usable as a citation target. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Pre-existing API naming pattern with url"
   @added(Versions.v2026_08_01_preview)
   citationUrl?: url;
 }
@@ -1028,6 +1031,7 @@ model KnowledgeBaseIndexedSharePointReference extends KnowledgeBaseReference {
   type: KnowledgeBaseReferenceType.indexedSharePoint;
 
   /** The document URL for the reference. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Pre-existing API contract and shipped name with url"
   docUrl?: string;
 
   /** The sensitivity label information for the reference. */
@@ -1035,6 +1039,7 @@ model KnowledgeBaseIndexedSharePointReference extends KnowledgeBaseReference {
   searchSensitivityLabelInfo?: PurviewSensitivityLabelInfo;
 
   /** A Search-owned URL that points at the backing document for this reference, usable as a citation target. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Pre-existing API contract and shipped name with url"
   @added(Versions.v2026_08_01_preview)
   citationUrl?: url;
 }
@@ -1046,6 +1051,7 @@ model KnowledgeBaseIndexedOneLakeReference extends KnowledgeBaseReference {
   type: KnowledgeBaseReferenceType.indexedOneLake;
 
   /** The document URL for the reference. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Pre-existing API contract and shipped name with url"
   docUrl?: string;
 
   /** The sensitivity label information for the reference. */
@@ -1053,6 +1059,7 @@ model KnowledgeBaseIndexedOneLakeReference extends KnowledgeBaseReference {
   searchSensitivityLabelInfo?: PurviewSensitivityLabelInfo;
 
   /** A Search-owned URL that points at the backing document for this reference, usable as a citation target. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Pre-existing API contract and shipped name with url"
   @added(Versions.v2026_08_01_preview)
   citationUrl?: url;
 }
@@ -1079,6 +1086,7 @@ model KnowledgeBaseRemoteSharePointReference extends KnowledgeBaseReference {
   type: KnowledgeBaseReferenceType.remoteSharePoint;
 
   /** The url the reference data originated from. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Pre-existing API contract and shipped name with url"
   webUrl?: url;
 
   /** Information about the sensitivity label applied to the SharePoint document. */
@@ -1111,6 +1119,7 @@ model KnowledgeBaseWorkIQReference extends KnowledgeBaseReference {
 @removed(Versions.v2026_08_01_preview)
 model WorkIQAttribution {
   /** The URL for the attribution. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Pre-existing API contract and shipped name with url"
   seeMoreWebUrl?: url;
 }
 
@@ -1175,9 +1184,11 @@ model KnowledgeBaseIndexedSqlReference extends KnowledgeBaseReference {
   type: KnowledgeBaseReferenceType.indexedSql;
 
   /** The document URL for the reference. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Pre-existing API contract and shipped name with url"
   docUrl?: string;
 
   /** A Search-owned URL that points at the backing document for this reference, usable as a citation target. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Pre-existing API contract and shipped name with url"
   @added(Versions.v2026_08_01_preview)
   citationUrl?: url;
 }

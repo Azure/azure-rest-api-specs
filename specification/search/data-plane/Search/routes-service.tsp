@@ -520,7 +520,7 @@ interface Indexes {
   @sharedRoute
   @list
   @get
-  listPaginated is SearchOperation<
+  listOffsetPaged is SearchOperation<
     {
       ...acceptHeaderMinimal;
 
@@ -567,7 +567,7 @@ interface Indexes {
   @sharedRoute
   @list
   @get
-  listWithSelectedPropertiesPaginated is SearchOperation<
+  listWithSelectedPropertiesOffsetPaged is SearchOperation<
     {
       ...acceptHeaderMinimal;
       ...selectQuery;

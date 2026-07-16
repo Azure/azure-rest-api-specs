@@ -103,9 +103,24 @@ namespace SearchIndexClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
   op listIndexes is Search.Indexes.list;
 
+  // Offset-paging list op (Search.Indexes.listOffsetPaged is @removed at
+  // v2026_08_01_preview, while the server-driven Search.Indexes.list is @added at the same
+  // version). The two service ops are version-disjoint, so binding both here and emitting
+  // them under the same client method name ("listIndexes") keeps a single `GetIndexes`
+  // method in every SDK version and avoids a customer breaking change.
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op listIndexesOffsetPaged is Search.Indexes.listOffsetPaged;
+
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
   op listIndexesWithSelectedProperties is Search.Indexes.listWithSelectedProperties;
+
+  // Offset-paging counterpart of `listIndexesWithSelectedProperties`; same
+  // version-disjoint unification as `listIndexesOffsetPaged` above.
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op listIndexesWithSelectedPropertiesOffsetPaged is Search.Indexes.listWithSelectedPropertiesOffsetPaged;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
@@ -645,6 +660,12 @@ namespace KnowledgeBaseRetrievalClient {
 @@access(SearchIndexClient.listIndexes, Access.internal, "python");
 @@access(
   SearchIndexClient.listIndexesWithSelectedProperties,
+  Access.internal,
+  "python"
+);
+@@access(SearchIndexClient.listIndexesOffsetPaged, Access.internal, "python");
+@@access(
+  SearchIndexClient.listIndexesWithSelectedPropertiesOffsetPaged,
   Access.internal,
   "python"
 );
@@ -3640,7 +3661,9 @@ namespace KnowledgeBaseRetrievalClient {
 
 @@clientName(SearchClient.count, "getDocumentCount", "!autorest");
 @@clientName(SearchClient.get, "getDocument", "!autorest");
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Intentional: version-disjoint offset-paging/server-driven list ops are unified under one C# method name (see listIndexesOffsetPaged comment above)."
 @@clientName(SearchIndexClient.listIndexes, "listIndexes", "!autorest");
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Intentional: version-disjoint offset-paging/server-driven list ops are unified under one C# method name (see listIndexesOffsetPaged comment above)."
 @@clientName(
   SearchIndexClient.listIndexesWithSelectedProperties,
   "listIndexesWithSelectedProperties",
@@ -3809,6 +3832,21 @@ namespace KnowledgeBaseRetrievalClient {
   ListIndexesSelectedResult.`@odata.nextLink`,
   "NextLink",
   "!autorest"
+);
+// Unify offset-paging list ops with their server-driven counterparts so the
+// C# SDK exposes a single `listIndexes` / `listIndexesWithSelectedProperties` method
+// in every api-version. Scoped to csharp: the underlying service ops are
+// version-disjoint (listOffsetPaged is @removed and list is @added at
+// v2026_08_01_preview), which the C# generator handles (it emits a per-version
+// method), so the duplicate name is only a warning there. Other language scopes
+// treat a duplicate client name as a hard error and keep the distinct op names.
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Intentional: version-disjoint offset-paging/server-driven list ops unified under one C# method name (see comment above)."
+@@clientName(SearchIndexClient.listIndexesOffsetPaged, "listIndexes", "csharp");
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Intentional: version-disjoint offset-paging/server-driven list ops unified under one C# method name (see comment above)."
+@@clientName(
+  SearchIndexClient.listIndexesWithSelectedPropertiesOffsetPaged,
+  "listIndexesWithSelectedProperties",
+  "csharp"
 );
 @@clientName(ListIndexStatsSummary.`@odata.count`, "Count", "!autorest");
 @@clientName(ListIndexStatsSummary.`@odata.nextLink`, "NextLink", "!autorest");
