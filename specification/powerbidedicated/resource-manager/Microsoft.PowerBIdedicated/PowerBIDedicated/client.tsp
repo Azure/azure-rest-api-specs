@@ -6,6 +6,12 @@ using Azure.Core;
 using Azure.ResourceManager.Foundations;
 using Microsoft.PowerBIDedicated;
 
+@@clientName(
+  Microsoft.PowerBIDedicated,
+  "PowerBIDedicatedMgmtClient",
+  "python"
+);
+
 @@clientName(Capacities.getDetails, "get", "csharp");
 @@clientName(
   CheckCapacityNameAvailabilityParameters,
