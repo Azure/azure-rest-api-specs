@@ -30,9 +30,6 @@ using Microsoft.Synapse;
 @@flattenProperty(WorkspacePatchInfo.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(IntegrationRuntimeStatusResponse.properties);
-
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(KustoPoolUpdate.properties);
 
 @@clientName(
@@ -360,9 +357,6 @@ using Microsoft.Synapse;
   IntegrationRuntimeResources.regenerate::parameters.body,
   "regenerateKeyParameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(IntegrationRuntimeResource.properties);
-
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(SparkConfigurationResource.properties);
 
