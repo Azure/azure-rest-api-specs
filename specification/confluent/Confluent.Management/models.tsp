@@ -412,6 +412,7 @@ model OrganizationResourceProperties {
   /**
    * SSO url for the Confluent organization.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   ssoUrl?: string;
 
@@ -2563,4 +2564,65 @@ model AccessPointProperties {
    */
   @identifiers(#["key"])
   dictionary?: KeyValuePair[];
+}
+
+/**
+ * SaaS guid & PublisherId for Activate and Validate SaaS Resource
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is an established abbreviation"
+@added(Microsoft.Confluent.Versions.v2026_06_02_preview)
+model ActivateSaaSParameterRequest {
+  /**
+   * SaaS guid for Activate and Validate SaaS Resource
+   */
+  saasGuid: string;
+
+  /**
+   * Publisher Id for Confluent resource
+   */
+  publisherId?: string;
+}
+
+/**
+ * Marketplace SaaS resource details.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is an established abbreviation"
+@added(Microsoft.Confluent.Versions.v2026_06_02_preview)
+model SaaSResourceDetailsResponse
+  is Azure.ResourceManager.CommonTypes.ProxyResource {
+  /**
+   * Id of the Marketplace SaaS Resource
+   */
+  saasId?: string;
+}
+
+/**
+ * SaaS-related data properties
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is an established abbreviation"
+@added(Microsoft.Confluent.Versions.v2026_06_02_preview)
+model SaaSData {
+  /**
+   * SaaS resource id
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is an established abbreviation"
+  saaSResourceId?: string;
+}
+
+/**
+ * Response of get latest linked SaaS resource operation
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is an established abbreviation"
+@added(Microsoft.Confluent.Versions.v2026_06_02_preview)
+model LatestLinkedSaaSResponse {
+  /**
+   * SaaS resource id
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is an established abbreviation"
+  saaSResourceId?: string;
+
+  /**
+   * Flag indicating if the SaaS resource is hidden
+   */
+  isHiddenSaaS?: boolean;
 }

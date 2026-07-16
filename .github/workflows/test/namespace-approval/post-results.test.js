@@ -38,7 +38,7 @@ describe("post-results", () => {
         "",
         "| Language | Proposed Namespace | Format | Status | Approvers |",
         "|----------|-------------------|--------|--------|----------|",
-        "| java | `com.azure.resourcemanager.compute` | ✅ | ⏳ Pending | JonathanGiles |",
+        "| java | `com.azure.resourcemanager.compute` | ✅ | ⏳ Pending | approver1 |",
         "| dotnet | `Azure.ResourceManager.Compute` | ✅ | ⏳ Pending | approver-a |",
         "",
         "<!-- namespace-review-bot -->",
@@ -61,13 +61,13 @@ describe("post-results", () => {
       const body = [
         "| Language | Proposed Namespace | Format | Status | Approvers |",
         "|----------|-------------------|--------|--------|----------|",
-        "| java | `com.azure.resourcemanager.compute` | ✅ | ✅ Approved by @JonathanGiles | JonathanGiles |",
+        "| java | `com.azure.resourcemanager.compute` | ✅ | ✅ Approved by @approver1 | approver1 |",
         "| dotnet | `Azure.ResourceManager.Compute` | ✅ | ⏳ Pending | approver-a |",
       ].join("\n");
 
       const result = parseCommentTable(body);
 
-      expect(result.get("java")?.status).toBe("✅ Approved by @JonathanGiles");
+      expect(result.get("java")?.status).toBe("✅ Approved by @approver1");
       expect(result.get("dotnet")?.status).toBe("⏳ Pending");
     });
 
@@ -77,7 +77,7 @@ describe("post-results", () => {
     });
 
     it("should handle format warning column values", () => {
-      const body = "| dotnet | `Azure.Compute` | ⚠️ Invalid | ⏳ Pending | ArthurMa1978, m-nash |";
+      const body = "| dotnet | `Azure.Compute` | ⚠️ Invalid | ⏳ Pending | approver3, approver4 |";
 
       const result = parseCommentTable(body);
 
@@ -105,19 +105,49 @@ describe("post-results", () => {
   });
 
   describe("selective reset logic", () => {
-    it("should identify changed namespaces for reset", () => {
+    /**
+     * Helper that mirrors the production reset logic from post-results.js.
+     * Only resets a language when:
+     *  1. A previous entry exists (prev !== undefined)
+     *  2. The namespace actually changed (prev.namespace !== newNs)
+     *  3. The language was previously approved (has approved label)
+     *
+     * First-time detections (!prev) are treated as new pending, not reset.
+     *
+     * @param {Map<string, { namespace: string, status: string }>} previousTable
+     * @param {Record<string, string>} newNamespaces
+     * @param {string[] | undefined} [existingLabels]
+     * @returns {{ resetLanguages: string[], preservedApprovals: Map<string, { namespace: string, status: string }> }}
+     */
+    function computeResets(previousTable, newNamespaces, existingLabels) {
+      /** @type {string[]} */
+      const resetLanguages = [];
       /** @type {Map<string, { namespace: string, status: string }>} */
+      const preservedApprovals = new Map();
+      const labels = existingLabels ?? [];
+      for (const [language, newNs] of Object.entries(newNamespaces)) {
+        const prev = previousTable.get(language);
+        if (prev && prev.namespace !== newNs) {
+          const approvedLabel = `namespace-${language}-approved`;
+          if (labels.includes(approvedLabel)) {
+            resetLanguages.push(language);
+          }
+        } else if (prev && prev.status && !prev.status.includes("Pending")) {
+          preservedApprovals.set(language, prev);
+        }
+      }
+      return { resetLanguages, preservedApprovals };
+    }
+
+    it("should reset only the language whose namespace changed and was approved", () => {
       const previousTable = new Map([
         [
           "java",
-          {
-            namespace: "com.azure.resourcemanager.compute",
-            status: "✅ Approved by @JonathanGiles",
-          },
+          { namespace: "com.azure.resourcemanager.compute", status: "✅ Approved by @approver1" },
         ],
         [
           "dotnet",
-          { namespace: "Azure.ResourceManager.Compute", status: "✅ Approved by @approver-a" },
+          { namespace: "Azure.ResourceManager.Compute", status: "✅ Approved by @approver2" },
         ],
       ]);
 
@@ -126,60 +156,71 @@ describe("post-results", () => {
         dotnet: "Azure.ResourceManager.Compute", // unchanged
       };
 
-      const resetLanguages = [];
-      /** @type {Map<string, { namespace: string, status: string }>} */
-      const preservedApprovals = new Map();
-
-      for (const [language, newNs] of Object.entries(newNamespaces)) {
-        const prev = previousTable.get(language);
-        if (!prev || prev.namespace !== newNs) {
-          resetLanguages.push(language);
-        } else if (prev.status && !prev.status.includes("Pending")) {
-          preservedApprovals.set(language, prev);
-        }
-      }
+      const existingLabels = ["namespace-java-approved", "namespace-dotnet-approved"];
+      const { resetLanguages, preservedApprovals } = computeResets(
+        previousTable,
+        newNamespaces,
+        existingLabels,
+      );
 
       expect(resetLanguages).toEqual(["java"]);
       expect(preservedApprovals.size).toBe(1);
-      expect(preservedApprovals.get("dotnet")?.status).toBe("✅ Approved by @approver-a");
+      expect(preservedApprovals.get("dotnet")?.status).toBe("✅ Approved by @approver2");
     });
 
-    it("should reset new languages not in previous comment", () => {
-      /** @type {Map<string, { namespace: string, status: string }>} */
+    it("should not reset a changed namespace if it was not previously approved", () => {
+      const previousTable = new Map([
+        ["java", { namespace: "com.azure.resourcemanager.compute", status: "⏳ Pending" }],
+        [
+          "dotnet",
+          { namespace: "Azure.ResourceManager.Compute", status: "✅ Approved by @approver2" },
+        ],
+      ]);
+
+      const newNamespaces = {
+        java: "com.azure.resourcemanager.network", // changed but was pending, not approved
+        dotnet: "Azure.ResourceManager.Compute", // unchanged
+      };
+
+      const existingLabels = ["namespace-dotnet-approved"]; // java has no approved label
+      const { resetLanguages, preservedApprovals } = computeResets(
+        previousTable,
+        newNamespaces,
+        existingLabels,
+      );
+
+      expect(resetLanguages).toEqual([]);
+      expect(preservedApprovals.size).toBe(1);
+      expect(preservedApprovals.get("dotnet")?.status).toBe("✅ Approved by @approver2");
+    });
+
+    it("should not reset new languages not in previous comment (first detection)", () => {
       const previousTable = new Map([
         [
           "java",
-          {
-            namespace: "com.azure.resourcemanager.compute",
-            status: "✅ Approved by @JonathanGiles",
-          },
+          { namespace: "com.azure.resourcemanager.compute", status: "✅ Approved by @approver1" },
         ],
       ]);
 
       const newNamespaces = {
         java: "com.azure.resourcemanager.compute",
-        python: "azure-mgmt-compute", // new language
+        python: "azure-mgmt-compute", // new language, no previous entry
       };
 
-      const resetLanguages = [];
-      /** @type {Map<string, { namespace: string, status: string }>} */
-      const preservedApprovals = new Map();
+      const existingLabels = ["namespace-java-approved"];
+      const { resetLanguages, preservedApprovals } = computeResets(
+        previousTable,
+        newNamespaces,
+        existingLabels,
+      );
 
-      for (const [language, newNs] of Object.entries(newNamespaces)) {
-        const prev = previousTable.get(language);
-        if (!prev || prev.namespace !== newNs) {
-          resetLanguages.push(language);
-        } else if (prev.status && !prev.status.includes("Pending")) {
-          preservedApprovals.set(language, prev);
-        }
-      }
-
-      expect(resetLanguages).toEqual(["python"]);
-      expect(preservedApprovals.get("java")?.status).toBe("✅ Approved by @JonathanGiles");
+      // python is new (no prev), should NOT be reset
+      expect(resetLanguages).toEqual([]);
+      expect(preservedApprovals.get("java")?.status).toBe("✅ Approved by @approver1");
     });
 
-    it("should reset all when no previous comment exists", () => {
-      /** @type {Map<string, { namespace: string, status: string }>} */
+    it("should not reset any when no previous comment exists (first run)", () => {
+      /** @type {Map<string, { namespace: string, status: string }> } */
       const previousTable = new Map(); // empty - first run
 
       const newNamespaces = {
@@ -187,30 +228,21 @@ describe("post-results", () => {
         dotnet: "Azure.ResourceManager.Compute",
       };
 
-      const resetLanguages = [];
-      for (const [language, newNs] of Object.entries(newNamespaces)) {
-        const prev = previousTable.get(language);
-        if (!prev || prev.namespace !== newNs) {
-          resetLanguages.push(language);
-        }
-      }
+      const { resetLanguages } = computeResets(previousTable, newNamespaces, []);
 
-      expect(resetLanguages).toEqual(["java", "dotnet"]);
+      // First detection: everything is new pending, nothing to reset
+      expect(resetLanguages).toEqual([]);
     });
 
     it("should not reset any when all namespaces unchanged", () => {
-      /** @type {Map<string, { namespace: string, status: string }>} */
       const previousTable = new Map([
         [
           "java",
-          {
-            namespace: "com.azure.resourcemanager.compute",
-            status: "✅ Approved by @JonathanGiles",
-          },
+          { namespace: "com.azure.resourcemanager.compute", status: "✅ Approved by @approver1" },
         ],
         [
           "dotnet",
-          { namespace: "Azure.ResourceManager.Compute", status: "✅ Approved by @approver-a" },
+          { namespace: "Azure.ResourceManager.Compute", status: "✅ Approved by @approver2" },
         ],
       ]);
 
@@ -219,21 +251,52 @@ describe("post-results", () => {
         dotnet: "Azure.ResourceManager.Compute",
       };
 
-      const resetLanguages = [];
-      /** @type {Map<string, { namespace: string, status: string }>} */
-      const preservedApprovals = new Map();
-
-      for (const [language, newNs] of Object.entries(newNamespaces)) {
-        const prev = previousTable.get(language);
-        if (!prev || prev.namespace !== newNs) {
-          resetLanguages.push(language);
-        } else if (prev.status && !prev.status.includes("Pending")) {
-          preservedApprovals.set(language, prev);
-        }
-      }
+      const existingLabels = ["namespace-java-approved", "namespace-dotnet-approved"];
+      const { resetLanguages, preservedApprovals } = computeResets(
+        previousTable,
+        newNamespaces,
+        existingLabels,
+      );
 
       expect(resetLanguages).toEqual([]);
       expect(preservedApprovals.size).toBe(2);
+    });
+
+    it("should only reset the single changed language when multiple exist", () => {
+      const previousTable = new Map([
+        [
+          "java",
+          { namespace: "com.azure.resourcemanager.compute", status: "✅ Approved by @approver1" },
+        ],
+        [
+          "dotnet",
+          { namespace: "Azure.ResourceManager.Compute", status: "✅ Approved by @approver2" },
+        ],
+        ["python", { namespace: "azure-mgmt-compute", status: "✅ Approved by @approver3" }],
+        ["typescript", { namespace: "@azure/arm-compute", status: "✅ Approved by @approver4" }],
+      ]);
+
+      const newNamespaces = {
+        java: "com.azure.resourcemanager.compute",
+        dotnet: "Azure.ResourceManager.Compute",
+        python: "azure-mgmt-compute",
+        typescript: "@azure/arm-compute-2", // only TS changed
+      };
+
+      const existingLabels = [
+        "namespace-java-approved",
+        "namespace-dotnet-approved",
+        "namespace-python-approved",
+        "namespace-typescript-approved",
+      ];
+      const { resetLanguages, preservedApprovals } = computeResets(
+        previousTable,
+        newNamespaces,
+        existingLabels,
+      );
+
+      expect(resetLanguages).toEqual(["typescript"]);
+      expect(preservedApprovals.size).toBe(3);
     });
   });
 
@@ -246,7 +309,7 @@ describe("post-results", () => {
         "",
         "| Language | Proposed Namespace | Format | Status | Approvers |",
         "|----------|-------------------|--------|--------|----------|",
-        "| java | `com.azure.messaging.eventgrid` | — | ⏳ Pending | JonathanGiles |",
+        "| java | `com.azure.messaging.eventgrid` | — | ⏳ Pending | approver1 |",
       ].join("\n");
 
       const rowRegex = new RegExp(`(\\| java[^|]*\\|[^|]+\\|[^|]+\\|) ⏳ Pending (\\|)`, "gi");
@@ -278,14 +341,14 @@ describe("post-results", () => {
       const preservedApprovals = new Map([
         [
           "dotnet",
-          { namespace: "Azure.ResourceManager.Compute", status: "✅ Approved by @approver-a" },
+          { namespace: "Azure.ResourceManager.Compute", status: "✅ Approved by @approver2" },
         ],
       ]);
 
       const preserved = preservedApprovals.get("dotnet");
       const status = preserved?.status ?? "⏳ Pending";
 
-      expect(status).toBe("✅ Approved by @approver-a");
+      expect(status).toBe("✅ Approved by @approver2");
     });
   });
 

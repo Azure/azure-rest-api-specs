@@ -13,8 +13,10 @@ namespace Microsoft.AzureArcData;
 /**
  * Describe SQL Server license resource.
  */
-model SqlServerLicense
-  is Azure.ResourceManager.TrackedResource<SqlServerLicenseProperties, false> {
+model SqlServerLicense is Azure.ResourceManager.TrackedResource<
+  SqlServerLicenseProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = SqlServerLicense,
     KeyName = "sqlServerLicenseName",

@@ -15,11 +15,10 @@ namespace Microsoft.AzureArcData;
  * Active directory connector resource
  */
 @parentResource(DataControllerResource)
-model ActiveDirectoryConnectorResource
-  is Azure.ResourceManager.ProxyResource<
-    ActiveDirectoryConnectorProperties,
-    false
-  > {
+model ActiveDirectoryConnectorResource is Azure.ResourceManager.ProxyResource<
+  ActiveDirectoryConnectorProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = ActiveDirectoryConnectorResource,
     KeyName = "activeDirectoryConnectorName",

@@ -27,8 +27,10 @@ using TypeSpec.Versioning;
 namespace ContentUnderstanding;
 
 @doc("Key-based authentication using the access key of the Azure resource.")
-model AzureKey
-  is ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">;
+model AzureKey is ApiKeyAuth<
+  ApiKeyLocation.header,
+  "Ocp-Apim-Subscription-Key"
+>;
 
 @doc("Microsoft Entra ID OAuth2 authentication using an access token.")
 model EntraIdToken
