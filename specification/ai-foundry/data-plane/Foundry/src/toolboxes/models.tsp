@@ -79,6 +79,7 @@ alias ToolboxBrowserAutomationPreviewToolType = "browser_automation_preview";
 alias ToolboxReminderPreviewToolType = "reminder_preview";
 alias ToolboxWorkIQPreviewToolType = "work_iq_preview";
 alias ToolboxFabricIQPreviewToolType = "fabric_iq_preview";
+alias ToolboxSearchToolType = "toolbox_search";
 alias ToolboxSearchPreviewToolType = "toolbox_search_preview";
 
 /**
@@ -96,6 +97,7 @@ union ToolboxToolType {
   reminder_preview: ToolboxReminderPreviewToolType,
   work_iq_preview: ToolboxWorkIQPreviewToolType,
   fabric_iq_preview: ToolboxFabricIQPreviewToolType,
+  toolbox_search: ToolboxSearchToolType,
   toolbox_search_preview: ToolboxSearchPreviewToolType,
 }
 
@@ -227,6 +229,16 @@ model ToolboxSearchPreviewToolboxTool extends ToolboxTool {
    * The type of the tool. Always `toolbox_search_preview`.
    */
   type: ToolboxSearchPreviewToolType;
+}
+
+/**
+ * A toolbox search tool stored in a toolbox.
+ */
+model ToolSearchToolboxTool extends ToolboxTool {
+  /**
+   * The type of the tool. Always `toolbox_search`.
+   */
+  type: ToolboxSearchToolType;
 }
 @doc("Policy configuration for a toolbox, including content safety and other governance settings.")
 model ToolboxPolicies {
