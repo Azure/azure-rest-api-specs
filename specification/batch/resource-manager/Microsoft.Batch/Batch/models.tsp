@@ -2130,6 +2130,12 @@ model PoolProperties {
   vmSize?: string;
 
   /**
+   * Specifies the profile of VM sizes and the allocation strategy used to allocate compute nodes for an Instance Mix pool. When specified, vmSize must be "Mix". This property can only be changed while the pool has no compute nodes.
+   */
+  @added(Versions.v2026_08_01)
+  vmSkuProfile?: VirtualMachineSkuProfile;
+
+  /**
    * Deployment configuration properties.
    */
   @summary("This property describes the virtual machines that the pool nodes will be deployed on.")
@@ -2368,6 +2374,65 @@ model VirtualMachineConfiguration {
    */
   @summary("Specifies the service artifact reference id used to set same image version for all virtual machines in the scale set when using 'latest' image version.")
   serviceArtifactReference?: ServiceArtifactReference;
+}
+
+/**
+ * Specifies the set of VM sizes and the allocation strategy used to allocate compute nodes for an Instance Mix pool.
+ */
+@added(Versions.v2026_08_01)
+model VirtualMachineSkuProfile {
+  /**
+   * The list of VM sizes (1 to 5) that may be allocated for the pool. All sizes must share the same vCPU count and VM family.
+   */
+  @minItems(1)
+  @maxItems(5)
+  @identifiers(#["name"])
+  vmSizes: VirtualMachineSkuProfileVMSize[];
+
+  /**
+   * The allocation strategy used to select VM sizes from vmSizes. Defaults to LowestPrice when not specified.
+   */
+  allocationStrategy?: VirtualMachineSkuAllocationStrategy;
+}
+
+/**
+ * Specifies a single VM size that may be allocated for an Instance Mix pool.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "VMSize matches the existing Batch vmSize terminology for VM sizes."
+@added(Versions.v2026_08_01)
+model VirtualMachineSkuProfileVMSize {
+  /**
+   * The name of the VM size (for example, "Standard_D8s_v5").
+   */
+  name: string;
+
+  /**
+   * The 0-based rank (a.k.a. priority) associated with this VM size. Lower values indicate higher priority. Rank is required only when the allocation strategy is 'Prioritized' and must be omitted otherwise.
+   */
+  rank?: int32;
+}
+
+/**
+ * Specifies the allocation strategy that the Fungible Compute Platform uses to select VM sizes from the vmSkuProfile when allocating nodes for an Instance Mix pool.
+ */
+@added(Versions.v2026_08_01)
+union VirtualMachineSkuAllocationStrategy {
+  string,
+
+  /**
+   * Select the cheapest available SKU in the region. This is the default strategy.
+   */
+  LowestPrice: "LowestPrice",
+
+  /**
+   * Select the SKU with the most regional physical capacity.
+   */
+  CapacityOptimized: "CapacityOptimized",
+
+  /**
+   * Follow the customer-defined ranking via the 0-based rank, falling back to the next rank when a preferred SKU is unavailable.
+   */
+  Prioritized: "Prioritized",
 }
 
 /**
