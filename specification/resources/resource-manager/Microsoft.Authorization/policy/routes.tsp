@@ -151,4 +151,23 @@ interface PolicyTokensOperationGroup {
     /** The policy token properties. */
     @body parameters: PolicyTokenRequest,
   ): PolicyTokenResponse | ErrorResponse;
+
+  /**
+   * This operation acquires a policy token in the given resource group for the given request body.
+   */
+  @added(Versions.v2026_07_01)
+  @summary("Acquires a policy token at resource group level.")
+  @autoRoute
+  @post
+  @action("acquirePolicyToken")
+  @armResourceCollectionAction
+  acquireAtResourceGroup(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...CommonTypes.ResourceGroupNameParameter,
+    ...ProviderNamespace<PolicyTokenRequest>,
+
+    /** The policy token properties. */
+    @body parameters: PolicyTokenRequest,
+  ): PolicyTokenResponse | ErrorResponse;
 }

@@ -7,11 +7,10 @@ using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
 @doc("The NetworkPacketBroker resource definition.")
-model NetworkPacketBroker
-  is Azure.ResourceManager.TrackedResource<
-    NetworkPacketBrokerProperties,
-    false
-  > {
+model NetworkPacketBroker is Azure.ResourceManager.TrackedResource<
+  NetworkPacketBrokerProperties,
+  false
+> {
   @doc("Name of the Network Packet Broker.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path

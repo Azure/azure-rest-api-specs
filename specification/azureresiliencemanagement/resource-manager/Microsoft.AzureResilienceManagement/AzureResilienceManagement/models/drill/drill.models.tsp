@@ -1,4 +1,4 @@
-﻿import "@typespec/http";
+import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
@@ -287,6 +287,7 @@ model MetricsToTrack {
     }
   ]>;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("Destination AMW account where the time-series data of the metric lives.")
   destinationAmwAccountUrl: armResourceIdentifier<[
     {
@@ -697,7 +698,8 @@ model ValidateForExecutionProperties {
 
   @doc("Physiscal Source locations from where resources to be failed-over or faulted.")
   @added(Versions.v2026_03_01_preview)
-  sourceLocations: string[];
+  @madeOptional(Versions.v2026_06_01_preview)
+  sourceLocations?: string[];
 }
 
 @doc("Request body of the Validate For Execute Action of Drill.")

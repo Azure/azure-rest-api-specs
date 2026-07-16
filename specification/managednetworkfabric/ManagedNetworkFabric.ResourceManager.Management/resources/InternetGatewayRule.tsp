@@ -8,11 +8,10 @@ using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
 @doc("The Internet Gateway Rule resource definition.")
-model InternetGatewayRule
-  is Azure.ResourceManager.TrackedResource<
-    InternetGatewayRuleProperties,
-    false
-  > {
+model InternetGatewayRule is Azure.ResourceManager.TrackedResource<
+  InternetGatewayRuleProperties,
+  false
+> {
   @doc("Name of the Internet Gateway rule.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path

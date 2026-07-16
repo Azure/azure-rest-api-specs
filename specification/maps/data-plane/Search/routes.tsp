@@ -79,7 +79,7 @@ interface Search {
       bbox?: float64[];
 
       /**
-       * A string that represents an [ISO 3166-1 Alpha-2 region/country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). This will alter Geopolitical disputed borders and labels to align with the specified user region. By default, the View parameter is set to “Auto” even if you haven’t defined it in the request.
+       * A string that represents an [ISO 3166-1 Alpha-2 region/country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). This will alter Geopolitical disputed borders and labels to align with the specified user region. By default, the View parameter is set to "Auto" even if you haven't defined it in the request.
        *
        * Please refer to [Supported Views](https://aka.ms/AzureMapsLocalizationViews) for details and to see the available Views.
        */
@@ -87,7 +87,7 @@ interface Search {
       view?: string;
 
       /**
-       * A point on the earth specified as a longitude and latitude. When you specify this parameter, the user’s location is taken into account and the results returned may be more relevant to the user. Example: &coordinates=lon,lat
+       * A point on the earth specified as a longitude and latitude. When you specify this parameter, the user's location is taken into account and the results returned may be more relevant to the user. Example: &coordinates=lon,lat
        */
       @minItems(2)
       @maxItems(2)
@@ -254,7 +254,7 @@ interface Search {
       coordinates: float64[];
 
       /**
-       * A string that represents an [ISO 3166-1 Alpha-2 region/country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). This will alter Geopolitical disputed borders and labels to align with the specified user region. By default, the View parameter is set to “Auto” even if you haven’t defined it in the request.
+       * A string that represents an [ISO 3166-1 Alpha-2 region/country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). This will alter Geopolitical disputed borders and labels to align with the specified user region. By default, the View parameter is set to "Auto" even if you haven't defined it in the request.
        *
        * Please refer to [Supported Views](https://aka.ms/AzureMapsLocalizationViews) for details and to see the available Views.
        */
@@ -330,7 +330,7 @@ interface Search {
       resultTypes?: ReverseGeocodingResultTypeEnum[];
 
       /**
-       * A string that represents an [ISO 3166-1 Alpha-2 region/country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). This will alter Geopolitical disputed borders and labels to align with the specified user region. By default, the View parameter is set to “Auto” even if you haven’t defined it in the request.
+       * A string that represents an [ISO 3166-1 Alpha-2 region/country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). This will alter Geopolitical disputed borders and labels to align with the specified user region. By default, the View parameter is set to "Auto" even if you haven't defined it in the request.
        *
        * Please refer to [Supported Views](https://aka.ms/AzureMapsLocalizationViews) for details and to see the available Views.
        */
@@ -416,7 +416,7 @@ interface Search {
   /**
    *
    *
-   * Given a request with a user’s location and a partial query that serves as the prefix of a full query string (referred to as a query prefix), the Azure Maps Autocomplete API returns a list of suggested entities that the user is most likely searching for. These entities are ranked from most to least likely.
+   * Given a request with a user's location and a partial query that serves as the prefix of a full query string (referred to as a query prefix), the Azure Maps Autocomplete API returns a list of suggested entities that the user is most likely searching for. These entities are ranked from most to least likely.
    *
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Non-standard operation."
@@ -449,7 +449,7 @@ interface Search {
       query: string;
 
       /**
-       * Required when `bbox` is not provided. A point on the earth specified as a longitude and latitude. When you specify this parameter, the user’s location is taken into account and the results returned may be more relevant to the user. Example: &coordinates=lon,lat
+       * Required when `bbox` is not provided. A point on the earth specified as a longitude and latitude. When you specify this parameter, the user's location is taken into account and the results returned may be more relevant to the user. Example: &coordinates=lon,lat
        *
        * **Note:** `coordinates` becomes a secondary signal if `bbox` is provided.
        */
@@ -503,7 +503,7 @@ interface Search {
       resultTypes?: AutocompleteResultTypeEnum[];
 
       /**
-       * A string that represents an [ISO 3166-1 Alpha-2 region/country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). This will alter Geopolitical disputed borders and labels to align with the specified user region. By default, the View parameter is set to “Auto” even if you haven’t defined it in the request.
+       * A string that represents an [ISO 3166-1 Alpha-2 region/country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). This will alter Geopolitical disputed borders and labels to align with the specified user region. By default, the View parameter is set to "Auto" even if you haven't defined it in the request.
        *
        * Please refer to [Supported Views](https://aka.ms/AzureMapsLocalizationViews) for details and to see the available Views.
        */

@@ -15,8 +15,10 @@ namespace Microsoft.KeyVault;
  * The key resource.
  */
 @parentResource(ManagedHsm)
-model ManagedHsmKey
-  is Azure.ResourceManager.ProxyResource<ManagedHsmKeyProperties, false> {
+model ManagedHsmKey is Azure.ResourceManager.ProxyResource<
+  ManagedHsmKeyProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = ManagedHsmKey,
     KeyName = "keyName",

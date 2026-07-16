@@ -15,8 +15,10 @@ namespace Microsoft.OperationalInsights;
  * The top level Linked service resource container.
  */
 @parentResource(Workspace)
-model LinkedService
-  is Azure.ResourceManager.ProxyResource<LinkedServiceProperties, false> {
+model LinkedService is Azure.ResourceManager.ProxyResource<
+  LinkedServiceProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = LinkedService,
     KeyName = "linkedServiceName",

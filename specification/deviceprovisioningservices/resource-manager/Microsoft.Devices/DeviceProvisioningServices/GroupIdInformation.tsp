@@ -14,8 +14,10 @@ namespace Microsoft.Devices;
  * The group information for creating a private endpoint on a provisioning service
  */
 @parentResource(ProvisioningServiceDescription)
-model GroupIdInformation
-  is Azure.ResourceManager.ProxyResource<GroupIdInformationProperties, false> {
+model GroupIdInformation is Azure.ResourceManager.ProxyResource<
+  GroupIdInformationProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = GroupIdInformation,
     KeyName = "groupId",
