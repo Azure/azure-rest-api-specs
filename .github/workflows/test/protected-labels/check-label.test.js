@@ -12,6 +12,15 @@ import { readFile } from "fs/promises";
 import yaml from "js-yaml";
 import checkLabel from "../../src/protected-labels/check-label.js";
 
+/**
+ * @param {Partial<import("@actions/github-script").AsyncFunctionArguments>} args
+ */
+function invokeCheckLabel(args) {
+  return checkLabel(
+    /** @type {import("@actions/github-script").AsyncFunctionArguments} */ (args),
+  );
+}
+
 const protectedLabelsConfig = {
   "BreakingChange-Approved-Benign": ["user1", "user2"],
   "Versioning-Approved-BugFix": ["user1", "user2"],
@@ -56,6 +65,7 @@ describe("checkLabel", () => {
     context = createMockContext();
     context.eventName = "pull_request_target";
     github.rest.issues.removeLabel.mockResolvedValue({});
+    // @ts-expect-error - createComment not in mock type but needed by check-label
     github.rest.issues.createComment = vi.fn().mockResolvedValue({});
     setupMocks();
   });
@@ -67,7 +77,7 @@ describe("checkLabel", () => {
         actor: "github-actions[bot]",
       });
 
-      await checkLabel({ github, context, core });
+      await invokeCheckLabel({ github, context, core });
 
       expect(github.rest.issues.removeLabel).not.toHaveBeenCalled();
     });
@@ -78,7 +88,7 @@ describe("checkLabel", () => {
         actor: "azure-sdk",
       });
 
-      await checkLabel({ github, context, core });
+      await invokeCheckLabel({ github, context, core });
 
       expect(github.rest.issues.removeLabel).not.toHaveBeenCalled();
     });
@@ -88,7 +98,7 @@ describe("checkLabel", () => {
     it("skips labels not in config", async () => {
       context.payload = createLabeledPayload({ labelName: "SomeRandomLabel", actor: "anyone" });
 
-      await checkLabel({ github, context, core });
+      await invokeCheckLabel({ github, context, core });
 
       expect(github.rest.issues.removeLabel).not.toHaveBeenCalled();
       expect(github.rest.issues.createComment).not.toHaveBeenCalled();
@@ -102,7 +112,7 @@ describe("checkLabel", () => {
         actor: "user1",
       });
 
-      await checkLabel({ github, context, core });
+      await invokeCheckLabel({ github, context, core });
 
       expect(github.rest.issues.removeLabel).not.toHaveBeenCalled();
       expect(github.rest.issues.createComment).not.toHaveBeenCalled();
@@ -114,7 +124,7 @@ describe("checkLabel", () => {
         actor: "User1",
       });
 
-      await checkLabel({ github, context, core });
+      await invokeCheckLabel({ github, context, core });
 
       expect(github.rest.issues.removeLabel).not.toHaveBeenCalled();
     });
@@ -125,7 +135,7 @@ describe("checkLabel", () => {
         actor: "unauthorized-user",
       });
 
-      await checkLabel({ github, context, core });
+      await invokeCheckLabel({ github, context, core });
 
       expect(github.rest.issues.removeLabel).toHaveBeenCalledWith({
         owner: "Azure",
@@ -151,7 +161,7 @@ describe("checkLabel", () => {
         actor: "unauthorized-user",
       });
 
-      await checkLabel({ github, context, core });
+      await invokeCheckLabel({ github, context, core });
 
       // Still posts comment even if label was already removed
       expect(github.rest.issues.createComment).toHaveBeenCalled();
@@ -167,7 +177,7 @@ describe("checkLabel", () => {
         actor: "unauthorized-user",
       });
 
-      await expect(checkLabel({ github, context, core })).rejects.toThrow("Server Error");
+      await expect(invokeCheckLabel({ github, context, core })).rejects.toThrow("Server Error");
     });
   });
 
@@ -180,7 +190,7 @@ describe("checkLabel", () => {
         actor: "someone",
       });
 
-      await expect(checkLabel({ github, context, core })).rejects.toThrow("expected a YAML object");
+      await expect(invokeCheckLabel({ github, context, core })).rejects.toThrow("expected a YAML object");
     });
 
     it("throws on invalid entry (not an array)", async () => {
@@ -193,7 +203,7 @@ describe("checkLabel", () => {
         actor: "someone",
       });
 
-      await expect(checkLabel({ github, context, core })).rejects.toThrow(
+      await expect(invokeCheckLabel({ github, context, core })).rejects.toThrow(
         "must map to an array of non-empty strings",
       );
     });
