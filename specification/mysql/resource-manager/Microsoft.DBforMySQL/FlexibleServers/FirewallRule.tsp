@@ -15,8 +15,10 @@ namespace Microsoft.DBforMySQL;
  * Represents a server firewall rule.
  */
 @parentResource(Server)
-model FirewallRule
-  is Azure.ResourceManager.ProxyResource<FirewallRuleProperties, false> {
+model FirewallRule is Azure.ResourceManager.ProxyResource<
+  FirewallRuleProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = FirewallRule,
     KeyName = "firewallRuleName",

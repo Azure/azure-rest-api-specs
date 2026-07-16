@@ -316,6 +316,7 @@ model WorkspaceProperties {
   description?: string;
 
   /** Url for the discovery service to identify regional endpoints for machine learning experimentation services. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   discoveryUrl?: string;
 
   /** Whether data isolation is enabled. */
