@@ -1,0 +1,785 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "DeploymentExtensionRuntimesClient",
+    "version": "2026-10-01-preview",
+    "description": "Deployment Extension Runtimes provider for Microsoft.Resources. Manages the\nregional runtime infrastructure that hosts Azure Deployments server-side\nextensions.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "DeploymentExtensionRuntimes"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Resources/deploymentExtensionRuntimes": {
+      "get": {
+        "operationId": "DeploymentExtensionRuntimes_ListBySubscription",
+        "tags": [
+          "DeploymentExtensionRuntimes"
+        ],
+        "description": "Lists all deployment extension runtimes in a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentExtensionRuntimeListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List deployment extension runtimes in a subscription": {
+            "$ref": "./examples/DeploymentExtensionRuntimes_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Resources/deploymentExtensionRuntimes": {
+      "get": {
+        "operationId": "DeploymentExtensionRuntimes_ListByResourceGroup",
+        "tags": [
+          "DeploymentExtensionRuntimes"
+        ],
+        "description": "Lists all deployment extension runtimes in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentExtensionRuntimeListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List deployment extension runtimes in a resource group": {
+            "$ref": "./examples/DeploymentExtensionRuntimes_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Resources/deploymentExtensionRuntimes/{runtimeName}": {
+      "get": {
+        "operationId": "DeploymentExtensionRuntimes_Get",
+        "tags": [
+          "DeploymentExtensionRuntimes"
+        ],
+        "description": "Gets a deployment extension runtime.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "runtimeName",
+            "in": "path",
+            "description": "The name of the DeploymentExtensionRuntime",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9-]{0,26}[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentExtensionRuntime"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a deployment extension runtime": {
+            "$ref": "./examples/DeploymentExtensionRuntimes_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "DeploymentExtensionRuntimes_CreateOrReplace",
+        "tags": [
+          "DeploymentExtensionRuntimes"
+        ],
+        "description": "Creates or updates a deployment extension runtime.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "runtimeName",
+            "in": "path",
+            "description": "The name of the DeploymentExtensionRuntime",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9-]{0,26}[a-z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeploymentExtensionRuntime"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'DeploymentExtensionRuntime' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DeploymentExtensionRuntime"
+            }
+          },
+          "201": {
+            "description": "Resource 'DeploymentExtensionRuntime' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DeploymentExtensionRuntime"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a BuiltIn deployment extension runtime": {
+            "$ref": "./examples/DeploymentExtensionRuntimes_CreateOrReplace_BuiltIn.json"
+          },
+          "Create or update a ContainerApps deployment extension runtime": {
+            "$ref": "./examples/DeploymentExtensionRuntimes_CreateOrReplace_ContainerApps.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "DeploymentExtensionRuntimes_UpdateTags",
+        "tags": [
+          "DeploymentExtensionRuntimes"
+        ],
+        "description": "Updates the tags of a deployment extension runtime.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "runtimeName",
+            "in": "path",
+            "description": "The name of the DeploymentExtensionRuntime",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9-]{0,26}[a-z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeploymentExtensionRuntimeTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentExtensionRuntime"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update the tags of a deployment extension runtime": {
+            "$ref": "./examples/DeploymentExtensionRuntimes_UpdateTags.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "DeploymentExtensionRuntimes_Delete",
+        "tags": [
+          "DeploymentExtensionRuntimes"
+        ],
+        "description": "Deletes a deployment extension runtime.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "runtimeName",
+            "in": "path",
+            "description": "The name of the DeploymentExtensionRuntime",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9-]{0,26}[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a deployment extension runtime": {
+            "$ref": "./examples/DeploymentExtensionRuntimes_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "BuiltInConfig": {
+      "type": "object",
+      "description": "Backend configuration for a `BuiltIn` runtime: a platform-provided extension\nthat carries no customer-supplied configuration.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RuntimeConfig"
+        }
+      ],
+      "x-ms-discriminator-value": "BuiltIn"
+    },
+    "ContainerAppsConfig": {
+      "type": "object",
+      "description": "Backend configuration for a `ContainerApps` runtime: a customer-managed\ncontainer hosted on Azure Container Apps.",
+      "properties": {
+        "artifactUri": {
+          "type": "string",
+          "description": "OCI artifact reference for the extension binary, for example\n`myregistry.azurecr.io/extensions/github:1.0`.",
+          "pattern": "^[a-z0-9]+([._-][a-z0-9]+)*(/[a-z0-9]+([._-][a-z0-9]+)*)*:[a-zA-Z0-9._-]+$"
+        },
+        "audienceAppId": {
+          "type": "string",
+          "description": "The Entra ID application (client) ID whose audience the runtime endpoint\nauthenticates against.",
+          "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$"
+        },
+        "registryIdentityId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The ARM resource ID of a user-assigned managed identity that holds\n`AcrPull` on the registry hosting `artifactUri`. Required only for private\nregistries.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
+        },
+        "observability": {
+          "$ref": "#/definitions/RuntimeObservability",
+          "description": "Observability configuration for the runtime."
+        },
+        "secrets": {
+          "type": "array",
+          "description": "Secret values injected into the runtime container. Secret literal values\nare write-only and are never returned on read operations.",
+          "items": {
+            "$ref": "#/definitions/RuntimeSecret"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "env": {
+          "type": "array",
+          "description": "Environment variables set on the runtime container. Plain-text values are\nreturned on read operations; values sourced from a secret reference are\nreturned by name only.",
+          "items": {
+            "$ref": "#/definitions/RuntimeEnvironmentVariable"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "scaling": {
+          "$ref": "#/definitions/RuntimeScaling",
+          "description": "Scaling configuration for the runtime."
+        },
+        "resources": {
+          "$ref": "#/definitions/RuntimeResources",
+          "description": "Compute resource allocation per replica."
+        },
+        "networkProfile": {
+          "$ref": "#/definitions/RuntimeNetworkProfile",
+          "description": "Optional virtual network integration for the runtime. Immutable after\ncreation."
+        },
+        "fqdn": {
+          "type": "string",
+          "description": "The externally accessible FQDN of the runtime endpoint. Populated once the\nruntime reaches the `Succeeded` state.",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The Entra ID home tenant of the runtime's subscription. This is the tenant\nwhose security token service is used for runtime token acquisition and\nwhose issuer is configured on the runtime endpoint.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "artifactUri",
+        "audienceAppId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RuntimeConfig"
+        }
+      ],
+      "x-ms-discriminator-value": "ContainerApps"
+    },
+    "DeploymentExtensionRuntime": {
+      "type": "object",
+      "description": "A deployment extension runtime. Represents the regional runtime\ninfrastructure that hosts an Azure Deployments server-side extension. The\nbackend architecture is selected by the discriminated `properties.config`\nproperty.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DeploymentExtensionRuntimeProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "DeploymentExtensionRuntimeListResult": {
+      "type": "object",
+      "description": "The response of a DeploymentExtensionRuntime list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DeploymentExtensionRuntime items on this page",
+          "items": {
+            "$ref": "#/definitions/DeploymentExtensionRuntime"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DeploymentExtensionRuntimeProperties": {
+      "type": "object",
+      "description": "Properties of a deployment extension runtime. The backend-specific\nconfiguration lives in the discriminated `config` sub-property; the remaining\nmembers are read-only outputs common to every runtime.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the runtime.",
+          "readOnly": true
+        },
+        "config": {
+          "$ref": "#/definitions/RuntimeConfig",
+          "description": "The backend configuration for the runtime. The `kind` discriminator selects\nthe backend architecture and the shape of this object."
+        }
+      },
+      "required": [
+        "config"
+      ]
+    },
+    "DeploymentExtensionRuntimeTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in DeploymentExtensionRuntime resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ExtensionRuntimeKind": {
+      "type": "string",
+      "description": "The backend architecture of a deployment extension runtime. This selects the\nshape of `properties.config` and is immutable after creation.",
+      "enum": [
+        "ContainerApps",
+        "BuiltIn"
+      ],
+      "x-ms-enum": {
+        "name": "ExtensionRuntimeKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ContainerApps",
+            "value": "ContainerApps",
+            "description": "Customer-managed runtime hosted on Azure Container Apps. The customer\nprovides the extension binary, an Entra ID app registration, and\nconfiguration; the resource provider creates the Azure Container Apps\nresources in the customer's subscription."
+          },
+          {
+            "name": "BuiltIn",
+            "value": "BuiltIn",
+            "description": "Platform-provided extension backed by a first-party service. No\ncustomer-managed binary or Azure Container Apps resources are created."
+          }
+        ]
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a deployment extension runtime. The terminal\nstates are `Succeeded`, `Failed`, and `Canceled`.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Creating",
+        "Updating",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "The runtime is being created."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The runtime is being updated."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The runtime is being deleted."
+          }
+        ]
+      }
+    },
+    "RuntimeConfig": {
+      "type": "object",
+      "description": "Backend configuration for a deployment extension runtime. The `kind`\ndiscriminator selects the backend architecture and the concrete shape of this\nobject.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/ExtensionRuntimeKind",
+          "description": "The backend architecture of the runtime. Immutable after creation.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
+    "RuntimeEnvironmentVariable": {
+      "type": "object",
+      "description": "An environment variable set on a deployment extension runtime container.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the environment variable.",
+          "minLength": 1
+        },
+        "value": {
+          "type": "string",
+          "description": "The literal value of the environment variable. Mutually exclusive with\n`secretRef`."
+        },
+        "secretRef": {
+          "type": "string",
+          "description": "The name of a secret (from `secrets`) whose value is used for this\nenvironment variable. Mutually exclusive with `value`."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "RuntimeNetworkProfile": {
+      "type": "object",
+      "description": "Virtual network integration configuration for a deployment extension\nruntime. Immutable after creation.",
+      "properties": {
+        "subnetId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The ARM resource ID of the subnet the runtime's Azure Container Apps\nenvironment is injected into. The subnet must be delegated to\n`Microsoft.App/environments`. Immutable after creation.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/virtualNetworks/subnets"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "RuntimeObservability": {
+      "type": "object",
+      "description": "Observability configuration for a deployment extension runtime.",
+      "properties": {
+        "workspaceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The ARM resource ID of a Log Analytics workspace that receives the\nruntime's container logs.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.OperationalInsights/workspaces"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "RuntimeResources": {
+      "type": "object",
+      "description": "Compute resource allocation per replica for a deployment extension runtime.",
+      "properties": {
+        "cpu": {
+          "type": "number",
+          "format": "double",
+          "description": "The number of vCPUs allocated per replica. Must be a valid Azure Container\nApps Consumption vCPU value (for example `0.25`, `0.5`, `1.0`, `2.0`,\n`4.0`).",
+          "default": 0.5
+        },
+        "memory": {
+          "type": "string",
+          "description": "The amount of memory allocated per replica, for example `1Gi`. Must be\ncompatible with the configured `cpu` value per Azure Container Apps\nConsumption limits.",
+          "default": "1Gi"
+        }
+      }
+    },
+    "RuntimeScaling": {
+      "type": "object",
+      "description": "Scaling configuration for a deployment extension runtime.",
+      "properties": {
+        "minReplicas": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimum number of replicas. A value of `0` enables scale-to-zero.",
+          "default": 1,
+          "minimum": 0,
+          "maximum": 30
+        },
+        "maxReplicas": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of replicas.",
+          "default": 5,
+          "minimum": 1,
+          "maximum": 30
+        },
+        "concurrentRequestsPerReplica": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of concurrent HTTP requests per replica that triggers\nscale-out.",
+          "default": 10,
+          "minimum": 1,
+          "maximum": 500
+        }
+      }
+    },
+    "RuntimeSecret": {
+      "type": "object",
+      "description": "A secret injected into a deployment extension runtime container.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the secret. Referenced from environment variables via\n`secretRef`.",
+          "minLength": 1
+        },
+        "value": {
+          "type": "string",
+          "format": "password",
+          "description": "The literal value of the secret. This property is write-only and is never\nreturned on read operations. Mutually exclusive with `keyVaultUri`.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
+        },
+        "keyVaultUri": {
+          "type": "string",
+          "description": "The Key Vault secret URI to source the secret value from. Requires\n`identity`. Mutually exclusive with `value`."
+        },
+        "identity": {
+          "type": "string",
+          "description": "The resource ID of a user-assigned managed identity used to read the secret\nfrom Key Vault, or `System` to use the system-assigned identity. Applies\nwhen `keyVaultUri` is set."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    }
+  },
+  "parameters": {}
+}
