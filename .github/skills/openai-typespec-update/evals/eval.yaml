@@ -1,0 +1,46 @@
+name: openai-typespec-update-eval
+description: Evaluation suite for the openai-typespec-update skill
+type: capability
+
+environment: azsdk-mcp-mock
+
+tags:
+  area: openai-typespec-update
+  type: ci-gate
+
+config:
+  runs: 1
+  timeout: "90s"
+  model: claude-opus-4.6
+  executor: copilot-sdk
+
+scoring:
+  threshold: 0.8
+
+stimuli:
+  - name: exact-install-001
+    prompt: "Update the OpenAI TypeSpec definitions we use in this repo."
+    graders:
+      - type: output-contains
+        config:
+          substring: "npm i @azure-tools/openai-typespec --save-exact"
+
+  - name: warn-on-caret-001
+    prompt: 'Our package.json currently has "@azure-tools/openai-typespec": "^1.11.0". Update guidance for this package.'
+    graders:
+      - type: output-contains
+        config:
+          substring: "--save-exact"
+      - type: output-matches
+        config:
+          pattern: "(?i)warn"
+      - type: output-contains
+        config:
+          substring: "^1.11.0"
+
+  - name: pinned-version-001
+    prompt: "Update @azure-tools/openai-typespec to version 1.22.0 exactly."
+    graders:
+      - type: output-contains
+        config:
+          substring: "npm i @azure-tools/openai-typespec@1.22.0 --save-exact"

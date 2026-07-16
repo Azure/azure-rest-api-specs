@@ -1,0 +1,50 @@
+name: azure-api-review-eval
+description: Evaluation suite for the azure-api-review skill
+type: capability
+
+environment: azsdk-mcp-mock
+
+tags:
+  area: azure-api-review
+  type: ci-gate
+
+config:
+  runs: 1
+  timeout: "90s"
+  model: claude-opus-4.6
+  executor: copilot-sdk
+
+scoring:
+  threshold: 0.8
+
+stimuli:
+  - name: secret-detection-001
+    prompt: "What azure-api-review rule should I cite if an ARM resource property named 'connectionString' has no format or write-only annotation and could leak a credential?"
+    graders:
+      - type: output-contains
+        config:
+          substring: "SEC-SECRET-DETECT"
+
+  - name: provisioning-state-001
+    prompt: "I'm reviewing an ARM tracked resource and it has no provisioningState property. Which azure-api-review rule does this violate?"
+    graders:
+      - type: output-contains
+        config:
+          substring: "provisioningState"
+      - type: output-matches
+        config:
+          pattern: "RPC-Async-V1-0[23]"
+
+  - name: naming-conventions-001
+    prompt: "Which azure-api-review reference file documents Azure naming and casing conventions for REST API properties?"
+    graders:
+      - type: output-contains
+        config:
+          substring: "naming-conventions.md"
+
+  - name: property-mutability-001
+    prompt: "A property is marked both readOnly and required in the request body schema of an ARM resource. Which azure-api-review rule IDs cover conditional read-only and update-tolerance violations?"
+    graders:
+      - type: output-matches
+        config:
+          pattern: "OAPI0(20|27|29|30|31|34)"
