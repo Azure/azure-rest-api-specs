@@ -15,8 +15,10 @@ namespace Microsoft.MachineLearningServices;
  * Azure Resource Manager resource envelope.
  */
 @parentResource(Workspace)
-model CapabilityHost
-  is Azure.ResourceManager.ProxyResource<CapabilityHostProperties, false> {
+model CapabilityHost is Azure.ResourceManager.ProxyResource<
+  CapabilityHostProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = CapabilityHost,
     KeyName = "name",

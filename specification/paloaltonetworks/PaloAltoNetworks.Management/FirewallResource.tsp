@@ -13,11 +13,10 @@ namespace PaloAltoNetworks.Cloudngfw;
 /**
  * PaloAltoNetworks Firewall
  */
-model FirewallResource
-  is Azure.ResourceManager.TrackedResource<
-    FirewallDeploymentProperties,
-    false
-  > {
+model FirewallResource is Azure.ResourceManager.TrackedResource<
+  FirewallDeploymentProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = FirewallResource,
     KeyName = "firewallName",

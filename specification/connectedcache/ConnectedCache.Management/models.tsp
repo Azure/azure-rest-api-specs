@@ -691,6 +691,7 @@ model AdditionalCacheNodeProperties {
   @doc("proxyUrl configuration of the cache node")
   proxyUrlConfiguration?: ProxyUrlConfiguration;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("Cache node resource Mcc proxy Url")
   @removed(Versions.v2024_11_30_preview)
   proxyUrl?: string;
@@ -794,6 +795,7 @@ model BgpConfiguration {
 
 @doc("ProxyUrl configuration of cache node")
 model ProxyUrlConfiguration {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("Host Proxy Address configuration along with port number. This can be a proxy or ip address. ex: xx.xx.xx.xxxx:80 or host name http://exampleproxy.com:80")
   proxyUrl?: string;
 }

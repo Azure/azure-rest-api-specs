@@ -15,8 +15,10 @@ namespace PaloAltoNetworks.Cloudngfw;
  * LocalRulestack fqdnList
  */
 @parentResource(LocalRulestackResource)
-model FqdnListLocalRulestackResource
-  is Azure.ResourceManager.ProxyResource<FqdnObject, false> {
+model FqdnListLocalRulestackResource is Azure.ResourceManager.ProxyResource<
+  FqdnObject,
+  false
+> {
   ...ResourceNameParameter<
     Resource = FqdnListLocalRulestackResource,
     KeyName = "name",
