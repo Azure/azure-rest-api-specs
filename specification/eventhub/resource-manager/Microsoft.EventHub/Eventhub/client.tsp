@@ -401,6 +401,8 @@ using Microsoft.EventHub;
   "csharp"
 );
 @@clientName(NetworkRuleSetProperties.ipRules, "IPRules", "csharp");
+@@clientName(IpAddressType, "EventHubIPAddressType", "csharp");
+@@clientName(EHNamespaceProperties.ipAddressType, "IPAddressType", "csharp");
 @@clientName(NamespaceReplicaLocation.roleType, "RoleType", "csharp");
 @@clientName(
   NspAccessRulePropertiesSubscriptionsItem,

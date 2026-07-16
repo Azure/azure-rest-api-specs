@@ -10,8 +10,10 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.ManagedNetworkFabric;
 @doc("Defines the Internal Network resource.")
 @parentResource(L3IsolationDomain)
-model InternalNetwork
-  is Azure.ResourceManager.ProxyResource<InternalNetworkProperties, false> {
+model InternalNetwork is Azure.ResourceManager.ProxyResource<
+  InternalNetworkProperties,
+  false
+> {
   @doc("Name of the Internal Network.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path

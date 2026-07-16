@@ -26,15 +26,14 @@ model AssessedWebAppV3 is ProxyResource<AssessedWebAppV3Properties> {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Doesn't have a PUT and hence no need for provisioning state. It is always hydrated by the service."
 @doc("Properties of an assessed web app.")
-model AssessedWebAppV3Properties
-  is AssessedWorkloadProperties<
-    Linkages,
-    Recommendations<
-      MigrationIssues,
-      MigrationSuitability,
-      Skus<MigrationSuitability>
-    >
-  > {
+model AssessedWebAppV3Properties is AssessedWorkloadProperties<
+  Linkages,
+  Recommendations<
+    MigrationIssues,
+    MigrationSuitability,
+    Skus<MigrationSuitability>
+  >
+> {
   @doc("Timestamp of the assessment creation.")
   createdTimestamp: string;
 

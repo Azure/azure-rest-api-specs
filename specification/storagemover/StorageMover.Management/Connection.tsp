@@ -17,8 +17,10 @@ namespace Microsoft.StorageMover;
 /** The Connection resource. */
 @added(Versions.v2025_08_01)
 @parentResource(StorageMover)
-model Connection
-  is Azure.ResourceManager.ProxyResource<ConnectionProperties, false> {
+model Connection is Azure.ResourceManager.ProxyResource<
+  ConnectionProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = Connection,
     KeyName = "connectionName",
