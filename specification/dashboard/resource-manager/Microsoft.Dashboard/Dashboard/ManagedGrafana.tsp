@@ -13,8 +13,10 @@ namespace Microsoft.Dashboard;
 /**
  * The grafana resource type.
  */
-model ManagedGrafana
-  is Azure.ResourceManager.ProxyResource<ManagedGrafanaProperties, true> {
+model ManagedGrafana is Azure.ResourceManager.ProxyResource<
+  ManagedGrafanaProperties,
+  true
+> {
   ...ResourceNameParameter<
     Resource = ManagedGrafana,
     KeyName = "workspaceName",

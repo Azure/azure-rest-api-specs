@@ -17,6 +17,7 @@ namespace PaloAltoNetworks.Cloudngfw;
 interface PaloAltoNetworksCloudngfwOperationsOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @doc("A long-running provider action.")
   @operationId("PaloAltoNetworksCloudngfwOperations_createProductSerialNumber")
   @autoRoute
   createProductSerialNumber is ArmProviderActionSync<
@@ -26,6 +27,7 @@ interface PaloAltoNetworksCloudngfwOperationsOperationGroup {
   >;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @doc("A long-running provider action.")
   @operationId("PaloAltoNetworksCloudngfwOperations_listCloudManagerTenants")
   @autoRoute
   listCloudManagerTenants is ArmProviderActionSync<
@@ -35,6 +37,7 @@ interface PaloAltoNetworksCloudngfwOperationsOperationGroup {
   >;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @doc("A long-running provider action.")
   @operationId("PaloAltoNetworksCloudngfwOperations_listProductSerialNumberStatus")
   @autoRoute
   listProductSerialNumberStatus is ArmProviderActionSync<
@@ -44,6 +47,7 @@ interface PaloAltoNetworksCloudngfwOperationsOperationGroup {
   >;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @doc("A long-running provider action.")
   @operationId("PaloAltoNetworksCloudngfwOperations_listSupportInfo")
   @autoRoute
   listSupportInfo is ArmProviderActionSync<
