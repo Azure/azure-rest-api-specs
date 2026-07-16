@@ -43,6 +43,7 @@ input-file:
   - stable/2025-09-01/expressRoute.json
   - stable/2025-09-01/firewall.json
   - stable/2025-09-01/firewallPolicy.json
+  - stable/2025-09-01/firstPartyServiceTag.json
   - stable/2025-09-01/interconnectGroup.json
   - stable/2025-09-01/loadBalancer.json
   - stable/2025-09-01/networkGateway.json
@@ -55,19 +56,12 @@ input-file:
   - stable/2025-09-01/virtualNetworkAppliance.json
   - stable/2025-09-01/virtualWan.json
   - stable/2018-10-01/vmssNetwork.json
+modelerfour:
+  lenient-model-deduplication: true
 suppressions:
-  - code: ParametersInPointGet
-    from: loadBalancer.json
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}"].get.parameters
-    reason: '"detailLevel" query parameter approved for GET LoadBalancer to reduce response payload for large resources. Approved in ARM Office Hours by Gary Li on 2/13/2025.'
-  - code: ProvisioningStateMustBeReadOnly
-    from: networkManager.json
-    reason: provisioningState is correctly marked readOnly in CommitProperties definition. The linter does not follow $ref chains to verify readOnly in referenced schemas.
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/commits/{commitName}"].get.responses["200"].schema
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/commits/{commitName}"].put.responses["200"].schema
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/commits/{commitName}"].put.responses["201"].schema
+  - code: MULTIPLE_API_VERSION
+    reason: vmssNetwork.json is only available in stable/2018-10-01. Newer API versions use vmssNetworkInterface.json instead.
+    from: vmssNetwork.json
   - code: PutResponseCodes
     reason: Required for multiple response codes. Reviewed by ARM team.
     where:
@@ -79,6 +73,7 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/linkReferences/{linkReferenceName}"].delete
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/links/{linkName}"].delete
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firstPartyServiceTags/{firstPartyServiceTagName}"].delete
   - code: ProvisioningStateMustBeReadOnly
     from: interconnectGroup.json
     reason: provisioningState is correctly marked readOnly in the referenced schema. The linter does not follow $ref chains to verify readOnly.
@@ -88,6 +83,16 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/interconnectGroups/{interconnectGroupName}"].put.responses["201"].schema
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/interconnectGroups/{interconnectGroupName}"].patch.responses["200"].schema
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/interconnectGroups/{interconnectGroupName}/subgroups/{subgroupName}"].get.responses["200"].schema
+  - code: ProvisioningStateMustBeReadOnly
+    from: expressRoute.json
+    reason: provisioningState is correctly marked readOnly in the referenced schema. The linter does not follow $ref chains to verify readOnly.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteLags/{expressRouteLagName}"].get.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteLags/{expressRouteLagName}"].put.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteLags/{expressRouteLagName}"].put.responses["201"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteLags/{expressRouteLagName}"].patch.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteLags/{expressRouteLagName}/links/{linkName}"].get.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteLags/{expressRouteLagName}/links/{linkName}/members/{memberName}"].get.responses["200"].schema
   - code: ResourceNameRestriction
     from: interconnectGroup.json
     reason: Subgroup is a read-only child resource with no PUT operation. Pattern restriction is not applicable.
@@ -123,6 +128,70 @@ suppressions:
     reason: Not a standard azure resource.
     where:
       - $.definitions.GetServiceGatewayServicesResult
+  - code: ProvisioningStateMustBeReadOnly
+    from: firstPartyServiceTag.json
+    reason: >-
+      The TypeSpec emitter correctly places readOnly: true as a sibling of $ref, which AutoRest
+      supports (along with description, title, nullable, and x-* extensions). The TypeSpec source
+      correctly marks provisioningState with @visibility(Lifecycle.Read). The lintdiff rule does
+      not recognize readOnly next to $ref, so this suppression is needed.
+      See: https://github.com/Azure/typespec-azure/issues/4611
+  - code: ProvisioningStateMustBeReadOnly
+    from: firewallPolicy.json
+    reason: >-
+      KSG provisioningState is emitted with readOnly as a sibling of $ref. This is valid for
+      AutoRest/ARM, but the linter does not resolve this pattern reliably.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/kubeSelectorGroups/{kubeSelectorGroupName}"].get.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/kubeSelectorGroups/{kubeSelectorGroupName}"].put.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/kubeSelectorGroups/{kubeSelectorGroupName}"].put.responses["201"].schema
+  - code: AvoidAdditionalProperties
+    from: firewallPolicy.json
+    reason: >-
+      KubeLabelSelector.matchLabels intentionally represents an open-ended Kubernetes label map
+      (string-to-string dictionary) and therefore requires additionalProperties.
+    where:
+      - $.definitions.KubeLabelSelector.properties.matchLabels
+  - code: ResourceNameRestriction
+    from: firewallPolicy.json
+    reason: >-
+      firewallPolicyName is the name parameter of the parent FirewallPolicy resource, inherited by
+      the KubeSelectorGroup child path via @parentResource. The child does not define or own the
+      parent's name parameter, so the naming pattern restriction is governed by the FirewallPolicy
+      resource and is not applicable on the child path.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/kubeSelectorGroups"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/kubeSelectorGroups/{kubeSelectorGroupName}"]
+  - code: ProvisioningStateMustBeReadOnly
+    from: networkWatcher.json
+    reason: >-
+      The TypeSpec emitter correctly places readOnly: true as a sibling of $ref, which AutoRest
+      supports (along with description, title, nullable, and x-* extensions). The TypeSpec source
+      correctly marks provisioningState with @visibility(Lifecycle.Read). The lintdiff rule does
+      not recognize readOnly next to $ref, so this suppression is needed.
+      See: https://github.com/Azure/typespec-azure/issues/4611
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/connectionAnalyzers/{connectionAnalyzerName}"].get.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/connectionAnalyzers/{connectionAnalyzerName}"].put.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/connectionAnalyzers/{connectionAnalyzerName}"].put.responses["201"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/connectionAnalyzers/{connectionAnalyzerName}"].patch.responses["200"].schema
+  - code: XMSSecretInResponse
+    from: expressRoute.json
+    reason: >-
+      activationKey is not a secret value, it is a base64 encoded string used for multi-cloud circuit provisioning.
+    where:
+      - $.definitions.ExpressRouteCircuit.properties.properties.properties.activationKey
+      - $.definitions.ExpressRouteCircuitPropertiesFormat.properties.activationKey
+  - code: ProvisioningStateMustBeReadOnly
+    from: virtualNetwork.json
+    reason: >-
+      provisioningState is correctly marked readOnly as a sibling of $ref in the generated swagger.
+      The TypeSpec source uses @visibility(Lifecycle.Read) on provisioningState. The lint rule does
+      not follow $ref chains to verify readOnly. See: https://github.com/Azure/typespec-azure/issues/4611
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationSecurityGroups/{applicationSecurityGroupName}/addressPrefixSets/{addressPrefixSetName}"].get.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationSecurityGroups/{applicationSecurityGroupName}/addressPrefixSets/{addressPrefixSetName}"].put.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationSecurityGroups/{applicationSecurityGroupName}/addressPrefixSets/{addressPrefixSetName}"].put.responses["201"].schema
 directive:
   - from: specification/common-types/resource-management/v6/types.json
     where: "$.definitions.ProxyResource"
@@ -138,6 +207,12 @@ directive:
     where: "$.definitions.systemData"
     transform: >
       $["x-ms-client-name"] = "SecurityPerimeterSystemData"
+
+  - from: networkGateway.json
+    where: $.definitions.BgpPeerStatus.properties.connectedDuration
+    transform: >
+      $["x-ms-client-name"] = "ConnectedDurationString"
+    reason: Property ends with "Duration" but is not an ISO 8601 / TimeSpan-compatible duration; rename for client to avoid .NET TimeSpan auto-conversion.
 ```
 
 ### Tag: package-2025-07-01
@@ -247,6 +322,16 @@ directive:
     where: "$.definitions.systemData"
     transform: >
       $["x-ms-client-name"] = "SecurityPerimeterSystemData"
+```
+
+### Tag: package-2026-06-01-preview
+
+These settings apply only when `--tag=package-2026-06-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-06-01-preview'
+input-file:
+  - preview/2026-06-01-preview/common.json
+  - preview/2026-06-01-preview/neuroShield.json
 ```
 
 ### Tag: package-2025-05-01
@@ -4862,6 +4947,11 @@ suppressions:
     reason: False alarm.
     where:
       - $.definitions.ConnectionSharedKeyResultList
+  - code: AvoidAdditionalProperties
+    from: firewallPolicy.json
+    reason: KubeLabelSelector.matchLabels is an open-ended Kubernetes labels dictionary and intentionally uses additionalProperties.
+    where:
+      - $.definitions.KubeLabelSelector.properties.matchLabels.additionalProperties
 ```
 
 ## Go
