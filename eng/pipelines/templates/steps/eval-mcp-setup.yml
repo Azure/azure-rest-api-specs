@@ -1,18 +1,10 @@
 # Repo-local override of the mcpSetupTemplate swap point (see
-# /eng/common/pipelines/templates/jobs/build-mcp.yml). Builds azure-sdk-tools' MCP server(s) so
-# this repo's Vally evals can exercise them, WITHOUT an ADO GitHub service connection: azure-sdk-tools
-# is side-checked-out via sparse-checkout.yml, authenticated with the azuresdk-copilot-github-pat
-# secret (already provided by the AzSDK_Eval_Variable_group variable group) -- the same PAT-based
-# pattern this repo already uses for other cross-repo checkouts, e.g.
-# /eng/pipelines/swagger-api-doc-preview.yml and archetype-spec-gen-sdk.yml. This sidesteps
-# eng/common/pipelines/templates/steps/eval-mcp-setup.yml's `checkout: <repository-resource>` +
-# resources.repositories + endpoint requirement entirely, so no ADO-admin action is needed.
+# /eng/common/pipelines/templates/jobs/build-mcp.yml). Builds azure-sdk-tools' MCP server(s),
+# side-checked-out via sparse-checkout.yml with a PAT (azuresdk-copilot-github-pat) instead of an
+# ADO GitHub service connection -- same pattern as swagger-api-doc-preview.yml.
 #
-# Fetches the top-level files + /eng + the whole /tools directory (sparse checkout), not just
-# /tools/azsdk-cli: Azure.Sdk.Tools.Cli.csproj has project references to sibling projects (e.g.
-# ../../codeowners-utils/Azure.Sdk.Tools.CodeownersUtils), so pulling only azsdk-cli fails restore
-# with CS0234/CS0246 errors (confirmed by a real pipeline run). Add more top-level paths below if
-# the MCP server build ever needs directories outside /tools too.
+# Sparse-checks out all of /tools (not just /tools/azsdk-cli): Cli.csproj project-references
+# sibling projects (e.g. codeowners-utils), so a narrower checkout fails restore with CS0234/CS0246.
 
 parameters:
   - name: TestType

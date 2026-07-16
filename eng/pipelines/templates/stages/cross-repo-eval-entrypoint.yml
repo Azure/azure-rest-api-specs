@@ -1,19 +1,11 @@
-# Reusable cross-repo eval entrypoint: wraps archetype-eval.yml's cross-repo MCP build plumbing
-# so any repo outside azure-sdk-tools that wants to run Vally evals against the mock/live MCP
-# server doesn't have to hand-roll its own `extends: archetype-eval.yml` parameter wiring — only
-# the values below need to differ per repo/run.
-# (This intentionally lives under eng/pipelines/, not eng/common/, since eng/common/** is synced
-# verbatim from azure-sdk-tools and would drop repo-local additions on the next sync.)
+# Reusable cross-repo eval entrypoint: wraps archetype-eval.yml's MCP build plumbing so a repo
+# outside azure-sdk-tools doesn't have to hand-roll its own `extends: archetype-eval.yml` wiring.
+# Lives under eng/pipelines/, not eng/common/, since eng/common/** is synced verbatim from
+# azure-sdk-tools and would drop repo-local additions on the next sync.
 #
-# No ADO GitHub service connection is required: mcpSetupTemplate defaults to this repo's own
-# /eng/pipelines/templates/steps/eval-mcp-setup.yml, which side-checks-out azure-sdk-tools via
-# sparse-checkout.yml authenticated with the azuresdk-copilot-github-pat secret -- the same
-# PAT-based pattern already used elsewhere in this repo (e.g. swagger-api-doc-preview.yml,
-# archetype-spec-gen-sdk.yml) for cross-repo checkouts, instead of a resources.repositories +
-# service-connection endpoint. (An earlier version of this template tried to declare
-# resources.repositories here, parameterized via `${{ parameters.x }}`; that's rejected by Azure
-# Pipelines at pipeline-run time with "A template expression is not allowed in this context",
-# since `resources:` is resolved before a template's `extends` parameters are bound.)
+# No ADO GitHub service connection needed: mcpSetupTemplate defaults to this repo's own
+# eval-mcp-setup.yml, which side-checks-out azure-sdk-tools via sparse-checkout.yml with a PAT
+# (same pattern as swagger-api-doc-preview.yml / archetype-spec-gen-sdk.yml).
 
 parameters:
   - name: mcpSetupTemplate

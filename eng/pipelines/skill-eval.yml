@@ -1,24 +1,14 @@
-# Skill-compliance eval CI: runs the per-skill Vally evals under .github/skills (one job per
-# skill), using the shared eval framework synced from azure-sdk-tools under eng/common. This is
-# the repo-local thin entrypoint; the framework itself (archetype/jobs/scripts) lives in
-# eng/common and is not repo-specific. The reusable cross-repo MCP build wiring
-# (mcpSetupTemplate/TestType/threshold plumbing) lives in
+# Vally eval CI for .github/skills, using the eval framework synced from azure-sdk-tools under
+# eng/common. Cross-repo MCP build wiring lives in
 # /eng/pipelines/templates/stages/cross-repo-eval-entrypoint.yml, extended below.
 #
-# No ADO GitHub service connection is required: the MCP build side-checks-out azure-sdk-tools via
-# /eng/pipelines/templates/steps/eval-mcp-setup.yml, which uses sparse-checkout.yml authenticated
-# with the azuresdk-copilot-github-pat secret (from the AzSDK_Eval_Variable_group below) -- the
-# same PAT-based pattern already used elsewhere in this repo (e.g.
-# eng/pipelines/swagger-api-doc-preview.yml) for cross-repo checkouts.
-#
-# Pilot scope: hermetic mock scenarios only, scheduled/manual runs (no `pr` trigger yet), per the
-# "begin with hermetic mock scenarios and scheduled/manual runs" acceptance criterion in
+# Pilot scope: hermetic mock scenarios only, scheduled/manual runs (no `pr` trigger yet) per
 # https://github.com/Azure/azure-sdk-tools/issues/16347.
 
 trigger: none
 pr: none
 
-# Scheduled pilot run. Cadence is a placeholder (daily) pending confirmation.
+# Cadence is a placeholder (daily) pending confirmation.
 schedules:
   - cron: '0 8 * * *'
     displayName: 'Daily skill-eval pilot run'
@@ -38,32 +28,17 @@ extends:
   template: /eng/pipelines/templates/stages/cross-repo-eval-entrypoint.yml
   parameters:
     vallyRoot: .github/skills
-    # Three patterns, all rooted at .github/skills so every suite shares one Prepare/Eval/Summary
-    # run (collect-stimuli.ts shards by `area` tag, falling back to parent folder name when a file
-    # has none -- so these three groups land in distinct shards automatically, no manual splitting
-    # needed):
-    #   - '*/evals/*.eval.yaml'  — trigger suites, named trigger.eval.yaml, one per skill.
-    #   - '*/evals/eval.yaml'    — capability suites, named plainly eval.yaml (doesn't match the
-    #                              *.eval.yaml glob above, since there's no name segment before
-    #                              the dot).
-    #   - 'evals/arm-api-reviewer/vally/eval-*.yaml' — the ARM API Reviewer suite (55 stimuli /
-    #                              17 files). It's independently owned (own nested .vally.yaml,
-    #                              own fixtures/, own run-evals.ps1 for local/manual runs) but
-    #                              vallyRoot is a shared ancestor of both trees, so its files glob
-    #                              in here too instead of needing a second pipeline -- eval-shard
-    #                              only supports one Prepare stage per pipeline (its matrix read
-    #                              is `stageDependencies.Prepare...`, not parameterized), so a
-    #                              second top-level pipeline was the only other option.
-    #     No MCP server is needed for it (skill-invocation/output-matches graders against inline
-    #     environment.files fixtures only) -- it simply doesn't reference the mock MCP server
-    #     this pipeline's TestType: mock (default) builds, same as any other skill-invocation-only
-    #     eval file here.
-    #     NOT covered by this pipeline (no glob gap, just no eval files yet): azure-api-review,
-    #     openai-typespec-update (still on the old Waza eval.yaml + tasks/ format).
+    # All rooted at .github/skills, so one Prepare/Eval/Summary run covers every suite
+    # (collect-stimuli.ts shards by `area` tag, falling back to parent folder name):
+    #   - '*/evals/*.eval.yaml' — trigger.eval.yaml suites, one per skill.
+    #   - '*/evals/eval.yaml'   — capability suites (plain eval.yaml, doesn't match *.eval.yaml).
+    #   - 'evals/arm-api-reviewer/vally/eval-*.yaml' — ARM API Reviewer suite (own nested
+    #     .vally.yaml/fixtures, no MCP server needed; folded in here instead of a second
+    #     pipeline since eval-shard.yml only supports one Prepare stage per pipeline).
+    # Not covered yet (no eval files): azure-api-review, openai-typespec-update.
     evalGlobs:
       - '*/evals/*.eval.yaml'
       - '*/evals/eval.yaml'
       - 'evals/arm-api-reviewer/vally/eval-*.yaml'
-    # Per-shard job timeout. Raised from 20 to 45m to cover the ARM suite's single fallback shard
-    # (17 files / 55 stimuli, no `area` tags to split further).
+    # Raised from 20 to 45m to cover the ARM suite's single fallback shard (17 files, no area tags).
     shardTimeoutInMinutes: 45
