@@ -35,3 +35,26 @@ using Microsoft.App;
 // ClientId is documented as a GUID; surface it as System.Guid in C# only,
 // without changing the wire/spec type (Type mapping).
 @@alternateType(AgentIdentity.clientId, Azure.Core.uuid, "csharp");
+@@alternateType(GenevaActionsPolicy.clientId, Azure.Core.uuid, "csharp");
+@@alternateType(GenevaActionsPolicyPatch.clientId, Azure.Core.uuid, "csharp");
+@@alternateType(ApplicationInsightsConfiguration.appId, Azure.Core.uuid, "csharp");
+
+// Add RP/domain context to otherwise-generic type names to avoid ambiguity in
+// IntelliSense and future breaking renames (contextual naming).
+@@clientName(ActionConfiguration, "AgentActionConfiguration", "csharp");
+@@clientName(
+  ConnectorProvisioningState,
+  "AgentConnectorProvisioningState",
+  "csharp"
+);
+@@clientName(
+  IncidentManagementConfiguration,
+  "AgentIncidentManagementConfiguration",
+  "csharp"
+);
+@@clientName(
+  KnowledgeGraphConfiguration,
+  "AgentKnowledgeGraphConfiguration",
+  "csharp"
+);
+@@clientName(UpgradeChannel, "AgentUpgradeChannel", "csharp");
