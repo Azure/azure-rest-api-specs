@@ -18,6 +18,7 @@ using Microsoft.Confluent;
   exact("AZURECOSMOSV2SINK"),
   "python"
 );
+
 #suppress "experimental-feature" "exact"
 @@clientName(
   ConnectorClass.AZURECOSMOSV2SOURCE,
