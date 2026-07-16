@@ -23,7 +23,7 @@ These are the global settings for the ContainerServices API.
 
 ```yaml
 openapi-type: arm
-tag: package-2026-02-02-preview
+tag: package-2026-05-02-preview
 ```
 
 ### Tag: package-2026-02-02-preview
@@ -33,6 +33,33 @@ These settings apply only when `--tag=package-2026-02-02-preview` is specified o
 ```yaml $(tag) == 'package-2026-02-02-preview'
 input-file:
   - preview/2026-02-02-preview/preparedimagespecification.json
+```
+
+### Tag: package-2026-03-02-preview
+
+These settings apply only when `--tag=package-2026-03-02-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-03-02-preview'
+input-file:
+  - preview/2026-03-02-preview/preparedimagespecification.json
+```
+
+### Tag: package-2026-04-02-preview
+
+These settings apply only when `--tag=package-2026-04-02-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-04-02-preview'
+input-file:
+  - preview/2026-04-02-preview/preparedimagespecification.json
+```
+
+### Tag: package-2026-05-02-preview
+
+These settings apply only when `--tag=package-2026-05-02-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-05-02-preview'
+input-file:
+  - preview/2026-05-02-preview/preparedimagespecification.json
 ```
 
 ---
@@ -55,7 +82,7 @@ See configuration in [readme.java.md](./readme.java.md)
 
 ## Suppression
 
-``` yaml
+```yaml
 directive:
   - suppress: GuidUsage
     from: preparedimagespecification.json
