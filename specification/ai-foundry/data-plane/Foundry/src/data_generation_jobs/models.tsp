@@ -221,7 +221,7 @@ model TracesDataGenerationJobOptions extends DataGenerationJobOptions {
   type: "traces";
 }
 
-@doc("The options for a task generation data generation job. Use with the evaluation scenario and prompt, file, or agent sources. Generated dataset rows include fields such as `id`, `category`, `test_case_description`, and `desired_num_turns`.")
+@doc("The options for a task generation data generation job. Use with multiturn evaluation scenarios and with prompt, file, or agent sources. Generated dataset rows include fields such as `id`, `category`, `test_case_description`, and `desired_num_turns`.")
 @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
 model TaskGenerationDataGenerationJobOptions extends DataGenerationJobOptions {
   @doc("The data generation job type, which is TaskGeneration for this model.")
