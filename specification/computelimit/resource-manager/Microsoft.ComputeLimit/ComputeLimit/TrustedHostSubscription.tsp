@@ -31,6 +31,11 @@ interface TrustedHostSubscriptions {
   create is ArmResourceCreateOrReplaceSync<TrustedHostSubscription>;
 
   /**
+   * Gets a host subscription trusted by the guest subscription.
+   */
+  get is ArmResourceRead<TrustedHostSubscription>;
+
+  /**
    * Removes a host subscription from the guest subscription's trusted hosts.
    */
   delete is ArmResourceDeleteSync<TrustedHostSubscription>;
@@ -38,5 +43,5 @@ interface TrustedHostSubscriptions {
   /**
    * Lists all host subscriptions trusted by the guest subscription in a location.
    */
-  listByParent is ArmResourceListByParent<TrustedHostSubscription>;
+  list is ArmResourceListAtScope<TrustedHostSubscription>;
 }

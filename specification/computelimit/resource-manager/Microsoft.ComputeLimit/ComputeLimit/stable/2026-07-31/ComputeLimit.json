@@ -1201,7 +1201,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ComputeLimit/locations/{location}/trustedHostSubscriptions": {
       "get": {
-        "operationId": "TrustedHostSubscriptions_ListByParent",
+        "operationId": "TrustedHostSubscriptions_ListBySubscriptionLocationResource",
         "tags": [
           "TrustedHostSubscriptions"
         ],
@@ -1242,6 +1242,51 @@
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ComputeLimit/locations/{location}/trustedHostSubscriptions/{hostSubscriptionId}": {
+      "get": {
+        "operationId": "TrustedHostSubscriptions_Get",
+        "tags": [
+          "TrustedHostSubscriptions"
+        ],
+        "description": "Gets a host subscription trusted by the guest subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "hostSubscriptionId",
+            "in": "path",
+            "description": "The name of the TrustedHostSubscription",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}(-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TrustedHostSubscription"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a trusted host subscription": {
+            "$ref": "./examples/TrustedHostSubscriptions_Get.json"
+          }
+        }
+      },
       "put": {
         "operationId": "TrustedHostSubscriptions_Create",
         "tags": [
