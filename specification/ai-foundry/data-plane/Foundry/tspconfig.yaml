@@ -3,6 +3,7 @@ parameters:
     default: "sdk/ai"
 emit:
   - "@typespec/openapi3"
+  - "@azure-tools/foundry-snippets-emitter"
 options:
   "@typespec/openapi3":
     emitter-output-dir: "{project-root}/"
@@ -32,6 +33,22 @@ options:
     emitter-output-dir: "{output-dir}/{service-dir}/json-schema"
     file-type: json
     bundleId: azure-ai-agents-v2.json
+  "@azure-tools/foundry-snippets-emitter":
+    emitter-output-dir: "{project-root}/"
+    namespace: "Azure.AI.Projects"
+    openapi-file: "./openapi3/virtual-public-preview/microsoft-foundry-openapi3.json"
+    sdk-catalog: "../../../../../foundry-api-reference-samples/config/sdk-catalog.json"
+    overrides-dir: "../../../../../foundry-api-reference-samples/config/overrides"
+    operation-aliases:
+      - operation-id: "Agents_createAgent_Agents_createAgentFromCode"
+        target: "Azure.AI.Projects.Agents.createAgent"
+      - operation-id: "Agents_updateAgent_Agents_updateAgentFromCode"
+        target: "Azure.AI.Projects.Agents.updateAgent"
+      - operation-id: "Agents_createAgentVersion_Agents_createAgentVersionFromCode"
+        target: "Azure.AI.Projects.Agents.createAgentVersion"
+      - operation-id: "createSkillVersion_createSkillVersionFromFiles"
+        target: "Azure.AI.Projects.Skills.createSkillVersion"
+    format-output: true
 imports:
   - "@azure-tools/typespec-azure-core"
   - "@azure-tools/typespec-azure-core/experimental"
