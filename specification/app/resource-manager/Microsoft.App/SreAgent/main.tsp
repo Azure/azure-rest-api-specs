@@ -6,7 +6,7 @@ import "./agentconnector.tsp";
 import "./agentspace.tsp";
 import "./agentspaceconnector.tsp";
 import "./supportedagentmodel.tsp";
-import "./debugsession.tsp";
+import "./agentsession.tsp";
 
 using Versioning;
 using Azure.ResourceManager;
@@ -24,8 +24,8 @@ enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   v2026_01_01: "2026-01-01",
 
-  /** 2026-06-01-preview version */
+  /** 2026-08-01-preview version */
   @Azure.Core.previewVersion
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
-  v2026_06_01_preview: "2026-06-01-preview",
+  v2026_08_01_preview: "2026-08-01-preview",
 }
