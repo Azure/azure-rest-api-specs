@@ -11,20 +11,21 @@ namespace Microsoft.NetworkCloud;
 /**
  * The name of the L2 network.
  */
-model L2NetworkNameParameter
-  is ResourceNameParameter<
-    Resource = L2Network,
-    KeyName = "l2NetworkName",
-    SegmentName = "l2Networks",
-    NamePattern = "^([a-zA-Z0-9][a-zA-Z0-9-_]{0,28}[a-zA-Z0-9])$"
-  >;
+model L2NetworkNameParameter is ResourceNameParameter<
+  Resource = L2Network,
+  KeyName = "l2NetworkName",
+  SegmentName = "l2Networks",
+  NamePattern = "^([a-zA-Z0-9][a-zA-Z0-9-_]{0,28}[a-zA-Z0-9])$"
+>;
 
 /**
  * L2Network represents a network that utilizes a single isolation domain set up for layer-2 resources.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "legacy resource using legacy features"
-model L2Network
-  is Azure.ResourceManager.TrackedResource<L2NetworkProperties, false> {
+model L2Network is Azure.ResourceManager.TrackedResource<
+  L2NetworkProperties,
+  false
+> {
   ...L2NetworkNameParameter;
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
   ...RequiredExtendedLocationProperty;

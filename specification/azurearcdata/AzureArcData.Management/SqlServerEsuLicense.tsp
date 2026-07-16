@@ -13,11 +13,10 @@ namespace Microsoft.AzureArcData;
 /**
  * Describe SQL Server ESU license resource.
  */
-model SqlServerEsuLicense
-  is Azure.ResourceManager.TrackedResource<
-    SqlServerEsuLicenseProperties,
-    false
-  > {
+model SqlServerEsuLicense is Azure.ResourceManager.TrackedResource<
+  SqlServerEsuLicenseProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = SqlServerEsuLicense,
     KeyName = "sqlServerEsuLicenseName",

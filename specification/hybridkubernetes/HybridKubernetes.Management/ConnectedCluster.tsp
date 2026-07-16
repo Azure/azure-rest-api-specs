@@ -15,8 +15,10 @@ namespace Microsoft.Kubernetes;
 /**
  * Represents a connected cluster.
  */
-model ConnectedCluster
-  is Azure.ResourceManager.TrackedResource<ConnectedClusterProperties, false> {
+model ConnectedCluster is Azure.ResourceManager.TrackedResource<
+  ConnectedClusterProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = ConnectedCluster,
     KeyName = "clusterName",

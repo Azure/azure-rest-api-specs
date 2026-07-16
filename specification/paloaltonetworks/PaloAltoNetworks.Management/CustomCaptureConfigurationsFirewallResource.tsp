@@ -18,11 +18,10 @@ namespace PaloAltoNetworks.Cloudngfw;
 @singleton("default")
 @parentResource(FirewallResource)
 @added(Versions.v2026_05_11_preview)
-model CustomCaptureConfigurationsFirewallResource
-  is Azure.ResourceManager.ProxyResource<
-    CustomCaptureConfigurationsProperties,
-    false
-  > {
+model CustomCaptureConfigurationsFirewallResource is Azure.ResourceManager.ProxyResource<
+  CustomCaptureConfigurationsProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = CustomCaptureConfigurationsFirewallResource,
     KeyName = "customCaptureConfigurationName",
