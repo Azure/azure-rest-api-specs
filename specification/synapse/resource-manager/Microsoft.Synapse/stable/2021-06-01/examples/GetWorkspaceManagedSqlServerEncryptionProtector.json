@@ -1,19 +1,19 @@
 {
   "parameters": {
-    "api-version": "2021-06-01",
-    "encryptionProtectorName": "current",
-    "resourceGroupName": "wsg-7398",
     "subscriptionId": "00000000-1111-2222-3333-444444444444",
-    "workspaceName": "testWorkspace"
+    "resourceGroupName": "wsg-7398",
+    "workspaceName": "testWorkspace",
+    "encryptionProtectorName": "current",
+    "api-version": "2021-06-01"
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/wsg-7398/providers/Microsoft.Synapse/workspaces/testWorkspace/encryptionProtector/current",
         "name": "current",
         "type": "Microsoft.Synapse/workspaces/encryptionProtector",
-        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/wsg-7398/providers/Microsoft.Synapse/workspaces/testWorkspace/encryptionProtector/current",
-        "kind": "azurekeyvault",
         "location": "Japan East",
+        "kind": "azurekeyvault",
         "properties": {
           "serverKeyName": "someVault_someKey_01234567890123456789012345678901",
           "serverKeyType": "AzureKeyVault",
@@ -21,7 +21,5 @@
         }
       }
     }
-  },
-  "operationId": "WorkspaceManagedSqlServerEncryptionProtector_Get",
-  "title": "Get workspace managed sql Server's encryption protector"
+  }
 }

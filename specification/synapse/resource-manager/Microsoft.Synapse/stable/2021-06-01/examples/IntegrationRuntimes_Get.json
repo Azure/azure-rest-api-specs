@@ -1,30 +1,30 @@
 {
   "parameters": {
-    "api-version": "2021-06-01-preview",
-    "ifNoneMatch": "15003c4f-0000-0200-0000-5cbe090b0000",
-    "integrationRuntimeName": "exampleIntegrationRuntime",
-    "resourceGroupName": "exampleResourceGroup",
     "subscriptionId": "12345678-1234-1234-1234-12345678abc",
-    "workspaceName": "exampleWorkspace"
+    "resourceGroupName": "exampleResourceGroup",
+    "workspaceName": "exampleWorkspace",
+    "integrationRuntimeName": "exampleIntegrationRuntime",
+    "ifNoneMatch": "15003c4f-0000-0200-0000-5cbe090b0000",
+    "api-version": "2021-06-01"
   },
   "responses": {
     "200": {
-      "body": {
-        "name": "exampleIntegrationRuntime",
-        "type": "Microsoft.Synapse/workspaces/integrationruntimes",
-        "etag": "15003c4f-0000-0200-0000-5cbe090b0000",
-        "id": "/subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.Synapse/workspaces/exampleWorkspaceName/integrationruntimes/exampleIntegrationRuntime",
-        "properties": {
-          "type": "SelfHosted",
-          "description": "A selfhosted integration runtime"
-        }
-      },
       "headers": {
         "Date": "Mon, 22 Apr 2019 18:33:47 GMT",
         "X-Content-Type-Options": "nosniff",
-        "x-ms-correlation-request-id": "ad824326-e577-4a47-a092-2e621c4d59d9",
         "x-ms-ratelimit-remaining-subscription-reads": "11997",
-        "x-ms-request-id": "ad824326-e577-4a47-a092-2e621c4d59d9"
+        "x-ms-request-id": "ad824326-e577-4a47-a092-2e621c4d59d9",
+        "x-ms-correlation-request-id": "ad824326-e577-4a47-a092-2e621c4d59d9"
+      },
+      "body": {
+        "id": "/subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.Synapse/workspaces/exampleWorkspaceName/integrationruntimes/exampleIntegrationRuntime",
+        "name": "exampleIntegrationRuntime",
+        "type": "Microsoft.Synapse/workspaces/integrationruntimes",
+        "properties": {
+          "type": "SelfHosted",
+          "description": "A selfhosted integration runtime"
+        },
+        "etag": "15003c4f-0000-0200-0000-5cbe090b0000"
       }
     },
     "304": {},
@@ -36,7 +36,5 @@
         }
       }
     }
-  },
-  "operationId": "IntegrationRuntimes_Get",
-  "title": "Get integration runtime"
+  }
 }

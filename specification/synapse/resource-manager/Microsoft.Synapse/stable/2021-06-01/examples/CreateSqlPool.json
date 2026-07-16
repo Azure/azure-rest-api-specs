@@ -1,51 +1,49 @@
 {
-  "operationId": "SqlPools_Create",
   "parameters": {
-    "api-version": "2021-06-01",
+    "subscriptionId": "01234567-89ab-4def-0123-456789abcdef",
     "resourceGroupName": "ExampleResourceGroup",
+    "workspaceName": "ExampleWorkspace",
+    "sqlPoolName": "ExampleSqlPool",
+    "api-version": "2021-06-01",
     "sqlPoolInfo": {
+      "tags": {},
+      "sku": {
+        "tier": "",
+        "name": ""
+      },
       "location": "Southeast Asia",
       "properties": {
-        "collation": "",
-        "createMode": "",
         "maxSizeBytes": 0,
-        "recoverableDatabaseId": "",
+        "collation": "",
         "sourceDatabaseId": "",
+        "recoverableDatabaseId": "",
+        "createMode": "",
         "storageAccountType": "LRS"
-      },
-      "sku": {
-        "name": "",
-        "tier": ""
-      },
-      "tags": {}
-    },
-    "sqlPoolName": "ExampleSqlPool",
-    "subscriptionId": "01234567-89ab-4def-0123-456789abcdef",
-    "workspaceName": "ExampleWorkspace"
+      }
+    }
   },
-  "title": "Create a SQL Analytics pool",
   "responses": {
     "200": {
       "body": {
-        "name": "ExampleSqlPool",
-        "type": "Microsoft.Synapse/workspaces/sqlPools",
         "id": "/subscriptions/01234567-89ab-4def-0123-456789abcdef/resourceGroups/ExampleResourceGroup/providers/Microsoft.Synapse/workspaces/ExampleWorkspaces/sqlPools/ExampleSqlPool",
+        "type": "Microsoft.Synapse/workspaces/sqlPools",
+        "name": "ExampleSqlPool",
         "location": "Southeast Asia",
-        "properties": {
-          "collation": "",
-          "creationDate": "1970-01-01T00:00:00.000Z",
-          "maxSizeBytes": 0,
-          "provisioningState": "Provisioning",
-          "recoverableDatabaseId": "",
-          "restorePointInTime": "1970-01-01T00:00:00.000Z",
-          "status": "Paused",
-          "storageAccountType": "LRS"
-        },
+        "tags": {},
         "sku": {
-          "name": "",
-          "tier": ""
+          "tier": "",
+          "name": ""
         },
-        "tags": {}
+        "properties": {
+          "maxSizeBytes": 0,
+          "collation": "",
+          "recoverableDatabaseId": "",
+          "provisioningState": "Provisioning",
+          "status": "Paused",
+          "restorePointInTime": "1970-01-01T00:00:00.000Z",
+          "creationDate": "1970-01-01T00:00:00.000Z",
+          "storageAccountType": "LRS"
+        }
       }
     },
     "202": {},

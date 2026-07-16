@@ -1,18 +1,18 @@
 {
   "parameters": {
-    "api-version": "2021-06-01",
-    "resourceGroupName": "ExampleResourceGroup",
     "subscriptionId": "01234567-89ab-4def-0123-456789abcdef",
-    "workspaceName": "ExampleWorkspace"
+    "resourceGroupName": "ExampleResourceGroup",
+    "workspaceName": "ExampleWorkspace",
+    "api-version": "2021-06-01"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
+            "id": "/subscriptions/01234567-89ab-4def-0123-456789abcdef/resourceGroups/ExampleResourceGroup/providers/Microsoft.Synapse/workspaces/ExampleWorkspace/privateLinkResources/sql",
             "name": "sql",
             "type": "Microsoft.Synapse/workspaces/privateLinkResources",
-            "id": "/subscriptions/01234567-89ab-4def-0123-456789abcdef/resourceGroups/ExampleResourceGroup/providers/Microsoft.Synapse/workspaces/ExampleWorkspace/privateLinkResources/sql",
             "properties": {
               "groupId": "sql",
               "requiredMembers": [
@@ -26,7 +26,5 @@
         ]
       }
     }
-  },
-  "operationId": "PrivateLinkResources_List",
-  "title": "Get private link resources for workspace"
+  }
 }

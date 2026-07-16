@@ -1,0 +1,30 @@
+{
+  "operationId": "MaintenanceWindows_Get",
+  "parameters": {
+    "api-version": "2021-06-01-preview",
+    "maintenanceWindowName": "current",
+    "resourceGroupName": "samplerg",
+    "sqlPoolName": "testsp",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "testworkspace"
+  },
+  "title": "Gets maintenance window settings for a selected SQL Analytics pool.",
+  "responses": {
+    "200": {
+      "body": {
+        "name": "current",
+        "type": "Microsoft.Synapse/workspaces/sqlPools/maintenancewindows",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/samplerg/providers/Microsoft.Synapse/workspaces/testworkspace/sqlPools/testsp/maintenancewindows/current",
+        "properties": {
+          "timeRanges": [
+            {
+              "dayOfWeek": "Saturday",
+              "duration": "PT60M",
+              "startTime": "00:00:00"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

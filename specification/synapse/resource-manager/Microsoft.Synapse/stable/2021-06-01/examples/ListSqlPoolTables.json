@@ -1,27 +1,25 @@
 {
-  "operationId": "SqlPoolTables_ListBySchema",
   "parameters": {
-    "api-version": "2021-06-01",
-    "resourceGroupName": "myRG",
-    "schemaName": "dbo",
-    "sqlPoolName": "myDatabase",
     "subscriptionId": "00000000-1111-2222-3333-444444444444",
-    "workspaceName": "serverName"
+    "resourceGroupName": "myRG",
+    "workspaceName": "serverName",
+    "sqlPoolName": "myDatabase",
+    "schemaName": "dbo",
+    "api-version": "2021-06-01"
   },
-  "title": "List the tables of a given schema in a SQL Analytics pool",
   "responses": {
     "200": {
       "body": {
         "value": [
           {
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myRG/providers/Microsoft.Synapse/workspaces/serverName/sqlPools/myDatabase/schemas/dbo/tables/table1",
             "name": "table1",
-            "type": "Microsoft.Synapse/workspaces/sqlPools/schemas/tables",
-            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myRG/providers/Microsoft.Synapse/workspaces/serverName/sqlPools/myDatabase/schemas/dbo/tables/table1"
+            "type": "Microsoft.Synapse/workspaces/sqlPools/schemas/tables"
           },
           {
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myRG/providers/Microsoft.Synapse/workspaces/serverName/sqlPools/myDatabase/schemas/dbo/tables/table2",
             "name": "table2",
-            "type": "Microsoft.Synapse/workspaces/sqlPools/schemas/tables",
-            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myRG/providers/Microsoft.Synapse/workspaces/serverName/sqlPools/myDatabase/schemas/dbo/tables/table2"
+            "type": "Microsoft.Synapse/workspaces/sqlPools/schemas/tables"
           }
         ]
       }

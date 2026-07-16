@@ -1,18 +1,18 @@
 {
   "parameters": {
-    "api-version": "2021-06-01",
-    "resourceGroupName": "ExampleResourceGroup",
     "subscriptionId": "01234567-89ab-4def-0123-456789abcdef",
+    "resourceGroupName": "ExampleResourceGroup",
     "workspaceName": "ExampleWorkspace",
+    "api-version": "2021-06-01",
     "request": {
       "ipFirewallRules": {
-        "AnotherExampleFirewallRule": {
-          "endIpAddress": "10.0.1.254",
-          "startIpAddress": "10.0.1.0"
-        },
         "ExampleFirewallRule": {
-          "endIpAddress": "10.0.0.254",
-          "startIpAddress": "10.0.0.0"
+          "startIpAddress": "10.0.0.0",
+          "endIpAddress": "10.0.0.254"
+        },
+        "AnotherExampleFirewallRule": {
+          "startIpAddress": "10.0.1.0",
+          "endIpAddress": "10.0.1.254"
         }
       }
     }
@@ -25,8 +25,8 @@
     },
     "202": {
       "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Synapse/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000/Spring/default?api-version=2021-06-01",
-        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Synapse/locations/eastus/operationStatus/default/operationId/00000000-0000-0000-0000-000000000000?api-version=2021-06-01"
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Synapse/locations/eastus/operationStatus/default/operationId/00000000-0000-0000-0000-000000000000?api-version=2021-06-01",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Synapse/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000/Spring/default?api-version=2021-06-01"
       }
     },
     "default": {
@@ -37,7 +37,5 @@
         }
       }
     }
-  },
-  "operationId": "IpFirewallRules_ReplaceAll",
-  "title": "Replace all IP firewall rules in a workspace"
+  }
 }

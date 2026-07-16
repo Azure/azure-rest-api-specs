@@ -1,32 +1,30 @@
 {
-  "operationId": "Keys_ListByWorkspace",
   "parameters": {
-    "api-version": "2021-06-01",
-    "resourceGroupName": "ExampleResourceGroup",
     "subscriptionId": "01234567-89ab-4def-0123-456789abcdef",
-    "workspaceName": "ExampleWorkspace"
+    "resourceGroupName": "ExampleResourceGroup",
+    "workspaceName": "ExampleWorkspace",
+    "api-version": "2021-06-01"
   },
-  "title": "List keys in workspace",
   "responses": {
     "200": {
       "body": {
         "value": [
           {
+            "id": "/subscriptions/01234567-89ab-4def-0123-456789abcdef/resourceGroups/ExampleResourceGroup/providers/Microsoft.Synapse/workspaces/ExampleWorkspace/keys/key1",
             "name": "key1",
             "type": "Microsoft.Synapse/workspaces/keys",
-            "id": "/subscriptions/01234567-89ab-4def-0123-456789abcdef/resourceGroups/ExampleResourceGroup/providers/Microsoft.Synapse/workspaces/ExampleWorkspace/keys/key1",
             "properties": {
-              "isActiveCMK": false,
-              "keyVaultUrl": "https://vault.azure.net/keys/somesecret1"
+              "keyVaultUrl": "https://vault.azure.net/keys/somesecret1",
+              "isActiveCMK": false
             }
           },
           {
+            "id": "/subscriptions/01234567-89ab-4def-0123-456789abcdef/resourceGroups/ExampleResourceGroup/providers/Microsoft.Synapse/workspaces/ExampleWorkspace/keys/key2",
             "name": "key2",
             "type": "Microsoft.Synapse/workspaces/keys",
-            "id": "/subscriptions/01234567-89ab-4def-0123-456789abcdef/resourceGroups/ExampleResourceGroup/providers/Microsoft.Synapse/workspaces/ExampleWorkspace/keys/key2",
             "properties": {
-              "isActiveCMK": true,
-              "keyVaultUrl": "https://vault.azure.net/keys/somesecret2"
+              "keyVaultUrl": "https://vault.azure.net/keys/somesecret2",
+              "isActiveCMK": true
             }
           }
         ]

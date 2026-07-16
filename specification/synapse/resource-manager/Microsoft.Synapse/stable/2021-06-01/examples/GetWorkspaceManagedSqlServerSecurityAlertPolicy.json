@@ -1,34 +1,32 @@
 {
   "parameters": {
-    "api-version": "2021-06-01",
-    "resourceGroupName": "wsg-7398",
-    "securityAlertPolicyName": "Default",
     "subscriptionId": "00000000-1111-2222-3333-444444444444",
-    "workspaceName": "testWorkspace"
+    "resourceGroupName": "wsg-7398",
+    "workspaceName": "testWorkspace",
+    "securityAlertPolicyName": "Default",
+    "api-version": "2021-06-01"
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/wsg-7398/providers/Microsoft.Synapse/workspaces/testWorkspace/securityAlertPolicies/Default",
         "name": "Default",
         "type": "Microsoft.Synapse/workspaces/securityAlertPolicies",
-        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/wsg-7398/providers/Microsoft.Synapse/workspaces/testWorkspace/securityAlertPolicies/Default",
         "properties": {
-          "creationTime": "2020-10-23T04:52:49.52Z",
-          "disabledAlerts": [
-            "Access_Anomaly"
-          ],
+          "state": "Disabled",
           "emailAccountAdmins": true,
           "emailAddresses": [
             "test@microsoft.com;user@microsoft.com"
           ],
+          "disabledAlerts": [
+            "Access_Anomaly"
+          ],
+          "creationTime": "2020-10-23T04:52:49.52Z",
           "retentionDays": 0,
-          "state": "Disabled",
           "storageAccountAccessKey": "",
           "storageEndpoint": "https://mystorage.blob.core.windows.net"
         }
       }
     }
-  },
-  "operationId": "WorkspaceManagedSqlServerSecurityAlertPolicy_Get",
-  "title": "Get workspace managed sql Server's security alert policy"
+  }
 }

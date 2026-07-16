@@ -1,58 +1,56 @@
 {
-  "operationId": "DataMaskingRules_ListBySqlPool",
   "parameters": {
-    "api-version": "2021-06-01",
-    "dataMaskingPolicyName": "Default",
-    "resourceGroupName": "sqlcrudtest-6852",
-    "sqlPoolName": "sqlcrudtest-331",
     "subscriptionId": "00000000-1111-2222-3333-444444444444",
-    "workspaceName": "sqlcrudtest-2080"
+    "resourceGroupName": "sqlcrudtest-6852",
+    "workspaceName": "sqlcrudtest-2080",
+    "sqlPoolName": "sqlcrudtest-331",
+    "dataMaskingPolicyName": "Default",
+    "api-version": "2021-06-01"
   },
-  "title": "List data masking rules",
   "responses": {
     "200": {
       "body": {
         "value": [
           {
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-6852/providers/Microsoft.Synapse/workspaces/sqlcrudtest-6852/sqlPools/sqlcrudtest-331/dataMaskingPolicies/Default/rules/",
             "name": null,
             "type": "Microsoft.Synapse/workspaces/sqlPools/dataMaskingPolicies/rules",
-            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-6852/providers/Microsoft.Synapse/workspaces/sqlcrudtest-6852/sqlPools/sqlcrudtest-331/dataMaskingPolicies/Default/rules/",
-            "kind": null,
             "location": "Central US",
+            "kind": null,
             "properties": {
-              "aliasName": null,
-              "columnName": "test1",
               "id": "dbo_Table_1_test1",
+              "ruleState": "Enabled",
+              "schemaName": "dbo",
+              "tableName": "Table_1",
+              "columnName": "test1",
+              "aliasName": null,
               "maskingFunction": "Text",
               "numberFrom": null,
               "numberTo": null,
               "prefixSize": "1",
-              "replacementString": "asdf",
-              "ruleState": "Enabled",
-              "schemaName": "dbo",
               "suffixSize": "0",
-              "tableName": "Table_1"
+              "replacementString": "asdf"
             }
           },
           {
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-6852/providers/Microsoft.Synapse/workspaces/sqlcrudtest-6852/sqlPools/sqlcrudtest-331/dataMaskingPolicies/Default/rules/",
             "name": null,
             "type": "Microsoft.Synapse/workspaces/sqlPools/dataMaskingPolicies/rules",
-            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-6852/providers/Microsoft.Synapse/workspaces/sqlcrudtest-6852/sqlPools/sqlcrudtest-331/dataMaskingPolicies/Default/rules/",
-            "kind": null,
             "location": "Central US",
+            "kind": null,
             "properties": {
-              "aliasName": null,
-              "columnName": "test1",
               "id": "dbo_Table_1_test1",
+              "ruleState": "Enabled",
+              "schemaName": "dbo",
+              "tableName": "Table_1",
+              "columnName": "test1",
+              "aliasName": null,
               "maskingFunction": "Number",
               "numberFrom": "0",
               "numberTo": "2",
               "prefixSize": null,
-              "replacementString": null,
-              "ruleState": "Enabled",
-              "schemaName": "dbo",
               "suffixSize": null,
-              "tableName": "Table_1"
+              "replacementString": null
             }
           }
         ]

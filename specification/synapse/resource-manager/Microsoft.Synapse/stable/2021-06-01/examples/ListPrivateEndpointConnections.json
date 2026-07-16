@@ -1,30 +1,28 @@
 {
-  "operationId": "PrivateEndpointConnections_List",
   "parameters": {
-    "api-version": "2021-06-01",
-    "resourceGroupName": "ExampleResourceGroup",
     "subscriptionId": "01234567-89ab-4def-0123-456789abcdef",
-    "workspaceName": "ExampleWorkspace"
+    "resourceGroupName": "ExampleResourceGroup",
+    "workspaceName": "ExampleWorkspace",
+    "api-version": "2021-06-01"
   },
-  "title": "List private endpoint connections in workspace",
   "responses": {
     "200": {
       "body": {
         "value": [
           {
+            "id": "/subscriptions/01234567-89ab-4def-0123-456789abcdef/resourceGroups/ExampleResourceGroup/providers/Microsoft.Synapse/workspaces/ExampleWorkspace/privateEndpointConnections/ExamplePrivateEndpointConnection",
             "name": "sql",
             "type": "Microsoft.Synapse/workspaces/privateEndpointConnections",
-            "id": "/subscriptions/01234567-89ab-4def-0123-456789abcdef/resourceGroups/ExampleResourceGroup/providers/Microsoft.Synapse/workspaces/ExampleWorkspace/privateEndpointConnections/ExamplePrivateEndpointConnection",
             "properties": {
+              "provisioningState": "Succeeded",
               "privateEndpoint": {
                 "id": "/subscriptions/01234567-89ab-4def-0123-456789abcdef/resourceGroups/ExampleResourceGroup/providers/Microsoft.Network/privateEndpoints/ExamplePrivateEndpoint"
               },
               "privateLinkServiceConnectionState": {
+                "status": "Approved",
                 "description": "Auto-approved",
-                "actionsRequired": "None",
-                "status": "Approved"
-              },
-              "provisioningState": "Succeeded"
+                "actionsRequired": "None"
+              }
             }
           }
         ]

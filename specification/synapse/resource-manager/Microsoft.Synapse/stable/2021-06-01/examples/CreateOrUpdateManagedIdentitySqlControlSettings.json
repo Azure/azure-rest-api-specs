@@ -1,5 +1,8 @@
 {
   "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "resourceGroup1",
+    "workspaceName": "workspace1",
     "api-version": "2021-06-01",
     "managedIdentitySqlControlSettings": {
       "properties": {
@@ -7,37 +10,32 @@
           "desiredState": "Enabled"
         }
       }
-    },
-    "resourceGroupName": "resourceGroup1",
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
-    "workspaceName": "workspace1"
+    }
   },
   "responses": {
     "200": {
       "body": {
-        "name": "default",
         "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup1/providers/Microsoft.Synapse/workspaces/workspace1/managedIdentitySqlControlSettings/default",
+        "name": "default",
         "properties": {
           "grantSqlControlToManagedIdentity": {
-            "actualState": "Enabling",
-            "desiredState": "Enabled"
+            "desiredState": "Enabled",
+            "actualState": "Enabling"
           }
         }
       }
     },
     "201": {
       "body": {
-        "name": "default",
         "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup1/providers/Microsoft.Synapse/workspaces/workspace1/managedIdentitySqlControlSettings/default",
+        "name": "default",
         "properties": {
           "grantSqlControlToManagedIdentity": {
-            "actualState": "Enabling",
-            "desiredState": "Enabled"
+            "desiredState": "Enabled",
+            "actualState": "Enabling"
           }
         }
       }
     }
-  },
-  "operationId": "WorkspaceManagedIdentitySqlControlSettings_CreateOrUpdate",
-  "title": "Create or update managed identity sql control settings"
+  }
 }

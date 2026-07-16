@@ -1,21 +1,19 @@
 {
-  "operationId": "PrivateEndpointConnections_Delete",
   "parameters": {
-    "api-version": "2021-06-01",
-    "privateEndpointConnectionName": "ExamplePrivateEndpointConnection",
-    "resourceGroupName": "ExampleResourceGroup",
     "subscriptionId": "01234567-89ab-4def-0123-456789abcdef",
-    "workspaceName": "ExampleWorkspace"
+    "resourceGroupName": "ExampleResourceGroup",
+    "workspaceName": "ExampleWorkspace",
+    "privateEndpointConnectionName": "ExamplePrivateEndpointConnection",
+    "api-version": "2021-06-01"
   },
-  "title": "Delete private endpoint connection",
   "responses": {
     "200": {},
     "202": {
-      "body": {
-        "status": "InProgress"
-      },
       "headers": {
         "azure-asyncoperation": "https://ms.web.azuresynapse.net"
+      },
+      "body": {
+        "status": "InProgress"
       }
     },
     "204": {},

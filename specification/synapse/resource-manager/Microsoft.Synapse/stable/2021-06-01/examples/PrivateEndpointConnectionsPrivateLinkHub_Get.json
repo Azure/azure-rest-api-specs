@@ -1,10 +1,10 @@
 {
   "parameters": {
-    "api-version": "2021-06-01",
-    "privateEndpointConnectionName": "pe0-f3ed30f5-338c-4855-a542-24a403694ad2",
-    "privateLinkHubName": "pe0",
+    "subscriptionId": "48b08652-d7a1-4d52-b13f-5a2471dce57b",
     "resourceGroupName": "gh-res-grp",
-    "subscriptionId": "48b08652-d7a1-4d52-b13f-5a2471dce57b"
+    "privateLinkHubName": "pe0",
+    "privateEndpointConnectionName": "pe0-f3ed30f5-338c-4855-a542-24a403694ad2",
+    "api-version": "2021-06-01"
   },
   "responses": {
     "200": {
@@ -13,13 +13,13 @@
         "type": "Microsoft.Synapse/privateLinkHubs/privateEndpointConnections",
         "id": "/subscriptions/48b08652-d7a1-4d52-b13f-5a2471dce57b/resourceGroups/gh-res-grp/providers/Microsoft.Synapse/privateLinkHubs/plh900/privateEndpointConnections/pe0-f3ed30f5-338c-4855-a542-24a403694ad2",
         "properties": {
+          "provisioningState": "Succeeded",
           "privateEndpoint": {
             "id": "/subscriptions/48b08652-d7a1-4d52-b13f-5a2471dce57b/resourceGroups/gh-res-grp/providers/Microsoft.Network/privateEndpoints/pe0"
           },
           "privateLinkServiceConnectionState": {
             "status": "Approved"
-          },
-          "provisioningState": "Succeeded"
+          }
         }
       }
     },
@@ -31,7 +31,5 @@
         }
       }
     }
-  },
-  "operationId": "PrivateEndpointConnectionsPrivateLinkHub_Get",
-  "title": "Get a privateLinkHub"
+  }
 }

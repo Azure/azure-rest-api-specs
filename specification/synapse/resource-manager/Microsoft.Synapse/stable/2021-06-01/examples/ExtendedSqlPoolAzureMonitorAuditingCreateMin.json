@@ -1,56 +1,54 @@
 {
-  "operationId": "ExtendedSqlPoolBlobAuditingPolicies_CreateOrUpdate",
   "parameters": {
-    "api-version": "2021-06-01",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "blobauditingtest-4799",
+    "workspaceName": "blobauditingtest-6440",
+    "sqlPoolName": "testdb",
     "blobAuditingPolicyName": "default",
+    "api-version": "2021-06-01",
     "parameters": {
       "properties": {
-        "isAzureMonitorTargetEnabled": true,
-        "state": "Enabled"
+        "state": "Enabled",
+        "isAzureMonitorTargetEnabled": true
       }
-    },
-    "resourceGroupName": "blobauditingtest-4799",
-    "sqlPoolName": "testdb",
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
-    "workspaceName": "blobauditingtest-6440"
+    }
   },
-  "title": "Create or update an extended SQL pool's azure monitor auditing policy with minimal parameters",
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/blobauditingtest-4799/providers/Microsoft.Synapse/workspaces/blobauditingtest-6440/sqlPools/testdb",
         "name": "default",
         "type": "Microsoft.Synapse/workspaces/sqlPools/extendedAuditingSettings",
-        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/blobauditingtest-4799/providers/Microsoft.Synapse/workspaces/blobauditingtest-6440/sqlPools/testdb",
         "properties": {
+          "state": "Enabled",
+          "isAzureMonitorTargetEnabled": true,
+          "retentionDays": 0,
+          "storageAccountSubscriptionId": "00000000-0000-0000-0000-000000000000",
+          "isStorageSecondaryKeyInUse": false,
           "auditActionsAndGroups": [
             "SUCCESSFUL_DATABASE_AUTHENTICATION_GROUP",
             "FAILED_DATABASE_AUTHENTICATION_GROUP",
             "BATCH_COMPLETED_GROUP"
-          ],
-          "isAzureMonitorTargetEnabled": true,
-          "isStorageSecondaryKeyInUse": false,
-          "retentionDays": 0,
-          "state": "Enabled",
-          "storageAccountSubscriptionId": "00000000-0000-0000-0000-000000000000"
+          ]
         }
       }
     },
     "201": {
       "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/blobauditingtest-4799/providers/Microsoft.Synapse/workspaces/blobauditingtest-6440/sqlPools/testdb",
         "name": "default",
         "type": "Microsoft.Synapse/workspaces/sqlPools/extendedAuditingSettings",
-        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/blobauditingtest-4799/providers/Microsoft.Synapse/workspaces/blobauditingtest-6440/sqlPools/testdb",
         "properties": {
+          "state": "Enabled",
+          "isAzureMonitorTargetEnabled": true,
+          "retentionDays": 0,
+          "storageAccountSubscriptionId": "00000000-0000-0000-0000-000000000000",
+          "isStorageSecondaryKeyInUse": false,
           "auditActionsAndGroups": [
             "SUCCESSFUL_DATABASE_AUTHENTICATION_GROUP",
             "FAILED_DATABASE_AUTHENTICATION_GROUP",
             "BATCH_COMPLETED_GROUP"
-          ],
-          "isAzureMonitorTargetEnabled": true,
-          "isStorageSecondaryKeyInUse": false,
-          "retentionDays": 0,
-          "state": "Enabled",
-          "storageAccountSubscriptionId": "00000000-0000-0000-0000-000000000000"
+          ]
         }
       }
     }

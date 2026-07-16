@@ -1,30 +1,35 @@
 {
   "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "myRG",
+    "workspaceName": "myWorkspace",
+    "sqlPoolName": "mySqlPool",
     "api-version": "2021-06-01",
     "parameters": {
       "operations": [
         {
           "properties": {
-            "schema": "dbo",
-            "column": "column1",
             "op": "set",
+            "schema": "dbo",
+            "table": "table1",
+            "column": "column1",
             "sensitivityLabel": {
               "properties": {
+                "labelName": "Highly Confidential",
+                "labelId": "3A477B16-9423-432B-AA97-6069B481CEC3",
                 "informationType": "Financial",
                 "informationTypeId": "1D3652D6-422C-4115-82F1-65DAEBC665C8",
-                "labelId": "3A477B16-9423-432B-AA97-6069B481CEC3",
-                "labelName": "Highly Confidential",
                 "rank": "Low"
               }
-            },
-            "table": "table1"
+            }
           }
         },
         {
           "properties": {
-            "schema": "dbo",
-            "column": "column2",
             "op": "set",
+            "schema": "dbo",
+            "table": "table2",
+            "column": "column2",
             "sensitivityLabel": {
               "properties": {
                 "informationType": "PhoneNumber",
@@ -33,28 +38,21 @@
                 "labelName": "PII",
                 "rank": "Critical"
               }
-            },
-            "table": "table2"
+            }
           }
         },
         {
           "properties": {
-            "schema": "dbo",
-            "column": "Column3",
             "op": "remove",
-            "table": "Table1"
+            "schema": "dbo",
+            "table": "Table1",
+            "column": "Column3"
           }
         }
       ]
-    },
-    "resourceGroupName": "myRG",
-    "sqlPoolName": "mySqlPool",
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
-    "workspaceName": "myWorkspace"
+    }
   },
   "responses": {
     "200": {}
-  },
-  "operationId": "SqlPoolSensitivityLabels_Update",
-  "title": "Update sensitivity labels of a given database using an operations batch."
+  }
 }
