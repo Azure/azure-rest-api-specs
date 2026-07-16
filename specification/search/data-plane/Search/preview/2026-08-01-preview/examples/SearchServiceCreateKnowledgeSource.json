@@ -2,10 +2,25 @@
   "operationId": "KnowledgeSources_Create",
   "title": "SearchServiceCreateKnowledgeSource",
   "parameters": {
-    "endpoint": "https://previewexampleservice.search.windows.net",
+    "endpoint": "https://typespecpreviewexampleservice.search.windows.net",
     "api-version": "2026-08-01-preview",
+    "Accept": "application/json;odata.metadata=minimal",
     "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
     "knowledgeSource": {
+      "name": "ks-preview-test",
+      "description": "Description of the knowledge source.",
+      "kind": "searchIndex",
+      "resultsProcessing": "none",
+      "@odata.etag": "0x1234568AE7E58A1",
+      "encryptionKey": {
+        "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
+        "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
+        "keyVaultUri": "https://myKeyVault.vault.azure.net",
+        "accessCredentials": {
+          "applicationId": "00000000-0000-0000-0000-000000000000",
+          "applicationSecret": "<applicationSecret>"
+        }
+      },
       "searchIndexParameters": {
         "searchIndexName": "preview-test",
         "sourceDataFields": [
@@ -21,19 +36,34 @@
             "name": "*"
           }
         ],
-        "semanticConfigurationName": "testconfig"
-      },
-      "name": "ks-preview-test",
-      "description": "Description of the knowledge source.",
-      "kind": "searchIndex",
-      "@odata.etag": "0x1234568AE7E58A1",
-      "encryptionKey": {
-        "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
-        "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
-        "keyVaultUri": "https://myKeyVault.vault.azure.net",
-        "accessCredentials": {
-          "applicationId": "00000000-0000-0000-0000-000000000000",
-          "applicationSecret": "<applicationSecret>"
+        "semanticConfigurationName": "testconfig",
+        "baseFilter": "category eq 'news'",
+        "queryHints": {
+          "filters": [
+            {
+              "field": "model",
+              "fieldValues": [
+                "Model-X100",
+                "Model-X200",
+                "Model-Pro"
+              ],
+              "filterInstructions": "Product model name."
+            }
+          ],
+          "boosts": [
+            {
+              "kind": "fieldValue",
+              "boostInstructions": "Document language; pick from the user's locale.",
+              "field": "language",
+              "fieldValues": [
+                "en",
+                "ja",
+                "fr",
+                "de"
+              ],
+              "boost": 2
+            }
+          ]
         }
       }
     }
@@ -45,10 +75,12 @@
         "name": "ks-preview-test",
         "kind": "searchIndex",
         "description": "Description of the knowledge source.",
+        "resultsProcessing": "none",
         "encryptionKey": {
           "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
           "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
           "keyVaultUri": "https://myKeyVault.vault.azure.net",
+          "isServiceLevelKey": false,
           "accessCredentials": {
             "applicationId": "00000000-0000-0000-0000-000000000000",
             "applicationSecret": "<applicationSecret>"
@@ -57,6 +89,7 @@
         "searchIndexParameters": {
           "searchIndexName": "preview-test",
           "semanticConfigurationName": "testconfig",
+          "baseFilter": "category eq 'news'",
           "sourceDataFields": [
             {
               "name": "description"
@@ -69,7 +102,34 @@
             {
               "name": "*"
             }
-          ]
+          ],
+          "queryHints": {
+            "filters": [
+              {
+                "field": "model",
+                "fieldValues": [
+                  "Model-X100",
+                  "Model-X200",
+                  "Model-Pro"
+                ],
+                "filterInstructions": "Product model name."
+              }
+            ],
+            "boosts": [
+              {
+                "kind": "fieldValue",
+                "field": "language",
+                "fieldValues": [
+                  "en",
+                  "ja",
+                  "fr",
+                  "de"
+                ],
+                "boost": 2.0,
+                "boostInstructions": "Document language; pick from the user's locale."
+              }
+            ]
+          }
         }
       }
     }

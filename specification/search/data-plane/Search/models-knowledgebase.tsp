@@ -177,9 +177,9 @@ model KnowledgeSourceParams {
   /** The reranker threshold all retrieved documents must meet to be included in the response. */
   rerankerThreshold?: float32;
 
-  /** Overrides the knowledge source's stored inclusionMode for this retrieve call only. When omitted, the stored knowledge source value applies. */
+  /** Overrides the knowledge source's stored resultsProcessing for this retrieve call only. When omitted, the stored knowledge source value applies. */
   @added(Versions.v2026_08_01_preview)
-  inclusionMode?: KnowledgeSourceInclusionMode;
+  resultsProcessing?: KnowledgeSourceResultsProcessing;
 
   /** Limits the maximum number of documents returned from this knowledge source. */
   @added(Versions.v2026_05_01_preview)
@@ -200,12 +200,20 @@ model SearchIndexKnowledgeSourceParams extends KnowledgeSourceParams {
 
   /** A filter condition applied to the index (e.g., 'State eq VA'). */
   filterAddOn?: string;
+
+  /** Hints that guide query planning toward useful filters and boosts. If specified, this object replaces the complete set of query hints configured on the knowledge source. */
+  @added(Versions.v2026_08_01_preview)
+  queryHintOverrides?: SearchIndexKnowledgeSourceQueryHints;
 }
 
 /** Specifies runtime parameters for a azure blob knowledge source */
 model AzureBlobKnowledgeSourceParams extends KnowledgeSourceParams {
   /** The discriminator value. */
   kind: KnowledgeSourceKind.AzureBlob;
+
+  /** Hints that guide query planning toward useful filters and boosts. If specified, this object replaces the complete set of query hints configured on the knowledge source. */
+  @added(Versions.v2026_08_01_preview)
+  queryHintOverrides?: SearchIndexKnowledgeSourceQueryHints;
 }
 
 /** Specifies which SharePoint libraries to access. */
@@ -228,12 +236,20 @@ union IndexedSharePointContainerName {
 model IndexedSharePointKnowledgeSourceParams extends KnowledgeSourceParams {
   /** The discriminator value. */
   kind: KnowledgeSourceKind.IndexedSharePoint;
+
+  /** Hints that guide query planning toward useful filters and boosts. If specified, this object replaces the complete set of query hints configured on the knowledge source. */
+  @added(Versions.v2026_08_01_preview)
+  queryHintOverrides?: SearchIndexKnowledgeSourceQueryHints;
 }
 
 /** Specifies runtime parameters for a indexed OneLake knowledge source */
 model IndexedOneLakeKnowledgeSourceParams extends KnowledgeSourceParams {
   /** The discriminator value. */
   kind: KnowledgeSourceKind.IndexedOneLake;
+
+  /** Hints that guide query planning toward useful filters and boosts. If specified, this object replaces the complete set of query hints configured on the knowledge source. */
+  @added(Versions.v2026_08_01_preview)
+  queryHintOverrides?: SearchIndexKnowledgeSourceQueryHints;
 }
 
 /** Specifies runtime parameters for a web knowledge source */
@@ -287,13 +303,6 @@ model FabricOntologyKnowledgeSourceParams extends KnowledgeSourceParams {
   kind: KnowledgeSourceKind.FabricOntology;
 }
 
-/** Specifies runtime parameters for a Fabric semantic model knowledge source */
-@added(Versions.v2026_08_01_preview)
-model FabricSemanticModelKnowledgeSourceParams extends KnowledgeSourceParams {
-  /** The discriminator value. */
-  kind: KnowledgeSourceKind.FabricSemanticModel;
-}
-
 /** Specifies runtime parameters for an MCP server knowledge source */
 @added(Versions.v2026_05_01_preview)
 model McpServerKnowledgeSourceParams extends KnowledgeSourceParams {
@@ -306,6 +315,10 @@ model McpServerKnowledgeSourceParams extends KnowledgeSourceParams {
 model FileKnowledgeSourceParams extends KnowledgeSourceParams {
   /** The discriminator value. */
   kind: KnowledgeSourceKind.File;
+
+  /** Hints that guide query planning toward useful filters and boosts. If specified, this object replaces the complete set of query hints configured on the knowledge source. */
+  @added(Versions.v2026_08_01_preview)
+  queryHintOverrides?: SearchIndexKnowledgeSourceQueryHints;
 }
 
 /** Specifies runtime parameters for an indexed SQL knowledge source */
@@ -313,6 +326,10 @@ model FileKnowledgeSourceParams extends KnowledgeSourceParams {
 model IndexedSqlKnowledgeSourceParams extends KnowledgeSourceParams {
   /** The discriminator value. */
   kind: KnowledgeSourceKind.IndexedSql;
+
+  /** Hints that guide query planning toward useful filters and boosts. If specified, this object replaces the complete set of query hints configured on the knowledge source. */
+  @added(Versions.v2026_08_01_preview)
+  queryHintOverrides?: SearchIndexKnowledgeSourceQueryHints;
 }
 
 /** An intended query to execute without model query planning. */
@@ -428,10 +445,6 @@ union KnowledgeBaseActivityRecordType {
   @added(Versions.v2026_05_01_preview)
   fabricOntology: "fabricOntology",
 
-  /** Fabric semantic model retrieval activity. */
-  @added(Versions.v2026_08_01_preview)
-  fabricSemanticModel: "fabricSemanticModel",
-
   /** MCP server retrieval activity. */
   @added(Versions.v2026_05_01_preview)
   mcpServer: "mcpServer",
@@ -508,6 +521,10 @@ model KnowledgeBaseSearchIndexActivityRecord
 
   /** The search index arguments for the retrieval activity. */
   searchIndexArguments?: KnowledgeBaseSearchIndexActivityArguments;
+
+  /** Details about the expressions generated from query hints for this activity. */
+  @added(Versions.v2026_08_01_preview)
+  queryHintProcessing?: KnowledgeBaseQueryHintProcessing;
 }
 
 /** Represents the arguments the search index retrieval activity was run with. */
@@ -526,6 +543,20 @@ model KnowledgeBaseSearchIndexActivityArguments {
 
   /** What semantic configuration was used from the search index. */
   semanticConfigurationName?: string;
+
+  /** The query syntax used to execute the search. Query hints can cause semantic queries to use full query syntax. */
+  @added(Versions.v2026_08_01_preview)
+  queryType?: QueryType;
+}
+
+/** Details about the expressions generated from query hints for a retrieval activity. */
+@added(Versions.v2026_08_01_preview)
+model KnowledgeBaseQueryHintProcessing {
+  /** The search clause generated from boost hints for this activity. */
+  generatedBoost?: string;
+
+  /** The filter expression generated from filter hints for this activity. */
+  generatedFilter?: string;
 }
 
 /** Represents a azure blob retrieval activity record. */
@@ -537,6 +568,10 @@ model KnowledgeBaseAzureBlobActivityRecord extends KnowledgeBaseActivityRecord {
 
   /** The azure blob arguments for the retrieval activity. */
   azureBlobArguments?: KnowledgeBaseAzureBlobActivityArguments;
+
+  /** Details about the expressions generated from query hints for this activity. */
+  @added(Versions.v2026_08_01_preview)
+  queryHintProcessing?: KnowledgeBaseQueryHintProcessing;
 }
 
 /** Represents the arguments the azure blob retrieval activity was run with. */
@@ -557,6 +592,10 @@ model KnowledgeBaseIndexedSharePointActivityRecord
 
   /** The indexed SharePoint arguments for the retrieval activity. */
   indexedSharePointArguments?: KnowledgeBaseIndexedSharePointActivityArguments;
+
+  /** Details about the expressions generated from query hints for this activity. */
+  @added(Versions.v2026_08_01_preview)
+  queryHintProcessing?: KnowledgeBaseQueryHintProcessing;
 }
 
 /** Represents the arguments the indexed SharePoint retrieval activity was run with. */
@@ -577,6 +616,10 @@ model KnowledgeBaseIndexedOneLakeActivityRecord
 
   /** The indexed OneLake arguments for the retrieval activity. */
   indexedOneLakeArguments?: KnowledgeBaseIndexedOneLakeActivityArguments;
+
+  /** Details about the expressions generated from query hints for this activity. */
+  @added(Versions.v2026_08_01_preview)
+  queryHintProcessing?: KnowledgeBaseQueryHintProcessing;
 }
 
 /** Represents the arguments the indexed OneLake retrieval activity was run with. */
@@ -701,26 +744,6 @@ model KnowledgeBaseFabricOntologyActivityArguments {
   search?: string;
 }
 
-/** Represents a Fabric semantic model retrieval activity record. */
-@added(Versions.v2026_08_01_preview)
-model KnowledgeBaseFabricSemanticModelActivityRecord
-  extends KnowledgeBaseActivityRecord {
-  ...KnowledgeBaseRetrievalActivityRecord;
-
-  /** The discriminator value. */
-  type: KnowledgeBaseActivityRecordType.fabricSemanticModel;
-
-  /** The Fabric semantic model arguments for the retrieval activity. */
-  fabricSemanticModelArguments?: KnowledgeBaseFabricSemanticModelActivityArguments;
-}
-
-/** Represents the arguments the Fabric semantic model retrieval activity was run with. */
-@added(Versions.v2026_08_01_preview)
-model KnowledgeBaseFabricSemanticModelActivityArguments {
-  /** The search string used to query the Fabric semantic model knowledge source. */
-  search?: string;
-}
-
 /** Represents an MCP server retrieval activity record. */
 @added(Versions.v2026_05_01_preview)
 model KnowledgeBaseMcpServerActivityRecord extends KnowledgeBaseActivityRecord {
@@ -754,6 +777,10 @@ model KnowledgeBaseFileActivityRecord extends KnowledgeBaseActivityRecord {
 
   /** The File arguments for the retrieval activity. */
   fileArguments?: KnowledgeBaseFileActivityArguments;
+
+  /** Details about the expressions generated from query hints for this activity. */
+  @added(Versions.v2026_08_01_preview)
+  queryHintProcessing?: KnowledgeBaseQueryHintProcessing;
 }
 
 /** Represents the arguments the File retrieval activity was run with. */
@@ -774,6 +801,10 @@ model KnowledgeBaseIndexedSqlActivityRecord
 
   /** The indexed SQL arguments for the retrieval activity. */
   indexedSqlArguments?: KnowledgeBaseIndexedSqlActivityArguments;
+
+  /** Details about the expressions generated from query hints for this activity. */
+  @added(Versions.v2026_08_01_preview)
+  queryHintProcessing?: KnowledgeBaseQueryHintProcessing;
 }
 
 /** Represents the arguments the indexed SQL retrieval activity was run with. */
@@ -919,10 +950,6 @@ union KnowledgeBaseReferenceType {
   @added(Versions.v2026_05_01_preview)
   fabricOntology: "fabricOntology",
 
-  /** Fabric semantic model document reference. */
-  @added(Versions.v2026_08_01_preview)
-  fabricSemanticModel: "fabricSemanticModel",
-
   /** MCP server document reference. */
   @added(Versions.v2026_05_01_preview)
   mcpServer: "mcpServer",
@@ -981,7 +1008,6 @@ model KnowledgeBaseAzureBlobReference extends KnowledgeBaseReference {
   type: KnowledgeBaseReferenceType.azureBlob;
 
   /** The blob URL for the reference. */
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   blobUrl?: string;
 
   /** The sensitivity label information for the reference. */
@@ -1002,7 +1028,6 @@ model KnowledgeBaseIndexedSharePointReference extends KnowledgeBaseReference {
   type: KnowledgeBaseReferenceType.indexedSharePoint;
 
   /** The document URL for the reference. */
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   docUrl?: string;
 
   /** The sensitivity label information for the reference. */
@@ -1021,7 +1046,6 @@ model KnowledgeBaseIndexedOneLakeReference extends KnowledgeBaseReference {
   type: KnowledgeBaseReferenceType.indexedOneLake;
 
   /** The document URL for the reference. */
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   docUrl?: string;
 
   /** The sensitivity label information for the reference. */
@@ -1055,7 +1079,6 @@ model KnowledgeBaseRemoteSharePointReference extends KnowledgeBaseReference {
   type: KnowledgeBaseReferenceType.remoteSharePoint;
 
   /** The url the reference data originated from. */
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   webUrl?: url;
 
   /** Information about the sensitivity label applied to the SharePoint document. */
@@ -1088,7 +1111,6 @@ model KnowledgeBaseWorkIQReference extends KnowledgeBaseReference {
 @removed(Versions.v2026_08_01_preview)
 model WorkIQAttribution {
   /** The URL for the attribution. */
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   seeMoreWebUrl?: url;
 }
 
@@ -1118,17 +1140,6 @@ model KnowledgeBaseFabricOntologyReference extends KnowledgeBaseReference {
 
   /** The ontology ID within the workspace. */
   ontologyId?: string;
-}
-
-/** Represents a Fabric semantic model document reference. Structured retrieval results (executed DAX query, column types, mime type, and result payload) are surfaced through the untyped `sourceData` bag under a `fabricSemanticModelResults` array. */
-#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
-@added(Versions.v2026_08_01_preview)
-model KnowledgeBaseFabricSemanticModelReference extends KnowledgeBaseReference {
-  /** The discriminator value. */
-  type: KnowledgeBaseReferenceType.fabricSemanticModel;
-
-  /** The Fabric artifact ID of the semantic model or report that produced this reference. */
-  artifactId?: string;
 }
 
 /** Represents an MCP server document reference. */
@@ -1164,7 +1175,6 @@ model KnowledgeBaseIndexedSqlReference extends KnowledgeBaseReference {
   type: KnowledgeBaseReferenceType.indexedSql;
 
   /** The document URL for the reference. */
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   docUrl?: string;
 
   /** A Search-owned URL that points at the backing document for this reference, usable as a citation target. */

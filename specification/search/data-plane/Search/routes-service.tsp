@@ -75,6 +75,7 @@ interface DataSources {
     {
       ...acceptHeaderMinimal;
       ...selectQuery;
+      ...listingPaginationQuery;
     },
     ListDataSourcesResult
   >;
@@ -250,6 +251,7 @@ interface Indexers {
     {
       ...acceptHeaderMinimal;
       ...selectQuery;
+      ...listingPaginationQuery;
     },
     ListIndexersResult
   >;
@@ -360,6 +362,7 @@ interface Skillsets {
     {
       ...acceptHeaderMinimal;
       ...selectQuery;
+      ...listingPaginationQuery;
     },
     ListSkillsetsResult
   >;
@@ -463,6 +466,7 @@ interface SynonymMaps {
     {
       ...acceptHeaderMinimal;
       ...selectQuery;
+      ...listingPaginationQuery;
     },
     ListSynonymMapsResult
   >;
@@ -510,11 +514,13 @@ interface Indexes {
   /** Lists all indexes available for a search service. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  @renamedFrom(Versions.v2026_08_01_preview, "list")
+  @removed(Versions.v2026_08_01_preview)
   @route("/indexes")
   @sharedRoute
   @list
   @get
-  list is SearchOperation<
+  listPaginated is SearchOperation<
     {
       ...acceptHeaderMinimal;
 
@@ -539,11 +545,29 @@ interface Indexes {
   /** Lists all indexes available for a search service. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  @added(Versions.v2026_08_01_preview)
   @route("/indexes")
   @sharedRoute
   @list
   @get
-  listWithSelectedProperties is SearchOperation<
+  list is SearchOperation<
+    {
+      ...acceptHeaderMinimal;
+      ...listingPaginationQuery;
+    },
+    ListIndexesResult
+  >;
+
+  /** Lists all indexes available for a search service. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  @renamedFrom(Versions.v2026_08_01_preview, "listWithSelectedProperties")
+  @removed(Versions.v2026_08_01_preview)
+  @route("/indexes")
+  @sharedRoute
+  @list
+  @get
+  listWithSelectedPropertiesPaginated is SearchOperation<
     {
       ...acceptHeaderMinimal;
       ...selectQuery;
@@ -562,6 +586,23 @@ interface Indexes {
       @added(Versions.v2026_05_01_preview)
       @query("$count")
       $count?: boolean;
+    },
+    ListIndexesSelectedResult
+  >;
+
+  /** Lists all indexes available for a search service. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  @added(Versions.v2026_08_01_preview)
+  @route("/indexes")
+  @sharedRoute
+  @list
+  @get
+  listWithSelectedProperties is SearchOperation<
+    {
+      ...acceptHeaderMinimal;
+      ...selectQuery;
+      ...listingPaginationQuery;
     },
     ListIndexesSelectedResult
   >;
@@ -677,6 +718,7 @@ interface Aliases {
   list is SearchOperation<
     {
       ...acceptHeaderMinimal;
+      ...listingPaginationQuery;
     },
     ListAliasesResult
   >;
@@ -763,6 +805,7 @@ interface KnowledgeBases {
   list is SearchOperation<
     {
       ...acceptHeaderMinimal;
+      ...listingPaginationQuery;
     },
     ListKnowledgeBasesResult
   >;
@@ -848,6 +891,7 @@ interface KnowledgeSources {
   list is SearchOperation<
     {
       ...acceptHeaderMinimal;
+      ...listingPaginationQuery;
     },
     ListKnowledgeSourcesResult
   >;
@@ -984,6 +1028,8 @@ interface KnowledgeSources {
       @added(Versions.v2026_08_01_preview)
       @query
       prefix?: string;
+
+      ...listingPaginationQuery;
     },
     ListKnowledgeSourceFilesResult
   >;
@@ -1063,11 +1109,13 @@ op getIndexStatsSummaryRemoved is SearchOperation<
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
 @added(Versions.v2026_05_01_preview)
+@renamedFrom(Versions.v2026_08_01_preview, "getIndexStatsSummary")
+@removed(Versions.v2026_08_01_preview)
 @route("/indexstats")
 @sharedRoute
 @list
 @get
-op getIndexStatsSummary is SearchOperation<
+op getIndexStatsSummaryPaginated is SearchOperation<
   {
     ...acceptHeaderMinimal;
 
@@ -1082,6 +1130,22 @@ op getIndexStatsSummary is SearchOperation<
     /** A value that specifies whether to fetch the total count of items. Default is false. */
     @query("$count")
     $count?: boolean;
+  },
+  ListIndexStatsSummary
+>;
+
+/** Retrieves a summary of statistics for all indexes in the search service. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+@added(Versions.v2026_08_01_preview)
+@route("/indexstats")
+@sharedRoute
+@list
+@get
+op getIndexStatsSummary is SearchOperation<
+  {
+    ...acceptHeaderMinimal;
+    ...listingPaginationQuery;
   },
   ListIndexStatsSummary
 >;

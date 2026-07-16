@@ -84,6 +84,45 @@
             "x-ms-client-name": "accept"
           },
           {
+            "name": "search",
+            "in": "query",
+            "description": "A string used to narrow down the listing so that fewer results need to be paged through. If omitted or an empty string is passed, no narrowing is applied.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "The maximum number of items to return in a single page. The server enforces a maximum; if omitted, the server determines a suitable default.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 3000
+          },
+          {
+            "name": "searchType",
+            "in": "query",
+            "description": "Specifies how the search parameter is interpreted. Currently only 'prefix' is supported.",
+            "required": false,
+            "type": "string",
+            "default": "prefix",
+            "enum": [
+              "prefix"
+            ],
+            "x-ms-enum": {
+              "name": "ListingSearchType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Prefix",
+                  "value": "prefix",
+                  "description": "Matches items whose name starts with the value of the search parameter."
+                }
+              ]
+            }
+          },
+          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
@@ -105,6 +144,9 @@
           "SearchServiceListAliases": {
             "$ref": "./examples/SearchServiceListAliases.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@odata.nextLink"
         }
       },
       "post": {
@@ -416,6 +458,45 @@
               "type": "string"
             },
             "collectionFormat": "csv"
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "description": "A string used to narrow down the listing so that fewer results need to be paged through. If omitted or an empty string is passed, no narrowing is applied.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "The maximum number of items to return in a single page. The server enforces a maximum; if omitted, the server determines a suitable default.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 3000
+          },
+          {
+            "name": "searchType",
+            "in": "query",
+            "description": "Specifies how the search parameter is interpreted. Currently only 'prefix' is supported.",
+            "required": false,
+            "type": "string",
+            "default": "prefix",
+            "enum": [
+              "prefix"
+            ],
+            "x-ms-enum": {
+              "name": "ListingSearchType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Prefix",
+                  "value": "prefix",
+                  "description": "Matches items whose name starts with the value of the search parameter."
+                }
+              ]
+            }
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -758,6 +839,45 @@
               "type": "string"
             },
             "collectionFormat": "csv"
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "description": "A string used to narrow down the listing so that fewer results need to be paged through. If omitted or an empty string is passed, no narrowing is applied.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "The maximum number of items to return in a single page. The server enforces a maximum; if omitted, the server determines a suitable default.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 3000
+          },
+          {
+            "name": "searchType",
+            "in": "query",
+            "description": "Specifies how the search parameter is interpreted. Currently only 'prefix' is supported.",
+            "required": false,
+            "type": "string",
+            "default": "prefix",
+            "enum": [
+              "prefix"
+            ],
+            "x-ms-enum": {
+              "name": "ListingSearchType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Prefix",
+                  "value": "prefix",
+                  "description": "Matches items whose name starts with the value of the search parameter."
+                }
+              ]
+            }
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -1390,27 +1510,43 @@
             "x-ms-client-name": "accept"
           },
           {
-            "name": "$top",
+            "name": "search",
             "in": "query",
-            "description": "The number of items to retrieve. Default is 50, maximum is 1000.",
+            "description": "A string used to narrow down the listing so that fewer results need to be paged through. If omitted or an empty string is passed, no narrowing is applied.",
             "required": false,
-            "type": "integer",
-            "format": "int32"
+            "type": "string"
           },
           {
-            "name": "$skip",
+            "name": "pageSize",
             "in": "query",
-            "description": "The number of items to skip.",
+            "description": "The maximum number of items to return in a single page. The server enforces a maximum; if omitted, the server determines a suitable default.",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 3000
           },
           {
-            "name": "$count",
+            "name": "searchType",
             "in": "query",
-            "description": "A value that specifies whether to fetch the total count of items. Default is false.",
+            "description": "Specifies how the search parameter is interpreted. Currently only 'prefix' is supported.",
             "required": false,
-            "type": "boolean"
+            "type": "string",
+            "default": "prefix",
+            "enum": [
+              "prefix"
+            ],
+            "x-ms-enum": {
+              "name": "ListingSearchType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Prefix",
+                  "value": "prefix",
+                  "description": "Matches items whose name starts with the value of the search parameter."
+                }
+              ]
+            }
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -2736,27 +2872,43 @@
             "x-ms-client-name": "accept"
           },
           {
-            "name": "$top",
+            "name": "search",
             "in": "query",
-            "description": "The number of items to retrieve. Default is 50, maximum is 1000.",
+            "description": "A string used to narrow down the listing so that fewer results need to be paged through. If omitted or an empty string is passed, no narrowing is applied.",
             "required": false,
-            "type": "integer",
-            "format": "int32"
+            "type": "string"
           },
           {
-            "name": "$skip",
+            "name": "pageSize",
             "in": "query",
-            "description": "The number of items to skip.",
+            "description": "The maximum number of items to return in a single page. The server enforces a maximum; if omitted, the server determines a suitable default.",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 3000
           },
           {
-            "name": "$count",
+            "name": "searchType",
             "in": "query",
-            "description": "A value that specifies whether to fetch the total count of items. Default is false.",
+            "description": "Specifies how the search parameter is interpreted. Currently only 'prefix' is supported.",
             "required": false,
-            "type": "boolean"
+            "type": "string",
+            "default": "prefix",
+            "enum": [
+              "prefix"
+            ],
+            "x-ms-enum": {
+              "name": "ListingSearchType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Prefix",
+                  "value": "prefix",
+                  "description": "Matches items whose name starts with the value of the search parameter."
+                }
+              ]
+            }
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -2809,6 +2961,45 @@
             "x-ms-client-name": "accept"
           },
           {
+            "name": "search",
+            "in": "query",
+            "description": "A string used to narrow down the listing so that fewer results need to be paged through. If omitted or an empty string is passed, no narrowing is applied.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "The maximum number of items to return in a single page. The server enforces a maximum; if omitted, the server determines a suitable default.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 3000
+          },
+          {
+            "name": "searchType",
+            "in": "query",
+            "description": "Specifies how the search parameter is interpreted. Currently only 'prefix' is supported.",
+            "required": false,
+            "type": "string",
+            "default": "prefix",
+            "enum": [
+              "prefix"
+            ],
+            "x-ms-enum": {
+              "name": "ListingSearchType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Prefix",
+                  "value": "prefix",
+                  "description": "Matches items whose name starts with the value of the search parameter."
+                }
+              ]
+            }
+          },
+          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
@@ -2830,6 +3021,9 @@
           "SearchServiceListKnowledgeBases": {
             "$ref": "./examples/SearchServiceListKnowledgeBases.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@odata.nextLink"
         }
       },
       "post": {
@@ -3223,6 +3417,45 @@
             "x-ms-client-name": "accept"
           },
           {
+            "name": "search",
+            "in": "query",
+            "description": "A string used to narrow down the listing so that fewer results need to be paged through. If omitted or an empty string is passed, no narrowing is applied.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "The maximum number of items to return in a single page. The server enforces a maximum; if omitted, the server determines a suitable default.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 3000
+          },
+          {
+            "name": "searchType",
+            "in": "query",
+            "description": "Specifies how the search parameter is interpreted. Currently only 'prefix' is supported.",
+            "required": false,
+            "type": "string",
+            "default": "prefix",
+            "enum": [
+              "prefix"
+            ],
+            "x-ms-enum": {
+              "name": "ListingSearchType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Prefix",
+                  "value": "prefix",
+                  "description": "Matches items whose name starts with the value of the search parameter."
+                }
+              ]
+            }
+          },
+          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
@@ -3274,6 +3507,9 @@
           "SearchServiceListKnowledgeSourcesWorkIQ": {
             "$ref": "./examples/SearchServiceListKnowledgeSourcesWorkIQ.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@odata.nextLink"
         }
       },
       "post": {
@@ -3697,6 +3933,45 @@
             "type": "string"
           },
           {
+            "name": "search",
+            "in": "query",
+            "description": "A string used to narrow down the listing so that fewer results need to be paged through. If omitted or an empty string is passed, no narrowing is applied.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "The maximum number of items to return in a single page. The server enforces a maximum; if omitted, the server determines a suitable default.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 3000
+          },
+          {
+            "name": "searchType",
+            "in": "query",
+            "description": "Specifies how the search parameter is interpreted. Currently only 'prefix' is supported.",
+            "required": false,
+            "type": "string",
+            "default": "prefix",
+            "enum": [
+              "prefix"
+            ],
+            "x-ms-enum": {
+              "name": "ListingSearchType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Prefix",
+                  "value": "prefix",
+                  "description": "Matches items whose name starts with the value of the search parameter."
+                }
+              ]
+            }
+          },
+          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
@@ -3726,6 +4001,9 @@
           "SearchServiceListKnowledgeSourceFiles": {
             "$ref": "./examples/SearchServiceListKnowledgeSourceFiles.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@odata.nextLink"
         }
       },
       "post": {
@@ -4051,6 +4329,45 @@
               "type": "string"
             },
             "collectionFormat": "csv"
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "description": "A string used to narrow down the listing so that fewer results need to be paged through. If omitted or an empty string is passed, no narrowing is applied.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "The maximum number of items to return in a single page. The server enforces a maximum; if omitted, the server determines a suitable default.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 3000
+          },
+          {
+            "name": "searchType",
+            "in": "query",
+            "description": "Specifies how the search parameter is interpreted. Currently only 'prefix' is supported.",
+            "required": false,
+            "type": "string",
+            "default": "prefix",
+            "enum": [
+              "prefix"
+            ],
+            "x-ms-enum": {
+              "name": "ListingSearchType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Prefix",
+                  "value": "prefix",
+                  "description": "Matches items whose name starts with the value of the search parameter."
+                }
+              ]
+            }
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -4463,6 +4780,45 @@
             "collectionFormat": "csv"
           },
           {
+            "name": "search",
+            "in": "query",
+            "description": "A string used to narrow down the listing so that fewer results need to be paged through. If omitted or an empty string is passed, no narrowing is applied.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "The maximum number of items to return in a single page. The server enforces a maximum; if omitted, the server determines a suitable default.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 3000
+          },
+          {
+            "name": "searchType",
+            "in": "query",
+            "description": "Specifies how the search parameter is interpreted. Currently only 'prefix' is supported.",
+            "required": false,
+            "type": "string",
+            "default": "prefix",
+            "enum": [
+              "prefix"
+            ],
+            "x-ms-enum": {
+              "name": "ListingSearchType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Prefix",
+                  "value": "prefix",
+                  "description": "Matches items whose name starts with the value of the search parameter."
+                }
+              ]
+            }
+          },
+          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
@@ -4799,27 +5155,43 @@
             "collectionFormat": "csv"
           },
           {
-            "name": "$top",
+            "name": "search",
             "in": "query",
-            "description": "The number of items to retrieve. Default is 50, maximum is 1000.",
+            "description": "A string used to narrow down the listing so that fewer results need to be paged through. If omitted or an empty string is passed, no narrowing is applied.",
             "required": false,
-            "type": "integer",
-            "format": "int32"
+            "type": "string"
           },
           {
-            "name": "$skip",
+            "name": "pageSize",
             "in": "query",
-            "description": "The number of items to skip.",
+            "description": "The maximum number of items to return in a single page. The server enforces a maximum; if omitted, the server determines a suitable default.",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 3000
           },
           {
-            "name": "$count",
+            "name": "searchType",
             "in": "query",
-            "description": "A value that specifies whether to fetch the total count of items. Default is false.",
+            "description": "Specifies how the search parameter is interpreted. Currently only 'prefix' is supported.",
             "required": false,
-            "type": "boolean"
+            "type": "string",
+            "default": "prefix",
+            "enum": [
+              "prefix"
+            ],
+            "x-ms-enum": {
+              "name": "ListingSearchType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Prefix",
+                  "value": "prefix",
+                  "description": "Matches items whose name starts with the value of the search parameter."
+                }
+              ]
+            }
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -5532,6 +5904,10 @@
           "description": "Consolidates all general ingestion settings.",
           "x-nullable": true
         },
+        "queryHints": {
+          "$ref": "#/definitions/SearchIndexKnowledgeSourceQueryHints",
+          "description": "Default hints that guide query planning toward useful filters and boosts for this index-backed knowledge source. Request-time query hints replace these defaults as a complete object."
+        },
         "createdResources": {
           "$ref": "#/definitions/CreatedResources",
           "description": "Resources created by the knowledge source.",
@@ -5546,6 +5922,12 @@
     "AzureBlobKnowledgeSourceParams": {
       "type": "object",
       "description": "Specifies runtime parameters for a azure blob knowledge source",
+      "properties": {
+        "queryHintOverrides": {
+          "$ref": "#/definitions/SearchIndexKnowledgeSourceQueryHints",
+          "description": "Hints that guide query planning toward useful filters and boosts. If specified, this object replaces the complete set of query hints configured on the knowledge source."
+        }
+      },
       "allOf": [
         {
           "$ref": "#/definitions/KnowledgeSourceParams"
@@ -8221,48 +8603,6 @@
       ],
       "x-ms-discriminator-value": "fabricOntology"
     },
-    "FabricSemanticModelKnowledgeSource": {
-      "type": "object",
-      "description": "Configuration for a Fabric / Power BI semantic model knowledge source.",
-      "properties": {
-        "fabricSemanticModelParameters": {
-          "$ref": "#/definitions/FabricSemanticModelKnowledgeSourceParameters",
-          "description": "The parameters for the Fabric semantic model knowledge source."
-        }
-      },
-      "required": [
-        "fabricSemanticModelParameters"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/KnowledgeSource"
-        }
-      ],
-      "x-ms-discriminator-value": "fabricSemanticModel"
-    },
-    "FabricSemanticModelKnowledgeSourceParameters": {
-      "type": "object",
-      "description": "Parameters for a Fabric / Power BI semantic model knowledge source.",
-      "properties": {
-        "artifactId": {
-          "type": "string",
-          "description": "The Fabric artifact ID of the Power BI semantic model or report to ground answers on."
-        }
-      },
-      "required": [
-        "artifactId"
-      ]
-    },
-    "FabricSemanticModelKnowledgeSourceParams": {
-      "type": "object",
-      "description": "Specifies runtime parameters for a Fabric semantic model knowledge source",
-      "allOf": [
-        {
-          "$ref": "#/definitions/KnowledgeSourceParams"
-        }
-      ],
-      "x-ms-discriminator-value": "fabricSemanticModel"
-    },
     "FacetResult": {
       "type": "object",
       "description": "A single bucket of a facet query result. Reports the number of documents with a field value falling within a particular range or having a particular value or interval.",
@@ -8414,6 +8754,10 @@
           "$ref": "#/definitions/KnowledgeSourceIngestionParameters",
           "description": "Consolidates all general ingestion settings for the File knowledge source, including the content extraction mode and an optional embeddingModel."
         },
+        "queryHints": {
+          "$ref": "#/definitions/SearchIndexKnowledgeSourceQueryHints",
+          "description": "Default hints that guide query planning toward useful filters and boosts for this index-backed knowledge source. Request-time query hints replace these defaults as a complete object."
+        },
         "createdResources": {
           "$ref": "#/definitions/CreatedResources",
           "description": "Resources created by the file knowledge source.",
@@ -8424,6 +8768,12 @@
     "FileKnowledgeSourceParams": {
       "type": "object",
       "description": "Specifies runtime parameters for a File knowledge source",
+      "properties": {
+        "queryHintOverrides": {
+          "$ref": "#/definitions/SearchIndexKnowledgeSourceQueryHints",
+          "description": "Hints that guide query planning toward useful filters and boosts. If specified, this object replaces the complete set of query hints configured on the knowledge source."
+        }
+      },
       "allOf": [
         {
           "$ref": "#/definitions/KnowledgeSourceParams"
@@ -9222,6 +9572,10 @@
           "$ref": "#/definitions/KnowledgeSourceIngestionParameters",
           "description": "Consolidates all general ingestion settings."
         },
+        "queryHints": {
+          "$ref": "#/definitions/SearchIndexKnowledgeSourceQueryHints",
+          "description": "Default hints that guide query planning toward useful filters and boosts for this index-backed knowledge source. Request-time query hints replace these defaults as a complete object."
+        },
         "createdResources": {
           "$ref": "#/definitions/CreatedResources",
           "description": "Resources created by the knowledge source.",
@@ -9236,6 +9590,12 @@
     "IndexedOneLakeKnowledgeSourceParams": {
       "type": "object",
       "description": "Specifies runtime parameters for a indexed OneLake knowledge source",
+      "properties": {
+        "queryHintOverrides": {
+          "$ref": "#/definitions/SearchIndexKnowledgeSourceQueryHints",
+          "description": "Hints that guide query planning toward useful filters and boosts. If specified, this object replaces the complete set of query hints configured on the knowledge source."
+        }
+      },
       "allOf": [
         {
           "$ref": "#/definitions/KnowledgeSourceParams"
@@ -9314,6 +9674,10 @@
           "description": "Consolidates all general ingestion settings.",
           "x-nullable": true
         },
+        "queryHints": {
+          "$ref": "#/definitions/SearchIndexKnowledgeSourceQueryHints",
+          "description": "Default hints that guide query planning toward useful filters and boosts for this index-backed knowledge source. Request-time query hints replace these defaults as a complete object."
+        },
         "createdResources": {
           "$ref": "#/definitions/CreatedResources",
           "description": "Resources created by the knowledge source.",
@@ -9328,6 +9692,12 @@
     "IndexedSharePointKnowledgeSourceParams": {
       "type": "object",
       "description": "Specifies runtime parameters for a indexed SharePoint knowledge source",
+      "properties": {
+        "queryHintOverrides": {
+          "$ref": "#/definitions/SearchIndexKnowledgeSourceQueryHints",
+          "description": "Hints that guide query planning toward useful filters and boosts. If specified, this object replaces the complete set of query hints configured on the knowledge source."
+        }
+      },
       "allOf": [
         {
           "$ref": "#/definitions/KnowledgeSourceParams"
@@ -9388,6 +9758,10 @@
           "$ref": "#/definitions/KnowledgeSourceIngestionParameters",
           "description": "Consolidates all general ingestion settings including embedding model, schedule, and identity."
         },
+        "queryHints": {
+          "$ref": "#/definitions/SearchIndexKnowledgeSourceQueryHints",
+          "description": "Default hints that guide query planning toward useful filters and boosts for this index-backed knowledge source. Request-time query hints replace these defaults as a complete object."
+        },
         "createdResources": {
           "$ref": "#/definitions/CreatedResources",
           "description": "Resources created by the knowledge source.",
@@ -9402,6 +9776,12 @@
     "IndexedSqlKnowledgeSourceParams": {
       "type": "object",
       "description": "Specifies runtime parameters for an indexed SQL knowledge source",
+      "properties": {
+        "queryHintOverrides": {
+          "$ref": "#/definitions/SearchIndexKnowledgeSourceQueryHints",
+          "description": "Hints that guide query planning toward useful filters and boosts. If specified, this object replaces the complete set of query hints configured on the knowledge source."
+        }
+      },
       "allOf": [
         {
           "$ref": "#/definitions/KnowledgeSourceParams"
@@ -10467,6 +10847,13 @@
           "type": "string",
           "description": "The description of the knowledge base."
         },
+        "tags": {
+          "type": "object",
+          "description": "User-defined key-value pairs for categorizing the knowledge base and attributing its usage and costs.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "retrievalInstructions": {
           "type": "string",
           "description": "Instructions considered by the knowledge base when developing query plan."
@@ -10549,7 +10936,6 @@
         "workIQ",
         "fabricDataAgent",
         "fabricOntology",
-        "fabricSemanticModel",
         "mcpServer",
         "file",
         "indexedSql",
@@ -10606,11 +10992,6 @@
             "name": "fabricOntology",
             "value": "fabricOntology",
             "description": "Fabric Ontology retrieval activity."
-          },
-          {
-            "name": "fabricSemanticModel",
-            "value": "fabricSemanticModel",
-            "description": "Fabric semantic model retrieval activity."
           },
           {
             "name": "mcpServer",
@@ -10738,6 +11119,10 @@
         "azureBlobArguments": {
           "$ref": "#/definitions/KnowledgeBaseAzureBlobActivityArguments",
           "description": "The azure blob arguments for the retrieval activity."
+        },
+        "queryHintProcessing": {
+          "$ref": "#/definitions/KnowledgeBaseQueryHintProcessing",
+          "description": "Details about the expressions generated from query hints for this activity."
         }
       },
       "allOf": [
@@ -10975,66 +11360,6 @@
       ],
       "x-ms-discriminator-value": "fabricOntology"
     },
-    "KnowledgeBaseFabricSemanticModelActivityArguments": {
-      "type": "object",
-      "description": "Represents the arguments the Fabric semantic model retrieval activity was run with.",
-      "properties": {
-        "search": {
-          "type": "string",
-          "description": "The search string used to query the Fabric semantic model knowledge source."
-        }
-      }
-    },
-    "KnowledgeBaseFabricSemanticModelActivityRecord": {
-      "type": "object",
-      "description": "Represents a Fabric semantic model retrieval activity record.",
-      "properties": {
-        "knowledgeSourceName": {
-          "type": "string",
-          "description": "The knowledge source for the retrieval activity."
-        },
-        "queryTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The query time for this retrieval activity."
-        },
-        "count": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The count of documents retrieved that were sufficiently relevant to pass the reranker threshold."
-        },
-        "imageServing": {
-          "$ref": "#/definitions/ImageServingStatistics",
-          "description": "Statistics about image serving for this retrieval activity"
-        },
-        "fabricSemanticModelArguments": {
-          "$ref": "#/definitions/KnowledgeBaseFabricSemanticModelActivityArguments",
-          "description": "The Fabric semantic model arguments for the retrieval activity."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/KnowledgeBaseActivityRecord"
-        }
-      ],
-      "x-ms-discriminator-value": "fabricSemanticModel"
-    },
-    "KnowledgeBaseFabricSemanticModelReference": {
-      "type": "object",
-      "description": "Represents a Fabric semantic model document reference. Structured retrieval results (executed DAX query, column types, mime type, and result payload) are surfaced through the untyped `sourceData` bag under a `fabricSemanticModelResults` array.",
-      "properties": {
-        "artifactId": {
-          "type": "string",
-          "description": "The Fabric artifact ID of the semantic model or report that produced this reference."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/KnowledgeBaseReference"
-        }
-      ],
-      "x-ms-discriminator-value": "fabricSemanticModel"
-    },
     "KnowledgeBaseFileActivityArguments": {
       "type": "object",
       "description": "Represents the arguments the File retrieval activity was run with.",
@@ -11070,6 +11395,10 @@
         "fileArguments": {
           "$ref": "#/definitions/KnowledgeBaseFileActivityArguments",
           "description": "The File arguments for the retrieval activity."
+        },
+        "queryHintProcessing": {
+          "$ref": "#/definitions/KnowledgeBaseQueryHintProcessing",
+          "description": "Details about the expressions generated from query hints for this activity."
         }
       },
       "allOf": [
@@ -11144,6 +11473,10 @@
         "indexedOneLakeArguments": {
           "$ref": "#/definitions/KnowledgeBaseIndexedOneLakeActivityArguments",
           "description": "The indexed OneLake arguments for the retrieval activity."
+        },
+        "queryHintProcessing": {
+          "$ref": "#/definitions/KnowledgeBaseQueryHintProcessing",
+          "description": "Details about the expressions generated from query hints for this activity."
         }
       },
       "allOf": [
@@ -11213,6 +11546,10 @@
         "indexedSharePointArguments": {
           "$ref": "#/definitions/KnowledgeBaseIndexedSharePointActivityArguments",
           "description": "The indexed SharePoint arguments for the retrieval activity."
+        },
+        "queryHintProcessing": {
+          "$ref": "#/definitions/KnowledgeBaseQueryHintProcessing",
+          "description": "Details about the expressions generated from query hints for this activity."
         }
       },
       "allOf": [
@@ -11282,6 +11619,10 @@
         "indexedSqlArguments": {
           "$ref": "#/definitions/KnowledgeBaseIndexedSqlActivityArguments",
           "description": "The indexed SQL arguments for the retrieval activity."
+        },
+        "queryHintProcessing": {
+          "$ref": "#/definitions/KnowledgeBaseQueryHintProcessing",
+          "description": "Details about the expressions generated from query hints for this activity."
         }
       },
       "allOf": [
@@ -11587,6 +11928,20 @@
       ],
       "x-ms-discriminator-value": "modelWebSummarization"
     },
+    "KnowledgeBaseQueryHintProcessing": {
+      "type": "object",
+      "description": "Details about the expressions generated from query hints for a retrieval activity.",
+      "properties": {
+        "generatedBoost": {
+          "type": "string",
+          "description": "The search clause generated from boost hints for this activity."
+        },
+        "generatedFilter": {
+          "type": "string",
+          "description": "The filter expression generated from filter hints for this activity."
+        }
+      }
+    },
     "KnowledgeBaseReference": {
       "type": "object",
       "description": "Base type for references.",
@@ -11635,7 +11990,6 @@
         "workIQ",
         "fabricDataAgent",
         "fabricOntology",
-        "fabricSemanticModel",
         "mcpServer",
         "file",
         "indexedSql"
@@ -11688,11 +12042,6 @@
             "name": "fabricOntology",
             "value": "fabricOntology",
             "description": "Fabric Ontology document reference."
-          },
-          {
-            "name": "fabricSemanticModel",
-            "value": "fabricSemanticModel",
-            "description": "Fabric semantic model document reference."
           },
           {
             "name": "mcpServer",
@@ -11995,6 +12344,10 @@
         "semanticConfigurationName": {
           "type": "string",
           "description": "What semantic configuration was used from the search index."
+        },
+        "queryType": {
+          "$ref": "#/definitions/QueryType",
+          "description": "The query syntax used to execute the search. Query hints can cause semantic queries to use full query syntax."
         }
       }
     },
@@ -12023,6 +12376,10 @@
         "searchIndexArguments": {
           "$ref": "#/definitions/KnowledgeBaseSearchIndexActivityArguments",
           "description": "The search index arguments for the retrieval activity."
+        },
+        "queryHintProcessing": {
+          "$ref": "#/definitions/KnowledgeBaseQueryHintProcessing",
+          "description": "Details about the expressions generated from query hints for this activity."
         }
       },
       "allOf": [
@@ -12387,9 +12744,9 @@
           "$ref": "#/definitions/KnowledgeSourceKind",
           "description": "The type of the knowledge source."
         },
-        "inclusionMode": {
-          "$ref": "#/definitions/KnowledgeSourceInclusionMode",
-          "description": "Controls how results from this knowledge source are integrated into the final result set. Defaults to 'reranked' when not specified."
+        "resultsProcessing": {
+          "$ref": "#/definitions/KnowledgeSourceResultsProcessing",
+          "description": "Controls whether results from this knowledge source are reranked before they are included in the final result set. Defaults to 'rerank' when not specified."
         },
         "@odata.etag": {
           "type": "string",
@@ -12509,30 +12866,6 @@
           "description": "The extraction mode applied to the file.",
           "readOnly": true
         }
-      }
-    },
-    "KnowledgeSourceInclusionMode": {
-      "type": "string",
-      "description": "Controls how a knowledge source's results are integrated into the final result set.",
-      "enum": [
-        "reranked",
-        "always"
-      ],
-      "x-ms-enum": {
-        "name": "KnowledgeSourceInclusionMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Reranked",
-            "value": "reranked",
-            "description": "Results from this knowledge source go through the reranking and aggregation pipeline alongside results from other knowledge sources. This is the default behavior."
-          },
-          {
-            "name": "Always",
-            "value": "always",
-            "description": "Results from this knowledge source bypass reranking and are always included in the agent context, preserving the underlying result order."
-          }
-        ]
       }
     },
     "KnowledgeSourceIngestionParameters": {
@@ -12688,8 +13021,7 @@
         "file",
         "mcpServer",
         "fabricDataAgent",
-        "fabricOntology",
-        "fabricSemanticModel"
+        "fabricOntology"
       ],
       "x-ms-enum": {
         "name": "KnowledgeSourceKind",
@@ -12754,11 +13086,6 @@
             "name": "FabricOntology",
             "value": "fabricOntology",
             "description": "A knowledge source that retrieves data from Microsoft Fabric Ontology ontologies."
-          },
-          {
-            "name": "FabricSemanticModel",
-            "value": "fabricSemanticModel",
-            "description": "A knowledge source that retrieves data from a Microsoft Fabric / Power BI semantic model."
           }
         ]
       }
@@ -12820,9 +13147,9 @@
           "format": "float",
           "description": "The reranker threshold all retrieved documents must meet to be included in the response."
         },
-        "inclusionMode": {
-          "$ref": "#/definitions/KnowledgeSourceInclusionMode",
-          "description": "Overrides the knowledge source's stored inclusionMode for this retrieve call only. When omitted, the stored knowledge source value applies."
+        "resultsProcessing": {
+          "$ref": "#/definitions/KnowledgeSourceResultsProcessing",
+          "description": "Overrides the knowledge source's stored resultsProcessing for this retrieve call only. When omitted, the stored knowledge source value applies."
         },
         "maxOutputDocuments": {
           "type": "integer",
@@ -12864,6 +13191,30 @@
       "required": [
         "name"
       ]
+    },
+    "KnowledgeSourceResultsProcessing": {
+      "type": "string",
+      "description": "Controls whether a knowledge source's results are reranked.",
+      "enum": [
+        "rerank",
+        "none"
+      ],
+      "x-ms-enum": {
+        "name": "KnowledgeSourceResultsProcessing",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Rerank",
+            "value": "rerank",
+            "description": "Results from this knowledge source go through the reranking pipeline. This is the default behavior."
+          },
+          {
+            "name": "None",
+            "value": "none",
+            "description": "Results from this knowledge source bypass reranking and preserve their underlying order."
+          }
+        ]
+      }
     },
     "KnowledgeSourceStatistics": {
       "type": "object",
@@ -13846,6 +14197,11 @@
             "$ref": "#/definitions/SearchAlias"
           },
           "readOnly": true
+        },
+        "@odata.nextLink": {
+          "type": "string",
+          "description": "The URL that can be used to fetch the next set of results.",
+          "readOnly": true
         }
       },
       "required": [
@@ -13862,6 +14218,11 @@
           "items": {
             "$ref": "#/definitions/SearchIndexerDataSource"
           },
+          "readOnly": true
+        },
+        "@odata.nextLink": {
+          "type": "string",
+          "description": "The URL that can be used to fetch the next set of results.",
           "readOnly": true
         }
       },
@@ -13907,6 +14268,11 @@
           "items": {
             "$ref": "#/definitions/SearchIndexer"
           },
+          "readOnly": true
+        },
+        "@odata.nextLink": {
+          "type": "string",
+          "description": "The URL that can be used to fetch the next set of results.",
           "readOnly": true
         }
       },
@@ -13980,6 +14346,11 @@
           "items": {
             "$ref": "#/definitions/KnowledgeBase"
           }
+        },
+        "@odata.nextLink": {
+          "type": "string",
+          "description": "The URL that can be used to fetch the next set of results.",
+          "readOnly": true
         }
       },
       "required": [
@@ -13996,6 +14367,11 @@
           "items": {
             "$ref": "#/definitions/KnowledgeSourceFile"
           }
+        },
+        "@odata.nextLink": {
+          "type": "string",
+          "description": "The URL that can be used to fetch the next set of results.",
+          "readOnly": true
         }
       },
       "required": [
@@ -14012,6 +14388,11 @@
           "items": {
             "$ref": "#/definitions/KnowledgeSource"
           }
+        },
+        "@odata.nextLink": {
+          "type": "string",
+          "description": "The URL that can be used to fetch the next set of results.",
+          "readOnly": true
         }
       },
       "required": [
@@ -14028,6 +14409,11 @@
           "items": {
             "$ref": "#/definitions/SearchIndexerSkillset"
           },
+          "readOnly": true
+        },
+        "@odata.nextLink": {
+          "type": "string",
+          "description": "The URL that can be used to fetch the next set of results.",
           "readOnly": true
         }
       },
@@ -14046,11 +14432,34 @@
             "$ref": "#/definitions/SynonymMap"
           },
           "readOnly": true
+        },
+        "@odata.nextLink": {
+          "type": "string",
+          "description": "The URL that can be used to fetch the next set of results.",
+          "readOnly": true
         }
       },
       "required": [
         "value"
       ]
+    },
+    "ListingSearchType": {
+      "type": "string",
+      "description": "Specifies how the search parameter is interpreted when narrowing down a listing result set. Currently only 'prefix' is supported.",
+      "enum": [
+        "prefix"
+      ],
+      "x-ms-enum": {
+        "name": "ListingSearchType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Prefix",
+            "value": "prefix",
+            "description": "Matches items whose name starts with the value of the search parameter."
+          }
+        ]
+      }
     },
     "LookupDocument": {
       "type": "object",
@@ -14577,39 +14986,15 @@
           "$ref": "#/definitions/McpServerOutputParsing",
           "description": "Optional configuration for parsing the tool's output."
         },
-        "inclusionMode": {
-          "$ref": "#/definitions/McpServerToolInclusionMode",
-          "description": "Controls how the parsed results from this tool are integrated into the final result set. Defaults to 'reranked' when not specified."
+        "resultsProcessing": {
+          "$ref": "#/definitions/KnowledgeSourceResultsProcessing",
+          "description": "Controls whether the parsed results from this tool are reranked. Defaults to 'rerank' when not specified."
         },
         "maxOutputTokens": {
           "type": "integer",
           "format": "int32",
           "description": "Optional post-parsing token cap for this tool's output. Must be greater than 0 when specified."
         }
-      }
-    },
-    "McpServerToolInclusionMode": {
-      "type": "string",
-      "description": "Controls how parsed MCP tool results are integrated into the final result set.",
-      "enum": [
-        "reranked",
-        "always"
-      ],
-      "x-ms-enum": {
-        "name": "McpServerToolInclusionMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Reranked",
-            "value": "reranked",
-            "description": "Tool results go through the reranking and aggregation pipeline alongside results from other knowledge sources. This is the default behavior."
-          },
-          {
-            "name": "Always",
-            "value": "always",
-            "description": "Tool results bypass reranking and are always included in the agent context."
-          }
-        ]
       }
     },
     "MergeSkill": {
@@ -18599,6 +18984,104 @@
       ],
       "x-ms-discriminator-value": "searchIndex"
     },
+    "SearchIndexKnowledgeSourceBoost": {
+      "type": "object",
+      "description": "A hint that identifies a condition the query planner can use to influence document ranking.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/SearchIndexKnowledgeSourceBoostKind",
+          "description": "The kind of boost hint."
+        },
+        "boostInstructions": {
+          "type": "string",
+          "description": "Natural-language instructions that explain when and how to apply the boost."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
+    "SearchIndexKnowledgeSourceBoostKind": {
+      "type": "string",
+      "description": "The kind of boost hint for a search index knowledge source.",
+      "enum": [
+        "fieldValue"
+      ],
+      "x-ms-enum": {
+        "name": "SearchIndexKnowledgeSourceBoostKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "FieldValue",
+            "value": "fieldValue",
+            "description": "Boost documents based on a field value."
+          }
+        ]
+      }
+    },
+    "SearchIndexKnowledgeSourceFieldValueBoost": {
+      "type": "object",
+      "description": "A hint that boosts documents based on a field value.",
+      "properties": {
+        "field": {
+          "type": "string",
+          "description": "The name of the search index field.",
+          "minLength": 1
+        },
+        "fieldValues": {
+          "type": "array",
+          "description": "Representative values for the field.",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "boost": {
+          "type": "number",
+          "format": "double",
+          "description": "A multiplier for the document score. Must be a positive number not equal to 1.0."
+        }
+      },
+      "required": [
+        "field",
+        "fieldValues",
+        "boost"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SearchIndexKnowledgeSourceBoost"
+        }
+      ],
+      "x-ms-discriminator-value": "fieldValue"
+    },
+    "SearchIndexKnowledgeSourceFilterHint": {
+      "type": "object",
+      "description": "A hint that identifies a field and representative values the query planner can use when constructing a filter.",
+      "properties": {
+        "field": {
+          "type": "string",
+          "description": "The name of the filterable search index field.",
+          "minLength": 1
+        },
+        "fieldValues": {
+          "type": "array",
+          "description": "Representative values for the field.",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "filterInstructions": {
+          "type": "string",
+          "description": "Natural-language instructions that explain when and how to filter on the field."
+        }
+      },
+      "required": [
+        "field",
+        "fieldValues"
+      ]
+    },
     "SearchIndexKnowledgeSourceParameters": {
       "type": "object",
       "description": "Parameters for search index knowledge source.",
@@ -18628,6 +19111,10 @@
         "baseFilter": {
           "type": "string",
           "description": "A default filter condition applied to the index at retrieval time (e.g., 'State eq VA'). Can be overridden at query time via knowledge source runtime parameters."
+        },
+        "queryHints": {
+          "$ref": "#/definitions/SearchIndexKnowledgeSourceQueryHints",
+          "description": "Default hints that guide query planning toward useful filters and boosts for this search index knowledge source. Request-time query hints replace these defaults as a complete object."
         }
       },
       "required": [
@@ -18641,6 +19128,10 @@
         "filterAddOn": {
           "type": "string",
           "description": "A filter condition applied to the index (e.g., 'State eq VA')."
+        },
+        "queryHintOverrides": {
+          "$ref": "#/definitions/SearchIndexKnowledgeSourceQueryHints",
+          "description": "Hints that guide query planning toward useful filters and boosts. If specified, this object replaces the complete set of query hints configured on the knowledge source."
         }
       },
       "allOf": [
@@ -18649,6 +19140,26 @@
         }
       ],
       "x-ms-discriminator-value": "searchIndex"
+    },
+    "SearchIndexKnowledgeSourceQueryHints": {
+      "type": "object",
+      "description": "Hints that guide query planning toward useful filters and boosts for a search index knowledge source.",
+      "properties": {
+        "filters": {
+          "type": "array",
+          "description": "Filter hints that identify fields and representative values the query planner can use when constructing filters.",
+          "items": {
+            "$ref": "#/definitions/SearchIndexKnowledgeSourceFilterHint"
+          }
+        },
+        "boosts": {
+          "type": "array",
+          "description": "Boost hints that identify conditions the query planner can use to influence document ranking.",
+          "items": {
+            "$ref": "#/definitions/SearchIndexKnowledgeSourceBoost"
+          }
+        }
+      }
     },
     "SearchIndexPermissionFilterOption": {
       "type": "string",

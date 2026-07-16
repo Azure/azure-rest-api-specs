@@ -343,6 +343,8 @@ namespace KnowledgeBaseRetrievalClient {
   "!autorest"
 );
 
+@@access(ListingSearchType, Access.public);
+@@usage(ListingSearchType, Usage.input);
 @@access(VectorSearchAlgorithmKind, Access.public);
 @@usage(VectorSearchAlgorithmKind, Usage.input);
 @@access(VectorSearchVectorizerKind, Access.public);
@@ -411,8 +413,6 @@ namespace KnowledgeBaseRetrievalClient {
 @@usage(FabricDataAgentKnowledgeSource, Usage.input);
 @@access(FabricOntologyKnowledgeSource, Access.public);
 @@usage(FabricOntologyKnowledgeSource, Usage.input);
-@@access(FabricSemanticModelKnowledgeSource, Access.public);
-@@usage(FabricSemanticModelKnowledgeSource, Usage.input);
 @@usage(SearchRequest, Usage.input | Usage.output, "java");
 
 // .NET specific customizations
@@ -640,7 +640,7 @@ namespace KnowledgeBaseRetrievalClient {
 @@access(SearchIndexClient.deleteSynonymMap, Access.internal, "python");
 @@access(SearchIndexClient.createOrUpdateIndex, Access.internal);
 @@access(SearchIndexClient.deleteIndex, Access.internal, "python");
-@@access(SearchIndexClient.analyze, Access.internal, "python");
+@@access(SearchIndexClient.analyze, Access.internal, "python,csharp");
 @@access(SearchIndexClient.getStatistics, Access.internal, "python");
 @@access(SearchIndexClient.listIndexes, Access.internal, "python");
 @@access(
@@ -1917,11 +1917,11 @@ namespace KnowledgeBaseRetrievalClient {
   "java"
 );
 @@clientNamespace(
-  Search.KnowledgeSourceInclusionMode,
+  Search.KnowledgeSourceResultsProcessing,
   "Azure.Search.Documents.Indexes"
 );
 @@clientNamespace(
-  Search.KnowledgeSourceInclusionMode,
+  Search.KnowledgeSourceResultsProcessing,
   "com.azure.search.documents.indexes",
   "java"
 );
@@ -1940,6 +1940,51 @@ namespace KnowledgeBaseRetrievalClient {
 );
 @@clientNamespace(
   Search.SearchIndexKnowledgeSourceParameters,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.SearchIndexKnowledgeSourceQueryHints,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.SearchIndexKnowledgeSourceQueryHints,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.SearchIndexKnowledgeSourceFilterHint,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.SearchIndexKnowledgeSourceFilterHint,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.SearchIndexKnowledgeSourceBoost,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.SearchIndexKnowledgeSourceBoost,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.SearchIndexKnowledgeSourceBoostKind,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.SearchIndexKnowledgeSourceBoostKind,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.SearchIndexKnowledgeSourceFieldValueBoost,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.SearchIndexKnowledgeSourceFieldValueBoost,
   "com.azure.search.documents.indexes",
   "java"
 );
@@ -2286,24 +2331,6 @@ namespace KnowledgeBaseRetrievalClient {
 );
 @@clientNamespace(
   Search.FabricOntologyKnowledgeSourceParameters,
-  "com.azure.search.documents.indexes",
-  "java"
-);
-@@clientNamespace(
-  Search.FabricSemanticModelKnowledgeSource,
-  "Azure.Search.Documents.Indexes"
-);
-@@clientNamespace(
-  Search.FabricSemanticModelKnowledgeSource,
-  "com.azure.search.documents.indexes",
-  "java"
-);
-@@clientNamespace(
-  Search.FabricSemanticModelKnowledgeSourceParameters,
-  "Azure.Search.Documents.Indexes"
-);
-@@clientNamespace(
-  Search.FabricSemanticModelKnowledgeSourceParameters,
   "com.azure.search.documents.indexes",
   "java"
 );
@@ -3887,7 +3914,10 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(VectorSearchProfile.compression, "compressionName", "!autorest");
 @@clientName(VectorSearchVectorizer.name, "vectorizerName", "!autorest");
 @@clientName(VectorSearchCompression.name, "compressionName", "!autorest");
-@@clientName(ListIndexesResult.value, "indexes", "!autorest");
+// csharp excluded: ListIndexesResult is csharp-internal and the paged @pageItems
+// property must keep its serialized name ("value") so autorest.csharp can resolve
+// the paging item property (it looks it up by serialized name, not client name).
+@@clientName(ListIndexesResult.value, "indexes", "!autorest,!csharp");
 @@clientName(SearchServiceCounters.aliasesCount, "aliasCounter", "!autorest");
 @@clientName(
   SearchServiceCounters.documentCount,
@@ -4066,7 +4096,10 @@ namespace KnowledgeBaseRetrievalClient {
 );
 @@clientName(PIIDetectionSkill.minimumPrecision, "minPrecision", "csharp");
 @@clientName(PIIDetectionSkill.maskingCharacter, "mask", "!autorest");
-@@clientName(ListAliasesResult.value, "aliases", "!autorest");
+// csharp excluded: the paged @pageItems property must keep its serialized name
+// ("value") so autorest.csharp can resolve the paging item property (it is looked
+// up by serialized name, not client name).
+@@clientName(ListAliasesResult.value, "aliases", "!autorest,!csharp");
 @@clientName(AMLParameters.uri, "scoringUri", "!autorest");
 @@clientName(AMLParameters.uri, "scoringUrl", "java");
 @@clientName(AMLParameters.key, "authenticationKey", "!autorest");
@@ -4422,7 +4455,14 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(VisionVectorizeSkill.`@odata.type`, "odatatype", "javascript");
 @@clientName(PathHierarchyTokenizerV2.`@odata.type`, "odataType", "!autorest");
 @@clientName(PathHierarchyTokenizerV2.`@odata.type`, "odatatype", "javascript");
-@@clientName(ListIndexStatsSummary.value, "IndexesStatistics", "!autorest");
+// csharp excluded: ListIndexStatsSummary is csharp-internal and the paged
+// @pageItems property must keep its serialized name ("value") so autorest.csharp
+// can resolve the paging item property (looked up by serialized name, not client name).
+@@clientName(
+  ListIndexStatsSummary.value,
+  "IndexesStatistics",
+  "!autorest,!csharp"
+);
 @@clientName(ListIndexStatsSummary.value, "indexesStatistics", "javascript"); //TODO: verify casing
 @@clientName(RankingOrder.RerankerScore, "reRankerScore", "csharp");
 @@clientName(Search.BM25SimilarityAlgorithm, "BM25Similarity", "csharp");
@@ -4895,6 +4935,15 @@ namespace KnowledgeBaseRetrievalClient {
   "java"
 );
 @@clientNamespace(
+  Search.KnowledgeBaseQueryHintProcessing,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseQueryHintProcessing,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
   Search.KnowledgeBaseAzureBlobActivityRecord,
   "Azure.Search.Documents.KnowledgeBases"
 );
@@ -5241,42 +5290,6 @@ namespace KnowledgeBaseRetrievalClient {
 );
 @@clientNamespace(
   Search.KnowledgeBaseFabricOntologyReference,
-  "com.azure.search.documents.knowledgebases",
-  "java"
-);
-@@clientNamespace(
-  Search.FabricSemanticModelKnowledgeSourceParams,
-  "Azure.Search.Documents.KnowledgeBases"
-);
-@@clientNamespace(
-  Search.FabricSemanticModelKnowledgeSourceParams,
-  "com.azure.search.documents.knowledgebases",
-  "java"
-);
-@@clientNamespace(
-  Search.KnowledgeBaseFabricSemanticModelActivityRecord,
-  "Azure.Search.Documents.KnowledgeBases"
-);
-@@clientNamespace(
-  Search.KnowledgeBaseFabricSemanticModelActivityRecord,
-  "com.azure.search.documents.knowledgebases",
-  "java"
-);
-@@clientNamespace(
-  Search.KnowledgeBaseFabricSemanticModelActivityArguments,
-  "Azure.Search.Documents.KnowledgeBases"
-);
-@@clientNamespace(
-  Search.KnowledgeBaseFabricSemanticModelActivityArguments,
-  "com.azure.search.documents.knowledgebases",
-  "java"
-);
-@@clientNamespace(
-  Search.KnowledgeBaseFabricSemanticModelReference,
-  "Azure.Search.Documents.KnowledgeBases"
-);
-@@clientNamespace(
-  Search.KnowledgeBaseFabricSemanticModelReference,
   "com.azure.search.documents.knowledgebases",
   "java"
 );

@@ -1,18 +1,19 @@
-﻿{
+{
   "operationId": "KnowledgeRetrieval_Retrieve",
   "title": "KnowledgeBaseRetrieveWithIntents",
   "parameters": {
-    "endpoint": "https://previewexampleservice.search.windows.net",
+    "endpoint": "https://typespecpreviewexampleservice.search.windows.net",
     "knowledgeBaseName": "base-preview-test",
     "api-version": "2026-08-01-preview",
-    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
+    "Accept": "application/json;odata.metadata=minimal",
     "x-ms-query-source-authorization": null,
     "x-ms-query-work-iq-source-authorization": null,
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
     "retrievalRequest": {
       "intents": [
         {
-          "search": "foo",
-          "type": "semantic"
+          "type": "semantic",
+          "search": "foo"
         }
       ],
       "maxRuntimeInSeconds": 60,
@@ -25,14 +26,43 @@
       "outputMode": "extractiveData",
       "knowledgeSourceParams": [
         {
-          "filterAddOn": "foo eq bar",
           "knowledgeSourceName": "ks-preview-test",
           "includeReferences": true,
           "includeReferenceSourceData": true,
           "alwaysQuerySource": true,
           "failOnError": true,
           "rerankerThreshold": 2.1,
-          "kind": "searchIndex"
+          "resultsProcessing": "rerank",
+          "kind": "searchIndex",
+          "filterAddOn": "foo eq bar",
+          "queryHintOverrides": {
+            "filters": [
+              {
+                "field": "country",
+                "fieldValues": [
+                  "United States",
+                  "Japan",
+                  "France",
+                  "Germany"
+                ],
+                "filterInstructions": "Country associated with the document."
+              }
+            ],
+            "boosts": [
+              {
+                "kind": "fieldValue",
+                "boostInstructions": "Prefer documents matching the user's locale.",
+                "field": "language",
+                "fieldValues": [
+                  "en-US",
+                  "ja-JP",
+                  "fr-FR",
+                  "de-DE"
+                ],
+                "boost": 1.5
+              }
+            ]
+          }
         }
       ]
     }
@@ -60,7 +90,8 @@
             "elapsedMs": 1234,
             "searchIndexArguments": {
               "search": "foo",
-              "filter": "foo eq bar",
+              "filter": "(category eq 'news') and (foo eq bar)",
+              "semanticConfigurationName": "testconfig",
               "sourceDataFields": [
                 {
                   "name": "category"
@@ -75,17 +106,16 @@
                   "name": "id"
                 }
               ],
-              "searchFields": [],
-              "semanticConfigurationName": "testconfig"
+              "searchFields": []
             }
           },
           {
             "type": "agenticReasoning",
             "id": 1,
+            "reasoningTokens": 39,
             "retrievalReasoningEffort": {
               "kind": "minimal"
-            },
-            "reasoningTokens": 37
+            }
           }
         ],
         "references": [
@@ -98,8 +128,9 @@
               "title": "high_doc",
               "content": "hello world"
             },
-            "rerankerScore": 3.5,
-            "docKey": "myDocKey1"
+            "rerankerScore": 4,
+            "docKey": "myDocKey1",
+            "citationUrl": "https://typespecpreviewexampleservice.search.windows.net/indexes/preview-test/docs/myDocKey1?$select=category%2Cdescription%2CownerId%2Cid&api-version=2026-08-01-preview"
           },
           {
             "type": "searchIndex",
@@ -110,8 +141,9 @@
               "title": "low_doc",
               "content": "goodbye world"
             },
-            "rerankerScore": 2.7,
-            "docKey": "myDocKey2"
+            "rerankerScore": 3.9,
+            "docKey": "myDocKey2",
+            "citationUrl": "https://typespecpreviewexampleservice.search.windows.net/indexes/preview-test/docs/myDocKey2?$select=category%2Cdescription%2CownerId%2Cid&api-version=2026-08-01-preview"
           }
         ]
       }
@@ -123,7 +155,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "[{...}]"
+                "text": "Partial results were returned before the retrieval completed."
               }
             ]
           }
@@ -134,57 +166,22 @@
             "id": 0,
             "knowledgeSourceName": "ks-preview-test",
             "queryTime": "2025-01-01T00:08:45.045Z",
-            "count": 2,
+            "count": 1,
             "elapsedMs": 1234,
             "searchIndexArguments": {
               "search": "foo",
-              "filter": "foo eq bar",
+              "filter": "(category eq 'news') and (foo eq bar)",
+              "semanticConfigurationName": "testconfig",
               "sourceDataFields": [
                 {
                   "name": "category"
                 },
                 {
-                  "name": "description"
-                },
-                {
-                  "name": "ownerId"
-                },
-                {
                   "name": "id"
                 }
               ],
-              "searchFields": [],
-              "semanticConfigurationName": "testconfig"
+              "searchFields": []
             }
-          },
-          {
-            "type": "web",
-            "id": 1,
-            "knowledgeSourceName": "ks-preview-web",
-            "queryTime": "2025-01-01T00:08:45.045Z",
-            "count": 10,
-            "elapsedMs": 2345,
-            "error": {
-              "code": "403",
-              "message": "The error message",
-              "details": [],
-              "additionalInfo": [
-                {
-                  "type": "SomeErrorType",
-                  "info": {
-                    "someProperty": "Some value"
-                  }
-                }
-              ]
-            }
-          },
-          {
-            "type": "agenticReasoning",
-            "id": 2,
-            "retrievalReasoningEffort": {
-              "kind": "minimal"
-            },
-            "reasoningTokens": 37
           }
         ],
         "references": [
@@ -197,20 +194,9 @@
               "title": "high_doc",
               "content": "hello world"
             },
-            "rerankerScore": 3.5,
-            "docKey": "myDocKey1"
-          },
-          {
-            "type": "searchIndex",
-            "id": "83dd7d41",
-            "activitySource": 0,
-            "sourceData": {
-              "id": "myDocKey2",
-              "title": "low_doc",
-              "content": "goodbye world"
-            },
-            "rerankerScore": 2.7,
-            "docKey": "myDocKey2"
+            "rerankerScore": 4,
+            "docKey": "myDocKey1",
+            "citationUrl": "https://typespecpreviewexampleservice.search.windows.net/indexes/preview-test/docs/myDocKey1?$select=category%2Cdescription%2CownerId%2Cid&api-version=2026-08-01-preview"
           }
         ]
       }

@@ -1,4 +1,4 @@
-import "@typespec/rest";
+﻿import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
@@ -6,6 +6,7 @@ import "@azure-tools/typespec-client-generator-core";
 import "./models-shared.tsp";
 
 using Azure.ClientGenerator.Core.Legacy;
+using TypeSpec.Http;
 using TypeSpec.Versioning;
 
 namespace Search;
@@ -3292,6 +3293,13 @@ model ListDataSourcesResult {
   @pageItems
   @visibility(Lifecycle.Read)
   value: SearchIndexerDataSource[];
+
+  /** The URL that can be used to fetch the next set of results. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @visibility(Lifecycle.Read)
+  @nextLink
+  @added(Versions.v2026_08_01_preview)
+  `@odata.nextLink`?: string;
 }
 
 /** The type of the keysOrIds. */
@@ -3494,6 +3502,13 @@ model ListIndexersResult {
   @pageItems
   @visibility(Lifecycle.Read)
   value: SearchIndexer[];
+
+  /** The URL that can be used to fetch the next set of results. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @visibility(Lifecycle.Read)
+  @nextLink
+  @added(Versions.v2026_08_01_preview)
+  `@odata.nextLink`?: string;
 }
 
 /** Represents the current status and execution history of an indexer. */
@@ -3915,6 +3930,13 @@ model ListSkillsetsResult {
   @visibility(Lifecycle.Read)
   @pageItems
   value: SearchIndexerSkillset[];
+
+  /** The URL that can be used to fetch the next set of results. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @visibility(Lifecycle.Read)
+  @nextLink
+  @added(Versions.v2026_08_01_preview)
+  `@odata.nextLink`?: string;
 }
 
 /** The type of the skill names. */
@@ -3953,6 +3975,13 @@ model ListSynonymMapsResult {
   @visibility(Lifecycle.Read)
   @pageItems
   value: SynonymMap[];
+
+  /** The URL that can be used to fetch the next set of results. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @visibility(Lifecycle.Read)
+  @nextLink
+  @added(Versions.v2026_08_01_preview)
+  `@odata.nextLink`?: string;
 }
 
 /** Represents a search index definition, which describes the fields and search behavior of an index. */
@@ -4154,7 +4183,6 @@ model SearchField {
   sourceDocumentId?: boolean;
 
   /** A value indicating whether the field contains a SharePoint site URL used for SharePoint group-based filtering. */
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @added(Versions.v2026_05_01_preview)
   sharepointSiteUrl?: boolean;
 
@@ -4576,6 +4604,13 @@ model ListAliasesResult {
   @pageItems
   @visibility(Lifecycle.Read)
   value: SearchAlias[];
+
+  /** The URL that can be used to fetch the next set of results. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @visibility(Lifecycle.Read)
+  @nextLink
+  @added(Versions.v2026_08_01_preview)
+  `@odata.nextLink`?: string;
 }
 
 // Knowledge Base models
@@ -4610,6 +4645,10 @@ model KnowledgeBase {
 
   /** The description of the knowledge base. */
   description?: string;
+
+  /** User-defined key-value pairs for categorizing the knowledge base and attributing its usage and costs. */
+  @added(Versions.v2026_08_01_preview)
+  tags?: Record<string>;
 
   /** Instructions considered by the knowledge base when developing query plan. */
   @added(Versions.v2026_05_01_preview)
@@ -4648,6 +4687,13 @@ model ListKnowledgeBasesResult {
   /** The knowledge bases in the service. */
   @pageItems
   value: KnowledgeBase[];
+
+  /** The URL that can be used to fetch the next set of results. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @visibility(Lifecycle.Read)
+  @nextLink
+  @added(Versions.v2026_08_01_preview)
+  `@odata.nextLink`?: string;
 }
 
 /** Specifies the connection parameters for the model to use for query planning. */
@@ -4723,9 +4769,9 @@ model KnowledgeSource {
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   kind: KnowledgeSourceKind;
 
-  /** Controls how results from this knowledge source are integrated into the final result set. Defaults to 'reranked' when not specified. */
+  /** Controls whether results from this knowledge source are reranked before they are included in the final result set. Defaults to 'rerank' when not specified. */
   @added(Versions.v2026_08_01_preview)
-  inclusionMode?: KnowledgeSourceInclusionMode;
+  resultsProcessing?: KnowledgeSourceResultsProcessing;
 
   /** The ETag of the knowledge source. */
   @encodedName("application/json", "@odata.etag")
@@ -4736,16 +4782,16 @@ model KnowledgeSource {
   encryptionKey?: SearchResourceEncryptionKey | null;
 }
 
-/** Controls how a knowledge source's results are integrated into the final result set. */
+/** Controls whether a knowledge source's results are reranked. */
 @added(Versions.v2026_08_01_preview)
-union KnowledgeSourceInclusionMode {
+union KnowledgeSourceResultsProcessing {
   string,
 
-  /** Results from this knowledge source go through the reranking and aggregation pipeline alongside results from other knowledge sources. This is the default behavior. */
-  Reranked: "reranked",
+  /** Results from this knowledge source go through the reranking pipeline. This is the default behavior. */
+  Rerank: "rerank",
 
-  /** Results from this knowledge source bypass reranking and are always included in the agent context, preserving the underlying result order. */
-  Always: "always",
+  /** Results from this knowledge source bypass reranking and preserve their underlying order. */
+  None: "none",
 }
 
 /** The kind of the knowledge source. */
@@ -4797,10 +4843,6 @@ union KnowledgeSourceKind {
   /** A knowledge source that retrieves data from Microsoft Fabric Ontology ontologies. */
   @added(Versions.v2026_05_01_preview)
   FabricOntology: "fabricOntology",
-
-  /** A knowledge source that retrieves data from a Microsoft Fabric / Power BI semantic model. */
-  @added(Versions.v2026_08_01_preview)
-  FabricSemanticModel: "fabricSemanticModel",
 }
 
 /** Knowledge Source targeting a search index. */
@@ -4828,6 +4870,75 @@ model SearchIndexKnowledgeSourceParameters {
   /** A default filter condition applied to the index at retrieval time (e.g., 'State eq VA'). Can be overridden at query time via knowledge source runtime parameters. */
   @added(Versions.v2026_05_01_preview)
   baseFilter?: string;
+
+  /** Default hints that guide query planning toward useful filters and boosts for this search index knowledge source. Request-time query hints replace these defaults as a complete object. */
+  @added(Versions.v2026_08_01_preview)
+  queryHints?: SearchIndexKnowledgeSourceQueryHints;
+}
+
+/** Hints that guide query planning toward useful filters and boosts for a search index knowledge source. */
+@added(Versions.v2026_08_01_preview)
+model SearchIndexKnowledgeSourceQueryHints {
+  /** Filter hints that identify fields and representative values the query planner can use when constructing filters. */
+  filters?: SearchIndexKnowledgeSourceFilterHint[];
+
+  /** Boost hints that identify conditions the query planner can use to influence document ranking. */
+  boosts?: SearchIndexKnowledgeSourceBoost[];
+}
+
+/** A hint that identifies a field and representative values the query planner can use when constructing a filter. */
+@added(Versions.v2026_08_01_preview)
+model SearchIndexKnowledgeSourceFilterHint {
+  /** The name of the filterable search index field. */
+  @minLength(1)
+  field: string;
+
+  /** Representative values for the field. */
+  @minItems(1)
+  fieldValues: string[];
+
+  /** Natural-language instructions that explain when and how to filter on the field. */
+  filterInstructions?: string;
+}
+
+/** A hint that identifies a condition the query planner can use to influence document ranking. */
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "The boost kind is extensible."
+@discriminator("kind")
+@added(Versions.v2026_08_01_preview)
+model SearchIndexKnowledgeSourceBoost {
+  /** The kind of boost hint. */
+  kind: SearchIndexKnowledgeSourceBoostKind;
+
+  /** Natural-language instructions that explain when and how to apply the boost. */
+  boostInstructions?: string;
+}
+
+/** The kind of boost hint for a search index knowledge source. */
+@added(Versions.v2026_08_01_preview)
+union SearchIndexKnowledgeSourceBoostKind {
+  string,
+
+  /** Boost documents based on a field value. */
+  FieldValue: "fieldValue",
+}
+
+/** A hint that boosts documents based on a field value. */
+@added(Versions.v2026_08_01_preview)
+model SearchIndexKnowledgeSourceFieldValueBoost
+  extends SearchIndexKnowledgeSourceBoost {
+  /** The discriminator value. */
+  kind: SearchIndexKnowledgeSourceBoostKind.FieldValue;
+
+  /** The name of the search index field. */
+  @minLength(1)
+  field: string;
+
+  /** Representative values for the field. */
+  @minItems(1)
+  fieldValues: string[];
+
+  /** A multiplier for the document score. Must be a positive number not equal to 1.0. */
+  boost: float64;
 }
 
 /** Field reference for a search index. */
@@ -4864,6 +4975,10 @@ model AzureBlobKnowledgeSourceParameters {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   ingestionParameters?: KnowledgeSourceIngestionParameters | null;
 
+  /** Default hints that guide query planning toward useful filters and boosts for this index-backed knowledge source. Request-time query hints replace these defaults as a complete object. */
+  @added(Versions.v2026_08_01_preview)
+  queryHints?: SearchIndexKnowledgeSourceQueryHints;
+
   /** Resources created by the knowledge source. */
   @visibility(Lifecycle.Read)
   createdResources?: CreatedResources;
@@ -4897,6 +5012,10 @@ model IndexedSharePointKnowledgeSourceParameters {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   ingestionParameters?: KnowledgeSourceIngestionParameters | null;
 
+  /** Default hints that guide query planning toward useful filters and boosts for this index-backed knowledge source. Request-time query hints replace these defaults as a complete object. */
+  @added(Versions.v2026_08_01_preview)
+  queryHints?: SearchIndexKnowledgeSourceQueryHints;
+
   /** Resources created by the knowledge source. */
   @visibility(Lifecycle.Read)
   createdResources?: CreatedResources;
@@ -4924,6 +5043,10 @@ model IndexedOneLakeKnowledgeSourceParameters {
 
   /** Consolidates all general ingestion settings. */
   ingestionParameters?: KnowledgeSourceIngestionParameters;
+
+  /** Default hints that guide query planning toward useful filters and boosts for this index-backed knowledge source. Request-time query hints replace these defaults as a complete object. */
+  @added(Versions.v2026_08_01_preview)
+  queryHints?: SearchIndexKnowledgeSourceQueryHints;
 
   /** Resources created by the knowledge source. */
   @visibility(Lifecycle.Read)
@@ -4960,6 +5083,10 @@ model IndexedSqlKnowledgeSourceParameters {
 
   /** Consolidates all general ingestion settings including embedding model, schedule, and identity. */
   ingestionParameters?: KnowledgeSourceIngestionParameters;
+
+  /** Default hints that guide query planning toward useful filters and boosts for this index-backed knowledge source. Request-time query hints replace these defaults as a complete object. */
+  @added(Versions.v2026_08_01_preview)
+  queryHints?: SearchIndexKnowledgeSourceQueryHints;
 
   /** Resources created by the knowledge source. */
   @visibility(Lifecycle.Read)
@@ -5008,6 +5135,10 @@ model FileKnowledgeSource extends KnowledgeSource {
 model FileKnowledgeSourceParameters {
   /** Consolidates all general ingestion settings for the File knowledge source, including the content extraction mode and an optional embeddingModel. */
   ingestionParameters?: KnowledgeSourceIngestionParameters;
+
+  /** Default hints that guide query planning toward useful filters and boosts for this index-backed knowledge source. Request-time query hints replace these defaults as a complete object. */
+  @added(Versions.v2026_08_01_preview)
+  queryHints?: SearchIndexKnowledgeSourceQueryHints;
 
   /** Resources created by the file knowledge source. */
   @visibility(Lifecycle.Read)
@@ -5095,6 +5226,13 @@ model ListKnowledgeSourceFilesResult {
   /** The list of files. */
   @pageItems
   value: KnowledgeSourceFile[];
+
+  /** The URL that can be used to fetch the next set of results. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @visibility(Lifecycle.Read)
+  @nextLink
+  @added(Versions.v2026_08_01_preview)
+  `@odata.nextLink`?: string;
 }
 
 /** Knowledge Source targeting web results. */
@@ -5298,7 +5436,12 @@ model McpServerTool {
   outputParsing?: McpServerOutputParsing;
 
   /** Controls how the parsed results from this tool are integrated into the final result set. Defaults to 'reranked' when not specified. */
+  @removed(Versions.v2026_08_01_preview)
   inclusionMode?: McpServerToolInclusionMode;
+
+  /** Controls whether the parsed results from this tool are reranked. Defaults to 'rerank' when not specified. */
+  @added(Versions.v2026_08_01_preview)
+  resultsProcessing?: KnowledgeSourceResultsProcessing;
 
   /** Optional post-parsing token cap for this tool's output. Must be greater than 0 when specified. */
   maxOutputTokens?: int32;
@@ -5306,6 +5449,7 @@ model McpServerTool {
 
 /** Controls how parsed MCP tool results are integrated into the final result set. */
 @added(Versions.v2026_05_01_preview)
+@removed(Versions.v2026_08_01_preview)
 union McpServerToolInclusionMode {
   string,
 
@@ -5446,28 +5590,18 @@ model FabricOntologyKnowledgeSourceParameters {
   ontologyId: string;
 }
 
-/** Configuration for a Fabric / Power BI semantic model knowledge source. */
-@added(Versions.v2026_08_01_preview)
-model FabricSemanticModelKnowledgeSource extends KnowledgeSource {
-  /** The discriminator value. */
-  kind: KnowledgeSourceKind.FabricSemanticModel;
-
-  /** The parameters for the Fabric semantic model knowledge source. */
-  fabricSemanticModelParameters: FabricSemanticModelKnowledgeSourceParameters;
-}
-
-/** Parameters for a Fabric / Power BI semantic model knowledge source. */
-@added(Versions.v2026_08_01_preview)
-model FabricSemanticModelKnowledgeSourceParameters {
-  /** The Fabric artifact ID of the Power BI semantic model or report to ground answers on. */
-  artifactId: string;
-}
-
 /** Result from listing knowledge sources. */
 model ListKnowledgeSourcesResult {
   /** The knowledge sources in the service. */
   @pageItems
   value: KnowledgeSource[];
+
+  /** The URL that can be used to fetch the next set of results. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @visibility(Lifecycle.Read)
+  @nextLink
+  @added(Versions.v2026_08_01_preview)
+  `@odata.nextLink`?: string;
 }
 
 /** Resources created by the knowledge source. Keys represent resource types (e.g., 'datasource', 'indexer', 'skillset', 'index') and values represent resource names. */
@@ -6655,7 +6789,6 @@ model AIServicesAccountKey extends CognitiveServicesAccount {
   key: string;
 
   /** The subdomain/Azure AI Services endpoint url for the corresponding AI Service. */
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   subdomainUrl: string;
 
   /** A URI fragment specifying the type of Azure AI service resource attached to a skillset. */
@@ -6671,7 +6804,6 @@ model AIServicesAccountIdentity extends CognitiveServicesAccount {
   identity?: SearchIndexerDataIdentity | null;
 
   /** The subdomain/Azure AI Services endpoint url for the corresponding AI Service. */
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   subdomainUrl: string;
 
   /** A URI fragment specifying the type of Azure AI service resource attached to a skillset. */
