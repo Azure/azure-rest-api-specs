@@ -39,3 +39,12 @@ These settings apply only when `--tag=package-2026-10-01-preview` is specified o
 input-file:
   - preview/2026-10-01-preview/deploymentExtensionRuntimes.json
 ```
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: OperationsAPIImplementation
+    from: deploymentExtensionRuntimes.json
+    reason: Operations API is implemented as a separate service.
+```

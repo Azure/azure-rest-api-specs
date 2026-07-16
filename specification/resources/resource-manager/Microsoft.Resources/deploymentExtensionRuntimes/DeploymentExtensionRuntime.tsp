@@ -21,9 +21,17 @@ model DeploymentExtensionRuntime
     SegmentName = "deploymentExtensionRuntimes",
     NamePattern = "^[a-z][a-z0-9-]{0,26}[a-z0-9]$"
   >;
-
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
+
+// The runtime's managed identity is immutable after creation: it is set at
+// create time and cannot be changed by a subsequent update. Marking it
+// create + read emits `x-ms-mutability: ["create", "read"]`.
+@@visibility(
+  DeploymentExtensionRuntime.identity,
+  Lifecycle.Create,
+  Lifecycle.Read
+);
 
 @armResourceOperations
 interface DeploymentExtensionRuntimes {

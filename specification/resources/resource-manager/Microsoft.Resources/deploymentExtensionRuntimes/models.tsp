@@ -103,7 +103,7 @@ model ContainerAppsConfig extends RuntimeConfig {
 
   /**
    * OCI artifact reference for the extension binary, for example
-   * `myregistry.azurecr.io/extensions/github:1.0`.
+   * `registry.azurecr.io/extensions/github:1.0`.
    */
   @pattern("^[a-z0-9]+([._-][a-z0-9]+)*(/[a-z0-9]+([._-][a-z0-9]+)*)*:[a-zA-Z0-9._-]+$")
   artifactUri: string;

@@ -400,7 +400,7 @@
       "properties": {
         "artifactUri": {
           "type": "string",
-          "description": "OCI artifact reference for the extension binary, for example\n`myregistry.azurecr.io/extensions/github:1.0`.",
+          "description": "OCI artifact reference for the extension binary, for example\n`registry.azurecr.io/extensions/github:1.0`.",
           "pattern": "^[a-z0-9]+([._-][a-z0-9]+)*(/[a-z0-9]+([._-][a-z0-9]+)*)*:[a-zA-Z0-9._-]+$"
         },
         "audienceAppId": {
@@ -488,7 +488,11 @@
         },
         "identity": {
           "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
+          "description": "The managed service identities assigned to this resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -619,7 +623,8 @@
             "description": "The runtime is being deleted."
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "RuntimeConfig": {
       "type": "object",
