@@ -144,9 +144,11 @@ namespace Microsoft.EventGrid.SystemEvents {
     requestId?: string;
 
     /** The path to the blob that was renamed. */
+    #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
     sourceUrl?: string;
 
     /** The new path to the blob after the rename operation. */
+    #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
     destinationUrl?: string;
 
     /** An opaque string value representing the logical sequence of events for any particular blob name. Users can use standard string comparison to understand the relative sequence of two events on the same blob name. */
@@ -167,9 +169,11 @@ namespace Microsoft.EventGrid.SystemEvents {
     requestId?: string;
 
     /** The path to the directory that was renamed. */
+    #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
     sourceUrl?: string;
 
     /** The new path to the directory after the rename operation. */
+    #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
     destinationUrl?: string;
 
     /** An opaque string value representing the logical sequence of events for any particular directory name. Users can use standard string comparison to understand the relative sequence of two events on the same directory name. */
@@ -303,6 +307,7 @@ namespace Microsoft.EventGrid.SystemEvents {
     policyRunId?: string;
 
     /** The blob URL for manifest file for inventory run. */
+    #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
     manifestBlobUrl?: string;
   }
 
