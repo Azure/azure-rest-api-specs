@@ -17,11 +17,10 @@ namespace Microsoft.Storage;
  */
 @parentResource(ContextCache)
 @added(Versions.v2026_06_01)
-model ContextCacheContainer
-  is Azure.ResourceManager.ProxyResource<
-    ContextCacheContainerProperties,
-    false
-  > {
+model ContextCacheContainer is Azure.ResourceManager.ProxyResource<
+  ContextCacheContainerProperties,
+  false
+> {
   /**
    * The name of the context cache container
    */

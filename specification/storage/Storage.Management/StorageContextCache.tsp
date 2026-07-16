@@ -15,8 +15,10 @@ namespace Microsoft.Storage;
  * A Context Cache resource
  */
 @added(Versions.v2026_06_01)
-model ContextCache
-  is Azure.ResourceManager.TrackedResource<ContextCacheProperties, false> {
+model ContextCache is Azure.ResourceManager.TrackedResource<
+  ContextCacheProperties,
+  false
+> {
   /**
    * The name of the context cache
    */
