@@ -448,6 +448,12 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
   "python,javascript,csharp,go"
 );
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This is for legacy compatibility"
+@@Legacy.disablePageable(
+  Storage.File.File.listAllRanges,
+  "python,javascript,csharp,go"
+);
+
 @@alternateType(Storage.File.FileProperty.creationTime, string, "python");
 @@alternateType(Storage.File.FileProperty.lastWriteTime, string, "python");
 @@alternateType(Storage.File.FileProperty.changeTime, string, "python");

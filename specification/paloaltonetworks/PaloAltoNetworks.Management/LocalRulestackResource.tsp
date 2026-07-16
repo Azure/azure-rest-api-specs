@@ -13,8 +13,10 @@ namespace PaloAltoNetworks.Cloudngfw;
 /**
  * PaloAltoNetworks LocalRulestack
  */
-model LocalRulestackResource
-  is Azure.ResourceManager.TrackedResource<RulestackProperties, false> {
+model LocalRulestackResource is Azure.ResourceManager.TrackedResource<
+  RulestackProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = LocalRulestackResource,
     KeyName = "localRulestackName",
