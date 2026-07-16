@@ -336,6 +336,15 @@ model PermissionError {
    */
   @visibility(Lifecycle.Read)
   identity?: EntraIdentity;
+
+  /**
+   * The error message describing the permission validation failure, when the
+   * failure carries a distinct message (for example, when the target could not
+   * be read to evaluate access).
+   */
+  @added(Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  errorMessage?: string;
 }
 
 /**
