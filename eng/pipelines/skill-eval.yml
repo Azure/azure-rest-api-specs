@@ -1,6 +1,6 @@
 # Vally eval CI for .github/skills, using the eval framework synced from azure-sdk-tools under
-# eng/common. Cross-repo MCP build wiring lives in
-# /eng/pipelines/templates/stages/cross-repo-eval-entrypoint.yml, extended below.
+# eng/common. Extends archetype-eval.yml directly; mcpSetupTemplate points at this repo's own
+# /eng/pipelines/templates/steps/eval-mcp-setup.yml (the MCP build swap point).
 #
 # Single CI mechanism for .github/skills: runs on every PR touching it (mock MCP tier) and
 # nightly on main to catch drift unrelated to a code change.
@@ -31,8 +31,10 @@ variables:
   - group: AzSDK_Eval_Variable_group
 
 extends:
-  template: /eng/pipelines/templates/stages/cross-repo-eval-entrypoint.yml
+  template: /eng/common/pipelines/templates/stages/archetype-eval.yml
   parameters:
+    mcpSetupTemplate: /eng/pipelines/templates/steps/eval-mcp-setup.yml
+    TestType: mock
     vallyRoot: .github/skills
     # All rooted at .github/skills, so one Prepare/Eval/Summary run covers every suite
     # (collect-stimuli.ts shards by `area` tag, falling back to parent folder name):
@@ -41,7 +43,6 @@ extends:
     #   - 'evals/arm-api-reviewer/vally/eval-*.yaml' — ARM API Reviewer suite (own nested
     #     .vally.yaml/fixtures, no MCP server needed; folded in here instead of a second
     #     pipeline since eval-shard.yml only supports one Prepare stage per pipeline).
-    # Not covered yet (no eval files): azure-api-review, openai-typespec-update.
     evalGlobs:
       - '*/evals/*.eval.yaml'
       - '*/evals/eval.yaml'
