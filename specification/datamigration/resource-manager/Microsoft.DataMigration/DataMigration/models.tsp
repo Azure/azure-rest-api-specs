@@ -7151,6 +7151,7 @@ model MigrationReportResult {
   /**
    * The url of the report.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   reportUrl?: string;
 }
 

@@ -1,8 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { createMockContext, createMockCore, createMockGithub } from "../mocks.js";
 
-// cspell:words jsquire xirzec
-
 vi.mock("fs/promises", () => ({
   readFile: vi.fn(),
 }));
@@ -17,12 +15,13 @@ import validateApproval from "../../src/namespace-approval/validate-approval.js"
 /** @type {import("../../src/namespace-approval/approvers.js").ApproversConfig} */
 const approversConfig = {
   "data-plane": {
-    dotnet: ["jsquire", "m-nash"],
-    java: ["JonathanGiles"],
-    python: ["xirzec"],
+    global: ["global-admin1", "global-admin2"],
+    dotnet: ["approver2", "approver4"],
+    java: ["approver1"],
+    python: ["approver3"],
   },
   "management-plane": {
-    all: ["ArthurMa1978", "m-nash"],
+    all: ["approver3", "approver4"],
   },
 };
 
@@ -90,7 +89,7 @@ describe("validate-approval", () => {
       context.payload = createPRLabeledPayload({
         action: "labeled",
         labelName: "namespace-java-approved",
-        actor: "JonathanGiles",
+        actor: "approver1",
         labels: ["namespace-java-pending"],
       });
 
@@ -119,7 +118,7 @@ describe("validate-approval", () => {
       context.payload = createPRLabeledPayload({
         action: "labeled",
         labelName: "namespace-java-approved",
-        actor: "JonathanGiles",
+        actor: "approver1",
         labels: ["namespace-review-required", "namespace-java-pending"],
       });
 
@@ -156,11 +155,33 @@ describe("validate-approval", () => {
       expect(commentBody).toContain("not authorized");
     });
 
+    it("should allow global approver to approve any language", async () => {
+      context.payload = createPRLabeledPayload({
+        action: "labeled",
+        labelName: "namespace-java-approved",
+        actor: "global-admin1",
+        labels: ["namespace-review-required", "namespace-java-pending"],
+      });
+
+      github.rest.pulls.get.mockResolvedValue({
+        data: { labels: [{ name: "namespace-review-required" }] },
+      });
+      /** @type {any} */ (github.rest.issues).listComments = vi
+        .fn()
+        .mockResolvedValue({ data: [] });
+
+      await validateApproval(args());
+
+      expect(github.rest.issues.removeLabel).toHaveBeenCalledWith(
+        expect.objectContaining({ name: "namespace-java-pending" }),
+      );
+    });
+
     it("should allow mgmt-plane approver for mgmt PR", async () => {
       context.payload = createPRLabeledPayload({
         action: "labeled",
         labelName: "namespace-dotnet-approved",
-        actor: "ArthurMa1978",
+        actor: "approver3",
         labels: ["namespace-review-required", "namespace-dotnet-pending"],
         isMgmt: true,
       });
@@ -185,7 +206,7 @@ describe("validate-approval", () => {
       context.payload = createPRLabeledPayload({
         action: "labeled",
         labelName: "namespace-approved-all",
-        actor: "ArthurMa1978",
+        actor: "approver3",
         labels: ["namespace-review-required", "namespace-dotnet-pending", "namespace-java-pending"],
       });
 
@@ -269,7 +290,7 @@ describe("validate-approval", () => {
       context.payload = createPRLabeledPayload({
         action: "unlabeled",
         labelName: "namespace-dotnet-pending",
-        actor: "jsquire",
+        actor: "approver2",
         labels: ["namespace-review-required"],
       });
 

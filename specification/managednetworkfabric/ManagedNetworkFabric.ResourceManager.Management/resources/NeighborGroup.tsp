@@ -7,8 +7,10 @@ using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
 @doc("Defines the Neighbor Group.")
-model NeighborGroup
-  is Azure.ResourceManager.TrackedResource<NeighborGroupProperties, false> {
+model NeighborGroup is Azure.ResourceManager.TrackedResource<
+  NeighborGroupProperties,
+  false
+> {
   @doc("Name of the Neighbor Group.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
