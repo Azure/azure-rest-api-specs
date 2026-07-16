@@ -12406,6 +12406,11 @@
           "description": "The virtual machine configuration for the Pool. This property must be specified.",
           "readOnly": true
         },
+        "vmSkuProfile": {
+          "$ref": "#/definitions/VirtualMachineSkuProfile",
+          "description": "Specifies the profile of VM sizes and the allocation strategy used to allocate Compute Nodes for an Instance Mix Pool. When specified, vmSize must be 'Mix'. This property can only be changed while the Pool has no Compute Nodes.",
+          "readOnly": true
+        },
         "resizeTimeout": {
           "type": "string",
           "format": "duration",
@@ -12570,6 +12575,10 @@
         "virtualMachineConfiguration": {
           "$ref": "#/definitions/VirtualMachineConfiguration",
           "description": "The virtual machine configuration for the Pool. This property must be specified."
+        },
+        "vmSkuProfile": {
+          "$ref": "#/definitions/VirtualMachineSkuProfile",
+          "description": "Specifies the profile of VM sizes and the allocation strategy used to allocate Compute Nodes for an Instance Mix Pool. When specified, vmSize must be 'Mix'. This property can only be changed while the Pool has no Compute Nodes."
         },
         "resizeTimeout": {
           "type": "string",
@@ -13057,6 +13066,10 @@
           "$ref": "#/definitions/VirtualMachineConfiguration",
           "description": "The virtual machine configuration for the Pool. This property must be specified."
         },
+        "vmSkuProfile": {
+          "$ref": "#/definitions/VirtualMachineSkuProfile",
+          "description": "Specifies the profile of VM sizes and the allocation strategy used to allocate Compute Nodes for an Instance Mix Pool. When specified, vmSize must be 'Mix'. This property can only be changed while the Pool has no Compute Nodes."
+        },
         "taskSlotsPerNode": {
           "type": "integer",
           "format": "int32",
@@ -13158,6 +13171,10 @@
         "virtualMachineConfiguration": {
           "$ref": "#/definitions/VirtualMachineConfigurationUpdate",
           "description": "The virtual machine configuration for the Pool. This property must be specified."
+        },
+        "vmSkuProfile": {
+          "$ref": "#/definitions/VirtualMachineSkuProfileUpdate",
+          "description": "Specifies the profile of VM sizes and the allocation strategy used to allocate Compute Nodes for an Instance Mix Pool. When specified, vmSize must be 'Mix'. This property can only be changed while the Pool has no Compute Nodes."
         },
         "taskSlotsPerNode": {
           "type": "integer",
@@ -13334,6 +13351,10 @@
         "virtualMachineConfiguration": {
           "$ref": "#/definitions/VirtualMachineConfigurationUpdate",
           "description": "The virtual machine configuration for the Pool. This property must be specified.<br /><br />This field can be updated only when the pool is empty."
+        },
+        "vmSkuProfile": {
+          "$ref": "#/definitions/VirtualMachineSkuProfileUpdate",
+          "description": "Specifies the profile of VM sizes and the allocation strategy used to allocate Compute Nodes for an Instance Mix Pool. When specified, vmSize must be 'Mix'.<br /><br />This field can be updated only when the pool is empty."
         },
         "taskSlotsPerNode": {
           "type": "integer",
@@ -16683,6 +16704,95 @@
           "description": "The resource ID of the Compute Node's current Virtual Machine Scale Set VM. Only defined if the Batch Account was created with its poolAllocationMode property set to 'UserSubscription'."
         }
       }
+    },
+    "VirtualMachineSkuAllocationStrategy": {
+      "type": "string",
+      "description": "Specifies the allocation strategy that the Fungible Compute Platform uses to select VM sizes from the vmSkuProfile when allocating Compute Nodes for an Instance Mix Pool.",
+      "enum": [
+        "lowestPrice",
+        "capacityOptimized",
+        "prioritized"
+      ],
+      "x-ms-enum": {
+        "name": "VirtualMachineSkuAllocationStrategy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "LowestPrice",
+            "value": "lowestPrice",
+            "description": "Select the cheapest available SKU in the region. This is the default strategy."
+          },
+          {
+            "name": "CapacityOptimized",
+            "value": "capacityOptimized",
+            "description": "Select the SKU with the most regional physical capacity."
+          },
+          {
+            "name": "Prioritized",
+            "value": "prioritized",
+            "description": "Follow the customer-defined ranking via the 0-based rank, falling back to the next rank when a preferred SKU is unavailable."
+          }
+        ]
+      }
+    },
+    "VirtualMachineSkuProfile": {
+      "type": "object",
+      "description": "Specifies the set of VM sizes and the allocation strategy used to allocate Compute Nodes for an Instance Mix Pool.",
+      "properties": {
+        "vmSizes": {
+          "type": "array",
+          "description": "The list of VM sizes (1 to 5) that may be allocated for the Pool. All sizes must share the same vCPU count and VM family.",
+          "minItems": 1,
+          "maxItems": 5,
+          "items": {
+            "$ref": "#/definitions/VirtualMachineSkuProfileVmSize"
+          }
+        },
+        "allocationStrategy": {
+          "$ref": "#/definitions/VirtualMachineSkuAllocationStrategy",
+          "description": "The allocation strategy used to select VM sizes from vmSizes. Defaults to lowestPrice when not specified."
+        }
+      },
+      "required": [
+        "vmSizes"
+      ]
+    },
+    "VirtualMachineSkuProfileUpdate": {
+      "type": "object",
+      "description": "Specifies the set of VM sizes and the allocation strategy used to allocate Compute Nodes for an Instance Mix Pool.",
+      "properties": {
+        "vmSizes": {
+          "type": "array",
+          "description": "The list of VM sizes (1 to 5) that may be allocated for the Pool. All sizes must share the same vCPU count and VM family.",
+          "minItems": 1,
+          "maxItems": 5,
+          "items": {
+            "$ref": "#/definitions/VirtualMachineSkuProfileVmSize"
+          }
+        },
+        "allocationStrategy": {
+          "$ref": "#/definitions/VirtualMachineSkuAllocationStrategy",
+          "description": "The allocation strategy used to select VM sizes from vmSizes. Defaults to lowestPrice when not specified."
+        }
+      }
+    },
+    "VirtualMachineSkuProfileVmSize": {
+      "type": "object",
+      "description": "Specifies a single VM size that may be allocated for an Instance Mix Pool.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the VM size (for example, 'Standard_D8s_v5')."
+        },
+        "rank": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The 0-based rank (a.k.a. priority) associated with this VM size. Lower values indicate higher priority. Rank is required only when the allocation strategy is 'prioritized' and must be omitted otherwise."
+        }
+      },
+      "required": [
+        "name"
+      ]
     },
     "WindowsConfiguration": {
       "type": "object",

@@ -1814,6 +1814,10 @@ model BatchPoolSpecification {
   @doc("The virtual machine configuration for the Pool. This property must be specified.")
   virtualMachineConfiguration?: VirtualMachineConfiguration;
 
+  @doc("Specifies the profile of VM sizes and the allocation strategy used to allocate Compute Nodes for an Instance Mix Pool. When specified, vmSize must be 'Mix'. This property can only be changed while the Pool has no Compute Nodes.")
+  @added(Versions.v2026_08_01)
+  vmSkuProfile?: VirtualMachineSkuProfile;
+
   @doc("The number of task slots that can be used to run concurrent tasks on a single compute node in the pool. The default value is 1. The maximum value is the smaller of 4 times the number of cores of the vmSize of the pool or 256.")
   taskSlotsPerNode?: int32;
 
@@ -1916,6 +1920,43 @@ model VirtualMachineConfiguration {
 
   @doc("Specifies the service artifact reference id used to set same image version for all virtual machines in the scale set when using 'latest' image version. The service artifact reference id in the form of /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/galleries/{galleryName}/serviceArtifacts/{serviceArtifactName}/vmArtifactsProfiles/{vmArtifactsProfilesName}")
   serviceArtifactReference?: ServiceArtifactReference;
+}
+
+@added(Versions.v2026_08_01)
+@doc("Specifies the set of VM sizes and the allocation strategy used to allocate Compute Nodes for an Instance Mix Pool.")
+model VirtualMachineSkuProfile {
+  @doc("The list of VM sizes (1 to 5) that may be allocated for the Pool. All sizes must share the same vCPU count and VM family.")
+  @minItems(1)
+  @maxItems(5)
+  vmSizes: VirtualMachineSkuProfileVmSize[];
+
+  @doc("The allocation strategy used to select VM sizes from vmSizes. Defaults to lowestPrice when not specified.")
+  allocationStrategy?: VirtualMachineSkuAllocationStrategy;
+}
+
+@added(Versions.v2026_08_01)
+@doc("Specifies a single VM size that may be allocated for an Instance Mix Pool.")
+model VirtualMachineSkuProfileVmSize {
+  @doc("The name of the VM size (for example, 'Standard_D8s_v5').")
+  name: string;
+
+  @doc("The 0-based rank (a.k.a. priority) associated with this VM size. Lower values indicate higher priority. Rank is required only when the allocation strategy is 'prioritized' and must be omitted otherwise.")
+  rank?: int32;
+}
+
+@added(Versions.v2026_08_01)
+@doc("Specifies the allocation strategy that the Fungible Compute Platform uses to select VM sizes from the vmSkuProfile when allocating Compute Nodes for an Instance Mix Pool.")
+union VirtualMachineSkuAllocationStrategy {
+  string,
+
+  @doc("Select the cheapest available SKU in the region. This is the default strategy.")
+  LowestPrice: "lowestPrice",
+
+  @doc("Select the SKU with the most regional physical capacity.")
+  CapacityOptimized: "capacityOptimized",
+
+  @doc("Follow the customer-defined ranking via the 0-based rank, falling back to the next rank when a preferred SKU is unavailable.")
+  Prioritized: "prioritized",
 }
 
 @doc("Windows operating system settings to apply to the virtual machine.")
@@ -2939,6 +2980,11 @@ model BatchPool {
   @visibility(Lifecycle.Read)
   virtualMachineConfiguration?: VirtualMachineConfiguration;
 
+  @doc("Specifies the profile of VM sizes and the allocation strategy used to allocate Compute Nodes for an Instance Mix Pool. When specified, vmSize must be 'Mix'. This property can only be changed while the Pool has no Compute Nodes.")
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_08_01)
+  vmSkuProfile?: VirtualMachineSkuProfile;
+
   @doc("The timeout for allocation of Compute Nodes to the Pool. This is the timeout for the most recent resize operation. (The initial sizing when the Pool is created counts as a resize.) The default value is 15 minutes. The time duration is specified in ISO 8601 format.")
   @visibility(Lifecycle.Read)
   resizeTimeout?: duration;
@@ -3041,6 +3087,10 @@ model BatchPoolCreateOptions {
   @doc("The virtual machine configuration for the Pool. This property must be specified.")
   virtualMachineConfiguration?: VirtualMachineConfiguration;
 
+  @doc("Specifies the profile of VM sizes and the allocation strategy used to allocate Compute Nodes for an Instance Mix Pool. When specified, vmSize must be 'Mix'. This property can only be changed while the Pool has no Compute Nodes.")
+  @added(Versions.v2026_08_01)
+  vmSkuProfile?: VirtualMachineSkuProfile;
+
   @doc("The timeout for allocation of Compute Nodes to the Pool. This timeout applies only to manual scaling; it has no effect when enableAutoScale is set to true. The default value is 15 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service returns an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request). The time duration is specified in ISO 8601 format.")
   resizeTimeout?: duration;
 
@@ -3124,6 +3174,10 @@ model BatchPoolUpdateOptions {
 
   @doc("The virtual machine configuration for the Pool. This property must be specified.<br /><br />This field can be updated only when the pool is empty.")
   virtualMachineConfiguration?: VirtualMachineConfiguration;
+
+  @doc("Specifies the profile of VM sizes and the allocation strategy used to allocate Compute Nodes for an Instance Mix Pool. When specified, vmSize must be 'Mix'.<br /><br />This field can be updated only when the pool is empty.")
+  @added(Versions.v2026_08_01)
+  vmSkuProfile?: VirtualMachineSkuProfile;
 
   @doc("The number of task slots that can be used to run concurrent tasks on a single compute node in the pool. The default value is 1. The maximum value is the smaller of 4 times the number of cores of the vmSize of the pool or 256.<br /><br />This field can be updated only when the pool is empty.")
   taskSlotsPerNode?: int32;
