@@ -27,7 +27,7 @@ model DeletedServer
   /**
    * Resource location.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "location represents the geographic location of the original server, not an ARM envelope location"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "location is intentionally placed at the ARM resource envelope level to match the actual API wire format, where it represents the geographic location of the original server"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "DeletedServer has no create operation; x-ms-mutability must be read-only to satisfy LocationMustHaveXmsMutability without implying a create path"
   @added(Versions.v2025_08_01_preview)
   @visibility(Lifecycle.Read)
