@@ -19,7 +19,7 @@ scoring:
 
 stimuli:
   - name: trigger-review-arm-spec-naming
-    prompt: "Review this ARM resource-manager OpenAPI spec for naming and casing violations."
+    prompt: "What naming and casing rules should I check when reviewing an ARM resource-manager OpenAPI spec?"
     environment:
       skills:
         - ..
@@ -28,7 +28,7 @@ stimuli:
         config:
           required: ["azure-api-review"]
   - name: trigger-check-provisioning-state-compliance
-    prompt: "Check this TypeSpec model for provisioningState compliance."
+    prompt: "What are the provisioningState requirements for ARM resources so I can check a TypeSpec model for compliance?"
     environment:
       skills:
         - ..
@@ -46,7 +46,7 @@ stimuli:
         config:
           required: ["azure-api-review"]
   - name: trigger-property-write-only-violation
-    prompt: "Does this property violate write-only or immutability rules for ARM resources?"
+    prompt: "What write-only and immutability rules apply to ARM resource properties?"
     environment:
       skills:
         - ..

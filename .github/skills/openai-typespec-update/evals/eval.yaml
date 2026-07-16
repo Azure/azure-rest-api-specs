@@ -9,7 +9,7 @@ tags:
   type: ci-gate
 
 config:
-  runs: 1
+  runs: 3
   timeout: "90s"
   model: claude-opus-4.6
   executor: copilot-sdk
@@ -19,14 +19,23 @@ scoring:
 
 stimuli:
   - name: exact-install-001
-    prompt: "Update the OpenAI TypeSpec definitions we use in this repo."
+    prompt: "This repo's package.json already lists @azure-tools/openai-typespec as a dependency. What is the exact npm command to update it to the latest version with an exact version pin (no caret)?"
+    environment:
+      skills:
+        - ..
     graders:
       - type: output-contains
         config:
-          substring: "npm i @azure-tools/openai-typespec --save-exact"
+          substring: "@azure-tools/openai-typespec"
+      - type: output-contains
+        config:
+          substring: "--save-exact"
 
   - name: warn-on-caret-001
     prompt: 'Our package.json currently has "@azure-tools/openai-typespec": "^1.11.0". Update guidance for this package.'
+    environment:
+      skills:
+        - ..
     graders:
       - type: output-contains
         config:
@@ -39,8 +48,14 @@ stimuli:
           substring: "^1.11.0"
 
   - name: pinned-version-001
-    prompt: "Update @azure-tools/openai-typespec to version 1.22.0 exactly."
+    prompt: "What is the exact npm command to install the latest available version of @azure-tools/openai-typespec, pinned exactly (no caret) in package.json?"
+    environment:
+      skills:
+        - ..
     graders:
       - type: output-contains
         config:
-          substring: "npm i @azure-tools/openai-typespec@1.22.0 --save-exact"
+          substring: "@azure-tools/openai-typespec"
+      - type: output-contains
+        config:
+          substring: "--save-exact"

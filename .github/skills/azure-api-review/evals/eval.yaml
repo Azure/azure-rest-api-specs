@@ -20,6 +20,9 @@ scoring:
 stimuli:
   - name: secret-detection-001
     prompt: "What azure-api-review rule should I cite if an ARM resource property named 'connectionString' has no format or write-only annotation and could leak a credential?"
+    environment:
+      skills:
+        - ..
     graders:
       - type: output-contains
         config:
@@ -27,6 +30,9 @@ stimuli:
 
   - name: provisioning-state-001
     prompt: "I'm reviewing an ARM tracked resource and it has no provisioningState property. Which azure-api-review rule does this violate?"
+    environment:
+      skills:
+        - ..
     graders:
       - type: output-contains
         config:
@@ -37,6 +43,9 @@ stimuli:
 
   - name: naming-conventions-001
     prompt: "Which azure-api-review reference file documents Azure naming and casing conventions for REST API properties?"
+    environment:
+      skills:
+        - ..
     graders:
       - type: output-contains
         config:
@@ -44,6 +53,9 @@ stimuli:
 
   - name: property-mutability-001
     prompt: "A property is marked both readOnly and required in the request body schema of an ARM resource. Which azure-api-review rule IDs cover conditional read-only and update-tolerance violations?"
+    environment:
+      skills:
+        - ..
     graders:
       - type: output-matches
         config:
