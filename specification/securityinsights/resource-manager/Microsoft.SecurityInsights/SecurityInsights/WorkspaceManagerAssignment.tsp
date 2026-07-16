@@ -8,6 +8,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.SecurityInsights;
 /**
@@ -110,3 +111,6 @@ interface WorkspaceManagerAssignments {
   WorkspaceManagerAssignments.createOrUpdate::parameters.resource,
   "The workspace manager assignment"
 );
+
+@@added(WorkspaceManagerAssignment, Versions.v2025_10_01_preview);
+@@added(WorkspaceManagerAssignments, Versions.v2025_10_01_preview);
