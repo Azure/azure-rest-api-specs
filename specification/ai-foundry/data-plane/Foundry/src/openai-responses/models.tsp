@@ -93,7 +93,7 @@ namespace Azure.AI.Projects {
        * optional `memory_limit` setting.
        * If not provided, the service assumes auto.
        */
-      #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Copying existing union type."
+      #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Copying existing union type."
       container?: string | OpenAI.AutoCodeInterpreterToolParam,
     }
   );
@@ -187,7 +187,7 @@ namespace Azure.AI.Projects {
     {
       /** The information about the creator of the item */
       #suppress "@azure-tools/typespec-autorest/union-unsupported" "Temporary suppression to allow union type."
-      #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "This is required due to a conflict with the service."
+      #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "This is required due to a conflict with the service."
       @removed(Versions.v1)
       created_by?: CreatedBy | string,
 
@@ -230,7 +230,7 @@ namespace Azure.AI.Projects {
     @doc("ID of the previous action if this action follows another.")
     previous_action_id?: string;
 
-    #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
+    #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Auto-suppressed warnings non-applicable rules during import."
     @doc("Status of the action (e.g., 'in_progress', 'completed', 'failed', 'cancelled').")
     status: "completed" | "failed" | "in_progress" | "cancelled";
   }

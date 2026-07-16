@@ -2738,6 +2738,7 @@ alias BodyParameter = {
 /** The multipart body parameter. */
 alias MultipartBodyParameter = {
   /** The body of the request. */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Keeping inline model to avoid breaking changes."
   @multipartBody body: {
     body: HttpPart<bytes>;
   };

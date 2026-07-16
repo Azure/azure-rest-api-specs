@@ -1329,6 +1329,7 @@ model ScheduleEntityRequestResponse {
    * Trigger configuration defining execution timing and scheduling behavior
    */
   @doc("Trigger configuration for execution timing and scheduling")
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Keeping inline model to avoid breaking changes."
   trigger?: {
     /**
      * Trigger type classification (Manual, TimeBased, EventDriven)
@@ -1340,6 +1341,7 @@ model ScheduleEntityRequestResponse {
      * Type-specific configuration properties for trigger behavior
      */
     @doc("Type-specific trigger configuration properties")
+    #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Keeping inline model to avoid breaking changes."
     typeProperties: {
       /**
        * Time zone identifier for schedule evaluation (e.g., 'UTC', 'America/New_York')
@@ -1365,6 +1367,7 @@ model ScheduleEntityRequestResponse {
    * Execution scope defining the data products and assets targeted for quality scanning
    */
   @doc("Execution scope for data quality scanning")
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Keeping inline model to avoid breaking changes."
   scope?: {
     /**
      * Collection of data product and asset pairs that define the scanning boundary
@@ -1413,6 +1416,7 @@ model ScheduleEntityRequestResponse {
    * Reference to the parent business domain that governs this schedule
    */
   @doc("Reference to the governing business domain")
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Keeping inline model to avoid breaking changes."
   businessDomain?: {
     /**
      * Reference type classification for business domain
@@ -2423,6 +2427,7 @@ model DataSourceEntity {
    * Reference to the business domain that governs this data source.
    */
   @doc("Business domain governance reference for this data source.")
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Keeping inline model to avoid breaking changes."
   businessDomain?: {
     /**
      * Type classification for the business domain reference.
@@ -2475,6 +2480,7 @@ model DataSourceEntity {
    * Authentication credential information for accessing the data source.
    */
   @doc("Authentication credential configuration for data source access.")
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Keeping inline model to avoid breaking changes."
   credential?: {
     /**
      * Type of credential (e.g., ServicePrincipal, ManagedIdentity, UsernamePassword).
@@ -2499,6 +2505,7 @@ model DataSourceEntity {
    * Consolidated configuration properties covering all supported data source types.
    */
   @doc("Combined configuration properties for all supported data source platforms.")
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Keeping inline model to avoid breaking changes."
   typeProperties?: {
     // ---------- Azure SQL ----------
     @doc("Azure SQL server name (for AzureSqlDatabase).")
@@ -2856,6 +2863,7 @@ model ProfileEntity {
    * Type-specific configuration properties including location definitions and access parameters
    */
   @doc("Type-specific profiling configuration properties")
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Keeping inline model to avoid breaking changes."
   typeProperties: {
     /**
      * Collection of data location definitions specifying where profiling should be performed
@@ -2893,6 +2901,7 @@ model ProfileEntity {
    * Profiling configuration including key column definitions and analysis parameters
    */
   @doc("Profiling configuration with key columns and parameters")
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Keeping inline model to avoid breaking changes."
   configuration: {
     /**
      * Collection of key columns that serve as primary identifiers for profiling analysis

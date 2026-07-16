@@ -215,6 +215,7 @@ model ErrorResponse {
   /**
    * The error object.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Keeping inline model to avoid breaking changes."
   error?: {
     /**
      * Error code

@@ -151,6 +151,7 @@ op resourceSyncRulesUpdate(
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>,
 ):
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Keeping inline model to avoid breaking changes."
   | {
       statusCode: 200;
       body: Microsoft.ExtendedLocation.resourceSyncRule;

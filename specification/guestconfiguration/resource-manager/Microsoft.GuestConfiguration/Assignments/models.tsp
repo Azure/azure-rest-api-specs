@@ -16,6 +16,7 @@ namespace Microsoft.GuestConfiguration;
 @error
 model ErrorResponse {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Keeping inline model to avoid breaking changes."
   error?: {
     /**
      * Error code.

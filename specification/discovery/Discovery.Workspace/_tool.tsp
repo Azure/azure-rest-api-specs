@@ -319,6 +319,7 @@ model RunResult {
   createdBy?: string;
 
   @doc("Details provided by the tool (rather than the platform).")
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Keeping inline model to avoid breaking changes."
   toolReport?: {
     /** Percentage compete */
     percentageComplete: int32;

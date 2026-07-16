@@ -73,7 +73,7 @@ namespace Azure.AI.Projects {
     /**The status of the item. One of `in_progress`, `completed`, or
   `incomplete`. Populated when items are returned via API.*/
     #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Auto-suppressed warnings non-applicable rules during import."
-    #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
+    #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Auto-suppressed warnings non-applicable rules during import."
     status: "in_progress" | "completed" | "incomplete";
   }
 
@@ -95,7 +95,7 @@ namespace Azure.AI.Projects {
     /**The status of the item. One of `in_progress`, `completed`, or
   `incomplete`. Populated when items are returned via API.*/
     #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Auto-suppressed warnings non-applicable rules during import."
-    #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
+    #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Auto-suppressed warnings non-applicable rules during import."
     status: "in_progress" | "completed" | "incomplete";
   }
 

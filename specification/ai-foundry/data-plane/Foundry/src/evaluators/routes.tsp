@@ -7,7 +7,7 @@ namespace Azure.AI.Projects;
 alias EvaluatorsPreviewHeader = WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.evaluations_v1_preview>;
 
 alias ListEvaluatorVersionsParameters = {
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Auto-suppressed warnings non-applicable rules during import."
   @doc("Filter evaluators by type. Possible values: 'all', 'custom', 'builtin'.")
   @Http.query
   type?: EvaluatorType | "all";

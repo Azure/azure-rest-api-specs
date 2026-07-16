@@ -69,6 +69,7 @@ op AtlasImportOperation<
       TraitLocation.Parameters,
       TraitContext.Action
     >,
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Keeping inline model to avoid breaking changes."
   TResponse &
     TraitProperties<
       Traits &

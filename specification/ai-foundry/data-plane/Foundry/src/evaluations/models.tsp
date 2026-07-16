@@ -169,7 +169,7 @@ model AgentEvaluation {
 @discriminator("role")
 @removed(Versions.v1)
 model Message {
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Auto-suppressed warnings non-applicable rules during import."
   @doc("The role of the message author. Known values: 'system', 'assistant', 'developer', 'user'.")
   role: "system" | "assistant" | "developer" | "user" | string;
 }

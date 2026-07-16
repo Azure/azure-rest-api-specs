@@ -42,6 +42,7 @@ op listFiles(@query purpose?: FilePurpose): FileListResponse;
 @route("/files")
 op uploadFile(
   @header contentType: "multipart/form-data",
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Keeping inline model to avoid breaking changes."
   @multipartBody file: {
     /** The file data (not filename) to upload. */
     @clientName("Data", "csharp") file: HttpPart<bytes>;
