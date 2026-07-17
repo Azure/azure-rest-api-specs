@@ -26,7 +26,7 @@ These are the global settings for the EventHub API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2026-01
+tag: package-2026-07-preview
 ```
 
 ### Tag: package-2017-04
@@ -264,6 +264,15 @@ These settings apply only when `--tag=package-2026-01` is specified on the comma
 ``` yaml $(tag) == 'package-2026-01'
 input-file:
 - stable/2026-01-01/openapi.json
+```
+
+### Tag: package-2026-07-preview
+
+These settings apply only when `--tag=package-2026-07-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2026-07-preview'
+input-file:
+- preview/2026-07-01-preview/openapi.json
 ```
 
 ## Suppression
@@ -547,6 +556,5 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
-
 
 
