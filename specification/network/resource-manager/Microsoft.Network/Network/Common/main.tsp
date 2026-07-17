@@ -261,6 +261,12 @@ union LoadBalancerSkuName {
    * Gateway
    */
   Gateway: "Gateway",
+
+  /**
+   * Service
+   */
+  @added(Versions.v2025_09_01)
+  Service: "Service",
 }
 
 /**
@@ -4310,8 +4316,7 @@ union VirtualNetworkPeeringLevel {
   LocalAndRemoteNotInSync: "LocalAndRemoteNotInSync",
 }
 
-@@clientName(
-  Components1Jq1T4ISchemasManagedserviceidentityPropertiesUserassignedidentitiesAdditionalproperties,
+@@clientName(Components1Jq1T4ISchemasManagedserviceidentityPropertiesUserassignedidentitiesAdditionalproperties,
   "ManagedServiceIdentityUserAssignedIdentities",
   "!javascript"
 );
