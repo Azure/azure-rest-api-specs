@@ -12,7 +12,12 @@ options:
     emit-lro-options: "all"
     examples-dir: "{project-root}/examples"
     output-splitting: "legacy-feature-files"
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.Sql"
+    emitter-output-dir: "{output-dir}/sdk/sqlmanagement/{namespace}"
+    enable-wire-path-attribute: true
   "@azure-tools/typespec-java":
+    api-version: "2025-01-01"
     emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-sql"
     namespace: "com.azure.resourcemanager.sql"
     flavor: "azure"
@@ -52,3 +57,4 @@ options:
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"

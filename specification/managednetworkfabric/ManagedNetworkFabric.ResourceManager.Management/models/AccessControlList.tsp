@@ -10,6 +10,7 @@ model AccessControlListProperties {
   @doc("Input method to configure Access Control List.")
   configurationType: ConfigurationType;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("Access Control List file URL.")
   aclsUrl?: url;
 
@@ -241,6 +242,7 @@ model AccessControlListPatchProperties {
   @doc("Input method to configure Access Control List.")
   configurationType?: ConfigurationType;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("Access Control List file URL.")
   aclsUrl?: url;
 

@@ -174,7 +174,7 @@ using Microsoft.EventHub;
   "EventHubsNamespaceGeoDataReplicationProperties",
   "csharp"
 );
-@@clientName(GeoDRRoleType, "EventHubsNamespaceGeoDRRoleType", "csharp");
+@@clientName(GeoDRRoleType, "EventHubsNamespaceGeoDrRoleType", "csharp");
 @@alternateType(
   NamespaceReplicaLocation.clusterArmId,
   Azure.Core.armResourceIdentifier,
@@ -185,6 +185,11 @@ using Microsoft.EventHub;
 @@clientName(
   NamespaceReplicaLocation,
   "EventHubsNamespaceReplicaLocation",
+  "csharp"
+);
+@@clientName(
+  NetworkRuleSetListResult,
+  "EventHubsNetworkRuleSetListResult",
   "csharp"
 );
 @@clientName(ErrorDetail, "EventHubsErrorDetail", "csharp");
@@ -210,10 +215,26 @@ using Microsoft.EventHub;
 );
 
 @@clientName(TlsVersion, "EventHubsTlsVersion", "csharp");
-@@clientName(TlsVersion.`1.0`, "Tls1_0", "csharp");
-@@clientName(TlsVersion.`1.1`, "Tls1_1", "csharp");
-@@clientName(TlsVersion.`1.2`, "Tls1_2", "csharp");
-@@clientName(TlsVersion.`1.3`, "Tls1_3", "csharp");
+@@clientName(
+  TlsVersion.`1.0`,
+  Azure.ClientGenerator.Core.exact("Tls1_0"),
+  "csharp"
+);
+@@clientName(
+  TlsVersion.`1.1`,
+  Azure.ClientGenerator.Core.exact("Tls1_1"),
+  "csharp"
+);
+@@clientName(
+  TlsVersion.`1.2`,
+  Azure.ClientGenerator.Core.exact("Tls1_2"),
+  "csharp"
+);
+@@clientName(
+  TlsVersion.`1.3`,
+  Azure.ClientGenerator.Core.exact("Tls1_3"),
+  "csharp"
+);
 @@clientName(PublicNetworkAccess, "EventHubsPublicNetworkAccess", "csharp");
 @@clientName(
   ProvisioningIssueProperties,
@@ -385,6 +406,8 @@ using Microsoft.EventHub;
   "csharp"
 );
 @@clientName(NetworkRuleSetProperties.ipRules, "IPRules", "csharp");
+@@clientName(IpAddressType, "EventHubsIPAddressType", "csharp");
+@@clientName(EHNamespaceProperties.ipAddressType, "IPAddressType", "csharp");
 @@clientName(NamespaceReplicaLocation.roleType, "RoleType", "csharp");
 @@clientName(
   NspAccessRulePropertiesSubscriptionsItem,

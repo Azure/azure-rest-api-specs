@@ -1,0 +1,224 @@
+{
+  "parameters": {
+    "api-version": "2026-03-01-preview",
+    "databaseName": "testdb",
+    "resourceGroupName": "testrg",
+    "sqlServerDatabaseResource": {
+      "location": "southeastasia",
+      "properties": {
+        "backupInformation": {
+          "lastFullBackup": "2022-05-05T16:26:33.883Z",
+          "lastLogBackup": "2022-05-10T16:26:33.883Z"
+        },
+        "backupPolicy": {
+          "differentialBackupHours": 12,
+          "fullBackupDays": 1,
+          "retentionPeriodDays": 1,
+          "transactionLogBackupMinutes": 30
+        },
+        "collationName": "SQL_Latin1_General_CP1_CI_AS",
+        "compatibilityLevel": 150,
+        "createMode": "PointInTimeRestore",
+        "dataFileSizeMB": 80,
+        "databaseCreationDate": "2022-04-05T16:26:33.883Z",
+        "databaseOptions": {
+          "isAutoCloseOn": true,
+          "isAutoCreateStatsOn": true,
+          "isAutoShrinkOn": true,
+          "isAutoUpdateStatsOn": true,
+          "isEncrypted": true,
+          "isHekatonFilesOn": false,
+          "isMemoryOptimizationEnabled": true,
+          "isRemoteDataArchiveEnabled": true,
+          "isTrustworthyOn": true
+        },
+        "isReadOnly": true,
+        "logFileSizeMB": 70,
+        "migration": {
+          "jobs": [
+            {
+              "additionalAttributes": [
+                {
+                  "keyName": "LRSVersion",
+                  "keyValue": "2.34"
+                }
+              ],
+              "initiatedFrom": "DMS-Portal",
+              "migrationMode": "LogShipping",
+              "migrationTrackingId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.DataMigration/SqlMigrationServices/my-migration-service",
+              "targetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Sql/managedInstances/myManagedInstance/databases/myDatabase",
+              "targetType": "AzureSqlManagedInstance"
+            }
+          ]
+        },
+        "recoveryMode": "Full",
+        "restorePointInTime": "2022-05-05T16:26:33.883Z",
+        "sizeMB": 150,
+        "sourceDatabaseId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.AzureArcData/testSqlServerInstance/testsqlManagedInstance/databases/MyDatabase",
+        "spaceAvailableMB": 100,
+        "state": "Online"
+      },
+      "tags": {
+        "mytag": "myval"
+      }
+    },
+    "sqlServerInstanceName": "testSqlServerInstance",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testdb",
+        "type": "Microsoft.AzureArcData/sqlServerInstances/databases",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.AzureArcData/testSqlServerInstance/testsqlManagedInstance/databases/testdb",
+        "location": "southeastasia",
+        "properties": {
+          "backupInformation": {
+            "lastFullBackup": "2022-05-05T16:26:33.883Z",
+            "lastLogBackup": "2022-05-10T16:26:33.883Z"
+          },
+          "backupPolicy": {
+            "differentialBackupHours": 12,
+            "fullBackupDays": 1,
+            "retentionPeriodDays": 1,
+            "transactionLogBackupMinutes": 30
+          },
+          "collationName": "SQL_Latin1_General_CP1_CI_AS",
+          "compatibilityLevel": 150,
+          "createMode": "PointInTimeRestore",
+          "databaseCreationDate": "2022-04-05T16:26:33.883Z",
+          "databaseOptions": {
+            "isAutoCloseOn": true,
+            "isAutoCreateStatsOn": true,
+            "isAutoShrinkOn": true,
+            "isAutoUpdateStatsOn": true,
+            "isEncrypted": true,
+            "isHekatonFilesOn": false,
+            "isMemoryOptimizationEnabled": true,
+            "isRemoteDataArchiveEnabled": true,
+            "isTrustworthyOn": true
+          },
+          "earliestRestoreDate": "2022-05-10T16:26:33.883Z",
+          "isReadOnly": true,
+          "migration": {
+            "jobs": [
+              {
+                "additionalAttributes": [
+                  {
+                    "keyName": "LRSVersion",
+                    "keyValue": "2.45"
+                  }
+                ],
+                "endTime": null,
+                "initiatedFrom": "DMS-Portal",
+                "lastError": null,
+                "migrationMode": "LogShipping",
+                "migrationTrackingId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.DataMigration/SqlMigrationServices/my-migration-service",
+                "startTime": "2024-01-01T10:00:00Z",
+                "status": "InProgress",
+                "targetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Sql/managedInstances/myManagedInstance/databases/myDatabase",
+                "targetType": "AzureSqlManagedInstance"
+              }
+            ]
+          },
+          "recoveryMode": "Full",
+          "restorePointInTime": "2022-05-05T16:26:33.883Z",
+          "sizeMB": 150,
+          "sourceDatabaseId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.AzureArcData/testSqlServerInstance/testsqlManagedInstance/databases/MyDatabase",
+          "spaceAvailableMB": 100,
+          "state": "Online",
+          "vmId": "12345678-1234-1234-1234-123456789123"
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "createdBy": "user1",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "mytag": "myval"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "testdb",
+        "type": "Microsoft.AzureArcData/sqlServerInstances/databases",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.AzureArcData/testSqlServerInstance/testsqlManagedInstance/databases/testdb",
+        "location": "southeastasia",
+        "properties": {
+          "backupInformation": {
+            "lastFullBackup": "2022-05-05T16:26:33.883Z",
+            "lastLogBackup": "2022-05-10T16:26:33.883Z"
+          },
+          "backupPolicy": {
+            "differentialBackupHours": 12,
+            "fullBackupDays": 1,
+            "retentionPeriodDays": 1,
+            "transactionLogBackupMinutes": 30
+          },
+          "collationName": "SQL_Latin1_General_CP1_CI_AS",
+          "compatibilityLevel": 150,
+          "createMode": "PointInTimeRestore",
+          "databaseCreationDate": "2022-04-05T16:26:33.883Z",
+          "databaseOptions": {
+            "isAutoCloseOn": true,
+            "isAutoCreateStatsOn": true,
+            "isAutoShrinkOn": true,
+            "isAutoUpdateStatsOn": true,
+            "isEncrypted": true,
+            "isHekatonFilesOn": false,
+            "isMemoryOptimizationEnabled": true,
+            "isRemoteDataArchiveEnabled": true,
+            "isTrustworthyOn": true
+          },
+          "earliestRestoreDate": "2022-05-10T16:26:33.883Z",
+          "isReadOnly": true,
+          "migration": {
+            "jobs": [
+              {
+                "additionalAttributes": [
+                  {
+                    "keyName": "LRSVersion",
+                    "keyValue": "2.34"
+                  }
+                ],
+                "endTime": null,
+                "initiatedFrom": "DMS-Portal",
+                "lastError": null,
+                "migrationMode": "LogShipping",
+                "migrationTrackingId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.DataMigration/SqlMigrationServices/my-migration-service",
+                "startTime": "2024-01-01T10:00:00Z",
+                "status": "InProgress",
+                "targetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Sql/managedInstances/myManagedInstance/databases/myDatabase",
+                "targetType": "AzureSqlManagedInstance"
+              }
+            ]
+          },
+          "recoveryMode": "Full",
+          "restorePointInTime": "2022-05-05T16:26:33.883Z",
+          "sizeMB": 150,
+          "sourceDatabaseId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.AzureArcData/testSqlServerInstance/testsqlManagedInstance/databases/MyDatabase",
+          "spaceAvailableMB": 100,
+          "state": "Online",
+          "vmId": "12345678-1234-1234-1234-123456789123"
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "createdBy": "user1",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "mytag": "myval"
+        }
+      }
+    }
+  },
+  "operationId": "SqlServerDatabases_Create",
+  "title": "Create a Arc Sql Server database."
+}
