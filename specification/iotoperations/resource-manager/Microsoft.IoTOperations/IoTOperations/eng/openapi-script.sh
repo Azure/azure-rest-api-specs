@@ -82,8 +82,9 @@ echo "Compiling the typespecs in the iotoperations directory..."
 
 # Recompile the typespecs in the management directory
 # echo "Recompiling the typespecs in the management directory..."
-npx tsp compile IoTOperations/.
-npx tsv IoTOperations/.
+cd resource-manager/Microsoft.IoTOperations/IoTOperations
+npx tsp compile .
+npx tsv .
 
 # Prettier
 # echo "Running prettier..."
