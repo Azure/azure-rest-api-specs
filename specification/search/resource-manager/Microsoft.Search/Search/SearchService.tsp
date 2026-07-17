@@ -25,15 +25,15 @@ model SearchService
   /**
    * The SKU of the search service, which determines price tier and capacity limits. This property is required when creating a new search service.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Pre-existing API contract: top-level envelope property."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Pre-existing API contract: retains externalDocs."
   @externalDocs("https://azure.microsoft.com/documentation/articles/search-sku-tier/")
   sku?: Sku;
 
   /**
    * The identity of the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Pre-existing API contract: top-level envelope property."
   identity?: Identity;
 }
 
@@ -130,7 +130,7 @@ interface SearchServices {
   /**
    * Gets the search service with the given name in the given resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Pre-existing API contract: retains externalDocs."
   @externalDocs("https://aka.ms/search-manage")
   @tag("Services")
   get is ArmResourceRead<
@@ -139,7 +139,7 @@ interface SearchServices {
       /**
        * A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.
        */
-      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-format" "Pre-existing API contract: GUID header."
       @format("uuid")
       @header("x-ms-client-request-id")
       @OpenAPI.extension(
@@ -155,7 +155,7 @@ interface SearchServices {
   /**
    * Creates or updates a search service in the given resource group. If the search service already exists, all properties will be updated with the given values.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Pre-existing API contract: retains externalDocs."
   @externalDocs("https://aka.ms/search-manage")
   @tag("Services")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
@@ -164,7 +164,7 @@ interface SearchServices {
       /**
        * A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.
        */
-      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-format" "Pre-existing API contract: GUID header."
       @format("uuid")
       @header("x-ms-client-request-id")
       @OpenAPI.extension(
@@ -182,7 +182,7 @@ interface SearchServices {
   /**
    * Updates an existing search service in the given resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Pre-existing API contract: retains externalDocs."
   @patch(#{ implicitOptionality: false })
   @externalDocs("https://aka.ms/search-manage")
   @tag("Services")
@@ -193,7 +193,7 @@ interface SearchServices {
       /**
        * A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.
        */
-      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-format" "Pre-existing API contract: GUID header."
       @format("uuid")
       @header("x-ms-client-request-id")
       @OpenAPI.extension(
@@ -210,7 +210,7 @@ interface SearchServices {
    * Deletes a search service in the given resource group, along with its associated resources.
    * Returns 200 (OK) on successful deletion, or 204 (No Content) if the service is not found.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Pre-existing API contract: retains externalDocs."
   @externalDocs("https://aka.ms/search-manage")
   @tag("Services")
   delete is ArmResourceDeleteSync<
@@ -219,7 +219,7 @@ interface SearchServices {
       /**
        * A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.
        */
-      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-format" "Pre-existing API contract: GUID header."
       @format("uuid")
       @header("x-ms-client-request-id")
       @OpenAPI.extension(
@@ -236,7 +236,7 @@ interface SearchServices {
   /**
    * Gets a list of all search services in the given resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Pre-existing API contract: retains externalDocs."
   @externalDocs("https://aka.ms/search-manage")
   @tag("Services")
   listByResourceGroup is ArmResourceListByParent<
@@ -245,7 +245,7 @@ interface SearchServices {
       /**
        * A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.
        */
-      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-format" "Pre-existing API contract: GUID header."
       @format("uuid")
       @header("x-ms-client-request-id")
       @OpenAPI.extension(
@@ -262,7 +262,7 @@ interface SearchServices {
   /**
    * Gets a list of all search services in the given subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Pre-existing API contract: retains externalDocs."
   @externalDocs("https://aka.ms/search-manage")
   @tag("Services")
   listBySubscription is ArmListBySubscription<
@@ -271,7 +271,7 @@ interface SearchServices {
       /**
        * A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.
        */
-      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-format" "Pre-existing API contract: GUID header."
       @format("uuid")
       @header("x-ms-client-request-id")
       @OpenAPI.extension(
@@ -288,7 +288,7 @@ interface SearchServices {
   /**
    * Gets the primary and secondary admin API keys for the specified Azure AI Search service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Pre-existing API contract: retains externalDocs."
   @action("listAdminKeys")
   @externalDocs("https://aka.ms/search-manage")
   @tag("AdminKeys")
@@ -300,7 +300,7 @@ interface SearchServices {
       /**
        * A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.
        */
-      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-format" "Pre-existing API contract: GUID header."
       @format("uuid")
       @header("x-ms-client-request-id")
       @OpenAPI.extension(
@@ -316,7 +316,7 @@ interface SearchServices {
   /**
    * Regenerates either the primary or secondary admin API key. You can only regenerate one key at a time.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Pre-existing API contract: retains externalDocs."
   @externalDocs("https://aka.ms/search-manage")
   @tag("AdminKeys")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}/regenerateAdminKey/{keyKind}")
@@ -328,7 +328,7 @@ interface SearchServices {
       /**
        * A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.
        */
-      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-format" "Pre-existing API contract: GUID header."
       @format("uuid")
       @header("x-ms-client-request-id")
       @OpenAPI.extension(
@@ -344,7 +344,7 @@ interface SearchServices {
   /**
    * Generates a new query key for the specified search service. You can create up to 50 query keys per service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Pre-existing API contract: retains externalDocs."
   @post
   @externalDocs("https://aka.ms/search-manage")
   @tag("QueryKeys")
@@ -357,7 +357,7 @@ interface SearchServices {
       /**
        * A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.
        */
-      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-format" "Pre-existing API contract: GUID header."
       @format("uuid")
       @header("x-ms-client-request-id")
       @OpenAPI.extension(
@@ -373,7 +373,7 @@ interface SearchServices {
   /**
    * Returns the list of query API keys for the given Azure AI Search service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Pre-existing API contract: retains externalDocs."
   @action("listQueryKeys")
   @externalDocs("https://aka.ms/search-manage")
   @tag("QueryKeys")
@@ -386,7 +386,7 @@ interface SearchServices {
       /**
        * A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.
        */
-      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-format" "Pre-existing API contract: GUID header."
       @format("uuid")
       @header("x-ms-client-request-id")
       @OpenAPI.extension(
@@ -404,7 +404,7 @@ interface SearchServices {
    * Returns 200 (OK) on successful deletion, 204 (No Content) if the service exists but the query keys not found, or 404 (Not Found) if the service is not found.
    * NOTE: The behavior of returning 404 is inconsistent with ARM guidelines. Clients should expect a 204 response in future versions and avoid new dependencies on the 404 response.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Pre-existing API contract: retains externalDocs."
   @delete
   @externalDocs("https://aka.ms/search-manage")
   @tag("QueryKeys")
@@ -416,7 +416,7 @@ interface SearchServices {
       /**
        * A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.
        */
-      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-format" "Pre-existing API contract: GUID header."
       @format("uuid")
       @header("x-ms-client-request-id")
       @OpenAPI.extension(
@@ -443,7 +443,7 @@ interface SearchServices {
   /**
    * Gets a list of all supported private link resource types for the given service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Pre-existing API contract: retains externalDocs."
   @operationId("PrivateLinkResources_ListSupported")
   @externalDocs("https://aka.ms/search-manage")
   @get
@@ -458,7 +458,7 @@ interface SearchServices {
       /**
        * A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.
        */
-      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-format" "Pre-existing API contract: GUID header."
       @format("uuid")
       @header("x-ms-client-request-id")
       @OpenAPI.extension(

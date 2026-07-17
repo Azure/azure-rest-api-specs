@@ -194,8 +194,10 @@ model NetAppAccountPatch is PatchModel<NetAppAccount> {
 /**
  * NetApp account patch properties
  */
-model AccountPropertiesPatch
-  is PatchModel<AccountProperties, "entraIdConfig" | "ldapConfiguration"> {
+model AccountPropertiesPatch is PatchModel<
+  AccountProperties,
+  "entraIdConfig" | "ldapConfiguration"
+> {
   /**
    * Entra ID configuration for the account.
    */
@@ -278,8 +280,10 @@ model BindPasswordAkvConfigPatch is PatchModel<BindPasswordAkvConfig>;
 @added(Versions.v2026_04_15_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_15_preview)
-model LdapConfigurationPatch
-  is PatchModel<LdapConfiguration, "bindPasswordAkvConfig"> {
+model LdapConfigurationPatch is PatchModel<
+  LdapConfiguration,
+  "bindPasswordAkvConfig"
+> {
   /**
    * The Azure Key Vault configuration where the Bind DN (Distinguished Name) user password is stored.
    */
