@@ -15971,6 +15971,13 @@ model NetworkVirtualAppliancePropertiesFormat {
    */
   @visibility(Lifecycle.Read)
   privateIpAddress?: string;
+
+  /**
+   * The migration status of the Network Virtual Appliance.
+   */
+  @added(Versions.v2025_09_01)
+  @visibility(Lifecycle.Read)
+  migrationStatus?: NetworkVirtualApplianceMigrationStatus;
 }
 
 /**
@@ -16229,6 +16236,132 @@ model NvaInVnetSubnetReferenceProperties {
       type: "Microsoft.Network/virtualNetworks/subnets";
     }
   ]>;
+}
+
+/**
+ * The type of migration workflow performed on a Network Virtual Appliance.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2025_09_01)
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+union MigrationType {
+  string,
+
+  /**
+   * Migrate the Network Virtual Appliance to a new OS / marketplace image version.
+   */
+  MigrateToNewOSVersion: "MigrateToNewOSVersion",
+
+  /**
+   * Migrate the Network Virtual Appliance to the new internal load balancer architecture.
+   */
+  MigrateToNewILBArchitecture: "MigrateToNewILBArchitecture",
+}
+
+/**
+ * Properties supplied to prepare the migration of a Network Virtual Appliance.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2025_09_01)
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+model NetworkVirtualAppliancePrepareMigrationProperties {
+  /**
+   * The type of migration workflow to prepare.
+   */
+  migrationType: MigrationType;
+
+  /**
+   * The marketplace version to migrate to. Applicable when migrationType is MigrateToNewOSVersion.
+   */
+  marketPlaceVersion?: string;
+}
+
+/**
+ * Parameters supplied to prepare the migration of a Network Virtual Appliance.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2025_09_01)
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+model NetworkVirtualAppliancePrepareMigrationRequest {
+  /**
+   * Properties of the prepare migration request.
+   */
+  properties?: NetworkVirtualAppliancePrepareMigrationProperties;
+}
+
+/**
+ * Properties supplied to execute the migration of a Network Virtual Appliance.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2025_09_01)
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+model NetworkVirtualApplianceExecuteMigrationProperties {
+  /**
+   * The type of migration workflow to execute.
+   */
+  migrationType: MigrationType;
+}
+
+/**
+ * Parameters supplied to execute the migration of a Network Virtual Appliance.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2025_09_01)
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+model NetworkVirtualApplianceExecuteMigrationRequest {
+  /**
+   * Properties of the execute migration request.
+   */
+  properties?: NetworkVirtualApplianceExecuteMigrationProperties;
+}
+
+/**
+ * Properties supplied to commit the migration of a Network Virtual Appliance.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2025_09_01)
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+model NetworkVirtualApplianceCommitMigrationProperties {
+  /**
+   * The type of migration workflow to commit.
+   */
+  migrationType: MigrationType;
+}
+
+/**
+ * Parameters supplied to commit the migration of a Network Virtual Appliance.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2025_09_01)
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+model NetworkVirtualApplianceCommitMigrationRequest {
+  /**
+   * Properties of the commit migration request.
+   */
+  properties?: NetworkVirtualApplianceCommitMigrationProperties;
+}
+
+/**
+ * The migration status of a Network Virtual Appliance.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2025_09_01)
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+model NetworkVirtualApplianceMigrationStatus {
+  /**
+   * The type of migration workflow currently in progress or last performed.
+   */
+  migrationType?: MigrationType;
+
+  /**
+   * The current phase of the migration workflow (for example, Prepare, Execute, Commit, or Abort).
+   */
+  migrationPhase?: string;
+
+  /**
+   * The detailed status of the current migration phase.
+   */
+  migrationPhaseStatus?: string;
 }
 
 /**

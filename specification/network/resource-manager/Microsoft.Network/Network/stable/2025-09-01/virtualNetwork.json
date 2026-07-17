@@ -8551,6 +8551,207 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/abortMigration": {
+      "post": {
+        "operationId": "NetworkVirtualAppliances_AbortMigration",
+        "tags": [
+          "NetworkVirtualAppliances"
+        ],
+        "description": "Aborts an in-progress migration of the specified Network Virtual Appliance and rolls back to the previous state.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "networkVirtualApplianceName",
+            "in": "path",
+            "description": "The name of Network Virtual Appliance.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully."
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Abort migration of a NetworkVirtualAppliance to the new ILB architecture": {
+            "$ref": "./examples/NetworkVirtualApplianceAbortMigration.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/commitMigration": {
+      "post": {
+        "operationId": "NetworkVirtualAppliances_CommitMigration",
+        "tags": [
+          "NetworkVirtualAppliances"
+        ],
+        "description": "Commits the migration of the specified Network Virtual Appliance. This finalizes a previously executed migration workflow.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "networkVirtualApplianceName",
+            "in": "path",
+            "description": "The name of Network Virtual Appliance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Parameters supplied to commit the migration of the Network Virtual Appliance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NetworkVirtualApplianceCommitMigrationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully."
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Commit migration of a NetworkVirtualAppliance to the new ILB architecture": {
+            "$ref": "./examples/NetworkVirtualApplianceCommitMigration.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/executeMigration": {
+      "post": {
+        "operationId": "NetworkVirtualAppliances_ExecuteMigration",
+        "tags": [
+          "NetworkVirtualAppliances"
+        ],
+        "description": "Executes the migration of the specified Network Virtual Appliance. This step performs the migration workflow that was previously prepared.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "networkVirtualApplianceName",
+            "in": "path",
+            "description": "The name of Network Virtual Appliance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Parameters supplied to execute the migration of the Network Virtual Appliance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NetworkVirtualApplianceExecuteMigrationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully."
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Execute migration of a NetworkVirtualAppliance to the new ILB architecture": {
+            "$ref": "./examples/NetworkVirtualApplianceExecuteMigration.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/getBootDiagnosticLogs": {
       "post": {
         "operationId": "NetworkVirtualAppliances_GetBootDiagnosticLogs",
@@ -8750,6 +8951,76 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/InboundSecurityRule"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/prepareMigration": {
+      "post": {
+        "operationId": "NetworkVirtualAppliances_PrepareMigration",
+        "tags": [
+          "NetworkVirtualAppliances"
+        ],
+        "description": "Prepares the migration of the specified Network Virtual Appliance. This is the first step of a migration workflow, such as migrating to a new OS version or to the new internal load balancer architecture.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "networkVirtualApplianceName",
+            "in": "path",
+            "description": "The name of Network Virtual Appliance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Parameters supplied to prepare the migration of the Network Virtual Appliance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NetworkVirtualAppliancePrepareMigrationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully."
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Prepare migration of a NetworkVirtualAppliance to the new ILB architecture": {
+            "$ref": "./examples/NetworkVirtualAppliancePrepareMigration.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -18782,6 +19053,52 @@
         }
       }
     },
+    "NetworkVirtualApplianceCommitMigrationProperties": {
+      "type": "object",
+      "description": "Properties supplied to commit the migration of a Network Virtual Appliance.",
+      "properties": {
+        "migrationType": {
+          "$ref": "./common.json#/definitions/MigrationType",
+          "description": "The type of migration workflow to commit."
+        }
+      },
+      "required": [
+        "migrationType"
+      ]
+    },
+    "NetworkVirtualApplianceCommitMigrationRequest": {
+      "type": "object",
+      "description": "Parameters supplied to commit the migration of a Network Virtual Appliance.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NetworkVirtualApplianceCommitMigrationProperties",
+          "description": "Properties of the commit migration request."
+        }
+      }
+    },
+    "NetworkVirtualApplianceExecuteMigrationProperties": {
+      "type": "object",
+      "description": "Properties supplied to execute the migration of a Network Virtual Appliance.",
+      "properties": {
+        "migrationType": {
+          "$ref": "./common.json#/definitions/MigrationType",
+          "description": "The type of migration workflow to execute."
+        }
+      },
+      "required": [
+        "migrationType"
+      ]
+    },
+    "NetworkVirtualApplianceExecuteMigrationRequest": {
+      "type": "object",
+      "description": "Parameters supplied to execute the migration of a Network Virtual Appliance.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NetworkVirtualApplianceExecuteMigrationProperties",
+          "description": "Properties of the execute migration request."
+        }
+      }
+    },
     "NetworkVirtualApplianceInstanceId": {
       "type": "object",
       "properties": {
@@ -18825,6 +19142,51 @@
       "required": [
         "value"
       ]
+    },
+    "NetworkVirtualApplianceMigrationStatus": {
+      "type": "object",
+      "description": "The migration status of a Network Virtual Appliance.",
+      "properties": {
+        "migrationType": {
+          "$ref": "./common.json#/definitions/MigrationType",
+          "description": "The type of migration workflow currently in progress or last performed."
+        },
+        "migrationPhase": {
+          "type": "string",
+          "description": "The current phase of the migration workflow (for example, Prepare, Execute, Commit, or Abort)."
+        },
+        "migrationPhaseStatus": {
+          "type": "string",
+          "description": "The detailed status of the current migration phase."
+        }
+      }
+    },
+    "NetworkVirtualAppliancePrepareMigrationProperties": {
+      "type": "object",
+      "description": "Properties supplied to prepare the migration of a Network Virtual Appliance.",
+      "properties": {
+        "migrationType": {
+          "$ref": "./common.json#/definitions/MigrationType",
+          "description": "The type of migration workflow to prepare."
+        },
+        "marketPlaceVersion": {
+          "type": "string",
+          "description": "The marketplace version to migrate to. Applicable when migrationType is MigrateToNewOSVersion."
+        }
+      },
+      "required": [
+        "migrationType"
+      ]
+    },
+    "NetworkVirtualAppliancePrepareMigrationRequest": {
+      "type": "object",
+      "description": "Parameters supplied to prepare the migration of a Network Virtual Appliance.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NetworkVirtualAppliancePrepareMigrationProperties",
+          "description": "Properties of the prepare migration request."
+        }
+      }
     },
     "NetworkVirtualAppliancePropertiesFormat": {
       "type": "object",
@@ -18953,6 +19315,11 @@
         "privateIpAddress": {
           "type": "string",
           "description": "A Internal Load Balancer's HA port frontend IP address. Can be used to set routes & UDR to load balance traffic between NVA instances",
+          "readOnly": true
+        },
+        "migrationStatus": {
+          "$ref": "#/definitions/NetworkVirtualApplianceMigrationStatus",
+          "description": "The migration status of the Network Virtual Appliance.",
           "readOnly": true
         }
       }

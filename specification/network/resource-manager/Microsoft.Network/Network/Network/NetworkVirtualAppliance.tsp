@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 using Common;
 
 namespace Microsoft.Network;
@@ -231,6 +232,66 @@ interface NetworkVirtualAppliances {
     NetworkVirtualApplianceInstanceId,
     Error = CloudError
   >;
+
+  /**
+   * Prepares the migration of the specified Network Virtual Appliance. This is the first step of a migration workflow, such as migrating to a new OS version or to the new internal load balancer architecture.
+   */
+  @added(Versions.v2025_09_01)
+  prepareMigration is ArmResourceActionAsync<
+    NetworkVirtualAppliance,
+    NetworkVirtualAppliancePrepareMigrationRequest,
+    {
+      @body body: void;
+    },
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = CloudError
+  >;
+
+  /**
+   * Executes the migration of the specified Network Virtual Appliance. This step performs the migration workflow that was previously prepared.
+   */
+  @added(Versions.v2025_09_01)
+  executeMigration is ArmResourceActionAsync<
+    NetworkVirtualAppliance,
+    NetworkVirtualApplianceExecuteMigrationRequest,
+    {
+      @body body: void;
+    },
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = CloudError
+  >;
+
+  /**
+   * Commits the migration of the specified Network Virtual Appliance. This finalizes a previously executed migration workflow.
+   */
+  @added(Versions.v2025_09_01)
+  commitMigration is ArmResourceActionAsync<
+    NetworkVirtualAppliance,
+    NetworkVirtualApplianceCommitMigrationRequest,
+    {
+      @body body: void;
+    },
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = CloudError
+  >;
+
+  /**
+   * Aborts an in-progress migration of the specified Network Virtual Appliance and rolls back to the previous state.
+   */
+  @added(Versions.v2025_09_01)
+  abortMigration is ArmResourceActionAsync<
+    NetworkVirtualAppliance,
+    void,
+    {
+      @body body: void;
+    },
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = CloudError
+  >;
 }
 
 @@doc(NetworkVirtualAppliance.name, "The name of Network Virtual Appliance.");
@@ -257,6 +318,18 @@ interface NetworkVirtualAppliances {
 @@doc(
   NetworkVirtualAppliances.getBootDiagnosticLogs::parameters.body,
   "Parameters supplied to retrieve boot diagnostic logs for a NVA VM instance"
+);
+@@doc(
+  NetworkVirtualAppliances.prepareMigration::parameters.body,
+  "Parameters supplied to prepare the migration of the Network Virtual Appliance."
+);
+@@doc(
+  NetworkVirtualAppliances.executeMigration::parameters.body,
+  "Parameters supplied to execute the migration of the Network Virtual Appliance."
+);
+@@doc(
+  NetworkVirtualAppliances.commitMigration::parameters.body,
+  "Parameters supplied to commit the migration of the Network Virtual Appliance."
 );
 @@doc(
   NetworkVirtualApplianceConnections.networkVirtualApplianceConnectionsCreateOrUpdate::parameters.body,
