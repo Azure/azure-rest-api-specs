@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Microsoft.Common;
@@ -152,7 +154,7 @@ model WebhookReceiver {
   tenantId?: string;
 
   /**
-   * The principal id of the managed identity. The value can be "None", "SystemAssigned"
+   * The principal id of the referenced managed identity.
    */
   managedIdentity?: string;
 }
@@ -227,7 +229,7 @@ model AutomationRunbookReceiver {
   useCommonAlertSchema?: boolean = false;
 
   /**
-   * The principal id of the managed identity. The value can be "None", "SystemAssigned"
+   * The principal id of the referenced managed identity.
    */
   managedIdentity?: string;
 }
@@ -258,9 +260,15 @@ model LogicAppReceiver {
   useCommonAlertSchema?: boolean = false;
 
   /**
-   * The principal id of the managed identity. The value can be "None", "SystemAssigned"
+   * The principal id of the referenced managed identity.
    */
   managedIdentity?: string;
+
+  /**
+   * The trigger name of the Logic App.
+   */
+  @added(Versions.v2026_09_01)
+  triggerName?: string;
 }
 
 /**
@@ -294,9 +302,15 @@ model AzureFunctionReceiver {
   useCommonAlertSchema?: boolean = false;
 
   /**
-   * The principal id of the managed identity. The value can be "None", "SystemAssigned"
+   * The principal id of the referenced managed identity.
    */
   managedIdentity?: string;
+
+  /**
+   * The Application ID URI from the AAD App Registration.
+   */
+  @added(Versions.v2026_09_01)
+  scope?: string;
 }
 
 /**
@@ -354,9 +368,19 @@ model EventHubReceiver {
   subscriptionId: string;
 
   /**
-   * The principal id of the managed identity. The value can be "None", "SystemAssigned"
+   * The principal id of the referenced managed identity.
    */
   managedIdentity?: string;
+
+  /**
+   * The ARM based resourceId of the Event Hub resource.
+   */
+  @added(Versions.v2026_09_01)
+  resourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.EventHub/namespaces";
+    }
+  ]>;
 }
 
 /**

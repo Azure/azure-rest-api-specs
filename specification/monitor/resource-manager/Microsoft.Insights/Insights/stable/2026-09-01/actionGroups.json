@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Action Groups API",
-    "version": "2024-10-01-preview",
+    "version": "2026-09-01",
     "description": "Monitor Management Client",
     "x-typespec-generated": [
       {
@@ -786,6 +786,10 @@
         "managedIdentity": {
           "type": "string",
           "description": "The principal id of the referenced managed identity."
+        },
+        "scope": {
+          "type": "string",
+          "description": "The Application ID URI from the AAD App Registration."
         }
       },
       "required": [
@@ -840,6 +844,18 @@
         "managedIdentity": {
           "type": "string",
           "description": "The principal id of the referenced managed identity."
+        },
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.EventHub/namespaces"
+              }
+            ]
+          },
+          "description": "The ARM based resourceId of the Event Hub resource."
         }
       },
       "required": [
@@ -973,6 +989,10 @@
         "managedIdentity": {
           "type": "string",
           "description": "The principal id of the referenced managed identity."
+        },
+        "triggerName": {
+          "type": "string",
+          "description": "The trigger name of the Logic App."
         }
       },
       "required": [
