@@ -53,10 +53,17 @@ model ServiceGateway extends SecurityPerimeterTrackedResource {
 }
 
 /** Status-only success response for synchronous service gateway update actions. */
+model ServiceGatewayActionOkResponseBody {}
+
+/** Status-only success response for synchronous service gateway update actions. */
 model ServiceGatewayActionOkResponse {
   /** HTTP status code for successful request processing. */
   @statusCode
   statusCode: 200;
+
+  /** Empty response body for successful synchronous service gateway update actions. */
+  @body
+  body: ServiceGatewayActionOkResponseBody;
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
