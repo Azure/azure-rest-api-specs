@@ -104,8 +104,8 @@ suppressions:
       applicationSecurityGroupName is an existing parent resource path parameter established in prior
       API versions. Adding a pattern constraint would be a breaking change to existing clients.
     where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationSecurityGroups/{applicationSecurityGroupName}/addressPrefixSets/{addressPrefixSetName}"].put.parameters[2]
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationSecurityGroups/{applicationSecurityGroupName}/addressPrefixSets/{addressPrefixSetName}"].get.parameters[2]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationSecurityGroups/{applicationSecurityGroupName}/addressPrefixSets"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationSecurityGroups/{applicationSecurityGroupName}/addressPrefixSets/{addressPrefixSetName}"]
   - code: ResourceNameRestriction
     from: interconnectGroup.json
     reason: Subgroup is a read-only child resource with no PUT operation. Pattern restriction is not applicable.
@@ -231,8 +231,8 @@ suppressions:
       applicationSecurityGroupName is an existing parent resource path parameter established in prior
       API versions. Adding a pattern constraint would be a breaking change to existing clients.
     where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationSecurityGroups/{applicationSecurityGroupName}/addressPrefixSets/{addressPrefixSetName}"].put.parameters[2]
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationSecurityGroups/{applicationSecurityGroupName}/addressPrefixSets/{addressPrefixSetName}"].get.parameters[2]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationSecurityGroups/{applicationSecurityGroupName}/addressPrefixSets"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationSecurityGroups/{applicationSecurityGroupName}/addressPrefixSets/{addressPrefixSetName}"]
   - code: ResourceNameRestriction
     from: interconnectGroup.json
     reason: Subgroup is a read-only child resource with no PUT operation. Pattern restriction is not applicable.
