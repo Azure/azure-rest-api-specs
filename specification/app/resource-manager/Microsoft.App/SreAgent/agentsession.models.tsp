@@ -59,34 +59,6 @@ model AgentSessionSandbox {
 
   /** The time when the sandbox expires. */
   expiresAt: utcDateTime;
-
-  /** The current state of the sandbox. */
-  state: AgentSessionSandboxState;
-
-  /** The monotonically increasing sandbox generation. */
-  @minValue(1)
-  generation: int32;
-}
-
-/** The lifecycle state of an Agent Session sandbox. */
-@added(Versions.v2026_08_01_preview)
-union AgentSessionSandboxState {
-  string,
-
-  /** The sandbox is being provisioned. */
-  Provisioning: "Provisioning",
-
-  /** The sandbox is ready for use. */
-  Ready: "Ready",
-
-  /** The sandbox has reached its expiration time. */
-  Expired: "Expired",
-
-  /** The sandbox has been deleted. */
-  Deleted: "Deleted",
-
-  /** Sandbox provisioning failed. */
-  Failed: "Failed",
 }
 
 /** The conditional header required for operations that modify an existing Agent Session. */

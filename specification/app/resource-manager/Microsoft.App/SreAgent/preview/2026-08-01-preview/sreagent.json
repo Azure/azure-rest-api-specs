@@ -2533,66 +2533,12 @@
           "type": "string",
           "format": "date-time",
           "description": "The time when the sandbox expires."
-        },
-        "state": {
-          "$ref": "#/definitions/AgentSessionSandboxState",
-          "description": "The current state of the sandbox."
-        },
-        "generation": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The monotonically increasing sandbox generation.",
-          "minimum": 1
         }
       },
       "required": [
         "sandboxId",
-        "expiresAt",
-        "state",
-        "generation"
+        "expiresAt"
       ]
-    },
-    "AgentSessionSandboxState": {
-      "type": "string",
-      "description": "The lifecycle state of an Agent Session sandbox.",
-      "enum": [
-        "Provisioning",
-        "Ready",
-        "Expired",
-        "Deleted",
-        "Failed"
-      ],
-      "x-ms-enum": {
-        "name": "AgentSessionSandboxState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Provisioning",
-            "value": "Provisioning",
-            "description": "The sandbox is being provisioned."
-          },
-          {
-            "name": "Ready",
-            "value": "Ready",
-            "description": "The sandbox is ready for use."
-          },
-          {
-            "name": "Expired",
-            "value": "Expired",
-            "description": "The sandbox has reached its expiration time."
-          },
-          {
-            "name": "Deleted",
-            "value": "Deleted",
-            "description": "The sandbox has been deleted."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Sandbox provisioning failed."
-          }
-        ]
-      }
     },
     "AgentSpace": {
       "type": "object",
