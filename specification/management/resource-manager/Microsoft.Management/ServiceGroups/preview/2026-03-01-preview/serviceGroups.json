@@ -316,6 +316,50 @@
           }
         }
       }
+    },
+    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/listDescendants": {
+      "post": {
+        "operationId": "ServiceGroups_ListDescendants",
+        "tags": [
+          "ServiceGroups"
+        ],
+        "description": "List the descendant serviceGroups of the serviceGroup, ordered by hierarchy.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "serviceGroupName",
+            "in": "path",
+            "description": "ServiceGroup Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9\\-_().]{1,90}$"
+          },
+          {
+            "$ref": "#/parameters/ListDescendantsQueryParameters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServiceGroupCollectionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListServiceGroupDescendants": {
+            "$ref": "./examples/ServiceGroup_ListDescendants.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -455,5 +499,14 @@
       }
     }
   },
-  "parameters": {}
+  "parameters": {
+    "ListDescendantsQueryParameters": {
+      "name": "skipToken",
+      "in": "query",
+      "description": "An opaque pagination token returned via nextLink to fetch the next page of results.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
 }

@@ -2,12 +2,14 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Management;
 /**
@@ -82,6 +84,18 @@ interface ServiceGroups {
     void,
     ArmResponse<ServiceGroupCollectionResponse>,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
+  >;
+
+  /**
+   * List the descendant serviceGroups of the serviceGroup, ordered by hierarchy.
+   */
+  @added(Versions.v2026_03_01_preview)
+  listDescendants is ArmResourceActionSync<
+    ServiceGroup,
+    void,
+    ArmResponse<ServiceGroupCollectionResponse>,
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
+    Parameters = ListDescendantsQueryParameters
   >;
 }
 
