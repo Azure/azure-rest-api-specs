@@ -24,13 +24,13 @@ model FabricShortcut
     Resource = FabricShortcut,
     KeyName = "fabricShortcutName",
     SegmentName = "fabricShortcuts",
-    NamePattern = ""
+    NamePattern = "^.+$"
   >;
 
   /**
    * The geo-location where the resource lives.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "The service returns the parent namespace location in the existing ARM resource envelope."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "The backend resource model returns location as a read-only top-level ARM envelope property, not as a Fabric shortcut property."
   @visibility(Lifecycle.Read)
   location?: string;
 }
@@ -38,7 +38,7 @@ model FabricShortcut
 /**
  * Properties of a Microsoft Fabric shortcut.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "The service does not expose a provisioning state for this proxy resource."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "The synchronous backend contract does not define or return provisioningState; shortcut lifecycle is reported through the read-only shortcutStatus property."
 @added(Versions.v2026_07_01_preview)
 model FabricShortcutProperties {
   /**
@@ -103,7 +103,11 @@ model FabricShortcutConfiguration {
   /**
    * The resource ID of the Log Analytics workspace.
    */
-  logAnalyticsResourceId?: string;
+  logAnalyticsResourceId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.OperationalInsights/workspaces";
+    }
+  ]>;
 
   /**
    * The Microsoft Fabric workspace name.

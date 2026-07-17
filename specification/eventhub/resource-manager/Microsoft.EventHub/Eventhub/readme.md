@@ -279,26 +279,9 @@ input-file:
 
 ``` yaml
 directive:
-  - suppress: MISSING_APIS_IN_DEFAULT_TAG
-    from: preview/2018-01-01-preview/virtualnetworkrules-preview.json
-    reason: These legacy child-resource routes are supported only by the 2018-01-01-preview controller and were replaced by networkRuleSets in current API versions.
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/virtualnetworkrules"]
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/virtualnetworkrules/{virtualNetworkRuleName}"]
-  - suppress: MISSING_APIS_IN_DEFAULT_TAG
-    from: preview/2018-01-01-preview/ipfilterrules-preview.json
-    reason: These legacy child-resource routes are supported only by the 2018-01-01-preview controller and were replaced by networkRuleSets in current API versions.
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/ipfilterrules"]
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/ipfilterrules/{ipFilterRuleName}"]
-  - suppress: MISSING_APIS_IN_DEFAULT_TAG
-    from: preview/2018-01-01-preview/sku.json
-    reason: The legacy SKU region discovery route is not implemented by the current Event Hubs SKU controller.
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.EventHub/sku/{sku}/regions"]
-
   - suppress: ResourceNameRestriction
     from: openapi.json
-    reason: Existing Event Hub and cluster parent names and Fabric shortcut names have no service-enforced regular expression constraint.
+    reason: The new child resource names are constrained, but existing namespace, Event Hub, and cluster parent names have no service-enforced regular expression constraint that can be added only to this preview version.
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/clusters/{clusterName}/upgradePreferences/default"]
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/clusters/{clusterName}/upgradePreferences/default/upgradeNow"]

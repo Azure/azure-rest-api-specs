@@ -24,7 +24,7 @@ model UpgradePreferences
     Resource = UpgradePreferences,
     KeyName = "upgradePreferencesName",
     SegmentName = "upgradePreferences",
-    NamePattern = ""
+    NamePattern = "^default$"
   >;
 }
 

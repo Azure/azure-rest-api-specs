@@ -3468,7 +3468,8 @@
             "in": "path",
             "description": "The Microsoft Fabric shortcut name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^.+$"
           }
         ],
         "responses": {
@@ -3531,7 +3532,8 @@
             "in": "path",
             "description": "The Microsoft Fabric shortcut name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^.+$"
           },
           {
             "name": "resource",
@@ -3603,7 +3605,8 @@
             "in": "path",
             "description": "The Microsoft Fabric shortcut name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^.+$"
           }
         ],
         "responses": {
@@ -3665,7 +3668,8 @@
             "in": "path",
             "description": "The Microsoft Fabric shortcut name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^.+$"
           }
         ],
         "responses": {
@@ -3730,7 +3734,8 @@
             "in": "path",
             "description": "The Microsoft Fabric shortcut name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^.+$"
           }
         ],
         "responses": {
@@ -6055,7 +6060,15 @@
         },
         "logAnalyticsResourceId": {
           "type": "string",
-          "description": "The resource ID of the Log Analytics workspace."
+          "format": "arm-id",
+          "description": "The resource ID of the Log Analytics workspace.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.OperationalInsights/workspaces"
+              }
+            ]
+          }
         },
         "workspaceName": {
           "type": "string",
