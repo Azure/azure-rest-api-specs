@@ -240,7 +240,9 @@ interface NetworkVirtualAppliances {
   prepareMigration is ArmResourceActionAsyncBase<
     NetworkVirtualAppliance,
     Request = NetworkVirtualAppliancePrepareMigrationRequest,
-    Response = ArmAcceptedLroResponse | ArmNoContentResponse<"Action completed successfully.">,
+    Response =
+      | ArmAcceptedLroResponse
+      | ArmNoContentResponse<"Action completed successfully.">,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NetworkVirtualAppliance>,
     Error = CloudError
   >;
@@ -252,7 +254,9 @@ interface NetworkVirtualAppliances {
   executeMigration is ArmResourceActionAsyncBase<
     NetworkVirtualAppliance,
     Request = NetworkVirtualApplianceExecuteMigrationRequest,
-    Response = ArmAcceptedLroResponse | ArmNoContentResponse<"Action completed successfully.">,
+    Response =
+      | ArmAcceptedLroResponse
+      | ArmNoContentResponse<"Action completed successfully.">,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NetworkVirtualAppliance>,
     Error = CloudError
   >;
@@ -264,7 +268,9 @@ interface NetworkVirtualAppliances {
   commitMigration is ArmResourceActionAsyncBase<
     NetworkVirtualAppliance,
     Request = NetworkVirtualApplianceCommitMigrationRequest,
-    Response = ArmAcceptedLroResponse | ArmNoContentResponse<"Action completed successfully.">,
+    Response =
+      | ArmAcceptedLroResponse
+      | ArmNoContentResponse<"Action completed successfully.">,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NetworkVirtualAppliance>,
     Error = CloudError
   >;
@@ -276,7 +282,9 @@ interface NetworkVirtualAppliances {
   abortMigration is ArmResourceActionAsyncBase<
     NetworkVirtualAppliance,
     Request = void,
-    Response = ArmAcceptedLroResponse | ArmNoContentResponse<"Action completed successfully.">,
+    Response =
+      | ArmAcceptedLroResponse
+      | ArmNoContentResponse<"Action completed successfully.">,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NetworkVirtualAppliance>,
     Error = CloudError
   >;
