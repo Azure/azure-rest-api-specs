@@ -12,6 +12,7 @@ model NetworkTapRuleProperties {
   @doc("Input method to configure Network Tap Rule.")
   configurationType: ConfigurationType;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("Network Tap Rules file URL.")
   tapRulesUrl?: url;
 
@@ -207,6 +208,7 @@ model NetworkTapRulePatchableProperties {
   @doc("Input method to configure Network Tap Rule.")
   configurationType?: ConfigurationType;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("Network Tap Rules file URL.")
   tapRulesUrl?: url;
 

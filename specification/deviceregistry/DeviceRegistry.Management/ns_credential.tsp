@@ -52,5 +52,6 @@ interface Credentials {
     >
   >;
   listByResourceGroup is ArmResourceListByParent<Credential>;
+  @doc("A long-running resource action.")
   synchronize is ArmResourceActionNoResponseContentAsync<Credential, void>;
 }
