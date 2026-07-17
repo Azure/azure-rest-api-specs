@@ -22,9 +22,10 @@ namespace Quantum.Workspace.Services {
     create is CreateOperation<JobDetails>;
 
     /** Update job properties. */
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Uses a custom signature to keep JobUpdateOptions as PATCH request while returning JobDetails on the shared jobs route."
     @sharedRoute
     @added(QuantumWorkspaceAPIVersion.v2025_09_01_preview)
-    update is PatchOperation<JobUpdateOptions>;
+    update is PatchOperation<JobUpdateOptions, JobDetails>;
 
     /** OLD METHOD: Update job properties. */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" """
