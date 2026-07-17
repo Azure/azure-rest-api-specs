@@ -148,6 +148,7 @@ interface CloudAccounts {
 
 @doc("Properties specific to Commvault Cloud Account resource")
 model CloudAccountProperties is BaseResourceProperties {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("SSO URL for the Commvault Cloud Account")
   @visibility(Lifecycle.Read)
   ssoUrl?: string;

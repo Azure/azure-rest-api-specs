@@ -8,8 +8,10 @@ using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
 @doc("The RoutePolicy resource definition.")
-model RoutePolicy
-  is Azure.ResourceManager.TrackedResource<RoutePolicyProperties, false> {
+model RoutePolicy is Azure.ResourceManager.TrackedResource<
+  RoutePolicyProperties,
+  false
+> {
   @doc("Name of the Route Policy.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path

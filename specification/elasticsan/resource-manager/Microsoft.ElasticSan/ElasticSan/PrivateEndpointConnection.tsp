@@ -15,11 +15,10 @@ namespace Microsoft.ElasticSan;
  *  Response for PrivateEndpoint Connection object
  */
 @parentResource(ElasticSan)
-model PrivateEndpointConnection
-  is Azure.ResourceManager.ProxyResource<
-    PrivateEndpointConnectionProperties,
-    false
-  > {
+model PrivateEndpointConnection is Azure.ResourceManager.ProxyResource<
+  PrivateEndpointConnectionProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = PrivateEndpointConnection,
     KeyName = "privateEndpointConnectionName",
