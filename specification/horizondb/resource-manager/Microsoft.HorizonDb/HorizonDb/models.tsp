@@ -94,6 +94,19 @@ model HorizonDbParameterGroup
   name: string;
 }
 
+@added(Versions.v2026_05_01_preview)
+@doc("Represents an Entra ID administrator configured on a HorizonDB cluster.")
+@parentResource(HorizonDbCluster)
+model HorizonDbAdministrator
+  is Azure.ResourceManager.ProxyResource<HorizonDbAdministratorProperties> {
+  @doc("The Entra ID object identifier of the principal (an RFC 4122 GUID).")
+  @pattern("^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$")
+  @key("objectId")
+  @path
+  @segment("administrators")
+  name: string;
+}
+
 @doc("Properties of a HorizonDB cluster.")
 model HorizonDbClusterProperties {
   @doc("The administrator login name.")
@@ -341,6 +354,49 @@ model HorizonDbFirewallRuleProperties {
   @doc("The provisioning state of the firewall rule.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+}
+
+@added(Versions.v2026_05_01_preview)
+@doc("Properties of a HorizonDB administrator.")
+model HorizonDbAdministratorProperties {
+  @doc("The display name or UPN of the Entra ID principal. For users, typically the User Principal Name (e.g., admin@contoso.com). For groups, the group display name. For service principals, the application display name.")
+  @maxLength(256)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  principalName: string;
+
+  @doc("The type of the Entra ID principal.")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  principalType: PrincipalTypes;
+
+  @doc("The Entra ID object identifier of the principal (an RFC 4122 GUID). On PUT requests, this value comes from the URI path parameter.")
+  @visibility(Lifecycle.Read)
+  objectId?: string;
+
+  @doc("The Entra ID tenant identifier (an RFC 4122 GUID). If omitted, defaults to the tenant of the subscription.")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  tenantId?: string;
+
+  @doc("The provisioning state of the administrator.")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
+@added(Versions.v2026_05_01_preview)
+@doc("The type of the Entra ID principal.")
+union PrincipalTypes {
+  string,
+
+  @doc("Unknown or unrecognized type (internal only, not accepted in requests).")
+  Unknown: "Unknown",
+
+  @doc("An Entra ID user account (UPN-based principal).")
+  User: "User",
+
+  @doc("An Entra ID security group. All members of the group inherit admin privileges.")
+  Group: "Group",
+
+  @doc("An Entra ID application / service principal (used for automated workloads).")
+  ServicePrincipal: "ServicePrincipal",
 }
 
 @doc("The mode to create a new HorizonDB cluster.")

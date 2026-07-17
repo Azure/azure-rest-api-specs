@@ -62,6 +62,9 @@
     },
     {
       "name": "HorizonDbParameterGroups"
+    },
+    {
+      "name": "HorizonDbAdministrators"
     }
   ],
   "paths": {
@@ -482,6 +485,276 @@
         "x-ms-examples": {
           "Delete a HorizonDB cluster": {
             "$ref": "./examples/Clusters_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/administrators": {
+      "get": {
+        "operationId": "HorizonDbAdministrators_List",
+        "tags": [
+          "HorizonDbAdministrators"
+        ],
+        "description": "Lists all HorizonDB administrators in a cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HorizonDbAdministratorListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List HorizonDB administrators in a cluster": {
+            "$ref": "./examples/Administrators_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/administrators/{objectId}": {
+      "get": {
+        "operationId": "HorizonDbAdministrators_Get",
+        "tags": [
+          "HorizonDbAdministrators"
+        ],
+        "description": "Gets information about a HorizonDB administrator.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "objectId",
+            "in": "path",
+            "description": "The Entra ID object identifier of the principal (an RFC 4122 GUID).",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HorizonDbAdministrator"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a HorizonDB administrator": {
+            "$ref": "./examples/Administrators_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "HorizonDbAdministrators_CreateOrUpdate",
+        "tags": [
+          "HorizonDbAdministrators"
+        ],
+        "description": "Creates a new HorizonDB administrator or updates an existing administrator.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "objectId",
+            "in": "path",
+            "description": "The Entra ID object identifier of the principal (an RFC 4122 GUID).",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HorizonDbAdministrator"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'HorizonDbAdministrator' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/HorizonDbAdministrator"
+            }
+          },
+          "201": {
+            "description": "Resource 'HorizonDbAdministrator' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/HorizonDbAdministrator"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a HorizonDB administrator": {
+            "$ref": "./examples/Administrators_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/HorizonDbAdministrator"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "HorizonDbAdministrators_Delete",
+        "tags": [
+          "HorizonDbAdministrators"
+        ],
+        "description": "Deletes a HorizonDB administrator.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "objectId",
+            "in": "path",
+            "description": "The Entra ID object identifier of the principal (an RFC 4122 GUID).",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a HorizonDB administrator": {
+            "$ref": "./examples/Administrators_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2218,6 +2491,87 @@
         ]
       }
     },
+    "HorizonDbAdministrator": {
+      "type": "object",
+      "description": "Represents an Entra ID administrator configured on a HorizonDB cluster.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/HorizonDbAdministratorProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "HorizonDbAdministratorListResult": {
+      "type": "object",
+      "description": "The response of a HorizonDbAdministrator list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The HorizonDbAdministrator items on this page",
+          "items": {
+            "$ref": "#/definitions/HorizonDbAdministrator"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "HorizonDbAdministratorProperties": {
+      "type": "object",
+      "description": "Properties of a HorizonDB administrator.",
+      "properties": {
+        "principalName": {
+          "type": "string",
+          "description": "The display name or UPN of the Entra ID principal. For users, typically the User Principal Name (e.g., admin@contoso.com). For groups, the group display name. For service principals, the application display name.",
+          "maxLength": 256,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "principalType": {
+          "$ref": "#/definitions/PrincipalTypes",
+          "description": "The type of the Entra ID principal.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "objectId": {
+          "type": "string",
+          "description": "The Entra ID object identifier of the principal (an RFC 4122 GUID). On PUT requests, this value comes from the URI path parameter.",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The Entra ID tenant identifier (an RFC 4122 GUID). If omitted, defaults to the tenant of the subscription.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the administrator.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "principalName",
+        "principalType"
+      ]
+    },
     "HorizonDbCluster": {
       "type": "object",
       "description": "Represents the HorizonDB cluster.",
@@ -3085,6 +3439,42 @@
           "description": "The unit of measurement for the parameter.",
           "readOnly": true
         }
+      }
+    },
+    "PrincipalTypes": {
+      "type": "string",
+      "description": "The type of the Entra ID principal.",
+      "enum": [
+        "Unknown",
+        "User",
+        "Group",
+        "ServicePrincipal"
+      ],
+      "x-ms-enum": {
+        "name": "PrincipalTypes",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown or unrecognized type (internal only, not accepted in requests)."
+          },
+          {
+            "name": "User",
+            "value": "User",
+            "description": "An Entra ID user account (UPN-based principal)."
+          },
+          {
+            "name": "Group",
+            "value": "Group",
+            "description": "An Entra ID security group. All members of the group inherit admin privileges."
+          },
+          {
+            "name": "ServicePrincipal",
+            "value": "ServicePrincipal",
+            "description": "An Entra ID application / service principal (used for automated workloads)."
+          }
+        ]
       }
     },
     "PrivateEndpointConnectionResourceListResult": {
