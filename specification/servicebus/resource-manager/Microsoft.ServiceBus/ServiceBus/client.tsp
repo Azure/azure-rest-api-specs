@@ -8,7 +8,11 @@ using Microsoft.ServiceBus;
 @@clientName(Microsoft.ServiceBus, "ServiceBusManagementClient", "python");
 
 @@clientName(NetworkRuleIPAction, "NetworkRuleIpAction", "java");
-@@clientName(NamespaceFailoverProperties, "FailoverProperties", "java");
+@@clientName(
+  NamespaceFailoverProperties,
+  "FailoverProperties",
+  "java,javascript"
+);
 
 // Fix TLS version naming changes for Go SDK compatibility
 @@clientName(TlsVersion.`1.0`, "One0", "go");
@@ -67,6 +71,8 @@ using Microsoft.ServiceBus;
   "csharp"
 );
 @@clientName(NWRuleSetIpRules, "ServiceBusNetworkRuleSetIPRules", "csharp");
+@@clientName(IpAddressType, "ServiceBusIPAddressType", "csharp");
+@@clientName(SBNamespaceProperties.ipAddressType, "IPAddressType", "csharp");
 @@clientName(NetworkRuleIPAction, "ServiceBusNetworkRuleIPAction", "csharp");
 @@clientName(
   NWRuleSetVirtualNetworkRules,
@@ -155,6 +161,7 @@ using Microsoft.ServiceBus;
   "csharp"
 );
 @@clientName(FailOver, "ServiceBusNamespaceFailOver", "csharp");
+@@clientName(FailOverProperties.force, "IsForced", "csharp");
 @@clientName(
   SBNamespaces.privateLinkResourcesGet,
   "GetPrivateLinkResources",

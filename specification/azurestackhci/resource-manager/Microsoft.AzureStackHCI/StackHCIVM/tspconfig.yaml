@@ -36,6 +36,7 @@ options:
   "@azure-typespec/http-client-csharp-mgmt":
     namespace: "Azure.ResourceManager.Hci.Vm"
     emitter-output-dir: "{output-dir}/sdk/azurestackhci/{namespace}"
+    api-version: "2025-09-01-preview"
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
     emitter-output-dir: "{output-dir}/{service-dir}/arm-azurestackhcivm"
@@ -45,3 +46,4 @@ options:
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"

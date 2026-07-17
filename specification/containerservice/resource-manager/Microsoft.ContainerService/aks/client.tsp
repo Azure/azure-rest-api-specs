@@ -1586,6 +1586,47 @@ namespace Azure.ResourceManager.Models {
   "csharp"
 );
 
+// .NET design guideline naming polish (azure-sdk-for-net PR #59887 review feedback)
+// Disambiguate overly-generic generated type names with a service-scoped prefix.
+@@clientName(Operator, "ManagedClusterLabelSelectorOperator", "csharp");
+@@clientName(
+  Azure.ResourceManager.ResourceProvisioningState,
+  "ContainerServiceProvisioningState",
+  "csharp"
+);
+@@clientName(
+  ResourceSkuCapacityScaleType,
+  "ContainerServiceSkuCapacityScaleType",
+  "csharp"
+);
+@@clientName(
+  ResourceSkuRestrictionsReasonCode,
+  "ContainerServiceSkuRestrictionsReasonCode",
+  "csharp"
+);
+@@clientName(
+  ResourceSkuRestrictionsType,
+  "ContainerServiceSkuRestrictionsType",
+  "csharp"
+);
+// Resource models: drop redundant "Resource" suffix / add service prefix so the
+// generated {Name}Resource/{Name}Data/{Name}Collection follow ARM conventions.
+@@clientName(MaintenanceWindowResource, "MaintenanceWindow", "csharp");
+@@clientName(
+  GuardrailsAvailableVersion,
+  "ContainerServiceGuardrailsAvailableVersion",
+  "csharp"
+);
+@@clientName(
+  SafeguardsAvailableVersion,
+  "ContainerServiceSafeguardsAvailableVersion",
+  "csharp"
+);
+// Profile models: add a service/resource prefix so they aren't confused with the
+// Network SDK's "Bastion*" types.
+@@clientName(BastionProfile, "ManagedClusterBastionProfile", "csharp");
+@@clientName(BastionSku, "ManagedClusterBastionSku", "csharp");
+
 // TODO: drop the type replacement upon next major breaking change
 @@alternateType(
   ManagedClusterIdentity.type,

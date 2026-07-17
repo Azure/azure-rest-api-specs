@@ -15,8 +15,8 @@ namespace Microsoft.Devices;
 /**
  * Intermediate path segment for Event Hub endpoints.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "EventHubEndpoint is an intermediate path segment in the published API with no properties of its own; the empty model is required to represent the parent resource path."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "This intermediate path-segment resource has no properties or provisioningState in the published API; retained as-is to preserve backward compatibility."
 @parentResource(IotHubDescription)
 model EventHubEndpoint is Azure.ResourceManager.ProxyResource<{}> {
   ...ResourceNameParameter<
@@ -43,7 +43,7 @@ model EventHubConsumerGroupInfo
   /**
    * The etag.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "etag is exposed at the resource envelope root in the published API; retained at this position to preserve backward compatibility."
   @visibility(Lifecycle.Read)
   etag?: string;
 }
@@ -63,7 +63,7 @@ interface EventHubConsumerGroupInfos {
   /**
    * Add a consumer group to an Event Hub-compatible endpoint in an IoT hub.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "This create operation returns only 200 in the published API; response codes are retained to preserve backward compatibility."
   @summary("Add a consumer group to an Event Hub-compatible endpoint in an IoT hub")
   @tag("PUT")
   createEventHubConsumerGroup is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
@@ -76,7 +76,7 @@ interface EventHubConsumerGroupInfos {
   /**
    * Delete a consumer group from an Event Hub-compatible endpoint in an IoT hub.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "This synchronous delete returns only 200 in the published API; response codes are retained to preserve backward compatibility."
   @summary("Delete a consumer group from an Event Hub-compatible endpoint in an IoT hub")
   @tag("DELETE")
   deleteEventHubConsumerGroup is ArmResourceDeleteSync<

@@ -16,8 +16,10 @@ namespace Microsoft.MachineLearningServices;
  * Azure Resource Manager resource envelope.
  */
 @parentResource(Registry)
-model DataContainer
-  is Azure.ResourceManager.ProxyResource<DataContainerProperties, false> {
+model DataContainer is Azure.ResourceManager.ProxyResource<
+  DataContainerProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = DataContainer,
     KeyName = "name",
@@ -48,7 +50,9 @@ interface DataContainerOps
         @segment("data")
         @key
         name: string,
-      }
+      },
+      ErrorResponse,
+      "MachineLearningRegistryDataContainer"
     > {}
 
 @armResourceOperations
@@ -74,7 +78,9 @@ interface DataContainerwithNamePatternOps
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
         name: string,
-      }
+      },
+      ErrorResponse,
+      "MachineLearningRegistryDataContainer"
     > {}
 
 @armResourceOperations
@@ -170,7 +176,9 @@ interface DataContainerOperationGroupOps
         @segment("data")
         @key
         name: string,
-      }
+      },
+      ErrorResponse,
+      "MachineLearningDataContainer"
     > {}
 
 @armResourceOperations

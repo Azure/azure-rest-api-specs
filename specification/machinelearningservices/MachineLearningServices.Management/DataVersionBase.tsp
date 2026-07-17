@@ -16,8 +16,10 @@ namespace Microsoft.MachineLearningServices;
  * Azure Resource Manager resource envelope.
  */
 @parentResource(DataContainer)
-model DataVersionBase
-  is Azure.ResourceManager.ProxyResource<DataVersionBaseProperties, false> {
+model DataVersionBase is Azure.ResourceManager.ProxyResource<
+  DataVersionBaseProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = DataVersionBase,
     KeyName = "version",
@@ -54,7 +56,9 @@ interface DataVersionBaseOps
         @segment("versions")
         @key
         version: string,
-      }
+      },
+      ErrorResponse,
+      "MachineLearningRegistryDataVersion"
     > {}
 
 @armResourceOperations
@@ -86,7 +90,9 @@ interface DataVersionWithNamePatternBaseOps
         @segment("versions")
         @key
         version: string,
-      }
+      },
+      ErrorResponse,
+      "MachineLearningRegistryDataVersion"
     > {}
 
 @armResourceOperations
@@ -218,7 +224,9 @@ interface DataVersionOps
         @segment("versions")
         @key
         version: string,
-      }
+      },
+      ErrorResponse,
+      "MachineLearningDataVersion"
     > {}
 
 @armResourceOperations

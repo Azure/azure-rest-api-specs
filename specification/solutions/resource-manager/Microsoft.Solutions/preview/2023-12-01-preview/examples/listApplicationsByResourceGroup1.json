@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "api-version": "2023-12-01-preview",
+    "resourceGroupName": "rg",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "myManagedApplication",
+            "type": "Microsoft.Solutions/applications",
+            "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/applications/myManagedApplication",
+            "identity": null,
+            "kind": "ServiceCatalog",
+            "managedBy": null,
+            "plan": null,
+            "properties": {
+              "applicationDefinitionId": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/managedApplicationDefinitions/myAppDef",
+              "managedResourceGroupId": "/subscriptions/subid/resourceGroups/myManagedRG",
+              "outputs": null,
+              "parameters": null,
+              "provisioningState": "Created"
+            },
+            "sku": null
+          },
+          {
+            "name": "myManagedApplication2",
+            "type": "Microsoft.Solutions/applications",
+            "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/applications/myManagedApplication2",
+            "identity": null,
+            "kind": "ServiceCatalog",
+            "managedBy": null,
+            "plan": null,
+            "properties": {
+              "applicationDefinitionId": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/managedApplicationDefinitions/myAppDef2",
+              "managedResourceGroupId": "/subscriptions/subid/resourceGroups/myManagedRG",
+              "outputs": null,
+              "parameters": null,
+              "provisioningState": "Created"
+            },
+            "sku": null
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "Applications_ListByResourceGroup",
+  "title": "Lists all the applications within a resource group"
+}

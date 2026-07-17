@@ -1,7 +1,9 @@
 import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
+import "@typespec/http";
 
 using Azure.ClientGenerator.Core;
+using Http;
 using Microsoft.Quota;
 
 // csharp
@@ -89,12 +91,19 @@ using Microsoft.Quota;
 op currentQuotaLimitBasesCreateOrUpdate(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   apiVersion: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   extensionProvider: "Microsoft.Quota",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   resourceName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   scope: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   createQuotaRequest: CurrentQuotaLimitBase,
 ): CurrentQuotaLimitBase;
@@ -102,7 +111,7 @@ op currentQuotaLimitBasesCreateOrUpdate(
 @@override(
   CurrentQuotaLimitBases.createOrUpdate,
   currentQuotaLimitBasesCreateOrUpdate,
-  "java,go,python,javascript"
+  "java,python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -110,18 +119,24 @@ op currentQuotaLimitBasesCreateOrUpdate(
 op currentQuotaLimitBasesGet(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   apiVersion: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   extensionProvider: "Microsoft.Quota",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   resourceName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   scope: string,
 ): CurrentQuotaLimitBase;
 
 @@override(
   CurrentQuotaLimitBases.get,
   currentQuotaLimitBasesGet,
-  "java,go,python,javascript"
+  "java,python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -129,12 +144,19 @@ op currentQuotaLimitBasesGet(
 op currentQuotaLimitBasesUpdate(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   apiVersion: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   extensionProvider: "Microsoft.Quota",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   resourceName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   scope: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   createQuotaRequest: CurrentQuotaLimitBase,
 ): CurrentQuotaLimitBase;
@@ -142,7 +164,7 @@ op currentQuotaLimitBasesUpdate(
 @@override(
   CurrentQuotaLimitBases.update,
   currentQuotaLimitBasesUpdate,
-  "java,go,python,javascript"
+  "java,python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -150,35 +172,39 @@ op currentQuotaLimitBasesUpdate(
 op quotaRequestStatusGet(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   apiVersion: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   extensionProvider: "Microsoft.Quota",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   id: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   scope: string,
 ): QuotaRequestDetails;
 
-@@override(
-  QuotaRequestStatus.get,
-  quotaRequestStatusGet,
-  "java,go,python,javascript"
-);
+@@override(QuotaRequestStatus.get, quotaRequestStatusGet, "java,python");
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op currentUsagesBasesGet(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   apiVersion: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   extensionProvider: "Microsoft.Quota",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   resourceName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   scope: string,
 ): CurrentUsagesBase;
 
-@@override(
-  CurrentUsagesBases.get,
-  currentUsagesBasesGet,
-  "java,go,python,javascript"
-);
+@@override(CurrentUsagesBases.get, currentUsagesBasesGet, "java,python");

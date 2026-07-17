@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-liftr-base";
 import "@azure-tools/typespec-autorest";
+import "./client.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -78,6 +79,7 @@ model PartnerProperties {
   @doc("Organization Id in MongoDB system")
   organizationId?: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("Redirect URL for the MongoDB")
   redirectUrl?: string;
 

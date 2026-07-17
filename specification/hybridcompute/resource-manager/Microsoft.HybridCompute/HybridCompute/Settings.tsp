@@ -66,7 +66,7 @@ alias SettingsOps = Azure.ResourceManager.Legacy.ExtensionOperations<
     @pattern("default")
     settingsResourceName: string;
   },
-  "Settings"
+  "HybridComputeSettings"
 >;
 
 @armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })

@@ -15,8 +15,10 @@ namespace Microsoft.Network;
  * Describes an inbound endpoint for a DNS resolver.
  */
 @parentResource(DnsResolver)
-model InboundEndpoint
-  is Azure.ResourceManager.TrackedResource<InboundEndpointProperties, false> {
+model InboundEndpoint is Azure.ResourceManager.TrackedResource<
+  InboundEndpointProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = InboundEndpoint,
     KeyName = "inboundEndpointName",
