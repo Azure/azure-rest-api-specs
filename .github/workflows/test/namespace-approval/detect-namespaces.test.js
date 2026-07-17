@@ -1,5 +1,5 @@
 import { execFile } from "child_process";
-import { readFile } from "fs/promises";
+import { readFile, writeFile } from "fs/promises";
 import yaml from "js-yaml";
 import { describe, expect, it, vi } from "vitest";
 import { createMockContext, createMockCore } from "../mocks.js";
@@ -60,6 +60,8 @@ const { getChangedFilesStatuses } = await import("../../../shared/src/changed-fi
 
 /** @type {import("vitest").Mock} */
 const readFileMock = /** @type {any} */ (readFile);
+/** @type {import("vitest").Mock} */
+const writeFileMock = /** @type {any} */ (writeFile);
 /** @type {import("vitest").Mock} */
 const getChangedFilesStatusesMock = /** @type {any} */ (getChangedFilesStatuses);
 /** @type {import("vitest").Mock} */
@@ -217,6 +219,65 @@ describe("detect-namespaces", () => {
     await detectNamespaces(args());
 
     expect(core.setOutput).toHaveBeenCalledWith("results", "true");
+  });
+
+  it("should expand Go module template variables using emitter-level service-dir", async () => {
+    core = createMockCore();
+    context = createMockContext();
+    context.payload = { pull_request: { number: 50 }, action: "opened" };
+    const file = "specification/enclave/Enclave.Management/tspconfig.yaml";
+    mockFileStatuses([file]);
+    readFileMock.mockResolvedValue(
+      yaml.dump({
+        linter: { extends: ["@azure-tools/typespec-azure-resource-manager/all"] },
+        parameters: {
+          "service-dir": { default: "sdk/enclave" },
+        },
+        options: {
+          "@azure-tools/typespec-go": {
+            "service-dir": "sdk/resourcemanager/enclave",
+            module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armenclave",
+          },
+        },
+      }),
+    );
+    mockGitShowNotFound();
+
+    await detectNamespaces(args());
+
+    expect(core.setOutput).toHaveBeenCalledWith("results", "true");
+    // Verify the written results contain the expanded Go namespace
+    const writtenJson = String(writeFileMock.mock.lastCall?.[1]);
+    expect(writtenJson).toContain('"go": "sdk/resourcemanager/enclave/armenclave"');
+  });
+
+  it("should fall back to global parameters for Go module template variables", async () => {
+    core = createMockCore();
+    context = createMockContext();
+    context.payload = { pull_request: { number: 51 }, action: "opened" };
+    const file = "specification/enclave/Enclave.Management/tspconfig.yaml";
+    mockFileStatuses([file]);
+    readFileMock.mockResolvedValue(
+      yaml.dump({
+        linter: { extends: ["@azure-tools/typespec-azure-resource-manager/all"] },
+        parameters: {
+          "service-dir": { default: "sdk/resourcemanager/enclave" },
+        },
+        options: {
+          "@azure-tools/typespec-go": {
+            module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armenclave",
+          },
+        },
+      }),
+    );
+    mockGitShowNotFound();
+
+    await detectNamespaces(args());
+
+    expect(core.setOutput).toHaveBeenCalledWith("results", "true");
+    // Verify the written results contain the expanded Go namespace
+    const writtenJson2 = String(writeFileMock.mock.lastCall?.[1]);
+    expect(writtenJson2).toContain('"go": "sdk/resourcemanager/enclave/armenclave"');
   });
 
   it("should skip when no tspconfig.yaml changes detected", async () => {
