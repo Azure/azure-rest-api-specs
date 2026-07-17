@@ -40,6 +40,8 @@ These settings apply only when `--tag=package-2026-07` is specified on the comma
 input-file:
   - stable/2026-07-01/openapi.json
 suppressions:
+  - code: PatchBodyParametersSchema
+    reason: This is the API design and therefore exempted
   - code: RepeatedPathInfo
     reason: These errors are from the previous API versions
     line: 6778
