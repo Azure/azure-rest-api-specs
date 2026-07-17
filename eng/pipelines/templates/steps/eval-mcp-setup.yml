@@ -1,6 +1,7 @@
 # Repo-local override of the mcpSetupTemplate swap point (see
 # /eng/common/pipelines/templates/jobs/build-mcp.yml). Builds azure-sdk-tools' MCP server(s),
-# side-checked-out via sparse-checkout.yml with a PAT (azuresdk-copilot-github-pat).
+# side-checked-out via sparse-checkout.yml. Azure/azure-sdk-tools is public, so the checkout is
+# anonymous (no PAT needed).
 #
 # Sparse-checks out all of /tools (not just /tools/azsdk-cli): Cli.csproj project-references
 # sibling projects (e.g. codeowners-utils), so a narrower checkout fails restore with CS0234/CS0246.
@@ -22,7 +23,6 @@ steps:
   - template: /eng/common/pipelines/templates/steps/sparse-checkout.yml
     parameters:
       SkipCheckoutNone: true
-      TokenToUseForAuth: $(azuresdk-copilot-github-pat)
       Paths:
         - '/tools'
       Repositories:

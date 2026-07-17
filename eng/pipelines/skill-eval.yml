@@ -2,18 +2,11 @@
 # eng/common. Extends archetype-eval.yml directly; mcpSetupTemplate points at this repo's own
 # /eng/pipelines/templates/steps/eval-mcp-setup.yml (the MCP build swap point).
 #
-# Single CI mechanism for .github/skills: runs on every PR touching it (mock MCP tier) and
-# nightly on main to catch drift unrelated to a code change..
+# Pilot scope: hermetic mock scenarios only, scheduled/manual runs (no pr trigger yet).
 
 trigger: none
 
-pr:
-  branches:
-    include:
-      - main
-  paths:
-    include:
-      - .github/skills/**
+pr: none
 
 schedules:
   - cron: '0 8 * * *'
