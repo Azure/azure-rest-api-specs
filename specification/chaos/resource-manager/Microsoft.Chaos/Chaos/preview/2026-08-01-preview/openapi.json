@@ -5069,7 +5069,7 @@
           {
             "name": "Csfi",
             "value": "Csfi",
-            "description": "A connection backed by Cloud Service Fundamentals Infrastructure (CSFI)."
+            "description": "A connection backed by Cloud Service Fault Injection (CSFI)."
           }
         ]
       }
@@ -5109,11 +5109,11 @@
           "description": "The fully qualified Azure resource ID of the target resource this connection is established with."
         },
         "principalId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The Microsoft Entra principal (object) ID of the identity used by the connection."
         },
         "tenantId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The Microsoft Entra tenant ID that the connection identity belongs to."
         },
         "certificateSubjectName": {
@@ -5130,7 +5130,8 @@
         },
         "dataPlaneEndpoint": {
           "type": "string",
-          "description": "The data plane endpoint of the target resource that this connection reaches.",
+          "format": "uri",
+          "description": "The regional Chaos Studio data-plane endpoint assigned to this connection.\nClients and agents use this endpoint to reach the Chaos Studio data plane\nfor the connection.",
           "readOnly": true
         },
         "status": {
@@ -5165,17 +5166,17 @@
           {
             "name": "Pending",
             "value": "Pending",
-            "description": "The connection has been created but the trust relationship is not yet established."
+            "description": "The connection has been created but is not yet sending heartbeats; the trust relationship is not yet established."
           },
           {
             "name": "Connected",
             "value": "Connected",
-            "description": "The connection is established and the target resource's data plane is reachable."
+            "description": "The connection is established and actively heartbeating."
           },
           {
             "name": "Disconnected",
             "value": "Disconnected",
-            "description": "The connection is no longer reachable."
+            "description": "The connection's heartbeat has gone stale; heartbeats are no longer being received."
           },
           {
             "name": "Revoked",

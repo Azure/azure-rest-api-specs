@@ -49,12 +49,12 @@ model ConnectionProperties {
   /**
    * The Microsoft Entra principal (object) ID of the identity used by the connection.
    */
-  principalId?: string;
+  principalId?: Azure.Core.uuid;
 
   /**
    * The Microsoft Entra tenant ID that the connection identity belongs to.
    */
-  tenantId?: string;
+  tenantId?: Azure.Core.uuid;
 
   /**
    * The subject name of the certificate used to authenticate the connection.
@@ -72,10 +72,12 @@ model ConnectionProperties {
   dstsPrincipal?: string;
 
   /**
-   * The data plane endpoint of the target resource that this connection reaches.
+   * The regional Chaos Studio data-plane endpoint assigned to this connection.
+   * Clients and agents use this endpoint to reach the Chaos Studio data plane
+   * for the connection.
    */
   @visibility(Lifecycle.Read)
-  dataPlaneEndpoint?: string;
+  dataPlaneEndpoint?: url;
 
   /**
    * The current status of the connection.
@@ -107,7 +109,7 @@ union ConnectionKind {
   ChaosAgent: "ChaosAgent",
 
   /**
-   * A connection backed by Cloud Service Fundamentals Infrastructure (CSFI).
+   * A connection backed by Cloud Service Fault Injection (CSFI).
    */
   Csfi: "Csfi",
 }
@@ -119,17 +121,17 @@ union ConnectionStatus {
   string,
 
   /**
-   * The connection has been created but the trust relationship is not yet established.
+   * The connection has been created but is not yet sending heartbeats; the trust relationship is not yet established.
    */
   Pending: "Pending",
 
   /**
-   * The connection is established and the target resource's data plane is reachable.
+   * The connection is established and actively heartbeating.
    */
   Connected: "Connected",
 
   /**
-   * The connection is no longer reachable.
+   * The connection's heartbeat has gone stale; heartbeats are no longer being received.
    */
   Disconnected: "Disconnected",
 
