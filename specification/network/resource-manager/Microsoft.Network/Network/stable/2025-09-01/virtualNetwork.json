@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "NetworkManagementClient",
+    "title": "WebApplicationFirewallManagement",
     "version": "2025-09-01",
-    "description": "APIs to manage Microsoft Azure network resources.",
+    "description": "APIs to manage web application firewall rules.",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -44,6 +44,9 @@
     },
     {
       "name": "applicationSecurityGroups"
+    },
+    {
+      "name": "AddressPrefixSets"
     },
     {
       "name": "BastionHosts"
@@ -164,9 +167,6 @@
     },
     {
       "name": "Usages"
-    },
-    {
-      "name": "AddressPrefixSets"
     }
   ],
   "paths": {
@@ -14455,10 +14455,10 @@
         "addressPrefixes": {
           "type": "array",
           "description": "The list of address prefixes in CIDR notation. Supports both IPv4 and IPv6 CIDR notation (e.g. '10.0.0.0/16', '2001:db8::/32').",
+          "minItems": 1,
           "items": {
             "type": "string"
-          },
-          "minItems": 1
+          }
         },
         "provisioningState": {
           "$ref": "./common.json#/definitions/Common.ProvisioningState",
@@ -16503,11 +16503,6 @@
         "deleteOption": {
           "$ref": "./common.json#/definitions/Common.DeleteOptions",
           "description": "Specify what happens to the public IP address when the VM using it is deleted"
-        },
-        "upgradedToV2": {
-          "type": "boolean",
-          "description": "Whether the public IP address SKU has been upgraded from Standard to StandardV2.",
-          "readOnly": true
         }
       }
     },
@@ -19979,11 +19974,6 @@
         "natGateway": {
           "$ref": "#/definitions/Common.NatGateway",
           "description": "NatGateway of Public IP Prefix."
-        },
-        "upgradedToV2": {
-          "type": "boolean",
-          "description": "Whether the public IP prefix SKU has been upgraded from Standard to StandardV2.",
-          "readOnly": true
         }
       }
     },
