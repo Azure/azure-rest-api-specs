@@ -41,6 +41,42 @@ suppressions:
   - code: ProvisioningStateMustBeReadOnly
     from: openapi.json
     reason: provisioningState is authored readOnly in TypeSpec (@visibility(Lifecycle.Read)) and emitted as { $ref, readOnly true }; the rule evaluates the resolved OpenAPI 2.0 document where a readOnly sibling of a $ref is dropped during resolution — a known TypeSpec/OpenAPI 2.0 limitation (see https://github.com/Azure/azure-openapi-validator/issues/637) confirmed by ARM review. Same generated shape as the approved GA 2026-01-01 resources.
+  - code: LatestVersionOfCommonTypesMustBeUsed
+    from: openapi.json
+    reason: The StorageCache spec is authored against common-types v3 across every shipped version; upgrading common-types would regenerate and break the already-released GA specs. Pre-existing across all versions and surfaced only because a newer openapi-validator was pulled in via a main-branch merge; not introduced by the RebalanceJob change.
+  - code: PostResponseCodes
+    from: openapi.json
+    reason: LRO POST response-code shape on pre-existing operations (the deprecated caches resource) emitted by shared definitions; present in shipped versions and surfaced only by a newer openapi-validator. Not on the RebalanceJob operations and not introduced by this change.
+  - code: PutResponseCodes
+    from: openapi.json
+    reason: LRO PUT response-code shape on pre-existing operations emitted by shared definitions; present in shipped versions and surfaced only by a newer openapi-validator. Not on the RebalanceJob operations and not introduced by this change.
+  - code: DeleteResponseCodes
+    from: openapi.json
+    reason: LRO DELETE response-code shape on pre-existing operations emitted by shared definitions; present in shipped versions and surfaced only by a newer openapi-validator. Not on the RebalanceJob operations and not introduced by this change.
+  - code: LroErrorContent
+    from: openapi.json
+    reason: LRO error responses use the pre-existing common-types v3 error schema shared across every StorageCache version; surfaced only by a newer openapi-validator and not introduced by the RebalanceJob change.
+  - code: EnumInsteadOfBoolean
+    from: openapi.json
+    reason: Boolean properties on pre-existing inherited definitions shared across shipped versions; surfaced only by a newer openapi-validator and not introduced by the RebalanceJob change.
+  - code: OperationIdNounConflictingModelNames
+    from: openapi.json
+    reason: Operation-id noun matches a pre-existing model name on inherited operations; present in shipped versions and surfaced only by a newer openapi-validator. Not introduced by the RebalanceJob change.
+  - code: AvoidAdditionalProperties
+    from: openapi.json
+    reason: additionalProperties on pre-existing inherited definitions shared across shipped versions; surfaced only by a newer openapi-validator and not introduced by the RebalanceJob change.
+  - code: LocationMustHaveXmsMutability
+    from: openapi.json
+    reason: location property x-ms-mutability on pre-existing tracked resources shared across shipped versions; surfaced only by a newer openapi-validator and not introduced by the RebalanceJob change.
+  - code: GuidUsage
+    from: openapi.json
+    reason: GUID-typed property on pre-existing inherited definitions; present in shipped versions and surfaced only by a newer openapi-validator. Not introduced by the RebalanceJob change.
+  - code: ParametersSchemaAsTypeObject
+    from: openapi.json
+    reason: Object-typed parameter schema on pre-existing inherited operations; present in shipped versions and surfaced only by a newer openapi-validator. Not introduced by the RebalanceJob change.
+  - code: RequestSchemaForTrackedResourcesMustHaveTags
+    from: openapi.json
+    reason: Tracked-resource request schema tags on pre-existing resources shared across shipped versions; surfaced only by a newer openapi-validator and not introduced by the RebalanceJob change.
 ```
 
 ### Tag: package-2026-01-01
@@ -49,6 +85,46 @@ These settings apply only when `--tag=package-2026-01-01` is specified on the co
 ```yaml $(tag) == 'package-2026-01-01'
 input-file:
   - stable/2026-01-01/openapi.json
+suppressions:
+  - code: LatestVersionOfCommonTypesMustBeUsed
+    from: openapi.json
+    reason: The StorageCache spec is authored against common-types v3 across every shipped version; upgrading common-types would regenerate and break this already-released GA spec. Pre-existing and surfaced only because a newer openapi-validator was pulled in via a main-branch merge on the RebalanceJob PR; not a change to this shipped version.
+  - code: PostResponseCodes
+    from: openapi.json
+    reason: LRO POST response-code shape on pre-existing operations (the deprecated caches resource and existing jobs) emitted by shared definitions; part of the already-released GA spec and surfaced only by a newer openapi-validator pulled in via a main-branch merge. Not a change to this shipped version.
+  - code: PutResponseCodes
+    from: openapi.json
+    reason: LRO PUT response-code shape on pre-existing operations emitted by shared definitions; part of the already-released GA spec and surfaced only by a newer openapi-validator pulled in via a main-branch merge. Not a change to this shipped version.
+  - code: DeleteResponseCodes
+    from: openapi.json
+    reason: LRO DELETE response-code shape on pre-existing operations emitted by shared definitions; part of the already-released GA spec and surfaced only by a newer openapi-validator pulled in via a main-branch merge. Not a change to this shipped version.
+  - code: LroErrorContent
+    from: openapi.json
+    reason: LRO error responses use the common-types v3 error schema in this already-released GA spec; surfaced only by a newer openapi-validator pulled in via a main-branch merge. Not a change to this shipped version.
+  - code: EnumInsteadOfBoolean
+    from: openapi.json
+    reason: Boolean properties on pre-existing definitions in this already-released GA spec; surfaced only by a newer openapi-validator pulled in via a main-branch merge. Not a change to this shipped version.
+  - code: ProvisioningStateMustBeReadOnly
+    from: openapi.json
+    reason: provisioningState is authored readOnly in TypeSpec (@visibility(Lifecycle.Read)) and emitted as { $ref, readOnly true }; the rule evaluates the resolved OpenAPI 2.0 document where a readOnly sibling of a $ref is dropped during resolution — a known TypeSpec/OpenAPI 2.0 limitation (see https://github.com/Azure/azure-openapi-validator/issues/637). Part of the already-released GA spec and surfaced only by a newer openapi-validator; not a change to this shipped version.
+  - code: OperationIdNounConflictingModelNames
+    from: openapi.json
+    reason: Operation-id noun matches a pre-existing model name in this already-released GA spec; surfaced only by a newer openapi-validator pulled in via a main-branch merge. Not a change to this shipped version.
+  - code: AvoidAdditionalProperties
+    from: openapi.json
+    reason: additionalProperties on pre-existing definitions in this already-released GA spec; surfaced only by a newer openapi-validator pulled in via a main-branch merge. Not a change to this shipped version.
+  - code: LocationMustHaveXmsMutability
+    from: openapi.json
+    reason: location property x-ms-mutability on pre-existing tracked resources in this already-released GA spec; surfaced only by a newer openapi-validator pulled in via a main-branch merge. Not a change to this shipped version.
+  - code: GuidUsage
+    from: openapi.json
+    reason: GUID-typed property on pre-existing definitions in this already-released GA spec; surfaced only by a newer openapi-validator pulled in via a main-branch merge. Not a change to this shipped version.
+  - code: ParametersSchemaAsTypeObject
+    from: openapi.json
+    reason: Object-typed parameter schema on pre-existing operations in this already-released GA spec; surfaced only by a newer openapi-validator pulled in via a main-branch merge. Not a change to this shipped version.
+  - code: RequestSchemaForTrackedResourcesMustHaveTags
+    from: openapi.json
+    reason: Tracked-resource request schema tags on pre-existing resources in this already-released GA spec; surfaced only by a newer openapi-validator pulled in via a main-branch merge. Not a change to this shipped version.
 ```
 
 ### Tag: package-2025-07-01
