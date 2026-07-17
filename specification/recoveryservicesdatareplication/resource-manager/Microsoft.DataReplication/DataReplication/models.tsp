@@ -2772,6 +2772,7 @@ model HyperVToAzStackHCINicInput {
   /**
    * Gets or sets a value indicating whether static ip migration is enabled.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   isStaticIpMigrationEnabled?: boolean;
 
   /**
@@ -2874,6 +2875,7 @@ model HyperVToAzStackHCIProtectedDiskProperties {
   /**
    * Gets or sets a value indicating whether the disk is the OS disk.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   isOsDisk?: boolean;
 
@@ -3066,12 +3068,14 @@ model HyperVToAzStackHCIProtectedItemModelCustomProperties
   /**
    * Gets or sets the type of the OS.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   osType?: string;
 
   /**
    * Gets or sets the name of the OS.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   osName?: string;
 
@@ -3277,6 +3281,7 @@ model HyperVToAzStackHCIProtectedItemModelCustomPropertiesUpdate
   /**
    * Gets or sets the type of the OS.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osType?: string;
 
   /**
@@ -3752,6 +3757,7 @@ model VMwareToAzStackHCINicInput {
   /**
    * Gets or sets a value indicating whether static ip migration is enabled.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   isStaticIpMigrationEnabled?: boolean;
 
   /**
@@ -3854,6 +3860,7 @@ model VMwareToAzStackHCIProtectedDiskProperties {
   /**
    * Gets or sets a value indicating whether the disk is the OS disk.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   isOsDisk?: boolean;
 
@@ -4025,12 +4032,14 @@ model VMwareToAzStackHCIProtectedItemModelCustomProperties
   /**
    * Gets or sets the type of the OS.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   osType?: string;
 
   /**
    * Gets or sets the name of the OS.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   osName?: string;
 
@@ -4290,6 +4299,7 @@ model VMwareToAzStackHCIProtectedItemModelCustomPropertiesUpdate
   /**
    * Gets or sets the type of the OS.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osType?: string;
 
   /**

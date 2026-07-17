@@ -5,6 +5,7 @@ import "./baseTarget.tsp";
 
 namespace Microsoft.DatabaseWatcher;
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("The properties specific to an elastic pool in Azure SQL Database.")
 model SqlDbElasticPoolTargetProperties extends TargetProperties {
   @doc("The Azure SQL DB elastic pool target.")

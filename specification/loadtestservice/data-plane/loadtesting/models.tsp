@@ -1162,6 +1162,7 @@ model ArtifactsContainerInfo {
   expireDateTime?: utcDateTime;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 @doc("Request to clone an existing test into a new test.")
 @added(APIVersions.v2025_03_01_preview)
 model CloneTestRequest {
@@ -1315,6 +1316,7 @@ model DimensionValueList {
   nextLink?: ResourceLocation<DimensionValueList>;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 @doc("Metric Dimensions")
 model MetricDimensionsRequest {
   @doc("Metric name")

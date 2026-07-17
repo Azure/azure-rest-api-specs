@@ -2199,6 +2199,7 @@ model OperationList {
 /**
  * The response containing operation information
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model OperationResponse {
   /**
    * Name of the operation
@@ -2244,6 +2245,7 @@ model OperationDisplay {
 /**
  * Request containing information needed for calculating refund.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model CalculateRefundRequest {
   /**
    * Fully qualified identifier of the reservation order being returned
@@ -2289,6 +2291,7 @@ model ReservationToReturn {
 /**
  * The response of calculate refund containing refund information of reservation
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model CalculateRefundResponse {
   /**
    * Fully qualified identifier of the reservation being returned
@@ -2567,6 +2570,7 @@ model Commitment extends Price {
 /**
  * CalculateExchange operation result
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model CalculateExchangeOperationResultResponse {
   /**
    * It should match what is used to GET the operation result.

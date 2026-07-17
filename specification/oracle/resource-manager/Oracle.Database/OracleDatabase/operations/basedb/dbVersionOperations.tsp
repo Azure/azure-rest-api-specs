@@ -6,6 +6,7 @@ using TypeSpec.Versioning;
 
 namespace Oracle.Database;
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @added(Versions.v20250701_preview)
 @armResourceOperations
 interface DbVersions extends OracleLocationBasedResource<DbVersion> {

@@ -236,6 +236,7 @@ union StoragePermissions {
 /**
  * Tells what traffic can bypass network rules. This can be 'AzureServices' or 'None'.  If not specified the default is 'AzureServices'.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 union NetworkRuleBypassOptions {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

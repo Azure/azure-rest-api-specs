@@ -176,6 +176,7 @@ model ResourceName {
 /**
  * The API error.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 @error
 model ExceptionResponse {
   /**
@@ -369,6 +370,7 @@ model CurrentQuotaLimit {
 /**
  * Quotas (service limits) in the request response.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model QuotaLimitsResponse is Azure.Core.Page<CurrentQuotaLimit>;
 
 /**
@@ -384,6 +386,7 @@ model CreateGenericQuotaRequestParameters {
 /**
  * Response for the quota submission request.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model QuotaRequestOneResourceSubmitResponse {
   /**
    * The quota request ID.
@@ -441,6 +444,7 @@ model QuotaRequestOneResourceProperties {
 /**
  * Response for the quota submission request.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model QuotaRequestSubmitResponse {
   /**
    * The quota request ID.

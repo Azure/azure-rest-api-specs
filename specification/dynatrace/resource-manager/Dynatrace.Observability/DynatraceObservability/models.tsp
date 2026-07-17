@@ -362,6 +362,7 @@ model LogStatusRequest {
 /**
  * List of all the resources being monitored by Dynatrace monitor resource
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model MonitoredResourceListResponse is Azure.Core.Page<MonitoredResource>;
 
 /**
@@ -533,6 +534,7 @@ model MetricRules {
 /**
  * Dynatrace resource can be created or not.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model CreateResourceSupportedResponse {
   /**
    * Represents the properties of the resource.
@@ -583,6 +585,7 @@ model VMExtensionPayload {
 /**
  * Request for performing Dynatrace agent install/uninstall action through the Azure Dynatrace resource on the provided list of agent resources.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model ManageAgentInstallationRequest {
   /**
    * The list of resources.
@@ -916,6 +919,7 @@ model OperationDisplay {
 /**
  * Request for getting connected resources count for a Marketplace Subscription Id
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model MarketplaceSubscriptionIdRequest {
   /**
    * Marketplace Subscription Id
@@ -926,6 +930,7 @@ model MarketplaceSubscriptionIdRequest {
 /**
  * Response for getting Connected resources for a MP SaaS Resource
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model ConnectedResourcesCountResponse {
   /**
    * Count of the connected resources
@@ -936,6 +941,7 @@ model ConnectedResourcesCountResponse {
 /**
  * Request for getting Marketplace SaaS resource details for a tenant Id
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MarketplaceSaaSResourceDetailsRequest {
   /**
@@ -947,6 +953,7 @@ model MarketplaceSaaSResourceDetailsRequest {
 /**
  * Marketplace SaaS resource details linked to the given tenant Id
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MarketplaceSaaSResourceDetailsResponse {
   /**
@@ -1049,6 +1056,7 @@ model MetricsStatusResponse {
 /**
  * Response of a list App Services Operation.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model AppServiceListResponse is Azure.Core.Page<AppServiceInfo>;
 
 /**
@@ -1158,6 +1166,7 @@ model SSODetailsResponse {
 /**
  * Request for getting all the linkable environments for a user
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model LinkableEnvironmentRequest {
   /**
    * Tenant Id of the user in which they want to link the environment
@@ -1178,12 +1187,14 @@ model LinkableEnvironmentRequest {
 /**
  * Response for getting all the linkable environments
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model LinkableEnvironmentListResponse
   is Azure.Core.Page<LinkableEnvironmentResponse>;
 
 /**
  * Response for getting all the linkable environments
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model LinkableEnvironmentResponse {
   /**
    * environment id for which user is an admin

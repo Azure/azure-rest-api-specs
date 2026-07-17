@@ -249,6 +249,7 @@ model MarketplaceSkuVersion {
   launchType?: OfferLaunchType;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 @doc("Access token request object")
 model AccessTokenRequest {
   @doc("The name of the publisher.")
@@ -289,6 +290,7 @@ model DiskAccessToken {
   accessToken: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 @doc("Access token request object")
 model AccessTokenReadRequest {
   @doc("The name of the publisher.")

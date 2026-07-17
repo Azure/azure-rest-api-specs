@@ -4,6 +4,7 @@ using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("IP Prefix Properties defines the properties of the resource.")
 model IpPrefixProperties {
   ...AnnotationResource;
@@ -39,8 +40,10 @@ model IpPrefixProperties {
   administrativeState?: AdministrativeState;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("IP Prefix patchable properties.")
 model IpPrefixPatchableProperties {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The list of IP Prefix Rules.")
   @Azure.ResourceManager.identifiers(#[])
   ipPrefixRules?: IpPrefixRule[];
@@ -73,6 +76,7 @@ model IpPrefixPatch extends TagsUpdate {
   properties?: IpPrefixPatchProperties;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("IP Prefix patchable properties.")
 model IpPrefixPatchProperties {
   ...AnnotationResource;

@@ -598,6 +598,7 @@ model ImageReference {
   @visibility(Lifecycle.Read)
   operatingSystem?: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The operating system build number of the image.")
   @visibility(Lifecycle.Read)
   osBuildNumber?: string;

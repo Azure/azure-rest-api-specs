@@ -32,6 +32,7 @@ model SqlAssessmentV3Properties is AssessmentProperties<
 
 @doc("SQL assessment settings class.")
 model SqlAssessmentSettings is AssessmentSettings {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("Gets or sets user configurable setting to display the azure hybrid use benefit.")
   osLicense?: OsLicense;
 

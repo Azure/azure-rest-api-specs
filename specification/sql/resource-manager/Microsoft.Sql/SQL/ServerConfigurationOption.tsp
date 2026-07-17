@@ -28,6 +28,7 @@ model ServerConfigurationOption
   >;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations

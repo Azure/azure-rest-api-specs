@@ -303,6 +303,7 @@ model OperationDisplay {
 /**
  * The parameters required to create a new subscription.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model PutAliasRequest {
   /**
    * Put alias request properties.

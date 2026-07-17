@@ -328,6 +328,7 @@ model AppServicePlanConfiguration {
 /**
  * Defines the request body for updating SAP monitor resource.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model UpdateMonitorRequest {
   ...ArmTagsProperty;
   ...ManagedServiceIdentityProperty;
@@ -477,6 +478,7 @@ model SapLandscapeMonitorMetricThresholds {
 /**
  * Gets or sets the provider properties.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model HanaDbProviderInstanceProperties extends ProviderSpecificProperties {
   /**
    * Gets or sets the target virtual machine size.
@@ -486,6 +488,7 @@ model HanaDbProviderInstanceProperties extends ProviderSpecificProperties {
   /**
    * Gets or sets the hana database name.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   dbName?: string;
 
   /**
@@ -501,17 +504,20 @@ model HanaDbProviderInstanceProperties extends ProviderSpecificProperties {
   /**
    * Gets or sets the database user name.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   dbUsername?: string;
 
   /**
    * Gets or sets the database password.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @secret
   dbPassword?: string;
 
   /**
    * Gets or sets the key vault URI to secret with the database password.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   dbPasswordUri?: string;
 
   /**
@@ -610,6 +616,7 @@ model SapNetWeaverProviderInstanceProperties
 /**
  * Gets or sets the PrometheusOS provider properties.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model PrometheusOsProviderInstanceProperties
   extends ProviderSpecificProperties {
   /**
@@ -642,6 +649,7 @@ model PrometheusOsProviderInstanceProperties
 /**
  * Gets or sets the DB2 provider properties.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model Db2ProviderInstanceProperties extends ProviderSpecificProperties {
   /**
    * Gets or sets the target virtual machine name.
@@ -651,27 +659,32 @@ model Db2ProviderInstanceProperties extends ProviderSpecificProperties {
   /**
    * Gets or sets the db2 database name.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   dbName?: string;
 
   /**
    * Gets or sets the db2 database sql port.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   dbPort?: string;
 
   /**
    * Gets or sets the db2 database user name.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   dbUsername?: string;
 
   /**
    * Gets or sets the db2 database password.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @secret
   dbPassword?: string;
 
   /**
    * Gets or sets the key vault URI to secret with the database password.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   dbPasswordUri?: string;
 
   /**
@@ -749,22 +762,26 @@ model MsSqlServerProviderInstanceProperties extends ProviderSpecificProperties {
   /**
    * Gets or sets the database sql port.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   dbPort?: string;
 
   /**
    * Gets or sets the database user name.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   dbUsername?: string;
 
   /**
    * Gets or sets the database password.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @secret
   dbPassword?: string;
 
   /**
    * Gets or sets the key vault URI to secret with the database password.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   dbPasswordUri?: string;
 
   /**
@@ -801,27 +818,32 @@ model OracleProviderInstanceProperties extends ProviderSpecificProperties {
   /**
    * Gets or sets the oracle database sql port.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   dbPort?: string;
 
   /**
    * Gets or sets the oracle database name.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   dbName?: string;
 
   /**
    * Gets or sets the oracle database user name.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   dbUsername?: string;
 
   /**
    * Gets or sets the oracle database password.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @secret
   dbPassword?: string;
 
   /**
    * Gets or sets the key vault URI to secret with the database password.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   dbPasswordUri?: string;
 
   /**

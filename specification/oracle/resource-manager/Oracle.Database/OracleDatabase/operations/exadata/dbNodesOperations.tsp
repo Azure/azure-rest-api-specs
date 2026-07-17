@@ -7,6 +7,7 @@ using TypeSpec.Versioning;
 
 namespace Oracle.Database;
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @armResourceOperations
 interface DbNodes extends OracleReadOnlyResource<DbNode> {
   // TODO: Swagger generator bug, cannot be extracted to interface

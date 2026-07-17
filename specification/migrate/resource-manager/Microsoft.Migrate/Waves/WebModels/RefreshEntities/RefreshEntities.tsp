@@ -10,6 +10,7 @@ using Azure.ResourceManager;
 
 namespace Microsoft.Migrate;
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 @doc("Request body for refreshing migration entities and groups.")
 @added(ApiVersions.v2026_02_01_preview)
 model RefreshEntitiesRequest {
@@ -28,6 +29,7 @@ model RefreshEntitiesRequest {
   ]>>;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 @doc("Response body for refresh migration entities operation.")
 @added(ApiVersions.v2026_02_01_preview)
 model RefreshEntitiesResponse {

@@ -13,6 +13,7 @@ namespace LiveTokenApi;
 /**
  * The response to a live token query.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model LiveTokenResponse {
   /**
    * JWT token for accessing live metrics stream data.

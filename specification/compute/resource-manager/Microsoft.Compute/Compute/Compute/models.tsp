@@ -1447,6 +1447,7 @@ union ConsistencyModeTypes {
   ApplicationConsistent: "ApplicationConsistent",
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union RestorePointCollectionExpandOptions {
   string,
@@ -2038,6 +2039,7 @@ model AutomaticOSUpgradePolicy {
   /**
    * Indicates whether Auto OS Upgrade should undergo deferral. Deferred OS upgrades will send advanced notifications on a per-VM basis that an OS upgrade from rolling upgrades is incoming, via the IMDS tag 'Platform.PendingOSUpgrade'. The upgrade then defers until the upgrade is approved via an ApproveRollingUpgrade call.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osRollingUpgradeDeferral?: boolean;
 }
 
@@ -2957,6 +2959,7 @@ model VirtualMachineScaleSetNetworkConfigurationProperties {
   /**
    * Specifies the IP configurations of the network interface.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @identifiers(#["name"])
   ipConfigurations: VirtualMachineScaleSetIPConfiguration[];
 
@@ -3099,6 +3102,7 @@ model VirtualMachineScaleSetPublicIPAddressConfigurationProperties {
   /**
    * The list of IP tags associated with the public IP address.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @identifiers(#[])
   ipTags?: VirtualMachineScaleSetIpTag[];
 
@@ -3136,6 +3140,7 @@ model VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings {
 /**
  * Contains the IP tag associated with the public IP address.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model VirtualMachineScaleSetIpTag {
   /**
    * IP tag type. Example: FirstPartyUsage.
@@ -3416,6 +3421,7 @@ model ScheduledEventsProfile {
   /**
    * Specifies OS Image Scheduled Event related configurations.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osImageNotificationProfile?: OSImageNotificationProfile;
 }
 
@@ -4004,6 +4010,7 @@ model VirtualMachineScaleSetUpdateVMProfile {
   /**
    * The virtual machine scale set OS profile.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osProfile?: VirtualMachineScaleSetUpdateOSProfile;
 
   /**
@@ -4106,6 +4113,7 @@ model VirtualMachineScaleSetUpdateStorageProfile {
   /**
    * The OS disk.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osDisk?: VirtualMachineScaleSetUpdateOSDisk;
 
   /**
@@ -4260,6 +4268,7 @@ model VirtualMachineScaleSetUpdateNetworkConfigurationProperties {
   /**
    * The virtual machine scale set IP Configuration.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @identifiers(#["name"])
   ipConfigurations?: VirtualMachineScaleSetUpdateIPConfiguration[];
 
@@ -4499,6 +4508,7 @@ model VirtualMachineScaleSetExtensionUpdate extends SubResourceReadOnly {
 /**
  * Response after calling a manual recovery walk
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model RecoveryWalkResponse {
   /**
    * Whether the recovery walk was performed
@@ -5074,6 +5084,7 @@ model VirtualMachineScaleSetVMProperties {
   /**
    * Specifies the operating system settings for the virtual machine.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osProfile?: OSProfile;
 
   /**
@@ -5235,6 +5246,7 @@ model VirtualMachineScaleSetVMInstanceView {
   /**
    * The version of Operating System running on the hybrid machine.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osVersion?: string;
 
   /**
@@ -5902,6 +5914,7 @@ model VirtualMachineNetworkInterfaceConfigurationProperties {
   /**
    * Specifies the IP configurations of the network interface.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @identifiers(#["name"])
   ipConfigurations: VirtualMachineNetworkInterfaceIPConfiguration[];
 
@@ -6037,6 +6050,7 @@ model VirtualMachinePublicIPAddressConfigurationProperties {
   /**
    * The list of IP tags associated with the public IP address.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @identifiers(#[])
   ipTags?: VirtualMachineIpTag[];
 
@@ -6318,6 +6332,7 @@ model VirtualMachineExtensionUpdateProperties {
 /**
  * Specifies the input for attaching and detaching a list of managed data disks.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model AttachDetachDataDisksRequest {
   /**
    * The list of managed data disks to be attached.
@@ -7344,6 +7359,7 @@ model VirtualMachineImageProperties {
   /**
    * Contains the os disk image information.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osDiskImage?: OSDiskImage;
 
   /**

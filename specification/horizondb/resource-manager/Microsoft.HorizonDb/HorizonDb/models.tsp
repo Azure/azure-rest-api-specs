@@ -9,6 +9,7 @@ using Azure.ResourceManager;
 
 namespace Microsoft.HorizonDb;
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("Represents the HorizonDB cluster.")
 model HorizonDbCluster
   is Azure.ResourceManager.TrackedResource<HorizonDbClusterProperties> {
@@ -38,6 +39,7 @@ model HorizonDbPool
   name: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("Represents the HorizonDB replica.")
 @parentResource(HorizonDbPool)
 model HorizonDbReplica
@@ -52,6 +54,7 @@ model HorizonDbReplica
   name: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("Represents the HorizonDB firewall rule.")
 @parentResource(HorizonDbPool)
 model HorizonDbFirewallRule
@@ -66,6 +69,7 @@ model HorizonDbFirewallRule
   name: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("Represents the HorizonDB private link resource.")
 @parentResource(HorizonDbCluster)
 model HorizonDbPrivateLinkResource
@@ -80,6 +84,7 @@ model HorizonDbPrivateLinkResource
   name: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("Represents the HorizonDB parameter group.")
 model HorizonDbParameterGroup
   is Azure.ResourceManager.TrackedResource<HorizonDbParameterGroupProperties> {
@@ -93,6 +98,7 @@ model HorizonDbParameterGroup
   name: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("Properties of a HorizonDB cluster.")
 model HorizonDbClusterProperties {
   @doc("The administrator login name.")
@@ -166,6 +172,7 @@ model HorizonDbClusterProperties {
   parameterGroup?: HorizonDbClusterParameterGroupConnectionProperties;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("Properties of a HorizonDB cluster for update operations.")
 model HorizonDbClusterPropertiesForPatchUpdate {
   @secret
@@ -185,6 +192,7 @@ model HorizonDbClusterPropertiesForPatchUpdate {
   parameterGroup?: HorizonDbClusterParameterGroupConnectionProperties;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("HorizonDB cluster for update operations.")
 model HorizonDbClusterForPatchUpdate {
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
@@ -193,6 +201,7 @@ model HorizonDbClusterForPatchUpdate {
   properties?: HorizonDbClusterPropertiesForPatchUpdate;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("Properties of a HorizonDB pool.")
 model HorizonDbPoolProperties {
   @doc("The location of the HorizonDB pool.")
@@ -228,6 +237,7 @@ model Network {
   publicNetworkAccess?: PublicNetworkAccessState;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("Properties of a HorizonDB replica.")
 model HorizonDbReplicaProperties {
   @doc("Role of the replica.")
@@ -250,6 +260,7 @@ model HorizonDbReplicaProperties {
   provisioningState?: ProvisioningState;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("Properties of a HorizonDB replica for update operations.")
 model HorizonDbReplicaPropertiesForPatchUpdate {
   @visibility(Lifecycle.Update)
@@ -257,18 +268,22 @@ model HorizonDbReplicaPropertiesForPatchUpdate {
   role?: ReplicaRole;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("HorizonDB replica for update operations.")
 model HorizonDbReplicaForPatchUpdate {
   @doc("Properties of a HorizonDB replica for update operations.")
   properties?: HorizonDbReplicaPropertiesForPatchUpdate;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("Properties of a HorizonDB firewall rule.")
 model HorizonDbFirewallRuleProperties {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The start IP address of the firewall rule (IPv4).")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   startIpAddress: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The end IP address of the firewall rule (IPv4).")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   endIpAddress: string;
@@ -389,6 +404,7 @@ union ProvisioningState {
   Provisioning: "Provisioning",
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("Properties of a HorizonDB parameter group.")
 model HorizonDbParameterGroupProperties {
   @doc("Parameters in the parameter group.")
@@ -454,6 +470,7 @@ model ParameterProperties {
   unit?: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("Properties of a HorizonDB parameter group for update operations.")
 model HorizonDbParameterGroupPropertiesForPatchUpdate {
   @doc("Parameters in the parameter group.")
@@ -470,6 +487,7 @@ model HorizonDbParameterGroupPropertiesForPatchUpdate {
   applyImmediately?: boolean;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("HorizonDB parameter group for update operations.")
 model HorizonDbParameterGroupForPatchUpdate {
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
@@ -478,6 +496,7 @@ model HorizonDbParameterGroupForPatchUpdate {
   properties?: HorizonDbParameterGroupPropertiesForPatchUpdate;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("Connection information for HorizonDB parameter group.")
 model HorizonDbParameterGroupConnectionProperties {
   @doc("The name of the connected resource.")
@@ -493,6 +512,7 @@ model HorizonDbParameterGroupConnectionProperties {
   type?: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("Connection information for HorizonDB parameter group.")
 model HorizonDbClusterParameterGroupConnectionProperties {
   @doc("The resource ID of the connected parameter group.")

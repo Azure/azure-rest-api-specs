@@ -67,6 +67,7 @@ model AutonomousDatabaseBackupProperties {
   @visibility(Lifecycle.Read)
   databaseSizeInTbs?: float64;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("A valid Oracle Database version for Autonomous Database.")
   @visibility(Lifecycle.Read)
   dbVersion?: string;

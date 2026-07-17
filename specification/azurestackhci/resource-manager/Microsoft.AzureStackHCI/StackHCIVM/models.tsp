@@ -593,6 +593,7 @@ model NetworkInterfaceArmReference {
     }
   ]>;
 }
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("The Azure Resource ID for a Network Interface.")
 model SubnetIpConfigurationReference {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "ID is already shipped. Changing the casing is a breaking change."
@@ -604,6 +605,7 @@ model SubnetIpConfigurationReference {
   ]>;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @added(Versions.v2025_09_01_preview)
 @doc("The Azure Resource ID for a resource consuming IP on a subnet")
 model VirtualNetworkSubnetIpConfigurationReference {
@@ -855,6 +857,7 @@ model GalleryImageVersionProperties {
 
 @doc("This is the storage profile of a Gallery Image Version.")
 model GalleryImageVersionStorageProfile {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("This is the OS disk image.")
   osDiskImage?: GalleryOSDiskImage;
 }
@@ -917,6 +920,7 @@ model ExtendedLocation {
   type?: ExtendedLocationTypes;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 @doc("The gallery images resource patch definition.")
 model GalleryImagesUpdateRequest {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
@@ -954,6 +958,7 @@ model LogicalNetworkProperties {
   networkType?: LogicalNetworkTypeEnum;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 @doc("DhcpOptions contains an array of DNS servers available to VMs deployed in the logical network. Standard DHCP option for a subnet overrides logical network DHCP options.")
 model LogicalNetworkPropertiesDhcpOptions {
   @doc("The list of DNS servers IP addresses.")
@@ -980,9 +985,11 @@ model SubnetProperties {
   @doc("List of address prefixes for the subnet.")
   addressPrefixes?: string[];
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("IPAllocationMethod - The IP address allocation method. Possible values include: 'Static', 'Dynamic'")
   ipAllocationMethod?: IpAllocationMethodEnum;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("IPConfigurationReferences - list of IPConfigurationReferences")
   @Azure.ResourceManager.identifiers(#[])
   ipConfigurationReferences?: SubnetIpConfigurationReference[];
@@ -1167,6 +1174,7 @@ model SecurityRuleProperties {
 
 @doc("Properties under the network interface resource")
 model NetworkInterfaceProperties {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("IPConfigurations - A list of IPConfigurations of the network interface.")
   @Azure.ResourceManager.identifiers(#[])
   ipConfigurations?: IPConfiguration[];
@@ -1336,6 +1344,7 @@ model LogicalNetworkStatusProvisioningStatus {
   status?: Status;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 @doc("The logical network resource patch definition.")
 model LogicalNetworksUpdateRequest {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
@@ -1367,6 +1376,7 @@ model VirtualNetworkAddressSpace {
   addressPrefixes: string[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 @added(Versions.v2025_09_01_preview)
 @doc("DHCP options for virtual networks")
 model VirtualNetworkDhcpOptions {
@@ -1412,6 +1422,7 @@ model VirtualNetworkSubnetProperties {
   @doc("RouteTable defining custom routes for the subnet.")
   routeTable?: RouteTable;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("List of ip configurations for the subnet")
   @visibility(Lifecycle.Read)
   ipConfigurations?: VirtualNetworkSubnetIpConfigurationReference[];
@@ -1456,6 +1467,7 @@ model PublicIPAddressProperties {
   @doc("Whether the public IP is v4 or v6. Defaults to IPv4")
   publicIPAddressVersion?: PublicIPAddressType;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("ipAllocationScope: Azure Reference to a particular IP Pool (ALM) or a LogicalNetwork (ALL) for allocating public IP")
   ipAllocationScope?: armResourceIdentifier<[
     {
@@ -1469,6 +1481,7 @@ model PublicIPAddressProperties {
   @doc("IP Address. This is static. If the user specifies, we allocate that otherwise allocate from logical network address space.")
   ipAddress?: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("network interface or LoadBalancer frontendIPconfiguration using this public IP")
   @visibility(Lifecycle.Read)
   ipConfiguration?: IPConfigurationArmReference;
@@ -1670,6 +1683,7 @@ model LoadBalancerBackendAddressProperties {
   @doc("admin state - if set to false, the address is removed from the pool")
   adminState?: LoadBalancerBackendAddressAdminState;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("IP address of the backend target. Populated automatically from the referenced IP configuration.")
   @visibility(Lifecycle.Read)
   ipAddress?: string;
@@ -1823,6 +1837,7 @@ model LoadBalancerStatusProvisioningStatus {
   status?: Status;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 @doc("The virtual network subnet resource patch definition.")
 @added(Versions.v2025_09_01_preview)
 model VirtualNetworkSubnetUpdateRequest {
@@ -1909,6 +1924,7 @@ model MarketplaceGalleryImageStatusDownloadStatus {
   downloadSizeInMB?: int64;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 @doc("The marketplace gallery image resource patch definition.")
 model MarketplaceGalleryImagesUpdateRequest {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
@@ -1916,6 +1932,7 @@ model MarketplaceGalleryImagesUpdateRequest {
   tags?: Record<string>;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 @doc("The network interface resource patch definition.")
 model NetworkInterfacesUpdateRequest {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
@@ -1992,6 +2009,7 @@ model StorageContainerStatusProvisioningStatus {
   status?: Status;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 @doc("The storage container resource patch definition.")
 model StorageContainersUpdateRequest {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
@@ -2211,6 +2229,7 @@ model VirtualHardDiskUploadStatus {
   errorMessage?: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 @doc("The virtual hard disk resource patch definition.")
 model VirtualHardDisksUpdateRequest {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
@@ -2230,6 +2249,7 @@ model VirtualHardDisksUpdateProperties {
   diskSizeGB?: int64;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 @added(Versions.v2024_05_01_preview)
 @doc("Request for uploading virtual hard disk.")
 model VirtualHardDiskUploadRequest {
@@ -2239,6 +2259,7 @@ model VirtualHardDiskUploadRequest {
   azureManagedDiskUploadUrl: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 @added(Versions.v2024_05_01_preview)
 @doc("Response for uploading virtual hard disk.")
 model VirtualHardDiskUploadResponse {
@@ -2318,6 +2339,7 @@ model VirtualMachineInstanceProperties {
   @visibility(Lifecycle.Read)
   hostNodeName?: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @added(Versions.v2025_06_01_preview)
   @doc("Name of the host node that the VM is on.")
   @visibility(Lifecycle.Read)
@@ -2392,6 +2414,7 @@ model VirtualMachineInstancePropertiesNetworkProfile {
   networkInterfaces?: NetworkInterfaceArmReference[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("OsProfile - describes the configuration of the operating system and sets login data")
 model VirtualMachineInstancePropertiesOsProfile {
   @doc("AdminPassword - admin password")
@@ -2412,6 +2435,7 @@ model VirtualMachineInstancePropertiesOsProfile {
   windowsConfiguration?: VirtualMachineInstancePropertiesOsProfileWindowsConfiguration;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("LinuxConfiguration - linux specific configuration values for the virtual machine instance")
 model VirtualMachineInstancePropertiesOsProfileLinuxConfiguration {
   @doc("DisablePasswordAuthentication - whether password authentication should be disabled")
@@ -2445,6 +2469,7 @@ model SshPublicKey {
   keyData?: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("Windows Configuration for the virtual machine instance")
 model VirtualMachineInstancePropertiesOsProfileWindowsConfiguration {
   @doc("Whether to EnableAutomaticUpdates on the machine")
@@ -2493,6 +2518,7 @@ model VirtualMachineInstancePropertiesStorageProfile {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   imageReference?: ImageArmReference;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("VHD to attach as OS disk")
   osDisk?: VirtualMachineInstancePropertiesStorageProfileOsDisk;
 
@@ -2504,9 +2530,11 @@ model VirtualMachineInstancePropertiesStorageProfile {
   ]>;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("VHD to attach as OS disk")
 model VirtualMachineInstancePropertiesStorageProfileOsDisk
   is VirtualHardDiskArmReference {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("This property allows you to specify the type of the OS that is included in the disk if creating a VM from user-image or a specialized VHD. Possible values are: Windows, Linux.")
   osType?: OperatingSystemTypes;
 
@@ -2646,6 +2674,7 @@ model Identity {
   type?: "SystemAssigned";
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 @doc("The virtual machine instance resource patch definition.")
 model VirtualMachineInstanceUpdateRequest {
   @doc("Defines the resource properties for the update.")
@@ -2666,6 +2695,7 @@ model VirtualMachineInstanceUpdateProperties {
   @doc("NetworkProfile - describes the network update configuration the virtual machine instance")
   networkProfile?: NetworkProfileUpdate;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("OsProfile - describes the update configuration of the operating system")
   osProfile?: OsProfileUpdate;
 }
@@ -2714,6 +2744,7 @@ model OsProfileUpdate {
   windowsConfiguration?: OsProfileUpdateWindowsConfiguration;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("OSProfile update linux configuration")
 model OsProfileUpdateLinuxConfiguration {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is a short form. It is the correct case"
@@ -2725,6 +2756,7 @@ model OsProfileUpdateLinuxConfiguration {
   provisionVMConfigAgent?: boolean;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("OSProfile update windows configuration")
 model OsProfileUpdateWindowsConfiguration {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is a short form. It is the correct case"
@@ -2826,6 +2858,7 @@ model GuestCredential {
   password?: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 @added(Versions.v2026_04_01_preview)
 @doc("The operation gracefully shuts down a virtual machine by requesting the operating system to shut down. The virtual machine can be restarted with the same provisioned resources. To force an immediate shut down, see the skipShutdown flag.")
 model PowerOffVirtualMachineOptions {

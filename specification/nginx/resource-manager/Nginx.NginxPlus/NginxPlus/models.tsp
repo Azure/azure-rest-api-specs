@@ -182,6 +182,7 @@ union ActionType {
 /**
  * Nginx Deployment Api Key Request
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model NginxDeploymentApiKeyRequest {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
@@ -245,6 +246,7 @@ model NginxDeploymentApiKeyResponseProperties {
 /**
  * Nginx Deployment Api Key List Response
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model NginxDeploymentApiKeyListResponse
   is Azure.Core.Page<NginxDeploymentApiKeyResponse>;
 
@@ -297,11 +299,13 @@ model NginxCertificateErrorResponseBody {
 /**
  * Nginx Certificate List Response
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model NginxCertificateListResponse is Azure.Core.Page<NginxCertificate>;
 
 /**
  * Response of a list operation.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model NginxConfigurationListResponse
   is Azure.Core.Page<NginxConfigurationResponse>;
 
@@ -345,6 +349,7 @@ model NginxConfigurationFile {
 /**
  * Nginx Configuration Protected File Response
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model NginxConfigurationProtectedFileResponse {
   /**
    * The virtual path of the protected file.
@@ -370,6 +375,7 @@ model NginxConfigurationPackage {
 /**
  * Nginx Configuration Request
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model NginxConfigurationRequest {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
@@ -425,6 +431,7 @@ model NginxConfigurationRequestProperties {
 /**
  * Nginx Configuration Protected File Request
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model NginxConfigurationProtectedFileRequest {
   /**
    * The content of the protected file. This value is a PUT only value. If you perform a GET request on this value, it will be empty because it is a protected file.
@@ -998,6 +1005,7 @@ model NginxDeploymentUpdatePropertiesNginxAppProtect {
 /**
  * Nginx Deployment List Response
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model NginxDeploymentListResponse is Azure.Core.Page<NginxDeployment>;
 
 /**
@@ -1082,6 +1090,7 @@ model NginxDeploymentWafPolicyApplyingStatus {
 /**
  * Nginx Deployment Default Waf Policy List Response
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model NginxDeploymentDefaultWafPolicyListResponse {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @identifiers(#[])
@@ -1107,6 +1116,7 @@ model NginxDeploymentDefaultWafPolicyProperties {
 /**
  * Nginx Deployment Waf Policy List Response
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model NginxDeploymentWafPolicyListResponse
   is Azure.Core.Page<NginxDeploymentWafPolicyMetadata>;
 
@@ -1189,6 +1199,7 @@ model NginxDeploymentWafPolicyError {
 /**
  * Nginx Deployment Waf Policy Analysis Create Request
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 @added(Versions.v2025_11_01)
 model NginxDeploymentWafPolicyAnalysisCreateRequest {
   /**
@@ -1217,6 +1228,7 @@ model NginxDeploymentWafPolicyAnalysisData {
 /**
  * Nginx Deployment Waf Policy Analysis Response
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 @added(Versions.v2025_11_01)
 model NginxDeploymentWafPolicyAnalysisResponse {
   /**

@@ -33,6 +33,7 @@ model RadiologyInsightsModelConfiguration {
   locale?: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 @doc("Options regarding follow up recommendation inferences and finding inferences.")
 model RadiologyInsightsInferenceOptions {
   @doc("Follow-up recommendation options.")
@@ -50,6 +51,7 @@ model RadiologyInsightsInferenceOptions {
   qualityMeasureOptions?: QualityMeasureOptions;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 @doc("Follow-up recommendation options.")
 model FollowupRecommendationOptions {
   @doc("Include/Exclude follow-up recommendations without a specific radiology procedure. Default is false.")
@@ -62,12 +64,14 @@ model FollowupRecommendationOptions {
   provideFocusedSentenceEvidence?: boolean;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 @doc("Finding options.")
 model FindingOptions {
   @doc("If this is true, provide the sentence that contains the first token of the finding's clinical indicator (i.e. the medical problem), if there is one. This sentence is provided as an extension with url 'ci_sentence', next to the token evidence. Default is false.")
   provideFocusedSentenceEvidence?: boolean;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 @added(ApiVersion.v2024_10_01)
 @doc("Guidance options.")
 model GuidanceOptions {
@@ -75,6 +79,7 @@ model GuidanceOptions {
   showGuidanceInHistory: boolean;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 @added(ApiVersion.v2024_10_01)
 @doc("Quality Measure Options.")
 model QualityMeasureOptions {

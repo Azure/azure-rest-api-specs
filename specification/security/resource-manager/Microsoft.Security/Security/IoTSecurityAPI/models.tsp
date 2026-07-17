@@ -202,6 +202,7 @@ union RecommendationConfigStatus {
 /**
  * Unmasked IP address logging status
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 union UnmaskedIpLoggingStatus {
   string,
 
@@ -821,6 +822,7 @@ model IoTSecuritySolutionProperties {
   /**
    * Unmasked IP address logging status
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   unmaskedIpLoggingStatus?: UnmaskedIpLoggingStatus = UnmaskedIpLoggingStatus.Disabled;
 
   /**
@@ -916,6 +918,7 @@ model UpdateIoTSecuritySolutionProperties {
 /**
  * Outbound connection to an ip that isn't allowed. Allow list consists of ipv4 or ipv6 range in CIDR notation.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(AllowlistCustomAlertRule)
 model ConnectionToIpNotAllowed extends CustomAlertRule {
@@ -926,6 +929,7 @@ model ConnectionToIpNotAllowed extends CustomAlertRule {
 /**
  * Inbound connection from an ip that isn't allowed. Allow list consists of ipv4 or ipv6 range in CIDR notation.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(AllowlistCustomAlertRule)
 model ConnectionFromIpNotAllowed extends CustomAlertRule {

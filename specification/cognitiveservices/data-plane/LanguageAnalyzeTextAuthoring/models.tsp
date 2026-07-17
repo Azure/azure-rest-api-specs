@@ -358,6 +358,7 @@ model InnerErrorModel {
 /**
  * Represents the options used to create or update a project.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 @clientName("TextAuthoringCreateProjectDetails", "csharp")
 model TextAnalysisAuthoringCreateProjectOptions {
   /**
@@ -399,6 +400,7 @@ model TextAnalysisAuthoringCreateProjectOptions {
 /**
  * Represents the options for authorizing a project copy to the current Azure resource.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 @clientName("TextAuthoringCopyAuthorizationDetails", "csharp")
 model TextAnalysisAuthoringCopyAuthorizationOptions {
   /**
@@ -420,6 +422,7 @@ model TextAnalysisAuthoringCopyAuthorizationOptions {
 /**
  * Represents the options for copying an existing project to another Azure resource.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 @clientName("TextAuthoringCopyProjectDetails", "csharp")
 model TextAnalysisAuthoringCopyProjectOptions {
   /**
@@ -491,6 +494,7 @@ model TextAnalysisAuthoringExportedProjectAssets {
 /**
  * Represents the options for starting a new training job.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 @clientName("TextAuthoringTrainingJobDetails", "csharp")
 model TextAnalysisAuthoringTrainingJobOptions {
   /**
@@ -558,6 +562,7 @@ model TextAnalysisAuthoringDataGenerationConnectionInfo {
 /**
  * Represents the options used running the evaluation.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 @clientName("TextAuthoringEvaluationDetails", "csharp")
 model TextAnalysisAuthoringEvaluationOptions {
   /**
@@ -717,6 +722,7 @@ model TextAnalysisAuthoringDeploymentResource {
 /**
  * Represents the options for creating or updating a project deployment.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 @clientName("TextAuthoringCreateDeploymentDetails", "csharp")
 model TextAnalysisAuthoringCreateDeploymentOptions {
   /**
@@ -734,6 +740,7 @@ model TextAnalysisAuthoringCreateDeploymentOptions {
 /**
  * Represents the options for deleting a project deployment.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 @added(Versions.v2024_11_15_preview)
 @clientName("TextAuthoringDeleteDeploymentDetails", "csharp")
 model TextAnalysisAuthoringDeleteDeploymentOptions {
@@ -776,6 +783,7 @@ model TextAnalysisAuthoringSwapDeploymentsJobState {
 /**
  * Represents the options for swapping two deployments together.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 @clientName("TextAuthoringSwapDeploymentsDetails", "csharp")
 model TextAnalysisAuthoringSwapDeploymentsOptions {
   /**
@@ -867,6 +875,7 @@ model TextAnalysisAuthoringExportedTrainedModel {
 /**
  * Represents the options for creating or replacing an exported model.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 @clientName("TextAuthoringExportedModelDetails", "csharp")
 model TextAnalysisAuthoringExportedModelOptions {
   /**
@@ -1177,6 +1186,7 @@ model TextAnalysisAuthoringAssignedDeploymentResource {
 /**
  * Represents the options for assigning Azure resources to a project.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 @clientName("TextAuthoringAssignDeploymentResourcesDetails", "csharp")
 model TextAnalysisAuthoringAssignDeploymentResourcesOptions {
   /**
@@ -1209,6 +1219,7 @@ model TextAnalysisAuthoringResourceMetadata {
 /**
  * Represents the options to unassign Azure resources from a project.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 @added(Versions.v2024_11_15_preview)
 @clientName("TextAuthoringUnassignDeploymentResourcesDetails", "csharp")
 model TextAnalysisAuthoringUnassignDeploymentResourcesOptions {

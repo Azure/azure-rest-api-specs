@@ -86,9 +86,11 @@ model RoutePolicyStatementPatchProperties extends AnnotationResource {
 
 @doc("Route policy statement condition properties.")
 model StatementConditionProperties {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("List of IP Community resource IDs.")
   ipCommunityIds?: string[];
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("List of IP Extended Community resource IDs.")
   ipExtendedCommunityIds?: string[];
 
@@ -101,15 +103,18 @@ model StatementConditionProperties {
 
 @doc("Route policy statement condition properties.")
 model StatementConditionPatchProperties {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("List of IP Community resource IDs.")
   ipCommunityIds?: string[];
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("List of IP Extended Community resource IDs.")
   ipExtendedCommunityIds?: string[];
 
   @doc("Type of the condition used.")
   type?: RoutePolicyConditionType;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("Arm Resource Id of IpPrefix.")
   ipPrefixId?: string;
 }
@@ -122,6 +127,7 @@ model IpCommunityIdList {
 
 @doc("IP Extended Community Id list properties.")
 model IpExtendedCommunityIdList {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("List of IP Extended Community resource IDs.")
   ipExtendedCommunityIds?: string[];
 }
@@ -136,9 +142,11 @@ model StatementActionProperties {
   @doc("Action type. Example: Permit | Deny | Continue.")
   actionType: RoutePolicyActionType;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("IP Community Properties.")
   ipCommunityProperties?: ActionIpCommunityProperties;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("IP Extended Community Properties.")
   ipExtendedCommunityProperties?: ActionIpExtendedCommunityProperties;
 }
@@ -153,13 +161,16 @@ model StatementActionPatchProperties {
   @doc("Action type. Example: Permit | Deny | Continue.")
   actionType: RoutePolicyActionType;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("IP Community Properties.")
   ipCommunityProperties?: ActionIpCommunityPatchProperties;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("IP Extended Community Properties.")
   ipExtendedCommunityProperties?: ActionIpExtendedCommunityPatchProperties;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("IP Community Properties.")
 model ActionIpCommunityProperties {
   @doc("List of IP Community IDs.")
@@ -172,9 +183,11 @@ model ActionIpCommunityProperties {
   set?: IpCommunityIdList;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("IP Community Properties.")
 model ActionIpCommunityPatchProperties is ActionIpCommunityProperties;
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("IP Extended Community Properties.")
 model ActionIpExtendedCommunityProperties {
   @doc("List of IP Extended Community IDs.")
@@ -187,6 +200,7 @@ model ActionIpExtendedCommunityProperties {
   set?: IpExtendedCommunityIdList;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("IP Extended Community Properties.")
 model ActionIpExtendedCommunityPatchProperties
   is ActionIpExtendedCommunityProperties;

@@ -14,6 +14,7 @@ using OpenAPI;
 
 namespace Microsoft.Migrate;
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 @doc("SQL Assessment REST resource.")
 @parentResource(AssessmentProject)
 model SqlGraphAssessmentOptions

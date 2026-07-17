@@ -206,6 +206,7 @@ model InboundEndpointProperties {
   /**
    * IP configurations for the inbound endpoint.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @identifiers(#[])
   ipConfigurations: IpConfiguration[];
 
@@ -239,6 +240,7 @@ model IpConfiguration {
   /**
    * Private IP address allocation method.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   privateIpAllocationMethod?: IpAllocationMethod = IpAllocationMethod.Dynamic;
 }
 

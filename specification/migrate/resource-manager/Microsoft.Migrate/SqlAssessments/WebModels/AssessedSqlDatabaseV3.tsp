@@ -42,6 +42,7 @@ model AssessedSqlDatabaseV3Properties is AssessedWorkloadProperties<
   updatedTimestamp?: utcDateTime;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Need to mention MegaBytes and hence used GB, Mb would give Gigabits"
 @doc("The sql db source information")
 model SqlDbExtendedDetails {

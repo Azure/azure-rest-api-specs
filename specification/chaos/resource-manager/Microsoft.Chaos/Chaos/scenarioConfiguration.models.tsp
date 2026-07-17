@@ -576,6 +576,7 @@ union RoleAssignmentStatus {
 /**
  * Request body for fixing resource permissions.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model FixResourcePermissionsRequest {
   /**
    * Optional value that indicates whether to run a "dry run" of fixing resource permissions.

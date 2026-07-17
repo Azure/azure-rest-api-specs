@@ -59,6 +59,7 @@ model ManagedClusterAgentPoolProfileProperties {
   /**
    * OS Disk Size in GB to be used to specify the disk size for every machine in the master/agent pool. If you specify 0, it will apply the default osDisk size according to the vmSize specified.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @maxValue(2048)
   @minValue(0)
@@ -67,6 +68,7 @@ model ManagedClusterAgentPoolProfileProperties {
   /**
    * The OS disk type to be used for machines in the agent pool. The default is 'Ephemeral' if the VM supports it and has a cache disk larger than the requested OSDiskSizeGB. Otherwise, defaults to 'Managed'. May not be changed after creation. For more information see [Ephemeral OS](https://docs.microsoft.com/azure/aks/cluster-configuration#ephemeral-os).
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osDiskType?: OSDiskType;
 
   /**
@@ -118,6 +120,7 @@ model ManagedClusterAgentPoolProfileProperties {
   /**
    * The operating system type. The default is Linux.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osType?: OSType = OSType.Linux;
 
   /**
@@ -701,6 +704,7 @@ model SysctlConfig {
   /**
    * Sysctl setting net.ipv4.ip_local_port_range.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   netIpv4IpLocalPortRange?: string;
 
   /**

@@ -59,6 +59,7 @@ model ResourceSize {
 /**
  * SpotPlacementScores API response.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model SpotPlacementScoresResponse {
   /**
    * The desired regions

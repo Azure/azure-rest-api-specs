@@ -81,10 +81,12 @@ model ScheduledActionResource {
   notificationSettings?: Array<NotificationProperties>;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 @@identifiers(ResourceListResponse.value, #[]);
 @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 model ResourceListResponse is Azure.Core.Page<ScheduledActionResource>;
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 @doc("Request model to attach a list of scheduled action resources.")
 model ResourceAttachRequest {
@@ -93,6 +95,7 @@ model ResourceAttachRequest {
   resources: Array<ScheduledActionResource>;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 @doc("Request model to detach a list of scheduled action resources.")
 model ResourceDetachRequest {
@@ -128,6 +131,7 @@ model ResourceStatus {
   error?: Azure.Core.Foundations.Error;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 @doc("The response from scheduled action resource requests, which contains the status of each resource")
 model ResourceOperationResponse {
@@ -182,6 +186,7 @@ model ScheduledActionsExtensionProperties {
   resourceNotificationSettings?: Array<NotificationProperties>;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 @doc("The response from scheduled action resource requests, which contains the status of each resource")
 model ScheduledActionResourceOperationResponse {

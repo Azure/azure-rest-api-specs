@@ -121,6 +121,7 @@ model WorkloadNetworkDnsServiceProperties {
   @doc("Display name of the DNS Service.")
   displayName?: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("DNS service IP of the DNS Service.")
   dnsServiceIp?: string;
 

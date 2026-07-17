@@ -10,11 +10,13 @@ using TypeSpec.Rest;
 using Azure.Core;
 using Azure.ResourceManager;
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("The properties specific to a database in Azure SQL Database.")
 model SqlDbSingleDatabaseTargetProperties extends TargetProperties {
   @doc("The Azure SQL DB single database target.")
   targetType: "SqlDb";
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The Azure resource ID of an Azure SQL DB database target.")
   sqlDbResourceId: armResourceIdentifier<[
     {

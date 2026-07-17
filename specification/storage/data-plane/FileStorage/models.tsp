@@ -845,6 +845,7 @@ model HandleItem {
 }
 
 /** An enumeration of directories and files. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 @Xml.name("EnumerationResults")
 model ListFilesAndDirectoriesSegmentResponse {
   /** The service endpoint. */
@@ -895,6 +896,7 @@ model ListFilesAndDirectoriesSegmentResponse {
 }
 
 /** An enumeration of handles. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 @Xml.name("EnumerationResults")
 model ListHandlesResponse {
   /** The handle list. */
@@ -909,6 +911,7 @@ model ListHandlesResponse {
 }
 
 /** An enumeration of shares. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 @Xml.name("EnumerationResults")
 model ListSharesResponse {
   /** The service endpoint. */

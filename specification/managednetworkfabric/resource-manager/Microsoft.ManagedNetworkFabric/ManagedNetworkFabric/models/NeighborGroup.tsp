@@ -90,6 +90,7 @@ model NeighborGroupPatchProperties {
   ...NeighborGroupPatchableProperties;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 @doc("Response for Neighbor Group Resync operation.")
 @added(Versions.v2025_07_15)
 model NeighborGroupResyncResponse {

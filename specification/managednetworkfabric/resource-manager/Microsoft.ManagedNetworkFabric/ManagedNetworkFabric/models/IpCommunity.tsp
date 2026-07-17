@@ -3,6 +3,7 @@ import "./common.tsp";
 using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("IP Community Properties defines the resource properties.")
 model IpCommunityProperties {
   ...AnnotationResource;
@@ -16,6 +17,7 @@ model IpCommunityProperties {
     }
   ]>;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("List of IP Community Rules.")
   @Azure.ResourceManager.identifiers(#[])
   ipCommunityRules: IpCommunityRule[];
@@ -38,8 +40,10 @@ model IpCommunityProperties {
   administrativeState?: AdministrativeState;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("IP Community patchable properties.")
 model IpCommunityPatchableProperties {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("List of IP Community Rules.")
   @Azure.ResourceManager.identifiers(#[])
   ipCommunityRules?: IpCommunityRule[];
@@ -63,6 +67,7 @@ model IpCommunityRule {
   communityMembers: string[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending instead of spreading to avoid breaking changes in patch model"
 @doc("The IP Community patch resource definition.")
 model IpCommunityPatch extends TagsUpdate {

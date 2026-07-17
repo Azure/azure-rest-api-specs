@@ -251,6 +251,7 @@ model AnswerSpan {
 }
 
 /** Parameters to query a knowledge base. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 model AnswersOptions {
   /** Exact QnA ID to fetch from the knowledge base, this field takes priority over question. */
   qnaId?: int32;
@@ -286,6 +287,7 @@ model AnswersOptions {
 }
 
 /** To configure Answer span prediction feature. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 model ShortAnswerOptions {
   /** Enable or disable Answer Span prediction. */
   enable?: boolean = true;
@@ -434,6 +436,7 @@ model ConversationalTask extends AnalyzeConversationTask {
 }
 
 /** The input ConversationItem and its optional parameters */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 model ConversationAnalysisOptions {
   /** The abstract base for a user input formatted conversation (e.g., Text, Transcript). */
   conversationItem: TextConversationItem;
@@ -494,6 +497,7 @@ model ConversationParameters extends AnalysisParameters {
 }
 
 /** The option to set to call a Conversation project. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 model ConversationCallingOptions {
   /** The language of the query in BCP 47 language representation. */
   language?: string;

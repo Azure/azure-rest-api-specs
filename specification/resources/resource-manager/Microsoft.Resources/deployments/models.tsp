@@ -816,6 +816,7 @@ model OnErrorDeployment {
 /**
  * Specifies whether template expressions are evaluated within the scope of the parent template or nested template.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 model ExpressionEvaluationOptions {
   /**
    * The scope to be used for evaluation of parameters, variables and functions in a nested template.

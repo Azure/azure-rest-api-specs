@@ -823,6 +823,7 @@ model BgpServiceLoadBalancerConfiguration {
   /**
    * The list of pools of IP addresses that can be allocated to load balancer services.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @identifiers(#[])
   ipAddressPools?: IpAddressPool[];
@@ -967,6 +968,7 @@ model L2ServiceLoadBalancerConfiguration {
   /**
    * The list of pools of IP addresses that can be allocated to load balancer services.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @identifiers(#[])
   ipAddressPools?: IpAddressPool[];

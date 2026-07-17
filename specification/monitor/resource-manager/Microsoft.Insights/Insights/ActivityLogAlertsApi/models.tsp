@@ -169,6 +169,7 @@ model AzureResource {
 /**
  * The error response.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 @error
 model ActivityLogAlertErrorResponse {
   /**

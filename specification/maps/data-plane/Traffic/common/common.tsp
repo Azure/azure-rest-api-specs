@@ -262,6 +262,7 @@ model ErrorAdditionalInfo {
 /**
  * This type represents the request body for the Batch service.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model BatchRequest {
   /**
    * The list of queries to process.

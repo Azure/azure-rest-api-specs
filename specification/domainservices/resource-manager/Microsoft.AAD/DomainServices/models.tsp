@@ -348,6 +348,7 @@ union CreatedByType {
 /**
  * Response for successful unsuspend of a domain service.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model UnsuspendDomainServiceResponse {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   message?: string;
@@ -589,12 +590,14 @@ model ReplicaSet {
   /**
    * List of Domain Controller IP Address
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   domainControllerIpAddress?: string[];
 
   /**
    * External access ip address.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   externalAccessIpAddress?: string;
 

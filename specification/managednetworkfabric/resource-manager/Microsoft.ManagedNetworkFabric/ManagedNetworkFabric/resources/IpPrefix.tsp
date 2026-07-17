@@ -22,6 +22,7 @@ model IpPrefix is Azure.ResourceManager.TrackedResource<
 
 @@doc(IpPrefix.properties, "The IP Prefix properties");
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @armResourceOperations
 interface IpPrefixes {
   @doc("Implements IP Prefix GET method.")

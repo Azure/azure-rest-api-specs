@@ -366,6 +366,7 @@ model HardwareProfile {
 
 @doc("Specifies the storage settings for the Azure Large Instance disks.")
 model StorageProfile {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @removed(Versions.v2024_08_01_preview)
   @renamedFrom(Versions.v2024_08_01_preview, "nfsIpAddress")
   @doc("IP Address to connect to storage.")
@@ -407,6 +408,7 @@ model OsProfile {
   @doc("Specifies the host OS name of the Azure Large Instance.")
   computerName?: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @removed(Versions.v2024_08_01_preview)
   @renamedFrom(Versions.v2024_08_01_preview, "osType")
   @doc("This property allows you to specify the type of the OS.")

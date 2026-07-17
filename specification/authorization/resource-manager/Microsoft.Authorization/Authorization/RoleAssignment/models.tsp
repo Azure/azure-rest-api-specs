@@ -112,6 +112,7 @@ model ValidationResponseErrorInfo {
 /**
  * Validation response
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model ValidationResponse {
   /**
    * Whether or not validation succeeded

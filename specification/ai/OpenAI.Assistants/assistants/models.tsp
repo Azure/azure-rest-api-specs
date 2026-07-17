@@ -83,6 +83,7 @@ model Assistant {
   ...RequiredNullableMetadata;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 @doc("The request details to use when creating a new assistant.")
 @added(ServiceApiVersions.v2024_02_15_preview)
 model AssistantCreationOptions {
@@ -146,6 +147,7 @@ model AssistantCreationOptions {
   ...OptionalNullableMetadata;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 @doc("The request details to use when modifying an existing assistant.")
 @added(ServiceApiVersions.v2024_02_15_preview)
 model UpdateAssistantOptions {

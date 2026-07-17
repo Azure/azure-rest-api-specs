@@ -37,6 +37,7 @@ union OnYourDataAuthenticationType {
   usernameAndPassword: "username_and_password",
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 @discriminator("type")
 @doc("The authentication options for Azure OpenAI On Your Data.")
 @added(ServiceApiVersions.v2024_02_15_Preview)
@@ -48,6 +49,7 @@ model OnYourDataAuthenticationOptions {
 @doc("""
   The authentication options for Azure OpenAI On Your Data when using an API key.
   """)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 @added(ServiceApiVersions.v2024_02_15_Preview)
 model OnYourDataApiKeyAuthenticationOptions
   extends OnYourDataAuthenticationOptions {
@@ -61,6 +63,7 @@ model OnYourDataApiKeyAuthenticationOptions
 @doc("""
   The authentication options for Azure OpenAI On Your Data when using a connection string.
   """)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 @added(ServiceApiVersions.v2024_02_15_Preview)
 model OnYourDataConnectionStringAuthenticationOptions
   extends OnYourDataAuthenticationOptions {
@@ -75,6 +78,7 @@ model OnYourDataConnectionStringAuthenticationOptions
 @doc("""
   The authentication options for Azure OpenAI On Your Data when using an Elasticsearch key and key ID pair.
   """)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 @added(ServiceApiVersions.v2024_02_15_Preview)
 model OnYourDataKeyAndKeyIdAuthenticationOptions
   extends OnYourDataAuthenticationOptions {
@@ -92,6 +96,7 @@ model OnYourDataKeyAndKeyIdAuthenticationOptions
 @doc("""
   The authentication options for Azure OpenAI On Your Data when using an Elasticsearch encoded API key.
   """)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 @added(ServiceApiVersions.v2024_02_15_Preview)
 model OnYourDataEncodedApiKeyAuthenticationOptions
   extends OnYourDataAuthenticationOptions {
@@ -106,6 +111,7 @@ model OnYourDataEncodedApiKeyAuthenticationOptions
 @doc("""
   The authentication options for Azure OpenAI On Your Data when using a username and password.
   """)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 @added(ServiceApiVersions.v2024_08_01_Preview)
 model OnYourDataUsernameAndPasswordAuthenticationOptions
   extends OnYourDataAuthenticationOptions {
@@ -122,6 +128,7 @@ model OnYourDataUsernameAndPasswordAuthenticationOptions
 @doc("""
   The authentication options for Azure OpenAI On Your Data when using access token.
   """)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 @added(ServiceApiVersions.v2024_02_15_Preview)
 model OnYourDataAccessTokenAuthenticationOptions
   extends OnYourDataAuthenticationOptions {
@@ -136,6 +143,7 @@ model OnYourDataAccessTokenAuthenticationOptions
 @doc("""
   The authentication options for Azure OpenAI On Your Data when using a system-assigned managed identity.
   """)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 @added(ServiceApiVersions.v2024_02_15_Preview)
 model OnYourDataSystemAssignedManagedIdentityAuthenticationOptions
   extends OnYourDataAuthenticationOptions {
@@ -146,6 +154,7 @@ model OnYourDataSystemAssignedManagedIdentityAuthenticationOptions
 @doc("""
   The authentication options for Azure OpenAI On Your Data when using a user-assigned managed identity.
   """)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 @added(ServiceApiVersions.v2024_02_15_Preview)
 model OnYourDataUserAssignedManagedIdentityAuthenticationOptions
   extends OnYourDataAuthenticationOptions {

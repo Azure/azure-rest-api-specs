@@ -70,6 +70,7 @@ model AzureSearchChatExtensionParameters {
   embeddingDependency?: OnYourDataVectorizationSource;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 @doc("Optional settings to control how fields are processed when using a configured Azure Search resource.")
 @added(ServiceApiVersions.v2024_02_15_Preview)
 model AzureSearchIndexFieldMappingOptions {

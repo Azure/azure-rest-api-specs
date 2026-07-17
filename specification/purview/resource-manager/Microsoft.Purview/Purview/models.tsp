@@ -1234,6 +1234,7 @@ model PrivateEndpointConnectionList
 /**
  * A private endpoint connection status update request class.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model PrivateEndpointConnectionStatusUpdateRequest {
   /**
    * The private endpoint resource identifier.
@@ -1249,6 +1250,7 @@ model PrivateEndpointConnectionStatusUpdateRequest {
 /**
  * A private endpoint connection status update response class.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model PrivateEndpointConnectionStatusUpdateResponse {
   /**
    * The private endpoint resource identifier.
@@ -1546,6 +1548,7 @@ model PrivateLinkResourceProperties {
 /**
  * The request payload for CheckNameAvailability API
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model CheckNameAvailabilityRequest {
   /**
    * Resource name to verify for availability

@@ -1664,6 +1664,7 @@ model Resource {
 /**
  * Request to configure alerts for the system.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model ConfigureAlertRequest {
   /**
    * The properties of a configure alert request.
@@ -2158,6 +2159,7 @@ model FabricSpecificCreationInput {
 /**
  * Request to failover a process server.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model FailoverProcessServerRequest {
   /**
    * The properties of the PS Failover request.
@@ -2542,6 +2544,7 @@ model ReplicationProviderSpecificContainerCreationInput {
 /**
  * Request to add a physical machine as a protectable item in a container.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model DiscoverProtectableItemRequest {
   /**
    * The properties of a discover protectable item request.
@@ -2561,11 +2564,13 @@ model DiscoverProtectableItemRequestProperties {
   /**
    * The IP address of the physical machine to be discovered.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipAddress?: string;
 
   /**
    * The OS type on the physical machine.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osType?: string;
 }
 
@@ -4095,6 +4100,7 @@ model UpdateApplianceForReplicationProtectedItemProviderSpecificInput {
 /**
  * Request to update the mobility service on a protected item.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model UpdateMobilityServiceRequest {
   /**
    * The properties of the update mobility service request.
@@ -4115,6 +4121,7 @@ model UpdateMobilityServiceRequestProperties {
 /**
  * Request to Reinstall the mobility service on a protected item.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model ReinstallMobilityServiceRequest {
   /**
    * The properties of the reinstall mobility service request
@@ -5238,6 +5245,7 @@ model VCenterProperties {
 /**
  * Input required to add vCenter.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AddVCenterRequest {
   /**
@@ -5280,6 +5288,7 @@ model AddVCenterRequestProperties {
 /**
  * Input required to update vCenter.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model UpdateVCenterRequest {
   /**
@@ -6263,6 +6272,7 @@ model SupportedOSProperties {
   /**
    * The supported operating systems property list.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   supportedOsList?: SupportedOSProperty[];
 }
@@ -7132,6 +7142,7 @@ model A2ACrossClusterMigrationReplicationDetails
   /**
    * The type of operating system.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osType?: string;
 
   /**
@@ -8216,6 +8227,7 @@ model A2AReplicationDetails extends ReplicationProviderSpecificSettings {
   /**
    * The OS family name.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osFamilyName?: string;
 
   /**
@@ -10047,6 +10059,7 @@ model FabricQueryParameter {
   /**
    * The OS type to be used for fetching agent details.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osType?: string;
 }
 
@@ -10366,6 +10379,7 @@ model HyperVReplicaAzureEnableProtectionInput
   /**
    * The OS type associated with VM.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osType?: string;
 
   /**
@@ -10684,6 +10698,7 @@ model HyperVReplicaAzurePlannedFailoverProviderInput
   /**
    * A value indicating the inplace OS Upgrade version.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osUpgradeVersion?: string;
 
   /**
@@ -11054,12 +11069,14 @@ model OSUpgradeSupportedVersions {
   /**
    * The source OS version name.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   supportedSourceOsVersion?: string;
 
   /**
    * The target OS version names.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   supportedTargetOsVersions?: string[];
 }
@@ -11130,6 +11147,7 @@ model HyperVReplicaAzureTestFailoverInput
   /**
    * A value indicating the inplace OS Upgrade version.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osUpgradeVersion?: string;
 
   /**
@@ -12861,6 +12879,7 @@ model InMageAzureV2TestFailoverInput extends TestFailoverProviderSpecificInput {
   /**
    * A value indicating the inplace OS Upgrade version.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osUpgradeVersion?: string;
 
   /**
@@ -12882,6 +12901,7 @@ model InMageAzureV2UnplannedFailoverInput
   /**
    * A value indicating the inplace OS Upgrade version.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osUpgradeVersion?: string;
 
   /**
@@ -13057,6 +13077,7 @@ model InMageDiskExclusionInput {
 /**
  * Guest disk signature based disk exclusion option when doing enable protection of virtual machine in InMage provider.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 model InMageVolumeExclusionOptions {
   /**
    * The volume label. The disk having any volume with this label will be excluded from replication.
@@ -13072,6 +13093,7 @@ model InMageVolumeExclusionOptions {
 /**
  * Guest disk signature based disk exclusion option when doing enable protection of virtual machine in InMage provider.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 model InMageDiskSignatureExclusionOptions {
   /**
    * The guest signature of disk to be excluded from replication.
@@ -14202,6 +14224,7 @@ model InMageRcmDiscoveredProtectedVmDetails {
   /**
    * The list of IP addresses.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   ipAddresses?: string[];
 
@@ -14687,6 +14710,7 @@ model InMageRcmFailbackDiscoveredProtectedVmDetails {
   /**
    * The list of IP addresses.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   ipAddresses?: string[];
 
@@ -14711,6 +14735,7 @@ model InMageRcmFailbackDiscoveredProtectedVmDetails {
   /**
    * The VM's OS name.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   osName?: string;
 
@@ -14869,6 +14894,7 @@ model InMageRcmFailbackNicDetails {
   /**
    * The IP address.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   sourceIpAddress?: string;
 }
@@ -15440,6 +15466,7 @@ model InMageRcmMobilityAgentDetails {
   /**
    * The OS family name.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osFamilyName?: string;
 
   /**
@@ -15992,6 +16019,7 @@ model InMageRcmReplicationDetails extends ReplicationProviderSpecificSettings {
   /**
    * The IP address of the primary network interface.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   primaryNicIpAddress?: string;
 
@@ -16338,6 +16366,7 @@ model InMageRcmTestFailoverInput extends TestFailoverProviderSpecificInput {
   /**
    * A value indicating the inplace OS Upgrade version.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osUpgradeVersion?: string;
 
   /**
@@ -16364,6 +16393,7 @@ model InMageRcmUnplannedFailoverInput
   /**
    * A value indicating the inplace OS Upgrade version.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osUpgradeVersion?: string;
 
   /**
@@ -18369,6 +18399,7 @@ model VMwareCbtMigrateInput extends MigrateProviderSpecificInput {
   /**
    * A value indicating the inplace OS Upgrade version.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osUpgradeVersion?: string;
 
   /**
@@ -19109,6 +19140,7 @@ model VMwareCbtTestMigrateInput extends TestMigrateProviderSpecificInput {
   /**
    * A value indicating the inplace OS Upgrade version.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osUpgradeVersion?: string;
 
   /**

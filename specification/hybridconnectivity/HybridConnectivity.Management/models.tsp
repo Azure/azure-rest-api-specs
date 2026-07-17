@@ -314,6 +314,7 @@ model ManagedProxyResource {
 /**
  * Represent ListIngressGatewayCredentials Request object.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model ListIngressGatewayCredentialsRequest {
   /**
    * The name of the service. If not provided, the request will by pass the generation of service configuration token.

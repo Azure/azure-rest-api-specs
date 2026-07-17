@@ -21,6 +21,7 @@ model NodePool {
   @visibility(Lifecycle.Read)
   mode: NodePoolMode;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("Gets os type.")
   @visibility(Lifecycle.Read)
   osType: OSType;

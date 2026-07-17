@@ -91,6 +91,7 @@ union FilePurpose {
   vision: "vision",
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 @doc("The response data from a file list operation.")
 @added(Versions.v2025_05_01)
 model FileListResponse {

@@ -45,6 +45,7 @@ union FeatureState {
 }
 
 /** Request body for feature enable action. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 @added(Versions.v2026_06_01)
 model FeatureEnableRequest {
   /** The Service Tree identifier associated with this feature action. */

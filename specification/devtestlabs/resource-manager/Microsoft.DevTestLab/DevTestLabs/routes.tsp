@@ -43,6 +43,7 @@ interface Operations {
 /**
  * Response for operations that return with 202 Accepted status code.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model AcceptedResponse {
   /**
    * HTTP status code 202

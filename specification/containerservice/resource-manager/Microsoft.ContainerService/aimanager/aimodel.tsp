@@ -59,6 +59,7 @@ model ModelSpec {
   maxContextLength: int32;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Reserved as an extensibility envelope so future versions can add optional filters without changing the SDK method signature."
 @added(Versions.v2026_05_02_preview)
 @doc("Request body for the AI model `calculateCost` action.")
@@ -66,6 +67,7 @@ model CalculateCostRequest {
   // intentionally empty for v1; future versions may add filters
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 @added(Versions.v2026_05_02_preview)
 @doc("Response body for the AI model `calculateCost` action.")
 model CalculateCostResponse {

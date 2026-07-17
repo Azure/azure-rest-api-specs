@@ -15,6 +15,7 @@ const AllConditionalAgentDefinitionPreviews = #{
   ],
 };
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 @extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
 model CreateAgentVersionRequest {
   ...MetadataPropertyForRequest;
@@ -28,6 +29,7 @@ model CreateAgentVersionRequest {
   definition: AgentDefinition;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model CreateAgentVersionFromManifestRequest {
   ...MetadataPropertyForRequest;
 
@@ -42,6 +44,7 @@ model CreateAgentVersionFromManifestRequest {
   parameter_values: Record<unknown>;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model CreateAgentFromManifestRequest {
   @doc("""
     The unique name that identifies the agent. Name can be used to retrieve/update/delete the agent.
@@ -55,10 +58,12 @@ model CreateAgentFromManifestRequest {
   ...CreateAgentVersionFromManifestRequest;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model UpdateAgentFromManifestRequest {
   ...CreateAgentVersionFromManifestRequest;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 @extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
 model CreateAgentRequest {
   @doc("""
@@ -73,6 +78,7 @@ model CreateAgentRequest {
   ...CreateAgentVersionRequest;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model UpdateAgentRequest {
   ...CreateAgentVersionRequest;
 }
@@ -246,6 +252,7 @@ model PromptAgentDefinition extends AgentDefinition {
 /**
  * Configuration options for a text response from the model. Can be plain text or structured JSON data.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 model PromptAgentDefinitionTextOptions {
   format?: OpenAI.TextResponseFormatConfiguration;
 }
@@ -349,6 +356,7 @@ alias ListAgentQueryParameters = {
   ...CommonPageQueryParameters;
 };
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 @doc("A deleted agent Object")
 model DeleteAgentResponse {
   @doc("The object type. Always 'agent.deleted'.")
@@ -361,6 +369,7 @@ model DeleteAgentResponse {
   deleted: boolean;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 @doc("A deleted agent version Object")
 model DeleteAgentVersionResponse {
   @doc("The object type. Always 'agent.version.deleted'.")

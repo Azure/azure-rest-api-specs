@@ -132,6 +132,7 @@ model ResourceNotificationDetails {
  * The flex properties for flexible VM creation.
  */
 // ----------- ExecuteCreateFlex ---------
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @added(Microsoft.Compute.Versions.`2026-04-06-preview`)
 @doc("The supported operating system types for flex VM creation")
 union OsType {
@@ -247,6 +248,7 @@ model FlexProperties {
   @maxItems(5)
   vmSizeProfiles: Array<VmSizeProfile>;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The operating system type for the VMs")
   osType: OsType;
 
@@ -507,6 +509,7 @@ model OperationErrorsResult {
   requestErrorDetails?: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 @doc("The response from a deallocate request")
 model DeallocateResourceOperationResponse {
   @doc("The description of the operation response")
@@ -524,6 +527,7 @@ model DeallocateResourceOperationResponse {
   results?: Array<ResourceOperation>;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 @doc("The response from a start request")
 model StartResourceOperationResponse {
   @doc("The description of the operation response")
@@ -541,6 +545,7 @@ model StartResourceOperationResponse {
   results?: Array<ResourceOperation>;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 @doc("The response from a Hibernate request")
 model HibernateResourceOperationResponse {
   @doc("The description of the operation response")
@@ -559,6 +564,7 @@ model HibernateResourceOperationResponse {
 }
 
 // ----------- Execute Operations Request ---------
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 @doc("The ExecuteDeallocateRequest request for executeDeallocate operations")
 model ExecuteDeallocateRequest {
   @doc("The execution parameters for the request")
@@ -573,6 +579,7 @@ model ExecuteDeallocateRequest {
   resourcesWithContext?: ResourcesWithContext;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 @doc("The ExecuteHibernateRequest request for executeHibernate operations")
 model ExecuteHibernateRequest {
   @doc("The execution parameters for the request")
@@ -587,6 +594,7 @@ model ExecuteHibernateRequest {
   resourcesWithContext?: ResourcesWithContext;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 @doc("The ExecuteStartRequest request for executeStart operations")
 model ExecuteStartRequest {
   @doc("The execution parameters for the request")
@@ -601,6 +609,7 @@ model ExecuteStartRequest {
   resourcesWithContext?: ResourcesWithContext;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 @doc("The ExecuteCreateRequest request for create operations")
 model ExecuteCreateRequest {
   @doc("resource creation payload")
@@ -610,6 +619,7 @@ model ExecuteCreateRequest {
   executionParameters: ExecutionParameters;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 @doc("The VdiCreateRequest request for create operations")
 model ExecuteVdiCreateRequest {
   @doc("resource creation payload")
@@ -642,6 +652,7 @@ model ReimagePayload {
   resourceOverrides?: ReimageResourceOverride[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 @doc("The ExecuteReimageRequest request for reimage operations")
 model ExecuteReimageRequest {
   @doc("The execution parameters for the request")
@@ -659,6 +670,7 @@ model ExecuteReimageRequest {
   reimageParameters?: ReimagePayload;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 @doc("The response from a create request")
 model CreateResourceOperationResponse {
   @doc("The description of the operation response")
@@ -676,6 +688,7 @@ model CreateResourceOperationResponse {
   results?: Array<ResourceOperation>;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 @doc("The response from a reimage request")
 model ReimageResourceOperationResponse {
   @doc("The description of the operation response")
@@ -693,6 +706,7 @@ model ReimageResourceOperationResponse {
   results?: Array<ResourceOperation>;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 @doc("The response from a delete request")
 model DeleteResourceOperationResponse {
   @doc("The description of the operation response")
@@ -710,6 +724,7 @@ model DeleteResourceOperationResponse {
   results?: Array<ResourceOperation>;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 @doc("The ExecuteDeleteRequest for delete VM operation")
 model ExecuteDeleteRequest {
   @doc("The execution parameters for the request")
@@ -728,12 +743,14 @@ model ExecuteDeleteRequest {
 }
 
 // ----------- GetOperationStatus ---------
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 @doc("This is the request to get operation status using operationids")
 model GetOperationStatusRequest {
   @doc("The list of operation ids to get the status of")
   operationIds: Array<string>;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 @doc("This is the response from a get operations status request")
 model GetOperationStatusResponse {
   @identifiers(#["resourceId"])
@@ -741,6 +758,7 @@ model GetOperationStatusResponse {
   results: Array<ResourceOperation>;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 @doc("Static read response for the singleton bulk VM operations proxy endpoint")
 model BulkVmOperationsReadResponse {
   @doc("Fully qualified resource ID for the singleton bulk VM operations proxy resource")
@@ -771,11 +789,13 @@ model CancelOperationsResponse {
 }
 
 // ----------- BulkOperationErrors ---------
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 @@identifiers(ListBulkOperationErrorsResponse.value, #[]);
 @added(Versions.`2026-07-06-preview`)
 @doc("The response from listing bulk operation errors")
 model ListBulkOperationErrorsResponse is Azure.Core.Page<ResourceOperation>;
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 @added(Versions.`2026-07-06-preview`)
 @doc("The response from acknowledging bulk operation errors")
 model AcknowledgeBulkOperationErrorsResponse {
@@ -789,6 +809,7 @@ model AcknowledgeBulkOperationErrorsResponse {
   skipped: Array<string>;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 @added(Versions.`2026-07-06-preview`)
 @doc("The request to acknowledge bulk operation errors")
 model AcknowledgeBulkOperationErrorsRequest {

@@ -52,6 +52,7 @@ model PhraseListProperties {
   biasingWeight?: float32;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-autorest/unsupported-multipart-type" "Support streaming input files"
 @doc("Metadata for a transcription request.")
 model TranscriptionOptions {
@@ -81,6 +82,7 @@ model TranscriptionOptions {
   phraseList?: PhraseListProperties;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 @doc("The Speaker Diarization settings. Diarization settings must be specified to enable speaker diarization.")
 model TranscriptionDiarizationOptions {
   @doc("Enable speaker diarization. This is automatically set to true when maxSpeakers is specified.")

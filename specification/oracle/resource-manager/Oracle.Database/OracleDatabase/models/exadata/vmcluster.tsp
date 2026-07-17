@@ -182,6 +182,7 @@ model CloudVmClusterProperties {
   @doc("The data disk group size to be allocated in TBs.")
   dataStorageSizeInTbs?: float64;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The local node storage to be allocated in GBs.")
   dbNodeStorageSizeInGbs?: int32;
 
@@ -370,6 +371,7 @@ model CloudVmClusterProperties {
   @visibility(Lifecycle.Read)
   computeModel?: ComputeModel;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @added(Versions.v20250801_preview)
   @doc("Exadata Database Storage Vault ID")
   @visibility(Lifecycle.Create, Lifecycle.Read)

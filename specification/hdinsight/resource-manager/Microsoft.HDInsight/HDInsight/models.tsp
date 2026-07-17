@@ -673,6 +673,7 @@ model HardwareProfile {
 /**
  * The Linux operation systems profile.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model OsProfile {
   /**
    * The Linux OS profile.
@@ -945,6 +946,7 @@ model PrivateLinkConfigurationProperties {
   /**
    * The IP configurations for the private link service.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipConfigurations: IPConfiguration[];
 }
 
@@ -1934,6 +1936,7 @@ model ClusterConfigurations {
 /**
  * The cluster monitor parameters.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model ClusterMonitoringRequest {
   /**
    * The cluster monitor workspace ID.
@@ -1949,6 +1952,7 @@ model ClusterMonitoringRequest {
 /**
  * The cluster monitoring status response.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model ClusterMonitoringResponse {
   /**
    * The status of the monitor on the HDInsight cluster.
@@ -1964,6 +1968,7 @@ model ClusterMonitoringResponse {
 /**
  * The azure monitor parameters.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model AzureMonitorRequest {
   /**
    * The Log Analytics workspace ID.
@@ -2016,6 +2021,7 @@ model AzureMonitorTableConfiguration {
 /**
  * The azure monitor status response.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model AzureMonitorResponse {
   /**
    * The status of the monitor on the HDInsight cluster.

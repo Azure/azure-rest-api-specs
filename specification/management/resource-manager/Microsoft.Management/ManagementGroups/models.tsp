@@ -411,6 +411,7 @@ model ManagementGroupChildInfo {
 /**
  * Management group creation parameters.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model CreateManagementGroupRequest {
   /**
    * The fully qualified ID for the management group.  For example, /providers/Microsoft.Management/managementGroups/0000000-0000-0000-0000-000000000000
@@ -587,6 +588,7 @@ model AzureAsyncOperationResults {
 /**
  * Management group patch parameters.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model PatchManagementGroupRequest {
   /**
    * The friendly name of the management group.
@@ -758,6 +760,7 @@ model HierarchySettingsProperties {
 /**
  * Parameters for creating or updating Management Group settings
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model CreateOrUpdateSettingsRequest {
   /**
    * The properties of the request to create or update Management Group settings
@@ -828,6 +831,7 @@ model OperationDisplayProperties {
 /**
  * Management group name availability check parameters.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model CheckNameAvailabilityRequest {
   /**
    * the name to check for availability

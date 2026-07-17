@@ -62,6 +62,7 @@ alias ReplicationProtectionContainersOps = Azure.ResourceManager.Legacy.LegacyOp
   }
 >;
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model ProtectionContainerAcceptedLroResponse<FinalResult extends
   | TypeSpec.Reflection.Model
   | unknown

@@ -2073,6 +2073,7 @@ model ApiError {
 /**
  * Request body to get the configuration for the region.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model RegionConfigurationRequest {
   /**
    * Request body to get the availability for scheduling orders.
@@ -2098,6 +2099,7 @@ model RegionConfigurationRequest {
 /**
  * Request body to get the availability for scheduling orders.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 @discriminator("skuName")
 model ScheduleAvailabilityRequest {
   /**
@@ -2125,6 +2127,7 @@ model ScheduleAvailabilityRequest {
 /**
  * Request body to get the transport availability for given sku.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model TransportAvailabilityRequest {
   /**
    * Type of the device.
@@ -2175,6 +2178,7 @@ model DeviceCapabilityRequest {
 /**
  * Configuration response specific to a region.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model RegionConfigurationResponse {
   /**
    * Schedule availability for given sku in a region.
@@ -2204,6 +2208,7 @@ model RegionConfigurationResponse {
 /**
  * Schedule availability for given sku in a region.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model ScheduleAvailabilityResponse {
   /**
    * List of dates available to schedule
@@ -2215,6 +2220,7 @@ model ScheduleAvailabilityResponse {
 /**
  * Transport options available for given sku in a region.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model TransportAvailabilityResponse {
   /**
    * List of transport availability details for given region
@@ -2238,6 +2244,7 @@ model TransportAvailabilityDetails {
 /**
  * Device capabilities for given sku in a region
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model DeviceCapabilityResponse {
   /**
    * List of device capabilities available for a given region and a given sku
@@ -3106,6 +3113,7 @@ model CreateJobValidations extends ValidationRequest {
 /**
  * Request to validate create order limit for current subscription.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model CreateOrderLimitForSubscriptionValidationRequest
   extends ValidationInputRequest {
   /**
@@ -3802,6 +3810,7 @@ model DataBoxJobDetails extends JobDetails {
 /**
  * Request body to get the availability for scheduling data box orders orders.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model DataBoxScheduleAvailabilityRequest extends ScheduleAvailabilityRequest {
   /**
    * Sku Name for which the order is to be scheduled.
@@ -3850,6 +3859,7 @@ model DataBoxSecret {
 /**
  * Request to validate export and import data details.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model DataTransferDetailsValidationRequest extends ValidationInputRequest {
   /**
    * List of DataTransfer details to be used to export data from azure.
@@ -3920,6 +3930,7 @@ model DataboxJobSecrets extends JobSecrets {
 /**
  * Datacenter instruction for given storage location.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model DatacenterAddressInstructionResponse extends DatacenterAddressResponse {
   /**
    * Data center communication instruction
@@ -3936,6 +3947,7 @@ model DatacenterAddressInstructionResponse extends DatacenterAddressResponse {
 /**
  * Datacenter address for given storage location.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model DatacenterAddressLocationResponse extends DatacenterAddressResponse {
   /**
    * Contact person name
@@ -4024,6 +4036,7 @@ model DatacenterAddressLocationResponse extends DatacenterAddressResponse {
 /**
  * Request body to get the availability for scheduling disk orders.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model DiskScheduleAvailabilityRequest extends ScheduleAvailabilityRequest {
   /**
    * The expected size of the data, which needs to be transferred in this job, in terabytes.
@@ -4039,6 +4052,7 @@ model DiskScheduleAvailabilityRequest extends ScheduleAvailabilityRequest {
 /**
  * Request body to get the availability for scheduling heavy orders.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model HeavyScheduleAvailabilityRequest extends ScheduleAvailabilityRequest {
   /**
    * Sku Name for which the order is to be scheduled.
@@ -4069,6 +4083,7 @@ model ManagedDiskDetails extends DataAccountDetails {
 /**
  * Request to validate preference of transport and data center.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model PreferencesValidationRequest extends ValidationInputRequest {
   /**
    * Preference of transport and data center.
@@ -4110,6 +4125,7 @@ model PreferencesValidationResponseProperties extends ValidationInputResponse {
 /**
  * Request to validate sku availability.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model SkuAvailabilityValidationRequest extends ValidationInputRequest {
   /**
    * Device type to be used for the job.
@@ -4177,6 +4193,7 @@ model StorageAccountDetails extends DataAccountDetails {
 /**
  * Request to validate subscription permission to create jobs.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model SubscriptionIsAllowedToCreateJobValidationRequest
   extends ValidationInputRequest {
   /**

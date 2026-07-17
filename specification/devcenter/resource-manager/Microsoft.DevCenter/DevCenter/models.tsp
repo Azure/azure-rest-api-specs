@@ -1472,6 +1472,7 @@ model ImageVersionProperties {
   @visibility(Lifecycle.Read)
   excludeFromLatest?: boolean;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The size of the OS disk image, in GB.")
   @visibility(Lifecycle.Read)
   osDiskImageSizeInGb?: int32;
@@ -1680,6 +1681,7 @@ model DevBoxDefinitionUpdateProperties {
   @doc("The SKU for Dev Boxes created using this definition.")
   sku?: Azure.ResourceManager.CommonTypes.Sku;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The storage type used for the Operating System disk of Dev Boxes created using this definition.")
   osStorageType?: string;
 
@@ -1754,6 +1756,7 @@ model UsageName {
   value?: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 @doc("The scoped name check availability request body.")
 model CheckScopedNameAvailabilityRequest {
   @doc("The name of the resource for which availability needs to be checked.")

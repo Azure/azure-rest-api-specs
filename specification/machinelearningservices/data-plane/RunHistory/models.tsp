@@ -173,6 +173,7 @@ union SpanStatus {
 // ============================================================
 
 /** Request to add or modify run service instances. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model AddOrModifyRunServiceInstancesRequest {
   /** The service instances to add or modify. */
   instances?: Record<ServiceInstance>;
@@ -263,6 +264,7 @@ model BaseEvent {
 }
 
 /** Request to batch add or modify runs. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model BatchAddOrModifyRunRequest {
   /** The list of runs to add or modify. */
   runs?: CreateRun[];
@@ -306,6 +308,7 @@ model BatchIMetricV2 {
 }
 
 /** A batch request for run data. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model BatchRunDataRequest {
   /** The requests keyed by identifier. */
   requests?: Record<GetRunDataRequest>;
@@ -354,6 +357,7 @@ model Compute {
 }
 
 /** Compute request information. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model ComputeRequest {
   /** The node count. */
   nodeCount?: int32;
@@ -714,6 +718,7 @@ model ExperimentQueryParams {
 }
 
 /** A request to get run data. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model GetRunDataRequest {
   /** The run ID. */
   runId?: string;
@@ -747,6 +752,7 @@ model GetRunsByIds {
 }
 
 /** A request to get sampled metrics. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model GetSampledMetricRequest {
   /** The metric name. */
   metricName?: string;
@@ -780,6 +786,7 @@ model IMetricV2 {
 }
 
 /** A nested structure of errors. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model InnerErrorResponse {
   /** The error code. */
   code?: string;
@@ -804,6 +811,7 @@ model JobCost {
 }
 
 /** A key-value pair of BaseEvent and ErrorResponse. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model KeyValuePairBaseEventErrorResponse {
   /** The event key. */
   key?: BaseEvent;
@@ -868,6 +876,7 @@ model ListMetrics {
 }
 
 /** A long-running null response. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model LongRunningNullResponse {}
 
 /** A metric definition. */
@@ -1148,6 +1157,7 @@ model QueueingInfo {
 }
 
 /** A request to retrieve full fidelity metrics. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model RetrieveFullFidelityMetricRequest {
   /** The metric name. */
   metricName?: string;
@@ -1582,6 +1592,7 @@ model RunMetric {
 }
 
 /** Run options. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 model RunOptions {
   /** Whether to generate a data container ID if not specified. */
   generateDataContainerIdIfNotSpecified?: boolean;

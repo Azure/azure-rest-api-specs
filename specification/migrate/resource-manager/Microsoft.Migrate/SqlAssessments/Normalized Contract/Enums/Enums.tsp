@@ -381,6 +381,7 @@ union AzureCurrency {
   string,
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 @doc("The savings options.")
 union SavingsOptions {
   @doc("No savings options.")

@@ -918,6 +918,7 @@ model FeedIndexEntityRequestDto {
 }
 
 /** Request body for listing models. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model ListModelsRequest {
   /** Filter by model name. */
   name?: string;
@@ -972,6 +973,7 @@ model ListModelsRequest {
 }
 
 /** Paginated response of models. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model ModelPagedResponse {
   /** The list of models. */
   @pageItems
@@ -985,6 +987,7 @@ model ModelPagedResponse {
 }
 
 /** Paginated response of models with next request. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model ModelListModelsRequestPagedResponse {
   /** The list of models. */
   @pageItems
@@ -1013,6 +1016,7 @@ model ModelBatchResponseDto {
 }
 
 /** Model container request. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model ModelContainerRequest {
   /** The container name. */
   name: string;

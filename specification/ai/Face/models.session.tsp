@@ -81,6 +81,7 @@ model LivenessSessionData {
   @doc("Whether or not to allow client to set their own 'userCorrelationId' via the Vision SDK. Default is false, and 'userCorrelationId' must be set in this request body.")
   userCorrelationIdSetInClient?: boolean;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @added(Versions.v1_3_preview_1)
   @doc("Specify the expected IP address or CIDR block of the client that runs the liveness check.")
   expectedClientIpAddress?: string;
@@ -382,6 +383,7 @@ model LivenessSessionCommonData {
   @doc("Denotes if the abuse monitoring feature was enabled during this session.")
   isAbuseMonitoringEnabled?: HttpPart<boolean>;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @added(Versions.v1_3_preview_1)
   @doc("The expected IP address or CIDR block of the client that runs the liveness check.")
   expectedClientIpAddress?: string;
@@ -525,6 +527,7 @@ model LivenessError {
 @added(Versions.v1_3_preview_1)
 @doc("The client information gathered during the liveness attempt.")
 model ClientInformation {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The client ip address seen during the liveness attempt.")
   ip: string;
 }
@@ -566,6 +569,7 @@ model LivenessColorDecisionTarget {
   faceRectangle: FaceRectangle;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 @added(Versions.v1_2)
 @doc("Request wrapper of liveness with verify session creation.")
 model CreateLivenessWithVerifySessionRequest {
@@ -621,6 +625,7 @@ model LivenessAbuseMonitoringSetting {
   enabled: HttpPart<boolean>;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 @added(Versions.v1_3_preview_1)
 @doc("Response model for client assets access token.")
 model ClientAssetsAccessTokenResponse {

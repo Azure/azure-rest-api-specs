@@ -15,6 +15,7 @@ namespace SensitivitySettingsAPI;
 /**
  * Data sensitivity settings for sensitive data discovery
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 @singleton("current")
 @tenantResource
 model GetSensitivitySettingsResponse

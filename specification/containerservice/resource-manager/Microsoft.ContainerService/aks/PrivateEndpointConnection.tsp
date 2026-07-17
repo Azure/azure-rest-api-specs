@@ -100,6 +100,7 @@ interface PrivateEndpointConnectionsOps
 /**
  * Async 200 OK response for delete with LRO polling headers.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 @doc("Resource deleted successfully.")
 model PrivateEndpointConnectionDeleteOkResponse {
   ...OkResponse;

@@ -38,6 +38,7 @@ model InsightModelConfiguration {
   modelDeploymentName: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 @doc("The request of the insights report.")
 @discriminator("type")
 model InsightRequest {
@@ -45,6 +46,7 @@ model InsightRequest {
   type: InsightType;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 @doc("Insights on set of Evaluation Results")
 model EvaluationRunClusterInsightRequest extends InsightRequest {
   @doc("The type of insights request.")
@@ -60,6 +62,7 @@ model EvaluationRunClusterInsightRequest extends InsightRequest {
   modelConfiguration?: InsightModelConfiguration;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 @doc("Insights on set of Agent Evaluation Results")
 model AgentClusterInsightRequest extends InsightRequest {
   @doc("The type of request.")
@@ -72,6 +75,7 @@ model AgentClusterInsightRequest extends InsightRequest {
   modelConfiguration?: InsightModelConfiguration;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 @doc("Evaluation Comparison Request")
 model EvaluationComparisonInsightRequest extends InsightRequest {
   @doc("The type of request.")

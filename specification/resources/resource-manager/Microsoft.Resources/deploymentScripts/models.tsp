@@ -67,6 +67,7 @@ union CreatedByType {
 /**
  * The clean up preference when the script execution gets in a terminal state. Default setting is 'Always'.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 union cleanupOptions {
   string,
 

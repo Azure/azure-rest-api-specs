@@ -4,6 +4,7 @@ using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("IP Extended Community Properties defines the resource properties.")
 model IpExtendedCommunityProperties {
   ...AnnotationResource;
@@ -36,8 +37,10 @@ model IpExtendedCommunityProperties {
   administrativeState?: AdministrativeState;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("IP Extended Community patchable properties.")
 model IpExtendedCommunityPatchableProperties {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("List of IP Extended Community Rules.")
   @Azure.ResourceManager.identifiers(#[])
   ipExtendedCommunityRules: IpExtendedCommunityRule[];
@@ -58,6 +61,7 @@ model IpExtendedCommunityRule {
   routeTargets: string[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending instead of spreading to avoid breaking changes in patch model"
 @doc("The IP Extended Communities patch resource definition.")
 model IpExtendedCommunityPatch extends TagsUpdate {
@@ -65,10 +69,12 @@ model IpExtendedCommunityPatch extends TagsUpdate {
   properties?: IpExtendedCommunityPatchProperties;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("IP Extended Community patchable properties.")
 model IpExtendedCommunityPatchProperties {
   ...AnnotationResource;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("List of IP Extended Community Rules.")
   @Azure.ResourceManager.identifiers(#[])
   ipExtendedCommunityRules?: IpExtendedCommunityRule[];

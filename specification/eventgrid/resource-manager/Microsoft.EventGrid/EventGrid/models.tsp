@@ -2912,6 +2912,7 @@ model DomainUpdateParameterProperties {
   /**
    * This can be used to restrict traffic from specific IPs instead of all IPs. Note: These are considered only if PublicNetworkAccess is enabled.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @identifiers(#[])
   inboundIpRules?: InboundIpRule[];
 
@@ -2976,6 +2977,7 @@ model DomainSharedAccessKeys {
 /**
  * Domain regenerate share access key request.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model DomainRegenerateKeyRequest {
   /**
    * Key name to regenerate key1 or key2.
@@ -3969,6 +3971,7 @@ model NamespaceUpdateParameterProperties {
   /**
    * This can be used to restrict traffic from specific IPs instead of all IPs. Note: These are considered only if PublicNetworkAccess is enabled.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @identifiers(#[])
   inboundIpRules?: InboundIpRule[];
 }
@@ -4052,6 +4055,7 @@ model NamespaceSharedAccessKeys {
 /**
  * Namespace regenerate share access key request.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model NamespaceRegenerateKeyRequest {
   /**
    * Key name to regenerate key1 or key2.
@@ -4371,6 +4375,7 @@ model PartnerNamespaceProperties {
   /**
    * This can be used to restrict traffic from specific IPs instead of all IPs. Note: These are considered only if PublicNetworkAccess is enabled.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @identifiers(#[])
   inboundIpRules?: InboundIpRule[];
 
@@ -4415,6 +4420,7 @@ model PartnerNamespaceUpdateParameterProperties {
   /**
    * This can be used to restrict traffic from specific IPs instead of all IPs. Note: These are considered only if PublicNetworkAccess is enabled.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @identifiers(#[])
   inboundIpRules?: InboundIpRule[];
 
@@ -4447,6 +4453,7 @@ model PartnerNamespaceSharedAccessKeys {
 /**
  * PartnerNamespace regenerate shared access key request.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model PartnerNamespaceRegenerateKeyRequest {
   /**
    * Key name to regenerate (key1 or key2).
@@ -5097,6 +5104,7 @@ model TopicUpdateParameterProperties {
   /**
    * This can be used to restrict traffic from specific IPs instead of all IPs. Note: These are considered only if PublicNetworkAccess is enabled.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @identifiers(#[])
   inboundIpRules?: InboundIpRule[];
 

@@ -569,6 +569,7 @@ model WorkspaceCustomParameters {
   /**
    * Boolean indicating whether the public IP should be disabled. Default value is true. Not allowed in Serverless ComputeMode workspace.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   enableNoPublicIp?: WorkspaceNoPublicIPBooleanParameter;
 
   /**
@@ -589,6 +590,7 @@ model WorkspaceCustomParameters {
   /**
    * Name of the Public IP for No Public IP workspace with managed vNet. Not allowed in Serverless ComputeMode workspace.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   publicIpName?: WorkspaceCustomStringParameter;
 
   /**
@@ -1297,6 +1299,7 @@ model EndpointDetail {
   /**
    * An IP Address that Domain Name currently resolves to.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipAddress?: string;
 
   /**

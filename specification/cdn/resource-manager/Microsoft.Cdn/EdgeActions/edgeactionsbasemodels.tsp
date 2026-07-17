@@ -134,6 +134,7 @@ model EdgeActionAttachment {
 }
 
 /** Edge action attachment response */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 @clientName("EdgeActionAttachmentResult", "csharp")
 model EdgeActionAttachmentResponse {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Extension needed for backwards compatibility with 2024-07-22-preview"

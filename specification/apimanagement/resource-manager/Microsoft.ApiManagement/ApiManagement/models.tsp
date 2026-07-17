@@ -3308,6 +3308,7 @@ model DiagnosticContractProperties {
   /**
    * Log the ClientIP. Default is false.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   logClientIp?: boolean;
 
   /**
@@ -5046,6 +5047,7 @@ model FailureStatusCodeRange {
 /**
  * The response to be returned when a backend fails to respond
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model BackendFailureResponse {
   /**
    * The status code of the response.
@@ -6025,6 +6027,7 @@ model ApiManagementServiceBaseProperties {
   /**
    * Public Standard SKU IP V4 based IP address to be associated with Virtual Network deployed service in the region. Supported only for Developer and Premium SKU being deployed in Virtual Network.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   publicIpAddressId?: string;
 
   /**
@@ -6279,6 +6282,7 @@ model AdditionalLocation {
   /**
    * Public Standard SKU IP V4 based IP address to be associated with Virtual Network deployed service in the location. Supported only for Premium SKU being deployed in Virtual Network.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   publicIpAddressId?: string;
 
   /**
@@ -9024,6 +9028,7 @@ model PortalSettingValidationKeyContract {
 /**
  * A request to approve or reject a private endpoint connection
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model PrivateEndpointConnectionRequest {
   /**
    * Private Endpoint Connection Resource Id.
@@ -10711,6 +10716,7 @@ model DiagnosticContractUpdateProperties {
   /**
    * Log the ClientIP. Default is false.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   logClientIp?: boolean;
 
   /**

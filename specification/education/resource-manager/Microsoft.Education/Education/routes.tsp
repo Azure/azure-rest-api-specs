@@ -11,6 +11,7 @@ using Azure.ResourceManager;
 
 namespace Microsoft.Education;
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 @doc("code redeemed")
 model RedeemCodeResponse {
   ...OkResponse;

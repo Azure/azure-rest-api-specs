@@ -14,6 +14,7 @@ namespace Nginx.NginxPlus;
 /**
  * Nginx Configuration Response
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 @parentResource(NginxDeployment)
 model NginxConfigurationResponse
   is Azure.ResourceManager.ProxyResource<NginxConfigurationResponseProperties> {

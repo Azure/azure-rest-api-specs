@@ -19,24 +19,28 @@ namespace Microsoft.Web;
 @mediaTypeHint("application/json")
 scalar stringApplicationJson extends string;
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @error
 model ArmBadRequestResponse {
   ...TypeSpec.Http.Response<400>;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @error
 model ArmNotFoundResponse {
   ...TypeSpec.Http.Response<404>;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @error
 model ArmConflictResponse {
   ...TypeSpec.Http.Response<409>;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @error
 model ArmTooManyRequestsResponse {
@@ -1683,6 +1687,7 @@ model AppServiceEnvironment {
   /**
    * User added ip ranges to whitelist on ASE db
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   userWhitelistedIpRanges?: string[];
 
   /**
@@ -1827,18 +1832,22 @@ model ProxyOnlyResource {
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AseV3NetworkingConfigurationProperties {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   windowsOutboundIpAddresses?: string[];
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   linuxOutboundIpAddresses?: string[];
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   externalInboundIpAddresses?: string[];
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   internalInboundIpAddresses?: string[];
@@ -1861,12 +1870,14 @@ model AseV3NetworkingConfigurationProperties {
   /**
    * Customer provided Inbound IP Address. Only able to be set on Ase create.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   inboundIpAddressOverride?: string;
 }
 
 /**
  * App Service error response.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 @error
 model DefaultErrorResponse {
   /**
@@ -2024,16 +2035,19 @@ model AddressResponseProperties {
   /**
    * Main public virtual IP.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   serviceIpAddress?: string;
 
   /**
    * Virtual Network internal IP address of the App Service Environment if it is in internal load-balancing mode.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   internalIpAddress?: string;
 
   /**
    * IP addresses appearing on outbound connections.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   outboundIpAddresses?: string[];
 
   /**
@@ -2295,12 +2309,14 @@ model SiteProperties {
   /**
    * List of IP addresses that the app uses for outbound connections (e.g. database access). Includes VIPs from tenants that site can be hosted with current settings. Read-only.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   outboundIpAddresses?: string;
 
   /**
    * List of IP addresses that the app uses for outbound connections (e.g. database access). Includes VIPs from all tenants except dataComponent. Read-only.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   possibleOutboundIpAddresses?: string;
 
@@ -2819,28 +2835,33 @@ model SiteConfig {
   /**
    * IP security restrictions for main.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @identifiers(#["name"])
   ipSecurityRestrictions?: IpSecurityRestriction[];
 
   /**
    * Default action for main access restriction if no rules are matched.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipSecurityRestrictionsDefaultAction?: DefaultAction;
 
   /**
    * IP security restrictions for scm.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @identifiers(#["name"])
   scmIpSecurityRestrictions?: IpSecurityRestriction[];
 
   /**
    * Default action for scm access restriction if no rules are matched.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   scmIpSecurityRestrictionsDefaultAction?: DefaultAction;
 
   /**
    * IP security restrictions for scm to use main.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   scmIpSecurityRestrictionsUseMain?: boolean;
 
   /**
@@ -3392,6 +3413,7 @@ model ApiManagementConfig {
 /**
  * IP security restriction on an app.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model IpSecurityRestriction {
   /**
    * IP address the security restriction is valid for.
@@ -4538,6 +4560,7 @@ model RemotePrivateEndpointConnectionARMResourceProperties {
   /**
    * Private IPAddresses mapped to the remote private endpoint
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipAddresses?: string[];
 }
 
@@ -6236,6 +6259,7 @@ model DiagnosticDetectorCollection
 /**
  * Class representing Response from Diagnostic Detectors
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DiagnosticDetectorResponse extends ProxyOnlyResource {
   /**
@@ -6531,6 +6555,7 @@ model KubeEnvironmentPatchResourceProperties {
   /**
    * Static IP of the KubeEnvironment
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   staticIp?: string;
 
@@ -7814,6 +7839,7 @@ model BillingMeterProperties {
 /**
  * Resource name availability request content.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model ResourceNameAvailabilityRequest {
   /**
    * Resource name to verify.
@@ -8047,6 +8073,7 @@ model NameIdentifier {
  */
 model IdentifierCollection is Azure.Core.Page<Identifier>;
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DnlResourceNameAvailabilityRequest {
   /**
@@ -8476,6 +8503,7 @@ model ValidateResponseError {
 /**
  * Request entity for previewing the Static Site workflow
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model StaticSitesWorkflowPreviewRequest extends ProxyOnlyResource {
   /**
@@ -8827,6 +8855,7 @@ model RemotePrivateEndpointConnectionProperties {
   /**
    * Private IPAddresses mapped to the remote private endpoint
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipAddresses?: string[];
 }
 
@@ -9172,6 +9201,7 @@ model DatabaseConnectionProperties {
 /**
  * Static Site Database Connection Request Properties resource when patching
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model DatabaseConnectionPatchRequest {
   /**
    * DatabaseConnectionPatchRequest resource specific properties
@@ -9761,12 +9791,14 @@ model SitePatchResourceProperties {
   /**
    * List of IP addresses that the app uses for outbound connections (e.g. database access). Includes VIPs from tenants that site can be hosted with current settings. Read-only.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   outboundIpAddresses?: string;
 
   /**
    * List of IP addresses that the app uses for outbound connections (e.g. database access). Includes VIPs from all tenants except dataComponent. Read-only.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   possibleOutboundIpAddresses?: string;
 
@@ -13553,6 +13585,7 @@ model DeletedAppRestoreRequestProperties {
 /**
  * Details about app recovery operation.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SnapshotRestoreRequest extends ProxyOnlyResource {
   /**
@@ -15095,6 +15128,7 @@ model RequestHistoryProperties {
 /**
  * A request.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model Request {
   /**
    * A list of all the headers attached to the request.
@@ -15116,6 +15150,7 @@ model Request {
 /**
  * A response.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model Response {
   /**
    * A list of all the headers attached to the response.
@@ -15568,12 +15603,14 @@ model FlowEndpoints {
   /**
    * The outgoing ip address.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @identifiers(#["address"])
   outgoingIpAddresses?: IpAddress[];
 
   /**
    * The access endpoint ip address.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @identifiers(#["address"])
   accessEndpointIpAddresses?: IpAddress[];
 }
@@ -15620,6 +15657,7 @@ model FlowAccessControlConfigurationPolicy {
   /**
    * The allowed caller IP address ranges.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @identifiers(#[])
   allowedCallerIpAddresses?: IpAddressRange[];
 
@@ -15982,6 +16020,7 @@ model HttpScaleRule {
 /**
  * A request to approve or reject a private endpoint connection
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model PrivateLinkConnectionApprovalRequest {
   /**
    * The state of a private link connection
@@ -16129,6 +16168,7 @@ model AppserviceGithubToken {
 /**
  * Appservice Github token request content.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model AppserviceGithubTokenRequest {
   /**
    * Code string to exchange for Github Access token

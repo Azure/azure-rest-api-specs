@@ -184,6 +184,7 @@ model GroupQuotasEntityBase {
 /**
  * The provisioning state for the operation.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model LROResponse extends Azure.ResourceManager.CommonTypes.ProxyResource {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -739,6 +740,7 @@ model GroupQuotasEnforcementStatusProperties {
 /**
  * List of Azure regions, where the group quotas is enabled for enforcement.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model GroupQuotasEnforcementListResponse {
   /**
    * List of Azure Regions.
@@ -836,6 +838,7 @@ model ResourceName {
 /**
  * Error.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 @error
 model ExceptionResponse {
   /**
@@ -1123,6 +1126,7 @@ model SubscriptionQuotaAllocationsStatusList {
 /**
  * Resource definition with the requested quota.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model ResourceBaseRequest {
   /**
    * The resource name, such as SKU name.
@@ -1168,6 +1172,7 @@ model CommonResourceProperties {
 /**
  * Quota limits request response.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model QuotaLimitsResponse {
   /**
    * List of quota limits with the quota request status.
@@ -1213,6 +1218,7 @@ model LimitObject extends LimitJsonObject {
 /**
  * Quota request response.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model QuotaRequestOneResourceSubmitResponse {
   /**
    * Quota request ID.
@@ -1318,6 +1324,7 @@ model QuotaRequestOneResourceProperties {
 /**
  * Quota request response.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model QuotaRequestSubmitResponse {
   /**
    * Quota request ID.

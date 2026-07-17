@@ -11,6 +11,7 @@ namespace Microsoft.HorizonDb;
 
 alias HorizonDbPrivateEndpointOperations = Azure.ResourceManager.PrivateEndpoints<PrivateEndpointConnection>;
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @armResourceOperations
 interface HorizonDbClusters {
   @doc("Gets information about a HorizonDB cluster.")
@@ -51,6 +52,7 @@ interface HorizonDbPools {
   list is ArmResourceListByParent<HorizonDbPool>;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @armResourceOperations
 interface HorizonDbReplicas {
   @doc("Gets information about a HorizonDB replica.")
@@ -79,6 +81,7 @@ interface HorizonDbReplicas {
   >;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @armResourceOperations
 interface HorizonDbFirewallRules {
   @doc("Gets information about a HorizonDB firewall rule.")
@@ -101,6 +104,7 @@ interface HorizonDbFirewallRules {
   >;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @armResourceOperations
 interface HorizonDbPrivateEndpointConnections {
   @doc("Gets a private endpoint connection.")
@@ -132,6 +136,7 @@ interface HorizonDbPrivateEndpointConnections {
   >;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @armResourceOperations
 interface HorizonDbPrivateLinkResources {
   @doc("Gets a private link resource.")
@@ -141,6 +146,7 @@ interface HorizonDbPrivateLinkResources {
   list is ArmResourceListByParent<HorizonDbPrivateLinkResource>;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @armResourceOperations
 interface HorizonDbParameterGroups {
   @doc("Gets information about a HorizonDB parameter group.")

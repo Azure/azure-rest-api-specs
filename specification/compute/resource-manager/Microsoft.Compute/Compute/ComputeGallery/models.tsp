@@ -1126,6 +1126,7 @@ model GalleryImageVersionStorageProfile {
   /**
    * This is the OS disk image.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osDiskImage?: GalleryOSDiskImage;
 
   /**
@@ -1356,6 +1357,7 @@ model UefiKeySignatures {
   /**
    * The database of UEFI keys for this image version.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @identifiers(#[])
   db?: UefiKey[];
 
@@ -2004,6 +2006,7 @@ model GalleryInVMAccessControlProfileProperties
   /**
    * This property allows you to specify the OS type of the VMs/VMSS for which this profile can be used against. Possible values are: 'Windows' or 'Linux'
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osType: OperatingSystemTypes;
 
   /**
@@ -2414,6 +2417,7 @@ model SharedGalleryImageVersionStorageProfile {
   /**
    * This is the OS disk image.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osDiskImage?: SharedGalleryOSDiskImage;
 
   /**

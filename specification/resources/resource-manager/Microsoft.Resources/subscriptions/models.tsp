@@ -569,6 +569,7 @@ model TenantIdDescription {
 /**
  * Check zone peers request parameters.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model CheckZonePeersRequest {
   /**
    * The Microsoft location.

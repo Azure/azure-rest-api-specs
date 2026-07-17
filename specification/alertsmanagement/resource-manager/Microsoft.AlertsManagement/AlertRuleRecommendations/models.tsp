@@ -227,6 +227,7 @@ union MetricAlertsDisplayUnit {
 /**
  * List of alert rule recommendations.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model AlertRuleRecommendationsListResponse
   is Azure.Core.Page<AlertRuleRecommendationResource>;
 

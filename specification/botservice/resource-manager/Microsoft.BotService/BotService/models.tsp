@@ -918,6 +918,7 @@ model Channel {
 /**
  * The ARM channel of list channel with keys operation response.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ListChannelWithKeysResponse extends BotChannel {
   /**
@@ -1136,6 +1137,7 @@ model SiteInfo {
 /**
  * The ARM create email sign in url operation response.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model CreateEmailSignInUrlResponse {
   /**
    * Specifies the resource ID.
@@ -1405,6 +1407,7 @@ model QnAMakerEndpointKeysRequestBody {
 /**
  * Schema for EndpointKeys generate/refresh operations.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model QnAMakerEndpointKeysResponse {
   /**

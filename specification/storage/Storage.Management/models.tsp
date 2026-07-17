@@ -1853,6 +1853,7 @@ model LeaseContainerRequest {
 /**
  * Lease Container response schema.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model LeaseContainerResponse {
   /**
    * Returned unique lease ID that must be included with any request to delete the container, or to renew, change, or release the lease.
@@ -2534,6 +2535,7 @@ model LeaseShareRequest {
 /**
  * Lease Share response schema.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model LeaseShareResponse {
   /**
    * Returned unique lease ID that must be included with any request to delete the share, or to renew, change, or release the lease.
@@ -4662,6 +4664,7 @@ model AccountSasParameters {
   /**
    * An IP address or a range of IP addresses from which to accept requests.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   signedIp?: string;
 
   /**
@@ -4721,6 +4724,7 @@ model ServiceSasParameters {
   /**
    * An IP address or a range of IP addresses from which to accept requests.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   signedIp?: string;
 
   /**
@@ -6571,6 +6575,7 @@ model ManagedIdentityAuthProperties extends StorageConnectorAuthProperties {
 /**
  * Test existing connection request properties
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 @added(Versions.v2025_08_01)
 model TestExistingConnectionRequest {
   /**
@@ -6582,6 +6587,7 @@ model TestExistingConnectionRequest {
 /**
  * Test connection response properties
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 @added(Versions.v2025_08_01)
 model TestConnectionResponse {
   /**

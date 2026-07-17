@@ -129,6 +129,7 @@ model AgriServiceConfig {
   @minLength(2)
   appServiceResourceId?: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("Cosmos Db resource Id.")
   @visibility(Lifecycle.Read)
   @minLength(2)

@@ -3094,6 +3094,7 @@ model PublicIPAddressConfiguration {
   /**
    * The number of IPs specified here limits the maximum size of the Pool - 100 dedicated nodes or 100 Spot/low-priority nodes can be allocated for each public IP. For example, a pool needing 250 dedicated VMs would need at least 3 public IPs specified. Each element of this collection is of the form: /subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.Network/publicIPAddresses/{ip}.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @summary("The list of public IPs which the Batch service will use when provisioning Compute Nodes.")
   ipAddressIds?: string[];
 
@@ -3795,6 +3796,7 @@ model AutomaticOSUpgradePolicy {
   /**
    * Defer OS upgrades on the TVMs if they are running tasks.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osRollingUpgradeDeferral?: boolean;
 }
 

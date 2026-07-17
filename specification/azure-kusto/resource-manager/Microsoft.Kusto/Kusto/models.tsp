@@ -1619,6 +1619,7 @@ model ClusterProperties {
   /**
    * The list of ips in the format of CIDR allowed to connect to the cluster.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   allowedIpRangeList?: string[];
 
   /**
@@ -1733,12 +1734,14 @@ model VirtualNetworkConfiguration {
   /**
    * Engine service's public IP address resource id.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   enginePublicIpId: string;
 
   /**
    * Data management's service public IP address resource id.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   dataManagementPublicIpId: string;
 
@@ -1993,6 +1996,7 @@ model ClusterMigrateRequest {
 /**
  * A principal assignment check name availability request.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model ClusterPrincipalAssignmentCheckNameRequest {
   /**
    * Principal Assignment resource name.
@@ -2385,6 +2389,7 @@ model ResourceSkuCapabilities {
 /**
  * The result returned from a cluster check name availability request.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model ClusterCheckNameRequest {
   /**
    * Cluster name.
@@ -2400,6 +2405,7 @@ model ClusterCheckNameRequest {
 /**
  * The result returned from a database check name availability request.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model CheckNameRequest {
   /**
    * Resource name.
@@ -2415,6 +2421,7 @@ model CheckNameRequest {
 /**
  * The result returned from a AttachedDatabaseConfigurations check name availability request.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model AttachedDatabaseConfigurationsCheckNameRequest {
   /**
    * Attached database resource name.
@@ -2430,6 +2437,7 @@ model AttachedDatabaseConfigurationsCheckNameRequest {
 /**
  * The result returned from a managedPrivateEndpoints check name availability request.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model ManagedPrivateEndpointsCheckNameRequest {
   /**
    * Managed private endpoint resource name.
@@ -2508,6 +2516,7 @@ model AzureCapacity {
 /**
  * The request to invite a follower to a database.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model DatabaseInviteFollowerRequest {
   /**
    * The email of the invited user for which the follower invitation is generated.
@@ -2533,6 +2542,7 @@ model DatabaseInviteFollowerResult {
 /**
  * A principal assignment check name availability request.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model DatabasePrincipalAssignmentCheckNameRequest {
   /**
    * Principal Assignment resource name.
@@ -2786,6 +2796,7 @@ model SandboxCustomImageProperties {
 /**
  * The result returned from a sandboxCustomImage check name availability request.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model SandboxCustomImagesCheckNameRequest {
   /**
    * Sandbox custom image resource name.
@@ -3096,6 +3107,7 @@ model DataConnectionValidationResult {
 /**
  * A data connection check name availability request.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model DataConnectionCheckNameRequest {
   /**
    * Data Connection name.
@@ -3111,6 +3123,7 @@ model DataConnectionCheckNameRequest {
 /**
  * A script name availability request.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model ScriptCheckNameRequest {
   /**
    * Script name.
@@ -3641,6 +3654,7 @@ model EventGridConnectionProperties {
 /**
  * Class representing the Kusto CosmosDb data connection properties.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model CosmosDbDataConnectionProperties {
   /**
    * The case-sensitive name of the existing target table in your cluster. Retrieved data is ingested into this table.
@@ -3666,16 +3680,19 @@ model CosmosDbDataConnectionProperties {
   /**
    * The resource ID of the Cosmos DB account used to create the data connection.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   cosmosDbAccountResourceId: string;
 
   /**
    * The name of an existing database in the Cosmos DB account.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   cosmosDbDatabase: string;
 
   /**
    * The name of an existing container in the Cosmos DB database.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   cosmosDbContainer: string;
 
   /**

@@ -29,6 +29,7 @@ model KnowledgeBaseVersion {
   ...BaseKnowledgeBase;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 @doc("Resources for indexing operation")
 model IndexingRequest {
   @doc("Node pool ID")
@@ -42,6 +43,7 @@ model IndexingRequest {
   storageId?: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 @doc("Supercomputer run ID")
 model IndexingResponse {
   @doc("Run ID")
@@ -64,6 +66,7 @@ model KnowledgeBaseOperationStatus {
 }
 
 /** Response body for a long-running delete operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model KnowledgeBaseDeleteResponse {
   @doc("The unique ID of the operation.")
   id: string;

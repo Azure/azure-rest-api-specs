@@ -22,6 +22,7 @@ model IpCommunity is Azure.ResourceManager.TrackedResource<
 
 @@doc(IpCommunity.properties, "The IP Community Properties");
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @armResourceOperations
 interface IpCommunities {
   @doc("Implements an IP Community GET method.")

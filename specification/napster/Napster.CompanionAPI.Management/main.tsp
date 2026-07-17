@@ -87,6 +87,7 @@ namespace Napster.CompanionAPI {
   /**
    * SaaS guid & PublishedId for Activate and Validate SaaS Resource
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   model ActivateSaaSParameterRequest {
     /**

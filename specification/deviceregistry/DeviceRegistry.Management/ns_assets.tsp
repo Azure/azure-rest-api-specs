@@ -35,6 +35,7 @@ model NamespaceAsset is TrackedResource<NamespaceAssetProperties> {
   extendedLocation: ExtendedLocation;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 @added(Versions.v2026_04_01)
 @doc("The request body for the executeAction operation on NamespaceAsset.")
 model NamespaceAssetExecuteActionRequest {
@@ -67,6 +68,7 @@ union ManagementActionExecutionStatus {
   string,
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 @added(Versions.v2026_04_01)
 @doc("The response body for the executeAction operation on NamespaceAsset.")
 model NamespaceAssetExecuteActionResponse {

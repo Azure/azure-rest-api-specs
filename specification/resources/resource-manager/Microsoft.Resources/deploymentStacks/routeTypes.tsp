@@ -11,6 +11,7 @@ namespace Microsoft.Resources.DeploymentStacks;
 @doc("Resource validation failed.")
 // TODO: This property isn't being output in the open API definition. Not sure if it's obsolete now. It was explicitly set on the 400 responses to `false` and I believe it influences SDK code generation by returning a response vs throwing an exception.
 //@extension("x-ms-error-response", false)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model ValidationBadRequestResponse<TBody> {
   ...BadRequestResponse;
 

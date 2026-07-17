@@ -18,6 +18,7 @@ namespace Azure.OpenAI;
   Completions support a wide variety of tasks and generate text that continues from or "completes"
   provided prompt data.
   """)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 model CompletionsOptions {
   @doc("The prompts to generate completions from.")
   @clientName("Prompts", "csharp")

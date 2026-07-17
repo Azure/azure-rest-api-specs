@@ -9,6 +9,7 @@ using Azure.Core.Traits;
 using Azure.ResourceManager;
 
 /** Request body for fetching configuration metadata. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model DataCollectionRuleConfigurationMetadataRequest {
   /** DCR Kind for which metadata is being requested (e.g., PlatformTelemetry). */
   dcrKind?: string;
@@ -21,6 +22,7 @@ model DataCollectionRuleConfigurationMetadataRequest {
 }
 
 /** Response containing configuration metadata for data collection rules. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model DataCollectionRuleConfigurationMetadataResponse {
   /** The configuration metadata for platform telemetry. */
   configurationMetadata?: ConfigurationMetadata;

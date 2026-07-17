@@ -363,6 +363,7 @@ union AnalyzeOutputOption {
   "figures",
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 @doc("Document analysis parameters.")
 model AnalyzeDocumentRequest {
   @doc("Document URL to analyze.  Either urlSource or base64Source must be specified.")
@@ -375,6 +376,7 @@ model AnalyzeDocumentRequest {
   base64Source?: bytes;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 @doc("Batch document analysis parameters.")
 model AnalyzeBatchDocumentsRequest {
   @doc("""
@@ -400,6 +402,7 @@ model AnalyzeBatchDocumentsRequest {
   overwriteExisting?: boolean = false;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 @doc("Error response object.")
 @error
 model DocumentIntelligenceErrorResponse {
@@ -1153,6 +1156,7 @@ model AddressValue {
   level?: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 @doc("Request body to build a new custom document model.")
 model BuildDocumentModelRequest {
   @doc("Unique document model name.")
@@ -1208,6 +1212,7 @@ model AzureBlobFileListContentSource {
   fileList: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 @doc("Request body to create a composed document model from component document models.")
 model ComposeDocumentModelRequest {
   @doc("Unique document model name.")
@@ -1231,6 +1236,7 @@ model ComposeDocumentModelRequest {
   tags?: Record<string>;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 @doc("Request body to authorize document model copy.")
 model AuthorizeCopyRequest {
   @doc("Unique document model name.")
@@ -1273,6 +1279,7 @@ model ModelCopyAuthorization {
   expirationDateTime: utcDateTime;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 @doc("Request body to authorize document classifier copy.")
 model AuthorizeClassifierCopyRequest {
   @doc("Unique document classifier name.")
@@ -1475,6 +1482,7 @@ model DocumentFieldSchema {
   properties?: Record<DocumentFieldSchema>;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 @doc("Request body to build a new custom document classifier.")
 model BuildDocumentClassifierRequest {
   @doc("Unique document classifier name.")
@@ -1554,6 +1562,7 @@ model DocumentClassifierDetails {
   warnings?: DocumentIntelligenceWarning[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 @doc("Document classification parameters.")
 model ClassifyDocumentRequest {
   @doc("Document URL to classify.  Either urlSource or base64Source must be specified.")

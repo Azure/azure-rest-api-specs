@@ -33,6 +33,7 @@ interface CdnPeeringPrefixesOperationGroup {
   >;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 @doc("Response for checking service provider availability")
 union CheckServiceProviderAvailabilityResponse {
   string,

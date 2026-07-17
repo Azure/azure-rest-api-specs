@@ -7,6 +7,7 @@ namespace Azure.OpenAI;
 using TypeSpec.Versioning;
 
 /** The request body of an upload creation operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 @added(ServiceApiVersions.v2024_08_01_Preview)
 model CreateUploadRequest {
   /** The name of the file to upload. */
@@ -34,6 +35,7 @@ model CreateUploadRequest {
 }
 
 /** The multipart/form-data request body of a data part addition request for an upload. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 @added(ServiceApiVersions.v2024_08_01_Preview)
 model AddUploadPartRequest {
   /** The chunk of bytes for this Part. */
@@ -41,6 +43,7 @@ model AddUploadPartRequest {
 }
 
 /** The request body of an upload completion request. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 @added(ServiceApiVersions.v2024_08_01_Preview)
 model CompleteUploadRequest {
   /** The ordered list of Part IDs. */

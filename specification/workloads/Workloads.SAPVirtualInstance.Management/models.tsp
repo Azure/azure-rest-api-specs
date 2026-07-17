@@ -536,6 +536,7 @@ union SAPSoftwareInstallationType {
 /**
  * The SAP Sizing Recommendation request.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SAP is used for representing the company product."
 model SAPSizingRecommendationRequest {
   /**
@@ -576,6 +577,7 @@ model SAPSizingRecommendationRequest {
   /**
    * The DB scale method.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   dbScaleMethod?: SAPDatabaseScaleMethod;
 
   /**
@@ -668,6 +670,7 @@ model SAPSupportedSku {
 /**
  * The SAP request to get list of disk configurations.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SAP is used for representing the company product."
 model SAPDiskConfigurationsRequest {
   /**
@@ -805,6 +808,7 @@ model DiskDetails {
 /**
  * The SAP request to get list of availability zones.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SAP is used for representing the company product."
 model SAPAvailabilityZoneDetailsRequest {
   /**
@@ -1004,6 +1008,7 @@ model Resource {
 /**
  * Defines the request body for updating Virtual Instance for SAP.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SAP is used for representing the company product."
 model UpdateSAPVirtualInstanceRequest {
   /**
@@ -1251,6 +1256,7 @@ model EnqueueReplicationServerProperties {
   /**
    * ERS SAP IP Address.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   ipAddress?: string;
 
@@ -1310,6 +1316,7 @@ model StorageInformation {
 /**
  * Defines the request body for updating SAP Central Instance.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SAP is used for representing the company product."
 model UpdateSAPCentralInstanceRequest {
   /**
@@ -1407,6 +1414,7 @@ model DatabaseVmDetails {
 /**
  * Defines the request body for updating SAP Database Instance.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SAP is used for representing the company product."
 model UpdateSAPDatabaseInstanceRequest {
   /**
@@ -1546,6 +1554,7 @@ model ApplicationServerVmDetails {
 /**
  * Defines the request body for updating SAP Application Instance.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SAP is used for representing the company product."
 model UpdateSAPApplicationInstanceRequest {
   /**
@@ -1617,6 +1626,7 @@ model WindowsConfiguration extends OSConfiguration {
   /**
    * The OS Type
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osType: OSType.Windows;
 }
 
@@ -1629,6 +1639,7 @@ model OSConfiguration {
   /**
    * The OS Type
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osType: OSType;
 }
 
@@ -1675,6 +1686,7 @@ model LinuxConfiguration extends OSConfiguration {
   /**
    * The OS Type
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osType: OSType.Linux;
 }
 
@@ -1827,6 +1839,7 @@ model SingleServerConfiguration extends InfrastructureConfiguration {
   /**
    * Gets or sets the disk configuration.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   dbDiskConfiguration?: DiskConfiguration;
 
   /**
@@ -1847,6 +1860,7 @@ model NetworkConfiguration {
   /**
    * Specifies whether a secondary IP address should be added to the network interface on all VMs of the SAP system being deployed
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   isSecondaryIpEnabled?: boolean = false;
 }
 
@@ -2204,6 +2218,7 @@ model LoadBalancerResourceNames {
   /**
    * The list of frontend IP configuration names. If provided as input, size of this list should be 2 for cs layer and should be 1 for database layer.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   frontendIpConfigurationNames?: string[];
 
   /**
@@ -2462,6 +2477,7 @@ model DeploymentWithOSConfiguration extends SAPConfiguration {
   /**
    * The OS and SAP configuration.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osSapConfiguration?: OsSapConfiguration;
 
   /**

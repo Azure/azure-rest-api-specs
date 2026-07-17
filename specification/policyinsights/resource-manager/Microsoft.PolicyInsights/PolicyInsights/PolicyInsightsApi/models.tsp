@@ -1275,6 +1275,7 @@ model SlimPolicyMetadata {
 /**
  * The check policy restrictions parameters describing the resource that is being evaluated.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model CheckRestrictionsRequest {
   /**
    * The information about the resource that will be evaluated.
@@ -1510,6 +1511,7 @@ model PolicyEffectDetails {
 /**
  * The check policy restrictions parameters describing the resource that is being evaluated.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model CheckManagementGroupRestrictionsRequest {
   /**
    * The information about the resource that will be evaluated.

@@ -15,6 +15,7 @@ namespace AssessmentAPI;
 /**
  * Security assessment metadata response
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/improper-subscription-list-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @tenantResource
 model SecurityAssessmentMetadataResponse

@@ -87,10 +87,12 @@ model OverviewSummaryProperties {
   @visibility(Lifecycle.Read)
   utilizationData?: UtilizationData;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("Shows the infrastructure as a service machine OS distribution.")
   @visibility(Lifecycle.Read)
   iaasOsDistribution?: IaasOsDistribution;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("OS Support Status Distribution.")
   @visibility(Lifecycle.Read)
   osSupportStatusDistribution?: SupportStatusDistribution;
@@ -171,6 +173,7 @@ model ServersDiscovered {
   notApplicable?: int32;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("Shows the infrastructure as a service machine OS distribution.")
 model IaasOsDistribution {
   @doc("Number of Windows servers.")

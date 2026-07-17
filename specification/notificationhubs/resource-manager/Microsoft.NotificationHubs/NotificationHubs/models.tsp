@@ -1441,6 +1441,7 @@ model ConnectionDetails {
   /**
    * IP address of the Private Endpoint. This is not used by Notification Hubs.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   privateIpAddress?: string;
 

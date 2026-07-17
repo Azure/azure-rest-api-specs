@@ -600,12 +600,14 @@ model MetadataPermissionsApplicationsItem {
 }
 
 /** An array of requests. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model BatchRequest {
   /** An single request in a batch. */
   requests: BatchQueryRequest[];
 }
 
 /** A single request in a batch. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model BatchQueryRequest {
   /** Unique ID corresponding to each request in the batch. */
   id: string;
@@ -636,12 +638,14 @@ model BatchQueryRequest {
 }
 
 /** Response to a batch query. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model BatchResponse {
   /** An array of responses corresponding to each individual request in a batch. */
   responses?: BatchQueryResponse[];
 }
 
 /** Contains the batch query response and the headers, id, and status of the request */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model BatchQueryResponse {
   /** Unique ID corresponding to each request in the batch. */
   id?: string;

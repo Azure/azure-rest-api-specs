@@ -38,6 +38,7 @@ model OnlineRequestSettings {
   maxConcurrentRequestsPerInstance: int32;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 @doc("LongRunningNullResponse")
 model LongRunningNullResponse {
   @doc("Polling Uri.")
@@ -45,6 +46,7 @@ model LongRunningNullResponse {
   location: ResourceLocation<ResourceOperationStatus<PutAssetLROResponse>>;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 @doc("PutAssetLROResponse")
 model PutAssetLROResponse {
   @doc("Response of completed put asset lro.")

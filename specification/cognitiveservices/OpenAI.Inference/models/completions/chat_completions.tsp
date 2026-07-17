@@ -81,6 +81,7 @@ model ChatCompletionsJsonSchemaResponseFormat
 /**
  * Options for streaming response. Only set this when you set `stream: true`.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 @added(ServiceApiVersions.v2024_09_01_Preview)
 model ChatCompletionStreamOptions {
   /**
@@ -95,6 +96,7 @@ model ChatCompletionStreamOptions {
   Completions support a wide variety of tasks and generate text that continues from or "completes"
   provided prompt data.
   """)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 @added(ServiceApiVersions.v2023_05_15)
 model ChatCompletionsOptions {
   @doc("""

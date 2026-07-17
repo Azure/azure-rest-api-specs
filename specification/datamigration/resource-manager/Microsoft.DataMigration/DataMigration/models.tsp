@@ -1800,6 +1800,7 @@ union SsisMigrationStage {
 /**
  * The field ordering
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 union MongoDbShardKeyOrder {
   string,
 
@@ -1866,6 +1867,7 @@ union MongoDbErrorType {
 /**
  * The type of progress object
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 union MongoDbProgressResultType {
   string,
 
@@ -1885,6 +1887,7 @@ union MongoDbProgressResultType {
   Collection: "Collection",
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union MongoDbMigrationState {
   string,
@@ -2076,6 +2079,7 @@ enum ServerLevelPermissionsGroup {
 /**
  * Database Migration Resource properties for CosmosDb for Mongo.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DatabaseMigrationPropertiesCosmosDbMongo
   extends DatabaseMigrationBaseProperties {
@@ -2300,6 +2304,7 @@ model ErrorInfo {
 @Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   DatabaseMigrationProperties
 )
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model DatabaseMigrationPropertiesSqlDb extends DatabaseMigrationBaseProperties {
   ...DatabaseMigrationPropertiesProperties;
 
@@ -2331,6 +2336,7 @@ model DatabaseMigrationPropertiesSqlDb extends DatabaseMigrationBaseProperties {
 /**
  * Detailed status of current Sql Db migration.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model SqlDbMigrationStatusDetails {
   /**
    * Current State of Migration.
@@ -2463,6 +2469,7 @@ model SqlConnectionInformation {
 /**
  * Offline configuration
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model SqlDbOfflineConfiguration {
   /**
    * Offline migration
@@ -3099,6 +3106,7 @@ model DatabaseMigrationBaseListResult is Azure.Core.Page<DatabaseMigrationBase>;
 /**
  * The response of a DatabaseMigrationCosmosDbMongo list operation.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model DatabaseMigrationCosmosDbMongoListResult
   is Azure.Core.Page<DatabaseMigrationCosmosDbMongo>;
 
@@ -3556,6 +3564,7 @@ model ServiceSku {
 /**
  * Service health status
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model DataMigrationServiceStatusResponse {
   /**
    * The DMS instance agent version
@@ -3752,6 +3761,7 @@ model LocalResource {
 /**
  * A resource type and proposed name
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model NameAvailabilityRequest {
   /**
    * The proposed resource name
@@ -3767,6 +3777,7 @@ model NameAvailabilityRequest {
 /**
  * Indicates whether a proposed resource name is available
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model NameAvailabilityResponse {
   /**
    * If true, the name is valid and available. If false, 'reason' describes why not.
@@ -4150,6 +4161,7 @@ model MigrateMISyncCompleteCommandOutput {
 /**
  * Describes a connection to a MongoDB data source
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model MongoDbConnectionInfo extends ConnectionInfo {
   /**
    * A MongoDB connection string or blob container URL. The user name and password can be specified here or in the userName and password properties
@@ -4908,6 +4920,7 @@ model ConnectToSourcePostgreSqlSyncTaskOutput {
 /**
  * Input for the task that validates connection to Azure Database for MySQL and target server requirements
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model ConnectToTargetAzureDbForMySqlTaskInput {
   /**
    * Connection information for source MySQL server
@@ -4928,6 +4941,7 @@ model ConnectToTargetAzureDbForMySqlTaskInput {
 /**
  * Output for the task that validates connection to Azure Database for MySQL and target server requirements
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model ConnectToTargetAzureDbForMySqlTaskOutput {
   /**
    * Result identifier
@@ -4964,6 +4978,7 @@ model ConnectToTargetAzureDbForMySqlTaskOutput {
 /**
  * Input for the task that validates connection to SQL DB and target server requirements
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model ConnectToTargetSqlDbTaskInput {
   /**
    * Connection information for target SQL DB
@@ -4979,6 +4994,7 @@ model ConnectToTargetSqlDbTaskInput {
 /**
  * Output for the task that validates connection to SQL DB and target server requirements
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model ConnectToTargetSqlDbTaskOutput {
   /**
    * Result identifier
@@ -5118,6 +5134,7 @@ model ConnectToTargetSqlMITaskOutput {
 /**
  * Input for the task that validates connection to Azure SQL DB and target server requirements
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model ConnectToTargetSqlSqlDbSyncTaskInput {
   /**
    * Connection information for source SQL Server
@@ -5133,6 +5150,7 @@ model ConnectToTargetSqlSqlDbSyncTaskInput {
 /**
  * Input for the task that validates connection to Azure Database for PostgreSQL and target server requirements
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model ConnectToTargetAzureDbForPostgreSqlSyncTaskInput {
   /**
    * Connection information for source PostgreSQL server
@@ -5148,6 +5166,7 @@ model ConnectToTargetAzureDbForPostgreSqlSyncTaskInput {
 /**
  * Output for the task that validates connection to Azure Database for PostgreSQL and target server requirements
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model ConnectToTargetAzureDbForPostgreSqlSyncTaskOutput {
   /**
    * Result identifier
@@ -5415,6 +5434,7 @@ model GetUserTablesSqlTaskOutput {
 /**
  * Properties for task that migrates Schema for SQL Server databases to Azure SQL databases
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model MigrateSchemaSqlServerSqlDbTaskProperties extends ProjectTaskProperties {
   /**
    * Task input
@@ -5452,6 +5472,7 @@ model MigrateSchemaSqlServerSqlDbTaskProperties extends ProjectTaskProperties {
 /**
  * Input for task that migrates Schema for SQL Server databases to Azure SQL databases
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateSchemaSqlServerSqlDbTaskInput extends SqlMigrationTaskInput {
   /**
@@ -5474,6 +5495,7 @@ model MigrateSchemaSqlServerSqlDbTaskInput extends SqlMigrationTaskInput {
 /**
  * Database input for migrate schema Sql Server to Azure SQL Server scenario
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model MigrateSchemaSqlServerSqlDbDatabaseInput {
   /**
    * Name of source database
@@ -5534,6 +5556,7 @@ model SqlMigrationTaskInput {
 /**
  * Output for the task that migrates Schema for SQL Server databases to Azure SQL databases
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @discriminator("resultType")
 model MigrateSchemaSqlServerSqlDbTaskOutput {
   /**
@@ -5549,6 +5572,7 @@ model MigrateSchemaSqlServerSqlDbTaskOutput {
   resultType: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateSchemaSqlServerSqlDbTaskOutputMigrationLevel
   extends MigrateSchemaSqlServerSqlDbTaskOutput {
@@ -5602,6 +5626,7 @@ model MigrateSchemaSqlServerSqlDbTaskOutputMigrationLevel
   resultType: "MigrationLevelOutput";
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateSchemaSqlServerSqlDbTaskOutputDatabaseLevel
   extends MigrateSchemaSqlServerSqlDbTaskOutput {
@@ -5673,6 +5698,7 @@ model MigrateSchemaSqlServerSqlDbTaskOutputDatabaseLevel
   resultType: "DatabaseLevelOutput";
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateSchemaSqlServerSqlDbTaskOutputError
   extends MigrateSchemaSqlServerSqlDbTaskOutput {
@@ -5712,6 +5738,7 @@ model MigrateSchemaSqlTaskOutputError
 /**
  * Input for the task that migrates MySQL databases to Azure Database for MySQL for online migrations
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model MigrateMySqlAzureDbForMySqlSyncTaskInput {
   /**
    * Connection information for source MySQL
@@ -5733,6 +5760,7 @@ model MigrateMySqlAzureDbForMySqlSyncTaskInput {
 /**
  * Database specific information for MySQL to Azure Database for MySQL migration task inputs
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model MigrateMySqlAzureDbForMySqlSyncDatabaseInput {
   /**
    * Name of the database
@@ -5772,6 +5800,7 @@ model MigrateMySqlAzureDbForMySqlSyncDatabaseInput {
 /**
  * Output for the task that migrates MySQL databases to Azure Database for MySQL for online migrations
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @discriminator("resultType")
 model MigrateMySqlAzureDbForMySqlSyncTaskOutput {
   /**
@@ -5787,6 +5816,7 @@ model MigrateMySqlAzureDbForMySqlSyncTaskOutput {
   resultType: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateMySqlAzureDbForMySqlSyncTaskOutputMigrationLevel
   extends MigrateMySqlAzureDbForMySqlSyncTaskOutput {
@@ -5834,6 +5864,7 @@ model MigrateMySqlAzureDbForMySqlSyncTaskOutputMigrationLevel
   resultType: "MigrationLevelOutput";
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateMySqlAzureDbForMySqlSyncTaskOutputDatabaseLevel
   extends MigrateMySqlAzureDbForMySqlSyncTaskOutput {
@@ -5935,6 +5966,7 @@ model MigrateMySqlAzureDbForMySqlSyncTaskOutputDatabaseLevel
   resultType: "DatabaseLevelOutput";
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateMySqlAzureDbForMySqlSyncTaskOutputTableLevel
   extends MigrateMySqlAzureDbForMySqlSyncTaskOutput {
@@ -6026,6 +6058,7 @@ model MigrateMySqlAzureDbForMySqlSyncTaskOutputTableLevel
   resultType: "TableLevelOutput";
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateMySqlAzureDbForMySqlSyncTaskOutputError
   extends MigrateMySqlAzureDbForMySqlSyncTaskOutput {
@@ -6041,6 +6074,7 @@ model MigrateMySqlAzureDbForMySqlSyncTaskOutputError
   resultType: "ErrorOutput";
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateMySqlAzureDbForMySqlSyncTaskOutputDatabaseError
   extends MigrateMySqlAzureDbForMySqlSyncTaskOutput {
@@ -6087,6 +6121,7 @@ model SyncMigrationDatabaseErrorEvent {
 /**
  * Input for the task that migrates PostgreSQL databases to Azure Database for PostgreSQL for online migrations
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model MigratePostgreSqlAzureDbForPostgreSqlSyncTaskInput {
   /**
    * Databases to migrate
@@ -6120,6 +6155,7 @@ model MigratePostgreSqlAzureDbForPostgreSqlSyncTaskInput {
 /**
  * Database specific information for PostgreSQL to Azure Database for PostgreSQL migration task inputs
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model MigratePostgreSqlAzureDbForPostgreSqlSyncDatabaseInput {
   /**
    * Name of the database
@@ -6165,6 +6201,7 @@ model MigratePostgreSqlAzureDbForPostgreSqlSyncDatabaseInput {
 /**
  * Selected tables for the migration
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model MigratePostgreSqlAzureDbForPostgreSqlSyncDatabaseTableInput {
   /**
    * Name of the table to migrate
@@ -6175,6 +6212,7 @@ model MigratePostgreSqlAzureDbForPostgreSqlSyncDatabaseTableInput {
 /**
  * Output for the task that migrates PostgreSQL databases to Azure Database for PostgreSQL for online migrations
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @discriminator("resultType")
 model MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutput {
   /**
@@ -6190,6 +6228,7 @@ model MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutput {
   resultType: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutputMigrationLevel
   extends MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutput {
@@ -6260,6 +6299,7 @@ model MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutputMigrationLevel
   resultType: "MigrationLevelOutput";
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutputDatabaseLevel
   extends MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutput {
@@ -6361,6 +6401,7 @@ model MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutputDatabaseLevel
   resultType: "DatabaseLevelOutput";
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutputTableLevel
   extends MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutput {
@@ -6452,6 +6493,7 @@ model MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutputTableLevel
   resultType: "TableLevelOutput";
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutputError
   extends MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutput {
@@ -6473,6 +6515,7 @@ model MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutputError
   resultType: "ErrorOutput";
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutputDatabaseError
   extends MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutput {
@@ -6496,6 +6539,7 @@ model MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutputDatabaseError
 /**
  * Input for the task that migrates on-prem SQL Server databases to Azure SQL Database for online migrations
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateSqlServerSqlDbSyncTaskInput extends SqlMigrationTaskInput {
   /**
@@ -6513,6 +6557,7 @@ model MigrateSqlServerSqlDbSyncTaskInput extends SqlMigrationTaskInput {
 /**
  * Database specific information for SQL to Azure SQL DB sync migration task inputs
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model MigrateSqlServerSqlDbSyncDatabaseInput {
   /**
    * Unique identifier for database
@@ -6562,6 +6607,7 @@ model MigrateSqlServerSqlDbSyncDatabaseInput {
 /**
  * Types of validations to run after the migration
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 model MigrationValidationOptions {
   /**
    * Allows to compare the schema information between source and target.
@@ -6582,6 +6628,7 @@ model MigrationValidationOptions {
 /**
  * Output for the task that migrates on-prem SQL Server databases to Azure SQL Database for online migrations
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @discriminator("resultType")
 model MigrateSqlServerSqlDbSyncTaskOutput {
   /**
@@ -6597,6 +6644,7 @@ model MigrateSqlServerSqlDbSyncTaskOutput {
   resultType: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateSqlServerSqlDbSyncTaskOutputMigrationLevel
   extends MigrateSqlServerSqlDbSyncTaskOutput {
@@ -6650,6 +6698,7 @@ model MigrateSqlServerSqlDbSyncTaskOutputMigrationLevel
   resultType: "MigrationLevelOutput";
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateSqlServerSqlDbSyncTaskOutputDatabaseLevel
   extends MigrateSqlServerSqlDbSyncTaskOutput {
@@ -6751,6 +6800,7 @@ model MigrateSqlServerSqlDbSyncTaskOutputDatabaseLevel
   resultType: "DatabaseLevelOutput";
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateSqlServerSqlDbSyncTaskOutputTableLevel
   extends MigrateSqlServerSqlDbSyncTaskOutput {
@@ -6842,6 +6892,7 @@ model MigrateSqlServerSqlDbSyncTaskOutputTableLevel
   resultType: "TableLevelOutput";
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateSqlServerSqlDbSyncTaskOutputError
   extends MigrateSqlServerSqlDbSyncTaskOutput {
@@ -6857,6 +6908,7 @@ model MigrateSqlServerSqlDbSyncTaskOutputError
   resultType: "ErrorOutput";
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateSqlServerSqlDbSyncTaskOutputDatabaseError
   extends MigrateSqlServerSqlDbSyncTaskOutput {
@@ -6880,6 +6932,7 @@ model MigrateSqlServerSqlDbSyncTaskOutputDatabaseError
 /**
  * Input for the task that migrates on-prem SQL Server databases to Azure SQL Database
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateSqlServerSqlDbTaskInput extends SqlMigrationTaskInput {
   /**
@@ -6909,6 +6962,7 @@ model MigrateSqlServerSqlDbTaskInput extends SqlMigrationTaskInput {
 /**
  * Database specific information for SQL to Azure SQL DB migration task inputs
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model MigrateSqlServerSqlDbDatabaseInput {
   /**
    * Name of the database
@@ -6923,6 +6977,7 @@ model MigrateSqlServerSqlDbDatabaseInput {
   /**
    * Whether to set database read only before migration
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   makeSourceDbReadOnly?: boolean;
 
   /**
@@ -6946,6 +7001,7 @@ model MigrateSqlServerSqlDbDatabaseInput {
 /**
  * Output for the task that migrates on-prem SQL Server databases to Azure SQL Database
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @discriminator("resultType")
 model MigrateSqlServerSqlDbTaskOutput {
   /**
@@ -6961,6 +7017,7 @@ model MigrateSqlServerSqlDbTaskOutput {
   resultType: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateSqlServerSqlDbTaskOutputMigrationLevel
   extends MigrateSqlServerSqlDbTaskOutput {
@@ -7155,6 +7212,7 @@ model MigrationReportResult {
   reportUrl?: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateSqlServerSqlDbTaskOutputDatabaseLevel
   extends MigrateSqlServerSqlDbTaskOutput {
@@ -7251,6 +7309,7 @@ model MigrateSqlServerSqlDbTaskOutputDatabaseLevel
   resultType: "DatabaseLevelOutput";
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateSqlServerSqlDbTaskOutputTableLevel
   extends MigrateSqlServerSqlDbTaskOutput {
@@ -7316,6 +7375,7 @@ model MigrateSqlServerSqlDbTaskOutputTableLevel
   resultType: "TableLevelOutput";
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateSqlServerSqlDbTaskOutputError
   extends MigrateSqlServerSqlDbTaskOutput {
@@ -7405,6 +7465,7 @@ model DataItemMigrationSummaryResult {
   resultPrefix?: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateSqlServerSqlDbTaskOutputValidationResult
   extends MigrateSqlServerSqlDbTaskOutput {
@@ -7416,6 +7477,7 @@ model MigrateSqlServerSqlDbTaskOutputValidationResult
   resultType: "MigrationValidationOutput";
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateSqlServerSqlDbTaskOutputDatabaseLevelValidationResult
   extends MigrateSqlServerSqlDbTaskOutput {
@@ -8497,6 +8559,7 @@ model MigrateSsisTaskOutputProjectLevel extends MigrateSsisTaskOutput {
 /**
  * Properties for the command that cancels a migration in whole or in part
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model MongoDbCancelCommand extends CommandProperties {
   /**
    * Command input
@@ -8565,6 +8628,7 @@ model MongoDbDatabaseInfo extends MongoDbObjectInfo {
 /**
  * Describes a supported collection within a MongoDB database
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MongoDbCollectionInfo extends MongoDbObjectInfo {
   /**
@@ -8622,6 +8686,7 @@ model MongoDbShardKeyInfo {
 /**
  * Describes a field reference within a MongoDB shard key
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model MongoDbShardKeyField {
   /**
    * The name of the field
@@ -8667,6 +8732,7 @@ model MongoDbObjectInfo {
 /**
  * Describes the progress of a collection
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model MongoDbCollectionProgress extends MongoDbProgress {
   /**
    * The type of progress object
@@ -8779,6 +8845,7 @@ model MongoDbError {
 /**
  * Describes how an individual MongoDB collection should be migrated
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model MongoDbCollectionSettings {
   /**
    * Whether the migrator is allowed to drop the target collection in the course of performing a migration. The default is true.
@@ -8800,6 +8867,7 @@ model MongoDbCollectionSettings {
 /**
  * Describes a MongoDB shard key
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model MongoDbShardKeySetting {
   /**
    * The fields within the shard key
@@ -8816,6 +8884,7 @@ model MongoDbShardKeySetting {
 /**
  * Describes the progress of a database
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model MongoDbDatabaseProgress extends MongoDbProgress {
   /**
    * The progress of the collections in the database. The keys are the unqualified names of the collections
@@ -8832,6 +8901,7 @@ model MongoDbDatabaseProgress extends MongoDbProgress {
 /**
  * Describes how an individual MongoDB database should be migrated
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model MongoDbDatabaseSettings {
   /**
    * The collections on the source database to migrate to the target. The keys are the unqualified names of the collections.
@@ -8849,6 +8919,7 @@ model MongoDbDatabaseSettings {
 /**
  * Properties for the command that finishes a migration in whole or in part
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model MongoDbFinishCommand extends CommandProperties {
   /**
    * Command input
@@ -8864,6 +8935,7 @@ model MongoDbFinishCommand extends CommandProperties {
 /**
  * Describes the input to the 'finish' MongoDB migration command
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MongoDbFinishCommandInput extends MongoDbCommandInput {
   /**
@@ -8875,6 +8947,7 @@ model MongoDbFinishCommandInput extends MongoDbCommandInput {
 /**
  * Describes how a MongoDB data migration should be performed
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model MongoDbMigrationSettings {
   /**
    * The RU limit on a CosmosDB target that collections will be temporarily increased to (if lower) during the initial copy of a migration, from 10,000 to 1,000,000, or 0 to use the default boost (which is generally the maximum), or null to not boost the RUs. This setting has no effect on non-CosmosDB targets.
@@ -8912,6 +8985,7 @@ model MongoDbMigrationSettings {
 /**
  * Specifies resource limits for the migration
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model MongoDbThrottlingSettings {
   /**
    * The percentage of CPU time that the migrator will try to avoid using, from 0 to 100
@@ -8932,6 +9006,7 @@ model MongoDbThrottlingSettings {
 /**
  * Describes the progress of the overall migration
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model MongoDbMigrationProgress extends MongoDbProgress {
   /**
    * The progress of the databases in the migration. The keys are the names of the databases
@@ -8948,6 +9023,7 @@ model MongoDbMigrationProgress extends MongoDbProgress {
 /**
  * Properties for the command that restarts a migration in whole or in part
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model MongoDbRestartCommand extends CommandProperties {
   /**
    * Command input
@@ -9003,6 +9079,7 @@ model ConnectToSourceOracleSyncTaskOutput {
 /**
  * Input for the task that validates connection to Azure Database for PostgreSQL and target server requirements for Oracle source.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model ConnectToTargetOracleAzureDbForPostgreSqlSyncTaskInput {
   /**
    * Connection information for target Azure Database for PostgreSQL server
@@ -9013,6 +9090,7 @@ model ConnectToTargetOracleAzureDbForPostgreSqlSyncTaskInput {
 /**
  * Output for the task that validates connection to Azure Database for PostgreSQL and target server requirements for Oracle source.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model ConnectToTargetOracleAzureDbForPostgreSqlSyncTaskOutput {
   /**
    * Version of the target server
@@ -9046,6 +9124,7 @@ model ConnectToTargetOracleAzureDbForPostgreSqlSyncTaskOutput {
   databaseSchemaMap?: ConnectToTargetOracleAzureDbForPostgreSqlSyncTaskOutputDatabaseSchemaMapItem[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ConnectToTargetOracleAzureDbForPostgreSqlSyncTaskOutputDatabaseSchemaMapItem {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -9137,6 +9216,7 @@ model GetUserTablesPostgreSqlTaskOutput {
 /**
  * Output for task that validates migration input for Oracle to Azure Database for PostgreSQL for online migrations
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model ValidateOracleAzureDbPostgreSqlSyncTaskOutput {
   /**
    * Errors associated with a selected database object
@@ -9149,6 +9229,7 @@ model ValidateOracleAzureDbPostgreSqlSyncTaskOutput {
 /**
  * Input for the task that migrates Oracle databases to Azure Database for PostgreSQL for online migrations
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model MigrateOracleAzureDbPostgreSqlSyncTaskInput {
   /**
    * Databases to migrate
@@ -9170,6 +9251,7 @@ model MigrateOracleAzureDbPostgreSqlSyncTaskInput {
 /**
  * Database specific information for Oracle to Azure Database for PostgreSQL migration task inputs
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model MigrateOracleAzureDbPostgreSqlSyncDatabaseInput {
   /**
    * How to handle object name casing: either Preserve or ToLower
@@ -9219,6 +9301,7 @@ model MigrateOracleAzureDbPostgreSqlSyncDatabaseInput {
 /**
  * Output for the task that migrates Oracle databases to Azure Database for PostgreSQL for online migrations
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @discriminator("resultType")
 model MigrateOracleAzureDbPostgreSqlSyncTaskOutput {
   /**
@@ -9234,6 +9317,7 @@ model MigrateOracleAzureDbPostgreSqlSyncTaskOutput {
   resultType: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateOracleAzureDbPostgreSqlSyncTaskOutputMigrationLevel
   extends MigrateOracleAzureDbPostgreSqlSyncTaskOutput {
@@ -9281,6 +9365,7 @@ model MigrateOracleAzureDbPostgreSqlSyncTaskOutputMigrationLevel
   resultType: "MigrationLevelOutput";
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateOracleAzureDbPostgreSqlSyncTaskOutputDatabaseLevel
   extends MigrateOracleAzureDbPostgreSqlSyncTaskOutput {
@@ -9382,6 +9467,7 @@ model MigrateOracleAzureDbPostgreSqlSyncTaskOutputDatabaseLevel
   resultType: "DatabaseLevelOutput";
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateOracleAzureDbPostgreSqlSyncTaskOutputTableLevel
   extends MigrateOracleAzureDbPostgreSqlSyncTaskOutput {
@@ -9473,6 +9559,7 @@ model MigrateOracleAzureDbPostgreSqlSyncTaskOutputTableLevel
   resultType: "TableLevelOutput";
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateOracleAzureDbPostgreSqlSyncTaskOutputError
   extends MigrateOracleAzureDbPostgreSqlSyncTaskOutput {
@@ -9488,6 +9575,7 @@ model MigrateOracleAzureDbPostgreSqlSyncTaskOutputError
   resultType: "ErrorOutput";
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateOracleAzureDbPostgreSqlSyncTaskOutputDatabaseError
   extends MigrateOracleAzureDbPostgreSqlSyncTaskOutput {
@@ -9750,6 +9838,7 @@ model InstallOCIDriverTaskProperties extends ProjectTaskProperties {
 /**
  * Properties for the task that validates the connection to and provides information about a MongoDB server
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model ConnectToMongoDbTaskProperties extends ProjectTaskProperties {
   /**
    * Describes a connection to a MongoDB data source
@@ -9965,6 +10054,7 @@ model ConnectToSourceOracleSyncTaskProperties extends ProjectTaskProperties {
 /**
  * Properties for the task that validates connection to SQL DB and target server requirements
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model ConnectToTargetSqlDbTaskProperties extends ProjectTaskProperties {
   /**
    * Task input
@@ -9992,6 +10082,7 @@ model ConnectToTargetSqlDbTaskProperties extends ProjectTaskProperties {
 /**
  * Properties for the task that validates connection to SQL DB and target server requirements for online migration
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model ConnectToTargetSqlSqlDbSyncTaskProperties extends ProjectTaskProperties {
   /**
    * Task input
@@ -10014,6 +10105,7 @@ model ConnectToTargetSqlSqlDbSyncTaskProperties extends ProjectTaskProperties {
 /**
  * Properties for the task that validates connection to Azure Database For PostgreSQL server and target server requirements for online migration
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model ConnectToTargetAzureDbForPostgreSqlSyncTaskProperties
   extends ProjectTaskProperties {
   /**
@@ -10037,6 +10129,7 @@ model ConnectToTargetAzureDbForPostgreSqlSyncTaskProperties
 /**
  * Properties for the task that validates connection to Azure Database For PostgreSQL server and target server requirements for online migration for Oracle source.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model ConnectToTargetOracleAzureDbForPostgreSqlSyncTaskProperties
   extends ProjectTaskProperties {
   /**
@@ -10221,6 +10314,7 @@ model ConnectToTargetSqlMISyncTaskProperties extends ProjectTaskProperties {
 /**
  * Properties for the task that validates connection to Azure Database for MySQL and target server requirements
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model ConnectToTargetAzureDbForMySqlTaskProperties
   extends ProjectTaskProperties {
   /**
@@ -10244,6 +10338,7 @@ model ConnectToTargetAzureDbForMySqlTaskProperties
 /**
  * Properties for the task that migrates data between MongoDB data sources
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model MigrateMongoDbTaskProperties extends ProjectTaskProperties {
   /**
    * Describes how a MongoDB data migration should be performed
@@ -10335,6 +10430,7 @@ model MigrateSqlServerSqlMISyncTaskProperties extends ProjectTaskProperties {
 /**
  * Properties for the task that migrates on-prem SQL Server databases to Azure SQL Database
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model MigrateSqlServerSqlDbTaskProperties extends ProjectTaskProperties {
   /**
    * Task input
@@ -10372,6 +10468,7 @@ model MigrateSqlServerSqlDbTaskProperties extends ProjectTaskProperties {
 /**
  * Properties for the task that migrates on-prem SQL Server databases to Azure SQL Database for online migrations
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model MigrateSqlServerSqlDbSyncTaskProperties extends ProjectTaskProperties {
   /**
    * Task input
@@ -10394,6 +10491,7 @@ model MigrateSqlServerSqlDbSyncTaskProperties extends ProjectTaskProperties {
 /**
  * Properties for the task that migrates MySQL databases to Azure Database for MySQL for online migrations
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model MigrateMySqlAzureDbForMySqlSyncTaskProperties
   extends ProjectTaskProperties {
   /**
@@ -10417,6 +10515,7 @@ model MigrateMySqlAzureDbForMySqlSyncTaskProperties
 /**
  * Properties for the task that migrates MySQL databases to Azure Database for MySQL for offline migrations
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model MigrateMySqlAzureDbForMySqlOfflineTaskProperties
   extends ProjectTaskProperties {
   /**
@@ -10450,6 +10549,7 @@ model MigrateMySqlAzureDbForMySqlOfflineTaskProperties
 /**
  * Input for the task that migrates MySQL databases to Azure Database for MySQL for offline migrations
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model MigrateMySqlAzureDbForMySqlOfflineTaskInput {
   /**
    * Connection information for source MySQL
@@ -10493,6 +10593,7 @@ model MigrateMySqlAzureDbForMySqlOfflineTaskInput {
 /**
  * Database specific information for offline MySQL to Azure Database for MySQL migration task inputs
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model MigrateMySqlAzureDbForMySqlOfflineDatabaseInput {
   /**
    * Name of the database
@@ -10514,6 +10615,7 @@ model MigrateMySqlAzureDbForMySqlOfflineDatabaseInput {
 /**
  * Output for the task that migrates MySQL databases to Azure Database for MySQL for offline migrations
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @discriminator("resultType")
 model MigrateMySqlAzureDbForMySqlOfflineTaskOutput {
   /**
@@ -10532,6 +10634,7 @@ model MigrateMySqlAzureDbForMySqlOfflineTaskOutput {
 /**
  * Properties for the task that migrates PostgreSQL databases to Azure Database for PostgreSQL for online migrations
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model MigratePostgreSqlAzureDbForPostgreSqlSyncTaskProperties
   extends ProjectTaskProperties {
   /**
@@ -10570,6 +10673,7 @@ model MigratePostgreSqlAzureDbForPostgreSqlSyncTaskProperties
 /**
  * Properties for the task that migrates Oracle to Azure Database for PostgreSQL for online migrations
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model MigrateOracleAzureDbForPostgreSqlSyncTaskProperties
   extends ProjectTaskProperties {
   /**
@@ -10593,6 +10697,7 @@ model MigrateOracleAzureDbForPostgreSqlSyncTaskProperties
 /**
  * Properties for task that validates migration input for SQL to Azure SQL DB sync migrations
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model ValidateMigrationInputSqlServerSqlDbSyncTaskProperties
   extends ProjectTaskProperties {
   /**
@@ -10897,6 +11002,7 @@ model ValidateMigrationInputSqlServerSqlMISyncTaskOutput {
 /**
  * Properties for the task that validates a migration between MongoDB data sources
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model ValidateMongoDbTaskProperties extends ProjectTaskProperties {
   /**
    * Describes how a MongoDB data migration should be performed
@@ -10919,6 +11025,7 @@ model ValidateMongoDbTaskProperties extends ProjectTaskProperties {
 /**
  * Properties for the task that validates a migration for Oracle to Azure Database for PostgreSQL for online migrations
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model ValidateOracleAzureDbForPostgreSqlSyncTaskProperties
   extends ProjectTaskProperties {
   /**
@@ -11138,6 +11245,7 @@ model DataMigrationProjectMetadata {
   /**
    * Target database name
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   targetDbName?: string;
 
@@ -11427,6 +11535,7 @@ model StartMigrationScenarioServerRoleResult {
   exceptionsAndWarnings?: ReportableException[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateMySqlAzureDbForMySqlOfflineTaskOutputMigrationLevel
   extends MigrateMySqlAzureDbForMySqlOfflineTaskOutput {
@@ -11528,6 +11637,7 @@ model MigrateMySqlAzureDbForMySqlOfflineTaskOutputMigrationLevel
   resultType: "MigrationLevelOutput";
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateMySqlAzureDbForMySqlOfflineTaskOutputDatabaseLevel
   extends MigrateMySqlAzureDbForMySqlOfflineTaskOutput {
@@ -11631,6 +11741,7 @@ model MigrateMySqlAzureDbForMySqlOfflineTaskOutputDatabaseLevel
   resultType: "DatabaseLevelOutput";
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateMySqlAzureDbForMySqlOfflineTaskOutputTableLevel
   extends MigrateMySqlAzureDbForMySqlOfflineTaskOutput {
@@ -11703,6 +11814,7 @@ model MigrateMySqlAzureDbForMySqlOfflineTaskOutputTableLevel
   resultType: "TableLevelOutput";
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateMySqlAzureDbForMySqlOfflineTaskOutputError
   extends MigrateMySqlAzureDbForMySqlOfflineTaskOutput {

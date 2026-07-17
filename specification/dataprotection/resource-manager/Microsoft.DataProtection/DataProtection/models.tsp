@@ -1161,6 +1161,7 @@ model PatchBackupVaultInput {
 /**
  * CheckNameAvailability Request
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model CheckNameAvailabilityRequest {
   /**
    * Resource name for which availability needs to be checked
@@ -1811,6 +1812,7 @@ model ValidateForBackupRequest {
 /**
  * Validate for modify backup request
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model ValidateForModifyBackupRequest {
   /**
    * Backup Instance
@@ -1960,6 +1962,7 @@ model ValidateCrossRegionRestoreRequestObject {
 /**
  * Details of CRR Job to be fetched
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model CrossRegionRestoreJobRequest {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sourceRegion: string;
@@ -2253,6 +2256,7 @@ model UserFacingWarningDetail {
 /**
  * Details of Backup Vault for which CRR Jobs are to be fetched
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model CrossRegionRestoreJobsRequest {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sourceRegion: string;
@@ -2275,6 +2279,7 @@ model AzureBackupJobResourceList extends DppResourceList {
 /**
  * Azure Backup Rehydrate Request
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model AzureBackupRehydrationRequest {
   /**
    * Id of the recovery point to be recovered
@@ -2363,6 +2368,7 @@ model ValidateRestoreRequestObject {
 /**
  * List Restore Ranges Request
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model AzureBackupFindRestorableTimeRangesRequest {
   /**
    * Gets or sets the type of the source data store.
@@ -2394,6 +2400,7 @@ model AzureBackupFindRestorableTimeRangesResponseResource extends DppResource {
 /**
  * List Restore Ranges Response
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model AzureBackupFindRestorableTimeRangesResponse {
   /**
    * Returns the Restore Ranges available on the Backup Instance.
@@ -2639,6 +2646,7 @@ model ResourceGuardOperationDetail {
 /**
  * Request body of unlock delete API.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model UnlockDeleteRequest {
   /**
    * ResourceGuardOperationRequests on which LAC check will be performed
@@ -2652,6 +2660,7 @@ model UnlockDeleteRequest {
 /**
  * Response of Unlock Delete API.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model UnlockDeleteResponse {
   /**
    * This is the time when unlock delete privileges will get expired.
@@ -2845,6 +2854,7 @@ model AzureBackupFindRestorableTimeRangesRequestResource
   content?: AzureBackupFindRestorableTimeRangesRequest;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DppWorkerRequest {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -2903,6 +2913,7 @@ model BackupParameters {
 /**
  * Azure backup recoveryPoint based restore request
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model AzureBackupRecoveryPointBasedRestoreRequest
   extends AzureBackupRestoreRequest {
   ...AzureBackupRestoreCommon;
@@ -2918,6 +2929,7 @@ model AzureBackupRestoreCommon {
 /**
  * AzureBackup Restore with Rehydration Request
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model AzureBackupRestoreWithRehydrationRequest
   extends AzureBackupRestoreRequest {
   ...AzureBackupRestoreCommon;
@@ -2938,6 +2950,7 @@ model AzureBackupRestoreWithRehydrationRequest
 /**
  * AzureBackup RecoveryPointTime Based Restore Request
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model AzureBackupRecoveryTimeBasedRestoreRequest
   extends AzureBackupRestoreRequest {
   /**
@@ -3438,6 +3451,7 @@ model DefaultResourceProperties extends BaseResourceProperties {
 /**
  * Base class for feature object
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model FeatureValidationRequest extends FeatureValidationRequestBase {
   /**
    * backup support feature type.
@@ -3458,6 +3472,7 @@ model FeatureValidationRequest extends FeatureValidationRequestBase {
 /**
  * Feature Validation Response
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model FeatureValidationResponse extends FeatureValidationResponseBase {
   /**
    * backup support feature type.

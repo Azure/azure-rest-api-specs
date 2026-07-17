@@ -15,6 +15,7 @@ namespace Azure.OpenAI;
   Embeddings measure the relatedness of text strings and are commonly used for search, clustering,
   recommendations, and other similar scenarios.
   """)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 model EmbeddingsOptions {
   @doc("""
     An identifier for the caller or end user of the operation. This may be used for tracking

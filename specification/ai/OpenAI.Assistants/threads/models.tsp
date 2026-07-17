@@ -37,6 +37,7 @@ model AssistantThread {
 }
 
 /** The details used to create a new assistant thread. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 @added(ServiceApiVersions.v2024_02_15_preview)
 model AssistantThreadCreationOptions {
   /** The initial messages to associate with the new thread. */
@@ -57,6 +58,7 @@ model AssistantThreadCreationOptions {
 }
 
 /** The details used to update an existing assistant thread */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 @added(ServiceApiVersions.v2024_02_15_preview)
 model UpdateAssistantThreadOptions {
   /** The ID of the thread to modify. */

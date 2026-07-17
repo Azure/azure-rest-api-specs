@@ -198,6 +198,7 @@ model OperationDisplay {
 /**
  * Request from client to check cluster name availability.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model NameAvailabilityRequest {
   /**
    * Cluster name to verify.
@@ -333,6 +334,7 @@ model ClusterProperties {
   /**
    * If public access is enabled on coordinator.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   coordinatorEnablePublicIpAccess?: boolean;
 
   /**
@@ -359,6 +361,7 @@ model ClusterProperties {
   /**
    * If public access is enabled on worker nodes.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   nodeEnablePublicIpAccess?: boolean;
 
   /**
@@ -629,6 +632,7 @@ model ClusterPropertiesForUpdate {
   /**
    * If public access is enabled on coordinator.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   coordinatorEnablePublicIpAccess?: boolean;
 
   /**
@@ -655,6 +659,7 @@ model ClusterPropertiesForUpdate {
   /**
    * If public access is enabled on worker nodes.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   nodeEnablePublicIpAccess?: boolean;
 
@@ -810,6 +815,7 @@ model FirewallRuleProperties {
 /**
  * Request from client to promote geo-redundant replica
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model PromoteRequest {
   /**
    * Boolean property to enable geo-redundant replica promotion.
@@ -929,6 +935,7 @@ model ServerProperties {
   /**
    * If public access is enabled on server.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   enablePublicIpAccess?: boolean;
 

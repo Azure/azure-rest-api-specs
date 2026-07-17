@@ -1428,6 +1428,7 @@ model CostAllocationProportion {
 /**
  * The cost allocation rule check name availability request
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model CostAllocationRuleCheckNameAvailabilityRequest {
   /**
    * Rule name
@@ -1443,6 +1444,7 @@ model CostAllocationRuleCheckNameAvailabilityRequest {
 /**
  * The cost allocation rule check name availability response
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model CostAllocationRuleCheckNameAvailabilityResponse {
   /**
    * Whether this rule name is available
@@ -1681,6 +1683,7 @@ model BenefitUtilizationSummary
 /**
  * Properties of an async benefit utilization summaries request.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model BenefitUtilizationSummariesRequest {
   /**
    * Billing account the benefit utilization summaries report is for. Required for billing account and billing profile scopes. Not supported for any benefit scopes.
@@ -2645,6 +2648,7 @@ model BlobInfo {
  *
  *  * 503 ServiceUnavailable - Service is temporarily unavailable. Retry after waiting for the time specified in the "Retry-After" header.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 @error
 model GenerateCostDetailsReportErrorResponse {
   /**
@@ -2736,6 +2740,7 @@ model DownloadURL {
  *
  *  * 503 ServiceUnavailable - Service is temporarily unavailable. Retry after waiting for the time specified in the "Retry-After" header.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 @error
 model GenerateDetailedCostReportErrorResponse {
   /**

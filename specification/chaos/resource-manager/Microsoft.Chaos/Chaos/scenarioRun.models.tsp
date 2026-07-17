@@ -17,6 +17,7 @@ namespace Microsoft.Chaos;
  * Location header should continue polling until a 200 response is returned.
  * The body reflects the current run state at the time of the poll.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model ScenarioRunInProgressResponse {
   ...AcceptedResponse;
 

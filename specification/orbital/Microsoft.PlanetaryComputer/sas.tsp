@@ -49,6 +49,7 @@ model SharedAccessSignatureSignedLink {
 /**
  * Successful Response
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model SharedAccessSignatureTokenResponse {
   /**
    * Status code
@@ -65,6 +66,7 @@ model SharedAccessSignatureTokenResponse {
 /**
  * Successful Response
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model SharedAccessSignatureSignedHrefResponse {
   /**
    * Status code

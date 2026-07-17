@@ -100,6 +100,7 @@ model RansomwareReportProperties {
 /**
  * Clear suspects for Advanced Ransomware Protection (ARP) report
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 @added(Versions.v2025_12_01)
 model RansomwareSuspectsClearRequest {
   /**
