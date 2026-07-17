@@ -1,6 +1,5 @@
 import "@typespec/rest";
 import "@typespec/http";
-import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Http;
@@ -55,7 +54,6 @@ model OverageBillingProperties {
 
   @doc("24-hour rolling threshold for capacity overage. Reaching this threshold results in capacity throttling.")
   @minValue(0)
-  @encodedName("application/json", "thresholdCapacityUnitHours")
   thresholdCapacityUnitHours?: int32;
 
   @doc("The notification properties for overage billing.")
