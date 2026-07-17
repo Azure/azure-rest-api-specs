@@ -10458,6 +10458,9 @@ union NodeStorageType {
 
   /** SAN iSCSI storage type. */
   SanIscsi: "SANISCSI",
+
+  /** SAN Fibre Channel storage type. */
+  SanFc: "SANFC",
 }
 
 /**
