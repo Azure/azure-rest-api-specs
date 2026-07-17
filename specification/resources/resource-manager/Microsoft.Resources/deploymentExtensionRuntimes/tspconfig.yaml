@@ -12,6 +12,37 @@ options:
     output-file: "{version-status}/{version}/deploymentExtensionRuntimes.json"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     examples-dir: "{project-root}/examples"
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.Resources.DeploymentExtensionRuntimes"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-resource-deploymentextensionruntimes"
+    namespace: "azure.mgmt.resource.deploymentextensionruntimes"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-resources-deploymentextensionruntimes"
+    namespace: "com.azure.resourcemanager.resources.deploymentextensionruntimes"
+    service-name: "Deployment Extension Runtimes"
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-resourcesdeploymentextensionruntimes"
+    service-dir: "sdk/resourcesdeploymentextensionruntimes"
+    flavor: azure
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-resourcesdeploymentextensionruntimes"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/resources"
+    emitter-output-dir: "{output-dir}/{service-dir}/armdeploymentextensionruntimes"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armdeploymentextensionruntimes"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
