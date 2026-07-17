@@ -14,9 +14,9 @@ using Microsoft.Common;
 namespace Microsoft.RoleAssignment;
 
 /**
- * The principal type of the assigned principal ID.
+ * The principal type of the assigned principal ID (role-assignment surface, api-version 2026-08-01 and later).
  */
-union PrincipalType {
+union RoleAssignmentPrincipalType {
   string,
 
   /**
@@ -45,15 +45,13 @@ union PrincipalType {
   Device: "Device",
 
   /**
-   * AgentUser (agentic identity derived from a User). Available from api-version 2026-08-01.
+   * AgentUser (agentic identity derived from a User).
    */
-  @added(Versions.v2026_08_01)
   AgentUser: "AgentUser",
 
   /**
-   * AgentServicePrincipal (agentic identity derived from a ServicePrincipal). Available from api-version 2026-08-01.
+   * AgentServicePrincipal (agentic identity derived from a ServicePrincipal).
    */
-  @added(Versions.v2026_08_01)
   AgentServicePrincipal: "AgentServicePrincipal",
 }
 
@@ -81,7 +79,8 @@ model RoleAssignmentProperties {
   /**
    * The principal type of the assigned principal ID.
    */
-  principalType?: PrincipalType = PrincipalType.User;
+  @typeChangedFrom(Versions.v2026_08_01, PrincipalType)
+  principalType?: RoleAssignmentPrincipalType = RoleAssignmentPrincipalType.User;
 
   /**
    * Description of role assignment
