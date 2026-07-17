@@ -21,11 +21,10 @@ namespace Microsoft.DesktopVirtualization;
 @added(Versions.vLatestPreview)
 @parentResource(HostPool)
 @singleton("default")
-model SessionHostConfiguration
-  is Azure.ResourceManager.ProxyResource<
-    SessionHostConfigurationProperties,
-    false
-  > {
+model SessionHostConfiguration is Azure.ResourceManager.ProxyResource<
+  SessionHostConfigurationProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = SessionHostConfiguration,
     KeyName = "SessionHostConfigurations",
