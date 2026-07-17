@@ -10,20 +10,23 @@ using TypeSpec.Versioning;
 
 namespace Microsoft.App;
 
-/** The properties of an Agent Session. */
+/** The properties supplied when creating an Agent Session. */
 @added(Versions.v2026_08_01_preview)
-model AgentSessionProperties {
+model AgentSessionCreateProperties {
   /** The primary Azure resource included in the troubleshooting scope. */
-  @visibility(Lifecycle.Create, Lifecycle.Read)
   targetResourceId: armResourceIdentifier;
 
   /** Additional Azure resources included in the troubleshooting scope. */
-  @visibility(Lifecycle.Create, Lifecycle.Read)
   additionalResourceIds: armResourceIdentifier[];
 
   /** Additional subscription identifiers that the Agent Session may inspect. */
-  @visibility(Lifecycle.Create, Lifecycle.Read)
   additionalSubscriptionIds: string[];
+}
+
+/** The properties of an Agent Session. */
+@added(Versions.v2026_08_01_preview)
+model AgentSessionProperties {
+  ...AgentSessionCreateProperties;
 
   /** The provisioning state of the persistent Agent Session resource. */
   @visibility(Lifecycle.Read)
@@ -32,6 +35,19 @@ model AgentSessionProperties {
   /** The latest sandbox generation associated with the Agent Session. */
   @visibility(Lifecycle.Read)
   sandbox?: AgentSessionSandbox;
+}
+
+/** The request body used to create an Agent Session. */
+@added(Versions.v2026_08_01_preview)
+model AgentSessionCreate {
+  /** The Azure region where the Agent Session is created. */
+  location: azureLocation;
+
+  /** Resource tags fixed at creation. */
+  ...ResourceTags;
+
+  /** The immutable target scope of the Agent Session. */
+  properties: AgentSessionCreateProperties;
 }
 
 /** The provisioning state of an Agent Session. */

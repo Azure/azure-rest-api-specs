@@ -32,7 +32,24 @@ interface AgentSessions {
   get is ArmResourceRead<AgentSession>;
 
   /** Creates an Agent Session and provisions its initial sandbox. */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<AgentSession>;
+  @autoRoute
+  @armResourceCreateOrUpdate(AgentSession)
+  @put
+  createOrUpdate is Azure.ResourceManager.Foundations.ArmCreateOperation<
+    ResourceInstanceParameters<
+      AgentSession,
+      Azure.ResourceManager.Foundations.DefaultBaseParameters<AgentSession>,
+      ProviderNamespace<AgentSession>
+    >,
+    AgentSessionCreate,
+    | ArmResourceUpdatedResponse<AgentSession>
+    | ArmResourceCreatedResponse<
+        AgentSession,
+        ArmAsyncOperationHeader<FinalResult = AgentSession> &
+          Azure.Core.Foundations.RetryAfterHeader
+      >,
+    ErrorResponse
+  >;
 
   /** Deletes an Agent Session and any active sandbox. */
   delete is ArmResourceDeleteWithoutOkAsync<

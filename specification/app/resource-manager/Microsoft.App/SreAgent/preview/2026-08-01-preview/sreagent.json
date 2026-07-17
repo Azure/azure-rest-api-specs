@@ -297,7 +297,7 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AgentSession"
+              "$ref": "#/definitions/AgentSessionCreate"
             }
           }
         ],
@@ -2398,6 +2398,68 @@
         }
       ]
     },
+    "AgentSessionCreate": {
+      "type": "object",
+      "description": "The request body used to create an Agent Session.",
+      "properties": {
+        "location": {
+          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "description": "The Azure region where the Agent Session is created."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/AgentSessionCreateProperties",
+          "description": "The immutable target scope of the Agent Session."
+        }
+      },
+      "required": [
+        "location",
+        "properties"
+      ]
+    },
+    "AgentSessionCreateProperties": {
+      "type": "object",
+      "description": "The properties supplied when creating an Agent Session.",
+      "properties": {
+        "targetResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The primary Azure resource included in the troubleshooting scope."
+        },
+        "additionalResourceIds": {
+          "type": "array",
+          "description": "Additional Azure resources included in the troubleshooting scope.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
+        },
+        "additionalSubscriptionIds": {
+          "type": "array",
+          "description": "Additional subscription identifiers that the Agent Session may inspect.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "targetResourceId",
+        "additionalResourceIds",
+        "additionalSubscriptionIds"
+      ]
+    },
     "AgentSessionListResult": {
       "type": "object",
       "description": "The response of a AgentSession list operation.",
@@ -2426,11 +2488,7 @@
         "targetResourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The primary Azure resource included in the troubleshooting scope.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The primary Azure resource included in the troubleshooting scope."
         },
         "additionalResourceIds": {
           "type": "array",
@@ -2439,22 +2497,14 @@
             "type": "string",
             "format": "arm-id",
             "description": "A type definition that refers the id to an Azure Resource Manager resource."
-          },
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          }
         },
         "additionalSubscriptionIds": {
           "type": "array",
           "description": "Additional subscription identifiers that the Agent Session may inspect.",
           "items": {
             "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          }
         },
         "provisioningState": {
           "$ref": "#/definitions/AgentSessionProvisioningState",
@@ -2889,6 +2939,10 @@
           "x-ms-secret": true
         }
       }
+    },
+    "Azure.Core.azureLocation": {
+      "type": "string",
+      "description": "Represents an Azure geography region where supported resource providers live."
     },
     "Connector": {
       "type": "object",
