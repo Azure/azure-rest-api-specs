@@ -11,8 +11,10 @@ namespace Microsoft.SignalRService;
 /**
  * A class represent a resource.
  */
-model WebPubSubResource
-  is Azure.ResourceManager.TrackedResource<WebPubSubProperties, true> {
+model WebPubSubResource is Azure.ResourceManager.TrackedResource<
+  WebPubSubProperties,
+  true
+> {
   ...ResourceNameParameter<
     Resource = WebPubSubResource,
     KeyName = "resourceName",

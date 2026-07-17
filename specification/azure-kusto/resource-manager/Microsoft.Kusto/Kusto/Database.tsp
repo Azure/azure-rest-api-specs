@@ -222,14 +222,13 @@ interface Databases {
   dataConnectionValidation is ArmResourceActionAsyncBase<
     Database,
     DataConnectionValidation,
-
-      | ArmAcceptedLroResponse<
-          "Data connection validation request accepted.",
-          LroHeaders = ArmLroLocationHeader<FinalResult = DataConnectionValidationListResult> &
-            ArmAsyncOperationHeader<FinalResult = DataConnectionValidationListResult> &
-            Azure.Core.Foundations.RetryAfterHeader
-        >
-      | ArmResponse<DataConnectionValidationListResult>,
+    | ArmAcceptedLroResponse<
+        "Data connection validation request accepted.",
+        LroHeaders = ArmLroLocationHeader<FinalResult = DataConnectionValidationListResult> &
+          ArmAsyncOperationHeader<FinalResult = DataConnectionValidationListResult> &
+          Azure.Core.Foundations.RetryAfterHeader
+      >
+    | ArmResponse<DataConnectionValidationListResult>,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<Database>
   >;
 
