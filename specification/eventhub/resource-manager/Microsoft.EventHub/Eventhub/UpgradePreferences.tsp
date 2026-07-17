@@ -133,25 +133,25 @@ model UpgradeStatus {
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The service validates the value against this fixed set and rejects unknown values."
 @added(Versions.v2026_07_01_preview)
 union UpgradePreferenceDayOfWeek {
-  /** Sunday. */
+  /** The maintenance window occurs on Sunday. */
   Sunday: "Sunday",
 
-  /** Monday. */
+  /** The maintenance window occurs on Monday. */
   Monday: "Monday",
 
-  /** Tuesday. */
+  /** The maintenance window occurs on Tuesday. */
   Tuesday: "Tuesday",
 
-  /** Wednesday. */
+  /** The maintenance window occurs on Wednesday. */
   Wednesday: "Wednesday",
 
-  /** Thursday. */
+  /** The maintenance window occurs on Thursday. */
   Thursday: "Thursday",
 
-  /** Friday. */
+  /** The maintenance window occurs on Friday. */
   Friday: "Friday",
 
-  /** Saturday. */
+  /** The maintenance window occurs on Saturday. */
   Saturday: "Saturday",
 }
 
