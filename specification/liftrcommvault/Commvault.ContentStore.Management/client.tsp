@@ -80,6 +80,10 @@ using Commvault.ContentStore;
   "csharp"
 );
 
+// [CSPELL] "vmtags" is flagged as an unknown word; use the compound "VmTags"
+// so the generated .NET name splits into known words.
+@@clientName(VmInfo.vmtags, "VmTags", "csharp");
+
 // [ACRONYM] "BackUp" should be treated as the compound word "Backup".
 @@clientName(BackUpType, "BackupType", "csharp");
 
