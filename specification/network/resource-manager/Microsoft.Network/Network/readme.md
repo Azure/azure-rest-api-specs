@@ -88,6 +88,24 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/interconnectGroups/{interconnectGroupName}"].put.responses["201"].schema
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/interconnectGroups/{interconnectGroupName}"].patch.responses["200"].schema
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/interconnectGroups/{interconnectGroupName}/subgroups/{subgroupName}"].get.responses["200"].schema
+  - code: ProvisioningStateMustBeReadOnly
+    from: virtualNetwork.json
+    reason: >-
+      provisioningState is correctly marked readOnly as a sibling of $ref in the generated swagger.
+      The TypeSpec source uses @visibility(Lifecycle.Read) on provisioningState. The lint rule does
+      not follow $ref chains to verify readOnly. See: https://github.com/Azure/typespec-azure/issues/4611
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationSecurityGroups/{applicationSecurityGroupName}/addressPrefixSets/{addressPrefixSetName}"].get.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationSecurityGroups/{applicationSecurityGroupName}/addressPrefixSets/{addressPrefixSetName}"].put.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationSecurityGroups/{applicationSecurityGroupName}/addressPrefixSets/{addressPrefixSetName}"].put.responses["201"].schema
+  - code: ResourceNameRestriction
+    from: virtualNetwork.json
+    reason: >-
+      applicationSecurityGroupName is an existing parent resource path parameter established in prior
+      API versions. Adding a pattern constraint would be a breaking change to existing clients.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationSecurityGroups/{applicationSecurityGroupName}/addressPrefixSets"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationSecurityGroups/{applicationSecurityGroupName}/addressPrefixSets/{addressPrefixSetName}"]
   - code: ResourceNameRestriction
     from: interconnectGroup.json
     reason: Subgroup is a read-only child resource with no PUT operation. Pattern restriction is not applicable.
@@ -197,6 +215,24 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/interconnectGroups/{interconnectGroupName}"].put.responses["201"].schema
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/interconnectGroups/{interconnectGroupName}"].patch.responses["200"].schema
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/interconnectGroups/{interconnectGroupName}/subgroups/{subgroupName}"].get.responses["200"].schema
+  - code: ProvisioningStateMustBeReadOnly
+    from: virtualNetwork.json
+    reason: >-
+      provisioningState is correctly marked readOnly as a sibling of $ref in the generated swagger.
+      The TypeSpec source uses @visibility(Lifecycle.Read) on provisioningState. The lint rule does
+      not follow $ref chains to verify readOnly. See: https://github.com/Azure/typespec-azure/issues/4611
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationSecurityGroups/{applicationSecurityGroupName}/addressPrefixSets/{addressPrefixSetName}"].get.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationSecurityGroups/{applicationSecurityGroupName}/addressPrefixSets/{addressPrefixSetName}"].put.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationSecurityGroups/{applicationSecurityGroupName}/addressPrefixSets/{addressPrefixSetName}"].put.responses["201"].schema
+  - code: ResourceNameRestriction
+    from: virtualNetwork.json
+    reason: >-
+      applicationSecurityGroupName is an existing parent resource path parameter established in prior
+      API versions. Adding a pattern constraint would be a breaking change to existing clients.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationSecurityGroups/{applicationSecurityGroupName}/addressPrefixSets"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationSecurityGroups/{applicationSecurityGroupName}/addressPrefixSets/{addressPrefixSetName}"]
   - code: ResourceNameRestriction
     from: interconnectGroup.json
     reason: Subgroup is a read-only child resource with no PUT operation. Pattern restriction is not applicable.
