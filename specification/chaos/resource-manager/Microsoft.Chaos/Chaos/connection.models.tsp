@@ -13,8 +13,9 @@ namespace Microsoft.Chaos;
 
 /**
  * Model that represents a connection between a workspace and a target resource.
- * A connection provisions and tracks the trust relationship used to reach the
- * data plane of a target resource for fault injection.
+ * A connection provisions and tracks the trust relationship that authorizes the
+ * actor to reach the Chaos Studio data plane for the workspace and target during
+ * fault injection.
  */
 @added(Microsoft.Chaos.Versions.v2026_08_01_preview)
 @parentResource(Workspace)
@@ -37,7 +38,7 @@ model Connection is Azure.ResourceManager.ProxyResource<ConnectionProperties> {
 @added(Microsoft.Chaos.Versions.v2026_08_01_preview)
 model ConnectionProperties {
   /**
-   * The kind of connection, indicating the actor type used to reach the target resource's data plane.
+   * The kind of connection, indicating the actor type authorized to reach the Chaos Studio data plane for the workspace and target.
    */
   kind: ConnectionKind;
 
@@ -93,7 +94,7 @@ model ConnectionProperties {
 }
 
 /**
- * The kind of connection, indicating the actor type used to reach the target resource's data plane.
+ * The kind of connection, indicating the actor type authorized to reach the Chaos Studio data plane for the workspace and target.
  */
 union ConnectionKind {
   string,

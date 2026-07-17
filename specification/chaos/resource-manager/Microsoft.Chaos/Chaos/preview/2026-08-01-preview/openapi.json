@@ -5031,7 +5031,7 @@
     },
     "Connection": {
       "type": "object",
-      "description": "Model that represents a connection between a workspace and a target resource.\nA connection provisions and tracks the trust relationship used to reach the\ndata plane of a target resource for fault injection.",
+      "description": "Model that represents a connection between a workspace and a target resource.\nA connection provisions and tracks the trust relationship that authorizes the\nactor to reach the Chaos Studio data plane for the workspace and target during\nfault injection.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/ConnectionProperties",
@@ -5046,7 +5046,7 @@
     },
     "ConnectionKind": {
       "type": "string",
-      "description": "The kind of connection, indicating the actor type used to reach the target resource's data plane.",
+      "description": "The kind of connection, indicating the actor type authorized to reach the Chaos Studio data plane for the workspace and target.",
       "enum": [
         "AksExtension",
         "ChaosAgent",
@@ -5101,7 +5101,7 @@
       "properties": {
         "kind": {
           "$ref": "#/definitions/ConnectionKind",
-          "description": "The kind of connection, indicating the actor type used to reach the target resource's data plane."
+          "description": "The kind of connection, indicating the actor type authorized to reach the Chaos Studio data plane for the workspace and target."
         },
         "targetResourceId": {
           "type": "string",
