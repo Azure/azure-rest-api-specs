@@ -94,5 +94,5 @@ union AgentSessionSandboxState {
 model AgentSessionIfMatchParameter {
   /** The ETag of the Agent Session. */
   @header("If-Match")
-  ifMatch: string;
+  ifMatch?: string;
 }
