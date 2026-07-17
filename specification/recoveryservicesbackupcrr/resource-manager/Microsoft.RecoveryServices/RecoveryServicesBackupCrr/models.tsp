@@ -1,11 +1,10 @@
 import "@typespec/rest";
 import "@typespec/http";
-import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
@@ -532,8 +531,6 @@ model AADProperties {
 /**
  * ARM Resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-azure-resource must be emitted on the legacy CRR Resource envelope to stay wire-faithful to the frozen 2023-01-15 contract (which sets it)."
-@extension("x-ms-azure-resource", true)
 model Resource {
   /**
    * Resource Id represents the complete path to the resource.

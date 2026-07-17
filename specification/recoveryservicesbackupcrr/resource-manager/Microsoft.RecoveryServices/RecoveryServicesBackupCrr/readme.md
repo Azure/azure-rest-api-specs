@@ -138,6 +138,9 @@ directive:
   - suppress: RequiredPropertiesMissingInResourceModel
     from: bms.json
     reason: The legacy CRR Resource envelope declares id/name/type as read-only but not required, matching the frozen 2023-01-15 contract (whose Resource definition has no `required` list). LintDiff expects ARM resource models to mark id/name/type as required; adding them would change the frozen contract.
+  - suppress: ResourceHasXMsResourceEnabled
+    from: bms.json
+    reason: The legacy CRR Resource envelope does not emit x-ms-azure-resource. The frozen 2023-01-15 Resource sets it, but the only TypeSpec way to emit it on this hand-written model is @extension("x-ms-azure-resource", true), which emits inconsistently across TypeSpec compiler versions (1.13 vs 1.14) and breaks the TypeSpec-Validation drift check. Suppressed here rather than introducing a compiler-version-fragile decorator; the missing marker is a benign, read-only ARM extension.
   - suppress: EvenSegmentedPathForPutOperation
     from: bms.json
     reason: The PUT is on the vaultstorageconfig singleton (BackupResourceConfigResource is an @singleton), so its path ends in the fixed name `vaultstorageconfig` rather than a parameterized {resourceName}. LintDiff expects PUT paths to end in {resourceType}/{resourceName}; the frozen 2023-01-15 contract models vaultstorageconfig as a singleton with this exact path, so it is preserved.
