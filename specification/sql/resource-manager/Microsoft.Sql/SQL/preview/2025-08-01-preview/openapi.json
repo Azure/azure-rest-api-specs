@@ -16071,6 +16071,197 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/topdatabases": {
+      "get": {
+        "operationId": "ManagedInstances_ListTopDatabasesByManagedInstance",
+        "tags": [
+          "ManagedInstances"
+        ],
+        "description": "Get top resource consuming databases of a managed instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "numberOfDatabases",
+            "in": "query",
+            "description": "How many 'top databases' to return. Default is 5.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "startTime",
+            "in": "query",
+            "description": "Start time for observed period.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "description": "End time for observed period.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "interval",
+            "in": "query",
+            "description": "The time step to be used to summarize the metric values. Default value is PT1H",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "PT1H",
+              "P1D"
+            ],
+            "x-ms-enum": {
+              "name": "QueryTimeGrainType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "PT1H",
+                  "value": "PT1H",
+                  "description": "PT1H"
+                },
+                {
+                  "name": "P1D",
+                  "value": "P1D",
+                  "description": "P1D"
+                }
+              ]
+            }
+          },
+          {
+            "name": "aggregationFunction",
+            "in": "query",
+            "description": "Aggregation function to be used, default value is 'sum'",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "avg",
+              "min",
+              "max",
+              "stdev",
+              "sum"
+            ],
+            "x-ms-enum": {
+              "name": "AggregationFunctionType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "avg",
+                  "value": "avg",
+                  "description": "avg"
+                },
+                {
+                  "name": "min",
+                  "value": "min",
+                  "description": "min"
+                },
+                {
+                  "name": "max",
+                  "value": "max",
+                  "description": "max"
+                },
+                {
+                  "name": "stdev",
+                  "value": "stdev",
+                  "description": "stdev"
+                },
+                {
+                  "name": "sum",
+                  "value": "sum",
+                  "description": "sum"
+                }
+              ]
+            }
+          },
+          {
+            "name": "observationMetric",
+            "in": "query",
+            "description": "Metric to be used for ranking top queries. Default is 'cpu'",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "cpu",
+              "io",
+              "logIo",
+              "duration",
+              "dtu"
+            ],
+            "x-ms-enum": {
+              "name": "MetricType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "cpu",
+                  "value": "cpu",
+                  "description": "cpu"
+                },
+                {
+                  "name": "io",
+                  "value": "io",
+                  "description": "io"
+                },
+                {
+                  "name": "logIo",
+                  "value": "logIo",
+                  "description": "logIo"
+                },
+                {
+                  "name": "duration",
+                  "value": "duration",
+                  "description": "duration"
+                },
+                {
+                  "name": "dtu",
+                  "value": "dtu",
+                  "description": "dtu"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TopDatabasesListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Obtain list of instance's top resource consuming databases. Example with all request parameters.": {
+            "$ref": "./examples/ManagedInstanceTopDatabasesMax.json"
+          },
+          "Obtain list of instance's top resource consuming databases. Example with only mandatory request parameters.": {
+            "$ref": "./examples/ManagedInstanceTopDatabasesMin.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/topqueries": {
       "get": {
         "operationId": "ManagedInstances_ListByManagedInstance",
@@ -44019,6 +44210,25 @@
         ]
       }
     },
+    "DatabaseStatisticsProperties": {
+      "type": "object",
+      "description": "Properties of a database consumption statistics.",
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "Database name of the database in which this query was executed.",
+          "readOnly": true
+        },
+        "intervals": {
+          "type": "array",
+          "description": "List of intervals with appropriate metric data",
+          "items": {
+            "$ref": "#/definitions/QueryMetricIntervalV2"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
     "DatabaseStatus": {
       "type": "string",
       "description": "The status of the database.",
@@ -54193,7 +54403,94 @@
         }
       }
     },
+    "QueryMetricIntervalV2": {
+      "type": "object",
+      "description": "Properties of a query metrics interval.",
+      "properties": {
+        "intervalStartTime": {
+          "type": "string",
+          "description": "The start time for the metric interval (ISO-8601 format).",
+          "readOnly": true
+        },
+        "intervalType": {
+          "$ref": "#/definitions/QueryTimeGrainType",
+          "description": "Interval type (length).",
+          "readOnly": true
+        },
+        "executionCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Execution count of a query in this interval.",
+          "readOnly": true
+        },
+        "metrics": {
+          "type": "array",
+          "description": "List of metric objects for this interval",
+          "items": {
+            "$ref": "#/definitions/QueryMetricPropertiesV2"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
     "QueryMetricProperties": {
+      "type": "object",
+      "description": "Properties of a topquery metric in one interval.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name information for the metric.",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The UI appropriate name for the metric.",
+          "readOnly": true
+        },
+        "unit": {
+          "$ref": "#/definitions/QueryMetricUnitType",
+          "description": "The unit of the metric.",
+          "readOnly": true
+        },
+        "value": {
+          "type": "number",
+          "format": "double",
+          "description": "The value of the metric.",
+          "readOnly": true
+        },
+        "min": {
+          "type": "number",
+          "format": "double",
+          "description": "Metric value when min() aggregate function is used over the interval.",
+          "readOnly": true
+        },
+        "max": {
+          "type": "number",
+          "format": "double",
+          "description": "Metric value when max() aggregate function is used over the interval.",
+          "readOnly": true
+        },
+        "avg": {
+          "type": "number",
+          "format": "double",
+          "description": "Metric value when avg() aggregate function is used over the interval.",
+          "readOnly": true
+        },
+        "sum": {
+          "type": "number",
+          "format": "double",
+          "description": "Metric value when sum() aggregate function is used over the interval.",
+          "readOnly": true
+        },
+        "stdev": {
+          "type": "number",
+          "format": "double",
+          "description": "Metric value when stdev aggregate function is used over the interval.",
+          "readOnly": true
+        }
+      }
+    },
+    "QueryMetricPropertiesV2": {
       "type": "object",
       "description": "Properties of a topquery metric in one interval.",
       "properties": {
@@ -54340,6 +54637,45 @@
           "description": "List of intervals with appropriate metric data",
           "items": {
             "$ref": "#/definitions/QueryMetricInterval"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "QueryStatisticsPropertiesV2": {
+      "type": "object",
+      "description": "Properties of a query execution statistics.",
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "Database name of the database in which this query was executed.",
+          "readOnly": true
+        },
+        "queryId": {
+          "type": "string",
+          "description": "Unique query id (unique within one database).",
+          "readOnly": true
+        },
+        "queryHash": {
+          "type": "string",
+          "description": "Query Hash identifies query content",
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "description": "The start time for the metric (ISO-8601 format).",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "description": "The end time for the metric (ISO-8601 format).",
+          "readOnly": true
+        },
+        "intervals": {
+          "type": "array",
+          "description": "List of intervals with appropriate metric data",
+          "items": {
+            "$ref": "#/definitions/QueryMetricIntervalV2"
           },
           "x-ms-identifiers": []
         }
@@ -60249,6 +60585,72 @@
         }
       }
     },
+    "TopDatabases": {
+      "type": "object",
+      "description": "Top resource consuming databases on a managed instance with the associated metric data for the observed period.",
+      "properties": {
+        "numberOfDatabases": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Requested number of top databases.",
+          "readOnly": true
+        },
+        "aggregationFunction": {
+          "type": "string",
+          "description": "Aggregation function used to calculate query metrics.",
+          "readOnly": true
+        },
+        "observationMetric": {
+          "type": "string",
+          "description": "Metric used to rank databases.",
+          "readOnly": true
+        },
+        "intervalType": {
+          "$ref": "#/definitions/QueryTimeGrainType",
+          "description": "Interval type (length).",
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "description": "The start time for the metric (ISO-8601 format).",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "description": "The end time for the metric (ISO-8601 format).",
+          "readOnly": true
+        },
+        "databases": {
+          "type": "array",
+          "description": "List of top resource consuming databases with appropriate metric data",
+          "items": {
+            "$ref": "#/definitions/DatabaseStatisticsProperties"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "TopDatabasesListResult": {
+      "type": "object",
+      "description": "A list of top resource consuming databases on managed instance",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The TopDatabases items on this page",
+          "items": {
+            "$ref": "#/definitions/TopDatabases"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "TopQueries": {
       "type": "object",
       "properties": {
@@ -60287,7 +60689,7 @@
           "type": "array",
           "description": "List of top resource consuming queries with appropriate metric data",
           "items": {
-            "$ref": "#/definitions/QueryStatisticsProperties"
+            "$ref": "#/definitions/QueryStatisticsPropertiesV2"
           },
           "x-ms-identifiers": []
         }

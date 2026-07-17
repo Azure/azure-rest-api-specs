@@ -8,6 +8,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Sql;
 /**
@@ -226,6 +227,57 @@ interface ManagedInstances {
        */
       @query("databases")
       databases?: string;
+
+      /**
+       * Start time for observed period.
+       */
+      @query("startTime")
+      startTime?: string;
+
+      /**
+       * End time for observed period.
+       */
+      @query("endTime")
+      endTime?: string;
+
+      /**
+       * The time step to be used to summarize the metric values. Default value is PT1H
+       */
+      @query("interval")
+      interval?: QueryTimeGrainType;
+
+      /**
+       * Aggregation function to be used, default value is 'sum'
+       */
+      @query("aggregationFunction")
+      aggregationFunction?: AggregationFunctionType;
+
+      /**
+       * Metric to be used for ranking top queries. Default is 'cpu'
+       */
+      @query("observationMetric")
+      observationMetric?: MetricType;
+    }
+  >;
+
+  /**
+   * Get top resource consuming databases of a managed instance.
+   */
+  @added(Versions.v2025_08_01_preview)
+  @list
+  @get
+  @action("topdatabases")
+  @tag("ManagedInstances")
+  listTopDatabasesByManagedInstance is ArmResourceActionSync<
+    ManagedInstance,
+    void,
+    ArmResponse<TopDatabasesListResult>,
+    Parameters = {
+      /**
+       * How many 'top databases' to return. Default is 5.
+       */
+      @query("numberOfDatabases")
+      numberOfDatabases?: int32;
 
       /**
        * Start time for observed period.

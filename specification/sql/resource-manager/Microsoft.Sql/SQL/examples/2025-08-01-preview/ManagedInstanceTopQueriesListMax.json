@@ -1,238 +1,244 @@
 {
   "parameters": {
+    "subscriptionId": "741fd0f5-9cb8-442c-91c3-3ef4ca231c2a",
+    "resourceGroupName": "testrg",
+    "managedInstanceName": "testcl",
     "api-version": "2025-08-01-preview",
-    "databases": "db1,db2",
-    "endTime": "2020-03-12T12:00:00Z",
-    "interval": "P1D",
-    "managedInstanceName": "sqlcrudtest-4645",
+    "interval": "PT1H",
+    "startTime": "2024-10-14T00:00:46.243Z",
+    "endTime": "2025-10-16T23:30:46.243Z",
     "observationMetric": "cpu",
-    "resourceGroupName": "sqlcrudtest-7398",
-    "startTime": "2020-03-10T12:00:00Z",
-    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+    "databases": "TestDatabase",
+    "numberOfQueries": 5
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "aggregationFunction": "sum",
-            "endTime": "03/12/2020 13:00:00",
-            "intervalType": "P1D",
             "numberOfQueries": 5,
-            "observationMetric": "cpu",
+            "aggregationFunction": "sum",
+            "observationMetric": "duration",
+            "intervalType": "PT1H",
+            "startTime": "10/13/2024 17:00:00",
+            "endTime": "10/16/2025 16:30:46",
             "queries": [
               {
-                "databaseName": "db1",
+                "databaseName": "TestDatabase",
+                "queryId": "26",
+                "queryHash": "0xA8E44BAAB092A596",
                 "intervals": [
                   {
-                    "executionCount": 1,
-                    "intervalStartTime": "03/11/2020 00:00:00",
+                    "intervalStartTime": "02/07/2025 15:00:00",
+                    "executionCount": 2,
                     "metrics": [
                       {
                         "name": "cpu",
                         "displayName": "Cpu",
                         "unit": "percentage",
-                        "value": 0.0015934667245370371
+                        "value": 0.0040089305555555555
                       },
                       {
                         "name": "io",
                         "displayName": "Physical Io Reads",
                         "unit": "percentage",
-                        "value": 0.000004224537037037037
+                        "value": 4.6527777777777774E-05
                       },
                       {
                         "name": "logIo",
                         "displayName": "Log Writes",
                         "unit": "percentage",
-                        "value": 0
+                        "value": 0.0
                       },
                       {
                         "name": "memory",
                         "displayName": "Memory consumption",
                         "unit": "KB",
-                        "value": 8336
+                        "value": 0.0
                       },
                       {
                         "name": "duration",
                         "displayName": "Query duration",
                         "unit": "microseconds",
-                        "value": 11091296
+                        "value": 1170285.0
                       }
                     ]
                   }
-                ],
-                "queryId": "28"
+                ]
               },
               {
-                "databaseName": "db1",
+                "databaseName": "TestDatabase",
+                "queryId": "90",
+                "queryHash": "0xE2D481769B70E309",
                 "intervals": [
                   {
+                    "intervalStartTime": "02/07/2025 15:00:00",
                     "executionCount": 1,
-                    "intervalStartTime": "03/11/2020 00:00:00",
                     "metrics": [
                       {
                         "name": "cpu",
                         "displayName": "Cpu",
                         "unit": "percentage",
-                        "value": 0.0009522783564814815
+                        "value": 0.00119546875
                       },
                       {
                         "name": "io",
                         "displayName": "Physical Io Reads",
                         "unit": "percentage",
-                        "value": 1.7361111111111112e-7
+                        "value": 6.38888888888889E-05
                       },
                       {
                         "name": "logIo",
                         "displayName": "Log Writes",
                         "unit": "percentage",
-                        "value": 0
+                        "value": 0.0
                       },
                       {
                         "name": "memory",
                         "displayName": "Memory consumption",
                         "unit": "KB",
-                        "value": 1024
+                        "value": 1024.0
                       },
                       {
                         "name": "duration",
                         "displayName": "Query duration",
                         "unit": "microseconds",
-                        "value": 6625562
+                        "value": 364459.0
                       }
                     ]
                   }
-                ],
-                "queryId": "24"
+                ]
               },
               {
-                "databaseName": "db1",
+                "databaseName": "TestDatabase",
+                "queryId": "89",
+                "queryHash": "0xB1A8D62FCF665755",
                 "intervals": [
                   {
-                    "executionCount": 82,
-                    "intervalStartTime": "03/11/2020 00:00:00",
+                    "intervalStartTime": "02/07/2025 15:00:00",
+                    "executionCount": 1,
                     "metrics": [
                       {
                         "name": "cpu",
                         "displayName": "Cpu",
                         "unit": "percentage",
-                        "value": 0.0007183139467592593
+                        "value": 0.00062754166666666666
                       },
                       {
                         "name": "io",
                         "displayName": "Physical Io Reads",
                         "unit": "percentage",
-                        "value": 0
+                        "value": 3.472222222222222E-06
                       },
                       {
                         "name": "logIo",
                         "displayName": "Log Writes",
                         "unit": "percentage",
-                        "value": 0
+                        "value": 0.0
                       },
                       {
                         "name": "memory",
                         "displayName": "Memory consumption",
                         "unit": "KB",
-                        "value": 0
+                        "value": 6672.0
                       },
                       {
                         "name": "duration",
                         "displayName": "Query duration",
                         "unit": "microseconds",
-                        "value": 4970199
+                        "value": 182396.0
                       }
                     ]
                   }
-                ],
-                "queryId": "3"
+                ]
               },
               {
-                "databaseName": "db1",
+                "databaseName": "TestDatabase",
+                "queryId": "55",
+                "queryHash": "0xE37AF20A8CA1340E",
                 "intervals": [
                   {
-                    "executionCount": 1,
-                    "intervalStartTime": "03/11/2020 00:00:00",
+                    "intervalStartTime": "02/07/2025 15:00:00",
+                    "executionCount": 9,
                     "metrics": [
                       {
                         "name": "cpu",
                         "displayName": "Cpu",
                         "unit": "percentage",
-                        "value": 0.0006494454571759259
+                        "value": 0.00041078819444444447
                       },
                       {
                         "name": "io",
                         "displayName": "Physical Io Reads",
                         "unit": "percentage",
-                        "value": 0.000005034722222222222
+                        "value": 0.0
                       },
                       {
                         "name": "logIo",
                         "displayName": "Log Writes",
                         "unit": "percentage",
-                        "value": 0
+                        "value": 0.0
                       },
                       {
                         "name": "memory",
                         "displayName": "Memory consumption",
                         "unit": "KB",
-                        "value": 1024
+                        "value": 75456.0
                       },
                       {
                         "name": "duration",
                         "displayName": "Query duration",
                         "unit": "microseconds",
-                        "value": 4530668
+                        "value": 118332.0
                       }
                     ]
                   }
-                ],
-                "queryId": "29"
+                ]
               },
               {
-                "databaseName": "db2",
+                "databaseName": "TestDatabase",
+                "queryId": "102",
+                "queryHash": "0xD0A224F78D9CD510",
                 "intervals": [
                   {
-                    "executionCount": 1,
-                    "intervalStartTime": "03/11/2020 00:00:00",
+                    "intervalStartTime": "02/07/2025 15:00:00",
+                    "executionCount": 2,
                     "metrics": [
                       {
                         "name": "cpu",
                         "displayName": "Cpu",
                         "unit": "percentage",
-                        "value": 0.0006275368923611112
+                        "value": 0.00026935763888888891
                       },
                       {
                         "name": "io",
                         "displayName": "Physical Io Reads",
                         "unit": "percentage",
-                        "value": 0
+                        "value": 0.0
                       },
                       {
                         "name": "logIo",
                         "displayName": "Log Writes",
                         "unit": "percentage",
-                        "value": 0
+                        "value": 0.0
                       },
                       {
                         "name": "memory",
                         "displayName": "Memory consumption",
                         "unit": "KB",
-                        "value": 1024
+                        "value": 0.0
                       },
                       {
                         "name": "duration",
                         "displayName": "Query duration",
                         "unit": "microseconds",
-                        "value": 4349943
+                        "value": 77579.0
                       }
                     ]
                   }
-                ],
-                "queryId": "25"
+                ]
               }
-            ],
-            "startTime": "03/10/2020 00:00:00"
+            ]
           }
         ]
       }
