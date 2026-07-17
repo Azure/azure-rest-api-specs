@@ -14,24 +14,22 @@ namespace Microsoft.NetworkCloud;
 /**
  * The name of the metrics configuration for the cluster.
  */
-model ClusterMetricsConfigurationNameParameter
-  is ResourceNameParameter<
-    Resource = ClusterMetricsConfiguration,
-    KeyName = "metricsConfigurationName",
-    SegmentName = "metricsConfigurations",
-    NamePattern = "^default$"
-  >;
+model ClusterMetricsConfigurationNameParameter is ResourceNameParameter<
+  Resource = ClusterMetricsConfiguration,
+  KeyName = "metricsConfigurationName",
+  SegmentName = "metricsConfigurations",
+  NamePattern = "^default$"
+>;
 
 /**
  * ClusterMetricsConfiguration represents the metrics configuration of an on-premises Network Cloud cluster.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "legacy resource using legacy features"
 @parentResource(Cluster)
-model ClusterMetricsConfiguration
-  is Azure.ResourceManager.TrackedResource<
-    ClusterMetricsConfigurationProperties,
-    false
-  > {
+model ClusterMetricsConfiguration is Azure.ResourceManager.TrackedResource<
+  ClusterMetricsConfigurationProperties,
+  false
+> {
   ...ClusterMetricsConfigurationNameParameter;
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
   ...RequiredExtendedLocationProperty;
