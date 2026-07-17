@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "NetworkManagementClient",
+    "title": "WebApplicationFirewallManagement",
     "version": "2025-09-01",
-    "description": "APIs to manage Microsoft Azure network resources.",
+    "description": "APIs to manage web application firewall rules.",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -44,6 +44,9 @@
     },
     {
       "name": "applicationSecurityGroups"
+    },
+    {
+      "name": "AddressPrefixSets"
     },
     {
       "name": "BastionHosts"
@@ -164,9 +167,6 @@
     },
     {
       "name": "Usages"
-    },
-    {
-      "name": "AddressPrefixSets"
     }
   ],
   "paths": {
@@ -197,11 +197,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List all IpAllocations": {
-            "$ref": "./examples/IpAllocationList.json"
           }
         },
         "x-ms-pageable": {
@@ -238,11 +233,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "List all application security groups": {
-            "$ref": "./examples/ApplicationSecurityGroupListAll.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -275,11 +265,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List all Bastion Hosts for a given subscription": {
-            "$ref": "./examples/BastionHostListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -316,11 +301,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "List all custom IP prefixes": {
-            "$ref": "./examples/CustomIpPrefixListAll.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -353,11 +333,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List all DDoS custom policies in subscription": {
-            "$ref": "./examples/DdosCustomPolicyListAll.json"
           }
         },
         "x-ms-pageable": {
@@ -394,11 +369,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "List all DDoS protection plans": {
-            "$ref": "./examples/DdosProtectionPlanListAll.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -433,11 +403,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "List all network interfaces": {
-            "$ref": "./examples/DscpConfigurationListAll.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -470,11 +435,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Error"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List_IpGroups": {
-            "$ref": "./examples/IpGroupsListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -514,11 +474,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Get list of private link service id that can be linked to a private end point with auto approved": {
-            "$ref": "./examples/AutoApprovedPrivateLinkServicesGet.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -551,11 +506,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get available delegations": {
-            "$ref": "./examples/AvailableDelegationsSubscriptionGet.json"
           }
         },
         "x-ms-pageable": {
@@ -592,11 +542,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Get available PrivateEndpoint types": {
-            "$ref": "./examples/AvailablePrivateEndpointTypesGet.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -629,11 +574,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get available service aliases": {
-            "$ref": "./examples/AvailableServiceAliasesList.json"
           }
         },
         "x-ms-pageable": {
@@ -675,11 +615,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Check Dns Name Availability": {
-            "$ref": "./examples/CheckDnsNameAvailability.json"
           }
         }
       }
@@ -739,11 +674,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Check private link service visibility": {
-            "$ref": "./examples/CheckPrivateLinkServiceVisibility.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/PrivateLinkServiceVisibility"
@@ -794,17 +724,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Get list of service tags": {
-            "$ref": "./examples/ServiceTagInformationListResult.json"
-          },
-          "Get list of service tags with no address prefixes": {
-            "$ref": "./examples/ServiceTagInformationListResultWithNoAddressPrefixes.json"
-          },
-          "Get list of service tags with tag name.": {
-            "$ref": "./examples/ServiceTagInformationListResultWithTagname.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -837,11 +756,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get list of service tags": {
-            "$ref": "./examples/ServiceTagsList.json"
           }
         }
       }
@@ -878,14 +792,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "List usages": {
-            "$ref": "./examples/UsageList.json"
-          },
-          "List usages spaced location": {
-            "$ref": "./examples/UsageListSpacedLocation.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -918,11 +824,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "EndpointServicesList": {
-            "$ref": "./examples/EndpointServicesList.json"
           }
         },
         "x-ms-pageable": {
@@ -959,11 +860,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "List all nat gateways": {
-            "$ref": "./examples/NatGatewayListAll.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -996,11 +892,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List all network interfaces": {
-            "$ref": "./examples/NetworkInterfaceListAll.json"
           }
         },
         "x-ms-pageable": {
@@ -1037,11 +928,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "List all network profiles": {
-            "$ref": "./examples/NetworkProfileListAll.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1076,11 +962,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "List all network security groups": {
-            "$ref": "./examples/NetworkSecurityGroupListAll.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1113,11 +994,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "NetworkVirtualApplianceSkuListResult": {
-            "$ref": "./examples/NetworkVirtualApplianceSkuList.json"
           }
         },
         "x-ms-pageable": {
@@ -1160,11 +1036,6 @@
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
           }
-        },
-        "x-ms-examples": {
-          "NetworkVirtualApplianceSkuGet": {
-            "$ref": "./examples/NetworkVirtualApplianceSkuGet.json"
-          }
         }
       }
     },
@@ -1195,11 +1066,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List all Network Virtual Appliances for a given subscription": {
-            "$ref": "./examples/NetworkVirtualApplianceListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -1236,11 +1102,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "List all private endpoints": {
-            "$ref": "./examples/PrivateEndpointListAll.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1273,11 +1134,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Error"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List all private list service": {
-            "$ref": "./examples/PrivateLinkServiceListAll.json"
           }
         },
         "x-ms-pageable": {
@@ -1314,11 +1170,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "List all public IP addresses": {
-            "$ref": "./examples/PublicIpAddressListAll.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1351,11 +1202,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List all public IP prefixes": {
-            "$ref": "./examples/PublicIpPrefixListAll.json"
           }
         },
         "x-ms-pageable": {
@@ -1392,11 +1238,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "List all route tables": {
-            "$ref": "./examples/RouteTableListAll.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1429,11 +1270,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List all Security Partner Providers for a given subscription": {
-            "$ref": "./examples/SecurityPartnerProviderListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -1470,11 +1306,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "List all virtual networks": {
-            "$ref": "./examples/VirtualNetworkListAll.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1507,11 +1338,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Error"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List all Virtual Routers for a given subscription": {
-            "$ref": "./examples/VirtualRouterListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -1549,11 +1375,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List IpAllocations in resource group": {
-            "$ref": "./examples/IpAllocationListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -1605,11 +1426,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get IpAllocation": {
-            "$ref": "./examples/IpAllocationGet.json"
           }
         }
       },
@@ -1677,11 +1493,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Create IpAllocation": {
-            "$ref": "./examples/IpAllocationCreate.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/IpAllocation"
@@ -1733,11 +1544,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Update virtual network tags": {
-            "$ref": "./examples/IpAllocationUpdateTags.json"
           }
         }
       },
@@ -1793,11 +1599,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Delete IpAllocation": {
-            "$ref": "./examples/IpAllocationDelete.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -1834,11 +1635,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List load balancers in resource group": {
-            "$ref": "./examples/ApplicationSecurityGroupList.json"
           }
         },
         "x-ms-pageable": {
@@ -1883,11 +1679,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get application security group": {
-            "$ref": "./examples/ApplicationSecurityGroupGet.json"
           }
         }
       },
@@ -1955,11 +1746,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Create application security group": {
-            "$ref": "./examples/ApplicationSecurityGroupCreate.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/Common.ApplicationSecurityGroup"
@@ -2011,11 +1797,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Update application security group tags": {
-            "$ref": "./examples/ApplicationSecurityGroupUpdateTags.json"
           }
         }
       },
@@ -2071,11 +1852,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Delete application security group": {
-            "$ref": "./examples/ApplicationSecurityGroupDelete.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -2119,11 +1895,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List address prefix sets": {
-            "$ref": "./examples/AddressPrefixSetList.json"
           }
         },
         "x-ms-pageable": {
@@ -2176,11 +1947,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get address prefix set": {
-            "$ref": "./examples/AddressPrefixSetGet.json"
           }
         }
       },
@@ -2256,11 +2022,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Create address prefix set": {
-            "$ref": "./examples/AddressPrefixSetCreate.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/AddressPrefixSet"
@@ -2324,11 +2085,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Delete address prefix set": {
-            "$ref": "./examples/AddressPrefixSetDelete.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -2365,11 +2121,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List all Bastion Hosts for a given resource group": {
-            "$ref": "./examples/BastionHostListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -2414,20 +2165,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get Bastion Host": {
-            "$ref": "./examples/BastionHostGet.json"
-          },
-          "Get Bastion Host With Private Only": {
-            "$ref": "./examples/BastionHostGetWithPrivateOnly.json"
-          },
-          "Get Bastion Host With Zones": {
-            "$ref": "./examples/BastionHostGetWithZones.json"
-          },
-          "Get Developer Bastion Host": {
-            "$ref": "./examples/BastionHostDeveloperGet.json"
           }
         }
       },
@@ -2493,20 +2230,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Create Bastion Host": {
-            "$ref": "./examples/BastionHostPut.json"
-          },
-          "Create Bastion Host With Private Only": {
-            "$ref": "./examples/BastionHostPutWithPrivateOnly.json"
-          },
-          "Create Bastion Host With Zones": {
-            "$ref": "./examples/BastionHostPutWithZones.json"
-          },
-          "Create Developer Bastion Host": {
-            "$ref": "./examples/BastionHostDeveloperPut.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2576,11 +2299,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Patch Bastion Host": {
-            "$ref": "./examples/BastionHostPatch.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/BastionHost"
@@ -2637,14 +2355,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Delete Bastion Host": {
-            "$ref": "./examples/BastionHostDelete.json"
-          },
-          "Delete Developer Bastion Host": {
-            "$ref": "./examples/BastionHostDeveloperDelete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2714,11 +2424,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Create Bastion Shareable Links for the request VMs": {
-            "$ref": "./examples/BastionShareableLinkCreate.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2791,11 +2496,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Delete Bastion Shareable Links for the request VMs": {
-            "$ref": "./examples/BastionShareableLinkDelete.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -2859,11 +2559,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Delete Bastion Shareable Links for the request VMs": {
-            "$ref": "./examples/BastionShareableLinkDeleteByToken.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -2916,11 +2611,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Deletes the specified active session": {
-            "$ref": "./examples/BastionSessionDelete.json"
           }
         },
         "x-ms-pageable": {
@@ -2979,11 +2669,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Returns a list of currently active sessions on the Bastion": {
-            "$ref": "./examples/BastionSessionsList.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -3045,11 +2730,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Returns the Bastion Shareable Links for the request VMs": {
-            "$ref": "./examples/BastionShareableLinkGet.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -3085,11 +2765,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List resource group Custom IP prefixes": {
-            "$ref": "./examples/CustomIpPrefixList.json"
           }
         },
         "x-ms-pageable": {
@@ -3141,11 +2816,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get custom IP prefix": {
-            "$ref": "./examples/CustomIpPrefixGet.json"
           }
         }
       },
@@ -3213,11 +2883,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Create custom IP prefix allocation method": {
-            "$ref": "./examples/CustomIpPrefixCreateCustomizedValues.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/CustomIpPrefix"
@@ -3269,11 +2934,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Update public IP address tags": {
-            "$ref": "./examples/CustomIpPrefixUpdateTags.json"
           }
         }
       },
@@ -3329,11 +2989,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Delete custom IP prefix": {
-            "$ref": "./examples/CustomIpPrefixDelete.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -3370,11 +3025,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List DDoS custom policies in a resource group": {
-            "$ref": "./examples/DdosCustomPolicyList.json"
           }
         },
         "x-ms-pageable": {
@@ -3419,11 +3069,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get DDoS custom policy": {
-            "$ref": "./examples/DdosCustomPolicyGet.json"
           }
         }
       },
@@ -3491,11 +3136,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Create DDoS custom policy": {
-            "$ref": "./examples/DdosCustomPolicyCreate.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/DdosCustomPolicy"
@@ -3547,11 +3187,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "DDoS Custom policy Update tags": {
-            "$ref": "./examples/DdosCustomPolicyUpdateTags.json"
           }
         }
       },
@@ -3607,11 +3242,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Delete DDoS custom policy": {
-            "$ref": "./examples/DdosCustomPolicyDelete.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -3648,11 +3278,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List DDoS protection plans in resource group": {
-            "$ref": "./examples/DdosProtectionPlanList.json"
           }
         },
         "x-ms-pageable": {
@@ -3697,11 +3322,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get DDoS protection plan": {
-            "$ref": "./examples/DdosProtectionPlanGet.json"
           }
         }
       },
@@ -3769,11 +3389,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Create DDoS protection plan": {
-            "$ref": "./examples/DdosProtectionPlanCreate.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/DdosProtectionPlan"
@@ -3825,11 +3440,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "DDoS protection plan Update tags": {
-            "$ref": "./examples/DdosProtectionPlanUpdateTags.json"
           }
         }
       },
@@ -3885,11 +3495,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Delete DDoS protection plan": {
-            "$ref": "./examples/DdosProtectionPlanDelete.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -3926,11 +3531,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get Dscp Configuration": {
-            "$ref": "./examples/DscpConfigurationList.json"
           }
         },
         "x-ms-pageable": {
@@ -3975,11 +3575,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get Dscp Configuration": {
-            "$ref": "./examples/DscpConfigurationGet.json"
           }
         }
       },
@@ -4047,11 +3642,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Create DSCP Configuration": {
-            "$ref": "./examples/DscpConfigurationCreate.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/DscpConfiguration"
@@ -4110,11 +3700,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Delete DSCP Configuration": {
-            "$ref": "./examples/DscpConfigurationDelete.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -4151,11 +3736,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Error"
             }
-          }
-        },
-        "x-ms-examples": {
-          "ListByResourceGroup_IpGroups": {
-            "$ref": "./examples/IpGroupsListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -4207,11 +3787,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Error"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get_IpGroups": {
-            "$ref": "./examples/IpGroupsGet.json"
           }
         }
       },
@@ -4279,11 +3854,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "CreateOrUpdate_IpGroups": {
-            "$ref": "./examples/IpGroupsCreate.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/IpGroup"
@@ -4335,11 +3905,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Error"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Update_IpGroups": {
-            "$ref": "./examples/IpGroupsUpdateTags.json"
           }
         }
       },
@@ -4395,11 +3960,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Delete_IpGroups": {
-            "$ref": "./examples/IpGroupsDelete.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -4441,11 +4001,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Get list of private link service id that can be linked to a private end point with auto approved": {
-            "$ref": "./examples/AutoApprovedPrivateLinkServicesResourceGroupGet.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -4481,11 +4036,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get available delegations in the resource group": {
-            "$ref": "./examples/AvailableDelegationsResourceGroupGet.json"
           }
         },
         "x-ms-pageable": {
@@ -4525,11 +4075,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Get available PrivateEndpoint types in the resource group": {
-            "$ref": "./examples/AvailablePrivateEndpointTypesResourceGroupGet.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -4565,11 +4110,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get available service aliases in the resource group": {
-            "$ref": "./examples/AvailableServiceAliasesListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -4635,11 +4175,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Check private link service visibility": {
-            "$ref": "./examples/CheckPrivateLinkServiceVisibilityByResourceGroup.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/PrivateLinkServiceVisibility"
@@ -4677,11 +4212,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List nat gateways in resource group": {
-            "$ref": "./examples/NatGatewayList.json"
           }
         },
         "x-ms-pageable": {
@@ -4733,20 +4263,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get nat gateway": {
-            "$ref": "./examples/NatGatewayGet.json"
-          },
-          "Get nat gateway with StandardV2 Sku": {
-            "$ref": "./examples/NatGatewayGetStandardV2Sku.json"
-          },
-          "Get nat gateway with nat64": {
-            "$ref": "./examples/NatGatewayWithNat64Get.json"
-          },
-          "Get nat gateway with service gateway": {
-            "$ref": "./examples/NatGatewayWithServiceGatewayGet.json"
           }
         }
       },
@@ -4824,20 +4340,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Create nat gateway": {
-            "$ref": "./examples/NatGatewayCreateOrUpdate.json"
-          },
-          "Create nat gateway with StandardV2 Sku": {
-            "$ref": "./examples/NatGatewayCreateOrUpdateStandardV2Sku.json"
-          },
-          "Create nat gateway with nat64": {
-            "$ref": "./examples/NatGatewayWithNat64CreateOrUpdate.json"
-          },
-          "Create nat gateway with service gateway": {
-            "$ref": "./examples/NatGatewayWithServiceGatewayCreateOrUpdate.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/Common.NatGateway"
@@ -4889,14 +4391,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Update nat gateway tags": {
-            "$ref": "./examples/NatGatewayUpdateTags.json"
-          },
-          "Update nat gateway with StandardV2 Sku tags": {
-            "$ref": "./examples/NatGatewayUpdateTagsStandardV2Sku.json"
           }
         }
       },
@@ -4952,11 +4446,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Delete nat gateway": {
-            "$ref": "./examples/NatGatewayDelete.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -4993,11 +4482,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List network interfaces in resource group": {
-            "$ref": "./examples/NetworkInterfaceList.json"
           }
         },
         "x-ms-pageable": {
@@ -5049,11 +4533,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get network interface": {
-            "$ref": "./examples/NetworkInterfaceGet.json"
           }
         }
       },
@@ -5121,14 +4600,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Create network interface": {
-            "$ref": "./examples/NetworkInterfaceCreate.json"
-          },
-          "Create network interface with Gateway Load Balancer Consumer configured": {
-            "$ref": "./examples/NetworkInterfaceCreateGatewayLoadBalancerConsumer.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/Common.NetworkInterface"
@@ -5180,11 +4651,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Update network interface tags": {
-            "$ref": "./examples/NetworkInterfaceUpdateTags.json"
           }
         }
       },
@@ -5238,11 +4704,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Delete network interface": {
-            "$ref": "./examples/NetworkInterfaceDelete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -5302,11 +4763,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List network interface effective network security groups": {
-            "$ref": "./examples/NetworkInterfaceEffectiveNSGList.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -5369,11 +4825,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Show network interface effective route tables": {
-            "$ref": "./examples/NetworkInterfaceEffectiveRouteTableList.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/EffectiveRouteListResult"
@@ -5418,11 +4869,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "NetworkInterfaceIPConfigurationList": {
-            "$ref": "./examples/NetworkInterfaceIPConfigurationList.json"
           }
         },
         "x-ms-pageable": {
@@ -5475,11 +4921,6 @@
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
           }
-        },
-        "x-ms-examples": {
-          "NetworkInterfaceIPConfigurationGet": {
-            "$ref": "./examples/NetworkInterfaceIPConfigurationGet.json"
-          }
         }
       }
     },
@@ -5520,11 +4961,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "NetworkInterfaceLoadBalancerList": {
-            "$ref": "./examples/NetworkInterfaceLoadBalancerList.json"
           }
         },
         "x-ms-pageable": {
@@ -5569,11 +5005,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List virtual network tap configurations": {
-            "$ref": "./examples/NetworkInterfaceTapConfigurationList.json"
           }
         },
         "x-ms-pageable": {
@@ -5625,11 +5056,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get Network Interface Tap Configurations": {
-            "$ref": "./examples/NetworkInterfaceTapConfigurationGet.json"
           }
         }
       },
@@ -5704,11 +5130,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Create Network Interface Tap Configurations": {
-            "$ref": "./examples/NetworkInterfaceTapConfigurationCreate.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/Common.NetworkInterfaceTapConfiguration"
@@ -5772,11 +5193,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Delete tap configuration": {
-            "$ref": "./examples/NetworkInterfaceTapConfigurationDelete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -5865,11 +5281,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "IpamPools_List": {
-            "$ref": "./examples/IpamPools_List.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -5922,11 +5333,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/CommonErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "IpamPools_Get": {
-            "$ref": "./examples/IpamPools_Get.json"
           }
         }
       },
@@ -6011,11 +5417,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "IpamPools_Create": {
-            "$ref": "./examples/IpamPools_Create.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/IpamPool"
@@ -6085,11 +5486,6 @@
               "$ref": "./common.json#/definitions/CommonErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "IpamPools_Update": {
-            "$ref": "./examples/IpamPools_Update.json"
-          }
         }
       },
       "delete": {
@@ -6158,11 +5554,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "IpamPools_Delete": {
-            "$ref": "./examples/IpamPools_Delete.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -6217,11 +5608,6 @@
               "$ref": "./common.json#/definitions/CommonErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "IpamPools_GetPoolUsage": {
-            "$ref": "./examples/IpamPools_GetPoolUsage.json"
-          }
         }
       }
     },
@@ -6272,11 +5658,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/CommonErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "IpamPools_ListAssociatedResources": {
-            "$ref": "./examples/IpamPools_ListAssociatedResources.json"
           }
         },
         "x-ms-pageable": {
@@ -6372,11 +5753,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "StaticCidrs_List": {
-            "$ref": "./examples/StaticCidrs_List.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -6437,11 +5813,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/CommonErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "StaticCidrs_Get": {
-            "$ref": "./examples/StaticCidrs_Get.json"
           }
         }
       },
@@ -6514,11 +5885,6 @@
               "$ref": "./common.json#/definitions/CommonErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "StaticCidrs_Create": {
-            "$ref": "./examples/StaticCidrs_Create.json"
-          }
         }
       },
       "delete": {
@@ -6586,11 +5952,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/CommonErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "StaticCidrs_Delete": {
-            "$ref": "./examples/StaticCidrs_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -6679,11 +6040,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "VerifierWorkspaceList": {
-            "$ref": "./examples/VerifierWorkspaceList.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -6736,11 +6092,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/CommonErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "VerifierWorkspaceGet": {
-            "$ref": "./examples/VerifierWorkspaceGet.json"
           }
         }
       },
@@ -6813,11 +6164,6 @@
               "$ref": "./common.json#/definitions/CommonErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "VerifierWorkspaceCreate": {
-            "$ref": "./examples/VerifierWorkspacePut.json"
-          }
         }
       },
       "patch": {
@@ -6882,11 +6228,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/CommonErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "VerifierWorkspacePatch": {
-            "$ref": "./examples/VerifierWorkspacePatch.json"
           }
         }
       },
@@ -6954,11 +6295,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/CommonErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "VerifierWorkspaceDelete": {
-            "$ref": "./examples/VerifierWorkspaceDelete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -7055,11 +6391,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "ReachabilityAnalysisIntentList": {
-            "$ref": "./examples/ReachabilityAnalysisIntentList.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -7120,11 +6451,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/CommonErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "ReachabilityAnalysisIntentGet": {
-            "$ref": "./examples/ReachabilityAnalysisIntentGet.json"
           }
         }
       },
@@ -7198,11 +6524,6 @@
               "$ref": "./common.json#/definitions/CommonErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "ReachabilityAnalysisIntentCreate": {
-            "$ref": "./examples/ReachabilityAnalysisIntentPut.json"
-          }
         }
       },
       "delete": {
@@ -7259,11 +6580,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/CommonErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "ReachabilityAnalysisIntentDelete": {
-            "$ref": "./examples/ReachabilityAnalysisIntentDelete.json"
           }
         }
       }
@@ -7356,11 +6672,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "ReachabilityAnalysisRunList": {
-            "$ref": "./examples/ReachabilityAnalysisRunList.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -7421,11 +6732,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/CommonErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "ReachabilityAnalysisRunGet": {
-            "$ref": "./examples/ReachabilityAnalysisRunGet.json"
           }
         }
       },
@@ -7499,11 +6805,6 @@
               "$ref": "./common.json#/definitions/CommonErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "ReachabilityAnalysisRunCreate": {
-            "$ref": "./examples/ReachabilityAnalysisRunPut.json"
-          }
         }
       },
       "delete": {
@@ -7573,11 +6874,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "ReachabilityAnalysisRunDelete": {
-            "$ref": "./examples/ReachabilityAnalysisRunDelete.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -7614,11 +6910,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List resource group network profiles": {
-            "$ref": "./examples/NetworkProfileList.json"
           }
         },
         "x-ms-pageable": {
@@ -7670,14 +6961,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get network profile": {
-            "$ref": "./examples/NetworkProfileGetConfigOnly.json"
-          },
-          "Get network profile with container network interfaces": {
-            "$ref": "./examples/NetworkProfileGetWithContainerNic.json"
           }
         }
       },
@@ -7733,11 +7016,6 @@
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Create network profile defaults": {
-            "$ref": "./examples/NetworkProfileCreateConfigOnly.json"
-          }
         }
       },
       "patch": {
@@ -7785,11 +7063,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Update network profile tags": {
-            "$ref": "./examples/NetworkProfileUpdateTags.json"
           }
         }
       },
@@ -7845,11 +7118,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Delete network profile": {
-            "$ref": "./examples/NetworkProfileDelete.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -7886,11 +7154,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List network security groups in resource group": {
-            "$ref": "./examples/NetworkSecurityGroupList.json"
           }
         },
         "x-ms-pageable": {
@@ -7942,11 +7205,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get network security group": {
-            "$ref": "./examples/NetworkSecurityGroupGet.json"
           }
         }
       },
@@ -8014,14 +7272,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Create network security group": {
-            "$ref": "./examples/NetworkSecurityGroupCreate.json"
-          },
-          "Create network security group with rule": {
-            "$ref": "./examples/NetworkSecurityGroupCreateWithRule.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/Common.NetworkSecurityGroup"
@@ -8073,11 +7323,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Update network security group tags": {
-            "$ref": "./examples/NetworkSecurityGroupUpdateTags.json"
           }
         }
       },
@@ -8133,11 +7378,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Delete network security group": {
-            "$ref": "./examples/NetworkSecurityGroupDelete.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -8181,11 +7421,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "DefaultSecurityRuleList": {
-            "$ref": "./examples/DefaultSecurityRuleList.json"
           }
         },
         "x-ms-pageable": {
@@ -8238,11 +7473,6 @@
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
           }
-        },
-        "x-ms-examples": {
-          "DefaultSecurityRuleGet": {
-            "$ref": "./examples/DefaultSecurityRuleGet.json"
-          }
         }
       }
     },
@@ -8283,11 +7513,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List network security rules in network security group": {
-            "$ref": "./examples/NetworkSecurityGroupRuleList.json"
           }
         },
         "x-ms-pageable": {
@@ -8339,11 +7564,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get network security rule in network security group": {
-            "$ref": "./examples/NetworkSecurityGroupRuleGet.json"
           }
         }
       },
@@ -8418,11 +7638,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Create security rule": {
-            "$ref": "./examples/NetworkSecurityGroupRuleCreate.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/Common.SecurityRule"
@@ -8488,11 +7703,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Delete network security rule from network security group": {
-            "$ref": "./examples/NetworkSecurityGroupRuleDelete.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -8529,11 +7739,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List all Network Virtual Appliance for a given resource group": {
-            "$ref": "./examples/NetworkVirtualApplianceListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -8585,11 +7790,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get NetworkVirtualAppliance": {
-            "$ref": "./examples/NetworkVirtualApplianceGet.json"
           }
         }
       },
@@ -8662,29 +7862,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Create NVA in VNet with PrivateNic & PublicNic": {
-            "$ref": "./examples/NetworkVirtualApplianceVnetBasicPut.json"
-          },
-          "Create NVA in VNet with PrivateNic & PublicNic, including Internet-Ingress": {
-            "$ref": "./examples/NetworkVirtualApplianceVnetIngressPut.json"
-          },
-          "Create NVA in VNet with PrivateNic & PublicNic, including NetworkProfile": {
-            "$ref": "./examples/NetworkVirtualApplianceVnetNetworkProfilePut.json"
-          },
-          "Create NVA in VNet with PrivateNic, PublicNic & AdditionalPrivateNic": {
-            "$ref": "./examples/NetworkVirtualApplianceVnetAdditionalPrivatePut.json"
-          },
-          "Create NVA in VNet with PrivateNic, PublicNic & AdditionalPublicNic": {
-            "$ref": "./examples/NetworkVirtualApplianceVnetAdditionalPublicPut.json"
-          },
-          "Create NetworkVirtualAppliance": {
-            "$ref": "./examples/NetworkVirtualAppliancePut.json"
-          },
-          "Create SaaS NetworkVirtualAppliance": {
-            "$ref": "./examples/NetworkVirtualApplianceSaaSPut.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/NetworkVirtualAppliance"
@@ -8736,11 +7913,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Update NetworkVirtualAppliance": {
-            "$ref": "./examples/NetworkVirtualApplianceUpdateTags.json"
           }
         }
       },
@@ -8794,11 +7966,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Delete NetworkVirtualAppliance": {
-            "$ref": "./examples/NetworkVirtualApplianceDelete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -8869,11 +8036,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Retrieve Boot Diagnostic logs for a given NVA VMSS instance": {
-            "$ref": "./examples/NetworkVirtualApplianceBootDiagnostics.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/NetworkVirtualApplianceInstanceId"
@@ -8922,11 +8084,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Create Network Virtual Appliance Inbound Security Rules": {
-            "$ref": "./examples/InboundSecurityRuleGet.json"
           }
         }
       },
@@ -8998,11 +8155,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Create Network Virtual Appliance Inbound Security Rules": {
-            "$ref": "./examples/InboundSecurityRulePut.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/InboundSecurityRule"
@@ -9070,11 +8222,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Reimages Specific NetworkVirtualAppliance VMs in VM Scale Set": {
-            "$ref": "./examples/NetworkVirtualApplianceSpecificReimage.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -9146,14 +8293,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Restart All NetworkVirtualAppliance VMs in VM Scale Set": {
-            "$ref": "./examples/NetworkVirtualApplianceEmptyRestart.json"
-          },
-          "Restart Specific NetworkVirtualAppliance VMs in VM Scale Set": {
-            "$ref": "./examples/NetworkVirtualApplianceSpecificRestart.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/NetworkVirtualApplianceInstanceIds"
@@ -9198,11 +8337,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List all Network Virtual Appliance sites for a given Network Virtual Appliance": {
-            "$ref": "./examples/NetworkVirtualApplianceSiteList.json"
           }
         },
         "x-ms-pageable": {
@@ -9254,11 +8388,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "GetNetwork Virtual Appliance Site": {
-            "$ref": "./examples/NetworkVirtualApplianceSiteGet.json"
           }
         }
       },
@@ -9333,11 +8462,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Create Network Virtual Appliance Site": {
-            "$ref": "./examples/NetworkVirtualApplianceSitePut.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/VirtualApplianceSite"
@@ -9403,11 +8527,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Delete Network Virtual Appliance Site": {
-            "$ref": "./examples/NetworkVirtualApplianceSiteDelete.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -9444,11 +8563,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Error"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List private endpoints in resource group": {
-            "$ref": "./examples/PrivateEndpointList.json"
           }
         },
         "x-ms-pageable": {
@@ -9500,17 +8614,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Error"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get private endpoint": {
-            "$ref": "./examples/PrivateEndpointGet.json"
-          },
-          "Get private endpoint with application security groups": {
-            "$ref": "./examples/PrivateEndpointGetWithASG.json"
-          },
-          "Get private endpoint with manual approval connection": {
-            "$ref": "./examples/PrivateEndpointGetForManualApproval.json"
           }
         }
       },
@@ -9578,17 +8681,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Create private endpoint": {
-            "$ref": "./examples/PrivateEndpointCreate.json"
-          },
-          "Create private endpoint with application security groups": {
-            "$ref": "./examples/PrivateEndpointCreateWithASG.json"
-          },
-          "Create private endpoint with manual approval connection": {
-            "$ref": "./examples/PrivateEndpointCreateForManualApproval.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/Common.PrivateEndpoint"
@@ -9647,11 +8739,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Delete private endpoint": {
-            "$ref": "./examples/PrivateEndpointDelete.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -9695,11 +8782,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List private endpoints in resource group": {
-            "$ref": "./examples/PrivateEndpointDnsZoneGroupList.json"
           }
         },
         "x-ms-pageable": {
@@ -9751,11 +8833,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get private dns zone group": {
-            "$ref": "./examples/PrivateEndpointDnsZoneGroupGet.json"
           }
         }
       },
@@ -9830,11 +8907,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Create private dns zone group": {
-            "$ref": "./examples/PrivateEndpointDnsZoneGroupCreate.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/PrivateDnsZoneGroup"
@@ -9900,11 +8972,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Delete private dns zone group": {
-            "$ref": "./examples/PrivateEndpointDnsZoneGroupDelete.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -9941,11 +9008,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Error"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List private link service in resource group": {
-            "$ref": "./examples/PrivateLinkServiceList.json"
           }
         },
         "x-ms-pageable": {
@@ -9997,11 +9059,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Error"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get private link service": {
-            "$ref": "./examples/PrivateLinkServiceGet.json"
           }
         }
       },
@@ -10069,11 +9126,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Create private link service": {
-            "$ref": "./examples/PrivateLinkServiceCreate.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/Common.PrivateLinkService"
@@ -10132,11 +9184,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Delete private link service": {
-            "$ref": "./examples/PrivateLinkServiceDelete.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -10180,11 +9227,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Error"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List private link service in resource group": {
-            "$ref": "./examples/PrivateLinkServiceListPrivateEndpointConnection.json"
           }
         },
         "x-ms-pageable": {
@@ -10244,11 +9286,6 @@
               "$ref": "./common.json#/definitions/Error"
             }
           }
-        },
-        "x-ms-examples": {
-          "Get private end point connection": {
-            "$ref": "./examples/PrivateLinkServiceGetPrivateEndpointConnection.json"
-          }
         }
       },
       "put": {
@@ -10303,11 +9340,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Error"
             }
-          }
-        },
-        "x-ms-examples": {
-          "approve or reject private end point connection for a private link service": {
-            "$ref": "./examples/PrivateLinkServiceUpdatePrivateEndpointConnection.json"
           }
         }
       },
@@ -10370,11 +9402,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "delete private end point connection for a private link service": {
-            "$ref": "./examples/PrivateLinkServiceDeletePrivateEndpointConnection.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -10411,11 +9438,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List resource group public IP addresses": {
-            "$ref": "./examples/PublicIpAddressList.json"
           }
         },
         "x-ms-pageable": {
@@ -10467,14 +9489,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get public IP address": {
-            "$ref": "./examples/PublicIpAddressGet.json"
-          },
-          "Get public IP address with StandardV2 sku": {
-            "$ref": "./examples/PublicIpAddressGetStandardV2Sku.json"
           }
         }
       },
@@ -10542,23 +9556,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Create public IP address DNS": {
-            "$ref": "./examples/PublicIpAddressCreateDns.json"
-          },
-          "Create public IP address DNS with Domain Name Label Scope": {
-            "$ref": "./examples/PublicIpAddressCreateDnsWithDomainNameLabelScope.json"
-          },
-          "Create public IP address allocation method": {
-            "$ref": "./examples/PublicIpAddressCreateCustomizedValues.json"
-          },
-          "Create public IP address defaults": {
-            "$ref": "./examples/PublicIpAddressCreateDefaults.json"
-          },
-          "Create public IP address defaults with StandardV2 Sku": {
-            "$ref": "./examples/PublicIpAddressCreateDefaultsStandardV2Sku.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/Common.PublicIPAddress"
@@ -10610,11 +9607,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Update public IP address tags": {
-            "$ref": "./examples/PublicIpAddressUpdateTags.json"
           }
         }
       },
@@ -10668,11 +9660,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Delete public IP address": {
-            "$ref": "./examples/PublicIpAddressDelete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -10732,11 +9719,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get Ddos Protection Status of a Public IP Address": {
-            "$ref": "./examples/PublicIpAddressGetDdosProtectionStatus.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -10813,11 +9795,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Disassociate public IP address ": {
-            "$ref": "./examples/PublicIpAddressDisassociateCloudServiceReservedPublicIp.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/Common.PublicIPAddress"
@@ -10892,11 +9869,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Reserve public IP address ": {
-            "$ref": "./examples/PublicIpAddressReserve.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/Common.PublicIPAddress"
@@ -10934,11 +9906,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List resource group public IP prefixes": {
-            "$ref": "./examples/PublicIpPrefixList.json"
           }
         },
         "x-ms-pageable": {
@@ -10990,14 +9957,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get public IP prefix": {
-            "$ref": "./examples/PublicIpPrefixGet.json"
-          },
-          "Get public IP prefix with StandardV2 sku": {
-            "$ref": "./examples/PublicIpPrefixGetStandardV2Sku.json"
           }
         }
       },
@@ -11065,17 +10024,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Create public IP prefix allocation method": {
-            "$ref": "./examples/PublicIpPrefixCreateCustomizedValues.json"
-          },
-          "Create public IP prefix defaults": {
-            "$ref": "./examples/PublicIpPrefixCreateDefaults.json"
-          },
-          "Create public IP prefix defaults with StandardV2 Sku": {
-            "$ref": "./examples/PublicIpPrefixCreateDefaultsStandardV2Sku.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/PublicIPPrefix"
@@ -11127,11 +10075,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Update public IP prefix tags": {
-            "$ref": "./examples/PublicIpPrefixUpdateTags.json"
           }
         }
       },
@@ -11187,11 +10130,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Delete public IP prefix": {
-            "$ref": "./examples/PublicIpPrefixDelete.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -11228,11 +10166,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List route tables in resource group": {
-            "$ref": "./examples/RouteTableList.json"
           }
         },
         "x-ms-pageable": {
@@ -11284,11 +10217,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get route table": {
-            "$ref": "./examples/RouteTableGet.json"
           }
         }
       },
@@ -11356,20 +10284,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Create route table": {
-            "$ref": "./examples/RouteTableCreate.json"
-          },
-          "Create route table with ECMP route": {
-            "$ref": "./examples/RouteTableCreateWithEcmpRoute.json"
-          },
-          "Create route table with disable peering route": {
-            "$ref": "./examples/RouteTableCreateWithDisablePeeringRoute.json"
-          },
-          "Create route table with route": {
-            "$ref": "./examples/RouteTableCreateWithRoute.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/Common.RouteTable"
@@ -11421,11 +10335,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Update route table tags": {
-            "$ref": "./examples/RouteTableUpdateTags.json"
           }
         }
       },
@@ -11481,11 +10390,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Delete route table": {
-            "$ref": "./examples/RouteTableDelete.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -11529,11 +10433,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List routes": {
-            "$ref": "./examples/RouteTableRouteList.json"
           }
         },
         "x-ms-pageable": {
@@ -11585,11 +10484,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get route": {
-            "$ref": "./examples/RouteTableRouteGet.json"
           }
         }
       },
@@ -11664,14 +10558,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Create ECMP route": {
-            "$ref": "./examples/RouteTableRouteCreateEcmp.json"
-          },
-          "Create route": {
-            "$ref": "./examples/RouteTableRouteCreate.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/Common.Route"
@@ -11737,11 +10623,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Delete route": {
-            "$ref": "./examples/RouteTableRouteDelete.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -11778,11 +10659,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List all Security Partner Providers for a given resource group": {
-            "$ref": "./examples/SecurityPartnerProviderListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -11827,11 +10703,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get Security Partner Provider": {
-            "$ref": "./examples/SecurityPartnerProviderGet.json"
           }
         }
       },
@@ -11899,11 +10770,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Create Security Partner Provider": {
-            "$ref": "./examples/SecurityPartnerProviderPut.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/SecurityPartnerProvider"
@@ -11955,11 +10821,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Update Security Partner Provider Tags": {
-            "$ref": "./examples/SecurityPartnerProviderUpdateTags.json"
           }
         }
       },
@@ -12015,11 +10876,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Delete Security Partner Provider": {
-            "$ref": "./examples/SecurityPartnerProviderDelete.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -12056,11 +10912,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List virtual networks in resource group": {
-            "$ref": "./examples/VirtualNetworkList.json"
           }
         },
         "x-ms-pageable": {
@@ -12112,17 +10963,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get virtual network": {
-            "$ref": "./examples/VirtualNetworkGet.json"
-          },
-          "Get virtual network with a delegated subnet": {
-            "$ref": "./examples/VirtualNetworkGetWithSubnetDelegation.json"
-          },
-          "Get virtual network with service association links": {
-            "$ref": "./examples/VirtualNetworkGetWithServiceAssociationLink.json"
           }
         }
       },
@@ -12190,35 +11030,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Create virtual network": {
-            "$ref": "./examples/VirtualNetworkCreate.json"
-          },
-          "Create virtual network with Bgp Communities": {
-            "$ref": "./examples/VirtualNetworkCreateWithBgpCommunities.json"
-          },
-          "Create virtual network with delegated subnets": {
-            "$ref": "./examples/VirtualNetworkCreateSubnetWithDelegation.json"
-          },
-          "Create virtual network with encryption": {
-            "$ref": "./examples/VirtualNetworkCreateWithEncryption.json"
-          },
-          "Create virtual network with ipamPool": {
-            "$ref": "./examples/VirtualNetworkCreateWithIpamPool.json"
-          },
-          "Create virtual network with service endpoints": {
-            "$ref": "./examples/VirtualNetworkCreateServiceEndpoints.json"
-          },
-          "Create virtual network with service endpoints and service endpoint policy": {
-            "$ref": "./examples/VirtualNetworkCreateServiceEndpointPolicy.json"
-          },
-          "Create virtual network with subnet": {
-            "$ref": "./examples/VirtualNetworkCreateSubnet.json"
-          },
-          "Create virtual network with subnet containing address prefixes": {
-            "$ref": "./examples/VirtualNetworkCreateSubnetWithAddressPrefixes.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/Common.VirtualNetwork"
@@ -12270,11 +11081,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Update virtual network tags": {
-            "$ref": "./examples/VirtualNetworkUpdateTags.json"
           }
         }
       },
@@ -12330,11 +11136,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Delete virtual network": {
-            "$ref": "./examples/VirtualNetworkDelete.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -12382,11 +11183,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Check IP address availability": {
-            "$ref": "./examples/VirtualNetworkCheckIPAddressAvailability.json"
           }
         }
       }
@@ -12456,11 +11252,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Get Ddos Protection Status of a Virtual Network": {
-            "$ref": "./examples/VirtualNetworkGetDdosProtectionStatus.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/VirtualNetworkDdosProtectionStatusResult"
@@ -12469,6 +11260,75 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/moveIpConfigurations": {
+      "post": {
+        "operationId": "VirtualNetworks_MoveIpConfigurations",
+        "tags": [
+          "VirtualNetworks"
+        ],
+        "description": "Move IP configurations from one virtual network to another.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualNetworkName",
+            "in": "path",
+            "description": "The name of the virtual network.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Parameters supplied to move IP configurations from one virtual network to another.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MoveIpConfigurationsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully."
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets": {
@@ -12508,11 +11368,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List subnets": {
-            "$ref": "./examples/SubnetList.json"
           }
         },
         "x-ms-pageable": {
@@ -12571,17 +11426,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get subnet": {
-            "$ref": "./examples/SubnetGet.json"
-          },
-          "Get subnet with a delegation": {
-            "$ref": "./examples/SubnetGetWithDelegation.json"
-          },
-          "Get subnet with sharing scope": {
-            "$ref": "./examples/SubnetGetWithSharingScope.json"
           }
         }
       },
@@ -12656,26 +11500,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Create Subnet with service gateway": {
-            "$ref": "./examples/SubnetCreateWithServiceGateway.json"
-          },
-          "Create subnet": {
-            "$ref": "./examples/SubnetCreate.json"
-          },
-          "Create subnet with a delegation": {
-            "$ref": "./examples/SubnetCreateWithDelegation.json"
-          },
-          "Create subnet with service endpoints": {
-            "$ref": "./examples/SubnetCreateServiceEndpoint.json"
-          },
-          "Create subnet with service endpoints with network identifier": {
-            "$ref": "./examples/SubnetCreateServiceEndpointNetworkIdentifier.json"
-          },
-          "Create subnet with sharing scope": {
-            "$ref": "./examples/SubnetCreateWithSharingScope.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/Common.Subnet"
@@ -12739,11 +11563,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Delete subnet": {
-            "$ref": "./examples/SubnetDelete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -12815,11 +11634,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Prepare Network Policies": {
-            "$ref": "./examples/SubnetPrepareNetworkPolicies.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -12868,11 +11682,6 @@
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Get Resource Navigation Links": {
-            "$ref": "./examples/VirtualNetworkGetResourceNavigationLinks.json"
-          }
         }
       }
     },
@@ -12917,11 +11726,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get Service Association Links": {
-            "$ref": "./examples/VirtualNetworkGetServiceAssociationLinks.json"
           }
         }
       }
@@ -12989,11 +11793,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Unprepare Network Policies": {
-            "$ref": "./examples/SubnetUnprepareNetworkPolicies.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -13034,11 +11833,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "VnetGetUsage": {
-            "$ref": "./examples/VirtualNetworkListUsage.json"
           }
         },
         "x-ms-pageable": {
@@ -13083,14 +11877,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List peerings": {
-            "$ref": "./examples/VirtualNetworkPeeringList.json"
-          },
-          "List peerings with remote virtual network encryption": {
-            "$ref": "./examples/VirtualNetworkPeeringListWithRemoteVirtualNetworkEncryption.json"
           }
         },
         "x-ms-pageable": {
@@ -13142,20 +11928,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get V6 subnet peering": {
-            "$ref": "./examples/VirtualNetworkV6SubnetPeeringGet.json"
-          },
-          "Get peering": {
-            "$ref": "./examples/VirtualNetworkPeeringGet.json"
-          },
-          "Get peering with remote virtual network encryption": {
-            "$ref": "./examples/VirtualNetworkPeeringGetWithRemoteVirtualNetworkEncryption.json"
-          },
-          "Get subnet peering": {
-            "$ref": "./examples/VirtualNetworkSubnetPeeringGet.json"
           }
         }
       },
@@ -13251,29 +12023,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Create V6 Subnet peering": {
-            "$ref": "./examples/VirtualNetworkV6SubnetPeeringCreate.json"
-          },
-          "Create peering": {
-            "$ref": "./examples/VirtualNetworkPeeringCreate.json"
-          },
-          "Create peering with remote virtual network encryption": {
-            "$ref": "./examples/VirtualNetworkPeeringCreateWithRemoteVirtualNetworkEncryption.json"
-          },
-          "Create subnet peering": {
-            "$ref": "./examples/VirtualNetworkSubnetPeeringCreate.json"
-          },
-          "Sync Peering": {
-            "$ref": "./examples/VirtualNetworkPeeringSync.json"
-          },
-          "Sync V6 Subnet Peering": {
-            "$ref": "./examples/VirtualNetworkV6SubnetPeeringSync.json"
-          },
-          "Sync subnet Peering": {
-            "$ref": "./examples/VirtualNetworkSubnetPeeringSync.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/Common.VirtualNetworkPeering"
@@ -13339,11 +12088,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Delete peering": {
-            "$ref": "./examples/VirtualNetworkPeeringDelete.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -13380,11 +12124,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Error"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List all Virtual Router for a given resource group": {
-            "$ref": "./examples/VirtualRouterListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -13436,11 +12175,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Error"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get VirtualRouter": {
-            "$ref": "./examples/VirtualRouterGet.json"
           }
         }
       },
@@ -13508,11 +12242,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Create VirtualRouter": {
-            "$ref": "./examples/VirtualRouterPut.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/VirtualRouter"
@@ -13571,11 +12300,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Delete VirtualRouter": {
-            "$ref": "./examples/VirtualRouterDelete.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -13619,11 +12343,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Error"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List all Virtual Router Peerings for a given Virtual Router": {
-            "$ref": "./examples/VirtualRouterPeeringList.json"
           }
         },
         "x-ms-pageable": {
@@ -13675,11 +12394,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Error"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get Virtual Router Peering": {
-            "$ref": "./examples/VirtualRouterPeeringGet.json"
           }
         }
       },
@@ -13754,11 +12468,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Create Virtual Router Peering": {
-            "$ref": "./examples/VirtualRouterPeeringPut.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/VirtualRouterPeering"
@@ -13824,11 +12533,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Delete VirtualRouterPeering": {
-            "$ref": "./examples/VirtualRouterPeeringDelete.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -13872,11 +12576,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List cloud service network interfaces": {
-            "$ref": "./examples/CloudServiceNetworkInterfaceList.json"
           }
         },
         "x-ms-pageable": {
@@ -13924,11 +12623,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get swap resource list": {
-            "$ref": "./examples/CloudServiceSwapList.json"
           }
         }
       }
@@ -13987,11 +12681,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get swap resource": {
-            "$ref": "./examples/CloudServiceSwapGet.json"
           }
         }
       },
@@ -14070,11 +12759,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Put vip swap operation.": {
-            "$ref": "./examples/CloudServiceSwapPut.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -14115,11 +12799,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "ListVMSSPublicIP": {
-            "$ref": "./examples/CloudServicePublicIpListAll.json"
           }
         },
         "x-ms-pageable": {
@@ -14171,11 +12850,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List cloud service role instance network interfaces": {
-            "$ref": "./examples/CloudServiceRoleInstanceNetworkInterfaceList.json"
           }
         },
         "x-ms-pageable": {
@@ -14242,11 +12916,6 @@
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Get cloud service network interface": {
-            "$ref": "./examples/CloudServiceNetworkInterfaceGet.json"
-          }
         }
       }
     },
@@ -14305,11 +12974,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "ListVMSSVMPublicIP": {
-            "$ref": "./examples/CloudServiceRoleInstancePublicIpList.json"
           }
         },
         "x-ms-pageable": {
@@ -14387,11 +13051,6 @@
               "$ref": "./common.json#/definitions/Common.CloudError"
             }
           }
-        },
-        "x-ms-examples": {
-          "GetVMSSPublicIP": {
-            "$ref": "./examples/CloudServicePublicIpGet.json"
-          }
         }
       }
     }
@@ -14455,10 +13114,10 @@
         "addressPrefixes": {
           "type": "array",
           "description": "The list of address prefixes in CIDR notation. Supports both IPv4 and IPv6 CIDR notation (e.g. '10.0.0.0/16', '2001:db8::/32').",
+          "minItems": 1,
           "items": {
             "type": "string"
-          },
-          "minItems": 1
+          }
         },
         "provisioningState": {
           "$ref": "./common.json#/definitions/Common.ProvisioningState",
@@ -16503,11 +15162,6 @@
         "deleteOption": {
           "$ref": "./common.json#/definitions/Common.DeleteOptions",
           "description": "Specify what happens to the public IP address when the VM using it is deleted"
-        },
-        "upgradedToV2": {
-          "type": "boolean",
-          "description": "Whether the public IP address SKU has been upgraded from Standard to StandardV2.",
-          "readOnly": true
         }
       }
     },
@@ -17868,6 +16522,13 @@
           "description": "Properties of the DDoS protection plan.",
           "x-ms-client-flatten": true
         },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "etag": {
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated.",
@@ -18840,6 +17501,62 @@
           "description": "String representing a friendly name for the resource."
         }
       }
+    },
+    "MoveIpConfigurationItem": {
+      "type": "object",
+      "description": "An item representing a source and target IP configuration for a move operation.",
+      "properties": {
+        "sourceIpConfiguration": {
+          "$ref": "#/definitions/MoveIpConfigurationResourceReference",
+          "description": "The source IP configuration to move from."
+        },
+        "targetIpConfiguration": {
+          "$ref": "#/definitions/MoveIpConfigurationResourceReference",
+          "description": "The target IP configuration to move to."
+        }
+      },
+      "required": [
+        "sourceIpConfiguration",
+        "targetIpConfiguration"
+      ]
+    },
+    "MoveIpConfigurationResourceReference": {
+      "type": "object",
+      "description": "Reference to an IP configuration resource by ARM resource ID.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The ARM resource ID of the IP configuration.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/networkInterfaces/ipConfigurations"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "MoveIpConfigurationsRequest": {
+      "type": "object",
+      "description": "Request body for the MoveIpConfigurations operation.",
+      "properties": {
+        "moveIpConfigurationItems": {
+          "type": "array",
+          "description": "A list of IP configuration move items.",
+          "items": {
+            "$ref": "#/definitions/MoveIpConfigurationItem"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "moveIpConfigurationItems"
+      ]
     },
     "NatGatewayListResult": {
       "type": "object",
@@ -19979,11 +18696,6 @@
         "natGateway": {
           "$ref": "#/definitions/Common.NatGateway",
           "description": "NatGateway of Public IP Prefix."
-        },
-        "upgradedToV2": {
-          "type": "boolean",
-          "description": "Whether the public IP prefix SKU has been upgraded from Standard to StandardV2.",
-          "readOnly": true
         }
       }
     },
