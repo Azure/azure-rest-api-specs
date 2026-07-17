@@ -2969,6 +2969,23 @@ model ClusterUpgradeSettings {
    * Settings for overrides.
    */
   overrideSettings?: UpgradeOverrideSettings;
+
+  /**
+   * Settings for upgrade gating on the cluster. When enabled, the upgrade waits for health signal validation and aborts if unhealthy signals are observed. For more information, see https://aka.ms/aks/upgrade-gate.
+   */
+  @added(Versions.v2026_07_02_preview)
+  upgradeGateSettings?: UpgradeGateSettings;
+}
+
+/**
+ * Settings for health-aware upgrade gating. For more information, see https://aka.ms/aks/upgrade-gate.
+ */
+@added(Versions.v2026_07_02_preview)
+model UpgradeGateSettings {
+  /**
+   * Whether upgrade gating is enabled. Defaults to false when omitted.
+   */
+  enabled?: boolean;
 }
 
 /**

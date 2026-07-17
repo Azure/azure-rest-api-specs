@@ -444,6 +444,12 @@ model AgentPoolUpgradeSettings {
    * Defines the behavior for undrainable nodes during upgrade. The most common cause of undrainable nodes is Pod Disruption Budgets (PDBs), but other issues, such as pod termination grace period is exceeding the remaining per-node drain timeout or pod is still being in a running state, can also cause undrainable nodes.
    */
   undrainableNodeBehavior?: UndrainableNodeBehavior;
+
+  /**
+   * Settings for upgrade gating on this agent pool. When enabled, the upgrade waits for health signal validation and aborts if unhealthy signals are observed. For more information, see https://aka.ms/aks/upgrade-gate.
+   */
+  @added(Versions.v2026_07_02_preview)
+  upgradeGateSettings?: UpgradeGateSettings;
 }
 
 /**

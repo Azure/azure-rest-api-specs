@@ -7511,10 +7511,6 @@
         "undrainableNodeBehavior": {
           "$ref": "#/definitions/UndrainableNodeBehavior",
           "description": "Defines the behavior for undrainable nodes during upgrade. The most common cause of undrainable nodes is Pod Disruption Budgets (PDBs), but other issues, such as pod termination grace period is exceeding the remaining per-node drain timeout or pod is still being in a running state, can also cause undrainable nodes."
-        },
-        "enableUpgradeGate": {
-          "type": "boolean",
-          "description": "Whether to enable upgrade gating for this agent pool. When enabled, the upgrade will wait for health signal validation and abort if getting unhealthy signal."
         }
       }
     },
@@ -7711,10 +7707,6 @@
         "overrideSettings": {
           "$ref": "#/definitions/UpgradeOverrideSettings",
           "description": "Settings for overrides."
-        },
-        "enableUpgradeGate": {
-          "type": "boolean",
-          "description": "Whether to enable upgrade gating for the cluster. When enabled, the upgrade will wait for health signal validation and abort if getting unhealthy signal."
         }
       }
     },
