@@ -16,7 +16,11 @@ using Microsoft.App;
 @@clientName(GenevaActionParameter, "GenevaActionParameterInfo", "csharp");
 
 // Boolean properties must use a verb prefix (BOOL001).
-@@clientName(GenevaActionConfig.approvalRequired, "IsApprovalRequired", "csharp");
+@@clientName(
+  GenevaActionConfig.approvalRequired,
+  "IsApprovalRequired",
+  "csharp"
+);
 @@clientName(SupportedAgentModelProperties.default, "IsDefault", "csharp");
 @@clientName(AgentIdentity.enabled, "IsEnabled", "csharp");
 
@@ -37,7 +41,11 @@ using Microsoft.App;
 @@alternateType(AgentIdentity.clientId, Azure.Core.uuid, "csharp");
 @@alternateType(GenevaActionsPolicy.clientId, Azure.Core.uuid, "csharp");
 @@alternateType(GenevaActionsPolicyPatch.clientId, Azure.Core.uuid, "csharp");
-@@alternateType(ApplicationInsightsConfiguration.appId, Azure.Core.uuid, "csharp");
+@@alternateType(
+  ApplicationInsightsConfiguration.appId,
+  Azure.Core.uuid,
+  "csharp"
+);
 
 // Add RP/domain context to otherwise-generic type names to avoid ambiguity in
 // IntelliSense and future breaking renames (contextual naming).
