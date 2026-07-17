@@ -14,6 +14,7 @@
           "scaleUnits": [
             {
               "deploymentData": {
+                "storageType": "SANISCSI",
                 "iScsiConfig": {
                   "iScsiNetworkConfig": {
                     "adapterProperties": {
@@ -21,24 +22,22 @@
                       "priorityValue8021ActionIscsi": 4,
                       "bandwidthPercentageIscsi": 50
                     },
-                    "targetPortalAddresses": [
-                      {
-                        "ipAddress": "10.0.0.1",
-                        "nextHop": "10.10.50.1"
-                      }
-                    ],
                     "adapterIPConfig": [
                       {
                         "networkAdapterName": "iSCSI-A",
                         "vlanId": 401,
-                        "addressPrefix": "10.10.50.0/24"
+                        "addressPrefix": "10.10.50.0/24",
+                        "targetPortalAddresses": [
+                          {
+                            "ipAddress": "10.0.0.1",
+                            "nextHop": "10.10.50.1"
+                          }
+                        ]
                       }
                     ]
                   },
                   "chapSettings": {
-                    "chapType": "Bidirectional",
-                    "chapUsername": "hci-initiator",
-                    "mutualChapUsername": "hci-target"
+                    "chapType": "Bidirectional"
                   },
                   "initiatorIqn": "iqn.2025-01.com.example:storage-target"
                 },
@@ -75,6 +74,7 @@
             "scaleUnits": [
               {
                 "deploymentData": {
+                  "storageType": "SANISCSI",
                   "iScsiConfig": {
                     "iScsiNetworkConfig": {
                       "adapterProperties": {
@@ -82,24 +82,22 @@
                         "priorityValue8021ActionIscsi": 4,
                         "bandwidthPercentageIscsi": 50
                       },
-                      "targetPortalAddresses": [
-                        {
-                          "ipAddress": "10.0.0.1",
-                          "nextHop": "10.10.50.1"
-                        }
-                      ],
                       "adapterIPConfig": [
                         {
                           "networkAdapterName": "iSCSI-A",
                           "vlanId": 401,
-                          "addressPrefix": "10.10.50.0/24"
+                          "addressPrefix": "10.10.50.0/24",
+                          "targetPortalAddresses": [
+                            {
+                              "ipAddress": "10.0.0.1",
+                              "nextHop": "10.10.50.1"
+                            }
+                          ]
                         }
                       ]
                     },
                     "chapSettings": {
-                      "chapType": "Bidirectional",
-                      "chapUsername": "hci-initiator",
-                      "mutualChapUsername": "hci-target"
+                      "chapType": "Bidirectional"
                     },
                     "initiatorIqn": "iqn.2025-01.com.example:storage-target"
                   },
@@ -142,6 +140,7 @@
             "scaleUnits": [
               {
                 "deploymentData": {
+                  "storageType": "SANISCSI",
                   "iScsiConfig": {
                     "iScsiNetworkConfig": {
                       "adapterProperties": {
@@ -149,24 +148,22 @@
                         "priorityValue8021ActionIscsi": 4,
                         "bandwidthPercentageIscsi": 50
                       },
-                      "targetPortalAddresses": [
-                        {
-                          "ipAddress": "10.0.0.1",
-                          "nextHop": "10.10.50.1"
-                        }
-                      ],
                       "adapterIPConfig": [
                         {
                           "networkAdapterName": "iSCSI-A",
                           "vlanId": 401,
-                          "addressPrefix": "10.10.50.0/24"
+                          "addressPrefix": "10.10.50.0/24",
+                          "targetPortalAddresses": [
+                            {
+                              "ipAddress": "10.0.0.1",
+                              "nextHop": "10.10.50.1"
+                            }
+                          ]
                         }
                       ]
                     },
                     "chapSettings": {
-                      "chapType": "Bidirectional",
-                      "chapUsername": "hci-initiator",
-                      "mutualChapUsername": "hci-target"
+                      "chapType": "Bidirectional"
                     },
                     "initiatorIqn": "iqn.2025-01.com.example:storage-target"
                   },

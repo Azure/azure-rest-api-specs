@@ -10429,6 +10429,11 @@ model EdgeMachineScaleUnits {
 @added(Versions.v2026_05_01_preview)
 model EdgeMachineDeploymentData {
   /**
+   * Storage type for the edge machine node.
+   */
+  storageType?: NodeStorageType;
+
+  /**
    * iSCSI configuration for the edge machine.
    */
   iScsiConfig?: IscsiConfig;
@@ -10439,6 +10444,20 @@ model EdgeMachineDeploymentData {
    */
   @identifiers(#[])
   secrets?: EceDeploymentSecrets[];
+}
+
+/**
+ * Node storage type for an edge machine.
+ */
+@added(Versions.v2026_05_01_preview)
+union NodeStorageType {
+  string,
+
+  /** Storage Spaces Direct (S2D) storage type. */
+  S2D: "S2D",
+
+  /** SAN iSCSI storage type. */
+  SanIscsi: "SANISCSI",
 }
 
 /**
@@ -10471,12 +10490,6 @@ model IscsiNetworkConfig {
    * Common adapter properties applied to all iSCSI network adapters.
    */
   adapterProperties?: IscsiAdapterProperties;
-
-  /**
-   * Target portal addresses reachable through the iSCSI network adapters.
-   */
-  @identifiers(#["ipAddress"])
-  targetPortalAddresses?: IscsiTargetPortalAddress[];
 
   /**
    * Per-adapter IP configuration for the iSCSI network adapters.
@@ -10526,6 +10539,12 @@ model IscsiAdapterIPConfig {
    * Address prefix (CIDR notation) for the iSCSI network adapter.
    */
   addressPrefix?: string;
+
+  /**
+   * Target portal addresses reachable through this iSCSI network adapter.
+   */
+  @identifiers(#["ipAddress"])
+  targetPortalAddresses?: IscsiTargetPortalAddress[];
 }
 
 /**
@@ -10545,9 +10564,10 @@ model IscsiTargetPortalAddress {
 }
 
 /**
- * CHAP authentication settings for an iSCSI connection. The CHAP secrets
- * themselves are referenced via the deployment data secrets (Key Vault), not
- * carried inline.
+ * CHAP authentication settings for an iSCSI connection. The CHAP credentials
+ * (username and secret) are referenced via the deployment data secrets
+ * (Key Vault) using the chapCredential and mutualChapCredential secret names,
+ * not carried inline.
  */
 @added(Versions.v2026_05_01_preview)
 model IscsiChapSettings {
@@ -10555,17 +10575,6 @@ model IscsiChapSettings {
    * The CHAP authentication mode to use for the iSCSI connection.
    */
   chapType?: IscsiChapType;
-
-  /**
-   * CHAP username used by the initiator to authenticate to the target.
-   */
-  chapUsername?: string;
-
-  /**
-   * Mutual CHAP username used by the target to authenticate to the initiator.
-   * Applicable only when chapType is Bidirectional.
-   */
-  mutualChapUsername?: string;
 }
 
 /**

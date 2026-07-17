@@ -12869,6 +12869,10 @@
       "type": "object",
       "description": "The deployment data of an edge machine.",
       "properties": {
+        "storageType": {
+          "$ref": "#/definitions/NodeStorageType",
+          "description": "Storage type for the edge machine node."
+        },
         "iScsiConfig": {
           "$ref": "#/definitions/IscsiConfig",
           "description": "iSCSI configuration for the edge machine."
@@ -16563,6 +16567,16 @@
         "addressPrefix": {
           "type": "string",
           "description": "Address prefix (CIDR notation) for the iSCSI network adapter."
+        },
+        "targetPortalAddresses": {
+          "type": "array",
+          "description": "Target portal addresses reachable through this iSCSI network adapter.",
+          "items": {
+            "$ref": "#/definitions/IscsiTargetPortalAddress"
+          },
+          "x-ms-identifiers": [
+            "ipAddress"
+          ]
         }
       }
     },
@@ -16589,19 +16603,11 @@
     },
     "IscsiChapSettings": {
       "type": "object",
-      "description": "CHAP authentication settings for an iSCSI connection. The CHAP secrets\nthemselves are referenced via the deployment data secrets (Key Vault), not\ncarried inline.",
+      "description": "CHAP authentication settings for an iSCSI connection. The CHAP credentials\n(username and secret) are referenced via the deployment data secrets\n(Key Vault) using the chapCredential and mutualChapCredential secret names,\nnot carried inline.",
       "properties": {
         "chapType": {
           "$ref": "#/definitions/IscsiChapType",
           "description": "The CHAP authentication mode to use for the iSCSI connection."
-        },
-        "chapUsername": {
-          "type": "string",
-          "description": "CHAP username used by the initiator to authenticate to the target."
-        },
-        "mutualChapUsername": {
-          "type": "string",
-          "description": "Mutual CHAP username used by the target to authenticate to the initiator.\nApplicable only when chapType is Bidirectional."
         }
       }
     },
@@ -16660,16 +16666,6 @@
         "adapterProperties": {
           "$ref": "#/definitions/IscsiAdapterProperties",
           "description": "Common adapter properties applied to all iSCSI network adapters."
-        },
-        "targetPortalAddresses": {
-          "type": "array",
-          "description": "Target portal addresses reachable through the iSCSI network adapters.",
-          "items": {
-            "$ref": "#/definitions/IscsiTargetPortalAddress"
-          },
-          "x-ms-identifiers": [
-            "ipAddress"
-          ]
         },
         "adapterIPConfig": {
           "type": "array",
@@ -18117,6 +18113,30 @@
         ]
       },
       "readOnly": true
+    },
+    "NodeStorageType": {
+      "type": "string",
+      "description": "Node storage type for an edge machine.",
+      "enum": [
+        "S2D",
+        "SANISCSI"
+      ],
+      "x-ms-enum": {
+        "name": "NodeStorageType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "S2D",
+            "value": "S2D",
+            "description": "Storage Spaces Direct (S2D) storage type."
+          },
+          {
+            "name": "SanIscsi",
+            "value": "SANISCSI",
+            "description": "SAN iSCSI storage type."
+          }
+        ]
+      }
     },
     "OSOperationType": {
       "type": "string",
