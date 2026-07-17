@@ -13,21 +13,22 @@ namespace Microsoft.NetworkCloud;
 /**
  * The name of the virtual machine console.
  */
-model ConsoleNameParameter
-  is ResourceNameParameter<
-    Resource = Console,
-    KeyName = "consoleName",
-    SegmentName = "consoles",
-    NamePattern = "^default$"
-  >;
+model ConsoleNameParameter is ResourceNameParameter<
+  Resource = Console,
+  KeyName = "consoleName",
+  SegmentName = "consoles",
+  NamePattern = "^default$"
+>;
 
 /**
  * Console represents the console of an on-premises Network Cloud virtual machine.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "legacy resource using legacy features"
 @parentResource(VirtualMachine)
-model Console
-  is Azure.ResourceManager.TrackedResource<ConsoleProperties, false> {
+model Console is Azure.ResourceManager.TrackedResource<
+  ConsoleProperties,
+  false
+> {
   ...ConsoleNameParameter;
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
   ...RequiredExtendedLocationProperty;

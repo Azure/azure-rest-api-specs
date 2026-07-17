@@ -167,4 +167,4 @@ using Microsoft.Mission;
 @@clientName(ServiceIdentifier.PrivateDNSZones, "PrivateDnsZones", "csharp");
 @@clientName(ActionPerformed, "ApproverActionPerformed", "csharp");
 
-@@clientName(Microsoft.Mission, "VirtualEnclavesMgmtClient", "python");
+@@clientName(Microsoft.Mission, "EnclaveMgmtClient", "python");
