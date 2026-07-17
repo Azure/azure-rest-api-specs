@@ -2,20 +2,19 @@
 
 These settings apply only when `--az` is specified on the command line.
 
-``` yaml $(az)
+```yaml $(az)
 az:
-    extensions: healthbot
-    namespace: azure.mgmt.healthbot
-    package-name: azure-mgmt-healthbot
+  extensions: healthbot
+  namespace: azure.mgmt.healthbot
+  package-name: azure-mgmt-healthbot
 az-output-folder: $(azure-cli-extension-folder)/src/healthbot
 python-sdk-output-folder: "$(az-output-folder)/azext_healthbot/vendored_sdks/healthbot"
 ```
 
-``` yaml 
+```yaml
 directive:
-    - where:
-          group: healthbot bot
-      set:
-          group: healthbot
-
+  - where:
+      group: healthbot bot
+    set:
+      group: healthbot
 ```

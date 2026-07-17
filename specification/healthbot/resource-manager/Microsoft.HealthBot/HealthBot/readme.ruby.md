@@ -17,4 +17,5 @@ Please also specify `--ruby-sdks-folder=<path to the root directory of your azur
 namespace: Microsoft.HealthBot
 output-folder: $(ruby-sdks-folder)/healthbot
 ```
+
 prev
