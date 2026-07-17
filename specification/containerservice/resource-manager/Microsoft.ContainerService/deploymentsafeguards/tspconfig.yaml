@@ -6,6 +6,7 @@ emit:
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"
   disable:
     "@azure-tools/typespec-azure-resource-manager/arm-common-types-version": "New rule"
 options:
@@ -16,6 +17,9 @@ options:
     output-file: "{version-status}/{version}/deploymentsafeguards.json"
     omit-unreachable-types: true
     use-read-only-status-schema: true
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.ContainerServiceSafeguards"
+    emitter-output-dir: "{output-dir}/sdk/containerservicesafeguards/{namespace}"
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-containerservicesafeguards"
     namespace: "azure.mgmt.containerservicesafeguards"

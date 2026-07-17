@@ -26,9 +26,8 @@ interface Terraform {
   )
   exportTerraform is ArmProviderActionAsync<
     BaseExportModel,
-
-      | ArmAcceptedLroResponse<"Resource operation accepted.", LroHeaders>
-      | ArmResponse<TerraformOperationStatus>,
+    | ArmAcceptedLroResponse<"Resource operation accepted.", LroHeaders>
+    | ArmResponse<TerraformOperationStatus>,
     Scope = SubscriptionActionScope,
     LroHeaders = LroHeaders
   >;
