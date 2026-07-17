@@ -27068,6 +27068,19 @@
           }
         }
       },
+      "AgentRunParams": {
+        "type": "object",
+        "properties": {
+          "max_concurrency": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "description": "The maximum number of agent runs to execute concurrently. Defaults to 1, which invokes the agent sequentially.",
+            "default": 1
+          }
+        },
+        "description": "Represents a set of parameters used to control how an Azure AI agent is invoked during an evaluation run."
+      },
       "AgentSessionResource": {
         "type": "object",
         "required": [
@@ -27649,6 +27662,14 @@
             "items": {
               "$ref": "#/components/schemas/OpenAI.Tool"
             }
+          },
+          "run_params": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentRunParams"
+              }
+            ],
+            "description": "The parameters used to control how the agent is invoked during evaluation, such as run concurrency."
           }
         },
         "allOf": [
@@ -27688,6 +27709,14 @@
             "items": {
               "$ref": "#/components/schemas/OpenAI.Tool"
             }
+          },
+          "run_params": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentRunParams"
+              }
+            ],
+            "description": "The parameters used to control how the agent is invoked during evaluation, such as run concurrency."
           }
         },
         "allOf": [

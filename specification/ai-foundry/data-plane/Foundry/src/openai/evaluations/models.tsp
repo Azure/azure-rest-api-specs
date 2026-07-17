@@ -330,6 +330,9 @@ model AzureAIAgentTarget extends Target {
   tool_descriptions?: ToolDescription[];
 
   tools?: OpenAI.Tool[];
+
+  /** The parameters used to control how the agent is invoked during evaluation, such as run concurrency. */
+  run_params?: AgentRunParams;
 }
 
 /** Description of a tool that can be used by an agent. */
@@ -354,6 +357,13 @@ model ModelSamplingParams {
 
   /** The maximum number of tokens allowed in the completion. */
   max_completion_tokens?: int32;
+}
+
+/** Represents a set of parameters used to control how an Azure AI agent is invoked during an evaluation run. */
+model AgentRunParams {
+  /** The maximum number of agent runs to execute concurrently. Defaults to 1, which invokes the agent sequentially. */
+  @minValue(1)
+  max_concurrency?: int32 = 1;
 }
 
 /** Base class for run data sources with discriminator support. */
