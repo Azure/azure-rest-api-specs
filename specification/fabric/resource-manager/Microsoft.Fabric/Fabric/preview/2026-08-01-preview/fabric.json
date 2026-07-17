@@ -757,6 +757,84 @@
         "members"
       ]
     },
+    "CapacityOverageNotificationProperties": {
+      "type": "object",
+      "description": "The notification properties for capacity overage.",
+      "properties": {
+        "email": {
+          "$ref": "#/definitions/CapacityOverageNotificationState",
+          "description": "The email notification state for capacity overage."
+        }
+      }
+    },
+    "CapacityOverageNotificationState": {
+      "type": "string",
+      "description": "The notification state for capacity overage.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "CapacityOverageNotificationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Capacity overage notifications are enabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Capacity overage notifications are disabled."
+          }
+        ]
+      }
+    },
+    "CapacityOverageProperties": {
+      "type": "object",
+      "description": "The capacity overage properties of the Fabric capacity resource",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/CapacityOverageState",
+          "description": "The capacity overage state for the Fabric capacity resource."
+        },
+        "thresholdCapacityUnitHours": {
+          "type": "integer",
+          "format": "int32",
+          "description": "24-hour rolling threshold for capacity overage. Reaching this threshold results in capacity throttling.",
+          "minimum": 0
+        },
+        "notifications": {
+          "$ref": "#/definitions/CapacityOverageNotificationProperties",
+          "description": "The notification properties for capacity overage."
+        }
+      }
+    },
+    "CapacityOverageState": {
+      "type": "string",
+      "description": "The capacity overage state for the Fabric capacity resource.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "CapacityOverageState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Capacity overage is enabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Capacity overage is disabled."
+          }
+        ]
+      }
+    },
     "FabricCapacity": {
       "type": "object",
       "description": "Fabric Capacity resource",
@@ -816,9 +894,9 @@
           "description": "The current state of Microsoft Fabric resource. The state is to indicate more states outside of resource provisioning.",
           "readOnly": true
         },
-        "overageBilling": {
-          "$ref": "#/definitions/OverageBillingProperties",
-          "description": "The overage billing properties of the Fabric capacity resource."
+        "overage": {
+          "$ref": "#/definitions/CapacityOverageProperties",
+          "description": "The capacity overage properties of the Fabric capacity resource."
         },
         "administration": {
           "$ref": "#/definitions/CapacityAdministration",
@@ -855,92 +933,14 @@
       "type": "object",
       "description": "The updatable properties of the FabricCapacity.",
       "properties": {
-        "overageBilling": {
-          "$ref": "#/definitions/OverageBillingProperties",
-          "description": "The overage billing properties of the Fabric capacity resource."
+        "overage": {
+          "$ref": "#/definitions/CapacityOverageProperties",
+          "description": "The capacity overage properties of the Fabric capacity resource."
         },
         "administration": {
           "$ref": "#/definitions/CapacityAdministration",
           "description": "The capacity administration"
         }
-      }
-    },
-    "OverageBillingNotificationProperties": {
-      "type": "object",
-      "description": "The notification properties for overage billing.",
-      "properties": {
-        "email": {
-          "$ref": "#/definitions/OverageBillingNotificationState",
-          "description": "The email notification state for overage billing."
-        }
-      }
-    },
-    "OverageBillingNotificationState": {
-      "type": "string",
-      "description": "The notification state for overage billing.",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "OverageBillingNotificationState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Enabled",
-            "value": "Enabled",
-            "description": "Overage billing notifications are enabled."
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "Overage billing notifications are disabled."
-          }
-        ]
-      }
-    },
-    "OverageBillingProperties": {
-      "type": "object",
-      "description": "The overage billing properties of the Fabric capacity resource",
-      "properties": {
-        "state": {
-          "$ref": "#/definitions/OverageBillingState",
-          "description": "The overage billing state for the Fabric capacity resource."
-        },
-        "thresholdCapacityUnitHours": {
-          "type": "integer",
-          "format": "int32",
-          "description": "24-hour rolling threshold for capacity overage. Reaching this threshold results in capacity throttling.",
-          "minimum": 0
-        },
-        "notifications": {
-          "$ref": "#/definitions/OverageBillingNotificationProperties",
-          "description": "The notification properties for overage billing."
-        }
-      }
-    },
-    "OverageBillingState": {
-      "type": "string",
-      "description": "The overage billing state for the Fabric capacity resource.",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "OverageBillingState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Enabled",
-            "value": "Enabled",
-            "description": "Overage billing is enabled."
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "Overage billing is disabled."
-          }
-        ]
       }
     },
     "PagedQuota": {

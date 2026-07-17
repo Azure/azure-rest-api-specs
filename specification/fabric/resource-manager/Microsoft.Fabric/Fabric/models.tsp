@@ -21,9 +21,9 @@ model FabricCapacityProperties {
   @visibility(Lifecycle.Read)
   state?: ResourceState;
 
-  @doc("The overage billing properties of the Fabric capacity resource.")
+  @doc("The capacity overage properties of the Fabric capacity resource.")
   @added(Microsoft.Fabric.Versions.v2026_08_01_preview)
-  overageBilling?: OverageBillingProperties;
+  overage?: CapacityOverageProperties;
 
   @doc("The capacity administration")
   administration: CapacityAdministration;
@@ -46,46 +46,46 @@ union RpSkuTier {
   fabric: "Fabric",
 }
 
-@doc("The overage billing properties of the Fabric capacity resource")
+@doc("The capacity overage properties of the Fabric capacity resource")
 @added(Microsoft.Fabric.Versions.v2026_08_01_preview)
-model OverageBillingProperties {
-  @doc("The overage billing state for the Fabric capacity resource.")
-  state?: OverageBillingState;
+model CapacityOverageProperties {
+  @doc("The capacity overage state for the Fabric capacity resource.")
+  state?: CapacityOverageState;
 
   @doc("24-hour rolling threshold for capacity overage. Reaching this threshold results in capacity throttling.")
   @minValue(0)
   thresholdCapacityUnitHours?: int32;
 
-  @doc("The notification properties for overage billing.")
-  notifications?: OverageBillingNotificationProperties;
+  @doc("The notification properties for capacity overage.")
+  notifications?: CapacityOverageNotificationProperties;
 }
 
-@doc("The overage billing state for the Fabric capacity resource.")
+@doc("The capacity overage state for the Fabric capacity resource.")
 @added(Microsoft.Fabric.Versions.v2026_08_01_preview)
-union OverageBillingState {
-  @doc("Overage billing is enabled.")
+union CapacityOverageState {
+  @doc("Capacity overage is enabled.")
   Enabled: "Enabled",
 
-  @doc("Overage billing is disabled.")
+  @doc("Capacity overage is disabled.")
   Disabled: "Disabled",
 
   string,
 }
 
-@doc("The notification properties for overage billing.")
+@doc("The notification properties for capacity overage.")
 @added(Microsoft.Fabric.Versions.v2026_08_01_preview)
-model OverageBillingNotificationProperties {
-  @doc("The email notification state for overage billing.")
-  email?: OverageBillingNotificationState;
+model CapacityOverageNotificationProperties {
+  @doc("The email notification state for capacity overage.")
+  email?: CapacityOverageNotificationState;
 }
 
-@doc("The notification state for overage billing.")
+@doc("The notification state for capacity overage.")
 @added(Microsoft.Fabric.Versions.v2026_08_01_preview)
-union OverageBillingNotificationState {
-  @doc("Overage billing notifications are enabled.")
+union CapacityOverageNotificationState {
+  @doc("Capacity overage notifications are enabled.")
   Enabled: "Enabled",
 
-  @doc("Overage billing notifications are disabled.")
+  @doc("Capacity overage notifications are disabled.")
   Disabled: "Disabled",
 
   string,
