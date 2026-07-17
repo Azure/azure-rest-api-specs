@@ -56,6 +56,7 @@ interface BackupUsageSummariesCRROperationGroup {
 @tag("AadProperties")
 interface AadPropertiesOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @doc("Gets the Azure Active Directory properties from the target-region Backup Management stamp, used to authorize a cross-region restore operation.")
   @summary("Fetches the AAD properties from target region BCM stamp.")
   @operationId("AadProperties_Get")
   @extension("x-ms-odata", "#/definitions/BMSAADPropertiesQueryObject")
