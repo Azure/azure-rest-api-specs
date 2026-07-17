@@ -12,7 +12,7 @@ pushd "$script_dir/../.." || {
 }
 
 # echo "Deleting the examples in the resource-manager directory and the management directory..."
-# rm -r resource-manager/Microsoft.IoTOperations/preview/2024-08-15-preview/examples
+# rm -r resource-manager/Microsoft.IoTOperations/IoTOperations/preview/2024-08-15-preview/examples
 
 echo "Generating the specs and the examples!"
 
@@ -21,7 +21,7 @@ echo "Compiling the typespecs in the iotoperations directory..."
 
 # Generate examples for all the openapi specs
 # echo "Generating examples for all the openapi specs..."
-# oav generate-examples resource-manager/Microsoft.IoTOperations/preview/2024-08-15-preview/iotoperations.json --max -p
+# oav generate-examples resource-manager/Microsoft.IoTOperations/IoTOperations/preview/2024-08-15-preview/iotoperations.json --max -p
 
 # Search each example file and replace the default string with resource-name123
 
@@ -30,7 +30,7 @@ echo "Compiling the typespecs in the iotoperations directory..."
 # Don't make any changes to examples for now through this script.
 #
 #####################################################################
-# for file in resource-manager/Microsoft.IoTOperations/preview/2024-08-15-preview/examples/*.json; do
+# for file in resource-manager/Microsoft.IoTOperations/IoTOperations/preview/2024-08-15-preview/examples/*.json; do
 #     jq 'walk(if type == "string" and . == "Replace this value with a string matching RegExp ^[a-z0-9][a-z0-9-]*[a-z0-9]$" then "resource-name123" else . end)' $file > temp.json && mv temp.json $file
 #     jq 'walk(if type == "string" and . == "Replace this value with a string matching RegExp ^[0-9]+[KMGTPE]$" then "500M" else . end)' $file > temp.json && mv temp.json $file
 #     jq 'walk(if type == "string" and . == "Replace this value with a string matching RegExp ^https://.*$" then "https://www.example.com" else . end)' $file > temp.json && mv temp.json $file
@@ -39,7 +39,7 @@ echo "Compiling the typespecs in the iotoperations directory..."
 #     jq 'walk(if type == "string" and . == "Replace this value with a string matching RegExp .+\\.fabric\\.microsoft\\.com" then "https://<host>.fabric.microsoft.com" else . end)' $file > temp.json && mv temp.json $file
 # done
 
-# for file in resource-manager/Microsoft.IoTOperations/preview/2024-08-15-preview/examples/*.json; do
+# for file in resource-manager/Microsoft.IoTOperations/IoTOperations/preview/2024-08-15-preview/examples/*.json; do
 
 #     # The following Jq commands replace ids with properly formatted ARM Ids
 #     operationId=$(jq -r '.operationId' $file)
@@ -78,12 +78,13 @@ echo "Compiling the typespecs in the iotoperations directory..."
 
 # Copy the examples to the management directory
 # echo "Copying the examples to the management directory..."
-# cp -r resource-manager/Microsoft.IoTOperations/preview/2024-08-15-preview/examples/. IoTOperations.Management/examples/2024-08-15-preview/
+# cp -r resource-manager/Microsoft.IoTOperations/IoTOperations/preview/2024-08-15-preview/examples/. resource-manager/Microsoft.IoTOperations/IoTOperations/examples/2024-08-15-preview/
 
 # Recompile the typespecs in the management directory
 # echo "Recompiling the typespecs in the management directory..."
-npx tsp compile IoTOperations.Management/.
-npx tsv IoTOperations.Management/.
+cd resource-manager/Microsoft.IoTOperations/IoTOperations
+npx tsp compile .
+npx tsv .
 
 # Prettier
 # echo "Running prettier..."
