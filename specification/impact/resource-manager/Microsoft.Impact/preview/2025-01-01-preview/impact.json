@@ -1087,34 +1087,29 @@
         "processingStateMessage"
       ]
     },
-    "ConnectorPropertiesUpdate": {
+    "ConnectorUpdate": {
       "type": "object",
-      "description": "Details of the Connector.",
+      "description": "The type used for update operations of the Connector.",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/ManagedServiceIdentityOnlyUserAssigned",
+          "description": "The managed service identities assigned to this resource."
+        },
+        "properties": {
+          "$ref": "#/definitions/ConnectorUpdateProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      }
+    },
+    "ConnectorUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the Connector.",
       "properties": {
         "connectorType": {
           "$ref": "#/definitions/Platform",
           "description": "connector type"
         }
       }
-    },
-    "ConnectorUpdate": {
-      "type": "object",
-      "description": "A connector is a resource that can be used to proactively report impacts against workloads in Azure to Microsoft.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ConnectorPropertiesUpdate",
-          "description": "The resource-specific properties for this resource."
-        },
-        "identity": {
-          "$ref": "#/definitions/ManagedServiceIdentityOnlyUserAssignedUpdate",
-          "description": "The managed service identities assigned to this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
     },
     "Content": {
       "type": "object",
@@ -1595,24 +1590,6 @@
       "required": [
         "type"
       ]
-    },
-    "ManagedServiceIdentityOnlyUserAssignedUpdate": {
-      "type": "object",
-      "description": "Managed service identity (system assigned and/or user assigned identities)",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/ManagedServiceIdentityTypeOnlyUserAssigned",
-          "description": "The type of managed identity assigned to this resource."
-        },
-        "userAssignedIdentities": {
-          "type": "object",
-          "description": "The identities assigned to this resource by the user.",
-          "additionalProperties": {
-            "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity",
-            "x-nullable": true
-          }
-        }
-      }
     },
     "ManagedServiceIdentityTypeOnlyUserAssigned": {
       "type": "string",
