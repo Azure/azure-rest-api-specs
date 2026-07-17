@@ -123,7 +123,7 @@ namespace Microsoft.CloudHealth {
     @doc("Display name")
     @minLength(1)
     @maxLength(260)
-    displayName?: number;
+    displayName: string;
 
     @removed(Versions.v2026_01_01_preview)
     @doc("Azure Resource Graph query text in KQL syntax. The query must return at least a column named 'id' which contains the resource ID of the discovered resources.")
