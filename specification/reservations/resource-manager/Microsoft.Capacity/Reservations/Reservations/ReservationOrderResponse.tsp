@@ -87,10 +87,9 @@ interface ReservationOrderResponses {
   split is ArmResourceActionAsyncBase<
     ReservationOrderResponse,
     SplitRequest,
-
-      | ArmResponse<ReservationResponse[]>
-      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ReservationResponse[]> &
-          Azure.Core.Foundations.RetryAfterHeader>,
+    | ArmResponse<ReservationResponse[]>
+    | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ReservationResponse[]> &
+        Azure.Core.Foundations.RetryAfterHeader>,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
     Error = Error
   >;
@@ -103,10 +102,9 @@ interface ReservationOrderResponses {
   merge is ArmResourceActionAsyncBase<
     ReservationOrderResponse,
     MergeRequest,
-
-      | ArmResponse<ReservationResponse[]>
-      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ReservationResponse[]> &
-          Azure.Core.Foundations.RetryAfterHeader>,
+    | ArmResponse<ReservationResponse[]>
+    | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ReservationResponse[]> &
+        Azure.Core.Foundations.RetryAfterHeader>,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
     Error = Error
   >;
@@ -150,11 +148,10 @@ interface ReservationOrderResponses {
   returnPost is ArmResourceActionAsyncBase<
     ReservationOrderResponse,
     RefundRequest,
-
-      | ArmResponse<ReservationOrderResponse>
-      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ReservationOrderResponse> &
-          Azure.Core.Foundations.RetryAfterHeader> &
-          Body<RefundResponse>),
+    | ArmResponse<ReservationOrderResponse>
+    | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ReservationOrderResponse> &
+        Azure.Core.Foundations.RetryAfterHeader> &
+        Body<RefundResponse>),
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
     Error = Error
   >;
