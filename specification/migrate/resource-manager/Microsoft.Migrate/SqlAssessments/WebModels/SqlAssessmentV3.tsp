@@ -21,8 +21,11 @@ model SqlAssessmentV3 is ProxyResource<SqlAssessmentV3Properties> {
 }
 
 @doc("SQL assessment properties class.")
-model SqlAssessmentV3Properties
-  is AssessmentProperties<Scope, SqlAssessmentSettings, AssessmentDetails> {
+model SqlAssessmentV3Properties is AssessmentProperties<
+  Scope,
+  SqlAssessmentSettings,
+  AssessmentDetails
+> {
   @doc("Gets or sets the machine assessment ARM ID for VM fallback.")
   fallbackMachineAssessmentArmId?: string;
 }

@@ -61,8 +61,10 @@ alias AgentApplicationsListParameters = {
  * Agent Application resource
  */
 @parentResource(Project)
-model AgentApplication
-  is Azure.ResourceManager.ProxyResource<AgenticApplicationProperties, false> {
+model AgentApplication is Azure.ResourceManager.ProxyResource<
+  AgenticApplicationProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = AgentApplication,
     KeyName = "name",
