@@ -161,6 +161,7 @@ using Microsoft.ServiceBus;
   "csharp"
 );
 @@clientName(FailOver, "ServiceBusNamespaceFailOver", "csharp");
+@@clientName(FailOverProperties.force, "IsForced", "csharp");
 @@clientName(
   SBNamespaces.privateLinkResourcesGet,
   "GetPrivateLinkResources",
