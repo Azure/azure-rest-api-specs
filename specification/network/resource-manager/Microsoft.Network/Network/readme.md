@@ -54,92 +54,7 @@ input-file:
   - stable/2025-09-01/virtualNetwork.json
   - stable/2025-09-01/virtualNetworkAppliance.json
   - stable/2025-09-01/virtualWan.json
-  - stable/2018-10-01/vmssNetwork.json
-suppressions:
-  - code: ParametersInPointGet
-    from: loadBalancer.json
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}"].get.parameters
-    reason: '"detailLevel" query parameter approved for GET LoadBalancer to reduce response payload for large resources. Approved in ARM Office Hours by Gary Li on 2/13/2025.'
-  - code: ProvisioningStateMustBeReadOnly
-    from: networkManager.json
-    reason: provisioningState is correctly marked readOnly in CommitProperties definition. The linter does not follow $ref chains to verify readOnly in referenced schemas.
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/commits/{commitName}"].get.responses["200"].schema
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/commits/{commitName}"].put.responses["200"].schema
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/commits/{commitName}"].put.responses["201"].schema
-  - code: PutResponseCodes
-    reason: Required for multiple response codes. Reviewed by ARM team.
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}"].put
-  - code: DeleteResponseCodes
-    reason: Required for multiple response codes. Reviewed by ARM team.
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}"].delete
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/linkReferences/{linkReferenceName}"].delete
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/links/{linkName}"].delete
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}"].delete
-  - code: ProvisioningStateMustBeReadOnly
-    from: interconnectGroup.json
-    reason: provisioningState is correctly marked readOnly in the referenced schema. The linter does not follow $ref chains to verify readOnly.
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/interconnectGroups/{interconnectGroupName}"].get.responses["200"].schema
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/interconnectGroups/{interconnectGroupName}"].put.responses["200"].schema
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/interconnectGroups/{interconnectGroupName}"].put.responses["201"].schema
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/interconnectGroups/{interconnectGroupName}"].patch.responses["200"].schema
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/interconnectGroups/{interconnectGroupName}/subgroups/{subgroupName}"].get.responses["200"].schema
-  - code: ResourceNameRestriction
-    from: interconnectGroup.json
-    reason: Subgroup is a read-only child resource with no PUT operation. Pattern restriction is not applicable.
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/interconnectGroups/{interconnectGroupName}/subgroups/{subgroupName}"]
-  - code: RequiredPropertiesMissingInResourceModel
-    from: interconnectGroup.json
-    reason: name, id and type properties are inherited from the upper level
-    where:
-      - $.definitions.InterconnectGroup
-      - $.definitions.InterconnectGroupListResult
-      - $.definitions.Subgroup
-      - $.definitions.SubgroupListResult
-  - code: PatchIdentityProperty
-    reason: False alarm.
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}"].patch.parameters[2]
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/flowLogs/{flowLogName}"].patch.parameters[3]
-  - code: SystemDataDefinitionsCommonTypes
-    from: virtualNetwork.json
-    reason: False alarm for common type errors.
-  - code: SystemDataDefinitionsCommonTypes
-    from: common.json
-    reason: False alarm.
-  - code: PutRequestResponseSchemeArm
-    from: common.json
-    reason: API spec code issue in PutRequestResponseSchemeArm validation.
-  - code: RequiredPropertiesMissingInResourceModel
-    reason: Not a standard azure resource.
-    where:
-      - $.definitions.GetServiceGatewayAddressLocationsResult
-  - code: RequiredPropertiesMissingInResourceModel
-    reason: Not a standard azure resource.
-    where:
-      - $.definitions.GetServiceGatewayServicesResult
-directive:
-  - from: specification/common-types/resource-management/v6/types.json
-    where: "$.definitions.ProxyResource"
-    transform: >
-      $["x-ms-client-name"] = "SecurityPerimeterProxyResource"
-
-  - from: specification/common-types/resource-management/v6/types.json
-    where: "$.definitions.Resource"
-    transform: >
-      $["x-ms-client-name"] = "SecurityPerimeterResource"
-
-  - from: specification/common-types/resource-management/v6/types.json
-    where: "$.definitions.systemData"
-    transform: >
-      $["x-ms-client-name"] = "SecurityPerimeterSystemData"
 ```
-
 ### Tag: package-2025-07-01
 
 These settings apply only when `--tag=package-2025-07-01` is specified on the command line.
@@ -197,6 +112,16 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/interconnectGroups/{interconnectGroupName}"].put.responses["201"].schema
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/interconnectGroups/{interconnectGroupName}"].patch.responses["200"].schema
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/interconnectGroups/{interconnectGroupName}/subgroups/{subgroupName}"].get.responses["200"].schema
+  - code: ProvisioningStateMustBeReadOnly
+    from: virtualNetwork.json
+    reason: >-
+      provisioningState is correctly marked readOnly as a sibling of $ref in the generated swagger.
+      The TypeSpec source uses @visibility(Lifecycle.Read) on provisioningState. The lint rule does
+      not follow $ref chains to verify readOnly. See: https://github.com/Azure/typespec-azure/issues/4611
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationSecurityGroups/{applicationSecurityGroupName}/addressPrefixSets/{addressPrefixSetName}"].get.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationSecurityGroups/{applicationSecurityGroupName}/addressPrefixSets/{addressPrefixSetName}"].put.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationSecurityGroups/{applicationSecurityGroupName}/addressPrefixSets/{addressPrefixSetName}"].put.responses["201"].schema
   - code: ResourceNameRestriction
     from: interconnectGroup.json
     reason: Subgroup is a read-only child resource with no PUT operation. Pattern restriction is not applicable.
