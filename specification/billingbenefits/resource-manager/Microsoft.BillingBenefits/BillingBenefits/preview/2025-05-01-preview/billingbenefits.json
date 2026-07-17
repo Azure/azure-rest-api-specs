@@ -2,13 +2,8 @@
   "swagger": "2.0",
   "info": {
     "title": "Billing benefits RP",
-    "version": "2026-06-01",
-    "description": "Azure Benefits RP let users create and manage benefits.",
-    "x-typespec-generated": [
-      {
-        "emitter": "@azure-tools/typespec-autorest"
-      }
-    ]
+    "version": "2025-05-01-preview",
+    "description": "Azure Benefits RP let users create and manage benefits."
   },
   "schemes": [
     "https"
@@ -74,27 +69,6 @@
     },
     {
       "name": "CreditSources"
-    },
-    {
-      "name": "FreeServicesOperations"
-    },
-    {
-      "name": "CreditTransactions"
-    },
-    {
-      "name": "MaccTransactions"
-    },
-    {
-      "name": "ConditionalCreditTransactions"
-    },
-    {
-      "name": "SubscriptionCatalogGroupsOps"
-    },
-    {
-      "name": "BillingAccountCatalogGroupsOps"
-    },
-    {
-      "name": "BillingProfileCatalogGroupsOps"
     }
   ],
   "paths": {
@@ -104,7 +78,7 @@
         "description": "List conditional credits that are applicable for a given scope. Currently supported scopes: billing accounts",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "scope",
@@ -124,7 +98,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -144,7 +118,7 @@
         "description": "List applicable credits for the provided scope. Currently supported scopes: BillingAccountResourceId",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "scope",
@@ -164,7 +138,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -184,7 +158,7 @@
         "description": "List discounts that are applicable for a given scope. Currently supported scopes: billing accounts",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "scope",
@@ -204,7 +178,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -218,221 +192,13 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/providers/Microsoft.BillingBenefits/catalogGroups": {
-      "get": {
-        "operationId": "BillingProfileCatalogGroupsOps_List",
-        "tags": [
-          "BillingProfileCatalogGroupsOps"
-        ],
-        "description": "List catalog groups at the target scope.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "billingAccountName",
-            "in": "path",
-            "description": "The name of the billing account.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9_\\-\\.:]+$"
-          },
-          {
-            "name": "billingProfileName",
-            "in": "path",
-            "description": "The name of the billing profile.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
-          },
-          {
-            "$ref": "#/parameters/CatalogGroupsListParameters"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/CatalogGroupListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "BillingProfileCatalogGroupsList": {
-            "$ref": "./examples/CatalogGroupsBillingProfileList.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/providers/Microsoft.BillingBenefits/catalogGroups/{catalogGroupName}": {
-      "get": {
-        "operationId": "BillingProfileCatalogGroupsOps_Get",
-        "tags": [
-          "BillingProfileCatalogGroupsOps"
-        ],
-        "description": "Get a specific catalog group at the target scope.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "billingAccountName",
-            "in": "path",
-            "description": "The name of the billing account.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9_\\-\\.:]+$"
-          },
-          {
-            "name": "billingProfileName",
-            "in": "path",
-            "description": "The name of the billing profile.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
-          },
-          {
-            "name": "catalogGroupName",
-            "in": "path",
-            "description": "The name of the CatalogGroup",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/CatalogGroup"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "BillingProfileCatalogGroupsGet": {
-            "$ref": "./examples/CatalogGroupsBillingProfileGet.json"
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/providers/Microsoft.BillingBenefits/catalogGroups": {
-      "get": {
-        "operationId": "BillingAccountCatalogGroupsOps_List",
-        "tags": [
-          "BillingAccountCatalogGroupsOps"
-        ],
-        "description": "List catalog groups at the target scope.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "billingAccountName",
-            "in": "path",
-            "description": "The name of the billing account.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9_\\-\\.:]+$"
-          },
-          {
-            "$ref": "#/parameters/CatalogGroupsListParameters"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/CatalogGroupListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "BillingAccountCatalogGroupsList": {
-            "$ref": "./examples/CatalogGroupsBillingAccountList.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/providers/Microsoft.BillingBenefits/catalogGroups/{catalogGroupName}": {
-      "get": {
-        "operationId": "BillingAccountCatalogGroupsOps_Get",
-        "tags": [
-          "BillingAccountCatalogGroupsOps"
-        ],
-        "description": "Get a specific catalog group at the target scope.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "billingAccountName",
-            "in": "path",
-            "description": "The name of the billing account.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9_\\-\\.:]+$"
-          },
-          {
-            "name": "catalogGroupName",
-            "in": "path",
-            "description": "The name of the CatalogGroup",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/CatalogGroup"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "BillingAccountCatalogGroupsGet": {
-            "$ref": "./examples/CatalogGroupsBillingAccountGet.json"
-          }
-        }
-      }
-    },
     "/providers/Microsoft.BillingBenefits/listSellerResources": {
       "post": {
         "operationId": "SellerResource_List",
         "description": "List maccs by billing account",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "body",
@@ -457,7 +223,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -489,20 +255,20 @@
         "description": "List the operations for the provider",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -525,7 +291,7 @@
         "description": "Get a reservation order alias.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "reservationOrderAliasName",
@@ -546,16 +312,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "ReservationOrderAliasGet": {
             "$ref": "./examples/ReservationOrderAliasGet.json"
-          },
-          "ReservationOrderAliasGetWithRenewProperties": {
-            "$ref": "./examples/ReservationOrderAliasGetWithRenewProperties.json"
           }
         }
       },
@@ -567,7 +330,7 @@
         "description": "Create a reservation order alias.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "reservationOrderAliasName",
@@ -614,16 +377,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "ReservationOrderAliasCreate": {
             "$ref": "./examples/ReservationOrderAliasCreate.json"
-          },
-          "ReservationOrderAliasCreateWithRenewProperties": {
-            "$ref": "./examples/ReservationOrderAliasCreateWithRenewProperties.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -642,7 +402,7 @@
         "description": "Get a savings plan.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "savingsPlanOrderAliasName",
@@ -663,7 +423,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -684,7 +444,7 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "savingsPlanOrderAliasName",
@@ -731,7 +491,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -759,7 +519,7 @@
         "description": "List all Savings plan orders.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -772,7 +532,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -795,7 +555,7 @@
         "description": "Get a savings plan order.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "savingsPlanOrderId",
@@ -822,7 +582,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -845,7 +605,7 @@
         "description": "Elevate as owner on savings plan order based on billing permissions.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "savingsPlanOrderId",
@@ -865,7 +625,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -885,7 +645,7 @@
         "description": "List savings plans in an order.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "savingsPlanOrderId",
@@ -905,7 +665,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -928,7 +688,7 @@
         "description": "Get savings plan.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "savingsPlanOrderId",
@@ -962,7 +722,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -983,7 +743,7 @@
         "description": "Update savings plan.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "savingsPlanOrderId",
@@ -1032,7 +792,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1057,7 +817,7 @@
         "description": "Validate savings plan patch.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "savingsPlanOrderId",
@@ -1093,7 +853,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1110,7 +870,7 @@
         "description": "List savings plans.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "$filter",
@@ -1167,7 +927,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1187,7 +947,7 @@
         "description": "Validate savings plan purchase.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "body",
@@ -1209,7 +969,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1234,12 +994,6 @@
           },
           "ConditionalCreditValidateUpdateRemoveMilestone": {
             "$ref": "./examples/ConditionalCreditValidateUpdateRemoveMilestone.json"
-          },
-          "CreditsValidateCreate": {
-            "$ref": "./examples/CreditsValidateCreate.json"
-          },
-          "DiscountsValidateCreate": {
-            "$ref": "./examples/DiscountsValidateCreate.json"
           },
           "MaccValidateCancel": {
             "$ref": "./examples/MaccValidateCancel.json"
@@ -1316,26 +1070,8 @@
           "MaccValidateWriteOffWithMilestones": {
             "$ref": "./examples/MaccValidateWriteOffWithMilestones.json"
           },
-          "MaccsValidateCreate": {
-            "$ref": "./examples/MaccsValidateCreate.json"
-          },
-          "SSCacoFlexibleValidateCreate": {
-            "$ref": "./examples/SSCacoFlexibleValidateCreate.json"
-          },
-          "SSCacoFlexibleValidateCreateMultipleInvalidOverlap": {
-            "$ref": "./examples/SSCacoFlexibleValidateCreateMultipleInvalidOverlap.json"
-          },
-          "SSCacoFlexibleValidateCreateMultipleValidOverlap": {
-            "$ref": "./examples/SSCacoFlexibleValidateCreateMultipleValidOverlap.json"
-          },
-          "SSCacoFlexibleValidateUpdate": {
-            "$ref": "./examples/SSCacoFlexibleValidateUpdate.json"
-          },
           "SavingsPlanValidatePurchase": {
             "$ref": "./examples/SavingsPlanValidatePurchase.json"
-          },
-          "SavingsPlansValidateCreate": {
-            "$ref": "./examples/SavingsPlansValidateCreate.json"
           }
         }
       }
@@ -1346,7 +1082,7 @@
         "description": "List contributors under applicable conditional credits for a given billing account.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "billingAccountId",
@@ -1375,7 +1111,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1395,7 +1131,7 @@
         "description": "List maccs that are applicable for a given billing account.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "billingAccountId",
@@ -1416,7 +1152,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1436,7 +1172,7 @@
         "description": "List contributors under applicable MACCs for a given billing account.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "billingAccountId",
@@ -1465,7 +1201,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1479,92 +1215,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.BillingBenefits/catalogGroups": {
-      "get": {
-        "operationId": "SubscriptionCatalogGroupsOps_List",
-        "tags": [
-          "SubscriptionCatalogGroupsOps"
-        ],
-        "description": "List catalog groups at the target scope.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/CatalogGroupsListParameters"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/CatalogGroupListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SubscriptionCatalogGroupsList": {
-            "$ref": "./examples/CatalogGroupsSubscriptionList.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.BillingBenefits/catalogGroups/{catalogGroupName}": {
-      "get": {
-        "operationId": "SubscriptionCatalogGroupsOps_Get",
-        "tags": [
-          "SubscriptionCatalogGroupsOps"
-        ],
-        "description": "Get a specific catalog group at the target scope.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "catalogGroupName",
-            "in": "path",
-            "description": "The name of the CatalogGroup",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/CatalogGroup"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SubscriptionCatalogGroupsGet": {
-            "$ref": "./examples/CatalogGroupsSubscriptionGet.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.BillingBenefits/conditionalCredits": {
       "get": {
         "operationId": "ConditionalCredits_ListBySubscription",
@@ -1574,10 +1224,10 @@
         "description": "List conditional credits by subscription.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -1590,7 +1240,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1613,10 +1263,10 @@
         "description": "List credits under a subscription from primary service tenant.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -1629,7 +1279,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1652,10 +1302,10 @@
         "description": "List discounts at subscription level",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -1668,52 +1318,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "DiscountSubscriptionList": {
             "$ref": "./examples/DiscountList.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.BillingBenefits/freeServices": {
-      "get": {
-        "operationId": "FreeServices_ListBySubscription",
-        "tags": [
-          "FreeServicesOperations"
-        ],
-        "description": "This operation lists free services that are available under the specified subscription.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/FreeServicesList"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "FreeServicesListBySubscription": {
-            "$ref": "./examples/FreeServicesListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -1730,10 +1341,10 @@
         "description": "List MACCs under a subscription from primary service tenant.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -1746,7 +1357,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1772,13 +1383,13 @@
         "description": "List conditional credits by resource group.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
@@ -1791,7 +1402,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1814,13 +1425,13 @@
         "description": "Get a conditional credit.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "conditionalCreditName",
@@ -1841,7 +1452,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1859,13 +1470,13 @@
         "description": "Create or update a conditional credit.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "conditionalCreditName",
@@ -1918,7 +1529,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1944,13 +1555,13 @@
         "description": "Update a conditional credit.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "conditionalCreditName",
@@ -2005,7 +1616,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2016,8 +1627,8 @@
           "ConditionalCreditUpdateContributor": {
             "$ref": "./examples/ConditionalCreditUpdateContributor.json"
           },
-          "ConditionalCreditUpdateLastMilestoneEndDate": {
-            "$ref": "./examples/ConditionalCreditUpdateLastMilestoneEndDate.json"
+          "ConditionalCreditUpdateContributorEndDateOnly": {
+            "$ref": "./examples/ConditionalCreditUpdateContributorEndDateOnly.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2034,13 +1645,13 @@
         "description": "Delete a conditional credit.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "conditionalCreditName",
@@ -2083,7 +1694,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2107,13 +1718,13 @@
         "description": "Cancel conditional credit. Stops applying the benefit.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "conditionalCreditName",
@@ -2153,7 +1764,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2178,13 +1789,13 @@
         "description": "List contributors under a primary conditional credit for primary service admin",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "conditionalCreditName",
@@ -2205,7 +1816,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2228,13 +1839,13 @@
         "description": "Get a conditional credit contributor for primary service admin",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "conditionalCreditName",
@@ -2263,118 +1874,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "ConditionalCreditContributor_GetFromPrimary": {
             "$ref": "./examples/ConditionalCreditContributorGetFromPrimary.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/conditionalCredits/{conditionalCreditName}/transactions": {
-      "get": {
-        "operationId": "ConditionalCreditTransactions_ListByParent",
-        "tags": [
-          "ConditionalCreditTransactions"
-        ],
-        "description": "List all transactions for a conditional credit.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "conditionalCreditName",
-            "in": "path",
-            "description": "Name of the conditional credit",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ConditionalCreditTransactionsList"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ConditionalCreditTransactionsList": {
-            "$ref": "./examples/ConditionalCreditTransactionsList.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/conditionalCredits/{conditionalCreditName}/transactions/{transactionName}": {
-      "get": {
-        "operationId": "ConditionalCreditTransactions_Get",
-        "tags": [
-          "ConditionalCreditTransactions"
-        ],
-        "description": "Get a specific transaction for a conditional credit.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "conditionalCreditName",
-            "in": "path",
-            "description": "Name of the conditional credit",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
-          },
-          {
-            "name": "transactionName",
-            "in": "path",
-            "description": "Name of the transaction",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ConditionalCreditTransaction"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ConditionalCreditTransactionGet": {
-            "$ref": "./examples/ConditionalCreditTransactionGet.json"
           }
         }
       }
@@ -2388,13 +1894,13 @@
         "description": "List Credits under a resource group from primary service admin.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
@@ -2407,7 +1913,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2430,13 +1936,13 @@
         "description": "Get a credit.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "creditName",
@@ -2457,7 +1963,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2475,13 +1981,13 @@
         "description": "Create a credit.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "creditName",
@@ -2539,19 +2045,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "CreditCreate": {
             "$ref": "./examples/CreditCreate.json"
-          },
-          "CreditCreateWithInvitation": {
-            "$ref": "./examples/CreditCreateWithInvitation.json"
-          },
-          "CreditTransferCreditCreate": {
-            "$ref": "./examples/CreditTransferCreditCreate.json"
           },
           "EndCustomerInvestmentFundCreditCreate": {
             "$ref": "./examples/EndCustomerInvestmentFundCreditCreate.json"
@@ -2574,13 +2074,13 @@
         "description": "Update a credit.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "creditName",
@@ -2635,7 +2135,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2658,13 +2158,13 @@
         "description": "Delete a credit.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "creditName",
@@ -2707,7 +2207,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2731,13 +2231,13 @@
         "description": "Cancels a credit.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "creditName",
@@ -2778,7 +2278,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2794,77 +2294,6 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/credits/{creditName}/changeSponsor": {
-      "post": {
-        "operationId": "Credits_ChangeSponsor",
-        "tags": [
-          "Credits"
-        ],
-        "description": "Change the sponsor of a credit.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "creditName",
-            "in": "path",
-            "description": "Name of the credit",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ChangeSponsorRequest"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "format": "uri",
-                "description": "URL for checking the ongoing status of the operation."
-              },
-              "Location": {
-                "type": "string",
-                "description": "Location URI to poll for result."
-              }
-            }
-          },
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CreditChangeSponsor": {
-            "$ref": "./examples/CreditChangeSponsor.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/credits/{creditName}/sources": {
       "get": {
         "operationId": "Sources_ListByCredit",
@@ -2874,13 +2303,13 @@
         "description": "List credit sources for a credit under a resource group from primary service admin.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "creditName",
@@ -2901,7 +2330,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2924,13 +2353,13 @@
         "description": "Get a credit source.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "creditName",
@@ -2959,7 +2388,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2977,13 +2406,13 @@
         "description": "Create a credit source.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "creditName",
@@ -3027,7 +2456,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -3045,13 +2474,13 @@
         "description": "Update a credit source.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "creditName",
@@ -3089,7 +2518,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -3107,13 +2536,13 @@
         "description": "Delete a credit source.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "creditName",
@@ -3142,118 +2571,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "CreditSourceDelete": {
             "$ref": "./examples/CreditSourceDelete.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/credits/{creditName}/transactions": {
-      "get": {
-        "operationId": "CreditTransactions_ListByParent",
-        "tags": [
-          "CreditTransactions"
-        ],
-        "description": "List all transactions for a credit.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "creditName",
-            "in": "path",
-            "description": "Name of the credit",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/TransactionsList"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CreditTransactionsList": {
-            "$ref": "./examples/CreditTransactionsList.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/credits/{creditName}/transactions/{transactionName}": {
-      "get": {
-        "operationId": "CreditTransactions_Get",
-        "tags": [
-          "CreditTransactions"
-        ],
-        "description": "Get a specific transaction for a credit.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "creditName",
-            "in": "path",
-            "description": "Name of the credit",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
-          },
-          {
-            "name": "transactionName",
-            "in": "path",
-            "description": "Name of the transaction",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/CreditTransaction"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CreditTransactionGet": {
-            "$ref": "./examples/CreditTransactionGet.json"
           }
         }
       }
@@ -3267,13 +2591,13 @@
         "description": "List discounts at resource group level",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
@@ -3286,7 +2610,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -3309,13 +2633,13 @@
         "description": "Get discount at resource group level",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "discountName",
@@ -3336,7 +2660,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -3354,13 +2678,13 @@
         "description": "Create discount.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "discountName",
@@ -3407,7 +2731,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -3420,9 +2744,6 @@
           },
           "DiscountsCreatePrimaryBackfill": {
             "$ref": "./examples/DiscountsCreatePrimaryBackfill.json"
-          },
-          "DiscountsCreatePrimaryWithAzurePromotion": {
-            "$ref": "./examples/DiscountsCreatePrimaryWithAzurePromotion.json"
           },
           "DiscountsCreatePrimaryWithCustomPrice": {
             "$ref": "./examples/DiscountsCreatePrimaryWithCustomPrice.json"
@@ -3448,13 +2769,13 @@
         "description": "Update discounts",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "discountName",
@@ -3503,16 +2824,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "DiscountGet": {
             "$ref": "./examples/DiscountsUpdate.json"
-          },
-          "DiscountsUpdateEndAt": {
-            "$ref": "./examples/DiscountsUpdateEndAt.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -3529,13 +2847,13 @@
         "description": "Delete discount. Clears the metadata from the user's view.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "discountName",
@@ -3572,7 +2890,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -3596,13 +2914,13 @@
         "description": "Cancel discount. Stops applying the benefit.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "discountName",
@@ -3642,7 +2960,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -3658,320 +2976,6 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/freeServices": {
-      "get": {
-        "operationId": "FreeServices_ListByResourceGroup",
-        "tags": [
-          "FreeServicesOperations"
-        ],
-        "description": "This operation lists the free services that are available under the specified resource group.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/FreeServicesList"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "FreeServicesListByResourceGroup": {
-            "$ref": "./examples/FreeServicesListByResourceGroup.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/freeServices/{freeServiceName}": {
-      "get": {
-        "operationId": "FreeServices_Get",
-        "tags": [
-          "FreeServicesOperations"
-        ],
-        "description": "This operation retrieves properties for free services.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "freeServiceName",
-            "in": "path",
-            "description": "Name of the free service",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/FreeServices"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "FreeServicesGet": {
-            "$ref": "./examples/FreeServicesGet.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "FreeServices_Create",
-        "tags": [
-          "FreeServicesOperations"
-        ],
-        "description": "This operation creates or updates free services in Azure",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "freeServiceName",
-            "in": "path",
-            "description": "Name of the free service",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Free services create request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/FreeServices"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'FreeServices' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/FreeServices"
-            }
-          },
-          "201": {
-            "description": "Resource 'FreeServices' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/FreeServices"
-            },
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "URL for checking the ongoing status of the operation."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "FreeServicesCreate": {
-            "$ref": "./examples/FreeServicesCreate.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/FreeServices"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "patch": {
-        "operationId": "FreeServices_Update",
-        "tags": [
-          "FreeServicesOperations"
-        ],
-        "description": "This operation updates free services in Azure.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "freeServiceName",
-            "in": "path",
-            "description": "Name of the free service",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Free services patch request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/FreeServicesPatchRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/FreeServices"
-            }
-          },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "format": "uri",
-                "description": "URL for checking the ongoing status of the operation."
-              },
-              "Location": {
-                "type": "string",
-                "description": "Location URI to poll for result."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "FreeServicesUpdate": {
-            "$ref": "./examples/FreeServicesUpdate.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/FreeServices"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "delete": {
-        "operationId": "FreeServices_Delete",
-        "tags": [
-          "FreeServicesOperations"
-        ],
-        "description": "This operation deletes free services from the subscription. Only free services that are in an expired or cancelled states can be deleted.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "freeServiceName",
-            "in": "path",
-            "description": "Name of the free service",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "format": "uri",
-                "description": "URL for checking the ongoing status of the operation."
-              },
-              "Location": {
-                "type": "string",
-                "description": "Location URI to poll for result."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. ",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "URL for checking the ongoing status of the operation."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "FreeServicesDelete": {
-            "$ref": "./examples/FreeServicesDelete.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/maccs": {
       "get": {
         "operationId": "Maccs_ListByResourceGroup",
@@ -3981,13 +2985,13 @@
         "description": "List MACCs under a resource group for primary service admin.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
@@ -4000,7 +3004,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -4026,13 +3030,13 @@
         "description": "Get a MACC.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "maccName",
@@ -4053,7 +3057,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -4089,13 +3093,13 @@
         "description": "Create MACC.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "maccName",
@@ -4142,7 +3146,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -4171,13 +3175,13 @@
         "description": "Update MACC.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "maccName",
@@ -4226,7 +3230,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -4273,9 +3277,6 @@
           "MaccUnsuppressAutomaticShortfall": {
             "$ref": "./examples/MaccUnsuppressAutomaticShortfall.json"
           },
-          "MaccWithMilestonesUpdateLastMilestoneEndDate": {
-            "$ref": "./examples/MaccWithMilestonesUpdateLastMilestoneEndDate.json"
-          },
           "MilestonesCreate_OnExistingMacc": {
             "$ref": "./examples/MilestonesCreateOnExistingMacc.json"
           },
@@ -4297,13 +3298,13 @@
         "description": "Delete MACC.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "maccName",
@@ -4340,7 +3341,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -4364,13 +3365,13 @@
         "description": "Represents an operation to cancel MACC contract. This operation does not indicate deletion of the MACC, but rather stops applying the benefit to the account.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "maccName",
@@ -4410,7 +3411,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -4438,13 +3439,13 @@
         "description": "Operation to charge shortfall to a customer's account, ensuring they are charged for the outstanding amount of MACC credit.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "maccName",
@@ -4493,7 +3494,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -4518,13 +3519,13 @@
         "description": "List contributors under a MACC for primary service admin",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "maccName",
@@ -4545,7 +3546,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -4574,13 +3575,13 @@
         "description": "Get a contributor for primary service admin",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "maccName",
@@ -4609,7 +3610,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -4626,111 +3627,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/maccs/{maccName}/transactions": {
-      "get": {
-        "operationId": "MaccTransactions_ListByParent",
-        "tags": [
-          "MaccTransactions"
-        ],
-        "description": "List all transactions for a MACC.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "maccName",
-            "in": "path",
-            "description": "Name of primary MACC.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/MaccTransactionsList"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "MaccTransactionsList": {
-            "$ref": "./examples/MaccTransactionsList.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/maccs/{maccName}/transactions/{transactionName}": {
-      "get": {
-        "operationId": "MaccTransactions_Get",
-        "tags": [
-          "MaccTransactions"
-        ],
-        "description": "Get a specific transaction for a MACC.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "maccName",
-            "in": "path",
-            "description": "Name of primary MACC.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
-          },
-          {
-            "name": "transactionName",
-            "in": "path",
-            "description": "Name of the transaction",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/MaccTransaction"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "MaccTransactionGet": {
-            "$ref": "./examples/MaccTransactionGet.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/maccs/{maccName}/writeOff": {
       "post": {
         "operationId": "Maccs_WriteOff",
@@ -4740,13 +3636,13 @@
         "description": "Operation to waive a customer's pending MACC balance (Shortfall) from their account, ensuring they are not charged for the outstanding amount.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "maccName",
@@ -4786,7 +3682,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -4819,7 +3715,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -4839,36 +3735,6 @@
           "type": "string",
           "description": "Url to get the next page."
         }
-      }
-    },
-    "AppliedOn": {
-      "type": "string",
-      "description": "Indicates where the credit benefit is applied",
-      "enum": [
-        "Consumption",
-        "Invoice",
-        "External"
-      ],
-      "x-ms-enum": {
-        "name": "AppliedOn",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Consumption",
-            "value": "Consumption",
-            "description": "Applied on consume charges"
-          },
-          {
-            "name": "Invoice",
-            "value": "Invoice",
-            "description": "Applied on invoice"
-          },
-          {
-            "name": "External",
-            "value": "External",
-            "description": "Applied externally"
-          }
-        ]
       }
     },
     "AppliedScopeProperties": {
@@ -4894,11 +3760,6 @@
         "displayName": {
           "type": "string",
           "description": "Display name"
-        },
-        "benefitFilter": {
-          "type": "string",
-          "description": "A filter string passed to downstream services to categorize and apply usage benefits to specific resource models. Expected format: \"key/value\" (e.g., \"contractId/2025 H2CPU\"). The value is not validated by BillingBenefits and is forwarded as-is.",
-          "example": "clusterId/2025 H2CPU"
         }
       }
     },
@@ -5006,7 +3867,7 @@
           "readOnly": true
         },
         "duration": {
-          "$ref": "#/definitions/Term",
+          "type": "string",
           "description": "Duration for which the benefit is active. Will be in format P{int}M or P{int}Y. Any values representing up to 12 years are valid. Upper limit examples: P144M, P12Y."
         }
       }
@@ -5015,132 +3876,34 @@
       "type": "string",
       "description": "Represents an Azure Resource Type."
     },
-    "BenefitAppliedScopeType": {
-      "type": "string",
-      "description": "List of applied scope types supported for benefit resources.",
-      "enum": [
-        "BillingAccount",
-        "BillingProfile",
-        "Customer"
-      ],
-      "x-ms-enum": {
-        "name": "BenefitAppliedScopeType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "BillingAccount",
-            "value": "BillingAccount"
-          },
-          {
-            "name": "BillingProfile",
-            "value": "BillingProfile"
-          },
-          {
-            "name": "Customer",
-            "value": "Customer"
-          }
-        ]
-      }
-    },
-    "BenefitProvisioningState": {
-      "type": "string",
-      "description": "Provisioning state for billing benefit resources. Includes the standard terminal states\n(Succeeded, Failed, Canceled) plus benefit-specific transition states.",
-      "enum": [
-        "Succeeded",
-        "Failed",
-        "Canceled",
-        "Pending"
-      ],
-      "x-ms-enum": {
-        "name": "BenefitProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Resource has been created."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Resource creation failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Resource creation was canceled."
-          },
-          {
-            "name": "Pending",
-            "value": "Pending",
-            "description": "The resource provisioning request has been accepted but processing has not yet started."
-          }
-        ]
-      },
-      "readOnly": true
-    },
     "BenefitType": {
       "type": "string",
-      "description": "Represents benefit model type for validation. Includes all resource types\nplus legacy singular-form values used by the validate API.",
+      "description": "Represents benefit model type for validation.",
       "enum": [
-        "Maccs",
-        "Credits",
-        "ConditionalCredits",
-        "Discounts",
-        "FreeServices",
-        "SavingsPlans",
-        "Reservations",
         "SavingsPlan",
-        "MACC"
+        "MACC",
+        "ConditionalCredits",
+        "Credits"
       ],
       "x-ms-enum": {
         "name": "BenefitType",
         "modelAsString": true,
         "values": [
           {
-            "name": "Maccs",
-            "value": "Maccs",
-            "description": "Microsoft Azure Consumption Commitments"
-          },
-          {
-            "name": "Credits",
-            "value": "Credits",
-            "description": "Credits applied to the customer's billing account"
-          },
-          {
-            "name": "ConditionalCredits",
-            "value": "ConditionalCredits",
-            "description": "Conditional Credits"
-          },
-          {
-            "name": "Discounts",
-            "value": "Discounts",
-            "description": "Discounts that reduce charges on eligible services"
-          },
-          {
-            "name": "FreeServices",
-            "value": "FreeServices",
-            "description": "Services provided at no charge under the billing agreement"
-          },
-          {
-            "name": "SavingsPlans",
-            "value": "SavingsPlans",
-            "description": "Savings Plan"
-          },
-          {
-            "name": "Reservations",
-            "value": "Reservations",
-            "description": "Reserved capacity or reserved instances"
-          },
-          {
             "name": "SavingsPlan",
-            "value": "SavingsPlan",
-            "description": "Savings Plan (singular form, used by validate API)"
+            "value": "SavingsPlan"
           },
           {
             "name": "MACC",
-            "value": "MACC",
-            "description": "MACC (legacy form, used by validate API)"
+            "value": "MACC"
+          },
+          {
+            "name": "ConditionalCredits",
+            "value": "ConditionalCredits"
+          },
+          {
+            "name": "Credits",
+            "value": "Credits"
           }
         ]
       }
@@ -5221,6 +3984,10 @@
               }
             ]
           }
+        },
+        "systemId": {
+          "type": "string",
+          "description": "This is the globally unique identifier of the credit which will not change for its lifetime."
         }
       }
     },
@@ -5251,12 +4018,12 @@
         },
         "startDate": {
           "type": "string",
-          "format": "date",
+          "format": "date-time-rfc7231",
           "description": "Date when the billing plan has started."
         },
         "nextPaymentDueDate": {
           "type": "string",
-          "format": "date",
+          "format": "date-time-rfc7231",
           "description": "For recurring billing plans, indicates the date when next payment will be processed. Null when total is paid off."
         },
         "transactions": {
@@ -5277,128 +4044,6 @@
         },
         "value": {
           "type": "string"
-        }
-      }
-    },
-    "CatalogGroup": {
-      "type": "object",
-      "description": "A catalog group represents a BenefitResourceType + Namespace grouping used for benefit SKU discovery.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/CatalogGroupProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "CatalogGroupCapability": {
-      "type": "object",
-      "description": "A key-value pair representing a capability of the catalog group (for example, exchange or renewal support).",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The capability name (e.g., SelfServiceExchange, Renewability)."
-        },
-        "value": {
-          "type": "string",
-          "description": "The capability value (e.g., Supported, Not Supported)."
-        }
-      },
-      "required": [
-        "name",
-        "value"
-      ]
-    },
-    "CatalogGroupListResult": {
-      "type": "object",
-      "description": "The response of a CatalogGroup list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The CatalogGroup items on this page",
-          "items": {
-            "$ref": "#/definitions/CatalogGroup"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "CatalogGroupProperties": {
-      "type": "object",
-      "description": "Properties of a catalog group.",
-      "properties": {
-        "benefitResourceType": {
-          "$ref": "#/definitions/ResourceType",
-          "description": "The top-level benefit resource type (e.g., maccs, credits, conditionalCredits, discounts, savingsPlans, reservations)."
-        },
-        "displayName": {
-          "type": "string",
-          "description": "Display name for the catalog group."
-        },
-        "shortDescription": {
-          "type": "string",
-          "description": "Short description of the catalog group."
-        },
-        "longDescription": {
-          "type": "string",
-          "description": "Long description of the catalog group."
-        },
-        "learnMoreLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "Link to learn more about this catalog group. Uses the forward-link format https://go.microsoft.com/fwlink/?linkid=<linkId>."
-        },
-        "keywords": {
-          "type": "array",
-          "description": "Manifest-sourced array of search terms for this catalog group. Omitted when empty.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "icon": {
-          "type": "string",
-          "description": "The benefit type's icon as JSON-escaped SVG markup. After parsing, the value is a complete `<svg>…</svg>` element.",
-          "example": "<svg viewBox=\"0 0 18 18\" class=\"\" role=\"presentation\" focusable=\"false\" xmlns:svg=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" id=\"FxSymbol0-026\"><defs><linearGradient id=\"0069e7e8-fdae-4c19-9033-1c9110b94edb\" x1=\"8.88\" y1=\"12.21\" x2=\"8.88\" y2=\".21\" gradientUnits=\"userSpaceOnUse\"><stop offset=\"0\" stop-color=\"#0078d4\"/><stop offset=\".82\" stop-color=\"#5ea0ef\"/></linearGradient><linearGradient id=\"a7c881fe-6333-4255-971a-27e7240497ec\" x1=\"8.88\" y1=\"16.84\" x2=\"8.88\" y2=\"12.21\" gradientUnits=\"userSpaceOnUse\"><stop offset=\".15\" stop-color=\"#ccc\"/><stop offset=\"1\" stop-color=\"#707070\"/></linearGradient></defs><rect x=\"-.12\" y=\".21\" width=\"18\" height=\"12\" rx=\".6\" fill=\"url(#0069e7e8-fdae-4c19-9033-1c9110b94edb)\"></rect><path fill=\"#50e6ff\" d=\"M11.88 4.46v3.49l-3 1.76v-3.5l3-1.75z\"></path><path fill=\"#c3f1ff\" d=\"M11.88 4.46l-3 1.76-3-1.76 3-1.75 3 1.75z\"></path><path fill=\"#9cebff\" d=\"M8.88 6.22v3.49l-3-1.76V4.46l3 1.76z\"></path><path fill=\"#c3f1ff\" d=\"M5.88 7.95l3-1.74v3.5l-3-1.76z\"></path><path fill=\"#9cebff\" d=\"M11.88 7.95l-3-1.74v3.5l3-1.76z\"></path><path d=\"M12.49 15.84c-1.78-.28-1.85-1.56-1.85-3.63H7.11c0 2.07-.06 3.35-1.84 3.63a1 1 0 0 0-.89 1h9a1 1 0 0 0-.89-1z\" fill=\"url(#a7c881fe-6333-4255-971a-27e7240497ec)\"></path></svg>"
-        },
-        "capabilities": {
-          "type": "array",
-          "description": "Capabilities of the catalog group as key-value pairs. Omitted when a benefit type has no defined capabilities.",
-          "items": {
-            "$ref": "#/definitions/CatalogGroupCapability"
-          },
-          "x-ms-identifiers": []
-        },
-        "disclaimers": {
-          "type": "array",
-          "description": "Optional disclaimers (legal or eligibility caveats) for the catalog group. Included only when caveats apply.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "benefitResourceType"
-      ]
-    },
-    "ChangeSponsorRequest": {
-      "type": "object",
-      "description": "Request body for the changeSponsor action on a credit.",
-      "properties": {
-        "sponsorId": {
-          "type": "string",
-          "description": "Financial code identifying the new sponsor. This is an alphanumeric identifier assigned by the billing system, for example P20567384.",
-          "example": "P30000001"
         }
       }
     },
@@ -5487,7 +4132,7 @@
           "readOnly": true
         },
         "identity": {
-          "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "Managed service identity (system assigned and/or user assigned identities)"
         },
         "sku": {
@@ -5501,7 +4146,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -5517,7 +4162,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -5703,7 +4348,7 @@
           }
         },
         "provisioningState": {
-          "$ref": "#/definitions/BenefitProvisioningState",
+          "$ref": "#/definitions/ConditionalCreditsProvisioningState",
           "description": "The provisioning state of the resource",
           "readOnly": true
         },
@@ -5745,28 +4390,6 @@
           "type": "string",
           "format": "arm-id",
           "description": "Fully-qualified resource identifier of the resource. Format: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/{benefitType}/{benefitName}."
-        },
-        "productDetails": {
-          "$ref": "#/definitions/ProductDetailsBase",
-          "description": "Product details including SKU title, product family, and product type.",
-          "readOnly": true
-        },
-        "appliedScopeType": {
-          "$ref": "#/definitions/BenefitAppliedScopeType",
-          "description": "Type of the applied scope for the conditional credit."
-        },
-        "invitationId": {
-          "type": "string",
-          "description": "Invitation identifier",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "consumed": {
-          "$ref": "#/definitions/Price",
-          "description": "Amount of benefit that has been consumed",
-          "readOnly": true
         }
       },
       "discriminator": "entityType",
@@ -5831,41 +4454,42 @@
         ]
       }
     },
-    "ConditionalCreditTransaction": {
-      "type": "object",
-      "description": "Transaction resource definition for ConditionalCredits",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/TransactionProperties",
-          "description": "Transaction properties"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "ConditionalCreditTransactionsList": {
-      "type": "object",
-      "description": "List of conditional credit transactions",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The ConditionalCreditTransaction items on this page",
-          "items": {
-            "$ref": "#/definitions/ConditionalCreditTransaction"
+    "ConditionalCreditsProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of the resource",
+      "enum": [
+        "Unknown",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Pending"
+      ],
+      "x-ms-enum": {
+        "name": "ConditionalCreditsProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled"
+          },
+          {
+            "name": "Pending",
+            "value": "Pending"
           }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
+        ]
+      }
     },
     "ConditionalCreditsValidateModel": {
       "type": "object",
@@ -5914,7 +4538,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -6044,7 +4668,7 @@
           "readOnly": true
         },
         "identity": {
-          "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "Managed service identity (system assigned and/or user assigned identities)"
         },
         "sku": {
@@ -6058,7 +4682,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -6185,35 +4809,6 @@
         }
       }
     },
-    "CreditProductDetails": {
-      "type": "object",
-      "description": "Product details for a credit",
-      "properties": {
-        "skuTitle": {
-          "type": "string",
-          "description": "SKU title of the product"
-        },
-        "productFamily": {
-          "type": "string",
-          "description": "The product family, for example \"Azure\" or \"M365\"."
-        },
-        "productType": {
-          "type": "string",
-          "description": "The type of the product."
-        },
-        "appliedOn": {
-          "type": "array",
-          "description": "Indicates where the credit benefit is applied (e.g., consume, invoice, or external application).",
-          "items": {
-            "$ref": "#/definitions/AppliedOn"
-          }
-        },
-        "appliedPrice": {
-          "type": "string",
-          "description": "Specifies which price point is used when applying the credit. Known values include \"MarketPrice\", \"UnitPrice\", and \"BenefitGroupPrice:<groupId>\" where <groupId> identifies the benefit group."
-        }
-      }
-    },
     "CreditProperties": {
       "type": "object",
       "description": "Properties of a credit",
@@ -6225,10 +4820,6 @@
         "productCode": {
           "type": "string",
           "description": "Product UPN for the credit type"
-        },
-        "displayName": {
-          "type": "string",
-          "description": "Display name"
         },
         "reason": {
           "$ref": "#/definitions/CreditReason",
@@ -6278,23 +4869,7 @@
                 "scopes": [
                   "Tenant"
                 ],
-                "type": "Microsoft.Billing/billingAccounts/billingProfiles"
-              }
-            ]
-          }
-        },
-        "customerResourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Customer resource id where the benefit is scoped to.",
-          "readOnly": true,
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "scopes": [
-                  "Tenant"
-                ],
-                "type": "Microsoft.Billing/billingAccounts/customers"
+                "type": "Microsoft.Billing/billingAccounts"
               }
             ]
           }
@@ -6307,7 +4882,7 @@
           }
         },
         "provisioningState": {
-          "$ref": "#/definitions/BenefitProvisioningState",
+          "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state",
           "readOnly": true
         },
@@ -6315,45 +4890,15 @@
           "type": "string",
           "description": "System identifier"
         },
-        "orderId": {
+        "customerId": {
           "type": "string",
-          "description": "Identifier of the $0 transaction created during credit acquisition.",
+          "description": "Fully-qualified identifier of the customer where the savings plan is applied. Present only for Partner-led customers. Format is /providers/Microsoft.Billing/billingAccounts/{acctId:orgId}",
           "readOnly": true
-        },
-        "fundingSystemId": {
-          "type": "string",
-          "description": "Unique identifier (UUID) of the funding lot assigned by the benefit publisher. Used in credit transfer scenarios to trace the originating credit lot.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
         },
         "resourceId": {
           "type": "string",
           "format": "arm-id",
           "description": "Fully-qualified resource identifier of the resource. Format: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/{benefitType}/{benefitName}."
-        },
-        "invitationId": {
-          "type": "string",
-          "description": "Invitation identifier",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "consumed": {
-          "$ref": "#/definitions/Price",
-          "description": "Amount of benefit that has been consumed",
-          "readOnly": true
-        },
-        "productDetails": {
-          "$ref": "#/definitions/CreditProductDetails",
-          "description": "Product details including SKU title, product kind, offer type, and application details",
-          "readOnly": true
-        },
-        "appliedScopeType": {
-          "$ref": "#/definitions/BenefitAppliedScopeType",
-          "description": "Type of the applied scope for the credit."
         }
       }
     },
@@ -6434,7 +4979,7 @@
           "readOnly": true
         },
         "identity": {
-          "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "Managed service identity (system assigned and/or user assigned identities)"
         },
         "sku": {
@@ -6448,7 +4993,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -6588,23 +5133,7 @@
             "description": "Credit application has not started yet"
           }
         ]
-      },
-      "readOnly": true
-    },
-    "CreditTransaction": {
-      "type": "object",
-      "description": "Transaction resource definition for Credits",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/TransactionProperties",
-          "description": "Transaction properties"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ]
+      }
     },
     "CreditsList": {
       "type": "object",
@@ -6736,9 +5265,36 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
         }
       ]
+    },
+    "DiscountAppliedScopeType": {
+      "type": "string",
+      "description": "List of applied scopes supported for discounts.",
+      "enum": [
+        "BillingAccount",
+        "BillingProfile",
+        "Customer"
+      ],
+      "x-ms-enum": {
+        "name": "DiscountAppliedScopeType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "BillingAccount",
+            "value": "BillingAccount"
+          },
+          {
+            "name": "BillingProfile",
+            "value": "BillingProfile"
+          },
+          {
+            "name": "Customer",
+            "value": "Customer"
+          }
+        ]
+      }
     },
     "DiscountCombinationRule": {
       "type": "string",
@@ -6830,11 +5386,6 @@
         "displayName": {
           "type": "string",
           "description": "Display name"
-        },
-        "endAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "End date of the discount. No duration will be supported. Allowed value is any date greater than or equal to startDate."
         }
       }
     },
@@ -6855,24 +5406,19 @@
           "format": "date-time",
           "description": "Start date of the discount. Value is the date the discount started or will start in the future."
         },
-        "endAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "End date of the discount. No duration will be supported. Allowed value is any date greater than or equal to startDate."
-        },
         "systemId": {
           "type": "string",
           "description": "This is the globally unique identifier of the Discount which will not change for the lifetime of the Discount."
         },
         "provisioningState": {
-          "$ref": "#/definitions/BenefitProvisioningState",
+          "$ref": "#/definitions/DiscountProvisioningState",
           "description": "The state of the resource. Supported values are Pending, Failed, Succeeded, Canceled.",
           "readOnly": true
         },
         "billingAccountResourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "Fully-qualified identifier of the billing account where the benefit is applied.",
+          "description": "Billing account resource id where the discount metadata is present.",
           "readOnly": true,
           "x-ms-arm-id-details": {
             "allowedResources": [
@@ -6888,7 +5434,7 @@
         "billingProfileResourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "Fully-qualified identifier of the billing profile where the benefit is applied.",
+          "description": "Billing profile resource id where the discount is scoped to.",
           "readOnly": true,
           "x-ms-arm-id-details": {
             "allowedResources": [
@@ -6896,7 +5442,7 @@
                 "scopes": [
                   "Tenant"
                 ],
-                "type": "Microsoft.Billing/billingAccounts/billingProfiles"
+                "type": "Microsoft.Billing/billingAccounts"
               }
             ]
           }
@@ -6904,7 +5450,7 @@
         "customerResourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "Customer resource id where the benefit is scoped to.",
+          "description": "Customer resource id where the discount is scoped to.",
           "readOnly": true,
           "x-ms-arm-id-details": {
             "allowedResources": [
@@ -6916,14 +5462,6 @@
               }
             ]
           }
-        },
-        "invitationId": {
-          "type": "string",
-          "description": "Invitation identifier",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
         },
         "displayName": {
           "type": "string",
@@ -6951,13 +5489,8 @@
           }
         },
         "appliedScopeType": {
-          "$ref": "#/definitions/BenefitAppliedScopeType",
+          "$ref": "#/definitions/DiscountAppliedScopeType",
           "description": "List of applied scopes supported for discounts."
-        },
-        "productDetails": {
-          "$ref": "#/definitions/ProductDetailsBase",
-          "description": "Product details including SKU title, product family, and product type.",
-          "readOnly": true
         }
       },
       "discriminator": "entityType",
@@ -6966,6 +5499,43 @@
         "productCode",
         "startAt"
       ]
+    },
+    "DiscountProvisioningState": {
+      "type": "string",
+      "description": "Provisioning states of Discount.",
+      "enum": [
+        "Unknown",
+        "Pending",
+        "Succeeded",
+        "Canceled",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "DiscountProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown"
+          },
+          {
+            "name": "Pending",
+            "value": "Pending"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed"
+          }
+        ]
+      }
     },
     "DiscountRuleType": {
       "type": "string",
@@ -7039,8 +5609,7 @@
         "Product",
         "Sku",
         "CustomPrice",
-        "CustomPriceMultiCurrency",
-        "AzurePromotion"
+        "CustomPriceMultiCurrency"
       ],
       "x-ms-enum": {
         "name": "DiscountType",
@@ -7065,30 +5634,9 @@
           {
             "name": "CustomPriceMultiCurrency",
             "value": "CustomPriceMultiCurrency"
-          },
-          {
-            "name": "AzurePromotion",
-            "value": "AzurePromotion",
-            "description": "Azure promotion discount type."
           }
         ]
       }
-    },
-    "DiscountTypeAzurePromotion": {
-      "type": "object",
-      "description": "Discount type properties for Azure promotion discounts.",
-      "properties": {
-        "productFamilyName": {
-          "type": "string",
-          "description": "Product family for which the discount is given. Validation: Optional"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/DiscountTypeProperties"
-        }
-      ],
-      "x-ms-discriminator-value": "AzurePromotion"
     },
     "DiscountTypeCustomPrice": {
       "type": "object",
@@ -7229,22 +5777,6 @@
         "applyDiscountOn"
       ]
     },
-    "DiscountValidateModel": {
-      "type": "object",
-      "description": "Discount validate model",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/DiscountProperties",
-          "description": "Discount validate properties"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/BenefitValidateModel"
-        }
-      ],
-      "x-ms-discriminator-value": "Discounts"
-    },
     "EnablementMode": {
       "type": "string",
       "description": "Represents the enablement status of a feature or settings.",
@@ -7343,244 +5875,6 @@
         }
       }
     },
-    "FreeServices": {
-      "type": "object",
-      "description": "Free Services resource definition",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/FreeServicesProperties",
-          "description": "Free services properties",
-          "x-ms-client-flatten": true
-        },
-        "managedBy": {
-          "type": "string",
-          "description": "The fully qualified resource ID of the resource that manages this resource. Indicates if this resource is managed by another Azure resource. If this is present, complete mode deployment will not delete the resource if it is removed from the template since it is managed by another resource.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "kind": {
-          "type": "string",
-          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type. E.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value.",
-          "pattern": "^[-\\w\\._,\\(\\)]+$",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "etag": {
-          "type": "string",
-          "description": "The etag field is *not* required. If it is provided in the response body, it must also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
-          "readOnly": true
-        },
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "Managed service identity (system assigned and/or user assigned identities)"
-        },
-        "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "The resource model definition representing SKU"
-        },
-        "plan": {
-          "$ref": "#/definitions/Plan",
-          "description": "Plan for the resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
-        }
-      ]
-    },
-    "FreeServicesList": {
-      "type": "object",
-      "description": "This operation lists the free services that are available under the specified subscription.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The list of free services",
-          "items": {
-            "$ref": "#/definitions/FreeServices"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URL to get the next set of results",
-          "readOnly": true
-        }
-      }
-    },
-    "FreeServicesPatchRequest": {
-      "type": "object",
-      "description": "Free services patch request",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/FreeServicesPatchRequestProperties",
-          "description": "Free services patch request properties",
-          "x-ms-client-flatten": true
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "FreeServicesPatchRequestProperties": {
-      "type": "object",
-      "description": "Free services patch request properties",
-      "properties": {
-        "endAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Updated expiration date and time of the free services"
-        }
-      }
-    },
-    "FreeServicesProperties": {
-      "type": "object",
-      "description": "Properties of free services",
-      "properties": {
-        "productCode": {
-          "type": "string",
-          "description": "This is the catalog UPN for the product."
-        },
-        "displayName": {
-          "type": "string",
-          "description": "Display name"
-        },
-        "status": {
-          "$ref": "#/definitions/FreeServicesStatus",
-          "description": "Current status of the free services"
-        },
-        "startAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Date and time when the free services become active"
-        },
-        "endAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Expiration date and time of the free services"
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/BenefitProvisioningState",
-          "description": "Provisioning state of Free Services as assigned by RPaaS. This indicates the last operation's status. For all practical purposes, this can be ignored. For current status of Free Services resource, refer to FreeServicesStatus.",
-          "readOnly": true
-        },
-        "billingAccountResourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Fully-qualified identifier of the billing account where the benefit is applied.",
-          "readOnly": true,
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "scopes": [
-                  "Tenant"
-                ],
-                "type": "Microsoft.Billing/billingAccounts"
-              }
-            ]
-          }
-        },
-        "billingProfileResourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Fully-qualified identifier of the billing profile where the benefit is applied.",
-          "readOnly": true,
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "scopes": [
-                  "Tenant"
-                ],
-                "type": "Microsoft.Billing/billingAccounts/billingProfiles"
-              }
-            ]
-          }
-        },
-        "customerResourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Customer resource id where the benefit is scoped to.",
-          "readOnly": true,
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "scopes": [
-                  "Tenant"
-                ],
-                "type": "Microsoft.Billing/billingAccounts/customers"
-              }
-            ]
-          }
-        },
-        "invitationId": {
-          "type": "string",
-          "description": "Invitation identifier",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "systemId": {
-          "type": "string",
-          "description": "This is the globally unique identifier of the free services which will not change for its lifetime. Generated by the benefit publisher."
-        },
-        "productDetails": {
-          "$ref": "#/definitions/ProductDetailsBase",
-          "description": "Product details including SKU title, product family, and product type.",
-          "readOnly": true
-        }
-      }
-    },
-    "FreeServicesStatus": {
-      "type": "string",
-      "description": "Status of the free services",
-      "enum": [
-        "Unknown",
-        "Pending",
-        "Active",
-        "Canceled",
-        "Completed"
-      ],
-      "x-ms-enum": {
-        "name": "FreeServicesStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Unknown",
-            "value": "Unknown",
-            "description": "Free services status is unknown"
-          },
-          {
-            "name": "Pending",
-            "value": "Pending",
-            "description": "Free services are pending activation"
-          },
-          {
-            "name": "Active",
-            "value": "Active",
-            "description": "Free services are active"
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Free services have been canceled"
-          },
-          {
-            "name": "Completed",
-            "value": "Completed",
-            "description": "Free services have been fully consumed or completed"
-          }
-        ]
-      }
-    },
     "InstanceFlexibility": {
       "type": "string",
       "description": "Turning this on will apply the reservation discount to other VMs in the same VM size group.",
@@ -7636,7 +5930,7 @@
           "readOnly": true
         },
         "identity": {
-          "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "Managed service identity (system assigned and/or user assigned identities)"
         },
         "sku": {
@@ -7650,7 +5944,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -7808,7 +6102,7 @@
       "description": "MACC properties",
       "properties": {
         "provisioningState": {
-          "$ref": "#/definitions/BenefitProvisioningState",
+          "type": "string",
           "description": "Provisioning state of MACC as assigned by RPaaS. This indicates the last operation's status. For all practical purposes, this can be ignored. For current status of MACC resource, refer to MaccStatus.",
           "readOnly": true
         },
@@ -7941,28 +6235,6 @@
               }
             ]
           }
-        },
-        "productDetails": {
-          "$ref": "#/definitions/ProductDetailsBase",
-          "description": "Product details including SKU title, product family, and product type.",
-          "readOnly": true
-        },
-        "appliedScopeType": {
-          "$ref": "#/definitions/BenefitAppliedScopeType",
-          "description": "Type of the applied scope for the MACC."
-        },
-        "invitationId": {
-          "type": "string",
-          "description": "Invitation identifier",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "consumed": {
-          "$ref": "#/definitions/Price",
-          "description": "Amount of benefit that has been consumed",
-          "readOnly": true
         }
       },
       "required": [
@@ -8127,42 +6399,6 @@
         ]
       }
     },
-    "MaccTransaction": {
-      "type": "object",
-      "description": "Transaction resource definition for Maccs",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/TransactionProperties",
-          "description": "Transaction properties"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "MaccTransactionsList": {
-      "type": "object",
-      "description": "List of Macc transactions",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The MaccTransaction items on this page",
-          "items": {
-            "$ref": "#/definitions/MaccTransaction"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "MaccValidateModel": {
       "type": "object",
       "description": "MACC validate model",
@@ -8179,22 +6415,6 @@
         }
       ],
       "x-ms-discriminator-value": "MACC"
-    },
-    "MaccsValidateModel": {
-      "type": "object",
-      "description": "Maccs validate model",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/MaccModelProperties",
-          "description": "MACC validate properties"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/BenefitValidateModel"
-        }
-      ],
-      "x-ms-discriminator-value": "Maccs"
     },
     "ManagedServiceIdentity": {
       "type": "object",
@@ -8220,7 +6440,7 @@
           "type": "object",
           "description": "The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests.",
           "additionalProperties": {
-            "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/UserAssignedIdentity"
+            "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/UserAssignedIdentity"
           }
         }
       },
@@ -8354,12 +6574,12 @@
       "properties": {
         "dueDate": {
           "type": "string",
-          "format": "date",
+          "format": "date-time-rfc7231",
           "description": "Date when the payment needs to be done."
         },
         "paymentDate": {
           "type": "string",
-          "format": "date",
+          "format": "date-time-rfc7231",
           "description": "Date when the transaction is completed. Is null when it is scheduled."
         },
         "pricingCurrencyTotal": {
@@ -8414,8 +6634,7 @@
             "value": "Cancelled"
           }
         ]
-      },
-      "readOnly": true
+      }
     },
     "Plan": {
       "type": "object",
@@ -8566,24 +6785,6 @@
       ],
       "x-ms-discriminator-value": "Primary"
     },
-    "ProductDetailsBase": {
-      "type": "object",
-      "description": "Common product detail properties shared across all benefit resources",
-      "properties": {
-        "skuTitle": {
-          "type": "string",
-          "description": "SKU title of the product"
-        },
-        "productFamily": {
-          "type": "string",
-          "description": "The product family, for example \"Azure\" or \"M365\"."
-        },
-        "productType": {
-          "type": "string",
-          "description": "The type of the product."
-        }
-      }
-    },
     "ProvisioningState": {
       "type": "string",
       "description": "Provisioning state",
@@ -8634,8 +6835,7 @@
             "value": "Failed"
           }
         ]
-      },
-      "readOnly": true
+      }
     },
     "PurchaseRequest": {
       "type": "object",
@@ -8688,38 +6888,10 @@
           "description": "Setting this to true will automatically purchase a new benefit on the expiration date time.",
           "default": false
         },
-        "renewAction": {
-          "$ref": "#/definitions/RenewAction",
-          "description": "Represents the renewal action for a reservation to be a new purchase or existing renewal."
-        },
         "appliedScopeProperties": {
           "$ref": "#/definitions/AppliedScopeProperties",
           "description": "Properties specific to applied scope type. Not required if not applicable."
         }
-      }
-    },
-    "RenewAction": {
-      "type": "string",
-      "description": "Represents the renewal action for a reservation to be a new purchase or existing renewal.",
-      "enum": [
-        "CreateNew",
-        "RenewExisting"
-      ],
-      "x-ms-enum": {
-        "name": "RenewAction",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "CreateNew",
-            "value": "CreateNew",
-            "description": "Represents a new purchase renewal action."
-          },
-          {
-            "name": "RenewExisting",
-            "value": "RenewExisting",
-            "description": "Represents renewal of an existing reservation."
-          }
-        ]
       }
     },
     "RenewProperties": {
@@ -8753,7 +6925,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
         }
       ]
     },
@@ -8796,10 +6968,6 @@
           "description": "Setting this to true will automatically purchase a new benefit on the expiration date time.",
           "default": false
         },
-        "renewAction": {
-          "$ref": "#/definitions/RenewAction",
-          "description": "Represents the renewal action for a reservation to be a new purchase or existing renewal."
-        },
         "reservedResourceType": {
           "$ref": "#/definitions/ReservedResourceType",
           "description": "The type of the resource that is being reserved."
@@ -8808,11 +6976,6 @@
           "type": "string",
           "format": "date-time",
           "description": "This is the date-time when the Azure Hybrid Benefit needs to be reviewed."
-        },
-        "benefitStartTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "This is the DateTime when the reservation benefit started."
         },
         "reservedResourceProperties": {
           "$ref": "#/definitions/ReservationOrderAliasRequestPropertiesReservedResourceProperties",
@@ -8853,7 +7016,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -8905,16 +7068,6 @@
           "description": "Setting this to true will automatically purchase a new benefit on the expiration date time.",
           "default": false
         },
-        "renewAction": {
-          "$ref": "#/definitions/RenewAction",
-          "description": "Represents the renewal action for a reservation to be a new purchase or existing renewal."
-        },
-        "renewalPurchaseDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "This is the date-time when the reservation was renewed.",
-          "readOnly": true
-        },
         "reservedResourceType": {
           "$ref": "#/definitions/ReservedResourceType",
           "description": "The type of the resource that is being reserved."
@@ -8923,11 +7076,6 @@
           "type": "string",
           "format": "date-time",
           "description": "This is the date-time when the Reservation needs to be reviewed."
-        },
-        "benefitStartTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "This is the DateTime when the reservation benefit started."
         },
         "reservedResourceProperties": {
           "$ref": "#/definitions/ReservationOrderAliasResponsePropertiesReservedResourceProperties",
@@ -9095,60 +7243,6 @@
         }
       }
     },
-    "ResourceType": {
-      "type": "string",
-      "description": "The top-level ARM resource type for a billing benefit (e.g., maccs, credits, savingsPlans, reservations).",
-      "enum": [
-        "Maccs",
-        "Credits",
-        "ConditionalCredits",
-        "Discounts",
-        "FreeServices",
-        "SavingsPlans",
-        "Reservations"
-      ],
-      "x-ms-enum": {
-        "name": "ResourceType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Maccs",
-            "value": "Maccs",
-            "description": "Microsoft Azure Consumption Commitments"
-          },
-          {
-            "name": "Credits",
-            "value": "Credits",
-            "description": "Credits applied to the customer's billing account"
-          },
-          {
-            "name": "ConditionalCredits",
-            "value": "ConditionalCredits",
-            "description": "Conditional Credits"
-          },
-          {
-            "name": "Discounts",
-            "value": "Discounts",
-            "description": "Discounts that reduce charges on eligible services"
-          },
-          {
-            "name": "FreeServices",
-            "value": "FreeServices",
-            "description": "Services provided at no charge under the billing agreement"
-          },
-          {
-            "name": "SavingsPlans",
-            "value": "SavingsPlans",
-            "description": "Savings Plan"
-          },
-          {
-            "name": "Reservations",
-            "value": "Reservations",
-            "description": "Reserved capacity or reserved instances"
-          }
-        ]
-      }
-    },
     "RoleAssignmentEntity": {
       "type": "object",
       "description": "Role assignment entity",
@@ -9205,7 +7299,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -9290,7 +7384,7 @@
                 "scopes": [
                   "Tenant"
                 ],
-                "type": "Microsoft.Billing/billingAccounts/billingProfiles"
+                "type": "Microsoft.Billing/billingAccounts"
               }
             ]
           }
@@ -9425,7 +7519,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -9497,7 +7591,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -9550,7 +7644,7 @@
                 "scopes": [
                   "Tenant"
                 ],
-                "type": "Microsoft.Billing/billingAccounts/billingProfiles"
+                "type": "Microsoft.Billing/billingAccounts"
               }
             ]
           }
@@ -9789,7 +7883,7 @@
           "readOnly": true
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
           "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
           "readOnly": true
         },
@@ -9827,54 +7921,6 @@
           "description": "Url to get the next page."
         }
       }
-    },
-    "SavingsPlansValidateModel": {
-      "type": "object",
-      "description": "Savings Plans validate model",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/SavingsPlanOrderAliasProperties",
-          "description": "Savings plan order alias properties"
-        },
-        "id": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the resource",
-          "readOnly": true
-        },
-        "type": {
-          "$ref": "#/definitions/Azure.Core.armResourceType",
-          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
-          "readOnly": true
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
-          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
-          "readOnly": true
-        },
-        "sku": {
-          "$ref": "#/definitions/ResourceSku",
-          "description": "Savings plan SKU"
-        },
-        "kind": {
-          "type": "string",
-          "description": "Resource provider kind"
-        }
-      },
-      "required": [
-        "sku"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/BenefitValidateModel"
-        }
-      ],
-      "x-ms-discriminator-value": "SavingsPlans"
     },
     "SellerResourceListRequest": {
       "type": "object",
@@ -9993,7 +8039,7 @@
           "description": "The name of the SKU. E.g. P3. It is typically a letter+number code"
         },
         "tier": {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/SkuTier",
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/SkuTier",
           "description": "This field is required to be implemented by the Resource Provider if the service has more than one tier, but is not required on a PUT."
         },
         "size": {
@@ -10018,7 +8064,6 @@
       "type": "string",
       "description": "Represent benefit term in ISO 8601 format.",
       "enum": [
-        "P1M",
         "P1Y",
         "P3Y",
         "P5Y"
@@ -10027,10 +8072,6 @@
         "name": "Term",
         "modelAsString": true,
         "values": [
-          {
-            "name": "P1M",
-            "value": "P1M"
-          },
           {
             "name": "P1Y",
             "value": "P1Y"
@@ -10045,162 +8086,6 @@
           }
         ]
       }
-    },
-    "TransactionBillingStatus": {
-      "type": "string",
-      "description": "Billing lifecycle status of a transaction.",
-      "enum": [
-        "Open",
-        "Closed"
-      ],
-      "x-ms-enum": {
-        "name": "TransactionBillingStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Open",
-            "value": "Open",
-            "description": "Charge may still change."
-          },
-          {
-            "name": "Closed",
-            "value": "Closed",
-            "description": "Charge is finalized."
-          }
-        ]
-      }
-    },
-    "TransactionChargeType": {
-      "type": "string",
-      "description": "The type of charge for a transaction.",
-      "enum": [
-        "Usage",
-        "Purchase",
-        "Refund"
-      ],
-      "x-ms-enum": {
-        "name": "TransactionChargeType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Usage",
-            "value": "Usage",
-            "description": "Usage charge. Applicable to all benefits."
-          },
-          {
-            "name": "Purchase",
-            "value": "Purchase",
-            "description": "Purchase charge. Applicable to MACC, CACO, ACO, MC only."
-          },
-          {
-            "name": "Refund",
-            "value": "Refund",
-            "description": "Refund charge. Applicable to all benefits."
-          }
-        ]
-      }
-    },
-    "TransactionProductDetails": {
-      "type": "object",
-      "description": "Product details for a transaction",
-      "properties": {
-        "skuTitle": {
-          "type": "string",
-          "description": "SKU title of the product"
-        },
-        "productFamily": {
-          "type": "string",
-          "description": "The product family, for example \"Azure\" or \"M365\"."
-        },
-        "productType": {
-          "type": "string",
-          "description": "The type of the product."
-        },
-        "serviceFamily": {
-          "type": "string",
-          "description": "Grouping of Azure services by core function (e.g., Compute, Databases)."
-        },
-        "publisherType": {
-          "type": "string",
-          "description": "The publisher type of the product, for example \"Microsoft\" for first-party or a third-party publisher name. Additional values may be introduced in the future."
-        }
-      }
-    },
-    "TransactionProperties": {
-      "type": "object",
-      "description": "Properties of a transaction",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/BenefitProvisioningState",
-          "description": "Provisioning state of the transaction as assigned by RPaaS. This indicates the last operation's status.",
-          "readOnly": true
-        },
-        "date": {
-          "type": "string",
-          "format": "date-time",
-          "description": "This is the DateTime when the transaction occurred."
-        },
-        "chargeType": {
-          "$ref": "#/definitions/TransactionChargeType",
-          "description": "The type of charge for this transaction."
-        },
-        "billingStatus": {
-          "$ref": "#/definitions/TransactionBillingStatus",
-          "description": "Billing lifecycle status of this transaction."
-        },
-        "invoiceResourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Fully-qualified identifier of the invoice.",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "scopes": [
-                  "Tenant"
-                ],
-                "type": "Microsoft.Billing/billingAccounts"
-              }
-            ]
-          }
-        },
-        "amountInBillingCurrency": {
-          "$ref": "#/definitions/Price",
-          "description": "Transaction amount in billing currency."
-        },
-        "amountInPricingCurrency": {
-          "$ref": "#/definitions/Price",
-          "description": "Transaction amount in pricing currency."
-        },
-        "productCode": {
-          "type": "string",
-          "description": "Catalog UPN for the product associated with this transaction."
-        },
-        "productDetails": {
-          "$ref": "#/definitions/TransactionProductDetails",
-          "description": "Product details including SKU title, SKU properties, product family, type, and publisher type."
-        }
-      }
-    },
-    "TransactionsList": {
-      "type": "object",
-      "description": "List of transactions",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The CreditTransaction items on this page",
-          "items": {
-            "$ref": "#/definitions/CreditTransaction"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
     },
     "Utilization": {
       "type": "object",
@@ -10250,14 +8135,5 @@
       }
     }
   },
-  "parameters": {
-    "CatalogGroupsListParameters": {
-      "name": "$filter",
-      "in": "query",
-      "description": "OData filter expression to narrow the list of catalog groups.",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    }
-  }
+  "parameters": {}
 }

@@ -1,3 +1,12 @@
+- tool: TypeSpecRequirement
+  path: ./preview/2024-11-01-preview/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./preview/2025-05-01-preview/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./stable/2022-11-01/*.json
+  reason: Brownfield service not ready to migrate
 - tool: TypeSpecValidation
   paths:
     - tspconfig.yaml
@@ -13,4 +22,4 @@
     - options.@azure-tools/typespec-go.fix-const-stuttering
     - options.@azure-tools/typespec-go.generate-samples
     - options.@azure-tools/typespec-go.head-as-boolean
-  reason: 'Go emitter needs to fix a example mapping issue, suppress validation for now'
+  reason: "Go emitter needs to fix a example mapping issue, suppress validation for now"
