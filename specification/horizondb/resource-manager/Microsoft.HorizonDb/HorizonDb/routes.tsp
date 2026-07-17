@@ -1,10 +1,12 @@
 import "@typespec/rest";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./main.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 namespace Microsoft.HorizonDb;
@@ -195,4 +197,30 @@ interface HorizonDbParameterGroups {
       version?: int32;
     }
   >;
+}
+
+@added(Versions.v2026_05_01_preview)
+@armResourceOperations
+interface HorizonDbAdministrators {
+  @doc("Gets information about a HorizonDB administrator.")
+  get is ArmResourceRead<HorizonDbAdministrator>;
+
+  @doc("Creates a new HorizonDB administrator or updates an existing administrator.")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
+    HorizonDbAdministrator,
+    Request = HorizonDbAdministratorAdd
+  >;
+
+  @doc("Deletes a HorizonDB administrator.")
+  delete is ArmResourceDeleteWithoutOkAsync<
+    HorizonDbAdministrator,
+    Response =
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
+  >;
+
+  @doc("Lists all HorizonDB administrators in a cluster.")
+  list is ArmResourceListByParent<HorizonDbAdministrator>;
 }
