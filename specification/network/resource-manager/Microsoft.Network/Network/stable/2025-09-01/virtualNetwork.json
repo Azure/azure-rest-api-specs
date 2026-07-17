@@ -8434,16 +8434,16 @@
           "Create SaaS NetworkVirtualAppliance": {
             "$ref": "./examples/NetworkVirtualApplianceSaaSPut.json"
           },
-          "Create NVA in Vhub with addressFamily having dual stack": {
+          "Create NVA in Vhub for IPv4 and IPv6": {
             "$ref": "./examples/NetworkVirtualApplianceVhubDualStackPut.json"
           },
-          "Create NVA in VNet with addressFamily having dual stack": {
+          "Create NVA in VNet for IPv4 and IPv6": {
             "$ref": "./examples/NetworkVirtualApplianceVnetDualStackPut.json"
           },
-          "Create NVA in Vhub with addressFamily having only IPv4": {
+          "Create NVA in Vhub for IPv4": {
             "$ref": "./examples/NetworkVirtualApplianceVhubIPv4Put.json"
           },
-          "Create NVA in VNet with addressFamily having only IPv4": {
+          "Create NVA in VNet for IPv4": {
             "$ref": "./examples/NetworkVirtualApplianceVnetIPv4Put.json"
           }
         },
@@ -18857,6 +18857,11 @@
           "description": "Address Prefix.",
           "readOnly": true
         },
+        "addressPrefixV6": {
+          "type": "string",
+          "description": "Address Prefix for Dual-Stack NVAs.",
+          "readOnly": true
+        },
         "bootStrapConfigurationBlobs": {
           "type": "array",
           "description": "BootStrapConfigurationBlobs storage URLs.",
@@ -18983,6 +18988,11 @@
         "privateIpAddress": {
           "type": "string",
           "description": "A Internal Load Balancer's HA port frontend IP address. Can be used to set routes & UDR to load balance traffic between NVA instances",
+          "readOnly": true
+        },
+        "privateIpAddressV6": {
+          "type": "string",
+          "description": "A Internal Load Balancer's HA port frontend IPv6 address. Can be used to set routes & UDR to load balance traffic between NVA instances. This field appears in dual-stack NVAs.",
           "readOnly": true
         }
       }
@@ -20778,6 +20788,16 @@
         "privateIpAddress": {
           "type": "string",
           "description": "Private IP address.",
+          "readOnly": true
+        },
+        "publicIpAddressV6": {
+          "type": "string",
+          "description": "Public IPv6 address. These fields appear in dual stack NVAs. It will also appear for Additional Nic configurations in case of Dual stack NVAs.",
+          "readOnly": true
+        },
+        "privateIpAddressV6": {
+          "type": "string",
+          "description": "Private IPv6 address. These fields appear in dual stack NVAs. It will also appear for Additional Nic configurations in case of Dual stack NVAs.",
           "readOnly": true
         },
         "instanceName": {
