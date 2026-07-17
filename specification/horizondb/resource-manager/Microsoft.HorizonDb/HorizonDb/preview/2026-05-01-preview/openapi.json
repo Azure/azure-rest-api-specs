@@ -2116,6 +2116,30 @@
     }
   },
   "definitions": {
+    "AuthenticationState": {
+      "type": "string",
+      "description": "Indicates if authentication state is enabled or not.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "AuthenticationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Is enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Is disabled"
+          }
+        ]
+      }
+    },
     "Azure.Core.azureLocation": {
       "type": "string",
       "description": "Represents an Azure geography region where supported resource providers live."
@@ -2214,7 +2238,7 @@
       "description": "Authentication configuration for a HorizonDB cluster.",
       "properties": {
         "entraIdAuthEnabled": {
-          "type": "boolean",
+          "$ref": "#/definitions/AuthenticationState",
           "description": "Indicates whether Microsoft Entra ID authentication is enabled."
         },
         "tenantId": {
@@ -2222,7 +2246,7 @@
           "description": "The Microsoft Entra tenant ID."
         },
         "passwordAuthEnabled": {
-          "type": "boolean",
+          "$ref": "#/definitions/AuthenticationState",
           "description": "Indicates whether password authentication is enabled."
         }
       }

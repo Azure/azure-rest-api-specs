@@ -181,13 +181,13 @@ model HorizonDbClusterProperties {
 @doc("Authentication configuration for a HorizonDB cluster.")
 model HorizonDbClusterAuthConfig {
   @doc("Indicates whether Microsoft Entra ID authentication is enabled.")
-  entraIdAuthEnabled?: boolean;
+  entraIdAuthEnabled?: AuthenticationState;
 
   @doc("The Microsoft Entra tenant ID.")
   tenantId?: string;
 
   @doc("Indicates whether password authentication is enabled.")
-  passwordAuthEnabled?: boolean;
+  passwordAuthEnabled?: AuthenticationState;
 }
 
 @added(Versions.v2026_05_01_preview)
@@ -414,6 +414,17 @@ union State {
   @added(Versions.v2026_05_01_preview)
   @doc("Is upgrading")
   Upgrading: "Upgrading",
+}
+
+@doc("Indicates if authentication state is enabled or not.")
+union AuthenticationState {
+  string,
+
+  @doc("Is enabled")
+  Enabled: "Enabled",
+
+  @doc("Is disabled")
+  Disabled: "Disabled",
 }
 
 @doc("Indicates if public network access is enabled or not.")
