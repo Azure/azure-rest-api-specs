@@ -28,9 +28,33 @@ These are the global settings for the Network API.
 title: NetworkManagementClient
 description: Network Client
 openapi-type: arm
-tag: package-2025-07-01
+tag: package-2025-09-01
 ```
 
+### Tag: package-2025-09-01
+
+These settings apply only when `--tag=package-2025-09-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-09-01'
+input-file:
+  - stable/2025-09-01/applicationGateway.json
+  - stable/2025-09-01/azureWebCategory.json
+  - stable/2025-09-01/common.json
+  - stable/2025-09-01/expressRoute.json
+  - stable/2025-09-01/firewall.json
+  - stable/2025-09-01/firewallPolicy.json
+  - stable/2025-09-01/interconnectGroup.json
+  - stable/2025-09-01/loadBalancer.json
+  - stable/2025-09-01/networkGateway.json
+  - stable/2025-09-01/networkingOperations.json
+  - stable/2025-09-01/networkManager.json
+  - stable/2025-09-01/networkSecurityPerimeter.json
+  - stable/2025-09-01/networkWatcher.json
+  - stable/2025-09-01/serviceGateway.json
+  - stable/2025-09-01/virtualNetwork.json
+  - stable/2025-09-01/virtualNetworkAppliance.json
+  - stable/2025-09-01/virtualWan.json
+```
 ### Tag: package-2025-07-01
 
 These settings apply only when `--tag=package-2025-07-01` is specified on the command line.
