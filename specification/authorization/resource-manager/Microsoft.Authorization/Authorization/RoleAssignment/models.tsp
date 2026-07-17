@@ -1,15 +1,61 @@
-﻿import "@typespec/rest";
+import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Microsoft.Common;
 
 namespace Microsoft.RoleAssignment;
+
+/**
+ * The principal type of the assigned principal ID.
+ */
+union PrincipalType {
+  string,
+
+  /**
+   * User
+   */
+  User: "User",
+
+  /**
+   * Group
+   */
+  Group: "Group",
+
+  /**
+   * ServicePrincipal
+   */
+  ServicePrincipal: "ServicePrincipal",
+
+  /**
+   * ForeignGroup
+   */
+  ForeignGroup: "ForeignGroup",
+
+  /**
+   * Device
+   */
+  Device: "Device",
+
+  /**
+   * AgentUser (agentic identity derived from a User). Available from api-version 2026-08-01.
+   */
+  @added(Versions.v2026_08_01)
+  AgentUser: "AgentUser",
+
+  /**
+   * AgentServicePrincipal (agentic identity derived from a ServicePrincipal). Available from api-version 2026-08-01.
+   */
+  @added(Versions.v2026_08_01)
+  AgentServicePrincipal: "AgentServicePrincipal",
+}
 
 /**
  * Role assignment properties.
