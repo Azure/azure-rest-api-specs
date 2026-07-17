@@ -219,6 +219,12 @@ namespace Azure.AI.Projects {
     }
   );
 
+  // ItemMessage spreads OpenAI.Message, whose content is an array. The Responses
+  // input contract also accepts string shorthand, and this client uses ItemMessage
+  // in the merged input/output item union.
+  @@withoutOmittedProperties(OpenAI.ItemMessage, "content");
+  @@copyProperties(OpenAI.ItemMessage, { content: string | OpenAI.MessageContent[] });
+
   // To avoid conflicts with Azure.Response
   @@clientName(OpenAI.Response, "ResponseObject");
 
@@ -251,6 +257,4 @@ namespace Azure.AI.Projects {
   @@access(UpdateAgentRequest, Access.public);
   @@usage(UpdateAgentRequest, Usage.input);
 
-  @@access(OpenAI.OutputItemCustomToolCallOutput, Access.public);
-  @@usage(OpenAI.OutputItemCustomToolCallOutput, Usage.input | Usage.output);
 }
