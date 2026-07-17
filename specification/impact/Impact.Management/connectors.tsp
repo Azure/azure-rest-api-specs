@@ -97,7 +97,7 @@ union Platform {
 interface Connectors {
   get is ArmResourceRead<Connector>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Connector>;
-  update is ArmResourcePatchSync<Connector, ConnectorProperties>;
+  update is ArmCustomPatchSync<Connector, ConnectorProperties>;
   delete is ArmResourceDeleteSync<Connector>;
   listBySubscription is ArmListBySubscription<Connector>;
 }
