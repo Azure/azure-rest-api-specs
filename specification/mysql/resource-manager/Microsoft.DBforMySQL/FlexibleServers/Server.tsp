@@ -105,10 +105,9 @@ interface Servers {
   failover is ArmResourceActionAsyncBase<
     Server,
     void,
-
-      | OkResponse
-      | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-          ArmLroLocationHeader>,
+    | OkResponse
+    | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+        ArmLroLocationHeader>,
     Azure.ResourceManager.Foundations.ResourceGroupBaseParameters
   >;
 
@@ -127,10 +126,9 @@ interface Servers {
   restart is ArmResourceActionAsyncBase<
     Server,
     ServerRestartParameter,
-
-      | OkResponse
-      | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-          ArmLroLocationHeader>,
+    | OkResponse
+    | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+        ArmLroLocationHeader>,
     Azure.ResourceManager.Foundations.ResourceGroupBaseParameters
   >;
 
@@ -140,10 +138,9 @@ interface Servers {
   start is ArmResourceActionAsyncBase<
     Server,
     void,
-
-      | OkResponse
-      | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-          ArmLroLocationHeader>,
+    | OkResponse
+    | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+        ArmLroLocationHeader>,
     Azure.ResourceManager.Foundations.ResourceGroupBaseParameters
   >;
 
@@ -153,10 +150,9 @@ interface Servers {
   stop is ArmResourceActionAsyncBase<
     Server,
     void,
-
-      | OkResponse
-      | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-          ArmLroLocationHeader>,
+    | OkResponse
+    | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+        ArmLroLocationHeader>,
     Azure.ResourceManager.Foundations.ResourceGroupBaseParameters
   >;
 
@@ -167,10 +163,9 @@ interface Servers {
   resetGtid is ArmResourceActionAsyncBase<
     Server,
     ServerGtidSetParameter,
-
-      | OkResponse
-      | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-          ArmLroLocationHeader>,
+    | OkResponse
+    | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+        ArmLroLocationHeader>,
     Azure.ResourceManager.Foundations.ResourceGroupBaseParameters
   >;
 
