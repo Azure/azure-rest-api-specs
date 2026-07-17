@@ -237,14 +237,11 @@ interface NetworkVirtualAppliances {
    * Prepares the migration of the specified Network Virtual Appliance. This is the first step of a migration workflow, such as migrating to a new OS version or to the new internal load balancer architecture.
    */
   @added(Versions.v2025_09_01)
-  prepareMigration is ArmResourceActionAsync<
+  prepareMigration is ArmResourceActionAsyncBase<
     NetworkVirtualAppliance,
-    NetworkVirtualAppliancePrepareMigrationRequest,
-    {
-      @body body: void;
-    },
-    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
-      Azure.Core.Foundations.RetryAfterHeader,
+    Request = NetworkVirtualAppliancePrepareMigrationRequest,
+    Response = ArmAcceptedLroResponse,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NetworkVirtualAppliance>,
     Error = CloudError
   >;
 
@@ -252,14 +249,11 @@ interface NetworkVirtualAppliances {
    * Executes the migration of the specified Network Virtual Appliance. This step performs the migration workflow that was previously prepared.
    */
   @added(Versions.v2025_09_01)
-  executeMigration is ArmResourceActionAsync<
+  executeMigration is ArmResourceActionAsyncBase<
     NetworkVirtualAppliance,
-    NetworkVirtualApplianceExecuteMigrationRequest,
-    {
-      @body body: void;
-    },
-    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
-      Azure.Core.Foundations.RetryAfterHeader,
+    Request = NetworkVirtualApplianceExecuteMigrationRequest,
+    Response = ArmAcceptedLroResponse,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NetworkVirtualAppliance>,
     Error = CloudError
   >;
 
@@ -267,14 +261,11 @@ interface NetworkVirtualAppliances {
    * Commits the migration of the specified Network Virtual Appliance. This finalizes a previously executed migration workflow.
    */
   @added(Versions.v2025_09_01)
-  commitMigration is ArmResourceActionAsync<
+  commitMigration is ArmResourceActionAsyncBase<
     NetworkVirtualAppliance,
-    NetworkVirtualApplianceCommitMigrationRequest,
-    {
-      @body body: void;
-    },
-    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
-      Azure.Core.Foundations.RetryAfterHeader,
+    Request = NetworkVirtualApplianceCommitMigrationRequest,
+    Response = ArmAcceptedLroResponse,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NetworkVirtualAppliance>,
     Error = CloudError
   >;
 
@@ -282,14 +273,11 @@ interface NetworkVirtualAppliances {
    * Aborts an in-progress migration of the specified Network Virtual Appliance and rolls back to the previous state.
    */
   @added(Versions.v2025_09_01)
-  abortMigration is ArmResourceActionAsync<
+  abortMigration is ArmResourceActionAsyncBase<
     NetworkVirtualAppliance,
-    void,
-    {
-      @body body: void;
-    },
-    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
-      Azure.Core.Foundations.RetryAfterHeader,
+    Request = void,
+    Response = ArmAcceptedLroResponse,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NetworkVirtualAppliance>,
     Error = CloudError
   >;
 }
