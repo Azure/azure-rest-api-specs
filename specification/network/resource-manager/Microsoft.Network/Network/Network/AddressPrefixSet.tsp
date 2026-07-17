@@ -61,6 +61,7 @@ model AddressPrefixSet extends SubResourceModel {
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model AddressPrefixSetPropertiesFormat {
   /** The list of address prefixes in CIDR notation. Supports both IPv4 and IPv6 CIDR notation (e.g. '10.0.0.0/16', '2001:db8::/32'). */
+  @minItems(1)
   addressPrefixes: string[];
 
   /** The provisioning state of the address prefix set resource. */
