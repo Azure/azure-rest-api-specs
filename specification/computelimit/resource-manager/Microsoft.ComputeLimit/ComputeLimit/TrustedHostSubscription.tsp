@@ -9,7 +9,12 @@ using TypeSpec.Versioning;
 
 namespace Microsoft.ComputeLimit;
 
-/** A host subscription trusted by a guest subscription. */
+/**
+ * A host subscription that a guest subscription trusts for sharing compute limits.
+ * A guest subscription can trust multiple host subscriptions; establishing trust does
+ * not by itself associate the guest with a host. Guest-to-host association happens at
+ * check-in time, where a subscription can be a guest of at most one host per region.
+ */
 @parentResource(SubscriptionLocationResource)
 @added(Versions.v2026_07_31)
 model TrustedHostSubscription is ProxyResource<never> {
@@ -26,22 +31,25 @@ model TrustedHostSubscription is ProxyResource<never> {
 @added(Versions.v2026_07_31)
 interface TrustedHostSubscriptions {
   /**
-   * Adds a host subscription to the guest subscription's trusted hosts.
+   * Adds a host subscription to the guest subscription's list of trusted hosts. A guest
+   * subscription can trust multiple host subscriptions; this only establishes trust and
+   * does not check the guest in to the host. Guest-to-host association is determined at
+   * check-in time, where a subscription can be a guest of at most one host per region.
    */
   create is ArmResourceCreateOrReplaceSync<TrustedHostSubscription>;
 
   /**
-   * Gets a host subscription trusted by the guest subscription.
+   * Gets a host subscription that the guest subscription trusts.
    */
   get is ArmResourceRead<TrustedHostSubscription>;
 
   /**
-   * Removes a host subscription from the guest subscription's trusted hosts.
+   * Removes a host subscription from the guest subscription's list of trusted hosts.
    */
   delete is ArmResourceDeleteSync<TrustedHostSubscription>;
 
   /**
-   * Lists all host subscriptions trusted by the guest subscription in a location.
+   * Lists all host subscriptions that the guest subscription trusts in a location.
    */
   list is ArmResourceListAtScope<TrustedHostSubscription>;
 }

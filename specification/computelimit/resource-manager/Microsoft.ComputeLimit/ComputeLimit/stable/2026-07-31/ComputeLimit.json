@@ -1205,7 +1205,7 @@
         "tags": [
           "TrustedHostSubscriptions"
         ],
-        "description": "Lists all host subscriptions trusted by the guest subscription in a location.",
+        "description": "Lists all host subscriptions that the guest subscription trusts in a location.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1247,7 +1247,7 @@
         "tags": [
           "TrustedHostSubscriptions"
         ],
-        "description": "Gets a host subscription trusted by the guest subscription.",
+        "description": "Gets a host subscription that the guest subscription trusts.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1292,7 +1292,7 @@
         "tags": [
           "TrustedHostSubscriptions"
         ],
-        "description": "Adds a host subscription to the guest subscription's trusted hosts.",
+        "description": "Adds a host subscription to the guest subscription's list of trusted hosts. A guest\nsubscription can trust multiple host subscriptions; this only establishes trust and\ndoes not check the guest in to the host. Guest-to-host association is determined at\ncheck-in time, where a subscription can be a guest of at most one host per region.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1352,7 +1352,7 @@
         "tags": [
           "TrustedHostSubscriptions"
         ],
-        "description": "Removes a host subscription from the guest subscription's trusted hosts.",
+        "description": "Removes a host subscription from the guest subscription's list of trusted hosts.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1915,7 +1915,7 @@
     },
     "TrustedHostSubscription": {
       "type": "object",
-      "description": "A host subscription trusted by a guest subscription.",
+      "description": "A host subscription that a guest subscription trusts for sharing compute limits.\nA guest subscription can trust multiple host subscriptions; establishing trust does\nnot by itself associate the guest with a host. Guest-to-host association happens at\ncheck-in time, where a subscription can be a guest of at most one host per region.",
       "allOf": [
         {
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
