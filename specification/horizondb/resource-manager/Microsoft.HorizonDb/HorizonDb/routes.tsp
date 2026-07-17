@@ -207,7 +207,10 @@ interface HorizonDbAdministrators {
 
   @doc("Creates a new HorizonDB administrator or updates an existing administrator.")
   @Azure.Core.useFinalStateVia("azure-async-operation")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<HorizonDbAdministrator>;
+  createOrUpdate is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
+    HorizonDbAdministrator,
+    Request = HorizonDbAdministratorAdd
+  >;
 
   @doc("Deletes a HorizonDB administrator.")
   delete is ArmResourceDeleteWithoutOkAsync<

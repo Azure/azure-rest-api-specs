@@ -641,7 +641,7 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/HorizonDbAdministrator"
+              "$ref": "#/definitions/HorizonDbAdministratorAdd"
             }
           }
         ],
@@ -2506,6 +2506,16 @@
         }
       ]
     },
+    "HorizonDbAdministratorAdd": {
+      "type": "object",
+      "description": "The request body for adding a HorizonDB administrator.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/HorizonDbAdministratorPropertiesForAdd",
+          "description": "The properties for adding a HorizonDB administrator."
+        }
+      }
+    },
     "HorizonDbAdministratorListResult": {
       "type": "object",
       "description": "The response of a HorizonDbAdministrator list operation.",
@@ -2572,6 +2582,29 @@
         "principalType"
       ]
     },
+    "HorizonDbAdministratorPropertiesForAdd": {
+      "type": "object",
+      "description": "The properties for adding a HorizonDB administrator.",
+      "properties": {
+        "principalName": {
+          "type": "string",
+          "description": "The display name or UPN of the Entra ID principal. For users, typically the User Principal Name (e.g., admin@contoso.com). For groups, the group display name. For service principals, the application display name.",
+          "maxLength": 256
+        },
+        "principalType": {
+          "$ref": "#/definitions/PrincipalTypes",
+          "description": "The type of the Entra ID principal."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The Entra ID tenant identifier (an RFC 4122 GUID). If omitted, defaults to the tenant of the subscription."
+        }
+      },
+      "required": [
+        "principalName",
+        "principalType"
+      ]
+    },
     "HorizonDbCluster": {
       "type": "object",
       "description": "Represents the HorizonDB cluster.",
@@ -2591,17 +2624,17 @@
       "type": "object",
       "description": "Authentication configuration for a HorizonDB cluster.",
       "properties": {
-        "entraIdAuthEnabled": {
+        "entraIdAuth": {
           "$ref": "#/definitions/AuthenticationState",
-          "description": "Indicates whether Microsoft Entra ID authentication is enabled."
+          "description": "Indicates whether Microsoft Entra ID authentication is enabled or disabled."
         },
         "tenantId": {
           "type": "string",
           "description": "The Microsoft Entra tenant ID."
         },
-        "passwordAuthEnabled": {
+        "passwordAuth": {
           "$ref": "#/definitions/AuthenticationState",
-          "description": "Indicates whether password authentication is enabled."
+          "description": "Indicates whether password authentication is enabled or disabled."
         }
       }
     },

@@ -193,14 +193,14 @@ model HorizonDbClusterProperties {
 @added(Versions.v2026_05_01_preview)
 @doc("Authentication configuration for a HorizonDB cluster.")
 model HorizonDbClusterAuthConfig {
-  @doc("Indicates whether Microsoft Entra ID authentication is enabled.")
-  entraIdAuthEnabled?: AuthenticationState;
+  @doc("Indicates whether Microsoft Entra ID authentication is enabled or disabled.")
+  entraIdAuth?: AuthenticationState;
 
   @doc("The Microsoft Entra tenant ID.")
   tenantId?: string;
 
-  @doc("Indicates whether password authentication is enabled.")
-  passwordAuthEnabled?: AuthenticationState;
+  @doc("Indicates whether password authentication is enabled or disabled.")
+  passwordAuth?: AuthenticationState;
 }
 
 @added(Versions.v2026_05_01_preview)
@@ -379,6 +379,27 @@ model HorizonDbAdministratorProperties {
   @doc("The provisioning state of the administrator.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+}
+
+@added(Versions.v2026_05_01_preview)
+@doc("The properties for adding a HorizonDB administrator.")
+model HorizonDbAdministratorPropertiesForAdd {
+  @doc("The display name or UPN of the Entra ID principal. For users, typically the User Principal Name (e.g., admin@contoso.com). For groups, the group display name. For service principals, the application display name.")
+  @maxLength(256)
+  principalName: string;
+
+  @doc("The type of the Entra ID principal.")
+  principalType: PrincipalTypes;
+
+  @doc("The Entra ID tenant identifier (an RFC 4122 GUID). If omitted, defaults to the tenant of the subscription.")
+  tenantId?: string;
+}
+
+@added(Versions.v2026_05_01_preview)
+@doc("The request body for adding a HorizonDB administrator.")
+model HorizonDbAdministratorAdd {
+  @doc("The properties for adding a HorizonDB administrator.")
+  properties?: HorizonDbAdministratorPropertiesForAdd;
 }
 
 @added(Versions.v2026_05_01_preview)

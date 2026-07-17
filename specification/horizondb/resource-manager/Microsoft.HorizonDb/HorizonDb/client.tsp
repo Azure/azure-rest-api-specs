@@ -41,6 +41,16 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 @@clientName(
+  Microsoft.HorizonDb.HorizonDbAdministratorPropertiesForAdd,
+  "HorizonDBAdministratorPropertiesForAdd",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.HorizonDbAdministratorAdd,
+  "HorizonDBAdministratorAdd",
+  "csharp"
+);
+@@clientName(
   Microsoft.HorizonDb.HorizonDbAdministrators,
   "HorizonDBAdministrators",
   "csharp"
