@@ -12,20 +12,21 @@ namespace Microsoft.NetworkCloud;
 /**
  * The name of the cluster.
  */
-model ClusterNameParameter
-  is ResourceNameParameter<
-    Resource = Cluster,
-    KeyName = "clusterName",
-    SegmentName = "clusters",
-    NamePattern = "^([a-zA-Z0-9][a-zA-Z0-9-_]{0,28}[a-zA-Z0-9])$"
-  >;
+model ClusterNameParameter is ResourceNameParameter<
+  Resource = Cluster,
+  KeyName = "clusterName",
+  SegmentName = "clusters",
+  NamePattern = "^([a-zA-Z0-9][a-zA-Z0-9-_]{0,28}[a-zA-Z0-9])$"
+>;
 
 /**
  * Cluster represents the on-premises Network Cloud cluster.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "legacy resource using legacy features"
-model Cluster
-  is Azure.ResourceManager.TrackedResource<ClusterProperties, false> {
+model Cluster is Azure.ResourceManager.TrackedResource<
+  ClusterProperties,
+  false
+> {
   ...ClusterNameParameter;
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
   ...RequiredExtendedLocationProperty;
