@@ -52,12 +52,15 @@ union AgentSessionProvisioningState {
 @added(Versions.v2026_08_01_preview)
 model AgentSessionSandbox {
   /** The service-issued identifier of the sandbox. */
+  @visibility(Lifecycle.Read)
   sandboxId: string;
 
   /** The WebSocket endpoint for a ready sandbox. */
+  @visibility(Lifecycle.Read)
   endpoint?: url;
 
   /** The time when the sandbox expires. */
+  @visibility(Lifecycle.Read)
   expiresAt: utcDateTime;
 }
 
