@@ -93,10 +93,7 @@ interface VirtualMachineDiagnosticRunCommands {
   @added(Versions.v2026_04_01)
   delete is VirtualMachineDiagnosticRunCommandOps.DeleteWithoutOkAsync<
     VirtualMachineDiagnosticRunCommand,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -185,10 +182,7 @@ interface VirtualMachineScaleSetVMDiagnosticRunCommands {
   @operationId("VirtualMachineScaleSetVMDiagnosticRunCommands_Delete")
   delete is VirtualMachineScaleSetVMDiagnosticRunCommandOps.DeleteWithoutOkAsync<
     VirtualMachineDiagnosticRunCommand,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -211,43 +205,34 @@ interface VirtualMachineScaleSetVMDiagnosticRunCommands {
   >;
 }
 
-@@clientName(
-  VirtualMachineDiagnosticRunCommands.createOrUpdate::parameters.resource,
+@@clientName(VirtualMachineDiagnosticRunCommands.createOrUpdate::parameters.resource,
   "runCommand"
 );
 
-@@clientName(
-  VirtualMachineDiagnosticRunCommands.update::parameters.properties,
+@@clientName(VirtualMachineDiagnosticRunCommands.update::parameters.properties,
   "runCommand"
 );
 
-@@clientName(
-  VirtualMachineScaleSetVMDiagnosticRunCommands.createOrUpdate::parameters.resource,
+@@clientName(VirtualMachineScaleSetVMDiagnosticRunCommands.createOrUpdate::parameters.resource,
   "runCommand"
 );
 
-@@clientName(
-  VirtualMachineScaleSetVMDiagnosticRunCommands.update::parameters.properties,
+@@clientName(VirtualMachineScaleSetVMDiagnosticRunCommands.update::parameters.properties,
   "runCommand"
 );
 
-@@doc(
-  VirtualMachineDiagnosticRunCommand.name,
+@@doc(VirtualMachineDiagnosticRunCommand.name,
   "The name of the virtual machine diagnostic run command."
 );
-@@doc(
-  VirtualMachineDiagnosticRunCommand.properties,
+@@doc(VirtualMachineDiagnosticRunCommand.properties,
   "Describes the properties of a Virtual Machine diagnostic run command."
 );
-@@doc(
-  VirtualMachineDiagnosticRunCommands.createOrUpdate::parameters.resource,
+@@doc(VirtualMachineDiagnosticRunCommands.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create Virtual Machine Diagnostic RunCommand operation."
 );
-@@doc(
-  VirtualMachineDiagnosticRunCommands.update::parameters.properties,
+@@doc(VirtualMachineDiagnosticRunCommands.update::parameters.properties,
   "Parameters supplied to the Update Virtual Machine Diagnostic RunCommand operation."
 );
-@@doc(
-  VirtualMachineScaleSetVMDiagnosticRunCommands.createOrUpdate::parameters.resource,
+@@doc(VirtualMachineScaleSetVMDiagnosticRunCommands.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create Virtual Machine Diagnostic RunCommand operation."
 );
