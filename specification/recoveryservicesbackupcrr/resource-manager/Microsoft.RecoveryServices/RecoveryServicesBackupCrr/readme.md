@@ -89,66 +89,63 @@ directive:
     reason: Legacy 2023-01-15 CRR models use additionalProperties (open maps); preserved for backward compatibility with the frozen contract.
   - suppress: AllTrackedResourcesMustHaveDelete
     from: bms.json
-    reason: CRR resources carry optional location/tags to stay wire-faithful to 2023-01-15, which makes LintDiff treat them as tracked resources. The frozen passive-stamp surface has no DELETE for them; adding one would introduce operations absent from the frozen contract.
+    reason: BackupResourceConfigResource and RecoveryPointResource have no DELETE operation. They are read-mostly passive-stamp resources; the frozen 2023-01-15 contract never exposed DELETE for them, and adding one would introduce operations absent from that contract. LintDiff only demands DELETE because it classifies any resource whose response body has a `location` property as "tracked" (arm-helper getTrackedResources checks exactly for a `location` property), and these resources carry `location` from the legacy 2023-01-15 envelope - so the "tracked" classification is a false positive, not a genuine tracked resource.
   - suppress: TrackedResourcesMustHavePut
     from: bms.json
-    reason: Same as above - CRR resources appear "tracked" only because of legacy optional location/tags; the frozen 2023-01-15 surface has no PUT for them.
+    reason: RecoveryPointResource has no PUT operation - recovery points are read-only (GET only) in the frozen 2023-01-15 contract. LintDiff only requires PUT because it mis-classifies the resource as "tracked" solely because its response body carries a legacy `location` property (the single criterion LintDiff uses); it is not a genuine tracked resource. Adding PUT would introduce an operation absent from the frozen contract.
   - suppress: TrackedResourcePatchOperation
     from: bms.json
-    reason: Same as above - the frozen 2023-01-15 CRR surface defines no PATCH for these read-mostly passive-stamp resources.
+    reason: RecoveryPointResource has no PATCH operation - recovery points are read-only in the frozen 2023-01-15 contract. LintDiff only requires a tags-updating PATCH because it mis-classifies the resource as "tracked" solely because its response body carries a legacy `location` property (the single criterion LintDiff uses); it is not a genuine tracked resource. Adding PATCH would introduce an operation absent from the frozen contract.
   - suppress: PathForTrackedResourceTypes
     from: bms.json
-    reason: CRR paths mirror the frozen 2023-01-15 URL structure exactly; the resources are not true tracked resources despite carrying legacy location/tags.
+    reason: BackupResourceConfigResource and RecoveryPointResource paths mirror the frozen 2023-01-15 URL structure exactly. LintDiff expects the standard tracked-resource path shape only because it mis-classifies these resources as "tracked" - their response bodies carry a legacy `location` property, the single criterion LintDiff uses; they are not genuine tracked resources, so their legacy 2023-01-15 paths must be preserved.
   - suppress: TrackedResourceBeyondsThirdLevel
     from: bms.json
-    reason: RecoveryPointResource sits below the frozen 2023-01-15 deep CRR path (vaults/backupFabrics/protectionContainers/protectedItems/recoveryPoints); the nesting is part of the existing contract.
+    reason: RecoveryPointResource sits below the deep frozen 2023-01-15 CRR path (vaults/backupFabrics/protectionContainers/protectedItems/recoveryPoints). LintDiff flags the nesting depth only because it mis-classifies the resource as "tracked" - its response body carries a legacy `location` property (the single criterion LintDiff uses); it is not a genuine tracked resource, and the deep nesting is part of the existing 2023-01-15 contract.
   - suppress: PutResponseCodes
     from: bms.json
-    reason: The frozen 2023-01-15 CRR operations use legacy response-code sets; preserved exactly for backward compatibility.
+    reason: BackupResourceStorageConfigs_Update (PUT on vaultstorageconfig) returns [200, default] in the frozen 2023-01-15 contract. LintDiff requires PUT to return exactly [200, 201, default]; the frozen contract never returned 201, and adding it would change the response contract.
   - suppress: PostResponseCodes
     from: bms.json
-    reason: The frozen 2023-01-15 CRR POST/action operations use legacy response-code sets (including the header-less 202 CrossRegionRestore); preserved for backward compatibility.
+    reason: Two POST operations use frozen 2023-01-15 response shapes that LintDiff rejects - (1) CrossRegionRestore_Trigger is a long-running POST whose 200 has no response schema (the legacy header-less-202 restore pattern), and (2) RecoveryPoints_GetAccessToken returns a 400 (AccessTokenBadRequestResponse) which the synchronous-POST rule ([200,default] / [204,default]) does not permit. Both are part of the frozen contract; changing them would break backward compatibility.
   - suppress: PatchResponseCodes
     from: bms.json
-    reason: The frozen 2023-01-15 vaultstorageconfig patch uses a legacy response-code set; preserved for backward compatibility.
+    reason: BackupResourceStorageConfigs_patch (PATCH on vaultstorageconfig) returns [204, default] in the frozen 2023-01-15 contract. LintDiff requires PATCH to return [200, default] (or [200, 202, default] for long-running); the frozen contract returns 204 (No Content), and changing it to 200 would alter the response contract.
   - suppress: PutGetPatchResponseSchema
     from: bms.json
-    reason: The frozen 2023-01-15 vaultstorageconfig operations use the legacy response schemas of the original contract; preserved for backward compatibility.
+    reason: On vaultstorageconfig (BackupResourceConfigResource) GET and PUT return the resource schema (200) but PATCH returns 204 No Content (no response schema), so the PUT/GET/PATCH schemas differ. LintDiff requires them to be identical; the frozen 2023-01-15 contract defines PATCH as a 204-returning operation, and changing it would alter the response contract.
   - suppress: GetCollectionOnlyHasValueAndNextLink
     from: bms.json
-    reason: Legacy 2023-01-15 CRR list responses are modeled exactly as in the frozen contract; preserved for backward compatibility.
+    reason: The rule requires a collection GET's 200 response model to have exactly the direct properties `value` and `nextLink`. Three frozen 2023-01-15 CRR responses deviate - AadProperties_Get returns AADPropertiesResource (a single resource envelope, not a value/nextLink list), BackupUsageSummariesCRR returns BackupManagementUsageList (which has `value` only, no `nextLink` - an unpaged legacy list), and the RecoveryPointsCrr list returns RecoveryPointResourceList (whose `nextLink` comes via its shared ResourceList base, so only `value` is a direct property). All three match the frozen contract's modeling; restructuring them would change the wire contract.
   - suppress: NoErrorCodeResponses
     from: bms.json
-    reason: The frozen 2023-01-15 CRR operations use the legacy error response modeling of the original contract; preserved for backward compatibility.
+    reason: RecoveryPoints_GetAccessToken declares an explicit 400 (BadRequest, x-ms-error-response:true) in the frozen 2023-01-15 contract. LintDiff disallows explicit error status codes (errors should be modeled via the `default` response); this 400 is part of the frozen contract and clients depend on it, so it is preserved.
   - suppress: LroLocationHeader
     from: bms.json
-    reason: The original 2023-01-15 CRR CrossRegionRestore/operation LROs return a header-less 202; preserved exactly for backward compatibility.
+    reason: CrossRegionRestore_Trigger and CrrOperationResults_Get return a header-less 202 (no Location response header) exactly as in the frozen 2023-01-15 contract. LintDiff requires a 202 to include a Location header; adding one would change the frozen wire contract.
   - suppress: OperationsAPIImplementation
     from: bms.json
     reason: The CRR passive-stamp surface (2023-01-15) does not expose a provider Operations list; the provider-level operations endpoint for the shared Microsoft.RecoveryServices RP is served by the sibling RecoveryServices/RecoveryServicesBackup specs.
   - suppress: BodyTopLevelProperties
     from: bms.json
-    reason: Legacy 2023-01-15 CRR resource envelopes place some fields at the top level (not under a properties bag); preserved for backward compatibility with the frozen contract.
+    reason: OperationStatus (the CRR async operation-status model) places status, startTime, endTime and error at the top level rather than under a `properties` bag, matching the frozen 2023-01-15 shape. LintDiff's allowed ARM top-level property set (name/type/id/location/properties/tags/etc.) does not include these fields; restructuring them under `properties` would change the wire contract.
   - suppress: XmsPageableForListCalls
     from: bms.json
-    reason: BackupUsageSummariesCRR_List is faithfully modeled with x-ms-pageable nextLinkName:null per the frozen 2023-01-15 contract (BackupManagementUsageList has no nextLink property).
+    reason: AadProperties_Get (GET on the collection-style path /backupAadProperties) returns a single AADPropertiesResource and is not paginated in the frozen 2023-01-15 contract. LintDiff treats any GET on a collection-style path (no {name} segment) as a LIST API and requires the x-ms-pageable extension; AadProperties is a singleton get, so adding pagination would change the contract. The genuine list operations (BackupCrrJobs_List, RecoveryPointsCrr_List, BackupProtectedItemsCrr_List, BackupUsageSummariesCRR_List) all already declare x-ms-pageable.
   - suppress: ParametersInPost
     from: bms.json
-    reason: Legacy 2023-01-15 CRR POST operations pass parameters exactly as modeled in the frozen contract; preserved for backward compatibility.
+    reason: BackupCrrJobs_List is modeled as a POST and carries the $filter and $skipToken query parameters exactly as in the frozen 2023-01-15 contract (the cross-region job feed is queried via POST). LintDiff requires POST operations to carry no query parameters other than api-version; moving $filter/$skipToken into the request body would change the wire contract.
   - suppress: RequiredPropertiesMissingInResourceModel
     from: bms.json
-    reason: Legacy 2023-01-15 CRR resource models do not declare the standard required resource properties; preserved to keep the emitted swagger faithful to the frozen source.
-  - suppress: ResourceHasXMsResourceEnabled
-    from: bms.json
-    reason: The frozen 2023-01-15 CRR resources do not set x-ms-azure-resource; preserved as-is for backward compatibility.
+    reason: The legacy CRR Resource envelope declares id/name/type as read-only but not required, matching the frozen 2023-01-15 contract (whose Resource definition has no `required` list). LintDiff expects ARM resource models to mark id/name/type as required; adding them would change the frozen contract.
   - suppress: EvenSegmentedPathForPutOperation
     from: bms.json
-    reason: CRR paths mirror the frozen 2023-01-15 URL structure exactly; the path segmentation is part of the existing wire contract.
+    reason: The PUT is on the vaultstorageconfig singleton (BackupResourceConfigResource is an @singleton), so its path ends in the fixed name `vaultstorageconfig` rather than a parameterized {resourceName}. LintDiff expects PUT paths to end in {resourceType}/{resourceName}; the frozen 2023-01-15 contract models vaultstorageconfig as a singleton with this exact path, so it is preserved.
   - suppress: PathForNestedResource
     from: bms.json
-    reason: CRR nested-resource paths mirror the frozen 2023-01-15 URL structure exactly; preserved for backward compatibility.
+    reason: The vaultstorageconfig path (vaults/{vaultName}/backupstorageconfig/vaultstorageconfig) is a singleton nested resource (BackupResourceConfigResource is an @singleton), so it does not match LintDiff's expected nested-resource pattern of {resourceType}/{resourceName-parameter} segments. The frozen 2023-01-15 contract models it as this exact singleton path; the rule's own documentation notes such fully-qualified/singleton paths are a valid suppression case.
   - suppress: UnSupportedPatchProperties
     from: bms.json
-    reason: The vaultstorageconfig patch mirrors the frozen 2023-01-15 contract exactly; preserved for backward compatibility.
+    reason: The PATCH on vaultstorageconfig (BackupResourceStorageConfigs_patch) uses the shared BackupResourceConfigResource model, whose body includes the top-level `location` envelope property. LintDiff flags `location` as non-patchable (wanting it marked readOnly/immutable or removed from the PATCH payload); the frozen 2023-01-15 PATCH uses this same model with `location` in the body, so restructuring it would change the wire contract.
 ```
 
