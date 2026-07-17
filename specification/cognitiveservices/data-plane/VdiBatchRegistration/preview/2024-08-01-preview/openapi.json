@@ -1,0 +1,668 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "VDI Registration service",
+    "version": "2024-08-01-preview",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "ApiKeyAuth": []
+    },
+    {
+      "OAuth2Auth": [
+        "https://widget.contoso.com/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "ApiKeyAuth": {
+      "type": "apiKey",
+      "name": "api-key",
+      "in": "header"
+    },
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.contoso.com/common/oauth2/v2.0/authorize",
+      "scopes": {
+        "https://widget.contoso.com/.default": ""
+      }
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/registrations": {
+      "get": {
+        "operationId": "Registrations_ListRegistration",
+        "description": "List registration resources.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedRegistration"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/registrations/{registrationName}": {
+      "get": {
+        "operationId": "Registrations_GetRegistration",
+        "description": "Fetch a registration by name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "registrationName",
+            "in": "path",
+            "description": "The registration name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Registration"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Registrations_CreateOrUpdateRegistration",
+        "description": "Create or update registration.",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "registrationName",
+            "in": "path",
+            "description": "The registration name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegistrationCreateOrUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Registration"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              },
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ],
+                "x-ms-enum": {
+                  "name": "RepeatabilityResult",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "accepted",
+                      "value": "accepted",
+                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+                    },
+                    {
+                      "name": "rejected",
+                      "value": "rejected",
+                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+                    }
+                  ]
+                }
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/Registration"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              },
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ],
+                "x-ms-enum": {
+                  "name": "RepeatabilityResult",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "accepted",
+                      "value": "accepted",
+                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+                    },
+                    {
+                      "name": "rejected",
+                      "value": "rejected",
+                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+                    }
+                  ]
+                }
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Registrations_DeleteRegistration",
+        "description": "Delete a registration resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "registrationName",
+            "in": "path",
+            "description": "The registration name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ],
+                "x-ms-enum": {
+                  "name": "RepeatabilityResult",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "accepted",
+                      "value": "accepted",
+                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+                    },
+                    {
+                      "name": "rejected",
+                      "value": "rejected",
+                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+                    }
+                  ]
+                }
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AiTaskConfiguration": {
+      "type": "object",
+      "description": "The AI Task configuration definition",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "Version of the AI Task configured"
+        }
+      },
+      "required": [
+        "version"
+      ]
+    },
+    "AiTaskConfigurationCreateOrUpdate": {
+      "type": "object",
+      "description": "The AI Task configuration definition",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "Version of the AI Task configured"
+        }
+      }
+    },
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "PagedRegistration": {
+      "type": "object",
+      "description": "Paged collection of Registration items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Registration items on this page",
+          "items": {
+            "$ref": "#/definitions/Registration"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "Processing": {
+      "type": "object",
+      "description": "The processing configuration definition"
+    },
+    "Registration": {
+      "type": "object",
+      "description": "Represents the registration payload",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The registration name.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "storage": {
+          "$ref": "#/definitions/Storage",
+          "description": "The storage configuration definition"
+        },
+        "processing": {
+          "$ref": "#/definitions/Processing",
+          "description": "The processing configuration definition"
+        },
+        "customProperties": {
+          "type": "object",
+          "description": "The processing configuration definition"
+        },
+        "aiTaskConfigurations": {
+          "type": "object",
+          "description": "The AI Task configuration definition",
+          "additionalProperties": {
+            "$ref": "#/definitions/AiTaskConfiguration"
+          }
+        },
+        "analytics": {
+          "type": "object",
+          "description": "The anlytics configuration definition"
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the created registration",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "name",
+        "storage",
+        "processing",
+        "customProperties",
+        "aiTaskConfigurations",
+        "analytics",
+        "status"
+      ]
+    },
+    "RegistrationCreateOrUpdate": {
+      "type": "object",
+      "description": "Represents the registration payload",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The registration name.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "storage": {
+          "$ref": "#/definitions/Storage",
+          "description": "The storage configuration definition"
+        },
+        "processing": {
+          "$ref": "#/definitions/Processing",
+          "description": "The processing configuration definition"
+        },
+        "customProperties": {
+          "type": "object",
+          "description": "The processing configuration definition"
+        },
+        "aiTaskConfigurations": {
+          "type": "object",
+          "description": "The AI Task configuration definition",
+          "additionalProperties": {
+            "$ref": "#/definitions/AiTaskConfigurationCreateOrUpdate"
+          }
+        },
+        "analytics": {
+          "type": "object",
+          "description": "The anlytics configuration definition"
+        }
+      }
+    },
+    "Storage": {
+      "type": "object",
+      "description": "The storage configuration definition"
+    }
+  },
+  "parameters": {
+    "Azure.Core.ClientRequestIdHeader": {
+      "name": "x-ms-client-request-id",
+      "in": "header",
+      "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+      "required": false,
+      "type": "string",
+      "format": "uuid",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "clientRequestId"
+    },
+    "Azure.Core.ConditionalRequestHeaders.ifMatch": {
+      "name": "If-Match",
+      "in": "header",
+      "description": "The request should only proceed if an entity matches this string.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "ifMatch"
+    },
+    "Azure.Core.ConditionalRequestHeaders.ifModifiedSince": {
+      "name": "If-Modified-Since",
+      "in": "header",
+      "description": "The request should only proceed if the entity was modified after this time.",
+      "required": false,
+      "type": "string",
+      "format": "date-time",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "ifModifiedSince"
+    },
+    "Azure.Core.ConditionalRequestHeaders.ifNoneMatch": {
+      "name": "If-None-Match",
+      "in": "header",
+      "description": "The request should only proceed if no entity matches this string.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "ifNoneMatch"
+    },
+    "Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince": {
+      "name": "If-Unmodified-Since",
+      "in": "header",
+      "description": "The request should only proceed if the entity was not modified after this time.",
+      "required": false,
+      "type": "string",
+      "format": "date-time",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "ifUnmodifiedSince"
+    },
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    },
+    "Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent": {
+      "name": "Repeatability-First-Sent",
+      "in": "header",
+      "description": "Specifies the date and time at which the request was first created.",
+      "required": false,
+      "type": "string",
+      "format": "date-time",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "repeatabilityFirstSent"
+    },
+    "Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId": {
+      "name": "Repeatability-Request-ID",
+      "in": "header",
+      "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "repeatabilityRequestId"
+    }
+  }
+}
