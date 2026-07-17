@@ -1087,6 +1087,38 @@
         "processingStateMessage"
       ]
     },
+    "ConnectorPropertiesCreate": {
+      "type": "object",
+      "description": "Connector properties for create/update operations, omitting server-side read-only fields (connectorId, tenantId, lastRunTimeStamp, processingState, processingStateMessage are required+read-only in the canonical model).",
+      "properties": {
+        "connectorType": {
+          "$ref": "#/definitions/Platform",
+          "description": "connector type"
+        }
+      },
+      "required": [
+        "connectorType"
+      ]
+    },
+    "ConnectorResourceCreate": {
+      "type": "object",
+      "description": "Connector resource for create/update operations.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConnectorPropertiesCreate",
+          "description": "The resource-specific properties for this resource."
+        },
+        "identity": {
+          "$ref": "#/definitions/ManagedServiceIdentityOnlyUserAssigned",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
     "ConnectorUpdate": {
       "type": "object",
       "description": "The type used for update operations of the Connector.",
