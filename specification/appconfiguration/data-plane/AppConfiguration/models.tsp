@@ -160,8 +160,8 @@ model Error {
   status?: int32;
 
   @added(Versions.v2026_08_01_preview)
-  @doc("The position that the error occurs.")
-  pos?: int32;
+  @doc("The byte offset within the value where the validation error occurs.")
+  bytePos?: int32;
 
   @added(Versions.v2026_08_01_preview)
   @doc("The location of the property that resulted in the validation error.")
@@ -642,9 +642,7 @@ model Schema {
   @visibility(Lifecycle.Read)
   lastModified?: offsetDateTime;
 
-  @doc("A value representing the current state of the resource.")
-  @visibility(Lifecycle.Read)
-  etag?: string;
+  ...Azure.Core.EtagProperty;
 }
 
 alias SchemaNamePathParam<TDoc extends valueof string> = {

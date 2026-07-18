@@ -3986,6 +3986,10 @@
         ]
       }
     },
+    "Azure.Core.eTag": {
+      "type": "string",
+      "description": "The ETag (or entity tag) HTTP response header is an identifier for a specific version of a resource.\nIt lets caches be more efficient and save bandwidth, as a web server does not need to resend a full response if the content was not changed.\n\nIt is a string of ASCII characters placed between double quotes, like \"675af34563dc-tr34\"."
+    },
     "CompositionType": {
       "type": "string",
       "description": "Composition types.",
@@ -4035,10 +4039,10 @@
           "format": "int32",
           "description": "The HTTP status code that the error maps to."
         },
-        "pos": {
+        "bytePos": {
           "type": "integer",
           "format": "int32",
-          "description": "The position that the error occurs."
+          "description": "The byte offset within the value where the validation error occurs."
         },
         "instanceLocation": {
           "type": "string",
@@ -4407,14 +4411,15 @@
           "x-ms-client-name": "lastModified"
         },
         "etag": {
-          "type": "string",
-          "description": "A value representing the current state of the resource.",
+          "$ref": "#/definitions/Azure.Core.eTag",
+          "description": "The entity tag for this resource.",
           "readOnly": true
         }
       },
       "required": [
         "name",
-        "json_schema"
+        "json_schema",
+        "etag"
       ]
     },
     "SchemaFields": {
