@@ -1111,6 +1111,10 @@ model KnowledgeBaseWorkIQReference extends KnowledgeBaseReference {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "WorkIQ is a product name where IQ is an acronym."
   @removed(Versions.v2026_08_01_preview)
   attributions?: WorkIQAttribution[];
+
+  /** The sensitivity label information for the reference. */
+  @added(Versions.v2026_08_01_preview)
+  searchSensitivityLabelInfo?: PurviewSensitivityLabelInfo;
 }
 
 /** Attribution information for a WorkIQ reference. */

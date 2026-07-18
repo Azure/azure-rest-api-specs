@@ -52,7 +52,7 @@ Cumulative: every change in the [2026-05-01-preview GA-to-Preview section](#2026
 **Per-source retrieval controls**:
 
 - `KnowledgeSourceParams.neverQuerySource`: request-local exclusion of a knowledge source from the candidate set (mutually exclusive with `alwaysQuerySource`; does not modify knowledge base membership).
-- `inclusionMode` (`KnowledgeSourceInclusionMode`) on knowledge sources, with a request-time override on the runtime params.
+- `resultsProcessing` (`KnowledgeSourceResultsProcessing`: `rerank` (default), `none`) on `KnowledgeSource` and `McpServerTool`, controlling whether a source's results go through the reranking pipeline; request-time override on `KnowledgeSourceParams`.
 - `networkAccessMode` (`KnowledgeSourceNetworkAccessMode`).
 
 **LLM activity model metadata**:
@@ -62,6 +62,7 @@ Cumulative: every change in the [2026-05-01-preview GA-to-Preview section](#2026
 **WorkIQ authentication**:
 
 - `WorkIQKnowledgeSource.workIQParameters` (`WorkIQKnowledgeSourceParameters`) and `EntraAppAuthentication` (`applicationId`, `federatedCredentialId`, optional `tenantId`) for federated-credential on-behalf-of auth; `x-ms-query-work-iq-source-authorization` request header (`queryWorkIQSourceAuthorization`).
+- `KnowledgeBaseWorkIQReference.searchSensitivityLabelInfo` (`PurviewSensitivityLabelInfo`) added as part of the WorkIQ reference payload restructure (see Preview-to-Preview breaking changes for the removed `attributions`).
 
 **New optional fields on existing models**:
 
@@ -88,7 +89,8 @@ Breaking vs 2026-05-01-preview only — the affected models and parameters don't
 **RemovedProperty / RemovedDefinition**:
 
 - `modelName` (string) removed from `KnowledgeBaseModelQueryPlanningActivityRecord`, `KnowledgeBaseModelAnswerSynthesisActivityRecord`, and `KnowledgeBaseModelWebSummarizationActivityRecord`; replaced by the structured `model` (`KnowledgeBaseActivityRecordModel`: `modelName`, `deploymentId`).
-- `KnowledgeBaseWorkIQReference.attributions` and the `WorkIQAttribution` definition removed (WorkIQ reference payload restructured).
+- `KnowledgeBaseWorkIQReference.attributions` and the `WorkIQAttribution` definition removed (WorkIQ reference payload restructured; replaced by `searchSensitivityLabelInfo`).
+- `McpServerTool.inclusionMode` and the `McpServerToolInclusionMode` union removed (both introduced in 2026-05-01-preview); replaced by `resultsProcessing` (`KnowledgeSourceResultsProcessing`).
 
 #### Non-Breaking Changes
 
