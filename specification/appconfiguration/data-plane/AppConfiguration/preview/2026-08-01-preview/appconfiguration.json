@@ -2625,6 +2625,22 @@
               }
             }
           },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/Schema"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "A value representing the current state of the resource."
+              },
+              "Sync-Token": {
+                "type": "string",
+                "description": "Used to guarantee real-time consistency between requests."
+              }
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {

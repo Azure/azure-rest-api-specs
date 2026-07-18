@@ -577,9 +577,14 @@ op createOrReplaceSchema is AppConfigOperation<
     @body
     entity: Schema;
   },
-  Body<Schema> &
-    AppConfigResponseHeaders &
-    ContentTypeHeader<"application/json">
+
+    | (Body<Schema> &
+        AppConfigResponseHeaders &
+        ContentTypeHeader<"application/json">)
+    | (CreatedResponse &
+        Body<Schema> &
+        AppConfigResponseHeaders &
+        ContentTypeHeader<"application/json">)
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
