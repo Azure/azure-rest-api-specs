@@ -89,8 +89,10 @@ union AgentDefinitionOptInKeys {
   external_agents_v1_preview: "ExternalAgents=V1Preview",
   draft_agents_v1_preview: "DraftAgents=V1Preview",
   voice_agents_v1_preview: "VoiceAgents=V1Preview",
+
   @removed(Versions.v1)
   hosted_agents_v1_preview: "HostedAgents=V1Preview",
+
   @removed(Versions.v1)
   container_agents_v1_preview: "ContainerAgents=V1Preview",
 }
