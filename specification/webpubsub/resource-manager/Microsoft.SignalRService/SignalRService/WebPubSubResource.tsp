@@ -11,10 +11,8 @@ namespace Microsoft.SignalRService;
 /**
  * A class represent a resource.
  */
-model WebPubSubResource is Azure.ResourceManager.TrackedResource<
-  WebPubSubProperties,
-  true
-> {
+model WebPubSubResource
+  is Azure.ResourceManager.TrackedResource<WebPubSubProperties, true> {
   ...ResourceNameParameter<
     Resource = WebPubSubResource,
     KeyName = "resourceName",
@@ -39,7 +37,7 @@ model WebPubSubResource is Azure.ResourceManager.TrackedResource<
    * A class represent managed identities used for request and response
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  identity?: ManagedIdentity;
+  identity?: ManagedIdentityNew;
 }
 
 @armResourceOperations
