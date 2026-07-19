@@ -113,7 +113,7 @@
             "description": "The name of the data scanner.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]*$"
+            "pattern": "^[a-zA-Z0-9-]{1,260}$"
           }
         ],
         "responses": {
@@ -160,7 +160,7 @@
             "description": "The name of the data scanner.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]*$"
+            "pattern": "^[a-zA-Z0-9-]{1,260}$"
           },
           {
             "name": "resource",
@@ -222,7 +222,7 @@
             "description": "The name of the data scanner.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]*$"
+            "pattern": "^[a-zA-Z0-9-]{1,260}$"
           }
         ],
         "responses": {
@@ -331,6 +331,7 @@
         },
         "nextLink": {
           "type": "string",
+          "format": "uri",
           "description": "The URI to fetch the next page."
         }
       },

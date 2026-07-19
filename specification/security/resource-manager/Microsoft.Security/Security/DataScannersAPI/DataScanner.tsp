@@ -23,7 +23,7 @@ model DataScanner
     Resource = DataScanner,
     KeyName = "scannerName",
     SegmentName = "datascanners",
-    NamePattern = "^[a-zA-Z0-9-]*$"
+    NamePattern = "^[a-zA-Z0-9-]{1,260}$"
   >;
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
@@ -51,7 +51,7 @@ alias DataScannersOps = Azure.ResourceManager.Legacy.ExtensionOperations<
     @path
     @segment("datascanners")
     @key
-    @pattern("^[a-zA-Z0-9-]*$")
+    @pattern("^[a-zA-Z0-9-]{1,260}$")
     scannerName: string;
   }
 >;

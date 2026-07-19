@@ -33,5 +33,5 @@ model DataScannerList {
    * The URI to fetch the next page.
    */
   @nextLink
-  nextLink?: string;
+  nextLink?: url;
 }
