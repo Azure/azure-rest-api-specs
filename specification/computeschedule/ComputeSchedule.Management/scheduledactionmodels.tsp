@@ -81,9 +81,8 @@ model ScheduledActionResource {
   notificationSettings?: Array<NotificationProperties>;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 @@identifiers(ResourceListResponse.value, #[]);
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 model ResourceListResponse is Azure.Core.Page<ScheduledActionResource>;
 

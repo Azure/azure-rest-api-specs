@@ -342,13 +342,13 @@ model AdditionalCustomerProperties {
   @visibility(Lifecycle.Read)
   signupPhaseStatusText?: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("Customer resource last PeeringDB update timestamp.")
   @visibility(Lifecycle.Read)
   @Azure.ClientGenerator.Core.clientName(
     "peeringDbLastUpdateDateValue",
     "csharp"
   )
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   peeringDbLastUpdateDate?: utcDateTime;
 
   @doc("Customer resource owner organization name.")

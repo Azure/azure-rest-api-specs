@@ -34,10 +34,10 @@ union AudioTranslationFormat {
   vtt: "vtt",
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 @doc("""
   The configuration information for an audio translation request.
   """)
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 @added(ServiceApiVersions.v2024_02_15_Preview)
 model AudioTranslationOptions {
   @doc("""

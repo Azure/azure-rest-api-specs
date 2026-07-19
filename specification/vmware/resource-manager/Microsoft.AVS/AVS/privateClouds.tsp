@@ -318,11 +318,11 @@ model PrivateCloudProperties {
     """)
   secondaryCircuit?: Circuit;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("""
     Flag to indicate whether the private cloud has the quota for provisioned NSX
     Public IP count raised from 64 to 1024
     """)
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   nsxPublicIpQuotaRaised?: NsxPublicIpQuotaRaisedEnum;
 

@@ -246,6 +246,7 @@ model Glossary {
   storageSource?: StorageSource;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 @doc("""
   Contains unified error information used for HTTP responses across any Cognitive
   Service. Instances
@@ -254,7 +255,6 @@ model Glossary {
   from
   a controller.
   """)
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 @error
 model TranslationErrorResponse {
   @doc("""
