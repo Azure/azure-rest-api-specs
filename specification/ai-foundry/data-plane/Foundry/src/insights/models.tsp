@@ -2,11 +2,17 @@ import "../common/models.tsp";
 
 using TypeSpec.Rest;
 using Azure.Core.Foundations;
+using TypeSpec.OpenAPI;
 
 namespace Azure.AI.Projects;
 
+const InsightsRequiredPreviews = #{
+  conditional_previews: #[FoundryFeaturesOptInKeys.insights_v1_preview],
+};
+
 @doc("The response body for cluster insights.")
 @resource("insights")
+@extension("x-ms-foundry-meta", InsightsRequiredPreviews)
 model Insight {
   @doc("The unique identifier for the insights report.")
   @key("id")
@@ -33,6 +39,7 @@ model Insight {
 }
 
 @doc("Configuration of the model used in the insight generation.")
+@extension("x-ms-foundry-meta", InsightsRequiredPreviews)
 model InsightModelConfiguration {
   @doc("The model deployment to be evaluated. Accepts either the deployment name alone or with the connection name as '{connectionName}/<modelDeploymentName>'.")
   modelDeploymentName: string;
@@ -41,6 +48,7 @@ model InsightModelConfiguration {
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 @doc("The request of the insights report.")
 @discriminator("type")
+@extension("x-ms-foundry-meta", InsightsRequiredPreviews)
 model InsightRequest {
   @doc("The type of request.")
   type: InsightType;
@@ -48,6 +56,7 @@ model InsightRequest {
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 @doc("Insights on set of Evaluation Results")
+@extension("x-ms-foundry-meta", InsightsRequiredPreviews)
 model EvaluationRunClusterInsightRequest extends InsightRequest {
   @doc("The type of insights request.")
   type: InsightType.EvaluationRunClusterInsight;
@@ -64,6 +73,7 @@ model EvaluationRunClusterInsightRequest extends InsightRequest {
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 @doc("Insights on set of Agent Evaluation Results")
+@extension("x-ms-foundry-meta", InsightsRequiredPreviews)
 model AgentClusterInsightRequest extends InsightRequest {
   @doc("The type of request.")
   type: InsightType.AgentClusterInsight;
@@ -77,6 +87,7 @@ model AgentClusterInsightRequest extends InsightRequest {
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 @doc("Evaluation Comparison Request")
+@extension("x-ms-foundry-meta", InsightsRequiredPreviews)
 model EvaluationComparisonInsightRequest extends InsightRequest {
   @doc("The type of request.")
   type: InsightType.EvaluationComparison;
@@ -92,6 +103,7 @@ model EvaluationComparisonInsightRequest extends InsightRequest {
 }
 
 @doc("The request of the insights.")
+@extension("x-ms-foundry-meta", InsightsRequiredPreviews)
 union InsightType {
   string,
 
@@ -106,6 +118,7 @@ union InsightType {
 }
 
 @doc("Metadata about the insights.")
+@extension("x-ms-foundry-meta", InsightsRequiredPreviews)
 model InsightsMetadata {
   @doc("The timestamp when the insights were created.")
   createdAt: utcDateTime;
@@ -116,12 +129,14 @@ model InsightsMetadata {
 
 @doc("The result of the insights.")
 @discriminator("type")
+@extension("x-ms-foundry-meta", InsightsRequiredPreviews)
 model InsightResult {
   @doc("The type of insights result.")
   type: InsightType;
 }
 
 @doc("Insights from the evaluation comparison.")
+@extension("x-ms-foundry-meta", InsightsRequiredPreviews)
 model EvaluationComparisonInsightResult extends InsightResult {
   @doc("The type of insights result.")
   type: InsightType.EvaluationComparison;
@@ -134,6 +149,7 @@ model EvaluationComparisonInsightResult extends InsightResult {
 }
 
 @doc("Comparison results for treatment runs against the baseline.")
+@extension("x-ms-foundry-meta", InsightsRequiredPreviews)
 model EvalRunResultComparison {
   @doc("Name of the testing criteria.")
   testingCriteria: string;
@@ -152,6 +168,7 @@ model EvalRunResultComparison {
 }
 
 @doc("Summary statistics of a metric in an evaluation run.")
+@extension("x-ms-foundry-meta", InsightsRequiredPreviews)
 model EvalRunResultSummary {
   @doc("The evaluation run ID.")
   runId: string;
@@ -167,6 +184,7 @@ model EvalRunResultSummary {
 }
 
 @doc("Metric comparison for a treatment against the baseline.")
+@extension("x-ms-foundry-meta", InsightsRequiredPreviews)
 model EvalRunResultCompareItem {
   @doc("The treatment run ID.")
   treatmentRunId: string;
@@ -185,6 +203,7 @@ model EvalRunResultCompareItem {
 }
 
 @doc("Treatment Effect Type.")
+@extension("x-ms-foundry-meta", InsightsRequiredPreviews)
 union TreatmentEffectType {
   @doc("Not enough samples to determine treatment effect.")
   TooFewSamples: "TooFewSamples",
@@ -205,6 +224,7 @@ union TreatmentEffectType {
 }
 
 @doc("Insights from the cluster analysis.")
+@extension("x-ms-foundry-meta", InsightsRequiredPreviews)
 model ClusterInsightResult {
   @doc("Summary of the insights report.")
   summary: InsightSummary;
@@ -236,6 +256,7 @@ model ClusterInsightResult {
 }
 
 @doc("Insights from the evaluation run cluster analysis.")
+@extension("x-ms-foundry-meta", InsightsRequiredPreviews)
 model EvaluationRunClusterInsightResult extends InsightResult {
   @doc("The type of insights result.")
   type: InsightType.EvaluationRunClusterInsight;
@@ -244,6 +265,7 @@ model EvaluationRunClusterInsightResult extends InsightResult {
 }
 
 @doc("Insights from the agent cluster analysis.")
+@extension("x-ms-foundry-meta", InsightsRequiredPreviews)
 model AgentClusterInsightResult extends InsightResult {
   @doc("The type of insights result.")
   type: InsightType.AgentClusterInsight;
@@ -252,6 +274,7 @@ model AgentClusterInsightResult extends InsightResult {
 }
 
 @doc("Summary of the error cluster analysis.")
+@extension("x-ms-foundry-meta", InsightsRequiredPreviews)
 model InsightSummary {
   @doc("Total number of samples analyzed.")
   sampleCount: int32;
@@ -270,6 +293,7 @@ model InsightSummary {
 }
 
 @doc("Token usage for cluster analysis")
+@extension("x-ms-foundry-meta", InsightsRequiredPreviews)
 model ClusterTokenUsage {
   @doc("input token usage")
   inputTokenUsage: int32;
@@ -282,6 +306,7 @@ model ClusterTokenUsage {
 }
 
 @doc("Coordinates for the analysis chart.")
+@extension("x-ms-foundry-meta", InsightsRequiredPreviews)
 model ChartCoordinate {
   @doc("X-axis coordinate.")
   x: int32;
@@ -294,6 +319,7 @@ model ChartCoordinate {
 }
 
 @doc("The type of sample used in the analysis.")
+@extension("x-ms-foundry-meta", InsightsRequiredPreviews)
 union SampleType {
   @doc("A sample from the evaluation result.")
   EvaluationResultSample: "EvaluationResultSample",
@@ -303,6 +329,7 @@ union SampleType {
 
 @doc("A sample from the analysis.")
 @discriminator("type")
+@extension("x-ms-foundry-meta", InsightsRequiredPreviews)
 model InsightSample {
   @doc("The unique identifier for the analysis sample.")
   id: string;
@@ -318,6 +345,7 @@ model InsightSample {
 }
 
 @doc("A sample from the evaluation result.")
+@extension("x-ms-foundry-meta", InsightsRequiredPreviews)
 model EvaluationResultSample extends InsightSample {
   @doc("Evaluation Result Sample Type")
   type: SampleType.EvaluationResultSample;
@@ -327,6 +355,7 @@ model EvaluationResultSample extends InsightSample {
 }
 
 @doc("Result of the evaluation.")
+@extension("x-ms-foundry-meta", InsightsRequiredPreviews)
 model EvalResult {
   @doc("name of the check")
   name: string;
@@ -342,6 +371,7 @@ model EvalResult {
 }
 
 @doc("A cluster of analysis samples.")
+@extension("x-ms-foundry-meta", InsightsRequiredPreviews)
 model InsightCluster {
   @doc("The id of the analysis cluster.")
   id: string;
