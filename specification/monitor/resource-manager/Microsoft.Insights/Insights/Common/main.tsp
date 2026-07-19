@@ -271,10 +271,10 @@ model Context {
   contextType?: string;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 /**
  * Describes the format of Error response.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 @error
 model ErrorResponse {
   /**

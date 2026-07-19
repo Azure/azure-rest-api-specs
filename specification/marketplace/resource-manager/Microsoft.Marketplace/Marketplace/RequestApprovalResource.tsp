@@ -11,10 +11,10 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Marketplace;
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 /**
  * Request approval resource.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 @parentResource(PrivateStore)
 model RequestApprovalResource
   is Azure.ResourceManager.ProxyResource<RequestApprovalProperties> {

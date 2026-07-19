@@ -11783,10 +11783,10 @@ alias HyperVVirtualMachineDetailsProperties = {
    */
   generation?: string;
 
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   /**
    * The Last replication time.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osDetails?: OSDetails;
 
   /**

@@ -527,8 +527,8 @@ model InnerErrorDetails {
   target?: string;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 /** Error response from the service. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 @clientName("ModelErrorResponse")
 model ErrorResponse {
   /** The error code. */

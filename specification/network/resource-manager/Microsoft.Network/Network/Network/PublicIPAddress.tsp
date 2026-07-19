@@ -43,16 +43,16 @@ alias PublicIPAddressOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @key
     networkInterfaceName: string;
 
-    #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
     /** The name of the IP configuration. */
+    #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
     @path
     @segment("ipconfigurations")
     @key
     ipConfigurationName: string;
   },
   {
-    #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
     /** The name of the public IP Address. */
+    #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
     @path
     @segment("publicipaddresses")
     @key
@@ -112,8 +112,8 @@ alias PublicIPAddressOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOper
     ...Azure.ResourceManager.Legacy.Provider;
   },
   {
-    #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
     /** The name of the public IP address. */
+    #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
     @path
     @segment("publicIPAddresses")
     @key

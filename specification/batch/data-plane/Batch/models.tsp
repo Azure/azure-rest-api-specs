@@ -1233,10 +1233,10 @@ model BatchJobSchedule {
   stats?: BatchJobScheduleStatistics;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 @doc("""
   Parameters for updating an Azure Batch Job Schedule.
   """)
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 model BatchJobScheduleUpdateOptions {
   @doc("The schedule according to which Jobs will be created. All times are fixed respective to UTC and are not impacted by daylight saving time. If you do not specify this element, the existing schedule is left unchanged.")
   schedule?: BatchJobScheduleConfiguration;
@@ -1248,10 +1248,10 @@ model BatchJobScheduleUpdateOptions {
   metadata?: BatchMetadataItem[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 @doc("""
   Parameters for creating an Azure Batch Job Schedule
   """)
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 model BatchJobScheduleCreateOptions {
   @doc("A string that uniquely identifies the schedule within the Account. The ID can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters. The ID is case-preserving and case-insensitive (that is, you may not have two IDs within an Account that differ only by case).")
   id: string;
@@ -3399,10 +3399,10 @@ model BatchTask {
   applicationPackageReferences?: BatchApplicationPackageReference[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 @doc("""
   Parameters for creating an Azure Batch Task.
   """)
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 model BatchTaskCreateOptions {
   @doc("A string that uniquely identifies the Task within the Job. The ID can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters. The ID is case-preserving and case-insensitive (that is, you may not have two IDs within a Job that differ only by case).")
   id: string;

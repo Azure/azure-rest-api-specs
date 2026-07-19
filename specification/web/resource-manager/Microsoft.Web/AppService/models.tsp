@@ -14378,10 +14378,10 @@ model RegenerateActionParameter {
   keyType?: KeyType;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 /**
  * Error response indicates Logic service is not able to process the incoming request. The error property contains the error details.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 @error
 model ErrorResponse {
   /**

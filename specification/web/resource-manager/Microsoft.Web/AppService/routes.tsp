@@ -105,10 +105,10 @@ op listBillingMeters is ArmProviderActionSync<
     @query("billingLocation")
     billingLocation?: string;
 
-    #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
     /**
      * App Service OS type meters used for
      */
+    #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
     @query("osType")
     osType?: string;
   },
@@ -349,10 +349,10 @@ interface ProviderOperationGroup {
   getFunctionAppStacks is ArmProviderActionSync<
     Response = FunctionAppStackCollection,
     Parameters = {
-      #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
       /**
        * Stack OS Type
        */
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
       @query("stackOsType")
       stackOsType?: ProviderStackOsType;
     },
@@ -371,10 +371,10 @@ interface ProviderOperationGroup {
     Parameters = {
       ...LocationResourceParameter;
 
-      #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
       /**
        * Stack OS Type
        */
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
       @query("stackOsType")
       stackOsType?: ProviderStackOsType;
     },
@@ -393,10 +393,10 @@ interface ProviderOperationGroup {
     Parameters = {
       ...LocationResourceParameter;
 
-      #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
       /**
        * Stack OS Type
        */
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
       @query("stackOsType")
       stackOsType?: ProviderStackOsType;
     },
@@ -413,10 +413,10 @@ interface ProviderOperationGroup {
   getWebAppStacks is ArmProviderActionSync<
     Response = WebAppStackCollection,
     Parameters = {
-      #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
       /**
        * Stack OS Type
        */
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
       @query("stackOsType")
       stackOsType?: ProviderStackOsType;
     },

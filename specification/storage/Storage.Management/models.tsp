@@ -4503,10 +4503,10 @@ model DeletedAccountProperties {
   deletionTime?: string;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 /**
  * An error response from the storage resource provider.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 @error
 model ErrorResponse {
   /**

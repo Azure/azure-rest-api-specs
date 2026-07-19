@@ -87,10 +87,10 @@ op listGeodataByIp(
   @path
   enrichmentType: EnrichmentType,
 
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   /**
    * IP address (v4 or v6) to be enriched
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @bodyRoot
   ipAddressBody: EnrichmentIpAddressBody,
 ): ArmResponse<EnrichmentIpGeodata> | CloudError;

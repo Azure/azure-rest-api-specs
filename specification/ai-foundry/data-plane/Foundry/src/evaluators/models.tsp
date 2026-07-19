@@ -356,11 +356,11 @@ model EvaluatorVersion {
   ...AssetBase;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 @extension(
   "x-ms-foundry-meta",
   #{ required_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview] }
 )
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 @doc("Request body for getting evaluator credentials")
 model EvaluatorCredentialRequest {
   @doc("The blob URI for the evaluator storage. Example: `https://account.blob.core.windows.net:443/container`")

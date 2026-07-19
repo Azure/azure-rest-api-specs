@@ -35,8 +35,8 @@ alias DatabaseMigrationSqlDbOps = Azure.ResourceManager.Legacy.ExtensionOperatio
     @key
     providerNamespace: "Microsoft.Sql";
 
-    #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
     /** The name of the target SQL DB instance. */
+    #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
     @path
     @segment("servers")
     @key
@@ -46,8 +46,8 @@ alias DatabaseMigrationSqlDbOps = Azure.ResourceManager.Legacy.ExtensionOperatio
   {
     ...Extension.ExtensionProviderNamespace<DatabaseMigrationSqlDb>;
 
-    #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
     /** The name of the target database. */
+    #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
     @path
     @segment("databaseMigrations")
     @key
@@ -67,8 +67,8 @@ alias DatabaseMigrationSqlDbOpsWithPattern = Azure.ResourceManager.Legacy.Extens
     @key
     providerNamespace: "Microsoft.Sql";
 
-    #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
     /** The name of the target SQL DB instance. */
+    #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
     @path
     @segment("servers")
     @key
@@ -79,8 +79,8 @@ alias DatabaseMigrationSqlDbOpsWithPattern = Azure.ResourceManager.Legacy.Extens
   {
     ...Extension.ExtensionProviderNamespace<DatabaseMigrationSqlDb>;
 
-    #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
     /** The name of the target database. */
+    #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
     @path
     @segment("databaseMigrations")
     @key

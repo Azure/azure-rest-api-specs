@@ -36,8 +36,8 @@ model VoiceLiveErrorDetails {
   event_id?: string;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 /** Standard error response envelope. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 @error
 @usage(ResponseUsage)
 model ErrorResponse {

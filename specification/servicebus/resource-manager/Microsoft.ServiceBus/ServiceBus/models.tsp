@@ -674,10 +674,10 @@ model NamespaceReplicaLocation {
   roleType?: GeoDRRoleType;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 /**
  * The resource management error response.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 @error
 model ErrorResponse {
   /**

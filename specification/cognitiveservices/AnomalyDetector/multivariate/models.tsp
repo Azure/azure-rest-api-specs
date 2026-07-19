@@ -128,11 +128,11 @@ model VariableState {
   lastTimestamp?: utcDateTime;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 @doc("""
   Detection request for batch inference. This is an asynchronous inference that
   will need another API to get detection results.
   """)
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 model MultivariateBatchDetectionOptions {
   @doc("""
     Source link to the input data to indicate an accessible Azure Storage URI.

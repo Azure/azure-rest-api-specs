@@ -441,10 +441,10 @@ model ProjectSettings {
   defaultAnswer?: string;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 /**
  * Error response.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 @error
 model ErrorResponse is Azure.Core.Foundations.ErrorResponseBase<Error>;
 
