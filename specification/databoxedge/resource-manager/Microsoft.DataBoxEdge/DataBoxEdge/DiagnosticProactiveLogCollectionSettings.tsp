@@ -16,11 +16,10 @@ namespace Microsoft.DataBoxEdge;
  */
 @singleton("default")
 @parentResource(DataBoxEdgeDevice)
-model DiagnosticProactiveLogCollectionSettings
-  is Azure.ResourceManager.ProxyResource<
-    ProactiveLogCollectionSettingsProperties,
-    false
-  > {
+model DiagnosticProactiveLogCollectionSettings is Azure.ResourceManager.ProxyResource<
+  ProactiveLogCollectionSettingsProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = DiagnosticProactiveLogCollectionSettings,
     KeyName = "diagnosticProactiveLogCollectionSetting",

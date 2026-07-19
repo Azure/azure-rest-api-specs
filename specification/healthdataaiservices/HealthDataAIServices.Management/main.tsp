@@ -98,6 +98,7 @@ model DeidServiceProperties {
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   @doc("Deid service url.")
   serviceUrl?: string;
