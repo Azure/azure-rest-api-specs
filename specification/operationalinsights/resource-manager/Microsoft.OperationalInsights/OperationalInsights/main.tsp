@@ -27,6 +27,7 @@ import "./Workspace.tsp";
 import "./NetworkSecurityPerimeterConfiguration.tsp";
 import "./SummaryLogs.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

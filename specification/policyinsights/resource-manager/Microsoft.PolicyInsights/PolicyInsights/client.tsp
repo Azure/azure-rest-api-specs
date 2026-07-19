@@ -1454,6 +1454,8 @@ op remediationsListDeploymentsAtManagementGroup(
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 op remediationsListForManagementGroup(
   ...ApiVersionParameter,
+
+  @path
   managementGroupsNamespace: ManagementGroupsNamespaceType,
 
   @path
@@ -1490,7 +1492,7 @@ op remediationsListDeploymentsAtSubscription(
   | ArmResponse<RemediationDeploymentsListResult>
   | PolicyInsightsApi.ErrorResponse;
 @@override(
-  RemediationSubscriptionOperations.listDeploymentsAtSubscription,
+  Remediations.listDeploymentsAtSubscription,
   remediationsListDeploymentsAtSubscription,
   "!java,!python"
 );
@@ -1509,7 +1511,7 @@ op remediationsListForSubscription(
   queryOptions?: RemediationsListForSubscriptionQueryOptions,
 ): ArmResponse<RemediationListResult> | PolicyInsightsApi.ErrorResponse;
 @@override(
-  RemediationSubscriptionOperations.listForSubscription,
+  Remediations.listForSubscription,
   remediationsListForSubscription,
   "!java,!python"
 );
@@ -1533,7 +1535,7 @@ op remediationsListDeploymentsAtResourceGroup(
   | ArmResponse<RemediationDeploymentsListResult>
   | PolicyInsightsApi.ErrorResponse;
 @@override(
-  RemediationResourceGroupOperations.listDeploymentsAtResourceGroup,
+  Remediations.listDeploymentsAtResourceGroup,
   remediationsListDeploymentsAtResourceGroup,
   "!java,!python"
 );
@@ -1548,7 +1550,7 @@ op remediationsListForResourceGroup(
   queryOptions?: RemediationsListForResourceGroupQueryOptions,
 ): ArmResponse<RemediationListResult> | PolicyInsightsApi.ErrorResponse;
 @@override(
-  RemediationResourceGroupOperations.listForResourceGroup,
+  Remediations.listForResourceGroup,
   remediationsListForResourceGroup,
   "!java,!python"
 );
@@ -1572,7 +1574,7 @@ op remediationsListDeploymentsAtResource(
   | ArmResponse<RemediationDeploymentsListResult>
   | PolicyInsightsApi.ErrorResponse;
 @@override(
-  RemediationResourceOperations.listDeploymentsAtResource,
+  Remediations.listDeploymentsAtResource,
   remediationsListDeploymentsAtResource,
   "!java,!python"
 );
@@ -1589,7 +1591,7 @@ op remediationsListForResource(
   queryOptions?: RemediationsListForResourceQueryOptions,
 ): ArmResponse<RemediationListResult> | PolicyInsightsApi.ErrorResponse;
 @@override(
-  RemediationResourceOperations.listForResource,
+  Remediations.listForResource,
   remediationsListForResource,
   "!java,!python"
 );
@@ -1625,7 +1627,7 @@ op attestationsListForResourceGroup(
   queryOptions?: AttestationsListForResourceGroupQueryOptions,
 ): ArmResponse<AttestationListResult> | PolicyInsightsApi.ErrorResponse;
 @@override(
-  AttestationResourceGroupOperations.listForResourceGroup,
+  Attestations.listForResourceGroup,
   attestationsListForResourceGroup,
   "!java,!python"
 );
@@ -1642,7 +1644,7 @@ op attestationsListForResource(
   queryOptions?: AttestationsListForResourceQueryOptions,
 ): ArmResponse<AttestationListResult> | PolicyInsightsApi.ErrorResponse;
 @@override(
-  AttestationOperationGroup.listForResource,
+  Attestations.listForResource,
   attestationsListForResource,
   "!java,!python"
 );
@@ -1823,3 +1825,736 @@ op attestationsListForResource(
   "javascript"
 );
 @@alternateType(ManagementGroupsNamespaceType, "Microsoft.Management");
+
+// ============================================================================
+// C# customizations
+//
+// Rationale:
+// 1) Back-compat renames preserve the GA C# SDK surface (Summary/SummaryResults
+//    were renamed to PolicySummary/PolicySummaryResults via the prior autorest
+//    config). Also works around a current C# mgmt generator inconsistency where
+//    ArmPolicyInsightsModelFactory references `Models.PolicySummaryResults`
+//    while only `Models.SummaryResults` is emitted.
+// 2) CheckRestrictionEvaluationDetails is referenced as a parameter on the
+//    public Arm*ModelFactory.PolicyEvaluationResult overload, but generated as
+//    internal. Make it public for C#.
+// 3) The spec defines per-scope LegacyOperations aliases (management group,
+//    subscription, resource group, and generic AtResource) for both Attestation
+//    and Remediation, all sharing the same ResourceName. The current C# mgmt
+//    generator emits one ArmClient extension set per alias, producing
+//    duplicate method signatures (CS0111) and per-scope helper extensions that
+//    did not exist on the GA C# SDK. Suppressing every alias except the
+//    generic AtResource one for C# only restores the GA surface (ArmClient
+//    extensions only) without changing the swagger emitted for other
+//    languages. The remaining AtResource alias uses `{resourceId}` which
+//    accepts any subscription/resource-group/management-group scope at runtime.
+// ============================================================================
+
+@@clientName(Summary, "PolicySummary", "csharp");
+@@clientName(SummaryResults, "PolicySummaryResults", "csharp");
+@@clientName(
+  CheckRestrictionsRequest,
+  "CheckPolicyRestrictionsContent",
+  "csharp"
+);
+@@clientName(
+  CheckManagementGroupRestrictionsRequest,
+  "CheckManagementGroupPolicyRestrictionsContent",
+  "csharp"
+);
+@@clientName(
+  CheckRestrictionsResult,
+  "CheckPolicyRestrictionsResult",
+  "csharp"
+);
+@@clientName(
+  CheckRestrictionsResult.contentEvaluationResult,
+  "PolicyEvaluations",
+  "csharp"
+);
+@@clientName(
+  PolicyEvaluationResult.evaluationDetails,
+  "CheckRestrictionEvaluationDetails",
+  "csharp"
+);
+// Back-compat class renames (previously done via the autorest rename-mapping).
+@@clientName(Attestation, "PolicyAttestation", "csharp");
+@@clientName(Remediation, "PolicyRemediation", "csharp");
+@@clientName(ComplianceState, "PolicyComplianceState", "csharp");
+@@clientName(PolicyEventsResourceType, "PolicyEventType", "csharp");
+@@clientName(PolicyStatesResource, "PolicyStateType", "csharp");
+@@clientName(
+  PolicyStatesSummaryResourceType,
+  "PolicyStateSummaryType",
+  "csharp"
+);
+@@clientName(PolicyTrackedResource, "PolicyTrackedResourceRecord", "csharp");
+@@clientName(
+  PolicyTrackedResourcesResourceType,
+  "PolicyTrackedResourceType",
+  "csharp"
+);
+// Back-compat property renames.
+@@clientName(AttestationProperties.expiresOn, "expireOn", "csharp");
+@@clientName(AttestationProperties.assessmentDate, "assessOn", "csharp");
+@@clientName(RemediationProperties.filters, "filter", "csharp");
+@@clientName(PolicyTrackedResource.lastUpdateUtc, "lastUpdateOn", "csharp");
+@@clientName(PolicyEvent.resourceType, "resourceTypeString", "csharp");
+@@clientName(PolicyState.resourceType, "resourceTypeString", "csharp");
+
+// Back-compat property types: ARM ID strings should be typed as ResourceIdentifier.
+@@alternateType(
+  AttestationProperties.policyAssignmentId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  RemediationProperties.policyAssignmentId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  PolicyAssignmentSummary.policyAssignmentId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  PolicyAssignmentSummary.policySetDefinitionId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  PolicyDetails.policyDefinitionId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  PolicyDetails.policyAssignmentId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  PolicyDetails.policySetDefinitionId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  PolicyEvent.policyAssignmentId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  PolicyEvent.policyDefinitionId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  PolicyEvent.resourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  PolicyEvent.policySetDefinitionId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  PolicyReference.policyDefinitionId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  PolicyReference.policySetDefinitionId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  PolicyReference.policyAssignmentId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  PolicyState.resourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  PolicyState.policyAssignmentId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  PolicyState.policyDefinitionId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  PolicyState.policySetDefinitionId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  IfNotExistsEvaluationDetails.resourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  PolicyDefinitionSummary.policyDefinitionId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  PolicyTrackedResource.trackedResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  RemediationDeployment.remediatedResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  RemediationDeployment.deploymentId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  TrackedResourceModificationDetails.deploymentId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
+// Back-compat property types: location strings should be typed as AzureLocation.
+@@alternateType(
+  PolicyEvent.resourceLocation,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(
+  PolicyState.resourceLocation,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(
+  RemediationDeployment.resourceLocation,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+// GA autorest's `format-by-name-rules: '*Uri': 'Uri'` retyped the slim
+// metadata's additionalContentUrl to System.Uri; preserve that.
+@@alternateType(
+  PolicyMetadataSlimProperties.additionalContentUrl,
+  url,
+  "csharp"
+);
+
+@@access(CheckRestrictionEvaluationDetails, Access.public, "csharp");
+// The generator emits a model PolicyMetadataCollection (paging envelope for
+// SlimPolicyMetadata) that conflicts with the ArmCollection type of the same
+// name. The GA C# SDK only exposed the ArmCollection publicly.
+@@access(PolicyMetadataCollection, Access.internal, "csharp");
+// GA C# SDK did not expose the Operations RP model publicly.
+@@access(PolicyInsightsApi.Operation, Access.internal, "csharp");
+@@access(OperationsListResults, Access.internal, "csharp");
+@@scope(PolicyInsightsApi.Operations.list, "!csharp");
+// NOTE: ComponentPolicyStatesQueryResults and SummarizeResults are paging
+// envelopes that GA hid by returning Pageable<T> (autorest's automatic
+// pageable detection via x-ms-pageable). The new spec ops are non-pageable
+// (no @pageItems / @nextLink on response models), so the C# emitter exposes
+// the envelopes directly. @@Legacy.markAsPageable is ineffective without
+// those markers. Accepted as additive new public surface; revisit if the
+// generator gains support for marking these as pageable without modifying
+// the shared models.tsp.
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "compat GA"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  PolicyStatesOperationGroup.summarizeForResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "compat GA"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  PolicyStatesOperationGroup.summarizeForResourceGroup,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "compat GA"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  PolicyStatesOperationGroup.summarizeForSubscription,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "compat GA"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  PolicyStatesOperationGroup.summarizeForManagementGroup,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "compat GA"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  PolicyStatesOperationGroup.summarizeForPolicyDefinition,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "compat GA"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  PolicyStatesOperationGroup.summarizeForPolicySetDefinition,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "compat GA"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  PolicyStatesOperationGroup.summarizeForResourceGroupLevelPolicyAssignment,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "compat GA"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  PolicyStatesOperationGroup.summarizeForSubscriptionLevelPolicyAssignment,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "compat GA"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  ComponentPolicyStatesOperationGroup.listQueryResultsForSubscription,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "compat GA"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroup,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "compat GA"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  ComponentPolicyStatesOperationGroup.listQueryResultsForResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "compat GA"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  ComponentPolicyStatesOperationGroup.listQueryResultsForPolicyDefinition,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "compat GA"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  ComponentPolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "compat GA"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment,
+  "csharp"
+);
+
+// Remediations: hide management-group, subscription, resource-group scope operations from C#
+@@scope(Remediations.getAtManagementGroup, "!csharp");
+@@scope(Remediations.createOrUpdateAtManagementGroup, "!csharp");
+@@scope(Remediations.deleteAtManagementGroup, "!csharp");
+@@scope(Remediations.listForManagementGroup, "!csharp");
+@@scope(RemediationsOperationGroup.listDeploymentsAtManagementGroup, "!csharp");
+@@scope(RemediationsOperationGroup.cancelAtManagementGroup, "!csharp");
+@@scope(Remediations.getAtSubscription, "!csharp");
+@@scope(Remediations.createOrUpdateAtSubscription, "!csharp");
+@@scope(Remediations.deleteAtSubscription, "!csharp");
+@@scope(Remediations.listForSubscription, "!csharp");
+@@scope(Remediations.listDeploymentsAtSubscription, "!csharp");
+@@scope(Remediations.cancelAtSubscription, "!csharp");
+@@scope(Remediations.getAtResourceGroup, "!csharp");
+@@scope(Remediations.createOrUpdateAtResourceGroup, "!csharp");
+@@scope(Remediations.deleteAtResourceGroup, "!csharp");
+@@scope(Remediations.listForResourceGroup, "!csharp");
+@@scope(Remediations.listDeploymentsAtResourceGroup, "!csharp");
+@@scope(Remediations.cancelAtResourceGroup, "!csharp");
+
+// Attestations: hide subscription and resource-group scope operations from C#
+@@scope(Attestations.getAtSubscription, "!csharp");
+@@scope(Attestations.createOrUpdateAtSubscription, "!csharp");
+@@scope(Attestations.deleteAtSubscription, "!csharp");
+@@scope(Attestations.listForSubscription, "!csharp");
+@@scope(Attestations.getAtResourceGroup, "!csharp");
+@@scope(Attestations.createOrUpdateAtResourceGroup, "!csharp");
+@@scope(Attestations.deleteAtResourceGroup, "!csharp");
+@@scope(Attestations.listForResourceGroup, "!csharp");
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "GA back-compat"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  SlimPolicyMetadata,
+  Azure.ResourceManager.CommonTypes.Resource,
+  "csharp"
+);
+
+@@clientName(QueryOptions, "PolicyQuerySettings", "csharp");
+
+// Restore GA OData property names (uppercase D after O) on the user-facing models.
+@@clientName(PolicyEvent.`@odata.id`, "ODataId", "csharp");
+@@clientName(PolicyEvent.`@odata.context`, "ODataContext", "csharp");
+@@clientName(PolicyState.`@odata.id`, "ODataId", "csharp");
+@@clientName(PolicyState.`@odata.context`, "ODataContext", "csharp");
+@@clientName(ComponentPolicyState.`@odata.id`, "ODataId", "csharp");
+@@clientName(ComponentPolicyState.`@odata.context`, "ODataContext", "csharp");
+@@clientName(Summary.`@odata.id`, "ODataId", "csharp");
+@@clientName(Summary.`@odata.context`, "ODataContext", "csharp");
+
+// Rename auto-emitted Mockable*Resource / PolicyInsightsExtensions extension
+// method names back to GA. Per skill ref §9.35 the C# emitter ignores
+// @@clientName on the @@override-shimmed top-level ops (e.g.
+// policyStatesSummarizeForSubscriptionLevelPolicyAssignment) but DOES honour
+// @@clientName when applied to the ARM-template-derived interface op
+// (PolicyStatesOperationGroup.summarizeForSubscriptionLevelPolicyAssignment).
+//
+// NOTE: GA used the same C# name for the 4 scope-bound variants (sub/rg/mg/
+// resource) of each query/summarize family — autorest combined them at source
+// level. The new emitter emits one ArmClient extension + REST method per op,
+// so renaming all 4 to the same name causes CS0111 on the ArmClient extension
+// class and the REST operations class. The renames below avoid that pattern —
+// only ops whose default name doesn't already match GA AND whose new name does
+// not collide with another rename in the same target class.
+
+@@clientName(
+  PolicyEventsOperationGroup.listQueryResultsForPolicyDefinition,
+  "GetQueryResultsForPolicyDefinitionPolicyEvents",
+  "csharp"
+);
+@@clientName(
+  PolicyEventsOperationGroup.listQueryResultsForPolicySetDefinition,
+  "GetQueryResultsForPolicySetDefinitionPolicyEvents",
+  "csharp"
+);
+@@clientName(
+  PolicyEventsOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment,
+  "GetQueryResultsForSubscriptionLevelPolicyAssignmentPolicyEvents",
+  "csharp"
+);
+@@clientName(
+  PolicyEventsOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment,
+  "GetQueryResultsForResourceGroupLevelPolicyAssignmentPolicyEvents",
+  "csharp"
+);
+
+@@clientName(
+  PolicyStatesOperationGroup.listQueryResultsForPolicyDefinition,
+  "GetQueryResultsForPolicyDefinitionPolicyStates",
+  "csharp"
+);
+@@clientName(
+  PolicyStatesOperationGroup.listQueryResultsForPolicySetDefinition,
+  "GetQueryResultsForPolicySetDefinitionPolicyStates",
+  "csharp"
+);
+@@clientName(
+  PolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment,
+  "GetQueryResultsForSubscriptionLevelPolicyAssignmentPolicyStates",
+  "csharp"
+);
+@@clientName(
+  PolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment,
+  "GetQueryResultsForResourceGroupLevelPolicyAssignmentPolicyStates",
+  "csharp"
+);
+@@clientName(
+  PolicyStatesOperationGroup.summarizeForPolicyDefinition,
+  "SummarizeForPolicyDefinitionPolicyStates",
+  "csharp"
+);
+@@clientName(
+  PolicyStatesOperationGroup.summarizeForPolicySetDefinition,
+  "SummarizeForPolicySetDefinitionPolicyStates",
+  "csharp"
+);
+@@clientName(
+  PolicyStatesOperationGroup.summarizeForSubscriptionLevelPolicyAssignment,
+  "SummarizeForSubscriptionLevelPolicyAssignmentPolicyStates",
+  "csharp"
+);
+@@clientName(
+  PolicyStatesOperationGroup.summarizeForResourceGroupLevelPolicyAssignment,
+  "SummarizeForResourceGroupLevelPolicyAssignmentPolicyStates",
+  "csharp"
+);
+
+@@clientName(
+  ComponentPolicyStatesOperationGroup.listQueryResultsForSubscription,
+  "GetQueryResultsForSubscriptionComponentPolicyStates",
+  "csharp"
+);
+@@clientName(
+  ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroup,
+  "GetQueryResultsForResourceGroupComponentPolicyStates",
+  "csharp"
+);
+@@clientName(
+  ComponentPolicyStatesOperationGroup.listQueryResultsForResource,
+  "GetQueryResultsForResourceComponentPolicyStates",
+  "csharp"
+);
+@@clientName(
+  ComponentPolicyStatesOperationGroup.listQueryResultsForPolicyDefinition,
+  "GetQueryResultsForPolicyDefinitionComponentPolicyStates",
+  "csharp"
+);
+@@clientName(
+  ComponentPolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment,
+  "GetQueryResultsForSubscriptionLevelPolicyAssignmentComponentPolicyStates",
+  "csharp"
+);
+@@clientName(
+  ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment,
+  "GetQueryResultsForResourceGroupLevelPolicyAssignmentComponentPolicyStates",
+  "csharp"
+);
+
+@@clientName(PolicyMetadataNonResourceOperationGroup.list, "GetAll", "csharp");
+
+@@clientName(
+  Remediations.listDeploymentsAtResource,
+  "GetDeployments",
+  "csharp"
+);
+@@clientName(Remediations.cancelAtResource, "Cancel", "csharp");
+@@alternateType(
+  attestationsListForResource::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyTrackedResourcesListQueryResultsForManagementGroup::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyTrackedResourcesListQueryResultsForSubscription::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyTrackedResourcesListQueryResultsForResourceGroup::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyTrackedResourcesListQueryResultsForResource::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyEventsListQueryResultsForManagementGroup::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyEventsListQueryResultsForSubscription::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyEventsListQueryResultsForResourceGroup::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyEventsListQueryResultsForResource::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyEventsListQueryResultsForPolicySetDefinition::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyEventsListQueryResultsForPolicyDefinition::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyEventsListQueryResultsForSubscriptionLevelPolicyAssignment::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyEventsListQueryResultsForResourceGroupLevelPolicyAssignment::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyStatesListQueryResultsForManagementGroup::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyStatesSummarizeForManagementGroup::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyStatesListQueryResultsForSubscription::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyStatesSummarizeForSubscription::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyStatesListQueryResultsForResourceGroup::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyStatesSummarizeForResourceGroup::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyStatesListQueryResultsForResource::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyStatesSummarizeForResource::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyStatesListQueryResultsForPolicySetDefinition::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyStatesSummarizeForPolicySetDefinition::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyStatesListQueryResultsForPolicyDefinition::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyStatesSummarizeForPolicyDefinition::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyStatesListQueryResultsForSubscriptionLevelPolicyAssignment::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyStatesSummarizeForSubscriptionLevelPolicyAssignment::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyStatesListQueryResultsForResourceGroupLevelPolicyAssignment::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyStatesSummarizeForResourceGroupLevelPolicyAssignment::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyMetadataList::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  componentPolicyStatesListQueryResultsForSubscription::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  componentPolicyStatesListQueryResultsForResourceGroup::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  componentPolicyStatesListQueryResultsForResource::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  componentPolicyStatesListQueryResultsForPolicyDefinition::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  componentPolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignment::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  componentPolicyStatesListQueryResultsForResourceGroupLevelPolicyAssignment::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  remediationsListDeploymentsAtManagementGroup::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  remediationsListForManagementGroup::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  remediationsListDeploymentsAtSubscription::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  remediationsListForSubscription::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  remediationsListDeploymentsAtResourceGroup::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  remediationsListForResourceGroup::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  remediationsListDeploymentsAtResource::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  remediationsListForResource::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  attestationsListForSubscription::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  attestationsListForResourceGroup::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "for csharp sdk compat"
+@@clientName(
+  PolicyStatesOperationGroup.triggerResourceGroupEvaluation,
+  "TriggerPolicyStateEvaluation",
+  "csharp"
+);
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "for csharp sdk compat"
+@@clientName(
+  PolicyStatesOperationGroup.triggerSubscriptionEvaluation,
+  "TriggerPolicyStateEvaluation",
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "csharp sdk compat"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  ComponentEventDetails,
+  Foundations.Resource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "csharp sdk compat"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  ComponentStateDetails,
+  Foundations.Resource,
+  "csharp"
+);

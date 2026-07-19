@@ -186,6 +186,10 @@ union CreateMode {
   Replica: "Replica",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   GeoRestore: "GeoRestore",
+
+  /** Rename an existing server. */
+  @added(Versions.v2025_12_01_preview)
+  Rename: "Rename",
 }
 
 /**
@@ -1219,6 +1223,7 @@ model ImportSourceProperties {
   /**
    * Uri of the import source storage.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   storageUrl?: string;
 

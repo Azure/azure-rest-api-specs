@@ -224,7 +224,7 @@ op regionalCheckNameAvailability is ArmProviderActionSync<
   Request = DnlResourceNameAvailabilityRequest,
   Response = DnlResourceNameAvailability,
   Scope = SubscriptionActionScope,
-  Parameters = LocationParameter,
+  Parameters = LocationResourceParameter,
   Error = DefaultErrorResponse
 >;
 
@@ -366,7 +366,7 @@ interface ProviderOperationGroup {
   getFunctionAppStacksForLocation is ArmProviderActionSync<
     Response = FunctionAppStackCollection,
     Parameters = {
-      ...LocationParameter;
+      ...LocationResourceParameter;
 
       /**
        * Stack OS Type
@@ -387,7 +387,7 @@ interface ProviderOperationGroup {
   getWebAppStacksForLocation is ArmProviderActionSync<
     Response = WebAppStackCollection,
     Parameters = {
-      ...LocationParameter;
+      ...LocationResourceParameter;
 
       /**
        * Stack OS Type
@@ -546,7 +546,7 @@ interface GetUsagesInLocationOperationGroup {
   list is ArmProviderActionSync<
     Response = CsmUsageQuotaCollection,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter,
+    Parameters = LocationResourceParameter,
     Error = DefaultErrorResponse
   >;
 }
@@ -564,7 +564,7 @@ interface StaticSitesOperationGroup {
     Request = StaticSitesWorkflowPreviewRequest,
     Response = StaticSitesWorkflowPreview,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter,
+    Parameters = LocationResourceParameter,
     Error = DefaultErrorResponse
   >;
 }

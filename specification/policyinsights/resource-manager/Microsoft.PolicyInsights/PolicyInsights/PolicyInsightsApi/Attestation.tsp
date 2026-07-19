@@ -11,8 +11,10 @@ namespace PolicyInsightsApi;
  * An attestation resource.
  */
 @subscriptionResource
-model Attestation
-  is Azure.ResourceManager.ProxyResource<AttestationProperties, false> {
+model Attestation is Azure.ResourceManager.ProxyResource<
+  AttestationProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = Attestation,
     KeyName = "attestationName",
@@ -39,7 +41,47 @@ alias AttestationSubscriptionOps = Azure.ResourceManager.Legacy.ExtensionOperati
     @segment("attestations")
     @key
     attestationName: string;
-  }
+  },
+  ResourceName = "PolicyAttestation"
+>;
+
+alias AttestationResourceGroupOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+  },
+  {
+    /** The name of the attestation. */
+    @path
+    @segment("attestations")
+    @key
+    attestationName: string;
+  },
+  ResourceName = "PolicyAttestation"
+>;
+
+alias AttestationAtResourceOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+
+    /** Resource ID. */
+    @path(#{ allowReserved: true })
+    @key
+    resourceId: string;
+
+    ...Azure.ResourceManager.Legacy.Provider;
+  },
+  {
+    /** The name of the attestation. */
+    @path
+    @segment("attestations")
+    @key
+    attestationName: string;
+  },
+  ResourceName = "PolicyAttestation",
+  ErrorType = ErrorResponse
 >;
 
 @armResourceOperations(#{ omitTags: true })
@@ -94,25 +136,7 @@ interface Attestations {
     },
     ErrorType = ErrorResponse
   >;
-}
-alias AttestationResourceGroupOps = Azure.ResourceManager.Legacy.LegacyOperations<
-  {
-    ...ApiVersionParameter;
-    ...SubscriptionIdParameter;
-    ...ResourceGroupParameter;
-    ...Azure.ResourceManager.Legacy.Provider;
-  },
-  {
-    /** The name of the attestation. */
-    @path
-    @segment("attestations")
-    @key
-    attestationName: string;
-  }
->;
 
-@armResourceOperations(#{ omitTags: true })
-interface AttestationResourceGroupOperations {
   /**
    * Gets an existing attestation at resource group scope.
    */
@@ -163,31 +187,7 @@ interface AttestationResourceGroupOperations {
     },
     OverrideErrorType = ErrorResponse
   >;
-}
 
-alias AttestationAtResourceOps = Azure.ResourceManager.Legacy.LegacyOperations<
-  {
-    ...ApiVersionParameter;
-
-    /** Resource ID. */
-    @path(#{ allowReserved: true })
-    @key
-    resourceId: string;
-
-    ...Azure.ResourceManager.Legacy.Provider;
-  },
-  {
-    /** The name of the attestation. */
-    @path
-    @segment("attestations")
-    @key
-    attestationName: string;
-  },
-  ErrorType = ErrorResponse
->;
-
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-interface AttestationOperationGroup {
   /**
    * Gets an existing attestation at resource scope.
    */
@@ -254,10 +254,10 @@ interface AttestationOperationGroup {
   "The attestation parameters."
 );
 @@doc(
-  AttestationResourceGroupOperations.createOrUpdateAtResourceGroup::parameters.resource,
+  Attestations.createOrUpdateAtResourceGroup::parameters.resource,
   "The attestation parameters."
 );
 @@doc(
-  AttestationOperationGroup.createOrUpdateAtResource::parameters.resource,
+  Attestations.createOrUpdateAtResource::parameters.resource,
   "The attestation parameters."
 );

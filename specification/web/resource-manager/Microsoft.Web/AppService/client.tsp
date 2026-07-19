@@ -6,6 +6,9 @@ using Http;
 using Azure.ClientGenerator.Core;
 using Microsoft.Web;
 using Azure.ResourceManager;
+using Azure.Core;
+
+namespace Customizations;
 
 // python
 @@clientName(Microsoft.Web, "WebSiteManagementClient", "python, javascript");
@@ -605,7 +608,8 @@ op webAppsDeletePrivateEndpointConnectionSlotCustomized(
 
 @@override(
   PrivateEndpointConnectionSlotOperationGroup.deletePrivateEndpointConnectionSlot,
-  webAppsDeletePrivateEndpointConnectionSlotCustomized
+  webAppsDeletePrivateEndpointConnectionSlotCustomized,
+  "!javascript,!autorest"
 );
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -3053,7 +3057,11 @@ op webAppsUpdateVnetConnectionSlotCustomized(
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Swagger bug. Function App on ACA is LRO."
 @@Azure.ClientGenerator.Core.Legacy.markAsLro(Sites.update, "java");
 
-@@clientName(Microsoft.Web.ErrorResponse, "WorkflowErrorResponse", "!go");
+@@clientName(
+  Microsoft.Web.ErrorResponse,
+  "WorkflowErrorResponse",
+  "!go,!javascript,!autorest"
+);
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -3095,7 +3103,7 @@ op regionalCheckNameAvailabilityCustomized(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...Azure.ResourceManager.Legacy.Provider,
-  ...LocationParameter,
+  ...LocationResourceParameter,
 
   /**
    * Resource name to verify.
@@ -3267,4 +3275,3787 @@ op regionalCheckNameAvailabilityCustomized(
   SiteConnectionStringKeyVaultReferenceSlot.getSiteConnectionStringKeyVaultReferencesSlot,
   "listSiteConnectionStringKeyVaultReferencesSlot",
   "javascript"
+);
+
+#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+op webAppsDeletePrivateEndpointConnectionSlotCustomizedForJs(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @path
+  name: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @path
+  privateEndpointConnectionName: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @path
+  slot: string,
+):
+  | ArmResponse<unknown>
+  | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = unknown>> & {
+      #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @body
+      _: unknown;
+    })
+  | (ArmDeletedNoContentResponse & {
+      #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @body
+      _: unknown;
+    });
+
+@@override(
+  PrivateEndpointConnectionSlotOperationGroup.deletePrivateEndpointConnectionSlot,
+  webAppsDeletePrivateEndpointConnectionSlotCustomizedForJs,
+  "javascript"
+);
+
+#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+op appServiceEnvironmentsDeletePrivateEndpointConnectionForJs(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @path
+  name: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @path
+  privateEndpointConnectionName: string,
+):
+  | ArmResponse<unknown>
+  | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = unknown> & {
+      #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @body
+      _: unknown;
+    }>
+  | (ArmDeletedNoContentResponse & {
+      #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @body
+      _: unknown;
+    });
+
+@@override(
+  RemotePrivateEndpointConnectionARMResources.deletePrivateEndpointConnection,
+  appServiceEnvironmentsDeletePrivateEndpointConnectionForJs,
+  "javascript"
+);
+
+#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+op staticSitesDeletePrivateEndpointConnectionForJs(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @path
+  name: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @path
+  privateEndpointConnectionName: string,
+):
+  | ArmResponse<unknown>
+  | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = unknown> & {
+      #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @body
+      _: unknown;
+    }>
+  | (ArmDeletedNoContentResponse & {
+      #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @body
+      _: unknown;
+    });
+
+@@override(
+  StaticSites.deletePrivateEndpointConnection,
+  staticSitesDeletePrivateEndpointConnectionForJs,
+  "javascript"
+);
+
+#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+op webAppsDeletePrivateEndpointConnectionForJs(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @path
+  name: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @path
+  privateEndpointConnectionName: string,
+):
+  | ArmResponse<unknown>
+  | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = unknown> & {
+      #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @body
+      _: unknown;
+    }>
+  | (ArmDeletedNoContentResponse & {
+      #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @body
+      _: unknown;
+    });
+
+@@override(
+  RemotePrivateEndpointConnectionARMResourceOperationGroup.deletePrivateEndpointConnection,
+  webAppsDeletePrivateEndpointConnectionForJs,
+  "javascript"
+);
+
+#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+op webAppsStartNetworkTraceForJs(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @path
+  name: string,
+
+  @query("durationInSeconds")
+  durationInSeconds?: int32,
+
+  @query("maxFrameLength")
+  maxFrameLength?: int32,
+
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
+  @query("sasUrl")
+  sasUrl?: string,
+
+  @body body: void,
+):
+  | ArmResponse<NetworkTrace[]>
+  | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NetworkTrace[]>> & {
+      @bodyRoot
+      @identifiers(#[])
+      _?: NetworkTrace[];
+    });
+
+@@override(
+  Sites.startNetworkTrace,
+  webAppsStartNetworkTraceForJs,
+  "javascript"
+);
+
+#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+op webAppsStartNetworkTraceSlotForJs(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @path
+  name: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @path
+  slot: string,
+
+  @query("durationInSeconds")
+  durationInSeconds?: int32,
+
+  @query("maxFrameLength")
+  maxFrameLength?: int32,
+
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
+  @query("sasUrl")
+  sasUrl?: string,
+
+  @body body: void,
+):
+  | ArmResponse<NetworkTrace[]>
+  | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NetworkTrace[]>> & {
+      @bodyRoot
+      @identifiers(#[])
+      _?: NetworkTrace[];
+    });
+
+@@override(
+  WebApps.startNetworkTraceSlot,
+  webAppsStartNetworkTraceSlotForJs,
+  "javascript"
+);
+
+#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+op webAppsStartWebSiteNetworkTraceOperationForJs(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @path
+  name: string,
+
+  @query("durationInSeconds")
+  durationInSeconds?: int32,
+
+  @query("maxFrameLength")
+  maxFrameLength?: int32,
+
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
+  @query("sasUrl")
+  sasUrl?: string,
+
+  @body body: void,
+):
+  | ArmResponse<NetworkTrace[]>
+  | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NetworkTrace[]>> & {
+      @bodyRoot
+      @identifiers(#[])
+      _?: NetworkTrace[];
+    });
+
+@@override(
+  Sites.startWebSiteNetworkTraceOperation,
+  webAppsStartWebSiteNetworkTraceOperationForJs,
+  "javascript"
+);
+
+#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+op webAppsStartWebSiteNetworkTraceOperationSlotForJs(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @path
+  name: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @path
+  slot: string,
+
+  @query("durationInSeconds")
+  durationInSeconds?: int32,
+
+  @query("maxFrameLength")
+  maxFrameLength?: int32,
+
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
+  @query("sasUrl")
+  sasUrl?: string,
+
+  @body body: void,
+):
+  | ArmResponse<NetworkTrace[]>
+  | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NetworkTrace[]>> & {
+      @bodyRoot
+      @identifiers(#[])
+      _?: NetworkTrace[];
+    });
+
+@@override(
+  WebApps.startWebSiteNetworkTraceOperationSlot,
+  webAppsStartWebSiteNetworkTraceOperationSlotForJs,
+  "javascript"
+);
+
+// --- Model renames ---
+@@clientName(AddressResponse, "AppServiceEnvironmentAddress", "csharp");
+@@clientName(AllowedPrincipals, "AppServiceAadAllowedPrincipals", "csharp");
+@@clientName(AnalysisData, "AnalysisDetectorEvidences", "csharp");
+@@clientName(AnalysisDefinition, "WebSiteAnalysisDefinition", "csharp");
+@@clientName(ApiKVReference, "ApiKeyVaultReference", "csharp");
+@@clientName(
+  ApiKVReferenceCollection,
+  "AppServiceApiKeyVaultReferenceList",
+  "csharp"
+);
+@@clientName(Apple, "AppServiceAppleProvider", "csharp");
+@@clientName(AppleRegistration, "AppServiceAppleRegistration", "csharp");
+@@clientName(
+  ApplicationStackCollection,
+  "ApplicationStackListResult",
+  "csharp"
+);
+@@clientName(
+  AppServiceEnvironment,
+  "AppServiceEnvironmentProperties",
+  "csharp"
+);
+@@clientName(
+  AppServiceEnvironmentCollection,
+  "AppServiceEnvironmentListResult",
+  "csharp"
+);
+@@clientName(
+  AppServiceEnvironmentPatchResource,
+  "AppServiceEnvironmentPatch",
+  "csharp"
+);
+@@clientName(AppServiceEnvironmentResource, "AppServiceEnvironment", "csharp");
+@@clientName(AppServicePlanCollection, "AppServicePlanListResult", "csharp");
+@@clientName(AppServicePlanRestrictions, "AppServicePlanRestriction", "csharp");
+@@access(ResourceMetricAvailability, Access.public, "csharp");
+@@clientName(AppServicePlanPatchResource, "AppServicePlanPatch", "csharp");
+@@clientName(AseRegion, "AppServiceAseRegion", "csharp");
+@@clientName(
+  AuthenticationType,
+  "FunctionAppStorageAccountAuthenticationType",
+  "csharp"
+);
+@@clientName(Microsoft.Web.AuthType, "SiteContainerAuthType", "csharp");
+@@clientName(AzureActiveDirectory, "AppServiceAadProvider", "csharp");
+@@clientName(AzureActiveDirectoryLogin, "AppServiceAadLoginFlow", "csharp");
+@@clientName(
+  AzureActiveDirectoryRegistration,
+  "AppServiceAadRegistration",
+  "csharp"
+);
+@@clientName(
+  AzureActiveDirectoryValidation,
+  "AppServiceAadValidation",
+  "csharp"
+);
+@@clientName(
+  AzureBlobStorageApplicationLogsConfig,
+  "AppServiceBlobStorageApplicationLogsConfig",
+  "csharp"
+);
+@@clientName(
+  AzureBlobStorageHttpLogsConfig,
+  "AppServiceBlobStorageHttpLogsConfig",
+  "csharp"
+);
+@@clientName(
+  AzureResourceErrorInfo,
+  "WorkflowExpressionResourceErrorInfo",
+  "csharp"
+);
+@@clientName(AzureResourceType, "AppServiceResourceType", "csharp");
+@@clientName(AzureStaticWebApps, "AppServiceStaticWebAppsProvider", "csharp");
+@@clientName(
+  AzureStaticWebAppsRegistration,
+  "AppServiceStaticWebAppsRegistration",
+  "csharp"
+);
+@@clientName(AzureStorageInfoValue, "AppServiceStorageAccessInfo", "csharp");
+@@clientName(
+  AzureStoragePropertyDictionaryResource,
+  "AzureStoragePropertyDictionary",
+  "csharp"
+);
+@@clientName(AzureStorageProtocol, "AppServiceStorageProtocol", "csharp");
+@@clientName(AzureStorageState, "AppServiceStorageAccountState", "csharp");
+@@clientName(AzureStorageType, "AppServiceStorageType", "csharp");
+@@clientName(
+  AzureTableStorageApplicationLogsConfig,
+  "AppServiceTableStorageApplicationLogsConfig",
+  "csharp"
+);
+@@clientName(BackupItem, "WebAppBackup", "csharp");
+@@clientName(BackupItemCollection, "WebAppBackupItemListResult", "csharp");
+@@clientName(BackupItemStatus, "WebAppBackupStatus", "csharp");
+@@clientName(BackupRequest, "WebAppBackupInfo", "csharp");
+@@clientName(BackupSchedule, "WebAppBackupSchedule", "csharp");
+@@clientName(BasicAuthName, "StaticSiteBasicAuthName", "csharp");
+@@clientName(
+  BillingMeterCollection,
+  "AppServiceBillingMeterListResult",
+  "csharp"
+);
+@@clientName(BuildStatus, "StaticSiteBuildStatus", "csharp");
+@@clientName(Capability, "AppServiceSkuCapability", "csharp");
+@@clientName(Certificate, "AppCertificate", "csharp");
+@@clientName(CertificateCollection, "AppCertificateListResult", "csharp");
+@@clientName(CertificatePatchResource, "AppCertificatePatch", "csharp");
+@@clientName(Channels, "RecommendationChannel", "csharp");
+@@clientName(ContainerThrottlingData, "ContainerThrottlingInfo", "csharp");
+@@clientName(ContentHash, "WebAppContentHash", "csharp");
+@@clientName(ContentLink, "WebAppContentLink", "csharp");
+@@clientName(
+  ContinuousWebJobCollection,
+  "ContinuousWebJobListResult",
+  "csharp"
+);
+@@clientName(CookieExpiration, "WebAppCookieExpiration", "csharp");
+@@clientName(CsmOperationCollection, "CsmOperationListResult", "csharp");
+@@clientName(CsmPublishingProfileOptions, "CsmPublishingProfile", "csharp");
+@@clientName(CsmUsageQuotaCollection, "CsmUsageQuotaListResult", "csharp");
+@@clientName(DaprConfig, "AppDaprConfig", "csharp");
+@@clientName(DaprLogLevel, "AppDaprLogLevel", "csharp");
+@@clientName(DatabaseConnection, "StaticSiteDatabaseConnection", "csharp");
+@@clientName(
+  DatabaseConnectionOverview,
+  "StaticSiteDatabaseConnectionOverview",
+  "csharp"
+);
+@@clientName(
+  DatabaseConnectionPatchRequest,
+  "StaticSiteDatabaseConnectionPatchContent",
+  "csharp"
+);
+@@clientName(DataSource, "DetectorDataSource", "csharp");
+@@clientName(DayOfWeek, "WebAppDayOfWeek", "csharp");
+@@clientName(DefaultAction, "SiteDefaultAction", "csharp");
+@@clientName(DeletedAppRestoreRequest, "DeletedAppRestoreContent", "csharp");
+@@clientName(DeletedWebAppCollection, "DeletedWebAppListResult", "csharp");
+@@clientName(Deployment, "WebAppDeployment", "csharp");
+@@clientName(DeploymentCollection, "WebAppDeploymentListResult", "csharp");
+@@clientName(DetectorResponse, "AppServiceDetector", "csharp");
+@@clientName(
+  DetectorResponseCollection,
+  "AppServiceDetectorListResult",
+  "csharp"
+);
+@@clientName(
+  DiagnosticAnalysisCollection,
+  "WebSiteAnalysisDefinitionListResult",
+  "csharp"
+);
+@@clientName(
+  DiagnosticCategoryCollection,
+  "DiagnosticCategoryListResult",
+  "csharp"
+);
+@@clientName(DiagnosticData, "DiagnosticDataset", "csharp");
+@@clientName(
+  DiagnosticDetectorCollection,
+  "DiagnosticDetectorListResult",
+  "csharp"
+);
+@@clientName(Dimension, "MetricDimension", "csharp");
+@@clientName(
+  DnlResourceNameAvailability,
+  "DnlResourceNameAvailabilityResult",
+  "csharp"
+);
+@@clientName(EnabledConfig, "WebAppEnabledConfig", "csharp");
+@@clientName(EnvironmentVariable, "WebAppEnvironmentVariable", "csharp");
+@@clientName(ErrorInfo, "WebAppErrorInfo", "csharp");
+@@clientName(ErrorProperties, "WebAppErrorProperties", "csharp");
+@@clientName(Microsoft.Web.ErrorResponse, "WebAppErrorResponse", "csharp");
+@@clientName(Experiments, "RoutingRuleExperiments", "csharp");
+@@clientName(Expression, "WorkflowExpression", "csharp");
+@@clientName(ExpressionRoot, "WorkflowExpressionRoot", "csharp");
+@@clientName(Facebook, "AppServiceFacebookProvider", "csharp");
+@@clientName(FrequencyUnit, "BackupFrequencyUnit", "csharp");
+@@clientName(
+  FunctionAppStackCollection,
+  "FunctionAppStackListResult",
+  "csharp"
+);
+@@clientName(
+  FunctionEnvelopeCollection,
+  "FunctionEnvelopeListResult",
+  "csharp"
+);
+@@clientName(
+  FunctionsAlwaysReadyConfig,
+  "FunctionAppAlwaysReadyConfig",
+  "csharp"
+);
+@@clientName(FunctionsDeploymentStorage, "FunctionAppStorage", "csharp");
+@@clientName(
+  FunctionsDeploymentStorageType,
+  "FunctionAppStorageType",
+  "csharp"
+);
+@@clientName(
+  FunctionsDeploymentStorageAuthentication,
+  "FunctionAppStorageAuthentication",
+  "csharp"
+);
+@@clientName(FunctionsRuntime, "FunctionAppRuntime", "csharp");
+@@clientName(
+  FunctionsScaleAndConcurrency,
+  "FunctionAppScaleAndConcurrency",
+  "csharp"
+);
+@@clientName(GeoRegionCollection, "AppServiceGeoRegionListResult", "csharp");
+@@clientName(GitHub, "AppServiceGitHubProvider", "csharp");
+@@clientName(Google, "AppServiceGoogleProvider", "csharp");
+@@clientName(HandlerMapping, "HttpRequestHandlerMapping", "csharp");
+@@clientName(HostKeys, "FunctionAppHostKeys", "csharp");
+@@clientName(HostNameBindingCollection, "HostNameBindingListResult", "csharp");
+@@clientName(
+  HybridConnectionCollection,
+  "HybridConnectionListResult",
+  "csharp"
+);
+@@clientName(IdentifierCollection, "AppServiceIdentifierListResult", "csharp");
+@@clientName(
+  InAvailabilityReasonType,
+  "AppServiceNameUnavailableReason",
+  "csharp"
+);
+@@clientName(
+  InboundEnvironmentEndpointCollection,
+  "InboundEnvironmentEndpointListResult",
+  "csharp"
+);
+@@clientName(InsightStatus, "DetectorInsightStatus", "csharp");
+@@clientName(IpAddress, "WebAppIPAddress", "csharp");
+@@clientName(IpAddressRange, "WebAppIPAddressRange", "csharp");
+@@clientName(IssueType, "DetectorIssueType", "csharp");
+@@clientName(JsonSchema, "WebAppJsonSchema", "csharp");
+@@clientName(KeyType, "WebAppKeyType", "csharp");
+@@clientName(KeyValuePairStringObject, "DataProviderKeyValuePair", "csharp");
+@@clientName(KubeEnvironmentCollection, "KubeEnvironmentListResult", "csharp");
+@@clientName(Login, "WebAppLoginInfo", "csharp");
+@@clientName(LogLevel, "WebAppLogLevel", "csharp");
+@@clientName(MSDeploy, "WebAppMSDeploy", "csharp");
+@@clientName(MSDeployLog, "WebAppMSDeployLog", "csharp");
+@@clientName(MSDeployLogEntry, "WebAppMSDeployLogEntry", "csharp");
+@@clientName(MSDeployLogEntryType, "WebAppMSDeployLogEntryType", "csharp");
+@@clientName(NameIdentifier, "AppServiceDomainNameIdentifier", "csharp");
+@@clientName(NetworkTrace, "WebAppNetworkTrace", "csharp");
+@@clientName(Nonce, "LoginFlowNonceSettings", "csharp");
+@@clientName(
+  OutboundEnvironmentEndpointCollection,
+  "OutboundEnvironmentEndpointListResult",
+  "csharp"
+);
+@@clientName(ParameterType, "WebAppParameterType", "csharp");
+@@clientName(PerfMonCounterCollection, "PerfMonCounterListResult", "csharp");
+@@clientName(PerfMonResponse, "PerfMonResponseInfo", "csharp");
+@@clientName(
+  PremierAddOnOfferCollection,
+  "PremierAddOnOfferListResult",
+  "csharp"
+);
+@@clientName(
+  PrivateEndpointConnectionCollection,
+  "RemotePrivateEndpointConnectionListResult",
+  "csharp"
+);
+@@clientName(
+  PrivateLinkConnectionApprovalRequestResource,
+  "PrivateLinkConnectionApprovalRequestInfo",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Web.PrivateLinkResource,
+  "AppServicePrivateLinkResourceData",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Web.PrivateLinkResourceProperties,
+  "AppServicePrivateLinkResourceProperties",
+  "csharp"
+);
+@@clientName(ProcessInfoCollection, "ProcessInfoListResult", "csharp");
+@@clientName(
+  ProcessModuleInfoCollection,
+  "ProcessModuleInfoListResult",
+  "csharp"
+);
+@@clientName(ProcessThreadInfo, "WebAppProcessThreadInfo", "csharp");
+@@clientName(ComputeModeOptions, "ComputeModeOption", "csharp");
+@@clientName(WorkerSizeOptions, "WorkerSizeOption", "csharp");
+@@clientName(
+  ProcessThreadInfoCollection,
+  "WebAppProcessThreadInfoListResult",
+  "csharp"
+);
+@@clientName(
+  PublicCertificateCollection,
+  "PublicCertificateListResult",
+  "csharp"
+);
+@@clientName(
+  PublishingCredentialsPoliciesCollection,
+  "PublishingCredentialsPoliciesListResult",
+  "csharp"
+);
+@@clientName(PushSettings, "WebAppPushSettings", "csharp");
+@@clientName(Recommendation, "AppServiceRecommendation", "csharp");
+@@clientName(
+  RecommendationCollection,
+  "AppServiceRecommendationListResult",
+  "csharp"
+);
+@@clientName(RecurrenceFrequency, "WorkflowRecurrenceFrequency", "csharp");
+@@clientName(RecurrenceSchedule, "WorkflowRecurrenceSchedule", "csharp");
+@@clientName(
+  RegenerateActionParameter,
+  "WorkflowRegenerateActionContent",
+  "csharp"
+);
+@@clientName(Rendering, "DiagnosticDataRendering", "csharp");
+@@clientName(RenderingType, "DiagnosticDataRenderingType", "csharp");
+@@clientName(RepetitionIndex, "WorkflowRunActionRepetitionIndex", "csharp");
+@@clientName(Request, "WebAppRequest", "csharp");
+@@clientName(RequestHistory, "WebAppRequestHistory", "csharp");
+@@clientName(
+  RequestHistoryProperties,
+  "WebAppRequestHistoryProperties",
+  "csharp"
+);
+@@clientName(ResourceCollection, "AppServicePlanResourceListResult", "csharp");
+@@clientName(ResourceConfig, "FunctionAppResourceConfig", "csharp");
+@@clientName(
+  ResourceHealthMetadataCollection,
+  "ResourceHealthMetadataListResult",
+  "csharp"
+);
+@@clientName(
+  ResourceMetricDefinitionCollection,
+  "ResourceMetricDefinitionListResult",
+  "csharp"
+);
+@@clientName(
+  ResourceNameAvailability,
+  "AppServiceNameAvailabilityResult",
+  "csharp"
+);
+@@clientName(
+  ResourceNameAvailabilityRequest,
+  "AppServiceNameAvailabilityContent",
+  "csharp"
+);
+@@clientName(ResourceReference, "WorkflowResourceReference", "csharp");
+@@clientName(Microsoft.Web.Response, "WebAppResponse", "csharp");
+@@clientName(ResponseMetaData, "DetectorMetadata", "csharp");
+@@clientName(RestoreRequest, "RestoreRequestInfo", "csharp");
+@@clientName(RetryHistory, "WebAppRetryHistory", "csharp");
+@@clientName(RouteType, "AppServiceVirtualNetworkRouteType", "csharp");
+@@clientName(RunActionCorrelation, "WebAppRunActionCorrelation", "csharp");
+@@clientName(RunCorrelation, "WebAppRunCorrelation", "csharp");
+@@clientName(RuntimeName, "FunctionAppRuntimeName", "csharp");
+@@clientName(Site, "WebSite", "csharp");
+@@clientName(SiteAvailabilityState, "WebSiteAvailabilityState", "csharp");
+@@clientName(SiteConfigResourceCollection, "SiteConfigListResult", "csharp");
+@@clientName(
+  SiteConfigurationSnapshotInfoCollection,
+  "SiteConfigurationSnapshotInfoListResult",
+  "csharp"
+);
+@@clientName(
+  SiteExtensionInfoCollection,
+  "SiteExtensionInfoListResult",
+  "csharp"
+);
+@@clientName(SitePatchResource, "SitePatchInfo", "csharp");
+@@clientName(SkuCapacity, "AppServiceSkuCapacity", "csharp");
+@@clientName(SkuDescription, "AppServiceSkuDescription", "csharp");
+@@clientName(SkuInfo, "AppServicePoolSkuInfo", "csharp");
+@@clientName(SkuInfoCollection, "AppServicePoolSkuInfoListResult", "csharp");
+@@clientName(SkuInfos, "AppServiceSkuResult", "csharp");
+@@clientName(SlotDifferenceCollection, "SlotDifferenceListResult", "csharp");
+@@clientName(Snapshot, "AppSnapshot", "csharp");
+@@clientName(SnapshotCollection, "AppSnapshotListResult", "csharp");
+@@clientName(Solution, "DiagnosticSolution", "csharp");
+@@clientName(SolutionType, "DiagnosticSolutionType", "csharp");
+@@clientName(
+  SourceControlCollection,
+  "AppServiceSourceControlListResult",
+  "csharp"
+);
+@@clientName(SslState, "HostNameBindingSslState", "csharp");
+@@clientName(StampCapacityCollection, "StampCapacityListResult", "csharp");
+@@clientName(StaticSite, "StaticSiteProperties", "csharp");
+@@clientName(StaticSiteARMResource, "StaticSite", "csharp");
+@@clientName(
+  StaticSiteBasicAuthPropertiesARMResource,
+  "StaticSiteBasicAuthProperty",
+  "csharp"
+);
+@@clientName(
+  StaticSiteBasicAuthPropertiesARMResourceProperties,
+  "StaticSiteBasicAuthPropertyProperties",
+  "csharp"
+);
+@@clientName(HybridConnectionLimits, "HybridConnectionLimit", "csharp");
+@@clientName(
+  HybridConnectionLimitsProperties,
+  "HybridConnectionLimitProperties",
+  "csharp"
+);
+@@clientName(NetworkFeatures, "NetworkFeature", "csharp");
+@@clientName(NetworkFeaturesProperties, "NetworkFeatureProperties", "csharp");
+@@clientName(SiteConfig, "SiteConfigProperties", "csharp");
+@@clientName(SiteConfigResource, "SiteConfig", "csharp");
+@@clientName(StaticSiteBuildARMResource, "StaticSiteBuild", "csharp");
+@@clientName(StaticSiteBuildCollection, "StaticSiteBuildListResult", "csharp");
+@@clientName(StaticSiteCollection, "StaticSiteListResult", "csharp");
+@@clientName(
+  StaticSiteCustomDomainOverviewARMResource,
+  "StaticSiteCustomDomainOverview",
+  "csharp"
+);
+@@clientName(
+  StaticSiteCustomDomainOverviewCollection,
+  "StaticSiteCustomDomainOverviewListResult",
+  "csharp"
+);
+@@clientName(
+  StaticSiteCustomDomainRequestPropertiesARMResource,
+  "StaticSiteCustomDomainContent",
+  "csharp"
+);
+@@clientName(
+  StaticSiteFunctionOverviewARMResource,
+  "StaticSiteFunctionOverview",
+  "csharp"
+);
+@@clientName(
+  StaticSiteFunctionOverviewCollection,
+  "StaticSiteFunctionOverviewListResult",
+  "csharp"
+);
+@@clientName(StaticSiteLinkedBackend, "StaticSiteLinkedBackendInfo", "csharp");
+@@clientName(
+  StaticSiteLinkedBackendARMResource,
+  "StaticSiteLinkedBackend",
+  "csharp"
+);
+@@clientName(
+  StaticSiteResetPropertiesARMResource,
+  "StaticSiteResetContent",
+  "csharp"
+);
+@@clientName(StaticSiteTemplateOptions, "StaticSiteTemplate", "csharp");
+@@clientName(StaticSiteUserARMResource, "StaticSiteUser", "csharp");
+@@clientName(StaticSiteUserCollection, "StaticSiteUserListResult", "csharp");
+@@clientName(
+  StaticSiteUserInvitationRequestResource,
+  "StaticSiteUserInvitationContent",
+  "csharp"
+);
+@@clientName(
+  StaticSiteUserInvitationResponseResource,
+  "StaticSiteUserInvitationResult",
+  "csharp"
+);
+@@clientName(
+  StaticSiteUserProvidedFunctionApp,
+  "LegacyStaticSiteUserProvidedFunctionApp",
+  "csharp"
+);
+@@alternateType(
+  StaticSiteUserProvidedFunctionApp,
+  StaticSiteUserProvidedFunctionAppARMResource,
+  "csharp"
+); // StaticSiteUserProvidedFunctionAppARMResource and StaticSiteUserProvidedFunctionApp are two models with exactly same properties but different names. Here we manually replace the references so that these two models are combined
+@@clientName(
+  StaticSiteUserProvidedFunctionAppProperties,
+  "LegacyStaticSiteUserProvidedFunctionAppProperties",
+  "csharp"
+); // Rename this model to avoid name collision with StaticSiteUserProvidedFunctionAppARMResource
+@@alternateType(
+  StaticSiteUserProvidedFunctionAppProperties,
+  StaticSiteUserProvidedFunctionAppARMResourceProperties,
+  "csharp"
+); // StaticSiteUserProvidedFunctionAppARMResource and StaticSiteUserProvidedFunctionApp are two models with exactly same properties but different names. Here we manually replace the references so that these two models are combined
+@@clientName(
+  StaticSiteUserProvidedFunctionAppARMResource,
+  "StaticSiteUserProvidedFunctionApp",
+  "csharp"
+);
+@@clientName(
+  StaticSiteUserProvidedFunctionAppARMResourceProperties,
+  "StaticSiteUserProvidedFunctionAppProperties",
+  "csharp"
+);
+@@clientName(
+  StaticSiteUserProvidedFunctionAppsCollection,
+  "StaticSiteUserProvidedFunctionAppsListResult",
+  "csharp"
+);
+@@clientName(
+  StaticSiteZipDeployment,
+  "StaticSiteZipDeploymentProperties",
+  "csharp"
+);
+@@clientName(
+  StaticSiteZipDeploymentARMResource,
+  "StaticSiteZipDeployment",
+  "csharp"
+);
+@@clientName(Status, "AppServiceStatusInfo", "csharp");
+@@clientName(StatusOptions, "AppServicePlanStatus", "csharp");
+@@clientName(StorageMigrationResponse, "StorageMigrationResult", "csharp");
+@@clientName(
+  StorageMigrationResponseProperties,
+  "StorageMigrationProperties",
+  "csharp"
+);
+@@clientName(StorageMigrationOptions, "StorageMigrationContent", "csharp");
+@@clientName(
+  StorageMigrationOptionsProperties,
+  "StorageMigrationContentProperties",
+  "csharp"
+);
+@@clientName(StorageType, "ArtifactStorageType", "csharp");
+@@clientName(StringDictionary, "AppServiceConfigurationDictionary", "csharp");
+@@clientName(StringList, "StaticSiteStringList", "csharp");
+@@clientName(SupportedTlsVersions, "AppServiceSupportedTlsVersion", "csharp");
+@@clientName(SupportTopic, "DetectorSupportTopic", "csharp");
+@@clientName(TlsCipherSuites, "AppServiceTlsCipherSuite", "csharp");
+@@clientName(
+  TriggeredJobHistoryCollection,
+  "TriggeredJobHistoryListResult",
+  "csharp"
+);
+@@clientName(TriggeredWebJobCollection, "TriggeredWebJobListResult", "csharp");
+@@clientName(TriggerTypes, "FunctionTriggerType", "csharp");
+@@clientName(Twitter, "AppServiceTwitterProvider", "csharp");
+@@clientName(
+  UpgradeAvailability,
+  "AppServiceEnvironmentUpgradeAvailability",
+  "csharp"
+);
+@@clientName(
+  UpgradePreference,
+  "AppServiceEnvironmentUpgradePreference",
+  "csharp"
+);
+@@clientName(UsageCollection, "AppServiceUsageListResult", "csharp");
+@@clientName(User, "PublishingUser", "csharp");
+@@clientName(ValidateRequest, "AppServiceValidateContent", "csharp");
+@@clientName(ValidateRequest.type, "ValidateResourceType", "csharp");
+@@clientName(ValidateResponse, "AppServiceValidateResult", "csharp");
+@@clientName(VnetGateway, "AppServiceVirtualNetworkGateway", "csharp");
+@@clientName(VnetInfo, "AppServiceVirtualNetworkProperties", "csharp");
+@@clientName(VnetInfoResource, "AppServiceVirtualNetwork", "csharp");
+@@clientName(
+  VnetParameters,
+  "AppServiceVirtualNetworkValidationContent",
+  "csharp"
+);
+@@clientName(VnetRoute, "AppServiceVirtualNetworkRoute", "csharp");
+@@clientName(
+  VnetValidationFailureDetails,
+  "VirtualNetworkValidationFailureDetails",
+  "csharp"
+);
+@@clientName(
+  VnetValidationTestFailure,
+  "VirtualNetworkValidationTestFailure",
+  "csharp"
+);
+@@clientName(VolumeMount, "SiteContainerVolumeMount", "csharp");
+@@clientName(WebAppCollection, "WebAppListResult", "csharp");
+@@clientName(
+  WebAppInstanceStatusCollection,
+  "WebAppInstanceStatusListResult",
+  "csharp"
+);
+@@clientName(WebAppStackCollection, "WebAppStackListResult", "csharp");
+@@clientName(WebJobCollection, "WebJobCListResult", "csharp");
+@@clientName(WorkerPoolCollection, "AppServiceWorkerPoolListResult", "csharp");
+@@clientName(WorkerPoolResource, "AppServiceWorkerPool", "csharp");
+@@clientName(Workflow, "WorkflowData", "csharp");
+@@clientName(WorkflowOutputParameter, "WorkflowOutputContent", "csharp");
+@@clientName(WorkflowParameter, "WorkflowContent", "csharp");
+@@clientName(
+  WorkflowTriggerListCallbackUrlQueries,
+  "WorkflowTriggerListCallbackUriQueries",
+  "csharp"
+);
+@@clientName(ApiKVReference, "ApiKeyVaultReference", "csharp");
+@@clientName(
+  ApiKVReferenceProperties,
+  "ApiKeyVaultReferenceProperties",
+  "csharp"
+);
+
+@@clientName(
+  AddressResponseProperties.vipMappings,
+  "VirtualIPMappings",
+  "csharp"
+);
+@@clientName(ApiKVReferenceProperties.identityType, "Identity", "csharp");
+@@clientName(ApplicationStackResource.name, "StackName", "csharp");
+@@clientName(AppServiceEnvironment.suspended, "IsSuspended", "csharp");
+@@clientName(AppServiceEnvironment.zoneRedundant, "IsZoneRedundant", "csharp");
+@@clientName(
+  AppServicePlanProperties.asyncScalingEnabled,
+  "IsAsyncScalingEnabled",
+  "csharp"
+);
+@@clientName(
+  AppServicePlanProperties.elasticScaleEnabled,
+  "IsElasticScaleEnabled",
+  "csharp"
+);
+@@clientName(
+  AppServicePlanProperties.freeOfferExpirationTime,
+  "FreeOfferExpireOn",
+  "csharp"
+);
+@@clientName(AppServicePlanProperties.hyperV, "IsHyperV", "csharp");
+@@clientName(
+  AppServicePlanProperties.perSiteScaling,
+  "IsPerSiteScaling",
+  "csharp"
+);
+@@clientName(AppServicePlanProperties.reserved, "IsReserved", "csharp");
+@@clientName(
+  AppServicePlanProperties.spotExpirationTime,
+  "SpotExpireOn",
+  "csharp"
+);
+@@clientName(
+  AppServicePlanProperties.zoneRedundant,
+  "IsZoneRedundant",
+  "csharp"
+);
+@@clientName(
+  AppServicePlanPatchResourceProperties.elasticScaleEnabled,
+  "IsElasticScaleEnabled",
+  "csharp"
+);
+@@clientName(
+  AppServicePlanPatchResourceProperties.hyperV,
+  "IsHyperV",
+  "csharp"
+);
+@@clientName(
+  AppServicePlanPatchResourceProperties.perSiteScaling,
+  "IsPerSiteScaling",
+  "csharp"
+);
+@@clientName(
+  AppServicePlanPatchResourceProperties.reserved,
+  "IsReserved",
+  "csharp"
+);
+@@clientName(
+  AppServicePlanPatchResourceProperties.zoneRedundant,
+  "IsZoneRedundant",
+  "csharp"
+);
+@@clientName(
+  AseRegionProperties.dedicatedHost,
+  "IsDedicatedHostEnabled",
+  "csharp"
+);
+@@clientName(AseRegionProperties.standard, "IsStandard", "csharp");
+@@clientName(
+  AseRegionProperties.zoneRedundant,
+  "IsZoneRedundantEnabled",
+  "csharp"
+);
+@@clientName(
+  AseV3NetworkingConfigurationProperties.ftpEnabled,
+  "IsFtpEnabled",
+  "csharp"
+);
+@@clientName(
+  AseV3NetworkingConfigurationProperties.remoteDebugEnabled,
+  "IsRemoteDebugEnabled",
+  "csharp"
+);
+@@clientName(
+  AzureActiveDirectoryRegistration.clientSecretCertificateThumbprint,
+  "ClientSecretCertificateThumbprintString",
+  "csharp"
+);
+@@clientName(
+  AzureTableStorageApplicationLogsConfig.sasUrl,
+  "SasUriString",
+  "csharp"
+);
+@@clientName(BackupItemProperties.created, "CreatedOn", "csharp");
+@@clientName(BackupItemProperties.finishedTimeStamp, "FinishedOn", "csharp");
+@@clientName(
+  BackupItemProperties.lastRestoreTimeStamp,
+  "LastRestoreOn",
+  "csharp"
+);
+@@clientName(BackupItemProperties.name, "BackupName", "csharp");
+@@clientName(BackupItemProperties.scheduled, "IsScheduled", "csharp");
+@@clientName(BackupRequestProperties.enabled, "IsEnabled", "csharp");
+@@clientName(CertificateProperties.expirationDate, "ExpireOn", "csharp");
+@@clientName(CertificateProperties.thumbprint, "ThumbprintString", "csharp");
+@@clientName(CertificateProperties.valid, "IsValid", "csharp");
+@@clientName(
+  CertificatePatchResourceProperties.thumbprint,
+  "ThumbprintString",
+  "csharp"
+);
+@@clientName(CertificatePatchResourceProperties.valid, "IsValid", "csharp");
+@@clientName(ContinuousWebJobProperties.using_sdk, "IsUsingSdk", "csharp");
+@@clientName(
+  DatabaseConnectionProperties.resourceId,
+  "DatabaseConnectionResourceId",
+  "csharp"
+);
+@@clientName(
+  DatabaseConnectionPatchRequestProperties.resourceId,
+  "DatabaseConnectionResourceId",
+  "csharp"
+);
+@@clientName(DeploymentProperties.active, "IsActive", "csharp");
+@@clientName(
+  HostNameBindingProperties.thumbprint,
+  "ThumbprintString",
+  "csharp"
+);
+@@clientName(HybridConnectionProperties.relayArmUri, "relayArmId", "csharp");
+@@clientName(
+  KubeEnvironmentProperties.internalLoadBalancerEnabled,
+  "IsInternalLoadBalancerEnabled",
+  "csharp"
+);
+@@clientName(
+  KubeEnvironmentPatchResourceProperties.internalLoadBalancerEnabled,
+  "IsInternalLoadBalancerEnabled",
+  "csharp"
+);
+@@clientName(
+  MigrateMySqlStatusProperties.localMySqlEnabled,
+  "IsLocalMySqlEnabled",
+  "csharp"
+);
+@@clientName(MSDeployProperties.appOffline, "IsAppOffline", "csharp");
+@@clientName(MSDeployStatusProperties.complete, "IsComplete", "csharp");
+@@clientName(
+  PremierAddOnOfferProperties.promoCodeRequired,
+  "IsPromoCodeRequired",
+  "csharp"
+);
+@@clientName(PrivateAccessProperties.enabled, "IsEnabled", "csharp");
+@@clientName(ProcessInfoProperties.threads, "ProcessThreads", "csharp");
+@@clientName(
+  PublicCertificateProperties.thumbprint,
+  "ThumbprintString",
+  "csharp"
+);
+@@clientName(
+  RemotePrivateEndpointConnectionARMResourceProperties.ipAddresses,
+  "IPAddresses",
+  "csharp"
+);
+@@alternateType(
+  RemotePrivateEndpointConnectionARMResourceProperties.ipAddresses,
+  ipV4Address[],
+  "csharp"
+);
+@@clientName(
+  ResourceHealthMetadataProperties.signalAvailability,
+  "IsSignalAvailable",
+  "csharp"
+);
+@@clientName(
+  SiteProperties.clientAffinityEnabled,
+  "IsClientAffinityEnabled",
+  "csharp"
+);
+@@clientName(
+  SiteProperties.clientAffinityPartitioningEnabled,
+  "IsClientAffinityPartitioningEnabled",
+  "csharp"
+);
+@@clientName(
+  SiteProperties.clientAffinityProxyEnabled,
+  "IsClientAffinityProxyEnabled",
+  "csharp"
+);
+@@clientName(SiteProperties.clientCertEnabled, "IsClientCertEnabled", "csharp");
+@@clientName(SiteProperties.enabled, "IsEnabled", "csharp");
+@@clientName(
+  SiteProperties.endToEndEncryptionEnabled,
+  "IsEndToEndEncryptionEnabled",
+  "csharp"
+);
+@@clientName(SiteProperties.hostNamesDisabled, "IsHostNameDisabled", "csharp");
+@@clientName(SiteProperties.httpsOnly, "IsHttpsOnly", "csharp");
+@@clientName(SiteProperties.hyperV, "IsHyperV", "csharp");
+@@clientName(SiteProperties.reserved, "IsReserved", "csharp");
+@@clientName(
+  SiteProperties.scmSiteAlsoStopped,
+  "IsScmSiteAlsoStopped",
+  "csharp"
+);
+@@clientName(SiteProperties.serverFarmId, "AppServicePlanId", "csharp");
+@@clientName(SiteProperties.sshEnabled, "IsSshEnabled", "csharp");
+@@clientName(
+  SiteProperties.storageAccountRequired,
+  "IsStorageAccountRequired",
+  "csharp"
+);
+@@clientName(SiteProperties.suspendedTill, "SuspendOn", "csharp");
+@@clientName(
+  SiteAuthSettingsProperties.clientSecretCertificateThumbprint,
+  "ClientSecretCertificateThumbprintString",
+  "csharp"
+);
+@@clientName(SiteAuthSettingsProperties.enabled, "IsEnabled", "csharp");
+@@clientName(
+  SiteAuthSettingsProperties.tokenStoreEnabled,
+  "IsTokenStoreEnabled",
+  "csharp"
+);
+@@clientName(
+  SiteConfig.acrUseManagedIdentityCreds,
+  "UseManagedIdentityCreds",
+  "csharp"
+);
+@@clientName(SiteConfig.alwaysOn, "IsAlwaysOn", "csharp");
+@@clientName(SiteConfig.autoHealEnabled, "IsAutoHealEnabled", "csharp");
+@@clientName(
+  SiteConfig.detailedErrorLoggingEnabled,
+  "IsDetailedErrorLoggingEnabled",
+  "csharp"
+);
+@@clientName(
+  SiteConfig.functionsRuntimeScaleMonitoringEnabled,
+  "IsFunctionsRuntimeScaleMonitoringEnabled",
+  "csharp"
+);
+@@clientName(SiteConfig.http20Enabled, "IsHttp20Enabled", "csharp");
+@@clientName(SiteConfig.httpLoggingEnabled, "IsHttpLoggingEnabled", "csharp");
+@@clientName(SiteConfig.localMySqlEnabled, "IsLocalMySqlEnabled", "csharp");
+@@clientName(
+  SiteConfig.remoteDebuggingEnabled,
+  "IsRemoteDebuggingEnabled",
+  "csharp"
+);
+@@clientName(
+  SiteConfig.requestTracingEnabled,
+  "IsRequestTracingEnabled",
+  "csharp"
+);
+@@clientName(
+  SiteConfig.scmIpSecurityRestrictionsUseMain,
+  "AllowIPSecurityRestrictionsForScmToUseMain",
+  "csharp"
+);
+@@clientName(SiteConfig.vnetRouteAllEnabled, "IsVnetRouteAllEnabled", "csharp");
+@@clientName(SiteConfig.webSocketsEnabled, "IsWebSocketsEnabled", "csharp");
+@@clientName(
+  SiteConfigurationSnapshotInfoProperties.time,
+  "SnapshotTakenTime",
+  "csharp"
+);
+@@clientName(
+  SiteLogsConfigProperties.detailedErrorMessages,
+  "IsDetailedErrorMessages",
+  "csharp"
+);
+@@clientName(
+  SiteLogsConfigProperties.failedRequestsTracing,
+  "IsFailedRequestsTracing",
+  "csharp"
+);
+@@clientName(
+  SitePatchResourceProperties.clientAffinityEnabled,
+  "IsClientAffinityEnabled",
+  "csharp"
+);
+@@clientName(
+  SitePatchResourceProperties.clientAffinityProxyEnabled,
+  "IsClientAffinityProxyEnabled",
+  "csharp"
+);
+@@clientName(
+  SitePatchResourceProperties.clientCertEnabled,
+  "IsClientCertEnabled",
+  "csharp"
+);
+@@clientName(SitePatchResourceProperties.enabled, "IsEnabled", "csharp");
+@@clientName(
+  SitePatchResourceProperties.hostNamesDisabled,
+  "IsHostNameDisabled",
+  "csharp"
+);
+@@clientName(SitePatchResourceProperties.httpsOnly, "IsHttpsOnly", "csharp");
+@@clientName(SitePatchResourceProperties.hyperV, "IsHyperV", "csharp");
+@@clientName(
+  SitePatchResourceProperties.lastModifiedTimeUtc,
+  "LastModifiedOn",
+  "csharp"
+);
+@@clientName(SitePatchResourceProperties.reserved, "IsReserved", "csharp");
+@@clientName(
+  SitePatchResourceProperties.scmSiteAlsoStopped,
+  "IsScmSiteAlsoStopped",
+  "csharp"
+);
+@@clientName(
+  SitePatchResourceProperties.storageAccountRequired,
+  "IsStorageAccountRequired",
+  "csharp"
+);
+@@clientName(SitePatchResourceProperties.suspendedTill, "SuspendOn", "csharp");
+@@clientName(
+  SiteSourceControlProperties.deploymentRollbackEnabled,
+  "IsDeploymentRollbackEnabled",
+  "csharp"
+);
+@@clientName(
+  StaticSiteBuildARMResourceProperties.createdTimeUtc,
+  "CreatedOn",
+  "csharp"
+);
+@@clientName(
+  SwiftVirtualNetworkProperties.swiftSupported,
+  "IsSwiftSupported",
+  "csharp"
+);
+@@clientName(
+  TriggeredWebJobProperties.storageAccountRequired,
+  "IsStorageAccountRequired",
+  "csharp"
+);
+@@clientName(TriggeredWebJobProperties.using_sdk, "IsUsingSdk", "csharp");
+@@clientName(
+  WebAppRuntimeSettings.remoteDebuggingSupported,
+  "IsRemoteDebuggingSupported",
+  "csharp"
+);
+@@clientName(WebJobProperties.using_sdk, "IsUsingSdk", "csharp");
+@@clientName(
+  WebSiteInstanceStatusProperties.healthCheckUrl,
+  "healthCheckUrlString",
+  "csharp"
+);
+@@clientName(WorkflowTriggerHistoryProperties.fired, "IsFired", "csharp");
+
+@@clientName(Apple.enabled, "IsEnabled", "csharp");
+@@clientName(AuthPlatform.enabled, "IsEnabled", "csharp");
+@@clientName(AzureActiveDirectory.enabled, "IsEnabled", "csharp");
+@@clientName(
+  AzureActiveDirectoryLogin.disableWWWAuthenticate,
+  "IsWwwAuthenticateDisabled",
+  "csharp"
+);
+@@clientName(AzureBlobStorageHttpLogsConfig.enabled, "IsEnabled", "csharp");
+@@clientName(AzureStaticWebApps.enabled, "IsEnabled", "csharp");
+@@clientName(
+  BackupSchedule.keepAtLeastOneBackup,
+  "ShouldKeepAtLeastOneBackup",
+  "csharp"
+);
+@@clientName(BackupSchedule.lastExecutionTime, "LastExecutedOn", "csharp");
+@@clientName(CloningInfo.overwrite, "CanOverwrite", "csharp");
+@@clientName(
+  CorsSettings.supportCredentials,
+  "IsCredentialsSupported",
+  "csharp"
+);
+@@clientName(
+  CsmPublishingProfileOptions.includeDisasterRecoveryEndpoints,
+  "IsIncludeDisasterRecoveryEndpoints",
+  "csharp"
+);
+@@clientName(CustomOpenIdConnectProvider.enabled, "IsEnabled", "csharp");
+@@clientName(DaprConfig.enableApiLogging, "IsApiLoggingEnabled", "csharp");
+@@clientName(DaprConfig.enabled, "IsEnabled", "csharp");
+@@clientName(
+  Dimension.toBeExportedForShoebox,
+  "IsToBeExportedForShoebox",
+  "csharp"
+);
+@@clientName(Microsoft.Web.ErrorResponse.error, "ErrorInfo", "csharp");
+@@clientName(Facebook.enabled, "IsEnabled", "csharp");
+@@clientName(FileSystemHttpLogsConfig.enabled, "IsEnabled", "csharp");
+@@clientName(
+  FunctionAppRuntimeSettings.remoteDebuggingSupported,
+  "IsRemoteDebuggingSupported",
+  "csharp"
+);
+@@clientName(
+  FunctionsAlwaysReadyConfig.instanceCount,
+  "AlwaysReadyInstanceCount",
+  "csharp"
+);
+@@clientName(FunctionsDeploymentStorage.type, "StorageType", "csharp");
+@@clientName(
+  FunctionsScaleAndConcurrency.instanceMemoryMB,
+  "FunctionAppInstanceMemoryMB",
+  "csharp"
+);
+@@clientName(
+  FunctionsScaleAndConcurrency.maximumInstanceCount,
+  "FunctionAppMaximumInstanceCount",
+  "csharp"
+);
+@@clientName(
+  FunctionsScaleAndConcurrencyTriggersHttp.perInstanceConcurrency,
+  "ConcurrentHttpPerInstanceConcurrency",
+  "csharp"
+);
+@@clientName(GitHub.enabled, "IsEnabled", "csharp");
+@@clientName(
+  GlobalValidation.requireAuthentication,
+  "IsAuthenticationRequired",
+  "csharp"
+);
+@@clientName(Google.enabled, "IsEnabled", "csharp");
+@@clientName(HostNameSslState.thumbprint, "ThumbprintString", "csharp");
+@@clientName(HttpSettings.requireHttps, "IsHttpsRequired", "csharp");
+@@clientName(IpSecurityRestriction.ipAddress, "IPAddressOrCidr", "csharp");
+@@clientName(LegacyMicrosoftAccount.enabled, "IsEnabled", "csharp");
+@@clientName(
+  MetricSpecification.enableRegionalMdmAccount,
+  "IsRegionalMdmAccountEnabled",
+  "csharp"
+);
+@@clientName(
+  MetricSpecification.supportsInstanceLevelAggregation,
+  "IsInstanceLevelAggregationSupported",
+  "csharp"
+);
+@@clientName(
+  OpenAuthenticationAccessPolicies.policies,
+  "OpenAuthenticationPolicyList",
+  "csharp"
+);
+@@clientName(OutboundVnetRouting.allTraffic, "IsAllTrafficEnabled", "csharp");
+@@clientName(
+  OutboundVnetRouting.applicationTraffic,
+  "IsApplicationTrafficEnabled",
+  "csharp"
+);
+@@clientName(
+  OutboundVnetRouting.contentShareTraffic,
+  "IsContentShareTrafficEnabled",
+  "csharp"
+);
+@@clientName(
+  OutboundVnetRouting.imagePullTraffic,
+  "IsImagePullTrafficEnabled",
+  "csharp"
+);
+@@clientName(
+  OutboundVnetRouting.backupRestoreTraffic,
+  "IsBackupRestoreTrafficEnabled",
+  "csharp"
+);
+@@clientName(
+  ResourceNameAvailability.nameAvailable,
+  "IsNameAvailable",
+  "csharp"
+);
+@@clientName(RestoreRequestProperties.overwrite, "CanOverwrite", "csharp");
+@@clientName(
+  SnapshotRestoreRequestProperties.overwrite,
+  "CanOverwrite",
+  "csharp"
+);
+@@clientName(
+  StackMajorVersion.applicationInsights,
+  "IsApplicationInsights",
+  "csharp"
+);
+@@clientName(TokenStore.enabled, "IsEnabled", "csharp");
+@@clientName(Twitter.enabled, "IsEnabled", "csharp");
+@@clientName(VirtualApplication.preloadEnabled, "IsPreloadEnabled", "csharp");
+@@clientName(VirtualIPMapping.inUse, "IsInUse", "csharp");
+@@clientName(VnetInfo.certThumbprint, "CertThumbprintString", "csharp");
+@@clientName(VnetInfo.resyncRequired, "IsResyncRequired", "csharp");
+@@clientName(
+  VnetValidationFailureDetailsProperties.failed,
+  "IsFailed",
+  "csharp"
+);
+@@clientName(VolumeMount.readOnly, "IsReadOnly", "csharp");
+@@clientName(
+  WorkflowTriggerListCallbackUrlQueries.se,
+  "SasTimestamp",
+  "csharp"
+);
+@@clientName(
+  WorkflowTriggerListCallbackUrlQueries.sig,
+  "SasSignature",
+  "csharp"
+);
+@@clientName(
+  WorkflowTriggerListCallbackUrlQueries.sp,
+  "SasPermission",
+  "csharp"
+);
+@@clientName(WorkflowTriggerListCallbackUrlQueries.sv, "SasVersion", "csharp");
+@@clientName(ApiDefinitionInfo.url, "ApiDefinitionUriStringValue", "csharp");
+@@clientName(
+  FunctionsDeploymentStorage.value,
+  "AzureStorageUriStringValue",
+  "csharp"
+);
+
+@@clientName(
+  TlsCipherSuites.TLS_AES_128_GCM_SHA256,
+  "TlsAes128GcmSha256",
+  "csharp"
+);
+@@clientName(
+  TlsCipherSuites.TLS_AES_256_GCM_SHA384,
+  "TlsAes256GcmSha384",
+  "csharp"
+);
+@@clientName(
+  TlsCipherSuites.TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256,
+  "TlsECDiffieHellmanECDsaWithAes128CbcSha256",
+  "csharp"
+);
+@@clientName(
+  TlsCipherSuites.TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,
+  "TlsECDiffieHellmanECDsaWithAes128GcmSha256",
+  "csharp"
+);
+@@clientName(
+  TlsCipherSuites.TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,
+  "TlsECDiffieHellmanECDsaWithAes256GcmSha384",
+  "csharp"
+);
+@@clientName(
+  TlsCipherSuites.TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,
+  "TlsECDiffieHellmanRsaWithAes128CbcSha",
+  "csharp"
+);
+@@clientName(
+  TlsCipherSuites.TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,
+  "TlsECDiffieHellmanRsaWithAes128CbcSha256",
+  "csharp"
+);
+@@clientName(
+  TlsCipherSuites.TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,
+  "TlsECDiffieHellmanRsaWithAes128GcmSha256",
+  "csharp"
+);
+@@clientName(
+  TlsCipherSuites.TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,
+  "TlsECDiffieHellmanRsaWithAes256CbcSha",
+  "csharp"
+);
+@@clientName(
+  TlsCipherSuites.TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384,
+  "TlsECDiffieHellmanRsaWithAes256CbcSha384",
+  "csharp"
+);
+@@clientName(
+  TlsCipherSuites.TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,
+  "TlsECDiffieHellmanRsaWithAes256GcmSha384",
+  "csharp"
+);
+@@clientName(
+  TlsCipherSuites.TLS_RSA_WITH_AES_128_CBC_SHA,
+  "TlsRsaWithAes128CbcSha",
+  "csharp"
+);
+@@clientName(
+  TlsCipherSuites.TLS_RSA_WITH_AES_128_CBC_SHA256,
+  "TlsRsaWithAes128CbcSha256",
+  "csharp"
+);
+@@clientName(
+  TlsCipherSuites.TLS_RSA_WITH_AES_128_GCM_SHA256,
+  "TlsRsaWithAes128GcmSha256",
+  "csharp"
+);
+@@clientName(
+  TlsCipherSuites.TLS_RSA_WITH_AES_256_CBC_SHA,
+  "TlsRsaWithAes256CbcSha",
+  "csharp"
+);
+@@clientName(
+  TlsCipherSuites.TLS_RSA_WITH_AES_256_CBC_SHA256,
+  "TlsRsaWithAes256CbcSha256",
+  "csharp"
+);
+@@clientName(
+  TlsCipherSuites.TLS_RSA_WITH_AES_256_GCM_SHA384,
+  "TlsRsaWithAes256GcmSha384",
+  "csharp"
+);
+// Back-compat property renames moved from SDK customizations to align with GA names.
+@@clientName(KubeEnvironmentProfile.type, "ResourceType", "csharp");
+@@clientName(OpenAuthenticationAccessPolicy.type, "ProviderType", "csharp");
+@@clientName(RegistryAdapter.type, "AdapterType", "csharp");
+@@clientName(ResourceReference.type, "ResourceType", "csharp");
+@@clientName(StorageMount.type, "MountType", "csharp");
+@@clientName(MSDeployLogEntry.type, "EntryType", "csharp");
+@@clientName(WorkflowParameter.type, "WebAppParameterType", "csharp");
+@@clientName(InstallScriptSource.type, "ScriptType", "csharp");
+@@clientName(
+  StaticSiteDatabaseConnectionConfigurationFileOverview.type,
+  "StaticSiteDatabaseConnectionConfigurationFileOverviewType",
+  "csharp"
+);
+@@clientName(WebAppStackProperties.preferredOs, "PreferredOS", "csharp");
+@@clientName(FunctionAppStackProperties.preferredOs, "PreferredOS", "csharp");
+
+// More back-compat property renames to align with GA 1.5.0 names.
+@@clientName(AzureStorageInfoValue.type, "StorageType", "csharp");
+@@clientName(HostingEnvironmentProfile.type, "ResourceType", "csharp");
+@@clientName(VirtualNetworkProfile.type, "ResourceType", "csharp");
+@@clientName(DetectorInfo.type, "DetectorType", "csharp");
+@@clientName(Rendering.type, "RenderingType", "csharp");
+@@clientName(Solution.type, "SolutionType", "csharp");
+@@clientName(
+  FunctionsDeploymentStorageAuthentication.type,
+  "AuthenticationType",
+  "csharp"
+);
+@@clientName(ConnStringInfo.type, "ConnectionStringType", "csharp");
+@@clientName(ConnStringValueTypePair.type, "ConnectionStringType", "csharp");
+@@clientName(ResourceNameAvailabilityRequest.type, "ResourceType", "csharp");
+@@clientName(DnlResourceNameAvailabilityRequest.type, "ResourceType", "csharp");
+@@clientName(
+  SnapshotRestoreRequestProperties.overwrite,
+  "CanOverwrite",
+  "csharp"
+);
+@@clientName(
+  MigrateMySqlRequestProperties.connectionString,
+  "ConnectionString",
+  "csharp"
+);
+@@clientName(
+  MigrateMySqlRequestProperties.migrationType,
+  "MigrationType",
+  "csharp"
+);
+@@clientName(
+  StorageMigrationOptionsProperties.azurefilesConnectionString,
+  "AzurefilesConnectionString",
+  "csharp"
+);
+@@clientName(
+  StorageMigrationOptionsProperties.azurefilesShare,
+  "AzurefilesShare",
+  "csharp"
+);
+@@clientName(
+  OutboundVnetRouting.managedIdentityTraffic,
+  "IsManagedIdentityTrafficEnabled",
+  "csharp"
+);
+
+// Additional renames for missing GA members.
+@@clientName(DetectorAbnormalTimePeriod.type, "IssueType", "csharp");
+@@clientName(Sites.swapSlotWithProduction, "SwapSlot", "csharp");
+@@clientName(WebApps.swapSlotSlot, "SwapSlot", "csharp");
+
+// Back-compat enum-value renames moved from SDK customizations to align with GA names.
+@@clientName(ScmType.VSTSRM, "Vstsrm", "csharp");
+@@clientName(
+  SupportedTlsVersions.`1.0`,
+  Azure.ClientGenerator.Core.exact("Tls1_0"),
+  "csharp"
+);
+@@clientName(
+  SupportedTlsVersions.`1.1`,
+  Azure.ClientGenerator.Core.exact("Tls1_1"),
+  "csharp"
+);
+@@clientName(
+  SupportedTlsVersions.`1.2`,
+  Azure.ClientGenerator.Core.exact("Tls1_2"),
+  "csharp"
+);
+@@clientName(
+  SupportedTlsVersions.`1.3`,
+  Azure.ClientGenerator.Core.exact("Tls1_3"),
+  "csharp"
+);
+@@clientName(ValidateResourceTypes.Site, "WebSite", "csharp");
+@@clientName(CheckNameResourceTypes.Site, "WebSite", "csharp");
+@@clientName(RouteType.DEFAULT, "Default", "csharp");
+@@clientName(RouteType.INHERITED, "Inherited", "csharp");
+@@clientName(RouteType.STATIC, "Static", "csharp");
+@@clientName(SslState.IpBasedEnabled, "IPBasedEnabled", "csharp");
+@@clientName(SiteRuntimeState.READY, "Ready", "csharp");
+@@clientName(SiteRuntimeState.STOPPED, "Stopped", "csharp");
+@@clientName(SiteRuntimeState.UNKNOWN, "Unknown", "csharp");
+@@clientName(ConnectionStringType.SQLServer, "SqlServer", "csharp");
+@@clientName(ConnectionStringType.SQLAzure, "SqlAzure", "csharp");
+@@clientName(ConnectionStringType.PostgreSQL, "PostgreSql", "csharp");
+
+@@clientName(ValidateResourceTypes, "ValidateResourceType", "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty for back-compat."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  SiteConfig.apiDefinition,
+  "csharp"
+);
+@@clientName(ApiDefinitionInfo, "AppServiceApiDefinitionInfo", "csharp");
+@@clientName(ArmPlan, "AppServiceArmPlan", "csharp");
+@@clientName(BillingMeter, "AppServiceBillingMeter", "csharp");
+@@clientName(
+  BlobStorageTokenStore,
+  "AppServiceBlobStorageTokenStore",
+  "csharp"
+);
+@@clientName(CorsSettings, "AppServiceCorsSettings", "csharp");
+@@clientName(
+  DatabaseBackupSetting,
+  "AppServiceDatabaseBackupSetting",
+  "csharp"
+);
+@@clientName(DatabaseType, "AppServiceDatabaseType", "csharp");
+@@clientName(DeploymentLocations, "AppServiceDeploymentLocations", "csharp");
+@@clientName(EndpointDependency, "AppServiceEndpointDependency", "csharp");
+@@clientName(EndpointDetail, "AppServiceEndpointDetail", "csharp");
+@@clientName(ForwardProxy, "AppServiceForwardProxy", "csharp");
+@@clientName(FtpsState, "AppServiceFtpsState", "csharp");
+@@clientName(GeoRegion, "AppServiceGeoRegion", "csharp");
+@@clientName(HostNameType, "AppServiceHostNameType", "csharp");
+@@clientName(HostType, "AppServiceHostType", "csharp");
+@@clientName(HttpLogsConfig, "AppServiceHttpLogsConfig", "csharp");
+@@clientName(HttpSettings, "AppServiceHttpSettings", "csharp");
+@@clientName(HttpSettingsRoutes, "AppServiceHttpSettingsRoutes", "csharp");
+@@clientName(Identifier, "AppServiceIdentifier", "csharp");
+@@clientName(IdentityProviders, "AppServiceIdentityProviders", "csharp");
+@@clientName(IpFilterTag, "AppServiceIPFilterTag", "csharp");
+@@clientName(IPMode, "AppServiceIPMode", "csharp");
+@@clientName(
+  IpSecurityRestriction,
+  "AppServiceIPSecurityRestriction",
+  "csharp"
+);
+@@clientName(NameValuePair, "AppServiceNameValuePair", "csharp");
+@@clientName(Operation, "AppServiceOperation", "csharp");
+@@clientName(OperationStatus, "AppServiceOperationStatus", "csharp");
+@@clientName(SourceControl, "AppServiceSourceControl", "csharp");
+@@clientName(TokenStore, "AppServiceTokenStore", "csharp");
+@@clientName(UsageState, "AppServiceUsageState", "csharp");
+@@clientName(
+  VirtualNetworkProfile,
+  "AppServiceVirtualNetworkProfile",
+  "csharp"
+);
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Function names can be duplicated across different operation groups, so we suppress this warning for now."
+@@clientName(AnalysisDefinitions.executeSiteAnalysis, "Execute", "csharp");
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Function names can be duplicated across different operation groups, so we suppress this warning for now."
+@@clientName(
+  DetectorDefinitionResources.executeSiteDetector,
+  "Execute",
+  "csharp"
+);
+@@clientName(Recommendations.disableRecommendationForSite, "Disable", "csharp");
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Function names can be duplicated across different operation groups, so we suppress this warning for now."
+@@clientName(
+  StaticSiteARMResources.createOrUpdateStaticSiteAppSettings,
+  "CreateOrUpdateAppSettings",
+  "csharp"
+);
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Function names can be duplicated across different operation groups, so we suppress this warning for now."
+@@clientName(
+  StaticSiteARMResources.createOrUpdateStaticSiteFunctionAppSettings,
+  "CreateOrUpdateFunctionAppSettings",
+  "csharp"
+);
+@@clientName(
+  StaticSiteARMResources.deleteStaticSiteUser,
+  "DeleteUser",
+  "csharp"
+);
+@@clientName(StaticSiteARMResources.detachStaticSite, "Detach", "csharp");
+@@clientName(
+  StaticSiteARMResources.listStaticSiteAppSettings,
+  "GetAppSettings",
+  "csharp"
+);
+@@clientName(
+  StaticSiteARMResources.listStaticSiteConfiguredRoles,
+  "GetConfiguredRoles",
+  "csharp"
+);
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Function names can be duplicated across different operation groups, so we suppress this warning for now."
+@@clientName(
+  StaticSiteARMResources.listStaticSiteFunctionAppSettings,
+  "GetFunctionAppSettings",
+  "csharp"
+);
+@@clientName(StaticSiteARMResources.listStaticSiteUsers, "GetUsers", "csharp");
+@@clientName(
+  StaticSiteARMResources.resetStaticSiteApiKey,
+  "ResetApiKey",
+  "csharp"
+);
+@@clientName(
+  StaticSiteARMResources.updateStaticSiteUser,
+  "UpdateUser",
+  "csharp"
+);
+@@clientName(
+  checkNameAvailability,
+  "CheckAppServiceNameAvailability",
+  "csharp"
+);
+@@clientName(
+  AppServicePlans.listHybridConnections,
+  "GetHybridConnectionRelays",
+  "csharp"
+);
+@@clientName(
+  HybridConnections.listWebAppsByHybridConnection,
+  "GetAllWebAppsByHybridConnection",
+  "csharp"
+);
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Function names can be duplicated across different operation groups, so we suppress this warning for now."
+@@clientName(
+  StaticSiteBuildARMResources.createOrUpdateStaticSiteBuildAppSettings,
+  "CreateOrUpdateAppSettings",
+  "csharp"
+);
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Function names can be duplicated across different operation groups, so we suppress this warning for now."
+@@clientName(
+  StaticSiteBuildARMResources.createOrUpdateStaticSiteBuildFunctionAppSettings,
+  "CreateOrUpdateFunctionAppSettings",
+  "csharp"
+);
+@@clientName(
+  StaticSiteBuildARMResources.listStaticSiteBuildFunctions,
+  "GetFunctions",
+  "csharp"
+);
+@@clientName(
+  StaticSiteBuildARMResources.createZipDeploymentForStaticSiteBuild,
+  "CreateZipDeployment",
+  "csharp"
+);
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Function names can be duplicated across different operation groups, so we suppress this warning for now."
+@@clientName(
+  StaticSiteBuildARMResources.listStaticSiteBuildFunctionAppSettings,
+  "GetFunctionAppSettings",
+  "csharp"
+);
+@@clientName(
+  RecommendationsOperationGroup.resetAllFilters,
+  "ResetAllRecommendationFilters",
+  "csharp"
+);
+@@clientName(
+  StaticSitesOperationGroup.previewWorkflow,
+  "PreviewStaticSiteWorkflow",
+  "csharp"
+);
+@@clientName(
+  ProviderOperationGroup.getWebAppStacksForLocation,
+  "GetWebAppStacksByLocation",
+  "csharp"
+);
+@@clientName(
+  getSubscriptionDeploymentLocations,
+  "GetAppServiceDeploymentLocations",
+  "csharp"
+);
+@@clientName(
+  RecommendationsOperationGroup.disableRecommendationForSubscription,
+  "DisableAppServiceRecommendation",
+  "csharp"
+);
+@@clientName(WebApps.listSnapshotsSlot, "GetSlotSnapshots", "csharp");
+@@clientName(
+  WebApps.listSnapshotsFromDRSecondarySlot,
+  "GetSlotSnapshotsFromDRSecondary",
+  "csharp"
+);
+@@clientName(
+  AppServiceEnvironmentResources.listWebApps,
+  "GetAllWebAppData",
+  "csharp"
+);
+@@clientName(
+  ResourceHealthMetadataNonResourceOperationGroup.listByResourceGroup,
+  "GetAllResourceHealthMetadataData",
+  "csharp"
+);
+@@clientName(
+  listSiteIdentifiersAssignedToHostName,
+  "GetAllSiteIdentifierData",
+  "csharp"
+);
+@@clientName(
+  SiteConfigResourceOperationGroup.listConfigurations,
+  "GetAllConfigurationData",
+  "csharp"
+);
+@@clientName(Sites.listHybridConnections, "GetHybridConnections", "csharp");
+@@clientName(Sites.listPremierAddOns, "GetAllPremierAddOnData", "csharp");
+@@clientName(
+  Sites.listRelayServiceConnections,
+  "GetAllRelayServiceConnectionData",
+  "csharp"
+);
+@@clientName(Sites.listSiteBackups, "GetAllSiteBackupData", "csharp");
+@@clientName(
+  SiteConfigSnapshotSlotResourceOperationGroup.listConfigurationsSlot,
+  "GetAllConfigurationSlotData",
+  "csharp"
+);
+@@clientName(
+  WebApps.listHybridConnectionsSlot,
+  "GetHybridConnectionsSlot",
+  "csharp"
+);
+@@clientName(
+  WebApps.listPremierAddOnsSlot,
+  "GetAllPremierAddOnSlotData",
+  "csharp"
+);
+@@clientName(
+  WebApps.listRelayServiceConnectionsSlot,
+  "GetAllRelayServiceConnectionSlotData",
+  "csharp"
+);
+@@clientName(WebApps.listSiteBackupsSlot, "GetAllSiteBackupSlotData", "csharp");
+@@clientName(
+  ProcessInfos.listInstanceProcessThreads,
+  "GetSiteInstanceProcessThreads",
+  "csharp"
+);
+@@clientName(
+  ProcessInfoOperationGroup.listProcessThreads,
+  "GetSiteProcessThreads",
+  "csharp"
+);
+@@clientName(
+  ProcessSlotOperationGroup.listProcessThreadsSlot,
+  "GetSiteSlotProcessThreads",
+  "csharp"
+);
+@@clientName(
+  InstanceProcessSlotOperationGroup.listInstanceProcessThreadsSlot,
+  "GetSiteSlotInstanceProcessThreads",
+  "csharp"
+);
+@@clientName(
+  regionalCheckNameAvailability,
+  "CheckDnlResourceNameAvailability",
+  "csharp"
+);
+
+@@alternateType(VirtualNetworkProfile.id, armResourceIdentifier, "csharp");
+@@alternateType(HostingEnvironmentProfile.id, armResourceIdentifier, "csharp");
+@@alternateType(KubeEnvironmentProfile.id, armResourceIdentifier, "csharp");
+@@alternateType(VnetInfo.vnetResourceId, armResourceIdentifier, "csharp");
+@@alternateType(CloningInfo.sourceWebAppId, armResourceIdentifier, "csharp");
+@@alternateType(
+  CloningInfo.trafficManagerProfileId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  RecommendationProperties.resourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(SupportTopic.pesId, armResourceIdentifier, "csharp");
+@@alternateType(
+  DeletedAppRestoreRequestProperties.deletedSiteId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(SnapshotRecoverySource.id, armResourceIdentifier, "csharp");
+@@alternateType(
+  StaticSiteUserProvidedFunctionAppARMResourceProperties.functionAppResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+
+@@alternateType(VirtualNetworkProfile.type, armResourceType, "csharp");
+@@alternateType(HostingEnvironmentProfile.type, armResourceType, "csharp");
+@@alternateType(KubeEnvironmentProfile.type, armResourceType, "csharp");
+@@alternateType(SkuInfo.resourceType, armResourceType, "csharp");
+@@alternateType(SkuInfos.resourceType, armResourceType, "csharp");
+@@alternateType(ResourceReference.type, armResourceType, "csharp");
+@@alternateType(BillingMeterProperties.meterId, uuid, "csharp");
+@@alternateType(
+  AddressResponseProperties.serviceIpAddress,
+  ipV4Address,
+  "csharp"
+);
+@@clientName(
+  AddressResponseProperties.serviceIpAddress,
+  "ServiceIPAddress",
+  "csharp"
+);
+@@alternateType(
+  AddressResponseProperties.internalIpAddress,
+  ipV4Address,
+  "csharp"
+);
+@@clientName(
+  AddressResponseProperties.internalIpAddress,
+  "InternalIPAddress",
+  "csharp"
+);
+@@clientName(
+  AddressResponseProperties.outboundIpAddresses,
+  "OutboundIPAddresses",
+  "csharp"
+);
+@@alternateType(
+  AddressResponseProperties.outboundIpAddresses,
+  ipV4Address[],
+  "csharp"
+);
+
+@@alternateType(LogSpecification.blobDuration, duration, "csharp");
+@@alternateType(MetricAvailability.blobDuration, duration, "csharp");
+@@alternateType(TriggeredJobRun.duration, duration, "csharp");
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Microsoft.Web.PrivateLinkResource,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  ResponseMessageEnvelopeRemotePrivateEndpointConnection,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  AppServiceEnvironmentPatchResource,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  PushSettings,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  ResourceMetricDefinition,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Microsoft.Web.Usage,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  AppServicePlanPatchResource,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  HybridConnectionKey,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  CertificatePatchResource,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  DiagnosticAnalysis,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  DiagnosticDetectorResponse,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Snapshot,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  KubeEnvironmentPatchResource,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  ApplicationStackResource,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  FunctionAppStack,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  WebAppStack,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Recommendation,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  BillingMeter,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  CustomHostnameSites,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  GeoRegion,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  AseRegion,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  PremierAddOnOffer,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  VnetParameters,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  VnetValidationFailureDetails,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  VnetValidationTestFailure,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  StaticSitesWorkflowPreviewRequest,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  StaticSitesWorkflowPreview,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  RemotePrivateEndpointConnection,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  StaticSiteUserProvidedFunctionApp,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  StaticSitePatchResource,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  StaticSiteUserARMResource,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  StringDictionary,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  StaticSiteFunctionOverviewARMResource,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  StaticSiteZipDeploymentARMResource,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  StaticSiteUserInvitationRequestResource,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  StaticSiteUserInvitationResponseResource,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  StaticSiteCustomDomainRequestPropertiesARMResource,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  StringList,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  StaticSiteResetPropertiesARMResource,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  SitePatchResource,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  CustomHostnameAnalysisResult,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  BackupRequest,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  RestoreRequest,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  SiteAuthSettings,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  AzureStoragePropertyDictionaryResource,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  ConnectionStringDictionary,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  SiteConfigurationSnapshotInfo,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  MSDeploy,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  MSDeployLog,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  ProcessThreadInfo,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  MigrateMySqlRequest,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  NetworkSecurityPerimeterConfiguration,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  SitePhpErrorLogFlag,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  PremierAddOnPatchResource,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  DeletedAppRestoreRequest,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  SnapshotRestoreRequest,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  SlotDifference,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  PrivateLinkConnectionApprovalRequestResource,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  StorageMigrationOptions,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  StorageMigrationResponse,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Workflow,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+@@scope(RelayServiceConnectionEntityProperties.resourceType, "!csharp");
+@@scope(BillingMeterProperties.resourceType, "!csharp");
+
+@@clientName(DeletedSiteProperties.kind, "KindPropertiesKind", "csharp");
+@@clientName(StackPreferredOs, "StackPreferredOS", "csharp");
+
+/**
+ * The method that should be used to authenticate the user.
+ */
+union ClientCredentialMethod {
+  string,
+
+  /** ClientSecretPost. */
+  ClientSecretPost: "ClientSecretPost",
+}
+@@alternateType(
+  OpenIdConnectClientCredential.method,
+  ClientCredentialMethod,
+  "csharp"
+);
+/**
+ * The source of the configuration reference.
+ */
+union ConfigReferenceSource {
+  string,
+
+  /** KeyVault. */
+  KeyVault: "KeyVault",
+}
+@@alternateType(
+  ApiKVReferenceProperties.source,
+  ConfigReferenceSource,
+  "csharp"
+);
+
+@@clientName(
+  ResourceHealthMetadataOperationGroup.listBySite,
+  "ListResourceHealthMetadata",
+  "csharp"
+);
+@@clientName(
+  BySiteSlotOperationGroup.listBySiteSlot,
+  "ListResourceHealthMetadata",
+  "csharp"
+);
+
+@@clientName(
+  SiteConfig.ipSecurityRestrictions,
+  "IPSecurityRestrictions",
+  "csharp"
+);
+@@clientName(
+  SiteConfig.ipSecurityRestrictionsDefaultAction,
+  "IPSecurityRestrictionsDefaultAction",
+  "csharp"
+);
+@@clientName(
+  SiteConfig.scmIpSecurityRestrictions,
+  "ScmIPSecurityRestrictions",
+  "csharp"
+);
+@@clientName(
+  SiteConfig.scmIpSecurityRestrictionsDefaultAction,
+  "ScmIPSecurityRestrictionsDefaultAction",
+  "csharp"
+);
+@@clientName(SiteProperties.ipMode, "IPMode", "csharp");
+@@clientName(
+  AppServiceEnvironment.ipsslAddressCount,
+  "IPSslAddressCount",
+  "csharp"
+);
+@@clientName(EndpointDetail.ipAddress, "IPAddress", "csharp");
+@@clientName(ServerFarmInstance.ipAddress, "IPAddress", "csharp");
+@@clientName(
+  RemotePrivateEndpointConnectionARMResourceProperties.ipAddresses,
+  "IPAddresses",
+  "csharp"
+);
+@@clientName(
+  RemotePrivateEndpointConnectionProperties.ipAddresses,
+  "IPAddresses",
+  "csharp"
+);
+@@alternateType(
+  RemotePrivateEndpointConnectionProperties.ipAddresses,
+  ipV4Address[],
+  "csharp"
+);
+
+@@clientName(BillingMeterProperties.osType, "OSType", "csharp");
+@@clientName(MSDeployCore.dbType, "DBType", "csharp");
+@@clientName(
+  SiteProperties.siteScopedCertificatesEnabled,
+  "IsSiteScopedCertificatesEnabled",
+  "csharp"
+);
+@@clientName(
+  SiteProperties.outboundIpAddresses,
+  "OutboundIPAddresses",
+  "csharp"
+);
+@@clientName(
+  SiteProperties.possibleOutboundIpAddresses,
+  "PossibleOutboundIPAddresses",
+  "csharp"
+);
+@@clientName(
+  AseV3NetworkingConfigurationProperties.externalInboundIpAddresses,
+  "ExternalInboundIPAddresses",
+  "csharp"
+);
+@@alternateType(
+  AseV3NetworkingConfigurationProperties.externalInboundIpAddresses,
+  ipV4Address[],
+  "csharp"
+);
+@@clientName(
+  AseV3NetworkingConfigurationProperties.internalInboundIpAddresses,
+  "InternalInboundIPAddresses",
+  "csharp"
+);
+@@alternateType(
+  AseV3NetworkingConfigurationProperties.internalInboundIpAddresses,
+  ipV4Address[],
+  "csharp"
+);
+@@clientName(
+  AseV3NetworkingConfigurationProperties.linuxOutboundIpAddresses,
+  "LinuxOutboundIPAddresses",
+  "csharp"
+);
+@@alternateType(
+  AseV3NetworkingConfigurationProperties.linuxOutboundIpAddresses,
+  ipV4Address[],
+  "csharp"
+);
+@@clientName(
+  AseV3NetworkingConfigurationProperties.windowsOutboundIpAddresses,
+  "WindowsOutboundIPAddresses",
+  "csharp"
+);
+@@alternateType(
+  AseV3NetworkingConfigurationProperties.windowsOutboundIpAddresses,
+  ipV4Address[],
+  "csharp"
+);
+@@clientName(
+  AseV3NetworkingConfigurationProperties.inboundIpAddressOverride,
+  "InboundIPAddressOverride",
+  "csharp"
+);
+@@clientName(
+  FlowEndpoints.accessEndpointIpAddresses,
+  "AccessEndpointIPAddresses",
+  "csharp"
+);
+@@clientName(
+  FlowEndpoints.outgoingIpAddresses,
+  "OutgoingIPAddresses",
+  "csharp"
+);
+@@clientName(
+  FlowAccessControlConfigurationPolicy.allowedCallerIpAddresses,
+  "AllowedCallerIPAddresses",
+  "csharp"
+);
+@@clientName(
+  AppServiceEnvironment.userWhitelistedIpRanges,
+  "UserWhitelistedIPRanges",
+  "csharp"
+);
+@@clientName(KubeEnvironmentProperties.staticIp, "StaticIP", "csharp");
+@@clientName(FunctionAppStackProperties.preferredOs, "PreferredOS", "csharp");
+
+@@alternateType(
+  CertificatePatchResourceProperties.keyVaultId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  CertificatePatchResourceProperties.serverFarmId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  ValidateProperties.serverFarmId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  VnetParametersProperties.subnetResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  SitePatchResourceProperties.serverFarmId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  SitePatchResourceProperties.virtualNetworkSubnetId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  DatabaseConnectionProperties.resourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  DatabaseConnectionPatchRequestProperties.resourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  StaticSiteLinkedBackend.backendResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  SwiftVirtualNetworkProperties.subnetResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(SiteProperties.serverFarmId, armResourceIdentifier, "csharp");
+@@alternateType(
+  SiteProperties.virtualNetworkSubnetId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  KubeEnvironmentProperties.aksResourceID,
+  armResourceIdentifier,
+  "csharp"
+);
+@@clientName(
+  KubeEnvironmentProperties.aksResourceID,
+  "AksResourceId",
+  "csharp"
+);
+
+@@alternateType(ResourceMetricDefinitionProperties.resourceUri, url, "csharp");
+@@alternateType(BackupItemProperties.storageAccountUrl, url, "csharp");
+@@alternateType(BackupRequestProperties.storageAccountUrl, url, "csharp");
+@@alternateType(RestoreRequestProperties.storageAccountUrl, url, "csharp");
+@@alternateType(WebSiteInstanceStatusProperties.consoleUrl, url, "csharp");
+@@alternateType(WebSiteInstanceStatusProperties.statusUrl, url, "csharp");
+@@alternateType(WebSiteInstanceStatusProperties.detectorUrl, url, "csharp");
+@@alternateType(PremierAddOnOfferProperties.legalTermsUrl, url, "csharp");
+@@alternateType(PremierAddOnOfferProperties.privacyPolicyUrl, url, "csharp");
+@@alternateType(ContinuousWebJobProperties.extra_info_url, url, "csharp");
+@@alternateType(ContinuousWebJobProperties.log_url, url, "csharp");
+@@alternateType(ContinuousWebJobProperties.url, url, "csharp");
+@@alternateType(TriggeredWebJobProperties.extra_info_url, url, "csharp");
+@@alternateType(TriggeredWebJobProperties.history_url, url, "csharp");
+@@alternateType(TriggeredWebJobProperties.scheduler_logs_url, url, "csharp");
+@@alternateType(TriggeredWebJobProperties.url, url, "csharp");
+@@alternateType(WebJobProperties.url, url, "csharp");
+@@alternateType(WebJobProperties.extra_info_url, url, "csharp");
+@@alternateType(ValidateProperties.containerRegistryBaseUrl, url, "csharp");
+@@alternateType(
+  StaticSitesWorkflowPreviewRequestProperties.repositoryUrl,
+  url,
+  "csharp"
+);
+@@alternateType(SiteExtensionInfoProperties.project_url, url, "csharp");
+@@alternateType(SiteExtensionInfoProperties.license_url, url, "csharp");
+@@alternateType(SiteExtensionInfoProperties.feed_url, url, "csharp");
+@@alternateType(SiteExtensionInfoProperties.extension_url, url, "csharp");
+@@alternateType(SiteExtensionInfoProperties.icon_url, url, "csharp");
+@@alternateType(
+  CustomDnsSuffixConfigurationProperties.certificateUrl,
+  url,
+  "csharp"
+);
+@@alternateType(
+  StaticSiteBasicAuthPropertiesARMResourceProperties.secretUrl,
+  url,
+  "csharp"
+);
+@@alternateType(
+  StaticSiteUserInvitationResponseResourceProperties.invitationUrl,
+  url,
+  "csharp"
+);
+@@alternateType(StaticSiteZipDeployment.apiZipUrl, url, "csharp");
+@@alternateType(StaticSiteZipDeployment.appZipUrl, url, "csharp");
+@@alternateType(StaticSite.repositoryUrl, url, "csharp");
+@@alternateType(VnetGatewayProperties.vpnPackageUri, url, "csharp");
+@@alternateType(UserProperties.scmUri, url, "csharp");
+@@alternateType(SiteSourceControlProperties.repoUrl, url, "csharp");
+@@alternateType(
+  RelayServiceConnectionEntityProperties.biztalkUri,
+  url,
+  "csharp"
+);
+
+@@clientName(
+  SiteConfig.acrUserManagedIdentityID,
+  "AcrUserManagedIdentityId",
+  "csharp"
+);
+@@clientName(
+  SitePatchResourceProperties.siteScopedCertificatesEnabled,
+  "IsSiteScopedCertificatesEnabled",
+  "csharp"
+);
+@@clientName(
+  SitePatchResourceProperties.outboundIpAddresses,
+  "OutboundIPAddresses",
+  "csharp"
+);
+@@clientName(
+  SitePatchResourceProperties.possibleOutboundIpAddresses,
+  "PossibleOutboundIPAddresses",
+  "csharp"
+);
+@@clientName(
+  KubeEnvironmentPatchResourceProperties.staticIp,
+  "StaticIP",
+  "csharp"
+);
+@@clientName(
+  KubeEnvironmentPatchResourceProperties.aksResourceID,
+  "AksResourceId",
+  "csharp"
+);
+@@clientName(DatabaseConnectionProperties.resourceId, "ResourceId", "csharp");
+@@clientName(
+  DatabaseConnectionPatchRequestProperties.resourceId,
+  "ResourceId",
+  "csharp"
+);
+
+@@alternateType(
+  HybridConnectionProperties.relayArmUri,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  KubeEnvironmentPatchResourceProperties.aksResourceID,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  StaticSiteLinkedBackendARMResourceProperties.backendResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(SiteProperties.inProgressOperationId, uuid, "csharp");
+@@alternateType(
+  SitePatchResourceProperties.inProgressOperationId,
+  uuid,
+  "csharp"
+);
+@@alternateType(RecommendationProperties.recommendationId, uuid, "csharp");
+@@alternateType(RecommendationRuleProperties.recommendationId, uuid, "csharp");
+@@alternateType(HostingEnvironmentProfile.type, armResourceType, "csharp");
+@@alternateType(KubeEnvironmentProfile.type, armResourceType, "csharp");
+@@alternateType(VirtualNetworkProfile.type, armResourceType, "csharp");
+@@alternateType(
+  BillingMeterProperties.billingLocation,
+  azureLocation,
+  "csharp"
+);
+
+@@clientName(
+  SiteRecommendations.listHistoryForWebApp,
+  "GetHistoryForWebAppRecommendations",
+  "csharp"
+);
+@@clientName(
+  SiteRecommendations.listRecommendedRulesForWebApp,
+  "GetRecommendedRulesForWebAppRecommendations",
+  "csharp"
+);
+@@clientName(
+  SiteRecommendations.disableAllForWebApp,
+  "DisableAllForWebAppRecommendation",
+  "csharp"
+);
+@@clientName(
+  SiteRecommendations.resetAllFiltersForWebApp,
+  "ResetAllFiltersForWebAppRecommendation",
+  "csharp"
+);
+@@clientName(
+  SiteWorkflows.regenerateAccessKey,
+  "RegenerateAccessKeyWorkflow",
+  "csharp"
+);
+@@clientName(SiteWorkflows.validate, "ValidateWorkflow", "csharp");
+@@clientName(
+  AppServiceEnvironmentRecommendations.listHistoryForHostingEnvironment,
+  "GetHistoryForHostingEnvironmentRecommendations",
+  "csharp"
+);
+@@clientName(
+  AppServiceEnvironmentRecommendations.listRecommendedRulesForHostingEnvironment,
+  "GetRecommendedRulesForHostingEnvironmentRecommendations",
+  "csharp"
+);
+@@clientName(
+  AppServiceEnvironmentRecommendations.disableAllForHostingEnvironment,
+  "DisableAllForHostingEnvironmentRecommendation",
+  "csharp"
+);
+@@clientName(
+  AppServiceEnvironmentRecommendations.resetAllFiltersForHostingEnvironment,
+  "ResetAllFiltersForHostingEnvironmentRecommendation",
+  "csharp"
+);
+@@clientName(
+  ProviderOperationGroup.getAvailableStacks,
+  "GetAvailableStacksProviders",
+  "csharp"
+);
+@@clientName(
+  ProviderOperationGroup.getFunctionAppStacks,
+  "GetFunctionAppStacksProviders",
+  "csharp"
+);
+@@clientName(
+  ProviderOperationGroup.getFunctionAppStacksForLocation,
+  "GetFunctionAppStacksForLocationProviders",
+  "csharp"
+);
+@@clientName(
+  ProviderOperationGroup.getWebAppStacks,
+  "GetWebAppStacksProviders",
+  "csharp"
+);
+@@clientName(
+  ProviderOperationGroup.getWebAppStacksForLocation,
+  "GetWebAppStacksByLocation",
+  "csharp"
+);
+@@clientName(
+  ProviderOperationGroup.getAvailableStacksOnPrem,
+  "GetAvailableStacksOnPremProviders",
+  "csharp"
+);
+@@clientName(
+  RecommendationsOperationGroup.list,
+  "GetRecommendations",
+  "csharp"
+);
+@@clientName(
+  RecommendationsOperationGroup.resetAllFilters,
+  "ResetAllRecommendationFilters",
+  "csharp"
+);
+@@clientName(
+  ResourceHealthMetadataNonResourceOperationGroup.list,
+  "GetAllResourceHealthMetadata",
+  "csharp"
+);
+@@clientName(
+  GetUsagesInLocationOperationGroup.list,
+  "GetGetUsagesInLocations",
+  "csharp"
+);
+@@clientName(
+  StaticSitesOperationGroup.previewWorkflow,
+  "PreviewStaticSiteWorkflow",
+  "csharp"
+);
+@@clientName(
+  AppServiceEnvironmentResources.listOperations,
+  "GetOperations",
+  "csharp"
+);
+@@clientName(
+  DeletedSites.getDeletedWebAppByLocation,
+  "GetDeletedWebAppByLocationDeletedWebApp",
+  "csharp"
+);
+@@clientName(
+  ProcessInfos.listInstanceProcessThreads,
+  "GetInstanceProcessThreads",
+  "csharp"
+);
+@@clientName(
+  ProcessInfoOperationGroup.listProcessThreads,
+  "GetProcessThreads",
+  "csharp"
+);
+@@clientName(
+  ProcessInfos.getInstanceProcessDump,
+  "GetInstanceProcessDump",
+  "csharp"
+);
+@@clientName(
+  ProcessInfoOperationGroup.getProcessDump,
+  "GetProcessDump",
+  "csharp"
+);
+@@clientName(
+  InstanceProcessSlotOperationGroup.getInstanceProcessDumpSlot,
+  "GetInstanceProcessDumpSlot",
+  "csharp"
+);
+@@clientName(
+  ProcessSlotOperationGroup.getProcessDumpSlot,
+  "GetProcessDumpSlot",
+  "csharp"
+);
+@@clientName(
+  InstanceProcessSlotOperationGroup.listInstanceProcessThreadsSlot,
+  "GetInstanceProcessThreadsSlot",
+  "csharp"
+);
+@@clientName(
+  ProcessSlotOperationGroup.listProcessThreadsSlot,
+  "GetProcessThreadsSlot",
+  "csharp"
+);
+@@clientName(CheckNameResourceTypes, "CheckNameResourceType", "csharp");
+@@clientName(
+  DnlResourceNameAvailabilityRequest,
+  "DnlResourceNameAvailabilityContent",
+  "csharp"
+);
+@@clientName(ProviderOsTypeSelected, "ProviderOSTypeSelected", "csharp");
+@@clientName(ProviderStackOsType, "ProviderStackOSType", "csharp");
+@@clientName(
+  StaticSitesWorkflowPreviewRequest,
+  "StaticSitesWorkflowPreviewContent",
+  "csharp"
+);
+@@clientName(
+  StaticSitesWorkflowPreviewRequestProperties,
+  "StaticSitesWorkflowPreviewContentProperties",
+  "csharp"
+);
+@@clientName(MigrateMySqlRequest, "MigrateMySqlContent", "csharp");
+@@clientName(
+  SiteContainerCollection,
+  "AppServiceSiteContainerListResult",
+  "csharp"
+);
+@@clientName(
+  NetworkSecurityPerimeter,
+  "AppServiceNetworkSecurityPerimeter",
+  "csharp"
+);
+@@alternateType(NetworkSecurityPerimeter.perimeterGuid, uuid, "csharp");
+@@alternateType(NetworkSecurityPerimeter.location, azureLocation, "csharp");
+@@clientName(
+  NetworkSecurityPerimeterConfiguration,
+  "AppServiceNetworkSecurityPerimeterConfiguration",
+  "csharp"
+);
+@@clientName(
+  NetworkSecurityPerimeterConfigurationProperties,
+  "AppServiceNetworkSecurityPerimeterConfigurationProperties",
+  "csharp"
+);
+@@clientName(NspProfile, "AppServiceNetworkSecurityPerimeterProfile", "csharp");
+@@clientName(
+  NspProfileAccessRule,
+  "AppServiceNetworkSecurityPerimeterProfileAccessRule",
+  "csharp"
+);
+@@clientName(
+  NspProfileAccessRuleGranularFeature,
+  "AppServiceNetworkSecurityPerimeterProfileGranularFeature",
+  "csharp"
+);
+@@clientName(
+  NspProfileAccessRuleProperties,
+  "AppServiceNetworkSecurityPerimeterProfileAccessRuleProperties",
+  "csharp"
+);
+@@clientName(
+  NspProvisioningIssue,
+  "AppServiceNetworkSecurityPerimeterProfileProvisioningIssue",
+  "csharp"
+);
+@@clientName(
+  NspProvisioningIssueProperties,
+  "AppServiceNetworkSecurityPerimeterProfileProvisioningIssueProperties",
+  "csharp"
+);
+@@clientName(
+  NspResourceAssociation,
+  "AppServiceNetworkSecurityPerimeterProfileResourceAssociation",
+  "csharp"
+);
+@@clientName(
+  NspSubscription,
+  "AppServiceNetworkSecurityPerimeterProfileSubscription",
+  "csharp"
+);
+
+@@usage(
+  ValidateProperties,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  ValidateRequest,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  AbnormalTimePeriod,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  AnalysisData,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  AnalysisDefinition,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  ApiKVReference,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  ApplicationStack,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  ApplicationStackResource,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  AseRegion,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  BackupItem,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  BillingMeter,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  ContainerCpuStatistics,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  ContainerCpuUsage,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  ContainerInfo,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  ContainerMemoryStatistics,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  ContainerNetworkInterfaceStatistics,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  ContainerThrottlingData,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  ContentLink,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  ContinuousWebJob,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  CustomHostnameAnalysisResult,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  CustomHostnameSites,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  DataProviderMetadata,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  DataSource,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  DataTableResponseColumn,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  DataTableResponseObject,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  DeletedSite,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  DetectorAbnormalTimePeriod,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  DetectorDefinition,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  DetectorDefinitionResource,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  DetectorInfo,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  DetectorResponse,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  DiagnosticAnalysis,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  DiagnosticCategory,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  DiagnosticData,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  DiagnosticDetectorResponse,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  DiagnosticMetricSample,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  DiagnosticMetricSet,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  ErrorProperties,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  FunctionAppStack,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  GeoRegion,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  HybridConnectionKey,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  HybridConnectionLimits,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  Microsoft.Web.Usage,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  MigrateMySqlStatus,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  MSDeployLog,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  MSDeployStatus,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  NetworkFeatures,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  PremierAddOnOffer,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  ProcessInfo,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  ProcessModuleInfo,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  ProcessThreadInfo,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  QueryUtterancesResult,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  QueryUtterancesResults,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  Recommendation,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  RecommendationRule,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  RemotePrivateEndpointConnection,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  Rendering,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  RepetitionIndex,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  Microsoft.Web.Request,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  RequestHistory,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  RequestHistoryProperties,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  ResourceHealthMetadata,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  ResourceMetricDefinition,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  Microsoft.Web.Response,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  RetryHistory,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  RunActionCorrelation,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  RunCorrelation,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  SampleUtterance,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  SiteConfigurationSnapshotInfo,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  SiteExtensionInfo,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  SitePhpErrorLogFlag,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  SlotDifference,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  Snapshot,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  Solution,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  StackMajorVersion,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  StackMinorVersion,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  StaticSiteBuildARMResource,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  StaticSiteCustomDomainOverviewARMResource,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  StaticSiteFunctionOverviewARMResource,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  StaticSitesWorkflowPreview,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  StaticSiteUserInvitationResponseResource,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  Microsoft.Web.Status,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  StorageMigrationResponse,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  StringList,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  TriggeredJobHistory,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  TriggeredJobRun,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  TriggeredWebJob,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  VirtualIPMapping,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  VnetValidationFailureDetails,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  VnetValidationTestFailure,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  WebAppStack,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  WebJob,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  WebSiteInstanceStatus,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  WorkflowEnvelope,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  WorkflowEnvelopeProperties,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  WorkflowHealth,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  WorkflowOutputParameter,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  WorkflowRun,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  WorkflowRunAction,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  WorkflowRunActionRepetitionDefinition,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  WorkflowTrigger,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  WorkflowTriggerHistory,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  WorkflowVersion,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Web.ManagedServiceIdentity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@clientName(
+  AppServiceEnvironment.ipsslAddressCount,
+  "IPSslAddressCount",
+  "csharp"
+);
+@@clientName(
+  AppServiceEnvironment.userWhitelistedIpRanges,
+  "UserWhitelistedIPRanges",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Web.ManagedServiceIdentityType,
+  "AppServiceManagedServiceIdentityType",
+  "csharp"
+);
+@@clientName(
+  DefaultIdentity.identityType,
+  "managedServiceIdentityType",
+  "csharp"
+);
+@@clientName(
+  AddressResponses.getVipInfo,
+  "GetAppServiceEnvironmentIPAddresses",
+  "csharp"
+);
+@@clientLocation(
+  SiteConfigResourceOperationGroup.listConfigurations,
+  Sites,
+  "csharp"
+);
+
+// According to https://github.com/Azure/azure-sdk-for-net/issues/35146, fix the KeyInfo model to be compatible with the real response from the service.
+/**
+ * Function key info.
+ */
+model WebAppKeyInfo {
+  /**
+   * Properties of function key info.
+   */
+  properties?: WebAppKeyInfoProperties;
+}
+/**
+ * Properties of function key info.
+ */
+model WebAppKeyInfoProperties {
+  /**
+   * Key name
+   */
+  name?: string;
+
+  /**
+   * Key value
+   */
+  value?: string;
+}
+@@alternateType(KeyInfo, WebAppKeyInfo, "csharp");
+
+@@usage(
+  SiteConfig,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  SiteConfigResource,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  MigrateMySqlRequest,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  StorageMigrationOptions,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  SnapshotRestoreRequest,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  CertificateProperties,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  CertificatePatchResourceProperties,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+
+@@clientName(ApplicationStack.name, "StackName", "csharp");
+@@alternateType(
+  Microsoft.Web.ExtendedLocation,
+  Azure.ResourceManager.CommonTypes.ExtendedLocation,
+  "csharp"
+);
+@@alternateType(WorkflowEnvelope.location, azureLocation, "csharp");
+@@clientName(ConnectionStringType.DocDb, "DocDB", "csharp");
+@@clientName(
+  HybridConnections.listWebAppsByHybridConnection,
+  "GetWebAppsByHybridConnection",
+  "csharp"
+);
+@@alternateType(ArmIdWrapper.id, armResourceIdentifier, "csharp");
+
+// According to https://github.com/Azure/azure-sdk-for-net/issues/39126, fix the `ProcessThreadInfo` definition based on the return result.
+/**
+ * Process Thread properties.
+ */
+model WebAppProcessThreadProperties {
+  /**
+   * Thread ID.
+   */
+  id?: int32;
+
+  /**
+   * HRef URI.
+   */
+  href?: url;
+
+  /**
+   * Thread state.
+   */
+  state?: string;
+}
+@@usage(
+  WebAppProcessThreadProperties,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@alternateType(
+  ProcessThreadInfo.properties,
+  WebAppProcessThreadProperties,
+  "csharp"
+);
+@@alternateType(
+  ProcessInfoProperties.threads,
+  WebAppProcessThreadProperties[],
+  "csharp"
 );

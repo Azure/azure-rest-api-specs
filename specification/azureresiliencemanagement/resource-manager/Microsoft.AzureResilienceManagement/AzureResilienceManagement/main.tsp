@@ -11,6 +11,7 @@ import "./drillResource.tsp";
 import "./drillRun.tsp";
 import "./partnersolution.tsp";
 import "./usagePlan.tsp";
+import "./client.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -35,6 +36,10 @@ enum Versions {
   @doc("Microsoft.AzureResilienceManagement Resource Provider management API version 2026-04-01-preview.")
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   v2026_04_01_preview: "2026-04-01-preview",
+
+  @doc("Microsoft.AzureResilienceManagement Resource Provider management API version 2026-06-01-preview.")
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  v2026_06_01_preview: "2026-06-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

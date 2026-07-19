@@ -43,6 +43,7 @@ Each reference file covers one cross-cutting rule area with:
 | [linter-rule-coverage.md](references/linter-rule-coverage.md)                 | Linter rule ID → instruction file mapping (130+ rules)                                       | --                                                   |
 | [example-quality.md](references/example-quality.md)                           | Example file quality: orphan detection, coverage, descriptive values                         | EX-ORPHAN, EX-COVERAGE, EX-DESCRIPTIVE-VALUES        |
 | [design-decisions.md](references/design-decisions.md)                         | Grey-area design trade-off frameworks (10 decision matrices)                                 | DD-001–DD-010                                        |
+| [pattern-validation.md](references/pattern-validation.md)                     | Allowlist vs. denylist `pattern` constraints; Unicode bypass risk; severity matrix           | OAPI-PATTERN-ALLOWLIST                               |
 
 ## Authoritative External Sources
 
@@ -137,6 +138,6 @@ The format-specific instruction files reference these shared rules:
 
 | Instruction File                  | Applies To                                    | Relationship                                                                                                           |
 | --------------------------------- | --------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| `armapi-review.instructions.md`   | `specification/**/resource-manager/**/*.json` | References shared rules + adds ARM-specific rules (path structure, PUT/PATCH/DELETE contracts, LRO, ARG compatibility) |
+| `arm-api-review.instructions.md`  | `specification/**/resource-manager/**/*.json` | References shared rules + adds ARM-specific rules (path structure, PUT/PATCH/DELETE contracts, LRO, ARG compatibility) |
 | `openapi-review.instructions.md`  | `specification/**/*.json`                     | References shared rules + adds generic OpenAPI rules (file structure, x-ms extensions, examples, security definitions) |
 | `typespec-review.instructions.md` | `specification/**/*.tsp`                      | References shared rules + adds TypeSpec-specific rules (decorators, project structure, anti-patterns)                  |

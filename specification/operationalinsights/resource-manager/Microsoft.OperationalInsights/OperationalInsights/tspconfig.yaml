@@ -1,6 +1,6 @@
 parameters:
   "service-dir":
-    default: "sdk/operationalInsights"
+    default: "sdk/operationalinsights"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -14,9 +14,15 @@ options:
   "@azure-typespec/http-client-csharp-mgmt":
     namespace: "Azure.ResourceManager.OperationalInsights"
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    enable-wire-path-attribute: true
+  "@azure-typespec/http-client-csharp-provisioning":
+    namespace: "Azure.Provisioning.OperationalInsights"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    api-version: "2025-07-01"
   "@azure-tools/typespec-python":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-operationalinsights"
-    namespace: "azure.mgmt.operationalinsights"
+    service-dir: "sdk/loganalytics"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-loganalytics"
+    namespace: "azure.mgmt.loganalytics"
     generate-test: true
     generate-sample: true
     flavor: "azure"
@@ -30,7 +36,6 @@ options:
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/arm-operationalinsights"
     flavor: azure
-    service-dir: "sdk/operationalinsights"
     compatibility-lro: true
     experimental-extensible-enums: true
     package-details:
@@ -48,3 +53,4 @@ options:
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"
