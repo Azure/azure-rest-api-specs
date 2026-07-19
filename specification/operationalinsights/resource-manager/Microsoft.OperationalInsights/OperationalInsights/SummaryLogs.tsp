@@ -27,7 +27,7 @@ model SummaryLogs
   /**
    * The managed identity of the summary logs resource. Only user-assigned identity is supported.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "SummaryLogs uses a purpose-built identity envelope that supports only None and UserAssigned; the common-types ManagedServiceIdentity always includes SystemAssigned, which this resource does not support."
   @added(Versions.v2026_03_01)
   identity?: SummaryLogsIdentity;
 }

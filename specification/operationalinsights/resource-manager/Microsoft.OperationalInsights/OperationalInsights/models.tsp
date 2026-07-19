@@ -2913,7 +2913,7 @@ model WorkspaceFeatures {
   /**
    * Enable Data authorization mode for the workspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "dataAuthorizationMode is tri-state: null indicates 'not set/inherited' which must be distinguishable from an explicit false; sending null is a valid no-op that carries different semantics than false."
   @added(Versions.v2026_03_01)
   dataAuthorizationMode?: boolean | null;
 }
@@ -3203,7 +3203,7 @@ model SummaryLogsIdentity {
   /**
    * The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "userAssignedIdentities is an ARM-standard map keyed by the user-assigned identity resource ID, which requires a Record type to represent the open-ended key set."
   userAssignedIdentities?: Record<SummaryLogsUserIdentityProperties>;
 }
 
