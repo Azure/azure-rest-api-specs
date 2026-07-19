@@ -105,6 +105,7 @@ op listBillingMeters is ArmProviderActionSync<
     @query("billingLocation")
     billingLocation?: string;
 
+    #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
     /**
      * App Service OS type meters used for
      */
@@ -330,6 +331,7 @@ interface ProviderOperationGroup {
   getAvailableStacks is ArmProviderActionSync<
     Response = ApplicationStackCollection,
     Parameters = {
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("osTypeSelected")
       osTypeSelected?: ProviderOsTypeSelected;
@@ -347,6 +349,7 @@ interface ProviderOperationGroup {
   getFunctionAppStacks is ArmProviderActionSync<
     Response = FunctionAppStackCollection,
     Parameters = {
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
       /**
        * Stack OS Type
        */
@@ -368,6 +371,7 @@ interface ProviderOperationGroup {
     Parameters = {
       ...LocationResourceParameter;
 
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
       /**
        * Stack OS Type
        */
@@ -389,6 +393,7 @@ interface ProviderOperationGroup {
     Parameters = {
       ...LocationResourceParameter;
 
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
       /**
        * Stack OS Type
        */
@@ -408,6 +413,7 @@ interface ProviderOperationGroup {
   getWebAppStacks is ArmProviderActionSync<
     Response = WebAppStackCollection,
     Parameters = {
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
       /**
        * Stack OS Type
        */
@@ -428,6 +434,7 @@ interface ProviderOperationGroup {
     Response = ApplicationStackCollection,
     Scope = SubscriptionActionScope,
     Parameters = {
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("osTypeSelected")
       osTypeSelected?: ProviderOsTypeSelected;

@@ -2080,6 +2080,7 @@ model NetworkConfiguration {
   @doc("The configuration for endpoints on Compute Nodes in the Batch Pool.")
   endpointConfiguration?: BatchPoolEndpointConfiguration;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The Public IPAddress configuration for Compute Nodes in the Batch Pool.")
   @clientName("publicIpAddressConfiguration", "!go")
   publicIPAddressConfiguration?: BatchPublicIpAddressConfiguration;
@@ -3769,6 +3770,7 @@ model UpgradePolicy {
   @doc("Specifies the mode of an upgrade to virtual machines in the scale set.<br /><br /> Possible values are:<br /><br /> **Manual** - You  control the application of updates to virtual machines in the scale set. You do this by using the manualUpgrade action.<br /><br /> **Automatic** - All virtual machines in the scale set are automatically updated at the same time.<br /><br /> **Rolling** - Scale set performs updates in batches with an optional pause time in between.")
   mode: UpgradeMode;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("Configuration parameters used for performing automatic OS Upgrade. The configuration parameters used for performing automatic OS upgrade.")
   @clientName("automaticOsUpgradePolicy")
@@ -4032,6 +4034,7 @@ model InboundEndpoint {
   @doc("The protocol of the endpoint.")
   protocol: InboundEndpointProtocol;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The public IP address of the Compute Node.")
   @clientName("publicIpAddress")
   publicIPAddress: ipV4Address;
@@ -4094,6 +4097,7 @@ model BatchNodeDisableSchedulingOptions {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("The remote login settings for a Compute Node.")
 model BatchNodeRemoteLoginSettings {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The IPv6 address used for remote login to the Compute Node.")
   @clientName("ipv6RemoteLoginIpAddress")
   ipv6RemoteLoginIPAddress?: ipV6Address;
@@ -4101,6 +4105,7 @@ model BatchNodeRemoteLoginSettings {
   @doc("The port used for remote login to the Compute Node.")
   ipv6RemoteLoginPort?: int32;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The IP address used for remote login to the Compute Node.")
   @clientName("remoteLoginIpAddress")
   remoteLoginIPAddress: ipV4Address;

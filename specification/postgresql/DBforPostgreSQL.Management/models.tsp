@@ -2187,6 +2187,7 @@ model MigrationSubstateDetails {
   validationDetails?: ValidationDetails;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 /**
  * Migration state of a database.
  */
@@ -3931,6 +3932,7 @@ union NetworkMigrationState {
   Cancelled: "Cancelled",
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 /**
  * Status of a network migration operation.
  */

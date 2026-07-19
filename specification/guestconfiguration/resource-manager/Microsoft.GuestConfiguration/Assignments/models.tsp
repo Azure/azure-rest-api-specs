@@ -10,6 +10,7 @@ using Azure.ResourceManager;
 
 namespace Microsoft.GuestConfiguration;
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 /**
  * Error response of an operation failure.
  */

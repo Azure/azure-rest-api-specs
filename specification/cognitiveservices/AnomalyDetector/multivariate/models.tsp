@@ -96,6 +96,7 @@ model MultivariateBatchDetectionResultSummary {
   setupInfo: MultivariateBatchDetectionOptions;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 @doc("Error information that the API returned.")
 @error
 model ErrorResponse {

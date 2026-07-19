@@ -532,6 +532,7 @@ model AzureContainerFolderDocumentLocation extends DocumentLocation {
   managedIdentityClientId?: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 /** Error response. */
 @error
 model ErrorResponse is Azure.Core.Foundations.ErrorResponseBase<Error>;

@@ -581,6 +581,7 @@ model ServiceImpactingEventIncidentProperties {
   incidentType?: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 /**
  * Error details.
  */

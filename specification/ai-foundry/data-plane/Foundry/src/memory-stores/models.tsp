@@ -306,6 +306,7 @@ model MemoryStoreDeleteScopeResponse {
   deleted: boolean;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 @doc("Response for deleting a memory item from a memory store.")
 @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
 model DeleteMemoryResponse {

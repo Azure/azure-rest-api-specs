@@ -11,6 +11,7 @@ using Azure.Core.Foundations;
 
 namespace Microsoft.PlanetaryComputer;
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 @doc("Generic paged response model")
 @friendlyName("{name}PagedResponse", T)
 model Page<T> {

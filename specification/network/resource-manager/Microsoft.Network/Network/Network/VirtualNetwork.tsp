@@ -90,6 +90,7 @@ interface VirtualNetworks {
     void,
     ArmResponse<IPAddressAvailabilityResult>,
     Parameters = {
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
       /**
        * The private IP address to be verified.
        */

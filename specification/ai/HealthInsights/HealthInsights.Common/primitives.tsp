@@ -32,6 +32,7 @@ alias ServiceTraits = NoRepeatableRequests &
   RequestIdResponseHeaderTrait &
   QueryParametersTrait<Azure.Core.ExpandQueryParameter>;
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 model HealthInsightsErrorResponse is Azure.Core.Foundations.ErrorResponse {
   ...RequestIdResponseHeader;
 }

@@ -467,6 +467,7 @@ model AvailableCluster {
   location?: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 /**
  * Error response indicates Event Hub service is not able to process the incoming request. The reason is provided in the error message.
  */

@@ -16513,6 +16513,7 @@ model InboundSecurityRules {
   appliesOn?: string[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 /**
  * The error object.
  */

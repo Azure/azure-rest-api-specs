@@ -2131,6 +2131,7 @@ model OperationInputs {
   name: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 /**
  * The properties indicating whether a given IoT hub name is available.
  */

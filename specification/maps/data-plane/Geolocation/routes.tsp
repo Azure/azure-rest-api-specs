@@ -40,6 +40,7 @@ interface Geolocation {
       @path
       format: JsonFormat = JsonFormat.json;
 
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
       /**
        * The IP address. Both IPv4 and IPv6 are allowed.
        */

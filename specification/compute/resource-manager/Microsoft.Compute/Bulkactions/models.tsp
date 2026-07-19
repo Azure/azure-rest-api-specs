@@ -790,6 +790,7 @@ model CancelOperationsResponse {
 
 // ----------- BulkOperationErrors ---------
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 @@identifiers(ListBulkOperationErrorsResponse.value, #[]);
 @added(Versions.`2026-07-06-preview`)
 @doc("The response from listing bulk operation errors")

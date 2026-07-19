@@ -776,6 +776,7 @@ model ErrorAdditionalInfo {
   info?: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 /** The error response. */
 @error
 model ErrorResponse {

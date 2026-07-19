@@ -629,6 +629,7 @@ model HandleItem {
   /** SMB session ID in context of which the file handle was opened */
   @Xml.name("SessionId") sessionId: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   /** Client IP that opened the handle */
   @Xml.name("ClientIp") clientIp: string;
 

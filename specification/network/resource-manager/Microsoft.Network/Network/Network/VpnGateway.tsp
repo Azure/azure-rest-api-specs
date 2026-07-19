@@ -162,6 +162,7 @@ interface VpnGateways {
     void,
     VpnGateway,
     Parameters = {
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
       /**
        * VpnGateway ipConfigurationId to specify the gateway instance.
        */

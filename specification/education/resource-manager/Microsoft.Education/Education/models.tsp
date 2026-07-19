@@ -233,6 +233,7 @@ model ErrorResponseBody {
   error?: ErrorResponse;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 /**
  * Describes the format of Error response.
  */

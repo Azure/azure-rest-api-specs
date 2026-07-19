@@ -12,6 +12,7 @@ namespace Microsoft.Resources;
 
 model DeploymentListResult is Azure.Core.Page<DeploymentExtended>;
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 /**
  * Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.)
  */

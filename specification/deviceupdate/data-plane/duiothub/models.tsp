@@ -408,6 +408,7 @@ model Step {
   updateId?: UpdateId;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 /**
  * Common error response.
  */

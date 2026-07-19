@@ -3279,6 +3279,7 @@ model ListDataSourcesResult {
   value: SearchIndexerDataSource[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 /** The type of the keysOrIds. */
 model DocumentKeysOrIds {
   /** document keys to be reset */
@@ -3902,6 +3903,7 @@ model ListSkillsetsResult {
   value: SearchIndexerSkillset[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 /** The type of the skill names. */
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict"
 model SkillNames {
@@ -4499,6 +4501,7 @@ model GetIndexStatisticsResult {
   vectorIndexSize: int64;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
 /** Specifies some text and analysis components used to break that text into tokens. */
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model AnalyzeRequest {

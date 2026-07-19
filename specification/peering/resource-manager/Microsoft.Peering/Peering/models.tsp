@@ -406,6 +406,7 @@ model CdnPeeringPrefixProperties {
   bgpCommunity?: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 /**
  * The error response that indicates why an operation has failed.
  */

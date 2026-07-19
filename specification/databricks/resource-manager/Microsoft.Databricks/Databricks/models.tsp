@@ -1112,6 +1112,7 @@ model Resource {
   type?: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 /**
  * Contains details when the response code indicates an error.
  */

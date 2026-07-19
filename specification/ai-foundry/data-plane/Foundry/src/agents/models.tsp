@@ -105,6 +105,7 @@ model UpdateAgentRequest {
   ...OmitProperties<CreateAgentVersionRequest, "draft">;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 model PatchAgentRequest {
   @doc("The endpoint configuration for the agent")
   agent_endpoint?: AgentEndpointConfig;
@@ -784,6 +785,7 @@ model CreateAgentFromCodeContent {
   ...CreateAgentVersionFromCodeContent;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
 /**
  * Response body for downloading a hosted agent's code zip.
  * Body is the raw zip bytes; `Content-Type` declares `application/zip` so clients
@@ -898,6 +900,7 @@ model AgentSessionResource {
 
 // ── Session Request Models ──────────────────────────────
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
 /** Request body for creating a new agent session. */
 @doc("Request to create a new agent session.")
 model CreateAgentSessionRequest {
