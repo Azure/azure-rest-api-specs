@@ -557,6 +557,30 @@ union TlsVersion {
    * 1.2
    */
   `1.2`: "1.2",
+
+  /**
+   * 1.3
+   */
+  @added(Versions.v2026_06_15_preview)
+  `1.3`: "1.3",
+}
+
+/**
+ * Specifies the IP address type for the namespace.
+ */
+@added(Versions.v2026_06_15_preview)
+union IpAddressType {
+  string,
+
+  /**
+   * IPv4
+   */
+  IPv4: "IPv4",
+
+  /**
+   * DualStack - supports both IPv4 and IPv6.
+   */
+  DualStack: "DualStack",
 }
 
 /**
@@ -3577,6 +3601,64 @@ model NamespaceProperties {
    * Minimum TLS version of the publisher allowed to publish to this namespace. Only TLS version 1.2 is supported.
    */
   minimumTlsVersionAllowed?: TlsVersion;
+
+  /**
+   * Specifies the IP address type for the namespace. Defaults to IPv4.
+   */
+  @added(Versions.v2026_06_15_preview)
+  ipAddressType?: IpAddressType;
+
+  /**
+   * Auto-scale configuration for the namespace resource
+   */
+  @added(Versions.v2026_06_15_preview)
+  autoScaleConfiguration?: AutoScaleConfiguration;
+}
+
+/**
+ * Auto-scale configuration for the namespace resource.
+ */
+@added(Versions.v2026_06_15_preview)
+model AutoScaleConfiguration {
+  /**
+   * Indicates whether auto-scaling is enabled for the namespace. When enabled, the namespace
+   * will automatically scale between minimumThroughputUnits and maximumThroughputUnits based
+   * on usage patterns.
+   */
+  enableAutoScale?: boolean;
+
+  /**
+   * Minimum number of Throughput Units for auto-scaling. Valid only when EnableAutoScale is true.
+   */
+  minimumThroughputUnits?: int32;
+
+  /**
+   * Maximum number of Throughput Units for auto-scaling. Valid only when EnableAutoScale is true.
+   */
+  maximumThroughputUnits?: int32;
+}
+
+/**
+ * UpdateAutoScaleConfiguration definition.
+ */
+@added(Versions.v2026_06_15_preview)
+model UpdateAutoScaleConfiguration {
+  /**
+   * Indicates whether auto-scaling is enabled for the namespace. When enabled, the namespace
+   * will automatically scale between minimumThroughputUnits and maximumThroughputUnits based
+   * on usage patterns.
+   */
+  enableAutoScale?: boolean;
+
+  /**
+   * Minimum number of Throughput Units for auto-scaling. Valid only when EnableAutoScale is true.
+   */
+  minimumThroughputUnits?: int32;
+
+  /**
+   * Maximum number of Throughput Units for auto-scaling. Valid only when EnableAutoScale is true.
+   */
+  maximumThroughputUnits?: int32;
 }
 
 /**
@@ -3971,12 +4053,19 @@ model NamespaceUpdateParameterProperties {
    */
   @identifiers(#[])
   inboundIpRules?: InboundIpRule[];
-}
 
-/**
- * Properties of the topic spaces configuration info of a namespace.
- */
-model UpdateTopicSpacesConfigurationInfo {
+  /**
+   * Specifies the IP address type for the namespace. Defaults to IPv4.
+   */
+  @added(Versions.v2026_06_15_preview)
+  ipAddressType?: IpAddressType;
+
+  /**
+   * Auto-scale configuration for the namespace resource
+   */
+  @added(Versions.v2026_06_15_preview)
+  autoScaleConfiguration?: UpdateAutoScaleConfiguration;
+}
   /**
    * Indicate if Topic Spaces Configuration is enabled for the namespace. Default is Disabled.
    */
