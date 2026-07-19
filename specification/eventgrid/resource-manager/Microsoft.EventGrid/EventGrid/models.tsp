@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.Core;
 using Azure.ResourceManager.Foundations;
@@ -557,6 +558,30 @@ union TlsVersion {
    * 1.2
    */
   `1.2`: "1.2",
+
+  /**
+   * 1.3
+   */
+  @added(Versions.v2026_06_15_preview)
+  `1.3`: "1.3",
+}
+
+/**
+ * The IP address type for the namespace.
+ */
+@added(Versions.v2026_06_15_preview)
+union IpAddressType {
+  string,
+
+  /**
+   * IPv4
+   */
+  IPv4: "IPv4",
+
+  /**
+   * DualStack
+   */
+  DualStack: "DualStack",
 }
 
 /**
@@ -3574,9 +3599,21 @@ model NamespaceProperties {
   inboundIpRules?: InboundIpRule[];
 
   /**
-   * Minimum TLS version of the publisher allowed to publish to this namespace. Only TLS version 1.2 is supported.
+   * Minimum TLS version of the publisher allowed to publish to this namespace. Allowed values: 1.0, 1.1, 1.2, 1.3.
    */
   minimumTlsVersionAllowed?: TlsVersion;
+
+  /**
+   * IP Address Type for the namespace.
+   */
+  @added(Versions.v2026_06_15_preview)
+  ipAddressType?: IpAddressType;
+
+  /**
+   * Auto-scale configuration for the namespace resource.
+   */
+  @added(Versions.v2026_06_15_preview)
+  autoScaleConfiguration?: AutoScaleConfiguration;
 }
 
 /**
@@ -3971,6 +4008,66 @@ model NamespaceUpdateParameterProperties {
    */
   @identifiers(#[])
   inboundIpRules?: InboundIpRule[];
+
+  /**
+   * Minimum TLS version of the publisher allowed to publish to this namespace.
+   */
+  @added(Versions.v2026_06_15_preview)
+  minimumTlsVersionAllowed?: TlsVersion;
+
+  /**
+   * IP Address Type for the namespace.
+   */
+  @added(Versions.v2026_06_15_preview)
+  ipAddressType?: IpAddressType;
+
+  /**
+   * Auto-scale configuration for the namespace resource.
+   */
+  @added(Versions.v2026_06_15_preview)
+  autoScaleConfiguration?: UpdateAutoScaleConfiguration;
+}
+
+/**
+ * Auto-scale configuration for the namespace resource.
+ */
+@added(Versions.v2026_06_15_preview)
+model AutoScaleConfiguration {
+  /**
+   * Indicates whether auto-scaling is enabled for the namespace.
+   */
+  enableAutoScale?: boolean;
+
+  /**
+   * Minimum number of Throughput Units for auto-scaling. Valid only when EnableAutoScale is true.
+   */
+  minimumThroughputUnits?: int32;
+
+  /**
+   * Maximum number of Throughput Units for auto-scaling. Valid only when EnableAutoScale is true.
+   */
+  maximumThroughputUnits?: int32;
+}
+
+/**
+ * UpdateAutoScaleConfiguration definition.
+ */
+@added(Versions.v2026_06_15_preview)
+model UpdateAutoScaleConfiguration {
+  /**
+   * Indicates whether auto-scaling is enabled for the namespace.
+   */
+  enableAutoScale?: boolean;
+
+  /**
+   * Minimum number of Throughput Units for auto-scaling. Valid only when EnableAutoScale is true.
+   */
+  minimumThroughputUnits?: int32;
+
+  /**
+   * Maximum number of Throughput Units for auto-scaling. Valid only when EnableAutoScale is true.
+   */
+  maximumThroughputUnits?: int32;
 }
 
 /**
