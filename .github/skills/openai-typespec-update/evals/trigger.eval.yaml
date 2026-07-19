@@ -1,0 +1,93 @@
+name: openai-typespec-update-trigger-eval
+description: Trigger and anti-trigger tests for the openai-typespec-update skill
+type: capability
+
+environment: azsdk-mcp-mock
+
+tags:
+  area: openai-typespec-update
+  type: ci-gate
+
+config:
+  runs: 1
+  timeout: "90s"
+  model: claude-opus-4.6
+  executor: copilot-sdk
+
+scoring:
+  threshold: 0.8
+
+stimuli:
+  - name: trigger-update-openai-typespec-definitions
+    prompt: "Update the OpenAI TypeSpec definitions."
+    environment:
+      skills:
+        - ..
+    graders:
+      - type: skill-invocation
+        config:
+          required: ["openai-typespec-update"]
+  - name: trigger-bump-openai-typespec
+    prompt: "Bump openai-typespec to the latest version."
+    environment:
+      skills:
+        - ..
+    graders:
+      - type: skill-invocation
+        config:
+          required: ["openai-typespec-update"]
+  - name: trigger-upgrade-azure-tools-openai-typespec
+    prompt: "Upgrade @azure-tools/openai-typespec."
+    environment:
+      skills:
+        - ..
+    graders:
+      - type: skill-invocation
+        config:
+          required: ["openai-typespec-update"]
+  - name: trigger-refresh-openai-typespec-models-views
+    prompt: "Refresh the OpenAI TypeSpec models and views."
+    environment:
+      skills:
+        - ..
+    graders:
+      - type: skill-invocation
+        config:
+          required: ["openai-typespec-update"]
+
+  - name: anti-trigger-general-typespec-authoring
+    prompt: "Add a new property to my TypeSpec model and update the API version."
+    environment:
+      skills:
+        - ..
+    graders:
+      - type: skill-invocation
+        config:
+          disallowed: ["openai-typespec-update"]
+  - name: anti-trigger-generate-sdk
+    prompt: "Generate the SDK for this package."
+    environment:
+      skills:
+        - ..
+    graders:
+      - type: skill-invocation
+        config:
+          disallowed: ["openai-typespec-update"]
+  - name: anti-trigger-release-sdk-package
+    prompt: "Release my SDK package."
+    environment:
+      skills:
+        - ..
+    graders:
+      - type: skill-invocation
+        config:
+          disallowed: ["openai-typespec-update"]
+  - name: anti-trigger-review-openapi-spec-naming
+    prompt: "Review this OpenAPI spec for naming conventions."
+    environment:
+      skills:
+        - ..
+    graders:
+      - type: skill-invocation
+        config:
+          disallowed: ["openai-typespec-update"]

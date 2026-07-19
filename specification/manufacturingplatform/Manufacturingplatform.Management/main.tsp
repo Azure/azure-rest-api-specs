@@ -115,6 +115,7 @@ model MdsResourceProperties {
   @pattern("^[{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$|^$")
   aksAdminGroupId?: string = "00000000-0000-0000-0000-000000000000";
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   @doc("Service Url")
   serviceUrl?: string;
