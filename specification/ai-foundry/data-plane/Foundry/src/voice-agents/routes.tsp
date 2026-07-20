@@ -31,7 +31,7 @@ interface AgentEndpointConversations {
    */
   @summary("Get a voice agent conversation")
   @get
-  @route("/voice_agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}")
+  @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}")
   @extension("x-ms-foundry-meta", PromptVoiceConversationRequiredPreviews)
   getAgentConversation is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
@@ -51,7 +51,7 @@ interface AgentEndpointConversations {
    */
   @summary("Delete a voice agent conversation")
   @delete
-  @route("/voice_agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}")
+  @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}")
   @extension("x-ms-foundry-meta", PromptVoiceConversationRequiredPreviews)
   deleteAgentConversation is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
@@ -72,7 +72,7 @@ interface AgentEndpointConversations {
    */
   @summary("List responses in a voice agent conversation")
   @get
-  @route("/voice_agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/responses")
+  @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/responses")
   @list
   @extension("x-ms-foundry-meta", PromptVoiceConversationRequiredPreviews)
   listAgentConversationResponses is FoundryDataPlanePreviewOperation<
@@ -95,7 +95,7 @@ interface AgentEndpointConversations {
    */
   @summary("Get a voice agent conversation response")
   @get
-  @route("/voice_agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/responses/{response_id}")
+  @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/responses/{response_id}")
   @extension("x-ms-foundry-meta", PromptVoiceConversationRequiredPreviews)
   getAgentConversationResponse is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
@@ -120,7 +120,7 @@ interface AgentEndpointConversations {
    */
   @summary("List items produced by a voice agent conversation response")
   @get
-  @route("/voice_agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/responses/{response_id}/items")
+  @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/responses/{response_id}/items")
   @list
   @extension("x-ms-foundry-meta", PromptVoiceConversationRequiredPreviews)
   listAgentConversationResponseItems is FoundryDataPlanePreviewOperation<
@@ -147,7 +147,7 @@ interface AgentEndpointConversations {
    */
   @summary("List items in a voice agent conversation")
   @get
-  @route("/voice_agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items")
+  @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items")
   @list
   @extension("x-ms-foundry-meta", PromptVoiceConversationRequiredPreviews)
   listAgentConversationItems is FoundryDataPlanePreviewOperation<
@@ -173,7 +173,7 @@ interface AgentEndpointConversations {
    */
   @summary("Get a voice agent conversation item")
   @get
-  @route("/voice_agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}")
+  @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}")
   @extension("x-ms-foundry-meta", PromptVoiceConversationRequiredPreviews)
   getAgentConversationItem is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
@@ -200,7 +200,7 @@ interface AgentEndpointConversations {
    */
   @summary("Get a voice agent conversation item's audio metadata")
   @get
-  @route("/voice_agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}/audio")
+  @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}/audio")
   @extension("x-ms-foundry-meta", PromptVoiceConversationRequiredPreviews)
   getAgentConversationItemAudio is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
@@ -226,7 +226,7 @@ interface AgentEndpointConversations {
    */
   @summary("Stream a voice agent conversation item's audio")
   @get
-  @route("/voice_agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}/audio/content")
+  @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}/audio/content")
   @extension("x-ms-foundry-meta", PromptVoiceConversationRequiredPreviews)
   getAgentConversationItemAudioContent is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
@@ -254,7 +254,7 @@ interface AgentEndpointConversations {
    */
   @summary("Get a voice agent conversation's merged recording metadata")
   @get
-  @route("/voice_agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/audio")
+  @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/audio")
   @extension("x-ms-foundry-meta", PromptVoiceConversationRequiredPreviews)
   getAgentConversationAudio is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
@@ -278,7 +278,7 @@ interface AgentEndpointConversations {
    */
   @summary("Stream a voice agent conversation's merged recording")
   @get
-  @route("/voice_agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/audio/content")
+  @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/audio/content")
   @extension("x-ms-foundry-meta", PromptVoiceConversationRequiredPreviews)
   getAgentConversationAudioContent is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
