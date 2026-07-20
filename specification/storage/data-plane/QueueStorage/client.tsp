@@ -384,7 +384,11 @@ op setMetadataRequiredMetadataQueue is StorageOperationNoBody<
 @@clientName(AccessPolicy.permission, "permissions", "java");
 @@clientName(UserDelegationKey.signedOid, "signedObjectId", "java");
 @@clientName(UserDelegationKey.signedTid, "signedTenantId", "java");
-@@clientName(UserDelegationKey.signedDelegatedUserTid, "signedDelegatedUserTenantId", "java");
+@@clientName(
+  UserDelegationKey.signedDelegatedUserTid,
+  "signedDelegatedUserTenantId",
+  "java"
+);
 @@clientName(KeyInfo.delegatedUserTid, "delegatedUserTenantId", "java");
 
 @@clientName(Storage.Queues, "AzureQueueStorage", "java");
