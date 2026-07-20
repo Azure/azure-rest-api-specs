@@ -146,6 +146,7 @@ union IPFamily {
 }
 
 @doc("CachingType enums")
+@clientName("BatchCachingType", "java")
 union CachingType {
   string,
 
@@ -4201,6 +4202,7 @@ model BatchNodeVMExtension {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("The vm extension instance view.")
+@clientName("VirtualMachineExtensionInstanceView", "java")
 model VMExtensionInstanceView {
   @doc("The name of the vm extension instance view.")
   name?: string;

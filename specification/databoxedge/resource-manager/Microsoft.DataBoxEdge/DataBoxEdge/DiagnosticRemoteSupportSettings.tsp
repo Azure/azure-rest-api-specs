@@ -16,11 +16,10 @@ namespace Microsoft.DataBoxEdge;
  */
 @singleton("default")
 @parentResource(DataBoxEdgeDevice)
-model DiagnosticRemoteSupportSettings
-  is Azure.ResourceManager.ProxyResource<
-    DiagnosticRemoteSupportSettingsProperties,
-    false
-  > {
+model DiagnosticRemoteSupportSettings is Azure.ResourceManager.ProxyResource<
+  DiagnosticRemoteSupportSettingsProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = DiagnosticRemoteSupportSettings,
     KeyName = "diagnosticRemoteSupportSetting",

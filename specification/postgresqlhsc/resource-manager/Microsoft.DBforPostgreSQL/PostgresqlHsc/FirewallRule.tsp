@@ -15,8 +15,10 @@ namespace Microsoft.DBforPostgreSQL;
  * Represents a cluster firewall rule.
  */
 @parentResource(Cluster)
-model FirewallRule
-  is Azure.ResourceManager.ProxyResource<FirewallRuleProperties, false> {
+model FirewallRule is Azure.ResourceManager.ProxyResource<
+  FirewallRuleProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = FirewallRule,
     KeyName = "firewallRuleName",
