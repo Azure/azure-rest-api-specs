@@ -388,6 +388,42 @@ interface VoiceAgents {
   >;
 
   /**
+   * Enables the specified voice agent, allowing it to accept new requests.
+   * This operation is idempotent — enabling an already-enabled voice agent returns success with no side effects.
+   */
+  @summary("Enable a voice agent")
+  @post
+  @route("/voice_agents/{agent_name}:enable")
+  @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+  @tag("Voice Agents")
+  enableVoiceAgent is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      @doc("The name of the voice agent to enable.")
+      @path agent_name: string;
+    },
+    NoContentResponse
+  >;
+
+  /**
+   * Disables the specified voice agent, preventing it from accepting new requests.
+   * This operation is idempotent — disabling an already-disabled voice agent returns success with no side effects.
+   */
+  @summary("Disable a voice agent")
+  @post
+  @route("/voice_agents/{agent_name}:disable")
+  @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+  @tag("Voice Agents")
+  disableVoiceAgent is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      @doc("The name of the voice agent to disable.")
+      @path agent_name: string;
+    },
+    NoContentResponse
+  >;
+
+  /**
    * Generates and creates a voice-first prompt agent from high-level inputs plus a natural-language goal.
    * The operation expands the goal into a full, editable definition, creates the agent through the standard
    * voice create path, and returns the created `VoiceAgentObject`. The caller can edit or override the

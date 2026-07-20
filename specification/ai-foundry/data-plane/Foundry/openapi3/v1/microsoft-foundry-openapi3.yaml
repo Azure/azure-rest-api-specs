@@ -39147,6 +39147,104 @@ paths:
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
+  /voice_agents/{agent_name}:disable:
+    post:
+      operationId: VoiceAgents_disableVoiceAgent
+      summary: Disable a voice agent
+      description: |-
+        Disables the specified voice agent, preventing it from accepting new requests.
+        This operation is idempotent — disabling an already-disabled voice agent returns success with no side effects.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - VoiceAgents=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the voice agent to disable.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '204':
+          description: There is no content to send for this request, but the headers may be useful.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Voice Agents
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+  /voice_agents/{agent_name}:enable:
+    post:
+      operationId: VoiceAgents_enableVoiceAgent
+      summary: Enable a voice agent
+      description: |-
+        Enables the specified voice agent, allowing it to accept new requests.
+        This operation is idempotent — enabling an already-enabled voice agent returns success with no side effects.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - VoiceAgents=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the voice agent to enable.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '204':
+          description: There is no content to send for this request, but the headers may be useful.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Voice Agents
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
   /voice_agents:generate:
     post:
       operationId: VoiceAgents_generateVoiceAgent
