@@ -42,11 +42,6 @@ union VerificationStatus {
   VerificationPending: "VerificationPending",
 
   /**
-   * The one-time passcode was sent but expired before it was confirmed.
-   */
-  VerificationExpired: "VerificationExpired",
-
-  /**
    * The receiver endpoint has been successfully verified.
    */
   Verified: "Verified",
