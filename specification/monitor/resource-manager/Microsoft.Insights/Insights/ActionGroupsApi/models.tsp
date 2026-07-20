@@ -26,6 +26,47 @@ union IncidentManagementService {
 }
 
 /**
+ * Indicates the email verification status of the receiver for the email One-Time Passcode (OTP) verification feature.
+ */
+union VerificationStatus {
+  string,
+
+  /**
+   * Verification is not applicable and the receiver is treated as allowed (legacy behavior).
+   */
+  LegacyAllowed: "LegacyAllowed",
+
+  /**
+   * A one-time passcode has been sent and is awaiting user confirmation.
+   */
+  VerificationPending: "VerificationPending",
+
+  /**
+   * The one-time passcode was sent but expired before it was confirmed.
+   */
+  VerificationExpired: "VerificationExpired",
+
+  /**
+   * The receiver endpoint has been successfully verified.
+   */
+  Verified: "Verified",
+}
+
+/**
+ * An email receiver.
+ */
+model EmailReceiver {
+  ...Microsoft.Common.EmailReceiver;
+
+  /**
+   * The email verification status of the receiver. This is a read-only property that reflects the current state of the email One-Time Passcode (OTP) verification for this receiver.
+   */
+  @added(Versions.v2026_09_01)
+  @visibility(Lifecycle.Read)
+  verificationStatus?: VerificationStatus;
+}
+
+/**
  * An Azure action group.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

@@ -1065,6 +1065,11 @@
           "$ref": "#/definitions/Microsoft.Common.ReceiverStatus",
           "description": "The receiver status of the e-mail.",
           "readOnly": true
+        },
+        "verificationStatus": {
+          "$ref": "#/definitions/Microsoft.Common.VerificationStatus",
+          "description": "The email verification status of the receiver. This is a read-only property that reflects the current state of the email One-Time Passcode (OTP) verification for this receiver.",
+          "readOnly": true
         }
       },
       "required": [
@@ -1143,6 +1148,42 @@
         "countryCode",
         "phoneNumber"
       ]
+    },
+    "Microsoft.Common.VerificationStatus": {
+      "type": "string",
+      "description": "Indicates the email verification status of the receiver for the email One-Time Passcode (OTP) verification feature.",
+      "enum": [
+        "LegacyAllowed",
+        "VerificationPending",
+        "VerificationExpired",
+        "Verified"
+      ],
+      "x-ms-enum": {
+        "name": "VerificationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "LegacyAllowed",
+            "value": "LegacyAllowed",
+            "description": "Verification is not applicable and the receiver is treated as allowed (legacy behavior)."
+          },
+          {
+            "name": "VerificationPending",
+            "value": "VerificationPending",
+            "description": "A one-time passcode has been sent and is awaiting user confirmation."
+          },
+          {
+            "name": "VerificationExpired",
+            "value": "VerificationExpired",
+            "description": "The one-time passcode was sent but expired before it was confirmed."
+          },
+          {
+            "name": "Verified",
+            "value": "Verified",
+            "description": "The receiver endpoint has been successfully verified."
+          }
+        ]
+      }
     },
     "Microsoft.Common.VoiceReceiver": {
       "type": "object",
