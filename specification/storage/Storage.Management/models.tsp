@@ -1935,6 +1935,17 @@ model FileServicePropertiesProperties {
    * Protocol settings for file service
    */
   protocolSettings?: ProtocolSettings;
+
+  /** Directory lease settings for the file service. */
+  @added(Versions.v2026_04_01)
+  directoryLease?: DirectoryLeaseSettings;
+}
+
+/** Settings for SMB directory lease. */
+@added(Versions.v2026_04_01)
+model DirectoryLeaseSettings {
+  /** Indicates whether SMB directory lease is enabled. Default is true. */
+  enabled?: boolean;
 }
 
 /**

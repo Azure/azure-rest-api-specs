@@ -3685,6 +3685,9 @@
           "PutFileServices": {
             "$ref": "./examples/FileServicesPut.json"
           },
+          "PutFileServices_EnableDirectoryLease": {
+            "$ref": "./examples/FileServicesPut_EnableDirectoryLease.json"
+          },
           "PutFileServices_EnableSMBMultichannel": {
             "$ref": "./examples/FileServicesPut_EnableSMBMultichannel.json"
           },
@@ -9579,6 +9582,16 @@
         }
       }
     },
+    "DirectoryLeaseSettings": {
+      "type": "object",
+      "description": "Settings for SMB directory lease.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates whether SMB directory lease is enabled. Default is true."
+        }
+      }
+    },
     "DirectoryServiceOptions": {
       "type": "string",
       "description": "Indicates the directory service used. Note that this enum may be extended in the future.",
@@ -10127,6 +10140,10 @@
         "protocolSettings": {
           "$ref": "#/definitions/ProtocolSettings",
           "description": "Protocol settings for file service"
+        },
+        "directoryLease": {
+          "$ref": "#/definitions/DirectoryLeaseSettings",
+          "description": "Directory lease settings for the file service."
         }
       }
     },
