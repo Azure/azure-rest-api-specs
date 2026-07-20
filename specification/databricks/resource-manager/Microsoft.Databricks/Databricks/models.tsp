@@ -474,6 +474,7 @@ model WorkspaceProperties {
   /**
    * The workspace URL which is of the format 'adb-{workspaceId}.{random}.azuredatabricks.net'
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   workspaceUrl?: string;
 
