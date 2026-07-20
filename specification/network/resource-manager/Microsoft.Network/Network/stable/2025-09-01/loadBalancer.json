@@ -355,6 +355,9 @@
           "Create load balancer with Sync Mode Property on Pool": {
             "$ref": "./examples/LoadBalancerCreateWithSyncModePropertyOnPool.json"
           },
+          "Create load balancer with advanced mode": {
+            "$ref": "./examples/LoadBalancerCreateWithAdvancedMode.json"
+          },
           "Create load balancer with inbound nat pool": {
             "$ref": "./examples/LoadBalancerCreateWithInboundNatPool.json"
           },
@@ -1903,6 +1906,10 @@
         "ddosSettings": {
           "$ref": "./common.json#/definitions/Common.DdosFrontendIpConfigurationSettings",
           "description": "The DDoS protection settings associated with the frontend IP configuration."
+        },
+        "enableConnectionTracking": {
+          "type": "boolean",
+          "description": "Whether connection tracking is enabled on this frontend IP configuration. When enabled, connection tracking is applied to all UDP and high availability (HA) load balancing rules that use this frontend IP configuration. The per-rule enableConnectionTracking on individual load balancing rules is not supported; configure connection tracking at the frontend IP configuration level instead."
         }
       }
     },
@@ -2244,6 +2251,14 @@
         "scope": {
           "$ref": "./common.json#/definitions/Common.LoadBalancerScope",
           "description": "Indicates the scope of the load balancer: external (Public) or internal (Private)."
+        },
+        "mode": {
+          "$ref": "./common.json#/definitions/Common.LoadBalancerMode",
+          "description": "The load balancer mode. Set to `Advanced` to enable additional capabilities on a Standard SKU load balancer. Advanced mode must be specified at creation and cannot be changed afterward.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       }
     },

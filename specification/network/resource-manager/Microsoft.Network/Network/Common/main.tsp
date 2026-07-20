@@ -298,6 +298,19 @@ union LoadBalancerScope {
 }
 
 /**
+ * The load balancer mode. Set to `Advanced` to enable additional capabilities on a Standard SKU load balancer. Advanced mode must be specified at creation and cannot be changed afterward.
+ */
+@added(Versions.v2025_09_01)
+union LoadBalancerMode {
+  string,
+
+  /**
+   * Advanced mode, which enables additional capabilities on a Standard SKU load balancer.
+   */
+  Advanced: "Advanced",
+}
+
+/**
  * If the encrypted VNet allows VM that does not support encryption. This field is for future support, AllowUnencrypted is the only supported value at general availability.
  */
 union VirtualNetworkEncryptionEnforcement {
@@ -2006,6 +2019,12 @@ model FrontendIPConfigurationPropertiesFormat {
    */
   @added(Versions.v2025_07_01)
   ddosSettings?: DdosFrontendIpConfigurationSettings;
+
+  /**
+   * Whether connection tracking is enabled on this frontend IP configuration. When enabled, connection tracking is applied to all UDP and high availability (HA) load balancing rules that use this frontend IP configuration. The per-rule enableConnectionTracking on individual load balancing rules is not supported; configure connection tracking at the frontend IP configuration level instead.
+   */
+  @added(Versions.v2025_09_01)
+  enableConnectionTracking?: boolean;
 }
 
 /** DDoS protection settings for a frontend IP configuration. */
@@ -4000,6 +4019,13 @@ model LoadBalancerPropertiesFormat {
    * Indicates the scope of the load balancer: external (Public) or internal (Private).
    */
   scope?: LoadBalancerScope;
+
+  /**
+   * The load balancer mode. Set to `Advanced` to enable additional capabilities on a Standard SKU load balancer. Advanced mode must be specified at creation and cannot be changed afterward.
+   */
+  @added(Versions.v2025_09_01)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  mode?: LoadBalancerMode;
 }
 
 /**
