@@ -4111,6 +4111,149 @@
         }
       }
     },
+    "/agents/{agent_name}/versions/{agent_version}/invocations/docs/asyncapi.json": {
+      "get": {
+        "operationId": "AgentInvocations_getAgentInvocationAsyncApiSpecJson",
+        "description": "Retrieves the AsyncAPI (JSON) specification for an agent version's event-driven\ninvocation contract (e.g. the `invocations_ws` WebSocket protocol). AsyncAPI is the\ncompanion to OpenAPI for streaming/bidirectional surfaces that OpenAPI cannot express.\nReturns 404 if the agent does not publish an AsyncAPI specification. Publishing is\noptional; when published, both JSON and YAML representations are available.",
+        "parameters": [
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "agent_version",
+            "in": "path",
+            "required": true,
+            "description": "The version of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "unevaluatedProperties": {}
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Invocations"
+        ]
+      }
+    },
+    "/agents/{agent_name}/versions/{agent_version}/invocations/docs/asyncapi.yaml": {
+      "get": {
+        "operationId": "AgentInvocations_getAgentInvocationAsyncApiSpecYaml",
+        "description": "Retrieves the AsyncAPI (YAML) specification for an agent version's event-driven\ninvocation contract. Companion to `getAgentInvocationAsyncApiSpecJson`; the path\nextension is authoritative for the returned content type (no `Accept` negotiation).\nReturns 404 if the agent does not publish an AsyncAPI specification.",
+        "parameters": [
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "agent_version",
+            "in": "path",
+            "required": true,
+            "description": "The version of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/yaml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Invocations"
+        ]
+      }
+    },
     "/agents/{agent_name}/versions/{agent_version}/sessions/{session_id}:logstream": {
       "get": {
         "operationId": "Agents_getSessionLogStream",
@@ -20737,6 +20880,14 @@
                     "type": "object",
                     "unevaluatedProperties": {},
                     "description": "The structured inputs to the response that can participate in prompt template substitution or tool argument bindings."
+                  },
+                  "user_security_context": {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/AzureUserSecurityContext"
+                      }
+                    ],
+                    "description": "User security context contains several parameters that describe the application itself, and the end user that interacts with the application. These fields assist your security operations teams to investigate and mitigate security incidents by providing a comprehensive approach to protecting your AI applications. [Learn more](https://aka.ms/TP4AI/Documentation/EndUserContext) about protecting AI applications using Microsoft Defender for Cloud."
                   }
                 }
               }
@@ -32128,6 +32279,28 @@
             "RedTeams=V1Preview"
           ]
         }
+      },
+      "AzureUserSecurityContext": {
+        "type": "object",
+        "properties": {
+          "application_name": {
+            "type": "string",
+            "description": "The name of the application. Sensitive personal information should not be included in this field."
+          },
+          "end_user_id": {
+            "type": "string",
+            "description": "This identifier is the Microsoft Entra ID (formerly Azure Active Directory) user object ID used to authenticate end-users within the generative AI application. Sensitive personal information should not be included in this field."
+          },
+          "end_user_tenant_id": {
+            "type": "string",
+            "description": "The Microsoft 365 tenant ID the end user belongs to. It's required when the generative AI application is multitenant."
+          },
+          "source_ip": {
+            "type": "string",
+            "description": "Captures the original client's IP address."
+          }
+        },
+        "description": "User security context contains several parameters that describe the application itself, and the end user that interacts with the application. These fields assist your security operations teams to investigate and mitigate security incidents by providing a comprehensive approach to protecting your AI applications. [Learn more](https://aka.ms/TP4AI/Documentation/EndUserContext) about protecting AI applications using Microsoft Defender for Cloud."
       },
       "BaseCredentials": {
         "type": "object",
@@ -44498,89 +44671,6 @@
         ],
         "description": "Controls which (if any) tool is called by the model.\n`none` means the model will not call any tool and instead generates a message.\n`auto` means the model can pick between generating a message or calling one or more tools.\n`required` means the model must call one or more tools.\nSpecifying a particular tool via `{\"type\": \"function\", \"function\": {\"name\": \"my_function\"}}` forces the model to call that tool.\n`none` is the default when no tools are present. `auto` is the default if tools are present."
       },
-      "OpenAI.ChatModel": {
-        "type": "string",
-        "enum": [
-          "gpt-5.4",
-          "gpt-5.4-mini",
-          "gpt-5.4-nano",
-          "gpt-5.4-mini-2026-03-17",
-          "gpt-5.4-nano-2026-03-17",
-          "gpt-5.3-chat-latest",
-          "gpt-5.2",
-          "gpt-5.2-2025-12-11",
-          "gpt-5.2-chat-latest",
-          "gpt-5.2-pro",
-          "gpt-5.2-pro-2025-12-11",
-          "gpt-5.1",
-          "gpt-5.1-2025-11-13",
-          "gpt-5.1-codex",
-          "gpt-5.1-mini",
-          "gpt-5.1-chat-latest",
-          "gpt-5",
-          "gpt-5-mini",
-          "gpt-5-nano",
-          "gpt-5-2025-08-07",
-          "gpt-5-mini-2025-08-07",
-          "gpt-5-nano-2025-08-07",
-          "gpt-5-chat-latest",
-          "gpt-4.1",
-          "gpt-4.1-mini",
-          "gpt-4.1-nano",
-          "gpt-4.1-2025-04-14",
-          "gpt-4.1-mini-2025-04-14",
-          "gpt-4.1-nano-2025-04-14",
-          "o4-mini",
-          "o4-mini-2025-04-16",
-          "o3",
-          "o3-2025-04-16",
-          "o3-mini",
-          "o3-mini-2025-01-31",
-          "o1",
-          "o1-2024-12-17",
-          "o1-preview",
-          "o1-preview-2024-09-12",
-          "o1-mini",
-          "o1-mini-2024-09-12",
-          "gpt-4o",
-          "gpt-4o-2024-11-20",
-          "gpt-4o-2024-08-06",
-          "gpt-4o-2024-05-13",
-          "gpt-4o-audio-preview",
-          "gpt-4o-audio-preview-2024-10-01",
-          "gpt-4o-audio-preview-2024-12-17",
-          "gpt-4o-audio-preview-2025-06-03",
-          "gpt-4o-mini-audio-preview",
-          "gpt-4o-mini-audio-preview-2024-12-17",
-          "gpt-4o-search-preview",
-          "gpt-4o-mini-search-preview",
-          "gpt-4o-search-preview-2025-03-11",
-          "gpt-4o-mini-search-preview-2025-03-11",
-          "chatgpt-4o-latest",
-          "codex-mini-latest",
-          "gpt-4o-mini",
-          "gpt-4o-mini-2024-07-18",
-          "gpt-4-turbo",
-          "gpt-4-turbo-2024-04-09",
-          "gpt-4-0125-preview",
-          "gpt-4-turbo-preview",
-          "gpt-4-1106-preview",
-          "gpt-4-vision-preview",
-          "gpt-4",
-          "gpt-4-0314",
-          "gpt-4-0613",
-          "gpt-4-32k",
-          "gpt-4-32k-0314",
-          "gpt-4-32k-0613",
-          "gpt-3.5-turbo",
-          "gpt-3.5-turbo-16k",
-          "gpt-3.5-turbo-0301",
-          "gpt-3.5-turbo-0613",
-          "gpt-3.5-turbo-1106",
-          "gpt-3.5-turbo-0125",
-          "gpt-3.5-turbo-16k-0613"
-        ]
-      },
       "OpenAI.ChunkingStrategyRequestParam": {
         "type": "object",
         "required": [
@@ -44874,7 +44964,8 @@
         ],
         "properties": {
           "model": {
-            "$ref": "#/components/schemas/OpenAI.ModelIdsCompaction"
+            "type": "string",
+            "description": "The model deployment to use for the compaction of this response."
           },
           "input": {
             "anyOf": [
@@ -47979,12 +48070,8 @@
             "description": "A list of messages comprising the conversation so far. Depending on the\n  [model](/docs/models) you use, different message types (modalities) are\n  supported, like [text](/docs/guides/text-generation),\n  [images](/docs/guides/vision), and [audio](/docs/guides/audio)."
           },
           "model": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.ModelIdsShared"
-              }
-            ],
-            "description": "Model ID used to generate the response, like `gpt-4o` or `o3`. OpenAI\n  offers a wide range of models with different capabilities, performance\n  characteristics, and price points. Refer to the [model guide](/docs/models)\n  to browse and compare available models."
+            "type": "string",
+            "description": "The model deployment to use for this chat completion."
           },
           "modalities": {
             "$ref": "#/components/schemas/OpenAI.ResponseModalities"
@@ -48245,6 +48332,14 @@
             "maxItems": 128,
             "description": "Deprecated in favor of `tools`.\n  A list of functions the model may generate JSON inputs for.",
             "deprecated": true
+          },
+          "user_security_context": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AzureUserSecurityContext"
+              }
+            ],
+            "description": "User security context contains several parameters that describe the application itself, and the end user that interacts with the application. These fields assist your security operations teams to investigate and mitigate security incidents by providing a comprehensive approach to protecting your AI applications. [Learn more](https://aka.ms/TP4AI/Documentation/EndUserContext) about protecting AI applications using Microsoft Defender for Cloud."
           }
         }
       },
@@ -48417,7 +48512,7 @@
           },
           "model": {
             "type": "string",
-            "description": "The model used for the chat completion."
+            "description": "The model deployment used for the creation of this chat completion."
           },
           "service_tier": {
             "$ref": "#/components/schemas/OpenAI.ServiceTier"
@@ -65874,56 +65969,6 @@
           "example": "{\n  \"id\": \"VAR_chat_model_id\",\n  \"object\": \"model\",\n  \"created\": 1686935002,\n  \"owned_by\": \"openai\"\n}\n"
         }
       },
-      "OpenAI.ModelIdsCompaction": {
-        "anyOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.ModelIdsResponses"
-          },
-          {
-            "type": "string"
-          },
-          {
-            "type": "null"
-          }
-        ],
-        "description": "Model ID used to generate the response, like `gpt-5` or `o3`. OpenAI offers a wide range of models with different capabilities, performance characteristics, and price points. Refer to the [model guide](/docs/models) to browse and compare available models."
-      },
-      "OpenAI.ModelIdsResponses": {
-        "anyOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.ModelIdsShared"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "o1-pro",
-              "o1-pro-2025-03-19",
-              "o3-pro",
-              "o3-pro-2025-06-10",
-              "o3-deep-research",
-              "o3-deep-research-2025-06-26",
-              "o4-mini-deep-research",
-              "o4-mini-deep-research-2025-06-26",
-              "computer-use-preview",
-              "computer-use-preview-2025-03-11",
-              "gpt-5-codex",
-              "gpt-5-pro",
-              "gpt-5-pro-2025-10-06",
-              "gpt-5.1-codex-max"
-            ]
-          }
-        ]
-      },
-      "OpenAI.ModelIdsShared": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "$ref": "#/components/schemas/OpenAI.ChatModel"
-          }
-        ]
-      },
       "OpenAI.Moderation": {
         "type": "object",
         "required": [
@@ -83172,6 +83217,27 @@
         },
         "description": "A project connection resource."
       },
+      "ToolSearchToolboxTool": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "toolbox_search"
+            ],
+            "description": "The type of the tool. Always `toolbox_search`."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ToolboxTool"
+          }
+        ],
+        "description": "A toolbox search tool stored in a toolbox."
+      },
       "ToolUseFineTuningDataGenerationJobOptions": {
         "type": "object",
         "required": [
@@ -83360,7 +83426,8 @@
             "work_iq_preview": "#/components/schemas/WorkIQPreviewToolboxTool",
             "fabric_iq_preview": "#/components/schemas/FabricIQPreviewToolboxTool",
             "web_iq_preview": "#/components/schemas/WebIQPreviewToolboxTool",
-            "toolbox_search_preview": "#/components/schemas/ToolboxSearchPreviewToolboxTool"
+            "toolbox_search_preview": "#/components/schemas/ToolboxSearchPreviewToolboxTool",
+            "toolbox_search": "#/components/schemas/ToolSearchToolboxTool"
           }
         },
         "description": "An abstract representation of a tool stored in a toolbox."
@@ -83380,6 +83447,7 @@
           "work_iq_preview",
           "fabric_iq_preview",
           "web_iq_preview",
+          "toolbox_search",
           "toolbox_search_preview"
         ],
         "description": "Supported tool types for tools stored in a toolbox."
@@ -84210,12 +84278,12 @@
           },
           "server_label": {
             "type": "string",
-            "description": "(Optional) The label of the WebIQ MCP server to connect to."
+            "description": "The label of the WebIQ MCP server to connect to."
           },
           "server_url": {
             "type": "string",
             "format": "uri",
-            "description": "(Optional) The URL of the WebIQ MCP server. If not provided, the URL from the project connection will be used."
+            "description": "The URL of the WebIQ MCP server. If not provided, the URL from the project connection will be used."
           },
           "require_approval": {
             "anyOf": [
@@ -84229,7 +84297,7 @@
                 "type": "null"
               }
             ],
-            "description": "(Optional) Whether the agent requires approval before executing actions. Default is always.",
+            "description": "Whether the agent requires approval before executing actions. Default is always.",
             "default": "always"
           }
         },
@@ -84264,12 +84332,12 @@
           },
           "server_label": {
             "type": "string",
-            "description": "(Optional) The label of the WebIQ MCP server to connect to."
+            "description": "The label of the WebIQ MCP server to connect to."
           },
           "server_url": {
             "type": "string",
             "format": "uri",
-            "description": "(Optional) The URL of the WebIQ MCP server. If not provided, the URL from the project connection will be used."
+            "description": "The URL of the WebIQ MCP server. If not provided, the URL from the project connection will be used."
           },
           "require_approval": {
             "anyOf": [
@@ -84283,7 +84351,7 @@
                 "type": "null"
               }
             ],
-            "description": "(Optional) Whether the agent requires approval before executing actions. Default is always.",
+            "description": "Whether the agent requires approval before executing actions. Default is always.",
             "default": "always"
           }
         },

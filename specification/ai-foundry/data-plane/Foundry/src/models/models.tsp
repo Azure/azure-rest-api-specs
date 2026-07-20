@@ -129,12 +129,14 @@ model ModelVersion {
   ...AssetBase;
 }
 
-@@visibility(ModelVersion.description,
+@@visibility(
+  ModelVersion.description,
   Lifecycle.Create,
   Lifecycle.Update,
   Lifecycle.Read
 );
-@@visibility(ModelVersion.tags,
+@@visibility(
+  ModelVersion.tags,
   Lifecycle.Create,
   Lifecycle.Update,
   Lifecycle.Read

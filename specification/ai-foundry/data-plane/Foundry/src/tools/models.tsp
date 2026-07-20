@@ -35,10 +35,8 @@ namespace Azure.AI.Projects {
     @removed(Versions.v1)
     memory_search: "memory_search",
   }
-  
-  const PreviewTool = #{
-    required_previews: #["preview_tool"],
-  };
+
+  const PreviewTool = #{ required_previews: #["preview_tool"] };
 
   @@copyVariants(OpenAI.ToolType, Azure.AI.Projects._PreviewAgentToolType);
   @@copyVariants(OpenAI.ToolType, Azure.AI.Projects._AgentToolType);
@@ -829,7 +827,6 @@ namespace Azure.AI.Projects {
      * The ID of the WorkIQ project connection.
      */
     project_connection_id: string;
-
   }
 
   /**
@@ -863,7 +860,6 @@ namespace Azure.AI.Projects {
     #suppress "@azure-tools/typespec-autorest/union-unsupported" "require_approval uses OpenAI union type."
     #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Matching OpenAI MCP tool pattern."
     require_approval?: OpenAI.MCPToolRequireApproval | string | null = "always";
-
   }
 
   /**

@@ -17,7 +17,9 @@ using TypeSpec.OpenAPI;
 namespace Azure.AI.Projects;
 
 const AgentOptimizationRequiredPreviews = #{
-  conditional_previews: #[FoundryFeaturesOptInKeys.agents_optimization_v2_preview],
+  conditional_previews: #[
+    FoundryFeaturesOptInKeys.agents_optimization_v2_preview
+  ],
 };
 
 // ---------------------------------------------------------------------------
