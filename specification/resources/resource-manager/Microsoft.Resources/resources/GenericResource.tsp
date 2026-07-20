@@ -17,8 +17,10 @@ namespace Microsoft.Resources;
  * Resource information.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-model GenericResource
-  is Azure.ResourceManager.Legacy.GenericResource<unknown, true> {
+model GenericResource is Azure.ResourceManager.Legacy.GenericResource<
+  unknown,
+  true
+> {
   /**
    * The plan of the resource.
    */

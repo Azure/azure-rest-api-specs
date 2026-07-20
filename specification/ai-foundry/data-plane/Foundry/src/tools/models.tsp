@@ -893,7 +893,6 @@ namespace Azure.AI.Projects {
     #suppress "@azure-tools/typespec-autorest/union-unsupported" "require_approval uses OpenAI union type."
     #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Matching OpenAI MCP tool pattern."
     require_approval?: OpenAI.MCPToolRequireApproval | string | null = "always";
-
   }
 
   /**

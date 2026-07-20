@@ -12,10 +12,12 @@ import {
 } from "./release-plan.ts";
 import type { TypeSpecProjectInfo } from "./types.ts";
 import {
-  checkNewApiVersionLabel,
   createOctokit,
+  FOLDER_MIGRATION_LABEL,
+  getPullRequestLabels,
   getTypeSpecProjectInfoFromCommit,
   getTypeSpecProjectInfoFromPr,
+  NEW_API_VERSION_LABEL,
 } from "./typespec-project.ts";
 
 /**
@@ -34,6 +36,20 @@ export async function main(): Promise<void> {
     if (args.prNumber) {
       console.log(`Analyzing PR #${args.prNumber} in ${args.owner}/${args.repo}`);
 
+      const labels = await getPullRequestLabels({
+        octokit,
+        owner: args.owner,
+        repo: args.repo,
+        prNumber: args.prNumber,
+      });
+
+      if (labels.includes(FOLDER_MIGRATION_LABEL)) {
+        console.log(
+          `PR #${args.prNumber} has the '${FOLDER_MIGRATION_LABEL}' label. Skipping release plan processing.`,
+        );
+        process.exit(0);
+      }
+
       projectInfo = await getTypeSpecProjectInfoFromPr({
         prNumber: args.prNumber,
         owner: args.owner,
@@ -44,12 +60,7 @@ export async function main(): Promise<void> {
 
       resolvedPrNumber = args.prNumber;
 
-      hasNewApiVersionLabel = await checkNewApiVersionLabel({
-        octokit,
-        owner: args.owner,
-        repo: args.repo,
-        prNumber: args.prNumber,
-      });
+      hasNewApiVersionLabel = labels.includes(NEW_API_VERSION_LABEL);
     } else {
       const commitSha = args.commitSha as string;
       console.log(`Analyzing commit ${commitSha} in ${args.owner}/${args.repo}`);
@@ -61,6 +72,13 @@ export async function main(): Promise<void> {
         workspace: args.workspace,
         octokit,
       });
+
+      if (commitResult.isFolderMigration) {
+        console.log(
+          `Commit ${commitSha} is associated with a '${FOLDER_MIGRATION_LABEL}' labeled PR. Skipping release plan processing.`,
+        );
+        process.exit(0);
+      }
 
       projectInfo = commitResult.projectInfo;
       resolvedPrNumber = commitResult.prNumber;
@@ -93,7 +111,7 @@ export async function main(): Promise<void> {
         apiVersion: projectInfo.apiVersion,
         testReleasePlan: args.testReleasePlan,
       },
-      createAzdskRunner(args.azsdkPath),
+      createAzdskRunner(),
       hasNewApiVersionLabel,
     );
 
@@ -151,6 +169,7 @@ export {
   ensureReleasePlan,
   getApiReleaseType,
   getNextMonthTarget,
+  getReleasePlanById,
   getSdkReleaseType,
   runAzdskCommand,
 } from "./release-plan.ts";
@@ -171,10 +190,13 @@ export {
   createOctokit,
   detectApiVersions,
   findTspConfigDir,
+  FOLDER_MIGRATION_LABEL,
   getAssociatedPrNumber,
   getCommitChangedFiles,
   getPrChangedFiles,
+  getPullRequestLabels,
   getTypeSpecProjectInfoFromCommit,
   getTypeSpecProjectInfoFromPr,
+  NEW_API_VERSION_LABEL,
   parseApiVersion,
 } from "./typespec-project.ts";
