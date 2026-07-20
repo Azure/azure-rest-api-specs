@@ -1,4 +1,5 @@
 import "../common/models.tsp";
+import "../common/servicepatterns.tsp";
 import "./models.tsp";
 
 using TypeSpec.Http;
@@ -7,110 +8,195 @@ using Azure.Core;
 
 namespace Azure.AI.Projects;
 
-alias MemoryStorePreviewHeader = WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.memory_stores_v1_preview>;
-
 @tag("Memory Stores")
 interface MemoryStores {
+  /** Creates a memory store resource with the provided configuration. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  @doc("Create a memory store.")
+  @summary("Create a memory store")
   @operationId("createMemoryStore")
   @post
   @route("/memory_stores")
   @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
-  createMemoryStore is FoundryDataPlaneOperation<
-    CreateMemoryStoreRequest & MemoryStorePreviewHeader,
+  createMemoryStore is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.memory_stores_v1_preview,
+    CreateMemoryStoreRequest,
     MemoryStoreObject
   >;
 
+  /** Updates the specified memory store with the supplied configuration changes. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  @doc("Update a memory store.")
+  @summary("Update a memory store")
   @operationId("updateMemoryStore")
   @post
   @route("/memory_stores/{name}")
   @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
-  updateMemoryStore is FoundryDataPlaneOperation<
-    UpdateMemoryStoreRequest & MemoryStorePreviewHeader,
+  updateMemoryStore is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.memory_stores_v1_preview,
+    UpdateMemoryStoreRequest,
     MemoryStoreObject
   >;
 
+  /** Retrieves the specified memory store and its current configuration. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  @doc("Retrieve a memory store.")
+  @summary("Get a memory store")
   @operationId("getMemoryStore")
   @get
   @route("/memory_stores/{name}")
   @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
-  getMemoryStore is FoundryDataPlaneOperation<
-    GetMemoryStoreRequest & MemoryStorePreviewHeader,
+  getMemoryStore is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.memory_stores_v1_preview,
+    GetMemoryStoreRequest,
     MemoryStoreObject
   >;
 
+  /** Returns the memory stores available to the caller. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  @doc("List all memory stores.")
+  @summary("List memory stores")
   @operationId("listMemoryStores")
   @get
   @list
   @route("/memory_stores")
   @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
-  listMemoryStores is FoundryDataPlaneOperation<
-    ListMemoryStoresRequest & MemoryStorePreviewHeader,
+  listMemoryStores is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.memory_stores_v1_preview,
+    ListMemoryStoresRequest,
     AgentsPagedResult<MemoryStoreObject>
   >;
 
+  /** Deletes the specified memory store. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  @doc("Delete a memory store.")
+  @summary("Delete a memory store")
   @operationId("deleteMemoryStore")
   @delete
   @route("/memory_stores/{name}")
   @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
-  deleteMemoryStore is FoundryDataPlaneOperation<
-    DeleteMemoryStoreRequest & MemoryStorePreviewHeader,
+  deleteMemoryStore is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.memory_stores_v1_preview,
+    DeleteMemoryStoreRequest,
     DeleteMemoryStoreResponse
   >;
 
+  /** Searches the specified memory store for memories relevant to the provided conversation context. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  @doc("Search for relevant memories from a memory store based on conversation context.")
+  @summary("Search memories")
   @operationId("searchMemories")
   @post
   @route("/memory_stores/{name}:search_memories")
   @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
-  searchMemories is FoundryDataPlaneOperation<
-    MemoryStoreSearchRequest & MemoryStorePreviewHeader,
+  searchMemories is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.memory_stores_v1_preview,
+    MemoryStoreSearchRequest,
     MemoryStoreSearchResponse
   >;
 
+  /**
+   * Starts an update that writes conversation memories into the specified memory store.
+   * The operation returns a long-running status location for polling the update result.
+   */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  @doc("Update memory store with conversation memories.")
+  @summary("Update memories")
   @operationId("updateMemories")
   @post
   @route("/memory_stores/{name}:update_memories")
   @pollingOperation(MemoryStores.getUpdateResult)
   @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
-  updateMemories is FoundryDataPlaneOperation<
-    MemoryStoreUpdateRequest & MemoryStorePreviewHeader,
+  updateMemories is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.memory_stores_v1_preview,
+    MemoryStoreUpdateRequest,
     Foundations.AcceptedResponse &
       MemoryStoreUpdateResponse &
       Foundations.LongRunningStatusLocation<MemoryStoreUpdateCompletedResult>
   >;
 
+  /** Retrieves the status and result of a memory store update operation. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  @doc("Get memory store update result.")
+  @summary("Get an update result")
   @operationId("getUpdateResult")
   @get
   @route("/memory_stores/{name}/updates/{update_id}")
   @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
-  getUpdateResult is FoundryDataPlaneOperation<
-    MemoryStoreGetUpdateResultRequest & MemoryStorePreviewHeader,
+  getUpdateResult is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.memory_stores_v1_preview,
+    MemoryStoreGetUpdateResultRequest,
     MemoryStoreUpdateResponse
   >;
 
+  /** Deletes all memories in the specified memory store that are associated with the provided scope. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  @doc("Delete all memories associated with a specific scope from a memory store.")
+  @summary("Delete memories by scope")
   @operationId("deleteScopeMemories")
   @post
   @route("/memory_stores/{name}:delete_scope")
   @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
-  deleteScope is FoundryDataPlaneOperation<
-    MemoryStoreDeleteScopeRequest & MemoryStorePreviewHeader,
+  deleteScope is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.memory_stores_v1_preview,
+    MemoryStoreDeleteScopeRequest,
     MemoryStoreDeleteScopeResponse
+  >;
+
+  /** Creates a memory item in the specified memory store. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  @summary("Create a memory item")
+  @operationId("createMemory")
+  @post
+  @route("/memory_stores/{name}/items")
+  @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
+  createMemory is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.memory_stores_v1_preview,
+    CreateMemoryRequest,
+    MemoryItem
+  >;
+
+  /** Updates the specified memory item in the memory store. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  @summary("Update a memory item")
+  @operationId("updateMemory")
+  @post
+  @route("/memory_stores/{name}/items/{memory_id}")
+  @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
+  updateMemory is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.memory_stores_v1_preview,
+    UpdateMemoryRequest,
+    MemoryItem
+  >;
+
+  /** Retrieves the specified memory item from the memory store. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  @summary("Get a memory item")
+  @operationId("getMemory")
+  @get
+  @route("/memory_stores/{name}/items/{memory_id}")
+  @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
+  getMemory is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.memory_stores_v1_preview,
+    GetMemoryRequest,
+    MemoryItem
+  >;
+
+  /** Returns memory items from the specified memory store. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  @summary("List memory items")
+  @operationId("listMemories")
+  @post
+  @list
+  @route("/memory_stores/{name}/items:list")
+  @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
+  listMemories is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.memory_stores_v1_preview,
+    ListMemoriesRequest,
+    AgentsPagedResult<MemoryItem>
+  >;
+
+  /** Deletes the specified memory item from the memory store. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  @summary("Delete a memory item")
+  @operationId("deleteMemory")
+  @delete
+  @route("/memory_stores/{name}/items/{memory_id}")
+  @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
+  deleteMemory is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.memory_stores_v1_preview,
+    DeleteMemoryRequest,
+    DeleteMemoryResponse
   >;
 }
