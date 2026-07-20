@@ -69941,6 +69941,7 @@ components:
           a2a_preview: '#/components/schemas/A2APreviewTool'
           work_iq_preview: '#/components/schemas/WorkIQPreviewTool'
           fabric_iq_preview: '#/components/schemas/FabricIQPreviewTool'
+          web_iq_preview: '#/components/schemas/WebIQPreviewTool'
           memory_search_preview: '#/components/schemas/MemorySearchPreviewTool'
           code_interpreter: '#/components/schemas/OpenAI.CodeInterpreterTool'
           function: '#/components/schemas/OpenAI.FunctionTool'
@@ -70293,6 +70294,7 @@ components:
             - memory_search_preview
             - work_iq_preview
             - fabric_iq_preview
+            - web_iq_preview
             - toolbox_search_preview
             - azure_ai_search
             - azure_function
@@ -74693,6 +74695,7 @@ components:
           reminder_preview: '#/components/schemas/ReminderPreviewToolboxTool'
           work_iq_preview: '#/components/schemas/WorkIQPreviewToolboxTool'
           fabric_iq_preview: '#/components/schemas/FabricIQPreviewToolboxTool'
+          web_iq_preview: '#/components/schemas/WebIQPreviewToolboxTool'
           toolbox_search_preview: '#/components/schemas/ToolboxSearchPreviewToolboxTool'
           toolbox_search: '#/components/schemas/ToolSearchToolboxTool'
       description: An abstract representation of a tool stored in a toolbox.
@@ -74710,6 +74713,7 @@ components:
         - reminder_preview
         - work_iq_preview
         - fabric_iq_preview
+        - web_iq_preview
         - toolbox_search
         - toolbox_search_preview
       description: Supported tool types for tools stored in a toolbox.
@@ -75197,6 +75201,73 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/VersionSelectionRule'
+    WebIQPreviewTool:
+      type: object
+      required:
+        - type
+        - project_connection_id
+      properties:
+        type:
+          type: string
+          enum:
+            - web_iq_preview
+          description: The object type, which is always 'web_iq_preview'.
+        project_connection_id:
+          type: string
+          description: The ID of the WebIQ project connection.
+        server_label:
+          type: string
+          description: The label of the WebIQ MCP server to connect to.
+        server_url:
+          type: string
+          format: uri
+          description: The URL of the WebIQ MCP server. If not provided, the URL from the project connection will be used.
+        require_approval:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.MCPToolRequireApproval'
+            - type: string
+            - type: 'null'
+          description: Whether the agent requires approval before executing actions. Default is always.
+          default: always
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Tool'
+      description: A WebIQ server-side tool.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
+    WebIQPreviewToolboxTool:
+      type: object
+      required:
+        - type
+        - project_connection_id
+      properties:
+        type:
+          type: string
+          enum:
+            - web_iq_preview
+        project_connection_id:
+          type: string
+          description: The ID of the WebIQ project connection.
+        server_label:
+          type: string
+          description: The label of the WebIQ MCP server to connect to.
+        server_url:
+          type: string
+          format: uri
+          description: The URL of the WebIQ MCP server. If not provided, the URL from the project connection will be used.
+        require_approval:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.MCPToolRequireApproval'
+            - type: string
+            - type: 'null'
+          description: Whether the agent requires approval before executing actions. Default is always.
+          default: always
+      allOf:
+        - $ref: '#/components/schemas/ToolboxTool'
+      description: A WebIQ tool stored in a toolbox.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     WebSearchConfiguration:
       type: object
       required:
