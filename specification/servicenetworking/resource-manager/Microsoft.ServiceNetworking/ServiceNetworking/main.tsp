@@ -83,10 +83,10 @@ union PublicNetworkAccess {
   string,
 
   /** Public network access is enabled (public frontend accessible via a public IP address). */
-  Enabled: "enabled",
+  Enabled: "Enabled",
 
   /** Public network access is disabled (private frontend accessible only through a private endpoint). */
-  Disabled: "disabled",
+  Disabled: "Disabled",
 }
 
 /** Reference to an Association resource. */
