@@ -22,15 +22,17 @@ options:
       - specification/ai-foundry/data-plane/Foundry/src/skills
       - specification/ai-foundry/data-plane/Foundry/src/agents
   "typespec-extension-exporter":
-     keys: x-ms-foundry-meta
-     language: csharp
-     output-shape: list
-     output-file: Azure.AI.Extensions.OpenAI_experimental.csv
-     emitter-output-dir: "{cwd}/../../codegen/src/" # run npx tsp compile from within `TempTypeSpecFiles` folder
-     namespace: Azure.AI.Extensions.OpenAI
+    keys: x-ms-foundry-meta
+    language: csharp
+    output-shape: list
+    output-file: Azure.AI.Extensions.OpenAI_experimental.csv
+    emitter-output-dir: "{cwd}/../../codegen/src/" # run npx tsp compile from within `TempTypeSpecFiles` folder
+    namespace: Azure.AI.Extensions.OpenAI
 imports:
   - "@azure-tools/typespec-azure-core"
   - "@azure-tools/typespec-azure-core/experimental"
+  - "@azure-tools/typespec-client-generator-core"
+  # Note: Imports for OpenAI types may use alternate views per tspconfig.yaml
   - "@azure-tools/openai-typespec/models/responses"
 linter:
   extends:
