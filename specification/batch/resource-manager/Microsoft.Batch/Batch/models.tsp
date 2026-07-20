@@ -1629,14 +1629,14 @@ model ApplicationPackageProperties {
   format?: string;
 
   /**
-   * The URL for the application package in Azure Storage.
+   * The URL for the application package in Azure Storage. This property is only returned for the PUT application package (create or update) operation. For the GET application package and POST activate application package operations, this property is not populated for API versions newer than 2025-06-01.
    */
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   storageUrl?: string;
 
   /**
-   * The UTC time at which the Azure Storage URL will expire.
+   * The UTC time at which the Azure Storage URL will expire. This property is only returned for the PUT application package (create or update) operation. For the GET application package and POST activate application package operations, this property is not populated for API versions newer than 2025-06-01.
    */
   @visibility(Lifecycle.Read)
   storageUrlExpiry?: utcDateTime;
