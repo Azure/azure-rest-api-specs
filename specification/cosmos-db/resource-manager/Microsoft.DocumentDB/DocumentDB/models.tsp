@@ -1207,6 +1207,12 @@ union ServiceType {
   GraphAPICompute: "GraphAPICompute",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   MaterializedViewsBuilder: "MaterializedViewsBuilder",
+
+  /**
+   * Embedding Generator service type.
+   */
+  @added(Versions.v2026_04_01_preview)
+  EmbeddingGenerator: "EmbeddingGenerator",
 }
 
 /**
@@ -1731,6 +1737,12 @@ model DatabaseAccountGetProperties {
    */
   @added(Versions.v2026_04_01_preview)
   enableMaterializedViews?: boolean;
+
+  /**
+   * Flag to indicate whether to enable Integrated Embeddings on the Cosmos DB account
+   */
+  @added(Versions.v2026_04_01_preview)
+  enableEmbeddingGenerator?: boolean;
 
   /**
    * The object that represents the metadata for the Account Keys of the Cosmos DB account.
@@ -2543,6 +2555,12 @@ model DatabaseAccountUpdateProperties {
   enableMaterializedViews?: boolean;
 
   /**
+   * Flag to indicate whether to enable Integrated Embeddings on the Cosmos DB account
+   */
+  @added(Versions.v2026_04_01_preview)
+  enableEmbeddingGenerator?: boolean;
+
+  /**
    * This property is ignored during the update operation, as the metadata is read-only. The object represents the metadata for the Account Keys of the Cosmos DB account.
    */
   @visibility(Lifecycle.Read)
@@ -2778,6 +2796,12 @@ model DatabaseAccountCreateUpdateProperties {
    */
   @added(Versions.v2026_04_01_preview)
   enableMaterializedViews?: boolean;
+
+  /**
+   * Flag to indicate whether to enable Integrated Embeddings on the Cosmos DB account
+   */
+  @added(Versions.v2026_04_01_preview)
+  enableEmbeddingGenerator?: boolean;
 
   /**
    * This property is ignored during the update/create operation, as the metadata is read-only. The object represents the metadata for the Account Keys of the Cosmos DB account.
@@ -4409,6 +4433,55 @@ model VectorEmbedding {
    * The number of dimensions in the vector.
    */
   dimensions: int32;
+
+  /**
+   * The embedding source configuration to automatically generate embeddings at the configured paths.
+   */
+  @added(Versions.v2026_04_01_preview)
+  embeddingSource?: EmbeddingSource;
+}
+
+/**
+ * Represents the embedding source configuration for the Embedding Generator service.
+ * When specified on a vector embedding, the service will automatically generate embeddings from source document fields.
+ */
+@added(Versions.v2026_04_01_preview)
+model EmbeddingSource {
+  /**
+   * The list of source paths in the document to generate embeddings from.
+   */
+  sourcePaths?: string[];
+
+  /**
+   * The endpoint URL of the AI model provider resource.
+   */
+  endpoint?: string;
+
+  /**
+   * The model deployment name used for generating embeddings.
+   */
+  deploymentName?: string;
+
+  /**
+   * The name of the embedding model.
+   */
+  modelName?: string;
+
+  /**
+   * The authentication type Azure Cosmos DB uses when calling the embedding model endpoint.
+   */
+  authType?: EmbeddingSourceAuthenticationType;
+}
+
+/**
+ * The type of authentication to use when calling the embedding provider API.
+ */
+@added(Versions.v2026_04_01_preview)
+union EmbeddingSourceAuthenticationType {
+  string,
+
+  /** Microsoft Entra ID based authentication. */
+  Entra: "Entra",
 }
 
 /**
@@ -9511,6 +9584,56 @@ model MaterializedViewsBuilderServiceResourceCreateUpdateProperties
    * ServiceType for the service.
    */
   serviceType: "MaterializedViewsBuilder";
+}
+
+/**
+ * Describes the service response property for EmbeddingGenerator.
+ */
+@added(Versions.v2026_04_01_preview)
+model EmbeddingGeneratorServiceResource {
+  /**
+   * Properties for EmbeddingGeneratorServiceResource.
+   */
+  properties?: EmbeddingGeneratorServiceResourceProperties;
+}
+
+/**
+ * Properties for EmbeddingGeneratorServiceResource.
+ */
+@added(Versions.v2026_04_01_preview)
+model EmbeddingGeneratorServiceResourceProperties
+  extends ServiceResourceProperties {
+  /**
+   * An array that contains all of the locations for the service.
+   */
+  @visibility(Lifecycle.Read)
+  locations?: EmbeddingGeneratorRegionalServiceResource[];
+
+  /**
+   * ServiceType for the service.
+   */
+  serviceType: "EmbeddingGenerator";
+}
+
+/**
+ * Resource for a regional service location.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2026_04_01_preview)
+model EmbeddingGeneratorRegionalServiceResource
+  extends RegionalServiceResource {}
+
+/**
+ * Properties for Create or Update request for EmbeddingGeneratorServiceResource
+ */
+@added(Versions.v2026_04_01_preview)
+model EmbeddingGeneratorServiceResourceCreateUpdateProperties
+  extends ServiceResourceCreateUpdateProperties {
+  /**
+   * ServiceType for the service.
+   */
+  serviceType: "EmbeddingGenerator";
 }
 
 /**
