@@ -382,6 +382,8 @@ op setMetadataRequiredMetadataQueue is StorageOperationNoBody<
 @@clientName(AccessPolicy.start, "startsOn", "java");
 @@clientName(AccessPolicy.expiry, "expiresOn", "java");
 @@clientName(AccessPolicy.permission, "permissions", "java");
+@@alternateType(AccessPolicy.start, utcDateTime, "java");
+@@alternateType(AccessPolicy.expiry, utcDateTime, "java");
 @@clientName(UserDelegationKey.signedOid, "signedObjectId", "java");
 @@clientName(UserDelegationKey.signedTid, "signedTenantId", "java");
 @@clientName(

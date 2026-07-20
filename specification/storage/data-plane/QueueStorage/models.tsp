@@ -290,6 +290,7 @@ model Error {
 }
 
 /** Statistics for the storage queue service. */
+@Xml.name("StorageServiceStats")
 model QueueServiceStats {
   /** The geo replication stats. */
   @Xml.name("GeoReplication") geoReplication?: GeoReplication;
