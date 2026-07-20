@@ -17,6 +17,7 @@ import {
   getChangedFilesStatuses,
   json,
   markdown,
+  openapi3,
   preview,
   quickstartTemplate,
   readme,
@@ -116,6 +117,8 @@ describe("changedFiles", () => {
     "specification/contosowidgetmanager/Contoso.Management/scenarios/2021-11-01/Employees_Get.json",
     "specification/contosowidgetmanager/Contoso.Management/scenarios/2021-12-01-preview/Employees_Get.json",
     "specification/compute/quickstart-templates/swagger.json",
+    "specification/ai-foundry/data-plane/Foundry/openapi3/v1/microsoft-foundry-openapi3.json",
+    "specification/ai-foundry/data-plane/Foundry/openapi3/virtual-public-preview/microsoft-foundry-openapi3.json",
   ];
 
   const filesResolved = files.map((f) => resolve(f));
@@ -139,6 +142,8 @@ describe("changedFiles", () => {
       "specification/contosowidgetmanager/Contoso.Management/scenarios/2021-11-01/Employees_Get.json",
       "specification/contosowidgetmanager/Contoso.Management/scenarios/2021-12-01-preview/Employees_Get.json",
       "specification/compute/quickstart-templates/swagger.json",
+      "specification/ai-foundry/data-plane/Foundry/openapi3/v1/microsoft-foundry-openapi3.json",
+      "specification/ai-foundry/data-plane/Foundry/openapi3/virtual-public-preview/microsoft-foundry-openapi3.json",
     ];
 
     expect(files.filter(json)).toEqual(expected);
@@ -203,6 +208,8 @@ describe("changedFiles", () => {
     const expected = [
       "not-spec/contosowidgetmanager/data-plane/readme.md",
       "specification/contosowidgetmanager/data-plane/readme.md",
+      "specification/ai-foundry/data-plane/Foundry/openapi3/v1/microsoft-foundry-openapi3.json",
+      "specification/ai-foundry/data-plane/Foundry/openapi3/virtual-public-preview/microsoft-foundry-openapi3.json",
     ];
 
     expect(files.filter(dataPlane)).toEqual(expected);
@@ -289,6 +296,16 @@ describe("changedFiles", () => {
 
     expect(files.filter(swagger)).toEqual(expected);
     expect(filesResolved.filter(swagger)).toEqual(expected.map((f) => resolve(f)));
+  });
+
+  it("filter:openapi3", () => {
+    const expected = [
+      "specification/ai-foundry/data-plane/Foundry/openapi3/v1/microsoft-foundry-openapi3.json",
+      "specification/ai-foundry/data-plane/Foundry/openapi3/virtual-public-preview/microsoft-foundry-openapi3.json",
+    ];
+
+    expect(files.filter(openapi3)).toEqual(expected);
+    expect(filesResolved.filter(openapi3)).toEqual(expected.map((f) => resolve(f)));
   });
 
   describe("getChangedFilesStatuses", () => {

@@ -313,7 +313,8 @@ export function swagger(file) {
     (dataPlane(file) || resourceManager(file)) &&
     !example(file) &&
     !quickstartTemplate(file) &&
-    !scenario(file)
+    !scenario(file) &&
+    !openapi3(file)
   );
 }
 
@@ -323,4 +324,14 @@ export function swagger(file) {
  */
 export function scenario(file) {
   return typeof file === "string" && json(file) && includesSegment(file, "scenarios");
+}
+
+/**
+ * Returns true for OpenAPI 3.x files (files under an "openapi3" path segment).
+ * These files are not Swagger 2.0 and cannot be processed by OAD-based breaking change tools.
+ * @param {string} [file]
+ * @returns {boolean}
+ */
+export function openapi3(file) {
+  return typeof file === "string" && includesSegment(file, "openapi3");
 }
