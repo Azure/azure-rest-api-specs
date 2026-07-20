@@ -15,8 +15,10 @@ namespace NewRelic.Observability;
  * A tag rule belonging to NewRelic account
  */
 @parentResource(NewRelicMonitorResource)
-model TagRule
-  is Azure.ResourceManager.ProxyResource<MonitoringTagRulesProperties, false> {
+model TagRule is Azure.ResourceManager.ProxyResource<
+  MonitoringTagRulesProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = TagRule,
     KeyName = "ruleSetName",
