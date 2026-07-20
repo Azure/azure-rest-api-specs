@@ -27,14 +27,18 @@ using TypeSpec.Versioning;
 @armProviderNamespace
 @service(#{ title: "OperationsClient" })
 @versioned(Versions)
-// FIXME: Common type version v2 is not supported for now. Set to v3.
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
 namespace Microsoft.KubernetesConfiguration;
 
 /**
  * The available API versions.
  */
 enum Versions {
+  /**
+   * The 2024-11-01 API version
+   */
+  v2024_11_01: "2024-11-01",
+
   /**
    * The 2025-03-01 API version.
    */
@@ -59,7 +63,7 @@ enum Versions {
 
 interface Operations
   extends Azure.ResourceManager.Legacy.Operations<
-      ArmResponse<ResourceProviderOperationList>,
+      ArmResponse<OperationListResult>,
       ErrorResponse
     > {}
 @@doc(

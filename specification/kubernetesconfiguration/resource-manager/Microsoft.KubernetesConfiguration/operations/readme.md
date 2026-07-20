@@ -89,18 +89,15 @@ These settings apply only when `--tag=package-2025-04` is specified on the comma
 input-file:
   - stable/2025-04-01/operations.json
 suppressions:
-  - code: OperationsApiSchemaUsesCommonTypes
-    from: operations.json
-    reason: Existing service contract needs to be backward compatible.  
   - code: OperationsApiTenantLevelOnly
     from: operations.json
-    reason: Existing service contract needs to be backward compatible.  
-  - code: ResourceNameRestriction
-    from: operations.json
-    reason: Existing service contract needs to be backward compatible.  
+    reason: User RP limitation
   - code: OperationsApiResponseSchema
     from: operations.json
-    reason: Existing service contract needs to be backward compatible.            
+    reason: Cluster-scoped async operations endpoint uses custom schema for operation status tracking, not standard operations catalog
+  - code: OperationsApiSchemaUsesCommonTypes
+    from: operations.json
+    reason: Cluster-scoped async operations endpoint uses custom schema for operation status tracking, not standard operations catalog
 ```
 
 ---
@@ -113,18 +110,15 @@ These settings apply only when `--tag=package-2025-03` is specified on the comma
 input-file:
   - stable/2025-03-01/operations.json
 suppressions:
-  - code: OperationsApiSchemaUsesCommonTypes
-    from: operations.json
-    reason: Existing service contract needs to be backward compatible.  
   - code: OperationsApiTenantLevelOnly
     from: operations.json
-    reason: Existing service contract needs to be backward compatible.  
-  - code: ResourceNameRestriction
-    from: operations.json
-    reason: Existing service contract needs to be backward compatible.  
+    reason: User RP limitation
   - code: OperationsApiResponseSchema
     from: operations.json
-    reason: Existing service contract needs to be backward compatible.            
+    reason: Cluster-scoped async operations endpoint uses custom schema for operation status tracking, not standard operations catalog
+  - code: OperationsApiSchemaUsesCommonTypes
+    from: operations.json
+    reason: Cluster-scoped async operations endpoint uses custom schema for operation status tracking, not standard operations catalog
 ```
 
 ---
@@ -137,17 +131,8 @@ These settings apply only when `--tag=package-2024-11` is specified on the comma
 input-file:
   - stable/2024-11-01/operations.json
 suppressions:
-  - code: OperationsApiSchemaUsesCommonTypes
-    from: operations.json
-    reason: Existing service contract needs to be backward compatible.  
   - code: OperationsApiTenantLevelOnly
     from: operations.json
-    reason: Existing service contract needs to be backward compatible.  
-  - code: ResourceNameRestriction
-    from: operations.json
-    reason: Existing service contract needs to be backward compatible.  
-  - code: OperationsApiResponseSchema
-    from: operations.json
-    reason: Existing service contract needs to be backward compatible.            
+    reason: User RP limitation
 ```
 
