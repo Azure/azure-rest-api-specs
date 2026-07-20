@@ -275,6 +275,7 @@ These settings apply only when `--tag=package-preview-2025-10-01-preview` is spe
 ```yaml $(tag) == 'package-preview-2025-10-01-preview'
 input-file:
   - preview/2025-10-01-preview/security-Operations.json
+  - preview/2025-10-01-preview/pricings.json
 ```
 
 ### Tag: package-preview-2026-01-01-preview
