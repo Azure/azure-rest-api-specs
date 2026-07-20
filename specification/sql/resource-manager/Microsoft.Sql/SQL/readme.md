@@ -10955,5 +10955,25 @@ suppressions:
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: WorkloadGroups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/workloadGroups/{workloadGroupName}"].delete.responses.default.schema["$ref"]
+  - code: PathForTrackedResourceTypes
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/deletedServers/{deletedServerName}"]
+    reason: DeletedServer is an ARM proxy resource (subscription-scoped), not a tracked resource. The location property on DeletedServer is informational only and does not make it a tracked resource.
+  - code: AllTrackedResourcesMustHaveDelete
+    from: openapi.json
+    where: $.definitions.DeletedServer
+    reason: DeletedServer is an ARM proxy resource, not a tracked resource. It does not require a delete operation.
+  - code: TrackedResourcePatchOperation
+    from: openapi.json
+    where: $.definitions.DeletedServer
+    reason: DeletedServer is an ARM proxy resource, not a tracked resource. It does not require a patch operation.
+  - code: TrackedResourcesMustHavePut
+    from: openapi.json
+    where: $.definitions.DeletedServer
+    reason: DeletedServer is an ARM proxy resource, not a tracked resource. It does not require a put operation.
+  - code: LocationMustHaveXmsMutability
+    from: openapi.json
+    where: $.definitions.DeletedServer.properties.location
+    reason: The location property on DeletedServer is read-only informational data representing the original server location. It is not user-settable and does not support create mutability.
 
 ```

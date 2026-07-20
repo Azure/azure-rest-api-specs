@@ -7394,7 +7394,7 @@ model DataWarehouseUserActivitiesProperties {
 /**
  * The properties of a deleted server.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "DeletedServer is a read-only proxy resource that represents a deleted server record. It has no provisioning lifecycle and does not support provisioning state."
 model DeletedServerProperties {
   /**
    * The version of the deleted server.
@@ -7406,7 +7406,6 @@ model DeletedServerProperties {
    * The deletion time of the deleted server.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   deletionTime?: utcDateTime;
 
   /**
@@ -7416,10 +7415,24 @@ model DeletedServerProperties {
   originalId?: string;
 
   /**
+   * The resource group of the original server before deletion.
+   */
+  @added(Versions.v2025_08_01_preview)
+  @visibility(Lifecycle.Read)
+  originalResourceGroup?: string;
+
+  /**
    * The fully qualified domain name of the server.
    */
   @visibility(Lifecycle.Read)
   fullyQualifiedDomainName?: string;
+
+  /**
+   * The date and time when the deleted server will be permanently deleted (purged).
+   */
+  @added(Versions.v2025_08_01_preview)
+  @visibility(Lifecycle.Read)
+  scheduledPurgeTime?: utcDateTime;
 }
 
 /**
