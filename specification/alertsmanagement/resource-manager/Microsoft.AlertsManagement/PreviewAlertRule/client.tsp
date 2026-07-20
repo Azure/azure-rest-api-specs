@@ -45,13 +45,8 @@ using Microsoft.AlertsManagement;
 // the operationId remains `PreviewAlertRule` (rather than becoming
 // `PreviewAlertRules_PreviewAlertRule`). `@@clientLocation` is scoped to
 // "csharp" so other TCGC-based emitters (Python/Java/JS/Go) also see no change.
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-namespace Microsoft.AlertsManagement {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  interface PreviewAlertRules {}
-}
 
-@@clientLocation(previewAlertRule, PreviewAlertRules, "csharp");
+@@clientLocation(previewAlertRule, "PreviewAlertRules", "csharp");
 
 // C# customizations: rename AlertSeverity enum members to use Word names since numeric
 // names produce illegal identifiers in C# field names.
@@ -107,21 +102,6 @@ namespace Microsoft.AlertsManagement {
 @@usage(LogAlertRuleDimension, Usage.input, "csharp");
 @@usage(LogAlertRuleConditionFailingPeriods, Usage.input, "csharp");
 
-// C# customizations: also explicitly flatten `LogAlertRuleResource.properties`
-// so the scalar fields inside `LogAlertRuleProperties` (description, displayName,
-// severity, enabled, evaluationFrequency, windowSize, overrideQueryTimeRange,
-// etc.) surface on `LogAlertRule` as fully **settable** scalar properties.
-// `@@usage` alone makes `LogAlertRule` constructible, but the C# MPG generator's
-// implicit-flatten still emits these scalars as getter-only delegations to an
-// internal `Properties` field. Combining `Usage.input` with `flattenProperty`
-// turns them into normal `{ get; set; }` C# properties so callers can configure
-// a `LogAlertRule` payload through standard object-initializer syntax.
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required so flattened scalars are settable"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
-  LogAlertRuleResource.properties,
-  "csharp"
-);
-
 // C# customizations: align Azure region strings with the Azure.Core.AzureLocation
 // strongly-typed value used elsewhere in azure-sdk-for-net (matches the
 // existing Azure.ResourceManager.AlertsManagement SDK surface).
@@ -134,20 +114,5 @@ namespace Microsoft.AlertsManagement {
 @@alternateType(
   LogAlertRuleProperties.scopes,
   armResourceIdentifier[],
-  "csharp"
-);
-
-// C# customizations: also flatten `PreviewAlertRuleRequest.properties` so the
-// inner `timespan` (required) and `scheduledQueryRuleProperties` fields surface
-// directly on `PreviewAlertRuleRequest`. Without this, callers must construct
-// a separate `PreviewAlertRuleRequestProperties` envelope and pass it to the
-// outer ctor, which yields a verbose two-step builder pattern (`new Request(loc,
-// new RequestProperties(timespan) { ScheduledQueryRuleProperties = rule })`).
-// Flattening collapses this to the idiomatic single-statement form
-// (`new Request(loc, timespan) { ScheduledQueryRuleProperties = rule }`) and
-// matches how `LogAlertRuleResource.properties` is handled above.
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required so flattened scalars are settable"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
-  PreviewAlertRuleRequest.properties,
   "csharp"
 );
