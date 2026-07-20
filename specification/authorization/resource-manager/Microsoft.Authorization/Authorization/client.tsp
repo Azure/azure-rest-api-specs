@@ -107,6 +107,100 @@ union RoleManagementScopeType {
   "AccessReviewDecisionResourceTarget",
   "csharp"
 );
+
+// Apply reviewed C# names for Access Review and Role Management APIs.
+@@clientName(
+  Microsoft.AttributeNamespaces.AccessReviewScheduleSettings.mailNotificationsEnabled,
+  "IsMailNotificationsEnabled",
+  "csharp"
+);
+@@clientName(
+  Microsoft.AttributeNamespaces.AccessReviewScheduleSettings.reminderNotificationsEnabled,
+  "IsReminderNotificationsEnabled",
+  "csharp"
+);
+@@clientName(
+  Microsoft.AttributeNamespaces.AccessReviewScheduleSettings.defaultDecisionEnabled,
+  "IsDefaultDecisionEnabled",
+  "csharp"
+);
+@@clientName(
+  Microsoft.AttributeNamespaces.AccessReviewScheduleSettings.justificationRequiredOnApproval,
+  "IsJustificationRequiredOnApproval",
+  "csharp"
+);
+@@clientName(
+  Microsoft.AttributeNamespaces.AccessReviewScheduleSettings.autoApplyDecisionsEnabled,
+  "IsAutoApplyDecisionsEnabled",
+  "csharp"
+);
+@@clientName(
+  Microsoft.AttributeNamespaces.AccessReviewScheduleSettings.recommendationsEnabled,
+  "IsRecommendationsEnabled",
+  "csharp"
+);
+@@clientName(
+  Microsoft.AttributeNamespaces.AccessReviewScope.expandNestedMemberships,
+  "IsExpandNestedMemberships",
+  "csharp"
+);
+@@clientName(
+  Microsoft.AttributeNamespaces.AccessReviewScope.includeInheritedAccess,
+  "IsIncludeInheritedAccess",
+  "csharp"
+);
+@@clientName(
+  Microsoft.AttributeNamespaces.AccessReviewScope.includeAccessBelowResource,
+  "IsIncludeAccessBelowResource",
+  "csharp"
+);
+@@clientName(
+  Microsoft.RoleManagementAlerts.Alert,
+  "RoleManagementAlert",
+  "csharp"
+);
+@@clientName(
+  Microsoft.RoleManagementAlerts.AlertConfiguration,
+  "RoleManagementAlertConfiguration",
+  "csharp"
+);
+@@clientName(
+  Microsoft.RoleManagementAlerts.AlertDefinition,
+  "RoleManagementAlertDefinition",
+  "csharp"
+);
+@@clientName(
+  Microsoft.RoleManagementAlerts.AlertIncident,
+  "RoleManagementAlertIncident",
+  "csharp"
+);
+@@clientName(
+  Microsoft.AttributeNamespaces.DecisionResourceType,
+  "AccessReviewDecisionResourceType",
+  "csharp"
+);
+@@clientName(
+  Microsoft.AttributeNamespaces.DefaultDecisionType,
+  "AccessReviewDefaultDecisionType",
+  "csharp"
+);
+@@clientName(
+  Microsoft.RoleManagementAlerts.SeverityLevel,
+  "RoleManagementAlertSeverityLevel",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Authorization.ExcludedPrincipalTypes,
+  "ExcludedPrincipalType",
+  "csharp"
+);
+@@clientName(Microsoft.Authorization.PIMOnlyMode, "PimOnlyMode", "csharp");
+@@clientName(
+  Microsoft.Authorization.PIMOnlyModeSettings,
+  "PimOnlyModeSettings",
+  "csharp"
+);
+
 @@clientName(
   Microsoft.ProviderOperations.ResourceType,
   "AuthorizationProviderResourceType",
