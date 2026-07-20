@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -398,6 +399,27 @@ model GitRepositoryDefinition {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   provider?: ProviderType | null;
+
+  /**
+   * Parameters to authenticate using Workload Identity.
+   */
+  @added(Versions.v2026_07_01_preview)
+  objectLevelIdentity?: ObjectLevelIdentityDefinition;
+
+  /**
+   * Directories to include when cloning the repository via sparse checkout. Only these directories and their subdirectories are included in the fetched artifact.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "sparseCheckout is nullable to support removal via JSON Merge Patch"
+  @added(Versions.v2026_07_01_preview)
+  sparseCheckout?: string[] | null;
+
+  /**
+   * Additional configuration properties to pass through to the Flux custom resource spec. Keys map directly to Flux CR spec field names. Use this for upstream Flux properties not yet available as typed fields.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Nullable to support removal via JSON Merge Patch"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<unknown> is required for pass-through of arbitrary Flux CR spec properties (FR-001)"
+  @added(Versions.v2026_07_01_preview)
+  additionalConfigurations?: Record<unknown> | null;
 }
 
 /**
@@ -471,6 +493,20 @@ model BucketDefinition {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   localAuthRef?: string | null;
+
+  /**
+   * Parameters to authenticate using Workload Identity.
+   */
+  @added(Versions.v2026_07_01_preview)
+  objectLevelIdentity?: ObjectLevelIdentityDefinition;
+
+  /**
+   * Additional configuration properties to pass through to the Flux custom resource spec. Keys map directly to Flux CR spec field names. Use this for upstream Flux properties not yet available as typed fields.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Nullable to support removal via JSON Merge Patch"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<unknown> is required for pass-through of arbitrary Flux CR spec properties (FR-001)"
+  @added(Versions.v2026_07_01_preview)
+  additionalConfigurations?: Record<unknown> | null;
 }
 
 /**
@@ -530,6 +566,20 @@ model AzureBlobDefinition {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   localAuthRef?: string | null;
+
+  /**
+   * Parameters to authenticate using Workload Identity.
+   */
+  @added(Versions.v2026_07_01_preview)
+  objectLevelIdentity?: ObjectLevelIdentityDefinition;
+
+  /**
+   * Additional configuration properties to pass through to the Flux custom resource spec. Keys map directly to Flux CR spec field names. Use this for upstream Flux properties not yet available as typed fields.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Nullable to support removal via JSON Merge Patch"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<unknown> is required for pass-through of arbitrary Flux CR spec properties (FR-001)"
+  @added(Versions.v2026_07_01_preview)
+  additionalConfigurations?: Record<unknown> | null;
 }
 
 /**
@@ -584,6 +634,86 @@ model ManagedIdentityDefinition {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   clientId?: string | null;
+}
+
+/**
+ * Parameters to authenticate using Workload Identity. Defines the Azure identity and optional Kubernetes ServiceAccount configuration for object-level workload identity authentication.
+ */
+@added(Versions.v2026_07_01_preview)
+model ObjectLevelIdentityDefinition {
+  /**
+   * The client ID of the Azure Managed Identity to be used for authentication. This value is used to annotate the Kubernetes ServiceAccount with `azure.workload.identity/client-id`.
+   */
+  clientId: string;
+
+  /**
+   * The tenant ID of the Azure Managed Identity. If omitted, the tenant is inferred from the cluster's workload identity configuration. This value is used to annotate the Kubernetes ServiceAccount with `azure.workload.identity/tenant-id`.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Tenant ID is intentionally nullable to allow inference from cluster config"
+  tenantId?: string | null;
+
+  /**
+   * The name of the Kubernetes ServiceAccount to use for workload identity authentication. If omitted, the agent generates a deterministic name based on the FluxConfiguration name and source type.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Service account name is intentionally nullable to allow auto-generation"
+  serviceAccountName?: string | null;
+}
+
+/**
+ * Parameters to configure kubeConfig for deploying to a remote AKS cluster using workload identity authentication.
+ */
+@added(Versions.v2026_07_01_preview)
+model KubeConfigDefinition {
+  /**
+   * The ARM resource ID of the remote AKS cluster to deploy to (e.g., /subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.ContainerService/managedClusters/{name}).
+   */
+  clusterResourceId: string;
+
+  /**
+   * Workload identity configuration for authenticating to the remote AKS cluster.
+   */
+  objectLevelIdentity: ObjectLevelIdentityDefinition;
+}
+
+/**
+ * Parameters to authenticate using Workload Identity for PATCH operations. All properties are optional per ARM PATCH guidelines.
+ */
+@added(Versions.v2026_07_01_preview)
+model ObjectLevelIdentityPatchDefinition {
+  /**
+   * The client ID of the Azure Managed Identity to be used for authentication. This value is used to annotate the Kubernetes ServiceAccount with `azure.workload.identity/client-id`.
+   */
+  clientId?: string;
+
+  /**
+   * The tenant ID of the Azure Managed Identity. If omitted, the tenant is inferred from the cluster's workload identity configuration. This value is used to annotate the Kubernetes ServiceAccount with `azure.workload.identity/tenant-id`.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Tenant ID is intentionally nullable to allow inference from cluster config"
+  tenantId?: string | null;
+
+  /**
+   * The name of the Kubernetes ServiceAccount to use for workload identity authentication. If omitted, the agent generates a deterministic name based on the FluxConfiguration name and source type.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Service account name is intentionally nullable to allow auto-generation"
+  serviceAccountName?: string | null;
+}
+
+/**
+ * Parameters to configure kubeConfig for PATCH operations. All properties are optional per ARM PATCH guidelines.
+ */
+@added(Versions.v2026_07_01_preview)
+model KubeConfigPatchDefinition {
+  /**
+   * The ARM resource ID of the remote AKS cluster to deploy to (e.g., /subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.ContainerService/managedClusters/{name}).
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Nullable to support PATCH removal of clusterResourceId"
+  clusterResourceId?: string | null;
+
+  /**
+   * Workload identity configuration for authenticating to the remote AKS cluster.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Nullable to support PATCH removal of objectLevelIdentity"
+  objectLevelIdentity?: ObjectLevelIdentityPatchDefinition | null;
 }
 
 /**
@@ -650,6 +780,20 @@ model OCIRepositoryDefinition {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   localAuthRef?: string | null;
+
+  /**
+   * Parameters to authenticate using Workload Identity.
+   */
+  @added(Versions.v2026_07_01_preview)
+  objectLevelIdentity?: ObjectLevelIdentityDefinition;
+
+  /**
+   * Additional configuration properties to pass through to the Flux custom resource spec. Keys map directly to Flux CR spec field names. Use this for upstream Flux properties not yet available as typed fields.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Nullable to support removal via JSON Merge Patch"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<unknown> is required for pass-through of arbitrary Flux CR spec properties (FR-001)"
+  @added(Versions.v2026_07_01_preview)
+  additionalConfigurations?: Record<unknown> | null;
 }
 
 /**
@@ -816,6 +960,20 @@ model KustomizationDefinition {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   postBuild?: PostBuildDefinition | null;
+
+  /**
+   * Parameters to configure kubeConfig for deploying to a remote AKS cluster using workload identity authentication.
+   */
+  @added(Versions.v2026_07_01_preview)
+  kubeConfig?: KubeConfigDefinition;
+
+  /**
+   * Additional configuration properties to pass through to the Flux custom resource spec. Keys map directly to Flux CR spec field names. Use this for upstream Flux properties not yet available as typed fields.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Nullable to support removal via JSON Merge Patch"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<unknown> is required for pass-through of arbitrary Flux CR spec properties (FR-001)"
+  @added(Versions.v2026_07_01_preview)
+  additionalConfigurations?: Record<unknown> | null;
 }
 
 /**
@@ -1092,6 +1250,28 @@ model GitRepositoryPatchDefinition {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   provider?: ProviderType | null;
+
+  /**
+   * Parameters to authenticate using Workload Identity. Set to null in PATCH to remove workload identity configuration.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Nullable to support PATCH removal of workload identity (FR-009)"
+  @added(Versions.v2026_07_01_preview)
+  objectLevelIdentity?: ObjectLevelIdentityPatchDefinition | null;
+
+  /**
+   * Directories to include when cloning the repository via sparse checkout. Only these directories and their subdirectories are included in the fetched artifact. Set to null in PATCH to remove sparse checkout configuration.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "sparseCheckout is nullable to support removal via JSON Merge Patch"
+  @added(Versions.v2026_07_01_preview)
+  sparseCheckout?: string[] | null;
+
+  /**
+   * Additional configuration properties to pass through to the Flux custom resource spec. Keys map directly to Flux CR spec field names. Set to null in PATCH to remove all extension properties.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Nullable to support removal via JSON Merge Patch"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<unknown> is required for pass-through of arbitrary Flux CR spec properties (FR-001)"
+  @added(Versions.v2026_07_01_preview)
+  additionalConfigurations?: Record<unknown> | null;
 }
 
 /**
@@ -1139,6 +1319,21 @@ model BucketPatchDefinition {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   localAuthRef?: string | null;
+
+  /**
+   * Parameters to authenticate using Workload Identity. Set to null in PATCH to remove workload identity configuration.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Nullable to support PATCH removal of workload identity (FR-009)"
+  @added(Versions.v2026_07_01_preview)
+  objectLevelIdentity?: ObjectLevelIdentityPatchDefinition | null;
+
+  /**
+   * Additional configuration properties to pass through to the Flux custom resource spec. Keys map directly to Flux CR spec field names. Set to null in PATCH to remove all extension properties.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Nullable to support removal via JSON Merge Patch"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<unknown> is required for pass-through of arbitrary Flux CR spec properties (FR-001)"
+  @added(Versions.v2026_07_01_preview)
+  additionalConfigurations?: Record<unknown> | null;
 }
 
 /**
@@ -1198,6 +1393,21 @@ model AzureBlobPatchDefinition {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   localAuthRef?: string | null;
+
+  /**
+   * Parameters to authenticate using Workload Identity. Set to null in PATCH to remove workload identity configuration.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Nullable to support PATCH removal of workload identity (FR-009)"
+  @added(Versions.v2026_07_01_preview)
+  objectLevelIdentity?: ObjectLevelIdentityPatchDefinition | null;
+
+  /**
+   * Additional configuration properties to pass through to the Flux custom resource spec. Keys map directly to Flux CR spec field names. Set to null in PATCH to remove all extension properties.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Nullable to support removal via JSON Merge Patch"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<unknown> is required for pass-through of arbitrary Flux CR spec properties (FR-001)"
+  @added(Versions.v2026_07_01_preview)
+  additionalConfigurations?: Record<unknown> | null;
 }
 
 /**
@@ -1320,6 +1530,21 @@ model OCIRepositoryPatchDefinition {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   localAuthRef?: string | null;
+
+  /**
+   * Parameters to authenticate using Workload Identity. Set to null in PATCH to remove workload identity configuration.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Nullable to support PATCH removal of workload identity (FR-009)"
+  @added(Versions.v2026_07_01_preview)
+  objectLevelIdentity?: ObjectLevelIdentityPatchDefinition | null;
+
+  /**
+   * Additional configuration properties to pass through to the Flux custom resource spec. Keys map directly to Flux CR spec field names. Set to null in PATCH to remove all extension properties.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Nullable to support removal via JSON Merge Patch"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<unknown> is required for pass-through of arbitrary Flux CR spec properties (FR-001)"
+  @added(Versions.v2026_07_01_preview)
+  additionalConfigurations?: Record<unknown> | null;
 }
 
 /**
@@ -1484,6 +1709,21 @@ model KustomizationPatchDefinition {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   postBuild?: PostBuildPatchDefinition | null;
+
+  /**
+   * Parameters to configure kubeConfig for deploying to a remote AKS cluster using workload identity authentication. Set to null in PATCH to remove kubeConfig configuration.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Nullable to support PATCH removal of kubeConfig (FR-009)"
+  @added(Versions.v2026_07_01_preview)
+  kubeConfig?: KubeConfigPatchDefinition | null;
+
+  /**
+   * Additional configuration properties to pass through to the Flux custom resource spec. Keys map directly to Flux CR spec field names. Set to null in PATCH to remove all extension properties.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Nullable to support removal via JSON Merge Patch"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<unknown> is required for pass-through of arbitrary Flux CR spec properties (FR-001)"
+  @added(Versions.v2026_07_01_preview)
+  additionalConfigurations?: Record<unknown> | null;
 }
 
 /**

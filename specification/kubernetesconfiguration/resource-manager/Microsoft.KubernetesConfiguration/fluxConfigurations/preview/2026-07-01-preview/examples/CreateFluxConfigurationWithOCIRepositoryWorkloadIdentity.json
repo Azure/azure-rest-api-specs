@@ -1,0 +1,185 @@
+{
+  "operationId": "FluxConfigurations_CreateOrUpdate",
+  "title": "Create Flux Configuration with OCI repository using workload identity",
+  "parameters": {
+    "api-version": "2026-07-01-preview",
+    "clusterName": "clusterName1",
+    "clusterResourceName": "connectedClusters",
+    "clusterRp": "Microsoft.Kubernetes",
+    "fluxConfiguration": {
+      "properties": {
+        "kustomizations": {
+          "apps": {
+            "path": "./apps/production",
+            "dependsOn": [],
+            "syncIntervalInSeconds": 600,
+            "timeoutInSeconds": 600,
+            "prune": true
+          }
+        },
+        "namespace": "flux-system",
+        "ociRepository": {
+          "syncIntervalInSeconds": 1000,
+          "timeoutInSeconds": 1000,
+          "url": "oci://contosoacr.azurecr.io/manifests/app-config",
+          "objectLevelIdentity": {
+            "clientId": "9d2c439a-3b52-4a08-b64f-1d5f3e0d537e",
+            "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+            "serviceAccountName": "contoso-acr-puller"
+          }
+        },
+        "scope": "cluster",
+        "sourceKind": "OCIRepository",
+        "suspend": false
+      }
+    },
+    "fluxConfigurationName": "contoso-oci-config",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subId1"
+  },
+  "responses": {
+    "200": {
+      "description": "Details of the Kubernetes Flux Configuration's current status.",
+      "body": {
+        "name": "contoso-oci-config",
+        "type": "Microsoft.KubernetesConfiguration/fluxConfigurations",
+        "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/fluxConfigurations/contoso-oci-config",
+        "properties": {
+          "azureBlob": null,
+          "bucket": null,
+          "complianceState": "Compliant",
+          "errorMessage": "",
+          "gitRepository": null,
+          "kustomizations": {
+            "apps": {
+              "name": "apps",
+              "path": "./apps/production",
+              "dependsOn": [],
+              "syncIntervalInSeconds": 600,
+              "timeoutInSeconds": 600,
+              "prune": true
+            }
+          },
+          "namespace": "flux-system",
+          "ociRepository": {
+            "syncIntervalInSeconds": 1000,
+            "timeoutInSeconds": 1000,
+            "url": "oci://contosoacr.azurecr.io/manifests/app-config",
+            "objectLevelIdentity": {
+              "clientId": "9d2c439a-3b52-4a08-b64f-1d5f3e0d537e",
+              "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+              "serviceAccountName": "contoso-acr-puller"
+            }
+          },
+          "provisioningState": "Succeeded",
+          "repositoryPublicKey": "",
+          "scope": "cluster",
+          "sourceKind": "OCIRepository",
+          "sourceSyncedCommitId": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2",
+          "sourceUpdatedAt": "2026-05-12T10:30:00Z",
+          "statusUpdatedAt": "2026-05-12T10:30:00Z",
+          "statuses": [
+            {
+              "name": "contoso-oci-config",
+              "appliedBy": null,
+              "complianceState": "Compliant",
+              "helmReleaseProperties": null,
+              "kind": "OCIRepository",
+              "statusConditions": [
+                {
+                  "type": "Ready",
+                  "lastTransitionTime": "2026-05-12T10:30:00Z",
+                  "message": "stored artifact for revision 'a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2'",
+                  "reason": "Succeeded",
+                  "status": "True"
+                }
+              ]
+            },
+            {
+              "name": "contoso-oci-config-apps",
+              "appliedBy": null,
+              "complianceState": "Compliant",
+              "helmReleaseProperties": null,
+              "kind": "Kustomization",
+              "statusConditions": [
+                {
+                  "type": "Ready",
+                  "lastTransitionTime": "2026-05-12T10:30:00Z",
+                  "message": "'Applied revision: a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2'",
+                  "reason": "ReconciliationSucceeded",
+                  "status": "True"
+                }
+              ]
+            }
+          ],
+          "suspend": false
+        },
+        "systemData": {
+          "createdAt": "2026-05-12T10:00:00.000Z",
+          "createdBy": "user@contoso.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2026-05-12T10:00:00.000Z",
+          "lastModifiedBy": "user@contoso.com",
+          "lastModifiedByType": "User"
+        }
+      },
+      "headers": {
+        "Operation-Location": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/fluxConfigurations/contoso-oci-config/{operationId}",
+        "x-ms-async-operation-timeout": "PT48H"
+      }
+    },
+    "201": {
+      "description": "Details of the Kubernetes Flux Configuration's current status.",
+      "body": {
+        "name": "contoso-oci-config",
+        "type": "Microsoft.KubernetesConfiguration/fluxConfigurations",
+        "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/fluxConfigurations/contoso-oci-config",
+        "properties": {
+          "azureBlob": null,
+          "bucket": null,
+          "complianceState": "Pending",
+          "errorMessage": "",
+          "gitRepository": null,
+          "kustomizations": {
+            "apps": {
+              "name": "apps",
+              "path": "./apps/production",
+              "dependsOn": [],
+              "syncIntervalInSeconds": 600,
+              "timeoutInSeconds": 600,
+              "prune": true
+            }
+          },
+          "namespace": "flux-system",
+          "ociRepository": {
+            "syncIntervalInSeconds": 1000,
+            "timeoutInSeconds": 1000,
+            "url": "oci://contosoacr.azurecr.io/manifests/app-config",
+            "objectLevelIdentity": {
+              "clientId": "9d2c439a-3b52-4a08-b64f-1d5f3e0d537e",
+              "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+              "serviceAccountName": "contoso-acr-puller"
+            }
+          },
+          "provisioningState": "Accepted",
+          "repositoryPublicKey": "",
+          "scope": "cluster",
+          "sourceKind": "OCIRepository",
+          "suspend": false
+        },
+        "systemData": {
+          "createdAt": "2026-05-12T10:00:00.000Z",
+          "createdBy": "user@contoso.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2026-05-12T10:00:00.000Z",
+          "lastModifiedBy": "user@contoso.com",
+          "lastModifiedByType": "User"
+        }
+      },
+      "headers": {
+        "Operation-Location": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/fluxConfigurations/contoso-oci-config/{operationId}",
+        "x-ms-async-operation-timeout": "PT48H"
+      }
+    }
+  }
+}
