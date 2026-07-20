@@ -162,3 +162,294 @@ stimuli:
       - "Did NOT flag the @identifiers(#[]) on diagnosticSnapshots -- explicit empty identifier list is the correct pattern for arrays with no identity (positive control)"
       - "Did NOT flag customLabels -- the ClusterLabel item type uses @key on labelKey, which automatically derives x-ms-identifiers (positive control)"
       - 'Never suggested @extension("x-ms-identifiers", ...) as a fix in any finding'
+
+  # 070005 -- x-ms-mutability violations (TSP-EXT-MUTABILITY)
+  - name: detect-typespec-x-ms-mutability-violations
+    environment:
+      files:
+        - src: "../fixtures/typespec/x-ms-mutability-violations.tsp"
+          dest: "specification/storageservice/resource-manager/Microsoft.StorageService/main.tsp"
+    prompt: >
+      Review the following TypeSpec specification file for compliance with
+      Azure REST API Guidelines, ARM RPC rules, and TypeSpec-specific review
+      rules. This is a new service with no previous API version. Report all
+      findings with rule IDs, line numbers, and fix suggestions. Pay special
+      attention to how property visibility and mutability are declared.
+
+      File: specification/storageservice/resource-manager/Microsoft.StorageService/main.tsp
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        config:
+          pattern: "(?i)@extension|x-ms-mutability"
+      - type: output-matches
+        config:
+          pattern: "(?i)@visibility|Lifecycle"
+      - type: output-matches
+        config:
+          pattern: "(?i)TSP-EXT-MUTABILITY|mutability"
+      - type: prompt
+    rubric:
+      - 'Flagged @extension("x-ms-mutability", ["create", "read"]) on location as forbidden -- @extension MUST NOT be used in TypeSpec source; use @visibility(Lifecycle.Create, Lifecycle.Read) instead (TSP-EXT-MUTABILITY)'
+      - 'Flagged @extension("x-ms-mutability", ["read"]) on provisioningState as forbidden -- use @visibility(Lifecycle.Read) instead (TSP-EXT-MUTABILITY)'
+      - 'Flagged @extension("x-ms-mutability", ["create", "update", "read"]) on displayName as forbidden -- use @visibility or omit the decorator entirely for the default (TSP-EXT-MUTABILITY)'
+      - 'Recommended replacing each @extension("x-ms-mutability", ...) call with the corresponding @visibility(Lifecycle.*) decorator'
+      - "Did NOT flag @visibility(Lifecycle.Create, Lifecycle.Read) on encryptionKeySource -- this is the correct pattern (positive control)"
+      - "Did NOT flag @visibility(Lifecycle.Read) on createdAt -- this is the correct pattern (positive control)"
+      - "Did NOT flag the tier property with no visibility decorator -- default visibility is correct (positive control)"
+      - 'Never suggested @extension("x-ms-mutability", ...) as a fix in any finding'
+
+  # 070006 -- x-ms-secret violations (TSP-EXT-SECRET)
+  - name: detect-typespec-x-ms-secret-violations
+    environment:
+      files:
+        - src: "../fixtures/typespec/x-ms-secret-violations.tsp"
+          dest: "specification/databaseservice2/resource-manager/Microsoft.DatabaseService/main.tsp"
+    prompt: >
+      Review the following TypeSpec specification file for compliance with
+      Azure REST API Guidelines, ARM RPC rules, and TypeSpec-specific review
+      rules. This is a new service with no previous API version. Report all
+      findings with rule IDs, line numbers, and fix suggestions. Pay special
+      attention to how secret properties are annotated.
+
+      File: specification/databaseservice2/resource-manager/Microsoft.DatabaseService/main.tsp
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        config:
+          pattern: "(?i)@extension|x-ms-secret"
+      - type: output-matches
+        config:
+          pattern: "(?i)@secret"
+      - type: output-matches
+        config:
+          pattern: "(?i)TSP-EXT-SECRET|secret"
+      - type: prompt
+    rubric:
+      - 'Flagged @extension("x-ms-secret", true) on administratorLoginPassword as forbidden -- @extension MUST NOT be used in TypeSpec source; use @secret instead (TSP-EXT-SECRET)'
+      - 'Flagged @extension("x-ms-secret", true) on primaryConnectionString as forbidden -- use @secret instead (TSP-EXT-SECRET)'
+      - "Flagged the #suppress of secret-prop on secondaryConnectionString as wrong -- removing the suppression and adding @secret is the correct fix (TSP-4.1 / TSP-EXT-SECRET)"
+      - 'Recommended replacing each @extension("x-ms-secret", true) with @secret'
+      - "Did NOT flag @secret on replicationKey -- this is the correct pattern (positive control)"
+      - "Did NOT flag @secret on monitoringConnectionString -- this is the correct pattern (positive control)"
+      - 'Never suggested @extension("x-ms-secret", true) as a fix in any finding'
+
+  # 070007 -- x-ms-client-flatten violations (TSP-EXT-FLATTEN)
+  - name: detect-typespec-x-ms-client-flatten-violations
+    environment:
+      files:
+        - src: "../fixtures/typespec/x-ms-client-flatten-violations.tsp"
+          dest: "specification/virtualmachineservice/resource-manager/Microsoft.VirtualMachineService/main.tsp"
+    prompt: >
+      Review the following TypeSpec specification file for compliance with
+      Azure REST API Guidelines, ARM RPC rules, and TypeSpec-specific review
+      rules. This is a new service with no previous API version. Report all
+      findings with rule IDs, line numbers, and fix suggestions. Pay special
+      attention to how property flattening is declared.
+
+      File: specification/virtualmachineservice/resource-manager/Microsoft.VirtualMachineService/main.tsp
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        config:
+          pattern: "(?i)@extension|x-ms-client-flatten"
+      - type: output-matches
+        config:
+          pattern: "(?i)@flattenProperty|flatten"
+      - type: output-matches
+        config:
+          pattern: "(?i)TSP-EXT-FLATTEN|flatten"
+      - type: prompt
+    rubric:
+      - 'Flagged @extension("x-ms-client-flatten", true) on networkConfig as forbidden -- @extension MUST NOT be used in TypeSpec source; for new APIs do not flatten at all (TSP-EXT-FLATTEN)'
+      - 'Flagged @extension("x-ms-client-flatten", true) on storageProfile as forbidden -- for pre-existing backward-compat flattening use @flattenProperty instead (TSP-EXT-FLATTEN)'
+      - "Recommended removing flattening from networkConfig (new API -- no flattening) and replacing @extension with @flattenProperty on storageProfile (backward-compat only)"
+      - "Did NOT flag @flattenProperty on hardwareProfile -- this is the correct backward-compat pattern (positive control)"
+      - "Did NOT flag the nested osProfile without flattening -- no flattening is correct for new properties (positive control)"
+      - 'Never suggested @extension("x-ms-client-flatten", true) as a fix in any finding'
+
+  # 070008 -- x-ms-enum violations (TSP-EXT-ENUM)
+  - name: detect-typespec-x-ms-enum-violations
+    environment:
+      files:
+        - src: "../fixtures/typespec/x-ms-enum-violations.tsp"
+          dest: "specification/cacheservice/resource-manager/Microsoft.CacheService/main.tsp"
+    prompt: >
+      Review the following TypeSpec specification file for compliance with
+      Azure REST API Guidelines, ARM RPC rules, and TypeSpec-specific review
+      rules. This is a new service with no previous API version. Report all
+      findings with rule IDs, line numbers, and fix suggestions. Pay special
+      attention to how enum metadata is declared.
+
+      File: specification/cacheservice/resource-manager/Microsoft.CacheService/main.tsp
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        config:
+          pattern: "(?i)@extension|x-ms-enum"
+      - type: output-matches
+        config:
+          pattern: "(?i)union|modelAsString"
+      - type: output-matches
+        config:
+          pattern: "(?i)TSP-EXT-ENUM|enum"
+      - type: prompt
+    rubric:
+      - 'Flagged @extension("x-ms-enum", ...) on ProvisioningStateType as forbidden -- @extension MUST NOT be used in TypeSpec source; the Azure TypeSpec emitter derives x-ms-enum automatically from union types (TSP-EXT-ENUM)'
+      - 'Flagged @extension("x-ms-enum", ...) on TierTypeViolation as forbidden -- remove the @extension call; the emitter produces the correct output from the union definition alone (TSP-EXT-ENUM)'
+      - 'Recommended removing all @extension("x-ms-enum", ...) decorators and relying on the emitter to derive x-ms-enum from the TypeSpec union'
+      - "Did NOT flag the ReplicationMode union -- union with string base and no @extension is the correct pattern (positive control)"
+      - 'Never suggested @extension("x-ms-enum", ...) as a fix in any finding'
+
+  # 070009 -- x-ms-discriminator-value violations (TSP-EXT-DISCRIMINATOR)
+  - name: detect-typespec-x-ms-discriminator-value-violations
+    environment:
+      files:
+        - src: "../fixtures/typespec/x-ms-discriminator-value-violations.tsp"
+          dest: "specification/petregistryservice/resource-manager/Microsoft.PetRegistryService/main.tsp"
+    prompt: >
+      Review the following TypeSpec specification file for compliance with
+      Azure REST API Guidelines, ARM RPC rules, and TypeSpec-specific review
+      rules. This is a new service with no previous API version. Report all
+      findings with rule IDs, line numbers, and fix suggestions. Pay special
+      attention to how discriminated union variants are declared.
+
+      File: specification/petregistryservice/resource-manager/Microsoft.PetRegistryService/main.tsp
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        config:
+          pattern: "(?i)@extension|x-ms-discriminator-value"
+      - type: output-matches
+        config:
+          pattern: "(?i)@discriminator|discriminator"
+      - type: output-matches
+        config:
+          pattern: "(?i)TSP-EXT-DISCRIMINATOR|discriminator"
+      - type: prompt
+    rubric:
+      - 'Flagged @extension("x-ms-discriminator-value", "Cat") on Cat as forbidden -- @extension MUST NOT be used in TypeSpec source; use @discriminator on the base model and a literal-typed discriminator property on each variant instead (TSP-EXT-DISCRIMINATOR)'
+      - 'Flagged @extension("x-ms-discriminator-value", "Dog") on Dog as forbidden -- same fix: literal-typed discriminator property (TSP-EXT-DISCRIMINATOR)'
+      - 'Recommended adding @discriminator("kind") to AnimalBase and replacing @extension with a literal kind property on each variant'
+      - "Did NOT flag CarVehicle -- literal-typed vehicleType discriminator property is the correct pattern (positive control)"
+      - "Did NOT flag TruckVehicle -- literal-typed vehicleType discriminator property is the correct pattern (positive control)"
+      - 'Never suggested @extension("x-ms-discriminator-value", ...) as a fix in any finding'
+
+  # 070010 -- x-ms-long-running-operation violations (TSP-EXT-LRO)
+  - name: detect-typespec-x-ms-lro-violations
+    environment:
+      files:
+        - src: "../fixtures/typespec/x-ms-lro-violations.tsp"
+          dest: "specification/computeservice/resource-manager/Microsoft.ComputeService/main.tsp"
+    prompt: >
+      Review the following TypeSpec specification file for compliance with
+      Azure REST API Guidelines, ARM RPC rules, and TypeSpec-specific review
+      rules. This is a new service with no previous API version. Report all
+      findings with rule IDs, line numbers, and fix suggestions. Pay special
+      attention to how long-running operations are declared.
+
+      File: specification/computeservice/resource-manager/Microsoft.ComputeService/main.tsp
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        config:
+          pattern: "(?i)@extension|x-ms-long-running-operation"
+      - type: output-matches
+        config:
+          pattern: "(?i)ArmResourceCreateOrReplaceAsync|ArmResourceDeleteAsync|Async"
+      - type: output-matches
+        config:
+          pattern: "(?i)TSP-EXT-LRO|long-running"
+      - type: prompt
+    rubric:
+      - 'Flagged @extension("x-ms-long-running-operation", true) on the Disks createOrUpdate as forbidden -- @extension MUST NOT be used in TypeSpec source; use ArmResourceCreateOrReplaceAsync instead (TSP-EXT-LRO)'
+      - 'Flagged @extension("x-ms-long-running-operation", true) and @extension("x-ms-long-running-operation-options", ...) on the Disks delete as forbidden -- use ArmResourceDeleteAsync instead (TSP-EXT-LRO)'
+      - "Recommended replacing the manual Disks.createOrUpdate with ArmResourceCreateOrReplaceAsync<Disk> and the manual Disks.delete with ArmResourceDeleteAsync<Disk>"
+      - "Did NOT flag VirtualMachines.createOrUpdate using ArmResourceCreateOrReplaceAsync -- this is the correct pattern (positive control)"
+      - "Did NOT flag VirtualMachines.delete using ArmResourceDeleteAsync -- this is the correct pattern (positive control)"
+      - "Did NOT flag VirtualMachines.restart using ArmResourceActionAsync -- this is the correct pattern (positive control)"
+      - 'Never suggested @extension("x-ms-long-running-operation", ...) as a fix in any finding'
+
+  # 070011 -- x-ms-azure-resource violations (TSP-EXT-AZURE-RESOURCE)
+  - name: detect-typespec-x-ms-azure-resource-violations
+    environment:
+      files:
+        - src: "../fixtures/typespec/x-ms-azure-resource-violations.tsp"
+          dest: "specification/hybridservice/resource-manager/Microsoft.HybridService/main.tsp"
+    prompt: >
+      Review the following TypeSpec specification file for compliance with
+      Azure REST API Guidelines, ARM RPC rules, and TypeSpec-specific review
+      rules. This is a new service with no previous API version. Report all
+      findings with rule IDs, line numbers, and fix suggestions. Pay special
+      attention to how ARM resource models are declared.
+
+      File: specification/hybridservice/resource-manager/Microsoft.HybridService/main.tsp
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        config:
+          pattern: "(?i)@extension|x-ms-azure-resource"
+      - type: output-matches
+        config:
+          pattern: "(?i)TrackedResource|ProxyResource|ExtensionResource"
+      - type: output-matches
+        config:
+          pattern: "(?i)TSP-EXT-AZURE-RESOURCE|azure-resource"
+      - type: prompt
+    rubric:
+      - 'Flagged @extension("x-ms-azure-resource", true) on ClusterViolation as forbidden -- @extension MUST NOT be used in TypeSpec source; extend TrackedResource<ClusterProperties> instead (TSP-EXT-AZURE-RESOURCE)'
+      - 'Flagged @extension("x-ms-azure-resource", true) on SubnetViolation as forbidden -- extend ProxyResource<SubnetProperties> instead (TSP-EXT-AZURE-RESOURCE)'
+      - "Recommended replacing ClusterViolation with a model that extends TrackedResource<ClusterProperties> and SubnetViolation with a model that extends ProxyResource<SubnetProperties>"
+      - "Did NOT flag ManagedCluster extending TrackedResource -- this is the correct pattern (positive control)"
+      - "Did NOT flag ManagedSubnet extending ProxyResource -- this is the correct pattern (positive control)"
+      - 'Never suggested @extension("x-ms-azure-resource", true) as a fix in any finding'
+
+  # 070012 -- x-ms-pageable violations (TSP-EXT-PAGEABLE)
+  - name: detect-typespec-x-ms-pageable-violations
+    environment:
+      files:
+        - src: "../fixtures/typespec/x-ms-pageable-violations.tsp"
+          dest: "specification/queueservice/resource-manager/Microsoft.QueueService/main.tsp"
+    prompt: >
+      Review the following TypeSpec specification file for compliance with
+      Azure REST API Guidelines, ARM RPC rules, and TypeSpec-specific review
+      rules. This is a new service with no previous API version. Report all
+      findings with rule IDs, line numbers, and fix suggestions. Pay special
+      attention to how list (pageable) operations are declared.
+
+      File: specification/queueservice/resource-manager/Microsoft.QueueService/main.tsp
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        config:
+          pattern: "(?i)@extension|x-ms-pageable"
+      - type: output-matches
+        config:
+          pattern: "(?i)ArmResourceListByParent|ArmListBySubscription"
+      - type: output-matches
+        config:
+          pattern: "(?i)TSP-EXT-PAGEABLE|pageable"
+      - type: prompt
+    rubric:
+      - 'Flagged @extension("x-ms-pageable", ...) on Topics.listByResourceGroup as forbidden -- @extension MUST NOT be used in TypeSpec source; use ArmResourceListByParent<Topic> instead (TSP-EXT-PAGEABLE)'
+      - 'Flagged @extension("x-ms-pageable", ...) on Topics.listBySubscription as forbidden -- use ArmListBySubscription<Topic> instead (TSP-EXT-PAGEABLE)'
+      - "Recommended replacing Topics.listByResourceGroup with ArmResourceListByParent<Topic> and Topics.listBySubscription with ArmListBySubscription<Topic>"
+      - "Did NOT flag Queues.listByResourceGroup using ArmResourceListByParent -- this is the correct pattern (positive control)"
+      - "Did NOT flag Queues.listBySubscription using ArmListBySubscription -- this is the correct pattern (positive control)"
+      - 'Never suggested @extension("x-ms-pageable", ...) as a fix in any finding'

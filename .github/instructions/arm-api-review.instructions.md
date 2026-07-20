@@ -1135,6 +1135,7 @@ When reviewing ARM resource-manager swagger files, verify:
 - ✅ Fields have clear ownership — server-owned (readOnly) or client-owned (preserved exactly); no server auto-updates of client fields (OAPI034)
 - ✅ Array ordering preserved in PUT/PATCH responses (OAPI024)
 - ✅ Arrays of objects declare `x-ms-identifiers` via TypeSpec `@key` or `@identifiers` (not `@extension`) — see TSP-ARRAY-IDENTIFIERS
+- ✅ No `@extension(...)` decorators appear in TypeSpec source for any reason — use `@visibility`, `@secret`, `@flattenProperty`, `union`, `@discriminator`, ARM async templates, ARM resource base types, and ARM list templates instead (see `typespec-review.instructions.md` Sections 6.6–6.13)
 - ✅ Property value casing and formatting preserved — no normalization (OAPI026)
 
 ### List APIs
