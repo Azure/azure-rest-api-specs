@@ -395,7 +395,7 @@ interface VoiceAgents {
    */
   @summary("Generate a voice agent")
   @post
-  @route("/voice_agents:generate_voice")
+  @route("/voice_agents:generate")
   @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
   @tag("Voice Agents")
   generateVoiceAgent is FoundryDataPlanePreviewOperation<
