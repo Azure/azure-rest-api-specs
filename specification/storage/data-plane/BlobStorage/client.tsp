@@ -207,12 +207,7 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 @@access(Storage.Blob.BlockBlob.upload, Access.internal, "rust");
 @@clientName(Storage.Blob.Blob.download, "download_internal", "rust");
 @@access(Storage.Blob.Blob.download, Access.internal, "rust");
-@@clientName(
-  Storage.Blob.Container.listBlobs,
-  "list_blobs_xml_internal",
-  "rust"
-);
-@@access(Storage.Blob.Container.listBlobs, Access.internal, "rust");
+@@scope(Storage.Blob.Container.listBlobs, "!rust");
 @@clientName(
   Storage.Blob.Container.listBlobFlatSegmentApacheArrow,
   "list_blobs_arrow_internal",
@@ -225,11 +220,6 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 );
 @@access(ListBlobsResponse, Access.public, "rust");
 @@usage(ListBlobsResponse, Usage.output, "rust");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Paging is implemented by the handwritten Rust client wrapper"
-@@Azure.ClientGenerator.Core.Legacy.disablePageable(
-  Storage.Blob.Container.listBlobs,
-  "rust"
-);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Paging is implemented by the handwritten Rust client wrapper"
 @@Azure.ClientGenerator.Core.Legacy.disablePageable(
   Storage.Blob.Container.listBlobFlatSegmentApacheArrow,
