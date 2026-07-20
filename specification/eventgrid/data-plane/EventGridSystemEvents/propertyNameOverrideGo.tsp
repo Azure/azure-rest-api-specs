@@ -746,11 +746,7 @@ using Microsoft.EventGrid.SystemEvents;
   "ACSChatThreadDeletedReasonType",
   "go"
 );
-@@clientName(
-  AcsMessageDeliveryStatusUpdatedEventData.toBsuid,
-  "ToBSUID",
-  "go"
-);
+@@clientName(AcsMessageDeliveryStatusUpdatedEventData.toBsuid, "ToBSUID", "go");
 @@clientName(AcsMessageReceivedEventData.fromBsuid, "FromBSUID", "go");
 
 // [END] ACS renames (and acronym casing)
