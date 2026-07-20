@@ -14,7 +14,7 @@ namespace Azure.AI.Projects;
 // ============================================================================
 // Voice-first prompt agent definition, configuration, resource, and request
 // models. These are split out from the text `/agents` surface so that
-// `/agents` carries only text agent kinds and `/voice-agents` carries only
+// `/agents` carries only text agent kinds and `/voice_agents` carries only
 // voice-first prompt agents. Shared agent shapes (AgentObject,
 // AgentVersionObject, request/response envelopes) are reused from
 // `../agents/models.tsp` via property spreads to avoid drift.
@@ -33,8 +33,8 @@ const PromptVoiceAgentRequiredPreview = #{
   """)
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
 model PromptVoiceAgentDefinition {
-  @doc("The kind discriminator for a voice-first prompt agent definition. Always `prompt_voice`.")
-  kind: "prompt_voice";
+  @doc("The kind discriminator for a voice-first prompt agent definition. Always `voice`.")
+  kind: "voice";
 
   @doc("Configuration for Responsible AI (RAI) content filtering and safety features.")
   rai_config?: RaiConfig;
