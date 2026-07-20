@@ -14,8 +14,8 @@ namespace Microsoft.Search;
 /**
  * Network security perimeter (NSP) configuration resource
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Pre-existing API contract: provisioning state defined by shared ARM NSP resource."
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Body defined by shared ARM NSP resource template."
 model NetworkSecurityPerimeterConfiguration
   is CommonTypes.NspConfigurationResource<KeyName = "nspConfigName">;
 alias NetworkSecurityPerimeterConfigurationOperations = NspConfigurations<

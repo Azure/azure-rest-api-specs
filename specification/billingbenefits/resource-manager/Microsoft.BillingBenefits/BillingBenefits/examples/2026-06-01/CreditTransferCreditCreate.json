@@ -1,0 +1,113 @@
+{
+  "parameters": {
+    "api-version": "2026-06-01",
+    "body": {
+      "location": "global",
+      "properties": {
+        "fundingSystemId": "e21611dc-a314-4aa7-b590-1ab159b7b41b",
+        "credit": {
+          "grain": "FullTerm",
+          "amount": 20000,
+          "currencyCode": "USD"
+        },
+        "displayName": "Transfer Credit"
+      }
+    },
+    "creditName": "credit_transfer_20260301",
+    "resourceGroupName": "resource_group_name_01",
+    "subscriptionId": "97ee05f2-07d5-494d-908c-081a197f4277"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "credit_transfer_20260301",
+        "type": "Microsoft.BillingBenefits/credits",
+        "id": "/subscriptions/97ee05f2-07d5-494d-908c-081a197f4277/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/credits/credit_transfer_20260301",
+        "location": "global",
+        "properties": {
+          "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/{enrollmentId}",
+          "credit": {
+            "amount": 20000,
+            "currencyCode": "USD",
+            "grain": "FullTerm"
+          },
+          "endAt": "2027-03-01T00:00:00Z",
+          "fundingSystemId": "e21611dc-a314-4aa7-b590-1ab159b7b41b",
+          "productCode": "0002d726-0000-0160-330f-a0b98cdbbdc4",
+          "displayName": "Transfer Credit",
+          "startAt": "2026-03-01T00:00:00Z",
+          "status": "Succeeded",
+          "consumed": {
+            "currencyCode": "USD",
+            "amount": 1250.5
+          },
+          "customerResourceId": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:11111111-1111-1111-1111-111111111111_2025-10-28/customers/22222222-2222-2222-2222-222222222222",
+          "productDetails": {
+            "skuTitle": "Azure Credit - Standard",
+            "productFamily": "Azure",
+            "productType": "Benefit",
+            "appliedOn": [
+              "Consumption"
+            ],
+            "appliedPrice": "marketPrice"
+          }
+        },
+        "systemData": {
+          "createdAt": "2026-03-01T01:01:01.1075056Z",
+          "createdByType": "User",
+          "lastModifiedAt": "2026-03-01T01:01:01.1075056Z",
+          "lastModifiedByType": "User"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "credit_transfer_20260301",
+        "type": "Microsoft.BillingBenefits/credits",
+        "id": "/subscriptions/97ee05f2-07d5-494d-908c-081a197f4277/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/credits/credit_transfer_20260301",
+        "location": "global",
+        "properties": {
+          "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/{enrollmentId}",
+          "credit": {
+            "amount": 20000,
+            "currencyCode": "USD",
+            "grain": "FullTerm"
+          },
+          "endAt": "2027-03-01T00:00:00Z",
+          "fundingSystemId": "e21611dc-a314-4aa7-b590-1ab159b7b41b",
+          "productCode": "0002d726-0000-0160-330f-a0b98cdbbdc4",
+          "displayName": "Transfer Credit",
+          "startAt": "2026-03-01T00:00:00Z",
+          "status": "Pending",
+          "consumed": {
+            "currencyCode": "USD",
+            "amount": 1250.5
+          },
+          "customerResourceId": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:11111111-1111-1111-1111-111111111111_2025-10-28/customers/22222222-2222-2222-2222-222222222222",
+          "productDetails": {
+            "skuTitle": "Azure Credit - Standard",
+            "productFamily": "Azure",
+            "productType": "Benefit",
+            "appliedOn": [
+              "Consumption"
+            ],
+            "appliedPrice": "marketPrice"
+          }
+        },
+        "systemData": {
+          "createdAt": "2026-03-01T01:01:01.1075056Z",
+          "createdByType": "User",
+          "lastModifiedAt": "2026-03-01T01:01:01.1075056Z",
+          "lastModifiedByType": "User"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/97ee05f2-07d5-494d-908c-081a197f4277/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/operationResults/4e2ffff7-b331-4fcb-ab11-b5fa49368188?api-version=2026-06-01",
+        "Location": "https://management.azure.com/subscriptions/97ee05f2-07d5-494d-908c-081a197f4277/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/operationResults/4e2ffff7-b331-4fcb-ab11-b5fa49368188?api-version=2026-06-01",
+        "Retry-After": 5
+      }
+    }
+  },
+  "operationId": "Credits_Create",
+  "title": "CreditTransferCreditCreate"
+}

@@ -9,6 +9,15 @@ import type {
   TypeSpecProjectInfo,
 } from "./types.ts";
 
+/** Label indicating that a spec PR introduces a new API version. */
+export const NEW_API_VERSION_LABEL = "new-api-version";
+
+/**
+ * Label indicating that a spec PR only migrates/renames folders. Release plan
+ * processing must be skipped entirely for PRs carrying this label.
+ */
+export const FOLDER_MIGRATION_LABEL = "FolderMigrationV2";
+
 /**
  * Identifies one TypeSpec project path and selected API version from a pull request.
  * Returns null when no specification files were modified, or when zero/multiple projects found.
@@ -57,7 +66,7 @@ export async function getTypeSpecProjectInfoFromPr(params: {
 
   const tspProjectPath = tspProjectPaths[0];
   const versionResult = detectApiVersions(
-    specFiles.map((f) => f.filename),
+    specFiles.filter((f) => f.status !== "renamed").map((f) => f.filename),
     tspProjectPath,
     workspace,
   );
@@ -95,12 +104,26 @@ export async function getTypeSpecProjectInfoFromCommit(params: {
   });
   console.log(`Associated PR number for commit ${commitSha}: ${associatedPrNumber ?? "none"}`);
   if (associatedPrNumber) {
-    const hasNewApiVersionLabel = await checkNewApiVersionLabel({
+    const labels = await getPullRequestLabels({
       octokit,
       owner,
       repo,
       prNumber: associatedPrNumber,
     });
+
+    if (labels.includes(FOLDER_MIGRATION_LABEL)) {
+      console.log(
+        `PR #${associatedPrNumber} has the '${FOLDER_MIGRATION_LABEL}' label. Skipping release plan processing.`,
+      );
+      return {
+        projectInfo: null,
+        prNumber: associatedPrNumber,
+        hasNewApiVersionLabel: false,
+        isFolderMigration: true,
+      };
+    }
+
+    const hasNewApiVersionLabel = labels.includes(NEW_API_VERSION_LABEL);
 
     const projectInfo = await getTypeSpecProjectInfoFromPr({
       prNumber: associatedPrNumber,
@@ -143,7 +166,7 @@ export async function getTypeSpecProjectInfoFromCommit(params: {
 
   const tspProjectPath = tspProjectPaths[0];
   const versionResult = detectApiVersions(
-    specFiles.map((f) => f.filename),
+    specFiles.filter((f) => f.status !== "renamed").map((f) => f.filename),
     tspProjectPath,
     workspace,
   );
@@ -162,12 +185,16 @@ export async function getTypeSpecProjectInfoFromCommit(params: {
   };
 }
 
-export async function checkNewApiVersionLabel(params: {
+/**
+ * Fetches the label names applied to a pull request.
+ * @returns Array of label names (empty when the PR has no labels)
+ */
+export async function getPullRequestLabels(params: {
   octokit: OctokitLike;
   owner: string;
   repo: string;
   prNumber: number;
-}): Promise<boolean> {
+}): Promise<string[]> {
   const { octokit, owner, repo, prNumber } = params;
 
   const pullRequest = await octokit.rest.pulls.get({
@@ -176,7 +203,7 @@ export async function checkNewApiVersionLabel(params: {
     pull_number: prNumber,
   });
 
-  return pullRequest.data.labels?.some((label) => label.name === "new-api-version") ?? false;
+  return pullRequest.data.labels?.map((label) => label.name) ?? [];
 }
 
 /**
