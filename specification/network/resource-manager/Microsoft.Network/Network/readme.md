@@ -123,6 +123,13 @@ suppressions:
     reason: Not a standard azure resource.
     where:
       - $.definitions.GetServiceGatewayServicesResult
+  - code: XMSSecretInResponse
+    from: expressRoute.json
+    reason: >-
+      activationKey is not a secret value, it is a base64 encoded string used for multi-cloud circuit provisioning.
+    where:
+      - $.definitions.ExpressRouteCircuit.properties.properties.properties.activationKey
+      - $.definitions.ExpressRouteCircuitPropertiesFormat.properties.activationKey
 directive:
   - from: specification/common-types/resource-management/v6/types.json
     where: "$.definitions.ProxyResource"

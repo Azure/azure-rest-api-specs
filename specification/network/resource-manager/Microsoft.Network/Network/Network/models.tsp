@@ -1514,6 +1514,12 @@ union ExpressRouteCircuitSkuTier {
    * Local
    */
   Local: "Local",
+
+  /**
+   * MultiCloud tier for cross-cloud connectivity.
+   */
+  @added(Versions.v2025_09_01)
+  MultiCloud: "MultiCloud",
 }
 
 /**
@@ -1558,6 +1564,35 @@ union ServiceProviderProvisioningState {
    * Deprovisioning
    */
   Deprovisioning: "Deprovisioning",
+
+  /**
+   * DeProvisioned State
+   */
+  @added(Versions.v2025_09_01)
+  DeProvisioned: "DeProvisioned",
+}
+
+/**
+ * The resiliency level of the ExpressRoute circuit.
+ */
+@added(Versions.v2025_09_01)
+union ResiliencyLevel {
+  string,
+
+  /**
+   * Standard resiliency level.
+   */
+  Standard: "Standard",
+
+  /**
+   * High resiliency level.
+   */
+  High: "High",
+
+  /**
+   * Maximum resiliency level.
+   */
+  Maximum: "Maximum",
 }
 
 /**
@@ -11284,6 +11319,26 @@ model ExpressRouteCircuitPropertiesFormat {
    */
   @visibility(Lifecycle.Read)
   stag?: int32;
+
+  /**
+   * The resiliency level of the ExpressRoute circuit.
+   */
+  @added(Versions.v2025_09_01)
+  @visibility(Lifecycle.Read)
+  resiliencyLevel?: ResiliencyLevel;
+
+  /**
+   * Account ID of customer account on partner cloud provider.
+   */
+  @added(Versions.v2025_09_01)
+  partnerAccountId?: string;
+
+  /**
+   * Activation Key from partner cloud provider.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "activationKey is not a secret value, it is a base64 encoded string used for multi-cloud circuit provisioning."
+  @added(Versions.v2025_09_01)
+  activationKey?: string;
 
   /**
    * The provisioning state of the express route circuit resource.
