@@ -13,21 +13,22 @@ namespace Microsoft.NetworkCloud;
 /**
  * The name of the Kubernetes cluster agent pool.
  */
-model AgentPoolNameParameter
-  is ResourceNameParameter<
-    Resource = AgentPool,
-    KeyName = "agentPoolName",
-    SegmentName = "agentPools",
-    NamePattern = "^([a-zA-Z0-9][a-zA-Z0-9-_]{0,28}[a-zA-Z0-9])$"
-  >;
+model AgentPoolNameParameter is ResourceNameParameter<
+  Resource = AgentPool,
+  KeyName = "agentPoolName",
+  SegmentName = "agentPools",
+  NamePattern = "^([a-zA-Z0-9][a-zA-Z0-9-_]{0,28}[a-zA-Z0-9])$"
+>;
 
 /**
  * AgentPool represents the agent pool of Kubernetes cluster.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "legacy resource using legacy features"
 @parentResource(KubernetesCluster)
-model AgentPool
-  is Azure.ResourceManager.TrackedResource<AgentPoolProperties, false> {
+model AgentPool is Azure.ResourceManager.TrackedResource<
+  AgentPoolProperties,
+  false
+> {
   ...AgentPoolNameParameter;
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
   ...ExtendedLocationProperty;
