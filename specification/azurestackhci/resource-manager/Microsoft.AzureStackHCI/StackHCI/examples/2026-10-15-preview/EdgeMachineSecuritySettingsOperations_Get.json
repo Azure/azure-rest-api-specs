@@ -1,0 +1,32 @@
+{
+  "operationId": "EdgeMachineSecuritySettingsOperations_Get",
+  "title": "Get edge machine security settings",
+  "description": "Get the security settings for an edge machine.",
+  "parameters": {
+    "subscriptionId": "12345678-1234-1234-1234-123456789012",
+    "resourceGroupName": "test-rg",
+    "edgeMachineName": "testEdgeMachine",
+    "securitySettingsName": "default"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/edgeMachines/testEdgeMachine/securitySettings/default",
+        "name": "default",
+        "type": "Microsoft.AzureStackHCI/edgeMachines/securitySettings",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "securityComplianceStatus": {
+            "fipsStatus": "Compliant",
+            "secureBootStatus": "Compliant",
+            "encryptionAtRestStatus": "Compliant",
+            "seLinuxPolicyStatus": "NonCompliant",
+            "securityBaselineStatus": "Pending"
+          },
+          "registrationTimestamp": "2026-03-10T15:04:05Z",
+          "lastSyncTimestamp": "2026-03-15T12:34:56Z"
+        }
+      }
+    }
+  }
+}

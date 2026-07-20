@@ -6587,6 +6587,7 @@ model HciAddServerJobProperties extends ClusterJobProperties {
   secrets?: EceDeploymentSecrets[];
 
   /** Use a cloud witness if you have internet access and if you use an Azure Storage account to provide a vote on cluster quorum. A cloud witness uses Azure Blob Storage to read or write a blob file and then uses it to arbitrate in split-brain resolution. */
+  @added(Versions.v2026_10_15_preview)
   witnessType?: WitnessType;
 
   /** Specify the fileshare path for the local witness for your Azure Stack HCI cluster. */
