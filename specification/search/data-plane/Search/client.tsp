@@ -2010,6 +2010,15 @@ namespace KnowledgeBaseRetrievalClient {
   "java"
 );
 @@clientNamespace(
+  Search.SearchIndexKnowledgeSourceMultiWordExpressionBoost,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.SearchIndexKnowledgeSourceMultiWordExpressionBoost,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
   Search.AzureBlobKnowledgeSource,
   "Azure.Search.Documents.Indexes"
 );

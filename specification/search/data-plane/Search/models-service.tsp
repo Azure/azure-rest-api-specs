@@ -4921,6 +4921,9 @@ union SearchIndexKnowledgeSourceBoostKind {
 
   /** Boost documents based on a field value. */
   FieldValue: "fieldValue",
+
+  /** Boost documents based on a multi-word expression. */
+  MultiWordExpression: "multiWordExpression",
 }
 
 /** A hint that boosts documents based on a field value. */
@@ -4935,8 +4938,22 @@ model SearchIndexKnowledgeSourceFieldValueBoost
   field: string;
 
   /** Representative values for the field. */
-  @minItems(1)
-  fieldValues: string[];
+  fieldValues?: string[];
+
+  /** A multiplier for the document score. Must be a positive number not equal to 1.0. */
+  boost: float64;
+}
+
+/** A hint that boosts documents based on a multi-word expression. */
+@added(Versions.v2026_08_01_preview)
+model SearchIndexKnowledgeSourceMultiWordExpressionBoost
+  extends SearchIndexKnowledgeSourceBoost {
+  /** The discriminator value. */
+  kind: SearchIndexKnowledgeSourceBoostKind.MultiWordExpression;
+
+  /** The name of the search index field. */
+  @minLength(1)
+  field: string;
 
   /** A multiplier for the document score. Must be a positive number not equal to 1.0. */
   boost: float64;

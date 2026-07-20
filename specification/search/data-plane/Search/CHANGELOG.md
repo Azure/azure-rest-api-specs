@@ -41,7 +41,7 @@ Cumulative: every change in the [2026-05-01-preview GA-to-Preview section](#2026
 
 **Query hints for search-index knowledge sources**:
 
-- Optional `queryHints` defaults (`SearchIndexKnowledgeSourceQueryHints`) on search-index-backed knowledge source parameters (`searchIndex`, `azureBlob`, `indexedSharePoint`, `indexedOneLake`, `indexedSql`, `file`), with `filters` (`SearchIndexKnowledgeSourceFilterHint`) and `boosts` (`SearchIndexKnowledgeSourceBoost` → `SearchIndexKnowledgeSourceFieldValueBoost`, discriminated by `SearchIndexKnowledgeSourceBoostKind` with the initial `fieldValue` kind and a positive score multiplier).
+- Optional `queryHints` defaults (`SearchIndexKnowledgeSourceQueryHints`) on search-index-backed knowledge source parameters (`searchIndex`, `azureBlob`, `indexedSharePoint`, `indexedOneLake`, `indexedSql`, `file`), with `filters` (`SearchIndexKnowledgeSourceFilterHint`) and `boosts` (`SearchIndexKnowledgeSourceBoost` with optional `boostInstructions`, discriminated by `SearchIndexKnowledgeSourceBoostKind` into `fieldValue` (`SearchIndexKnowledgeSourceFieldValueBoost`) and `multiWordExpression` (`SearchIndexKnowledgeSourceMultiWordExpressionBoost`), each targeting a `field` with a positive score multiplier).
 - Request-time `queryHintOverrides` on the corresponding knowledge source runtime params; an override replaces the stored hint object as a complete object.
 - `queryType` on search-index activity arguments, and `queryHintProcessing` (`KnowledgeBaseQueryHintProcessing`) on index-backed retrieval activity records reporting the aggregate search clause and filter expression generated from the hints.
 

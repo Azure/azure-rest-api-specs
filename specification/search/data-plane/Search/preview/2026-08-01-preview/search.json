@@ -18997,7 +18997,8 @@
       "type": "string",
       "description": "The kind of boost hint for a search index knowledge source.",
       "enum": [
-        "fieldValue"
+        "fieldValue",
+        "multiWordExpression"
       ],
       "x-ms-enum": {
         "name": "SearchIndexKnowledgeSourceBoostKind",
@@ -19007,6 +19008,11 @@
             "name": "FieldValue",
             "value": "fieldValue",
             "description": "Boost documents based on a field value."
+          },
+          {
+            "name": "MultiWordExpression",
+            "value": "multiWordExpression",
+            "description": "Boost documents based on a multi-word expression."
           }
         ]
       }
@@ -19023,7 +19029,6 @@
         "fieldValues": {
           "type": "array",
           "description": "Representative values for the field.",
-          "minItems": 1,
           "items": {
             "type": "string"
           }
@@ -19036,7 +19041,6 @@
       },
       "required": [
         "field",
-        "fieldValues",
         "boost"
       ],
       "allOf": [
@@ -19072,6 +19076,32 @@
         "field",
         "fieldValues"
       ]
+    },
+    "SearchIndexKnowledgeSourceMultiWordExpressionBoost": {
+      "type": "object",
+      "description": "A hint that boosts documents based on a multi-word expression.",
+      "properties": {
+        "field": {
+          "type": "string",
+          "description": "The name of the search index field.",
+          "minLength": 1
+        },
+        "boost": {
+          "type": "number",
+          "format": "double",
+          "description": "A multiplier for the document score. Must be a positive number not equal to 1.0."
+        }
+      },
+      "required": [
+        "field",
+        "boost"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SearchIndexKnowledgeSourceBoost"
+        }
+      ],
+      "x-ms-discriminator-value": "multiWordExpression"
     },
     "SearchIndexKnowledgeSourceParameters": {
       "type": "object",
