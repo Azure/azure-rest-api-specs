@@ -26410,6 +26410,35 @@
         },
         "description": "Configuration specific to the activity protocol."
       },
+      "AgentBlueprintEntraSignInConfig": {
+        "type": "object",
+        "required": [
+          "mode"
+        ],
+        "properties": {
+          "mode": {
+            "type": "string",
+            "enum": [
+              "agent_blueprint"
+            ],
+            "description": "The Entra sign-in mode. Always 'agent_blueprint'."
+          },
+          "validation": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EntraValidationConfiguration"
+              }
+            ],
+            "description": "The validation applied to inbound bearer tokens presented to the agent endpoint in agent-blueprint sign-in mode."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntraSignInConfig"
+          }
+        ],
+        "description": "Agent-blueprint Entra sign-in configuration. The agent endpoint validates inbound tokens against the agent's blueprint application."
+      },
       "AgentBlueprintReference": {
         "type": "object",
         "required": [
@@ -26439,59 +26468,6 @@
             ]
           }
         ]
-      },
-      "AgentBlueprintSignInConfig": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "agent_blueprint"
-            ],
-            "description": "The type of sign-in configuration. Always 'agent_blueprint'."
-          },
-          "token_validation": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/TokenValidationRule"
-            },
-            "description": "The validation applied to inbound bearer tokens presented to the agent endpoint. A token is accepted if it satisfies any one of the rules. Typically defaulted to a single rule derived from the blueprint (audience = blueprint resource URI, tenant = subscription tenant, required scope = default scope declared on the blueprint)."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/AgentSignInConfig"
-          }
-        ],
-        "description": "Agent-blueprint sign-in configuration. The calling user is represented via the agent's blueprint application, and inbound bearer tokens are validated against the supplied rules."
-      },
-      "AgentBlueprintSignInConfigUpdate": {
-        "type": "object",
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "agent_blueprint"
-            ],
-            "description": "The type of sign-in configuration. Always 'agent_blueprint'."
-          },
-          "token_validation": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/TokenValidationRule"
-            },
-            "description": "The validation applied to inbound bearer tokens presented to the agent endpoint. A token is accepted if it satisfies any one of the rules. Typically defaulted to a single rule derived from the blueprint (audience = blueprint resource URI, tenant = subscription tenant, required scope = default scope declared on the blueprint)."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/AgentSignInConfigUpdate"
-          }
-        ],
-        "description": "Agent-blueprint sign-in configuration. The calling user is represented via the agent's blueprint application, and inbound bearer tokens are validated against the supplied rules."
       },
       "AgentCard": {
         "type": "object",
@@ -26804,14 +26780,6 @@
               "$ref": "#/components/schemas/AgentEndpointAuthorizationScheme"
             },
             "description": "The authorization schemes supported by the agent endpoint."
-          },
-          "sign_in_config": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/AgentSignInConfig"
-              }
-            ],
-            "description": "The sign-in configuration governing the Entra application identity used to represent the calling user. Defaults to Foundry sign-in when not specified."
           }
         }
       },
@@ -26840,14 +26808,6 @@
               "$ref": "#/components/schemas/AgentEndpointAuthorizationScheme"
             },
             "description": "The authorization schemes supported by the agent endpoint."
-          },
-          "sign_in_config": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/AgentSignInConfigUpdate"
-              }
-            ],
-            "description": "The sign-in configuration governing the Entra application identity used to represent the calling user. Defaults to Foundry sign-in when not specified."
           }
         }
       },
@@ -27209,69 +27169,6 @@
           }
         ],
         "description": "The status of an agent session."
-      },
-      "AgentSignInConfig": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/AgentSignInConfigType"
-              }
-            ],
-            "description": "The type of sign-in configuration."
-          }
-        },
-        "discriminator": {
-          "propertyName": "type",
-          "mapping": {
-            "foundry": "#/components/schemas/FoundrySignInConfig",
-            "agent_blueprint": "#/components/schemas/AgentBlueprintSignInConfig"
-          }
-        },
-        "description": "The sign-in configuration governing which Entra application identity the agent uses to represent\nthe calling user, for inbound token validation and downstream on-behalf-of access. The `type`\nproperty discriminates the concrete configuration type; type-specific inputs (such as token\nvalidation) are carried only by the types that support them. Defaults to Foundry sign-in when not\nspecified."
-      },
-      "AgentSignInConfigType": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "foundry",
-              "agent_blueprint"
-            ]
-          }
-        ],
-        "description": "The type of sign-in configuration, governing which Entra application identity the agent uses to represent the calling user (for inbound token validation and downstream on-behalf-of access). Applies across inbound authorization schemes."
-      },
-      "AgentSignInConfigUpdate": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/AgentSignInConfigType"
-              }
-            ],
-            "description": "The type of sign-in configuration."
-          }
-        },
-        "discriminator": {
-          "propertyName": "type",
-          "mapping": {
-            "foundry": "#/components/schemas/FoundrySignInConfigUpdate",
-            "agent_blueprint": "#/components/schemas/AgentBlueprintSignInConfigUpdate"
-          }
-        },
-        "description": "The sign-in configuration governing which Entra application identity the agent uses to represent\nthe calling user, for inbound token validation and downstream on-behalf-of access. The `type`\nproperty discriminates the concrete configuration type; type-specific inputs (such as token\nvalidation) are carried only by the types that support them. Defaults to Foundry sign-in when not\nspecified."
       },
       "AgentState": {
         "anyOf": [
@@ -32019,6 +31916,14 @@
             "enum": [
               "Entra"
             ]
+          },
+          "sign_in_config": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EntraSignInConfig"
+              }
+            ],
+            "description": "The Entra sign-in configuration governing which Entra application the agent endpoint validates inbound tokens against (and represents the calling user as for downstream on-behalf-of access). Defaults to the platform default ('foundry') behavior when not specified."
           }
         },
         "allOf": [
@@ -32048,6 +31953,72 @@
           }
         ],
         "description": "Entra ID credential definition"
+      },
+      "EntraSignInConfig": {
+        "type": "object",
+        "required": [
+          "mode"
+        ],
+        "properties": {
+          "mode": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EntraSignInMode"
+              }
+            ],
+            "description": "The Entra sign-in mode."
+          }
+        },
+        "discriminator": {
+          "propertyName": "mode",
+          "mapping": {
+            "foundry": "#/components/schemas/FoundryEntraSignInConfig",
+            "agent_blueprint": "#/components/schemas/AgentBlueprintEntraSignInConfig"
+          }
+        },
+        "description": "Entra sign-in configuration for the agent endpoint. The `mode` property discriminates the concrete\nconfiguration type; mode-specific inputs (such as token validation) are carried only by the modes\nthat support them. Defaults to Foundry sign-in when not specified."
+      },
+      "EntraSignInMode": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "foundry",
+              "agent_blueprint"
+            ]
+          }
+        ],
+        "description": "The Entra sign-in mode governing which Entra application the agent endpoint validates inbound tokens against."
+      },
+      "EntraValidationConfiguration": {
+        "type": "object",
+        "properties": {
+          "allowed_audiences": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The set of accepted token audiences (the `aud` claim). Typically the agent blueprint resource URI (e.g. `api://{agentBlueprintId}`)."
+          },
+          "allowed_tenants": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The set of accepted token tenants (the `tid` claim). Typically the subscription tenant."
+          },
+          "required_scopes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The scopes (the `scp` claim) that must all be present on an inbound token. Typically the default scope declared on the agent blueprint."
+          }
+        },
+        "description": "Validation applied to an inbound bearer token addressed to the agent's blueprint audience. Each\nlist is defaulted to a single value when the agent is switched to the 'agent_blueprint' sign-in\nmode (audience = blueprint resource URI, tenant = subscription tenant, required scope = default\nscope declared on the blueprint)."
       },
       "Eval": {
         "type": "object",
@@ -34596,6 +34567,27 @@
         ],
         "description": "FileDatasetVersion Definition"
       },
+      "FoundryEntraSignInConfig": {
+        "type": "object",
+        "required": [
+          "mode"
+        ],
+        "properties": {
+          "mode": {
+            "type": "string",
+            "enum": [
+              "foundry"
+            ],
+            "description": "The Entra sign-in mode. Always 'foundry'."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntraSignInConfig"
+          }
+        ],
+        "description": "Foundry Entra sign-in configuration. The agent endpoint validates inbound tokens against the Foundry application (ai.azure.com). This is the default when a sign-in configuration is not specified."
+      },
       "FoundryModelArtifactProfileCategory": {
         "anyOf": [
           {
@@ -34723,45 +34715,6 @@
             "Models=V1Preview"
           ]
         }
-      },
-      "FoundrySignInConfig": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "foundry"
-            ],
-            "description": "The type of sign-in configuration. Always 'foundry'."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/AgentSignInConfig"
-          }
-        ],
-        "description": "Foundry sign-in configuration. The calling user is represented via the Foundry application (ai.azure.com). This is the default when a sign-in configuration is not specified."
-      },
-      "FoundrySignInConfigUpdate": {
-        "type": "object",
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "foundry"
-            ],
-            "description": "The type of sign-in configuration. Always 'foundry'."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/AgentSignInConfigUpdate"
-          }
-        ],
-        "description": "Foundry sign-in configuration. The calling user is represented via the Foundry application (ai.azure.com). This is the default when a sign-in configuration is not specified."
       },
       "FoundryTimestamp": {
         "type": "integer",
@@ -78500,27 +78453,6 @@
             "Routines=V1Preview"
           ]
         }
-      },
-      "TokenValidationRule": {
-        "type": "object",
-        "properties": {
-          "audience": {
-            "type": "string",
-            "description": "The accepted token audience (the `aud` claim). Typically the agent blueprint resource URI (e.g. `api://{agentBlueprintId}`)."
-          },
-          "tenant_id": {
-            "type": "string",
-            "description": "The accepted token tenant (the `tid` claim). Typically the subscription tenant."
-          },
-          "required_scopes": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "The scopes (the `scp` claim) that must all be present on the inbound token. Typically the default scope declared on the agent blueprint."
-          }
-        },
-        "description": "A single accepted-token profile used to validate an inbound bearer token presented to the agent\nendpoint. A token is accepted when its `aud`, `tid`, and `scp` claims match this rule. When\nmultiple rules are configured, a token is accepted if it satisfies any one of them, which allows\nper-tenant audiences and scopes rather than assuming every caller shares the same values."
       },
       "ToolCallOutputContent": {
         "anyOf": [
