@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -52,6 +54,39 @@ model ExtensionTypeProperties {
    * Supported Kubernetes Scopes for this Extension Type.
    */
   supportedScopes?: ExtensionTypePropertiesSupportedScopes;
+
+  /**
+   * Supported regions for this Extension Type.
+   */
+  @added(Versions.v2026_05_01)
+  supportedRegions?: string[];
+
+  /**
+   * Additional details for the extension type.
+   */
+  @added(Versions.v2026_05_01)
+  additionalDetails?: ExtensionTypePropertiesAdditionalDetails;
+}
+
+/**
+ * Additional details for the extension type, such as documentation and release notes links.
+ */
+@added(Versions.v2026_05_01)
+model ExtensionTypePropertiesAdditionalDetails {
+  /**
+   * Link to the documentation for the extension type.
+   */
+  docs?: string;
+
+  /**
+   * Link to the release notes for the extension type.
+   */
+  releaseNotes?: string;
+
+  /**
+   * Link to the troubleshooting guide for the extension type.
+   */
+  troubleshootingGuide?: string;
 }
 
 /**
@@ -139,6 +174,12 @@ model ExtensionTypeVersionForReleaseTrainProperties {
    * A list of supported cluster types for this version of the Extension Type
    */
   supportedClusterTypes?: string[];
+
+  /**
+   * Indicates if this version of the Extension Type is FIPS compliant.
+   */
+  @added(Versions.v2026_05_01)
+  isFipsCompliant?: boolean;
 }
 
 /**
