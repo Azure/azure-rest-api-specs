@@ -39,7 +39,6 @@ interface AgentInvocations {
    */
   @get
   @route("/agents/{agent_name}/versions/{agent_version}/invocations/docs/asyncapi.json")
-  @extension("x-ms-foundry-meta", AgentInvocationRequiredPreviews)
   getAgentInvocationAsyncApiSpecJson is FoundryDataPlaneOperation<
     {
       /** The name of the agent. */
@@ -47,7 +46,7 @@ interface AgentInvocations {
 
       /** The version of the agent. */
       @path agent_version: string;
-    } & AgentInvocationPreviewHeader,
+    },
     {
       @header contentType: "application/json";
       @body spec: Record<unknown>;
@@ -62,7 +61,6 @@ interface AgentInvocations {
    */
   @get
   @route("/agents/{agent_name}/versions/{agent_version}/invocations/docs/asyncapi.yaml")
-  @extension("x-ms-foundry-meta", AgentInvocationRequiredPreviews)
   getAgentInvocationAsyncApiSpecYaml is FoundryDataPlaneOperation<
     {
       /** The name of the agent. */
@@ -70,7 +68,7 @@ interface AgentInvocations {
 
       /** The version of the agent. */
       @path agent_version: string;
-    } & AgentInvocationPreviewHeader,
+    },
     {
       @header contentType: "application/yaml";
       @body spec: string;
