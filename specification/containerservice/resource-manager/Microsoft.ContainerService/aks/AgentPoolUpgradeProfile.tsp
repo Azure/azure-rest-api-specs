@@ -20,11 +20,10 @@ namespace Microsoft.ContainerService;
  */
 @singleton("default")
 @parentResource(AgentPool)
-model AgentPoolUpgradeProfile
-  is Azure.ResourceManager.ProxyResource<
-    AgentPoolUpgradeProfileProperties,
-    false
-  > {
+model AgentPoolUpgradeProfile is Azure.ResourceManager.ProxyResource<
+  AgentPoolUpgradeProfileProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = AgentPoolUpgradeProfile,
     KeyName = "upgradeProfile",
@@ -76,14 +75,14 @@ model AgentPoolUpgradeProfileProperties {
   /**
    * List of components grouped by kubernetes major.minor version.
    */
-  @added(Versions.v2026_03_02_preview)
+  @added(Versions.v2026_04_02_preview)
   @identifiers(#[])
   componentsByReleases?: ComponentsByRelease[];
 
   /**
    * List of historical good versions for rollback operations.
    */
-  @added(Versions.v2026_03_02_preview)
+  @added(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
   @identifiers(#[])
   recentlyUsedVersions?: AgentPoolRecentlyUsedVersion[];
@@ -109,14 +108,14 @@ model AgentPoolUpgradeProfilePropertiesUpgradesItem {
   /**
    * Whether the Kubernetes version is out of support.
    */
-  @added(Versions.v2026_03_02_preview)
+  @added(Versions.v2026_04_02_preview)
   isOutOfSupport?: boolean;
 }
 
 /**
  * A historical version that can be used for rollback operations.
  */
-@added(Versions.v2026_03_02_preview)
+@added(Versions.v2026_04_01)
 model AgentPoolRecentlyUsedVersion {
   /**
    * The Kubernetes version (major.minor.patch) available for rollback.

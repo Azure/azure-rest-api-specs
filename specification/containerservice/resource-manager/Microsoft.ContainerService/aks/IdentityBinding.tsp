@@ -19,7 +19,7 @@ namespace Microsoft.ContainerService;
  * The IdentityBinding resource.
  */
 @parentResource(ManagedCluster)
-@added(Versions.v2026_03_02_preview)
+@added(Versions.v2026_04_01)
 model IdentityBinding
   is Azure.ResourceManager.ProxyResource<IdentityBindingProperties> {
   ...ResourceNameParameter<
@@ -44,7 +44,7 @@ model IdentityBinding
 );
 
 @armResourceOperations
-@added(Versions.v2026_03_02_preview)
+@added(Versions.v2026_04_01)
 interface IdentityBindings {
   /**
    * Gets the specified Identity Binding.
@@ -83,7 +83,7 @@ interface IdentityBindings {
  * The provisioning state of the last accepted operation.
  */
 @Azure.Core.lroStatus
-@added(Versions.v2026_03_02_preview)
+@added(Versions.v2026_04_01)
 union IdentityBindingProvisioningState {
   string,
 
@@ -121,7 +121,7 @@ union IdentityBindingProvisioningState {
 /**
  * IdentityBinding properties.
  */
-@added(Versions.v2026_03_02_preview)
+@added(Versions.v2026_04_01)
 model IdentityBindingProperties {
   /**
    * Managed identity profile for the identity binding.
@@ -145,7 +145,7 @@ model IdentityBindingProperties {
 /**
  * Managed identity profile for the identity binding.
  */
-@added(Versions.v2026_03_02_preview)
+@added(Versions.v2026_04_01)
 model IdentityBindingManagedIdentityProfile {
   /**
    * The resource ID of the managed identity.
@@ -185,11 +185,12 @@ model IdentityBindingManagedIdentityProfile {
 /**
  * IdentityBinding OIDC issuer profile.
  */
-@added(Versions.v2026_03_02_preview)
+@added(Versions.v2026_04_01)
 model IdentityBindingOidcIssuerProfile {
   /**
    * The OIDC issuer URL of the IdentityBinding.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   oidcIssuerUrl?: url;
 }

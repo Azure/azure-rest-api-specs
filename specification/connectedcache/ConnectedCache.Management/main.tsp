@@ -9,6 +9,7 @@ import "./ispCustomers.tsp";
 import "./ispCacheNodes.tsp";
 import "./enterpriseMccCustomers.tsp";
 import "./enterpriseMccCacheNodes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

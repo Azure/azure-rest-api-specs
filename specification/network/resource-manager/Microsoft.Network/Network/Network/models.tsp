@@ -1830,7 +1830,7 @@ union FirewallPolicyRuleCollectionType {
 /**
  * Describes if results should be in ascending/descending order
  */
-union FirewallPolicyIdpsQuerySortOrder {
+union FirewallPolicyIDPSQuerySortOrder {
   string,
 
   /**
@@ -3083,7 +3083,7 @@ union Protocol {
 /**
  * HTTP method.
  */
-union HttpMethod {
+union HTTPMethod {
   string,
 
   /**
@@ -3387,7 +3387,7 @@ union PreferredIPVersion {
 /**
  * The HTTP method to use.
  */
-union HttpConfigurationMethod {
+union HTTPConfigurationMethod {
   string,
 
   /**
@@ -6063,7 +6063,7 @@ enum SlotType {
  * The current mode enforced, 0 - Disabled, 1 - Alert, 2 -Deny
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-enum FirewallPolicyIdpsSignatureMode {
+enum FirewallPolicyIDPSSignatureMode {
   /**
    * 0
    */
@@ -6084,7 +6084,7 @@ enum FirewallPolicyIdpsSignatureMode {
  * Describes the severity of signature: 1 - High, 2 - Medium, 3 - Low
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-enum FirewallPolicyIdpsSignatureSeverity {
+enum FirewallPolicyIDPSSignatureSeverity {
   /**
    * 1
    */
@@ -6105,7 +6105,7 @@ enum FirewallPolicyIdpsSignatureSeverity {
  * Describes in which direction signature is being enforced: 0 - OutBound, 1 - InBound, 2 - Any, 3 - Internal, 4 - InternalOutbound, 5 - InternalInbound
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-enum FirewallPolicyIdpsSignatureDirection {
+enum FirewallPolicyIDPSSignatureDirection {
   /**
    * 0
    */
@@ -7403,6 +7403,7 @@ model ApplicationGatewayCustomError {
   /**
    * Error page URL of the application gateway custom error.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   customErrorPageUrl?: string;
 }
 
@@ -8114,6 +8115,7 @@ model ApplicationGatewayRedirectConfigurationPropertiesFormat {
   /**
    * Url to redirect the request to.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   targetUrl?: string;
 
   /**
@@ -9250,7 +9252,7 @@ model AzureFirewallPropertiesFormat {
    * IpGroups associated with AzureFirewall.
    */
   @visibility(Lifecycle.Read)
-  ipGroups?: AzureFirewallIPGroups[];
+  ipGroups?: AzureFirewallIpGroups[];
 
   /**
    * The Azure Firewall Resource SKU.
@@ -9765,7 +9767,7 @@ model AzureFirewallPublicIPAddress {
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.firewall)
-model AzureFirewallIPGroups {
+model AzureFirewallIpGroups {
   /**
    * Resource ID.
    */
@@ -9853,6 +9855,7 @@ model FirewallPacketCaptureParameters {
   /**
    * Upload capture location
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   sasUrl?: string;
 
   /**
@@ -12655,7 +12658,7 @@ model OrderBy {
   /**
    * Describes if results should be in ascending/descending order
    */
-  order?: FirewallPolicyIdpsQuerySortOrder;
+  order?: FirewallPolicyIDPSQuerySortOrder;
 }
 
 /**
@@ -12688,17 +12691,17 @@ model SingleQueryResult {
   /**
    * The current mode enforced, 0 - Disabled, 1 - Alert, 2 -Deny
    */
-  mode?: FirewallPolicyIdpsSignatureMode;
+  mode?: FirewallPolicyIDPSSignatureMode;
 
   /**
    * Describes the severity of signature: 1 - High, 2 - Medium, 3 - Low
    */
-  severity?: FirewallPolicyIdpsSignatureSeverity;
+  severity?: FirewallPolicyIDPSSignatureSeverity;
 
   /**
    * Describes in which direction signature is being enforced: 0 - OutBound, 1 - InBound, 2 - Any, 3 - Internal, 4 - InternalOutbound, 5 - InternalInbound
    */
-  direction?: FirewallPolicyIdpsSignatureDirection;
+  direction?: FirewallPolicyIDPSSignatureDirection;
 
   /**
    * Describes the groups the signature belongs to
@@ -15172,7 +15175,7 @@ model SecurityPerimeterResource {
    * Azure Resource Manager metadata containing createdBy and modifiedBy information.
    */
   @visibility(Lifecycle.Read)
-  systemData?: SecurityPerimeterSystemData;
+  systemData?: CommonTypes.SystemData;
 }
 
 /**
@@ -16257,11 +16260,13 @@ model NetworkVirtualApplianceBootDiagnosticParameters {
   /**
    * Specifies the sas-url to the storage blob into which serial console logs for the requested instance will be written
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   serialConsoleStorageSasUrl?: url;
 
   /**
    * Specifies the sas-url to the storage blob into which console screen shot for the requested instance will be written
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   consoleScreenshotStorageSasUrl?: url;
 }
 
@@ -17392,7 +17397,7 @@ model HttpConfiguration {
   /**
    * HTTP method.
    */
-  method?: HttpMethod;
+  method?: HTTPMethod;
 
   /**
    * List of HTTP headers.
@@ -18369,7 +18374,7 @@ model ConnectionMonitorHttpConfiguration {
   /**
    * The HTTP method to use.
    */
-  method?: HttpConfigurationMethod;
+  method?: HTTPConfigurationMethod;
 
   /**
    * The path component of the URI. For instance, "/dir1/dir2".
@@ -20177,7 +20182,6 @@ model IpsecPolicy {
  * Radius Server Settings.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 @Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model RadiusServer {
@@ -20617,7 +20621,6 @@ model VirtualNetworkGatewayConnectionListEntityPropertiesFormat {
  * A reference to VirtualNetworkGateway or LocalNetworkGateway resource.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 @Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model VirtualNetworkConnectionGatewayReference {
@@ -20684,7 +20687,6 @@ model GatewayCustomBgpIpAddressIpConfiguration {
 /**
  * An traffic selector policy for a virtual network gateway connection.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 @Azure.ResourceManager.Legacy.feature(Features.networkGateway)
@@ -20890,7 +20892,6 @@ model GatewayRoute {
  * Gateway Resiliency Information
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 @Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model GatewayResiliencyInformation {
@@ -20936,7 +20937,6 @@ model GatewayResiliencyInformation {
  * Gateway Resiliency based Recommendations
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 @Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model ResiliencyRecommendationComponents {
@@ -20965,7 +20965,6 @@ model ResiliencyRecommendationComponents {
 /**
  * Resiliency Recommendation details
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 @Azure.ResourceManager.Legacy.feature(Features.networkGateway)
@@ -21004,7 +21003,6 @@ model GatewayResiliencyRecommendation {
 /**
  * Gateway Route Sets Information
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 @Azure.ResourceManager.Legacy.feature(Features.networkGateway)
@@ -21190,6 +21188,7 @@ model VpnPacketCaptureStopParameters {
   /**
    * SAS url for packet capture on virtual network gateway.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   sasUrl?: string;
 }
 
@@ -21377,7 +21376,6 @@ model FailoverConnectionDetails {
 /**
  * Start packet capture parameters on virtual network gateway.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 @Azure.ResourceManager.Legacy.feature(Features.networkGateway)
@@ -22030,6 +22028,7 @@ model VirtualNetworkGatewayMigrationParameters {
   /**
    * Resource url that needs to be passed in to migration.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   resourceUrl?: string;
 }
 
@@ -22369,6 +22368,7 @@ model GetVpnSitesConfigurationRequest {
   /**
    * The sas-url to download the configurations for vpn-sites.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   outputBlobSasUrl: string;
 }
 
@@ -23774,6 +23774,7 @@ model VpnGatewayPacketCaptureStopParameters {
   /**
    * SAS url for packet capture on vpn gateway.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   sasUrl?: string;
 }
 
@@ -23844,6 +23845,7 @@ model VpnConnectionPacketCaptureStopParameters {
   /**
    * SAS url for packet capture on vpn connection.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   sasUrl?: string;
 
   /**
@@ -23904,6 +23906,7 @@ model VpnProfileResponse {
   /**
    * URL to the VPN profile.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   profileUrl?: string;
 }
 
@@ -23922,6 +23925,7 @@ model P2SVpnConnectionHealthRequest {
   /**
    * The sas-url to download the P2S Vpn connection health detail.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   outputBlobSasUrl?: string;
 }
 
@@ -23935,6 +23939,7 @@ model P2SVpnConnectionHealth {
   /**
    * Returned sas url of the blob to which the p2s vpn connection detailed health will be written.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   sasUrl?: string;
 }
 
@@ -23973,7 +23978,7 @@ model VirtualWanVpnProfileParameters {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
-model ListVirtualHubRouteTableV2SResult
+model ListVirtualHubRouteTableV2sResult
   is Azure.Core.Page<VirtualHubRouteTableV2>;
 
 /**
@@ -26103,57 +26108,6 @@ model ExpressRoutePortsLocationListResult
 
 model BastionHostListResult is Azure.Core.Page<BastionHost>;
 
-@@Azure.ClientGenerator.Core.clientName(
-  ListVirtualHubRouteTableV2SResult,
-  "ListVirtualHubRouteTableV2sResult"
-);
-@@Azure.ClientGenerator.Core.clientName(
-  HttpConfigurationMethod,
-  "HTTPConfigurationMethod"
-);
-@@Azure.ClientGenerator.Core.clientName(HttpHeader, "HTTPHeader");
-@@Azure.ClientGenerator.Core.clientName(
-  ConnectivityGroupItem,
-  "connectivityGroupItem"
-);
-@@Azure.ClientGenerator.Core.clientName(
-  FirewallPolicySnat,
-  "FirewallPolicySNAT"
-);
-@@Azure.ClientGenerator.Core.clientName(HttpConfiguration, "HTTPConfiguration");
-@@Azure.ClientGenerator.Core.clientName(HttpMethod, "HTTPMethod");
-@@Azure.ClientGenerator.Core.clientName(
-  FirewallPolicyIdpsQuerySortOrder,
-  "FirewallPolicyIDPSQuerySortOrder"
-);
-@@Azure.ClientGenerator.Core.clientName(
-  FirewallPolicyIdpsSignatureMode,
-  "FirewallPolicyIDPSSignatureMode"
-);
-@@Azure.ClientGenerator.Core.clientName(
-  FirewallPolicyIdpsSignatureDirection,
-  "FirewallPolicyIDPSSignatureDirection"
-);
-@@Azure.ClientGenerator.Core.clientName(
-  ScrubbingRuleEntryMatchOperator,
-  "scrubbingRuleEntryMatchOperator"
-);
-@@Azure.ClientGenerator.Core.clientName(
-  ScrubbingRuleEntryState,
-  "scrubbingRuleEntryState"
-);
-@@Azure.ClientGenerator.Core.clientName(
-  FirewallPolicyIdpsSignatureSeverity,
-  "FirewallPolicyIDPSSignatureSeverity"
-);
-@@Azure.ClientGenerator.Core.clientName(
-  VirtualApplianceNetworkInterfaceConfiguration.type,
-  "NicType"
-);
-@@Azure.ClientGenerator.Core.clientName(
-  AzureFirewallIPGroups,
-  "AzureFirewallIpGroups"
-);
 @@doc(PacketCaptureListResult, "List of packet capture sessions.");
 @@doc(
   PacketCaptureListResult.value,

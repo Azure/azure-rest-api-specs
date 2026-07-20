@@ -10,8 +10,9 @@ using Microsoft.DevHub;
 @@clientName(WorkflowRun.workflowRunURL, "workflowRunUrl", "java");
 @@clientName(PullRequest.prURL, "prUrl", "java");
 @@clientName(Microsoft.DevHub, "DeveloperHubServiceClient", "javascript,java");
+@@clientName(Microsoft.DevHub, "DevHubMgmtClient", "python");
 @@clientName(ACR, "Acr", "java,javascript");
-@@clientName(Deployment, "DeploymentProperties", "java,javascript");
+@@clientName(Deployment, "DeploymentProperties", "java,javascript,python");
 // consistency on "AdoOAuth"
 @@clientName(AdooAuthResponse, "AdoOAuthResponse", "java");
 @@clientName(AdooAuthResponses, "AdoOAuthResponses", "java");
@@ -85,3 +86,184 @@ using Microsoft.DevHub;
   "DeveloperHubServiceClient",
   "go"
 );
+
+// csharp: ADO acronym PascalCase (3-letter acronym)
+@@clientName(ADORepository, "AdoRepository", "csharp");
+@@clientName(ADOProviderProfile, "AdoProviderProfile", "csharp");
+
+// csharp: add RP/domain context to otherwise-generic resource trio nouns
+@@clientName(Workflow, "DevHubWorkflow", "csharp");
+@@clientName(Template, "DevHubTemplate", "csharp");
+
+// csharp: enum member casing fixes
+@@clientName(WorkflowRunStatus.inprogress, "InProgress", "csharp");
+@@clientName(GenerationLanguage.gomodule, "GoModule", "csharp");
+@@clientName(QuickStartTemplateType.HCIAKS, "HciAks", "csharp");
+@@clientName(QuickStartTemplateType.HCIARCVM, "HciArcVm", "csharp");
+
+// csharp: URL -> Url acronym casing (mirrors java)
+@@clientName(GitHubOAuthInfoResponse.authURL, "authUrl", "csharp");
+@@clientName(AdooAuthInfoResponse.authURL, "authUrl", "csharp");
+@@clientName(GitHubWorkflowProfile.prURL, "prUrl", "csharp");
+@@clientName(WorkflowRun.workflowRunURL, "workflowRunUrl", "csharp");
+@@clientName(PullRequest.prURL, "prUrl", "csharp");
+
+// csharp: boolean properties need a verb prefix
+@@clientName(WorkflowRun.succeeded, "isSucceeded", "csharp");
+@@clientName(Parameter.required, "isRequired", "csharp");
+
+// csharp: ARM resource id strings -> ResourceIdentifier
+@@alternateType(
+  GitHubWorkflowProfile.aksResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  IacTemplateProperties.sourceResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
+// csharp: etag string -> Azure.ETag
+@@alternateType(
+  Azure.ResourceManager.Legacy.EntityTagProperty.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+
+// csharp AdoOAuth casing consistency (mirrors java).
+@@clientName(AdooAuthResponse, "AdoOAuthResponse", "csharp");
+@@clientName(AdooAuthResponses, "AdoOAuthResponses", "csharp");
+@@clientName(AdooAuthListResponse, "AdoOAuthListResponse", "csharp");
+@@clientName(ADOOAuth, "AdoOAuth", "csharp");
+@@clientName(AdooAuthResponses.getADOOAuthInfo, "getAdoOAuthInfo", "csharp");
+
+@@clientName(ScaleProperty.numberOfStore, "NumberOfStores", "csharp");
+@@clientName(GenerationLanguage.csharp, "CSharp", "csharp");
+@@clientName(GenerationLanguage.javascript, "JavaScript", "csharp");
+@@clientName(RepositoryProviderType.github, "GitHub", "csharp");
+@@clientName(VersionedTemplate, "DevHubVersionedTemplate", "csharp");
+
+@@clientName(ACR, "DevHubContainerRegistryInfo", "csharp");
+@@clientName(Build, "DevHubDockerBuildInfo", "csharp");
+@@clientName(Deployment, "DevHubDeploymentProperties", "csharp");
+// Targets Azure.ResourceManager.CommonTypes.Origin (the ARM common-type actually
+// emitted via Foundations.Operation.origin), not the unused local `union Origin` in
+// models.tsp; a bare `Origin` would rename the dead local type and leave the generated one unchanged.
+@@clientName(
+  Azure.ResourceManager.CommonTypes.Origin,
+  "DevHubOperationOrigin",
+  "csharp"
+);
+
+// csharp: add DevHub prefix to otherwise-generic model/enum names
+// Targets Azure.ResourceManager.CommonTypes.ActionType (the ARM common-type actually
+// emitted via Foundations.Operation.actionType), not the unused local `union ActionType`
+// in models.tsp; a bare `ActionType` would rename the dead local type only.
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ActionType,
+  "DevHubActionType",
+  "csharp"
+);
+@@clientName(
+  ArtifactGenerationProperties,
+  "DevHubArtifactGenerationProperties",
+  "csharp"
+);
+@@clientName(AuthorizationStatus, "DevHubAuthorizationStatus", "csharp");
+@@clientName(
+  DockerfileGenerationMode,
+  "DevHubDockerfileGenerationMode",
+  "csharp"
+);
+@@clientName(GenerationLanguage, "DevHubGenerationLanguage", "csharp");
+@@clientName(GenerationManifestType, "DevHubGenerationManifestType", "csharp");
+@@clientName(IacTemplateDetails, "DevHubIacTemplateDetails", "csharp");
+@@clientName(IacTemplateProperties, "DevHubIacTemplateProperties", "csharp");
+@@clientName(ManifestGenerationMode, "DevHubManifestGenerationMode", "csharp");
+@@clientName(ManifestType, "DevHubManifestType", "csharp");
+@@clientName(OidcCredentials, "DevHubOidcCredentials", "csharp");
+// Targets Azure.ResourceManager.CommonTypes.OperationDisplay (the ARM common-type actually
+// emitted via Foundations.Operation.display), not any local model; use the qualified name so
+// the rename reaches the generated type.
+@@clientName(
+  Azure.ResourceManager.CommonTypes.OperationDisplay,
+  "DevHubOperationDisplay",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.Foundations.OperationListResult,
+  "DevHubOperationListResult",
+  "csharp"
+);
+@@clientName(ParameterDefault, "DevHubTemplateParameterDefault", "csharp");
+@@clientName(ParameterKind, "DevHubTemplateParameterKind", "csharp");
+@@clientName(ParameterType, "DevHubTemplateParameterType", "csharp");
+@@clientName(PullRequestStatus, "DevHubPullRequestStatus", "csharp");
+@@clientName(QuickStartTemplateType, "DevHubQuickStartTemplateType", "csharp");
+@@clientName(RepositoryProviderType, "DevHubRepositoryProviderType", "csharp");
+@@clientName(ScaleProperty, "DevHubScaleProperty", "csharp");
+@@clientName(StageProperties, "DevHubStageInfo", "csharp");
+@@clientName(TemplateProperties, "DevHubTemplateProperties", "csharp");
+@@clientName(TemplateReference, "DevHubTemplateReference", "csharp");
+@@clientName(TemplateType, "DevHubTemplateType", "csharp");
+@@clientName(
+  TemplateWorkflowProfile,
+  "DevHubTemplateWorkflowProfile",
+  "csharp"
+);
+@@clientName(
+  VersionedTemplateProperties,
+  "DevHubVersionedTemplateProperties",
+  "csharp"
+);
+@@clientName(WorkflowProperties, "DevHubWorkflowProperties", "csharp");
+@@clientName(WorkflowRun, "DevHubWorkflowRun", "csharp");
+@@clientName(WorkflowRunStatus, "DevHubWorkflowRunStatus", "csharp");
+@@clientName(TagsObject, "DevHubTagsPatch", "csharp");
+
+@@clientName(AdooAuthCallRequest, "DeveloperHubAdoOAuthCallContent", "csharp");
+@@clientName(
+  ExportTemplateRequest,
+  "DeveloperHubExportTemplateContent",
+  "csharp"
+);
+@@clientName(
+  GitHubOAuthCallRequest,
+  "DeveloperHubGitHubOAuthCallContent",
+  "csharp"
+);
+@@clientName(
+  ScaleTemplateRequest,
+  "DeveloperHubScaleTemplateContent",
+  "csharp"
+);
+@@clientName(AdooAuthInfoResponse, "DeveloperHubAdoOAuthInfoResult", "csharp");
+@@clientName(
+  DeleteWorkflowResponse,
+  "DeveloperHubDeleteWorkflowResult",
+  "csharp"
+);
+@@clientName(
+  GenerateVersionedTemplateResponse,
+  "DeveloperHubGenerateVersionedTemplateResult",
+  "csharp"
+);
+@@clientName(
+  GitHubOAuthInfoResponse,
+  "DeveloperHubGitHubOAuthInfoResult",
+  "csharp"
+);
+@@clientName(
+  GitHubOAuthListResponse,
+  "DeveloperHubGitHubOAuthListResult",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.Foundations.Operation,
+  "DeveloperHubOperationInfo",
+  "csharp"
+);
+@@clientName(Parameter, "DeveloperHubParameterContent", "csharp");
+@@clientName(PrLinkResponse, "DeveloperHubPrLinkResult", "csharp");
+@@clientName(PullRequest, "DeveloperHubPullRequestContent", "csharp");

@@ -70,6 +70,10 @@ model RequestSession {
   /** Specifies which tools the model is allowed to call during the session. */
   tool_choice?: ToolChoice;
 
+  /** Whether the model is allowed to call tools in parallel. */
+  @added(Versions.v2026_06_01_preview)
+  parallel_tool_calls?: boolean = true;
+
   /** Controls the randomness of the model's output. Range: 0.0 to 1.0. Default is 0.7. */
   temperature?: float32;
 
@@ -133,6 +137,7 @@ union ReasoningEffort {
 }
 
 /** Base for session configuration in the response. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(ResponseUsage)
 model ResponseSession is RequestSession {
   ...SessionBase;
@@ -142,6 +147,12 @@ model ResponseSession is RequestSession {
 
   /** The unique identifier for the session. */
   id?: string;
+
+  /** Expiration time for the session. This value is set by the server and cannot be changed with `session.update`. */
+  #suppress "@microsoft/azure-openapi-validator/IntegerTypeMustHaveFormat" "The unixtime format is present, but the legacy rule only allows int32 or int64."
+  @added(Versions.v2026_07_15)
+  @encode(DateTimeKnownEncoding.unixTimestamp, int64)
+  expires_at?: utcDateTime;
 }
 
 /** Supported OpenAI voice names (string enum). */
@@ -459,7 +470,7 @@ union PersonalVoiceModels {
 
   /** Use the MAI-Voice-1 model. */
   @added(Versions.v2026_04_10)
-  "MAI-Voice-1",
+  `MAI-Voice-1`: "MAI-Voice-1",
 }
 
 /** Azure avatar voice sync configuration. Uses personal voice synthesis with avatar character. */
@@ -713,6 +724,23 @@ union Modality {
 @usage(RequestUsage)
 model EouDetection {
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Keeping inline union to avoid breaking changes."
+  @typeChangedFrom(
+    Versions.v2026_06_01_preview,
+
+      | "semantic_detection_v1"
+      | "semantic_detection_v1_en"
+      | "semantic_detection_v1_multilingual"
+      | string
+  )
+  @typeChangedFrom(
+    Versions.v2026_07_15,
+
+      | "semantic_detection_v1"
+      | "semantic_detection_v1_en"
+      | "semantic_detection_v1_multilingual"
+      | "smart_end_of_turn_detection"
+      | string
+  )
   `model`:
     | "semantic_detection_v1"
     | "semantic_detection_v1_en"
@@ -774,6 +802,26 @@ model AzureSemanticDetectionMultilingual extends EouDetection {
   threshold_level?: EouThresholdLevel;
 
   /** Timeout in milliseconds. Recommended instead of `timeout`. */
+  @minValue(0)
+  timeout_ms?: int32;
+}
+
+/**
+ * Audio-based end-of-turn detection. Operates directly on the input audio
+ * stream rather than text. Use `threshold_level` and `timeout_ms` to tune
+ * detection.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@added(Versions.v2026_06_01_preview)
+@removed(Versions.v2026_07_15)
+@usage(RequestUsage)
+model SmartEndOfTurnDetection extends EouDetection {
+  `model`: "smart_end_of_turn_detection";
+
+  /** Threshold level setting. One of `low`, `medium`, `high`, or `default`. */
+  threshold_level?: EouThresholdLevel;
+
+  /** Timeout in milliseconds. */
   @minValue(0)
   timeout_ms?: int32;
 }

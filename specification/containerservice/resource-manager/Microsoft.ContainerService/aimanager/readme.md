@@ -26,7 +26,29 @@ These are the global settings for the AI Manager API.
 
 ```yaml
 openapi-type: arm
-tag: package-2026-04-02-preview
+tag: package-2026-05-02-preview
+```
+
+### Tag: package-2026-05-02-preview
+
+These settings apply only when `--tag=package-2026-05-02-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-05-02-preview'
+input-file:
+  - preview/2026-05-02-preview/aimanagers.json
+suppressions:
+  - code: AvoidAdditionalProperties
+    from: aimanagers.json
+    where: $.definitions.AIManagerNamespaceProperties.properties.labels
+    reason: Labels are a key/value map that is passed through to the underlying Kubernetes model.
+  - code: AvoidAdditionalProperties
+    from: aimanagers.json
+    where: $.definitions.AIManagerNamespaceProperties.properties.annotations
+    reason: Annotations are a key/value map that is passed through to the underlying Kubernetes model.
+  - code: AvoidAdditionalProperties
+    from: aimanagers.json
+    where: $.definitions.ModelDeploymentOverrides.properties.values
+    reason: Free-form override key/value pairs documented per release.
 ```
 
 ### Tag: package-2026-04-02-preview

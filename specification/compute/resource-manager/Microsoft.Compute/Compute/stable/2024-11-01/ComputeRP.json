@@ -16927,6 +16927,7 @@
       "description": "Code indicating the current status of the upgrade.",
       "enum": [
         "RollingForward",
+        "RollingBack",
         "Cancelled",
         "Completed",
         "Faulted"
@@ -17869,6 +17870,7 @@
       "description": "Code indicating the current status of the upgrade.",
       "enum": [
         "RollingForward",
+        "RollingBack",
         "Cancelled",
         "Completed",
         "Faulted"
@@ -19815,19 +19817,19 @@
       "type": "object",
       "description": "Describes a Virtual Machine Scale Set Extension.",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/VirtualMachineScaleSetExtensionProperties",
-          "description": "Describes the properties of a Virtual Machine Scale Set Extension.",
-          "x-ms-client-flatten": true
+        "name": {
+          "type": "string",
+          "description": "Resource name"
         },
         "type": {
           "type": "string",
           "description": "Resource type",
           "readOnly": true
         },
-        "name": {
-          "type": "string",
-          "description": "Resource name"
+        "properties": {
+          "$ref": "#/definitions/VirtualMachineScaleSetExtensionProperties",
+          "description": "Describes the properties of a Virtual Machine Scale Set Extension.",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [

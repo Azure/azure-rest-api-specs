@@ -1,9 +1,11 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.Core;
 
 namespace AzureAppConfiguration;
@@ -27,6 +29,10 @@ union KeyValueFields {
 
   @doc("Tags field.")
   tags: "tags",
+
+  @added(Versions.v2026_04_01)
+  @doc("Description field.")
+  description: "description",
 
   @doc("Locked field.")
   locked: "locked",
@@ -68,6 +74,10 @@ union SnapshotFields {
 
   @doc("Tags field.")
   tags: "tags",
+
+  @added(Versions.v2026_04_01)
+  @doc("Description field.")
+  description: "description",
 
   @doc("Etag field.")
   etag: "etag",
@@ -190,6 +200,10 @@ model KeyValue {
   @doc("The tags of the key-value")
   tags?: Record<string>;
 
+  @added(Versions.v2026_04_01)
+  @doc("The description of the key-value.")
+  description?: string;
+
   @doc("Indicates whether the key-value is locked.")
   locked?: boolean;
 
@@ -267,6 +281,10 @@ model Snapshot {
   @doc("The tags of the snapshot.")
   tags?: Record<string>;
 
+  @added(Versions.v2026_04_01)
+  @doc("The description of the snapshot.")
+  description?: string;
+
   @doc("A value representing the current state of the snapshot.")
   @visibility(Lifecycle.Read)
   etag?: string;
@@ -337,6 +355,20 @@ alias ContentTypeHeader<T extends string> = {
   @doc("Content-Type header")
   @header("Content-Type")
   contentType?: T | "application/problem+json";
+};
+
+alias PutKeyValueRequestContentType = {
+  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Needs fix: https://github.com/microsoft/typespec/issues/2853"
+  @doc("Content-Type header")
+  @header("Content-Type")
+  contentType:
+    | "application/vnd.microsoft.appconfig.kv+json"
+    | "application/vnd.microsoft.appconfig.kvset+json"
+    | "application/json"
+    | "text/json"
+    | "application/*+json"
+    | "application/json-patch+json";
 };
 
 alias AppConfigResponseHeaders = {

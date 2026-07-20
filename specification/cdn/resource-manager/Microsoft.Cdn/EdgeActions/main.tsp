@@ -6,6 +6,7 @@ import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./edgeactionsbasemodels.tsp";
+import "./client.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -94,14 +95,14 @@ interface EdgeActions {
     Azure.ResourceManager.Foundations.BaseParameters<EdgeAction>,
     ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader,
     {},
-
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse
+    | ArmDeletedResponse
+    | ArmDeleteAcceptedLroResponse
+    | ArmDeletedNoContentResponse
   >;
   listByResourceGroup is ArmResourceListByParent<EdgeAction>;
   listBySubscription is ArmListBySubscription<EdgeAction>;
 
+  @doc("A long-running resource action.")
   @removed(Versions.`2025-12-01-preview`)
   addAttachment is ArmResourceActionAsync<
     EdgeAction,
@@ -110,6 +111,7 @@ interface EdgeActions {
   >;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Operation matches 2024 baseline with 200, 202 responses"
+  @doc("A long-running resource action.")
   @removed(Versions.`2025-12-01-preview`)
   deleteAttachment is ArmResourceActionNoContentAsync<
     EdgeAction,
@@ -134,12 +136,12 @@ interface EdgeActionVersions {
     Azure.ResourceManager.Foundations.BaseParameters<EdgeActionVersion>,
     ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader,
     {},
-
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse
+    | ArmDeletedResponse
+    | ArmDeleteAcceptedLroResponse
+    | ArmDeletedNoContentResponse
   >;
   listByEdgeAction is ArmResourceListByParent<EdgeActionVersion>;
+  @doc("A long-running resource action.")
   deployVersionCode is ArmResourceActionAsync<
     EdgeActionVersion,
     VersionCode,
@@ -187,10 +189,9 @@ interface EdgeActionExecutionFilters {
     Azure.ResourceManager.Foundations.BaseParameters<EdgeActionExecutionFilter>,
     ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader,
     {},
-
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse
+    | ArmDeletedResponse
+    | ArmDeleteAcceptedLroResponse
+    | ArmDeletedNoContentResponse
   >;
   listByEdgeAction is ArmResourceListByParent<EdgeActionExecutionFilter>;
 }

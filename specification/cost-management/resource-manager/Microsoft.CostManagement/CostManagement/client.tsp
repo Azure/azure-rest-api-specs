@@ -7,10 +7,10 @@ using Azure.Core;
 using Microsoft.CostManagement;
 
 // Rename PivotTypeType back to PivotType for Java
-@@clientName(PivotTypeType, "PivotType", "java,javascript");
+@@clientName(PivotTypeType, "PivotType", "java,javascript,python");
 
 // Rename KpiTypeType back to KpiType for Java
-@@clientName(KpiTypeType, "KpiType", "java,javascript");
+@@clientName(KpiTypeType, "KpiType", "java,javascript,python");
 
 // Rename DownloadURL back to DownloadUrl for Java
 @@clientName(DownloadURL, "DownloadUrl", "java");

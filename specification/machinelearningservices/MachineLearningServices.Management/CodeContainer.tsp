@@ -15,8 +15,10 @@ namespace Microsoft.MachineLearningServices;
  * Azure Resource Manager resource envelope.
  */
 @parentResource(Registry)
-model CodeContainer
-  is Azure.ResourceManager.ProxyResource<CodeContainerProperties, false> {
+model CodeContainer is Azure.ResourceManager.ProxyResource<
+  CodeContainerProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = CodeContainer,
     KeyName = "codeName",
@@ -48,7 +50,9 @@ interface CodeContainerOps
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
         codeName: string,
-      }
+      },
+      ErrorResponse,
+      "MachineLearningRegistryCodeContainer"
     > {}
 
 @armResourceOperations
@@ -137,7 +141,9 @@ interface CodeContainerOperationGroupOps
         @segment("codes")
         @key
         name: string,
-      }
+      },
+      ErrorResponse,
+      "MachineLearningCodeContainer"
     > {}
 
 @armResourceOperations

@@ -138,11 +138,10 @@ interface Servers {
   start is ArmResourceActionAsyncBase<
     Server,
     BackupsLongTermRetentionRequest,
-
-      | (BackupsLongTermRetentionResponse & RequestIdResponseHeader)
-      | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = BackupsLongTermRetentionResponse> &
-          Azure.Core.Foundations.RetryAfterHeader> &
-          RequestIdResponseHeader),
+    | (BackupsLongTermRetentionResponse & RequestIdResponseHeader)
+    | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = BackupsLongTermRetentionResponse> &
+        Azure.Core.Foundations.RetryAfterHeader> &
+        RequestIdResponseHeader),
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Server>,
     Error = CustomErrorResponse
   >;
@@ -213,11 +212,22 @@ interface Servers {
   migrateNetworkMode is ArmResourceActionAsyncBase<
     Server,
     void,
+    | (MigrateNetworkStatus & RequestIdResponseHeader)
+    | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = MigrateNetworkStatus> &
+        Azure.Core.Foundations.RetryAfterHeader> &
+        RequestIdResponseHeader),
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Server>
+  >;
 
-      | (MigrateNetworkStatus & RequestIdResponseHeader)
-      | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = MigrateNetworkStatus> &
-          Azure.Core.Foundations.RetryAfterHeader> &
-          RequestIdResponseHeader),
+  @doc("Start Major Version Upgrade Prechecks.")
+  @added(Versions.v2026_04_01)
+  @action("startMajorVersionUpgradePrecheck")
+  startMajorVersionUpgradePrecheck is ArmResourceActionAsyncBase<
+    Server,
+    StartMajorVersionUpgradePrecheckRequest,
+    | (StartMajorVersionUpgradePrecheckResponse & RequestIdResponseHeader)
+    | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = StartMajorVersionUpgradePrecheckResponse> &
+        Azure.Core.Foundations.RetryAfterHeader>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Server>
   >;
 }

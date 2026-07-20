@@ -1599,6 +1599,7 @@ enum StatusLevelTypes {
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum UpgradeState {
   RollingForward,
+  RollingBack,
   Cancelled,
   Completed,
   Faulted,
@@ -1620,6 +1621,7 @@ enum UpgradeOperationInvoker {
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum RollingUpgradeStatusCode {
   RollingForward,
+  RollingBack,
   Cancelled,
   Completed,
   Faulted,
@@ -1829,7 +1831,7 @@ model VirtualMachineScaleSetProperties {
   /**
    * The provisioning state, which only appears in the response.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Consistent with established Compute RP patterns (e.g. DedicatedHost, VirtualMachine, CapacityReservation) for SDK and behavioral consistency."
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 
@@ -2233,6 +2235,12 @@ model VirtualMachineScaleSetVMProfile {
   capacityReservation?: CapacityReservationProfile;
 
   /**
+   * Specifies the Interconnect Block related details of a Scale Set. Minimum api-version: 2026-03-01.
+   */
+  @added(Versions.v2026_03_01)
+  interconnectBlockProfile?: InterconnectBlockProfile;
+
+  /**
    * Specifies the gallery applications that should be made available to the VM/VMSS
    */
   applicationProfile?: ApplicationProfile;
@@ -2455,6 +2463,7 @@ model WinRMListener {
   /**
    * This is the URL of a certificate that has been uploaded to Key Vault as a secret. For adding a secret to the Key Vault, see [Add a key or secret to the key vault](https://docs.microsoft.com/azure/key-vault/key-vault-get-started/#add). In this case, your certificate needs to be the Base64 encoding of the following JSON Object which is encoded in UTF-8: <br><br> {<br>  "data":"<Base64-encoded-certificate>",<br>  "dataType":"pfx",<br>  "password":"<pfx-file-password>"<br>} <br> To install certificates on a virtual machine it is recommended to use the [Azure Key Vault virtual machine extension for Linux](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-linux) or the [Azure Key Vault virtual machine extension for Windows](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-windows).
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   certificateUrl?: string;
 }
 
@@ -2572,6 +2581,7 @@ model VaultCertificate {
   /**
    * This is the URL of a certificate that has been uploaded to Key Vault as a secret. For adding a secret to the Key Vault, see [Add a key or secret to the key vault](https://docs.microsoft.com/azure/key-vault/key-vault-get-started/#add). In this case, your certificate needs to be It is the Base64 encoding of the following JSON Object which is encoded in UTF-8: <br><br> {<br>  "data":"<Base64-encoded-certificate>",<br>  "dataType":"pfx",<br>  "password":"<pfx-file-password>"<br>} <br> To install certificates on a virtual machine it is recommended to use the [Azure Key Vault virtual machine extension for Linux](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-linux) or the [Azure Key Vault virtual machine extension for Windows](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-windows).
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   certificateUrl?: string;
 
   /**
@@ -2868,6 +2878,12 @@ model VirtualMachineScaleSetNetworkProfile {
    * specifies the Microsoft.Network API version used when creating networking resources in the Network Interface Configurations for Virtual Machine Scale Set with orchestration mode 'Flexible'
    */
   networkApiVersion?: NetworkApiVersion;
+
+  /**
+   * Specifies the interconnect group profile to associate with the scale set. Minimum api-version: 2026-03-01.
+   */
+  @added(Versions.v2026_03_01)
+  interconnectGroupProfile?: InterconnectGroupProfile;
 }
 
 /**
@@ -3371,6 +3387,7 @@ model KeyVaultSecretReference {
   /**
    * The URL referencing a secret in a Key Vault.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   secretUrl: string;
 
   /**
@@ -3784,6 +3801,12 @@ model SkuProfile {
    * Specifies the allocation strategy for the virtual machine scale set based on which the VMs will be allocated.
    */
   allocationStrategy?: AllocationStrategy;
+
+  /**
+   * Specifies the policy that controls whether the platform may automatically migrate scale set instances to a different VM size from the SKU profile depending on platform demands. When omitted, automatic SKU migration is disabled.
+   */
+  @added(Versions.v2026_03_01)
+  automaticSkuMigrationPolicy?: AutomaticSkuMigrationPolicy;
 }
 
 /**
@@ -3799,6 +3822,17 @@ model SkuProfileVMSize {
    * Specifies the rank (a.k.a priority) associated with the VM Size.
    */
   rank?: int32;
+}
+
+/**
+ * Specifies the configuration parameters used to control automatic SKU migration for the virtual machine scale set. When enabled, the platform may migrate instances to a different VM size from the SKU profile depending on platform demands.
+ */
+@added(Versions.v2026_03_01)
+model AutomaticSkuMigrationPolicy {
+  /**
+   * Specifies whether automatic SKU migration should be enabled on the virtual machine scale set. The default value is false.
+   */
+  enabled?: boolean;
 }
 
 /**
@@ -4026,6 +4060,12 @@ model VirtualMachineScaleSetUpdateVMProfile {
    * Specifies the hardware profile related details of a scale set. Minimum api-version: 2021-11-01.
    */
   hardwareProfile?: VirtualMachineScaleSetHardwareProfile;
+
+  /**
+   * Specifies the Interconnect Block related details of a scale set. Minimum api-version: 2026-03-01.
+   */
+  @added(Versions.v2026_03_01)
+  interconnectBlockProfile?: InterconnectBlockProfile;
 }
 
 /**
@@ -4151,6 +4191,12 @@ model VirtualMachineScaleSetUpdateNetworkProfile {
    * specifies the Microsoft.Network API version used when creating networking resources in the Network Interface Configurations for Virtual Machine Scale Set with orchestration mode 'Flexible'
    */
   networkApiVersion?: NetworkApiVersion;
+
+  /**
+   * Specifies the interconnect group profile to associate with the scale set. Minimum api-version: 2026-03-01.
+   */
+  @added(Versions.v2026_03_01)
+  interconnectGroupProfile?: InterconnectGroupProfile;
 }
 
 /**
@@ -5099,6 +5145,12 @@ model VirtualMachineScaleSetVMProperties {
       type: "Microsoft.Compute/virtualMachines";
     }
   ]>;
+
+  /**
+   * Specifies the Interconnect Block related details of a Scale Set VM instance. Minimum api-version: 2026-03-01.
+   */
+  @added(Versions.v2026_03_01)
+  interconnectBlockProfile?: InterconnectBlockProfile;
 }
 
 /**
@@ -5189,6 +5241,13 @@ model VirtualMachineScaleSetVMInstanceView {
    * The hypervisor generation of the Virtual Machine [V1, V2]
    */
   hyperVGeneration?: HyperVGeneration;
+
+  /**
+   * The Interconnect runtime view of the Scale Set VM instance. Minimum api-version: 2026-03-01.
+   */
+  @added(Versions.v2026_03_01)
+  @visibility(Lifecycle.Read)
+  interconnectInstanceView?: InterconnectInstanceView;
 }
 
 /**
@@ -5328,6 +5387,7 @@ model KeyVaultKeyReference {
   /**
    * The URL referencing a key encryption key in Key Vault.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   keyUrl: string;
 
   /**
@@ -5735,6 +5795,12 @@ model NetworkProfile {
    */
   @identifiers(#["name"])
   networkInterfaceConfigurations?: VirtualMachineNetworkInterfaceConfiguration[];
+
+  /**
+   * Specifies the interconnect group profile to associate with the virtual machine. Minimum api-version: 2026-03-01.
+   */
+  @added(Versions.v2026_03_01)
+  interconnectGroupProfile?: InterconnectGroupProfile;
 }
 
 /**
@@ -6029,6 +6095,12 @@ model VirtualMachineScaleSetVMNetworkProfileConfiguration {
    */
   @identifiers(#["name"])
   networkInterfaceConfigurations?: VirtualMachineScaleSetNetworkConfiguration[];
+
+  /**
+   * Specifies the interconnect group profile to associate with the scale set vm instance. Minimum api-version: 2026-03-01.
+   */
+  @added(Versions.v2026_03_01)
+  interconnectGroupProfile?: InterconnectGroupProfile;
 }
 
 /**
@@ -6473,6 +6545,12 @@ model VirtualMachineProperties {
   capacityReservation?: CapacityReservationProfile;
 
   /**
+   * Specifies information about the Interconnect Block that is used to allocate the Virtual Machine. Minimum api-version: 2026-03-01.
+   */
+  @added(Versions.v2026_03_01)
+  interconnectBlockProfile?: InterconnectBlockProfile;
+
+  /**
    * Specifies the gallery applications that should be made available to the VM/VMSS.
    */
   applicationProfile?: ApplicationProfile;
@@ -6584,6 +6662,13 @@ model VirtualMachineInstanceView {
    */
   @visibility(Lifecycle.Read)
   isVMInStandbyPool?: boolean;
+
+  /**
+   * The Interconnect runtime view of the Virtual Machine. Minimum api-version: 2026-03-01.
+   */
+  @added(Versions.v2026_03_01)
+  @visibility(Lifecycle.Read)
+  interconnectInstanceView?: InterconnectInstanceView;
 }
 
 /**
@@ -7926,6 +8011,151 @@ model SshPublicKeyResourceProperties {
    * SSH public key used to authenticate to a virtual machine through ssh. If this property is not initially provided when the resource is created, the publicKey property will be populated when generateKeyPair is called. If the public key is provided upon resource creation, the provided public key needs to be at least 2048-bit and in ssh-rsa format.
    */
   publicKey?: string;
+}
+
+/**
+ * The list Interconnect Block operation response.
+ */
+@added(Versions.v2026_03_01)
+model InterconnectBlockListResult is Azure.Core.Page<InterconnectBlock>;
+
+@@doc(InterconnectBlockListResult.value, "The list of Interconnect Blocks.");
+@@doc(
+  InterconnectBlockListResult.nextLink,
+  "The URI to fetch the next page of Interconnect Blocks. Call ListNext() with this URI to fetch the next page of Interconnect Blocks."
+);
+
+/**
+ * Properties of the Interconnect Block.
+ */
+@added(Versions.v2026_03_01)
+model InterconnectBlockProperties {
+  /**
+   * A list of all virtual machine resource ids that are associated with the Interconnect Block.
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#["id"])
+  virtualMachinesAssociated?: SubResourceReadOnly[];
+
+  /**
+   * The Microsoft.Network/interconnectGroups resource that this Interconnect Block is associated with. Required at create and immutable thereafter.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  interconnectGroup: ApiEntityReference;
+
+  /**
+   * A unique id (GUID) generated and assigned to the Interconnect Block by the platform which does not change throughout the lifetime of the resource.
+   */
+  @visibility(Lifecycle.Read)
+  interconnectBlockId?: string;
+
+  /**
+   * The date time when the Interconnect Block was last updated.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningTime?: utcDateTime;
+
+  /**
+   * The provisioning state, which only appears in the response.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Consistent with established Compute RP patterns (e.g. DedicatedHost, VirtualMachine, CapacityReservation) for SDK and behavioral consistency."
+  @visibility(Lifecycle.Read)
+  provisioningState?: string;
+
+  /**
+   * The Interconnect Block instance view.
+   */
+  @visibility(Lifecycle.Read)
+  instanceView?: InterconnectBlockInstanceView;
+
+  /**
+   * Specifies the time at which the Interconnect Block resource was created.
+   */
+  @visibility(Lifecycle.Read)
+  timeCreated?: utcDateTime;
+}
+
+/**
+ * The instance view of an Interconnect Block.
+ */
+@added(Versions.v2026_03_01)
+model InterconnectBlockInstanceView {
+  /**
+   * The current capacity allocated for this Interconnect Block.
+   */
+  @visibility(Lifecycle.Read)
+  currentCapacity?: int32;
+
+  /**
+   * The resource status information.
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
+  statuses?: InstanceViewStatus[];
+}
+
+/**
+ * Specifies information about the Interconnect Block. Only tags and sku.capacity can be updated.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Consistent with established Compute RP patterns (e.g. DedicatedHost, VirtualMachine, CapacityReservation) for SDK and behavioral consistency."
+@added(Versions.v2026_03_01)
+model InterconnectBlockUpdate extends UpdateResource {
+  /**
+   * SKU of the resource for which capacity needs to be pre-allocated. Only `sku.capacity` is mutable; `sku.name` is immutable.
+   */
+  sku?: Sku;
+}
+
+/**
+ * The expand expression to apply on the operation for an Interconnect Block.
+ */
+@added(Versions.v2026_03_01)
+union InterconnectBlockExpandTypes {
+  string,
+
+  /**
+   * Retrieve the runtime instance view of the Interconnect Block.
+   */
+  instanceView: "instanceView",
+}
+
+/**
+ * The parameters of an Interconnect Block Profile.
+ */
+@added(Versions.v2026_03_01)
+model InterconnectBlockProfile {
+  /**
+   * Specifies the Interconnect Block resource ID that should be used for allocating the Virtual Machine or Scale Set VM instances provided enough capacity has been reserved.
+   */
+  interconnectBlock?: ApiEntityReference;
+}
+
+/**
+ * The Interconnect Block instance view details for a Virtual Machine or Scale Set VM instance.
+ */
+@added(Versions.v2026_03_01)
+model InterconnectInstanceView {
+  /**
+   * The ID (GUID) of the Interconnect subgroup in which the Virtual Machine was placed.
+   */
+  @visibility(Lifecycle.Read)
+  interconnectSubgroupId?: string;
+}
+
+/**
+ * Specifies the interconnect group profile for a virtual machine, used to associate the VM with an interconnect group and subgroups.
+ */
+@added(Versions.v2026_03_01)
+model InterconnectGroupProfile {
+  /**
+   * Reference to the interconnect group resource.
+   */
+  interconnectGroup?: SubResource;
+
+  /**
+   * The list of subgroup references within the interconnect group.
+   */
+  subgroups?: SubResource[];
 }
 
 /**
