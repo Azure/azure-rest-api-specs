@@ -112,8 +112,8 @@
           "Retrieve a policy assignment": {
             "$ref": "./examples/getPolicyAssignment.json"
           },
-          "Retrieve a policy assignment with a resource percentage selector": {
-            "$ref": "./examples/getPolicyAssignmentWithResourcePercentageSelector.json"
+          "Retrieve a policy assignment with a resource rollout percentage selector": {
+            "$ref": "./examples/getPolicyAssignmentWithResourceRolloutPercentageSelector.json"
           },
           "Retrieve a policy assignment with a system assigned identity": {
             "$ref": "./examples/getPolicyAssignmentWithIdentity.json"
@@ -186,8 +186,8 @@
           "Create or update a policy assignment to enforce policy effect only on enrolled resources during resource creation or update.": {
             "$ref": "./examples/createPolicyAssignmentWithEnrollEnforcement.json"
           },
-          "Create or update a policy assignment with a resource percentage selector": {
-            "$ref": "./examples/createPolicyAssignmentWithResourcePercentageSelector.json"
+          "Create or update a policy assignment with a resource rollout percentage selector": {
+            "$ref": "./examples/createPolicyAssignmentWithResourceRolloutPercentageSelector.json"
           },
           "Create or update a policy assignment with a system assigned identity": {
             "$ref": "./examples/createPolicyAssignmentWithIdentity.json"
@@ -263,8 +263,8 @@
           }
         },
         "x-ms-examples": {
-          "Update a policy assignment with a resource percentage selector": {
-            "$ref": "./examples/updatePolicyAssignmentWithResourcePercentageSelector.json"
+          "Update a policy assignment with a resource rollout percentage selector": {
+            "$ref": "./examples/updatePolicyAssignmentWithResourceRolloutPercentageSelector.json"
           },
           "Update a policy assignment with a system assigned identity": {
             "$ref": "./examples/updatePolicyAssignmentWithIdentity.json"
@@ -4882,7 +4882,7 @@
           {
             "name": "UserAssigned",
             "value": "UserAssigned",
-            "description": "Indicates that a system assigned identity is associated with the resource."
+            "description": "Indicates that a user assigned identity is associated with the resource."
           },
           {
             "name": "None",
@@ -4956,8 +4956,8 @@
           "type": "integer",
           "format": "int32",
           "description": "The percent of total resources that will be governed by the policy.",
-          "minimum": 1,
-          "maximum": 99
+          "minimum": 0,
+          "maximum": 100
         }
       }
     },
@@ -4969,7 +4969,7 @@
         "resourceType",
         "resourceWithoutLocation",
         "policyDefinitionReferenceId",
-        "resourcePercentage",
+        "resourceRolloutPercentage",
         "userPrincipalId",
         "groupPrincipalId"
       ],
@@ -4998,9 +4998,9 @@
             "description": "The selector kind to filter policies by the policy definition reference ID."
           },
           {
-            "name": "resourcePercentage",
-            "value": "resourcePercentage",
-            "description": "The selector kind to filter policies by the resource percentage."
+            "name": "resourceRolloutPercentage",
+            "value": "resourceRolloutPercentage",
+            "description": "The selector kind to filter policies by the resource rollout percentage."
           },
           {
             "name": "userPrincipalId",

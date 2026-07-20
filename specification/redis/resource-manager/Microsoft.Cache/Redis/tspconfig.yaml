@@ -15,6 +15,10 @@ options:
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: "Azure.ResourceManager.Redis"
     enable-wire-path-attribute: true
+  "@azure-typespec/http-client-csharp-provisioning":
+    namespace: "Azure.Provisioning.Redis"
+    emitter-output-dir: "{project-root}/Azure.Provisioning.Redis"
+    api-version: "2024-11-01"
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-redis"
     namespace: "azure.mgmt.redis"
@@ -55,3 +59,4 @@ options:
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"

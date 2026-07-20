@@ -12,8 +12,10 @@ namespace Microsoft.SqlVirtualMachine;
 /**
  * A SQL virtual machine.
  */
-model SqlVirtualMachine
-  is Azure.ResourceManager.TrackedResource<SqlVirtualMachineProperties, true> {
+model SqlVirtualMachine is Azure.ResourceManager.TrackedResource<
+  SqlVirtualMachineProperties,
+  true
+> {
   ...ResourceNameParameter<
     Resource = SqlVirtualMachine,
     KeyName = "sqlVirtualMachineName",
