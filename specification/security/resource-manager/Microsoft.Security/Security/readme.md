@@ -738,6 +738,7 @@ input-file:
 - preview/2025-10-01-preview/pricings.json
 - stable/2024-08-01/security-SecurityStandards.json
 - stable/2026-01-01/privateLinks.json
+- stable/2026-08-01/datascanners.json
 
 # Autorest suppressions
 suppressions:
