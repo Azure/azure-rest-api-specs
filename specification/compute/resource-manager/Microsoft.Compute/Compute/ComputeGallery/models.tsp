@@ -146,6 +146,12 @@ union ConfidentialVMEncryptionType {
   EncryptedWithCmk: "EncryptedWithCmk",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   NonPersistedTPM: "NonPersistedTPM",
+
+  /**
+   * Confidential VM Encryption Type which should be used for encrypting the data disks with customer managed keys. This Encryption type should only be used for data disks, and should not be used for OS disk encryption. When this encryption type is used for data disk encryption.Subscriptions need to be enrolled for Confidential VM with data encryption through following AFEC - Microsoft.Compute/ConfidentialVMDataDiskEncryptionPreview
+   */
+  @added(Versions.v2026_03_03)
+  DataDiskEncryptedWithCmk: "DataDiskEncryptedWithCmk",
 }
 
 /**
@@ -532,6 +538,18 @@ model SoftDeletePolicy {
    * Enables soft-deletion for resources in this gallery, allowing them to be recovered within retention time.
    */
   isSoftDeleteEnabled?: boolean;
+
+  /**
+   * The retention period in days for a soft-deleted resource. After this period elapses, the soft-deleted gallery image version transitions to a simulated hard-deleted state.
+   */
+  @added(Versions.v2026_03_03)
+  retentionPeriodInDays?: int32;
+
+  /**
+   * The grace period in days for a simulated hard-deleted resource. During this period the gallery image version is unusable but can still be recovered if required. After this period elapses, the gallery image version is permanently (hard) deleted.
+   */
+  @added(Versions.v2026_03_03)
+  gracePeriodInDays?: int32;
 }
 
 /**
@@ -1038,6 +1056,22 @@ model OSDiskImageSecurityProfile {
 }
 
 /**
+ * Contains security profile for a DataDisk image.
+ */
+@added(Versions.v2026_03_03)
+model DataDiskImageSecurityProfile {
+  /**
+   * confidential VM encryption types
+   */
+  confidentialVMEncryptionType?: ConfidentialVMEncryptionType;
+
+  /**
+   * secure VM disk encryption set id
+   */
+  secureVMDiskEncryptionSetId?: string;
+}
+
+/**
  * This is the disk image encryption base class.
  */
 model DiskImageEncryption {
@@ -1052,6 +1086,12 @@ model DiskImageEncryption {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model DataDiskImageEncryption extends DiskImageEncryption {
+  /**
+   * This property specifies the security profile of a data disk image.
+   */
+  @added(Versions.v2026_03_03)
+  securityProfile?: DataDiskImageSecurityProfile;
+
   /**
    * This property specifies the logical unit number of the data disk. This value is used to identify data disks within the Virtual Machine and therefore must be unique for each data disk attached to the Virtual Machine.
    */
@@ -1782,6 +1822,20 @@ model GallerySoftDeletedResourceProperties {
    * The timestamp for when the resource is soft-deleted. In dateTime offset format.
    */
   softDeletedTime?: string;
+
+  /**
+   * The timestamp after which a soft-deleted gallery image version is no longer consumable for VM/VMSS creation or VMSS scale out. It is calculated from the soft-deleted time plus the retention period. In dateTime offset format.
+   */
+  @added(Versions.v2026_03_03)
+  @visibility(Lifecycle.Read)
+  consumptionEndTime?: utcDateTime;
+
+  /**
+   * The timestamp at which a soft-deleted gallery image version is permanently (hard) deleted and can no longer be recovered. In dateTime offset format.
+   */
+  @added(Versions.v2026_03_03)
+  @visibility(Lifecycle.Read)
+  hardDeletionTargetTime?: utcDateTime;
 }
 
 /**
@@ -2374,6 +2428,24 @@ model SharedGalleryImageVersionList
 @@identifiers(SharedGalleryImageVersionList.value, #[]);
 
 /**
+ * The state of a gallery image version, derived from its soft-delete status.
+ */
+@added(Versions.v2026_03_03)
+union GalleryImageVersionState {
+  string,
+
+  /**
+   * The gallery image version is active and available for use.
+   */
+  Active: "Active",
+
+  /**
+   * The gallery image version has been soft-deleted. It is available for use only when a specific version is requested, and it will not be resolved as the latest version.
+   */
+  SoftDeleted: "SoftDeleted",
+}
+
+/**
  * Describes the properties of a gallery image version.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
@@ -2405,6 +2477,20 @@ model SharedGalleryImageVersionProperties {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   artifactTags?: Record<string>;
+
+  /**
+   * The timestamp after which a soft-deleted gallery image version is no longer consumable for VM/VMSS creation or VMSS scale out. It is calculated from the soft-deleted time plus the retention period, and is not present for active gallery image versions. In dateTime offset format.
+   */
+  @added(Versions.v2026_03_03)
+  @visibility(Lifecycle.Read)
+  consumptionEndTime?: utcDateTime;
+
+  /**
+   * The state of the gallery image version, derived from its soft-delete status.
+   */
+  @added(Versions.v2026_03_03)
+  @visibility(Lifecycle.Read)
+  imageState?: GalleryImageVersionState;
 }
 
 /**
@@ -2685,6 +2771,20 @@ model CommunityGalleryImageVersionProperties {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   artifactTags?: Record<string>;
+
+  /**
+   * The timestamp after which a soft-deleted gallery image version is no longer consumable for VM/VMSS creation or VMSS scale out. It is calculated from the soft-deleted time plus the retention period, and is not present for active gallery image versions. In dateTime offset format.
+   */
+  @added(Versions.v2026_03_03)
+  @visibility(Lifecycle.Read)
+  consumptionEndTime?: utcDateTime;
+
+  /**
+   * The state of the gallery image version, derived from its soft-delete status.
+   */
+  @added(Versions.v2026_03_03)
+  @visibility(Lifecycle.Read)
+  imageState?: GalleryImageVersionState;
 }
 
 /**
