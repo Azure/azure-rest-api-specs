@@ -4,6 +4,8 @@ import "@typespec/http";
 import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
+using Azure.Core;
+using TypeSpec.Http;
 using TypeSpec.Versioning;
 
 using Microsoft.PlanetaryComputer;
@@ -18,10 +20,6 @@ namespace Customizations;
 // === Client name conflicts ===
 @@clientName(IngestionOperations, "IngestionOperationsManagement", "csharp");
 @@clientName(TilerInfoOperations, "TilerInfoManagement", "csharp");
-// @@clientName(StacItemOrStacItemCollection,
-//   "StacItemOrStacItemCollectionContent",
-//   "csharp"
-// );
 @@clientName(StacItemProperties.datetime, "date_time", "python");
 @@clientName(StacSearchParameters.datetime, "date_time", "python");
 @@clientName(SharedAccessSignature, "Sas", "python");
@@ -68,10 +66,61 @@ namespace Customizations;
 
 // === Python snake_case parameter renames ===
 @@clientName(CollectionMosaicFilterQueryParameters.sortby, "sort_by", "python");
+@@clientName(CollectionMosaicFilterQueryParameters.sortby, "sortBy", "csharp");
 @@clientName(BoundingBoxPathParameters.minx, "min_x", "python");
 @@clientName(BoundingBoxPathParameters.miny, "min_y", "python");
 @@clientName(BoundingBoxPathParameters.maxx, "max_x", "python");
 @@clientName(BoundingBoxPathParameters.maxy, "max_y", "python");
+
+// C# camelCase fixes for bounding box parameters (minx → minX, etc.)
+@@clientName(BoundingBoxPathParameters.minx, "minX", "csharp");
+@@clientName(BoundingBoxPathParameters.miny, "minY", "csharp");
+@@clientName(BoundingBoxPathParameters.maxx, "maxX", "csharp");
+@@clientName(BoundingBoxPathParameters.maxy, "maxY", "csharp");
+
+// C# rename: id → sourceId for ingestion source operations (distinguish from other id types)
+@@clientName(IngestionSourceParameters.id, "sourceId", "csharp");
+@@clientName(IngestionSources.replace::parameters.id, "sourceId", "csharp");
+@@clientName(IngestionSources.delete::parameters.id, "sourceId", "csharp");
+
+// C# rename: creationTime → createdOn (Azure SDK convention for timestamps)
+@@clientName(IngestionDefinition.creationTime, "createdOn", "csharp");
+@@clientName(IngestionRun.creationTime, "createdOn", "csharp");
+@@clientName(IngestionRunOperation.creationTime, "createdOn", "csharp");
+@@clientName(Operation.creationTime, "createdOn", "csharp");
+
+// C# rename: *Url → *Uri (Azure SDK convention)
+@@clientName(
+  IngestionDefinition.sourceCatalogUrl,
+  "sourceCatalogUri",
+  "csharp"
+);
+@@clientName(
+  IngestionDefinition.stacGeoparquetUrl,
+  "stacGeoparquetUri",
+  "csharp"
+);
+@@clientName(IngestionRun.sourceCatalogUrl, "sourceCatalogUri", "csharp");
+
+// C# rename: finishTime → finishedOn (Azure SDK convention for timestamps)
+@@clientName(IngestionRunOperation.finishTime, "finishedOn", "csharp");
+@@clientName(Operation.finishTime, "finishedOn", "csharp");
+
+// C# rename: startTime → startedOn (Azure SDK timestamp convention)
+@@clientName(IngestionRunOperation.startTime, "startedOn", "csharp");
+@@clientName(Operation.startTime, "startedOn", "csharp");
+
+// C# rename: created → createdOn (Azure SDK timestamp convention)
+@@clientName(IngestionSourceSummary.created, "createdOn", "csharp");
+@@clientName(IngestionSource.created, "createdOn", "csharp");
+@@clientName(StacCommonMetadata.created, "createdOn", "csharp");
+
+// C# rename: IngestionSourceType → IngestionSourceKind (avoid "Type" suffix)
+@@clientName(IngestionSourceType, "IngestionSourceKind", "csharp");
+
+// C# rename: importType → importKind, IngestionType → IngestionKind (avoid "Type" suffix)
+@@clientName(IngestionDefinition.importType, "importKind", "csharp");
+@@clientName(IngestionType, "IngestionKind", "csharp");
 
 // Disable convenient API for JSON-Merge patch operations
 @@convenientAPI(Ingestions.update, false, "csharp,java");
@@ -80,18 +129,14 @@ namespace Customizations;
 // Workaround errors CS0019 and CS0019
 @@alternateType(StacCollectionTemporalExtent.interval, string[][], "csharp");
 
+// Use Azure.Core.ETag type for StacItem.eTag
+@@alternateType(StacItem.eTag, eTag, "csharp");
+
 // Change the WmtsCapabilitiesXmlResponse body type from bytes to string for JavaScript
 @@alternateType(WmtsCapabilitiesXmlResponse.body, string, "javascript");
 
 // Rename Ingestion.delete to deleteIngestion for JavaScript to avoid @fixme conflict
 @@clientName(Ingestion.delete, "deleteIngestion", "javascript");
-
-// === Python external type mappings ===
-// NOTE: @@alternateType with ExternalType is currently broken for ALL models used
-// in our API — not just @discriminator hierarchies. See:
-// https://github.com/Azure/azure-sdk-for-python/issues/46020
-// Feature, FeatureCollection, StacCollection, and all Geometry/STAC discriminated
-// types are excluded until the pygen fix is released.
 
 // Address naming convention violations for C# SDK
 @@clientName(
@@ -103,12 +148,6 @@ namespace Customizations;
 // Models ending with "Definition" - rename appropriately
 @@clientName(IngestionDefinition, "IngestionInformation", "csharp");
 
-// === Python API naming notes ===
-// All Python method naming (searches→search, list→get, _by_tms, _by_format,
-// geo_json removal) is now handled via interface member names below.
-// Language-specific @@clientName overrides can be added here when other
-// languages (C#, Java, JS) need different names from the Python defaults.
-
 // Models ending with "Operation" - rename to "Info"
 @@clientName(IngestionRunOperation, "IngestionRunInformation", "csharp");
 
@@ -118,7 +157,94 @@ namespace Customizations;
 @@clientName(Point, "PointGeometry", "csharp");
 @@clientName(Polygon, "PolygonGeometry", "csharp");
 @@clientName(Resampling, "ResamplingMethod", "csharp");
-@@clientName(Operation, "LongRunningOperation", "csharp");
+@@clientName(FeatureType, "FeatureKind", "csharp");
+@@clientName(Operation, "PlanetaryComputerOperation", "csharp");
+@@clientName(Operation.type, "Kind", "csharp");
+@@clientName(OperationStatus, "PlanetaryComputerOperationStatus", "csharp");
+@@clientName(
+  OperationStatusHistoryItem,
+  "PlanetaryComputerOperationStatusHistoryItem",
+  "csharp"
+);
+@@clientName(ErrorInfo, "PlanetaryComputerErrorInfo", "csharp");
+
+// C# rename: all *Type unions/models → *Kind (avoid "Type" suffix)
+@@clientName(LegendConfigType, "LegendConfigKind", "csharp");
+@@clientName(MosaicMetadataType, "MosaicMetadataKind", "csharp");
+@@clientName(NoDataType, "NoDataKind", "csharp");
+@@clientName(PartitionType, "PartitionKind", "csharp");
+@@clientName(PartitionTypeScheme, "PartitionKindScheme", "csharp");
+@@clientName(RenderOptionType, "RenderOptionKind", "csharp");
+@@clientName(FeatureCollectionType, "FeatureCollectionKind", "csharp");
+@@clientName(GeometryType, "GeometryKind", "csharp");
+@@clientName(GeometryCollectionType, "GeometryCollectionKind", "csharp");
+@@clientName(
+  StacQueryableDefinitionDataType,
+  "StacQueryableDefinitionDataKind",
+  "csharp"
+);
+@@clientName(StacItemCollectionType, "StacItemCollectionKind", "csharp");
+@@clientName(StacModelType, "StacModelKind", "csharp");
+@@clientName(StacLinkType, "StacLinkKind", "csharp");
+
+// C# rename: .type properties → Kind (on models not yet handled)
+@@clientName(RenderOption.type, "Kind", "csharp");
+@@clientName(RenderOptionLegend.type, "Kind", "csharp");
+@@clientName(MosaicMetadata.type, "Kind", "csharp");
+@@clientName(AssetMetadata.type, "Kind", "csharp");
+@@clientName(TileSetLink.type, "Kind", "csharp");
+
+// C# rename: .type properties on STAC models → Kind
+@@clientName(StacAsset.type, "Kind", "csharp");
+@@clientName(StacItemAsset.type, "Kind", "csharp");
+@@clientName(StacCollection.type, "Kind", "csharp");
+@@clientName(StacLandingPage.type, "Kind", "csharp");
+@@clientName(StacItem.type, "Kind", "csharp");
+@@clientName(StacItemCollection.type, "Kind", "csharp");
+@@clientName(StacLink.type, "Kind", "csharp");
+
+// C# rename: tilejsonKey → tileJsonKey (fix casing)
+@@clientName(RenderOptionVectorOptions.tilejsonKey, "tileJsonKey", "csharp");
+
+// C# rename: colormap → colorMap (fix camelCase word boundary)
+@@clientName(TilerInfo.colormap, "colorMap", "csharp");
+
+// C# rename: dtype → dataType (expand abbreviation)
+@@clientName(TilerInfo.dtype, "dataType", "csharp");
+
+// C# rename: dataType → dataKind (property uses *Type union renamed to *Kind)
+@@clientName(StacQueryable.dataType, "dataKind", "csharp");
+
+// C# rename: lastUsed → lastUsedOn (Azure SDK timestamp convention)
+@@clientName(TilerStacSearchDefinition.lastUsed, "lastUsedOn", "csharp");
+
+// C# rename: expiration → expiresOn (Azure SDK timestamp convention)
+@@clientName(
+  SharedAccessSignatureTokenConnection.expiration,
+  "expiresOn",
+  "csharp"
+);
+
+// C# rename: updated → updatedOn (Azure SDK timestamp convention)
+@@clientName(StacCommonMetadata.updated, "updatedOn", "csharp");
+
+// C# rename: STAC temporal properties (Azure SDK timestamp convention)
+@@clientName(StacItemProperties.startDatetime, "startedOn", "csharp");
+@@clientName(StacItemProperties.endDatetime, "endedOn", "csharp");
+
+// C# rename: timestamp → more descriptive names
+@@clientName(OperationStatusHistoryItem.timestamp, "occurredOn", "csharp");
+@@clientName(StacItem.timestamp, "recordedOn", "csharp");
+
+// Response → Result renames (Azure SDK reserves "Response" for HTTP response types)
+@@clientName(AssetStatisticsResponse, "AssetStatisticsResult", "csharp");
+@@clientName(ClassMapLegendResponse, "ClassMapLegendResult", "csharp");
+@@clientName(
+  QueryableDefinitionsResponse,
+  "QueryableDefinitionsResult",
+  "csharp"
+);
+@@clientName(TilerInfoMapResponse, "TilerInfoMapResult", "csharp");
 
 // Generic geometry class names - add descriptive prefixes for Java to avoid
 // collisions with common domain types and improve discoverability.
@@ -273,9 +399,6 @@ namespace Customizations;
 
 // Additional model renames for C#
 @@clientName(RenderOption, "RenderConfiguration", "csharp");
-@@clientName(StacCollection, "StacCollectionResource", "csharp");
-@@clientName(StacItem, "StacItemResource", "csharp");
-@@clientName(StacItemCollection, "StacItemCollectionResource", "csharp");
 
 // === Ingestion Management ===
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -889,3 +1012,454 @@ interface SharedAccessSignature {
     """,
   DocumentationMode.replace
 );
+
+// =============================================================================
+// C# Options Bags for DataClient methods with >6 parameters
+// Groups optional query parameters into options models for better C# ergonomics.
+// Path parameters (collectionId, itemId, z, x, y, etc.) stay as direct method args.
+// Wire format is unchanged — these are purely client-side grouping.
+// =============================================================================
+
+// --- Item Tile Options ---
+/** Options for item tile rendering operations. */
+@added(Versions.v2026_04_15)
+model GetTileOptions {
+  ...AssetQueryParameters;
+  ...TerrainAlgorithmQueryParameters;
+  ...TileMatrixSetQueryParameters;
+  ...MiscTileQueryParameters;
+  ...TilePaddingQueryParameters;
+  ...SubDatasetQueryParameters;
+}
+
+// --- Collection Tile Options ---
+/** Options for collection-level tile rendering operations. */
+@added(Versions.v2026_04_15)
+model GetCollectionTileOptions {
+  ...AssetQueryParameters;
+  ...MosaicSearchQueryParameters;
+  ...CollectionMosaicFilterQueryParameters;
+  ...CollectionSubDatasetQueryParameters;
+  ...TerrainAlgorithmQueryParameters;
+  ...MosaicTileQueryParameters;
+  ...MiscTileQueryParameters;
+  ...TilePaddingQueryParameters;
+}
+
+// --- Search Tile Options ---
+/** Options for search-based tile rendering operations. */
+@added(Versions.v2026_04_15)
+model GetSearchTileOptions {
+  ...AssetQueryParameters;
+  ...MosaicSearchQueryParameters;
+  ...SubDatasetQueryParameters;
+  ...TerrainAlgorithmQueryParameters;
+  ...MosaicTileQueryParameters;
+  ...MiscTileQueryParameters;
+  ...TilePaddingQueryParameters;
+}
+
+// --- Item TileJSON Options ---
+/** Options for item TileJSON metadata operations. */
+@added(Versions.v2026_04_15)
+model GetItemTileJsonOptions {
+  ...AssetQueryParameters;
+  ...TerrainAlgorithmQueryParameters;
+  ...TileMatrixSetQueryParameters;
+  ...MiscTileQueryParameters;
+  ...TilePaddingQueryParameters;
+  ...SubDatasetQueryParameters;
+  ...ZoomQueryParameters;
+
+  /** The format of the output tile image. */
+  @query("tile_format") tileFormat?: TilerImageFormat;
+
+  /** The scale factor applied to the tile. */
+  @query("tile_scale") tileScale?: int32;
+}
+
+// --- Collection TileJSON Options ---
+/** Options for collection-level TileJSON metadata operations. */
+@added(Versions.v2026_04_15)
+model GetCollectionTileJsonOptions {
+  ...AssetQueryParameters;
+  ...MosaicSearchQueryParameters;
+  ...CollectionMosaicFilterQueryParameters;
+  ...CollectionSubDatasetQueryParameters;
+  ...TerrainAlgorithmQueryParameters;
+  ...ZoomQueryParameters;
+  ...MosaicTileQueryParameters;
+  ...MiscTileQueryParameters;
+  ...TilePaddingQueryParameters;
+
+  /** The format of the output tile image. */
+  @query("tile_format") tileFormat?: TilerImageFormat;
+
+  /** The scale factor applied to the tile. */
+  @query("tile_scale") tileScale?: int32;
+}
+
+// --- Search TileJSON Options ---
+/** Options for search-based TileJSON metadata operations. */
+@added(Versions.v2026_04_15)
+model GetSearchTileJsonOptions {
+  ...AssetQueryParameters;
+  ...MosaicSearchQueryParameters;
+  ...SubDatasetQueryParameters;
+  ...TerrainAlgorithmQueryParameters;
+  ...ZoomQueryParameters;
+  ...MosaicTileQueryParameters;
+  ...MiscTileQueryParameters;
+  ...TilePaddingQueryParameters;
+
+  /** The format of the output tile image. */
+  @query("tile_format") tileFormat?: TilerImageFormat;
+
+  /** The scale factor applied to the tile. */
+  @query("tile_scale") tileScale?: int32;
+}
+
+// --- Item Preview Options ---
+/** Options for item preview/image operations. */
+@added(Versions.v2026_04_15)
+model GetItemPreviewOptions {
+  ...AssetQueryParameters;
+  ...TerrainAlgorithmQueryParameters;
+  ...DimensionsQueryParameters;
+  ...MiscTileQueryParameters;
+  ...DstCrsQueryParameter;
+  ...SubDatasetQueryParameters;
+
+  /** The color formula to apply for image processing. */
+  @query("color_formula") colorFormula?: string;
+
+  /** The coordinate reference system of the input coordinates. */
+  @query("coord_crs") coordinateCrs?: string;
+
+  /** The resampling algorithm to use. */
+  @query("resampling") resampling?: Resampling;
+
+  /** The maximum output image size in pixels. */
+  @query("max_size") maxSize?: int32;
+}
+
+// --- Item BboxCrop Options ---
+/** Options for item bounding box crop operations. */
+@added(Versions.v2026_04_15)
+model GetItemBboxCropOptions {
+  ...AssetQueryParameters;
+  ...TerrainAlgorithmQueryParameters;
+  ...MiscTileQueryParameters;
+  ...SubDatasetQueryParameters;
+
+  /** The color formula to apply for image processing. */
+  @query("color_formula") colorFormula?: string;
+
+  /** The coordinate reference system of the input coordinates. */
+  @query("coord_crs") coordinateCrs?: string;
+
+  /** The target coordinate reference system for the output. */
+  @query("dst_crs") destinationCrs?: string;
+
+  /** The resampling algorithm to use. */
+  @query("resampling") resampling?: Resampling;
+
+  /** The maximum output image size in pixels. */
+  @query("max_size") maxSize?: int32;
+}
+
+// --- Collection BboxCrop Options ---
+/** Options for collection-level bounding box crop operations. */
+@added(Versions.v2026_04_15)
+model GetCollectionBboxCropOptions {
+  ...AssetQueryParameters;
+  ...MosaicSearchQueryParameters;
+  ...CollectionMosaicFilterQueryParameters;
+  ...CollectionSubDatasetQueryParameters;
+  ...TerrainAlgorithmQueryParameters;
+  ...MosaicCropQueryParameters;
+  ...MiscTileQueryParameters;
+
+  /** The coordinate reference system of the input coordinates. */
+  @query("coord_crs") coordinateCrs?: string;
+
+  /** The target coordinate reference system for the output. */
+  @query("dst_crs") destinationCrs?: string;
+
+  /** The maximum output image size in pixels. */
+  @query("max_size") maxSize?: int32;
+}
+
+// --- Search BboxCrop Options ---
+/** Options for search-based bounding box crop operations. */
+@added(Versions.v2026_04_15)
+model GetSearchBboxCropOptions {
+  ...AssetQueryParameters;
+  ...MosaicSearchQueryParameters;
+  ...SubDatasetQueryParameters;
+  ...TerrainAlgorithmQueryParameters;
+  ...MosaicCropQueryParameters;
+  ...MiscTileQueryParameters;
+
+  /** The coordinate reference system of the input coordinates. */
+  @query("coord_crs") coordinateCrs?: string;
+
+  /** The target coordinate reference system for the output. */
+  @query("dst_crs") destinationCrs?: string;
+
+  /** The maximum output image size in pixels. */
+  @query("max_size") maxSize?: int32;
+}
+
+// --- Item CropFeature Options ---
+/** Options for item GeoJSON feature crop operations. */
+@added(Versions.v2026_04_15)
+model CropFeatureOptions {
+  ...AssetQueryParameters;
+  ...TerrainAlgorithmQueryParameters;
+  ...DimensionsQueryParameters;
+  ...MiscTileQueryParameters;
+  ...DstCrsQueryParameter;
+  ...SubDatasetQueryParameters;
+
+  /** The color formula to apply for image processing. */
+  @query("color_formula") colorFormula?: string;
+
+  /** The coordinate reference system of the input coordinates. */
+  @query("coord_crs") coordinateCrs?: string;
+
+  /** The resampling algorithm to use. */
+  @query("resampling") resampling?: Resampling;
+
+  /** The maximum output image size in pixels. */
+  @query("max_size") maxSize?: int32;
+}
+
+// --- Collection CropFeature Options ---
+/** Options for collection-level GeoJSON feature crop operations. */
+@added(Versions.v2026_04_15)
+model CropCollectionFeatureOptions {
+  ...AssetQueryParameters;
+  ...MosaicSearchQueryParameters;
+  ...CollectionMosaicFilterQueryParameters;
+  ...CollectionSubDatasetQueryParameters;
+  ...TerrainAlgorithmQueryParameters;
+  ...DimensionsQueryParameters;
+  ...MosaicCropQueryParameters;
+  ...MiscTileQueryParameters;
+  ...DstCrsQueryParameter;
+
+  /** The coordinate reference system of the input coordinates. */
+  @query("coord_crs") coordinateCrs?: string;
+
+  /** The maximum output image size in pixels. */
+  @query("max_size") maxSize?: int32;
+}
+
+// --- Search CropFeature Options ---
+/** Options for search-based GeoJSON feature crop operations. */
+@added(Versions.v2026_04_15)
+model CropSearchFeatureOptions {
+  ...AssetQueryParameters;
+  ...MosaicSearchQueryParameters;
+  ...SubDatasetQueryParameters;
+  ...TerrainAlgorithmQueryParameters;
+  ...DimensionsQueryParameters;
+  ...MosaicCropQueryParameters;
+  ...MiscTileQueryParameters;
+  ...DstCrsQueryParameter;
+
+  /** The coordinate reference system of the input coordinates. */
+  @query("coord_crs") coordinateCrs?: string;
+
+  /** The maximum output image size in pixels. */
+  @query("max_size") maxSize?: int32;
+}
+
+// --- Item Point Options ---
+/** Options for item point query operations. */
+@added(Versions.v2026_04_15)
+model GetItemPointOptions {
+  ...AssetQueryParameters;
+  ...SubDatasetQueryParameters;
+
+  /** The coordinate reference system of the input coordinates. */
+  @query("coord_crs") coordinateCrs?: string;
+
+  /** The resampling algorithm to use. */
+  @query("resampling") resampling?: Resampling;
+}
+
+// --- Collection Point Options ---
+/** Options for collection-level point query operations. */
+@added(Versions.v2026_04_15)
+model GetCollectionPointOptions {
+  ...AssetQueryParameters;
+  ...MosaicSearchQueryParameters;
+  ...CollectionMosaicFilterQueryParameters;
+  ...CollectionSubDatasetQueryParameters;
+
+  /** The coordinate reference system of the input coordinates. */
+  @query("coord_crs") coordinateCrs?: string;
+
+  /** The resampling algorithm to use. */
+  @query("resampling") resampling?: Resampling;
+}
+
+// --- Search Point Options ---
+/** Options for search-based point query operations. */
+@added(Versions.v2026_04_15)
+model GetSearchPointOptions {
+  ...AssetQueryParameters;
+  ...MosaicSearchQueryParameters;
+  ...SubDatasetQueryParameters;
+
+  /** The coordinate reference system of the input coordinates. */
+  @query("coord_crs") coordinateCrs?: string;
+
+  /** The resampling algorithm to use. */
+  @query("resampling") resampling?: Resampling;
+}
+
+// --- Item Statistics Options ---
+/** Options for item statistics operations. */
+@added(Versions.v2026_04_15)
+model GetItemStatisticsOptions {
+  ...AssetQueryParameters;
+  ...StatisticsQueryParameters;
+  ...SubDatasetQueryParameters;
+
+  /** The coordinate reference system of the input coordinates. */
+  @query("coord_crs") coordinateCrs?: string;
+}
+
+// --- Item WMTS Options ---
+/** Options for item WMTS capabilities operations. */
+@added(Versions.v2026_04_15)
+model GetItemWmtsOptions {
+  ...AssetQueryParameters;
+  ...TerrainAlgorithmQueryParameters;
+  ...ZoomQueryParameters;
+  ...MiscTileQueryParameters;
+  ...TilePaddingQueryParameters;
+  ...SubDatasetQueryParameters;
+
+  /** The format of the output tile image. */
+  @query("tile_format") tileFormat?: TilerImageFormat;
+
+  /** The scale factor applied to the tile. */
+  @query("tile_scale") tileScale?: int32;
+}
+
+// --- Collection WMTS Options ---
+/** Options for collection-level WMTS capabilities operations. */
+@added(Versions.v2026_04_15)
+model GetCollectionWmtsOptions {
+  ...CollectionMosaicFilterQueryParameters;
+  ...ZoomQueryParameters;
+  ...AssetQueryParameters;
+
+  /** The format of the output tile image. */
+  @query("tile_format") tileFormat?: TilerImageFormat;
+
+  /** The scale factor applied to the tile. */
+  @query("tile_scale") tileScale?: int32;
+}
+
+// --- Search WMTS Options ---
+/** Options for search-based WMTS capabilities operations. */
+@added(Versions.v2026_04_15)
+model GetSearchWmtsOptions {
+  ...ZoomQueryParameters;
+  ...AssetQueryParameters;
+
+  /** The format of the output tile image. */
+  @query("tile_format") tileFormat?: TilerImageFormat;
+
+  /** The scale factor applied to the tile. */
+  @query("tile_scale") tileScale?: int32;
+}
+
+// =============================================================================
+// Suppress convenience methods for operations returning Response<BinaryData>.
+// Keep protocol-only overload; typed convenience can be added later.
+// =============================================================================
+
+// Item Tiles
+@@convenientAPI(Data.getTile, false, "csharp");
+@@convenientAPI(Data.getTileByFormat, false, "csharp");
+@@convenientAPI(Data.getTileByScale, false, "csharp");
+@@convenientAPI(Data.getTileByScaleAndFormat, false, "csharp");
+@@convenientAPI(Data.getTileNoTms, false, "csharp");
+@@convenientAPI(Data.getTileNoTmsByFormat, false, "csharp");
+@@convenientAPI(Data.getTileNoTmsByScale, false, "csharp");
+@@convenientAPI(Data.getTileNoTmsByScaleAndFormat, false, "csharp");
+
+// Item Preview
+@@convenientAPI(Data.getItemPreview, false, "csharp");
+@@convenientAPI(Data.getItemPreviewWithFormat, false, "csharp");
+
+// Item BboxCrop
+@@convenientAPI(Data.getItemBboxCrop, false, "csharp");
+@@convenientAPI(Data.getItemBboxCropWithDimensions, false, "csharp");
+
+// Item CropFeature
+@@convenientAPI(Data.cropFeature, false, "csharp");
+@@convenientAPI(Data.cropFeatureByFormat, false, "csharp");
+@@convenientAPI(Data.cropFeatureWidthByHeight, false, "csharp");
+
+// Item WMTS
+@@convenientAPI(Data.getItemWmtsCapabilities, false, "csharp");
+@@convenientAPI(Data.getItemWmtsCapabilitiesByTms, false, "csharp");
+
+// Collection Tiles
+@@convenientAPI(Data.getCollectionTile, false, "csharp");
+@@convenientAPI(Data.getCollectionTileByFormat, false, "csharp");
+@@convenientAPI(Data.getCollectionTileByScale, false, "csharp");
+@@convenientAPI(Data.getCollectionTileByScaleAndFormat, false, "csharp");
+@@convenientAPI(Data.getCollectionTileNoTms, false, "csharp");
+@@convenientAPI(Data.getCollectionTileNoTmsByFormat, false, "csharp");
+@@convenientAPI(Data.getCollectionTileNoTmsByScale, false, "csharp");
+@@convenientAPI(Data.getCollectionTileNoTmsByScaleAndFormat, false, "csharp");
+
+// Collection BboxCrop
+@@convenientAPI(Data.getCollectionBboxCrop, false, "csharp");
+@@convenientAPI(Data.getCollectionBboxCropWithDimensions, false, "csharp");
+
+// Collection CropFeature
+@@convenientAPI(Data.cropCollectionFeature, false, "csharp");
+@@convenientAPI(Data.cropCollectionFeatureByFormat, false, "csharp");
+@@convenientAPI(Data.cropCollectionFeatureWidthByHeight, false, "csharp");
+
+// Collection WMTS
+@@convenientAPI(Data.getCollectionWmtsCapabilities, false, "csharp");
+@@convenientAPI(Data.getCollectionWmtsCapabilitiesByTms, false, "csharp");
+
+// Search Tiles
+@@convenientAPI(Data.getSearchTile, false, "csharp");
+@@convenientAPI(Data.getSearchTileByFormat, false, "csharp");
+@@convenientAPI(Data.getSearchTileByScale, false, "csharp");
+@@convenientAPI(Data.getSearchTileByScaleAndFormat, false, "csharp");
+@@convenientAPI(Data.getSearchTileNoTms, false, "csharp");
+@@convenientAPI(Data.getSearchTileNoTmsByFormat, false, "csharp");
+@@convenientAPI(Data.getSearchTileNoTmsByScale, false, "csharp");
+@@convenientAPI(Data.getSearchTileNoTmsByScaleAndFormat, false, "csharp");
+
+// Search BboxCrop
+@@convenientAPI(Data.getSearchBboxCrop, false, "csharp");
+@@convenientAPI(Data.getSearchBboxCropWithDimensions, false, "csharp");
+
+// Search CropFeature
+@@convenientAPI(Data.cropSearchFeature, false, "csharp");
+@@convenientAPI(Data.cropSearchFeatureByFormat, false, "csharp");
+@@convenientAPI(Data.cropSearchFeatureWidthByHeight, false, "csharp");
+
+// Search WMTS
+@@convenientAPI(Data.getSearchWmtsCapabilities, false, "csharp");
+@@convenientAPI(Data.getSearchWmtsCapabilitiesByTms, false, "csharp");
+
+// Legend (returns PNG image)
+@@convenientAPI(Data.getLegend, false, "csharp");
+
+// Collection Thumbnail
+@@convenientAPI(Stac.getCollectionThumbnail, false, "csharp");
