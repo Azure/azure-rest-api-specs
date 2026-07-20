@@ -267,6 +267,33 @@ union NfsVersion {
   NFSv3: "NFSv3",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   NFSv4: "NFSv4",
+  @added(Versions.v2026_05_01)
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  NFSv4_1: "NFSv4_1",
+}
+
+/**
+ *  Source type to differentiate SMBMount and FSX-SMB endpoints. Default is SMBMount.
+ */
+@added(Versions.v2026_05_01)
+union SmbMountSourceType {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  SmbMount: "SmbMount",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  FSXSMB: "FSX-SMB",
+}
+
+/**
+ *  Source type to differentiate NFSMount and FSX-EFS endpoints. Default is NFSMount.
+ */
+@added(Versions.v2026_05_01)
+union NfsMountSourceType {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  NfsMount: "NfsMount",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  FSXEFS: "FSX-EFS",
 }
 
 /**
@@ -1446,6 +1473,12 @@ model NfsMountEndpointProperties extends EndpointBaseProperties {
    * The Endpoint resource type.
    */
   endpointType: "NfsMount";
+
+  /**
+   * Source type to differentiate NFSMount and FSX-SMB endpoints. Default is NFSMount.
+   */
+  @added(Versions.v2026_05_01)
+  sourceType?: NfsMountSourceType = NfsMountSourceType.NfsMount;
 }
 
 /**
@@ -1635,6 +1668,12 @@ model SmbMountEndpointProperties extends EndpointBaseProperties {
    * The Endpoint resource type.
    */
   endpointType: "SmbMount";
+
+  /**
+   * Source type to differentiate SMBMount and FSX-SMB endpoints. Default is SMBMount.
+   */
+  @added(Versions.v2026_05_01)
+  sourceType?: SmbMountSourceType = SmbMountSourceType.SmbMount;
 }
 
 /**

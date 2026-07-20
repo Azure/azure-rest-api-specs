@@ -3983,6 +3983,29 @@
             "read",
             "create"
           ]
+        },
+        "sourceType": {
+          "type": "string",
+          "description": "Source type to differentiate NFSMount and FSX-SMB endpoints. Default is NFSMount.",
+          "default": "NfsMount",
+          "enum": [
+            "NfsMount",
+            "FSX-EFS"
+          ],
+          "x-ms-enum": {
+            "name": "NfsMountSourceType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "NfsMount",
+                "value": "NfsMount"
+              },
+              {
+                "name": "FSXEFS",
+                "value": "FSX-EFS"
+              }
+            ]
+          }
         }
       },
       "required": [
@@ -4011,7 +4034,8 @@
       "enum": [
         "NFSauto",
         "NFSv3",
-        "NFSv4"
+        "NFSv4",
+        "NFSv4_1"
       ],
       "x-ms-enum": {
         "name": "NfsVersion",
@@ -4028,6 +4052,10 @@
           {
             "name": "NFSv4",
             "value": "NFSv4"
+          },
+          {
+            "name": "NFSv4_1",
+            "value": "NFSv4_1"
           }
         ]
       }
@@ -4368,6 +4396,29 @@
         "credentials": {
           "$ref": "#/definitions/AzureKeyVaultSmbCredentials",
           "description": "The Azure Key Vault secret URIs which store the required credentials to access the SMB share."
+        },
+        "sourceType": {
+          "type": "string",
+          "description": "Source type to differentiate SMBMount and FSX-SMB endpoints. Default is SMBMount.",
+          "default": "SmbMount",
+          "enum": [
+            "SmbMount",
+            "FSX-SMB"
+          ],
+          "x-ms-enum": {
+            "name": "SmbMountSourceType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "SmbMount",
+                "value": "SmbMount"
+              },
+              {
+                "name": "FSXSMB",
+                "value": "FSX-SMB"
+              }
+            ]
+          }
         }
       },
       "required": [

@@ -1,13 +1,23 @@
 {
-  "operationId": "Endpoints_Get",
+  "operationId": "Endpoints_CreateOrUpdate_nfsMount_EFS",
   "parameters": {
     "api-version": "2026-05-01",
+    "endpoint": {
+      "properties": {
+        "description": "Example NFS Mount Endpoint Description",
+        "endpointType": "NfsMount",
+        "sourceType": "FSXEFS",
+        "endpointKind": "Source",
+        "export": "examples-exportName",
+        "host": "0.0.0.0"
+      }
+    },
     "endpointName": "examples-endpointName",
     "resourceGroupName": "examples-rg",
     "storageMoverName": "examples-storageMoverName",
     "subscriptionId": "60bcfc77-6589-4da2-b7fd-f9ec9322cf95"
   },
-  "title": "Endpoints_Get_NfsMount",
+  "title": "Endpoints_CreateOrUpdate_NfsMount_EFS",
   "responses": {
     "200": {
       "body": {
@@ -17,8 +27,8 @@
         "properties": {
           "description": "Example NFS Mount Endpoint Description",
           "endpointType": "NfsMount",
-          "sourceType": "NfsMount",
           "endpointKind": "Source",
+          "sourceType": "FSXEFS",
           "export": "examples-exportName",
           "host": "0.0.0.0",
           "nfsVersion": "NFSauto",
