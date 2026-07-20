@@ -582,7 +582,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/bulkCreateCustom/{name}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/bulkCreateCustom/{id}": {
       "get": {
         "operationId": "BulkCreateCustom_Get",
         "tags": [
@@ -608,13 +608,12 @@
             "minLength": 1
           },
           {
-            "name": "name",
+            "name": "id",
             "in": "path",
-            "description": "The name of the BulkCreateCustom.",
+            "description": "The id of the BulkCreateCustom. The value must be an UUID.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+            "format": "uuid"
           }
         ],
         "responses": {
@@ -662,13 +661,12 @@
             "minLength": 1
           },
           {
-            "name": "name",
+            "name": "id",
             "in": "path",
-            "description": "The name of the BulkCreateCustom.",
+            "description": "The id of the BulkCreateCustom. The value must be an UUID.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+            "format": "uuid"
           },
           {
             "name": "resource",
@@ -746,13 +744,12 @@
             "minLength": 1
           },
           {
-            "name": "name",
+            "name": "id",
             "in": "path",
-            "description": "The name of the BulkCreateCustom.",
+            "description": "The id of the BulkCreateCustom. The value must be an UUID.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+            "format": "uuid"
           },
           {
             "name": "deleteInstances",
@@ -798,7 +795,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/bulkCreateCustom/{name}/cancel": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/bulkCreateCustom/{id}/cancel": {
       "post": {
         "operationId": "BulkCreateCustom_Cancel",
         "tags": [
@@ -824,13 +821,12 @@
             "minLength": 1
           },
           {
-            "name": "name",
+            "name": "id",
             "in": "path",
-            "description": "The name of the BulkCreateCustom.",
+            "description": "The id of the BulkCreateCustom. The value must be an UUID.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+            "format": "uuid"
           }
         ],
         "responses": {
@@ -3492,16 +3488,6 @@
         ]
       }
     },
-    "BulkCreateCustomExecutionParameters": {
-      "type": "object",
-      "description": "Extra parameters that control how a BulkCreateCustom request is executed.",
-      "properties": {
-        "retryPolicy": {
-          "$ref": "#/definitions/BulkCreateCustomRetryPolicy",
-          "description": "Retry policy the user can pass."
-        }
-      }
-    },
     "BulkCreateCustomListResult": {
       "type": "object",
       "description": "List of BulkCreateCustom resources.",
@@ -3695,7 +3681,7 @@
           ]
         },
         "executionParameters": {
-          "$ref": "#/definitions/BulkCreateCustomExecutionParameters",
+          "$ref": "#/definitions/ExecutionParameters",
           "description": "Extra parameters that control how the request is executed, including the retry policy."
         }
       },
@@ -3704,21 +3690,6 @@
         "priorityProfile",
         "computeProfile"
       ]
-    },
-    "BulkCreateCustomRetryPolicy": {
-      "type": "object",
-      "description": "The retry policy for a BulkCreateCustom request.",
-      "properties": {
-        "retryWindowInMinutes": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Retry window in minutes for the request."
-        },
-        "onFailureAction": {
-          "$ref": "#/definitions/ResourceOperationType",
-          "description": "Action to take on failure."
-        }
-      }
     },
     "BulkCreateCustomVmSizeProfile": {
       "type": "object",
