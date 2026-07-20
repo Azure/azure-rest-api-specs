@@ -54,10 +54,6 @@ using Microsoft.Cache;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(AccessPolicyAssignment.properties);
 
-@@clientLocation(Migrations.get, "Migration");
-@@clientLocation(Migrations.start, "Migration");
 @@clientName(Migrations.start::parameters.resource, "parameters");
-@@clientLocation(Migrations.list, "Migration");
-@@clientLocation(Migrations.cancel, "Migration");
 
 @@clientLocation(OperationsStatusOperationGroup.get, "OperationsStatus");

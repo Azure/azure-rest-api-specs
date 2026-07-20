@@ -11,20 +11,21 @@ namespace Microsoft.NetworkCloud;
 /**
  * The name of the trunked network.
  */
-model TrunkedNetworkNameParameter
-  is ResourceNameParameter<
-    Resource = TrunkedNetwork,
-    KeyName = "trunkedNetworkName",
-    SegmentName = "trunkedNetworks",
-    NamePattern = "^([a-zA-Z0-9][a-zA-Z0-9-_]{0,28}[a-zA-Z0-9])$"
-  >;
+model TrunkedNetworkNameParameter is ResourceNameParameter<
+  Resource = TrunkedNetwork,
+  KeyName = "trunkedNetworkName",
+  SegmentName = "trunkedNetworks",
+  NamePattern = "^([a-zA-Z0-9][a-zA-Z0-9-_]{0,28}[a-zA-Z0-9])$"
+>;
 
 /**
  * TrunkedNetwork represents a network that utilizes multiple isolation domains and specified VLANs to create a trunked network.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "legacy resource using legacy features"
-model TrunkedNetwork
-  is Azure.ResourceManager.TrackedResource<TrunkedNetworkProperties, false> {
+model TrunkedNetwork is Azure.ResourceManager.TrackedResource<
+  TrunkedNetworkProperties,
+  false
+> {
   ...TrunkedNetworkNameParameter;
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
   ...RequiredExtendedLocationProperty;
