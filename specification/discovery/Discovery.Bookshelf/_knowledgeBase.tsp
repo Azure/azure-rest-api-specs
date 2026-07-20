@@ -65,6 +65,7 @@ alias BaseKnowledgeBase = WithId & {
   @removed(Versions.`2026-02-01-preview`)
   dataAssetIds: DataAssetId[];
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("URL to access the knowledge base.")
   @visibility(Lifecycle.Read)
   knowledgeBaseUrl?: string;

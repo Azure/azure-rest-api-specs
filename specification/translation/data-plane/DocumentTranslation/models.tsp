@@ -167,6 +167,7 @@ model BatchRequest {
 
 @doc("Source of the input documents")
 model SourceInput {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("Location of the folder / container or single file with your documents")
   sourceUrl: string;
 
@@ -203,6 +204,7 @@ model DocumentFilter {
 
 @doc("Destination for the finished translated documents")
 model TargetInput {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("Location of the folder / container with your documents")
   targetUrl: string;
 
@@ -221,6 +223,7 @@ model TargetInput {
 
 @doc("Glossary / translation memory for the request")
 model Glossary {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("""
     Location of the glossary. 
     We will use the file extension to extract the

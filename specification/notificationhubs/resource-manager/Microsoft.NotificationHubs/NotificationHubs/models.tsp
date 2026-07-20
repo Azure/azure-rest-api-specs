@@ -655,6 +655,7 @@ model AdmCredentialProperties {
   /**
    * Gets or sets the URL of the authorization token.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @minLength(1)
   @secret
   authTokenUrl: string;
