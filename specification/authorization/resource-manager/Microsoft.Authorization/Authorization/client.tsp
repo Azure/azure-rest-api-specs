@@ -155,6 +155,11 @@ union RoleManagementScopeType {
   "csharp"
 );
 @@clientName(
+  Microsoft.AccessReview.AttributeNamespace,
+  "RoleManagementAttributeNamespace",
+  "csharp"
+);
+@@clientName(
   Microsoft.RoleManagementAlerts.Alert,
   "RoleManagementAlert",
   "csharp"
@@ -377,7 +382,7 @@ union RoleManagementScopeType {
 );
 @@clientName(
   Microsoft.AccessReview.AttributeNamespaceCreateRequest,
-  "AttributeNamespaceCreateContent",
+  "RoleManagementAttributeNamespaceCreateContent",
   "csharp"
 );
 @@clientName(
