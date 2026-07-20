@@ -86,6 +86,7 @@ model ActionGroup {
    * The list of email receivers that are part of this action group.
    */
   @identifiers(#[])
+  @typeChangedFrom(Versions.v2026_09_01, Microsoft.Common.EmailReceiver[])
   emailReceivers?: EmailReceiver[];
 
   /**
@@ -540,6 +541,7 @@ model NotificationRequestBody {
    * The list of email receivers that are part of this action group.
    */
   @identifiers(#[])
+  @typeChangedFrom(Versions.v2026_09_01, Microsoft.Common.EmailReceiver[])
   emailReceivers?: EmailReceiver[];
 
   /**
