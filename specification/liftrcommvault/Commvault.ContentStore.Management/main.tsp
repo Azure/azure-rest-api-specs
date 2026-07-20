@@ -687,6 +687,7 @@ model ProtectionGroupResources {
 
   @doc("Rules to match resources")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
   matchRules?: {
     @doc("rules to match")
     @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)

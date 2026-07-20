@@ -267,7 +267,7 @@ model Response {
    * inclusive of tool calls, that was used in this response.
    */
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "This is how it's represented OpenAI Style."
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Keeping inline union to avoid breaking changes."
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Keeping inline union to avoid breaking changes."
   max_output_tokens?: int32 | "inf";
 
   /**
@@ -1123,7 +1123,7 @@ model ServerEventResponseAnimationBlendshapeDelta extends ServerEvent {
   output_index: int32;
   content_index: int32;
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "This is how it's represented OpenAI Style."
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Keeping inline union to avoid breaking changes."
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Keeping inline union to avoid breaking changes."
   frames: float32[][] | string;
   frame_index: int32;
 }
@@ -1258,7 +1258,7 @@ model ResponseCreateParams {
    * given model. Defaults to `inf`.
    */
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "This is how it's represented OpenAI Style."
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Keeping inline union to avoid breaking changes."
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Keeping inline union to avoid breaking changes."
   max_output_tokens?: int32 | "inf";
 
   /** Create the response with pre-generated assistant message. The message item would be
