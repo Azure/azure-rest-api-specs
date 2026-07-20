@@ -724,6 +724,7 @@ interface ScheduledActions {
     | ArmResponse<ResourceListResponse>
     | ErrorResponse;
 
+  /** Attach resources to the scheduled action so they are included in future occurrences. */
   attachResources is ArmResourceActionAsync<
     ScheduledAction,
     ResourceAttachRequest,
@@ -732,6 +733,7 @@ interface ScheduledActions {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
+  /** Detach resources from the scheduled action so they are excluded from future occurrences. */
   detachResources is ArmResourceActionAsync<
     ScheduledAction,
     ResourceDetachRequest,
@@ -746,18 +748,21 @@ interface ScheduledActions {
     ResourceOperationResponse
   >;
 
+  /** Disable the scheduled action so its future occurrences do not run. */
   disable is ArmResourceActionNoResponseContentAsync<
     ScheduledAction,
     void,
     LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
 
+  /** Enable a previously disabled scheduled action so its future occurrences run. */
   enable is ArmResourceActionNoResponseContentAsync<
     ScheduledAction,
     void,
     LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
 
+  /** Cancel the next scheduled occurrence of the scheduled action. */
   cancelNextOccurrence is ArmResourceActionAsync<
     ScheduledAction,
     CancelOccurrenceRequest,
@@ -766,6 +771,7 @@ interface ScheduledActions {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
+  /** Trigger a manual occurrence of the scheduled action immediately, outside its normal schedule. */
   triggerManualOccurrence is ArmResourceActionAsync<
     ScheduledAction,
     void,
@@ -824,6 +830,7 @@ interface Occurrences {
     | ArmResponse<OccurrenceResourceListResponse>
     | ErrorResponse;
 
+  /** Cancel the occurrence so its pending operations do not run. */
   cancel is ArmResourceActionAsync<
     Occurrence,
     CancelOccurrenceRequest,
@@ -832,6 +839,7 @@ interface Occurrences {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
+  /** Delay the occurrence to a later time. */
   delay is ArmResourceActionAsync<
     Occurrence,
     DelayRequest,

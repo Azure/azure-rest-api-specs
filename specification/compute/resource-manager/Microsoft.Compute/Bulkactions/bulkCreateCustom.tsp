@@ -34,11 +34,13 @@ alias BulkCreateCustomLocationParameter = {
 };
 
 alias BulkCreateCustomId = {
-  /** The id of the BulkCreateCustom. The value must be an UUID. */
+  /** The name of the BulkCreateCustom. The value must be an UUID. */
   @path
+  @minLength(1)
   @segment("bulkCreateCustom")
   @key
-  id: uuid;
+  @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
+  name: string;
 };
 
 alias BulkCreateCustomDeleteInstancesParameter = {
