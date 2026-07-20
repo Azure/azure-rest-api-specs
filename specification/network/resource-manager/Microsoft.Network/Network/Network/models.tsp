@@ -16241,7 +16241,7 @@ model NvaInVnetSubnetReferenceProperties {
 /**
  * The type of migration workflow performed on a Network Virtual Appliance.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Network uses legacy feature-file output splitting (tspconfig output-splitting: legacy-feature-files); Azure.ResourceManager.Legacy.feature is required to place this NVA migration type in the virtualNetwork.json feature file, consistent with the established Microsoft.Network Swagger layout."
 @added(Versions.v2025_09_01)
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 union MigrationType {
@@ -16261,7 +16261,7 @@ union MigrationType {
 /**
  * Properties supplied to prepare the migration of a Network Virtual Appliance.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Network uses legacy feature-file output splitting (tspconfig output-splitting: legacy-feature-files); Azure.ResourceManager.Legacy.feature is required to place this NVA migration type in the virtualNetwork.json feature file, consistent with the established Microsoft.Network Swagger layout."
 @added(Versions.v2025_09_01)
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model NetworkVirtualAppliancePrepareMigrationProperties {
@@ -16279,7 +16279,7 @@ model NetworkVirtualAppliancePrepareMigrationProperties {
 /**
  * Parameters supplied to prepare the migration of a Network Virtual Appliance.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Network uses legacy feature-file output splitting (tspconfig output-splitting: legacy-feature-files); Azure.ResourceManager.Legacy.feature is required to place this NVA migration type in the virtualNetwork.json feature file, consistent with the established Microsoft.Network Swagger layout."
 @added(Versions.v2025_09_01)
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model NetworkVirtualAppliancePrepareMigrationRequest {
@@ -16292,7 +16292,7 @@ model NetworkVirtualAppliancePrepareMigrationRequest {
 /**
  * Properties supplied to execute the migration of a Network Virtual Appliance.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Network uses legacy feature-file output splitting (tspconfig output-splitting: legacy-feature-files); Azure.ResourceManager.Legacy.feature is required to place this NVA migration type in the virtualNetwork.json feature file, consistent with the established Microsoft.Network Swagger layout."
 @added(Versions.v2025_09_01)
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model NetworkVirtualApplianceExecuteMigrationProperties {
@@ -16305,7 +16305,7 @@ model NetworkVirtualApplianceExecuteMigrationProperties {
 /**
  * Parameters supplied to execute the migration of a Network Virtual Appliance.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Network uses legacy feature-file output splitting (tspconfig output-splitting: legacy-feature-files); Azure.ResourceManager.Legacy.feature is required to place this NVA migration type in the virtualNetwork.json feature file, consistent with the established Microsoft.Network Swagger layout."
 @added(Versions.v2025_09_01)
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model NetworkVirtualApplianceExecuteMigrationRequest {
@@ -16318,7 +16318,7 @@ model NetworkVirtualApplianceExecuteMigrationRequest {
 /**
  * Properties supplied to commit the migration of a Network Virtual Appliance.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Network uses legacy feature-file output splitting (tspconfig output-splitting: legacy-feature-files); Azure.ResourceManager.Legacy.feature is required to place this NVA migration type in the virtualNetwork.json feature file, consistent with the established Microsoft.Network Swagger layout."
 @added(Versions.v2025_09_01)
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model NetworkVirtualApplianceCommitMigrationProperties {
@@ -16331,7 +16331,7 @@ model NetworkVirtualApplianceCommitMigrationProperties {
 /**
  * Parameters supplied to commit the migration of a Network Virtual Appliance.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Network uses legacy feature-file output splitting (tspconfig output-splitting: legacy-feature-files); Azure.ResourceManager.Legacy.feature is required to place this NVA migration type in the virtualNetwork.json feature file, consistent with the established Microsoft.Network Swagger layout."
 @added(Versions.v2025_09_01)
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model NetworkVirtualApplianceCommitMigrationRequest {
@@ -16344,7 +16344,7 @@ model NetworkVirtualApplianceCommitMigrationRequest {
 /**
  * The migration status of a Network Virtual Appliance.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Network uses legacy feature-file output splitting (tspconfig output-splitting: legacy-feature-files); Azure.ResourceManager.Legacy.feature is required to place this NVA migration type in the virtualNetwork.json feature file, consistent with the established Microsoft.Network Swagger layout."
 @added(Versions.v2025_09_01)
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model NetworkVirtualApplianceMigrationStatus {
