@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "iotHubClient",
-    "version": "2026-03-01-preview",
+    "version": "2026-05-01-preview",
     "description": "Use this API to manage the IoT hubs in your Azure subscription.",
     "x-typespec-generated": [
       {
@@ -2907,6 +2907,24 @@
         }
       }
     },
+    "EventStreamAuthenticationType": {
+      "type": "string",
+      "description": "Specifies authentication type being used for connecting to the event stream account.",
+      "enum": [
+        "identityBased"
+      ],
+      "x-ms-enum": {
+        "name": "EventStreamAuthenticationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "identityBased",
+            "value": "identityBased",
+            "description": "identityBased authentication"
+          }
+        ]
+      }
+    },
     "ExportDevicesRequest": {
       "type": "object",
       "description": "Use to provide parameters when requesting an export of all devices in the IoT hub.",
@@ -3574,8 +3592,7 @@
         "S3",
         "B1",
         "B2",
-        "B3",
-        "GEN2"
+        "B3"
       ],
       "x-ms-enum": {
         "name": "IotHubSku",
@@ -3615,11 +3632,6 @@
             "name": "B3",
             "value": "B3",
             "description": "B3"
-          },
-          {
-            "name": "GEN2",
-            "value": "GEN2",
-            "description": "GEN2"
           }
         ]
       }
@@ -3697,8 +3709,7 @@
       "enum": [
         "Free",
         "Standard",
-        "Basic",
-        "Generation2"
+        "Basic"
       ],
       "x-ms-enum": {
         "name": "IotHubSkuTier",
@@ -3718,11 +3729,6 @@
             "name": "Basic",
             "value": "Basic",
             "description": "Basic"
-          },
-          {
-            "name": "Generation2",
-            "value": "Generation2",
-            "description": "Generation2"
           }
         ]
       }
@@ -4657,6 +4663,13 @@
           "items": {
             "$ref": "#/definitions/RoutingCosmosDBSqlApiProperties"
           }
+        },
+        "eventStreams": {
+          "type": "array",
+          "description": "The list of event stream endpoints that IoT hub routes messages to, based on the routing rules.",
+          "items": {
+            "$ref": "#/definitions/RoutingEventStreamProperties"
+          }
         }
       }
     },
@@ -4706,6 +4719,55 @@
       },
       "required": [
         "name"
+      ]
+    },
+    "RoutingEventStreamProperties": {
+      "type": "object",
+      "description": "The properties related to an event stream endpoint.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name that identifies this endpoint. The name can only include alphanumeric characters, periods, underscores, hyphens and has a maximum length of 64 characters. The following names are reserved:  events, fileNotifications, $default. Endpoint names must be unique across endpoint types.",
+          "pattern": "^[A-Za-z0-9-._]{1,64}$"
+        },
+        "id": {
+          "type": "string",
+          "description": "Id of the event stream endpoint",
+          "readOnly": true
+        },
+        "endpointUri": {
+          "type": "string",
+          "description": "The url of the underlying event hub namespace of the event stream endpoint. It must include the protocol sb://"
+        },
+        "entityPath": {
+          "type": "string",
+          "description": "Event hub name on the event hub namespace"
+        },
+        "authenticationType": {
+          "$ref": "#/definitions/EventStreamAuthenticationType",
+          "description": "Method used to authenticate against the event stream endpoint"
+        },
+        "identity": {
+          "$ref": "#/definitions/ManagedIdentity",
+          "description": "Managed identity properties of routing event stream endpoint."
+        },
+        "workspaceId": {
+          "type": "string",
+          "description": "The unique GUID of the target Microsoft Fabric workspace for the event stream endpoint."
+        },
+        "eventStreamId": {
+          "type": "string",
+          "description": "The unique GUID of the target event stream under the workspace."
+        },
+        "sourceId": {
+          "type": "string",
+          "description": "The unique GUID of the custom source for the event stream."
+        }
+      },
+      "required": [
+        "name",
+        "endpointUri",
+        "entityPath"
       ]
     },
     "RoutingMessage": {
