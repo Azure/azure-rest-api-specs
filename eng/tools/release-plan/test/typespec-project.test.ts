@@ -7,6 +7,7 @@ import {
   getAssociatedPrNumber,
   getCommitChangedFiles,
   getPrChangedFiles,
+  getPullRequestLabels,
   getTypeSpecProjectInfoFromCommit,
   getTypeSpecProjectInfoFromPr,
   parseApiVersion,
@@ -381,5 +382,100 @@ describe("TypeSpec project detection edge cases", () => {
     expect(result.hasNewApiVersionLabel).toBe(false);
     expect(result.projectInfo?.tspProjectPath).toBe("specification/bar");
     expect(result.projectInfo?.apiVersion).toBe("2025-09-01");
+  });
+
+  it("skips folder-migration PRs and does not fetch changed files", async () => {
+    const listPullRequestsAssociatedWithCommit = vi.fn().mockResolvedValueOnce({
+      data: [{ number: 321 }],
+    });
+    const get = vi
+      .fn()
+      .mockResolvedValueOnce({ data: { labels: [{ name: "FolderMigrationV2" }] } });
+    const listFiles = vi.fn();
+
+    const result = await getTypeSpecProjectInfoFromCommit({
+      commitSha: "mig123",
+      owner: "Azure",
+      repo: "azure-rest-api-specs",
+      workspace: process.cwd(),
+      octokit: {
+        rest: {
+          pulls: {
+            get,
+            listFiles,
+          },
+          repos: {
+            listPullRequestsAssociatedWithCommit,
+            getCommit: vi.fn(),
+          },
+        },
+      },
+    });
+
+    expect(result.isFolderMigration).toBe(true);
+    expect(result.projectInfo).toBeNull();
+    expect(result.prNumber).toBe(321);
+    expect(result.hasNewApiVersionLabel).toBe(false);
+    // Folder migration is detected before listing files, so no file lookup happens.
+    expect(listFiles).not.toHaveBeenCalled();
+  });
+
+  it("ignores renamed files when detecting the API version", async () => {
+    const listPullRequestsAssociatedWithCommit = vi.fn().mockResolvedValueOnce({ data: [] });
+    const getCommit = vi.fn().mockResolvedValueOnce({
+      data: {
+        files: [
+          { filename: "specification/bar/tspconfig.yaml", status: "modified" },
+          // Renamed into a folder that looks like an older API version; must be ignored.
+          { filename: "specification/bar/2020-01-01/legacy.tsp", status: "renamed" },
+          { filename: "specification/bar/2025-09-01/main.tsp", status: "added" },
+        ],
+      },
+    });
+
+    const result = await getTypeSpecProjectInfoFromCommit({
+      commitSha: "rename1",
+      owner: "Azure",
+      repo: "azure-rest-api-specs",
+      workspace: process.cwd(),
+      octokit: {
+        rest: {
+          pulls: {
+            get: vi.fn(),
+            listFiles: vi.fn(),
+          },
+          repos: {
+            listPullRequestsAssociatedWithCommit,
+            getCommit,
+          },
+        },
+      },
+    });
+
+    expect(result.projectInfo?.apiVersion).toBe("2025-09-01");
+  });
+});
+
+describe("pull request label helpers", () => {
+  it("returns the list of label names", async () => {
+    const get = vi.fn().mockResolvedValueOnce({
+      data: { labels: [{ name: "new-api-version" }, { name: "FolderMigrationV2" }] },
+    });
+
+    const labels = await getPullRequestLabels({
+      octokit: {
+        rest: {
+          pulls: {
+            get,
+            listFiles: vi.fn(),
+          },
+        },
+      },
+      owner: "Azure",
+      repo: "azure-rest-api-specs",
+      prNumber: 7,
+    });
+
+    expect(labels).toEqual(["new-api-version", "FolderMigrationV2"]);
   });
 });
