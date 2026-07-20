@@ -31,7 +31,7 @@ jobs:
         id: swagger-model-validation
         run: |
           echo "summary=$GITHUB_STEP_SUMMARY" >> "$GITHUB_OUTPUT"
-          npm exec --no -- oav-runner examples
+          pnpm exec oav-runner examples
 
       # Used by other workflows like set-status
       - name: Set job-summary artifact

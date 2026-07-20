@@ -1,0 +1,57 @@
+packages:
+  - ".github"
+  - ".github/shared"
+  - "eng/tools"
+  - "eng/tools/*"
+
+# Lowered from the pnpm 11 default of 1440 (24h) to unblock recently published
+# dependencies. Packages must be at least this many minutes old before install.
+minimumReleaseAge: 720
+
+allowBuilds:
+  # Git-hosted dependency (github:actions/github-script) that pnpm builds via its
+  # "prepare" script. pnpm 11 refuses to build git deps with build scripts unless
+  # they are allowlisted here, failing install with ERR_PNPM_GIT_DEP_PREPARE_NOT_ALLOWED.
+  # For git deps pnpm does not trust a bare package-name key (the version is non-semver),
+  # so the full "name@<resolution>" dep path is required. Update the commit hash if the
+  # github:actions/github-script ref is bumped.
+  "@actions/github-script@https://codeload.github.com/actions/github-script/tar.gz/3a2844b7e9c422d3c10d287c895573f7108da1b3": true
+  # Registry package with a "preinstall" script (a Node-version guard). pnpm 11
+  # errors on dependencies whose build scripts are not allowlisted, failing install
+  # with ERR_PNPM_IGNORED_BUILDS unless listed here.
+  autorest: true
+
+overrides:
+  "@typespec/asset-emitter": "0.79.1"
+  "get-uri": "^6.0.5"
+  "js-yaml@^4.0.0": "^4.3.0"
+  "lodash": "^4.18.1"
+  "minimatch@^3.0.0": "^3.1.5"
+  "superagent": "^10.2.3"
+  "undici@^5.0.0": "^6.0.0"
+
+catalog:
+  "@apidevtools/json-schema-ref-parser": ^15.1.3
+  "@eslint/js": ^10.0.0
+  "@types/cross-spawn": ^6.0.6
+  "@types/debug": ^4.1.12
+  "@types/js-yaml": ^4.0.9
+  "@types/node": ^20.0.0
+  "@types/semver": ^7.7.1
+  "@vitest/coverage-v8": ^4.1.0
+  autorest: ^3.8.0
+  cross-env: ^10.1.0
+  cross-spawn: ^7.0.6
+  debug: ^4.4.3
+  eslint: ^10.0.0
+  globals: ^17.0.0
+  js-yaml: ^4.1.0
+  marked: ^18.0.0
+  prettier: 3.8.3
+  prettier-plugin-organize-imports: ^4.2.0
+  semver: ^7.7.1
+  simple-git: ^3.36.0
+  typescript: ~6.0.2
+  typescript-eslint: ^8.58.0
+  vitest: ^4.1.0
+  zod: ^4.3.5

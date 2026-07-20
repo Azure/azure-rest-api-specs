@@ -190,13 +190,13 @@ cd <local_repo_clone_root>
 cd specification/contosowidgetmanager
 
 # Install the dependencies to the local 'node_modules' folder.
-npm install
+pnpm install
 
 # Run 'prettier --check' to verify the problems can be reproduced locally
-npx prettier --check **/*.json
+pnpm prettier --check **/*.json
 
 # Run 'prettier --write' to fix the problems.
-npx prettier --write **/*.json
+pnpm prettier --write **/*.json
 ```
 
 Then please commit and push changes made by prettier.

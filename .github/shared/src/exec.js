@@ -1,4 +1,5 @@
 import child_process from "child_process";
+import spawn from "cross-spawn";
 import { dirname, join } from "path";
 import { promisify } from "util";
 const execFileImpl = promisify(child_process.execFile);
@@ -12,7 +13,7 @@ const execFileImpl = promisify(child_process.execFile);
 
 /**
  * @typedef {Object} NpmPrefixOptions
- * @property {string} [prefix] Prefix to pass to npm via "--prefix".
+ * @property {string} [prefix] Prefix to pass to the package manager via "--prefix".
  */
 
 /**
@@ -131,4 +132,112 @@ export async function execNpm(args, options = {}) {
  */
 export async function execNpmExec(args, options = {}) {
   return await execNpm(["exec", "--no", "--", ...args], options);
+}
+
+/**
+ * Calls `cross-spawn` with appropriate arguments to run `pnpm` on all platforms.
+ *
+ * Uses `cross-spawn` instead of `child_process.execFile()` so that the `pnpm.cmd`
+ * batch shim can be resolved and launched safely on Windows without enabling a
+ * shell. Enabling a shell (e.g. `shell: true`) would reintroduce quoting and
+ * shell-parsing risks, so it is intentionally avoided.
+ *
+ * @param {string[]} args
+ * @param {ExecNpmOptions} [options]
+ * @returns {Promise<ExecResult>}
+ * @throws {ExecError}
+ */
+export async function execPnpm(args, options = {}) {
+  const { prefix, cwd, logger, maxBuffer = 16 * 1024 * 1024 } = options;
+
+  const prefixArgs = prefix ? ["--prefix", prefix] : [];
+  const allArgs = [...prefixArgs, ...args];
+
+  logger?.info(`execPnpm(${JSON.stringify(allArgs)})`);
+
+  return await new Promise((resolve, reject) => {
+    // cross-spawn resolves "pnpm" to the "pnpm.cmd" shim on Windows and spawns it
+    // directly (shell disabled), avoiding shell quoting/parsing risks while still
+    // working cross-platform.
+    const child = spawn("pnpm", allArgs, { cwd });
+
+    let stdout = "";
+    let stderr = "";
+    let settled = false;
+
+    /**
+     * Ensures the promise is settled at most once, even though several events
+     * (data overflow, error, close) may fire after the result is known.
+     *
+     * @param {() => void} action
+     */
+    const settle = (action) => {
+      if (settled) return;
+      settled = true;
+      action();
+    };
+
+    /** @param {ExecError} error */
+    const fail = (error) =>
+      settle(() => {
+        error.stdout = stdout;
+        error.stderr = stderr;
+        logger?.debug(`error: '${JSON.stringify(error)}'`);
+        reject(error);
+      });
+
+    /** @param {"stdout" | "stderr"} streamName */
+    const failMaxBuffer = (streamName) => {
+      child.kill();
+      const error = /** @type {ExecError} */ (new Error(`${streamName} maxBuffer length exceeded`));
+      error.code = /** @type {any} */ ("ERR_CHILD_PROCESS_STDIO_MAXBUFFER");
+      fail(error);
+    };
+
+    child.stdout?.on("data", (data) => {
+      stdout += data;
+      if (Buffer.byteLength(stdout) > maxBuffer) failMaxBuffer("stdout");
+    });
+
+    child.stderr?.on("data", (data) => {
+      stderr += data;
+      if (Buffer.byteLength(stderr) > maxBuffer) failMaxBuffer("stderr");
+    });
+
+    // Only fires if the process could not be spawned at all (e.g. "pnpm" missing).
+    /* v8 ignore next */
+    child.on("error", (error) => fail(/** @type {ExecError} */ (error)));
+
+    child.on("close", (code) => {
+      logger?.debug(`stdout: '${stdout}'`);
+      logger?.debug(`stderr: '${stderr}'`);
+
+      if (code === 0) {
+        settle(() => resolve({ stdout, stderr }));
+      } else {
+        // Match the error contract of execFile()/execNpm(), whose message embeds
+        // stderr (e.g. "Command failed: ...\n<stderr>"), so callers asserting on
+        // the thrown message keep working regardless of npm vs pnpm backend.
+        const error = /** @type {ExecError} */ (
+          new Error(
+            `pnpm ${allArgs.join(" ")} exited with code ${code}${stderr ? `\n${stderr}` : ""}`,
+          )
+        );
+        error.code = /** @type {any} */ (code);
+        fail(error);
+      }
+    });
+  });
+}
+
+/**
+ * Calls `execPnpm()` with arguments ["exec", ...] prepended.
+ *
+ * @param {string[]} args
+ * @param {ExecNpmOptions} [options]
+ * @returns {Promise<ExecResult>}
+ * @throws {ExecError}
+ */
+export async function execPnpmExec(args, options = {}) {
+  return await execPnpm(["exec", ...args], options);
 }

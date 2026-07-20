@@ -37,12 +37,13 @@ jobs:
 
           echo "output-file=$AVOCADO_OUTPUT_FILE" >> "$GITHUB_OUTPUT"
 
-          npm exec --no -- avocado \
+          pnpm exec avocado \
             --excludePaths \
               "/common-types/" \
               "/scenarios/" \
               "/package.json" \
-              "/package-lock.json" \
+              "/pnpm-lock.yaml" \
+              "/pnpm-workspace.yaml" \
               "/cadl/examples/" \
               '(?=/examples/)(?!(?:/stable/|/preview/))' \
               "/\\.github/" \

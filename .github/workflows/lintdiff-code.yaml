@@ -65,7 +65,7 @@ jobs:
 
           echo "summary=$GITHUB_STEP_SUMMARY" >> "$GITHUB_OUTPUT"
 
-          npm exec --no -- lint-diff \
+          pnpm exec lint-diff \
             --before before \
             --after after \
             --changed-files-path changed-files.txt \

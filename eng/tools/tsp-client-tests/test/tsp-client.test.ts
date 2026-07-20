@@ -1,4 +1,4 @@
-import { execNpmExec } from "@azure-tools/specs-shared/exec";
+import { execPnpmExec } from "@azure-tools/specs-shared/exec";
 import { debugLogger } from "@azure-tools/specs-shared/logger";
 
 import { access, constants, mkdir, rm } from "fs/promises";
@@ -24,7 +24,7 @@ async function convert(expect: ExpectStatic, readme: string) {
   }
 
   try {
-    let result = await execNpmExec(
+    let result = await execPnpmExec(
       [
         "tsp-client",
         "convert",
@@ -49,7 +49,7 @@ async function convert(expect: ExpectStatic, readme: string) {
     console.log(`File exists: ${mainTsp}`);
 
     // Use "--no-emit" to avoid generating output files that would need to be cleaned up
-    result = await execNpmExec(["tsp", "compile", "--no-emit", outputFolder], options);
+    result = await execPnpmExec(["tsp", "compile", "--no-emit", outputFolder], options);
 
     expect(result.stdout).toContain("TypeSpec compiler");
   } finally {
@@ -61,7 +61,7 @@ async function convert(expect: ExpectStatic, readme: string) {
 }
 
 test.concurrent("Usage", async ({ expect }) => {
-  await expect(execNpmExec(["tsp-client"], options)).rejects.toThrow("Usage");
+  await expect(execPnpmExec(["tsp-client"], options)).rejects.toThrow("Usage");
 });
 
 // Disabled since tsp-client is failing on data-plane

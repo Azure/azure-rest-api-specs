@@ -31,7 +31,7 @@ jobs:
         id: swagger-semantic-validation
         run: |
           echo "summary=$GITHUB_STEP_SUMMARY" >> "$GITHUB_OUTPUT"
-          npm exec --no -- oav-runner specs
+          pnpm exec oav-runner specs
 
       # Used by other workflows like set-status
       - name: Set job-summary artifact
