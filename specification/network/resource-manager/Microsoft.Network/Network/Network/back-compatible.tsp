@@ -918,6 +918,9 @@ using TypeSpec.Versioning;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ExpressRoutePort.properties);
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "ExpressRouteLag follows the same client-flatten pattern as ExpressRoutePort for SDK compatibility."
+@@Legacy.flattenProperty(ExpressRouteLag.properties);
+
 @@clientName(
   ExpressRoutePortAuthorizations.createOrUpdate::parameters.resource,
   "authorizationParameters"
