@@ -223,6 +223,8 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
   Access.internal,
   "rust"
 );
+@@access(ListBlobsResponse, Access.public, "rust");
+@@usage(ListBlobsResponse, Usage.output, "rust");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Paging is implemented by the handwritten Rust client wrapper"
 @@Azure.ClientGenerator.Core.Legacy.disablePageable(
   Storage.Blob.Container.listBlobs,
