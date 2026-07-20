@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for azuredatatransfer.
+This is the AutoRest configuration file for azuredatatransfer ok.
 
 ## Getting Started
 
