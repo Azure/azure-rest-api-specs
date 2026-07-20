@@ -3093,6 +3093,32 @@ model ILRRequest {
 }
 
 /**
+ * Request resource wrapping the parameters for the listMountScripts action.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Mirrors the sibling ILRRequestResource ARM request envelope."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Mirrors the sibling ILRRequestResource ARM request envelope."
+@added(Versions.v2026_08_01)
+model ListMountScriptsRequestResource extends Resource {
+  ...ResourceProperties;
+
+  /**
+   * ListMountScriptsRequestResource properties
+   */
+  properties?: ListMountScriptsRequest;
+}
+
+/**
+ * Parameters for the listMountScripts action.
+ */
+@added(Versions.v2026_08_01)
+model ListMountScriptsRequest {
+  /**
+   * Operation ID returned by the prior provisionInstantItemRecovery action whose iSCSI mount scripts are to be retrieved.
+   */
+  operationId: string;
+}
+
+/**
  * List of WorkloadProtectableItem resources
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

@@ -3670,6 +3670,15 @@
             "description": "RecoveryPointID represents the backed up data to be fetched.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ListMountScriptsRequestResource"
+            }
           }
         ],
         "responses": {
@@ -13002,6 +13011,49 @@
           }
         ]
       }
+    },
+    "ListMountScriptsRequest": {
+      "type": "object",
+      "description": "Parameters for the listMountScripts action.",
+      "properties": {
+        "operationId": {
+          "type": "string",
+          "description": "Operation ID returned by the prior provisionInstantItemRecovery action whose iSCSI mount scripts are to be retrieved."
+        }
+      },
+      "required": [
+        "operationId"
+      ]
+    },
+    "ListMountScriptsRequestResource": {
+      "type": "object",
+      "description": "Request resource wrapping the parameters for the listMountScripts action.",
+      "properties": {
+        "location": {
+          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "description": "Resource location."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "eTag": {
+          "type": "string",
+          "description": "Optional ETag."
+        },
+        "properties": {
+          "$ref": "#/definitions/ListMountScriptsRequest",
+          "description": "ListMountScriptsRequestResource properties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ]
     },
     "ListRecoveryPointsRecommendedForMoveRequest": {
       "type": "object",

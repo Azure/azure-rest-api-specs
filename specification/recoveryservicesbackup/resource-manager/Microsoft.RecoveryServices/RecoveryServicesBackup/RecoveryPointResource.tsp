@@ -151,7 +151,7 @@ interface ItemLevelRecoveryConnections {
   @action("listMountScripts")
   listMountScripts is ArmResourceActionSync<
     RecoveryPointResource,
-    void,
+    ListMountScriptsRequestResource,
     ArmResponse<InstantItemRecoveryTarget>
   >;
 }
