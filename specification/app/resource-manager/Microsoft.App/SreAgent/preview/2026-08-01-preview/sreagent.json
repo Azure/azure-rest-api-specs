@@ -59,6 +59,45 @@
     }
   ],
   "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.App/agentSessions": {
+      "get": {
+        "operationId": "AgentSessions_ListBySubscription",
+        "tags": [
+          "AgentSessions"
+        ],
+        "description": "Lists Agent Sessions in a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AgentSessionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AgentSessions_ListBySubscription": {
+            "$ref": "./examples/AgentSessions_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.App/agentSpaces": {
       "get": {
         "operationId": "AgentSpaces_ListBySubscription",
@@ -297,7 +336,7 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AgentSessionCreate"
+              "$ref": "#/definitions/AgentSession"
             }
           }
         ],
@@ -339,6 +378,78 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "AgentSessions_Update",
+        "tags": [
+          "AgentSessions"
+        ],
+        "description": "Updates the tags of an Agent Session.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "agentSessionName",
+            "in": "path",
+            "description": "The name of the AgentSession",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9]([-a-z0-9]{0,61}[a-z0-9])?$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AgentSessionTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AgentSession"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AgentSessions_Update": {
+            "$ref": "./examples/AgentSessions_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
@@ -2398,72 +2509,6 @@
         }
       ]
     },
-    "AgentSessionCreate": {
-      "type": "object",
-      "description": "The request body used to create an Agent Session.",
-      "properties": {
-        "location": {
-          "$ref": "#/definitions/Azure.Core.azureLocation",
-          "description": "The Azure region where the Agent Session is created.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "properties": {
-          "$ref": "#/definitions/AgentSessionCreateProperties",
-          "description": "The immutable target scope of the Agent Session."
-        }
-      },
-      "required": [
-        "location",
-        "properties"
-      ]
-    },
-    "AgentSessionCreateProperties": {
-      "type": "object",
-      "description": "The properties supplied when creating an Agent Session.",
-      "properties": {
-        "targetResourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The primary Azure resource included in the troubleshooting scope."
-        },
-        "additionalResourceIds": {
-          "type": "array",
-          "description": "Additional Azure resources included in the troubleshooting scope.",
-          "items": {
-            "type": "string",
-            "format": "arm-id",
-            "description": "A type definition that refers the id to an Azure Resource Manager resource."
-          }
-        },
-        "additionalSubscriptionIds": {
-          "type": "array",
-          "description": "Additional subscription identifiers that the Agent Session may inspect.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "targetResourceId",
-        "additionalResourceIds",
-        "additionalSubscriptionIds"
-      ]
-    },
     "AgentSessionListResult": {
       "type": "object",
       "description": "The response of a AgentSession list operation.",
@@ -2492,7 +2537,11 @@
         "targetResourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The primary Azure resource included in the troubleshooting scope."
+          "description": "The primary Azure resource included in the troubleshooting scope.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "additionalResourceIds": {
           "type": "array",
@@ -2501,14 +2550,22 @@
             "type": "string",
             "format": "arm-id",
             "description": "A type definition that refers the id to an Azure Resource Manager resource."
-          }
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "additionalSubscriptionIds": {
           "type": "array",
           "description": "Additional subscription identifiers that the Agent Session may inspect.",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "provisioningState": {
           "$ref": "#/definitions/AgentSessionProvisioningState",
@@ -2522,9 +2579,7 @@
         }
       },
       "required": [
-        "targetResourceId",
-        "additionalResourceIds",
-        "additionalSubscriptionIds"
+        "targetResourceId"
       ]
     },
     "AgentSessionProvisioningState": {
@@ -2596,6 +2651,19 @@
         "sandboxId",
         "expiresAt"
       ]
+    },
+    "AgentSessionTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in AgentSession resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
     },
     "AgentSpace": {
       "type": "object",
@@ -2943,10 +3011,6 @@
           "x-ms-secret": true
         }
       }
-    },
-    "Azure.Core.azureLocation": {
-      "type": "string",
-      "description": "Represents an Azure geography region where supported resource providers live."
     },
     "Connector": {
       "type": "object",

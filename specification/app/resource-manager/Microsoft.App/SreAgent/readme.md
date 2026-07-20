@@ -35,21 +35,6 @@ suppressions:
   - code: MissingSegmentsInNestedResourceListOperation
     reason: The parent resource Get call is defined in a separate file.
     from: sreagent.json
-  - code: AvoidAdditionalProperties
-    reason: These existing extensibility dictionaries carry forward unchanged from the stable API.
-    where:
-      - $.definitions.AgentConnectorProperties.properties.extendedProperties
-      - $.definitions.AgentSpaceConnectorProperties.properties.extendedProperties
-      - $.definitions.Connector.properties.extendedProperties
-  - code: TrackedResourcePatchOperation
-    reason: Agent Session tags and target scope are immutable after creation by design; callers must delete and recreate the resource to change them.
-    where:
-      - $.definitions.AgentSession
-  - code: PutRequestResponseSchemeArm
-    reason: The PUT request intentionally excludes the service-managed sandbox, while the response returns the provisioned sandbox.
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/agentSessions/{agentSessionName}"].put
-
 ```
 
 ### Tag: package-2026-08-01-preview
