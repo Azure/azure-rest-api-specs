@@ -739,7 +739,7 @@ union RoleManagementScopeType {
 );
 @@clientName(
   Microsoft.RoleDefinitions.PermissionsOperationGroup.listForResource,
-  "GetAzurePermissionsForResources",
+  "GetAzurePermissionsForResource",
   "csharp"
 );
 
