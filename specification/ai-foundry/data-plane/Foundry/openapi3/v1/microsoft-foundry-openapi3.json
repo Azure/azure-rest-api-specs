@@ -26443,15 +26443,15 @@
       "AgentBlueprintSignInConfig": {
         "type": "object",
         "required": [
-          "mode"
+          "type"
         ],
         "properties": {
-          "mode": {
+          "type": {
             "type": "string",
             "enum": [
               "agent_blueprint"
             ],
-            "description": "The sign-in mode. Always 'agent_blueprint'."
+            "description": "The type of sign-in configuration. Always 'agent_blueprint'."
           },
           "token_validation": {
             "type": "array",
@@ -26471,12 +26471,12 @@
       "AgentBlueprintSignInConfigUpdate": {
         "type": "object",
         "properties": {
-          "mode": {
+          "type": {
             "type": "string",
             "enum": [
               "agent_blueprint"
             ],
-            "description": "The sign-in mode. Always 'agent_blueprint'."
+            "description": "The type of sign-in configuration. Always 'agent_blueprint'."
           },
           "token_validation": {
             "type": "array",
@@ -27213,52 +27213,28 @@
       "AgentSignInConfig": {
         "type": "object",
         "required": [
-          "mode"
+          "type"
         ],
         "properties": {
-          "mode": {
+          "type": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/AgentSignInMode"
+                "$ref": "#/components/schemas/AgentSignInConfigType"
               }
             ],
-            "description": "The sign-in mode."
+            "description": "The type of sign-in configuration."
           }
         },
         "discriminator": {
-          "propertyName": "mode",
+          "propertyName": "type",
           "mapping": {
             "foundry": "#/components/schemas/FoundrySignInConfig",
             "agent_blueprint": "#/components/schemas/AgentBlueprintSignInConfig"
           }
         },
-        "description": "The sign-in configuration governing which Entra application identity the agent uses to represent\nthe calling user, for inbound token validation and downstream on-behalf-of access. The `mode`\nproperty discriminates the concrete configuration type; mode-specific inputs (such as token\nvalidation) are carried only by the modes that support them. Defaults to Foundry sign-in when not\nspecified."
+        "description": "The sign-in configuration governing which Entra application identity the agent uses to represent\nthe calling user, for inbound token validation and downstream on-behalf-of access. The `type`\nproperty discriminates the concrete configuration type; type-specific inputs (such as token\nvalidation) are carried only by the types that support them. Defaults to Foundry sign-in when not\nspecified."
       },
-      "AgentSignInConfigUpdate": {
-        "type": "object",
-        "required": [
-          "mode"
-        ],
-        "properties": {
-          "mode": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/AgentSignInMode"
-              }
-            ],
-            "description": "The sign-in mode."
-          }
-        },
-        "discriminator": {
-          "propertyName": "mode",
-          "mapping": {
-            "foundry": "#/components/schemas/FoundrySignInConfigUpdate",
-            "agent_blueprint": "#/components/schemas/AgentBlueprintSignInConfigUpdate"
-          }
-        },
-        "description": "The sign-in configuration governing which Entra application identity the agent uses to represent\nthe calling user, for inbound token validation and downstream on-behalf-of access. The `mode`\nproperty discriminates the concrete configuration type; mode-specific inputs (such as token\nvalidation) are carried only by the modes that support them. Defaults to Foundry sign-in when not\nspecified."
-      },
-      "AgentSignInMode": {
+      "AgentSignInConfigType": {
         "anyOf": [
           {
             "type": "string"
@@ -27271,7 +27247,31 @@
             ]
           }
         ],
-        "description": "The sign-in mode governing which Entra application identity the agent uses to represent the calling user (for inbound token validation and downstream on-behalf-of access). Applies across inbound authorization schemes."
+        "description": "The type of sign-in configuration, governing which Entra application identity the agent uses to represent the calling user (for inbound token validation and downstream on-behalf-of access). Applies across inbound authorization schemes."
+      },
+      "AgentSignInConfigUpdate": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentSignInConfigType"
+              }
+            ],
+            "description": "The type of sign-in configuration."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "foundry": "#/components/schemas/FoundrySignInConfigUpdate",
+            "agent_blueprint": "#/components/schemas/AgentBlueprintSignInConfigUpdate"
+          }
+        },
+        "description": "The sign-in configuration governing which Entra application identity the agent uses to represent\nthe calling user, for inbound token validation and downstream on-behalf-of access. The `type`\nproperty discriminates the concrete configuration type; type-specific inputs (such as token\nvalidation) are carried only by the types that support them. Defaults to Foundry sign-in when not\nspecified."
       },
       "AgentState": {
         "anyOf": [
@@ -34727,15 +34727,15 @@
       "FoundrySignInConfig": {
         "type": "object",
         "required": [
-          "mode"
+          "type"
         ],
         "properties": {
-          "mode": {
+          "type": {
             "type": "string",
             "enum": [
               "foundry"
             ],
-            "description": "The sign-in mode. Always 'foundry'."
+            "description": "The type of sign-in configuration. Always 'foundry'."
           }
         },
         "allOf": [
@@ -34748,12 +34748,12 @@
       "FoundrySignInConfigUpdate": {
         "type": "object",
         "properties": {
-          "mode": {
+          "type": {
             "type": "string",
             "enum": [
               "foundry"
             ],
-            "description": "The sign-in mode. Always 'foundry'."
+            "description": "The type of sign-in configuration. Always 'foundry'."
           }
         },
         "allOf": [

@@ -668,8 +668,8 @@ model InvocationsProtocolConfiguration {}
 @doc("Configuration specific to the WebSocket-based invocations protocol.")
 model InvocationsWsProtocolConfiguration {}
 
-@doc("The sign-in mode governing which Entra application identity the agent uses to represent the calling user (for inbound token validation and downstream on-behalf-of access). Applies across inbound authorization schemes.")
-union AgentSignInMode {
+@doc("The type of sign-in configuration, governing which Entra application identity the agent uses to represent the calling user (for inbound token validation and downstream on-behalf-of access). Applies across inbound authorization schemes.")
+union AgentSignInConfigType {
   string,
 
   @doc("Foundry sign-in. The calling user is represented via the Foundry application (ai.azure.com). This is the default when a sign-in configuration is not specified.")
@@ -681,27 +681,27 @@ union AgentSignInMode {
 
 @doc("""
   The sign-in configuration governing which Entra application identity the agent uses to represent
-  the calling user, for inbound token validation and downstream on-behalf-of access. The `mode`
-  property discriminates the concrete configuration type; mode-specific inputs (such as token
-  validation) are carried only by the modes that support them. Defaults to Foundry sign-in when not
+  the calling user, for inbound token validation and downstream on-behalf-of access. The `type`
+  property discriminates the concrete configuration type; type-specific inputs (such as token
+  validation) are carried only by the types that support them. Defaults to Foundry sign-in when not
   specified.
   """)
-@discriminator("mode")
+@discriminator("type")
 model AgentSignInConfig {
-  @doc("The sign-in mode.")
-  mode: AgentSignInMode;
+  @doc("The type of sign-in configuration.")
+  type: AgentSignInConfigType;
 }
 
 @doc("Foundry sign-in configuration. The calling user is represented via the Foundry application (ai.azure.com). This is the default when a sign-in configuration is not specified.")
 model FoundrySignInConfig extends AgentSignInConfig {
-  @doc("The sign-in mode. Always 'foundry'.")
-  mode: AgentSignInMode.foundry;
+  @doc("The type of sign-in configuration. Always 'foundry'.")
+  type: AgentSignInConfigType.foundry;
 }
 
 @doc("Agent-blueprint sign-in configuration. The calling user is represented via the agent's blueprint application, and inbound bearer tokens are validated against the supplied rules.")
 model AgentBlueprintSignInConfig extends AgentSignInConfig {
-  @doc("The sign-in mode. Always 'agent_blueprint'.")
-  mode: AgentSignInMode.agent_blueprint;
+  @doc("The type of sign-in configuration. Always 'agent_blueprint'.")
+  type: AgentSignInConfigType.agent_blueprint;
 
   @doc("The validation applied to inbound bearer tokens presented to the agent endpoint. A token is accepted if it satisfies any one of the rules. Typically defaulted to a single rule derived from the blueprint (audience = blueprint resource URI, tenant = subscription tenant, required scope = default scope declared on the blueprint).")
   token_validation?: TokenValidationRule[];

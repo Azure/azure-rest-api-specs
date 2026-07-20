@@ -39871,13 +39871,13 @@ components:
     AgentBlueprintSignInConfig:
       type: object
       required:
-        - mode
+        - type
       properties:
-        mode:
+        type:
           type: string
           enum:
             - agent_blueprint
-          description: The sign-in mode. Always 'agent_blueprint'.
+          description: The type of sign-in configuration. Always 'agent_blueprint'.
         token_validation:
           type: array
           items:
@@ -39889,11 +39889,11 @@ components:
     AgentBlueprintSignInConfigUpdate:
       type: object
       properties:
-        mode:
+        type:
           type: string
           enum:
             - agent_blueprint
-          description: The sign-in mode. Always 'agent_blueprint'.
+          description: The type of sign-in configuration. Always 'agent_blueprint'.
         token_validation:
           type: array
           items:
@@ -40690,51 +40690,51 @@ components:
     AgentSignInConfig:
       type: object
       required:
-        - mode
+        - type
       properties:
-        mode:
+        type:
           allOf:
-            - $ref: '#/components/schemas/AgentSignInMode'
-          description: The sign-in mode.
+            - $ref: '#/components/schemas/AgentSignInConfigType'
+          description: The type of sign-in configuration.
       discriminator:
-        propertyName: mode
+        propertyName: type
         mapping:
           foundry: '#/components/schemas/FoundrySignInConfig'
           agent_blueprint: '#/components/schemas/AgentBlueprintSignInConfig'
       description: |-
         The sign-in configuration governing which Entra application identity the agent uses to represent
-        the calling user, for inbound token validation and downstream on-behalf-of access. The `mode`
-        property discriminates the concrete configuration type; mode-specific inputs (such as token
-        validation) are carried only by the modes that support them. Defaults to Foundry sign-in when not
+        the calling user, for inbound token validation and downstream on-behalf-of access. The `type`
+        property discriminates the concrete configuration type; type-specific inputs (such as token
+        validation) are carried only by the types that support them. Defaults to Foundry sign-in when not
         specified.
-    AgentSignInConfigUpdate:
-      type: object
-      required:
-        - mode
-      properties:
-        mode:
-          allOf:
-            - $ref: '#/components/schemas/AgentSignInMode'
-          description: The sign-in mode.
-      discriminator:
-        propertyName: mode
-        mapping:
-          foundry: '#/components/schemas/FoundrySignInConfigUpdate'
-          agent_blueprint: '#/components/schemas/AgentBlueprintSignInConfigUpdate'
-      description: |-
-        The sign-in configuration governing which Entra application identity the agent uses to represent
-        the calling user, for inbound token validation and downstream on-behalf-of access. The `mode`
-        property discriminates the concrete configuration type; mode-specific inputs (such as token
-        validation) are carried only by the modes that support them. Defaults to Foundry sign-in when not
-        specified.
-    AgentSignInMode:
+    AgentSignInConfigType:
       anyOf:
         - type: string
         - type: string
           enum:
             - foundry
             - agent_blueprint
-      description: The sign-in mode governing which Entra application identity the agent uses to represent the calling user (for inbound token validation and downstream on-behalf-of access). Applies across inbound authorization schemes.
+      description: The type of sign-in configuration, governing which Entra application identity the agent uses to represent the calling user (for inbound token validation and downstream on-behalf-of access). Applies across inbound authorization schemes.
+    AgentSignInConfigUpdate:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          allOf:
+            - $ref: '#/components/schemas/AgentSignInConfigType'
+          description: The type of sign-in configuration.
+      discriminator:
+        propertyName: type
+        mapping:
+          foundry: '#/components/schemas/FoundrySignInConfigUpdate'
+          agent_blueprint: '#/components/schemas/AgentBlueprintSignInConfigUpdate'
+      description: |-
+        The sign-in configuration governing which Entra application identity the agent uses to represent
+        the calling user, for inbound token validation and downstream on-behalf-of access. The `type`
+        property discriminates the concrete configuration type; type-specific inputs (such as token
+        validation) are carried only by the types that support them. Defaults to Foundry sign-in when not
+        specified.
     AgentState:
       anyOf:
         - type: string
@@ -46742,24 +46742,24 @@ components:
     FoundrySignInConfig:
       type: object
       required:
-        - mode
+        - type
       properties:
-        mode:
+        type:
           type: string
           enum:
             - foundry
-          description: The sign-in mode. Always 'foundry'.
+          description: The type of sign-in configuration. Always 'foundry'.
       allOf:
         - $ref: '#/components/schemas/AgentSignInConfig'
       description: Foundry sign-in configuration. The calling user is represented via the Foundry application (ai.azure.com). This is the default when a sign-in configuration is not specified.
     FoundrySignInConfigUpdate:
       type: object
       properties:
-        mode:
+        type:
           type: string
           enum:
             - foundry
-          description: The sign-in mode. Always 'foundry'.
+          description: The type of sign-in configuration. Always 'foundry'.
       allOf:
         - $ref: '#/components/schemas/AgentSignInConfigUpdate'
       description: Foundry sign-in configuration. The calling user is represented via the Foundry application (ai.azure.com). This is the default when a sign-in configuration is not specified.
