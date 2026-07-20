@@ -103,6 +103,11 @@ union RoleManagementScopeType {
   "csharp"
 );
 @@clientName(
+  Microsoft.AttributeNamespaces.AccessReviewDecisionResource,
+  "AccessReviewDecisionResourceTarget",
+  "csharp"
+);
+@@clientName(
   Microsoft.ProviderOperations.ResourceType,
   "AuthorizationProviderResourceType",
   "csharp"
