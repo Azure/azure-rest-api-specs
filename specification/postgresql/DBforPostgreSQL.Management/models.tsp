@@ -3205,7 +3205,6 @@ model Backup {
    * Indicates if the server is configured to create immutable backups.
    */
   @added(Versions.v2026_07_01)
-  @visibility(Lifecycle.Read, Lifecycle.Create)
   immutableBackup?: ImmutableBackup;
 
   /**
@@ -3498,7 +3497,6 @@ model BackupForPatch {
    * Indicates if the server is configured to create immutable backups.
    */
   @added(Versions.v2026_07_01)
-  @visibility(Lifecycle.Read)
   immutableBackup?: ImmutableBackup;
 
   /**
