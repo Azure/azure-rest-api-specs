@@ -132,7 +132,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           },
           {
             "name": "body",
@@ -178,7 +178,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           },
           {
             "name": "body",
@@ -224,7 +224,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           },
           {
             "name": "body",
@@ -270,7 +270,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           },
           {
             "name": "body",
@@ -405,7 +405,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           }
         ],
         "responses": {
@@ -523,7 +523,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           },
           {
             "name": "body",
@@ -588,7 +588,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           }
         ],
         "responses": {
@@ -8614,11 +8614,13 @@
       "properties": {
         "clusterPeeringCommand": {
           "type": "string",
-          "description": "ClusterPeeringCommand to run to accept cluster peer. Will only be present if <code>clusterPeeringStatus</code> is <code>pending</code>."
+          "description": "ClusterPeeringCommand to run to accept cluster peer. Will only be present if <code>clusterPeeringStatus</code> is <code>pending</code>.",
+          "example": "cluster peer create -peer-addresses 10.0.0.1,10.0.0.2"
         },
         "passphrase": {
           "type": "string",
-          "description": "Passphrase for use with cluster peer command"
+          "description": "Passphrase for use with cluster peer command",
+          "example": "SecurePassphrase123"
         }
       }
     },
@@ -10940,7 +10942,7 @@
     },
     "SubvolumeInfo": {
       "type": "object",
-      "description": "Subvolume Information properties",
+      "description": "Subvolume Information properties\nDeprecated. This resource type will be removed in a future API version.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/SubvolumeProperties",
@@ -11817,7 +11819,7 @@
           "description": "A unique file path for the volume. Used when creating mount targets",
           "minLength": 1,
           "maxLength": 80,
-          "pattern": "^[a-zA-Z][a-zA-Z0-9\\-]{0,79}$",
+          "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_]{0,79}$",
           "x-ms-mutability": [
             "read",
             "create"
@@ -12332,7 +12334,7 @@
         },
         "enableSubvolumes": {
           "type": "string",
-          "description": "Flag indicating whether subvolume operations are enabled on the volume",
+          "description": "Flag indicating whether subvolume operations are enabled on the volume\nDeprecated. Subvolume operations and this flag will be removed in a future API version.",
           "default": "Disabled",
           "enum": [
             "Enabled",

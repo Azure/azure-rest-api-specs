@@ -85,7 +85,8 @@ interface DeviceGroups {
   >;
 }
 
-@@doc(DeviceGroups.claimDevices::parameters.body,
+@@doc(
+  DeviceGroups.claimDevices::parameters.body,
   "Bulk claim devices request body."
 );
 @@clientName(DeviceGroups.claimDevices::parameters.body, "claimDevicesRequest");

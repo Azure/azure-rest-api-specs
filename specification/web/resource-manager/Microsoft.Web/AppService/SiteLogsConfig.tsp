@@ -53,7 +53,8 @@ interface SiteLogsConfigOps
         @segment("config")
         @key
         logs: "logs",
-      }
+      },
+      ResourceName = "LogsSiteConfig"
     > {}
 
 @tag("WebApps")
@@ -106,7 +107,8 @@ interface SiteLogsConfigOperationGroupOps
         @segment("config")
         @key
         logs: "logs",
-      }
+      },
+      ResourceName = "LogsSiteSlotConfig"
     > {}
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -136,10 +138,12 @@ interface SiteLogsConfigOperationGroup {
 
 @@doc(SiteLogsConfig.name, "");
 @@doc(SiteLogsConfig.properties, "SiteLogsConfig resource specific properties");
-@@doc(SiteLogsConfigs.updateDiagnosticLogsConfig::parameters.resource,
+@@doc(
+  SiteLogsConfigs.updateDiagnosticLogsConfig::parameters.resource,
   "A SiteLogsConfig JSON object that contains the logging configuration to change in the \"properties\"property"
 );
 
-@@doc(SiteLogsConfigOperationGroup.updateDiagnosticLogsConfigSlot::parameters.resource,
+@@doc(
+  SiteLogsConfigOperationGroup.updateDiagnosticLogsConfigSlot::parameters.resource,
   "A SiteLogsConfig JSON object that contains the logging configuration to change in the \"properties\"property"
 );

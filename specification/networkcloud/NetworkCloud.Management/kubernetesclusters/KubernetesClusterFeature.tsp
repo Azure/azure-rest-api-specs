@@ -13,13 +13,12 @@ namespace Microsoft.NetworkCloud;
 /**
  * The name of the feature.
  */
-model KubernetesClusterFeatureNameParameter
-  is ResourceNameParameter<
-    Resource = KubernetesClusterFeature,
-    KeyName = "featureName",
-    SegmentName = "features",
-    NamePattern = "^([a-zA-Z0-9][a-zA-Z0-9-]{0,61}[a-zA-Z0-9])$"
-  >;
+model KubernetesClusterFeatureNameParameter is ResourceNameParameter<
+  Resource = KubernetesClusterFeature,
+  KeyName = "featureName",
+  SegmentName = "features",
+  NamePattern = "^([a-zA-Z0-9][a-zA-Z0-9-]{0,61}[a-zA-Z0-9])$"
+>;
 
 /**
  * KubernetesClusterFeature represents the feature of a Kubernetes cluster.
@@ -77,7 +76,9 @@ interface KubernetesClusterFeatures {
       ...IfMatchParameter;
       ...IfNoneMatchParameter;
     },
-    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -94,12 +95,15 @@ interface KubernetesClusterFeatures {
 }
 
 @@doc(KubernetesClusterFeature.name, "The name of the feature.");
-@@doc(KubernetesClusterFeature.properties,
+@@doc(
+  KubernetesClusterFeature.properties,
   "The list of the resource properties."
 );
-@@doc(KubernetesClusterFeatures.createOrUpdate::parameters.resource,
+@@doc(
+  KubernetesClusterFeatures.createOrUpdate::parameters.resource,
   "The request body."
 );
-@@doc(KubernetesClusterFeatures.update::parameters.properties,
+@@doc(
+  KubernetesClusterFeatures.update::parameters.properties,
   "The request body."
 );

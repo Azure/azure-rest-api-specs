@@ -1,6 +1,6 @@
 parameters:
   "service-dir":
-    default: "sdk/computebulkactions"
+    default: "sdk/compute"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -15,24 +15,24 @@ options:
     namespace: "Azure.ResourceManager.Compute.BulkActions"
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-python":
-    namespace: "azure.mgmt.bulkactions"
+    namespace: "azure.mgmt.compute.bulkaction"
     generate-test: true
     generate-sample: true
     flavor: "azure"
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-bulkactions"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-compute-bulkaction"
   "@azure-tools/typespec-java":
     service-dir: "sdk/compute"
     emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-compute-bulkactions"
     namespace: "com.azure.resourcemanager.compute.bulkactions"
-    service-name: "Compute Bulkactions"
+    service-name: "Compute BulkActions"
     flavor: azure
   "@azure-tools/typespec-ts":
-    service-dir: "sdk/computebulkactions"
-    emitter-output-dir: "{output-dir}/{service-dir}/arm-computebulkactions"
+    service-dir: "sdk/compute"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-compute-bulkactions"
     flavor: azure
     experimental-extensible-enums: true
     package-details:
-      name: "@azure/arm-computebulkactions"
+      name: "@azure/arm-compute-bulkactions"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/compute"
     emitter-output-dir: "{output-dir}/{service-dir}/armbulkactions"
@@ -46,3 +46,4 @@ options:
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"

@@ -59,7 +59,7 @@ model VolumeProperties {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @maxLength(80)
   @minLength(1)
-  @pattern("^[a-zA-Z][a-zA-Z0-9\\-]{0,79}$")
+  @pattern("^[a-zA-Z][a-zA-Z0-9\\-_]{0,79}$")
   creationToken: string;
 
   /**
@@ -75,6 +75,15 @@ model VolumeProperties {
   @added(Versions.v2026_01_01)
   @removed(Versions.v2026_01_15_preview)
   @renamedFrom(Versions.v2026_01_15_preview, "usageThreshold")
+  @added(Versions.v2026_03_01)
+  @removed(Versions.v2026_03_15_preview)
+  @renamedFrom(Versions.v2026_03_15_preview, "usageThreshold")
+  @added(Versions.v2026_04_01)
+  @removed(Versions.v2026_04_15_preview)
+  @renamedFrom(Versions.v2026_04_15_preview, "usageThreshold")
+  @added(Versions.v2026_05_01)
+  @removed(Versions.v2026_05_15_preview)
+  @renamedFrom(Versions.v2026_05_15_preview, "usageThreshold")
   @maxValue(2638827906662400)
   @minValue(53687091200)
   usageThresholdOld: int64 = 107374182400;
@@ -87,6 +96,12 @@ model VolumeProperties {
   @added(Versions.v2025_12_15_preview)
   @removed(Versions.v2026_01_01)
   @added(Versions.v2026_01_15_preview)
+  @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_04_01)
+  @added(Versions.v2026_04_15_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
   @maxValue(7916483719987200)
   @minValue(53687091200)
   usageThreshold: int64 = 107374182400;
@@ -112,13 +127,14 @@ model VolumeProperties {
    * Resource identifier used to identify the Snapshot.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  snapshotId?: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/snapshots";
-    }
-  ]> | null;
+  snapshotId?:
+    | Azure.Core.armResourceIdentifier<[
+        {
+          type: "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/snapshots";
+        }
+      ]>
+    | null;
 
   /**
    * If enabled (true) the snapshot the volume was created from will be automatically deleted after the volume create operation has finished.  Defaults to false
@@ -130,11 +146,13 @@ model VolumeProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  backupId?: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.NetApp/netAppAccounts/backupVaults/backups";
-    }
-  ]> | null;
+  backupId?:
+    | Azure.Core.armResourceIdentifier<[
+        {
+          type: "Microsoft.NetApp/netAppAccounts/backupVaults/backups";
+        }
+      ]>
+    | null;
 
   /**
    * Unique Baremetal Tenant Identifier.
@@ -276,6 +294,12 @@ model VolumeProperties {
   @added(Versions.v2025_12_15_preview)
   @removed(Versions.v2026_01_01)
   @added(Versions.v2026_01_15_preview)
+  @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_04_01)
+  @added(Versions.v2026_04_15_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   ldapServerType?: LdapServerType;
 
@@ -397,7 +421,10 @@ model VolumeProperties {
 
   /**
    * Flag indicating whether subvolume operations are enabled on the volume
+   * Deprecated. Subvolume operations and this flag will be removed in a future API version.
    */
+  #suppress "deprecated" "Suppress this warning until the property is removed."
+  #deprecated "Deprecated. This property will be removed in a future API version."
   enableSubvolumes?: EnableSubvolumes = EnableSubvolumes.Disabled;
 
   /**
@@ -421,6 +448,12 @@ model VolumeProperties {
   @added(Versions.v2025_12_15_preview)
   @removed(Versions.v2026_01_01)
   @added(Versions.v2026_01_15_preview)
+  @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_04_01)
+  @added(Versions.v2026_04_15_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   largeVolumeType?: LargeVolumeType;
 
@@ -444,6 +477,12 @@ model VolumeProperties {
   @added(Versions.v2025_12_15_preview)
   @removed(Versions.v2026_01_01)
   @added(Versions.v2026_01_15_preview)
+  @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_04_01)
+  @added(Versions.v2026_04_15_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
   language?: VolumeLanguage;
 
   /**
@@ -452,6 +491,31 @@ model VolumeProperties {
   @added(Versions.v2025_12_15_preview)
   @removed(Versions.v2026_01_01)
   @added(Versions.v2026_01_15_preview)
+  @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_04_01)
+  @added(Versions.v2026_04_15_preview)
+  @removed(Versions.v2026_03_15_preview)
+  @renamedFrom(Versions.v2026_03_15_preview, "breakthroughMode")
+  @added(Versions.v2026_04_01)
+  @removed(Versions.v2026_04_15_preview)
+  @added(Versions.v2026_05_01)
+  @removed(Versions.v2026_05_15_preview)
+  @renamedFrom(Versions.v2026_04_15_preview, "breakthroughMode")
+  breakthroughModeOld?: BreakthroughMode;
+
+  /**
+   * Specifies whether the volume operates in Breakthrough Mode.
+   */
+  @added(Versions.v2025_12_15_preview)
+  @removed(Versions.v2026_01_01)
+  @added(Versions.v2026_01_15_preview)
+  @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_04_01)
+  @added(Versions.v2026_04_15_preview)
+  @added(Versions.v2026_05_01)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   breakthroughMode?: BreakthroughMode;
 }
 
@@ -829,7 +893,6 @@ union VolumeLanguage {
 /**
  * Set of export policy rules
  */
-@clientName("NetAppVolumeExportPolicyRule", "csharp")
 model VolumePropertiesExportPolicy {
   /**
    * Export policy rule
@@ -1269,6 +1332,15 @@ model VolumePatchProperties {
   @added(Versions.v2026_01_01)
   @removed(Versions.v2026_01_15_preview)
   @renamedFrom(Versions.v2026_01_15_preview, "usageThreshold")
+  @added(Versions.v2026_03_01)
+  @removed(Versions.v2026_03_15_preview)
+  @renamedFrom(Versions.v2026_03_15_preview, "usageThreshold")
+  @added(Versions.v2026_04_01)
+  @removed(Versions.v2026_04_15_preview)
+  @renamedFrom(Versions.v2026_04_15_preview, "usageThreshold")
+  @added(Versions.v2026_05_01)
+  @removed(Versions.v2026_05_15_preview)
+  @renamedFrom(Versions.v2026_05_15_preview, "usageThreshold")
   @maxValue(2638827906662400)
   @minValue(53687091200)
   usageThreshold20250901?: int64;
@@ -1281,6 +1353,12 @@ model VolumePatchProperties {
   @added(Versions.v2025_12_15_preview)
   @removed(Versions.v2026_01_01)
   @added(Versions.v2026_01_15_preview)
+  @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_04_01)
+  @added(Versions.v2026_04_15_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
   @maxValue(7916483719987200)
   @minValue(53687091200)
   usageThreshold?: int64;
@@ -2064,7 +2142,9 @@ union AvsDataStore {
 
 /**
  * Flag indicating whether subvolume operations are enabled on the volume
+ * Deprecated. This type will be removed in a future API version.
  */
+#deprecated "Deprecated. This type will be removed in a future API version."
 union EnableSubvolumes {
   string,
 
@@ -2120,6 +2200,11 @@ union LargeVolumeType {
 @added(Versions.v2025_12_15_preview)
 @removed(Versions.v2026_01_01)
 @added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_04_01)
+@added(Versions.v2026_04_15_preview)
+@added(Versions.v2026_05_01)
 union BreakthroughMode {
   string,
 
@@ -2290,7 +2375,8 @@ union ActualRansomwareProtectionState {
   Paused: "Paused",
 }
 
-@@visibility(Azure.ResourceManager.AvailabilityZonesProperty.zones,
+@@visibility(
+  Azure.ResourceManager.AvailabilityZonesProperty.zones,
   Lifecycle.Read,
   Lifecycle.Create
 );
@@ -2309,11 +2395,14 @@ interface Volumes {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Volume,
-    Response = ArmResourceUpdatedResponse<Volume> | ArmResourceCreatedResponse<
-      Volume,
-      ArmAsyncOperationHeader<FinalResult = Volume> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceUpdatedResponse<Volume>
+      | ArmResourceCreatedResponse<
+          Volume,
+          ArmAsyncOperationHeader<FinalResult = Volume> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**
@@ -2689,37 +2778,48 @@ interface Volumes {
 @@minLength(Volume.name, 1);
 @@doc(Volume.name, "The name of the volume");
 @@doc(Volume.properties, "Volume properties");
-@@doc(Volumes.createOrUpdate::parameters.resource,
+@@doc(
+  Volumes.createOrUpdate::parameters.resource,
   "Volume object supplied in the body of the operation."
 );
-@@doc(Volumes.update::parameters.properties,
+@@doc(
+  Volumes.update::parameters.properties,
   "Volume object supplied in the body of the operation."
 );
-@@doc(Volumes.revert::parameters.body,
+@@doc(
+  Volumes.revert::parameters.body,
   "Object for snapshot to revert supplied in the body of the operation."
 );
-@@doc(Volumes.breakFileLocks::parameters.body,
+@@doc(
+  Volumes.breakFileLocks::parameters.body,
   "Optional body to provide the ability to clear file locks with selected options"
 );
-@@doc(Volumes.listGetGroupIdListForLdapUser::parameters.body,
+@@doc(
+  Volumes.listGetGroupIdListForLdapUser::parameters.body,
   "Returns group Id list for a specific LDAP user"
 );
-@@doc(Volumes.breakReplication::parameters.body,
+@@doc(
+  Volumes.breakReplication::parameters.body,
   "Optional body to force break the replication."
 );
-@@doc(Volumes.reestablishReplication::parameters.body,
+@@doc(
+  Volumes.reestablishReplication::parameters.body,
   "body for the id of the source volume."
 );
-@@doc(Volumes.authorizeReplication::parameters.body,
+@@doc(
+  Volumes.authorizeReplication::parameters.body,
   "Authorize request object supplied in the body of the operation."
 );
-@@doc(Volumes.peerExternalCluster::parameters.body,
+@@doc(
+  Volumes.peerExternalCluster::parameters.body,
   "Cluster peer request object supplied in the body of the operation."
 );
-@@doc(Volumes.poolChange::parameters.body,
+@@doc(
+  Volumes.poolChange::parameters.body,
   "Move volume to the pool supplied in the body of the operation."
 );
 @@doc(Volumes.relocate::parameters.body, "Relocate volume request");
-@@doc(Volumes.migrateBackups::parameters.body,
+@@doc(
+  Volumes.migrateBackups::parameters.body,
   "Migrate backups under volume payload supplied in the body of the operation."
 );

@@ -19,6 +19,7 @@ enum Versions {
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1")
   v2_preview: "2024-11-01-preview",
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/version-progression" "Existing API"
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1")
   v1_stable: "2024-11-01",
 
@@ -166,6 +167,7 @@ model SingleSignOnProperties {
   @doc("AAD enterprise application Id used to setup SSO")
   enterpriseAppId?: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("URL for SSO to be used by the partner to redirect the user to their system")
   singleSignOnUrl?: Uri;
 

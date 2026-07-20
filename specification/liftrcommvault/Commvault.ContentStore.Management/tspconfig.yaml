@@ -1,0 +1,46 @@
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    use-read-only-status-schema: true
+    emitter-output-dir: "{project-root}/.."
+    azure-resource-provider-folder: "resource-manager"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/commvault.json"
+    examples-dir: "{project-root}/examples"
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.CommvaultContentStore"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-commvaultcontentstore"
+    flavor: azure
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-commvaultcontentstore"
+  "@azure-tools/typespec-go":
+    service-dir: sdk/resourcemanager/commvaultcontentstore
+    emitter-output-dir: "{output-dir}/{service-dir}/armcommvaultcontentstore"
+    module: github.com/Azure/azure-sdk-for-go/{service-dir}/armcommvaultcontentstore
+    fix-const-stuttering: true
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+    flavor: azure
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-commvaultcontentstore"
+    namespace: azure.mgmt.commvaultcontentstore
+    generate-test: true
+    generate-sample: true
+    flavor: azure
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-commvaultcontentstore"
+    flavor: azure
+    namespace: com.azure.resourcemanager.commvaultcontentstore
+    service-name: Commvault Content Store
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"
+parameters:
+  service-dir:
+    default: sdk/commvaultcontentstore

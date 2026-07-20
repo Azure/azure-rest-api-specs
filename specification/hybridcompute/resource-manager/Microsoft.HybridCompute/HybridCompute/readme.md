@@ -26,7 +26,7 @@ These are the global settings for the HybridCompute API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2025-09-16-preview
+tag: package-preview-2026-06-16-preview
 directive:
   - from: HybridCompute.json
     where: $.definitions.MachineInstallPatchesParameters.properties.maximumDuration
@@ -78,14 +78,40 @@ directive:
 
 ```
 
+### Tag: package-preview-2026-06-16-preview
+
+These settings apply only when `--tag=package-preview-2026-06-16-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-06-16-preview'
+input-file:
+  - preview/2026-06-16-preview/openapi.json
+```
+
+### Tag: package-preview-2026-06-04-preview
+
+These settings apply only when `--tag=package-preview-2026-06-04-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-06-04-preview'
+input-file:
+  - preview/2026-06-04-preview/openapi.json
+```
+
+### Tag: package-preview-2026-02-12-preview
+
+These settings apply only when `--tag=package-preview-2026-02-12-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-02-12-preview'
+input-file:
+  - preview/2026-02-12-preview/openapi.json
+```
+
 ### Tag: package-preview-2025-09-16-preview
 
 These settings apply only when `--tag=package-preview-2025-09-16-preview` is specified on the command line.
 
 ```yaml $(tag) == 'package-preview-2025-09-16-preview'
 input-file:
-  - preview/2025-09-16-preview/HybridCompute.json
-  - preview/2025-09-16-preview/privateLinkScopes.json
+  - preview/2025-09-16-preview/openapi.json
 ```
 
 ### Tag: package-preview-2025-08-21-preview

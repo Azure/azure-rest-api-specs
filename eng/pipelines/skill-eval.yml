@@ -1,0 +1,44 @@
+# Vally eval CI for .github/skills, using the eval framework synced from azure-sdk-tools under
+# eng/common. Extends archetype-eval.yml directly; mcpSetupTemplate points at this repo's own
+# /eng/pipelines/templates/steps/eval-mcp-setup.yml (the MCP build swap point).
+#
+# Pilot scope: hermetic mock scenarios only, scheduled/manual runs (no pr trigger yet).
+
+trigger: none
+
+pr: none
+
+schedules:
+  - cron: '0 8 * * *'
+    displayName: 'Daily skill-eval run'
+    branches:
+      include:
+        - main
+    always: true
+
+variables:
+  # Managed-pool image selection (LINUXPOOL/LINUXVMIMAGE). Repo-local.
+  - template: /eng/pipelines/templates/variables/image.yml
+  # Provides the secret azuresdk-copilot-github-pat, mapped into GITHUB_TOKEN in the invoke step.
+  # Already exists in this ADO project.
+  - group: AzSDK_Eval_Variable_group
+
+extends:
+  template: /eng/common/pipelines/templates/stages/archetype-eval.yml
+  parameters:
+    mcpSetupTemplate: /eng/pipelines/templates/steps/eval-mcp-setup.yml
+    TestType: mock
+    vallyRoot: .github/skills
+    # All rooted at .github/skills, so one Prepare/Eval/Summary run covers every suite
+    # (collect-stimuli.ts shards by `area` tag, falling back to parent folder name):
+    #   - '*/evals/*.eval.yaml' — trigger.eval.yaml suites, one per skill.
+    #   - '*/evals/eval.yaml'   — capability suites (plain eval.yaml, doesn't match *.eval.yaml).
+    #   - 'evals/arm-api-reviewer/vally/eval-*.yaml' — ARM API Reviewer suite (own nested
+    #     .vally.yaml/fixtures, no MCP server needed; folded in here instead of a second
+    #     pipeline since eval-shard.yml only supports one Prepare stage per pipeline).
+    evalGlobs:
+      - '*/evals/*.eval.yaml'
+      - '*/evals/eval.yaml'
+      - 'evals/arm-api-reviewer/vally/eval-*.yaml'
+    # Raised from 20 to 45m to cover the ARM suite's single fallback shard (17 files, no area tags).
+    shardTimeoutInMinutes: 45

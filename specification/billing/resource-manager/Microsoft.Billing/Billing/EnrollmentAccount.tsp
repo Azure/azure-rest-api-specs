@@ -65,7 +65,8 @@ alias EnrollmentAccountOps = Azure.ResourceManager.Legacy.ExtensionOperations<
     @key
     @pattern("^[a-zA-Z\\d-_]{1,128}$")
     enrollmentAccountName: string;
-  }
+  },
+  "BillingDepartmentEnrollmentAccount"
 >;
 
 @armResourceOperations(#{ omitTags: true })
@@ -152,7 +153,8 @@ alias EnrollmentAccountOperationGroupOps = Azure.ResourceManager.Legacy.Extensio
     @key
     @pattern("^[a-zA-Z\\d-_]{1,128}$")
     enrollmentAccountName: string;
-  }
+  },
+  "BillingEnrollmentAccount"
 >;
 
 alias EnrollmentAccountOperationGroupNoPatternOps = Azure.ResourceManager.Legacy.ExtensionOperations<
@@ -322,9 +324,11 @@ interface EnrollmentAccountOperationGroup {
 }
 
 @@doc(EnrollmentAccount.name, "The name of the enrollment account.");
-@@doc(EnrollmentAccount.properties,
+@@doc(
+  EnrollmentAccount.properties,
   "It is an organizational hierarchy within a billing account to administer and manage azure costs."
 );
-@@doc(EnrollmentAccountOperationGroup.checkAccessByEnrollmentAccount::parameters.body,
+@@doc(
+  EnrollmentAccountOperationGroup.checkAccessByEnrollmentAccount::parameters.body,
   "The request object against which access of the caller will be checked."
 );

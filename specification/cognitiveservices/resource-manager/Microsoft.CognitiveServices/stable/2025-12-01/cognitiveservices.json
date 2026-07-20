@@ -1211,9 +1211,9 @@
             }
           },
           "201": {
-            "description": "Resource 'RaiExternalSafetyProvider' create operation succeeded",
+            "description": "Resource 'RaiExternalSafetyProviderSchema' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/RaiExternalSafetyProvider"
+              "$ref": "#/definitions/RaiExternalSafetyProviderSchema"
             }
           },
           "default": {
@@ -5346,6 +5346,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
@@ -15399,67 +15402,6 @@
         "source": {
           "$ref": "#/definitions/RaiPolicyContentSource",
           "description": "Content source to apply the Content Filters."
-        }
-      }
-    },
-    "RaiExternalSafetyProvider": {
-      "type": "object",
-      "description": "Cognitive Services Rai External Safety provider.",
-      "properties": {
-        "etag": {
-          "type": "string",
-          "description": "Resource Etag.",
-          "readOnly": true
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "properties": {
-          "$ref": "#/definitions/RaiExternalSafetyProviderProperties",
-          "description": "Properties of Cognitive Services Rai External Safety provider."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "RaiExternalSafetyProviderProperties": {
-      "type": "object",
-      "description": "RAI External SafetyProvider properties.",
-      "properties": {
-        "providerId": {
-          "type": "string",
-          "description": "The unique identifier of the safety provider."
-        },
-        "providerName": {
-          "type": "string",
-          "description": "Name of the safety provider."
-        },
-        "mode": {
-          "type": "string",
-          "description": "Safety provider mode sync/async."
-        },
-        "url": {
-          "type": "string",
-          "format": "uri",
-          "description": "Webhook URL for the safety provider."
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Creation time of the safety provider."
-        },
-        "lastModifiedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Last modified time of the safety provider."
         }
       }
     },

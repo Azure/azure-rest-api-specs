@@ -1,0 +1,50 @@
+parameters:
+  service-dir:
+    default: sdk/azureresiliencemanagement
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    use-read-only-status-schema: true
+    emitter-output-dir: "{project-root}"
+    output-file: "{version-status}/{version}/openapi.json"
+    examples-dir: "{project-root}/examples"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.ResilienceManagement"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+  "@azure-tools/typespec-python":
+    service-dir: "sdk/resiliencemanagement"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-resiliencemanagement"
+    namespace: azure.mgmt.resiliencemanagement
+    generate-test: true
+    generate-sample: true
+    flavor: azure
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-resiliencemanagement"
+    namespace: com.azure.resourcemanager.resiliencemanagement
+    service-name: Resilience Management
+    flavor: azure
+  "@azure-tools/typespec-go":
+    service-dir: sdk/resourcemanager/resiliencemanagement
+    emitter-output-dir: "{output-dir}/{service-dir}/armresiliencemanagement"
+    module: github.com/Azure/azure-sdk-for-go/{service-dir}/armresiliencemanagement
+    fix-const-stuttering: true
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    service-dir: "sdk/resiliencemanagement"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-resiliencemanagement"
+    package-details:
+      name: "@azure/arm-resiliencemanagement"
+    flavor: azure
+    experimental-extensible-enums: true
+    compatibility-lro: true
+    api-version: "2026-04-01-preview"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"

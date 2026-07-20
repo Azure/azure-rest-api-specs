@@ -1,0 +1,89 @@
+{
+  "title": "Entities_GetSignalRecommendations",
+  "operationId": "Entities_GetSignalRecommendations",
+  "parameters": {
+    "api-version": "2026-05-01-preview",
+    "subscriptionId": "abcdef12-3456-7890-abcd-ef1234567890",
+    "resourceGroupName": "online-store-rg",
+    "healthModelName": "online-store",
+    "entityName": "orders-db"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "recommendedSignals": [
+          {
+            "signalId": "sql-cpu-percent",
+            "metricNamespace": "Microsoft.Sql/servers/databases",
+            "metricName": "cpu_percent",
+            "aggregationType": "Average",
+            "unit": "Percent",
+            "timeGrain": "PT5M",
+            "evaluationRules": {
+              "degradedRule": {
+                "operator": "GreaterThan",
+                "threshold": 70
+              },
+              "unhealthyRule": {
+                "operator": "GreaterThan",
+                "threshold": 90
+              }
+            }
+          },
+          {
+            "signalId": "sql-dtu-consumption",
+            "metricNamespace": "Microsoft.Sql/servers/databases",
+            "metricName": "dtu_consumption_percent",
+            "aggregationType": "Average",
+            "unit": "Percent",
+            "timeGrain": "PT5M",
+            "evaluationRules": {
+              "degradedRule": {
+                "operator": "GreaterThan",
+                "threshold": 75
+              },
+              "unhealthyRule": {
+                "operator": "GreaterThan",
+                "threshold": 90
+              }
+            }
+          }
+        ],
+        "recommendedConfigurations": [
+          {
+            "signalId": "sql-storage-percent",
+            "metricNamespace": "Microsoft.Sql/servers/databases",
+            "metricName": "storage_percent",
+            "aggregationType": "Maximum",
+            "unit": "Percent",
+            "timeGrain": "PT15M",
+            "evaluationRules": {
+              "degradedRule": {
+                "operator": "GreaterThan",
+                "threshold": 80
+              },
+              "unhealthyRule": {
+                "operator": "GreaterThan",
+                "threshold": 95
+              }
+            }
+          },
+          {
+            "signalId": "sql-deadlocks",
+            "metricNamespace": "Microsoft.Sql/servers/databases",
+            "metricName": "deadlock",
+            "aggregationType": "Total",
+            "unit": "Count",
+            "timeGrain": "PT5M",
+            "evaluationRules": {
+              "unhealthyRule": {
+                "operator": "GreaterThan",
+                "threshold": 0
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

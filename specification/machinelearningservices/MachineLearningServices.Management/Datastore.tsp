@@ -15,8 +15,10 @@ namespace Microsoft.MachineLearningServices;
  * Azure Resource Manager resource envelope.
  */
 @parentResource(Workspace)
-model Datastore
-  is Azure.ResourceManager.ProxyResource<DatastoreProperties, false> {
+model Datastore is Azure.ResourceManager.ProxyResource<
+  DatastoreProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = Datastore,
     KeyName = "name",
@@ -124,7 +126,8 @@ interface Datastores {
 
 @@doc(Datastore.name, "Datastore name.");
 @@doc(Datastore.properties, "[Required] Additional attributes of the entity.");
-@@doc(Datastores.createOrUpdate::parameters.resource,
+@@doc(
+  Datastores.createOrUpdate::parameters.resource,
   "Datastore entity to create or update."
 );
 @@doc(Datastores.listSecrets::parameters.body, "Secret expiry information.");

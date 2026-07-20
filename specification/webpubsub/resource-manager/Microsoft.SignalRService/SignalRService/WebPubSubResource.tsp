@@ -11,8 +11,10 @@ namespace Microsoft.SignalRService;
 /**
  * A class represent a resource.
  */
-model WebPubSubResource
-  is Azure.ResourceManager.TrackedResource<WebPubSubProperties, true> {
+model WebPubSubResource is Azure.ResourceManager.TrackedResource<
+  WebPubSubProperties,
+  true
+> {
   ...ResourceNameParameter<
     Resource = WebPubSubResource,
     KeyName = "resourceName",
@@ -54,12 +56,15 @@ interface WebPubSubResources {
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     WebPubSubResource,
-    Response = ArmResponse<WebPubSubResource> | ArmResourceCreatedResponse<
-      WebPubSubResource,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = WebPubSubResource>
-    > | {
-      @statusCode statusCode: 202;
-    }
+    Response =
+      | ArmResponse<WebPubSubResource>
+      | ArmResourceCreatedResponse<
+          WebPubSubResource,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = WebPubSubResource>
+        >
+      | {
+          @statusCode statusCode: 202;
+        }
   >;
 
   /**
@@ -113,10 +118,12 @@ interface WebPubSubResources {
   regenerateKey is ArmResourceActionSync<
     WebPubSubResource,
     RegenerateKeyParameters,
-    Response = WebPubSubKeys | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = WebPubSubKeys>> & {
-      @bodyRoot
-      _: WebPubSubKeys;
-    })
+    Response =
+      | WebPubSubKeys
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = WebPubSubKeys>> & {
+          @bodyRoot
+          _: WebPubSubKeys;
+        })
   >;
 
   /**
@@ -152,15 +159,19 @@ interface WebPubSubResources {
 @@maxLength(WebPubSubResource.name, 63);
 @@minLength(WebPubSubResource.name, 3);
 @@doc(WebPubSubResource.name, "The name of the resource.");
-@@doc(WebPubSubResource.properties,
+@@doc(
+  WebPubSubResource.properties,
   "A class that describes the properties of the resource"
 );
-@@doc(WebPubSubResources.createOrUpdate::parameters.resource,
+@@doc(
+  WebPubSubResources.createOrUpdate::parameters.resource,
   "Parameters for the create or update operation"
 );
-@@doc(WebPubSubResources.update::parameters.properties,
+@@doc(
+  WebPubSubResources.update::parameters.properties,
   "Parameters for the update operation"
 );
-@@doc(WebPubSubResources.regenerateKey::parameters.body,
+@@doc(
+  WebPubSubResources.regenerateKey::parameters.body,
   "Parameter that describes the Regenerate Key Operation."
 );

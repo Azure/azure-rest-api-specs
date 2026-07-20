@@ -10,6 +10,7 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
@@ -38,4 +39,9 @@ enum Versions {
    * The 2024-12-09-preview API version.
    */
   v2024_12_09_preview: "2024-12-09-preview",
+
+  /**
+   * The 2026-02-23 API version.
+   */
+  v2026_02_23: "2026-02-23",
 }

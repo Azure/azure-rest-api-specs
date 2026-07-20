@@ -20,11 +20,10 @@ namespace Microsoft.ContainerService;
  */
 @singleton("default")
 @parentResource(ManagedCluster)
-model ManagedClusterUpgradeProfile
-  is Azure.ResourceManager.ProxyResource<
-    ManagedClusterUpgradeProfileProperties,
-    false
-  > {
+model ManagedClusterUpgradeProfile is Azure.ResourceManager.ProxyResource<
+  ManagedClusterUpgradeProfileProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = ManagedClusterUpgradeProfile,
     KeyName = "upgradeProfile",
@@ -34,7 +33,8 @@ model ManagedClusterUpgradeProfile
 }
 
 @@doc(ManagedClusterUpgradeProfile.name, "");
-@@doc(ManagedClusterUpgradeProfile.properties,
+@@doc(
+  ManagedClusterUpgradeProfile.properties,
   "The properties of the upgrade profile."
 );
 
@@ -96,7 +96,7 @@ model ManagedClusterPoolUpgradeProfile {
   /**
    * List of components grouped by kubernetes major.minor version.
    */
-  @added(Versions.v2026_02_02_preview)
+  @added(Versions.v2026_04_02_preview)
   @identifiers(#[])
   componentsByReleases?: ComponentsByRelease[];
 }
@@ -116,6 +116,6 @@ model ManagedClusterPoolUpgradeProfileUpgradesItem {
   /**
    * Whether the Kubernetes version is out of support.
    */
-  @added(Versions.v2026_02_02_preview)
+  @added(Versions.v2026_04_02_preview)
   isOutOfSupport?: boolean;
 }

@@ -20,6 +20,12 @@ namespace Microsoft.NetApp;
 @added(Versions.v2025_12_15_preview)
 @removed(Versions.v2026_01_01)
 @added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_04_01)
+@added(Versions.v2026_04_15_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
 @parentResource(ElasticAccount)
 model ElasticBackupVault is TrackedResource<ElasticBackupVaultProperties> {
   ...ResourceNameParameter<
@@ -37,6 +43,12 @@ model ElasticBackupVault is TrackedResource<ElasticBackupVaultProperties> {
 @added(Versions.v2025_12_15_preview)
 @removed(Versions.v2026_01_01)
 @added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_04_01)
+@added(Versions.v2026_04_15_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
 model ElasticBackupVaultProperties {
   /**
    * Azure lifecycle management.
@@ -53,6 +65,12 @@ interface ElasticBackupVaults {
   @added(Versions.v2025_12_15_preview)
   @removed(Versions.v2026_01_01)
   @added(Versions.v2026_01_15_preview)
+  @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_04_01)
+  @added(Versions.v2026_04_15_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
   get is ArmResourceRead<ElasticBackupVault>;
 
   /**
@@ -61,6 +79,12 @@ interface ElasticBackupVaults {
   @added(Versions.v2025_12_15_preview)
   @removed(Versions.v2026_01_01)
   @added(Versions.v2026_01_15_preview)
+  @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_04_01)
+  @added(Versions.v2026_04_15_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
   createOrUpdate is ArmResourceCreateOrUpdateAsync<ElasticBackupVault>;
 
   /**
@@ -69,6 +93,12 @@ interface ElasticBackupVaults {
   @added(Versions.v2025_12_15_preview)
   @removed(Versions.v2026_01_01)
   @added(Versions.v2026_01_15_preview)
+  @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_04_01)
+  @added(Versions.v2026_04_15_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
   update is ArmCustomPatchAsync<
     ElasticBackupVault,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -85,6 +115,12 @@ interface ElasticBackupVaults {
   @added(Versions.v2025_12_15_preview)
   @removed(Versions.v2026_01_01)
   @added(Versions.v2026_01_15_preview)
+  @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_04_01)
+  @added(Versions.v2026_04_15_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
   delete is ArmResourceDeleteWithoutOkAsync<ElasticBackupVault>;
   /**
    * List and describe all Elastic Backup Vaults in the elastic account.
@@ -92,6 +128,12 @@ interface ElasticBackupVaults {
   @added(Versions.v2025_12_15_preview)
   @removed(Versions.v2026_01_01)
   @added(Versions.v2026_01_15_preview)
+  @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_04_01)
+  @added(Versions.v2026_04_15_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
   listByElasticAccount is ArmResourceListByParent<ElasticBackupVault>;
 }
 

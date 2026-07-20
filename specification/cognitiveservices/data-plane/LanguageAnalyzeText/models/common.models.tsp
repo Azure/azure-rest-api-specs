@@ -18,6 +18,7 @@ model AADToken
   is OAuth2Auth<[
     {
       type: OAuth2FlowType.implicit;
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
       authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize";
       scopes: ["https://cognitiveservices.azure.com/.default"];
     }
@@ -188,7 +189,7 @@ model AnalyzeTextJobsInput {
   tasks: AnalyzeTextLROTask[];
 
   /** Default language to use for records requesting automatic language detection. */
-  @added(Versions.v2025_11_15_preview)
+  @added(Versions.v2026_05_15_preview)
   defaultLanguage?: string;
 
   /** Optional duration in seconds after which the job will be canceled if not completed. */
@@ -358,7 +359,7 @@ model MultiLanguageInput {
 }
 
 /** Defines the detected language for the document. */
-@added(Versions.v2025_11_15_preview)
+@added(Versions.v2026_05_15_preview)
 model DocumentDetectedLanguage {
   /** If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document. */
   detectedLanguage?: DetectedLanguage;

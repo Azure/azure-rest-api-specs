@@ -17,8 +17,10 @@ namespace Microsoft.Storage;
  */
 @parentResource(StorageAccount)
 @added(Versions.v2025_08_01)
-model DataShare
-  is Azure.ResourceManager.TrackedResource<StorageDataShareProperties, false> {
+model DataShare is Azure.ResourceManager.TrackedResource<
+  StorageDataShareProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = DataShare,
     KeyName = "dataShareName",
@@ -43,7 +45,7 @@ interface DataShares {
   /**
    * Update a Storage DataShare.
    */
-  update is ArmResourcePatchAsync<DataShare, StorageDataShareProperties>;
+  update is ArmCustomPatchAsync<DataShare, PatchModel = DataShareUpdate>;
 
   /**
    * Delete a Storage DataShare.
@@ -60,9 +62,11 @@ interface DataShares {
 @@minLength(DataShare.name, 3);
 @@doc(DataShare.name, "The name of the Storage DataShare.");
 @@doc(DataShare.properties, "The properties of the Storage DataShare.");
-@@doc(DataShares.create::parameters.resource,
+@@doc(
+  DataShares.create::parameters.resource,
   "Create a Storage DataShare if it does not already exist; otherwise, error out. This API will not allow you to replace an already existing resource."
 );
-@@doc(DataShares.update::parameters.properties,
+@@doc(
+  DataShares.update::parameters.properties,
   "The updated properties of the Storage DataShare."
 );

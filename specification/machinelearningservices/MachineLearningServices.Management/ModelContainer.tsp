@@ -15,8 +15,10 @@ namespace Microsoft.MachineLearningServices;
  * Azure Resource Manager resource envelope.
  */
 @parentResource(Registry)
-model ModelContainer
-  is Azure.ResourceManager.ProxyResource<ModelContainerProperties, false> {
+model ModelContainer is Azure.ResourceManager.ProxyResource<
+  ModelContainerProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = ModelContainer,
     KeyName = "modelName",
@@ -48,7 +50,9 @@ interface ModelContainerOps
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
         modelName: string,
-      }
+      },
+      ErrorResponse,
+      "MachineLearningRegistryModelContainer"
     > {}
 
 @armResourceOperations
@@ -66,16 +70,15 @@ interface ModelContainers {
   @summary("Create or update model container.")
   createOrUpdate is ModelContainerOps.CreateOrUpdateAsync<
     ModelContainer,
-    Response = ArmResourceUpdatedResponse<ModelContainer> | (ArmResourceCreatedResponse<
-      ModelContainer,
-      ArmAsyncOperationHeader
-    > & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<ModelContainer>
+      | (ArmResourceCreatedResponse<ModelContainer, ArmAsyncOperationHeader> & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
   >;
 
   /**
@@ -85,13 +88,16 @@ interface ModelContainers {
   @summary("Delete container.")
   delete is ModelContainerOps.DeleteWithoutOkAsync<
     ModelContainer,
-    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    }) | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | (ArmDeleteAcceptedLroResponse & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -138,7 +144,9 @@ interface ModelContainerOperationGroupOps
         @segment("models")
         @key
         name: string,
-      }
+      },
+      ErrorResponse,
+      "MachineLearningModelContainer"
     > {}
 
 @armResourceOperations
@@ -191,12 +199,15 @@ interface ModelContainerOperationGroup {
 }
 
 @@doc(ModelContainer.name, "Container name. This is case-sensitive.");
-@@doc(ModelContainer.properties,
+@@doc(
+  ModelContainer.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(ModelContainers.createOrUpdate::parameters.resource,
+@@doc(
+  ModelContainers.createOrUpdate::parameters.resource,
   "Container entity to create or update."
 );
-@@doc(ModelContainerOperationGroup.createOrUpdate::parameters.resource,
+@@doc(
+  ModelContainerOperationGroup.createOrUpdate::parameters.resource,
   "Container entity to create or update."
 );

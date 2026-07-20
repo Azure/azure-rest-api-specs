@@ -15,8 +15,10 @@ namespace Microsoft.DataFactory;
  * Credential resource type.
  */
 @parentResource(Factory)
-model CredentialResource
-  is Azure.ResourceManager.ProxyResource<Credential, false> {
+model CredentialResource is Azure.ResourceManager.ProxyResource<
+  Credential,
+  false
+> {
   ...ResourceNameParameter<
     Resource = CredentialResource,
     KeyName = "credentialName",
@@ -87,6 +89,7 @@ interface CredentialResources {
 @@minLength(CredentialResource.name, 1);
 @@doc(CredentialResource.name, "Credential name");
 @@doc(CredentialResource.properties, "Properties of credentials.");
-@@doc(CredentialResources.createOrUpdate::parameters.resource,
+@@doc(
+  CredentialResources.createOrUpdate::parameters.resource,
   "Credential resource definition."
 );

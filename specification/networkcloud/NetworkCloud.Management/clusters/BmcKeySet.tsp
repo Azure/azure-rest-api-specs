@@ -13,21 +13,22 @@ namespace Microsoft.NetworkCloud;
 /**
  * The name of the baseboard management controller key set.
  */
-model BmcKeySetNameParameter
-  is ResourceNameParameter<
-    Resource = BmcKeySet,
-    KeyName = "bmcKeySetName",
-    SegmentName = "bmcKeySets",
-    NamePattern = "^([a-zA-Z0-9][a-zA-Z0-9-_]{0,28}[a-zA-Z0-9])$"
-  >;
+model BmcKeySetNameParameter is ResourceNameParameter<
+  Resource = BmcKeySet,
+  KeyName = "bmcKeySetName",
+  SegmentName = "bmcKeySets",
+  NamePattern = "^([a-zA-Z0-9][a-zA-Z0-9-_]{0,28}[a-zA-Z0-9])$"
+>;
 
 /**
  * BmcKeySet represents the baseboard management controller key set.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "legacy resource using legacy features"
 @parentResource(Cluster)
-model BmcKeySet
-  is Azure.ResourceManager.TrackedResource<BmcKeySetProperties, false> {
+model BmcKeySet is Azure.ResourceManager.TrackedResource<
+  BmcKeySetProperties,
+  false
+> {
   ...BmcKeySetNameParameter;
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
   ...RequiredExtendedLocationProperty;
@@ -78,7 +79,9 @@ interface BmcKeySets {
       ...IfMatchParameter;
       ...IfNoneMatchParameter;
     },
-    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -94,7 +97,8 @@ interface BmcKeySets {
   >;
 }
 
-@@doc(BmcKeySet.name,
+@@doc(
+  BmcKeySet.name,
   "The name of the baseboard management controller key set."
 );
 @@doc(BmcKeySet.properties, "The list of the resource properties.");

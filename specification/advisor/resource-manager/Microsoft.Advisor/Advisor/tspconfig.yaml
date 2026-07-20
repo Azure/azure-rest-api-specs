@@ -25,6 +25,7 @@ options:
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/arm-advisor"
     flavor: azure
+    treat-unknown-as-record: true
     experimental-extensible-enums: true
     package-details:
       name: "@azure/arm-advisor"
@@ -44,3 +45,4 @@ options:
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"

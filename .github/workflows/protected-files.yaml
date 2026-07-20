@@ -15,13 +15,17 @@ permissions:
 
 env:
   # Users allowed to edit protected files without failing check
-  user-allowed: ${{ github.event.pull_request.user.login == 'azure-sdk' }}
+  user-allowed: >-
+    ${{
+      github.event.pull_request.user.login == 'azure-sdk' ||
+      github.event.pull_request.user.login == 'azure-sdk-automation[bot]'
+    }}
 
 jobs:
   protected-files:
     name: Protected Files
 
-    runs-on: ubuntu-slim
+    runs-on: ubuntu-24.04
 
     steps:
       # Since check is required, the job must pass instead of being skipped
@@ -29,7 +33,7 @@ jobs:
         if: ${{ env.user-allowed == 'true' }}
         run: echo "Account '${{ github.event.pull_request.user.login }}' is allowed to update protected files"
 
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         if: ${{ env.user-allowed != 'true' }}
         with:
           # Required since "HEAD^" is passed to Get-ChangedFiles
@@ -42,6 +46,8 @@ jobs:
 
           # powershell glob syntax
           $protectedFiles = @(".gitignore", "cspell.json", "cspell.yaml", "package.json", "package-lock.json", ".github/*", ".github/azsdk-common-*", ".vscode/*", "eng/*")
+          # regex syntax, for files synced from Azure/azure-sdk-tools
+          $azureSdkToolsFiles = @('^\.github/skills/azsdk-common-[^/]+(/.*)?$', '^eng/common(/.*)?$')
           # regex syntax, to support protected paths within larger excluded paths
           $excludedFiles = @('.github/CODEOWNERS', '.github/skills/(?!azsdk-common-).+')
           $changedFiles = @(Get-ChangedFiles -baseCommitish HEAD^ -headCommitish HEAD -diffFilter "")
@@ -56,7 +62,12 @@ jobs:
 
           if ($matchedFiles.Count -gt 0) {
             foreach ($file in $matchedFiles) {
-              Write-Output "::error file=$file::File '$file' should only be updated by the Azure SDK team.  If intentional, the PR may be merged by the Azure SDK team via bypassing the branch protections."
+              if ($azureSdkToolsFiles | Where-Object { $file -match $_ }) {
+                Write-Output "::error file=$file::File '$file' is synced from Azure/azure-sdk-tools and should not be updated directly in this repo."
+              }
+              else {
+                Write-Output "::error file=$file::File '$file' should only be updated by the Azure SDK team.  If intentional, the PR may be merged by the Azure SDK team via bypassing the branch protections."
+              }
             }
             exit 1
           }
