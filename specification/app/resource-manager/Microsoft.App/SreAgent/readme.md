@@ -45,6 +45,10 @@ suppressions:
     reason: Agent Session tags and target scope are immutable after creation by design; callers must delete and recreate the resource to change them.
     where:
       - $.definitions.AgentSession
+  - code: PutRequestResponseSchemeArm
+    reason: The PUT request intentionally excludes the service-managed sandbox, while the response returns the provisioned sandbox.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/agentSessions/{agentSessionName}"].put
 
 ```
 

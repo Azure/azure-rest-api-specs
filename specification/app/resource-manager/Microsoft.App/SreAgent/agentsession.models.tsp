@@ -41,6 +41,7 @@ model AgentSessionProperties {
 @added(Versions.v2026_08_01_preview)
 model AgentSessionCreate {
   /** The Azure region where the Agent Session is created. */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   location: azureLocation;
 
   /** Resource tags fixed at creation. */
