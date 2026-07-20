@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "DeploymentsClient",
-    "version": "2025-04-01",
+    "version": "2026-06-01",
     "description": "Provides operations for working with deployments.",
     "x-typespec-generated": [
       {
@@ -3620,11 +3620,6 @@
       "type": "object",
       "description": "Represents the value for an extension config property.",
       "properties": {
-        "type": {
-          "$ref": "#/definitions/ExtensionConfigPropertyType",
-          "description": "The value type of the extension config property.",
-          "readOnly": true
-        },
         "value": {
           "description": "The value of the extension config property."
         },
@@ -3655,6 +3650,11 @@
         "configId": {
           "type": "string",
           "description": "The extension configuration ID. It uniquely identifies a deployment target within an extension.",
+          "readOnly": true
+        },
+        "configHash": {
+          "type": "string",
+          "description": "The extension configuration hash. Can be used to distinguish different configurations that have the same config ID.",
           "readOnly": true
         },
         "config": {
@@ -4104,6 +4104,41 @@
         }
       }
     },
+    "DeploymentResourceWhatIfPrediction": {
+      "type": "object",
+      "description": "A prediction for a deployment resource by its symbolic name path.",
+      "properties": {
+        "symbolicNamePath": {
+          "type": "array",
+          "description": "The symbolic name path to the resource in the deployment template, including nested deployment(s) and extension if applicable.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "The predicted fully-qualified Azure resource ID."
+        },
+        "extension": {
+          "$ref": "#/definitions/DeploymentExtensionDefinition",
+          "description": "The predicted extension usage."
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "The predicted resource type."
+        },
+        "identifiers": {
+          "description": "The predicted extensible resource identifiers."
+        },
+        "apiVersion": {
+          "type": "string",
+          "description": "The predicted API version."
+        }
+      },
+      "required": [
+        "symbolicNamePath"
+      ]
+    },
     "DeploymentValidateResult": {
       "type": "object",
       "description": "Information from validate template deployment response.",
@@ -4158,6 +4193,16 @@
         "whatIfSettings": {
           "$ref": "#/definitions/DeploymentWhatIfSettings",
           "description": "Optional What-If operation settings."
+        },
+        "resourcePredictions": {
+          "type": "array",
+          "description": "Resource predictions that can be utilized by what-if to produce potential modification changes.",
+          "items": {
+            "$ref": "#/definitions/DeploymentResourceWhatIfPrediction"
+          },
+          "x-ms-identifiers": [
+            "symbolicNamePath"
+          ]
         }
       },
       "allOf": [
@@ -4254,60 +4299,6 @@
             "name": "Inner",
             "value": "Inner",
             "description": "Inner"
-          }
-        ]
-      }
-    },
-    "ExtensionConfigPropertyType": {
-      "type": "string",
-      "description": "Type of an extension config property value.",
-      "enum": [
-        "String",
-        "Int",
-        "Bool",
-        "Array",
-        "Object",
-        "SecureString",
-        "SecureObject"
-      ],
-      "x-ms-enum": {
-        "name": "ExtensionConfigPropertyType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "String",
-            "value": "String",
-            "description": "Property type representing a string value."
-          },
-          {
-            "name": "Int",
-            "value": "Int",
-            "description": "Property type representing an integer value."
-          },
-          {
-            "name": "Bool",
-            "value": "Bool",
-            "description": "Property type representing a boolean value."
-          },
-          {
-            "name": "Array",
-            "value": "Array",
-            "description": "Property type representing an array value."
-          },
-          {
-            "name": "Object",
-            "value": "Object",
-            "description": "Property type representing an object value."
-          },
-          {
-            "name": "SecureString",
-            "value": "SecureString",
-            "description": "Property type representing a secure string value."
-          },
-          {
-            "name": "SecureObject",
-            "value": "SecureObject",
-            "description": "Property type representing a secure object value."
           }
         ]
       }
@@ -4864,6 +4855,13 @@
           "type": "string",
           "description": "The API version the resource was deployed with.",
           "readOnly": true
+        },
+        "symbolicNamePath": {
+          "type": "array",
+          "description": "The symbolic name path to the resource in the deployment template, including nested deployment(s) and extension if applicable.",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -4954,6 +4952,13 @@
         "symbolicName": {
           "type": "string",
           "description": "The symbolic name of the resource as defined in the deployment template."
+        },
+        "symbolicNamePath": {
+          "type": "array",
+          "description": "The symbolic name path to the resource in the deployment template, including nested deployment(s) and extension if applicable.",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -5042,6 +5047,10 @@
         "symbolicName": {
           "type": "string",
           "description": "The symbolic name of the resource responsible for this change."
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "The resource type of the resource."
         },
         "identifiers": {
           "description": "A subset of properties that uniquely identify a Bicep extensible resource because it lacks a resource id like an Azure resource has."
