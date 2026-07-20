@@ -1399,31 +1399,31 @@
     },
     "GenerateWavePlanRequest": {
       "type": "object",
-      "description": "Data model of Download URL for wave recommendation report.",
+      "description": "Request body for the generateWavePlan action.",
       "properties": {
         "assessmentArmId": {
           "type": "string",
-          "description": "ARM Id of the assessment for which the wave plan report is to be generated."
+          "description": "ARM Id of the assessment for which the wave plan report is to be generated. Required from API version 2026-06-01-preview onwards."
         },
         "migrationPath": {
           "type": "string",
-          "description": "Optional. Specify the migration path for which the wave plan report is to be generated. If not specified, the default will be used"
+          "description": "Migration path for which the wave plan report is to be generated. Required from API version 2026-06-01-preview onwards. Allowed values include PaaSPreferred, PaaSCentric, IaaSCentric, RecommendedPath, AzureVM, Avs, SqlDatabase, SqlMI, AzureSQLVM, AzureAppService, AzureAppServiceContainer, AKS, Modernize, LiftAndShift."
         }
       }
     },
     "GenerateWavePlanResponse": {
       "type": "object",
-      "description": "Data model of Download URL for wave recommendation report.",
+      "description": "Response body for the generateWavePlan action.",
       "properties": {
         "sasUri": {
           "type": "string",
-          "description": "Hyperlink to download report.",
+          "description": "Time-bound SAS URL to the wave-plan artifact. Expires at expirationTime; never persisted on the wave-plan document.",
           "readOnly": true
         },
         "expirationTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Expiry date of download url.",
+          "description": "UTC instant after which sasUri ceases to be valid.",
           "readOnly": true
         }
       },

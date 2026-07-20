@@ -1,6 +1,7 @@
 import "../../Common/ArmModels/AzureResourceProperties.tsp";
 import "../Enums/Enums.tsp";
 import "../../Common/ArmModels/MigrateProject.tsp";
+import "../../ApiVersions.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -45,14 +46,16 @@ model TaskProperties is AzureResourceProperties {
 
   @doc("Task Type")
   @visibility(Lifecycle.Read)
-  taskType: TaskType;
+  @madeOptional(ApiVersions.v2026_06_01_preview)
+  taskType?: TaskType;
 
   @doc("Task Dislay Name ")
   displayName: string;
 
   @doc("Indicates whether the task is editable.")
   @visibility(Lifecycle.Read)
-  isEditable: boolean;
+  @madeOptional(ApiVersions.v2026_06_01_preview)
+  isEditable?: boolean;
 
   @doc("Task Status")
   status: string;

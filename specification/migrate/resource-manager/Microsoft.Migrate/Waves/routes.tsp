@@ -3,6 +3,10 @@ import "@typespec/rest";
 import "@azure-tools/typespec-client-generator-core";
 import "./ApiVersions.tsp";
 import "./WebModels/Waves/GenerateWavePlan.tsp";
+import "./WebModels/Waves/FetchSasUri.tsp";
+import "./WebModels/Waves/ImportWavePlan.tsp";
+import "./WebModels/Waves/GetWavePlans.tsp";
+import "./WebModels/Waves/CreateWavesFromPlan.tsp";
 import "./WebModels/Waves/MigrationWaves.tsp";
 import "./WebModels/RefreshEntities/RefreshEntities.tsp";
 import "./WebModels/MigrationEntity/MigrationEntity.tsp";
@@ -37,6 +41,43 @@ interface MigrateProjects {
     MigrateProject,
     RefreshEntitiesRequest,
     RefreshEntitiesResponse
+  >;
+
+  @added(ApiVersions.v2026_06_01_preview)
+  @doc("Mints a short-lived write-targeted SAS URL pointing into a server-managed CSV staging container. Callers PUT a wave-plan CSV to this URL and then reference the same URL on importWavePlan. Empty request body; synchronous (no LRO).")
+  @summary("Fetch Upload SAS URI")
+  @action("fetchSASUri")
+  fetchSasUri is ArmResourceActionSync<
+    MigrateProject,
+    void,
+    FetchSasUriResponse
+  >;
+
+  @added(ApiVersions.v2026_06_01_preview)
+  @doc("Imports a customer-authored wave plan from a CSV upload as a new wave plan resource; supersedes any existing plan for the (assessmentArmId, migrationPath) tuple.")
+  @summary("Import Wave Plan")
+  importWavePlan is ArmResourceActionAsync<
+    MigrateProject,
+    ImportWavePlanRequest,
+    ImportWavePlanResponse
+  >;
+
+  @added(ApiVersions.v2026_06_01_preview)
+  @doc("Lists wave plans for an assessment. When migrationPath is supplied, restricts results to that (assessmentArmId, migrationPath) combination. Returns the entire result set in a single page; ordered by wavePlanVersion descending within each migration path.")
+  @summary("Get Wave Plans")
+  getWavePlans is ArmResourceActionSync<
+    MigrateProject,
+    GetWavePlansRequest,
+    GetWavePlansResponse
+  >;
+
+  @added(ApiVersions.v2026_06_01_preview)
+  @doc("Creates Wave resources from the latest Active wave plan for the supplied (assessmentArmId, migrationPath) tuple.")
+  @summary("Create Waves From Plan")
+  createWavesFromPlan is ArmResourceActionAsync<
+    MigrateProject,
+    CreateWavesFromPlanRequest,
+    CreateWavesFromPlanResponse
   >;
 }
 
