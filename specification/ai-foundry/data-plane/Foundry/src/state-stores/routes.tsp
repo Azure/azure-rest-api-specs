@@ -6,7 +6,6 @@
  * for the checklist and open items to verify before opening the specs PR.
  * Not yet compiled.
  */
-
 import "../common/models.tsp";
 import "../common/servicepatterns.tsp";
 import "./models.tsp";

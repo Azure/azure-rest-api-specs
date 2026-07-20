@@ -29,7 +29,6 @@
  *     memory-stores does.
  * ============================================================================
  */
-
 import "../common/service.tsp";
 
 using TypeSpec.Http;
