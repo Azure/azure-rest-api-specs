@@ -9062,12 +9062,12 @@ model CapacityReservationInstanceView {
 }
 
 /**
- * Defines the schedule for Block-type or future capacity reservations. Specifies the schedule during which the capacity reservation is active and VM or VMSS resource can be allocated using the reservation. This property is required when the capacity reservation group type is 'Block'. In a 'Targeted' capacity reservation group, a future capacity reservation can be scheduled using only a start time. The scheduleProfile, start, and end fields are immutable after creation. Minimum API version: 2025-04-01. Please refer to https://aka.ms/blockcapacityreservation for more details.
+ * Defines the schedule for Block and future capacity reservations. Specifies the schedule during which capacity reservation is active and VM or VMSS resource can be allocated using reservation. This property is required and supported when the capacity reservation group type is 'Block'. For Block capacity reservations, the scheduleProfile, start, and end fields are immutable after creation. Please refer to https://aka.ms/blockcapacityreservation for more details. Minimum API version for Block capacity reservations: 2025-04-01.  In a 'Targeted' capacity reservation group, future capacity reservations must use this property with only a start time. Minimum API version for future capacity reservations: 2026-04-01.
  */
 @added(Versions.v2025_04_01)
 model ScheduleProfile {
   /**
-   * The required start date for block or future capacity reservations. Block reservations: Must be today or within 56 days in the future. For same-day scheduling, requests must be submitted before 11:30 AM UTC. Future reservations: Must be at least 7 days in the future, and maximum 6 months in the future. Example: 2025-06-27.
+   * The required start date for block or future capacity reservations. Block capacity reservations: Must be today or within 56 days in the future. For same-day scheduling, requests must be submitted before 11:30 AM UTC. Future capacity reservations: Must be at least 7 days in the future, and maximum 6 months in the future. Example: 2025-06-27. Minimum API version for future capacity reservations: 2026-04-01.
    */
   start?: string;
 
@@ -9086,6 +9086,7 @@ model ScheduleProfile {
    * The date/time until which a future capacity reservation can be updated or deleted. Read-only.
    */
   @added(Versions.v2026_04_01)
+  @visibility(Lifecycle.Read)
   modifiableUntil?: utcDateTime;
 }
 
@@ -9125,7 +9126,7 @@ union ReservationType {
   string,
 
   /**
-   * To consume on demand or future allocated capacity reservation when a capacity reservation group is provided.
+   * To consume on demand or future allocated capacity reservation when a capacity reservation group is provided. Minimum API version for future capacity reservations: 2026-04-01.
    */
   Targeted: "Targeted",
 
@@ -9267,7 +9268,7 @@ model CapacityReservationProperties {
   timeCreated?: utcDateTime;
 
   /**
-   * Defines the schedule for Block-type capacity reservations. Specifies the schedule during which capacity reservation is active and VM or VMSS resource can be allocated using reservation. This property is required and only supported when the capacity reservation group type is 'Block'. The scheduleProfile, start, and end fields are immutable after creation. Minimum API version: 2025-04-01. Please refer to https://aka.ms/blockcapacityreservation for more details.
+   * Defines the schedule for Block and future capacity reservations. Specifies the schedule during which capacity reservation is active and VM or VMSS resource can be allocated using reservation. This property is required and supported when the capacity reservation group type is 'Block'. For Block capacity reservations, the scheduleProfile, start, and end fields are immutable after creation. Please refer to https://aka.ms/blockcapacityreservation for more details. Minimum API version for Block capacity reservations: 2025-04-01.  In a 'Targeted' capacity reservation group, future capacity reservations must use this property with only a start time. Minimum API version for future capacity reservations: 2026-04-01.
    */
   @added(Versions.v2025_04_01)
   scheduleProfile?: ScheduleProfile;
