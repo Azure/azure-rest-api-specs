@@ -40,4 +40,9 @@ enum Versions {
    * The 2022-04-01 API version.
    */
   v2022_04_01: "2022-04-01",
+
+  /**
+   * The 2026-08-01 API version. Adds the AgentUser / AgentServicePrincipal principal types.
+   */
+  v2026_08_01: "2026-08-01",
 }

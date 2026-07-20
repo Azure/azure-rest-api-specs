@@ -113,7 +113,7 @@ input-file:
   - stable/2015-07-01/ClassicAdmin.json
   - preview/2024-07-01-preview/authorization-DenyAssignmentCalls.json
   - stable/2022-04-01/authorization-ProviderOperationsCalls.json
-  - stable/2022-04-01/authorization-RoleAssignmentsCalls.json
+  - stable/2026-08-01/authorization-RoleAssignmentsCalls.json
   - preview/2022-05-01-preview/authorization-RoleDefinitionsCalls.json
   - preview/2024-09-01-preview/openapi.json
   - preview/2021-12-01-preview/authorization-AccessReviewCalls.json
@@ -215,6 +215,29 @@ These settings apply only when `--tag=package-2021-12-01-preview-python-only` is
 ```yaml $(tag) == 'package-2021-12-01-preview-python-only'
 input-file:
   - preview/2021-12-01-preview/authorization-AccessReviewCalls.json
+```
+
+### Tag: package-2026-08-01
+
+These settings apply only when `--tag=package-2026-08-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-08-01'
+input-file:
+  - stable/2015-07-01/ClassicAdmin.json
+  - stable/2022-04-01/authorization-DenyAssignmentCalls.json
+  - stable/2022-04-01/authorization-ProviderOperationsCalls.json
+  - stable/2026-08-01/authorization-RoleAssignmentsCalls.json
+  - stable/2022-04-01/authorization-RoleDefinitionsCalls.json
+  - stable/2022-04-01/common-types.json
+  - stable/2020-10-01/EligibleChildResources.json
+  - stable/2020-10-01/RoleAssignmentSchedule.json
+  - stable/2020-10-01/RoleAssignmentScheduleInstance.json
+  - stable/2020-10-01/RoleAssignmentScheduleRequest.json
+  - stable/2020-10-01/RoleEligibilitySchedule.json
+  - stable/2020-10-01/RoleEligibilityScheduleInstance.json
+  - stable/2020-10-01/RoleEligibilityScheduleRequest.json
+  - stable/2020-10-01/RoleManagementPolicy.json
+  - stable/2020-10-01/RoleManagementPolicyAssignment.json
 ```
 
 ### Tag: package-2022-04-01
