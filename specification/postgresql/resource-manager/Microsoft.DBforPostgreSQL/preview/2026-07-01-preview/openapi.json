@@ -5436,6 +5436,14 @@
             "create"
           ]
         },
+        "immutableBackup": {
+          "$ref": "#/definitions/ImmutableBackup",
+          "description": "Indicates if the server is configured to create immutable backups.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "earliestRestoreDate": {
           "type": "string",
           "format": "date-time",
@@ -5512,6 +5520,11 @@
         "geoRedundantBackup": {
           "$ref": "#/definitions/GeographicallyRedundantBackup",
           "description": "Indicates if the server is configured to create geographically redundant backups.",
+          "readOnly": true
+        },
+        "immutableBackup": {
+          "$ref": "#/definitions/ImmutableBackup",
+          "description": "Indicates if the server is configured to create immutable backups.",
           "readOnly": true
         },
         "earliestRestoreDate": {
@@ -6880,6 +6893,30 @@
             "name": "SystemAssigned,UserAssigned",
             "value": "SystemAssigned,UserAssigned",
             "description": "Both system-assigned and user-assigned identities are assigned to the server."
+          }
+        ]
+      }
+    },
+    "ImmutableBackup": {
+      "type": "string",
+      "description": "Indicates if the server is configured to create immutable backups.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "ImmutableBackup",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Server is configured to create immutable backups."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Server is not configured to create immutable backups."
           }
         ]
       }
