@@ -240,6 +240,21 @@ union RoleManagementScopeType {
   "csharp"
 );
 @@clientName(
+  Microsoft.DenyAssignment.DenyAssignmentProperties.permissions,
+  "DeniedPermissions",
+  "csharp"
+);
+@@clientName(
+  Microsoft.DenyAssignment.DenyAssignmentProperties.principals,
+  "DeniedPrincipals",
+  "csharp"
+);
+@@clientName(
+  Microsoft.DenyAssignment.DenyAssignmentProperties.excludePrincipals,
+  "ExcludedPrincipals",
+  "csharp"
+);
+@@clientName(
   Microsoft.Authorization.EligibleChildResource.type,
   "ResourceType",
   "csharp"
