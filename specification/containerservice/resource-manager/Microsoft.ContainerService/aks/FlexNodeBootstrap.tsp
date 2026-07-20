@@ -75,7 +75,7 @@ model BootstrapAzureConfig {
 @added(Versions.v2026_05_02_preview)
 model BootstrapTargetCluster {
   /**
-   * ARM resource ID of the target AKS cluster.
+   * Azure resource ID of the target AKS cluster.
    */
   @visibility(Lifecycle.Read)
   resourceId?: Azure.Core.armResourceIdentifier;
