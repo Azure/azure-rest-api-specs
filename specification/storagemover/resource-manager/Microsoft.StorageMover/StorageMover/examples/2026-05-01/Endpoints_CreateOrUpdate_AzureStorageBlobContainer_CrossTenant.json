@@ -1,0 +1,45 @@
+{
+  "operationId": "Endpoints_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2026-05-01",
+    "endpoint": {
+      "properties": {
+        "description": "Cross-tenant source Storage Blob Container Endpoint",
+        "blobContainerName": "examples-blobcontainer",
+        "endpointType": "AzureStorageBlobContainer",
+        "endpointKind": "Source",
+        "storageAccountResourceId": "/subscriptions/60bcfc77-6589-4da2-b7fd-f9ec9322cf95/resourceGroups/examples-rg/providers/Microsoft.Storage/storageAccounts/examplesourcesa",
+        "enableCrossTenantTransfer": true,
+        "allowedStorageAccounts": [
+          "/subscriptions/0a2b3c4d-5e6f-7081-92a3-b4c5d6e7f809/resourceGroups/partner-rg/providers/Microsoft.Storage/storageAccounts/partnertargetsa"
+        ]
+      }
+    },
+    "endpointName": "examples-endpointName",
+    "resourceGroupName": "examples-rg",
+    "storageMoverName": "examples-storageMoverName",
+    "subscriptionId": "60bcfc77-6589-4da2-b7fd-f9ec9322cf95"
+  },
+  "title": "Endpoints_CreateOrUpdate_AzureStorageBlobContainer_CrossTenant",
+  "responses": {
+    "200": {
+      "body": {
+        "name": "examples-endpointName",
+        "type": "Microsoft.StorageMover/storageMovers/endpoints",
+        "id": "/subscriptions/60bcfc77-6589-4da2-b7fd-f9ec9322cf95/resourceGroups/examples-rg/providers/Microsoft.StorageMover/storageMovers/examples-storageMoverName/endpoints/examples-endpointName",
+        "properties": {
+          "description": "Cross-tenant source Storage Blob Container Endpoint",
+          "blobContainerName": "examples-blobcontainer",
+          "endpointType": "AzureStorageBlobContainer",
+          "endpointKind": "Source",
+          "provisioningState": "Succeeded",
+          "storageAccountResourceId": "/subscriptions/60bcfc77-6589-4da2-b7fd-f9ec9322cf95/resourceGroups/examples-rg/providers/Microsoft.Storage/storageAccounts/examplesourcesa",
+          "enableCrossTenantTransfer": true,
+          "allowedStorageAccounts": [
+            "/subscriptions/0a2b3c4d-5e6f-7081-92a3-b4c5d6e7f809/resourceGroups/partner-rg/providers/Microsoft.Storage/storageAccounts/partnertargetsa"
+          ]
+        }
+      }
+    }
+  }
+}

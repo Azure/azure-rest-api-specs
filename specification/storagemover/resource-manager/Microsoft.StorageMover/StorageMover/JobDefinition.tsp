@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.StorageMover;
 /**
@@ -85,6 +86,16 @@ interface JobDefinitions {
    * Requests the Agent of any active instance of this Job Definition to stop.
    */
   stopJob is ArmResourceActionSync<
+    JobDefinition,
+    void,
+    ArmResponse<JobRunResourceId>
+  >;
+
+  /**
+   * Post action to reconcile the running job.
+   */
+  @added(Versions.v2026_05_01)
+  reconcileJob is ArmResourceActionSync<
     JobDefinition,
     void,
     ArmResponse<JobRunResourceId>

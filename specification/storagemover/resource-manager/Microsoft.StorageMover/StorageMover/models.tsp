@@ -820,16 +820,15 @@ model JobDefinitionProperties {
   preservePermissions?: boolean = true;
 
   /**
-   * Indicates that this Job Definition is a cross-tenant job where the source
-   * endpoint resides in a different Azure AD tenant from the Job Definition.
-   * The Job Definition must be created in the destination (target) tenant.
-   * When true, `crossTenantSourceTenantId` and
-   * `crossTenantSourceEndpointResourceId` must be provided. Defaults to false.
-   * Cannot be modified after the Job Definition is created.
+   * Indicates that this Job Definition is a cross-tenant job where the
+   * counterpart endpoint resides in a different Azure AD tenant. When true,
+   * `crossTenantEndpointTenantId` and `crossTenantEndpointResourceId` must be
+   * provided. Defaults to false. Cannot be modified after the Job Definition is
+   * created.
    */
   @added(Versions.v2026_05_01)
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  isCrossTenantJob?: boolean;
+  isCrossTenantJob?: boolean = false;
 
   /**
    * The Azure AD tenant ID of the cross-tenant source endpoint. Required when
@@ -838,20 +837,32 @@ model JobDefinitionProperties {
    */
   @added(Versions.v2026_05_01)
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  crossTenantSourceTenantId?: string;
+  crossTenantEndpointTenantId?: string;
 
   /**
-   * Fully qualified resource ID of the cross-tenant source Endpoint. Required
-   * when `isCrossTenantJob` is true. Cannot be modified after the Job
-   * Definition is created.
+   * Full ARM resource ID of the cross-tenant (foreign) endpoint. On the
+   * source-tenant copy this is the TARGET endpoint; on the
+   * target-tenant copy this is the SOURCE endpoint.
    */
   @added(Versions.v2026_05_01)
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  crossTenantSourceEndpointResourceId?: Azure.Core.armResourceIdentifier<[
+  crossTenantEndpointResourceId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.StorageMover/storageMovers/endpoints";
     }
   ]>;
+
+  /**
+   * The synchronization mode for the Job Definition.
+   */
+  @added(Versions.v2026_05_01)
+  syncMode?: string;
+
+  /**
+   * The last time the mover was synchronized.
+   */
+  @added(Versions.v2026_05_01)
+  moverSyncedUntil?: utcDateTime;
 }
 
 /**
@@ -1052,6 +1063,18 @@ model JobDefinitionUpdateProperties {
    */
   @added(Versions.v2025_12_01)
   schedule?: ScheduleInfo;
+
+  /**
+   * The synchronization mode for the Job Definition.
+   */
+  @added(Versions.v2026_05_01)
+  syncMode?: string;
+
+  /**
+   * The last time the mover was synchronized.
+   */
+  @added(Versions.v2026_05_01)
+  moverSyncedUntil?: utcDateTime;
 }
 
 /**
@@ -1348,7 +1371,7 @@ model AzureStorageBlobContainerEndpointProperties
    * to false. Can be updated via PATCH.
    */
   @added(Versions.v2026_05_01)
-  enableCrossTenantTransfer?: boolean;
+  enableCrossTenantTransfer?: boolean = false;
 
   /**
    * Full ARM resource IDs of partner-tenant storage accounts that are allowed
@@ -1527,6 +1550,33 @@ model AzureStorageSmbFileShareEndpointProperties
    * The Endpoint resource type.
    */
   endpointType: "AzureStorageSmbFileShare";
+
+   /**
+   * Opt-in flag enabling this endpoint to be used as one side of a cross-tenant
+   * data transfer pair. When set to true, RBAC for the endpoint's managed
+   * identity is granted on the customer's storage account so that authorization
+   * can be performed entirely in the tenant where this endpoint lives. Defaults
+   * to false. Can be updated via PATCH.
+   */
+  @added(Versions.v2026_05_01)
+  enableCrossTenantTransfer?: boolean = false;
+
+  /**
+   * Full ARM resource IDs of partner-tenant storage accounts that are allowed
+   * to be the other side of a cross-tenant data transfer pair with this
+   * endpoint. For a source endpoint this lists allowed target storage accounts;
+   * for a target endpoint this lists allowed source storage accounts.
+   * The full list is replaced on PATCH (omit an entry to remove it; include
+   * an entry to add it). Mutual presence in both endpoints' allow lists is
+   * re-validated at every job run start, so removing an entry blocks future
+   * runs that reference the removed storage account.
+   */
+  @added(Versions.v2026_05_01)
+  allowedStorageAccounts?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Storage/storageAccounts";
+    }
+  ]>[];
 }
 
 /**
@@ -1538,6 +1588,26 @@ model AzureStorageSmbFileShareEndpointUpdateProperties
    * The Endpoint resource type.
    */
   endpointType: "AzureStorageSmbFileShare";
+
+  /**
+   * Opt-in flag enabling this endpoint to be used as one side of a cross-tenant
+   * data transfer pair. Defaults to false.
+   */
+  @added(Versions.v2026_05_01)
+  enableCrossTenantTransfer?: boolean;
+
+  /**
+   * Replaces the list of partner-tenant storage account ARM IDs allowed to be
+   * the other side of a cross-tenant data transfer pair with this endpoint.
+   * Omit an entry to remove it; include an entry to add it. Removing an entry
+   * blocks future job runs that reference that storage account.
+   */
+  @added(Versions.v2026_05_01)
+  allowedStorageAccounts?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Storage/storageAccounts";
+    }
+  ]>[];
 }
 
 /**
