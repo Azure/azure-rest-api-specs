@@ -2682,7 +2682,7 @@
         },
         "targetKubernetesVersion": {
           "type": "string",
-          "description": "  This is the target Kubernetes version for auto-upgrade. The format must be `{major version}.{minor version}`. For example, \"1.30\".\n  By default, this is empty.\n  If upgrade channel is set to TargetKubernetesVersion, this field must not be empty.\n  If upgrade channel is Rapid, Stable or NodeImage, this field must be empty."
+          "description": "  This is the target Kubernetes version for auto-upgrade. The format must be `{major version}.{minor version}`. For example, \"1.30\".\n  By default, this is empty.\n  If upgrade channel is set to TargetKubernetesVersion, this field must not be empty.\n  If upgrade channel is not TargetKubernetesVersion, this field must be empty."
         },
         "longTermSupport": {
           "type": "boolean",
@@ -3848,7 +3848,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name of the group.\nIt must match a group name of an existing fleet member. ",
+          "description": "Name of the group.\nIt serves as an identifier and must match a group name of an existing fleet member unless\nMemberSelector is specified. When MemberSelector is set, Name is only used as an identifier.",
           "minLength": 1,
           "maxLength": 50,
           "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"

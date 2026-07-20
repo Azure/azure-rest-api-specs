@@ -73,7 +73,7 @@ model AutoUpgradeProfileProperties {
       This is the target Kubernetes version for auto-upgrade. The format must be `{major version}.{minor version}`. For example, "1.30".
       By default, this is empty.
       If upgrade channel is set to TargetKubernetesVersion, this field must not be empty.
-      If upgrade channel is Rapid, Stable or NodeImage, this field must be empty.
+      If upgrade channel is not TargetKubernetesVersion, this field must be empty.
     """)
   @added(Versions.v2025_04_01_preview)
   targetKubernetesVersion?: string;
@@ -112,6 +112,14 @@ union UpgradeChannel {
     """)
   @added(Versions.v2025_04_01_preview)
   TargetKubernetesVersion: "TargetKubernetesVersion",
+
+  @doc("""
+      Applies security patches to the nodes of the target clusters.
+      For information on the behavior of update run for security patch upgrade,
+      see https://learn.microsoft.com/en-us/azure/kubernetes-fleet/update-orchestration?tabs=azure-portal
+    """)
+  @added(Versions.v2026_06_02_preview)
+  SecurityPatch: "SecurityPatch",
 }
 
 @doc("The node image upgrade to be applied to the target clusters in auto upgrade.")
@@ -175,6 +183,11 @@ model AutoUpgradeProfileStatus {
   @doc("The target Kubernetes version or node image versions of the last trigger.")
   @visibility(Lifecycle.Read)
   lastTriggerUpgradeVersions?: string[];
+
+  @doc("Additional information about the last trigger attempt.")
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_06_02_preview)
+  lastTriggerMessage?: string;
 }
 
 @doc("AutoUpgradeLastTriggerStatus is the status of the last AutoUpgrade trigger (attempt to automatically create and start UpdateRun when there are new released versions) of an auto upgrade profile.")
