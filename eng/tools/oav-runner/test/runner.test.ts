@@ -10,6 +10,7 @@ describe("file processing", () => {
     const changedFiles = [
       "specification/serviceB/data-plane/service.B/preview/2025-07-01-preview/serviceBspec.json",
       "specification/serviceB/data-plane/service.B/stable/2025-06-01/serviceBspec.json",
+      "specification/serviceB/data-plane/service.B/openapi3/v1/serviceBopenapi3.json",
       "specification/serviceB/data-plane/service.B/readme.md",
     ];
 
@@ -20,6 +21,16 @@ describe("file processing", () => {
         "specification/serviceB/data-plane/service.B/stable/2025-06-01/serviceBspec.json",
       ]
     `);
+  });
+
+  it("should skip OpenAPI 3 documents", async () => {
+    const changedFiles = [
+      "specification/serviceB/data-plane/service.B/openapi3/v1/serviceBopenapi3.json",
+    ];
+
+    await expect(
+      processFilesToSpecificationList(ROOT, changedFiles),
+    ).resolves.toMatchInlineSnapshot(`[]`);
   });
 
   it("should process a larger set of files and return a list of expected resolved swagger files", async () => {

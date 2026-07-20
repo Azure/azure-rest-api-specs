@@ -144,6 +144,33 @@ async function getFiles(rootDirectory: string, directory: string): Promise<strin
     .filter((d) => d.includes("specification" + path.sep));
 }
 
+/**
+ * Determine whether the given specification file is an OpenAPI 3 document that OAV should skip.
+ *
+ * If the file cannot be read or parsed, return false so the caller still passes it to OAV and
+ * lets the existing validation flow surface the underlying error.
+ *
+ * @param filePath - Absolute path to the specification file.
+ * @returns True when the file is OpenAPI 3 and should be skipped by OAV.
+ */
+async function isOpenApi3Document(filePath: string): Promise<boolean> {
+  try {
+    const fileContent = await fs.promises.readFile(filePath, { encoding: "utf8" });
+    const document = JSON.parse(fileContent) as unknown;
+
+    if (!document || typeof document !== "object" || Array.isArray(document)) {
+      return false;
+    }
+
+    return "openapi" in document && !("swagger" in document);
+  } catch (error) {
+    console.log(
+      `Error determining OpenAPI version for ${filePath}: ${error instanceof Error ? error.message : String(error)}`,
+    );
+    return false;
+  }
+}
+
 export async function processFilesToSpecificationList(
   rootDirectory: string,
   files: string[],
@@ -177,6 +204,9 @@ export async function processFilesToSpecificationList(
       const visibleSwaggerFiles = await getFiles(rootDirectory, swaggerDir);
 
       for (const swaggerFile of visibleSwaggerFiles) {
+        if (await isOpenApi3Document(path.join(rootDirectory, swaggerFile))) {
+          continue;
+        }
         if (!cachedSwaggerSpecs.has(swaggerFile)) {
           const swaggerModel = new Swagger(path.join(rootDirectory, swaggerFile));
           try {
@@ -206,7 +236,11 @@ export async function processFilesToSpecificationList(
     }
 
     // finally handle our base case where the file we're examining is itself a swagger file
-    if (swagger(file) && fs.existsSync(absoluteFilePath)) {
+    if (
+      swagger(file) &&
+      fs.existsSync(absoluteFilePath) &&
+      !(await isOpenApi3Document(absoluteFilePath))
+    ) {
       resultFiles.push(file);
     }
   }
