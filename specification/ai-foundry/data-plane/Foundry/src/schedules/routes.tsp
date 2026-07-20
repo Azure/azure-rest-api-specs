@@ -7,10 +7,12 @@ namespace Azure.AI.Projects;
 alias SchedulesPreviewHeader = WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.schedules_v1_preview>;
 
 alias SchedulesFilterQueryParams = {
+  /** The type query parameter. */
   @query("type")
   @doc("Filter by the type of schedule.")
   type?: ScheduleTaskType;
 
+  /** The enabled query parameter. */
   @query("enabled")
   @doc("Filter by the enabled status.")
   enabled?: boolean;
@@ -27,10 +29,11 @@ alias SchedulesCreateOrUpdateParams = {
 
 @tag("Schedules")
 interface Schedules {
+  /** Deletes the specified schedule resource. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We need explicit definition for header support"
-  @doc("Delete a schedule.")
+  @summary("Delete a schedule")
   @Http.delete
-  delete is Azure.Core.Foundations.ResourceOperation<
+  delete is FoundryResourceOperation<
     Schedule,
     {
       ...SchedulesPreviewHeader;
@@ -38,9 +41,10 @@ interface Schedules {
     Http.NoContentResponse
   >;
 
+  /** Retrieves the specified schedule resource. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We need explicit definition for header support"
-  @doc("Get a schedule by id.")
-  get is Azure.Core.Foundations.ResourceOperation<
+  @summary("Get a schedule")
+  get is FoundryResourceOperation<
     Schedule,
     {
       ...SchedulesPreviewHeader;
@@ -48,34 +52,39 @@ interface Schedules {
     Azure.Core.Foundations.ResourceOkResponse<Schedule>
   >;
 
+  /** Returns schedules that match the supplied type and enabled filters. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We need explicit definition for header support"
-  @doc("List all schedules.")
+  @summary("List schedules")
   @Rest.listsResource(Schedule)
-  list is Azure.Core.Foundations.ResourceList<
+  list is FoundryResourceList<
     Schedule,
     SchedulesFilterQueryParams & SchedulesPreviewHeader,
     Azure.Core.Page<Schedule>
   >;
 
+  /** Creates a new schedule or updates an existing schedule with the supplied definition. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We need explicit definition for header support"
-  @doc("Create or update operation template.")
+  @summary("Create or update a schedule")
   @Http.put
-  createOrUpdate is Azure.Core.Foundations.ResourceOperation<
+  createOrUpdate is FoundryResourceOperation<
     Schedule,
     SchedulesCreateOrUpdateParams,
     Azure.Core.Foundations.ResourceCreatedOrOkResponse<Schedule>
   >;
 
+  /** Retrieves the specified run for a schedule. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("Get a schedule run by id.")
+  @summary("Get a schedule run")
   @route("schedules/{schedule_id}/runs/{run_id}")
   @get
   getRun is FoundryDataPlaneOperation<
     {
+      /** The schedule id path parameter. */
       @path
       @doc("The unique identifier of the schedule.")
       schedule_id: string;
 
+      /** The run id path parameter. */
       @path
       @doc("The unique identifier of the schedule run.")
       run_id: string;
@@ -85,10 +94,11 @@ interface Schedules {
     OkResponse & ScheduleRun
   >;
 
+  /** Returns schedule runs that match the supplied filters. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We need explicit definition for header support"
-  @doc("List all schedule runs.")
+  @summary("List schedule runs")
   @Rest.listsResource(ScheduleRun)
-  listRuns is Azure.Core.Foundations.ResourceList<
+  listRuns is FoundryResourceList<
     ScheduleRun,
     SchedulesFilterQueryParams & SchedulesPreviewHeader,
     Azure.Core.Page<ScheduleRun>

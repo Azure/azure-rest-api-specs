@@ -409,6 +409,12 @@ using Microsoft.NetApp;
 @@clientName(BucketPatchProperties.akvDetails, "KeyVaultDetails", "csharp");
 @@clientName(CertificateAkvDetails, "CertificateKeyVaultDetails", "csharp");
 @@clientName(CredentialsAkvDetails, "CredentialsKeyVaultDetails", "csharp");
+@@clientName(BindPasswordAkvConfig, "BindPasswordKeyVaultConfig", "csharp");
+@@clientName(
+  BindPasswordAkvConfigPatch,
+  "BindPasswordKeyVaultConfigPatch",
+  "csharp"
+);
 @@clientName(
   AzureKeyVaultDetails.certificateAkvDetails,
   "CertificateKeyVaultDetails",

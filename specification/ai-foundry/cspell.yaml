@@ -17,6 +17,7 @@ words:
   - includable
   - includables
   - logprobs
+  - dedup
 overrides:
   # Red-team related terms
   - filename:
@@ -48,6 +49,15 @@ overrides:
   - filename: '**/*client*tsp'
     ignoreRegExpList:
       - '/@@clientName\([^\"]*\"([^\"]*)/g'
+  # Route documentation checker terminology
+  - filename: '**/data-plane/Foundry/.github/skills/foundry-route-doc-check/references/route-documentation-rules.md'
+    words:
+      - reemits
+  # Windows command script built-ins
+  - filename: '**/data-plane/Foundry/compile_all.cmd'
+    words:
+      - popd
+      - pushd
   # Example and output patterns: ignore common false positives in examples and emission outputs
   - filename:
     - '**/specification/ai-foundry/data-plane/Foundry/examples'
@@ -69,3 +79,11 @@ overrides:
       - logit_bias
       - apim-request-id
       - davinci # legacy OpenAI model name
+  # Agents optimization terms
+  - filename:
+    - '**/specification/ai-foundry/data-plane/Foundry/src/agents-optimization'
+    - '**/specification/ai-foundry/data-plane/Foundry/openapi3'
+    - '**/specification/ai-foundry/data-plane/Foundry/stable'
+    - '**/specification/ai-foundry/data-plane/Foundry/preview'
+    words:
+      - Likert # Likert scale - common evaluation methodology

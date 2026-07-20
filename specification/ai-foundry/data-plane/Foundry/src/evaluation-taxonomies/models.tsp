@@ -1,12 +1,18 @@
 import "../common/models.tsp";
-import "../openai-evaluations/models.tsp";
+import "../openai/evaluations/models.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.OpenAPI;
 
 namespace Azure.AI.Projects;
 
+const EvaluationTaxonomiesRequiredPreviews = #{
+  required_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview],
+};
+
 @doc("Evaluation Taxonomy Definition")
 @resource("evaluationtaxonomies")
+@extension("x-ms-foundry-meta", EvaluationTaxonomiesRequiredPreviews)
 model EvaluationTaxonomy {
   ...AssetBase;
 
@@ -21,6 +27,7 @@ model EvaluationTaxonomy {
 }
 
 @doc("Type of the evaluation taxonomy input.")
+@extension("x-ms-foundry-meta", EvaluationTaxonomiesRequiredPreviews)
 union EvaluationTaxonomyInputType {
   string,
 
@@ -33,12 +40,14 @@ union EvaluationTaxonomyInputType {
 
 @discriminator("type")
 @doc("Input configuration for the evaluation taxonomy.")
+@extension("x-ms-foundry-meta", EvaluationTaxonomiesRequiredPreviews)
 model EvaluationTaxonomyInput {
   @doc("Input type of the evaluation taxonomy.")
   type: EvaluationTaxonomyInputType;
 }
 
 @doc("Input configuration for the evaluation taxonomy when the input type is agent.")
+@extension("x-ms-foundry-meta", EvaluationTaxonomiesRequiredPreviews)
 model AgentTaxonomyInput extends EvaluationTaxonomyInput {
   @doc("Input type of the evaluation taxonomy.")
   type: EvaluationTaxonomyInputType.agent;
@@ -51,6 +60,7 @@ model AgentTaxonomyInput extends EvaluationTaxonomyInput {
 }
 
 @doc("Taxonomy category definition.")
+@extension("x-ms-foundry-meta", EvaluationTaxonomiesRequiredPreviews)
 model TaxonomyCategory {
   @doc("Unique identifier of the taxonomy category.")
   id: string;
@@ -72,6 +82,7 @@ model TaxonomyCategory {
 }
 
 @doc("Taxonomy sub-category definition.")
+@extension("x-ms-foundry-meta", EvaluationTaxonomiesRequiredPreviews)
 model TaxonomySubCategory {
   @doc("Unique identifier of the taxonomy sub-category.")
   id: string;
