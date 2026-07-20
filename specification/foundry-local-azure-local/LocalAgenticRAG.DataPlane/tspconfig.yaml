@@ -1,0 +1,39 @@
+parameters:  
+  "service-dir":
+    default: "sdk/localagenticrag.dataplane"
+  "dependencies":
+    default: ""
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    emitter-output-dir: "{project-root}"
+    output-file: "{emitter-output-dir}/{version-status}/{version}/openapi.json"
+  "@azure-tools/typespec-python":    
+    emitter-output-dir: "{output-dir}/{service-dir}/foundrylocal-agenticrag"
+    namespace: "foundrylocal.agenticrag"
+    package-mode: dataplane
+  "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/FoundryLocal.AgenticRAG"
+    namespace: "FoundryLocal.AgenticRAG"
+    clear-output-folder: true
+    model-namespace: false
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/foundrylocal-agenticrag-rest"
+    package-details:
+      name: "@azure-rest/foundrylocal-agenticrag"
+      description: "FoundryLocal.AgenticRAG Service"
+    flavor: azure
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/foundrylocal-agenticrag"
+    namespace: com.foundrylocal.agenticrag
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+  disable:
+    # Path params are required for resource-based routes used with RpcOperation
+    "@azure-tools/typespec-azure-core/no-rpc-path-params":
+      "API uses resource-based URL patterns that require path parameters with RpcOperation."
+    # List operations return wrapper models (e.g., CollectionList) not single resources
+    "@azure-tools/typespec-azure-core/use-standard-names":
+      "List operations return wrapper models with cursor pagination, not single resources."
