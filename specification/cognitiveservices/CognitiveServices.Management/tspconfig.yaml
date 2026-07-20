@@ -15,6 +15,14 @@ options:
     namespace: "Azure.ResourceManager.CognitiveServices"
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     enable-wire-path-attribute: true
+  "@azure-typespec/http-client-csharp-provisioning":
+    namespace: "Azure.Provisioning.CognitiveServices"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    api-version: "2026-05-01"
+    # Work around a provisioning post-processor issue: removeOrInternalize
+    # drops discriminator subtypes referenced only by their base model.
+    # The planned post-processing overhaul should make this unnecessary.
+    unreferenced-types-handling: "internalize"
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-cognitiveservices"
     namespace: "azure.mgmt.cognitiveservices"
