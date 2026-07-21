@@ -66,3 +66,58 @@ stimuli:
       - Flagged a realistic password "SuperSecretP@ssw0rd123!" in adminPassword
       - Flagged a Base64-encoded string in primaryKey that looks like a real key
       - Recommended placeholder values instead of realistic secrets
+
+  # 060003 — Non-production hosts in LRO headers (EX-EXAMPLE-URL-HOST)
+  - name: detect-example-bad-url-host
+    environment:
+      files:
+        - src: "../fixtures/examples/example-bad-url-host.json"
+          dest: "specification/exsvc/resource-manager/Microsoft.ExService/stable/2025-01-01/examples/Widgets_Create.json"
+    prompt: >
+      Review the following example JSON file for compliance with Azure REST API
+      example file guidelines. This example is for a PUT (create) operation on
+      an ARM resource. Report all findings with rule IDs and fix suggestions.
+
+      File: specification/exsvc/resource-manager/Microsoft.ExService/stable/2025-01-01/examples/Widgets_Create.json
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        name: "dogfood URL flagged"
+        config:
+          pattern: "(?i)EX-EXAMPLE-URL-HOST|dogfood|windows-int\\.net|non.?prod|non.?production"
+      - type: output-matches
+        name: "legacy endpoint flagged"
+        config:
+          pattern: "(?i)management\\.windowsazure\\.com|legacy|EX-EXAMPLE-URL-HOST"
+      - type: prompt
+    rubric:
+      - Flagged the `Azure-AsyncOperation` header URL using the dogfood host `api-dogfood.resources.windows-int.net` — example headers must use `management.azure.com` (EX-EXAMPLE-URL-HOST)
+      - Flagged the `Location` header URL using the legacy host `management.windowsazure.com` — must be `management.azure.com` (EX-EXAMPLE-URL-HOST)
+      - Suggested replacing both non-production hosts with `https://management.azure.com/...`
+
+  # 060004 — Incorrect ARM resource ID casing (EX-RESOURCE-ID-CASING)
+  - name: detect-example-bad-resource-id-casing
+    environment:
+      files:
+        - src: "../fixtures/examples/example-bad-resource-id-casing.json"
+          dest: "specification/exsvc/resource-manager/Microsoft.ExService/stable/2025-01-01/examples/Widgets_Get.json"
+    prompt: >
+      Review the following example JSON file for compliance with Azure REST API
+      example file guidelines. This example is for a GET operation on an ARM
+      resource. Report all findings with rule IDs and fix suggestions.
+
+      File: specification/exsvc/resource-manager/Microsoft.ExService/stable/2025-01-01/examples/Widgets_Get.json
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        name: "incorrect casing flagged"
+        config:
+          pattern: "(?i)EX-RESOURCE-ID-CASING|resourceGroups|casing|resourcegroups"
+      - type: prompt
+    rubric:
+      - Flagged that the `id` field uses `resourcegroups` (all lowercase) instead of the canonical `resourceGroups` (camelCase) segment (EX-RESOURCE-ID-CASING)
+      - Suggested correcting the casing to `resourceGroups` in the resource ID path

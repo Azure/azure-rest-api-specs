@@ -279,6 +279,42 @@ Flag these issues when found:
 
 ---
 
+## 5A. TypeSpec Design Smells (TYPESPEC-DESIGN-SMELLS)
+
+> **Severity:** Warning (non-blocking). These are design quality issues, not correctness violations. Flag them as suggestions — the author should consider the refactor but is not required to apply it before merging.
+
+Flag the following patterns when found in TypeSpec source files:
+
+### 5A.1 Hand-Rolled Resource Base Types
+
+- **Problem:** A resource model that manually assembles `id`, `name`, `type`, `location`, `tags`, `systemData`, and `properties` via `@key`, custom decorators, or inline declarations instead of extending the built-in ARM base types.
+- **Preferred pattern:** Extend `TrackedResource<TProperties>` for tracked resources and `ProxyResource<TProperties>` for proxy resources. This removes the need for private decorators and ensures all ARM-required envelope properties are correctly generated.
+- **Flag as `TYPESPEC-DESIGN-SMELLS` Warning** with a suggestion to replace hand-rolled definitions with `TrackedResource<T>` or `ProxyResource<T>`.
+
+### 5A.2 OpenAPI Decorators on LRO Operations
+
+- **Problem:** Using `@useFinalStateVia`, `@extension("x-ms-long-running-operation", ...)`, `@extension("x-ms-long-running-operation-options", ...)`, or other OpenAPI-layer decorators directly on LRO operations.
+- **Why it matters:** These decorators bypass the TypeSpec type system and the Azure TypeSpec LRO templates. Client SDKs generated from TypeSpec that uses raw OpenAPI annotations often cannot correctly understand the LRO contract, which breaks SDK polling behavior.
+- **Preferred pattern:** Use `Azure.ResourceManager` LRO templates (`ArmResourceCreateOrReplaceAsync`, `ArmResourceDeleteAsync`, `ArmResourceActionAsync`, etc.) or `Azure.Core` LRO templates (`LongRunningResourceCreateOrReplace`, `LongRunningResourceDelete`, etc.). These templates emit the correct `x-ms-long-running-operation*` annotations automatically and are validated by the linter.
+- **Flag as `TYPESPEC-DESIGN-SMELLS` Warning** with a suggestion to replace the hand-annotated LRO with the appropriate template.
+
+### 5A.3 Repeated Parameter Blocks — Use an Alias
+
+- **Problem:** The same group of parameters (e.g., `...ApiVersionParameter; ...SubscriptionIdParameter; ...ResourceGroupParameter; ...ResourceTypeParameter`) is spread inline at three or more operation sites.
+- **Why it matters:** Repetition makes the spec harder to maintain — a change to the shared parameters must be applied in N places. TypeSpec `alias` is the canonical way to name and reuse a block of spread parameters.
+- **Preferred pattern:** Extract the repeated parameter block into a named `alias`:
+  ```tsp
+  alias StandardResourceParams = {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+  };
+  ```
+  Then spread the alias: `...StandardResourceParams;`
+- **Flag as `TYPESPEC-DESIGN-SMELLS` Warning** when the same spread block appears three or more times across different operations in the same file or interface.
+
+---
+
 ## 6. ARM TypeSpec Additional Rules
 
 ### 6.1 `@segment` Casing for Resource Types (TSP-SEGMENT-CASE)
@@ -425,7 +461,9 @@ When reviewing TypeSpec files, verify:
 - ✅ URI properties use `url` scalar type, not plain `string`
 - ✅ Array-typed properties declare item identity via `@key` (on item type) or `@identifiers` (on array property); use `@identifiers(#[])` when items have no identifier (TSP-ARRAY-IDENTIFIERS)
 - ✅ No `@extension(...)` decorators in TypeSpec source — never `@extension("x-ms-identifiers", ...)`, `@extension("x-ms-mutability", ...)`, etc.
-- ✅ Standard ARM base types used (no custom/private resource decorators)
+- ✅ Standard ARM base types used (no custom/private resource decorators); hand-rolled resource base types flagged for `TrackedResource<T>`/`ProxyResource<T>` refactor (TYPESPEC-DESIGN-SMELLS §5A.1)
+- ✅ LRO operations use ARM/Azure.Core templates, not raw `@extension` or `@useFinalStateVia` decorators (TYPESPEC-DESIGN-SMELLS §5A.2)
+- ✅ Repeated parameter blocks (3+ occurrences of the same spread group) extracted to an `alias` (TYPESPEC-DESIGN-SMELLS §5A.3)
 - ✅ Client customizations only in `client.tsp`
 - ✅ `tspconfig.yaml` references correct linter ruleset
 - ✅ `tspconfig.yaml` `emit` list matches configured emitter options (TSP-CONFIG-EMIT)

@@ -134,3 +134,34 @@ stimuli:
     rubric:
       - Flagged the async PUT returning 202 instead of 200/201 with provisioningState per RPC-Async-V1-01 (or the equivalent linter rule names PutResponseCodes / LongRunningResponseStatusCode / LongRunningOperationsOptionsValidator)
       - Flagged the DELETE returning a Widget body in the 200 response per RPC-Delete-V1-04
+
+  # 030005 — GET returning 202 (RPC-Get-V1-01)
+  - name: detect-get-returns-202
+    environment:
+      files:
+        - src: "../fixtures/arm-openapi/get-returns-202.json"
+          dest: "specification/asyncreadsvc/resource-manager/Microsoft.AsyncRead/stable/2025-01-01/asyncreadsvc.json"
+    prompt: >
+      Review the following ARM resource-manager OpenAPI specification file for
+      compliance with Azure REST API Guidelines and ARM RPC rules. This is a new
+      service with no previous API version. Report all findings with rule IDs,
+      line numbers, and fix suggestions.
+
+      File: specification/asyncreadsvc/resource-manager/Microsoft.AsyncRead/stable/2025-01-01/asyncreadsvc.json
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        name: "GET 202 violation flagged"
+        config:
+          pattern: "(?i)RPC-Get-V1-01|GET.{0,100}202|202.{0,100}GET|long.?running.{0,80}GET|GET.{0,80}long.?running"
+      - type: output-matches
+        name: "specific operation mentioned"
+        config:
+          pattern: "(?i)WorkspaceDiscoveries_GetLatest|GetLatest|discoveries"
+      - type: prompt
+    rubric:
+      - Flagged that `WorkspaceDiscoveries_GetLatest` is a GET operation that returns `202 Accepted` — GET operations must return only `200` and `default`; they must never return `202` or be marked as long-running (RPC-Get-V1-01)
+      - Flagged that `x-ms-long-running-operation: true` on a GET operation is invalid
+      - Did NOT flag `Workspaces_Get` (the second GET operation) as it correctly returns only `200` and `default`

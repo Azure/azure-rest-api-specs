@@ -66,14 +66,17 @@ rule category without interference from other issues.
 | `put-response-mismatch.json`      | PUT response mismatch         | 200 and 201 responses use different schemas; request body differs from 201 response.                                                                                                         |
 | `secret-property.json`            | Secret property issues        | connectionString, adminPassword, and primaryKey without x-ms-secret annotation.                                                                                                              |
 | `typespec-generated-spec.json`    | None (true negative)          | Compliant ARM spec carrying the `x-typespec-generated` extension at the top level. Used by the TSP-REQUIRED-V1 eval to verify TypeSpec-generated swagger is not flagged.                     |
+| `get-returns-202.json`            | GET returning 202             | `WorkspaceDiscoveries_GetLatest` GET operation with `x-ms-long-running-operation: true` and `202` response. Violates RPC-Get-V1-01 (GET must return only 200/default, never 202 or LRO).    |
 
-### `examples/` -- Example JSON Files (3 files)
+### `examples/` -- Example JSON Files (6 files)
 
-| File                            | Violations           | Description                                                                                          |
-| ------------------------------- | -------------------- | ---------------------------------------------------------------------------------------------------- |
-| `example-clean.json`            | None (true negative) | Properly formed example with fully qualified ARM resource ID, no secrets, correct provisioningState. |
-| `example-bad-resource-id.json`  | Empty resource ID    | Response body has an empty string for the `id` field.                                                |
-| `example-realistic-secret.json` | Realistic secrets    | Contains realistic connection string, password, and Base64-encoded key values.                       |
+| File                                    | Violations              | Description                                                                                                     |
+| --------------------------------------- | ----------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `example-clean.json`                    | None (true negative)    | Properly formed example with fully qualified ARM resource ID, no secrets, correct provisioningState.            |
+| `example-bad-resource-id.json`          | Empty resource ID       | Response body has an empty string for the `id` field.                                                           |
+| `example-realistic-secret.json`         | Realistic secrets       | Contains realistic connection string, password, and Base64-encoded key values.                                  |
+| `example-bad-url-host.json`             | Non-production URL hosts | LRO headers (`Azure-AsyncOperation`, `Location`) use `api-dogfood.resources.windows-int.net` and `management.windowsazure.com` instead of `management.azure.com`. Violates EX-EXAMPLE-URL-HOST. |
+| `example-bad-resource-id-casing.json`   | ARM ID segment casing   | Response body `id` field uses `resourcegroups` (all-lowercase) instead of canonical `resourceGroups` (camelCase). Violates EX-RESOURCE-ID-CASING. |
 
 ### `readme/` -- Suppression Configuration (2 files)
 
@@ -81,6 +84,14 @@ rule category without interference from other issues.
 | ------------------------------------- | -------------------------- | ---------------------------------------------------------------------------------------------- |
 | `readme-new-suppression-no-reason.md` | Missing justification      | Suppressions for AvoidAdditionalProperties and PatchBodyParametersSchema with no reason field. |
 | `readme-security-suppression.md`      | Vague security suppression | Suppressions for XmsSecretNotReadBack and SecretPropertyMustBeWriteOnly with vague reasons.    |
+
+### `suppressions-yaml/` -- suppressions.yaml Files (3 files)
+
+| File                              | Violations                     | Description                                                                                                                                          |
+| --------------------------------- | ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `suppressions-no-reason.yaml`     | Missing reason field           | New entries for `NoUnreferencedTypes` (no `reason:` field) and `RequireDocumentation` (vague `reason: existing pattern`).                            |
+| `suppressions-security-rule.yaml` | Security-rule suppression      | New entries suppressing `XmsSecretNotReadBack` and `SecretPropertyMustBeWriteOnly` with `will fix later` or no reason — both flagged as Blocking.    |
+| `suppressions-denylist.yaml`      | Denylist justifications        | Entries with `reason: FIXME`, `reason: TODO`, and the bare rule name as the reason — all on the SUPPRESSION-JUSTIFICATION-DENYLIST.                  |
 
 ### `version-pairs/` -- Version Comparison Pairs (6 pairs, 12 files)
 

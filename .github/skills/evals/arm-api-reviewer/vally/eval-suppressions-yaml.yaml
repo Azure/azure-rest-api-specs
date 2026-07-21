@@ -119,3 +119,55 @@ stimuli:
       - The agent explicitly notes that these are security-related rules and that suppressing them requires specific, verifiable justification — `will fix later` and an absent reason both fail this bar
       - The pre-existing `FolderStructure / MustUseV2` entry is NOT flagged as a new finding
       - Both new findings are classified as `[NEW]`
+
+  # 140003 — Suppression justification denylist (SUPPRESSION-JUSTIFICATION-DENYLIST)
+  - name: detect-suppressions-yaml-denylist-justification
+    environment:
+      files:
+        - src: "../fixtures/suppressions-yaml/suppressions-denylist.yaml"
+          dest: "specification/suppressions.yaml"
+    prompt: >
+      Review the following `specification/suppressions.yaml` file. The PR adds
+      three new entries to a previously-existing file:
+
+        1. A new `LintDiff` / `ProvisioningStateMustBeReadOnly` entry for
+           `fixmesvc/Fixme.Management/stable/2025-01-01/**` with
+           `reason: "FIXME"`.
+        2. A new `TypeSpecRequirement` entry for
+           `todosvc/Todo.Management/stable/2025-01-01/**` with
+           `reason: TODO add real reason`.
+        3. A new `LintDiff` / `arm-resource-provisioning-state` entry for
+           `denysvc/Denylist.Management/stable/2025-01-01/**` with
+           `reason: arm-resource-provisioning-state` (bare rule name).
+
+      The pre-existing entry for `stable/2024-01-01/**` with the detailed reason
+      was already on the base branch and must NOT be flagged as new.
+
+      Apply the suppression justification analysis. Flag entries whose `reason`
+      matches the denylist of low-information justifications. Report findings
+      with rule IDs, severity, and the specific tuple being flagged.
+
+      File: specification/suppressions.yaml
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        name: "FIXME entry flagged"
+        config:
+          pattern: "(?i)FIXME|SUPPRESSION-JUSTIFICATION-DENYLIST|denylist|boilerplate|low.?information"
+      - type: output-matches
+        name: "TODO entry flagged"
+        config:
+          pattern: "(?i)TODO|SUPPRESSION-JUSTIFICATION-DENYLIST|denylist|boilerplate|low.?information"
+      - type: output-matches
+        name: "bare rule name entry flagged"
+        config:
+          pattern: "(?i)arm-resource-provisioning-state.{0,200}(reason|justification|denylist|bare|boilerplate)|bare.{0,200}arm-resource-provisioning-state"
+      - type: prompt
+    rubric:
+      - The FIXME entry (`fixmesvc`) is flagged — `FIXME` is on the denylist of low-information justifications (SUPPRESSION-JUSTIFICATION-DENYLIST)
+      - The TODO entry (`todosvc`) is flagged — `TODO` is on the denylist (SUPPRESSION-JUSTIFICATION-DENYLIST)
+      - The bare-rule-name entry (`denysvc / 2025`) is flagged — using the rule name itself as the reason provides no real justification (SUPPRESSION-JUSTIFICATION-DENYLIST)
+      - The pre-existing 2024-01-01 entry with a detailed technical reason is NOT flagged
+      - The agent clearly identifies each flagged entry by tool + rules + paths
