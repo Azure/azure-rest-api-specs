@@ -149,6 +149,16 @@ using Azure.ClientGenerator.Core;
   "CheckAppConfigurationRegionalNameAvailability",
   "csharp"
 );
+@@clientName(
+  NetworkSecurityPerimeterConfigurations.get,
+  "GetNetworkSecurityPerimeterConfiguration",
+  "csharp"
+);
+@@clientName(
+  NetworkSecurityPerimeterConfigurations.listByConfigurationStore,
+  "GetNetworkSecurityPerimeterConfigurations",
+  "csharp"
+);
 @@alternateType(
   DeletedConfigurationStoreProperties.configurationStoreId,
   Azure.Core.armResourceIdentifier,
@@ -179,6 +189,11 @@ using Azure.ClientGenerator.Core;
 @@alternateType(
   SnapshotProperties.etag,
   Azure.Core.EtagProperty.etag,
+  "csharp"
+);
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeter.location,
+  Azure.Core.azureLocation,
   "csharp"
 );
 @@clientName(
