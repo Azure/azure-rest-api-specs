@@ -347,8 +347,10 @@ model OptimizationJob is JobLike<OptimizationJobResult, OptimizationJobInputs> {
 
 @doc("Slim job representation returned by the LIST endpoint.")
 @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-model OptimizationJobListItem
-  is OmitProperties<OptimizationJob, "inputs" | "result" | "warnings"> {
+model OptimizationJobListItem is OmitProperties<
+  OptimizationJob,
+  "inputs" | "result" | "warnings"
+> {
   @doc("The agent targeted by this optimization job.")
   @visibility(Lifecycle.Read)
   agent?: OptimizationAgentIdentifier;

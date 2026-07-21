@@ -14,9 +14,8 @@ const PromptVoiceConversationRequiredPreviews = #{
 
 /**
  * Read-only, endpoint-scoped retrieval of the conversations, responses, transcript items, per-turn
- * metrics, and audio recorded by a voice-first prompt agent. These resources follow the Azure Voice Live
- * realtime schema (conversation / response / item / usage), not the OpenAI Responses/Conversations
- * resources. For a `voice` agent the service is the sole writer of responses and items, so only
+ * metrics, and audio recorded by a voice agent. For a `voice` agent, the service is the sole writer of
+ * responses and items, so only
  * reads plus a cascading conversation delete are exposed — there are no response/item create, update, or
  * delete routes. All persistence is governed by the definition's `store` flag: when `store = false` (the
  * default) nothing is persisted, so these routes return `404`. The merged-recording routes additionally
@@ -293,15 +292,15 @@ interface AgentEndpointConversations {
   >;
 }
 
-@doc("""
-  Management of voice-first prompt agents. These agents live on the dedicated `/voice_agents` path family: the
-  text `/agents` surface neither accepts nor returns voice agents, and this surface accepts only voice agents.
-  Each create/update produces a new immutable version, exactly like text prompt agents.
-  """)
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
+@doc("""
+  Management of voice agents. These agents live on the dedicated `/voice_agents` path family: the text `/agents`
+  surface neither accepts nor returns voice agents, and this surface accepts only voice agents. Each create or
+  update produces a new immutable version.
+  """)
 interface VoiceAgents {
   /**
-   * Creates a new voice-first prompt agent, or a new version of an existing one.
+   * Creates a new voice agent, or a new version of an existing one.
    */
   @summary("Create a voice agent")
   @post
@@ -400,7 +399,8 @@ interface VoiceAgents {
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
       @doc("The name of the voice agent to enable.")
-      @path agent_name: string;
+      @path
+      agent_name: string;
     },
     NoContentResponse
   >;
@@ -418,13 +418,14 @@ interface VoiceAgents {
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
       @doc("The name of the voice agent to disable.")
-      @path agent_name: string;
+      @path
+      agent_name: string;
     },
     NoContentResponse
   >;
 
   /**
-   * Generates and creates a voice-first prompt agent from high-level inputs plus a natural-language goal.
+   * Generates and creates a voice agent from high-level inputs plus a natural-language goal.
    * The operation expands the goal into a full, editable definition, creates the agent through the standard
    * voice create path, and returns the created `VoiceAgentObject`. The caller can edit or override the
    * generated fields afterward through normal versioning.
@@ -482,7 +483,9 @@ interface VoiceAgents {
       @extension(
         "x-ms-foundry-meta",
         #{
-          conditional_previews: #[AgentDefinitionOptInKeys.draft_agents_v1_preview],
+          conditional_previews: #[
+            AgentDefinitionOptInKeys.draft_agents_v1_preview
+          ],
         }
       )
       @query

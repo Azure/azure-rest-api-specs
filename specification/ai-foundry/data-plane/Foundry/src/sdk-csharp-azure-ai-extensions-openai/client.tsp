@@ -413,6 +413,7 @@ namespace Azure.AI.Projects {
   );
   @@clientName(A2APreviewTool.base_url, "BaseUri");
   @@clientName(FabricIQPreviewTool.server_url, "ServerUri");
+  @@clientName(WebIQPreviewTool.server_url, "ServerUri");
   @@clientName(
     CaptureStructuredOutputsTool.outputs,
     "OutputDefinition",

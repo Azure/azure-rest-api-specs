@@ -5,6 +5,7 @@ import "./models.tsp";
 namespace Azure.AI.Projects;
 using Http;
 using OpenAPI;
+using Azure.Core;
 
 alias EvaluatorsPreviewHeader = WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.evaluations_v1_preview>;
 
@@ -192,7 +193,6 @@ const EvaluatorGenerationJobsRequiredPreviews = #{
 
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
-#suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "LRO polling is handled by the client via Operation-Location"
 @tag("EvaluatorGenerationJobs")
 interface EvaluatorGenerationJobs {
   /**
@@ -202,6 +202,7 @@ interface EvaluatorGenerationJobs {
   @summary("Create an evaluator generation job")
   @route("evaluator_generation_jobs")
   @extension("x-ms-foundry-meta", EvaluatorGenerationJobsRequiredPreviews)
+  @pollingOperation(EvaluatorGenerationJobs.get)
   create is postJobPreview<
     FoundryFeaturesOptInKeys.evaluations_v1_preview,
     EvaluatorGenerationJob
