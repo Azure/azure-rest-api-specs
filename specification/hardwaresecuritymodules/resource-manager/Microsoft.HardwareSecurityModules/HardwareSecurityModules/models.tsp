@@ -929,8 +929,8 @@ union PaymentHsmClusterSkuFamily {
 union PaymentHsmClusterSkuName {
   string,
 
-  /** Standard_B1v2 SKU */
-  Standard_B1v2: "Standard_B1v2",
+  /** Payments_v2 SKU */
+  Payments_v2: "Payments_v2",
 }
 
 /**
