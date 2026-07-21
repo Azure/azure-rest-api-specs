@@ -104,4 +104,23 @@
   rules: [FolderStructure]
   reason: Specs added as folder structure v1, not yet converted to v2
   paths:
-    - HybridCompute
+    - HybridCompute- tool: Swagger Avocado
+  path: ./stable/2025-01-13/HybridCompute.json
+  reason: >
+    The hybridIdentityMetadata and agentVersions operations were intentionally retired during the
+    TypeSpec migration via the readme remove-operation directives (internal / unused). This older
+    version still contains them, so Avocado reports MISSING_APIS_IN_DEFAULT_TAG against the
+    2026-07-15 default tag. Suppressed per the retirement intent.
+- tool: Swagger Avocado
+  path: ./stable/2025-01-13/privateLinkScopes.json
+  reason: >
+    The networkConfigurations operations were intentionally retired during the TypeSpec migration
+    via the readme remove-operation directives (to be replaced by the Settings operations). This
+    older version still contains them, so Avocado reports MISSING_APIS_IN_DEFAULT_TAG against the
+    2026-07-15 default tag. Suppressed per the retirement intent.
+- tool: Swagger Avocado
+  path: ./stable/2019-12-12/HybridCompute.json
+  reason: >
+    The machines/reconnect operation was retired years ago and is not part of the current API
+    surface. This older version still contains it, so Avocado reports MISSING_APIS_IN_DEFAULT_TAG
+    against the 2026-07-15 default tag. Suppressed per the retirement intent.

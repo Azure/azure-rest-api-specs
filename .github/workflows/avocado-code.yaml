@@ -51,7 +51,8 @@ jobs:
               "data-plane" \
               "resource-manager" \
             --file \
-              "$AVOCADO_OUTPUT_FILE"
+              "$AVOCADO_OUTPUT_FILE" \
+          || true # Exit code handled by generate-job-summary step
 
           TIME=$(node -p 'JSON.stringify(new Date())')
 
