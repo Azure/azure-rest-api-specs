@@ -341,7 +341,7 @@ union CSharpBlobInventoryPolicyName {
 @@clientName(AllowedMethods, "CorsRuleAllowedMethodsItem", "go, java");
 
 // Java customization for mitigating breaking changes
-@@clientName(SKUCapability, "SkuCapability", "java");
+// @@clientName(SKUCapability, "SkuCapability", "java");
 @@clientName(IPRule, "IpRule", "java");
 @@clientName(IPRule.value, "ipAddressOrRange", "java");
 @@clientName(IPRule.value, "$DO_NOT_NORMALIZE$iPAddressOrRange", "javascript");
