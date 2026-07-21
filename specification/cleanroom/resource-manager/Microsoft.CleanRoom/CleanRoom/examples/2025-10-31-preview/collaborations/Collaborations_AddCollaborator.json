@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "api-version": "2025-10-31-preview",
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "resourceGroupName": "testrg",
+    "collaborationName": "ContosoCollaboration",
+    "body": {
+      "email": "alice@example.com"
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.CleanRoom/locations/northeurope/operationStatuses/abcd1234-abcd-1234-abcd-abcdefabcdef?api-version=2025-10-31-preview",
+        "Location": "https://management.azure.com/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.CleanRoom/Collaborations/ContosoCollaboration/operationResults/abcd1234-abcd-1234-abcd-abcdefabcdef?api-version=2025-10-31-preview",
+        "Retry-After": "10"
+      }
+    },
+    "200": {
+      "body": {
+        "name": "ContosoCollaboration",
+        "type": "Microsoft.CleanRoom/Collaborations",
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.CleanRoom/Collaborations/ContosoCollaboration",
+        "location": "northeurope",
+        "properties": {
+          "clusterEndpoint": "https://ContosoEndpoint/",
+          "consortiumType": "ConfidentialACI",
+          "userIdentity": {
+            "tenantId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+            "objectId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+            "accountType": "microsoft"
+          },
+          "health": {
+            "healthState": "Ok",
+            "healthIssues": []
+          },
+          "workloads": [],
+          "consortiumArmId": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.CleanRoom/consortiums/ContosoConsortium",
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  },
+  "operationId": "Collaborations_AddCollaborator",
+  "title": "Add Collaborator"
+}
