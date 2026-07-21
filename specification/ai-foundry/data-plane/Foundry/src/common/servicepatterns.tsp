@@ -1,8 +1,11 @@
 import "@typespec/http";
 
+import "@azure-tools/typespec-azure-core";
+
 using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
+using Azure.Core;
 
 namespace Azure.AI.Projects;
 
@@ -350,12 +353,15 @@ union JobStatus {
   in_progress: "in_progress",
 
   /** Job completed successfully. */
+  @lroSucceeded
   succeeded: "succeeded",
 
   /** Job failed. */
+  @lroFailed
   failed: "failed",
 
   /** Job was cancelled by the caller. */
+  @lroCanceled
   cancelled: "cancelled",
 }
 
@@ -384,6 +390,7 @@ model JobLike<
 
   /** Current lifecycle status. */
   @visibility(Lifecycle.Read)
+  @lroStatus
   status: TStatus;
 
   /** Error details — populated only on failure. */

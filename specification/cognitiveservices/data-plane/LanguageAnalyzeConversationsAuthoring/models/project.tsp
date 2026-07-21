@@ -569,6 +569,7 @@ model AnalyzeConversationAuthoringExportProjectJobState {
   /**
    * The URL to use in order to download the exported project.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   resultUrl?: string;
 }
 
