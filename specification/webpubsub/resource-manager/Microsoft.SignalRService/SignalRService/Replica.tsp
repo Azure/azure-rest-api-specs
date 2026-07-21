@@ -14,10 +14,8 @@ namespace Microsoft.SignalRService;
  * A class represent a replica resource.
  */
 @parentResource(WebPubSubResource)
-model Replica is Azure.ResourceManager.TrackedResource<
-  ReplicaProperties,
-  true
-> {
+model Replica
+  is Azure.ResourceManager.TrackedResource<ReplicaProperties, true> {
   ...ResourceNameParameter<
     Resource = Replica,
     KeyName = "replicaName",

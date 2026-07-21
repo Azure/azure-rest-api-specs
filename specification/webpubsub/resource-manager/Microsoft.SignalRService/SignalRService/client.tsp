@@ -1,5 +1,5 @@
-import "@azure-tools/typespec-client-generator-core";
 import "./main.tsp";
+import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 using Azure.ClientGenerator.Core.Legacy;
@@ -7,11 +7,11 @@ using Azure.Core;
 using Microsoft.SignalRService;
 using Http;
 
-@@clientName(
-  Microsoft.SignalRService,
-  "WebPubSubManagementClient",
-  "javascript,python"
-);
+// @@clientName(
+//   Microsoft.SignalRService,
+//   "WebPubSubManagementClient",
+//   "javascript"
+// );
 
 @@clientDoc(
   Microsoft.SignalRService.EventHandler.urlTemplate,
@@ -32,12 +32,6 @@ using Http;
 @@clientName(NetworkACL, "NetworkAcl", "java");
 @@clientName(IPRule, "IpRule", "java");
 @@clientName(PrivateEndpointACL, "PrivateEndpointAcl", "java");
-@@clientName(Microsoft.SignalRService.WebPubSubResource, "ResourceInfo", "go");
-@@clientName(
-  Microsoft.SignalRService.WebPubSubResourceList,
-  "ResourceInfoList",
-  "go"
-);
 @@clientName(EventHandler, "WebPubSubEventHandler", "csharp");
 @@clientName(WebPubSubRequestType.RESTAPI, "RestApi", "csharp");
 @@clientName(ProvisioningState, "WebPubSubProvisioningState", "csharp");
@@ -269,39 +263,35 @@ op WebPubSubHubsGetCustomized(
   resourceName: string,
 ): WebPubSubHub;
 
-@@override(
-  WebPubSubHubs.get,
-  WebPubSubHubsGetCustomized,
-  "go,python,javascript"
-);
+@@override(WebPubSubHubs.get, WebPubSubHubsGetCustomized, "go,javascript");
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op WebPubSubHubsCreateOrUpdateCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<WebPubSubHub>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
+// #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
+// #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+// #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+// op WebPubSubHubsCreateOrUpdateCustomized(
+//   ...Azure.ResourceManager.ProviderNamespace<WebPubSubHub>,
+//   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
+//   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  hubName: string,
+//   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+//   @path
+//   hubName: string,
 
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
+//   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  resourceName: string,
+//   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+//   @path
+//   resourceName: string,
 
-  @body
-  parameters: WebPubSubHub,
-): void;
+//   @body
+//   parameters: WebPubSubHub,
+// ): void;
 
-@@override(
-  WebPubSubHubs.createOrUpdate,
-  WebPubSubHubsCreateOrUpdateCustomized,
-  "go,python,javascript"
-);
+// @@override(
+//   WebPubSubHubs.createOrUpdate,
+//   WebPubSubHubsCreateOrUpdateCustomized,
+//   "go,python,javascript"
+// );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
