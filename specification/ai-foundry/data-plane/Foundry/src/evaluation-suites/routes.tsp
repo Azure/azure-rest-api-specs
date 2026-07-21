@@ -6,6 +6,7 @@ namespace Azure.AI.Projects;
 using Http;
 using OpenAPI;
 using TypeSpec.Versioning;
+using Azure.Core;
 
 alias ListEvaluationSuiteVersionsParameters = {};
 
@@ -77,7 +78,6 @@ interface EvaluationSuites
 
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
-#suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "LRO polling is handled by the client via Operation-Location"
 @tag("EvaluationSuiteGenerationJobs")
 @removed(Versions.v1)
 interface EvaluationSuiteGenerationJobs {
@@ -85,6 +85,7 @@ interface EvaluationSuiteGenerationJobs {
   @summary("Create an evaluation suite generation job")
   @route("evaluation_suite_generation_jobs")
   @extension("x-ms-foundry-meta", EvaluationSuiteGenerationJobsRequiredPreviews)
+  @pollingOperation(EvaluationSuiteGenerationJobs.get)
   create is postJobPreview<
     FoundryFeaturesOptInKeys.evaluations_v1_preview,
     EvaluationSuiteGenerationJob

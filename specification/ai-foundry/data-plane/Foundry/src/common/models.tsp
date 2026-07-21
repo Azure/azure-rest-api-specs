@@ -200,3 +200,20 @@ model DatasetJobSource {
   @doc("The version of the dataset. If not specified, the latest version is used.")
   version?: string;
 }
+
+/**
+ * User security context contains several parameters that describe the application itself, and the end user that interacts with the application. These fields assist your security operations teams to investigate and mitigate security incidents by providing a comprehensive approach to protecting your AI applications. [Learn more](https://aka.ms/TP4AI/Documentation/EndUserContext) about protecting AI applications using Microsoft Defender for Cloud.
+ */
+model AzureUserSecurityContext {
+  /** The name of the application. Sensitive personal information should not be included in this field. */
+  application_name?: string;
+
+  /** This identifier is the Microsoft Entra ID (formerly Azure Active Directory) user object ID used to authenticate end-users within the generative AI application. Sensitive personal information should not be included in this field. */
+  end_user_id?: string;
+
+  /** The Microsoft 365 tenant ID the end user belongs to. It's required when the generative AI application is multitenant. */
+  end_user_tenant_id?: string;
+
+  /** Captures the original client's IP address. */
+  source_ip?: string;
+}

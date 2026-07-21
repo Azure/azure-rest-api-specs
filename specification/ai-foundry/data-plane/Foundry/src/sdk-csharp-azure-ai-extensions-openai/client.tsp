@@ -407,15 +407,19 @@ namespace Azure.AI.Projects {
   @@clientName(StructuredOutputDefinition.strict, "IsStrict");
   @@clientName(OpenAI.WebSearchApproximateLocation.type, "Kind");
   @@access(OpenAI.WebSearchApproximateLocation.type, Access.internal);
-  @@clientName(OpenAI.OutputItemMcpApprovalResponseResource.approve, "IsApproved");
+  @@clientName(
+    OpenAI.OutputItemMcpApprovalResponseResource.approve,
+    "IsApproved"
+  );
   @@clientName(A2APreviewTool.base_url, "BaseUri");
   @@clientName(FabricIQPreviewTool.server_url, "ServerUri");
+  @@clientName(WebIQPreviewTool.server_url, "ServerUri");
   @@clientName(
     CaptureStructuredOutputsTool.outputs,
     "OutputDefinition",
     "csharp"
   );
-  
+
   // --------------------------------------------------------------------------------
   // Usage / Public accessibility overrides
   // --------------------------------------------------------------------------------

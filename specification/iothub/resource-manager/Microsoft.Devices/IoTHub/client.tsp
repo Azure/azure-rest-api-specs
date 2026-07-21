@@ -1,4 +1,5 @@
 import "@azure-tools/typespec-client-generator-core";
+import "@typespec/http";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./main.tsp";
 
@@ -345,7 +346,10 @@ using Http;
 op replaceManualFailover(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
+
+  @path
   iotHubName: string,
+
   ...Azure.ResourceManager.ResourceGroupParameter,
   ...Azure.ResourceManager.Legacy.Provider,
   @body body: Microsoft.Devices.FailoverInput,
@@ -369,7 +373,10 @@ op replaceManualFailover(
 op replaceTestAllRoutes(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
+
+  @path
   iotHubName: string,
+
   ...Azure.ResourceManager.ResourceGroupParameter,
   ...Azure.ResourceManager.Legacy.Provider,
   @body body: Microsoft.Devices.TestAllRoutesInput,
@@ -388,7 +395,10 @@ op replaceTestAllRoutes(
 op replaceTestRoute(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
+
+  @path
   iotHubName: string,
+
   ...Azure.ResourceManager.ResourceGroupParameter,
   ...Azure.ResourceManager.Legacy.Provider,
   @body body: Microsoft.Devices.TestRouteInput,

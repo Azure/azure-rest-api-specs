@@ -1923,11 +1923,7 @@ namespace Azure.AI.Projects;
   }
 );
 
-@@extension(
-  Azure.AI.Projects.Evals.getEvalRunOutputItems,
-  "x-ms-list",
-  true
-);
+@@extension(Azure.AI.Projects.Evals.getEvalRunOutputItems, "x-ms-list", true);
 
 @@extension(
   Azure.AI.Projects.Evals.getEvalRunOutputItem,
