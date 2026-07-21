@@ -27,6 +27,7 @@ This tool:
 4. **Reports results** as:
    - JSON (full structured report)
    - Markdown (human-readable summary for PR comments)
+   - GitHub Actions inline `::warning` annotations (via `--github-annotations`), anchored to each suppression's source location so they surface on the PR diff
 
 5. **Gates approval** by setting `requiresApproval: true` when new or changed suppressions exist, and optionally exits with code 1 via `--fail-on-approval`.
 
@@ -51,6 +52,7 @@ npx typespec-suppressions --base <commitish> [--head <commitish>] [options] <spe
 | `--json-output <path>`      | stdout       | Write JSON report to a file instead of stdout                                                                                                                                  |
 | `--markdown-output <path>`  | _(none)_     | Write a Markdown summary to a file                                                                                                                                             |
 | `--check-rules-file <path>` | _(none)_     | Path to a JSON file listing the lint rules whose suppressions require approval. Enables **checked-only mode** (see below). Resolved relative to the current working directory. |
+| `--github-annotations`      | `false`      | Emit a GitHub Actions `::warning` annotation for each new/changed suppression, anchored to its source file and line so it renders as an inline warning on the PR diff          |
 | `--fail-on-approval`        | `false`      | Exit with code 1 if new/changed suppressions require approval                                                                                                                  |
 
 ### Check rules (scoped approval)
@@ -102,6 +104,10 @@ npx typespec-suppressions --base abc123 --head def456 \
   --markdown-output report.md \
   --fail-on-approval \
   specification/foo/Service
+
+# Emit inline PR annotations from a GitHub Actions workflow
+npx typespec-suppressions --base origin/main --github-annotations \
+  specification/foo/Service
 ```
 
 ## How It Works
@@ -141,12 +147,14 @@ The tool also exports functions for use in other tools:
 import {
   analyzeTypeSpecSuppressions,
   analyzeTypeSpecSuppressionsFromDirectories,
+  loadCheckRulesFile,
   renderMarkdownSummary,
 } from "@azure-tools/typespec-suppressions";
 ```
 
 - `analyzeTypeSpecSuppressions(options)` – git-revision-based analysis
 - `analyzeTypeSpecSuppressionsFromDirectories(options)` – filesystem-directory-based analysis (useful for testing)
+- `loadCheckRulesFile(path)` – loads and validates a check-rules JSON file, returning the list of rules (empty on any read/parse error)
 - `renderMarkdownSummary(params)` – renders a Markdown report from analysis results
 
 ## Output Schema
