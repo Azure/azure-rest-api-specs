@@ -563,6 +563,14 @@ union VersionSelectorType {
 
 model VersionSelector {
   version_selection_rules: VersionSelectionRule[];
+
+  @doc("The experiment identifier bound to this selector. Minted and managed by the Experiments Service; read-only for developers. When set, the selector is write-locked.")
+  @visibility(Lifecycle.Read)
+  experiment_id?: string;
+
+  @doc("An immutable bucketing seed used for deterministic sticky routing. Minted by the Experiments Service; read-only for developers.")
+  @visibility(Lifecycle.Read)
+  salt?: string;
 }
 
 @discriminator("type")

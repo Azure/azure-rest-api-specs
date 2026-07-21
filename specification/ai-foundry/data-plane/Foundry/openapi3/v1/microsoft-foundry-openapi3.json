@@ -7155,6 +7155,677 @@
         }
       }
     },
+    "/experiments": {
+      "post": {
+        "operationId": "Experiments_create",
+        "summary": "Create an experiment",
+        "description": "Creates an experiment in the 'created' state. Call the :start action to begin routing traffic.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Experiments=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The experiment was created successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Experiment"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Experiments"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateExperimentRequest"
+              }
+            }
+          }
+        },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Experiments=V1Preview"
+          ]
+        }
+      },
+      "get": {
+        "operationId": "Experiments_list",
+        "summary": "List experiments",
+        "description": "Returns the list of all experiments.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Experiments=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the\ndefault is 20.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            },
+            "explode": false
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "description": "Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and `desc`\nfor descending order.",
+            "schema": {
+              "$ref": "#/components/schemas/PageOrder"
+            },
+            "explode": false
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `before` is an object ID that defines your place in the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data",
+                    "has_more"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Experiment"
+                      },
+                      "description": "The requested list of experiments."
+                    },
+                    "first_id": {
+                      "type": "string",
+                      "description": "The first ID represented in this list."
+                    },
+                    "last_id": {
+                      "type": "string",
+                      "description": "The last ID represented in this list."
+                    },
+                    "has_more": {
+                      "type": "boolean",
+                      "description": "A value indicating whether there are additional values available not captured in this list."
+                    }
+                  },
+                  "description": "The response data for a requested list of experiments."
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Experiments"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Experiments=V1Preview"
+          ]
+        }
+      }
+    },
+    "/experiments/{experiment_id}": {
+      "get": {
+        "operationId": "Experiments_get",
+        "summary": "Get an experiment",
+        "description": "Retrieves the experiment by id.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Experiments=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "experiment_id",
+            "in": "path",
+            "required": true,
+            "description": "The unique identifier of the experiment.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Experiment"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Experiments"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Experiments=V1Preview"
+          ]
+        }
+      }
+    },
+    "/experiments/{experiment_id}:start": {
+      "post": {
+        "operationId": "Experiments_start",
+        "summary": "Start an experiment",
+        "description": "Starts a created experiment. The service mints experiment_id and salt, write-locks the agent's version selector, and begins sticky-per-conversation routing.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Experiments=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "experiment_id",
+            "in": "path",
+            "required": true,
+            "description": "The unique identifier of the experiment to start.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The experiment was started successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Experiment"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Experiments"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Experiments=V1Preview"
+          ]
+        }
+      }
+    },
+    "/experiments/{experiment_id}:stop": {
+      "post": {
+        "operationId": "Experiments_stop",
+        "summary": "Stop an experiment",
+        "description": "Stops a running experiment. Routing collapses to the control variant and the agent's version selector is unlocked for editing.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Experiments=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "experiment_id",
+            "in": "path",
+            "required": true,
+            "description": "The unique identifier of the experiment to stop.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The experiment was stopped successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Experiment"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Experiments"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Experiments=V1Preview"
+          ]
+        }
+      }
+    },
+    "/experiments/{experiment_id}:promote": {
+      "post": {
+        "operationId": "Experiments_promote",
+        "summary": "Promote an experiment",
+        "description": "Promotes the winning variant. The agent's version selector is replaced with a single 100% rule for the winner.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Experiments=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "experiment_id",
+            "in": "path",
+            "required": true,
+            "description": "The unique identifier of the experiment to promote.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The experiment was promoted successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Experiment"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Experiments"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PromoteExperimentRequest"
+              }
+            }
+          }
+        },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Experiments=V1Preview"
+          ]
+        }
+      }
+    },
+    "/experiments/{experiment_id}/scorecards": {
+      "get": {
+        "operationId": "Experiments_listScorecards",
+        "summary": "List scorecards",
+        "description": "Returns the list of generated scorecards for an experiment. Each scorecard is a table comparing metric values between variants.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Experiments=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "experiment_id",
+            "in": "path",
+            "required": true,
+            "description": "The unique identifier of the experiment.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Scorecard"
+                      },
+                      "description": "The list of scorecards."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Experiments"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Experiments=V1Preview"
+          ]
+        }
+      }
+    },
+    "/experiments/{experiment_id}/scorecards/{scorecard_id}": {
+      "delete": {
+        "operationId": "Experiments_deleteScorecard",
+        "summary": "Delete a scorecard",
+        "description": "Deletes the scorecard record and its user-blob artifact. Does not stop or mutate the experiment itself.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Experiments=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "experiment_id",
+            "in": "path",
+            "required": true,
+            "description": "The unique identifier of the experiment.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "scorecard_id",
+            "in": "path",
+            "required": true,
+            "description": "The unique identifier of the scorecard to delete.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The scorecard was deleted successfully."
+          },
+          "default": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Experiments"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Experiments=V1Preview"
+          ]
+        }
+      }
+    },
     "/indexes": {
       "get": {
         "operationId": "Indexes_listLatest",
@@ -33442,6 +34113,562 @@
             "Evaluations=V1Preview"
           ]
         }
+      },
+      "Experiment": {
+        "type": "object",
+        "required": [
+          "id",
+          "type",
+          "state",
+          "display_name",
+          "variants",
+          "experiment_steps",
+          "assignment_properties",
+          "metrics"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique identifier of the experiment.",
+            "readOnly": true
+          },
+          "type": {
+            "$ref": "#/components/schemas/ExperimentType"
+          },
+          "state": {
+            "$ref": "#/components/schemas/ExperimentState"
+          },
+          "display_name": {
+            "type": "string",
+            "description": "A human-readable display name for the experiment."
+          },
+          "description": {
+            "type": "string",
+            "description": "A human-readable description of the experiment."
+          },
+          "target_agent": {
+            "type": "string",
+            "description": "The name of the agent this experiment targets. Required for agents_safe_rollout type."
+          },
+          "duration": {
+            "type": "string",
+            "description": "The ISO 8601 duration for the experiment (e.g. 'P3D' for 3 days). Defaults to P3D when omitted."
+          },
+          "variants": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExperimentVariant"
+            },
+            "description": "The list of variants participating in the experiment."
+          },
+          "experiment_steps": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExperimentStep"
+            },
+            "description": "The list of experiment steps with traffic allocation details. Materialized by the service.",
+            "readOnly": true
+          },
+          "assignment_properties": {
+            "$ref": "#/components/schemas/ExperimentAssignmentProperties"
+          },
+          "metrics": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExperimentMetric"
+            },
+            "description": "The list of metrics (evaluation rules or inline evaluators) attached to the experiment."
+          },
+          "started_at": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true,
+            "description": "The Unix timestamp (seconds) when the experiment was started. Null if not yet started.",
+            "readOnly": true
+          },
+          "scheduled_start_at": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true,
+            "description": "The scheduled start time for the experiment (Unix timestamp). Null if started immediately."
+          },
+          "scheduled_end_at": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true,
+            "description": "The scheduled end time for the experiment (Unix timestamp). Null if no end is scheduled."
+          }
+        },
+        "description": "Represents an experiment that binds version routing to a lifecycle for A/B testing."
+      },
+      "ExperimentAssignmentProperties": {
+        "type": "object",
+        "required": [
+          "salt",
+          "assignment_unit"
+        ],
+        "properties": {
+          "salt": {
+            "type": "string",
+            "description": "An immutable bucketing seed minted when the experiment starts. Re-salting re-randomizes every bucket.",
+            "readOnly": true
+          },
+          "assignment_unit": {
+            "type": "string",
+            "description": "The unit used for sticky bucketing (e.g. conversationId).",
+            "readOnly": true
+          }
+        },
+        "description": "Properties controlling how traffic is assigned to variants."
+      },
+      "ExperimentBucketRange": {
+        "type": "object",
+        "required": [
+          "start",
+          "end"
+        ],
+        "properties": {
+          "start": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The inclusive start of the bucket range (0-based)."
+          },
+          "end": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The exclusive end of the bucket range."
+          }
+        },
+        "description": "A contiguous range of hash buckets assigned to a variant."
+      },
+      "ExperimentMetric": {
+        "type": "object",
+        "required": [
+          "name",
+          "definition"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The caller-defined metric name, unique within the experiment."
+          },
+          "desired_direction": {
+            "$ref": "#/components/schemas/ExperimentMetricDirection"
+          },
+          "definition": {
+            "$ref": "#/components/schemas/ExperimentMetricDefinition"
+          }
+        },
+        "description": "A metric attached to the experiment — defines what to measure, how to aggregate, and where the data comes from."
+      },
+      "ExperimentMetricDefinition": {
+        "type": "object",
+        "required": [
+          "source"
+        ],
+        "properties": {
+          "source": {
+            "$ref": "#/components/schemas/ExperimentMetricSource"
+          },
+          "aggregation": {
+            "$ref": "#/components/schemas/ExperimentMetricAggregation"
+          }
+        },
+        "description": "The definition of a metric — wraps the data source and optional aggregation."
+      },
+      "ExperimentMetricDirection": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "increase",
+              "decrease"
+            ]
+          }
+        ],
+        "description": "The desired direction for a metric value."
+      },
+      "ExperimentMetricAggregationType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "average",
+              "percentile",
+              "rate"
+            ]
+          }
+        ],
+        "description": "The aggregation function for a metric."
+      },
+      "ExperimentMetricAggregation": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/ExperimentMetricAggregationType"
+          },
+          "percentile": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The percentile value (e.g. 95). Required when type is 'percentile'."
+          }
+        },
+        "description": "Aggregation configuration for a metric."
+      },
+      "ExperimentMetricSourceType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "continuous_evaluation_rule",
+              "evaluator",
+              "traces"
+            ]
+          }
+        ],
+        "description": "The type of metric source."
+      },
+      "ExperimentMetricSource": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/ExperimentMetricSourceType"
+          },
+          "rule_id": {
+            "type": "string",
+            "description": "The schedule ID of a continuous evaluation rule. Required when type is 'continuous_evaluation_rule'."
+          },
+          "evaluator_name": {
+            "type": "string",
+            "description": "The built-in evaluator name (e.g. 'builtin.groundedness'). Required when type is 'evaluator'."
+          },
+          "name": {
+            "type": "string",
+            "description": "The trace metric name (e.g. 'latency_ms'). Required when type is 'traces'."
+          }
+        },
+        "description": "The source of a metric value, discriminated by type."
+      },
+
+      "ExperimentState": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "created",
+              "running",
+              "stopped",
+              "promoted"
+            ]
+          }
+        ],
+        "description": "The lifecycle state of the experiment."
+      },
+      "ExperimentStep": {
+        "type": "object",
+        "required": [
+          "id",
+          "variant_traffic_maps"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The identifier for this experiment step."
+          },
+          "started_at": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true,
+            "description": "The Unix timestamp (seconds) when this step started."
+          },
+          "stopped_at": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true,
+            "description": "The Unix timestamp (seconds) when this step stopped. Null if still running."
+          },
+          "variant_traffic_maps": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExperimentVariantTrafficMap"
+            },
+            "description": "The traffic allocation for each variant in this step."
+          }
+        },
+        "description": "A step in the experiment with traffic allocation details."
+      },
+      "ExperimentType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "agents_safe_rollout"
+            ]
+          }
+        ],
+        "description": "The discriminated experiment kind."
+      },
+      "ExperimentVariant": {
+        "type": "object",
+        "required": [
+          "id",
+          "role"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The variant identifier. For agents_safe_rollout this is the agent version number."
+          },
+          "role": {
+            "$ref": "#/components/schemas/ExperimentVariantRole"
+          },
+          "traffic_percentage": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The percentage of traffic to route to this variant. Required on create; may be omitted in materialized responses."
+          }
+        },
+        "description": "A variant participating in the experiment."
+      },
+      "ExperimentVariantRole": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "control",
+              "treatment"
+            ]
+          }
+        ],
+        "description": "The role of a variant in the experiment."
+      },
+      "ExperimentVariantTrafficMap": {
+        "type": "object",
+        "required": [
+          "variant_id",
+          "percentage",
+          "bucket_ranges"
+        ],
+        "properties": {
+          "variant_id": {
+            "type": "string",
+            "description": "The variant identifier this traffic map applies to."
+          },
+          "percentage": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The traffic percentage for this variant."
+          },
+          "bucket_ranges": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExperimentBucketRange"
+            },
+            "description": "The hash bucket ranges assigned to this variant."
+          }
+        },
+        "description": "Traffic allocation map for a single variant within an experiment step."
+      },
+      "CreateExperimentRequest": {
+        "type": "object",
+        "required": [
+          "type",
+          "display_name",
+          "variants"
+        ],
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/ExperimentType"
+          },
+          "target_agent": {
+            "type": "string",
+            "description": "The name of the agent this experiment targets. Required for agents_safe_rollout type."
+          },
+          "display_name": {
+            "type": "string",
+            "description": "A human-readable display name for the experiment."
+          },
+          "description": {
+            "type": "string",
+            "description": "A human-readable description of the experiment."
+          },
+          "duration": {
+            "type": "string",
+            "description": "The ISO 8601 duration for the experiment (e.g. 'P3D' for 3 days). Defaults to P3D when omitted."
+          },
+          "variants": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExperimentVariant"
+            },
+            "description": "The list of variants. Each variant id is an agent version number. Exactly one must have role 'control'. traffic_percentage must sum to 100."
+          },
+          "metrics": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExperimentMetric"
+            },
+            "description": "Optional list of metrics (evaluation rules or inline evaluators) to attach to the experiment."
+          }
+        },
+        "description": "Request body for creating an experiment."
+      },
+      "PromoteExperimentRequest": {
+        "type": "object",
+        "required": [
+          "winner_variant_id"
+        ],
+        "properties": {
+          "winner_variant_id": {
+            "type": "string",
+            "description": "The variant id (agent version) to promote as the winner. The agent's version selector is replaced with a single 100% rule for this version."
+          }
+        },
+        "description": "Request body for promoting an experiment."
+      },
+      "ScorecardState": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "ready",
+              "computing",
+              "failed"
+            ]
+          }
+        ],
+        "description": "The state of a scorecard."
+      },
+      "ScorecardRow": {
+        "type": "object",
+        "required": [
+          "metric_name",
+          "label",
+          "desired_direction",
+          "control_stats",
+          "treatment_stats",
+          "delta",
+          "p_value"
+        ],
+        "properties": {
+          "metric_name": {
+            "type": "string",
+            "description": "The metric name this row corresponds to."
+          },
+          "label": {
+            "type": "string",
+            "description": "A human-readable label for the metric."
+          },
+          "desired_direction": {
+            "$ref": "#/components/schemas/ExperimentMetricDirection"
+          },
+          "control_stats": {
+            "$ref": "#/components/schemas/ScorecardVariantStats"
+          },
+          "treatment_stats": {
+            "$ref": "#/components/schemas/ScorecardVariantStats"
+          },
+          "delta": {
+            "type": "number",
+            "format": "double",
+            "description": "The absolute delta between treatment and control."
+          },
+          "p_value": {
+            "type": "number",
+            "format": "double",
+            "description": "The p-value for statistical significance."
+          }
+        },
+        "description": "A single row in a scorecard table — one metric comparison between control and treatment."
+      },
+      "ScorecardVariantStats": {
+        "type": "object",
+        "required": [
+          "count",
+          "average",
+          "std_dev"
+        ],
+        "properties": {
+          "count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of observations."
+          },
+          "average": {
+            "type": "number",
+            "format": "double",
+            "description": "The arithmetic mean of the metric values."
+          },
+          "std_dev": {
+            "type": "number",
+            "format": "double",
+            "description": "The standard deviation of the metric values."
+          }
+        },
+        "description": "Summary statistics for a variant in a scorecard row."
+      },
+      "Scorecard": {
+        "type": "object",
+        "required": [
+          "id",
+          "experiment_id",
+          "state",
+          "artifact_uri",
+          "rows"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique identifier of the scorecard.",
+            "readOnly": true
+          },
+          "experiment_id": {
+            "type": "string",
+            "description": "The experiment this scorecard belongs to."
+          },
+          "state": {
+            "$ref": "#/components/schemas/ScorecardState"
+          },
+          "artifact_uri": {
+            "type": "string",
+            "description": "The URI to the scorecard artifact in the user's blob storage."
+          },
+          "rows": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ScorecardRow"
+            },
+            "description": "The metric comparison rows."
+          }
+        },
+        "description": "A generated scorecard artifact — a table comparing metric values between variants."
       },
       "ExternalAgentDefinition": {
         "type": "object",
@@ -76443,6 +77670,16 @@
             "items": {
               "$ref": "#/components/schemas/VersionSelectionRule"
             }
+          },
+          "experiment_id": {
+            "type": "string",
+            "description": "The experiment identifier bound to this selector. Minted and managed by the Experiments Service; read-only for developers. When set, the selector is write-locked.",
+            "readOnly": true
+          },
+          "salt": {
+            "type": "string",
+            "description": "An immutable bucketing seed used for deterministic sticky routing. Minted by the Experiments Service; read-only for developers.",
+            "readOnly": true
           }
         }
       },
