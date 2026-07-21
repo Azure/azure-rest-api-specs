@@ -1178,6 +1178,11 @@ model KnowledgeBaseFileReference extends KnowledgeBaseReference {
 
   /** The document name for the reference. */
   docName?: string;
+
+  /** A Search-owned URL that points at the backing document for this reference, usable as a citation target. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Pre-existing API contract and shipped name with url"
+  @added(Versions.v2026_08_01_preview)
+  citationUrl?: url;
 }
 
 /** Represents an Azure SQL document reference. */

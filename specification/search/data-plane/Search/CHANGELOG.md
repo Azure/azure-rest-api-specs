@@ -8,17 +8,28 @@ It is maintained for internal engineering reference and API Stewardship Board re
 
 ---
 
+
 ## 2026-08-01-preview
 
 **Summary**: Built on top of 2026-05-01-preview. Adds streaming (SSE) retrieval, an `auto` reasoning tier, search-index query hints, server-driven listing pagination, File-source upload enhancements, image serving, per-source controls, retrieve defaults, knowledge base tags, and WorkIQ on-behalf-of auth; restructures LLM activity-record metadata and the WorkIQ reference.
 
 ### GA-to-Preview Changes (2026-04-01 → 2026-08-01-preview)
 
-Cumulative: every change in the [2026-05-01-preview GA-to-Preview section](#2026-05-01-preview) plus the additions below. The Preview-to-Preview breaking changes touch models and parameters that are new since GA, so they are additive here.
+Cumulative: this view includes every change in the [2026-05-01-preview GA-to-Preview section](#2026-05-01-preview) plus this release's additions. CI (`openapi-diff`/OAD) diffs against the 2026-04-01 GA and re-reports the **full cumulative breaking set** on every run, so the Breaking Changes below carry the always-returned response fields first introduced in 2026-05-01-preview together with this release's new parameter-order shifts.
 
 #### Breaking Changes
 
-**No wire-level breaking changes** relative to the 2026-04-01 GA baseline. (The breaking changes under Preview-to-Preview below affect 2026-05-01-preview users only.)
+All items below are **wire-compatible** (a live caller is unaffected); they are OAD-detected and listed for the breaking-change review because this is a preview.
+
+**AddedRequiredProperty** — cumulative, inherited from the [2026-05-01-preview GA-to-Preview section](#2026-05-01-preview); OAD flags all four vs the 2026-04-01 GA (`1034`):
+
+- `SearchIndexerStatus.runtime`, `SearchServiceStatistics.indexersRuntime`, `SearchServiceCounters.knowledgeBasesCount`, and `SearchServiceCounters.knowledgeSourcesCount` are added to the `required` array of their response models (and via `SearchServiceStatistics.counters` / the `/servicestats` response schema). Wire-compatible: these are always-returned response fields, so an existing client just ignores them.
+
+**ChangedParameterOrder** — cumulative; OAD reports 55 occurrences vs the 2026-04-01 GA (`1042`):
+
+- The re-introduced preview parameters from 2026-05-01-preview (see that version's ChangedParameterOrder) **plus** this release's new listing/pagination query parameters (`search`, `pageSize`, `searchType`) added to the collection list GETs (`/aliases`, `/datasources`, `/indexers`, `/skillsets`, `/synonymmaps`, `/indexes`, `/knowledgebases`, `/knowledgesources`, `/indexstats`) shift `x-ms-client-request-id` — and, on the write operations that also gained parameters, the trailing path/body params — to higher positional indexes. Wire-compatible: HTTP parameters are keyed by name, not position.
+
+> The `AddedRequiredProperty`, `RemovedParameter`, and `RemovedProperty`/`RemovedDefinition` items listed under Preview-to-Preview below touch models and parameters introduced *after* the 2026-04-01 GA (e.g. `WorkIQKnowledgeSource`, `McpServerTool`, the interim `$top`/`$skip`/`$count` paging), so they are additive — not breaking — relative to this GA baseline.
 
 #### Non-Breaking Changes
 
@@ -41,7 +52,7 @@ Cumulative: every change in the [2026-05-01-preview GA-to-Preview section](#2026
 
 **Query hints for search-index knowledge sources**:
 
-- Optional `queryHints` defaults (`SearchIndexKnowledgeSourceQueryHints`) on search-index-backed knowledge source parameters (`searchIndex`, `azureBlob`, `indexedSharePoint`, `indexedOneLake`, `indexedSql`, `file`), with `filters` (`SearchIndexKnowledgeSourceFilterHint`) and `boosts` (`SearchIndexKnowledgeSourceBoost` with optional `boostInstructions`, discriminated by `SearchIndexKnowledgeSourceBoostKind` into `fieldValue` (`SearchIndexKnowledgeSourceFieldValueBoost`) and `multiWordExpression` (`SearchIndexKnowledgeSourceMultiWordExpressionBoost`), each targeting a `field` with a positive score multiplier).
+- Optional `queryHints` defaults (`SearchIndexKnowledgeSourceQueryHints`) on search-index-backed knowledge source parameters (`searchIndex`, `azureBlob`, `indexedSharePoint`, `indexedOneLake`, `indexedSql`, `file`), with `filters` (`SearchIndexKnowledgeSourceFilterHint`) and `boosts` (`SearchIndexKnowledgeSourceBoost` with optional `boostInstructions`, discriminated by `SearchIndexKnowledgeSourceBoostKind` into `fieldValue` (`SearchIndexKnowledgeSourceFieldValueBoost`: a required `field` plus optional representative `fieldValues`) and `multiWordExpression` (`SearchIndexKnowledgeSourceMultiWordExpressionBoost`: optional representative `fieldValues`, no `field`), each with a positive `boost` score multiplier).
 - Request-time `queryHintOverrides` on the corresponding knowledge source runtime params; an override replaces the stored hint object as a complete object.
 - `queryType` on search-index activity arguments, and `queryHintProcessing` (`KnowledgeBaseQueryHintProcessing`) on index-backed retrieval activity records reporting the aggregate search clause and filter expression generated from the hints.
 
@@ -82,6 +93,10 @@ Breaking vs 2026-05-01-preview only — the affected models and parameters don't
 
 - `WorkIQKnowledgeSource.workIQParameters` (`WorkIQKnowledgeSourceParameters`, required): the WorkIQ knowledge source (introduced in 2026-05-01-preview) now requires customer-owned Microsoft Entra app configuration for on-behalf-of authentication to the Work IQ API.
 
+**ChangedParameterOrder**:
+
+- The new listing/pagination query parameters (`search`, `pageSize`, `searchType`) added to the collection list GETs (`/aliases`, `/datasources`, `/indexers`, `/skillsets`, `/synonymmaps`, `/indexes`, `/knowledgebases`, `/knowledgesources`, `/indexstats`) push `x-ms-client-request-id` to a higher positional index; OAD reports this across every affected list operation. Wire-compatible: HTTP parameters are keyed by name, not position.
+
 **RemovedParameter**:
 
 - `$top`, `$skip`, `$count` removed from `Indexes_List`, `Indexes_ListWithSelectedProperties`, and `GetIndexStatsSummary` (the OData paging added in 2026-05-01-preview); replaced by the server-driven `search`/`pageSize`/`searchType` + `@odata.nextLink` pagination.
@@ -98,8 +113,10 @@ Same additions as the GA-to-Preview section above; all additive relative to this
 
 ---
 
+
 ## 2026-05-01-preview
 
+**Summary**: Built on top of 2026-04-01 GA. Restores GA-dropped preview features and adds new knowledge source types, image serving, freshness, permission filtering, and more AI models.
 **Summary**: Built on top of 2026-04-01 GA. Restores GA-dropped preview features and adds new knowledge source types, image serving, freshness, permission filtering, and more AI models.
 
 ### GA-to-Preview Changes (2026-04-01 → 2026-05-01-preview)
@@ -108,6 +125,7 @@ Same additions as the GA-to-Preview section above; all additive relative to this
 
 **AddedRequiredProperty**: The following properties become required.
 
+_Re-introduced (preview-only):_
 _Re-introduced (preview-only):_
 
 - `SearchIndexerStatus.runtime` (`IndexerRuntime`): indexer cumulative runtime snapshot.
@@ -118,6 +136,7 @@ _Re-introduced (preview-only):_
 
 **ChangedParameterOrder**: Preview-only parameters re-inserted, shifting subsequent parameter positions.
 
+_Re-introduced (preview-only):_
 _Re-introduced (preview-only):_
 
 - `DataSources_CreateOrUpdate`: `ignoreResetRequirements` re-inserted before `x-ms-client-request-id`, `dataSourceName`, `dataSource`.
@@ -130,6 +149,7 @@ _Re-introduced (preview-only):_
 
 - **KnowledgeSources file management**: `KnowledgeSources_UploadFile` (POST), `KnowledgeSources_ListFiles` (GET), `KnowledgeSources_DeleteFile` (DELETE) under `.../files`.
 
+_Re-introduced (preview-only):_
 _Re-introduced (preview-only):_
 
 - **GetIndexStatsSummary** (GET `/indexstats`): `$top`, `$skip`, `$count` pagination; returns `ListIndexStatsSummary`.
@@ -144,6 +164,7 @@ _Re-introduced (preview-only):_
 - **`FabricDataAgent`**: `FabricDataAgentKnowledgeSource`, `FabricDataAgentKnowledgeSourceParameters`; activity/reference types.
 - **`FabricOntology`**: `FabricOntologyKnowledgeSource`, `FabricOntologyKnowledgeSourceParameters`; activity/reference types.
 
+_Re-introduced (preview-only):_
 _Re-introduced (preview-only):_
 
 - **`IndexedSharePoint`** and **`RemoteSharePoint`**: full model, parameter, runtime-params, activity, and reference trees.
@@ -160,6 +181,7 @@ _Re-introduced (preview-only):_
 - `Indexes_List`/`Indexes_ListWithSelectedProperties`: `$top`, `$skip`, `$count`.
 
 _Re-introduced (preview-only):_
+_Re-introduced (preview-only):_
 
 - `KnowledgeBase`: `retrievalReasoningEffort`, `outputMode`, `retrievalInstructions`, `answerInstructions`; `KnowledgeSourceParams`: `alwaysQuerySource`.
 - `KnowledgeBaseRetrievalRequest`: `messages`, `maxOutputSize`, `retrievalReasoningEffort`, `outputMode`.
@@ -171,17 +193,20 @@ _Re-introduced (preview-only):_
 **Query features**:
 
 _Re-introduced (preview-only):_
+_Re-introduced (preview-only):_
 
 `QueryRewritesType`, `QueryLanguage`, `QuerySpellerType`, `SemanticQueryRewritesResultType`; `SearchRequest` fields `queryRewrites`, `queryLanguage`, `speller`, `semanticFields`, `hybridSearch`; `VectorizableTextQuery.queryRewrites`; `VectorQuery.threshold`, `filterOverride`, `perDocumentVectorLimit`; `FacetResult` aggregate metrics (`avg`, `min`, `max`, `sum`, `cardinality`, `@search.facets`); debug types `QueryRewritesDebugInfo`, `QueryRewritesValuesDebugInfo`, `SemanticDebugInfo`, `DocumentDebugInfo.innerHits`, `DocumentDebugInfo.semantic`, `SearchDocumentsResult.@search.semanticQueryRewritesResultType`; `HybridSearch` (`maxTextRecallSize`, `countAndFacetMode`).
 
 **Skills and vectorizers**:
 
 _Re-introduced (preview-only):_
+_Re-introduced (preview-only):_
 
 `AzureMachineLearningSkill`, `VisionVectorizeSkill`; `SplitSkill.unit`, `SplitSkill.azureOpenAITokenizerParameters`; `ChatCompletionSkill` WebApi-style properties (`authResourceId`, `batchSize`, `degreeOfParallelism`, `httpHeaders`, `httpMethod`, `timeout`).
 
 **Knowledge base retrieval and permission filtering types**:
 
+_Re-introduced (preview-only):_
 _Re-introduced (preview-only):_
 
 `KnowledgeRetrievalLowReasoningEffort`, `KnowledgeRetrievalMediumReasoningEffort`, `KnowledgeRetrievalOutputMode` (`extractiveData`, `answerSynthesis`); `KnowledgeBaseModelQueryPlanningActivityRecord`, `KnowledgeBaseModelAnswerSynthesisActivityRecord`; `SearchIndexPermissionFilterOption`, `PermissionFilter`.
@@ -202,11 +227,13 @@ _Re-introduced (preview-only):_
 #### Non-Breaking Changes
 
 All additive relative to this baseline: re-introduced items were restored with identical contracts; `SearchServiceCounters.knowledgeBasesCount` / `knowledgeSourcesCount` are new required fields on a response model (additive to clients); `SearchIndexerStatus.runtime` and `SearchServiceStatistics.indexersRuntime` were already required in 2025-11-01-preview and are unchanged.
+All additive relative to this baseline: re-introduced items were restored with identical contracts; `SearchServiceCounters.knowledgeBasesCount` / `knowledgeSourcesCount` are new required fields on a response model (additive to clients); `SearchIndexerStatus.runtime` and `SearchServiceStatistics.indexersRuntime` were already required in 2025-11-01-preview and are unchanged.
 
 ---
 
 ## 2026-04-01 (GA)
 
+**Summary**: Built on top of 2025-09-01 GA. First GA on the TypeSpec-unified `search.json` (migrated at 2025-11-01-preview); inherits that structure plus new features and refinements.
 **Summary**: Built on top of 2025-09-01 GA. First GA on the TypeSpec-unified `search.json` (migrated at 2025-11-01-preview); inherits that structure plus new features and refinements.
 
 **REST API Review Tracking**: [[Azure Search - Azure AI Search] DP 2026-04-01 GA API Review #40034](https://github.com/Azure/azure-rest-api-specs/issues/40034)
@@ -243,27 +270,36 @@ All additive relative to this baseline: re-introduced items were restored with i
 
 **New skills and vectorizers**:
 
+**New skills and vectorizers**:
+
 - `ChatCompletionSkill` (#Microsoft.Skills.Custom.ChatCompletionSkill): calls a chat-completion model.
 - `ContentUnderstandingSkill` (#Microsoft.Skills.Util.ContentUnderstandingSkill): Azure AI Content Understanding enrichment.
 
 **New optional fields on existing models**:
+**New optional fields on existing models**:
 
+_Indexers / Data sources_
 _Indexers / Data sources_
 
 - `SearchIndexerDataSource`: `identity` (managed identity for data source authentication).
 - `SearchIndexerKnowledgeStore`: `identity` (managed identity for knowledge store projections).
 
 _Encryption_
+_Encryption_
 
 - `SearchResourceEncryptionKey.keyVaultKeyVersion`: changed from **required** to **optional**, aligning with actual service behavior. This property was modified as optional in the preview track since 2025-03-01-preview, but the fix was not applied to 2025-09-01 GA.
 
 **Markdown parsing mode**:
+**Markdown parsing mode**:
 
 Native Markdown file parsing for blob indexers without requiring a separate skill:
+
 
 - `BlobIndexerParsingMode`: new `markdown` enum value to enable Markdown parsing.
 - `IndexingParametersConfiguration.markdownParsingSubmode`: controls document splitting — `oneToOne` (entire file becomes one document) or `oneToMany` (split by header sections).
 - `IndexingParametersConfiguration.markdownHeaderDepth`: sets header depth for sectioning (`h1` through `h6`; default: `h6`).
+
+**Knowledge base activity**:
 
 **Knowledge base activity**:
 
@@ -338,6 +374,7 @@ The following preview features were not promoted to the GA release.
 ## 2025-11-01-preview: TypeSpec Migration
 
 **Scope**: Migration from three hand-authored Swagger files (`searchservice.json`, `searchindex.json`, `knowledgebase.json`) to a single TypeSpec-compiled `search.json` describing the same `2025-11-01-preview` API.
+
 
 - This TypeSpec migration applies to both REST API specification and SDKs. Changes listed here have been addressed in the SDK migration process as well.
 

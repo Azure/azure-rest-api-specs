@@ -4951,9 +4951,8 @@ model SearchIndexKnowledgeSourceMultiWordExpressionBoost
   /** The discriminator value. */
   kind: SearchIndexKnowledgeSourceBoostKind.MultiWordExpression;
 
-  /** The name of the search index field. */
-  @minLength(1)
-  field: string;
+  /** Representative values for the boost. */
+  fieldValues?: string[];
 
   /** A multiplier for the document score. Must be a positive number not equal to 1.0. */
   boost: float64;
