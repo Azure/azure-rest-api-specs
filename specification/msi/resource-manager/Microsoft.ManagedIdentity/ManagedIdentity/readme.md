@@ -26,7 +26,16 @@ These are the global settings for the Managed Service Identity API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2024-11-30
+tag: package-2026-04-30
+```
+
+### Tag: package-2026-04-30
+
+These settings apply only when `--tag=package-2026-04-30` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-04-30'
+input-file:
+  - stable/2026-04-30/ManagedIdentity.json
 ```
 
 ### Tag: package-2025-05-31-preview
