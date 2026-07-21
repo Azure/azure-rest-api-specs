@@ -63,6 +63,21 @@ model DataGenerationJobOutputOptions {
 
   @doc("Tags to assign to the output. Applies only to dataset outputs (evaluation scenario); ignored for Azure OpenAI file outputs.")
   tags?: Record<string>;
+
+  @doc("Controls how dataset outputs are written. If omitted, defaults to `overwrite` and creates the next dataset version using only newly generated rows.")
+  write_mode?: DataGenerationJobOutputWriteMode;
+}
+
+@doc("The supported write modes for data generation job outputs.")
+@extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
+union DataGenerationJobOutputWriteMode {
+  string,
+
+  @doc("Default behavior. Create the next dataset version using only newly generated rows, replacing the previous version's rows in the new version.")
+  overwrite: "overwrite",
+
+  @doc("Applicable only for trace data generation jobs that output evaluation datasets. Create the next dataset version by merging newly generated rows with the latest existing dataset version and de-duping trace rows.")
+  merge: "merge",
 }
 
 @doc("Result produced by a successful data generation job.")
@@ -105,7 +120,7 @@ model DataGenerationJobOutput {
 @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
 model FileDataGenerationJobOutput extends DataGenerationJobOutput {
   @doc("Azure OpenAI file output.")
-  type: "file";
+  type: DataGenerationJobOutputType.file;
 
   @doc("The id of the output Azure OpenAI file.")
   @visibility(Lifecycle.Read)
@@ -120,7 +135,7 @@ model FileDataGenerationJobOutput extends DataGenerationJobOutput {
 @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
 model DatasetDataGenerationJobOutput extends DataGenerationJobOutput {
   @doc("Dataset output.")
-  type: "dataset";
+  type: DataGenerationJobOutputType.dataset;
 
   @doc("The id of the output dataset created.")
   @visibility(Lifecycle.Read)
@@ -193,9 +208,6 @@ model DataGenerationJobOptions {
   @doc("The data generation job type.")
   type: DataGenerationJobType;
 
-  @doc("Maximum number of samples to generate.")
-  max_samples: int32;
-
   @doc("The proportion of the generated data to be used for training when the data is used for fine-tuning. The rest will be used for validation. Value should be between 0 and 1.")
   @minValue(0)
   @maxValue(1)
@@ -209,7 +221,10 @@ model DataGenerationJobOptions {
 @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
 model SimpleQnADataGenerationJobOptions extends DataGenerationJobOptions {
   @doc("The data generation job type, which is SimpleQnA for this model.")
-  type: "simple_qna";
+  type: DataGenerationJobType.simple_qna;
+
+  @doc("Maximum number of samples to generate, up to service-defined limits.")
+  max_samples: int32;
 
   @doc("The question types to generate. Used only for fine-tuning scenarios.")
   question_types?: SimpleQnAFineTuningQuestionType[];
@@ -219,7 +234,10 @@ model SimpleQnADataGenerationJobOptions extends DataGenerationJobOptions {
 @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
 model TracesDataGenerationJobOptions extends DataGenerationJobOptions {
   @doc("The data generation job type, which is Traces for this model.")
-  type: "traces";
+  type: DataGenerationJobType.traces;
+
+  @doc("Maximum number of samples to generate, up to service-defined limits. If omitted, sampling is turned off.")
+  max_samples?: int32;
 }
 
 @doc("The options for a data generation job with ToolUse type. Used only for fine-tuning scenarios.")
@@ -227,7 +245,10 @@ model TracesDataGenerationJobOptions extends DataGenerationJobOptions {
 model ToolUseFineTuningDataGenerationJobOptions
   extends DataGenerationJobOptions {
   @doc("The data generation job type, which is ToolUse for this model.")
-  type: "tool_use";
+  type: DataGenerationJobType.tool_use;
+
+  @doc("Maximum number of samples to generate, up to service-defined limits.")
+  max_samples: int32;
 }
 
 @doc("The supported source types for data generation jobs.")
@@ -274,13 +295,19 @@ model AgentDataGenerationJobSource extends DataGenerationJobSource {
 @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
 model TracesDataGenerationJobSource extends DataGenerationJobSource {
   ...TracesJobSource;
+
+  @doc("Optional explicit list of trace IDs to include. Mutually exclusive with `kql_where_clause`.")
+  trace_ids?: string[];
+
+  @doc("Optional KQL where clause used to filter traces. Mutually exclusive with `trace_ids`.")
+  kql_where_clause?: string;
 }
 
 @doc("File source for data generation jobs — Azure OpenAI file input.")
 @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
 model FileDataGenerationJobSource extends DataGenerationJobSource {
   @doc("The source type for this job, which is File.")
-  type: "file";
+  type: DataGenerationJobSourceType.file;
 
   @doc("Input Azure Open AI file id used for data generation.")
   id: string;
