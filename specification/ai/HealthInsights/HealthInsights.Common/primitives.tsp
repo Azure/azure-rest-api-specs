@@ -19,6 +19,7 @@ alias HealthInsightsRetryAfterTrait = ResponseHeadersTrait<
 @trait("RequestIdResponseHeader")
 model RequestIdResponseHeaderTrait {
   @doc("An opaque, globally-unique, server-generated string identifier for the request.")
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
   requestId: {
     @traitLocation(TraitLocation.Response)
     response: RequestIdResponseHeader;

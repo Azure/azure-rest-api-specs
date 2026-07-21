@@ -215,6 +215,7 @@ model ErrorResponse {
   /**
    * The error object.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
   error?: {
     /**
      * Error code
@@ -570,6 +571,7 @@ model Operation {
   /**
    * The object that represents the operation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
   display?: {
     /**
      * Service provider: Microsoft.PowerBIDedicated.

@@ -2761,6 +2761,7 @@ model ManagedClusterNATGatewayProfile {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @added(Versions.v2026_04_02_preview)
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
   outboundIPPrefixes?: {
     /**
      * A list of public IP prefix resources.
@@ -2778,6 +2779,7 @@ model ManagedClusterNATGatewayProfile {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @added(Versions.v2026_04_02_preview)
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
   outboundIPs?: {
     /**
      * A list of public IP resources.

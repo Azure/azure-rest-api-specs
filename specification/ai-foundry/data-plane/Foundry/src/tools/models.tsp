@@ -775,7 +775,7 @@ namespace Azure.AI.Projects {
   model MemorySearchToolCallItemResource extends OpenAI.OutputItem {
     type: "memory_search_call";
 
-    #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
+    #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Auto-suppressed warnings non-applicable rules during import."
     @doc("""
       The status of the memory search tool call. One of `in_progress`,
       `searching`, `completed`, `incomplete` or `failed`,
@@ -801,7 +801,7 @@ namespace Azure.AI.Projects {
   // Tool Call Output Content Type
   // ==============================================================================
 
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Output can be multiple types"
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Output can be multiple types"
   @doc("The output content from a tool call, which can be a dictionary, string, or array.")
   union ToolCallOutputContent {
     @doc("A dictionary/object output.")
