@@ -180,6 +180,21 @@ union RoleManagementScopeType {
   "csharp"
 );
 @@clientName(
+  Microsoft.RoleManagementAlerts.AlertConfigurationProperties,
+  "RoleManagementAlertConfigurationProperties",
+  "csharp"
+);
+@@clientName(
+  Microsoft.RoleManagementAlerts.AlertIncidentProperties,
+  "RoleManagementAlertIncidentProperties",
+  "csharp"
+);
+@@clientName(
+  Microsoft.RoleManagementAlerts.AlertOperationResult,
+  "RoleManagementAlertOperationResult",
+  "csharp"
+);
+@@clientName(
   Microsoft.AttributeNamespaces.DecisionResourceType,
   "AccessReviewDecisionResourceType",
   "csharp"
@@ -305,7 +320,7 @@ union RoleManagementScopeType {
 );
 @@clientName(
   Microsoft.Authorization.NotificationDeliveryMechanism,
-  "NotificationDeliveryType",
+  "RoleManagementNotificationDeliveryType",
   "csharp"
 );
 @@clientName(
@@ -335,7 +350,7 @@ union RoleManagementScopeType {
 );
 @@clientName(
   Microsoft.Authorization.RoleManagementPolicyNotificationRule.isDefaultRecipientsEnabled,
-  "AreDefaultRecipientsEnabled",
+  "IsDefaultRecipientsEnabled",
   "csharp"
 );
 @@clientName(
@@ -650,6 +665,26 @@ union RoleManagementScopeType {
 );
 
 // Restore C# GA identifier types from AutoRest format-by-name and rename mappings.
+@@alternateType(
+  Microsoft.AttributeNamespaces.AccessReviewScope.resourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.AttributeNamespaces.AccessReviewScope.excludeResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.AttributeNamespaces.RecordAllDecisionsProperties.resourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.RoleManagementAlerts.AlertOperationResult.resourceLocation,
+  Azure.Core.azureLocation,
+  "csharp"
+);
 @@alternateType(
   Microsoft.RoleAssignment.RoleAssignmentProperties.roleDefinitionId,
   Azure.Core.armResourceIdentifier,
