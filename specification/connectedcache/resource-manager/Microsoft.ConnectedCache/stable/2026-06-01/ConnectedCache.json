@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ConnectedCache",
-    "version": "2024-11-30-preview",
+    "version": "2026-06-01",
     "description": "Microsoft Connected Cache Rest APIs",
     "x-typespec-generated": [
       {
@@ -2052,6 +2052,66 @@
           "description": "Cache node tls certificate status.",
           "readOnly": true
         },
+        "hostOsEdition": {
+          "type": "string",
+          "description": "Operating system edition of the cache node host machine",
+          "readOnly": true
+        },
+        "hostOsVersion": {
+          "type": "string",
+          "description": "Operating system version of the cache node host machine",
+          "readOnly": true
+        },
+        "hostOsBuild": {
+          "type": "string",
+          "description": "Operating system build of the cache node host machine",
+          "readOnly": true
+        },
+        "distroOsEditionWsl": {
+          "type": "string",
+          "description": "Operating system edition of the WSL Linux distribution used to run the cache node on Windows host machines",
+          "readOnly": true
+        },
+        "distroOsVersionWsl": {
+          "type": "string",
+          "description": "Operating system version of the WSL Linux distribution used to run the cache node on Windows host machines",
+          "readOnly": true
+        },
+        "distroOsBuildWsl": {
+          "type": "string",
+          "description": "Operating system build of the WSL Linux distribution used to run the cache node on Windows host machines",
+          "readOnly": true
+        },
+        "containerOsEdition": {
+          "type": "string",
+          "description": "Operating system edition of container used to run the cache node",
+          "readOnly": true
+        },
+        "containerOsVersion": {
+          "type": "string",
+          "description": "Operating system version of the container used to run the cache node",
+          "readOnly": true
+        },
+        "containerOsBuild": {
+          "type": "string",
+          "description": "Operating system build of the container used to run the cache node",
+          "readOnly": true
+        },
+        "installVersionMsix": {
+          "type": "string",
+          "description": "Version of the Windows deployment application used to deploy the cache node",
+          "readOnly": true
+        },
+        "installVersionScript": {
+          "type": "string",
+          "description": "Version of the installation scripts used to deploy the cache node",
+          "readOnly": true
+        },
+        "appVersionWsl": {
+          "type": "string",
+          "description": "Version of the Windows Subsystem for Linux application version used to run the cache node on the Windows host machine",
+          "readOnly": true
+        },
         "optionalProperty1": {
           "type": "string",
           "description": "Optional property #1 of Mcc response object"
@@ -2441,6 +2501,10 @@
           "description": "Cache node resource last Cidr Csv update timestamp",
           "readOnly": true
         },
+        "bgpNetworkInterface": {
+          "type": "string",
+          "description": "Cache node resource Bgp network interface."
+        },
         "bgpCidrCsvLastUpdateTime": {
           "type": "string",
           "format": "date-time",
@@ -2593,6 +2657,26 @@
           "type": "string",
           "description": "Customer requested time of the day for mcc install of auto update cycle, should be hh:mm",
           "pattern": "^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$"
+        },
+        "openFirewallPort80": {
+          "type": "boolean",
+          "description": "Cache node port firewall rule creation opt-in for port 80 property"
+        },
+        "openFirewallPort443": {
+          "type": "boolean",
+          "description": "Cache node port firewall rule creation opt-in for port 443 property"
+        },
+        "openFirewallPort5000": {
+          "type": "boolean",
+          "description": "Cache node port firewall rule creation opt-in for port 5000 property"
+        },
+        "openFirewallPort5001": {
+          "type": "boolean",
+          "description": "Cache node port firewall rule creation opt-in for port 5001 property"
+        },
+        "runtimeAccountType": {
+          "type": "string",
+          "description": "Connected Cache runtime account type"
         }
       }
     },
@@ -3312,6 +3396,11 @@
           "description": "Mcc cache node Tls certificate file name.",
           "readOnly": true
         },
+        "certType": {
+          "type": "string",
+          "description": "Mcc cache node Tls certificate Type.",
+          "readOnly": true
+        },
         "thumbprint": {
           "type": "string",
           "description": "Mcc cache node Tls certificate thumbprint.",
@@ -3591,7 +3680,9 @@
       "enum": [
         "Preview",
         "Slow",
-        "Fast"
+        "Fast",
+        "Stable",
+        "Beta"
       ],
       "x-ms-enum": {
         "name": "autoUpdateRingType",
@@ -3611,6 +3702,16 @@
             "name": "Fast",
             "value": "Fast",
             "description": "customer selection of fast / auto update to install mcc on their physical vm"
+          },
+          {
+            "name": "Stable",
+            "value": "Stable",
+            "description": "customer selection of stable update to install mcc on their physical vm"
+          },
+          {
+            "name": "Beta",
+            "value": "Beta",
+            "description": "customer selection of beta update to install mcc on their physical vm"
           }
         ]
       }
