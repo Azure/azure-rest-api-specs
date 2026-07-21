@@ -49,19 +49,10 @@ namespace Azure.AI.Projects {
   // --------------------------------------------------------------------------------
   @@clientName(OpenAI, "ProjectOpenAIClient");
 
-  // The ConversationResoruce is not yet emitted by the OpenAI SDK, so emitt it here for now. Once the OpenAI SDK emits it, this will be removed.
-  @@clientNamespace(OpenAI.ConversationResource, "Azure.AI.Extensions.OpenAI", "csharp");
-  @@usage(OpenAI.ConversationResource, Usage.output);
-  @@access(OpenAI.ConversationResource, Access.public);
-  @@clientName(OpenAI.ConversationResource, "ProjectConversation");
-
-  @@usage(
-    OpenAI.CreateConversationBody,
-    Usage.output | Usage.json | Usage.input
-  );
-  @@access(OpenAI.CreateConversationBody, Access.public);
-  @@usage(OpenAI.UpdateConversationBody, Usage.input);
-  @@access(OpenAI.UpdateConversationBody, Access.public);
+  // The conversation data models (ConversationResource, CreateConversationBody,
+  // UpdateConversationBody) are now emitted by the OpenAI SDK (2.12+), so they are
+  // no longer generated here. The Foundry ProjectConversationsClient wrapper consumes
+  // OpenAI's OpenAI.Conversations.* types directly.
 
   @@clientNamespace(OpenAI.Metadata, "Azure.AI.Extensions.OpenAI", "csharp");
   @@access(OpenAI.Metadata, Access.internal);
