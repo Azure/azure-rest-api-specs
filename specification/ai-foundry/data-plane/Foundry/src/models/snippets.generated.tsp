@@ -8,6 +8,182 @@ using TypeSpec.OpenAPI;
 namespace Azure.AI.Projects;
 
 @@extension(
+  Azure.AI.Projects.Models.listLatest,
+  "x-codeSamples",
+  #[
+    #{
+      lang: "curl",
+      label: "cURL",
+      source: """
+        curl -X "GET" \\
+        "$FOUNDRY_PROJECT_ENDPOINT/models?api-version=<api-version>" \\
+          -H "Authorization: Bearer $AZURE_TOKEN" \\
+          -H "Foundry-Features: <Foundry-Features>"
+        """,
+    },
+    #{
+      lang: "python",
+      label: "Python",
+      source: """
+        import os
+        from azure.identity import DefaultAzureCredential
+        from azure.ai.projects import AIProjectClient
+        
+        endpoint = os.environ["FOUNDRY_PROJECT_ENDPOINT"]
+        credential = DefaultAzureCredential()
+        project_client = AIProjectClient(endpoint=endpoint, credential=credential)
+        
+        for item in project_client.beta.models.list():
+            print(item)
+        """,
+    },
+    #{
+      lang: "csharp",
+      label: ".NET",
+      source: """
+        using System.Net.Http.Headers;
+        using System.Text;
+        using Azure.Core;
+        using Azure.Identity;
+        string endpoint = Environment.GetEnvironmentVariable("FOUNDRY_PROJECT_ENDPOINT")!.TrimEnd('/');
+        string url = endpoint + "/models?api-version=<api-version>";
+        TokenCredential credential = new DefaultAzureCredential();
+        AccessToken token = await credential.GetTokenAsync(new TokenRequestContext(["https://ai.azure.com/.default"]));
+        using HttpClient client = new();
+        using HttpRequestMessage request = new(HttpMethod.Get, url);
+        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token.Token);
+        request.Headers.Add("Foundry-Features", "<Foundry-Features>");
+        using HttpResponseMessage response = await client.SendAsync(request);
+        response.EnsureSuccessStatusCode();
+        Console.WriteLine(await response.Content.ReadAsStringAsync());
+        """,
+    },
+    #{
+      lang: "typescript",
+      label: "TypeScript",
+      source: """
+        import { AIProjectClient } from "@azure/ai-projects";
+        import { DefaultAzureCredential } from "@azure/identity";
+        
+        const projectEndpoint = process.env.FOUNDRY_PROJECT_ENDPOINT || "<project endpoint string>";
+        const project = new AIProjectClient(projectEndpoint, new DefaultAzureCredential());
+        
+        for await (const item of project.beta.models.list()) {
+          console.log(item);
+        }
+        """,
+    },
+    #{
+      lang: "java",
+      label: "Java",
+      source: """
+        import com.azure.ai.projects.AIProjectClientBuilder;
+        import com.azure.ai.projects.BetaModelsClient;
+        import com.azure.identity.DefaultAzureCredentialBuilder;
+        import com.azure.ai.projects.models.ModelVersion;
+        import com.azure.core.http.rest.PagedIterable;
+        
+        String endpoint = System.getenv("FOUNDRY_PROJECT_ENDPOINT");
+        BetaModelsClient client = new AIProjectClientBuilder().endpoint(endpoint).credential(new DefaultAzureCredentialBuilder().build()).beta().buildBetaModelsClient();
+        
+        PagedIterable<ModelVersion> items = modelsClient.listLatestModelVersions();
+        for (ModelVersion item : items) {
+            System.out.println(item);
+        }
+        """,
+    }
+  ]
+);
+
+@@extension(
+  Azure.AI.Projects.Models.listVersions,
+  "x-codeSamples",
+  #[
+    #{
+      lang: "curl",
+      label: "cURL",
+      source: """
+        curl -X "GET" \\
+        "$FOUNDRY_PROJECT_ENDPOINT/models/<name>/versions?api-version=<api-version>" \\
+          -H "Authorization: Bearer $AZURE_TOKEN" \\
+          -H "Foundry-Features: <Foundry-Features>"
+        """,
+    },
+    #{
+      lang: "python",
+      label: "Python",
+      source: """
+        import os
+        from azure.identity import DefaultAzureCredential
+        from azure.ai.projects import AIProjectClient
+        
+        endpoint = os.environ["FOUNDRY_PROJECT_ENDPOINT"]
+        credential = DefaultAzureCredential()
+        project_client = AIProjectClient(endpoint=endpoint, credential=credential)
+        
+        for item in project_client.beta.models.list_versions(name="<name>"):
+            print(item)
+        """,
+    },
+    #{
+      lang: "csharp",
+      label: ".NET",
+      source: """
+        using System.Net.Http.Headers;
+        using System.Text;
+        using Azure.Core;
+        using Azure.Identity;
+        string endpoint = Environment.GetEnvironmentVariable("FOUNDRY_PROJECT_ENDPOINT")!.TrimEnd('/');
+        string url = endpoint + "/models/<name>/versions?api-version=<api-version>";
+        TokenCredential credential = new DefaultAzureCredential();
+        AccessToken token = await credential.GetTokenAsync(new TokenRequestContext(["https://ai.azure.com/.default"]));
+        using HttpClient client = new();
+        using HttpRequestMessage request = new(HttpMethod.Get, url);
+        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token.Token);
+        request.Headers.Add("Foundry-Features", "<Foundry-Features>");
+        using HttpResponseMessage response = await client.SendAsync(request);
+        response.EnsureSuccessStatusCode();
+        Console.WriteLine(await response.Content.ReadAsStringAsync());
+        """,
+    },
+    #{
+      lang: "typescript",
+      label: "TypeScript",
+      source: """
+        import { AIProjectClient } from "@azure/ai-projects";
+        import { DefaultAzureCredential } from "@azure/identity";
+        
+        const projectEndpoint = process.env.FOUNDRY_PROJECT_ENDPOINT || "<project endpoint string>";
+        const project = new AIProjectClient(projectEndpoint, new DefaultAzureCredential());
+        
+        for await (const item of project.beta.models.listVersions("<name>")) {
+          console.log(item);
+        }
+        """,
+    },
+    #{
+      lang: "java",
+      label: "Java",
+      source: """
+        import com.azure.ai.projects.AIProjectClientBuilder;
+        import com.azure.ai.projects.BetaModelsClient;
+        import com.azure.identity.DefaultAzureCredentialBuilder;
+        import com.azure.ai.projects.models.ModelVersion;
+        import com.azure.core.http.rest.PagedIterable;
+        
+        String endpoint = System.getenv("FOUNDRY_PROJECT_ENDPOINT");
+        BetaModelsClient client = new AIProjectClientBuilder().endpoint(endpoint).credential(new DefaultAzureCredentialBuilder().build()).beta().buildBetaModelsClient();
+        
+        PagedIterable<ModelVersion> items = modelsClient.listModelVersions("<name>");
+        for (ModelVersion item : items) {
+            System.out.println(item);
+        }
+        """,
+    }
+  ]
+);
+
+@@extension(
   Azure.AI.Projects.Models.getVersion,
   "x-codeSamples",
   #[

@@ -8,6 +8,407 @@ using TypeSpec.OpenAPI;
 namespace Azure.AI.Projects;
 
 @@extension(
+  Azure.AI.Projects.Datasets.listLatest,
+  "x-codeSamples",
+  #[
+    #{
+      lang: "curl",
+      label: "cURL",
+      source: """
+        curl -X "GET" \\
+        "$FOUNDRY_PROJECT_ENDPOINT/datasets?api-version=<api-version>" \\
+          -H "Authorization: Bearer $AZURE_TOKEN"
+        """,
+    },
+    #{
+      lang: "python",
+      label: "Python",
+      source: """
+        import os
+        from azure.identity import DefaultAzureCredential
+        from azure.ai.projects import AIProjectClient
+        
+        endpoint = os.environ["FOUNDRY_PROJECT_ENDPOINT"]
+        credential = DefaultAzureCredential()
+        project_client = AIProjectClient(endpoint=endpoint, credential=credential)
+        
+        for item in project_client.datasets.list():
+            print(item)
+        """,
+    },
+    #{
+      lang: "csharp",
+      label: ".NET",
+      source: """
+        using System;
+        using Azure.AI.Projects;
+        using Azure.Identity;
+        
+        string endpoint = Environment.GetEnvironmentVariable("FOUNDRY_PROJECT_ENDPOINT")!;
+        AIProjectClient projectClient = new AIProjectClient(new Uri(endpoint), new DefaultAzureCredential());
+        
+        foreach (var item in projectClient.Datasets.GetDatasets())
+        {
+            Console.WriteLine(item);
+        }
+        """,
+    },
+    #{
+      lang: "typescript",
+      label: "TypeScript",
+      source: """
+        import { AIProjectClient } from "@azure/ai-projects";
+        import { DefaultAzureCredential } from "@azure/identity";
+        
+        const projectEndpoint = process.env.FOUNDRY_PROJECT_ENDPOINT || "<project endpoint string>";
+        const project = new AIProjectClient(projectEndpoint, new DefaultAzureCredential());
+        
+        for await (const item of project.datasets.list()) {
+          console.log(item);
+        }
+        """,
+    },
+    #{
+      lang: "java",
+      label: "Java",
+      source: """
+        import com.azure.ai.projects.AIProjectClientBuilder;
+        import com.azure.ai.projects.DatasetsClient;
+        import com.azure.identity.DefaultAzureCredentialBuilder;
+        import com.azure.ai.projects.models.DatasetVersion;
+        import com.azure.core.http.rest.PagedIterable;
+        
+        String endpoint = System.getenv("FOUNDRY_PROJECT_ENDPOINT");
+        DatasetsClient client = new AIProjectClientBuilder().endpoint(endpoint).credential(new DefaultAzureCredentialBuilder().build()).buildDatasetsClient();
+        
+        PagedIterable<DatasetVersion> items = datasetsClient.listLatestDatasetVersions();
+        for (DatasetVersion item : items) {
+            System.out.println(item);
+        }
+        """,
+    }
+  ]
+);
+
+@@extension(
+  Azure.AI.Projects.Datasets.listVersions,
+  "x-codeSamples",
+  #[
+    #{
+      lang: "curl",
+      label: "cURL",
+      source: """
+        curl -X "GET" \\
+        "$FOUNDRY_PROJECT_ENDPOINT/datasets/<name>/versions?api-version=<api-version>" \\
+          -H "Authorization: Bearer $AZURE_TOKEN"
+        """,
+    },
+    #{
+      lang: "python",
+      label: "Python",
+      source: """
+        import os
+        from azure.identity import DefaultAzureCredential
+        from azure.ai.projects import AIProjectClient
+        
+        endpoint = os.environ["FOUNDRY_PROJECT_ENDPOINT"]
+        credential = DefaultAzureCredential()
+        project_client = AIProjectClient(endpoint=endpoint, credential=credential)
+        
+        for item in project_client.datasets.list_versions(name="<name>"):
+            print(item)
+        """,
+    },
+    #{
+      lang: "csharp",
+      label: ".NET",
+      source: """
+        using System;
+        using Azure.AI.Projects;
+        using Azure.Identity;
+        
+        string endpoint = Environment.GetEnvironmentVariable("FOUNDRY_PROJECT_ENDPOINT")!;
+        AIProjectClient projectClient = new AIProjectClient(new Uri(endpoint), new DefaultAzureCredential());
+        
+        foreach (var item in projectClient.Datasets.GetDatasetVersions("<name>"))
+        {
+            Console.WriteLine(item);
+        }
+        """,
+    },
+    #{
+      lang: "typescript",
+      label: "TypeScript",
+      source: """
+        import { AIProjectClient } from "@azure/ai-projects";
+        import { DefaultAzureCredential } from "@azure/identity";
+        
+        const projectEndpoint = process.env.FOUNDRY_PROJECT_ENDPOINT || "<project endpoint string>";
+        const project = new AIProjectClient(projectEndpoint, new DefaultAzureCredential());
+        
+        for await (const item of project.datasets.listVersions("<name>")) {
+          console.log(item);
+        }
+        """,
+    },
+    #{
+      lang: "java",
+      label: "Java",
+      source: """
+        import com.azure.ai.projects.AIProjectClientBuilder;
+        import com.azure.ai.projects.DatasetsClient;
+        import com.azure.identity.DefaultAzureCredentialBuilder;
+        import com.azure.ai.projects.models.DatasetVersion;
+        import com.azure.core.http.rest.PagedIterable;
+        
+        String endpoint = System.getenv("FOUNDRY_PROJECT_ENDPOINT");
+        DatasetsClient client = new AIProjectClientBuilder().endpoint(endpoint).credential(new DefaultAzureCredentialBuilder().build()).buildDatasetsClient();
+        
+        PagedIterable<DatasetVersion> items = datasetsClient.listDatasetVersions("<name>");
+        for (DatasetVersion item : items) {
+            System.out.println(item);
+        }
+        """,
+    }
+  ]
+);
+
+@@extension(
+  Azure.AI.Projects.Datasets.getVersion,
+  "x-codeSamples",
+  #[
+    #{
+      lang: "curl",
+      label: "cURL",
+      source: """
+        curl -X "GET" \\
+        "$FOUNDRY_PROJECT_ENDPOINT/datasets/<name>/versions/<version>?api-version=<api-version>" \\
+          -H "Authorization: Bearer $AZURE_TOKEN"
+        """,
+    },
+    #{
+      lang: "python",
+      label: "Python",
+      source: """
+        import os
+        from azure.identity import DefaultAzureCredential
+        from azure.ai.projects import AIProjectClient
+        
+        endpoint = os.environ["FOUNDRY_PROJECT_ENDPOINT"]
+        credential = DefaultAzureCredential()
+        project_client = AIProjectClient(endpoint=endpoint, credential=credential)
+        
+        result = project_client.datasets.get(name="<name>", version="<version>")
+        print(result)
+        """,
+    },
+    #{
+      lang: "csharp",
+      label: ".NET",
+      source: """
+        using System;
+        using Azure.AI.Projects;
+        using Azure.Identity;
+        
+        string endpoint = Environment.GetEnvironmentVariable("FOUNDRY_PROJECT_ENDPOINT")!;
+        AIProjectClient projectClient = new AIProjectClient(new Uri(endpoint), new DefaultAzureCredential());
+        
+        var result = projectClient.Datasets.GetDataset("<name>", "<version>");
+        Console.WriteLine(result);
+        """,
+    },
+    #{
+      lang: "typescript",
+      label: "TypeScript",
+      source: """
+        import { AIProjectClient } from "@azure/ai-projects";
+        import { DefaultAzureCredential } from "@azure/identity";
+        
+        const projectEndpoint = process.env.FOUNDRY_PROJECT_ENDPOINT || "<project endpoint string>";
+        const project = new AIProjectClient(projectEndpoint, new DefaultAzureCredential());
+        
+        const result = await project.datasets.get("<name>", "<version>");
+        console.log(result);
+        """,
+    },
+    #{
+      lang: "java",
+      label: "Java",
+      source: """
+        import com.azure.ai.projects.AIProjectClientBuilder;
+        import com.azure.ai.projects.DatasetsClient;
+        import com.azure.identity.DefaultAzureCredentialBuilder;
+        import com.azure.ai.projects.models.DatasetVersion;
+        
+        String endpoint = System.getenv("FOUNDRY_PROJECT_ENDPOINT");
+        DatasetsClient client = new AIProjectClientBuilder().endpoint(endpoint).credential(new DefaultAzureCredentialBuilder().build()).buildDatasetsClient();
+        
+        DatasetVersion result = datasetsClient.getDatasetVersion("<name>", "<version>");
+        System.out.println(result);
+        """,
+    }
+  ]
+);
+
+@@extension(
+  Azure.AI.Projects.Datasets.deleteVersion,
+  "x-codeSamples",
+  #[
+    #{
+      lang: "curl",
+      label: "cURL",
+      source: """
+        curl -X "DELETE" \\
+        "$FOUNDRY_PROJECT_ENDPOINT/datasets/<name>/versions/<version>?api-version=<api-version>" \\
+          -H "Authorization: Bearer $AZURE_TOKEN"
+        """,
+    },
+    #{
+      lang: "python",
+      label: "Python",
+      source: """
+        import os
+        from azure.identity import DefaultAzureCredential
+        from azure.ai.projects import AIProjectClient
+        
+        endpoint = os.environ["FOUNDRY_PROJECT_ENDPOINT"]
+        credential = DefaultAzureCredential()
+        project_client = AIProjectClient(endpoint=endpoint, credential=credential)
+        
+        result = project_client.datasets.delete(name="<name>", version="<version>")
+        print(result)
+        """,
+    },
+    #{
+      lang: "csharp",
+      label: ".NET",
+      source: """
+        using System;
+        using Azure.AI.Projects;
+        using Azure.Identity;
+        
+        string endpoint = Environment.GetEnvironmentVariable("FOUNDRY_PROJECT_ENDPOINT")!;
+        AIProjectClient projectClient = new AIProjectClient(new Uri(endpoint), new DefaultAzureCredential());
+        
+        projectClient.Datasets.Delete("<name>", "<version>");
+        Console.WriteLine("Operation completed.");
+        """,
+    },
+    #{
+      lang: "typescript",
+      label: "TypeScript",
+      source: """
+        import { AIProjectClient } from "@azure/ai-projects";
+        import { DefaultAzureCredential } from "@azure/identity";
+        
+        const projectEndpoint = process.env.FOUNDRY_PROJECT_ENDPOINT || "<project endpoint string>";
+        const project = new AIProjectClient(projectEndpoint, new DefaultAzureCredential());
+        
+        const result = await project.datasets.delete("<name>", "<version>");
+        console.log(result);
+        """,
+    },
+    #{
+      lang: "java",
+      label: "Java",
+      source: """
+        import com.azure.ai.projects.AIProjectClientBuilder;
+        import com.azure.ai.projects.DatasetsClient;
+        import com.azure.identity.DefaultAzureCredentialBuilder;
+        
+        String endpoint = System.getenv("FOUNDRY_PROJECT_ENDPOINT");
+        DatasetsClient client = new AIProjectClientBuilder().endpoint(endpoint).credential(new DefaultAzureCredentialBuilder().build()).buildDatasetsClient();
+        
+        datasetsClient.deleteDatasetVersion("<name>", "<version>");
+        System.out.println("Operation completed.");
+        """,
+    }
+  ]
+);
+
+@@extension(
+  Azure.AI.Projects.Datasets.createOrUpdateVersion,
+  "x-codeSamples",
+  #[
+    #{
+      lang: "curl",
+      label: "cURL",
+      source: """
+        curl -X "PATCH" \\
+        "$FOUNDRY_PROJECT_ENDPOINT/datasets/<name>/versions/<version>?api-version=<api-version>" \\
+          -H "Authorization: Bearer $AZURE_TOKEN" \\
+          -H "Content-Type: application/merge-patch+json" \\
+          -d "{}"
+        """,
+    },
+    #{
+      lang: "python",
+      label: "Python",
+      source: """
+        import os
+        from azure.identity import DefaultAzureCredential
+        from azure.ai.projects import AIProjectClient
+        
+        endpoint = os.environ["FOUNDRY_PROJECT_ENDPOINT"]
+        credential = DefaultAzureCredential()
+        project_client = AIProjectClient(endpoint=endpoint, credential=credential)
+        
+        result = project_client.datasets.create_or_update(name="<name>", version="<version>", dataset_version={})
+        print(result)
+        """,
+    },
+    #{
+      lang: "csharp",
+      label: ".NET",
+      source: """
+        using System;
+        using System.ClientModel.Primitives;
+        using Azure.AI.Projects;
+        using Azure.Identity;
+        
+        string endpoint = Environment.GetEnvironmentVariable("FOUNDRY_PROJECT_ENDPOINT")!;
+        AIProjectClient projectClient = new AIProjectClient(new Uri(endpoint), new DefaultAzureCredential());
+        
+        var result = projectClient.Datasets.CreateOrUpdate("<name>", "<version>", BinaryContent.Create(BinaryData.FromString("{}")));
+        Console.WriteLine(result);
+        """,
+    },
+    #{
+      lang: "typescript",
+      label: "TypeScript",
+      source: """
+        import { AIProjectClient } from "@azure/ai-projects";
+        import { DefaultAzureCredential } from "@azure/identity";
+        import type { DatasetVersionUnion } from "@azure/ai-projects";
+        
+        const projectEndpoint = process.env.FOUNDRY_PROJECT_ENDPOINT || "<project endpoint string>";
+        const project = new AIProjectClient(projectEndpoint, new DefaultAzureCredential());
+        
+        const result = await project.datasets.createOrUpdate("<name>", "<version>", {} as DatasetVersionUnion);
+        console.log(result);
+        """,
+    },
+    #{
+      lang: "java",
+      label: "Java",
+      source: """
+        import com.azure.ai.projects.AIProjectClientBuilder;
+        import com.azure.ai.projects.DatasetsClient;
+        import com.azure.identity.DefaultAzureCredentialBuilder;
+        import com.azure.ai.projects.models.DatasetVersion;
+        import com.azure.ai.projects.models.FileDatasetVersion;
+        
+        String endpoint = System.getenv("FOUNDRY_PROJECT_ENDPOINT");
+        DatasetsClient client = new AIProjectClientBuilder().endpoint(endpoint).credential(new DefaultAzureCredentialBuilder().build()).buildDatasetsClient();
+        
+        DatasetVersion result = datasetsClient.createOrUpdateDatasetVersion("<name>", "<version>", new FileDatasetVersion());
+        System.out.println(result);
+        """,
+    }
+  ]
+);
+
+@@extension(
   Azure.AI.Projects.Datasets.getCredentials,
   "x-codeSamples",
   #[
