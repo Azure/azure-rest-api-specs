@@ -50,7 +50,60 @@
                   "switchName": "vmanagement",
                   "switchType": "External"
                 }
-              ]
+              ],
+              "hostNetwork": {
+                "enableStorageAutoIp": false,
+                "intents": [
+                  {
+                    "adapterPropertyOverrides": {
+                      "jumboPacket": null,
+                      "networkDirect": "0",
+                      "networkDirectTechnology": null
+                    },
+                    "intentAdapters": [
+                      "ethernet",
+                      "ethernet2"
+                    ],
+                    "intentName": "managementcomputestorage",
+                    "intentType": 14,
+                    "isComputeIntentSet": true,
+                    "isManagementIntentSet": true,
+                    "isNetworkIntentType": true,
+                    "isOnlyStorage": false,
+                    "isOnlyStretch": false,
+                    "isStorageIntentSet": true,
+                    "isStretchIntentSet": false,
+                    "overrideAdapterProperty": true,
+                    "overrideQosPolicy": true,
+                    "overrideVirtualSwitchConfiguration": true,
+                    "qosPolicyOverrides": {
+                      "bandwidthPercentage_SMB": null,
+                      "priorityValue8021Action_Cluster": null,
+                      "priorityValue8021Action_SMB": null
+                    },
+                    "scope": 0,
+                    "virtualSwitchConfigurationOverrides": {
+                      "enableIov": "True",
+                      "loadBalancingAlgorithm": "HyperVPort"
+                    }
+                  }
+                ],
+                "storageConnectivitySwitchless": false,
+                "storageNetworks": [
+                  {
+                    "name": "StorageIntent1",
+                    "networkAdapterName": "ethernet",
+                    "storageAdapterIPInfo": [
+                      {
+                        "ipv4Address": "192.168.120.192",
+                        "physicalNode": "v-host1",
+                        "subnetMask": "255.255.244.0"
+                      }
+                    ],
+                    "storageVlanId": "8"
+                  }
+                ]
+              }
             },
             "osProfile": {
               "bootType": "UEFI",
@@ -152,7 +205,60 @@
                   "switchName": "vmanagement",
                   "switchType": "External"
                 }
-              ]
+              ],
+              "hostNetwork": {
+                "enableStorageAutoIp": false,
+                "intents": [
+                  {
+                    "adapterPropertyOverrides": {
+                      "jumboPacket": null,
+                      "networkDirect": "0",
+                      "networkDirectTechnology": null
+                    },
+                    "intentAdapters": [
+                      "ethernet",
+                      "ethernet2"
+                    ],
+                    "intentName": "managementcomputestorage",
+                    "intentType": 14,
+                    "isComputeIntentSet": true,
+                    "isManagementIntentSet": true,
+                    "isNetworkIntentType": true,
+                    "isOnlyStorage": false,
+                    "isOnlyStretch": false,
+                    "isStorageIntentSet": true,
+                    "isStretchIntentSet": false,
+                    "overrideAdapterProperty": true,
+                    "overrideQosPolicy": true,
+                    "overrideVirtualSwitchConfiguration": true,
+                    "qosPolicyOverrides": {
+                      "bandwidthPercentage_SMB": null,
+                      "priorityValue8021Action_Cluster": null,
+                      "priorityValue8021Action_SMB": null
+                    },
+                    "scope": 0,
+                    "virtualSwitchConfigurationOverrides": {
+                      "enableIov": "True",
+                      "loadBalancingAlgorithm": "HyperVPort"
+                    }
+                  }
+                ],
+                "storageConnectivitySwitchless": false,
+                "storageNetworks": [
+                  {
+                    "name": "StorageIntent1",
+                    "networkAdapterName": "ethernet",
+                    "storageAdapterIPInfo": [
+                      {
+                        "ipv4Address": "192.168.120.192",
+                        "physicalNode": "v-host1",
+                        "subnetMask": "255.255.244.0"
+                      }
+                    ],
+                    "storageVlanId": "8"
+                  }
+                ]
+              }
             },
             "osProfile": {
               "bootType": "UEFI",

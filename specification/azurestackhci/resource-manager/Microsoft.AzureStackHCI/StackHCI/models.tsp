@@ -7359,6 +7359,13 @@ model EdgeMachineNetworkProfile {
   @visibility(Lifecycle.Read)
   @Azure.ResourceManager.identifiers(#["switchName"])
   switchDetails?: SwitchDetail[];
+
+  /**
+   * HostNetwork config to deploy AzureStackHCI Cluster.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_10_15_preview)
+  hostNetwork?: HciEdgeDeviceHostNetwork;
 }
 
 /**
