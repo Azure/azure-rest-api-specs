@@ -12215,6 +12215,13 @@ model FirewallPolicyPropertiesFormat {
    * The Firewall Policy SKU.
    */
   sku?: FirewallPolicySku;
+
+  /**
+   * Indicates that the Firewall Policy is managed by AFC (Azure Firewall for Containers). When set, the policy is treated as read-only for callers that do not supply the AFC-managed sync marker on write operations.
+   */
+  @added(Versions.v2025_09_01)
+  @visibility(Lifecycle.Read)
+  afcManaged?: boolean;
 }
 
 /**
