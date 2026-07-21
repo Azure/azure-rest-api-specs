@@ -1,0 +1,43 @@
+emit:
+  - "@azure-tools/typespec-autorest"
+parameters:
+  "service-dir":
+    default: "sdk/networksecurity"
+options:
+  "@azure-tools/typespec-autorest":
+    use-read-only-status-schema: true
+    emitter-output-dir: "{project-root}"
+    output-file: "{emitter-output-dir}/{version-status}/{version}/agentFabric.json"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.NetworkSecurity"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-networksecurity"
+    namespace: "azure.mgmt.networksecurity"
+    generate-test: true
+    generate-sample: true
+    flavor: azure
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-networksecurity"
+    namespace: "com.azure.resourcemanager.networksecurity"
+    service-name: "networksecurity"
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-networksecurity"
+    experimental-extensible-enums: true
+    flavor: azure
+    package-details:
+      name: "@azure/arm-networksecurity"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/networksecurity"
+    emitter-output-dir: "{output-dir}/{service-dir}/armnetworksecurity"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armnetworksecurity"
+    fix-const-stuttering: true
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"

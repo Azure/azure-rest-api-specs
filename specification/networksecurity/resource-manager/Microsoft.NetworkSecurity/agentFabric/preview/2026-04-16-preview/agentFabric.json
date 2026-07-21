@@ -1,0 +1,2587 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.NetworkSecurity management service",
+    "version": "2026-04-16-preview",
+    "description": "Microsoft.NetworkSecurity Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "AgentFabrics"
+    },
+    {
+      "name": "Members"
+    },
+    {
+      "name": "PolicyGroups"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.NetworkSecurity/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NetworkSecurity/agentFabrics": {
+      "get": {
+        "operationId": "AgentFabrics_ListBySubscription",
+        "tags": [
+          "AgentFabrics"
+        ],
+        "description": "List AgentFabric resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AgentFabricListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AgentFabrics_ListBySubscription": {
+            "$ref": "./examples/AgentFabrics_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NetworkSecurity/policyGroups": {
+      "get": {
+        "operationId": "PolicyGroups_ListBySubscription",
+        "tags": [
+          "PolicyGroups"
+        ],
+        "description": "List PolicyGroup resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PolicyGroupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PolicyGroups_ListBySubscription": {
+            "$ref": "./examples/PolicyGroups_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkSecurity/agentFabrics": {
+      "get": {
+        "operationId": "AgentFabrics_ListByResourceGroup",
+        "tags": [
+          "AgentFabrics"
+        ],
+        "description": "List AgentFabric resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AgentFabricListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AgentFabrics_ListByResourceGroup": {
+            "$ref": "./examples/AgentFabrics_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkSecurity/agentFabrics/{agentFabricName}": {
+      "get": {
+        "operationId": "AgentFabrics_Get",
+        "tags": [
+          "AgentFabrics"
+        ],
+        "description": "Get a AgentFabric",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "agentFabricName",
+            "in": "path",
+            "description": "The name of the AgentFabric",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AgentFabric"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AgentFabrics_Get": {
+            "$ref": "./examples/AgentFabrics_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AgentFabrics_CreateOrUpdate",
+        "tags": [
+          "AgentFabrics"
+        ],
+        "description": "Create a AgentFabric",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "agentFabricName",
+            "in": "path",
+            "description": "The name of the AgentFabric",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AgentFabric"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'AgentFabric' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AgentFabric"
+            }
+          },
+          "201": {
+            "description": "Resource 'AgentFabric' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AgentFabric"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AgentFabrics_CreateOrUpdate": {
+            "$ref": "./examples/AgentFabrics_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "AgentFabrics_Update",
+        "tags": [
+          "AgentFabrics"
+        ],
+        "description": "Update a AgentFabric",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "agentFabricName",
+            "in": "path",
+            "description": "The name of the AgentFabric",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AgentFabricTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AgentFabric"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AgentFabrics_Update": {
+            "$ref": "./examples/AgentFabrics_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "AgentFabrics_Delete",
+        "tags": [
+          "AgentFabrics"
+        ],
+        "description": "Delete a AgentFabric",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "agentFabricName",
+            "in": "path",
+            "description": "The name of the AgentFabric",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AgentFabrics_Delete": {
+            "$ref": "./examples/AgentFabrics_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkSecurity/agentFabrics/{agentFabricName}/members": {
+      "get": {
+        "operationId": "Members_ListByParent",
+        "tags": [
+          "Members"
+        ],
+        "description": "List Member resources by AgentFabric",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "agentFabricName",
+            "in": "path",
+            "description": "The name of the AgentFabric",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MemberListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Members_ListByParent": {
+            "$ref": "./examples/Members_ListByParent.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkSecurity/agentFabrics/{agentFabricName}/members/{memberName}": {
+      "get": {
+        "operationId": "Members_Get",
+        "tags": [
+          "Members"
+        ],
+        "description": "Get a Member",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "agentFabricName",
+            "in": "path",
+            "description": "The name of the AgentFabric",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "memberName",
+            "in": "path",
+            "description": "The name of the Member",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Member"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Members_Get": {
+            "$ref": "./examples/Members_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Members_CreateOrUpdate",
+        "tags": [
+          "Members"
+        ],
+        "description": "Create a Member",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "agentFabricName",
+            "in": "path",
+            "description": "The name of the AgentFabric",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "memberName",
+            "in": "path",
+            "description": "The name of the Member",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Member"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Member' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Member"
+            }
+          },
+          "201": {
+            "description": "Resource 'Member' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Member"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Members_CreateOrUpdate": {
+            "$ref": "./examples/Members_CreateOrUpdate.json"
+          },
+          "Members_CreateOrUpdate_AgentFabricSandbox": {
+            "$ref": "./examples/Members_CreateOrUpdate_AgentFabricSandbox.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Members_Delete",
+        "tags": [
+          "Members"
+        ],
+        "description": "Delete a Member",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "agentFabricName",
+            "in": "path",
+            "description": "The name of the AgentFabric",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "memberName",
+            "in": "path",
+            "description": "The name of the Member",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Members_Delete": {
+            "$ref": "./examples/Members_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkSecurity/policyGroups": {
+      "get": {
+        "operationId": "PolicyGroups_ListByResourceGroup",
+        "tags": [
+          "PolicyGroups"
+        ],
+        "description": "List PolicyGroup resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PolicyGroupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PolicyGroups_ListByResourceGroup": {
+            "$ref": "./examples/PolicyGroups_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkSecurity/policyGroups/{policyGroupName}": {
+      "get": {
+        "operationId": "PolicyGroups_Get",
+        "tags": [
+          "PolicyGroups"
+        ],
+        "description": "Get a PolicyGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "policyGroupName",
+            "in": "path",
+            "description": "The name of the PolicyGroup",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PolicyGroup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PolicyGroups_Get": {
+            "$ref": "./examples/PolicyGroups_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "PolicyGroups_CreateOrUpdate",
+        "tags": [
+          "PolicyGroups"
+        ],
+        "description": "Create a PolicyGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "policyGroupName",
+            "in": "path",
+            "description": "The name of the PolicyGroup",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PolicyGroup"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'PolicyGroup' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PolicyGroup"
+            }
+          },
+          "201": {
+            "description": "Resource 'PolicyGroup' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PolicyGroup"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PolicyGroups_CreateOrUpdate": {
+            "$ref": "./examples/PolicyGroups_CreateOrUpdate.json"
+          },
+          "PolicyGroups_CreateOrUpdate_ContentInspection": {
+            "$ref": "./examples/PolicyGroups_CreateOrUpdate_ContentInspection.json"
+          },
+          "PolicyGroups_CreateOrUpdate_Mcp": {
+            "$ref": "./examples/PolicyGroups_CreateOrUpdate_Mcp.json"
+          },
+          "PolicyGroups_CreateOrUpdate_TlsInspection": {
+            "$ref": "./examples/PolicyGroups_CreateOrUpdate_TlsInspection.json"
+          },
+          "PolicyGroups_CreateOrUpdate_UrlFiltering": {
+            "$ref": "./examples/PolicyGroups_CreateOrUpdate_UrlFiltering.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "PolicyGroups_Update",
+        "tags": [
+          "PolicyGroups"
+        ],
+        "description": "Update a PolicyGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "policyGroupName",
+            "in": "path",
+            "description": "The name of the PolicyGroup",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PolicyGroupTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PolicyGroup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PolicyGroups_Update": {
+            "$ref": "./examples/PolicyGroups_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "PolicyGroups_Delete",
+        "tags": [
+          "PolicyGroups"
+        ],
+        "description": "Delete a PolicyGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "policyGroupName",
+            "in": "path",
+            "description": "The name of the PolicyGroup",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PolicyGroups_Delete": {
+            "$ref": "./examples/PolicyGroups_Delete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AgentFabric": {
+      "type": "object",
+      "description": "AgentFabric resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AgentFabricProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "AgentFabricListResult": {
+      "type": "object",
+      "description": "The response of a AgentFabric list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AgentFabric items on this page",
+          "items": {
+            "$ref": "#/definitions/AgentFabric"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AgentFabricProperties": {
+      "type": "object",
+      "description": "AgentFabric properties",
+      "properties": {
+        "defaultPolicyGroups": {
+          "type": "array",
+          "description": "The default policy groups to apply to all members of this fabric.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.NetworkSecurity/policyGroups"
+                }
+              ]
+            }
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "AgentFabricSandboxEndpoint": {
+      "type": "object",
+      "description": "A network endpoint exposed by an Agent Fabric sandbox workload.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the endpoint."
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The port the endpoint listens on."
+        }
+      },
+      "required": [
+        "name",
+        "port"
+      ]
+    },
+    "AgentFabricSandboxImage": {
+      "type": "object",
+      "description": "The container image to run for an Agent Fabric sandbox workload.",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "description": "The image reference URI (e.g., registry/repository:tag)."
+        },
+        "digest": {
+          "type": "string",
+          "description": "The image content digest used to pin an exact image version."
+        },
+        "pullPolicy": {
+          "$ref": "#/definitions/ImagePullPolicy",
+          "description": "The policy controlling when the image is pulled."
+        }
+      },
+      "required": [
+        "uri"
+      ]
+    },
+    "AgentFabricSandboxResources": {
+      "type": "object",
+      "description": "The compute resources allocated to an Agent Fabric sandbox workload.",
+      "properties": {
+        "cpu": {
+          "type": "string",
+          "description": "The amount of CPU to allocate to the workload."
+        },
+        "memory": {
+          "type": "string",
+          "description": "The amount of memory to allocate to the workload."
+        },
+        "disk": {
+          "type": "string",
+          "description": "The amount of disk to allocate to the workload."
+        }
+      },
+      "required": [
+        "cpu",
+        "memory"
+      ]
+    },
+    "AgentFabricSandboxWorkload": {
+      "type": "object",
+      "description": "Agent Fabric sandbox workload configuration.",
+      "properties": {
+        "image": {
+          "$ref": "#/definitions/AgentFabricSandboxImage",
+          "description": "The container image to run for the workload."
+        },
+        "resources": {
+          "$ref": "#/definitions/AgentFabricSandboxResources",
+          "description": "The compute resources allocated to the workload."
+        },
+        "agentIdentity": {
+          "$ref": "#/definitions/AgentIdentity",
+          "description": "The Entra agent identity associated with the workload."
+        },
+        "endpoints": {
+          "type": "array",
+          "description": "The network endpoints exposed by the workload.",
+          "items": {
+            "$ref": "#/definitions/AgentFabricSandboxEndpoint"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "domain": {
+          "type": "string",
+          "description": "The resolvable DNS name assigned to the workload."
+        }
+      },
+      "required": [
+        "image",
+        "resources",
+        "domain"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkloadBase"
+        }
+      ],
+      "x-ms-discriminator-value": "AgentFabricSandbox"
+    },
+    "AgentFabricTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in AgentFabric resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AgentIdentity": {
+      "type": "object",
+      "description": "The Entra agent identity associated with an Agent Fabric sandbox workload.",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "The Azure tenant ID that owns the agent identity."
+        },
+        "agentId": {
+          "type": "string",
+          "description": "The Entra agent ID representing the workload's identity."
+        }
+      },
+      "required": [
+        "tenantId",
+        "agentId"
+      ]
+    },
+    "AzureManagedCaCertificate": {
+      "type": "object",
+      "description": "TLS inspection certificate issued by an Azure-managed certificate authority.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TlsInspectionCertificateBase"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureManagedCA"
+    },
+    "ContentInspectionPolicy": {
+      "type": "object",
+      "description": "Content inspection network security policy.",
+      "properties": {
+        "source": {
+          "$ref": "#/definitions/ContentInspectionPolicySource",
+          "description": "The source details for the policy."
+        },
+        "promptInjectionProtection": {
+          "$ref": "#/definitions/PromptInjectionProtection",
+          "description": "The prompt injection protection configuration."
+        }
+      },
+      "required": [
+        "source"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/NetworkSecurityPolicyBase"
+        }
+      ],
+      "x-ms-discriminator-value": "ContentInspection"
+    },
+    "ContentInspectionPolicyAddressPrefixesSource": {
+      "type": "object",
+      "description": "Selects content inspection sources by IP address prefixes.",
+      "properties": {
+        "prefixes": {
+          "type": "array",
+          "description": "The IP address prefixes, in CIDR notation, that identify the source(s).",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "prefixes"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ContentInspectionPolicySource"
+        }
+      ],
+      "x-ms-discriminator-value": "AddressPrefixes"
+    },
+    "ContentInspectionPolicySource": {
+      "type": "object",
+      "description": "Selects the source(s) that a content inspection policy applies to.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ContentInspectionPolicySourceType",
+          "description": "The type of source selector."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "ContentInspectionPolicySourceType": {
+      "type": "string",
+      "description": "The type of source selector for a content inspection policy.",
+      "enum": [
+        "WorkloadIdPatterns",
+        "AddressPrefixes"
+      ],
+      "x-ms-enum": {
+        "name": "ContentInspectionPolicySourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "WorkloadIdPatterns",
+            "value": "WorkloadIdPatterns",
+            "description": "Select sources by workload ID patterns."
+          },
+          {
+            "name": "AddressPrefixes",
+            "value": "AddressPrefixes",
+            "description": "Select sources by IP address prefixes in CIDR notation."
+          }
+        ]
+      }
+    },
+    "ContentInspectionPolicyWorkloadIdPatternsSource": {
+      "type": "object",
+      "description": "Selects content inspection sources by workload ID patterns.",
+      "properties": {
+        "patterns": {
+          "type": "array",
+          "description": "The workload ID patterns that identify the source(s).",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "patterns"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ContentInspectionPolicySource"
+        }
+      ],
+      "x-ms-discriminator-value": "WorkloadIdPatterns"
+    },
+    "ContentInspectionSensitivity": {
+      "type": "string",
+      "description": "The sensitivity level of content inspection.",
+      "enum": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "x-ms-enum": {
+        "name": "ContentInspectionSensitivity",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Low",
+            "value": "Low",
+            "description": "Low sensitivity."
+          },
+          {
+            "name": "Medium",
+            "value": "Medium",
+            "description": "Medium sensitivity."
+          },
+          {
+            "name": "High",
+            "value": "High",
+            "description": "High sensitivity."
+          }
+        ]
+      }
+    },
+    "FoundryWorkload": {
+      "type": "object",
+      "description": "Foundry workload configuration.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The ARM resource ID of the Foundry resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkloadBase"
+        }
+      ],
+      "x-ms-discriminator-value": "Foundry"
+    },
+    "FqdnFilteringAddressPrefixesSource": {
+      "type": "object",
+      "description": "Selects FQDN filtering sources by IP address prefixes.",
+      "properties": {
+        "prefixes": {
+          "type": "array",
+          "description": "The IP address prefixes, in CIDR notation, that identify the source(s).",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "prefixes"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/FqdnFilteringSource"
+        }
+      ],
+      "x-ms-discriminator-value": "AddressPrefixes"
+    },
+    "FqdnFilteringDestination": {
+      "type": "object",
+      "description": "Selects the destination(s) that an FQDN filtering policy applies to.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/FqdnFilteringDestinationType",
+          "description": "The type of destination selector."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "FqdnFilteringDestinationType": {
+      "type": "string",
+      "description": "The type of destination selector for an FQDN filtering policy.",
+      "enum": [
+        "Fqdns"
+      ],
+      "x-ms-enum": {
+        "name": "FqdnFilteringDestinationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Fqdns",
+            "value": "Fqdns",
+            "description": "Select destinations by fully qualified domain names."
+          }
+        ]
+      }
+    },
+    "FqdnFilteringFqdnsDestination": {
+      "type": "object",
+      "description": "Selects FQDN filtering destinations by fully qualified domain names.",
+      "properties": {
+        "fqdns": {
+          "type": "array",
+          "description": "The fully qualified domain names that identify the destination(s).",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "fqdns"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/FqdnFilteringDestination"
+        }
+      ],
+      "x-ms-discriminator-value": "Fqdns"
+    },
+    "FqdnFilteringPolicy": {
+      "type": "object",
+      "description": "FQDN filtering network security policy.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the policy."
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The priority of the policy."
+        },
+        "direction": {
+          "$ref": "#/definitions/PolicyDirection",
+          "description": "The direction of traffic for the policy."
+        },
+        "ports": {
+          "type": "array",
+          "description": "The ports for the policy.",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "source": {
+          "$ref": "#/definitions/FqdnFilteringSource",
+          "description": "The source details for the policy."
+        },
+        "destination": {
+          "$ref": "#/definitions/FqdnFilteringDestination",
+          "description": "The destination details for the policy."
+        }
+      },
+      "required": [
+        "source"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/NetworkSecurityPolicyBase"
+        }
+      ],
+      "x-ms-discriminator-value": "FqdnFiltering"
+    },
+    "FqdnFilteringSource": {
+      "type": "object",
+      "description": "Selects the source(s) that an FQDN filtering policy applies to.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/FqdnFilteringSourceType",
+          "description": "The type of source selector."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "FqdnFilteringSourceType": {
+      "type": "string",
+      "description": "The type of source selector for an FQDN filtering policy.",
+      "enum": [
+        "WorkloadIdPatterns",
+        "AddressPrefixes"
+      ],
+      "x-ms-enum": {
+        "name": "FqdnFilteringSourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "WorkloadIdPatterns",
+            "value": "WorkloadIdPatterns",
+            "description": "Select sources by workload ID patterns."
+          },
+          {
+            "name": "AddressPrefixes",
+            "value": "AddressPrefixes",
+            "description": "Select sources by IP address prefixes in CIDR notation."
+          }
+        ]
+      }
+    },
+    "FqdnFilteringWorkloadIdPatternsSource": {
+      "type": "object",
+      "description": "Selects FQDN filtering sources by workload ID patterns.",
+      "properties": {
+        "patterns": {
+          "type": "array",
+          "description": "The workload ID patterns that identify the source(s).",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "patterns"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/FqdnFilteringSource"
+        }
+      ],
+      "x-ms-discriminator-value": "WorkloadIdPatterns"
+    },
+    "HttpMethod": {
+      "type": "string",
+      "description": "The HTTP method matched by a URL filtering rule.",
+      "enum": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE",
+        "PATCH",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "x-ms-enum": {
+        "name": "HttpMethod",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Get",
+            "value": "GET",
+            "description": "HTTP GET method."
+          },
+          {
+            "name": "Post",
+            "value": "POST",
+            "description": "HTTP POST method."
+          },
+          {
+            "name": "Put",
+            "value": "PUT",
+            "description": "HTTP PUT method."
+          },
+          {
+            "name": "Delete",
+            "value": "DELETE",
+            "description": "HTTP DELETE method."
+          },
+          {
+            "name": "Patch",
+            "value": "PATCH",
+            "description": "HTTP PATCH method."
+          },
+          {
+            "name": "Head",
+            "value": "HEAD",
+            "description": "HTTP HEAD method."
+          },
+          {
+            "name": "Options",
+            "value": "OPTIONS",
+            "description": "HTTP OPTIONS method."
+          }
+        ]
+      }
+    },
+    "ImagePullPolicy": {
+      "type": "string",
+      "description": "The image pull policy for a sandbox workload container image.",
+      "enum": [
+        "Always",
+        "IfNotPresent"
+      ],
+      "x-ms-enum": {
+        "name": "ImagePullPolicy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Always",
+            "value": "Always",
+            "description": "Always pull the image."
+          },
+          {
+            "name": "IfNotPresent",
+            "value": "IfNotPresent",
+            "description": "Pull the image only if it is not already present on the host."
+          }
+        ]
+      }
+    },
+    "McpPolicy": {
+      "type": "object",
+      "description": "MCP server network security policy.",
+      "properties": {
+        "defaultAction": {
+          "$ref": "#/definitions/PolicyAction",
+          "description": "The default action to take when no rule in the policy matches."
+        },
+        "source": {
+          "$ref": "#/definitions/McpPolicySource",
+          "description": "The source(s) that this policy applies to."
+        },
+        "destination": {
+          "$ref": "#/definitions/McpPolicyDestination",
+          "description": "The MCP server(s) that this policy applies to."
+        },
+        "rules": {
+          "type": "array",
+          "description": "The list of MCP rules.",
+          "items": {
+            "$ref": "#/definitions/McpRule"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "defaultAction",
+        "source",
+        "destination",
+        "rules"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/NetworkSecurityPolicyBase"
+        }
+      ],
+      "x-ms-discriminator-value": "Mcp"
+    },
+    "McpPolicyAddressPrefixesDestination": {
+      "type": "object",
+      "description": "Selects MCP policy destinations by IP address prefixes.",
+      "properties": {
+        "prefixes": {
+          "type": "array",
+          "description": "The IP address prefixes, in CIDR notation, that identify the destination(s).",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "prefixes"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/McpPolicyDestination"
+        }
+      ],
+      "x-ms-discriminator-value": "AddressPrefixes"
+    },
+    "McpPolicyAddressPrefixesSource": {
+      "type": "object",
+      "description": "Selects MCP policy sources by IP address prefixes.",
+      "properties": {
+        "prefixes": {
+          "type": "array",
+          "description": "The IP address prefixes, in CIDR notation, that identify the source(s).",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "prefixes"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/McpPolicySource"
+        }
+      ],
+      "x-ms-discriminator-value": "AddressPrefixes"
+    },
+    "McpPolicyDestination": {
+      "type": "object",
+      "description": "Selects the MCP server(s) that an MCP policy applies to.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/McpPolicyDestinationType",
+          "description": "The type of destination selector."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "McpPolicyDestinationType": {
+      "type": "string",
+      "description": "The type of destination selector for an MCP policy.",
+      "enum": [
+        "WorkloadIdPatterns",
+        "AddressPrefixes",
+        "Fqdns"
+      ],
+      "x-ms-enum": {
+        "name": "McpPolicyDestinationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "WorkloadIdPatterns",
+            "value": "WorkloadIdPatterns",
+            "description": "Select destinations by workload ID patterns."
+          },
+          {
+            "name": "AddressPrefixes",
+            "value": "AddressPrefixes",
+            "description": "Select destinations by IP address prefixes in CIDR notation."
+          },
+          {
+            "name": "Fqdns",
+            "value": "Fqdns",
+            "description": "Select destinations by fully qualified domain names."
+          }
+        ]
+      }
+    },
+    "McpPolicyFqdnsDestination": {
+      "type": "object",
+      "description": "Selects MCP policy destinations by fully qualified domain names.",
+      "properties": {
+        "fqdns": {
+          "type": "array",
+          "description": "The fully qualified domain names that identify the destination(s).",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "fqdns"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/McpPolicyDestination"
+        }
+      ],
+      "x-ms-discriminator-value": "Fqdns"
+    },
+    "McpPolicySource": {
+      "type": "object",
+      "description": "Selects the source(s) that an MCP policy applies to.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/McpPolicySourceType",
+          "description": "The type of source selector."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "McpPolicySourceType": {
+      "type": "string",
+      "description": "The type of source selector for an MCP policy.",
+      "enum": [
+        "WorkloadIdPatterns",
+        "AddressPrefixes"
+      ],
+      "x-ms-enum": {
+        "name": "McpPolicySourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "WorkloadIdPatterns",
+            "value": "WorkloadIdPatterns",
+            "description": "Select sources by workload ID patterns."
+          },
+          {
+            "name": "AddressPrefixes",
+            "value": "AddressPrefixes",
+            "description": "Select sources by IP address prefixes in CIDR notation."
+          }
+        ]
+      }
+    },
+    "McpPolicyWorkloadIdPatternsDestination": {
+      "type": "object",
+      "description": "Selects MCP policy destinations by workload ID patterns.",
+      "properties": {
+        "patterns": {
+          "type": "array",
+          "description": "The workload ID patterns that identify the destination(s).",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "patterns"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/McpPolicyDestination"
+        }
+      ],
+      "x-ms-discriminator-value": "WorkloadIdPatterns"
+    },
+    "McpPolicyWorkloadIdPatternsSource": {
+      "type": "object",
+      "description": "Selects MCP policy sources by workload ID patterns.",
+      "properties": {
+        "patterns": {
+          "type": "array",
+          "description": "The workload ID patterns that identify the source(s).",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "patterns"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/McpPolicySource"
+        }
+      ],
+      "x-ms-discriminator-value": "WorkloadIdPatterns"
+    },
+    "McpRule": {
+      "type": "object",
+      "description": "A single rule within an MCP policy.",
+      "properties": {
+        "action": {
+          "$ref": "#/definitions/PolicyAction",
+          "description": "The action to take for the specified MCP tools."
+        },
+        "tools": {
+          "type": "array",
+          "description": "The MCP tool names that the rule applies to.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "action",
+        "tools"
+      ]
+    },
+    "Member": {
+      "type": "object",
+      "description": "Member resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MemberProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "MemberListResult": {
+      "type": "object",
+      "description": "The response of a Member list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Member items on this page",
+          "items": {
+            "$ref": "#/definitions/Member"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "MemberProperties": {
+      "type": "object",
+      "description": "Member properties",
+      "properties": {
+        "workload": {
+          "$ref": "#/definitions/WorkloadBase",
+          "description": "The workload configuration of the member."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "NetworkSecurityPolicyBase": {
+      "type": "object",
+      "description": "Base network security policy configuration.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/NetworkSecurityPolicyType",
+          "description": "The network security policy type."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "NetworkSecurityPolicyType": {
+      "type": "string",
+      "description": "The type of network security policy.",
+      "enum": [
+        "FqdnFiltering",
+        "UrlFiltering",
+        "Mcp",
+        "TlsInspection",
+        "ContentInspection"
+      ],
+      "x-ms-enum": {
+        "name": "NetworkSecurityPolicyType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "FqdnFiltering",
+            "value": "FqdnFiltering",
+            "description": "FQDN filtering policy type."
+          },
+          {
+            "name": "UrlFiltering",
+            "value": "UrlFiltering",
+            "description": "URL filtering policy type."
+          },
+          {
+            "name": "Mcp",
+            "value": "Mcp",
+            "description": "MCP server policy type."
+          },
+          {
+            "name": "TlsInspection",
+            "value": "TlsInspection",
+            "description": "TLS inspection policy type."
+          },
+          {
+            "name": "ContentInspection",
+            "value": "ContentInspection",
+            "description": "Content inspection policy type."
+          }
+        ]
+      }
+    },
+    "PolicyAction": {
+      "type": "string",
+      "description": "The action to take when a network security policy or rule matches traffic.",
+      "enum": [
+        "Allow",
+        "Deny"
+      ],
+      "x-ms-enum": {
+        "name": "PolicyAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Allow",
+            "value": "Allow",
+            "description": "Allow the matching traffic."
+          },
+          {
+            "name": "Deny",
+            "value": "Deny",
+            "description": "Deny the matching traffic."
+          }
+        ]
+      }
+    },
+    "PolicyDirection": {
+      "type": "string",
+      "description": "The direction of network traffic for a policy.",
+      "enum": [
+        "Outbound",
+        "Inbound",
+        "Both"
+      ],
+      "x-ms-enum": {
+        "name": "PolicyDirection",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Outbound",
+            "value": "Outbound",
+            "description": "Outbound traffic only."
+          },
+          {
+            "name": "Inbound",
+            "value": "Inbound",
+            "description": "Inbound traffic only."
+          },
+          {
+            "name": "Both",
+            "value": "Both",
+            "description": "Both inbound and outbound traffic."
+          }
+        ]
+      }
+    },
+    "PolicyGroup": {
+      "type": "object",
+      "description": "PolicyGroup resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PolicyGroupProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "PolicyGroupListResult": {
+      "type": "object",
+      "description": "The response of a PolicyGroup list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PolicyGroup items on this page",
+          "items": {
+            "$ref": "#/definitions/PolicyGroup"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PolicyGroupProperties": {
+      "type": "object",
+      "description": "PolicyGroup properties.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the policy group."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the policy group."
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The priority of the policy group."
+        },
+        "networkSecurityPolicies": {
+          "type": "array",
+          "description": "The list of network security policies.",
+          "items": {
+            "$ref": "#/definitions/NetworkSecurityPolicyBase"
+          },
+          "x-ms-identifiers": []
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "PolicyGroupTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in PolicyGroup resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PromptInjectionOnDetection": {
+      "type": "string",
+      "description": "The action to take when prompt injection is detected.",
+      "enum": [
+        "BlockAndAlert",
+        "Alert",
+        "Sanitize"
+      ],
+      "x-ms-enum": {
+        "name": "PromptInjectionOnDetection",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "BlockAndAlert",
+            "value": "BlockAndAlert",
+            "description": "Block the request or response and raise an alert."
+          },
+          {
+            "name": "Alert",
+            "value": "Alert",
+            "description": "Raise an alert but allow the request or response to proceed."
+          },
+          {
+            "name": "Sanitize",
+            "value": "Sanitize",
+            "description": "Remove the detected content and allow the request or response to proceed."
+          }
+        ]
+      }
+    },
+    "PromptInjectionProtection": {
+      "type": "object",
+      "description": "Prompt injection protection configuration.",
+      "properties": {
+        "sensitivity": {
+          "$ref": "#/definitions/ContentInspectionSensitivity",
+          "description": "The sensitivity level of prompt injection detection."
+        },
+        "promptLocations": {
+          "type": "array",
+          "description": "The JSONPath expressions selecting the parts of the request body to scan for prompt injection.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "responseLocations": {
+          "type": "array",
+          "description": "The JSONPath expressions selecting the parts of the response body to scan for prompt injection.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "onDetection": {
+          "$ref": "#/definitions/PromptInjectionOnDetection",
+          "description": "The action to take when prompt injection is detected."
+        }
+      },
+      "required": [
+        "onDetection"
+      ]
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state of the resource",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource provisioning succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource provisioning failed"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource provisioning was canceled"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "TlsInspectionCertificateBase": {
+      "type": "object",
+      "description": "Base certificate configuration for a TLS inspection policy.",
+      "properties": {
+        "mode": {
+          "$ref": "#/definitions/TlsInspectionCertificateMode",
+          "description": "The source mode of the TLS inspection certificate."
+        }
+      },
+      "discriminator": "mode",
+      "required": [
+        "mode"
+      ]
+    },
+    "TlsInspectionCertificateMode": {
+      "type": "string",
+      "description": "The source of the certificate used for TLS inspection.",
+      "enum": [
+        "AzureManagedCA"
+      ],
+      "x-ms-enum": {
+        "name": "TlsInspectionCertificateMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureManagedCA",
+            "value": "AzureManagedCA",
+            "description": "Certificate issued by an Azure-managed certificate authority."
+          }
+        ]
+      }
+    },
+    "TlsInspectionPolicy": {
+      "type": "object",
+      "description": "TLS inspection network security policy.",
+      "properties": {
+        "source": {
+          "$ref": "#/definitions/TlsInspectionPolicySource",
+          "description": "The source details for the policy."
+        },
+        "certificate": {
+          "$ref": "#/definitions/TlsInspectionCertificateBase",
+          "description": "The certificate configuration used for TLS inspection."
+        }
+      },
+      "required": [
+        "source",
+        "certificate"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/NetworkSecurityPolicyBase"
+        }
+      ],
+      "x-ms-discriminator-value": "TlsInspection"
+    },
+    "TlsInspectionPolicySource": {
+      "type": "object",
+      "description": "Selects the source(s) that a TLS inspection policy applies to.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/TlsInspectionPolicySourceType",
+          "description": "The type of source selector."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "TlsInspectionPolicySourceType": {
+      "type": "string",
+      "description": "The type of source selector for a TLS inspection policy.",
+      "enum": [
+        "WorkloadIdPatterns"
+      ],
+      "x-ms-enum": {
+        "name": "TlsInspectionPolicySourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "WorkloadIdPatterns",
+            "value": "WorkloadIdPatterns",
+            "description": "Select sources by workload ID patterns."
+          }
+        ]
+      }
+    },
+    "TlsInspectionPolicyWorkloadIdPatternsSource": {
+      "type": "object",
+      "description": "Selects TLS inspection sources by workload ID patterns.",
+      "properties": {
+        "patterns": {
+          "type": "array",
+          "description": "The workload ID patterns that identify the source(s).",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "patterns"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/TlsInspectionPolicySource"
+        }
+      ],
+      "x-ms-discriminator-value": "WorkloadIdPatterns"
+    },
+    "UrlFilteringAddressPrefixesDestination": {
+      "type": "object",
+      "description": "Selects URL filtering destinations by IP address prefixes.",
+      "properties": {
+        "prefixes": {
+          "type": "array",
+          "description": "The IP address prefixes, in CIDR notation, that identify the destination(s).",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "prefixes"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/UrlFilteringDestination"
+        }
+      ],
+      "x-ms-discriminator-value": "AddressPrefixes"
+    },
+    "UrlFilteringAddressPrefixesSource": {
+      "type": "object",
+      "description": "Selects URL filtering sources by IP address prefixes.",
+      "properties": {
+        "prefixes": {
+          "type": "array",
+          "description": "The IP address prefixes, in CIDR notation, that identify the source(s).",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "prefixes"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/UrlFilteringSource"
+        }
+      ],
+      "x-ms-discriminator-value": "AddressPrefixes"
+    },
+    "UrlFilteringDestination": {
+      "type": "object",
+      "description": "Selects the destination(s) that a URL filtering policy applies to.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/UrlFilteringDestinationType",
+          "description": "The type of destination selector."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "UrlFilteringDestinationType": {
+      "type": "string",
+      "description": "The type of destination selector for a URL filtering policy.",
+      "enum": [
+        "WorkloadIdPatterns",
+        "AddressPrefixes",
+        "Fqdns"
+      ],
+      "x-ms-enum": {
+        "name": "UrlFilteringDestinationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "WorkloadIdPatterns",
+            "value": "WorkloadIdPatterns",
+            "description": "Select destinations by workload ID patterns."
+          },
+          {
+            "name": "AddressPrefixes",
+            "value": "AddressPrefixes",
+            "description": "Select destinations by IP address prefixes in CIDR notation."
+          },
+          {
+            "name": "Fqdns",
+            "value": "Fqdns",
+            "description": "Select destinations by fully qualified domain names."
+          }
+        ]
+      }
+    },
+    "UrlFilteringFqdnsDestination": {
+      "type": "object",
+      "description": "Selects URL filtering destinations by fully qualified domain names.",
+      "properties": {
+        "fqdns": {
+          "type": "array",
+          "description": "The fully qualified domain names that identify the destination(s).",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "fqdns"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/UrlFilteringDestination"
+        }
+      ],
+      "x-ms-discriminator-value": "Fqdns"
+    },
+    "UrlFilteringPolicy": {
+      "type": "object",
+      "description": "URL filtering network security policy.",
+      "properties": {
+        "defaultAction": {
+          "$ref": "#/definitions/PolicyAction",
+          "description": "The default action to take when no rule in the policy matches."
+        },
+        "source": {
+          "$ref": "#/definitions/UrlFilteringSource",
+          "description": "The source details for the policy."
+        },
+        "destination": {
+          "$ref": "#/definitions/UrlFilteringDestination",
+          "description": "The destination details for the policy."
+        },
+        "rules": {
+          "type": "array",
+          "description": "The list of URL filtering rules.",
+          "items": {
+            "$ref": "#/definitions/UrlFilteringRule"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      },
+      "required": [
+        "defaultAction",
+        "source",
+        "rules"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/NetworkSecurityPolicyBase"
+        }
+      ],
+      "x-ms-discriminator-value": "UrlFiltering"
+    },
+    "UrlFilteringRule": {
+      "type": "object",
+      "description": "A single rule within a URL filtering policy.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the rule."
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The priority of the rule. Rules are evaluated in ascending priority order."
+        },
+        "hostname": {
+          "type": "string",
+          "description": "The hostname matched by the rule. If omitted, the rule matches any hostname."
+        },
+        "method": {
+          "$ref": "#/definitions/HttpMethod",
+          "description": "The HTTP method matched by the rule. If omitted, the rule matches any method."
+        },
+        "paths": {
+          "type": "array",
+          "description": "The URL paths matched by the rule. If omitted, the rule matches any path.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "action": {
+          "$ref": "#/definitions/PolicyAction",
+          "description": "The action to take when the rule matches."
+        }
+      },
+      "required": [
+        "name",
+        "priority",
+        "action"
+      ]
+    },
+    "UrlFilteringSource": {
+      "type": "object",
+      "description": "Selects the source(s) that a URL filtering policy applies to.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/UrlFilteringSourceType",
+          "description": "The type of source selector."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "UrlFilteringSourceType": {
+      "type": "string",
+      "description": "The type of source selector for a URL filtering policy.",
+      "enum": [
+        "WorkloadIdPatterns",
+        "AddressPrefixes"
+      ],
+      "x-ms-enum": {
+        "name": "UrlFilteringSourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "WorkloadIdPatterns",
+            "value": "WorkloadIdPatterns",
+            "description": "Select sources by workload ID patterns."
+          },
+          {
+            "name": "AddressPrefixes",
+            "value": "AddressPrefixes",
+            "description": "Select sources by IP address prefixes in CIDR notation."
+          }
+        ]
+      }
+    },
+    "UrlFilteringWorkloadIdPatternsDestination": {
+      "type": "object",
+      "description": "Selects URL filtering destinations by workload ID patterns.",
+      "properties": {
+        "patterns": {
+          "type": "array",
+          "description": "The workload ID patterns that identify the destination(s).",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "patterns"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/UrlFilteringDestination"
+        }
+      ],
+      "x-ms-discriminator-value": "WorkloadIdPatterns"
+    },
+    "UrlFilteringWorkloadIdPatternsSource": {
+      "type": "object",
+      "description": "Selects URL filtering sources by workload ID patterns.",
+      "properties": {
+        "patterns": {
+          "type": "array",
+          "description": "The workload ID patterns that identify the source(s).",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "patterns"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/UrlFilteringSource"
+        }
+      ],
+      "x-ms-discriminator-value": "WorkloadIdPatterns"
+    },
+    "WorkloadBase": {
+      "type": "object",
+      "description": "Base workload configuration for a member.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/WorkloadType",
+          "description": "The workload type.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "workloadId": {
+          "type": "string",
+          "description": "The unique identifier assigned to the workload by the resource provider.",
+          "readOnly": true
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "WorkloadType": {
+      "type": "string",
+      "description": "The workload type of a member.",
+      "enum": [
+        "Foundry",
+        "AgentFabricSandbox"
+      ],
+      "x-ms-enum": {
+        "name": "WorkloadType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Foundry",
+            "value": "Foundry",
+            "description": "Foundry workload type"
+          },
+          {
+            "name": "AgentFabricSandbox",
+            "value": "AgentFabricSandbox",
+            "description": "Agent Fabric sandbox workload type"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}

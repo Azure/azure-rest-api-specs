@@ -1,0 +1,142 @@
+{
+  "title": "PolicyGroups_CreateOrUpdate_ContentInspection",
+  "operationId": "PolicyGroups_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2026-04-16-preview",
+    "subscriptionId": "11809CA1-E126-4017-945E-AA795CD5C5A9",
+    "resourceGroupName": "rgnetworksecurity",
+    "policyGroupName": "contentInspectionGroup",
+    "resource": {
+      "location": "eastus",
+      "tags": {
+        "env": "test"
+      },
+      "properties": {
+        "displayName": "Content Inspection Policy Group",
+        "description": "A policy group demonstrating content inspection policies",
+        "priority": 100,
+        "networkSecurityPolicies": [
+          {
+            "type": "ContentInspection",
+            "source": {
+              "type": "WorkloadIdPatterns",
+              "patterns": [
+                "spiffe://contoso.com/ns/default/sa/*"
+              ]
+            },
+            "promptInjectionProtection": {
+              "sensitivity": "High",
+              "promptLocations": [
+                "$.messages[*].content",
+                "$.input"
+              ],
+              "responseLocations": [
+                "$.choices[*].message.content"
+              ],
+              "onDetection": "BlockAndAlert"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "displayName": "Content Inspection Policy Group",
+          "description": "A policy group demonstrating content inspection policies",
+          "priority": 100,
+          "networkSecurityPolicies": [
+            {
+              "type": "ContentInspection",
+              "source": {
+                "type": "WorkloadIdPatterns",
+                "patterns": [
+                  "spiffe://contoso.com/ns/default/sa/*"
+                ]
+              },
+              "promptInjectionProtection": {
+                "sensitivity": "High",
+                "promptLocations": [
+                  "$.messages[*].content",
+                  "$.input"
+                ],
+                "responseLocations": [
+                  "$.choices[*].message.content"
+                ],
+                "onDetection": "BlockAndAlert"
+              }
+            }
+          ],
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/rgnetworksecurity/providers/Microsoft.NetworkSecurity/policyGroups/contentInspectionGroup",
+        "name": "contentInspectionGroup",
+        "type": "Microsoft.NetworkSecurity/policyGroups",
+        "location": "eastus",
+        "tags": {
+          "env": "test"
+        },
+        "systemData": {
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "createdAt": "2025-01-01T00:00:00.000Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-01-01T00:00:00.000Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "displayName": "Content Inspection Policy Group",
+          "description": "A policy group demonstrating content inspection policies",
+          "priority": 100,
+          "networkSecurityPolicies": [
+            {
+              "type": "ContentInspection",
+              "source": {
+                "type": "WorkloadIdPatterns",
+                "patterns": [
+                  "spiffe://contoso.com/ns/default/sa/*"
+                ]
+              },
+              "promptInjectionProtection": {
+                "sensitivity": "High",
+                "promptLocations": [
+                  "$.messages[*].content",
+                  "$.input"
+                ],
+                "responseLocations": [
+                  "$.choices[*].message.content"
+                ],
+                "onDetection": "BlockAndAlert"
+              }
+            }
+          ],
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/rgnetworksecurity/providers/Microsoft.NetworkSecurity/policyGroups/contentInspectionGroup",
+        "name": "contentInspectionGroup",
+        "type": "Microsoft.NetworkSecurity/policyGroups",
+        "location": "eastus",
+        "tags": {
+          "env": "test"
+        },
+        "systemData": {
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "createdAt": "2025-01-01T00:00:00.000Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-01-01T00:00:00.000Z"
+        }
+      }
+    }
+  }
+}

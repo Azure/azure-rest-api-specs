@@ -1,0 +1,130 @@
+{
+  "title": "Members_CreateOrUpdate_AgentFabricSandbox",
+  "operationId": "Members_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2026-04-16-preview",
+    "subscriptionId": "11809CA1-E126-4017-945E-AA795CD5C5A9",
+    "resourceGroupName": "rgnetworksecurity",
+    "agentFabricName": "testAIFabric",
+    "memberName": "sandboxMember",
+    "resource": {
+      "properties": {
+        "workload": {
+          "type": "AgentFabricSandbox",
+          "image": {
+            "uri": "contoso.azurecr.io/agents/sandbox:1.0.0",
+            "digest": "sha256:2c26b46b68ffc68ff99b453c1d30413413422d706483bfa0f98a5e886266e7ae",
+            "pullPolicy": "IfNotPresent"
+          },
+          "resources": {
+            "cpu": "2",
+            "memory": "4Gi",
+            "disk": "20Gi"
+          },
+          "agentIdentity": {
+            "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+            "agentId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+          },
+          "endpoints": [
+            {
+              "name": "http",
+              "port": 8080
+            }
+          ],
+          "domain": "sandbox-member.testaifabric.contoso.com"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "workload": {
+            "type": "AgentFabricSandbox",
+            "workloadId": "abc12345-def6-7890-abcd-ef1234567890",
+            "image": {
+              "uri": "contoso.azurecr.io/agents/sandbox:1.0.0",
+              "digest": "sha256:2c26b46b68ffc68ff99b453c1d30413413422d706483bfa0f98a5e886266e7ae",
+              "pullPolicy": "IfNotPresent"
+            },
+            "resources": {
+              "cpu": "2",
+              "memory": "4Gi",
+              "disk": "20Gi"
+            },
+            "agentIdentity": {
+              "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+              "agentId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+            },
+            "endpoints": [
+              {
+                "name": "http",
+                "port": 8080
+              }
+            ],
+            "domain": "sandbox-member.testaifabric.contoso.com"
+          },
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/rgnetworksecurity/providers/Microsoft.NetworkSecurity/agentFabrics/testAIFabric/members/sandboxMember",
+        "name": "sandboxMember",
+        "type": "Microsoft.NetworkSecurity/agentFabrics/members",
+        "systemData": {
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "createdAt": "2025-01-01T00:00:00.000Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-01-01T00:00:00.000Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "workload": {
+            "type": "AgentFabricSandbox",
+            "workloadId": "abc12345-def6-7890-abcd-ef1234567890",
+            "image": {
+              "uri": "contoso.azurecr.io/agents/sandbox:1.0.0",
+              "digest": "sha256:2c26b46b68ffc68ff99b453c1d30413413422d706483bfa0f98a5e886266e7ae",
+              "pullPolicy": "IfNotPresent"
+            },
+            "resources": {
+              "cpu": "2",
+              "memory": "4Gi",
+              "disk": "20Gi"
+            },
+            "agentIdentity": {
+              "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+              "agentId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+            },
+            "endpoints": [
+              {
+                "name": "http",
+                "port": 8080
+              }
+            ],
+            "domain": "sandbox-member.testaifabric.contoso.com"
+          },
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/rgnetworksecurity/providers/Microsoft.NetworkSecurity/agentFabrics/testAIFabric/members/sandboxMember",
+        "name": "sandboxMember",
+        "type": "Microsoft.NetworkSecurity/agentFabrics/members",
+        "systemData": {
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "createdAt": "2025-01-01T00:00:00.000Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-01-01T00:00:00.000Z"
+        }
+      }
+    }
+  }
+}
