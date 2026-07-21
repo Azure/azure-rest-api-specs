@@ -109,6 +109,16 @@ model ScenarioRunProperties {
   resources: ScenarioRunResource[];
 
   /**
+   * Resources that matched the scenario's target resource types but were excluded
+   * from fault injection by the configuration's resource-targeting filters
+   * (for example zone, location, or explicit exclusions). These resources will not be impacted by the run.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  @identifiers(#["id"])
+  excludedResources?: ScenarioRunResource[];
+
+  /**
    * System or infrastructure errors encountered during the scenario run.
    */
   @visibility(Lifecycle.Read)

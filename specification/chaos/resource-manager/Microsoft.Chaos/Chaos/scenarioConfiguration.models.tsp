@@ -245,6 +245,25 @@ model ValidationProperties {
   endTime?: utcDateTime;
 
   /**
+   * Resources that matched the scenario's target resource types and will be impacted
+   * by the run, resolved after applying the configuration's resource-targeting filters.
+   */
+  @added(Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  @identifiers(#["id"])
+  resources?: ScenarioRunResource[];
+
+  /**
+   * Resources that matched the scenario's target resource types but were excluded
+   * from fault injection by the configuration's resource-targeting filters
+   * (for example zone, location, or explicit exclusions). These resources will not be impacted.
+   */
+  @added(Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  @identifiers(#["id"])
+  excludedResources?: ScenarioRunResource[];
+
+  /**
    * System or infrastructure errors encountered during validation.
    */
   @visibility(Lifecycle.Read)
