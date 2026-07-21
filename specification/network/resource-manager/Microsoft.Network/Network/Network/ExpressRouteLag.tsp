@@ -28,6 +28,15 @@ model ExpressRouteLag extends Common.Resource {
   /** ExpressRouteLag properties. */
   properties?: ExpressRouteLagPropertiesFormat;
 
+  /** The unique identifier of the resource. */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /** The type of the resource. */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /** The name of the resource. */
   @visibility(Lifecycle.Read)
   @path
   @key("expressRouteLagName")
