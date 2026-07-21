@@ -4503,7 +4503,6 @@ model GetIndexStatisticsResult {
 
 /** Specifies some text and analysis components used to break that text into tokens. */
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AnalyzeRequest {
   /** The text to break into tokens. */
   text: string;

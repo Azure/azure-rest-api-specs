@@ -364,7 +364,6 @@ union AnalyzeOutputOption {
 }
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Document analysis parameters.")
 model AnalyzeDocumentRequest {
   @doc("Document URL to analyze.  Either urlSource or base64Source must be specified.")
@@ -377,7 +376,6 @@ model AnalyzeDocumentRequest {
   base64Source?: bytes;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Batch document analysis parameters.")
 model AnalyzeBatchDocumentsRequest {
@@ -1159,7 +1157,6 @@ model AddressValue {
 }
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Request body to build a new custom document model.")
 model BuildDocumentModelRequest {
   @doc("Unique document model name.")
@@ -1216,7 +1213,6 @@ model AzureBlobFileListContentSource {
 }
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Request body to create a composed document model from component document models.")
 model ComposeDocumentModelRequest {
   @doc("Unique document model name.")
@@ -1240,7 +1236,6 @@ model ComposeDocumentModelRequest {
   tags?: Record<string>;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Request body to authorize document model copy.")
 model AuthorizeCopyRequest {
@@ -1284,7 +1279,6 @@ model ModelCopyAuthorization {
   expirationDateTime: utcDateTime;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Request body to authorize document classifier copy.")
 model AuthorizeClassifierCopyRequest {
@@ -1489,7 +1483,6 @@ model DocumentFieldSchema {
 }
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Request body to build a new custom document classifier.")
 model BuildDocumentClassifierRequest {
   @doc("Unique document classifier name.")
@@ -1569,7 +1562,6 @@ model DocumentClassifierDetails {
   warnings?: DocumentIntelligenceWarning[];
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Document classification parameters.")
 model ClassifyDocumentRequest {
