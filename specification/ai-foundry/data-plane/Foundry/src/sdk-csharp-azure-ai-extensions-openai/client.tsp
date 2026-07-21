@@ -87,12 +87,7 @@ namespace Azure.AI.Projects {
   @@alternateType(OpenAI.Tool, {  identity: "OpenAI.Responses.ResponseTool",  package: "OpenAI",  minVersion: "2.12.0"}, "csharp");
   @@alternateType(OpenAI.ComputerTool, {  identity: "OpenAI.Responses.ComputerTool",  package: "OpenAI",  minVersion: "2.12.0"}, "csharp");
 
-  //@@access(OpenAI.ContainerMemoryLimit, Access.internal);
-  //@@access(OpenAI.ContainerAutoParam, Access.internal);
 
-  // Tools not yet exposed by OpenAI SDK, so cleave them off.
-  // ToolType = "computer"
-  @@alternateType(OpenAI.ComputerTool,  { identity: "System.Object" }, "csharp");
   @@alternateType(OpenAI.WebSearchTool, {  identity: "OpenAI.Responses.WebSearchTool",  package: "OpenAI",  minVersion: "2.12.0"}, "csharp");
   @@alternateType(OpenAI.FunctionTool, {  identity: "OpenAI.Responses.FunctionTool",  package: "OpenAI",  minVersion: "2.12.0"}, "csharp");
   @@alternateType(OpenAI.AnnotationType, {  identity: "OpenAI.Responses.ResponseMessageAnnotationKind",  package: "OpenAI",  minVersion: "2.12.0"}, "csharp");
@@ -193,6 +188,8 @@ namespace Azure.AI.Projects {
   @@alternateType(OpenAI.NamespaceToolParam,  { identity: "System.Object" }, "csharp");
   // ToolType = "tool_search"
   @@alternateType(OpenAI.ToolSearchToolParam,  { identity: "System.Object" }, "csharp");
+
+  //@@alternateType(OpenAI.CompactResource, { identity: "System.Object" }, "csharp");
 
   // --------------------------------------------------------------------------------
   // --------------------------------------------------------------------------------
@@ -402,7 +399,10 @@ namespace Azure.AI.Projects {
     OpenAI.OutputItemMcpApprovalResponseResource.approve,
     "IsApproved"
   );
+  
   @@clientName(A2APreviewTool.base_url, "BaseUri");
+  @@usage(A2APreviewTool, Usage.input | Usage.output);
+
   @@usage(FabricIQPreviewTool, Usage.input | Usage.output);
   @@clientName(FabricIQPreviewTool.server_url, "ServerUri");
   @@clientName(WebIQPreviewTool.server_url, "ServerUri");
