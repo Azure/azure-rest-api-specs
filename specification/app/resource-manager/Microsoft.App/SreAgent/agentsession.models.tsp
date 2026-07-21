@@ -13,13 +13,10 @@ namespace Microsoft.App;
 /** The properties of an Agent Session. */
 @added(Versions.v2026_08_01_preview)
 model AgentSessionProperties {
-  /** The primary Azure resource included in the troubleshooting scope. */
+  /** The Azure resources included in the troubleshooting scope. */
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  targetResourceId: armResourceIdentifier;
-
-  /** Additional Azure resources included in the troubleshooting scope. */
-  @visibility(Lifecycle.Create, Lifecycle.Read)
-  additionalResourceIds?: armResourceIdentifier[];
+  @minItems(1)
+  resourceIds: armResourceIdentifier[];
 
   /** Additional subscription identifiers that the Agent Session may inspect. */
   @visibility(Lifecycle.Create, Lifecycle.Read)
@@ -51,10 +48,6 @@ union AgentSessionProvisioningState {
 /** The latest isolated runtime associated with an Agent Session. */
 @added(Versions.v2026_08_01_preview)
 model AgentSessionSandbox {
-  /** The service-issued identifier of the sandbox. */
-  @visibility(Lifecycle.Read)
-  sandboxId: string;
-
   /** The WebSocket endpoint for a ready sandbox. */
   @visibility(Lifecycle.Read)
   endpoint?: url;

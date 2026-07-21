@@ -522,13 +522,13 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/agentSessions/{agentSessionName}/refresh": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/agentSessions/{agentSessionName}/provision": {
       "post": {
-        "operationId": "AgentSessions_Refresh",
+        "operationId": "AgentSessions_Provision",
         "tags": [
           "AgentSessions"
         ],
-        "description": "Provisions a replacement sandbox after the current sandbox expires or is deleted.",
+        "description": "Returns the active sandbox when one exists, or provisions a sandbox when\nthe Agent Session has no active sandbox. Repeated calls do not create\noverlapping sandboxes.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -585,8 +585,8 @@
           }
         },
         "x-ms-examples": {
-          "AgentSessions_Refresh": {
-            "$ref": "./examples/AgentSessions_Refresh.json"
+          "AgentSessions_Provision": {
+            "$ref": "./examples/AgentSessions_Provision.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2534,18 +2534,10 @@
       "type": "object",
       "description": "The properties of an Agent Session.",
       "properties": {
-        "targetResourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The primary Azure resource included in the troubleshooting scope.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "additionalResourceIds": {
+        "resourceIds": {
           "type": "array",
-          "description": "Additional Azure resources included in the troubleshooting scope.",
+          "description": "The Azure resources included in the troubleshooting scope.",
+          "minItems": 1,
           "items": {
             "type": "string",
             "format": "arm-id",
@@ -2579,7 +2571,7 @@
         }
       },
       "required": [
-        "targetResourceId"
+        "resourceIds"
       ]
     },
     "AgentSessionProvisioningState": {
@@ -2629,11 +2621,6 @@
       "type": "object",
       "description": "The latest isolated runtime associated with an Agent Session.",
       "properties": {
-        "sandboxId": {
-          "type": "string",
-          "description": "The service-issued identifier of the sandbox.",
-          "readOnly": true
-        },
         "endpoint": {
           "type": "string",
           "format": "uri",
@@ -2648,7 +2635,6 @@
         }
       },
       "required": [
-        "sandboxId",
         "expiresAt"
       ]
     },

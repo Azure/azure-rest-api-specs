@@ -51,8 +51,12 @@ interface AgentSessions {
   /** Lists Agent Sessions in a subscription. */
   listBySubscription is ArmListBySubscription<AgentSession>;
 
-  /** Provisions a replacement sandbox after the current sandbox expires or is deleted. */
-  refresh is ArmResourceActionAsync<
+  /**
+   * Returns the active sandbox when one exists, or provisions a sandbox when
+   * the Agent Session has no active sandbox. Repeated calls do not create
+   * overlapping sandboxes.
+   */
+  provision is ArmResourceActionAsync<
     Resource = AgentSession,
     Request = void,
     Response = AgentSession,
