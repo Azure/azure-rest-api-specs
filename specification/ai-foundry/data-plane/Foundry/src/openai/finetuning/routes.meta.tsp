@@ -17,15 +17,25 @@ namespace Azure.AI.Projects;
     examples: #{
       request: #{
         curl: """
-          curl https://api.openai.com/v1/fine_tuning/checkpoints/ft:gpt-4o-mini-2024-07-18:org:weather:B7R9VjQd/permissions \\
-            -H "Authorization: Bearer $OPENAI_API_KEY"
+          az login
+          AZURE_API_KEY=$(az account get-access-token --resource https://ai.azure.com/ --query accessToken -o tsv)
+          
+          curlhttps://<foundry-resource>.services.ai.azure.com/openai/v1/fine_tuning/checkpoints/ft:gpt-4o-mini-2024-07-18:org:weather:B7R9VjQd/permissions \\
+            -H "Authorization: Bearer $AZURE_API_KEY"
           
           """,
         `node.js`: """
           import OpenAI from 'openai';
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+          
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
           
           const client = new OpenAI({
-            apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+              baseURL: endpoint,
+              apiKey: tokenProvider
           });
           
           const permission = await client.fineTuning.checkpoints.permissions.retrieve(
@@ -37,9 +47,14 @@ namespace Azure.AI.Projects;
         python: """
           import os
           from openai import OpenAI
+          from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+          
+          endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
           
           client = OpenAI(
-              api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+              base_url=endpoint,
+              api_key=token_provider
           )
           permission = client.fine_tuning.checkpoints.permissions.retrieve(
               fine_tuned_model_checkpoint="ft-AF1WoRqd3aJAHsqc9NY7iL8F",
@@ -55,12 +70,23 @@ namespace Azure.AI.Projects;
           
           	"github.com/openai/openai-go"
           	"github.com/openai/openai-go/option"
+              "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+              "github.com/openai/openai-go/v3/azure"
           )
           
           func main() {
-          	client := openai.NewClient(
-          		option.WithAPIKey("My API Key"),
-          	)
+          	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+              tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+              if err != nil {
+                  println("Error creating credential.")
+                  panic(err)
+              }
+          
+              client := openai.NewClient(
+                  option.WithBaseURL(endpoint),
+                  azure.WithTokenCredential(tokenCredential),
+              )
           	permission, err := client.FineTuning.Checkpoints.Permissions.Get(
           		context.TODO(),
           		"ft-AF1WoRqd3aJAHsqc9NY7iL8F",
@@ -81,6 +107,9 @@ namespace Azure.AI.Projects;
           import com.openai.client.okhttp.OpenAIOkHttpClient;
           import com.openai.models.finetuning.checkpoints.permissions.PermissionRetrieveParams;
           import com.openai.models.finetuning.checkpoints.permissions.PermissionRetrieveResponse;
+          import com.azure.identity.AuthenticationUtil;
+          import com.azure.identity.DefaultAzureCredentialBuilder;
+          import com.openai.credential.BearerTokenCredential;
           
           public final class Main {
               private Main() {}
@@ -94,8 +123,27 @@ namespace Azure.AI.Projects;
           """,
         ruby: """
           require "openai"
+          require "oauth2"
           
-          openai = OpenAI::Client.new(api_key: "My API Key")
+          tenant_id = ENV["AZURE_TENANT_ID"]
+          client_id = ENV["AZURE_CLIENT_ID"]
+          client_secret = ENV["AZURE_CLIENT_SECRET"]
+          
+          resource = "https://ai.azure.com/.default"
+          oauth_client = OAuth2::Client.new(
+            client_id,
+            client_secret,
+            site: "https://login.microsoftonline.com/#{tenant_id}",
+            token_url: "/oauth2/v2.0/token"
+          )
+          
+          token = oauth_client.client_credentials.get_token(scope: resource).token
+          base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+          openai = OpenAI::Client.new(
+            access_token: token,
+            uri_base: base_url
+          )
           
           permission = openai.fine_tuning.checkpoints.permissions.retrieve("ft-AF1WoRqd3aJAHsqc9NY7iL8F")
           
@@ -144,16 +192,26 @@ namespace Azure.AI.Projects;
     examples: #{
       request: #{
         curl: """
-          curl https://api.openai.com/v1/fine_tuning/checkpoints/ft:gpt-4o-mini-2024-07-18:org:weather:B7R9VjQd/permissions \\
-            -H "Authorization: Bearer $OPENAI_API_KEY"
+          az login
+          AZURE_API_KEY=$(az account get-access-token --resource https://ai.azure.com/ --query accessToken -o tsv)
+          
+          curlhttps://<foundry-resource>.services.ai.azure.com/openai/v1/fine_tuning/checkpoints/ft:gpt-4o-mini-2024-07-18:org:weather:B7R9VjQd/permissions \\
+            -H "Authorization: Bearer $AZURE_API_KEY"
             -d '{"project_ids": ["proj_abGMw1llN8IrBb6SvvY5A1iH"]}'
           
           """,
         `node.js`: """
           import OpenAI from 'openai';
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+          
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
           
           const client = new OpenAI({
-            apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+              baseURL: endpoint,
+              apiKey: tokenProvider
           });
           
           // Automatically fetches more pages as needed.
@@ -167,9 +225,14 @@ namespace Azure.AI.Projects;
         python: """
           import os
           from openai import OpenAI
+          from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+          
+          endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
           
           client = OpenAI(
-              api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+              base_url=endpoint,
+              api_key=token_provider
           )
           page = client.fine_tuning.checkpoints.permissions.create(
               fine_tuned_model_checkpoint="ft:gpt-4o-mini-2024-07-18:org:weather:B7R9VjQd",
@@ -187,12 +250,23 @@ namespace Azure.AI.Projects;
           
           	"github.com/openai/openai-go"
           	"github.com/openai/openai-go/option"
+              "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+              "github.com/openai/openai-go/v3/azure"
           )
           
           func main() {
-          	client := openai.NewClient(
-          		option.WithAPIKey("My API Key"),
-          	)
+          	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+              tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+              if err != nil {
+                  println("Error creating credential.")
+                  panic(err)
+              }
+          
+              client := openai.NewClient(
+                  option.WithBaseURL(endpoint),
+                  azure.WithTokenCredential(tokenCredential),
+              )
           	page, err := client.FineTuning.Checkpoints.Permissions.New(
           		context.TODO(),
           		"ft:gpt-4o-mini-2024-07-18:org:weather:B7R9VjQd",
@@ -215,25 +289,48 @@ namespace Azure.AI.Projects;
           import com.openai.client.okhttp.OpenAIOkHttpClient;
           import com.openai.models.finetuning.checkpoints.permissions.PermissionCreatePage;
           import com.openai.models.finetuning.checkpoints.permissions.PermissionCreateParams;
+          import com.azure.identity.AuthenticationUtil;
+          import com.azure.identity.DefaultAzureCredentialBuilder;
+          import com.openai.credential.BearerTokenCredential;
           
           public final class Main {
               private Main() {}
           
               public static void main(String[] args) {
-                  OpenAIClient client = OpenAIOkHttpClient.fromEnv();
+                  String endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
           
-                  PermissionCreateParams params = PermissionCreateParams.builder()
-                      .fineTunedModelCheckpoint("ft:gpt-4o-mini-2024-07-18:org:weather:B7R9VjQd")
-                      .addProjectId("string")
-                      .build();
+              OpenAIClient client = OpenAIOkHttpClient.builder()
+                  .baseUrl(endpoint)
+                  .credential(BearerTokenCredential.create(AuthenticationUtil.getBearerTokenSupplier(
+                      new DefaultAzureCredentialBuilder().build(), "https://ai.azure.com/.default")))
+                  .build();
                   PermissionCreatePage page = client.fineTuning().checkpoints().permissions().create(params);
               }
           }
           """,
         ruby: """
           require "openai"
+          require "oauth2"
           
-          openai = OpenAI::Client.new(api_key: "My API Key")
+          tenant_id = ENV["AZURE_TENANT_ID"]
+          client_id = ENV["AZURE_CLIENT_ID"]
+          client_secret = ENV["AZURE_CLIENT_SECRET"]
+          
+          resource = "https://ai.azure.com/.default"
+          oauth_client = OAuth2::Client.new(
+            client_id,
+            client_secret,
+            site: "https://login.microsoftonline.com/#{tenant_id}",
+            token_url: "/oauth2/v2.0/token"
+          )
+          
+          token = oauth_client.client_credentials.get_token(scope: resource).token
+          base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+          openai = OpenAI::Client.new(
+            access_token: token,
+            uri_base: base_url
+          )
           
           page = openai.fine_tuning.checkpoints.permissions.create(
             "ft:gpt-4o-mini-2024-07-18:org:weather:B7R9VjQd",
@@ -273,15 +370,25 @@ namespace Azure.AI.Projects;
     examples: #{
       request: #{
         curl: """
-          curl https://api.openai.com/v1/fine_tuning/checkpoints/ft:gpt-4o-mini-2024-07-18:org:weather:B7R9VjQd/permissions/cp_zc4Q7MP6XxulcVzj4MZdwsAB \\
-            -H "Authorization: Bearer $OPENAI_API_KEY"
+          az login
+          AZURE_API_KEY=$(az account get-access-token --resource https://ai.azure.com/ --query accessToken -o tsv)
+          
+          curlhttps://<foundry-resource>.services.ai.azure.com/openai/v1/fine_tuning/checkpoints/ft:gpt-4o-mini-2024-07-18:org:weather:B7R9VjQd/permissions/cp_zc4Q7MP6XxulcVzj4MZdwsAB \\
+            -H "Authorization: Bearer $AZURE_API_KEY"
           
           """,
         `node.js`: """
           import OpenAI from 'openai';
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+          
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
           
           const client = new OpenAI({
-            apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+              baseURL: endpoint,
+              apiKey: tokenProvider
           });
           
           const permission = await client.fineTuning.checkpoints.permissions.delete(
@@ -294,9 +401,14 @@ namespace Azure.AI.Projects;
         python: """
           import os
           from openai import OpenAI
+          from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+          
+          endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
           
           client = OpenAI(
-              api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+              base_url=endpoint,
+              api_key=token_provider
           )
           permission = client.fine_tuning.checkpoints.permissions.delete(
               permission_id="cp_zc4Q7MP6XxulcVzj4MZdwsAB",
@@ -313,12 +425,23 @@ namespace Azure.AI.Projects;
           
           	"github.com/openai/openai-go"
           	"github.com/openai/openai-go/option"
+              "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+              "github.com/openai/openai-go/v3/azure"
           )
           
           func main() {
-          	client := openai.NewClient(
-          		option.WithAPIKey("My API Key"),
-          	)
+          	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+              tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+              if err != nil {
+                  println("Error creating credential.")
+                  panic(err)
+              }
+          
+              client := openai.NewClient(
+                  option.WithBaseURL(endpoint),
+                  azure.WithTokenCredential(tokenCredential),
+              )
           	permission, err := client.FineTuning.Checkpoints.Permissions.Delete(
           		context.TODO(),
           		"ft:gpt-4o-mini-2024-07-18:org:weather:B7R9VjQd",
@@ -339,25 +462,48 @@ namespace Azure.AI.Projects;
           import com.openai.client.okhttp.OpenAIOkHttpClient;
           import com.openai.models.finetuning.checkpoints.permissions.PermissionDeleteParams;
           import com.openai.models.finetuning.checkpoints.permissions.PermissionDeleteResponse;
+          import com.azure.identity.AuthenticationUtil;
+          import com.azure.identity.DefaultAzureCredentialBuilder;
+          import com.openai.credential.BearerTokenCredential;
           
           public final class Main {
               private Main() {}
           
               public static void main(String[] args) {
-                  OpenAIClient client = OpenAIOkHttpClient.fromEnv();
+                  String endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
           
-                  PermissionDeleteParams params = PermissionDeleteParams.builder()
-                      .fineTunedModelCheckpoint("ft:gpt-4o-mini-2024-07-18:org:weather:B7R9VjQd")
-                      .permissionId("cp_zc4Q7MP6XxulcVzj4MZdwsAB")
-                      .build();
+              OpenAIClient client = OpenAIOkHttpClient.builder()
+                  .baseUrl(endpoint)
+                  .credential(BearerTokenCredential.create(AuthenticationUtil.getBearerTokenSupplier(
+                      new DefaultAzureCredentialBuilder().build(), "https://ai.azure.com/.default")))
+                  .build();
                   PermissionDeleteResponse permission = client.fineTuning().checkpoints().permissions().delete(params);
               }
           }
           """,
         ruby: """
           require "openai"
+          require "oauth2"
           
-          openai = OpenAI::Client.new(api_key: "My API Key")
+          tenant_id = ENV["AZURE_TENANT_ID"]
+          client_id = ENV["AZURE_CLIENT_ID"]
+          client_secret = ENV["AZURE_CLIENT_SECRET"]
+          
+          resource = "https://ai.azure.com/.default"
+          oauth_client = OAuth2::Client.new(
+            client_id,
+            client_secret,
+            site: "https://login.microsoftonline.com/#{tenant_id}",
+            token_url: "/oauth2/v2.0/token"
+          )
+          
+          token = oauth_client.client_credentials.get_token(scope: resource).token
+          base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+          openai = OpenAI::Client.new(
+            access_token: token,
+            uri_base: base_url
+          )
           
           permission = openai.fine_tuning.checkpoints.permissions.delete(
             "cp_zc4Q7MP6XxulcVzj4MZdwsAB",
@@ -388,16 +534,24 @@ namespace Azure.AI.Projects;
     examples: #{
       request: #{
         curl: """
-          curl https://api.openai.com/v1/fine_tuning/jobs?limit=2&metadata[key]=value \\
-            -H "Authorization: Bearer $OPENAI_API_KEY"
+          az login
+          AZURE_API_KEY=$(az account get-access-token --resource https://ai.azure.com/ --query accessToken -o tsv)
+          
+          curlhttps://<foundry-resource>.services.ai.azure.com/openai/v1/fine_tuning/jobs?limit=2&metadata[key]=value \\
+            -H "Authorization: Bearer $AZURE_API_KEY"
           
           """,
         python: """
           import os
           from openai import OpenAI
+          from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+          
+          endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
           
           client = OpenAI(
-              api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+              base_url=endpoint,
+              api_key=token_provider
           )
           page = client.fine_tuning.jobs.list()
           page = page.data[0]
@@ -405,8 +559,17 @@ namespace Azure.AI.Projects;
           """,
         javascript: """
           import OpenAI from "openai";
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
           
-          const openai = new OpenAI();
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
+          
+          const openai = new OpenAI({
+              baseURL: endpoint,
+              apiKey: tokenProvider
+          });
           
           async function main() {
             const list = await openai.fineTuning.jobs.list();
@@ -420,9 +583,16 @@ namespace Azure.AI.Projects;
           """,
         `node.js`: """
           import OpenAI from 'openai';
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+          
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
           
           const client = new OpenAI({
-            apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+              baseURL: endpoint,
+              apiKey: tokenProvider
           });
           
           // Automatically fetches more pages as needed.
@@ -439,12 +609,23 @@ namespace Azure.AI.Projects;
           
           	"github.com/openai/openai-go"
           	"github.com/openai/openai-go/option"
+              "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+              "github.com/openai/openai-go/v3/azure"
           )
           
           func main() {
-          	client := openai.NewClient(
-          		option.WithAPIKey("My API Key"),
-          	)
+          	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+              tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+              if err != nil {
+                  println("Error creating credential.")
+                  panic(err)
+              }
+          
+              client := openai.NewClient(
+                  option.WithBaseURL(endpoint),
+                  azure.WithTokenCredential(tokenCredential),
+              )
           	page, err := client.FineTuning.Jobs.List(context.TODO(), openai.FineTuningJobListParams{})
           	if err != nil {
           		panic(err.Error())
@@ -461,6 +642,9 @@ namespace Azure.AI.Projects;
           import com.openai.client.okhttp.OpenAIOkHttpClient;
           import com.openai.models.finetuning.jobs.JobListPage;
           import com.openai.models.finetuning.jobs.JobListParams;
+          import com.azure.identity.AuthenticationUtil;
+          import com.azure.identity.DefaultAzureCredentialBuilder;
+          import com.openai.credential.BearerTokenCredential;
           
           public final class Main {
               private Main() {}
@@ -474,8 +658,27 @@ namespace Azure.AI.Projects;
           """,
         ruby: """
           require "openai"
+          require "oauth2"
           
-          openai = OpenAI::Client.new(api_key: "My API Key")
+          tenant_id = ENV["AZURE_TENANT_ID"]
+          client_id = ENV["AZURE_CLIENT_ID"]
+          client_secret = ENV["AZURE_CLIENT_SECRET"]
+          
+          resource = "https://ai.azure.com/.default"
+          oauth_client = OAuth2::Client.new(
+            client_id,
+            client_secret,
+            site: "https://login.microsoftonline.com/#{tenant_id}",
+            token_url: "/oauth2/v2.0/token"
+          )
+          
+          token = oauth_client.client_credentials.get_token(scope: resource).token
+          base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+          openai = OpenAI::Client.new(
+            access_token: token,
+            uri_base: base_url
+          )
           
           page = openai.fine_tuning.jobs.list
           
@@ -528,9 +731,12 @@ namespace Azure.AI.Projects;
         title: "Default",
         request: #{
           curl: """
-            curl https://api.openai.com/v1/fine_tuning/jobs \\
+            az login
+            AZURE_API_KEY=$(az account get-access-token --resource https://ai.azure.com/ --query accessToken -o tsv)
+            
+            curlhttps://<foundry-resource>.services.ai.azure.com/openai/v1/fine_tuning/jobs \\
               -H "Content-Type: application/json" \\
-              -H "Authorization: Bearer $OPENAI_API_KEY" \\
+              -H "Authorization: Bearer $AZURE_API_KEY" \\
               -d '{
                 "training_file": "file-BK7bzQj3FfZFXr7DbL6xJwfo",
                 "model": "gpt-4o-mini"
@@ -540,9 +746,14 @@ namespace Azure.AI.Projects;
           python: """
             import os
             from openai import OpenAI
+            from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+            
+            endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
             
             client = OpenAI(
-                api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+                base_url=endpoint,
+                api_key=token_provider
             )
             fine_tuning_job = client.fine_tuning.jobs.create(
                 model="gpt-4o-mini",
@@ -552,8 +763,17 @@ namespace Azure.AI.Projects;
             """,
           javascript: """
             import OpenAI from "openai";
+            import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
             
-            const openai = new OpenAI();
+            const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            const tokenProvider = getBearerTokenProvider(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
+            
+            const openai = new OpenAI({
+                baseURL: endpoint,
+                apiKey: tokenProvider
+            });
             
             async function main() {
               const fineTune = await openai.fineTuning.jobs.create({
@@ -568,9 +788,16 @@ namespace Azure.AI.Projects;
             """,
           `node.js`: """
             import OpenAI from 'openai';
+            import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+            
+            const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            const tokenProvider = getBearerTokenProvider(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
             
             const client = new OpenAI({
-              apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+                baseURL: endpoint,
+                apiKey: tokenProvider
             });
             
             const fineTuningJob = await client.fineTuning.jobs.create({
@@ -589,12 +816,23 @@ namespace Azure.AI.Projects;
             
             	"github.com/openai/openai-go"
             	"github.com/openai/openai-go/option"
+                "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+                "github.com/openai/openai-go/v3/azure"
             )
             
             func main() {
-            	client := openai.NewClient(
-            		option.WithAPIKey("My API Key"),
-            	)
+            	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            
+                tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+                if err != nil {
+                    println("Error creating credential.")
+                    panic(err)
+                }
+            
+                client := openai.NewClient(
+                    option.WithBaseURL(endpoint),
+                    azure.WithTokenCredential(tokenCredential),
+                )
             	fineTuningJob, err := client.FineTuning.Jobs.New(context.TODO(), openai.FineTuningJobNewParams{
             		Model:        openai.FineTuningJobNewParamsModelGPT4oMini,
             		TrainingFile: "file-abc123",
@@ -614,25 +852,48 @@ namespace Azure.AI.Projects;
             import com.openai.client.okhttp.OpenAIOkHttpClient;
             import com.openai.models.finetuning.jobs.FineTuningJob;
             import com.openai.models.finetuning.jobs.JobCreateParams;
+            import com.azure.identity.AuthenticationUtil;
+            import com.azure.identity.DefaultAzureCredentialBuilder;
+            import com.openai.credential.BearerTokenCredential;
             
             public final class Main {
                 private Main() {}
             
                 public static void main(String[] args) {
-                    OpenAIClient client = OpenAIOkHttpClient.fromEnv();
+                    String endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
             
-                    JobCreateParams params = JobCreateParams.builder()
-                        .model(JobCreateParams.Model.GPT_4O_MINI)
-                        .trainingFile("file-abc123")
-                        .build();
+                OpenAIClient client = OpenAIOkHttpClient.builder()
+                    .baseUrl(endpoint)
+                    .credential(BearerTokenCredential.create(AuthenticationUtil.getBearerTokenSupplier(
+                        new DefaultAzureCredentialBuilder().build(), "https://ai.azure.com/.default")))
+                    .build();
                     FineTuningJob fineTuningJob = client.fineTuning().jobs().create(params);
                 }
             }
             """,
           ruby: """
             require "openai"
+            require "oauth2"
             
-            openai = OpenAI::Client.new(api_key: "My API Key")
+            tenant_id = ENV["AZURE_TENANT_ID"]
+            client_id = ENV["AZURE_CLIENT_ID"]
+            client_secret = ENV["AZURE_CLIENT_SECRET"]
+            
+            resource = "https://ai.azure.com/.default"
+            oauth_client = OAuth2::Client.new(
+              client_id,
+              client_secret,
+              site: "https://login.microsoftonline.com/#{tenant_id}",
+              token_url: "/oauth2/v2.0/token"
+            )
+            
+            token = oauth_client.client_credentials.get_token(scope: resource).token
+            base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            
+            openai = OpenAI::Client.new(
+              access_token: token,
+              uri_base: base_url
+            )
             
             fine_tuning_job = openai.fine_tuning.jobs.create(model: :"gpt-4o-mini", training_file: "file-abc123")
             
@@ -670,9 +931,12 @@ namespace Azure.AI.Projects;
         title: "Epochs",
         request: #{
           curl: """
-            curl https://api.openai.com/v1/fine_tuning/jobs \\
+            az login
+            AZURE_API_KEY=$(az account get-access-token --resource https://ai.azure.com/ --query accessToken -o tsv)
+            
+            curlhttps://<foundry-resource>.services.ai.azure.com/openai/v1/fine_tuning/jobs \\
               -H "Content-Type: application/json" \\
-              -H "Authorization: Bearer $OPENAI_API_KEY" \\
+              -H "Authorization: Bearer $AZURE_API_KEY" \\
               -d '{
                 "training_file": "file-abc123",
                 "model": "gpt-4o-mini",
@@ -690,9 +954,14 @@ namespace Azure.AI.Projects;
           python: """
             import os
             from openai import OpenAI
+            from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+            
+            endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
             
             client = OpenAI(
-                api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+                base_url=endpoint,
+                api_key=token_provider
             )
             fine_tuning_job = client.fine_tuning.jobs.create(
                 model="gpt-4o-mini",
@@ -703,8 +972,17 @@ namespace Azure.AI.Projects;
           javascript: """
             import OpenAI from "openai";
             import { SupervisedMethod, SupervisedHyperparameters } from "openai/resources/fine-tuning/methods";
+            import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
             
-            const openai = new OpenAI();
+            const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            const tokenProvider = getBearerTokenProvider(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
+            
+            const openai = new OpenAI({
+                baseURL: endpoint,
+                apiKey: tokenProvider
+            });
             
             async function main() {
               const fineTune = await openai.fineTuning.jobs.create({
@@ -728,9 +1006,16 @@ namespace Azure.AI.Projects;
             """,
           `node.js`: """
             import OpenAI from 'openai';
+            import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+            
+            const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            const tokenProvider = getBearerTokenProvider(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
             
             const client = new OpenAI({
-              apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+                baseURL: endpoint,
+                apiKey: tokenProvider
             });
             
             const fineTuningJob = await client.fineTuning.jobs.create({
@@ -749,12 +1034,23 @@ namespace Azure.AI.Projects;
             
             	"github.com/openai/openai-go"
             	"github.com/openai/openai-go/option"
+                "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+                "github.com/openai/openai-go/v3/azure"
             )
             
             func main() {
-            	client := openai.NewClient(
-            		option.WithAPIKey("My API Key"),
-            	)
+            	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            
+                tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+                if err != nil {
+                    println("Error creating credential.")
+                    panic(err)
+                }
+            
+                client := openai.NewClient(
+                    option.WithBaseURL(endpoint),
+                    azure.WithTokenCredential(tokenCredential),
+                )
             	fineTuningJob, err := client.FineTuning.Jobs.New(context.TODO(), openai.FineTuningJobNewParams{
             		Model:        openai.FineTuningJobNewParamsModelGPT4oMini,
             		TrainingFile: "file-abc123",
@@ -774,25 +1070,48 @@ namespace Azure.AI.Projects;
             import com.openai.client.okhttp.OpenAIOkHttpClient;
             import com.openai.models.finetuning.jobs.FineTuningJob;
             import com.openai.models.finetuning.jobs.JobCreateParams;
+            import com.azure.identity.AuthenticationUtil;
+            import com.azure.identity.DefaultAzureCredentialBuilder;
+            import com.openai.credential.BearerTokenCredential;
             
             public final class Main {
                 private Main() {}
             
                 public static void main(String[] args) {
-                    OpenAIClient client = OpenAIOkHttpClient.fromEnv();
+                    String endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
             
-                    JobCreateParams params = JobCreateParams.builder()
-                        .model(JobCreateParams.Model.GPT_4O_MINI)
-                        .trainingFile("file-abc123")
-                        .build();
+                OpenAIClient client = OpenAIOkHttpClient.builder()
+                    .baseUrl(endpoint)
+                    .credential(BearerTokenCredential.create(AuthenticationUtil.getBearerTokenSupplier(
+                        new DefaultAzureCredentialBuilder().build(), "https://ai.azure.com/.default")))
+                    .build();
                     FineTuningJob fineTuningJob = client.fineTuning().jobs().create(params);
                 }
             }
             """,
           ruby: """
             require "openai"
+            require "oauth2"
             
-            openai = OpenAI::Client.new(api_key: "My API Key")
+            tenant_id = ENV["AZURE_TENANT_ID"]
+            client_id = ENV["AZURE_CLIENT_ID"]
+            client_secret = ENV["AZURE_CLIENT_SECRET"]
+            
+            resource = "https://ai.azure.com/.default"
+            oauth_client = OAuth2::Client.new(
+              client_id,
+              client_secret,
+              site: "https://login.microsoftonline.com/#{tenant_id}",
+              token_url: "/oauth2/v2.0/token"
+            )
+            
+            token = oauth_client.client_credentials.get_token(scope: resource).token
+            base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            
+            openai = OpenAI::Client.new(
+              access_token: token,
+              uri_base: base_url
+            )
             
             fine_tuning_job = openai.fine_tuning.jobs.create(model: :"gpt-4o-mini", training_file: "file-abc123")
             
@@ -848,9 +1167,12 @@ namespace Azure.AI.Projects;
         title: "DPO",
         request: #{
           curl: """
-            curl https://api.openai.com/v1/fine_tuning/jobs \\
+            az login
+            AZURE_API_KEY=$(az account get-access-token --resource https://ai.azure.com/ --query accessToken -o tsv)
+            
+            curlhttps://<foundry-resource>.services.ai.azure.com/openai/v1/fine_tuning/jobs \\
               -H "Content-Type: application/json" \\
-              -H "Authorization: Bearer $OPENAI_API_KEY" \\
+              -H "Authorization: Bearer $AZURE_API_KEY" \\
               -d '{
                 "training_file": "file-abc123",
                 "validation_file": "file-abc123",
@@ -869,9 +1191,14 @@ namespace Azure.AI.Projects;
           python: """
             import os
             from openai import OpenAI
+            from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+            
+            endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
             
             client = OpenAI(
-                api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+                base_url=endpoint,
+                api_key=token_provider
             )
             fine_tuning_job = client.fine_tuning.jobs.create(
                 model="gpt-4o-mini",
@@ -881,9 +1208,16 @@ namespace Azure.AI.Projects;
             """,
           `node.js`: """
             import OpenAI from 'openai';
+            import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+            
+            const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            const tokenProvider = getBearerTokenProvider(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
             
             const client = new OpenAI({
-              apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+                baseURL: endpoint,
+                apiKey: tokenProvider
             });
             
             const fineTuningJob = await client.fineTuning.jobs.create({
@@ -902,12 +1236,23 @@ namespace Azure.AI.Projects;
             
             	"github.com/openai/openai-go"
             	"github.com/openai/openai-go/option"
+                "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+                "github.com/openai/openai-go/v3/azure"
             )
             
             func main() {
-            	client := openai.NewClient(
-            		option.WithAPIKey("My API Key"),
-            	)
+            	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            
+                tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+                if err != nil {
+                    println("Error creating credential.")
+                    panic(err)
+                }
+            
+                client := openai.NewClient(
+                    option.WithBaseURL(endpoint),
+                    azure.WithTokenCredential(tokenCredential),
+                )
             	fineTuningJob, err := client.FineTuning.Jobs.New(context.TODO(), openai.FineTuningJobNewParams{
             		Model:        openai.FineTuningJobNewParamsModelGPT4oMini,
             		TrainingFile: "file-abc123",
@@ -927,25 +1272,48 @@ namespace Azure.AI.Projects;
             import com.openai.client.okhttp.OpenAIOkHttpClient;
             import com.openai.models.finetuning.jobs.FineTuningJob;
             import com.openai.models.finetuning.jobs.JobCreateParams;
+            import com.azure.identity.AuthenticationUtil;
+            import com.azure.identity.DefaultAzureCredentialBuilder;
+            import com.openai.credential.BearerTokenCredential;
             
             public final class Main {
                 private Main() {}
             
                 public static void main(String[] args) {
-                    OpenAIClient client = OpenAIOkHttpClient.fromEnv();
+                    String endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
             
-                    JobCreateParams params = JobCreateParams.builder()
-                        .model(JobCreateParams.Model.GPT_4O_MINI)
-                        .trainingFile("file-abc123")
-                        .build();
+                OpenAIClient client = OpenAIOkHttpClient.builder()
+                    .baseUrl(endpoint)
+                    .credential(BearerTokenCredential.create(AuthenticationUtil.getBearerTokenSupplier(
+                        new DefaultAzureCredentialBuilder().build(), "https://ai.azure.com/.default")))
+                    .build();
                     FineTuningJob fineTuningJob = client.fineTuning().jobs().create(params);
                 }
             }
             """,
           ruby: """
             require "openai"
+            require "oauth2"
             
-            openai = OpenAI::Client.new(api_key: "My API Key")
+            tenant_id = ENV["AZURE_TENANT_ID"]
+            client_id = ENV["AZURE_CLIENT_ID"]
+            client_secret = ENV["AZURE_CLIENT_SECRET"]
+            
+            resource = "https://ai.azure.com/.default"
+            oauth_client = OAuth2::Client.new(
+              client_id,
+              client_secret,
+              site: "https://login.microsoftonline.com/#{tenant_id}",
+              token_url: "/oauth2/v2.0/token"
+            )
+            
+            token = oauth_client.client_credentials.get_token(scope: resource).token
+            base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            
+            openai = OpenAI::Client.new(
+              access_token: token,
+              uri_base: base_url
+            )
             
             fine_tuning_job = openai.fine_tuning.jobs.create(model: :"gpt-4o-mini", training_file: "file-abc123")
             
@@ -997,9 +1365,12 @@ namespace Azure.AI.Projects;
         title: "Reinforcement",
         request: #{
           curl: """
-            curl https://api.openai.com/v1/fine_tuning/jobs \\
+            az login
+            AZURE_API_KEY=$(az account get-access-token --resource https://ai.azure.com/ --query accessToken -o tsv)
+            
+            curlhttps://<foundry-resource>.services.ai.azure.com/openai/v1/fine_tuning/jobs \\
               -H "Content-Type: application/json" \\
-              -H "Authorization: Bearer $OPENAI_API_KEY" \\
+              -H "Authorization: Bearer $AZURE_API_KEY" \\
               -d '{
                 "training_file": "file-abc",
                 "validation_file": "file-123",
@@ -1025,9 +1396,14 @@ namespace Azure.AI.Projects;
           python: """
             import os
             from openai import OpenAI
+            from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+            
+            endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
             
             client = OpenAI(
-                api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+                base_url=endpoint,
+                api_key=token_provider
             )
             fine_tuning_job = client.fine_tuning.jobs.create(
                 model="gpt-4o-mini",
@@ -1037,9 +1413,16 @@ namespace Azure.AI.Projects;
             """,
           `node.js`: """
             import OpenAI from 'openai';
+            import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+            
+            const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            const tokenProvider = getBearerTokenProvider(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
             
             const client = new OpenAI({
-              apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+                baseURL: endpoint,
+                apiKey: tokenProvider
             });
             
             const fineTuningJob = await client.fineTuning.jobs.create({
@@ -1058,12 +1441,23 @@ namespace Azure.AI.Projects;
             
             	"github.com/openai/openai-go"
             	"github.com/openai/openai-go/option"
+                "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+                "github.com/openai/openai-go/v3/azure"
             )
             
             func main() {
-            	client := openai.NewClient(
-            		option.WithAPIKey("My API Key"),
-            	)
+            	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            
+                tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+                if err != nil {
+                    println("Error creating credential.")
+                    panic(err)
+                }
+            
+                client := openai.NewClient(
+                    option.WithBaseURL(endpoint),
+                    azure.WithTokenCredential(tokenCredential),
+                )
             	fineTuningJob, err := client.FineTuning.Jobs.New(context.TODO(), openai.FineTuningJobNewParams{
             		Model:        openai.FineTuningJobNewParamsModelGPT4oMini,
             		TrainingFile: "file-abc123",
@@ -1083,25 +1477,48 @@ namespace Azure.AI.Projects;
             import com.openai.client.okhttp.OpenAIOkHttpClient;
             import com.openai.models.finetuning.jobs.FineTuningJob;
             import com.openai.models.finetuning.jobs.JobCreateParams;
+            import com.azure.identity.AuthenticationUtil;
+            import com.azure.identity.DefaultAzureCredentialBuilder;
+            import com.openai.credential.BearerTokenCredential;
             
             public final class Main {
                 private Main() {}
             
                 public static void main(String[] args) {
-                    OpenAIClient client = OpenAIOkHttpClient.fromEnv();
+                    String endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
             
-                    JobCreateParams params = JobCreateParams.builder()
-                        .model(JobCreateParams.Model.GPT_4O_MINI)
-                        .trainingFile("file-abc123")
-                        .build();
+                OpenAIClient client = OpenAIOkHttpClient.builder()
+                    .baseUrl(endpoint)
+                    .credential(BearerTokenCredential.create(AuthenticationUtil.getBearerTokenSupplier(
+                        new DefaultAzureCredentialBuilder().build(), "https://ai.azure.com/.default")))
+                    .build();
                     FineTuningJob fineTuningJob = client.fineTuning().jobs().create(params);
                 }
             }
             """,
           ruby: """
             require "openai"
+            require "oauth2"
             
-            openai = OpenAI::Client.new(api_key: "My API Key")
+            tenant_id = ENV["AZURE_TENANT_ID"]
+            client_id = ENV["AZURE_CLIENT_ID"]
+            client_secret = ENV["AZURE_CLIENT_SECRET"]
+            
+            resource = "https://ai.azure.com/.default"
+            oauth_client = OAuth2::Client.new(
+              client_id,
+              client_secret,
+              site: "https://login.microsoftonline.com/#{tenant_id}",
+              token_url: "/oauth2/v2.0/token"
+            )
+            
+            token = oauth_client.client_credentials.get_token(scope: resource).token
+            base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            
+            openai = OpenAI::Client.new(
+              access_token: token,
+              uri_base: base_url
+            )
             
             fine_tuning_job = openai.fine_tuning.jobs.create(model: :"gpt-4o-mini", training_file: "file-abc123")
             
@@ -1161,9 +1578,12 @@ namespace Azure.AI.Projects;
         title: "Validation file",
         request: #{
           curl: """
-            curl https://api.openai.com/v1/fine_tuning/jobs \\
+            az login
+            AZURE_API_KEY=$(az account get-access-token --resource https://ai.azure.com/ --query accessToken -o tsv)
+            
+            curlhttps://<foundry-resource>.services.ai.azure.com/openai/v1/fine_tuning/jobs \\
               -H "Content-Type: application/json" \\
-              -H "Authorization: Bearer $OPENAI_API_KEY" \\
+              -H "Authorization: Bearer $AZURE_API_KEY" \\
               -d '{
                 "training_file": "file-abc123",
                 "validation_file": "file-abc123",
@@ -1174,9 +1594,14 @@ namespace Azure.AI.Projects;
           python: """
             import os
             from openai import OpenAI
+            from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+            
+            endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
             
             client = OpenAI(
-                api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+                base_url=endpoint,
+                api_key=token_provider
             )
             fine_tuning_job = client.fine_tuning.jobs.create(
                 model="gpt-4o-mini",
@@ -1186,8 +1611,17 @@ namespace Azure.AI.Projects;
             """,
           javascript: """
             import OpenAI from "openai";
+            import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
             
-            const openai = new OpenAI();
+            const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            const tokenProvider = getBearerTokenProvider(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
+            
+            const openai = new OpenAI({
+                baseURL: endpoint,
+                apiKey: tokenProvider
+            });
             
             async function main() {
               const fineTune = await openai.fineTuning.jobs.create({
@@ -1203,9 +1637,16 @@ namespace Azure.AI.Projects;
             """,
           `node.js`: """
             import OpenAI from 'openai';
+            import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+            
+            const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            const tokenProvider = getBearerTokenProvider(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
             
             const client = new OpenAI({
-              apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+                baseURL: endpoint,
+                apiKey: tokenProvider
             });
             
             const fineTuningJob = await client.fineTuning.jobs.create({
@@ -1224,12 +1665,23 @@ namespace Azure.AI.Projects;
             
             	"github.com/openai/openai-go"
             	"github.com/openai/openai-go/option"
+                "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+                "github.com/openai/openai-go/v3/azure"
             )
             
             func main() {
-            	client := openai.NewClient(
-            		option.WithAPIKey("My API Key"),
-            	)
+            	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            
+                tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+                if err != nil {
+                    println("Error creating credential.")
+                    panic(err)
+                }
+            
+                client := openai.NewClient(
+                    option.WithBaseURL(endpoint),
+                    azure.WithTokenCredential(tokenCredential),
+                )
             	fineTuningJob, err := client.FineTuning.Jobs.New(context.TODO(), openai.FineTuningJobNewParams{
             		Model:        openai.FineTuningJobNewParamsModelGPT4oMini,
             		TrainingFile: "file-abc123",
@@ -1249,25 +1701,48 @@ namespace Azure.AI.Projects;
             import com.openai.client.okhttp.OpenAIOkHttpClient;
             import com.openai.models.finetuning.jobs.FineTuningJob;
             import com.openai.models.finetuning.jobs.JobCreateParams;
+            import com.azure.identity.AuthenticationUtil;
+            import com.azure.identity.DefaultAzureCredentialBuilder;
+            import com.openai.credential.BearerTokenCredential;
             
             public final class Main {
                 private Main() {}
             
                 public static void main(String[] args) {
-                    OpenAIClient client = OpenAIOkHttpClient.fromEnv();
+                    String endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
             
-                    JobCreateParams params = JobCreateParams.builder()
-                        .model(JobCreateParams.Model.GPT_4O_MINI)
-                        .trainingFile("file-abc123")
-                        .build();
+                OpenAIClient client = OpenAIOkHttpClient.builder()
+                    .baseUrl(endpoint)
+                    .credential(BearerTokenCredential.create(AuthenticationUtil.getBearerTokenSupplier(
+                        new DefaultAzureCredentialBuilder().build(), "https://ai.azure.com/.default")))
+                    .build();
                     FineTuningJob fineTuningJob = client.fineTuning().jobs().create(params);
                 }
             }
             """,
           ruby: """
             require "openai"
+            require "oauth2"
             
-            openai = OpenAI::Client.new(api_key: "My API Key")
+            tenant_id = ENV["AZURE_TENANT_ID"]
+            client_id = ENV["AZURE_CLIENT_ID"]
+            client_secret = ENV["AZURE_CLIENT_SECRET"]
+            
+            resource = "https://ai.azure.com/.default"
+            oauth_client = OAuth2::Client.new(
+              client_id,
+              client_secret,
+              site: "https://login.microsoftonline.com/#{tenant_id}",
+              token_url: "/oauth2/v2.0/token"
+            )
+            
+            token = oauth_client.client_credentials.get_token(scope: resource).token
+            base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            
+            openai = OpenAI::Client.new(
+              access_token: token,
+              uri_base: base_url
+            )
             
             fine_tuning_job = openai.fine_tuning.jobs.create(model: :"gpt-4o-mini", training_file: "file-abc123")
             
@@ -1305,9 +1780,12 @@ namespace Azure.AI.Projects;
         title: "W&B Integration",
         request: #{
           curl: """
-            curl https://api.openai.com/v1/fine_tuning/jobs \\
+            az login
+            AZURE_API_KEY=$(az account get-access-token --resource https://ai.azure.com/ --query accessToken -o tsv)
+            
+            curlhttps://<foundry-resource>.services.ai.azure.com/openai/v1/fine_tuning/jobs \\
               -H "Content-Type: application/json" \\
-              -H "Authorization: Bearer $OPENAI_API_KEY" \\
+              -H "Authorization: Bearer $AZURE_API_KEY" \\
               -d '{
                 "training_file": "file-abc123",
                 "validation_file": "file-abc123",
@@ -1329,9 +1807,16 @@ namespace Azure.AI.Projects;
             """,
           `node.js`: """
             import OpenAI from 'openai';
+            import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+            
+            const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            const tokenProvider = getBearerTokenProvider(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
             
             const client = new OpenAI({
-              apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+                baseURL: endpoint,
+                apiKey: tokenProvider
             });
             
             const fineTuningJob = await client.fineTuning.jobs.create({
@@ -1344,9 +1829,14 @@ namespace Azure.AI.Projects;
           python: """
             import os
             from openai import OpenAI
+            from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+            
+            endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
             
             client = OpenAI(
-                api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+                base_url=endpoint,
+                api_key=token_provider
             )
             fine_tuning_job = client.fine_tuning.jobs.create(
                 model="gpt-4o-mini",
@@ -1363,12 +1853,23 @@ namespace Azure.AI.Projects;
             
             	"github.com/openai/openai-go"
             	"github.com/openai/openai-go/option"
+                "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+                "github.com/openai/openai-go/v3/azure"
             )
             
             func main() {
-            	client := openai.NewClient(
-            		option.WithAPIKey("My API Key"),
-            	)
+            	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            
+                tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+                if err != nil {
+                    println("Error creating credential.")
+                    panic(err)
+                }
+            
+                client := openai.NewClient(
+                    option.WithBaseURL(endpoint),
+                    azure.WithTokenCredential(tokenCredential),
+                )
             	fineTuningJob, err := client.FineTuning.Jobs.New(context.TODO(), openai.FineTuningJobNewParams{
             		Model:        openai.FineTuningJobNewParamsModelGPT4oMini,
             		TrainingFile: "file-abc123",
@@ -1388,25 +1889,48 @@ namespace Azure.AI.Projects;
             import com.openai.client.okhttp.OpenAIOkHttpClient;
             import com.openai.models.finetuning.jobs.FineTuningJob;
             import com.openai.models.finetuning.jobs.JobCreateParams;
+            import com.azure.identity.AuthenticationUtil;
+            import com.azure.identity.DefaultAzureCredentialBuilder;
+            import com.openai.credential.BearerTokenCredential;
             
             public final class Main {
                 private Main() {}
             
                 public static void main(String[] args) {
-                    OpenAIClient client = OpenAIOkHttpClient.fromEnv();
+                    String endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
             
-                    JobCreateParams params = JobCreateParams.builder()
-                        .model(JobCreateParams.Model.GPT_4O_MINI)
-                        .trainingFile("file-abc123")
-                        .build();
+                OpenAIClient client = OpenAIOkHttpClient.builder()
+                    .baseUrl(endpoint)
+                    .credential(BearerTokenCredential.create(AuthenticationUtil.getBearerTokenSupplier(
+                        new DefaultAzureCredentialBuilder().build(), "https://ai.azure.com/.default")))
+                    .build();
                     FineTuningJob fineTuningJob = client.fineTuning().jobs().create(params);
                 }
             }
             """,
           ruby: """
             require "openai"
+            require "oauth2"
             
-            openai = OpenAI::Client.new(api_key: "My API Key")
+            tenant_id = ENV["AZURE_TENANT_ID"]
+            client_id = ENV["AZURE_CLIENT_ID"]
+            client_secret = ENV["AZURE_CLIENT_SECRET"]
+            
+            resource = "https://ai.azure.com/.default"
+            oauth_client = OAuth2::Client.new(
+              client_id,
+              client_secret,
+              site: "https://login.microsoftonline.com/#{tenant_id}",
+              token_url: "/oauth2/v2.0/token"
+            )
+            
+            token = oauth_client.client_credentials.get_token(scope: resource).token
+            base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            
+            openai = OpenAI::Client.new(
+              access_token: token,
+              uri_base: base_url
+            )
             
             fine_tuning_job = openai.fine_tuning.jobs.create(model: :"gpt-4o-mini", training_file: "file-abc123")
             
@@ -1463,16 +1987,24 @@ namespace Azure.AI.Projects;
     examples: #{
       request: #{
         curl: """
-          curl https://api.openai.com/v1/fine_tuning/jobs/ft-AF1WoRqd3aJAHsqc9NY7iL8F \\
-            -H "Authorization: Bearer $OPENAI_API_KEY"
+          az login
+          AZURE_API_KEY=$(az account get-access-token --resource https://ai.azure.com/ --query accessToken -o tsv)
+          
+          curlhttps://<foundry-resource>.services.ai.azure.com/openai/v1/fine_tuning/jobs/ft-AF1WoRqd3aJAHsqc9NY7iL8F \\
+            -H "Authorization: Bearer $AZURE_API_KEY"
           
           """,
         python: """
           import os
           from openai import OpenAI
+          from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+          
+          endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
           
           client = OpenAI(
-              api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+              base_url=endpoint,
+              api_key=token_provider
           )
           fine_tuning_job = client.fine_tuning.jobs.retrieve(
               "ft-AF1WoRqd3aJAHsqc9NY7iL8F",
@@ -1481,8 +2013,17 @@ namespace Azure.AI.Projects;
           """,
         javascript: """
           import OpenAI from "openai";
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
           
-          const openai = new OpenAI();
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
+          
+          const openai = new OpenAI({
+              baseURL: endpoint,
+              apiKey: tokenProvider
+          });
           
           async function main() {
             const fineTune = await openai.fineTuning.jobs.retrieve("ftjob-abc123");
@@ -1495,9 +2036,16 @@ namespace Azure.AI.Projects;
           """,
         `node.js`: """
           import OpenAI from 'openai';
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+          
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
           
           const client = new OpenAI({
-            apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+              baseURL: endpoint,
+              apiKey: tokenProvider
           });
           
           const fineTuningJob = await client.fineTuning.jobs.retrieve('ft-AF1WoRqd3aJAHsqc9NY7iL8F');
@@ -1513,12 +2061,23 @@ namespace Azure.AI.Projects;
           
           	"github.com/openai/openai-go"
           	"github.com/openai/openai-go/option"
+              "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+              "github.com/openai/openai-go/v3/azure"
           )
           
           func main() {
-          	client := openai.NewClient(
-          		option.WithAPIKey("My API Key"),
-          	)
+          	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+              tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+              if err != nil {
+                  println("Error creating credential.")
+                  panic(err)
+              }
+          
+              client := openai.NewClient(
+                  option.WithBaseURL(endpoint),
+                  azure.WithTokenCredential(tokenCredential),
+              )
           	fineTuningJob, err := client.FineTuning.Jobs.Get(context.TODO(), "ft-AF1WoRqd3aJAHsqc9NY7iL8F")
           	if err != nil {
           		panic(err.Error())
@@ -1535,6 +2094,9 @@ namespace Azure.AI.Projects;
           import com.openai.client.okhttp.OpenAIOkHttpClient;
           import com.openai.models.finetuning.jobs.FineTuningJob;
           import com.openai.models.finetuning.jobs.JobRetrieveParams;
+          import com.azure.identity.AuthenticationUtil;
+          import com.azure.identity.DefaultAzureCredentialBuilder;
+          import com.openai.credential.BearerTokenCredential;
           
           public final class Main {
               private Main() {}
@@ -1548,8 +2110,27 @@ namespace Azure.AI.Projects;
           """,
         ruby: """
           require "openai"
+          require "oauth2"
           
-          openai = OpenAI::Client.new(api_key: "My API Key")
+          tenant_id = ENV["AZURE_TENANT_ID"]
+          client_id = ENV["AZURE_CLIENT_ID"]
+          client_secret = ENV["AZURE_CLIENT_SECRET"]
+          
+          resource = "https://ai.azure.com/.default"
+          oauth_client = OAuth2::Client.new(
+            client_id,
+            client_secret,
+            site: "https://login.microsoftonline.com/#{tenant_id}",
+            token_url: "/oauth2/v2.0/token"
+          )
+          
+          token = oauth_client.client_credentials.get_token(scope: resource).token
+          base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+          openai = OpenAI::Client.new(
+            access_token: token,
+            uri_base: base_url
+          )
           
           fine_tuning_job = openai.fine_tuning.jobs.retrieve("ft-AF1WoRqd3aJAHsqc9NY7iL8F")
           
@@ -1606,16 +2187,24 @@ namespace Azure.AI.Projects;
     examples: #{
       request: #{
         curl: """
-          curl -X POST https://api.openai.com/v1/fine_tuning/jobs/ftjob-abc123/cancel \\
-            -H "Authorization: Bearer $OPENAI_API_KEY"
+          az login
+          AZURE_API_KEY=$(az account get-access-token --resource https://ai.azure.com/ --query accessToken -o tsv)
+          
+          curl-X POST https://<foundry-resource>.services.ai.azure.com/openai/v1/fine_tuning/jobs/ftjob-abc123/cancel \\
+            -H "Authorization: Bearer $AZURE_API_KEY"
           
           """,
         python: """
           import os
           from openai import OpenAI
+          from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+          
+          endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
           
           client = OpenAI(
-              api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+              base_url=endpoint,
+              api_key=token_provider
           )
           fine_tuning_job = client.fine_tuning.jobs.cancel(
               "ft-AF1WoRqd3aJAHsqc9NY7iL8F",
@@ -1624,8 +2213,17 @@ namespace Azure.AI.Projects;
           """,
         javascript: """
           import OpenAI from "openai";
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
           
-          const openai = new OpenAI();
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
+          
+          const openai = new OpenAI({
+              baseURL: endpoint,
+              apiKey: tokenProvider
+          });
           
           async function main() {
             const fineTune = await openai.fineTuning.jobs.cancel("ftjob-abc123");
@@ -1636,9 +2234,16 @@ namespace Azure.AI.Projects;
           """,
         `node.js`: """
           import OpenAI from 'openai';
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+          
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
           
           const client = new OpenAI({
-            apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+              baseURL: endpoint,
+              apiKey: tokenProvider
           });
           
           const fineTuningJob = await client.fineTuning.jobs.cancel('ft-AF1WoRqd3aJAHsqc9NY7iL8F');
@@ -1654,12 +2259,23 @@ namespace Azure.AI.Projects;
           
           	"github.com/openai/openai-go"
           	"github.com/openai/openai-go/option"
+              "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+              "github.com/openai/openai-go/v3/azure"
           )
           
           func main() {
-          	client := openai.NewClient(
-          		option.WithAPIKey("My API Key"),
-          	)
+          	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+              tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+              if err != nil {
+                  println("Error creating credential.")
+                  panic(err)
+              }
+          
+              client := openai.NewClient(
+                  option.WithBaseURL(endpoint),
+                  azure.WithTokenCredential(tokenCredential),
+              )
           	fineTuningJob, err := client.FineTuning.Jobs.Cancel(context.TODO(), "ft-AF1WoRqd3aJAHsqc9NY7iL8F")
           	if err != nil {
           		panic(err.Error())
@@ -1676,6 +2292,9 @@ namespace Azure.AI.Projects;
           import com.openai.client.okhttp.OpenAIOkHttpClient;
           import com.openai.models.finetuning.jobs.FineTuningJob;
           import com.openai.models.finetuning.jobs.JobCancelParams;
+          import com.azure.identity.AuthenticationUtil;
+          import com.azure.identity.DefaultAzureCredentialBuilder;
+          import com.openai.credential.BearerTokenCredential;
           
           public final class Main {
               private Main() {}
@@ -1689,8 +2308,27 @@ namespace Azure.AI.Projects;
           """,
         ruby: """
           require "openai"
+          require "oauth2"
           
-          openai = OpenAI::Client.new(api_key: "My API Key")
+          tenant_id = ENV["AZURE_TENANT_ID"]
+          client_id = ENV["AZURE_CLIENT_ID"]
+          client_secret = ENV["AZURE_CLIENT_SECRET"]
+          
+          resource = "https://ai.azure.com/.default"
+          oauth_client = OAuth2::Client.new(
+            client_id,
+            client_secret,
+            site: "https://login.microsoftonline.com/#{tenant_id}",
+            token_url: "/oauth2/v2.0/token"
+          )
+          
+          token = oauth_client.client_credentials.get_token(scope: resource).token
+          base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+          openai = OpenAI::Client.new(
+            access_token: token,
+            uri_base: base_url
+          )
           
           fine_tuning_job = openai.fine_tuning.jobs.cancel("ft-AF1WoRqd3aJAHsqc9NY7iL8F")
           
@@ -1725,15 +2363,25 @@ namespace Azure.AI.Projects;
     examples: #{
       request: #{
         curl: """
-          curl https://api.openai.com/v1/fine_tuning/jobs/ftjob-abc123/checkpoints \\
-            -H "Authorization: Bearer $OPENAI_API_KEY"
+          az login
+          AZURE_API_KEY=$(az account get-access-token --resource https://ai.azure.com/ --query accessToken -o tsv)
+          
+          curlhttps://<foundry-resource>.services.ai.azure.com/openai/v1/fine_tuning/jobs/ftjob-abc123/checkpoints \\
+            -H "Authorization: Bearer $AZURE_API_KEY"
           
           """,
         `node.js`: """
           import OpenAI from 'openai';
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+          
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
           
           const client = new OpenAI({
-            apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+              baseURL: endpoint,
+              apiKey: tokenProvider
           });
           
           // Automatically fetches more pages as needed.
@@ -1746,9 +2394,14 @@ namespace Azure.AI.Projects;
         python: """
           import os
           from openai import OpenAI
+          from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+          
+          endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
           
           client = OpenAI(
-              api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+              base_url=endpoint,
+              api_key=token_provider
           )
           page = client.fine_tuning.jobs.checkpoints.list(
               fine_tuning_job_id="ft-AF1WoRqd3aJAHsqc9NY7iL8F",
@@ -1765,12 +2418,23 @@ namespace Azure.AI.Projects;
           
           	"github.com/openai/openai-go"
           	"github.com/openai/openai-go/option"
+              "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+              "github.com/openai/openai-go/v3/azure"
           )
           
           func main() {
-          	client := openai.NewClient(
-          		option.WithAPIKey("My API Key"),
-          	)
+          	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+              tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+              if err != nil {
+                  println("Error creating credential.")
+                  panic(err)
+              }
+          
+              client := openai.NewClient(
+                  option.WithBaseURL(endpoint),
+                  azure.WithTokenCredential(tokenCredential),
+              )
           	page, err := client.FineTuning.Jobs.Checkpoints.List(
           		context.TODO(),
           		"ft-AF1WoRqd3aJAHsqc9NY7iL8F",
@@ -1791,6 +2455,9 @@ namespace Azure.AI.Projects;
           import com.openai.client.okhttp.OpenAIOkHttpClient;
           import com.openai.models.finetuning.jobs.checkpoints.CheckpointListPage;
           import com.openai.models.finetuning.jobs.checkpoints.CheckpointListParams;
+          import com.azure.identity.AuthenticationUtil;
+          import com.azure.identity.DefaultAzureCredentialBuilder;
+          import com.openai.credential.BearerTokenCredential;
           
           public final class Main {
               private Main() {}
@@ -1804,8 +2471,27 @@ namespace Azure.AI.Projects;
           """,
         ruby: """
           require "openai"
+          require "oauth2"
           
-          openai = OpenAI::Client.new(api_key: "My API Key")
+          tenant_id = ENV["AZURE_TENANT_ID"]
+          client_id = ENV["AZURE_CLIENT_ID"]
+          client_secret = ENV["AZURE_CLIENT_SECRET"]
+          
+          resource = "https://ai.azure.com/.default"
+          oauth_client = OAuth2::Client.new(
+            client_id,
+            client_secret,
+            site: "https://login.microsoftonline.com/#{tenant_id}",
+            token_url: "/oauth2/v2.0/token"
+          )
+          
+          token = oauth_client.client_credentials.get_token(scope: resource).token
+          base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+          openai = OpenAI::Client.new(
+            access_token: token,
+            uri_base: base_url
+          )
           
           page = openai.fine_tuning.jobs.checkpoints.list("ft-AF1WoRqd3aJAHsqc9NY7iL8F")
           
@@ -1866,16 +2552,24 @@ namespace Azure.AI.Projects;
     examples: #{
       request: #{
         curl: """
-          curl https://api.openai.com/v1/fine_tuning/jobs/ftjob-abc123/events \\
-            -H "Authorization: Bearer $OPENAI_API_KEY"
+          az login
+          AZURE_API_KEY=$(az account get-access-token --resource https://ai.azure.com/ --query accessToken -o tsv)
+          
+          curlhttps://<foundry-resource>.services.ai.azure.com/openai/v1/fine_tuning/jobs/ftjob-abc123/events \\
+            -H "Authorization: Bearer $AZURE_API_KEY"
           
           """,
         python: """
           import os
           from openai import OpenAI
+          from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+          
+          endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
           
           client = OpenAI(
-              api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+              base_url=endpoint,
+              api_key=token_provider
           )
           page = client.fine_tuning.jobs.list_events(
               fine_tuning_job_id="ft-AF1WoRqd3aJAHsqc9NY7iL8F",
@@ -1885,8 +2579,17 @@ namespace Azure.AI.Projects;
           """,
         javascript: """
           import OpenAI from "openai";
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
           
-          const openai = new OpenAI();
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
+          
+          const openai = new OpenAI({
+              baseURL: endpoint,
+              apiKey: tokenProvider
+          });
           
           async function main() {
             const list = await openai.fineTuning.list_events(id="ftjob-abc123", limit=2);
@@ -1900,9 +2603,16 @@ namespace Azure.AI.Projects;
           """,
         `node.js`: """
           import OpenAI from 'openai';
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+          
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
           
           const client = new OpenAI({
-            apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+              baseURL: endpoint,
+              apiKey: tokenProvider
           });
           
           // Automatically fetches more pages as needed.
@@ -1921,12 +2631,23 @@ namespace Azure.AI.Projects;
           
           	"github.com/openai/openai-go"
           	"github.com/openai/openai-go/option"
+              "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+              "github.com/openai/openai-go/v3/azure"
           )
           
           func main() {
-          	client := openai.NewClient(
-          		option.WithAPIKey("My API Key"),
-          	)
+          	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+              tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+              if err != nil {
+                  println("Error creating credential.")
+                  panic(err)
+              }
+          
+              client := openai.NewClient(
+                  option.WithBaseURL(endpoint),
+                  azure.WithTokenCredential(tokenCredential),
+              )
           	page, err := client.FineTuning.Jobs.ListEvents(
           		context.TODO(),
           		"ft-AF1WoRqd3aJAHsqc9NY7iL8F",
@@ -1947,6 +2668,9 @@ namespace Azure.AI.Projects;
           import com.openai.client.okhttp.OpenAIOkHttpClient;
           import com.openai.models.finetuning.jobs.JobListEventsPage;
           import com.openai.models.finetuning.jobs.JobListEventsParams;
+          import com.azure.identity.AuthenticationUtil;
+          import com.azure.identity.DefaultAzureCredentialBuilder;
+          import com.openai.credential.BearerTokenCredential;
           
           public final class Main {
               private Main() {}
@@ -1960,8 +2684,27 @@ namespace Azure.AI.Projects;
           """,
         ruby: """
           require "openai"
+          require "oauth2"
           
-          openai = OpenAI::Client.new(api_key: "My API Key")
+          tenant_id = ENV["AZURE_TENANT_ID"]
+          client_id = ENV["AZURE_CLIENT_ID"]
+          client_secret = ENV["AZURE_CLIENT_SECRET"]
+          
+          resource = "https://ai.azure.com/.default"
+          oauth_client = OAuth2::Client.new(
+            client_id,
+            client_secret,
+            site: "https://login.microsoftonline.com/#{tenant_id}",
+            token_url: "/oauth2/v2.0/token"
+          )
+          
+          token = oauth_client.client_credentials.get_token(scope: resource).token
+          base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+          openai = OpenAI::Client.new(
+            access_token: token,
+            uri_base: base_url
+          )
           
           page = openai.fine_tuning.jobs.list_events("ft-AF1WoRqd3aJAHsqc9NY7iL8F")
           
@@ -2014,16 +2757,24 @@ namespace Azure.AI.Projects;
     examples: #{
       request: #{
         curl: """
-          curl -X POST https://api.openai.com/v1/fine_tuning/jobs/ftjob-abc123/pause \\
-            -H "Authorization: Bearer $OPENAI_API_KEY"
+          az login
+          AZURE_API_KEY=$(az account get-access-token --resource https://ai.azure.com/ --query accessToken -o tsv)
+          
+          curl-X POST https://<foundry-resource>.services.ai.azure.com/openai/v1/fine_tuning/jobs/ftjob-abc123/pause \\
+            -H "Authorization: Bearer $AZURE_API_KEY"
           
           """,
         python: """
           import os
           from openai import OpenAI
+          from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+          
+          endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
           
           client = OpenAI(
-              api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+              base_url=endpoint,
+              api_key=token_provider
           )
           fine_tuning_job = client.fine_tuning.jobs.pause(
               "ft-AF1WoRqd3aJAHsqc9NY7iL8F",
@@ -2032,8 +2783,17 @@ namespace Azure.AI.Projects;
           """,
         javascript: """
           import OpenAI from "openai";
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
           
-          const openai = new OpenAI();
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
+          
+          const openai = new OpenAI({
+              baseURL: endpoint,
+              apiKey: tokenProvider
+          });
           
           async function main() {
             const fineTune = await openai.fineTuning.jobs.pause("ftjob-abc123");
@@ -2044,9 +2804,16 @@ namespace Azure.AI.Projects;
           """,
         `node.js`: """
           import OpenAI from 'openai';
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+          
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
           
           const client = new OpenAI({
-            apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+              baseURL: endpoint,
+              apiKey: tokenProvider
           });
           
           const fineTuningJob = await client.fineTuning.jobs.pause('ft-AF1WoRqd3aJAHsqc9NY7iL8F');
@@ -2062,12 +2829,23 @@ namespace Azure.AI.Projects;
           
           	"github.com/openai/openai-go"
           	"github.com/openai/openai-go/option"
+              "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+              "github.com/openai/openai-go/v3/azure"
           )
           
           func main() {
-          	client := openai.NewClient(
-          		option.WithAPIKey("My API Key"),
-          	)
+          	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+              tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+              if err != nil {
+                  println("Error creating credential.")
+                  panic(err)
+              }
+          
+              client := openai.NewClient(
+                  option.WithBaseURL(endpoint),
+                  azure.WithTokenCredential(tokenCredential),
+              )
           	fineTuningJob, err := client.FineTuning.Jobs.Pause(context.TODO(), "ft-AF1WoRqd3aJAHsqc9NY7iL8F")
           	if err != nil {
           		panic(err.Error())
@@ -2084,6 +2862,9 @@ namespace Azure.AI.Projects;
           import com.openai.client.okhttp.OpenAIOkHttpClient;
           import com.openai.models.finetuning.jobs.FineTuningJob;
           import com.openai.models.finetuning.jobs.JobPauseParams;
+          import com.azure.identity.AuthenticationUtil;
+          import com.azure.identity.DefaultAzureCredentialBuilder;
+          import com.openai.credential.BearerTokenCredential;
           
           public final class Main {
               private Main() {}
@@ -2097,8 +2878,27 @@ namespace Azure.AI.Projects;
           """,
         ruby: """
           require "openai"
+          require "oauth2"
           
-          openai = OpenAI::Client.new(api_key: "My API Key")
+          tenant_id = ENV["AZURE_TENANT_ID"]
+          client_id = ENV["AZURE_CLIENT_ID"]
+          client_secret = ENV["AZURE_CLIENT_SECRET"]
+          
+          resource = "https://ai.azure.com/.default"
+          oauth_client = OAuth2::Client.new(
+            client_id,
+            client_secret,
+            site: "https://login.microsoftonline.com/#{tenant_id}",
+            token_url: "/oauth2/v2.0/token"
+          )
+          
+          token = oauth_client.client_credentials.get_token(scope: resource).token
+          base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+          openai = OpenAI::Client.new(
+            access_token: token,
+            uri_base: base_url
+          )
           
           fine_tuning_job = openai.fine_tuning.jobs.pause("ft-AF1WoRqd3aJAHsqc9NY7iL8F")
           
@@ -2133,16 +2933,24 @@ namespace Azure.AI.Projects;
     examples: #{
       request: #{
         curl: """
-          curl -X POST https://api.openai.com/v1/fine_tuning/jobs/ftjob-abc123/resume \\
-            -H "Authorization: Bearer $OPENAI_API_KEY"
+          az login
+          AZURE_API_KEY=$(az account get-access-token --resource https://ai.azure.com/ --query accessToken -o tsv)
+          
+          curl-X POST https://<foundry-resource>.services.ai.azure.com/openai/v1/fine_tuning/jobs/ftjob-abc123/resume \\
+            -H "Authorization: Bearer $AZURE_API_KEY"
           
           """,
         python: """
           import os
           from openai import OpenAI
+          from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+          
+          endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
           
           client = OpenAI(
-              api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+              base_url=endpoint,
+              api_key=token_provider
           )
           fine_tuning_job = client.fine_tuning.jobs.resume(
               "ft-AF1WoRqd3aJAHsqc9NY7iL8F",
@@ -2151,8 +2959,17 @@ namespace Azure.AI.Projects;
           """,
         javascript: """
           import OpenAI from "openai";
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
           
-          const openai = new OpenAI();
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
+          
+          const openai = new OpenAI({
+              baseURL: endpoint,
+              apiKey: tokenProvider
+          });
           
           async function main() {
             const fineTune = await openai.fineTuning.jobs.resume("ftjob-abc123");
@@ -2163,9 +2980,16 @@ namespace Azure.AI.Projects;
           """,
         `node.js`: """
           import OpenAI from 'openai';
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+          
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
           
           const client = new OpenAI({
-            apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+              baseURL: endpoint,
+              apiKey: tokenProvider
           });
           
           const fineTuningJob = await client.fineTuning.jobs.resume('ft-AF1WoRqd3aJAHsqc9NY7iL8F');
@@ -2181,12 +3005,23 @@ namespace Azure.AI.Projects;
           
           	"github.com/openai/openai-go"
           	"github.com/openai/openai-go/option"
+              "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+              "github.com/openai/openai-go/v3/azure"
           )
           
           func main() {
-          	client := openai.NewClient(
-          		option.WithAPIKey("My API Key"),
-          	)
+          	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+              tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+              if err != nil {
+                  println("Error creating credential.")
+                  panic(err)
+              }
+          
+              client := openai.NewClient(
+                  option.WithBaseURL(endpoint),
+                  azure.WithTokenCredential(tokenCredential),
+              )
           	fineTuningJob, err := client.FineTuning.Jobs.Resume(context.TODO(), "ft-AF1WoRqd3aJAHsqc9NY7iL8F")
           	if err != nil {
           		panic(err.Error())
@@ -2203,6 +3038,9 @@ namespace Azure.AI.Projects;
           import com.openai.client.okhttp.OpenAIOkHttpClient;
           import com.openai.models.finetuning.jobs.FineTuningJob;
           import com.openai.models.finetuning.jobs.JobResumeParams;
+          import com.azure.identity.AuthenticationUtil;
+          import com.azure.identity.DefaultAzureCredentialBuilder;
+          import com.openai.credential.BearerTokenCredential;
           
           public final class Main {
               private Main() {}
@@ -2216,8 +3054,27 @@ namespace Azure.AI.Projects;
           """,
         ruby: """
           require "openai"
+          require "oauth2"
           
-          openai = OpenAI::Client.new(api_key: "My API Key")
+          tenant_id = ENV["AZURE_TENANT_ID"]
+          client_id = ENV["AZURE_CLIENT_ID"]
+          client_secret = ENV["AZURE_CLIENT_SECRET"]
+          
+          resource = "https://ai.azure.com/.default"
+          oauth_client = OAuth2::Client.new(
+            client_id,
+            client_secret,
+            site: "https://login.microsoftonline.com/#{tenant_id}",
+            token_url: "/oauth2/v2.0/token"
+          )
+          
+          token = oauth_client.client_credentials.get_token(scope: resource).token
+          base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+          openai = OpenAI::Client.new(
+            access_token: token,
+            uri_base: base_url
+          )
           
           fine_tuning_job = openai.fine_tuning.jobs.resume("ft-AF1WoRqd3aJAHsqc9NY7iL8F")
           

@@ -19,8 +19,11 @@ namespace Azure.AI.Projects;
         title: "Default",
         request: #{
           curl: """
-            curl https://api.openai.com/v1/audio/speech \\
-              -H "Authorization: Bearer $OPENAI_API_KEY" \\
+            az login
+            AZURE_API_KEY=$(az account get-access-token --resource https://ai.azure.com/ --query accessToken -o tsv)
+            
+            curlhttps://<foundry-resource>.services.ai.azure.com/openai/v1/audio/speech \\
+              -H "Authorization: Bearer $AZURE_API_KEY" \\
               -H "Content-Type: application/json" \\
               -d '{
                 "model": "gpt-4o-mini-tts",
@@ -33,9 +36,14 @@ namespace Azure.AI.Projects;
           python: """
             import os
             from openai import OpenAI
+            from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+            
+            endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
             
             client = OpenAI(
-                api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+                base_url=endpoint,
+                api_key=token_provider
             )
             speech = client.audio.speech.create(
                 input="input",
@@ -50,8 +58,17 @@ namespace Azure.AI.Projects;
             import fs from "fs";
             import path from "path";
             import OpenAI from "openai";
+            import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
             
-            const openai = new OpenAI();
+            const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            const tokenProvider = getBearerTokenProvider(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
+            
+            const openai = new OpenAI({
+                baseURL: endpoint,
+                apiKey: tokenProvider
+            });
             
             const speechFile = path.resolve("./speech.mp3");
             
@@ -74,10 +91,22 @@ namespace Azure.AI.Projects;
             
             using OpenAI.Audio;
             
+            #pragma warning disable OPENAI001
+            
+            const string deploymentName = "<deployment-name>";
+            const string endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            
+            BearerTokenPolicy tokenPolicy = new(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
+            
             AudioClient client = new(
-                model: "gpt-4o-mini-tts",
-                apiKey: Environment.GetEnvironmentVariable("OPENAI_API_KEY")
-            );
+                model: deploymentName,
+                authenticationPolicy: tokenPolicy,
+                options: new OpenAIClientOptions()
+                {
+                    Endpoint = new Uri($"{endpoint}"),
+                });
             
             BinaryData speech = client.GenerateSpeech(
                 text: "The quick brown fox jumped over the lazy dog.",
@@ -85,14 +114,24 @@ namespace Azure.AI.Projects;
             );
             
             using FileStream stream = File.OpenWrite("speech.mp3");
+            using Azure.Identity;
+            using OpenAI;
+            using System.ClientModel.Primitives;
             speech.ToStream().CopyTo(stream);
             
             """,
           `node.js`: """
             import OpenAI from 'openai';
+            import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+            
+            const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            const tokenProvider = getBearerTokenProvider(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
             
             const client = new OpenAI({
-              apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+                baseURL: endpoint,
+                apiKey: tokenProvider
             });
             
             const speech = await client.audio.speech.create({
@@ -115,12 +154,23 @@ namespace Azure.AI.Projects;
             
             	"github.com/openai/openai-go"
             	"github.com/openai/openai-go/option"
+                "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+                "github.com/openai/openai-go/v3/azure"
             )
             
             func main() {
-            	client := openai.NewClient(
-            		option.WithAPIKey("My API Key"),
-            	)
+            	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            
+                tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+                if err != nil {
+                    println("Error creating credential.")
+                    panic(err)
+                }
+            
+                client := openai.NewClient(
+                    option.WithBaseURL(endpoint),
+                    azure.WithTokenCredential(tokenCredential),
+                )
             	speech, err := client.Audio.Speech.New(context.TODO(), openai.AudioSpeechNewParams{
             		Input: "input",
             		Model: openai.SpeechModelTTS1,
@@ -144,26 +194,48 @@ namespace Azure.AI.Projects;
             import com.openai.core.http.HttpResponse;
             import com.openai.models.audio.speech.SpeechCreateParams;
             import com.openai.models.audio.speech.SpeechModel;
+            import com.azure.identity.AuthenticationUtil;
+            import com.azure.identity.DefaultAzureCredentialBuilder;
+            import com.openai.credential.BearerTokenCredential;
             
             public final class Main {
                 private Main() {}
             
                 public static void main(String[] args) {
-                    OpenAIClient client = OpenAIOkHttpClient.fromEnv();
+                    String endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
             
-                    SpeechCreateParams params = SpeechCreateParams.builder()
-                        .input("input")
-                        .model(SpeechModel.TTS_1)
-                        .voice(SpeechCreateParams.Voice.UnionMember1.ALLOY)
-                        .build();
+                OpenAIClient client = OpenAIOkHttpClient.builder()
+                    .baseUrl(endpoint)
+                    .credential(BearerTokenCredential.create(AuthenticationUtil.getBearerTokenSupplier(
+                        new DefaultAzureCredentialBuilder().build(), "https://ai.azure.com/.default")))
+                    .build();
                     HttpResponse speech = client.audio().speech().create(params);
                 }
             }
             """,
           ruby: """
             require "openai"
+            require "oauth2"
             
-            openai = OpenAI::Client.new(api_key: "My API Key")
+            tenant_id = ENV["AZURE_TENANT_ID"]
+            client_id = ENV["AZURE_CLIENT_ID"]
+            client_secret = ENV["AZURE_CLIENT_SECRET"]
+            
+            resource = "https://ai.azure.com/.default"
+            oauth_client = OAuth2::Client.new(
+              client_id,
+              client_secret,
+              site: "https://login.microsoftonline.com/#{tenant_id}",
+              token_url: "/oauth2/v2.0/token"
+            )
+            
+            token = oauth_client.client_credentials.get_token(scope: resource).token
+            base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            
+            openai = OpenAI::Client.new(
+              access_token: token,
+              uri_base: base_url
+            )
             
             speech = openai.audio.speech.create(input: "input", model: :"tts-1", voice: :alloy)
             
@@ -175,8 +247,11 @@ namespace Azure.AI.Projects;
         title: "SSE Stream Format",
         request: #{
           curl: """
-            curl https://api.openai.com/v1/audio/speech \\
-              -H "Authorization: Bearer $OPENAI_API_KEY" \\
+            az login
+            AZURE_API_KEY=$(az account get-access-token --resource https://ai.azure.com/ --query accessToken -o tsv)
+            
+            curlhttps://<foundry-resource>.services.ai.azure.com/openai/v1/audio/speech \\
+              -H "Authorization: Bearer $AZURE_API_KEY" \\
               -H "Content-Type: application/json" \\
               -d '{
                 "model": "gpt-4o-mini-tts",
@@ -188,9 +263,16 @@ namespace Azure.AI.Projects;
             """,
           `node.js`: """
             import OpenAI from 'openai';
+            import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+            
+            const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            const tokenProvider = getBearerTokenProvider(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
             
             const client = new OpenAI({
-              apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+                baseURL: endpoint,
+                apiKey: tokenProvider
             });
             
             const speech = await client.audio.speech.create({
@@ -207,9 +289,14 @@ namespace Azure.AI.Projects;
           python: """
             import os
             from openai import OpenAI
+            from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+            
+            endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
             
             client = OpenAI(
-                api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+                base_url=endpoint,
+                api_key=token_provider
             )
             speech = client.audio.speech.create(
                 input="input",
@@ -229,12 +316,23 @@ namespace Azure.AI.Projects;
             
             	"github.com/openai/openai-go"
             	"github.com/openai/openai-go/option"
+                "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+                "github.com/openai/openai-go/v3/azure"
             )
             
             func main() {
-            	client := openai.NewClient(
-            		option.WithAPIKey("My API Key"),
-            	)
+            	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            
+                tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+                if err != nil {
+                    println("Error creating credential.")
+                    panic(err)
+                }
+            
+                client := openai.NewClient(
+                    option.WithBaseURL(endpoint),
+                    azure.WithTokenCredential(tokenCredential),
+                )
             	speech, err := client.Audio.Speech.New(context.TODO(), openai.AudioSpeechNewParams{
             		Input: "input",
             		Model: openai.SpeechModelTTS1,
@@ -258,26 +356,48 @@ namespace Azure.AI.Projects;
             import com.openai.core.http.HttpResponse;
             import com.openai.models.audio.speech.SpeechCreateParams;
             import com.openai.models.audio.speech.SpeechModel;
+            import com.azure.identity.AuthenticationUtil;
+            import com.azure.identity.DefaultAzureCredentialBuilder;
+            import com.openai.credential.BearerTokenCredential;
             
             public final class Main {
                 private Main() {}
             
                 public static void main(String[] args) {
-                    OpenAIClient client = OpenAIOkHttpClient.fromEnv();
+                    String endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
             
-                    SpeechCreateParams params = SpeechCreateParams.builder()
-                        .input("input")
-                        .model(SpeechModel.TTS_1)
-                        .voice(SpeechCreateParams.Voice.UnionMember1.ALLOY)
-                        .build();
+                OpenAIClient client = OpenAIOkHttpClient.builder()
+                    .baseUrl(endpoint)
+                    .credential(BearerTokenCredential.create(AuthenticationUtil.getBearerTokenSupplier(
+                        new DefaultAzureCredentialBuilder().build(), "https://ai.azure.com/.default")))
+                    .build();
                     HttpResponse speech = client.audio().speech().create(params);
                 }
             }
             """,
           ruby: """
             require "openai"
+            require "oauth2"
             
-            openai = OpenAI::Client.new(api_key: "My API Key")
+            tenant_id = ENV["AZURE_TENANT_ID"]
+            client_id = ENV["AZURE_CLIENT_ID"]
+            client_secret = ENV["AZURE_CLIENT_SECRET"]
+            
+            resource = "https://ai.azure.com/.default"
+            oauth_client = OAuth2::Client.new(
+              client_id,
+              client_secret,
+              site: "https://login.microsoftonline.com/#{tenant_id}",
+              token_url: "/oauth2/v2.0/token"
+            )
+            
+            token = oauth_client.client_credentials.get_token(scope: resource).token
+            base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            
+            openai = OpenAI::Client.new(
+              access_token: token,
+              uri_base: base_url
+            )
             
             speech = openai.audio.speech.create(input: "input", model: :"tts-1", voice: :alloy)
             
@@ -300,8 +420,11 @@ namespace Azure.AI.Projects;
         title: "Default",
         request: #{
           curl: """
-            curl https://api.openai.com/v1/audio/transcriptions \\
-              -H "Authorization: Bearer $OPENAI_API_KEY" \\
+            az login
+            AZURE_API_KEY=$(az account get-access-token --resource https://ai.azure.com/ --query accessToken -o tsv)
+            
+            curlhttps://<foundry-resource>.services.ai.azure.com/openai/v1/audio/transcriptions \\
+              -H "Authorization: Bearer $AZURE_API_KEY" \\
               -H "Content-Type: multipart/form-data" \\
               -F file="@/path/to/file/audio.mp3" \\
               -F model="gpt-4o-transcribe"
@@ -310,9 +433,14 @@ namespace Azure.AI.Projects;
           python: """
             import os
             from openai import OpenAI
+            from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+            
+            endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
             
             client = OpenAI(
-                api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+                base_url=endpoint,
+                api_key=token_provider
             )
             for transcription in client.audio.transcriptions.create(
                 file=b"Example data",
@@ -323,8 +451,17 @@ namespace Azure.AI.Projects;
           javascript: """
             import fs from "fs";
             import OpenAI from "openai";
+            import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
             
-            const openai = new OpenAI();
+            const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            const tokenProvider = getBearerTokenProvider(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
+            
+            const openai = new OpenAI({
+                baseURL: endpoint,
+                apiKey: tokenProvider
+            });
             
             async function main() {
               const transcription = await openai.audio.transcriptions.create({
@@ -341,12 +478,27 @@ namespace Azure.AI.Projects;
             using System;
             
             using OpenAI.Audio;
+            using Azure.Identity;
+            using OpenAI;
+            using System.ClientModel.Primitives;
             string audioFilePath = "audio.mp3";
             
+            #pragma warning disable OPENAI001
+            
+            const string deploymentName = "<deployment-name>";
+            const string endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            
+            BearerTokenPolicy tokenPolicy = new(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
+            
             AudioClient client = new(
-                model: "gpt-4o-transcribe",
-                apiKey: Environment.GetEnvironmentVariable("OPENAI_API_KEY")
-            );
+                model: deploymentName,
+                authenticationPolicy: tokenPolicy,
+                options: new OpenAIClientOptions()
+                {
+                    Endpoint = new Uri($"{endpoint}"),
+                });
             
             AudioTranscription transcription = client.TranscribeAudio(audioFilePath);
             
@@ -356,9 +508,16 @@ namespace Azure.AI.Projects;
           `node.js`: """
             import fs from 'fs';
             import OpenAI from 'openai';
+            import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+            
+            const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            const tokenProvider = getBearerTokenProvider(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
             
             const client = new OpenAI({
-              apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+                baseURL: endpoint,
+                apiKey: tokenProvider
             });
             
             const transcription = await client.audio.transcriptions.create({
@@ -379,12 +538,23 @@ namespace Azure.AI.Projects;
             
             	"github.com/openai/openai-go"
             	"github.com/openai/openai-go/option"
+                "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+                "github.com/openai/openai-go/v3/azure"
             )
             
             func main() {
-            	client := openai.NewClient(
-            		option.WithAPIKey("My API Key"),
-            	)
+            	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            
+                tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+                if err != nil {
+                    println("Error creating credential.")
+                    panic(err)
+                }
+            
+                client := openai.NewClient(
+                    option.WithBaseURL(endpoint),
+                    azure.WithTokenCredential(tokenCredential),
+                )
             	transcription, err := client.Audio.Transcriptions.New(context.TODO(), openai.AudioTranscriptionNewParams{
             		File:  io.Reader(bytes.NewBuffer([]byte("Example data"))),
             		Model: openai.AudioModelGPT4oTranscribe,
@@ -406,25 +576,48 @@ namespace Azure.AI.Projects;
             import com.openai.models.audio.transcriptions.TranscriptionCreateParams;
             import com.openai.models.audio.transcriptions.TranscriptionCreateResponse;
             import java.io.ByteArrayInputStream;
+            import com.azure.identity.AuthenticationUtil;
+            import com.azure.identity.DefaultAzureCredentialBuilder;
+            import com.openai.credential.BearerTokenCredential;
             
             public final class Main {
                 private Main() {}
             
                 public static void main(String[] args) {
-                    OpenAIClient client = OpenAIOkHttpClient.fromEnv();
+                    String endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
             
-                    TranscriptionCreateParams params = TranscriptionCreateParams.builder()
-                        .file(new ByteArrayInputStream("Example data".getBytes()))
-                        .model(AudioModel.GPT_4O_TRANSCRIBE)
-                        .build();
+                OpenAIClient client = OpenAIOkHttpClient.builder()
+                    .baseUrl(endpoint)
+                    .credential(BearerTokenCredential.create(AuthenticationUtil.getBearerTokenSupplier(
+                        new DefaultAzureCredentialBuilder().build(), "https://ai.azure.com/.default")))
+                    .build();
                     TranscriptionCreateResponse transcription = client.audio().transcriptions().create(params);
                 }
             }
             """,
           ruby: """
             require "openai"
+            require "oauth2"
             
-            openai = OpenAI::Client.new(api_key: "My API Key")
+            tenant_id = ENV["AZURE_TENANT_ID"]
+            client_id = ENV["AZURE_CLIENT_ID"]
+            client_secret = ENV["AZURE_CLIENT_SECRET"]
+            
+            resource = "https://ai.azure.com/.default"
+            oauth_client = OAuth2::Client.new(
+              client_id,
+              client_secret,
+              site: "https://login.microsoftonline.com/#{tenant_id}",
+              token_url: "/oauth2/v2.0/token"
+            )
+            
+            token = oauth_client.client_credentials.get_token(scope: resource).token
+            base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            
+            openai = OpenAI::Client.new(
+              access_token: token,
+              uri_base: base_url
+            )
             
             transcription = openai.audio.transcriptions.create(file: StringIO.new("Example data"), model: :"gpt-4o-transcribe")
             
@@ -452,8 +645,11 @@ namespace Azure.AI.Projects;
         title: "Diarization",
         request: #{
           curl: """
-            curl https://api.openai.com/v1/audio/transcriptions \\
-              -H "Authorization: Bearer $OPENAI_API_KEY" \\
+            az login
+            AZURE_API_KEY=$(az account get-access-token --resource https://ai.azure.com/ --query accessToken -o tsv)
+            
+            curlhttps://<foundry-resource>.services.ai.azure.com/openai/v1/audio/transcriptions \\
+              -H "Authorization: Bearer $AZURE_API_KEY" \\
               -H "Content-Type: multipart/form-data" \\
               -F file="@/path/to/file/meeting.wav" \\
               -F model="gpt-4o-transcribe-diarize" \\
@@ -466,9 +662,14 @@ namespace Azure.AI.Projects;
           python: """
             import os
             from openai import OpenAI
+            from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+            
+            endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
             
             client = OpenAI(
-                api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+                base_url=endpoint,
+                api_key=token_provider
             )
             for transcription in client.audio.transcriptions.create(
                 file=b"Example data",
@@ -479,8 +680,17 @@ namespace Azure.AI.Projects;
           javascript: """
             import fs from "fs";
             import OpenAI from "openai";
+            import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
             
-            const openai = new OpenAI();
+            const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            const tokenProvider = getBearerTokenProvider(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
+            
+            const openai = new OpenAI({
+                baseURL: endpoint,
+                apiKey: tokenProvider
+            });
             
             const speakerRef = fs.readFileSync("agent.wav").toString("base64");
             
@@ -501,9 +711,16 @@ namespace Azure.AI.Projects;
           `node.js`: """
             import fs from 'fs';
             import OpenAI from 'openai';
+            import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+            
+            const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            const tokenProvider = getBearerTokenProvider(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
             
             const client = new OpenAI({
-              apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+                baseURL: endpoint,
+                apiKey: tokenProvider
             });
             
             const transcription = await client.audio.transcriptions.create({
@@ -524,12 +741,23 @@ namespace Azure.AI.Projects;
             
             	"github.com/openai/openai-go"
             	"github.com/openai/openai-go/option"
+                "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+                "github.com/openai/openai-go/v3/azure"
             )
             
             func main() {
-            	client := openai.NewClient(
-            		option.WithAPIKey("My API Key"),
-            	)
+            	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            
+                tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+                if err != nil {
+                    println("Error creating credential.")
+                    panic(err)
+                }
+            
+                client := openai.NewClient(
+                    option.WithBaseURL(endpoint),
+                    azure.WithTokenCredential(tokenCredential),
+                )
             	transcription, err := client.Audio.Transcriptions.New(context.TODO(), openai.AudioTranscriptionNewParams{
             		File:  io.Reader(bytes.NewBuffer([]byte("Example data"))),
             		Model: openai.AudioModelGPT4oTranscribe,
@@ -551,25 +779,48 @@ namespace Azure.AI.Projects;
             import com.openai.models.audio.transcriptions.TranscriptionCreateParams;
             import com.openai.models.audio.transcriptions.TranscriptionCreateResponse;
             import java.io.ByteArrayInputStream;
+            import com.azure.identity.AuthenticationUtil;
+            import com.azure.identity.DefaultAzureCredentialBuilder;
+            import com.openai.credential.BearerTokenCredential;
             
             public final class Main {
                 private Main() {}
             
                 public static void main(String[] args) {
-                    OpenAIClient client = OpenAIOkHttpClient.fromEnv();
+                    String endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
             
-                    TranscriptionCreateParams params = TranscriptionCreateParams.builder()
-                        .file(new ByteArrayInputStream("Example data".getBytes()))
-                        .model(AudioModel.GPT_4O_TRANSCRIBE)
-                        .build();
+                OpenAIClient client = OpenAIOkHttpClient.builder()
+                    .baseUrl(endpoint)
+                    .credential(BearerTokenCredential.create(AuthenticationUtil.getBearerTokenSupplier(
+                        new DefaultAzureCredentialBuilder().build(), "https://ai.azure.com/.default")))
+                    .build();
                     TranscriptionCreateResponse transcription = client.audio().transcriptions().create(params);
                 }
             }
             """,
           ruby: """
             require "openai"
+            require "oauth2"
             
-            openai = OpenAI::Client.new(api_key: "My API Key")
+            tenant_id = ENV["AZURE_TENANT_ID"]
+            client_id = ENV["AZURE_CLIENT_ID"]
+            client_secret = ENV["AZURE_CLIENT_SECRET"]
+            
+            resource = "https://ai.azure.com/.default"
+            oauth_client = OAuth2::Client.new(
+              client_id,
+              client_secret,
+              site: "https://login.microsoftonline.com/#{tenant_id}",
+              token_url: "/oauth2/v2.0/token"
+            )
+            
+            token = oauth_client.client_credentials.get_token(scope: resource).token
+            base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            
+            openai = OpenAI::Client.new(
+              access_token: token,
+              uri_base: base_url
+            )
             
             transcription = openai.audio.transcriptions.create(file: StringIO.new("Example data"), model: :"gpt-4o-transcribe")
             
@@ -621,8 +872,11 @@ namespace Azure.AI.Projects;
         title: "Streaming",
         request: #{
           curl: """
-            curl https://api.openai.com/v1/audio/transcriptions \\
-              -H "Authorization: Bearer $OPENAI_API_KEY" \\
+            az login
+            AZURE_API_KEY=$(az account get-access-token --resource https://ai.azure.com/ --query accessToken -o tsv)
+            
+            curlhttps://<foundry-resource>.services.ai.azure.com/openai/v1/audio/transcriptions \\
+              -H "Authorization: Bearer $AZURE_API_KEY" \\
               -H "Content-Type: multipart/form-data" \\
               -F file="@/path/to/file/audio.mp3" \\
               -F model="gpt-4o-mini-transcribe" \\
@@ -632,9 +886,14 @@ namespace Azure.AI.Projects;
           python: """
             import os
             from openai import OpenAI
+            from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+            
+            endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
             
             client = OpenAI(
-                api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+                base_url=endpoint,
+                api_key=token_provider
             )
             for transcription in client.audio.transcriptions.create(
                 file=b"Example data",
@@ -645,8 +904,17 @@ namespace Azure.AI.Projects;
           javascript: """
             import fs from "fs";
             import OpenAI from "openai";
+            import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
             
-            const openai = new OpenAI();
+            const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            const tokenProvider = getBearerTokenProvider(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
+            
+            const openai = new OpenAI({
+                baseURL: endpoint,
+                apiKey: tokenProvider
+            });
             
             const stream = await openai.audio.transcriptions.create({
               file: fs.createReadStream("audio.mp3"),
@@ -662,9 +930,16 @@ namespace Azure.AI.Projects;
           `node.js`: """
             import fs from 'fs';
             import OpenAI from 'openai';
+            import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+            
+            const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            const tokenProvider = getBearerTokenProvider(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
             
             const client = new OpenAI({
-              apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+                baseURL: endpoint,
+                apiKey: tokenProvider
             });
             
             const transcription = await client.audio.transcriptions.create({
@@ -685,12 +960,23 @@ namespace Azure.AI.Projects;
             
             	"github.com/openai/openai-go"
             	"github.com/openai/openai-go/option"
+                "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+                "github.com/openai/openai-go/v3/azure"
             )
             
             func main() {
-            	client := openai.NewClient(
-            		option.WithAPIKey("My API Key"),
-            	)
+            	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            
+                tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+                if err != nil {
+                    println("Error creating credential.")
+                    panic(err)
+                }
+            
+                client := openai.NewClient(
+                    option.WithBaseURL(endpoint),
+                    azure.WithTokenCredential(tokenCredential),
+                )
             	transcription, err := client.Audio.Transcriptions.New(context.TODO(), openai.AudioTranscriptionNewParams{
             		File:  io.Reader(bytes.NewBuffer([]byte("Example data"))),
             		Model: openai.AudioModelGPT4oTranscribe,
@@ -712,25 +998,48 @@ namespace Azure.AI.Projects;
             import com.openai.models.audio.transcriptions.TranscriptionCreateParams;
             import com.openai.models.audio.transcriptions.TranscriptionCreateResponse;
             import java.io.ByteArrayInputStream;
+            import com.azure.identity.AuthenticationUtil;
+            import com.azure.identity.DefaultAzureCredentialBuilder;
+            import com.openai.credential.BearerTokenCredential;
             
             public final class Main {
                 private Main() {}
             
                 public static void main(String[] args) {
-                    OpenAIClient client = OpenAIOkHttpClient.fromEnv();
+                    String endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
             
-                    TranscriptionCreateParams params = TranscriptionCreateParams.builder()
-                        .file(new ByteArrayInputStream("Example data".getBytes()))
-                        .model(AudioModel.GPT_4O_TRANSCRIBE)
-                        .build();
+                OpenAIClient client = OpenAIOkHttpClient.builder()
+                    .baseUrl(endpoint)
+                    .credential(BearerTokenCredential.create(AuthenticationUtil.getBearerTokenSupplier(
+                        new DefaultAzureCredentialBuilder().build(), "https://ai.azure.com/.default")))
+                    .build();
                     TranscriptionCreateResponse transcription = client.audio().transcriptions().create(params);
                 }
             }
             """,
           ruby: """
             require "openai"
+            require "oauth2"
             
-            openai = OpenAI::Client.new(api_key: "My API Key")
+            tenant_id = ENV["AZURE_TENANT_ID"]
+            client_id = ENV["AZURE_CLIENT_ID"]
+            client_secret = ENV["AZURE_CLIENT_SECRET"]
+            
+            resource = "https://ai.azure.com/.default"
+            oauth_client = OAuth2::Client.new(
+              client_id,
+              client_secret,
+              site: "https://login.microsoftonline.com/#{tenant_id}",
+              token_url: "/oauth2/v2.0/token"
+            )
+            
+            token = oauth_client.client_credentials.get_token(scope: resource).token
+            base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            
+            openai = OpenAI::Client.new(
+              access_token: token,
+              uri_base: base_url
+            )
             
             transcription = openai.audio.transcriptions.create(file: StringIO.new("Example data"), model: :"gpt-4o-transcribe")
             
@@ -808,8 +1117,11 @@ namespace Azure.AI.Projects;
         title: "Logprobs",
         request: #{
           curl: """
-            curl https://api.openai.com/v1/audio/transcriptions \\
-              -H "Authorization: Bearer $OPENAI_API_KEY" \\
+            az login
+            AZURE_API_KEY=$(az account get-access-token --resource https://ai.azure.com/ --query accessToken -o tsv)
+            
+            curlhttps://<foundry-resource>.services.ai.azure.com/openai/v1/audio/transcriptions \\
+              -H "Authorization: Bearer $AZURE_API_KEY" \\
               -H "Content-Type: multipart/form-data" \\
               -F file="@/path/to/file/audio.mp3" \\
               -F "include[]=logprobs" \\
@@ -820,9 +1132,14 @@ namespace Azure.AI.Projects;
           python: """
             import os
             from openai import OpenAI
+            from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+            
+            endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
             
             client = OpenAI(
-                api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+                base_url=endpoint,
+                api_key=token_provider
             )
             for transcription in client.audio.transcriptions.create(
                 file=b"Example data",
@@ -833,8 +1150,17 @@ namespace Azure.AI.Projects;
           javascript: """
             import fs from "fs";
             import OpenAI from "openai";
+            import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
             
-            const openai = new OpenAI();
+            const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            const tokenProvider = getBearerTokenProvider(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
+            
+            const openai = new OpenAI({
+                baseURL: endpoint,
+                apiKey: tokenProvider
+            });
             
             async function main() {
               const transcription = await openai.audio.transcriptions.create({
@@ -852,9 +1178,16 @@ namespace Azure.AI.Projects;
           `node.js`: """
             import fs from 'fs';
             import OpenAI from 'openai';
+            import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+            
+            const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            const tokenProvider = getBearerTokenProvider(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
             
             const client = new OpenAI({
-              apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+                baseURL: endpoint,
+                apiKey: tokenProvider
             });
             
             const transcription = await client.audio.transcriptions.create({
@@ -875,12 +1208,23 @@ namespace Azure.AI.Projects;
             
             	"github.com/openai/openai-go"
             	"github.com/openai/openai-go/option"
+                "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+                "github.com/openai/openai-go/v3/azure"
             )
             
             func main() {
-            	client := openai.NewClient(
-            		option.WithAPIKey("My API Key"),
-            	)
+            	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            
+                tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+                if err != nil {
+                    println("Error creating credential.")
+                    panic(err)
+                }
+            
+                client := openai.NewClient(
+                    option.WithBaseURL(endpoint),
+                    azure.WithTokenCredential(tokenCredential),
+                )
             	transcription, err := client.Audio.Transcriptions.New(context.TODO(), openai.AudioTranscriptionNewParams{
             		File:  io.Reader(bytes.NewBuffer([]byte("Example data"))),
             		Model: openai.AudioModelGPT4oTranscribe,
@@ -902,25 +1246,48 @@ namespace Azure.AI.Projects;
             import com.openai.models.audio.transcriptions.TranscriptionCreateParams;
             import com.openai.models.audio.transcriptions.TranscriptionCreateResponse;
             import java.io.ByteArrayInputStream;
+            import com.azure.identity.AuthenticationUtil;
+            import com.azure.identity.DefaultAzureCredentialBuilder;
+            import com.openai.credential.BearerTokenCredential;
             
             public final class Main {
                 private Main() {}
             
                 public static void main(String[] args) {
-                    OpenAIClient client = OpenAIOkHttpClient.fromEnv();
+                    String endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
             
-                    TranscriptionCreateParams params = TranscriptionCreateParams.builder()
-                        .file(new ByteArrayInputStream("Example data".getBytes()))
-                        .model(AudioModel.GPT_4O_TRANSCRIBE)
-                        .build();
+                OpenAIClient client = OpenAIOkHttpClient.builder()
+                    .baseUrl(endpoint)
+                    .credential(BearerTokenCredential.create(AuthenticationUtil.getBearerTokenSupplier(
+                        new DefaultAzureCredentialBuilder().build(), "https://ai.azure.com/.default")))
+                    .build();
                     TranscriptionCreateResponse transcription = client.audio().transcriptions().create(params);
                 }
             }
             """,
           ruby: """
             require "openai"
+            require "oauth2"
             
-            openai = OpenAI::Client.new(api_key: "My API Key")
+            tenant_id = ENV["AZURE_TENANT_ID"]
+            client_id = ENV["AZURE_CLIENT_ID"]
+            client_secret = ENV["AZURE_CLIENT_SECRET"]
+            
+            resource = "https://ai.azure.com/.default"
+            oauth_client = OAuth2::Client.new(
+              client_id,
+              client_secret,
+              site: "https://login.microsoftonline.com/#{tenant_id}",
+              token_url: "/oauth2/v2.0/token"
+            )
+            
+            token = oauth_client.client_credentials.get_token(scope: resource).token
+            base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            
+            openai = OpenAI::Client.new(
+              access_token: token,
+              uri_base: base_url
+            )
             
             transcription = openai.audio.transcriptions.create(file: StringIO.new("Example data"), model: :"gpt-4o-transcribe")
             
@@ -990,8 +1357,11 @@ namespace Azure.AI.Projects;
         title: "Word timestamps",
         request: #{
           curl: """
-            curl https://api.openai.com/v1/audio/transcriptions \\
-              -H "Authorization: Bearer $OPENAI_API_KEY" \\
+            az login
+            AZURE_API_KEY=$(az account get-access-token --resource https://ai.azure.com/ --query accessToken -o tsv)
+            
+            curlhttps://<foundry-resource>.services.ai.azure.com/openai/v1/audio/transcriptions \\
+              -H "Authorization: Bearer $AZURE_API_KEY" \\
               -H "Content-Type: multipart/form-data" \\
               -F file="@/path/to/file/audio.mp3" \\
               -F "timestamp_granularities[]=word" \\
@@ -1002,9 +1372,14 @@ namespace Azure.AI.Projects;
           python: """
             import os
             from openai import OpenAI
+            from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+            
+            endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
             
             client = OpenAI(
-                api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+                base_url=endpoint,
+                api_key=token_provider
             )
             for transcription in client.audio.transcriptions.create(
                 file=b"Example data",
@@ -1015,8 +1390,17 @@ namespace Azure.AI.Projects;
           javascript: """
             import fs from "fs";
             import OpenAI from "openai";
+            import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
             
-            const openai = new OpenAI();
+            const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            const tokenProvider = getBearerTokenProvider(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
+            
+            const openai = new OpenAI({
+                baseURL: endpoint,
+                apiKey: tokenProvider
+            });
             
             async function main() {
               const transcription = await openai.audio.transcriptions.create({
@@ -1035,13 +1419,28 @@ namespace Azure.AI.Projects;
             using System;
             
             using OpenAI.Audio;
+            using Azure.Identity;
+            using OpenAI;
+            using System.ClientModel.Primitives;
             
             string audioFilePath = "audio.mp3";
             
+            #pragma warning disable OPENAI001
+            
+            const string deploymentName = "<deployment-name>";
+            const string endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            
+            BearerTokenPolicy tokenPolicy = new(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
+            
             AudioClient client = new(
-                model: "whisper-1",
-                apiKey: Environment.GetEnvironmentVariable("OPENAI_API_KEY")
-            );
+                model: deploymentName,
+                authenticationPolicy: tokenPolicy,
+                options: new OpenAIClientOptions()
+                {
+                    Endpoint = new Uri($"{endpoint}"),
+                });
             
             AudioTranscriptionOptions options = new()
             {
@@ -1057,9 +1456,16 @@ namespace Azure.AI.Projects;
           `node.js`: """
             import fs from 'fs';
             import OpenAI from 'openai';
+            import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+            
+            const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            const tokenProvider = getBearerTokenProvider(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
             
             const client = new OpenAI({
-              apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+                baseURL: endpoint,
+                apiKey: tokenProvider
             });
             
             const transcription = await client.audio.transcriptions.create({
@@ -1080,12 +1486,23 @@ namespace Azure.AI.Projects;
             
             	"github.com/openai/openai-go"
             	"github.com/openai/openai-go/option"
+                "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+                "github.com/openai/openai-go/v3/azure"
             )
             
             func main() {
-            	client := openai.NewClient(
-            		option.WithAPIKey("My API Key"),
-            	)
+            	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            
+                tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+                if err != nil {
+                    println("Error creating credential.")
+                    panic(err)
+                }
+            
+                client := openai.NewClient(
+                    option.WithBaseURL(endpoint),
+                    azure.WithTokenCredential(tokenCredential),
+                )
             	transcription, err := client.Audio.Transcriptions.New(context.TODO(), openai.AudioTranscriptionNewParams{
             		File:  io.Reader(bytes.NewBuffer([]byte("Example data"))),
             		Model: openai.AudioModelGPT4oTranscribe,
@@ -1107,25 +1524,48 @@ namespace Azure.AI.Projects;
             import com.openai.models.audio.transcriptions.TranscriptionCreateParams;
             import com.openai.models.audio.transcriptions.TranscriptionCreateResponse;
             import java.io.ByteArrayInputStream;
+            import com.azure.identity.AuthenticationUtil;
+            import com.azure.identity.DefaultAzureCredentialBuilder;
+            import com.openai.credential.BearerTokenCredential;
             
             public final class Main {
                 private Main() {}
             
                 public static void main(String[] args) {
-                    OpenAIClient client = OpenAIOkHttpClient.fromEnv();
+                    String endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
             
-                    TranscriptionCreateParams params = TranscriptionCreateParams.builder()
-                        .file(new ByteArrayInputStream("Example data".getBytes()))
-                        .model(AudioModel.GPT_4O_TRANSCRIBE)
-                        .build();
+                OpenAIClient client = OpenAIOkHttpClient.builder()
+                    .baseUrl(endpoint)
+                    .credential(BearerTokenCredential.create(AuthenticationUtil.getBearerTokenSupplier(
+                        new DefaultAzureCredentialBuilder().build(), "https://ai.azure.com/.default")))
+                    .build();
                     TranscriptionCreateResponse transcription = client.audio().transcriptions().create(params);
                 }
             }
             """,
           ruby: """
             require "openai"
+            require "oauth2"
             
-            openai = OpenAI::Client.new(api_key: "My API Key")
+            tenant_id = ENV["AZURE_TENANT_ID"]
+            client_id = ENV["AZURE_CLIENT_ID"]
+            client_secret = ENV["AZURE_CLIENT_SECRET"]
+            
+            resource = "https://ai.azure.com/.default"
+            oauth_client = OAuth2::Client.new(
+              client_id,
+              client_secret,
+              site: "https://login.microsoftonline.com/#{tenant_id}",
+              token_url: "/oauth2/v2.0/token"
+            )
+            
+            token = oauth_client.client_credentials.get_token(scope: resource).token
+            base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            
+            openai = OpenAI::Client.new(
+              access_token: token,
+              uri_base: base_url
+            )
             
             transcription = openai.audio.transcriptions.create(file: StringIO.new("Example data"), model: :"gpt-4o-transcribe")
             
@@ -1163,8 +1603,11 @@ namespace Azure.AI.Projects;
         title: "Segment timestamps",
         request: #{
           curl: """
-            curl https://api.openai.com/v1/audio/transcriptions \\
-              -H "Authorization: Bearer $OPENAI_API_KEY" \\
+            az login
+            AZURE_API_KEY=$(az account get-access-token --resource https://ai.azure.com/ --query accessToken -o tsv)
+            
+            curlhttps://<foundry-resource>.services.ai.azure.com/openai/v1/audio/transcriptions \\
+              -H "Authorization: Bearer $AZURE_API_KEY" \\
               -H "Content-Type: multipart/form-data" \\
               -F file="@/path/to/file/audio.mp3" \\
               -F "timestamp_granularities[]=segment" \\
@@ -1175,9 +1618,14 @@ namespace Azure.AI.Projects;
           python: """
             import os
             from openai import OpenAI
+            from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+            
+            endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
             
             client = OpenAI(
-                api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+                base_url=endpoint,
+                api_key=token_provider
             )
             for transcription in client.audio.transcriptions.create(
                 file=b"Example data",
@@ -1188,8 +1636,17 @@ namespace Azure.AI.Projects;
           javascript: """
             import fs from "fs";
             import OpenAI from "openai";
+            import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
             
-            const openai = new OpenAI();
+            const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            const tokenProvider = getBearerTokenProvider(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
+            
+            const openai = new OpenAI({
+                baseURL: endpoint,
+                apiKey: tokenProvider
+            });
             
             async function main() {
               const transcription = await openai.audio.transcriptions.create({
@@ -1208,13 +1665,28 @@ namespace Azure.AI.Projects;
             using System;
             
             using OpenAI.Audio;
+            using Azure.Identity;
+            using OpenAI;
+            using System.ClientModel.Primitives;
             
             string audioFilePath = "audio.mp3";
             
+            #pragma warning disable OPENAI001
+            
+            const string deploymentName = "<deployment-name>";
+            const string endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            
+            BearerTokenPolicy tokenPolicy = new(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
+            
             AudioClient client = new(
-                model: "whisper-1",
-                apiKey: Environment.GetEnvironmentVariable("OPENAI_API_KEY")
-            );
+                model: deploymentName,
+                authenticationPolicy: tokenPolicy,
+                options: new OpenAIClientOptions()
+                {
+                    Endpoint = new Uri($"{endpoint}"),
+                });
             
             AudioTranscriptionOptions options = new()
             {
@@ -1230,9 +1702,16 @@ namespace Azure.AI.Projects;
           `node.js`: """
             import fs from 'fs';
             import OpenAI from 'openai';
+            import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+            
+            const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            const tokenProvider = getBearerTokenProvider(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
             
             const client = new OpenAI({
-              apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+                baseURL: endpoint,
+                apiKey: tokenProvider
             });
             
             const transcription = await client.audio.transcriptions.create({
@@ -1253,12 +1732,23 @@ namespace Azure.AI.Projects;
             
             	"github.com/openai/openai-go"
             	"github.com/openai/openai-go/option"
+                "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+                "github.com/openai/openai-go/v3/azure"
             )
             
             func main() {
-            	client := openai.NewClient(
-            		option.WithAPIKey("My API Key"),
-            	)
+            	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            
+                tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+                if err != nil {
+                    println("Error creating credential.")
+                    panic(err)
+                }
+            
+                client := openai.NewClient(
+                    option.WithBaseURL(endpoint),
+                    azure.WithTokenCredential(tokenCredential),
+                )
             	transcription, err := client.Audio.Transcriptions.New(context.TODO(), openai.AudioTranscriptionNewParams{
             		File:  io.Reader(bytes.NewBuffer([]byte("Example data"))),
             		Model: openai.AudioModelGPT4oTranscribe,
@@ -1280,25 +1770,48 @@ namespace Azure.AI.Projects;
             import com.openai.models.audio.transcriptions.TranscriptionCreateParams;
             import com.openai.models.audio.transcriptions.TranscriptionCreateResponse;
             import java.io.ByteArrayInputStream;
+            import com.azure.identity.AuthenticationUtil;
+            import com.azure.identity.DefaultAzureCredentialBuilder;
+            import com.openai.credential.BearerTokenCredential;
             
             public final class Main {
                 private Main() {}
             
                 public static void main(String[] args) {
-                    OpenAIClient client = OpenAIOkHttpClient.fromEnv();
+                    String endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
             
-                    TranscriptionCreateParams params = TranscriptionCreateParams.builder()
-                        .file(new ByteArrayInputStream("Example data".getBytes()))
-                        .model(AudioModel.GPT_4O_TRANSCRIBE)
-                        .build();
+                OpenAIClient client = OpenAIOkHttpClient.builder()
+                    .baseUrl(endpoint)
+                    .credential(BearerTokenCredential.create(AuthenticationUtil.getBearerTokenSupplier(
+                        new DefaultAzureCredentialBuilder().build(), "https://ai.azure.com/.default")))
+                    .build();
                     TranscriptionCreateResponse transcription = client.audio().transcriptions().create(params);
                 }
             }
             """,
           ruby: """
             require "openai"
+            require "oauth2"
             
-            openai = OpenAI::Client.new(api_key: "My API Key")
+            tenant_id = ENV["AZURE_TENANT_ID"]
+            client_id = ENV["AZURE_CLIENT_ID"]
+            client_secret = ENV["AZURE_CLIENT_SECRET"]
+            
+            resource = "https://ai.azure.com/.default"
+            oauth_client = OAuth2::Client.new(
+              client_id,
+              client_secret,
+              site: "https://login.microsoftonline.com/#{tenant_id}",
+              token_url: "/oauth2/v2.0/token"
+            )
+            
+            token = oauth_client.client_credentials.get_token(scope: resource).token
+            base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            
+            openai = OpenAI::Client.new(
+              access_token: token,
+              uri_base: base_url
+            )
             
             transcription = openai.audio.transcriptions.create(file: StringIO.new("Example data"), model: :"gpt-4o-transcribe")
             
@@ -1349,8 +1862,11 @@ namespace Azure.AI.Projects;
     examples: #{
       request: #{
         curl: """
-          curl https://api.openai.com/v1/audio/translations \\
-            -H "Authorization: Bearer $OPENAI_API_KEY" \\
+          az login
+          AZURE_API_KEY=$(az account get-access-token --resource https://ai.azure.com/ --query accessToken -o tsv)
+          
+          curlhttps://<foundry-resource>.services.ai.azure.com/openai/v1/audio/translations \\
+            -H "Authorization: Bearer $AZURE_API_KEY" \\
             -H "Content-Type: multipart/form-data" \\
             -F file="@/path/to/file/german.m4a" \\
             -F model="whisper-1"
@@ -1359,9 +1875,14 @@ namespace Azure.AI.Projects;
         python: """
           import os
           from openai import OpenAI
+          from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+          
+          endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
           
           client = OpenAI(
-              api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+              base_url=endpoint,
+              api_key=token_provider
           )
           translation = client.audio.translations.create(
               file=b"Example data",
@@ -1372,8 +1893,17 @@ namespace Azure.AI.Projects;
         javascript: """
           import fs from "fs";
           import OpenAI from "openai";
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
           
-          const openai = new OpenAI();
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
+          
+          const openai = new OpenAI({
+              baseURL: endpoint,
+              apiKey: tokenProvider
+          });
           
           async function main() {
               const translation = await openai.audio.translations.create({
@@ -1390,13 +1920,28 @@ namespace Azure.AI.Projects;
           using System;
           
           using OpenAI.Audio;
+          using Azure.Identity;
+          using OpenAI;
+          using System.ClientModel.Primitives;
           
           string audioFilePath = "audio.mp3";
           
+          #pragma warning disable OPENAI001
+          
+          const string deploymentName = "<deployment-name>";
+          const string endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          
+          BearerTokenPolicy tokenPolicy = new(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
+          
           AudioClient client = new(
-              model: "whisper-1",
-              apiKey: Environment.GetEnvironmentVariable("OPENAI_API_KEY")
-          );
+              model: deploymentName,
+              authenticationPolicy: tokenPolicy,
+              options: new OpenAIClientOptions()
+              {
+                  Endpoint = new Uri($"{endpoint}"),
+              });
           
           AudioTranscription transcription = client.TranscribeAudio(audioFilePath);
           
@@ -1406,9 +1951,16 @@ namespace Azure.AI.Projects;
         `node.js`: """
           import fs from 'fs';
           import OpenAI from 'openai';
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+          
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
           
           const client = new OpenAI({
-            apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+              baseURL: endpoint,
+              apiKey: tokenProvider
           });
           
           const translation = await client.audio.translations.create({
@@ -1429,12 +1981,23 @@ namespace Azure.AI.Projects;
           
           	"github.com/openai/openai-go"
           	"github.com/openai/openai-go/option"
+              "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+              "github.com/openai/openai-go/v3/azure"
           )
           
           func main() {
-          	client := openai.NewClient(
-          		option.WithAPIKey("My API Key"),
-          	)
+          	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+              tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+              if err != nil {
+                  println("Error creating credential.")
+                  panic(err)
+              }
+          
+              client := openai.NewClient(
+                  option.WithBaseURL(endpoint),
+                  azure.WithTokenCredential(tokenCredential),
+              )
           	translation, err := client.Audio.Translations.New(context.TODO(), openai.AudioTranslationNewParams{
           		File:  io.Reader(bytes.NewBuffer([]byte("Example data"))),
           		Model: openai.AudioModelWhisper1,
@@ -1456,25 +2019,48 @@ namespace Azure.AI.Projects;
           import com.openai.models.audio.translations.TranslationCreateParams;
           import com.openai.models.audio.translations.TranslationCreateResponse;
           import java.io.ByteArrayInputStream;
+          import com.azure.identity.AuthenticationUtil;
+          import com.azure.identity.DefaultAzureCredentialBuilder;
+          import com.openai.credential.BearerTokenCredential;
           
           public final class Main {
               private Main() {}
           
               public static void main(String[] args) {
-                  OpenAIClient client = OpenAIOkHttpClient.fromEnv();
+                  String endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
           
-                  TranslationCreateParams params = TranslationCreateParams.builder()
-                      .file(new ByteArrayInputStream("Example data".getBytes()))
-                      .model(AudioModel.WHISPER_1)
-                      .build();
+              OpenAIClient client = OpenAIOkHttpClient.builder()
+                  .baseUrl(endpoint)
+                  .credential(BearerTokenCredential.create(AuthenticationUtil.getBearerTokenSupplier(
+                      new DefaultAzureCredentialBuilder().build(), "https://ai.azure.com/.default")))
+                  .build();
                   TranslationCreateResponse translation = client.audio().translations().create(params);
               }
           }
           """,
         ruby: """
           require "openai"
+          require "oauth2"
           
-          openai = OpenAI::Client.new(api_key: "My API Key")
+          tenant_id = ENV["AZURE_TENANT_ID"]
+          client_id = ENV["AZURE_CLIENT_ID"]
+          client_secret = ENV["AZURE_CLIENT_SECRET"]
+          
+          resource = "https://ai.azure.com/.default"
+          oauth_client = OAuth2::Client.new(
+            client_id,
+            client_secret,
+            site: "https://login.microsoftonline.com/#{tenant_id}",
+            token_url: "/oauth2/v2.0/token"
+          )
+          
+          token = oauth_client.client_credentials.get_token(scope: resource).token
+          base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+          openai = OpenAI::Client.new(
+            access_token: token,
+            uri_base: base_url
+          )
           
           translation = openai.audio.translations.create(file: StringIO.new("Example data"), model: :"whisper-1")
           

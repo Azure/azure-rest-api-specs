@@ -16,13 +16,11 @@ namespace Azure.AI.Projects;
 @route("openai/v1/files")
 @tag("Files")
 interface Files {
-  /**
-   * Lists files matching the request filters.
-   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @doc("Returns a list of files.")
   @summary("List files")
   @list
   @get
@@ -33,17 +31,27 @@ interface Files {
       @query(#{ explode: true })
       purpose?: string;
 
-      /** A limit on the number of objects to be returned. Limit can range between 1 and 10,000, and the default is 10,000. */
+      /**
+       * A limit on the number of objects to be returned. Limit can range between 1 and 10,000, and the
+       * default is 10,000.
+       */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Auto-suppressed warnings non-applicable rules during import."
       @query(#{ explode: true })
       limit?: integer = 10000;
 
-      /** Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and `desc` for descending order. */
+      /**
+       * Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and `desc`
+       * for descending order.
+       */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Auto-suppressed warnings non-applicable rules during import."
       @query(#{ explode: true })
       order?: OpenAI.OrderEnum = OrderEnum.desc;
 
-      /** A cursor for use in pagination. `after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list. */
+      /**
+       * A cursor for use in pagination. `after` is an object ID that defines your place in the list.
+       * For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+       * subsequent call can include after=obj_foo in order to fetch the next page of the list.
+       */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Auto-suppressed warnings non-applicable rules during import."
       #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
       @extension("x-ms-list-continuation-token", true)
@@ -54,19 +62,17 @@ interface Files {
     OpenAI.ListFilesResponse
   >;
 
-  /**
-   * Creates a file from the supplied request.
-   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/byos" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @doc("Creates a file and returns the result.")
   @summary("Create a file")
   @post
   createFile is OpenAIOperation<
     {
-      /** The content type of the request body. */
+      /** The request content type. */
       @header
       contentType: "multipart/form-data";
 
@@ -77,13 +83,11 @@ interface Files {
     OpenAI.OpenAIFile
   >;
 
-  /**
-   * Deletes a file by its identifier.
-   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @doc("Deletes a file and remove it from all vector stores.")
   @summary("Delete a file")
   @route("{file_id}")
   @delete
@@ -97,15 +101,13 @@ interface Files {
     OpenAI.DeleteFileResponse
   >;
 
-  /**
-   * Retrieves a file by its identifier.
-   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
-  @summary("Get a file")
+  @doc("Returns information about a specific file.")
+  @summary("Get a specific file")
   @route("{file_id}")
   @get
   retrieveFile is OpenAIOperation<
@@ -118,15 +120,13 @@ interface Files {
     OpenAI.OpenAIFile
   >;
 
-  /**
-   * Downloads a file.
-   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
-  @summary("Download a file")
+  @doc("Returns the contents of the specified file.")
+  @summary("Download the specified file")
   @route("{file_id}/content")
   @get
   downloadFile is OpenAIOperation<

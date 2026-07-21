@@ -16,13 +16,11 @@ namespace Azure.AI.Projects;
 @route("openai/v1/chat")
 @tag("Chat")
 interface Chat {
-  /**
-   * Lists chat completions matching the request filters.
-   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @doc("Lists stored Chat Completions. Only Chat Completions that have been stored with the `store` parameter set to `true` will be returned.")
   @summary("List chat completions")
   @list
   @route("completions")
@@ -34,8 +32,10 @@ interface Chat {
       @query(#{ explode: true })
       `model`?: string;
 
-      /**A list of metadata keys to filter the Chat Completions by. Example:
-  `metadata[key1]=value1&metadata[key2]=value2`*/
+      /**
+       * A list of metadata keys to filter the Chat Completions by. Example:
+       * `metadata[key1]=value1&metadata[key2]=value2`.
+       */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Auto-suppressed warnings non-applicable rules during import."
       #suppress "@azure-tools/typespec-azure-core/no-nullable" "Auto-suppressed warnings non-applicable rules during import."
       @query(#{ explode: true })
@@ -54,7 +54,10 @@ interface Chat {
       @query(#{ explode: true })
       limit?: integer = 20;
 
-      /** Sort order for Chat Completions by timestamp. Use `asc` for ascending order or `desc` for descending order. Defaults to `asc`. */
+      /**
+       * Sort order for Chat Completions by timestamp. Use `asc` for ascending order or `desc` for
+       * descending order. Defaults to `asc`.
+       */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Auto-suppressed warnings non-applicable rules during import."
       @query(#{ explode: true })
       order?: OpenAI.OrderEnum = OrderEnum.asc;
@@ -62,14 +65,12 @@ interface Chat {
     OpenAI.ChatCompletionList
   >;
 
-  /**
-   * Creates a chat completion from the supplied request.
-   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @doc("Creates a chat completion using the supplied messages and model settings. Responses is recommended for new projects that need the latest platform features.")
   @summary("Create a chat completion")
   @route("completions")
   @post
@@ -82,13 +83,11 @@ interface Chat {
     OpenAI.CreateChatCompletionResponse
   >;
 
-  /**
-   * Deletes a chat completion by its identifier.
-   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @doc("Deletes a stored chat completion. Only Chat Completions that have been created with the `store` parameter set to `true` can be deleted.")
   @summary("Delete a chat completion")
   @route("completions/{completion_id}")
   @delete
@@ -102,13 +101,11 @@ interface Chat {
     OpenAI.ChatCompletionDeleted
   >;
 
-  /**
-   * Retrieves a chat completion by its identifier.
-   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @doc("Retrieves a stored chat completion. Only Chat Completions that have been created with the `store` parameter set to `true` will be returned.")
   @summary("Get a chat completion")
   @route("completions/{completion_id}")
   @get
@@ -122,13 +119,11 @@ interface Chat {
     OpenAI.CreateChatCompletionResponse
   >;
 
-  /**
-   * Updates a chat completion with the supplied changes.
-   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @doc("Updates a stored chat completion. Only Chat Completions that have been created with the `store` parameter set to `true` can be modified. Currently, the only supported modification is to update the `metadata` field.")
   @summary("Update a chat completion")
   @route("completions/{completion_id}")
   @post
@@ -146,15 +141,13 @@ interface Chat {
     OpenAI.CreateChatCompletionResponse
   >;
 
-  /**
-   * Retrieves chat completion messages by its identifier.
-   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
-  @summary("Get chat completion messages")
+  @doc("Retrieves the messages in a stored chat completion. Only Chat Completions that have been created with the `store` parameter set to `true` will be returned.")
+  @summary("List chat completion messages")
   @list
   @route("completions/{completion_id}/messages")
   @get
@@ -178,7 +171,10 @@ interface Chat {
       @query(#{ explode: true })
       limit?: integer = 20;
 
-      /** Sort order for messages by timestamp. Use `asc` for ascending order or `desc` for descending order. Defaults to `asc`. */
+      /**
+       * Sort order for messages by timestamp. Use `asc` for ascending order or `desc` for descending
+       * order. Defaults to `asc`.
+       */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Auto-suppressed warnings non-applicable rules during import."
       @query(#{ explode: true })
       order?: OpenAI.OrderEnum = OrderEnum.asc;

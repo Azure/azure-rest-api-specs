@@ -16,31 +16,39 @@ namespace Azure.AI.Projects;
 @route("openai/v1/assistants")
 @tag("Assistants")
 interface Assistants {
-  /**
-   * Lists assistants matching the request filters.
-   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "deprecated" "Deprecated OpenAI operation shapes intentionally reference deprecated models."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #deprecated "deprecated"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @doc("Returns a list of assistants.")
   @summary("List assistants")
   @list
   @get
   listAssistants is OpenAIOperation<
     {
-      /** A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20. */
+      /**
+       * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+       * default is 20.
+       */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Auto-suppressed warnings non-applicable rules during import."
       @query(#{ explode: true })
       limit?: integer = 20;
 
-      /** Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and `desc` for descending order. */
+      /**
+       * Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and `desc`
+       * for descending order.
+       */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Auto-suppressed warnings non-applicable rules during import."
       @query(#{ explode: true })
       order?: OpenAI.OrderEnum = OrderEnum.desc;
 
-      /** A cursor for use in pagination. `after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list. */
+      /**
+       * A cursor for use in pagination. `after` is an object ID that defines your place in the list.
+       * For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+       * subsequent call can include after=obj_foo in order to fetch the next page of the list.
+       */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Auto-suppressed warnings non-applicable rules during import."
       #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
       @extension("x-ms-list-continuation-token", true)
@@ -48,7 +56,11 @@ interface Assistants {
       @query(#{ explode: true })
       after?: string;
 
-      /** A cursor for use in pagination. `before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list. */
+      /**
+       * A cursor for use in pagination. `before` is an object ID that defines your place in the list.
+       * For instance, if you make a list request and receive 100 objects, starting with obj_foo, your
+       * subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+       */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Auto-suppressed warnings non-applicable rules during import."
       @query(#{ explode: true })
       before?: string;
@@ -56,15 +68,13 @@ interface Assistants {
     OpenAI.ListAssistantsResponse
   >;
 
-  /**
-   * Creates an assistant from the supplied request.
-   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "deprecated" "Deprecated OpenAI operation shapes intentionally reference deprecated models."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #deprecated "deprecated"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @doc("Creates an assistant with a model and instructions.")
   @summary("Create an assistant")
   @post
   createAssistant is OpenAIOperation<
@@ -76,15 +86,13 @@ interface Assistants {
     OpenAI.AssistantObject
   >;
 
-  /**
-   * Deletes an assistant by its identifier.
-   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "deprecated" "Deprecated OpenAI operation shapes intentionally reference deprecated models."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #deprecated "deprecated"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @doc("Deletes an assistant.")
   @summary("Delete an assistant")
   @route("{assistant_id}")
   @delete
@@ -98,15 +106,13 @@ interface Assistants {
     OpenAI.DeleteAssistantResponse
   >;
 
-  /**
-   * Retrieves an assistant by its identifier.
-   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "deprecated" "Deprecated OpenAI operation shapes intentionally reference deprecated models."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #deprecated "deprecated"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @doc("Retrieves an assistant.")
   @summary("Get an assistant")
   @route("{assistant_id}")
   @get
@@ -120,15 +126,13 @@ interface Assistants {
     OpenAI.AssistantObject
   >;
 
-  /**
-   * Updates an assistant with the supplied changes.
-   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "deprecated" "Deprecated OpenAI operation shapes intentionally reference deprecated models."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #deprecated "deprecated"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @doc("Updates an assistant and returns the result.")
   @summary("Update an assistant")
   @route("{assistant_id}")
   @post

@@ -9,7 +9,7 @@ import "@typespec/openapi";
 using TypeSpec.OpenAPI;
 namespace Azure.AI.Projects;
 @@extension(
-  Azure.AI.Projects.VideoGeneration.listVideos,
+  Azure.AI.Projects.VideoGeneration.ListVideos,
   "x-oaiMeta",
   #{
     name: "List videos",
@@ -18,14 +18,26 @@ namespace Azure.AI.Projects;
     examples: #{
       request: #{
         curl: """
-          curl https://api.openai.com/v1/videos \\
-            -H "Authorization: Bearer $OPENAI_API_KEY"
+          az login
+          AZURE_API_KEY=$(az account get-access-token --resource https://ai.azure.com/ --query accessToken -o tsv)
+          
+          curlhttps://<foundry-resource>.services.ai.azure.com/openai/v1/videos \\
+            -H "Authorization: Bearer $AZURE_API_KEY"
           
           """,
         javascript: """
           import OpenAI from 'openai';
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
           
-          const openai = new OpenAI();
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
+          
+          const openai = new OpenAI({
+              baseURL: endpoint,
+              apiKey: tokenProvider
+          });
           
           // Automatically fetches more pages as needed.
           for await (const video of openai.videos.list()) {
@@ -36,9 +48,14 @@ namespace Azure.AI.Projects;
         python: """
           import os
           from openai import OpenAI
+          from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+          
+          endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
           
           client = OpenAI(
-              api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+              base_url=endpoint,
+              api_key=token_provider
           )
           page = client.videos.list()
           page = page.data[0]
@@ -53,12 +70,23 @@ namespace Azure.AI.Projects;
           
           	"github.com/openai/openai-go"
           	"github.com/openai/openai-go/option"
+              "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+              "github.com/openai/openai-go/v3/azure"
           )
           
           func main() {
-          	client := openai.NewClient(
-          		option.WithAPIKey("My API Key"),
-          	)
+          	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+              tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+              if err != nil {
+                  println("Error creating credential.")
+                  panic(err)
+              }
+          
+              client := openai.NewClient(
+                  option.WithBaseURL(endpoint),
+                  azure.WithTokenCredential(tokenCredential),
+              )
           	page, err := client.Videos.List(context.TODO(), openai.VideoListParams{})
           	if err != nil {
           		panic(err.Error())
@@ -70,8 +98,27 @@ namespace Azure.AI.Projects;
           """,
         ruby: """
           require "openai"
+          require "oauth2"
           
-          openai = OpenAI::Client.new(api_key: "My API Key")
+          tenant_id = ENV["AZURE_TENANT_ID"]
+          client_id = ENV["AZURE_CLIENT_ID"]
+          client_secret = ENV["AZURE_CLIENT_SECRET"]
+          
+          resource = "https://ai.azure.com/.default"
+          oauth_client = OAuth2::Client.new(
+            client_id,
+            client_secret,
+            site: "https://login.microsoftonline.com/#{tenant_id}",
+            token_url: "/oauth2/v2.0/token"
+          )
+          
+          token = oauth_client.client_credentials.get_token(scope: resource).token
+          base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+          openai = OpenAI::Client.new(
+            access_token: token,
+            uri_base: base_url
+          )
           
           page = openai.videos.list
           
@@ -84,6 +131,9 @@ namespace Azure.AI.Projects;
           import com.openai.client.okhttp.OpenAIOkHttpClient;
           import com.openai.models.videos.VideoListPage;
           import com.openai.models.videos.VideoListParams;
+          import com.azure.identity.AuthenticationUtil;
+          import com.azure.identity.DefaultAzureCredentialBuilder;
+          import com.openai.credential.BearerTokenCredential;
           
           public final class Main {
               private Main() {}
@@ -97,9 +147,16 @@ namespace Azure.AI.Projects;
           """,
         `node.js`: """
           import OpenAI from 'openai';
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+          
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
           
           const client = new OpenAI({
-            apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+              baseURL: endpoint,
+              apiKey: tokenProvider
           });
           
           // Automatically fetches more pages as needed.
@@ -126,7 +183,7 @@ namespace Azure.AI.Projects;
   }
 );
 
-@@extension(Azure.AI.Projects.VideoGeneration.listVideos, "x-ms-list", true);
+@@extension(Azure.AI.Projects.VideoGeneration.ListVideos, "x-ms-list", true);
 
 @@extension(
   Azure.AI.Projects.VideoGeneration.createVideo,
@@ -138,16 +195,28 @@ namespace Azure.AI.Projects;
     examples: #{
       request: #{
         curl: """
-          curl https://api.openai.com/v1/videos \\
-            -H "Authorization: Bearer $OPENAI_API_KEY" \\
+          az login
+          AZURE_API_KEY=$(az account get-access-token --resource https://ai.azure.com/ --query accessToken -o tsv)
+          
+          curlhttps://<foundry-resource>.services.ai.azure.com/openai/v1/videos \\
+            -H "Authorization: Bearer $AZURE_API_KEY" \\
             -F "model=sora-2" \\
             -F "prompt=A calico cat playing a piano on stage"
           
           """,
         javascript: """
           import OpenAI from 'openai';
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
           
-          const openai = new OpenAI();
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
+          
+          const openai = new OpenAI({
+              baseURL: endpoint,
+              apiKey: tokenProvider
+          });
           
           const video = await openai.videos.create({ prompt: 'A calico cat playing a piano on stage' });
           
@@ -157,9 +226,14 @@ namespace Azure.AI.Projects;
         python: """
           import os
           from openai import OpenAI
+          from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+          
+          endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
           
           client = OpenAI(
-              api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+              base_url=endpoint,
+              api_key=token_provider
           )
           video = client.videos.create(
               prompt="x",
@@ -175,12 +249,23 @@ namespace Azure.AI.Projects;
           
           	"github.com/openai/openai-go"
           	"github.com/openai/openai-go/option"
+              "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+              "github.com/openai/openai-go/v3/azure"
           )
           
           func main() {
-          	client := openai.NewClient(
-          		option.WithAPIKey("My API Key"),
-          	)
+          	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+              tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+              if err != nil {
+                  println("Error creating credential.")
+                  panic(err)
+              }
+          
+              client := openai.NewClient(
+                  option.WithBaseURL(endpoint),
+                  azure.WithTokenCredential(tokenCredential),
+              )
           	video, err := client.Videos.New(context.TODO(), openai.VideoNewParams{
           		Prompt: "x",
           	})
@@ -194,8 +279,27 @@ namespace Azure.AI.Projects;
           """,
         ruby: """
           require "openai"
+          require "oauth2"
           
-          openai = OpenAI::Client.new(api_key: "My API Key")
+          tenant_id = ENV["AZURE_TENANT_ID"]
+          client_id = ENV["AZURE_CLIENT_ID"]
+          client_secret = ENV["AZURE_CLIENT_SECRET"]
+          
+          resource = "https://ai.azure.com/.default"
+          oauth_client = OAuth2::Client.new(
+            client_id,
+            client_secret,
+            site: "https://login.microsoftonline.com/#{tenant_id}",
+            token_url: "/oauth2/v2.0/token"
+          )
+          
+          token = oauth_client.client_credentials.get_token(scope: resource).token
+          base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+          openai = OpenAI::Client.new(
+            access_token: token,
+            uri_base: base_url
+          )
           
           video = openai.videos.create(prompt: "x")
           
@@ -208,25 +312,37 @@ namespace Azure.AI.Projects;
           import com.openai.client.okhttp.OpenAIOkHttpClient;
           import com.openai.models.videos.Video;
           import com.openai.models.videos.VideoCreateParams;
+          import com.azure.identity.AuthenticationUtil;
+          import com.azure.identity.DefaultAzureCredentialBuilder;
+          import com.openai.credential.BearerTokenCredential;
           
           public final class Main {
               private Main() {}
           
               public static void main(String[] args) {
-                  OpenAIClient client = OpenAIOkHttpClient.fromEnv();
+                  String endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
           
-                  VideoCreateParams params = VideoCreateParams.builder()
-                      .prompt("x")
-                      .build();
+              OpenAIClient client = OpenAIOkHttpClient.builder()
+                  .baseUrl(endpoint)
+                  .credential(BearerTokenCredential.create(AuthenticationUtil.getBearerTokenSupplier(
+                      new DefaultAzureCredentialBuilder().build(), "https://ai.azure.com/.default")))
+                  .build();
                   Video video = client.videos().create(params);
               }
           }
           """,
         `node.js`: """
           import OpenAI from 'openai';
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+          
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
           
           const client = new OpenAI({
-            apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+              baseURL: endpoint,
+              apiKey: tokenProvider
           });
           
           const video = await client.videos.create({ prompt: 'x' });
@@ -253,7 +369,7 @@ namespace Azure.AI.Projects;
 );
 
 @@extension(
-  Azure.AI.Projects.VideoGeneration.createVideoCharacter,
+  Azure.AI.Projects.VideoGeneration.CreateVideoCharacter,
   "x-oaiMeta",
   #{
     examples: #{
@@ -262,9 +378,16 @@ namespace Azure.AI.Projects;
         `node.js`: """
           import fs from 'fs';
           import OpenAI from 'openai';
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+          
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
           
           const client = new OpenAI({
-            apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+              baseURL: endpoint,
+              apiKey: tokenProvider
           });
           
           const response = await client.videos.createCharacter({
@@ -277,9 +400,14 @@ namespace Azure.AI.Projects;
         python: """
           import os
           from openai import OpenAI
+          from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+          
+          endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
           
           client = OpenAI(
-              api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+              base_url=endpoint,
+              api_key=token_provider
           )
           response = client.videos.create_character(
               name="x",
@@ -298,12 +426,23 @@ namespace Azure.AI.Projects;
           
           	"github.com/openai/openai-go"
           	"github.com/openai/openai-go/option"
+              "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+              "github.com/openai/openai-go/v3/azure"
           )
           
           func main() {
-          	client := openai.NewClient(
-          		option.WithAPIKey("My API Key"),
-          	)
+          	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+              tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+              if err != nil {
+                  println("Error creating credential.")
+                  panic(err)
+              }
+          
+              client := openai.NewClient(
+                  option.WithBaseURL(endpoint),
+                  azure.WithTokenCredential(tokenCredential),
+              )
           	response, err := client.Videos.NewCharacter(context.TODO(), openai.VideoNewCharacterParams{
           		Name:  "x",
           		Video: io.Reader(bytes.NewBuffer([]byte("Example data"))),
@@ -324,25 +463,48 @@ namespace Azure.AI.Projects;
           import com.openai.models.videos.VideoCreateCharacterParams;
           import com.openai.models.videos.VideoCreateCharacterResponse;
           import java.io.ByteArrayInputStream;
+          import com.azure.identity.AuthenticationUtil;
+          import com.azure.identity.DefaultAzureCredentialBuilder;
+          import com.openai.credential.BearerTokenCredential;
           
           public final class Main {
               private Main() {}
           
               public static void main(String[] args) {
-                  OpenAIClient client = OpenAIOkHttpClient.fromEnv();
+                  String endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
           
-                  VideoCreateCharacterParams params = VideoCreateCharacterParams.builder()
-                      .name("x")
-                      .video(new ByteArrayInputStream("Example data".getBytes()))
-                      .build();
+              OpenAIClient client = OpenAIOkHttpClient.builder()
+                  .baseUrl(endpoint)
+                  .credential(BearerTokenCredential.create(AuthenticationUtil.getBearerTokenSupplier(
+                      new DefaultAzureCredentialBuilder().build(), "https://ai.azure.com/.default")))
+                  .build();
                   VideoCreateCharacterResponse response = client.videos().createCharacter(params);
               }
           }
           """,
         ruby: """
           require "openai"
+          require "oauth2"
           
-          openai = OpenAI::Client.new(api_key: "My API Key")
+          tenant_id = ENV["AZURE_TENANT_ID"]
+          client_id = ENV["AZURE_CLIENT_ID"]
+          client_secret = ENV["AZURE_CLIENT_SECRET"]
+          
+          resource = "https://ai.azure.com/.default"
+          oauth_client = OAuth2::Client.new(
+            client_id,
+            client_secret,
+            site: "https://login.microsoftonline.com/#{tenant_id}",
+            token_url: "/oauth2/v2.0/token"
+          )
+          
+          token = oauth_client.client_credentials.get_token(scope: resource).token
+          base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+          openai = OpenAI::Client.new(
+            access_token: token,
+            uri_base: base_url
+          )
           
           response = openai.videos.create_character(name: "x", video: StringIO.new("Example data"))
           
@@ -354,7 +516,7 @@ namespace Azure.AI.Projects;
 );
 
 @@extension(
-  Azure.AI.Projects.VideoGeneration.getVideoCharacter,
+  Azure.AI.Projects.VideoGeneration.GetVideoCharacter,
   "x-oaiMeta",
   #{
     examples: #{
@@ -362,9 +524,16 @@ namespace Azure.AI.Projects;
       request: #{
         `node.js`: """
           import OpenAI from 'openai';
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+          
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
           
           const client = new OpenAI({
-            apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+              baseURL: endpoint,
+              apiKey: tokenProvider
           });
           
           const response = await client.videos.getCharacter('char_123');
@@ -374,9 +543,14 @@ namespace Azure.AI.Projects;
         python: """
           import os
           from openai import OpenAI
+          from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+          
+          endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
           
           client = OpenAI(
-              api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+              base_url=endpoint,
+              api_key=token_provider
           )
           response = client.videos.get_character(
               "char_123",
@@ -392,12 +566,23 @@ namespace Azure.AI.Projects;
           
           	"github.com/openai/openai-go"
           	"github.com/openai/openai-go/option"
+              "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+              "github.com/openai/openai-go/v3/azure"
           )
           
           func main() {
-          	client := openai.NewClient(
-          		option.WithAPIKey("My API Key"),
-          	)
+          	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+              tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+              if err != nil {
+                  println("Error creating credential.")
+                  panic(err)
+              }
+          
+              client := openai.NewClient(
+                  option.WithBaseURL(endpoint),
+                  azure.WithTokenCredential(tokenCredential),
+              )
           	response, err := client.Videos.GetCharacter(context.TODO(), "char_123")
           	if err != nil {
           		panic(err.Error())
@@ -414,6 +599,9 @@ namespace Azure.AI.Projects;
           import com.openai.client.okhttp.OpenAIOkHttpClient;
           import com.openai.models.videos.VideoGetCharacterParams;
           import com.openai.models.videos.VideoGetCharacterResponse;
+          import com.azure.identity.AuthenticationUtil;
+          import com.azure.identity.DefaultAzureCredentialBuilder;
+          import com.openai.credential.BearerTokenCredential;
           
           public final class Main {
               private Main() {}
@@ -427,8 +615,27 @@ namespace Azure.AI.Projects;
           """,
         ruby: """
           require "openai"
+          require "oauth2"
           
-          openai = OpenAI::Client.new(api_key: "My API Key")
+          tenant_id = ENV["AZURE_TENANT_ID"]
+          client_id = ENV["AZURE_CLIENT_ID"]
+          client_secret = ENV["AZURE_CLIENT_SECRET"]
+          
+          resource = "https://ai.azure.com/.default"
+          oauth_client = OAuth2::Client.new(
+            client_id,
+            client_secret,
+            site: "https://login.microsoftonline.com/#{tenant_id}",
+            token_url: "/oauth2/v2.0/token"
+          )
+          
+          token = oauth_client.client_credentials.get_token(scope: resource).token
+          base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+          openai = OpenAI::Client.new(
+            access_token: token,
+            uri_base: base_url
+          )
           
           response = openai.videos.get_character("char_123")
           
@@ -440,7 +647,7 @@ namespace Azure.AI.Projects;
 );
 
 @@extension(
-  Azure.AI.Projects.VideoGeneration.createVideoEditMultipart,
+  Azure.AI.Projects.VideoGeneration.CreateVideoEditMultipart,
   "x-oaiMeta",
   #{
     examples: #{
@@ -448,9 +655,16 @@ namespace Azure.AI.Projects;
       request: #{
         `node.js`: """
           import OpenAI from 'openai';
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+          
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
           
           const client = new OpenAI({
-            apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+              baseURL: endpoint,
+              apiKey: tokenProvider
           });
           
           const video = await client.videos.edit({ prompt: 'x', video: fs.createReadStream('path/to/file') });
@@ -460,9 +674,14 @@ namespace Azure.AI.Projects;
         python: """
           import os
           from openai import OpenAI
+          from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+          
+          endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
           
           client = OpenAI(
-              api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+              base_url=endpoint,
+              api_key=token_provider
           )
           video = client.videos.edit(
               prompt="x",
@@ -481,12 +700,23 @@ namespace Azure.AI.Projects;
           
           	"github.com/openai/openai-go"
           	"github.com/openai/openai-go/option"
+              "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+              "github.com/openai/openai-go/v3/azure"
           )
           
           func main() {
-          	client := openai.NewClient(
-          		option.WithAPIKey("My API Key"),
-          	)
+          	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+              tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+              if err != nil {
+                  println("Error creating credential.")
+                  panic(err)
+              }
+          
+              client := openai.NewClient(
+                  option.WithBaseURL(endpoint),
+                  azure.WithTokenCredential(tokenCredential),
+              )
           	video, err := client.Videos.Edit(context.TODO(), openai.VideoEditParams{
           		Prompt: "x",
           		Video: openai.VideoEditParamsVideoUnion{
@@ -510,25 +740,48 @@ namespace Azure.AI.Projects;
           import com.openai.models.videos.VideoEditParams;
           import java.io.ByteArrayInputStream;
           import java.io.InputStream;
+          import com.azure.identity.AuthenticationUtil;
+          import com.azure.identity.DefaultAzureCredentialBuilder;
+          import com.openai.credential.BearerTokenCredential;
           
           public final class Main {
               private Main() {}
           
               public static void main(String[] args) {
-                  OpenAIClient client = OpenAIOkHttpClient.fromEnv();
+                  String endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
           
-                  VideoEditParams params = VideoEditParams.builder()
-                      .prompt("x")
-                      .video(new ByteArrayInputStream("Example data".getBytes()))
-                      .build();
+              OpenAIClient client = OpenAIOkHttpClient.builder()
+                  .baseUrl(endpoint)
+                  .credential(BearerTokenCredential.create(AuthenticationUtil.getBearerTokenSupplier(
+                      new DefaultAzureCredentialBuilder().build(), "https://ai.azure.com/.default")))
+                  .build();
                   Video video = client.videos().edit(params);
               }
           }
           """,
         ruby: """
           require "openai"
+          require "oauth2"
           
-          openai = OpenAI::Client.new(api_key: "My API Key")
+          tenant_id = ENV["AZURE_TENANT_ID"]
+          client_id = ENV["AZURE_CLIENT_ID"]
+          client_secret = ENV["AZURE_CLIENT_SECRET"]
+          
+          resource = "https://ai.azure.com/.default"
+          oauth_client = OAuth2::Client.new(
+            client_id,
+            client_secret,
+            site: "https://login.microsoftonline.com/#{tenant_id}",
+            token_url: "/oauth2/v2.0/token"
+          )
+          
+          token = oauth_client.client_credentials.get_token(scope: resource).token
+          base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+          openai = OpenAI::Client.new(
+            access_token: token,
+            uri_base: base_url
+          )
           
           video = openai.videos.edit(prompt: "x", video: StringIO.new("Example data"))
           
@@ -540,7 +793,7 @@ namespace Azure.AI.Projects;
 );
 
 @@extension(
-  Azure.AI.Projects.VideoGeneration.createVideoEditJson,
+  Azure.AI.Projects.VideoGeneration.CreateVideoEditJson,
   "x-oaiMeta",
   #{
     examples: #{
@@ -548,9 +801,16 @@ namespace Azure.AI.Projects;
       request: #{
         `node.js`: """
           import OpenAI from 'openai';
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+          
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
           
           const client = new OpenAI({
-            apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+              baseURL: endpoint,
+              apiKey: tokenProvider
           });
           
           const video = await client.videos.edit({ prompt: 'x', video: fs.createReadStream('path/to/file') });
@@ -560,9 +820,14 @@ namespace Azure.AI.Projects;
         python: """
           import os
           from openai import OpenAI
+          from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+          
+          endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
           
           client = OpenAI(
-              api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+              base_url=endpoint,
+              api_key=token_provider
           )
           video = client.videos.edit(
               prompt="x",
@@ -581,12 +846,23 @@ namespace Azure.AI.Projects;
           
           	"github.com/openai/openai-go"
           	"github.com/openai/openai-go/option"
+              "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+              "github.com/openai/openai-go/v3/azure"
           )
           
           func main() {
-          	client := openai.NewClient(
-          		option.WithAPIKey("My API Key"),
-          	)
+          	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+              tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+              if err != nil {
+                  println("Error creating credential.")
+                  panic(err)
+              }
+          
+              client := openai.NewClient(
+                  option.WithBaseURL(endpoint),
+                  azure.WithTokenCredential(tokenCredential),
+              )
           	video, err := client.Videos.Edit(context.TODO(), openai.VideoEditParams{
           		Prompt: "x",
           		Video: openai.VideoEditParamsVideoUnion{
@@ -610,25 +886,48 @@ namespace Azure.AI.Projects;
           import com.openai.models.videos.VideoEditParams;
           import java.io.ByteArrayInputStream;
           import java.io.InputStream;
+          import com.azure.identity.AuthenticationUtil;
+          import com.azure.identity.DefaultAzureCredentialBuilder;
+          import com.openai.credential.BearerTokenCredential;
           
           public final class Main {
               private Main() {}
           
               public static void main(String[] args) {
-                  OpenAIClient client = OpenAIOkHttpClient.fromEnv();
+                  String endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
           
-                  VideoEditParams params = VideoEditParams.builder()
-                      .prompt("x")
-                      .video(new ByteArrayInputStream("Example data".getBytes()))
-                      .build();
+              OpenAIClient client = OpenAIOkHttpClient.builder()
+                  .baseUrl(endpoint)
+                  .credential(BearerTokenCredential.create(AuthenticationUtil.getBearerTokenSupplier(
+                      new DefaultAzureCredentialBuilder().build(), "https://ai.azure.com/.default")))
+                  .build();
                   Video video = client.videos().edit(params);
               }
           }
           """,
         ruby: """
           require "openai"
+          require "oauth2"
           
-          openai = OpenAI::Client.new(api_key: "My API Key")
+          tenant_id = ENV["AZURE_TENANT_ID"]
+          client_id = ENV["AZURE_CLIENT_ID"]
+          client_secret = ENV["AZURE_CLIENT_SECRET"]
+          
+          resource = "https://ai.azure.com/.default"
+          oauth_client = OAuth2::Client.new(
+            client_id,
+            client_secret,
+            site: "https://login.microsoftonline.com/#{tenant_id}",
+            token_url: "/oauth2/v2.0/token"
+          )
+          
+          token = oauth_client.client_credentials.get_token(scope: resource).token
+          base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+          openai = OpenAI::Client.new(
+            access_token: token,
+            uri_base: base_url
+          )
           
           video = openai.videos.edit(prompt: "x", video: StringIO.new("Example data"))
           
@@ -640,7 +939,7 @@ namespace Azure.AI.Projects;
 );
 
 @@extension(
-  Azure.AI.Projects.VideoGeneration.createVideoExtendMultipart,
+  Azure.AI.Projects.VideoGeneration.CreateVideoExtendMultipart,
   "x-oaiMeta",
   #{
     examples: #{
@@ -648,9 +947,16 @@ namespace Azure.AI.Projects;
       request: #{
         `node.js`: """
           import OpenAI from 'openai';
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+          
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
           
           const client = new OpenAI({
-            apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+              baseURL: endpoint,
+              apiKey: tokenProvider
           });
           
           const video = await client.videos.extend({
@@ -664,9 +970,14 @@ namespace Azure.AI.Projects;
         python: """
           import os
           from openai import OpenAI
+          from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+          
+          endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
           
           client = OpenAI(
-              api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+              base_url=endpoint,
+              api_key=token_provider
           )
           video = client.videos.extend(
               prompt="x",
@@ -686,12 +997,23 @@ namespace Azure.AI.Projects;
           
           	"github.com/openai/openai-go"
           	"github.com/openai/openai-go/option"
+              "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+              "github.com/openai/openai-go/v3/azure"
           )
           
           func main() {
-          	client := openai.NewClient(
-          		option.WithAPIKey("My API Key"),
-          	)
+          	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+              tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+              if err != nil {
+                  println("Error creating credential.")
+                  panic(err)
+              }
+          
+              client := openai.NewClient(
+                  option.WithBaseURL(endpoint),
+                  azure.WithTokenCredential(tokenCredential),
+              )
           	video, err := client.Videos.Extend(context.TODO(), openai.VideoExtendParams{
           		Prompt:  "x",
           		Seconds: openai.VideoSeconds4,
@@ -717,26 +1039,48 @@ namespace Azure.AI.Projects;
           import com.openai.models.videos.VideoSeconds;
           import java.io.ByteArrayInputStream;
           import java.io.InputStream;
+          import com.azure.identity.AuthenticationUtil;
+          import com.azure.identity.DefaultAzureCredentialBuilder;
+          import com.openai.credential.BearerTokenCredential;
           
           public final class Main {
               private Main() {}
           
               public static void main(String[] args) {
-                  OpenAIClient client = OpenAIOkHttpClient.fromEnv();
+                  String endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
           
-                  VideoExtendParams params = VideoExtendParams.builder()
-                      .prompt("x")
-                      .seconds(VideoSeconds._4)
-                      .video(new ByteArrayInputStream("Example data".getBytes()))
-                      .build();
+              OpenAIClient client = OpenAIOkHttpClient.builder()
+                  .baseUrl(endpoint)
+                  .credential(BearerTokenCredential.create(AuthenticationUtil.getBearerTokenSupplier(
+                      new DefaultAzureCredentialBuilder().build(), "https://ai.azure.com/.default")))
+                  .build();
                   Video video = client.videos().extend(params);
               }
           }
           """,
         ruby: """
           require "openai"
+          require "oauth2"
           
-          openai = OpenAI::Client.new(api_key: "My API Key")
+          tenant_id = ENV["AZURE_TENANT_ID"]
+          client_id = ENV["AZURE_CLIENT_ID"]
+          client_secret = ENV["AZURE_CLIENT_SECRET"]
+          
+          resource = "https://ai.azure.com/.default"
+          oauth_client = OAuth2::Client.new(
+            client_id,
+            client_secret,
+            site: "https://login.microsoftonline.com/#{tenant_id}",
+            token_url: "/oauth2/v2.0/token"
+          )
+          
+          token = oauth_client.client_credentials.get_token(scope: resource).token
+          base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+          openai = OpenAI::Client.new(
+            access_token: token,
+            uri_base: base_url
+          )
           
           video = openai.videos.extend_(prompt: "x", seconds: :"4", video: StringIO.new("Example data"))
           
@@ -748,7 +1092,7 @@ namespace Azure.AI.Projects;
 );
 
 @@extension(
-  Azure.AI.Projects.VideoGeneration.createVideoExtendJson,
+  Azure.AI.Projects.VideoGeneration.CreateVideoExtendJson,
   "x-oaiMeta",
   #{
     examples: #{
@@ -756,9 +1100,16 @@ namespace Azure.AI.Projects;
       request: #{
         `node.js`: """
           import OpenAI from 'openai';
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+          
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
           
           const client = new OpenAI({
-            apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+              baseURL: endpoint,
+              apiKey: tokenProvider
           });
           
           const video = await client.videos.extend({
@@ -772,9 +1123,14 @@ namespace Azure.AI.Projects;
         python: """
           import os
           from openai import OpenAI
+          from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+          
+          endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
           
           client = OpenAI(
-              api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+              base_url=endpoint,
+              api_key=token_provider
           )
           video = client.videos.extend(
               prompt="x",
@@ -794,12 +1150,23 @@ namespace Azure.AI.Projects;
           
           	"github.com/openai/openai-go"
           	"github.com/openai/openai-go/option"
+              "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+              "github.com/openai/openai-go/v3/azure"
           )
           
           func main() {
-          	client := openai.NewClient(
-          		option.WithAPIKey("My API Key"),
-          	)
+          	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+              tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+              if err != nil {
+                  println("Error creating credential.")
+                  panic(err)
+              }
+          
+              client := openai.NewClient(
+                  option.WithBaseURL(endpoint),
+                  azure.WithTokenCredential(tokenCredential),
+              )
           	video, err := client.Videos.Extend(context.TODO(), openai.VideoExtendParams{
           		Prompt:  "x",
           		Seconds: openai.VideoSeconds4,
@@ -825,26 +1192,48 @@ namespace Azure.AI.Projects;
           import com.openai.models.videos.VideoSeconds;
           import java.io.ByteArrayInputStream;
           import java.io.InputStream;
+          import com.azure.identity.AuthenticationUtil;
+          import com.azure.identity.DefaultAzureCredentialBuilder;
+          import com.openai.credential.BearerTokenCredential;
           
           public final class Main {
               private Main() {}
           
               public static void main(String[] args) {
-                  OpenAIClient client = OpenAIOkHttpClient.fromEnv();
+                  String endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
           
-                  VideoExtendParams params = VideoExtendParams.builder()
-                      .prompt("x")
-                      .seconds(VideoSeconds._4)
-                      .video(new ByteArrayInputStream("Example data".getBytes()))
-                      .build();
+              OpenAIClient client = OpenAIOkHttpClient.builder()
+                  .baseUrl(endpoint)
+                  .credential(BearerTokenCredential.create(AuthenticationUtil.getBearerTokenSupplier(
+                      new DefaultAzureCredentialBuilder().build(), "https://ai.azure.com/.default")))
+                  .build();
                   Video video = client.videos().extend(params);
               }
           }
           """,
         ruby: """
           require "openai"
+          require "oauth2"
           
-          openai = OpenAI::Client.new(api_key: "My API Key")
+          tenant_id = ENV["AZURE_TENANT_ID"]
+          client_id = ENV["AZURE_CLIENT_ID"]
+          client_secret = ENV["AZURE_CLIENT_SECRET"]
+          
+          resource = "https://ai.azure.com/.default"
+          oauth_client = OAuth2::Client.new(
+            client_id,
+            client_secret,
+            site: "https://login.microsoftonline.com/#{tenant_id}",
+            token_url: "/oauth2/v2.0/token"
+          )
+          
+          token = oauth_client.client_credentials.get_token(scope: resource).token
+          base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+          openai = OpenAI::Client.new(
+            access_token: token,
+            uri_base: base_url
+          )
           
           video = openai.videos.extend_(prompt: "x", seconds: :"4", video: StringIO.new("Example data"))
           
@@ -856,7 +1245,7 @@ namespace Azure.AI.Projects;
 );
 
 @@extension(
-  Azure.AI.Projects.VideoGeneration.deleteVideo,
+  Azure.AI.Projects.VideoGeneration.DeleteVideo,
   "x-oaiMeta",
   #{
     name: "Delete video",
@@ -867,8 +1256,17 @@ namespace Azure.AI.Projects;
       request: #{
         javascript: """
           import OpenAI from 'openai';
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
           
-          const client = new OpenAI();
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
+          
+          const openai = new OpenAI({
+              baseURL: endpoint,
+              apiKey: tokenProvider
+          });
           
           const video = await client.videos.delete('video_123');
           
@@ -878,9 +1276,14 @@ namespace Azure.AI.Projects;
         python: """
           import os
           from openai import OpenAI
+          from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+          
+          endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
           
           client = OpenAI(
-              api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+              base_url=endpoint,
+              api_key=token_provider
           )
           video = client.videos.delete(
               "video_123",
@@ -896,12 +1299,23 @@ namespace Azure.AI.Projects;
           
           	"github.com/openai/openai-go"
           	"github.com/openai/openai-go/option"
+              "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+              "github.com/openai/openai-go/v3/azure"
           )
           
           func main() {
-          	client := openai.NewClient(
-          		option.WithAPIKey("My API Key"),
-          	)
+          	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+              tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+              if err != nil {
+                  println("Error creating credential.")
+                  panic(err)
+              }
+          
+              client := openai.NewClient(
+                  option.WithBaseURL(endpoint),
+                  azure.WithTokenCredential(tokenCredential),
+              )
           	video, err := client.Videos.Delete(context.TODO(), "video_123")
           	if err != nil {
           		panic(err.Error())
@@ -913,8 +1327,27 @@ namespace Azure.AI.Projects;
           """,
         ruby: """
           require "openai"
+          require "oauth2"
           
-          openai = OpenAI::Client.new(api_key: "My API Key")
+          tenant_id = ENV["AZURE_TENANT_ID"]
+          client_id = ENV["AZURE_CLIENT_ID"]
+          client_secret = ENV["AZURE_CLIENT_SECRET"]
+          
+          resource = "https://ai.azure.com/.default"
+          oauth_client = OAuth2::Client.new(
+            client_id,
+            client_secret,
+            site: "https://login.microsoftonline.com/#{tenant_id}",
+            token_url: "/oauth2/v2.0/token"
+          )
+          
+          token = oauth_client.client_credentials.get_token(scope: resource).token
+          base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+          openai = OpenAI::Client.new(
+            access_token: token,
+            uri_base: base_url
+          )
           
           video = openai.videos.delete("video_123")
           
@@ -927,6 +1360,9 @@ namespace Azure.AI.Projects;
           import com.openai.client.okhttp.OpenAIOkHttpClient;
           import com.openai.models.videos.VideoDeleteParams;
           import com.openai.models.videos.VideoDeleteResponse;
+          import com.azure.identity.AuthenticationUtil;
+          import com.azure.identity.DefaultAzureCredentialBuilder;
+          import com.openai.credential.BearerTokenCredential;
           
           public final class Main {
               private Main() {}
@@ -940,9 +1376,16 @@ namespace Azure.AI.Projects;
           """,
         `node.js`: """
           import OpenAI from 'openai';
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+          
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
           
           const client = new OpenAI({
-            apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+              baseURL: endpoint,
+              apiKey: tokenProvider
           });
           
           const video = await client.videos.delete('video_123');
@@ -955,7 +1398,7 @@ namespace Azure.AI.Projects;
 );
 
 @@extension(
-  Azure.AI.Projects.VideoGeneration.getVideo,
+  Azure.AI.Projects.VideoGeneration.GetVideo,
   "x-oaiMeta",
   #{
     name: "Retrieve video",
@@ -966,8 +1409,17 @@ namespace Azure.AI.Projects;
       request: #{
         javascript: """
           import OpenAI from 'openai';
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
           
-          const client = new OpenAI();
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
+          
+          const openai = new OpenAI({
+              baseURL: endpoint,
+              apiKey: tokenProvider
+          });
           
           const video = await client.videos.retrieve('video_123');
           
@@ -977,9 +1429,14 @@ namespace Azure.AI.Projects;
         python: """
           import os
           from openai import OpenAI
+          from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+          
+          endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
           
           client = OpenAI(
-              api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+              base_url=endpoint,
+              api_key=token_provider
           )
           video = client.videos.retrieve(
               "video_123",
@@ -995,12 +1452,23 @@ namespace Azure.AI.Projects;
           
           	"github.com/openai/openai-go"
           	"github.com/openai/openai-go/option"
+              "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+              "github.com/openai/openai-go/v3/azure"
           )
           
           func main() {
-          	client := openai.NewClient(
-          		option.WithAPIKey("My API Key"),
-          	)
+          	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+              tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+              if err != nil {
+                  println("Error creating credential.")
+                  panic(err)
+              }
+          
+              client := openai.NewClient(
+                  option.WithBaseURL(endpoint),
+                  azure.WithTokenCredential(tokenCredential),
+              )
           	video, err := client.Videos.Get(context.TODO(), "video_123")
           	if err != nil {
           		panic(err.Error())
@@ -1012,8 +1480,27 @@ namespace Azure.AI.Projects;
           """,
         ruby: """
           require "openai"
+          require "oauth2"
           
-          openai = OpenAI::Client.new(api_key: "My API Key")
+          tenant_id = ENV["AZURE_TENANT_ID"]
+          client_id = ENV["AZURE_CLIENT_ID"]
+          client_secret = ENV["AZURE_CLIENT_SECRET"]
+          
+          resource = "https://ai.azure.com/.default"
+          oauth_client = OAuth2::Client.new(
+            client_id,
+            client_secret,
+            site: "https://login.microsoftonline.com/#{tenant_id}",
+            token_url: "/oauth2/v2.0/token"
+          )
+          
+          token = oauth_client.client_credentials.get_token(scope: resource).token
+          base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+          openai = OpenAI::Client.new(
+            access_token: token,
+            uri_base: base_url
+          )
           
           video = openai.videos.retrieve("video_123")
           
@@ -1026,6 +1513,9 @@ namespace Azure.AI.Projects;
           import com.openai.client.okhttp.OpenAIOkHttpClient;
           import com.openai.models.videos.Video;
           import com.openai.models.videos.VideoRetrieveParams;
+          import com.azure.identity.AuthenticationUtil;
+          import com.azure.identity.DefaultAzureCredentialBuilder;
+          import com.openai.credential.BearerTokenCredential;
           
           public final class Main {
               private Main() {}
@@ -1039,9 +1529,16 @@ namespace Azure.AI.Projects;
           """,
         `node.js`: """
           import OpenAI from 'openai';
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+          
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
           
           const client = new OpenAI({
-            apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+              baseURL: endpoint,
+              apiKey: tokenProvider
           });
           
           const video = await client.videos.retrieve('video_123');
@@ -1054,7 +1551,7 @@ namespace Azure.AI.Projects;
 );
 
 @@extension(
-  Azure.AI.Projects.VideoGeneration.retrieveVideoContent,
+  Azure.AI.Projects.VideoGeneration.RetrieveVideoContent,
   "x-oaiMeta",
   #{
     name: "Retrieve video content",
@@ -1065,8 +1562,17 @@ namespace Azure.AI.Projects;
       request: #{
         javascript: """
           import OpenAI from 'openai';
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
           
-          const client = new OpenAI();
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
+          
+          const openai = new OpenAI({
+              baseURL: endpoint,
+              apiKey: tokenProvider
+          });
           
           const response = await client.videos.downloadContent('video_123');
           
@@ -1079,9 +1585,14 @@ namespace Azure.AI.Projects;
         python: """
           import os
           from openai import OpenAI
+          from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+          
+          endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
           
           client = OpenAI(
-              api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+              base_url=endpoint,
+              api_key=token_provider
           )
           response = client.videos.download_content(
               video_id="video_123",
@@ -1099,12 +1610,23 @@ namespace Azure.AI.Projects;
           
           	"github.com/openai/openai-go"
           	"github.com/openai/openai-go/option"
+              "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+              "github.com/openai/openai-go/v3/azure"
           )
           
           func main() {
-          	client := openai.NewClient(
-          		option.WithAPIKey("My API Key"),
-          	)
+          	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+              tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+              if err != nil {
+                  println("Error creating credential.")
+                  panic(err)
+              }
+          
+              client := openai.NewClient(
+                  option.WithBaseURL(endpoint),
+                  azure.WithTokenCredential(tokenCredential),
+              )
           	response, err := client.Videos.DownloadContent(
           		context.TODO(),
           		"video_123",
@@ -1120,8 +1642,27 @@ namespace Azure.AI.Projects;
           """,
         ruby: """
           require "openai"
+          require "oauth2"
           
-          openai = OpenAI::Client.new(api_key: "My API Key")
+          tenant_id = ENV["AZURE_TENANT_ID"]
+          client_id = ENV["AZURE_CLIENT_ID"]
+          client_secret = ENV["AZURE_CLIENT_SECRET"]
+          
+          resource = "https://ai.azure.com/.default"
+          oauth_client = OAuth2::Client.new(
+            client_id,
+            client_secret,
+            site: "https://login.microsoftonline.com/#{tenant_id}",
+            token_url: "/oauth2/v2.0/token"
+          )
+          
+          token = oauth_client.client_credentials.get_token(scope: resource).token
+          base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+          openai = OpenAI::Client.new(
+            access_token: token,
+            uri_base: base_url
+          )
           
           response = openai.videos.download_content("video_123")
           
@@ -1134,6 +1675,9 @@ namespace Azure.AI.Projects;
           import com.openai.client.okhttp.OpenAIOkHttpClient;
           import com.openai.core.http.HttpResponse;
           import com.openai.models.videos.VideoDownloadContentParams;
+          import com.azure.identity.AuthenticationUtil;
+          import com.azure.identity.DefaultAzureCredentialBuilder;
+          import com.openai.credential.BearerTokenCredential;
           
           public final class Main {
               private Main() {}
@@ -1147,9 +1691,16 @@ namespace Azure.AI.Projects;
           """,
         `node.js`: """
           import OpenAI from 'openai';
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+          
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
           
           const client = new OpenAI({
-            apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+              baseURL: endpoint,
+              apiKey: tokenProvider
           });
           
           const response = await client.videos.downloadContent('video_123');
@@ -1165,7 +1716,7 @@ namespace Azure.AI.Projects;
 );
 
 @@extension(
-  Azure.AI.Projects.VideoGeneration.createVideoRemix,
+  Azure.AI.Projects.VideoGeneration.CreateVideoRemix,
   "x-oaiMeta",
   #{
     name: "Remix video",
@@ -1174,8 +1725,11 @@ namespace Azure.AI.Projects;
     examples: #{
       request: #{
         curl: """
-          curl -X POST https://api.openai.com/v1/videos/video_123/remix \\
-            -H "Authorization: Bearer $OPENAI_API_KEY" \\
+          az login
+          AZURE_API_KEY=$(az account get-access-token --resource https://ai.azure.com/ --query accessToken -o tsv)
+          
+          curl-X POST https://<foundry-resource>.services.ai.azure.com/openai/v1/videos/video_123/remix \\
+            -H "Authorization: Bearer $AZURE_API_KEY" \\
             -H "Content-Type: application/json" \\
             -d '{
               "prompt": "Extend the scene with the cat taking a bow to the cheering audience"
@@ -1184,8 +1738,17 @@ namespace Azure.AI.Projects;
           """,
         javascript: """
           import OpenAI from 'openai';
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
           
-          const client = new OpenAI();
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
+          
+          const openai = new OpenAI({
+              baseURL: endpoint,
+              apiKey: tokenProvider
+          });
           
           const video = await client.videos.remix('video_123', { prompt: 'Extend the scene with the cat taking a bow to the cheering audience' });
           
@@ -1195,9 +1758,14 @@ namespace Azure.AI.Projects;
         python: """
           import os
           from openai import OpenAI
+          from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+          
+          endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
           
           client = OpenAI(
-              api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+              base_url=endpoint,
+              api_key=token_provider
           )
           video = client.videos.remix(
               video_id="video_123",
@@ -1214,12 +1782,23 @@ namespace Azure.AI.Projects;
           
           	"github.com/openai/openai-go"
           	"github.com/openai/openai-go/option"
+              "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+              "github.com/openai/openai-go/v3/azure"
           )
           
           func main() {
-          	client := openai.NewClient(
-          		option.WithAPIKey("My API Key"),
-          	)
+          	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+              tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+              if err != nil {
+                  println("Error creating credential.")
+                  panic(err)
+              }
+          
+              client := openai.NewClient(
+                  option.WithBaseURL(endpoint),
+                  azure.WithTokenCredential(tokenCredential),
+              )
           	video, err := client.Videos.Remix(
           		context.TODO(),
           		"video_123",
@@ -1237,8 +1816,27 @@ namespace Azure.AI.Projects;
           """,
         ruby: """
           require "openai"
+          require "oauth2"
           
-          openai = OpenAI::Client.new(api_key: "My API Key")
+          tenant_id = ENV["AZURE_TENANT_ID"]
+          client_id = ENV["AZURE_CLIENT_ID"]
+          client_secret = ENV["AZURE_CLIENT_SECRET"]
+          
+          resource = "https://ai.azure.com/.default"
+          oauth_client = OAuth2::Client.new(
+            client_id,
+            client_secret,
+            site: "https://login.microsoftonline.com/#{tenant_id}",
+            token_url: "/oauth2/v2.0/token"
+          )
+          
+          token = oauth_client.client_credentials.get_token(scope: resource).token
+          base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+          openai = OpenAI::Client.new(
+            access_token: token,
+            uri_base: base_url
+          )
           
           video = openai.videos.remix("video_123", prompt: "x")
           
@@ -1251,26 +1849,37 @@ namespace Azure.AI.Projects;
           import com.openai.client.okhttp.OpenAIOkHttpClient;
           import com.openai.models.videos.Video;
           import com.openai.models.videos.VideoRemixParams;
+          import com.azure.identity.AuthenticationUtil;
+          import com.azure.identity.DefaultAzureCredentialBuilder;
+          import com.openai.credential.BearerTokenCredential;
           
           public final class Main {
               private Main() {}
           
               public static void main(String[] args) {
-                  OpenAIClient client = OpenAIOkHttpClient.fromEnv();
+                  String endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
           
-                  VideoRemixParams params = VideoRemixParams.builder()
-                      .videoId("video_123")
-                      .prompt("x")
-                      .build();
+              OpenAIClient client = OpenAIOkHttpClient.builder()
+                  .baseUrl(endpoint)
+                  .credential(BearerTokenCredential.create(AuthenticationUtil.getBearerTokenSupplier(
+                      new DefaultAzureCredentialBuilder().build(), "https://ai.azure.com/.default")))
+                  .build();
                   Video video = client.videos().remix(params);
               }
           }
           """,
         `node.js`: """
           import OpenAI from 'openai';
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+          
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
           
           const client = new OpenAI({
-            apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+              baseURL: endpoint,
+              apiKey: tokenProvider
           });
           
           const video = await client.videos.remix('video_123', { prompt: 'x' });

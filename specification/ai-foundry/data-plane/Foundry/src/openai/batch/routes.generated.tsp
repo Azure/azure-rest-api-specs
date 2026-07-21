@@ -15,19 +15,21 @@ namespace Azure.AI.Projects;
 @route("openai/v1/batches")
 @tag("Batch")
 interface Batches {
-  /**
-   * Lists batches matching the request filters.
-   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @doc("Lists your organization's batches.")
   @summary("List batches")
   @list
   @get
   listBatches is OpenAIOperation<
     {
-      /** A cursor for use in pagination. `after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list. */
+      /**
+       * A cursor for use in pagination. `after` is an object ID that defines your place in the list.
+       * For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+       * subsequent call can include after=obj_foo in order to fetch the next page of the list.
+       */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Auto-suppressed warnings non-applicable rules during import."
       #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
       @extension("x-ms-list-continuation-token", true)
@@ -35,7 +37,10 @@ interface Batches {
       @query(#{ explode: true })
       after?: string;
 
-      /** A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20. */
+      /**
+       * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+       * default is 20.
+       */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Auto-suppressed warnings non-applicable rules during import."
       @query(#{ explode: true })
       limit?: integer = 20;
@@ -43,13 +48,11 @@ interface Batches {
     OpenAI.ListBatchesResponse
   >;
 
-  /**
-   * Creates a batch from the supplied request.
-   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @doc("Creates and executes a batch from an uploaded file of requests.")
   @summary("Create a batch")
   @post
   createBatch is OpenAIOperation<
@@ -61,14 +64,12 @@ interface Batches {
     OpenAI.Batch
   >;
 
-  /**
-   * Retrieves a batch by its identifier.
-   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @doc("Retrieves a batch.")
   @summary("Get a batch")
   @route("{batch_id}")
   @get
@@ -82,14 +83,12 @@ interface Batches {
     OpenAI.Batch
   >;
 
-  /**
-   * Cancels a batch by its identifier.
-   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
-  @summary("Cancel a batch")
+  @doc("Cancels an in-progress batch. The batch will be in status `cancelling` for up to 10 minutes, before changing to `cancelled`, where it will have partial results (if any) available in the output file.")
+  @summary("Cancel an in-progress batch")
   @route("{batch_id}/cancel")
   @post
   cancelBatch is OpenAIOperation<

@@ -7,31 +7,26 @@
 import "../../common/models.tsp";
 import "@typespec/http";
 import "@azure-tools/openai-typespec/models/images";
-import "@typespec/openapi";
 using TypeSpec.Http;
 using OpenAI;
-using TypeSpec.OpenAPI;
 namespace Azure.AI.Projects;
 @route("openai/v1/images")
 @tag("Images")
 interface Images {
-  /**
-   * Creates an image edit multipart from the supplied request.
-   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/byos" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
-  @summary("Create an image edit multipart")
+  @doc("Creates an edited or extended image given one or more source images and a prompt. This endpoint supports GPT Image models (`gpt-image-1.5`, `gpt-image-1`, `gpt-image-1-mini`, and `chatgpt-image-latest`) and `dall-e-2`.")
+  @summary("Create an image edit")
   @sharedRoute
   @route("edits")
   @post
-  @extension("x-ms-request-body-description-override", "The request body.")
   createImageEditMultipart is OpenAIOperation<
     {
-      /** The content type of the request body. */
+      /** The request content type. */
       @header
       contentType: "multipart/form-data";
 
@@ -42,19 +37,16 @@ interface Images {
     OpenAI.ImagesResponse
   >;
 
-  /**
-   * Creates an image edit json from the supplied request.
-   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
-  @summary("Create an image edit json")
+  @doc("Creates an edited or extended image given one or more source images and a prompt. This endpoint supports GPT Image models (`gpt-image-1.5`, `gpt-image-1`, `gpt-image-1-mini`, and `chatgpt-image-latest`) and `dall-e-2`.")
+  @summary("Create an image edit")
   @sharedRoute
   @route("edits")
   @post
-  @extension("x-ms-request-body-description-override", "The request body.")
   createImageEditJson is OpenAIOperation<
     {
       /** The request body. */
@@ -64,14 +56,12 @@ interface Images {
     OpenAI.ImagesResponse
   >;
 
-  /**
-   * Creates an image from the supplied request.
-   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @doc("Creates an image given a prompt. Learn more.")
   @summary("Create an image")
   @route("generations")
   @post
@@ -84,20 +74,18 @@ interface Images {
     OpenAI.ImagesResponse
   >;
 
-  /**
-   * Creates an image variation from the supplied request.
-   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/byos" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @doc("Creates a variation of a given image. This endpoint only supports `dall-e-2`.")
   @summary("Create an image variation")
   @route("variations")
   @post
   createImageVariation is OpenAIOperation<
     {
-      /** The content type of the request body. */
+      /** The request content type. */
       @header
       contentType: "multipart/form-data";
 

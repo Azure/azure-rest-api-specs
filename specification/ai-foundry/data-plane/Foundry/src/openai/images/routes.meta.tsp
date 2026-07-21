@@ -19,10 +19,13 @@ namespace Azure.AI.Projects;
         title: "Edit image",
         request: #{
           curl: """
-            curl -s -D >(grep -i x-request-id >&2) \\
+            az login
+            AZURE_API_KEY=$(az account get-access-token --resource https://ai.azure.com/ --query accessToken -o tsv)
+            
+            curl-s -D >(grep -i x-request-id >&2) \\
               -o >(jq -r '.data[0].b64_json' | base64 --decode > gift-basket.png) \\
-              -X POST "https://api.openai.com/v1/images/edits" \\
-              -H "Authorization: Bearer $OPENAI_API_KEY" \\
+              -X POST "https://<foundry-resource>.services.ai.azure.com/openai/v1/images/edits" \\
+              -H "Authorization: Bearer $AZURE_API_KEY" \\
               -F "model=gpt-image-1.5" \\
               -F "image[]=@body-lotion.png" \\
               -F "image[]=@bath-bomb.png" \\
@@ -34,9 +37,14 @@ namespace Azure.AI.Projects;
           python: """
             import os
             from openai import OpenAI
+            from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+            
+            endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
             
             client = OpenAI(
-                api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+                base_url=endpoint,
+                api_key=token_provider
             )
             for image in client.images.edit(
                 image=b"Example data",
@@ -47,8 +55,17 @@ namespace Azure.AI.Projects;
           javascript: """
             import fs from "fs";
             import OpenAI, { toFile } from "openai";
+            import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
             
-            const client = new OpenAI();
+            const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            const tokenProvider = getBearerTokenProvider(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
+            
+            const openai = new OpenAI({
+                baseURL: endpoint,
+                apiKey: tokenProvider
+            });
             
             const imageFiles = [
                 "bath-bomb.png",
@@ -80,9 +97,16 @@ namespace Azure.AI.Projects;
           `node.js`: """
             import fs from 'fs';
             import OpenAI from 'openai';
+            import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+            
+            const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            const tokenProvider = getBearerTokenProvider(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
             
             const client = new OpenAI({
-              apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+                baseURL: endpoint,
+                apiKey: tokenProvider
             });
             
             const imagesResponse = await client.images.edit({
@@ -103,12 +127,23 @@ namespace Azure.AI.Projects;
             
             	"github.com/openai/openai-go"
             	"github.com/openai/openai-go/option"
+                "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+                "github.com/openai/openai-go/v3/azure"
             )
             
             func main() {
-            	client := openai.NewClient(
-            		option.WithAPIKey("My API Key"),
-            	)
+            	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            
+                tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+                if err != nil {
+                    println("Error creating credential.")
+                    panic(err)
+                }
+            
+                client := openai.NewClient(
+                    option.WithBaseURL(endpoint),
+                    azure.WithTokenCredential(tokenCredential),
+                )
             	imagesResponse, err := client.Images.Edit(context.TODO(), openai.ImageEditParams{
             		Image: openai.ImageEditParamsImageUnion{
             			OfFile: io.Reader(bytes.NewBuffer([]byte("Example data"))),
@@ -132,25 +167,48 @@ namespace Azure.AI.Projects;
             import com.openai.models.images.ImagesResponse;
             import java.io.ByteArrayInputStream;
             import java.io.InputStream;
+            import com.azure.identity.AuthenticationUtil;
+            import com.azure.identity.DefaultAzureCredentialBuilder;
+            import com.openai.credential.BearerTokenCredential;
             
             public final class Main {
                 private Main() {}
             
                 public static void main(String[] args) {
-                    OpenAIClient client = OpenAIOkHttpClient.fromEnv();
+                    String endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
             
-                    ImageEditParams params = ImageEditParams.builder()
-                        .image(new ByteArrayInputStream("Example data".getBytes()))
-                        .prompt("A cute baby sea otter wearing a beret")
-                        .build();
+                OpenAIClient client = OpenAIOkHttpClient.builder()
+                    .baseUrl(endpoint)
+                    .credential(BearerTokenCredential.create(AuthenticationUtil.getBearerTokenSupplier(
+                        new DefaultAzureCredentialBuilder().build(), "https://ai.azure.com/.default")))
+                    .build();
                     ImagesResponse imagesResponse = client.images().edit(params);
                 }
             }
             """,
           ruby: """
             require "openai"
+            require "oauth2"
             
-            openai = OpenAI::Client.new(api_key: "My API Key")
+            tenant_id = ENV["AZURE_TENANT_ID"]
+            client_id = ENV["AZURE_CLIENT_ID"]
+            client_secret = ENV["AZURE_CLIENT_SECRET"]
+            
+            resource = "https://ai.azure.com/.default"
+            oauth_client = OAuth2::Client.new(
+              client_id,
+              client_secret,
+              site: "https://login.microsoftonline.com/#{tenant_id}",
+              token_url: "/oauth2/v2.0/token"
+            )
+            
+            token = oauth_client.client_credentials.get_token(scope: resource).token
+            base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            
+            openai = OpenAI::Client.new(
+              access_token: token,
+              uri_base: base_url
+            )
             
             images_response = openai.images.edit(image: StringIO.new("Example data"), prompt: "A cute baby sea otter wearing a beret")
             
@@ -162,8 +220,11 @@ namespace Azure.AI.Projects;
         title: "Streaming",
         request: #{
           curl: """
-            curl -s -N -X POST "https://api.openai.com/v1/images/edits" \\
-              -H "Authorization: Bearer $OPENAI_API_KEY" \\
+            az login
+            AZURE_API_KEY=$(az account get-access-token --resource https://ai.azure.com/ --query accessToken -o tsv)
+            
+            curl-s -N -X POST "https://<foundry-resource>.services.ai.azure.com/openai/v1/images/edits" \\
+              -H "Authorization: Bearer $AZURE_API_KEY" \\
               -F "model=gpt-image-1.5" \\
               -F "image[]=@body-lotion.png" \\
               -F "image[]=@bath-bomb.png" \\
@@ -176,9 +237,14 @@ namespace Azure.AI.Projects;
           python: """
             import os
             from openai import OpenAI
+            from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+            
+            endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
             
             client = OpenAI(
-                api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+                base_url=endpoint,
+                api_key=token_provider
             )
             for image in client.images.edit(
                 image=b"Example data",
@@ -189,8 +255,17 @@ namespace Azure.AI.Projects;
           javascript: """
             import fs from "fs";
             import OpenAI, { toFile } from "openai";
+            import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
             
-            const client = new OpenAI();
+            const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            const tokenProvider = getBearerTokenProvider(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
+            
+            const openai = new OpenAI({
+                baseURL: endpoint,
+                apiKey: tokenProvider
+            });
             
             const imageFiles = [
                 "bath-bomb.png",
@@ -222,9 +297,16 @@ namespace Azure.AI.Projects;
           `node.js`: """
             import fs from 'fs';
             import OpenAI from 'openai';
+            import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+            
+            const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            const tokenProvider = getBearerTokenProvider(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
             
             const client = new OpenAI({
-              apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+                baseURL: endpoint,
+                apiKey: tokenProvider
             });
             
             const imagesResponse = await client.images.edit({
@@ -245,12 +327,23 @@ namespace Azure.AI.Projects;
             
             	"github.com/openai/openai-go"
             	"github.com/openai/openai-go/option"
+                "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+                "github.com/openai/openai-go/v3/azure"
             )
             
             func main() {
-            	client := openai.NewClient(
-            		option.WithAPIKey("My API Key"),
-            	)
+            	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            
+                tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+                if err != nil {
+                    println("Error creating credential.")
+                    panic(err)
+                }
+            
+                client := openai.NewClient(
+                    option.WithBaseURL(endpoint),
+                    azure.WithTokenCredential(tokenCredential),
+                )
             	imagesResponse, err := client.Images.Edit(context.TODO(), openai.ImageEditParams{
             		Image: openai.ImageEditParamsImageUnion{
             			OfFile: io.Reader(bytes.NewBuffer([]byte("Example data"))),
@@ -274,25 +367,48 @@ namespace Azure.AI.Projects;
             import com.openai.models.images.ImagesResponse;
             import java.io.ByteArrayInputStream;
             import java.io.InputStream;
+            import com.azure.identity.AuthenticationUtil;
+            import com.azure.identity.DefaultAzureCredentialBuilder;
+            import com.openai.credential.BearerTokenCredential;
             
             public final class Main {
                 private Main() {}
             
                 public static void main(String[] args) {
-                    OpenAIClient client = OpenAIOkHttpClient.fromEnv();
+                    String endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
             
-                    ImageEditParams params = ImageEditParams.builder()
-                        .image(new ByteArrayInputStream("Example data".getBytes()))
-                        .prompt("A cute baby sea otter wearing a beret")
-                        .build();
+                OpenAIClient client = OpenAIOkHttpClient.builder()
+                    .baseUrl(endpoint)
+                    .credential(BearerTokenCredential.create(AuthenticationUtil.getBearerTokenSupplier(
+                        new DefaultAzureCredentialBuilder().build(), "https://ai.azure.com/.default")))
+                    .build();
                     ImagesResponse imagesResponse = client.images().edit(params);
                 }
             }
             """,
           ruby: """
             require "openai"
+            require "oauth2"
             
-            openai = OpenAI::Client.new(api_key: "My API Key")
+            tenant_id = ENV["AZURE_TENANT_ID"]
+            client_id = ENV["AZURE_CLIENT_ID"]
+            client_secret = ENV["AZURE_CLIENT_SECRET"]
+            
+            resource = "https://ai.azure.com/.default"
+            oauth_client = OAuth2::Client.new(
+              client_id,
+              client_secret,
+              site: "https://login.microsoftonline.com/#{tenant_id}",
+              token_url: "/oauth2/v2.0/token"
+            )
+            
+            token = oauth_client.client_credentials.get_token(scope: resource).token
+            base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            
+            openai = OpenAI::Client.new(
+              access_token: token,
+              uri_base: base_url
+            )
             
             images_response = openai.images.edit(image: StringIO.new("Example data"), prompt: "A cute baby sea otter wearing a beret")
             
@@ -323,10 +439,13 @@ namespace Azure.AI.Projects;
         title: "Edit image",
         request: #{
           curl: """
-            curl -s -D >(grep -i x-request-id >&2) \\
+            az login
+            AZURE_API_KEY=$(az account get-access-token --resource https://ai.azure.com/ --query accessToken -o tsv)
+            
+            curl-s -D >(grep -i x-request-id >&2) \\
               -o >(jq -r '.data[0].b64_json' | base64 --decode > gift-basket.png) \\
-              -X POST "https://api.openai.com/v1/images/edits" \\
-              -H "Authorization: Bearer $OPENAI_API_KEY" \\
+              -X POST "https://<foundry-resource>.services.ai.azure.com/openai/v1/images/edits" \\
+              -H "Authorization: Bearer $AZURE_API_KEY" \\
               -F "model=gpt-image-1.5" \\
               -F "image[]=@body-lotion.png" \\
               -F "image[]=@bath-bomb.png" \\
@@ -338,9 +457,14 @@ namespace Azure.AI.Projects;
           python: """
             import os
             from openai import OpenAI
+            from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+            
+            endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
             
             client = OpenAI(
-                api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+                base_url=endpoint,
+                api_key=token_provider
             )
             for image in client.images.edit(
                 image=b"Example data",
@@ -351,8 +475,17 @@ namespace Azure.AI.Projects;
           javascript: """
             import fs from "fs";
             import OpenAI, { toFile } from "openai";
+            import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
             
-            const client = new OpenAI();
+            const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            const tokenProvider = getBearerTokenProvider(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
+            
+            const openai = new OpenAI({
+                baseURL: endpoint,
+                apiKey: tokenProvider
+            });
             
             const imageFiles = [
                 "bath-bomb.png",
@@ -384,9 +517,16 @@ namespace Azure.AI.Projects;
           `node.js`: """
             import fs from 'fs';
             import OpenAI from 'openai';
+            import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+            
+            const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            const tokenProvider = getBearerTokenProvider(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
             
             const client = new OpenAI({
-              apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+                baseURL: endpoint,
+                apiKey: tokenProvider
             });
             
             const imagesResponse = await client.images.edit({
@@ -407,12 +547,23 @@ namespace Azure.AI.Projects;
             
             	"github.com/openai/openai-go"
             	"github.com/openai/openai-go/option"
+                "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+                "github.com/openai/openai-go/v3/azure"
             )
             
             func main() {
-            	client := openai.NewClient(
-            		option.WithAPIKey("My API Key"),
-            	)
+            	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            
+                tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+                if err != nil {
+                    println("Error creating credential.")
+                    panic(err)
+                }
+            
+                client := openai.NewClient(
+                    option.WithBaseURL(endpoint),
+                    azure.WithTokenCredential(tokenCredential),
+                )
             	imagesResponse, err := client.Images.Edit(context.TODO(), openai.ImageEditParams{
             		Image: openai.ImageEditParamsImageUnion{
             			OfFile: io.Reader(bytes.NewBuffer([]byte("Example data"))),
@@ -436,25 +587,48 @@ namespace Azure.AI.Projects;
             import com.openai.models.images.ImagesResponse;
             import java.io.ByteArrayInputStream;
             import java.io.InputStream;
+            import com.azure.identity.AuthenticationUtil;
+            import com.azure.identity.DefaultAzureCredentialBuilder;
+            import com.openai.credential.BearerTokenCredential;
             
             public final class Main {
                 private Main() {}
             
                 public static void main(String[] args) {
-                    OpenAIClient client = OpenAIOkHttpClient.fromEnv();
+                    String endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
             
-                    ImageEditParams params = ImageEditParams.builder()
-                        .image(new ByteArrayInputStream("Example data".getBytes()))
-                        .prompt("A cute baby sea otter wearing a beret")
-                        .build();
+                OpenAIClient client = OpenAIOkHttpClient.builder()
+                    .baseUrl(endpoint)
+                    .credential(BearerTokenCredential.create(AuthenticationUtil.getBearerTokenSupplier(
+                        new DefaultAzureCredentialBuilder().build(), "https://ai.azure.com/.default")))
+                    .build();
                     ImagesResponse imagesResponse = client.images().edit(params);
                 }
             }
             """,
           ruby: """
             require "openai"
+            require "oauth2"
             
-            openai = OpenAI::Client.new(api_key: "My API Key")
+            tenant_id = ENV["AZURE_TENANT_ID"]
+            client_id = ENV["AZURE_CLIENT_ID"]
+            client_secret = ENV["AZURE_CLIENT_SECRET"]
+            
+            resource = "https://ai.azure.com/.default"
+            oauth_client = OAuth2::Client.new(
+              client_id,
+              client_secret,
+              site: "https://login.microsoftonline.com/#{tenant_id}",
+              token_url: "/oauth2/v2.0/token"
+            )
+            
+            token = oauth_client.client_credentials.get_token(scope: resource).token
+            base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            
+            openai = OpenAI::Client.new(
+              access_token: token,
+              uri_base: base_url
+            )
             
             images_response = openai.images.edit(image: StringIO.new("Example data"), prompt: "A cute baby sea otter wearing a beret")
             
@@ -466,8 +640,11 @@ namespace Azure.AI.Projects;
         title: "Streaming",
         request: #{
           curl: """
-            curl -s -N -X POST "https://api.openai.com/v1/images/edits" \\
-              -H "Authorization: Bearer $OPENAI_API_KEY" \\
+            az login
+            AZURE_API_KEY=$(az account get-access-token --resource https://ai.azure.com/ --query accessToken -o tsv)
+            
+            curl-s -N -X POST "https://<foundry-resource>.services.ai.azure.com/openai/v1/images/edits" \\
+              -H "Authorization: Bearer $AZURE_API_KEY" \\
               -F "model=gpt-image-1.5" \\
               -F "image[]=@body-lotion.png" \\
               -F "image[]=@bath-bomb.png" \\
@@ -480,9 +657,14 @@ namespace Azure.AI.Projects;
           python: """
             import os
             from openai import OpenAI
+            from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+            
+            endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
             
             client = OpenAI(
-                api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+                base_url=endpoint,
+                api_key=token_provider
             )
             for image in client.images.edit(
                 image=b"Example data",
@@ -493,8 +675,17 @@ namespace Azure.AI.Projects;
           javascript: """
             import fs from "fs";
             import OpenAI, { toFile } from "openai";
+            import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
             
-            const client = new OpenAI();
+            const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            const tokenProvider = getBearerTokenProvider(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
+            
+            const openai = new OpenAI({
+                baseURL: endpoint,
+                apiKey: tokenProvider
+            });
             
             const imageFiles = [
                 "bath-bomb.png",
@@ -526,9 +717,16 @@ namespace Azure.AI.Projects;
           `node.js`: """
             import fs from 'fs';
             import OpenAI from 'openai';
+            import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+            
+            const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            const tokenProvider = getBearerTokenProvider(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
             
             const client = new OpenAI({
-              apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+                baseURL: endpoint,
+                apiKey: tokenProvider
             });
             
             const imagesResponse = await client.images.edit({
@@ -549,12 +747,23 @@ namespace Azure.AI.Projects;
             
             	"github.com/openai/openai-go"
             	"github.com/openai/openai-go/option"
+                "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+                "github.com/openai/openai-go/v3/azure"
             )
             
             func main() {
-            	client := openai.NewClient(
-            		option.WithAPIKey("My API Key"),
-            	)
+            	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            
+                tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+                if err != nil {
+                    println("Error creating credential.")
+                    panic(err)
+                }
+            
+                client := openai.NewClient(
+                    option.WithBaseURL(endpoint),
+                    azure.WithTokenCredential(tokenCredential),
+                )
             	imagesResponse, err := client.Images.Edit(context.TODO(), openai.ImageEditParams{
             		Image: openai.ImageEditParamsImageUnion{
             			OfFile: io.Reader(bytes.NewBuffer([]byte("Example data"))),
@@ -578,25 +787,48 @@ namespace Azure.AI.Projects;
             import com.openai.models.images.ImagesResponse;
             import java.io.ByteArrayInputStream;
             import java.io.InputStream;
+            import com.azure.identity.AuthenticationUtil;
+            import com.azure.identity.DefaultAzureCredentialBuilder;
+            import com.openai.credential.BearerTokenCredential;
             
             public final class Main {
                 private Main() {}
             
                 public static void main(String[] args) {
-                    OpenAIClient client = OpenAIOkHttpClient.fromEnv();
+                    String endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
             
-                    ImageEditParams params = ImageEditParams.builder()
-                        .image(new ByteArrayInputStream("Example data".getBytes()))
-                        .prompt("A cute baby sea otter wearing a beret")
-                        .build();
+                OpenAIClient client = OpenAIOkHttpClient.builder()
+                    .baseUrl(endpoint)
+                    .credential(BearerTokenCredential.create(AuthenticationUtil.getBearerTokenSupplier(
+                        new DefaultAzureCredentialBuilder().build(), "https://ai.azure.com/.default")))
+                    .build();
                     ImagesResponse imagesResponse = client.images().edit(params);
                 }
             }
             """,
           ruby: """
             require "openai"
+            require "oauth2"
             
-            openai = OpenAI::Client.new(api_key: "My API Key")
+            tenant_id = ENV["AZURE_TENANT_ID"]
+            client_id = ENV["AZURE_CLIENT_ID"]
+            client_secret = ENV["AZURE_CLIENT_SECRET"]
+            
+            resource = "https://ai.azure.com/.default"
+            oauth_client = OAuth2::Client.new(
+              client_id,
+              client_secret,
+              site: "https://login.microsoftonline.com/#{tenant_id}",
+              token_url: "/oauth2/v2.0/token"
+            )
+            
+            token = oauth_client.client_credentials.get_token(scope: resource).token
+            base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            
+            openai = OpenAI::Client.new(
+              access_token: token,
+              uri_base: base_url
+            )
             
             images_response = openai.images.edit(image: StringIO.new("Example data"), prompt: "A cute baby sea otter wearing a beret")
             
@@ -627,9 +859,12 @@ namespace Azure.AI.Projects;
         title: "Generate image",
         request: #{
           curl: """
-            curl https://api.openai.com/v1/images/generations \\
+            az login
+            AZURE_API_KEY=$(az account get-access-token --resource https://ai.azure.com/ --query accessToken -o tsv)
+            
+            curlhttps://<foundry-resource>.services.ai.azure.com/openai/v1/images/generations \\
               -H "Content-Type: application/json" \\
-              -H "Authorization: Bearer $OPENAI_API_KEY" \\
+              -H "Authorization: Bearer $AZURE_API_KEY" \\
               -d '{
                 "model": "gpt-image-1.5",
                 "prompt": "A cute baby sea otter",
@@ -641,9 +876,14 @@ namespace Azure.AI.Projects;
           python: """
             import os
             from openai import OpenAI
+            from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+            
+            endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
             
             client = OpenAI(
-                api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+                base_url=endpoint,
+                api_key=token_provider
             )
             for image in client.images.generate(
                 prompt="A cute baby sea otter",
@@ -653,8 +893,17 @@ namespace Azure.AI.Projects;
           javascript: """
             import OpenAI from "openai";
             import { writeFile } from "fs/promises";
+            import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
             
-            const client = new OpenAI();
+            const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            const tokenProvider = getBearerTokenProvider(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
+            
+            const openai = new OpenAI({
+                baseURL: endpoint,
+                apiKey: tokenProvider
+            });
             
             const img = await client.images.generate({
               model: "gpt-image-1.5",
@@ -669,9 +918,16 @@ namespace Azure.AI.Projects;
             """,
           `node.js`: """
             import OpenAI from 'openai';
+            import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+            
+            const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            const tokenProvider = getBearerTokenProvider(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
             
             const client = new OpenAI({
-              apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+                baseURL: endpoint,
+                apiKey: tokenProvider
             });
             
             const imagesResponse = await client.images.generate({ prompt: 'A cute baby sea otter' });
@@ -687,12 +943,23 @@ namespace Azure.AI.Projects;
             
             	"github.com/openai/openai-go"
             	"github.com/openai/openai-go/option"
+                "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+                "github.com/openai/openai-go/v3/azure"
             )
             
             func main() {
-            	client := openai.NewClient(
-            		option.WithAPIKey("My API Key"),
-            	)
+            	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            
+                tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+                if err != nil {
+                    println("Error creating credential.")
+                    panic(err)
+                }
+            
+                client := openai.NewClient(
+                    option.WithBaseURL(endpoint),
+                    azure.WithTokenCredential(tokenCredential),
+                )
             	imagesResponse, err := client.Images.Generate(context.TODO(), openai.ImageGenerateParams{
             		Prompt: "A cute baby sea otter",
             	})
@@ -711,24 +978,48 @@ namespace Azure.AI.Projects;
             import com.openai.client.okhttp.OpenAIOkHttpClient;
             import com.openai.models.images.ImageGenerateParams;
             import com.openai.models.images.ImagesResponse;
+            import com.azure.identity.AuthenticationUtil;
+            import com.azure.identity.DefaultAzureCredentialBuilder;
+            import com.openai.credential.BearerTokenCredential;
             
             public final class Main {
                 private Main() {}
             
                 public static void main(String[] args) {
-                    OpenAIClient client = OpenAIOkHttpClient.fromEnv();
+                    String endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
             
-                    ImageGenerateParams params = ImageGenerateParams.builder()
-                        .prompt("A cute baby sea otter")
-                        .build();
+                OpenAIClient client = OpenAIOkHttpClient.builder()
+                    .baseUrl(endpoint)
+                    .credential(BearerTokenCredential.create(AuthenticationUtil.getBearerTokenSupplier(
+                        new DefaultAzureCredentialBuilder().build(), "https://ai.azure.com/.default")))
+                    .build();
                     ImagesResponse imagesResponse = client.images().generate(params);
                 }
             }
             """,
           ruby: """
             require "openai"
+            require "oauth2"
             
-            openai = OpenAI::Client.new(api_key: "My API Key")
+            tenant_id = ENV["AZURE_TENANT_ID"]
+            client_id = ENV["AZURE_CLIENT_ID"]
+            client_secret = ENV["AZURE_CLIENT_SECRET"]
+            
+            resource = "https://ai.azure.com/.default"
+            oauth_client = OAuth2::Client.new(
+              client_id,
+              client_secret,
+              site: "https://login.microsoftonline.com/#{tenant_id}",
+              token_url: "/oauth2/v2.0/token"
+            )
+            
+            token = oauth_client.client_credentials.get_token(scope: resource).token
+            base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            
+            openai = OpenAI::Client.new(
+              access_token: token,
+              uri_base: base_url
+            )
             
             images_response = openai.images.generate(prompt: "A cute baby sea otter")
             
@@ -760,9 +1051,12 @@ namespace Azure.AI.Projects;
         title: "Streaming",
         request: #{
           curl: """
-            curl https://api.openai.com/v1/images/generations \\
+            az login
+            AZURE_API_KEY=$(az account get-access-token --resource https://ai.azure.com/ --query accessToken -o tsv)
+            
+            curlhttps://<foundry-resource>.services.ai.azure.com/openai/v1/images/generations \\
               -H "Content-Type: application/json" \\
-              -H "Authorization: Bearer $OPENAI_API_KEY" \\
+              -H "Authorization: Bearer $AZURE_API_KEY" \\
               -d '{
                 "model": "gpt-image-1.5",
                 "prompt": "A cute baby sea otter",
@@ -776,9 +1070,14 @@ namespace Azure.AI.Projects;
           python: """
             import os
             from openai import OpenAI
+            from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+            
+            endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
             
             client = OpenAI(
-                api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+                base_url=endpoint,
+                api_key=token_provider
             )
             for image in client.images.generate(
                 prompt="A cute baby sea otter",
@@ -787,8 +1086,17 @@ namespace Azure.AI.Projects;
             """,
           javascript: """
             import OpenAI from "openai";
+            import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
             
-            const client = new OpenAI();
+            const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            const tokenProvider = getBearerTokenProvider(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
+            
+            const openai = new OpenAI({
+                baseURL: endpoint,
+                apiKey: tokenProvider
+            });
             
             const stream = await client.images.generate({
               model: "gpt-image-1.5",
@@ -805,9 +1113,16 @@ namespace Azure.AI.Projects;
             """,
           `node.js`: """
             import OpenAI from 'openai';
+            import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+            
+            const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            const tokenProvider = getBearerTokenProvider(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
             
             const client = new OpenAI({
-              apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+                baseURL: endpoint,
+                apiKey: tokenProvider
             });
             
             const imagesResponse = await client.images.generate({ prompt: 'A cute baby sea otter' });
@@ -823,12 +1138,23 @@ namespace Azure.AI.Projects;
             
             	"github.com/openai/openai-go"
             	"github.com/openai/openai-go/option"
+                "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+                "github.com/openai/openai-go/v3/azure"
             )
             
             func main() {
-            	client := openai.NewClient(
-            		option.WithAPIKey("My API Key"),
-            	)
+            	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            
+                tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+                if err != nil {
+                    println("Error creating credential.")
+                    panic(err)
+                }
+            
+                client := openai.NewClient(
+                    option.WithBaseURL(endpoint),
+                    azure.WithTokenCredential(tokenCredential),
+                )
             	imagesResponse, err := client.Images.Generate(context.TODO(), openai.ImageGenerateParams{
             		Prompt: "A cute baby sea otter",
             	})
@@ -847,24 +1173,48 @@ namespace Azure.AI.Projects;
             import com.openai.client.okhttp.OpenAIOkHttpClient;
             import com.openai.models.images.ImageGenerateParams;
             import com.openai.models.images.ImagesResponse;
+            import com.azure.identity.AuthenticationUtil;
+            import com.azure.identity.DefaultAzureCredentialBuilder;
+            import com.openai.credential.BearerTokenCredential;
             
             public final class Main {
                 private Main() {}
             
                 public static void main(String[] args) {
-                    OpenAIClient client = OpenAIOkHttpClient.fromEnv();
+                    String endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
             
-                    ImageGenerateParams params = ImageGenerateParams.builder()
-                        .prompt("A cute baby sea otter")
-                        .build();
+                OpenAIClient client = OpenAIOkHttpClient.builder()
+                    .baseUrl(endpoint)
+                    .credential(BearerTokenCredential.create(AuthenticationUtil.getBearerTokenSupplier(
+                        new DefaultAzureCredentialBuilder().build(), "https://ai.azure.com/.default")))
+                    .build();
                     ImagesResponse imagesResponse = client.images().generate(params);
                 }
             }
             """,
           ruby: """
             require "openai"
+            require "oauth2"
             
-            openai = OpenAI::Client.new(api_key: "My API Key")
+            tenant_id = ENV["AZURE_TENANT_ID"]
+            client_id = ENV["AZURE_CLIENT_ID"]
+            client_secret = ENV["AZURE_CLIENT_SECRET"]
+            
+            resource = "https://ai.azure.com/.default"
+            oauth_client = OAuth2::Client.new(
+              client_id,
+              client_secret,
+              site: "https://login.microsoftonline.com/#{tenant_id}",
+              token_url: "/oauth2/v2.0/token"
+            )
+            
+            token = oauth_client.client_credentials.get_token(scope: resource).token
+            base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            
+            openai = OpenAI::Client.new(
+              access_token: token,
+              uri_base: base_url
+            )
             
             images_response = openai.images.generate(prompt: "A cute baby sea otter")
             
@@ -893,8 +1243,11 @@ namespace Azure.AI.Projects;
     examples: #{
       request: #{
         curl: """
-          curl https://api.openai.com/v1/images/variations \\
-            -H "Authorization: Bearer $OPENAI_API_KEY" \\
+          az login
+          AZURE_API_KEY=$(az account get-access-token --resource https://ai.azure.com/ --query accessToken -o tsv)
+          
+          curlhttps://<foundry-resource>.services.ai.azure.com/openai/v1/images/variations \\
+            -H "Authorization: Bearer $AZURE_API_KEY" \\
             -F image="@otter.png" \\
             -F n=2 \\
             -F size="1024x1024"
@@ -903,9 +1256,14 @@ namespace Azure.AI.Projects;
         python: """
           import os
           from openai import OpenAI
+          from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+          
+          endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
           
           client = OpenAI(
-              api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+              base_url=endpoint,
+              api_key=token_provider
           )
           images_response = client.images.create_variation(
               image=b"Example data",
@@ -915,8 +1273,17 @@ namespace Azure.AI.Projects;
         javascript: """
           import fs from "fs";
           import OpenAI from "openai";
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
           
-          const openai = new OpenAI();
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
+          
+          const openai = new OpenAI({
+              baseURL: endpoint,
+              apiKey: tokenProvider
+          });
           
           async function main() {
             const image = await openai.images.createVariation({
@@ -931,11 +1298,26 @@ namespace Azure.AI.Projects;
           using System;
           
           using OpenAI.Images;
+          using Azure.Identity;
+          using OpenAI;
+          using System.ClientModel.Primitives;
+          
+          #pragma warning disable OPENAI001
+          
+          const string deploymentName = "<deployment-name>";
+          const string endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          
+          BearerTokenPolicy tokenPolicy = new(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
           
           ImageClient client = new(
-              model: "dall-e-2",
-              apiKey: Environment.GetEnvironmentVariable("OPENAI_API_KEY")
-          );
+              model: deploymentName,
+              authenticationPolicy: tokenPolicy,
+              options: new OpenAIClientOptions()
+              {
+                  Endpoint = new Uri($"{endpoint}"),
+              });
           
           GeneratedImage image = client.GenerateImageVariation(imageFilePath: "otter.png");
           
@@ -945,9 +1327,16 @@ namespace Azure.AI.Projects;
         `node.js`: """
           import fs from 'fs';
           import OpenAI from 'openai';
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+          
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
           
           const client = new OpenAI({
-            apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+              baseURL: endpoint,
+              apiKey: tokenProvider
           });
           
           const imagesResponse = await client.images.createVariation({
@@ -967,12 +1356,23 @@ namespace Azure.AI.Projects;
           
           	"github.com/openai/openai-go"
           	"github.com/openai/openai-go/option"
+              "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+              "github.com/openai/openai-go/v3/azure"
           )
           
           func main() {
-          	client := openai.NewClient(
-          		option.WithAPIKey("My API Key"),
-          	)
+          	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+              tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+              if err != nil {
+                  println("Error creating credential.")
+                  panic(err)
+              }
+          
+              client := openai.NewClient(
+                  option.WithBaseURL(endpoint),
+                  azure.WithTokenCredential(tokenCredential),
+              )
           	imagesResponse, err := client.Images.NewVariation(context.TODO(), openai.ImageNewVariationParams{
           		Image: io.Reader(bytes.NewBuffer([]byte("Example data"))),
           	})
@@ -992,24 +1392,48 @@ namespace Azure.AI.Projects;
           import com.openai.models.images.ImageCreateVariationParams;
           import com.openai.models.images.ImagesResponse;
           import java.io.ByteArrayInputStream;
+          import com.azure.identity.AuthenticationUtil;
+          import com.azure.identity.DefaultAzureCredentialBuilder;
+          import com.openai.credential.BearerTokenCredential;
           
           public final class Main {
               private Main() {}
           
               public static void main(String[] args) {
-                  OpenAIClient client = OpenAIOkHttpClient.fromEnv();
+                  String endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
           
-                  ImageCreateVariationParams params = ImageCreateVariationParams.builder()
-                      .image(new ByteArrayInputStream("Example data".getBytes()))
-                      .build();
+              OpenAIClient client = OpenAIOkHttpClient.builder()
+                  .baseUrl(endpoint)
+                  .credential(BearerTokenCredential.create(AuthenticationUtil.getBearerTokenSupplier(
+                      new DefaultAzureCredentialBuilder().build(), "https://ai.azure.com/.default")))
+                  .build();
                   ImagesResponse imagesResponse = client.images().createVariation(params);
               }
           }
           """,
         ruby: """
           require "openai"
+          require "oauth2"
           
-          openai = OpenAI::Client.new(api_key: "My API Key")
+          tenant_id = ENV["AZURE_TENANT_ID"]
+          client_id = ENV["AZURE_CLIENT_ID"]
+          client_secret = ENV["AZURE_CLIENT_SECRET"]
+          
+          resource = "https://ai.azure.com/.default"
+          oauth_client = OAuth2::Client.new(
+            client_id,
+            client_secret,
+            site: "https://login.microsoftonline.com/#{tenant_id}",
+            token_url: "/oauth2/v2.0/token"
+          )
+          
+          token = oauth_client.client_credentials.get_token(scope: resource).token
+          base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+          openai = OpenAI::Client.new(
+            access_token: token,
+            uri_base: base_url
+          )
           
           images_response = openai.images.create_variation(image: StringIO.new("Example data"))
           

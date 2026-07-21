@@ -20,9 +20,12 @@ namespace Azure.AI.Projects;
         title: "Text input",
         request: #{
           curl: """
-            curl https://api.openai.com/v1/responses \\
+            az login
+            AZURE_API_KEY=$(az account get-access-token --resource https://ai.azure.com/ --query accessToken -o tsv)
+            
+            curlhttps://<foundry-resource>.services.ai.azure.com/openai/v1/responses \\
               -H "Content-Type: application/json" \\
-              -H "Authorization: Bearer $OPENAI_API_KEY" \\
+              -H "Authorization: Bearer $AZURE_API_KEY" \\
               -d '{
                 "model": "gpt-5.4",
                 "input": "Tell me a three sentence bedtime story about a unicorn."
@@ -31,8 +34,17 @@ namespace Azure.AI.Projects;
             """,
           javascript: """
             import OpenAI from "openai";
+            import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
             
-            const openai = new OpenAI();
+            const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            const tokenProvider = getBearerTokenProvider(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
+            
+            const openai = new OpenAI({
+                baseURL: endpoint,
+                apiKey: tokenProvider
+            });
             
             const response = await openai.responses.create({
                 model: "gpt-5.4",
@@ -45,9 +57,14 @@ namespace Azure.AI.Projects;
           python: """
             import os
             from openai import OpenAI
+            from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+            
+            endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
             
             client = OpenAI(
-                api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+                base_url=endpoint,
+                api_key=token_provider
             )
             for response in client.responses.create():
               print(response)
@@ -55,11 +72,26 @@ namespace Azure.AI.Projects;
           csharp: """
             using System;
             using OpenAI.Responses;
+            using Azure.Identity;
+            using OpenAI;
+            using System.ClientModel.Primitives;
+            
+            #pragma warning disable OPENAI001
+            
+            const string deploymentName = "<deployment-name>";
+            const string endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            
+            BearerTokenPolicy tokenPolicy = new(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
             
             OpenAIResponseClient client = new(
-                model: "gpt-5.4",
-                apiKey: Environment.GetEnvironmentVariable("OPENAI_API_KEY")
-            );
+                model: deploymentName,
+                authenticationPolicy: tokenPolicy,
+                options: new OpenAIClientOptions()
+                {
+                    Endpoint = new Uri($"{endpoint}"),
+                });
             
             OpenAIResponse response = client.CreateResponse("Tell me a three sentence bedtime story about a unicorn.");
             
@@ -68,9 +100,16 @@ namespace Azure.AI.Projects;
             """,
           `node.js`: """
             import OpenAI from 'openai';
+            import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+            
+            const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            const tokenProvider = getBearerTokenProvider(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
             
             const client = new OpenAI({
-              apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+                baseURL: endpoint,
+                apiKey: tokenProvider
             });
             
             const response = await client.responses.create();
@@ -87,12 +126,23 @@ namespace Azure.AI.Projects;
             	"github.com/openai/openai-go"
             	"github.com/openai/openai-go/option"
             	"github.com/openai/openai-go/responses"
+                "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+                "github.com/openai/openai-go/v3/azure"
             )
             
             func main() {
-            	client := openai.NewClient(
-            		option.WithAPIKey("My API Key"),
-            	)
+            	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            
+                tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+                if err != nil {
+                    println("Error creating credential.")
+                    panic(err)
+                }
+            
+                client := openai.NewClient(
+                    option.WithBaseURL(endpoint),
+                    azure.WithTokenCredential(tokenCredential),
+                )
             	response, err := client.Responses.New(context.TODO(), responses.ResponseNewParams{})
             	if err != nil {
             		panic(err.Error())
@@ -109,6 +159,9 @@ namespace Azure.AI.Projects;
             import com.openai.client.okhttp.OpenAIOkHttpClient;
             import com.openai.models.responses.Response;
             import com.openai.models.responses.ResponseCreateParams;
+            import com.azure.identity.AuthenticationUtil;
+            import com.azure.identity.DefaultAzureCredentialBuilder;
+            import com.openai.credential.BearerTokenCredential;
             
             public final class Main {
                 private Main() {}
@@ -122,8 +175,27 @@ namespace Azure.AI.Projects;
             """,
           ruby: """
             require "openai"
+            require "oauth2"
             
-            openai = OpenAI::Client.new(api_key: "My API Key")
+            tenant_id = ENV["AZURE_TENANT_ID"]
+            client_id = ENV["AZURE_CLIENT_ID"]
+            client_secret = ENV["AZURE_CLIENT_SECRET"]
+            
+            resource = "https://ai.azure.com/.default"
+            oauth_client = OAuth2::Client.new(
+              client_id,
+              client_secret,
+              site: "https://login.microsoftonline.com/#{tenant_id}",
+              token_url: "/oauth2/v2.0/token"
+            )
+            
+            token = oauth_client.client_credentials.get_token(scope: resource).token
+            base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            
+            openai = OpenAI::Client.new(
+              access_token: token,
+              uri_base: base_url
+            )
             
             response = openai.responses.create
             
@@ -195,9 +267,12 @@ namespace Azure.AI.Projects;
         title: "Image input",
         request: #{
           curl: """
-            curl https://api.openai.com/v1/responses \\
+            az login
+            AZURE_API_KEY=$(az account get-access-token --resource https://ai.azure.com/ --query accessToken -o tsv)
+            
+            curlhttps://<foundry-resource>.services.ai.azure.com/openai/v1/responses \\
               -H "Content-Type: application/json" \\
-              -H "Authorization: Bearer $OPENAI_API_KEY" \\
+              -H "Authorization: Bearer $AZURE_API_KEY" \\
               -d '{
                 "model": "gpt-5.4",
                 "input": [
@@ -217,8 +292,17 @@ namespace Azure.AI.Projects;
             """,
           javascript: """
             import OpenAI from "openai";
+            import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
             
-            const openai = new OpenAI();
+            const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            const tokenProvider = getBearerTokenProvider(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
+            
+            const openai = new OpenAI({
+                baseURL: endpoint,
+                apiKey: tokenProvider
+            });
             
             const response = await openai.responses.create({
                 model: "gpt-5.4",
@@ -243,9 +327,14 @@ namespace Azure.AI.Projects;
           python: """
             import os
             from openai import OpenAI
+            from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+            
+            endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
             
             client = OpenAI(
-                api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+                base_url=endpoint,
+                api_key=token_provider
             )
             for response in client.responses.create():
               print(response)
@@ -255,11 +344,26 @@ namespace Azure.AI.Projects;
             using System.Collections.Generic;
             
             using OpenAI.Responses;
+            using Azure.Identity;
+            using OpenAI;
+            using System.ClientModel.Primitives;
+            
+            #pragma warning disable OPENAI001
+            
+            const string deploymentName = "<deployment-name>";
+            const string endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            
+            BearerTokenPolicy tokenPolicy = new(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
             
             OpenAIResponseClient client = new(
-                model: "gpt-5.4",
-                apiKey: Environment.GetEnvironmentVariable("OPENAI_API_KEY")
-            );
+                model: deploymentName,
+                authenticationPolicy: tokenPolicy,
+                options: new OpenAIClientOptions()
+                {
+                    Endpoint = new Uri($"{endpoint}"),
+                });
             
             List<ResponseItem> inputItems =
             [
@@ -278,9 +382,16 @@ namespace Azure.AI.Projects;
             """,
           `node.js`: """
             import OpenAI from 'openai';
+            import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+            
+            const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            const tokenProvider = getBearerTokenProvider(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
             
             const client = new OpenAI({
-              apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+                baseURL: endpoint,
+                apiKey: tokenProvider
             });
             
             const response = await client.responses.create();
@@ -297,12 +408,23 @@ namespace Azure.AI.Projects;
             	"github.com/openai/openai-go"
             	"github.com/openai/openai-go/option"
             	"github.com/openai/openai-go/responses"
+                "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+                "github.com/openai/openai-go/v3/azure"
             )
             
             func main() {
-            	client := openai.NewClient(
-            		option.WithAPIKey("My API Key"),
-            	)
+            	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            
+                tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+                if err != nil {
+                    println("Error creating credential.")
+                    panic(err)
+                }
+            
+                client := openai.NewClient(
+                    option.WithBaseURL(endpoint),
+                    azure.WithTokenCredential(tokenCredential),
+                )
             	response, err := client.Responses.New(context.TODO(), responses.ResponseNewParams{})
             	if err != nil {
             		panic(err.Error())
@@ -319,6 +441,9 @@ namespace Azure.AI.Projects;
             import com.openai.client.okhttp.OpenAIOkHttpClient;
             import com.openai.models.responses.Response;
             import com.openai.models.responses.ResponseCreateParams;
+            import com.azure.identity.AuthenticationUtil;
+            import com.azure.identity.DefaultAzureCredentialBuilder;
+            import com.openai.credential.BearerTokenCredential;
             
             public final class Main {
                 private Main() {}
@@ -332,8 +457,27 @@ namespace Azure.AI.Projects;
             """,
           ruby: """
             require "openai"
+            require "oauth2"
             
-            openai = OpenAI::Client.new(api_key: "My API Key")
+            tenant_id = ENV["AZURE_TENANT_ID"]
+            client_id = ENV["AZURE_CLIENT_ID"]
+            client_secret = ENV["AZURE_CLIENT_SECRET"]
+            
+            resource = "https://ai.azure.com/.default"
+            oauth_client = OAuth2::Client.new(
+              client_id,
+              client_secret,
+              site: "https://login.microsoftonline.com/#{tenant_id}",
+              token_url: "/oauth2/v2.0/token"
+            )
+            
+            token = oauth_client.client_credentials.get_token(scope: resource).token
+            base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            
+            openai = OpenAI::Client.new(
+              access_token: token,
+              uri_base: base_url
+            )
             
             response = openai.responses.create
             
@@ -405,9 +549,12 @@ namespace Azure.AI.Projects;
         title: "File input",
         request: #{
           curl: """
-            curl https://api.openai.com/v1/responses \\
+            az login
+            AZURE_API_KEY=$(az account get-access-token --resource https://ai.azure.com/ --query accessToken -o tsv)
+            
+            curlhttps://<foundry-resource>.services.ai.azure.com/openai/v1/responses \\
               -H "Content-Type: application/json" \\
-              -H "Authorization: Bearer $OPENAI_API_KEY" \\
+              -H "Authorization: Bearer $AZURE_API_KEY" \\
               -d '{
                 "model": "gpt-5.4",
                 "input": [
@@ -427,8 +574,17 @@ namespace Azure.AI.Projects;
             """,
           javascript: """
             import OpenAI from "openai";
+            import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
             
-            const openai = new OpenAI();
+            const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            const tokenProvider = getBearerTokenProvider(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
+            
+            const openai = new OpenAI({
+                baseURL: endpoint,
+                apiKey: tokenProvider
+            });
             
             const response = await openai.responses.create({
                 model: "gpt-5.4",
@@ -452,18 +608,30 @@ namespace Azure.AI.Projects;
           python: """
             import os
             from openai import OpenAI
+            from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+            
+            endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
             
             client = OpenAI(
-                api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+                base_url=endpoint,
+                api_key=token_provider
             )
             for response in client.responses.create():
               print(response)
             """,
           `node.js`: """
             import OpenAI from 'openai';
+            import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+            
+            const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            const tokenProvider = getBearerTokenProvider(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
             
             const client = new OpenAI({
-              apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+                baseURL: endpoint,
+                apiKey: tokenProvider
             });
             
             const response = await client.responses.create();
@@ -480,12 +648,23 @@ namespace Azure.AI.Projects;
             	"github.com/openai/openai-go"
             	"github.com/openai/openai-go/option"
             	"github.com/openai/openai-go/responses"
+                "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+                "github.com/openai/openai-go/v3/azure"
             )
             
             func main() {
-            	client := openai.NewClient(
-            		option.WithAPIKey("My API Key"),
-            	)
+            	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            
+                tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+                if err != nil {
+                    println("Error creating credential.")
+                    panic(err)
+                }
+            
+                client := openai.NewClient(
+                    option.WithBaseURL(endpoint),
+                    azure.WithTokenCredential(tokenCredential),
+                )
             	response, err := client.Responses.New(context.TODO(), responses.ResponseNewParams{})
             	if err != nil {
             		panic(err.Error())
@@ -502,6 +681,9 @@ namespace Azure.AI.Projects;
             import com.openai.client.okhttp.OpenAIOkHttpClient;
             import com.openai.models.responses.Response;
             import com.openai.models.responses.ResponseCreateParams;
+            import com.azure.identity.AuthenticationUtil;
+            import com.azure.identity.DefaultAzureCredentialBuilder;
+            import com.openai.credential.BearerTokenCredential;
             
             public final class Main {
                 private Main() {}
@@ -515,8 +697,27 @@ namespace Azure.AI.Projects;
             """,
           ruby: """
             require "openai"
+            require "oauth2"
             
-            openai = OpenAI::Client.new(api_key: "My API Key")
+            tenant_id = ENV["AZURE_TENANT_ID"]
+            client_id = ENV["AZURE_CLIENT_ID"]
+            client_secret = ENV["AZURE_CLIENT_SECRET"]
+            
+            resource = "https://ai.azure.com/.default"
+            oauth_client = OAuth2::Client.new(
+              client_id,
+              client_secret,
+              site: "https://login.microsoftonline.com/#{tenant_id}",
+              token_url: "/oauth2/v2.0/token"
+            )
+            
+            token = oauth_client.client_credentials.get_token(scope: resource).token
+            base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            
+            openai = OpenAI::Client.new(
+              access_token: token,
+              uri_base: base_url
+            )
             
             response = openai.responses.create
             
@@ -621,9 +822,12 @@ namespace Azure.AI.Projects;
         title: "Web search",
         request: #{
           curl: """
-            curl https://api.openai.com/v1/responses \\
+            az login
+            AZURE_API_KEY=$(az account get-access-token --resource https://ai.azure.com/ --query accessToken -o tsv)
+            
+            curlhttps://<foundry-resource>.services.ai.azure.com/openai/v1/responses \\
               -H "Content-Type: application/json" \\
-              -H "Authorization: Bearer $OPENAI_API_KEY" \\
+              -H "Authorization: Bearer $AZURE_API_KEY" \\
               -d '{
                 "model": "gpt-5.4",
                 "tools": [{ "type": "web_search_preview" }],
@@ -633,8 +837,17 @@ namespace Azure.AI.Projects;
             """,
           javascript: """
             import OpenAI from "openai";
+            import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
             
-            const openai = new OpenAI();
+            const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            const tokenProvider = getBearerTokenProvider(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
+            
+            const openai = new OpenAI({
+                baseURL: endpoint,
+                apiKey: tokenProvider
+            });
             
             const response = await openai.responses.create({
                 model: "gpt-5.4",
@@ -648,9 +861,14 @@ namespace Azure.AI.Projects;
           python: """
             import os
             from openai import OpenAI
+            from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+            
+            endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
             
             client = OpenAI(
-                api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+                base_url=endpoint,
+                api_key=token_provider
             )
             for response in client.responses.create():
               print(response)
@@ -659,11 +877,26 @@ namespace Azure.AI.Projects;
             using System;
             
             using OpenAI.Responses;
+            using Azure.Identity;
+            using OpenAI;
+            using System.ClientModel.Primitives;
+            
+            #pragma warning disable OPENAI001
+            
+            const string deploymentName = "<deployment-name>";
+            const string endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            
+            BearerTokenPolicy tokenPolicy = new(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
             
             OpenAIResponseClient client = new(
-                model: "gpt-5.4",
-                apiKey: Environment.GetEnvironmentVariable("OPENAI_API_KEY")
-            );
+                model: deploymentName,
+                authenticationPolicy: tokenPolicy,
+                options: new OpenAIClientOptions()
+                {
+                    Endpoint = new Uri($"{endpoint}"),
+                });
             
             string userInputText = "What was a positive news story from today?";
             
@@ -682,9 +915,16 @@ namespace Azure.AI.Projects;
             """,
           `node.js`: """
             import OpenAI from 'openai';
+            import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+            
+            const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            const tokenProvider = getBearerTokenProvider(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
             
             const client = new OpenAI({
-              apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+                baseURL: endpoint,
+                apiKey: tokenProvider
             });
             
             const response = await client.responses.create();
@@ -701,12 +941,23 @@ namespace Azure.AI.Projects;
             	"github.com/openai/openai-go"
             	"github.com/openai/openai-go/option"
             	"github.com/openai/openai-go/responses"
+                "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+                "github.com/openai/openai-go/v3/azure"
             )
             
             func main() {
-            	client := openai.NewClient(
-            		option.WithAPIKey("My API Key"),
-            	)
+            	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            
+                tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+                if err != nil {
+                    println("Error creating credential.")
+                    panic(err)
+                }
+            
+                client := openai.NewClient(
+                    option.WithBaseURL(endpoint),
+                    azure.WithTokenCredential(tokenCredential),
+                )
             	response, err := client.Responses.New(context.TODO(), responses.ResponseNewParams{})
             	if err != nil {
             		panic(err.Error())
@@ -723,6 +974,9 @@ namespace Azure.AI.Projects;
             import com.openai.client.okhttp.OpenAIOkHttpClient;
             import com.openai.models.responses.Response;
             import com.openai.models.responses.ResponseCreateParams;
+            import com.azure.identity.AuthenticationUtil;
+            import com.azure.identity.DefaultAzureCredentialBuilder;
+            import com.openai.credential.BearerTokenCredential;
             
             public final class Main {
                 private Main() {}
@@ -736,8 +990,27 @@ namespace Azure.AI.Projects;
             """,
           ruby: """
             require "openai"
+            require "oauth2"
             
-            openai = OpenAI::Client.new(api_key: "My API Key")
+            tenant_id = ENV["AZURE_TENANT_ID"]
+            client_id = ENV["AZURE_CLIENT_ID"]
+            client_secret = ENV["AZURE_CLIENT_SECRET"]
+            
+            resource = "https://ai.azure.com/.default"
+            oauth_client = OAuth2::Client.new(
+              client_id,
+              client_secret,
+              site: "https://login.microsoftonline.com/#{tenant_id}",
+              token_url: "/oauth2/v2.0/token"
+            )
+            
+            token = oauth_client.client_credentials.get_token(scope: resource).token
+            base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            
+            openai = OpenAI::Client.new(
+              access_token: token,
+              uri_base: base_url
+            )
             
             response = openai.responses.create
             
@@ -849,9 +1122,12 @@ namespace Azure.AI.Projects;
         title: "File search",
         request: #{
           curl: """
-            curl https://api.openai.com/v1/responses \\
+            az login
+            AZURE_API_KEY=$(az account get-access-token --resource https://ai.azure.com/ --query accessToken -o tsv)
+            
+            curlhttps://<foundry-resource>.services.ai.azure.com/openai/v1/responses \\
               -H "Content-Type: application/json" \\
-              -H "Authorization: Bearer $OPENAI_API_KEY" \\
+              -H "Authorization: Bearer $AZURE_API_KEY" \\
               -d '{
                 "model": "gpt-5.4",
                 "tools": [{
@@ -865,8 +1141,17 @@ namespace Azure.AI.Projects;
             """,
           javascript: """
             import OpenAI from "openai";
+            import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
             
-            const openai = new OpenAI();
+            const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            const tokenProvider = getBearerTokenProvider(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
+            
+            const openai = new OpenAI({
+                baseURL: endpoint,
+                apiKey: tokenProvider
+            });
             
             const response = await openai.responses.create({
                 model: "gpt-5.4",
@@ -884,9 +1169,14 @@ namespace Azure.AI.Projects;
           python: """
             import os
             from openai import OpenAI
+            from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+            
+            endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
             
             client = OpenAI(
-                api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+                base_url=endpoint,
+                api_key=token_provider
             )
             for response in client.responses.create():
               print(response)
@@ -895,11 +1185,26 @@ namespace Azure.AI.Projects;
             using System;
             
             using OpenAI.Responses;
+            using Azure.Identity;
+            using OpenAI;
+            using System.ClientModel.Primitives;
+            
+            #pragma warning disable OPENAI001
+            
+            const string deploymentName = "<deployment-name>";
+            const string endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            
+            BearerTokenPolicy tokenPolicy = new(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
             
             OpenAIResponseClient client = new(
-                model: "gpt-5.4",
-                apiKey: Environment.GetEnvironmentVariable("OPENAI_API_KEY")
-            );
+                model: deploymentName,
+                authenticationPolicy: tokenPolicy,
+                options: new OpenAIClientOptions()
+                {
+                    Endpoint = new Uri($"{endpoint}"),
+                });
             
             string userInputText = "What are the attributes of an ancient brown dragon?";
             
@@ -921,9 +1226,16 @@ namespace Azure.AI.Projects;
             """,
           `node.js`: """
             import OpenAI from 'openai';
+            import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+            
+            const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            const tokenProvider = getBearerTokenProvider(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
             
             const client = new OpenAI({
-              apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+                baseURL: endpoint,
+                apiKey: tokenProvider
             });
             
             const response = await client.responses.create();
@@ -940,12 +1252,23 @@ namespace Azure.AI.Projects;
             	"github.com/openai/openai-go"
             	"github.com/openai/openai-go/option"
             	"github.com/openai/openai-go/responses"
+                "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+                "github.com/openai/openai-go/v3/azure"
             )
             
             func main() {
-            	client := openai.NewClient(
-            		option.WithAPIKey("My API Key"),
-            	)
+            	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            
+                tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+                if err != nil {
+                    println("Error creating credential.")
+                    panic(err)
+                }
+            
+                client := openai.NewClient(
+                    option.WithBaseURL(endpoint),
+                    azure.WithTokenCredential(tokenCredential),
+                )
             	response, err := client.Responses.New(context.TODO(), responses.ResponseNewParams{})
             	if err != nil {
             		panic(err.Error())
@@ -962,6 +1285,9 @@ namespace Azure.AI.Projects;
             import com.openai.client.okhttp.OpenAIOkHttpClient;
             import com.openai.models.responses.Response;
             import com.openai.models.responses.ResponseCreateParams;
+            import com.azure.identity.AuthenticationUtil;
+            import com.azure.identity.DefaultAzureCredentialBuilder;
+            import com.openai.credential.BearerTokenCredential;
             
             public final class Main {
                 private Main() {}
@@ -975,8 +1301,27 @@ namespace Azure.AI.Projects;
             """,
           ruby: """
             require "openai"
+            require "oauth2"
             
-            openai = OpenAI::Client.new(api_key: "My API Key")
+            tenant_id = ENV["AZURE_TENANT_ID"]
+            client_id = ENV["AZURE_CLIENT_ID"]
+            client_secret = ENV["AZURE_CLIENT_SECRET"]
+            
+            resource = "https://ai.azure.com/.default"
+            oauth_client = OAuth2::Client.new(
+              client_id,
+              client_secret,
+              site: "https://login.microsoftonline.com/#{tenant_id}",
+              token_url: "/oauth2/v2.0/token"
+            )
+            
+            token = oauth_client.client_credentials.get_token(scope: resource).token
+            base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            
+            openai = OpenAI::Client.new(
+              access_token: token,
+              uri_base: base_url
+            )
             
             response = openai.responses.create
             
@@ -1119,9 +1464,12 @@ namespace Azure.AI.Projects;
         title: "Streaming",
         request: #{
           curl: """
-            curl https://api.openai.com/v1/responses \\
+            az login
+            AZURE_API_KEY=$(az account get-access-token --resource https://ai.azure.com/ --query accessToken -o tsv)
+            
+            curlhttps://<foundry-resource>.services.ai.azure.com/openai/v1/responses \\
               -H "Content-Type: application/json" \\
-              -H "Authorization: Bearer $OPENAI_API_KEY" \\
+              -H "Authorization: Bearer $AZURE_API_KEY" \\
               -d '{
                 "model": "gpt-5.4",
                 "instructions": "You are a helpful assistant.",
@@ -1133,17 +1481,31 @@ namespace Azure.AI.Projects;
           python: """
             import os
             from openai import OpenAI
+            from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+            
+            endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
             
             client = OpenAI(
-                api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+                base_url=endpoint,
+                api_key=token_provider
             )
             for response in client.responses.create():
               print(response)
             """,
           javascript: """
             import OpenAI from "openai";
+            import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
             
-            const openai = new OpenAI();
+            const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            const tokenProvider = getBearerTokenProvider(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
+            
+            const openai = new OpenAI({
+                baseURL: endpoint,
+                apiKey: tokenProvider
+            });
             
             const response = await openai.responses.create({
                 model: "gpt-5.4",
@@ -1163,11 +1525,26 @@ namespace Azure.AI.Projects;
             using System.Threading.Tasks;
             
             using OpenAI.Responses;
+            using Azure.Identity;
+            using OpenAI;
+            using System.ClientModel.Primitives;
+            
+            #pragma warning disable OPENAI001
+            
+            const string deploymentName = "<deployment-name>";
+            const string endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            
+            BearerTokenPolicy tokenPolicy = new(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
             
             OpenAIResponseClient client = new(
-                model: "gpt-5.4",
-                apiKey: Environment.GetEnvironmentVariable("OPENAI_API_KEY")
-            );
+                model: deploymentName,
+                authenticationPolicy: tokenPolicy,
+                options: new OpenAIClientOptions()
+                {
+                    Endpoint = new Uri($"{endpoint}"),
+                });
             
             string userInputText = "Hello!";
             
@@ -1189,9 +1566,16 @@ namespace Azure.AI.Projects;
             """,
           `node.js`: """
             import OpenAI from 'openai';
+            import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+            
+            const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            const tokenProvider = getBearerTokenProvider(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
             
             const client = new OpenAI({
-              apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+                baseURL: endpoint,
+                apiKey: tokenProvider
             });
             
             const response = await client.responses.create();
@@ -1208,12 +1592,23 @@ namespace Azure.AI.Projects;
             	"github.com/openai/openai-go"
             	"github.com/openai/openai-go/option"
             	"github.com/openai/openai-go/responses"
+                "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+                "github.com/openai/openai-go/v3/azure"
             )
             
             func main() {
-            	client := openai.NewClient(
-            		option.WithAPIKey("My API Key"),
-            	)
+            	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            
+                tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+                if err != nil {
+                    println("Error creating credential.")
+                    panic(err)
+                }
+            
+                client := openai.NewClient(
+                    option.WithBaseURL(endpoint),
+                    azure.WithTokenCredential(tokenCredential),
+                )
             	response, err := client.Responses.New(context.TODO(), responses.ResponseNewParams{})
             	if err != nil {
             		panic(err.Error())
@@ -1230,6 +1625,9 @@ namespace Azure.AI.Projects;
             import com.openai.client.okhttp.OpenAIOkHttpClient;
             import com.openai.models.responses.Response;
             import com.openai.models.responses.ResponseCreateParams;
+            import com.azure.identity.AuthenticationUtil;
+            import com.azure.identity.DefaultAzureCredentialBuilder;
+            import com.openai.credential.BearerTokenCredential;
             
             public final class Main {
                 private Main() {}
@@ -1243,8 +1641,27 @@ namespace Azure.AI.Projects;
             """,
           ruby: """
             require "openai"
+            require "oauth2"
             
-            openai = OpenAI::Client.new(api_key: "My API Key")
+            tenant_id = ENV["AZURE_TENANT_ID"]
+            client_id = ENV["AZURE_CLIENT_ID"]
+            client_secret = ENV["AZURE_CLIENT_SECRET"]
+            
+            resource = "https://ai.azure.com/.default"
+            oauth_client = OAuth2::Client.new(
+              client_id,
+              client_secret,
+              site: "https://login.microsoftonline.com/#{tenant_id}",
+              token_url: "/oauth2/v2.0/token"
+            )
+            
+            token = oauth_client.client_credentials.get_token(scope: resource).token
+            base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            
+            openai = OpenAI::Client.new(
+              access_token: token,
+              uri_base: base_url
+            )
             
             response = openai.responses.create
             
@@ -1287,9 +1704,12 @@ namespace Azure.AI.Projects;
         title: "Functions",
         request: #{
           curl: """
-            curl https://api.openai.com/v1/responses \\
+            az login
+            AZURE_API_KEY=$(az account get-access-token --resource https://ai.azure.com/ --query accessToken -o tsv)
+            
+            curlhttps://<foundry-resource>.services.ai.azure.com/openai/v1/responses \\
               -H "Content-Type: application/json" \\
-              -H "Authorization: Bearer $OPENAI_API_KEY" \\
+              -H "Authorization: Bearer $AZURE_API_KEY" \\
               -d '{
                 "model": "gpt-5.4",
                 "input": "What is the weather like in Boston today?",
@@ -1321,17 +1741,31 @@ namespace Azure.AI.Projects;
           python: """
             import os
             from openai import OpenAI
+            from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+            
+            endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
             
             client = OpenAI(
-                api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+                base_url=endpoint,
+                api_key=token_provider
             )
             for response in client.responses.create():
               print(response)
             """,
           javascript: """
             import OpenAI from "openai";
+            import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
             
-            const openai = new OpenAI();
+            const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            const tokenProvider = getBearerTokenProvider(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
+            
+            const openai = new OpenAI({
+                baseURL: endpoint,
+                apiKey: tokenProvider
+            });
             
             const tools = [
                 {
@@ -1365,11 +1799,26 @@ namespace Azure.AI.Projects;
           csharp: """
             using System;
             using OpenAI.Responses;
+            using Azure.Identity;
+            using OpenAI;
+            using System.ClientModel.Primitives;
+            
+            #pragma warning disable OPENAI001
+            
+            const string deploymentName = "<deployment-name>";
+            const string endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            
+            BearerTokenPolicy tokenPolicy = new(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
             
             OpenAIResponseClient client = new(
-                model: "gpt-5.4",
-                apiKey: Environment.GetEnvironmentVariable("OPENAI_API_KEY")
-            );
+                model: deploymentName,
+                authenticationPolicy: tokenPolicy,
+                options: new OpenAIClientOptions()
+                {
+                    Endpoint = new Uri($"{endpoint}"),
+                });
             
             ResponseTool getCurrentWeatherFunctionTool = ResponseTool.CreateFunctionTool(
                 functionName: "get_current_weather",
@@ -1406,9 +1855,16 @@ namespace Azure.AI.Projects;
             """,
           `node.js`: """
             import OpenAI from 'openai';
+            import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+            
+            const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            const tokenProvider = getBearerTokenProvider(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
             
             const client = new OpenAI({
-              apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+                baseURL: endpoint,
+                apiKey: tokenProvider
             });
             
             const response = await client.responses.create();
@@ -1425,12 +1881,23 @@ namespace Azure.AI.Projects;
             	"github.com/openai/openai-go"
             	"github.com/openai/openai-go/option"
             	"github.com/openai/openai-go/responses"
+                "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+                "github.com/openai/openai-go/v3/azure"
             )
             
             func main() {
-            	client := openai.NewClient(
-            		option.WithAPIKey("My API Key"),
-            	)
+            	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            
+                tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+                if err != nil {
+                    println("Error creating credential.")
+                    panic(err)
+                }
+            
+                client := openai.NewClient(
+                    option.WithBaseURL(endpoint),
+                    azure.WithTokenCredential(tokenCredential),
+                )
             	response, err := client.Responses.New(context.TODO(), responses.ResponseNewParams{})
             	if err != nil {
             		panic(err.Error())
@@ -1447,6 +1914,9 @@ namespace Azure.AI.Projects;
             import com.openai.client.okhttp.OpenAIOkHttpClient;
             import com.openai.models.responses.Response;
             import com.openai.models.responses.ResponseCreateParams;
+            import com.azure.identity.AuthenticationUtil;
+            import com.azure.identity.DefaultAzureCredentialBuilder;
+            import com.openai.credential.BearerTokenCredential;
             
             public final class Main {
                 private Main() {}
@@ -1460,8 +1930,27 @@ namespace Azure.AI.Projects;
             """,
           ruby: """
             require "openai"
+            require "oauth2"
             
-            openai = OpenAI::Client.new(api_key: "My API Key")
+            tenant_id = ENV["AZURE_TENANT_ID"]
+            client_id = ENV["AZURE_CLIENT_ID"]
+            client_secret = ENV["AZURE_CLIENT_SECRET"]
+            
+            resource = "https://ai.azure.com/.default"
+            oauth_client = OAuth2::Client.new(
+              client_id,
+              client_secret,
+              site: "https://login.microsoftonline.com/#{tenant_id}",
+              token_url: "/oauth2/v2.0/token"
+            )
+            
+            token = oauth_client.client_credentials.get_token(scope: resource).token
+            base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            
+            openai = OpenAI::Client.new(
+              access_token: token,
+              uri_base: base_url
+            )
             
             response = openai.responses.create
             
@@ -1552,9 +2041,12 @@ namespace Azure.AI.Projects;
         title: "Reasoning",
         request: #{
           curl: """
-            curl https://api.openai.com/v1/responses \\
+            az login
+            AZURE_API_KEY=$(az account get-access-token --resource https://ai.azure.com/ --query accessToken -o tsv)
+            
+            curlhttps://<foundry-resource>.services.ai.azure.com/openai/v1/responses \\
               -H "Content-Type: application/json" \\
-              -H "Authorization: Bearer $OPENAI_API_KEY" \\
+              -H "Authorization: Bearer $AZURE_API_KEY" \\
               -d '{
                 "model": "o3-mini",
                 "input": "How much wood would a woodchuck chuck?",
@@ -1566,7 +2058,16 @@ namespace Azure.AI.Projects;
             """,
           javascript: """
             import OpenAI from "openai";
-            const openai = new OpenAI();
+            import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+            const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            const tokenProvider = getBearerTokenProvider(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
+            
+            const openai = new OpenAI({
+                baseURL: endpoint,
+                apiKey: tokenProvider
+            });
             
             const response = await openai.responses.create({
                 model: "o3-mini",
@@ -1582,9 +2083,14 @@ namespace Azure.AI.Projects;
           python: """
             import os
             from openai import OpenAI
+            from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+            
+            endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
             
             client = OpenAI(
-                api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+                base_url=endpoint,
+                api_key=token_provider
             )
             for response in client.responses.create():
               print(response)
@@ -1592,11 +2098,26 @@ namespace Azure.AI.Projects;
           csharp: """
             using System;
             using OpenAI.Responses;
+            using Azure.Identity;
+            using OpenAI;
+            using System.ClientModel.Primitives;
+            
+            #pragma warning disable OPENAI001
+            
+            const string deploymentName = "<deployment-name>";
+            const string endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            
+            BearerTokenPolicy tokenPolicy = new(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
             
             OpenAIResponseClient client = new(
-                model: "o3-mini",
-                apiKey: Environment.GetEnvironmentVariable("OPENAI_API_KEY")
-            );
+                model: deploymentName,
+                authenticationPolicy: tokenPolicy,
+                options: new OpenAIClientOptions()
+                {
+                    Endpoint = new Uri($"{endpoint}"),
+                });
             
             string userInputText = "How much wood would a woodchuck chuck?";
             
@@ -1615,9 +2136,16 @@ namespace Azure.AI.Projects;
             """,
           `node.js`: """
             import OpenAI from 'openai';
+            import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+            
+            const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+            const tokenProvider = getBearerTokenProvider(
+                new DefaultAzureCredential(),
+                "https://ai.azure.com/.default");
             
             const client = new OpenAI({
-              apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+                baseURL: endpoint,
+                apiKey: tokenProvider
             });
             
             const response = await client.responses.create();
@@ -1634,12 +2162,23 @@ namespace Azure.AI.Projects;
             	"github.com/openai/openai-go"
             	"github.com/openai/openai-go/option"
             	"github.com/openai/openai-go/responses"
+                "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+                "github.com/openai/openai-go/v3/azure"
             )
             
             func main() {
-            	client := openai.NewClient(
-            		option.WithAPIKey("My API Key"),
-            	)
+            	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            
+                tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+                if err != nil {
+                    println("Error creating credential.")
+                    panic(err)
+                }
+            
+                client := openai.NewClient(
+                    option.WithBaseURL(endpoint),
+                    azure.WithTokenCredential(tokenCredential),
+                )
             	response, err := client.Responses.New(context.TODO(), responses.ResponseNewParams{})
             	if err != nil {
             		panic(err.Error())
@@ -1656,6 +2195,9 @@ namespace Azure.AI.Projects;
             import com.openai.client.okhttp.OpenAIOkHttpClient;
             import com.openai.models.responses.Response;
             import com.openai.models.responses.ResponseCreateParams;
+            import com.azure.identity.AuthenticationUtil;
+            import com.azure.identity.DefaultAzureCredentialBuilder;
+            import com.openai.credential.BearerTokenCredential;
             
             public final class Main {
                 private Main() {}
@@ -1669,8 +2211,27 @@ namespace Azure.AI.Projects;
             """,
           ruby: """
             require "openai"
+            require "oauth2"
             
-            openai = OpenAI::Client.new(api_key: "My API Key")
+            tenant_id = ENV["AZURE_TENANT_ID"]
+            client_id = ENV["AZURE_CLIENT_ID"]
+            client_secret = ENV["AZURE_CLIENT_SECRET"]
+            
+            resource = "https://ai.azure.com/.default"
+            oauth_client = OAuth2::Client.new(
+              client_id,
+              client_secret,
+              site: "https://login.microsoftonline.com/#{tenant_id}",
+              token_url: "/oauth2/v2.0/token"
+            )
+            
+            token = oauth_client.client_credentials.get_token(scope: resource).token
+            base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+            
+            openai = OpenAI::Client.new(
+              access_token: token,
+              uri_base: base_url
+            )
             
             response = openai.responses.create
             
@@ -1751,14 +2312,26 @@ namespace Azure.AI.Projects;
     examples: #{
       request: #{
         curl: """
-          curl -X DELETE https://api.openai.com/v1/responses/resp_123 \\
+          az login
+          AZURE_API_KEY=$(az account get-access-token --resource https://ai.azure.com/ --query accessToken -o tsv)
+          
+          curl-X DELETE https://<foundry-resource>.services.ai.azure.com/openai/v1/responses/resp_123 \\
               -H "Content-Type: application/json" \\
-              -H "Authorization: Bearer $OPENAI_API_KEY"
+              -H "Authorization: Bearer $AZURE_API_KEY"
           
           """,
         javascript: """
           import OpenAI from "openai";
-          const client = new OpenAI();
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
+          
+          const openai = new OpenAI({
+              baseURL: endpoint,
+              apiKey: tokenProvider
+          });
           
           const response = await client.responses.delete("resp_123");
           console.log(response);
@@ -1767,9 +2340,14 @@ namespace Azure.AI.Projects;
         python: """
           import os
           from openai import OpenAI
+          from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+          
+          endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
           
           client = OpenAI(
-              api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+              base_url=endpoint,
+              api_key=token_provider
           )
           client.responses.delete(
               "resp_677efb5139a88190b512bc3fef8e535d",
@@ -1777,9 +2355,16 @@ namespace Azure.AI.Projects;
           """,
         `node.js`: """
           import OpenAI from 'openai';
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+          
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
           
           const client = new OpenAI({
-            apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+              baseURL: endpoint,
+              apiKey: tokenProvider
           });
           
           await client.responses.delete('resp_677efb5139a88190b512bc3fef8e535d');
@@ -1792,12 +2377,23 @@ namespace Azure.AI.Projects;
           
           	"github.com/openai/openai-go"
           	"github.com/openai/openai-go/option"
+              "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+              "github.com/openai/openai-go/v3/azure"
           )
           
           func main() {
-          	client := openai.NewClient(
-          		option.WithAPIKey("My API Key"),
-          	)
+          	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+              tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+              if err != nil {
+                  println("Error creating credential.")
+                  panic(err)
+              }
+          
+              client := openai.NewClient(
+                  option.WithBaseURL(endpoint),
+                  azure.WithTokenCredential(tokenCredential),
+              )
           	err := client.Responses.Delete(context.TODO(), "resp_677efb5139a88190b512bc3fef8e535d")
           	if err != nil {
           		panic(err.Error())
@@ -1811,6 +2407,9 @@ namespace Azure.AI.Projects;
           import com.openai.client.OpenAIClient;
           import com.openai.client.okhttp.OpenAIOkHttpClient;
           import com.openai.models.responses.ResponseDeleteParams;
+          import com.azure.identity.AuthenticationUtil;
+          import com.azure.identity.DefaultAzureCredentialBuilder;
+          import com.openai.credential.BearerTokenCredential;
           
           public final class Main {
               private Main() {}
@@ -1824,8 +2423,27 @@ namespace Azure.AI.Projects;
           """,
         ruby: """
           require "openai"
+          require "oauth2"
           
-          openai = OpenAI::Client.new(api_key: "My API Key")
+          tenant_id = ENV["AZURE_TENANT_ID"]
+          client_id = ENV["AZURE_CLIENT_ID"]
+          client_secret = ENV["AZURE_CLIENT_SECRET"]
+          
+          resource = "https://ai.azure.com/.default"
+          oauth_client = OAuth2::Client.new(
+            client_id,
+            client_secret,
+            site: "https://login.microsoftonline.com/#{tenant_id}",
+            token_url: "/oauth2/v2.0/token"
+          )
+          
+          token = oauth_client.client_credentials.get_token(scope: resource).token
+          base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+          openai = OpenAI::Client.new(
+            access_token: token,
+            uri_base: base_url
+          )
           
           result = openai.responses.delete("resp_677efb5139a88190b512bc3fef8e535d")
           
@@ -1853,14 +2471,26 @@ namespace Azure.AI.Projects;
     examples: #{
       request: #{
         curl: """
-          curl https://api.openai.com/v1/responses/resp_123 \\
+          az login
+          AZURE_API_KEY=$(az account get-access-token --resource https://ai.azure.com/ --query accessToken -o tsv)
+          
+          curlhttps://<foundry-resource>.services.ai.azure.com/openai/v1/responses/resp_123 \\
               -H "Content-Type: application/json" \\
-              -H "Authorization: Bearer $OPENAI_API_KEY"
+              -H "Authorization: Bearer $AZURE_API_KEY"
           
           """,
         javascript: """
           import OpenAI from "openai";
-          const client = new OpenAI();
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
+          
+          const openai = new OpenAI({
+              baseURL: endpoint,
+              apiKey: tokenProvider
+          });
           
           const response = await client.responses.retrieve("resp_123");
           console.log(response);
@@ -1869,9 +2499,14 @@ namespace Azure.AI.Projects;
         python: """
           import os
           from openai import OpenAI
+          from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+          
+          endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
           
           client = OpenAI(
-              api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+              base_url=endpoint,
+              api_key=token_provider
           )
           for response in client.responses.retrieve(
               response_id="resp_677efb5139a88190b512bc3fef8e535d",
@@ -1880,9 +2515,16 @@ namespace Azure.AI.Projects;
           """,
         `node.js`: """
           import OpenAI from 'openai';
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+          
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
           
           const client = new OpenAI({
-            apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+              baseURL: endpoint,
+              apiKey: tokenProvider
           });
           
           const response = await client.responses.retrieve('resp_677efb5139a88190b512bc3fef8e535d');
@@ -1899,12 +2541,23 @@ namespace Azure.AI.Projects;
           	"github.com/openai/openai-go"
           	"github.com/openai/openai-go/option"
           	"github.com/openai/openai-go/responses"
+              "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+              "github.com/openai/openai-go/v3/azure"
           )
           
           func main() {
-          	client := openai.NewClient(
-          		option.WithAPIKey("My API Key"),
-          	)
+          	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+              tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+              if err != nil {
+                  println("Error creating credential.")
+                  panic(err)
+              }
+          
+              client := openai.NewClient(
+                  option.WithBaseURL(endpoint),
+                  azure.WithTokenCredential(tokenCredential),
+              )
           	response, err := client.Responses.Get(
           		context.TODO(),
           		"resp_677efb5139a88190b512bc3fef8e535d",
@@ -1925,6 +2578,9 @@ namespace Azure.AI.Projects;
           import com.openai.client.okhttp.OpenAIOkHttpClient;
           import com.openai.models.responses.Response;
           import com.openai.models.responses.ResponseRetrieveParams;
+          import com.azure.identity.AuthenticationUtil;
+          import com.azure.identity.DefaultAzureCredentialBuilder;
+          import com.openai.credential.BearerTokenCredential;
           
           public final class Main {
               private Main() {}
@@ -1938,8 +2594,27 @@ namespace Azure.AI.Projects;
           """,
         ruby: """
           require "openai"
+          require "oauth2"
           
-          openai = OpenAI::Client.new(api_key: "My API Key")
+          tenant_id = ENV["AZURE_TENANT_ID"]
+          client_id = ENV["AZURE_CLIENT_ID"]
+          client_secret = ENV["AZURE_CLIENT_SECRET"]
+          
+          resource = "https://ai.azure.com/.default"
+          oauth_client = OAuth2::Client.new(
+            client_id,
+            client_secret,
+            site: "https://login.microsoftonline.com/#{tenant_id}",
+            token_url: "/oauth2/v2.0/token"
+          )
+          
+          token = oauth_client.client_credentials.get_token(scope: resource).token
+          base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+          openai = OpenAI::Client.new(
+            access_token: token,
+            uri_base: base_url
+          )
           
           response = openai.responses.retrieve("resp_677efb5139a88190b512bc3fef8e535d")
           
@@ -2021,14 +2696,26 @@ namespace Azure.AI.Projects;
     examples: #{
       request: #{
         curl: """
-          curl -X POST https://api.openai.com/v1/responses/resp_123/cancel \\
+          az login
+          AZURE_API_KEY=$(az account get-access-token --resource https://ai.azure.com/ --query accessToken -o tsv)
+          
+          curl-X POST https://<foundry-resource>.services.ai.azure.com/openai/v1/responses/resp_123/cancel \\
               -H "Content-Type: application/json" \\
-              -H "Authorization: Bearer $OPENAI_API_KEY"
+              -H "Authorization: Bearer $AZURE_API_KEY"
           
           """,
         javascript: """
           import OpenAI from "openai";
-          const client = new OpenAI();
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
+          
+          const openai = new OpenAI({
+              baseURL: endpoint,
+              apiKey: tokenProvider
+          });
           
           const response = await client.responses.cancel("resp_123");
           console.log(response);
@@ -2037,9 +2724,14 @@ namespace Azure.AI.Projects;
         python: """
           import os
           from openai import OpenAI
+          from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+          
+          endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
           
           client = OpenAI(
-              api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+              base_url=endpoint,
+              api_key=token_provider
           )
           response = client.responses.cancel(
               "resp_677efb5139a88190b512bc3fef8e535d",
@@ -2048,9 +2740,16 @@ namespace Azure.AI.Projects;
           """,
         `node.js`: """
           import OpenAI from 'openai';
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+          
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
           
           const client = new OpenAI({
-            apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+              baseURL: endpoint,
+              apiKey: tokenProvider
           });
           
           const response = await client.responses.cancel('resp_677efb5139a88190b512bc3fef8e535d');
@@ -2066,12 +2765,23 @@ namespace Azure.AI.Projects;
           
           	"github.com/openai/openai-go"
           	"github.com/openai/openai-go/option"
+              "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+              "github.com/openai/openai-go/v3/azure"
           )
           
           func main() {
-          	client := openai.NewClient(
-          		option.WithAPIKey("My API Key"),
-          	)
+          	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+              tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+              if err != nil {
+                  println("Error creating credential.")
+                  panic(err)
+              }
+          
+              client := openai.NewClient(
+                  option.WithBaseURL(endpoint),
+                  azure.WithTokenCredential(tokenCredential),
+              )
           	response, err := client.Responses.Cancel(context.TODO(), "resp_677efb5139a88190b512bc3fef8e535d")
           	if err != nil {
           		panic(err.Error())
@@ -2088,6 +2798,9 @@ namespace Azure.AI.Projects;
           import com.openai.client.okhttp.OpenAIOkHttpClient;
           import com.openai.models.responses.Response;
           import com.openai.models.responses.ResponseCancelParams;
+          import com.azure.identity.AuthenticationUtil;
+          import com.azure.identity.DefaultAzureCredentialBuilder;
+          import com.openai.credential.BearerTokenCredential;
           
           public final class Main {
               private Main() {}
@@ -2101,8 +2814,27 @@ namespace Azure.AI.Projects;
           """,
         ruby: """
           require "openai"
+          require "oauth2"
           
-          openai = OpenAI::Client.new(api_key: "My API Key")
+          tenant_id = ENV["AZURE_TENANT_ID"]
+          client_id = ENV["AZURE_CLIENT_ID"]
+          client_secret = ENV["AZURE_CLIENT_SECRET"]
+          
+          resource = "https://ai.azure.com/.default"
+          oauth_client = OAuth2::Client.new(
+            client_id,
+            client_secret,
+            site: "https://login.microsoftonline.com/#{tenant_id}",
+            token_url: "/oauth2/v2.0/token"
+          )
+          
+          token = oauth_client.client_credentials.get_token(scope: resource).token
+          base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+          openai = OpenAI::Client.new(
+            access_token: token,
+            uri_base: base_url
+          )
           
           response = openai.responses.cancel("resp_677efb5139a88190b512bc3fef8e535d")
           
@@ -2175,14 +2907,26 @@ namespace Azure.AI.Projects;
     examples: #{
       request: #{
         curl: """
-          curl https://api.openai.com/v1/responses/resp_abc123/input_items \\
+          az login
+          AZURE_API_KEY=$(az account get-access-token --resource https://ai.azure.com/ --query accessToken -o tsv)
+          
+          curlhttps://<foundry-resource>.services.ai.azure.com/openai/v1/responses/resp_abc123/input_items \\
             -H "Content-Type: application/json" \\
-            -H "Authorization: Bearer $OPENAI_API_KEY"
+            -H "Authorization: Bearer $AZURE_API_KEY"
           
           """,
         javascript: """
           import OpenAI from "openai";
-          const client = new OpenAI();
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
+          
+          const openai = new OpenAI({
+              baseURL: endpoint,
+              apiKey: tokenProvider
+          });
           
           const response = await client.responses.inputItems.list("resp_123");
           console.log(response.data);
@@ -2191,9 +2935,14 @@ namespace Azure.AI.Projects;
         python: """
           import os
           from openai import OpenAI
+          from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+          
+          endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
           
           client = OpenAI(
-              api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+              base_url=endpoint,
+              api_key=token_provider
           )
           page = client.responses.input_items.list(
               response_id="response_id",
@@ -2203,9 +2952,16 @@ namespace Azure.AI.Projects;
           """,
         `node.js`: """
           import OpenAI from 'openai';
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+          
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
           
           const client = new OpenAI({
-            apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+              baseURL: endpoint,
+              apiKey: tokenProvider
           });
           
           // Automatically fetches more pages as needed.
@@ -2223,12 +2979,23 @@ namespace Azure.AI.Projects;
           	"github.com/openai/openai-go"
           	"github.com/openai/openai-go/option"
           	"github.com/openai/openai-go/responses"
+              "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+              "github.com/openai/openai-go/v3/azure"
           )
           
           func main() {
-          	client := openai.NewClient(
-          		option.WithAPIKey("My API Key"),
-          	)
+          	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+              tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+              if err != nil {
+                  println("Error creating credential.")
+                  panic(err)
+              }
+          
+              client := openai.NewClient(
+                  option.WithBaseURL(endpoint),
+                  azure.WithTokenCredential(tokenCredential),
+              )
           	page, err := client.Responses.InputItems.List(
           		context.TODO(),
           		"response_id",
@@ -2249,6 +3016,9 @@ namespace Azure.AI.Projects;
           import com.openai.client.okhttp.OpenAIOkHttpClient;
           import com.openai.models.responses.inputitems.InputItemListPage;
           import com.openai.models.responses.inputitems.InputItemListParams;
+          import com.azure.identity.AuthenticationUtil;
+          import com.azure.identity.DefaultAzureCredentialBuilder;
+          import com.openai.credential.BearerTokenCredential;
           
           public final class Main {
               private Main() {}
@@ -2262,8 +3032,27 @@ namespace Azure.AI.Projects;
           """,
         ruby: """
           require "openai"
+          require "oauth2"
           
-          openai = OpenAI::Client.new(api_key: "My API Key")
+          tenant_id = ENV["AZURE_TENANT_ID"]
+          client_id = ENV["AZURE_CLIENT_ID"]
+          client_secret = ENV["AZURE_CLIENT_SECRET"]
+          
+          resource = "https://ai.azure.com/.default"
+          oauth_client = OAuth2::Client.new(
+            client_id,
+            client_secret,
+            site: "https://login.microsoftonline.com/#{tenant_id}",
+            token_url: "/oauth2/v2.0/token"
+          )
+          
+          token = oauth_client.client_credentials.get_token(scope: resource).token
+          base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+          openai = OpenAI::Client.new(
+            access_token: token,
+            uri_base: base_url
+          )
           
           page = openai.responses.input_items.list("response_id")
           
@@ -2307,9 +3096,12 @@ namespace Azure.AI.Projects;
     examples: #{
       request: #{
         curl: """
-          curl -X POST https://api.openai.com/v1/responses/compact \\
+          az login
+          AZURE_API_KEY=$(az account get-access-token --resource https://ai.azure.com/ --query accessToken -o tsv)
+          
+          curl-X POST https://<foundry-resource>.services.ai.azure.com/openai/v1/responses/compact \\
               -H "Content-Type: application/json" \\
-              -H "Authorization: Bearer $OPENAI_API_KEY" \\
+              -H "Authorization: Bearer $AZURE_API_KEY" \\
               -d '{
                 "model": "gpt-5.1-codex-max",
                 "input": [
@@ -2337,8 +3129,17 @@ namespace Azure.AI.Projects;
           """,
         javascript: """
           import OpenAI from "openai";
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
           
-          const openai = new OpenAI();
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
+          
+          const openai = new OpenAI({
+              baseURL: endpoint,
+              apiKey: tokenProvider
+          });
           
           // Compact the previous response if you are running out of tokens
           const compactedResponse = await openai.responses.compact({
@@ -2373,9 +3174,14 @@ namespace Azure.AI.Projects;
         python: """
           import os
           from openai import OpenAI
+          from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+          
+          endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
           
           client = OpenAI(
-              api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+              base_url=endpoint,
+              api_key=token_provider
           )
           compacted_response = client.responses.compact(
               model="gpt-5.4",
@@ -2384,9 +3190,16 @@ namespace Azure.AI.Projects;
           """,
         `node.js`: """
           import OpenAI from 'openai';
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+          
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
           
           const client = new OpenAI({
-            apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+              baseURL: endpoint,
+              apiKey: tokenProvider
           });
           
           const compactedResponse = await client.responses.compact({ model: 'gpt-5.4' });
@@ -2403,12 +3216,23 @@ namespace Azure.AI.Projects;
           	"github.com/openai/openai-go"
           	"github.com/openai/openai-go/option"
           	"github.com/openai/openai-go/responses"
+              "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+              "github.com/openai/openai-go/v3/azure"
           )
           
           func main() {
-          	client := openai.NewClient(
-          		option.WithAPIKey("My API Key"),
-          	)
+          	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+              tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+              if err != nil {
+                  println("Error creating credential.")
+                  panic(err)
+              }
+          
+              client := openai.NewClient(
+                  option.WithBaseURL(endpoint),
+                  azure.WithTokenCredential(tokenCredential),
+              )
           	compactedResponse, err := client.Responses.Compact(context.TODO(), responses.ResponseCompactParams{
           		Model: responses.ResponseCompactParamsModelGPT5_4,
           	})
@@ -2427,24 +3251,48 @@ namespace Azure.AI.Projects;
           import com.openai.client.okhttp.OpenAIOkHttpClient;
           import com.openai.models.responses.CompactedResponse;
           import com.openai.models.responses.ResponseCompactParams;
+          import com.azure.identity.AuthenticationUtil;
+          import com.azure.identity.DefaultAzureCredentialBuilder;
+          import com.openai.credential.BearerTokenCredential;
           
           public final class Main {
               private Main() {}
           
               public static void main(String[] args) {
-                  OpenAIClient client = OpenAIOkHttpClient.fromEnv();
+                  String endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
           
-                  ResponseCompactParams params = ResponseCompactParams.builder()
-                      .model(ResponseCompactParams.Model.GPT_5_4)
-                      .build();
+              OpenAIClient client = OpenAIOkHttpClient.builder()
+                  .baseUrl(endpoint)
+                  .credential(BearerTokenCredential.create(AuthenticationUtil.getBearerTokenSupplier(
+                      new DefaultAzureCredentialBuilder().build(), "https://ai.azure.com/.default")))
+                  .build();
                   CompactedResponse compactedResponse = client.responses().compact(params);
               }
           }
           """,
         ruby: """
           require "openai"
+          require "oauth2"
           
-          openai = OpenAI::Client.new(api_key: "My API Key")
+          tenant_id = ENV["AZURE_TENANT_ID"]
+          client_id = ENV["AZURE_CLIENT_ID"]
+          client_secret = ENV["AZURE_CLIENT_SECRET"]
+          
+          resource = "https://ai.azure.com/.default"
+          oauth_client = OAuth2::Client.new(
+            client_id,
+            client_secret,
+            site: "https://login.microsoftonline.com/#{tenant_id}",
+            token_url: "/oauth2/v2.0/token"
+          )
+          
+          token = oauth_client.client_credentials.get_token(scope: resource).token
+          base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+          openai = OpenAI::Client.new(
+            access_token: token,
+            uri_base: base_url
+          )
           
           compacted_response = openai.responses.compact(model: :"gpt-5.4")
           
