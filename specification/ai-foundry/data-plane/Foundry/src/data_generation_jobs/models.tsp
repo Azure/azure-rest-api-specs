@@ -63,6 +63,12 @@ model DataGenerationJobOutputOptions {
 
   @doc("Tags to assign to the output. Applies only to dataset outputs (evaluation scenario); ignored for Azure OpenAI file outputs.")
   tags?: Record<string>;
+
+  @doc("Target dataset ID to append results to when adding generated rows to an existing dataset.")
+  target_dataset_id?: string;
+
+  @doc("Field path used to deduplicate rows when adding generated data to an existing dataset.")
+  dedupe_key?: string;
 }
 
 @doc("Result produced by a successful data generation job.")
@@ -244,6 +250,9 @@ union DataGenerationJobSourceType {
   @doc("Traces source — conversation traces from Application Insights.")
   traces: "traces",
 
+  @doc("Dataset source — reference to a dataset asset.")
+  dataset: "dataset",
+
   @doc("File source — Azure OpenAI file.")
   file: "file",
 }
@@ -274,6 +283,25 @@ model AgentDataGenerationJobSource extends DataGenerationJobSource {
 @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
 model TracesDataGenerationJobSource extends DataGenerationJobSource {
   ...TracesJobSource;
+
+  @doc("Optional explicit list of trace IDs to include. Mutually exclusive with `kql_where_clause`.")
+  trace_ids?: string[];
+
+  @doc("Optional KQL where clause used to filter traces.")
+  kql_where_clause?: string;
+}
+
+@doc("Dataset source for data generation jobs — reference to an existing dataset asset.")
+@extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
+model DatasetDataGenerationJobSource extends DataGenerationJobSource {
+  @doc("The source type for this source, which is Dataset.")
+  type: "dataset";
+
+  @doc("The dataset asset name.")
+  name: string;
+
+  @doc("The dataset asset version.")
+  version?: string;
 }
 
 @doc("File source for data generation jobs — Azure OpenAI file input.")
