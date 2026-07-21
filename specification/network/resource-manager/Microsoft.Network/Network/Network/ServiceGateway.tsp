@@ -52,8 +52,12 @@ model ServiceGateway extends SecurityPerimeterTrackedResource {
   zones?: string[];
 }
 
-/** Status-only success response for synchronous service gateway update actions. */
-model ServiceGatewayActionOkResponseBody {}
+@doc("Empty success response.")
+model ServiceGatewayActionOkResponseBody {
+  /** The status of the operation. */
+  @visibility(Lifecycle.Read)
+  status?: string;
+}
 
 /** Status-only success response for synchronous service gateway update actions. */
 model ServiceGatewayActionOkResponse {
