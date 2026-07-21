@@ -3975,6 +3975,33 @@
         },
         "tags": [
           "Agent Invocations"
+        ],
+        "x-codeSamples": [
+          {
+            "lang": "curl",
+            "label": "cURL",
+            "source": "curl -X \"GET\" \\\n\"$FOUNDRY_PROJECT_ENDPOINT/agents/<agent-name>/versions/<agent-version>/invocations/docs/asyncapi.json?api-version=<api-version>\" \\\n  -H \"Authorization: Bearer $AZURE_TOKEN\""
+          },
+          {
+            "lang": "python",
+            "label": "Python",
+            "source": "import os\nimport requests\nfrom azure.identity import DefaultAzureCredential\nendpoint = os.environ[\"FOUNDRY_PROJECT_ENDPOINT\"].rstrip(\"/\")\nurl = f\"{endpoint}/agents/<agent-name>/versions/<agent-version>/invocations/docs/asyncapi.json?api-version=<api-version>\"\ntoken = DefaultAzureCredential().get_token(\"https://ai.azure.com/.default\").token\nheaders = {\n    \"Authorization\": f\"Bearer {token}\",\n}\nresponse = requests.get(url, headers=headers, timeout=30)\nresponse.raise_for_status()\nprint(response.json())"
+          },
+          {
+            "lang": "csharp",
+            "label": ".NET",
+            "source": "using System.Net.Http.Headers;\nusing System.Text;\nusing Azure.Core;\nusing Azure.Identity;\nstring endpoint = Environment.GetEnvironmentVariable(\"FOUNDRY_PROJECT_ENDPOINT\")!.TrimEnd('/');\nstring url = endpoint + \"/agents/<agent-name>/versions/<agent-version>/invocations/docs/asyncapi.json?api-version=<api-version>\";\nTokenCredential credential = new DefaultAzureCredential();\nAccessToken token = await credential.GetTokenAsync(new TokenRequestContext([\"https://ai.azure.com/.default\"]));\nusing HttpClient client = new();\nusing HttpRequestMessage request = new(HttpMethod.Get, url);\nrequest.Headers.Authorization = new AuthenticationHeaderValue(\"Bearer\", token.Token);\nusing HttpResponseMessage response = await client.SendAsync(request);\nresponse.EnsureSuccessStatusCode();\nConsole.WriteLine(await response.Content.ReadAsStringAsync());"
+          },
+          {
+            "lang": "typescript",
+            "label": "TypeScript",
+            "source": "import { DefaultAzureCredential } from \"@azure/identity\";\n\nconst endpoint = process.env.FOUNDRY_PROJECT_ENDPOINT?.replace(/\\/$/, \"\");\nif (!endpoint) throw new Error(\"FOUNDRY_PROJECT_ENDPOINT is required\");\nconst url = `${endpoint}/agents/<agent-name>/versions/<agent-version>/invocations/docs/asyncapi.json?api-version=<api-version>`;\nconst credential = new DefaultAzureCredential();\nconst token = await credential.getToken(\"https://ai.azure.com/.default\");\n\nconst response = await fetch(url, {\n  method: \"GET\",\n  headers: {\n    Authorization: `Bearer ${token.token}`,\n  },\n});\n\nif (!response.ok) {\n  throw new Error(`Request failed: ${response.status} ${await response.text()}`);\n}\nconsole.log(await response.json());"
+          },
+          {
+            "lang": "java",
+            "label": "Java",
+            "source": "import com.azure.core.credential.AccessToken;\nimport com.azure.core.credential.TokenRequestContext;\nimport com.azure.identity.DefaultAzureCredentialBuilder;\nimport java.net.URI;\nimport java.net.http.HttpClient;\nimport java.net.http.HttpRequest;\nimport java.net.http.HttpResponse;\n\nString endpoint = System.getenv(\"FOUNDRY_PROJECT_ENDPOINT\").replaceAll(\"/$\", \"\");\nString url = endpoint + \"/agents/<agent-name>/versions/<agent-version>/invocations/docs/asyncapi.json?api-version=<api-version>\";\nAccessToken token = new DefaultAzureCredentialBuilder().build()\n    .getToken(new TokenRequestContext().addScopes(\"https://ai.azure.com/.default\"))\n    .block();\n\nHttpRequest.Builder request = HttpRequest.newBuilder()\n    .uri(URI.create(url))\n    .method(\"GET\", HttpRequest.BodyPublishers.noBody())\n    .header(\"Authorization\", \"Bearer \" + token.getToken());\n\nHttpResponse<String> response = HttpClient.newHttpClient().send(request.build(), HttpResponse.BodyHandlers.ofString());\nif (response.statusCode() >= 400) {\n    throw new IllegalStateException(\"Request failed: \" + response.statusCode() + \" \" + response.body());\n}\nSystem.out.println(response.body());"
+          }
         ]
       }
     },
@@ -4046,6 +4073,33 @@
         },
         "tags": [
           "Agent Invocations"
+        ],
+        "x-codeSamples": [
+          {
+            "lang": "curl",
+            "label": "cURL",
+            "source": "curl -X \"GET\" \\\n\"$FOUNDRY_PROJECT_ENDPOINT/agents/<agent-name>/versions/<agent-version>/invocations/docs/asyncapi.yaml?api-version=<api-version>\" \\\n  -H \"Authorization: Bearer $AZURE_TOKEN\""
+          },
+          {
+            "lang": "python",
+            "label": "Python",
+            "source": "import os\nimport requests\nfrom azure.identity import DefaultAzureCredential\nendpoint = os.environ[\"FOUNDRY_PROJECT_ENDPOINT\"].rstrip(\"/\")\nurl = f\"{endpoint}/agents/<agent-name>/versions/<agent-version>/invocations/docs/asyncapi.yaml?api-version=<api-version>\"\ntoken = DefaultAzureCredential().get_token(\"https://ai.azure.com/.default\").token\nheaders = {\n    \"Authorization\": f\"Bearer {token}\",\n}\nresponse = requests.get(url, headers=headers, timeout=30)\nresponse.raise_for_status()\nprint(response.text)"
+          },
+          {
+            "lang": "csharp",
+            "label": ".NET",
+            "source": "using System.Net.Http.Headers;\nusing System.Text;\nusing Azure.Core;\nusing Azure.Identity;\nstring endpoint = Environment.GetEnvironmentVariable(\"FOUNDRY_PROJECT_ENDPOINT\")!.TrimEnd('/');\nstring url = endpoint + \"/agents/<agent-name>/versions/<agent-version>/invocations/docs/asyncapi.yaml?api-version=<api-version>\";\nTokenCredential credential = new DefaultAzureCredential();\nAccessToken token = await credential.GetTokenAsync(new TokenRequestContext([\"https://ai.azure.com/.default\"]));\nusing HttpClient client = new();\nusing HttpRequestMessage request = new(HttpMethod.Get, url);\nrequest.Headers.Authorization = new AuthenticationHeaderValue(\"Bearer\", token.Token);\nusing HttpResponseMessage response = await client.SendAsync(request);\nresponse.EnsureSuccessStatusCode();\nConsole.WriteLine(await response.Content.ReadAsStringAsync());"
+          },
+          {
+            "lang": "typescript",
+            "label": "TypeScript",
+            "source": "import { DefaultAzureCredential } from \"@azure/identity\";\n\nconst endpoint = process.env.FOUNDRY_PROJECT_ENDPOINT?.replace(/\\/$/, \"\");\nif (!endpoint) throw new Error(\"FOUNDRY_PROJECT_ENDPOINT is required\");\nconst url = `${endpoint}/agents/<agent-name>/versions/<agent-version>/invocations/docs/asyncapi.yaml?api-version=<api-version>`;\nconst credential = new DefaultAzureCredential();\nconst token = await credential.getToken(\"https://ai.azure.com/.default\");\n\nconst response = await fetch(url, {\n  method: \"GET\",\n  headers: {\n    Authorization: `Bearer ${token.token}`,\n  },\n});\n\nif (!response.ok) {\n  throw new Error(`Request failed: ${response.status} ${await response.text()}`);\n}\nconsole.log(await response.text());"
+          },
+          {
+            "lang": "java",
+            "label": "Java",
+            "source": "import com.azure.core.credential.AccessToken;\nimport com.azure.core.credential.TokenRequestContext;\nimport com.azure.identity.DefaultAzureCredentialBuilder;\nimport java.net.URI;\nimport java.net.http.HttpClient;\nimport java.net.http.HttpRequest;\nimport java.net.http.HttpResponse;\n\nString endpoint = System.getenv(\"FOUNDRY_PROJECT_ENDPOINT\").replaceAll(\"/$\", \"\");\nString url = endpoint + \"/agents/<agent-name>/versions/<agent-version>/invocations/docs/asyncapi.yaml?api-version=<api-version>\";\nAccessToken token = new DefaultAzureCredentialBuilder().build()\n    .getToken(new TokenRequestContext().addScopes(\"https://ai.azure.com/.default\"))\n    .block();\n\nHttpRequest.Builder request = HttpRequest.newBuilder()\n    .uri(URI.create(url))\n    .method(\"GET\", HttpRequest.BodyPublishers.noBody())\n    .header(\"Authorization\", \"Bearer \" + token.getToken());\n\nHttpResponse<String> response = HttpClient.newHttpClient().send(request.build(), HttpResponse.BodyHandlers.ofString());\nif (response.statusCode() >= 400) {\n    throw new IllegalStateException(\"Request failed: \" + response.statusCode() + \" \" + response.body());\n}\nSystem.out.println(response.body());"
+          }
         ]
       }
     },

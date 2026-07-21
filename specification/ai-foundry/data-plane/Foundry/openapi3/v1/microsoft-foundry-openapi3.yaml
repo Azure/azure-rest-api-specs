@@ -4493,6 +4493,94 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agent Invocations
+      x-codeSamples:
+        - lang: curl
+          label: cURL
+          source: |-
+            curl -X "GET" \
+            "$FOUNDRY_PROJECT_ENDPOINT/agents/<agent-name>/versions/<agent-version>/invocations/docs/asyncapi.json?api-version=<api-version>" \
+              -H "Authorization: Bearer $AZURE_TOKEN"
+        - lang: python
+          label: Python
+          source: |-
+            import os
+            import requests
+            from azure.identity import DefaultAzureCredential
+            endpoint = os.environ["FOUNDRY_PROJECT_ENDPOINT"].rstrip("/")
+            url = f"{endpoint}/agents/<agent-name>/versions/<agent-version>/invocations/docs/asyncapi.json?api-version=<api-version>"
+            token = DefaultAzureCredential().get_token("https://ai.azure.com/.default").token
+            headers = {
+                "Authorization": f"Bearer {token}",
+            }
+            response = requests.get(url, headers=headers, timeout=30)
+            response.raise_for_status()
+            print(response.json())
+        - lang: csharp
+          label: .NET
+          source: |-
+            using System.Net.Http.Headers;
+            using System.Text;
+            using Azure.Core;
+            using Azure.Identity;
+            string endpoint = Environment.GetEnvironmentVariable("FOUNDRY_PROJECT_ENDPOINT")!.TrimEnd('/');
+            string url = endpoint + "/agents/<agent-name>/versions/<agent-version>/invocations/docs/asyncapi.json?api-version=<api-version>";
+            TokenCredential credential = new DefaultAzureCredential();
+            AccessToken token = await credential.GetTokenAsync(new TokenRequestContext(["https://ai.azure.com/.default"]));
+            using HttpClient client = new();
+            using HttpRequestMessage request = new(HttpMethod.Get, url);
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token.Token);
+            using HttpResponseMessage response = await client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+            Console.WriteLine(await response.Content.ReadAsStringAsync());
+        - lang: typescript
+          label: TypeScript
+          source: |-
+            import { DefaultAzureCredential } from "@azure/identity";
+
+            const endpoint = process.env.FOUNDRY_PROJECT_ENDPOINT?.replace(/\/$/, "");
+            if (!endpoint) throw new Error("FOUNDRY_PROJECT_ENDPOINT is required");
+            const url = `${endpoint}/agents/<agent-name>/versions/<agent-version>/invocations/docs/asyncapi.json?api-version=<api-version>`;
+            const credential = new DefaultAzureCredential();
+            const token = await credential.getToken("https://ai.azure.com/.default");
+
+            const response = await fetch(url, {
+              method: "GET",
+              headers: {
+                Authorization: `Bearer ${token.token}`,
+              },
+            });
+
+            if (!response.ok) {
+              throw new Error(`Request failed: ${response.status} ${await response.text()}`);
+            }
+            console.log(await response.json());
+        - lang: java
+          label: Java
+          source: |-
+            import com.azure.core.credential.AccessToken;
+            import com.azure.core.credential.TokenRequestContext;
+            import com.azure.identity.DefaultAzureCredentialBuilder;
+            import java.net.URI;
+            import java.net.http.HttpClient;
+            import java.net.http.HttpRequest;
+            import java.net.http.HttpResponse;
+
+            String endpoint = System.getenv("FOUNDRY_PROJECT_ENDPOINT").replaceAll("/$", "");
+            String url = endpoint + "/agents/<agent-name>/versions/<agent-version>/invocations/docs/asyncapi.json?api-version=<api-version>";
+            AccessToken token = new DefaultAzureCredentialBuilder().build()
+                .getToken(new TokenRequestContext().addScopes("https://ai.azure.com/.default"))
+                .block();
+
+            HttpRequest.Builder request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .method("GET", HttpRequest.BodyPublishers.noBody())
+                .header("Authorization", "Bearer " + token.getToken());
+
+            HttpResponse<String> response = HttpClient.newHttpClient().send(request.build(), HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode() >= 400) {
+                throw new IllegalStateException("Request failed: " + response.statusCode() + " " + response.body());
+            }
+            System.out.println(response.body());
   /agents/{agent_name}/versions/{agent_version}/invocations/docs/asyncapi.yaml:
     get:
       operationId: AgentInvocations_getAgentInvocationAsyncApiSpecYaml
@@ -4542,6 +4630,94 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agent Invocations
+      x-codeSamples:
+        - lang: curl
+          label: cURL
+          source: |-
+            curl -X "GET" \
+            "$FOUNDRY_PROJECT_ENDPOINT/agents/<agent-name>/versions/<agent-version>/invocations/docs/asyncapi.yaml?api-version=<api-version>" \
+              -H "Authorization: Bearer $AZURE_TOKEN"
+        - lang: python
+          label: Python
+          source: |-
+            import os
+            import requests
+            from azure.identity import DefaultAzureCredential
+            endpoint = os.environ["FOUNDRY_PROJECT_ENDPOINT"].rstrip("/")
+            url = f"{endpoint}/agents/<agent-name>/versions/<agent-version>/invocations/docs/asyncapi.yaml?api-version=<api-version>"
+            token = DefaultAzureCredential().get_token("https://ai.azure.com/.default").token
+            headers = {
+                "Authorization": f"Bearer {token}",
+            }
+            response = requests.get(url, headers=headers, timeout=30)
+            response.raise_for_status()
+            print(response.text)
+        - lang: csharp
+          label: .NET
+          source: |-
+            using System.Net.Http.Headers;
+            using System.Text;
+            using Azure.Core;
+            using Azure.Identity;
+            string endpoint = Environment.GetEnvironmentVariable("FOUNDRY_PROJECT_ENDPOINT")!.TrimEnd('/');
+            string url = endpoint + "/agents/<agent-name>/versions/<agent-version>/invocations/docs/asyncapi.yaml?api-version=<api-version>";
+            TokenCredential credential = new DefaultAzureCredential();
+            AccessToken token = await credential.GetTokenAsync(new TokenRequestContext(["https://ai.azure.com/.default"]));
+            using HttpClient client = new();
+            using HttpRequestMessage request = new(HttpMethod.Get, url);
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token.Token);
+            using HttpResponseMessage response = await client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+            Console.WriteLine(await response.Content.ReadAsStringAsync());
+        - lang: typescript
+          label: TypeScript
+          source: |-
+            import { DefaultAzureCredential } from "@azure/identity";
+
+            const endpoint = process.env.FOUNDRY_PROJECT_ENDPOINT?.replace(/\/$/, "");
+            if (!endpoint) throw new Error("FOUNDRY_PROJECT_ENDPOINT is required");
+            const url = `${endpoint}/agents/<agent-name>/versions/<agent-version>/invocations/docs/asyncapi.yaml?api-version=<api-version>`;
+            const credential = new DefaultAzureCredential();
+            const token = await credential.getToken("https://ai.azure.com/.default");
+
+            const response = await fetch(url, {
+              method: "GET",
+              headers: {
+                Authorization: `Bearer ${token.token}`,
+              },
+            });
+
+            if (!response.ok) {
+              throw new Error(`Request failed: ${response.status} ${await response.text()}`);
+            }
+            console.log(await response.text());
+        - lang: java
+          label: Java
+          source: |-
+            import com.azure.core.credential.AccessToken;
+            import com.azure.core.credential.TokenRequestContext;
+            import com.azure.identity.DefaultAzureCredentialBuilder;
+            import java.net.URI;
+            import java.net.http.HttpClient;
+            import java.net.http.HttpRequest;
+            import java.net.http.HttpResponse;
+
+            String endpoint = System.getenv("FOUNDRY_PROJECT_ENDPOINT").replaceAll("/$", "");
+            String url = endpoint + "/agents/<agent-name>/versions/<agent-version>/invocations/docs/asyncapi.yaml?api-version=<api-version>";
+            AccessToken token = new DefaultAzureCredentialBuilder().build()
+                .getToken(new TokenRequestContext().addScopes("https://ai.azure.com/.default"))
+                .block();
+
+            HttpRequest.Builder request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .method("GET", HttpRequest.BodyPublishers.noBody())
+                .header("Authorization", "Bearer " + token.getToken());
+
+            HttpResponse<String> response = HttpClient.newHttpClient().send(request.build(), HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode() >= 400) {
+                throw new IllegalStateException("Request failed: " + response.statusCode() + " " + response.body());
+            }
+            System.out.println(response.body());
   /agents/{agent_name}/versions/{agent_version}/sessions/{session_id}:logstream:
     get:
       operationId: Agents_getSessionLogStream
