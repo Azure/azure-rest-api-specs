@@ -10006,6 +10006,42 @@
         }
       }
     },
+    "AzurePostgreSqlAuthenticationType": {
+      "type": "string",
+      "description": "Specify the authentication to be used.",
+      "enum": [
+        "BasicAuth",
+        "ServicePrincipal",
+        "SystemAssignedManagedIdentity",
+        "UserAssignedManagedIdentity"
+      ],
+      "x-ms-enum": {
+        "name": "AzurePostgreSqlAuthenticationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "BasicAuth",
+            "value": "BasicAuth",
+            "description": "BasicAuth"
+          },
+          {
+            "name": "ServicePrincipal",
+            "value": "ServicePrincipal",
+            "description": "ServicePrincipal"
+          },
+          {
+            "name": "SystemAssignedManagedIdentity",
+            "value": "SystemAssignedManagedIdentity",
+            "description": "SystemAssignedManagedIdentity"
+          },
+          {
+            "name": "UserAssignedManagedIdentity",
+            "value": "UserAssignedManagedIdentity",
+            "description": "UserAssignedManagedIdentity"
+          }
+        ]
+      }
+    },
     "AzurePostgreSqlLinkedService": {
       "type": "object",
       "description": "Azure PostgreSQL linked service.",
@@ -10032,6 +10068,10 @@
       "properties": {
         "connectionString": {
           "description": "An ODBC connection string. Type: string, SecureString or AzureKeyVaultSecretReference."
+        },
+        "authenticationType": {
+          "$ref": "#/definitions/AzurePostgreSqlAuthenticationType",
+          "description": "Specify the authentication to be used. Type: string."
         },
         "server": {
           "description": "Server name for connection. Type: string."
