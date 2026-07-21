@@ -292,12 +292,12 @@ interface AgentEndpointConversations {
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
 @doc("""
   Management of voice agents. These agents live on the dedicated `/voice_agents` path family: the text `/agents`
   surface neither accepts nor returns voice agents, and this surface accepts only voice agents. Each create or
   update produces a new immutable version.
   """)
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
 interface VoiceAgents {
   /**
    * Creates a new voice agent, or a new version of an existing one.
@@ -399,7 +399,8 @@ interface VoiceAgents {
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
       @doc("The name of the voice agent to enable.")
-      @path agent_name: string;
+      @path
+      agent_name: string;
     },
     NoContentResponse
   >;
@@ -417,7 +418,8 @@ interface VoiceAgents {
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
       @doc("The name of the voice agent to disable.")
-      @path agent_name: string;
+      @path
+      agent_name: string;
     },
     NoContentResponse
   >;
@@ -481,7 +483,9 @@ interface VoiceAgents {
       @extension(
         "x-ms-foundry-meta",
         #{
-          conditional_previews: #[AgentDefinitionOptInKeys.draft_agents_v1_preview],
+          conditional_previews: #[
+            AgentDefinitionOptInKeys.draft_agents_v1_preview
+          ],
         }
       )
       @query
