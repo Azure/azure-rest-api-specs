@@ -49,58 +49,85 @@
                 }
               ],
               "hostNetwork": {
-                "enableStorageAutoIp": false,
                 "intents": [
                   {
-                    "adapterPropertyOverrides": {
-                      "jumboPacket": null,
-                      "networkDirect": "0",
-                      "networkDirectTechnology": null
-                    },
-                    "intentAdapters": [
-                      "ethernet",
-                      "ethernet2"
-                    ],
-                    "intentName": "managementcomputestorage",
-                    "intentType": 14,
+                    "scope": 1,
+                    "intentType": 3,
                     "isComputeIntentSet": true,
-                    "isManagementIntentSet": true,
-                    "isNetworkIntentType": true,
-                    "isOnlyStorage": false,
-                    "isOnlyStretch": false,
                     "isStorageIntentSet": true,
+                    "isOnlyStorage": false,
+                    "isManagementIntentSet": true,
                     "isStretchIntentSet": false,
-                    "overrideAdapterProperty": true,
-                    "overrideQosPolicy": true,
-                    "overrideVirtualSwitchConfiguration": true,
-                    "qosPolicyOverrides": {
-                      "bandwidthPercentage_SMB": null,
-                      "priorityValue8021Action_Cluster": null,
-                      "priorityValue8021Action_SMB": null
-                    },
-                    "scope": 0,
+                    "isOnlyStretch": false,
+                    "isNetworkIntentType": true,
+                    "intentName": "ManagementComputeStorage",
+                    "intentAdapters": [
+                      "port1",
+                      "port2"
+                    ],
+                    "overrideVirtualSwitchConfiguration": false,
                     "virtualSwitchConfigurationOverrides": {
-                      "enableIov": "True",
-                      "loadBalancingAlgorithm": "HyperVPort"
+                      "enableIov": "true",
+                      "loadBalancingAlgorithm": "Dynamic"
+                    },
+                    "overrideQosPolicy": false,
+                    "qosPolicyOverrides": {
+                      "priorityValue8021Action_Cluster": "7",
+                      "priorityValue8021Action_SMB": "3",
+                      "bandwidthPercentage_SMB": "50"
+                    },
+                    "overrideAdapterProperty": false,
+                    "adapterPropertyOverrides": {
+                      "jumboPacket": "9014",
+                      "networkDirect": "Enabled",
+                      "networkDirectTechnology": "RoCEv2"
                     }
                   }
                 ],
-                "storageConnectivitySwitchless": false,
                 "storageNetworks": [
                   {
-                    "name": "StorageIntent1",
-                    "networkAdapterName": "ethernet",
+                    "name": "Storage1Network",
+                    "networkAdapterName": "port3",
+                    "storageVlanId": "711",
                     "storageAdapterIPInfo": [
                       {
-                        "ipv4Address": "192.168.120.192",
-                        "physicalNode": "v-host1",
-                        "subnetMask": "255.255.244.0"
+                        "physicalNode": "Node-1",
+                        "ipv4Address": "10.0.0.1",
+                        "subnetMask": "255.255.255.0"
                       }
-                    ],
-                    "storageVlanId": "8"
+                    ]
                   }
-                ]
+                ],
+                "storageConnectivitySwitchless": true,
+                "enableStorageAutoIp": true
+              },
+              "sdnProperties": {
+                "sdnStatus": "Enabled",
+                "sdnDomainName": "sdn-nc.contoso.com",
+                "sdnApiAddress": "10.0.0.10"
               }
+            },
+            "storageProfile": {
+              "poolableDisksCount": 4,
+              "disks": [
+                {
+                  "id": "5000C500A1B2C3D4",
+                  "sizeInBytes": "1920383410176",
+                  "type": "SSD",
+                  "model": "MZ7LH1T9HMLT",
+                  "manufacturer": "Samsung",
+                  "isSupported": true
+                }
+              ]
+            },
+            "confidentialVmProfile": {
+              "igvmStatus": "Enabled",
+              "statusDetails": [
+                {
+                  "code": "IgvmEnabled",
+                  "message": "Confidential VM capabilities are enabled on the device."
+                }
+              ]
             },
             "osProfile": {
               "bootType": "UEFI",
