@@ -26484,6 +26484,468 @@ model VirtualNetworkApplianceIpConfigurationProperties {
   #["addressLocation"]
 );
 @@identifiers(GetServiceGatewayServicesResult.value, #["name"]);
+// =============================================================================
+// Connection Analyzer (api-version 2025-09-01)
+// =============================================================================
+
+/**
+ * The type of diagnostic operation to run on a connection analyzer.
+ */
+@added(Versions.v2025_09_01)
+union DiagnosticOperation {
+  string,
+
+  /**
+   * Determines the next hop for traffic from the source to the destination.
+   */
+  NextHop: "NextHop",
+
+  /**
+   * Evaluates the network security group rules that apply to the traffic.
+   */
+  NSG: "NSG",
+
+  /**
+   * Scans the destination ports to determine their reachability.
+   */
+  PortScan: "PortScan",
+
+  /**
+   * Performs an end-to-end connectivity check between the source and destination.
+   */
+  ConnectivityCheck: "ConnectivityCheck",
+
+  /**
+   * Runs Express Route specific diagnostics for the connection.
+   */
+  ExpressRouteDiagnostic: "ExpressRouteDiagnostic",
+}
+
+namespace ConnectionAnalyzerEndpointTypes {
+  /**
+   * The endpoint type for a connection analyzer source or destination.
+   */
+  @added(Versions.v2025_09_01)
+  union EndpointType {
+    string,
+
+    /**
+     * An Azure virtual machine endpoint, identified by its ARM resource ID.
+     */
+    VM: "VM",
+
+    /**
+     * An Azure virtual machine scale set (or scale set instance) endpoint, identified by its ARM resource ID.
+     */
+    VMSS: "VMSS",
+
+    /**
+     * An external endpoint reachable from outside Azure, identified by an IP address or FQDN.
+     */
+    ExternalAddress: "ExternalAddress",
+
+    /**
+     * An Azure Bastion host endpoint, identified by its ARM resource ID.
+     */
+    BastionHost: "BastionHost",
+
+    /**
+     * An Application Gateway endpoint, identified by its ARM resource ID.
+     */
+    ApplicationGateway: "ApplicationGateway",
+  }
+}
+
+/**
+ * Current execution status of the connection analyzer.
+ */
+@added(Versions.v2025_09_01)
+union ConnectionAnalyzerStatus {
+  string,
+
+  /**
+   * The connection analyzer has been created but execution has not yet begun.
+   */
+  NotStarted: "NotStarted",
+
+  /**
+   * The connection analyzer is currently running its diagnostic operations.
+   */
+  Running: "Running",
+
+  /**
+   * The connection analyzer completed all diagnostic operations successfully.
+   */
+  Succeeded: "Succeeded",
+
+  /**
+   * The connection analyzer failed to complete its diagnostic operations.
+   */
+  Failed: "Failed",
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required to attach Connection Analyzer child models to the existing NetworkWatcher resource which is modeled with the legacy ARM resource pattern via Azure.ResourceManager.Legacy.feature."
+@added(Versions.v2025_09_01)
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
+@doc("""
+  Describes a source or destination endpoint of a connection analyzer.
+  
+  The schema is intentionally permissive (a flat object) because the set of
+  valid fields is determined by `type` and is enforced server-side by the
+  Network Resource Provider. The required and allowed fields per `type` are:
+  
+  - `VM`, `VMSS`, `BastionHost`, `ApplicationGateway`: `resourceId` is
+    required and must be the ARM resource ID of the corresponding resource
+    (a virtual machine, virtual machine scale set or VMSS instance, Azure
+    Bastion host, or Application Gateway, respectively); `address` is not
+    used; `port` is optional.
+  - `ExternalAddress`: `address` is required and must be an IP address or
+    FQDN reachable from outside Azure; `resourceId` is not used; `port` is
+    optional.
+  
+  Requests that supply fields not allowed for the chosen `type`, or omit a
+  required field, are rejected by the service with a validation error. This
+  follows the same convention used by `ConnectivitySource` and
+  `ConnectivityDestination` on Network Watcher.
+  """)
+model ConnectionAnalyzerEndpoint {
+  /**
+   * The type of the endpoint. Determines which of `resourceId` and `address`
+   * are required; see the model-level documentation for the per-type contract.
+   */
+  type: ConnectionAnalyzerEndpointTypes.EndpointType;
+
+  /**
+   * ARM resource ID of the endpoint resource. Required when `type` is `VM`,
+   * `VMSS`, `BastionHost`, or `ApplicationGateway`. Not used when `type` is
+   * `ExternalAddress`.
+   */
+  resourceId?: armResourceIdentifier;
+
+  /**
+   * IP address or FQDN of the endpoint. Required when `type` is
+   * `ExternalAddress`. Not used for the resource-typed endpoint kinds (`VM`,
+   * `VMSS`, `BastionHost`, `ApplicationGateway`).
+   */
+  address?: string;
+
+  /**
+   * Port to use for the endpoint (0-65535).
+   */
+  @minValue(0)
+  @maxValue(65535)
+  port?: int32;
+}
+
+/**
+ * Settings that control how connectivity checks are performed by the connection analyzer.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required to attach Connection Analyzer child models to the existing NetworkWatcher resource which is modeled with the legacy ARM resource pattern via Azure.ResourceManager.Legacy.feature."
+@added(Versions.v2025_09_01)
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
+model ConnectivityCheckSettings {
+  /**
+   * Whether to generate a hop-by-hop path during the connectivity check. Default value is true.
+   */
+  generatePath?: boolean = true;
+
+  /**
+   * Preferred IP version for the connectivity check.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name preserves uppercase 'IP' acronym to remain consistent with existing Microsoft.Network properties named preferredIPVersion."
+  preferredIPVersion?: PreferredIPVersion;
+}
+
+/**
+ * Settings that control how Express Route diagnostics are performed by the connection analyzer.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required to attach Connection Analyzer child models to the existing NetworkWatcher resource which is modeled with the legacy ARM resource pattern via Azure.ResourceManager.Legacy.feature."
+@added(Versions.v2025_09_01)
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
+model ExpressRouteDiagnosticsSettings {
+  /**
+   * Resource ID of the Express Route circuit.
+   */
+  erCircuitResourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/expressRouteCircuits";
+    }
+  ]>;
+
+  /**
+   * Bandwidth (in Mbps) to use for the Express Route diagnostic.
+   */
+  bandwidth?: float32;
+}
+
+/**
+ * Diagnostic settings to provide for the ConnectionAnalyzer operation.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required to attach Connection Analyzer child models to the existing NetworkWatcher resource which is modeled with the legacy ARM resource pattern via Azure.ResourceManager.Legacy.feature."
+@added(Versions.v2025_09_01)
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
+model DiagnosticOperationsSettings {
+  /**
+   * Settings for the ConnectivityCheck diagnostic operation.
+   */
+  connectivityCheckSettings?: ConnectivityCheckSettings;
+
+  /**
+   * Settings for the ExpressRouteDiagnostic diagnostic operation.
+   */
+  expressRouteDiagnosticsSettings?: ExpressRouteDiagnosticsSettings;
+}
+
+/**
+ * Protocol-level settings for the connection analyzer.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required to attach Connection Analyzer child models to the existing NetworkWatcher resource which is modeled with the legacy ARM resource pattern via Azure.ResourceManager.Legacy.feature."
+@added(Versions.v2025_09_01)
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
+model ProtocolSettings {
+  /**
+   * Network protocol.
+   */
+  protocol?: Protocol;
+
+  /**
+   * HTTP configuration (used when protocol is Http or Https).
+   */
+  httpConfiguration?: HttpConfiguration;
+}
+
+/**
+ * Storage account where the connection analyzer writes its output.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required to attach Connection Analyzer child models to the existing NetworkWatcher resource which is modeled with the legacy ARM resource pattern via Azure.ResourceManager.Legacy.feature."
+@added(Versions.v2025_09_01)
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
+model StorageAccountSettings {
+  /**
+   * Resource ID of the storage account.
+   */
+  storageAccountId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Storage/storageAccounts";
+    }
+  ]>;
+
+  /**
+   * Sub-path within the storage account where results are written.
+   */
+  path?: string;
+}
+
+/**
+ * Settings that control where the connection analyzer writes its results.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required to attach Connection Analyzer child models to the existing NetworkWatcher resource which is modeled with the legacy ARM resource pattern via Azure.ResourceManager.Legacy.feature."
+@added(Versions.v2025_09_01)
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
+model OutputSettings {
+  /**
+   * Storage account where output is written.
+   */
+  storageAccountSettings?: StorageAccountSettings;
+}
+
+/**
+ * Properties of a connection analyzer.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required to attach Connection Analyzer child models to the existing NetworkWatcher resource which is modeled with the legacy ARM resource pattern via Azure.ResourceManager.Legacy.feature."
+@added(Versions.v2025_09_01)
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
+model ConnectionAnalyzerProperties {
+  /**
+   * Source endpoint of the connection analyzer.
+   */
+  source: ConnectionAnalyzerEndpoint;
+
+  /**
+   * Destination endpoint of the connection analyzer.
+   */
+  destination: ConnectionAnalyzerEndpoint;
+
+  /**
+   * List of diagnostic operations to run.
+   */
+  @minItems(1)
+  diagnosticOperations: DiagnosticOperation[];
+
+  /**
+   * Protocol-level settings.
+   */
+  protocolSettings?: ProtocolSettings;
+
+  /**
+   * Per-operation diagnostic settings.
+   */
+  diagnosticOperationsSettings?: DiagnosticOperationsSettings;
+
+  /**
+   * Time-to-live (days) before the analyzer expires.
+   */
+  expiryInDays?: int32;
+
+  /**
+   * Output settings (e.g. storage account).
+   */
+  outputSettings?: OutputSettings;
+
+  /**
+   * UTC time when the connection analyzer request was received.
+   */
+  @visibility(Lifecycle.Read)
+  requestTime?: utcDateTime;
+
+  /**
+   * The provisioning state of the connection analyzer resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+
+  /**
+   * Current execution status of the connection analyzer.
+   */
+  @visibility(Lifecycle.Read)
+  status?: ConnectionAnalyzerStatus;
+}
+
+/**
+ * Defines a connection analyzer resource.
+ *
+ * NOTE: `type` and `systemData` are intentionally omitted from this envelope
+ * to remain consistent with the sibling NetworkWatcher child resources
+ * (e.g. `ConnectionMonitor`, `PacketCapture`) which follow the legacy
+ * `Azure.ResourceManager.Legacy` custom-resource pattern. Adding `systemData`
+ * here would diverge from those siblings; the omission is the deliberate
+ * legacy pattern and is acknowledged.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required to attach Connection Analyzer child models to the existing NetworkWatcher resource which is modeled with the legacy ARM resource pattern via Azure.ResourceManager.Legacy.feature."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "ConnectionAnalyzer is exposed via the legacy NetworkWatcher action pattern; its key is supplied by the routed operation, not modeled on the resource."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Connection Analyzer follows the existing legacy custom-resource pattern used by sibling NetworkWatcher child resources in this project."
+@added(Versions.v2025_09_01)
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
+@Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
+model ConnectionAnalyzer {
+  /**
+   * Name of the connection analyzer.
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * Resource ID of the connection analyzer.
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * A unique read-only string that changes whenever the resource is updated.
+   */
+  @visibility(Lifecycle.Read)
+  etag?: string;
+
+  /**
+   * Resource location.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location: string;
+
+  /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "ARM resource tags must be modeled as Record<string> per the ARM resource contract."
+  tags?: Record<string>;
+
+  /**
+   * Properties of the connection analyzer.
+   */
+  properties: ConnectionAnalyzerProperties;
+}
+
+/**
+ * List of connection analyzers.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required to attach Connection Analyzer child models to the existing NetworkWatcher resource which is modeled with the legacy ARM resource pattern via Azure.ResourceManager.Legacy.feature."
+@added(Versions.v2025_09_01)
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
+model ConnectionAnalyzerListResult {
+  /**
+   * Information about connection analyzers.
+   */
+  @pageItems
+  value?: ConnectionAnalyzer[];
+
+  /**
+   * URL to get the next set of results.
+   */
+  @nextLink
+  nextLink?: string;
+}
+
+/**
+ * Result of an individual diagnostic operation run by a connection analyzer.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required to attach Connection Analyzer child models to the existing NetworkWatcher resource which is modeled with the legacy ARM resource pattern via Azure.ResourceManager.Legacy.feature."
+@added(Versions.v2025_09_01)
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
+model DiagnosticOperationResult {
+  /**
+   * The diagnostic operation that was run.
+   */
+  diagnosticOperation: DiagnosticOperation;
+
+  /**
+   * Error encountered while running the diagnostic operation, if any.
+   */
+  error?: string;
+
+  /**
+   * The result of the diagnostic operation, serialized as a JSON string.
+   */
+  result?: string;
+}
+
+/**
+ * Status result returned when querying a connection analyzer for its diagnostic results.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required to attach Connection Analyzer child models to the existing NetworkWatcher resource which is modeled with the legacy ARM resource pattern via Azure.ResourceManager.Legacy.feature."
+@added(Versions.v2025_09_01)
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
+model ConnectionAnalyzerQueryStatusResult {
+  /**
+   * Resource ID of the connection analyzer.
+   */
+  id?: string;
+
+  /**
+   * Current execution status of the connection analyzer.
+   */
+  connectionAnalyzerStatus?: ConnectionAnalyzerStatus;
+
+  /**
+   * Error message if the connection analyzer operation failed.
+   */
+  error?: string;
+
+  /**
+   * Storage path where the connection analyzer output is written.
+   */
+  outputStoragePath?: string;
+
+  /**
+   * UTC time when the connection analyzer expires.
+   */
+  expiryInUtc?: utcDateTime;
+
+  /**
+   * Results of the individual diagnostic operations.
+   */
+  @identifiers(#["diagnosticOperation"])
+  diagnosticOperationResults?: DiagnosticOperationResult[];
+}
+
 @@added(DisablePeeringRoute, Versions.v2025_07_01);
 @@added(RouteTablePropertiesFormat.disablePeeringRoute, Versions.v2025_07_01);
 

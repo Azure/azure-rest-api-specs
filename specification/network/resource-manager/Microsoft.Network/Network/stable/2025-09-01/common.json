@@ -3577,6 +3577,84 @@
         ]
       }
     },
+    "ConnectionAnalyzerEndpointType": {
+      "type": "string",
+      "description": "The endpoint type for a connection analyzer source or destination.",
+      "enum": [
+        "VM",
+        "VMSS",
+        "ExternalAddress",
+        "BastionHost",
+        "ApplicationGateway"
+      ],
+      "x-ms-enum": {
+        "name": "ConnectionAnalyzerEndpointType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "VM",
+            "value": "VM",
+            "description": "An Azure virtual machine endpoint, identified by its ARM resource ID."
+          },
+          {
+            "name": "VMSS",
+            "value": "VMSS",
+            "description": "An Azure virtual machine scale set (or scale set instance) endpoint, identified by its ARM resource ID."
+          },
+          {
+            "name": "ExternalAddress",
+            "value": "ExternalAddress",
+            "description": "An external endpoint reachable from outside Azure, identified by an IP address or FQDN."
+          },
+          {
+            "name": "BastionHost",
+            "value": "BastionHost",
+            "description": "An Azure Bastion host endpoint, identified by its ARM resource ID."
+          },
+          {
+            "name": "ApplicationGateway",
+            "value": "ApplicationGateway",
+            "description": "An Application Gateway endpoint, identified by its ARM resource ID."
+          }
+        ]
+      }
+    },
+    "ConnectionAnalyzerStatus": {
+      "type": "string",
+      "description": "Current execution status of the connection analyzer.",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Succeeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "ConnectionAnalyzerStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "The connection analyzer has been created but execution has not yet begun."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "The connection analyzer is currently running its diagnostic operations."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The connection analyzer completed all diagnostic operations successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The connection analyzer failed to complete its diagnostic operations."
+          }
+        ]
+      }
+    },
     "ConnectionAuthenticationType": {
       "type": "string",
       "description": "Gateway connection authentication type.",
@@ -4017,6 +4095,48 @@
             "name": "DHGroup24",
             "value": "DHGroup24",
             "description": "DHGroup24"
+          }
+        ]
+      }
+    },
+    "DiagnosticOperation": {
+      "type": "string",
+      "description": "The type of diagnostic operation to run on a connection analyzer.",
+      "enum": [
+        "NextHop",
+        "NSG",
+        "PortScan",
+        "ConnectivityCheck",
+        "ExpressRouteDiagnostic"
+      ],
+      "x-ms-enum": {
+        "name": "DiagnosticOperation",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NextHop",
+            "value": "NextHop",
+            "description": "Determines the next hop for traffic from the source to the destination."
+          },
+          {
+            "name": "NSG",
+            "value": "NSG",
+            "description": "Evaluates the network security group rules that apply to the traffic."
+          },
+          {
+            "name": "PortScan",
+            "value": "PortScan",
+            "description": "Scans the destination ports to determine their reachability."
+          },
+          {
+            "name": "ConnectivityCheck",
+            "value": "ConnectivityCheck",
+            "description": "Performs an end-to-end connectivity check between the source and destination."
+          },
+          {
+            "name": "ExpressRouteDiagnostic",
+            "value": "ExpressRouteDiagnostic",
+            "description": "Runs Express Route specific diagnostics for the connection."
           }
         ]
       }
