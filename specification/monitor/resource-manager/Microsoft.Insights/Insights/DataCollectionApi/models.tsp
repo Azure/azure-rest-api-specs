@@ -1330,6 +1330,7 @@ model StorageBlob {
   /**
    * Url of the storage blob
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   blobUrl?: string;
 
   /**

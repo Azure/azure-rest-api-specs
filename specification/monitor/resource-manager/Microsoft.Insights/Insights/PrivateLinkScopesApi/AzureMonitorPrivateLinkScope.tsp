@@ -13,11 +13,10 @@ namespace PrivateLinkScopesApi;
 /**
  * An Azure Monitor PrivateLinkScope definition.
  */
-model AzureMonitorPrivateLinkScope
-  is Azure.ResourceManager.TrackedResource<
-    AzureMonitorPrivateLinkScopeProperties,
-    false
-  > {
+model AzureMonitorPrivateLinkScope is Azure.ResourceManager.TrackedResource<
+  AzureMonitorPrivateLinkScopeProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = AzureMonitorPrivateLinkScope,
     KeyName = "scopeName",
