@@ -12,6 +12,7 @@ namespace Microsoft.Education;
 /**
  * join requests.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve the existing C# SDK name."
 @parentResource(LabDetails)
 model JoinRequestDetails
   is Azure.ResourceManager.ProxyResource<JoinRequestProperties> {

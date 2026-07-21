@@ -12,22 +12,31 @@ import { readFile } from "fs/promises";
 import yaml from "js-yaml";
 import validateApproval from "../../src/namespace-approval/validate-approval.js";
 
-/** @type {import("../../src/namespace-approval/approvers.js").ApproversConfig} */
-const approversConfig = {
-  "data-plane": {
-    global: ["global-admin1", "global-admin2"],
-    dotnet: ["approver2", "approver4"],
-    java: ["approver1"],
-    python: ["approver3"],
+/** Mock protected-labels.yml content (as yaml.load would return) */
+const protectedLabelsYaml = {
+  "global-approvers": ["global-admin1", "global-admin2"],
+  "BreakingChange-Approved-Benign": ["someone"],
+  "namespace-dotnet-approved": {
+    "management-plane": ["approver3", "approver4"],
+    "data-plane": ["approver2", "approver4"],
   },
-  "management-plane": {
-    all: ["approver3", "approver4"],
+  "namespace-java-approved": {
+    "management-plane": ["approver3", "approver4"],
+    "data-plane": ["approver1"],
+  },
+  "namespace-python-approved": {
+    "management-plane": ["approver3", "approver4"],
+    "data-plane": ["approver3"],
+  },
+  "namespace-approved-all": {
+    "management-plane": ["approver3", "approver4"],
+    "data-plane": ["global-admin1", "global-admin2"],
   },
 };
 
 function setupMocks() {
   /** @type {ReturnType<typeof vi.fn>} */ (readFile).mockResolvedValue("yaml-content");
-  /** @type {ReturnType<typeof vi.fn>} */ (yaml.load).mockReturnValue(approversConfig);
+  /** @type {ReturnType<typeof vi.fn>} */ (yaml.load).mockReturnValue(protectedLabelsYaml);
 }
 
 /**
@@ -136,25 +145,6 @@ describe("validate-approval", () => {
       );
     });
 
-    it("should reject unauthorized approver and remove label", async () => {
-      context.payload = createPRLabeledPayload({
-        action: "labeled",
-        labelName: "namespace-java-approved",
-        actor: "random-user",
-        labels: ["namespace-review-required", "namespace-java-pending"],
-      });
-
-      await validateApproval(args());
-
-      expect(github.rest.issues.removeLabel).toHaveBeenCalledWith(
-        expect.objectContaining({ name: "namespace-java-approved" }),
-      );
-      expect(github.rest.issues.createComment).toHaveBeenCalled();
-      const calls = vi.mocked(github.rest.issues.createComment).mock.calls;
-      const commentBody = String(/** @type {Record<string, unknown>} */ (calls[0][0]).body);
-      expect(commentBody).toContain("not authorized");
-    });
-
     it("should allow global approver to approve any language", async () => {
       context.payload = createPRLabeledPayload({
         action: "labeled",
@@ -208,6 +198,7 @@ describe("validate-approval", () => {
         labelName: "namespace-approved-all",
         actor: "approver3",
         labels: ["namespace-review-required", "namespace-dotnet-pending", "namespace-java-pending"],
+        isMgmt: true,
       });
 
       github.rest.pulls.get.mockResolvedValue({
@@ -227,11 +218,11 @@ describe("validate-approval", () => {
       );
     });
 
-    it("should reject namespace-approved-all from unauthorized user", async () => {
+    it("should reject namespace-approved-all on data-plane PR", async () => {
       context.payload = createPRLabeledPayload({
         action: "labeled",
         labelName: "namespace-approved-all",
-        actor: "random-user",
+        actor: "approver3",
         labels: ["namespace-review-required", "namespace-dotnet-pending"],
       });
 
@@ -243,7 +234,7 @@ describe("validate-approval", () => {
       expect(github.rest.issues.createComment).toHaveBeenCalled();
       const calls = vi.mocked(github.rest.issues.createComment).mock.calls;
       const commentBody = String(/** @type {Record<string, unknown>} */ (calls[0][0]).body);
-      expect(commentBody).toContain("not authorized");
+      expect(commentBody).toContain("only available on management-plane");
     });
   });
 

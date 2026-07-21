@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.Core;
 using Azure.ResourceManager.Foundations;
@@ -97,6 +99,18 @@ union AuthenticationType {
 
   /**
    * identityBased
+   */
+  identityBased: "identityBased",
+}
+
+/**
+ * Specifies authentication type being used for connecting to the event stream account.
+ */
+union EventStreamAuthenticationType {
+  string,
+
+  /**
+   * identityBased authentication
    */
   identityBased: "identityBased",
 }
@@ -270,6 +284,7 @@ union IotHubSku {
   /**
    * GEN2
    */
+  @removed(Versions.v2026_05_01_preview)
   GEN2: "GEN2",
 }
 
@@ -548,6 +563,7 @@ enum IotHubSkuTier {
   /**
    * Generation2
    */
+  @removed(Versions.v2026_05_01_preview)
   Generation2,
 }
 
@@ -1152,6 +1168,65 @@ model RoutingEndpoints {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name retained to match the published API; 'DB' reflects the Cosmos DB product name."
   cosmosDBSqlContainers?: RoutingCosmosDBSqlApiProperties[];
+
+  /**
+   * The list of event stream endpoints that IoT hub routes messages to, based on the routing rules.
+   */
+  @added(Versions.v2026_05_01_preview)
+  eventStreams?: RoutingEventStreamProperties[];
+}
+
+/**
+ * The properties related to an event stream endpoint.
+ */
+@added(Versions.v2026_05_01_preview)
+model RoutingEventStreamProperties {
+  /**
+   * The name that identifies this endpoint. The name can only include alphanumeric characters, periods, underscores, hyphens and has a maximum length of 64 characters. The following names are reserved:  events, fileNotifications, $default. Endpoint names must be unique across endpoint types.
+   */
+  @pattern("^[A-Za-z0-9-._]{1,64}$")
+  name: string;
+
+  /**
+   * Id of the event stream endpoint
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * The url of the underlying event hub namespace of the event stream endpoint. It must include the protocol sb://
+   */
+  endpointUri: string;
+
+  /**
+   * Event hub name on the event hub namespace
+   */
+  entityPath: string;
+
+  /**
+   * Method used to authenticate against the event stream endpoint
+   */
+  authenticationType?: EventStreamAuthenticationType;
+
+  /**
+   * Managed identity properties of routing event stream endpoint.
+   */
+  identity?: ManagedIdentity;
+
+  /**
+   * The unique GUID of the target Microsoft Fabric workspace for the event stream endpoint.
+   */
+  workspaceId?: string;
+
+  /**
+   * The unique GUID of the target event stream under the workspace.
+   */
+  eventStreamId?: string;
+
+  /**
+   * The unique GUID of the custom source for the event stream.
+   */
+  sourceId?: string;
 }
 
 /**
@@ -1732,7 +1807,7 @@ model RootCertificateProperties {
  */
 model DeviceRegistry {
   /**
-   * The identifier of the Azure Device Registry namespace associated with the GEN2 SKU hub.
+   * The identifier of the Azure Device Registry namespace
    */
   namespaceResourceId?: Azure.Core.armResourceIdentifier;
 
