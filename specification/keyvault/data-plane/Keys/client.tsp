@@ -606,6 +606,11 @@ op listDeletedKeyProperties is KeyVaultOperation<{}, DeletedKeyListResult>;
   "RSAOaep256",
   "javascript"
 );
+@@clientName(
+  JsonWebKeyEncryptionAlgorithm.RSA_OAEP384,
+  "RSAOaep384",
+  "javascript"
+);
 @@clientName(JsonWebKeyEncryptionAlgorithm.RSA1_5, "RSA15", "javascript");
 @@clientName(JsonWebKeyEncryptionAlgorithm.A128_GCM, "A128GCM", "javascript");
 @@clientName(JsonWebKeyEncryptionAlgorithm.A192_GCM, "A192GCM", "javascript");
@@ -658,6 +663,11 @@ op listDeletedKeyProperties is KeyVaultOperation<{}, DeletedKeyListResult>;
 @@clientName(
   KeyEncryptionAlgorithm.RSA_AES_KEY_WRAP_384,
   "RsaAesKeyWrap384",
+  "javascript"
+);
+@@clientName(
+  KeyEncryptionAlgorithm.RSA_PKCS_OAEP_384,
+  "RsaPkcsOaep384",
   "javascript"
 );
 
