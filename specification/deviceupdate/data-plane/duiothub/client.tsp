@@ -13,8 +13,8 @@ namespace Customization;
   "logCollectionId"
 );
 
-// Java and C# use the explicitly defined clients below. Other languages keep
-// the already-shipped public client/operation-group names.
+// Java and C# retain their already-shipped two-client API surface through the
+// explicit clients below. Other languages retain their operation-group names.
 @@clientLocation(
   DeviceUpdateOperationGroup.listUpdates,
   "DeviceUpdate",
@@ -284,7 +284,7 @@ model DeviceUpdateClientOptions {
   "!java,!csharp"
 );
 
-// Java lib GAed with 2 clients
+// Java and C# GAed/shipped with 2 clients
 @clientInitialization(
   {
     parameters: DeviceUpdateClientOptions,
