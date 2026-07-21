@@ -86,7 +86,6 @@ interface SessionResourceFiles {
       contentType: "multipart/form-data";
 
       /** Multipart body */
-      #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
       @multipartBody body: {
         /** The file to upload. */
         file: HttpPart<bytes>;

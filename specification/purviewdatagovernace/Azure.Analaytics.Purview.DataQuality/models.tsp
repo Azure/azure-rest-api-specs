@@ -1215,7 +1215,7 @@ model ScheduleEntity {
        */
       @doc("Next scheduled execution time (UTC)")
       triggerTime?: utcDateTime;
-  };
+    };
   };
 
   /**
