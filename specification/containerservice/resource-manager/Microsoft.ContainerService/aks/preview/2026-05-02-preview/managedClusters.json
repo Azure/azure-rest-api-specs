@@ -7976,17 +7976,32 @@
       "type": "string",
       "description": "The current provisioning state of the alert configuration.",
       "enum": [
-        "Creating",
-        "Updating",
-        "Deleting",
         "Succeeded",
         "Failed",
-        "Canceled"
+        "Canceled",
+        "Creating",
+        "Updating",
+        "Deleting"
       ],
       "x-ms-enum": {
         "name": "AlertConfigurationProvisioningState",
         "modelAsString": true,
         "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
           {
             "name": "Creating",
             "value": "Creating",
@@ -8001,21 +8016,6 @@
             "name": "Deleting",
             "value": "Deleting",
             "description": "The alert configuration is being deleted."
-          },
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "The alert configuration has been successfully provisioned."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "The alert configuration provisioning failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "The alert configuration provisioning was canceled."
           }
         ]
       },
