@@ -15,11 +15,10 @@ namespace Microsoft.MachineLearningServices;
  * Azure Resource Manager resource envelope.
  */
 @parentResource(FeaturestoreEntityContainer)
-model FeaturestoreEntityVersion
-  is Azure.ResourceManager.ProxyResource<
-    FeaturestoreEntityVersionProperties,
-    false
-  > {
+model FeaturestoreEntityVersion is Azure.ResourceManager.ProxyResource<
+  FeaturestoreEntityVersionProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = FeaturestoreEntityVersion,
     KeyName = "version",
