@@ -77,9 +77,15 @@ interface Computes {
 
   /**
    * Creates or updates a compute associated with the Cognitive Services account.
+   * The compute create is a long-running operation: the service returns 202 Accepted
+   * while the compute is provisioned asynchronously, in addition to the 200/201 responses.
    */
   @tag("Computes")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Compute>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Service returns 202 Accepted for the asynchronous compute create in addition to 200/201; declared so the generated SDK can handle the real service response. Requires ARM review sign-off."
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    Compute,
+    Response = ArmResourceUpdatedResponse<Compute> | ArmResourceCreatedResponse<Compute> | ArmAcceptedLroResponse
+  >;
 
   /**
    * Updates a compute associated with the Cognitive Services account.
