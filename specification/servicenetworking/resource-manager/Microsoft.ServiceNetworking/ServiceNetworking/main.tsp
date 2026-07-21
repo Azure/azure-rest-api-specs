@@ -122,7 +122,7 @@ model AssociationUpdate {
 
   /** The resource-specific properties for this resource. */
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty("!javascript")
   properties?: AssociationUpdateProperties;
 }
 
