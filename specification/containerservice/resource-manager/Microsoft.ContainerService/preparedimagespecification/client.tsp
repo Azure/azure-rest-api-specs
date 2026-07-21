@@ -8,7 +8,7 @@ using Microsoft.ContainerService;
 @@clientName(Microsoft.ContainerService, "PreparedImgSpecMgmtClient", "java");
 @@clientName(
   Microsoft.ContainerService,
-  "ContainerServicePreparedImageSpecificationClient",
+  "ContainerServicePreparedImgSpecMgmtClient",
   "python"
 );
 @@alternateType(Azure.ResourceManager.EntityTagProperty.eTag, eTag, "csharp");
