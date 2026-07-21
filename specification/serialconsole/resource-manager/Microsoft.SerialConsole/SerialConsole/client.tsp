@@ -4,27 +4,33 @@ using Microsoft.SerialConsole;
 using Azure.ClientGenerator.Core;
 using TypeSpec.Rest;
 
-@@clientName(
-  Microsoft.SerialConsole,
+@@clientName(Microsoft.SerialConsole,
   "MicrosoftSerialConsoleClient",
   "javascript,python,go"
 );
 
-@@clientLocation(
-  Microsoft.SerialConsole.SerialConsoleOperationGroup.disableConsole,
+@@clientLocation(Microsoft.SerialConsole.SerialConsoleOperationGroup.disableConsole,
   Microsoft.SerialConsole,
   "go,javascript,python"
 );
-@@clientLocation(
-  Microsoft.SerialConsole.SerialConsoleOperationGroup.enableConsole,
+@@clientLocation(Microsoft.SerialConsole.SerialConsoleOperationGroup.enableConsole,
   Microsoft.SerialConsole,
   "go,javascript,python"
 );
 
-@@clientName(SerialConsoleOperationsValueItem, "SerialConsoleOperationInfo", "csharp");
-@@clientName(SerialConsoleOperationsValueItemDisplay, "SerialConsoleOperationDisplay", "csharp");
+@@clientName(SerialConsoleOperationsValueItem,
+  "SerialConsoleOperationInfo",
+  "csharp"
+);
+@@clientName(SerialConsoleOperationsValueItemDisplay,
+  "SerialConsoleOperationDisplay",
+  "csharp"
+);
 @@clientName(SerialPorts.listBySubscriptions, "GetSerialPorts", "csharp");
-@@alternateType(SerialConsoleOperationsValueItem.isDataAction, boolean, "csharp");
-@@segment(ParentResourceParameters.resourceGroupName, "resourceGroups");
+@@alternateType(SerialConsoleOperationsValueItem.isDataAction,
+  boolean,
+  "csharp"
+);
 
 @@alternateType(getConsoleStatus::parameters.default, "default", "csharp");
+@@alternateType(ConsoleServiceDefaultParameter.default, "default", "csharp");
