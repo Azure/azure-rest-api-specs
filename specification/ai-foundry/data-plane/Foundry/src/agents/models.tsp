@@ -589,9 +589,6 @@ model AgentEndpointAuthorizationScheme {
 
 model EntraAuthorizationScheme extends AgentEndpointAuthorizationScheme {
   type: AgentEndpointAuthorizationSchemeType.Entra;
-
-  @doc("The Entra sign-in configuration governing which Entra application the agent endpoint validates inbound tokens against (and represents the calling user as for downstream on-behalf-of access). Defaults to the platform default ('foundry') behavior when not specified.")
-  sign_in_config?: EntraSignInConfig;
 }
 
 @doc("The Entra sign-in mode governing which Entra application the agent endpoint validates inbound tokens against.")
@@ -725,6 +722,9 @@ model AgentEndpointConfig {
 
   @doc("The authorization schemes supported by the agent endpoint.")
   authorization_schemes?: AgentEndpointAuthorizationScheme[];
+
+  @doc("The Entra sign-in configuration governing which Entra application the agent endpoint validates inbound tokens against (and represents the calling user as for downstream on-behalf-of access). Defaults to the platform default ('foundry') behavior when not specified.")
+  entra_sign_in_config?: EntraSignInConfig;
 }
 
 model AgentIdentity {

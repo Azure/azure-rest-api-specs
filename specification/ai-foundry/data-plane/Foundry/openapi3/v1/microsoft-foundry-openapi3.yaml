@@ -38070,6 +38070,20 @@ components:
       allOf:
         - $ref: '#/components/schemas/EntraSignInConfig'
       description: Agent-blueprint Entra sign-in configuration. The agent endpoint validates inbound tokens against the agent's blueprint application.
+    AgentBlueprintEntraSignInConfigUpdate:
+      type: object
+      properties:
+        mode:
+          type: string
+          enum:
+            - agent_blueprint
+          description: The Entra sign-in mode. Always 'agent_blueprint'.
+        validation:
+          $ref: '#/components/schemas/EntraValidationConfiguration'
+          description: The validation applied to inbound bearer tokens presented to the agent endpoint in agent-blueprint sign-in mode.
+      allOf:
+        - $ref: '#/components/schemas/EntraSignInConfigUpdate'
+      description: Agent-blueprint Entra sign-in configuration. The agent endpoint validates inbound tokens against the agent's blueprint application.
     AgentBlueprintReference:
       type: object
       required:
@@ -38296,6 +38310,9 @@ components:
           items:
             $ref: '#/components/schemas/AgentEndpointAuthorizationScheme'
           description: The authorization schemes supported by the agent endpoint.
+        entra_sign_in_config:
+          $ref: '#/components/schemas/EntraSignInConfig'
+          description: The Entra sign-in configuration governing which Entra application the agent endpoint validates inbound tokens against (and represents the calling user as for downstream on-behalf-of access). Defaults to the platform default ('foundry') behavior when not specified.
     AgentEndpointConfigUpdate:
       type: object
       properties:
@@ -38310,6 +38327,9 @@ components:
           items:
             $ref: '#/components/schemas/AgentEndpointAuthorizationScheme'
           description: The authorization schemes supported by the agent endpoint.
+        entra_sign_in_config:
+          $ref: '#/components/schemas/EntraSignInConfigUpdate'
+          description: The Entra sign-in configuration governing which Entra application the agent endpoint validates inbound tokens against (and represents the calling user as for downstream on-behalf-of access). Defaults to the platform default ('foundry') behavior when not specified.
     AgentEndpointProtocol:
       anyOf:
         - type: string
@@ -41620,9 +41640,6 @@ components:
           type: string
           enum:
             - Entra
-        sign_in_config:
-          $ref: '#/components/schemas/EntraSignInConfig'
-          description: The Entra sign-in configuration governing which Entra application the agent endpoint validates inbound tokens against (and represents the calling user as for downstream on-behalf-of access). Defaults to the platform default ('foundry') behavior when not specified.
       allOf:
         - $ref: '#/components/schemas/AgentEndpointAuthorizationScheme'
     EntraIDCredentials:
@@ -41652,6 +41669,23 @@ components:
         mapping:
           foundry: '#/components/schemas/FoundryEntraSignInConfig'
           agent_blueprint: '#/components/schemas/AgentBlueprintEntraSignInConfig'
+      description: |-
+        Entra sign-in configuration for the agent endpoint. The `mode` property discriminates the concrete
+        configuration type; mode-specific inputs (such as token validation) are carried only by the modes
+        that support them. Defaults to Foundry sign-in when not specified.
+    EntraSignInConfigUpdate:
+      type: object
+      required:
+        - mode
+      properties:
+        mode:
+          $ref: '#/components/schemas/EntraSignInMode'
+          description: The Entra sign-in mode.
+      discriminator:
+        propertyName: mode
+        mapping:
+          foundry: '#/components/schemas/FoundryEntraSignInConfigUpdate'
+          agent_blueprint: '#/components/schemas/AgentBlueprintEntraSignInConfigUpdate'
       description: |-
         Entra sign-in configuration for the agent endpoint. The `mode` property discriminates the concrete
         configuration type; mode-specific inputs (such as token validation) are carried only by the modes
@@ -43588,6 +43622,17 @@ components:
           description: The Entra sign-in mode. Always 'foundry'.
       allOf:
         - $ref: '#/components/schemas/EntraSignInConfig'
+      description: Foundry Entra sign-in configuration. The agent endpoint validates inbound tokens against the Foundry application (ai.azure.com). This is the default when a sign-in configuration is not specified.
+    FoundryEntraSignInConfigUpdate:
+      type: object
+      properties:
+        mode:
+          type: string
+          enum:
+            - foundry
+          description: The Entra sign-in mode. Always 'foundry'.
+      allOf:
+        - $ref: '#/components/schemas/EntraSignInConfigUpdate'
       description: Foundry Entra sign-in configuration. The agent endpoint validates inbound tokens against the Foundry application (ai.azure.com). This is the default when a sign-in configuration is not specified.
     FoundryModelArtifactProfileCategory:
       anyOf:
