@@ -65,13 +65,8 @@ interface FirewallPolicyKubeSelectorGroups {
   /**
    * Deletes the specified FirewallPolicyKubeSelectorGroup.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "KubeSelectorGroup delete is a long-running operation that returns 200, 202, and 204 to match the existing firewall policy delete behavior, which deviates from the default ARM delete response codes."
   delete is ArmResourceDeleteWithoutOkAsync<
     FirewallPolicyKubeSelectorGroup,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
