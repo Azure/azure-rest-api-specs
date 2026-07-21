@@ -6,6 +6,15 @@
   },
   "tags": [
     {
+      "name": "Agent Conversations"
+    },
+    {
+      "name": "Voice Agents"
+    },
+    {
+      "name": "Voice Agent Versions"
+    },
+    {
       "name": "EvaluationSuiteGenerationJobs"
     },
     {
@@ -1788,6 +1797,1232 @@
         "tags": [
           "Agent Invocations WebSocket"
         ]
+      }
+    },
+    "/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}": {
+      "get": {
+        "operationId": "AgentEndpointConversations_getAgentConversation",
+        "summary": "Get a voice agent conversation",
+        "description": "Retrieves a single conversation recorded for the specified voice agent endpoint by its id.\nReturns `404` when the conversation was not persisted (`store = false`) or does not exist.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "conversation_id",
+            "in": "path",
+            "required": true,
+            "description": "The id of the conversation to retrieve.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VoiceConversation"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Conversations"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "delete": {
+        "operationId": "AgentEndpointConversations_deleteAgentConversation",
+        "summary": "Delete a voice agent conversation",
+        "description": "Deletes a conversation and all of its stored data — responses, items, and any audio (cascade). This is\nthe customer's explicit data-deletion control for voice conversations.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "conversation_id",
+            "in": "path",
+            "required": true,
+            "description": "The id of the conversation to delete.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VoiceDeletedConversation"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Conversations"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/audio": {
+      "get": {
+        "operationId": "AgentEndpointConversations_getAgentConversationAudio",
+        "summary": "Get a voice agent conversation's merged recording metadata",
+        "description": "Returns metadata for the whole-call merged stereo recording (user audio on the left channel, agent audio\non the right). The common metadata (format, sample rate, channels, channel layout, duration) is returned\nfor both Foundry-managed and bring-your-own-storage (BYOS) recordings; for BYOS the response additionally\nincludes `blob_path`, a direct path into the customer's own storage (no SAS) that the customer downloads\nwith their own credentials. The recording is built once from the per-turn segments after the session ends;\na request against an in-progress session returns `409`. Requires the conversation to have persisted audio\n(`store = true`); otherwise returns `404`.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "conversation_id",
+            "in": "path",
+            "required": true,
+            "description": "The id of the conversation whose merged recording metadata is retrieved.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VoiceRecordingResponse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Conversations"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/audio/content": {
+      "get": {
+        "operationId": "AgentEndpointConversations_getAgentConversationAudioContent",
+        "summary": "Stream a voice agent conversation's merged recording",
+        "description": "Streams the whole-call merged stereo recording as a WAV (`audio/wav`) byte stream through the service\n(no SAS URL). This route serves Foundry-managed storage only. For bring-your-own-storage (BYOS)\nrecordings the bytes are not proxied — the caller must download directly from customer storage using the\n`blob_path` returned by the metadata route — so this route returns `409 Conflict` for BYOS recordings.\nA request against an in-progress session also returns `409` (a distinct condition: session-not-ended\nversus BYOS-download-required). A conversation without persisted audio (`store = false`) returns `404`.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "conversation_id",
+            "in": "path",
+            "required": true,
+            "description": "The id of the conversation whose merged recording is streamed.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A streamed WAV (`audio/wav`) audio response. The bytes are streamed through the service; no SAS URL is returned.",
+            "content": {
+              "audio/wav": {
+                "schema": {
+                  "contentMediaType": "audio/wav"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Conversations"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items": {
+      "get": {
+        "operationId": "AgentEndpointConversations_listAgentConversationItems",
+        "summary": "List items in a voice agent conversation",
+        "description": "Returns a paged collection of items — the complete ordered conversation history, including user input,\nassistant output, and client-created tool outputs (transcripts + tool events). Returns `404` when the\nconversation was not persisted (`store = false`).",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "conversation_id",
+            "in": "path",
+            "required": true,
+            "description": "The id of the conversation whose items are listed.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the\ndefault is 20.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            },
+            "explode": false
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "description": "Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`\nfor descending order.",
+            "schema": {
+              "$ref": "#/components/schemas/PageOrder"
+            },
+            "explode": false
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include after=obj_foo in order to fetch the next page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `before` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data",
+                    "has_more"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/VoiceConversationItem"
+                      },
+                      "description": "The requested list of items."
+                    },
+                    "first_id": {
+                      "type": "string",
+                      "description": "The first ID represented in this list."
+                    },
+                    "last_id": {
+                      "type": "string",
+                      "description": "The last ID represented in this list."
+                    },
+                    "has_more": {
+                      "type": "boolean",
+                      "description": "A value indicating whether there are additional values available not captured in this list."
+                    }
+                  },
+                  "description": "The response data for a requested list of items."
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Conversations"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}": {
+      "get": {
+        "operationId": "AgentEndpointConversations_getAgentConversationItem",
+        "summary": "Get a voice agent conversation item",
+        "description": "Retrieves a single item from the specified conversation by its id, including its transcript. An\n`input_audio`/`output_audio` content part indicates that audio is available for the item; the canonical per-item\naudio metadata is the `/items/{item_id}/audio` resource, and the bytes are streamed by\n`/items/{item_id}/audio/content`. Returns `404` when the conversation or item was not persisted\n(`store = false`).",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "conversation_id",
+            "in": "path",
+            "required": true,
+            "description": "The id of the conversation that contains the item.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "item_id",
+            "in": "path",
+            "required": true,
+            "description": "The id of the conversation item to retrieve.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VoiceConversationItem"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Conversations"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}/audio": {
+      "get": {
+        "operationId": "AgentEndpointConversations_getAgentConversationItemAudio",
+        "summary": "Get a voice agent conversation item's audio metadata",
+        "description": "Returns metadata for a single conversation item's audio segment, including the common playback facts\n(role, format/codec, sample rate, channels, offset, duration) for both Foundry-managed and\nbring-your-own-storage (BYOS) recordings; for BYOS the response additionally includes `blob_path`, a direct\npath into the customer's own storage (no SAS) that the customer downloads with their own credentials.\nRequires the conversation to have persisted audio (`store = true`); returns `404` when the conversation,\nitem, or its audio was not persisted.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "conversation_id",
+            "in": "path",
+            "required": true,
+            "description": "The id of the conversation that contains the item.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "item_id",
+            "in": "path",
+            "required": true,
+            "description": "The id of the conversation item whose audio metadata is retrieved.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VoiceItemAudioResponse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Conversations"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}/audio/content": {
+      "get": {
+        "operationId": "AgentEndpointConversations_getAgentConversationItemAudioContent",
+        "summary": "Stream a voice agent conversation item's audio",
+        "description": "Streams a single conversation item's audio as a WAV (`audio/wav`) byte stream through the service (no SAS\nURL). This route serves Foundry-managed storage only. For bring-your-own-storage (BYOS) recordings the\nbytes are not proxied — the caller must download directly from customer storage using the `blob_path`\nreturned by the item's `/audio` metadata route — so this route returns `409 Conflict` for BYOS recordings.\nReturns `404` when the conversation, item, or its audio was not persisted (`store = false`).",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "conversation_id",
+            "in": "path",
+            "required": true,
+            "description": "The id of the conversation that contains the item.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "item_id",
+            "in": "path",
+            "required": true,
+            "description": "The id of the conversation item whose audio is streamed.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A streamed WAV (`audio/wav`) audio response. The bytes are streamed through the service; no SAS URL is returned.",
+            "content": {
+              "audio/wav": {
+                "schema": {
+                  "contentMediaType": "audio/wav"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Conversations"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/responses": {
+      "get": {
+        "operationId": "AgentEndpointConversations_listAgentConversationResponses",
+        "summary": "List responses in a voice agent conversation",
+        "description": "Returns a paged collection of the responses (model inference turns) recorded for the specified\nconversation. The per-response `output` projection may be omitted here; use the response-items route\nfor the canonical paged output. Returns `404` when the conversation was not persisted (`store = false`).",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "conversation_id",
+            "in": "path",
+            "required": true,
+            "description": "The id of the conversation whose responses are listed.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the\ndefault is 20.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            },
+            "explode": false
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "description": "Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`\nfor descending order.",
+            "schema": {
+              "$ref": "#/components/schemas/PageOrder"
+            },
+            "explode": false
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include after=obj_foo in order to fetch the next page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `before` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data",
+                    "has_more"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/VoiceResponse"
+                      },
+                      "description": "The requested list of items."
+                    },
+                    "first_id": {
+                      "type": "string",
+                      "description": "The first ID represented in this list."
+                    },
+                    "last_id": {
+                      "type": "string",
+                      "description": "The last ID represented in this list."
+                    },
+                    "has_more": {
+                      "type": "boolean",
+                      "description": "A value indicating whether there are additional values available not captured in this list."
+                    }
+                  },
+                  "description": "The response data for a requested list of items."
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Conversations"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/responses/{response_id}": {
+      "get": {
+        "operationId": "AgentEndpointConversations_getAgentConversationResponse",
+        "summary": "Get a voice agent conversation response",
+        "description": "Retrieves a single response from the specified conversation by its id, including its `output` items,\n`usage`, and status. Returns `404` when the conversation or response was not persisted (`store = false`).",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "conversation_id",
+            "in": "path",
+            "required": true,
+            "description": "The id of the conversation that contains the response.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "response_id",
+            "in": "path",
+            "required": true,
+            "description": "The id of the response to retrieve.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VoiceResponse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Conversations"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/responses/{response_id}/items": {
+      "get": {
+        "operationId": "AgentEndpointConversations_listAgentConversationResponseItems",
+        "summary": "List items produced by a voice agent conversation response",
+        "description": "Returns a paged collection of the output items produced by a specific response (the response's output\nprojection). For the complete ordered conversation history — including user input and client-created\ntool outputs — use the conversation items route instead. Returns `404` when the conversation or\nresponse was not persisted (`store = false`).",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "conversation_id",
+            "in": "path",
+            "required": true,
+            "description": "The id of the conversation that contains the response.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "response_id",
+            "in": "path",
+            "required": true,
+            "description": "The id of the response whose output items are listed.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the\ndefault is 20.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            },
+            "explode": false
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "description": "Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`\nfor descending order.",
+            "schema": {
+              "$ref": "#/components/schemas/PageOrder"
+            },
+            "explode": false
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include after=obj_foo in order to fetch the next page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `before` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data",
+                    "has_more"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/VoiceConversationItem"
+                      },
+                      "description": "The requested list of items."
+                    },
+                    "first_id": {
+                      "type": "string",
+                      "description": "The first ID represented in this list."
+                    },
+                    "last_id": {
+                      "type": "string",
+                      "description": "The last ID represented in this list."
+                    },
+                    "has_more": {
+                      "type": "boolean",
+                      "description": "A value indicating whether there are additional values available not captured in this list."
+                    }
+                  },
+                  "description": "The response data for a requested list of items."
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Conversations"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       }
     },
     "/agents/{agent_name}/endpoint/sessions": {
@@ -28876,6 +30111,1127 @@
           "Toolboxes"
         ]
       }
+    },
+    "/voice_agents": {
+      "post": {
+        "operationId": "VoiceAgents_createVoiceAgent",
+        "summary": "Create a voice agent",
+        "description": "Creates a new voice agent, or a new version of an existing one.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VoiceAgentObject"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Voice Agents"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateVoiceAgentRequest"
+              }
+            }
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "get": {
+        "operationId": "VoiceAgents_listVoiceAgents",
+        "summary": "List voice agents",
+        "description": "Returns a paged collection of voice agents.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the\ndefault is 20.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            },
+            "explode": false
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "description": "Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`\nfor descending order.",
+            "schema": {
+              "$ref": "#/components/schemas/PageOrder"
+            },
+            "explode": false
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include after=obj_foo in order to fetch the next page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `before` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data",
+                    "has_more"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/VoiceAgentObject"
+                      },
+                      "description": "The requested list of items."
+                    },
+                    "first_id": {
+                      "type": "string",
+                      "description": "The first ID represented in this list."
+                    },
+                    "last_id": {
+                      "type": "string",
+                      "description": "The last ID represented in this list."
+                    },
+                    "has_more": {
+                      "type": "boolean",
+                      "description": "A value indicating whether there are additional values available not captured in this list."
+                    }
+                  },
+                  "description": "The response data for a requested list of items."
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Voice Agents"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/voice_agents/{agent_name}": {
+      "get": {
+        "operationId": "VoiceAgents_getVoiceAgent",
+        "summary": "Get a voice agent",
+        "description": "Retrieves a voice agent by its unique name.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the voice agent to retrieve.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VoiceAgentObject"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Voice Agents"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "post": {
+        "operationId": "VoiceAgents_updateVoiceAgent",
+        "summary": "Update a voice agent",
+        "description": "Updates a voice agent by adding a new version if there are any changes to the agent definition.\nIf no changes, returns the existing agent version.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the voice agent to update.",
+            "schema": {
+              "type": "string",
+              "maxLength": 63
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VoiceAgentObject"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Voice Agents"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateVoiceAgentRequest"
+              }
+            }
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "delete": {
+        "operationId": "VoiceAgents_deleteVoiceAgent",
+        "summary": "Delete a voice agent",
+        "description": "Deletes a voice agent and all of its versions.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the voice agent to delete.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteAgentResponse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Voice Agents"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/voice_agents/{agent_name}/versions": {
+      "post": {
+        "operationId": "VoiceAgents_createVoiceAgentVersion",
+        "summary": "Create a voice agent version",
+        "description": "Creates a new version for the specified voice agent and returns the created version resource.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the voice agent.",
+            "schema": {
+              "type": "string",
+              "maxLength": 63
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VoiceAgentVersionObject"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Voice Agent Versions"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateVoiceAgentVersionRequest"
+              }
+            }
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "get": {
+        "operationId": "VoiceAgents_listVoiceAgentVersions",
+        "summary": "List voice agent versions",
+        "description": "Returns a paged collection of versions for the specified voice agent.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the voice agent to retrieve versions for.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the\ndefault is 20.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            },
+            "explode": false
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "description": "Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`\nfor descending order.",
+            "schema": {
+              "$ref": "#/components/schemas/PageOrder"
+            },
+            "explode": false
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include after=obj_foo in order to fetch the next page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `before` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "include_drafts",
+            "in": "query",
+            "required": false,
+            "description": "(Preview) Whether to include draft versions in the listing. The service defaults to `false` if a value is not specified by the caller (only non-draft versions are returned).",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "x-ms-foundry-meta": {
+              "conditional_previews": [
+                "DraftAgents=V1Preview"
+              ]
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data",
+                    "has_more"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/VoiceAgentVersionObject"
+                      },
+                      "description": "The requested list of items."
+                    },
+                    "first_id": {
+                      "type": "string",
+                      "description": "The first ID represented in this list."
+                    },
+                    "last_id": {
+                      "type": "string",
+                      "description": "The last ID represented in this list."
+                    },
+                    "has_more": {
+                      "type": "boolean",
+                      "description": "A value indicating whether there are additional values available not captured in this list."
+                    }
+                  },
+                  "description": "The response data for a requested list of items."
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Voice Agent Versions"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/voice_agents/{agent_name}/versions/{agent_version}": {
+      "get": {
+        "operationId": "VoiceAgents_getVoiceAgentVersion",
+        "summary": "Get a voice agent version",
+        "description": "Retrieves the specified version of a voice agent by its agent name and version identifier.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the voice agent to retrieve.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "agent_version",
+            "in": "path",
+            "required": true,
+            "description": "The version of the voice agent to retrieve.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VoiceAgentVersionObject"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Voice Agent Versions"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "delete": {
+        "operationId": "VoiceAgents_deleteVoiceAgentVersion",
+        "summary": "Delete a voice agent version",
+        "description": "Deletes a specific version of a voice agent.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the voice agent to delete.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "agent_version",
+            "in": "path",
+            "required": true,
+            "description": "The version of the voice agent to delete.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteAgentVersionResponse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Voice Agent Versions"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/voice_agents/{agent_name}:disable": {
+      "post": {
+        "operationId": "VoiceAgents_disableVoiceAgent",
+        "summary": "Disable a voice agent",
+        "description": "Disables the specified voice agent, preventing it from accepting new requests.\nThis operation is idempotent — disabling an already-disabled voice agent returns success with no side effects.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the voice agent to disable.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Voice Agents"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/voice_agents/{agent_name}:enable": {
+      "post": {
+        "operationId": "VoiceAgents_enableVoiceAgent",
+        "summary": "Enable a voice agent",
+        "description": "Enables the specified voice agent, allowing it to accept new requests.\nThis operation is idempotent — enabling an already-enabled voice agent returns success with no side effects.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the voice agent to enable.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Voice Agents"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/voice_agents:generate": {
+      "post": {
+        "operationId": "VoiceAgents_generateVoiceAgent",
+        "summary": "Generate a voice agent",
+        "description": "Generates and creates a voice agent from high-level inputs plus a natural-language goal.\nThe operation expands the goal into a full, editable definition, creates the agent through the standard\nvoice create path, and returns the created `VoiceAgentObject`. The caller can edit or override the\ngenerated fields afterward through normal versioning.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VoiceAgentObject"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Voice Agents"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GenerateVoiceAgentRequest"
+              }
+            }
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      }
     }
   },
   "security": [
@@ -29754,6 +32110,7 @@
           "WorkflowAgents=V1Preview",
           "ExternalAgents=V1Preview",
           "DraftAgents=V1Preview",
+          "VoiceAgents=V1Preview",
           "HostedAgents=V1Preview",
           "ContainerAgents=V1Preview"
         ],
@@ -31944,6 +34301,68 @@
         },
         "description": "User security context contains several parameters that describe the application itself, and the end user that interacts with the application. These fields assist your security operations teams to investigate and mitigate security incidents by providing a comprehensive approach to protecting your AI applications. [Learn more](https://aka.ms/TP4AI/Documentation/EndUserContext) about protecting AI applications using Microsoft Defender for Cloud."
       },
+      "AzureVoice": {
+        "type": "object",
+        "required": [
+          "type",
+          "name"
+        ],
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/AzureVoiceType",
+            "description": "The Azure voice kind."
+          },
+          "name": {
+            "type": "string",
+            "description": "The Azure neural voice name, e.g. 'en-US-AvaNeural'."
+          },
+          "style": {
+            "type": "string",
+            "description": "Optional speaking style, e.g. 'cheerful'."
+          },
+          "pitch": {
+            "type": "string",
+            "description": "Optional pitch adjustment, e.g. '+5%'."
+          },
+          "rate": {
+            "type": "string",
+            "description": "Optional rate adjustment, e.g. '+10%'."
+          },
+          "locale": {
+            "type": "string",
+            "description": "Optional BCP-47 locale override, e.g. 'en-US'."
+          }
+        },
+        "description": "An Azure neural voice with optional prosody. Built-in voices are specified as a bare string instead.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "AzureVoiceType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "azure-standard",
+              "azure-custom",
+              "azure-personal",
+              "avatar-voice-sync",
+              "azure-realtime-native"
+            ]
+          }
+        ],
+        "description": "The Azure voice kind.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
       "BaseCredentials": {
         "type": "object",
         "required": [
@@ -33734,6 +36153,115 @@
         "required": [
           "files"
         ]
+      },
+      "CreateVoiceAgentRequest": {
+        "type": "object",
+        "required": [
+          "name",
+          "definition"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 63,
+            "description": "The unique name that identifies the agent. Name can be used to retrieve/update/delete the agent.\n- Must start and end with alphanumeric characters,\n- Can contain hyphens in the middle\n- Must not exceed 63 characters."
+          },
+          "state": {
+            "$ref": "#/components/schemas/AgentState",
+            "description": "The initial operational state of the agent. Defaults to 'enabled' if not specified.",
+            "default": "enabled"
+          },
+          "metadata": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "type": "string"
+            },
+            "description": "Set of 16 key-value pairs that can be attached to an object. This can be\nuseful for storing additional information about the object in a structured\nformat, and querying for objects via API or the dashboard.\n\nKeys are strings with a maximum length of 64 characters. Values are strings\nwith a maximum length of 512 characters.",
+            "x-oaiTypeLabel": "map"
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 512,
+            "description": "A human-readable description of the agent."
+          },
+          "blueprint_reference": {
+            "$ref": "#/components/schemas/AgentBlueprintReference",
+            "description": "The blueprint reference for the agent."
+          },
+          "draft": {
+            "type": "boolean",
+            "description": "(Preview) Whether this agent version is a draft (candidate) rather than a release. The service defaults to `false` if a value is not specified by the caller. Draft versions are recorded but excluded from default 'latest' resolution and are not auto-promoted.",
+            "x-ms-foundry-meta": {
+              "conditional_previews": [
+                "DraftAgents=V1Preview"
+              ]
+            },
+            "default": false
+          },
+          "definition": {
+            "$ref": "#/components/schemas/VoiceAgentDefinition",
+            "description": "The voice agent definition."
+          },
+          "agent_endpoint": {
+            "$ref": "#/components/schemas/AgentEndpointConfig",
+            "description": "An optional endpoint configuration. If not specified, a default endpoint configuration will be set for the agent"
+          },
+          "agent_card": {
+            "$ref": "#/components/schemas/AgentCard",
+            "description": "Optional agent card for the agent"
+          }
+        },
+        "description": "The request to create a voice agent.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "CreateVoiceAgentVersionRequest": {
+        "type": "object",
+        "required": [
+          "definition"
+        ],
+        "properties": {
+          "metadata": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "type": "string"
+            },
+            "description": "Set of 16 key-value pairs that can be attached to an object. This can be\nuseful for storing additional information about the object in a structured\nformat, and querying for objects via API or the dashboard.\n\nKeys are strings with a maximum length of 64 characters. Values are strings\nwith a maximum length of 512 characters.",
+            "x-oaiTypeLabel": "map"
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 512,
+            "description": "A human-readable description of the agent."
+          },
+          "blueprint_reference": {
+            "$ref": "#/components/schemas/AgentBlueprintReference",
+            "description": "The blueprint reference for the agent."
+          },
+          "draft": {
+            "type": "boolean",
+            "description": "(Preview) Whether this agent version is a draft (candidate) rather than a release. The service defaults to `false` if a value is not specified by the caller. Draft versions are recorded but excluded from default 'latest' resolution and are not auto-promoted.",
+            "x-ms-foundry-meta": {
+              "conditional_previews": [
+                "DraftAgents=V1Preview"
+              ]
+            },
+            "default": false
+          },
+          "definition": {
+            "$ref": "#/components/schemas/VoiceAgentDefinition",
+            "description": "The voice agent definition."
+          }
+        },
+        "description": "The request to create a new version of a voice agent.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "CreatedBy": {
         "type": "object",
@@ -38344,6 +40872,71 @@
           }
         },
         "description": "Details of a function tool call."
+      },
+      "GenerateVoiceAgentRequest": {
+        "type": "object",
+        "required": [
+          "name",
+          "model_type",
+          "model",
+          "agent_type",
+          "use_case",
+          "goal"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 63,
+            "description": "The unique name for the agent to create."
+          },
+          "model_type": {
+            "$ref": "#/components/schemas/VoiceModelType",
+            "description": "How the model backing the generated agent is served: `managed` (service-managed) or `self_deployed` (the customer's own deployment). Carried through to the generated definition, not generated."
+          },
+          "model": {
+            "type": "string",
+            "description": "The model paired with `model_type`: the service-managed model name when `managed`, or the customer's Foundry deployment name when `self_deployed`. Carried through, not generated."
+          },
+          "agent_type": {
+            "$ref": "#/components/schemas/VoiceAgentType",
+            "description": "The persona/tone to steer generation."
+          },
+          "use_case": {
+            "$ref": "#/components/schemas/VoiceAgentUseCase",
+            "description": "The scenario-template catalog entry the generator specializes for."
+          },
+          "goal": {
+            "type": "string",
+            "description": "A natural-language description of what the agent should do; the seed for the generated `instructions`."
+          },
+          "description": {
+            "type": "string",
+            "description": "An optional description for the agent. Generated from `goal` when omitted."
+          },
+          "tools": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VoiceAgentTool"
+            },
+            "description": "Optional tools carried through verbatim onto the generated agent (see `VoiceAgentTool`)."
+          },
+          "draft": {
+            "type": "boolean",
+            "description": "(Preview) When `true`, the generated voice agent is created as a draft — an editable, unpublished version the caller can review and refine before publishing it via the standard create/version path. The service defaults to `false` if a value is not specified by the caller, in which case the agent is created and published normally.",
+            "x-ms-foundry-meta": {
+              "conditional_previews": [
+                "DraftAgents=V1Preview"
+              ]
+            },
+            "default": false
+          }
+        },
+        "description": "The inputs for generating a voice agent. A few high-level inputs plus a natural-language `goal`\nare expanded into a full, editable `VoiceAgentDefinition`, which is then created via the standard voice\nagent create path. The generated `instructions` and audio/voice settings are stored as separate fields on the\nresulting agent definition, so the caller can edit or override any of them afterward via normal versioning.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "GenerationWarningType": {
         "anyOf": [
@@ -66950,6 +69543,447 @@
         "description": "Parameters used to decline an incoming SIP call handled by the Realtime API.",
         "title": "Realtime call reject request"
       },
+      "OpenAI.RealtimeConversationItem": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/OpenAI.RealtimeConversationItemType"
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "function_call_output": "#/components/schemas/OpenAI.RealtimeConversationItemFunctionCallOutput",
+            "mcp_list_tools": "#/components/schemas/OpenAI.RealtimeMCPListTools",
+            "mcp_call": "#/components/schemas/OpenAI.RealtimeMCPToolCall",
+            "mcp_approval_request": "#/components/schemas/OpenAI.RealtimeMCPApprovalRequest",
+            "mcp_approval_response": "#/components/schemas/OpenAI.RealtimeMCPApprovalResponse",
+            "function_call": "#/components/schemas/OpenAI.RealtimeConversationItemFunctionCall"
+          }
+        },
+        "description": "A single item within a Realtime conversation."
+      },
+      "OpenAI.RealtimeConversationItemFunctionCall": {
+        "type": "object",
+        "required": [
+          "type",
+          "name",
+          "arguments"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique ID of the item. This may be provided by the client or generated by the server."
+          },
+          "object": {
+            "type": "string",
+            "enum": [
+              "realtime.item"
+            ],
+            "description": "Identifier for the API object being returned - always `realtime.item`. Optional when creating a new item.",
+            "x-stainless-const": true
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "function_call"
+            ],
+            "description": "The type of the item. Always `function_call`.",
+            "x-stainless-const": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "completed",
+              "incomplete",
+              "in_progress"
+            ],
+            "description": "The status of the item. Has no effect on the conversation."
+          },
+          "call_id": {
+            "type": "string",
+            "description": "The ID of the function call."
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the function being called."
+          },
+          "arguments": {
+            "type": "string",
+            "description": "The arguments of the function call. This is a JSON-encoded string representing the arguments passed to the function, for example `{\"arg1\": \"value1\", \"arg2\": 42}`."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeConversationItem"
+          }
+        ],
+        "description": "A function call item in a Realtime conversation.",
+        "title": "Realtime function call item"
+      },
+      "OpenAI.RealtimeConversationItemFunctionCallOutput": {
+        "type": "object",
+        "required": [
+          "type",
+          "call_id",
+          "output"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique ID of the item. This may be provided by the client or generated by the server."
+          },
+          "object": {
+            "type": "string",
+            "enum": [
+              "realtime.item"
+            ],
+            "description": "Identifier for the API object being returned - always `realtime.item`. Optional when creating a new item.",
+            "x-stainless-const": true
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "function_call_output"
+            ],
+            "description": "The type of the item. Always `function_call_output`.",
+            "x-stainless-const": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "completed",
+              "incomplete",
+              "in_progress"
+            ],
+            "description": "The status of the item. Has no effect on the conversation."
+          },
+          "call_id": {
+            "type": "string",
+            "description": "The ID of the function call this output is for."
+          },
+          "output": {
+            "type": "string",
+            "description": "The output of the function call, this is free text and can contain any information or simply be empty."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeConversationItem"
+          }
+        ],
+        "description": "A function call output item in a Realtime conversation.",
+        "title": "Realtime function call output item"
+      },
+      "OpenAI.RealtimeConversationItemMessage": {
+        "type": "object",
+        "required": [
+          "role"
+        ],
+        "properties": {
+          "role": {
+            "$ref": "#/components/schemas/OpenAI.RealtimeConversationItemMessageType"
+          }
+        },
+        "discriminator": {
+          "propertyName": "role",
+          "mapping": {
+            "user": "#/components/schemas/OpenAI.RealtimeConversationItemMessageUser",
+            "assistant": "#/components/schemas/OpenAI.RealtimeConversationItemMessageAssistant",
+            "system": "#/components/schemas/OpenAI.RealtimeConversationItemMessageSystem"
+          }
+        }
+      },
+      "OpenAI.RealtimeConversationItemMessageAssistant": {
+        "type": "object",
+        "required": [
+          "type",
+          "role",
+          "content"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique ID of the item. This may be provided by the client or generated by the server."
+          },
+          "object": {
+            "type": "string",
+            "enum": [
+              "realtime.item"
+            ],
+            "description": "Identifier for the API object being returned - always `realtime.item`. Optional when creating a new item.",
+            "x-stainless-const": true
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "message"
+            ],
+            "description": "The type of the item. Always `message`.",
+            "x-stainless-const": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "completed",
+              "incomplete",
+              "in_progress"
+            ],
+            "description": "The status of the item. Has no effect on the conversation."
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "assistant"
+            ],
+            "description": "The role of the message sender. Always `assistant`.",
+            "x-stainless-const": true
+          },
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OpenAI.RealtimeConversationItemMessageAssistantContent"
+            },
+            "description": "The content of the message."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeConversationItemMessage"
+          }
+        ],
+        "description": "An assistant message item in a Realtime conversation.",
+        "title": "Realtime assistant message item"
+      },
+      "OpenAI.RealtimeConversationItemMessageAssistantContent": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "output_text",
+              "output_audio"
+            ]
+          },
+          "text": {
+            "type": "string"
+          },
+          "audio": {
+            "type": "string"
+          },
+          "transcript": {
+            "type": "string"
+          }
+        }
+      },
+      "OpenAI.RealtimeConversationItemMessageSystem": {
+        "type": "object",
+        "required": [
+          "type",
+          "role",
+          "content"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique ID of the item. This may be provided by the client or generated by the server."
+          },
+          "object": {
+            "type": "string",
+            "enum": [
+              "realtime.item"
+            ],
+            "description": "Identifier for the API object being returned - always `realtime.item`. Optional when creating a new item.",
+            "x-stainless-const": true
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "message"
+            ],
+            "description": "The type of the item. Always `message`.",
+            "x-stainless-const": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "completed",
+              "incomplete",
+              "in_progress"
+            ],
+            "description": "The status of the item. Has no effect on the conversation."
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "system"
+            ],
+            "description": "The role of the message sender. Always `system`.",
+            "x-stainless-const": true
+          },
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OpenAI.RealtimeConversationItemMessageSystemContent"
+            },
+            "description": "The content of the message."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeConversationItemMessage"
+          }
+        ],
+        "description": "A system message in a Realtime conversation can be used to provide additional context or instructions to the model. This is similar but distinct from the instruction prompt provided at the start of a conversation, as system messages can be added at any point in the conversation. For major changes to the conversation's behavior, use instructions, but for smaller updates (e.g. \"the user is now asking about a different topic\"), use system messages.",
+        "title": "Realtime system message item"
+      },
+      "OpenAI.RealtimeConversationItemMessageSystemContent": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "input_text"
+            ],
+            "x-stainless-const": true
+          },
+          "text": {
+            "type": "string"
+          }
+        }
+      },
+      "OpenAI.RealtimeConversationItemMessageType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "system",
+              "user",
+              "assistant"
+            ]
+          }
+        ]
+      },
+      "OpenAI.RealtimeConversationItemMessageUser": {
+        "type": "object",
+        "required": [
+          "type",
+          "role",
+          "content"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique ID of the item. This may be provided by the client or generated by the server."
+          },
+          "object": {
+            "type": "string",
+            "enum": [
+              "realtime.item"
+            ],
+            "description": "Identifier for the API object being returned - always `realtime.item`. Optional when creating a new item.",
+            "x-stainless-const": true
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "message"
+            ],
+            "description": "The type of the item. Always `message`.",
+            "x-stainless-const": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "completed",
+              "incomplete",
+              "in_progress"
+            ],
+            "description": "The status of the item. Has no effect on the conversation."
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "user"
+            ],
+            "description": "The role of the message sender. Always `user`.",
+            "x-stainless-const": true
+          },
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OpenAI.RealtimeConversationItemMessageUserContent"
+            },
+            "description": "The content of the message."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeConversationItemMessage"
+          }
+        ],
+        "description": "A user message item in a Realtime conversation.",
+        "title": "Realtime user message item"
+      },
+      "OpenAI.RealtimeConversationItemMessageUserContent": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "input_text",
+              "input_audio",
+              "input_image"
+            ]
+          },
+          "text": {
+            "type": "string"
+          },
+          "audio": {
+            "type": "string"
+          },
+          "image_url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "detail": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "low",
+              "high"
+            ],
+            "default": "auto"
+          },
+          "transcript": {
+            "type": "string"
+          }
+        }
+      },
+      "OpenAI.RealtimeConversationItemType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "function_call",
+              "function_call_output",
+              "mcp_approval_response",
+              "mcp_list_tools",
+              "mcp_call",
+              "mcp_approval_request"
+            ]
+          }
+        ]
+      },
       "OpenAI.RealtimeCreateClientSecretRequest": {
         "type": "object",
         "properties": {
@@ -67047,6 +70081,97 @@
       "OpenAI.RealtimeFunctionToolParameters": {
         "type": "object"
       },
+      "OpenAI.RealtimeMCPApprovalRequest": {
+        "type": "object",
+        "required": [
+          "type",
+          "id",
+          "server_label",
+          "name",
+          "arguments"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "mcp_approval_request"
+            ],
+            "description": "The type of the item. Always `mcp_approval_request`.",
+            "x-stainless-const": true
+          },
+          "id": {
+            "type": "string",
+            "description": "The unique ID of the approval request."
+          },
+          "server_label": {
+            "type": "string",
+            "description": "The label of the MCP server making the request."
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the tool to run."
+          },
+          "arguments": {
+            "type": "string",
+            "description": "A JSON string of arguments for the tool."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeConversationItem"
+          }
+        ],
+        "description": "A Realtime item requesting human approval of a tool invocation.",
+        "title": "Realtime MCP approval request"
+      },
+      "OpenAI.RealtimeMCPApprovalResponse": {
+        "type": "object",
+        "required": [
+          "type",
+          "id",
+          "approval_request_id",
+          "approve"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "mcp_approval_response"
+            ],
+            "description": "The type of the item. Always `mcp_approval_response`.",
+            "x-stainless-const": true
+          },
+          "id": {
+            "type": "string",
+            "description": "The unique ID of the approval response."
+          },
+          "approval_request_id": {
+            "type": "string",
+            "description": "The ID of the approval request being answered."
+          },
+          "approve": {
+            "type": "boolean",
+            "description": "Whether the request was approved."
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeConversationItem"
+          }
+        ],
+        "description": "A Realtime item responding to an MCP approval request.",
+        "title": "Realtime MCP approval response"
+      },
       "OpenAI.RealtimeMCPError": {
         "type": "object",
         "required": [
@@ -67095,6 +70220,46 @@
         ],
         "title": "Realtime MCP HTTP error"
       },
+      "OpenAI.RealtimeMCPListTools": {
+        "type": "object",
+        "required": [
+          "type",
+          "server_label",
+          "tools"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "mcp_list_tools"
+            ],
+            "description": "The type of the item. Always `mcp_list_tools`.",
+            "x-stainless-const": true
+          },
+          "id": {
+            "type": "string",
+            "description": "The unique ID of the list."
+          },
+          "server_label": {
+            "type": "string",
+            "description": "The label of the MCP server."
+          },
+          "tools": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OpenAI.MCPListToolsTool"
+            },
+            "description": "The tools available on the server."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeConversationItem"
+          }
+        ],
+        "description": "A Realtime item listing tools available on an MCP server.",
+        "title": "Realtime MCP list tools"
+      },
       "OpenAI.RealtimeMCPProtocolError": {
         "type": "object",
         "required": [
@@ -67123,6 +70288,72 @@
           }
         ],
         "title": "Realtime MCP protocol error"
+      },
+      "OpenAI.RealtimeMCPToolCall": {
+        "type": "object",
+        "required": [
+          "type",
+          "id",
+          "server_label",
+          "name",
+          "arguments"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "mcp_call"
+            ],
+            "description": "The type of the item. Always `mcp_call`.",
+            "x-stainless-const": true
+          },
+          "id": {
+            "type": "string",
+            "description": "The unique ID of the tool call."
+          },
+          "server_label": {
+            "type": "string",
+            "description": "The label of the MCP server running the tool."
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the tool that was run."
+          },
+          "arguments": {
+            "type": "string",
+            "description": "A JSON string of the arguments passed to the tool."
+          },
+          "approval_request_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "output": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "error": {
+            "$ref": "#/components/schemas/OpenAI.RealtimeMCPError"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeConversationItem"
+          }
+        ],
+        "description": "A Realtime item representing an invocation of a tool on an MCP server.",
+        "title": "Realtime MCP tool call"
       },
       "OpenAI.RealtimeMCPToolExecutionError": {
         "type": "object",
@@ -67184,6 +70415,108 @@
           "xhigh"
         ],
         "description": "Constrains effort on reasoning for reasoning-capable Realtime models such as\n`gpt-realtime-2`."
+      },
+      "OpenAI.RealtimeResponseStatusDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "completed",
+              "cancelled",
+              "failed",
+              "incomplete"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "enum": [
+              "turn_detected",
+              "client_cancelled",
+              "max_output_tokens",
+              "content_filter"
+            ]
+          },
+          "error": {
+            "$ref": "#/components/schemas/OpenAI.RealtimeResponseStatusDetailsError"
+          }
+        }
+      },
+      "OpenAI.RealtimeResponseStatusDetailsError": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "OpenAI.RealtimeResponseUsage": {
+        "type": "object",
+        "properties": {
+          "total_tokens": {
+            "$ref": "#/components/schemas/OpenAI.integer"
+          },
+          "input_tokens": {
+            "$ref": "#/components/schemas/OpenAI.integer"
+          },
+          "output_tokens": {
+            "$ref": "#/components/schemas/OpenAI.integer"
+          },
+          "input_token_details": {
+            "$ref": "#/components/schemas/OpenAI.RealtimeResponseUsageInputTokenDetails"
+          },
+          "output_token_details": {
+            "$ref": "#/components/schemas/OpenAI.RealtimeResponseUsageOutputTokenDetails"
+          }
+        }
+      },
+      "OpenAI.RealtimeResponseUsageInputTokenDetails": {
+        "type": "object",
+        "properties": {
+          "cached_tokens": {
+            "$ref": "#/components/schemas/OpenAI.integer"
+          },
+          "text_tokens": {
+            "$ref": "#/components/schemas/OpenAI.integer"
+          },
+          "image_tokens": {
+            "$ref": "#/components/schemas/OpenAI.integer"
+          },
+          "audio_tokens": {
+            "$ref": "#/components/schemas/OpenAI.integer"
+          },
+          "cached_tokens_details": {
+            "$ref": "#/components/schemas/OpenAI.RealtimeResponseUsageInputTokenDetailsCachedTokensDetails"
+          }
+        }
+      },
+      "OpenAI.RealtimeResponseUsageInputTokenDetailsCachedTokensDetails": {
+        "type": "object",
+        "properties": {
+          "text_tokens": {
+            "$ref": "#/components/schemas/OpenAI.integer"
+          },
+          "image_tokens": {
+            "$ref": "#/components/schemas/OpenAI.integer"
+          },
+          "audio_tokens": {
+            "$ref": "#/components/schemas/OpenAI.integer"
+          }
+        }
+      },
+      "OpenAI.RealtimeResponseUsageOutputTokenDetails": {
+        "type": "object",
+        "properties": {
+          "text_tokens": {
+            "$ref": "#/components/schemas/OpenAI.integer"
+          },
+          "audio_tokens": {
+            "$ref": "#/components/schemas/OpenAI.integer"
+          }
+        }
       },
       "OpenAI.RealtimeSessionCreateRequest": {
         "type": "object",
@@ -73697,12 +77030,12 @@
             "web_iq_preview": "#/components/schemas/WebIQPreviewTool",
             "memory_search_preview": "#/components/schemas/MemorySearchPreviewTool",
             "memory_search": "#/components/schemas/MemorySearchTool",
-            "code_interpreter": "#/components/schemas/OpenAI.CodeInterpreterTool",
             "function": "#/components/schemas/OpenAI.FunctionTool",
+            "mcp": "#/components/schemas/OpenAI.MCPTool",
+            "code_interpreter": "#/components/schemas/OpenAI.CodeInterpreterTool",
             "file_search": "#/components/schemas/OpenAI.FileSearchTool",
             "computer_use_preview": "#/components/schemas/OpenAI.ComputerUsePreviewTool",
             "web_search": "#/components/schemas/OpenAI.WebSearchTool",
-            "mcp": "#/components/schemas/OpenAI.MCPTool",
             "image_generation": "#/components/schemas/OpenAI.ImageGenTool",
             "local_shell": "#/components/schemas/OpenAI.LocalShellToolParam",
             "shell": "#/components/schemas/OpenAI.FunctionShellToolParam",
@@ -79031,6 +82364,81 @@
           ]
         }
       },
+      "SemanticVadTurnDetection": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "semantic_vad"
+            ]
+          },
+          "eagerness": {
+            "$ref": "#/components/schemas/VoiceTurnDetectionEagerness",
+            "description": "How eagerly the model ends the user's turn."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VoiceTurnDetection"
+          }
+        ],
+        "description": "Semantic (model-based) turn detection.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "ServerVadTurnDetection": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "server_vad"
+            ]
+          },
+          "threshold": {
+            "type": "number",
+            "format": "float",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Activation threshold (0-1). Higher requires louder audio to trigger."
+          },
+          "prefix_padding_ms": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Audio (ms) to include before detected speech start."
+          },
+          "silence_duration_ms": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Silence (ms) used to detect speech stop."
+          },
+          "create_response": {
+            "type": "boolean",
+            "description": "Whether the server automatically creates a response when a turn ends. Defaults to true."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VoiceTurnDetection"
+          }
+        ],
+        "description": "Server-side voice activity detection (silence-based).",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
       "SessionDirectoryEntry": {
         "type": "object",
         "required": [
@@ -80958,6 +84366,41 @@
           }
         }
       },
+      "UpdateVoiceAgentRequest": {
+        "type": "object",
+        "required": [
+          "definition"
+        ],
+        "properties": {
+          "metadata": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "type": "string"
+            },
+            "description": "Set of 16 key-value pairs that can be attached to an object. This can be\nuseful for storing additional information about the object in a structured\nformat, and querying for objects via API or the dashboard.\n\nKeys are strings with a maximum length of 64 characters. Values are strings\nwith a maximum length of 512 characters.",
+            "x-oaiTypeLabel": "map"
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 512,
+            "description": "A human-readable description of the agent."
+          },
+          "blueprint_reference": {
+            "$ref": "#/components/schemas/AgentBlueprintReference",
+            "description": "The blueprint reference for the agent."
+          },
+          "definition": {
+            "$ref": "#/components/schemas/VoiceAgentDefinition",
+            "description": "The voice agent definition."
+          }
+        },
+        "description": "The request to update a voice agent by adding a new version.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
       "UserMessage": {
         "type": "object",
         "required": [
@@ -81127,6 +84570,1460 @@
               "$ref": "#/components/schemas/VersionSelectionRule"
             }
           }
+        }
+      },
+      "VoiceAgentDefinition": {
+        "type": "object",
+        "required": [
+          "kind",
+          "model_type",
+          "model"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "voice"
+            ],
+            "description": "The kind discriminator for a voice agent definition. Always `voice`."
+          },
+          "rai_config": {
+            "$ref": "#/components/schemas/RaiConfig",
+            "description": "Configuration for Responsible AI (RAI) content filtering and safety features."
+          },
+          "model_type": {
+            "$ref": "#/components/schemas/VoiceModelType",
+            "description": "How the model backing this agent is served. Together with `model`, this selects the model up front. `managed` uses a service-managed model; `self_deployed` uses the customer's own Foundry deployment. This is independent of the architecture (realtime or cascaded), which the service derives from the selected model."
+          },
+          "model": {
+            "type": "string",
+            "description": "The model to use for this agent, paired with `model_type`: the service-managed model name when `model_type` is `managed`, or the customer's Foundry deployment name when `model_type` is `self_deployed`. The model must support realtime or cascaded voice. The service derives the architecture from the selected model."
+          },
+          "instructions": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "A system (or developer) message inserted into the model's context. Supports template substitution via `structured_inputs`, rendered per session before the live session starts."
+          },
+          "audio": {
+            "$ref": "#/components/schemas/VoiceAudioConfig",
+            "description": "The audio configuration, including input and output formats, voice, turn detection, noise reduction, and\ntranscription. These values are session defaults; a client may override supported fields when connecting."
+          },
+          "output_modalities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VoiceOutputModality"
+            },
+            "description": "The output modalities the agent produces. Defaults to `[\"audio\"]`. `animation` and `avatar` are available\nwhen an avatar is configured."
+          },
+          "avatar": {
+            "$ref": "#/components/schemas/VoiceAvatarConfig",
+            "description": "Optional avatar configuration. These values are session defaults and may be overridden when connecting."
+          },
+          "tools": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VoiceAgentTool"
+            },
+            "description": "The tools the voice agent may use. Supported tool kinds are `function` (executed by the client), `mcp`,\n`system` (service-managed session controls), and `toolbox`. Server-side tools such as `web_search`,\n`azure_ai_search`, and `openapi` are provided through a toolbox rather than declared directly."
+          },
+          "structured_inputs": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "$ref": "#/components/schemas/StructuredInputDefinition"
+            },
+            "description": "Set of structured inputs that participate in prompt template substitution, rendered per session before the live session starts."
+          },
+          "store": {
+            "type": "boolean",
+            "description": "Whether conversations with this agent are persisted. A single, all-or-nothing persistence switch that defaults to\n`false` (privacy-safe: off by default). When `true`, Foundry persists the full conversation — the transcript/event\ntimeline and raw audio. When `false`, nothing is persisted and no conversation is surfaced. There is no separate\naudio-logging control; audio is persisted only as part of this switch. Latency/performance telemetry (e.g.\ntime-to-first-audio, inter-token latency, interruption) is observability-only (customer trace / App Insights) and\nis not part of the persisted conversation content.",
+            "default": false
+          }
+        },
+        "description": "The voice agent definition. Its configuration (model, instructions, audio, tools, and optional avatar) drives a\nmanaged speech-to-speech experience. The realtime voice session is established through a separate connect operation\nthat is not defined in this specification. Every create or update produces a new immutable version.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentObject": {
+        "type": "object",
+        "required": [
+          "object",
+          "id",
+          "name",
+          "state",
+          "versions"
+        ],
+        "properties": {
+          "object": {
+            "type": "string",
+            "enum": [
+              "agent"
+            ],
+            "description": "The object type, which is always 'agent'."
+          },
+          "id": {
+            "type": "string",
+            "description": "The unique identifier of the agent."
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 63,
+            "description": "The name of the agent."
+          },
+          "state": {
+            "$ref": "#/components/schemas/AgentState",
+            "description": "The operational state of the agent. Controls whether the agent endpoint accepts or rejects requests.",
+            "readOnly": true
+          },
+          "agent_endpoint": {
+            "$ref": "#/components/schemas/AgentEndpointConfig",
+            "description": "The endpoint configuration for the agent"
+          },
+          "instance_identity": {
+            "$ref": "#/components/schemas/AgentIdentity",
+            "description": "The instance identity of the agent",
+            "readOnly": true
+          },
+          "blueprint": {
+            "$ref": "#/components/schemas/AgentIdentity",
+            "description": "The blueprint for the agent",
+            "readOnly": true
+          },
+          "blueprint_reference": {
+            "$ref": "#/components/schemas/AgentBlueprintReference",
+            "description": "The blueprint for the agent",
+            "readOnly": true
+          },
+          "agent_card": {
+            "$ref": "#/components/schemas/AgentCard"
+          },
+          "versions": {
+            "type": "object",
+            "properties": {
+              "latest": {
+                "$ref": "#/components/schemas/VoiceAgentVersionObject"
+              }
+            },
+            "required": [
+              "latest"
+            ],
+            "description": "The latest version of the voice agent."
+          }
+        },
+        "description": "A voice agent. Mirrors `AgentObject`, but its latest version is a `VoiceAgentVersionObject`.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentTool": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.FunctionTool"
+          },
+          {
+            "$ref": "#/components/schemas/OpenAI.MCPTool"
+          },
+          {
+            "$ref": "#/components/schemas/VoiceSystemTool"
+          },
+          {
+            "$ref": "#/components/schemas/VoiceToolboxTool"
+          }
+        ],
+        "description": "A tool usable by a voice agent. Supported kinds are native `function` tools (executed by the client), `mcp`,\nservice-managed `system` controls, and `toolbox` references. Server-side tools such as `web_search` and\n`azure_ai_search` are provided through a toolbox.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "personal",
+              "business"
+            ]
+          }
+        ],
+        "description": "The persona/tone a guided-authoring request steers the generated voice agent toward.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentUseCase": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "customer_support",
+              "reception",
+              "sales",
+              "travel_assistant",
+              "outreach",
+              "personal_assistant",
+              "learning",
+              "call_center",
+              "in_car"
+            ]
+          }
+        ],
+        "description": "The scenario-template catalog entry a guided-authoring request specializes the generated voice agent for.\nExtensible: additional use cases may be added over time.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentVersionObject": {
+        "type": "object",
+        "required": [
+          "metadata",
+          "object",
+          "id",
+          "name",
+          "version",
+          "created_at",
+          "definition"
+        ],
+        "properties": {
+          "metadata": {
+            "anyOf": [
+              {
+                "type": "object",
+                "unevaluatedProperties": {
+                  "type": "string"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Set of 16 key-value pairs that can be attached to an object. This can be\nuseful for storing additional information about the object in a structured\nformat, and querying for objects via API or the dashboard.\n\nKeys are strings with a maximum length of 64 characters. Values are strings\nwith a maximum length of 512 characters.",
+            "x-oaiTypeLabel": "map"
+          },
+          "object": {
+            "type": "string",
+            "enum": [
+              "agent.version"
+            ],
+            "description": "The object type, which is always 'agent.version'."
+          },
+          "id": {
+            "type": "string",
+            "description": "The unique identifier of the agent version."
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 256,
+            "description": "The name of the agent. Name can be used to retrieve/update/delete the agent."
+          },
+          "version": {
+            "type": "string",
+            "description": "The version identifier of the agent. Agents are immutable and every update creates a new version while keeping the name same."
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 512,
+            "description": "A human-readable description of the agent."
+          },
+          "created_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "The Unix timestamp (seconds) when the agent was created."
+          },
+          "draft": {
+            "type": "boolean",
+            "description": "Whether this agent version is a draft (candidate) rather than a release. Draft versions are recorded but excluded from default 'latest' resolution and are not auto-promoted. Defaults to false.",
+            "x-ms-foundry-meta": {
+              "conditional_previews": [
+                "DraftAgents=V1Preview"
+              ]
+            },
+            "default": false
+          },
+          "status": {
+            "$ref": "#/components/schemas/AgentVersionStatus",
+            "description": "The provisioning status of the agent version. Defaults to 'active' for non-hosted agents. For hosted agents, reflects infrastructure readiness."
+          },
+          "instance_identity": {
+            "$ref": "#/components/schemas/AgentIdentity",
+            "description": "The instance identity of the agent",
+            "readOnly": true
+          },
+          "blueprint": {
+            "$ref": "#/components/schemas/AgentIdentity",
+            "description": "The blueprint for the agent",
+            "readOnly": true
+          },
+          "blueprint_reference": {
+            "$ref": "#/components/schemas/AgentBlueprintReference",
+            "description": "The blueprint for the agent",
+            "readOnly": true
+          },
+          "agent_guid": {
+            "type": "string",
+            "description": "The unique GUID identifier of the agent.",
+            "readOnly": true
+          },
+          "definition": {
+            "$ref": "#/components/schemas/VoiceAgentDefinition",
+            "description": "The voice agent definition for this version."
+          }
+        },
+        "description": "A voice agent version. Mirrors `AgentVersionObject`, but its `definition` is always a `VoiceAgentDefinition`.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAssistantMessageItem": {
+        "type": "object",
+        "properties": {
+          "created_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "The Unix timestamp (in seconds) for when the item was persisted."
+          },
+          "response_id": {
+            "type": "string",
+            "description": "The id of the response that produced this item, when applicable."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeConversationItemMessageAssistant"
+          }
+        ],
+        "description": "An assistant message item. Only `output_text` and `output_audio` content are valid for assistant messages.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAudioConfig": {
+        "type": "object",
+        "properties": {
+          "input": {
+            "$ref": "#/components/schemas/VoiceAudioInputConfig",
+            "description": "Input (microphone) audio configuration."
+          },
+          "output": {
+            "$ref": "#/components/schemas/VoiceAudioOutputConfig",
+            "description": "Output (agent speech) audio configuration."
+          }
+        },
+        "description": "The audio configuration for a voice agent. These values are session defaults and may be overridden when connecting.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAudioFormat": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/VoiceAudioFormatType",
+            "description": "The audio format type, e.g. 'audio/pcm' (16-bit PCM), 'audio/pcmu' (G.711 mu-law), or 'audio/pcma' (G.711 A-law)."
+          },
+          "rate": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The sample rate in Hz. Applies to 'audio/pcm' (e.g. 24000); omit for telephony G.711 formats (8 kHz)."
+          }
+        },
+        "description": "An audio format. Follows the OpenAI Realtime session schema; `type` carries the media subtype.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAudioFormatType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "audio/pcm",
+              "audio/pcmu",
+              "audio/pcma"
+            ]
+          }
+        ],
+        "description": "The audio format type. Values follow the OpenAI Realtime wire schema and are exempt from the snake_case enum-value rule.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAudioInputConfig": {
+        "type": "object",
+        "properties": {
+          "format": {
+            "$ref": "#/components/schemas/VoiceAudioFormat",
+            "description": "The input audio format."
+          },
+          "noise_reduction": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/VoiceNoiseReduction"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Input noise reduction. Set to null to disable."
+          },
+          "turn_detection": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/VoiceTurnDetection"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Turn (end-of-speech) detection. Set to null to disable server-side turn detection."
+          },
+          "transcription": {
+            "$ref": "#/components/schemas/VoiceInputTranscription",
+            "description": "Optional asynchronous input-audio transcription configuration."
+          }
+        },
+        "description": "Input audio configuration for a voice agent.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAudioOutputConfig": {
+        "type": "object",
+        "properties": {
+          "format": {
+            "$ref": "#/components/schemas/VoiceAudioFormat",
+            "description": "The output audio format."
+          },
+          "voice": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "$ref": "#/components/schemas/AzureVoice"
+              }
+            ],
+            "description": "The voice. Either a built-in voice name, such as `alloy`, or an Azure neural voice object."
+          },
+          "speed": {
+            "type": "number",
+            "format": "float",
+            "minimum": 0.25,
+            "maximum": 1.5,
+            "description": "The speaking speed multiplier, from 0.25 to 1.5. Defaults to 1.",
+            "default": 1
+          }
+        },
+        "description": "Output audio configuration for a voice agent.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAvatarConfig": {
+        "type": "object",
+        "required": [
+          "type",
+          "character"
+        ],
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/VoiceAvatarType",
+            "description": "The avatar type."
+          },
+          "character": {
+            "type": "string",
+            "description": "The avatar character identifier, e.g. 'lisa'."
+          },
+          "style": {
+            "type": "string",
+            "description": "The avatar style, e.g. 'casual-sitting'."
+          },
+          "customized": {
+            "type": "boolean",
+            "description": "Whether the avatar is a customer-customized avatar. Defaults to false.",
+            "default": false
+          },
+          "output_protocol": {
+            "$ref": "#/components/schemas/VoiceAvatarOutputProtocol",
+            "description": "The transport used to deliver the avatar video stream."
+          }
+        },
+        "description": "Avatar configuration for a voice agent. These values are session defaults and may be overridden when connecting.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAvatarOutputProtocol": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "webrtc",
+              "websocket"
+            ]
+          }
+        ],
+        "description": "The transport used to deliver the avatar video stream.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAvatarType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "video-avatar",
+              "photo-avatar"
+            ]
+          }
+        ],
+        "description": "The avatar type.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceConversation": {
+        "type": "object",
+        "required": [
+          "id",
+          "object",
+          "status",
+          "created_at"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique id of the conversation."
+          },
+          "object": {
+            "type": "string",
+            "enum": [
+              "voice.conversation"
+            ],
+            "description": "The object type. Always `voice.conversation`."
+          },
+          "status": {
+            "$ref": "#/components/schemas/VoiceConversationStatus",
+            "description": "The lifecycle status of the conversation."
+          },
+          "created_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "The Unix timestamp (in seconds) for when the conversation was created."
+          },
+          "completed_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "The Unix timestamp (in seconds) for when the conversation's session ended. Absent while in progress."
+          },
+          "metadata": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "type": "string"
+            },
+            "description": "A set of key-value pairs attached to the conversation."
+          },
+          "usage": {
+            "$ref": "#/components/schemas/OpenAI.RealtimeResponseUsage",
+            "description": "Aggregate token usage totals across all responses in this conversation."
+          }
+        },
+        "description": "A persisted voice conversation. The Foundry envelope that owns a voice agent's stored\ntranscript, responses, per-turn metrics, and audio. It is the parent, retention, and delete boundary:\ndeleting it cascades to its responses, items, metrics, and audio.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceConversationItem": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/VoiceSystemMessageItem"
+          },
+          {
+            "$ref": "#/components/schemas/VoiceUserMessageItem"
+          },
+          {
+            "$ref": "#/components/schemas/VoiceAssistantMessageItem"
+          },
+          {
+            "$ref": "#/components/schemas/VoiceFunctionCallItem"
+          },
+          {
+            "$ref": "#/components/schemas/VoiceFunctionCallOutputItem"
+          },
+          {
+            "$ref": "#/components/schemas/VoiceMcpListToolsItem"
+          },
+          {
+            "$ref": "#/components/schemas/VoiceMcpCallItem"
+          },
+          {
+            "$ref": "#/components/schemas/VoiceMcpApprovalRequestItem"
+          },
+          {
+            "$ref": "#/components/schemas/VoiceMcpApprovalResponseItem"
+          }
+        ],
+        "description": "A persisted item in a voice conversation. A plain union of the 9 OpenAI Realtime item kinds\n(message x3 roles, function_call, function_call_output, mcp_list_tools, mcp_call,\nmcp_approval_request, mcp_approval_response), each extended with the Foundry persistence extensions\n`created_at`/`response_id`. See the note above for why this is a plain union rather than a single\n`@discriminator`-based type.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceConversationStatus": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "in_progress",
+              "completed"
+            ]
+          }
+        ],
+        "description": "The lifecycle status of a persisted voice conversation.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceDeletedConversation": {
+        "type": "object",
+        "required": [
+          "id",
+          "object",
+          "deleted"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The id of the deleted conversation."
+          },
+          "object": {
+            "type": "string",
+            "enum": [
+              "voice.conversation.deleted"
+            ],
+            "description": "The object type. Always `voice.conversation.deleted`."
+          },
+          "deleted": {
+            "type": "boolean",
+            "description": "Always `true` for a successful delete."
+          }
+        },
+        "description": "The response returned when a voice conversation is deleted.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceFunctionCallItem": {
+        "type": "object",
+        "properties": {
+          "created_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "The Unix timestamp (in seconds) for when the item was persisted."
+          },
+          "response_id": {
+            "type": "string",
+            "description": "The id of the response that produced this item, when applicable."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeConversationItemFunctionCall"
+          }
+        ],
+        "description": "A function call request item.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceFunctionCallOutputItem": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the function that was called. A Foundry extension: OpenAI's function_call_output does not carry the function name, only `call_id`."
+          },
+          "created_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "The Unix timestamp (in seconds) for when the item was persisted."
+          },
+          "response_id": {
+            "type": "string",
+            "description": "The id of the response that produced this item, when applicable."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeConversationItemFunctionCallOutput"
+          }
+        ],
+        "description": "A function call output item.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceInputTranscription": {
+        "type": "object",
+        "properties": {
+          "model": {
+            "type": "string",
+            "description": "The transcription model deployment to use."
+          },
+          "language": {
+            "type": "string",
+            "description": "The expected input language as a BCP-47 code (e.g. 'en-US'). Auto-detected when omitted."
+          },
+          "prompt": {
+            "type": "string",
+            "description": "Optional prompt to bias transcription toward domain terms."
+          }
+        },
+        "description": "Asynchronous input-audio transcription configuration.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceItemAudioResponse": {
+        "type": "object",
+        "required": [
+          "conversation_id",
+          "item_id"
+        ],
+        "properties": {
+          "conversation_id": {
+            "type": "string",
+            "description": "The id of the conversation the item belongs to."
+          },
+          "item_id": {
+            "type": "string",
+            "description": "The id of the item this audio belongs to."
+          },
+          "role": {
+            "type": "string",
+            "description": "The role the audio belongs to, e.g. `user` or `agent`."
+          },
+          "format": {
+            "type": "string",
+            "description": "The container format of the audio, e.g. `wav`."
+          },
+          "codec": {
+            "type": "string",
+            "description": "The audio codec, e.g. `pcm16`."
+          },
+          "sample_rate": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The sample rate in Hz."
+          },
+          "channels": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of audio channels."
+          },
+          "start_offset_ms": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The offset from the session start at which this segment begins, in milliseconds."
+          },
+          "duration_ms": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The duration of the audio segment, in milliseconds."
+          },
+          "blob_path": {
+            "type": "string",
+            "description": "For bring-your-own-storage (BYOS) recordings only: a direct path/URL into the customer's own storage, without a SAS token — the customer downloads it using their own storage credentials. Absent for Foundry-managed storage, where the bytes are streamed via the item's `/audio/content` route instead."
+          }
+        },
+        "description": "Metadata for a single conversation item's audio segment. For bring-your-own-storage (BYOS), the response includes\n`blob_path`, a direct customer-storage path or URL without a SAS token, that the customer accesses with their own\ncredentials. For Foundry-managed storage, `blob_path` is absent and the bytes are streamed through the item's\n`/audio/content` route.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceMcpApprovalRequestItem": {
+        "type": "object",
+        "properties": {
+          "created_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "The Unix timestamp (in seconds) for when the item was persisted."
+          },
+          "response_id": {
+            "type": "string",
+            "description": "The id of the response that produced this item, when applicable."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeMCPApprovalRequest"
+          }
+        ],
+        "description": "An MCP approval request item.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceMcpApprovalResponseItem": {
+        "type": "object",
+        "properties": {
+          "created_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "The Unix timestamp (in seconds) for when the item was persisted."
+          },
+          "response_id": {
+            "type": "string",
+            "description": "The id of the response that produced this item, when applicable."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeMCPApprovalResponse"
+          }
+        ],
+        "description": "An MCP approval response item (client-created).",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceMcpCallItem": {
+        "type": "object",
+        "properties": {
+          "created_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "The Unix timestamp (in seconds) for when the item was persisted."
+          },
+          "response_id": {
+            "type": "string",
+            "description": "The id of the response that produced this item, when applicable."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeMCPToolCall"
+          }
+        ],
+        "description": "An MCP call item.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceMcpListToolsItem": {
+        "type": "object",
+        "properties": {
+          "created_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "The Unix timestamp (in seconds) for when the item was persisted."
+          },
+          "response_id": {
+            "type": "string",
+            "description": "The id of the response that produced this item, when applicable."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeMCPListTools"
+          }
+        ],
+        "description": "An MCP list-tools item.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceModelType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "managed",
+              "self_deployed"
+            ]
+          }
+        ],
+        "description": "How the model backing a voice agent is served. This is independent of the architecture (realtime or cascaded),\nwhich the service derives from the selected model.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceNoiseReduction": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/VoiceNoiseReductionType",
+            "description": "The noise reduction mode."
+          }
+        },
+        "description": "Input audio noise reduction configuration.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceNoiseReductionType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "near_field",
+              "far_field",
+              "azure_deep_noise_suppression"
+            ]
+          }
+        ],
+        "description": "The input audio noise reduction mode.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceOutputModality": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "text",
+              "audio",
+              "animation",
+              "avatar"
+            ]
+          }
+        ],
+        "description": "An output modality the agent may produce. `animation` and `avatar` are used when an avatar is configured.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceRecordingChannelLayout": {
+        "type": "object",
+        "required": [
+          "left",
+          "right"
+        ],
+        "properties": {
+          "left": {
+            "type": "string",
+            "description": "The role carried on the left channel, e.g. `user`."
+          },
+          "right": {
+            "type": "string",
+            "description": "The role carried on the right channel, e.g. `agent`."
+          }
+        },
+        "description": "The role assigned to each channel of a merged stereo voice recording.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceRecordingResponse": {
+        "type": "object",
+        "required": [
+          "conversation_id",
+          "format",
+          "sample_rate",
+          "channels",
+          "channel_layout",
+          "duration_ms"
+        ],
+        "properties": {
+          "conversation_id": {
+            "type": "string",
+            "description": "The id of the conversation this recording belongs to."
+          },
+          "format": {
+            "type": "string",
+            "description": "The container format of the recording, e.g. `wav`."
+          },
+          "sample_rate": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The sample rate of the recording in Hz, e.g. 24000."
+          },
+          "channels": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of audio channels. The merged recording is stereo (`2`)."
+          },
+          "channel_layout": {
+            "$ref": "#/components/schemas/VoiceRecordingChannelLayout",
+            "description": "The role assigned to each stereo channel."
+          },
+          "duration_ms": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The total duration of the recording in milliseconds."
+          },
+          "blob_path": {
+            "type": "string",
+            "description": "For bring-your-own-storage (BYOS) recordings only: a direct path/URL into the customer's own storage, without a SAS token — the customer downloads it using their own storage credentials. Absent for Foundry-managed storage, where the bytes are streamed via the `/audio/content` route instead."
+          }
+        },
+        "description": "Metadata for the merged, whole-call stereo recording of a voice conversation (user audio on the left channel,\nagent audio on the right). Built once from the per-turn segments after the session ends and durably cached.\nThe common metadata (format, sample rate, channels, channel layout, duration) is returned for both\nFoundry-managed and bring-your-own-storage (BYOS) recordings. For BYOS the response also includes `blob_path`,\na direct path/URL into the customer's own storage (no SAS token) that the customer downloads using their own\nstorage credentials. For Foundry-managed storage `blob_path` is absent and the bytes are streamed via the\n`/audio/content` route instead.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceResponse": {
+        "type": "object",
+        "required": [
+          "id",
+          "object",
+          "status",
+          "conversation_id"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique id of the response."
+          },
+          "object": {
+            "type": "string",
+            "enum": [
+              "realtime.response"
+            ],
+            "description": "The object type. Always `realtime.response`."
+          },
+          "status": {
+            "$ref": "#/components/schemas/VoiceResponseStatus",
+            "description": "The status of the response."
+          },
+          "status_details": {
+            "$ref": "#/components/schemas/OpenAI.RealtimeResponseStatusDetails",
+            "description": "Additional detail about a terminal status."
+          },
+          "output": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VoiceConversationItem"
+            },
+            "description": "The output items produced by the response. May be omitted in list results; retrieve the full response (GET .../responses/{response_id}) or use the paged response-items route (GET .../responses/{response_id}/items) for its output items. Each item's `response_id` also links it back to this response in the conversation-level items list."
+          },
+          "usage": {
+            "$ref": "#/components/schemas/OpenAI.RealtimeResponseUsage",
+            "description": "Token usage statistics for the response."
+          },
+          "conversation_id": {
+            "type": "string",
+            "description": "The id of the conversation this response belongs to."
+          },
+          "audio": {
+            "$ref": "#/components/schemas/VoiceResponseAudio",
+            "description": "The audio configuration used for the response, including the voice and audio format used for output."
+          },
+          "output_modalities": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "text",
+                "audio"
+              ]
+            },
+            "description": "The output modalities used for the response, e.g. `[\"text\", \"audio\"]`. Audio output always includes a text transcript."
+          },
+          "temperature": {
+            "type": "number",
+            "format": "float",
+            "description": "The sampling temperature used for the response."
+          },
+          "max_output_tokens": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "format": "int32"
+              },
+              {
+                "type": "string",
+                "enum": [
+                  "inf"
+                ]
+              }
+            ],
+            "description": "The maximum number of output tokens allowed for the response; an integer or the literal `inf`."
+          },
+          "created_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "The Unix timestamp (in seconds) for when the response was created."
+          },
+          "completed_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "The Unix timestamp (in seconds) for when the response completed."
+          }
+        },
+        "description": "A persisted voice response representing one model inference turn within a conversation. In list results the\n`output` projection may be omitted; retrieve the\nfull response (`GET .../responses/{response_id}`) or the paged response-items route\n(`GET .../responses/{response_id}/items`) for its output items. `created_at`/`completed_at` are Foundry\ndurable ordering extensions.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceResponseAudio": {
+        "type": "object",
+        "properties": {
+          "output": {
+            "$ref": "#/components/schemas/VoiceResponseAudioOutput",
+            "description": "The audio output configuration used for the response."
+          }
+        },
+        "description": "Audio configuration for a response. Follows the OpenAI Realtime GA `audio` object shape.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceResponseAudioOutput": {
+        "type": "object",
+        "properties": {
+          "voice": {
+            "$ref": "#/components/schemas/VoiceResponseVoice",
+            "description": "The voice used for the response's audio output."
+          },
+          "format": {
+            "$ref": "#/components/schemas/OpenAI.RealtimeAudioFormats",
+            "description": "The audio format used for the response's audio output."
+          }
+        },
+        "description": "The output audio format used for a response. Follows the OpenAI Realtime GA audio format discriminated union.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceResponseStatus": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "in_progress",
+              "completed",
+              "cancelled",
+              "incomplete",
+              "failed"
+            ]
+          }
+        ],
+        "description": "The status of a voice response.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceResponseVoice": {
+        "type": "object",
+        "required": [
+          "type",
+          "name"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "The voice kind, e.g. `openai` or an Azure voice type."
+          },
+          "name": {
+            "type": "string",
+            "description": "The voice name."
+          }
+        },
+        "description": "The voice used for a response, for example `{ \"type\": \"openai\", \"name\": \"alloy\" }`.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceSystemMessageItem": {
+        "type": "object",
+        "properties": {
+          "created_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "The Unix timestamp (in seconds) for when the item was persisted."
+          },
+          "response_id": {
+            "type": "string",
+            "description": "The id of the response that produced this item, when applicable."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeConversationItemMessageSystem"
+          }
+        ],
+        "description": "A system message item. Only `input_text` content is valid for system messages.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceSystemTool": {
+        "type": "object",
+        "required": [
+          "type",
+          "name"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "system"
+            ],
+            "description": "The type of the tool. Always `system`."
+          },
+          "name": {
+            "$ref": "#/components/schemas/VoiceSystemToolName",
+            "description": "The service-managed control action. Known values are stable; additional values may be added over time."
+          },
+          "description": {
+            "type": "string",
+            "description": "An optional description of the system tool."
+          }
+        },
+        "description": "A service-managed control that acts on the active voice session without customer code or external authentication.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceSystemToolName": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "end_conversation"
+            ]
+          }
+        ],
+        "description": "A service-managed voice-session control action. Known values are stable; additional values may be added over time.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceToolboxTool": {
+        "type": "object",
+        "required": [
+          "type",
+          "toolbox_name",
+          "toolbox_version"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "toolbox"
+            ],
+            "description": "The type of the tool. Always `toolbox`."
+          },
+          "toolbox_name": {
+            "type": "string",
+            "description": "The name of the toolbox to attach."
+          },
+          "toolbox_version": {
+            "type": "string",
+            "description": "The immutable version of the toolbox to attach."
+          }
+        },
+        "description": "A reference to a Foundry toolbox, which is a versioned bundle of tools executed through its MCP endpoint.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceTurnDetection": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/VoiceTurnDetectionType",
+            "description": "The turn detection strategy."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "server_vad": "#/components/schemas/ServerVadTurnDetection",
+            "semantic_vad": "#/components/schemas/SemanticVadTurnDetection"
+          }
+        },
+        "description": "Turn (end-of-speech) detection configuration.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceTurnDetectionEagerness": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "auto",
+              "low",
+              "medium",
+              "high"
+            ]
+          }
+        ],
+        "description": "How eagerly semantic turn detection ends the user's turn.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceTurnDetectionType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "server_vad",
+              "semantic_vad"
+            ]
+          }
+        ],
+        "description": "The turn detection strategy. Values follow the OpenAI Realtime wire schema.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceUserMessageItem": {
+        "type": "object",
+        "properties": {
+          "created_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "The Unix timestamp (in seconds) for when the item was persisted."
+          },
+          "response_id": {
+            "type": "string",
+            "description": "The id of the response that produced this item, when applicable."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeConversationItemMessageUser"
+          }
+        ],
+        "description": "A user message item. `input_text`, `input_audio`, and `input_image` content are valid for user messages.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
         }
       },
       "WebIQPreviewTool": {
