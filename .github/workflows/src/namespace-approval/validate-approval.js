@@ -48,8 +48,8 @@ async function handleUnlabeled({
   prNumber,
 }) {
   const isNamespacePending =
-    targetLabel.startsWith("namespace-") && targetLabel.endsWith("-pending");
-  if (!isNamespacePending && targetLabel !== "namespace-review-required") {
+    targetLabel.startsWith("package-name-") && targetLabel.endsWith("-pending");
+  if (!isNamespacePending && targetLabel !== "package-name-review-required") {
     core.info(`${targetLabel} is not a namespace label, skipping`);
     return;
   }
@@ -103,8 +103,8 @@ async function handleLabeled({
   /** @type {string[]} */
   let langsToApprove;
 
-  if (targetLabel === "namespace-approved-all") {
-    // namespace-approved-all is a shortcut for management-plane only.
+  if (targetLabel === "package-name-approved-all") {
+    // package-name-approved-all is a shortcut for management-plane only.
     // On mgmt PRs, a single label approves all pending languages at once.
     // Auth (who can apply) is enforced by check-label.js (protected-labels workflow).
     if (!isMgmt) {
@@ -118,16 +118,16 @@ async function handleLabeled({
         owner,
         repo,
         issue_number: prNumber,
-        body: `⚠️ \`namespace-approved-all\` is only available on management-plane PRs. Use per-language \`namespace-<lang>-approved\` labels instead.\n\nLabel removed.`,
+        body: `⚠️ \`package-name-approved-all\` is only available on management-plane PRs. Use per-language \`package-name-<lang>-approved\` labels instead.\n\nLabel removed.`,
       });
       return;
     }
 
     langsToApprove = labels
-      .filter((label) => label.startsWith("namespace-") && label.endsWith("-pending"))
-      .map((label) => label.replace("namespace-", "").replace("-pending", ""));
+      .filter((label) => label.startsWith("package-name-") && label.endsWith("-pending"))
+      .map((label) => label.replace("package-name-", "").replace("-pending", ""));
   } else {
-    const match = targetLabel.match(/^namespace-(\w+)-approved$/);
+    const match = targetLabel.match(/^package-name-(\w+)-approved$/);
     if (!match) {
       core.info(`${targetLabel} is not a namespace approval label`);
       return;
@@ -145,8 +145,8 @@ async function handleLabeled({
 
   for (const lang of langsToApprove) {
     // Add approved label before removing pending to avoid status check timing gap (#4)
-    if (targetLabel === "namespace-approved-all") {
-      const approvedLabel = `namespace-${lang}-approved`;
+    if (targetLabel === "package-name-approved-all") {
+      const approvedLabel = `package-name-${lang}-approved`;
       await github.rest.issues.addLabels({
         owner,
         repo,
@@ -155,7 +155,7 @@ async function handleLabeled({
       });
     }
 
-    await removeLabelIfPresent(github, owner, repo, prNumber, `namespace-${lang}-pending`);
+    await removeLabelIfPresent(github, owner, repo, prNumber, `package-name-${lang}-pending`);
   }
 
   const { data: currentPR } = await github.rest.pulls.get({
@@ -168,7 +168,8 @@ async function handleLabeled({
     (/** @type {{ name?: string }} */ label) => label.name ?? "",
   );
   const pendingLabels = currentLabels.filter(
-    (/** @type {string} */ label) => label.startsWith("namespace-") && label.endsWith("-pending"),
+    (/** @type {string} */ label) =>
+      label.startsWith("package-name-") && label.endsWith("-pending"),
   );
 
   const comments = await github.paginate(github.rest.issues.listComments, {
@@ -179,14 +180,31 @@ async function handleLabeled({
   const botComment = comments.find(
     (/** @type {{ user?: { type?: string } | null, body?: string }} */ comment) =>
       comment.user?.type === "Bot" &&
-      (comment.body?.includes("<!-- namespace-review-bot -->") ?? false),
+      (comment.body?.includes("<!-- package-name-review-bot -->") ?? false),
   );
 
   if (botComment?.body) {
     let body = botComment.body;
+    // Update the triggered language(s) first
     for (const lang of langsToApprove) {
-      const rowRegex = new RegExp(`(\\| ${lang}[^|]*\\|[^|]+\\|[^|]+\\|) ⏳ Pending (\\|)`, "gi");
+      const rowRegex = new RegExp(
+        `(\\| ${lang}[^|]*\\|[^|]+\\|[^|]+\\|[^|]+\\|) ⏳ Pending (\\|)`,
+        "gi",
+      );
       body = body.replace(rowRegex, `$1 ✅ Approved by @${actor} $2`);
+    }
+    // Also update any other languages that have approved labels but may have been
+    // missed due to concurrent workflow runs (race condition between label events).
+    const approvedLangs = labels
+      .filter((label) => label.startsWith("package-name-") && label.endsWith("-approved"))
+      .map((label) => label.replace("package-name-", "").replace("-approved", ""))
+      .filter((lang) => lang !== "approved" && lang !== "all");
+    for (const lang of approvedLangs) {
+      const rowRegex = new RegExp(
+        `(\\| ${lang}[^|]*\\|[^|]+\\|[^|]+\\|[^|]+\\|) ⏳ Pending (\\|)`,
+        "gi",
+      );
+      body = body.replace(rowRegex, `$1 ✅ Approved $2`);
     }
     await github.rest.issues.updateComment({
       owner,
@@ -198,12 +216,12 @@ async function handleLabeled({
 
   if (pendingLabels.length === 0) {
     core.info("All namespaces approved!");
-    await removeLabelIfPresent(github, owner, repo, prNumber, "namespace-review-required");
+    await removeLabelIfPresent(github, owner, repo, prNumber, "package-name-review-required");
     await github.rest.issues.addLabels({
       owner,
       repo,
       issue_number: prNumber,
-      labels: ["namespace-approved"],
+      labels: ["package-name-approved"],
     });
 
     // Only post the approval comment if one doesn't already exist (avoids duplicates
@@ -211,14 +229,14 @@ async function handleLabeled({
     const approvalCommentExists = comments.some(
       (/** @type {{ user?: { type?: string } | null, body?: string }} */ comment) =>
         comment.user?.type === "Bot" &&
-        (comment.body?.includes("## ✅ Namespace Approved") ?? false),
+        (comment.body?.includes("## \u2705 Package Name Approved") ?? false),
     );
     if (!approvalCommentExists) {
       await github.rest.issues.createComment({
         owner,
         repo,
         issue_number: prNumber,
-        body: "## ✅ Namespace Approved\n\nAll required namespace approvals received. This PR is clear to merge from a namespace perspective.",
+        body: "## \u2705 Package Name Approved\n\nAll required package name approvals received. This PR is clear to merge from a package name perspective.",
       });
     }
   }
@@ -263,7 +281,7 @@ export default async function validateApproval({ github, context, core }) {
     });
   }
 
-  if (!labels.includes("namespace-review-required")) {
+  if (!labels.includes("package-name-review-required")) {
     core.info("No namespace review, skipping");
     return;
   }

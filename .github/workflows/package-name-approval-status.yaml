@@ -1,9 +1,11 @@
-name: "Namespace Approval - Set Status"
+name: "Package Name Approval - Set Status"
 
 on:
   workflow_run:
-    workflows: ["Namespace Approval - Analyze Code"]
+    workflows: ["Package Name Approval - Analyze Code"]
     types: [completed]
+    branches:
+      - main
 
 permissions:
   actions: read
@@ -13,7 +15,7 @@ permissions:
 
 jobs:
   post-results:
-    name: Post Namespace Results
+    name: Post Package Name Results
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v6
@@ -24,7 +26,7 @@ jobs:
       - name: Install dependencies for github-script actions
         uses: ./.github/actions/install-deps-github-script
 
-      - name: Post namespace review comment
+      - name: Post package name review comment
         uses: actions/github-script@v8
         with:
           script: |
@@ -32,7 +34,7 @@ jobs:
               await import('${{ github.workspace }}/.github/workflows/src/namespace-approval/post-results.js');
             await postResults({ github, context, core });
 
-      - name: Set namespace approval status
+      - name: Set package name approval status
         uses: actions/github-script@v8
         with:
           script: |

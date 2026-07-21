@@ -37,17 +37,17 @@ describe("status-check", () => {
     });
   });
 
-  it("should pass when no namespace-review-required label", async () => {
+  it("should pass when no package-name-review-required label", async () => {
     github.rest.pulls.get.mockResolvedValue({
       data: { labels: [{ name: "other-label" }], head: { sha: "abc123" } },
     });
 
     await statusCheck(args());
 
-    expect(core.info).toHaveBeenCalledWith("No namespace review required, passing");
+    expect(core.info).toHaveBeenCalledWith("No package name review required, passing");
     expect(core.setFailed).not.toHaveBeenCalled();
     expect(github.rest.repos.createCommitStatus).toHaveBeenCalledWith(
-      expect.objectContaining({ state: "success", context: "Namespace Approval" }),
+      expect.objectContaining({ state: "success", context: "Package Name Approval" }),
     );
   });
 
@@ -56,9 +56,9 @@ describe("status-check", () => {
       data: {
         head: { sha: "abc123" },
         labels: [
-          { name: "namespace-review-required" },
-          { name: "namespace-java-pending" },
-          { name: "namespace-dotnet-pending" },
+          { name: "package-name-review-required" },
+          { name: "package-name-java-pending" },
+          { name: "package-name-dotnet-pending" },
         ],
       },
     });
@@ -74,49 +74,49 @@ describe("status-check", () => {
     expect(infoMsg).toContain("dotnet");
     expect(core.setFailed).not.toHaveBeenCalled();
     expect(github.rest.repos.createCommitStatus).toHaveBeenCalledWith(
-      expect.objectContaining({ state: "pending", context: "Namespace Approval" }),
+      expect.objectContaining({ state: "pending", context: "Package Name Approval" }),
     );
   });
 
-  it("should pass when all namespaces approved", async () => {
+  it("should pass when all package names approved", async () => {
     github.rest.pulls.get.mockResolvedValue({
       data: {
         head: { sha: "abc123" },
         labels: [
-          { name: "namespace-review-required" },
-          { name: "namespace-approved" },
-          { name: "namespace-java-approved" },
+          { name: "package-name-review-required" },
+          { name: "package-name-approved" },
+          { name: "package-name-java-approved" },
         ],
       },
     });
 
     await statusCheck(args());
 
-    expect(core.info).toHaveBeenCalledWith("All namespaces approved - merge allowed");
+    expect(core.info).toHaveBeenCalledWith("All package names approved - merge allowed");
     expect(core.setFailed).not.toHaveBeenCalled();
     expect(github.rest.repos.createCommitStatus).toHaveBeenCalledWith(
-      expect.objectContaining({ state: "success", context: "Namespace Approval" }),
+      expect.objectContaining({ state: "success", context: "Package Name Approval" }),
     );
   });
 
-  it("should set pending when namespace-review-required but no pending or approved labels", async () => {
+  it("should set pending when package-name-review-required but no pending or approved labels", async () => {
     github.rest.pulls.get.mockResolvedValue({
       data: {
         head: { sha: "abc123" },
-        labels: [{ name: "namespace-review-required" }],
+        labels: [{ name: "package-name-review-required" }],
       },
     });
 
     await statusCheck(args());
 
     expect(core.warning).toHaveBeenCalledWith(
-      "namespace-review-required is set but no pending or approved labels found",
+      "package-name-review-required is set but no pending or approved labels found",
     );
     expect(github.rest.repos.createCommitStatus).toHaveBeenCalledWith(
       expect.objectContaining({
         state: "pending",
-        context: "Namespace Approval",
-        description: "Namespace review in progress",
+        context: "Package Name Approval",
+        description: "Package name review in progress",
       }),
     );
   });

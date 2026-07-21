@@ -26,7 +26,7 @@ some-approval-label:
 
 # Plane-aware: different approvers depending on whether the PR
 # is management-plane (has Mgmt/resource-manager label) or data-plane
-namespace-dotnet-approved:
+package-name-dotnet-approved:
   management-plane:
     - user1
     - user2
