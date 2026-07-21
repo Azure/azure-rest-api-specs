@@ -38543,7 +38543,7 @@ paths:
     post:
       operationId: VoiceAgents_createVoiceAgent
       summary: Create a voice agent
-      description: Creates a new voice-first prompt agent, or a new version of an existing one.
+      description: Creates a new voice agent, or a new version of an existing one.
       parameters:
         - name: Foundry-Features
           in: header
@@ -39250,7 +39250,7 @@ paths:
       operationId: VoiceAgents_generateVoiceAgent
       summary: Generate a voice agent
       description: |-
-        Generates and creates a voice-first prompt agent from high-level inputs plus a natural-language goal.
+        Generates and creates a voice agent from high-level inputs plus a natural-language goal.
         The operation expands the goal into a full, editable definition, creates the agent through the standard
         voice create path, and returns the created `VoiceAgentObject`. The caller can edit or override the
         generated fields afterward through normal versioning.
@@ -41245,9 +41245,7 @@ components:
         locale:
           type: string
           description: Optional BCP-47 locale override, e.g. 'en-US'.
-      description: |-
-        An Azure (Voice Live) neural voice with optional prosody. A Voice Live extension to the OpenAI Realtime voice
-        field; OpenAI built-in voices are specified as a bare string instead.
+      description: An Azure neural voice with optional prosody. Built-in voices are specified as a bare string instead.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -41256,12 +41254,12 @@ components:
         - type: string
         - type: string
           enum:
-            - azure_standard
-            - azure_custom
-            - azure_personal
-            - azure_avatar_voice_sync
-            - azure_realtime_native
-      description: The Azure (Voice Live) voice kind.
+            - azure-standard
+            - azure-custom
+            - azure-personal
+            - avatar-voice-sync
+            - azure-realtime-native
+      description: The Azure voice kind.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -42525,8 +42523,8 @@ components:
           default: false
         definition:
           allOf:
-            - $ref: '#/components/schemas/PromptVoiceAgentDefinition'
-          description: The voice-first prompt agent definition.
+            - $ref: '#/components/schemas/VoiceAgentDefinition'
+          description: The voice agent definition.
         agent_endpoint:
           allOf:
             - $ref: '#/components/schemas/AgentEndpointConfig'
@@ -42535,7 +42533,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/AgentCard'
           description: Optional agent card for the agent
-      description: The request to create a voice-first prompt agent.
+      description: The request to create a voice agent.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -42573,9 +42571,9 @@ components:
           default: false
         definition:
           allOf:
-            - $ref: '#/components/schemas/PromptVoiceAgentDefinition'
-          description: The voice-first prompt agent definition.
-      description: The request to create a new version of a voice-first prompt agent.
+            - $ref: '#/components/schemas/VoiceAgentDefinition'
+          description: The voice agent definition.
+      description: The request to create a new version of a voice agent.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -45502,10 +45500,10 @@ components:
         model_type:
           allOf:
             - $ref: '#/components/schemas/VoiceModelType'
-          description: 'How the model backing the generated agent is served: `managed` (Voice Live-hosted) or `self_deployed` (BYOM). Carried through to the generated definition, not generated.'
+          description: "How the model backing the generated agent is served: `managed` (service-managed) or `self_deployed` (the customer's own deployment). Carried through to the generated definition, not generated."
         model:
           type: string
-          description: "The model paired with `model_type`: the Voice Live-hosted model name when `managed`, or the customer's Foundry deployment name when `self_deployed`. Carried through, not generated."
+          description: "The model paired with `model_type`: the service-managed model name when `managed`, or the customer's Foundry deployment name when `self_deployed`. Carried through, not generated."
         agent_type:
           allOf:
             - $ref: '#/components/schemas/VoiceAgentType'
@@ -45533,8 +45531,8 @@ components:
               - DraftAgents=V1Preview
           default: false
       description: |-
-        The inputs for generating a voice-first prompt agent. A few high-level inputs plus a natural-language `goal`
-        are expanded into a full, editable `PromptVoiceAgentDefinition`, which is then created via the standard voice
+        The inputs for generating a voice agent. A few high-level inputs plus a natural-language `goal`
+        are expanded into a full, editable `VoiceAgentDefinition`, which is then created via the standard voice
         agent create path. The generated `instructions` and audio/voice settings are stored as separate fields on the
         resulting agent definition, so the caller can edit or override any of them afterward via normal versioning.
       x-ms-foundry-meta:
@@ -75015,86 +75013,6 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
-    PromptVoiceAgentDefinition:
-      type: object
-      required:
-        - kind
-        - model_type
-        - model
-      properties:
-        kind:
-          type: string
-          enum:
-            - voice
-          description: The kind discriminator for a voice-first prompt agent definition. Always `voice`.
-        rai_config:
-          allOf:
-            - $ref: '#/components/schemas/RaiConfig'
-          description: Configuration for Responsible AI (RAI) content filtering and safety features.
-        model_type:
-          allOf:
-            - $ref: '#/components/schemas/VoiceModelType'
-          description: How the model backing this agent is served. Together with `model`, this selects the model up front. `managed` runs a Voice Live-hosted model; `self_deployed` (BYOM) uses the customer's own Foundry deployment. Orthogonal to the architecture (realtime vs cascaded), which Foundry derives from the selected model.
-        model:
-          type: string
-          description: "The model to use for this agent, paired with `model_type`: the Voice Live-hosted model name when `model_type` is `managed`, or the customer's Foundry deployment name when `model_type` is `self_deployed`. Must be a realtime- or cascaded-capable model; Foundry derives the architecture (realtime vs cascaded) from it, so there is no architecture field."
-        instructions:
-          anyOf:
-            - type: string
-            - type: 'null'
-          description: A system (or developer) message inserted into the model's context. Supports template substitution via `structured_inputs`, rendered per session before the live session starts.
-        audio:
-          allOf:
-            - $ref: '#/components/schemas/VoiceAudioConfig'
-          description: |-
-            The audio stack configuration (input/output format, voice, turn detection, noise reduction, transcription),
-            following the OpenAI Realtime session schema that Voice Live implements and extends. Authored here as the
-            control-plane defaults; a client may override the overridable fields per session at connect time.
-        output_modalities:
-          type: array
-          items:
-            $ref: '#/components/schemas/VoiceOutputModality'
-          description: |-
-            The output modalities the agent produces. Defaults to `["audio"]`. Voice Live adds `animation`/`avatar`
-            when an avatar is configured.
-        avatar:
-          allOf:
-            - $ref: '#/components/schemas/VoiceAvatarConfig'
-          description: Optional avatar configuration (a Voice Live extension). Authored here as a control-plane default; overridable per session.
-        tools:
-          type: array
-          items:
-            $ref: '#/components/schemas/VoiceAgentTool'
-          description: |-
-            The tools the agent may use. A voice-first prompt agent supports exactly four tool kinds (see `VoiceAgentTool`):
-            native `function` (executed by the client), `mcp`, `system` (Voice Live built-in control, e.g. end-call),
-            and `toolbox`. Unlike prompt/hosted agents, server-side tools (e.g. `web_search`, `azure_ai_search`,
-            `openapi`) are not declared directly on a voice agent; they are packaged in a toolbox and executed by Voice
-            Live via the toolbox MCP endpoint.
-        structured_inputs:
-          type: object
-          unevaluatedProperties:
-            $ref: '#/components/schemas/StructuredInputDefinition'
-          description: Set of structured inputs that participate in prompt template substitution, rendered per session before the live session starts.
-        store:
-          type: boolean
-          description: |-
-            Whether conversations with this agent are persisted. A single, all-or-nothing persistence switch that defaults to
-            `false` (privacy-safe: off by default). When `true`, Foundry persists the full conversation — the transcript/event
-            timeline and raw audio. When `false`, nothing is persisted and no conversation is surfaced. There is no separate
-            audio-logging control; audio is persisted only as part of this switch. Latency/performance telemetry (e.g.
-            time-to-first-audio, inter-token latency, interruption) is observability-only (customer trace / App Insights) and
-            is not part of the persisted conversation content.
-          default: false
-      description: |-
-        The voice-first prompt agent definition. A declarative agent kind whose configuration (model, prompt, audio stack,
-        tools, optional avatar) drives a managed speech-to-speech experience powered by the managed Voice Live backend.
-        The live realtime voice session — a service-terminated WebSocket bridged to Voice Live — is established through a
-        separate realtime connect operation that is not defined in this spec; the realtime session/audio/event wire schema
-        is owned by Voice Live. Like prompt agents, every create/update produces a new immutable version.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     ProtocolConfiguration:
       type: object
       properties:
@@ -77475,9 +77393,9 @@ components:
           description: The blueprint reference for the agent.
         definition:
           allOf:
-            - $ref: '#/components/schemas/PromptVoiceAgentDefinition'
-          description: The voice-first prompt agent definition.
-      description: The request to update a voice-first prompt agent by adding a new version.
+            - $ref: '#/components/schemas/VoiceAgentDefinition'
+          description: The voice agent definition.
+      description: The request to update a voice agent by adding a new version.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -77572,6 +77490,81 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/VersionSelectionRule'
+    VoiceAgentDefinition:
+      type: object
+      required:
+        - kind
+        - model_type
+        - model
+      properties:
+        kind:
+          type: string
+          enum:
+            - voice
+          description: The kind discriminator for a voice agent definition. Always `voice`.
+        rai_config:
+          allOf:
+            - $ref: '#/components/schemas/RaiConfig'
+          description: Configuration for Responsible AI (RAI) content filtering and safety features.
+        model_type:
+          allOf:
+            - $ref: '#/components/schemas/VoiceModelType'
+          description: How the model backing this agent is served. Together with `model`, this selects the model up front. `managed` uses a service-managed model; `self_deployed` uses the customer's own Foundry deployment. This is independent of the architecture (realtime or cascaded), which the service derives from the selected model.
+        model:
+          type: string
+          description: "The model to use for this agent, paired with `model_type`: the service-managed model name when `model_type` is `managed`, or the customer's Foundry deployment name when `model_type` is `self_deployed`. The model must support realtime or cascaded voice. The service derives the architecture from the selected model."
+        instructions:
+          anyOf:
+            - type: string
+            - type: 'null'
+          description: A system (or developer) message inserted into the model's context. Supports template substitution via `structured_inputs`, rendered per session before the live session starts.
+        audio:
+          allOf:
+            - $ref: '#/components/schemas/VoiceAudioConfig'
+          description: |-
+            The audio configuration, including input and output formats, voice, turn detection, noise reduction, and
+            transcription. These values are session defaults; a client may override supported fields when connecting.
+        output_modalities:
+          type: array
+          items:
+            $ref: '#/components/schemas/VoiceOutputModality'
+          description: |-
+            The output modalities the agent produces. Defaults to `["audio"]`. `animation` and `avatar` are available
+            when an avatar is configured.
+        avatar:
+          allOf:
+            - $ref: '#/components/schemas/VoiceAvatarConfig'
+          description: Optional avatar configuration. These values are session defaults and may be overridden when connecting.
+        tools:
+          type: array
+          items:
+            $ref: '#/components/schemas/VoiceAgentTool'
+          description: |-
+            The tools the voice agent may use. Supported tool kinds are `function` (executed by the client), `mcp`,
+            `system` (service-managed session controls), and `toolbox`. Server-side tools such as `web_search`,
+            `azure_ai_search`, and `openapi` are provided through a toolbox rather than declared directly.
+        structured_inputs:
+          type: object
+          unevaluatedProperties:
+            $ref: '#/components/schemas/StructuredInputDefinition'
+          description: Set of structured inputs that participate in prompt template substitution, rendered per session before the live session starts.
+        store:
+          type: boolean
+          description: |-
+            Whether conversations with this agent are persisted. A single, all-or-nothing persistence switch that defaults to
+            `false` (privacy-safe: off by default). When `true`, Foundry persists the full conversation — the transcript/event
+            timeline and raw audio. When `false`, nothing is persisted and no conversation is surfaced. There is no separate
+            audio-logging control; audio is persisted only as part of this switch. Latency/performance telemetry (e.g.
+            time-to-first-audio, inter-token latency, interruption) is observability-only (customer trace / App Insights) and
+            is not part of the persisted conversation content.
+          default: false
+      description: |-
+        The voice agent definition. Its configuration (model, instructions, audio, tools, and optional avatar) drives a
+        managed speech-to-speech experience. The realtime voice session is established through a separate connect operation
+        that is not defined in this specification. Every create or update produces a new immutable version.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     VoiceAgentObject:
       type: object
       required:
@@ -77627,7 +77620,7 @@ components:
           required:
             - latest
           description: The latest version of the voice agent.
-      description: A voice-first prompt agent. Mirrors `AgentObject`, but its latest version is a `VoiceAgentVersionObject`.
+      description: A voice agent. Mirrors `AgentObject`, but its latest version is a `VoiceAgentVersionObject`.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -77638,10 +77631,9 @@ components:
         - $ref: '#/components/schemas/VoiceSystemTool'
         - $ref: '#/components/schemas/VoiceToolboxTool'
       description: |-
-        A tool usable by a voice-first prompt agent. Exactly four kinds are supported: native `function` (executed by the
-        client) and `mcp` reuse the OpenAI Realtime tool shapes; `system` and `toolbox` are Foundry voice extensions.
-        The generic agent tool set (server-side tools such as `web_search` or `azure_ai_search`) is intentionally not
-        allowed here — package those in a toolbox instead.
+        A tool usable by a voice agent. Supported kinds are native `function` tools (executed by the client), `mcp`,
+        service-managed `system` controls, and `toolbox` references. Server-side tools such as `web_search` and
+        `azure_ai_search` are provided through a toolbox.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -77756,9 +77748,9 @@ components:
           readOnly: true
         definition:
           allOf:
-            - $ref: '#/components/schemas/PromptVoiceAgentDefinition'
-          description: The voice-first prompt agent definition for this version.
-      description: A voice-first prompt agent version. Mirrors `AgentVersionObject`, but its `definition` is always a `PromptVoiceAgentDefinition`.
+            - $ref: '#/components/schemas/VoiceAgentDefinition'
+          description: The voice agent definition for this version.
+      description: A voice agent version. Mirrors `AgentVersionObject`, but its `definition` is always a `VoiceAgentDefinition`.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -77789,9 +77781,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/VoiceAudioOutputConfig'
           description: Output (agent speech) audio configuration.
-      description: |-
-        The audio stack configuration for a voice-first prompt agent, following the OpenAI Realtime session schema (which
-        Voice Live implements and extends). Authored as control-plane defaults; overridable per session at connect time.
+      description: The audio configuration for a voice agent. These values are session defaults and may be overridden when connecting.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -77845,7 +77835,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/VoiceInputTranscription'
           description: Optional asynchronous input-audio transcription configuration.
-      description: Input (microphone) audio configuration for a voice-first prompt agent.
+      description: Input audio configuration for a voice agent.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -77860,7 +77850,7 @@ components:
           anyOf:
             - type: string
             - $ref: '#/components/schemas/AzureVoice'
-          description: The voice. Either an OpenAI Realtime built-in voice name (e.g. 'alloy') or an Azure (Voice Live) neural voice object.
+          description: The voice. Either a built-in voice name, such as `alloy`, or an Azure neural voice object.
         speed:
           type: number
           format: float
@@ -77868,7 +77858,7 @@ components:
           maximum: 1.5
           description: The speaking speed multiplier, from 0.25 to 1.5. Defaults to 1.
           default: 1
-      description: Output (agent speech) audio configuration for a voice-first prompt agent.
+      description: Output audio configuration for a voice agent.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -77881,7 +77871,7 @@ components:
         type:
           allOf:
             - $ref: '#/components/schemas/VoiceAvatarType'
-          description: The avatar type. Values follow the Voice Live wire schema.
+          description: The avatar type.
         character:
           type: string
           description: The avatar character identifier, e.g. 'lisa'.
@@ -77896,9 +77886,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/VoiceAvatarOutputProtocol'
           description: The transport used to deliver the avatar video stream.
-      description: |-
-        Avatar configuration for a voice-first prompt agent. A Voice Live extension (not part of the OpenAI Realtime schema).
-        Authored as a control-plane default; overridable per session.
+      description: Avatar configuration for a voice agent. These values are session defaults and may be overridden when connecting.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -77920,7 +77908,7 @@ components:
           enum:
             - video-avatar
             - photo-avatar
-      description: The avatar type. Values follow the Voice Live wire schema.
+      description: The avatar type.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -77962,7 +77950,7 @@ components:
             - $ref: '#/components/schemas/OpenAI.RealtimeResponseUsage'
           description: Aggregate token usage totals across all responses in this conversation.
       description: |-
-        A persisted voice conversation. The Foundry envelope that owns a voice-first prompt agent's stored
+        A persisted voice conversation. The Foundry envelope that owns a voice agent's stored
         transcript, responses, per-turn metrics, and audio. It is the parent, retention, and delete boundary:
         deleting it cascades to its responses, items, metrics, and audio.
       x-ms-foundry-meta:
@@ -78113,11 +78101,10 @@ components:
           type: string
           description: "For bring-your-own-storage (BYOS) recordings only: a direct path/URL into the customer's own storage, without a SAS token — the customer downloads it using their own storage credentials. Absent for Foundry-managed storage, where the bytes are streamed via the item's `/audio/content` route instead."
       description: |-
-        Metadata for a single conversation item's audio segment. Exposes only safe, playback-relevant facts;
-        internal storage identifiers (file id, container, host, owner, provider) are never surfaced. For
-        bring-your-own-storage (BYOS) the response includes `blob_path` (a direct customer-storage path/URL, no SAS)
-        that the customer downloads with their own credentials; for Foundry-managed storage `blob_path` is absent and
-        the bytes are streamed via the item's `/audio/content` route instead.
+        Metadata for a single conversation item's audio segment. For bring-your-own-storage (BYOS), the response includes
+        `blob_path`, a direct customer-storage path or URL without a SAS token, that the customer accesses with their own
+        credentials. For Foundry-managed storage, `blob_path` is absent and the bytes are streamed through the item's
+        `/audio/content` route.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -78193,8 +78180,8 @@ components:
             - managed
             - self_deployed
       description: |-
-        How the model backing a voice-first prompt agent is served. Orthogonal to the architecture (realtime vs cascaded),
-        which Foundry derives from the selected model.
+        How the model backing a voice agent is served. This is independent of the architecture (realtime or cascaded),
+        which the service derives from the selected model.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -78219,7 +78206,7 @@ components:
             - near_field
             - far_field
             - azure_deep_noise_suppression
-      description: The input audio noise reduction mode. 'near_field'/'far_field' follow the OpenAI Realtime schema; 'azure_deep_noise_suppression' is a Voice Live extension.
+      description: The input audio noise reduction mode.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -78232,7 +78219,7 @@ components:
             - audio
             - animation
             - avatar
-      description: An output modality the agent may produce. 'animation'/'avatar' are Voice Live extensions used when an avatar is configured.
+      description: An output modality the agent may produce. `animation` and `avatar` are used when an avatar is configured.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -78367,8 +78354,8 @@ components:
             - $ref: '#/components/schemas/FoundryTimestamp'
           description: The Unix timestamp (in seconds) for when the response completed.
       description: |-
-        A persisted voice response, following the Voice Live `RealtimeResponse` schema. Represents one model
-        inference turn within a conversation. In list results the `output` projection may be omitted; retrieve the
+        A persisted voice response representing one model inference turn within a conversation. In list results the
+        `output` projection may be omitted; retrieve the
         full response (`GET .../responses/{response_id}`) or the paged response-items route
         (`GET .../responses/{response_id}/items`) for its output items. `created_at`/`completed_at` are Foundry
         durable ordering extensions.
@@ -78411,7 +78398,7 @@ components:
             - cancelled
             - incomplete
             - failed
-      description: The status of a voice response. Follows the Voice Live realtime response status.
+      description: The status of a voice response.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -78427,7 +78414,7 @@ components:
         name:
           type: string
           description: The voice name.
-      description: 'The voice used for a response. Follows the Voice Live realtime voice shape (e.g. `{ "type": "openai", "name": "alloy" }`).'
+      description: 'The voice used for a response, for example `{ "type": "openai", "name": "alloy" }`.'
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -78459,9 +78446,23 @@ components:
             - system
           description: The type of the tool. Always `system`.
         name:
+          allOf:
+            - $ref: '#/components/schemas/VoiceSystemToolName'
+          description: The service-managed control action. Known values are stable; additional values may be added over time.
+        description:
           type: string
-          description: The name of the built-in control action, e.g. `end_conversation`.
-      description: A Voice Live built-in control (system) tool that acts on the live session itself, e.g. ending the call. Executed natively by Voice Live; no customer code or external auth.
+          description: An optional description of the system tool.
+      description: A service-managed control that acts on the active voice session without customer code or external authentication.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceSystemToolName:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - end_conversation
+      description: A service-managed voice-session control action. Known values are stable; additional values may be added over time.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -78483,7 +78484,7 @@ components:
         toolbox_version:
           type: string
           description: The immutable version of the toolbox to attach.
-      description: A reference to a Foundry toolbox (a versioned bundle of tools). Voice Live calls the toolbox MCP endpoint and the Foundry tool server runs the tool. This is how a voice agent uses server-side tools (web search, Azure AI Search, OpenAPI, etc.) that it cannot declare directly.
+      description: A reference to a Foundry toolbox, which is a versioned bundle of tools executed through its MCP endpoint.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview

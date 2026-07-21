@@ -12,10 +12,10 @@ using TypeSpec.Versioning;
 namespace Azure.AI.Projects;
 
 // ============================================================================
-// Voice-first prompt agent definition, configuration, resource, and request
+// Voice agent definition, configuration, resource, and request
 // models. These are split out from the text `/agents` surface so that
 // `/agents` carries only text agent kinds and `/voice_agents` carries only
-// voice-first prompt agents. Shared agent shapes (AgentObject,
+// voice agents. Shared agent shapes (AgentObject,
 // AgentVersionObject, request/response envelopes) are reused from
 // `../agents/models.tsp` via property spreads to avoid drift.
 // ============================================================================
@@ -25,51 +25,46 @@ const PromptVoiceAgentRequiredPreview = #{
 };
 
 @doc("""
-  The voice-first prompt agent definition. A declarative agent kind whose configuration (model, prompt, audio stack,
-  tools, optional avatar) drives a managed speech-to-speech experience powered by the managed Voice Live backend.
-  The live realtime voice session — a service-terminated WebSocket bridged to Voice Live — is established through a
-  separate realtime connect operation that is not defined in this spec; the realtime session/audio/event wire schema
-  is owned by Voice Live. Like prompt agents, every create/update produces a new immutable version.
+  The voice agent definition. Its configuration (model, instructions, audio, tools, and optional avatar) drives a
+  managed speech-to-speech experience. The realtime voice session is established through a separate connect operation
+  that is not defined in this specification. Every create or update produces a new immutable version.
   """)
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
-model PromptVoiceAgentDefinition {
-  @doc("The kind discriminator for a voice-first prompt agent definition. Always `voice`.")
+model VoiceAgentDefinition {
+  @doc("The kind discriminator for a voice agent definition. Always `voice`.")
   kind: "voice";
 
   @doc("Configuration for Responsible AI (RAI) content filtering and safety features.")
   rai_config?: RaiConfig;
 
-  @doc("How the model backing this agent is served. Together with `model`, this selects the model up front. `managed` runs a Voice Live-hosted model; `self_deployed` (BYOM) uses the customer's own Foundry deployment. Orthogonal to the architecture (realtime vs cascaded), which Foundry derives from the selected model.")
+  @doc("How the model backing this agent is served. Together with `model`, this selects the model up front. `managed` uses a service-managed model; `self_deployed` uses the customer's own Foundry deployment. This is independent of the architecture (realtime or cascaded), which the service derives from the selected model.")
   model_type: VoiceModelType;
 
-  @doc("The model to use for this agent, paired with `model_type`: the Voice Live-hosted model name when `model_type` is `managed`, or the customer's Foundry deployment name when `model_type` is `self_deployed`. Must be a realtime- or cascaded-capable model; Foundry derives the architecture (realtime vs cascaded) from it, so there is no architecture field.")
+  @doc("The model to use for this agent, paired with `model_type`: the service-managed model name when `model_type` is `managed`, or the customer's Foundry deployment name when `model_type` is `self_deployed`. The model must support realtime or cascaded voice. The service derives the architecture from the selected model.")
   `model`: string;
 
   @doc("A system (or developer) message inserted into the model's context. Supports template substitution via `structured_inputs`, rendered per session before the live session starts.")
   instructions?: string | null;
 
   @doc("""
-    The audio stack configuration (input/output format, voice, turn detection, noise reduction, transcription),
-    following the OpenAI Realtime session schema that Voice Live implements and extends. Authored here as the
-    control-plane defaults; a client may override the overridable fields per session at connect time.
+    The audio configuration, including input and output formats, voice, turn detection, noise reduction, and
+    transcription. These values are session defaults; a client may override supported fields when connecting.
     """)
   audio?: VoiceAudioConfig;
 
   @doc("""
-    The output modalities the agent produces. Defaults to `["audio"]`. Voice Live adds `animation`/`avatar`
+    The output modalities the agent produces. Defaults to `["audio"]`. `animation` and `avatar` are available
     when an avatar is configured.
     """)
   output_modalities?: VoiceOutputModality[];
 
-  @doc("Optional avatar configuration (a Voice Live extension). Authored here as a control-plane default; overridable per session.")
+  @doc("Optional avatar configuration. These values are session defaults and may be overridden when connecting.")
   avatar?: VoiceAvatarConfig;
 
   @doc("""
-    The tools the agent may use. A voice-first prompt agent supports exactly four tool kinds (see `VoiceAgentTool`):
-    native `function` (executed by the client), `mcp`, `system` (Voice Live built-in control, e.g. end-call),
-    and `toolbox`. Unlike prompt/hosted agents, server-side tools (e.g. `web_search`, `azure_ai_search`,
-    `openapi`) are not declared directly on a voice agent; they are packaged in a toolbox and executed by Voice
-    Live via the toolbox MCP endpoint.
+    The tools the voice agent may use. Supported tool kinds are `function` (executed by the client), `mcp`,
+    `system` (service-managed session controls), and `toolbox`. Server-side tools such as `web_search`,
+    `azure_ai_search`, and `openapi` are provided through a toolbox rather than declared directly.
     """)
   tools?: VoiceAgentTool[];
 
@@ -88,52 +83,63 @@ model PromptVoiceAgentDefinition {
 }
 
 @doc("""
-  How the model backing a voice-first prompt agent is served. Orthogonal to the architecture (realtime vs cascaded),
-  which Foundry derives from the selected model.
+  How the model backing a voice agent is served. This is independent of the architecture (realtime or cascaded),
+  which the service derives from the selected model.
   """)
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
 union VoiceModelType {
   string,
 
-  @doc("Voice Live runs the named model on its own infrastructure, e.g. `gpt-realtime`.")
+  @doc("The service hosts and manages the named model, for example `gpt-realtime`.")
   managed: "managed",
 
-  @doc("Bring your own model (BYOM): Voice Live calls the customer's own Foundry deployment named by `model`.")
+  @doc("The service uses the customer's own Foundry deployment named by `model`.")
   self_deployed: "self_deployed",
 }
 
 @doc("""
-  A tool usable by a voice-first prompt agent. Exactly four kinds are supported: native `function` (executed by the
-  client) and `mcp` reuse the OpenAI Realtime tool shapes; `system` and `toolbox` are Foundry voice extensions.
-  The generic agent tool set (server-side tools such as `web_search` or `azure_ai_search`) is intentionally not
-  allowed here — package those in a toolbox instead.
+  A tool usable by a voice agent. Supported kinds are native `function` tools (executed by the client), `mcp`,
+  service-managed `system` controls, and `toolbox` references. Server-side tools such as `web_search` and
+  `azure_ai_search` are provided through a toolbox.
   """)
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
 union VoiceAgentTool {
   @doc("A native function tool, executed by the client.")
   function: OpenAI.FunctionTool,
 
-  @doc("An MCP tool, executed by Voice Live; the agent resolves auth (e.g. via a Foundry connection).")
+  @doc("An MCP tool executed by the service. The agent resolves authentication, for example through a Foundry connection.")
   mcp: OpenAI.MCPTool,
 
-  @doc("A Voice Live built-in control tool, e.g. end-call.")
+  @doc("A service-managed control that acts on the active voice session.")
   system: VoiceSystemTool,
 
-  @doc("A reference to a Foundry toolbox, executed by Voice Live via the toolbox MCP endpoint.")
+  @doc("A reference to a Foundry toolbox executed through its MCP endpoint.")
   toolbox: VoiceToolboxTool,
 }
 
-@doc("A Voice Live built-in control (system) tool that acts on the live session itself, e.g. ending the call. Executed natively by Voice Live; no customer code or external auth.")
+@doc("A service-managed control that acts on the active voice session without customer code or external authentication.")
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
 model VoiceSystemTool {
   @doc("The type of the tool. Always `system`.")
   type: "system";
 
-  @doc("The name of the built-in control action, e.g. `end_conversation`.")
-  name: string;
+  @doc("The service-managed control action. Known values are stable; additional values may be added over time.")
+  name: VoiceSystemToolName;
+
+  @doc("An optional description of the system tool.")
+  description?: string;
 }
 
-@doc("A reference to a Foundry toolbox (a versioned bundle of tools). Voice Live calls the toolbox MCP endpoint and the Foundry tool server runs the tool. This is how a voice agent uses server-side tools (web search, Azure AI Search, OpenAPI, etc.) that it cannot declare directly.")
+@doc("A service-managed voice-session control action. Known values are stable; additional values may be added over time.")
+@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+union VoiceSystemToolName {
+  string,
+
+  @doc("Ends the active conversation.")
+  end_conversation: "end_conversation",
+}
+
+@doc("A reference to a Foundry toolbox, which is a versioned bundle of tools executed through its MCP endpoint.")
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
 model VoiceToolboxTool {
   @doc("The type of the tool. Always `toolbox`.")
@@ -147,8 +153,7 @@ model VoiceToolboxTool {
 }
 
 @doc("""
-  The audio stack configuration for a voice-first prompt agent, following the OpenAI Realtime session schema (which
-  Voice Live implements and extends). Authored as control-plane defaults; overridable per session at connect time.
+  The audio configuration for a voice agent. These values are session defaults and may be overridden when connecting.
   """)
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
 model VoiceAudioConfig {
@@ -159,7 +164,7 @@ model VoiceAudioConfig {
   output?: VoiceAudioOutputConfig;
 }
 
-@doc("Input (microphone) audio configuration for a voice-first prompt agent.")
+@doc("Input audio configuration for a voice agent.")
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
 model VoiceAudioInputConfig {
   @doc("The input audio format.")
@@ -175,14 +180,14 @@ model VoiceAudioInputConfig {
   transcription?: VoiceInputTranscription;
 }
 
-@doc("Output (agent speech) audio configuration for a voice-first prompt agent.")
+@doc("Output audio configuration for a voice agent.")
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
 model VoiceAudioOutputConfig {
   @doc("The output audio format.")
   format?: VoiceAudioFormat;
 
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "voice is an OpenAI Realtime built-in voice name (bare string) or an Azure Voice Live neural voice object."
-  @doc("The voice. Either an OpenAI Realtime built-in voice name (e.g. 'alloy') or an Azure (Voice Live) neural voice object.")
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "voice is a built-in voice name (bare string) or an Azure neural voice object."
+  @doc("The voice. Either a built-in voice name, such as `alloy`, or an Azure neural voice object.")
   voice?: string | AzureVoice;
 
   @doc("The speaking speed multiplier, from 0.25 to 1.5. Defaults to 1.")
@@ -223,14 +228,14 @@ model VoiceNoiseReduction {
   type: VoiceNoiseReductionType;
 }
 
-@doc("The input audio noise reduction mode. 'near_field'/'far_field' follow the OpenAI Realtime schema; 'azure_deep_noise_suppression' is a Voice Live extension.")
+@doc("The input audio noise reduction mode.")
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
 union VoiceNoiseReductionType {
   string,
   near_field: "near_field",
   far_field: "far_field",
 
-  @doc("Azure Voice Live deep noise suppression (extension).")
+  @doc("Azure deep noise suppression.")
   azure_deep_noise_suppression: "azure_deep_noise_suppression",
 }
 
@@ -303,8 +308,7 @@ model VoiceInputTranscription {
 }
 
 @doc("""
-  An Azure (Voice Live) neural voice with optional prosody. A Voice Live extension to the OpenAI Realtime voice
-  field; OpenAI built-in voices are specified as a bare string instead.
+  An Azure neural voice with optional prosody. Built-in voices are specified as a bare string instead.
   """)
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
 model AzureVoice {
@@ -327,24 +331,23 @@ model AzureVoice {
   locale?: string;
 }
 
-@doc("The Azure (Voice Live) voice kind.")
+@doc("The Azure voice kind.")
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
 union AzureVoiceType {
   string,
-  azure_standard: "azure_standard",
-  azure_custom: "azure_custom",
-  azure_personal: "azure_personal",
-  azure_avatar_voice_sync: "azure_avatar_voice_sync",
-  azure_realtime_native: "azure_realtime_native",
+  azure_standard: "azure-standard",
+  azure_custom: "azure-custom",
+  azure_personal: "azure-personal",
+  avatar_voice_sync: "avatar-voice-sync",
+  azure_realtime_native: "azure-realtime-native",
 }
 
 @doc("""
-  Avatar configuration for a voice-first prompt agent. A Voice Live extension (not part of the OpenAI Realtime schema).
-  Authored as a control-plane default; overridable per session.
+  Avatar configuration for a voice agent. These values are session defaults and may be overridden when connecting.
   """)
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
 model VoiceAvatarConfig {
-  @doc("The avatar type. Values follow the Voice Live wire schema.")
+  @doc("The avatar type.")
   type: VoiceAvatarType;
 
   @doc("The avatar character identifier, e.g. 'lisa'.")
@@ -360,7 +363,7 @@ model VoiceAvatarConfig {
   output_protocol?: VoiceAvatarOutputProtocol;
 }
 
-@doc("The avatar type. Values follow the Voice Live wire schema.")
+@doc("The avatar type.")
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
 union VoiceAvatarType {
   string,
@@ -376,7 +379,7 @@ union VoiceAvatarOutputProtocol {
   websocket: "websocket",
 }
 
-@doc("An output modality the agent may produce. 'animation'/'avatar' are Voice Live extensions used when an avatar is configured.")
+@doc("An output modality the agent may produce. `animation` and `avatar` are used when an avatar is configured.")
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
 union VoiceOutputModality {
   string,
@@ -421,20 +424,20 @@ union VoiceAgentUseCase {
 //
 // The persisted voice agent and its immutable versions mirror the shared
 // AgentObject / AgentVersionObject shapes, but their `definition` is always a
-// PromptVoiceAgentDefinition. Shared fields are reused via OmitProperties so
+// VoiceAgentDefinition. Shared fields are reused via OmitProperties so
 // the voice surface stays in sync with the text surface.
 // ============================================================================
 
-@doc("A voice-first prompt agent version. Mirrors `AgentVersionObject`, but its `definition` is always a `PromptVoiceAgentDefinition`.")
+@doc("A voice agent version. Mirrors `AgentVersionObject`, but its `definition` is always a `VoiceAgentDefinition`.")
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
 model VoiceAgentVersionObject {
   ...OmitProperties<AgentVersionObject, "definition" | "error">;
 
-  @doc("The voice-first prompt agent definition for this version.")
-  definition: PromptVoiceAgentDefinition;
+  @doc("The voice agent definition for this version.")
+  definition: VoiceAgentDefinition;
 }
 
-@doc("A voice-first prompt agent. Mirrors `AgentObject`, but its latest version is a `VoiceAgentVersionObject`.")
+@doc("A voice agent. Mirrors `AgentObject`, but its latest version is a `VoiceAgentVersionObject`.")
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
 model VoiceAgentObject {
   ...OmitProperties<AgentObject, "versions">;
@@ -445,16 +448,16 @@ model VoiceAgentObject {
   };
 }
 
-@doc("The request to create a new version of a voice-first prompt agent.")
+@doc("The request to create a new version of a voice agent.")
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
 model CreateVoiceAgentVersionRequest {
   ...OmitProperties<CreateAgentVersionRequest, "definition">;
 
-  @doc("The voice-first prompt agent definition.")
-  definition: PromptVoiceAgentDefinition;
+  @doc("The voice agent definition.")
+  definition: VoiceAgentDefinition;
 }
 
-@doc("The request to create a voice-first prompt agent.")
+@doc("The request to create a voice agent.")
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
 model CreateVoiceAgentRequest {
   @doc("""
@@ -478,15 +481,15 @@ model CreateVoiceAgentRequest {
   agent_card?: AgentCard;
 }
 
-@doc("The request to update a voice-first prompt agent by adding a new version.")
+@doc("The request to update a voice agent by adding a new version.")
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
 model UpdateVoiceAgentRequest {
   ...OmitProperties<CreateVoiceAgentVersionRequest, "draft">;
 }
 
 @doc("""
-  The inputs for generating a voice-first prompt agent. A few high-level inputs plus a natural-language `goal`
-  are expanded into a full, editable `PromptVoiceAgentDefinition`, which is then created via the standard voice
+  The inputs for generating a voice agent. A few high-level inputs plus a natural-language `goal`
+  are expanded into a full, editable `VoiceAgentDefinition`, which is then created via the standard voice
   agent create path. The generated `instructions` and audio/voice settings are stored as separate fields on the
   resulting agent definition, so the caller can edit or override any of them afterward via normal versioning.
   """)
@@ -496,10 +499,10 @@ model GenerateVoiceAgentRequest {
   @maxLength(63)
   name: string;
 
-  @doc("How the model backing the generated agent is served: `managed` (Voice Live-hosted) or `self_deployed` (BYOM). Carried through to the generated definition, not generated.")
+  @doc("How the model backing the generated agent is served: `managed` (service-managed) or `self_deployed` (the customer's own deployment). Carried through to the generated definition, not generated.")
   model_type: VoiceModelType;
 
-  @doc("The model paired with `model_type`: the Voice Live-hosted model name when `managed`, or the customer's Foundry deployment name when `self_deployed`. Carried through, not generated.")
+  @doc("The model paired with `model_type`: the service-managed model name when `managed`, or the customer's Foundry deployment name when `self_deployed`. Carried through, not generated.")
   `model`: string;
 
   @doc("The persona/tone to steer generation.")

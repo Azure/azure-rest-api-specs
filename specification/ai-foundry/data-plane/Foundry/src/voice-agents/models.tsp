@@ -11,14 +11,9 @@ namespace Azure.AI.Projects;
 // ============================================================================
 // Persisted voice conversation resources.
 //
-// These models describe the durable, read-only projection of a voice-first
-// prompt agent's conversation. They follow the Azure Voice Live 2026-04-10
-// realtime schema (conversation / response / item / usage), NOT the OpenAI
-// Responses/Conversations resources. Only fields that are safe and meaningful
-// for a persisted customer contract are exposed; internal storage identifiers
-// (file ids, containers, hosts, owners, providers) are never surfaced, and raw
-// audio bytes are never inlined — the dedicated item/recording audio routes
-// stream the bytes.
+// These models describe the durable, read-only projection of a voice agent's
+// conversation using conversation, response, item, and usage resources. Raw
+// audio bytes are streamed through the dedicated item and recording routes.
 // ============================================================================
 
 @doc("The lifecycle status of a persisted voice conversation.")
@@ -34,7 +29,7 @@ union VoiceConversationStatus {
 }
 
 @doc("""
-  A persisted voice conversation. The Foundry envelope that owns a voice-first prompt agent's stored
+  A persisted voice conversation. The Foundry envelope that owns a voice agent's stored
   transcript, responses, per-turn metrics, and audio. It is the parent, retention, and delete boundary:
   deleting it cascades to its responses, items, metrics, and audio.
   """)
@@ -76,7 +71,7 @@ model VoiceDeletedConversation {
 }
 
 // ---------------------------------------------------------------------------
-// Response (Voice Live RealtimeResponse)
+// Voice response
 // ---------------------------------------------------------------------------
 //
 // VoiceResponse cannot `extends OpenAI.RealtimeResponse`: overriding `audio` to the Foundry
@@ -91,7 +86,7 @@ model VoiceDeletedConversation {
 // available in this program via ./src/openai/responses/main.tsp -> @azure-tools/openai-typespec's
 // realtime models.tsp. See VoiceResponse.usage below.
 
-@doc("The status of a voice response. Follows the Voice Live realtime response status.")
+@doc("The status of a voice response.")
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
 union VoiceResponseStatus {
   string,
@@ -102,7 +97,7 @@ union VoiceResponseStatus {
   failed: "failed",
 }
 
-@doc("The voice used for a response. Follows the Voice Live realtime voice shape (e.g. `{ \"type\": \"openai\", \"name\": \"alloy\" }`).")
+@doc("The voice used for a response, for example `{ \"type\": \"openai\", \"name\": \"alloy\" }`.")
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
 model VoiceResponseVoice {
   @doc("The voice kind, e.g. `openai` or an Azure voice type.")
@@ -130,8 +125,8 @@ model VoiceResponseAudio {
 }
 
 @doc("""
-  A persisted voice response, following the Voice Live `RealtimeResponse` schema. Represents one model
-  inference turn within a conversation. In list results the `output` projection may be omitted; retrieve the
+  A persisted voice response representing one model inference turn within a conversation. In list results the
+  `output` projection may be omitted; retrieve the
   full response (`GET .../responses/{response_id}`) or the paged response-items route
   (`GET .../responses/{response_id}/items`) for its output items. `created_at`/`completed_at` are Foundry
   durable ordering extensions.
@@ -169,7 +164,7 @@ model VoiceResponse {
   @doc("The sampling temperature used for the response.")
   temperature?: float32;
 
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Voice Live represents this as an integer token count or the literal string 'inf'."
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "The contract represents this as an integer token count or the literal string 'inf'."
   @doc("The maximum number of output tokens allowed for the response; an integer or the literal `inf`.")
   max_output_tokens?: int32 | "inf";
 
@@ -337,11 +332,10 @@ union VoiceConversationItem {
 // ---------------------------------------------------------------------------
 
 @doc("""
-  Metadata for a single conversation item's audio segment. Exposes only safe, playback-relevant facts;
-  internal storage identifiers (file id, container, host, owner, provider) are never surfaced. For
-  bring-your-own-storage (BYOS) the response includes `blob_path` (a direct customer-storage path/URL, no SAS)
-  that the customer downloads with their own credentials; for Foundry-managed storage `blob_path` is absent and
-  the bytes are streamed via the item's `/audio/content` route instead.
+  Metadata for a single conversation item's audio segment. For bring-your-own-storage (BYOS), the response includes
+  `blob_path`, a direct customer-storage path or URL without a SAS token, that the customer accesses with their own
+  credentials. For Foundry-managed storage, `blob_path` is absent and the bytes are streamed through the item's
+  `/audio/content` route.
   """)
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
 model VoiceItemAudioResponse {
