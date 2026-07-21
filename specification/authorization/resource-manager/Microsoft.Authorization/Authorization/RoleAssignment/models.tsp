@@ -139,3 +139,45 @@ model RoleAssignmentFilter {
    */
   principalId?: string;
 }
+
+/**
+ * The principal type of the assigned principal ID.
+ */
+union PrincipalType {
+  string,
+
+  /**
+   * User
+   */
+  User: "User",
+
+  /**
+   * Group
+   */
+  Group: "Group",
+
+  /**
+   * ServicePrincipal
+   */
+  ServicePrincipal: "ServicePrincipal",
+
+  /**
+   * ForeignGroup
+   */
+  ForeignGroup: "ForeignGroup",
+
+  /**
+   * Device
+   */
+  Device: "Device",
+
+  /**
+   * AgentUser (agentic identity derived from a User).
+   */
+  AgentUser: "AgentUser",
+
+  /**
+   * AgentServicePrincipal (agentic identity derived from a ServicePrincipal).
+   */
+  AgentServicePrincipal: "AgentServicePrincipal",
+}
