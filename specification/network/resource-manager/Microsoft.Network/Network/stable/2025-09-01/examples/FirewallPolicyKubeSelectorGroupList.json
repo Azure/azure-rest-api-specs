@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "api-version": "2025-09-01",
+    "firewallPolicyName": "firewallPolicy",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "kubeSelectorGroup1",
+            "etag": "W/\"72090554-7e3b-43f2-80ad-99a9020dcb11\"",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy/kubeSelectorGroups/kubeSelectorGroup1",
+            "properties": {
+              "podSelector": {
+                "matchLabels": {
+                  "app": "web",
+                  "env": "production"
+                },
+                "matchExpressions": [
+                  {
+                    "key": "tier",
+                    "operator": "In",
+                    "values": [
+                      "frontend",
+                      "backend"
+                    ]
+                  }
+                ]
+              },
+              "namespaceSelector": {
+                "matchLabels": {
+                  "kubernetes.io/metadata.name": "production"
+                }
+              },
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "FirewallPolicyKubeSelectorGroups_List",
+  "title": "List all FirewallPolicyKubeSelectorGroups for a given FirewallPolicy"
+}

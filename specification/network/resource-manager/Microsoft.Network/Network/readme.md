@@ -123,6 +123,32 @@ suppressions:
     reason: Not a standard azure resource.
     where:
       - $.definitions.GetServiceGatewayServicesResult
+  - code: ProvisioningStateMustBeReadOnly
+    from: firewallPolicy.json
+    reason: >-
+      KSG provisioningState is emitted with readOnly as a sibling of $ref. This is valid for
+      AutoRest/ARM, but the linter does not resolve this pattern reliably.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/kubeSelectorGroups/{kubeSelectorGroupName}"].get.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/kubeSelectorGroups/{kubeSelectorGroupName}"].put.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/kubeSelectorGroups/{kubeSelectorGroupName}"].put.responses["201"].schema
+  - code: AvoidAdditionalProperties
+    from: firewallPolicy.json
+    reason: >-
+      KubeLabelSelector.matchLabels intentionally represents an open-ended Kubernetes label map
+      (string-to-string dictionary) and therefore requires additionalProperties.
+    where:
+      - $.definitions.KubeLabelSelector.properties.matchLabels
+  - code: ResourceNameRestriction
+    from: firewallPolicy.json
+    reason: >-
+      firewallPolicyName is the name parameter of the parent FirewallPolicy resource, inherited by
+      the KubeSelectorGroup child path via @parentResource. The child does not define or own the
+      parent's name parameter, so the naming pattern restriction is governed by the FirewallPolicy
+      resource and is not applicable on the child path.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/kubeSelectorGroups"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/kubeSelectorGroups/{kubeSelectorGroupName}"]
 directive:
   - from: specification/common-types/resource-management/v6/types.json
     where: "$.definitions.ProxyResource"

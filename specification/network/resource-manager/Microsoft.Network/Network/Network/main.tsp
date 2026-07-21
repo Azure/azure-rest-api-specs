@@ -40,6 +40,7 @@ import "./ExpressRoutePort.tsp";
 import "./ExpressRoutePortAuthorization.tsp";
 import "./FirewallPolicy.tsp";
 import "./FirewallPolicyRuleCollectionGroup.tsp";
+import "./FirewallPolicyKubeSelectorGroup.tsp";
 import "./SignaturesOverrides.tsp";
 import "./FirewallPolicyDraft.tsp";
 import "./FirewallPolicyRuleCollectionGroupDraft.tsp";
