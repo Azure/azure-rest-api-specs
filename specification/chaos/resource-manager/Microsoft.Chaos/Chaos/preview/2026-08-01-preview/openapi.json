@@ -7118,6 +7118,17 @@
             "id"
           ]
         },
+        "excludedResources": {
+          "type": "array",
+          "description": "Resources that matched the scenario's target resource types but were excluded\nfrom fault injection by the configuration's resource-targeting filters\n(for example zone, location, or explicit exclusions). These resources will not be impacted by the run.",
+          "items": {
+            "$ref": "#/definitions/ScenarioRunResource"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "id"
+          ]
+        },
         "errors": {
           "type": "array",
           "description": "System or infrastructure errors encountered during the scenario run.",
@@ -7731,6 +7742,28 @@
           "format": "date-time",
           "description": "The scenario validation UTC end time.",
           "readOnly": true
+        },
+        "resources": {
+          "type": "array",
+          "description": "Resources that matched the scenario's target resource types and will be impacted\nby the run, resolved after applying the configuration's resource-targeting filters.",
+          "items": {
+            "$ref": "#/definitions/ScenarioRunResource"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "id"
+          ]
+        },
+        "excludedResources": {
+          "type": "array",
+          "description": "Resources that matched the scenario's target resource types but were excluded\nfrom fault injection by the configuration's resource-targeting filters\n(for example zone, location, or explicit exclusions). These resources will not be impacted.",
+          "items": {
+            "$ref": "#/definitions/ScenarioRunResource"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "id"
+          ]
         },
         "errors": {
           "type": "array",
