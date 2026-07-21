@@ -28,16 +28,8 @@ model ExpressRouteLag extends Common.Resource {
   /** ExpressRouteLag properties. */
   properties?: ExpressRouteLagPropertiesFormat;
 
-  /** The unique identifier of the resource. */
   @visibility(Lifecycle.Read)
-  id: string;
-
-  /** The type of the resource. */
-  @visibility(Lifecycle.Read)
-  type: string;
-
-  /** The name of the resource. */
-  @visibility(Lifecycle.Read)
+  @path
   @key("expressRouteLagName")
   @minLength(1)
   @maxLength(80)
@@ -154,7 +146,7 @@ interface ExpressRouteLags {
   @tag("ExpressRouteLags")
   @autoRoute
   @patch(#{ implicitOptionality: false })
-  updateTagsOrIdentity is ArmCustomPatchSync<
+  update is ArmCustomPatchSync<
     ExpressRouteLag,
     PatchModel = ExpressRouteLagUpdateTagsOrIdentityRequest,
     Error = CloudError
@@ -285,7 +277,7 @@ interface ExpressRouteLags {
   "Parameters supplied to the create ExpressRouteLag operation."
 );
 @@doc(
-  ExpressRouteLags.updateTagsOrIdentity::parameters.properties,
+  ExpressRouteLags.update::parameters.properties,
   "Parameters supplied to update ExpressRouteLag resource tags or identity."
 );
 @@doc(

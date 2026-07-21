@@ -3766,7 +3766,7 @@
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "operationId": "ExpressRouteLags_UpdateTagsOrIdentity",
+        "operationId": "ExpressRouteLags_Update",
         "tags": [
           "ExpressRouteLags"
         ],
@@ -6717,24 +6717,6 @@
           "description": "ExpressRouteLag properties.",
           "x-ms-client-flatten": true
         },
-        "id": {
-          "type": "string",
-          "description": "The unique identifier of the resource.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of the resource.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of ExpressRouteLag.",
-          "minLength": 1,
-          "maxLength": 80,
-          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$",
-          "readOnly": true
-        },
         "etag": {
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated.",
@@ -6745,11 +6727,6 @@
           "description": "The identity of ExpressRouteLag, if configured."
         }
       },
-      "required": [
-        "id",
-        "type",
-        "name"
-      ],
       "allOf": [
         {
           "$ref": "./common.json#/definitions/Common.Resource"
