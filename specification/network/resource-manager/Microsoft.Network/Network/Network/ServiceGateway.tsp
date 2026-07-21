@@ -52,6 +52,13 @@ model ServiceGateway extends SecurityPerimeterTrackedResource {
   zones?: string[];
 }
 
+/** Status-only success response for synchronous service gateway update actions. */
+model ServiceGatewayActionOkResponse {
+  /** HTTP status code for successful request processing. */
+  @statusCode
+  statusCode: 200;
+}
+
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.serviceGateway)
 @armResourceOperations
@@ -107,12 +114,10 @@ interface ServiceGateways {
    *
    * For address-level partial updates, if no services are provided, the existing services will be considered for deletion.
    */
-  updateAddressLocations is ArmResourceActionAsync<
+  updateAddressLocations is ArmResourceActionSync<
     ServiceGateway,
     ServiceGatewayUpdateAddressLocationsRequest,
-    NoContentResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
-      Azure.Core.Foundations.RetryAfterHeader,
+    ServiceGatewayActionOkResponse,
     Error = CloudError
   >;
 
@@ -123,12 +128,10 @@ interface ServiceGateways {
    * Full update replaces all existing services with the new list provided in the request.
    * Partial update modifies only the specified services.
    */
-  updateServices is ArmResourceActionAsync<
+  updateServices is ArmResourceActionSync<
     ServiceGateway,
     ServiceGatewayUpdateServicesRequest,
-    NoContentResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
-      Azure.Core.Foundations.RetryAfterHeader,
+    ServiceGatewayActionOkResponse,
     Error = CloudError
   >;
 
@@ -171,11 +174,11 @@ interface ServiceGateways {
 );
 @@doc(
   ServiceGateways.updateAddressLocations::parameters.body,
-  "Parameters supplied to the create or updates address locations in service gateway operation."
+  "Parameters supplied to create or update address locations in service gateway operation."
 );
 @@doc(
   ServiceGateways.updateServices::parameters.body,
-  "Parameters supplied to the create or updates services in service gateway operation."
+  "Parameters supplied to create or update services in service gateway operation."
 );
 @@clientName(ServiceGateways.createOrUpdate::parameters.resource, "parameters");
 @@clientName(ServiceGateways.updateTags::parameters.properties, "parameters");
