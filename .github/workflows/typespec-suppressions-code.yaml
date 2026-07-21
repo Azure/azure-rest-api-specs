@@ -1,0 +1,95 @@
+name: "TypeSpec Suppressions - Analyze Code"
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - edited
+
+permissions:
+  contents: read
+
+jobs:
+  typespec-suppressions:
+    name: "TypeSpec Suppressions - Analyze Code"
+    runs-on: ubuntu-24.04
+
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+
+      - name: Setup Node and install deps
+        uses: ./.github/actions/setup-node-install-deps
+
+      - name: Get impacted TypeSpec folders
+        shell: pwsh
+        run: |
+          $ignoreCoreFiles = -not (@('main', 'RPSaaSMaster') -contains $Env:GITHUB_BASE_REF)
+          $typespecFolders, $checkedAll = & "./eng/scripts/Get-TypeSpec-Folders.ps1" `
+            -BaseCommitish:"${{ github.event.pull_request.base.sha }}" `
+            -HeadCommitish:"HEAD" `
+            -IgnoreCoreFiles:$ignoreCoreFiles
+
+          $typespecFolders | Set-Content -Path typespec-folders.txt
+
+          if ($checkedAll) {
+            Write-Host "Checking all TypeSpec folders because core files changed."
+          }
+
+          Write-Host "Found $($typespecFolders.Count) impacted TypeSpec folders."
+          foreach ($typespecFolder in $typespecFolders) {
+            Write-Host "  $typespecFolder"
+          }
+
+      - name: Run TypeSpec suppressions analysis
+        shell: bash
+        run: |
+          if [[ ! -s typespec-folders.txt ]]; then
+            {
+              echo "# TypeSpec Suppressions"
+              echo
+              echo "No impacted TypeSpec folders were found."
+            } > "$GITHUB_STEP_SUMMARY"
+            printf '%s\n' \
+              '{' \
+              '  "repoRoot": "'"$GITHUB_WORKSPACE"'",' \
+              '  "baseRevision": "'"${{ github.event.pull_request.base.sha }}"'",' \
+              '  "headRevision": "HEAD",' \
+              '  "specPaths": [],' \
+              '  "requiresApproval": false,' \
+              '  "counts": {' \
+              '    "specs": 0,' \
+              '    "base": 0,' \
+              '    "head": 0,' \
+              '    "new": 0,' \
+              '    "removed": 0,' \
+              '    "changed": 0,' \
+              '    "unchanged": 0' \
+              '  },' \
+              '  "specs": []' \
+              '}' > "typespec-suppressions-report.json"
+            exit 0
+          fi
+
+          mapfile -t spec_folders < typespec-folders.txt
+
+          npm exec --no -- typespec-suppressions \
+            --base "${{ github.event.pull_request.base.sha }}" \
+            --head HEAD \
+            --json-output "typespec-suppressions-report.json" \
+            --markdown-output "$GITHUB_STEP_SUMMARY" \
+            --check-rules-file "eng/tools/typespec-suppressions/check-rules.json" \
+            --github-annotations \
+            "${spec_folders[@]}"
+
+      - name: Upload report artifact
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: typespec-suppressions-report
+          path: typespec-suppressions-report.json
+          if-no-files-found: ignore

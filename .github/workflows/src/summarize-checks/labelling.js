@@ -50,6 +50,9 @@ export const ImpactAssessmentSchema = z.object({
   resourceManagerRequired: z.boolean().describe("Whether a resource manager review is required."),
   dataPlaneRequired: z.boolean().describe("Whether a data plane review is required."),
   suppressionReviewRequired: z.boolean().describe("Whether a suppression review is required."),
+  typeSpecSuppressionReviewRequired: z
+    .boolean()
+    .describe("Whether a TypeSpec suppression review is required."),
   isNewApiVersion: z.boolean().describe("Whether this PR introduces a new API version."),
   rpaasRpNotInPrivateRepo: z
     .boolean()
@@ -497,6 +500,13 @@ export function processImpactAssessment(labelContext, impactAssessment) {
   suppressionReviewRequiredLabel.shouldBePresent =
     impactAssessment.suppressionReviewRequired || false;
 
+  const typeSpecSuppressionReviewRequiredLabel = new Label(
+    "TypeSpecSuppressionReviewRequired",
+    labelContext.present,
+  );
+  typeSpecSuppressionReviewRequiredLabel.shouldBePresent =
+    impactAssessment.typeSpecSuppressionReviewRequired || false;
+
   const rpassReviewRequiredLabel = new Label("RPaaS", labelContext.present);
   rpassReviewRequiredLabel.shouldBePresent = impactAssessment.rpaasChange || false;
 
@@ -555,6 +565,10 @@ export function processImpactAssessment(labelContext, impactAssessment) {
   armReviewLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
   typeSpecLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
   suppressionReviewRequiredLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
+  typeSpecSuppressionReviewRequiredLabel.applyStateChange(
+    labelContext.toAdd,
+    labelContext.toRemove,
+  );
   rpassReviewRequiredLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
   newRPNamespaceLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
   ciNewRPNamespaceWithoutRpaaSLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
@@ -1012,8 +1026,26 @@ const rulesPri1Suppressions = [
     anyPrerequisiteLabels: ["SuppressionReviewRequired"],
     anyRequiredLabels: ["Approved-Suppression"],
     troubleshootingGuide:
-      `The suppressions added to the AutoRest config files (README.mds) require review. ${diagramTsg(1, true)}, ` +
-      `or to step 3, depending on the kind of suppression you did.`,
+      `This PR introduced suppressions that require review. Inspect the suppression details surfaced by automation and ` +
+      `ask the appropriate reviewer to apply the <code>Approved-Suppression</code> label. ${diagramTsg(1, true)}.`,
+  },
+];
+
+/** @type {RequiredLabelRule[]} */
+const rulesPri1TypeSpecSuppressions = [
+  // Gates on the dedicated TypeSpec suppression category, independent of the
+  // autorest/README `SuppressionReviewRequired` rule above. This rule is always
+  // active but only takes effect when the `TypeSpecSuppressionReviewRequired`
+  // label is present, which is currently never applied (gating is disabled in
+  // the summarize-impact `processTypeSpecSuppression`). It becomes effective
+  // once TypeSpec suppression gating is enabled there.
+  {
+    precedence: 1,
+    anyPrerequisiteLabels: ["TypeSpecSuppressionReviewRequired"],
+    anyRequiredLabels: ["Approved-TypeSpecSuppression"],
+    troubleshootingGuide:
+      `This PR introduced TypeSpec suppressions that require review. Inspect the suppression details surfaced by automation and ` +
+      `ask the appropriate reviewer to apply the <code>Approved-TypeSpecSuppression</code> label. ${diagramTsg(1, true)}.`,
   },
 ];
 
@@ -1182,6 +1214,7 @@ export const requiredLabelsRules = rulesPri0dataPlane
   .concat(rulesPri0ArmRev)
   .concat(rulesPri1ArmRev)
   .concat(rulesPri1Suppressions)
+  .concat(rulesPri1TypeSpecSuppressions)
   .concat(rulesPri1Namespace)
   .concat(rulesPri2Sdk)
   .concat(rulesPri2LegacySdk)

@@ -1,0 +1,28 @@
+name: TypeSpec Suppressions - Test
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    paths:
+      - package-lock.json
+      - package.json
+      - tsconfig.json
+      - .github/workflows/_reusable-eng-tools-test.yaml
+      - .github/workflows/typespec-suppressions-code.yaml
+      - .github/workflows/typespec-suppressions-test.yaml
+      - eng/tools/package.json
+      - eng/tools/tsconfig.json
+      - eng/tools/typespec-suppressions/**
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  typespec-suppressions:
+    uses: ./.github/workflows/_reusable-eng-tools-test.yaml
+    with:
+      package: typespec-suppressions
+      lint: false

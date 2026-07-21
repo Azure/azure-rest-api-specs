@@ -41,6 +41,7 @@ describe("Impact Detection - default fixture", () => {
       },
       expectedImpact: {
         suppressionReviewRequired: false,
+        typeSpecSuppressionReviewRequired: false,
         rpaasChange: false,
         newRP: false,
         rpaasRPMissing: false,
@@ -64,6 +65,31 @@ describe("Impact Detection - default fixture", () => {
       },
       expectedImpact: {
         suppressionReviewRequired: false,
+        typeSpecSuppressionReviewRequired: false,
+        rpaasChange: false,
+        newRP: false,
+        rpaasRPMissing: false,
+        rpaasRpNotInPrivateRepo: false,
+        resourceManagerRequired: false,
+        dataPlaneRequired: false,
+        typeSpecChanged: true,
+        isNewApiVersion: false,
+        isDraft: false,
+        targetBranch: "main",
+      },
+    },
+    {
+      description: "Should report but not gate suppression review by default (empty check-rules)",
+      changedFileDetails: {
+        additions: [],
+        modifications: ["specification/contososuppressiondemo/Contoso.SuppressionDemo/main.tsp"],
+        deletions: [],
+        renames: [],
+        total: 1,
+      },
+      expectedImpact: {
+        suppressionReviewRequired: false,
+        typeSpecSuppressionReviewRequired: false,
         rpaasChange: false,
         newRP: false,
         rpaasRPMissing: false,
@@ -87,6 +113,7 @@ describe("Impact Detection - default fixture", () => {
       },
       expectedImpact: {
         suppressionReviewRequired: true,
+        typeSpecSuppressionReviewRequired: false,
         rpaasChange: true,
         newRP: false,
         rpaasRPMissing: false,
@@ -112,6 +139,7 @@ describe("Impact Detection - default fixture", () => {
       },
       expectedImpact: {
         suppressionReviewRequired: false,
+        typeSpecSuppressionReviewRequired: false,
         rpaasChange: false,
         newRP: false,
         rpaasRPMissing: false,
@@ -138,6 +166,7 @@ describe("Impact Detection - default fixture", () => {
       },
       expectedImpact: {
         suppressionReviewRequired: true,
+        typeSpecSuppressionReviewRequired: false,
         rpaasChange: true,
         newRP: true,
         rpaasRPMissing: false,
@@ -164,6 +193,7 @@ describe("Impact Detection - default fixture", () => {
       },
       expectedImpact: {
         suppressionReviewRequired: true,
+        typeSpecSuppressionReviewRequired: false,
         rpaasChange: false,
         newRP: true,
         rpaasRPMissing: true,

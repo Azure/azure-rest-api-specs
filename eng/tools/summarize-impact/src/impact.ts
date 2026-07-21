@@ -1,5 +1,9 @@
 #!/usr/bin/env node
 
+import {
+  analyzeTypeSpecSuppressionsFromDirectories,
+  loadCheckRulesFile,
+} from "@azure-tools/typespec-suppressions";
 import { existsSync, readdirSync, readFileSync, statSync } from "fs";
 import { glob } from "glob";
 import { dirname, join, resolve } from "path";
@@ -106,6 +110,11 @@ export async function evaluateImpact(
   // as a label
   const suppressionRequired = await processSuppression(context, labelContext);
 
+  // Evaluated as its own category, independent of the autorest/README
+  // suppression flow above. Gating is currently disabled (see
+  // processTypeSpecSuppression), so this is always false today.
+  const typeSpecSuppressionRequired = await processTypeSpecSuppression(context, labelContext);
+
   // needs to examine "after" context to understand if a readme that was changed is RPaaS or not
   const { rpaasLabelShouldBePresent } = await processRPaaS(context, labelContext);
 
@@ -142,6 +151,7 @@ export async function evaluateImpact(
 
   return {
     suppressionReviewRequired: suppressionRequired,
+    typeSpecSuppressionReviewRequired: typeSpecSuppressionRequired,
     rpaasChange: rpaasLabelShouldBePresent,
     newRP: newRPNamespaceLabelShouldBePresent,
     rpaasRPMissing: ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent,
@@ -458,6 +468,119 @@ async function processSuppression(context: PRContext, labelContext: LabelContext
   console.log("RETURN definition processSuppression");
 
   return suppressionReviewRequiredLabel.shouldBePresent;
+}
+
+/**
+ * Relative path (from the head checkout root, i.e. `context.sourceDirectory`) to
+ * the committed curated check-rules file used to scope TypeSpec suppression
+ * review. Kept in the head checkout so the ruleset is versioned with the specs.
+ */
+const TYPESPEC_CHECK_RULES_RELATIVE_PATH = "eng/tools/typespec-suppressions/check-rules.json";
+
+/**
+ * Evaluates TypeSpec suppressions as their OWN category, independent of the
+ * autorest/README `SuppressionReviewRequired` flow handled by
+ * {@link processSuppression}.
+ *
+ * The curated check-rules file (see {@link TYPESPEC_CHECK_RULES_RELATIVE_PATH})
+ * scopes which suppressions would require approval once gating is enabled.
+ *
+ * NOTE: gating is intentionally OFF during the initial rollout. TypeSpec
+ * suppressions are still surfaced for visibility (via the Analyze Code report
+ * artifact rendered in summarize-checks), but the
+ * `TypeSpecSuppressionReviewRequired` label is forced off here so nothing blocks
+ * merges yet. See the single "gating disabled" line below for how to flip it on.
+ */
+async function processTypeSpecSuppression(
+  context: PRContext,
+  labelContext: LabelContext,
+): Promise<boolean> {
+  console.log("ENTER definition processTypeSpecSuppression");
+
+  const typeSpecSuppressionReviewRequiredLabel = new Label("TypeSpecSuppressionReviewRequired");
+  typeSpecSuppressionReviewRequiredLabel.shouldBePresent = false;
+
+  const changedTypeSpecProjectFolders = getChangedTypeSpecProjectFolders(context);
+  console.log(
+    `Changed TypeSpec project folders for suppression review: ${changedTypeSpecProjectFolders.join(",")}`,
+  );
+
+  if (changedTypeSpecProjectFolders.length > 0) {
+    // Load the curated check-rules file from the head checkout. Missing/invalid
+    // file degrades gracefully to zero rules (nothing requires approval).
+    const checkRules = loadCheckRulesFile(
+      resolve(context.sourceDirectory, TYPESPEC_CHECK_RULES_RELATIVE_PATH),
+    );
+
+    const report = await analyzeTypeSpecSuppressionsFromDirectories({
+      baseRoot: context.targetDirectory,
+      headRoot: context.sourceDirectory,
+      specPaths: changedTypeSpecProjectFolders,
+      checkRules,
+    });
+
+    typeSpecSuppressionReviewRequiredLabel.shouldBePresent =
+      report.checkedSuppressions?.requiresApproval ?? report.requiresApproval;
+  }
+
+  // --- Initial rollout: gating disabled ------------------------------------
+  // Force the TypeSpec suppression label off regardless of the computed value
+  // above. Suppressions remain visible in the summarize-checks report, but do
+  // not block merges yet. To ENABLE gating, delete the single line below so the
+  // computed value from the check-rules file takes effect.
+  typeSpecSuppressionReviewRequiredLabel.shouldBePresent = false;
+
+  typeSpecSuppressionReviewRequiredLabel.applyStateChange(
+    labelContext.toAdd,
+    labelContext.toRemove,
+  );
+  console.log("RETURN definition processTypeSpecSuppression");
+
+  return typeSpecSuppressionReviewRequiredLabel.shouldBePresent;
+}
+
+function getChangedTypeSpecProjectFolders(context: PRContext): string[] {
+  const folders = new Set<string>();
+
+  for (const filePath of context.getChangedFiles()) {
+    if (!filePath.endsWith(".tsp") && !filePath.endsWith("tspconfig.yaml")) {
+      continue;
+    }
+
+    const projectFolder = findTypeSpecProjectFolder(context, filePath);
+    if (projectFolder) {
+      folders.add(projectFolder);
+    }
+  }
+
+  return [...folders].sort((left, right) => left.localeCompare(right));
+}
+
+function findTypeSpecProjectFolder(context: PRContext, filePath: string): string | undefined {
+  let currentDirectory = dirname(filePath);
+
+  while (
+    currentDirectory &&
+    currentDirectory !== "." &&
+    currentDirectory !== "/" &&
+    currentDirectory !== "specification"
+  ) {
+    const hasConfig = [context.sourceDirectory, context.targetDirectory].some((root) =>
+      existsSync(join(root, currentDirectory, "tspconfig.yaml")),
+    );
+
+    if (hasConfig) {
+      return currentDirectory;
+    }
+
+    const parentDirectory = dirname(currentDirectory);
+    if (parentDirectory === currentDirectory) {
+      break;
+    }
+    currentDirectory = parentDirectory;
+  }
+
+  return undefined;
 }
 
 function getSuppressions(readmePath: string) {
