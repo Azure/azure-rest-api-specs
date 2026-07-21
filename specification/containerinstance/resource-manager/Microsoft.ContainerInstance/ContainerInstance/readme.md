@@ -26,7 +26,61 @@ These are the global settings for the ContainerInstance API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2025-09-01
+tag: package-2026-07-01
+```
+
+### Tag: package-2026-07-01
+
+These settings apply only when `--tag=package-2026-07-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-07-01'
+input-file:
+  - ./stable/2026-07-01/containerInstance.json
+directive:
+  - suppress: AvoidAdditionalProperties
+    reason: This stable version preserves the existing service contract carried forward from preview.
+  - suppress: ArmResourcePropertiesBag
+    reason: This stable version preserves the existing service contract carried forward from preview.
+  - suppress: DeleteResponseBodyEmpty
+    reason: This stable version preserves the existing service contract carried forward from preview.
+  - suppress: DeleteResponseCodes
+    reason: This stable version preserves the existing service contract carried forward from preview.
+  - suppress: DescriptionMustNotBeNodeName
+    reason: These enum value descriptions are carried forward from the existing service contract.
+  - suppress: EnumInsteadOfBoolean
+    reason: The boolean shapes in this generated OpenAPI are carried forward from earlier preview and stable API contracts. Changing them to string enums in this stable version would be a breaking contract change.
+  - suppress: GetCollectionOnlyHasValueAndNextLink
+    reason: This stable version preserves the existing service contract carried forward from preview.
+  - suppress: LatestVersionOfCommonTypesMustBeUsed
+    reason: This TypeSpec project intentionally continues to emit ARM common-types v5 for compatibility with the service's existing API shapes. Moving the entire service to v6 is outside the scope of this fix.
+  - suppress: LocationMustHaveXmsMutability
+    reason: This generated swagger preserves legacy custom and proxy resource shapes for backward compatibility. Changing location mutability here would alter the existing contract.
+  - suppress: LroErrorContent
+    reason: The long-running operations in this stable version continue to use the service's existing CloudError shape for backward compatibility.
+  - suppress: OperationsApiResponseSchema
+    reason: This stable version preserves the existing service contract carried forward from preview.
+  - suppress: OperationsApiSchemaUsesCommonTypes
+    reason: This stable version preserves the existing service contract carried forward from preview.
+  - suppress: PatchIdentityProperty
+    reason: This stable version preserves the existing service contract carried forward from preview.
+  - suppress: PostResponseCodes
+    reason: This stable version preserves the existing service contract carried forward from preview.
+  - suppress: ProvisioningStateMustBeReadOnly
+    reason: provisioningState is read-only by design and is carried forward from the existing generated contract.
+  - suppress: RequiredPropertiesMissingInResourceModel
+    reason: This stable version preserves the existing service contract carried forward from preview.
+  - suppress: ResourceNameRestriction
+    reason: These path parameter shapes are carried forward from the existing service contract.
+  - suppress: SchemaDescriptionOrTitle
+    reason: This stable version preserves the existing generated schema shape carried forward from preview.
+  - suppress: SummaryAndDescriptionMustNotBeSame
+    reason: This stable version preserves the existing operation text carried forward from preview.
+  - suppress: UnSupportedPatchProperties
+    reason: This stable version preserves the existing patch contract carried forward from preview.
+  - suppress: XmsIdentifierValidation
+    reason: This stable version preserves the existing generated pageable shape carried forward from preview.
+  - suppress: XmsPageableForListCalls
+    reason: This stable version preserves the existing list contract carried forward from preview.
 ```
 
 ### Tag: package-2025-09-01

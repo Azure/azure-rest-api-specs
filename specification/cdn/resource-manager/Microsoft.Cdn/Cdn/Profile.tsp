@@ -145,12 +145,11 @@ interface Profiles {
   upgrade is ArmResourceActionAsyncBase<
     Profile,
     ProfileUpgradeParameters,
-
-      | ArmResponse<Profile>
-      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Profile>> & {
-          @bodyRoot
-          _: Profile;
-        }),
+    | ArmResponse<Profile>
+    | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Profile>> & {
+        @bodyRoot
+        _: Profile;
+      }),
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Profile>
   >;
 

@@ -4,7 +4,7 @@ parameters:
 options:
   "@azure-tools/typespec-java":
     api-version: "v1"
-    package-dir: "azure-ai-agents"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-agents"
     namespace: "com.azure.ai.agents"
     service-name: "Agents"
     partial-update: true
@@ -34,7 +34,7 @@ options:
       - "specification/ai-foundry/data-plane/Foundry/src/deployments/"
       - "specification/ai-foundry/data-plane/Foundry/src/red-teams/"
       - "specification/ai-foundry/data-plane/Foundry/src/evaluation-rules/"
-      - "specification/ai-foundry/data-plane/Foundry/src/openai-evaluations/"
+      - "specification/ai-foundry/data-plane/Foundry/src/openai/evaluations/"
       - "specification/ai-foundry/data-plane/Foundry/src/evaluation-taxonomies/"
       - "specification/ai-foundry/data-plane/Foundry/src/evaluators/"
       - "specification/ai-foundry/data-plane/Foundry/src/insights/"
@@ -67,6 +67,7 @@ imports:
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"
   disable:
     "@azure-tools/typespec-azure-core/casing-style": "Since we have many names in the form XxxxAIXxxx"
     "@azure-tools/typespec-azure-core/no-string-discriminator": "Use an extensible union instead of a plain string"

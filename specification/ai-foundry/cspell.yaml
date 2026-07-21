@@ -19,6 +19,44 @@ words:
   - logprobs
   - dedup
 overrides:
+  # OpenAI related terms
+  - filename:
+    - '**/specification/ai-foundry/data-plane/Foundry/src/openai/**'
+    - '**/specification/ai-foundry/data-plane/Foundry/openapi3'
+    - '**/specification/ai-foundry/data-plane/Foundry/stable'
+    - '**/specification/ai-foundry/data-plane/Foundry/preview'
+    words:
+      - acemeco
+      - ahrenheit
+      - Buffett
+      - dall
+      - egroup
+      - erun
+      - FDOC
+      - ftjob
+      - GEICO's
+      - granularities
+      - Hsqc
+      - Jwfo
+      - Liegl
+      - mpga
+      - msid
+      - notificiation
+      - okhttp
+      - ouputs
+      - rtpmap
+      - SAVPF
+      - tcptype
+      - tfmt
+      - ufrag
+      - uhhm
+      - Vbqg
+      - vsfb
+      - webrtc
+      - wuzzy
+      - Xxulc
+      - Zdws
+
   # Red-team related terms
   - filename:
     - '**/specification/ai-foundry/data-plane/Foundry/src/red-teams'
@@ -49,6 +87,15 @@ overrides:
   - filename: '**/*client*tsp'
     ignoreRegExpList:
       - '/@@clientName\([^\"]*\"([^\"]*)/g'
+  # Route documentation checker terminology
+  - filename: '**/data-plane/Foundry/.github/skills/foundry-route-doc-check/references/route-documentation-rules.md'
+    words:
+      - reemits
+  # Windows command script built-ins
+  - filename: '**/data-plane/Foundry/compile_all.cmd'
+    words:
+      - popd
+      - pushd
   # Example and output patterns: ignore common false positives in examples and emission outputs
   - filename:
     - '**/specification/ai-foundry/data-plane/Foundry/examples'
@@ -78,3 +125,8 @@ overrides:
     - '**/specification/ai-foundry/data-plane/Foundry/preview'
     words:
       - Likert # Likert scale - common evaluation methodology
+  - filename:
+    - '**/specification/ai-foundry/data-plane/Foundry/.github/skills'
+    words:
+      - fdoc
+      - reemits

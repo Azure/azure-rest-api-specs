@@ -22,8 +22,56 @@ interface AgentInvocations {
       @path agent_name: string;
     },
     {
+      /** The content type of the request body. */
+      @header contentType: "application/json";
+
+      /** The invocation specification request body. */
+      @body spec: Record<unknown>;
+    }
+  >;
+
+  /**
+   * Retrieves the AsyncAPI (JSON) specification for an agent version's event-driven
+   * invocation contract (e.g. the `invocations_ws` WebSocket protocol). AsyncAPI is the
+   * companion to OpenAPI for streaming/bidirectional surfaces that OpenAPI cannot express.
+   * Returns 404 if the agent does not publish an AsyncAPI specification. Publishing is
+   * optional; when published, both JSON and YAML representations are available.
+   */
+  @get
+  @route("/agents/{agent_name}/versions/{agent_version}/invocations/docs/asyncapi.json")
+  getAgentInvocationAsyncApiSpecJson is FoundryDataPlaneOperation<
+    {
+      /** The name of the agent. */
+      @path agent_name: string;
+
+      /** The version of the agent. */
+      @path agent_version: string;
+    },
+    {
       @header contentType: "application/json";
       @body spec: Record<unknown>;
+    }
+  >;
+
+  /**
+   * Retrieves the AsyncAPI (YAML) specification for an agent version's event-driven
+   * invocation contract. Companion to `getAgentInvocationAsyncApiSpecJson`; the path
+   * extension is authoritative for the returned content type (no `Accept` negotiation).
+   * Returns 404 if the agent does not publish an AsyncAPI specification.
+   */
+  @get
+  @route("/agents/{agent_name}/versions/{agent_version}/invocations/docs/asyncapi.yaml")
+  getAgentInvocationAsyncApiSpecYaml is FoundryDataPlaneOperation<
+    {
+      /** The name of the agent. */
+      @path agent_name: string;
+
+      /** The version of the agent. */
+      @path agent_version: string;
+    },
+    {
+      @header contentType: "application/yaml";
+      @body spec: string;
     }
   >;
 

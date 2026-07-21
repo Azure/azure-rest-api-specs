@@ -1,10 +1,9 @@
 import "../sdk-common/error.default.tsp";
 import "../common/servicepatterns.tsp";
-import "../openai-conversations/routes.tsp";
-import "../openai-responses/routes.tsp";
+import "../openai/conversations/routes.tsp";
+import "../openai/responses/routes.tsp";
 import "../toolboxes/models.tsp";
 import "../agents/models.tsp";
-import "../toolboxes/models.tsp";
 import "../skills/models.tsp";
 
 using Azure.ClientGenerator.Core;
@@ -397,10 +396,16 @@ namespace Azure.AI.Projects {
   @@clientName(OpenApiTool.openapi, "OpenApi");
 
   @@clientName(StructuredOutputDefinition.strict, "IsStrict");
-  @@usage(A2APreviewTool, Usage.input | Usage.output);
+  @@clientName(OpenAI.WebSearchApproximateLocation.type, "Kind");
+  @@access(OpenAI.WebSearchApproximateLocation.type, Access.internal);
+  @@clientName(
+    OpenAI.OutputItemMcpApprovalResponseResource.approve,
+    "IsApproved"
+  );
   @@clientName(A2APreviewTool.base_url, "BaseUri");
   @@usage(FabricIQPreviewTool, Usage.input | Usage.output);
   @@clientName(FabricIQPreviewTool.server_url, "ServerUri");
+  @@clientName(WebIQPreviewTool.server_url, "ServerUri");
   @@clientName(
     CaptureStructuredOutputsTool.outputs,
     "OutputDefinition",

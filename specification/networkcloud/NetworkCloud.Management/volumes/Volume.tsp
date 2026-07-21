@@ -11,13 +11,12 @@ namespace Microsoft.NetworkCloud;
 /**
  * The name of the volume.
  */
-model VolumeNameParameter
-  is ResourceNameParameter<
-    Resource = Volume,
-    KeyName = "volumeName",
-    SegmentName = "volumes",
-    NamePattern = "^([a-zA-Z0-9][a-zA-Z0-9-_]{0,62}[a-zA-Z0-9])$"
-  >;
+model VolumeNameParameter is ResourceNameParameter<
+  Resource = Volume,
+  KeyName = "volumeName",
+  SegmentName = "volumes",
+  NamePattern = "^([a-zA-Z0-9][a-zA-Z0-9-_]{0,62}[a-zA-Z0-9])$"
+>;
 
 /**
  * Volume represents storage made available for use by resources running on the cluster.

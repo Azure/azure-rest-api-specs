@@ -4,6 +4,7 @@ import "../agents/models.tsp";
 import "../skills/models.tsp";
 
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.AI.Projects;
 
@@ -78,6 +79,8 @@ alias ToolboxBrowserAutomationPreviewToolType = "browser_automation_preview";
 alias ToolboxReminderPreviewToolType = "reminder_preview";
 alias ToolboxWorkIQPreviewToolType = "work_iq_preview";
 alias ToolboxFabricIQPreviewToolType = "fabric_iq_preview";
+alias ToolboxWebIQPreviewToolType = "web_iq_preview";
+alias ToolboxSearchToolType = "toolbox_search";
 alias ToolboxSearchPreviewToolType = "toolbox_search_preview";
 
 /**
@@ -95,6 +98,8 @@ union ToolboxToolType {
   reminder_preview: ToolboxReminderPreviewToolType,
   work_iq_preview: ToolboxWorkIQPreviewToolType,
   fabric_iq_preview: ToolboxFabricIQPreviewToolType,
+  web_iq_preview: ToolboxWebIQPreviewToolType,
+  toolbox_search: ToolboxSearchToolType,
   toolbox_search_preview: ToolboxSearchPreviewToolType,
 }
 
@@ -117,7 +122,6 @@ model ToolboxTool {
  */
 model CodeInterpreterToolboxTool extends ToolboxTool {
   type: ToolboxCodeInterpreterToolType;
-
   ...ToolFields<OpenAI.CodeInterpreterTool>;
 }
 
@@ -126,11 +130,7 @@ model CodeInterpreterToolboxTool extends ToolboxTool {
  */
 model FileSearchToolboxTool extends ToolboxTool {
   type: ToolboxFileSearchToolType;
-
-  ...WithFieldsOptional<
-    ToolFields<OpenAI.FileSearchTool>,
-    "vector_store_ids"
-  >;
+  ...WithFieldsOptional<ToolFields<OpenAI.FileSearchTool>, "vector_store_ids">;
 }
 
 /**
@@ -138,7 +138,6 @@ model FileSearchToolboxTool extends ToolboxTool {
  */
 model WebSearchToolboxTool extends ToolboxTool {
   type: ToolboxWebSearchToolType;
-
   ...ToolFields<OpenAI.WebSearchTool>;
 }
 
@@ -147,7 +146,6 @@ model WebSearchToolboxTool extends ToolboxTool {
  */
 model MCPToolboxTool extends ToolboxTool {
   type: ToolboxMCPToolType;
-
   ...ToolFields<OpenAI.MCPTool>;
 }
 
@@ -156,7 +154,6 @@ model MCPToolboxTool extends ToolboxTool {
  */
 model AzureAISearchToolboxTool extends ToolboxTool {
   type: ToolboxAzureAISearchToolType;
-
   ...ToolFields<AzureAISearchTool>;
 }
 
@@ -165,31 +162,31 @@ model AzureAISearchToolboxTool extends ToolboxTool {
  */
 model OpenApiToolboxTool extends ToolboxTool {
   type: ToolboxOpenApiToolType;
-
   ...ToolFields<OpenApiTool>;
 }
 
 /**
  * An A2A tool stored in a toolbox.
  */
+@extension("x-ms-foundry-meta", PreviewTool)
 model A2APreviewToolboxTool extends ToolboxTool {
   type: ToolboxA2APreviewToolType;
-
   ...ToolFields<A2APreviewTool>;
 }
 
 /**
  * A browser automation tool stored in a toolbox.
  */
+@extension("x-ms-foundry-meta", PreviewTool)
 model BrowserAutomationPreviewToolboxTool extends ToolboxTool {
   type: ToolboxBrowserAutomationPreviewToolType;
-
   ...ToolFields<BrowserAutomationPreviewTool>;
 }
 
 /**
  * A reminder tool stored in a toolbox.
  */
+@extension("x-ms-foundry-meta", PreviewTool)
 model ReminderPreviewToolboxTool extends ToolboxTool {
   type: ToolboxReminderPreviewToolType;
 }
@@ -197,29 +194,49 @@ model ReminderPreviewToolboxTool extends ToolboxTool {
 /**
  * A WorkIQ tool stored in a toolbox.
  */
+@extension("x-ms-foundry-meta", PreviewTool)
 model WorkIQPreviewToolboxTool extends ToolboxTool {
   type: ToolboxWorkIQPreviewToolType;
-
   ...ToolFields<WorkIQPreviewTool>;
 }
 
 /**
  * A FabricIQ tool stored in a toolbox.
  */
+@extension("x-ms-foundry-meta", PreviewTool)
 model FabricIQPreviewToolboxTool extends ToolboxTool {
   type: ToolboxFabricIQPreviewToolType;
-
   ...ToolFields<FabricIQPreviewTool>;
+}
+
+/**
+ * A WebIQ tool stored in a toolbox.
+ */
+@extension("x-ms-foundry-meta", PreviewTool)
+model WebIQPreviewToolboxTool extends ToolboxTool {
+  type: ToolboxWebIQPreviewToolType;
+  ...ToolFields<WebIQPreviewTool>;
 }
 
 /**
  * A toolbox search tool stored in a toolbox.
  */
+@extension("x-ms-foundry-meta", PreviewTool)
 model ToolboxSearchPreviewToolboxTool extends ToolboxTool {
   /**
    * The type of the tool. Always `toolbox_search_preview`.
    */
   type: ToolboxSearchPreviewToolType;
+}
+
+/**
+ * A toolbox search tool stored in a toolbox.
+ */
+model ToolSearchToolboxTool extends ToolboxTool {
+  /**
+   * The type of the tool. Always `toolbox_search`.
+   */
+  type: ToolboxSearchToolType;
 }
 @doc("Policy configuration for a toolbox, including content safety and other governance settings.")
 model ToolboxPolicies {

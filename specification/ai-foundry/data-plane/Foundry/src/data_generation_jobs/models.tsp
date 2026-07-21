@@ -6,7 +6,9 @@ using TypeSpec.OpenAPI;
 namespace Azure.AI.Projects;
 
 const DataGenerationJobsRequiredPreviews = #{
-  conditional_previews: #[FoundryFeaturesOptInKeys.data_generation_jobs_v1_preview],
+  conditional_previews: #[
+    FoundryFeaturesOptInKeys.data_generation_jobs_v1_preview
+  ],
 };
 
 @doc("The supported data generation job types.")
@@ -78,8 +80,10 @@ model DataGenerationJobResult {
 
 @doc("Data Generation Job resource.")
 @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
-model DataGenerationJob
-  is JobLike<DataGenerationJobResult, DataGenerationJobInputs> {
+model DataGenerationJob is JobLike<
+  DataGenerationJobResult,
+  DataGenerationJobInputs
+> {
   @doc("The timestamp when the job was created, represented in Unix time (seconds since January 1, 1970).")
   @visibility(Lifecycle.Read)
   created_at: FoundryTimestamp;

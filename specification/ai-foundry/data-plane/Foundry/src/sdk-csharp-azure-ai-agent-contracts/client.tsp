@@ -7,8 +7,8 @@ import "../agents-containers/routes.tsp";
 import "../agents-invocations_ws/routes.tsp";
 import "../memory-stores/routes.tsp";
 import "../skills/routes.tsp";
-import "../openai-conversations/routes.tsp";
-import "../openai-responses/routes.tsp";
+import "../openai/conversations/routes.tsp";
+import "../openai/responses/routes.tsp";
 import "../toolboxes/routes.tsp";
 
 using Azure.ClientGenerator.Core;
@@ -264,5 +264,8 @@ namespace Azure.AI.Projects {
 
   @@access(OpenAI.ItemCustomToolCallOutput, Access.public);
   @@usage(OpenAI.ItemCustomToolCallOutput, Usage.input | Usage.output);
-  @@clientName(OpenAI.ItemCustomToolCallOutput, "OutputItemCustomToolCallOutput");
+  @@clientName(
+    OpenAI.ItemCustomToolCallOutput,
+    "OutputItemCustomToolCallOutput"
+  );
 }

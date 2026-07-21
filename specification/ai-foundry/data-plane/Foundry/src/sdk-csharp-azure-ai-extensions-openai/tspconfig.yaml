@@ -2,6 +2,7 @@ parameters:
   "service-dir":
     default: "sdk/ai"
 emit:
+  - "@typespec/openapi3"
 options:
   "@typespec/http-client-csharp":
     emitter-output-dir: "{output-dir}/{service-dir}/{package-name}"
@@ -9,18 +10,24 @@ options:
     api-version: "v1"
     plugins:
       - "../codegen"
-    debug: false
   "@azure-tools/typespec-client-generator-cli":
     additionalDirectories:
       - specification/ai-foundry/data-plane/Foundry/src/agents
       - specification/ai-foundry/data-plane/Foundry/src/common
       - specification/ai-foundry/data-plane/Foundry/src/memory-stores
-      - specification/ai-foundry/data-plane/Foundry/src/openai-conversations
-      - specification/ai-foundry/data-plane/Foundry/src/openai-responses
+      - specification/ai-foundry/data-plane/Foundry/src/openai/conversations
+      - specification/ai-foundry/data-plane/Foundry/src/openai/responses
       - specification/ai-foundry/data-plane/Foundry/src/tools
       - specification/ai-foundry/data-plane/Foundry/src/toolboxes
       - specification/ai-foundry/data-plane/Foundry/src/skills
       - specification/ai-foundry/data-plane/Foundry/src/agents
+  "typespec-extension-exporter":
+    keys: x-ms-foundry-meta
+    language: csharp
+    output-shape: list
+    output-file: Azure.AI.Extensions.OpenAI_experimental.csv
+    emitter-output-dir: "{cwd}/../../codegen/src/" # run npx tsp compile from within `TempTypeSpecFiles` folder
+    namespace: Azure.AI.Extensions.OpenAI
 imports:
   - "@azure-tools/typespec-azure-core"
   - "@azure-tools/typespec-azure-core/experimental"

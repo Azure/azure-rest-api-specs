@@ -59,6 +59,7 @@ interface Agents {
   @tag("Agents")
   createAgentFromCode is FoundryDataPlaneOperation<
     {
+      /** The content type of the request body. */
       @header contentType: "multipart/form-data";
 
       /** The unique name that identifies the agent. Max 63 chars, must start and end with alphanumeric, hyphens allowed in the middle. */
@@ -70,6 +71,7 @@ interface Agents {
       @header("x-ms-code-zip-sha256")
       codeZipSha256: string;
 
+      /** The content multipart request content. */
       @multipartBody content: CreateAgentFromCodeContent;
     },
     AgentObject
@@ -124,12 +126,14 @@ interface Agents {
       @path
       agent_name: string;
 
+      /** The content type of the request body. */
       @header contentType: "multipart/form-data";
 
       /** SHA-256 hex digest of the uploaded code zip. Used for change detection (dedup) and integrity verification. */
       @header("x-ms-code-zip-sha256")
       codeZipSha256: string;
 
+      /** The content multipart request content. */
       @multipartBody content: CreateAgentVersionFromCodeContent;
     },
     AgentObject
@@ -306,7 +310,9 @@ interface Agents {
   @tag("Agent Versions")
   @extension(
     "x-ms-foundry-meta",
-    #{ conditional_previews: #[AgentDefinitionOptInKeys.draft_agents_v1_preview] }
+    #{
+      conditional_previews: #[AgentDefinitionOptInKeys.draft_agents_v1_preview],
+    }
   )
   listAgentVersions is FoundryDataPlaneOperation<
     {
@@ -314,15 +320,19 @@ interface Agents {
       @path agent_name: string;
 
       ...CommonPageQueryParameters;
-
       ...WithConditionalFoundryPreviewHeader<AgentDefinitionOptInKeys.draft_agents_v1_preview>;
 
       /** (Preview) Whether to include draft versions in the listing. The service defaults to `false` if a value is not specified by the caller (only non-draft versions are returned). */
       @extension(
         "x-ms-foundry-meta",
-        #{ conditional_previews: #[AgentDefinitionOptInKeys.draft_agents_v1_preview] }
+        #{
+          conditional_previews: #[
+            AgentDefinitionOptInKeys.draft_agents_v1_preview
+          ],
+        }
       )
-      @query include_drafts?: boolean = false;
+      @query
+      include_drafts?: boolean = false;
     },
     AgentsPagedResult<AgentVersionObject>
   >;
@@ -342,7 +352,9 @@ interface Agents {
       @path
       agent_name: string;
 
+      /** The content type of the request body. */
       @header("Content-Type") contentType: "application/merge-patch+json";
+
       ...PatchAgentRequest;
     },
     AgentObject
@@ -373,12 +385,14 @@ interface Agents {
       @path
       agent_name: string;
 
+      /** The content type of the request body. */
       @header contentType: "multipart/form-data";
 
       /** SHA-256 hex digest of the uploaded code zip. Used for change detection (dedup) and integrity verification. */
       @header("x-ms-code-zip-sha256")
       codeZipSha256: string;
 
+      /** The content multipart request content. */
       @multipartBody content: CreateAgentVersionFromCodeContent;
     },
     AgentVersionObject
@@ -421,6 +435,7 @@ interface Agents {
   @summary("Enable an agent")
   @post
   @route("/agents/{agent_name}:enable")
+  @tag("Agents")
   enableAgent is FoundryDataPlaneOperation<
     {
       /** The name of the agent to enable. */
@@ -437,6 +452,7 @@ interface Agents {
   @summary("Disable an agent")
   @post
   @route("/agents/{agent_name}:disable")
+  @tag("Agents")
   disableAgent is FoundryDataPlaneOperation<
     {
       /** The name of the agent to disable. */
