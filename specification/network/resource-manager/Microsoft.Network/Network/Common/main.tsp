@@ -298,6 +298,19 @@ union LoadBalancerScope {
 }
 
 /**
+ * The load balancer mode. Set to `Advanced` to enable additional capabilities on a Standard SKU load balancer. Advanced mode must be specified at creation and cannot be changed afterward.
+ */
+@added(Versions.v2025_09_01)
+union LoadBalancerMode {
+  string,
+
+  /**
+   * Advanced mode, which enables additional capabilities on a Standard SKU load balancer.
+   */
+  Advanced: "Advanced",
+}
+
+/**
  * If the encrypted VNet allows VM that does not support encryption. This field is for future support, AllowUnencrypted is the only supported value at general availability.
  */
 union VirtualNetworkEncryptionEnforcement {
@@ -2013,6 +2026,12 @@ model FrontendIPConfigurationPropertiesFormat {
    */
   @added(Versions.v2025_07_01)
   ddosSettings?: DdosFrontendIpConfigurationSettings;
+
+  /**
+   * Enables UDP flow tracking for traffic associated with the frontend IP configuration. When enabled, packets belonging to the same UDP flow are consistently directed to the same backend instance. This setting applies to all associated load balancing rules and takes precedence over rule-level enableConnectionTracking settings.
+   */
+  @added(Versions.v2025_09_01)
+  enableConnectionTracking?: boolean;
 }
 
 /** DDoS protection settings for a frontend IP configuration. */
@@ -3387,7 +3406,7 @@ model LoadBalancingRulePropertiesFormat {
   disableOutboundSnat?: boolean;
 
   /**
-   * Defines whether connections between 2 communicating endpoints can be tracked and associated to the same backend VM over its lifetime when using UDP protocol.
+   * Enables UDP flow tracking for the load balancing rule. This property is retained for rule-level configuration compatibility. When enableConnectionTracking is specified on the associated frontend IP configuration, the frontend setting takes precedence.
    */
   enableConnectionTracking?: boolean;
 
@@ -4007,6 +4026,13 @@ model LoadBalancerPropertiesFormat {
    * Indicates the scope of the load balancer: external (Public) or internal (Private).
    */
   scope?: LoadBalancerScope;
+
+  /**
+   * The load balancer mode. Set to `Advanced` to enable additional capabilities on a Standard SKU load balancer. Advanced mode must be specified at creation and cannot be changed afterward.
+   */
+  @added(Versions.v2025_09_01)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  mode?: LoadBalancerMode;
 }
 
 /**
