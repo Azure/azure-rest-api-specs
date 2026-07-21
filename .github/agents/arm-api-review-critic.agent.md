@@ -857,6 +857,7 @@ auto-invalidates if the underlying rule moves.
   Anchor: `arm-api-review.instructions.md`, provisioning-state section.
 - **Enum value additions inside `x-ms-enum.modelAsString: true`.** Not a
   breaking change. Anchor: `documentation/Breaking changes guidelines.md`.
+- **Blocking severity on an unknown enum literal in an example response body when the enum is `modelAsString: true`.** Azure's extensible enums (`x-ms-enum.modelAsString: true`, which is mandated for all enums by the openapi-review rules) accept any string at ModelValidation/LintDiff time, so an unknown value in a response body field does **not** break CI and **must not** be classified as Blocking. Downgrade the finding to **Warning** unless at least one of the following escalation conditions applies: (a) the field is a **discriminator** property (SDK deserialization breaks regardless of `modelAsString`); (b) the unknown value is in a **path or query parameter** in the request URL (routing table dispatch fails at runtime). If you see a Blocking finding of this shape in the reviewer's report, downgrade it to Warning in your first iteration without waiting for the human to verify CI. Anchor: `openapi-review.instructions.md` §22.7 (EX-PAYLOAD severity calibration for unknown enum literals).
 - **Suppressions carried forward from a prior version.** Only newly added
   suppressions require fresh justification. Anchor: reviewer Step 4 Section3
   ("Carried-over suppressions (OK)").

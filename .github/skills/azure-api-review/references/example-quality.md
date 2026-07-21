@@ -22,6 +22,38 @@ ensure example files are accurate, complete, and professional.
 
 ---
 
+## EX-PAYLOAD — Example Payload Correctness
+
+- **Rule ID:** `EX-PAYLOAD`
+- **Default severity:** Varies by context — see the severity matrix below.
+
+> **Full rule and severity matrix:** See
+> [`openapi-review.instructions.md` §22.7](../../../instructions/openapi-review.instructions.md#227-example-payload-correctness-ex-payload)
+> for all EX-PAYLOAD checks (schema validation, resource ID format, malformed
+> strings, response key casing, object vs. null, DELETE body rules).
+
+### Severity calibration for unknown enum literals
+
+When an example string value does not match any declared member of a
+referenced enum, the correct severity depends on where the value appears
+and whether the enum is extensible:
+
+| Context                 | Enum type                                         | Severity     |
+| ----------------------- | ------------------------------------------------- | ------------ |
+| Response body field     | Extensible (`x-ms-enum.modelAsString: true`)      | **Warning**  |
+| Response body field     | Closed (`modelAsString: false` or no `x-ms-enum`) | **Blocking** |
+| Discriminator field     | Any                                               | **Blocking** |
+| Path or query parameter | Any                                               | **Blocking** |
+
+**Key rule:** An unknown literal in a response body field on an extensible
+enum (`modelAsString: true`) is **Warning**, not Blocking. Azure mandates
+`modelAsString: true` on all enums (see
+[`openapi-review.instructions.md` §7](../../../instructions/openapi-review.instructions.md#7-enumerations)),
+so ModelValidation accepts the value and CI remains green. The harm is
+limited to downstream documentation and SDK sample generators. Always
+check `x-ms-enum.modelAsString` before assigning Blocking severity to an
+unknown enum literal in an example response body.
+
 ## EX-ORPHAN — Orphan Detection
 
 - **Rule ID:** `EX-ORPHAN`

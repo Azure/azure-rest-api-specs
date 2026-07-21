@@ -27,7 +27,7 @@ arm-api-reviewer/
 │   ├── eval-fast-path-triage.yaml
 │   ├── eval-protocol-safety.yaml
 │   └── eval-pattern-validation.yaml
-├── fixtures/              # Test fixtures (39 data files + README)
+├── fixtures/              # Test fixtures (45 data files + README)
 │   ├── arm-openapi/       # ARM OpenAPI specs with seeded violations
 │   ├── examples/          # Example JSON files (good and bad)
 │   ├── readme/            # readme.md suppression files
@@ -46,7 +46,7 @@ arm-api-reviewer/
 | 03xxxx | Operations                    | 4     | PATCH, PUT, DELETE, LRO violations                                                                                                                                                                                                                                                                              |
 | 04xxxx | Breaking changes              | 4     | Removed property, type change, enum narrowing, added required                                                                                                                                                                                                                                                   |
 | 05xxxx | Suppression analysis (readme) | 2     | Missing reason, security rule suppressions                                                                                                                                                                                                                                                                      |
-| 06xxxx | Example file validation       | 2     | Bad resource ID, realistic secrets                                                                                                                                                                                                                                                                              |
+| 06xxxx | Example file validation       | 6     | Bad resource ID, realistic secrets, EX-PAYLOAD severity: extensible-enum response body (Warning), closed-enum response body (Blocking), discriminator (Blocking), path parameter (Blocking)                                                                                                                     |
 | 07xxxx | TypeSpec review               | 4     | Segment casing, secrets, anti-patterns, x-ms-identifiers                                                                                                                                                                                                                                                        |
 | 08xxxx | Check Name Availability       | 1     | Custom CNA models, missing input validation                                                                                                                                                                                                                                                                     |
 | 09xxxx | True negatives                | 3     | Clean spec, clean example, clean proxy resource                                                                                                                                                                                                                                                                 |
@@ -59,17 +59,17 @@ arm-api-reviewer/
 | 16xxxx | Protocol safety               | 11    | Subagent auto-unavailable; empty-response not pass; INVALIDATED stops session; downstream-rule telemetry; happy-path READY TO POST; Step 1 SHA pinning; iteration-2 reconciliation marker; override-reason marker; telemetry-degraded fallback; critic=unknown fallback; ARMChangesRequested skip on clean plan |
 | 17xxxx | Pattern constraint validation | 3     | Denylist `[^...]` pattern on path param (blocking); denylist on existing vs new property (warning vs blocking); TypeSpec `@pattern` denylist (blocking)                                                                                                                                                         |
 
-Total: 55 stimuli across 17 eval files.
+Total: 59 stimuli across 17 eval files.
 
 ## Fixtures
 
-All 36 fixture data files live in `fixtures/` (plus a `README.md`). See
+All 45 fixture data files live in `fixtures/` (plus a `README.md`). See
 [`fixtures/README.md`](fixtures/README.md) for the complete catalog with
 descriptions, seeded violations, and guidance on reusing fixtures in other
 eval suites.
 
-- **15 ARM OpenAPI specs** in `arm-openapi/` -- 2 clean + 12 with seeded violations + 1 TypeSpec-generated + 1 denylist pattern
-- **3 example JSON files** in `examples/` -- 1 clean + 2 with issues
+- **17 ARM OpenAPI specs** in `arm-openapi/` -- 2 clean + 12 with seeded violations + 1 TypeSpec-generated + 1 denylist pattern + 1 EX-PAYLOAD severity-calibration spec
+- **7 example JSON files** in `examples/` -- 1 clean + 2 with issues + 4 EX-PAYLOAD severity cases
 - **2 readme.md files** in `readme/` -- suppression scenarios
 - **2 suppressions.yaml files** in `suppressions-yaml/` -- missing-reason and security-rule scenarios
 - **5 TypeSpec files** in `typespec/` -- segment/naming, secret/type, anti-pattern, x-ms-identifiers, denylist pattern violations
@@ -87,7 +87,7 @@ VS Code with GitHub Copilot active.
 ```powershell
 cd .github/skills/evals/arm-api-reviewer
 
-# Run the full suite (55 stimuli, sequential -- safest)
+# Run the full suite (59 stimuli, sequential -- safest)
 .\run-evals.ps1
 
 # Point to an existing vally clone instead of re-cloning
@@ -139,7 +139,7 @@ cd .github/skills/evals/arm-api-reviewer
 # (vally is a monorepo; the CLI binary lives under packages/cli)
 export VALLY_CLI="/path/to/vally/packages/cli/dist/index.js"
 
-# Run the full suite (all 55 stimuli, 5 concurrent workers)
+# Run the full suite (all 59 stimuli, 5 concurrent workers)
 node $VALLY_CLI eval --suite all --verbose
 
 # Run a single category

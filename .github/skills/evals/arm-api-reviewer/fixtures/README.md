@@ -46,7 +46,7 @@ rule category without interference from other issues.
 
 ## Fixture Catalog
 
-### `arm-openapi/` -- ARM OpenAPI Specifications (16 files)
+### `arm-openapi/` -- ARM OpenAPI Specifications (17 files)
 
 | File                              | Violations                    | Description                                                                                                                                                                                  |
 | --------------------------------- | ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -66,14 +66,19 @@ rule category without interference from other issues.
 | `put-response-mismatch.json`      | PUT response mismatch         | 200 and 201 responses use different schemas; request body differs from 201 response.                                                                                                         |
 | `secret-property.json`            | Secret property issues        | connectionString, adminPassword, and primaryKey without x-ms-secret annotation.                                                                                                              |
 | `typespec-generated-spec.json`    | None (true negative)          | Compliant ARM spec carrying the `x-typespec-generated` extension at the top level. Used by the TSP-REQUIRED-V1 eval to verify TypeSpec-generated swagger is not flagged.                     |
+| `ex-payload-spec.json`            | See EX-PAYLOAD examples       | ARM spec with four enum configurations for EX-PAYLOAD severity-calibration evals: `OperationType` (extensible enum, `modelAsString: true`); `ClosedOperationType` (closed enum, `modelAsString: false`); `WidgetBase` with `kind` discriminator (extensible enum); `widgetKind` path parameter (extensible enum). Used alongside the four `example-ex-payload-*.json` example files. |
 
-### `examples/` -- Example JSON Files (3 files)
+### `examples/` -- Example JSON Files (7 files)
 
-| File                            | Violations           | Description                                                                                          |
-| ------------------------------- | -------------------- | ---------------------------------------------------------------------------------------------------- |
-| `example-clean.json`            | None (true negative) | Properly formed example with fully qualified ARM resource ID, no secrets, correct provisioningState. |
-| `example-bad-resource-id.json`  | Empty resource ID    | Response body has an empty string for the `id` field.                                                |
-| `example-realistic-secret.json` | Realistic secrets    | Contains realistic connection string, password, and Base64-encoded key values.                       |
+| File                                     | Violations                    | Description                                                                                                                                          |
+| ---------------------------------------- | ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `example-clean.json`                     | None (true negative)          | Properly formed example with fully qualified ARM resource ID, no secrets, correct provisioningState.                                                 |
+| `example-bad-resource-id.json`           | Empty resource ID             | Response body has an empty string for the `id` field.                                                                                                |
+| `example-realistic-secret.json`          | Realistic secrets             | Contains realistic connection string, password, and Base64-encoded key values.                                                                       |
+| `example-ex-payload-extensible-enum.json` | EX-PAYLOAD: Warning (extensible) | Response body uses `"operationType": "Investigate"` against `OperationType` (`modelAsString: true`). Expects a **Warning** EX-PAYLOAD finding (not Blocking) — ModelValidation accepts arbitrary strings on extensible enums. |
+| `example-ex-payload-closed-enum.json`    | EX-PAYLOAD: Blocking (closed) | Response body uses `"operationType": "Investigate"` against `ClosedOperationType` (`modelAsString: false`). Expects a **Blocking** EX-PAYLOAD finding — ModelValidation rejects undeclared values for closed enums. |
+| `example-ex-payload-discriminator.json`  | EX-PAYLOAD: Blocking (discriminator) | Response body uses `"kind": "UnknownWidget"` as a discriminator value not in `WidgetKindDiscriminator` (which is extensible). Expects a **Blocking** EX-PAYLOAD finding — SDK deserializers use the discriminator to select the concrete subtype regardless of `modelAsString`. |
+| `example-ex-payload-path-param.json`     | EX-PAYLOAD: Blocking (path param) | Request URL uses `"widgetKind": "Enterprise"` in a path parameter backed by `WidgetKind` extensible enum (`Standard`/`Premium`). Expects a **Blocking** EX-PAYLOAD finding — path parameters are dispatched against the route table, not the schema. |
 
 ### `readme/` -- Suppression Configuration (2 files)
 
