@@ -5519,6 +5519,21 @@ model BootDiagnosticsInstanceView {
 }
 
 /**
+ * Specifies flexible virtual machine sizing options. When specified, Azure may allocate a compatible
+ * alternative VM size from the same family if the preferred size is unavailable. The customer is billed
+ * at the preferred size, and the deployed size is returned in the hardwareProfile.vmSize property in the response.
+ */
+@added(Versions.v2026_04_01)
+model FlexProfile {
+  /**
+   * Specifies the preferred (reference) VM size. Azure may allocate a compatible alternative size from the
+   * same family if the preferred size is unavailable. Either hardwareProfile.vmSize or flexProfile.preferredVMSize
+   * should be specified in the request, but not both.
+   */
+  preferredVMSize?: VirtualMachineSizeTypes;
+}
+
+/**
  * Specifies the hardware settings for the virtual machine.
  */
 model HardwareProfile {
@@ -6491,6 +6506,15 @@ model VirtualMachineProperties {
    * Specifies the hardware settings for the virtual machine.
    */
   hardwareProfile?: HardwareProfile;
+
+  /**
+   * Specifies the flexible VM sizing options. When specified, Azure may deploy a compatible alternative VM
+   * size if the preferred size is unavailable, while billing at the preferred size. Either
+   * hardwareProfile.vmSize or flexProfile.preferredVMSize should be specified, but not both. The deployed
+   * size is returned in hardwareProfile.vmSize on GET.
+   */
+  @added(Versions.v2026_04_01)
+  flexProfile?: FlexProfile;
 
   /**
    * Specifies Redeploy, Reboot and ScheduledEventsAdditionalPublishingTargets Scheduled Event related configurations for the virtual machine.

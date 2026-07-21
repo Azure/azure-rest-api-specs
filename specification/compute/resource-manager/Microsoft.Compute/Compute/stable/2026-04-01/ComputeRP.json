@@ -11004,6 +11004,9 @@
           }
         },
         "x-ms-examples": {
+          "Get a VM with flexible sizing": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Get_WithFlexProfile.json"
+          },
           "Get a Virtual Machine.": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Get.json"
           },
@@ -11155,6 +11158,9 @@
           },
           "Create a VM with encryption identity": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithEncryptionIdentity.json"
+          },
+          "Create a VM with flexible sizing enabled": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithFlexProfile.json"
           },
           "Create a VM with network interface configuration": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithNetworkInterfaceConfiguration.json"
@@ -11354,6 +11360,9 @@
           },
           "Update a VM by force-detaching data disk": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Update_ForceDetachDataDisk.json"
+          },
+          "Update a VM's flexible sizing configuration": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Update_WithFlexProfile.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -15896,6 +15905,16 @@
           "type": "string",
           "format": "duration",
           "description": "Grace period for newly created VMs or when the External Health policy is first applied on VMSS. Uses the ISO 8601 format. Minimum: 5 minutes (PT5M), Maximum: 4 hours (PT4H)."
+        }
+      }
+    },
+    "FlexProfile": {
+      "type": "object",
+      "description": "Specifies flexible virtual machine sizing options. When specified, Azure may allocate a compatible\nalternative VM size from the same family if the preferred size is unavailable. The customer is billed\nat the preferred size, and the deployed size is returned in the hardwareProfile.vmSize property in the response.",
+      "properties": {
+        "preferredVMSize": {
+          "$ref": "#/definitions/VirtualMachineSizeTypes",
+          "description": "Specifies the preferred (reference) VM size. Azure may allocate a compatible alternative size from the\nsame family if the preferred size is unavailable. Either hardwareProfile.vmSize or flexProfile.preferredVMSize\nshould be specified in the request, but not both."
         }
       }
     },
@@ -22007,6 +22026,10 @@
         "hardwareProfile": {
           "$ref": "#/definitions/HardwareProfile",
           "description": "Specifies the hardware settings for the virtual machine."
+        },
+        "flexProfile": {
+          "$ref": "#/definitions/FlexProfile",
+          "description": "Specifies the flexible VM sizing options. When specified, Azure may deploy a compatible alternative VM\nsize if the preferred size is unavailable, while billing at the preferred size. Either\nhardwareProfile.vmSize or flexProfile.preferredVMSize should be specified, but not both. The deployed\nsize is returned in hardwareProfile.vmSize on GET."
         },
         "scheduledEventsPolicy": {
           "$ref": "#/definitions/ScheduledEventsPolicy",
