@@ -100,8 +100,16 @@ using Azure.AI.Projects;
 @@clientName(OpenAI.ContainerMemoryLimit.`16g`, exact("MEMORY_16GB"), "python");
 @@clientName(OpenAI.ContainerMemoryLimit.`64g`, exact("MEMORY_64GB"), "python");
 
-@@clientName(OpenAI.ToolChoiceParamType.web_search_preview_2025_03_11, exact("WEB_SEARCH_PREVIEW_2025_03_11"), "python");
-@@clientName(OpenAI.RankerVersionType.`default-2024-11-15`, exact("DEFAULT_2024_11_15"), "python");
+@@clientName(
+  OpenAI.ToolChoiceParamType.web_search_preview_2025_03_11,
+  exact("WEB_SEARCH_PREVIEW_2025_03_11"),
+  "python"
+);
+@@clientName(
+  OpenAI.RankerVersionType.`default-2024-11-15`,
+  exact("DEFAULT_2024_11_15"),
+  "python"
+);
 @@clientName(_PreviewAgentToolType.a2a_preview, exact("A2A_PREVIEW"), "python");
 @@clientName(ToolboxToolType.a2a_preview, exact("A2A_PREVIEW"), "python");
 @@clientName(ProtocolConfiguration.a2a, exact("a2a"), "python");
@@ -117,7 +125,11 @@ using Azure.AI.Projects;
 
 // Session operations all use "session_id". Session file operations all use "agent_session_id". Consolidate to use "session_id" everywhere.
 @@clientName(UploadSessionFileParams.agent_session_id, "session_id", "python");
-@@clientName(DownloadSessionFileParams.agent_session_id, "session_id", "python");
+@@clientName(
+  DownloadSessionFileParams.agent_session_id,
+  "session_id",
+  "python"
+);
 @@clientName(ListSessionFilesParams.agent_session_id, "session_id", "python");
 @@clientName(DeleteSessionFileParams.agent_session_id, "session_id", "python");
 
@@ -129,8 +141,16 @@ using Azure.AI.Projects;
 @@clientName(Agents.createAgentVersionFromCode, "createVersionFromCode");
 
 @@access(Agents.createAgentVersionFromCode, Access.internal, "python");
-@@clientName(CreateAgentVersionFromCodeMetadata, "_CreateAgentVersionFromCodeMetadata", "python");
-@@clientName(CreateAgentVersionFromCodeContent, "_CreateAgentVersionFromCodeContent", "python");
+@@clientName(
+  CreateAgentVersionFromCodeMetadata,
+  "_CreateAgentVersionFromCodeMetadata",
+  "python"
+);
+@@clientName(
+  CreateAgentVersionFromCodeContent,
+  "_CreateAgentVersionFromCodeContent",
+  "python"
+);
 
 @@clientName(Agents.downloadAgentCode, "download_code", "python");
 @@clientName(DownloadAgentCodeResponse, "DownloadAgentCodeResult", "python");
@@ -140,7 +160,6 @@ using Azure.AI.Projects;
   "python"
 );
 @@clientName(SessionFileWriteResponse, "SessionFileWriteResult", "python");
-
 
 // --------------------------------------------------------------------------------
 // Datasets sub‐client

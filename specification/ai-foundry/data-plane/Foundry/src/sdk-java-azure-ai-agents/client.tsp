@@ -81,7 +81,10 @@ using Azure.AI.Projects;
 
 @@clientName(OpenAI.DetailEnum, "ImageDetailLevel");
 
-@@clientName(_PreviewAgentToolType.fabric_dataagent_preview, "FABRIC_DATA_AGENT_PREVIEW");
+@@clientName(
+  _PreviewAgentToolType.fabric_dataagent_preview,
+  "FABRIC_DATA_AGENT_PREVIEW"
+);
 
 @@clientName(OpenAI.MCPListToolsToolAnnotations, "McpListToolsToolAnnotations");
 @@clientName(OpenAI.MCPListToolsTool, "McpListToolsTool");
@@ -194,8 +197,10 @@ using Azure.AI.Projects;
 
 @@clientName(WorkIQPreviewTool, "WorkIqPreviewTool", "java");
 @@clientName(FabricIQPreviewTool, "FabricIqPreviewTool", "java");
+@@clientName(WebIQPreviewTool, "WebIqPreviewTool", "java");
 @@clientName(WorkIQPreviewToolboxTool, "WorkIqPreviewToolboxTool", "java");
 @@clientName(FabricIQPreviewToolboxTool, "FabricIqPreviewToolboxTool", "java");
+@@clientName(WebIQPreviewToolboxTool, "WebIqPreviewToolboxTool", "java");
 
 @@clientName(AgentOptimizationJobs.create, "createOptimizationJob", "java");
 @@clientName(AgentOptimizationJobs.get, "getOptimizationJob", "java");
@@ -360,6 +365,7 @@ using Azure.AI.Projects;
 // The original type is string | OpenAI.ToolChoiceParam . Making this just string
 // Prevents the emission of the full ToolChoiceParam class tree in Java, which
 // is already exposed by the Stainless library. Currently there aren't any azure-isms.
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 @@changePropertyType(PromptAgentDefinition.tool_choice, string);
 
 // AI Tooling: openai-java de-dup
@@ -678,4 +684,3 @@ union WebSearchToolSearchContextSizeExpandable {
 // of our own, to prevent confusion.
 @@clientName(Conversations.listConversations, "listAgentConversations", "java");
 @@clientLocation(Conversations.listConversations, Agents);
-

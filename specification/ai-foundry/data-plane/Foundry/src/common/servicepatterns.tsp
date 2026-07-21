@@ -1,8 +1,11 @@
 import "@typespec/http";
 
+import "@azure-tools/typespec-azure-core";
+
 using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
+using Azure.Core;
 
 namespace Azure.AI.Projects;
 
@@ -88,8 +91,10 @@ union AgentDefinitionOptInKeys {
   workflow_agents_v1_preview: "WorkflowAgents=V1Preview",
   external_agents_v1_preview: "ExternalAgents=V1Preview",
   draft_agents_v1_preview: "DraftAgents=V1Preview",
+
   @removed(Versions.v1)
   hosted_agents_v1_preview: "HostedAgents=V1Preview",
+
   @removed(Versions.v1)
   container_agents_v1_preview: "ContainerAgents=V1Preview",
 }
@@ -347,12 +352,15 @@ union JobStatus {
   in_progress: "in_progress",
 
   /** Job completed successfully. */
+  @lroSucceeded
   succeeded: "succeeded",
 
   /** Job failed. */
+  @lroFailed
   failed: "failed",
 
   /** Job was cancelled by the caller. */
+  @lroCanceled
   cancelled: "cancelled",
 }
 
@@ -381,6 +389,7 @@ model JobLike<
 
   /** Current lifecycle status. */
   @visibility(Lifecycle.Read)
+  @lroStatus
   status: TStatus;
 
   /** Error details — populated only on failure. */
