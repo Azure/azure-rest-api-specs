@@ -2790,12 +2790,12 @@ union AddressFamily {
   string,
 
   /**
-   * IPv4
+   * IPv4 address family.
    */
   IPv4: "IPv4",
 
   /**
-   * IPv6
+   * IPv6 address family.
    */
   IPv6: "IPv6",
 }
