@@ -2783,6 +2783,24 @@ union NicTypeInResponse {
 }
 
 /**
+ * The address family of the Network Virtual Appliance.
+ */
+@added(Versions.v2025_09_01)
+union AddressFamily {
+  string,
+
+  /**
+   * IPv4
+   */
+  IPv4: "IPv4",
+
+  /**
+   * IPv6
+   */
+  IPv6: "IPv6",
+}
+
+/**
  * NIC type. This should be either PublicNic or PrivateNic.
  */
 union NicTypeInRequest {
@@ -15866,6 +15884,13 @@ model NetworkVirtualAppliancePropertiesFormat {
   addressPrefix?: string;
 
   /**
+   * Address Prefix for Dual-Stack NVAs.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_09_01)
+  addressPrefixV6?: string;
+
+  /**
    * BootStrapConfigurationBlobs storage URLs.
    */
   bootStrapConfigurationBlobs?: string[];
@@ -15967,10 +15992,23 @@ model NetworkVirtualAppliancePropertiesFormat {
   nvaInterfaceConfigurations?: NvaInterfaceConfigurationsProperties[];
 
   /**
+   * The address families to deploy the NVA in. ["IPv4", "IPv6"] deploys a dual-stack NVA (both IPv4 and IPv6 configurations on the NICs; the vHub/VNet must be dual-stack). ["IPv4"], an empty array, or omitting the field deploys an IPv4-only NVA. ["IPv6"] deploys an IPv6-only NVA, which is not supported yet.
+   */
+  @added(Versions.v2025_09_01)
+  addressFamily?: AddressFamily[];
+
+  /**
    * A Internal Load Balancer's HA port frontend IP address. Can be used to set routes & UDR to load balance traffic between NVA instances
    */
   @visibility(Lifecycle.Read)
   privateIpAddress?: string;
+
+  /**
+   * A Internal Load Balancer's HA port frontend IPv6 address. Can be used to set routes & UDR to load balance traffic between NVA instances. This field appears in dual-stack NVAs.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_09_01)
+  privateIpAddressV6?: string;
 }
 
 /**
@@ -16024,6 +16062,20 @@ model VirtualApplianceNicProperties {
    */
   @visibility(Lifecycle.Read)
   privateIpAddress?: string;
+
+  /**
+   * Public IPv6 address. These fields appear in dual stack NVAs. It will also appear for Additional Nic configurations in case of Dual stack NVAs.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_09_01)
+  publicIpAddressV6?: string;
+
+  /**
+   * Private IPv6 address. These fields appear in dual stack NVAs. It will also appear for Additional Nic configurations in case of Dual stack NVAs.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_09_01)
+  privateIpAddressV6?: string;
 
   /**
    * Instance on which nic is attached.

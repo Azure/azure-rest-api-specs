@@ -8335,11 +8335,11 @@
           "Get NetworkVirtualAppliance": {
             "$ref": "./examples/NetworkVirtualApplianceGet.json"
           },
-          "Get NetworkVirtualAppliance in Virtual Hub with Dual Stack": {
-            "$ref": "./examples/NetworkVirtualApplianceVhubDualStackGet.json"
-          },
           "Get NetworkVirtualAppliance in VNet with Dual Stack": {
             "$ref": "./examples/NetworkVirtualApplianceVnetDualStackGet.json"
+          },
+          "Get NetworkVirtualAppliance in Vhub with Dual Stack": {
+            "$ref": "./examples/NetworkVirtualApplianceVhubDualStackGet.json"
           }
         }
       },
@@ -8413,6 +8413,12 @@
           }
         },
         "x-ms-examples": {
+          "Create NVA in VNet for IPv4": {
+            "$ref": "./examples/NetworkVirtualApplianceVnetIPv4Put.json"
+          },
+          "Create NVA in VNet for IPv4 and IPv6": {
+            "$ref": "./examples/NetworkVirtualApplianceVnetDualStackPut.json"
+          },
           "Create NVA in VNet with PrivateNic & PublicNic": {
             "$ref": "./examples/NetworkVirtualApplianceVnetBasicPut.json"
           },
@@ -8428,23 +8434,17 @@
           "Create NVA in VNet with PrivateNic, PublicNic & AdditionalPublicNic": {
             "$ref": "./examples/NetworkVirtualApplianceVnetAdditionalPublicPut.json"
           },
+          "Create NVA in Virtual Hub for IPv4": {
+            "$ref": "./examples/NetworkVirtualApplianceVhubIPv4Put.json"
+          },
+          "Create NVA in Virtual Hub for IPv4 and IPv6": {
+            "$ref": "./examples/NetworkVirtualApplianceVhubDualStackPut.json"
+          },
           "Create NetworkVirtualAppliance": {
             "$ref": "./examples/NetworkVirtualAppliancePut.json"
           },
           "Create SaaS NetworkVirtualAppliance": {
             "$ref": "./examples/NetworkVirtualApplianceSaaSPut.json"
-          },
-          "Create NVA in Virtual Hub for IPv4 and IPv6": {
-            "$ref": "./examples/NetworkVirtualApplianceVhubDualStackPut.json"
-          },
-          "Create NVA in VNet for IPv4 and IPv6": {
-            "$ref": "./examples/NetworkVirtualApplianceVnetDualStackPut.json"
-          },
-          "Create NVA in Virtual Hub for IPv4": {
-            "$ref": "./examples/NetworkVirtualApplianceVhubIPv4Put.json"
-          },
-          "Create NVA in VNet for IPv4": {
-            "$ref": "./examples/NetworkVirtualApplianceVnetIPv4Put.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -18873,21 +18873,6 @@
           "$ref": "./common.json#/definitions/Common.SubResource",
           "description": "The Virtual Hub where Network Virtual Appliance is being deployed."
         },
-        "addressFamily": {
-          "type": "array",
-          "description": "The address families to deploy the NVA in. [\"IPv4\", \"IPv6\"] deploys a dual-stack NVA (both IPv4 and IPv6 configurations on the NICs; vHub/VNet must be dual-stack). [\"IPv4\"], [], or omitted deploys an IPv4-only NVA. [\"IPv6\"] deploys an IPv6-only NVA, which is not supported yet.",
-          "items": {
-            "type": "string",
-            "enum": [
-              "IPv4",
-              "IPv6"
-            ],
-            "x-ms-enum": {
-              "name": "AddressFamily",
-              "modelAsString": true
-            }
-          }
-        },
         "cloudInitConfigurationBlobs": {
           "type": "array",
           "description": "CloudInitConfigurationBlob storage URLs.",
@@ -18986,6 +18971,13 @@
           "maxItems": 3,
           "items": {
             "$ref": "#/definitions/NvaInterfaceConfigurationsProperties"
+          }
+        },
+        "addressFamily": {
+          "type": "array",
+          "description": "The address families to deploy the NVA in. [\"IPv4\", \"IPv6\"] deploys a dual-stack NVA (both IPv4 and IPv6 configurations on the NICs; the vHub/VNet must be dual-stack). [\"IPv4\"], an empty array, or omitting the field deploys an IPv4-only NVA. [\"IPv6\"] deploys an IPv6-only NVA, which is not supported yet.",
+          "items": {
+            "$ref": "./common.json#/definitions/AddressFamily"
           }
         },
         "privateIpAddress": {

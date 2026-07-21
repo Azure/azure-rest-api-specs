@@ -2,39 +2,6 @@
   "parameters": {
     "api-version": "2025-09-01",
     "networkVirtualApplianceName": "nva",
-    "parameters": {
-      "identity": {
-        "type": "UserAssigned",
-        "userAssignedIdentities": {
-          "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity1": {}
-        }
-      },
-      "location": "West US",
-      "properties": {
-        "addressFamily": [
-          "IPv4",
-          "IPv6"
-        ],
-        "bootStrapConfigurationBlobs": [
-          "https://csrncvhdstorage1.blob.core.windows.net/csrncvhdstoragecont/csrbootstrapconfig"
-        ],
-        "cloudInitConfigurationBlobs": [
-          "https://csrncvhdstorage1.blob.core.windows.net/csrncvhdstoragecont/csrcloudinitconfig"
-        ],
-        "nvaSku": {
-          "bundledScaleUnit": "1",
-          "marketPlaceVersion": "12.1",
-          "vendor": "Cisco SDWAN"
-        },
-        "virtualApplianceAsn": 10000,
-        "virtualHub": {
-          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/hub1"
-        }
-      },
-      "tags": {
-        "key1": "value1"
-      }
-    },
     "resourceGroupName": "rg1",
     "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
@@ -120,53 +87,8 @@
           "key1": "value1"
         }
       }
-    },
-    "201": {
-      "body": {
-        "name": "nva",
-        "type": "Microsoft.Network/networkVirtualAppliances",
-        "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkVirtualAppliances/nva",
-        "identity": {
-          "type": "UserAssigned",
-          "userAssignedIdentities": {
-            "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity1": {}
-          }
-        },
-        "location": "West US",
-        "properties": {
-          "addressFamily": [
-            "IPv4",
-            "IPv6"
-          ],
-          "bootStrapConfigurationBlobs": [
-            "https://csrncvhdstorage1.blob.core.windows.net/csrncvhdstoragecont/csrbootstrapconfig"
-          ],
-          "cloudInitConfigurationBlobs": [
-            "https://csrncvhdstorage1.blob.core.windows.net/csrncvhdstoragecont/csrcloudinitconfig"
-          ],
-          "privateIpAddress": "",
-          "privateIpAddressV6": "",
-          "nvaSku": {
-            "bundledScaleUnit": "1",
-            "marketPlaceVersion": "12.1",
-            "vendor": "Cisco SDWAN"
-          },
-          "provisioningState": "Updating",
-          "virtualApplianceAsn": 10000,
-          "virtualHub": {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/hub1"
-          }
-        },
-        "tags": {
-          "key1": "value1"
-        }
-      },
-      "headers": {
-        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus/nfvOperations/00000000-0000-0000-0000-000000000000?api-version=2025-09-01"
-      }
     }
   },
-  "operationId": "NetworkVirtualAppliances_CreateOrUpdate",
-  "title": "Create NVA in Virtual Hub for IPv4 and IPv6"
+  "operationId": "NetworkVirtualAppliances_Get",
+  "title": "Get NetworkVirtualAppliance in Vhub with Dual Stack"
 }
