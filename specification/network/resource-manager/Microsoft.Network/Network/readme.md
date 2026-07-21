@@ -43,6 +43,7 @@ input-file:
   - stable/2025-09-01/expressRoute.json
   - stable/2025-09-01/firewall.json
   - stable/2025-09-01/firewallPolicy.json
+  - stable/2025-09-01/firstPartyServiceTag.json
   - stable/2025-09-01/interconnectGroup.json
   - stable/2025-09-01/loadBalancer.json
   - stable/2025-09-01/networkGateway.json
@@ -79,6 +80,7 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/linkReferences/{linkReferenceName}"].delete
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/links/{linkName}"].delete
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firstPartyServiceTags/{firstPartyServiceTagName}"].delete
   - code: ProvisioningStateMustBeReadOnly
     from: interconnectGroup.json
     reason: provisioningState is correctly marked readOnly in the referenced schema. The linter does not follow $ref chains to verify readOnly.
@@ -123,6 +125,14 @@ suppressions:
     reason: Not a standard azure resource.
     where:
       - $.definitions.GetServiceGatewayServicesResult
+  - code: ProvisioningStateMustBeReadOnly
+    from: firstPartyServiceTag.json
+    reason: >-
+      The TypeSpec emitter correctly places readOnly: true as a sibling of $ref, which AutoRest
+      supports (along with description, title, nullable, and x-* extensions). The TypeSpec source
+      correctly marks provisioningState with @visibility(Lifecycle.Read). The lintdiff rule does
+      not recognize readOnly next to $ref, so this suppression is needed.
+      See: https://github.com/Azure/typespec-azure/issues/4611
 directive:
   - from: specification/common-types/resource-management/v6/types.json
     where: "$.definitions.ProxyResource"

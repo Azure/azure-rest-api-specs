@@ -99,6 +99,10 @@ enum Features {
   /** Interconnect group resource type for managing interconnect groups. */
   @added(Versions.v2025_07_01)
   interconnectGroup,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @added(Versions.v2025_09_01)
+  firstPartyServiceTag,
 }
 
 /**
@@ -1489,6 +1493,16 @@ model IpTag {
    * The value of the IP tag associated with the public IP. Example: SQL.
    */
   tag?: string;
+
+  /**
+   * The resource ID of the first party service tag associated with the IP tag.
+   */
+  @added(Versions.v2025_09_01)
+  firstPartyServiceTagId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/firstPartyServiceTags";
+    }
+  ]>;
 }
 
 /**
