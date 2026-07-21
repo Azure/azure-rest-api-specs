@@ -28,7 +28,102 @@ review comments from tens of thousands of PRs across both repos.
 2. In the agent picker at the top of the chat, select **ARM API Reviewer**.
 3. Type your request in the chat input.
 
-## Reviewing a PR
+## Automated Review (GitHub Actions)
+
+The ARM API Reviewer also runs automatically as a GitHub Actions workflow
+(`.github/workflows/arm-api-review.md`) so that authors get feedback the
+moment they open a PR — no human reviewer needs to trigger it manually.
+
+### When reviews run automatically
+
+| Trigger                            | Condition                                                                                                                                            |
+| ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| PR opened                          | PR carries the `WaitForARMFeedback` label; triggered by a user with write access or above; touches `specification/**` files; does not have `skip-arm-review` label |
+| PR synchronized (new push)         | Same conditions as opened; prior in-progress run is cancelled automatically (debounce)                                                              |
+| `WaitForARMFeedback` label added   | Applying the label triggers a review directly (no push needed), subject to the same conditions                                                      |
+| `/arm-review` comment              | On-demand: posted by a user with write access or above; runs even on draft PRs and without `WaitForARMFeedback`                                     |
+| `workflow_dispatch`                | On-demand: repository maintainer triggers manually with a PR number                                                                                |
+
+> **Automated vs. on-demand:** The automated triggers (`opened` /
+> `synchronize` / `labeled`) only run when the PR carries the
+> `WaitForARMFeedback` label — this keeps automated reviews scoped to PRs that
+> are actually awaiting ARM feedback. Adding the label is itself a trigger, so a
+> review starts as soon as a maintainer applies it. The on-demand triggers
+> (`/arm-review`, `workflow_dispatch`) have no such restriction and run
+> regardless of the label or draft state.
+
+> **Fork PRs and permissions:** The workflow does not run on PRs from forks, and
+> gh-aw's built-in role check only lets users with **write access or above**
+> trigger it. Together these keep the automated review from running on
+> externally-authored PRs. The GitHub MCP toolset additionally runs at
+> `approved` integrity for defense in depth.
+
+> **Draft PRs converted to ready:** The `ready_for_review` event is not
+> supported by the workflow engine. If you open a PR as a draft and later mark
+> it ready for review without pushing a new commit, use `/arm-review` to
+> trigger a review.
+
+### On-demand review with `/arm-review`
+
+Post `/arm-review` as a comment on any PR to request a fresh review. This is
+useful after pushing fixes to address earlier findings:
+
+```text
+/arm-review
+```
+
+**Who can use it:** repository collaborators with write access or higher
+(enforced by gh-aw's built-in role check). Posting `/arm-review` without
+sufficient permissions is silently ignored.
+
+### Labels
+
+| Label                  | Effect                                                   |
+| ---------------------- | -------------------------------------------------------- |
+| `skip-arm-review`      | Opts out of automated ARM API review for this PR         |
+| `ARMChangesRequested`  | Added by the workflow when blocking findings are found   |
+| `WaitForARMFeedback`   | Gates automated reviews: `opened` / `synchronize` / `labeled` runs only fire while this label is present, and applying it triggers a review. Removed by the workflow when blocking findings are found |
+
+### Opting out
+
+Add the `skip-arm-review` label to a PR to permanently disable automated ARM
+API review for that PR. The label can be removed later to re-enable it.
+
+> **Note:** `skip-arm-review` does not prevent repository collaborators from
+> running a manual review via VS Code or `/arm-review`.
+
+### Large pull requests
+
+To keep automated reviews accurate and timely, the workflow does not run on
+very large changes. If a PR changes more than **50** files under
+`specification/`, the automated review is skipped and the agent posts a short
+notice on the PR explaining that it was skipped due to the size limit. **No
+action is required from the author** — the assigned Azure API reviewer reviews
+these changes as part of the standard review process. The notice is posted
+once (guarded by a hidden marker) rather than repeated as the PR changes, so it
+does not add noise on busy PRs.
+
+### What the automated review covers
+
+The GitHub Actions workflow applies the same rules as the VS Code agent:
+
+- OpenAPI v2 (Swagger) JSON specifications under `specification/**`
+- TypeSpec (`.tsp`) source files and `tspconfig.yaml`
+- Example files under `specification/**/examples/`
+- `readme.md` AutoRest configuration and suppressions
+
+Files outside `specification/**` are skipped.
+
+### Bot identity and comment deduplication
+
+The automated workflow posts review comments under a stable bot identity.
+Every comment ends with the same hidden telemetry marker as the interactive
+agent (`posted-by: arm-api-reviewer-agent`), so the
+[Comment Reconciliation](#comment-reconciliation-on-repeat-reviews) logic
+(Scenarios A–E) works end-to-end for both trigger paths. Repeat runs do not
+duplicate comments.
+
+## Reviewing a PR (VS Code — Interactive)
 
 In the agent chat, type your request directly:
 
@@ -432,6 +527,7 @@ The agent **does not**:
 | `skills/azure-api-review/SKILL.md`              | Shared review skill manifest and maintenance guidance                                                                                                                                                                                                                                                                                                                              |
 | `skills/azure-api-review/references/*.md`       | 18 cross-cutting rule references covering secret detection, property mutability, provisioning state, naming, enums, examples, tracked-resource lifecycle, policy compatibility, template deployment, availability zones, field ownership, what-if/preflight, LRO final-state-via, suppression criteria, linter coverage, design decisions, GUID/UUID on ARM, and "think in graphs" |
 | `copilot-review-instructions.md`                | Instructions for Copilot Code Review (automated inline PR comments -- separate from the agent)                                                                                                                                                                                                                                                                                     |
+| `.github/workflows/arm-api-review.md`           | GitHub Actions workflow source -- automated trigger on PR open and on-demand via `/arm-review`                                                                                                                                                                                                                                                                                     |
 
 ### Evaluation Suite
 
@@ -442,7 +538,7 @@ report format, and more. The tests run against fixture files with seeded
 violations and verify the agent detects each issue.
 
 To run the eval suite after making changes to the agent, instruction files,
-or skills:
+skills, **or the automated workflow configuration** (`.github/workflows/arm-api-review.md`):
 
 ```powershell
 cd .github/skills/evals/arm-api-reviewer
@@ -450,14 +546,16 @@ cd .github/skills/evals/arm-api-reviewer
 ```
 
 The script automatically clones and builds the
+
 <!-- cspell:words vally -->
+
 [vally](https://github.com/microsoft/vally) framework, runs all
 tests, and prints a pass/fail summary. Pass `-VallyRepo` to point to an
 existing clone, `-Suite` to run a single category, or `-SkipBuild` to skip
 rebuilding. Run `Get-Help .\run-evals.ps1 -Detailed` for all options.
 
-Include the eval results in any PR that modifies the agent or its rules so
-reviewers can assess the impact.
+Include the eval results in any PR that modifies the agent, its rules, or the
+automated workflow configuration so reviewers can assess the impact.
 
 See [`.github/skills/evals/arm-api-reviewer/README.md`](../.github/skills/evals/arm-api-reviewer/README.md)
 for full documentation on test categories, fixtures, graders, and adding
