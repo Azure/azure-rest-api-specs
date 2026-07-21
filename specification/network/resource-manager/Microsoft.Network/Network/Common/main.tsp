@@ -2021,7 +2021,7 @@ model FrontendIPConfigurationPropertiesFormat {
   ddosSettings?: DdosFrontendIpConfigurationSettings;
 
   /**
-   * Whether connection tracking is enabled on this frontend IP configuration. When enabled, connection tracking is applied to all UDP and high availability (HA) load balancing rules that use this frontend IP configuration. The per-rule enableConnectionTracking on individual load balancing rules is not supported; configure connection tracking at the frontend IP configuration level instead.
+   * Enables UDP flow tracking for traffic associated with the frontend IP configuration. When enabled, packets belonging to the same UDP flow are consistently directed to the same backend instance. This setting applies to all associated load balancing rules and takes precedence over rule-level enableConnectionTracking settings.
    */
   @added(Versions.v2025_09_01)
   enableConnectionTracking?: boolean;
@@ -3399,7 +3399,7 @@ model LoadBalancingRulePropertiesFormat {
   disableOutboundSnat?: boolean;
 
   /**
-   * Defines whether connections between 2 communicating endpoints can be tracked and associated to the same backend VM over its lifetime when using UDP protocol.
+   * Enables UDP flow tracking for the load balancing rule. This property is retained for rule-level configuration compatibility. When enableConnectionTracking is specified on the associated frontend IP configuration, the frontend setting takes precedence.
    */
   enableConnectionTracking?: boolean;
 
