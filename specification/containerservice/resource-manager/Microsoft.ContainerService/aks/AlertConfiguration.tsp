@@ -34,7 +34,7 @@ union AlertConfigurationMode {
  */
 @added(Versions.v2026_05_02_preview)
 union AlertConfigurationProvisioningState {
-  string,
+  ResourceProvisioningState,
 
   /**
    * The alert configuration is being created.
@@ -50,21 +50,6 @@ union AlertConfigurationProvisioningState {
    * The alert configuration is being deleted.
    */
   Deleting: "Deleting",
-
-  /**
-   * The alert configuration has been successfully provisioned.
-   */
-  Succeeded: "Succeeded",
-
-  /**
-   * The alert configuration provisioning failed.
-   */
-  Failed: "Failed",
-
-  /**
-   * The alert configuration provisioning was canceled.
-   */
-  Canceled: "Canceled",
 }
 
 /**
