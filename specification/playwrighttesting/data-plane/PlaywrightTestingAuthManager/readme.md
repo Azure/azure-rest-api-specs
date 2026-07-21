@@ -42,7 +42,7 @@ These settings apply only when `--tag=package-2024-12-01` is specified on the co
 
 ```yaml $(tag) == 'package-2024-12-01'
 input-file:
-  - Microsoft.PlaywrightTesting.AuthManager/stable/2024-12-01/playwrighttesting.json
+  - stable/2024-12-01/playwrighttesting.json
 suppressions:
   - code: ValidResponseCodeRequired
     from: playwrighttesting.json
