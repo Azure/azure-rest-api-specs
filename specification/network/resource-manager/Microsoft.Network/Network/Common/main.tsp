@@ -4316,7 +4316,8 @@ union VirtualNetworkPeeringLevel {
   LocalAndRemoteNotInSync: "LocalAndRemoteNotInSync",
 }
 
-@@clientName(Components1Jq1T4ISchemasManagedserviceidentityPropertiesUserassignedidentitiesAdditionalproperties,
+@@clientName(
+  Components1Jq1T4ISchemasManagedserviceidentityPropertiesUserassignedidentitiesAdditionalproperties,
   "ManagedServiceIdentityUserAssignedIdentities",
   "!javascript"
 );
