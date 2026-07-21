@@ -206,3 +206,13 @@ using Azure.ClientGenerator.Core;
   "AppConfigurationMoboBrokerResourceInfo",
   "csharp"
 );
+@@clientName(
+  Azure.ResourceManager.CommonTypes.Severity,
+  "AppConfigurationSeverity",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.IssueType,
+  "AppConfigurationIssueType",
+  "csharp"
+);
