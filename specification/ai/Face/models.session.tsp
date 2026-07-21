@@ -569,7 +569,7 @@ model LivenessColorDecisionTarget {
   faceRectangle: FaceRectangle;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v1_2)
 @doc("Request wrapper of liveness with verify session creation.")
 model CreateLivenessWithVerifySessionRequest {
@@ -625,7 +625,7 @@ model LivenessAbuseMonitoringSetting {
   enabled: HttpPart<boolean>;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v1_3_preview_1)
 @doc("Response model for client assets access token.")
 model ClientAssetsAccessTokenResponse {

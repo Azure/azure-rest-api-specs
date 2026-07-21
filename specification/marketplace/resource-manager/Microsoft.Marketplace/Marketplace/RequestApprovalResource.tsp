@@ -14,7 +14,7 @@ namespace Microsoft.Marketplace;
 /**
  * Request approval resource.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @parentResource(PrivateStore)
 model RequestApprovalResource
   is Azure.ResourceManager.ProxyResource<RequestApprovalProperties> {

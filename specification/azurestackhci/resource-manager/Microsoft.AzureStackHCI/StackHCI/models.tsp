@@ -1971,7 +1971,7 @@ model ArcIdentityResponseProperties {
 /**
  * Request for reconciling Arc Settings.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ReconcileArcSettingsRequest {
   /**
    * List of Arc Nodes in the cluster
@@ -2784,7 +2784,7 @@ model NextBillingModel {
 /**
  * Update secrets locations change  Request.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SecretsLocationsChangeRequest {
   /**
    * List of secret locations
@@ -2793,7 +2793,7 @@ model SecretsLocationsChangeRequest {
   properties?: SecretsLocationDetails[];
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model UploadCertificateRequest {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -2829,7 +2829,7 @@ model ClusterIdentityResponseProperties {
   aadApplicationObjectId?: string;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SoftwareAssuranceChangeRequest {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -6629,7 +6629,7 @@ model HciRepairServerJobProperties extends ClusterJobProperties {
 /**
  * Request for Add/Remove Devices to the pool.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2026_05_01_preview)
 model ListOfDevicesRequest {
   /**
@@ -6892,7 +6892,7 @@ model EdgeMachinePatch {
 /**
  * The validate request for Edge Machine.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2026_05_01_preview)
 model EdgeMachineValidateRequest {
   /**
@@ -6913,7 +6913,7 @@ model EdgeMachineValidateRequest {
 /**
  * The validate response for Edge Machine.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2026_05_01_preview)
 model EdgeMachineValidateResponse {
   /**
@@ -8537,7 +8537,7 @@ model PlatformPayload {
 /**
  * Validate Ownership Voucher Request
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2026_05_01_preview)
 model ValidateOwnershipVouchersRequest {
   /**
@@ -8551,7 +8551,7 @@ model ValidateOwnershipVouchersRequest {
 /**
  * Validate Ownership Voucher Response
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2026_05_01_preview)
 model ValidateOwnershipVouchersResponse {
   /**

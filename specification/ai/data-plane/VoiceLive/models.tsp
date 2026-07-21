@@ -37,7 +37,7 @@ model VoiceLiveErrorDetails {
 }
 
 /** Standard error response envelope. */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 @usage(ResponseUsage)
 model ErrorResponse {
@@ -203,7 +203,7 @@ model ConversationItemBase {
 }
 
 /** The response resource. */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(ResponseUsage)
 model Response {

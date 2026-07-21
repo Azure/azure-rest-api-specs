@@ -13,7 +13,7 @@ namespace Microsoft.DevHub;
 /**
  * Singleton response of ADO OAuth.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @singleton("default")
 @subscriptionResource
 model AdooAuthResponse is Azure.ResourceManager.ProxyResource<ADOOAuth> {

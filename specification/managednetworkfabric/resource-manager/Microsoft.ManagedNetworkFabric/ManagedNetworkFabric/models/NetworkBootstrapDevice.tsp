@@ -88,31 +88,31 @@ model NetworkBootstrapDevicePatchProperties {
   ...NetworkBootstrapDevicePatchableProperties;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Response body for a ResyncPasswords request on a Network Bootstrap Device.")
 model NetworkBootstrapDeviceResyncPasswordsResponse {
   ...OperationStatusResult;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The current status of an refresh configuration async operation.")
 model NetworkBootstrapDeviceRefreshConfigurationResponse {
   ...OperationStatusResult;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Network Bootstrap Device Administrative State Update Response.")
 model NetworkBootstrapDeviceUpdateAdministrativeStateResponse {
   ...OperationStatusResult;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Network Bootstrap Device reboot Response.")
 model NetworkBootstrapDeviceRebootResponse {
   ...OperationStatusResult;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Network Bootstrap Device upgrade Response.")
 model NetworkBootstrapDeviceUpgradeResponse {
   ...OperationStatusResult;

@@ -558,7 +558,7 @@ model DrillEndRequest {
   attestationNotes: string;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Response body of Drill actions")
 model DrillActionResponse {
   @doc("JobId of the Drill")
@@ -570,7 +570,7 @@ model DrillActionResponse {
   ]>;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Request body of the AddOrUpdateResources API.")
 model AddOrUpdateResourcesRequest {
   @doc("Duration of faults.")
@@ -611,7 +611,7 @@ model IncludeOrUpdateResource {
   faultProperties?: FaultProperties;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Response body of the AddOrUpdateResources API.")
 @removed(Versions.v2026_04_01_preview)
 model AddOrUpdateResourcesResponse {
@@ -705,7 +705,7 @@ model ValidateForExecutionProperties {
   sourceLocations?: string[];
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Request body of the Validate For Execute Action of Drill.")
 @added(Versions.v2026_03_01_preview)
 model ValidateForExecutionRequest {
@@ -832,7 +832,7 @@ model DrillResourceQualification {
   resourceQualificationDetails: ResourceQualificationDetails;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("ValidateForExecution post action response.")
 @added(Versions.v2026_03_01_preview)
 model ValidateForExecutionResponse {

@@ -3476,7 +3476,7 @@ model DaprSubscriptionRouteRule {
 /**
  * Dapr PubSub Bulk Subscription Options.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DaprSubscriptionBulkSubscribeOptions {
   /**
    * Enable bulk subscription
@@ -4587,7 +4587,7 @@ model DiagnosticSupportTopic {
 /**
  * Diagnostics data returned from a detector
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DiagnosticsDataApiResponse {
   /**
    * Table response
@@ -6710,7 +6710,7 @@ model EnvironmentVariable {
 /**
  * App Service error response.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model DefaultErrorResponse {
   /**

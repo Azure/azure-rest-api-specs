@@ -1735,7 +1735,7 @@ model AzureCacheForRedisMigrationProperties extends MigrationProperties {
 /**
  * Properties for validating migration from Azure Cache for Redis to Redis Enterprise.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model MigrationValidationRequest {
   /**
    * The source resource ID to validate migration from. This is the resource ID of the Azure Cache for Redis.
@@ -1760,7 +1760,7 @@ model MigrationValidationRequest {
 /**
  * Response for migration validation operation.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model MigrationValidationResponse {
   /**
    * Indicates whether the migration validation passed.

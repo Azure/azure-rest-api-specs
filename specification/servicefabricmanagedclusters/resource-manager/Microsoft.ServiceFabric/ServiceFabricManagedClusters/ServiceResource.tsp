@@ -827,7 +827,7 @@ union MoveCost {
 /**
  * Request to restart a replica.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2025_10_01_preview)
 model RestartReplicaRequest {
   /**

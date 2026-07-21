@@ -127,7 +127,7 @@ model CertificateProfileName {
   certificateProfile: string;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The artifact request information to be signed by the service.")
 model SigningPayloadOptions {
   @doc("The supported signature algorithm identifiers.")
@@ -155,7 +155,7 @@ model SignStatusResult {
   signingCertificate?: bytes;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Signing option parameters corresponding to the account and certificate profile name.")
 model SigningOptions {
   @doc("Signing account name.")

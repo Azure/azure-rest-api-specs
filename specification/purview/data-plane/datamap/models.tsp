@@ -500,7 +500,7 @@ model AtlasEntityHeader {
   status?: EntityStatus;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("An error response from the service")
 @error
 model AtlasErrorResponse {
@@ -525,7 +525,7 @@ model AtlasEntitiesWithExtInfo {
   entities?: AtlasEntity[];
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The request payload for classification association.")
 model ClassificationAssociateOptions {
   @doc("""
@@ -582,7 +582,7 @@ model BulkImportResult {
   successImportInfoList?: ImportInfo[];
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Business metadata to send to the service")
 model BusinessMetadataOptions {
   @doc("InputStream of file")

@@ -69,7 +69,7 @@ model RenderOption {
 /**
  * Defines parameters for vector tile rendering.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model RenderOptionVectorOptions {
   /**
    * Asset key containing the TileJSON URL.

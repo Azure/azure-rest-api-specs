@@ -1000,7 +1000,7 @@ model AzureActiveDirectoryApplicationCredentials {
 /**
  * Defines the options for how the search service authenticates a data plane request. This cannot be set if 'disableLocalAuth' is set to true.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DataPlaneAuthOptions {
   /**
    * Indicates that only the API key can be used for authentication.

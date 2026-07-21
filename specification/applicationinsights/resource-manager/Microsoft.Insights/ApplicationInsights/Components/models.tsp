@@ -412,7 +412,7 @@ model ComponentPurgeBodyFilters {
 /**
  * Response containing operationId for a specific purge action.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ComponentPurgeResponse {
   /**
    * Id to use when querying for status for a particular purge operation.
@@ -423,7 +423,7 @@ model ComponentPurgeResponse {
 /**
  * Response containing status for a specific purge operation.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ComponentPurgeStatusResponse {
   /**
    * Status of the operation represented by the requested Id.

@@ -140,7 +140,7 @@ model UsageSample {
 /**
  * Describes the format of Error response with a wrapper object
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model ErrorObjectResponse {
   /**
@@ -152,7 +152,7 @@ model ErrorObjectResponse {
 /**
  * Describes the format of Error response.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model ErrorResponse {
   /**

@@ -505,7 +505,7 @@ union InputType {
 /**
  * The get collection count request body.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Get collection count's request object.")
 model GetCollectionCountRequest {
   /**
@@ -517,7 +517,7 @@ model GetCollectionCountRequest {
 /**
  * The get collection count response.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model GetCollectionCountResponse {
   /**
    * The count of the specified resource.
@@ -528,7 +528,7 @@ model GetCollectionCountResponse {
 /**
  * The get overview status request body.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Get overview status request object.")
 model GetOverviewStatusRequest {
   /**
@@ -540,7 +540,7 @@ model GetOverviewStatusRequest {
 /**
  * The get overview status response.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model GetOverviewStatusResponse {
   /**
    * List of different status items.
@@ -687,7 +687,7 @@ model QuickAssessment {
 /**
  * List in use storage accounts request.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Parameters for listing in use storage accounts operation. If subscription list is null, it will check the user's all subscriptions.")
 model ListInUseStorageAccountsRequest {
   /**
@@ -699,7 +699,7 @@ model ListInUseStorageAccountsRequest {
 /**
  * List in use storage accounts response.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Parameters for listing in use storage accounts operation. If subscription list is null, it will check the user's all subscriptions.")
 model ListInUseStorageAccountsResponse {
   /**
@@ -1435,7 +1435,7 @@ model RecommendationSolution {
 /**
  * Snapshot's download request.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SnapshotDownloadRequest {
   /**
    * Tenant id.
@@ -1738,7 +1738,7 @@ model EvidenceProperties {
 /**
  * Evidence file's download request.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model EvidenceFileDownloadRequest {
   /**
    * Tenant id.
@@ -1755,7 +1755,7 @@ model EvidenceFileDownloadRequest {
 /**
  * Object that includes all the possible response for the evidence file download operation.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model EvidenceFileDownloadResponse {
   /**
    * The uri of evidence file

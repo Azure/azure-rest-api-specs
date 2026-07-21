@@ -1155,7 +1155,7 @@ enum GeoJsonObjectType {
 /**
  * This object is the request body.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DirectionsRequest {
   /**
    * Specifies the `GeoJSON` type. The only supported object type is
@@ -1529,7 +1529,7 @@ alias AxleCount = {
 /**
  * Alternative route.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model RouteDirectionsResponse extends FeatureCollection {
   /**
@@ -1624,7 +1624,7 @@ model FeatureProperties {
  * Common error response for Azure Maps APIs to return error details for failed
  * operations.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model MapsErrorResponse {
   /**
@@ -1721,7 +1721,7 @@ alias OptionalId = {
 /**
  * This object is returned from a successful Directions Batch service call.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DirectionsBatchResponse {
   /**
    * Summary for the batch request
@@ -1765,7 +1765,7 @@ model DirectionsBatchResponseItem {
 /**
  * This object is the request body.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SnapToRoadsRequest {
   /**
    * Specifies the `GeoJSON` type. The only supported object type is
@@ -1840,7 +1840,7 @@ model InputSnapToRoadsFeaturesItem {
 /**
  * This object is returned from a successful call.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SnapToRoadsResponse {
   /**
    * Specifies the `GeoJSON` type. The only supported object type is
@@ -1939,7 +1939,7 @@ model SnapToRoadsBatchRequestItem {
 /**
  * This object is returned from a successful Snap To Roads Batch service call.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SnapToRoadsBatchResponse {
   /**
    * Summary for the batch request
@@ -1985,7 +1985,7 @@ model SnapToRoadsBatchResponseItem {
  * and additional properties. Refer to [RFC
  * 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model RouteRangeRequest {
   /**
    * Specifies the `GeoJSON` type. The only supported object type is Feature. For
@@ -2135,7 +2135,7 @@ model RouteRangeVehicleSpec {
 /**
  * This object is returned from a successful call.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model RouteRangeResponse {
   /**
    * Specifies the `GeoJSON` type. The only supported object type is
@@ -2217,7 +2217,7 @@ model RouteRangeBatchRequestItem {
 /**
  * This object is returned from a successful Route Range Batch service call.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model RouteRangeBatchResponse {
   /**
    * Summary for the batch request
@@ -2264,7 +2264,7 @@ model RouteRangeBatchResponseItem {
  * additional properties. Refer to [RFC
  * 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model RouteMatrixRequest {
   /**
    * Specifies the `GeoJSON` type. The only supported object type is
@@ -2443,7 +2443,7 @@ model RouteMatrixVehicleSpec extends VehicleSpec {}
 /**
  * This object is returned from a successful call.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model RouteMatrixResponse {
   /**
    * Specifies the `GeoJSON` type. The only supported object type is Feature. For
@@ -2564,7 +2564,7 @@ model RouteMatrixItemResult {
  * additional properties. Refer to [RFC
  * 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model RouteMatrixAsyncRequest {
   /**
    * Specifies the `GeoJSON` type. The only supported object type is
@@ -2725,7 +2725,7 @@ model RouteOperationResult {
  * details for failed operations. (This also follows the OData error response
  * format.).
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model ErrorResponse {
   /**
@@ -2743,7 +2743,7 @@ model ErrorResponse {
 /**
  * This object represents the result of a successful route operation.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @discriminator("kind")
 model RouteOperationResponse {
   /**
@@ -2756,7 +2756,7 @@ model RouteOperationResponse {
  * Specifies the driving instructions and additional properties for each maneuver
  * point in the route Leg.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model RouteMatrixAsyncResponse extends RouteOperationResponse {
   ...RouteMatrixResponse;
 

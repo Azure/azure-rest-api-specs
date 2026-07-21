@@ -88,7 +88,7 @@ model DependencyProcessFilter {
   processNameFilter?: ProcessNameFilter;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("GetDependencyViewForFocusedMachine request model")
 model GetDependencyViewForFocusedMachineRequest {
   @doc("Machine arm id")
@@ -98,7 +98,7 @@ model GetDependencyViewForFocusedMachineRequest {
   filters?: DependencyMapVisualizationFilter;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("GetConnectionsWithConnectedMachineForFocusedMachine request model")
 model GetConnectionsWithConnectedMachineForFocusedMachineRequest {
   @doc("Source machine arm id")
@@ -111,7 +111,7 @@ model GetConnectionsWithConnectedMachineForFocusedMachineRequest {
   filters?: DependencyMapVisualizationFilter;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("GetConnectionsForProcessOnFocusedMachine request model")
 model GetConnectionsForProcessOnFocusedMachineRequest {
   @doc("Machine arm id")
@@ -137,7 +137,7 @@ model ExportDependenciesRequest {
   applianceNameList?: string[];
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2025_07_01_preview)
 @doc("GetDependencyViewForAllMachines request model")
 model GetDependencyViewForAllMachinesRequest {

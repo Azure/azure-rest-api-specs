@@ -626,7 +626,7 @@ model FeatureFlagProperties {
   featureFlagValue?: string;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending common error response"
 @doc("Arm Configuration Diff Response.")
 @added(Versions.v2024_06_15_preview)
@@ -636,7 +636,7 @@ model ArmConfigurationDiffResponse extends CommonErrorResponse {
   configurationDiffUrl?: string;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Arm Configuration Diff Response V2.")
 @added(Versions.v2025_07_15)
 model ArmConfigurationDiffOperationResponse {
@@ -653,7 +653,7 @@ model ArmConfigurationDiffResponseProperties {
   configurationDiffUrl?: string;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending common error response"
 @doc("View Device Configuration Response.")
 @added(Versions.v2024_06_15_preview)
@@ -663,7 +663,7 @@ model ViewDeviceConfigurationResponse extends CommonErrorResponse {
   deviceConfigurationUrl?: string;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("View Device Configuration Response V2.")
 @added(Versions.v2025_07_15)
 model ViewDeviceConfigurationOperationResponse {
@@ -716,7 +716,7 @@ model CommitBatchStatusRequest {
   commitBatchId?: string;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending common error response"
 @doc("Commit Batch Status Response.")
 @added(Versions.v2024_06_15_preview)
@@ -731,7 +731,7 @@ model CommitBatchStatusResponse extends CommonErrorResponse {
   commitBatchDetails?: CommitBatchDetails;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Commit Batch Status Response.")
 @added(Versions.v2025_07_15)
 model CommitBatchStatusOperationResponse {
@@ -761,7 +761,7 @@ model DiscardCommitBatchRequest {
   commitBatchId?: string;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending common error response"
 @doc("Discard Commit Batch Response.")
 @added(Versions.v2024_06_15_preview)
@@ -770,7 +770,7 @@ model DiscardCommitBatchResponse extends CommonErrorResponse {
   commitBatchId?: string;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Discard Commit Batch Response.")
 @added(Versions.v2025_07_15)
 model DiscardCommitBatchOperationResponse {
@@ -809,28 +809,28 @@ model CommitBatchDetails {
   failedDevices?: string[];
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Response body for a RotatePasswords request on a Network Fabric.")
 @added(Versions.v2025_07_15)
 model NetworkFabricRotatePasswordsResponse {
   ...OperationStatusResult;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Response body for a ResyncPasswords request on a Network Fabric.")
 @added(Versions.v2025_07_15)
 model NetworkFabricResyncPasswordsResponse {
   ...OperationStatusResult;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Response body for a RotateCertificates request on a Network Fabric.")
 @added(Versions.v2025_07_15)
 model NetworkFabricRotateCertificatesResponse {
   ...OperationStatusResult;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Response body for a ResyncCertificates request on a Network Fabric.")
 @added(Versions.v2025_07_15)
 model NetworkFabricResyncCertificatesResponse {
@@ -888,7 +888,7 @@ union CommitConfigurationPolicy {
   string,
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Commit Configuration Request.")
 @added(Versions.v2025_07_15)
 model CommitConfigurationRequest {
@@ -902,7 +902,7 @@ model CommitConfigurationRequest {
   devices?: string[];
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Commit Configuration Response.")
 @added(Versions.v2025_07_15)
 model CommitConfigurationResponse {

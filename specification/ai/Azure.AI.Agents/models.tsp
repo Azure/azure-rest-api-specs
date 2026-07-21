@@ -78,7 +78,7 @@ model Agent {
   ...RequiredNullableMetadata;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The request details to use when creating a new agent.")
 @added(Versions.v2025_05_01)
 model CreateAgentOptions {
@@ -138,7 +138,7 @@ model CreateAgentOptions {
   ...OptionalNullableMetadata;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The request details to use when modifying an existing agent.")
 @added(Versions.v2025_05_01)
 model UpdateAgentOptions {
@@ -209,7 +209,7 @@ model AgentDeletionStatus {
   object: "assistant.deleted";
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The request details to use when retrieving an agent.")
 @added(Versions.v2025_05_01)
 model GetAgentOptions {
@@ -218,7 +218,7 @@ model GetAgentOptions {
   assistantId: string;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The request details to use when deleting an agent.")
 @added(Versions.v2025_05_01)
 model DeleteAgentOptions {

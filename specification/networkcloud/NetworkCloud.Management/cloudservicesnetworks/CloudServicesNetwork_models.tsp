@@ -273,7 +273,7 @@ model EndpointDependency {
 /**
  * CloudServicesNetworkStorageOptions represents the storage options for the cloud services network.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CloudServicesNetworkStorageOptions {
   /**
    * The indicator to enable shared storage on the cloud services network. If not specified, the allocation will align with the standard storage enablement.

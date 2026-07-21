@@ -1664,7 +1664,7 @@ model Resource {
 /**
  * Request to configure alerts for the system.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ConfigureAlertRequest {
   /**
    * The properties of a configure alert request.
@@ -2159,7 +2159,7 @@ model FabricSpecificCreationInput {
 /**
  * Request to failover a process server.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model FailoverProcessServerRequest {
   /**
    * The properties of the PS Failover request.
@@ -2544,7 +2544,7 @@ model ReplicationProviderSpecificContainerCreationInput {
 /**
  * Request to add a physical machine as a protectable item in a container.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DiscoverProtectableItemRequest {
   /**
    * The properties of a discover protectable item request.
@@ -4100,7 +4100,7 @@ model UpdateApplianceForReplicationProtectedItemProviderSpecificInput {
 /**
  * Request to update the mobility service on a protected item.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model UpdateMobilityServiceRequest {
   /**
    * The properties of the update mobility service request.
@@ -4121,7 +4121,7 @@ model UpdateMobilityServiceRequestProperties {
 /**
  * Request to Reinstall the mobility service on a protected item.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ReinstallMobilityServiceRequest {
   /**
    * The properties of the reinstall mobility service request
@@ -5245,7 +5245,7 @@ model VCenterProperties {
 /**
  * Input required to add vCenter.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AddVCenterRequest {
   /**
@@ -5288,7 +5288,7 @@ model AddVCenterRequestProperties {
 /**
  * Input required to update vCenter.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model UpdateVCenterRequest {
   /**
@@ -13078,7 +13078,7 @@ model InMageDiskExclusionInput {
 /**
  * Guest disk signature based disk exclusion option when doing enable protection of virtual machine in InMage provider.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model InMageVolumeExclusionOptions {
   /**
    * The volume label. The disk having any volume with this label will be excluded from replication.
@@ -13094,7 +13094,7 @@ model InMageVolumeExclusionOptions {
 /**
  * Guest disk signature based disk exclusion option when doing enable protection of virtual machine in InMage provider.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model InMageDiskSignatureExclusionOptions {
   /**
    * The guest signature of disk to be excluded from replication.

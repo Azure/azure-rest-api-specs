@@ -3564,7 +3564,7 @@ model ServiceSku {
 /**
  * Service health status
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DataMigrationServiceStatusResponse {
   /**
    * The DMS instance agent version
@@ -3761,7 +3761,7 @@ model LocalResource {
 /**
  * A resource type and proposed name
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model NameAvailabilityRequest {
   /**
    * The proposed resource name
@@ -3777,7 +3777,7 @@ model NameAvailabilityRequest {
 /**
  * Indicates whether a proposed resource name is available
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model NameAvailabilityResponse {
   /**
    * If true, the name is valid and available. If false, 'reason' describes why not.
@@ -6607,7 +6607,7 @@ model MigrateSqlServerSqlDbSyncDatabaseInput {
 /**
  * Types of validations to run after the migration
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model MigrationValidationOptions {
   /**
    * Allows to compare the schema information between source and target.

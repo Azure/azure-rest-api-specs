@@ -3619,7 +3619,7 @@ model RaiBlocklistItemProperties {
 /**
  * The Cognitive Services RaiBlocklist Item request body.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model RaiBlocklistItemBulkRequest {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The name for RaiBlocklistItemBulkRequest"
   name?: string;
@@ -5513,7 +5513,7 @@ model OutboundRuleListResult {
 /**
  * Managed Network Provisioning options for managed network of a cognitive services account.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Empty model 'ManagedNetworkProvisionOptions' preserved for backward compatibility with existing API surface"
 model ManagedNetworkProvisionOptions {}
 
@@ -5538,7 +5538,7 @@ model RaiBlockListResult {
 /**
  * The list of Cognitive Services RaiBlocklist Items for batch add.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Empty model 'RaiBlocklistItemsBulkAddRequest' preserved for backward compatibility with existing API surface"
 @identifiers(#["name"])
 model RaiBlocklistItemsBulkAddRequest is Array<RaiBlocklistItemBulkRequest>;
@@ -5711,7 +5711,7 @@ model RaiPolicyListResult {
 /**
  * The list of Cognitive Services RaiBlocklist Items Names.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Empty model 'RaiBlocklistItemsBulkDeleteRequest' preserved for backward compatibility with existing API surface"
 model RaiBlocklistItemsBulkDeleteRequest is Array<string>;
 
@@ -6313,7 +6313,7 @@ model ManagedComputeUsageListResult {
 /**
  * Request body for the evaluateDeploymentPolicies action.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_15_preview)
@@ -6363,7 +6363,7 @@ model EvaluateDeploymentPoliciesDeploymentProperties {
 /**
  * Response body for the evaluateDeploymentPolicies action.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_15_preview)

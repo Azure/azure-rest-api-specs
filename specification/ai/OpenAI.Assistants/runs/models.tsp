@@ -195,7 +195,7 @@ union RunIncludes {
   fileSearchContent: "step_details.tool_calls[*].file_search.results[*].content",
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The details used when creating a new run of an assistant thread.")
 @added(ServiceApiVersions.v2024_02_15_preview)
 model CreateRunOptions {
@@ -378,7 +378,7 @@ model SubmitToolOutputsDetails {
   toolCalls: RequiredToolCall[];
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The details used when creating and immediately running a new assistant thread.")
 @added(ServiceApiVersions.v2024_02_15_preview)
 model CreateAndRunThreadOptions {

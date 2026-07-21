@@ -12,7 +12,7 @@ using TypeSpec.Versioning;
 namespace Search;
 
 /** The input contract for the retrieval request. */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model KnowledgeBaseRetrievalRequest {
   /** A list of chat message style input. */
   @added(Versions.v2026_05_01_preview)
@@ -56,7 +56,7 @@ model KnowledgeBaseRetrievalRequest {
 }
 
 /** The output contract for the retrieval response. */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model KnowledgeBaseRetrievalResponse {
   /** The response messages. */
   response?: KnowledgeBaseMessage[];
@@ -1155,7 +1155,7 @@ model KnowledgeBaseErrorAdditionalInfo {
 }
 
 /** Successful retrieval response. */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model KnowledgeBaseRetrievalSuccessResponse {
   /** The retrieval response is successfully returned. */
   @statusCode
@@ -1167,7 +1167,7 @@ model KnowledgeBaseRetrievalSuccessResponse {
 }
 
 /** Partial retrieval response. */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model KnowledgeBaseRetrievalPartialResponse {
   /** A partial retrieval response is returned. */
   @statusCode

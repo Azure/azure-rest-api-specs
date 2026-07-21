@@ -424,7 +424,7 @@ model SubmitDeallocateRequest {
   correlationid: string;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The response from a deallocate request")
 model DeallocateResourceOperationResponse {
   @doc("The description of the operation response")
@@ -458,7 +458,7 @@ model SubmitStartRequest {
   correlationid: string;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The response from a start request")
 model StartResourceOperationResponse {
   @doc("The description of the operation response")
@@ -492,7 +492,7 @@ model SubmitHibernateRequest {
   correlationid: string;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The response from a Hibernate request")
 model HibernateResourceOperationResponse {
   @doc("The description of the operation response")
@@ -560,7 +560,7 @@ model ExecuteCreateRequest {
   correlationid?: string;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The response from a create request")
 @added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
 model CreateResourceOperationResponse {
@@ -579,7 +579,7 @@ model CreateResourceOperationResponse {
   results?: Array<ResourceOperation>;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The response from a delete request")
 @added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
 model DeleteResourceOperationResponse {
@@ -697,7 +697,7 @@ model ExecuteCreateFlexRequest {
   correlationid?: string;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Microsoft.ComputeSchedule.Versions.`2026-03-01-preview`)
 @doc("The response from a create flex request")
 model CreateFlexResourceOperationResponse {

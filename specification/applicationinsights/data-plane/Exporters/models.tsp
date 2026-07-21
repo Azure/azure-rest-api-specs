@@ -260,7 +260,7 @@ model Domain {
 /**
  * Response containing the status of each telemetry item.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model TrackResponse {
   /**
    * The number of items received.

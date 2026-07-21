@@ -519,7 +519,7 @@ model ServerBackupProperties {
 /**
  * BackupAndExport API Request
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model BackupAndExportRequest extends BackupRequestBase {
   /**
@@ -569,7 +569,7 @@ model BackupSettings {
 /**
  * Represents BackupAndExportAPI Response
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BackupAndExportResponse
   is Azure.ResourceManager.ProxyResource<BackupAndExportResponseProperties> {
   ...ErrorResponse;
@@ -636,7 +636,7 @@ model BackupAndExportResponseProperties {
 /**
  * Represents ValidateBackup API Response
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ValidateBackupResponse {
   /**
    * The response properties of a pre backup operation.
@@ -1864,7 +1864,7 @@ model DelegatedSubnetUsage {
 /**
  * Request from client to check resource name availability.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model NameAvailabilityRequest {
   /**
    * Resource name to verify.
@@ -1936,7 +1936,7 @@ model OperationProgressResponseType {
 /**
  * The response of get private dns zone suffix.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model GetPrivateDnsZoneSuffixResponse {
   /**
    * Represents the private DNS zone suffix.

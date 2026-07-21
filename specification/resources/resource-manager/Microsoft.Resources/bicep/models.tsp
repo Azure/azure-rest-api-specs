@@ -22,7 +22,7 @@ model DecompileOperationRequest {
 /**
  * The response of the decompileBicep operation
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DecompileOperationSuccessResponse {
   /**
    * An array of key-value pairs containing the entryPoint string as the key for the Bicep file decompiled from the ARM json template

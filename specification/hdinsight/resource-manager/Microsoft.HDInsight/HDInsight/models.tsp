@@ -1936,7 +1936,7 @@ model ClusterConfigurations {
 /**
  * The cluster monitor parameters.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ClusterMonitoringRequest {
   /**
    * The cluster monitor workspace ID.
@@ -1952,7 +1952,7 @@ model ClusterMonitoringRequest {
 /**
  * The cluster monitoring status response.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ClusterMonitoringResponse {
   /**
    * The status of the monitor on the HDInsight cluster.
@@ -1968,7 +1968,7 @@ model ClusterMonitoringResponse {
 /**
  * The azure monitor parameters.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AzureMonitorRequest {
   /**
    * The Log Analytics workspace ID.
@@ -2021,7 +2021,7 @@ model AzureMonitorTableConfiguration {
 /**
  * The azure monitor status response.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AzureMonitorResponse {
   /**
    * The status of the monitor on the HDInsight cluster.

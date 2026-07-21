@@ -12,7 +12,7 @@ using Azure.ResourceManager.Foundations;
 namespace Microsoft.DataFactory;
 
 /** Current status of the change data capture resource. */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @mediaTypeHint("application/json")
 scalar ChangeDataCaptureStatusResponse extends string;
 
@@ -3285,7 +3285,7 @@ enum DayOfWeek {
 }
 
 /** A list of operations that can be performed by the Data Factory service. */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model OperationListResponse {
   /** List of Data Factory operations supported by the Data Factory resource provider. */
   @pageItems
@@ -3766,7 +3766,7 @@ model ExposureControlResponse {
 /**
  * A list of exposure control features.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ExposureControlBatchRequest {
   /**
    * List of exposure control features.
@@ -3778,7 +3778,7 @@ model ExposureControlBatchRequest {
 /**
  * A list of exposure control feature values.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ExposureControlBatchResponse {
   /**
    * List of exposure control feature values.
@@ -3904,7 +3904,7 @@ model UserAccessPolicy {
 /**
  * Get Data Plane read only token response definition.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AccessPolicyResponse {
   /**
    * The user access policy.
@@ -3927,7 +3927,7 @@ model AccessPolicyResponse {
 /**
  * A list of integration runtime resources.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model IntegrationRuntimeListResponse
   is Azure.Core.Page<IntegrationRuntimeResource>;
 
@@ -3983,7 +3983,7 @@ model SubResource {
 /**
  * Update integration runtime request.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model UpdateIntegrationRuntimeRequest {
   /**
    * Enables or disables the auto-update feature of the self-hosted integration runtime. See https://go.microsoft.com/fwlink/?linkid=854189.
@@ -3999,7 +3999,7 @@ model UpdateIntegrationRuntimeRequest {
 /**
  * Integration runtime status response.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model IntegrationRuntimeStatusResponse {
   /**
    * The integration runtime name.
@@ -4041,7 +4041,7 @@ model IntegrationRuntimeStatus {
 /**
  * Azure-SSIS integration runtime outbound network dependency endpoints.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model IntegrationRuntimeOutboundNetworkDependenciesEndpointsResponse {
   /**
    * The list of outbound network dependency endpoints.
@@ -4237,7 +4237,7 @@ model IntegrationRuntimeNodeMonitoringData {
 /**
  * Data factory name for linked integration runtime request.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model LinkedIntegrationRuntimeRequest {
   /**
    * The data factory name for linked integration runtime.
@@ -4248,7 +4248,7 @@ model LinkedIntegrationRuntimeRequest {
 /**
  * The linked integration runtime information.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CreateLinkedIntegrationRuntimeRequest {
   /**
    * The name of the linked integration runtime.
@@ -4274,7 +4274,7 @@ model CreateLinkedIntegrationRuntimeRequest {
 /**
  * The status of the operation.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SsisObjectMetadataStatusResponse {
   /**
    * The status of the operation.
@@ -4300,7 +4300,7 @@ model SsisObjectMetadataStatusResponse {
 /**
  * The request payload of get SSIS object metadata.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model GetSsisObjectMetadataRequest {
   /**
    * Metadata path.
@@ -4311,7 +4311,7 @@ model GetSsisObjectMetadataRequest {
 /**
  * A list of SSIS object metadata.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SsisObjectMetadataListResponse is Azure.Core.Page<SsisObjectMetadata>;
 
 /**
@@ -4466,7 +4466,7 @@ model SelfHostedIntegrationRuntimeNode {
 /**
  * Update integration runtime node request.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model UpdateIntegrationRuntimeNodeRequest {
   /**
    * The number of concurrent jobs permitted to run on the integration runtime node. Values between 1 and maxConcurrentJobs(inclusive) are allowed.
@@ -4490,7 +4490,7 @@ model IntegrationRuntimeNodeIpAddress {
 /**
  * The enable the interactive authoring information.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model EnableInteractiveQueryRequest {
   /**
    * The allowed idle time for interactive authoring.
@@ -4501,7 +4501,7 @@ model EnableInteractiveQueryRequest {
 /**
  * A list of linked service resources.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model LinkedServiceListResponse is Azure.Core.Page<LinkedServiceResource>;
 
 /**
@@ -4939,7 +4939,7 @@ model RunQueryOrderBy {
 /**
  * A list pipeline runs.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model PipelineRunsQueryResponse {
   /**
    * List of pipeline runs.
@@ -5277,7 +5277,7 @@ model TriggerSubscriptionOperationStatus {
 /**
  * A list of trigger runs.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model TriggerRunsQueryResponse {
   /**
    * List of trigger runs.
@@ -5413,7 +5413,7 @@ model DataFlowListResponse is Azure.Core.Page<DataFlowResource>;
 /**
  * Request body structure for creating data flow debug session.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CreateDataFlowDebugSessionRequest {
   /**
    * Compute type of the cluster. The value will be overwritten by the same setting in integration runtime if provided.
@@ -5460,7 +5460,7 @@ model SubResourceDebugResource {
 /**
  * Response body structure for creating data flow debug session.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CreateDataFlowDebugSessionResponse {
   /**
    * The state of the debug session.
@@ -5480,7 +5480,7 @@ model CreateDataFlowDebugSessionResponse {
   QueryDataFlowDebugSessionsResponse.value,
   #["dataFlowName", "sessionId"]
 );
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model QueryDataFlowDebugSessionsResponse
   is Azure.Core.Page<DataFlowDebugSessionInfo>;
 
@@ -5672,7 +5672,7 @@ model DataFlowSourceSetting {
 /**
  * Response body structure for starting data flow debug session.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AddDataFlowToDebugSessionResponse {
   /**
    * The ID of data flow debug job version.
@@ -5683,7 +5683,7 @@ model AddDataFlowToDebugSessionResponse {
 /**
  * Request body structure for deleting data flow debug session.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DeleteDataFlowDebugSessionRequest {
   /**
    * The ID of data flow debug session.
@@ -5694,7 +5694,7 @@ model DeleteDataFlowDebugSessionRequest {
 /**
  * Request body structure for data flow debug command.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DataFlowDebugCommandRequest {
   /**
    * The ID of data flow debug session.
@@ -5740,7 +5740,7 @@ model DataFlowDebugCommandPayload {
 /**
  * Response body structure of data flow result for data preview, statistics or expression preview.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DataFlowDebugCommandResponse {
   /**
    * The run status of data preview, statistics or expression preview.
@@ -5756,7 +5756,7 @@ model DataFlowDebugCommandResponse {
 /**
  * A list of managed Virtual Network resources.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ManagedVirtualNetworkListResponse
   is Azure.Core.Page<ManagedVirtualNetworkResource>;
 
@@ -5783,7 +5783,7 @@ model ManagedVirtualNetwork {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details" /**
  * A list of managed private endpoint resources.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model managedPrivateEndpointListResponse
   is Azure.Core.Page<ManagedPrivateEndpointResource>;
 
@@ -5853,7 +5853,7 @@ model ConnectionStateProperties {
 /**
  * A list of credential resources.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CredentialListResponse is Azure.Core.Page<CredentialResource>;
 
 /**
@@ -5885,7 +5885,7 @@ model Credential {
 /**
  * A list of linked service resources.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model PrivateEndpointConnectionListResponse
   is Azure.Core.Page<PrivateEndpointConnectionResource>;
 
@@ -5952,7 +5952,7 @@ model PrivateLinkConnectionApprovalRequestResource extends SubResource {
 /**
  * A request to approve or reject a private endpoint connection
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model PrivateLinkConnectionApprovalRequest {
   /**
    * The state of a private link connection
@@ -6021,13 +6021,13 @@ model PrivateLinkResourceProperties {
 /**
  * A list of Global parameters.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model GlobalParameterListResponse is Azure.Core.Page<GlobalParameterResource>;
 
 /**
  * A list of change data capture resources.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ChangeDataCaptureListResponse
   is Azure.Core.Page<ChangeDataCaptureResource>;
 
@@ -6435,7 +6435,7 @@ model AzureKeyVaultSecretReference extends SecretBase {
 /**
  * A list of integration runtime status.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model IntegrationRuntimeStatusListResponse
   is Azure.Core.Page<IntegrationRuntimeStatusResponse>;
 
@@ -6545,7 +6545,7 @@ model DatasetReference {
 /**
  * Response body structure for get data factory operation status.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model GetDataFactoryOperationStatusResponse {
   ...Record<unknown>;
 

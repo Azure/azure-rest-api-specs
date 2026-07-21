@@ -177,7 +177,7 @@ model EvaluationSuiteVersion {
 // Run API models
 // ---------------------------------------------------------------------------
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Request body for running an evaluation from a suite.")
 @extension("x-ms-foundry-meta", EvaluationSuitesRequiredPreviews)
 model EvaluationSuiteRunRequest {
@@ -191,7 +191,7 @@ model EvaluationSuiteRunRequest {
   evaluation_level?: EvaluationLevel;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Response from running an evaluation suite.")
 @extension("x-ms-foundry-meta", EvaluationSuitesRequiredPreviews)
 model EvaluationSuiteRunResponse {
@@ -332,7 +332,7 @@ model EvaluationSuiteGenerationJobInputs {
   evaluation_level?: EvaluationLevel;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Options for dataset generation within an evaluation suite generation job.")
 @extension("x-ms-foundry-meta", EvaluationSuitesRequiredPreviews)
 model EvaluationSuiteDataGenerationOptions {

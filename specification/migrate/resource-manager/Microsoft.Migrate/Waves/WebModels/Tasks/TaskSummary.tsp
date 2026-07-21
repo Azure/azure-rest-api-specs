@@ -12,7 +12,7 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.Migrate;
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(ApiVersions.v2025_03_30_preview)
 @doc("Task Summary Request model.")
 model TaskSummaryRequest {
@@ -30,7 +30,7 @@ model TaskSummaryRequest {
   ]>;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(ApiVersions.v2025_03_30_preview)
 @doc("Task Summary Response model.")
 model TaskSummaryResponse {

@@ -2041,7 +2041,7 @@ model HypervSiteUpdateProperties {
 /**
  * DependencyMap ServiceMap extensions Client GroupMembers Request
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DependencyMapServiceMapextensionsClientGroupMembersRequest {
   /**
    * id of machine
@@ -2300,7 +2300,7 @@ model HypervSiteUsage {
 /**
  * DependencyMap ServiceMap extensions ExportDependencies Request
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DependencyMapServiceMapextensionsExportDependenciesRequest {
   /**
    * start time
@@ -2318,7 +2318,7 @@ model DependencyMapServiceMapextensionsExportDependenciesRequest {
 /**
  * The body of export machine errors request.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ExportMachineErrorsRequest {
   /**
    * Gets or sets the properties.
@@ -2339,7 +2339,7 @@ model RequestExportMachineErrorsProperties {
 /**
  * DependencyMap ServiceMapextensions Scope MapRequest
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DependencyMapServiceMapextensionsScopeMapRequest {
   /**
    * start time
@@ -2362,7 +2362,7 @@ model DependencyMapServiceMapextensionsScopeMapRequest {
 /**
  * DependencyMap ServiceMap extensions SingleMachine DetailedMap Request
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DependencyMapServiceMapextensionsSingleMachineDetailedMapRequest {
   /**
    * id of machine
@@ -4019,7 +4019,7 @@ model RunAsAccountProperties {
 /**
  * DependencyMap ServiceMap extensions ServerGroup Members Request
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DependencyMapServiceMapextensionsServerGroupMembersRequest {
   /**
    * port of server
@@ -4140,7 +4140,7 @@ model ImportSiteUpdateProperties {
 /**
  * Import URI response class.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SasUriResponse {
   /**
    * Gets or sets the job ARM ID.
@@ -4679,7 +4679,7 @@ model MasterSiteUpdateProperties {
 /**
  * ErrorSummaryRequest body
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ErrorSummaryRequest {
   /**
    * Gets or sets the Appliance Name.
@@ -4855,7 +4855,7 @@ model SQLInventoryImportBody {
 /**
  * ExportSqlServerRequest body
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ExportSqlServersRequest {
   /**
    * Gets or sets the Appliance Name.
@@ -5898,7 +5898,7 @@ model DiscoverySiteDataSourceProperties {
 /**
  * ExportWebAppsRequest body
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ExportWebAppsRequest {
   /**
    * filter options.
@@ -7175,7 +7175,7 @@ model ServerSiteResourceUpdateProperties {
 /**
  * The properties of ServerSiteUsageResponse.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ServerSiteUsageResponse {
   /**
    * Gets or sets the number of run as accounts in the site.
@@ -7760,7 +7760,7 @@ model VmwareSiteUsage {
 /**
  * ExportMachinesRequest body
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ExportMachinesRequest {
   /**
    * filter options.

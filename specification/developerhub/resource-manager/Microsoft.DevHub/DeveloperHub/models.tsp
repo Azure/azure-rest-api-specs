@@ -756,7 +756,7 @@ model TagsObject {
   tags?: Record<string>;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ExportTemplateRequest {
   /**
@@ -783,7 +783,7 @@ model PrLinkResponse {
   prLink?: string;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ScaleTemplateRequest {
   /**
@@ -847,7 +847,7 @@ model OperationDisplay {
 /**
  * GitHubOAuth request object
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model GitHubOAuthCallRequest {
   /**
@@ -860,7 +860,7 @@ model GitHubOAuthCallRequest {
 /**
  * URL used to authorize the Developer Hub GitHub App
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model GitHubOAuthInfoResponse {
   /**
@@ -892,7 +892,7 @@ model GitHubOAuthProperties {
 /**
  * The response from List GitHubOAuth operation.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model GitHubOAuthListResponse {
   /**
@@ -1473,7 +1473,7 @@ model ADOProviderProfile {
 /**
  * delete response if content must be provided on delete operation
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DeleteWorkflowResponse {
   /**
    * delete status message
@@ -1525,7 +1525,7 @@ model ADOOAuth {
 /**
  * The response from List ADOOAuth operation.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AdooAuthListResponse is Azure.Core.Page<AdooAuthResponse>;
 
 /**
@@ -1648,7 +1648,7 @@ model ParameterDefault {
 /**
  * Generated template files returned as a map<path string,content string>
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model GenerateVersionedTemplateResponse {
   /**
    * files returned as a map<path string,content string>

@@ -214,7 +214,7 @@ model DiffDiskSettings {
   placement?: DiffDiskPlacement;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Specifies the ephemeral disk option for operating system disk.")
 union DiffDiskOptions {
   string,
@@ -1084,7 +1084,7 @@ model VirtualMachineIpTag {
   tag?: string;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Specify what happens to the network interface when the VM is deleted")
 union DeleteOptions {
   string,

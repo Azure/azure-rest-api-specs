@@ -360,7 +360,7 @@ model ServerInstanceProperties {
 /**
  * Defines the request body for updating Server Instances resource.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model UpdateServerInstanceRequest {
   /**
    * Server instances properties.

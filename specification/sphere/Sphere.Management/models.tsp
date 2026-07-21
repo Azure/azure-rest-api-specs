@@ -398,7 +398,7 @@ model CertificateProperties {
 /**
  * The certificate chain response.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CertificateChainResponse {
   /**
    * The certificate chain.
@@ -410,7 +410,7 @@ model CertificateChainResponse {
 /**
  * Request for the proof of possession nonce
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ProofOfPossessionNonceRequest {
   /**
    * The proof of possession nonce
@@ -421,7 +421,7 @@ model ProofOfPossessionNonceRequest {
 /**
  * Result of the action to generate a proof of possession nonce
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatible"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Existing use case"
 model ProofOfPossessionNonceResponse extends CertificateProperties {}
@@ -535,7 +535,7 @@ model DeploymentProperties {
 /**
  * Request of the action to list device groups for a catalog.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ListDeviceGroupsRequest {
   /**
    * Device Group name.
@@ -803,7 +803,7 @@ model DeviceUpdateProperties {
 /**
  * Request of the action to create a signed device capability image
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model GenerateCapabilityImageRequest {
   /**
    * List of capabilities to create
@@ -814,7 +814,7 @@ model GenerateCapabilityImageRequest {
 /**
  * Signed device capability image response
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SignedCapabilityImageResponse {
   /**
    * The signed device capability image as a UTF-8 encoded base 64 string.

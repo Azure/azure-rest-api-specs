@@ -1996,7 +1996,7 @@ model ClusterMigrateRequest {
 /**
  * A principal assignment check name availability request.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ClusterPrincipalAssignmentCheckNameRequest {
   /**
    * Principal Assignment resource name.
@@ -2389,7 +2389,7 @@ model ResourceSkuCapabilities {
 /**
  * The result returned from a cluster check name availability request.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ClusterCheckNameRequest {
   /**
    * Cluster name.
@@ -2405,7 +2405,7 @@ model ClusterCheckNameRequest {
 /**
  * The result returned from a database check name availability request.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CheckNameRequest {
   /**
    * Resource name.
@@ -2421,7 +2421,7 @@ model CheckNameRequest {
 /**
  * The result returned from a AttachedDatabaseConfigurations check name availability request.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AttachedDatabaseConfigurationsCheckNameRequest {
   /**
    * Attached database resource name.
@@ -2437,7 +2437,7 @@ model AttachedDatabaseConfigurationsCheckNameRequest {
 /**
  * The result returned from a managedPrivateEndpoints check name availability request.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ManagedPrivateEndpointsCheckNameRequest {
   /**
    * Managed private endpoint resource name.
@@ -2516,7 +2516,7 @@ model AzureCapacity {
 /**
  * The request to invite a follower to a database.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DatabaseInviteFollowerRequest {
   /**
    * The email of the invited user for which the follower invitation is generated.
@@ -2542,7 +2542,7 @@ model DatabaseInviteFollowerResult {
 /**
  * A principal assignment check name availability request.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DatabasePrincipalAssignmentCheckNameRequest {
   /**
    * Principal Assignment resource name.
@@ -2796,7 +2796,7 @@ model SandboxCustomImageProperties {
 /**
  * The result returned from a sandboxCustomImage check name availability request.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SandboxCustomImagesCheckNameRequest {
   /**
    * Sandbox custom image resource name.
@@ -3107,7 +3107,7 @@ model DataConnectionValidationResult {
 /**
  * A data connection check name availability request.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DataConnectionCheckNameRequest {
   /**
    * Data Connection name.
@@ -3123,7 +3123,7 @@ model DataConnectionCheckNameRequest {
 /**
  * A script name availability request.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ScriptCheckNameRequest {
   /**
    * Script name.

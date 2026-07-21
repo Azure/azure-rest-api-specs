@@ -687,7 +687,7 @@ model Changelog {
 /**
  * advanced security object
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AdvSecurityObjectListResponse {
   /**
    * response value
@@ -784,7 +784,7 @@ model ListFirewallsResponse {
 /**
  * predefined url categories response
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model PredefinedUrlCategoriesResponse is Azure.Core.Page<PredefinedUrlCategory>;
 
 /**
@@ -800,7 +800,7 @@ model PredefinedUrlCategory {
 /**
  * Security services list response
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SecurityServicesResponse {
   /**
    * response value

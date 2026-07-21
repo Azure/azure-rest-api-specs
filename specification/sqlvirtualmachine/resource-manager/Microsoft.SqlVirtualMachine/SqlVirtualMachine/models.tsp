@@ -1384,7 +1384,7 @@ model VirtualMachineIdentity {
 /**
  * Configure disk config assessment for databases in your SQL virtual machine.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DiskConfigAssessmentRequest {
   /**
    * Boolean to run disk config Assessment. Use false to fetch past Assessment.

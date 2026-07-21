@@ -1917,7 +1917,7 @@ model SavedSearchesListResult {
 /**
  * The get schema operation response.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SearchGetSchemaResponse {
   /**
    * The metadata from search results.
@@ -2615,7 +2615,7 @@ model WorkspacePurgeBodyFilters {
 /**
  * Response containing operationId for a specific purge action.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model WorkspacePurgeResponse {
   /**
    * Id to use when querying for status for a particular purge operation.
@@ -2626,7 +2626,7 @@ model WorkspacePurgeResponse {
 /**
  * Response containing status for a specific purge operation.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model WorkspacePurgeStatusResponse {
   /**
    * Status of the operation represented by the requested Id.
@@ -3157,7 +3157,7 @@ model ARMErrorResponseBody {
   code?: string;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ArmErrorResponse {
   /**
@@ -3166,14 +3166,14 @@ model ArmErrorResponse {
   error?: ARMErrorResponseBody;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @error
 model ArmNotFoundBodyResponse {
   @body error: ArmErrorResponse;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @doc("ignore")
 model ArmNotFoundResponse {

@@ -3883,7 +3883,7 @@ model ActionPropertiesBase {
 /**
  * Action for alert rule.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ActionRequest extends ResourceWithEtag {
   /**
@@ -5436,7 +5436,7 @@ model EntityTimelineParameters {
 /**
  * The entity timeline result operation response.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2025_10_01_preview)
 model EntityTimelineResponse {
   /**
@@ -5527,7 +5527,7 @@ model EntityTimelineItem {
 /**
  * Retrieve queries for entity result operation response.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2025_10_01_preview)
 model GetQueriesResponse {
   /**
@@ -5600,7 +5600,7 @@ model EntityGetInsightsParameters {
 /**
  * The Get Insights result operation response.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2025_10_01_preview)
 model EntityGetInsightsResponse {
   /**
@@ -6675,7 +6675,7 @@ model IncidentCommentProperties {
 /**
  * The incident related entities response.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model IncidentEntitiesResponse {
   /**
    * Array of the incident related entities.

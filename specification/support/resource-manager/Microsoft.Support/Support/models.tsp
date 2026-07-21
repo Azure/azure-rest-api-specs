@@ -278,7 +278,7 @@ model ServiceProperties {
 /**
  * Input to problem classification Classification API.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2026_06_01)
 model ServiceClassificationRequest {
   /**
@@ -1101,7 +1101,7 @@ model DirectConnectEscalation {
 /**
  * The look up resource Id request body
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2026_06_01)
 model LookUpResourceIdRequest {
   /**
@@ -1123,7 +1123,7 @@ model LookUpResourceIdRequest {
 /**
  * The look up resource id response
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2026_06_01)
 model LookUpResourceIdResponse {
   /**

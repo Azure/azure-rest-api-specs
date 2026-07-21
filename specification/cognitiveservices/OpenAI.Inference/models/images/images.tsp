@@ -103,7 +103,7 @@ union ImageGenerationResponseFormat {
   base64: "b64_json",
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Represents the request data used to generate images.")
 @added(ServiceApiVersions.v2023_06_01_Preview)
 model ImageGenerationOptions {
@@ -268,7 +268,7 @@ model ImageGenerations {
 // version, but not prevent generation of models for older versions.
 
 //@lroStatus
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("A polling status update or final response payload for an image operation.")
 @added(ServiceApiVersions.v2023_06_01_Preview)
 @removed(ServiceApiVersions.v2024_02_15_Preview)

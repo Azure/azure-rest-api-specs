@@ -46,7 +46,7 @@ namespace Azure.AI.Projects {
 
   // Any fields marked with `@removed` need to be placed directly under `@@copyProperties`
   /** Azure specific fields used in the creation of "Response" object (i.e. "AgentReference") */
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
   model AzureCreateResponseOptions {
     /** The agent to use for generating the response. */
     agent_reference?: AgentReference;

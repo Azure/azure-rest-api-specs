@@ -443,7 +443,7 @@ model RangeLimits {
   max: int64;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Health information for a storage pool")
 model HealthResponse {
   @doc("Health metrics")
@@ -1011,7 +1011,7 @@ model IscsiConnectionParameters {
   endpoints: IscsiEndpoint[];
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2026_01_01_preview)
 @doc("Connection parameters response")
 model ConnectionParametersResponse {

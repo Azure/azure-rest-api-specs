@@ -1233,7 +1233,7 @@ model BatchJobSchedule {
   stats?: BatchJobScheduleStatistics;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("""
   Parameters for updating an Azure Batch Job Schedule.
   """)
@@ -1248,7 +1248,7 @@ model BatchJobScheduleUpdateOptions {
   metadata?: BatchMetadataItem[];
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("""
   Parameters for creating an Azure Batch Job Schedule
   """)
@@ -2572,7 +2572,7 @@ model BatchJob {
   stats?: BatchJobStatistics;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Parameters for creating an Azure Batch Job.")
 model BatchJobCreateOptions {
   @doc("A string that uniquely identifies the Job within the Account. The ID can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters. The ID is case-preserving and case-insensitive (that is, you may not have two IDs within an Account that differ only by case).")
@@ -2627,7 +2627,7 @@ model BatchJobCreateOptions {
   metadata?: BatchMetadataItem[];
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Parameters for updating an Azure Batch Job.")
 model BatchJobUpdateOptions {
   @doc("The priority of the Job. Priority values can range from -1000 to 1000, with -1000 being the lowest priority and 1000 being the highest priority. If omitted, the priority of the Job is left unchanged.")
@@ -2691,14 +2691,14 @@ model BatchJobSchedulingError {
   details?: NameValuePair[];
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Parameters for disabling an Azure Batch Job.")
 model BatchJobDisableOptions {
   @doc("What to do with active Tasks associated with the Job.")
   disableTasks: DisableBatchJobOption;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Parameters for terminating an Azure Batch Job.")
 model BatchJobTerminateOptions {
   @doc("The text you want to appear as the Job's TerminationReason. The default is 'UserTerminate'.")
@@ -3037,7 +3037,7 @@ model BatchPool {
   upgradePolicy?: UpgradePolicy;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Parameters for creating an Azure Batch Pool.")
 model BatchPoolCreateOptions {
   @doc("A string that uniquely identifies the Pool within the Account. The ID can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters. The ID is case-preserving and case-insensitive (that is, you may not have two Pool IDs within an Account that differ only by case).")
@@ -3101,7 +3101,7 @@ model BatchPoolCreateOptions {
   upgradePolicy?: UpgradePolicy;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Parameters for replacing properties on an Azure Batch Pool.")
 model BatchPoolReplaceOptions {
   @doc("A Task to run on each Compute Node as it joins the Pool. The Task runs when the Compute Node is added to the Pool or when the Compute Node is restarted. If this element is present, it overwrites any existing StartTask. If omitted, any existing StartTask is removed from the Pool.")
@@ -3114,7 +3114,7 @@ model BatchPoolReplaceOptions {
   metadata: BatchMetadataItem[];
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Parameters for updating an Azure Batch Pool.")
 model BatchPoolUpdateOptions {
   @doc("The display name for the Pool. The display name need not be unique and can contain any Unicode characters up to a maximum length of 1024. This field can be updated only when the pool is empty.")
@@ -3228,7 +3228,7 @@ model BatchPoolListResult {
   `odata.nextLink`?: url;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Parameters for enabling automatic scaling on an Azure Batch Pool.")
 model BatchPoolEnableAutoScaleOptions {
   @doc("The formula for the desired number of Compute Nodes in the Pool. The default value is 15 minutes. The minimum and maximum value are 5 minutes and 168 hours respectively. If you specify a value less than 5 minutes or greater than 168 hours, the Batch service rejects the request with an invalid property value error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request). If you specify a new interval, then the existing autoscale evaluation schedule will be stopped and a new autoscale evaluation schedule will be started, with its starting time being the time when this request was issued.")
@@ -3238,14 +3238,14 @@ model BatchPoolEnableAutoScaleOptions {
   autoScaleEvaluationInterval?: duration;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Parameters for evaluating an automatic scaling formula on an Azure Batch Pool.")
 model BatchPoolEvaluateAutoScaleOptions {
   @doc("The formula for the desired number of Compute Nodes in the Pool. The formula is validated and its results calculated, but it is not applied to the Pool. To apply the formula to the Pool, 'Enable automatic scaling on a Pool'. For more information about specifying this formula, see Automatically scale Compute Nodes in an Azure Batch Pool (https://learn.microsoft.com/azure/batch/batch-automatic-scaling).")
   autoScaleFormula: string;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Parameters for changing the size of an Azure Batch Pool.")
 model BatchPoolResizeOptions {
   @doc("The desired number of dedicated Compute Nodes in the Pool.")
@@ -3261,7 +3261,7 @@ model BatchPoolResizeOptions {
   nodeDeallocationOption?: BatchNodeDeallocationOption;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Parameters for removing nodes from an Azure Batch Pool.")
 model BatchNodeRemoveOptions {
   @doc("A list containing the IDs of the Compute Nodes to be removed from the specified Pool. A maximum of 100 nodes may be removed per request.")
@@ -3275,7 +3275,7 @@ model BatchNodeRemoveOptions {
   nodeDeallocationOption?: BatchNodeDeallocationOption;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Options for deallocating a Compute Node.")
 model BatchNodeDeallocateOptions {
   @doc("When to deallocate the Compute Node and what to do with currently running Tasks. The default value is requeue.")
@@ -3399,7 +3399,7 @@ model BatchTask {
   applicationPackageReferences?: BatchApplicationPackageReference[];
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("""
   Parameters for creating an Azure Batch Task.
   """)
@@ -3480,7 +3480,7 @@ model ExitCodeMapping {
   exitOptions: ExitOptions;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Specifies how the Batch service responds to a particular exit condition.")
 model ExitOptions {
   @doc("An action to take on the Job containing the Task, if the Task completes with the given exit condition and the Job's onTaskFailed property is 'performExitOptionsJobAction'. The default is none for exit code 0 and terminate for all other exit conditions. If the Job's onTaskFailed property is noaction, then specifying this property returns an error and the add Task request fails with an invalid property value error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).")
@@ -3823,7 +3823,7 @@ model RollingUpgradePolicy {
   rollbackFailedInstancesOnPolicyBreach?: boolean;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Parameters for creating a user account for RDP or SSH access on an Azure Batch Compute Node.")
 model BatchNodeUserCreateOptions {
   @doc("The user name of the Account.")
@@ -3843,7 +3843,7 @@ model BatchNodeUserCreateOptions {
   sshPublicKey?: string;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Parameters for updating a user account for RDP or SSH access on an Azure Batch Compute Node.")
 model BatchNodeUserUpdateOptions {
   @secret
@@ -4072,7 +4072,7 @@ model VirtualMachineInfo {
   scaleSetVmResourceId?: string;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Parameters for rebooting an Azure Batch Compute Node.")
 model BatchNodeRebootOptions {
   @doc("When to reboot the Compute Node and what to do with currently running Tasks. The default value is requeue.")
@@ -4080,14 +4080,14 @@ model BatchNodeRebootOptions {
   nodeRebootOption?: BatchNodeRebootKind;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Parameters for reimaging an Azure Batch Compute Node.")
 model BatchNodeReimageOptions {
   @doc("When to reimage the Compute Node and what to do with currently running Tasks. The default value is requeue.")
   nodeReimageOption?: BatchNodeReimageOption;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Parameters for disabling scheduling on an Azure Batch Compute Node.")
 model BatchNodeDisableSchedulingOptions {
   @doc("What to do with currently running Tasks when disabling Task scheduling on the Compute Node. The default value is requeue.")
@@ -4114,7 +4114,7 @@ model BatchNodeRemoteLoginSettings {
   remoteLoginPort: int32;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The Azure Batch service log files upload parameters for a Compute Node.")
 model UploadBatchServiceLogsOptions {
   @doc("The URL of the container within Azure Blob Storage to which to upload the Batch Service log file(s). If a user assigned managed identity is not being used, the URL must include a Shared Access Signature (SAS) granting write permissions to the container. The SAS duration must allow enough time for the upload to finish. The start time for SAS is optional and recommended to not be specified.")

@@ -142,7 +142,7 @@ model InnerErrorModel {
 /**
  * Represents the options used to create or update a project.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AnalyzeConversationAuthoringCreateProjectOptions {
   /**
    * Represents the project kind.
@@ -184,7 +184,7 @@ model AnalyzeConversationAuthoringCreateProjectOptions {
 /**
  * Represents the options for authorizing a project copy to the current Azure resource.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2025_05_15_preview)
 model AnalyzeConversationAuthoringCopyAuthorizationOptions {
   /**
@@ -206,7 +206,7 @@ model AnalyzeConversationAuthoringCopyAuthorizationOptions {
 /**
  * Represents the options for copying an existing project to another Azure resource.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2025_05_15_preview)
 model AnalyzeConversationAuthoringCopiedProjectOptions {
   /**
@@ -279,7 +279,7 @@ model AnalyzeConversationAuthoringExportedProjectAssets {
 /**
  * Represents the options for starting a new training job.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AnalyzeConversationAuthoringTrainingJobOptions {
   /**
    * Represents the output model label.
@@ -311,7 +311,7 @@ model AnalyzeConversationAuthoringTrainingJobOptions {
 /**
  * Represents the options used running the evaluation.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AnalyzeConversationAuthoringEvaluationOptions {
   /**
    * Represents the evaluation kind. By default, the evaluation kind is set to percentage.
@@ -473,7 +473,7 @@ model AnalyzeConversationAuthoringDeploymentResource {
 /**
  * Represents the options for creating or updating a project deployment.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AnalyzeConversationAuthoringCreateDeploymentOptions {
   /**
    * Represents the trained model label.
@@ -515,7 +515,7 @@ model AnalyzeConversationAuthoringProjectAzureResourceIds {
 /**
  * Represents the options for deleting a project deployment.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AnalyzeConversationAuthoringDeleteDeploymentOptions {
   /**
    * Represents the resource IDs to delete the deployment from. If not provided, the deployment will be rolled out from all the resources it is deployed to. If provided, it will delete the deployment only from the specified assigned resources, and leave it for the rest.
@@ -553,7 +553,7 @@ model AnalyzeConversationAuthoringSwapDeploymentsJobState {
 /**
  * Represents the options for swapping two deployments together.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AnalyzeConversationAuthoringSwapDeploymentsOptions {
   /**
    * Represents the first deployment name.
@@ -1136,7 +1136,7 @@ model AnalyzeConversationAuthoringProjectResourceAssignmentInfo {
 /**
  * Represents the options to unassign Azure resources from a project.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2025_05_15_preview)
 model AnalyzeConversationAuthoringUnassignDeploymentResourcesOptions {
   /**
@@ -1721,7 +1721,7 @@ model AnalyzeConversationAuthoringExportedConversationOrchestration {
 /**
  * Represents the orchestration options for a Conversational project target.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AnalyzeConversationAuthoringExportedConversationOrchestrationOptions
   extends AnalyzeConversationAuthoringExportedOrchestrationOptions {
   /**
@@ -1738,7 +1738,7 @@ model AnalyzeConversationAuthoringExportedConversationOrchestrationOptions
 /**
  * Represents the options used to define the orchestration behavior of an intent.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @discriminator("targetProjectKind")
 model AnalyzeConversationAuthoringExportedOrchestrationOptions {
   targetProjectKind: OrchestrationTargetProjectKind;
@@ -1767,7 +1767,7 @@ model AnalyzeConversationAuthoringExportedLuisOrchestration {
 /**
  * Represents the orchestration options for a LUIS application target.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AnalyzeConversationAuthoringExportedLuisOrchestrationOptions
   extends AnalyzeConversationAuthoringExportedOrchestrationOptions {
   /**
@@ -1794,7 +1794,7 @@ model AnalyzeConversationAuthoringExportedQuestionAnsweringOrchestration {
 /**
  * Represents the orchestration options for a Question Answering project target.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AnalyzeConversationAuthoringExportedQuestionAnsweringOrchestrationOptions
   extends AnalyzeConversationAuthoringExportedOrchestrationOptions {
   /**
@@ -1940,7 +1940,7 @@ model AnalyzeConversationAuthoringModelFile {
 /**
  * Represents the options for creating or replacing an exported model.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2025_05_15_preview)
 model ExportedModelOptions {
   /**

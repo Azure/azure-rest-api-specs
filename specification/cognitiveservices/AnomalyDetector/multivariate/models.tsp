@@ -96,7 +96,7 @@ model MultivariateBatchDetectionResultSummary {
   setupInfo: MultivariateBatchDetectionOptions;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Error information that the API returned.")
 @error
 model ErrorResponse {
@@ -128,7 +128,7 @@ model VariableState {
   lastTimestamp?: utcDateTime;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("""
   Detection request for batch inference. This is an asynchronous inference that
   will need another API to get detection results.
@@ -367,7 +367,7 @@ model ModelList {
   nextLink?: string;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Request of the last detection.")
 model MultivariateLastDetectionOptions {
   @doc("""

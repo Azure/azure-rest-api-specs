@@ -653,7 +653,7 @@ model ZoneUpdate {
 /**
  * Represents the properties of the Dns Resource Reference Request.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DnsResourceReferenceRequest {
   /**
    * The properties of the Resource Reference Request.

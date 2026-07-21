@@ -14,7 +14,7 @@ namespace Microsoft.AccessReview;
 /**
  * Request body for creating an attribute namespace.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AttributeNamespaceCreateRequest {
   /**
    * The principal ID of the namespace owner.

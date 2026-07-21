@@ -65,7 +65,7 @@ model FileSearchToolResource {
  * type of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search`
  * tool requires a list of vector store IDs.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(ServiceApiVersions.v2024_05_01_preview)
 model CreateToolResourcesOptions {
   /**
@@ -83,7 +83,7 @@ model CreateToolResourcesOptions {
 /**
  * A set of resources that will be used by the `code_interpreter` tool. Request object.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(ServiceApiVersions.v2024_05_01_preview)
 model CreateCodeInterpreterToolResourceOptions {
   /** A list of file IDs made available to the `code_interpreter` tool. */
@@ -97,7 +97,7 @@ model CreateCodeInterpreterToolResourceOptions {
  * For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires
  * a list of vector store IDs.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the OpenAI API"
 @added(ServiceApiVersions.v2024_05_01_preview)
 union CreateFileSearchToolResourceOptions {
@@ -114,7 +114,7 @@ union CreateFileSearchToolResourceOptions {
 }
 
 /** File IDs associated to the vector store to be passed to the helper. */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(ServiceApiVersions.v2024_05_01_preview)
 model CreateFileSearchToolResourceVectorStoreOptions {
   /** A list of file IDs to add to the vector store. There can be a maximum of 10000 files in a vector store. */
@@ -142,7 +142,7 @@ model CreateFileSearchToolResourceVectorStoreOptions {
  * For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires a list of
  * vector store IDs.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(ServiceApiVersions.v2024_05_01_preview)
 model UpdateToolResourcesOptions {
   /**
@@ -158,7 +158,7 @@ model UpdateToolResourcesOptions {
 }
 
 /** Request object to update `code_interpreted` tool resources. */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(ServiceApiVersions.v2024_05_01_preview)
 model UpdateCodeInterpreterToolResourceOptions {
   /** A list of file IDs to override the current list of the assistant. */
@@ -168,7 +168,7 @@ model UpdateCodeInterpreterToolResourceOptions {
 }
 
 /** Request object to update `file_search` tool resources. */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(ServiceApiVersions.v2024_05_01_preview)
 model UpdateFileSearchToolResourceOptions {
   /** A list of vector store IDs to override the current list of the assistant. */

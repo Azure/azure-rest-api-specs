@@ -98,7 +98,7 @@ model BaseCollection {
   recognitionModel?: RecognitionModel;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Model for creating face collection.")
 model CreateCollectionRequest {
   ...UserDefinedFields;
@@ -125,7 +125,7 @@ model BaseFace {
   ...FaceUserData;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Query parameters for add face.")
 model AddFaceOptions {
   @doc("A face rectangle to specify the target face to be added to a person, in the format of 'targetFace=left,top,width,height'.")
@@ -144,7 +144,7 @@ model AddFaceOptions {
   userData?: string;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Add face from stream request.")
 model AddFaceRequest is AddFaceOptions {
   @doc("The format of the HTTP payload.")
@@ -156,7 +156,7 @@ model AddFaceRequest is AddFaceOptions {
   imageContent: bytes;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Add face from url request.")
 model AddFaceFromUrlRequest is AddFaceOptions {
   @clientName("uri", "csharp")
@@ -317,7 +317,7 @@ model FaceError {
   message: string;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model FaceErrorResponse is Azure.Core.Foundations.ErrorResponseBase<FaceError>;
 
 alias BodyParameter<

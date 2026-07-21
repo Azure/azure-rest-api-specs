@@ -53,7 +53,7 @@ model PipelineRunProperties {
 /**
  * The request properties provided for a pipeline run.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.vLatestPreview)
 model PipelineRunRequest {
   /**
@@ -120,7 +120,7 @@ model PipelineRunTargetProperties {
 /**
  * The response properties returned for a pipeline run.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.vLatestPreview)
 model PipelineRunResponse {
   /**

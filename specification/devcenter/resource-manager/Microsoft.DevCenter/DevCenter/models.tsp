@@ -1756,7 +1756,7 @@ model UsageName {
   value?: string;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The scoped name check availability request body.")
 model CheckScopedNameAvailabilityRequest {
   @doc("The name of the resource for which availability needs to be checked.")

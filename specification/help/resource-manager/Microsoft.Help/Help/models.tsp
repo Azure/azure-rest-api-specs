@@ -353,7 +353,7 @@ union AutomatedCheckResultType {
 /**
  * Response for whether the requested resource name is available or not.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CheckNameAvailabilityResponse {
   /**
    * Returns true or false depending on the availability of the name
@@ -1271,7 +1271,7 @@ model TroubleshooterResponse {
 /**
  * Troubleshooter restart response
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model RestartTroubleshooterResponse {
   /**
    * Updated TroubleshooterResource Name .

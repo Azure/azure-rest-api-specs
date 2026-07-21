@@ -173,7 +173,7 @@ alias DeleteSkillVersionRequest = {
   version: string;
 };
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("A deleted skill.")
 @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
 model DeleteSkillResponse {
@@ -187,7 +187,7 @@ model DeleteSkillResponse {
   deleted: boolean;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("A deleted skill version.")
 @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
 model DeleteSkillVersionResponse {
@@ -204,7 +204,7 @@ model DeleteSkillVersionResponse {
   version: string;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The response body for downloading a skill package.")
 @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
 model DownloadSkillResponse {

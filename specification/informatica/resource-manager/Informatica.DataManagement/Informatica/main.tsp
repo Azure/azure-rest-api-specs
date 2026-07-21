@@ -448,7 +448,7 @@ model UserDetails {
   phoneNumber?: string;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Serverless Runtime environment Metadata response.")
 model ServerlessMetadataResponse {
   @doc("type of the runtime environment.")

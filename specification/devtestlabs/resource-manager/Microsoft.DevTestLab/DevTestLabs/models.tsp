@@ -1038,7 +1038,7 @@ model ArtifactProperties {
 /**
  * Parameters for generating an ARM template for deploying artifacts.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model GenerateArmTemplateRequest {
   /**
    * The resource name of the virtual machine.
@@ -2190,7 +2190,7 @@ model NotifyParameters {
 /**
  * Request body for evaluating a policy set.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model EvaluatePoliciesRequest {
   /**
    * Policies to evaluate.
@@ -2227,7 +2227,7 @@ model EvaluatePoliciesProperties {
 /**
  * Response body for evaluating a policy set.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model EvaluatePoliciesResponse {
   /**
    * Results of evaluating a policy set.
@@ -3079,7 +3079,7 @@ model LabVirtualMachineFragment extends UpdateResource {}
 /**
  * Request body for applying artifacts to a virtual machine.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ApplyArtifactsRequest {
   /**
    * The list of artifacts to apply.
@@ -3318,7 +3318,7 @@ model GenerateUploadUriParameter {
 /**
  * Response body for generating an upload URI.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model GenerateUploadUriResponse {
   /**
    * The upload URI for the VHD.
@@ -3329,7 +3329,7 @@ model GenerateUploadUriResponse {
 /**
  * This represents the payload required to import a virtual machine from a different lab into the current one
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ImportLabVirtualMachineRequest {
   /**
    * The full resource ID of the virtual machine to be imported.

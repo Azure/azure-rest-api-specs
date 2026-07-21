@@ -542,7 +542,7 @@ model CommonPostActionResponseForStateUpdate extends CommonErrorResponse {
   configurationState?: ConfigurationState;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending common error response"
 @doc("The response of the action validate configuration.")
 model ValidateConfigurationResponse extends CommonErrorResponse {
@@ -1316,7 +1316,7 @@ model BmpExportPolicyPatchProperties {
   exportPolicies?: BmpExportPolicy[];
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Update Administrative State Response.")
 @added(Versions.v2025_07_15)
 model UpdateAdministrativeStateResponse {

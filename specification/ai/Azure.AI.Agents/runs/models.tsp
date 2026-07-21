@@ -187,7 +187,7 @@ model RunCompletionUsage {
   totalTokens: int64;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The details used when creating a new run of an agent thread.")
 @added(Versions.v2025_05_01)
 model CreateRunOptions {
@@ -385,7 +385,7 @@ model SubmitToolApprovalDetails {
   toolCalls: RequiredToolCall[];
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The details used when creating and immediately running a new agent thread.")
 @added(Versions.v2025_05_01)
 model CreateAndRunThreadOptions {

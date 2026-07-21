@@ -1198,7 +1198,7 @@ model Port {
   count?: int64;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("A request body used for an asset report snapshot export.")
 model ReportAssetSnapshotExportRequest {
   @doc("The metric to retrieve a snapshot for.")
@@ -1211,7 +1211,7 @@ model ReportAssetSnapshotExportRequest {
   columns?: string[];
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("A request body used to retrieve an asset report snapshot.")
 model ReportAssetSnapshotRequest {
   @doc("The metric to retrieve a snapshot for.")
@@ -1248,7 +1248,7 @@ model ReportAssetSnapshotResult {
   assets?: AssetPageResult;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("A request body used to retrieve summary asset information. One and only one collection of summary identifiers must be provided: filters, metrics, or metricCategories.")
 model ReportAssetSummaryRequest {
   @doc("Categories to retrieve risk reporting data for.")

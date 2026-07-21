@@ -106,7 +106,7 @@ union SkuMixPlacementPartialFulfillmentReason {
 // ===================== Request Models =====================
 
 /** Sku Mix Placement API request. */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2026_05_05_preview)
 model SkuMixPlacementRequest {
   /** Optional logical zones to consider (e.g. ["1","2","3"]). Omitted or empty implies regional deployment. */
@@ -200,7 +200,7 @@ model SkuMixPlacementVMSize {
 // ===================== Response Models =====================
 
 /** Sku Mix Placement API response. */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2026_05_05_preview)
 model SkuMixPlacementResponse {
   /** List of placement choice recommendations. */

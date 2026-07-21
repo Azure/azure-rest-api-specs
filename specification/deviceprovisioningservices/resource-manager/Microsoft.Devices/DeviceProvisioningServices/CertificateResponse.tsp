@@ -14,7 +14,7 @@ namespace Microsoft.Devices;
 /**
  * The X509 Certificate.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @parentResource(ProvisioningServiceDescription)
 model CertificateResponse
   is Azure.ResourceManager.ProxyResource<CertificateProperties> {

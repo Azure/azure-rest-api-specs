@@ -108,7 +108,7 @@ alias EtagResponseHeader = {
 /**
  * The properties for the table query response.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model TableQueryResponse {
   /**
    * The metadata response of the table.
@@ -161,7 +161,7 @@ model TableProperties {
 /**
  * The properties for the table entity query response.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model TableEntityQueryResponse {
   /**
    * The metadata response of the table.
@@ -390,7 +390,7 @@ model TablesError {
 /// Conditional responses
 
 /** The table properties as returned in an echo response. */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model TableResponse {
   ...TableProperties;
 
@@ -404,7 +404,7 @@ model TableResponse {
 }
 
 /** Create table successful response with content */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CreateTableEchoResponse {
   /** 201 Created. Includes echo response */
   @statusCode statusCode: 201;
@@ -428,7 +428,7 @@ model CreateTableEchoResponse {
 }
 
 /** Create table response with no content */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CreateTableResponse {
   /** 204 No Content. Response with no echo. */
   @statusCode statusCode: 204;
@@ -444,7 +444,7 @@ model CreateTableResponse {
 }
 
 /** Insert entity successful response with content */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model InsertEntityEchoResponse {
   /** 201 Created. Includes echo response */
   @statusCode statusCode: 201;
@@ -470,7 +470,7 @@ model InsertEntityEchoResponse {
 }
 
 /** Insert entity response with no content */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model InsertEntityResponse {
   /** 204 No Content. Response with no echo. */
   @statusCode statusCode: 204;

@@ -354,7 +354,7 @@ model CheckNameAvailabilityParameters {
 /**
  * The response of listUpgradeNotifications.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model NotificationListResponse is Azure.Core.Page<UpgradeNotification>;
 
 /**

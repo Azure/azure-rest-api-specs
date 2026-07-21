@@ -548,7 +548,7 @@ model FileShareLimitsOutput {
   provisioningConstants: FileShareProvisioningConstants;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Request structure for file share provisioning parameters recommendation API.")
 model FileShareProvisioningRecommendationRequest {
   @doc("The properties of the file share provisioning recommendation input.")
@@ -562,7 +562,7 @@ model FileShareProvisioningRecommendationInput {
   provisionedStorageGiB: int32;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Response structure for file share provisioning parameters recommendation API.")
 model FileShareProvisioningRecommendationResponse {
   @doc("The properties of the file share provisioning recommendation output.")

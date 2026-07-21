@@ -3400,7 +3400,7 @@ model TriggerList is Azure.Core.Page<Trigger>;
 /**
  * The request object for trigger support package.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model TriggerSupportPackageRequest extends ARMBaseModel {
   /**
@@ -3703,7 +3703,7 @@ model RawCertificateData {
 /**
  * The upload registration certificate response.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model UploadCertificateResponse {
   /**
    * Specifies authentication type.
@@ -3969,7 +3969,7 @@ model ComputeResource {
 /**
  * Resource Move details
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DataBoxEdgeMoveRequest {
   /**
    * Target resource group ARMId

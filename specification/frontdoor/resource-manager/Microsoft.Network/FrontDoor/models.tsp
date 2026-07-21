@@ -2253,7 +2253,7 @@ model ResourcewithSettableName {
 /**
  * Error response indicates Front Door service is not able to process the incoming request. The reason is provided in the error message.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model ErrorResponse {
   /**
@@ -2272,7 +2272,7 @@ model ErrorResponse {
 /**
  * Error response indicates Front Door service is not able to process the incoming request. The reason is provided in the error message.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model DefaultErrorResponse {
   /**

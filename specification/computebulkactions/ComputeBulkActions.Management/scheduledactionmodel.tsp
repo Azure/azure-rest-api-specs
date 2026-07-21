@@ -346,7 +346,7 @@ model ExecuteTypeRequest {
   correlationid: string;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Common model for operation response")
 model OperationResponse {
   @doc("The description of the operation response")
@@ -365,34 +365,34 @@ model OperationResponse {
 }
 
 // ----------- DeallocateResponse ---------
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The response from a deallocate request")
 model DeallocateResourceOperationResponse {
   ...OperationResponse;
 }
 
 // ----------- StartResponse ---------
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The response from a start request")
 model StartResourceOperationResponse {
   ...OperationResponse;
 }
 
 // ----------- HibernateResponse ---------
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The response from a Hibernate request")
 model HibernateResourceOperationResponse {
   ...OperationResponse;
 }
 
 // ----------- Execute Operations Request ---------
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The ExecuteDeallocateRequest request for executeDeallocate operations")
 model ExecuteDeallocateRequest {
   ...ExecuteTypeRequest;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The ExecuteHibernateRequest request for executeHibernate operations")
 model ExecuteHibernateRequest {
   ...ExecuteTypeRequest;
@@ -415,13 +415,13 @@ model ExecuteCreateRequest {
   correlationid?: string;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The response from a create request")
 model CreateResourceOperationResponse {
   ...OperationResponse;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The response from a delete request")
 model DeleteResourceOperationResponse {
   ...OperationResponse;
@@ -436,7 +436,7 @@ model ExecuteDeleteRequest {
 }
 
 // ----------- GetOperationStatus ---------
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("This is the request to get operation status using operationids")
 model GetOperationStatusRequest {
   @doc("The list of operation ids to get the status of")
@@ -446,7 +446,7 @@ model GetOperationStatusRequest {
   correlationid: string;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("This is the response from a get operations status request")
 model GetOperationStatusResponse {
   @identifiers(#["resourceId"])
@@ -455,7 +455,7 @@ model GetOperationStatusResponse {
 }
 
 // ----------- CancelOperations ---------
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("This is the request to cancel running operations in bulkactions using the operation ids")
 model CancelOperationsRequest {
   @doc("The list of operation ids to cancel operations on")
@@ -465,7 +465,7 @@ model CancelOperationsRequest {
   correlationid: string;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("This is the response from a cancel operations request")
 model CancelOperationsResponse {
   @identifiers(#["resourceId"])

@@ -2134,7 +2134,7 @@ model OperationInputs {
 /**
  * The properties indicating whether a given IoT hub name is available.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model IotHubNameAvailabilityInfo {
   /**
    * The value which indicates whether the provided name is available.

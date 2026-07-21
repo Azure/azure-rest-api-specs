@@ -357,7 +357,7 @@ model ErrorAdditionalInfo {
 /**
  * Common error response for Azure Maps APIs to return error details for failed operations.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model MapsErrorResponse {
   /**
@@ -422,7 +422,7 @@ model MapsInnerError {
 /**
  * This type represents the request body for the Batch service.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchRequest {
   /**
    * The list of queries to process.

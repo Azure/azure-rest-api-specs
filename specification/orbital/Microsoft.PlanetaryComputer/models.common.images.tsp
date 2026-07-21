@@ -9,7 +9,7 @@ namespace Microsoft.PlanetaryComputer;
 /**
  * Return an image.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ImagePngResponse {
   /**
    * status code
@@ -31,7 +31,7 @@ model ImagePngResponse {
 /**
  * Return an image.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ImageJpegResponse {
   /**
    * status code
@@ -53,7 +53,7 @@ model ImageJpegResponse {
 /**
  * Return an image.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ImageJpgResponse {
   /**
    * status code
@@ -75,7 +75,7 @@ model ImageJpgResponse {
 /**
  * Return an image.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ImageJp2Response {
   /**
    * status code
@@ -97,7 +97,7 @@ model ImageJp2Response {
 /**
  * Return an image.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ApplicationXbinaryResponse {
   /**
    * status code
@@ -119,7 +119,7 @@ model ApplicationXbinaryResponse {
 /**
  * Return an image.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ImageWebpResponse {
   /**
    * status code
@@ -141,7 +141,7 @@ model ImageWebpResponse {
 /**
  * Return an image.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ImageTiffResponse {
   /**
    * status code

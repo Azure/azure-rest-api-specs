@@ -13,7 +13,7 @@ using Azure.ClientGenerator.Core;
 
 namespace Azure.OpenAI;
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("""
   The configuration information for a completions request.
   Completions support a wide variety of tasks and generate text that continues from or "completes"

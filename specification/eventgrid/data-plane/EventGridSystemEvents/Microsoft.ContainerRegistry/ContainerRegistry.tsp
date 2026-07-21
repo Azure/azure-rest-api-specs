@@ -116,7 +116,7 @@ model ContainerRegistryArtifactEventTarget {
 }
 
 /** The request that generated the event. */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ContainerRegistryEventRequest {
   /** The ID of the request that initiated the event. */
   id: string;

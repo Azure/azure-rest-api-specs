@@ -5047,7 +5047,7 @@ model FailureStatusCodeRange {
 /**
  * The response to be returned when a backend fails to respond
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BackendFailureResponse {
   /**
    * The status code of the response.
@@ -9028,7 +9028,7 @@ model PortalSettingValidationKeyContract {
 /**
  * A request to approve or reject a private endpoint connection
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model PrivateEndpointConnectionRequest {
   /**
    * Private Endpoint Connection Resource Id.

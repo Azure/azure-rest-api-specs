@@ -370,7 +370,7 @@ model OperationDisplay {
 /**
  * Response of get all accounts Operation.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AccountsListResponse is Azure.Core.Page<AccountResource>;
 
 /**
@@ -650,7 +650,7 @@ model SaaSData {
 /**
  * Response of get all organizations Operation.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model OrganizationsListResponse is Azure.Core.Page<OrganizationResource>;
 
 /**
@@ -689,7 +689,7 @@ model OrganizationProperties {
 /**
  * Response of get all plan data Operation.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model PlanDataListResponse is Azure.Core.Page<PlanDataResource>;
 
 /**
@@ -727,7 +727,7 @@ model PlanDataProperties {
 /**
  * SaaS guid & PublishedId for Activate and Validate SaaS Resource
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ActivateSaaSParameterRequest {
   /**
@@ -744,7 +744,7 @@ model ActivateSaaSParameterRequest {
 /**
  * Marketplace SaaS resource details.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SaaSResourceDetailsResponse
@@ -910,7 +910,7 @@ model AppServicesGetRequest {
 /**
  * Response of a list app services Operation.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AppServicesListResponse is Azure.Core.Page<AppServiceInfo>;
 
 /**
@@ -978,7 +978,7 @@ model HostsGetRequest {
 /**
  * Response of a list VM Host Operation.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VMHostsListResponse is Azure.Core.Page<VMInfo>;
 
@@ -1005,7 +1005,7 @@ model VMInfo {
 /**
  * List of all the resources being monitored by NewRelic monitor resource
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model MonitoredResourceListResponse is Azure.Core.Page<MonitoredResource>;
 
 /**
@@ -1112,7 +1112,7 @@ model PartnerBillingEntity {
 /**
  *  List of all active newrelic deployments.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ConnectedPartnerResourcesListResponse
   is Azure.Core.Page<ConnectedPartnerResourcesListFormat>;
 
@@ -1279,7 +1279,7 @@ model MonitoredSubscription {
 /**
  * Response of a list operation.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model LinkedResourceListResponse is Azure.Core.Page<LinkedResource>;
 
 /**
@@ -1307,7 +1307,7 @@ model VMExtensionPayload {
 /**
  * Response of get latest linked SaaS resource operation
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model LatestLinkedSaaSResponse {
   /**

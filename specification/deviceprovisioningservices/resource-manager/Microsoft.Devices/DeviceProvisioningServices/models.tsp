@@ -784,7 +784,7 @@ model IotDpsSkuDefinition {
 /**
  * Description of the response of the verification code.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model VerificationCodeResponse {
   /**
    * Name of certificate.
@@ -860,7 +860,7 @@ model VerificationCodeResponseProperties {
 /**
  * The JSON-serialized leaf certificate
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model VerificationCodeRequest {
   /**
    * base-64 representation of X509 certificate .cer file or just .pem file content.

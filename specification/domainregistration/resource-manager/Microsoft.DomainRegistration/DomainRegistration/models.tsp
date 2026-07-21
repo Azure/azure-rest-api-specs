@@ -360,7 +360,7 @@ model LogSpecification {
 /**
  * App Service error response.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model DefaultErrorResponse {
   /**
@@ -732,7 +732,7 @@ model DomainPurchaseConsent {
 /**
  * Single sign-on request information for domain management.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DomainControlCenterSsoRequest {
   /**
    * URL where the single sign-on request is to be made.
@@ -1022,7 +1022,7 @@ model TldLegalAgreement {
 /**
  * The server could not understand the request due to invalid syntax.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model ArmBadRequestResponse {
   ...TypeSpec.Http.Response<400>;

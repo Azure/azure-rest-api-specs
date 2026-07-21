@@ -392,7 +392,7 @@ union UsagesUnit {
 /**
  * Details of the certificate to be uploaded to the vault.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CertificateRequest {
   /**
    * Raw certificate data.
@@ -418,7 +418,7 @@ model RawCertificateData {
 /**
  * Certificate corresponding to a vault that can be used by clients to register themselves with the vault.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model VaultCertificateResponse {
   /**
    * Resource name associated with the resource.
@@ -1724,7 +1724,7 @@ model ResourceCertificateAndAcsDetails extends ResourceCertificateDetails {
   authType: "AccessControlService";
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ClientDiscoveryResponse
   is Azure.Core.Page<ClientDiscoveryValueForSingleApi>;
 

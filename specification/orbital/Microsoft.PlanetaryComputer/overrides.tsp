@@ -14,7 +14,7 @@ using Microsoft.PlanetaryComputer;
 /**
  * Options for getting a tile from a dataset
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model GetTileOptions {
   /**
    * Asset query parameters for selecting and manipulating assets
@@ -45,7 +45,7 @@ model GetTileOptions {
 /**
  * Options for getting WMTS capabilities
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model GetWmtsCapabilitiesOptions {
   /**
    * Asset query parameters for selecting and manipulating assets
@@ -89,7 +89,7 @@ model GetWmtsCapabilitiesOptions {
 /**
  * Options for getting asset statistics
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model GetAssetStatisticsOptions {
   /**
    * Asset query parameters for selecting and manipulating assets
@@ -105,7 +105,7 @@ model GetAssetStatisticsOptions {
 /**
  * Options for cropping GeoJSON
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CropGeoJsonOptions {
   /**
    * Asset query parameters for selecting and manipulating assets
@@ -150,7 +150,7 @@ model CropGeoJsonOptions {
 /**
  * Options for getting parts (cropped to bounding box)
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model GetPartOptions {
   /**
    * Asset query parameters for selecting and manipulating assets
@@ -201,7 +201,7 @@ model GetPartOptions {
 /**
  * Options for getting previews
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model GetPreviewOptions {
   /**
    * Asset query parameters for selecting and manipulating assets
@@ -251,7 +251,7 @@ model GetPreviewOptions {
 /**
  * Options for getting statistics
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model GetStatisticsOptions {
   /**
    * Asset query parameters for selecting and manipulating assets
@@ -267,7 +267,7 @@ model GetStatisticsOptions {
 /**
  * Options for getting GeoJSON statistics
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model GetGeoJsonStatisticsOptions {
   /**
    * Asset query parameters for selecting and manipulating assets
@@ -283,7 +283,7 @@ model GetGeoJsonStatisticsOptions {
 /**
  * Options for getting TileJSON
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model GetTileJsonOptions {
   /**
    * Asset query parameters for selecting and manipulating assets
@@ -327,7 +327,7 @@ model GetTileJsonOptions {
 /**
  * Options for mosaic tiles
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model GetMosaicTileOptions {
   /**
    * Asset query parameters for selecting and manipulating assets
@@ -358,7 +358,7 @@ model GetMosaicTileOptions {
 /**
  * Options for mosaic TileJSON
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model GetMosaicTileJsonOptions {
   /**
    * Asset query parameters for selecting and manipulating assets
@@ -407,7 +407,7 @@ model GetMosaicTileJsonOptions {
 /**
  * Options for mosaic WMTS capabilities
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model GetMosaicWmtsCapabilitiesOptions {
   /**
    * Asset query parameters for selecting and manipulating assets

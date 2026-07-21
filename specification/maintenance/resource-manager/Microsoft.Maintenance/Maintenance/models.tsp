@@ -171,7 +171,7 @@ enum TagOperators {
 /**
  * Response of ScheduledEvents acknowledge
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ScheduledEventsApproveResponse {
   /**
    * Successfully Approved

@@ -256,7 +256,7 @@ model Routine {
   updated_at?: FoundryTimestamp;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The request body used to create or update a routine.")
 @extension("x-ms-foundry-meta", RoutineRequiredPreviews)
 model RoutineCreateOrUpdateRequest {
@@ -302,7 +302,7 @@ model InvokeAgentInvocationsApiDispatchPayload extends RoutineDispatchPayload {
   input: unknown;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Request body for the public dispatch_async route.")
 @extension("x-ms-foundry-meta", RoutineRequiredPreviews)
 model DispatchRoutineRequest {
@@ -310,7 +310,7 @@ model DispatchRoutineRequest {
   payload?: RoutineDispatchPayload;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Identifiers returned after a routine dispatch is queued.")
 @extension("x-ms-foundry-meta", RoutineRequiredPreviews)
 model DispatchRoutineResponse {

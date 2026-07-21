@@ -536,7 +536,7 @@ union SAPSoftwareInstallationType {
 /**
  * The SAP Sizing Recommendation request.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SAP is used for representing the company product."
 model SAPSizingRecommendationRequest {
   /**
@@ -670,7 +670,7 @@ model SAPSupportedSku {
 /**
  * The SAP request to get list of disk configurations.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SAP is used for representing the company product."
 model SAPDiskConfigurationsRequest {
   /**
@@ -808,7 +808,7 @@ model DiskDetails {
 /**
  * The SAP request to get list of availability zones.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SAP is used for representing the company product."
 model SAPAvailabilityZoneDetailsRequest {
   /**
@@ -1008,7 +1008,7 @@ model Resource {
 /**
  * Defines the request body for updating Virtual Instance for SAP.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SAP is used for representing the company product."
 model UpdateSAPVirtualInstanceRequest {
   /**
@@ -1316,7 +1316,7 @@ model StorageInformation {
 /**
  * Defines the request body for updating SAP Central Instance.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SAP is used for representing the company product."
 model UpdateSAPCentralInstanceRequest {
   /**
@@ -1414,7 +1414,7 @@ model DatabaseVmDetails {
 /**
  * Defines the request body for updating SAP Database Instance.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SAP is used for representing the company product."
 model UpdateSAPDatabaseInstanceRequest {
   /**
@@ -1554,7 +1554,7 @@ model ApplicationServerVmDetails {
 /**
  * Defines the request body for updating SAP Application Instance.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SAP is used for representing the company product."
 model UpdateSAPApplicationInstanceRequest {
   /**

@@ -3877,7 +3877,7 @@ model BillingAccountPatch extends ProxyResourceWithTags {
 /**
  * Result of the address validation.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AddressValidationResponse {
   /**
    * Status of the address validation.
@@ -5451,7 +5451,7 @@ model UtilizationAggregates {
 /**
  * Savings plan patch request
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SavingsPlanUpdateRequest {
   /**
    * Savings plan patch request
@@ -5503,7 +5503,7 @@ model SavingsPlanUpdateRequestProperties {
 /**
  * Savings plan update validate request.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SavingsPlanUpdateValidateRequest {
   /**
    * The benefits of a savings plan.
@@ -5515,7 +5515,7 @@ model SavingsPlanUpdateValidateRequest {
 /**
  * Savings plan update validate response.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SavingsPlanValidateResponse {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @identifiers(#[])
@@ -5969,7 +5969,7 @@ model CancelSubscriptionRequest {
 /**
  * Request parameters that are provided to merge the two billing subscriptions.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BillingSubscriptionMergeRequest {
   /**
    * The ID of the target billing subscription that will be merged with the source subscription provided in the request.
@@ -5985,7 +5985,7 @@ model BillingSubscriptionMergeRequest {
 /**
  * Request parameters to transfer billing subscription.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model MoveBillingSubscriptionRequest {
   /**
    * The destination invoice section id.
@@ -6001,7 +6001,7 @@ model MoveBillingSubscriptionRequest {
 /**
  * Request parameters that are provided to split the billing subscription.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BillingSubscriptionSplitRequest {
   /**
    * The ID of the target product to which the subscription needs to be split into. This value is not same as the value returned in Get API call and can be retrieved from Catalog API to know the product id to split into.
@@ -6687,7 +6687,7 @@ model RefundDetailsSummaryAmountRefunded extends Amount {}
 /**
  * A list of download details for individual documents.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DocumentDownloadRequest {
   /**
    * The ID that uniquely identifies an invoice document. This ID may be an identifier for an invoice PDF, a credit note, or a tax receipt. If omitted, the most recent invoice PDF for the invoice will be returned.
@@ -7802,7 +7802,7 @@ model RenewPropertiesResponse {
 /**
  * The request for reservation purchase
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ReservationPurchaseRequest {
   /**
    * The name of sku
@@ -8664,7 +8664,7 @@ model TransferError {
 /**
  * Request parameters to initiate transfer.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model InitiateTransferRequest {
   /**
    * Request parameters to initiate transfer.
@@ -8747,7 +8747,7 @@ model PartnerTransferProperties {
 /**
  * Request parameters to initiate partner transfer.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model PartnerInitiateTransferRequest {
   /**
    * Request parameters to initiate partner transfer.
@@ -8889,7 +8889,7 @@ model RecipientTransferProperties {
 /**
  * Result of transfer validation.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ValidateTransferListResponse {
   /**
    * The list of transfer validation results.
@@ -8903,7 +8903,7 @@ model ValidateTransferListResponse {
 /**
  * Transfer validation response.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ValidateTransferResponse {
   /**
    * The properties of transfer validation response.

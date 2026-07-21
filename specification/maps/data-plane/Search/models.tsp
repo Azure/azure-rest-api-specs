@@ -1082,7 +1082,7 @@ union AutocompleteResultTypeEnum {
  * Encoded as a [`GeoJSON FeatureCollection`](https://www.rfc-editor.org/rfc/rfc7946) whose
  * `features` array contains one `Feature` per geocoded location.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model GeocodingResponse {
   /**
    * The `GeoJSON` object type of a successful `Get Geocoding` or `Get Reverse Geocoding`
@@ -1476,7 +1476,7 @@ model GeocodingBatchRequestItem {
  * many of the submitted queries succeeded plus a `batchItems` array containing one response
  * entry per query in the request, in the same order as the request `batchItems` array.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model GeocodingBatchResponse {
   /**
    * Aggregate counts for the batch as a whole, the total submitted queries and how many of
@@ -1699,7 +1699,7 @@ model ReverseGeocodingBatchRequestItem {
  * array contains one `Feature` per autocomplete suggestion, ranked from most to least
  * likely.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AutocompleteResponse {
   /**
    * The `GeoJSON` object type of a successful `Get Autocomplete` response body. Always
@@ -1794,7 +1794,7 @@ model AutocompleteProperties {
  * details for failed operations. (This also follows the OData error response
  * format.).
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model ErrorResponse {
   /**

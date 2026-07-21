@@ -178,7 +178,7 @@ model OptimizationAgentDefinition {
   tools?: Record<unknown>[];
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-options-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Tuning knobs and run-mode for an optimization job.")
 @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
 model OptimizationOptions {

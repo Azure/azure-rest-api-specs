@@ -72,7 +72,7 @@ either the validationCode or the validationUrl received in a
 SubscriptionValidationEvent. When the validationCode is used, the
 SubscriptionValidationResponse can be used to build the response.
 */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SubscriptionValidationResponse {
   /** The validation response sent by the subscriber to Azure Event Grid to complete the validation of an event subscription. */
   validationResponse: string;

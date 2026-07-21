@@ -187,7 +187,7 @@ union ManagedPrivateEndpointConnectionStatus {
   Disconnected: "Disconnected",
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ManagedGrafanaListResponse is Azure.Core.Page<ManagedGrafana>;
 
@@ -747,7 +747,7 @@ model MarketplaceTrialQuota {
   trialEndAt?: utcDateTime;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model GrafanaAvailablePluginListResponse {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -792,7 +792,7 @@ model GrafanaAvailablePlugin {
 /**
  * The list of managed private endpoints of a grafana resource
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ManagedPrivateEndpointModelListResponse
   is Azure.Core.Page<ManagedPrivateEndpointModel>;
 
@@ -879,7 +879,7 @@ model ManagedPrivateEndpointUpdateParameters {
   tags?: Record<string>;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IntegrationFabricListResponse is Azure.Core.Page<IntegrationFabric>;
 
@@ -931,7 +931,7 @@ model IntegrationFabricPropertiesUpdateParameters {
   scenarios?: string[];
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ManagedDashboardListResponse is Azure.Core.Page<ManagedDashboard>;
 
@@ -975,7 +975,7 @@ model ResourceSku {
 /**
  * The list response for dashboard definitions.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-response-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2025_09_01_preview)
 model DashboardDefinitionListResponse is Azure.Core.Page<DashboardDefinition>;
 

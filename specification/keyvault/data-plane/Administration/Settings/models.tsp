@@ -34,7 +34,7 @@ union SettingTypeEnum {
 /**
  * The update settings request object.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model UpdateSettingRequest {
   /**
    * The value of the pool setting.

@@ -2977,7 +2977,7 @@ model DomainSharedAccessKeys {
 /**
  * Domain regenerate share access key request.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DomainRegenerateKeyRequest {
   /**
    * Key name to regenerate key1 or key2.
@@ -4055,7 +4055,7 @@ model NamespaceSharedAccessKeys {
 /**
  * Namespace regenerate share access key request.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model NamespaceRegenerateKeyRequest {
   /**
    * Key name to regenerate key1 or key2.
@@ -4453,7 +4453,7 @@ model PartnerNamespaceSharedAccessKeys {
 /**
  * PartnerNamespace regenerate shared access key request.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-request-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model PartnerNamespaceRegenerateKeyRequest {
   /**
    * Key name to regenerate (key1 or key2).
