@@ -60,7 +60,7 @@ model WorkspaceDiscoveryProperties {
    * The workspace ID this discovery belongs to.
    */
   @visibility(Lifecycle.Read)
-  workspaceId: string;
+  workspaceId: Azure.Core.armResourceIdentifier;
 
   /**
    * The resource snapshot ID produced by this discovery.

@@ -70,7 +70,12 @@ suppressions:
   - code: GuidUsage
     from: openapi.json
     where: $.definitions["Azure.Core.uuid"].format
-    reason: Approved by ARM API reviewer. GUID usage is required for resource identifiers in the Chaos service.
+    reason: >-
+      The Azure.Core.uuid scalar is used only for canonical Microsoft Entra
+      identifiers and Azure RBAC role definition GUIDs: ConnectionProperties.principalId
+      (Entra principal/object ID), ConnectionProperties.tenantId (Entra tenant ID), and
+      ActionProperties.recommendedRoles (Azure RBAC role definition GUIDs). These are
+      well-known UUIDs, not free-form resource identifiers. Approved by ARM API reviewer.
   - code: AllTrackedResourcesMustHaveDelete
     from: openapi.json
     where: $.definitions.Workspace
@@ -144,7 +149,12 @@ suppressions:
   - code: GuidUsage
     from: openapi.json
     where: $.definitions["Azure.Core.uuid"].format
-    reason: Approved by ARM API reviewer. GUID usage is required for resource identifiers in the Chaos service.
+    reason: >-
+      The Azure.Core.uuid scalar is used only for canonical Microsoft Entra
+      identifiers and Azure RBAC role definition GUIDs: ConnectionProperties.principalId
+      (Entra principal/object ID), ConnectionProperties.tenantId (Entra tenant ID), and
+      ActionProperties.recommendedRoles (Azure RBAC role definition GUIDs). These are
+      well-known UUIDs, not free-form resource identifiers. Approved by ARM API reviewer.
   - code: AllTrackedResourcesMustHaveDelete
     from: openapi.json
     where: $.definitions.Workspace
