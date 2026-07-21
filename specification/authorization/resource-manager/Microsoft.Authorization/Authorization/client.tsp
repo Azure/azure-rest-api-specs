@@ -320,7 +320,7 @@ union RoleManagementScopeType {
 );
 @@clientName(
   Microsoft.Authorization.NotificationDeliveryMechanism,
-  "RoleManagementNotificationDeliveryType",
+  "NotificationDeliveryType",
   "csharp"
 );
 @@clientName(
