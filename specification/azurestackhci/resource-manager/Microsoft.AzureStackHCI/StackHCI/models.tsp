@@ -7280,6 +7280,13 @@ model EdgeMachineReportedProperties {
   extensionProfile?: ExtensionProfile;
 
   /**
+   * CVM (Confidential VM) support details for the edge machine.
+   */
+  @added(Versions.v2026_10_15_preview)
+  @visibility(Lifecycle.Read)
+  confidentialVmProfile?: ConfidentialVmProfile;
+
+  /**
    * Read-only Hyper-V VM inventory reported by the device management extension for VMs visible on this node.
    */
   @visibility(Lifecycle.Read)
@@ -7359,6 +7366,18 @@ model EdgeMachineNetworkProfile {
   @visibility(Lifecycle.Read)
   @Azure.ResourceManager.identifiers(#["switchName"])
   switchDetails?: SwitchDetail[];
+
+  /**
+   * HostNetwork configuration reported for the edge machine.
+   */
+  @visibility(Lifecycle.Read)
+  hostNetwork?: HciEdgeDeviceHostNetwork;
+
+  /**
+   * Software Defined Networking (SDN) properties reported for the edge machine.
+   */
+  @visibility(Lifecycle.Read)
+  sdnProperties?: SdnProperties;
 }
 
 /**
@@ -7575,6 +7594,13 @@ model StorageProfile {
    */
   @visibility(Lifecycle.Read)
   poolableDisksCount?: int64;
+
+  /**
+   * List of storage disks on the edge machine.
+   */
+  @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#["id"])
+  disks?: EdgeDeviceDisks[];
 }
 /**
  * details of validation failure

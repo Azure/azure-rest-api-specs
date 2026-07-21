@@ -13870,6 +13870,16 @@
           "x-ms-identifiers": [
             "switchName"
           ]
+        },
+        "hostNetwork": {
+          "$ref": "#/definitions/HciEdgeDeviceHostNetwork",
+          "description": "HostNetwork configuration reported for the edge machine.",
+          "readOnly": true
+        },
+        "sdnProperties": {
+          "$ref": "#/definitions/SdnProperties",
+          "description": "Software Defined Networking (SDN) properties reported for the edge machine.",
+          "readOnly": true
         }
       }
     },
@@ -14281,6 +14291,11 @@
         "extensionProfile": {
           "$ref": "#/definitions/ExtensionProfile",
           "description": "Extension details for edge machine.",
+          "readOnly": true
+        },
+        "confidentialVmProfile": {
+          "$ref": "#/definitions/ConfidentialVmProfile",
+          "description": "CVM (Confidential VM) support details for the edge machine.",
           "readOnly": true
         },
         "workloadInventory": {
@@ -21075,6 +21090,17 @@
           "format": "int64",
           "description": "Number of storage disks in the device with $CanPool as true.",
           "readOnly": true
+        },
+        "disks": {
+          "type": "array",
+          "description": "List of storage disks on the edge machine.",
+          "items": {
+            "$ref": "#/definitions/EdgeDeviceDisks"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "id"
+          ]
         }
       }
     },
