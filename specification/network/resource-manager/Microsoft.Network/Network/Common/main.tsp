@@ -55,6 +55,11 @@ enum Versions {
    * The 2025-07-01 API version.
    */
   v2025_07_01: "2025-07-01",
+
+  /**
+   * The 2025-09-01 API version.
+   */
+  v2025_09_01: "2025-09-01",
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -256,6 +261,12 @@ union LoadBalancerSkuName {
    * Gateway
    */
   Gateway: "Gateway",
+
+  /**
+   * Service load balancer SKU.
+   */
+  @added(Versions.v2025_09_01)
+  Service: "Service",
 }
 
 /**
@@ -4305,8 +4316,7 @@ union VirtualNetworkPeeringLevel {
   LocalAndRemoteNotInSync: "LocalAndRemoteNotInSync",
 }
 
-@@clientName(
-  Components1Jq1T4ISchemasManagedserviceidentityPropertiesUserassignedidentitiesAdditionalproperties,
+@@clientName(Components1Jq1T4ISchemasManagedserviceidentityPropertiesUserassignedidentitiesAdditionalproperties,
   "ManagedServiceIdentityUserAssignedIdentities",
   "!javascript"
 );
