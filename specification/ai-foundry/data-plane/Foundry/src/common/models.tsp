@@ -28,13 +28,30 @@ alias AcceptJsonHeader = {
   @header accept: "application/json";
 };
 
+/**
+ * Optional request header carrying an opaque per-user identity for delegation.
+ * When present and the caller has the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission,
+ * the service scopes endpoint-scoped data (responses, conversations, sessions) to the
+ * supplied user identity instead of the caller's own identity.
+ * If the caller has delegation RBAC but does not pass this header, the caller's own identity is used.
+ */
+alias UserDelegationHeader = {
+  /** Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission. */
+  @header("x-ms-user-identity") user_identity?: string;
+};
+
+// NOTE: Platform-internal headers (x-agent-foundry-call-id, x-foundry-foundation-token)
+// are NOT part of the public API spec. They are injected by the platform and resolved
+// server-side. If needed for contracts, they should be added in the contracts entry point.
+
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
+#suppress "@azure-tools/typespec-azure-core/response-schema-problem" "OpenAI Response schemas can be intentionally combined for documentation clarity"
 op OpenAIOperation<
   Params extends Reflection.Model,
   Response,
   ErrorResponse = ApiErrorResponse
->(...Params): Response | ErrorResponse;
+>(...Params): Response | AzureRangeErrorResponse<ErrorResponse>;
 
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
@@ -45,7 +62,7 @@ op OpenAIOperationWithPreview<
   ErrorResponse = ApiErrorResponse
 >(...WithConditionalFoundryPreviewHeader<AreaPreviewLabel>, ...Params):
   | Response
-  | ErrorResponse;
+  | AzureRangeErrorResponse<ErrorResponse>;
 
 alias AssetBase = {
   @doc("Asset ID, a unique identifier for the asset")
@@ -102,3 +119,83 @@ alias SseResponseOf<T> = {
   @header("Content-Type") contentType: "text/event-stream";
   @body responseBody: T;
 };
+
+// ============================================================================
+// Shared Job Sources
+//
+// Source types shared across job types (evaluator generation, data generation,
+// and future job types such as optimization). Placed in common to avoid
+// duplication across job-specific model files.
+// ============================================================================
+
+// Common properties shared across all job source types. Spread into per-context
+// source variants alongside a context-specific discriminated base (e.g.,
+// `EvaluatorGenerationJobSource`). Modeled as an `alias` (not a `model`) since
+// it is a single-property fragment used purely for spreading — declaring a
+// named model adds no value over inlining the property.
+alias JobSourceDescription = {
+  @doc("Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities').")
+  description?: string;
+};
+
+@doc("Prompt source — inline text provided by the user. Reusable shape spread into per-context discriminated subtypes.")
+model PromptJobSource {
+  ...JobSourceDescription;
+
+  @doc("The source type for this source, which is Prompt.")
+  type: "prompt";
+
+  @doc("Inline prompt text (e.g., agent description, policy text, supplementary context).")
+  prompt: string;
+}
+
+@doc("Agent source — references an agent to fetch instructions and metadata from. For prompt agents, fetches the agent's system prompt. For other agent types, fetches available metadata (description, configuration). Add a separate prompt source entry to `sources[]` to provide supplementary text alongside the agent. Reusable shape spread into per-context discriminated subtypes.")
+model AgentJobSource {
+  ...JobSourceDescription;
+
+  @doc("The source type for this source, which is Agent.")
+  type: "agent";
+
+  @doc("The agent name to fetch instructions from.")
+  agent_name: string;
+
+  @doc("The agent version. If not specified, the latest version is used.")
+  agent_version?: string;
+}
+
+@doc("Traces source — conversation traces from Application Insights. Reusable shape spread into per-context discriminated subtypes.")
+model TracesJobSource {
+  ...JobSourceDescription;
+
+  @doc("The source type for this source, which is Traces.")
+  type: "traces";
+
+  @doc("The unique agent ID used to filter traces. Provide either `agent_id` or `agent_name` — at least one is required.")
+  agent_id?: string;
+
+  @doc("The agent name to fetch traces for. Provide either `agent_id` or `agent_name` — at least one is required.")
+  agent_name?: string;
+
+  @doc("The agent version. If not specified, traces for ALL versions of the agent are included within the time window.")
+  agent_version?: string;
+
+  @doc("Start of the time window (Unix timestamp in seconds) for fetching traces.")
+  start_time: FoundryTimestamp;
+
+  @doc("End of the time window (Unix timestamp in seconds). Defaults to current time.")
+  end_time?: FoundryTimestamp;
+}
+
+@doc("Dataset source — reference to a dataset. Reusable shape spread into per-context discriminated subtypes.")
+model DatasetJobSource {
+  ...JobSourceDescription;
+
+  @doc("The source type for this source, which is Dataset.")
+  type: "dataset";
+
+  @doc("The name of the dataset.")
+  name: string;
+
+  @doc("The version of the dataset. If not specified, the latest version is used.")
+  version?: string;
+}
