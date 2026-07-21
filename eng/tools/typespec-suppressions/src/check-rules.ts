@@ -2,13 +2,6 @@ import { readFileSync } from "node:fs";
 import path from "node:path";
 
 /**
- * Repo-relative path to the curated check-rules file (the "New TypeSpec
- * ruleset"). Shared so the CLI workflow and downstream consumers (e.g.
- * summarize-impact) resolve the same file.
- */
-export const CHECK_RULES_RELATIVE_PATH = "eng/tools/typespec-suppressions/check-rules.json";
-
-/**
  * Shape of the curated check-rules JSON file. Only `rules` is required.
  */
 export interface CheckRulesFile {

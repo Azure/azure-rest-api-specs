@@ -96,7 +96,6 @@ export async function main() {
   }
 }
 
-export { CHECK_RULES_RELATIVE_PATH } from "./check-rules.ts";
 export {
   analyzeTypeSpecSuppressions,
   analyzeTypeSpecSuppressionsFromDirectories,

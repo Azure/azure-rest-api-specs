@@ -85,8 +85,10 @@ Behavior notes:
 - **Graceful degradation:** if the file is missing, unreadable, not valid JSON,
   or lacks a `rules` string array, a warning is logged and the tool proceeds with
   zero rules (no suppressions require approval). It never hard-fails.
-- The curated list for this repo lives at
-  `eng/tools/typespec-suppressions/check-rules.json`.
+- The curated ruleset is optional and supplied explicitly via
+  `--check-rules-file <path>`. There is no hardcoded default location: when the
+  flag is omitted the tool runs in legacy mode (all suppressions reported, none
+  gated).
 
 ### Examples
 
