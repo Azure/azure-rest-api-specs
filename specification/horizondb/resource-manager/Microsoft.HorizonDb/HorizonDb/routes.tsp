@@ -144,8 +144,16 @@ interface HorizonDbPrivateEndpointConnections {
     PrivateEndpointConnectionResource
   >;
 
+  @doc("Updates a private endpoint connection.")
+  @removed(Versions.v2026_05_01_preview)
+  update is HorizonDbPrivateEndpointOperations.CustomPatchAsync<
+    HorizonDbCluster,
+    PrivateEndpointConnectionResource
+  >;
+
   @doc("Approves or rejects a private endpoint connection.")
-  update is HorizonDbPrivateEndpointOperations.CreateOrReplaceSync<
+  @added(Versions.v2026_05_01_preview)
+  updateStatus is HorizonDbPrivateEndpointOperations.CreateOrReplaceSync<
     HorizonDbCluster,
     PrivateEndpointConnectionResource
   >;

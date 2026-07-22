@@ -1705,7 +1705,7 @@
         }
       },
       "put": {
-        "operationId": "HorizonDbPrivateEndpointConnections_Update",
+        "operationId": "HorizonDbPrivateEndpointConnections_UpdateStatus",
         "tags": [
           "HorizonDbPrivateEndpointConnections"
         ],
@@ -1765,7 +1765,7 @@
         },
         "x-ms-examples": {
           "Approve or reject a private endpoint connection": {
-            "$ref": "./examples/PrivateEndpointConnections_Update.json"
+            "$ref": "./examples/PrivateEndpointConnections_UpdateStatus.json"
           }
         }
       },
@@ -2881,7 +2881,14 @@
         "userAssignedIdentityId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The resource ID of the user-assigned managed identity used for mirroring."
+          "description": "The resource ID of the user-assigned managed identity used for mirroring.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
         }
       }
     },

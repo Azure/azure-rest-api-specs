@@ -148,6 +148,11 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 @@clientName(
+  Microsoft.HorizonDb.HorizonDbPrivateEndpointConnections.updateStatus,
+  "updateStatusPrivateEndpointConnection",
+  "csharp"
+);
+@@clientName(
   Microsoft.HorizonDb.HorizonDbPrivateEndpointConnections.delete,
   "deletePrivateEndpointConnection",
   "csharp"

@@ -204,7 +204,11 @@ model HorizonDbClusterMirroring {
   databaseNames?: string[];
 
   @doc("The resource ID of the user-assigned managed identity used for mirroring.")
-  userAssignedIdentityId?: armResourceIdentifier;
+  userAssignedIdentityId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
 }
 
 @added(Versions.v2026_05_01_preview)
