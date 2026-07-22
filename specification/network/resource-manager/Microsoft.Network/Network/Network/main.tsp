@@ -18,7 +18,6 @@ import "./ApplicationGatewayAvailableSslOptions.tsp";
 import "./ApplicationGatewayPrivateEndpointConnection.tsp";
 import "./ApplicationGatewayWafDynamicManifestResult.tsp";
 import "./ApplicationSecurityGroup.tsp";
-import "./AddressPrefixSet.tsp";
 import "./AzureFirewall.tsp";
 import "./AzureWebCategory.tsp";
 import "./BastionHost.tsp";
@@ -137,6 +136,7 @@ import "./routes.tsp";
 import "./VirtualNetworkAppliance.tsp";
 import "./ServiceGateway.tsp";
 import "./InterconnectGroup.tsp";
+import "./AddressPrefixSet.tsp";
 import "../Common/main.tsp";
 
 using TypeSpec.Rest;
