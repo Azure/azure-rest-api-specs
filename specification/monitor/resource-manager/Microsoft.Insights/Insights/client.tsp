@@ -936,22 +936,22 @@ namespace Microsoft.InsightsCombinedClient;
 @@clientName(
   TenantActionGroups.WebhookReceiver,
   "TenantActionGroupWebhookReceiver",
-  "java,javascript,python"
+  "java,javascript,python,go"
 );
 @@clientName(
   TenantActionGroups.ActionGroupPatchBody,
   "TenantActionGroupPatchBody",
-  "java,javascript,python"
+  "java,javascript,python,go"
 );
 @@clientName(
   TenantActionGroups.ActionDetail,
   "TenantActionGroupActionDetail",
-  "java,javascript,python"
+  "java,javascript,python,go"
 );
 @@clientName(
   TenantActionGroups.TestNotificationDetailsResponse,
   "TenantActionGroupTestNotificationDetailsResponse",
-  "java,javascript,python"
+  "java,javascript,python,go"
 );
 
 @@clientName(
@@ -1456,7 +1456,7 @@ model MetricSettings {
 @@alternateType(
   ServiceDiagnosticsSettingsApi.MetricSettings,
   DiagnosticsSettings.DiagnosticsMetricSettings,
-  "java,javascript,python"
+  "java,javascript,python,go"
 );
 @@clientName(
   DiagnosticsSettings.DiagnosticsMetricSettings,
@@ -1505,7 +1505,7 @@ model LogSettings {
 @@alternateType(
   ServiceDiagnosticsSettingsApi.LogSettings,
   DiagnosticsSettings.DiagnosticsLogSettings,
-  "java,javascript,python"
+  "java,javascript,python,go"
 );
 @@clientName(
   DiagnosticsSettings.DiagnosticsLogSettings,

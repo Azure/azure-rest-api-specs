@@ -32,6 +32,7 @@ interface Occurrences {
     CancelOccurrenceRequest,
     ResourceOperationResponse
   >;
+  @doc("A long-running resource action.")
   delay is ArmResourceActionAsync<
     Occurrence,
     DelayRequest,
