@@ -190,3 +190,8 @@ using Microsoft.Mission;
 @@clientName(TransitOptionParams, "EnclaveTransitOptionContent", "csharp");
 @@clientName(TransitOptionType, "EnclaveTransitOptionType", "csharp");
 @@clientName(UpdateMode, "EnclaveUpdateMode", "csharp");
+
+@@clientName(VirtualEnclaveProperties, "EnclaveProperties", "csharp");
+@@clientName(VirtualEnclavePatchProperties, "EnclavePatchProperties", "csharp");
+@@clientName(VirtualEnclaveApprovalSettings, "EnclaveApprovalSettings", "csharp");
+@@clientName(VirtualEnclaveApprovalSettingsPatchProperties, "EnclaveApprovalSettingsPatchProperties", "csharp");
