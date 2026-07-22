@@ -57,6 +57,7 @@ model MachineOnPremSettingsProperties is AzureResourceProperties {
   costOverrides?: CostOverride[];
 
   @doc("Metadata describing the reconciliation status of the settings.")
+  @visibility(Lifecycle.Read)
   reconciliationInfo?: MachineReconciliationInfo;
 }
 
