@@ -54,6 +54,18 @@ namespace Microsoft.Compute;
   "!autorest"
 );
 
+// Disambiguate LaunchBulkInstancesOperation's custom InnerError from the standard
+// Azure.Core.Foundations.InnerError that the folded ScheduledActions error models pull in
+// (via Azure.Core.Foundations.Error). Flattening-language SDKs (C#/Java/Python) require unique
+// client names; the standard type keeps "InnerError", BA's custom one is renamed.
+@@clientName(Microsoft.Compute.InnerError, "BulkInstancesInnerError", "csharp");
+@@clientName(Microsoft.Compute.InnerError, "BulkInstancesInnerError", "java");
+@@clientName(
+  Microsoft.Compute.InnerError,
+  "BulkInstancesInnerError",
+  "python,go,javascript"
+);
+
 @@clientName(CancelOperationsResponse, "CancelBulkOperationsResult", "csharp");
 @@clientName(DeadlineType, "BulkActionDeadlineKind", "csharp");
 @@clientName(
@@ -224,45 +236,6 @@ namespace Microsoft.Compute;
   "ComputeBulkFallbackOperationInfo",
   "csharp"
 );
-
-// C# only: expose subscriptionId as Guid? (UUID) while keeping the spec/OpenAPI type as string to avoid ARM GuidUsage lint.
-@@alternateType(
-  ResourceOperationDetails.subscriptionId,
-  Azure.Core.uuid,
-  "csharp"
-);
-
-@@clientName(
-  DeallocateResourceOperationResponse.type,
-  "ResourceTypeName",
-  "csharp"
-);
-
-@@clientName(
-  HibernateResourceOperationResponse.type,
-  "ResourceTypeName",
-  "csharp"
-);
-
-@@clientName(
-  DeleteResourceOperationResponse.type,
-  "ResourceTypeName",
-  "csharp"
-);
-
-@@clientName(
-  CreateResourceOperationResponse.type,
-  "ResourceTypeName",
-  "csharp"
-);
-
-@@clientName(
-  ReimageResourceOperationResponse.type,
-  "ResourceTypeName",
-  "csharp"
-);
-
-@@clientName(StartResourceOperationResponse.type, "ResourceTypeName", "csharp");
 
 // =====================================================================
 // Fix: Go SDK Validation incorrectly detects networkApiVersion as an API version
