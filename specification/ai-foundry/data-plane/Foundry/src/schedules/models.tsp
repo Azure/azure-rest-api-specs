@@ -2,10 +2,16 @@ import "../common/models.tsp";
 import "../insights/models.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.OpenAPI;
 
 namespace Azure.AI.Projects;
 
+const SchedulesRequiredPreviews = #{
+  required_previews: #[FoundryFeaturesOptInKeys.schedules_v1_preview],
+};
+
 @doc("Schedule provisioning status.")
+@extension("x-ms-foundry-meta", SchedulesRequiredPreviews)
 union ScheduleProvisioningStatus {
   string,
 
@@ -26,6 +32,7 @@ union ScheduleProvisioningStatus {
 }
 
 @doc("Type of the trigger.")
+@extension("x-ms-foundry-meta", SchedulesRequiredPreviews)
 union TriggerType {
   string,
 
@@ -41,19 +48,21 @@ union TriggerType {
 
 @doc("Base model for Trigger of the schedule.")
 @discriminator("type")
+@extension("x-ms-foundry-meta", SchedulesRequiredPreviews)
 model Trigger {
   @doc("Type of the trigger.")
   type: TriggerType;
 }
 
 @doc("Cron based trigger.")
+@extension("x-ms-foundry-meta", SchedulesRequiredPreviews)
 model CronTrigger extends Trigger {
   type: TriggerType.Cron;
 
   @doc("Cron expression that defines the schedule frequency.")
   expression: string;
 
-  @doc("Time zone for the cron schedule.")
+  @doc("Time zone for the cron schedule. Defaults to `UTC`.")
   timeZone?: string = "UTC";
 
   @doc("Start time for the cron schedule in ISO 8601 format.")
@@ -64,6 +73,7 @@ model CronTrigger extends Trigger {
 }
 
 @doc("Recurrence type.")
+@extension("x-ms-foundry-meta", SchedulesRequiredPreviews)
 union RecurrenceType {
   string,
 
@@ -81,6 +91,7 @@ union RecurrenceType {
 }
 
 @doc("Days of the week for recurrence schedule.")
+@extension("x-ms-foundry-meta", SchedulesRequiredPreviews)
 union DayOfWeek {
   string,
 
@@ -108,17 +119,20 @@ union DayOfWeek {
 
 @doc("Recurrence schedule model.")
 @discriminator("type")
+@extension("x-ms-foundry-meta", SchedulesRequiredPreviews)
 model RecurrenceSchedule {
   @doc("Recurrence type for the recurrence schedule.")
   type: RecurrenceType;
 }
 
 @doc("Hourly recurrence schedule.")
+@extension("x-ms-foundry-meta", SchedulesRequiredPreviews)
 model HourlyRecurrenceSchedule extends RecurrenceSchedule {
   type: RecurrenceType.Hourly;
 }
 
 @doc("Daily recurrence schedule.")
+@extension("x-ms-foundry-meta", SchedulesRequiredPreviews)
 model DailyRecurrenceSchedule extends RecurrenceSchedule {
   @doc("Daily recurrence type.")
   type: RecurrenceType.Daily;
@@ -128,6 +142,7 @@ model DailyRecurrenceSchedule extends RecurrenceSchedule {
 }
 
 @doc("Weekly recurrence schedule.")
+@extension("x-ms-foundry-meta", SchedulesRequiredPreviews)
 model WeeklyRecurrenceSchedule extends RecurrenceSchedule {
   @doc("Weekly recurrence type.")
   type: RecurrenceType.Weekly;
@@ -137,6 +152,7 @@ model WeeklyRecurrenceSchedule extends RecurrenceSchedule {
 }
 
 @doc("Monthly recurrence schedule.")
+@extension("x-ms-foundry-meta", SchedulesRequiredPreviews)
 model MonthlyRecurrenceSchedule extends RecurrenceSchedule {
   @doc("Monthly recurrence type.")
   type: RecurrenceType.Monthly;
@@ -146,6 +162,7 @@ model MonthlyRecurrenceSchedule extends RecurrenceSchedule {
 }
 
 @doc("Recurrence based trigger.")
+@extension("x-ms-foundry-meta", SchedulesRequiredPreviews)
 model RecurrenceTrigger extends Trigger {
   @doc("Type of the trigger.")
   type: TriggerType.Recurrence;
@@ -156,7 +173,7 @@ model RecurrenceTrigger extends Trigger {
   @doc("End time for the recurrence schedule in ISO 8601 format.")
   endTime?: string;
 
-  @doc("Time zone for the recurrence schedule.")
+  @doc("Time zone for the recurrence schedule. Defaults to `UTC`.")
   timeZone?: string = "UTC";
 
   @doc("Interval for the recurrence schedule.")
@@ -167,17 +184,19 @@ model RecurrenceTrigger extends Trigger {
 }
 
 @doc("One-time trigger.")
+@extension("x-ms-foundry-meta", SchedulesRequiredPreviews)
 model OneTimeTrigger extends Trigger {
   type: TriggerType.OneTime;
 
   @doc("Date and time for the one-time trigger in ISO 8601 format.")
   triggerAt: string;
 
-  @doc("Time zone for the one-time trigger.")
+  @doc("Time zone for the one-time trigger. Defaults to `UTC`.")
   timeZone?: string = "UTC";
 }
 
 @doc("Type of the task.")
+@extension("x-ms-foundry-meta", SchedulesRequiredPreviews)
 union ScheduleTaskType {
   string,
 
@@ -190,6 +209,7 @@ union ScheduleTaskType {
 
 @doc("Schedule task model.")
 @discriminator("type")
+@extension("x-ms-foundry-meta", SchedulesRequiredPreviews)
 model ScheduleTask {
   @doc("Type of the task.")
   type: ScheduleTaskType;
@@ -199,6 +219,7 @@ model ScheduleTask {
 }
 
 @doc("Evaluation task for the schedule.")
+@extension("x-ms-foundry-meta", SchedulesRequiredPreviews)
 model EvaluationScheduleTask extends ScheduleTask {
   type: ScheduleTaskType.Evaluation;
 
@@ -206,10 +227,11 @@ model EvaluationScheduleTask extends ScheduleTask {
   evalId: string;
 
   @doc("The evaluation run payload.")
-  evalRun: {};
+  evalRun: Record<unknown>;
 }
 
 @doc("Insight task for the schedule.")
+@extension("x-ms-foundry-meta", SchedulesRequiredPreviews)
 model InsightScheduleTask extends ScheduleTask {
   type: ScheduleTaskType.Insight;
 
@@ -219,6 +241,7 @@ model InsightScheduleTask extends ScheduleTask {
 
 @resource("schedules")
 @doc("Schedule model.")
+@extension("x-ms-foundry-meta", SchedulesRequiredPreviews)
 model Schedule {
   @doc("Identifier of the schedule.")
   @key("id")
@@ -259,6 +282,7 @@ model Schedule {
 @doc("Schedule run model.")
 @parentResource(Schedule)
 @resource("runs")
+@extension("x-ms-foundry-meta", SchedulesRequiredPreviews)
 model ScheduleRun {
   @doc("Identifier of the schedule run.")
   @key("runId")
