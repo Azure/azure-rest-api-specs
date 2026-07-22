@@ -58,6 +58,10 @@ suppressions:
     reason: These are tenant level APIs and resource types by design.
     from: serviceGroups.json
     where: $.paths["/providers/Microsoft.Management/serviceGroups/{serviceGroupName}"]
+  - code: XMSSecretInResponse
+    reason: skipToken is the standard Azure OData paging continuation token, not a secret. The linter flags it due to the "Token" substring in the name; the property carries opaque pagination state and is not sensitive.
+    from: serviceGroups.json
+    where: $.definitions.ListDescendantsRequest.properties.skipToken
 ```
 ---
 
