@@ -122,6 +122,10 @@ These settings apply only when `--tag=package-2026-06-01` is specified on the co
 ```yaml $(tag) == 'package-2026-06-01'
 input-file:
   - NewRelic.Observability/stable/2026-06-01/NewRelic.json
+suppressions:
+  - code: ProvisioningStateMustBeReadOnly
+    from: NewRelic.json
+    reason: Seems like a tool bug, as the visibility is set to read only in definition of ProvisioningState.
 ```
 
 ---
