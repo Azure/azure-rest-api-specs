@@ -291,9 +291,7 @@ model HorizonDbClusterForPatchUpdate {
 }
 
 @@added(HorizonDbCluster.identity, Versions.v2026_05_01_preview);
-@@added(HorizonDbClusterForPatchUpdate.identity,
-  Versions.v2026_05_01_preview
-);
+@@added(HorizonDbClusterForPatchUpdate.identity, Versions.v2026_05_01_preview);
 
 @doc("Properties of a HorizonDB pool.")
 model HorizonDbPoolProperties {

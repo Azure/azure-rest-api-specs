@@ -49,8 +49,7 @@ interface HorizonDbClusters {
     HorizonDbCluster,
     void,
     ArmResponse<HorizonDbCluster>,
-    LroHeaders = ArmCombinedLroHeaders &
-      Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   @added(Versions.v2026_05_01_preview)
@@ -59,8 +58,7 @@ interface HorizonDbClusters {
     HorizonDbCluster,
     void,
     ArmResponse<HorizonDbCluster>,
-    LroHeaders = ArmCombinedLroHeaders &
-      Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   @added(Versions.v2026_05_01_preview)
@@ -69,8 +67,7 @@ interface HorizonDbClusters {
     HorizonDbCluster,
     void,
     ArmResponse<HorizonDbCluster>,
-    LroHeaders = ArmCombinedLroHeaders &
-      Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
 }
 
