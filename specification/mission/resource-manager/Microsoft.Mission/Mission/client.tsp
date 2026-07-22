@@ -4,49 +4,49 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.Mission;
 
-@@clientName(ApprovalResource, "VirtualEnclaveApproval", "csharp");
-@@clientName(ApprovalProperties, "VirtualEnclaveApprovalProperties", "csharp");
+@@clientName(ApprovalResource, "EnclaveApproval", "csharp");
+@@clientName(ApprovalProperties, "EnclaveApprovalProperties", "csharp");
 @@clientName(
   CommunityEndpointResource,
-  "VirtualEnclaveCommunityEndpoint",
+  "EnclaveCommunityEndpoint",
   "csharp"
 );
 @@clientName(
   CommunityEndpointProperties,
-  "VirtualEnclaveCommunityEndpointProperties",
+  "EnclaveCommunityEndpointProperties",
   "csharp"
 );
-@@clientName(CommunityResource, "VirtualEnclaveCommunity", "csharp");
+@@clientName(CommunityResource, "EnclaveCommunity", "csharp");
 @@clientName(
   CommunityProperties,
-  "VirtualEnclaveCommunityProperties",
+  "EnclaveCommunityProperties",
   "csharp"
 );
-@@clientName(EnclaveConnectionResource, "VirtualEnclaveConnection", "csharp");
+@@clientName(EnclaveConnectionResource, "EnclaveConnection", "csharp");
 @@clientName(
   EnclaveConnectionProperties,
-  "VirtualEnclaveConnectionProperties",
+  "EnclaveConnectionProperties",
   "csharp"
 );
-@@clientName(EnclaveEndpointResource, "VirtualEnclaveEndpoint", "csharp");
+@@clientName(EnclaveEndpointResource, "EnclaveEndpoint", "csharp");
 @@clientName(
   EnclaveEndpointProperties,
-  "VirtualEnclaveEndpointProperties",
+  "EnclaveEndpointProperties",
   "csharp"
 );
-@@clientName(EnclaveResource, "VirtualEnclave", "csharp");
-@@clientName(TransitHubResource, "VirtualEnclaveTransitHub", "csharp");
-@@clientName(TransitHubResource, "VirtualEnclaveTransitHub", "csharp");
+@@clientName(EnclaveResource, "Enclave", "csharp");
+@@clientName(TransitHubResource, "EnclaveTransitHub", "csharp");
+@@clientName(TransitHubResource, "EnclaveTransitHub", "csharp");
 @@clientName(
   TransitHubProperties,
-  "VirtualEnclaveTransitHubProperties",
+  "EnclaveTransitHubProperties",
   "csharp"
 );
-@@clientName(WorkloadResource, "VirtualEnclaveWorkload", "csharp");
-@@clientName(WorkloadProperties, "VirtualEnclaveWorkloadProperties", "csharp");
+@@clientName(WorkloadResource, "EnclaveWorkload", "csharp");
+@@clientName(WorkloadProperties, "EnclaveWorkloadProperties", "csharp");
 @@clientName(
   TransitHubProperties,
-  "VirtualEnclaveTransitHubProperties",
+  "EnclaveTransitHubProperties",
   "csharp"
 );
 @@clientName(ApprovalActionResponse, "ApprovalActionResult", "csharp");
@@ -58,18 +58,18 @@ using Microsoft.Mission;
 );
 @@clientName(
   ApprovalPatchProperties,
-  "VirtualEnclaveApprovalPatchProperties",
+  "EnclaveApprovalPatchProperties",
   "csharp"
 );
-@@clientName(Approver, "VirtualEnclaveApprover", "csharp");
-@@clientName(ApprovalPolicy, "VirtualEnclaveApprovalPolicy", "csharp");
-@@clientName(ApprovalSettings, "VirtualEnclaveBaseApprovalSettings", "csharp");
+@@clientName(Approver, "EnclaveApprover", "csharp");
+@@clientName(ApprovalPolicy, "EnclaveApprovalPolicy", "csharp");
+@@clientName(ApprovalSettings, "EnclaveBaseApprovalSettings", "csharp");
 @@clientName(
   LegacyApprovalSettings,
-  "VirtualEnclaveLegacyApprovalSettings",
+  "EnclaveLegacyApprovalSettings",
   "csharp"
 );
-@@clientName(ApprovalStatus, "VirtualEnclaveApprovalStatus", "csharp");
+@@clientName(ApprovalStatus, "EnclaveApprovalStatus", "csharp");
 @@clientName(
   CheckAddressSpaceAvailabilityResponse,
   "CheckAddressSpaceAvailabilityResult",
@@ -80,7 +80,7 @@ using Microsoft.Mission;
   "IsAvailable",
   "csharp"
 );
-@@clientName(DestinationType, "VirtualEnclaveCommunityEndpointDestinationType", "csharp");
+@@clientName(DestinationType, "EnclaveCommunityEndpointDestinationType", "csharp");
 @@clientName(CommunityEndpointProtocol.ANY, "Any", "csharp");
 @@clientName(CommunityEndpointProtocol.TCP, "Tcp", "csharp");
 @@clientName(CommunityEndpointProtocol.UDP, "Udp", "csharp");
@@ -95,43 +95,43 @@ using Microsoft.Mission;
 @@clientName(EnclaveEndpointProtocol.ESP, "Esp", "csharp");
 @@clientName(DestinationType.FQDN, "Fqdn", "csharp");
 @@clientName(DestinationType.FQDNTag, "FqdnTag", "csharp");
-@@clientName(CommunityPatchModel, "VirtualEnclaveCommunityPatch", "csharp");
+@@clientName(CommunityPatchModel, "EnclaveCommunityPatch", "csharp");
 @@clientName(
   CommunityPatchProperties,
-  "VirtualEnclaveCommunityPatchProperties",
+  "EnclaveCommunityPatchProperties",
   "csharp"
 );
 @@clientName(
   DiagnosticDestination,
-  "VirtualEnclaveDiagnosticDestination",
+  "EnclaveDiagnosticDestination",
   "csharp"
 );
-@@clientName(FirewallSKU, "VirtualEnclaveFirewallSku", "csharp");
-@@clientName(GovernedServiceItem, "VirtualEnclaveGovernedService", "csharp");
+@@clientName(FirewallSKU, "EnclaveFirewallSku", "csharp");
+@@clientName(GovernedServiceItem, "EnclaveGovernedService", "csharp");
 @@clientName(
   ServiceIdentifier,
-  "VirtualEnclaveGovernedServiceIdentifier",
+  "EnclaveGovernedServiceIdentifier",
   "csharp"
 );
 @@clientName(ServiceIdentifier.AKS, "Aks", "csharp");
 @@clientName(
   MaintenanceModeConfigurationModel,
-  "VirtualEnclaveMaintenanceModeConfiguration",
+  "EnclaveMaintenanceModeConfiguration",
   "csharp"
 );
 @@clientName(
   MaintenanceModeConfigurationPatchModel,
-  "VirtualEnclaveMaintenanceModeConfigurationPatch",
+  "EnclaveMaintenanceModeConfigurationPatch",
   "csharp"
 );
-@@clientName(TransitOption, "VirtualEnclaveTransitOptionProperties", "csharp");
-@@clientName(Principal, "VirtualEnclavePrincipal", "csharp");
-@@clientName(MandatoryApprover, "VirtualEnclaveMandatoryApprover", "csharp");
-@@clientName(ProvisioningState, "VirtualEnclaveProvisioningState", "csharp");
-@@clientName(RoleAssignmentItem, "VirtualEnclaveRoleAssignmentItem", "csharp");
+@@clientName(TransitOption, "EnclaveTransitOptionProperties", "csharp");
+@@clientName(Principal, "EnclavePrincipal", "csharp");
+@@clientName(MandatoryApprover, "EnclaveMandatoryApprover", "csharp");
+@@clientName(ProvisioningState, "EnclaveProvisioningState", "csharp");
+@@clientName(RoleAssignmentItem, "EnclaveRoleAssignmentItem", "csharp");
 @@clientName(
   SubnetConfiguration,
-  "VirtualEnclaveSubnetConfiguration",
+  "EnclaveSubnetConfiguration",
   "csharp"
 );
 @@clientName(RequestMetadata, "ApprovalRequestMetadata", "csharp");
@@ -142,7 +142,7 @@ using Microsoft.Mission;
 );
 @@clientName(
   TransitHubPatchProperties,
-  "VirtualEnclaveTransitHubPatchProperties",
+  "EnclaveTransitHubPatchProperties",
   "csharp"
 );
 @@clientName(
@@ -173,20 +173,20 @@ using Microsoft.Mission;
 @@clientName(DedicatedHubResource, "DedicatedHub", "csharp");
 
 // Types renamed to add resource provider or feature context
-@@clientName(CommunityEndpointDestinationRule, "VirtualEnclaveCommunityEndpointDestinationRule", "csharp");
-@@clientName(CommunityEndpointPatchProperties, "VirtualEnclaveCommunityEndpointPatchProperties", "csharp");
-@@clientName(CommunityEndpointProtocol, "VirtualEnclaveCommunityEndpointProtocol", "csharp");
-@@clientName(Designation, "VirtualEnclaveDesignation", "csharp");
-@@clientName(EnclaveEndpointPatchProperties, "VirtualEnclaveEndpointPatchProperties", "csharp");
-@@clientName(MonitoringDestination, "VirtualEnclaveMonitoringDestination", "csharp");
-@@clientName(MonitoringDestinationPatchModel, "VirtualEnclaveMonitoringDestinationPatch", "csharp");
-@@clientName(MonitoringDestinationType, "VirtualEnclaveMonitoringDestinationType", "csharp");
-@@clientName(MonitoringSettingsModel, "VirtualEnclaveMonitoringSettings", "csharp");
-@@clientName(MonitoringSettingsPatchModel, "VirtualEnclaveMonitoringSettingsPatch", "csharp");
-@@clientName(RbacInheritanceMode, "VirtualEnclaveRbacInheritanceMode", "csharp");
-@@clientName(ResourceVisibilityMode, "VirtualEnclaveResourceVisibilityMode", "csharp");
-@@clientName(SecurityProvider, "VirtualEnclaveSecurityProvider", "csharp");
-@@clientName(TransitHubState, "VirtualEnclaveTransitHubState", "csharp");
-@@clientName(TransitOptionParams, "VirtualEnclaveTransitOptionContent", "csharp");
-@@clientName(TransitOptionType, "VirtualEnclaveTransitOptionType", "csharp");
-@@clientName(UpdateMode, "VirtualEnclaveUpdateMode", "csharp");
+@@clientName(CommunityEndpointDestinationRule, "EnclaveCommunityEndpointDestinationRule", "csharp");
+@@clientName(CommunityEndpointPatchProperties, "EnclaveCommunityEndpointPatchProperties", "csharp");
+@@clientName(CommunityEndpointProtocol, "EnclaveCommunityEndpointProtocol", "csharp");
+@@clientName(Designation, "EnclaveDesignation", "csharp");
+@@clientName(EnclaveEndpointPatchProperties, "EnclaveEndpointPatchProperties", "csharp");
+@@clientName(MonitoringDestination, "EnclaveMonitoringDestination", "csharp");
+@@clientName(MonitoringDestinationPatchModel, "EnclaveMonitoringDestinationPatch", "csharp");
+@@clientName(MonitoringDestinationType, "EnclaveMonitoringDestinationType", "csharp");
+@@clientName(MonitoringSettingsModel, "EnclaveMonitoringSettings", "csharp");
+@@clientName(MonitoringSettingsPatchModel, "EnclaveMonitoringSettingsPatch", "csharp");
+@@clientName(RbacInheritanceMode, "EnclaveRbacInheritanceMode", "csharp");
+@@clientName(ResourceVisibilityMode, "EnclaveResourceVisibilityMode", "csharp");
+@@clientName(SecurityProvider, "EnclaveSecurityProvider", "csharp");
+@@clientName(TransitHubState, "EnclaveTransitHubState", "csharp");
+@@clientName(TransitOptionParams, "EnclaveTransitOptionContent", "csharp");
+@@clientName(TransitOptionType, "EnclaveTransitOptionType", "csharp");
+@@clientName(UpdateMode, "EnclaveUpdateMode", "csharp");
