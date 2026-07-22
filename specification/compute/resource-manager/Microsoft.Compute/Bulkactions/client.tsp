@@ -253,6 +253,14 @@ namespace Microsoft.Compute;
 #suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Preserve type for public API surface"
 @@clientOption(ExecutionParameters, "disable-safe-flatten", true, "csharp");
 
+// ResourcesWithContext (added in 2026-07-06-preview) is a single-property model whose inner
+// property would safe-flatten into a "Resources" member, colliding with the existing
+// UserRequestResources "Resources" on the Execute*Content models. Disable safe-flatten to keep
+// it as a distinct type and avoid the duplicate-member (CS0102) build break in the C# SDK.
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Preserve type for public API surface"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Preserve type for public API surface"
+@@clientOption(ResourcesWithContext, "disable-safe-flatten", true, "csharp");
+
 @@clientName(CancelOperationsRequest, "CancelBulkOperationsContent", "csharp");
 @@clientName(
   GetOperationStatusRequest,
