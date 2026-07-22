@@ -17,15 +17,15 @@ namespace Microsoft.Network;
 /**
  * Address prefix set child resource of an application security group.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy sub-resource model uses ARM private types for compatibility with existing Network RP patterns"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "AddressPrefixSet is a sub-resource of ApplicationSecurityGroup using legacy Network RP resource patterns"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extends SubResourceModel to match existing Network RP sub-resource conventions"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Uses legacy ARM resource patterns consistent with other Network RP sub-resources"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP feature gating, consistent with other Network RP interface definitions"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Required for includeInapplicableMetadataInPayload which suppresses systemData in the response payload, consistent with other Network RP nested resources"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "AddressPrefixSet uses the local Network RP ProxyResource base type consistent with other Network RP nested resources (e.g. ConnectionPolicy)"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending the local Network RP ProxyResource is the established pattern for nested resources in this RP"
 @added(Versions.v2025_09_01)
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 @parentResource(ApplicationSecurityGroup)
 @Http.Private.includeInapplicableMetadataInPayload(false)
-model AddressPrefixSet extends SubResourceModel {
+model AddressPrefixSet extends ProxyResource {
   /** Properties of the address prefix set. */
   properties?: AddressPrefixSetPropertiesFormat;
 
@@ -36,21 +36,6 @@ model AddressPrefixSet extends SubResourceModel {
   @segment("addressPrefixSets")
   @pattern("^[a-zA-Z0-9]([a-zA-Z0-9_.-]{0,78}[a-zA-Z0-9_])?$")
   name: string;
-
-  /** A unique read-only string that changes whenever the resource is updated. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "etag is a standard ARM envelope property returned by the Network RP for concurrency control"
-  @visibility(Lifecycle.Read)
-  etag?: string;
-
-  /** Type of the resource. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "type is a standard ARM envelope property indicating the resource type"
-  @visibility(Lifecycle.Read)
-  type?: string;
-
-  /** The system metadata related to this resource. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "systemData is a standard ARM envelope property for resource metadata tracking"
-  @visibility(Lifecycle.Read)
-  systemData?: Azure.ResourceManager.Foundations.SystemData;
 }
 
 /**
