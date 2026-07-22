@@ -118,13 +118,12 @@ model ParentServiceGroupProperties {
 model ServiceGroupCollectionResponse is Azure.Core.Page<ServiceGroup>;
 
 /**
- * Additional query parameters for the listDescendants action.
+ * Request body for the listDescendants action.
  */
 @added(Versions.v2026_03_01_preview)
-model ListDescendantsQueryParameters {
+model ListDescendantsRequest {
   /**
    * An opaque pagination token returned via nextLink to fetch the next page of results.
    */
-  @query("skipToken")
   skipToken?: string;
 }

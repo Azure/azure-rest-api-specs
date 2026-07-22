@@ -337,7 +337,13 @@
             "pattern": "^[a-zA-Z0-9\\-_().]{1,90}$"
           },
           {
-            "$ref": "#/parameters/ListDescendantsQueryParameters"
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ListDescendantsRequest"
+            }
           }
         ],
         "responses": {
@@ -363,6 +369,16 @@
     }
   },
   "definitions": {
+    "ListDescendantsRequest": {
+      "type": "object",
+      "description": "Request body for the listDescendants action.",
+      "properties": {
+        "skipToken": {
+          "type": "string",
+          "description": "An opaque pagination token returned via nextLink to fetch the next page of results."
+        }
+      }
+    },
     "ParentServiceGroupProperties": {
       "type": "object",
       "description": "The details of the parent serviceGroup.",
@@ -499,14 +515,5 @@
       }
     }
   },
-  "parameters": {
-    "ListDescendantsQueryParameters": {
-      "name": "skipToken",
-      "in": "query",
-      "description": "An opaque pagination token returned via nextLink to fetch the next page of results.",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    }
-  }
+  "parameters": {}
 }

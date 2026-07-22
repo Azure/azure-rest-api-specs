@@ -92,10 +92,9 @@ interface ServiceGroups {
   @added(Versions.v2026_03_01_preview)
   listDescendants is ArmResourceActionSync<
     ServiceGroup,
-    void,
+    ListDescendantsRequest,
     ArmResponse<ServiceGroupCollectionResponse>,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
-    Parameters = ListDescendantsQueryParameters
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
   >;
 }
 
