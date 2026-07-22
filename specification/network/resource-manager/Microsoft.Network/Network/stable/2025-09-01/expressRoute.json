@@ -6162,6 +6162,14 @@
             "$ref": "#/definitions/PeerExpressRouteCircuitConnection"
           },
           "readOnly": true
+        },
+        "peeringConfigurations": {
+          "type": "array",
+          "description": "The list of peering configurations for each port specified in the attachedPorts property.",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteCircuitPeeringConfiguration"
+          },
+          "readOnly": true
         }
       }
     },
@@ -6247,6 +6255,62 @@
         "enableDirectPortRateLimit": {
           "type": "boolean",
           "description": "Flag denoting rate-limiting status of the ExpressRoute direct-port circuit."
+        },
+        "attachedPorts": {
+          "type": "array",
+          "description": "The list of attached ExpressRoute port resources for this circuit.",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteCircuitAttachedPort"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ExpressRouteCircuitAttachedPort": {
+      "type": "object",
+      "description": "Attached ExpressRoute port information for an ExpressRoute circuit.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The resource ID of the attached ExpressRoute port."
+        },
+        "authorizationKey": {
+          "type": "string",
+          "description": "The authorization key associated with the attached port."
+        },
+        "peeringLocation": {
+          "type": "string",
+          "description": "The peering location of the attached port."
+        }
+      }
+    },
+    "ExpressRouteCircuitPeeringConfiguration": {
+      "type": "object",
+      "description": "Peering configuration for a specific attached port.",
+      "properties": {
+        "attachedPortId": {
+          "type": "string",
+          "description": "The resource ID of the attached ExpressRoute port."
+        },
+        "primaryPeerAddressPrefix": {
+          "type": "string",
+          "description": "The primary IPv4 peer address prefix."
+        },
+        "secondaryPeerAddressPrefix": {
+          "type": "string",
+          "description": "The secondary IPv4 peer address prefix."
+        },
+        "primaryIpv6PeerAddressPrefix": {
+          "type": "string",
+          "description": "The primary IPv6 peer address prefix."
+        },
+        "secondaryIpv6PeerAddressPrefix": {
+          "type": "string",
+          "description": "The secondary IPv6 peer address prefix."
+        },
+        "status": {
+          "type": "string",
+          "description": "The provisioning status of the peering configuration."
         }
       }
     },
