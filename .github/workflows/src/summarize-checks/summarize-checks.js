@@ -153,7 +153,8 @@ const IMPACT_CHECK_NAME = "Summarize PR Impact";
 const NEXT_STEPS_COMMENT_ID = "NextStepsToMerge";
 const TYPESPEC_SUPPRESSIONS_WORKFLOW_NAME = "TypeSpec Suppressions - Analyze Code";
 const TYPESPEC_SUPPRESSIONS_REPORT_ARTIFACT_NAME = "typespec-suppressions-report";
-const TYPESPEC_SUPPRESSIONS_SECTION_TITLE = "TypeSpec suppressions requiring review";
+const TYPESPEC_SUPPRESSIONS_SECTION_TITLE =
+  "TypeSpec suppressions requiring review (testing, non-blocking)";
 const APPROVED_SUPPRESSION_LABEL = "Approved-TypeSpecSuppression";
 // GitHub caps comment bodies at ~65k characters, so only render a handful of suppressions
 // inline per table (new and changed) and link to the analysis log for the full list.
