@@ -1,0 +1,90 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2026-04-01",
+    "capacityReservationGroupName": "openCapacityReservationGroup",
+    "parameters": {
+      "location": "westus",
+      "tags": {
+        "department": "finance"
+      },
+      "zones": [
+        "1",
+        "2"
+      ],
+      "properties": {
+        "sharingProfile": {
+          "subscriptionIds": [
+            {
+              "id": "/subscriptions/{subscription-id1}"
+            },
+            {
+              "id": "/subscriptions/{subscription-id2}"
+            }
+          ]
+        },
+        "reservationType": "Open"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "openCapacityReservationGroup",
+        "location": "westus",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/CapacityReservationGroups/openCapacityReservationGroup",
+        "tags": {
+          "department": "finance"
+        },
+        "zones": [
+          "1",
+          "2"
+        ],
+        "properties": {
+          "sharingProfile": {
+            "subscriptionIds": [
+              {
+                "id": "/subscriptions/{subscription-id1}"
+              },
+              {
+                "id": "/subscriptions/{subscription-id2}"
+              }
+            ]
+          },
+          "reservationType": "Open"
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "location": "westus",
+        "tags": {
+          "department": "finance",
+          "owner": "myCompany"
+        },
+        "name": "openCapacityReservationGroup",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/CapacityReservationGroups/openCapacityReservationGroup",
+        "zones": [
+          "1",
+          "2"
+        ],
+        "properties": {
+          "sharingProfile": {
+            "subscriptionIds": [
+              {
+                "id": "/subscriptions/{subscription-id1}"
+              },
+              {
+                "id": "/subscriptions/{subscription-id2}"
+              }
+            ]
+          },
+          "reservationType": "Open"
+        }
+      }
+    }
+  },
+  "operationId": "CapacityReservationGroups_CreateOrUpdate",
+  "title": "Create or update an open capacity reservation group."
+}
