@@ -60,7 +60,11 @@ namespace Microsoft.Compute;
 // client names; the standard type keeps "InnerError", BA's custom one is renamed.
 @@clientName(Microsoft.Compute.InnerError, "BulkInstancesInnerError", "csharp");
 @@clientName(Microsoft.Compute.InnerError, "BulkInstancesInnerError", "java");
-@@clientName(Microsoft.Compute.InnerError, "BulkInstancesInnerError", "python");
+@@clientName(
+  Microsoft.Compute.InnerError,
+  "BulkInstancesInnerError",
+  "python,go,javascript"
+);
 
 @@clientName(CancelOperationsResponse, "CancelBulkOperationsResult", "csharp");
 @@clientName(DeadlineType, "BulkActionDeadlineKind", "csharp");
