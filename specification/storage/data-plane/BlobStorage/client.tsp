@@ -60,9 +60,21 @@ interface BlobServiceClient extends Storage.Blob.Service {}
   {
     service: Storage.Blob,
   },
-  "rust,go"
+  "rust,go,csharp"
 )
-interface BlobContainerClient extends Storage.Blob.Container {}
+interface BlobContainerClient extends Storage.Blob.Container {
+  /** Returns a list of the blobs in the specified container. A delimiter can be used to traverse a virtual hierarchy of blobs as though it were a file system. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+  @scope("csharp")
+  listBlobHierarchySegment is Customizations.listBlobHierarchySegment;
+
+  /** Returns a list of the blobs in Apache Arrow format as raw data, to be deserialized by the client. A delimiter can be used to traverse a virtual hierarchy of blobs as though it were a file system. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Keeping operation shape inline with existing service patterns"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Keeping operation shape inline with existing service patterns"
+  @scope("csharp")
+  listBlobHierarchySegmentApacheArrow is Customizations.listBlobHierarchySegmentApacheArrow;
+}
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
 @client(
@@ -891,6 +903,66 @@ op setImmutabilityPolicyOptionalExpiry is StorageOperationNoBody<
 
 // C# customizations
 
+  /** Returns a list of the blobs in the specified container. A delimiter can be used to traverse a virtual hierarchy of blobs as though it were a file system. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+  @get
+  @list
+  @sharedRoute
+  @route("?restype=container&comp=list")
+  @scope("csharp")
+  op listBlobHierarchySegment is StorageOperationResponseBody<
+    {
+      /** If specified, the operation returns a BlobPrefix element that acts as a placeholder for all blobs whose names begin with the same substring up to the appearance of the delimiter character. The delimiter may be a single character or a string. */
+      @query delimiter?: string;
+
+      ...PrefixParameter;
+      ...MarkerParameter;
+      ...MaxResultsParameter;
+      ...ListBlobsIncludeParameter;
+      ...TimeoutParameter;
+      ...ListBlobsStartFrom;
+    },
+    {
+      /** The list of blobs in the container. */
+      @body
+      enumerationResults: ListBlobsHierarchicalResponse;
+    }
+  >;
+
+  /** Returns a list of the blobs in Apache Arrow format as raw data, to be deserialized by the client. A delimiter can be used to traverse a virtual hierarchy of blobs as though it were a file system. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Keeping operation shape inline with existing service patterns"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Keeping operation shape inline with existing service patterns"
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Fixed set of content types returned by the service"
+  @added(Versions.v2026_12_06)
+  @get
+  @sharedRoute
+  @scope("csharp")
+  @route("?restype=container&comp=list")
+  op listBlobHierarchySegmentApacheArrow is StorageOperationResponseBody<
+    {
+      /** The Accept header indicating the response should be returned as an Apache Arrow stream, falling back to XML otherwise. */
+      #suppress "@typespec/http/content-type-ignored" "Raw response, deserialized by client"
+      @header("accept")
+      accept: "application/vnd.apache.arrow.stream,application/xml";
+
+      /** If specified, the operation returns a BlobPrefix element that acts as a placeholder for all blobs whose names begin with the same substring up to the appearance of the delimiter character. The delimiter may be a single character or a string. */
+      @query delimiter?: string;
+
+      ...PrefixParameter;
+      ...MarkerParameter;
+      ...MaxResultsParameter;
+      ...ListBlobsIncludeParameter;
+      ...TimeoutParameter;
+      ...ListBlobsStartFrom;
+      ...ListBlobsEndBefore;
+    },
+    {
+      @body body: bytes;
+    },
+    "application/vnd.apache.arrow.stream" | "application/xml"
+  >;
+
 // Defining an override for backward compatibility for C# since the XML payload was serialized with the
 // elements/properties in a different order than defined in the swagger.
 
@@ -951,8 +1023,8 @@ model BlobServicePropertiesCsharp {
 @@clientName(StorageErrorCode, "BlobErrorCode", "csharp");
 @@clientName(Blob, "BlobRestClient", "csharp");
 @@clientName(BlobItem, "BlobItemInternal", "csharp,python");
-@@clientName(Container, "ContainerRestClient", "csharp");
-@@clientName(Container.listBlobs, "ListBlobFlatSegment", "csharp");
+@@clientName(BlobContainerClient, "ContainerRestClient", "csharp");
+@@clientName(BlobContainerClient.listBlobs, "ListBlobFlatSegment", "csharp");
 @@clientName(Service, "ServiceRestClient", "csharp");
 @@clientName(BlockBlob, "BlockBlobRestClient", "csharp");
 @@clientName(PageBlob, "PageBlobRestClient", "csharp");
@@ -969,7 +1041,7 @@ model BlobServicePropertiesCsharp {
   "ListBlobsHierarchySegmentResponse",
   "csharp"
 );
-@@clientName(Container.findBlobsByTags, "FilterBlobs", "csharp");
+@@clientName(BlobContainerClient.findBlobsByTags, "FilterBlobs", "csharp");
 @@clientName(Service.findBlobsByTags, "FilterBlobs", "csharp");
 @@clientName(Service.listContainers, "ListContainersSegment", "csharp");
 @@clientName(QueryType, "QueryFormatType", "csharp");
@@ -1024,6 +1096,9 @@ model BlobServicePropertiesCsharp {
 
 @@convenientAPI(Storage.Blob.Service.submitBatch, false, "csharp");
 @@convenientAPI(Storage.Blob.Container.submitBatch, false, "csharp");
+
+@@scope(Storage.Blob.Container.listBlobHierarchySegment, "!csharp");
+@@scope(Storage.Blob.Container.listBlobHierarchySegmentApacheArrow, "!csharp");
 
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(
