@@ -2,12 +2,14 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 using Microsoft.Common;
 
 namespace MetricAlertApi;
@@ -71,6 +73,22 @@ interface MetricAlertResources {
   /**
    * Create or update an metric alert definition.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "The preview API version only returns 200 for create/update."
+  @removed(Versions.v2026_01_01)
+  @renamedFrom(Versions.v2026_01_01, "createOrUpdate")
+  @sharedRoute
+  @tag("MetricAlerts")
+  createOrUpdateV1 is ArmResourceCreateOrReplaceSync<
+    MetricAlertResource,
+    Response = ArmResourceUpdatedResponse<MetricAlertResource>,
+    Error = MetricAlertErrorResponse
+  >;
+
+  /**
+   * Create or update an metric alert definition.
+   */
+  @added(Versions.v2026_01_01)
+  @sharedRoute
   @tag("MetricAlerts")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     MetricAlertResource,
@@ -161,6 +179,10 @@ interface MetricAlertResources {
 @@doc(
   MetricAlertResource.properties,
   "The alert rule properties of the resource."
+);
+@@doc(
+  MetricAlertResources.createOrUpdateV1::parameters.resource,
+  "The parameters of the rule to create or update."
 );
 @@doc(
   MetricAlertResources.createOrUpdate::parameters.resource,
