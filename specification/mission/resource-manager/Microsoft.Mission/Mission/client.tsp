@@ -6,22 +6,14 @@ using Microsoft.Mission;
 
 @@clientName(ApprovalResource, "EnclaveApproval", "csharp");
 @@clientName(ApprovalProperties, "EnclaveApprovalProperties", "csharp");
-@@clientName(
-  CommunityEndpointResource,
-  "EnclaveCommunityEndpoint",
-  "csharp"
-);
+@@clientName(CommunityEndpointResource, "EnclaveCommunityEndpoint", "csharp");
 @@clientName(
   CommunityEndpointProperties,
   "EnclaveCommunityEndpointProperties",
   "csharp"
 );
 @@clientName(CommunityResource, "EnclaveCommunity", "csharp");
-@@clientName(
-  CommunityProperties,
-  "EnclaveCommunityProperties",
-  "csharp"
-);
+@@clientName(CommunityProperties, "EnclaveCommunityProperties", "csharp");
 @@clientName(EnclaveConnectionResource, "EnclaveConnection", "csharp");
 @@clientName(
   EnclaveConnectionProperties,
@@ -29,26 +21,14 @@ using Microsoft.Mission;
   "csharp"
 );
 @@clientName(EnclaveEndpointResource, "EnclaveEndpoint", "csharp");
-@@clientName(
-  EnclaveEndpointProperties,
-  "EnclaveEndpointProperties",
-  "csharp"
-);
+@@clientName(EnclaveEndpointProperties, "EnclaveEndpointProperties", "csharp");
 @@clientName(EnclaveResource, "Enclave", "csharp");
 @@clientName(TransitHubResource, "EnclaveTransitHub", "csharp");
 @@clientName(TransitHubResource, "EnclaveTransitHub", "csharp");
-@@clientName(
-  TransitHubProperties,
-  "EnclaveTransitHubProperties",
-  "csharp"
-);
+@@clientName(TransitHubProperties, "EnclaveTransitHubProperties", "csharp");
 @@clientName(WorkloadResource, "EnclaveWorkload", "csharp");
 @@clientName(WorkloadProperties, "EnclaveWorkloadProperties", "csharp");
-@@clientName(
-  TransitHubProperties,
-  "EnclaveTransitHubProperties",
-  "csharp"
-);
+@@clientName(TransitHubProperties, "EnclaveTransitHubProperties", "csharp");
 @@clientName(ApprovalActionResponse, "ApprovalActionResult", "csharp");
 @@clientName(ApprovalCallbackRequest, "ApprovalCallbackContent", "csharp");
 @@clientName(
@@ -64,11 +44,7 @@ using Microsoft.Mission;
 @@clientName(Approver, "EnclaveApprover", "csharp");
 @@clientName(ApprovalPolicy, "EnclaveApprovalPolicy", "csharp");
 @@clientName(ApprovalSettings, "EnclaveBaseApprovalSettings", "csharp");
-@@clientName(
-  LegacyApprovalSettings,
-  "EnclaveLegacyApprovalSettings",
-  "csharp"
-);
+@@clientName(LegacyApprovalSettings, "EnclaveLegacyApprovalSettings", "csharp");
 @@clientName(ApprovalStatus, "EnclaveApprovalStatus", "csharp");
 @@clientName(
   CheckAddressSpaceAvailabilityResponse,
@@ -80,7 +56,11 @@ using Microsoft.Mission;
   "IsAvailable",
   "csharp"
 );
-@@clientName(DestinationType, "EnclaveCommunityEndpointDestinationType", "csharp");
+@@clientName(
+  DestinationType,
+  "EnclaveCommunityEndpointDestinationType",
+  "csharp"
+);
 @@clientName(CommunityEndpointProtocol.ANY, "Any", "csharp");
 @@clientName(CommunityEndpointProtocol.TCP, "Tcp", "csharp");
 @@clientName(CommunityEndpointProtocol.UDP, "Udp", "csharp");
@@ -101,18 +81,10 @@ using Microsoft.Mission;
   "EnclaveCommunityPatchProperties",
   "csharp"
 );
-@@clientName(
-  DiagnosticDestination,
-  "EnclaveDiagnosticDestination",
-  "csharp"
-);
+@@clientName(DiagnosticDestination, "EnclaveDiagnosticDestination", "csharp");
 @@clientName(FirewallSKU, "EnclaveFirewallSku", "csharp");
 @@clientName(GovernedServiceItem, "EnclaveGovernedService", "csharp");
-@@clientName(
-  ServiceIdentifier,
-  "EnclaveGovernedServiceIdentifier",
-  "csharp"
-);
+@@clientName(ServiceIdentifier, "EnclaveGovernedServiceIdentifier", "csharp");
 @@clientName(ServiceIdentifier.AKS, "Aks", "csharp");
 @@clientName(
   MaintenanceModeConfigurationModel,
@@ -129,11 +101,7 @@ using Microsoft.Mission;
 @@clientName(MandatoryApprover, "EnclaveMandatoryApprover", "csharp");
 @@clientName(ProvisioningState, "EnclaveProvisioningState", "csharp");
 @@clientName(RoleAssignmentItem, "EnclaveRoleAssignmentItem", "csharp");
-@@clientName(
-  SubnetConfiguration,
-  "EnclaveSubnetConfiguration",
-  "csharp"
-);
+@@clientName(SubnetConfiguration, "EnclaveSubnetConfiguration", "csharp");
 @@clientName(RequestMetadata, "ApprovalRequestMetadata", "csharp");
 @@clientName(
   RequestMetadataUpdatableProperties,
@@ -169,20 +137,52 @@ using Microsoft.Mission;
 
 @@clientName(Microsoft.Mission, "VirtualEnclavesMgmtClient", "python");
 
-// Resource rename: DedicatedHubResource -> DedicatedHub (also renames Data/Collection/Patch derivatives)
-@@clientName(DedicatedHubResource, "DedicatedHub", "csharp");
-
-// Types renamed to add resource provider or feature context
-@@clientName(CommunityEndpointDestinationRule, "EnclaveCommunityEndpointDestinationRule", "csharp");
-@@clientName(CommunityEndpointPatchProperties, "EnclaveCommunityEndpointPatchProperties", "csharp");
-@@clientName(CommunityEndpointProtocol, "EnclaveCommunityEndpointProtocol", "csharp");
+@@clientName(DedicatedHubResource, "EnclaveDedicatedHub", "csharp");
+@@clientName(DedicatedHubProperties, "EnclaveDedicatedHubProperties", "csharp");
+@@clientName(DedicatedHubPatchModel, "EnclaveDedicatedHubPatch", "csharp");
+@@clientName(
+  DedicatedHubPatchProperties,
+  "EnclaveDedicatedHubPatchProperties",
+  "csharp"
+);
+@@clientName(
+  CommunityEndpointDestinationRule,
+  "EnclaveCommunityEndpointDestinationRule",
+  "csharp"
+);
+@@clientName(
+  CommunityEndpointPatchProperties,
+  "EnclaveCommunityEndpointPatchProperties",
+  "csharp"
+);
+@@clientName(
+  CommunityEndpointProtocol,
+  "EnclaveCommunityEndpointProtocol",
+  "csharp"
+);
 @@clientName(Designation, "EnclaveDesignation", "csharp");
-@@clientName(EnclaveEndpointPatchProperties, "EnclaveEndpointPatchProperties", "csharp");
+@@clientName(
+  EnclaveEndpointPatchProperties,
+  "EnclaveEndpointPatchProperties",
+  "csharp"
+);
 @@clientName(MonitoringDestination, "EnclaveMonitoringDestination", "csharp");
-@@clientName(MonitoringDestinationPatchModel, "EnclaveMonitoringDestinationPatch", "csharp");
-@@clientName(MonitoringDestinationType, "EnclaveMonitoringDestinationType", "csharp");
+@@clientName(
+  MonitoringDestinationPatchModel,
+  "EnclaveMonitoringDestinationPatch",
+  "csharp"
+);
+@@clientName(
+  MonitoringDestinationType,
+  "EnclaveMonitoringDestinationType",
+  "csharp"
+);
 @@clientName(MonitoringSettingsModel, "EnclaveMonitoringSettings", "csharp");
-@@clientName(MonitoringSettingsPatchModel, "EnclaveMonitoringSettingsPatch", "csharp");
+@@clientName(
+  MonitoringSettingsPatchModel,
+  "EnclaveMonitoringSettingsPatch",
+  "csharp"
+);
 @@clientName(RbacInheritanceMode, "EnclaveRbacInheritanceMode", "csharp");
 @@clientName(ResourceVisibilityMode, "EnclaveResourceVisibilityMode", "csharp");
 @@clientName(SecurityProvider, "EnclaveSecurityProvider", "csharp");
@@ -193,5 +193,13 @@ using Microsoft.Mission;
 
 @@clientName(VirtualEnclaveProperties, "EnclaveProperties", "csharp");
 @@clientName(VirtualEnclavePatchProperties, "EnclavePatchProperties", "csharp");
-@@clientName(VirtualEnclaveApprovalSettings, "EnclaveApprovalSettings", "csharp");
-@@clientName(VirtualEnclaveApprovalSettingsPatchProperties, "EnclaveApprovalSettingsPatchProperties", "csharp");
+@@clientName(
+  VirtualEnclaveApprovalSettings,
+  "EnclaveApprovalSettings",
+  "csharp"
+);
+@@clientName(
+  VirtualEnclaveApprovalSettingsPatchProperties,
+  "EnclaveApprovalSettingsPatchProperties",
+  "csharp"
+);
