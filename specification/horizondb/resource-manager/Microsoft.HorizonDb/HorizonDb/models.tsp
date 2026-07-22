@@ -429,7 +429,7 @@ model HorizonDbAdministratorPropertiesForAdd {
 @doc("The request body for adding a HorizonDB administrator.")
 model HorizonDbAdministratorAdd {
   @doc("The properties for adding a HorizonDB administrator.")
-  properties?: HorizonDbAdministratorPropertiesForAdd;
+  properties: HorizonDbAdministratorPropertiesForAdd;
 }
 
 @added(Versions.v2026_05_01_preview)
