@@ -25,13 +25,14 @@ function readBaseVersion(file) {
 }
 
 /**
- * Extract namespace values from a parsed tspconfig options object.
+ * Extract namespace values from a parsed tspconfig object.
  * Returns a map of language → namespace (same logic as extractNamespaces but from raw config).
  *
  * @param {Record<string, Record<string, unknown>>} options - The options section of tspconfig
+ * @param {Record<string, unknown>} [fullConfig] - Full tspconfig (needed for Go template resolution)
  * @returns {Record<string, string>}
  */
-function extractNamespacesFromOptions(options) {
+function extractNamespacesFromOptions(options, fullConfig) {
   /** @type {Record<string, string>} */
   const namespaces = {};
   for (const [emitterKey, emitterOpts] of Object.entries(options)) {
@@ -55,6 +56,13 @@ function extractNamespacesFromOptions(options) {
     }
 
     const module = /** @type {string | undefined} */ (emitterOpts.module);
+    if (module && lang === "go" && fullConfig) {
+      const expanded = resolveGoModule(module, emitterOpts, fullConfig);
+      const goBase = "github.com/Azure/azure-sdk-for-go/";
+      namespaces[lang] = expanded.startsWith(goBase) ? expanded.slice(goBase.length) : expanded;
+      continue;
+    }
+
     if (module) {
       namespaces[lang] = module;
       continue;
@@ -97,6 +105,39 @@ function resolveLanguage(emitterKey) {
     }
   }
   return undefined;
+}
+
+/**
+ * Resolve template variables in a Go module path.
+ * Replaces {service-dir} with the emitter-level value if present, otherwise
+ * falls back to the global parameters.service-dir.default.
+ *
+ * @param {string} module - Raw module value (e.g. "github.com/Azure/azure-sdk-for-go/{service-dir}/armfoo")
+ * @param {Record<string, unknown>} emitterOpts - The emitter options object
+ * @param {Record<string, unknown>} config - The full tspconfig object
+ * @returns {string} Expanded module path
+ */
+function resolveGoModule(module, emitterOpts, config) {
+  return module.replace(
+    /\{([^}]+)\}/g,
+    (/** @type {string} */ match, /** @type {string} */ key) => {
+      // Check emitter-level option first
+      const emitterValue = emitterOpts[key];
+      if (typeof emitterValue === "string") {
+        return emitterValue;
+      }
+      // Fall back to global parameters.{varName}.default
+      const parameters = /** @type {Record<string, Record<string, unknown>> | undefined} */ (
+        config.parameters
+      );
+      const param = parameters?.[key];
+      if (param && typeof param.default === "string") {
+        return param.default;
+      }
+      // Cannot resolve - return as-is
+      return match;
+    },
+  );
 }
 
 /**
@@ -190,6 +231,20 @@ async function extractNamespaces(file, namespacesFound, artifactNames, core) {
     }
 
     const module = /** @type {string | undefined} */ (emitterOpts.module);
+    if (module && lang === "go") {
+      // Go module values contain template variables like {service-dir} that need expanding.
+      // Resolution order: emitter-level service-dir > global parameters.service-dir.default
+      const expanded = resolveGoModule(module, emitterOpts, config);
+      // Extract path after the Go SDK base URL for format validation
+      const goBase = "github.com/Azure/azure-sdk-for-go/";
+      if (expanded.startsWith(goBase)) {
+        namespacesFound[lang] = expanded.slice(goBase.length);
+      } else {
+        namespacesFound[lang] = expanded;
+      }
+      continue;
+    }
+
     if (module) {
       namespacesFound[lang] = module;
       continue;
@@ -282,7 +337,7 @@ export default async function detectNamespaces({ context, core }) {
       if (!baseOptions) {
         continue;
       }
-      const baseNamespaces = extractNamespacesFromOptions(baseOptions);
+      const baseNamespaces = extractNamespacesFromOptions(baseOptions, baseConfig);
       for (const [lang, ns] of Object.entries(namespacesFound)) {
         if (baseNamespaces[lang] === ns) {
           core.info(`Namespace unchanged for ${lang}: "${ns}", skipping`);
