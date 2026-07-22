@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./CommonModels.tsp";
+import "./FlexNodeBootstrap.tsp";
 import "./ManagedCluster.tsp";
 
 using TypeSpec.Rest;
@@ -97,7 +98,7 @@ interface AgentPools {
    * Completes the upgrade operation for the specified agent pool.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Keeping both 202 and 204 responses for passing the lintdiff validator. See https://github.com/Azure/azure-openapi-validator/issues/809"
-  @added(Versions.v2026_04_02_preview)
+  @added(Versions.v2026_05_02_preview)
   @summary("Completes the upgrade of an agent pool.")
   completeUpgrade is ArmResourceActionAsync<
     AgentPool,
@@ -125,17 +126,28 @@ interface AgentPools {
   upgradeNodeImageVersion is ArmResourceActionAsyncBase<
     AgentPool,
     void,
+    | {
+        ...AcceptedResponse;
+        ...ArmCombinedLroHeaders<FinalResult = void>;
+        ...Azure.Core.Foundations.RetryAfterHeader;
 
-      | {
-          ...AcceptedResponse;
-          ...ArmCombinedLroHeaders<FinalResult = void>;
-          ...Azure.Core.Foundations.RetryAfterHeader;
-
-          @body
-          body: AgentPool;
-        }
-      | OkResponse,
+        @body
+        body: AgentPool;
+      }
+    | OkResponse,
     Foundations.DefaultBaseParameters<AgentPool>
+  >;
+
+  /**
+   * Returns pool-level bootstrap configuration for FlexNode machines.
+   */
+  @added(Versions.v2026_05_02_preview)
+  @action("listBootstrapData")
+  @summary("Lists bootstrap data for a FlexNode agent pool.")
+  listBootstrapData is ArmResourceActionSync<
+    AgentPool,
+    ListBootstrapDataRequest,
+    ArmResponse<PoolBootstrapData>
   >;
 
   /**
@@ -143,7 +155,7 @@ interface AgentPools {
    */
   @get
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/agentPools/{agentPoolName}/operations/{operationId}")
-  @added(Versions.v2026_04_02_preview)
+  @added(Versions.v2026_05_02_preview)
   getByAgentPool is AgentPoolsOps.ActionSync<
     AgentPool,
     void,
