@@ -355,9 +355,6 @@
           "Create load balancer with Sync Mode Property on Pool": {
             "$ref": "./examples/LoadBalancerCreateWithSyncModePropertyOnPool.json"
           },
-          "Create load balancer with advanced mode": {
-            "$ref": "./examples/LoadBalancerCreateWithAdvancedMode.json"
-          },
           "Create load balancer with inbound nat pool": {
             "$ref": "./examples/LoadBalancerCreateWithInboundNatPool.json"
           },
@@ -1906,10 +1903,6 @@
         "ddosSettings": {
           "$ref": "./common.json#/definitions/Common.DdosFrontendIpConfigurationSettings",
           "description": "The DDoS protection settings associated with the frontend IP configuration."
-        },
-        "enableConnectionTracking": {
-          "type": "boolean",
-          "description": "Enables UDP flow tracking for traffic associated with the frontend IP configuration. When enabled, packets belonging to the same UDP flow are consistently directed to the same backend instance. This setting applies to all associated load balancing rules and takes precedence over rule-level enableConnectionTracking settings."
         }
       }
     },
@@ -2251,14 +2244,6 @@
         "scope": {
           "$ref": "./common.json#/definitions/Common.LoadBalancerScope",
           "description": "Indicates the scope of the load balancer: external (Public) or internal (Private)."
-        },
-        "mode": {
-          "$ref": "./common.json#/definitions/Common.LoadBalancerMode",
-          "description": "The load balancer mode. Set to `Advanced` to enable additional capabilities on a Standard SKU load balancer. Advanced mode must be specified at creation and cannot be changed afterward.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
         }
       }
     },
@@ -2357,7 +2342,7 @@
         },
         "enableConnectionTracking": {
           "type": "boolean",
-          "description": "Enables UDP flow tracking for the load balancing rule. This property is retained for rule-level configuration compatibility. When enableConnectionTracking is specified on the associated frontend IP configuration, the frontend setting takes precedence."
+          "description": "Defines whether connections between 2 communicating endpoints can be tracked and associated to the same backend VM over its lifetime when using UDP protocol."
         },
         "provisioningState": {
           "$ref": "./common.json#/definitions/Common.ProvisioningState",

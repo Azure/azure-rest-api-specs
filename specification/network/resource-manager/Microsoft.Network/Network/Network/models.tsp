@@ -12208,13 +12208,6 @@ model FirewallPolicyPropertiesFormat {
    * The Firewall Policy SKU.
    */
   sku?: FirewallPolicySku;
-
-  /**
-   * Indicates that the Firewall Policy is managed by AFC (Azure Firewall for Containers). When set, the policy is treated as read-only for callers that do not supply the AFC-managed sync marker on write operations.
-   */
-  @added(Versions.v2025_09_01)
-  @visibility(Lifecycle.Read)
-  afcManaged?: boolean;
 }
 
 /**
@@ -19688,55 +19681,6 @@ model VirtualNetworkUsageName {
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model VirtualNetworkDdosProtectionStatusResult
   is Azure.Core.Page<PublicIpDdosProtectionStatusResult>;
-
-/**
- * Request body for the MoveIpConfigurations operation.
- */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_09_01)
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
-model MoveIpConfigurationsRequest {
-  /**
-   * A list of IP configuration move items.
-   */
-  @identifiers(#[])
-  moveIpConfigurationItems: MoveIpConfigurationItem[];
-}
-
-/**
- * An item representing a source and target IP configuration for a move operation.
- */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_09_01)
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
-model MoveIpConfigurationItem {
-  /**
-   * The source IP configuration to move from.
-   */
-  sourceIpConfiguration: MoveIpConfigurationResourceReference;
-
-  /**
-   * The target IP configuration to move to.
-   */
-  targetIpConfiguration: MoveIpConfigurationResourceReference;
-}
-
-/**
- * Reference to an IP configuration resource by ARM resource ID.
- */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_09_01)
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
-model MoveIpConfigurationResourceReference {
-  /**
-   * The ARM resource ID of the IP configuration.
-   */
-  id: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.Network/networkInterfaces/ipConfigurations";
-    }
-  ]>;
-}
 
 /**
  * VirtualNetworkGateway properties.
