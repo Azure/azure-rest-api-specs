@@ -63,7 +63,7 @@ Where `<lang>` is one of: `dotnet`, `java`, `python`, `typescript`, `go`, `rust`
 
 ## Authorized Approvers
 
-Defined in [`.github/namespace-approvers.yml`](../../../namespace-approvers.yml):
+Defined in [`.github/protected-labels.yml`](../../../protected-labels.yml) (namespace entries use plane-aware format):
 
 <!-- cspell:disable -->
 
@@ -97,7 +97,7 @@ No action needed beyond your normal workflow:
 
 ## Configuration
 
-To update approvers, submit a PR modifying `.github/namespace-approvers.yml`. Changes take effect immediately on merge.
+To update approvers, submit a PR modifying `.github/protected-labels.yml`. Changes take effect immediately on merge.
 
 ## Format Validation
 
@@ -112,7 +112,7 @@ Mitigations:
 - **No fork code execution:** The workflow only reads configuration files (approvers YAML) from the base branch, never from the PR branch.
 - **Unauthorized label reversal:** If an unauthorized user adds an approval label, the workflow removes it and posts a warning comment.
 - **Unauthorized removal guard:** If an unauthorized user removes a pending label, the workflow re-applies it.
-- **Approver allowlist:** Only users listed in `.github/namespace-approvers.yml` can approve namespaces.
+- **Approver allowlist:** Only users listed in `.github/protected-labels.yml` can approve namespaces.
 
 ## Relationship to API Review
 

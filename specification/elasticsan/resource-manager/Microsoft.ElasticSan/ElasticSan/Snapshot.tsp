@@ -15,8 +15,10 @@ namespace Microsoft.ElasticSan;
  * Response for Volume Snapshot request.
  */
 @parentResource(VolumeGroup)
-model Snapshot
-  is Azure.ResourceManager.ProxyResource<SnapshotProperties, false> {
+model Snapshot is Azure.ResourceManager.ProxyResource<
+  SnapshotProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = Snapshot,
     KeyName = "snapshotName",
