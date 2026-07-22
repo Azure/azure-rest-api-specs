@@ -27,8 +27,18 @@ These are the global settings for the connectedcache
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-11-30-preview
+tag: package-2026-06-01
 ```
+
+### Tag: package-2026-06-01
+
+These settings apply only when `--tag=package-2026-06-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2026-06-01'
+input-file:
+  - Microsoft.ConnectedCache/stable/2026-06-01/ConnectedCache.json
+```
+
 
 ### Tag: package-2024-11-30-preview
 
@@ -66,6 +76,10 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_connectedcache']
 ```
+
+## Go
+
+See configuration in [readme.go.md](./readme.go.md)
 
 ## CSharp
 
