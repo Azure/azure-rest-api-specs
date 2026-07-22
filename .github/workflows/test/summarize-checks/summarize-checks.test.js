@@ -1343,7 +1343,7 @@ describe("Summarize Checks Unit Tests", () => {
       await expect(
         getImpactAssessment(github, mockCore, "test-owner", "test-repo", 123),
       ).rejects.toThrowErrorMatchingInlineSnapshot(
-        `[Error: Unable to find job-summary artifact for run ID: 123.]`,
+        `[Error: Unable to find job-summary artifact for run ID: 123. This should never happen, as this section of code should only run with a valid runId.]`,
       );
     });
   });

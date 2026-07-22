@@ -1237,7 +1237,51 @@ export async function downloadArtifactText(github, core, owner, repo, runId, art
  * @returns {Promise<import("./labelling.js").ImpactAssessment>} The parsed job summary data
  */
 export async function getImpactAssessment(github, core, owner, repo, runId) {
-  const jsonContent = await downloadArtifactText(github, core, owner, repo, runId, "job-summary");
+  // List artifacts for provided workflow run
+  const jobSummaryArtifacts = await github.paginate(github.rest.actions.listWorkflowRunArtifacts, {
+    owner,
+    repo,
+    run_id: runId,
+    name: "job-summary",
+    per_page: PER_PAGE_MAX,
+  });
+
+  // If multiple artifacts with same name, select latest updated
+  const jobSummaryArtifact = jobSummaryArtifacts.sort(
+    invert(byDate((a) => a.updated_at || "1970")),
+  )[0];
+
+  if (!jobSummaryArtifact) {
+    throw new Error(
+      `Unable to find job-summary artifact for run ID: ${runId}. This should never happen, as this section of code should only run with a valid runId.`,
+    );
+  }
+
+  // Download the artifact as a zip archive
+  const download = await github.rest.actions.downloadArtifact({
+    owner,
+    repo,
+    artifact_id: jobSummaryArtifact.id,
+    archive_format: "zip",
+  });
+
+  core.info(`Successfully downloaded job-summary artifact ID: ${jobSummaryArtifact.id}`);
+
+  // Write zip buffer to temp file and extract JSON
+  const tmpZip = path.join(process.env.RUNNER_TEMP || os.tmpdir(), `job-summary-${runId}.zip`);
+  // Convert ArrayBuffer to Buffer
+  // Convert ArrayBuffer (download.data) to Node Buffer
+  const arrayBuffer = /** @type {ArrayBuffer} */ (download.data);
+  const zipBuffer = Buffer.from(new Uint8Array(arrayBuffer));
+  await fs.writeFile(tmpZip, zipBuffer);
+
+  // Extract JSON content from zip archive
+  // Could replace with library like 'fflate' instead of 'exec unzip', but
+  // this would require 'npm i', while 'unzip' is pre-installed.
+  const { stdout: jsonContent } = await execFile("unzip", ["-p", tmpZip]);
+
+  await fs.unlink(tmpZip);
+
   return ImpactAssessmentSchema.parse(JSON.parse(jsonContent));
 }
 
