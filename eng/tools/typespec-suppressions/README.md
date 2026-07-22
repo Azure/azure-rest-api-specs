@@ -196,37 +196,44 @@ interface SuppressionReport {
 
 ## PR Integration Workflow
 
-The tool is integrated into the PR lifecycle through three coordinated components:
+The tool is integrated into the PR lifecycle as an **independent `TypeSpec Suppressions` check category**. Like other repository checks (e.g. Swagger ModelValidation), it is split into an _Analyze Code_ workflow that does the work and a _Set Status_ workflow that publishes the required commit status. Two additional consumers — Summarize Checks and Summarize Impact — surface the results and drive the review labels.
 
-### 1. Analysis Workflow
+### 1. Analyze Code
 
-**File:** `.github/workflows/typespec-suppressions-code.yaml`
+**File:** `.github/workflows/typespec-suppressions-code.yaml` — check name **"TypeSpec Suppressions - Analyze Code"**
 
-Triggers on every PR event (`opened`, `synchronize`, `reopened`, `edited`):
+Triggers on PR events (`opened`, `synchronize`, `reopened`, `edited`):
 
 1. **Checkout** — checks out the PR head SHA with full git history (`fetch-depth: 0`)
 2. **Detect impacted folders** — runs `eng/scripts/Get-TypeSpec-Folders.ps1` to diff the base and head commits, producing a list of changed TypeSpec project directories
-3. **Run analysis** — executes `typespec-suppressions --base <base-sha> --head HEAD` on all impacted folders
+3. **Run analysis** — executes `typespec-suppressions --base <base-sha> --head HEAD --check-rules-file eng/tools/typespec-suppressions/check-rules.json` on all impacted folders
 4. **Upload artifact** — saves the JSON report as a build artifact named `typespec-suppressions-report`
 5. **Step summary** — writes the Markdown report to `$GITHUB_STEP_SUMMARY` for visibility in the GitHub Actions UI
+6. **Inline annotations** — emits `::warning` annotations for new and changed [checked](#check-rules-scoped-approval) suppressions directly on the PR diff
 
 If no impacted TypeSpec folders are found, the workflow writes an empty report (`requiresApproval: false`) and exits early.
 
-### 2. Summarize Checks (Downstream Consumer)
+> **Note on `edited` events.** The `edited` trigger is kept so the analysis re-diffs when the PR **base branch** changes. However, `edited` also fires for title/description edits, which re-run the workflow on the same head commit. Because GitHub aggregates `::warning` annotations across every check run on a commit, inline annotations are emitted **only** for non-`edited` events or `edited` events that actually changed the base (`github.event.changes.base`) — otherwise the inline warnings would appear duplicated. The report, PR comment, and status still refresh on every run.
 
-**File:** `.github/workflows/src/summarize-checks/summarize-checks.js`
+### 2. Set Status
 
-The "Summarize PR Impact" check aggregates results from multiple PR checks, including typespec-suppressions:
+**File:** `.github/workflows/typespec-suppressions-status.yaml` — check name **"TypeSpec Suppressions"**
 
-1. **Finds** the most recent `TypeSpec Suppressions - Analyze Code` workflow run for the PR's head SHA
-2. **Downloads** the `typespec-suppressions-report` artifact from that run
-3. **Reads `requiresApproval`** from the JSON report:
-   - If `false` → no action, the suppressions section is omitted
-   - If `true` → renders a collapsible section titled **"TypeSpec suppressions requiring review"** in the PR comment
-4. **Lists** each new and changed suppression with rule name, source location, justification, and documentation links
-5. **Instructs** reviewers to apply the **`Approved-Suppression`** label if the justifications are acceptable
+Uses the shared `_reusable-set-check-status.yaml` to publish a single, stable required commit-status check named **"TypeSpec Suppressions"** that mirrors the Analyze Code result. This follows the Analyze Code / Set Status split used by other repository checks, so branch protection can require the stable `TypeSpec Suppressions` status regardless of the underlying workflow run.
 
-### 3. Test Workflow (CI for the Tool Itself)
+### 3. Summarize Checks (Downstream Consumer)
+
+**Files:** `.github/workflows/src/summarize-checks/summarize-checks.js`, `.github/workflows/src/summarize-checks/labelling.js`
+
+The "Summarize PR Impact" check renders a dedicated TypeSpec suppressions section and drives the review labels:
+
+1. **Finds** the most recent `TypeSpec Suppressions - Analyze Code` workflow run for the PR's head SHA and **downloads** the `typespec-suppressions-report` artifact
+2. **Renders** a collapsible section titled **"TypeSpec suppressions requiring review"**, listing each new and changed **checked** suppression (`report.checkedSuppressions`) with rule name, source location, justification, documentation links, and a per-row **Status** column (✅ once approved, ❌ while pending)
+3. **Enforces** the review-label rule: when the `TypeSpecSuppressionReviewRequired` label is present, `Approved-TypeSpecSuppression` is required for merge. Reviewers apply `Approved-TypeSpecSuppression` once every justification is acceptable.
+
+Only suppressions whose rule name appears in [`check-rules.json`](#check-rules-scoped-approval) are counted (the `checkedSuppressions` subset). An empty rule list reports nothing for review.
+
+### 4. Test Workflow (CI for the Tool Itself)
 
 **File:** `.github/workflows/typespec-suppressions-test.yaml`
 
@@ -237,34 +244,46 @@ Runs the tool's own unit and e2e tests. Triggers on:
 
 Uses the shared eng/tools test workflow, which type-checks, runs `test:ci`, and format-checks the tool.
 
-### 4. Summarize Impact (Library Consumer)
+### 5. Summarize Impact (Library Consumer)
 
 **File:** `eng/tools/summarize-impact/src/impact.ts`
 
-The `summarize-impact` tool imports the programmatic API (`analyzeTypeSpecSuppressionsFromDirectories`) to include suppression analysis in broader impact summaries, using directory-based comparison rather than git revisions.
+The `summarize-impact` tool imports the programmatic API (`analyzeTypeSpecSuppressionsFromDirectories`) to compute the `TypeSpecSuppressionReviewRequired` label from the **checked** subset, using directory-based comparison rather than git revisions.
+
+### Labels
+
+| Label                               | Applied by                                                                       | Meaning                                                                                                         |
+| ----------------------------------- | -------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `TypeSpecSuppressionReviewRequired` | Automatically (Summarize Impact), when any checked suppression is new or changed | Marks the PR as having suppressions that require reviewer approval                                              |
+| `Approved-TypeSpecSuppression`      | Reviewer                                                                         | Approves the checked suppressions; satisfies the merge requirement gated by `TypeSpecSuppressionReviewRequired` |
 
 ### Flow Diagram
 
 ```
 PR opened/updated
   │
-  ├─► typespec-suppressions-code.yaml
+  ├─► TypeSpec Suppressions - Analyze Code (typespec-suppressions-code.yaml)
   │     ├─ Get-TypeSpec-Folders.ps1 → finds changed spec directories
-  │     ├─ typespec-suppressions CLI → JSON report + Markdown summary
+  │     ├─ typespec-suppressions CLI → JSON report + Markdown summary + inline annotations
   │     └─ Upload artifact: "typespec-suppressions-report"
   │
-  └─► summarize-checks.js (downstream)
-        ├─ Download "typespec-suppressions-report" artifact
-        ├─ Check report.requiresApproval
-        │   ├─ false → no action
-        │   └─ true → render suppression details in PR comment
-        └─ Prompt reviewer for "Approved-Suppression" label
+  ├─► TypeSpec Suppressions - Set Status (typespec-suppressions-status.yaml)
+  │     └─ Publish required commit status "TypeSpec Suppressions" (mirrors Analyze Code)
+  │
+  ├─► Summarize Checks (summarize-checks.js + labelling.js)
+  │     ├─ Download "typespec-suppressions-report" artifact
+  │     ├─ Render checked suppressions in the PR comment
+  │     └─ Require Approved-TypeSpecSuppression when TypeSpecSuppressionReviewRequired is set
+  │
+  └─► Summarize Impact (impact.ts)
+        └─ Compute TypeSpecSuppressionReviewRequired from checkedSuppressions
 ```
 
 ### Key Behaviors
 
-- **`requiresApproval`** is computed, not configurable. It is `true` whenever there are new or changed suppressions, `false` otherwise. Removed suppressions alone do not trigger approval.
-- **`--fail-on-approval`** is the only behavioral control: when set, the CLI exits with code 1 if `requiresApproval` is `true`. The PR analysis workflow does **not** use this flag — it relies on the downstream summarize-checks workflow to surface the information to reviewers instead of blocking the check.
+- **Rollout is report-only.** Suppressions are surfaced (report artifact, PR comment, inline annotations) but do **not** block merges yet: `summarize-impact` computes `TypeSpecSuppressionReviewRequired` from the check-rules, then currently forces it off. Enabling gating is a single-line change in `processTypeSpecSuppression` (`impact.ts`).
+- **`requiresApproval`** is computed, not configurable. It is `true` whenever there are new or changed suppressions, `false` otherwise. Removed suppressions alone do not trigger approval. In [checked mode](#check-rules-scoped-approval) only suppressions matching `check-rules.json` count toward it (`checkedSuppressions`).
+- **`--fail-on-approval`** is the only CLI-level behavioral control: when set, the CLI exits with code 1 if `requiresApproval` is `true`. The PR Analyze Code workflow does **not** use this flag — gating is driven by the label mechanism above rather than by failing the check.
 - **Suppression identity** is based on structural anchors (spec path + source kind + rule name + anchor path), not line numbers, making the diff resilient to code reformatting and reordering.
 
 ## Development
