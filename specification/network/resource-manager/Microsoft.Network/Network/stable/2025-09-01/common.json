@@ -4590,6 +4590,78 @@
         ]
       }
     },
+    "ExpressRouteLagBillingType": {
+      "type": "string",
+      "description": "The billing type of the ExpressRouteLag resource.",
+      "enum": [
+        "MeteredData",
+        "UnlimitedData"
+      ],
+      "x-ms-enum": {
+        "name": "ExpressRouteLagBillingType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "MeteredData",
+            "value": "MeteredData",
+            "description": "Metered data transfer billing."
+          },
+          {
+            "name": "UnlimitedData",
+            "value": "UnlimitedData",
+            "description": "Unlimited data transfer billing."
+          }
+        ]
+      }
+    },
+    "ExpressRouteLagEncapsulation": {
+      "type": "string",
+      "description": "Encapsulation method on LAG.",
+      "enum": [
+        "Dot1Q",
+        "QinQ"
+      ],
+      "x-ms-enum": {
+        "name": "ExpressRouteLagEncapsulation",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Dot1Q",
+            "value": "Dot1Q",
+            "description": "IEEE 802.1Q encapsulation."
+          },
+          {
+            "name": "QinQ",
+            "value": "QinQ",
+            "description": "IEEE 802.1ad encapsulation."
+          }
+        ]
+      }
+    },
+    "ExpressRouteLagLacpTimer": {
+      "type": "string",
+      "description": "LACP timer configuration.",
+      "enum": [
+        "Fast",
+        "Slow"
+      ],
+      "x-ms-enum": {
+        "name": "ExpressRouteLagLacpTimer",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Fast",
+            "value": "Fast",
+            "description": "Fast LACP timer (30 seconds)."
+          },
+          {
+            "name": "Slow",
+            "value": "Slow",
+            "description": "Slow LACP timer (90 seconds)."
+          }
+        ]
+      }
+    },
     "ExpressRouteLinkAdminState": {
       "type": "string",
       "description": "Administrative state of the physical port.",
