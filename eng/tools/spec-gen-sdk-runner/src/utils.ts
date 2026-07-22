@@ -29,6 +29,180 @@ export async function resetGitRepo(repoPath: string): Promise<void> {
   }
 }
 
+/**
+ * Character allowlist for an SDK repo branch pin: must start and end with an
+ * alphanumeric character, with letters, digits, and the separators `._-/`
+ * allowed in between. This inherently rejects whitespace, `:`, `~^?*[]`, `@`,
+ * backslashes, control characters, and a leading dash or slash. The remaining
+ * git-specific sequence checks live in `isValidSdkBranchName` for readability.
+ */
+const sdkBranchNameRegex = /^[A-Za-z0-9](?:[A-Za-z0-9._/-]*[A-Za-z0-9])?$/;
+
+/**
+ * Returns true if `branch` is a safe, valid git branch name to use as an SDK
+ * repo pin: length-bounded, matching the character allowlist, and free of the
+ * disallowed git sequences (`refs/` prefix, `..`, `//`, and a `.lock` suffix).
+ */
+export function isValidSdkBranchName(branch: string): boolean {
+  return (
+    typeof branch === "string" &&
+    branch.length > 0 &&
+    branch.length <= 250 &&
+    !branch.startsWith("refs/") &&
+    !branch.includes("..") &&
+    !branch.includes("//") &&
+    !branch.endsWith(".lock") &&
+    sdkBranchNameRegex.test(branch)
+  );
+}
+
+/** Run a git command with an argument array (no shell) in the given repo. */
+async function runGitCommand(repoPath: string, args: string[]): Promise<void> {
+  await new Promise<void>((resolve, reject) => {
+    const child = spawn("git", args, {
+      cwd: repoPath,
+      shell: false,
+      stdio: "inherit",
+      env: process.env,
+    });
+    child.on("error", (error) => reject(error));
+    child.on("exit", (code) => {
+      if (code === 0) {
+        resolve();
+      } else {
+        reject(new Error(`git ${args.join(" ")} exited with code ${code}`));
+      }
+    });
+  });
+}
+
+/**
+ * Returns true if `branch` exists as a head (branch ref) on `origin`.
+ * A successful query with no matching ref returns false; operational git
+ * failures reject so callers cannot mistake them for a missing branch.
+ */
+async function sdkBranchExistsOnOrigin(repoPath: string, branch: string): Promise<boolean> {
+  return new Promise((resolve, reject) => {
+    const chunks: Buffer[] = [];
+    const child = spawn("git", ["ls-remote", "--heads", "origin", `refs/heads/${branch}`], {
+      cwd: repoPath,
+      shell: false,
+      stdio: ["ignore", "pipe", "inherit"],
+      env: process.env,
+    });
+    child.stdout.on("data", (data: Buffer) => chunks.push(data));
+    child.on("error", (error) => {
+      reject(new Error(`Failed to query SDK branch '${branch}' on origin`, { cause: error }));
+    });
+    child.on("close", (code) => {
+      if (code !== 0) {
+        reject(new Error(`git ls-remote for SDK branch '${branch}' exited with code ${code}`));
+        return;
+      }
+      const output = Buffer.concat(chunks).toString("utf8").trim();
+      resolve(output.length > 0);
+    });
+  });
+}
+
+/**
+ * Check out a non-`main` SDK repo branch in `repoPath` for the public spec-PR
+ * flow. Validates the branch name, confirms it exists as a head on `origin`,
+ * fetches it heads-only, and checks it out.
+ *
+ * @returns `true` if the branch was checked out; `false` only when the branch
+ *   does not exist (caller should fall back to `main`).
+ * @throws when the branch name is unsafe or a git operation fails.
+ */
+export async function checkoutSdkBranch(repoPath: string, branch: string): Promise<boolean> {
+  if (!isValidSdkBranchName(branch)) {
+    throw new Error(`Refusing to check out unsafe SDK branch name '${branch}'`);
+  }
+
+  let exists: boolean;
+  try {
+    exists = await sdkBranchExistsOnOrigin(repoPath, branch);
+  } catch (error) {
+    throw new Error(
+      `Unable to verify SDK branch '${branch}' on origin. SDK validation stopped without falling back to 'main'. Check repository access and network connectivity, then retry the pipeline.`,
+      { cause: error },
+    );
+  }
+  if (!exists) {
+    logMessage(`SDK branch '${branch}' not found on origin; falling back to 'main'`, LogLevel.Warn);
+    return false;
+  }
+
+  try {
+    await runGitCommand(repoPath, [
+      "fetch",
+      "origin",
+      `refs/heads/${branch}:refs/remotes/origin/${branch}`,
+    ]);
+  } catch (error) {
+    throw new Error(
+      `Unable to fetch SDK branch '${branch}' from origin. SDK validation stopped without falling back to 'main'. Check repository access and network connectivity, then retry the pipeline.`,
+      { cause: error },
+    );
+  }
+
+  try {
+    await runGitCommand(repoPath, ["checkout", "-B", branch, `origin/${branch}`]);
+    logMessage(`Checked out SDK repo branch '${branch}' in ${repoPath}`, LogLevel.Info);
+    return true;
+  } catch (error) {
+    throw new Error(
+      `Unable to check out SDK branch '${branch}'. SDK validation stopped to avoid generating from the wrong branch.`,
+      { cause: error },
+    );
+  }
+}
+
+/** Check out the `main` branch to normalize the SDK repo between specs. */
+export async function checkoutMainBranch(repoPath: string): Promise<void> {
+  try {
+    await runGitCommand(repoPath, ["checkout", "main"]);
+  } catch (error) {
+    throw new Error(
+      `Unable to restore the SDK repository to 'main'. SDK validation stopped to prevent the next spec from using the wrong branch.`,
+      { cause: error },
+    );
+  }
+}
+
+/**
+ * Get the service folder path (`specification/<service>`) from a spec config path.
+ * @param specConfigPath The relative spec config path.
+ * @returns The service folder path.
+ */
+export function getServiceFolderPath(specConfigPath: string): string {
+  if (!specConfigPath || specConfigPath.length === 0) {
+    return "";
+  }
+  const segments = specConfigPath.replaceAll("\\", "/").split("/");
+  if (segments.length > 2) {
+    return `${segments[0]}/${segments[1]}`;
+  }
+  return segments.join("/");
+}
+
+/**
+ * Get the API plane folder (`.../resource-manager` or `.../data-plane`) from a
+ * spec config path.
+ * @param specConfigPath The relative spec config path.
+ * @returns The plane folder path, or `undefined` when the path has no plane segment.
+ */
+export function getPlaneFolderPath(specConfigPath: string): string | undefined {
+  const segments = specConfigPath.replaceAll("\\", "/").split("/");
+  const planeIndex = segments.findIndex(
+    (segment) => segment === "resource-manager" || segment === "data-plane",
+  );
+  if (planeIndex === -1) {
+    return undefined;
+  }
+  return segments.slice(0, planeIndex + 1).join("/");
+}
+
 /*
  * Common function to find files recursively with case-insensitive matching
  */
