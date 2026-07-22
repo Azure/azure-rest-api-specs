@@ -16,10 +16,10 @@ namespace Microsoft.Network;
 /**
  * ServiceGateway resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "ServiceGateway uses Http.Private.includeInapplicableMetadataInPayload to suppress irrelevant ARM envelope properties from the response payload, which is required for correct wire format compatibility."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "ServiceGateway extends SecurityPerimeterTrackedResource, a shared base type defined in the Common namespace that captures the standard NSP-linked tracked resource shape. Refactoring to a standard ARM resource would require breaking changes to the existing API surface."
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "ServiceGateway inherits from SecurityPerimeterTrackedResource to share common NSP envelope properties (identity, kind, etag) across all security perimeter resource types. Composition would duplicate these definitions across the codebase."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "ServiceGateway uses Azure.ResourceManager.Legacy.feature gating to align with the NSP feature flag pattern used across all perimeter-linked resources in this namespace."
 @Azure.ResourceManager.Legacy.feature(Features.serviceGateway)
 @Http.Private.includeInapplicableMetadataInPayload(false)
 model ServiceGateway extends SecurityPerimeterTrackedResource {
@@ -48,7 +48,7 @@ model ServiceGateway extends SecurityPerimeterTrackedResource {
   /** A list of availability zones denoting the zone in which service gateway should be deployed.
    *
    * - The zone values must be provided as strings representing numeric identifiers like "1", "2", "3" etc. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "The zones property is a top-level envelope field required for availability zone deployment configuration. It is consistent with the existing pattern used by other zonal resources in this namespace (e.g. NatGateway, PublicIPAddress) and must remain in the envelope for backward compatibility."
   zones?: string[];
 }
 
@@ -70,7 +70,7 @@ model ServiceGatewayActionOkResponse {
   body: ServiceGatewayActionOkResponseBody;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "ServiceGateways interface uses Azure.ResourceManager.Legacy.feature gating to conditionally expose operations only when the serviceGateway feature flag is enabled, consistent with the feature-gating pattern used across all NSP-linked resource operations in this namespace."
 @Azure.ResourceManager.Legacy.feature(Features.serviceGateway)
 @armResourceOperations
 interface ServiceGateways {
