@@ -6,6 +6,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "../Common/Models.tsp";
 import "../Common/Enums.tsp";
 import "../../Common/ArmModels/AzureResourceProperties.tsp";
+import "../../Common/StandardizedContracts/CarbonEmissionsDetails.tsp";
 
 using Autorest;
 using TypeSpec.Http;
@@ -19,6 +20,7 @@ namespace Microsoft.Migrate;
 
 @doc("Iaas summary REST resource.")
 @parentResource(BusinessCase)
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 model IaasSummary is ProxyResource<IaasSummaryProperties> {
   @doc("Gets the Name of the Iaas Summary.")
   @key("iaasSummaryName")
@@ -31,6 +33,7 @@ model IaasSummary is ProxyResource<IaasSummaryProperties> {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "This is a hydrated resource with no PUT call."
 @doc("Iaas summary properties class.")
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 model IaasSummaryProperties {
   @doc("The Azure IaaS summary.")
   @visibility(Lifecycle.Read)
@@ -42,6 +45,7 @@ model IaasSummaryProperties {
 }
 
 @doc("The Azure IaaS summary.")
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 model AzureIaasSummary {
   @doc("Shows the year-on-year cost overall.")
   @visibility(Lifecycle.Read)
@@ -65,6 +69,7 @@ model AzureIaasSummary {
 }
 
 @doc("Azure Iaas virtual machine summary.")
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 model AzureIaasVmSummary {
   @doc("Servers suitable for migration.")
   @visibility(Lifecycle.Read)
@@ -112,6 +117,7 @@ model AzureIaasVmSummary {
 }
 
 @doc("Azure Iaas sql server summary.")
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 model AzureIaasSqlSummary {
   @doc("Total SQL entities.")
   @visibility(Lifecycle.Read)
@@ -150,6 +156,7 @@ model AzureIaasSqlSummary {
 }
 
 @doc("The on premises IAAS summary.")
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 model OnPremisesIaasSummary {
   @doc("The number of servers.")
   @visibility(Lifecycle.Read)
@@ -244,6 +251,7 @@ model OnPremisesIaasSummary {
 }
 
 @doc("The Iaas OS licensing details.")
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 model IaasOsLicensingDetails {
   @doc("The OS type.")
   @visibility(Lifecycle.Read)

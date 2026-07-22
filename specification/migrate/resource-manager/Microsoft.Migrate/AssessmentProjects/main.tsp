@@ -10,6 +10,8 @@ import "./AssessmentProjectsVersions.tsp";
 
 // Add MaAssessment Project service routes here.
 import "./asmprojectroutes.tsp";
+import "./onpremroutes.tsp";
+import "./operationresultsroutes.tsp";
 import "./client.tsp";
 
 using TypeSpec.Http;

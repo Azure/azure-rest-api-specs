@@ -1,0 +1,200 @@
+{
+  "title": "MachineOnPremSettingsOperations_ListByParent_MaximumSet",
+  "operationId": "MachineOnPremSettingsOperations_ListByParent",
+  "parameters": {
+    "api-version": "2025-09-09-preview",
+    "subscriptionId": "4bd2aa0f-2bd2-4d67-91a8-5a4533d58600",
+    "resourceGroupName": "rgassessmentProjects",
+    "projectName": "assessmentProject"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "computeSettings": {
+                "hyperthreadCoreToMemoryRatio": 3.6,
+                "price": 7019.58,
+                "windowsServerLicensing": {
+                  "licenseCost": 1000,
+                  "softwareAssuranceCost": 192.33,
+                  "licensesPerCore": 0
+                },
+                "rhelLinuxServerLicensing": {
+                  "licenseCost": 799
+                },
+                "suseLinuxServerLicensing": {
+                  "licenseCost": 859
+                },
+                "virtualizationSoftwareSettings": {
+                  "licenseAndSupportList": [
+                    {
+                      "licenseType": "VSphereStandard",
+                      "licenseCost": 995,
+                      "basicSupportCost": 273,
+                      "productionSupportCost": 284.33
+                    },
+                    {
+                      "licenseType": "VSphereEnterprisePlus",
+                      "licenseCost": 3595,
+                      "basicSupportCost": 755,
+                      "productionSupportCost": 791
+                    }
+                  ],
+                  "vMwareCloudFoundationLicenseCost": 350,
+                  "numberOfPhysicalCoresPerLicense": 30,
+                  "softwareAssuranceCost": 0
+                },
+                "computeHardwareMaintenanceCostPercentage": 5,
+                "vmOversubscriptionRatio": 9,
+                "cpuOversubscriptionRatio": 4
+              },
+              "storageSettings": {
+                "costPerGbPerYear": 2,
+                "maintainanceCostPercentageToAcquisitionCost": 10
+              },
+              "networkSettings": {
+                "physicalServersPerCabinet": 16,
+                "averageCostPerCabinet": 906,
+                "maintenanceCostPercentage": 15
+              },
+              "facilitySettings": {
+                "facilitiesCost": 0,
+                "facilitiesCostPerKwh": 330,
+                "powerUtilizationEfficiency": 1.8
+              },
+              "securitySettings": {
+                "serverSecurityCostPerServerPerYear": 250
+              },
+              "laborSettings": {
+                "physicalServersPerAdmin": 100,
+                "virtualMachinesPerAdmin": 120,
+                "hourlyAdminCost": 40
+              },
+              "managementSettings": {
+                "hypervVirtualizationSoftwareSettings": {
+                  "licenseAndSupportList": [
+                    {
+                      "licenseType": "Datacentre",
+                      "licenseCost": 3607,
+                      "basicSupportCost": 0,
+                      "productionSupportCost": 0
+                    }
+                  ],
+                  "numberOfPhysicalCoresPerLicense": 16,
+                  "softwareAssuranceCost": 192.33
+                },
+                "vSphereManagementSettings": {
+                  "licenseAndSupportList": [
+                    {
+                      "licenseType": "VSphereServerStandard",
+                      "licenseCost": 6175,
+                      "basicSupportCost": 1365,
+                      "productionSupportCost": 1365
+                    }
+                  ]
+                },
+                "thirdPartyManagementSettings": {
+                  "licenseCost": 864,
+                  "supportCost": 192
+                },
+                "otherManagementCostsSettings": {
+                  "monitoringCostPerServerPerYear": 430,
+                  "patchingCostPerServerPerYear": 430,
+                  "dataProtectionCostPerServerPerYear": 580,
+                  "storageBackupCostPerGbPerYear": 0.025
+                }
+              },
+              "azureArcSettings": {
+                "azureArcState": "Enabled",
+                "laborCostPercentage": 70,
+                "managementSettings": {
+                  "monitoringSettings": {
+                    "logsVolumeInGb": 0.1,
+                    "alertRulesCount": 50
+                  }
+                }
+              },
+              "costOverrides": [
+                {
+                  "name": "HardwareAcquisition",
+                  "value": 5000
+                },
+                {
+                  "name": "HardwareMaintenance",
+                  "value": 1500
+                },
+                {
+                  "name": "DatabaseLicensing",
+                  "value": 3000
+                },
+                {
+                  "name": "VirtualizationLicenseCost",
+                  "value": 1200
+                },
+                {
+                  "name": "LinuxLicenseCost",
+                  "value": 800
+                },
+                {
+                  "name": "WindowsLicenseCost",
+                  "value": 1500
+                },
+                {
+                  "name": "StorageAcquisition",
+                  "value": 2000
+                },
+                {
+                  "name": "StorageMaintenance",
+                  "value": 800
+                },
+                {
+                  "name": "NetworkAcquisition",
+                  "value": 1000
+                },
+                {
+                  "name": "NetworkMaintenance",
+                  "value": 500
+                },
+                {
+                  "name": "LaborCost",
+                  "value": 4000
+                },
+                {
+                  "name": "SecurityCost",
+                  "value": 2500
+                },
+                {
+                  "name": "ManagementCosts",
+                  "value": 3500
+                },
+                {
+                  "name": "FacilitiesCosts",
+                  "value": 1800
+                }
+              ],
+              "reconciliationInfo": {
+                "lastReconciliationTime": "2025-12-22T09:28:41.2570746Z",
+                "reconciliationStatus": "Succeeded",
+                "reconciliationTriggerSource": "OnDemandSettingsUpdate"
+              }
+            },
+            "id": "/subscriptions/4bd2aa0f-2bd2-4d67-91a8-5a4533d58600/resourceGroups/rgassessmentProjects/providers/Microsoft.Migrate/assessmentprojects/assessmentProject/machineOnPremSettings/default",
+            "name": "default",
+            "type": "Microsoft.Migrate/assessmentprojects/machineOnPremSettings",
+            "systemData": {
+              "createdBy": "sakanwar",
+              "createdByType": "User",
+              "createdAt": "2023-09-15T07:22:18.589Z",
+              "lastModifiedBy": "sakanwar",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2023-09-15T07:22:18.589Z"
+            }
+          }
+        ],
+        "nextLink": "https://microsoft.com/a"
+      }
+    }
+  }
+}
