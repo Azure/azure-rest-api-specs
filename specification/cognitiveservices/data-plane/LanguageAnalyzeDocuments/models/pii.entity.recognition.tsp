@@ -197,7 +197,7 @@ union RedactionPolicyKind {
   /** Do not redact detected entities. */
   noMask: "noMask",
 
-  /** React detected entities with redaction character. */
+  /** Redact detected entities with redaction character. */
   characterMask: "characterMask",
 
   /** Redact detected entities with entity type. */
@@ -346,7 +346,7 @@ union PiiCategories {
   /** Azure Storage Account Key */
   AzureStorageAccountKey: "AzureStorageAccountKey",
 
-  /** Azure Storage Account Generic */
+  /** Azure Storage account-related secrets or credentials that do not match a more specific Azure Storage category. */
   AzureStorageAccountGeneric: "AzureStorageAccountGeneric",
 
   /** BE National Number */

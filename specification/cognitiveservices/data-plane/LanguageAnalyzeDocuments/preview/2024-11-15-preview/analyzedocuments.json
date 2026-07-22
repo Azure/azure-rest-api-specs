@@ -22,7 +22,9 @@
         "in": "path",
         "description": "Supported Cognitive Services endpoint (e.g., https://<resource-name>.api.cognitiveservices.azure.com).",
         "required": true,
-        "type": "string"
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
       }
     ]
   },
@@ -303,17 +305,17 @@
               {
                 "name": "TextElements_v8",
                 "value": "TextElements_v8",
-                "description": "Returned offset and length values will correspond to textElements (Graphemes and Grapheme clusters) confirming to the Unicode 8.0.0 standard. Use this option if your application is written in .Net Framework or .Net Core and you will be using StringInfo."
+                "description": "Returned offset and length values will correspond to textElements (Graphemes and Grapheme clusters) conforming to the Unicode 8.0.0 standard. Use this option if your application is written in .NET Framework or .NET Core and you will be using StringInfo."
               },
               {
                 "name": "UnicodeCodePoint",
                 "value": "UnicodeCodePoint",
-                "description": "Returned offset and length values will correspond to Unicode code points. Use this option if your application is written in a language that support Unicode, for example Python."
+                "description": "Returned offset and length values will correspond to Unicode code points. Use this option if your application is written in a language that supports Unicode, for example Python."
               },
               {
                 "name": "Utf16CodeUnit",
                 "value": "Utf16CodeUnit",
-                "description": "Returned offset and length values will correspond to UTF-16 code units. Use this option if your application is written in a language that support Unicode, for example Java, JavaScript."
+                "description": "Returned offset and length values will correspond to UTF-16 code units. Use this option if your application is written in a language that supports Unicode, for example Java, JavaScript."
               }
             ]
           }
@@ -1110,17 +1112,17 @@
               {
                 "name": "TextElements_v8",
                 "value": "TextElements_v8",
-                "description": "Returned offset and length values will correspond to textElements (Graphemes and Grapheme clusters) confirming to the Unicode 8.0.0 standard. Use this option if your application is written in .Net Framework or .Net Core and you will be using StringInfo."
+                "description": "Returned offset and length values will correspond to textElements (Graphemes and Grapheme clusters) conforming to the Unicode 8.0.0 standard. Use this option if your application is written in .NET Framework or .NET Core and you will be using StringInfo."
               },
               {
                 "name": "UnicodeCodePoint",
                 "value": "UnicodeCodePoint",
-                "description": "Returned offset and length values will correspond to Unicode code points. Use this option if your application is written in a language that support Unicode, for example Python."
+                "description": "Returned offset and length values will correspond to Unicode code points. Use this option if your application is written in a language that supports Unicode, for example Python."
               },
               {
                 "name": "Utf16CodeUnit",
                 "value": "Utf16CodeUnit",
-                "description": "Returned offset and length values will correspond to UTF-16 code units. Use this option if your application is written in a language that support Unicode, for example Java, JavaScript."
+                "description": "Returned offset and length values will correspond to UTF-16 code units. Use this option if your application is written in a language that supports Unicode, for example Java, JavaScript."
               }
             ]
           }
@@ -1593,7 +1595,7 @@
           {
             "name": "AzureStorageAccountGeneric",
             "value": "AzureStorageAccountGeneric",
-            "description": "Azure Storage Account Generic"
+            "description": "Azure Storage account-related secrets or credentials that do not match a more specific Azure Storage category."
           },
           {
             "name": "BENationalNumber",
@@ -2633,7 +2635,7 @@
           {
             "name": "AzureStorageAccountGeneric",
             "value": "AzureStorageAccountGeneric",
-            "description": "Azure Storage Account Generic"
+            "description": "Azure Storage account-related secrets or credentials that do not match a more specific Azure Storage category."
           },
           {
             "name": "BENationalNumber",
@@ -3495,17 +3497,17 @@
               {
                 "name": "TextElements_v8",
                 "value": "TextElements_v8",
-                "description": "Returned offset and length values will correspond to textElements (Graphemes and Grapheme clusters) confirming to the Unicode 8.0.0 standard. Use this option if your application is written in .Net Framework or .Net Core and you will be using StringInfo."
+                "description": "Returned offset and length values will correspond to textElements (Graphemes and Grapheme clusters) conforming to the Unicode 8.0.0 standard. Use this option if your application is written in .NET Framework or .NET Core and you will be using StringInfo."
               },
               {
                 "name": "UnicodeCodePoint",
                 "value": "UnicodeCodePoint",
-                "description": "Returned offset and length values will correspond to Unicode code points. Use this option if your application is written in a language that support Unicode, for example Python."
+                "description": "Returned offset and length values will correspond to Unicode code points. Use this option if your application is written in a language that supports Unicode, for example Python."
               },
               {
                 "name": "Utf16CodeUnit",
                 "value": "Utf16CodeUnit",
-                "description": "Returned offset and length values will correspond to UTF-16 code units. Use this option if your application is written in a language that support Unicode, for example Java, JavaScript."
+                "description": "Returned offset and length values will correspond to UTF-16 code units. Use this option if your application is written in a language that supports Unicode, for example Java, JavaScript."
               }
             ]
           }
@@ -3547,7 +3549,7 @@
           {
             "name": "characterMask",
             "value": "characterMask",
-            "description": "React detected entities with redaction character."
+            "description": "Redact detected entities with redaction character."
           },
           {
             "name": "entityMask",
@@ -3579,7 +3581,7 @@
         "transactionsCount": {
           "type": "integer",
           "format": "int64",
-          "description": "Number of transactions for the request."
+          "description": "Number of billing or usage transactions for the request."
         }
       },
       "required": [
