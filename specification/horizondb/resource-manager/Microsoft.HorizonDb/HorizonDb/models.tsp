@@ -21,6 +21,8 @@ model HorizonDbCluster
   @path
   @segment("clusters")
   name: string;
+
+  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
 
 @doc("Represents the HorizonDB pool.")
@@ -188,6 +190,25 @@ model HorizonDbClusterProperties {
   @doc("The compute model for the cluster.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   computeModel?: HorizonDbComputeModel;
+
+  @added(Versions.v2026_05_01_preview)
+  @doc("Mirroring configuration for the HorizonDB cluster.")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  mirroring?: HorizonDbClusterMirroring;
+}
+
+@added(Versions.v2026_05_01_preview)
+@doc("Mirroring configuration for a HorizonDB cluster.")
+model HorizonDbClusterMirroring {
+  @doc("The names of the databases to mirror.")
+  databaseNames?: string[];
+
+  @doc("The resource ID of the user-assigned managed identity used for mirroring.")
+  userAssignedIdentityId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
 }
 
 @added(Versions.v2026_05_01_preview)
@@ -257,15 +278,24 @@ model HorizonDbClusterPropertiesForPatchUpdate {
   @doc("The compute model for the cluster.")
   @visibility(Lifecycle.Update)
   computeModel?: HorizonDbComputeModel;
+
+  @added(Versions.v2026_05_01_preview)
+  @doc("Mirroring configuration for the HorizonDB cluster.")
+  @visibility(Lifecycle.Update)
+  mirroring?: HorizonDbClusterMirroring;
 }
 
 @doc("HorizonDB cluster for update operations.")
 model HorizonDbClusterForPatchUpdate {
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 
   @doc("The properties that can be updated for a HorizonDB cluster.")
   properties?: HorizonDbClusterPropertiesForPatchUpdate;
 }
+
+@@added(HorizonDbCluster.identity, Versions.v2026_05_01_preview);
+@@added(HorizonDbClusterForPatchUpdate.identity, Versions.v2026_05_01_preview);
 
 @doc("Properties of a HorizonDB pool.")
 model HorizonDbPoolProperties {
@@ -399,7 +429,7 @@ model HorizonDbAdministratorPropertiesForAdd {
 @doc("The request body for adding a HorizonDB administrator.")
 model HorizonDbAdministratorAdd {
   @doc("The properties for adding a HorizonDB administrator.")
-  properties?: HorizonDbAdministratorPropertiesForAdd;
+  properties: HorizonDbAdministratorPropertiesForAdd;
 }
 
 @added(Versions.v2026_05_01_preview)

@@ -1704,12 +1704,12 @@
           }
         }
       },
-      "patch": {
-        "operationId": "HorizonDbPrivateEndpointConnections_Update",
+      "put": {
+        "operationId": "HorizonDbPrivateEndpointConnections_UpdateStatus",
         "tags": [
           "HorizonDbPrivateEndpointConnections"
         ],
-        "description": "Updates a private endpoint connection.",
+        "description": "Approves or rejects a private endpoint connection.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1734,34 +1734,26 @@
             "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/parameters/PrivateEndpointConnectionName"
           },
           {
-            "name": "properties",
+            "name": "resource",
             "in": "body",
-            "description": "The resource properties to be updated.",
+            "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Azure.ResourceManager.PrivateEndpointConnectionUpdate"
+              "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "Resource 'PrivateEndpointConnectionResource' update operation succeeded",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
-          "202": {
-            "description": "Resource update request accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
+          "201": {
+            "description": "Resource 'PrivateEndpointConnectionResource' create operation succeeded",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
@@ -1773,14 +1765,9 @@
         },
         "x-ms-examples": {
           "Approve or reject a private endpoint connection": {
-            "$ref": "./examples/PrivateEndpointConnections_Update.json"
+            "$ref": "./examples/PrivateEndpointConnections_UpdateStatus.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "delete": {
         "operationId": "HorizonDbPrivateEndpointConnections_Delete",
@@ -1962,6 +1949,222 @@
             "$ref": "./examples/PrivateLinkResources_Get.json"
           }
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/restart": {
+      "post": {
+        "operationId": "HorizonDbClusters_Restart",
+        "tags": [
+          "HorizonDbClusters"
+        ],
+        "description": "Restarts a HorizonDB cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HorizonDbCluster"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Restart a HorizonDB cluster": {
+            "$ref": "./examples/Clusters_Restart.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/start": {
+      "post": {
+        "operationId": "HorizonDbClusters_Start",
+        "tags": [
+          "HorizonDbClusters"
+        ],
+        "description": "Starts a stopped HorizonDB cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HorizonDbCluster"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Start a HorizonDB cluster": {
+            "$ref": "./examples/Clusters_Start.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/stop": {
+      "post": {
+        "operationId": "HorizonDbClusters_Stop",
+        "tags": [
+          "HorizonDbClusters"
+        ],
+        "description": "Stops a running HorizonDB cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HorizonDbCluster"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Stop a HorizonDB cluster": {
+            "$ref": "./examples/Clusters_Stop.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/parameterGroups": {
@@ -2417,26 +2620,6 @@
       "type": "string",
       "description": "Represents an Azure geography region where supported resource providers live."
     },
-    "Azure.ResourceManager.PrivateEndpointConnectionUpdate": {
-      "type": "object",
-      "description": "PATCH model for private endpoint connections",
-      "properties": {
-        "properties": {
-          "type": "object",
-          "description": "The private endpoint connection properties",
-          "properties": {
-            "privateEndpoint": {
-              "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpoint",
-              "description": "The private endpoint resource."
-            },
-            "privateLinkServiceConnectionState": {
-              "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateLinkServiceConnectionState",
-              "description": "A collection of information about the state of the connection between service consumer and provider."
-            }
-          }
-        }
-      }
-    },
     "CreateModeCluster": {
       "type": "string",
       "description": "The mode to create a new HorizonDB cluster.",
@@ -2514,7 +2697,10 @@
           "$ref": "#/definitions/HorizonDbAdministratorPropertiesForAdd",
           "description": "The properties for adding a HorizonDB administrator."
         }
-      }
+      },
+      "required": [
+        "properties"
+      ]
     },
     "HorizonDbAdministratorListResult": {
       "type": "object",
@@ -2612,6 +2798,10 @@
         "properties": {
           "$ref": "#/definitions/HorizonDbClusterProperties",
           "description": "The resource-specific properties for this resource."
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
         }
       },
       "allOf": [
@@ -2649,6 +2839,10 @@
             "type": "string"
           }
         },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
         "properties": {
           "$ref": "#/definitions/HorizonDbClusterPropertiesForPatchUpdate",
           "description": "The properties that can be updated for a HorizonDB cluster."
@@ -2675,6 +2869,31 @@
       "required": [
         "value"
       ]
+    },
+    "HorizonDbClusterMirroring": {
+      "type": "object",
+      "description": "Mirroring configuration for a HorizonDB cluster.",
+      "properties": {
+        "databaseNames": {
+          "type": "array",
+          "description": "The names of the databases to mirror.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "userAssignedIdentityId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of the user-assigned managed identity used for mirroring.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
+        }
+      }
     },
     "HorizonDbClusterParameterGroupConnectionProperties": {
       "type": "object",
@@ -2835,6 +3054,15 @@
             "update",
             "create"
           ]
+        },
+        "mirroring": {
+          "$ref": "#/definitions/HorizonDbClusterMirroring",
+          "description": "Mirroring configuration for the HorizonDB cluster.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         }
       },
       "required": [
@@ -2880,6 +3108,13 @@
         "computeModel": {
           "$ref": "#/definitions/HorizonDbComputeModel",
           "description": "The compute model for the cluster.",
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
+        "mirroring": {
+          "$ref": "#/definitions/HorizonDbClusterMirroring",
+          "description": "Mirroring configuration for the HorizonDB cluster.",
           "x-ms-mutability": [
             "update"
           ]
