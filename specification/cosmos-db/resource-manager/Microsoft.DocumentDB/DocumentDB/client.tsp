@@ -1674,8 +1674,13 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
   "CassandraViewConfig",
   "csharp"
 );
-@@clientName(ARMProxyResource, "ArmProxyResource", "csharp");
+@@clientName(ARMProxyResource, "CosmosDBProxyResource", "csharp");
 @@clientName(ARMResourceProperties, "ArmResourceProperties", "csharp");
+@@clientName(
+  ScheduledEventStrategy,
+  "CassandraScheduledEventStrategy",
+  "csharp"
+);
 @@clientName(
   MaterializedViewDefinition,
   "CosmosDBMaterializedViewDefinition",
