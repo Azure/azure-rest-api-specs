@@ -442,6 +442,121 @@ interface ContainerRegistry {
     },
     ArtifactManifestProperties
   >;
+
+  /**
+   * List soft-deleted manifests for the given repository
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
+  @summary("List soft-deleted manifests")
+  @route("/acr/v1/_deleted/{name}/_manifests")
+  @get
+  getDeletedManifests is AcrOperation<
+    {
+      /**
+       * Name of the image (including the namespace)
+       */
+      @path
+      name: string;
+
+      /**
+       * Query parameter for the last item in previous query. Result set will include
+       * values lexically after last.
+       */
+      @query("last")
+      last?: string;
+
+      /**
+       * query parameter for max number of items
+       */
+      @query("n")
+      n?: int32;
+    },
+    {
+      /** next paginated result */
+      @header("Link")
+      link?: string;
+
+      @bodyRoot
+      body: DeletedManifests;
+    }
+  >;
+
+  /**
+   * List soft-deleted tags for the given repository
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
+  @summary("List soft-deleted tags")
+  @route("/acr/v1/_deleted/{name}/_tags")
+  @get
+  getDeletedTags is AcrOperation<
+    {
+      /**
+       * Name of the image (including the namespace)
+       */
+      @path
+      name: string;
+
+      /**
+       * Query parameter for the last item in previous query. Result set will include
+       * values lexically after last.
+       */
+      @query("last")
+      last?: string;
+
+      /**
+       * query parameter for max number of items
+       */
+      @query("n")
+      n?: int32;
+    },
+    {
+      /** next paginated result */
+      @header("Link")
+      link?: string;
+
+      @bodyRoot
+      body: DeletedTags;
+    }
+  >;
+
+  /**
+   * Restore a soft-deleted artifact by re-creating the specified tag pointing at
+   * the given manifest digest. The manifest must still be within the registry's
+   * soft-delete retention window.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
+  @summary("Restore a soft-deleted artifact")
+  @route("/acr/v1/_deleted/{name}/_manifests/{digest}")
+  @post
+  restoreDeletedArtifact is AcrOperation<
+    {
+      /**
+       * Name of the image (including the namespace)
+       */
+      @path
+      name: string;
+
+      /**
+       * Digest of the soft-deleted manifest to restore
+       */
+      @path
+      digest: string;
+
+      /**
+       * If true, an existing tag with the same name will be overwritten when the
+       * artifact is restored.
+       */
+      @query
+      force?: boolean;
+
+      /**
+       * Restore request body specifying the tag to recreate.
+       */
+      @bodyRoot
+      payload: RestoreDeletedArtifactRequest;
+    },
+    NoContentResponse
+  >;
 }
 
 interface ContainerRegistryBlob {

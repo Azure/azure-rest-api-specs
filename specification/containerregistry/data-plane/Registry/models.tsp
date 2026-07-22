@@ -1233,3 +1233,173 @@ model PathsV3R3RxOauth2TokenPostRequestbodyContentApplicationXWwwFormUrlencodedS
   @encodedName("application/x-www-form-urlencoded", "grant_type")
   grantType: TokenGrantType;
 }
+
+/**
+ * Deleted manifest list
+ */
+model DeletedManifests {
+  /**
+   * Registry login server name. This is likely to be similar to
+   * {registry-name}.azurecr.io.
+   */
+  registry?: string;
+
+  /**
+   * Image name
+   */
+  imageName?: string;
+
+  /**
+   * List of soft-deleted manifests
+   */
+  @pageItems
+  manifests?: DeletedManifest[];
+
+  /**
+   * Link to the next page of results
+   */
+  @nextLink
+  link?: string;
+}
+
+/**
+ * Soft-deleted manifest details
+ */
+model DeletedManifest {
+  /**
+   * Manifest digest
+   */
+  @visibility(Lifecycle.Read)
+  digest: string;
+
+  /**
+   * Image size
+   */
+  @visibility(Lifecycle.Read)
+  imageSize?: int64;
+
+  /**
+   * Created time
+   */
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  createdTime?: utcDateTime;
+
+  /**
+   * Last update time
+   */
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  lastUpdateTime?: utcDateTime;
+
+  /**
+   * Time at which the manifest was soft-deleted. The manifest is recoverable
+   * for the soft-delete retention window configured on the registry (default
+   * 30 days) before it is permanently purged.
+   */
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  deletedTime: utcDateTime;
+
+  /**
+   * CPU architecture
+   */
+  @visibility(Lifecycle.Read)
+  architecture?: ArtifactArchitecture;
+
+  /**
+   * Operating system
+   */
+  @visibility(Lifecycle.Read)
+  os?: ArtifactOperatingSystem;
+
+  /**
+   * Config blob media type
+   */
+  configMediaType?: string;
+
+  /**
+   * List of tags that pointed to this manifest at the time it was deleted.
+   */
+  @visibility(Lifecycle.Read)
+  tags?: string[];
+}
+
+/**
+ * Deleted tag list
+ */
+model DeletedTags {
+  /**
+   * Registry login server name. This is likely to be similar to
+   * {registry-name}.azurecr.io.
+   */
+  registry?: string;
+
+  /**
+   * Image name
+   */
+  imageName?: string;
+
+  /**
+   * List of soft-deleted tags
+   */
+  @pageItems
+  tags?: DeletedTag[];
+
+  /**
+   * Link to the next page of results
+   */
+  @nextLink
+  link?: string;
+}
+
+/**
+ * Soft-deleted tag details
+ */
+model DeletedTag {
+  /**
+   * Tag name
+   */
+  @visibility(Lifecycle.Read)
+  name: string;
+
+  /**
+   * Digest the tag pointed to at the time of deletion
+   */
+  @visibility(Lifecycle.Read)
+  digest: string;
+
+  /**
+   * Tag created time
+   */
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  createdTime?: utcDateTime;
+
+  /**
+   * Tag last update time
+   */
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  lastUpdateTime?: utcDateTime;
+
+  /**
+   * Time at which the tag was soft-deleted. The tag is recoverable for the
+   * soft-delete retention window configured on the registry (default 30 days)
+   * before it is permanently purged.
+   */
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  deletedTime: utcDateTime;
+}
+
+/**
+ * Request body for restoring a soft-deleted manifest. Supplies the tag to
+ * re-associate with the restored manifest.
+ */
+model RestoreDeletedArtifactRequest {
+  /**
+   * Tag to re-associate with the restored manifest.
+   */
+  tag: string;
+}
