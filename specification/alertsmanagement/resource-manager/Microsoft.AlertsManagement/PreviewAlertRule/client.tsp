@@ -84,24 +84,6 @@ using Microsoft.AlertsManagement;
 // ValueType.Equals(object) on the generated readonly struct.
 @@clientName(ConditionOperator.Equals, "EqualTo", "csharp");
 
-// C# customizations: force `LogAlertRuleResource` (and its nested
-// `LogAlertRuleProperties`) to be treated as input-only models. Because the
-// TypeSpec body declares `@visibility(Lifecycle.Read, Lifecycle.Create)` on
-// `location` and the model is only ever sent as a request body (the POST
-// response is `PreviewAlertRuleResponse`, not `LogAlertRuleResource`), TCGC's
-// default `input | output` usage marks the model with output semantics and
-// the C# emitter then emits an `internal` constructor with read-only
-// properties — which makes it impossible for callers to construct a
-// `LogAlertRule` payload. `Usage.input` keeps the public parameterless
-// constructor and the writable scalar setters that are required for a
-// request-body shape.
-@@usage(LogAlertRuleResource, Usage.input, "csharp");
-@@usage(LogAlertRuleProperties, Usage.input, "csharp");
-@@usage(LogAlertRuleCriteria, Usage.input, "csharp");
-@@usage(LogAlertRuleCondition, Usage.input, "csharp");
-@@usage(LogAlertRuleDimension, Usage.input, "csharp");
-@@usage(LogAlertRuleConditionFailingPeriods, Usage.input, "csharp");
-
 // C# customizations: align Azure region strings with the Azure.Core.AzureLocation
 // strongly-typed value used elsewhere in azure-sdk-for-net (matches the
 // existing Azure.ResourceManager.AlertsManagement SDK surface).
