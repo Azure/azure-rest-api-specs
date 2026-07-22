@@ -10,7 +10,7 @@ namespace Microsoft.Resources.DeploymentExtensionRuntimes;
 /**
  * A deployment extension runtime. Represents the regional runtime
  * infrastructure that hosts an Azure Deployments server-side extension. The
- * backend architecture is selected by the discriminated `properties.config`
+ * backend architecture is selected by the discriminated `properties.hosting`
  * property.
  */
 model DeploymentExtensionRuntime
@@ -19,7 +19,7 @@ model DeploymentExtensionRuntime
     Resource = DeploymentExtensionRuntime,
     KeyName = "runtimeName",
     SegmentName = "deploymentExtensionRuntimes",
-    NamePattern = "^[a-z][a-z0-9-]{0,26}[a-z0-9]$"
+    NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9-]{0,62}$"
   >;
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }

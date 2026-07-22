@@ -8,7 +8,7 @@ namespace Microsoft.Resources.DeploymentExtensionRuntimes;
 
 /**
  * The backend architecture of a deployment extension runtime. This selects the
- * shape of `properties.config` and is immutable after creation.
+ * shape of `properties.hosting` and is immutable after creation.
  */
 union ExtensionRuntimeKind {
   string,
@@ -59,7 +59,7 @@ union ProvisioningState {
 
 /**
  * Properties of a deployment extension runtime. The backend-specific
- * configuration lives in the discriminated `config` sub-property; the remaining
+ * configuration lives in the discriminated `hosting` sub-property; the remaining
  * members are read-only outputs common to every runtime.
  */
 model DeploymentExtensionRuntimeProperties {
@@ -70,36 +70,36 @@ model DeploymentExtensionRuntimeProperties {
   provisioningState?: ProvisioningState;
 
   /**
-   * The backend configuration for the runtime. The `kind` discriminator selects
-   * the backend architecture and the shape of this object.
+   * The backend configuration for the runtime. The `runtimeKind` discriminator
+   * selects the backend architecture and the shape of this object.
    */
-  config: RuntimeConfig;
+  hosting: RuntimeHosting;
 }
 
 /**
- * Backend configuration for a deployment extension runtime. The `kind`
+ * Backend configuration for a deployment extension runtime. The `runtimeKind`
  * discriminator selects the backend architecture and the concrete shape of this
  * object.
  */
-@discriminator("kind")
-model RuntimeConfig {
+@discriminator("runtimeKind")
+model RuntimeHosting {
   /**
    * The backend architecture of the runtime. Immutable after creation.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  kind: ExtensionRuntimeKind;
+  runtimeKind: ExtensionRuntimeKind;
 }
 
 /**
  * Backend configuration for a `ContainerApps` runtime: a customer-managed
  * container hosted on Azure Container Apps.
  */
-model ContainerAppsConfig extends RuntimeConfig {
+model ContainerAppsHosting extends RuntimeHosting {
   /**
    * The backend architecture discriminator for a customer-managed Azure
    * Container Apps runtime.
    */
-  kind: "ContainerApps";
+  runtimeKind: "ContainerApps";
 
   /**
    * OCI artifact reference for the extension binary, for example
@@ -182,11 +182,11 @@ model ContainerAppsConfig extends RuntimeConfig {
  * Backend configuration for a `BuiltIn` runtime: a platform-provided extension
  * that carries no customer-supplied configuration.
  */
-model BuiltInConfig extends RuntimeConfig {
+model BuiltInHosting extends RuntimeHosting {
   /**
    * The backend architecture discriminator for a platform-provided runtime.
    */
-  kind: "BuiltIn";
+  runtimeKind: "BuiltIn";
 }
 
 /**
