@@ -406,7 +406,7 @@ model RelayNamespaceProperties {
    * Existing namespaces configured with TLS 1.0 or 1.1 are reported as TLS 1.2.
    */
   @added(Versions.v2026_01_01)
-  minimumTlsVersion?: TlsVersion = "1.2";
+  minimumTlsVersion?: TlsVersion;
 }
 
 /**
