@@ -40,6 +40,7 @@ import "./DevicePool.tsp";
 import "./EdgeMachineGpu.tsp";
 import "./EdgeMachineNetworkAdapters.tsp";
 import "./EdgeMachineStorage.tsp";
+import "./EdgeMachineDeploymentSetting.tsp";
 import "./client.tsp";
 
 using Azure.ResourceManager;
