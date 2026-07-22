@@ -18,6 +18,7 @@ import "./ApplicationGatewayAvailableSslOptions.tsp";
 import "./ApplicationGatewayPrivateEndpointConnection.tsp";
 import "./ApplicationGatewayWafDynamicManifestResult.tsp";
 import "./ApplicationSecurityGroup.tsp";
+import "./AddressPrefixSet.tsp";
 import "./AzureFirewall.tsp";
 import "./AzureWebCategory.tsp";
 import "./BastionHost.tsp";
