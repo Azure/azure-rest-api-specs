@@ -28,37 +28,53 @@ describe("formatSuppressionAnnotation", () => {
     expect(annotation).toContain("file=specification/contoso/Contoso.Widget/main.tsp");
     expect(annotation).toContain("line=42");
     expect(annotation).toContain("col=3");
-    expect(annotation).toContain("title=TypeSpec suppression requires review");
+    expect(annotation).toContain("title=New/changed TypeSpec Suppression - REVIEW REQUIRED");
   });
 
-  it("includes the rule name, justification, and raw documentation URL", () => {
+  it("lays out the body as encoded newline-separated lines", () => {
     const annotation = formatSuppressionAnnotation(makeRecord());
 
-    expect(annotation).toContain("@azure-tools/typespec-azure-core/no-enum");
-    expect(annotation).toContain('"Legacy enum kept for backward compatibility"');
     expect(annotation).toContain(
-      "Rule docs: https://azure.github.io/typespec-azure/docs/libraries/azure-core/rules/no-enum",
+      "Authors should avoid adding new suppressions and prefer fixing the underlying issue",
     );
+    expect(annotation).toContain(
+      "**Rule docs**: https://azure.github.io/typespec-azure/docs/libraries/azure-core/rules/no-enum",
+    );
+    // Body lines are joined with newlines and encoded as %0A for the workflow command.
+    expect(annotation).toContain("%0A");
+    expect(annotation).not.toContain("\n");
+  });
+
+  it("omits the rule name and, when justified, the justification text", () => {
+    const annotation = formatSuppressionAnnotation(makeRecord());
+
+    expect(annotation).not.toContain("@azure-tools/typespec-azure-core/no-enum");
+    expect(annotation).not.toContain("Legacy enum kept for backward compatibility");
+    expect(annotation).not.toContain("NO JUSTIFICATION PROVIDED");
   });
 
   it("omits the docs clause when no documentation URL is available", () => {
     const annotation = formatSuppressionAnnotation(makeRecord({ ruleMetadata: undefined }));
 
-    expect(annotation).not.toContain("Rule docs:");
+    expect(annotation).not.toContain("Rule docs");
   });
 
   it("flags a missing justification", () => {
     const annotation = formatSuppressionAnnotation(makeRecord({ justification: "   " }));
 
-    expect(annotation).toContain("NO JUSTIFICATION PROVIDED");
+    expect(annotation).toContain("NO JUSTIFICATION PROVIDED — a justification is required.");
   });
 
   it("escapes newlines and percent signs in the message", () => {
     const annotation = formatSuppressionAnnotation(
-      makeRecord({ justification: "line1\nline2 100% sure", ruleMetadata: undefined }),
+      makeRecord({
+        justification: "   ",
+        ruleMetadata: { documentationUrl: "https://example.com/docs%20guide" },
+      }),
     );
 
-    expect(annotation).toContain("line1%0Aline2 100%25 sure");
+    expect(annotation).toContain("https://example.com/docs%2520guide");
+    expect(annotation).toContain("%0A");
     expect(annotation).not.toContain("\n");
   });
 });
@@ -95,8 +111,7 @@ describe("emitSuppressionAnnotations", () => {
     // Changed suppression is anchored to the head-side (after) location, not the before line.
     expect(second).toContain("file=specification/contoso/Contoso.Widget/models.tsp");
     expect(second).toContain("line=55");
-    expect(second).toContain('"new reason"');
-    expect(second).not.toContain("old reason");
+    expect(second).not.toContain("line=10");
   });
 
   it("emits nothing when there are no new or changed suppressions", () => {

@@ -1,6 +1,10 @@
 import type { SuppressionChange, SuppressionRecord } from "./types.ts";
 
-const ANNOTATION_TITLE = "TypeSpec suppression requires review";
+const ANNOTATION_TITLE = "New/changed TypeSpec Suppression - REVIEW REQUIRED";
+
+const SUPPRESSION_GUIDANCE =
+  "Authors should avoid adding new suppressions and prefer fixing the underlying issue; " +
+  "reviewers should approve only when there is a clear, compelling justification and no reasonable alternative.";
 
 /**
  * Escapes a value for use in the message portion of a GitHub Actions workflow command.
@@ -19,12 +23,25 @@ function escapeAnnotationProperty(value: string): string {
 }
 
 function buildAnnotationMessage(suppression: SuppressionRecord): string {
-  const justification = suppression.justification?.trim()
-    ? `"${suppression.justification.trim()}"`
-    : "NO JUSTIFICATION PROVIDED";
-  const base = `${ANNOTATION_TITLE} — ${suppression.ruleName}: ${justification}.`;
+  // GitHub renders `%0A`-encoded newlines in the annotation message body (but not in the
+  // `title` property), so lay the details out one per line for readability. Newline
+  // encoding is handled by escapeAnnotationMessage in formatSuppressionAnnotation.
+  const lines: string[] = [];
+
+  // Only call out the justification when it is missing; a present justification is already
+  // visible in the suppression comment the annotation is anchored to.
+  if (!suppression.justification?.trim()) {
+    lines.push("NO JUSTIFICATION PROVIDED — a justification is required.");
+  }
+
+  lines.push(SUPPRESSION_GUIDANCE);
+
   const documentationUrl = suppression.ruleMetadata?.documentationUrl;
-  return documentationUrl ? `${base} Rule docs: ${documentationUrl}` : base;
+  if (documentationUrl) {
+    lines.push(`**Rule docs**: ${documentationUrl}`);
+  }
+
+  return lines.join("\n");
 }
 
 /**
