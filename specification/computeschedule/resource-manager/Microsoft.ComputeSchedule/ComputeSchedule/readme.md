@@ -181,6 +181,15 @@ input-file:
   - preview/2024-08-15-preview/computeschedule.json
 ```
 
+### Tag: package-2024-06-01-preview
+
+These settings apply only when `--tag=package-2024-06-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-06-01-preview'
+input-file:
+  - preview/2024-06-01-preview/computeschedule.json
+```
+
 ---
 
 # Code Generation
