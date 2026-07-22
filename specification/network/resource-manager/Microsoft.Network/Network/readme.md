@@ -125,9 +125,7 @@ suppressions:
       - $.definitions.GetServiceGatewayServicesResult
   - code: ProvisioningStateMustBeReadOnly
     from: firewallPolicy.json
-    reason: >-
-      KSG provisioningState is emitted with readOnly as a sibling of $ref. This is valid for
-      AutoRest/ARM, but the linter does not resolve this pattern reliably.
+    reason: provisioningState is correctly marked readOnly in the referenced schema. The linter does not follow $ref chains to verify readOnly.
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/kubeSelectorGroups/{kubeSelectorGroupName}"].get.responses["200"].schema
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/kubeSelectorGroups/{kubeSelectorGroupName}"].put.responses["200"].schema
