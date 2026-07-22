@@ -134,9 +134,6 @@ using Microsoft.Mission;
 );
 @@clientName(ServiceIdentifier.PrivateDNSZones, "PrivateDnsZones", "csharp");
 @@clientName(ActionPerformed, "ApproverActionPerformed", "csharp");
-
-@@clientName(Microsoft.Mission, "VirtualEnclavesMgmtClient", "python");
-
 @@clientName(DedicatedHubResource, "EnclaveDedicatedHub", "csharp");
 @@clientName(DedicatedHubProperties, "EnclaveDedicatedHubProperties", "csharp");
 @@clientName(DedicatedHubPatchModel, "EnclaveDedicatedHubPatch", "csharp");
@@ -190,7 +187,6 @@ using Microsoft.Mission;
 @@clientName(TransitOptionParams, "EnclaveTransitOptionContent", "csharp");
 @@clientName(TransitOptionType, "EnclaveTransitOptionType", "csharp");
 @@clientName(UpdateMode, "EnclaveUpdateMode", "csharp");
-
 @@clientName(VirtualEnclaveProperties, "EnclaveProperties", "csharp");
 @@clientName(VirtualEnclavePatchProperties, "EnclavePatchProperties", "csharp");
 @@clientName(
@@ -203,3 +199,5 @@ using Microsoft.Mission;
   "EnclaveApprovalSettingsPatchProperties",
   "csharp"
 );
+
+@@clientName(Microsoft.Mission, "EnclaveMgmtClient", "python");
