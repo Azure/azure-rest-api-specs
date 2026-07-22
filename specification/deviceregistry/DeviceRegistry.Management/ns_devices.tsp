@@ -90,6 +90,7 @@ interface NamespaceDevices {
   delete is ArmResourceDeleteWithoutOkAsync<NamespaceDevice>;
   listByResourceGroup is ArmResourceListByParent<NamespaceDevice>;
 
+  @doc("A long-running resource action.")
   @added(Versions.v2026_03_01_preview)
   @removed(Versions.v2026_04_01)
   revoke is ArmResourceActionAsync<
