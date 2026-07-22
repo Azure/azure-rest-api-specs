@@ -4,10 +4,13 @@ parameters:
   "dependencies":
     default: ""
 emit:
+  - "@azure-tools/typespec-autorest"
   - "@typespec/openapi3"
-# VoiceLive follows the Azure AI Foundry pattern: it consumes the OpenAI GA Realtime
-# TypeSpec and emits OpenAPI 3.x via `@typespec/openapi3` (which supports `oneOf`, so
-# OpenAI GA models that use oneOf unions — tools, tool_choice, etc. — emit correctly).
+# VoiceLive follows the Azure AI Foundry pattern (matching OpenAI.Assistants and
+# ModelInference): it dual-emits Swagger 2.0 via `@azure-tools/typespec-autorest`
+# (the standard Foundry output, into `stable/`/`preview/` folders) AND OpenAPI 3.x via
+# `@typespec/openapi3` (which supports the `oneOf` unions the OpenAI GA models use —
+# tools, tool_choice, voice, etc. — that Swagger 2.0 cannot represent).
 imports:
   - "@azure-tools/openai-typespec/models/realtime"
 linter:
@@ -25,6 +28,10 @@ linter:
     "@azure-tools/typespec-client-generator-core/property-name-conflict": "OpenAI package has conflict."
     "@azure-tools/typespec-azure-core/no-enum": "OpenAI uses enums."
 options:
+  "@azure-tools/typespec-autorest":
+    emitter-output-dir: "{project-root}"
+    output-file: "{version-status}/{version}/VoiceLive.json"
+    omit-unreachable-types: false
   "@typespec/openapi3":
     emitter-output-dir: "{project-root}"
     output-file: "openapi3/{version}/VoiceLive.json"
