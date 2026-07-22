@@ -25,5 +25,5 @@ model ImportWavePlanRequest {
 @doc("Response payload for the importWavePlan action.")
 @added(ApiVersions.v2026_06_01_preview)
 model ImportWavePlanResponse {
-  ...WavePlanListItem;
+  ...WavePlanListItemBase;
 }

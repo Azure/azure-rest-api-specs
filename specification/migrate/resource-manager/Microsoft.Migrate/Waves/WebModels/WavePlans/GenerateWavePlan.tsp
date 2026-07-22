@@ -58,4 +58,9 @@ model GenerateWavePlanResponse {
   @added(ApiVersions.v2026_06_01_preview)
   @visibility(Lifecycle.Read)
   artifactProperties: ArtifactProperties;
+
+  @doc("The plan-level summary (number of waves, risk, confidence).")
+  @added(ApiVersions.v2026_06_01_preview)
+  @visibility(Lifecycle.Read)
+  summary?: WavePlanSummary;
 }

@@ -1842,6 +1842,11 @@
           "$ref": "#/definitions/ArtifactProperties",
           "description": "The Artifact Store identity (artifactId, versionId) this run's files are committed under, used to resolve time-bound download access.",
           "readOnly": true
+        },
+        "summary": {
+          "$ref": "#/definitions/WavePlanSummary",
+          "description": "The plan-level summary (number of waves, risk, confidence).",
+          "readOnly": true
         }
       },
       "required": [
@@ -2872,6 +2877,11 @@
           "$ref": "#/definitions/ArtifactProperties",
           "description": "The Artifact Store identity (artifactId, versionId) this plan's files are committed under, used to resolve time-bound download access.",
           "readOnly": true
+        },
+        "summary": {
+          "$ref": "#/definitions/WavePlanSummary",
+          "description": "The plan-level summary (number of waves, risk, confidence).",
+          "readOnly": true
         }
       },
       "required": [
@@ -2881,6 +2891,33 @@
         "provisioningState",
         "planSource",
         "artifactProperties"
+      ]
+    },
+    "WavePlanSummary": {
+      "type": "object",
+      "description": "Plan-level summary surfaced on the generateWavePlan and getWavePlans responses.",
+      "properties": {
+        "numberOfWaves": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of waves in the plan.",
+          "readOnly": true
+        },
+        "risk": {
+          "type": "string",
+          "description": "The plan-level overall risk bucket (Low/Medium/High).",
+          "readOnly": true
+        },
+        "confidence": {
+          "type": "string",
+          "description": "The plan-level overall confidence label (Low/Medium/High).",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "numberOfWaves",
+        "risk",
+        "confidence"
       ]
     },
     "WaveProperties": {

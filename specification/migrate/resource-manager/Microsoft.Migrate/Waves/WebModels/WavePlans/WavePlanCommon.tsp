@@ -33,9 +33,25 @@ model ArtifactProperties {
   versionId: string;
 }
 
-@doc("A single wave-plan entry in the getWavePlans response.")
+@doc("Plan-level summary surfaced on the generateWavePlan and getWavePlans responses.")
 @added(ApiVersions.v2026_06_01_preview)
-model WavePlanListItem {
+model WavePlanSummary {
+  @doc("The total number of waves in the plan.")
+  @visibility(Lifecycle.Read)
+  numberOfWaves: int32;
+
+  @doc("The plan-level overall risk bucket (Low/Medium/High).")
+  @visibility(Lifecycle.Read)
+  risk: string;
+
+  @doc("The plan-level overall confidence label (Low/Medium/High).")
+  @visibility(Lifecycle.Read)
+  confidence: string;
+}
+
+@doc("Common wave-plan identity fields shared by the getWavePlans list item and the importWavePlan response.")
+@added(ApiVersions.v2026_06_01_preview)
+model WavePlanListItemBase {
   @doc("The wave-plan name.")
   @visibility(Lifecycle.Read)
   wavePlanName: string;
@@ -59,4 +75,14 @@ model WavePlanListItem {
   @doc("The Artifact Store identity (artifactId, versionId) this plan's files are committed under, used to resolve time-bound download access.")
   @visibility(Lifecycle.Read)
   artifactProperties: ArtifactProperties;
+}
+
+@doc("A single wave-plan entry in the getWavePlans response.")
+@added(ApiVersions.v2026_06_01_preview)
+model WavePlanListItem {
+  ...WavePlanListItemBase;
+
+  @doc("The plan-level summary (number of waves, risk, confidence).")
+  @visibility(Lifecycle.Read)
+  summary?: WavePlanSummary;
 }
