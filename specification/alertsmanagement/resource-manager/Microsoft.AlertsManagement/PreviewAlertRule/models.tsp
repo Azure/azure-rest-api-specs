@@ -34,15 +34,8 @@ union Kind {
 /**
  * Severity of the alert. Should be an integer between [0-4]. Value of 0 is severest. Relevant and required only for rules of the kind LogAlert.
  */
-// NOTE: Base type intentionally `int32` (not `int64`). The C# MPG generator's
-// `Microsoft.TypeSpec.Generator.Input.InputEnumTypeValueConverter` only supports
-// `String`, `Int32`, and `Float32` enum value types; an `int64`-backed union
-// crashes the generator with a `TypeInitializationException` at
-// `ModelReaderWriterContextDefinition`. The values here are 0..4, which
-// serialize identically as `int32` or `int64` over the wire, so this change is
-// wire-format safe.
 union AlertSeverity {
-  int32,
+  int64,
 
   /**
    * 0
