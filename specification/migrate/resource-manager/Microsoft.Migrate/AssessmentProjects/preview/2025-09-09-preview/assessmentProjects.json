@@ -179,13 +179,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Migrate/locations/{location}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Migrate/locations/{location}/operationStatuses/{operationId}": {
       "get": {
         "operationId": "OperationStatuses_GetSubscriptionStatus",
         "tags": [
           "OperationStatuses"
         ],
-        "description": "Get a OperationResults",
+        "description": "Get the status of an async operation.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -195,6 +195,13 @@
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "The operation ID.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
