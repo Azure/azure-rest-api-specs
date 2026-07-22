@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Playwright Service API",
-    "version": "2026-04-01-preview",
+    "version": "2026-06-01-preview",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -562,6 +562,137 @@
         "x-ms-examples": {
           "BrowserSessions_Get": {
             "$ref": "./examples/BrowserSessions_Get.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "BrowserSessions_CreateOrUpdate",
+        "description": "Creates a browser session for the specified session and workspace ID. Only creation of a new browser session is supported; a request that targets an existing session returns a 4xx error. The sourceId and sourceType are supplied through request headers and returned on GET. Requires Bearer JWT access token provided by Entra ID.",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "description": "The workspace ID in GUID format.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 36,
+            "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
+          },
+          {
+            "name": "sessionId",
+            "in": "path",
+            "description": "The browser session ID in GUID format.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 36,
+            "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
+          },
+          {
+            "name": "x-ms-source-id",
+            "in": "header",
+            "description": "The browser session source ID. An encoding of required identifiers based on the source type; usually the run ID for Playwright Workspaces test runs.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "sourceId"
+          },
+          {
+            "name": "x-ms-source-type",
+            "in": "header",
+            "description": "The browser session source type.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "PlaywrightWorkspacesTestRun",
+              "BrowserAutomationTool",
+              "Others"
+            ],
+            "x-ms-enum": {
+              "name": "BrowserSessionSourceType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "PlaywrightWorkspacesTestRun",
+                  "value": "PlaywrightWorkspacesTestRun",
+                  "description": "The browser session source is a Playwright Workspaces test run."
+                },
+                {
+                  "name": "BrowserAutomationTool",
+                  "value": "BrowserAutomationTool",
+                  "description": "The browser session source is a browser automation tool."
+                },
+                {
+                  "name": "Others",
+                  "value": "Others",
+                  "description": "The browser session source is of other types."
+                }
+              ]
+            },
+            "x-ms-client-name": "sourceType"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BrowserSessionCreateOrUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BrowserSession"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/BrowserSession"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BrowserSessions_CreateOrUpdate": {
+            "$ref": "./examples/BrowserSessions_CreateOrUpdate.json"
           }
         }
       }
@@ -1125,11 +1256,90 @@
               }
             ]
           }
+        },
+        "protocol": {
+          "$ref": "#/definitions/BrowserSessionProtocol",
+          "description": "The protocol for the browser session."
+        },
+        "browserRegion": {
+          "type": "string",
+          "description": "The region where the provisioned browser container is located.",
+          "readOnly": true
+        },
+        "browserEndpoint": {
+          "type": "string",
+          "description": "The websocket endpoint that can be used to connect to the browser session.",
+          "readOnly": true
+        },
+        "liveViewUrl": {
+          "type": "string",
+          "description": "The URL to view the live browser session.",
+          "readOnly": true
         }
       },
       "required": [
-        "id"
+        "id",
+        "protocol"
       ]
+    },
+    "BrowserSessionCreateOrUpdate": {
+      "type": "object",
+      "description": "Model of a browser session used for tracking purposes.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The browser session display name.",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "operatingSystem": {
+          "type": "string",
+          "description": "The browser session operating system. Defaults to Linux.",
+          "default": "Linux",
+          "enum": [
+            "Linux",
+            "Windows"
+          ],
+          "x-ms-enum": {
+            "name": "OS",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Linux",
+                "value": "Linux",
+                "description": "Linux operating system."
+              },
+              {
+                "name": "Windows",
+                "value": "Windows",
+                "description": "Windows operating system."
+              }
+            ]
+          }
+        },
+        "protocol": {
+          "$ref": "#/definitions/BrowserSessionProtocol",
+          "description": "The protocol for the browser session."
+        }
+      }
+    },
+    "BrowserSessionProtocol": {
+      "type": "string",
+      "description": "The protocol for the browser session.",
+      "enum": [
+        "cdp"
+      ],
+      "x-ms-enum": {
+        "name": "BrowserSessionProtocol",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CDP",
+            "value": "cdp",
+            "description": "Chrome DevTools Protocol."
+          }
+        ]
+      }
     },
     "BrowserSessionSource": {
       "type": "object",
