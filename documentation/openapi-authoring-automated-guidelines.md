@@ -26,152 +26,161 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 
 ## Automated Rules
 
+> **Authoring in TypeSpec?** The tables below include a **TypeSpec Rule or Doc** column that connects each LintDiff rule to TypeSpec, where possible. Each cell contains one of the following:
+>
+> - A link to the equivalent [TypeSpec linter rule](https://azure.github.io/typespec-azure/docs/libraries/azure-resource-manager/rules/) — follow it to learn how to detect and fix the violation directly in TypeSpec (rather than in the generated OpenAPI/Swagger).
+> - A link to the most relevant TypeSpec **how-to** documentation, for violations that TypeSpec does not lint directly but that the how-to guidance helps you avoid.
+> - **Invalid TypeSpec** — meaning the violation cannot occur in a TypeSpec specification at all: the equivalent construct would fail to compile, so there is no separate linter rule or fix guidance to link. If you author in TypeSpec you get this validation "for free" at compile time.
+> - **No longer valid** — the LintDiff rule is deprecated or no longer enforced for ARM specs, so there is no corresponding TypeSpec rule or guidance to link.
+>
+> The mapping is not exhaustive and will continue to grow as more rules are correlated.
+
 ### ARM Violations
 
 #### ARM Errors
 
-| Id | Rule Name | Applies to |
-| --- | --- | --- |
-| [R3012](#r3012) | [APIVersionPattern](#r3012) | ARM OpenAPI(swagger) specs |
-| [R3019](#r3019) | [ARMResourcePropertiesBag](#r3019) | ARM and Data plane OpenAPI(swagger) specs |
-| [R3014](#r3014) | [BodyPropertiesNamesCamelCase](#r3014) | ARM and Data plane OpenAPI(swagger) specs |
-| [R3016](#r3016) | [DefinitionsPropertiesNamesCamelCase](#r3016)  | ARM and Data plane OpenAPI(swagger) specs |
-| [R3006](#r3006) | [BodyTopLevelProperties](#r3006) | ARM OpenAPI(swagger) specs |
-| [R3008](#r3008) | [CollectionObjectPropertiesNaming](#r3008) | ARM and Data plane OpenAPI(swagger) specs |
-| [R2044](#r2044) | [InvalidVerbUsed](#r2044) | ARM and Data plane OpenAPI(swagger) specs |
-| [R3023](#r3023) | [OperationsAPIImplementation](#r3023) | ARM OpenAPI(swagger) specs |
-| [R3007](#r3007) | [PutGetPatchResponseSchema](#r3007) | ARM and Data plane OpenAPI(swagger) specs |
-| [R3025](#r3025) | [TrackedResourceGetOperation](#r3025) | ARM OpenAPI(swagger) specs |
-| [R3026](#r3026) | [TrackedResourcePatchOperation](#r3026) | ARM OpenAPI(swagger) specs |
-| [R3030](#R3030) | [PathResourceProviderMatchNamespace](#R3030) | ARM OpenAPI(swagger) specs |
-| [R2016](#r2016) | [PatchBodyParametersSchema](#r2016) | ARM and Data plane OpenAPI(swagger) specs |
-| [R2062](#r2062) | [XmsResourceInPutResponse](#r2062) | ARM OpenAPI(swagger) specs |
-| [R3011](#r3011) | [DescriptionMustNotBeNodeName](#r3011) | ARM and Data plane OpenAPI(swagger) specs |
-| [R2020](#r2020) | [RequiredPropertiesMissingInResourceModel](#r2020) | ARM OpenAPI(swagger) specs |
-| [R3020](#r3020) | [PathResourceProviderNamePascalCase](#r3020) | ARM OpenAPI(swagger) specs |
-| [R3021](#r3021) | [PathResourceTypeNameCamelCase](#r3021) | ARM OpenAPI(swagger) specs |
-| [R4004](#r4004) | [OperationIdRequired](#r4004) | ARM OpenAPI(swagger) specs |
-| [R4007](#r4007) | [DefaultErrorResponseSchema](#r4007) | ARM OpenAPI(swagger) specs |
-| [R4010](#r4010) | [RequiredDefaultResponse](#r4010) | ARM OpenAPI(swagger) specs |
-| [R4011](#r4011) | [DeleteOperationResponses](#r4011) | ARM OpenAPI(swagger) specs |
-| [R4015](#r4015) | [NestedResourcesMustHaveListOperation](#r4015) | ARM OpenAPI(swagger) specs |
-| [R4016](#r4016) | [TopLevelResourcesListByResourceGroup](#r4016) | ARM OpenAPI(swagger) specs |
-| [R4017](#r4017) | [TopLevelResourcesListBySubscription](#r4017) | ARM OpenAPI(swagger) specs |
-| [R4018](#r4018) | [OperationsApiResponseSchema](#r4018) | ARM OpenAPI(swagger) specs |
-| [R4019](#r4019) | [GetCollectionResponseSchema](#r4019) | ARM OpenAPI(swagger) specs |
-| [R4009](#r4009) | [RequiredReadOnlySystemData](#r4009) | ARM OpenAPI(swagger) specs |
-| [R4025](#r4025) | [DeleteOperationAsyncResponseValidation](#r4025) | ARM OpenAPI(swagger) specs |
+| Id | Rule Name | Applies to | TypeSpec Rule or Doc |
+| --- | --- | --- | --- |
+| [R3012](#r3012) | [APIVersionPattern](#r3012) | ARM OpenAPI(swagger) specs | [arm-resource-invalid-version-format](https://azure.github.io/typespec-azure/docs/libraries/azure-resource-manager/rules/arm-resource-invalid-version-format/) |
+| [R3019](#r3019) | [ARMResourcePropertiesBag](#r3019) | ARM and Data plane OpenAPI(swagger) specs | [arm-resource-duplicate-property](https://azure.github.io/typespec-azure/docs/libraries/azure-resource-manager/rules/arm-resource-duplicate-property/) |
+| [R3014](#r3014) | [BodyPropertiesNamesCamelCase](#r3014) | ARM and Data plane OpenAPI(swagger) specs | [casing-style](https://azure.github.io/typespec-azure/docs/libraries/azure-core/rules/casing-style/) |
+| [R3016](#r3016) | [DefinitionsPropertiesNamesCamelCase](#r3016)  | ARM and Data plane OpenAPI(swagger) specs | [casing-style](https://azure.github.io/typespec-azure/docs/libraries/azure-core/rules/casing-style/) |
+| [R3006](#r3006) | [BodyTopLevelProperties](#r3006) | ARM OpenAPI(swagger) specs | [arm-resource-invalid-envelope-property](https://azure.github.io/typespec-azure/docs/libraries/azure-resource-manager/rules/arm-resource-invalid-envelope-property/) |
+| [R3008](#r3008) | [CollectionObjectPropertiesNaming](#r3008) | ARM and Data plane OpenAPI(swagger) specs | [How-to: ARM resource list operations](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/#resource-list-operations-get) |
+| [R2044](#r2044) | [InvalidVerbUsed](#r2044) | ARM and Data plane OpenAPI(swagger) specs | [arm-resource-invalid-action-verb](https://azure.github.io/typespec-azure/docs/libraries/azure-resource-manager/rules/arm-resource-invalid-action-verb/) |
+| [R3023](#r3023) | [OperationsAPIImplementation](#r3023) | ARM OpenAPI(swagger) specs | [missing-operations-endpoint](https://azure.github.io/typespec-azure/docs/libraries/azure-resource-manager/rules/missing-operations-endpoint/) |
+| [R3007](#r3007) | [PutGetPatchResponseSchema](#r3007) | ARM and Data plane OpenAPI(swagger) specs | [arm-resource-operation-response](https://azure.github.io/typespec-azure/docs/libraries/azure-resource-manager/rules/arm-resource-operation-response/) |
+| [R3025](#r3025) | [TrackedResourceGetOperation](#r3025) | ARM OpenAPI(swagger) specs | [How-to: Tracked Resource Operations](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/#trackedresource) |
+| [R3026](#r3026) | [TrackedResourcePatchOperation](#r3026) | ARM OpenAPI(swagger) specs | [How-to: Tracked Resource Operations](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/#trackedresource) |
+| [R3030](#R3030) | [PathResourceProviderMatchNamespace](#R3030) | ARM OpenAPI(swagger) specs | [How-to: ARM provider namespace](https://azure.github.io/typespec-azure/docs/howtos/arm/change-provider-namespace/#1-change-the-name-in-the-spec) |
+| [R2016](#r2016) | [PatchBodyParametersSchema](#r2016) | ARM and Data plane OpenAPI(swagger) specs | [arm-resource-patch](https://azure.github.io/typespec-azure/docs/libraries/azure-resource-manager/rules/arm-resource-patch/) |
+| [R2062](#r2062) | [XmsResourceInPutResponse](#r2062) | ARM OpenAPI(swagger) specs | [How-to: ARM resource types](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-type/#modeling-resources-in-typespec) |
+| [R3011](#r3011) | [DescriptionMustNotBeNodeName](#r3011) | ARM and Data plane OpenAPI(swagger) specs | [documentation-required](https://azure.github.io/typespec-azure/docs/libraries/azure-core/rules/documentation-required/) |
+| [R2020](#r2020) | [RequiredPropertiesMissingInResourceModel](#r2020) | ARM OpenAPI(swagger) specs | [How-to: ARM resource types](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-type/#modeling-resources-in-typespec) |
+| [R3020](#r3020) | [PathResourceProviderNamePascalCase](#r3020) | ARM OpenAPI(swagger) specs | [How-to: ARM provider namespace](https://azure.github.io/typespec-azure/docs/howtos/arm/change-provider-namespace/#1-change-the-name-in-the-spec) |
+| [R3021](#r3021) | [PathResourceTypeNameCamelCase](#r3021) | ARM OpenAPI(swagger) specs | [Use ResourceNameParameter template](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-type/#modeling-resources-in-typespec) |
+| [R4004](#r4004) | [OperationIdRequired](#r4004) | ARM OpenAPI(swagger) specs | Invalid TypeSpec |
+| [R4007](#r4007) | [DefaultErrorResponseSchema](#r4007) | ARM OpenAPI(swagger) specs | [Use Standard Operation Templates](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/#recommended-and-required-operations) |
+| [R4010](#r4010) | [RequiredDefaultResponse](#r4010) | ARM OpenAPI(swagger) specs | [Use Standard Operation Templates](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/#recommended-and-required-operations) |
+| [R4011](#r4011) | [DeleteOperationResponses](#r4011) | ARM OpenAPI(swagger) specs | [delete-operation-response-codes](https://azure.github.io/typespec-azure/docs/libraries/azure-resource-manager/rules/delete-operation-response-codes/) |
+| [R4015](#r4015) | [NestedResourcesMustHaveListOperation](#r4015) | ARM OpenAPI(swagger) specs | [Proxy resource operations](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/#proxy-resource) |
+| [R4016](#r4016) | [TopLevelResourcesListByResourceGroup](#r4016) | ARM OpenAPI(swagger) specs | [How-to: ARM resource operations](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/#trackedresource) |
+| [R4017](#r4017) | [TopLevelResourcesListBySubscription](#r4017) | ARM OpenAPI(swagger) specs | [How-to: ARM resource operations](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/#resource-list-operations-get) |
+| [R4018](#r4018) | [OperationsApiResponseSchema](#r4018) | ARM OpenAPI(swagger) specs | [missing-operations-endpoint](https://azure.github.io/typespec-azure/docs/libraries/azure-resource-manager/rules/missing-operations-endpoint/) |
+| [R4019](#r4019) | [GetCollectionResponseSchema](#r4019) | ARM OpenAPI(swagger) specs | [How-to: ARM resource operations](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/#resource-list-operations-get) |
+| [R4009](#r4009) | [RequiredReadOnlySystemData](#r4009) | ARM OpenAPI(swagger) specs | [How-to: ARM resource types](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-type/#modeling-resources-in-typespec) |
+| [R4025](#r4025) | [DeleteOperationAsyncResponseValidation](#r4025) | ARM OpenAPI(swagger) specs | [delete-operation-response-codes](https://azure.github.io/typespec-azure/docs/libraries/azure-resource-manager/rules/delete-operation-response-codes/) |
 
 #### ARM Warnings
 
-| Id | Rule Name | Applies to |
-| --- | --- | --- |
-| [R3018](#r3018) | [EnumInsteadOfBoolean](#r3018) | ARM and Data plane OpenAPI(swagger) specs |
-| [R3017](#r3017) | [GuidUsage](#r3017) | ARM and Data plane OpenAPI(swagger) specs |
-| [R2057](#r2057) | [InvalidSkuModel](#r2057) | ARM OpenAPI(swagger) specs |
-| [R3010](#r3010) | [TrackedResourceListByImmediateParent](#r3010) | ARM OpenAPI(swagger) specs |
-| [R3027](#r3027) | [TrackedResourceListByResourceGroup](#r3027) | ARM OpenAPI(swagger) specs |
-| [R3028](#r3028) | [TrackedResourceListBySubscription](#r3028) | ARM OpenAPI(swagger) specs |
-| [R2004](#r2004) | [NonApplicationJsonType](#r2004) | ARM OpenAPI(swagger) specs |
-| [R4014](#r4014) | [AllResourcesMustHaveGetOperation](#r4014) | ARM OpenAPI(swagger) specs |
+| Id | Rule Name | Applies to | TypeSpec Rule or Doc |
+| --- | --- | --- | --- |
+| [R3018](#r3018) | [EnumInsteadOfBoolean](#r3018) | ARM and Data plane OpenAPI(swagger) specs | [Troubleshoot: extensible enums](https://azure.github.io/typespec-azure/docs/troubleshoot/enum-not-extensible/) |
+| [R3017](#r3017) | [GuidUsage](#r3017) | ARM and Data plane OpenAPI(swagger) specs | [How-to: migrating ARM specs](https://azure.github.io/typespec-azure/docs/migrate-swagger/checklists/migrate-arm-tips/) |
+| [R2057](#r2057) | [InvalidSkuModel](#r2057) | ARM OpenAPI(swagger) specs | [Sku (common-types)](https://azure.github.io/typespec-azure/docs/libraries/azure-resource-manager/reference/data-types/#Azure.ResourceManager.CommonTypes.Sku) |
+| [R3010](#r3010) | [TrackedResourceListByImmediateParent](#r3010) | ARM OpenAPI(swagger) specs | [How-to: ARM Tracked resource operations](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/#trackedresource) |
+| [R3027](#r3027) | [TrackedResourceListByResourceGroup](#r3027) | ARM OpenAPI(swagger) specs | [How-to: ARM Tracked resource operations](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/#trackedresource) |
+| [R3028](#r3028) | [TrackedResourceListBySubscription](#r3028) | ARM OpenAPI(swagger) specs | [How-to: ARM Tracked resource operations](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/#trackedresource) |
+| [R2004](#r2004) | [NonApplicationJsonType](#r2004) | ARM OpenAPI(swagger) specs | [How-to: content negotiation](https://azure.github.io/typespec-azure/docs/howtos/azure-core/content-negotiation/) |
+| [R4014](#r4014) | [AllResourcesMustHaveGetOperation](#r4014) | ARM OpenAPI(swagger) specs | [How-to: ARM resource operations](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/#resource-get-operations) |
 ### SDK Violations
 
 #### SDK Errors
 
-| Id | Rule Name | Applies to |
-| --- | --- | --- |
-| [R2024](#r2024) | [AnonymousBodyParameter](#r2024) | ARM and Data plane OpenAPI(swagger) specs |
-| [R2026](#r2026) | [AvoidAnonymousTypes](#r2026) | ARM and Data plane OpenAPI(swagger) specs |
-| [R2014](#r2014) | [SubscriptionIdParameterInOperations](#r2014) | ARM and Data plane OpenAPI(swagger) specs |
-| [R2027](#r2027) | [DefaultMustBeInEnum](#r2027) | ARM and Data plane OpenAPI(swagger) specs |
-| [R1001](#r1001) | [OperationIdNounInVerb](#r1001) | ARM and Data plane OpenAPI(swagger) specs |
-| [R2055](#r2055) | [OneUnderscoreInOperationId](#r2055) | ARM and Data plane OpenAPI(swagger) specs |
-| [R2003](#r2003) | [ValidFormats](#r2003)  | ARM and Data plane OpenAPI(swagger) specs |
-| [R2005](#r2005) | [LongRunningResponseStatusCode](#r2005) | ARM and Data plane OpenAPI(swagger) specs |
-| [R2008](#r2008) | [MutabilityWithReadOnlyRule](#r2008) | ARM and Data plane OpenAPI(swagger) specs |
-| [R2025](#r2025) | [NextLinkPropertyMustExist](#r2025) | ARM and Data plane OpenAPI(swagger) specs |
-| [R2028](#r2028) | [NonEmptyClientName](#r2028) | ARM and Data plane OpenAPI(swagger) specs |
-| [R2060](#r2060) | [PageableRequires200Response](#r2060) | ARM and Data plane OpenAPI(swagger) specs |
-| [R2019](#r2019) | [ResourceHasXMsResourceEnabled](#r2019) | ARM OpenAPI(swagger) specs |
-| [R2058](#r2058) | [XmsPathsMustOverloadPaths](#r2058) | ARM and Data plane OpenAPI(swagger) specs |
-| [R2012](#r2012) | [XmsClientNameParameter](#r2012) | ARM and Data plane OpenAPI(swagger) specs |
-| [R2013](#r2013) | [XmsClientNameProperty](#r2013) | ARM and Data plane OpenAPI(swagger) specs |
-| [R2047](#r2047) | [NamePropertyDefinitionInParameter](#r2047) | ARM and Data plane OpenAPI(swagger) specs |
-| [R2056](#r2056) | [RequiredReadOnlyProperties](#r2056) | ARM and Data plane OpenAPI(swagger) specs |
-| [R2054](#r2054) | [SecurityDefinitionsStructure](#r2054) | ARM OpenAPI(swagger) specs |
-| [R2006](#r2006) | [ControlCharactersNotAllowed](#r2006) | ARM and Data plane OpenAPI(swagger) specs |
-| [R2009](#r2009) | [ArraySchemaMustHaveItems](#r2009) | ARM and Data plane OpenAPI(swagger) specs |
-| [R2018](#r2018) | [XmsEnumValidation](#r2018) | ARM and Data plane OpenAPI(swagger) specs |
-| [R3013](#r3013) | [DeleteMustNotHaveRequestBody](#r3013) | ARM and Data plane OpenAPI(swagger) specs |
-| [R4001](#r4001) | [XmsParameterLocation](#r4001) | ARM and Data plan OpenAPI(swagger) specs |
-| [R3015](#r3015) | [EnumMustHaveType](#r3015) | ARM and Data plan OpenAPI(swagger) specs |
-| [R3024](#r3024) | [EnumUniqueValue](#r3024) | ARM and Data plan OpenAPI(swagger) specs |
-| [R3029](#r3029) | [EnumMustNotHaveEmptyValue](#r3024) | ARM and Data plan OpenAPI(swagger) specs |
-| [R4005](#r4005) | [UniqueXmsEnumName](#r4005) | ARM and Data plane OpenAPI(swagger) specs |
-| [R4008](#r4008) | [AvoidEmptyResponseSchema](#r4008) | ARM OpenAPI(swagger) specs |
-| [R4012](#r4012) | [XmsPageableMustHaveCorrespondingResponse](#r4012) | ARM OpenAPI(swagger) specs |
-| [R4013](#r4013) | [IntegerTypeMustHaveFormat](#r4013) | ARM OpenAPI(swagger) specs |
-| [R4028](#r4028) | [ValidResponseCodeRequired](#r4028) | ARM and Data Plane OpenAPI(swagger) specs |
-| [R4029](#r4029) | [UniqueClientParameterName](#r4029) | ARM OpenAPI(swagger) specs |
-| [R4032](#r4032) | [MissingXmsErrorResponse](#r4032) | ARM OpenAPI(swagger) specs |
-| [R4033](#r4033) | [UniqueModelName](#r4033) | ARM OpenAPI(swagger) specs |
-| [R4034](#r4034) | [AzureResourceTagsSchemaValidation](#r4034) | ARM OpenAPI(swagger) specs |
-| [R4035](#r4035) | [PrivateEndpointResourceSchemaValidation](#r4035) | ARM OpenAPI(swagger) specs |
-| [R4036](#r4036) | [ImplementPrivateEndpointAPIs](#r4036) | ARM OpenAPI(swagger) specs |
-| [R4037](#r4037) | [MissingTypeObject](#r4037) | ARM and Data plan OpenAPI(swagger) specs |
-| [R4039](#r4039) | [ParametersOrder](#r4039) | ARM and Data plan OpenAPI(swagger) specs |
-| [R4040](#r4040) | [EnumMustRespectType](#r4040) | ARM and Data plan OpenAPI(swagger) specs |
-| [R4041](#r4041) | [XmsIdentifierValidation](#r4041) | ARM OpenAPI(swagger) specs |
+| Id | Rule Name | Applies to | TypeSpec Rule or Doc |
+| --- | --- | --- | --- |
+| [R2024](#r2024) | [AnonymousBodyParameter](#r2024) | ARM and Data plane OpenAPI(swagger) specs | [How-to: migrating ARM specs](https://azure.github.io/typespec-azure/docs/migrate-swagger/checklists/migrate-arm-tips/) |
+| [R2026](#r2026) | [AvoidAnonymousTypes](#r2026) | ARM and Data plane OpenAPI(swagger) specs | [How-to: migrating ARM specs](https://azure.github.io/typespec-azure/docs/migrate-swagger/checklists/migrate-arm-tips/) |
+| [R2014](#r2014) | [SubscriptionIdParameterInOperations](#r2014) | ARM and Data plane OpenAPI(swagger) specs | [How-to: ARM resource operations](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/#common-operation-parameters) |
+| [R2027](#r2027) | [DefaultMustBeInEnum](#r2027) | ARM and Data plane OpenAPI(swagger) specs | Invalid TypeSpec |
+| [R1001](#r1001) | [OperationIdNounInVerb](#r1001) | ARM and Data plane OpenAPI(swagger) specs | [How-to: client naming](https://azure.github.io/typespec-azure/docs/howtos/generate-client-libraries/09renaming/) |
+| [R2055](#r2055) | [OneUnderscoreInOperationId](#r2055) | ARM and Data plane OpenAPI(swagger) specs | Invalid TypeSpec |
+| [R2003](#r2003) | [ValidFormats](#r2003)  | ARM and Data plane OpenAPI(swagger) specs | [known-encoding](https://azure.github.io/typespec-azure/docs/libraries/azure-core/rules/known-encoding/)<br/>[no-generic-numeric](https://azure.github.io/typespec-azure/docs/libraries/azure-core/rules/no-generic-numeric/) |
+| [R2005](#r2005) | [LongRunningResponseStatusCode](#r2005) | ARM and Data plane OpenAPI(swagger) specs | [How-to: ARM long-running operations](https://azure.github.io/typespec-azure/docs/howtos/arm/long-running-operations/) |
+| [R2008](#r2008) | [MutabilityWithReadOnlyRule](#r2008) | ARM and Data plane OpenAPI(swagger) specs | [How-to: ARM resource types](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-type/#property-visibility-and-other-constraints) |
+| [R2025](#r2025) | [NextLinkPropertyMustExist](#r2025) | ARM and Data plane OpenAPI(swagger) specs | [How-to: ARM resource operations](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/#resource-list-operations-get) |
+| [R2028](#r2028) | [NonEmptyClientName](#r2028) | ARM and Data plane OpenAPI(swagger) specs | Invalid TypeSpec |
+| [R2060](#r2060) | [PageableRequires200Response](#r2060) | ARM and Data plane OpenAPI(swagger) specs | [How-to: ARM resource operations](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/#resource-list-operations-get) |
+| [R2019](#r2019) | [ResourceHasXMsResourceEnabled](#r2019) | ARM OpenAPI(swagger) specs | [arm-custom-resource-usage-discourage](https://azure.github.io/typespec-azure/docs/libraries/azure-resource-manager/rules/arm-custom-resource-usage-discourage/) |
+| [R2058](#r2058) | [XmsPathsMustOverloadPaths](#r2058) | ARM and Data plane OpenAPI(swagger) specs | Invalid TypeSpec |
+| [R2012](#r2012) | [XmsClientNameParameter](#r2012) | ARM and Data plane OpenAPI(swagger) specs | [How-to: client naming](https://azure.github.io/typespec-azure/docs/howtos/generate-client-libraries/09renaming/) |
+| [R2013](#r2013) | [XmsClientNameProperty](#r2013) | ARM and Data plane OpenAPI(swagger) specs | [How-to: client naming](https://azure.github.io/typespec-azure/docs/howtos/generate-client-libraries/09renaming/) |
+| [R2047](#r2047) | [NamePropertyDefinitionInParameter](#r2047) | ARM and Data plane OpenAPI(swagger) specs | Invalid TypeSpec |
+| [R2056](#r2056) | [RequiredReadOnlyProperties](#r2056) | ARM and Data plane OpenAPI(swagger) specs | [How-to: ARM resource types](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-type/#property-visibility-and-other-constraints) |
+| [R2054](#r2054) | [SecurityDefinitionsStructure](#r2054) | ARM OpenAPI(swagger) specs | Invalid TypeSpec |
+| [R2006](#r2006) | [ControlCharactersNotAllowed](#r2006) | ARM and Data plane OpenAPI(swagger) specs | [casing-style](https://azure.github.io/typespec-azure/docs/libraries/azure-core/rules/casing-style/) |
+| [R2009](#r2009) | [ArraySchemaMustHaveItems](#r2009) | ARM and Data plane OpenAPI(swagger) specs | Invalid TypeSpec |
+| [R2018](#r2018) | [XmsEnumValidation](#r2018) | ARM and Data plane OpenAPI(swagger) specs | Invalid TypeSpec |
+| [R3013](#r3013) | [DeleteMustNotHaveRequestBody](#r3013) | ARM and Data plane OpenAPI(swagger) specs | Invalid TypeSpec |
+| [R4001](#r4001) | [XmsParameterLocation](#r4001) | ARM and Data plan OpenAPI(swagger) specs | [@clientLocation (typespec-client-generator-core)](https://azure.github.io/typespec-azure/docs/libraries/typespec-client-generator-core/reference/decorators/#@Azure.ClientGenerator.Core.clientLocation) |
+| [R3015](#r3015) | [EnumMustHaveType](#r3015) | ARM and Data plan OpenAPI(swagger) specs | Invalid TypeSpec |
+| [R3024](#r3024) | [EnumUniqueValue](#r3024) | ARM and Data plan OpenAPI(swagger) specs | Invalid TypeSpec |
+| [R3029](#r3029) | [EnumMustNotHaveEmptyValue](#r3024) | ARM and Data plan OpenAPI(swagger) specs | Invalid TypeSpec |
+| [R4005](#r4005) | [UniqueXmsEnumName](#r4005) | ARM and Data plane OpenAPI(swagger) specs | Invalid TypeSpec |
+| [R4008](#r4008) | [AvoidEmptyResponseSchema](#r4008) | ARM OpenAPI(swagger) specs | [no-unknown](https://azure.github.io/typespec-azure/docs/libraries/azure-core/rules/no-unknown/) |
+| [R4012](#r4012) | [XmsPageableMustHaveCorrespondingResponse](#r4012) | ARM OpenAPI(swagger) specs | Invalid TypeSpec |
+| [R4013](#r4013) | [IntegerTypeMustHaveFormat](#r4013) | ARM OpenAPI(swagger) specs | [no-generic-numeric](https://azure.github.io/typespec-azure/docs/libraries/azure-core/rules/no-generic-numeric/) |
+| [R4028](#r4028) | [ValidResponseCodeRequired](#r4028) | ARM and Data Plane OpenAPI(swagger) specs | [How-to: ARM resource operations](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/#arm-response-types) |
+| [R4029](#r4029) | [UniqueClientParameterName](#r4029) | ARM OpenAPI(swagger) specs | Invalid TypeSpec |
+| [R4032](#r4032) | [MissingXmsErrorResponse](#r4032) | ARM OpenAPI(swagger) specs | [ErrorResponse (common-types)](https://azure.github.io/typespec-azure/docs/libraries/azure-resource-manager/reference/data-types/#Azure.ResourceManager.CommonTypes.ErrorResponse) |
+| [R4033](#r4033) | [UniqueModelName](#r4033) | ARM OpenAPI(swagger) specs | Invalid TypeSpec |
+| [R4034](#r4034) | [AzureResourceTagsSchemaValidation](#r4034) | ARM OpenAPI(swagger) specs | [ArmTagsProperty (common-types)](https://azure.github.io/typespec-azure/docs/libraries/azure-resource-manager/reference/data-types/#Azure.ResourceManager.Foundations.ArmTagsProperty) |
+| [R4035](#r4035) | [PrivateEndpointResourceSchemaValidation](#r4035) | ARM OpenAPI(swagger) specs | [How-to: ARM private endpoints](https://azure.github.io/typespec-azure/docs/howtos/arm/private-endpoints/) |
+| [R4036](#r4036) | [ImplementPrivateEndpointAPIs](#r4036) | ARM OpenAPI(swagger) specs | [How-to: ARM private endpoints](https://azure.github.io/typespec-azure/docs/howtos/arm/private-endpoints/) |
+| [R4037](#r4037) | [MissingTypeObject](#r4037) | ARM and Data plan OpenAPI(swagger) specs | [no-empty-model](https://azure.github.io/typespec-azure/docs/libraries/azure-resource-manager/rules/no-empty-model/) |
+| [R4039](#r4039) | [ParametersOrder](#r4039) | ARM and Data plan OpenAPI(swagger) specs | [How-to: ARM resource operations](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/#common-operation-parameters) |
+| [R4040](#r4040) | [EnumMustRespectType](#r4040) | ARM and Data plan OpenAPI(swagger) specs | Invalid TypeSpec |
+| [R4041](#r4041) | [XmsIdentifierValidation](#r4041) | ARM OpenAPI(swagger) specs | [missing-x-ms-identifiers](https://azure.github.io/typespec-azure/docs/libraries/azure-resource-manager/rules/missing-x-ms-identifiers/) |
 #### SDK Warnings
 
-| Id | Rule Name | Applies to |
-| --- | --- | --- |
-| [R4000](#r4000) | [ParameterDescriptionRequired](#r4000) | ARM and Data plane OpenAPI(swagger) specs |
-| [R4020](#r4000-3) | [DescriptiveDescriptionRequired](#r4000-3) | ARM and Data plane OpenAPI(swagger) specs |
-| [R4021](#r4000-4) | [DescriptionAndTitleMissing](#r4000-4) | ARM and Data plane OpenAPI(swagger) specs |
-| [R4022](#r4000-5) | [OperationDescriptionOrSummaryRequired](#r4000-5)  | ARM and Data plane OpenAPI(swagger) specs |
-| [R2001](#r2001) | [AvoidNestedProperties](#r2001) | ARM and Data plane OpenAPI(swagger) specs |
-| [R4002](#r4002) | [LocationMustHaveXmsMutability](#r4002) | ARM OpenAPI(swagger) specs |
-| [R2066](#r2066) | [PostOperationIdContainsUrlVerb](#r2066) | ARM and Data plane OpenAPI(swagger) specs |
-| [R2015](#r2015) | [ParameterNotDefinedInGlobalParameters](#r2015) | ARM and Data plane OpenAPI(swagger) specs |
-| [R1010](#r1010) | [AvoidMSDNReferences](#r1010) | ARM and Data plane OpenAPI(swagger) specs |
-| [R2017](#r2017) | [PutRequestResponseScheme](#r2017) | ARM and Data plane OpenAPI(swagger) specs |
-| [R1009](#r1009) | [DeleteInOperationName](#r1009) | ARM and Data plane OpenAPI(swagger) specs |
-| [R1005](#r1005) | [GetInOperationName](#r1005) | ARM and Data plane OpenAPI(swagger) specs |
-| [R1003](#r1003) | [ListInOperationName](#r1003) | ARM and Data plane OpenAPI(swagger) specs |
-| [R1006](#r1006) | [PutInOperationName](#r1006) | ARM and Data plane OpenAPI(swagger) specs |
-| [R1007](#r1007) | [PatchInOperationName](#r1007) | ARM and Data plane OpenAPI(swagger) specs |
-| [R1011](#r1011) | [HttpsSupportedScheme](#r1011) | ARM OpenAPI(swagger) specs |
-| [R2065](#r2065) | [LicenseHeaderMustNotBeSpecified](#r2065) | ARM and Data plane OpenAPI(swagger) specs |
-| [R3060](#r3060) | [XmsPageableListByRGAndSubscriptions](#r3060) | ARM OpenAPI(swagger) specs |
-| [R2063](#r2063) | [OperationIdNounConflictingModelNames](#r2063) | ARM and Data plane OpenAPI(swagger) specs |
-| [R2064](#r2064) | [LROStatusCodesReturnTypeSchema](#r2064) | ARM and Data plane OpenAPI(swagger) specs |
-| [R2023](#r2023) | [SummaryAndDescriptionMustNotBeSame](#r2023) | ARM and Data plane OpenAPI(swagger) specs |
-| [R2010](#r2010) | [LongRunningOperationsOptionsValidator](#r2010) | ARM and Data plane OpenAPI(swagger) specs |
-| [R2007](#r2007) | [LongRunningOperationsWithLongRunningExtension](#r2007) | ARM OpenAPI(swagger) specs |
-| [R2029](#r2029) | [PageableOperation](#r2029) | ARM and Data plane OpenAPI(swagger) specs |
-| [R4006](#r4006) | [DeprecatedXmsCodeGenerationSetting](#r4006) | ARM and Data plane OpenAPI(swagger) specs |
-| [R4024](#r4024) | [PreviewVersionOverOneYear](#r4024) | ARM OpenAPI(swagger) specs |
-| [R4030](#r4030) | [UniqueXmsExample](#r4030) | ARM OpenAPI(swagger) specs |
+| Id | Rule Name | Applies to | TypeSpec Rule or Doc |
+| --- | --- | --- | --- |
+| [R4000](#r4000) | [ParameterDescriptionRequired](#r4000) | ARM and Data plane OpenAPI(swagger) specs | [documentation-required](https://azure.github.io/typespec-azure/docs/libraries/azure-core/rules/documentation-required/) |
+| [R4020](#r4000-3) | [DescriptiveDescriptionRequired](#r4000-3) | ARM and Data plane OpenAPI(swagger) specs | [documentation-required](https://azure.github.io/typespec-azure/docs/libraries/azure-core/rules/documentation-required/) |
+| [R4021](#r4000-4) | [DescriptionAndTitleMissing](#r4000-4) | ARM and Data plane OpenAPI(swagger) specs | [documentation-required](https://azure.github.io/typespec-azure/docs/libraries/azure-core/rules/documentation-required/) |
+| [R4022](#r4000-5) | [OperationDescriptionOrSummaryRequired](#r4000-5)  | ARM and Data plane OpenAPI(swagger) specs | [documentation-required](https://azure.github.io/typespec-azure/docs/libraries/azure-core/rules/documentation-required/) |
+| [R2001](#r2001) | [AvoidNestedProperties](#r2001) | ARM and Data plane OpenAPI(swagger) specs | No longer valid |
+| [R4002](#r4002) | [LocationMustHaveXmsMutability](#r4002) | ARM OpenAPI(swagger) specs | [How-to: Tracked Resources](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-type/#tracked-resources) |
+| [R2066](#r2066) | [PostOperationIdContainsUrlVerb](#r2066) | ARM and Data plane OpenAPI(swagger) specs | [How-to: client naming](https://azure.github.io/typespec-azure/docs/howtos/generate-client-libraries/09renaming/) |
+| [R2015](#r2015) | [ParameterNotDefinedInGlobalParameters](#r2015) | ARM and Data plane OpenAPI(swagger) specs | Invalid TypeSpec |
+| [R1010](#r1010) | [AvoidMSDNReferences](#r1010) | ARM and Data plane OpenAPI(swagger) specs | [documentation-required](https://azure.github.io/typespec-azure/docs/libraries/azure-core/rules/documentation-required/) |
+| [R2017](#r2017) | [PutRequestResponseScheme](#r2017) | ARM and Data plane OpenAPI(swagger) specs | [How-to: ARM resource operations](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/#resource-createorupdate-operations-put) |
+| [R1009](#r1009) | [DeleteInOperationName](#r1009) | ARM and Data plane OpenAPI(swagger) specs | [How-to: ARM resource operations](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/#resource-delete-operations-delete) |
+| [R1005](#r1005) | [GetInOperationName](#r1005) | ARM and Data plane OpenAPI(swagger) specs | [How-to: ARM resource operations](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/#resource-get-operations) |
+| [R1003](#r1003) | [ListInOperationName](#r1003) | ARM and Data plane OpenAPI(swagger) specs | [How-to: ARM resource operations](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/#resource-list-operations-get) |
+| [R1006](#r1006) | [PutInOperationName](#r1006) | ARM and Data plane OpenAPI(swagger) specs | [How-to: ARM resource operations](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/#resource-createorupdate-operations-put) |
+| [R1007](#r1007) | [PatchInOperationName](#r1007) | ARM and Data plane OpenAPI(swagger) specs | [How-to: ARM resource operations](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/#resource-update-operations-patch) |
+| [R1011](#r1011) | [HttpsSupportedScheme](#r1011) | ARM OpenAPI(swagger) specs | Invalid TypeSpec |
+| [R2065](#r2065) | [LicenseHeaderMustNotBeSpecified](#r2065) | ARM and Data plane OpenAPI(swagger) specs | Invalid TypeSpec |
+| [R3060](#r3060) | [XmsPageableListByRGAndSubscriptions](#r3060) | ARM OpenAPI(swagger) specs | [How-to: ARM resource operations](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/#resource-list-operations-get) |
+| [R2063](#r2063) | [OperationIdNounConflictingModelNames](#r2063) | ARM and Data plane OpenAPI(swagger) specs | Invalid TypeSpec |
+| [R2064](#r2064) | [LROStatusCodesReturnTypeSchema](#r2064) | ARM and Data plane OpenAPI(swagger) specs | [How-to: ARM long-running operations](https://azure.github.io/typespec-azure/docs/howtos/arm/long-running-operations/) |
+| [R2023](#r2023) | [SummaryAndDescriptionMustNotBeSame](#r2023) | ARM and Data plane OpenAPI(swagger) specs | [documentation-required](https://azure.github.io/typespec-azure/docs/libraries/azure-core/rules/documentation-required/) |
+| [R2010](#r2010) | [LongRunningOperationsOptionsValidator](#r2010) | ARM and Data plane OpenAPI(swagger) specs | [How-to: ARM long-running operations](https://azure.github.io/typespec-azure/docs/howtos/arm/long-running-operations/) |
+| [R2007](#r2007) | [LongRunningOperationsWithLongRunningExtension](#r2007) | ARM OpenAPI(swagger) specs | [How-to: ARM long-running operations](https://azure.github.io/typespec-azure/docs/howtos/arm/long-running-operations/) |
+| [R2029](#r2029) | [PageableOperation](#r2029) | ARM and Data plane OpenAPI(swagger) specs | [How-to: ARM resource operations](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/#resource-list-operations-get) |
+| [R4006](#r4006) | [DeprecatedXmsCodeGenerationSetting](#r4006) | ARM and Data plane OpenAPI(swagger) specs | Invalid TypeSpec |
+| [R4024](#r4024) | [PreviewVersionOverOneYear](#r4024) | ARM OpenAPI(swagger) specs | [How-to: versioning](https://azure.github.io/typespec-azure/docs/howtos/versioning/01-about-versioning/) |
+| [R4030](#r4030) | [UniqueXmsExample](#r4030) | ARM OpenAPI(swagger) specs | [How-to: migrating ARM specs](https://azure.github.io/typespec-azure/docs/migrate-swagger/checklists/migrate-arm-tips/) |
 
 
 ### RPaaS Violations
 
 #### RPaaS Errors
 
-| Id | Rule Name | Applies to |
-| --- | --- | --- |
-| [R4023](#r4023) | [RPaasPutLongRunningOperation201Only](#r4023) | ARM OpenAPI(swagger) specs |
-| [R4026](#r4026) | [RPaasPostLongRunningOperation202Only](#r4026) | ARM OpenAPI(swagger) specs |
-| [R4031](#r4031) | [RPaasResourceProvisioningState](#r4031) | ARM OpenAPI(swagger) specs |
-| [R4038](#r4038) | [ExtensionResourcePathPattern](#r4038) | ARM OpenAPI(swagger) specs |
+| Id | Rule Name | Applies to | TypeSpec Rule or Doc |
+| --- | --- | --- | --- |
+| [R4023](#r4023) | [RPaasPutLongRunningOperation201Only](#r4023) | ARM OpenAPI(swagger) specs | [put-operation-response-codes](https://azure.github.io/typespec-azure/docs/libraries/azure-resource-manager/rules/put-operation-response-codes/) |
+| [R4026](#r4026) | [RPaasPostLongRunningOperation202Only](#r4026) | ARM OpenAPI(swagger) specs | [post-operation-response-codes](https://azure.github.io/typespec-azure/docs/libraries/azure-resource-manager/rules/post-operation-response-codes/) |
+| [R4031](#r4031) | [RPaasResourceProvisioningState](#r4031) | ARM OpenAPI(swagger) specs | [arm-resource-provisioning-state](https://azure.github.io/typespec-azure/docs/libraries/azure-resource-manager/rules/arm-resource-provisioning-state/) |
+| [R4038](#r4038) | [ExtensionResourcePathPattern](#r4038) | ARM OpenAPI(swagger) specs | [How-to: ARM resource types](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-type/#extension-resource) |
 ### Documentation
 
 #### Documentation Errors
 
-| Id | Rule Name | Applies to |
-| --- | --- | --- |
-| [D5001](#d5001) | [XmsExamplesRequired](#d5001) | ARM and Data plane OpenAPI(swagger) specs |
+| Id | Rule Name | Applies to | TypeSpec Rule or Doc |
+| --- | --- | --- | --- |
+| [D5001](#d5001) | [XmsExamplesRequired](#d5001) | ARM and Data plane OpenAPI(swagger) specs | [How-to: migrating ARM specs](https://azure.github.io/typespec-azure/docs/migrate-swagger/checklists/migrate-arm-tips/) |
 
 ## Rule Descriptions
 
@@ -179,6 +188,8 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 **Category** : ARM Error
 
 **Applies to**: ARM OpenAPI(swagger) specs
+
+**TypeSpec Rule or Doc** : [arm-resource-invalid-version-format](https://azure.github.io/typespec-azure/docs/libraries/azure-resource-manager/rules/arm-resource-invalid-version-format/)
 
 **Output Message**: API Version must be in the format: yyyy-MM-dd, optionally followed by -preview, -alpha, -beta, -rc, -privatepreview.
 
@@ -218,6 +229,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Category** : ARM Error
 
 **Applies to** : ARM and Data Plane OpenAPI(swagger) specs
+
+**TypeSpec Rule or Doc** : [casing-style](https://azure.github.io/typespec-azure/docs/libraries/azure-core/rules/casing-style/)
 
 **Output Message**: Property named: "{0}", must follow camelCase style. Example: "{1}".
 **Output Message**: Property named: "{0}", for definition: "{1}" must follow camelCase style. Example: "{2}".
@@ -262,6 +275,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
+**TypeSpec Rule or Doc** : [How-to: Tracked Resource Operations](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/#trackedresource)
+
 **Output Message**: Tracked resource '{0}' must have a get operation.
 
 **Description**: Verifies if a tracked resource has a corresponding GET operation. 
@@ -282,6 +297,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Category** : ARM Error
 
 **Applies to** : ARM OpenAPI(swagger) specs
+
+**TypeSpec Rule or Doc** : [How-to: Tracked Resource Operations](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/#trackedresource)
 
 **Output Message**: Tracked resource '{0}' must have patch operation that at least supports the update of tags.
 
@@ -304,6 +321,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
+**TypeSpec Rule or Doc** : [How-to: ARM Tracked resource operations](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/#trackedresource)
+
 **Output Message**: The tracked resource, '{0}', must have a list by resource group operation.
 
 **Description**: Verifies if a tracked resource has a corresponding ListByResourceGroup operation. 
@@ -324,6 +343,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Category** : ARM Warning
 
 **Applies to** : ARM OpenAPI(swagger) specs
+
+**TypeSpec Rule or Doc** : [How-to: ARM Tracked resource operations](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/#trackedresource)
 
 **Output Message**: The tracked resource, '{0}', must have a list by subscriptions operation.
 
@@ -346,6 +367,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
+**TypeSpec Rule or Doc** : [How-to: ARM Tracked resource operations](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/#trackedresource)
+
 **Output Message**: The child tracked resource, '{0}' with immediate parent '{1}', must have a list by immediate parent operation.
 
 **Description**: Verifies if a tracked resource has a corresponding list by immediate parent operation. 
@@ -367,6 +390,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
+**TypeSpec Rule or Doc** : [Troubleshoot: extensible enums](https://azure.github.io/typespec-azure/docs/troubleshoot/enum-not-extensible/)
+
 **Output Message**: Booleans are not descriptive and make them hard to use. Consider using string enums with allowed set of values defined. Property: {0}.
 
 **Description**: Booleans properties are not descriptive in all cases and can make them to use, evaluate whether is makes sense to keep the property as boolean or turn it into an enum. 
@@ -385,6 +410,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Category** : SDK Warning
 
 **Applies to** : ARM OpenAPI(swagger) specs
+
+**TypeSpec Rule or Doc** : [How-to: Tracked Resources](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-type/#tracked-resources)
 
 **Output Message**: Property 'location' must have '\"x-ms-mutability\":[\"read\", \"create\"]' extension defined. Resource Model: '{0}'
 
@@ -408,6 +435,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Category** : SDK Error
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
+
+**TypeSpec Rule or Doc** : Invalid TypeSpec
 
 **Output Message**: Empty x-ms-client-name property.
 
@@ -433,6 +462,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
+**TypeSpec Rule or Doc** : [How-to: client naming](https://azure.github.io/typespec-azure/docs/howtos/generate-client-libraries/09renaming/)
+
 **Output Message**: OperationId should contain the verb: '{0}' in:'{1}'
 
 **Description**: A POST operation's operationId should contain the verb indicated at the end of the corresponding url.
@@ -457,6 +488,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Category** : SDK Error
 
 **Applies to** : ARM and Data Plane OpenAPI(swagger) specs
+
+**TypeSpec Rule or Doc** : Invalid TypeSpec
 
 **Output Message**: Please provide an items property for array type: '{0}'.
 
@@ -493,6 +526,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
+**TypeSpec Rule or Doc** : [How-to: client naming](https://azure.github.io/typespec-azure/docs/howtos/generate-client-libraries/09renaming/)
+
 **Output Message**: Value of 'x-ms-client-name' cannot be the same as '{0}' Property/Model.
 
 **Description**: The [`x-ms-client-name`](https://github.com/Azure/autorest/tree/master/docs/extensions#x-ms-client-name) extension is used to change the name of a parameter or property in the generated code. By using the 'x-ms-client-name' extension, a name can be defined for use specifically in code generation, separately from the name on the wire. It can be used for query parameters and header parameters, as well as properties of schemas. This name is case sensitive.
@@ -522,6 +557,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Category** : SDK Error
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
+
+**TypeSpec Rule or Doc** : [How-to: client naming](https://azure.github.io/typespec-azure/docs/howtos/generate-client-libraries/09renaming/)
 
 **Output Message**: Value of 'x-ms-client-name' cannot be the same as '{0}' Property/Model.
 
@@ -556,6 +593,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
+**TypeSpec Rule or Doc** : [documentation-required](https://azure.github.io/typespec-azure/docs/libraries/azure-core/rules/documentation-required/)
+
 **Output Message**: For better generated code quality, remove all references to "msdn.microsoft.com".
 
 **Description**: The documentation is being generated from the OpenAPI(swagger) and published at "docs.microsoft.com". From that perspective, documentation team would like to avoid having links to the "msdn.microsoft.com" in the OpenAPI(swagger) and SDK documentations.
@@ -574,6 +613,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Category** : SDK Warning
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
+
+**TypeSpec Rule or Doc** : [How-to: ARM resource operations](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/#resource-delete-operations-delete)
 
 **Output Message**: 'DELETE' operation '{0}' should use method name 'Delete'. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change.
 
@@ -598,6 +639,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
+**TypeSpec Rule or Doc** : [How-to: ARM resource operations](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/#resource-get-operations)
+
 **Output Message**: 'GET' operation '{0}' should use method name 'Get' or Method name start with 'List'. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change.
 
 **Description**: Verifies whether value for `operationId` is named as per ARM guidelines.
@@ -621,6 +664,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
+**TypeSpec Rule or Doc** : [How-to: ARM resource operations](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/#resource-list-operations-get)
+
 **Output Message**: Since operation '{0}' response has model definition '{1}', it should be of the form "*_list*".
 
 **Description**: Verifies whether value for `operationId` is named as per ARM guidelines when response contains array of items.
@@ -642,6 +687,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Category** : SDK Warning
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
+
+**TypeSpec Rule or Doc** : [How-to: ARM resource operations](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/#resource-createorupdate-operations-put)
 
 **Output Message**: 'PUT' operation '{0}' should use method name 'Create'. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change.
 
@@ -665,6 +712,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
+**TypeSpec Rule or Doc** : [How-to: ARM resource operations](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/#resource-update-operations-patch)
+
 **Output Message**: 'PATCH' operation '{0}' should use method name 'Update'. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change.
 
 **Description**: Verifies whether value for `operationId` is named as per ARM guidelines.
@@ -686,6 +735,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
+**TypeSpec Rule or Doc** : [How-to: migrating ARM specs](https://azure.github.io/typespec-azure/docs/migrate-swagger/checklists/migrate-arm-tips/)
+
 **Output Message**: Guid used in model definition '{1}' for property '{0}'. Usage of Guid is not recommended. If GUIDs are absolutely required in your service, please get sign off from the Azure API review board.
 
 **Description**: Verifies whether format is specified as "uuid" or not.
@@ -704,6 +755,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Category** : SDK Warning
 
 **Applies to** : ARM OpenAPI(swagger) specs
+
+**TypeSpec Rule or Doc** : Invalid TypeSpec
 
 **Output Message**: Azure Resource Management only supports HTTPS scheme.
 
@@ -729,6 +782,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
+**TypeSpec Rule or Doc** : [How-to: content negotiation](https://azure.github.io/typespec-azure/docs/howtos/azure-core/content-negotiation/)
+
 **Output Message**: Only content-type 'application/json' is supported by ARM..
 
 **Description**: Verifies whether operation supports "application/json" as consumes or produces section.
@@ -745,6 +800,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Category** : ARM Error
 
 **Applies to** : ARM OpenAPI(swagger) specs
+
+**TypeSpec Rule or Doc** : [How-to: ARM provider namespace](https://azure.github.io/typespec-azure/docs/howtos/arm/change-provider-namespace/#1-change-the-name-in-the-spec)
 
 **Output Message**: The last resource provider '{0}' doesn't match the namespace.
 
@@ -802,6 +859,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
+**TypeSpec Rule or Doc** : [casing-style](https://azure.github.io/typespec-azure/docs/libraries/azure-core/rules/casing-style/)
+
 **Output Message**: May not contain control characters:  Characters:'{0}' in:'{1}'
 
 **Description**: Verifies whether if a specification does not have any control characters in it.
@@ -819,6 +878,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Category** : SDK Error
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
+
+**TypeSpec Rule or Doc** : [How-to: ARM resource types](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-type/#property-visibility-and-other-constraints)
 
 **Output Message**:  When property is modeled as "readOnly": true then x-ms-mutability extension can only have "read" value. When property is modeled as "readOnly": false then applying x-ms-mutability extension with only "read" value is not allowed. Extension contains invalid values: '{0}'
 
@@ -851,6 +912,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Category** : SDK Error
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
+
+**TypeSpec Rule or Doc** : Invalid TypeSpec
 
 **Output Message**: Paths in x-ms-paths must overload a normal path in the paths section, i.e. a path in the x-ms-paths must either be same as a path in the paths section or a path in the paths sections followed by additional parameters. 
 
@@ -894,6 +957,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
+**TypeSpec Rule or Doc** : No longer valid
+
 **Output Message**: Consider using x-ms-client-flatten to provide a better end user experience
 
 **Description**: Nested properties can result into bad user experience especially when creating request objects. `x-ms-client-flatten` flattens the model properties so that the users can analyze and set the properties much more easily.
@@ -909,6 +974,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
+**TypeSpec Rule or Doc** : [How-to: ARM resource list operations](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/#resource-list-operations-get)
+
 **Output Message**: Collection object '{0}' returned by list operation '{1}' with 'x-ms-pageable' extension, has no property named 'value'. 
 
 **Description**: Per ARM guidelines, a model returned by an `x-ms-pageable` operation must have a property named `value`. This property indicates what type of array the object is.
@@ -923,6 +990,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Category** : SDK Error
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
+
+**TypeSpec Rule or Doc** : Invalid TypeSpec
 
 **Output Message**: The default value is not one of the values enumerated as valid for this element.
 
@@ -952,6 +1021,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Category** : SDK Error
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
+
+**TypeSpec Rule or Doc** : Invalid TypeSpec
 
 **Output Message**: Parameter Must have the "name" property defined with non-empty string as its value.
 
@@ -987,6 +1058,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
+**TypeSpec Rule or Doc** : [How-to: client naming](https://azure.github.io/typespec-azure/docs/howtos/generate-client-libraries/09renaming/)
+
 **Output Message**: Per the Noun_Verb convention for Operation Ids, the noun '{0}' should not appear after the underscore.
 
 **Description**: OperationId should be of the form `Noun_Verb`. 
@@ -1012,6 +1085,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
+**TypeSpec Rule or Doc** : Invalid TypeSpec
+
 **Output Message**: Only 1 underscore is permitted in the operation id, following Noun_Verb conventions.
 
 **Description**: An operationId can have exactly one underscore, not adhering to it can cause errors in code generation.
@@ -1035,6 +1110,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Category** : ARM Error
 
 **Applies to** : ARM OpenAPI(swagger) specs
+
+**TypeSpec Rule or Doc** : [missing-operations-endpoint](https://azure.github.io/typespec-azure/docs/libraries/azure-resource-manager/rules/missing-operations-endpoint/)
 
 **Output Message**: Operations API must be implemented for '{0}'.
 
@@ -1132,6 +1209,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
+**TypeSpec Rule or Doc** : Invalid TypeSpec
+
 **Output Message**: Parameter "{0}" is referenced but not defined in the global parameters section of Service Definition
 
 **Description**: Per ARM guidelines, if `subscriptionId` is used anywhere as a path parameter, it must always be defined as global parameter. `api-version` is almost always an input parameter in any ARM spec and must also be defined as a global parameter.
@@ -1149,6 +1228,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
+**TypeSpec Rule or Doc** : [How-to: ARM resource types](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-type/#modeling-resources-in-typespec)
+
 **Output Message**: Model definition '{0}' must have the properties 'name', 'id' and 'type' in its hierarchy and these properties must be marked as readonly.
 
 **Description**: Per [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md), a `Resource` model must have the `name`, `id` and `type` properties defined as `readOnly` in its hierarchy.
@@ -1163,6 +1244,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Category** : SDK Error
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
+
+**TypeSpec Rule or Doc** : [How-to: ARM resource types](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-type/#property-visibility-and-other-constraints)
 
 **Output Message**: Property '{0}' is a required property. It should not be marked as 'readonly'.
 
@@ -1193,6 +1276,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
+**TypeSpec Rule or Doc** : [How-to: ARM resource operations](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/#common-operation-parameters)
+
 **Output Message**: Parameter "subscriptionId" is not allowed in the operations section, define it in the global parameters section instead/Parameter "{0}" is referenced but not defined in the global parameters section of Service Definition
 
 **Description**: `subscriptionId` must not be an operation parameter and must be declared in the global parameters section.
@@ -1207,6 +1292,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Category** : SDK Error
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
+
+**TypeSpec Rule or Doc** : [known-encoding](https://azure.github.io/typespec-azure/docs/libraries/azure-core/rules/known-encoding/)<br/>[no-generic-numeric](https://azure.github.io/typespec-azure/docs/libraries/azure-core/rules/no-generic-numeric/)
 
 **Output Message**: '{0}' is not a known format.
 
@@ -1242,6 +1329,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
+**TypeSpec Rule or Doc** : Invalid TypeSpec
+
 **Output Message**: License header must not be specified inside x-ms-code-generation-settings. The license can vary for different SDKs generated and is passed via command line/config file when generating the SDK.
 
 **Description**: `x-ms-code-generation-settings` must not have the license section specified in the OpenAPI documents since each generated SDK can have a different licensing header. This information must be provided either from the command line or the configuration file when actually generating the sdk.
@@ -1254,6 +1343,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Category** : SDK Error
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
+
+**TypeSpec Rule or Doc** : [How-to: ARM resource operations](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/#resource-list-operations-get)
 
 **Output Message**: The property '{0}' specified by nextLinkName does not exist in the 200 response schema. Please, specify the name of the property that provides the nextLink. If the model does not have the nextLink property then specify null.
 
@@ -1274,6 +1365,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
+**TypeSpec Rule or Doc** : [How-to: ARM resource operations](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/#resource-list-operations-get)
+
 **Output Message**: A response for the 200 HTTP status code must be defined to use x-ms-pageable.
 
 **Description**: Per definition of AutoRest [x-ms-pageable extension](https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-pageable), the response schema must contain a 200 response schema.
@@ -1293,6 +1386,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM specs
 
+**TypeSpec Rule or Doc** : [How-to: migrating ARM specs](https://azure.github.io/typespec-azure/docs/migrate-swagger/checklists/migrate-arm-tips/)
+
 **Output Message**: Inline/anonymous models must not be used, instead define a schema with a model name in the "definitions" section and refer to it. This allows operations to share the models.
 
 **Description**: This rule appears if in the parameter definition you have anonymous types. 
@@ -1307,6 +1402,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Category** : SDK Error
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
+
+**TypeSpec Rule or Doc** : [How-to: migrating ARM specs](https://azure.github.io/typespec-azure/docs/migrate-swagger/checklists/migrate-arm-tips/)
 
 **Output Message**: Inline/anonymous models must not be used, instead define a schema with a model name in the "definitions" section and refer to it. This allows operations to share the models.
 
@@ -1384,6 +1481,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
+**TypeSpec Rule or Doc** : [arm-resource-duplicate-property](https://azure.github.io/typespec-azure/docs/libraries/azure-resource-manager/rules/arm-resource-duplicate-property/)
+
 **Output Message**: Top level property names should not be repeated inside the properties bag for ARM resource '{0}'. Properties [{1}] conflict with ARM top level properties. Please rename these.
 
 **Description**: Per [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md), top level properties should not be repeated inside the properties bag for ARM resources.
@@ -1438,6 +1537,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Category** : ARM Error
 
 **Applies to** : ARM OpenAPI(swagger) specs
+
+**TypeSpec Rule or Doc** : [arm-resource-invalid-envelope-property](https://azure.github.io/typespec-azure/docs/libraries/azure-resource-manager/rules/arm-resource-invalid-envelope-property/)
 
 **Output Message**: Top level properties should be one of name, type, id, location, properties, tags, plan, sku, etag, managedBy, identity, systemData, extendedlocation. Model definition '{0}' has extra properties ['{1}'].
 
@@ -1495,6 +1596,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
+**TypeSpec Rule or Doc** : [Sku (common-types)](https://azure.github.io/typespec-azure/docs/libraries/azure-resource-manager/reference/data-types/#Azure.ResourceManager.CommonTypes.Sku)
+
 **Output Message**: Sku Model definition '{0}' is not valid. A Sku model must have 'name' property. It can also have 'tier', 'size', 'family', 'capacity' as optional properties.
 
 **Description**: Sku model definition needs to follow [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md) and can contain only a certain set of properties as described in the message. 
@@ -1511,6 +1614,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Category** : SDK Error
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
+
+**TypeSpec Rule or Doc** : Invalid TypeSpec
 
 **Output Message**: The enum types should have x-ms-enum type extension set with appropriate options. Property name: {0}.
 
@@ -1529,6 +1634,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
+**TypeSpec Rule or Doc** : Invalid TypeSpec
+
 **Output Message**: OperationId has a noun that conflicts with one of the model names in definitions section. The model name will be disambiguated to '{0}Model'. Consider using the plural form of '{1}' to avoid this. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change.
 
 **Description**: The first part of an operation Id separated by an underscore i.e., `Noun` in a `Noun_Verb` should not conflict with names of the models defined in the definitions section. If this happens, AutoRest appends `Model` to the name of the model to resolve the conflict (`NounModel` in given example) with the name of the client itself (which will be named as `Noun` in given example). This can result in an inconsistent user experience.
@@ -1543,6 +1650,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Category** : SDK Error
 
 **Applies to** : ARM OpenAPI(swagger) specs
+
+**TypeSpec Rule or Doc** : Invalid TypeSpec
 
 **Output Message**: Every OpenAPI(swagger) spec/configuration must have a security definitions section and it must adhere to the structure described [here](https://github.com/Azure/azure-openapi-validator/blob/master/docs/security-definitions-structure-validation.md)
 
@@ -1559,6 +1668,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
+**TypeSpec Rule or Doc** : [arm-custom-resource-usage-discourage](https://azure.github.io/typespec-azure/docs/libraries/azure-resource-manager/rules/arm-custom-resource-usage-discourage/)
+
 **Output Message**: A 'Resource' definition must have x-ms-azure-resource extension enabled and set to true.
 
 **Description**: A 'Resource' definition must have x-ms-azure-resource extension enabled and set to true. This will indicate that the model is an Azure resource.
@@ -1574,6 +1685,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
+**TypeSpec Rule or Doc** : [How-to: ARM resource operations](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/#resource-createorupdate-operations-put)
+
 **Output Message**: A PUT operation request body schema should be the same as its 200 response schema, to allow reusing the same entity between GET and PUT. If the schema of the PUT request body is a superset of the GET response body, make sure you have a PATCH operation to make the resource updatable. Operation: '{0}' Request Model: '{1}' Response Model: '{2}'
 
 **Description**: The request & response('200') schema of the PUT operation must be same.
@@ -1588,6 +1701,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Category** : SDK Error
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
+
+**TypeSpec Rule or Doc** : [How-to: ARM long-running operations](https://azure.github.io/typespec-azure/docs/howtos/arm/long-running-operations/)
 
 **Output Message**: A '{0}' operation '{1}' with x-ms-long-running-operation extension must have a valid terminal success status code {2}.
 
@@ -1605,6 +1720,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
+**TypeSpec Rule or Doc** : [arm-resource-invalid-action-verb](https://azure.github.io/typespec-azure/docs/libraries/azure-resource-manager/rules/arm-resource-invalid-action-verb/)
+
 **Output Message**: Permissible values for HTTP Verb are DELETE, GET, PUT, PATCH, HEAD, OPTIONS, POST, TRACE.
 
 **Description**: Each operation definition must have a HTTP verb and it must be DELETE/GET/PUT/PATCH/HEAD/OPTIONS/POST/TRACE.
@@ -1619,6 +1736,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Category** : ARM Error
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
+
+**TypeSpec Rule or Doc** : [arm-resource-operation-response](https://azure.github.io/typespec-azure/docs/libraries/azure-resource-manager/rules/arm-resource-operation-response/)
 
 **Output Message**: {0} has different responses for PUT/GET/PATCH operations. The PUT/GET/PATCH operations must have same schema response.
 
@@ -1635,6 +1754,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
+**TypeSpec Rule or Doc** : Invalid TypeSpec
+
 **Output Message**: 'Delete' operation '{0}' must not have a request body.
 
 **Description**: The request body of a delete operation must be empty.
@@ -1649,6 +1770,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Category** : ARM Error
 
 **Applies to** : ARM OpenAPI(swagger) specs
+
+**TypeSpec Rule or Doc** : [How-to: ARM resource types](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-type/#modeling-resources-in-typespec)
 
 **Output Message**: The 200 response model for an ARM PUT operation must have x-ms-azure-resource extension set to true in its hierarchy. Operation: '{0}' Model: '{1}'.
 
@@ -1665,6 +1788,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
+**TypeSpec Rule or Doc** : [How-to: ARM resource operations](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/#resource-list-operations-get)
+
 **Output Message**: For the tracked resource '{0}', the x-ms-pageable extension values must be same for list by resource group and subscriptions operations.
 
 **Description**: When a tracked resource has list by resource group and subscription operations, the x-ms-pageable extension values must be same for both operations. A tracked resource is a resource with a 'location' property as required. If this rule flags a resource which does not have a 'location' property, then it might be a false positive.
@@ -1680,6 +1805,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
+**TypeSpec Rule or Doc** : [How-to: ARM long-running operations](https://azure.github.io/typespec-azure/docs/howtos/arm/long-running-operations/)
+
 **Output Message**: 200/201 Responses of long running operations must have a schema definition for return type. OperationId: '{0}', Response code: '{1}'
 
 **Description**: The '200'/'201' responses of the long running operation must have a schema definition. 
@@ -1694,6 +1821,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Category** : ARM Error
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
+
+**TypeSpec Rule or Doc** : [arm-resource-patch](https://azure.github.io/typespec-azure/docs/libraries/azure-resource-manager/rules/arm-resource-patch/)
 
 **Output Message**: Properties of a PATCH request body must not be {0}. PATCH operation: '{1}' Model Definition: '{2}' Property: '{3}'
 
@@ -1752,6 +1881,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
+**TypeSpec Rule or Doc** : [documentation-required](https://azure.github.io/typespec-azure/docs/libraries/azure-core/rules/documentation-required/)
+
 **Output Message**: {0} lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
 
 **Description**: A parameter must have 'description' property.
@@ -1766,6 +1897,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Category** : SDK Warning
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
+
+**TypeSpec Rule or Doc** : [documentation-required](https://azure.github.io/typespec-azure/docs/libraries/azure-core/rules/documentation-required/)
 
 **Output Message**: The value provided for description is not descriptive enough. Accurate and descriptive description is essential for maintaining reference documentation.
 
@@ -1782,6 +1915,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
+**TypeSpec Rule or Doc** : [documentation-required](https://azure.github.io/typespec-azure/docs/libraries/azure-core/rules/documentation-required/)
+
 **Output Message**: {0} lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
 
 **Description**: The definition must have at least one of the properties - description/title.
@@ -1797,6 +1932,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
+**TypeSpec Rule or Doc** : [documentation-required](https://azure.github.io/typespec-azure/docs/libraries/azure-core/rules/documentation-required/)
+
 **Output Message**: {0} lacks 'description' and 'summary' property. Consider adding a 'description'/'summary' element. Accurate description/summary is essential for maintaining reference documentation.
 
 **Description**: Every operation must have a 'description'/'summary' property.
@@ -1811,6 +1948,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Category** : SDK Warning
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
+
+**TypeSpec Rule or Doc** : [documentation-required](https://azure.github.io/typespec-azure/docs/libraries/azure-core/rules/documentation-required/)
 
 **Output Message**: The summary and description values should not be same.
 
@@ -1855,6 +1994,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
+**TypeSpec Rule or Doc** : [documentation-required](https://azure.github.io/typespec-azure/docs/libraries/azure-core/rules/documentation-required/)
+
 **Output Message**: Description must not match the name of the node it is supposed to describe.
 
 **Description**: Description section must provide details on the current operation or model. Using the name of node in description does not provide any value.
@@ -1870,6 +2011,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Category** : SDK Error
 
 **Applies to** : ARM and Data Plane OpenAPI(swagger) specs
+
+**TypeSpec Rule or Doc** : [@clientLocation (typespec-client-generator-core)](https://azure.github.io/typespec-azure/docs/libraries/typespec-client-generator-core/reference/decorators/#@Azure.ClientGenerator.Core.clientLocation)
 
 **Output Message** : The parameter '{your parameter name}' is defined in global parameters section without 'x-ms-parameter-location' extension. This would add the parameter as the client property. Please ensure that this is exactly you want. If so, apply the extension "x-ms-parameter-location": "client". Else, apply the extension "x-ms-parameter-location": "method".
 
@@ -1897,6 +2040,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Category** : SDK Warning
 
 **Applies to** : ARM and Data Plane OpenAPI(swagger) specs
+
+**TypeSpec Rule or Doc** : [How-to: ARM long-running operations](https://azure.github.io/typespec-azure/docs/howtos/arm/long-running-operations/)
 
 **Output Message** : A LRO Post operation with return schema must have "x-ms-long-running-operation-options" extension enabled.
 
@@ -1930,6 +2075,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
+**TypeSpec Rule or Doc** : Invalid TypeSpec
+
 **Output Message** : Missing operationId. path:'${operation path}' operation:'${operation}'.
 
 **Description** : Each operation must have a unique operationId.
@@ -1949,6 +2096,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Category** : ARM Error
 
 **Applies to** : ARM and Data Plane OpenAPI(swagger) specs
+
+**TypeSpec Rule or Doc** : [How-to: ARM provider namespace](https://azure.github.io/typespec-azure/docs/howtos/arm/change-provider-namespace/#1-change-the-name-in-the-spec)
 
 **Output Message** : Resource provider naming must follow the pascal case. Path: {your path}
 
@@ -2006,6 +2155,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM and Data Plane OpenAPI(swagger) specs
 
+**TypeSpec Rule or Doc** : [Use ResourceNameParameter template](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-type/#modeling-resources-in-typespec)
+
 **Output Message** : Resource type naming SHOULD follow camel case. Path: {your path}
 
 **Description** : Resource type or other identifiers (include: namespace, entityTypes) SHOULD follow camel case. (e.g. Microsoft.Insights/components/proactiveDetectionConfigs, not ProactiveDetectionConfig)
@@ -2060,6 +2211,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM and Data Plane OpenAPI(swagger) specs
 
+**TypeSpec Rule or Doc** : Invalid TypeSpec
+
 **Output Message** : Enum must not contain duplicated value (case insensitive).
 
 **Description** : Enum must not contain duplicated value (case insensitive).
@@ -2102,6 +2255,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Category** : SDK Error
 
 **Applies to** : ARM and Data Plane OpenAPI(swagger) specs
+
+**TypeSpec Rule or Doc** : Invalid TypeSpec
 
 **Output Message** : Enum must define its type. All values in an enum must adhere to the specified type. 
 
@@ -2160,6 +2315,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM and Data Plane OpenAPI(swagger) specs
 
+**TypeSpec Rule or Doc** : Invalid TypeSpec
+
 **Output Message** : Enum value must not contain empty value.
 
 **Description** : Enum must not be empty, or contain special character, like space, tab, etc. It will lead to code generation failure in downstream pipeline.
@@ -2201,6 +2358,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
+**TypeSpec Rule or Doc** : [How-to: ARM long-running operations](https://azure.github.io/typespec-azure/docs/howtos/arm/long-running-operations/)
+
 **Output Message** : The operation '{0}' returns 202 status code, which indicates a long running operation, please enable 'x-ms-long-running-operation'.  
 
 **Description** : Per [x-ms-long-running-operation](./swagger-extensions.md#x-ms-long-running-operation) ,The operation which returns 202 status code indicates a long running operation. Every long running operation must have the x-ms-long-running-operation enabled.
@@ -2232,6 +2391,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Category** : SDK Warning
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
+
+**TypeSpec Rule or Doc** : [How-to: ARM resource operations](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/#resource-list-operations-get)
 
 **Output Message** : Based on the response model schema, operation '${operationId}' might be pageable. Consider adding the x-ms-pageable extension.  
 
@@ -2268,6 +2429,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Category** : SDK Error
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
+
+**TypeSpec Rule or Doc** : Invalid TypeSpec
 
 **Output Message** : Must not have duplicate name in x-ms-enum extension , make sure every x-ms-enum name unique.  
 
@@ -2323,6 +2486,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
+**TypeSpec Rule or Doc** : Invalid TypeSpec
+
 **Output Message** : The x-ms-code-generation-setting extension is being deprecated. Please remove it and move settings to readme file for code generation.
 
 **Description** : The x-ms-code-generation-settings is being deprecated. AutoRest (v3) is using settings in readme file for code generation and will stop supporting it inside the swagger file. Please ensure to remove the parameter from swagger spec and move settings to readme.
@@ -2351,6 +2516,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Category** : ARM Error
 
 **Applies to** : ARM OpenAPI(swagger) specs
+
+**TypeSpec Rule or Doc** : [Use Standard Operation Templates](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/#recommended-and-required-operations)
 
 **Output Message** : The default error response schema SHOULD correspond to the schema documented at https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/common-api-details.md#error-response-content.
 
@@ -2421,6 +2588,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
+**TypeSpec Rule or Doc** : [no-unknown](https://azure.github.io/typespec-azure/docs/libraries/azure-core/rules/no-unknown/)
+
 **Output Message** : Response schema must not be empty.
 
 **Description** : Response schema must not be empty, or it will block code generation.
@@ -2450,6 +2619,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Category** : ARM Error
 
 **Applies to** : ARM OpenAPI(swagger) specs
+
+**TypeSpec Rule or Doc** : [How-to: ARM resource types](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-type/#modeling-resources-in-typespec)
 
 **Output Message** : 
 1. if missing the systemData , output:
@@ -2488,6 +2659,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
+**TypeSpec Rule or Doc** : [Use Standard Operation Templates](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/#recommended-and-required-operations)
+
 **Output Message** : The response is defined without a default error response implementation,please add it. 
 
 **Description** : Per ARM Specs, every operation must have a default error response implementation.
@@ -2519,6 +2692,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Category** : ARM Error
 
 **Applies to** : ARM OpenAPI(swagger) specs
+
+**TypeSpec Rule or Doc** : [delete-operation-response-codes](https://azure.github.io/typespec-azure/docs/libraries/azure-resource-manager/rules/delete-operation-response-codes/)
 
 **Output Message** : The delete operation is defined without a 200 or 204 error response implementation,please add it. 
 
@@ -2569,6 +2744,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
+**TypeSpec Rule or Doc** : Invalid TypeSpec
+
 **Output Message** : The operation: '{operation name}' is defined with x-ms-pageable enabled,but can not find the corresponding nextLink property in the response, please add it.
 
 **Description** :  Per [extensions](https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-pageable) ,when specifying a x-ms-pageable/nextLinkName, the corresponding nextlink property must be defined in the response schema.
@@ -2616,6 +2793,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
+**TypeSpec Rule or Doc** : [no-generic-numeric](https://azure.github.io/typespec-azure/docs/libraries/azure-core/rules/no-generic-numeric/)
+
 **Output Message** : The integer type does not have a format, please add it.
 
 **Description** :  The type:integer must have a required format. Possible value for format are int32 and int64.
@@ -2646,6 +2825,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Category** : ARM Warning
 
 **Applies to** : ARM OpenAPI(swagger) specs
+
+**TypeSpec Rule or Doc** : [How-to: ARM resource operations](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/#resource-get-operations)
 
 **Output Message** : The resource "{0}" does not have get operation, please add it.
 
@@ -2684,6 +2865,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Category** : ARM Error
 
 **Applies to** : ARM OpenAPI(swagger) specs
+
+**TypeSpec Rule or Doc** : [Proxy resource operations](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/#proxy-resource)
 
 **Output Message** : The nested resource "{0}" does not have list operation, please add it.
 
@@ -2724,6 +2907,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
+**TypeSpec Rule or Doc** : [How-to: ARM resource operations](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/#trackedresource)
+
 **Output Message** : The top-level resource "{0}" does not have list by resource group operation, please add it.
 
 **Description** : Per [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md), all the top-level resources must have a list by resource group operation which returns the collection of the resource. 
@@ -2763,6 +2948,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
+**TypeSpec Rule or Doc** : [How-to: ARM resource operations](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/#resource-list-operations-get)
+
 **Output Message** : The top-level resource "{0}" does not have list by subscription operation, please add it.
 
 **Description** : Per [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md), all the top-level resources must have a list by subscription operation which returns the collection of the resource. 
@@ -2801,6 +2988,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Category** : ARM Error
 
 **Applies to** : ARM OpenAPI(swagger) specs
+
+**TypeSpec Rule or Doc** : [missing-operations-endpoint](https://azure.github.io/typespec-azure/docs/libraries/azure-resource-manager/rules/missing-operations-endpoint/)
 
 **Output Message** : The response schema of operations API "{0}" does not match the ARM specification. Please standardize the schema.
 
@@ -2892,6 +3081,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
+**TypeSpec Rule or Doc** : [How-to: ARM resource operations](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/#resource-list-operations-get)
+
 **Output Message** : The response model in the GET collection operation "{0}" does not match with the response model in the individual GET operation "{1}".
 
 **Description** : Per [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md#get-resource), for all resources (top-level and nested), collection GETs should have a response definition with a property "value" containing an array of the "resource" schema.The definition returned in the collection "value" array should be the same as the response body for the individual GET.
@@ -2953,6 +3144,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
+**TypeSpec Rule or Doc** : [put-operation-response-codes](https://azure.github.io/typespec-azure/docs/libraries/azure-resource-manager/rules/put-operation-response-codes/)
+
 **Output Message** : [RPaaS] Only 201 is the supported response code for PUT async response
 
 **Description** : An async PUT operation response include status code 201 with 'Azure-async-operation' header. Must also support status code 200, for simple updates that can be completed synchronously (ex: tags). Operation must also add "x-ms-long-running-operation and x-ms-long-running-operation-options" to mark that it is a long running operation (in case of 201) and how it is tracked (Azure-async-operation header).
@@ -3003,6 +3196,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
+**TypeSpec Rule or Doc** : [How-to: versioning](https://azure.github.io/typespec-azure/docs/howtos/versioning/01-about-versioning/)
+
 **Output Message** : The API version:{api-version} having been in a preview state over one year , please move to GA or retire.
 
 **Description** : Per [Retirement-of-Previews](https://dev.azure.com/msazure/AzureWiki/_wiki/wikis/AzureWiki.wiki/37683/Retirement-of-Previews), service, feature, API, and SKU in preview for over one year need to move to GA or retire.
@@ -3021,6 +3216,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Category** : ARM Error
 
 **Applies to** : ARM OpenAPI(swagger) specs
+
+**TypeSpec Rule or Doc** : [delete-operation-response-codes](https://azure.github.io/typespec-azure/docs/libraries/azure-resource-manager/rules/delete-operation-response-codes/)
 
 **Output Message** : DELETE async supports
 
@@ -3069,6 +3266,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
+**TypeSpec Rule or Doc** : [post-operation-response-codes](https://azure.github.io/typespec-azure/docs/libraries/azure-resource-manager/rules/post-operation-response-codes/)
+
 **Output Message** : [RPaaS] POST async supports
 
 **Description** : An async POST operation response include status code 202 with 'Location' header. Must support status code 200 if operation can be completed synchronously. Operation must also add "x-ms-long-running-operation and x-ms-long-running-operation-options" to mark that it is a long running operation (in case of 202) and how it is tracked (Location header).
@@ -3113,6 +3312,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM and Data Plane OpenAPI(swagger) specs
 
+**TypeSpec Rule or Doc** : [How-to: ARM resource operations](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/#arm-response-types)
+
 **Output Message** :  There is no declared valid status code.
 
 **Description** : Every operation response must contain a valid code like "200","201","202" or "204" which indicates the operation is succeed and it's not allowed that a response schema just contains a "default" code. 
@@ -3152,6 +3353,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Category** : SDK Error
 
 **Applies to** : ARM OpenAPI(swagger) specs
+
+**TypeSpec Rule or Doc** : Invalid TypeSpec
 
 **Output Message** :  Do not have duplicate name of client parameter name, make sure every client parameter name unique.
 
@@ -3199,6 +3402,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
+**TypeSpec Rule or Doc** : [How-to: migrating ARM specs](https://azure.github.io/typespec-azure/docs/migrate-swagger/checklists/migrate-arm-tips/)
+
 **Output Message** :  Do not have duplicate name of x-ms-example, make sure every x-ms-example name unique. Duplicate x-ms-example: {ExampleName}
 
 **Description** : x-ms-example name should be unique in the same API version.
@@ -3232,6 +3437,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Category** : RPaaS Error
 
 **Applies to** : ARM OpenAPI(swagger) specs
+
+**TypeSpec Rule or Doc** : [arm-resource-provisioning-state](https://azure.github.io/typespec-azure/docs/libraries/azure-resource-manager/rules/arm-resource-provisioning-state/)
 
 **Output Message** : [RPaaS] The resource {0} is defined without 'provisioningState' in properties bag, consider adding the provisioningState for it.
 
@@ -3275,6 +3482,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
+**TypeSpec Rule or Doc** : [ErrorResponse (common-types)](https://azure.github.io/typespec-azure/docs/libraries/azure-resource-manager/reference/data-types/#Azure.ResourceManager.CommonTypes.ErrorResponse)
+
 **Output Message** : The response code {0} is defined without a x-ms-error-response.
 
 **Description** :  If defines response code 4xx or 5xx ,  x-ms-error-response:true is required. There is one exception: a HEAD operation with 404 SHOULD have x-ms-error-response:false, as it is often used to check for existence of resources, the HEAD with 404 means the resource doesn’t exist.
@@ -3314,6 +3523,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Category** : SDK Error
 
 **Applies to** : ARM OpenAPI(swagger) specs
+
+**TypeSpec Rule or Doc** : Invalid TypeSpec
 
 **Output Message** :  The model name {0} is duplicated with {1} .
 
@@ -3365,6 +3576,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
+**TypeSpec Rule or Doc** : [ArmTagsProperty (common-types)](https://azure.github.io/typespec-azure/docs/libraries/azure-resource-manager/reference/data-types/#Azure.ResourceManager.Foundations.ArmTagsProperty)
+
 **Output Message** :  The property tags in the resource "{0}" does not conform to the common type definition.
 
 **Description** :  This rule is to check if the tags definition of a resource conforms to the common tags definition.
@@ -3411,6 +3624,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
+**TypeSpec Rule or Doc** : [How-to: ARM private endpoints](https://azure.github.io/typespec-azure/docs/howtos/arm/private-endpoints/)
+
 **Output Message** :  The private endpoint model "{0}" schema does not conform to the common type definition.
 
 **Description** :  This rule is to check if the schemas used by private endpoint conform to the common [privateLink](https://github.com/Azure/azure-rest-api-specs/blob/master/specification/common-types/resource-management/v1/privatelinks.json). The rule will check the schemas of following models and their properties:
@@ -3438,6 +3653,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
+**TypeSpec Rule or Doc** : [How-to: ARM private endpoints](https://azure.github.io/typespec-azure/docs/howtos/arm/private-endpoints/)
+
 **Output Message** : The private endpoint API: {apiPath} is missing.
 
 **Description** :  This rule is to check if all the APIs for private endpoint are implemented. Per design spec, for supporting private endpoint, the service should implement the following APIs:
@@ -3464,6 +3681,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Category** : SDK Error
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
+
+**TypeSpec Rule or Doc** : [no-empty-model](https://azure.github.io/typespec-azure/docs/libraries/azure-resource-manager/rules/no-empty-model/)
 
 **Output Message** : The schema '{json path}' is considered an object but without a 'type:object', please add the missing 'type:object'.
 
@@ -3512,6 +3731,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
+**TypeSpec Rule or Doc** : [How-to: ARM resource types](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-type/#extension-resource)
+
 **Output Message** : The path '{api path}' which is for extension routing resource type, shouldn't include the parent scope.
 
 **Description**: Path (operation) for 'extension routing type' (that has additional /providers/ segment in parent scope) must be of the form '{scope}/provider/RPNamespace/resourceTypeName' (shouldn't include parent scope)
@@ -3543,6 +3764,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM and Data Plane OpenAPI(swagger) specs
 
+**TypeSpec Rule or Doc** : [How-to: ARM resource operations](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/#common-operation-parameters)
+
 **Output Message** : The parameters should be kept in the same order as they present in the path.
 
 **Description**: The rule is to ensure the parameters in the same order as they are ranked in the path. Since it can introduce a breaking change when updating parameter order, for services that have already shipped public versions, you may request to suppress the rule following the process documented here: https://aka.ms/pr-suppressions
@@ -3566,6 +3789,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM and Data Plane OpenAPI(swagger) specs
 
+**TypeSpec Rule or Doc** : Invalid TypeSpec
+
 **Output Message** : Enum values should respect the type.
 
 **Description**: This rule is to check if the enum values conform to the type.
@@ -3586,6 +3811,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Category** : SDK Error
 
 **Applies to** : ARM OpenAPI(swagger) specs
+
+**TypeSpec Rule or Doc** : [missing-x-ms-identifiers](https://azure.github.io/typespec-azure/docs/libraries/azure-resource-manager/rules/missing-x-ms-identifiers/)
 
 **Output Message** : Missing identifier {0} in array item property.
 
