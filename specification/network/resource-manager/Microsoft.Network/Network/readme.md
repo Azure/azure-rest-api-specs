@@ -133,6 +133,16 @@ suppressions:
       correctly marks provisioningState with @visibility(Lifecycle.Read). The lintdiff rule does
       not recognize readOnly next to $ref, so this suppression is needed.
       See: https://github.com/Azure/typespec-azure/issues/4611
+  - code: ResourceNameRestriction
+    from: virtualNetwork.json
+    reason: The resource name parameter 'virtualNetworkName' is not defined with a 'pattern' restriction. Suppress it to avoid breaking change because it is referenced by all Virtual Network APIs.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/moveIpConfigurations"]
+  - code: PostResponseCodes
+    from: virtualNetwork.json
+    reason: LRO POST operation returns 200 with no schema for completion status and 202 for async acceptance. This is the standard TypeSpec ArmResourceActionAsync pattern for void LRO operations.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/moveIpConfigurations"].post
 directive:
   - from: specification/common-types/resource-management/v6/types.json
     where: "$.definitions.ProxyResource"

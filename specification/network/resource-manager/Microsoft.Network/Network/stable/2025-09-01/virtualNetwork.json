@@ -12221,6 +12221,80 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/moveIpConfigurations": {
+      "post": {
+        "operationId": "VirtualNetworks_MoveIpConfigurations",
+        "tags": [
+          "VirtualNetworks"
+        ],
+        "description": "Move IP configurations from one virtual network to another.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualNetworkName",
+            "in": "path",
+            "description": "The name of the virtual network.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Parameters supplied to move IP configurations from one virtual network to another.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MoveIpConfigurationsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully."
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Move IP Configurations": {
+            "$ref": "./examples/VirtualNetworkMoveIpConfigurations.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets": {
       "get": {
         "operationId": "Subnets_List",
@@ -18524,6 +18598,62 @@
           "description": "String representing a friendly name for the resource."
         }
       }
+    },
+    "MoveIpConfigurationItem": {
+      "type": "object",
+      "description": "An item representing a source and target IP configuration for a move operation.",
+      "properties": {
+        "sourceIpConfiguration": {
+          "$ref": "#/definitions/MoveIpConfigurationResourceReference",
+          "description": "The source IP configuration to move from."
+        },
+        "targetIpConfiguration": {
+          "$ref": "#/definitions/MoveIpConfigurationResourceReference",
+          "description": "The target IP configuration to move to."
+        }
+      },
+      "required": [
+        "sourceIpConfiguration",
+        "targetIpConfiguration"
+      ]
+    },
+    "MoveIpConfigurationResourceReference": {
+      "type": "object",
+      "description": "Reference to an IP configuration resource by ARM resource ID.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The ARM resource ID of the IP configuration.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/networkInterfaces/ipConfigurations"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "MoveIpConfigurationsRequest": {
+      "type": "object",
+      "description": "Request body for the MoveIpConfigurations operation.",
+      "properties": {
+        "moveIpConfigurationItems": {
+          "type": "array",
+          "description": "A list of IP configuration move items.",
+          "items": {
+            "$ref": "#/definitions/MoveIpConfigurationItem"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "moveIpConfigurationItems"
+      ]
     },
     "NatGatewayListResult": {
       "type": "object",
