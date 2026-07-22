@@ -225,8 +225,8 @@ model BatchRequestOutput {
   @encodedName("application/json", "custom_id")
   customId?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
   /** The http response */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
   response?: {
     /** The HTTP status code of the response */
     @encodedName("application/json", "status_code")
@@ -240,8 +240,8 @@ model BatchRequestOutput {
     body?: Record<string>;
   };
 
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
   /** For requests that failed with a non-HTTP error, this will contain more information on the cause of the failure. */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
   error?: {
     /** A machine-readable error code. */
     code?: string;

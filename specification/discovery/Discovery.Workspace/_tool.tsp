@@ -318,8 +318,8 @@ model RunResult {
   @doc("The user that started the tool run.")
   createdBy?: string;
 
-  @doc("Details provided by the tool (rather than the platform).")
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
+  @doc("Details provided by the tool (rather than the platform).")
   toolReport?: {
     /** Percentage compete */
     percentageComplete: int32;
