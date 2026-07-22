@@ -2783,24 +2783,6 @@ union NicTypeInResponse {
 }
 
 /**
- * The address family of the Network Virtual Appliance.
- */
-@added(Versions.v2025_09_01)
-union AddressFamily {
-  string,
-
-  /**
-   * IPv4 address family.
-   */
-  IPv4: "IPv4",
-
-  /**
-   * IPv6 address family.
-   */
-  IPv6: "IPv6",
-}
-
-/**
  * NIC type. This should be either PublicNic or PrivateNic.
  */
 union NicTypeInRequest {
@@ -15992,10 +15974,12 @@ model NetworkVirtualAppliancePropertiesFormat {
   nvaInterfaceConfigurations?: NvaInterfaceConfigurationsProperties[];
 
   /**
-   * The address families to deploy the NVA in. ["IPv4", "IPv6"] deploys a dual-stack NVA (both IPv4 and IPv6 configurations on the NICs; the vHub/VNet must be dual-stack). ["IPv4"], an empty array, or omitting the field deploys an IPv4-only NVA. ["IPv6"] deploys an IPv6-only NVA, which is not supported yet.
+   * The address families to deploy the NVA in. ["IPv4", "IPv6"] deploys a dual-stack NVA (the vHub/VNet must also be dual-stack). ["IPv4"], an empty array, or omitting the field deploys an IPv4-only NVA. The value "IPv6" may only appear in combination with "IPv4"; standalone ["IPv6"] is reserved for future use and is rejected by the service today.
    */
   @added(Versions.v2025_09_01)
-  addressFamily?: AddressFamily[];
+  @uniqueItems
+  @maxItems(2)
+  addressFamily?: IPVersion[];
 
   /**
    * A Internal Load Balancer's HA port frontend IP address. Can be used to set routes & UDR to load balance traffic between NVA instances
@@ -16004,7 +15988,7 @@ model NetworkVirtualAppliancePropertiesFormat {
   privateIpAddress?: string;
 
   /**
-   * A Internal Load Balancer's HA port frontend IPv6 address. Can be used to set routes & UDR to load balance traffic between NVA instances. This field appears in dual-stack NVAs.
+   * An Internal Load Balancer's HA port frontend IPv6 address. Can be used to set routes & UDR to load balance traffic between NVA instances. This field appears in dual-stack NVAs.
    */
   @visibility(Lifecycle.Read)
   @added(Versions.v2025_09_01)
@@ -16064,14 +16048,14 @@ model VirtualApplianceNicProperties {
   privateIpAddress?: string;
 
   /**
-   * Public IPv6 address. These fields appear in dual stack NVAs. It will also appear for Additional Nic configurations in case of Dual stack NVAs.
+   * Public IPv6 address. Populated for dual-stack NVAs, including on additional-NIC configurations when the NVA is dual-stack.
    */
   @visibility(Lifecycle.Read)
   @added(Versions.v2025_09_01)
   publicIpAddressV6?: string;
 
   /**
-   * Private IPv6 address. These fields appear in dual stack NVAs. It will also appear for Additional Nic configurations in case of Dual stack NVAs.
+   * Private IPv6 address. Populated for dual-stack NVAs, including on additional-NIC configurations when the NVA is dual-stack.
    */
   @visibility(Lifecycle.Read)
   @added(Versions.v2025_09_01)

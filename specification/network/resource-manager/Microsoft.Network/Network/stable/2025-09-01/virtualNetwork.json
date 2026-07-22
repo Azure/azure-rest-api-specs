@@ -18975,9 +18975,11 @@
         },
         "addressFamily": {
           "type": "array",
-          "description": "The address families to deploy the NVA in. [\"IPv4\", \"IPv6\"] deploys a dual-stack NVA (both IPv4 and IPv6 configurations on the NICs; the vHub/VNet must be dual-stack). [\"IPv4\"], an empty array, or omitting the field deploys an IPv4-only NVA. [\"IPv6\"] deploys an IPv6-only NVA, which is not supported yet.",
+          "description": "The address families to deploy the NVA in. [\"IPv4\", \"IPv6\"] deploys a dual-stack NVA (the vHub/VNet must also be dual-stack). [\"IPv4\"], an empty array, or omitting the field deploys an IPv4-only NVA. The value \"IPv6\" may only appear in combination with \"IPv4\"; standalone [\"IPv6\"] is reserved for future use and is rejected by the service today.",
+          "maxItems": 2,
+          "uniqueItems": true,
           "items": {
-            "$ref": "./common.json#/definitions/AddressFamily"
+            "$ref": "./common.json#/definitions/Common.IPVersion"
           }
         },
         "privateIpAddress": {
@@ -18987,7 +18989,7 @@
         },
         "privateIpAddressV6": {
           "type": "string",
-          "description": "A Internal Load Balancer's HA port frontend IPv6 address. Can be used to set routes & UDR to load balance traffic between NVA instances. This field appears in dual-stack NVAs.",
+          "description": "An Internal Load Balancer's HA port frontend IPv6 address. Can be used to set routes & UDR to load balance traffic between NVA instances. This field appears in dual-stack NVAs.",
           "readOnly": true
         }
       }
@@ -20787,12 +20789,12 @@
         },
         "publicIpAddressV6": {
           "type": "string",
-          "description": "Public IPv6 address. These fields appear in dual stack NVAs. It will also appear for Additional Nic configurations in case of Dual stack NVAs.",
+          "description": "Public IPv6 address. Populated for dual-stack NVAs, including on additional-NIC configurations when the NVA is dual-stack.",
           "readOnly": true
         },
         "privateIpAddressV6": {
           "type": "string",
-          "description": "Private IPv6 address. These fields appear in dual stack NVAs. It will also appear for Additional Nic configurations in case of Dual stack NVAs.",
+          "description": "Private IPv6 address. Populated for dual-stack NVAs, including on additional-NIC configurations when the NVA is dual-stack.",
           "readOnly": true
         },
         "instanceName": {
