@@ -1,4 +1,7 @@
 import "./WebModels/BusinessCases/BusinessCase.tsp";
+import "./Common/StandardizedContracts/CostComponent.tsp";
+import "./Common/StandardizedContracts/CostDetails.tsp";
+import "./Common/StandardizedContracts/DataTypes.tsp";
 
 using Autorest;
 using TypeSpec.Http;
@@ -22,6 +25,7 @@ interface BusinessCaseOperations {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "POST Compare Summary body is empty."
   @doc("A long-running resource action.")
+  @removed(BusinessCaseApiVersions.v2025_09_09_preview)
   @summary("Get Compare summary report for Business case.")
   compareSummary is ArmResourceActionAsync<BusinessCase, {}, CompareSummary>;
 
@@ -36,6 +40,7 @@ interface BusinessCaseOperations {
 }
 
 @armResourceOperations
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 interface BusinessCaseIaasSummaryOperations {
   get is ArmResourceRead<IaasSummary>;
 
@@ -43,6 +48,7 @@ interface BusinessCaseIaasSummaryOperations {
 }
 
 @armResourceOperations
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 interface BusinessCasePaasSummaryOperations {
   get is ArmResourceRead<PaasSummary>;
 
@@ -57,6 +63,7 @@ interface BusinessCaseOverviewSummaryOperations {
 }
 
 @armResourceOperations
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 interface BusinessCaseAvsSummaryOperations {
   get is ArmResourceRead<AvsSummary>;
 
@@ -64,6 +71,7 @@ interface BusinessCaseAvsSummaryOperations {
 }
 
 @armResourceOperations
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 interface EvaluatedMachinesOperations {
   get is ArmResourceRead<EvaluatedMachine>;
 
@@ -95,6 +103,7 @@ interface EvaluatedMachinesOperations {
 }
 
 @armResourceOperations
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 interface EvaluatedSqlEntitiesOperations {
   get is ArmResourceRead<EvaluatedSqlEntity>;
 
@@ -126,6 +135,7 @@ interface EvaluatedSqlEntitiesOperations {
 }
 
 @armResourceOperations
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 interface EvaluatedWebAppsOperations {
   get is ArmResourceRead<EvaluatedWebApp>;
 
@@ -157,6 +167,7 @@ interface EvaluatedWebAppsOperations {
 }
 
 @armResourceOperations
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 interface EvaluatedAvsMachinesOperations {
   get is ArmResourceRead<EvaluatedAvsMachine>;
 

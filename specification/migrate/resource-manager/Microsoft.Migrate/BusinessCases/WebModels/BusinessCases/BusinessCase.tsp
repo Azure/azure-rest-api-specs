@@ -46,6 +46,17 @@ model BusinessCase is ProxyResource<BusinessCaseProperties> {
   resource.
   """)
 model BusinessCaseProperties is AzureResourceProperties {
+  @doc("Version")
+  @visibility(Lifecycle.Read)
+  @added(BusinessCaseApiVersions.v2025_09_09_preview)
+  version?: string;
+
+  @doc("dependent assessments")
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
+  @added(BusinessCaseApiVersions.v2025_09_09_preview)
+  assessments?: Assessments[];
+
   @doc("Business case settings.")
   settings?: Settings;
 
@@ -61,6 +72,20 @@ model BusinessCaseProperties is AzureResourceProperties {
   @doc("Gets the business case scope.")
   @visibility(Lifecycle.Read)
   businessCaseScope?: BusinessCaseScope;
+
+  @doc("Arm id of dependent partner assessments.")
+  @added(BusinessCaseApiVersions.v2025_09_09_preview)
+  dependentAssessmentIds?: string[];
+}
+
+@added(BusinessCaseApiVersions.v2025_09_09_preview)
+@doc("Business case report details.")
+model Assessments {
+  @doc("type of armId")
+  type: string;
+
+  @doc("armId of the dependent assessments")
+  armId: string;
 }
 
 @doc("Business case report details.")
@@ -76,20 +101,46 @@ model ReportDetails {
 
 @doc("Business case settings.")
 model Settings {
+  @added(BusinessCaseApiVersions.v2025_09_09_preview)
+  @doc("Common settings.")
+  commonSettings: CommonSettings;
+
   @doc("Azure settings for a business case.")
   azureSettings: AzureSettings;
 
+  @removed(BusinessCaseApiVersions.v2025_09_09_preview)
   @doc("On-premise settings.")
   onPremiseSettings?: OnPremiseSettings;
 
   @doc("Azure arc settings.")
   azureArcSettings?: AzureArcSettings;
+
+  @added(BusinessCaseApiVersions.v2025_09_09_preview)
+  @doc("Gets or sets the billing settings.")
+  billingSettings?: BillingSettings;
 }
 
-@doc("Azure settings for a business case.")
-model AzureSettings {
-  @doc("Gets or sets azure location.")
+@added(BusinessCaseApiVersions.v2025_09_09_preview)
+@doc("Common settings.")
+model CommonSettings {
+  @doc("Location/region that the business case is stored.")
   targetLocation: string;
+
+  @doc("The assessment project ID that this business case is linked to.")
+  assessmentProjectId?: string;
+
+  @doc("Gets infrastructure growth rate.")
+  @minValue(0.0)
+  @maxValue(100.0)
+  infrastructureGrowthRate: float32 = 5.0;
+
+  @doc("Gets wACC percentage.")
+  @minValue(0.0)
+  @maxValue(100.0)
+  wacc?: float32;
+
+  @doc("The business case type. Can be only IAAS, optimize for PAAS and optimize for cost.")
+  businessCaseType?: MigrationStrategy = MigrationStrategy.OptimizeForCost;
 
   @doc("Gets azure Discount percentage.")
   @minValue(0.0)
@@ -99,10 +150,32 @@ model AzureSettings {
   @doc("Business case Currency.")
   currency: BusinessCaseCurrency = BusinessCaseCurrency.USD;
 
+  @doc("The workload discovery source i.e. Appliance or Import.")
+  workloadDiscoverySource?: DiscoverySource = DiscoverySource.Appliance;
+}
+
+@doc("Azure settings for a business case.")
+model AzureSettings {
+  @removed(BusinessCaseApiVersions.v2025_09_09_preview)
+  @doc("Gets or sets azure location.")
+  targetLocation: string;
+
+  @doc("Gets azure Discount percentage.")
+  @minValue(0.0)
+  @maxValue(100.0)
+  @removed(BusinessCaseApiVersions.v2025_09_09_preview)
+  discountPercentage?: float32;
+
+  @doc("Business case Currency.")
+  @removed(BusinessCaseApiVersions.v2025_09_09_preview)
+  currency: BusinessCaseCurrency = BusinessCaseCurrency.USD;
+
   @doc("Migration Strategy.")
+  @removed(BusinessCaseApiVersions.v2025_09_09_preview)
   businessCaseType?: MigrationStrategy = MigrationStrategy.OptimizeForCost;
 
   @doc("Workload discovery source.")
+  @removed(BusinessCaseApiVersions.v2025_09_09_preview)
   workloadDiscoverySource?: DiscoverySource = DiscoverySource.Appliance;
 
   @doc("Gets start time to use for performance.")
@@ -128,11 +201,13 @@ model AzureSettings {
   @doc("Gets infrastructure growth rate.")
   @minValue(0.0)
   @maxValue(100.0)
+  @removed(BusinessCaseApiVersions.v2025_09_09_preview)
   infrastructureGrowthRate?: float32 = 5.0;
 
   @doc("Gets wACC percentage.")
   @minValue(0.0)
   @maxValue(100.0)
+  @removed(BusinessCaseApiVersions.v2025_09_09_preview)
   wacc?: float32;
 
   @doc("Gets network cost percentage.")
@@ -150,6 +225,12 @@ model AzureSettings {
   @maxValue(100.0)
   paasLaborCostPercentage?: float32 = 60;
 
+  @doc("Gets Management labour cost percentage.")
+  @minValue(0.0)
+  @maxValue(100.0)
+  @added(BusinessCaseApiVersions.v2025_09_09_preview)
+  managementLaborCostPercentage?: float32 = 60;
+
   @doc("Gets Avs labour cost percentage.")
   @minValue(0.0)
   @maxValue(100.0)
@@ -157,8 +238,39 @@ model AzureSettings {
 
   @doc("Gets the business case savings option type.")
   savingsOption?: SavingsOption = SavingsOption.RI3Year;
+
+  @added(BusinessCaseApiVersions.v2025_09_09_preview)
+  @doc("Gets and Sets Sql Azure Settings.")
+  sqlAzureSettings?: SqlAzureSettings;
 }
 
+@added(BusinessCaseApiVersions.v2025_09_09_preview)
+@doc("Gets and Sets Sql Azure Settings.")
+model SqlAzureSettings {
+  @doc("Gets and Sets Sql Azure Settings.")
+  hadrProperties?: HadrProperties;
+}
+
+@added(BusinessCaseApiVersions.v2025_09_09_preview)
+@doc("Gets and Sets Sql Azure Settings HadrProperties.")
+model HadrProperties {
+  @doc("Indicates whether HADR Assessment is enabled.")
+  enableHadrAssessment: boolean;
+
+  @doc("The Multi Subnet Intent.")
+  multiSubnetIntent: string;
+
+  @doc("The Async Commit Mode Intent.")
+  asyncCommitModeIntent: string;
+
+  @doc("The Disaster Recovery Location.")
+  disasterRecoveryLocation: string;
+
+  @doc("Indicates whether Internet Access is available.")
+  isInternetAccessAvailable: boolean;
+}
+
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 @doc("On-premise settings.")
 model OnPremiseSettings {
   @doc("Compute settings.")
@@ -197,6 +309,7 @@ model AzureArcSettings {
   managementSettings?: AzureArcManagementSettings;
 }
 
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 @doc("Compute settings.")
 model ComputeSettings {
   @doc("Hyperthread core to memory ratio.")
@@ -231,6 +344,7 @@ model ComputeSettings {
   virtualizationSoftwareSettings: VirtualizationSoftwareSettings;
 }
 
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 @doc("SQL Server licensing settings.")
 model SqlServerLicensingSettings {
   @doc("SQL Server version.")
@@ -243,6 +357,7 @@ model SqlServerLicensingSettings {
   softwareAssuranceCost: float32;
 }
 
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 @doc("Windows Server licensing settings.")
 model WindowsServerLicensingSettings {
   @doc("Licence Cost.")
@@ -255,19 +370,23 @@ model WindowsServerLicensingSettings {
   licensesPerCore: int32;
 }
 
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 @doc("Linux Server licensing settings.")
 model LinuxServerLicensingSettings {
   @doc("Licence Cost.")
   licenseCost: float32;
 }
 
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 @doc("Virtualization software settings.")
 model VirtualizationSoftwareSettings {
   @doc("VMware cloud foundation license cost.")
   vMwareCloudFoundationLicenseCost: float32;
 }
 
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 @doc("Representation of a vsphere licence base.")
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 model VsphereLicenseBase {
   @doc("Cost of a licence.")
   licenseCost: float32;
@@ -279,12 +398,15 @@ model VsphereLicenseBase {
   productionSupportCost: float32;
 }
 
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 @doc("Representation of a vsphere licence.")
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 model VsphereLicense is VsphereLicenseBase {
   @doc("VSphere licence type.")
   licenseType: LicenseType;
 }
 
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 @doc("Storage settings.")
 model StorageSettings {
   @doc("Cost per gigabyte per year.")
@@ -296,6 +418,7 @@ model StorageSettings {
   maintainanceCostPercentageToAcquisitionCost: float32;
 }
 
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 @doc("Network settings.")
 model NetworkSettings {
   @doc("Network maintenance cost percentage.")
@@ -310,6 +433,7 @@ model NetworkSettings {
   averageCostPerCabinet: float32;
 }
 
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 @doc("Facility settings.")
 model FacilitySettings {
   @doc("The facilities cost.")
@@ -320,6 +444,7 @@ model FacilitySettings {
   powerUtilizationEfficiency: float32;
 }
 
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 @doc("Labour settings.")
 model LaborSettings {
   @doc("Physical servers per administrator.")
@@ -334,6 +459,7 @@ model LaborSettings {
   hourlyAdminCost: float32;
 }
 
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 @doc("Security settings.")
 model SecuritySettings {
   @doc("Physical servers per administrator.")
@@ -343,6 +469,7 @@ model SecuritySettings {
   sqlServerSecurityCostPerServerPerYear: float32;
 }
 
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 @doc("Management settings.")
 model ManagementSettings {
   @doc("HyperV Virtualization Management Settings.")
@@ -355,6 +482,7 @@ model ManagementSettings {
   otherManagementCostsSettings: OtherManagementCostsSettings;
 }
 
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 @doc("HyperV Virtualization Management Settings.")
 model HypervVirtualizationManagementSettings {
   @doc("Number of physical cores per licence.")
@@ -369,6 +497,7 @@ model HypervVirtualizationManagementSettings {
   licenseAndSupportList: HypervLicense[];
 }
 
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 @doc("Representation of a licence.")
 model HypervLicense {
   @doc("Cost of a licence.")
@@ -378,19 +507,23 @@ model HypervLicense {
   licenseType: HyperVLicenseType;
 }
 
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 @doc("Vsphere management settings.")
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 model VsphereManagementSettings {
   @doc("Licence and support list.")
   @identifiers(#[])
   licenseAndSupportList: VsphereManagementLicense[];
 }
 
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 @doc("Representation of a vsphere management licence.")
 model VsphereManagementLicense is VsphereLicenseBase {
   @doc("VSphere licence type.")
   licenseType: VsphereManagementLicenseType;
 }
 
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 @doc("Third Party Management settings.")
 model ThirdPartyManagementSettings {
   @doc("License Cost.")
@@ -400,6 +533,7 @@ model ThirdPartyManagementSettings {
   supportCost: float32;
 }
 
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 @doc("Other Management Costs Settings.")
 model OtherManagementCostsSettings {
   @doc("Monitoring Cost Per Server Per Year.")
@@ -437,4 +571,14 @@ model BusinessCaseScope {
   @doc("ARG query.")
   @visibility(Lifecycle.Read)
   azureResourceGraphQuery?: string;
+}
+
+@added(BusinessCaseApiVersions.v2025_09_09_preview)
+@doc("Billing settings class.")
+model BillingSettings {
+  @doc("Gets or sets the licensing program.")
+  licensingProgram?: LicensingProgram;
+
+  @doc("Gets or sets the subscription ID for licensing program selected.")
+  subscriptionId?: string;
 }
