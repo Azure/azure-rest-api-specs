@@ -46,9 +46,6 @@
       "name": "applicationSecurityGroups"
     },
     {
-      "name": "AddressPrefixSets"
-    },
-    {
       "name": "BastionHosts"
     },
     {
@@ -167,6 +164,9 @@
     },
     {
       "name": "Usages"
+    },
+    {
+      "name": "AddressPrefixSets"
     }
   ],
   "paths": {
@@ -14404,26 +14404,11 @@
         "properties": {
           "$ref": "#/definitions/AddressPrefixSetPropertiesFormat",
           "description": "Properties of the address prefix set."
-        },
-        "etag": {
-          "type": "string",
-          "description": "A unique read-only string that changes whenever the resource is updated.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "Type of the resource.",
-          "readOnly": true
-        },
-        "systemData": {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
-          "description": "The system metadata related to this resource.",
-          "readOnly": true
         }
       },
       "allOf": [
         {
-          "$ref": "./common.json#/definitions/Common.SubResourceModel"
+          "$ref": "./common.json#/definitions/ProxyResource"
         }
       ]
     },
