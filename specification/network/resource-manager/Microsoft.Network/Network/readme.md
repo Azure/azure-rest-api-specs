@@ -133,6 +133,13 @@ suppressions:
     reason: Not a standard azure resource.
     where:
       - $.definitions.GetServiceGatewayServicesResult
+  - code: XMSSecretInResponse
+    from: expressRoute.json
+    reason: >-
+      activationKey is not a secret value, it is a base64 encoded string used for multi-cloud circuit provisioning.
+    where:
+      - $.definitions.ExpressRouteCircuit.properties.properties.properties.activationKey
+      - $.definitions.ExpressRouteCircuitPropertiesFormat.properties.activationKey
   - code: ResourceNameRestriction
     from: virtualNetwork.json
     reason: The resource name parameter 'virtualNetworkName' is not defined with a 'pattern' restriction. Suppress it to avoid breaking change because it is referenced by all Virtual Network APIs.

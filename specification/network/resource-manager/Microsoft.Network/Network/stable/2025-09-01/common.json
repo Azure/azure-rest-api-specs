@@ -4513,7 +4513,8 @@
         "Standard",
         "Premium",
         "Basic",
-        "Local"
+        "Local",
+        "MultiCloud"
       ],
       "x-ms-enum": {
         "name": "ExpressRouteCircuitSkuTier",
@@ -4538,6 +4539,11 @@
             "name": "Local",
             "value": "Local",
             "description": "Local"
+          },
+          {
+            "name": "MultiCloud",
+            "value": "MultiCloud",
+            "description": "MultiCloud tier for cross-cloud connectivity."
           }
         ]
       }
@@ -7412,6 +7418,36 @@
       },
       "x-ms-azure-resource": true
     },
+    "ResiliencyLevel": {
+      "type": "string",
+      "description": "The resiliency level of the ExpressRoute circuit.",
+      "enum": [
+        "Standard",
+        "High",
+        "Maximum"
+      ],
+      "x-ms-enum": {
+        "name": "ResiliencyLevel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "Standard resiliency level."
+          },
+          {
+            "name": "High",
+            "value": "High",
+            "description": "High resiliency level."
+          },
+          {
+            "name": "Maximum",
+            "value": "Maximum",
+            "description": "Maximum resiliency level."
+          }
+        ]
+      }
+    },
     "ResiliencyModel": {
       "type": "string",
       "description": "Property to indicate if the Express Route Gateway has resiliency model of MultiHomed or SingleHomed",
@@ -8043,7 +8079,8 @@
         "NotProvisioned",
         "Provisioning",
         "Provisioned",
-        "Deprovisioning"
+        "Deprovisioning",
+        "DeProvisioned"
       ],
       "x-ms-enum": {
         "name": "ServiceProviderProvisioningState",
@@ -8068,6 +8105,11 @@
             "name": "Deprovisioning",
             "value": "Deprovisioning",
             "description": "Deprovisioning"
+          },
+          {
+            "name": "DeProvisioned",
+            "value": "DeProvisioned",
+            "description": "DeProvisioned State"
           }
         ]
       }

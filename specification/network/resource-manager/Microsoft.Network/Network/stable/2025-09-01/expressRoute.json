@@ -1142,6 +1142,9 @@
         "x-ms-examples": {
           "Get ExpressRouteCircuit": {
             "$ref": "./examples/ExpressRouteCircuitGet.json"
+          },
+          "Get MultiCloud ExpressRouteCircuit": {
+            "$ref": "./examples/ExpressRouteMultiCloudCircuitGet.json"
           }
         }
       },
@@ -1215,6 +1218,12 @@
           },
           "Create ExpressRouteCircuit on ExpressRoutePort": {
             "$ref": "./examples/ExpressRouteCircuitCreateOnExpressRoutePort.json"
+          },
+          "Create MultiCloud ExpressRouteCircuit with ActivationKey": {
+            "$ref": "./examples/ExpressRouteMultiCloudCircuitCreateWithActivationKey.json"
+          },
+          "Create MultiCloud ExpressRouteCircuit with PartnerAccountId": {
+            "$ref": "./examples/ExpressRouteMultiCloudCircuitCreateWithPartnerAccountId.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1331,6 +1340,9 @@
         "x-ms-examples": {
           "Delete ExpressRouteCircuit": {
             "$ref": "./examples/ExpressRouteCircuitDelete.json"
+          },
+          "Delete MultiCloud ExpressRouteCircuit": {
+            "$ref": "./examples/ExpressRouteMultiCloudCircuitDelete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -6221,6 +6233,19 @@
           "format": "int32",
           "description": "The identifier of the circuit traffic. Outer tag for QinQ encapsulation.",
           "readOnly": true
+        },
+        "resiliencyLevel": {
+          "$ref": "./common.json#/definitions/ResiliencyLevel",
+          "description": "The resiliency level of the ExpressRoute circuit.",
+          "readOnly": true
+        },
+        "partnerAccountId": {
+          "type": "string",
+          "description": "Account ID of customer account on partner cloud provider."
+        },
+        "activationKey": {
+          "type": "string",
+          "description": "Activation Key from partner cloud provider."
         },
         "provisioningState": {
           "$ref": "./common.json#/definitions/Common.ProvisioningState",
