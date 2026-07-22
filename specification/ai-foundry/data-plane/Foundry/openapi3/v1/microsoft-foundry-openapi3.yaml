@@ -38411,16 +38411,6 @@ components:
         version:
           type: string
           description: The version identifier of the agent.
-    AgentRunParams:
-      type: object
-      properties:
-        max_concurrency:
-          type: integer
-          format: int32
-          minimum: 1
-          description: The maximum number of agent runs to execute concurrently. Defaults to 1, which invokes the agent sequentially.
-          default: 1
-      description: Represents a set of parameters used to control how an Azure AI agent is invoked during an evaluation run.
     AgentSessionResource:
       type: object
       required:
@@ -38814,10 +38804,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/OpenAI.Tool'
-        run_params:
-          allOf:
-            - $ref: '#/components/schemas/AgentRunParams'
-          description: The parameters used to control how the agent is invoked during evaluation, such as run concurrency.
       allOf:
         - $ref: '#/components/schemas/Target'
       description: Represents a target specifying an Azure AI agent.
@@ -38844,10 +38830,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/OpenAI.Tool'
-        run_params:
-          allOf:
-            - $ref: '#/components/schemas/AgentRunParams'
-          description: The parameters used to control how the agent is invoked during evaluation, such as run concurrency.
       allOf:
         - $ref: '#/components/schemas/TargetUpdate'
       description: Represents a target specifying an Azure AI agent.
@@ -44298,6 +44280,7 @@ components:
           red_team_taxonomy: '#/components/schemas/RedTeamTaxonomyItemGenerationParams'
           response_retrieval: '#/components/schemas/ResponseRetrievalItemGenerationParams'
           conversation_gen_preview: '#/components/schemas/ConversationGenPreviewItemGenerationParams'
+          target_completion: '#/components/schemas/TargetCompletionItemGenerationParams'
           synthetic_data_gen_preview: '#/components/schemas/SyntheticDataGenerationPreviewItemGenerationParams'
       description: Represents the set of parameters used to control item generation operations.
     ItemGenerationParamsType:
@@ -44311,6 +44294,7 @@ components:
             - red_team_taxonomy
             - synthetic_data_gen_preview
             - conversation_gen_preview
+            - target_completion
       description: The types of parameters for red team item generation.
     JobStatus:
       anyOf:
@@ -74294,6 +74278,25 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvalRunDataSource'
       description: Represents a data source for target-based completion evaluation configuration.
+    TargetCompletionItemGenerationParams:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - target_completion
+          description: The type of item generation parameters, always `target_completion`.
+        max_concurrency:
+          type: integer
+          format: int32
+          minimum: 1
+          description: The maximum number of target completions to execute concurrently. Defaults to 1, which invokes the target sequentially.
+          default: 1
+      allOf:
+        - $ref: '#/components/schemas/ItemGenerationParams'
+      description: Represents the parameters for target completion item generation.
     TargetUpdate:
       type: object
       required:

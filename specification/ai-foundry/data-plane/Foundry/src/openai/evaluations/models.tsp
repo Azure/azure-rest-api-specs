@@ -220,6 +220,9 @@ union ItemGenerationParamsType {
 
   /** Parameters for conversation simulation item generation. */
   conversationGenPreview: "conversation_gen_preview",
+
+  /** Parameters for target completion item generation. */
+  targetCompletion: "target_completion",
 }
 
 /** The types of parameters for synthetic data generation item generation. */
@@ -330,9 +333,6 @@ model AzureAIAgentTarget extends Target {
   tool_descriptions?: ToolDescription[];
 
   tools?: OpenAI.Tool[];
-
-  /** The parameters used to control how the agent is invoked during evaluation, such as run concurrency. */
-  run_params?: AgentRunParams;
 }
 
 /** Description of a tool that can be used by an agent. */
@@ -357,13 +357,6 @@ model ModelSamplingParams {
 
   /** The maximum number of tokens allowed in the completion. */
   max_completion_tokens?: int32;
-}
-
-/** Represents a set of parameters used to control how an Azure AI agent is invoked during an evaluation run. */
-model AgentRunParams {
-  /** The maximum number of agent runs to execute concurrently. Defaults to 1, which invokes the agent sequentially. */
-  @minValue(1)
-  max_concurrency?: int32 = 1;
 }
 
 /** Base class for run data sources with discriminator support. */
@@ -537,6 +530,16 @@ model ConversationGenPreviewItemGenerationParams extends ItemGenerationParams {
 
   /** Sampling parameters for the conversation generation. */
   sampling_params?: ModelSamplingParams;
+}
+
+/** Represents the parameters for target completion item generation. */
+model TargetCompletionItemGenerationParams extends ItemGenerationParams {
+  /** The type of item generation parameters, always `target_completion`. */
+  type: ItemGenerationParamsType.targetCompletion;
+
+  /** The maximum number of target completions to execute concurrently. Defaults to 1, which invokes the target sequentially. */
+  @minValue(1)
+  max_concurrency?: int32 = 1;
 }
 
 // ── Trace Source types ────────────────────────────────────────────────────────
