@@ -36,6 +36,7 @@ model SqlOnPremSettingsProperties is AzureResourceProperties {
   securitySettings: SqlSecuritySettings;
 
   @doc("Metadata describing the reconciliation status of the settings.")
+  @visibility(Lifecycle.Read)
   reconciliationInfo?: SqlReconciliationInfo;
 }
 
