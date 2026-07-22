@@ -1494,6 +1494,7 @@ model Action {
 /**
  * The type of action to be executed.
  */
+@@clientName(ActionType, "DataTransferActionType");
 union ActionType {
   string,
 
