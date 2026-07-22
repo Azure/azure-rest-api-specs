@@ -1704,12 +1704,12 @@
           }
         }
       },
-      "patch": {
+      "put": {
         "operationId": "HorizonDbPrivateEndpointConnections_Update",
         "tags": [
           "HorizonDbPrivateEndpointConnections"
         ],
-        "description": "Updates a private endpoint connection.",
+        "description": "Approves or rejects a private endpoint connection.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1734,34 +1734,26 @@
             "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/parameters/PrivateEndpointConnectionName"
           },
           {
-            "name": "properties",
+            "name": "resource",
             "in": "body",
-            "description": "The resource properties to be updated.",
+            "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Azure.ResourceManager.PrivateEndpointConnectionUpdate"
+              "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "Resource 'PrivateEndpointConnectionResource' update operation succeeded",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
-          "202": {
-            "description": "Resource update request accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
+          "201": {
+            "description": "Resource 'PrivateEndpointConnectionResource' create operation succeeded",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
@@ -1775,12 +1767,7 @@
           "Approve or reject a private endpoint connection": {
             "$ref": "./examples/PrivateEndpointConnections_Update.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "delete": {
         "operationId": "HorizonDbPrivateEndpointConnections_Delete",
@@ -2416,26 +2403,6 @@
     "Azure.Core.azureLocation": {
       "type": "string",
       "description": "Represents an Azure geography region where supported resource providers live."
-    },
-    "Azure.ResourceManager.PrivateEndpointConnectionUpdate": {
-      "type": "object",
-      "description": "PATCH model for private endpoint connections",
-      "properties": {
-        "properties": {
-          "type": "object",
-          "description": "The private endpoint connection properties",
-          "properties": {
-            "privateEndpoint": {
-              "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpoint",
-              "description": "The private endpoint resource."
-            },
-            "privateLinkServiceConnectionState": {
-              "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateLinkServiceConnectionState",
-              "description": "A collection of information about the state of the connection between service consumer and provider."
-            }
-          }
-        }
-      }
     },
     "CreateModeCluster": {
       "type": "string",

@@ -117,8 +117,8 @@ interface HorizonDbPrivateEndpointConnections {
     PrivateEndpointConnectionResource
   >;
 
-  @doc("Updates a private endpoint connection.")
-  update is HorizonDbPrivateEndpointOperations.CustomPatchAsync<
+  @doc("Approves or rejects a private endpoint connection.")
+  update is HorizonDbPrivateEndpointOperations.CreateOrReplaceSync<
     HorizonDbCluster,
     PrivateEndpointConnectionResource
   >;
