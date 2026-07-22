@@ -18,8 +18,8 @@ alias HealthInsightsRetryAfterTrait = ResponseHeadersTrait<
 @doc("Provides the 'x-ms-request-id' header to enable request correlation in responses.")
 @trait("RequestIdResponseHeader")
 model RequestIdResponseHeaderTrait {
-  @doc("An opaque, globally-unique, server-generated string identifier for the request.")
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
+  @doc("An opaque, globally-unique, server-generated string identifier for the request.")
   requestId: {
     @traitLocation(TraitLocation.Response)
     response: RequestIdResponseHeader;
