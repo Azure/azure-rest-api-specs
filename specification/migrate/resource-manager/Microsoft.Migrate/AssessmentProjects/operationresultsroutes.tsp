@@ -13,5 +13,8 @@ namespace Microsoft.Migrate;
 @armResourceOperations
 interface OperationStatuses {
   @added(AssessmentProjectApiVersions.v2025_09_09_preview)
-  getSubscriptionStatus is ArmResourceRead<OperationResults>;
+  getSubscriptionStatus is GetResourceOperationStatus<
+    OperationResults,
+    SubscriptionLocationActionScope
+  >;
 }
