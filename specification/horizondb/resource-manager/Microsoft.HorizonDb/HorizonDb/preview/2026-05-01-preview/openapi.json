@@ -2795,6 +2795,10 @@
         "properties": {
           "$ref": "#/definitions/HorizonDbClusterProperties",
           "description": "The resource-specific properties for this resource."
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
         }
       },
       "allOf": [
@@ -2832,6 +2836,10 @@
             "type": "string"
           }
         },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
         "properties": {
           "$ref": "#/definitions/HorizonDbClusterPropertiesForPatchUpdate",
           "description": "The properties that can be updated for a HorizonDB cluster."
@@ -2858,6 +2866,24 @@
       "required": [
         "value"
       ]
+    },
+    "HorizonDbClusterMirroring": {
+      "type": "object",
+      "description": "Mirroring configuration for a HorizonDB cluster.",
+      "properties": {
+        "databaseNames": {
+          "type": "array",
+          "description": "The names of the databases to mirror.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "userAssignedIdentityId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of the user-assigned managed identity used for mirroring."
+        }
+      }
     },
     "HorizonDbClusterParameterGroupConnectionProperties": {
       "type": "object",
@@ -3018,6 +3044,15 @@
             "update",
             "create"
           ]
+        },
+        "mirroring": {
+          "$ref": "#/definitions/HorizonDbClusterMirroring",
+          "description": "Mirroring configuration for the HorizonDB cluster.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         }
       },
       "required": [
@@ -3063,6 +3098,13 @@
         "computeModel": {
           "$ref": "#/definitions/HorizonDbComputeModel",
           "description": "The compute model for the cluster.",
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
+        "mirroring": {
+          "$ref": "#/definitions/HorizonDbClusterMirroring",
+          "description": "Mirroring configuration for the HorizonDB cluster.",
           "x-ms-mutability": [
             "update"
           ]
