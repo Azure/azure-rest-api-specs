@@ -24,7 +24,7 @@ These settings apply only when `--tag=package-v1` is specified on the command li
 
 ```yaml $(tag) == 'package-v1'
 input-file:
-  - openapi3/v1/VoiceLive.json
+  - stable/v1/VoiceLive.json
 ```
 
 ### Tag: package-virtual-public-preview
@@ -33,7 +33,7 @@ These settings apply only when `--tag=package-virtual-public-preview` is specifi
 
 ```yaml $(tag) == 'package-virtual-public-preview'
 input-file:
-  - openapi3/virtual-public-preview/VoiceLive.json
+  - preview/virtual-public-preview/VoiceLive.json
 ```
 
 ### Suppression
