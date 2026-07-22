@@ -80,7 +80,11 @@ using Microsoft.Mission;
   "IsAvailable",
   "csharp"
 );
-@@clientName(DestinationType, "CommunityEndpointDestinationType", "csharp");
+@@clientName(
+  DestinationType,
+  "VirtualEnclaveCommunityEndpointDestinationType",
+  "csharp"
+);
 @@clientName(CommunityEndpointProtocol.ANY, "Any", "csharp");
 @@clientName(CommunityEndpointProtocol.TCP, "Tcp", "csharp");
 @@clientName(CommunityEndpointProtocol.UDP, "Udp", "csharp");
@@ -166,5 +170,86 @@ using Microsoft.Mission;
 );
 @@clientName(ServiceIdentifier.PrivateDNSZones, "PrivateDnsZones", "csharp");
 @@clientName(ActionPerformed, "ApproverActionPerformed", "csharp");
+@@clientName(DedicatedHubResource, "VirtualEnclaveDedicatedHub", "csharp");
+@@clientName(
+  DedicatedHubProperties,
+  "VirtualEnclaveDedicatedHubProperties",
+  "csharp"
+);
+@@clientName(
+  DedicatedHubPatchModel,
+  "VirtualEnclaveDedicatedHubPatch",
+  "csharp"
+);
+@@clientName(
+  DedicatedHubPatchProperties,
+  "VirtualEnclaveDedicatedHubPatchProperties",
+  "csharp"
+);
+@@clientName(
+  CommunityEndpointDestinationRule,
+  "VirtualEnclaveCommunityEndpointDestinationRule",
+  "csharp"
+);
+@@clientName(
+  CommunityEndpointPatchProperties,
+  "VirtualEnclaveCommunityEndpointPatchProperties",
+  "csharp"
+);
+@@clientName(
+  CommunityEndpointProtocol,
+  "VirtualEnclaveCommunityEndpointProtocol",
+  "csharp"
+);
+@@clientName(Designation, "VirtualEnclaveDesignation", "csharp");
+@@clientName(
+  EnclaveEndpointPatchProperties,
+  "VirtualEnclaveEndpointPatchProperties",
+  "csharp"
+);
+@@clientName(
+  MonitoringDestination,
+  "VirtualEnclaveMonitoringDestination",
+  "csharp"
+);
+@@clientName(
+  MonitoringDestinationPatchModel,
+  "VirtualEnclaveMonitoringDestinationPatch",
+  "csharp"
+);
+@@clientName(
+  MonitoringDestinationType,
+  "VirtualEnclaveMonitoringDestinationType",
+  "csharp"
+);
+@@clientName(
+  MonitoringSettingsModel,
+  "VirtualEnclaveMonitoringSettings",
+  "csharp"
+);
+@@clientName(
+  MonitoringSettingsPatchModel,
+  "VirtualEnclaveMonitoringSettingsPatch",
+  "csharp"
+);
+@@clientName(
+  RbacInheritanceMode,
+  "VirtualEnclaveRbacInheritanceMode",
+  "csharp"
+);
+@@clientName(
+  ResourceVisibilityMode,
+  "VirtualEnclaveResourceVisibilityMode",
+  "csharp"
+);
+@@clientName(SecurityProvider, "VirtualEnclaveSecurityProvider", "csharp");
+@@clientName(TransitHubState, "VirtualEnclaveTransitHubState", "csharp");
+@@clientName(
+  TransitOptionParams,
+  "VirtualEnclaveTransitOptionContent",
+  "csharp"
+);
+@@clientName(TransitOptionType, "VirtualEnclaveTransitOptionType", "csharp");
+@@clientName(UpdateMode, "VirtualEnclaveUpdateMode", "csharp");
 
-@@clientName(Microsoft.Mission, "VirtualEnclavesMgmtClient", "python");
+@@clientName(Microsoft.Mission, "EnclaveMgmtClient", "python");

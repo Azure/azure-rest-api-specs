@@ -17,6 +17,7 @@ words:
   - includable
   - includables
   - logprobs
+  - dedup
 overrides:
   # Red-team related terms
   - filename:
@@ -69,3 +70,16 @@ overrides:
       - logit_bias
       - apim-request-id
       - davinci # legacy OpenAI model name
+  # Agents optimization terms
+  - filename:
+    - '**/specification/ai-foundry/data-plane/Foundry/src/agents-optimization'
+    - '**/specification/ai-foundry/data-plane/Foundry/openapi3'
+    - '**/specification/ai-foundry/data-plane/Foundry/stable'
+    - '**/specification/ai-foundry/data-plane/Foundry/preview'
+    words:
+      - Likert # Likert scale - common evaluation methodology
+  - filename:
+    - '**/specification/ai-foundry/data-plane/Foundry/.github/skills'
+    words:
+      - fdoc
+      - reemits

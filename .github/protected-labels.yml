@@ -1,0 +1,64 @@
+# Protected Labels Configuration
+# This file defines which labels can only be applied by authorized users.
+# If an unauthorized user applies a protected label, the bot removes it.
+#
+# The problem: service teams self-applying "Approved" labels to bypass architect review.
+# This workflow ensures only authorized reviewers can sign off via labels.
+#
+# Format:
+#   global-approvers: users who can apply ANY protected label
+#   LabelName: users who can apply THIS specific label (in addition to global)
+#
+# To update: submit a PR modifying this file.
+
+# Global approvers can apply any protected label.
+global-approvers:
+  - lmazuel
+  - samvaity
+  - praveenkuttappan
+
+# Namespace approval labels (plane-aware)
+namespace-dotnet-approved:
+  management-plane:
+    - ArthurMa1978
+    - m-nash
+  data-plane:
+    - jsquire
+    - m-nash
+namespace-java-approved:
+  management-plane:
+    - ArthurMa1978
+    - m-nash
+  data-plane:
+    - JonathanGiles
+    - alzimmermsft
+namespace-python-approved:
+  management-plane:
+    - ArthurMa1978
+    - m-nash
+  data-plane:
+    - xirzec
+    - kashifkhan
+namespace-typescript-approved:
+  management-plane:
+    - ArthurMa1978
+    - m-nash
+  data-plane:
+    - xirzec
+    - maorleger
+namespace-go-approved:
+  management-plane:
+    - ArthurMa1978
+    - m-nash
+  data-plane:
+    - jhendrixMSFT
+namespace-rust-approved:
+  management-plane:
+    - ArthurMa1978
+    - m-nash
+  data-plane:
+    - heaths
+namespace-approved-all:
+  management-plane:
+    - ArthurMa1978
+    - m-nash
