@@ -141,7 +141,7 @@ interface BrowserSessions {
   list is Operations.ResourceList<BrowserSession>;
 
   @added(Versions.v2026_06_01_preview)
-  @doc("Creates a browser session for the specified session and workspace ID. Only creation of a new browser session is supported; a request that targets an existing session returns a 4xx error. The sourceId and sourceType are supplied through request headers and returned on GET. Requires Bearer JWT access token provided by Entra ID.")
+  @doc("Creates or updates a browser session for the specified session and workspace ID. The sourceId and sourceType are supplied through request headers. Requires Bearer JWT access token provided by Entra ID.")
   createOrUpdate is Operations.ResourceCreateOrUpdate<
     BrowserSession,
     TraitOverride<RequestHeadersTrait<{
