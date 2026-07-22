@@ -1,0 +1,1169 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ProvisioningDeviceClient",
+    "version": "2026-11-15-preview",
+    "description": "API for device runtime operations with the Azure IoT Hub Device Provisioning\nService",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "global.azure-devices-provisioning.net",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "tags": [],
+  "paths": {
+    "/{idScope}/registrations/{registrationId}": {
+      "post": {
+        "operationId": "RuntimeRegistration_DeviceRegistrationStatusLookup",
+        "summary": "Gets the device registration status.",
+        "description": "Gets the device registration status.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "registrationId",
+            "in": "path",
+            "description": "Registration ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "idScope",
+            "in": "path",
+            "description": "The scope of the DPS instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Device registration.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceRegistration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeviceRegistrationResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ProvisioningServiceErrorDetails"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code for specific error that occurred."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RuntimeRegistration_DeviceRegistrationStatusLookup_MaximumSet_Gen": {
+            "$ref": "./examples/RuntimeRegistration_DeviceRegistrationStatusLookup_MaximumSet_Gen.json"
+          },
+          "RuntimeRegistration_DeviceRegistrationStatusLookup_MinimumSet_Gen": {
+            "$ref": "./examples/RuntimeRegistration_DeviceRegistrationStatusLookup_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/{idScope}/registrations/{registrationId}/getDeviceUpdate": {
+      "post": {
+        "operationId": "DeviceUpdate_GetDeviceUpdate",
+        "summary": "Checks for an available device update (regular / operational path).",
+        "description": "Checks for an available device update on the regular / operational path. The\ndevice selects this endpoint once it is provisioned.\n\nOn failure, ADU's `error.code` string is returned verbatim in the\n`x-ms-error-code` header and mirrored in the error body `info` dictionary\nunder `aduErrorCode` (plus `aduErrorTarget` when applicable). Devices should\nbranch on that code rather than the HTTP status.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "registrationId",
+            "in": "path",
+            "description": "The registration ID is alphanumeric, lowercase, and may contain hyphens.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "idScope",
+            "in": "path",
+            "description": "The scope of the DPS instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Update check request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateCheckRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/UpdateCheckResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ProvisioningServiceErrorDetails"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code for specific error that occurred."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeviceUpdate_GetDeviceUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/DeviceUpdate_GetDeviceUpdate_MaximumSet_Gen.json"
+          },
+          "DeviceUpdate_GetDeviceUpdate_MinimumSet_Gen": {
+            "$ref": "./examples/DeviceUpdate_GetDeviceUpdate_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/{idScope}/registrations/{registrationId}/onboarding/getDeviceUpdate": {
+      "post": {
+        "operationId": "DeviceUpdate_GetOnboardingDeviceUpdate",
+        "summary": "Checks for an available device update (onboarding / bootstrap path).",
+        "description": "Checks for an available device update on the onboarding / bootstrap path. The\ndevice selects this endpoint before it is provisioned; only the external device\nidentifier is available (no ADR device UUID yet).\n\nOn failure, ADU's `error.code` string is returned verbatim in the\n`x-ms-error-code` header and mirrored in the error body `info` dictionary\nunder `aduErrorCode` (plus `aduErrorTarget` when applicable). Devices should\nbranch on that code rather than the HTTP status.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "registrationId",
+            "in": "path",
+            "description": "The registration ID is alphanumeric, lowercase, and may contain hyphens.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "idScope",
+            "in": "path",
+            "description": "The scope of the DPS instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Update check request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateCheckRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/UpdateCheckResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ProvisioningServiceErrorDetails"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code for specific error that occurred."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeviceUpdate_GetOnboardingDeviceUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/DeviceUpdate_GetOnboardingDeviceUpdate_MaximumSet_Gen.json"
+          },
+          "DeviceUpdate_GetOnboardingDeviceUpdate_MinimumSet_Gen": {
+            "$ref": "./examples/DeviceUpdate_GetOnboardingDeviceUpdate_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/{idScope}/registrations/{registrationId}/operations/{operationId}": {
+      "get": {
+        "operationId": "RuntimeRegistration_OperationStatusLookup",
+        "summary": "Gets the registration operation status.",
+        "description": "Gets the registration operation status.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "registrationId",
+            "in": "path",
+            "description": "Registration ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "Operation ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "idScope",
+            "in": "path",
+            "description": "The scope of the DPS instance.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RegistrationOperationStatus"
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/RegistrationOperationStatus"
+            },
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "retry-after": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ProvisioningServiceErrorDetails"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code for specific error that occurred."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RuntimeRegistration_OperationStatusLookup_MaximumSet_Gen": {
+            "$ref": "./examples/RuntimeRegistration_OperationStatusLookup_MaximumSet_Gen.json"
+          },
+          "RuntimeRegistration_OperationStatusLookup_MinimumSet_Gen": {
+            "$ref": "./examples/RuntimeRegistration_OperationStatusLookup_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/{idScope}/registrations/{registrationId}/register": {
+      "put": {
+        "operationId": "RuntimeRegistration_RegisterDeviceAndIssueCertificate",
+        "summary": "Registers the devices and optionally issue operational certificates for IoT devices.",
+        "description": "Registers the devices and optionally issue operational certificates for IoT devices.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "registrationId",
+            "in": "path",
+            "description": "The registration ID is alphanumeric, lowercase, and may contain hyphens.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "idScope",
+            "in": "path",
+            "description": "The scope of the DPS instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceRegistration",
+            "in": "body",
+            "description": "Device registration request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceRegistration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RegistrationOperationStatus"
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/RegistrationOperationStatus"
+            },
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "retry-after": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ProvisioningServiceErrorDetails"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code for specific error that occurred."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RuntimeRegistration_RegisterDeviceAndIssueCertificate_MaximumSet_Gen": {
+            "$ref": "./examples/RuntimeRegistration_RegisterDeviceAndIssueCertificate_MaximumSet_Gen.json"
+          },
+          "RuntimeRegistration_RegisterDeviceAndIssueCertificate_MinimumSet_Gen": {
+            "$ref": "./examples/RuntimeRegistration_RegisterDeviceAndIssueCertificate_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/{idScope}/registrations/{registrationId}/reportDeviceUpdateStatus": {
+      "post": {
+        "operationId": "DeviceUpdate_ReportDeviceUpdateStatus",
+        "summary": "Reports the terminal result of a device update installation.",
+        "description": "Reports the terminal result of a device update installation. Idempotent on\nworkflowId; ADU routes the report to the correct update family.\n\nOn failure, ADU's `error.code` string is returned verbatim in the\n`x-ms-error-code` header and mirrored in the error body `info` dictionary\nunder `aduErrorCode` (plus `aduErrorTarget` when applicable). Devices should\nbranch on that code rather than the HTTP status.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "registrationId",
+            "in": "path",
+            "description": "The registration ID is alphanumeric, lowercase, and may contain hyphens.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "idScope",
+            "in": "path",
+            "description": "The scope of the DPS instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Status report request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReportStatusRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ProvisioningServiceErrorDetails"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code for specific error that occurred."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeviceUpdate_ReportDeviceUpdateStatus_MaximumSet_Gen": {
+            "$ref": "./examples/DeviceUpdate_ReportDeviceUpdateStatus_MaximumSet_Gen.json"
+          },
+          "DeviceUpdate_ReportDeviceUpdateStatus_MinimumSet_Gen": {
+            "$ref": "./examples/DeviceUpdate_ReportDeviceUpdateStatus_MinimumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AgentInfo": {
+      "type": "object",
+      "description": "Information describing the ADU agent and the device it runs on, used to match\nthe device to an applicable update.",
+      "properties": {
+        "agentSdkVersion": {
+          "type": "string",
+          "description": "Agent SDK version. Diagnostic only; not used for targeting.",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "agentProfile": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Opaque capability identifier; the service maps it to supported manifest versions\nand installability constraints. The device must not infer meaning from the value.",
+          "minimum": 1
+        },
+        "compatibilityProperties": {
+          "type": "object",
+          "description": "Device compatibility attributes; combined with agentProfile to compute the device class.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "agentSdkVersion",
+        "agentProfile",
+        "compatibilityProperties"
+      ]
+    },
+    "AssignedDeviceSubstatus": {
+      "type": "string",
+      "description": "Substatus for 'Assigned' devices. Possible values include -\n'initialAssignment': Device has been assigned to an IoT hub for the first time,\n'deviceDataMigrated': Device has been assigned to a different IoT hub and its\ndevice data was migrated from the previously assigned IoT hub. Device data was\nremoved from the previously assigned IoT hub, 'deviceDataReset':  Device has\nbeen assigned to a different IoT hub and its device data was populated from the\ninitial state stored in the enrollment. Device data was removed from the\npreviously assigned IoT hub, 'reprovisionedToInitialAssignment': Device has\nbeen re-provisioned to a previously assigned IoT hub.",
+      "enum": [
+        "initialAssignment",
+        "deviceDataMigrated",
+        "deviceDataReset",
+        "reprovisionedToInitialAssignment"
+      ],
+      "x-ms-enum": {
+        "name": "AssignedDeviceSubstatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "initialAssignment",
+            "value": "initialAssignment",
+            "description": "initialAssignment"
+          },
+          {
+            "name": "deviceDataMigrated",
+            "value": "deviceDataMigrated",
+            "description": "deviceDataMigrated"
+          },
+          {
+            "name": "deviceDataReset",
+            "value": "deviceDataReset",
+            "description": "deviceDataReset"
+          },
+          {
+            "name": "reprovisionedToInitialAssignment",
+            "value": "reprovisionedToInitialAssignment",
+            "description": "reprovisionedToInitialAssignment"
+          }
+        ]
+      }
+    },
+    "DeviceRegistration": {
+      "type": "object",
+      "description": "Device registration.",
+      "properties": {
+        "registrationId": {
+          "type": "string",
+          "description": "The registration ID is a case-insensitive string (up to 128 characters long) of\nalphanumeric characters plus certain special characters : . _ -. No special\ncharacters allowed at start or end."
+        },
+        "tpm": {
+          "$ref": "#/definitions/TpmAttestation",
+          "description": "Attestation via TPM."
+        },
+        "csr": {
+          "type": "string",
+          "description": "A Base64-encoded DER certificate signing request (CSR) in PKCS #10 format,\nexcluding PEM headers and footers. The Common Name (CN) must match the device\nregistrationId. Including this field in the\nRuntimeRegistration_DeviceRegistrationStatusLookup operation will result in\na bad request."
+        },
+        "payload": {
+          "type": "object",
+          "description": "Any object",
+          "additionalProperties": {}
+        }
+      }
+    },
+    "DeviceRegistrationResult": {
+      "type": "object",
+      "description": "Device registration result.",
+      "properties": {
+        "tpm": {
+          "$ref": "#/definitions/TpmRegistrationResult",
+          "description": "TPM registration result."
+        },
+        "x509": {
+          "$ref": "#/definitions/X509RegistrationResult",
+          "description": "X509 registration result."
+        },
+        "symmetricKey": {
+          "$ref": "#/definitions/SymmetricKeyRegistrationResult",
+          "description": "Registration result returned when using SymmetricKey attestation."
+        },
+        "registrationId": {
+          "type": "string",
+          "description": "This id is used to uniquely identify a device registration of an enrollment.\nA case-insensitive string (up to 128 characters long) of alphanumeric\ncharacters plus certain special characters : . _ -. No special characters\nallowed at start or end.",
+          "readOnly": true
+        },
+        "createdDateTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Registration create date time (in UTC).",
+          "readOnly": true
+        },
+        "assignedHub": {
+          "type": "string",
+          "description": "Assigned Azure IoT Hub.",
+          "readOnly": true
+        },
+        "deviceId": {
+          "type": "string",
+          "description": "Device ID.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/EnrollmentStatus",
+          "description": "Enrollment status.",
+          "readOnly": true
+        },
+        "substatus": {
+          "$ref": "#/definitions/AssignedDeviceSubstatus",
+          "description": "Substatus for 'Assigned' devices. Possible values include -\n'initialAssignment': Device has been assigned to an IoT hub for the first time,\n'deviceDataMigrated': Device has been assigned to a different IoT hub and its\ndevice data was migrated from the previously assigned IoT hub. Device data was\nremoved from the previously assigned IoT hub, 'deviceDataReset':  Device has\nbeen assigned to a different IoT hub and its device data was populated from the\ninitial state stored in the enrollment. Device data was removed from the\npreviously assigned IoT hub, 'reprovisionedToInitialAssignment': Device has\nbeen re-provisioned to a previously assigned IoT hub.",
+          "readOnly": true
+        },
+        "errorCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Error code.",
+          "readOnly": true
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Error message.",
+          "readOnly": true
+        },
+        "lastUpdatedDateTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last updated date time (in UTC).",
+          "readOnly": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "The entity tag associated with the resource.",
+          "readOnly": true
+        },
+        "payload": {
+          "type": "object",
+          "description": "Any object",
+          "additionalProperties": {},
+          "readOnly": true
+        },
+        "issuedCertificateChain": {
+          "type": "array",
+          "description": "An array containing the full certificate chain for the issued certificate.\nThe first element is the issued leaf certificate, followed by any intermediate\ncertification authorities (ICAs), and ending with the root certification authority (CA).\nEach certificate in the array is the issuer of the previous certificate.\nThis property is not included in responses for the\nRuntimeRegistration_DeviceRegistrationStatusLookup operation.",
+          "items": {
+            "type": "string",
+            "format": "byte"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "EnrollmentStatus": {
+      "type": "string",
+      "description": "Enrollment status.",
+      "enum": [
+        "unassigned",
+        "assigning",
+        "assigned",
+        "failed",
+        "disabled"
+      ],
+      "x-ms-enum": {
+        "name": "EnrollmentStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "unassigned",
+            "value": "unassigned",
+            "description": "unassigned"
+          },
+          {
+            "name": "assigning",
+            "value": "assigning",
+            "description": "assigning"
+          },
+          {
+            "name": "assigned",
+            "value": "assigned",
+            "description": "assigned"
+          },
+          {
+            "name": "failed",
+            "value": "failed",
+            "description": "failed"
+          },
+          {
+            "name": "disabled",
+            "value": "disabled",
+            "description": "disabled"
+          }
+        ]
+      }
+    },
+    "FailureOrigin": {
+      "type": "string",
+      "description": "Best-effort attestation of which subsystem produced a failure. Advisory only.\nMirrors the ADU `FailureOrigin` enum; extensible union for forward-compat.",
+      "enum": [
+        "NOT_APPLICABLE",
+        "ADU_CLOUD_SERVICE",
+        "ADU_MANAGED_RESOURCE",
+        "AGENT_CORE",
+        "AGENT_EXTENSION",
+        "AGENT_DEPENDENCY",
+        "DEVICE",
+        "OTHER"
+      ],
+      "x-ms-enum": {
+        "name": "FailureOrigin",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotApplicable",
+            "value": "NOT_APPLICABLE",
+            "description": "No failure, or origin not applicable."
+          },
+          {
+            "name": "AduCloudService",
+            "value": "ADU_CLOUD_SERVICE",
+            "description": "The ADU cloud service."
+          },
+          {
+            "name": "AduManagedResource",
+            "value": "ADU_MANAGED_RESOURCE",
+            "description": "An ADU-managed resource."
+          },
+          {
+            "name": "AgentCore",
+            "value": "AGENT_CORE",
+            "description": "The device agent core."
+          },
+          {
+            "name": "AgentExtension",
+            "value": "AGENT_EXTENSION",
+            "description": "An agent extension."
+          },
+          {
+            "name": "AgentDependency",
+            "value": "AGENT_DEPENDENCY",
+            "description": "An agent dependency."
+          },
+          {
+            "name": "Device",
+            "value": "DEVICE",
+            "description": "The device itself."
+          },
+          {
+            "name": "Other",
+            "value": "OTHER",
+            "description": "Some other origin."
+          }
+        ]
+      }
+    },
+    "InstallResult": {
+      "type": "object",
+      "description": "Terminal install result. Mirrors the ADU `InstallResult` model: the top-level\nstep fields (spread from `StepResult`) plus an optional per-step breakdown.",
+      "properties": {
+        "outcome": {
+          "$ref": "#/definitions/Outcome",
+          "description": "Terminal outcome of this step."
+        },
+        "failureOrigin": {
+          "$ref": "#/definitions/FailureOrigin",
+          "description": "Which subsystem produced a failure. Advisory only."
+        },
+        "resultCode": {
+          "type": "integer",
+          "format": "int64",
+          "description": "A positive value indicates success; a non-positive value indicates failure. Diagnostic only."
+        },
+        "extendedResultCodes": {
+          "type": "string",
+          "description": "Comma-separated unsigned hexadecimal int32 codes for diagnostic correlation. Opaque to the service.",
+          "maxLength": 1024
+        },
+        "resultDetails": {
+          "type": "string",
+          "description": "Human-readable diagnostic detail. Not parsed programmatically.",
+          "maxLength": 1024
+        },
+        "stepResults": {
+          "type": "object",
+          "description": "Per-step outcomes, keyed `step_0`, `step_1`, …. May be omitted on success;\nshould be present on failure. Typed per the ADU contract (values are `StepResult`).",
+          "additionalProperties": {
+            "$ref": "#/definitions/StepResult"
+          }
+        }
+      },
+      "required": [
+        "outcome",
+        "failureOrigin",
+        "resultCode",
+        "extendedResultCodes"
+      ]
+    },
+    "InstalledUpdateId": {
+      "type": "object",
+      "description": "Identifier of an update.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Update provider. Alphanumeric plus '.' and '-'.",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9.\\-]+$"
+        },
+        "name": {
+          "type": "string",
+          "description": "Update name. Alphanumeric plus '.' and '-'.",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9.\\-]+$"
+        },
+        "version": {
+          "type": "string",
+          "description": "2 to 4-part numeric version, e.g. 1.2, 1.2.3, 1.2.3.4.",
+          "pattern": "^\\d+(\\.\\d+){1,3}$"
+        }
+      },
+      "required": [
+        "provider",
+        "name",
+        "version"
+      ]
+    },
+    "Outcome": {
+      "type": "string",
+      "description": "Terminal outcome of an update attempt or step. Mirrors the ADU `Outcome` enum;\nmodeled as an extensible union so ADU can add outcomes without a breaking change.",
+      "enum": [
+        "SUCCEEDED",
+        "FAILED",
+        "CANCELED",
+        "SKIPPED"
+      ],
+      "x-ms-enum": {
+        "name": "Outcome",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "SUCCEEDED",
+            "description": "The attempt succeeded."
+          },
+          {
+            "name": "Failed",
+            "value": "FAILED",
+            "description": "The attempt failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "CANCELED",
+            "description": "The attempt was canceled."
+          },
+          {
+            "name": "Skipped",
+            "value": "SKIPPED",
+            "description": "The attempt was skipped."
+          }
+        ]
+      }
+    },
+    "ProvisioningServiceErrorDetails": {
+      "type": "object",
+      "description": "Contains the properties of an error returned by the Azure IoT Hub Provisioning\nService.",
+      "properties": {
+        "errorCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Numeric error code."
+        },
+        "trackingId": {
+          "type": "string",
+          "description": "Error tracking ID."
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message."
+        },
+        "info": {
+          "type": "object",
+          "description": "Dictionary of <string>",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "timestampUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Error timestamp (UTC)."
+        }
+      }
+    },
+    "RegistrationOperationStatus": {
+      "type": "object",
+      "description": "Registration operation status.",
+      "properties": {
+        "operationId": {
+          "type": "string",
+          "description": "Operation ID.",
+          "minLength": 1
+        },
+        "status": {
+          "$ref": "#/definitions/EnrollmentStatus",
+          "description": "Device enrollment status."
+        },
+        "registrationState": {
+          "$ref": "#/definitions/DeviceRegistrationResult",
+          "description": "Device registration result."
+        }
+      },
+      "required": [
+        "operationId"
+      ]
+    },
+    "ReportDeviceUpdateStatusResult": {
+      "type": "object",
+      "description": "Result of a reportDeviceUpdateStatus call. Empty in this preview; fields may be\nadded later."
+    },
+    "ReportStatusRequest": {
+      "type": "object",
+      "description": "Request body reporting the terminal result of an update installation.",
+      "properties": {
+        "workflowId": {
+          "type": "string",
+          "description": "The workflowId from the updateMetadata being reported; the idempotency and routing key.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "tpm": {
+          "$ref": "#/definitions/TpmAttestation",
+          "description": "Attestation via TPM. Present only for TPM-attested devices, mirroring the\nRegister (DeviceRegistration) request; X.509 and symmetric-key attestation are\ncarried at the transport layer (TLS client certificate / SAS token) and are not\npart of the request body. Auth is enforced per action, so this parity affordance\nis present on every device-facing request."
+        },
+        "installedUpdateId": {
+          "$ref": "#/definitions/InstalledUpdateId",
+          "description": "The update now installed, or null. Communicates current device state; not a failure signal.",
+          "x-nullable": true
+        },
+        "lastInstallResult": {
+          "$ref": "#/definitions/InstallResult",
+          "description": "The terminal result of the installation."
+        }
+      },
+      "required": [
+        "workflowId",
+        "installedUpdateId",
+        "lastInstallResult"
+      ]
+    },
+    "ServiceConfiguration": {
+      "type": "object",
+      "description": "Device service configuration returned by an update check.",
+      "properties": {
+        "rootKeyDownloadUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL of the current root-key package; the device verifies updateManifestSignature against it."
+        }
+      },
+      "required": [
+        "rootKeyDownloadUrl"
+      ]
+    },
+    "StepResult": {
+      "type": "object",
+      "description": "Per-step terminal result. Mirrors the ADU `StepResult` model.",
+      "properties": {
+        "outcome": {
+          "$ref": "#/definitions/Outcome",
+          "description": "Terminal outcome of this step."
+        },
+        "failureOrigin": {
+          "$ref": "#/definitions/FailureOrigin",
+          "description": "Which subsystem produced a failure. Advisory only."
+        },
+        "resultCode": {
+          "type": "integer",
+          "format": "int64",
+          "description": "A positive value indicates success; a non-positive value indicates failure. Diagnostic only."
+        },
+        "extendedResultCodes": {
+          "type": "string",
+          "description": "Comma-separated unsigned hexadecimal int32 codes for diagnostic correlation. Opaque to the service.",
+          "maxLength": 1024
+        },
+        "resultDetails": {
+          "type": "string",
+          "description": "Human-readable diagnostic detail. Not parsed programmatically.",
+          "maxLength": 1024
+        }
+      },
+      "required": [
+        "outcome",
+        "failureOrigin",
+        "resultCode",
+        "extendedResultCodes"
+      ]
+    },
+    "SymmetricKeyRegistrationResult": {
+      "type": "object",
+      "description": "Registration result returned when using SymmetricKey attestation.",
+      "properties": {
+        "enrollmentGroupId": {
+          "type": "string",
+          "description": "Enrollment group ID."
+        }
+      }
+    },
+    "TpmAttestation": {
+      "type": "object",
+      "description": "Attestation via TPM.",
+      "properties": {
+        "endorsementKey": {
+          "type": "string",
+          "description": "TPM endorsement key."
+        },
+        "storageRootKey": {
+          "type": "string",
+          "description": "TPM storage root key."
+        }
+      },
+      "required": [
+        "endorsementKey"
+      ]
+    },
+    "TpmRegistrationResult": {
+      "type": "object",
+      "description": "TPM registration result.",
+      "properties": {
+        "authenticationKey": {
+          "type": "string",
+          "description": "Encrypted authentication key."
+        }
+      }
+    },
+    "UpdateCheckRequest": {
+      "type": "object",
+      "description": "Request body for a device update check (both the regular/operational and the\nonboarding/bootstrap fetch operations share this shape).",
+      "properties": {
+        "agentInfo": {
+          "$ref": "#/definitions/AgentInfo",
+          "description": "Device agent information. Required unless a still-current agentInfoETag is supplied."
+        },
+        "tpm": {
+          "$ref": "#/definitions/TpmAttestation",
+          "description": "Attestation via TPM. Present only for TPM-attested devices, mirroring the\nRegister (DeviceRegistration) request; X.509 and symmetric-key attestation are\ncarried at the transport layer (TLS client certificate / SAS token) and are not\npart of the request body, exactly as in Register."
+        },
+        "installedUpdateId": {
+          "$ref": "#/definitions/InstalledUpdateId",
+          "description": "Currently installed update, or null if none.",
+          "x-nullable": true
+        },
+        "agentInfoETag": {
+          "type": "string",
+          "description": "ETag from a prior response; lets the service skip re-processing agentInfo.\nOptional.",
+          "minLength": 1,
+          "maxLength": 128,
+          "x-ms-client-name": "agentInfoEtag"
+        },
+        "serviceConfigETag": {
+          "type": "string",
+          "description": "ETag from a prior response; lets the service omit unchanged serviceConfiguration.\nOptional.",
+          "minLength": 1,
+          "maxLength": 128,
+          "x-ms-client-name": "serviceConfigEtag"
+        }
+      },
+      "required": [
+        "installedUpdateId"
+      ]
+    },
+    "UpdateCheckResponse": {
+      "type": "object",
+      "description": "Response body for a device update check. When an update applies, updateMetadata\nis present; \"no update available\" is signaled by omitting updateMetadata.",
+      "properties": {
+        "serviceConfiguration": {
+          "$ref": "#/definitions/ServiceConfiguration",
+          "description": "Device service configuration. Omitted only when a matching serviceConfigETag was supplied."
+        },
+        "serviceConfigETag": {
+          "type": "string",
+          "description": "Current ETag of serviceConfiguration.",
+          "x-ms-client-name": "serviceConfigEtag"
+        },
+        "agentInfoETag": {
+          "type": "string",
+          "description": "Current ETag of the processed agentInfo.",
+          "x-ms-client-name": "agentInfoEtag"
+        },
+        "updateMetadata": {
+          "$ref": "#/definitions/UpdateMetadata",
+          "description": "Present only when an update applies to the device; omitted otherwise."
+        }
+      },
+      "required": [
+        "serviceConfigETag",
+        "agentInfoETag"
+      ]
+    },
+    "UpdateMetadata": {
+      "type": "object",
+      "description": "Metadata describing an available update. The manifest is opaque to DPS.",
+      "properties": {
+        "workflowId": {
+          "type": "string",
+          "description": "Opaque deployment identifier; echoed by the device on reportDeviceUpdateStatus.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "updateManifest": {
+          "type": "string",
+          "description": "Update manifest as a serialized JSON string; verify the signature before parsing. DPS does not parse this value."
+        },
+        "updateManifestSignature": {
+          "type": "string",
+          "description": "JWS compact serialization over updateManifest."
+        },
+        "fileUrls": {
+          "type": "object",
+          "description": "Map of fileId to download URL.",
+          "additionalProperties": {
+            "format": "uri",
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "workflowId",
+        "updateManifest",
+        "updateManifestSignature",
+        "fileUrls"
+      ]
+    },
+    "X509CertificateInfo": {
+      "type": "object",
+      "description": "X509 certificate info.",
+      "properties": {
+        "subjectName": {
+          "type": "string",
+          "description": "Certificate subject name."
+        },
+        "sha1Thumbprint": {
+          "type": "string",
+          "description": "SHA-1 thumbprint of the certificate."
+        },
+        "sha256Thumbprint": {
+          "type": "string",
+          "description": "SHA-256 thumbprint of the certificate."
+        },
+        "issuerName": {
+          "type": "string",
+          "description": "Certificate issuer name."
+        },
+        "notBeforeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Certificate validity start date (UTC)."
+        },
+        "notAfterUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Certificate expiry date (UTC)."
+        },
+        "serialNumber": {
+          "type": "string",
+          "description": "Certificate serial number."
+        },
+        "version": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Certificate version."
+        }
+      },
+      "required": [
+        "subjectName",
+        "sha1Thumbprint",
+        "sha256Thumbprint",
+        "issuerName",
+        "notBeforeUtc",
+        "notAfterUtc",
+        "serialNumber",
+        "version"
+      ]
+    },
+    "X509RegistrationResult": {
+      "type": "object",
+      "description": "X509 registration result.",
+      "properties": {
+        "certificateInfo": {
+          "$ref": "#/definitions/X509CertificateInfo",
+          "description": "X509 certificate info."
+        },
+        "enrollmentGroupId": {
+          "type": "string",
+          "description": "Enrollment group ID."
+        },
+        "signingCertificateInfo": {
+          "$ref": "#/definitions/X509CertificateInfo",
+          "description": "X509 certificate info."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    }
+  }
+}

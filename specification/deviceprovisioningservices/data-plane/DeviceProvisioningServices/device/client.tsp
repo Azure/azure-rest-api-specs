@@ -17,3 +17,6 @@ using ProvisioningDeviceClient;
   RuntimeRegistration.registerDeviceAndIssueCertificate,
   "RuntimeRegistration"
 );
+@@clientLocation(DeviceUpdate.getDeviceUpdate, "DeviceUpdate");
+@@clientLocation(DeviceUpdate.getOnboardingDeviceUpdate, "DeviceUpdate");
+@@clientLocation(DeviceUpdate.reportDeviceUpdateStatus, "DeviceUpdate");
