@@ -204,6 +204,13 @@
             "type": "string"
           },
           {
+            "name": "afcManagedSync",
+            "in": "query",
+            "description": "Indicates that the write originates from AFC (Azure Firewall for Containers) and is permitted to modify an AFC-managed Firewall Policy.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
             "name": "parameters",
             "in": "body",
             "description": "Parameters supplied to the create or update Firewall Policy operation.",
@@ -1907,6 +1914,11 @@
         "sku": {
           "$ref": "#/definitions/FirewallPolicySku",
           "description": "The Firewall Policy SKU."
+        },
+        "afcManaged": {
+          "type": "boolean",
+          "description": "Indicates that the Firewall Policy is managed by AFC (Azure Firewall for Containers). When set, the policy is treated as read-only for callers that do not supply the AFC-managed sync marker on write operations.",
+          "readOnly": true
         }
       }
     },
