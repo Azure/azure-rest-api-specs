@@ -1,0 +1,40 @@
+{
+  "operationId": "VirtualNetworks_MoveIpConfigurations",
+  "title": "Move IP Configurations",
+  "parameters": {
+    "api-version": "2025-09-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "virtualNetworkName": "test-vnet",
+    "body": {
+      "moveIpConfigurationItems": [
+        {
+          "sourceIpConfiguration": {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/nic1/ipConfigurations/ipconfig1"
+          },
+          "targetIpConfiguration": {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/nic2/ipConfigurations/ipconfig2"
+          }
+        },
+        {
+          "sourceIpConfiguration": {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/nic3/ipConfigurations/ipconfig3"
+          },
+          "targetIpConfiguration": {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/nic4/ipConfigurations/ipconfig4"
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus/operations/11111111-1111-1111-1111-111111111111?api-version=2025-09-01",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus/operations/11111111-1111-1111-1111-111111111111?api-version=2025-09-01",
+        "Retry-After": 10
+      }
+    }
+  }
+}
