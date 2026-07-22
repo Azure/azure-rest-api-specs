@@ -31,7 +31,7 @@ interface OnPremTcoOperations {
   get is ArmResourceRead<OnPremTco>;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "On-premises machine settings are a configuration resource managed via PUT (create/replace); delete is intentionally not supported."
 @doc("Operations for managing on-premises machine settings.")
 @armResourceOperations
 interface MachineOnPremSettingsOperations {
@@ -48,7 +48,7 @@ interface MachineOnPremSettingsOperations {
   create is ArmResourceCreateOrReplaceSync<MachineOnPremSettings>;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "On-premises SQL settings are a configuration resource managed via PUT (create/replace); delete is intentionally not supported."
 @doc("Operations for managing on-premises SQL settings.")
 @armResourceOperations
 interface SqlOnPremSettingsOperations {

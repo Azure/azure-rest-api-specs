@@ -36,6 +36,6 @@ model OperationResultProperties {
   armUri: string;
 }
 
-/** The standard operation status at the subscription level] */
+/** The standard operation status at the subscription level. */
 @added(AssessmentProjectApiVersions.v2025_09_09_preview)
 model OperationResults is ArmOperationStatus<OperationResultProperties>;
