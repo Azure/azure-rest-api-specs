@@ -47,6 +47,15 @@ jobs:
 
       - name: Run TypeSpec suppressions analysis
         shell: bash
+        env:
+          # Emit inline PR `::warning` annotations only for meaningful analysis runs.
+          # GitHub aggregates annotations across every check run on a commit, so
+          # re-emitting them when a PR is edited without changing the base branch
+          # (e.g. title/description edits, which still fire the `edited` trigger)
+          # duplicates the inline warnings. `edited` is retained on this workflow
+          # solely to re-diff when the PR base branch changes; in that case
+          # `github.event.changes.base` is set and annotations are emitted again.
+          EMIT_ANNOTATIONS: ${{ github.event.action != 'edited' || github.event.changes.base != null }}
         run: |
           if [[ ! -s typespec-folders.txt ]]; then
             {
@@ -77,13 +86,20 @@ jobs:
 
           mapfile -t spec_folders < typespec-folders.txt
 
+          annotations_flag=()
+          if [[ "$EMIT_ANNOTATIONS" == "true" ]]; then
+            annotations_flag=(--github-annotations)
+          else
+            echo "Skipping inline suppression annotations for a '${{ github.event.action }}' event that did not change the PR base branch (avoids duplicate annotations)."
+          fi
+
           npm exec --no -- typespec-suppressions \
             --base "${{ github.event.pull_request.base.sha }}" \
             --head HEAD \
             --json-output "typespec-suppressions-report.json" \
             --markdown-output "$GITHUB_STEP_SUMMARY" \
             --check-rules-file "eng/tools/typespec-suppressions/check-rules.json" \
-            --github-annotations \
+            "${annotations_flag[@]}" \
             "${spec_folders[@]}"
 
       - name: Upload report artifact
