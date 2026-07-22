@@ -1,0 +1,8 @@
+suppressions:
+  # Ignore linting requirements to use v2 pathing. Carbon started on v1 pathing
+  # and all recent API additions have used v1.
+  # TODO: Remove this suppression once Carbon APIs are moved to v2 pathing.
+  - code: FolderStructure
+    reason: Carbon APIs are in v1 pathing.
+    where: $.paths[*]
+    from: specification/carbon/resource-manager/Microsoft.Carbon/**
