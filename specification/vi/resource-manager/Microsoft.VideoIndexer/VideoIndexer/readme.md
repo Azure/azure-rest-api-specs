@@ -64,6 +64,15 @@ input-file:
   - stable/2025-04-01/vi.json
 ```
 
+### Tag: package-2025-03-01
+These settings apply only when `--tag=2025-03-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-03-01'
+version-with-underscores: 2025_03_01
+input-file:
+  - stable/2025-03-01/vi.json
+```
+
 ### Tag: package-2024-09-23-preview
 
 These settings apply only when `--tag=2024-09-23-preview` is specified on the command line.
