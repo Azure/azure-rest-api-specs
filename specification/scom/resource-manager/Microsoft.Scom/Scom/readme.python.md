@@ -5,36 +5,16 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 
 
 ``` yaml $(python)
-python: 
-    azure-arm: true
-    license-header: MICROSOFT_MIT_NO_VERSION
-    package-name: azure-mgmt-scom
-    no-namespace-folders: true
-    package-version: 1.0.0b1
-```
-
-``` yaml $(python-mode) == 'update'
-python:
-    output-folder: $(python-sdks-folder)/scom/azure-mgmt-scom/azure/mgmt/scom
-```
-``` yaml $(python-mode) == 'create'
-python:
-    basic-setup-py: true
-    output-folder: $(python-sdks-folder)/scom/azure-mgmt-scom
-```
-
-``` yaml $(python) && $(track2)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-scom
+namespace: azure.mgmt.scom
 no-namespace-folders: true
 package-version: 1.0.0b1
+clear-output-folder: true
 ```
 
-``` yaml $(python-mode) == 'update' && $(track2)
+``` yaml $(python)
+no-namespace-folders: true
 output-folder: $(python-sdks-folder)/scom/azure-mgmt-scom/azure/mgmt/scom
-```
-``` yaml $(python-mode) == 'create' && $(track2)
-basic-setup-py: true
-output-folder: $(python-sdks-folder)/scom/azure-mgmt-scom
 ```
