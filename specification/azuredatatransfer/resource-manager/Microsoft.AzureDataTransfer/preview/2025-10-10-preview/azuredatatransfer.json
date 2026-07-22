@@ -450,8 +450,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/Connection"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       },
@@ -788,8 +787,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/Flow"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       },
@@ -1025,8 +1023,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/ArmFlowResponse"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -1103,8 +1100,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/ArmFlowResponse"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -1181,8 +1177,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/ArmFlowResponse"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -1504,8 +1499,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/ArmFlowResponse"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -1591,8 +1585,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/ArmFlowResponse"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -1678,8 +1671,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/ArmFlowResponse"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -1765,8 +1757,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/ArmFlowResponse"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -1852,8 +1843,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/ArmFlowResponse"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -1929,8 +1919,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/ArmConnectionResponse"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -2202,8 +2191,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/Pipeline"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       },
@@ -2418,8 +2406,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/ArmConnectionResponse"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -2495,8 +2482,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/ArmPipelineResponse"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -2694,8 +2680,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/FlowProfile"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       },
@@ -2779,8 +2764,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/FlowProfile"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
@@ -3044,8 +3028,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/ArmConnectionResponse"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -3345,9 +3328,96 @@
         }
       }
     },
+    "AuthenticationType": {
+      "type": "string",
+      "description": "Type of authentication mechanism for Azure Data Transfer API Flows.",
+      "enum": [
+        "JWT",
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "AuthenticationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "JWT",
+            "value": "JWT",
+            "description": "Option to use a JWT Bearer Authentication Token."
+          },
+          {
+            "name": "None",
+            "value": "None",
+            "description": "Option to not use any form of Authentication."
+          }
+        ]
+      }
+    },
     "Azure.Core.armResourceType": {
       "type": "string",
       "description": "Represents an Azure Resource Type."
+    },
+    "AzureResourceManagerArmResponseConnection": {
+      "type": "object",
+      "description": "Azure operation completed successfully.",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/Connection",
+          "description": "The body type of the operation request or response."
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
+    "AzureResourceManagerArmResponseFlow": {
+      "type": "object",
+      "description": "Azure operation completed successfully.",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/Flow",
+          "description": "The body type of the operation request or response."
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
+    "AzureResourceManagerArmResponsePipeline": {
+      "type": "object",
+      "description": "Azure operation completed successfully.",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/Pipeline",
+          "description": "The body type of the operation request or response."
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
+    "Casing": {
+      "type": "string",
+      "description": "Text casing comparison options - diacritics casing is also supported.",
+      "enum": [
+        "Insensitive",
+        "Sensitive"
+      ],
+      "x-ms-enum": {
+        "name": "Casing",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Insensitive",
+            "value": "Insensitive",
+            "description": "Ignores casing when performing pattern matching. For example, \"Hello World\" would be found in \"hello world\"."
+          },
+          {
+            "name": "Sensitive",
+            "value": "Sensitive",
+            "description": "Requires exact casing for the pattern match. For example, \"Hello World\" would NOT not be found in \"hello world\"."
+          }
+        ]
+      }
     },
     "Connection": {
       "type": "object",
@@ -3748,6 +3818,30 @@
             "name": "Receive",
             "value": "Receive",
             "description": "The direction is on the receiving side side of a pipeline, connection, or flow."
+          }
+        ]
+      }
+    },
+    "EnablementStatus": {
+      "type": "string",
+      "description": "Enablement statuses",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "EnablementStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Represents an enabled status."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Represents a disabled status."
           }
         ]
       }
@@ -4576,6 +4670,30 @@
         }
       }
     },
+    "MatchType": {
+      "type": "string",
+      "description": "The text pattern matching conditions for text comparison.",
+      "enum": [
+        "Partial",
+        "Complete"
+      ],
+      "x-ms-enum": {
+        "name": "MatchType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Partial",
+            "value": "Partial",
+            "description": "The option to pattern match substrings within all text content. For example, \"hello world\" would be found in \"chello worlds\"."
+          },
+          {
+            "name": "Complete",
+            "value": "Complete",
+            "description": "The option to pattern match the entire string explicitly. For example, \"hello world\" would NOT be found in \"chello worlds\"."
+          }
+        ]
+      }
+    },
     "MessagingOptions": {
       "type": "object",
       "description": "The option associated with messaging flows.",
@@ -5148,6 +5266,46 @@
         }
       ]
     },
+    "PipelineConnection": {
+      "type": "object",
+      "description": "Connection body inside a pipeline",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Connection id inside pipeline",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Connection name inside pipeline",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Connection type inside pipeline",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Connection location inside pipeline",
+          "readOnly": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "Connection etag inside pipeline",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "additionalProperties": {}
+    },
     "PipelineConnectionProperties": {
       "type": "object",
       "description": "Connection properties inside pipeline",
@@ -5319,6 +5477,37 @@
           }
         }
       }
+    },
+    "Plan": {
+      "type": "object",
+      "description": "Plan for the resource.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "A user defined name of the 3rd Party Artifact that is being procured."
+        },
+        "publisher": {
+          "type": "string",
+          "description": "The publisher of the 3rd Party Artifact that is being bought. E.g. NewRelic"
+        },
+        "product": {
+          "type": "string",
+          "description": "The 3rd Party artifact that is being procured. E.g. NewRelic. Product maps to the OfferID specified for the artifact at the time of Data Market onboarding."
+        },
+        "promotionCode": {
+          "type": "string",
+          "description": "A publisher provided promotion code as provisioned in Data Market for the said product/artifact."
+        },
+        "version": {
+          "type": "string",
+          "description": "The version of the desired product/artifact."
+        }
+      },
+      "required": [
+        "name",
+        "publisher",
+        "product"
+      ]
     },
     "ProvisioningState": {
       "type": "string",
