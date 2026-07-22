@@ -29,6 +29,15 @@ openapi-type: arm
 tag: package-2026-01
 ```
 
+### Tag: package-2026-07-preview
+
+These settings apply only when `--tag=package-2026-07-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2026-07-preview'
+input-file:
+- ./preview/2026-07-01-preview/servicebus.json
+```
+
 ### Tag: package-2026-01
 
 These settings apply only when `--tag=package-2026-01` is specified on the command line.
@@ -301,5 +310,3 @@ directive:
     from: servicebus.json
     reason: Suppress it for now to avoid breaking change because it is referenced by many files.Will update in next api version.Please scope the suppression to the Namespaces PATCH operation only.
 ```
-
-
