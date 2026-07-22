@@ -80,7 +80,7 @@ using Microsoft.Mission;
   "IsAvailable",
   "csharp"
 );
-@@clientName(DestinationType, "CommunityEndpointDestinationType", "csharp");
+@@clientName(DestinationType, "VirtualEnclaveCommunityEndpointDestinationType", "csharp");
 @@clientName(CommunityEndpointProtocol.ANY, "Any", "csharp");
 @@clientName(CommunityEndpointProtocol.TCP, "Tcp", "csharp");
 @@clientName(CommunityEndpointProtocol.UDP, "Udp", "csharp");
@@ -168,3 +168,25 @@ using Microsoft.Mission;
 @@clientName(ActionPerformed, "ApproverActionPerformed", "csharp");
 
 @@clientName(Microsoft.Mission, "VirtualEnclavesMgmtClient", "python");
+
+// Resource rename: DedicatedHubResource -> DedicatedHub (also renames Data/Collection/Patch derivatives)
+@@clientName(DedicatedHubResource, "DedicatedHub", "csharp");
+
+// Types renamed to add resource provider or feature context
+@@clientName(CommunityEndpointDestinationRule, "VirtualEnclaveCommunityEndpointDestinationRule", "csharp");
+@@clientName(CommunityEndpointPatchProperties, "VirtualEnclaveCommunityEndpointPatchProperties", "csharp");
+@@clientName(CommunityEndpointProtocol, "VirtualEnclaveCommunityEndpointProtocol", "csharp");
+@@clientName(Designation, "VirtualEnclaveDesignation", "csharp");
+@@clientName(EnclaveEndpointPatchProperties, "VirtualEnclaveEndpointPatchProperties", "csharp");
+@@clientName(MonitoringDestination, "VirtualEnclaveMonitoringDestination", "csharp");
+@@clientName(MonitoringDestinationPatchModel, "VirtualEnclaveMonitoringDestinationPatch", "csharp");
+@@clientName(MonitoringDestinationType, "VirtualEnclaveMonitoringDestinationType", "csharp");
+@@clientName(MonitoringSettingsModel, "VirtualEnclaveMonitoringSettings", "csharp");
+@@clientName(MonitoringSettingsPatchModel, "VirtualEnclaveMonitoringSettingsPatch", "csharp");
+@@clientName(RbacInheritanceMode, "VirtualEnclaveRbacInheritanceMode", "csharp");
+@@clientName(ResourceVisibilityMode, "VirtualEnclaveResourceVisibilityMode", "csharp");
+@@clientName(SecurityProvider, "VirtualEnclaveSecurityProvider", "csharp");
+@@clientName(TransitHubState, "VirtualEnclaveTransitHubState", "csharp");
+@@clientName(TransitOptionParams, "VirtualEnclaveTransitOptionContent", "csharp");
+@@clientName(TransitOptionType, "VirtualEnclaveTransitOptionType", "csharp");
+@@clientName(UpdateMode, "VirtualEnclaveUpdateMode", "csharp");
