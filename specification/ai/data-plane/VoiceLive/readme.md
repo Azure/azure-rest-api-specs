@@ -15,51 +15,25 @@ API version is controlled by the `@azure-tools/typespec-autorest` emitter in tsp
 
 ```yaml
 openapi-type: data-plane
+tag: package-v1
 ```
 
-### Tag: package-2026-07-15
+### Tag: package-v1
 
-These settings apply only when `--tag=package-2026-07-15` is specified on the command line.
+These settings apply only when `--tag=package-v1` is specified on the command line.
 
-```yaml $(tag) == 'package-2026-07-15'
+```yaml $(tag) == 'package-v1'
 input-file:
-  - stable/2026-07-15/VoiceLive.json
+  - openapi3/v1/VoiceLive.json
 ```
 
-### Tag: package-2026-06-01-preview
+### Tag: package-virtual-public-preview
 
-These settings apply only when `--tag=package-2026-06-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-virtual-public-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2026-06-01-preview'
+```yaml $(tag) == 'package-virtual-public-preview'
 input-file:
-  - preview/2026-06-01-preview/VoiceLive.json
-```
-
-### Tag: package-2026-04-10
-
-These settings apply only when `--tag=package-2026-04-10` is specified on the command line.
-
-```yaml $(tag) == 'package-2026-04-10'
-input-file:
-  - stable/2026-04-10/VoiceLive.json
-```
-
-### Tag: package-2026-01-01-preview
-
-These settings apply only when `--tag=package-2026-01-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2026-01-01-preview'
-input-file:
-  - preview/2026-01-01-preview/VoiceLive.json
-```
-
-### Tag: package-2025-10-01
-
-These settings apply only when `--tag=package-2025-10-01` is specified on the command line.
-
-```yaml $(tag) == 'package-2025-10-01'
-input-file:
-  - stable/2025-10-01/VoiceLive.json
+  - openapi3/virtual-public-preview/VoiceLive.json
 ```
 
 ### Suppression
@@ -74,3 +48,10 @@ directive:
     where: $.definitions.ResponseSession.properties.expires_at
     reason: OpenAI Realtime uses the "unixtime" format, which this legacy rule does not recognize.
 ```
+
+## Contributing
+
+VoiceLive uses the **label-based (`v1`) versioning** pattern. For authoring rules — how to add
+GA and preview features, promote preview to GA, handle breaking changes, and compile/send a PR
+— see [CONTRIBUTING.md](CONTRIBUTING.md). For the full design and rationale, see
+[docs/versioning.md](docs/versioning.md).
