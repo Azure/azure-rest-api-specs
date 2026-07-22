@@ -8581,6 +8581,12 @@ model ApplicationGatewayGlobalConfiguration {
    * Enable response buffering.
    */
   enableResponseBuffering?: boolean;
+
+  /**
+   * Disable default server header in response.
+   */
+  @added(Versions.v2025_09_01)
+  disableDefaultServerHeaderInResponse?: boolean;
 }
 
 /**
