@@ -6,6 +6,19 @@ This is the AutoRest configuration file for Network.
 
 ---
 
+## Note: VMSS `2018-10-01` captured-schema exception
+
+The `stable/2018-10-01/vmssNetwork.json` spec is an **intentional, long-standing exception** to the "same-version stable API surface must not change" (captured-schema) rule. These VMSS network APIs have always pinned the `2018-10-01` api-version while returning the **latest** `NetworkInterface` and `PublicIPAddress` types. Consequently, additive changes to the shared `Common` types (e.g., new properties such as `firstPartyServiceTagId`) ripple into `2018-10-01` **by design**, and BreakingChange/versioning tooling may flag them (e.g., OAD rule [`1041 AddedPropertyInResponse`](https://github.com/Azure/openapi-diff/blob/main/docs/rules/1041.md)). This is expected and has already been signed off for SDKs, PowerShell, CLI, and Terraform. Do not "fix" this by scoping the property out of `2018-10-01`.
+
+Precedent (the latest network types have long been captured under `2018-10-01`):
+
+- [`stable/2025-01-01/vmssNetworkInterface.json` (L6)](https://github.com/Azure/azure-rest-api-specs/blob/main/specification/network/resource-manager/Microsoft.Network/Network/stable/2025-01-01/vmssNetworkInterface.json#L6)
+- [`stable/2024-10-01/vmssNetworkInterface.json` (L6)](https://github.com/Azure/azure-rest-api-specs/blob/main/specification/network/resource-manager/Microsoft.Network/Network/stable/2024-10-01/vmssNetworkInterface.json#L6)
+- The same `2018-10-01` spec was similarly updated during the `2025-07-01` TypeSpec network version update in [PR #42717](https://github.com/Azure/azure-rest-api-specs/pull/42717).
+- Full history of previously checked-in changes to these types: [VMSS network schema changes 2019-07-01 to 2025-01-01](https://github.com/markcowl/azure-rest-api-specs/blob/markcowl/vmss-network-schema-change-report/specification/network/resource-manager/Microsoft.Network/Network/Vmss/vmss-network-api-schema-changes-2019-07-01-to-2025-01-01.md).
+
+---
+
 ## Getting Started
 
 To build the SDK for Network, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
