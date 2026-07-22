@@ -1477,6 +1477,13 @@ export async function getTypeSpecSuppressionsSection(
   // gates rendering. Gating (the TypeSpecSuppressionReviewRequired label) is
   // applied separately by summarize-impact and is currently disabled during the
   // initial rollout.
+  //
+  // Once gating is enabled (the force-off line in summarize-impact's
+  // `processTypeSpecSuppression` is removed), this parameter should be used to
+  // render the suppressions section only when
+  // `impactAssessment.typeSpecSuppressionReviewRequired` is true, so the
+  // "Approval required" messaging appears only while the gate is actually active
+  // rather than on every PR that touches a checked suppression.
   void impactAssessment;
 
   const run = await getLatestTypeSpecSuppressionsWorkflowRun(github, core, owner, repo, head_sha);
