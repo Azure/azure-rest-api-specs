@@ -1,0 +1,32 @@
+{
+  "title": "Get Private Link Resources",
+  "operationId": "PrivateLinkResourcesInterface_ListByTrafficController",
+  "parameters": {
+    "api-version": "2026-03-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "trafficControllerName": "tc1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "fe1",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ServiceNetworking/trafficControllers/tc1/privateLinkResources/fe1",
+            "type": "Microsoft.ServiceNetworking/trafficControllers/privateLinkResources",
+            "properties": {
+              "groupId": "fe1",
+              "requiredMembers": [
+                "fe1"
+              ],
+              "requiredZoneNames": [
+                "privatelink.alb.azure.com"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}
