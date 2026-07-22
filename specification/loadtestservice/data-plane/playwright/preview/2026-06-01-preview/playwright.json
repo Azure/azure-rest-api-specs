@@ -596,49 +596,14 @@
             "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
           },
           {
-            "name": "x-ms-source-id",
-            "in": "header",
-            "description": "The browser session source ID. An encoding of required identifiers based on the source type; usually the run ID for Playwright Workspaces test runs.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "sourceId"
-          },
-          {
-            "name": "x-ms-source-type",
-            "in": "header",
-            "description": "The browser session source type.",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "PlaywrightWorkspacesTestRun",
-              "BrowserAutomationTool",
-              "Others"
-            ],
-            "x-ms-enum": {
-              "name": "BrowserSessionSourceType",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "PlaywrightWorkspacesTestRun",
-                  "value": "PlaywrightWorkspacesTestRun",
-                  "description": "The browser session source is a Playwright Workspaces test run."
-                },
-                {
-                  "name": "BrowserAutomationTool",
-                  "value": "BrowserAutomationTool",
-                  "description": "The browser session source is a browser automation tool."
-                },
-                {
-                  "name": "Others",
-                  "value": "Others",
-                  "description": "The browser session source is of other types."
-                }
-              ]
-            },
-            "x-ms-client-name": "sourceType"
-          },
-          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "x-ms-useragent",
+            "in": "header",
+            "description": "Optional header to specify additional client information when the standard 'User-Agent' header cannot be explicitly set, such as when using Playwright Client. The value should follow the standard 'User-Agent' header format.",
+            "required": false,
+            "type": "string"
           },
           {
             "name": "resource",

@@ -4,8 +4,6 @@ import "@typespec/versioning";
 
 using TypeSpec.Versioning;
 using TypeSpec.Rest;
-using TypeSpec.Http;
-using Azure.Core.Traits;
 
 namespace Playwright;
 
@@ -142,16 +140,5 @@ interface BrowserSessions {
 
   @added(Versions.v2026_06_01_preview)
   @doc("Creates or updates a browser session for the specified session and workspace ID. The sourceId and sourceType are supplied through request headers. Requires Bearer JWT access token provided by Entra ID.")
-  createOrUpdate is Operations.ResourceCreateOrUpdate<
-    BrowserSession,
-    TraitOverride<RequestHeadersTrait<{
-      @header(#{ name: "x-ms-source-id" })
-      @doc("The browser session source ID. An encoding of required identifiers based on the source type; usually the run ID for Playwright Workspaces test runs.")
-      sourceId?: string;
-
-      @header(#{ name: "x-ms-source-type" })
-      @doc("The browser session source type.")
-      sourceType?: BrowserSessionSourceType;
-    }>>
-  >;
+  createOrUpdate is Operations.ResourceCreateOrUpdate<BrowserSession>;
 }
