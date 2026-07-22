@@ -26841,6 +26841,7 @@ model ConnectionAnalyzerProperties {
   /**
    * Time-to-live (days) before the analyzer expires.
    */
+  @minValue(1)
   expiryInDays?: int32;
 
   /**
@@ -26959,6 +26960,11 @@ model DiagnosticOperationResult {
 
   /**
    * The result of the diagnostic operation, serialized as a JSON string.
+   *
+   * The payload shape varies by `diagnosticOperation`. For example, a
+   * `ConnectivityCheck` operation returns a JSON object such as
+   * `{ "ConnectivityStatus": "Reachable" }`. Consumers should parse this
+   * string as JSON according to the corresponding diagnostic operation.
    */
   result?: string;
 }
@@ -26973,6 +26979,7 @@ model ConnectionAnalyzerQueryStatusResult {
   /**
    * Resource ID of the connection analyzer.
    */
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**

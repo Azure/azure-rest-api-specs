@@ -3160,7 +3160,7 @@
     },
     "ConnectionAnalyzer": {
       "type": "object",
-      "description": "Defines a connection analyzer resource.",
+      "description": "Defines a connection analyzer resource.\n\nNOTE: `type` and `systemData` are intentionally omitted from this envelope\nto remain consistent with the sibling NetworkWatcher child resources\n(e.g. `ConnectionMonitor`, `PacketCapture`) which follow the legacy\n`Azure.ResourceManager.Legacy` custom-resource pattern. Adding `systemData`\nhere would diverge from those siblings; the omission is the deliberate\nlegacy pattern and is acknowledged.",
       "properties": {
         "name": {
           "type": "string",
@@ -3264,10 +3264,10 @@
         "diagnosticOperations": {
           "type": "array",
           "description": "List of diagnostic operations to run.",
+          "minItems": 1,
           "items": {
             "$ref": "./common.json#/definitions/DiagnosticOperation"
-          },
-          "minItems": 1
+          }
         },
         "protocolSettings": {
           "$ref": "#/definitions/ProtocolSettings",
@@ -3280,7 +3280,8 @@
         "expiryInDays": {
           "type": "integer",
           "format": "int32",
-          "description": "Time-to-live (days) before the analyzer expires."
+          "description": "Time-to-live (days) before the analyzer expires.",
+          "minimum": 1
         },
         "outputSettings": {
           "$ref": "#/definitions/OutputSettings",
@@ -3315,7 +3316,8 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Resource ID of the connection analyzer."
+          "description": "Resource ID of the connection analyzer.",
+          "readOnly": true
         },
         "connectionAnalyzerStatus": {
           "$ref": "./common.json#/definitions/ConnectionAnalyzerStatus",
@@ -4093,7 +4095,7 @@
         },
         "result": {
           "type": "string",
-          "description": "The result of the diagnostic operation, serialized as a JSON string."
+          "description": "The result of the diagnostic operation, serialized as a JSON string.\n\nThe payload shape varies by `diagnosticOperation`. For example, a\n`ConnectivityCheck` operation returns a JSON object such as\n`{ \"ConnectivityStatus\": \"Reachable\" }`. Consumers should parse this\nstring as JSON according to the corresponding diagnostic operation."
         }
       },
       "required": [
