@@ -10234,7 +10234,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/OpenAI.CreateBatchParametersBody'
+              $ref: '#/components/schemas/OpenAI.CreateBatchRequest'
         description: The request body.
       x-oaiMeta:
         name: Create batch
@@ -24882,6 +24882,7 @@ paths:
                           - in_memory
                           - 24h
                       - type: 'null'
+                    deprecated: true
                   previous_response_id:
                     anyOf:
                       - type: string
@@ -24984,6 +24985,8 @@ paths:
                       - type: 'null'
                   usage:
                     $ref: '#/components/schemas/OpenAI.ResponseUsage'
+                  prompt_cache_options:
+                    $ref: '#/components/schemas/OpenAI.PromptCacheOptions'
                   moderation:
                     anyOf:
                       - $ref: '#/components/schemas/OpenAI.Moderation'
@@ -25087,6 +25090,9 @@ paths:
                         - in_memory
                         - 24h
                     - type: 'null'
+                  deprecated: true
+                prompt_cache_options:
+                  $ref: '#/components/schemas/OpenAI.PromptCacheOptionsParam'
                 previous_response_id:
                   anyOf:
                     - type: string
@@ -41898,6 +41904,12 @@ components:
           type: string
           enum:
             - code_interpreter
+        allowed_callers:
+          anyOf:
+            - type: array
+              items:
+                $ref: '#/components/schemas/OpenAI.CallableToolAllowedCaller'
+            - type: 'null'
         container:
           anyOf:
             - type: string
@@ -46134,6 +46146,12 @@ components:
                 type: string
             - $ref: '#/components/schemas/OpenAI.MCPToolFilter'
             - type: 'null'
+        allowed_callers:
+          anyOf:
+            - type: array
+              items:
+                $ref: '#/components/schemas/OpenAI.CallableToolAllowedCaller'
+            - type: 'null'
         require_approval:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.MCPToolRequireApproval'
@@ -47166,6 +47184,12 @@ components:
             - apply_patch
           description: The type of the tool. Always `apply_patch`.
           x-stainless-const: true
+        allowed_callers:
+          anyOf:
+            - type: array
+              items:
+                $ref: '#/components/schemas/OpenAI.CallableToolAllowedCaller'
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: Allows the assistant to create, delete, or update files using unified diffs.
@@ -47753,7 +47777,6 @@ components:
           description: The Unix timestamp (in seconds) for when the batch was cancelled.
         request_counts:
           $ref: '#/components/schemas/OpenAI.BatchRequestCounts'
-          description: The request counts for different statuses within the batch.
         usage:
           $ref: '#/components/schemas/OpenAI.BatchUsage'
           description: |-
@@ -47821,12 +47844,10 @@ components:
           anyOf:
             - type: string
             - type: 'null'
-          description: The name of the parameter that caused the error, if applicable.
         line:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.integer'
             - type: 'null'
-          description: The line number of the input file where the error occurred, if applicable.
     OpenAI.BatchErrors:
       type: object
       properties:
@@ -47865,10 +47886,14 @@ components:
       properties:
         total:
           $ref: '#/components/schemas/OpenAI.integer'
+          description: Total number of requests in the batch.
         completed:
           $ref: '#/components/schemas/OpenAI.integer'
+          description: Number of requests that have been completed successfully.
         failed:
           $ref: '#/components/schemas/OpenAI.integer'
+          description: Number of requests that have failed.
+      description: The request counts for different statuses within the batch.
     OpenAI.BatchUsage:
       type: object
       required:
@@ -47902,6 +47927,11 @@ components:
       properties:
         reasoning_tokens:
           $ref: '#/components/schemas/OpenAI.integer'
+    OpenAI.CallableToolAllowedCaller:
+      type: string
+      enum:
+        - direct
+        - programmatic
     OpenAI.ChatCompletionAllowedTools:
       type: object
       required:
@@ -48453,6 +48483,8 @@ components:
         text:
           type: string
           description: The text content.
+        prompt_cache_breakpoint:
+          $ref: '#/components/schemas/OpenAI.PromptCacheBreakpointParam'
       allOf:
         - $ref: '#/components/schemas/OpenAI.ChatCompletionRequestAssistantMessageContentPart'
       description: Learn about [text inputs](/docs/guides/text-generation).
@@ -48557,6 +48589,8 @@ components:
           x-stainless-const: true
         input_audio:
           $ref: '#/components/schemas/OpenAI.ChatCompletionRequestMessageContentPartAudioInputAudio'
+        prompt_cache_breakpoint:
+          $ref: '#/components/schemas/OpenAI.PromptCacheBreakpointParam'
       allOf:
         - $ref: '#/components/schemas/OpenAI.ChatCompletionRequestUserMessageContentPart'
       description: Learn about [audio inputs](/docs/guides/audio).
@@ -48588,6 +48622,8 @@ components:
           x-stainless-const: true
         file:
           $ref: '#/components/schemas/OpenAI.ChatCompletionRequestMessageContentPartFileFile'
+        prompt_cache_breakpoint:
+          $ref: '#/components/schemas/OpenAI.PromptCacheBreakpointParam'
       allOf:
         - $ref: '#/components/schemas/OpenAI.ChatCompletionRequestUserMessageContentPart'
       description: Learn about [file inputs](/docs/guides/text) for text generation.
@@ -48615,6 +48651,8 @@ components:
           x-stainless-const: true
         image_url:
           $ref: '#/components/schemas/OpenAI.ChatCompletionRequestMessageContentPartImageImageUrl'
+        prompt_cache_breakpoint:
+          $ref: '#/components/schemas/OpenAI.PromptCacheBreakpointParam'
       allOf:
         - $ref: '#/components/schemas/OpenAI.ChatCompletionRequestUserMessageContentPart'
       description: Learn about [image inputs](/docs/guides/vision).
@@ -48667,6 +48705,8 @@ components:
         text:
           type: string
           description: The text content.
+        prompt_cache_breakpoint:
+          $ref: '#/components/schemas/OpenAI.PromptCacheBreakpointParam'
       description: Learn about [text inputs](/docs/guides/text-generation).
       title: Text content part
     OpenAI.ChatCompletionRequestMessageType:
@@ -48796,6 +48836,8 @@ components:
         text:
           type: string
           description: The text content.
+        prompt_cache_breakpoint:
+          $ref: '#/components/schemas/OpenAI.PromptCacheBreakpointParam'
       allOf:
         - $ref: '#/components/schemas/OpenAI.ChatCompletionRequestUserMessageContentPart'
       description: Learn about [text inputs](/docs/guides/text-generation).
@@ -49133,6 +49175,12 @@ components:
             - code_interpreter
           description: The type of the code interpreter tool. Always `code_interpreter`.
           x-stainless-const: true
+        allowed_callers:
+          anyOf:
+            - type: array
+              items:
+                $ref: '#/components/schemas/OpenAI.CallableToolAllowedCaller'
+            - type: 'null'
         name:
           type: string
           description: Deprecated. This property is deprecated and will be removed in a future version.
@@ -49222,6 +49270,10 @@ components:
         prompt_cache_retention:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.PromptCacheRetentionEnum'
+            - type: 'null'
+        prompt_cache_options:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.PromptCacheOptionsParam'
             - type: 'null'
         service_tier:
           anyOf:
@@ -49327,6 +49379,8 @@ components:
         audio_tokens:
           $ref: '#/components/schemas/OpenAI.integer'
         cached_tokens:
+          $ref: '#/components/schemas/OpenAI.integer'
+        cache_write_tokens:
           $ref: '#/components/schemas/OpenAI.integer'
     OpenAI.CompoundFilter:
       type: object
@@ -49443,6 +49497,8 @@ components:
         detail:
           $ref: '#/components/schemas/OpenAI.ImageDetail'
           description: The detail level of the screenshot image to be sent to the model. One of `high`, `low`, `auto`, or `original`. Defaults to `auto`.
+        prompt_cache_breakpoint:
+          $ref: '#/components/schemas/OpenAI.PromptCacheBreakpointConfig'
       allOf:
         - $ref: '#/components/schemas/OpenAI.MessageContent'
       description: A screenshot of a computer.
@@ -49887,6 +49943,8 @@ components:
           tool_search_output: '#/components/schemas/OpenAI.ConversationItemToolSearchOutput'
           additional_tools: '#/components/schemas/OpenAI.ConversationItemAdditionalTools'
           reasoning: '#/components/schemas/OpenAI.ConversationItemReasoningItem'
+          program: '#/components/schemas/OpenAI.ConversationItemProgram'
+          program_output: '#/components/schemas/OpenAI.ConversationItemProgramOutput'
           compaction: '#/components/schemas/OpenAI.ConversationItemCompactionBody'
           code_interpreter_call: '#/components/schemas/OpenAI.ConversationItemCodeInterpreterToolCall'
           local_shell_call: '#/components/schemas/OpenAI.ConversationItemLocalShellToolCall'
@@ -49953,6 +50011,10 @@ components:
         call_id:
           type: string
           description: The unique ID of the apply patch tool call generated by the model.
+        caller:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ToolCallCaller'
+            - type: 'null'
         status:
           $ref: '#/components/schemas/OpenAI.ApplyPatchCallStatus'
           description: The status of the apply patch tool call. One of `in_progress` or `completed`.
@@ -49988,6 +50050,10 @@ components:
         call_id:
           type: string
           description: The unique ID of the apply patch tool call generated by the model.
+        caller:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ToolCallCaller'
+            - type: 'null'
         status:
           $ref: '#/components/schemas/OpenAI.ApplyPatchCallOutputStatus'
           description: The status of the apply patch tool call output. One of `completed` or `failed`.
@@ -50186,6 +50252,10 @@ components:
         call_id:
           type: string
           description: The call ID, used to map this custom tool call output to a custom tool call.
+        caller:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ToolCallCallerParam'
+            - type: 'null'
         output:
           oneOf:
             - type: string
@@ -50227,6 +50297,10 @@ components:
         call_id:
           type: string
           description: An identifier used to map this custom tool call to a tool call output.
+        caller:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ToolCallCaller'
+            - type: 'null'
         namespace:
           type: string
           description: The namespace of the custom tool being called.
@@ -50315,6 +50389,10 @@ components:
         call_id:
           type: string
           description: The unique ID of the shell tool call generated by the model.
+        caller:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ToolCallCaller'
+            - type: 'null'
         action:
           $ref: '#/components/schemas/OpenAI.FunctionShellAction'
           description: The shell commands and limits that describe how to run the tool call.
@@ -50355,6 +50433,10 @@ components:
         call_id:
           type: string
           description: The unique ID of the shell tool call generated by the model.
+        caller:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ToolCallCaller'
+            - type: 'null'
         status:
           $ref: '#/components/schemas/OpenAI.FunctionShellCallOutputStatusEnum'
           description: The status of the shell call output. One of `in_progress`, `completed`, or `incomplete`.
@@ -50396,6 +50478,10 @@ components:
         call_id:
           type: string
           description: The unique ID of the function tool call generated by the model.
+        caller:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ToolCallCaller'
+            - type: 'null'
         namespace:
           type: string
           description: The namespace of the function to run.
@@ -50443,6 +50529,10 @@ components:
         call_id:
           type: string
           description: The unique ID of the function tool call generated by the model.
+        caller:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ToolCallCallerParam'
+            - type: 'null'
         output:
           oneOf:
             - type: string
@@ -50775,6 +50865,66 @@ components:
         - $ref: '#/components/schemas/OpenAI.ConversationItem'
       description: A message to or from the model.
       title: Message
+    OpenAI.ConversationItemProgram:
+      type: object
+      required:
+        - type
+        - id
+        - call_id
+        - code
+        - fingerprint
+      properties:
+        type:
+          type: string
+          enum:
+            - program
+          description: The type of the item. Always `program`.
+          x-stainless-const: true
+          default: program
+        id:
+          type: string
+          description: The unique ID of the program item.
+        call_id:
+          type: string
+          description: The stable call ID of the program item.
+        code:
+          type: string
+          description: The JavaScript source executed by programmatic tool calling.
+        fingerprint:
+          type: string
+          description: Opaque program replay fingerprint that must be round-tripped.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ConversationItem'
+    OpenAI.ConversationItemProgramOutput:
+      type: object
+      required:
+        - type
+        - id
+        - call_id
+        - result
+        - status
+      properties:
+        type:
+          type: string
+          enum:
+            - program_output
+          description: The type of the item. Always `program_output`.
+          x-stainless-const: true
+          default: program_output
+        id:
+          type: string
+          description: The unique ID of the program output item.
+        call_id:
+          type: string
+          description: The call ID of the program item.
+        result:
+          type: string
+          description: The result produced by the program item.
+        status:
+          $ref: '#/components/schemas/OpenAI.ProgramOutputStatus'
+          description: The terminal status of the program output item.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ConversationItem'
     OpenAI.ConversationItemReasoningItem:
       type: object
       required:
@@ -50916,6 +51066,8 @@ components:
             - tool_search_output
             - additional_tools
             - reasoning
+            - program
+            - program_output
             - compaction
             - code_interpreter_call
             - local_shell_call
@@ -51173,7 +51325,7 @@ components:
           maximum: 4096
         chunk_overlap_tokens:
           $ref: '#/components/schemas/OpenAI.integer'
-    OpenAI.CreateBatchParametersBody:
+    OpenAI.CreateBatchRequest:
       type: object
       required:
         - input_file_id
@@ -51182,6 +51334,10 @@ components:
       properties:
         input_file_id:
           type: string
+          description: |-
+            The ID of an uploaded file that contains requests for the new batch.
+              See [upload file](/docs/api-reference/files/create) for how to upload a file.
+              Your input file must be formatted as a [JSONL file](/docs/api-reference/batch/request-input), and must be uploaded with the purpose `batch`. The file can contain up to 50,000 requests, and can be up to 200 MB in size.
         endpoint:
           type: string
           enum:
@@ -51193,10 +51349,12 @@ components:
             - /v1/images/generations
             - /v1/images/edits
             - /v1/videos
+          description: The endpoint to be used for all requests in the batch. Currently `/v1/responses`, `/v1/chat/completions`, `/v1/embeddings`, `/v1/completions`, `/v1/moderations`, `/v1/images/generations`, `/v1/images/edits`, and `/v1/videos` are supported. Note that `/v1/embeddings` batches are also restricted to a maximum of 50,000 embedding inputs across all requests in the batch.
         completion_window:
           type: string
           enum:
             - 24h
+          description: The time frame within which the batch should be processed. Currently only `24h` is supported.
         metadata:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.Metadata'
@@ -51252,6 +51410,9 @@ components:
                 - in_memory
                 - 24h
             - type: 'null'
+          deprecated: true
+        prompt_cache_options:
+          $ref: '#/components/schemas/OpenAI.PromptCacheOptionsParam'
         messages:
           type: array
           items:
@@ -53939,8 +54100,8 @@ components:
       discriminator:
         propertyName: type
         mapping:
-          duration: '#/components/schemas/OpenAI.TranscriptTextUsageDuration'
           tokens: '#/components/schemas/OpenAI.TranscriptTextUsageTokens'
+          duration: '#/components/schemas/OpenAI.TranscriptTextUsageDuration'
       description: Token usage statistics for the request.
     OpenAI.CreateTranscriptionResponseJsonUsageType:
       anyOf:
@@ -54415,6 +54576,12 @@ components:
         defer_loading:
           type: boolean
           description: Whether this tool should be deferred and discovered via tool search.
+        allowed_callers:
+          anyOf:
+            - type: array
+              items:
+                $ref: '#/components/schemas/OpenAI.CallableToolAllowedCaller'
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A custom tool that processes input using a specified format. Learn more about   [custom tools](/docs/guides/function-calling#custom-tools)
@@ -54613,6 +54780,31 @@ components:
         - high
         - auto
         - original
+    OpenAI.DirectToolCallCaller:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - direct
+          x-stainless-const: true
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ToolCallCaller'
+    OpenAI.DirectToolCallCallerParam:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - direct
+          description: The caller type. Always `direct`.
+          x-stainless-const: true
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ToolCallCallerParam'
     OpenAI.DoubleClickAction:
       type: object
       required:
@@ -55241,6 +55433,8 @@ components:
         text:
           type: string
           description: The text input to the model.
+        prompt_cache_breakpoint:
+          $ref: '#/components/schemas/OpenAI.PromptCacheBreakpointConfig'
       allOf:
         - $ref: '#/components/schemas/OpenAI.EvalItemContentItemObject'
       description: A text input to the model.
@@ -55628,6 +55822,7 @@ components:
     OpenAI.FileInputDetail:
       type: string
       enum:
+        - auto
         - low
         - high
     OpenAI.FilePath:
@@ -56354,13 +56549,15 @@ components:
         file_data:
           type: string
           description: The content of the file to be sent to the model.
+        prompt_cache_breakpoint:
+          $ref: '#/components/schemas/OpenAI.PromptCacheBreakpointConfig'
         file_url:
           type: string
           format: uri
           description: The URL of the file to be sent to the model.
         detail:
           $ref: '#/components/schemas/OpenAI.FileInputDetail'
-          description: The detail level of the file to be sent to the model. Use `low` for the default rendering behavior, or `high` to render the file at higher quality. Defaults to `low`.
+          description: The detail level of the file to be sent to the model. Use `auto` to let the system select the detail level; for GPT-5.6 and later models, `auto` uses high-quality rendering, which may increase input token usage. Use `low` for lower-cost rendering, or `high` to render the file at higher quality. Defaults to `auto`.
       allOf:
         - $ref: '#/components/schemas/OpenAI.FunctionAndCustomToolCallOutput'
       description: A file input to the model.
@@ -56390,6 +56587,8 @@ components:
         detail:
           $ref: '#/components/schemas/OpenAI.ImageDetail'
           description: The detail level of the image to be sent to the model. One of `high`, `low`, `auto`, or `original`. Defaults to `auto`.
+        prompt_cache_breakpoint:
+          $ref: '#/components/schemas/OpenAI.PromptCacheBreakpointConfig'
       allOf:
         - $ref: '#/components/schemas/OpenAI.FunctionAndCustomToolCallOutput'
       description: An image input to the model. Learn about [image inputs](/docs/guides/vision).
@@ -56410,6 +56609,8 @@ components:
         text:
           type: string
           description: The text input to the model.
+        prompt_cache_breakpoint:
+          $ref: '#/components/schemas/OpenAI.PromptCacheBreakpointConfig'
       allOf:
         - $ref: '#/components/schemas/OpenAI.FunctionAndCustomToolCallOutput'
       description: A text input to the model.
@@ -56768,6 +56969,12 @@ components:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.FunctionShellToolParamEnvironment'
             - type: 'null'
+        allowed_callers:
+          anyOf:
+            - type: array
+              items:
+                $ref: '#/components/schemas/OpenAI.CallableToolAllowedCaller'
+            - type: 'null'
         name:
           type: string
           description: Deprecated. This property is deprecated and will be removed in a future version.
@@ -56871,6 +57078,11 @@ components:
             - type: object
               unevaluatedProperties: {}
             - type: 'null'
+        output_schema:
+          anyOf:
+            - type: object
+              unevaluatedProperties: {}
+            - type: 'null'
         strict:
           anyOf:
             - type: boolean
@@ -56878,6 +57090,12 @@ components:
         defer_loading:
           type: boolean
           description: Whether this function is deferred and loaded via tool search.
+        allowed_callers:
+          anyOf:
+            - type: array
+              items:
+                $ref: '#/components/schemas/OpenAI.CallableToolAllowedCaller'
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: Defines a function in your own code the model can choose to call. Learn more about [function calling](https://platform.openai.com/docs/guides/function-calling).
@@ -56911,9 +57129,20 @@ components:
             - function
           x-stainless-const: true
           default: function
+        output_schema:
+          anyOf:
+            - type: object
+              unevaluatedProperties: {}
+            - type: 'null'
         defer_loading:
           type: boolean
           description: Whether this function should be deferred and discovered via tool search.
+        allowed_callers:
+          anyOf:
+            - type: array
+              items:
+                $ref: '#/components/schemas/OpenAI.CallableToolAllowedCaller'
+            - type: 'null'
     OpenAI.GraderLabelModel:
       type: object
       required:
@@ -57709,13 +57938,15 @@ components:
         file_data:
           type: string
           description: The content of the file to be sent to the model.
+        prompt_cache_breakpoint:
+          $ref: '#/components/schemas/OpenAI.PromptCacheBreakpointConfig'
         file_url:
           type: string
           format: uri
           description: The URL of the file to be sent to the model.
         detail:
           $ref: '#/components/schemas/OpenAI.FileInputDetail'
-          description: The detail level of the file to be sent to the model. Use `low` for the default rendering behavior, or `high` to render the file at higher quality. Defaults to `low`.
+          description: The detail level of the file to be sent to the model. Use `auto` to let the system select the detail level; for GPT-5.6 and later models, `auto` uses high-quality rendering, which may increase input token usage. Use `low` for lower-cost rendering, or `high` to render the file at higher quality. Defaults to `auto`.
       allOf:
         - $ref: '#/components/schemas/OpenAI.InputContent'
       description: A file input to the model.
@@ -57745,6 +57976,8 @@ components:
         detail:
           $ref: '#/components/schemas/OpenAI.ImageDetail'
           description: The detail level of the image to be sent to the model. One of `high`, `low`, `auto`, or `original`. Defaults to `auto`.
+        prompt_cache_breakpoint:
+          $ref: '#/components/schemas/OpenAI.PromptCacheBreakpointConfig'
       allOf:
         - $ref: '#/components/schemas/OpenAI.InputContent'
       description: An image input to the model. Learn about [image inputs](/docs/guides/vision).
@@ -57765,6 +57998,8 @@ components:
         text:
           type: string
           description: The text input to the model.
+        prompt_cache_breakpoint:
+          $ref: '#/components/schemas/OpenAI.PromptCacheBreakpointConfig'
       allOf:
         - $ref: '#/components/schemas/OpenAI.InputContent'
       description: A text input to the model.
@@ -57805,13 +58040,15 @@ components:
         file_data:
           type: string
           description: The content of the file to be sent to the model.
+        prompt_cache_breakpoint:
+          $ref: '#/components/schemas/OpenAI.PromptCacheBreakpointConfig'
         file_url:
           type: string
           format: uri
           description: The URL of the file to be sent to the model.
         detail:
           $ref: '#/components/schemas/OpenAI.FileInputDetail'
-          description: The detail level of the file to be sent to the model. Use `low` for the default rendering behavior, or `high` to render the file at higher quality. Defaults to `low`.
+          description: The detail level of the file to be sent to the model. Use `auto` to let the system select the detail level; for GPT-5.6 and later models, `auto` uses high-quality rendering, which may increase input token usage. Use `low` for lower-cost rendering, or `high` to render the file at higher quality. Defaults to `auto`.
       description: A file input to the model.
       title: Input file
     OpenAI.InputFileContentParam:
@@ -57845,7 +58082,11 @@ components:
             - type: 'null'
         detail:
           $ref: '#/components/schemas/OpenAI.FileInputDetail'
-          description: The detail level of the file to be sent to the model. Use `low` for the default rendering behavior, or `high` to render the file at higher quality. Defaults to `low`.
+          description: The detail level of the file to be sent to the model. Use `auto` to let the system select the detail level; for GPT-5.6 and later models, `auto` uses high-quality rendering, which may increase input token usage. Use `low` for lower-cost rendering, or `high` to render the file at higher quality. Defaults to `auto`.
+        prompt_cache_breakpoint:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.PromptCacheBreakpointParam'
+            - type: 'null'
       description: A file input to the model.
       title: Input file
     OpenAI.InputImageContent:
@@ -57873,6 +58114,8 @@ components:
         detail:
           $ref: '#/components/schemas/OpenAI.ImageDetail'
           description: The detail level of the image to be sent to the model. One of `high`, `low`, `auto`, or `original`. Defaults to `auto`.
+        prompt_cache_breakpoint:
+          $ref: '#/components/schemas/OpenAI.PromptCacheBreakpointConfig'
       description: An image input to the model. Learn about [image inputs](/docs/guides/vision).
       title: Input image
     OpenAI.InputImageContentParamAutoParam:
@@ -57899,6 +58142,10 @@ components:
         detail:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.DetailEnum'
+            - type: 'null'
+        prompt_cache_breakpoint:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.PromptCacheBreakpointParam'
             - type: 'null'
       description: An image input to the model. Learn about [image inputs](/docs/guides/vision)
       title: Input image
@@ -58000,6 +58247,10 @@ components:
           minLength: 1
           maxLength: 64
           description: The unique ID of the apply patch tool call generated by the model.
+        caller:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ToolCallCallerParam'
+            - type: 'null'
         status:
           $ref: '#/components/schemas/OpenAI.ApplyPatchCallStatusParam'
           description: The status of the apply patch tool call. One of `in_progress` or `completed`.
@@ -58033,6 +58284,10 @@ components:
           minLength: 1
           maxLength: 64
           description: The unique ID of the apply patch tool call generated by the model.
+        caller:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ToolCallCallerParam'
+            - type: 'null'
         status:
           $ref: '#/components/schemas/OpenAI.ApplyPatchCallOutputStatusParam'
           description: The status of the apply patch tool call output. One of `completed` or `failed`.
@@ -58221,6 +58476,10 @@ components:
         call_id:
           type: string
           description: An identifier used to map this custom tool call to a tool call output.
+        caller:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ToolCallCaller'
+            - type: 'null'
         namespace:
           type: string
           description: The namespace of the custom tool being called.
@@ -58253,6 +58512,10 @@ components:
         call_id:
           type: string
           description: The call ID, used to map this custom tool call output to a custom tool call.
+        caller:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ToolCallCallerParam'
+            - type: 'null'
         output:
           oneOf:
             - type: string
@@ -58344,6 +58607,10 @@ components:
                   - $ref: '#/components/schemas/OpenAI.InputImageContentParamAutoParam'
                   - $ref: '#/components/schemas/OpenAI.InputFileContentParam'
           description: Text, image, or file output of the function tool call.
+        caller:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ToolCallCallerParam'
+            - type: 'null'
         status:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.FunctionCallItemStatus'
@@ -58368,6 +58635,10 @@ components:
           minLength: 1
           maxLength: 64
           description: The unique ID of the shell tool call generated by the model.
+        caller:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ToolCallCallerParam'
+            - type: 'null'
         type:
           type: string
           enum:
@@ -58406,6 +58677,10 @@ components:
           minLength: 1
           maxLength: 64
           description: The unique ID of the shell tool call generated by the model.
+        caller:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ToolCallCallerParam'
+            - type: 'null'
         type:
           type: string
           enum:
@@ -58452,6 +58727,10 @@ components:
         call_id:
           type: string
           description: The unique ID of the function tool call generated by the model.
+        caller:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ToolCallCaller'
+            - type: 'null'
         namespace:
           type: string
           description: The namespace of the function to run.
@@ -58984,6 +59263,8 @@ components:
         text:
           type: string
           description: The text input to the model.
+        prompt_cache_breakpoint:
+          $ref: '#/components/schemas/OpenAI.PromptCacheBreakpointConfig'
       description: A text input to the model.
       title: Input text
     OpenAI.InputTextContentParam:
@@ -59003,6 +59284,10 @@ components:
           type: string
           maxLength: 10485760
           description: The text input to the model.
+        prompt_cache_breakpoint:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.PromptCacheBreakpointParam'
+            - type: 'null'
       description: A text input to the model.
       title: Input text
     OpenAI.Item:
@@ -59099,6 +59384,10 @@ components:
           minLength: 1
           maxLength: 64
           description: The unique ID of the apply patch tool call generated by the model.
+        caller:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ToolCallCallerParam'
+            - type: 'null'
         status:
           $ref: '#/components/schemas/OpenAI.ApplyPatchCallStatusParam'
           description: The status of the apply patch tool call. One of `in_progress` or `completed`.
@@ -59132,6 +59421,10 @@ components:
           minLength: 1
           maxLength: 64
           description: The unique ID of the apply patch tool call generated by the model.
+        caller:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ToolCallCallerParam'
+            - type: 'null'
         status:
           $ref: '#/components/schemas/OpenAI.ApplyPatchCallOutputStatusParam'
           description: The status of the apply patch tool call output. One of `completed` or `failed`.
@@ -59320,6 +59613,10 @@ components:
         call_id:
           type: string
           description: An identifier used to map this custom tool call to a tool call output.
+        caller:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ToolCallCaller'
+            - type: 'null'
         namespace:
           type: string
           description: The namespace of the custom tool being called.
@@ -59352,6 +59649,10 @@ components:
         call_id:
           type: string
           description: The call ID, used to map this custom tool call output to a custom tool call.
+        caller:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ToolCallCallerParam'
+            - type: 'null'
         output:
           oneOf:
             - type: string
@@ -59376,6 +59677,8 @@ components:
         propertyName: type
         mapping:
           message: '#/components/schemas/OpenAI.ItemFieldMessage'
+          program: '#/components/schemas/OpenAI.ItemFieldProgram'
+          program_output: '#/components/schemas/OpenAI.ItemFieldProgramOutput'
           function_call: '#/components/schemas/OpenAI.ItemFieldFunctionToolCall'
           tool_search_call: '#/components/schemas/OpenAI.ItemFieldToolSearchCall'
           tool_search_output: '#/components/schemas/OpenAI.ItemFieldToolSearchOutput'
@@ -59452,6 +59755,10 @@ components:
         call_id:
           type: string
           description: The unique ID of the apply patch tool call generated by the model.
+        caller:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ToolCallCaller'
+            - type: 'null'
         status:
           $ref: '#/components/schemas/OpenAI.ApplyPatchCallStatus'
           description: The status of the apply patch tool call. One of `in_progress` or `completed`.
@@ -59487,6 +59794,10 @@ components:
         call_id:
           type: string
           description: The unique ID of the apply patch tool call generated by the model.
+        caller:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ToolCallCaller'
+            - type: 'null'
         status:
           $ref: '#/components/schemas/OpenAI.ApplyPatchCallOutputStatus'
           description: The status of the apply patch tool call output. One of `completed` or `failed`.
@@ -59685,6 +59996,10 @@ components:
         call_id:
           type: string
           description: An identifier used to map this custom tool call to a tool call output.
+        caller:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ToolCallCaller'
+            - type: 'null'
         namespace:
           type: string
           description: The namespace of the custom tool being called.
@@ -59717,6 +60032,10 @@ components:
         call_id:
           type: string
           description: The call ID, used to map this custom tool call output to a custom tool call.
+        caller:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ToolCallCallerParam'
+            - type: 'null'
         output:
           oneOf:
             - type: string
@@ -59798,6 +60117,10 @@ components:
         call_id:
           type: string
           description: The unique ID of the shell tool call generated by the model.
+        caller:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ToolCallCaller'
+            - type: 'null'
         action:
           $ref: '#/components/schemas/OpenAI.FunctionShellAction'
           description: The shell commands and limits that describe how to run the tool call.
@@ -59838,6 +60161,10 @@ components:
         call_id:
           type: string
           description: The unique ID of the shell tool call generated by the model.
+        caller:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ToolCallCaller'
+            - type: 'null'
         status:
           $ref: '#/components/schemas/OpenAI.FunctionShellCallOutputStatusEnum'
           description: The status of the shell call output. One of `in_progress`, `completed`, or `incomplete`.
@@ -59879,6 +60206,10 @@ components:
         call_id:
           type: string
           description: The unique ID of the function tool call generated by the model.
+        caller:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ToolCallCaller'
+            - type: 'null'
         namespace:
           type: string
           description: The namespace of the function to run.
@@ -59926,6 +60257,10 @@ components:
         call_id:
           type: string
           description: The unique ID of the function tool call generated by the model.
+        caller:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ToolCallCallerParam'
+            - type: 'null'
         output:
           oneOf:
             - type: string
@@ -60222,6 +60557,66 @@ components:
         - $ref: '#/components/schemas/OpenAI.ItemField'
       description: A message to or from the model.
       title: Message
+    OpenAI.ItemFieldProgram:
+      type: object
+      required:
+        - type
+        - id
+        - call_id
+        - code
+        - fingerprint
+      properties:
+        type:
+          type: string
+          enum:
+            - program
+          description: The type of the item. Always `program`.
+          x-stainless-const: true
+          default: program
+        id:
+          type: string
+          description: The unique ID of the program item.
+        call_id:
+          type: string
+          description: The stable call ID of the program item.
+        code:
+          type: string
+          description: The JavaScript source executed by programmatic tool calling.
+        fingerprint:
+          type: string
+          description: Opaque program replay fingerprint that must be round-tripped.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ItemField'
+    OpenAI.ItemFieldProgramOutput:
+      type: object
+      required:
+        - type
+        - id
+        - call_id
+        - result
+        - status
+      properties:
+        type:
+          type: string
+          enum:
+            - program_output
+          description: The type of the item. Always `program_output`.
+          x-stainless-const: true
+          default: program_output
+        id:
+          type: string
+          description: The unique ID of the program output item.
+        call_id:
+          type: string
+          description: The call ID of the program item.
+        result:
+          type: string
+          description: The result produced by the program item.
+        status:
+          $ref: '#/components/schemas/OpenAI.ProgramOutputStatus'
+          description: The terminal status of the program output item.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ItemField'
     OpenAI.ItemFieldReasoningItem:
       type: object
       required:
@@ -60352,6 +60747,8 @@ components:
         - type: string
           enum:
             - message
+            - program
+            - program_output
             - function_call
             - tool_search_call
             - tool_search_output
@@ -60495,6 +60892,10 @@ components:
                   - $ref: '#/components/schemas/OpenAI.InputImageContentParamAutoParam'
                   - $ref: '#/components/schemas/OpenAI.InputFileContentParam'
           description: Text, image, or file output of the function tool call.
+        caller:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ToolCallCallerParam'
+            - type: 'null'
         status:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.FunctionCallItemStatus'
@@ -60519,6 +60920,10 @@ components:
           minLength: 1
           maxLength: 64
           description: The unique ID of the shell tool call generated by the model.
+        caller:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ToolCallCallerParam'
+            - type: 'null'
         type:
           type: string
           enum:
@@ -60557,6 +60962,10 @@ components:
           minLength: 1
           maxLength: 64
           description: The unique ID of the shell tool call generated by the model.
+        caller:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ToolCallCallerParam'
+            - type: 'null'
         type:
           type: string
           enum:
@@ -60603,6 +61012,10 @@ components:
         call_id:
           type: string
           description: The unique ID of the function tool call generated by the model.
+        caller:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ToolCallCaller'
+            - type: 'null'
         namespace:
           type: string
           description: The namespace of the function to run.
@@ -61041,6 +61454,8 @@ components:
           tool_search_output: '#/components/schemas/OpenAI.ItemResourceToolSearchOutput'
           additional_tools: '#/components/schemas/OpenAI.ItemResourceAdditionalTools'
           reasoning: '#/components/schemas/OpenAI.ItemResourceReasoningItem'
+          program: '#/components/schemas/OpenAI.ItemResourceProgram'
+          program_output: '#/components/schemas/OpenAI.ItemResourceProgramOutput'
           compaction: '#/components/schemas/OpenAI.ItemResourceCompactionBody'
           image_generation_call: '#/components/schemas/OpenAI.ItemResourceImageGenToolCall'
           code_interpreter_call: '#/components/schemas/OpenAI.ItemResourceCodeInterpreterToolCall'
@@ -61107,6 +61522,10 @@ components:
         call_id:
           type: string
           description: The unique ID of the apply patch tool call generated by the model.
+        caller:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ToolCallCaller'
+            - type: 'null'
         status:
           $ref: '#/components/schemas/OpenAI.ApplyPatchCallStatus'
           description: The status of the apply patch tool call. One of `in_progress` or `completed`.
@@ -61142,6 +61561,10 @@ components:
         call_id:
           type: string
           description: The unique ID of the apply patch tool call generated by the model.
+        caller:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ToolCallCaller'
+            - type: 'null'
         status:
           $ref: '#/components/schemas/OpenAI.ApplyPatchCallOutputStatus'
           description: The status of the apply patch tool call output. One of `completed` or `failed`.
@@ -61340,6 +61763,10 @@ components:
         call_id:
           type: string
           description: The call ID, used to map this custom tool call output to a custom tool call.
+        caller:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ToolCallCallerParam'
+            - type: 'null'
         output:
           oneOf:
             - type: string
@@ -61381,6 +61808,10 @@ components:
         call_id:
           type: string
           description: An identifier used to map this custom tool call to a tool call output.
+        caller:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ToolCallCaller'
+            - type: 'null'
         namespace:
           type: string
           description: The namespace of the custom tool being called.
@@ -61469,6 +61900,10 @@ components:
         call_id:
           type: string
           description: The unique ID of the shell tool call generated by the model.
+        caller:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ToolCallCaller'
+            - type: 'null'
         action:
           $ref: '#/components/schemas/OpenAI.FunctionShellAction'
           description: The shell commands and limits that describe how to run the tool call.
@@ -61509,6 +61944,10 @@ components:
         call_id:
           type: string
           description: The unique ID of the shell tool call generated by the model.
+        caller:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ToolCallCaller'
+            - type: 'null'
         status:
           $ref: '#/components/schemas/OpenAI.FunctionShellCallOutputStatusEnum'
           description: The status of the shell call output. One of `in_progress`, `completed`, or `incomplete`.
@@ -61550,6 +61989,10 @@ components:
         call_id:
           type: string
           description: The unique ID of the function tool call generated by the model.
+        caller:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ToolCallCaller'
+            - type: 'null'
         namespace:
           type: string
           description: The namespace of the function to run.
@@ -61597,6 +62040,10 @@ components:
         call_id:
           type: string
           description: The unique ID of the function tool call generated by the model.
+        caller:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ToolCallCallerParam'
+            - type: 'null'
         output:
           oneOf:
             - type: string
@@ -61945,6 +62392,66 @@ components:
         - $ref: '#/components/schemas/OpenAI.ItemResource'
       description: An output message from the model.
       title: Output message
+    OpenAI.ItemResourceProgram:
+      type: object
+      required:
+        - type
+        - id
+        - call_id
+        - code
+        - fingerprint
+      properties:
+        type:
+          type: string
+          enum:
+            - program
+          description: The type of the item. Always `program`.
+          x-stainless-const: true
+          default: program
+        id:
+          type: string
+          description: The unique ID of the program item.
+        call_id:
+          type: string
+          description: The stable call ID of the program item.
+        code:
+          type: string
+          description: The JavaScript source executed by programmatic tool calling.
+        fingerprint:
+          type: string
+          description: Opaque program replay fingerprint that must be round-tripped.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ItemResource'
+    OpenAI.ItemResourceProgramOutput:
+      type: object
+      required:
+        - type
+        - id
+        - call_id
+        - result
+        - status
+      properties:
+        type:
+          type: string
+          enum:
+            - program_output
+          description: The type of the item. Always `program_output`.
+          x-stainless-const: true
+          default: program_output
+        id:
+          type: string
+          description: The unique ID of the program output item.
+        call_id:
+          type: string
+          description: The call ID of the program item.
+        result:
+          type: string
+          description: The result produced by the program item.
+        status:
+          $ref: '#/components/schemas/OpenAI.ProgramOutputStatus'
+          description: The terminal status of the program output item.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ItemResource'
     OpenAI.ItemResourceReasoningItem:
       type: object
       required:
@@ -62086,6 +62593,8 @@ components:
             - tool_search_output
             - additional_tools
             - reasoning
+            - program
+            - program_output
             - compaction
             - image_generation_call
             - code_interpreter_call
@@ -62941,6 +63450,12 @@ components:
                 type: string
             - $ref: '#/components/schemas/OpenAI.MCPToolFilter'
             - type: 'null'
+        allowed_callers:
+          anyOf:
+            - type: array
+              items:
+                $ref: '#/components/schemas/OpenAI.CallableToolAllowedCaller'
+            - type: 'null'
         require_approval:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.MCPToolRequireApproval'
@@ -63107,13 +63622,15 @@ components:
         file_data:
           type: string
           description: The content of the file to be sent to the model.
+        prompt_cache_breakpoint:
+          $ref: '#/components/schemas/OpenAI.PromptCacheBreakpointConfig'
         file_url:
           type: string
           format: uri
           description: The URL of the file to be sent to the model.
         detail:
           $ref: '#/components/schemas/OpenAI.FileInputDetail'
-          description: The detail level of the file to be sent to the model. Use `low` for the default rendering behavior, or `high` to render the file at higher quality. Defaults to `low`.
+          description: The detail level of the file to be sent to the model. Use `auto` to let the system select the detail level; for GPT-5.6 and later models, `auto` uses high-quality rendering, which may increase input token usage. Use `low` for lower-cost rendering, or `high` to render the file at higher quality. Defaults to `auto`.
       allOf:
         - $ref: '#/components/schemas/OpenAI.MessageContent'
       description: A file input to the model.
@@ -63143,6 +63660,8 @@ components:
         detail:
           $ref: '#/components/schemas/OpenAI.ImageDetail'
           description: The detail level of the image to be sent to the model. One of `high`, `low`, `auto`, or `original`. Defaults to `auto`.
+        prompt_cache_breakpoint:
+          $ref: '#/components/schemas/OpenAI.PromptCacheBreakpointConfig'
       allOf:
         - $ref: '#/components/schemas/OpenAI.MessageContent'
       description: An image input to the model. Learn about [image inputs](/docs/guides/vision).
@@ -63163,6 +63682,8 @@ components:
         text:
           type: string
           description: The text input to the model.
+        prompt_cache_breakpoint:
+          $ref: '#/components/schemas/OpenAI.PromptCacheBreakpointConfig'
       allOf:
         - $ref: '#/components/schemas/OpenAI.MessageContent'
       description: A text input to the model.
@@ -63644,6 +64165,14 @@ components:
         - text
         - image
       description: The applied input type(s) for the category.
+    OpenAI.ModerationConfigParam:
+      type: object
+      required:
+        - mode
+      properties:
+        mode:
+          $ref: '#/components/schemas/OpenAI.ModerationMode'
+      description: The moderation policy for the response input.
     OpenAI.ModerationEntry:
       type: object
       required:
@@ -63718,6 +64247,11 @@ components:
       enum:
         - text
         - image
+    OpenAI.ModerationMode:
+      type: string
+      enum:
+        - score
+        - block
     OpenAI.ModerationParam:
       type: object
       required:
@@ -63726,7 +64260,23 @@ components:
         model:
           type: string
           description: The moderation model to use for moderated completions, e.g. 'omni-moderation-latest'.
+        policy:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ModerationPolicyParam'
+            - type: 'null'
       description: Configuration for running moderation on the input and output of this response.
+    OpenAI.ModerationPolicyParam:
+      type: object
+      properties:
+        input:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ModerationConfigParam'
+            - type: 'null'
+        output:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ModerationConfigParam'
+            - type: 'null'
+      description: The policy to apply to moderated response input and output.
     OpenAI.ModerationResultBody:
       type: object
       required:
@@ -64216,6 +64766,8 @@ components:
           computer_call: '#/components/schemas/OpenAI.OutputItemComputerToolCall'
           computer_call_output: '#/components/schemas/OpenAI.OutputItemComputerToolCallOutput'
           reasoning: '#/components/schemas/OpenAI.OutputItemReasoningItem'
+          program: '#/components/schemas/OpenAI.OutputItemProgram'
+          program_output: '#/components/schemas/OpenAI.OutputItemProgramOutput'
           tool_search_call: '#/components/schemas/OpenAI.OutputItemToolSearchCall'
           tool_search_output: '#/components/schemas/OpenAI.OutputItemToolSearchOutput'
           additional_tools: '#/components/schemas/OpenAI.OutputItemAdditionalTools'
@@ -64284,6 +64836,10 @@ components:
         call_id:
           type: string
           description: The unique ID of the apply patch tool call generated by the model.
+        caller:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ToolCallCaller'
+            - type: 'null'
         status:
           $ref: '#/components/schemas/OpenAI.ApplyPatchCallStatus'
           description: The status of the apply patch tool call. One of `in_progress` or `completed`.
@@ -64319,6 +64875,10 @@ components:
         call_id:
           type: string
           description: The unique ID of the apply patch tool call generated by the model.
+        caller:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ToolCallCaller'
+            - type: 'null'
         status:
           $ref: '#/components/schemas/OpenAI.ApplyPatchCallOutputStatus'
           description: The status of the apply patch tool call output. One of `completed` or `failed`.
@@ -64517,6 +65077,10 @@ components:
         call_id:
           type: string
           description: The call ID, used to map this custom tool call output to a custom tool call.
+        caller:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ToolCallCallerParam'
+            - type: 'null'
         output:
           oneOf:
             - type: string
@@ -64558,6 +65122,10 @@ components:
         call_id:
           type: string
           description: An identifier used to map this custom tool call to a tool call output.
+        caller:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ToolCallCaller'
+            - type: 'null'
         namespace:
           type: string
           description: The namespace of the custom tool being called.
@@ -64646,6 +65214,10 @@ components:
         call_id:
           type: string
           description: The unique ID of the shell tool call generated by the model.
+        caller:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ToolCallCaller'
+            - type: 'null'
         action:
           $ref: '#/components/schemas/OpenAI.FunctionShellAction'
           description: The shell commands and limits that describe how to run the tool call.
@@ -64686,6 +65258,10 @@ components:
         call_id:
           type: string
           description: The unique ID of the shell tool call generated by the model.
+        caller:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ToolCallCaller'
+            - type: 'null'
         status:
           $ref: '#/components/schemas/OpenAI.FunctionShellCallOutputStatusEnum'
           description: The status of the shell call output. One of `in_progress`, `completed`, or `incomplete`.
@@ -64727,6 +65303,10 @@ components:
         call_id:
           type: string
           description: The unique ID of the function tool call generated by the model.
+        caller:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ToolCallCaller'
+            - type: 'null'
         namespace:
           type: string
           description: The namespace of the function to run.
@@ -64774,6 +65354,10 @@ components:
         call_id:
           type: string
           description: The unique ID of the function tool call generated by the model.
+        caller:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ToolCallCallerParam'
+            - type: 'null'
         output:
           oneOf:
             - type: string
@@ -65078,6 +65662,66 @@ components:
         - $ref: '#/components/schemas/OpenAI.OutputItem'
       description: An output message from the model.
       title: Output message
+    OpenAI.OutputItemProgram:
+      type: object
+      required:
+        - type
+        - id
+        - call_id
+        - code
+        - fingerprint
+      properties:
+        type:
+          type: string
+          enum:
+            - program
+          description: The type of the item. Always `program`.
+          x-stainless-const: true
+          default: program
+        id:
+          type: string
+          description: The unique ID of the program item.
+        call_id:
+          type: string
+          description: The stable call ID of the program item.
+        code:
+          type: string
+          description: The JavaScript source executed by programmatic tool calling.
+        fingerprint:
+          type: string
+          description: Opaque program replay fingerprint that must be round-tripped.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.OutputItem'
+    OpenAI.OutputItemProgramOutput:
+      type: object
+      required:
+        - type
+        - id
+        - call_id
+        - result
+        - status
+      properties:
+        type:
+          type: string
+          enum:
+            - program_output
+          description: The type of the item. Always `program_output`.
+          x-stainless-const: true
+          default: program_output
+        id:
+          type: string
+          description: The unique ID of the program output item.
+        call_id:
+          type: string
+          description: The call ID of the program item.
+        result:
+          type: string
+          description: The result produced by the program item.
+        status:
+          $ref: '#/components/schemas/OpenAI.ProgramOutputStatus'
+          description: The terminal status of the program output item.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.OutputItem'
     OpenAI.OutputItemReasoningItem:
       type: object
       required:
@@ -65215,6 +65859,8 @@ components:
             - computer_call
             - computer_call_output
             - reasoning
+            - program
+            - program_output
             - tool_search_call
             - tool_search_output
             - additional_tools
@@ -65407,6 +66053,59 @@ components:
         Static predicted output content, such as the content of a text file that is
         being regenerated.
       title: Static Content
+    OpenAI.ProgramOutputStatus:
+      type: string
+      enum:
+        - completed
+        - incomplete
+    OpenAI.ProgramToolCallCaller:
+      type: object
+      required:
+        - type
+        - caller_id
+      properties:
+        type:
+          type: string
+          enum:
+            - program
+          x-stainless-const: true
+        caller_id:
+          type: string
+          description: The call ID of the program item that produced this tool call.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ToolCallCaller'
+    OpenAI.ProgramToolCallCallerParam:
+      type: object
+      required:
+        - type
+        - caller_id
+      properties:
+        type:
+          type: string
+          enum:
+            - program
+          description: The caller type. Always `program`.
+          x-stainless-const: true
+        caller_id:
+          type: string
+          minLength: 1
+          maxLength: 64
+          description: The call ID of the program item that produced this tool call.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ToolCallCallerParam'
+    OpenAI.ProgrammaticToolCallingParam:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - programmatic_tool_calling
+          description: The type of the tool. Always `programmatic_tool_calling`.
+          x-stainless-const: true
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Tool'
     OpenAI.Prompt:
       type: object
       required:
@@ -65426,11 +66125,73 @@ components:
       description: |-
         Reference to a prompt template and its variables.
         [Learn more](/docs/guides/text?api-mode=responses#reusable-prompts).
+    OpenAI.PromptCacheBreakpointConfig:
+      type: object
+      required:
+        - mode
+      properties:
+        mode:
+          type: string
+          enum:
+            - explicit
+          description: The breakpoint mode. Always `explicit`.
+          x-stainless-const: true
+          default: explicit
+      description: Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a token block.
+      title: Prompt cache breakpoint
+    OpenAI.PromptCacheBreakpointParam:
+      type: object
+      required:
+        - mode
+      properties:
+        mode:
+          type: string
+          enum:
+            - explicit
+          description: The breakpoint mode. Always `explicit`.
+          x-stainless-const: true
+          default: explicit
+      description: Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a token block.
+      title: Prompt cache breakpoint
+    OpenAI.PromptCacheModeEnum:
+      type: string
+      enum:
+        - implicit
+        - explicit
+    OpenAI.PromptCacheOptions:
+      type: object
+      required:
+        - ttl
+        - mode
+      properties:
+        ttl:
+          $ref: '#/components/schemas/OpenAI.PromptCacheTTLEnum'
+          description: The minimum lifetime applied to each cache breakpoint.
+        mode:
+          $ref: '#/components/schemas/OpenAI.PromptCacheModeEnum'
+          description: Whether implicit prompt-cache breakpoints were enabled.
+      description: The prompt-caching options that were applied to the response. Supported for `gpt-5.6` and later models.
+      title: Prompt cache options
+    OpenAI.PromptCacheOptionsParam:
+      type: object
+      properties:
+        ttl:
+          $ref: '#/components/schemas/OpenAI.PromptCacheTTLEnum'
+          description: The minimum lifetime applied to every implicit and explicit cache breakpoint written by the request. Defaults to `30m`, which is currently the only supported value. The backend may retain cache entries for longer.
+        mode:
+          $ref: '#/components/schemas/OpenAI.PromptCacheModeEnum'
+          description: Controls whether OpenAI automatically creates an implicit cache breakpoint. Defaults to `implicit`. With `implicit`, OpenAI creates one implicit breakpoint and writes up to the latest three explicit breakpoints in the request. With `explicit`, OpenAI does not create an implicit breakpoint and writes up to the latest four explicit breakpoints. If there are no explicit breakpoints, the request does not use prompt caching.
+      description: Options for prompt caching. Supported for `gpt-5.6` and later models. By default, OpenAI automatically chooses one implicit cache breakpoint. You can add explicit breakpoints to content blocks with `prompt_cache_breakpoint`. Each request can write up to four breakpoints. For cache matching, OpenAI considers up to the latest 80 breakpoints in the conversation, without a content-block lookback limit. Set `mode` to `explicit` to disable the implicit breakpoint. The `ttl` defaults to `30m`, which is currently the only supported value. See the [prompt caching guide](/docs/guides/prompt-caching) for current details.
+      title: Prompt cache options
     OpenAI.PromptCacheRetentionEnum:
       type: string
       enum:
         - in_memory
         - 24h
+    OpenAI.PromptCacheTTLEnum:
+      type: string
+      enum:
+        - 30m
     OpenAI.RankerVersionType:
       type: string
       enum:
@@ -66470,6 +67231,8 @@ components:
                 - gpt-realtime
                 - gpt-realtime-1.5
                 - gpt-realtime-2
+                - gpt-realtime-2.1
+                - gpt-realtime-2.1-mini
                 - gpt-realtime-2025-08-28
                 - gpt-4o-realtime-preview
                 - gpt-4o-realtime-preview-2024-10-01
@@ -67394,6 +68157,11 @@ components:
     OpenAI.Reasoning:
       type: object
       properties:
+        mode:
+          $ref: '#/components/schemas/OpenAI.ReasoningModeEnum'
+          description: |-
+            Controls the reasoning execution mode for the request.
+              When returned on a response, this is the effective execution mode.
         effort:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.ReasoningEffort'
@@ -67438,16 +68206,22 @@ components:
             - medium
             - high
             - xhigh
+            - max
       description: |-
-        Constrains effort on reasoning for
-        [reasoning models](https://platform.openai.com/docs/guides/reasoning).
-        Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing
-        reasoning effort can result in faster responses and fewer tokens used
-        on reasoning in a response.
-        - `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.
-        - All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.
-        - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
-        - `xhigh` is supported for all models after `gpt-5.1-codex-max`.
+        Constrains effort on reasoning for reasoning models. Currently supported
+        values are `none`, `minimal`, `low`, `medium`, `high`, `xhigh`, and `max`.
+        Reducing reasoning effort can result in faster responses and fewer tokens
+        used on reasoning in a response. Not all reasoning models support every
+        value. See the
+        [reasoning guide](https://platform.openai.com/docs/guides/reasoning)
+        for model-specific support.
+    OpenAI.ReasoningModeEnum:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - standard
+            - pro
     OpenAI.ReasoningTextContent:
       type: object
       required:
@@ -67522,6 +68296,7 @@ components:
                 - in_memory
                 - 24h
             - type: 'null'
+          deprecated: true
         previous_response_id:
           anyOf:
             - type: string
@@ -67624,6 +68399,8 @@ components:
             - type: 'null'
         usage:
           $ref: '#/components/schemas/OpenAI.ResponseUsage'
+        prompt_cache_options:
+          $ref: '#/components/schemas/OpenAI.PromptCacheOptions'
         moderation:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.Moderation'
@@ -68303,6 +69080,7 @@ components:
         - server_error
         - rate_limit_exceeded
         - invalid_prompt
+        - bio_policy
         - vector_store_timeout
         - invalid_image
         - invalid_image_format
@@ -69618,6 +70396,13 @@ components:
         summary_index:
           $ref: '#/components/schemas/OpenAI.integer'
           description: The index of the summary part within the reasoning summary.
+        status:
+          type: string
+          enum:
+            - incomplete
+          description: |-
+            The completion status of the summary part. Omitted when the part completed
+              normally and set to `incomplete` when generation was interrupted.
         sequence_number:
           $ref: '#/components/schemas/OpenAI.integer'
           description: The sequence number of this event.
@@ -70219,8 +71004,11 @@ components:
       type: object
       required:
         - cached_tokens
+        - cache_write_tokens
       properties:
         cached_tokens:
+          $ref: '#/components/schemas/OpenAI.integer'
+        cache_write_tokens:
           $ref: '#/components/schemas/OpenAI.integer'
     OpenAI.ResponseUsageOutputTokensDetails:
       type: object
@@ -71330,6 +72118,19 @@ components:
         - $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
       description: Forces the model to call the shell tool when a tool call is required.
       title: Specific shell tool choice
+    OpenAI.SpecificProgrammaticToolCallingParam:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - programmatic_tool_calling
+          description: The tool to call. Always `programmatic_tool_calling`.
+          x-stainless-const: true
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
     OpenAI.StaticChunkingStrategy:
       type: object
       required:
@@ -71668,6 +72469,7 @@ components:
           file_search: '#/components/schemas/OpenAI.FileSearchTool'
           computer_use_preview: '#/components/schemas/OpenAI.ComputerUsePreviewTool'
           web_search: '#/components/schemas/OpenAI.WebSearchTool'
+          programmatic_tool_calling: '#/components/schemas/OpenAI.ProgrammaticToolCallingParam'
           image_generation: '#/components/schemas/OpenAI.ImageGenTool'
           local_shell: '#/components/schemas/OpenAI.LocalShellToolParam'
           shell: '#/components/schemas/OpenAI.FunctionShellToolParam'
@@ -71678,6 +72480,46 @@ components:
           namespace: '#/components/schemas/OpenAI.NamespaceToolParam'
           tool_search: '#/components/schemas/OpenAI.ToolSearchToolParam'
       description: A tool that can be used to generate a response.
+    OpenAI.ToolCallCaller:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          $ref: '#/components/schemas/OpenAI.ToolCallCallerType'
+      discriminator:
+        propertyName: type
+        mapping:
+          direct: '#/components/schemas/OpenAI.DirectToolCallCaller'
+          program: '#/components/schemas/OpenAI.ProgramToolCallCaller'
+      description: The execution context that produced this tool call.
+    OpenAI.ToolCallCallerParam:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          $ref: '#/components/schemas/OpenAI.ToolCallCallerParamType'
+      discriminator:
+        propertyName: type
+        mapping:
+          direct: '#/components/schemas/OpenAI.DirectToolCallCallerParam'
+          program: '#/components/schemas/OpenAI.ProgramToolCallCallerParam'
+      description: The execution context that produced this tool call.
+    OpenAI.ToolCallCallerParamType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - direct
+            - program
+    OpenAI.ToolCallCallerType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - direct
+            - program
     OpenAI.ToolChoiceAllowed:
       type: object
       required:
@@ -71892,6 +72734,7 @@ components:
           function: '#/components/schemas/OpenAI.ToolChoiceFunction'
           mcp: '#/components/schemas/OpenAI.ToolChoiceMCP'
           custom: '#/components/schemas/OpenAI.ToolChoiceCustom'
+          programmatic_tool_calling: '#/components/schemas/OpenAI.SpecificProgrammaticToolCallingParam'
           apply_patch: '#/components/schemas/OpenAI.SpecificApplyPatchParam'
           shell: '#/components/schemas/OpenAI.SpecificFunctionShellParam'
           file_search: '#/components/schemas/OpenAI.ToolChoiceFileSearch'
@@ -71915,6 +72758,7 @@ components:
             - function
             - mcp
             - custom
+            - programmatic_tool_calling
             - apply_patch
             - shell
             - file_search
@@ -71996,6 +72840,7 @@ components:
             - web_search
             - mcp
             - code_interpreter
+            - programmatic_tool_calling
             - image_generation
             - local_shell
             - shell
@@ -73999,7 +74844,8 @@ components:
           type: integer
           format: int32
           minimum: 1
-          description: Maximum number of consecutive reflective minibatch rejections before stopping early. A 'stall' occurs when the optimizer proposes a prompt change, evaluates it on a small subset, and the score does not improve — so no full validation-set evaluation is triggered. The counter resets whenever a minibatch passes and its full-validation score beats the current best. Only a sustained plateau of `max_stalls` consecutive minibatch failures triggers the stop. When omitted, the optimizer uses its internal default. Must be >= 1 when set.
+          description: Maximum number of consecutive reflective minibatch rejections before stopping early. A 'stall' occurs when the optimizer proposes a prompt change, evaluates it on a small subset, and the score does not improve — so no full validation-set evaluation is triggered. The counter resets whenever a minibatch passes and its full-validation score beats the current best. Only a sustained plateau of `max_stalls` consecutive minibatch failures triggers the stop. The service defaults to 5 if a value is not specified by the caller. Must be >= 1 when set.
+          default: 5
       description: Tuning knobs and run-mode for an optimization job.
       x-ms-foundry-meta:
         conditional_previews:
