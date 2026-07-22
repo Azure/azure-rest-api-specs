@@ -42,6 +42,36 @@ interface HorizonDbClusters {
 
   @doc("Lists all HorizonDB clusters in a subscription.")
   listBySubscription is ArmListBySubscription<HorizonDbCluster>;
+
+  @added(Versions.v2026_05_01_preview)
+  @doc("Starts a stopped HorizonDB cluster.")
+  start is ArmResourceActionAsync<
+    HorizonDbCluster,
+    void,
+    ArmResponse<HorizonDbCluster>,
+    LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  @added(Versions.v2026_05_01_preview)
+  @doc("Stops a running HorizonDB cluster.")
+  stop is ArmResourceActionAsync<
+    HorizonDbCluster,
+    void,
+    ArmResponse<HorizonDbCluster>,
+    LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  @added(Versions.v2026_05_01_preview)
+  @doc("Restarts a HorizonDB cluster.")
+  restart is ArmResourceActionAsync<
+    HorizonDbCluster,
+    void,
+    ArmResponse<HorizonDbCluster>,
+    LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 }
 
 @armResourceOperations
