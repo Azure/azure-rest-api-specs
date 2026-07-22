@@ -53,11 +53,7 @@ namespace Azure.AI.Projects {
   // no longer generated here. The Foundry ProjectConversationsClient wrapper consumes
   // OpenAI's OpenAI.Conversations.* types directly.
 
-  @@clientNamespace(OpenAI.Metadata, "Azure.AI.Extensions.OpenAI", "csharp");
-  @@access(OpenAI.Metadata, Access.internal);
-  @@usage(OpenAI.Metadata, Usage.input | Usage.output);
-  @@clientName(OpenAI.Metadata, "InternalMetadataContainer");
-
+  
   @@clientNamespace(Azure.AI.Projects, "Azure.AI.Extensions.OpenAI", "csharp");
 
   @@clientName(CreatedBy, "AgentResponseItemSource");
