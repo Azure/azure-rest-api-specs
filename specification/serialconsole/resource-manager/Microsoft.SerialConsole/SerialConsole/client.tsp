@@ -4,30 +4,36 @@ using Microsoft.SerialConsole;
 using Azure.ClientGenerator.Core;
 using TypeSpec.Rest;
 
-@@clientName(Microsoft.SerialConsole,
+@@clientName(
+  Microsoft.SerialConsole,
   "MicrosoftSerialConsoleClient",
   "javascript,python,go"
 );
 
-@@clientLocation(Microsoft.SerialConsole.SerialConsoleOperationGroup.disableConsole,
+@@clientLocation(
+  Microsoft.SerialConsole.SerialConsoleOperationGroup.disableConsole,
   Microsoft.SerialConsole,
   "go,javascript,python"
 );
-@@clientLocation(Microsoft.SerialConsole.SerialConsoleOperationGroup.enableConsole,
+@@clientLocation(
+  Microsoft.SerialConsole.SerialConsoleOperationGroup.enableConsole,
   Microsoft.SerialConsole,
   "go,javascript,python"
 );
 
-@@clientName(SerialConsoleOperationsValueItem,
+@@clientName(
+  SerialConsoleOperationsValueItem,
   "SerialConsoleOperationInfo",
   "csharp"
 );
-@@clientName(SerialConsoleOperationsValueItemDisplay,
+@@clientName(
+  SerialConsoleOperationsValueItemDisplay,
   "SerialConsoleOperationDisplay",
   "csharp"
 );
 @@clientName(SerialPorts.listBySubscriptions, "GetSerialPorts", "csharp");
-@@alternateType(SerialConsoleOperationsValueItem.isDataAction,
+@@alternateType(
+  SerialConsoleOperationsValueItem.isDataAction,
   boolean,
   "csharp"
 );
