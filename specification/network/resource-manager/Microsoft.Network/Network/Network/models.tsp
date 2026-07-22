@@ -19690,6 +19690,55 @@ model VirtualNetworkDdosProtectionStatusResult
   is Azure.Core.Page<PublicIpDdosProtectionStatusResult>;
 
 /**
+ * Request body for the MoveIpConfigurations operation.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2025_09_01)
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+model MoveIpConfigurationsRequest {
+  /**
+   * A list of IP configuration move items.
+   */
+  @identifiers(#[])
+  moveIpConfigurationItems: MoveIpConfigurationItem[];
+}
+
+/**
+ * An item representing a source and target IP configuration for a move operation.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2025_09_01)
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+model MoveIpConfigurationItem {
+  /**
+   * The source IP configuration to move from.
+   */
+  sourceIpConfiguration: MoveIpConfigurationResourceReference;
+
+  /**
+   * The target IP configuration to move to.
+   */
+  targetIpConfiguration: MoveIpConfigurationResourceReference;
+}
+
+/**
+ * Reference to an IP configuration resource by ARM resource ID.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2025_09_01)
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+model MoveIpConfigurationResourceReference {
+  /**
+   * The ARM resource ID of the IP configuration.
+   */
+  id: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/networkInterfaces/ipConfigurations";
+    }
+  ]>;
+}
+
+/**
  * VirtualNetworkGateway properties.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
