@@ -200,6 +200,11 @@ using Microsoft.Datadog;
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
+@@alternateType(
+  ActivateSaaSParameterRequest.saaSResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
 @@alternateType(PartnerBillingEntity.partnerEntityUri, url, "csharp");
 @@alternateType(DatadogSingleSignOnProperties.singleSignOnUrl, url, "csharp");
 @@alternateType(DatadogOrganizationProperties.redirectUri, url, "csharp");
