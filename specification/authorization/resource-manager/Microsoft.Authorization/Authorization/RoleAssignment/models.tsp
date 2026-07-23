@@ -174,12 +174,12 @@ union PrincipalType {
   Device: "Device",
 
   /**
-   * AgentUser (agentic identity derived from a User).
+   * Agent identity derived from a user.
    */
   AgentUser: "AgentUser",
 
   /**
-   * AgentServicePrincipal (agentic identity derived from a ServicePrincipal).
+   * Agent identity derived from a service principal.
    */
   AgentServicePrincipal: "AgentServicePrincipal",
 }
