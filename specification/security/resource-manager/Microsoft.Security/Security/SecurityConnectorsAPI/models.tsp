@@ -2,12 +2,14 @@
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/versioning";
 import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using TypeSpec.Versioning;
 using Common;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -282,6 +284,23 @@ union SubPlan {
    * P2
    */
   P2: "P2",
+}
+
+/**
+ * The installation method for the Defender for Containers agent.
+ */
+union InstallationMethod {
+  string,
+
+  /**
+   * Arc-based installation
+   */
+  Arc: "Arc",
+
+  /**
+   * Helm-based installation
+   */
+  Helm: "Helm",
 }
 
 /**
@@ -693,6 +712,24 @@ model defenderForContainersAwsOffering extends cloudOffering {
    * The kinesis to s3 connection configuration
    */
   kinesisToS3?: DefenderForContainersAwsOfferingKinesisToS3;
+
+  /**
+   * The installation method for the Defender for Containers agent.
+   */
+  @added(Versions.v2026_08_01_preview)
+  installationMethod?: InstallationMethod;
+
+  /**
+   * Is security gating enabled
+   */
+  @added(Versions.v2026_08_01_preview)
+  securityGatingEnabled?: boolean;
+
+  /**
+   * Is defender anti-malware enabled
+   */
+  @added(Versions.v2026_08_01_preview)
+  containerAntiMalwareEnabled?: boolean;
 
   /**
    * Is audit logs data collection enabled
@@ -1322,6 +1359,24 @@ model defenderForContainersGcpOffering extends cloudOffering {
   enableAuditLogsAutoProvisioning?: boolean;
 
   /**
+   * The installation method for the Defender for Containers agent.
+   */
+  @added(Versions.v2026_08_01_preview)
+  installationMethod?: InstallationMethod;
+
+  /**
+   * Is security gating enabled
+   */
+  @added(Versions.v2026_08_01_preview)
+  securityGatingEnabled?: boolean;
+
+  /**
+   * Is defender anti-malware enabled
+   */
+  @added(Versions.v2026_08_01_preview)
+  containerAntiMalwareEnabled?: boolean;
+
+  /**
    * Is Microsoft Defender for Cloud Kubernetes agent auto provisioning enabled
    */
   enableDefenderAgentAutoProvisioning?: boolean;
@@ -1488,6 +1543,12 @@ model defenderCspmAwsOffering extends cloudOffering {
   mdcContainersAgentlessDiscoveryK8s?: DefenderCspmAwsOfferingMdcContainersAgentlessDiscoveryK8S;
 
   /**
+   * The Microsoft Defender serverless containers configuration
+   */
+  @added(Versions.v2026_08_01_preview)
+  serverlessContainers?: DefenderCspmAwsOfferingServerlessContainers;
+
+  /**
    * The type of the security offering.
    */
   offeringType: "DefenderCspmAws";
@@ -1500,6 +1561,16 @@ model defenderCspmAwsOffering extends cloudOffering {
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model defenderCspmAwsOfferingVmScanners extends vmScannersAws {}
+
+/**
+ * The Microsoft Defender serverless containers configuration
+ */
+model DefenderCspmAwsOfferingServerlessContainers {
+  /**
+   * Is serverless containers scanning enabled
+   */
+  enabled?: boolean;
+}
 
 /**
  * The Microsoft Defender Data Sensitivity discovery configuration
