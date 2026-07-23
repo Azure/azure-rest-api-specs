@@ -1,0 +1,87 @@
+{
+  "parameters": {
+    "api-version": "2025-09-01",
+    "parameters": {
+      "location": "eastus",
+      "properties": {
+        "idleTimeoutInMinutes": 10,
+        "ipTags": [
+          {
+            "ipTagType": "FirstPartyUsage",
+            "tag": "SQL",
+            "firstPartyServiceTagId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/firstPartyServiceTags/myServiceTag"
+          }
+        ],
+        "publicIPAddressVersion": "IPv4",
+        "publicIPAllocationMethod": "Static"
+      },
+      "sku": {
+        "name": "Standard",
+        "tier": "Global"
+      }
+    },
+    "publicIpAddressName": "test-ip",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "test-ip",
+        "type": "Microsoft.Network/publicIPAddresses",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/test-ip",
+        "location": "eastus",
+        "properties": {
+          "ddosSettings": {
+            "protectionMode": "VirtualNetworkInherited"
+          },
+          "idleTimeoutInMinutes": 10,
+          "ipTags": [
+            {
+              "ipTagType": "FirstPartyUsage",
+              "tag": "SQL",
+              "firstPartyServiceTagId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/firstPartyServiceTags/myServiceTag"
+            }
+          ],
+          "provisioningState": "Succeeded",
+          "publicIPAddressVersion": "IPv4",
+          "publicIPAllocationMethod": "Static"
+        },
+        "sku": {
+          "name": "Standard",
+          "tier": "Global"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "test-ip",
+        "type": "Microsoft.Network/publicIPAddresses",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/test-ip",
+        "location": "eastus",
+        "properties": {
+          "ddosSettings": {
+            "protectionMode": "VirtualNetworkInherited"
+          },
+          "idleTimeoutInMinutes": 10,
+          "ipTags": [
+            {
+              "ipTagType": "FirstPartyUsage",
+              "tag": "SQL",
+              "firstPartyServiceTagId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/firstPartyServiceTags/myServiceTag"
+            }
+          ],
+          "provisioningState": "Succeeded",
+          "publicIPAddressVersion": "IPv4",
+          "publicIPAllocationMethod": "Static"
+        },
+        "sku": {
+          "name": "Standard",
+          "tier": "Global"
+        }
+      }
+    }
+  },
+  "operationId": "PublicIPAddresses_CreateOrUpdate",
+  "title": "Create public IP address with first party service tag"
+}

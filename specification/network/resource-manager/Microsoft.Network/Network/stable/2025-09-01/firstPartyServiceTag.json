@@ -1,0 +1,464 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "WebApplicationFirewallManagement",
+    "version": "2025-09-01",
+    "description": "APIs to manage Microsoft Azure network resources.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "FirstPartyServiceTags"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/firstPartyServiceTags": {
+      "get": {
+        "operationId": "FirstPartyServiceTags_ListAll",
+        "tags": [
+          "FirstPartyServiceTags"
+        ],
+        "description": "Gets all the first party service tags in a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FirstPartyServiceTagListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all first party service tags": {
+            "$ref": "./examples/FirstPartyServiceTagListAll.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firstPartyServiceTags": {
+      "get": {
+        "operationId": "FirstPartyServiceTags_List",
+        "tags": [
+          "FirstPartyServiceTags"
+        ],
+        "description": "Gets all the first party service tags in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FirstPartyServiceTagListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List first party service tags in resource group": {
+            "$ref": "./examples/FirstPartyServiceTagList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firstPartyServiceTags/{firstPartyServiceTagName}": {
+      "get": {
+        "operationId": "FirstPartyServiceTags_Get",
+        "tags": [
+          "FirstPartyServiceTags"
+        ],
+        "description": "Gets the specified first party service tag.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "firstPartyServiceTagName",
+            "in": "path",
+            "description": "The name of the first party service tag.",
+            "required": true,
+            "type": "string",
+            "maxLength": 80,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,79}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FirstPartyServiceTag"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get first party service tag": {
+            "$ref": "./examples/FirstPartyServiceTagGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "FirstPartyServiceTags_CreateOrUpdate",
+        "tags": [
+          "FirstPartyServiceTags"
+        ],
+        "description": "Creates or updates a first party service tag.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "firstPartyServiceTagName",
+            "in": "path",
+            "description": "The name of the first party service tag.",
+            "required": true,
+            "type": "string",
+            "maxLength": 80,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,79}$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to the create or update first party service tag operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FirstPartyServiceTag"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'FirstPartyServiceTag' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/FirstPartyServiceTag"
+            }
+          },
+          "201": {
+            "description": "Resource 'FirstPartyServiceTag' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/FirstPartyServiceTag"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create first party service tag": {
+            "$ref": "./examples/FirstPartyServiceTagCreate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/FirstPartyServiceTag"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "FirstPartyServiceTags_UpdateTags",
+        "tags": [
+          "FirstPartyServiceTags"
+        ],
+        "description": "Updates a first party service tag tags.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "firstPartyServiceTagName",
+            "in": "path",
+            "description": "The name of the first party service tag.",
+            "required": true,
+            "type": "string",
+            "maxLength": 80,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,79}$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to update first party service tag tags.",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json#/definitions/TagsObject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FirstPartyServiceTag"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update first party service tag tags": {
+            "$ref": "./examples/FirstPartyServiceTagUpdateTags.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/FirstPartyServiceTag"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "FirstPartyServiceTags_Delete",
+        "tags": [
+          "FirstPartyServiceTags"
+        ],
+        "description": "Deletes the specified first party service tag.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "firstPartyServiceTagName",
+            "in": "path",
+            "description": "The name of the first party service tag.",
+            "required": true,
+            "type": "string",
+            "maxLength": 80,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,79}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete first party service tag": {
+            "$ref": "./examples/FirstPartyServiceTagDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "FirstPartyServiceTag": {
+      "type": "object",
+      "description": "First party service tag resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FirstPartyServiceTagPropertiesFormat",
+          "description": "Properties of the first party service tag."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "FirstPartyServiceTagListResult": {
+      "type": "object",
+      "description": "The response of a FirstPartyServiceTag list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The FirstPartyServiceTag items on this page",
+          "items": {
+            "$ref": "#/definitions/FirstPartyServiceTag"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "FirstPartyServiceTagPropertiesFormat": {
+      "type": "object",
+      "description": "Properties of the first party service tag.",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "The value of the first party service tag."
+        },
+        "failedReason": {
+          "type": "string",
+          "description": "The reason for failure, if any.",
+          "readOnly": true
+        },
+        "resourceGuid": {
+          "type": "string",
+          "description": "The resource GUID property of the first party service tag resource.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/Common.ProvisioningState",
+          "description": "The provisioning state of the first party service tag resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "value"
+      ]
+    }
+  },
+  "parameters": {}
+}
