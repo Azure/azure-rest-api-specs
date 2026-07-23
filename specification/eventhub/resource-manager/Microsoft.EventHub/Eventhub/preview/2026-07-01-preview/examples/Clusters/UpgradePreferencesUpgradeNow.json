@@ -1,0 +1,34 @@
+{
+  "parameters": {
+    "api-version": "2026-07-01-preview",
+    "clusterName": "contoso-cluster",
+    "resourceGroupName": "contoso-rg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-rg/providers/Microsoft.EventHub/clusters/contoso-cluster/upgradePreferences/default",
+        "name": "default",
+        "properties": {
+          "maintenanceWindows": [
+            {
+              "dayOfWeek": "Saturday",
+              "durationMinutes": 960,
+              "startTimeOfDay": "PT2H"
+            }
+          ],
+          "upgradeStatus": {
+            "completesAt": "2026-07-02T20:00:00Z",
+            "inProgress": true,
+            "pendingUpgrade": true
+          }
+        },
+        "type": "Microsoft.EventHub/clusters/upgradePreferences"
+      }
+    },
+    "204": {}
+  },
+  "operationId": "UpgradePreferencesOperations_UpgradeNow",
+  "title": "Start an upgrade immediately"
+}

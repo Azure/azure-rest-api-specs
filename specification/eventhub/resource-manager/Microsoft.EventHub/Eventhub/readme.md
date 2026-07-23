@@ -266,10 +266,64 @@ input-file:
 - stable/2026-01-01/openapi.json
 ```
 
+### Tag: package-2026-07-preview
+
+These settings apply only when `--tag=package-2026-07-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2026-07-preview'
+input-file:
+- preview/2026-07-01-preview/openapi.json
+```
+
 ## Suppression
 
 ``` yaml
 directive:
+  - suppress: ResourceNameRestriction
+    from: openapi.json
+    reason: The new child resource names are constrained, but existing namespace, Event Hub, and cluster parent names have no service-enforced regular expression constraint that can be added only to this preview version.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/clusters/{clusterName}/upgradePreferences/default"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/clusters/{clusterName}/upgradePreferences/default/upgradeNow"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/eventhubs/{eventHubName}/fabricShortcuts"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/eventhubs/{eventHubName}/fabricShortcuts/{fabricShortcutName}"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/eventhubs/{eventHubName}/fabricShortcuts/{fabricShortcutName}/approve"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/eventhubs/{eventHubName}/fabricShortcuts/{fabricShortcutName}/reject"]
+  - suppress: PutResponseCodes
+    from: openapi.json
+    reason: The service returns 200 for both create and update for these resources.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/clusters/{clusterName}/upgradePreferences/default"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/eventhubs/{eventHubName}/fabricShortcuts/{fabricShortcutName}"].put
+  - suppress: PostResponseCodes
+    from: openapi.json
+    reason: Upgrade now returns 200 when an upgrade starts and 204 when no upgrade is pending.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/clusters/{clusterName}/upgradePreferences/default/upgradeNow"].post
+  - suppress: RequestSchemaForTrackedResourcesMustHaveTags
+    from: openapi.json
+    reason: Fabric shortcuts are proxy resources and do not support tags.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/eventhubs/{eventHubName}/fabricShortcuts/{fabricShortcutName}"].put
+  - suppress: DeleteResponseCodes
+    from: openapi.json
+    reason: Fabric shortcut deletion returns 200 on success.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/eventhubs/{eventHubName}/fabricShortcuts/{fabricShortcutName}"].delete
+  - suppress: DeleteOperationResponses
+    from: openapi.json
+    reason: Fabric shortcut deletion returns an empty 200 response on success.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/eventhubs/{eventHubName}/fabricShortcuts/{fabricShortcutName}"].delete.responses
+  - suppress: GuidUsage
+    from: openapi.json
+    reason: Microsoft Fabric tenant, workspace, and artifact identifiers are UUIDs by definition.
+    where: $.definitions["Azure.Core.uuid"].format
+  - suppress: TrackedResourcePatchOperation
+    from: openapi.json
+    reason: Fabric shortcuts are proxy resources and do not support tags or PATCH.
+    where: $.definitions.FabricShortcut
+  - suppress: NestedResourcesMustHaveListOperation
+    from: openapi.json
+    reason: Upgrade preferences are a singleton child resource and do not have a list operation.
+    where: $.definitions.UpgradePreferences
+
   - suppress: MissingTypeObject
     from: CheckNameAvailability.json
     reason: Not a mandatory check
@@ -547,6 +601,3 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
-
-
-
