@@ -106,6 +106,7 @@ suppressions:
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationSecurityGroups/{applicationSecurityGroupName}/addressPrefixSets"]
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationSecurityGroups/{applicationSecurityGroupName}/addressPrefixSets/{addressPrefixSetName}"]
+  - code: ProvisioningStateMustBeReadOnly
     from: expressRoute.json
     reason: The emitted {$ref, readOnly true} shape matches all pre-existing peer resources in expressRoute.json (ExpressRouteCircuit, ExpressRoutePort, etc.). A Network-RP-wide TypeSpec correction is tracked separately.
     where:
