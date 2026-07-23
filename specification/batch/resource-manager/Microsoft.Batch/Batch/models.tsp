@@ -2137,6 +2137,12 @@ model PoolProperties {
   vmSkuProfile?: VirtualMachineSkuProfile;
 
   /**
+   * Specifies the hardware settings for the compute nodes.
+   */
+  @added(Versions.v2026_08_01)
+  vmHardwareProfile?: VirtualMachineHardwareProfile;
+
+  /**
    * Deployment configuration properties.
    */
   @summary("This property describes the virtual machines that the pool nodes will be deployed on.")
@@ -2434,6 +2440,36 @@ union VirtualMachineSkuAllocationStrategy {
    * Follow the customer-defined ranking via the 0-based rank, falling back to the next rank when a preferred SKU is unavailable.
    */
   Prioritized: "Prioritized",
+}
+
+/**
+ * Specifies the hardware settings for the compute nodes.
+ */
+@added(Versions.v2026_08_01)
+model VirtualMachineHardwareProfile {
+  /**
+   * Specifies the properties for customizing the size of the virtual machine.
+   */
+  vmSizeProperties?: VMSizeProperties;
+}
+
+/**
+ * Specifies the properties for customizing the size of the virtual machine.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "VMSizeProperties matches the Azure Compute VM size customization model naming."
+@added(Versions.v2026_08_01)
+model VMSizeProperties {
+  /**
+   * Specifies the number of vCPUs available for the VM. When this property is not specified in the request body the default behavior is to set it to the value of vCPUs available for that VM size.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "vCPUsAvailable matches the Azure Compute VM size property naming."
+  vCPUsAvailable?: int32;
+
+  /**
+   * Specifies the vCPU to physical core ratio. When this property is not specified in the request body the default behavior is set to the value of vCPUsPerCore for the VM Size. **Setting this property to 1 also means that hyper-threading is disabled.**
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "vCPUsPerCore matches the Azure Compute VM size property naming."
+  vCPUsPerCore?: int32;
 }
 
 /**
