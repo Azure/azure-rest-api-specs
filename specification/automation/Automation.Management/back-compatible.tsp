@@ -955,3 +955,4 @@ using Microsoft.Automation;
 );
 
 @@visibility(Watcher.tags, Lifecycle.Read, Lifecycle.Create, Lifecycle.Update);
+@@clientName(SourceControls.create::parameters.resource, "parameters");
