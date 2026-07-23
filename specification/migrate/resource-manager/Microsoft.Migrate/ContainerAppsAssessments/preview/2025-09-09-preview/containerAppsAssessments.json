@@ -1,0 +1,4295 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Migrate Assessment Service",
+    "version": "2025-09-09-preview",
+    "description": "Azure Migrate Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "ContainerAppsAssessmentOperations"
+    },
+    {
+      "name": "AssessedWebApplicationOperations"
+    },
+    {
+      "name": "ContainerAppsOptionsOperations"
+    },
+    {
+      "name": "ContainerAppsSummaryOperations"
+    },
+    {
+      "name": "ContainerAppsManagedEnvironmentOperations"
+    },
+    {
+      "name": "ContainerAppsCostDetailOperations"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/containerAppsAssessmentOptions": {
+      "get": {
+        "operationId": "ContainerAppsOptionsOperations_ListByParent",
+        "tags": [
+          "ContainerAppsOptionsOperations"
+        ],
+        "description": "List ContainerAppsAssessmentOptions resources by AssessmentProject",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Assessment Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ContainerAppsAssessmentOptionsListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ContainerAppsOptionsOperations_ListByParent_MaximumSet": {
+            "$ref": "./examples/ContainerAppsOptionsOperations_ListByParent_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/containerAppsAssessmentOptions/{assessmentOptionsName}": {
+      "get": {
+        "operationId": "ContainerAppsOptionsOperations_Get",
+        "tags": [
+          "ContainerAppsOptionsOperations"
+        ],
+        "description": "Get a ContainerAppsAssessmentOptions",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Assessment Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "assessmentOptionsName",
+            "in": "path",
+            "description": "Azure Container Apps Assessment Options Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ContainerAppsAssessmentOptions"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ContainerAppsOptionsOperations_Get_MaximumSet": {
+            "$ref": "./examples/ContainerAppsOptionsOperations_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/containerAppsAssessments": {
+      "get": {
+        "operationId": "ContainerAppsAssessmentOperations_ListByParent",
+        "tags": [
+          "ContainerAppsAssessmentOperations"
+        ],
+        "description": "List ContainerAppsAssessment resources by AssessmentProject",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Assessment Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ContainerAppsAssessmentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ContainerAppsAssessmentOperations_ListByParent_MaximumSet": {
+            "$ref": "./examples/ContainerAppsAssessmentOperations_ListByParent_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/containerAppsAssessments/{assessmentName}": {
+      "get": {
+        "operationId": "ContainerAppsAssessmentOperations_Get",
+        "tags": [
+          "ContainerAppsAssessmentOperations"
+        ],
+        "description": "Get a ContainerAppsAssessment",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Assessment Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "description": "Azure Container Apps Assessment Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ContainerAppsAssessment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ContainerAppsAssessmentOperations_Get_MaximumSet": {
+            "$ref": "./examples/ContainerAppsAssessmentOperations_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ContainerAppsAssessmentOperations_Create",
+        "tags": [
+          "ContainerAppsAssessmentOperations"
+        ],
+        "description": "Create a ContainerAppsAssessment",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Assessment Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "description": "Azure Container Apps Assessment Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ContainerAppsAssessment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ContainerAppsAssessment' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ContainerAppsAssessment"
+            }
+          },
+          "201": {
+            "description": "Resource 'ContainerAppsAssessment' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ContainerAppsAssessment"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ContainerAppsAssessmentOperations_Create_MaximumSet": {
+            "$ref": "./examples/ContainerAppsAssessmentOperations_Create_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ContainerAppsAssessmentOperations_Delete",
+        "tags": [
+          "ContainerAppsAssessmentOperations"
+        ],
+        "description": "Delete a ContainerAppsAssessment",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Assessment Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "description": "Azure Container Apps Assessment Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ContainerAppsAssessmentOperations_Delete_MaximumSet": {
+            "$ref": "./examples/ContainerAppsAssessmentOperations_Delete_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/containerAppsAssessments/{assessmentName}/assessedWebApps": {
+      "get": {
+        "operationId": "AssessedWebApplicationOperations_ListByParent",
+        "tags": [
+          "AssessedWebApplicationOperations"
+        ],
+        "description": "List AssessedWebApplication resources by ContainerAppsAssessment",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Assessment Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "description": "Azure Container Apps Assessment Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AssessedWebApplicationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AssessedWebApplicationOperations_ListByParent_MaximumSet": {
+            "$ref": "./examples/AssessedWebApplicationOperations_ListByParent_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/containerAppsAssessments/{assessmentName}/assessedWebApps/{assessedWorkload}": {
+      "get": {
+        "operationId": "AssessedWebApplicationOperations_Get",
+        "tags": [
+          "AssessedWebApplicationOperations"
+        ],
+        "description": "Get a AssessedWebApplication",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Assessment Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "description": "Azure Container Apps Assessment Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "assessedWorkload",
+            "in": "path",
+            "description": "Assessed Web Application Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AssessedWebApplication"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AssessedWebApplicationOperations_Get_MaximumSet": {
+            "$ref": "./examples/AssessedWebApplicationOperations_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/containerAppsAssessments/{assessmentName}/costDetails": {
+      "get": {
+        "operationId": "ContainerAppsCostDetailOperations_ListByParent",
+        "tags": [
+          "ContainerAppsCostDetailOperations"
+        ],
+        "description": "List ContainerAppsCostDetail resources by ContainerAppsAssessment",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Assessment Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "description": "Azure Container Apps Assessment Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ContainerAppsCostDetailListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ContainerAppsCostDetailOperations_ListByParent_MaximumSet": {
+            "$ref": "./examples/ContainerAppsCostDetailOperations_ListByParent_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/containerAppsAssessments/{assessmentName}/downloadUrl": {
+      "post": {
+        "operationId": "ContainerAppsAssessmentOperations_DownloadUrl",
+        "tags": [
+          "ContainerAppsAssessmentOperations"
+        ],
+        "description": "Get URL for downloading Azure Container Apps Assessment Report.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Assessment Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "description": "Azure Container Apps Assessment Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DownloadUrl"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ContainerAppsAssessmentOperations_DownloadUrl_MaximumSet": {
+            "$ref": "./examples/ContainerAppsAssessmentOperations_DownloadUrl_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/containerAppsAssessments/{assessmentName}/managedEnvironments": {
+      "get": {
+        "operationId": "ContainerAppsManagedEnvironmentOperations_ListByParent",
+        "tags": [
+          "ContainerAppsManagedEnvironmentOperations"
+        ],
+        "description": "List ContainerAppsManagedEnvironment resources by ContainerAppsAssessment",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Assessment Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "description": "Azure Container Apps Assessment Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ContainerAppsManagedEnvironmentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ContainerAppsManagedEnvironmentOperations_ListByParent_MaximumSet": {
+            "$ref": "./examples/ContainerAppsManagedEnvironmentOperations_ListByParent_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/containerAppsAssessments/{assessmentName}/managedEnvironments/{managedEnvironmentName}": {
+      "get": {
+        "operationId": "ContainerAppsManagedEnvironmentOperations_Get",
+        "tags": [
+          "ContainerAppsManagedEnvironmentOperations"
+        ],
+        "description": "Get a ContainerAppsManagedEnvironment",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Assessment Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "description": "Azure Container Apps Assessment Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "managedEnvironmentName",
+            "in": "path",
+            "description": "Azure Container Apps Managed Environment Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ContainerAppsManagedEnvironment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ContainerAppsManagedEnvironmentOperations_Get_MaximumSet": {
+            "$ref": "./examples/ContainerAppsManagedEnvironmentOperations_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/containerAppsAssessments/{assessmentName}/summaries": {
+      "get": {
+        "operationId": "ContainerAppsSummaryOperations_ListByParent",
+        "tags": [
+          "ContainerAppsSummaryOperations"
+        ],
+        "description": "List ContainerAppsSummary resources by ContainerAppsAssessment",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Assessment Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "description": "Azure Container Apps Assessment Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ContainerAppsSummaryListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ContainerAppsSummaryOperations_ListByParent_MaximumSet": {
+            "$ref": "./examples/ContainerAppsSummaryOperations_ListByParent_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/containerAppsAssessments/{assessmentName}/summaries/{summaryName}": {
+      "get": {
+        "operationId": "ContainerAppsSummaryOperations_Get",
+        "tags": [
+          "ContainerAppsSummaryOperations"
+        ],
+        "description": "Get a ContainerAppsSummary",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Assessment Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "description": "Azure Container Apps Assessment Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "summaryName",
+            "in": "path",
+            "description": "Azure Container Apps Assessment Summary Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ContainerAppsSummary"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ContainerAppsSummaryOperations_Get_MaximumSet": {
+            "$ref": "./examples/ContainerAppsSummaryOperations_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AssessedWebApplication": {
+      "type": "object",
+      "description": "ARM model of Assessed Web Application.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AssessedWebApplicationProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AssessedWebApplicationListResult": {
+      "type": "object",
+      "description": "The response of a AssessedWebApplication list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AssessedWebApplication items on this page",
+          "items": {
+            "$ref": "#/definitions/AssessedWebApplication"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AssessedWebApplicationProperties": {
+      "type": "object",
+      "description": "Assessed Web Application Properties.",
+      "properties": {
+        "workloadType": {
+          "$ref": "#/definitions/MigrateWorkloadType",
+          "description": "The workload type",
+          "readOnly": true
+        },
+        "linkages": {
+          "type": "array",
+          "description": "The linkages list.",
+          "items": {
+            "$ref": "#/definitions/Linkages"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "recommendations": {
+          "type": "array",
+          "description": "The recommendation list.",
+          "items": {
+            "type": "object",
+            "description": "Recommendation details",
+            "properties": {
+              "configuration": {
+                "$ref": "#/definitions/Configuration",
+                "description": "The configuration data.",
+                "readOnly": true
+              },
+              "recommendedFor": {
+                "$ref": "#/definitions/RecommendedFor",
+                "description": "The recommended details.",
+                "readOnly": true
+              },
+              "migrationPlatform": {
+                "$ref": "#/definitions/MigrationPlatform",
+                "description": "The migration Platform.",
+                "readOnly": true
+              },
+              "confidenceScore": {
+                "type": "number",
+                "format": "float",
+                "description": "The confidence score.",
+                "readOnly": true
+              },
+              "migrationSuitability": {
+                "$ref": "#/definitions/MigrationSuitability",
+                "description": "The migration suitability.",
+                "readOnly": true
+              },
+              "securitySuitability": {
+                "$ref": "#/definitions/SecuritySuitability",
+                "description": "The security suitability.",
+                "readOnly": true
+              },
+              "totalCost": {
+                "type": "array",
+                "description": "The total cost details.",
+                "items": {
+                  "$ref": "#/definitions/CostDetailsCommon"
+                },
+                "readOnly": true,
+                "x-ms-identifiers": []
+              },
+              "totalSavings": {
+                "type": "array",
+                "description": "The total cost details.",
+                "items": {
+                  "$ref": "#/definitions/SavingsDetailsCommon"
+                },
+                "readOnly": true,
+                "x-ms-identifiers": []
+              },
+              "migrationIssues": {
+                "type": "array",
+                "description": "The migration issues list.",
+                "items": {
+                  "$ref": "#/definitions/MigrationIssues"
+                },
+                "readOnly": true,
+                "x-ms-identifiers": []
+              },
+              "skus": {
+                "type": "array",
+                "description": "The Skus list.",
+                "items": {
+                  "type": "object",
+                  "description": "Skus details.",
+                  "properties": {
+                    "kind": {
+                      "$ref": "#/definitions/SkuKind",
+                      "description": "The Sku kind.",
+                      "readOnly": true
+                    },
+                    "resourceUri": {
+                      "type": "string",
+                      "description": "The resource uri.",
+                      "readOnly": true
+                    },
+                    "displayName": {
+                      "type": "string",
+                      "description": "The sku name.",
+                      "readOnly": true
+                    },
+                    "id": {
+                      "type": "string",
+                      "description": "The sku id.",
+                      "readOnly": true
+                    },
+                    "type": {
+                      "$ref": "#/definitions/SkuType",
+                      "description": "The sku type.",
+                      "readOnly": true
+                    },
+                    "sources": {
+                      "type": "array",
+                      "description": "The source name.",
+                      "items": {
+                        "type": "object",
+                        "description": "Source recommendation details.",
+                        "properties": {
+                          "name": {
+                            "type": "string",
+                            "description": "The sku name.",
+                            "readOnly": true
+                          },
+                          "migrationSuitability": {
+                            "$ref": "#/definitions/MigrationSuitability",
+                            "description": "The sku type.",
+                            "readOnly": true
+                          }
+                        }
+                      },
+                      "readOnly": true,
+                      "x-ms-identifiers": []
+                    },
+                    "details": {
+                      "$ref": "#/definitions/SkuDetails",
+                      "description": "The sku details.",
+                      "readOnly": true
+                    }
+                  }
+                },
+                "readOnly": true,
+                "x-ms-identifiers": []
+              }
+            }
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "recommendationResult": {
+          "$ref": "#/definitions/RecommendationResult",
+          "description": "Recommendation Result of assessed webapp."
+        },
+        "webAppType": {
+          "$ref": "#/definitions/WebServerType",
+          "description": "Type of assessed webapp."
+        }
+      },
+      "required": [
+        "recommendationResult",
+        "webAppType"
+      ]
+    },
+    "AssessmentDetails": {
+      "type": "object",
+      "description": "Assessment details class.",
+      "properties": {
+        "confidenceRatingInPercentage": {
+          "type": "number",
+          "format": "float",
+          "description": "Confidence Rating in Percentage.",
+          "readOnly": true
+        },
+        "pricesTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last time when rates were queried.",
+          "readOnly": true
+        },
+        "createdTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and Time when assessment was created.",
+          "readOnly": true
+        },
+        "updatedTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and Time when assessment was last updated.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/AssessmentStatus",
+          "description": "Whether assessment is in valid state and all machines have been assessed.",
+          "readOnly": true
+        }
+      }
+    },
+    "AssessmentProject": {
+      "type": "object",
+      "description": "An Assessment project site resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ProjectProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "AssessmentSettings": {
+      "type": "object",
+      "description": "Assessment settings class.",
+      "properties": {
+        "azureLocation": {
+          "type": "string",
+          "description": "Azure Location or Azure region where to which the machines will be migrated."
+        },
+        "currency": {
+          "$ref": "#/definitions/AzureCurrency",
+          "description": "Currency in which prices should be reported."
+        },
+        "scalingFactor": {
+          "type": "number",
+          "format": "float",
+          "description": "Percentage of buffer that user wants on performance metrics when recommending\nAzure sizes."
+        },
+        "discountPercentage": {
+          "type": "number",
+          "format": "float",
+          "description": "Custom discount percentage."
+        },
+        "sizingCriterion": {
+          "$ref": "#/definitions/AssessmentSizingCriterion",
+          "description": "Assessment sizing criterion."
+        },
+        "performanceData": {
+          "$ref": "#/definitions/PerformanceData",
+          "description": "Gets or sets the performance data."
+        },
+        "savingsSettings": {
+          "$ref": "#/definitions/SavingsSettings",
+          "description": "Gets or sets the savings settings."
+        },
+        "billingSettings": {
+          "$ref": "#/definitions/BillingSettings",
+          "description": "Gets or sets the billing settings."
+        },
+        "environmentType": {
+          "$ref": "#/definitions/EnvironmentType",
+          "description": "Gets or sets user configurable setting to display the environment type."
+        }
+      }
+    },
+    "AssessmentSizingCriterion": {
+      "type": "string",
+      "description": "Assessment Sizing Criteria.",
+      "enum": [
+        "PerformanceBased",
+        "AsOnPremises"
+      ],
+      "x-ms-enum": {
+        "name": "AssessmentSizingCriterion",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PerformanceBased",
+            "value": "PerformanceBased",
+            "description": "Performance Data based Sizing."
+          },
+          {
+            "name": "AsOnPremises",
+            "value": "AsOnPremises",
+            "description": "As On Premises or Static Data based Sizing."
+          }
+        ]
+      }
+    },
+    "AssessmentSource": {
+      "type": "string",
+      "description": "Assessment Source",
+      "enum": [
+        "Unknown",
+        "Machine",
+        "IIS",
+        "TomCat",
+        "OracleServer",
+        "OracleDatabase",
+        "SAPInstance",
+        "SpringbootApplication",
+        "MySQLServer",
+        "SqlInstance",
+        "SqlDatabase",
+        "WebApps"
+      ],
+      "x-ms-enum": {
+        "name": "AssessmentSource",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown - Assessment Source"
+          },
+          {
+            "name": "Machine",
+            "value": "Machine",
+            "description": "Machine - Assessment Source"
+          },
+          {
+            "name": "IIS",
+            "value": "IIS",
+            "description": "IIS - Assessment Source"
+          },
+          {
+            "name": "TomCat",
+            "value": "TomCat",
+            "description": "TomCat - Assessment Source"
+          },
+          {
+            "name": "OracleServer",
+            "value": "OracleServer",
+            "description": "OracleServer - Assessment Source"
+          },
+          {
+            "name": "OracleDatabase",
+            "value": "OracleDatabase",
+            "description": "OracleDatabase - Assessment Source"
+          },
+          {
+            "name": "SAPInstance",
+            "value": "SAPInstance",
+            "description": "SAPInstance - Assessment Source"
+          },
+          {
+            "name": "SpringbootApplication",
+            "value": "SpringbootApplication",
+            "description": "SpringbootApplication - Assessment Source"
+          },
+          {
+            "name": "MySQLServer",
+            "value": "MySQLServer",
+            "description": "MySQLServer - Assessment Source"
+          },
+          {
+            "name": "SqlInstance",
+            "value": "SqlInstance",
+            "description": "SqlInstance - Assessment Source"
+          },
+          {
+            "name": "SqlDatabase",
+            "value": "SqlDatabase",
+            "description": "SqlDatabase - Assessment Source"
+          },
+          {
+            "name": "WebApps",
+            "value": "WebApps",
+            "description": "WebApps - Assessment Source"
+          }
+        ]
+      }
+    },
+    "AssessmentStatus": {
+      "type": "string",
+      "description": "Assessment Status.",
+      "enum": [
+        "Created",
+        "Updated",
+        "Running",
+        "Completed",
+        "Invalid",
+        "OutOfSync",
+        "OutDated",
+        "Deleted",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "AssessmentStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Created",
+            "value": "Created",
+            "description": "Assessment is Created."
+          },
+          {
+            "name": "Updated",
+            "value": "Updated",
+            "description": "Assessment is Updated."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "Assessment is currently running."
+          },
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "Assessment is Completed or Ready."
+          },
+          {
+            "name": "Invalid",
+            "value": "Invalid",
+            "description": "Assessment is Failed i.e. it is now invalid."
+          },
+          {
+            "name": "OutOfSync",
+            "value": "OutOfSync",
+            "description": "Assessment is Out of Sync."
+          },
+          {
+            "name": "OutDated",
+            "value": "OutDated",
+            "description": "Assessment is Out Dated."
+          },
+          {
+            "name": "Deleted",
+            "value": "Deleted",
+            "description": "Assessment is Deleted."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Assessment has Failed."
+          }
+        ]
+      }
+    },
+    "Azure.Core.azureLocation": {
+      "type": "string",
+      "description": "Represents an Azure geography region where supported resource providers live."
+    },
+    "AzureCurrency": {
+      "type": "string",
+      "description": "Currency for Azure.",
+      "enum": [
+        "Unknown",
+        "USD",
+        "DKK",
+        "CAD",
+        "IDR",
+        "JPY",
+        "KRW",
+        "NZD",
+        "NOK",
+        "RUB",
+        "SAR",
+        "ZAR",
+        "SEK",
+        "TRY",
+        "GBP",
+        "MXN",
+        "MYR",
+        "INR",
+        "HKD",
+        "BRL",
+        "TWD",
+        "EUR",
+        "CHF",
+        "ARS",
+        "AUD",
+        "CNY"
+      ],
+      "x-ms-enum": {
+        "name": "AzureCurrency",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown Currency for Azure"
+          },
+          {
+            "name": "USD",
+            "value": "USD",
+            "description": "USD Currency for Azure"
+          },
+          {
+            "name": "DKK",
+            "value": "DKK",
+            "description": "DKK Currency for Azure"
+          },
+          {
+            "name": "CAD",
+            "value": "CAD",
+            "description": "CAD Currency for Azure"
+          },
+          {
+            "name": "IDR",
+            "value": "IDR",
+            "description": "IDR Currency for Azure"
+          },
+          {
+            "name": "JPY",
+            "value": "JPY",
+            "description": "JPY Currency for Azure"
+          },
+          {
+            "name": "KRW",
+            "value": "KRW",
+            "description": "KRW Currency for Azure"
+          },
+          {
+            "name": "NZD",
+            "value": "NZD",
+            "description": "NZD Currency for Azure"
+          },
+          {
+            "name": "NOK",
+            "value": "NOK",
+            "description": "NOK Currency for Azure"
+          },
+          {
+            "name": "RUB",
+            "value": "RUB",
+            "description": "RUB Currency for Azure"
+          },
+          {
+            "name": "SAR",
+            "value": "SAR",
+            "description": "SAR Currency for Azure"
+          },
+          {
+            "name": "ZAR",
+            "value": "ZAR",
+            "description": "ZAR Currency for Azure"
+          },
+          {
+            "name": "SEK",
+            "value": "SEK",
+            "description": "SEK Currency for Azure"
+          },
+          {
+            "name": "TRY",
+            "value": "TRY",
+            "description": "TRY Currency for Azure"
+          },
+          {
+            "name": "GBP",
+            "value": "GBP",
+            "description": "GBP Currency for Azure"
+          },
+          {
+            "name": "MXN",
+            "value": "MXN",
+            "description": "MXN Currency for Azure"
+          },
+          {
+            "name": "MYR",
+            "value": "MYR",
+            "description": "MYR Currency for Azure"
+          },
+          {
+            "name": "INR",
+            "value": "INR",
+            "description": "INR Currency for Azure"
+          },
+          {
+            "name": "HKD",
+            "value": "HKD",
+            "description": "HKD Currency for Azure"
+          },
+          {
+            "name": "BRL",
+            "value": "BRL",
+            "description": "BRL Currency for Azure"
+          },
+          {
+            "name": "TWD",
+            "value": "TWD",
+            "description": "TWD Currency for Azure"
+          },
+          {
+            "name": "EUR",
+            "value": "EUR",
+            "description": "EUR Currency for Azure"
+          },
+          {
+            "name": "CHF",
+            "value": "CHF",
+            "description": "CHF Currency for Azure"
+          },
+          {
+            "name": "ARS",
+            "value": "ARS",
+            "description": "ARS Currency for Azure"
+          },
+          {
+            "name": "AUD",
+            "value": "AUD",
+            "description": "AUD Currency for Azure"
+          },
+          {
+            "name": "CNY",
+            "value": "CNY",
+            "description": "CNY Currency for Azure"
+          }
+        ]
+      }
+    },
+    "AzureManagementOfferingType": {
+      "type": "string",
+      "description": "Azure management Offering type",
+      "enum": [
+        "No",
+        "SCOMMI",
+        "AzMon",
+        "AUM",
+        "AzureBackup"
+      ],
+      "x-ms-enum": {
+        "name": "AzureManagementOfferingType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "No",
+            "value": "No",
+            "description": "No - Azure management Offering type"
+          },
+          {
+            "name": "SCOMMI",
+            "value": "SCOMMI",
+            "description": "SCOMMI - Azure management Offering type"
+          },
+          {
+            "name": "AzMon",
+            "value": "AzMon",
+            "description": "AzMon - Azure management Offering type"
+          },
+          {
+            "name": "AUM",
+            "value": "AUM",
+            "description": "AUM - Azure management Offering type"
+          },
+          {
+            "name": "AzureBackup",
+            "value": "AzureBackup",
+            "description": "AzureBackup - Azure management Offering type"
+          }
+        ]
+      }
+    },
+    "AzureOffer": {
+      "type": "string",
+      "description": "Azure Offer",
+      "enum": [
+        "Unknown",
+        "MSAZR0003P",
+        "MSAZR0023P",
+        "MSMCAZR0044P",
+        "MSMCAZR0059P",
+        "MSMCAZR0060P",
+        "MSMCAZR0063P",
+        "MSAZRUSGOV0003P",
+        "EA",
+        "SavingsPlan1Year",
+        "SavingsPlan3Year"
+      ],
+      "x-ms-enum": {
+        "name": "AzureOffer",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown - Azure Offer"
+          },
+          {
+            "name": "Msazr0003P",
+            "value": "MSAZR0003P",
+            "description": "MSAZR0003P Azure Offer"
+          },
+          {
+            "name": "Msazr0023P",
+            "value": "MSAZR0023P",
+            "description": "MSAZR0023P Azure Offer"
+          },
+          {
+            "name": "Msmcazr0044P",
+            "value": "MSMCAZR0044P",
+            "description": "MSMCAZR0044P Azure Offer"
+          },
+          {
+            "name": "Msmcazr0059P",
+            "value": "MSMCAZR0059P",
+            "description": "MSMCAZR0059P Azure Offer"
+          },
+          {
+            "name": "Msmcazr0060P",
+            "value": "MSMCAZR0060P",
+            "description": "MSMCAZR0060P Azure Offer"
+          },
+          {
+            "name": "Msmcazr0063P",
+            "value": "MSMCAZR0063P",
+            "description": "MSMCAZR0063P Azure Offer"
+          },
+          {
+            "name": "Msazrusgov0003P",
+            "value": "MSAZRUSGOV0003P",
+            "description": "MSAZRUSGOV0003P Azure Offer"
+          },
+          {
+            "name": "EA",
+            "value": "EA",
+            "description": "EA Azure Offer"
+          },
+          {
+            "name": "SavingsPlan1Year",
+            "value": "SavingsPlan1Year",
+            "description": "SavingsPlan1Year Azure Offer"
+          },
+          {
+            "name": "SavingsPlan3Year",
+            "value": "SavingsPlan3Year",
+            "description": "SavingsPlan3Year Azure Offer"
+          }
+        ]
+      }
+    },
+    "AzureResourceProperties": {
+      "type": "object",
+      "description": "Common properties for all azure tracked and proxy resources.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "AzureTarget": {
+      "type": "string",
+      "description": "Azure Target",
+      "enum": [
+        "Unknown",
+        "SqlDatabase",
+        "SqlMI",
+        "FlexServerPG",
+        "OracleIaasVM",
+        "AzureSpringApps",
+        "SAPAzureInstance",
+        "AKS",
+        "MySQLAzureFlexServer",
+        "AzureSQLVM",
+        "AzureVM",
+        "AzureAppService",
+        "AzureAppServiceContainer",
+        "Avs",
+        "ContainerApps"
+      ],
+      "x-ms-enum": {
+        "name": "AzureTarget",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown - Azure Target"
+          },
+          {
+            "name": "SqlDatabase",
+            "value": "SqlDatabase",
+            "description": "SqlDatabase - Azure Target"
+          },
+          {
+            "name": "SqlMI",
+            "value": "SqlMI",
+            "description": "SqlMI - Azure Target"
+          },
+          {
+            "name": "FlexServerPG",
+            "value": "FlexServerPG",
+            "description": "FlexServerPG - Azure Target"
+          },
+          {
+            "name": "OracleIaasVM",
+            "value": "OracleIaasVM",
+            "description": "OracleIaasVM - Azure Target"
+          },
+          {
+            "name": "AzureSpringApps",
+            "value": "AzureSpringApps",
+            "description": "AzureSpringApps - Azure Target"
+          },
+          {
+            "name": "SAPAzureInstance",
+            "value": "SAPAzureInstance",
+            "description": "SAPAzureInstance - Azure Target"
+          },
+          {
+            "name": "AKS",
+            "value": "AKS",
+            "description": "AKS - Azure Target"
+          },
+          {
+            "name": "MySQLAzureFlexServer",
+            "value": "MySQLAzureFlexServer",
+            "description": "MySQLAzureFlexServer - Azure Target"
+          },
+          {
+            "name": "AzureSQLVM",
+            "value": "AzureSQLVM",
+            "description": "AzureSQLVM - Azure Target"
+          },
+          {
+            "name": "AzureVM",
+            "value": "AzureVM",
+            "description": "AzureVM - Azure Target"
+          },
+          {
+            "name": "AzureAppService",
+            "value": "AzureAppService",
+            "description": "AzureAppService - Azure Target"
+          },
+          {
+            "name": "AzureAppServiceContainer",
+            "value": "AzureAppServiceContainer",
+            "description": "AzureAppServiceContainer - Azure Target"
+          },
+          {
+            "name": "Avs",
+            "value": "Avs",
+            "description": "Avs - Azure Target"
+          },
+          {
+            "name": "ContainerApps",
+            "value": "ContainerApps",
+            "description": "ContainerApps - Azure Target"
+          }
+        ]
+      }
+    },
+    "BillingSettings": {
+      "type": "object",
+      "description": "Billing settings class.",
+      "properties": {
+        "licensingProgram": {
+          "$ref": "#/definitions/LicensingProgram",
+          "description": "Gets or sets the licensing program."
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "Gets or sets the subscription ID for licensing program selected."
+        }
+      }
+    },
+    "CloudSuitabilityCommon": {
+      "type": "string",
+      "description": "Cloud Suitability Common",
+      "enum": [
+        "Unknown",
+        "NotSuitable",
+        "Suitable",
+        "ConditionallySuitable",
+        "ReadinessUnknown",
+        "SuitableWithWarnings"
+      ],
+      "x-ms-enum": {
+        "name": "CloudSuitabilityCommon",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown - Cloud Suitability Common"
+          },
+          {
+            "name": "NotSuitable",
+            "value": "NotSuitable",
+            "description": "NotSuitable - Cloud Suitability Common"
+          },
+          {
+            "name": "Suitable",
+            "value": "Suitable",
+            "description": "Suitable - Cloud Suitability Common"
+          },
+          {
+            "name": "ConditionallySuitable",
+            "value": "ConditionallySuitable",
+            "description": "ConditionallySuitable - Cloud Suitability Common"
+          },
+          {
+            "name": "ReadinessUnknown",
+            "value": "ReadinessUnknown",
+            "description": "ReadinessUnknown - Cloud Suitability Common"
+          },
+          {
+            "name": "SuitableWithWarnings",
+            "value": "SuitableWithWarnings",
+            "description": "SuitableWithWarnings - Cloud Suitability Common"
+          }
+        ]
+      }
+    },
+    "ComputeResource": {
+      "type": "object",
+      "description": "Data model of Cores and Memory Compute Resource.",
+      "properties": {
+        "cores": {
+          "type": "number",
+          "format": "float",
+          "description": "Gets cores.",
+          "readOnly": true
+        },
+        "memory": {
+          "type": "number",
+          "format": "float",
+          "description": "Gets memory.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "cores",
+        "memory"
+      ]
+    },
+    "Configuration": {
+      "type": "object",
+      "description": "Configuration details.",
+      "properties": {
+        "azureTarget": {
+          "$ref": "#/definitions/AzureTarget",
+          "description": "The azure target.",
+          "readOnly": true
+        },
+        "sizingCriterion": {
+          "$ref": "#/definitions/AssessmentSizingCriterion",
+          "description": "The azure target.",
+          "readOnly": true
+        }
+      }
+    },
+    "ContainerApp": {
+      "type": "object",
+      "description": "Data model of Container App within an Azure Container Apps environment.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Gets id.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name.",
+          "readOnly": true
+        },
+        "environmentName": {
+          "type": "string",
+          "description": "Gets the parent environment name.",
+          "readOnly": true
+        },
+        "workloadProfileType": {
+          "$ref": "#/definitions/ContainerAppsWorkloadProfileType",
+          "description": "Gets the workload profile type.",
+          "readOnly": true
+        },
+        "sku": {
+          "$ref": "#/definitions/ContainerAppsWorkloadProfileSku",
+          "description": "Gets the workload profile SKU.",
+          "readOnly": true
+        },
+        "cores": {
+          "type": "number",
+          "format": "double",
+          "description": "Gets vCPU cores allocated to the container app.",
+          "readOnly": true
+        },
+        "memoryInGib": {
+          "type": "number",
+          "format": "double",
+          "description": "Gets memory in GiB allocated to the container app.",
+          "readOnly": true
+        },
+        "monthlyCost": {
+          "type": "number",
+          "format": "double",
+          "description": "Gets monthly cost.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "environmentName"
+      ]
+    },
+    "ContainerAppEnvironment": {
+      "type": "object",
+      "description": "Data model of Container App Environment.",
+      "properties": {
+        "region": {
+          "type": "string",
+          "description": "Gets region.",
+          "readOnly": true
+        },
+        "workloadProfileType": {
+          "$ref": "#/definitions/ContainerAppsWorkloadProfileType",
+          "description": "Gets the workload profile type for the environment.",
+          "readOnly": true
+        },
+        "cores": {
+          "type": "number",
+          "format": "double",
+          "description": "Gets the total vCPU cores allocated to the environment.",
+          "readOnly": true
+        },
+        "memoryInGib": {
+          "type": "number",
+          "format": "double",
+          "description": "Gets the total memory in GiB allocated to the environment.",
+          "readOnly": true
+        },
+        "numberOfContainerApps": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets the number of container apps in this environment.",
+          "readOnly": true
+        },
+        "monthlyCost": {
+          "type": "number",
+          "format": "double",
+          "description": "Gets monthly cost.",
+          "readOnly": true
+        },
+        "managementFeeMonthlyCost": {
+          "type": "number",
+          "format": "double",
+          "description": "Gets management fee monthly cost.",
+          "readOnly": true
+        },
+        "createdTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets the created timestamp.",
+          "readOnly": true
+        },
+        "updatedTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets the updated timestamp.",
+          "readOnly": true
+        },
+        "containerApps": {
+          "type": "array",
+          "description": "Gets list of container apps in this environment.",
+          "items": {
+            "$ref": "#/definitions/ContainerApp"
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "containerApps"
+      ]
+    },
+    "ContainerAppsAssessment": {
+      "type": "object",
+      "description": "ARM model of Azure Container Apps Assessment.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ContainerAppsAssessmentProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ContainerAppsAssessmentListResult": {
+      "type": "object",
+      "description": "The response of a ContainerAppsAssessment list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ContainerAppsAssessment items on this page",
+          "items": {
+            "$ref": "#/definitions/ContainerAppsAssessment"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ContainerAppsAssessmentOptions": {
+      "type": "object",
+      "description": "ARM model of Azure Container Apps Assessment Options.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ContainerAppsAssessmentOptionsProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ContainerAppsAssessmentOptionsListResult": {
+      "type": "object",
+      "description": "The response of a ContainerAppsAssessmentOptions list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ContainerAppsAssessmentOptions items on this page",
+          "items": {
+            "$ref": "#/definitions/ContainerAppsAssessmentOptions"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ContainerAppsAssessmentOptionsOutboundEdgeGroup": {
+      "type": "object",
+      "description": "A class that represents the outbound edges from a given node.",
+      "properties": {
+        "sku": {
+          "type": "array",
+          "description": "Gets or sets the Workload Profile SKUs.",
+          "items": {
+            "$ref": "#/definitions/ContainerAppsWorkloadProfileSku"
+          }
+        },
+        "workloadProfileTypes": {
+          "type": "array",
+          "description": "Gets or sets the Workload Profile Types.",
+          "items": {
+            "$ref": "#/definitions/ContainerAppsWorkloadProfileType"
+          }
+        },
+        "targetLocations": {
+          "type": "array",
+          "description": "Gets or sets the Azure Locations.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.azureLocation"
+          }
+        },
+        "currencies": {
+          "type": "array",
+          "description": "Gets or sets the Azure Currency.",
+          "items": {
+            "$ref": "#/definitions/AzureCurrency"
+          }
+        },
+        "savingsOptions": {
+          "type": "array",
+          "description": "Gets or sets the Assessment Savings Options.",
+          "items": {
+            "$ref": "#/definitions/SavingsOptions"
+          }
+        },
+        "licensingProgram": {
+          "type": "array",
+          "description": "Gets or sets the Licensing Program.",
+          "items": {
+            "$ref": "#/definitions/LicensingProgram"
+          }
+        }
+      },
+      "required": [
+        "sku",
+        "workloadProfileTypes",
+        "targetLocations",
+        "currencies",
+        "savingsOptions",
+        "licensingProgram"
+      ]
+    },
+    "ContainerAppsAssessmentOptionsProperties": {
+      "type": "object",
+      "description": "Azure Container Apps Assessment Options Properties.",
+      "properties": {
+        "edges": {
+          "type": "object",
+          "description": "Gets the mapping of Assessment Options in graph representation.",
+          "additionalProperties": {
+            "$ref": "#/definitions/ContainerAppsAssessmentOptionsOutboundEdgeGroup"
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "edges"
+      ]
+    },
+    "ContainerAppsAssessmentProperties": {
+      "type": "object",
+      "description": "Azure Container Apps Assessment Properties.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "scope": {
+          "$ref": "#/definitions/Scope",
+          "description": "Gets or sets the scope of assessment."
+        },
+        "settings": {
+          "$ref": "#/definitions/ContainerAppsAssessmentSettings",
+          "description": "Gets or sets the settings for the assessment."
+        },
+        "details": {
+          "$ref": "#/definitions/AssessmentDetails",
+          "description": "Gets or sets the details of the assessment."
+        }
+      }
+    },
+    "ContainerAppsAssessmentSettings": {
+      "type": "object",
+      "description": "Data model of Azure Container Apps Assessment Settings.",
+      "properties": {
+        "azureLocation": {
+          "type": "string",
+          "description": "Azure Location or Azure region where to which the machines will be migrated."
+        },
+        "currency": {
+          "$ref": "#/definitions/AzureCurrency",
+          "description": "Currency in which prices should be reported."
+        },
+        "scalingFactor": {
+          "type": "number",
+          "format": "float",
+          "description": "Percentage of buffer that user wants on performance metrics when recommending\nAzure sizes."
+        },
+        "discountPercentage": {
+          "type": "number",
+          "format": "float",
+          "description": "Custom discount percentage."
+        },
+        "sizingCriterion": {
+          "$ref": "#/definitions/AssessmentSizingCriterion",
+          "description": "Assessment sizing criterion."
+        },
+        "performanceData": {
+          "$ref": "#/definitions/PerformanceData",
+          "description": "Gets or sets the performance data."
+        },
+        "savingsSettings": {
+          "$ref": "#/definitions/SavingsSettings",
+          "description": "Gets or sets the savings settings."
+        },
+        "billingSettings": {
+          "$ref": "#/definitions/BillingSettings",
+          "description": "Gets or sets the billing settings."
+        },
+        "environmentType": {
+          "$ref": "#/definitions/EnvironmentType",
+          "description": "Gets or sets user configurable setting to display the environment type."
+        },
+        "sku": {
+          "$ref": "#/definitions/ContainerAppsWorkloadProfileSku",
+          "description": "Gets or sets the workload profile SKU."
+        },
+        "workloadProfileType": {
+          "$ref": "#/definitions/ContainerAppsWorkloadProfileType",
+          "description": "Gets or sets the workload profile type."
+        }
+      },
+      "required": [
+        "sku",
+        "workloadProfileType"
+      ]
+    },
+    "ContainerAppsCostDetail": {
+      "type": "object",
+      "description": "ARM model of Azure Container Apps Cost Detail.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ContainerAppsCostDetailProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ContainerAppsCostDetailListResult": {
+      "type": "object",
+      "description": "The response of a ContainerAppsCostDetail list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ContainerAppsCostDetail items on this page",
+          "items": {
+            "$ref": "#/definitions/ContainerAppsCostDetail"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ContainerAppsCostDetailProperties": {
+      "type": "object",
+      "description": "ARM model of Azure Container Apps Cost Detail Properties.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Gets id.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name.",
+          "readOnly": true
+        },
+        "environmentName": {
+          "type": "string",
+          "description": "Gets the parent environment name.",
+          "readOnly": true
+        },
+        "workloadProfileType": {
+          "$ref": "#/definitions/ContainerAppsWorkloadProfileType",
+          "description": "Gets the workload profile type.",
+          "readOnly": true
+        },
+        "sku": {
+          "$ref": "#/definitions/ContainerAppsWorkloadProfileSku",
+          "description": "Gets the workload profile SKU.",
+          "readOnly": true
+        },
+        "cores": {
+          "type": "number",
+          "format": "double",
+          "description": "Gets vCPU cores allocated to the container app.",
+          "readOnly": true
+        },
+        "memoryInGib": {
+          "type": "number",
+          "format": "double",
+          "description": "Gets memory in GiB allocated to the container app.",
+          "readOnly": true
+        },
+        "monthlyCost": {
+          "type": "number",
+          "format": "double",
+          "description": "Gets monthly cost.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "environmentName"
+      ]
+    },
+    "ContainerAppsManagedEnvironment": {
+      "type": "object",
+      "description": "ARM model of Azure Container Apps Managed Environment.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ContainerAppsManagedEnvironmentProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ContainerAppsManagedEnvironmentListResult": {
+      "type": "object",
+      "description": "The response of a ContainerAppsManagedEnvironment list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ContainerAppsManagedEnvironment items on this page",
+          "items": {
+            "$ref": "#/definitions/ContainerAppsManagedEnvironment"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ContainerAppsManagedEnvironmentProperties": {
+      "type": "object",
+      "description": "ARM model of Azure Container Apps Managed Environment Properties.",
+      "properties": {
+        "region": {
+          "type": "string",
+          "description": "Gets region.",
+          "readOnly": true
+        },
+        "workloadProfileType": {
+          "$ref": "#/definitions/ContainerAppsWorkloadProfileType",
+          "description": "Gets the workload profile type for the environment.",
+          "readOnly": true
+        },
+        "cores": {
+          "type": "number",
+          "format": "double",
+          "description": "Gets the total vCPU cores allocated to the environment.",
+          "readOnly": true
+        },
+        "memoryInGib": {
+          "type": "number",
+          "format": "double",
+          "description": "Gets the total memory in GiB allocated to the environment.",
+          "readOnly": true
+        },
+        "numberOfContainerApps": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets the number of container apps in this environment.",
+          "readOnly": true
+        },
+        "monthlyCost": {
+          "type": "number",
+          "format": "double",
+          "description": "Gets monthly cost.",
+          "readOnly": true
+        },
+        "managementFeeMonthlyCost": {
+          "type": "number",
+          "format": "double",
+          "description": "Gets management fee monthly cost.",
+          "readOnly": true
+        },
+        "createdTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets the created timestamp.",
+          "readOnly": true
+        },
+        "updatedTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets the updated timestamp.",
+          "readOnly": true
+        },
+        "containerApps": {
+          "type": "array",
+          "description": "Gets list of container apps in this environment.",
+          "items": {
+            "$ref": "#/definitions/ContainerApp"
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "containerApps"
+      ]
+    },
+    "ContainerAppsSummary": {
+      "type": "object",
+      "description": "ARM model of Azure Container Apps Summary.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ContainerAppsSummaryProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ContainerAppsSummaryListResult": {
+      "type": "object",
+      "description": "The response of a ContainerAppsSummary list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ContainerAppsSummary items on this page",
+          "items": {
+            "$ref": "#/definitions/ContainerAppsSummary"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ContainerAppsSummaryProperties": {
+      "type": "object",
+      "description": "Azure Container Apps Summary Properties.",
+      "properties": {
+        "summaryType": {
+          "$ref": "#/definitions/SummaryType",
+          "description": "The summary type",
+          "readOnly": true
+        },
+        "summaryName": {
+          "type": "string",
+          "description": "The summary name",
+          "readOnly": true
+        },
+        "sources": {
+          "type": "array",
+          "description": "The source details list.",
+          "items": {
+            "$ref": "#/definitions/SourceDetails"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "targets": {
+          "type": "array",
+          "description": "The target details list.",
+          "items": {
+            "$ref": "#/definitions/TargetDetails"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "targetSourceMapping": {
+          "type": "array",
+          "description": "The target source mapping.",
+          "items": {
+            "$ref": "#/definitions/TargetSourcePair"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "costComponents": {
+          "type": "array",
+          "description": "The cost components.",
+          "items": {
+            "$ref": "#/definitions/CostDetailsCommon"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "savingsComponents": {
+          "type": "array",
+          "description": "The cost components.",
+          "items": {
+            "$ref": "#/definitions/SavingsDetailsCommon"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "webAppCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets the number of web apps.",
+          "readOnly": true
+        },
+        "webServerCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets the number of web servers.",
+          "readOnly": true
+        },
+        "machineCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets the number of machines.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "webAppCount",
+        "webServerCount",
+        "machineCount"
+      ]
+    },
+    "ContainerAppsWorkloadProfileSku": {
+      "type": "string",
+      "description": "Workload Profile SKU for Azure Container Apps.",
+      "enum": [
+        "Consumption",
+        "Dedicated-D4",
+        "Dedicated-D8",
+        "Dedicated-D16",
+        "Dedicated-D32",
+        "Dedicated-E4",
+        "Dedicated-E8",
+        "Dedicated-E16",
+        "Dedicated-E32",
+        "Consumption-GPU-NC8as-T4",
+        "Consumption-GPU-NC24-A100",
+        "Dedicated-NC24-A100",
+        "Dedicated-NC48-A100",
+        "Dedicated-NC96-A100"
+      ],
+      "x-ms-enum": {
+        "name": "ContainerAppsWorkloadProfileSku",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Consumption",
+            "value": "Consumption",
+            "description": "Consumption workload profile."
+          },
+          {
+            "name": "DedicatedD4",
+            "value": "Dedicated-D4",
+            "description": "Dedicated D4 — General purpose D-series."
+          },
+          {
+            "name": "DedicatedD8",
+            "value": "Dedicated-D8",
+            "description": "Dedicated D8 — General purpose D-series."
+          },
+          {
+            "name": "DedicatedD16",
+            "value": "Dedicated-D16",
+            "description": "Dedicated D16 — General purpose D-series."
+          },
+          {
+            "name": "DedicatedD32",
+            "value": "Dedicated-D32",
+            "description": "Dedicated D32 — General purpose D-series."
+          },
+          {
+            "name": "DedicatedE4",
+            "value": "Dedicated-E4",
+            "description": "Dedicated E4 — Memory optimized E-series."
+          },
+          {
+            "name": "DedicatedE8",
+            "value": "Dedicated-E8",
+            "description": "Dedicated E8 — Memory optimized E-series."
+          },
+          {
+            "name": "DedicatedE16",
+            "value": "Dedicated-E16",
+            "description": "Dedicated E16 — Memory optimized E-series."
+          },
+          {
+            "name": "DedicatedE32",
+            "value": "Dedicated-E32",
+            "description": "Dedicated E32 — Memory optimized E-series."
+          },
+          {
+            "name": "ConsumptionGpuNC8asT4",
+            "value": "Consumption-GPU-NC8as-T4",
+            "description": "Consumption GPU NC8as T4 — GPU-accelerated T4."
+          },
+          {
+            "name": "ConsumptionGpuNC24A100",
+            "value": "Consumption-GPU-NC24-A100",
+            "description": "Consumption GPU NC24 A100 — GPU-accelerated A100."
+          },
+          {
+            "name": "DedicatedNC24A100",
+            "value": "Dedicated-NC24-A100",
+            "description": "Dedicated NC24 A100 — GPU-accelerated A100."
+          },
+          {
+            "name": "DedicatedNC48A100",
+            "value": "Dedicated-NC48-A100",
+            "description": "Dedicated NC48 A100 — GPU-accelerated A100."
+          },
+          {
+            "name": "DedicatedNC96A100",
+            "value": "Dedicated-NC96-A100",
+            "description": "Dedicated NC96 A100 — GPU-accelerated A100."
+          }
+        ]
+      }
+    },
+    "ContainerAppsWorkloadProfileType": {
+      "type": "string",
+      "description": "Workload Profile Type for Azure Container Apps.",
+      "enum": [
+        "Any",
+        "Consumption",
+        "Dedicated"
+      ],
+      "x-ms-enum": {
+        "name": "ContainerAppsWorkloadProfileType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Any",
+            "value": "Any",
+            "description": "Any workload profile type."
+          },
+          {
+            "name": "Consumption",
+            "value": "Consumption",
+            "description": "Consumption workload profile — up to 4 vCPUs, 8 GiB memory."
+          },
+          {
+            "name": "Dedicated",
+            "value": "Dedicated",
+            "description": "Dedicated workload profile."
+          }
+        ]
+      }
+    },
+    "CostDetailsCommon": {
+      "type": "object",
+      "description": "The cost details.",
+      "properties": {
+        "savingOptions": {
+          "$ref": "#/definitions/SavingsOptions",
+          "description": "The savings options.",
+          "readOnly": true
+        },
+        "costDetail": {
+          "type": "array",
+          "description": "The sku cost details per azure offer type.",
+          "items": {
+            "type": "object",
+            "description": "The generic name value pair.",
+            "properties": {
+              "name": {
+                "$ref": "#/definitions/CostType",
+                "description": "The name.",
+                "readOnly": true
+              },
+              "value": {
+                "type": "number",
+                "format": "float",
+                "description": "The value.",
+                "readOnly": true
+              }
+            }
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "CostType": {
+      "type": "string",
+      "description": "Cost type",
+      "enum": [
+        "MonthlyStorageCost",
+        "MonthlyComputeCost",
+        "MonthlyLicensingCost",
+        "MonthlySecurityCost",
+        "MonthlyManagementCost",
+        "MonitoringService",
+        "DataProtectionService",
+        "PatchingService",
+        "MonthlyAzureHybridCost",
+        "MonthlyPremiumV2StorageCost",
+        "MonthlyLinuxAzureHybridCost",
+        "MonthlyUltraStorageCost",
+        "MonthlyStandardSsdStorageCost",
+        "MonthlyBandwidthCost",
+        "MonthlyPremiumStorageCost",
+        "MonthlyUltraDiskCost",
+        "MonthlyStandardHddStorageCost",
+        "MonthlyAvsExternalStorageCost",
+        "MonthlyAvsNetworkCost",
+        "MonthlyAvsNodeCost",
+        "TotalMonthlyCost"
+      ],
+      "x-ms-enum": {
+        "name": "CostType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "MonthlyStorageCost",
+            "value": "MonthlyStorageCost",
+            "description": "MonthlyStorageCost - Cost type"
+          },
+          {
+            "name": "MonthlyComputeCost",
+            "value": "MonthlyComputeCost",
+            "description": "MonthlyComputeCost - Cost type"
+          },
+          {
+            "name": "MonthlyLicensingCost",
+            "value": "MonthlyLicensingCost",
+            "description": "MonthlyLicensingCost - Cost type"
+          },
+          {
+            "name": "MonthlySecurityCost",
+            "value": "MonthlySecurityCost",
+            "description": "MonthlySecurityCost - Cost type"
+          },
+          {
+            "name": "MonthlyManagementCost",
+            "value": "MonthlyManagementCost",
+            "description": "MonthlyManagementCost - Cost type"
+          },
+          {
+            "name": "MonitoringService",
+            "value": "MonitoringService",
+            "description": "MonitoringService - Cost type"
+          },
+          {
+            "name": "DataProtectionService",
+            "value": "DataProtectionService",
+            "description": "DataProtectionService - Cost type"
+          },
+          {
+            "name": "PatchingService",
+            "value": "PatchingService",
+            "description": "PatchingService - Cost type"
+          },
+          {
+            "name": "MonthlyAzureHybridCost",
+            "value": "MonthlyAzureHybridCost",
+            "description": "MonthlyAzureHybridCost - Cost type"
+          },
+          {
+            "name": "MonthlyPremiumV2StorageCost",
+            "value": "MonthlyPremiumV2StorageCost",
+            "description": "MonthlyPremiumV2StorageCost - Cost type"
+          },
+          {
+            "name": "MonthlyLinuxAzureHybridCost",
+            "value": "MonthlyLinuxAzureHybridCost",
+            "description": "MonthlyLinuxAzureHybridCost - Cost type"
+          },
+          {
+            "name": "MonthlyUltraStorageCost",
+            "value": "MonthlyUltraStorageCost",
+            "description": "MonthlyUltraStorageCost - Cost type"
+          },
+          {
+            "name": "MonthlyStandardSsdStorageCost",
+            "value": "MonthlyStandardSsdStorageCost",
+            "description": "MonthlyStandardSsdStorageCost - Cost type"
+          },
+          {
+            "name": "MonthlyBandwidthCost",
+            "value": "MonthlyBandwidthCost",
+            "description": "MonthlyBandwidthCost - Cost type"
+          },
+          {
+            "name": "MonthlyPremiumStorageCost",
+            "value": "MonthlyPremiumStorageCost",
+            "description": "MonthlyPremiumStorageCost - Cost type"
+          },
+          {
+            "name": "MonthlyUltraDiskCost",
+            "value": "MonthlyUltraDiskCost",
+            "description": "MonthlyUltraDiskCost - Cost type"
+          },
+          {
+            "name": "MonthlyStandardHddStorageCost",
+            "value": "MonthlyStandardHddStorageCost",
+            "description": "MonthlyStandardHddStorageCost - Cost type"
+          },
+          {
+            "name": "MonthlyAvsExternalStorageCost",
+            "value": "MonthlyAvsExternalStorageCost",
+            "description": "MonthlyAvsExternalStorageCost - Cost type"
+          },
+          {
+            "name": "MonthlyAvsNetworkCost",
+            "value": "MonthlyAvsNetworkCost",
+            "description": "MonthlyAvsNetworkCost - Cost type"
+          },
+          {
+            "name": "MonthlyAvsNodeCost",
+            "value": "MonthlyAvsNodeCost",
+            "description": "MonthlyAvsNodeCost - Cost type"
+          },
+          {
+            "name": "TotalMonthlyCost",
+            "value": "TotalMonthlyCost",
+            "description": "TotalMonthlyCost - Cost type"
+          }
+        ]
+      }
+    },
+    "DownloadUrl": {
+      "type": "object",
+      "description": "Data model of Download URL for assessment report.",
+      "properties": {
+        "assessmentReportUrl": {
+          "type": "string",
+          "format": "password",
+          "description": "Hyperlink to download report.",
+          "readOnly": true,
+          "x-ms-secret": true
+        },
+        "expirationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Expiry date of download url.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "assessmentReportUrl",
+        "expirationTime"
+      ]
+    },
+    "EnvironmentType": {
+      "type": "string",
+      "description": "Environment Type",
+      "enum": [
+        "Production",
+        "Unknown",
+        "DevTest"
+      ],
+      "x-ms-enum": {
+        "name": "EnvironmentType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Production",
+            "value": "Production",
+            "description": "Production - Environment Type"
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown - Environment Type"
+          },
+          {
+            "name": "DevTest",
+            "value": "DevTest",
+            "description": "DevTest - Environment Type"
+          }
+        ]
+      }
+    },
+    "LicensingProgram": {
+      "type": "string",
+      "description": "The licensing program.",
+      "enum": [
+        "Retail",
+        "Unknown",
+        "EA",
+        "MCA"
+      ],
+      "x-ms-enum": {
+        "name": "LicensingProgram",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Retail",
+            "value": "Retail",
+            "description": "Retail/Pay as you go."
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Not known"
+          },
+          {
+            "name": "EA",
+            "value": "EA",
+            "description": "Enterprise agreement."
+          },
+          {
+            "name": "MCA",
+            "value": "MCA",
+            "description": "Microsoft customer agreement."
+          }
+        ]
+      }
+    },
+    "LinkageKind": {
+      "type": "string",
+      "description": "Linkage kind",
+      "enum": [
+        "Unknown",
+        "Machine",
+        "Server",
+        "Instance",
+        "WebServer",
+        "WebApplication",
+        "Database"
+      ],
+      "x-ms-enum": {
+        "name": "LinkageKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown - Linkage kind"
+          },
+          {
+            "name": "Machine",
+            "value": "Machine",
+            "description": "Machine - Linkage kind"
+          },
+          {
+            "name": "Server",
+            "value": "Server",
+            "description": "Server - Linkage kind"
+          },
+          {
+            "name": "Instance",
+            "value": "Instance",
+            "description": "Instance - Linkage kind"
+          },
+          {
+            "name": "WebServer",
+            "value": "WebServer",
+            "description": "WebServer - Linkage kind"
+          },
+          {
+            "name": "WebApplication",
+            "value": "WebApplication",
+            "description": "WebApplication - Linkage kind"
+          },
+          {
+            "name": "Database",
+            "value": "Database",
+            "description": "Database - Linkage kind"
+          }
+        ]
+      }
+    },
+    "LinkageType": {
+      "type": "string",
+      "description": "Linkage type",
+      "enum": [
+        "Parent",
+        "Source"
+      ],
+      "x-ms-enum": {
+        "name": "LinkageType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Parent",
+            "value": "Parent",
+            "description": "Parent - Linkage type"
+          },
+          {
+            "name": "Source",
+            "value": "Source",
+            "description": "Source - Linkage type"
+          }
+        ]
+      }
+    },
+    "Linkages": {
+      "type": "object",
+      "description": "Linkages details",
+      "properties": {
+        "workloadName": {
+          "type": "string",
+          "description": "The workload name",
+          "readOnly": true
+        },
+        "linkageType": {
+          "$ref": "#/definitions/LinkageType",
+          "description": "The linkage type.",
+          "readOnly": true
+        },
+        "kind": {
+          "$ref": "#/definitions/LinkageKind",
+          "description": "The linkage kind.",
+          "readOnly": true
+        },
+        "armId": {
+          "type": "string",
+          "description": "The arm id.",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagementDetails": {
+      "type": "object",
+      "description": "Management details.",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/AzureManagementOfferingType",
+          "description": "The management summary name.",
+          "readOnly": true
+        },
+        "readinessSummary": {
+          "type": "array",
+          "description": "The management suitability summary.",
+          "items": {
+            "type": "object",
+            "description": "The generic name value pair.",
+            "properties": {
+              "name": {
+                "$ref": "#/definitions/CloudSuitabilityCommon",
+                "description": "The name.",
+                "readOnly": true
+              },
+              "value": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The value.",
+                "readOnly": true
+              }
+            }
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "MigrateWorkloadType": {
+      "type": "string",
+      "description": "Migration Workload type",
+      "enum": [
+        "Unknown",
+        "Machine",
+        "Server",
+        "Instance",
+        "WebServer",
+        "WebApplication",
+        "Database",
+        "Host",
+        "ManagementServer"
+      ],
+      "x-ms-enum": {
+        "name": "MigrateWorkloadType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown - Migration Workload type"
+          },
+          {
+            "name": "Machine",
+            "value": "Machine",
+            "description": "Machine - Migration Workload type"
+          },
+          {
+            "name": "Server",
+            "value": "Server",
+            "description": "Server - Migration Workload type"
+          },
+          {
+            "name": "Instance",
+            "value": "Instance",
+            "description": "Instance - Migration Workload type"
+          },
+          {
+            "name": "WebServer",
+            "value": "WebServer",
+            "description": "WebServer - Migration Workload type"
+          },
+          {
+            "name": "WebApplication",
+            "value": "WebApplication",
+            "description": "WebApplication - Migration Workload type"
+          },
+          {
+            "name": "Database",
+            "value": "Database",
+            "description": "Database - Migration Workload type"
+          },
+          {
+            "name": "Host",
+            "value": "Host",
+            "description": "Host - Migration Workload type"
+          },
+          {
+            "name": "ManagementServer",
+            "value": "ManagementServer",
+            "description": "ManagementServer - Migration Workload type"
+          }
+        ]
+      }
+    },
+    "MigrationDetails": {
+      "type": "object",
+      "description": "Migration details.",
+      "properties": {
+        "readinessSummary": {
+          "type": "array",
+          "description": "The readiness summary.",
+          "items": {
+            "type": "object",
+            "description": "The generic name value pair.",
+            "properties": {
+              "name": {
+                "$ref": "#/definitions/CloudSuitabilityCommon",
+                "description": "The name.",
+                "readOnly": true
+              },
+              "value": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The value.",
+                "readOnly": true
+              }
+            }
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "migrationType": {
+          "$ref": "#/definitions/MigrationType",
+          "description": "The migration type",
+          "readOnly": true
+        }
+      }
+    },
+    "MigrationIssues": {
+      "type": "object",
+      "description": "Migration issues.",
+      "properties": {
+        "issueCode": {
+          "type": "string",
+          "description": "The issue id.",
+          "readOnly": true
+        },
+        "issueCategory": {
+          "$ref": "#/definitions/MigrationIssuesCategory",
+          "description": "The issue category.",
+          "readOnly": true
+        },
+        "issueDescription": {
+          "type": "string",
+          "description": "The issue description.",
+          "readOnly": true
+        },
+        "possibleCause": {
+          "type": "string",
+          "description": "The possible causes.",
+          "readOnly": true
+        },
+        "recommendedActions": {
+          "type": "array",
+          "description": "The recommended action.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "moreInformation": {
+          "type": "array",
+          "description": "The more information list.",
+          "items": {
+            "$ref": "#/definitions/MoreInformation"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "MigrationIssuesCategory": {
+      "type": "string",
+      "description": "Migration Issues Category",
+      "enum": [
+        "Issue",
+        "Warning",
+        "Internal"
+      ],
+      "x-ms-enum": {
+        "name": "MigrationIssuesCategory",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Issue",
+            "value": "Issue",
+            "description": "Issue - Migration Issues Category"
+          },
+          {
+            "name": "Warning",
+            "value": "Warning",
+            "description": "Warning - Migration Issues Category"
+          },
+          {
+            "name": "Internal",
+            "value": "Internal",
+            "description": "Internal - Migration Issues Category"
+          }
+        ]
+      }
+    },
+    "MigrationPlatform": {
+      "type": "string",
+      "description": "Migration Platform",
+      "enum": [
+        "Unknown",
+        "PaaS",
+        "IaaS",
+        "SaaS"
+      ],
+      "x-ms-enum": {
+        "name": "MigrationPlatform",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown - Migration Platform"
+          },
+          {
+            "name": "PaaS",
+            "value": "PaaS",
+            "description": "PaaS - Migration Platform"
+          },
+          {
+            "name": "IaaS",
+            "value": "IaaS",
+            "description": "IaaS - Migration Platform"
+          },
+          {
+            "name": "SaaS",
+            "value": "SaaS",
+            "description": "SaaS - Migration Platform"
+          }
+        ]
+      }
+    },
+    "MigrationSuitability": {
+      "type": "object",
+      "description": "The migration suitability.",
+      "properties": {
+        "readiness": {
+          "$ref": "#/definitions/CloudSuitabilityCommon",
+          "description": "The migration suitability.",
+          "readOnly": true
+        }
+      }
+    },
+    "MigrationType": {
+      "type": "string",
+      "description": "Migration Type",
+      "enum": [
+        "Unknown",
+        "Replatform",
+        "Rehost",
+        "Retain",
+        "Rearchitect"
+      ],
+      "x-ms-enum": {
+        "name": "MigrationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown - Migration Type"
+          },
+          {
+            "name": "Replatform",
+            "value": "Replatform",
+            "description": "Replatform - Migration Type"
+          },
+          {
+            "name": "Rehost",
+            "value": "Rehost",
+            "description": "Rehost - Migration Type"
+          },
+          {
+            "name": "Retain",
+            "value": "Retain",
+            "description": "Retain - Migration Type"
+          },
+          {
+            "name": "Rearchitect",
+            "value": "Rearchitect",
+            "description": "Rearchitect - Migration Type"
+          }
+        ]
+      }
+    },
+    "MoreInformation": {
+      "type": "object",
+      "description": "More information details.",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The title of the information.",
+          "readOnly": true
+        },
+        "url": {
+          "type": "string",
+          "description": "The URL of the information.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "title",
+        "url"
+      ]
+    },
+    "Percentile": {
+      "type": "string",
+      "description": "Percentile for Performance Data.",
+      "enum": [
+        "Percentile50",
+        "Percentile90",
+        "Percentile95",
+        "Percentile99",
+        "PercentileUnknown"
+      ],
+      "x-ms-enum": {
+        "name": "Percentile",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Percentile50",
+            "value": "Percentile50",
+            "description": "Percentile 50."
+          },
+          {
+            "name": "Percentile90",
+            "value": "Percentile90",
+            "description": "Percentile 90."
+          },
+          {
+            "name": "Percentile95",
+            "value": "Percentile95",
+            "description": "Percentile 95."
+          },
+          {
+            "name": "Percentile99",
+            "value": "Percentile99",
+            "description": "Percentile 99."
+          },
+          {
+            "name": "PercentileUnknown",
+            "value": "PercentileUnknown",
+            "description": "Percentile unknown."
+          }
+        ]
+      }
+    },
+    "PerformanceData": {
+      "type": "object",
+      "description": "Performance data class.",
+      "properties": {
+        "percentile": {
+          "$ref": "#/definitions/Percentile",
+          "description": "Percentile of the utilization data values to be considered while assessing\nmachines."
+        },
+        "timeRange": {
+          "$ref": "#/definitions/TimeRange",
+          "description": "Time Range for which the historic utilization data should be considered for\nassessment."
+        },
+        "perfDataStartTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the start time to consider performance data for assessment."
+        },
+        "perfDataEndTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the end time to consider performance data for assessment."
+        }
+      }
+    },
+    "PrivateEndpointConnection": {
+      "type": "object",
+      "description": "Private endpoint connection resource.",
+      "properties": {
+        "properties": {
+          "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnectionProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ProjectProperties": {
+      "type": "object",
+      "description": "Properties of a project.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "createdTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time when this project was created. Date-Time represented in ISO-8601 format.",
+          "readOnly": true
+        },
+        "updatedTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time when this project was last updated. Date-Time represented in ISO-8601\nformat.",
+          "readOnly": true
+        },
+        "serviceEndpoint": {
+          "type": "string",
+          "description": "Endpoint at which the collector agent can call agent REST API.",
+          "readOnly": true
+        },
+        "assessmentSolutionId": {
+          "type": "string",
+          "description": "Assessment solution ARM id tracked by Microsoft.Migrate/migrateProjects."
+        },
+        "projectStatus": {
+          "$ref": "#/definitions/ProjectStatus",
+          "description": "Assessment project status."
+        },
+        "customerWorkspaceId": {
+          "type": "string",
+          "description": "The ARM id of service map workspace created by customer."
+        },
+        "customerWorkspaceLocation": {
+          "type": "string",
+          "description": "Location of service map workspace created by customer."
+        },
+        "publicNetworkAccess": {
+          "type": "string",
+          "description": "This value can be set to 'enabled' to avoid breaking changes on existing\ncustomer resources and templates. If set to 'disabled', traffic over public\ninterface is not allowed, and private endpoint connections would be the\nexclusive access method."
+        },
+        "privateEndpointConnections": {
+          "type": "array",
+          "description": "The list of private endpoint connections to the project.",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          },
+          "readOnly": true
+        },
+        "customerStorageAccountArmId": {
+          "type": "string",
+          "description": "The ARM id of the storage account used for interactions when public access is\ndisabled."
+        }
+      }
+    },
+    "ProjectStatus": {
+      "type": "string",
+      "description": "Project Status.",
+      "enum": [
+        "Active",
+        "Inactive"
+      ],
+      "x-ms-enum": {
+        "name": "ProjectStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "Active Status."
+          },
+          {
+            "name": "Inactive",
+            "value": "Inactive",
+            "description": "Inactive Status."
+          }
+        ]
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The status of the current operation.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource provisioning Successful."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource provisioning Failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource provisioning Canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "Resource is being Provisioned."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Resource is being Updated."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Resource is being Deleted."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Resource is being Accepted."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "Readiness": {
+      "type": "string",
+      "description": "Readiness for Azure.",
+      "enum": [
+        "Unknown",
+        "NotReady",
+        "ReadyWithConditions",
+        "Ready"
+      ],
+      "x-ms-enum": {
+        "name": "Readiness",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown Readiness."
+          },
+          {
+            "name": "NotReady",
+            "value": "NotReady",
+            "description": "Not Ready."
+          },
+          {
+            "name": "ReadyWithConditions",
+            "value": "ReadyWithConditions",
+            "description": "Ready with conditions."
+          },
+          {
+            "name": "Ready",
+            "value": "Ready",
+            "description": "Ready for migration."
+          }
+        ]
+      }
+    },
+    "RecommendationResult": {
+      "type": "object",
+      "description": "Data model of Recommendation Result.",
+      "properties": {
+        "request": {
+          "$ref": "#/definitions/ComputeResource",
+          "description": "Gets cores and memory request.",
+          "readOnly": true
+        },
+        "limit": {
+          "$ref": "#/definitions/ComputeResource",
+          "description": "Gets cores and memory limit.",
+          "readOnly": true
+        },
+        "environmentName": {
+          "type": "string",
+          "description": "Gets environment name.",
+          "readOnly": true
+        },
+        "workloadProfileType": {
+          "$ref": "#/definitions/ContainerAppsWorkloadProfileType",
+          "description": "Gets the workload profile type.",
+          "readOnly": true
+        },
+        "minReplicas": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets the minimum number of replicas.",
+          "readOnly": true
+        },
+        "maxReplicas": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets the maximum number of replicas.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "request",
+        "limit",
+        "environmentName",
+        "workloadProfileType",
+        "minReplicas",
+        "maxReplicas"
+      ]
+    },
+    "RecommendedFor": {
+      "type": "object",
+      "description": "The recommended details.",
+      "properties": {
+        "strategies": {
+          "type": "array",
+          "description": "The list of strategy type.",
+          "items": {
+            "$ref": "#/definitions/StrategyType"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "SavingsDetailsCommon": {
+      "type": "object",
+      "description": "The savings details.",
+      "properties": {
+        "savingOptions": {
+          "$ref": "#/definitions/SavingsOptions",
+          "description": "The savings options.",
+          "readOnly": true
+        },
+        "savingsDetail": {
+          "type": "array",
+          "description": "The sku cost details per azure offer type.",
+          "items": {
+            "type": "object",
+            "description": "The generic name value pair.",
+            "properties": {
+              "name": {
+                "$ref": "#/definitions/SavingsType",
+                "description": "The name.",
+                "readOnly": true
+              },
+              "value": {
+                "type": "number",
+                "format": "float",
+                "description": "The value.",
+                "readOnly": true
+              }
+            }
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "SavingsOptions": {
+      "type": "string",
+      "description": "The savings options.",
+      "enum": [
+        "None",
+        "RI1Year",
+        "RI3Year",
+        "SavingsPlan1Year",
+        "SavingsPlan3Year",
+        "CustomAzureOfferCode"
+      ],
+      "x-ms-enum": {
+        "name": "SavingsOptions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No savings options."
+          },
+          {
+            "name": "RI1Year",
+            "value": "RI1Year",
+            "description": "Reserved Instance for 1 year."
+          },
+          {
+            "name": "RI3Year",
+            "value": "RI3Year",
+            "description": "Reserved Instance for 3 years."
+          },
+          {
+            "name": "SavingsPlan1Year",
+            "value": "SavingsPlan1Year",
+            "description": "The savings plan for 1 year."
+          },
+          {
+            "name": "SavingsPlan3Year",
+            "value": "SavingsPlan3Year",
+            "description": "The savings plan for 3  years."
+          },
+          {
+            "name": "CustomAzureOfferCode",
+            "value": "CustomAzureOfferCode",
+            "description": "Custom azure offer code."
+          }
+        ]
+      }
+    },
+    "SavingsSettings": {
+      "type": "object",
+      "description": "Savings settings class.",
+      "properties": {
+        "savingsOptions": {
+          "$ref": "#/definitions/SavingsOptions",
+          "description": "Gets or sets the savings options."
+        },
+        "azureOfferCode": {
+          "$ref": "#/definitions/AzureOffer",
+          "description": "Gets or sets the Azure offer code."
+        }
+      }
+    },
+    "SavingsType": {
+      "type": "string",
+      "description": "Savings type",
+      "enum": [
+        "MonthlyAzureHybridCostSavings",
+        "MonthlyLinuxAzureHybridCostSavings",
+        "MonthlyAhubSqlCostSavings",
+        "MonthlyVcfByolCostDifference"
+      ],
+      "x-ms-enum": {
+        "name": "SavingsType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "MonthlyAzureHybridCostSavings",
+            "value": "MonthlyAzureHybridCostSavings",
+            "description": "MonthlyAzureHybridCostSavings - Savings type"
+          },
+          {
+            "name": "MonthlyLinuxAzureHybridCostSavings",
+            "value": "MonthlyLinuxAzureHybridCostSavings",
+            "description": "MonthlyLinuxAzureHybridCostSavings - Savings type"
+          },
+          {
+            "name": "MonthlyAhubSqlCostSavings",
+            "value": "MonthlyAhubSqlCostSavings",
+            "description": "MonthlyAhubSqlCostSavings - Savings type"
+          },
+          {
+            "name": "MonthlyVcfByolCostDifference",
+            "value": "MonthlyVcfByolCostDifference",
+            "description": "MonthlyVcfByolCostDifference - Savings type"
+          }
+        ]
+      }
+    },
+    "Scope": {
+      "type": "object",
+      "description": "Scope of the assessment.",
+      "properties": {
+        "scopeType": {
+          "$ref": "#/definitions/ScopeType",
+          "description": "The scope type"
+        },
+        "serverGroupId": {
+          "type": "string",
+          "description": "The server group arm id."
+        },
+        "azureResourceGraphQuery": {
+          "type": "string",
+          "description": "The ARG query."
+        }
+      }
+    },
+    "ScopeType": {
+      "type": "string",
+      "description": "Scope type",
+      "enum": [
+        "ServerGroupId",
+        "AzureResourceGraphQuery"
+      ],
+      "x-ms-enum": {
+        "name": "ScopeType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ServerGroupId",
+            "value": "ServerGroupId",
+            "description": "ServerGroupId - Scope type"
+          },
+          {
+            "name": "AzureResourceGraphQuery",
+            "value": "AzureResourceGraphQuery",
+            "description": "AzureResourceGraphQuery - Scope type"
+          }
+        ]
+      }
+    },
+    "SecuritySuitability": {
+      "type": "object",
+      "description": "The security suitability.",
+      "properties": {
+        "readiness": {
+          "$ref": "#/definitions/CloudSuitabilityCommon",
+          "description": "The security suitability.",
+          "readOnly": true
+        }
+      }
+    },
+    "SkuDetails": {
+      "type": "object",
+      "description": "Sku details.",
+      "properties": {
+        "skuType": {
+          "$ref": "#/definitions/SkuType",
+          "description": "The sku type.",
+          "readOnly": true
+        },
+        "skuName": {
+          "type": "string",
+          "description": "The sku name.",
+          "readOnly": true
+        },
+        "capabilities": {
+          "type": "array",
+          "description": "The capabilities.",
+          "items": {
+            "type": "object",
+            "description": "The generic name value pair.",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "The name.",
+                "readOnly": true
+              },
+              "value": {
+                "type": "string",
+                "description": "The value.",
+                "readOnly": true
+              }
+            }
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "totalCost": {
+          "type": "array",
+          "description": "The sku cost details.",
+          "items": {
+            "$ref": "#/definitions/CostDetailsCommon"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "totalSavings": {
+          "type": "array",
+          "description": "The sku savings details.",
+          "items": {
+            "$ref": "#/definitions/SavingsDetailsCommon"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "SkuKind": {
+      "type": "string",
+      "description": "Sku Kind",
+      "enum": [
+        "Endpoint",
+        "Details"
+      ],
+      "x-ms-enum": {
+        "name": "SkuKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Endpoint",
+            "value": "Endpoint",
+            "description": "Endpoint - Sku Kind"
+          },
+          {
+            "name": "Details",
+            "value": "Details",
+            "description": "Details - Sku Kind"
+          }
+        ]
+      }
+    },
+    "SkuType": {
+      "type": "string",
+      "description": "Sku type",
+      "enum": [
+        "Unknown",
+        "Compute",
+        "Storage",
+        "Network",
+        "AppServicePlan",
+        "AzureSpringApps"
+      ],
+      "x-ms-enum": {
+        "name": "SkuType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown - Sku type"
+          },
+          {
+            "name": "Compute",
+            "value": "Compute",
+            "description": "Compute - Sku type"
+          },
+          {
+            "name": "Storage",
+            "value": "Storage",
+            "description": "Storage - Sku type"
+          },
+          {
+            "name": "Network",
+            "value": "Network",
+            "description": "Network - Sku type"
+          },
+          {
+            "name": "AppServicePlan",
+            "value": "AppServicePlan",
+            "description": "AppServicePlan - Sku type"
+          },
+          {
+            "name": "AzureSpringApps",
+            "value": "AzureSpringApps",
+            "description": "AzureSpringApps - Sku type"
+          }
+        ]
+      }
+    },
+    "SourceDetails": {
+      "type": "object",
+      "description": "Source details",
+      "properties": {
+        "sourceName": {
+          "$ref": "#/definitions/AssessmentSource",
+          "description": "The source name.",
+          "readOnly": true
+        },
+        "sourceType": {
+          "$ref": "#/definitions/MigrateWorkloadType",
+          "description": "The source type.",
+          "readOnly": true
+        },
+        "platform": {
+          "$ref": "#/definitions/MigrationPlatform",
+          "description": "The migration platform.",
+          "readOnly": true
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The count of a type of source.",
+          "readOnly": true
+        }
+      }
+    },
+    "StrategyType": {
+      "type": "string",
+      "description": "Strategy type",
+      "enum": [
+        "PaaSPreferred",
+        "CostOptimized",
+        "EffortOptimized"
+      ],
+      "x-ms-enum": {
+        "name": "StrategyType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PaaSPreferred",
+            "value": "PaaSPreferred",
+            "description": "PaaSPreferred - Strategy type"
+          },
+          {
+            "name": "CostOptimized",
+            "value": "CostOptimized",
+            "description": "CostOptimized - Strategy type"
+          },
+          {
+            "name": "EffortOptimized",
+            "value": "EffortOptimized",
+            "description": "EffortOptimized - Strategy type"
+          }
+        ]
+      }
+    },
+    "SummaryProperties": {
+      "type": "object",
+      "description": "Summary properties class.",
+      "properties": {
+        "summaryType": {
+          "$ref": "#/definitions/SummaryType",
+          "description": "The summary type",
+          "readOnly": true
+        },
+        "summaryName": {
+          "type": "string",
+          "description": "The summary name",
+          "readOnly": true
+        },
+        "sources": {
+          "type": "array",
+          "description": "The source details list.",
+          "items": {
+            "$ref": "#/definitions/SourceDetails"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "targets": {
+          "type": "array",
+          "description": "The target details list.",
+          "items": {
+            "$ref": "#/definitions/TargetDetails"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "targetSourceMapping": {
+          "type": "array",
+          "description": "The target source mapping.",
+          "items": {
+            "$ref": "#/definitions/TargetSourcePair"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "costComponents": {
+          "type": "array",
+          "description": "The cost components.",
+          "items": {
+            "$ref": "#/definitions/CostDetailsCommon"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "savingsComponents": {
+          "type": "array",
+          "description": "The cost components.",
+          "items": {
+            "$ref": "#/definitions/SavingsDetailsCommon"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "SummaryType": {
+      "type": "string",
+      "description": "Summary Type",
+      "enum": [
+        "Unknown",
+        "Strategy",
+        "Target"
+      ],
+      "x-ms-enum": {
+        "name": "SummaryType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown - Summary Type"
+          },
+          {
+            "name": "Strategy",
+            "value": "Strategy",
+            "description": "Strategy - Summary Type"
+          },
+          {
+            "name": "Target",
+            "value": "Target",
+            "description": "Target - Summary Type"
+          }
+        ]
+      }
+    },
+    "TargetDetails": {
+      "type": "object",
+      "description": "Target details",
+      "properties": {
+        "targetName": {
+          "$ref": "#/definitions/AzureTarget",
+          "description": "The target name.",
+          "readOnly": true
+        },
+        "targetType": {
+          "$ref": "#/definitions/MigrateWorkloadType",
+          "description": "The target type.",
+          "readOnly": true
+        },
+        "platform": {
+          "$ref": "#/definitions/MigrationPlatform",
+          "description": "The migration platform.",
+          "readOnly": true
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The count of a type of source.",
+          "readOnly": true
+        }
+      }
+    },
+    "TargetSourcePair": {
+      "type": "object",
+      "description": "Target source pair",
+      "properties": {
+        "sourceRef": {
+          "$ref": "#/definitions/AssessmentSource",
+          "description": "The source name.",
+          "readOnly": true
+        },
+        "targetRef": {
+          "$ref": "#/definitions/AzureTarget",
+          "description": "The target name.",
+          "readOnly": true
+        },
+        "sourceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The count of a type of source.",
+          "readOnly": true
+        },
+        "targetCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The count of a type of target.",
+          "readOnly": true
+        },
+        "migrationDetails": {
+          "$ref": "#/definitions/MigrationDetails",
+          "description": "The migration details.",
+          "readOnly": true
+        },
+        "managementDetails": {
+          "type": "array",
+          "description": "The management details.",
+          "items": {
+            "$ref": "#/definitions/ManagementDetails"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "costDetails": {
+          "type": "array",
+          "description": "The cost details.",
+          "items": {
+            "$ref": "#/definitions/CostDetailsCommon"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "savingsDetails": {
+          "type": "array",
+          "description": "The savings details.",
+          "items": {
+            "$ref": "#/definitions/SavingsDetailsCommon"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "confidenceScore": {
+          "type": "number",
+          "format": "double",
+          "description": "The confidence score.",
+          "readOnly": true
+        }
+      }
+    },
+    "TimeRange": {
+      "type": "string",
+      "description": "Time Range for Performance Data.",
+      "enum": [
+        "Day",
+        "Week",
+        "Month",
+        "Custom"
+      ],
+      "x-ms-enum": {
+        "name": "TimeRange",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Day",
+            "value": "Day",
+            "description": "Daily."
+          },
+          {
+            "name": "Week",
+            "value": "Week",
+            "description": "Weekly."
+          },
+          {
+            "name": "Month",
+            "value": "Month",
+            "description": "Monthly."
+          },
+          {
+            "name": "Custom",
+            "value": "Custom",
+            "description": "Custom Time Range."
+          }
+        ]
+      }
+    },
+    "WebServerType": {
+      "type": "string",
+      "description": "Web Server Type.",
+      "enum": [
+        "Unknown",
+        "IIS",
+        "Tomcat"
+      ],
+      "x-ms-enum": {
+        "name": "WebServerType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown. Indicates Missing Data."
+          },
+          {
+            "name": "IIS",
+            "value": "IIS",
+            "description": "ASP.NET Web App."
+          },
+          {
+            "name": "Tomcat",
+            "value": "Tomcat",
+            "description": "Java Web App."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}
