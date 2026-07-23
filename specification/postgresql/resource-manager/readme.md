@@ -31,6 +31,10 @@ openapi-type: arm
 tag: package-flexibleserver-2025-08-01
 ```
 
+```yaml $(package-singleservers)
+tag: package-2020-01-01
+```
+
 ### Tag: package-flexibleserver-2026-07-01-preview
 
 These settings apply only when `--tag=package-flexibleserver-2026-07-01-preview` is specified on the command line.
