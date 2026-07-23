@@ -5,6 +5,7 @@ import "@typespec/http";
 using Azure.ClientGenerator.Core;
 using Http;
 using Microsoft.Quota;
+using Http;
 
 // csharp
 @@clientName(LimitJsonObject, "QuotaLimitJsonObject", "csharp");
