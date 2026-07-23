@@ -37,7 +37,7 @@ suppressions:
     reason: LRO status response uses inline OperationStatus model from Azure.Core templates
     from: discovery-bookshelf.json
     where:
-      - $.paths["/knowledgeBases/{knowledgeBaseName}].delete.responses["202"].schema
+      - $.paths["/knowledgeBases/{knowledgeBaseName}"].delete.responses["202"].schema
       - $.paths["/knowledgeBases/{knowledgeBaseName}:startIndexing"].post.responses["202"].schema
       - $.paths["/knowledgeBases/{knowledgeBaseName}:cancelIndexing"].post.responses["202"].schema
       - $.paths["/knowledgeBases/{knowledgeBaseName}:search"].post.responses["202"].schema
