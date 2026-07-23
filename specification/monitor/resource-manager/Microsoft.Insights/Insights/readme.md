@@ -35,6 +35,8 @@ openapi-subtype: rpaas
 directive:
   - suppress: Example Validations
     reason: "There are open issues (bugs) in the validator affecting some of the examples and since there is no way to selectively disable the validation for a particular example or paths, all of the example validation is being turned off."
+  - suppress: MULTIPLE_API_VERSION
+    reason: "This is a large umbrella readme that intentionally bundles multiple Monitor sub-services each pinned to their own latest stable/preview API version. The mixed API versions are by design."
 ```
 
 ### Tag: package-2025-08
