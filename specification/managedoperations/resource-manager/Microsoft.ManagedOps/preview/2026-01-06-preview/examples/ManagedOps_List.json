@@ -1,0 +1,72 @@
+{
+  "title": "ManagedOps_List",
+  "operationId": "ManagedOps_List",
+  "parameters": {
+    "api-version": "2026-01-06-preview",
+    "subscriptionId": "11809CA1-E126-4017-945E-AA795CD5C5A9"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/providers/Microsoft.ManagedOps/managedOps/default",
+            "name": "default",
+            "type": "Microsoft.ManagedOps/managedOps",
+            "systemData": {
+              "createdBy": "myUser",
+              "createdByType": "User",
+              "createdAt": "2023-05-19T00:28:48.610Z",
+              "lastModifiedBy": "myUser",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2023-05-19T00:28:48.610Z"
+            },
+            "properties": {
+              "sku": {
+                "name": "ManagedOps",
+                "tier": "Essential"
+              },
+              "desiredConfiguration": {
+                "changeTrackingAndInventory": {
+                  "logAnalyticsWorkspaceId": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/myResourceGroup/providers/Microsoft.OperationalInsights/workspaces/myLogAnalyticsWorkspace"
+                },
+                "azureMonitorInsights": {
+                  "azureMonitorWorkspaceId": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/myResourceGroup/providers/Microsoft.Monitor/accounts/myAzureMonitorWorkspace"
+                },
+                "userAssignedManagedIdentityId": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myManagedIdentity",
+                "defenderForServers": "Enable",
+                "defenderCspm": "Enable"
+              },
+              "provisioningState": "Provisioning",
+              "policyAssignmentProperties": {
+                "policyInitiativeAssignmentId": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/providers/microsoft.authorization/policyassignments/Managedops-Policy-11809CA1-E126-4017-945E-AA795CD5C5A9"
+              },
+              "services": {
+                "changeTrackingAndInventory": {
+                  "dcrId": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/myResourceGroup/providers/Microsoft.Insights/dataCollectionRules/ct-dcr131878407",
+                  "enablementStatus": "Enabled"
+                },
+                "azureMonitorInsights": {
+                  "dcrId": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/myResourceGroup/providers/Microsoft.Insights/dataCollectionRules/ami-dcr131878407",
+                  "enablementStatus": "Enabled"
+                },
+                "azureUpdateManager": {
+                  "enablementStatus": "Enabled"
+                },
+                "azurePolicyAndMachineConfiguration": {
+                  "enablementStatus": "Enabled"
+                },
+                "defenderForServers": {
+                  "enablementStatus": "Enabled"
+                },
+                "defenderCspm": {
+                  "enablementStatus": "Enabled"
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
