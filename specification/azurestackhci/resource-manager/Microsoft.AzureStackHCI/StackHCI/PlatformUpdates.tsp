@@ -13,7 +13,7 @@ namespace Microsoft.AzureStackHCI;
  * Represents a platform update resource.
  */
 @parentResource(SubscriptionLocationResource)
-@added(Versions.v2026_05_01_preview)
+@added(Versions.v2026_10_15_preview)
 model PlatformUpdate
   is Azure.ResourceManager.ProxyResource<PlatformUpdateProperties> {
   ...ResourceNameParameter<
@@ -23,7 +23,7 @@ model PlatformUpdate
 }
 
 @armResourceOperations
-@added(Versions.v2026_05_01_preview)
+@added(Versions.v2026_10_15_preview)
 interface PlatformUpdates {
   /**
    * Get a platform update.
