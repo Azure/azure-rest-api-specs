@@ -351,6 +351,7 @@ const cases: TestCase[] = [
 describe("validateBreakingChange", () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    process.exitCode = undefined;
   });
 
   it.each(cases)(
@@ -418,6 +419,36 @@ describe("validateBreakingChange", () => {
       }
     },
   );
+
+  it("returns success when only OAD violations are detected", async () => {
+    mockChangedFilesStatuses({
+      modifications: ["specification/foo/data-plane/Foo/stable/2025-03-01/foo.json"],
+    });
+
+    vi.mocked(runOad).mockResolvedValue([
+      {
+        id: "1011",
+        code: "AddingResponseCode",
+        message: "The new version adds a response code '201'.",
+        old: {},
+        new: {
+          location: "foo.json:1:1",
+          path: "paths['/foo'].put.responses.201",
+          ref: "file:///foo.json#/paths/~1foo/put/responses/201",
+        },
+        docUrl: "https://github.com/Azure/openapi-diff/tree/master/docs/rules/1011.md",
+        mode: "Addition",
+        type: "Error",
+      },
+    ]);
+
+    const statusCode = await validateBreakingChange({
+      ...context,
+      runType: BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION,
+    });
+
+    expect(statusCode).toBe(0);
+  });
 });
 
 function prependParentFolder(
