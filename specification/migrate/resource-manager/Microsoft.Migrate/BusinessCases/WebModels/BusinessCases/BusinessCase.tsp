@@ -46,7 +46,7 @@ model BusinessCase is ProxyResource<BusinessCaseProperties> {
   resource.
   """)
 model BusinessCaseProperties is AzureResourceProperties {
-  @doc("Version")
+  @doc("The version of the business case.")
   @visibility(Lifecycle.Read)
   @added(BusinessCaseApiVersions.v2025_09_09_preview)
   version?: string;
