@@ -32,6 +32,18 @@ model FirstPartyServiceTag extends Common.Resource {
   properties?: FirstPartyServiceTagPropertiesFormat;
 
   /**
+   * The unique identifier of the resource.
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * The type of the resource.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
    * The name of the first party service tag.
    */
   @visibility(Lifecycle.Read)
