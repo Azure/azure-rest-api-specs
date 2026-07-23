@@ -22,7 +22,8 @@ model MongoCluster is TrackedResource<MongoClusterProperties> {
   ...ManagedServiceIdentityProperty;
 }
 
-@@added(MongoCluster.identity,
+@@added(
+  MongoCluster.identity,
   Microsoft.DocumentDB.Versions.v2025_07_01_preview
 );
 
@@ -613,6 +614,7 @@ model CustomerManagedKeyEncryptionProperties {
   keyEncryptionKeyIdentity?: KeyEncryptionKeyIdentity;
 
   /** The URI of the key vault key used for encryption. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @madeOptional(Versions.v2025_08_01_preview)
   keyEncryptionKeyUrl?: string;
 }

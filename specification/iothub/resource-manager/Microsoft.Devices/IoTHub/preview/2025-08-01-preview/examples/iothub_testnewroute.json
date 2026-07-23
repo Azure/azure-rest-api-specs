@@ -1,28 +1,28 @@
 {
   "parameters": {
+    "iotHubName": "testHub",
+    "resourceGroupName": "myResourceGroup",
     "api-version": "2025-08-01-preview",
+    "subscriptionId": "91d12660-3dec-467a-be2a-213b5544ddc0",
     "input": {
       "message": {
+        "body": "Body of message",
         "appProperties": {
           "key1": "value1"
         },
-        "body": "Body of message",
         "systemProperties": {
           "key1": "value1"
         }
       },
       "route": {
         "name": "Routeid",
+        "source": "DeviceMessages",
         "endpointNames": [
           "id1"
         ],
-        "isEnabled": true,
-        "source": "DeviceMessages"
+        "isEnabled": true
       }
-    },
-    "iotHubName": "testHub",
-    "resourceGroupName": "myResourceGroup",
-    "subscriptionId": "91d12660-3dec-467a-be2a-213b5544ddc0"
+    }
   },
   "responses": {
     "200": {
@@ -31,24 +31,22 @@
         "details": {
           "compilationErrors": [
             {
-              "location": {
-                "end": {
-                  "column": 24,
-                  "line": 12
-                },
-                "start": {
-                  "column": 12,
-                  "line": 12
-                }
-              },
               "message": "string response",
-              "severity": "error"
+              "severity": "error",
+              "location": {
+                "start": {
+                  "line": 12,
+                  "column": 12
+                },
+                "end": {
+                  "line": 12,
+                  "column": 24
+                }
+              }
             }
           ]
         }
       }
     }
-  },
-  "operationId": "IotHubResource_TestRoute",
-  "title": "IotHubResource_TestRoute"
+  }
 }

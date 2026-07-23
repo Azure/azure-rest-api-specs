@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.App;
 /**
@@ -36,6 +37,19 @@ alias LogicAppParentParameter = {
   containerAppName: string;
 };
 
+alias LogicAppOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  LogicAppParentParameter,
+  {
+    /** Name of the Logic App, the extension resource. */
+    @path
+    @segment("providers/Microsoft.App/logicApps")
+    @key
+    @pattern("^[-\\w\\._\\(\\)]+$")
+    logicAppName: string;
+  },
+  ErrorType = DefaultErrorResponse
+>;
+
 @armResourceOperations
 interface LogicApps {
   /**
@@ -51,10 +65,21 @@ interface LogicApps {
   /**
    * Create or update a Logic App extension resource
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<
+  @sharedRoute
+  @removed(Versions.v2026_01_01)
+  createOrUpdate is LogicAppOps.CreateOrUpdateSync<LogicApp>;
+
+  /**
+   * Create or update a Logic App extension resource
+   */
+  @sharedRoute
+  @added(Versions.v2026_01_01)
+  createOrUpdateStable is LogicAppOps.CreateOrUpdateSync<
     LogicApp,
-    LogicAppParentParameter,
-    Error = DefaultErrorResponse
+    {},
+    | ArmResourceUpdatedResponse<LogicApp>
+    | ArmResourceCreatedSyncResponse<LogicApp>,
+    true
   >;
 
   /**
@@ -69,6 +94,7 @@ interface LogicApps {
   /**
    * Creates or updates the artifacts for the logic app
    */
+  @removed(Versions.v2026_01_01)
   deployWorkflowArtifacts is ArmResourceActionSync<
     LogicApp,
     WorkflowArtifacts,
@@ -94,6 +120,7 @@ interface LogicApps {
    * Proxies a the API call to the logic app backed by the container app.
    */
   @summary("Proxies a the API call to the logic app backed by the container app.")
+  @removed(Versions.v2026_01_01)
   invoke is ArmResourceActionSync<
     LogicApp,
     void,
@@ -140,12 +167,15 @@ interface LogicApps {
 }
 
 @@doc(LogicApp.name, "Name of the Logic App, the extension resource.");
-@@doc(LogicApp.properties,
+@@doc(
+  LogicApp.properties,
   "The resource-specific properties for this resource."
 );
-@@doc(LogicApps.createOrUpdate::parameters.resource,
+@@doc(
+  LogicApps.createOrUpdate::parameters.resource,
   "Logic app resource properties."
 );
-@@doc(LogicApps.deployWorkflowArtifacts::parameters.body,
+@@doc(
+  LogicApps.deployWorkflowArtifacts::parameters.body,
   "Application settings and files of the workflow."
 );

@@ -359,7 +359,9 @@ interface GenerateAwsTemplate {
     @doc("ConnectorId and SolutionTypes and their properties to Generate AWS CFT Template.")
     @body
     generateAwsTemplateRequest: GenerateAwsTemplateRequest,
-  ): Azure.ResourceManager.ArmResponse<GenerateAwsTemplateResponse> | ErrorResponse;
+  ):
+    | Azure.ResourceManager.ArmResponse<GenerateAwsTemplateResponse>
+    | ErrorResponse;
 }
 
 /**
@@ -381,6 +383,7 @@ interface PublicCloudConnectors {
   listByResourceGroup is ArmResourceListByParent<PublicCloudConnector>;
   listBySubscription is ArmListBySubscription<PublicCloudConnector>;
 
+  @doc("A long-running resource action.")
   testPermissions is ArmResourceActionAsync<
     PublicCloudConnector,
     void,

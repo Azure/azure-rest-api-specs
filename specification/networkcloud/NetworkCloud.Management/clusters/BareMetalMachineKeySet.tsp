@@ -13,24 +13,22 @@ namespace Microsoft.NetworkCloud;
 /**
  * The name of the bare metal machine key set.
  */
-model BareMetalMachineKeySetNameParameter
-  is ResourceNameParameter<
-    Resource = BareMetalMachineKeySet,
-    KeyName = "bareMetalMachineKeySetName",
-    SegmentName = "bareMetalMachineKeySets",
-    NamePattern = "^([a-zA-Z0-9][a-zA-Z0-9-_]{0,28}[a-zA-Z0-9])$"
-  >;
+model BareMetalMachineKeySetNameParameter is ResourceNameParameter<
+  Resource = BareMetalMachineKeySet,
+  KeyName = "bareMetalMachineKeySetName",
+  SegmentName = "bareMetalMachineKeySets",
+  NamePattern = "^([a-zA-Z0-9][a-zA-Z0-9-_]{0,28}[a-zA-Z0-9])$"
+>;
 
 /**
  * BareMetalMachineKeySet represents the bare metal machine key set.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "legacy resource using legacy features"
 @parentResource(Cluster)
-model BareMetalMachineKeySet
-  is Azure.ResourceManager.TrackedResource<
-    BareMetalMachineKeySetProperties,
-    false
-  > {
+model BareMetalMachineKeySet is Azure.ResourceManager.TrackedResource<
+  BareMetalMachineKeySetProperties,
+  false
+> {
   ...BareMetalMachineKeySetNameParameter;
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
   ...RequiredExtendedLocationProperty;
@@ -81,7 +79,9 @@ interface BareMetalMachineKeySets {
       ...IfMatchParameter;
       ...IfNoneMatchParameter;
     },
-    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -97,15 +97,19 @@ interface BareMetalMachineKeySets {
   >;
 }
 
-@@doc(BareMetalMachineKeySet.name,
+@@doc(
+  BareMetalMachineKeySet.name,
   "The name of the bare metal machine key set."
 );
-@@doc(BareMetalMachineKeySet.properties,
+@@doc(
+  BareMetalMachineKeySet.properties,
   "The list of the resource properties."
 );
-@@doc(BareMetalMachineKeySets.createOrUpdate::parameters.resource,
+@@doc(
+  BareMetalMachineKeySets.createOrUpdate::parameters.resource,
   "The request body."
 );
-@@doc(BareMetalMachineKeySets.update::parameters.properties,
+@@doc(
+  BareMetalMachineKeySets.update::parameters.properties,
   "The request body."
 );

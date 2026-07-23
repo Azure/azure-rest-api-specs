@@ -19,7 +19,7 @@ namespace Microsoft.ContainerService;
  * The IdentityBinding resource.
  */
 @parentResource(ManagedCluster)
-@added(Versions.v2026_02_02_preview)
+@added(Versions.v2026_04_01)
 model IdentityBinding
   is Azure.ResourceManager.ProxyResource<IdentityBindingProperties> {
   ...ResourceNameParameter<
@@ -34,15 +34,17 @@ model IdentityBinding
 @@maxLength(IdentityBinding.name, 63);
 @@minLength(IdentityBinding.name, 1);
 @@doc(IdentityBinding.name, "The name of the identity binding.");
-@@doc(IdentityBinding.properties,
+@@doc(
+  IdentityBinding.properties,
   "The resource-specific properties for this resource."
 );
-@@doc(IdentityBindings.createOrUpdate::parameters.resource,
+@@doc(
+  IdentityBindings.createOrUpdate::parameters.resource,
   "The identity binding to create or update."
 );
 
 @armResourceOperations
-@added(Versions.v2026_02_02_preview)
+@added(Versions.v2026_04_01)
 interface IdentityBindings {
   /**
    * Gets the specified Identity Binding.
@@ -81,7 +83,7 @@ interface IdentityBindings {
  * The provisioning state of the last accepted operation.
  */
 @Azure.Core.lroStatus
-@added(Versions.v2026_02_02_preview)
+@added(Versions.v2026_04_01)
 union IdentityBindingProvisioningState {
   string,
 
@@ -119,7 +121,7 @@ union IdentityBindingProvisioningState {
 /**
  * IdentityBinding properties.
  */
-@added(Versions.v2026_02_02_preview)
+@added(Versions.v2026_04_01)
 model IdentityBindingProperties {
   /**
    * Managed identity profile for the identity binding.
@@ -138,12 +140,53 @@ model IdentityBindingProperties {
    */
   @visibility(Lifecycle.Read)
   provisioningState?: IdentityBindingProvisioningState;
+
+  /**
+   * Optional list of subjects authorized to use this identity binding for
+   * token exchange. Each entry pairs a required namespace label selector
+   * with an optional service account label selector; selectors within an
+   * entry are AND'd, and multiple entries are OR'd. When omitted or empty,
+   * authorization falls back exclusively to ClusterRole/ClusterRoleBinding
+   * evaluation. Maximum 100 entries.
+   */
+  @added(Versions.v2026_05_02_preview)
+  @identifiers(#[])
+  @maxItems(100)
+  allowedSubjects?: AllowedSubject[];
+}
+
+/**
+ * A subject authorized to use the identity binding for token exchange.
+ * The namespace selector is required and must be non-empty. The service
+ * account selector is optional; when omitted, all service accounts in
+ * matching namespaces are authorized. Selectors within a single
+ * AllowedSubject are AND'd; multiple AllowedSubjects on an
+ * IdentityBinding are OR'd.
+ */
+@added(Versions.v2026_05_02_preview)
+model AllowedSubject {
+  /**
+   * Label selector matching the namespaces in which this identity may be
+   * used. Must be non-empty: an empty selector would match every namespace
+   * and is rejected to prevent overly permissive bindings. Use the built-in
+   * `kubernetes.io/metadata.name` label to target specific namespaces by
+   * name.
+   */
+  namespaceSelector: LabelSelector;
+
+  /**
+   * Optional label selector matching the service accounts (within the
+   * namespaces matched by `namespaceSelector`) that may use this identity.
+   * When omitted, all service accounts in matching namespaces are
+   * authorized. When provided, it must be non-empty.
+   */
+  serviceAccountSelector?: LabelSelector;
 }
 
 /**
  * Managed identity profile for the identity binding.
  */
-@added(Versions.v2026_02_02_preview)
+@added(Versions.v2026_04_01)
 model IdentityBindingManagedIdentityProfile {
   /**
    * The resource ID of the managed identity.
@@ -183,11 +226,12 @@ model IdentityBindingManagedIdentityProfile {
 /**
  * IdentityBinding OIDC issuer profile.
  */
-@added(Versions.v2026_02_02_preview)
+@added(Versions.v2026_04_01)
 model IdentityBindingOidcIssuerProfile {
   /**
    * The OIDC issuer URL of the IdentityBinding.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   oidcIssuerUrl?: url;
 }

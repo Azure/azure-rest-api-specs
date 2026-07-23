@@ -22,11 +22,10 @@ namespace Microsoft.DesktopVirtualization;
 @added(Versions.vLatestPreview)
 @parentResource(HostPool)
 @singleton("default")
-model SessionHostManagement
-  is Azure.ResourceManager.ProxyResource<
-    SessionHostManagementProperties,
-    false
-  > {
+model SessionHostManagement is Azure.ResourceManager.ProxyResource<
+  SessionHostManagementProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = SessionHostManagement,
     KeyName = "sessionHostManagements",
@@ -124,12 +123,15 @@ interface SessionHostManagements {
 @@maxLength(SessionHostManagement.name, 24);
 @@minLength(SessionHostManagement.name, 3);
 @@doc(SessionHostManagement.name, "The name of the sessionHostManagement");
-@@doc(SessionHostManagement.properties,
+@@doc(
+  SessionHostManagement.properties,
   "Detailed properties for SessionHostManagement"
 );
-@@clientName(SessionHostManagements.update::parameters.body,
+@@clientName(
+  SessionHostManagements.update::parameters.body,
   "sessionHostManagement"
 );
-@@doc(SessionHostManagements.update::parameters.body,
+@@doc(
+  SessionHostManagements.update::parameters.body,
   "The properties to be updated."
 );

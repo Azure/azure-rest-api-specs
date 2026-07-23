@@ -8,14 +8,14 @@ parameters:
   WorkingDirectory: $(System.DefaultWorkingDirectory)
   ScriptDirectory: eng/common/scripts
   SkipCheckingForChanges: false
-  AuthToken: $(azuresdk-github-pat)
+  AuthToken: ''
 
 steps:
 - ${{ if eq(parameters.AuthToken, '') }}:
   - template: /eng/common/pipelines/templates/steps/login-to-github.yml
     parameters:
       TokenOwners:
-        - ${{ parameters.TargetRepoOwner }}
+        - ${{ parameters.BaseRepoOwner }}
       ScriptDirectory: ${{ parameters.ScriptDirectory }}
 
 - task: PowerShell@2

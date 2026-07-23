@@ -16,11 +16,10 @@ namespace Microsoft.DataBoxEdge;
  */
 @singleton("default")
 @parentResource(DataBoxEdgeDevice)
-model DiagnosticRemoteSupportSettings
-  is Azure.ResourceManager.ProxyResource<
-    DiagnosticRemoteSupportSettingsProperties,
-    false
-  > {
+model DiagnosticRemoteSupportSettings is Azure.ResourceManager.ProxyResource<
+  DiagnosticRemoteSupportSettingsProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = DiagnosticRemoteSupportSettings,
     KeyName = "diagnosticRemoteSupportSetting",
@@ -46,16 +45,20 @@ interface DiagnosticRemoteSupportSettingsOperationGroup {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   updateDiagnosticRemoteSupportSettings is ArmResourceCreateOrReplaceAsync<
     DiagnosticRemoteSupportSettings,
-    Response = ArmResourceUpdatedResponse<DiagnosticRemoteSupportSettings> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = DiagnosticRemoteSupportSettings> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response =
+      | ArmResourceUpdatedResponse<DiagnosticRemoteSupportSettings>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = DiagnosticRemoteSupportSettings> &
+          Azure.Core.Foundations.RetryAfterHeader>,
     Error = CloudError
   >;
 }
 
 @@doc(DiagnosticRemoteSupportSettings.name, "");
-@@doc(DiagnosticRemoteSupportSettings.properties,
+@@doc(
+  DiagnosticRemoteSupportSettings.properties,
   "Properties of the remote support  settings."
 );
-@@doc(DiagnosticRemoteSupportSettingsOperationGroup.updateDiagnosticRemoteSupportSettings::parameters.resource,
+@@doc(
+  DiagnosticRemoteSupportSettingsOperationGroup.updateDiagnosticRemoteSupportSettings::parameters.resource,
   "The diagnostic remote support settings."
 );

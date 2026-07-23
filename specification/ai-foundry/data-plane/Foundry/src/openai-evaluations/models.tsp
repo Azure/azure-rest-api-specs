@@ -2,9 +2,11 @@ import "../common/models.tsp";
 import "../red-teams/models.tsp";
 
 using Azure.Core.Experimental;
+using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
+/** The object type for evaluation deletion responses. */
 union EvalObjectType {
   evalDeleted: "eval.deleted",
 }
@@ -33,6 +35,17 @@ model DeleteEvalRunResponse {
   deleted?: boolean;
 }
 
+@doc("The level at which evaluation is performed.")
+union EvaluationLevel {
+  @doc("Evaluation is performed at the turn level.")
+  turn: "turn",
+
+  @doc("Evaluation is performed at the conversation level.")
+  conversation: "conversation",
+
+  string,
+}
+
 /** Grader Azure AI Evaluator definition for foundry evaluators. */
 model GraderAzureAIEvaluator {
   /** The object type, which is always `azure_ai_evaluator`. */
@@ -48,14 +61,15 @@ model GraderAzureAIEvaluator {
   evaluator_version?: string;
 
   /** The initialization parameters for the evaluation. Must support structured outputs. */
-  initialization_parameters?: {};
+  initialization_parameters?: Record<unknown>;
 
   /** The model to use for the evaluation. Must support structured outputs. */
   data_mapping?: Record<string>;
 }
 
+/** An Azure AI Evaluator grader used as testing criterion in evaluations. */
 @summary("AzureAIEvaluatorGrader")
-model EvalGraderAzureAIEvaluator {
+model TestingCriterionAzureAIEvaluator {
   ...GraderAzureAIEvaluator;
 }
 
@@ -69,6 +83,7 @@ model DataSourceConfig {
   schema: Record<unknown>;
 }
 
+/** Base data source configuration for Azure AI evaluation scenarios. */
 @discriminator("scenario")
 model AzureAIDataSourceConfig extends DataSourceConfig {
   /** The object type, which is always `azure_ai_source`. */
@@ -104,7 +119,8 @@ model AzureAIBenchmarkDataSourceConfig extends AzureAIDataSourceConfig {
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
 #suppress "deprecated" "Deprecated status inherited from source OpenAI specification"
-@@changePropertyType(OpenAI.Eval.data_source_config,
+@@changePropertyType(
+  OpenAI.Eval.data_source_config,
 
     | OpenAI.CreateEvalCustomDataSourceConfig
     | OpenAI.CreateEvalLogsDataSourceConfig
@@ -117,14 +133,15 @@ model AzureAIBenchmarkDataSourceConfig extends AzureAIDataSourceConfig {
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the Azure OpenAI API."
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
-@@changePropertyType(OpenAI.Eval.testing_criteria,
+@@changePropertyType(
+  OpenAI.Eval.testing_criteria,
   (
     | OpenAI.EvalGraderLabelModel
     | OpenAI.EvalGraderStringCheck
     | OpenAI.EvalGraderTextSimilarity
     | OpenAI.EvalGraderPython
     | OpenAI.EvalGraderScoreModel
-    | EvalGraderAzureAIEvaluator)[]
+    | TestingCriterionAzureAIEvaluator)[]
 );
 
 model Eval is OpenAI.Eval {
@@ -150,7 +167,8 @@ model Eval is OpenAI.Eval {
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
 #suppress "deprecated" "Deprecated status inherited from source OpenAI specification"
-@@changePropertyType(OpenAI.CreateEvalRequest.data_source_config,
+@@changePropertyType(
+  OpenAI.CreateEvalRequest.data_source_config,
 
     | OpenAI.CreateEvalCustomDataSourceConfig
     | OpenAI.CreateEvalLogsDataSourceConfig
@@ -163,14 +181,15 @@ model Eval is OpenAI.Eval {
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the Azure OpenAI API."
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
-@@changePropertyType(OpenAI.CreateEvalRequest.testing_criteria,
+@@changePropertyType(
+  OpenAI.CreateEvalRequest.testing_criteria,
   (
     | OpenAI.EvalGraderLabelModel
     | OpenAI.EvalGraderStringCheck
     | OpenAI.EvalGraderTextSimilarity
     | OpenAI.EvalGraderPython
     | OpenAI.EvalGraderScoreModel
-    | EvalGraderAzureAIEvaluator)[]
+    | TestingCriterionAzureAIEvaluator)[]
 );
 model CreateEvalRequest is OpenAI.CreateEvalRequest {
   /**
@@ -198,6 +217,9 @@ union ItemGenerationParamsType {
 
   /** Parameters for synthetic data item generation. */
   syntheticDataGeneration: "synthetic_data_gen_preview",
+
+  /** Parameters for conversation simulation item generation. */
+  conversationGenPreview: "conversation_gen_preview",
 }
 
 /** The types of parameters for synthetic data generation item generation. */
@@ -215,6 +237,7 @@ model ItemGenerationParams {
   type: ItemGenerationParamsType;
 }
 
+/** Represents the parameters for red team item generation. */
 model RedTeamItemGenerationParams extends ItemGenerationParams {
   /** The type of item generation parameters. */
   type: ItemGenerationParamsType.redTeam;
@@ -305,6 +328,8 @@ model AzureAIAgentTarget extends Target {
 
   /** The parameters used to control the sampling behavior of the agent during text generation. */
   tool_descriptions?: ToolDescription[];
+
+  tools?: OpenAI.Tool[];
 }
 
 /** Description of a tool that can be used by an agent. */
@@ -318,17 +343,17 @@ model ToolDescription {
 
 /** Represents a set of parameters used to control the sampling behavior of a language model during text generation. */
 model ModelSamplingParams {
-  /** The temperature parameter for sampling. */
-  temperature: float32;
+  /** The temperature parameter for sampling. Defaults to 1.0. */
+  temperature?: float32 = 1.0;
 
-  /** The top-p parameter for nucleus sampling. */
-  top_p: float32;
+  /** The top-p parameter for nucleus sampling. Defaults to 1.0. */
+  top_p?: float32 = 1.0;
 
-  /** The random seed for reproducibility. */
-  seed: int32;
+  /** The random seed for reproducibility. Defaults to 42. */
+  seed?: int32 = 42;
 
   /** The maximum number of tokens allowed in the completion. */
-  max_completion_tokens: int32;
+  max_completion_tokens?: int32;
 }
 
 /** Base class for run data sources with discriminator support. */
@@ -345,6 +370,9 @@ model TracesPreviewEvalRunDataSource extends EvalRunDataSource {
 
   /** Collection of Agent trace identifiers that should be evaluated. */
   trace_ids?: string[];
+
+  /** Collection of conversation identifiers to filter traces by conversation. */
+  conversation_ids?: string[];
 
   /** The agent ID used to filter traces for evaluation. */
   agent_id?: string;
@@ -387,6 +415,7 @@ model SyntheticDataGenerationPreviewEvalRunDataSource
   input_messages?: OpenAI.CreateEvalResponsesRunDataSourceInputMessagesTemplate;
 }
 
+/** Represents the parameters for synthetic data generation item generation. */
 model SyntheticDataGenerationPreviewItemGenerationParams
   extends ItemGenerationParams {
   /** The type of item generation parameters. */
@@ -442,6 +471,9 @@ model TargetCompletionEvalRunDataSource extends EvalRunDataSource {
 
   /** The target configuration for the evaluation. */
   target: Target;
+
+  /** The parameters for item generation. ConversationGenPreviewItemGenerationParams enables conversation simulation previews. */
+  item_generation_params?: ItemGenerationParams;
 }
 
 /** Represents a reference to an uploaded CSV file used as a source for evaluation data. */
@@ -464,6 +496,7 @@ model EvalCsvRunDataSource extends EvalRunDataSource {
   source: EvalCsvFileIdSource;
 }
 
+/** Represents a data source for red team evaluation runs. */
 model RedTeamEvalRunDataSource extends EvalRunDataSource {
   /** The type of data source. Always `azure_ai_red_team`. */
   type: "azure_ai_red_team";
@@ -473,6 +506,117 @@ model RedTeamEvalRunDataSource extends EvalRunDataSource {
 
   /** The target configuration for the evaluation. */
   target: Target;
+}
+
+/** Represents the parameters for conversation simulation item generation. */
+model ConversationGenPreviewItemGenerationParams extends ItemGenerationParams {
+  /** The type of item generation parameters, always `conversation_gen_preview`. */
+  type: ItemGenerationParamsType.conversationGenPreview;
+
+  /** The model deployment used for simulation, in the format '{connectionName}/modelDeploymentName'. */
+  `model`: string;
+
+  /** Maximum number of turns per simulated conversation. Defaults to 20. */
+  max_turns?: int32 = 20;
+
+  /** Number of simulated conversations to generate per test scenario. Defaults to 5. */
+  num_conversations?: int32 = 5;
+
+  /** Mapping from source fields to response_id field, which is required for retrieving chat history. */
+  data_mapping?: Record<string>;
+
+  /** Sampling parameters for the conversation generation. */
+  sampling_params?: ModelSamplingParams;
+}
+
+// ── Trace Source types ────────────────────────────────────────────────────────
+
+/** Specifies the type of trace source used to select traces for evaluation. */
+union TraceSourceType {
+  string,
+
+  /** Selects traces by explicit trace IDs. */
+  traceIdSource: "trace_id_source",
+
+  /** Selects traces by conversation IDs. */
+  conversationIdSource: "conversation_id_source",
+
+  /** Selects traces by agent reference with time-based filtering. */
+  agentFilter: "agent_filter",
+}
+
+/** Base class for polymorphic trace sources nested within an AzureAITraceDataSourcePreviewEvalRunDataSource. */
+@discriminator("type")
+model TraceSource {
+  /** The discriminator that identifies which kind of trace source this is. */
+  type: TraceSourceType;
+}
+
+/** A trace source that selects traces by explicit trace IDs. */
+model TraceIdTraceSource extends TraceSource {
+  /** The type of trace source, always `trace_id_source`. */
+  type: TraceSourceType.traceIdSource;
+
+  /** Collection of trace identifiers to evaluate. */
+  trace_ids: string[];
+}
+
+/** A trace source that selects traces by conversation IDs. */
+model ConversationIdTraceSource extends TraceSource {
+  /** The type of trace source, always `conversation_id_source`. */
+  type: TraceSourceType.conversationIdSource;
+
+  /** Collection of conversation identifiers to filter traces by. */
+  conversation_ids: string[];
+}
+
+/** Specifies the type of filter strategy used to select traces for evaluation. */
+union FilterStrategyType {
+  string,
+
+  /** Selects traces by random sampling. */
+  random_sampling: "random_sampling",
+
+  /** Selects traces using an algorithm to identify the most relevant ones. */
+  smart_filtering: "smart_filtering",
+}
+
+/** A trace source that selects traces by agent reference with time-based filtering. */
+model AgentFilterTraceSource extends TraceSource {
+  /** The type of trace source, always `agent_filter`. */
+  type: TraceSourceType.agentFilter;
+
+  /** The identifier of the agent to filter traces by. */
+  agent_id?: string;
+
+  /** The name of the agent to filter traces by. */
+  agent_name?: string;
+
+  /** The version of the agent to filter traces by. */
+  agent_version?: string;
+
+  /** Start time for the trace query window, expressed as a Unix timestamp (seconds). */
+  start_time?: FoundryTimestamp;
+
+  /** End time for the trace query window, expressed as a Unix timestamp (seconds). */
+  end_time?: FoundryTimestamp;
+
+  /** Maximum number of traces to sample. Must be greater than 0. */
+  max_traces?: int32;
+
+  /** The strategy used to filter traces. */
+  filter_strategy?: FilterStrategyType;
+}
+
+// ── Trace Data Source ─────────────────────────────────────────────────────────
+
+/** A wrapper data source that contains a polymorphic trace source to specify how traces are selected for evaluation. */
+model AzureAITraceDataSourcePreviewEvalRunDataSource extends EvalRunDataSource {
+  /** The type of data source, always `azure_ai_trace_data_source_preview`. */
+  type: "azure_ai_trace_data_source_preview";
+
+  /** The trace source that defines how traces are selected for evaluation. */
+  trace_source?: TraceSource;
 }
 
 /** Represents a data source for benchmark evaluation runs. */
@@ -496,12 +640,40 @@ model AzureAIBenchmarkPreviewEvalRunDataSource extends EvalRunDataSource {
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the Azure OpenAI API."
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
-@@changePropertyType(OpenAI.EvalRun.data_source,
+@@changePropertyType(
+  OpenAI.EvalRun.data_source,
 
     | OpenAI.CreateEvalJsonlRunDataSource
     | OpenAI.CreateEvalCompletionsRunDataSource
     | OpenAI.CreateEvalResponsesRunDataSource
-    | EvalRunDataSource /* RedTeamEvalRunDataSource | TargetCompletionsEvalRunDataSource | AzureAIResponsesEvalRunDataSource | TracesPreviewEvalRunDataSource | AzureAIBenchmarkPreviewEvalRunDataSource */
+    | EvalRunDataSource /* RedTeamEvalRunDataSource | TargetCompletionsEvalRunDataSource | AzureAIResponsesEvalRunDataSource | TracesPreviewEvalRunDataSource | AzureAIBenchmarkPreviewEvalRunDataSource | AzureAITraceDataSourcePreviewEvalRunDataSource */
+);
+
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+@@copyProperties(
+  OpenAI.EvalRunPerTestingCriteriaResults,
+  {
+    /** Number of tests that errored for this criteria. */
+    #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "Auto-suppressed warnings non-applicable rules during import."
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
+    errored?: integer,
+
+    /** Number of tests that were skipped for this criteria. */
+    #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "Auto-suppressed warnings non-applicable rules during import."
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
+    skipped?: integer,
+  }
+);
+
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+@@copyProperties(
+  OpenAI.EvalRunResultCounts,
+  {
+    /** Number of output items that were skipped during the evaluation. */
+    #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "Auto-suppressed warnings non-applicable rules during import."
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
+    skipped?: integer,
+  }
 );
 
 model EvalRun is OpenAI.EvalRun {
@@ -520,17 +692,21 @@ model EvalRun is OpenAI.EvalRun {
     Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.
   */
   properties?: Record<string>;
+
+  /** The level at which evaluation is performed. Defaults to 'turn' if not specified. */
+  evaluation_level?: EvaluationLevel = EvaluationLevel.turn;
 }
 
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "Imported from OpenAI spec."
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
-@@changePropertyType(OpenAI.CreateEvalRunRequest.data_source,
+@@changePropertyType(
+  OpenAI.CreateEvalRunRequest.data_source,
 
     | OpenAI.CreateEvalJsonlRunDataSource
     | OpenAI.CreateEvalCompletionsRunDataSource
     | OpenAI.CreateEvalResponsesRunDataSource
-    | EvalRunDataSource /* RedTeamEvalRunDataSource | TargetCompletionsEvalRunDataSource | AzureAIResponsesEvalRunDataSource | TracesPreviewEvalRunDataSource | AzureAIBenchmarkPreviewEvalRunDataSource */
+    | EvalRunDataSource /* RedTeamEvalRunDataSource | TargetCompletionsEvalRunDataSource | AzureAIResponsesEvalRunDataSource | TracesPreviewEvalRunDataSource | AzureAIBenchmarkPreviewEvalRunDataSource | AzureAITraceDataSourcePreviewEvalRunDataSource */
 );
 
 model CreateEvalRunRequest is OpenAI.CreateEvalRunRequest {
@@ -539,6 +715,9 @@ model CreateEvalRunRequest is OpenAI.CreateEvalRunRequest {
     Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.
   */
   properties?: Record<string>;
+
+  /** The level at which evaluation is performed. Defaults to 'turn' if not specified. */
+  evaluation_level?: EvaluationLevel = EvaluationLevel.turn;
 }
 
 model UpdateEvalParametersBody is OpenAI.UpdateEvalParametersBody {
@@ -549,10 +728,28 @@ model UpdateEvalParametersBody is OpenAI.UpdateEvalParametersBody {
   properties?: Record<string>;
 }
 
+/** The evaluation status for an evaluation run output item result. */
+union EvalRunOutputItemResultStatus {
+  string,
+
+  /** The evaluator completed successfully for this result item. */
+  completed: "completed",
+
+  /** The evaluator encountered an error for this result item. */
+  errored: "errored",
+
+  /** The evaluator skipped this result item. */
+  skipped: "skipped",
+}
+
 /** Represents the result of an evaluation run output item. */
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-@@copyProperties(OpenAI.EvalRunOutputItemResult,
+@@copyProperties(
+  OpenAI.EvalRunOutputItemResult,
   {
+    /** The evaluation status for this result item. Values: "completed", "errored", "skipped". Null if not provided by evaluator. When status is skipped, passed/score can be ignored. */
+    status?: EvalRunOutputItemResultStatus,
+
     /** The name of the metric (e.g., "fluency", "f1_score"). */
     metric?: string,
 
@@ -573,7 +770,8 @@ model UpdateEvalParametersBody is OpenAI.UpdateEvalParametersBody {
 model EvalRunOutputItemResult is OpenAI.EvalRunOutputItemResult;
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-@@changePropertyType(OpenAI.EvalRunOutputItem.results,
+@@changePropertyType(
+  OpenAI.EvalRunOutputItem.results,
   EvalRunOutputItemResult[]
 );
 
@@ -592,12 +790,14 @@ model EvalRunOutputItemSampleInput is OpenAI.EvalRunOutputItemSampleInput {
 }
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-@@changePropertyType(OpenAI.EvalRunOutputItemSample.input,
+@@changePropertyType(
+  OpenAI.EvalRunOutputItemSample.input,
   EvalRunOutputItemSampleInput[]
 );
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-@@changePropertyType(OpenAI.EvalRunOutputItemSample.output,
+@@changePropertyType(
+  OpenAI.EvalRunOutputItemSample.output,
   EvalRunOutputItemSampleOutput[]
 );
 

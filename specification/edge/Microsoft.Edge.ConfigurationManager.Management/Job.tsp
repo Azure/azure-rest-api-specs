@@ -31,6 +31,10 @@ union JobType {
 
   @doc("A validation job.")
   ExternalValidation: "externalValidation",
+
+  @doc("An Uninstall job.")
+  @added(Versions.v2025_08_01)
+  Uninstall: "uninstall",
 }
 
 @doc("Status of a job or job step.")
@@ -48,22 +52,6 @@ union JobStatus {
 
   /** The job or step failed. */
   Failed: "Failed",
-}
-
-@doc("Publish statistics for a job step, including total, success, and failed counts.")
-@added(Versions.v2025_08_01)
-model PublishJobStepStatistics extends JobStepStatisticsBase {
-  @doc("Statistics type discriminator value")
-  statisticsType: JobType.Publish;
-
-  @doc("Total count of items processed in this step")
-  totalCount?: int32;
-
-  @doc("Count of successful items in this step")
-  successCount?: int32;
-
-  @doc("Count of failed items in this step")
-  failedCount?: int32;
 }
 
 // Base model for polymorphic job step statistics
@@ -89,6 +77,39 @@ model DeployJobStepStatistics extends JobStepStatisticsBase {
   failedCount?: int32;
 }
 
+@doc("Publish statistics for a job step, including total, success, and failed counts.")
+@added(Versions.v2025_08_01)
+model PublishJobStepStatistics extends JobStepStatisticsBase {
+  @doc("Statistics type discriminator value")
+  statisticsType: JobType.Publish;
+
+  @doc("Total count of items processed in this step")
+  totalCount?: int32;
+
+  @doc("Count of successful items in this step")
+  successCount?: int32;
+
+  @doc("Count of failed items in this step")
+  failedCount?: int32;
+}
+
+@doc("Uninstall statistics for a job step, including total, success, and failed counts.")
+@added(Versions.v2025_08_01)
+model UninstallJobStepStatistics extends JobStepStatisticsBase {
+  @doc("Statistics type discriminator value")
+  statisticsType: JobType.Uninstall;
+
+  @doc("Total count of items processed in this step")
+  totalCount?: int32;
+
+  @doc("Count of successful items in this step")
+  successCount?: int32;
+
+  @doc("Count of failed items in this step")
+  failedCount?: int32;
+}
+
+// Not needed anymore as the statistics type will be of different model and for union we can only add same type of models
 // Union for polymorphic statistics
 @doc("Polymorphic statistics for a job step.")
 union JobStepStatistics {
@@ -119,6 +140,15 @@ model PublishJobParameter extends JobParameterBase {
   jobType: JobType.Publish;
 
   parameter?: SolutionVersionParameter;
+}
+
+@doc("Parameters for an Uninstall job.")
+@added(Versions.v2025_08_01)
+model UninstallJobParameter extends JobParameterBase {
+  @doc("Job type discriminator value")
+  jobType: JobType.Uninstall;
+
+  parameter?: UninstallSolutionParameter;
 }
 
 @doc("Job Step")

@@ -98,19 +98,20 @@ interface HsmSecurityDomain {
       @body
       securityDomain: SecurityDomainObject;
     },
-    {
-      ...LroResponseStatusAndHeaders;
+    | {
+        ...LroResponseStatusAndHeaders;
 
-      /**
-       * The status of the Security Domain restore operation.
-       */
-      @body response: SecurityDomainOperationStatus;
-    } | {
-      /**
-       * Final response.
-       */
-      @statusCode _: 204;
-    }
+        /**
+         * The status of the Security Domain restore operation.
+         */
+        @body response: SecurityDomainOperationStatus;
+      }
+    | {
+        /**
+         * Final response.
+         */
+        @statusCode _: 204;
+      }
   >;
 
   /**

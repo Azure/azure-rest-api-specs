@@ -3,7 +3,7 @@ import { exec, spawn, spawnSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 import { inspect, promisify } from "node:util";
-import { LogLevel, logMessage } from "./log.js";
+import { LogLevel, logMessage } from "./log.ts";
 
 type Dirent = fs.Dirent;
 
@@ -57,6 +57,14 @@ export function getArgumentValue(args: string[], flag: string, defaultValue: str
   return index !== -1 && args[index + 1] ? args[index + 1] : defaultValue;
 }
 
+export function isPrivateSpecRepo(specRepoHttpsUrl: string): boolean {
+  const normalizedUrl = specRepoHttpsUrl
+    .toLowerCase()
+    .replace(/\.git$/, "")
+    .replace(/\/$/, "");
+  return normalizedUrl.endsWith("-pr");
+}
+
 /*
  * Get the relative path from the specification folder
  */
@@ -86,6 +94,39 @@ export async function runSpecGenSdkCommand(specGenSdkCommand: string[]): Promise
         resolve();
       } else {
         reject(new Error(`Process exited with code ${code}`));
+      }
+    });
+  });
+}
+
+/**
+ * Run a command and capture its stdout output as a string.
+ * Used for azsdk-cli commands that return JSON on stdout.
+ *
+ * @param executable - The executable to run (e.g., "azsdk")
+ * @param args - Array of command arguments
+ * @returns The captured stdout output
+ */
+export async function runCommandWithOutput(executable: string, args: string[]): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const chunks: Buffer[] = [];
+    const childProcess = spawn(executable, args, {
+      shell: false,
+      stdio: ["inherit", "pipe", "inherit"],
+      env: process.env,
+    });
+    childProcess.stdout.on("data", (data: Buffer) => {
+      chunks.push(data);
+    });
+    childProcess.on("error", (error) => {
+      reject(new Error(`Failed to start process '${executable}': ${error.message}`));
+    });
+    childProcess.on("close", (code) => {
+      const output = Buffer.concat(chunks).toString("utf8");
+      if (code === 0) {
+        resolve(output);
+      } else {
+        reject(new Error(`Process '${executable}' exited with code ${code}. Output: ${output}`));
       }
     });
   });

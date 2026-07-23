@@ -58,7 +58,7 @@ model PrivateEndpointConnectionProperties {
  */
 model PrivateEndpoint {
   /**
-   * The ARM identifier for private endpoint.
+   * The Azure identifier for private endpoint.
    */
   @visibility(Lifecycle.Read)
   id?: string;
@@ -115,11 +115,10 @@ model PrivateEndpointConnectionListResult
 /**
  * A private link resource.
  */
-model PrivateLinkResource
-  is Azure.ResourceManager.TrackedResource<
-    PrivateLinkResourceProperties,
-    false
-  > {
+model PrivateLinkResource is Azure.ResourceManager.TrackedResource<
+  PrivateLinkResourceProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = PrivateLinkResource,
     KeyName = "privateLinkName",

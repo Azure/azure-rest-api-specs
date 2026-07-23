@@ -54,12 +54,15 @@ interface PrivateEndpointConnectionResources {
 
 @@maxLength(PrivateEndpointConnectionResource.name, 87);
 @@minLength(PrivateEndpointConnectionResource.name, 1);
-@@doc(PrivateEndpointConnectionResource.name,
+@@doc(
+  PrivateEndpointConnectionResource.name,
   "Private Endpoint Connection Name"
 );
-@@doc(PrivateEndpointConnectionResource.properties,
+@@doc(
+  PrivateEndpointConnectionResource.properties,
   "Private Endpoint Connection properties."
 );
-@@doc(PrivateEndpointConnectionResources.update::parameters.resource,
+@@doc(
+  PrivateEndpointConnectionResources.update::parameters.resource,
   "Description of the Private Endpoint Connection resource."
 );

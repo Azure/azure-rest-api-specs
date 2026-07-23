@@ -60,9 +60,11 @@ interface Monitors {
   list is ArmListBySubscription<Monitor>;
 }
 
-@@doc(Monitors.create::parameters.resource,
+@@doc(
+  Monitors.create::parameters.resource,
   "Request body representing a SAP monitor"
 );
-@@doc(Monitors.update::parameters.properties,
+@@doc(
+  Monitors.update::parameters.properties,
   "The Update SAP workload monitor request body."
 );

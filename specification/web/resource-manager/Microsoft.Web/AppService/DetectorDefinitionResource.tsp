@@ -58,7 +58,8 @@ interface DetectorDefinitionResourceOps
         @segment("detectors")
         @key
         detectorName: string,
-      }
+      },
+      ResourceName = "SiteDiagnosticDetector"
     > {}
 
 @tag("Diagnostics")
@@ -148,7 +149,8 @@ interface DetectorDefinitionResourceOperationGroupOps
         @segment("detectors")
         @key
         detectorName: string,
-      }
+      },
+      ResourceName = "SiteSlotDiagnosticDetector"
     > {}
 
 @tag("Diagnostics")

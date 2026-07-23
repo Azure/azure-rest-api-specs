@@ -56,10 +56,13 @@ alias DatabaseTableOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @segment("tables")
     @key
     tableName: string;
-  }
+  },
+  ResourceName = "SqlDatabaseTable"
 >;
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.DatabaseTables)
 interface DatabaseTables {
   /**
    * Get database table
@@ -111,10 +114,13 @@ alias ManagedDatabaseTableOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @segment("tables")
     @key
     tableName: string;
-  }
+  },
+  ResourceName = "ManagedDatabaseTable"
 >;
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.ManagedDatabaseTables)
 interface ManagedDatabaseTables {
   /**
    * Get managed database table

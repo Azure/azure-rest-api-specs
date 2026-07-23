@@ -352,4 +352,30 @@ describe("spec-gen-sdk-status", () => {
       }),
     );
   });
+
+  it("should skip status update when no SDK Validation checks are found", async () => {
+    // Simulates a reopened PR with no SDK-relevant changes: no SDK Validation check runs exist.
+    mockGithub.rest.checks.listForRef.mockResolvedValue({
+      data: {
+        check_runs: [],
+      },
+    });
+
+    await setSpecGenSdkStatusImpl({
+      owner: "testOwner",
+      repo: "testRepo",
+      head_sha: "testSha",
+      target_url: "https://example.com",
+      github: mockGithub,
+      core: mockCore,
+      issue_number: 123,
+    });
+
+    // No status should be set when there are no SDK Validation checks.
+    expect(mockGithub.rest.repos.createCommitStatus).not.toHaveBeenCalled();
+
+    // Outputs should still be set for downstream artifact upload steps.
+    expect(mockCore.setOutput).toBeCalledWith("head_sha", "testSha");
+    expect(mockCore.setOutput).toBeCalledWith("issue_number", 123);
+  });
 });

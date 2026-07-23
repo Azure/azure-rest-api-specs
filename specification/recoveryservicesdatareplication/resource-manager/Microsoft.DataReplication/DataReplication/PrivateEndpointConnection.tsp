@@ -26,7 +26,8 @@ model PrivateEndpointConnection
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-openapi"
-@@OpenAPI.extension(PrivateEndpointConnections.update::parameters.resource,
+@@OpenAPI.extension(
+  PrivateEndpointConnections.update::parameters.resource,
   "x-ms-client-name",
   "body"
 );
@@ -54,6 +55,7 @@ interface PrivateEndpointConnections {
 }
 
 @@doc(PrivateEndpointConnection.name, "The private endpoint connection name.");
-@@doc(PrivateEndpointConnections.update::parameters.resource,
+@@doc(
+  PrivateEndpointConnections.update::parameters.resource,
   "Private endpoint connection update input."
 );

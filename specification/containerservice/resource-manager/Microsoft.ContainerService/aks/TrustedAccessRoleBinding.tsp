@@ -18,11 +18,10 @@ namespace Microsoft.ContainerService;
  * Defines binding between a resource and role
  */
 @parentResource(ManagedCluster)
-model TrustedAccessRoleBinding
-  is Azure.ResourceManager.ProxyResource<
-    TrustedAccessRoleBindingProperties,
-    false
-  > {
+model TrustedAccessRoleBinding is Azure.ResourceManager.ProxyResource<
+  TrustedAccessRoleBindingProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = TrustedAccessRoleBinding,
     KeyName = "trustedAccessRoleBindingName",
@@ -33,13 +32,16 @@ model TrustedAccessRoleBinding
 
 @@maxLength(TrustedAccessRoleBinding.name, 24);
 @@minLength(TrustedAccessRoleBinding.name, 1);
-@@doc(TrustedAccessRoleBinding.name,
+@@doc(
+  TrustedAccessRoleBinding.name,
   "The name of trusted access role binding."
 );
-@@doc(TrustedAccessRoleBinding.properties,
+@@doc(
+  TrustedAccessRoleBinding.properties,
   "Properties for trusted access role binding"
 );
-@@doc(TrustedAccessRoleBindings.createOrUpdate::parameters.resource,
+@@doc(
+  TrustedAccessRoleBindings.createOrUpdate::parameters.resource,
   "A trusted access role binding"
 );
 

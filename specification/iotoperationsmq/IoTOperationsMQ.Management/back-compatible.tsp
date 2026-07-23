@@ -2,55 +2,68 @@
 using Microsoft.IoTOperationsMQ;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(BrokerAuthenticationResource.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  BrokerAuthenticationResource.properties,
   "autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(BrokerAuthorizationResource.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  BrokerAuthorizationResource.properties,
   "autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(BrokerListenerResource.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  BrokerListenerResource.properties,
   "autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(BrokerResource.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  BrokerResource.properties,
   "autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DataLakeConnectorResource.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  DataLakeConnectorResource.properties,
   "autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DiagnosticServiceResource.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  DiagnosticServiceResource.properties,
   "autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DataLakeTopicMapResource.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  DataLakeTopicMapResource.properties,
   "autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(KafkaConnectorResource.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  KafkaConnectorResource.properties,
   "autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(KafkaTopicMapResource.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  KafkaTopicMapResource.properties,
   "autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(MqttBridgeConnectorResource.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  MqttBridgeConnectorResource.properties,
   "autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(MqResource.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  MqResource.properties,
   "autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(MqttBridgeTopicMapResource.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  MqttBridgeTopicMapResource.properties,
   "autorest"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Azure.ResourceManager.Foundations.ResourceUpdateModel.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Azure.ResourceManager.Foundations.ResourceUpdateModel.properties,
   "autorest"
 );

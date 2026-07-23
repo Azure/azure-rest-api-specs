@@ -18,16 +18,13 @@ options:
     service-name: "DevHub"
     flavor: azure
     use-object-for-unknown: true
-  "@azure-tools/typespec-csharp":
+  "@azure-typespec/http-client-csharp-mgmt":
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    flavor: azure
-    clear-output-folder: true
-    model-namespace: true
-    namespace: "Azure.ResourceManager.DeveloperHub"
+    namespace: "Azure.ResourceManager.DevHub"
   "@azure-tools/typespec-python":
-    service-dir: "sdk/developerhub"
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-developerhub"
-    namespace: "azure.mgmt.developerhub"
+    service-dir: "sdk/devhub"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-devhub"
+    namespace: "azure.mgmt.devhub"
     generate-test: true
     generate-sample: true
     flavor: "azure"
@@ -52,3 +49,4 @@ options:
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"

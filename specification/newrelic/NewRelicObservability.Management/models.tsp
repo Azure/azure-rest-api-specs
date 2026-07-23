@@ -565,6 +565,7 @@ model NewRelicSingleSignOnProperties {
   /**
    * The login URL specific to this NewRelic Organization
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   singleSignOnUrl?: string;
 
   /**
@@ -1408,7 +1409,8 @@ model MetricsStatusRequestParameter {
 scalar email extends string;
 
 @@identifiers(AppServicesListResponse.value, #["azureResourceId"]);
-@@visibility(NewRelicMonitorResource.properties,
+@@visibility(
+  NewRelicMonitorResource.properties,
   Lifecycle.Read,
   Lifecycle.Create
 );

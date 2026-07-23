@@ -14,24 +14,22 @@ namespace Microsoft.NetworkCloud;
 /**
  * The name of the metrics configuration for the cluster.
  */
-model ClusterMetricsConfigurationNameParameter
-  is ResourceNameParameter<
-    Resource = ClusterMetricsConfiguration,
-    KeyName = "metricsConfigurationName",
-    SegmentName = "metricsConfigurations",
-    NamePattern = "^default$"
-  >;
+model ClusterMetricsConfigurationNameParameter is ResourceNameParameter<
+  Resource = ClusterMetricsConfiguration,
+  KeyName = "metricsConfigurationName",
+  SegmentName = "metricsConfigurations",
+  NamePattern = "^default$"
+>;
 
 /**
  * ClusterMetricsConfiguration represents the metrics configuration of an on-premises Network Cloud cluster.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "legacy resource using legacy features"
 @parentResource(Cluster)
-model ClusterMetricsConfiguration
-  is Azure.ResourceManager.TrackedResource<
-    ClusterMetricsConfigurationProperties,
-    false
-  > {
+model ClusterMetricsConfiguration is Azure.ResourceManager.TrackedResource<
+  ClusterMetricsConfigurationProperties,
+  false
+> {
   ...ClusterMetricsConfigurationNameParameter;
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
   ...RequiredExtendedLocationProperty;
@@ -90,7 +88,9 @@ interface ClusterMetricsConfigurations {
       ...IfMatchParameter;
       ...IfNoneMatchParameter;
     },
-    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -108,15 +108,19 @@ interface ClusterMetricsConfigurations {
   >;
 }
 
-@@doc(ClusterMetricsConfiguration.name,
+@@doc(
+  ClusterMetricsConfiguration.name,
   "The name of the metrics configuration for the cluster."
 );
-@@doc(ClusterMetricsConfiguration.properties,
+@@doc(
+  ClusterMetricsConfiguration.properties,
   "The list of the resource properties."
 );
-@@doc(ClusterMetricsConfigurations.createOrUpdate::parameters.resource,
+@@doc(
+  ClusterMetricsConfigurations.createOrUpdate::parameters.resource,
   "The request body."
 );
-@@doc(ClusterMetricsConfigurations.update::parameters.properties,
+@@doc(
+  ClusterMetricsConfigurations.update::parameters.properties,
   "The request body."
 );

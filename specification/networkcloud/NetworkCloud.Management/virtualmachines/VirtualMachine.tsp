@@ -11,20 +11,21 @@ namespace Microsoft.NetworkCloud;
 /**
  * The name of the virtual machine.
  */
-model VirtualMachineNameParameter
-  is ResourceNameParameter<
-    Resource = VirtualMachine,
-    KeyName = "virtualMachineName",
-    SegmentName = "virtualMachines",
-    NamePattern = "^([a-zA-Z0-9][a-zA-Z0-9]{0,62}[a-zA-Z0-9])$"
-  >;
+model VirtualMachineNameParameter is ResourceNameParameter<
+  Resource = VirtualMachine,
+  KeyName = "virtualMachineName",
+  SegmentName = "virtualMachines",
+  NamePattern = "^([a-zA-Z0-9][a-zA-Z0-9]{0,62}[a-zA-Z0-9])$"
+>;
 
 /**
  * VirtualMachine represents the on-premises Network Cloud virtual machine.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "legacy resource using legacy features"
-model VirtualMachine
-  is Azure.ResourceManager.TrackedResource<VirtualMachineProperties, false> {
+model VirtualMachine is Azure.ResourceManager.TrackedResource<
+  VirtualMachineProperties,
+  false
+> {
   ...VirtualMachineNameParameter;
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
   ...RequiredExtendedLocationProperty;
@@ -76,7 +77,9 @@ interface VirtualMachines {
       ...IfMatchParameter;
       ...IfNoneMatchParameter;
     },
-    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>>
+      | ArmDeletedNoContentResponse
   >;
 
   /**

@@ -11,12 +11,16 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.MachineLearningServices;
+
+// cspell:ignore Learnin
 /**
  * Azure Resource Manager resource envelope.
  */
 @parentResource(ComponentContainer)
-model ComponentVersion
-  is Azure.ResourceManager.ProxyResource<ComponentVersionProperties, false> {
+model ComponentVersion is Azure.ResourceManager.ProxyResource<
+  ComponentVersionProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = ComponentVersion,
     KeyName = "version",
@@ -54,7 +58,9 @@ interface ComponentVersionOps
         @segment("versions")
         @key
         version: string,
-      }
+      },
+      ErrorResponse,
+      "MachineLearninRegistryComponentVersion"
     > {}
 
 @armResourceOperations
@@ -72,16 +78,18 @@ interface ComponentVersions {
   @summary("Create or update version.")
   createOrUpdate is ComponentVersionOps.CreateOrUpdateAsync<
     ComponentVersion,
-    Response = ArmResourceUpdatedResponse<ComponentVersion> | (ArmResourceCreatedResponse<
-      ComponentVersion,
-      ArmAsyncOperationHeader
-    > & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<ComponentVersion>
+      | (ArmResourceCreatedResponse<
+          ComponentVersion,
+          ArmAsyncOperationHeader
+        > & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
   >;
 
   /**
@@ -91,13 +99,16 @@ interface ComponentVersions {
   @summary("Delete version.")
   delete is ComponentVersionOps.DeleteWithoutOkAsync<
     ComponentVersion,
-    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    }) | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | (ArmDeleteAcceptedLroResponse & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -156,7 +167,9 @@ interface ComponentVersionOperationGroupOps
         @segment("versions")
         @key
         version: string,
-      }
+      },
+      ErrorResponse,
+      "MachineLearningComponentVersion"
     > {}
 
 @armResourceOperations
@@ -229,15 +242,19 @@ interface ComponentVersionOperationGroup {
 }
 
 @@doc(ComponentVersion.name, "Version identifier.");
-@@doc(ComponentVersion.properties,
+@@doc(
+  ComponentVersion.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(ComponentVersions.createOrUpdate::parameters.resource,
+@@doc(
+  ComponentVersions.createOrUpdate::parameters.resource,
   "Version entity to create or update."
 );
-@@doc(ComponentVersionOperationGroup.createOrUpdate::parameters.resource,
+@@doc(
+  ComponentVersionOperationGroup.createOrUpdate::parameters.resource,
   "Version entity to create or update."
 );
-@@doc(ComponentVersionOperationGroup.publish::parameters.body,
+@@doc(
+  ComponentVersionOperationGroup.publish::parameters.body,
   "Destination registry info"
 );

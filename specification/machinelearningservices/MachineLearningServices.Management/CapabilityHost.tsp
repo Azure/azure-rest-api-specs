@@ -15,8 +15,10 @@ namespace Microsoft.MachineLearningServices;
  * Azure Resource Manager resource envelope.
  */
 @parentResource(Workspace)
-model CapabilityHost
-  is Azure.ResourceManager.ProxyResource<CapabilityHostProperties, false> {
+model CapabilityHost is Azure.ResourceManager.ProxyResource<
+  CapabilityHostProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = CapabilityHost,
     KeyName = "name",
@@ -40,17 +42,19 @@ interface CapabilityHosts {
   @Azure.Core.useFinalStateVia("original-uri")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     CapabilityHost,
-    Response = ArmResourceUpdatedResponse<CapabilityHost> | (ArmResourceCreatedResponse<
-      CapabilityHost,
-      LroHeaders = ArmAsyncOperationHeader
-    > &
-      Azure.Core.Foundations.RetryAfterHeader & {
-        /**
-         * Timeout for the client to use when polling the asynchronous operation.
-         */
-        @header("x-ms-async-operation-timeout")
-        timeout: duration;
-      })
+    Response =
+      | ArmResourceUpdatedResponse<CapabilityHost>
+      | (ArmResourceCreatedResponse<
+          CapabilityHost,
+          LroHeaders = ArmAsyncOperationHeader
+        > &
+          Azure.Core.Foundations.RetryAfterHeader & {
+            /**
+             * Timeout for the client to use when polling the asynchronous operation.
+             */
+            @header("x-ms-async-operation-timeout")
+            timeout: duration;
+          })
   >;
 
   /**
@@ -59,20 +63,24 @@ interface CapabilityHosts {
   @summary("Delete capabilityHost.")
   delete is ArmResourceDeleteWithoutOkAsync<
     CapabilityHost,
-    Response = (ArmDeleteAcceptedLroResponse & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    }) | ArmDeletedNoContentResponse
+    Response =
+      | (ArmDeleteAcceptedLroResponse & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
+      | ArmDeletedNoContentResponse
   >;
 }
 
 @@doc(CapabilityHost.name, "CapabilityHost name.");
-@@doc(CapabilityHost.properties,
+@@doc(
+  CapabilityHost.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(CapabilityHosts.createOrUpdate::parameters.resource,
+@@doc(
+  CapabilityHosts.createOrUpdate::parameters.resource,
   "CapabilityHost definition."
 );

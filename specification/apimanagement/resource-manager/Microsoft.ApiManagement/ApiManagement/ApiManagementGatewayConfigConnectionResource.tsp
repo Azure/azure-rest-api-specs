@@ -15,11 +15,10 @@ namespace Microsoft.ApiManagement;
  * A single API Management gateway resource in List or Get response.
  */
 @parentResource(ApiManagementGatewayResource)
-model ApiManagementGatewayConfigConnectionResource
-  is Azure.ResourceManager.ProxyResource<
-    GatewayConfigConnectionBaseProperties,
-    false
-  > {
+model ApiManagementGatewayConfigConnectionResource is Azure.ResourceManager.ProxyResource<
+  GatewayConfigConnectionBaseProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = ApiManagementGatewayConfigConnectionResource,
     KeyName = "configConnectionName",
@@ -89,16 +88,20 @@ interface ApiManagementGatewayConfigConnectionResources {
 
 @@maxLength(ApiManagementGatewayConfigConnectionResource.name, 30);
 @@minLength(ApiManagementGatewayConfigConnectionResource.name, 1);
-@@doc(ApiManagementGatewayConfigConnectionResource.name,
+@@doc(
+  ApiManagementGatewayConfigConnectionResource.name,
   "The name of the API Management gateway config connection."
 );
-@@encodedName(ApiManagementGatewayConfigConnectionResource.etag,
+@@encodedName(
+  ApiManagementGatewayConfigConnectionResource.etag,
   "application/json",
   "etag"
 );
-@@doc(ApiManagementGatewayConfigConnectionResource.properties,
+@@doc(
+  ApiManagementGatewayConfigConnectionResource.properties,
   "Properties of the API Management gateway config connection."
 );
-@@doc(ApiManagementGatewayConfigConnectionResources.createOrUpdate::parameters.resource,
+@@doc(
+  ApiManagementGatewayConfigConnectionResources.createOrUpdate::parameters.resource,
   "Parameters supplied to the CreateOrUpdate API Management gateway config connection operation."
 );

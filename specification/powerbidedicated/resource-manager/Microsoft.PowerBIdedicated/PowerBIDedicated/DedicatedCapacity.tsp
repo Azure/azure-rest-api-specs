@@ -13,8 +13,10 @@ namespace Microsoft.PowerBIDedicated;
 /**
  * Represents an instance of a Dedicated Capacity resource.
  */
-model DedicatedCapacity
-  is Azure.ResourceManager.TrackedResource<DedicatedCapacityProperties, true> {
+model DedicatedCapacity is Azure.ResourceManager.TrackedResource<
+  DedicatedCapacityProperties,
+  true
+> {
   ...ResourceNameParameter<
     Resource = DedicatedCapacity,
     KeyName = "dedicatedCapacityName",
@@ -54,11 +56,13 @@ interface Capacities {
   update is ArmCustomPatchAsync<
     DedicatedCapacity,
     PatchModel = DedicatedCapacityUpdateParameters,
-    Response = ArmResponse<DedicatedCapacity> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = DedicatedCapacity> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: DedicatedCapacity;
-    }),
+    Response =
+      | ArmResponse<DedicatedCapacity>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = DedicatedCapacity> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: DedicatedCapacity;
+        }),
     Error = ErrorResponse
   >;
 
@@ -68,7 +72,10 @@ interface Capacities {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     DedicatedCapacity,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = ErrorResponse
   >;
 
@@ -133,15 +140,19 @@ interface Capacities {
 
 @@maxLength(DedicatedCapacity.name, 63);
 @@minLength(DedicatedCapacity.name, 3);
-@@doc(DedicatedCapacity.name,
+@@doc(
+  DedicatedCapacity.name,
   "The name of the dedicated capacity. It must be a minimum of 3 characters, and a maximum of 63."
 );
-@@doc(DedicatedCapacity.properties,
+@@doc(
+  DedicatedCapacity.properties,
   "Properties of the provision operation request."
 );
-@@doc(Capacities.create::parameters.resource,
+@@doc(
+  Capacities.create::parameters.resource,
   "Contains the information used to provision the Dedicated capacity."
 );
-@@doc(Capacities.update::parameters.properties,
+@@doc(
+  Capacities.update::parameters.properties,
   "Request object that contains the updated information for the capacity."
 );

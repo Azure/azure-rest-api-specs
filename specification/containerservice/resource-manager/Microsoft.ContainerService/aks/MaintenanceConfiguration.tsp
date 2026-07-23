@@ -1,10 +1,12 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./CommonModels.tsp";
 import "./ManagedCluster.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 
@@ -28,13 +30,16 @@ model MaintenanceConfiguration
   >;
 }
 
-@@doc(MaintenanceConfiguration.name,
+@@doc(
+  MaintenanceConfiguration.name,
   "The name of the maintenance configuration. Supported values are 'default', 'aksManagedAutoUpgradeSchedule', or 'aksManagedNodeOSUpgradeSchedule'."
 );
-@@doc(MaintenanceConfiguration.properties,
+@@doc(
+  MaintenanceConfiguration.properties,
   "Properties of a default maintenance configuration."
 );
-@@doc(MaintenanceConfigurations.createOrUpdate::parameters.resource,
+@@doc(
+  MaintenanceConfigurations.createOrUpdate::parameters.resource,
   "The maintenance configuration to create or update."
 );
 
@@ -141,6 +146,16 @@ model MaintenanceConfigurationProperties {
    */
   @identifiers(#[])
   notAllowedTime?: TimeSpan[];
+
+  /**
+   * The fully qualified resource ID of the maintenance window that this maintenance configuration is linked to. When set, the schedule is derived read-only from the linked maintenance window — maintenanceWindow becomes a computed field. When absent (the default), the schedule is defined inline via the maintenanceWindow property. The caller must have read access to the target maintenance window.
+   */
+  @added(Versions.v2026_05_02_preview)
+  maintenanceWindowId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ContainerService/maintenanceWindows";
+    }
+  ]>;
 
   /**
    * Maintenance window for the maintenance configuration.

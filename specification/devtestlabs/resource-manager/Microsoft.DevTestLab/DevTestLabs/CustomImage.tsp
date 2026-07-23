@@ -13,8 +13,10 @@ namespace Microsoft.DevTestLab;
  * A custom image.
  */
 @parentResource(Lab)
-model CustomImage
-  is Azure.ResourceManager.ProxyResource<CustomImageProperties, false> {
+model CustomImage is Azure.ResourceManager.ProxyResource<
+  CustomImageProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = CustomImage,
     KeyName = "customImageName",
@@ -92,7 +94,10 @@ interface CustomImages {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is CustomImageOps.DeleteWithoutOkAsync<
     CustomImage,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**

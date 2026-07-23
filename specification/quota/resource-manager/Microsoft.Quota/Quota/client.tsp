@@ -1,7 +1,9 @@
 import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
+import "@typespec/http";
 
 using Azure.ClientGenerator.Core;
+using Http;
 using Microsoft.Quota;
 
 // csharp
@@ -24,34 +26,41 @@ using Microsoft.Quota;
 @@clientName(GroupQuotasEntity, "GroupQuotaEntity", "csharp");
 @@clientName(GroupQuotasEntityBase, "GroupQuotaEntityBase", "csharp");
 @@clientName(GroupQuotaSubscriptionId, "GroupQuotaSubscription", "csharp");
-@@clientName(GroupQuotaSubscriptionIdProperties,
+@@clientName(
+  GroupQuotaSubscriptionIdProperties,
   "GroupQuotaSubscriptionProperties",
   "csharp"
 );
-@@clientName(QuotaAllocationRequestStatusProperties.requestSubmitTime,
+@@clientName(
+  QuotaAllocationRequestStatusProperties.requestSubmitTime,
   "RequestSubmittedOn",
   "csharp"
 );
-@@clientName(SubmittedResourceRequestStatus,
+@@clientName(
+  SubmittedResourceRequestStatus,
   "GroupQuotaRequestStatus",
   "csharp"
 );
-@@clientName(SubmittedResourceRequestStatusProperties,
+@@clientName(
+  SubmittedResourceRequestStatusProperties,
   "GroupQuotaRequestStatusProperties",
   "csharp"
 );
-@@clientName(SubmittedResourceRequestStatusProperties.requestSubmitTime,
+@@clientName(
+  SubmittedResourceRequestStatusProperties.requestSubmitTime,
   "RequestSubmittedOn",
   "csharp"
 );
 @@clientName(AllocatedToSubscription, "SubscriptionAllocatedQuota", "csharp");
 @@clientName(RequestState, "QuotaRequestStatus", "csharp");
 @@clientName(ResourceUsages, "GroupQuotaResourceUsages", "csharp");
-@@clientName(GroupQuotasEntities.groupQuotaLimitsRequestList,
+@@clientName(
+  GroupQuotasEntities.groupQuotaLimitsRequestList,
   "GetGroupQuotaLimitsRequests",
   "csharp"
 );
-@@clientName(GroupQuotasEntities.groupQuotaUsagesList,
+@@clientName(
+  GroupQuotasEntities.groupQuotaUsagesList,
   "GetGroupQuotaUsages",
   "csharp"
 );
@@ -82,19 +91,27 @@ using Microsoft.Quota;
 op currentQuotaLimitBasesCreateOrUpdate(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   apiVersion: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   extensionProvider: "Microsoft.Quota",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   resourceName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   scope: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   createQuotaRequest: CurrentQuotaLimitBase,
 ): CurrentQuotaLimitBase;
 
-@@override(CurrentQuotaLimitBases.createOrUpdate,
+@@override(
+  CurrentQuotaLimitBases.createOrUpdate,
   currentQuotaLimitBasesCreateOrUpdate,
-  "java,go,python,javascript"
+  "java,python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -102,17 +119,24 @@ op currentQuotaLimitBasesCreateOrUpdate(
 op currentQuotaLimitBasesGet(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   apiVersion: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   extensionProvider: "Microsoft.Quota",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   resourceName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   scope: string,
 ): CurrentQuotaLimitBase;
 
-@@override(CurrentQuotaLimitBases.get,
+@@override(
+  CurrentQuotaLimitBases.get,
   currentQuotaLimitBasesGet,
-  "java,go,python,javascript"
+  "java,python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -120,19 +144,27 @@ op currentQuotaLimitBasesGet(
 op currentQuotaLimitBasesUpdate(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   apiVersion: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   extensionProvider: "Microsoft.Quota",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   resourceName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   scope: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   createQuotaRequest: CurrentQuotaLimitBase,
 ): CurrentQuotaLimitBase;
 
-@@override(CurrentQuotaLimitBases.update,
+@@override(
+  CurrentQuotaLimitBases.update,
   currentQuotaLimitBasesUpdate,
-  "java,go,python,javascript"
+  "java,python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -140,33 +172,39 @@ op currentQuotaLimitBasesUpdate(
 op quotaRequestStatusGet(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   apiVersion: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   extensionProvider: "Microsoft.Quota",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   id: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   scope: string,
 ): QuotaRequestDetails;
 
-@@override(QuotaRequestStatus.get,
-  quotaRequestStatusGet,
-  "java,go,python,javascript"
-);
+@@override(QuotaRequestStatus.get, quotaRequestStatusGet, "java,python");
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op currentUsagesBasesGet(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   apiVersion: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   extensionProvider: "Microsoft.Quota",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   resourceName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   scope: string,
 ): CurrentUsagesBase;
 
-@@override(CurrentUsagesBases.get,
-  currentUsagesBasesGet,
-  "java,go,python,javascript"
-);
+@@override(CurrentUsagesBases.get, currentUsagesBasesGet, "java,python");

@@ -1,0 +1,177 @@
+parameters:
+  - name: Test-release-Plan
+    type: boolean
+    default: false
+  - name: PrNumber
+    type: number
+    default: 0
+
+trigger:
+  paths:
+    include:
+      - specification/**/*.tsp
+      - specification/**/tspconfig.yaml
+
+pr: none
+
+stages:
+  - stage: ReleasePlanCreation
+    displayName: "Stage : Release Plan Creation"
+    jobs:
+      - job: ReleasePlan
+        displayName: Create or Find Release Plan
+        pool:
+          name: $(LINUXPOOL)
+          vmImage: $(LINUXVMIMAGE)
+
+        variables:
+          - template: /eng/pipelines/templates/variables/globals.yml
+          - template: /eng/pipelines/templates/variables/image.yml
+
+        steps:
+          - checkout: self
+            fetchDepth: 2
+
+          - template: /eng/common/pipelines/templates/steps/login-to-github.yml
+
+          - template: /eng/pipelines/templates/steps/npm-install.yml
+
+          - template: /eng/common/pipelines/templates/steps/install-azsdk-cli.yml
+
+          - task: AzureCLI@2
+            displayName: "Create or Get Release Plan details"
+            condition: succeeded()
+            continueOnError: true
+            env:
+              GH_TOKEN: $(GH_TOKEN)
+              AZSDKTOOLS_NOTIFICATION_SERVICE_URL: $(AzureSDKEmailerSasURL)
+              ${{ if eq(parameters['Test-release-Plan'], true) }}:
+                AZSDKTOOLS_AGENT_TESTING: "true"
+            inputs:
+              azureSubscription: opensource-api-connection
+              scriptType: pscore
+              scriptLocation: inlineScript
+              inlineScript: |
+                $ErrorActionPreference = "Stop"
+
+                $prNumber = ${{ parameters.PrNumber }}
+                $outputPath = "$(Build.ArtifactStagingDirectory)/release-plan/release-plan.json"
+
+                $nodeArgs = @(
+                  "--repo", "$(Build.Repository.Name)",
+                  "--workspace", "$(Build.SourcesDirectory)",
+                  "--test-release-plan", "${{ parameters['Test-release-Plan'] }}",
+                  "--output-file", $outputPath
+                )
+
+                if ($prNumber -gt 0) {
+                  Write-Host "Using PR number: $prNumber"
+                  $nodeArgs += @("--pr-number", $prNumber)
+                } else {
+                  $commitSha = "$(Build.SourceVersion)"
+                  if ([string]::IsNullOrWhiteSpace($commitSha)) {
+                    Write-Host "Build.SourceVersion is empty. Falling back to repo HEAD commit."
+                    $commitSha = (git -C "$(Build.SourcesDirectory)" rev-parse HEAD).Trim()
+                  }
+
+                  if ([string]::IsNullOrWhiteSpace($commitSha)) {
+                    Write-Host "##vso[task.logissue type=error]Unable to determine commit SHA from Build.SourceVersion or repository HEAD."
+                    exit 1
+                  }
+
+                  Write-Host "Using commit SHA: $commitSha"
+                  $nodeArgs += @("--commit-sha", $commitSha)
+                }
+
+                npm exec --no -- create-release-plan @nodeArgs
+
+          - pwsh: |
+              $outputPath = "$(Build.ArtifactStagingDirectory)/release-plan/release-plan.json"
+              if (!(Test-Path $outputPath)) {
+                Write-Host "release-plan.json not found. Setting SkipSDKGeneration to true."
+                Write-Host "##vso[task.setvariable variable=SkipSDKGeneration;isOutput=true]true"
+                New-Item -ItemType Directory -Force -Path (Split-Path $outputPath -Parent) | Out-Null
+                '{"outcome":"not_found","releasePlan":null,"details":{}}' | Out-File -FilePath $outputPath -Encoding utf8
+              } else {
+                Write-Host "release-plan.json found. Setting SkipSDKGeneration to false."
+                Write-Host "##vso[task.setvariable variable=SkipSDKGeneration;isOutput=true]false"
+              }
+            name: setReleasePlanArtifactState
+            displayName: "Ensure release plan artifact file exists"
+            condition: succeededOrFailed()
+
+          - task: AzureCLI@2
+            displayName: "Update SDK details for eligible release plans"
+            condition: and(succeeded(), ne(variables['SkipSDKGeneration'], 'true'))
+            env:
+              ${{ if eq(parameters['Test-release-Plan'], true) }}:
+                AZSDKTOOLS_AGENT_TESTING: "true"
+            inputs:
+              azureSubscription: opensource-api-connection
+              scriptType: pscore
+              scriptLocation: inlineScript
+              inlineScript: |
+                $ErrorActionPreference = "Stop"
+
+                $artifactPath = "$(Build.ArtifactStagingDirectory)/release-plan/release-plan.json"
+                if (!(Test-Path $artifactPath)) {
+                  Write-Host "Release plan artifact not found. Skipping update-sdk-details."
+                  exit 0
+                }
+
+                npm exec --no -- update-sdk-details --artifact-file $artifactPath --workspace "$(Build.SourcesDirectory)"
+
+          - task: PublishPipelineArtifact@1
+            displayName: "Publish release plan details artifact"
+            condition: succeededOrFailed()
+            inputs:
+              targetPath: "$(Build.ArtifactStagingDirectory)/release-plan"
+              artifactName: "release-plan-details"
+              publishLocation: "pipeline"
+
+  - stage: GenerateSdk
+    displayName: "Stage : Generate SDK"
+    dependsOn: ReleasePlanCreation
+    condition: and(succeeded(), ne(dependencies.ReleasePlanCreation.outputs['ReleasePlan.setReleasePlanArtifactState.SkipSDKGeneration'], 'true'))
+    jobs:
+      - job: GenerateSdk
+        displayName: Generate SDK from Release Plan
+        pool:
+          name: $(LINUXPOOL)
+          vmImage: $(LINUXVMIMAGE)
+
+        variables:
+          - template: /eng/pipelines/templates/variables/globals.yml
+          - template: /eng/pipelines/templates/variables/image.yml
+
+        steps:
+          - checkout: self
+            fetchDepth: 2
+
+          - template: /eng/common/pipelines/templates/steps/login-to-github.yml
+
+          - template: /eng/pipelines/templates/steps/npm-install.yml
+
+          - template: /eng/common/pipelines/templates/steps/install-azsdk-cli.yml
+
+          - task: DownloadPipelineArtifact@2
+            displayName: "Download release plan details artifact"
+            inputs:
+              buildType: "current"
+              artifactName: "release-plan-details"
+              targetPath: "$(Pipeline.Workspace)/release-plan-details"
+
+          - task: AzureCLI@2
+            displayName: "Parse release plan and conditionally generate SDKs"
+            env:
+              GH_TOKEN: $(GH_TOKEN)
+              ${{ if eq(parameters['Test-release-Plan'], true) }}:
+                AZSDKTOOLS_AGENT_TESTING: "true"
+            inputs:
+              azureSubscription: opensource-api-connection
+              scriptType: pscore
+              scriptLocation: inlineScript
+              inlineScript: |
+                $ErrorActionPreference = "Stop"
+                $artifactPath = "$(Pipeline.Workspace)/release-plan-details/release-plan.json"
+                npm exec --no -- generate-sdk --artifact-file $artifactPath --workspace "$(Build.SourcesDirectory)"

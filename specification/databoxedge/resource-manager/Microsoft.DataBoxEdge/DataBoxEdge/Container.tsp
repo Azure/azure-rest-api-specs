@@ -15,8 +15,10 @@ namespace Microsoft.DataBoxEdge;
  * Represents a container on the  Data Box Edge/Gateway device.
  */
 @parentResource(StorageAccount)
-model Container
-  is Azure.ResourceManager.ProxyResource<ContainerProperties, false> {
+model Container is Azure.ResourceManager.ProxyResource<
+  ContainerProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = Container,
     KeyName = "containerName",
@@ -40,8 +42,10 @@ interface Containers {
   @summary("Creates a new container or updates an existing container on the device.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Container,
-    Response = ArmResourceUpdatedResponse<Container> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Container> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response =
+      | ArmResourceUpdatedResponse<Container>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Container> &
+          Azure.Core.Foundations.RetryAfterHeader>,
     Error = CloudError
   >;
 
@@ -76,6 +80,7 @@ interface Containers {
 
 @@doc(Container.name, "The container Name");
 @@doc(Container.properties, "The container properties.");
-@@doc(Containers.createOrUpdate::parameters.resource,
+@@doc(
+  Containers.createOrUpdate::parameters.resource,
   "The container properties."
 );

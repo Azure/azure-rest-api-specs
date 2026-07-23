@@ -18,7 +18,8 @@ namespace Azure.AI.OpenAI {
 namespace Azure.AI.OpenAI.Assistants {
   // Trivial response value containers should treat these containers as internal details and instead surface a shimmed
   // operation that exposes the underlying data directly.
-  @@clientName(AssistantDeletionStatus,
+  @@clientName(
+    AssistantDeletionStatus,
     "InternalAssistantDeletionStatus",
     "csharp"
   );
@@ -57,11 +58,13 @@ namespace Azure.AI.OpenAI.Assistants {
   // SubmitToolOutputsAction: include .tool_calls directly rather than via an intermediate .details.
 
   @@access(SubmitToolOutputsDetails, Access.internal);
-  @@clientName(SubmitToolOutputsDetails,
+  @@clientName(
+    SubmitToolOutputsDetails,
     "InternalSubmitToolOutputsDetails",
     "csharp"
   );
-  @@clientName(SubmitToolOutputsAction.submitToolOutputs,
+  @@clientName(
+    SubmitToolOutputsAction.submitToolOutputs,
     "InternalDetails",
     "csharp"
   );
@@ -69,13 +72,15 @@ namespace Azure.AI.OpenAI.Assistants {
   // RequiredFunctionToolCall, RunStepFunctionToolCall: include name/arguments/output directly
 
   @@access(RunStepFunctionToolCallDetails, Access.internal);
-  @@clientName(RunStepFunctionToolCallDetails,
+  @@clientName(
+    RunStepFunctionToolCallDetails,
     "InternalRunStepFunctionToolCallDetails",
     "csharp"
   );
   @@clientName(RequiredFunctionToolCall.function, "InternalDetails", "csharp");
   @@access(RequiredFunctionToolCallDetails, Access.internal);
-  @@clientName(RequiredFunctionToolCallDetails,
+  @@clientName(
+    RequiredFunctionToolCallDetails,
     "InternalRequiredFunctionToolCallDetails",
     "csharp"
   );
@@ -84,11 +89,13 @@ namespace Azure.AI.OpenAI.Assistants {
   // RunStepCodeInterpreterToolCall: include input/outputs directly
 
   @@access(RunStepCodeInterpreterToolCallDetails, Access.internal);
-  @@clientName(RunStepCodeInterpreterToolCallDetails,
+  @@clientName(
+    RunStepCodeInterpreterToolCallDetails,
     "InternalCodeInterpreterToolCallDetails",
     "csharp"
   );
-  @@clientName(RunStepCodeInterpreterToolCall.codeInterpreter,
+  @@clientName(
+    RunStepCodeInterpreterToolCall.codeInterpreter,
     "InternalDetails",
     "csharp"
   );
@@ -102,11 +109,13 @@ namespace Azure.AI.OpenAI.Assistants {
   // MessageTextFileCitationAnnotation: file_id/quote don't need another type
 
   @@access(MessageTextFileCitationDetails, Access.internal);
-  @@clientName(MessageTextFileCitationDetails,
+  @@clientName(
+    MessageTextFileCitationDetails,
     "InternalMessageTextFileCitationDetails",
     "csharp"
   );
-  @@clientName(MessageTextFileCitationAnnotation.fileCitation,
+  @@clientName(
+    MessageTextFileCitationAnnotation.fileCitation,
     "InternalDetails",
     "csharp"
   );
@@ -114,11 +123,13 @@ namespace Azure.AI.OpenAI.Assistants {
   // MessageTextFilePathAnnotation: file_id doesn't need a separate details client type
 
   @@access(MessageTextFilePathDetails, Access.internal);
-  @@clientName(MessageTextFilePathDetails,
+  @@clientName(
+    MessageTextFilePathDetails,
     "InternalMessageTextFilePathDetails",
     "csharp"
   );
-  @@clientName(MessageTextFilePathAnnotation.filePath,
+  @@clientName(
+    MessageTextFilePathAnnotation.filePath,
     "InternalDetails",
     "csharp"
   );
@@ -128,7 +139,8 @@ namespace Azure.AI.OpenAI.Assistants {
   // base64) are better accomplished via another approach at the client layer.
 
   @@access(MessageImageFileDetails, Access.internal);
-  @@clientName(MessageImageFileDetails,
+  @@clientName(
+    MessageImageFileDetails,
     "InternalMessageImageFileDetails",
     "csharp"
   );
@@ -218,11 +230,13 @@ namespace Azure.AI.OpenAI.Assistants {
   @@clientName(CreateRunOptions.`model`, "OverrideModelName", "csharp");
   @@clientName(CreateRunOptions.instructions, "OverrideInstructions", "csharp");
   @@clientName(CreateRunOptions.tools, "OverrideTools", "csharp");
-  @@clientName(CreateAndRunThreadOptions.`model`,
+  @@clientName(
+    CreateAndRunThreadOptions.`model`,
     "OverrideModelName",
     "csharp"
   );
-  @@clientName(CreateAndRunThreadOptions.instructions,
+  @@clientName(
+    CreateAndRunThreadOptions.instructions,
     "OverrideInstructions",
     "csharp"
   );
@@ -231,31 +245,38 @@ namespace Azure.AI.OpenAI.Assistants {
   // "Note that deleting an AssistantFile doesn’t delete the original File object, it simply deletes the association
   // between that File and the Assistant."
 
-  @@clientName(createAssistant::parameters.body,
+  @@clientName(
+    createAssistant::parameters.body,
     "assistantCreationOptions",
     "java"
   );
-  @@clientName(updateAssistant::parameters.body,
+  @@clientName(
+    updateAssistant::parameters.body,
     "updateAssistantOptions",
     "java"
   );
-  @@clientName(createThreadAndRun::parameters.body,
+  @@clientName(
+    createThreadAndRun::parameters.body,
     "createAndRunThreadOptions",
     "java"
   );
-  @@clientName(createThread::parameters.body,
+  @@clientName(
+    createThread::parameters.body,
     "assistantThreadCreationOptions",
     "java"
   );
-  @@clientName(updateThread::parameters.body,
+  @@clientName(
+    updateThread::parameters.body,
     "updateAssistantThreadOptions",
     "java"
   );
-  @@clientName(createVectorStore::parameters.body,
+  @@clientName(
+    createVectorStore::parameters.body,
     "vectorStoreOptions",
     "java"
   );
-  @@clientName(modifyVectorStore::parameters.body,
+  @@clientName(
+    modifyVectorStore::parameters.body,
     "vectorStoreUpdateOptions",
     "java"
   );
@@ -263,7 +284,8 @@ namespace Azure.AI.OpenAI.Assistants {
   @@clientName(createMessage::parameters.body, "threadMessageOptions", "java");
 }
 
-@@clientName(Azure.AI.OpenAI.Assistants.uploadFile::parameters.file,
+@@clientName(
+  Azure.AI.OpenAI.Assistants.uploadFile::parameters.file,
   "uploadFileRequest",
   "java"
 );

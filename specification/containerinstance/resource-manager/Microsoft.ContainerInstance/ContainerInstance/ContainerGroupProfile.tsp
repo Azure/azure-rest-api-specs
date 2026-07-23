@@ -65,15 +65,17 @@ interface ContainerGroupProfiles {
   @summary("Create or Update a ContainerGroupProfile")
   createOrUpdate is ContainerGroupProfileOps.CreateOrUpdateSync<
     ContainerGroupProfile,
-    Response = (ArmResourceUpdatedResponse<ContainerGroupProfile> & {
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
-      @header("x-ms-correlation-request-id")
-      `x-ms-correlation-request-id`: string;
-    }) | (ArmResourceCreatedSyncResponse<ContainerGroupProfile> & {
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
-      @header("x-ms-correlation-request-id")
-      `x-ms-correlation-request-id`: string;
-    })
+    Response =
+      | (ArmResourceUpdatedResponse<ContainerGroupProfile> & {
+          #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+          @header("x-ms-correlation-request-id")
+          `x-ms-correlation-request-id`: string;
+        })
+      | (ArmResourceCreatedSyncResponse<ContainerGroupProfile> & {
+          #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+          @header("x-ms-correlation-request-id")
+          `x-ms-correlation-request-id`: string;
+        })
   >;
 
   /**
@@ -161,12 +163,15 @@ interface CGProfile {
 @@maxLength(ContainerGroupProfile.name, 63);
 @@minLength(ContainerGroupProfile.name, 1);
 @@doc(ContainerGroupProfile.name, "ContainerGroupProfile name.");
-@@doc(ContainerGroupProfile.properties,
+@@doc(
+  ContainerGroupProfile.properties,
   "The container group profile properties"
 );
-@@doc(ContainerGroupProfiles.createOrUpdate::parameters.resource,
+@@doc(
+  ContainerGroupProfiles.createOrUpdate::parameters.resource,
   "The ContainerGroupProfile object."
 );
-@@doc(ContainerGroupProfiles.update::parameters.properties,
+@@doc(
+  ContainerGroupProfiles.update::parameters.properties,
   "The container group profile properties that need to be updated."
 );

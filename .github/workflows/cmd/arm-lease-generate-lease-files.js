@@ -74,13 +74,14 @@ export function validateRpNamespace(rpNamespace) {
 /**
  * Validate an organization name
  * @param {string} orgName - Organization name
- * @returns {string} The validated org name
+ * @returns {string} The validated org name (lowercased)
  */
 export function validateOrgName(orgName) {
-  if (!/^[a-z0-9]+$/.test(orgName)) {
-    throw new Error(`orgName must be lowercase alphanumeric: ${orgName}`);
+  const normalized = orgName.toLowerCase();
+  if (!/^[a-z0-9-]+$/.test(normalized)) {
+    throw new Error(`orgName must be lowercase alphanumeric (hyphens allowed): ${orgName}`);
   }
-  return orgName;
+  return normalized;
 }
 
 /**
@@ -198,17 +199,17 @@ function processEntry(entry, options, repoRoot) {
   const { startdate, duration, reviewer, dryRun: isDryRun } = options;
 
   try {
-    validateOrgName(orgName);
+    const normalizedOrgName = validateOrgName(orgName);
     validateRpNamespace(rpNamespace);
 
     const content = generateLeaseYaml(rpNamespace, startdate, duration, reviewer);
 
     if (serviceNames.length === 0) {
-      createLeaseFile(getLeasePath(repoRoot, orgName, rpNamespace), content, isDryRun);
+      createLeaseFile(getLeasePath(repoRoot, normalizedOrgName, rpNamespace), content, isDryRun);
     } else {
       for (const serviceName of serviceNames) {
         createLeaseFile(
-          getLeasePath(repoRoot, orgName, rpNamespace, serviceName),
+          getLeasePath(repoRoot, normalizedOrgName, rpNamespace, serviceName),
           content,
           isDryRun,
         );
