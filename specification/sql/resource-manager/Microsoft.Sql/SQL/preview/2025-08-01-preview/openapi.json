@@ -51442,6 +51442,36 @@
         "value"
       ]
     },
+    "ManagedInstanceAdministratorPrincipalType": {
+      "type": "string",
+      "description": "Principal type of the managed instance administrator.",
+      "enum": [
+        "User",
+        "Group",
+        "Application"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedInstanceAdministratorPrincipalType",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "User",
+            "value": "User",
+            "description": "Indicates that the principal is a user."
+          },
+          {
+            "name": "Group",
+            "value": "Group",
+            "description": "Indicates that the principal is a group."
+          },
+          {
+            "name": "Application",
+            "value": "Application",
+            "description": "Indicates that the principal is an application."
+          }
+        ]
+      }
+    },
     "ManagedInstanceAdministratorProperties": {
       "type": "object",
       "description": "The properties of a managed instance administrator.",
@@ -51461,6 +51491,10 @@
         "tenantId": {
           "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Tenant ID of the managed instance administrator."
+        },
+        "principalType": {
+          "$ref": "#/definitions/ManagedInstanceAdministratorPrincipalType",
+          "description": "Principal type of the managed instance administrator."
         }
       },
       "required": [

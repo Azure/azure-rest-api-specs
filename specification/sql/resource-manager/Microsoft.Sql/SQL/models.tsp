@@ -2273,6 +2273,28 @@ union ManagedInstanceAdministratorType {
   ActiveDirectory: "ActiveDirectory",
 }
 
+/**
+ * Principal type of the managed instance administrator.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2025_08_01_preview)
+enum ManagedInstanceAdministratorPrincipalType {
+  /**
+   * Indicates that the principal is a user.
+   */
+  User,
+
+  /**
+   * Indicates that the principal is a group.
+   */
+  Group,
+
+  /**
+   * Indicates that the principal is an application.
+   */
+  Application,
+}
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union AdministratorName {
   string,
@@ -11801,6 +11823,12 @@ model ManagedInstanceAdministratorProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tenantId?: Azure.Core.uuid;
+
+  /**
+   * Principal type of the managed instance administrator.
+   */
+  @added(Versions.v2025_08_01_preview)
+  principalType?: ManagedInstanceAdministratorPrincipalType;
 }
 
 /**
