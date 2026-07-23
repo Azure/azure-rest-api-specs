@@ -355,10 +355,12 @@ model ContainerConfiguration {
   image: string;
 
   @doc("""
-    The id (or name) of a Foundry project connection that authorizes pulling `image` from a private
-    container registry. Used only for registry authentication and never affects the image name —
-    `image` remains a fully-qualified `host/repo:tag` literal. Omit for public images or when the
-    registry is accessible via the project's managed identity (for example, Azure Container Registry).
+    The id (or name) of the Foundry project connection that provides the credentials used to
+    authenticate to the private container registry hosting `image`. The connection abstracts the
+    auth mechanism — for example a managed-identity-federated token exchange, or a username/token
+    secret — so registry credentials are never part of the agent definition. Used only for registry
+    authentication and never affects the image name; `image` remains a fully-qualified `host/repo:tag`
+    literal. Omit for public images or registries already reachable by the platform's default identity.
     """)
   @example("jfrog-foundryagents")
   registry_connection_id?: string;
