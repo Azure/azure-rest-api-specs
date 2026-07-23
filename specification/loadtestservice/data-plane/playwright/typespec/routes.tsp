@@ -69,3 +69,18 @@ interface Workspaces {
     ServiceTraits
   >;
 }
+
+interface BrowserSessions {
+  // BrowserSession Operations
+  @added(Versions.v2026_04_01_preview)
+  @doc("Get a browser session for the specified session and workspace ID. Requires Bearer JWT access token provided by Entra ID.")
+  get is Operations.ResourceRead<BrowserSession>;
+
+  @added(Versions.v2026_04_01_preview)
+  @doc("Lists browser sessions for the specified workspace ID. Supports OData query parameters such as $filter and $top. Default page size is 10. Use nextLink in response to fetch additional results. Requires Bearer JWT access token provided by Entra ID.")
+  list is Operations.ResourceList<BrowserSession>;
+
+  @added(Versions.v2026_06_01_preview)
+  @doc("Creates or updates a browser session for the specified session and workspace ID. The sourceId and sourceType are supplied through request headers. Requires Bearer JWT access token provided by Entra ID.")
+  createOrUpdate is Operations.ResourceCreateOrUpdate<BrowserSessionCreateOrUpdate>;
+}
