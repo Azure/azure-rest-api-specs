@@ -2491,6 +2491,7 @@ model WinRMListener {
   /**
    * This is the URL of a certificate that has been uploaded to Key Vault as a secret. For adding a secret to the Key Vault, see [Add a key or secret to the key vault](https://docs.microsoft.com/azure/key-vault/key-vault-get-started/#add). In this case, your certificate needs to be the Base64 encoding of the following JSON Object which is encoded in UTF-8: <br><br> {<br>  "data":"<Base64-encoded-certificate>",<br>  "dataType":"pfx",<br>  "password":"<pfx-file-password>"<br>} <br> To install certificates on a virtual machine it is recommended to use the [Azure Key Vault virtual machine extension for Linux](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-linux) or the [Azure Key Vault virtual machine extension for Windows](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-windows).
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   certificateUrl?: string;
 }
 
@@ -2608,6 +2609,7 @@ model VaultCertificate {
   /**
    * This is the URL of a certificate that has been uploaded to Key Vault as a secret. For adding a secret to the Key Vault, see [Add a key or secret to the key vault](https://docs.microsoft.com/azure/key-vault/key-vault-get-started/#add). In this case, your certificate needs to be It is the Base64 encoding of the following JSON Object which is encoded in UTF-8: <br><br> {<br>  "data":"<Base64-encoded-certificate>",<br>  "dataType":"pfx",<br>  "password":"<pfx-file-password>"<br>} <br> To install certificates on a virtual machine it is recommended to use the [Azure Key Vault virtual machine extension for Linux](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-linux) or the [Azure Key Vault virtual machine extension for Windows](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-windows).
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   certificateUrl?: string;
 
   /**
@@ -3433,6 +3435,7 @@ model KeyVaultSecretReference {
   /**
    * The URL referencing a secret in a Key Vault.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   secretUrl: string;
 
   /**
@@ -3498,6 +3501,12 @@ model CapacityReservationProfile {
    * Specifies the capacity reservation group resource id that should be used for allocating the virtual machine or scaleset vm instances provided enough capacity has been reserved. Please refer to https://aka.ms/CapacityReservation for more details.
    */
   capacityReservationGroup?: SubResource;
+
+  /**
+   * Specifies whether the virtual machine is explicitly opted out from being associated with any capacity reservation. When set to true, the virtual machine will not be allowed to implicitly or explicitly associate with any type of capacity reservation and will consume capacity from the publicly available capacity. Minimum api-version: 2026-04-01.
+   */
+  @added(Versions.v2026_04_01)
+  disableCapacityReservationAssignment?: boolean;
 }
 
 /**
@@ -5206,6 +5215,12 @@ model VirtualMachineScaleSetVMProperties {
    */
   @added(Versions.v2026_03_01)
   interconnectBlockProfile?: InterconnectBlockProfile;
+
+  /**
+   * Specifies information about the capacity reservation that is used to allocate the virtual machine scale set VM instance. The capacity reservation group is inherited from the parent virtual machine scale set and cannot be changed on the individual scale set VM instance. Minimum api-version: 2026-04-01.
+   */
+  @added(Versions.v2026_04_01)
+  capacityReservation?: CapacityReservationProfile;
 }
 
 /**
@@ -5442,6 +5457,7 @@ model KeyVaultKeyReference {
   /**
    * The URL referencing a key encryption key in Key Vault.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   keyUrl: string;
 
   /**
@@ -6742,6 +6758,13 @@ model VirtualMachineInstanceView {
   @added(Versions.v2026_03_01)
   @visibility(Lifecycle.Read)
   interconnectInstanceView?: InterconnectInstanceView;
+
+  /**
+   * Specifies which type of capacity reservation the virtual machine will consume capacity from if eligible or whether it is explicitly opted out from being associated and consuming capacity from any reserved capacity available in the subscription. Minimum api-version: 2026-04-01.
+   */
+  @added(Versions.v2026_04_01)
+  @visibility(Lifecycle.Read)
+  capacityReservationType?: CapacityReservationType;
 }
 
 /**
@@ -9015,7 +9038,7 @@ model CapacityReservationGroupProperties {
   sharingProfile?: ResourceSharingProfile;
 
   /**
-   * Indicates the type of capacity reservation. Allowed values are 'Block' for block capacity reservations and 'Targeted' for reservations that enable a VM to consume a specific capacity reservation when a capacity reservation group is provided. The reservation type is immutable and cannot be changed after it is assigned.
+   * Indicates the type of capacity reservation. Allowed values are 'Block' for block capacity reservations that enable a VM to consume capacity only from this capacity block when it is associated using a capacity reservation group, 'Targeted' for reservations that enable a VM to consume capacity from an explicitly associated capacity reservation group and fall back to the publicly available capacity if the reservation is full, and 'Open' for reservations that a VM consumes when it is eligible from an implicitly associated capacity reservation group with the matching VM size and zone without associating that capacity reservation group and fall back to the publicly available capacity if the reservation is full. The reservation type is immutable and cannot be changed after the capacity reservation group is created.
    */
   @added(Versions.v2025_04_01)
   reservationType?: ReservationType;
@@ -9099,6 +9122,14 @@ model CapacityReservationUtilization {
   @visibility(Lifecycle.Read)
   @identifiers(#["id"])
   virtualMachinesAllocated?: SubResourceReadOnly[];
+
+  /**
+   * For open capacity reservations, this provides a map of the used reserved capacity count keyed by the subscription id (a GUID) that is consuming the capacity, i.e. each entry maps a consuming subscription id to the count of reserved capacity it is currently using. This is populated only for open capacity reservations and is not reported for targeted and block capacity reservations, which instead report allocation through virtualMachinesAllocated. Minimum api-version: 2026-04-01.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Open capacity reservation usage is inherently a map keyed by the consuming subscription id (GUID) to its used reserved capacity count."
+  @added(Versions.v2026_04_01)
+  @visibility(Lifecycle.Read)
+  usedReservedCountBySubscription?: Record<int32>;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -9111,7 +9142,7 @@ model ResourceSharingProfile {
 }
 
 /**
- * Indicates the type of capacity reservation. Allowed values are 'Block' for block capacity reservations and 'Targeted' for reservations that enable a VM to consume a specific capacity reservation when a capacity reservation group is provided. The reservation type is immutable and cannot be changed after it is assigned.
+ * Indicates the type of capacity reservation. Allowed values are 'Block' for block capacity reservations that enable a VM to consume capacity only from this capacity block when it is associated using a capacity reservation group, 'Targeted' for reservations that enable a VM to consume capacity from an explicitly associated capacity reservation group and fall back to the publicly available capacity if the reservation is full, and 'Open' for reservations that a VM consumes when it is eligible from an implicitly associated capacity reservation group with the matching VM size and zone without associating that capacity reservation group and fall back to the publicly available capacity if the reservation is full. The reservation type is immutable and cannot be changed after the capacity reservation group is created.
  */
 @added(Versions.v2025_04_01)
 union ReservationType {
@@ -9121,12 +9152,54 @@ union ReservationType {
   string,
 
   /**
-   * To consume on demand allocated capacity reservation when a capacity reservation group is provided.
+   * Reservations that enable a VM to consume capacity from an explicitly associated capacity reservation group and fall back to the publicly available capacity if the reservation is full.
    */
   Targeted: "Targeted",
 
   /**
-   * To consume scheduled allocated block capacity reservation when a capacity reservation group is provided.
+   * Block capacity reservations that enable a VM to consume capacity only from this capacity block when it is associated using a capacity reservation group.
+   */
+  Block: "Block",
+
+  /**
+   * Reservations that a VM consumes when it is eligible from an implicitly associated capacity reservation group with the matching VM size and zone without associating that capacity reservation group, and fall back to the publicly available capacity if the reservation is full. Minimum api-version: 2026-04-01.
+   */
+  @added(Versions.v2026_04_01)
+  Open: "Open",
+}
+
+/**
+ * Specifies which type of capacity reservation the virtual machine will consume capacity from if eligible or whether it is explicitly opted out from being associated and consuming capacity from any reserved capacity available in the subscription. Minimum api-version: 2026-04-01.
+ */
+@added(Versions.v2026_04_01)
+union CapacityReservationType {
+  /**
+   * Custom capacity reservation type value.
+   */
+  string,
+
+  /**
+   * The virtual machine is not eligible to be implicitly associated with an open capacity reservation and is not explicitly associated with any capacity reservation group, so it will consume capacity from the publicly available capacity.
+   */
+  NotEligible: "NotEligible",
+
+  /**
+   * The virtual machine will consume capacity from a specific matching capacity reservation when associated with a capacity reservation group resource of type targeted, but can fall back to consume capacity from the publicly available capacity if there is no capacity available in the targeted reservation.
+   */
+  Targeted: "Targeted",
+
+  /**
+   * The virtual machine if eligible will implicitly associate and consume any available capacity from a matching open capacity reservation created or shared in the subscription. **Note:** The VM should not be explicitly associated with the open capacity reservation group resource containing the matching reservation.
+   */
+  Open: "Open",
+
+  /**
+   * The virtual machine has capacity reservation assignment disabled and will not be allowed to implicitly or explicitly associate with any type of capacity reservation.
+   */
+  Disabled: "Disabled",
+
+  /**
+   * The virtual machine consumes capacity from a specific matching capacity reservation when associated with a capacity reservation group resource of type block, and will hit capacity failures if there is no available capacity in the block reservation.
    */
   Block: "Block",
 }
@@ -9419,10 +9492,12 @@ model VirtualMachineRunCommandsListResult
 model VirtualMachineDiagnosticRunCommandsListResult
   is Azure.Core.Page<VirtualMachineDiagnosticRunCommand>;
 
-@@doc(VirtualMachineDiagnosticRunCommandsListResult.value,
+@@doc(
+  VirtualMachineDiagnosticRunCommandsListResult.value,
   "The list of diagnostic run commands."
 );
-@@doc(VirtualMachineDiagnosticRunCommandsListResult.nextLink,
+@@doc(
+  VirtualMachineDiagnosticRunCommandsListResult.nextLink,
   "The uri to fetch the next page of diagnostic run commands."
 );
 

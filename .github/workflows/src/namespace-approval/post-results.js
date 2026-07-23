@@ -95,7 +95,7 @@ function getApprovers(approversConfig, isMgmt, language) {
   const approvers = approversConfig["data-plane"]?.[language];
   if (!approvers) {
     throw new Error(
-      `No approvers configured for language "${language}" in .github/namespace-approvers.yml`,
+      `No approvers configured for language "${language}" in .github/protected-labels.yml`,
     );
   }
   return approvers;
@@ -205,7 +205,7 @@ function buildCommentBody({
   if (resetLanguages && resetLanguages.length > 0) {
     body += `\n> ⚠️ **Namespace changed** — approvals for ${resetLanguages.join(", ")} have been reset.\n`;
   }
-  body += `\n_Approver list: [.github/namespace-approvers.yml](../blob/${baseRef}/.github/namespace-approvers.yml)_\n`;
+  body += `\n_Approver list: [.github/protected-labels.yml](../blob/${baseRef}/.github/protected-labels.yml)_\n`;
   body += `_Process: [.github/workflows/src/namespace-approval/NAMESPACE-REVIEW-PROCESS.md](../blob/${baseRef}/.github/workflows/src/namespace-approval/NAMESPACE-REVIEW-PROCESS.md)_\n`;
   body += `_Namespaces extracted from tspconfig.yaml emitter options_`;
   return body;
@@ -251,22 +251,23 @@ export default async function postResults({ github, context, core }) {
       const prev = previousTable.get(language);
       const newNs = results.namespacesFound[language];
 
-      if (!prev || prev.namespace !== newNs) {
-        // Namespace changed or new language: reset approval
+      if (prev && prev.namespace !== newNs) {
+        // Namespace genuinely changed from a previously-recorded value
         const approvedLabel = `namespace-${language}-approved`;
         if (existingLabels.includes(approvedLabel)) {
           core.info(
-            `Namespace changed for ${language}: "${prev?.namespace ?? "(new)"}" → "${newNs}", resetting approval`,
+            `Namespace changed for ${language}: "${prev.namespace}" → "${newNs}", resetting approval`,
           );
           await removeLabelIfPresent(github, owner, repo, issue_number, approvedLabel);
           existingLabels.splice(existingLabels.indexOf(approvedLabel), 1);
+          resetLanguages.push(language);
         }
-        resetLanguages.push(language);
-      } else if (prev.status && !prev.status.includes("Pending")) {
+      } else if (prev && prev.status && !prev.status.includes("Pending")) {
         // Namespace unchanged and previously approved: preserve status
         core.info(`Namespace unchanged for ${language}: "${newNs}", preserving approval`);
         preservedApprovals.set(language, prev);
       }
+      // No previous entry (!prev) means first detection — treat as new pending (no reset)
     }
 
     // Only remove global approval labels if any language was actually reset

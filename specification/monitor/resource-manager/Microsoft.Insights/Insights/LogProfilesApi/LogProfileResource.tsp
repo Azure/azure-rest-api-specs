@@ -14,8 +14,10 @@ namespace LogProfilesApi;
  * The log profile resource.
  */
 @subscriptionResource
-model LogProfileResource
-  is Azure.ResourceManager.TrackedResource<LogProfileProperties, false> {
+model LogProfileResource is Azure.ResourceManager.TrackedResource<
+  LogProfileProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = LogProfileResource,
     KeyName = "logProfileName",
