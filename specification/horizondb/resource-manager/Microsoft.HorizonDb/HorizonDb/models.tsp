@@ -6,6 +6,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 namespace Microsoft.HorizonDb;
 
@@ -20,6 +21,8 @@ model HorizonDbCluster
   @path
   @segment("clusters")
   name: string;
+
+  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
 
 @doc("Represents the HorizonDB pool.")
@@ -90,6 +93,19 @@ model HorizonDbParameterGroup
   @key("parameterGroupName")
   @path
   @segment("parameterGroups")
+  name: string;
+}
+
+@added(Versions.v2026_05_01_preview)
+@doc("Represents an Entra ID administrator configured on a HorizonDB cluster.")
+@parentResource(HorizonDbCluster)
+model HorizonDbAdministrator
+  is Azure.ResourceManager.ProxyResource<HorizonDbAdministratorProperties> {
+  @doc("The Entra ID object identifier of the principal (an RFC 4122 GUID).")
+  @pattern("^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$")
+  @key("objectId")
+  @path
+  @segment("administrators")
   name: string;
 }
 
@@ -164,6 +180,75 @@ model HorizonDbClusterProperties {
   @doc("Defines connection to a parameter group.")
   @visibility(Lifecycle.Update, Lifecycle.Read)
   parameterGroup?: HorizonDbClusterParameterGroupConnectionProperties;
+
+  @added(Versions.v2026_05_01_preview)
+  @doc("Authentication configuration for the HorizonDB cluster.")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  authConfig?: HorizonDbClusterAuthConfig;
+
+  @added(Versions.v2026_05_01_preview)
+  @doc("The compute model for the cluster.")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  computeModel?: HorizonDbComputeModel;
+
+  @added(Versions.v2026_05_01_preview)
+  @doc("Mirroring configuration for the HorizonDB cluster.")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  mirroring?: HorizonDbClusterMirroring;
+}
+
+@added(Versions.v2026_05_01_preview)
+@doc("Mirroring configuration for a HorizonDB cluster.")
+model HorizonDbClusterMirroring {
+  @doc("The names of the databases to mirror.")
+  databaseNames?: string[];
+
+  @doc("The resource ID of the user-assigned managed identity used for mirroring.")
+  userAssignedIdentityId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
+}
+
+@added(Versions.v2026_05_01_preview)
+@doc("Authentication configuration for a HorizonDB cluster.")
+model HorizonDbClusterAuthConfig {
+  @doc("Indicates whether Microsoft Entra ID authentication is enabled or disabled.")
+  entraIdAuth?: AuthenticationState;
+
+  @doc("The Microsoft Entra tenant ID.")
+  tenantId?: string;
+
+  @doc("Indicates whether password authentication is enabled or disabled.")
+  passwordAuth?: AuthenticationState;
+}
+
+@added(Versions.v2026_05_01_preview)
+@doc("The compute model for a HorizonDB cluster.")
+model HorizonDbComputeModel {
+  @doc("The compute model type. Supported values: 'Provisioned', 'Serverless'.")
+  type?: HorizonDbComputeModelType;
+
+  @doc("The fixed vCore count for Provisioned compute.")
+  vCores?: int32;
+
+  @doc("The minimum vCores for Serverless compute. Defines the lower autoscaling bound.")
+  minvCores?: float64;
+
+  @doc("The maximum vCores for Serverless compute. Defines the upper autoscaling bound.")
+  maxvCores?: float64;
+}
+
+@doc("The compute model type.")
+union HorizonDbComputeModelType {
+  string,
+
+  @doc("Provisioned compute.")
+  Provisioned: "Provisioned",
+
+  @doc("Serverless compute.")
+  Serverless: "Serverless",
 }
 
 @doc("Properties of a HorizonDB cluster for update operations.")
@@ -183,15 +268,34 @@ model HorizonDbClusterPropertiesForPatchUpdate {
 
   @doc("Defines connection to a parameter group.")
   parameterGroup?: HorizonDbClusterParameterGroupConnectionProperties;
+
+  @added(Versions.v2026_05_01_preview)
+  @doc("Authentication configuration for the HorizonDB cluster.")
+  @visibility(Lifecycle.Update)
+  authConfig?: HorizonDbClusterAuthConfig;
+
+  @added(Versions.v2026_05_01_preview)
+  @doc("The compute model for the cluster.")
+  @visibility(Lifecycle.Update)
+  computeModel?: HorizonDbComputeModel;
+
+  @added(Versions.v2026_05_01_preview)
+  @doc("Mirroring configuration for the HorizonDB cluster.")
+  @visibility(Lifecycle.Update)
+  mirroring?: HorizonDbClusterMirroring;
 }
 
 @doc("HorizonDB cluster for update operations.")
 model HorizonDbClusterForPatchUpdate {
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 
   @doc("The properties that can be updated for a HorizonDB cluster.")
   properties?: HorizonDbClusterPropertiesForPatchUpdate;
 }
+
+@@added(HorizonDbCluster.identity, Versions.v2026_05_01_preview);
+@@added(HorizonDbClusterForPatchUpdate.identity, Versions.v2026_05_01_preview);
 
 @doc("Properties of a HorizonDB pool.")
 model HorizonDbPoolProperties {
@@ -282,6 +386,70 @@ model HorizonDbFirewallRuleProperties {
   provisioningState?: ProvisioningState;
 }
 
+@added(Versions.v2026_05_01_preview)
+@doc("Properties of a HorizonDB administrator.")
+model HorizonDbAdministratorProperties {
+  @doc("The display name or UPN of the Entra ID principal. For users, typically the User Principal Name (e.g., admin@contoso.com). For groups, the group display name. For service principals, the application display name.")
+  @maxLength(256)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  principalName: string;
+
+  @doc("The type of the Entra ID principal.")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  principalType: PrincipalTypes;
+
+  @doc("The Entra ID object identifier of the principal (an RFC 4122 GUID). On PUT requests, this value comes from the URI path parameter.")
+  @visibility(Lifecycle.Read)
+  objectId?: string;
+
+  @doc("The Entra ID tenant identifier (an RFC 4122 GUID). If omitted, defaults to the tenant of the subscription.")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  tenantId?: string;
+
+  @doc("The provisioning state of the administrator.")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
+@added(Versions.v2026_05_01_preview)
+@doc("The properties for adding a HorizonDB administrator.")
+model HorizonDbAdministratorPropertiesForAdd {
+  @doc("The display name or UPN of the Entra ID principal. For users, typically the User Principal Name (e.g., admin@contoso.com). For groups, the group display name. For service principals, the application display name.")
+  @maxLength(256)
+  principalName: string;
+
+  @doc("The type of the Entra ID principal.")
+  principalType: PrincipalTypes;
+
+  @doc("The Entra ID tenant identifier (an RFC 4122 GUID). If omitted, defaults to the tenant of the subscription.")
+  tenantId?: string;
+}
+
+@added(Versions.v2026_05_01_preview)
+@doc("The request body for adding a HorizonDB administrator.")
+model HorizonDbAdministratorAdd {
+  @doc("The properties for adding a HorizonDB administrator.")
+  properties: HorizonDbAdministratorPropertiesForAdd;
+}
+
+@added(Versions.v2026_05_01_preview)
+@doc("The type of the Entra ID principal.")
+union PrincipalTypes {
+  string,
+
+  @doc("Unknown or unrecognized type (internal only, not accepted in requests).")
+  Unknown: "Unknown",
+
+  @doc("An Entra ID user account (UPN-based principal).")
+  User: "User",
+
+  @doc("An Entra ID security group. All members of the group inherit admin privileges.")
+  Group: "Group",
+
+  @doc("An Entra ID application / service principal (used for automated workloads).")
+  ServicePrincipal: "ServicePrincipal",
+}
+
 @doc("The mode to create a new HorizonDB cluster.")
 union CreateModeCluster {
   string,
@@ -322,29 +490,48 @@ union ZonePlacementPolicy {
 union State {
   string,
 
-  /** Is ready and operational */
+  @doc("Is ready and operational")
   Ready: "Ready",
 
-  /** Is being dropped/deleted */
+  @doc("Is being dropped/deleted")
   Dropping: "Dropping",
 
-  /** Is disabled */
+  @doc("Is disabled")
   Disabled: "Disabled",
 
-  /** Is starting up */
+  @doc("Is starting up")
   Starting: "Starting",
 
-  /** Is stopping */
+  @doc("Is stopping")
   Stopping: "Stopping",
 
-  /** Is stopped */
+  @doc("Is stopped")
   Stopped: "Stopped",
 
-  /** Is being updated */
+  @doc("Is being updated")
   Updating: "Updating",
 
-  /** Is healthy */
+  @doc("Is healthy")
   Healthy: "Healthy",
+
+  @added(Versions.v2026_05_01_preview)
+  @doc("Is succeeded")
+  Succeeded: "Succeeded",
+
+  @added(Versions.v2026_05_01_preview)
+  @doc("Is upgrading")
+  Upgrading: "Upgrading",
+}
+
+@doc("Indicates if authentication state is enabled or not.")
+union AuthenticationState {
+  string,
+
+  @doc("Is enabled")
+  Enabled: "Enabled",
+
+  @doc("Is disabled")
+  Disabled: "Disabled",
 }
 
 @doc("Indicates if public network access is enabled or not.")

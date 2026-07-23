@@ -1,10 +1,12 @@
 import "@typespec/rest";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./main.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 namespace Microsoft.HorizonDb;
@@ -40,6 +42,33 @@ interface HorizonDbClusters {
 
   @doc("Lists all HorizonDB clusters in a subscription.")
   listBySubscription is ArmListBySubscription<HorizonDbCluster>;
+
+  @added(Versions.v2026_05_01_preview)
+  @doc("Starts a stopped HorizonDB cluster.")
+  start is ArmResourceActionAsync<
+    HorizonDbCluster,
+    void,
+    ArmResponse<HorizonDbCluster>,
+    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  @added(Versions.v2026_05_01_preview)
+  @doc("Stops a running HorizonDB cluster.")
+  stop is ArmResourceActionAsync<
+    HorizonDbCluster,
+    void,
+    ArmResponse<HorizonDbCluster>,
+    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  @added(Versions.v2026_05_01_preview)
+  @doc("Restarts a HorizonDB cluster.")
+  restart is ArmResourceActionAsync<
+    HorizonDbCluster,
+    void,
+    ArmResponse<HorizonDbCluster>,
+    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
+  >;
 }
 
 @armResourceOperations
@@ -116,7 +145,15 @@ interface HorizonDbPrivateEndpointConnections {
   >;
 
   @doc("Updates a private endpoint connection.")
+  @removed(Versions.v2026_05_01_preview)
   update is HorizonDbPrivateEndpointOperations.CustomPatchAsync<
+    HorizonDbCluster,
+    PrivateEndpointConnectionResource
+  >;
+
+  @doc("Approves or rejects a private endpoint connection.")
+  @added(Versions.v2026_05_01_preview)
+  updateStatus is HorizonDbPrivateEndpointOperations.CreateOrReplaceSync<
     HorizonDbCluster,
     PrivateEndpointConnectionResource
   >;
@@ -195,4 +232,30 @@ interface HorizonDbParameterGroups {
       version?: int32;
     }
   >;
+}
+
+@added(Versions.v2026_05_01_preview)
+@armResourceOperations
+interface HorizonDbAdministrators {
+  @doc("Gets information about a HorizonDB administrator.")
+  get is ArmResourceRead<HorizonDbAdministrator>;
+
+  @doc("Creates a new HorizonDB administrator or updates an existing administrator.")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
+    HorizonDbAdministrator,
+    Request = HorizonDbAdministratorAdd
+  >;
+
+  @doc("Deletes a HorizonDB administrator.")
+  delete is ArmResourceDeleteWithoutOkAsync<
+    HorizonDbAdministrator,
+    Response =
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
+  >;
+
+  @doc("Lists all HorizonDB administrators in a cluster.")
+  list is ArmResourceListByParent<HorizonDbAdministrator>;
 }
