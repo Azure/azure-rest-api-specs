@@ -131,7 +131,7 @@ model ListDescendantsRequest {
 
 /**
  * Response for the listDescendants action. Contains a page of service groups
- * plus pagination tokens for fetching subsequent pages.
+ * plus an opaque skipToken for fetching subsequent pages.
  */
 @added(Versions.v2026_03_01_preview)
 model ListDescendantsResponse {
@@ -141,14 +141,9 @@ model ListDescendantsResponse {
   value: ServiceGroup[];
 
   /**
-   * URL of the next page. When present, callers must re-POST to this URL with
-   * the skipToken value from this response in the request body.
-   */
-  nextLink?: url;
-
-  /**
-   * Opaque pagination token. When present, callers must include this value in
-   * the request body of the next POST call to fetch the next page of results.
+   * Opaque pagination token. When present, more results are available; callers
+   * must re-POST to the same listDescendants URL with this value in the request
+   * body to fetch the next page. When absent, the current page is the last page.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "skipToken is the standard Azure OData paging continuation token, not a secret. The linter flags it due to the 'Token' substring in the name; the property carries opaque pagination state and is not sensitive."
   skipToken?: string;

@@ -89,10 +89,11 @@ interface ServiceGroups {
   /**
    * List the descendant serviceGroups of the serviceGroup, ordered by hierarchy.
    *
-   * This is a paginated POST action. To fetch subsequent pages, re-POST to the URL
-   * in the response's nextLink field with the response's skipToken included in the
-   * request body. SDKs do not natively support POST-based pagination, so callers
-   * must loop manually until nextLink is absent.
+   * This is a paginated POST action. When the response contains a skipToken,
+   * more results are available; callers must re-POST to the same listDescendants
+   * URL with that skipToken value in the request body to fetch the next page.
+   * When skipToken is absent, the current page is the last page. SDKs do not
+   * natively support POST-based pagination, so callers must loop manually.
    */
   @added(Versions.v2026_03_01_preview)
   listDescendants is ArmResourceActionSync<

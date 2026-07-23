@@ -323,7 +323,7 @@
         "tags": [
           "ServiceGroups"
         ],
-        "description": "List the descendant serviceGroups of the serviceGroup, ordered by hierarchy.\n\nThis is a paginated POST action. To fetch subsequent pages, re-POST to the URL\nin the response's nextLink field with the response's skipToken included in the\nrequest body. SDKs do not natively support POST-based pagination, so callers\nmust loop manually until nextLink is absent.",
+        "description": "List the descendant serviceGroups of the serviceGroup, ordered by hierarchy.\n\nThis is a paginated POST action. When the response contains a skipToken,\nmore results are available; callers must re-POST to the same listDescendants\nURL with that skipToken value in the request body to fetch the next page.\nWhen skipToken is absent, the current page is the last page. SDKs do not\nnatively support POST-based pagination, so callers must loop manually.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -381,7 +381,7 @@
     },
     "ListDescendantsResponse": {
       "type": "object",
-      "description": "Response for the listDescendants action. Contains a page of service groups\nplus pagination tokens for fetching subsequent pages.",
+      "description": "Response for the listDescendants action. Contains a page of service groups\nplus an opaque skipToken for fetching subsequent pages.",
       "properties": {
         "value": {
           "type": "array",
@@ -390,14 +390,9 @@
             "$ref": "#/definitions/ServiceGroup"
           }
         },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "URL of the next page. When present, callers must re-POST to this URL with\nthe skipToken value from this response in the request body."
-        },
         "skipToken": {
           "type": "string",
-          "description": "Opaque pagination token. When present, callers must include this value in\nthe request body of the next POST call to fetch the next page of results."
+          "description": "Opaque pagination token. When present, more results are available; callers\nmust re-POST to the same listDescendants URL with this value in the request\nbody to fetch the next page. When absent, the current page is the last page."
         }
       },
       "required": [
