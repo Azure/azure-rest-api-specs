@@ -325,6 +325,19 @@
           "format": "uuid",
           "description": "Tenant ID of the managed instance administrator.",
           "type": "string"
+        },
+        "principalType": {
+          "description": "Principal type of the managed instance administrator.",
+          "enum": [
+            "User",
+            "Group",
+            "Application"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ManagedInstanceAdministratorPrincipalType",
+            "modelAsString": false
+          }
         }
       }
     }
