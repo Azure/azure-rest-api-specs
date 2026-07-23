@@ -138,6 +138,7 @@ union JobType {
   OnPremToCloud: "OnPremToCloud",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   CloudToCloud: "CloudToCloud",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @added(Versions.v2026_05_01)
   OnPremToCloudAgentLess: "OnPremToCloudAgentLess",
@@ -267,8 +268,9 @@ union NfsVersion {
   NFSv3: "NFSv3",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   NFSv4: "NFSv4",
-  @added(Versions.v2026_05_01)
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2026_05_01)
   NFSv4_1: "NFSv4_1",
 }
 
@@ -1584,7 +1586,7 @@ model AzureStorageSmbFileShareEndpointProperties
    */
   endpointType: "AzureStorageSmbFileShare";
 
-   /**
+  /**
    * Opt-in flag enabling this endpoint to be used as one side of a cross-tenant
    * data transfer pair. When set to true, RBAC for the endpoint's managed
    * identity is granted on the customer's storage account so that authorization
