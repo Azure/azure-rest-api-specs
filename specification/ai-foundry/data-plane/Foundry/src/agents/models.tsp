@@ -591,8 +591,8 @@ model EntraAuthorizationScheme extends AgentEndpointAuthorizationScheme {
   type: AgentEndpointAuthorizationSchemeType.Entra;
 }
 
-@doc("The Entra sign-in mode governing which Entra application the agent endpoint validates inbound tokens against.")
-union EntraSignInMode {
+@doc("The Entra sign-in type governing which Entra application the agent endpoint validates inbound tokens against.")
+union EntraSignInType {
   string,
 
   @doc("Sign-in using the Foundry application (ai.azure.com). Inbound tokens are validated against the Foundry application audience. This is the default when a sign-in configuration is not specified.")
@@ -603,26 +603,26 @@ union EntraSignInMode {
 }
 
 @doc("""
-  Entra sign-in configuration for the agent endpoint. The `mode` property discriminates the concrete
-  configuration type; mode-specific inputs (such as token validation) are carried only by the modes
+  Entra sign-in configuration for the agent endpoint. The `type` property discriminates the concrete
+  configuration type; type-specific inputs (such as token validation) are carried only by the types
   that support them. Defaults to Foundry sign-in when not specified.
   """)
-@discriminator("mode")
+@discriminator("type")
 model EntraSignInConfig {
-  @doc("The Entra sign-in mode.")
-  mode: EntraSignInMode;
+  @doc("The Entra sign-in type.")
+  type: EntraSignInType;
 }
 
 @doc("Foundry Entra sign-in configuration. The agent endpoint validates inbound tokens against the Foundry application (ai.azure.com). This is the default when a sign-in configuration is not specified.")
 model FoundryEntraSignInConfig extends EntraSignInConfig {
-  @doc("The Entra sign-in mode. Always 'foundry'.")
-  mode: EntraSignInMode.foundry;
+  @doc("The Entra sign-in type. Always 'foundry'.")
+  type: EntraSignInType.foundry;
 }
 
 @doc("Agent-blueprint Entra sign-in configuration. The agent endpoint validates inbound tokens against the agent's blueprint application.")
 model AgentBlueprintEntraSignInConfig extends EntraSignInConfig {
-  @doc("The Entra sign-in mode. Always 'agent_blueprint'.")
-  mode: EntraSignInMode.agent_blueprint;
+  @doc("The Entra sign-in type. Always 'agent_blueprint'.")
+  type: EntraSignInType.agent_blueprint;
 
   @doc("The validation applied to inbound bearer tokens presented to the agent endpoint in agent-blueprint sign-in mode.")
   validation?: EntraValidationConfiguration;
@@ -723,7 +723,7 @@ model AgentEndpointConfig {
   @doc("The authorization schemes supported by the agent endpoint.")
   authorization_schemes?: AgentEndpointAuthorizationScheme[];
 
-  @doc("The Entra sign-in configuration governing which Entra application the agent endpoint validates inbound tokens against (and represents the calling user as for downstream on-behalf-of access). Defaults to the platform default ('foundry') behavior when not specified.")
+  @doc("The Entra sign-in configuration governing which Entra application the agent endpoint validates inbound tokens against (and represents the calling user as for downstream on-behalf-of access). The service defaults 'foundry' behavior if a value is not specified by the caller.")
   entra_sign_in_config?: EntraSignInConfig;
 }
 
