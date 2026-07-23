@@ -15,6 +15,7 @@ API version is controlled by the `@azure-tools/typespec-autorest` emitter in tsp
 
 ```yaml
 openapi-type: data-plane
+tag: package-2026-07-31-preview
 ```
 
 ### Tag: package-2026-07-31-preview
