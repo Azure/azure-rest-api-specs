@@ -559,6 +559,34 @@ union SensitivityType {
 }
 
 /**
+ * Status of a managed rule set.
+ */
+@added(Versions.v2026_04_01)
+union ManagedRuleSetStatus {
+  string,
+
+  /**
+   * The managed rule set is in preview.
+   */
+  Preview: "Preview",
+
+  /**
+   * The managed rule set is generally available.
+   */
+  GA: "GA",
+
+  /**
+   * The managed rule set is deprecated.
+   */
+  Deprecated: "Deprecated",
+
+  /**
+   * The managed rule set is supported.
+   */
+  Supported: "Supported",
+}
+
+/**
  * Resource status of the policy.
  */
 union PolicyResourceState {
@@ -2359,6 +2387,20 @@ model ManagedRuleSetDefinitionProperties {
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   ruleGroups?: ManagedRuleGroupDefinition[];
+
+  /**
+   * Human-readable display name for the managed rule set version (e.g., 'Default Ruleset 2.2 (Latest, Recommended)').
+   */
+  @added(Versions.v2026_04_01)
+  @visibility(Lifecycle.Read)
+  displayName?: string;
+
+  /**
+   * Describes the lifecycle status of the managed rule set version.
+   */
+  @added(Versions.v2026_04_01)
+  @visibility(Lifecycle.Read)
+  status?: ManagedRuleSetStatus;
 }
 
 /**
@@ -2418,6 +2460,13 @@ model ManagedRuleDefinition {
    */
   @visibility(Lifecycle.Read)
   description?: string;
+
+  /**
+   * Describes the paranoia level of the managed rule. Applicable only for DRS rules. Omitted for Bot Manager, DDoS, and AI rules.
+   */
+  @added(Versions.v2026_04_01)
+  @visibility(Lifecycle.Read)
+  paranoiaLevel?: int32;
 }
 
 /**
