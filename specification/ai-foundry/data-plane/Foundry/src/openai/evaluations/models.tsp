@@ -537,7 +537,7 @@ model TargetCompletionItemGenerationParams extends ItemGenerationParams {
   /** The type of item generation parameters, always `target_completion`. */
   type: ItemGenerationParamsType.targetCompletion;
 
-  /** The maximum number of target completions to execute concurrently. Defaults to 1, which invokes the target sequentially. */
+  /** The maximum number of target completions to execute concurrently. The services defaults to 1 if a value is not specified by the caller, which invokes the target sequentially. */
   @minValue(1)
   max_concurrency?: int32 = 1;
 }
