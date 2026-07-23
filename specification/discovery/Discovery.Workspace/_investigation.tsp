@@ -181,13 +181,36 @@ model DiscoveryEngineUpdate {
   configuration?: Record<unknown>;
 }
 
+// Named alias so the GA (2026-06-01) SDK model is `InvestigationOperationStatus`
+// instead of the auto-synthesized `ResourceOperationStatusInvestigationInvestigationError`.
+// Scoped to GA only: the model is @added at 2026-06-01 and is referenced solely by
+// the GA operation below. The 2026-02-01-preview swagger is frozen via a
+// version-split (see the Conversations update/stableUpdate precedent).
+@doc("The status of a long-running Investigation operation.")
+@added(Versions.`2026-06-01`)
+model InvestigationOperationStatus is ResourceOperationStatus<Investigation>;
+
 interface Investigations {
   @doc("Fetch a Investigation by name.")
   get is ResourceRead<Investigation>;
 
+  // Preview (2026-02-01-preview) operation, frozen and removed at GA. Renamed to
+  // `...Legacy` so the GA operation can take the clean `getOperationStatus` name;
+  // @operationId preserves the preview swagger's operationId byte-for-byte.
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Versioned operation needs explicit operationId"
   @doc("Get the status of a long-running operation.")
+  @sharedRoute
   @added(Versions.`2026-02-01-preview`)
-  getOperationStatus is Operations.GetResourceOperationStatus<Investigation>;
+  @removed(Versions.`2026-06-01`)
+  @operationId("Investigations_GetOperationStatus")
+  getOperationStatusLegacy is Operations.GetResourceOperationStatus<Investigation>;
+
+  // GA (2026-06-01) operation returning the cleanly-named model; keeps the clean
+  // `getOperationStatus` name (and operationId) as the public surface.
+  @doc("Get the status of a long-running operation.")
+  @sharedRoute
+  @added(Versions.`2026-06-01`)
+  getOperationStatus is ResourceRead<InvestigationOperationStatus>;
 
   @doc("Creates an Investigation.")
   createOrReplace is StandardResourceOperations.ResourceCreateOrReplace<Investigation>;
