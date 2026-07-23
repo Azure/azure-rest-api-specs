@@ -24,7 +24,7 @@ model JobDefinition is Azure.ResourceManager.ProxyResource<
     Resource = JobDefinition,
     KeyName = "jobDefinitionName",
     SegmentName = "jobDefinitions",
-    NamePattern = ""
+    NamePattern = "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$"
   >;
 }
 
