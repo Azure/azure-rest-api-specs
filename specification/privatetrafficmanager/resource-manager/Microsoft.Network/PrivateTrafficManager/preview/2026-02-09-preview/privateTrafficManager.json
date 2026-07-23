@@ -2232,9 +2232,19 @@
         "target"
       ]
     },
-    "EndpointPropertiesUpdate": {
+    "EndpointUpdate": {
       "type": "object",
-      "description": "Class representing a Traffic Manager endpoint properties.",
+      "description": "The type used for update operations of the Endpoint.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EndpointUpdateProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      }
+    },
+    "EndpointUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the Endpoint.",
       "properties": {
         "target": {
           "type": "string",
@@ -2271,21 +2281,6 @@
           "description": "The health policy associated with this endpoint."
         }
       }
-    },
-    "EndpointUpdate": {
-      "type": "object",
-      "description": "Class representing a Private Traffic Manager endpoint.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/EndpointPropertiesUpdate",
-          "description": "The properties of the Private Traffic Manager endpoint."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ]
     },
     "EndpointsKind": {
       "type": "string",
@@ -2524,7 +2519,7 @@
         "intervalInSeconds": {
           "type": "integer",
           "format": "int64",
-          "description": "The monitor interval for endpoints in this profile. This is the interval at which Traffic Manager will check the health of each endpoint in this profile. Allowed values: 5, 10, or 30 seconds."
+          "description": "The monitor interval for endpoints in this profile. This is the interval at which Traffic Manager will check the health of each endpoint in this profile. Allowed values: 10 or 30 seconds."
         },
         "timeoutInSeconds": {
           "type": "integer",
@@ -2694,30 +2689,25 @@
         "probingGatewayId"
       ]
     },
-    "ProfileProbingGatewayPropertiesUpdate": {
+    "ProfileProbingGatewayUpdate": {
       "type": "object",
-      "description": "Properties of a probing gateway association with a Private Traffic Manager profile.",
+      "description": "The type used for update operations of the ProfileProbingGateway.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ProfileProbingGatewayUpdateProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      }
+    },
+    "ProfileProbingGatewayUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the ProfileProbingGateway.",
       "properties": {
         "probingGatewayId": {
           "$ref": "#/definitions/ProbingGatewayId",
           "description": "The ARM resource ID of the probing gateway."
         }
       }
-    },
-    "ProfileProbingGatewayUpdate": {
-      "type": "object",
-      "description": "Class representing a probing gateway associated with a Private Traffic Manager profile. This resource is only available when the parent profile has `customTopologyMapMode` set to `Disabled` (Basic experience).",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ProfileProbingGatewayPropertiesUpdate",
-          "description": "The properties of the probing gateway association."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ]
     },
     "ProfileProperties": {
       "type": "object",
@@ -2962,18 +2952,33 @@
     },
     "SiteUpdate": {
       "type": "object",
-      "description": "Class representing a Site.",
+      "description": "The type used for update operations of the Site.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/SiteProperties",
-          "description": "The properties of the Site."
+          "$ref": "#/definitions/SiteUpdateProperties",
+          "description": "The resource-specific properties for this resource."
         }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+      }
+    },
+    "SiteUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the Site.",
+      "properties": {
+        "probingGatewayIds": {
+          "type": "array",
+          "description": "The ARM resource ID of the probing gateway that can be used to monitor health as surrogate to the networks in the Site.",
+          "items": {
+            "$ref": "#/definitions/ProbingGatewayId"
+          }
+        },
+        "virtualNetworkIds": {
+          "type": "array",
+          "description": "The list of Network IDs that forms the Site.",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkId"
+          }
         }
-      ]
+      }
     },
     "TopologyMap": {
       "type": "object",
