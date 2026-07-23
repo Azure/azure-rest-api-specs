@@ -36,9 +36,6 @@ These settings apply only when `--tag=package-preview-2025-09` is specified on t
 ```yaml $(tag) == 'package-preview-2025-09'
 input-file:
   - preview/2025-09-09-preview/businessCases.json
-suppressions:
-  - code: OperationsAPIImplementation
-    reason: Microsoft.Migrate resource provider has one RP with multiple SDKs. Operations API is centrally implemented at the AssessmentProjects level and intentionally excluded from individual service specifications to avoid duplication across multiple SDK instances.
 ```
 
 ### Tag: package-preview-2024-03
