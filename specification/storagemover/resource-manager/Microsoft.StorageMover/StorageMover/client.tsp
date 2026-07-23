@@ -105,7 +105,8 @@ using Azure.Core;
   string[],
   "csharp"
 );
-@@alternateType(JobDefinitionProperties.crossTenantEndpointResourceId,
+@@alternateType(
+  JobDefinitionProperties.crossTenantEndpointResourceId,
   string,
   "csharp"
 );
