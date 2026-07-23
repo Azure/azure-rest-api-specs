@@ -4,6 +4,8 @@ info:
   version: virtual-public-preview
 tags:
   - name: EvaluationSuiteGenerationJobs
+  - name: State Stores
+  - name: State Store Items
   - name: Fine-Tuning
   - name: Responses Root
     description: Responses
@@ -12367,6 +12369,778 @@ paths:
       x-ms-foundry-meta:
         required_previews:
           - Skills=V1Preview
+  /storage/state_stores:
+    post:
+      operationId: createStateStore
+      summary: Create a state store
+      description: Creates a durable state store. `201` on success, `409` if `name` already exists.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - StateStores=V1Preview
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StateStore'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - State Stores
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  minLength: 1
+                  maxLength: 128
+                  description: Required. Unique within [project_id, agent_guid].
+                user_isolation:
+                  type: boolean
+                  description: Optional. Omitted -> `false` (agent-level, shared). Fixed at create.
+                  default: false
+                item_ttl_seconds:
+                  type: integer
+                  format: int32
+                  minimum: -1
+                  maximum: 2147483647
+                  description: Optional. Default 30 days (2592000). `-1` = never expire. Fixed at create.
+                  default: 2592000
+                description:
+                  type: string
+                  maxLength: 1024
+                  description: Optional free-form description.
+                tags:
+                  type: object
+                  unevaluatedProperties:
+                    type: string
+                  description: Optional string-to-string labels.
+              required:
+                - name
+      x-ms-foundry-meta:
+        required_previews:
+          - StateStores=V1Preview
+    get:
+      operationId: listStateStores
+      summary: List state stores
+      description: Lists the state stores available to the caller.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - StateStores=V1Preview
+        - name: limit
+          in: query
+          required: false
+          description: |-
+            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+            default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: |-
+            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
+            for descending order.
+          schema:
+            $ref: '#/components/schemas/PageOrder'
+          explode: false
+        - name: after
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: before
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - has_more
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/StateStore'
+                    description: The requested list of items.
+                  first_id:
+                    type: string
+                    description: The first ID represented in this list.
+                  last_id:
+                    type: string
+                    description: The last ID represented in this list.
+                  has_more:
+                    type: boolean
+                    description: A value indicating whether there are additional values available not captured in this list.
+                description: The response data for a requested list of items.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - State Stores
+      x-ms-foundry-meta:
+        required_previews:
+          - StateStores=V1Preview
+  /storage/state_stores/{state_store}:
+    get:
+      operationId: getStateStore
+      summary: Get a state store
+      description: Retrieves the specified state store. `404` if no such store exists.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - StateStores=V1Preview
+        - name: state_store
+          in: path
+          required: true
+          description: The name of the state store to retrieve.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StateStore'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - State Stores
+      x-ms-foundry-meta:
+        required_previews:
+          - StateStores=V1Preview
+    patch:
+      operationId: updateStateStore
+      summary: Update a state store
+      description: Updates the mutable metadata (`description` / `tags`) of a state store.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - StateStores=V1Preview
+        - name: state_store
+          in: path
+          required: true
+          description: The name of the state store to update.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StateStore'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - State Stores
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                  maxLength: 1024
+                  description: Optional free-form description. A present value replaces the stored one.
+                tags:
+                  type: object
+                  unevaluatedProperties:
+                    type: string
+                  description: Optional string-to-string labels. Replaced wholesale (not merged) when present.
+      x-ms-foundry-meta:
+        required_previews:
+          - StateStores=V1Preview
+    delete:
+      operationId: deleteStateStore
+      summary: Delete a state store
+      description: Deletes a state store and, cascading, every item under it. Idempotent.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - StateStores=V1Preview
+        - name: state_store
+          in: path
+          required: true
+          description: The name of the state store to delete.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeletedStateStore'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - State Stores
+      x-ms-foundry-meta:
+        required_previews:
+          - StateStores=V1Preview
+  /storage/state_stores/{state_store}/items:
+    post:
+      operationId: createStateStoreItem
+      summary: Create a state-store item
+      description: Creates an item. `409` on a duplicate `key`; `404` if the store does not exist.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - StateStores=V1Preview
+        - name: state_store
+          in: path
+          required: true
+          description: The name of the state store.
+          schema:
+            type: string
+        - name: x-ms-user-id
+          in: header
+          required: false
+          description: Trusted-only delegation header supplying the resolved end-user id for a user-isolated store.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StateStoreItemRef'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - State Store Items
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                key:
+                  type: string
+                  minLength: 1
+                  maxLength: 128
+                  description: Logical key, unique within the store. May contain `/`.
+                value:
+                  type: object
+                  unevaluatedProperties: {}
+                  description: Opaque JSON object; stored and returned verbatim.
+                tags:
+                  type: object
+                  unevaluatedProperties:
+                    type: string
+                  description: Optional labels used to filter `listKeys`.
+              required:
+                - key
+                - value
+      x-ms-foundry-meta:
+        required_previews:
+          - StateStores=V1Preview
+  /storage/state_stores/{state_store}/items/{key}:
+    put:
+      operationId: putStateStoreItem
+      summary: Put a state-store item
+      description: Idempotent create-or-replace by key. `If-Match` gives optimistic concurrency (`412` on mismatch).
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - StateStores=V1Preview
+        - name: state_store
+          in: path
+          required: true
+          description: The name of the state store.
+          schema:
+            type: string
+        - name: key
+          in: path
+          required: true
+          description: The item key.
+          schema:
+            type: string
+        - name: If-Match
+          in: header
+          required: false
+          description: '`"<etag>"` for a conditional write, or `"*"` to require the item already exists. Omit for unconditional last-write-wins.'
+          schema:
+            type: string
+        - name: x-ms-user-id
+          in: header
+          required: false
+          description: Trusted-only delegation header supplying the resolved end-user id for a user-isolated store.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StateStoreItemRef'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - State Store Items
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                value:
+                  type: object
+                  unevaluatedProperties: {}
+                  description: Opaque JSON object; stored and returned verbatim.
+                tags:
+                  type: object
+                  unevaluatedProperties:
+                    type: string
+                  description: Optional labels used to filter `listKeys`.
+              required:
+                - value
+      x-ms-foundry-meta:
+        required_previews:
+          - StateStores=V1Preview
+    get:
+      operationId: getStateStoreItem
+      summary: Get a state-store item
+      description: Retrieves the item at `key`. `404` if the key has never been written.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - StateStores=V1Preview
+        - name: state_store
+          in: path
+          required: true
+          description: The name of the state store.
+          schema:
+            type: string
+        - name: key
+          in: path
+          required: true
+          description: The item key.
+          schema:
+            type: string
+        - name: x-ms-user-id
+          in: header
+          required: false
+          description: Trusted-only delegation header supplying the resolved end-user id for a user-isolated store.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StateStoreItem'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - State Store Items
+      x-ms-foundry-meta:
+        required_previews:
+          - StateStores=V1Preview
+    delete:
+      operationId: deleteStateStoreItem
+      summary: Delete a state-store item
+      description: Deletes the item at `key`. `If-Match` gives a conditional delete (`412`). Idempotent.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - StateStores=V1Preview
+        - name: state_store
+          in: path
+          required: true
+          description: The name of the state store.
+          schema:
+            type: string
+        - name: key
+          in: path
+          required: true
+          description: The item key.
+          schema:
+            type: string
+        - name: If-Match
+          in: header
+          required: false
+          description: '`"<etag>"` for a conditional delete. Omit for unconditional delete.'
+          schema:
+            type: string
+        - name: x-ms-user-id
+          in: header
+          required: false
+          description: Trusted-only delegation header supplying the resolved end-user id for a user-isolated store.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeletedStateStoreItem'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - State Store Items
+      x-ms-foundry-meta:
+        required_previews:
+          - StateStores=V1Preview
+  /storage/state_stores/{state_store}/items:keys:
+    get:
+      operationId: listStateStoreItemKeys
+      summary: List state-store item keys
+      description: Lists item keys (keys-only projection); never returns `value`.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - StateStores=V1Preview
+        - name: state_store
+          in: path
+          required: true
+          description: The name of the state store.
+          schema:
+            type: string
+        - name: tags
+          in: query
+          required: false
+          description: Optional, repeatable tag-equality filter, e.g. `tags.version=1`. AND-combined; omit to list every key.
+          schema:
+            type: object
+            unevaluatedProperties:
+              type: string
+          explode: false
+        - name: x-ms-user-id
+          in: header
+          required: false
+          description: Trusted-only delegation header supplying the resolved end-user id for a user-isolated store.
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          description: |-
+            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+            default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: |-
+            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
+            for descending order.
+          schema:
+            $ref: '#/components/schemas/PageOrder'
+          explode: false
+        - name: after
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: before
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - has_more
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/StateStoreItemKey'
+                    description: The requested list of items.
+                  first_id:
+                    type: string
+                    description: The first ID represented in this list.
+                  last_id:
+                    type: string
+                    description: The last ID represented in this list.
+                  has_more:
+                    type: boolean
+                    description: A value indicating whether there are additional values available not captured in this list.
+                description: The response data for a requested list of items.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - State Store Items
+      x-ms-foundry-meta:
+        required_previews:
+          - StateStores=V1Preview
   /toolboxes:
     get:
       operationId: listToolboxes
@@ -17026,6 +17800,56 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - Skills=V1Preview
+    DeletedStateStore:
+      type: object
+      required:
+        - object
+        - name
+        - deleted
+      properties:
+        object:
+          type: string
+          enum:
+            - state_store
+          description: The object type, which is always 'state_store'.
+        id:
+          type: string
+          description: Present when the store existed; absent when the delete was a no-op (already gone).
+        name:
+          type: string
+          description: The name of the state store.
+        deleted:
+          type: boolean
+          description: Whether the state store was deleted. Always `true`.
+      description: Response for deleting a state store.
+      x-ms-foundry-meta:
+        required_previews:
+          - StateStores=V1Preview
+    DeletedStateStoreItem:
+      type: object
+      required:
+        - object
+        - key
+        - deleted
+      properties:
+        object:
+          type: string
+          enum:
+            - state_store.item
+          description: The object type, which is always 'state_store.item'.
+        id:
+          type: string
+          description: Present when the item existed; absent when the delete was a no-op (already gone).
+        key:
+          type: string
+          description: Logical key of the item.
+        deleted:
+          type: boolean
+          description: Whether the item was deleted. Always `true`.
+      description: Response for deleting a state-store item.
+      x-ms-foundry-meta:
+        required_previews:
+          - StateStores=V1Preview
     Deployment:
       type: object
       required:
@@ -40742,6 +41566,179 @@ components:
           type: string
           description: Sku tier
       description: Sku information
+    StateStore:
+      type: object
+      required:
+        - object
+        - id
+        - name
+        - user_isolation
+        - item_ttl_seconds
+        - created_at
+        - updated_at
+      properties:
+        object:
+          type: string
+          enum:
+            - state_store
+          description: The object type, which is always 'state_store'.
+        id:
+          type: string
+          description: Server-assigned, read-only identifier. Not used for addressing (the `name` is).
+        name:
+          type: string
+          minLength: 1
+          maxLength: 128
+          description: Caller-chosen logical name. Unique within [project_id, agent_guid]. May contain `/` as a hierarchy separator. Immutable.
+        user_isolation:
+          type: boolean
+          description: Whether item operations are partitioned per resolved user. Omitted at create -> `false`. Immutable.
+          default: false
+        item_ttl_seconds:
+          type: integer
+          format: int32
+          minimum: -1
+          maximum: 2147483647
+          description: Store-wide default TTL (seconds) inherited by every item, write-sliding per item. `-1` = never expire. Immutable.
+          default: 2592000
+        description:
+          type: string
+          maxLength: 1024
+          description: Optional free-form description. Mutable via `updateStateStore`.
+        tags:
+          type: object
+          unevaluatedProperties:
+            type: string
+          description: Optional string-to-string labels. Mutable (replaced wholesale) via `updateStateStore`.
+        created_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: The Unix timestamp (seconds) when the store was created.
+        updated_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: The Unix timestamp (seconds) when the store metadata was last updated.
+      description: A first-class, explicitly-created durable key-value store.
+      x-ms-foundry-meta:
+        required_previews:
+          - StateStores=V1Preview
+    StateStoreItem:
+      type: object
+      required:
+        - object
+        - id
+        - key
+        - value
+        - etag
+        - created_at
+        - updated_at
+      properties:
+        object:
+          type: string
+          enum:
+            - state_store.item
+          description: The object type, which is always 'state_store.item'.
+        id:
+          type: string
+          description: Server-assigned, read-only identifier. Not used for addressing (the `key` is).
+        key:
+          type: string
+          minLength: 1
+          maxLength: 128
+          description: Logical key, unique within the store. May contain `/`.
+        value:
+          type: object
+          unevaluatedProperties: {}
+          description: Opaque JSON object; stored and returned verbatim. <= 1 MB serialized inline.
+        tags:
+          type: object
+          unevaluatedProperties:
+            type: string
+          description: Optional labels used to filter `listKeys`. Replaced wholesale on write.
+        etag:
+          type: string
+          description: Optimistic-concurrency token for this item; also echoed in the `ETag` response header.
+        created_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: The Unix timestamp (seconds) when the item was created.
+        updated_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: The Unix timestamp (seconds) when the item was last updated.
+      description: A single key -> value record within a state store.
+      x-ms-foundry-meta:
+        required_previews:
+          - StateStores=V1Preview
+    StateStoreItemKey:
+      type: object
+      required:
+        - object
+        - id
+        - key
+        - etag
+        - created_at
+        - updated_at
+      properties:
+        object:
+          type: string
+          enum:
+            - state_store.item
+          description: The object type, which is always 'state_store.item'.
+        id:
+          type: string
+          description: Server-assigned, read-only identifier.
+        key:
+          type: string
+          description: Logical key of the item.
+        tags:
+          type: object
+          unevaluatedProperties:
+            type: string
+          description: Optional labels associated with the item.
+        etag:
+          type: string
+          description: Optimistic-concurrency token for this item.
+        created_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: The Unix timestamp (seconds) when the item was created.
+        updated_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: The Unix timestamp (seconds) when the item was last updated.
+      description: A keys-only projection of a state-store item (never includes the value).
+      x-ms-foundry-meta:
+        required_previews:
+          - StateStores=V1Preview
+    StateStoreItemRef:
+      type: object
+      required:
+        - object
+        - id
+        - key
+        - etag
+        - created_at
+        - updated_at
+      properties:
+        object:
+          type: string
+          enum:
+            - state_store.item
+          description: The object type, which is always 'state_store.item'.
+        id:
+          type: string
+          description: Server-assigned, read-only identifier.
+        key:
+          type: string
+          description: Logical key of the item.
+        etag:
+          type: string
+          description: Optimistic-concurrency token; also echoed in the `ETag` response header.
+        created_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: The Unix timestamp (seconds) when the item was created.
+        updated_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: The Unix timestamp (seconds) when the item was last updated.
+      description: Server metadata for a written state-store item (no value echoed back).
+      x-ms-foundry-meta:
+        required_previews:
+          - StateStores=V1Preview
     StructuredInputDefinition:
       type: object
       properties:
