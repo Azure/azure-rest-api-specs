@@ -11009,6 +11009,138 @@ model QueryMetricProperties {
 }
 
 /**
+ * Properties of a query execution statistics.
+ */
+@added(Versions.v2025_08_01_preview)
+model QueryStatisticsPropertiesV2 {
+  /**
+   * Database name of the database in which this query was executed.
+   */
+  @visibility(Lifecycle.Read)
+  databaseName?: string;
+
+  /**
+   * Unique query id (unique within one database).
+   */
+  @visibility(Lifecycle.Read)
+  queryId?: string;
+
+  /**
+   * Query Hash identifies query content
+   */
+  @visibility(Lifecycle.Read)
+  queryHash?: string;
+
+  /**
+   * The start time for the metric (ISO-8601 format).
+   */
+  @visibility(Lifecycle.Read)
+  startTime?: string;
+
+  /**
+   * The end time for the metric (ISO-8601 format).
+   */
+  @visibility(Lifecycle.Read)
+  endTime?: string;
+
+  /**
+   * List of intervals with appropriate metric data
+   */
+  @identifiers(#[])
+  intervals?: QueryMetricIntervalV2[];
+}
+
+/**
+ * Properties of a query metrics interval.
+ */
+@added(Versions.v2025_08_01_preview)
+model QueryMetricIntervalV2 {
+  /**
+   * The start time for the metric interval (ISO-8601 format).
+   */
+  @visibility(Lifecycle.Read)
+  intervalStartTime?: string;
+
+  /**
+   * Interval type (length).
+   */
+  @visibility(Lifecycle.Read)
+  intervalType?: QueryTimeGrainType;
+
+  /**
+   * Execution count of a query in this interval.
+   */
+  @visibility(Lifecycle.Read)
+  executionCount?: int64;
+
+  /**
+   * List of metric objects for this interval
+   */
+  @identifiers(#[])
+  metrics?: QueryMetricPropertiesV2[];
+}
+
+/**
+ * Properties of a topquery metric in one interval.
+ */
+@added(Versions.v2025_08_01_preview)
+model QueryMetricPropertiesV2 {
+  /**
+   * The name information for the metric.
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * The UI appropriate name for the metric.
+   */
+  @visibility(Lifecycle.Read)
+  displayName?: string;
+
+  /**
+   * The unit of the metric.
+   */
+  @visibility(Lifecycle.Read)
+  unit?: QueryMetricUnitType;
+
+  /**
+   * The value of the metric.
+   */
+  @visibility(Lifecycle.Read)
+  value?: float64;
+
+  /**
+   * Metric value when min() aggregate function is used over the interval.
+   */
+  @visibility(Lifecycle.Read)
+  min?: float64;
+
+  /**
+   * Metric value when max() aggregate function is used over the interval.
+   */
+  @visibility(Lifecycle.Read)
+  max?: float64;
+
+  /**
+   * Metric value when avg() aggregate function is used over the interval.
+   */
+  @visibility(Lifecycle.Read)
+  avg?: float64;
+
+  /**
+   * Metric value when sum() aggregate function is used over the interval.
+   */
+  @visibility(Lifecycle.Read)
+  sum?: float64;
+
+  /**
+   * Metric value when stdev aggregate function is used over the interval.
+   */
+  @visibility(Lifecycle.Read)
+  stdev?: float64;
+}
+
+/**
  * The managed database's restore details properties.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -12816,8 +12948,81 @@ model TopQueries {
   /**
    * List of top resource consuming queries with appropriate metric data
    */
+  @typeChangedFrom(Versions.v2025_08_01_preview, QueryStatisticsProperties[])
   @identifiers(#[])
-  queries?: QueryStatisticsProperties[];
+  queries?: QueryStatisticsPropertiesV2[];
+}
+
+/**
+ * A list of top resource consuming databases on managed instance
+ */
+@added(Versions.v2025_08_01_preview)
+model TopDatabasesListResult is Azure.Core.Page<TopDatabases>;
+
+/**
+ * Top resource consuming databases on a managed instance with the associated metric data for the observed period.
+ */
+@added(Versions.v2025_08_01_preview)
+model TopDatabases {
+  /**
+   * Requested number of top databases.
+   */
+  @visibility(Lifecycle.Read)
+  numberOfDatabases?: int32;
+
+  /**
+   * Aggregation function used to calculate query metrics.
+   */
+  @visibility(Lifecycle.Read)
+  aggregationFunction?: string;
+
+  /**
+   * Metric used to rank databases.
+   */
+  @visibility(Lifecycle.Read)
+  observationMetric?: string;
+
+  /**
+   * Interval type (length).
+   */
+  @visibility(Lifecycle.Read)
+  intervalType?: QueryTimeGrainType;
+
+  /**
+   * The start time for the metric (ISO-8601 format).
+   */
+  @visibility(Lifecycle.Read)
+  startTime?: string;
+
+  /**
+   * The end time for the metric (ISO-8601 format).
+   */
+  @visibility(Lifecycle.Read)
+  endTime?: string;
+
+  /**
+   * List of top resource consuming databases with appropriate metric data
+   */
+  @identifiers(#[])
+  databases?: DatabaseStatisticsProperties[];
+}
+
+/**
+ * Properties of a database consumption statistics.
+ */
+@added(Versions.v2025_08_01_preview)
+model DatabaseStatisticsProperties {
+  /**
+   * Database name of the database in which this query was executed.
+   */
+  @visibility(Lifecycle.Read)
+  databaseName?: string;
+
+  /**
+   * List of intervals with appropriate metric data
+   */
+  @identifiers(#[])
+  intervals?: QueryMetricIntervalV2[];
 }
 
 /**
