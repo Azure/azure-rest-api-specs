@@ -11,7 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Microsoft.Common;
 
-namespace Microsoft.AccessReview;
+namespace Microsoft.AttributeNamespaces;
 // FIXME: AttributeNamespace has no properties property
 /**
  * An attribute namespace resource.

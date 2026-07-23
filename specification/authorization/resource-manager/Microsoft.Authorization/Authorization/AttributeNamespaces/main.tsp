@@ -29,7 +29,7 @@ using TypeSpec.Versioning;
 @service(#{ title: "AuthorizationManagementClient" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-namespace Microsoft.AccessReview;
+namespace Microsoft.AttributeNamespaces;
 
 /**
  * The available API versions.
