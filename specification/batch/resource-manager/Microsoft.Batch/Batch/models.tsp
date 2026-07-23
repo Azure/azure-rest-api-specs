@@ -2389,12 +2389,12 @@ model VirtualMachineConfiguration {
 @added(Versions.v2026_08_01)
 model VirtualMachineSkuProfile {
   /**
-   * The list of VM sizes (1 to 5) that may be allocated for the pool. All sizes must share the same vCPU count and VM family.
+   * The list of VM sizes (1 to 5) that may be allocated for the pool. All sizes must share the same vCPU count and VM family. This must be specified when the vmSkuProfile is provided during pool creation.
    */
   @minItems(1)
   @maxItems(5)
   @identifiers(#["name"])
-  vmSizes: VirtualMachineSkuProfileVMSize[];
+  vmSizes?: VirtualMachineSkuProfileVMSize[];
 
   /**
    * The allocation strategy used to select VM sizes from vmSizes. Defaults to LowestPrice when not specified.

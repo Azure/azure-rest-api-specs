@@ -7149,7 +7149,7 @@
       "properties": {
         "vmSizes": {
           "type": "array",
-          "description": "The list of VM sizes (1 to 5) that may be allocated for the pool. All sizes must share the same vCPU count and VM family.",
+          "description": "The list of VM sizes (1 to 5) that may be allocated for the pool. All sizes must share the same vCPU count and VM family. This must be specified when the vmSkuProfile is provided during pool creation.",
           "minItems": 1,
           "maxItems": 5,
           "items": {
@@ -7163,10 +7163,7 @@
           "$ref": "#/definitions/VirtualMachineSkuAllocationStrategy",
           "description": "The allocation strategy used to select VM sizes from vmSizes. Defaults to LowestPrice when not specified."
         }
-      },
-      "required": [
-        "vmSizes"
-      ]
+      }
     },
     "VirtualMachineSkuProfileVMSize": {
       "type": "object",
