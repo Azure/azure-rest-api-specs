@@ -1392,10 +1392,12 @@ namespace VoiceLiveClient {
 @@access(OpenAI.Filters, Access.internal);
 @@access(OpenAI.FunctionShellToolParam, Access.internal);
 @@access(OpenAI.FunctionShellToolParamEnvironment, Access.internal);
-@@access(OpenAI.FunctionShellToolParamEnvironmentContainerReferenceParam,
+@@access(
+  OpenAI.FunctionShellToolParamEnvironmentContainerReferenceParam,
   Access.internal
 );
-@@access(OpenAI.FunctionShellToolParamEnvironmentLocalEnvironmentParam,
+@@access(
+  OpenAI.FunctionShellToolParamEnvironmentLocalEnvironmentParam,
   Access.internal
 );
 @@access(OpenAI.FunctionTool, Access.internal);
