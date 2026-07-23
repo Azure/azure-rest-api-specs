@@ -10,6 +10,7 @@ emit:
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"
 
 options:
   "@azure-tools/typespec-autorest":
@@ -38,6 +39,10 @@ options:
     generate-tests: false
     generate-samples: false
     include-api-view-properties: false
+  "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: Azure.Security.KeyVault.Certificates
+    model-namespace: true
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/keyvault-certificates"
     experimental-extensible-enums: true
@@ -58,7 +63,7 @@ options:
     crate-name: "azure_security_keyvault_certificates"
     crate-version: "0.0.1"
     emitter-output-dir: "{output-dir}/{service-dir}/{crate-name}"
-    api-version: "2025-07-01"
+    api-version: "2026-03-01-preview"
     omit-constructors: true
   "@azure-tools/typespec-client-generator-cli":
     additionalDirectories:

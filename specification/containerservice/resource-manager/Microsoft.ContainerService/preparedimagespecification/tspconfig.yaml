@@ -1,6 +1,6 @@
 parameters:
   "service-dir":
-    default: "sdk/containerservicepreparedimagespecification"
+    default: "sdk/containerservicepreparedimgspec"
 emit:
   - "@azure-tools/typespec-autorest"
 output-dir: "{project-root}"
@@ -13,17 +13,21 @@ options:
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     examples-dir: "{project-root}/examples"
     use-read-only-status-schema: true
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.ContainerServicePreparedImgSpec"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-java":
-    namespace: "com.azure.resourcemanager.containerservice.preparedimgspec"
-    package-dir: "azure-resourcemanager-containerservice-preparedimgspec"
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-containerservice-preparedimgspec"
+    service-dir: "sdk/containerservice"
+    namespace: "com.azure.resourcemanager.containerservicepreparedimgspec"
+    package-dir: "azure-resourcemanager-containerservicepreparedimgspec"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-containerservicepreparedimgspec"
     service-name: "Container Service Prepared Image Specification"
     flavor: azure
   "@azure-tools/typespec-go":
-    service-dir: "sdk/resourcemanager/containerservicepreparedimagespecification"
-    package-dir: "armcontainerservicepreparedimagespecification"
-    emitter-output-dir: "{output-dir}/{service-dir}/armcontainerservicepreparedimagespecification"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armcontainerservicepreparedimagespecification"
+    service-dir: "sdk/resourcemanager/containerservicepreparedimgspec"
+    package-dir: "armcontainerservicepreparedimgspec"
+    emitter-output-dir: "{output-dir}/{service-dir}/armcontainerservicepreparedimgspec"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armcontainerservicepreparedimgspec"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
@@ -31,23 +35,21 @@ options:
     head-as-boolean: true
     inject-spans: true
   "@azure-tools/typespec-python":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-containerservicepreparedimagespecification"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-containerservicepreparedimgspec"
     flavor: "azure"
-    namespace: "azure.mgmt.containerservicepreparedimagespecification"
+    namespace: "azure.mgmt.containerservicepreparedimgspec"
     service-dir: "sdk/containerservice"
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-ts":
     service-dir: "sdk/containerservice"
-    package-dir: "arm-containerservicepreparedimagespecification"
+    package-dir: "arm-containerservicepreparedimgspec"
     flavor: azure
     experimental-extensible-enums: true
-    emitter-output-dir: "{output-dir}/{service-dir}/arm-containerservicepreparedimagespecification"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-containerservicepreparedimgspec"
     package-details:
-      name: "@azure/arm-containerservicepreparedimagespecification"
-  "@azure-typespec/http-client-csharp-mgmt":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    namespace: Azure.ResourceManager.ContainerServicePreparedImageSpecification
+      name: "@azure/arm-containerservicepreparedimgspec"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"

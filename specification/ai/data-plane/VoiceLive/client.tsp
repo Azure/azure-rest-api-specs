@@ -3,6 +3,19 @@ import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 
+@@clientName(VoiceLive.AzureRealtimeNativeVoice.type, "Kind", "csharp");
+@@clientName(
+  VoiceLive.RequestSession.parallel_tool_calls,
+  "AllowParallelToolCalls",
+  "csharp"
+);
+@@clientName(
+  VoiceLive.ResponseSession.parallel_tool_calls,
+  "AllowParallelToolCalls",
+  "csharp"
+);
+@@clientName(VoiceLive.ResponseSession.expires_at, "ExpiresOn", "csharp");
+
 @@access(VoiceLive.ClientEventSessionUpdate, Access.public, "python");
 @@access(VoiceLive.ClientEventInputAudioBufferAppend, Access.public, "python");
 @@access(VoiceLive.ClientEventInputAudioBufferCommit, Access.public, "python");
@@ -634,6 +647,7 @@ using Azure.ClientGenerator.Core;
 );
 @@alternateType(VoiceLive.RequestImageContentPart.image_url, url, "csharp");
 @@alternateType(VoiceLive.RequestSession.turn_detection, unknown, "csharp");
+@@alternateType(VoiceLive.MCPServer.server_url, url, "csharp");
 
 @@access(VoiceLive.ClientEventSessionUpdate, Access.public, "java");
 @@access(VoiceLive.ClientEventInputAudioBufferAppend, Access.public, "java");

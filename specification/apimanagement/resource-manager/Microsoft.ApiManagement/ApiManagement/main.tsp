@@ -78,6 +78,7 @@ import "./UserContract.tsp";
 import "./ApiManagementWorkspaceLinksResource.tsp";
 import "./WorkspaceContract.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

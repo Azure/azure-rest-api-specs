@@ -3730,6 +3730,12 @@ model OptionalServices {
    * The name of custom location.
    */
   customLocation?: string;
+
+  /**
+   * Captures the customer's intent to enable or disable Confidential VM (CVM) support on the AzureStackHCI Cluster.
+   */
+  @added(Versions.v2026_05_01_preview)
+  confidentialVmIntent?: ConfidentialVmIntent = ConfidentialVmIntent.Disable;
 }
 
 /**
@@ -7316,13 +7322,13 @@ model EdgeMachineWorkloadInventoryItem {
    * Configured virtual processor count from Hyper-V.
    */
   @visibility(Lifecycle.Read)
-  virtualProcessorCount?: int32;
+  virtualProcessorCount?: string;
 
   /**
    * Maximum memory the VM can consume, in bytes.
    */
   @visibility(Lifecycle.Read)
-  memoryInBytes?: int64;
+  memoryInBytes?: string;
 }
 
 /**
@@ -8411,6 +8417,7 @@ model OsImageProperties {
   /**
    * Represents composed image iso download url of a os image.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   composedImageIsoUrl?: string;
 
   /**
@@ -8466,6 +8473,7 @@ model PlatformPayload {
   /**
    * Represents url of a platform update payload.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   payloadUrl?: string;
 
   /**
@@ -8822,6 +8830,24 @@ model EdgeMachineGpuProperties {
    */
   @visibility(Lifecycle.Read)
   partitionDetails?: GpuPartitionDetails;
+
+  /**
+   * The type of the accelerator.
+   */
+  @visibility(Lifecycle.Read)
+  acceleratorType?: string;
+
+  /**
+   * The memory model of the GPU. Possible values are 'Dedicated VRAM', 'Unified (Shared System Memory)', and 'Unified (SoC LPDDR)'.
+   */
+  @visibility(Lifecycle.Read)
+  memoryModel?: string;
+
+  /**
+   * The total memory of the GPU in bytes.
+   */
+  @visibility(Lifecycle.Read)
+  totalMemoryInBytes?: string;
 }
 
 /**
@@ -9857,6 +9883,10 @@ model DiskReportedProperties {
   /** The manufacturer of the disk. */
   @visibility(Lifecycle.Read)
   manufacturer?: string;
+
+  /** Indicates whether the disk manufacturer is supported for the validated solution recipe ring. Defaults to true. Set to false when the SAN vendor is not in the allowed vendor list for the current ring. */
+  @visibility(Lifecycle.Read)
+  isSupported?: boolean;
 
   /** Serial number. */
   @visibility(Lifecycle.Read)

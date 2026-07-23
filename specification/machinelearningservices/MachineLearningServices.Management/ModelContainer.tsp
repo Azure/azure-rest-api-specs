@@ -15,8 +15,10 @@ namespace Microsoft.MachineLearningServices;
  * Azure Resource Manager resource envelope.
  */
 @parentResource(Registry)
-model ModelContainer
-  is Azure.ResourceManager.ProxyResource<ModelContainerProperties, false> {
+model ModelContainer is Azure.ResourceManager.ProxyResource<
+  ModelContainerProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = ModelContainer,
     KeyName = "modelName",
@@ -48,7 +50,9 @@ interface ModelContainerOps
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
         modelName: string,
-      }
+      },
+      ErrorResponse,
+      "MachineLearningRegistryModelContainer"
     > {}
 
 @armResourceOperations
@@ -140,7 +144,9 @@ interface ModelContainerOperationGroupOps
         @segment("models")
         @key
         name: string,
-      }
+      },
+      ErrorResponse,
+      "MachineLearningModelContainer"
     > {}
 
 @armResourceOperations

@@ -60,9 +60,8 @@ op ArmResourceActionNoContentAsyncNoRequestBody<
 > is ArmResourceActionAsyncBase<
   TResource,
   void,
-
-    | ArmAcceptedLroResponse
-    | ArmNoContentResponse<"Action completed successfully.">,
+  | ArmAcceptedLroResponse
+  | ArmNoContentResponse<"Action completed successfully.">,
   TBaseParameters
 >;
 

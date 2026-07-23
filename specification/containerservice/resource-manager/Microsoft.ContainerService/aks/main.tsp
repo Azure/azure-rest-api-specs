@@ -23,6 +23,7 @@ import "./MeshUpgradeProfile.tsp";
 import "./MaintenanceConfiguration.tsp";
 import "./MaintenanceWindow.tsp";
 import "./ManagedNamespace.tsp";
+import "./FlexNodeBootstrap.tsp";
 import "./AgentPool.tsp";
 import "./AgentPoolUpgradeProfile.tsp";
 import "./Machine.tsp";
@@ -36,6 +37,8 @@ import "./JWTAuthenticator.tsp";
 import "./MeshMembership.tsp";
 import "./Operations.tsp";
 import "./LocationRoutes.tsp";
+import "./AlertConfiguration.tsp";
+import "./client.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
@@ -80,8 +83,13 @@ enum Versions {
   v2026_04_01: "2026-04-01",
 
   /**
-   * The 2026-04-02-preview API version.
+   * The 2026-05-01 API version.
+   */
+  v2026_05_01: "2026-05-01",
+
+  /**
+   * The 2026-05-02-preview API version.
    */
   @previewVersion
-  v2026_04_02_preview: "2026-04-02-preview",
+  v2026_05_02_preview: "2026-05-02-preview",
 }

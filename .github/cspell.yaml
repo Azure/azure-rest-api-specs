@@ -5,6 +5,7 @@ ignorePaths:
   - CODEOWNERS*
   - arm-leases/**
   - policies/**
+  - protected-labels.yml
   - workflows/*.lock.yml
   - workflows/**/*.md
 words:
@@ -63,7 +64,11 @@ overrides:
     words:
       - foos
 
-  - filename: "**/.github/skills/evals/arm-api-reviewer/evaluate/*.yaml"
+  - filename: "**/.github/agents/arm-api-reviewer.agent.md"
+    words:
+      - reposting
+
+  - filename: "**/.github/skills/evals/arm-api-reviewer/vally/*.yaml"
     words:
       - classsvc
       - cleansvc

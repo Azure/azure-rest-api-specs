@@ -388,6 +388,7 @@ model PricesheetDownloadProperties {
   /**
    * The link (url) to download the pricesheet.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   downloadUrl?: string;
 
@@ -3932,6 +3933,7 @@ model DownloadProperties {
   /**
    * The link (url) to download the pricesheet.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   downloadUrl?: string;
 

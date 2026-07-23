@@ -14,8 +14,10 @@ using TypeSpec.Versioning;
 namespace Microsoft.Datadog;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model DatadogMonitorResource
-  is Azure.ResourceManager.TrackedResource<MonitorProperties, true> {
+model DatadogMonitorResource is Azure.ResourceManager.TrackedResource<
+  MonitorProperties,
+  true
+> {
   ...ResourceNameParameter<
     Resource = DatadogMonitorResource,
     KeyName = "monitorName",
