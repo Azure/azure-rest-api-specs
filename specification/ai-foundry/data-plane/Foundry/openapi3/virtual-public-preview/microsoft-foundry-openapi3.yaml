@@ -17090,7 +17090,48 @@ components:
           type: boolean
           description: When true, the LLM judge always scores this dimension regardless of relevance (skips applicability assessment). The service-generated general quality/policy dimension has this set to true and is non-editable. Users may set this on their own custom dimensions. The service defaults to `false` if a value is not specified by the caller.
           default: false
+        metadata:
+          $ref: '#/components/schemas/DimensionMetadata'
+          description: Service-generated version lineage for this dimension. Present only when lineage tracking is available.
+          readOnly: true
       description: A single dimension — one independent, measurable quality dimension within a rubric evaluator's scoring blueprint.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
+    DimensionChangeKind:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - new
+            - carried_over
+            - amplified
+            - regenerated
+            - human_edited
+      description: How a rubric dimension changed relative to the preceding evaluator version.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
+    DimensionMetadata:
+      type: object
+      required:
+        - origin_version
+        - last_modified_version
+        - change_kind
+      properties:
+        origin_version:
+          type: string
+          description: The evaluator version in which the dimension was first introduced, or the earliest version known after lineage tracking began.
+        last_modified_version:
+          type: string
+          description: The evaluator version containing the most recent substantive change to the dimension.
+        change_kind:
+          $ref: '#/components/schemas/DimensionChangeKind'
+          description: How the dimension changed relative to the preceding evaluator version.
+        change_detail:
+          type: string
+          description: A bounded service-generated explanation of the version transition.
+      description: Service-generated version lineage for a rubric dimension.
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
@@ -40186,9 +40227,65 @@ components:
           maximum: 1
           description: Pass/fail threshold for the aggregate rubric score, on the same normalized 0.0-1.0 scale as the emitted `score`. When the runtime weighted average meets or exceeds this value, the result is `pass`. Defaults to 0.5 (equivalent to a raw 1-5 weighted average of 3.0). The 'any dimension scored 1 → fail' rule still applies regardless of this threshold.
           default: 0.5
+        health:
+          $ref: '#/components/schemas/RubricHealth'
+          description: Service-generated rubric health. Present only when health computation is enabled and at least one signal is available.
+          readOnly: true
+        superseded_dimensions:
+          type: array
+          items:
+            $ref: '#/components/schemas/SupersededDimension'
+          description: Dimensions from the preceding evaluator version that are not present in this rubric. Present only when version lineage is available.
+          readOnly: true
       allOf:
         - $ref: '#/components/schemas/EvaluatorDefinition'
       description: Rubric-based evaluator definition — stores dimensions produced by the generate API. Used for both quality and safety evaluators.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
+    RubricHealth:
+      type: object
+      properties:
+        diversity:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 1
+          description: Normalized non-redundancy among rubric dimensions. Higher values indicate greater diversity.
+        coverage:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 1
+          description: Normalized coverage of concepts found in the evaluator-generation sources.
+        negative_vs_positive:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 1
+          description: Failure-path coverage normalized against the service's configured target fraction. A value of 1.0 means the target was met or exceeded.
+        overall:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 1
+          description: Normalized aggregate health score. Omitted when required component signals are unavailable.
+        confidence:
+          $ref: '#/components/schemas/RubricHealthConfidence'
+          description: The completeness of the evidence used to compute the health signals.
+      description: Service-generated health signals for a rubric evaluator.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
+    RubricHealthConfidence:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - low
+            - med
+            - high
+      description: The completeness of the evidence used to compute rubric health.
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
@@ -40797,6 +40894,22 @@ components:
           description: The structured output captured during the response.
       allOf:
         - $ref: '#/components/schemas/OpenAI.OutputItem'
+    SupersededDimension:
+      type: object
+      required:
+        - id
+        - reason
+      properties:
+        id:
+          type: string
+          description: The stable identifier of the superseded dimension.
+        reason:
+          type: string
+          description: A bounded service-generated reason why the dimension was superseded.
+      description: A dimension from the preceding evaluator version that is not present in the current rubric.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     SyntheticDataGenerationPreviewEvalRunDataSource:
       type: object
       required:

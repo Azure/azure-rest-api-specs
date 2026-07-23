@@ -145,6 +145,99 @@ model Dimension {
 
   @doc("When true, the LLM judge always scores this dimension regardless of relevance (skips applicability assessment). The service-generated general quality/policy dimension has this set to true and is non-editable. Users may set this on their own custom dimensions. The service defaults to `false` if a value is not specified by the caller.")
   always_applicable?: boolean = false;
+
+  @doc("Service-generated version lineage for this dimension. Present only when lineage tracking is available.")
+  @visibility(Lifecycle.Read)
+  metadata?: DimensionMetadata;
+}
+
+@doc("How a rubric dimension changed relative to the preceding evaluator version.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+union DimensionChangeKind {
+  string,
+
+  @doc("The dimension was introduced in this evaluator version.")
+  new: "new",
+
+  @doc("The generated dimension was preserved without a substantive change.")
+  carried_over: "carried_over",
+
+  @doc("The generated dimension retained its meaning and received a higher weight.")
+  amplified: "amplified",
+
+  @doc("The generated dimension was substantively changed.")
+  regenerated: "regenerated",
+
+  @doc("The dimension is owned by a human edit and must be preserved during selective regeneration.")
+  human_edited: "human_edited",
+}
+
+@doc("Service-generated version lineage for a rubric dimension.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+model DimensionMetadata {
+  @doc("The evaluator version in which the dimension was first introduced, or the earliest version known after lineage tracking began.")
+  origin_version: string;
+
+  @doc("The evaluator version containing the most recent substantive change to the dimension.")
+  last_modified_version: string;
+
+  @doc("How the dimension changed relative to the preceding evaluator version.")
+  change_kind: DimensionChangeKind;
+
+  @doc("A bounded service-generated explanation of the version transition.")
+  change_detail?: string;
+}
+
+@doc("A dimension from the preceding evaluator version that is not present in the current rubric.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+model SupersededDimension {
+  @doc("The stable identifier of the superseded dimension.")
+  id: string;
+
+  @doc("A bounded service-generated reason why the dimension was superseded.")
+  reason: string;
+}
+
+@doc("The completeness of the evidence used to compute rubric health.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+union RubricHealthConfidence {
+  string,
+
+  @doc("The health signals are incomplete or insufficiently supported.")
+  low: "low",
+
+  @doc("The health signals have sufficient structural evidence but limited empirical support.")
+  med: "med",
+
+  @doc("The health signals include strong supporting evidence.")
+  high: "high",
+}
+
+@doc("Service-generated health signals for a rubric evaluator.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+model RubricHealth {
+  @doc("Normalized non-redundancy among rubric dimensions. Higher values indicate greater diversity.")
+  @minValue(0.0)
+  @maxValue(1.0)
+  diversity?: float32;
+
+  @doc("Normalized coverage of concepts found in the evaluator-generation sources.")
+  @minValue(0.0)
+  @maxValue(1.0)
+  coverage?: float32;
+
+  @doc("Failure-path coverage normalized against the service's configured target fraction. A value of 1.0 means the target was met or exceeded.")
+  @minValue(0.0)
+  @maxValue(1.0)
+  negative_vs_positive?: float32;
+
+  @doc("Normalized aggregate health score. Omitted when required component signals are unavailable.")
+  @minValue(0.0)
+  @maxValue(1.0)
+  overall?: float32;
+
+  @doc("The completeness of the evidence used to compute the health signals.")
+  confidence?: RubricHealthConfidence;
 }
 
 @doc("Rubric-based evaluator definition — stores dimensions produced by the generate API. Used for both quality and safety evaluators.")
@@ -159,6 +252,14 @@ model RubricBasedEvaluatorDefinition extends EvaluatorDefinition {
   @minValue(0.0)
   @maxValue(1.0)
   pass_threshold?: float32 = 0.5;
+
+  @doc("Service-generated rubric health. Present only when health computation is enabled and at least one signal is available.")
+  @visibility(Lifecycle.Read)
+  health?: RubricHealth;
+
+  @doc("Dimensions from the preceding evaluator version that are not present in this rubric. Present only when version lineage is available.")
+  @visibility(Lifecycle.Read)
+  superseded_dimensions?: SupersededDimension[];
 }
 
 @doc("Endpoint-based evaluator definition. The customer owns and hosts an HTTP endpoint that implements the evaluation contract. The evaluator references a Project Connection by name; the connection stores the endpoint URL and credentials (API Key or Entra ID). At execution time, the service resolves the connection to obtain the endpoint URL and authentication details, then calls the endpoint for each evaluation row.")
