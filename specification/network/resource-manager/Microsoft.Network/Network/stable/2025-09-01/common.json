@@ -4513,7 +4513,8 @@
         "Standard",
         "Premium",
         "Basic",
-        "Local"
+        "Local",
+        "MultiCloud"
       ],
       "x-ms-enum": {
         "name": "ExpressRouteCircuitSkuTier",
@@ -4538,6 +4539,11 @@
             "name": "Local",
             "value": "Local",
             "description": "Local"
+          },
+          {
+            "name": "MultiCloud",
+            "value": "MultiCloud",
+            "description": "MultiCloud tier for cross-cloud connectivity."
           }
         ]
       }
@@ -4586,6 +4592,78 @@
             "name": "Secondary",
             "value": "Secondary",
             "description": "Secondary link."
+          }
+        ]
+      }
+    },
+    "ExpressRouteLagBillingType": {
+      "type": "string",
+      "description": "The billing type of the ExpressRouteLag resource.",
+      "enum": [
+        "MeteredData",
+        "UnlimitedData"
+      ],
+      "x-ms-enum": {
+        "name": "ExpressRouteLagBillingType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "MeteredData",
+            "value": "MeteredData",
+            "description": "Metered data transfer billing."
+          },
+          {
+            "name": "UnlimitedData",
+            "value": "UnlimitedData",
+            "description": "Unlimited data transfer billing."
+          }
+        ]
+      }
+    },
+    "ExpressRouteLagEncapsulation": {
+      "type": "string",
+      "description": "Encapsulation method on LAG.",
+      "enum": [
+        "Dot1Q",
+        "QinQ"
+      ],
+      "x-ms-enum": {
+        "name": "ExpressRouteLagEncapsulation",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Dot1Q",
+            "value": "Dot1Q",
+            "description": "IEEE 802.1Q encapsulation."
+          },
+          {
+            "name": "QinQ",
+            "value": "QinQ",
+            "description": "IEEE 802.1ad encapsulation."
+          }
+        ]
+      }
+    },
+    "ExpressRouteLagLacpTimer": {
+      "type": "string",
+      "description": "LACP timer configuration.",
+      "enum": [
+        "Fast",
+        "Slow"
+      ],
+      "x-ms-enum": {
+        "name": "ExpressRouteLagLacpTimer",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Fast",
+            "value": "Fast",
+            "description": "Fast LACP timer (30 seconds)."
+          },
+          {
+            "name": "Slow",
+            "value": "Slow",
+            "description": "Slow LACP timer (90 seconds)."
           }
         ]
       }
@@ -7340,6 +7418,36 @@
       },
       "x-ms-azure-resource": true
     },
+    "ResiliencyLevel": {
+      "type": "string",
+      "description": "The resiliency level of the ExpressRoute circuit.",
+      "enum": [
+        "Standard",
+        "High",
+        "Maximum"
+      ],
+      "x-ms-enum": {
+        "name": "ResiliencyLevel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "Standard resiliency level."
+          },
+          {
+            "name": "High",
+            "value": "High",
+            "description": "High resiliency level."
+          },
+          {
+            "name": "Maximum",
+            "value": "Maximum",
+            "description": "Maximum resiliency level."
+          }
+        ]
+      }
+    },
     "ResiliencyModel": {
       "type": "string",
       "description": "Property to indicate if the Express Route Gateway has resiliency model of MultiHomed or SingleHomed",
@@ -7971,7 +8079,8 @@
         "NotProvisioned",
         "Provisioning",
         "Provisioned",
-        "Deprovisioning"
+        "Deprovisioning",
+        "DeProvisioned"
       ],
       "x-ms-enum": {
         "name": "ServiceProviderProvisioningState",
@@ -7996,6 +8105,11 @@
             "name": "Deprovisioning",
             "value": "Deprovisioning",
             "description": "Deprovisioning"
+          },
+          {
+            "name": "DeProvisioned",
+            "value": "DeProvisioned",
+            "description": "DeProvisioned State"
           }
         ]
       }
