@@ -40,7 +40,6 @@ union ClientEventType {
 
   /** Updates authorization headers for an active BYOM connection. */
   byom_credential_update: "byom_credential.update",
-
 }
 
 /**

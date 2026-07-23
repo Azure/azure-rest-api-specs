@@ -518,9 +518,9 @@ model ResponseCreateParams {
   temperature?: float32;
 
   /** Preview hosted-agent invocation input. Hosted agents are excluded from v1. */
-  @removed(Versions.v1)
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "Opaque passthrough: values are user-provided input forwarded to the hosted agent, whose schema is not defined by this API."
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Opaque passthrough JSON from hosted agent; values are not limited to strings."
+  @removed(Versions.v1)
   invoke_input?: Record<unknown>;
 }
 

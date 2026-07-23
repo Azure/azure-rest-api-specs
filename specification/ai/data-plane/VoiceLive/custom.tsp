@@ -54,7 +54,6 @@ model AudioFormat {
 @usage(DualUsage)
 model PcmAudioFormat extends AudioFormat {
   type: AudioFormatType.pcm;
-
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "VoiceLive supports these runtime PCM sample rates."
   rate?: 8000 | 16000 | 24000 = 24000;
 }
@@ -228,7 +227,10 @@ model AudioOutputConfig {
 @@removed(OpenAI.RealtimeServerEventOutputAudioBufferStarted, Versions.v1);
 @@removed(OpenAI.RealtimeServerEventOutputAudioBufferStopped, Versions.v1);
 @@removed(OpenAI.RealtimeServerEventConversationCreated, Versions.v1);
-@@removed(OpenAI.RealtimeServerEventInputAudioBufferDtmfEventReceived, Versions.v1);
+@@removed(
+  OpenAI.RealtimeServerEventInputAudioBufferDtmfEventReceived,
+  Versions.v1
+);
 @@removed(OpenAI.RealtimeServerEventRateLimitsUpdated, Versions.v1);
 
 // VoiceLive reuses the OpenAI event names for avatar media-buffer clearing but
