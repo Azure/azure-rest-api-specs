@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.Relationships Management Service",
-    "version": "2023-09-01-preview",
+    "version": "2026-03-01-preview",
     "description": "Microsoft.Relationships Resource Provider management API.",
     "x-typespec-generated": [
       {
@@ -50,6 +50,45 @@
     }
   ],
   "paths": {
+    "/{resourceUri}/providers/Microsoft.Relationships/dependencyOf": {
+      "get": {
+        "operationId": "DependencyOfRelationships_ListByParent",
+        "tags": [
+          "DependencyOfRelationships"
+        ],
+        "description": "List DependencyOfRelationship resources by parent",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DependencyOfRelationshipListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DependencyOfRelationships_ListByParent": {
+            "$ref": "./examples/DependencyOfRelationships_ListByParent.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/{resourceUri}/providers/Microsoft.Relationships/dependencyOf/{name}": {
       "get": {
         "operationId": "DependencyOfRelationships_Get",
@@ -221,6 +260,45 @@
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.Relationships/serviceGroupMember": {
+      "get": {
+        "operationId": "ServiceGroupMemberRelationships_ListByParent",
+        "tags": [
+          "ServiceGroupMemberRelationships"
+        ],
+        "description": "List ServiceGroupMemberRelationship resources by parent",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServiceGroupMemberRelationshipListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ServiceGroupMemberRelationships_ListByParent": {
+            "$ref": "./examples/ServiceGroupMemberRelationships_ListByParent.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/{resourceUri}/providers/Microsoft.Relationships/serviceGroupMember/{name}": {
@@ -431,9 +509,209 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Relationships/contains": {
+      "get": {
+        "operationId": "ContainsRelationships_ListBySubscription",
+        "description": "List ContainsRelationship resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filters the results by target resource type. Example: properties.metadata.targetType eq 'Microsoft.Compute/virtualMachines'",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "filter"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The maximum number of results to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "top"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ContainsRelationshipListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ContainsRelationships_ListBySubscription": {
+            "$ref": "./examples/ContainsRelationships_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relationships/contains": {
+      "get": {
+        "operationId": "ContainsRelationships_ListByResourceGroup",
+        "description": "List ContainsRelationship resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filters the results by target resource type. Example: properties.metadata.targetType eq 'Microsoft.Compute/virtualMachines'",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "filter"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The maximum number of results to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "top"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ContainsRelationshipListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ContainsRelationships_ListByResourceGroup": {
+            "$ref": "./examples/ContainsRelationships_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
+    "ContainsRelationship": {
+      "type": "object",
+      "description": "Defines a contains relationship resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ContainsRelationshipProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ContainsRelationshipListResult": {
+      "type": "object",
+      "description": "The response of a ContainsRelationship list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ContainsRelationship items on this page",
+          "items": {
+            "$ref": "#/definitions/ContainsRelationship"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ContainsRelationshipProperties": {
+      "type": "object",
+      "description": "contains relationship properties.",
+      "properties": {
+        "sourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The relationship source resource id. Must be a subscription or resource group.",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Resources/subscriptions",
+                "scopes": [
+                  "Subscription"
+                ]
+              },
+              {
+                "type": "Microsoft.Resources/resourceGroups",
+                "scopes": [
+                  "ResourceGroup"
+                ]
+              }
+            ]
+          }
+        },
+        "targetId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The relationship target resource id."
+        },
+        "targetTenant": {
+          "type": "string",
+          "description": "The relationship target tenant id."
+        },
+        "originInformation": {
+          "$ref": "#/definitions/RelationshipOriginInformation",
+          "description": "Information about the origin of the relationship.",
+          "readOnly": true
+        },
+        "metadata": {
+          "$ref": "#/definitions/RelationshipMetadata",
+          "description": "Metadata about the relationship.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the relationship.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "targetId"
+      ]
+    },
     "DependencyOfRelationship": {
       "type": "object",
       "description": "Defines a dependencyOf relationship resource.",
@@ -447,6 +725,27 @@
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
+      ]
+    },
+    "DependencyOfRelationshipListResult": {
+      "type": "object",
+      "description": "The response of a DependencyOfRelationship list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DependencyOfRelationship items on this page",
+          "items": {
+            "$ref": "#/definitions/DependencyOfRelationship"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "DependencyOfRelationshipProperties": {
@@ -485,10 +784,7 @@
         }
       },
       "required": [
-        "sourceId",
-        "targetId",
-        "originInformation",
-        "metadata"
+        "targetId"
       ]
     },
     "ProvisioningState": {
@@ -625,7 +921,7 @@
       "description": "Defines a ServiceGroupMember relationship resource.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ServiceGroupMemberRelationshipProperties",
+          "$ref": "#/definitions/ServiceGroupMemberRelationshipPropertiesV2",
           "description": "The resource-specific properties for this resource."
         }
       },
@@ -635,34 +931,45 @@
         }
       ]
     },
-    "ServiceGroupMemberRelationshipProperties": {
+    "ServiceGroupMemberRelationshipListResult": {
+      "type": "object",
+      "description": "The response of a ServiceGroupMemberRelationship list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ServiceGroupMemberRelationship items on this page",
+          "items": {
+            "$ref": "#/definitions/ServiceGroupMemberRelationship"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ServiceGroupMemberRelationshipPropertiesV2": {
       "type": "object",
       "description": "ServiceGroupMember relationship properties.",
       "properties": {
         "sourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The relationship source resource id.",
-          "readOnly": true
+          "description": "The relationship source resource id. Must be a service group."
         },
         "targetId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The relationship target resource id.",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Management/serviceGroups",
-                "scopes": [
-                  "Tenant"
-                ]
-              }
-            ]
-          }
+          "description": "The relationship target resource id. Server-derived from the scoped resource.",
+          "readOnly": true
         },
-        "targetTenant": {
+        "sourceTenant": {
           "type": "string",
-          "description": "The relationship target tenant id."
+          "description": "The relationship source tenant id."
         },
         "originInformation": {
           "$ref": "#/definitions/RelationshipOriginInformation",
@@ -681,10 +988,7 @@
         }
       },
       "required": [
-        "sourceId",
-        "targetId",
-        "originInformation",
-        "metadata"
+        "sourceId"
       ]
     }
   },
