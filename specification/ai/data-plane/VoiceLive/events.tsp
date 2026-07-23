@@ -10,11 +10,22 @@ namespace VoiceLive;
  */
 union ClientEventType {
   string,
+
+  @removed(Versions.v1)
   input_audio_turn_start: "input_audio.turn.start",
+
+  @removed(Versions.v1)
   input_audio_turn_append: "input_audio.turn.append",
+
+  @removed(Versions.v1)
   input_audio_turn_end: "input_audio.turn.end",
+
+  @removed(Versions.v1)
   input_audio_turn_cancel: "input_audio.turn.cancel",
+
+  @removed(Versions.v1)
   input_audio_clear: "input_audio.clear",
+
   session_avatar_connect: "session.avatar.connect",
 
   /** Sent by the client to initiate a WebRTC session with an SDP offer. */

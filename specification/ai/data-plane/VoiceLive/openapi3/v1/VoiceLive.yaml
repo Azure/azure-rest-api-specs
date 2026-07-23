@@ -958,101 +958,11 @@ components:
         propertyName: type
         mapping:
           session.avatar.connect: '#/components/schemas/ClientEventSessionAvatarConnect'
-          input_audio.turn.start: '#/components/schemas/ClientEventInputAudioTurnStart'
-          input_audio.turn.append: '#/components/schemas/ClientEventInputAudioTurnAppend'
-          input_audio.turn.end: '#/components/schemas/ClientEventInputAudioTurnEnd'
-          input_audio.turn.cancel: '#/components/schemas/ClientEventInputAudioTurnCancel'
-          input_audio.clear: '#/components/schemas/ClientEventInputAudioClear'
           input_text.delta: '#/components/schemas/ClientEventInputTextDelta'
           input_text.done: '#/components/schemas/ClientEventInputTextDone'
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeClientEvent'
       description: A voicelive client event.
-    ClientEventInputAudioClear:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
-          enum:
-            - input_audio.clear
-          description: The event type, must be 'input_audio.clear'.
-      allOf:
-        - $ref: '#/components/schemas/ClientEvent'
-      description: Clears all input audio currently being streamed.
-    ClientEventInputAudioTurnAppend:
-      type: object
-      required:
-        - type
-        - turn_id
-        - audio
-      properties:
-        type:
-          type: string
-          enum:
-            - input_audio.turn.append
-          description: The event type, must be 'input_audio.turn.append'.
-        turn_id:
-          type: string
-          description: The ID of the turn this audio is part of.
-        audio:
-          type: string
-          description: Base64-encoded audio chunk.
-      allOf:
-        - $ref: '#/components/schemas/ClientEvent'
-      description: Appends audio data to an ongoing input turn.
-    ClientEventInputAudioTurnCancel:
-      type: object
-      required:
-        - type
-        - turn_id
-      properties:
-        type:
-          type: string
-          enum:
-            - input_audio.turn.cancel
-          description: The event type, must be 'input_audio.turn.cancel'.
-        turn_id:
-          type: string
-          description: The ID of the turn to cancel.
-      allOf:
-        - $ref: '#/components/schemas/ClientEvent'
-      description: Cancels an in-progress input audio turn.
-    ClientEventInputAudioTurnEnd:
-      type: object
-      required:
-        - type
-        - turn_id
-      properties:
-        type:
-          type: string
-          enum:
-            - input_audio.turn.end
-          description: The event type, must be 'input_audio.turn.end'.
-        turn_id:
-          type: string
-          description: The ID of the audio turn being ended.
-      allOf:
-        - $ref: '#/components/schemas/ClientEvent'
-      description: Marks the end of an audio input turn.
-    ClientEventInputAudioTurnStart:
-      type: object
-      required:
-        - type
-        - turn_id
-      properties:
-        type:
-          type: string
-          enum:
-            - input_audio.turn.start
-          description: The event type, must be 'input_audio.turn.start'.
-        turn_id:
-          type: string
-          description: Unique identifier for the input audio turn.
-      allOf:
-        - $ref: '#/components/schemas/ClientEvent'
-      description: Indicates the start of a new audio input turn.
     ClientEventInputTextDelta:
       type: object
       required:
@@ -1126,11 +1036,6 @@ components:
         - type: string
         - type: string
           enum:
-            - input_audio.turn.start
-            - input_audio.turn.append
-            - input_audio.turn.end
-            - input_audio.turn.cancel
-            - input_audio.clear
             - session.avatar.connect
             - input_text.delta
             - input_text.done
@@ -2671,11 +2576,6 @@ components:
           response.cancel: '#/components/schemas/OpenAI.RealtimeClientEventResponseCancel'
           response.create: '#/components/schemas/OpenAI.RealtimeClientEventResponseCreate'
           session.update: '#/components/schemas/OpenAI.RealtimeClientEventSessionUpdate'
-          input_audio.turn.start: '#/components/schemas/ClientEvent'
-          input_audio.turn.append: '#/components/schemas/ClientEvent'
-          input_audio.turn.end: '#/components/schemas/ClientEvent'
-          input_audio.turn.cancel: '#/components/schemas/ClientEvent'
-          input_audio.clear: '#/components/schemas/ClientEvent'
           session.avatar.connect: '#/components/schemas/ClientEvent'
           input_text.delta: '#/components/schemas/ClientEvent'
           input_text.done: '#/components/schemas/ClientEvent'
@@ -3038,9 +2938,6 @@ components:
           x-stainless-const: true
         response:
           $ref: '#/components/schemas/ResponseCreateParams'
-        additional_instructions:
-          type: string
-          description: Additional instructions (system prompt) appended to the default session instructions. Affects this response only. (Azure extension)
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeClientEvent'
       description: |-

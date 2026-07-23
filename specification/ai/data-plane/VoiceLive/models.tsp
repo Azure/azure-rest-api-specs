@@ -75,6 +75,7 @@ model ClientEventSessionAvatarConnect extends ClientEvent {
 
 /** Indicates the start of a new audio input turn. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@removed(Versions.v1)
 @usage(RequestUsage)
 model ClientEventInputAudioTurnStart extends ClientEvent {
   /** The event type, must be 'input_audio.turn.start'. */
@@ -86,6 +87,7 @@ model ClientEventInputAudioTurnStart extends ClientEvent {
 
 /** Appends audio data to an ongoing input turn. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@removed(Versions.v1)
 @usage(RequestUsage)
 model ClientEventInputAudioTurnAppend extends ClientEvent {
   /** The event type, must be 'input_audio.turn.append'. */
@@ -100,6 +102,7 @@ model ClientEventInputAudioTurnAppend extends ClientEvent {
 
 /** Marks the end of an audio input turn. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@removed(Versions.v1)
 @usage(RequestUsage)
 model ClientEventInputAudioTurnEnd extends ClientEvent {
   /** The event type, must be 'input_audio.turn.end'. */
@@ -111,6 +114,7 @@ model ClientEventInputAudioTurnEnd extends ClientEvent {
 
 /** Cancels an in-progress input audio turn. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@removed(Versions.v1)
 @usage(RequestUsage)
 model ClientEventInputAudioTurnCancel extends ClientEvent {
   /** The event type, must be 'input_audio.turn.cancel'. */
@@ -121,6 +125,7 @@ model ClientEventInputAudioTurnCancel extends ClientEvent {
 }
 
 /** Clears all input audio currently being streamed. */
+@removed(Versions.v1)
 @usage(RequestUsage)
 model ClientEventInputAudioClear extends ClientEvent {
   /** The event type, must be 'input_audio.clear'. */

@@ -106,6 +106,7 @@ model AudioOutputConfig {
   OpenAI.RealtimeClientEventResponseCreate,
   {
     /** Additional instructions (system prompt) appended to the default session instructions. Affects this response only. (Azure extension) */
+    @removed(Versions.v1)
     additional_instructions?: string,
   }
 );
