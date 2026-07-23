@@ -32,7 +32,11 @@ describe("runRules", function () {
   });
 
   it("should skip a suppressable rule when a matching suppression exists", async function () {
-    const rule1 = createRule("Rule1", { success: false }, { suppressable: true });
+    const rule1 = createRule(
+      "Rule1",
+      { success: false, reason: "test failure" },
+      { suppressable: true },
+    );
     const rule2 = createRule("Rule2", { success: true });
 
     const suppressions = [
@@ -95,7 +99,7 @@ describe("runRules", function () {
   });
 
   it("should stop executing rules after a failure", async function () {
-    const rule1 = createRule("Rule1", { success: false, errorOutput: "error" });
+    const rule1 = createRule("Rule1", { success: false, reason: "error" });
     const rule2 = createRule("Rule2", { success: true });
 
     const result = await runRules([rule1, rule2], "/test", []);

@@ -36,20 +36,20 @@ export class FolderStructureRule implements Rule {
       if (suppressMustUseV2) {
         stdOutput += `Folder '${folder}' is not using "folder structure v2", but was suppressed.\n`;
       } else {
+        if (stdOutput) console.log(stdOutput);
         return {
           success: false,
-          stdOutput: stdOutput,
-          errorOutput: `Folder '${folder}' must use "folder structure v2". See https://aka.ms/azsdk/spec-dirs \n`,
+          reason: `Folder '${folder}' must use "folder structure v2". See https://aka.ms/azsdk/spec-dirs \n`,
         };
       }
     }
 
     stdOutput += `folder: ${folder}\n`;
     if (!(await fileExists(folder))) {
+      if (stdOutput) console.log(stdOutput);
       return {
         success: false,
-        stdOutput: stdOutput,
-        errorOutput: `Folder '${folder}' does not exist.\n`,
+        reason: `Folder '${folder}' does not exist.\n`,
       };
     }
 
@@ -218,10 +218,10 @@ export class FolderStructureRule implements Rule {
       }
     }
 
-    return {
-      success: success,
-      stdOutput: stdOutput,
-      errorOutput: errorOutput,
-    };
+    if (stdOutput) console.log(stdOutput);
+
+    return success
+      ? { success: true }
+      : { success: false, reason: errorOutput || "Folder structure validation failed." };
   }
 }

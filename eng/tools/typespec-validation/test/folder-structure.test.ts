@@ -60,8 +60,8 @@ describe("folder-structure", function () {
       fileExistsSpy.mockResolvedValue(false);
 
       const result = await new FolderStructureRule().execute(mockFolder);
-      assert(result.errorOutput);
-      assert(result.errorOutput.includes("does not exist"));
+      assert(!result.success && result.reason);
+      assert(result.reason.includes("does not exist"));
     });
 
     it("should fail if tspconfig has incorrect extension", async function () {
@@ -70,8 +70,8 @@ describe("folder-structure", function () {
       );
 
       const result = await new FolderStructureRule().execute(mockFolder);
-      assert(result.errorOutput);
-      assert(result.errorOutput.includes("Invalid config file"));
+      assert(!result.success && result.reason);
+      assert(result.reason.includes("Invalid config file"));
     });
 
     it("should fail if folder under specification/ is capitalized", async function () {
@@ -81,8 +81,8 @@ describe("folder-structure", function () {
       normalizePathSpy.mockReturnValue("/gitroot");
 
       const result = await new FolderStructureRule().execute("/gitroot/specification/Foo/Foo");
-      assert(result.errorOutput);
-      assert(result.errorOutput.includes("must be lower case"));
+      assert(!result.success && result.reason);
+      assert(result.reason.includes("must be lower case"));
     });
 
     it("should succeed if package folder has trailing slash", async function () {
@@ -104,8 +104,8 @@ describe("folder-structure", function () {
       const result = await new FolderStructureRule().execute(
         "/gitroot/specification/foo/Foo/Foo/Foo",
       );
-      assert(result.errorOutput);
-      assert(result.errorOutput.includes("3 levels or less"));
+      assert(!result.success && result.reason);
+      assert(result.reason.includes("3 levels or less"));
     });
 
     it("should fail if second level folder not capitalized at after each '.' ", async function () {
@@ -115,8 +115,8 @@ describe("folder-structure", function () {
       normalizePathSpy.mockReturnValue("/gitroot");
 
       const result = await new FolderStructureRule().execute("/gitroot/specification/foo/Foo.foo");
-      assert(result.errorOutput);
-      assert(result.errorOutput.includes("must be capitalized"));
+      assert(!result.success && result.reason);
+      assert(result.reason.includes("must be capitalized"));
     });
 
     it("should fail if second level folder is data-plane", async function () {
@@ -128,8 +128,8 @@ describe("folder-structure", function () {
       const result = await new FolderStructureRule().execute(
         "/gitroot/specification/foo/data-plane",
       );
-      assert(result.errorOutput);
-      assert(result.errorOutput.includes("does not match regex"));
+      assert(!result.success && result.reason);
+      assert(result.reason.includes("does not match regex"));
     });
 
     it("should fail if second level folder is resource-manager", async function () {
@@ -141,8 +141,8 @@ describe("folder-structure", function () {
       const result = await new FolderStructureRule().execute(
         "/gitroot/specification/foo/resource-manager",
       );
-      assert(result.errorOutput);
-      assert(result.errorOutput.includes("does not match regex"));
+      assert(!result.success && result.reason);
+      assert(result.reason.includes("does not match regex"));
     });
 
     it("should fail if Shared does not follow Management ", async function () {
@@ -154,8 +154,8 @@ describe("folder-structure", function () {
       const result = await new FolderStructureRule().execute(
         "/gitroot/specification/foo/Foo.Management.Foo.Shared",
       );
-      assert(result.errorOutput);
-      assert(result.errorOutput.includes("should follow"));
+      assert(!result.success && result.reason);
+      assert(result.reason.includes("should follow"));
     });
 
     it("should fail if folder doesn't contain main.tsp nor client.tsp", async function () {
@@ -177,8 +177,8 @@ describe("folder-structure", function () {
         "/gitroot/specification/foo/Foo.Management",
       );
 
-      assert(result.errorOutput);
-      assert(result.errorOutput.includes("must contain"));
+      assert(!result.success && result.reason);
+      assert(result.reason.includes("must contain"));
     });
 
     it("should fail if folder doesn't contain examples when main.tsp exists", async function () {
@@ -200,8 +200,8 @@ describe("folder-structure", function () {
         "/gitroot/specification/foo/Foo.Management",
       );
 
-      assert(result.errorOutput);
-      assert(result.errorOutput.includes("must contain"));
+      assert(!result.success && result.reason);
+      assert(result.reason.includes("must contain"));
     });
 
     it("should fail if non-shared folder doesn't contain tspconfig", async function () {
@@ -221,8 +221,8 @@ describe("folder-structure", function () {
         "/gitroot/specification/foo/Foo.Management",
       );
 
-      assert(result.errorOutput);
-      assert(result.errorOutput.includes("must contain"));
+      assert(!result.success && result.reason);
+      assert(result.reason.includes("must contain"));
     });
 
     it("should succeed with resource-manager/Management", async function () {
@@ -278,8 +278,8 @@ options:
 
       const result = await new FolderStructureRule().execute("/gitroot/specification/foo/Foo");
 
-      assert(result.errorOutput);
-      assert(result.errorOutput.includes(".Management"));
+      assert(!result.success && result.reason);
+      assert(result.reason.includes(".Management"));
     });
 
     it("should fail with data-plane/Management", async function () {
@@ -299,16 +299,16 @@ options:
         "/gitroot/specification/foo/Foo.Management",
       );
 
-      assert(result.errorOutput);
-      assert(result.errorOutput.includes(".Management"));
+      assert(!result.success && result.reason);
+      assert(result.reason.includes(".Management"));
     });
 
     it("should fail if MustUseV2 not suppressed", async function () {
       vi.spyOn(utils, "getSuppressions").mockResolvedValue([]);
 
       const result = await new FolderStructureRule().execute(mockFolder);
-      assert(result.errorOutput);
-      assert(result.errorOutput.includes('must use "folder structure v2'));
+      assert(!result.success && result.reason);
+      assert(result.reason.includes('must use "folder structure v2'));
     });
   });
 
@@ -330,7 +330,7 @@ options:
         "/gitroot/specification/foo/data-plane/Foo",
       );
 
-      assert(result.errorOutput?.includes("must contain"));
+      assert(!result.success && result.reason.includes("must contain"));
     });
 
     it("should fail if incorrect folder depth", async function () {
@@ -340,27 +340,27 @@ options:
       normalizePathSpy.mockReturnValue("/gitroot");
 
       let result = await new FolderStructureRule().execute("/gitroot/specification/foo/data-plane");
-      assert(result.errorOutput?.includes("level under"));
+      assert(!result.success && result.reason?.includes("level under"));
 
       result = await new FolderStructureRule().execute(
         "/gitroot/specification/foo/data-plane/Foo/too-deep",
       );
-      assert(result.errorOutput?.includes("level under"));
+      assert(!result.success && result.reason?.includes("level under"));
 
       result = await new FolderStructureRule().execute(
         "/gitroot/specification/foo/resource-manager",
       );
-      assert(result.errorOutput?.includes("levels under"));
+      assert(!result.success && result.reason?.includes("levels under"));
 
       result = await new FolderStructureRule().execute(
         "/gitroot/specification/foo/resource-manager/RP.Namespace",
       );
-      assert(result.errorOutput?.includes("levels under"));
+      assert(!result.success && result.reason?.includes("levels under"));
 
       result = await new FolderStructureRule().execute(
         "/gitroot/specification/foo/resource-manager/RP.Namespace/FooManagement/too-deep",
       );
-      assert(result.errorOutput?.includes("levels under"));
+      assert(!result.success && result.reason?.includes("levels under"));
     });
 
     it("should succeed with data-plane", async function () {

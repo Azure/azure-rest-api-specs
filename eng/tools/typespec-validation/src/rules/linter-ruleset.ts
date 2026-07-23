@@ -90,10 +90,10 @@ export class LinterRulesetRule implements Rule {
         `    - "${requiredRuleset}"`;
     }
 
-    return {
-      success: success,
-      stdOutput: stdOutput,
-      errorOutput: errorOutput,
-    };
+    if (stdOutput) console.log(stdOutput);
+
+    return success
+      ? { success: true }
+      : { success: false, reason: errorOutput || "Linter ruleset validation failed." };
   }
 }

@@ -50,12 +50,11 @@ export async function runRules(
 
     const ruleResult = await rule.execute(folder);
     result.executed.push(rule.name);
-    if (ruleResult.stdOutput) console.log(ruleResult.stdOutput);
     if (!ruleResult.success) {
       result.success = false;
       result.failed.push(rule.name);
       console.log("Rule " + rule.name + " failed");
-      if (ruleResult.errorOutput) console.log(ruleResult.errorOutput);
+      console.log(ruleResult.reason);
 
       // Stop executing more rules, since the results are more likely to be confusing than helpful
       // Can add property like "RuleResult.ContinueOnError" if some rules want to continue

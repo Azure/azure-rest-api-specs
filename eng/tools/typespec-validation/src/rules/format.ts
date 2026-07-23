@@ -36,18 +36,17 @@ export class FormatRule implements Rule {
 
     if (success) {
       const gitDiffResult = await gitDiffTopSpecFolder(folder);
-      stdOutput += gitDiffResult.stdOutput;
       if (!gitDiffResult.success) {
         success = false;
-        errorOutput += gitDiffResult.errorOutput;
+        errorOutput += gitDiffResult.reason;
         errorOutput += `\nFiles have been changed after \`tsp format\`. Run \`tsp format\` and ensure all files are included in your change.`;
       }
     }
 
-    return {
-      success: success,
-      stdOutput: stdOutput,
-      errorOutput: errorOutput,
-    };
+    if (stdOutput) console.log(stdOutput);
+
+    return success
+      ? { success: true }
+      : { success: false, reason: errorOutput || "Format validation failed." };
   }
 }
