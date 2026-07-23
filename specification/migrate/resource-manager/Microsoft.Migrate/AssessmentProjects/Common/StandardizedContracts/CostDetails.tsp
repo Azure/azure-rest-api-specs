@@ -84,7 +84,7 @@ union ManagementCostComponentName {
   @doc("System Center License Cost.")
   SystemCenterLicenseCost: "SystemCenterLicenseCost",
 
-  @doc("VSphere eManagement Cost.")
+  @doc("VMware vSphere Management Cost.")
   VSphereManagementCost: "VSphereManagementCost",
 
   @doc("Third Party Management Cost.")
