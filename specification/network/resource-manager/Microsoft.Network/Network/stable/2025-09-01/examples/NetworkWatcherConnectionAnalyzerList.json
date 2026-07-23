@@ -1,0 +1,92 @@
+{
+  "parameters": {
+    "api-version": "2025-09-01",
+    "subscriptionId": "7f4a1d92-3b6e-4c8f-9a25-e1b8c3d7f024",
+    "resourceGroupName": "connectionAnalyzerRG",
+    "networkWatcherName": "nw1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "ca1",
+            "id": "/subscriptions/7f4a1d92-3b6e-4c8f-9a25-e1b8c3d7f024/resourceGroups/connectionAnalyzerRG/providers/Microsoft.Network/networkWatchers/nw1/connectionAnalyzers/ca1",
+            "etag": "W/\"e7497f26-5f09-4559-900b-fe98f3dedb6f\"",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "status": "Running",
+              "diagnosticOperations": [
+                "ConnectivityCheck"
+              ],
+              "source": {
+                "type": "VM",
+                "resourceId": "/subscriptions/7f4a1d92-3b6e-4c8f-9a25-e1b8c3d7f024/resourceGroups/connectionAnalyzerRG/providers/Microsoft.Compute/virtualMachines/ct1"
+              },
+              "destination": {
+                "address": "www.bing.com",
+                "type": "ExternalAddress"
+              },
+              "protocolSettings": {
+                "protocol": "Tcp"
+              },
+              "diagnosticOperationsSettings": {
+                "connectivityCheckSettings": {
+                  "generatePath": true,
+                  "preferredIPVersion": "IPv4"
+                }
+              },
+              "expiryInDays": 30,
+              "outputSettings": {
+                "storageAccountSettings": {
+                  "storageAccountId": "/subscriptions/7f4a1d92-3b6e-4c8f-9a25-e1b8c3d7f024/resourceGroups/connectionAnalyzerRG/providers/Microsoft.Storage/storageAccounts/sa1",
+                  "path": "connectionanalyzer/results2"
+                }
+              }
+            },
+            "location": "eastus"
+          },
+          {
+            "name": "ca2",
+            "id": "/subscriptions/7f4a1d92-3b6e-4c8f-9a25-e1b8c3d7f024/resourceGroups/connectionAnalyzerRG/providers/Microsoft.Network/networkWatchers/nw1/connectionAnalyzers/ca2",
+            "etag": "W/\"e7497f26-5f09-4559-900b-fe98f3dedb6l\"",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "status": "Running",
+              "diagnosticOperations": [
+                "ConnectivityCheck"
+              ],
+              "source": {
+                "type": "VM",
+                "resourceId": "/subscriptions/7f4a1d92-3b6e-4c8f-9a25-e1b8c3d7f024/resourceGroups/connectionAnalyzerRG/providers/Microsoft.Compute/virtualMachines/ct2"
+              },
+              "destination": {
+                "address": "www.bing.com",
+                "type": "ExternalAddress"
+              },
+              "protocolSettings": {
+                "protocol": "Tcp"
+              },
+              "diagnosticOperationsSettings": {
+                "connectivityCheckSettings": {
+                  "generatePath": true,
+                  "preferredIPVersion": "IPv4"
+                }
+              },
+              "expiryInDays": 30,
+              "outputSettings": {
+                "storageAccountSettings": {
+                  "storageAccountId": "/subscriptions/7f4a1d92-3b6e-4c8f-9a25-e1b8c3d7f024/resourceGroups/connectionAnalyzerRG/providers/Microsoft.Storage/storageAccounts/sa1",
+                  "path": "connectionanalyzer/results"
+                }
+              }
+            },
+            "location": "eastus"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "NetworkWatchers_ConnectionAnalyzersList",
+  "title": "List connection analyzers"
+}

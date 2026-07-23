@@ -22,6 +22,10 @@ using TypeSpec.Versioning;
   ScrubbingRuleEntryState,
   "scrubbingRuleEntryState"
 );
+@@Azure.ClientGenerator.Core.clientName(
+  Microsoft.Network.ConnectionAnalyzerEndpointTypes.EndpointType,
+  "ConnectionAnalyzerEndpointType"
+);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ApplicationGatewayIPConfiguration.properties);
