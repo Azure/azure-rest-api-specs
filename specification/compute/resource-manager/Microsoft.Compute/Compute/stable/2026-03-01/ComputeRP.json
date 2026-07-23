@@ -7254,6 +7254,20 @@
               "$ref": "#/definitions/VMScaleSetLifecycleHookEvent"
             }
           },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -7265,7 +7279,12 @@
           "The operation to update the virtual machine scale set lifecycle hook event.": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSetLifeCycleHookEvent_Update.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/VMScaleSetLifecycleHookEvent"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/manualupgrade": {
@@ -19671,6 +19690,11 @@
         "state": {
           "$ref": "#/definitions/VMScaleSetLifecycleHookEventState",
           "description": "Specifies the state of the virtual machine scale set lifecycle hook event.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "The provisioning state, which only appears in the response.",
           "readOnly": true
         }
       }

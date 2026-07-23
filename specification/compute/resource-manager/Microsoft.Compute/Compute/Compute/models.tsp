@@ -1235,7 +1235,7 @@ model VMScaleSetLifecycleHookEventTargetResource {
 /**
  * Defines the virtual machine scale set lifecycle hook event properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Consistent with established Compute RP patterns (e.g. DedicatedHost, VirtualMachine, CapacityReservation) for SDK and behavioral consistency."
 @added(Versions.v2025_11_01)
 model VMScaleSetLifecycleHookEventProperties {
   /**
@@ -1287,6 +1287,12 @@ model VMScaleSetLifecycleHookEventProperties {
    */
   @visibility(Lifecycle.Read)
   state?: VMScaleSetLifecycleHookEventState;
+
+  /**
+   * The provisioning state, which only appears in the response.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: string;
 }
 
 /**
