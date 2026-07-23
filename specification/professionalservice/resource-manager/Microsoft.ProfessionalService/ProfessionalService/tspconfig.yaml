@@ -1,0 +1,40 @@
+parameters:
+  "service-dir":
+    default: "sdk/professionalservice"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    use-read-only-status-schema: true
+    emitter-output-dir: "{project-root}"
+    output-file: "{version-status}/{version}/professionalservice.json"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+  "@azure-tools/typespec-java":
+    flavor: azure
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-professionalservice"
+    namespace: "com.azure.resourcemanager.professionalservice"
+    service-name: "ProfessionalService"
+  "@azure-tools/typespec-ts":
+    flavor: azure
+    experimental-extensible-enums: true
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-professionalservice"
+    package-details:
+      name: "@azure/arm-professionalservice"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/professionalservice"
+    emitter-output-dir: "{output-dir}/{service-dir}/armprofessionalservice"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armprofessionalservice"
+    flavor: azure
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+  "@azure-tools/typespec-python":
+    flavor: azure
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-professionalservice"
+    namespace: "azure.mgmt.professionalservice"
+    generate-sample: true
+    generate-test: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
