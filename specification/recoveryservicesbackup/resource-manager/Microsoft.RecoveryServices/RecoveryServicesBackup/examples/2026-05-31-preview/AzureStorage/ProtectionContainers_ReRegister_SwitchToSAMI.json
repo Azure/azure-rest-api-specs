@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "api-version": "2026-05-31-preview",
+    "containerName": "StorageContainer;Storage;SwaggerTestRg;swaggertestsa",
+    "fabricName": "Azure",
+    "parameters": {
+      "properties": {
+        "acquireStorageAccountLock": "Acquire",
+        "backupManagementType": "AzureStorage",
+        "containerType": "StorageContainer",
+        "friendlyName": "swaggertestsa",
+        "sourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/SwaggerTestRg/providers/Microsoft.Storage/storageAccounts/swaggertestsa",
+        "operationType": "Reregister",
+        "accessType": "IdentityBased",
+        "identityInfo": {
+          "isSystemAssignedIdentity": true
+        }
+      }
+    },
+    "resourceGroupName": "SwaggerTestRg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "vaultName": "swaggertestvault"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "StorageContainer;Storage;SwaggerTestRg;swaggertestsa",
+        "id": "/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/swaggertestvault/backupFabrics/Azure/protectionContainers/StorageContainer;Storage;SwaggerTestRg;swaggertestsa",
+        "properties": {
+          "acquireStorageAccountLock": "Acquire",
+          "backupManagementType": "AzureStorage",
+          "containerType": "StorageContainer",
+          "friendlyName": "swaggertestsa",
+          "healthStatus": "Healthy",
+          "protectedItemCount": 1,
+          "registrationStatus": "Registered",
+          "sourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/SwaggerTestRg/providers/Microsoft.Storage/storageAccounts/swaggertestsa",
+          "accessType": "IdentityBased",
+          "identityInfo": {
+            "isSystemAssignedIdentity": true
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/swaggertestvault/backupFabrics/Azure/protectionContainers/StorageContainer;Storage;SwaggerTestRg;swaggertestsa/operationsStatus/00000000-0000-0000-0000-000000000000?api-version=2026-05-31-preview",
+        "Location": "https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/swaggertestvault/backupFabrics/Azure/protectionContainers/StorageContainer;Storage;SwaggerTestRg;swaggertestsa/operationResults/00000000-0000-0000-0000-000000000000?api-version=2026-05-31-preview",
+        "Retry-After": 60
+      }
+    }
+  },
+  "operationId": "ProtectionContainers_Register",
+  "title": "Re-register Azure Storage ProtectionContainers switching to System Assigned Managed Identity"
+}

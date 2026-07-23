@@ -2,6 +2,9 @@ parameters:
   "service-dir":
     default: "sdk/security"
 options:
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.SecurityCenter"
+    emitter-output-dir: "{output-dir}/sdk/securitycenter/{namespace}"
   "@azure-tools/typespec-python":
     service-dir: "sdk/security"
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-security"
@@ -27,6 +30,7 @@ options:
       SecurityManagementClient: SecurityCenter
     flavor: "azure"
     compatibility-lro: true
+    generate-sample: false
     experimental-extensible-enums: true
     package-details:
       name: "@azure/arm-security"
@@ -43,3 +47,4 @@ options:
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"

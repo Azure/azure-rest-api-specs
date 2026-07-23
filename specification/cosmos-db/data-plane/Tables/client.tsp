@@ -19,8 +19,8 @@ namespace ClientCustomizations;
   "python"
 );
 
-@@alternateType(Data.Tables.AccessPolicy.start, string, "python");
-@@alternateType(Data.Tables.AccessPolicy.expiry, string, "python");
+@@alternateType(AccessPolicy.start, string, "python,javascript");
+@@alternateType(AccessPolicy.expiry, string, "python,javascript");
 
 /** The signed identifier. */
 model SignedIdentifier {
@@ -30,4 +30,8 @@ model SignedIdentifier {
   /** The access policy for the signed identifier. */
   @Xml.name("AccessPolicy") accessPolicy?: AccessPolicy;
 }
-@@alternateType(Data.Tables.SignedIdentifier, SignedIdentifier, "python");
+@@alternateType(SignedIdentifier, SignedIdentifier, "python");
+
+@@clientName(TablesServiceError, "TableServiceError", "javascript");
+@@clientName(Metrics.includeApis, "includeAPIs", "javascript");
+@@clientName(EtagResponseHeader.eTag, "etag", "javascript");
