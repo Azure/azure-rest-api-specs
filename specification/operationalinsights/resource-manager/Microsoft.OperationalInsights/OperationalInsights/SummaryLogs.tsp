@@ -2,12 +2,14 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.OperationalInsights;
 /**
@@ -21,6 +23,13 @@ model SummaryLogs
     SegmentName = "summaryLogs",
     NamePattern = "[^/]+"
   >;
+
+  /**
+   * The managed identity of the summary logs resource. Only user-assigned identity is supported.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "SummaryLogs uses a purpose-built identity envelope that supports only None and UserAssigned; the common-types ManagedServiceIdentity always includes SystemAssigned, which this resource does not support."
+  @added(Versions.v2026_03_01)
+  identity?: SummaryLogsIdentity;
 }
 
 @armResourceOperations(#{ omitTags: true })
