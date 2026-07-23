@@ -58,11 +58,20 @@ union ServerEventType {
   warning: "warning",
   byom_credential_updated: "byom_credential.updated",
   session_avatar_connecting: "session.avatar.connecting",
+
+  @removed(Versions.PuPr)
   response_animation_blendshapes_delta: "response.animation_blendshapes.delta",
+
+  @removed(Versions.PuPr)
   response_animation_blendshapes_done: "response.animation_blendshapes.done",
+
   response_audio_timestamp_delta: "response.audio_timestamp.delta",
   response_audio_timestamp_done: "response.audio_timestamp.done",
+
+  @removed(Versions.PuPr)
   response_animation_viseme_delta: "response.animation_viseme.delta",
+
+  @removed(Versions.PuPr)
   response_animation_viseme_done: "response.animation_viseme.done",
 
   /** Avatar switches to speaking state. */
@@ -93,6 +102,7 @@ union ServerEventType {
   response_file_search_call_completed: "response.file_search_call.completed",
 
   /** Audio transcript annotation added. */
+  @removed(Versions.PuPr)
   response_audio_transcript_annotation_added: "response.audio_transcript.annotation.added",
 
   /** Invocation passthrough delta from hosted agent. */

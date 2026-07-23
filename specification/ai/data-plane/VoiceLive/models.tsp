@@ -362,6 +362,7 @@ model TranscriptionPhrase {
 
 /** Represents a delta update of blendshape animation frames for a specific output of a response. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@removed(Versions.PuPr)
 @usage(ResponseUsage)
 model ServerEventResponseAnimationBlendshapeDelta extends ServerEvent {
   type: ServerEventType.response_animation_blendshapes_delta;
@@ -377,6 +378,7 @@ model ServerEventResponseAnimationBlendshapeDelta extends ServerEvent {
 
 /** Indicates the completion of blendshape animation processing for a specific output of a response. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@removed(Versions.PuPr)
 @usage(ResponseUsage)
 model ServerEventResponseAnimationBlendshapeDone extends ServerEvent {
   type: ServerEventType.response_animation_blendshapes_done;
@@ -413,6 +415,7 @@ model ServerEventResponseAudioTimestampDone extends ServerEvent {
 
 /** Represents a viseme ID delta update for animation based on audio. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@removed(Versions.PuPr)
 @usage(ResponseUsage)
 model ServerEventResponseAnimationVisemeDelta extends ServerEvent {
   type: ServerEventType.response_animation_viseme_delta;
@@ -426,6 +429,7 @@ model ServerEventResponseAnimationVisemeDelta extends ServerEvent {
 
 /** Indicates completion of viseme animation delivery for a response. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@removed(Versions.PuPr)
 @usage(ResponseUsage)
 model ServerEventResponseAnimationVisemeDone extends ServerEvent {
   type: ServerEventType.response_animation_viseme_done;
@@ -665,6 +669,7 @@ model ServerEventResponseFileSearchCallCompleted extends ServerEvent {
 /** Returned when an audio transcript annotation is added to a response. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 #suppress "@azure-tools/typespec-azure-core/no-unknown" // The annotation can be of any type.
+@removed(Versions.PuPr)
 @usage(ResponseUsage)
 model ServerEventResponseAudioTranscriptAnnotationAdded extends ServerEvent {
   /** The event type, must be `response.audio_transcript.annotation.added`. */

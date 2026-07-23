@@ -3983,12 +3983,8 @@ components:
           warning: '#/components/schemas/ServerEvent'
           byom_credential.updated: '#/components/schemas/ServerEvent'
           session.avatar.connecting: '#/components/schemas/ServerEvent'
-          response.animation_blendshapes.delta: '#/components/schemas/ServerEvent'
-          response.animation_blendshapes.done: '#/components/schemas/ServerEvent'
           response.audio_timestamp.delta: '#/components/schemas/ServerEvent'
           response.audio_timestamp.done: '#/components/schemas/ServerEvent'
-          response.animation_viseme.delta: '#/components/schemas/ServerEvent'
-          response.animation_viseme.done: '#/components/schemas/ServerEvent'
           session.avatar.switch_to_speaking: '#/components/schemas/ServerEvent'
           session.avatar.switch_to_idle: '#/components/schemas/ServerEvent'
           response.video.delta: '#/components/schemas/ServerEvent'
@@ -3998,7 +3994,6 @@ components:
           response.file_search_call.searching: '#/components/schemas/ServerEvent'
           response.file_search_call.in_progress: '#/components/schemas/ServerEvent'
           response.file_search_call.completed: '#/components/schemas/ServerEvent'
-          response.audio_transcript.annotation.added: '#/components/schemas/ServerEvent'
           response.invocation.delta: '#/components/schemas/ServerEvent'
       description: A realtime server event.
     OpenAI.RealtimeServerEventConversationCreated:
@@ -7652,12 +7647,8 @@ components:
           warning: '#/components/schemas/ServerEventWarning'
           byom_credential.updated: '#/components/schemas/ServerEventBYOMCredentialUpdated'
           session.avatar.connecting: '#/components/schemas/ServerEventSessionAvatarConnecting'
-          response.animation_blendshapes.delta: '#/components/schemas/ServerEventResponseAnimationBlendshapeDelta'
-          response.animation_blendshapes.done: '#/components/schemas/ServerEventResponseAnimationBlendshapeDone'
           response.audio_timestamp.delta: '#/components/schemas/ServerEventResponseAudioTimestampDelta'
           response.audio_timestamp.done: '#/components/schemas/ServerEventResponseAudioTimestampDone'
-          response.animation_viseme.delta: '#/components/schemas/ServerEventResponseAnimationVisemeDelta'
-          response.animation_viseme.done: '#/components/schemas/ServerEventResponseAnimationVisemeDone'
           session.avatar.switch_to_speaking: '#/components/schemas/ServerEventSessionAvatarSwitchToSpeaking'
           session.avatar.switch_to_idle: '#/components/schemas/ServerEventSessionAvatarSwitchToIdle'
           response.video.delta: '#/components/schemas/ServerEventResponseVideoDelta'
@@ -7667,7 +7658,6 @@ components:
           response.file_search_call.searching: '#/components/schemas/ServerEventResponseFileSearchCallSearching'
           response.file_search_call.in_progress: '#/components/schemas/ServerEventResponseFileSearchCallInProgress'
           response.file_search_call.completed: '#/components/schemas/ServerEventResponseFileSearchCallCompleted'
-          response.audio_transcript.annotation.added: '#/components/schemas/ServerEventResponseAudioTranscriptAnnotationAdded'
           response.invocation.delta: '#/components/schemas/ServerEventResponseInvocationDelta'
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeServerEvent'
@@ -7691,128 +7681,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/ServerEvent'
       description: Confirms that BYOM authorization headers were updated.
-    ServerEventResponseAnimationBlendshapeDelta:
-      type: object
-      required:
-        - type
-        - response_id
-        - item_id
-        - output_index
-        - content_index
-        - frames
-        - frame_index
-      properties:
-        type:
-          type: string
-          enum:
-            - response.animation_blendshapes.delta
-        response_id:
-          type: string
-        item_id:
-          type: string
-        output_index:
-          type: integer
-          format: int32
-        content_index:
-          type: integer
-          format: int32
-        frames:
-          anyOf:
-            - type: array
-              items:
-                type: array
-                items:
-                  type: number
-                  format: float
-            - type: string
-        frame_index:
-          type: integer
-          format: int32
-      allOf:
-        - $ref: '#/components/schemas/ServerEvent'
-      description: Represents a delta update of blendshape animation frames for a specific output of a response.
-    ServerEventResponseAnimationBlendshapeDone:
-      type: object
-      required:
-        - type
-        - response_id
-        - item_id
-        - output_index
-      properties:
-        type:
-          type: string
-          enum:
-            - response.animation_blendshapes.done
-        response_id:
-          type: string
-        item_id:
-          type: string
-        output_index:
-          type: integer
-          format: int32
-      allOf:
-        - $ref: '#/components/schemas/ServerEvent'
-      description: Indicates the completion of blendshape animation processing for a specific output of a response.
-    ServerEventResponseAnimationVisemeDelta:
-      type: object
-      required:
-        - type
-        - response_id
-        - item_id
-        - output_index
-        - content_index
-        - audio_offset_ms
-        - viseme_id
-      properties:
-        type:
-          type: string
-          enum:
-            - response.animation_viseme.delta
-        response_id:
-          type: string
-        item_id:
-          type: string
-        output_index:
-          type: integer
-          format: int32
-        content_index:
-          type: integer
-          format: int32
-        audio_offset_ms:
-          type: integer
-          format: int32
-        viseme_id:
-          type: integer
-          format: int32
-      allOf:
-        - $ref: '#/components/schemas/ServerEvent'
-      description: Represents a viseme ID delta update for animation based on audio.
-    ServerEventResponseAnimationVisemeDone:
-      type: object
-      required:
-        - type
-        - response_id
-        - item_id
-        - output_index
-        - content_index
-      properties:
-        type:
-          type: string
-          enum:
-            - response.animation_viseme.done
-        response_id:
-          type: string
-        item_id:
-          type: string
-        output_index:
-          type: integer
-          format: int32
-        content_index:
-          type: integer
-          format: int32
-      allOf:
-        - $ref: '#/components/schemas/ServerEvent'
-      description: Indicates completion of viseme animation delivery for a response.
     ServerEventResponseAudioTimestampDelta:
       type: object
       required:
@@ -7881,45 +7749,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/ServerEvent'
       description: Indicates completion of audio timestamp delivery for a response.
-    ServerEventResponseAudioTranscriptAnnotationAdded:
-      type: object
-      required:
-        - type
-        - response_id
-        - item_id
-        - output_index
-        - content_index
-        - annotation_index
-        - annotation
-      properties:
-        type:
-          type: string
-          enum:
-            - response.audio_transcript.annotation.added
-          description: The event type, must be `response.audio_transcript.annotation.added`.
-        response_id:
-          type: string
-          description: The ID of the response.
-        item_id:
-          type: string
-          description: The ID of the item.
-        output_index:
-          type: integer
-          format: int32
-          description: The index of the output item in the response.
-        content_index:
-          type: integer
-          format: int32
-          description: The index of the content part in the item's content array.
-        annotation_index:
-          type: integer
-          format: int32
-          description: The index of the annotation.
-        annotation:
-          description: The annotation object.
-      allOf:
-        - $ref: '#/components/schemas/ServerEvent'
-      description: Returned when an audio transcript annotation is added to a response.
     ServerEventResponseFileSearchCallCompleted:
       type: object
       required:
@@ -8207,12 +8036,8 @@ components:
             - warning
             - byom_credential.updated
             - session.avatar.connecting
-            - response.animation_blendshapes.delta
-            - response.animation_blendshapes.done
             - response.audio_timestamp.delta
             - response.audio_timestamp.done
-            - response.animation_viseme.delta
-            - response.animation_viseme.done
             - session.avatar.switch_to_speaking
             - session.avatar.switch_to_idle
             - response.video.delta
@@ -8222,7 +8047,6 @@ components:
             - response.file_search_call.searching
             - response.file_search_call.in_progress
             - response.file_search_call.completed
-            - response.audio_transcript.annotation.added
             - response.invocation.delta
       description: |-
         Azure-specific server event types. Server events that exist in OpenAI GA
