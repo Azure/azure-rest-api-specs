@@ -140,6 +140,8 @@ model RoleAssignmentFilter {
   principalId?: string;
 }
 
+// Java and Python retain the existing shared SDK PrincipalType through the
+// combined client's language-scoped alternate-type customization.
 /**
  * The principal type of the assigned principal ID.
  */
