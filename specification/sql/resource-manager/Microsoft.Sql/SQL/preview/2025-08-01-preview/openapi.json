@@ -952,6 +952,21 @@
                 }
               ]
             }
+          },
+          {
+            "name": "$skiptoken",
+            "in": "query",
+            "description": "An opaque token that identifies a starting point in the collection.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The number of elements to return from the collection.",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
           }
         ],
         "responses": {
@@ -971,6 +986,9 @@
         "x-ms-examples": {
           "Get all long term retention backups under the location.": {
             "$ref": "./examples/LongTermRetentionBackupListByLocation.json"
+          },
+          "Get long term retention backups under the location with pagination.": {
+            "$ref": "./examples/LongTermRetentionBackupListByLocationWithPagination.json"
           }
         },
         "x-ms-pageable": {
@@ -1491,6 +1509,21 @@
                 }
               ]
             }
+          },
+          {
+            "name": "$skiptoken",
+            "in": "query",
+            "description": "An opaque token that identifies a starting point in the collection.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The number of elements to return from the collection.",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
           }
         ],
         "responses": {
@@ -1510,6 +1543,9 @@
         "x-ms-examples": {
           "Get all long term retention backups under the server.": {
             "$ref": "./examples/LongTermRetentionBackupListByServer.json"
+          },
+          "Get long term retention backups under the server with pagination.": {
+            "$ref": "./examples/LongTermRetentionBackupListByServerWithPagination.json"
           }
         },
         "x-ms-pageable": {
@@ -1591,6 +1627,21 @@
                 }
               ]
             }
+          },
+          {
+            "name": "$skiptoken",
+            "in": "query",
+            "description": "An opaque token that identifies a starting point in the collection.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The number of elements to return from the collection.",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
           }
         ],
         "responses": {
@@ -1610,6 +1661,9 @@
         "x-ms-examples": {
           "Get all long term retention backups under the database.": {
             "$ref": "./examples/LongTermRetentionBackupListByDatabase.json"
+          },
+          "Get long term retention backups under the database with pagination.": {
+            "$ref": "./examples/LongTermRetentionBackupListByDatabaseWithPagination.json"
           }
         },
         "x-ms-pageable": {
@@ -3718,6 +3772,21 @@
                 }
               ]
             }
+          },
+          {
+            "name": "$skiptoken",
+            "in": "query",
+            "description": "An opaque token that identifies a starting point in the collection.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The number of elements to return from the collection.",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
           }
         ],
         "responses": {
@@ -3737,6 +3806,9 @@
         "x-ms-examples": {
           "Get all long term retention backups under the location based on resource group.": {
             "$ref": "./examples/ResourceGroupBasedLongTermRetentionBackupListByLocation.json"
+          },
+          "Get long term retention backups under the location based on resource group with pagination.": {
+            "$ref": "./examples/ResourceGroupBasedLongTermRetentionBackupListByLocationWithPagination.json"
           }
         },
         "x-ms-pageable": {
@@ -4275,6 +4347,21 @@
                 }
               ]
             }
+          },
+          {
+            "name": "$skiptoken",
+            "in": "query",
+            "description": "An opaque token that identifies a starting point in the collection.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The number of elements to return from the collection.",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
           }
         ],
         "responses": {
@@ -4294,6 +4381,9 @@
         "x-ms-examples": {
           "Get all long term retention backups under the server based on resource group.": {
             "$ref": "./examples/ResourceGroupBasedLongTermRetentionBackupListByServer.json"
+          },
+          "Get long term retention backups under the server based on resource group with pagination.": {
+            "$ref": "./examples/ResourceGroupBasedLongTermRetentionBackupListByServerWithPagination.json"
           }
         },
         "x-ms-pageable": {
@@ -4378,6 +4468,21 @@
                 }
               ]
             }
+          },
+          {
+            "name": "$skiptoken",
+            "in": "query",
+            "description": "An opaque token that identifies a starting point in the collection.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The number of elements to return from the collection.",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
           }
         ],
         "responses": {
@@ -4397,6 +4502,9 @@
         "x-ms-examples": {
           "Get all long term retention backups under the database.": {
             "$ref": "./examples/ResourceGroupBasedLongTermRetentionBackupListByDatabase.json"
+          },
+          "Get long term retention backups under the database based on resource group with pagination.": {
+            "$ref": "./examples/ResourceGroupBasedLongTermRetentionBackupListByDatabaseWithPagination.json"
           }
         },
         "x-ms-pageable": {
@@ -11976,6 +12084,9 @@
           }
         },
         "x-ms-examples": {
+          "Update the databases of a distributed availability group.": {
+            "$ref": "./examples/DistributedAvailabilityGroupsUpdateDatabases.json"
+          },
           "Update the distributed availability group replication mode before deleting it.": {
             "$ref": "./examples/DistributedAvailabilityGroupsUpdate.json"
           }
@@ -13104,6 +13215,9 @@
           }
         },
         "x-ms-examples": {
+          "Get a list of endpoint certificates including trusted root certificates.": {
+            "$ref": "./examples/EndpointCertificatesListByInstanceWithTrustedRootCertificates.json"
+          },
           "Get a list of endpoint certificates.": {
             "$ref": "./examples/EndpointCertificatesListByInstance.json"
           }
@@ -13160,6 +13274,9 @@
           }
         },
         "x-ms-examples": {
+          "Gets an endpoint certificate including trusted root certificates.": {
+            "$ref": "./examples/EndpointCertificatesGetWithTrustedRootCertificates.json"
+          },
           "Gets an endpoint certificate.": {
             "$ref": "./examples/EndpointCertificatesGet.json"
           }
@@ -45247,6 +45364,14 @@
           "$ref": "#/definitions/DeletedServerProperties",
           "description": "Resource properties.",
           "x-ms-client-flatten": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location.",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
         }
       },
       "allOf": [
@@ -45296,9 +45421,20 @@
           "description": "The original ID of the server before deletion.",
           "readOnly": true
         },
+        "originalResourceGroup": {
+          "type": "string",
+          "description": "The resource group of the original server before deletion.",
+          "readOnly": true
+        },
         "fullyQualifiedDomainName": {
           "type": "string",
           "description": "The fully qualified domain name of the server.",
+          "readOnly": true
+        },
+        "scheduledPurgeTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time when the deleted server will be permanently deleted (purged).",
           "readOnly": true
         }
       }
@@ -45523,6 +45659,10 @@
         "seedingMode": {
           "$ref": "#/definitions/SeedingModeType",
           "description": "Database seeding mode – can be Automatic (default), or Manual for supported scenarios."
+        },
+        "linkMode": {
+          "$ref": "#/definitions/LinkModeType",
+          "description": "Specifies whether the link operates in single-database or multi-database mode."
         },
         "databases": {
           "type": "array",
@@ -46400,6 +46540,14 @@
         "publicBlob": {
           "type": "string",
           "description": "The certificate public blob"
+        },
+        "trustedRootCertificates": {
+          "type": "array",
+          "description": "Trusted root certificates required to validate the instance certificate",
+          "items": {
+            "$ref": "#/definitions/EndpointTrustedRootCertificateInfo"
+          },
+          "readOnly": true
         }
       }
     },
@@ -46432,6 +46580,20 @@
           "format": "int32",
           "description": "The port an endpoint is connected to.",
           "readOnly": true
+        }
+      }
+    },
+    "EndpointTrustedRootCertificateInfo": {
+      "type": "object",
+      "description": "Trusted root certificate required to validate the instance certificate",
+      "properties": {
+        "subject": {
+          "type": "string",
+          "description": "Root certificate subject name"
+        },
+        "publicBlob": {
+          "type": "string",
+          "description": "Root certificate public blob as DER encoded hex string"
         }
       }
     },
@@ -49709,6 +49871,30 @@
           "type": "string",
           "description": "The reason for the capability not being available."
         }
+      }
+    },
+    "LinkModeType": {
+      "type": "string",
+      "description": "Specifies whether the link operates in single-database or multi-database mode.",
+      "enum": [
+        "SingleDatabase",
+        "MultiDatabase"
+      ],
+      "x-ms-enum": {
+        "name": "LinkModeType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SingleDatabase",
+            "value": "SingleDatabase",
+            "description": "The link operates in single-database mode."
+          },
+          {
+            "name": "MultiDatabase",
+            "value": "MultiDatabase",
+            "description": "The link operates in multi-database mode."
+          }
+        ]
       }
     },
     "LinkRole": {
