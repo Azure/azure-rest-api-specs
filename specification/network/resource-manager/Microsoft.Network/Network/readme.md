@@ -157,6 +157,19 @@ suppressions:
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/kubeSelectorGroups"]
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/kubeSelectorGroups/{kubeSelectorGroupName}"]
+  - code: ProvisioningStateMustBeReadOnly
+    from: networkWatcher.json
+    reason: >-
+      The TypeSpec emitter correctly places readOnly: true as a sibling of $ref, which AutoRest
+      supports (along with description, title, nullable, and x-* extensions). The TypeSpec source
+      correctly marks provisioningState with @visibility(Lifecycle.Read). The lintdiff rule does
+      not recognize readOnly next to $ref, so this suppression is needed.
+      See: https://github.com/Azure/typespec-azure/issues/4611
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/connectionAnalyzers/{connectionAnalyzerName}"].get.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/connectionAnalyzers/{connectionAnalyzerName}"].put.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/connectionAnalyzers/{connectionAnalyzerName}"].put.responses["201"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/connectionAnalyzers/{connectionAnalyzerName}"].patch.responses["200"].schema
   - code: XMSSecretInResponse
     from: expressRoute.json
     reason: >-
