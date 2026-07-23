@@ -39,13 +39,7 @@ using Microsoft.AlertsManagement;
 
 // C# customizations: virtually group the free-standing `previewAlertRule` op
 // under an interface `PreviewAlertRules` for the C# MPG emitter only, so the
-// generator can emit a proper client / extension class for it. The interface
-// is declared here in client.tsp (not in routes.tsp) so the OpenAPI/Swagger
-// output is not affected — the swagger emitter does not load client.tsp, so
-// the operationId remains `PreviewAlertRule` (rather than becoming
-// `PreviewAlertRules_PreviewAlertRule`). `@@clientLocation` is scoped to
-// "csharp" so other TCGC-based emitters (Python/Java/JS/Go) also see no change.
-
+// generator can emit a proper client / extension class for it.
 @@clientLocation(previewAlertRule, "PreviewAlertRules", "csharp");
 
 // C# customizations: rename AlertSeverity enum members to use Word names since numeric
