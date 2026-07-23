@@ -362,7 +362,7 @@ model ContainerConfiguration {
     authentication and never affects the image name; `image` remains a fully-qualified `host/repo:tag`
     literal. Omit for public images or registries already reachable by the platform's default identity.
     """)
-  @example("jfrog-foundryagents")
+  @example("my-registry-connection")
   registry_connection_id?: string;
 }
 
