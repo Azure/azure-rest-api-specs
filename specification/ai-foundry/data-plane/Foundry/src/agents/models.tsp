@@ -358,9 +358,8 @@ model ContainerConfiguration {
     The id (or name) of the Foundry project connection that provides the credentials used to
     authenticate to the private container registry hosting `image`. The connection abstracts the
     auth mechanism — for example a managed-identity-federated token exchange, or a username/token
-    secret — so registry credentials are never part of the agent definition. Used only for registry
-    authentication and never affects the image name; `image` remains a fully-qualified `host/repo:tag`
-    literal. Omit for public images or registries already reachable by the platform's default identity.
+    secret — so registry credentials are never part of the agent definition. Omit for public images
+    or registries already reachable by the platform's default identity.
     """)
   @example("my-registry-connection")
   registry_connection_id?: string;
