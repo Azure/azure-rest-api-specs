@@ -1,10 +1,12 @@
-name: "Namespace Approval - Validate Labels"
+name: "Package Name Approval - Validate Labels"
 
 on:
   pull_request_target:
     types:
       - labeled
       - unlabeled
+    branches:
+      - main
 
 permissions:
   contents: read
@@ -13,7 +15,7 @@ permissions:
 
 jobs:
   validate-approval:
-    name: Validate Namespace Approval
+    name: Validate Package Name Approval
     runs-on: ubuntu-24.04
     steps:
       # IMPORTANT: This workflow uses pull_request_target, which runs with repo write permissions.
@@ -26,7 +28,7 @@ jobs:
       - name: Install dependencies for github-script actions
         uses: ./.github/actions/install-deps-github-script
 
-      - name: Validate namespace approval label
+      - name: Validate package name approval label
         uses: actions/github-script@v8
         with:
           script: |
@@ -34,7 +36,7 @@ jobs:
               await import('${{ github.workspace }}/.github/workflows/src/namespace-approval/validate-approval.js');
             await validateApproval({ github, context, core });
 
-      - name: Update namespace approval status
+      - name: Update package name approval status
         uses: actions/github-script@v8
         with:
           script: |

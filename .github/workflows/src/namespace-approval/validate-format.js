@@ -11,7 +11,7 @@ import yaml from "js-yaml";
  * @typedef {Record<string, FormatRule | FormatRule[]>} FormatRulesConfig
  */
 
-const DEFAULT_RULES_PATH = ".github/namespace-format-rules.yml";
+const DEFAULT_RULES_PATH = ".github/package-name-format-rules.yml";
 
 /**
  * Load format rules from YAML config.
@@ -42,10 +42,10 @@ export async function loadFormatRules(core, rulesPath = DEFAULT_RULES_PATH) {
  */
 
 /**
- * Validate a namespace string against the format rules for a language.
+ * Validate a package name string against the format rules for a language.
  *
  * @param {string} language - Language key (e.g., "dotnet", "java", "go")
- * @param {string} namespace - The namespace string to validate
+ * @param {string} namespace - The package name string to validate
  * @param {FormatRulesConfig} rules - The loaded format rules
  * @returns {FormatValidationResult}
  */
@@ -82,9 +82,9 @@ export function validateNamespaceFormat(language, namespace, rules) {
 }
 
 /**
- * Validate all detected namespaces against format rules.
+ * Validate all detected package names against format rules.
  *
- * @param {Record<string, string>} namespacesFound - Map of language to namespace
+ * @param {Record<string, string>} namespacesFound - Map of language to package name
  * @param {FormatRulesConfig} rules - The loaded format rules
  * @returns {FormatValidationResult[]}
  */

@@ -23,11 +23,11 @@ const protectedLabelsConfig = {
   "global-approvers": ["global-admin"],
   "BreakingChange-Approved-Benign": ["user1", "user2"],
   "Versioning-Approved-BugFix": ["user1", "user2"],
-  "namespace-dotnet-approved": {
+  "package-name-dotnet-approved": {
     "management-plane": ["mgmt-approver1"],
     "data-plane": ["dp-approver1", "dp-approver2"],
   },
-  "namespace-approved-all": {
+  "package-name-approved-all": {
     "management-plane": ["mgmt-approver1"],
   },
 };
@@ -234,7 +234,7 @@ describe("checkLabel", () => {
   describe("plane-aware labels", () => {
     it("uses data-plane approvers when PR has data-plane label", async () => {
       context.payload = createLabeledPayload({
-        labelName: "namespace-dotnet-approved",
+        labelName: "package-name-dotnet-approved",
         actor: "dp-approver1",
         extraLabels: ["data-plane"],
       });
@@ -246,7 +246,7 @@ describe("checkLabel", () => {
 
     it("rejects mgmt-only approver on data-plane PR", async () => {
       context.payload = createLabeledPayload({
-        labelName: "namespace-dotnet-approved",
+        labelName: "package-name-dotnet-approved",
         actor: "mgmt-approver1",
         extraLabels: ["data-plane"],
       });
@@ -254,13 +254,13 @@ describe("checkLabel", () => {
       await invokeCheckLabel({ github, context, core });
 
       expect(github.rest.issues.removeLabel).toHaveBeenCalledWith(
-        expect.objectContaining({ name: "namespace-dotnet-approved" }),
+        expect.objectContaining({ name: "package-name-dotnet-approved" }),
       );
     });
 
     it("uses mgmt approvers when PR has Mgmt label", async () => {
       context.payload = createLabeledPayload({
-        labelName: "namespace-dotnet-approved",
+        labelName: "package-name-dotnet-approved",
         actor: "mgmt-approver1",
         extraLabels: ["Mgmt"],
       });
@@ -272,7 +272,7 @@ describe("checkLabel", () => {
 
     it("rejects data-plane approver on mgmt PR", async () => {
       context.payload = createLabeledPayload({
-        labelName: "namespace-dotnet-approved",
+        labelName: "package-name-dotnet-approved",
         actor: "dp-approver1",
         extraLabels: ["resource-manager"],
       });
@@ -280,13 +280,13 @@ describe("checkLabel", () => {
       await invokeCheckLabel({ github, context, core });
 
       expect(github.rest.issues.removeLabel).toHaveBeenCalledWith(
-        expect.objectContaining({ name: "namespace-dotnet-approved" }),
+        expect.objectContaining({ name: "package-name-dotnet-approved" }),
       );
     });
 
     it("global approver can apply plane-aware label on any plane", async () => {
       context.payload = createLabeledPayload({
-        labelName: "namespace-dotnet-approved",
+        labelName: "package-name-dotnet-approved",
         actor: "global-admin",
         extraLabels: ["Mgmt"],
       });
@@ -298,7 +298,7 @@ describe("checkLabel", () => {
 
     it("skips enforcement for plane-aware label when PR has no plane label", async () => {
       context.payload = createLabeledPayload({
-        labelName: "namespace-dotnet-approved",
+        labelName: "package-name-dotnet-approved",
         actor: "random-user",
       });
 
@@ -309,7 +309,7 @@ describe("checkLabel", () => {
 
     it("mgmt-only label rejects everyone on data-plane PR (except global)", async () => {
       context.payload = createLabeledPayload({
-        labelName: "namespace-approved-all",
+        labelName: "package-name-approved-all",
         actor: "mgmt-approver1",
         extraLabels: ["data-plane"],
       });
@@ -317,13 +317,13 @@ describe("checkLabel", () => {
       await invokeCheckLabel({ github, context, core });
 
       expect(github.rest.issues.removeLabel).toHaveBeenCalledWith(
-        expect.objectContaining({ name: "namespace-approved-all" }),
+        expect.objectContaining({ name: "package-name-approved-all" }),
       );
     });
 
     it("mgmt-only label allows mgmt approver on mgmt PR", async () => {
       context.payload = createLabeledPayload({
-        labelName: "namespace-approved-all",
+        labelName: "package-name-approved-all",
         actor: "mgmt-approver1",
         extraLabels: ["Mgmt"],
       });

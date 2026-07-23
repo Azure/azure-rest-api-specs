@@ -1,14 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access */
 import { execFile } from "child_process";
+import { existsSync } from "fs";
 import { readFile, writeFile } from "fs/promises";
-import yaml from "js-yaml";
 import { describe, expect, it, vi } from "vitest";
 import { createMockContext, createMockCore } from "../mocks.js";
 
-// We can't easily test the default export (it depends on getChangedFiles and process.env),
-// but we can test extractNamespaces and resolveLanguage by re-importing the module internals.
-// Since they're not exported, we test them indirectly through tspconfig content.
-
-// Mock readFile to return tspconfig content
+// Mock fs/promises for readFile (metadata JSON) and writeFile (results)
 vi.mock("fs/promises", async (importOriginal) => {
   /** @type {typeof import("fs/promises")} */
   const actual = /** @type {any} */ (await importOriginal());
@@ -19,22 +16,32 @@ vi.mock("fs/promises", async (importOriginal) => {
   };
 });
 
-// Mock child_process.execFile for git show (base branch comparison)
-// promisify(execFile) expects (err, stdout, stderr) callback pattern
+// Mock fs.existsSync for metadata output and base-ref path checks
+vi.mock("fs", async (importOriginal) => {
+  /** @type {typeof import("fs")} */
+  const actual = /** @type {any} */ (await importOriginal());
+  return {
+    ...actual,
+    existsSync: vi.fn().mockReturnValue(true),
+  };
+});
+
+// Mock child_process.execFile for npx tsp compile
 vi.mock("child_process", () => ({
   execFile: vi.fn(
     (
       /** @type {string} */ _cmd,
       /** @type {string[]} */ _args,
-      /** @type {(err: Error | null, stdout: string, stderr: string) => void} */ cb,
+      /** @type {object | ((err: Error | null, stdout: string, stderr: string) => void)} */ cbOrOpts,
+      /** @type {((err: Error | null, stdout: string, stderr: string) => void) | undefined} */ maybeCb,
     ) => {
-      // Default: file not found on base branch
-      cb(new Error("fatal: path not found"), "", "");
+      const cb = typeof cbOrOpts === "function" ? cbOrOpts : maybeCb;
+      if (cb) cb(null, "", "");
     },
   ),
 }));
 
-// Mock getChangedFilesStatuses — path must match the import in detect-namespaces.js
+// Mock getChangedFilesStatuses
 vi.mock("../../../shared/src/changed-files.js", () => ({
   getChangedFilesStatuses: vi.fn().mockResolvedValue({
     additions: [],
@@ -50,7 +57,7 @@ vi.mock("../../../shared/src/changed-files.js", () => ({
 // Mock format validation
 vi.mock("../../src/namespace-approval/validate-format.js", () => ({
   loadFormatRules: vi.fn().mockReturnValue(null),
-  validateNamespaceFormat: vi.fn(),
+  validateAllNamespaces: vi.fn().mockReturnValue([]),
 }));
 
 // Import after mocks
@@ -66,6 +73,8 @@ const writeFileMock = /** @type {any} */ (writeFile);
 const getChangedFilesStatusesMock = /** @type {any} */ (getChangedFilesStatuses);
 /** @type {import("vitest").Mock} */
 const execFileMock = /** @type {any} */ (execFile);
+/** @type {import("vitest").Mock} */
+const existsSyncMock = /** @type {any} */ (existsSync);
 
 /** @type {ReturnType<typeof createMockCore>} */
 let core;
@@ -80,8 +89,8 @@ function args() {
 }
 
 /**
- * Helper to mock getChangedFilesStatuses with modifications (most common case).
- * @param {string[]} modifications - Files that were modified
+ * Helper to mock getChangedFilesStatuses.
+ * @param {string[]} modifications
  * @param {{ additions?: string[], renames?: {from: string, to: string}[] }} [extra]
  */
 function mockFileStatuses(modifications, extra = {}) {
@@ -94,190 +103,116 @@ function mockFileStatuses(modifications, extra = {}) {
   });
 }
 
-function mgmtTspconfig() {
-  return yaml.dump({
-    linter: {
-      extends: ["@azure-tools/typespec-azure-resource-manager/all"],
-    },
-    options: {
-      "@azure-tools/typespec-csharp": {
-        namespace: "Azure.ResourceManager.Compute",
-      },
-      "@azure-tools/typespec-java": {
-        "emitter-output-dir": "{output-dir}/{service-dir}/azure-resourcemanager-compute",
-        namespace: "com.azure.resourcemanager.compute",
-      },
-      "@azure-tools/typespec-python": {
-        "package-details": { name: "azure-mgmt-compute" },
-      },
-      "@azure-tools/typespec-ts": {
-        namespace: "@azure/arm-compute",
-      },
-      "@azure-tools/typespec-go": {
-        module: "sdk/resourcemanager/compute/armcompute",
-      },
-    },
+/**
+ * Create a metadata JSON response as the emitter would produce.
+ * @param {Record<string, Array<{packageName: string, namespace?: string}>>} languages
+ * @param {"management" | "data"} type
+ * @returns {string}
+ */
+function makeMetadataJson(languages, type) {
+  return JSON.stringify({
+    emitterVersion: "0.2.1",
+    generatedAt: "2025-01-01T00:00:00Z",
+    typespec: { namespace: "Test", type },
+    languages,
+    sourceConfigPath: "/test/tspconfig.yaml",
   });
 }
 
-function dataplaneTspconfig() {
-  return yaml.dump({
-    linter: {
-      extends: ["@azure-tools/typespec-azure-core/all"],
-    },
-    options: {
-      "@azure-tools/typespec-java": {
-        namespace: "com.azure.messaging.eventgrid",
-      },
-      "@azure-tools/typespec-python": {
-        "package-details": { name: "azure-eventgrid" },
-      },
-      "@azure-tools/typespec-ts": {
-        namespace: "@azure/eventgrid",
-      },
-    },
-  });
-}
-
-function rustTspconfig() {
-  return yaml.dump({
-    options: {
-      "@azure-tools/typespec-rust": {
-        "crate-name": "azure_storage_blobs",
-      },
-    },
-  });
-}
-
-describe("detect-namespaces", () => {
-  // Set RUNNER_TEMP for tests since we removed the fallback
+describe("detect-namespaces (dual tsp compile)", () => {
   process.env.RUNNER_TEMP = process.env.RUNNER_TEMP ?? "/tmp";
+  process.env.BASE_REF_DIR = "/base-ref";
 
-  // Default: git show fails (file not on base branch = new file)
-  function mockGitShowNotFound() {
-    execFileMock.mockImplementation(
-      (
-        /** @type {string} */ _cmd,
-        /** @type {string[]} */ _args,
-        /** @type {(err: Error | null, stdout: string, stderr: string) => void} */ cb,
-      ) => {
-        cb(new Error("fatal: path not found"), "", "");
-      },
-    );
-  }
-
-  /**
-   * Mock git show to return base branch content for a given file.
-   * @param {string} content - YAML content to return
-   */
-  function mockGitShowReturns(content) {
-    execFileMock.mockImplementation(
-      (
-        /** @type {string} */ _cmd,
-        /** @type {string[]} */ _args,
-        /** @type {(err: Error | null, stdout: string, stderr: string) => void} */ cb,
-      ) => {
-        cb(null, content, "");
-      },
-    );
-  }
-
-  it("should detect management plane namespaces from path", async () => {
+  it("should detect management plane package names via tsp compile", async () => {
     core = createMockCore();
     context = createMockContext();
     context.payload = { pull_request: { number: 42 }, action: "opened" };
     const file = "specification/compute/Compute.Management/tspconfig.yaml";
     mockFileStatuses([file]);
-    readFileMock.mockResolvedValue(mgmtTspconfig());
+
+    // existsSync: true for metadata output, false for base-ref tspconfig (new file)
+    existsSyncMock.mockImplementation((/** @type {string} */ path) => {
+      if (path.includes("base-ref")) return false;
+      return true; // metadata JSON exists
+    });
+
+    execFileMock.mockImplementation((_cmd, _args, cbOrOpts, maybeCb) => {
+      const cb = typeof cbOrOpts === "function" ? cbOrOpts : maybeCb;
+      if (cb) cb(null, "", "");
+    });
+
+    readFileMock.mockResolvedValue(
+      makeMetadataJson(
+        {
+          csharp: [
+            {
+              packageName: "Azure.ResourceManager.Compute",
+              namespace: "Azure.ResourceManager.Compute",
+            },
+          ],
+          java: [
+            {
+              packageName: "azure-resourcemanager-compute",
+              namespace: "com.azure.resourcemanager.compute",
+            },
+          ],
+          python: [{ packageName: "azure-mgmt-compute", namespace: "azure.mgmt.compute" }],
+          typescript: [{ packageName: "@azure/arm-compute", namespace: "Azure.Compute" }],
+        },
+        "management",
+      ),
+    );
 
     await detectNamespaces(args());
 
     expect(core.setOutput).toHaveBeenCalledWith("results", "true");
+    const writtenJson = String(writeFileMock.mock.lastCall?.[1]);
+    const results = JSON.parse(writtenJson);
+    expect(results.isMgmt).toBe(true);
+    expect(results.namespacesFound.dotnet).toBe("Azure.ResourceManager.Compute");
+    expect(results.namespacesFound.java).toBe("azure-resourcemanager-compute");
+    expect(results.namespacesFound.python).toBe("azure-mgmt-compute");
+    expect(results.namespacesFound.typescript).toBe("@azure/arm-compute");
   });
 
-  it("should detect data plane from linter extends", async () => {
+  it("should detect data plane package names", async () => {
     core = createMockCore();
     context = createMockContext();
     context.payload = { pull_request: { number: 43 }, action: "opened" };
     const file = "specification/eventgrid/EventGrid/tspconfig.yaml";
     mockFileStatuses([file]);
-    readFileMock.mockResolvedValue(dataplaneTspconfig());
 
-    await detectNamespaces(args());
-
-    expect(core.setOutput).toHaveBeenCalledWith("results", "true");
-  });
-
-  it("should extract rust crate-name", async () => {
-    core = createMockCore();
-    context = createMockContext();
-    context.payload = { pull_request: { number: 44 }, action: "opened" };
-    const file = "specification/storage/Storage/tspconfig.yaml";
-    mockFileStatuses([file]);
-    readFileMock.mockResolvedValue(rustTspconfig());
-
-    await detectNamespaces(args());
-
-    expect(core.setOutput).toHaveBeenCalledWith("results", "true");
-  });
-
-  it("should expand Go module template variables using emitter-level service-dir", async () => {
-    core = createMockCore();
-    context = createMockContext();
-    context.payload = { pull_request: { number: 50 }, action: "opened" };
-    const file = "specification/enclave/Enclave.Management/tspconfig.yaml";
-    mockFileStatuses([file]);
+    existsSyncMock.mockImplementation((/** @type {string} */ path) => {
+      if (path.includes("base-ref")) return false;
+      return true;
+    });
+    execFileMock.mockImplementation((_cmd, _args, cbOrOpts, maybeCb) => {
+      const cb = typeof cbOrOpts === "function" ? cbOrOpts : maybeCb;
+      if (cb) cb(null, "", "");
+    });
     readFileMock.mockResolvedValue(
-      yaml.dump({
-        linter: { extends: ["@azure-tools/typespec-azure-resource-manager/all"] },
-        parameters: {
-          "service-dir": { default: "sdk/enclave" },
+      makeMetadataJson(
+        {
+          java: [
+            {
+              packageName: "azure-messaging-eventgrid",
+              namespace: "com.azure.messaging.eventgrid",
+            },
+          ],
+          python: [{ packageName: "azure-eventgrid", namespace: "azure.eventgrid" }],
+          typescript: [{ packageName: "@azure/eventgrid", namespace: "Azure.EventGrid" }],
         },
-        options: {
-          "@azure-tools/typespec-go": {
-            "service-dir": "sdk/resourcemanager/enclave",
-            module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armenclave",
-          },
-        },
-      }),
+        "data",
+      ),
     );
-    mockGitShowNotFound();
 
     await detectNamespaces(args());
 
     expect(core.setOutput).toHaveBeenCalledWith("results", "true");
-    // Verify the written results contain the expanded Go namespace
     const writtenJson = String(writeFileMock.mock.lastCall?.[1]);
-    expect(writtenJson).toContain('"go": "sdk/resourcemanager/enclave/armenclave"');
-  });
-
-  it("should fall back to global parameters for Go module template variables", async () => {
-    core = createMockCore();
-    context = createMockContext();
-    context.payload = { pull_request: { number: 51 }, action: "opened" };
-    const file = "specification/enclave/Enclave.Management/tspconfig.yaml";
-    mockFileStatuses([file]);
-    readFileMock.mockResolvedValue(
-      yaml.dump({
-        linter: { extends: ["@azure-tools/typespec-azure-resource-manager/all"] },
-        parameters: {
-          "service-dir": { default: "sdk/resourcemanager/enclave" },
-        },
-        options: {
-          "@azure-tools/typespec-go": {
-            module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armenclave",
-          },
-        },
-      }),
-    );
-    mockGitShowNotFound();
-
-    await detectNamespaces(args());
-
-    expect(core.setOutput).toHaveBeenCalledWith("results", "true");
-    // Verify the written results contain the expanded Go namespace
-    const writtenJson2 = String(writeFileMock.mock.lastCall?.[1]);
-    expect(writtenJson2).toContain('"go": "sdk/resourcemanager/enclave/armenclave"');
+    const results = JSON.parse(writtenJson);
+    expect(results.isDataPlane).toBe(true);
+    expect(results.isMgmt).toBe(false);
   });
 
   it("should skip when no tspconfig.yaml changes detected", async () => {
@@ -292,199 +227,112 @@ describe("detect-namespaces", () => {
     expect(core.setOutput).not.toHaveBeenCalled();
   });
 
-  it("should handle tspconfig with no emitter options", async () => {
-    core = createMockCore();
-    context = createMockContext();
-    context.payload = { pull_request: { number: 46 }, action: "opened" };
-    const file = "specification/compute/Compute.Management/tspconfig.yaml";
-    mockFileStatuses([file]);
-    readFileMock.mockResolvedValue(yaml.dump({ linter: {} }));
-    mockGitShowNotFound();
-
-    await detectNamespaces(args());
-
-    expect(core.info).toHaveBeenCalledWith(expect.stringContaining("No emitter options found"));
-  });
-
-  it("should skip namespaces unchanged from base branch", async () => {
+  it("should filter unchanged package names using dual tsp compile", async () => {
     core = createMockCore();
     context = createMockContext();
     context.payload = { pull_request: { number: 47 }, action: "synchronize" };
     const file = "specification/compute/Compute.Management/tspconfig.yaml";
     mockFileStatuses([file]);
-    // PR version: same namespaces as base, but with added generate-samples option
-    const prContent = yaml.dump({
-      options: {
-        "@azure-tools/typespec-csharp": {
-          namespace: "Azure.ResourceManager.Compute",
-        },
-        "@azure-tools/typespec-java": {
-          namespace: "com.azure.resourcemanager.compute",
-          "generate-samples": false,
-          "generate-tests": false,
-        },
-      },
+
+    // Both base-ref tspconfig and metadata output exist
+    existsSyncMock.mockReturnValue(true);
+
+    execFileMock.mockImplementation((_cmd, _args, cbOrOpts, maybeCb) => {
+      const cb = typeof cbOrOpts === "function" ? cbOrOpts : maybeCb;
+      if (cb) cb(null, "", "");
     });
-    readFileMock.mockResolvedValue(prContent);
-    // Base version: same namespaces, without generate-samples
-    const baseContent = yaml.dump({
-      options: {
-        "@azure-tools/typespec-csharp": {
-          namespace: "Azure.ResourceManager.Compute",
+
+    // readFile is called twice: once for PR metadata, once for base metadata
+    // Both return the same package names = unchanged
+    readFileMock.mockResolvedValue(
+      makeMetadataJson(
+        {
+          csharp: [
+            {
+              packageName: "Azure.ResourceManager.Compute",
+              namespace: "Azure.ResourceManager.Compute",
+            },
+          ],
+          java: [
+            {
+              packageName: "azure-resourcemanager-compute",
+              namespace: "com.azure.resourcemanager.compute",
+            },
+          ],
         },
-        "@azure-tools/typespec-java": {
-          namespace: "com.azure.resourcemanager.compute",
-        },
-      },
-    });
-    mockGitShowReturns(baseContent);
+        "management",
+      ),
+    );
 
     await detectNamespaces(args());
 
-    // No namespace changes → should not output results
     expect(core.setOutput).not.toHaveBeenCalled();
     expect(core.info).toHaveBeenCalledWith(
-      "No namespace changes detected after comparing with base branch",
+      "No package name changes detected after comparing with base branch",
     );
   });
 
-  it("should detect only the language whose namespace changed", async () => {
+  it("should detect only the language whose package name changed", async () => {
     core = createMockCore();
     context = createMockContext();
     context.payload = { pull_request: { number: 48 }, action: "synchronize" };
     const file = "specification/compute/Compute.Management/tspconfig.yaml";
     mockFileStatuses([file]);
-    // PR version: typescript namespace changed
-    const prContent = yaml.dump({
-      options: {
-        "@azure-tools/typespec-csharp": {
-          namespace: "Azure.ResourceManager.Compute",
-        },
-        "@azure-tools/typespec-java": {
-          namespace: "com.azure.resourcemanager.compute",
-        },
-        "@azure-tools/typespec-ts": {
-          "package-details": { name: "@azure/arm-compute-v2" },
-        },
-      },
+
+    existsSyncMock.mockReturnValue(true);
+    execFileMock.mockImplementation((_cmd, _args, cbOrOpts, maybeCb) => {
+      const cb = typeof cbOrOpts === "function" ? cbOrOpts : maybeCb;
+      if (cb) cb(null, "", "");
     });
-    readFileMock.mockResolvedValue(prContent);
-    // Base version: original typescript namespace
-    const baseContent = yaml.dump({
-      options: {
-        "@azure-tools/typespec-csharp": {
-          namespace: "Azure.ResourceManager.Compute",
-        },
-        "@azure-tools/typespec-java": {
-          namespace: "com.azure.resourcemanager.compute",
-        },
-        "@azure-tools/typespec-ts": {
-          "package-details": { name: "@azure/arm-compute" },
-        },
-      },
+
+    // PR has updated typescript package name; base has original
+    let readCount = 0;
+    readFileMock.mockImplementation(() => {
+      readCount++;
+      if (readCount === 1) {
+        // PR head result
+        return Promise.resolve(
+          makeMetadataJson(
+            {
+              csharp: [
+                {
+                  packageName: "Azure.ResourceManager.Compute",
+                  namespace: "Azure.ResourceManager.Compute",
+                },
+              ],
+              typescript: [{ packageName: "@azure/arm-compute-v2", namespace: "Azure.Compute" }],
+            },
+            "management",
+          ),
+        );
+      }
+      // Base result
+      return Promise.resolve(
+        makeMetadataJson(
+          {
+            csharp: [
+              {
+                packageName: "Azure.ResourceManager.Compute",
+                namespace: "Azure.ResourceManager.Compute",
+              },
+            ],
+            typescript: [{ packageName: "@azure/arm-compute", namespace: "Azure.Compute" }],
+          },
+          "management",
+        ),
+      );
     });
-    mockGitShowReturns(baseContent);
 
     await detectNamespaces(args());
 
-    // Only typescript changed → should output results
     expect(core.setOutput).toHaveBeenCalledWith("results", "true");
-    // Verify dotnet and java were skipped
     expect(core.info).toHaveBeenCalledWith(
-      expect.stringContaining("Namespace unchanged for dotnet"),
+      expect.stringContaining("Package name unchanged for dotnet"),
     );
-    expect(core.info).toHaveBeenCalledWith(expect.stringContaining("Namespace unchanged for java"));
-  });
-
-  it("should skip unchanged namespaces when file is renamed (folder migration)", async () => {
-    core = createMockCore();
-    context = createMockContext();
-    context.payload = { pull_request: { number: 49 }, action: "opened" };
-    const oldPath = "specification/edgezones/resource-manager/tspconfig.yaml";
-    const newPath =
-      "specification/edgezones/resource-manager/Microsoft.EdgeZones/EdgeZones/tspconfig.yaml";
-    // Report as a rename
-    mockFileStatuses([], { renames: [{ from: oldPath, to: newPath }] });
-    // PR version: namespaces unchanged, only output paths differ
-    const content = yaml.dump({
-      options: {
-        "@azure-tools/typespec-python": {
-          "emitter-output-dir": "{output-dir}/{service-dir}/azure-mgmt-edgezones",
-          namespace: "azure.mgmt.edgezones",
-        },
-        "@azure-tools/typespec-java": {
-          namespace: "com.azure.resourcemanager.edgezones",
-        },
-        "@azure-tools/typespec-csharp": {
-          namespace: "Azure.ResourceManager.EdgeZones",
-        },
-      },
-    });
-    readFileMock.mockResolvedValue(content);
-    // Base version at old path: same namespaces
-    mockGitShowReturns(content);
-
-    await detectNamespaces(args());
-
-    // All namespaces unchanged → should not output results
-    expect(core.setOutput).not.toHaveBeenCalled();
-    expect(core.info).toHaveBeenCalledWith(
-      "No namespace changes detected after comparing with base branch",
-    );
-  });
-
-  it("should use old path for git show when file is renamed", async () => {
-    core = createMockCore();
-    context = createMockContext();
-    context.payload = { pull_request: { number: 50 }, action: "opened" };
-    const oldPath = "specification/edgezones/resource-manager/tspconfig.yaml";
-    const newPath =
-      "specification/edgezones/resource-manager/Microsoft.EdgeZones/EdgeZones/tspconfig.yaml";
-    mockFileStatuses([], { renames: [{ from: oldPath, to: newPath }] });
-    // PR version: typescript namespace changed during rename
-    const prContent = yaml.dump({
-      options: {
-        "@azure-tools/typespec-csharp": {
-          namespace: "Azure.ResourceManager.EdgeZones",
-        },
-        "@azure-tools/typespec-ts": {
-          namespace: "@azure/arm-edgezones-v2",
-        },
-      },
-    });
-    readFileMock.mockResolvedValue(prContent);
-    // Base version: original typescript namespace
-    const baseContent = yaml.dump({
-      options: {
-        "@azure-tools/typespec-csharp": {
-          namespace: "Azure.ResourceManager.EdgeZones",
-        },
-        "@azure-tools/typespec-ts": {
-          namespace: "@azure/arm-edgezones",
-        },
-      },
-    });
-    execFileMock.mockImplementation(
-      (
-        /** @type {string} */ _cmd,
-        /** @type {string[]} */ args,
-        /** @type {(err: Error | null, stdout: string, stderr: string) => void} */ cb,
-      ) => {
-        // Verify git show is called with the OLD path, not the new path
-        expect(args[1]).toContain(oldPath);
-        expect(args[1]).not.toContain("Microsoft.EdgeZones");
-        cb(null, baseContent, "");
-      },
-    );
-
-    await detectNamespaces(args());
-
-    // Only typescript changed → should output results
-    expect(core.setOutput).toHaveBeenCalledWith("results", "true");
-    // dotnet unchanged
-    expect(core.info).toHaveBeenCalledWith(
-      expect.stringContaining("Namespace unchanged for dotnet"),
-    );
+    const writtenJson = String(writeFileMock.mock.lastCall?.[1]);
+    const results = JSON.parse(writtenJson);
+    expect(results.namespacesFound.typescript).toBe("@azure/arm-compute-v2");
+    expect(results.namespacesFound.dotnet).toBeUndefined();
   });
 
   it("should treat additions as new files (no base comparison)", async () => {
@@ -493,21 +341,136 @@ describe("detect-namespaces", () => {
     context.payload = { pull_request: { number: 51 }, action: "opened" };
     const file = "specification/newservice/NewService/tspconfig.yaml";
     mockFileStatuses([], { additions: [file] });
+
+    existsSyncMock.mockImplementation((/** @type {string} */ path) => {
+      if (path.includes("base-ref")) return false;
+      return true;
+    });
+    execFileMock.mockImplementation((_cmd, _args, cbOrOpts, maybeCb) => {
+      const cb = typeof cbOrOpts === "function" ? cbOrOpts : maybeCb;
+      if (cb) cb(null, "", "");
+    });
     readFileMock.mockResolvedValue(
-      yaml.dump({
-        options: {
-          "@azure-tools/typespec-java": {
-            namespace: "com.azure.newservice",
-          },
+      makeMetadataJson(
+        {
+          java: [{ packageName: "azure-newservice", namespace: "com.azure.newservice" }],
         },
-      }),
+        "data",
+      ),
     );
-    // git show should NOT be called for additions
-    mockGitShowNotFound();
 
     await detectNamespaces(args());
 
-    // New file → all namespaces reported
     expect(core.setOutput).toHaveBeenCalledWith("results", "true");
+  });
+
+  it("should handle base compile failure gracefully (treat as new)", async () => {
+    core = createMockCore();
+    context = createMockContext();
+    context.payload = { pull_request: { number: 53 }, action: "synchronize" };
+    const file = "specification/compute/Compute.Management/tspconfig.yaml";
+    mockFileStatuses([file]);
+
+    existsSyncMock.mockImplementation((/** @type {string} */ path) => {
+      if (path.includes("base-ref") && path.includes("typespec-metadata.json")) {
+        return false; // base compile output missing
+      }
+      return true; // base tspconfig exists, PR metadata exists
+    });
+
+    execFileMock.mockImplementation((_cmd, _args, cbOrOpts, maybeCb) => {
+      const cb = typeof cbOrOpts === "function" ? cbOrOpts : maybeCb;
+      if (cb) cb(null, "", "");
+    });
+    readFileMock.mockResolvedValue(
+      makeMetadataJson(
+        {
+          csharp: [
+            {
+              packageName: "Azure.ResourceManager.Compute",
+              namespace: "Azure.ResourceManager.Compute",
+            },
+          ],
+        },
+        "management",
+      ),
+    );
+
+    await detectNamespaces(args());
+
+    // Base failed, so treat all as new
+    expect(core.setOutput).toHaveBeenCalledWith("results", "true");
+    expect(core.warning).toHaveBeenCalledWith(expect.stringContaining("Failed to compile base"));
+  });
+
+  it("should map csharp to dotnet in language keys", async () => {
+    core = createMockCore();
+    context = createMockContext();
+    context.payload = { pull_request: { number: 52 }, action: "opened" };
+    const file = "specification/test/Test/tspconfig.yaml";
+    mockFileStatuses([], { additions: [file] });
+
+    existsSyncMock.mockImplementation((/** @type {string} */ path) => {
+      if (path.includes("base-ref")) return false;
+      return true;
+    });
+    execFileMock.mockImplementation((_cmd, _args, cbOrOpts, maybeCb) => {
+      const cb = typeof cbOrOpts === "function" ? cbOrOpts : maybeCb;
+      if (cb) cb(null, "", "");
+    });
+    readFileMock.mockResolvedValue(
+      makeMetadataJson(
+        {
+          csharp: [{ packageName: "Azure.Test", namespace: "Azure.Test" }],
+          "http-client-csharp": [{ packageName: "Azure.Test", namespace: "Azure.Test" }],
+        },
+        "data",
+      ),
+    );
+
+    await detectNamespaces(args());
+
+    expect(core.setOutput).toHaveBeenCalledWith("results", "true");
+    const writtenJson = String(writeFileMock.mock.lastCall?.[1]);
+    const results = JSON.parse(writtenJson);
+    expect(results.namespacesFound.dotnet).toBe("Azure.Test");
+  });
+
+  it("should use basePath from rename for base compilation", async () => {
+    core = createMockCore();
+    context = createMockContext();
+    context.payload = { pull_request: { number: 54 }, action: "opened" };
+    const oldPath = "specification/edgezones/resource-manager/tspconfig.yaml";
+    const newPath =
+      "specification/edgezones/resource-manager/Microsoft.EdgeZones/EdgeZones/tspconfig.yaml";
+    mockFileStatuses([], { renames: [{ from: oldPath, to: newPath }] });
+
+    // base-ref has the OLD path, not the new path
+    existsSyncMock.mockImplementation((/** @type {string} */ path) => {
+      if (path.includes("base-ref") && path.includes(oldPath)) return true;
+      if (path.includes("base-ref") && path.includes("Microsoft.EdgeZones")) return false;
+      return true; // metadata outputs
+    });
+    execFileMock.mockImplementation((_cmd, _args, cbOrOpts, maybeCb) => {
+      const cb = typeof cbOrOpts === "function" ? cbOrOpts : maybeCb;
+      if (cb) cb(null, "", "");
+    });
+    // Both return same package names = unchanged
+    readFileMock.mockResolvedValue(
+      makeMetadataJson(
+        {
+          python: [{ packageName: "azure-mgmt-edgezones", namespace: "azure.mgmt.edgezones" }],
+        },
+        "management",
+      ),
+    );
+
+    await detectNamespaces(args());
+
+    // All unchanged
+    expect(core.setOutput).not.toHaveBeenCalled();
+    expect(core.info).toHaveBeenCalledWith(
+      "No package name changes detected after comparing with base branch",
+    );
   });
 });

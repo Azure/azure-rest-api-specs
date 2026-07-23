@@ -1,6 +1,6 @@
-# Namespace Format Rules
-# These regex patterns validate namespace/package naming conventions per language.
-# Namespaces that fail validation are flagged in the bot comment before manual review.
+# Package Name Format Rules
+# These regex patterns validate package naming conventions per language.
+# Package names that fail validation are flagged in the bot comment before manual review.
 #
 # To update: submit a PR modifying the patterns below.
 # Each language can have one rule or multiple rules (array).
@@ -15,8 +15,8 @@ dotnet:
 java:
   - pattern: "^azure-resourcemanager-[a-z0-9]+(?:-[a-z0-9]+)?$"
     description: "Maven artifact: azure-resourcemanager-{name} (lowercase)"
-  - pattern: '^com\.azure\.resourcemanager\.[a-z0-9]+(?:\.[a-z0-9]+)?$'
-    description: "Java package: com.azure.resourcemanager.{name} (lowercase)"
+  - pattern: "^com\\.azure\\.resourcemanager:azure-resourcemanager-[a-z0-9]+(?:-[a-z0-9]+)?$"
+    description: "Maven coordinate: com.azure.resourcemanager:azure-resourcemanager-{name} (lowercase)"
 
 go:
   pattern: "^sdk/resourcemanager/(?:[a-z0-9]+)/(?:arm[a-z0-9]+)$"
@@ -27,5 +27,5 @@ typescript:
   description: "@azure/arm-{name} (lowercase)"
 
 python:
-  pattern: '^azure\.mgmt\.[a-z0-9]+$'
-  description: "azure.mgmt.{name} (dot-separated namespace, lowercase)"
+  pattern: "^azure-mgmt-[a-z0-9]+$"
+  description: "azure-mgmt-{name} (PyPI package name, lowercase)"
