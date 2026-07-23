@@ -1,0 +1,69 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "rg",
+    "sandboxName": "testSandbox0",
+    "api-version": "2026-02-01-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/sandboxes/testSandbox0",
+        "name": "testSandbox0",
+        "type": "Microsoft.App/sandboxes",
+        "properties": {
+          "id": "sandbox-12345",
+          "createdAt": "2026-01-15T10:30:00Z",
+          "state": "Running",
+          "snapshotId": "snapshot-67890",
+          "ports": [
+            {
+              "name": "http",
+              "port": 8080,
+              "url": "https://testsandbox0-8080.sandbox.eastus.azurecontainerapps.io",
+              "activationMode": "Manual"
+            },
+            {
+              "name": "https",
+              "port": 8443,
+              "url": "https://testsandbox0-8443.sandbox.eastus.azurecontainerapps.io",
+              "auth": {
+                "provider": "github",
+                "settings": {
+                  "clientId": "abc123"
+                }
+              },
+              "activationMode": "OnDemand"
+            }
+          ],
+          "labels": {
+            "environment": "dev",
+            "team": "platform"
+          },
+          "vmmType": "firecracker",
+          "entrypoint": [
+            "/bin/sh"
+          ],
+          "cmd": [
+            "-c",
+            "npm start"
+          ],
+          "sourcesRef": {
+            "type": "Image",
+            "image": "mcr.microsoft.com/azuredocs/aci-helloworld:latest"
+          },
+          "resources": {
+            "cpu": 1.0,
+            "memory": "2Gi",
+            "disk": "10Gi"
+          },
+          "connections": [
+            "conn-123",
+            "conn-456"
+          ]
+        }
+      }
+    }
+  }
+}
