@@ -16289,6 +16289,13 @@ model NetworkVirtualAppliancePropertiesFormat {
   addressPrefix?: string;
 
   /**
+   * Address Prefix for Dual-Stack NVAs.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_09_01)
+  addressPrefixV6?: string;
+
+  /**
    * BootStrapConfigurationBlobs storage URLs.
    */
   bootStrapConfigurationBlobs?: string[];
@@ -16390,10 +16397,25 @@ model NetworkVirtualAppliancePropertiesFormat {
   nvaInterfaceConfigurations?: NvaInterfaceConfigurationsProperties[];
 
   /**
+   * The address families to deploy the NVA in. ["IPv4", "IPv6"] deploys a dual-stack NVA (the vHub/VNet must also be dual-stack). ["IPv4"], an empty array, or omitting the field deploys an IPv4-only NVA. The value "IPv6" may only appear in combination with "IPv4"; standalone ["IPv6"] is reserved for future use and is rejected by the service today.
+   */
+  @added(Versions.v2025_09_01)
+  @uniqueItems
+  @maxItems(2)
+  addressFamily?: IPVersion[];
+
+  /**
    * A Internal Load Balancer's HA port frontend IP address. Can be used to set routes & UDR to load balance traffic between NVA instances
    */
   @visibility(Lifecycle.Read)
   privateIpAddress?: string;
+
+  /**
+   * An Internal Load Balancer's HA port frontend IPv6 address. Can be used to set routes & UDR to load balance traffic between NVA instances. This field appears in dual-stack NVAs.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_09_01)
+  privateIpAddressV6?: string;
 }
 
 /**
@@ -16447,6 +16469,20 @@ model VirtualApplianceNicProperties {
    */
   @visibility(Lifecycle.Read)
   privateIpAddress?: string;
+
+  /**
+   * Public IPv6 address. Populated for dual-stack NVAs, including on additional-NIC configurations when the NVA is dual-stack.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_09_01)
+  publicIpAddressV6?: string;
+
+  /**
+   * Private IPv6 address. Populated for dual-stack NVAs, including on additional-NIC configurations when the NVA is dual-stack.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_09_01)
+  privateIpAddressV6?: string;
 
   /**
    * Instance on which nic is attached.
