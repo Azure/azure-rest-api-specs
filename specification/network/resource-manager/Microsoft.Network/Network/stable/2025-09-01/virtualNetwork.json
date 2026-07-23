@@ -8334,6 +8334,12 @@
         "x-ms-examples": {
           "Get NetworkVirtualAppliance": {
             "$ref": "./examples/NetworkVirtualApplianceGet.json"
+          },
+          "Get NetworkVirtualAppliance in VNet with Dual Stack": {
+            "$ref": "./examples/NetworkVirtualApplianceVnetDualStackGet.json"
+          },
+          "Get NetworkVirtualAppliance in Virtual Hub with Dual Stack": {
+            "$ref": "./examples/NetworkVirtualApplianceVhubDualStackGet.json"
           }
         }
       },
@@ -8407,6 +8413,12 @@
           }
         },
         "x-ms-examples": {
+          "Create NVA in VNet for IPv4": {
+            "$ref": "./examples/NetworkVirtualApplianceVnetIPv4Put.json"
+          },
+          "Create NVA in VNet for IPv4 and IPv6": {
+            "$ref": "./examples/NetworkVirtualApplianceVnetDualStackPut.json"
+          },
           "Create NVA in VNet with PrivateNic & PublicNic": {
             "$ref": "./examples/NetworkVirtualApplianceVnetBasicPut.json"
           },
@@ -8421,6 +8433,12 @@
           },
           "Create NVA in VNet with PrivateNic, PublicNic & AdditionalPublicNic": {
             "$ref": "./examples/NetworkVirtualApplianceVnetAdditionalPublicPut.json"
+          },
+          "Create NVA in Virtual Hub for IPv4": {
+            "$ref": "./examples/NetworkVirtualApplianceVhubIPv4Put.json"
+          },
+          "Create NVA in Virtual Hub for IPv4 and IPv6": {
+            "$ref": "./examples/NetworkVirtualApplianceVhubDualStackPut.json"
           },
           "Create NetworkVirtualAppliance": {
             "$ref": "./examples/NetworkVirtualAppliancePut.json"
@@ -18987,6 +19005,11 @@
           "description": "Address Prefix.",
           "readOnly": true
         },
+        "addressPrefixV6": {
+          "type": "string",
+          "description": "Address Prefix for Dual-Stack NVAs.",
+          "readOnly": true
+        },
         "bootStrapConfigurationBlobs": {
           "type": "array",
           "description": "BootStrapConfigurationBlobs storage URLs.",
@@ -19098,9 +19121,23 @@
             "$ref": "#/definitions/NvaInterfaceConfigurationsProperties"
           }
         },
+        "addressFamily": {
+          "type": "array",
+          "description": "The address families to deploy the NVA in. [\"IPv4\", \"IPv6\"] deploys a dual-stack NVA (the vHub/VNet must also be dual-stack). [\"IPv4\"], an empty array, or omitting the field deploys an IPv4-only NVA. The value \"IPv6\" may only appear in combination with \"IPv4\"; standalone [\"IPv6\"] is reserved for future use and is rejected by the service today.",
+          "maxItems": 2,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "./common.json#/definitions/Common.IPVersion"
+          }
+        },
         "privateIpAddress": {
           "type": "string",
           "description": "A Internal Load Balancer's HA port frontend IP address. Can be used to set routes & UDR to load balance traffic between NVA instances",
+          "readOnly": true
+        },
+        "privateIpAddressV6": {
+          "type": "string",
+          "description": "An Internal Load Balancer's HA port frontend IPv6 address. Can be used to set routes & UDR to load balance traffic between NVA instances. This field appears in dual-stack NVAs.",
           "readOnly": true
         }
       }
@@ -20896,6 +20933,16 @@
         "privateIpAddress": {
           "type": "string",
           "description": "Private IP address.",
+          "readOnly": true
+        },
+        "publicIpAddressV6": {
+          "type": "string",
+          "description": "Public IPv6 address. Populated for dual-stack NVAs, including on additional-NIC configurations when the NVA is dual-stack.",
+          "readOnly": true
+        },
+        "privateIpAddressV6": {
+          "type": "string",
+          "description": "Private IPv6 address. Populated for dual-stack NVAs, including on additional-NIC configurations when the NVA is dual-stack.",
           "readOnly": true
         },
         "instanceName": {
