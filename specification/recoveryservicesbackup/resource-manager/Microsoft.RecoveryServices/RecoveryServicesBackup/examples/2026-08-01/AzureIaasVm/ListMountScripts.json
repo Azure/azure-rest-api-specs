@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "api-version": "2026-08-01",
+    "containerName": "iaasvmcontainer;iaasvmcontainerv2;pysdktestrg;pysdktestv2vm1",
+    "fabricName": "Azure",
+    "protectedItemName": "vm;iaasvmcontainerv2;pysdktestrg;pysdktestv2vm1",
+    "recoveryPointId": "38823086363464",
+    "resourceGroupName": "PythonSDKBackupTestRg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "vaultName": "PySDKBackupTestRsVault",
+    "parameters": {
+      "properties": {
+        "operationId": "00000000-0000-0000-0000-000000000001"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "clientScripts": [
+          {
+            "scriptContent": "@ECHO OFF\nREM iSCSI mount script for Instant Item Recovery",
+            "scriptExtension": ".ps1",
+            "osType": "Windows",
+            "scriptNameSuffix": "38823086363464"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ItemLevelRecoveryConnections_ListMountScripts",
+  "title": "List mount scripts for an active Instant Item Recovery session"
+}

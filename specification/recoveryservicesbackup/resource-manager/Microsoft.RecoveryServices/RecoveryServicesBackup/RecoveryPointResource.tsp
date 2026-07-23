@@ -82,6 +82,7 @@ interface RecoveryPoints {
   @added(Versions.v2026_03_31_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_31_preview)
+  @removed(Versions.v2026_08_01)
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     RecoveryPointResource,
@@ -138,6 +139,21 @@ interface ItemLevelRecoveryConnections {
     RecoveryPointResource,
     void,
     AcceptedResponse
+  >;
+
+  /**
+   * Fetches the mount scripts for an active Instant Item Recovery (ILR) session on the recovery point.
+   * The mount scripts contain the iSCSI connection details required to browse and recover files and folders.
+   * This dedicated, RBAC-gated action returns the scripts that were previously embedded inline in the
+   * operationsStatus (ILR provision) response, and must be used to retrieve them from API version 2026-08-01 onwards.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Synchronous action that returns the mount scripts in the 200 response body."
+  @added(Versions.v2026_08_01)
+  @action("listMountScripts")
+  listMountScripts is ArmResourceActionSync<
+    RecoveryPointResource,
+    ListMountScriptsRequestResource,
+    ArmResponse<InstantItemRecoveryTarget>
   >;
 }
 
