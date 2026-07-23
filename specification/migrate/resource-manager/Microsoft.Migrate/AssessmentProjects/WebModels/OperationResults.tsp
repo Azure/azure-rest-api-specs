@@ -27,13 +27,13 @@ model SasUriDetails {
 @doc("The properties of the operation result.")
 @added(AssessmentProjectApiVersions.v2025_09_09_preview)
 model OperationResultProperties {
-  @doc("The operation result sas Uri.")
+  @doc("The operation result sas Uri. Populated only when the operation reaches a terminal Succeeded status.")
   @visibility(Lifecycle.Read)
-  sasUriDetails: SasUriDetails;
+  sasUriDetails?: SasUriDetails;
 
-  @doc("An ARM URI that can be used to access the operation result.")
+  @doc("An Azure Resource Manager URI that can be used to access the operation result. Populated only when the operation reaches a terminal Succeeded status.")
   @visibility(Lifecycle.Read)
-  armUri: string;
+  armUri?: string;
 }
 
 /** The standard operation status at the subscription level. */
