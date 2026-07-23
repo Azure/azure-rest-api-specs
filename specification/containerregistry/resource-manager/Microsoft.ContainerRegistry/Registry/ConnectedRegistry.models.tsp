@@ -158,6 +158,24 @@ union SyncState {
 }
 
 /**
+ * The authentication type used for the connected registry to sync with its parent.
+ */
+@added(Versions.vLatestPreview)
+union AuthType {
+  string,
+
+  /**
+   * Sync authentication is done using ACR tokens
+   */
+  SyncToken: "SyncToken",
+
+  /**
+   * Sync authentication is done using managed identity
+   */
+  ManagedIdentity: "ManagedIdentity",
+}
+
+/**
  * The properties of a connected registry.
  */
 model ConnectedRegistryProperties {
@@ -274,7 +292,8 @@ model SyncProperties {
   /**
    * The resource ID of the ACR token used to authenticate the connected registry to its parent during sync.
    */
-  tokenId: string;
+  @madeOptional(Versions.vLatestPreview)
+  tokenId?: string;
 
   /**
    * The cron expression indicating the schedule that the connected registry will sync with its parent.
@@ -303,6 +322,12 @@ model SyncProperties {
    */
   @visibility(Lifecycle.Read)
   gatewayEndpoint?: string;
+
+  /**
+   * The authentication type used for the connected registry to sync with its parent.
+   */
+  @added(Versions.vLatestPreview)
+  authType?: AuthType;
 }
 
 /**
@@ -405,6 +430,20 @@ model StatusDetailProperties {
    */
   @visibility(Lifecycle.Read)
   correlationId?: string;
+
+  /**
+   * The total disk space in gibibytes (Gib, base-2).
+   */
+  @added(Versions.vLatestPreview)
+  @visibility(Lifecycle.Read)
+  totalGib?: float64;
+
+  /**
+   * The available disk space in gibibytes (Gib, base-2).
+   */
+  @added(Versions.vLatestPreview)
+  @visibility(Lifecycle.Read)
+  availableGib?: float64;
 }
 
 /**
@@ -465,6 +504,12 @@ model ConnectedRegistryUpdateParameters {
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: ConnectedRegistryUpdateProperties;
+
+  /**
+   * The user-assigned managed identity used to authenticate the connected registry with its parent during sync.
+   */
+  @added(Versions.vLatestPreview)
+  identity?: IdentityProperties;
 }
 
 /**
@@ -515,6 +560,18 @@ model SyncUpdateProperties {
    * The period of time for which a message is available to sync before it is expired. Specify the duration using the format P[n]Y[n]M[n]DT[n]H[n]M[n]S as per ISO8601.
    */
   messageTtl?: duration;
+
+  /**
+   * The resource ID of the ACR token used to authenticate the connected registry to its parent during sync. Required when the resource-level identity is not set (SyncToken mode). Must not be set when identity is provided.
+   */
+  @added(Versions.vLatestPreview)
+  tokenId?: string;
+
+  /**
+   * The authentication type used for the connected registry to sync with its parent.
+   */
+  @added(Versions.vLatestPreview)
+  authType?: AuthType;
 }
 
 /**
