@@ -86,7 +86,9 @@ using Microsoft.Quota;
 // Java-specific fixes for breaking changes
 @@clientName(ResponseETagHeader.eTag, "etag", "java");
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op currentQuotaLimitBasesCreateOrUpdate(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
@@ -114,7 +116,9 @@ op currentQuotaLimitBasesCreateOrUpdate(
   "java,python"
 );
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op currentQuotaLimitBasesGet(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
@@ -139,7 +143,9 @@ op currentQuotaLimitBasesGet(
   "java,python"
 );
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op currentQuotaLimitBasesUpdate(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
@@ -167,7 +173,9 @@ op currentQuotaLimitBasesUpdate(
   "java,python"
 );
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op quotaRequestStatusGet(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
@@ -188,7 +196,9 @@ op quotaRequestStatusGet(
 
 @@override(QuotaRequestStatus.get, quotaRequestStatusGet, "java,python");
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op currentUsagesBasesGet(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"

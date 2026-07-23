@@ -97,7 +97,9 @@ interface Registries {
    * Get blob reference SAS Uri.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Custom operation pattern for existing API"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Custom operation pattern for existing API"
   @summary("Get blob reference SAS Uri.")
   @post
   getBlobReferenceSAS(...ReferenceSASParameters):

@@ -97,7 +97,9 @@ interface ProvidersOperationGroup {
   /**
    * Gets all resource providers for a subscription.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "non-standard operations"
   @tag("Providers")
   @route("/subscriptions/{subscriptionId}/providers")
   @list
@@ -117,7 +119,9 @@ interface ProvidersOperationGroup {
   /**
    * Gets the specified resource provider.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "non-standard operations"
   @tag("Providers")
   @route("/subscriptions/{subscriptionId}/providers/{resourceProviderNamespace}")
   @get
@@ -216,7 +220,9 @@ interface TagsOperationGroup {
   /**
    * This operation allows deleting a value from the list of predefined values for an existing predefined tag name. The value being deleted must not be in use as a tag value for the given tag name for any resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "non-standard operations"
   @tag("Tags")
   @summary("Deletes a predefined tag value for a predefined tag name.")
   @route("/subscriptions/{subscriptionId}/tagNames/{tagName}/tagValues/{tagValue}")
@@ -242,7 +248,9 @@ interface TagsOperationGroup {
   /**
    * This operation allows adding a value to the list of predefined values for an existing predefined tag name. A tag value can have a maximum of 256 characters.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "non-standard operations"
   @tag("Tags")
   @summary("Creates a predefined value for a predefined tag name.")
   @route("/subscriptions/{subscriptionId}/tagNames/{tagName}/tagValues/{tagValue}")
@@ -271,7 +279,9 @@ interface TagsOperationGroup {
   /**
    * This operation allows adding a name to the list of predefined tag names for the given subscription. A tag name can have a maximum of 512 characters and is case-insensitive. Tag names cannot have the following prefixes which are reserved for Azure use: 'microsoft', 'azure', 'windows'.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "non-standard operations"
   @tag("Tags")
   @summary("Creates a predefined tag name.")
   @route("/subscriptions/{subscriptionId}/tagNames/{tagName}")
@@ -294,7 +304,9 @@ interface TagsOperationGroup {
   /**
    * This operation allows deleting a name from the list of predefined tag names for the given subscription. The name being deleted must not be in use as a tag name for any resource. All predefined values for the given name must have already been deleted.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "non-standard operations"
   @tag("Tags")
   @summary("Deletes a predefined tag name.")
   @route("/subscriptions/{subscriptionId}/tagNames/{tagName}")
@@ -314,7 +326,9 @@ interface TagsOperationGroup {
   /**
    * This operation performs a union of predefined tags, resource tags, resource group tags and subscription tags, and returns a summary of usage for each tag name and value under the given subscription. In case of a large number of tags, this operation may return a previously cached result.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "non-standard operations"
   @tag("Tags")
   @summary("Gets a summary of tag usage under the subscription.")
   @route("/subscriptions/{subscriptionId}/tagNames")

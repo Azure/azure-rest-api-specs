@@ -33,7 +33,9 @@ model EndpointResource
  * @template Error Optional. The error response, if non-standard.
  */
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "template"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "template"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "template"
 @returnsDoc("Azure operation completed successfully.")
 @autoRoute
 @armResourceAction(Resource)

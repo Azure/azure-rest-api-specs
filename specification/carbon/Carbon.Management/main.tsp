@@ -511,7 +511,9 @@ model CarbonEmissionDataAvailableDateRange {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Each resource interface must have an @armResourceOperations decorator."
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Resource POST operation must be decorated with @armResourceAction or @armResourceCollectionAction."
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Resource POST operation must be decorated with @armResourceAction or @armResourceCollectionAction."
 interface CarbonService {
   @doc("API for Carbon Emissions Reports")
   @post

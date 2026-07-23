@@ -8,7 +8,9 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op accountsCreateOrUpdate(
   /**
@@ -34,7 +36,9 @@ op accountsCreateOrUpdate(
 @@override(Accounts.createOrUpdate, accountsCreateOrUpdate);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op accountsDelete(
   /**
@@ -52,7 +56,9 @@ op accountsDelete(
 @@override(Accounts.delete, accountsDelete);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op accountsGet(
   /**
@@ -70,7 +76,9 @@ op accountsGet(
 @@override(Accounts.get, accountsGet);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op accountsUpdate(
   /**
@@ -94,7 +102,9 @@ op accountsUpdate(
 @@override(Accounts.update, accountsUpdate);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op enterpriseCreateOrUpdate(
   /**
@@ -120,7 +130,9 @@ op enterpriseCreateOrUpdate(
 @@override(EnterprisePolicies.createOrUpdate, enterpriseCreateOrUpdate);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op enterpriseGet(
   /**
@@ -138,7 +150,9 @@ op enterpriseGet(
 @@override(EnterprisePolicies.get, enterpriseGet);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op enterpriseUpdate(
   /**
