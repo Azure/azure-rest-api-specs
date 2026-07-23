@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 using Common;
 using Azure.ClientGenerator.Core;
 
@@ -125,6 +126,30 @@ interface ServiceGateways {
    *
    * For address-level partial updates, if no services are provided, the existing services will be considered for deletion.
    */
+  @removed(Versions.v2025_09_01)
+  updateAddressLocationsLro is ArmResourceActionAsync<
+    ServiceGateway,
+    ServiceGatewayUpdateAddressLocationsRequest,
+    NoContentResponse,
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = CloudError
+  >;
+
+  /**
+   * Creates or updates address locations within the service gateway.
+   *
+   * The request supports both full and partial update modes at two levels: location and address.
+   *
+   * Full update replaces all existing data.
+   *
+   * Partial update modifies only the specified entries:
+   *
+   * For location-level partial updates, if no address is provided, the existing address will be deleted.
+   *
+   * For address-level partial updates, if no services are provided, the existing services will be considered for deletion.
+   */
+  @added(Versions.v2025_09_01)
   updateAddressLocations is ArmResourceActionSync<
     ServiceGateway,
     ServiceGatewayUpdateAddressLocationsRequest,
@@ -139,6 +164,24 @@ interface ServiceGateways {
    * Full update replaces all existing services with the new list provided in the request.
    * Partial update modifies only the specified services.
    */
+  @removed(Versions.v2025_09_01)
+  updateServicesLro is ArmResourceActionAsync<
+    ServiceGateway,
+    ServiceGatewayUpdateServicesRequest,
+    NoContentResponse,
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = CloudError
+  >;
+
+  /**
+   * Creates, updates, or deletes services within the service gateway.
+   * The request supports both full and partial update modes at the service level.
+   *
+   * Full update replaces all existing services with the new list provided in the request.
+   * Partial update modifies only the specified services.
+   */
+  @added(Versions.v2025_09_01)
   updateServices is ArmResourceActionSync<
     ServiceGateway,
     ServiceGatewayUpdateServicesRequest,
@@ -183,9 +226,24 @@ interface ServiceGateways {
   ServiceGateways.updateTags::parameters.properties,
   "Parameters supplied to update service gateway tags."
 );
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "The LRO variant uses a different TypeSpec member name to enable versioning, but must preserve the original operationId for wire backward compatibility with 2025-05-01 and 2025-07-01."
+@@operationId(
+  ServiceGateways.updateAddressLocationsLro,
+  "ServiceGateways_UpdateAddressLocations"
+);
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "The LRO variant uses a different TypeSpec member name to enable versioning, but must preserve the original operationId for wire backward compatibility with 2025-05-01 and 2025-07-01."
+@@operationId(ServiceGateways.updateServicesLro, "ServiceGateways_UpdateServices");
+@@doc(
+  ServiceGateways.updateAddressLocationsLro::parameters.body,
+  "Parameters supplied to create or update address locations in service gateway operation."
+);
 @@doc(
   ServiceGateways.updateAddressLocations::parameters.body,
   "Parameters supplied to create or update address locations in service gateway operation."
+);
+@@doc(
+  ServiceGateways.updateServicesLro::parameters.body,
+  "Parameters supplied to create or update services in service gateway operation."
 );
 @@doc(
   ServiceGateways.updateServices::parameters.body,
@@ -194,7 +252,12 @@ interface ServiceGateways {
 @@clientName(ServiceGateways.createOrUpdate::parameters.resource, "parameters");
 @@clientName(ServiceGateways.updateTags::parameters.properties, "parameters");
 @@clientName(
+  ServiceGateways.updateAddressLocationsLro::parameters.body,
+  "parameters"
+);
+@@clientName(
   ServiceGateways.updateAddressLocations::parameters.body,
   "parameters"
 );
+@@clientName(ServiceGateways.updateServicesLro::parameters.body, "parameters");
 @@clientName(ServiceGateways.updateServices::parameters.body, "parameters");
