@@ -104,6 +104,7 @@ model NamespaceMigrateRequest {
   resourceIds?: string[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2025_07_01_preview)
 @doc("Response for the migrate asset resources operation into Namespace resource.")
 model NamespaceMigrateResponse {

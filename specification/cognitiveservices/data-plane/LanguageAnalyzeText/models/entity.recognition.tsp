@@ -281,6 +281,7 @@ union EntityCategory {
 }
 
 /** The class that houses the inference options allowed for named entity recognition. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2024_11_01)
 model EntityInferenceOptions {
   /** Option to include/exclude the detected entity values to be normalized and included in the metadata. The numeric and temporal entity types support value normalization. */

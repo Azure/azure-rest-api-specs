@@ -81,6 +81,7 @@ model DbServerProperties {
   @visibility(Lifecycle.Read)
   cpuCoreCount?: int32;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("dbServerPatching details of the Db server.")
   @visibility(Lifecycle.Read)
   dbServerPatchingDetails?: DbServerPatchingDetails;
@@ -89,6 +90,7 @@ model DbServerProperties {
   @visibility(Lifecycle.Read)
   maxMemoryInGbs?: int32;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The allocated local node storage in GBs on the Db server.")
   @visibility(Lifecycle.Read)
   dbNodeStorageSizeInGbs?: int32;
@@ -121,6 +123,7 @@ model DbServerProperties {
   @visibility(Lifecycle.Read)
   autonomousVirtualMachineIds?: Ocid[];
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The total max dbNode storage in GBs.")
   @visibility(Lifecycle.Read)
   maxDbNodeStorageInGbs?: int32;

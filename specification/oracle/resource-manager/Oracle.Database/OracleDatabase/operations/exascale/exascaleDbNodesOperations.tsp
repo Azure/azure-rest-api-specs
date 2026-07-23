@@ -7,6 +7,7 @@ using Autorest;
 
 namespace Oracle.Database;
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @added(Versions.v20241201_preview)
 @armResourceOperations
 interface ExascaleDbNodes extends OracleReadOnlyResource<ExascaleDbNode> {

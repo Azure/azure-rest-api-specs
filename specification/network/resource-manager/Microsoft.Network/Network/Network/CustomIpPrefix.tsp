@@ -24,6 +24,7 @@ namespace Microsoft.Network;
 model CustomIpPrefix extends Common.Resource {
   properties?: CustomIpPrefixPropertiesFormat;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   @path
   @key("customIpPrefixName")
@@ -46,6 +47,7 @@ model CustomIpPrefix extends Common.Resource {
   zones?: string[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 @armResourceOperations

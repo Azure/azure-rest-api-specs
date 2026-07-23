@@ -1466,11 +1466,13 @@ using Microsoft.ManagedNetworkFabric;
 @@usage(IpCommunityIdList, Usage.input | Usage.output | Usage.json, "csharp");
 // These compatibility base models preserve the shipped C# hierarchy where the
 // action models derive from add-operation models exposing Add*CommunityIds.
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("IP community add operation properties.")
 model IpCommunityAddOperationProperties {
   @doc("List of IP community resource IDs to add.")
   add?: IpCommunityIdList;
 }
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("IP extended community add operation properties.")
 model IpExtendedCommunityAddOperationProperties {
   @doc("List of IP extended community resource IDs to add.")

@@ -1,4 +1,4 @@
-﻿import "@typespec/rest";
+import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-resource-manager";
 import "../Common/main.tsp";
@@ -112,6 +112,7 @@ model ValidationResponseErrorInfo {
 /**
  * Validation response
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ValidationResponse {
   /**
    * Whether or not validation succeeded

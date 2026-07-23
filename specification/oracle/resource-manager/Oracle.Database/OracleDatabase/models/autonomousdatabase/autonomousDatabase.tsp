@@ -913,6 +913,7 @@ model AutonomousDatabaseBaseProperties {
   @maxLength(255)
   dbVersion?: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The Autonomous Database workload type")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   dbWorkload?: WorkloadType;
@@ -963,6 +964,7 @@ model AutonomousDatabaseBaseProperties {
   @visibility(Lifecycle.Read)
   remoteDisasterRecoveryConfiguration?: DisasterRecoveryConfigurationDetails;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("Local Autonomous Disaster Recovery standby database details.")
   @visibility(Lifecycle.Read)
   localStandbyDb?: AutonomousDatabaseStandbySummary;
@@ -1012,6 +1014,7 @@ model AutonomousDatabaseBaseProperties {
   @identifiers(#[])
   scheduledOperationsList?: ScheduledOperationsType[];
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The private endpoint Ip address for the resource.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   privateEndpointIp?: string;

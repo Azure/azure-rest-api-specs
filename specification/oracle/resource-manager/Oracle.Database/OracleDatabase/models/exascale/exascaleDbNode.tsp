@@ -7,6 +7,7 @@ using Azure.ResourceManager;
 
 namespace Oracle.Database;
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @added(Versions.v20241201_preview)
 scalar ExascaleDbNodeResourceId
   extends armResourceIdentifier<[
@@ -39,6 +40,7 @@ model ExascaleDbNodeProperties {
   @doc("The number of CPU cores enabled on the Db node.")
   cpuCoreCount?: int32;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The allocated local node storage in GBs on the Db node.")
   dbNodeStorageSizeInGbs?: int32;
 

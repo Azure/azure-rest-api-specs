@@ -38,6 +38,7 @@ model DbNodeProperties {
   @doc("The number of CPU cores enabled on the Db node.")
   cpuCoreCount?: int32;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The allocated local node storage in GBs on the Db node.")
   dbNodeStorageSizeInGbs?: int32;
 

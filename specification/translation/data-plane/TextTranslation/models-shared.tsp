@@ -30,6 +30,7 @@ alias CommonResultHeaders = {
   requestId: string;
 };
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Representation of the Error Response from Translator Service.")
 @error
 model ErrorResponse {

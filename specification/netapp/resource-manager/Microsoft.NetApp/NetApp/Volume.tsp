@@ -1495,6 +1495,7 @@ model VolumeRevert {
 /**
  * Break file locks request
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BreakFileLocksRequest {
   /**
    * To clear file locks on a volume for a particular client
@@ -1511,6 +1512,7 @@ model BreakFileLocksRequest {
 /**
  * Get group Id list for LDAP User request
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model GetGroupIdListForLdapUserRequest {
   /**
    * username is required to fetch the group to which user is part of
@@ -1523,6 +1525,7 @@ model GetGroupIdListForLdapUserRequest {
 /**
  * Group Id list for Ldap user
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model GetGroupIdListForLdapUserResponse {
   /**
    * Group Id list
@@ -1533,6 +1536,7 @@ model GetGroupIdListForLdapUserResponse {
 /**
  * Break replication request
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BreakReplicationRequest {
   /**
    * If replication is in status transferring and you want to force break the replication, set to true
@@ -1543,6 +1547,7 @@ model BreakReplicationRequest {
 /**
  * Re-establish request object supplied in the body of the operation.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ReestablishReplicationRequest {
   /**
    * Resource id of the source volume for the replication
@@ -1665,6 +1670,7 @@ union ReplicationMirrorState {
 /**
  * Authorize request
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AuthorizeRequest {
   /**
    * Resource id of the remote volume
@@ -1675,10 +1681,12 @@ model AuthorizeRequest {
 /**
  * Source Cluster properties for a cluster peer request
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model PeerClusterForVolumeMigrationRequest {
   /**
    * A list of IC-LIF IPs that can be used to connect to the On-prem cluster
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @minItems(1)
   peerIpAddresses: string[];
 }
@@ -2256,6 +2264,7 @@ model ListQuotaReportResult {
 /**
  * Quota Report for volume
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2025_12_01)
 model ListQuotaReportResponse {
   /**

@@ -162,6 +162,7 @@ model ElasticVolumeDataProtectionPatchProperties {
 @added(Versions.v2026_05_15_preview)
 model ElasticMountTargetProperties {
   /** The mount target's IPv4 address, used to mount the volume */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   ipAddress?: ipV4Address;
 

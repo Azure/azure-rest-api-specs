@@ -155,6 +155,7 @@ union MccIssueType {
   string,
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @removed(Versions.v2024_11_30_preview)
 @doc("Model representing Cache Node for ConnectedCache resource")
 model CacheNodeOldResponse {
@@ -287,6 +288,7 @@ model CustomerEntity {
 
 @doc("Model representing customer for connected cache resource")
 model AdditionalCustomerProperties {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("Customer resource last PeeringDB update timestamp.")
   @visibility(Lifecycle.Read)
   @removed(Versions.v2024_11_30_preview)
@@ -348,6 +350,7 @@ model AdditionalCustomerProperties {
   @visibility(Lifecycle.Read)
   signupPhaseStatusText?: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("Customer resource last PeeringDB update timestamp.")
   @visibility(Lifecycle.Read)
   @Azure.ClientGenerator.Core.clientName(
@@ -881,6 +884,7 @@ model CacheNodeDriveConfiguration {
 
 @doc("Bgp configuration of cache node")
 model BgpConfiguration {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("Asn to ip address mapping")
   asnToIpAddressMapping?: string;
 }

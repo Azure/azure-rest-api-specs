@@ -3825,6 +3825,7 @@ model AgentVersion {
   /**
    * Defines the os type.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osType?: string;
 }
 

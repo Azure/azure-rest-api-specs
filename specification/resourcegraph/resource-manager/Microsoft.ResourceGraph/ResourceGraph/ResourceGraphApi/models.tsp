@@ -139,6 +139,7 @@ model QueryRequest {
 /**
  * The options for query evaluation
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model QueryRequestOptions {
   /**
    * Continuation token for pagination, capturing the next page size and offset, as well as the context of the query.
@@ -177,6 +178,7 @@ model QueryRequestOptions {
 /**
  * A request to compute additional statistics (facets) over the query results.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model FacetRequest {
   /**
    * The column or list of columns to summarize by
@@ -192,6 +194,7 @@ model FacetRequest {
 /**
  * The options for facet evaluation
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model FacetRequestOptions {
   /**
    * The column name or query expression to sort on. Defaults to count if not present.

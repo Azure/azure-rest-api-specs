@@ -1,4 +1,4 @@
-﻿import "@typespec/rest";
+import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
@@ -15,6 +15,7 @@ namespace DefenderForStorageAPI;
 /**
  * Optional. Write scan result on BlobIndexTags by default.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 union BlobScanResultsOptions {
   string,
 

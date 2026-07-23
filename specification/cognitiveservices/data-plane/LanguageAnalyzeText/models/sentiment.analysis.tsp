@@ -75,6 +75,7 @@ union TokenSentimentValue {
 }
 
 /** Sentiment analysis results for the input documents. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SentimentResponse is PreBuiltResult {
   /** The sentiment analysis results for each document in the input. */
   @typeChangedFrom(Versions.v2026_05_15_preview, SentimentDocumentResult[])

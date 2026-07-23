@@ -1038,6 +1038,7 @@ model ArtifactProperties {
 /**
  * Parameters for generating an ARM template for deploying artifacts.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model GenerateArmTemplateRequest {
   /**
    * The resource name of the virtual machine.
@@ -1423,11 +1424,13 @@ model CustomImagePropertiesFromVm {
   /**
    * The Windows OS information of the VM.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   windowsOsInfo?: WindowsOsInfo;
 
   /**
    * The Linux OS information of the VM.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   linuxOsInfo?: LinuxOsInfo;
 }
 
@@ -1672,6 +1675,7 @@ model LabVirtualMachineCreationParameterProperties {
   /**
    * Indicates whether the virtual machine is to be created without a public IP address.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   disallowPublicIpAddress?: boolean = false;
 
   /**
@@ -1841,16 +1845,19 @@ model NetworkInterfaceProperties {
   /**
    * The resource ID of the public IP address.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   publicIpAddressId?: string;
 
   /**
    * The public IP address.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   publicIpAddress?: string;
 
   /**
    * The private IP address.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   privateIpAddress?: string;
 
   /**
@@ -1871,12 +1878,14 @@ model NetworkInterfaceProperties {
   /**
    * The configuration for sharing a public IP address across multiple virtual machines.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   sharedPublicIpAddressConfiguration?: SharedPublicIpAddressConfiguration;
 }
 
 /**
  * Properties of a virtual machine that determine how it is connected to a load balancer.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model SharedPublicIpAddressConfiguration {
   /**
    * The incoming NAT rules
@@ -2181,6 +2190,7 @@ model NotifyParameters {
 /**
  * Request body for evaluating a policy set.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model EvaluatePoliciesRequest {
   /**
    * Policies to evaluate.
@@ -2217,6 +2227,7 @@ model EvaluatePoliciesProperties {
 /**
  * Response body for evaluating a policy set.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model EvaluatePoliciesResponse {
   /**
    * Results of evaluating a policy set.
@@ -2852,6 +2863,7 @@ model LabVirtualMachineProperties {
   /**
    * Indicates whether the virtual machine is to be created without a public IP address.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   disallowPublicIpAddress?: boolean = false;
 
   /**
@@ -3067,6 +3079,7 @@ model LabVirtualMachineFragment extends UpdateResource {}
 /**
  * Request body for applying artifacts to a virtual machine.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ApplyArtifactsRequest {
   /**
    * The list of artifacts to apply.
@@ -3220,11 +3233,13 @@ model SubnetOverride {
   /**
    * Indicates whether public IP addresses can be assigned to virtual machines on this subnet (i.e. Allow, Deny).
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   usePublicIpAddressPermission?: UsagePermissionType;
 
   /**
    * Properties that virtual machines on this subnet will share.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   sharedPublicIpAddressConfiguration?: SubnetSharedPublicIpAddressConfiguration;
 
   /**
@@ -3236,6 +3251,7 @@ model SubnetOverride {
 /**
  * Configuration for public IP address sharing.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model SubnetSharedPublicIpAddressConfiguration {
   /**
    * Backend ports that virtual machines on this subnet are allowed to expose
@@ -3302,6 +3318,7 @@ model GenerateUploadUriParameter {
 /**
  * Response body for generating an upload URI.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model GenerateUploadUriResponse {
   /**
    * The upload URI for the VHD.
@@ -3312,6 +3329,7 @@ model GenerateUploadUriResponse {
 /**
  * This represents the payload required to import a virtual machine from a different lab into the current one
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ImportLabVirtualMachineRequest {
   /**
    * The full resource ID of the virtual machine to be imported.

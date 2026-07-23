@@ -19,6 +19,7 @@ model AutonomousDbVersion is ProxyResource<AutonomousDbVersionProperties> {
   name: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read-only resource. No provisioning state provided."
 @doc("AutonomousDbVersion resource model")
 model AutonomousDbVersionProperties {

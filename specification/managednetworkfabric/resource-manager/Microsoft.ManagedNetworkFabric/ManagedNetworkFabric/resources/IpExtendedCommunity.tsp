@@ -11,6 +11,7 @@ model IpExtendedCommunity is Azure.ResourceManager.TrackedResource<
   IpExtendedCommunityProperties,
   false
 > {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("Name of the IP Extended Community.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
@@ -22,6 +23,7 @@ model IpExtendedCommunity is Azure.ResourceManager.TrackedResource<
 
 @@doc(IpExtendedCommunity.properties, "The IpExtendedCommunity properties");
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @armResourceOperations
 interface IpExtendedCommunities {
   @doc("Implements IP Extended Community GET method.")

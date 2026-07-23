@@ -38,6 +38,7 @@ using TypeSpec.Versioning;
 @doc("Microsoft Mission Resource Provider management API.")
 namespace Microsoft.Mission;
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Arm resource update successful")
 model ArmUpdatedResponse<TResource extends Azure.ResourceManager.Foundations.Resource>
   is ArmResponse<TResource>;

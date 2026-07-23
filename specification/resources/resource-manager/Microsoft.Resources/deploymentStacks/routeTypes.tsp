@@ -8,6 +8,7 @@ using TypeSpec.Http;
 
 namespace Microsoft.Resources.DeploymentStacks;
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Resource validation failed.")
 // TODO: This property isn't being output in the open API definition. Not sure if it's obsolete now. It was explicitly set on the 400 responses to `false` and I believe it influences SDK code generation by returning a response vs throwing an exception.
 //@extension("x-ms-error-response", false)

@@ -7,6 +7,7 @@ using Azure.ResourceManager;
 
 namespace Oracle.Database;
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @added(Versions.v20241201_preview)
 scalar ExascaleDbStorageVaultResourceId
   extends armResourceIdentifier<[
@@ -23,6 +24,7 @@ model ExascaleDbStorageVault
   ...AvailabilityZonesProperty;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @added(Versions.v20241201_preview)
 @doc("ExascaleDbStorageVault resource model")
 model ExascaleDbStorageVaultProperties {
@@ -104,6 +106,7 @@ model ExascaleDbStorageDetails {
   totalSizeInGbs?: int32;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @added(Versions.v20241201_preview)
 @doc("Create exadata Database Storage Details model")
 model ExascaleDbStorageInputDetails {
@@ -111,6 +114,7 @@ model ExascaleDbStorageInputDetails {
   totalSizeInGbs: int32;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @added(Versions.v20241201_preview)
 @doc("Exadata Database Storage Vault lifecycle state enum")
 union ExascaleDbStorageVaultLifecycleState {

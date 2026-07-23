@@ -44,6 +44,7 @@ model LuisParameters extends AnalysisParameters {
 }
 
 /** This customizes how the service calls LUIS Generally Available projects. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @access(Access.internal, "python")
 model LuisCallingOptions {
   /** Enable verbose response. */

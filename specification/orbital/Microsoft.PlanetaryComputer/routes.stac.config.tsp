@@ -8,6 +8,7 @@ import "./models.common.images.tsp";
 using TypeSpec.Http;
 namespace Microsoft.PlanetaryComputer;
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" "STAC queryable definitions contain mixed types (objects, booleans, strings)"
 @doc("Queryable definitions response.")
 model QueryableDefinitionsResponse is Record<unknown>;
@@ -321,6 +322,7 @@ interface StacCollectionMosaics {
   >;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 interface StacCollectionRenderOptions {
   /**
    * Get all render options for a given collection

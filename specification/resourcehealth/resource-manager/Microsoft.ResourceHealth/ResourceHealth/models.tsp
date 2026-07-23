@@ -584,6 +584,7 @@ model ServiceImpactingEventIncidentProperties {
 /**
  * Error details.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model ErrorResponse {
   /**

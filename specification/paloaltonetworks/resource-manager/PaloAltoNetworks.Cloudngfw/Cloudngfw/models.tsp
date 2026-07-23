@@ -687,6 +687,7 @@ model Changelog {
 /**
  * advanced security object
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AdvSecurityObjectListResponse {
   /**
    * response value
@@ -783,6 +784,7 @@ model ListFirewallsResponse {
 /**
  * predefined url categories response
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model PredefinedUrlCategoriesResponse is Azure.Core.Page<PredefinedUrlCategory>;
 
 /**
@@ -798,6 +800,7 @@ model PredefinedUrlCategory {
 /**
  * Security services list response
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SecurityServicesResponse {
   /**
    * response value
@@ -1374,6 +1377,7 @@ model VnetConfiguration {
   /**
    * IP of trust subnet for UDR
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipOfTrustSubnetForUdr?: IPAddress;
 }
 
@@ -1435,6 +1439,7 @@ model VwanConfiguration {
   /**
    * IP of trust subnet for UDR
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipOfTrustSubnetForUdr?: IPAddress;
 }
 
@@ -2286,6 +2291,7 @@ model CustomCaptureConfigurationsFilter {
   @doc("Network protocol — TCP or UDP.")
   protocol: CustomCaptureConfigurationsProtocol;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("Source IPv4 address in dotted format (e.g., 10.0.0.5).")
   sourceIpAddress: string;
 
@@ -2294,6 +2300,7 @@ model CustomCaptureConfigurationsFilter {
   @maxValue(65535)
   sourcePort?: int32;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("Destination IPv4 address in dotted format (e.g., 52.39.204.87).")
   destinationIpAddress: string;
 

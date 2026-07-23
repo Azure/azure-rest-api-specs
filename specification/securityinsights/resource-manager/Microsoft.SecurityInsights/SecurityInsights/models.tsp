@@ -3883,6 +3883,7 @@ model ActionPropertiesBase {
 /**
  * Action for alert rule.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ActionRequest extends ResourceWithEtag {
   /**
@@ -5026,12 +5027,14 @@ model EnrichmentIpAddressBody {
   /**
    * The dotted-decimal or colon-separated string representation of the IP address
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipAddress?: string;
 }
 
 /**
  * Geodata information for a given IP address
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @added(Versions.v2025_10_01_preview)
 model EnrichmentIpGeodata {
   /**
@@ -5076,11 +5079,13 @@ model EnrichmentIpGeodata {
   /**
    * The dotted-decimal or colon-separated string representation of the IP address
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipAddr?: string;
 
   /**
    * A description of the connection type of this IP address
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipRoutingType?: string;
 
   /**
@@ -5431,6 +5436,7 @@ model EntityTimelineParameters {
 /**
  * The entity timeline result operation response.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2025_10_01_preview)
 model EntityTimelineResponse {
   /**
@@ -5521,6 +5527,7 @@ model EntityTimelineItem {
 /**
  * Retrieve queries for entity result operation response.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2025_10_01_preview)
 model GetQueriesResponse {
   /**
@@ -5593,6 +5600,7 @@ model EntityGetInsightsParameters {
 /**
  * The Get Insights result operation response.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2025_10_01_preview)
 model EntityGetInsightsResponse {
   /**
@@ -6667,6 +6675,7 @@ model IncidentCommentProperties {
 /**
  * The incident related entities response.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model IncidentEntitiesResponse {
   /**
    * Array of the incident related entities.
@@ -15025,6 +15034,7 @@ model DnsEntityProperties extends EntityCommonProperties {
   /**
    * An ip entity id for the dns server resolving the request
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   dnsServerIpEntityId?: string;
 
@@ -15037,12 +15047,14 @@ model DnsEntityProperties extends EntityCommonProperties {
   /**
    * An ip entity id for the dns request client
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   hostIpAddressEntityId?: string;
 
   /**
    * Ip entity identifiers for the resolved ip address.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   ipAddressEntityIds?: string[];
 }
@@ -15310,6 +15322,7 @@ model IoTDeviceEntityProperties extends EntityCommonProperties {
   /**
    * The IP entity if of this device
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   ipAddressEntityId?: string;
 
@@ -15462,6 +15475,7 @@ model IpEntity extends Entity {
 /**
  * Ip entity property bag.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IpEntityProperties extends EntityCommonProperties {
   /**
@@ -16237,6 +16251,7 @@ model NicEntityProperties extends EntityCommonProperties {
   /**
    * The IP entity id of this network interface
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   ipAddressEntityId?: string;
 

@@ -31,6 +31,7 @@ using TypeSpec.Http;
  * - The interval `[-2, 0]` is mapped to the color `[0, 0, 0, 0]` (transparent black).
  * - The interval `[1, 32]` is mapped to the color `[255, 255, 178, 255]` (opaque yellow).
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model IntervalLegendsResponse {
   /**
    * status code
@@ -52,6 +53,7 @@ model IntervalLegendsResponse {
 /**
  * ClassMap legend response model.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" "ClassMap legend values are RGBA color arrays, not strings."
 #suppress "@azure-tools/typespec-autorest/no-unknown" "ClassMap legend values are RGBA color arrays but additionalProperties cannot express array items."
 model ClassMapLegendResponse is Record<unknown>;

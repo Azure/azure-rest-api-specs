@@ -8,6 +8,7 @@ using Azure.Core;
 
 namespace Oracle.Database;
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @added(Versions.v20250701_preview)
 scalar DbSystemResourceId
   extends armResourceIdentifier<[
@@ -41,6 +42,7 @@ model DbVersionProperties {
   @doc("True if this version of the Oracle Database software is the latest version for a release.")
   isLatestForMajorVersion?: boolean;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("True if this version of the Oracle Database software is the preview version.")
   isPreviewDbVersion?: boolean;
 
@@ -51,15 +53,18 @@ model DbVersionProperties {
   supportsPdb?: boolean;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @added(Versions.v20250701_preview)
 @doc("Provides DbVersion query parameter for list operations.")
 model DbVersionFilter {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @query
   @doc("If provided, filters the results to the set of database versions which are supported for the given shape. e.g., VM.Standard.E5.Flex")
   @minLength(1)
   @maxLength(255)
   dbSystemShape?: BaseDbSystemShapes;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @query
   @doc("The DB system AzureId. If provided, filters the results to the set of database versions which are supported for the DB system.")
   dbSystemId?: DbSystemResourceId;

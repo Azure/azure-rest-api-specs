@@ -547,6 +547,7 @@ model NotificationRequestBody {
 /**
  * The details of the test notification results.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model TestNotificationDetailsResponse {
   /**
    * The context info
@@ -624,6 +625,7 @@ model ActionGroupList is Azure.Core.Page<ActionGroupResource>;
 /**
  * Describes a receiver that should be resubscribed.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model EnableRequest {
   /**
    * The name of the receiver to resubscribe.
@@ -631,6 +633,7 @@ model EnableRequest {
   receiverName: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @error
 model ArmConflictErrorResponse {

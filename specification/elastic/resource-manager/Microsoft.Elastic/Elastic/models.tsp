@@ -263,6 +263,7 @@ model OperationResult {
 /**
  * RP default error response.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model ResourceProviderDefaultErrorResponse {
   /**
@@ -301,6 +302,7 @@ model ErrorResponseBody {
 /**
  * Response of a list operation.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ElasticMonitorResourceListResponse
   is Azure.Core.Page<ElasticMonitorResource>;
 
@@ -619,6 +621,7 @@ model IdentityProperties {
 /**
  * List of elastic versions available in a region.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ElasticVersionsListResponse is Azure.Core.Page<ElasticVersionListFormat>;
 
 /**
@@ -772,6 +775,7 @@ model FilteringTag {
 /**
  * Response of a list operation.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model MonitoredResourceListResponse is Azure.Core.Page<MonitoredResource>;
 
 /**
@@ -945,6 +949,7 @@ model ExternalUserInfo {
 /**
  * The properties of the response we got from elastic while creating external user
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ExternalUserCreationResponse {
   /**
    * Shows if user is created or updated
@@ -991,6 +996,7 @@ model PartnerBillingEntity {
 /**
  *  List of all active elastic deployments.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ConnectedPartnerResourcesListResponse
   is Azure.Core.Page<ConnectedPartnerResourcesListFormat>;
 
@@ -1037,6 +1043,7 @@ model ConnectedPartnerResourceProperties {
 /**
  * Response of a list operation.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model OpenAIIntegrationRPModelListResponse
   is Azure.Core.Page<OpenAIIntegrationRPModel>;
@@ -1078,6 +1085,7 @@ model OpenAIIntegrationProperties {
 /**
  * Status of the OpenAI Integration
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model OpenAIIntegrationStatusResponse {
   /**
@@ -1100,11 +1108,13 @@ model OpenAIIntegrationStatusResponseProperties {
 /**
  * Response of a list operation.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model MonitoringTagRulesListResponse is Azure.Core.Page<MonitoringTagRules>;
 
 /**
  * Response of a list operation.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VMHostListResponse is Azure.Core.Page<VMResources>;
 
@@ -1179,6 +1189,7 @@ model ElasticMonitorUpgrade {
 /**
  * List of elastic traffic filters in the account
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ElasticTrafficFilterResponse {
   /**
    * List of elastic traffic filters in the account
@@ -1287,6 +1298,7 @@ model UserApiKeyResponseProperties {
 /**
  * The Azure Subscription ID to which the Organization of the logged in user belongs and gets billed into.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ElasticOrganizationToAzureSubscriptionMappingResponse {
   /**
    * The properties of Azure Subscription ID to which the Organization of the logged in user belongs and gets billed into.

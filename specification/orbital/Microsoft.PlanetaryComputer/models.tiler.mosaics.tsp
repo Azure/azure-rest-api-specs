@@ -282,6 +282,7 @@ model MosaicMetadata {
 /**
  * Response from a successful mosaic registration with search ID and related links
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model TilerMosaicSearchRegistrationResponse {
   /**
    * Unique identifier for the registered search
@@ -366,6 +367,7 @@ model TilerStacSearchDefinition {
 /**
  * Return list of assets
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ApplicationJsonResponse {
   /**
    * status code

@@ -239,6 +239,7 @@ union NameUnavailabilityReason {
 /**
  * The desired action for requests captured by this rule.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum IpFilterActionType {
   Accept,
@@ -248,6 +249,7 @@ enum IpFilterActionType {
 /**
  * Target for requests captured by this rule.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum IpFilterTargetType {
   all,
@@ -354,6 +356,7 @@ model IotDpsPropertiesDescription {
   /**
    * The IP filter rules.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ipFilterRules?: IpFilterRule[];
 
@@ -781,6 +784,7 @@ model IotDpsSkuDefinition {
 /**
  * Description of the response of the verification code.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model VerificationCodeResponse {
   /**
    * Name of certificate.
@@ -856,6 +860,7 @@ model VerificationCodeResponseProperties {
 /**
  * The JSON-serialized leaf certificate
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model VerificationCodeRequest {
   /**
    * base-64 representation of X509 certificate .cer file or just .pem file content.

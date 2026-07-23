@@ -71,6 +71,7 @@ model MemberCap {
 }
 
 /** Request body for the `setMemberCapOverrides` action. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2026_07_01)
 model SetMemberCapOverridesRequest {
   /**

@@ -1,4 +1,4 @@
-﻿import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
@@ -15,6 +15,7 @@ namespace SensitivitySettingsAPI;
 /**
  * Data sensitivity settings for sensitive data discovery
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @singleton("current")
 @tenantResource
 model GetSensitivitySettingsResponse

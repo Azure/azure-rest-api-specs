@@ -240,6 +240,7 @@ model ServiceProperties {
   restore?: boolean = false;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The metadata schema export request.")
 model MetadataSchemaExportRequest {
   @doc("An entity the metadata schema is requested for.")
@@ -588,6 +589,7 @@ model ApiSourceProperties {
 /**
  * The API source specification import options.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2024_06_01_preview)
 union ImportSpecificationOptions {
   string,

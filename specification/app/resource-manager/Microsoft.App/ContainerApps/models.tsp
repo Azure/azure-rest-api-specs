@@ -1974,6 +1974,7 @@ model BuildConfiguration {
   /**
    * Base OS used to build and run the app.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   baseOs?: string;
 
   /**
@@ -3475,6 +3476,7 @@ model DaprSubscriptionRouteRule {
 /**
  * Dapr PubSub Bulk Subscription Options.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DaprSubscriptionBulkSubscribeOptions {
   /**
    * Enable bulk subscription
@@ -3786,6 +3788,7 @@ model JobProperties {
   /**
    * Outbound IP Addresses of a container apps job.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   outboundIpAddresses?: string[];
 
@@ -4153,6 +4156,7 @@ model JobPatchPropertiesProperties {
   /**
    * Outbound IP Addresses of a container apps job.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   outboundIpAddresses?: string[];
 
   /**
@@ -4583,6 +4587,7 @@ model DiagnosticSupportTopic {
 /**
  * Diagnostics data returned from a detector
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DiagnosticsDataApiResponse {
   /**
    * Table response
@@ -6705,6 +6710,7 @@ model EnvironmentVariable {
 /**
  * App Service error response.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model DefaultErrorResponse {
   /**
@@ -6883,6 +6889,7 @@ model ContainerAppProperties {
   /**
    * Outbound IP Addresses for container app.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   outboundIpAddresses?: string[];
 
@@ -7049,6 +7056,7 @@ model Ingress {
   /**
    * Rules to restrict incoming IP address.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @identifiers(#["name"])
   ipSecurityRestrictions?: IpSecurityRestrictionRule[];
 
@@ -7128,6 +7136,7 @@ model CustomDomain {
 /**
  * Rule to restrict incoming IP address.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model IpSecurityRestrictionRule {
   /**
    * Name for the IP restriction rule.
@@ -7142,6 +7151,7 @@ model IpSecurityRestrictionRule {
   /**
    * CIDR notation to match incoming IP address
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipAddressRange: string;
 
   /**
@@ -7974,6 +7984,7 @@ model ContainerAppsBuildConfiguration {
   /**
    * Base OS used to build and run the app.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   baseOs?: string;
 
@@ -8253,6 +8264,7 @@ model PatchDetailsNewLayer {
   /**
    * The OS name and its version in the new run image for the target image.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osAndVersion?: string;
 }
 
@@ -8273,6 +8285,7 @@ model PatchDetailsOldLayer {
   /**
    * The OS name and its version in the old run image for the target image.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osAndVersion?: string;
 }
 

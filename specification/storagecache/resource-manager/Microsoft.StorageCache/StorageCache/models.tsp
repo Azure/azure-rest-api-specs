@@ -2360,6 +2360,7 @@ model AmlFilesystemCheckSubnetError {
   filesystemSubnet?: AmlFilesystemCheckSubnetErrorFilesystemSubnet;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BadRequestResponse is AmlFilesystemCheckSubnetError {
   ...Response<400>;
 }
@@ -2773,6 +2774,7 @@ model AscOperation {
 /**
  * Describes the format of Error response.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AscOperationErrorResponse {
   /**
    * Error code
@@ -3214,11 +3216,13 @@ model CacheActiveDirectorySettings {
   /**
    * Primary DNS IP address used to resolve the Active Directory domain controller's fully qualified domain name.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   primaryDnsIpAddress: string;
 
   /**
    * Secondary DNS IP address used to resolve the Active Directory domain controller's fully qualified domain name.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   secondaryDnsIpAddress?: string;
 
   /**

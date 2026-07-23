@@ -997,6 +997,7 @@ model VirtualMachineScaleSetNetworkConfigurationProperties {
   /**
    * Specifies the IP configurations of the network interface.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @Azure.ResourceManager.identifiers(#["name"])
   ipConfigurations: VirtualMachineScaleSetIPConfiguration[];
 
@@ -1151,6 +1152,7 @@ model VirtualMachineScaleSetPublicIPAddressConfigurationProperties {
   /**
    * The list of IP tags associated with the public IP address.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @Azure.ResourceManager.identifiers(#[])
   ipTags?: VirtualMachineScaleSetIpTag[];
 
@@ -1514,6 +1516,7 @@ model ScheduledEventsProfile {
   /**
    * Specifies OS Image Scheduled Event related configurations.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osImageNotificationProfile?: OSImageNotificationProfile;
 }
 

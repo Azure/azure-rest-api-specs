@@ -86,6 +86,7 @@ model AccessControlListMatchConfiguration {
   @minValue(1)
   sequenceNumber?: int64;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("Type of IP Address. IPv4 or IPv6")
   ipAddressType?: IPAddressType;
 
@@ -111,6 +112,7 @@ model AccessControlListMatchConfigurationPatch {
   @minValue(1)
   sequenceNumber?: int64;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("Type of IP Address. IPv4 or IPv6")
   ipAddressType?: IPAddressType;
 
@@ -171,6 +173,7 @@ model AccessControlListMatchConditionPatch extends CommonMatchConditionsPatch {
   @minItems(1)
   fragments?: string[];
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("List of IP Lengths that need to be matched.")
   @minItems(1)
   ipLengths?: string[];
@@ -472,16 +475,20 @@ model ControlPlaneAclPortMatchCondition {
 model ControlPlaneAclPortMatchConditionPatch
   is ControlPlaneAclPortMatchCondition;
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("Control Plane Access Control List (ACL) IP condition properties")
 @added(Versions.v2025_07_15)
 model ControlPlanAclIpMatchCondition {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("List of the source IP addresses that need to be matched.")
   sourceIpPrefix?: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("List of the destination IP addresses that need to be matched.")
   destinationIpPrefix?: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("Control Plane Access Control List (ACL) IP condition patch properties")
 @added(Versions.v2025_07_15)
 model ControlPlaneAclIpMatchConditionPatch is ControlPlanAclIpMatchCondition;
@@ -544,6 +551,7 @@ model ControlPlaneAclMatchCondition {
   @doc("Protocols that need to be matched.")
   protocolTypes?: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("IP condition that needs to be matched.")
   ipCondition?: ControlPlanAclIpMatchCondition;
 
@@ -567,6 +575,7 @@ model ControlPlaneAclMatchConditionPatch {
   @doc("Protocols that need to be matched.")
   protocolTypes?: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("IP condition that needs to be matched.")
   ipCondition?: ControlPlaneAclIpMatchConditionPatch;
 
@@ -657,6 +666,7 @@ model ControlPlaneAclMatchConfigurationPatchProperties {
 @doc("Access Control List (ACL) configurations properties")
 @added(Versions.v2025_07_15)
 model ControlPlaneAclProperties {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("IP Address Type. IPv4 or IPv6")
   ipAddressType?: IPAddressType;
 
@@ -669,6 +679,7 @@ model ControlPlaneAclProperties {
 @doc("Access Control List (ACL) configurations patch properties")
 @added(Versions.v2025_07_15)
 model ControlPlaneAclPatchProperties {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("IP Address Type. IPv4 or IPv6")
   ipAddressType?: IPAddressType;
 

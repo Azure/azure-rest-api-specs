@@ -22,6 +22,7 @@ model BlobDetails {
 }
 
 /** SAS URI operation response. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SasUriResponse {
   /** A URL with a SAS token to upload a blob for execution in the given workspace. */
   @visibility(Lifecycle.Read)

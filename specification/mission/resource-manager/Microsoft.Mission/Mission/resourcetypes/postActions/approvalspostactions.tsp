@@ -43,6 +43,7 @@ model ApprovalActionResponse {
   message: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Request body for calling post-action")
 model ApprovalDeletionCallbackRequest {
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Backwards compatibility - Existing union"

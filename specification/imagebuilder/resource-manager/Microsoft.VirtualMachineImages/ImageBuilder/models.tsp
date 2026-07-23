@@ -654,6 +654,7 @@ model ImageTemplateVmProfile {
   /**
    * Size of the OS disk in GB. Omit or specify 0 to use Azure's default OS disk size.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @minValue(0)
   osDiskSizeGB?: int32 = 0;

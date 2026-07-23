@@ -131,6 +131,7 @@ model MaintenanceWindow {
 
 @doc("The estimated total time required in minutes for all patching operations (database server, storage server, and network switch patching).")
 model EstimatedPatchingTime {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The estimated time required in minutes for database server patching.")
   @minValue(1)
   @maxValue(3000)
@@ -253,10 +254,12 @@ model CloudExadataInfrastructureProperties {
   @visibility(Lifecycle.Read)
   maxMemoryInGbs?: int32;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The local node storage to be allocated in GBs.")
   @visibility(Lifecycle.Read)
   dbNodeStorageSizeInGbs?: int32;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The total local node storage available in GBs.")
   @visibility(Lifecycle.Read)
   maxDbNodeStorageSizeInGbs?: int32;
@@ -269,6 +272,7 @@ model CloudExadataInfrastructureProperties {
   @visibility(Lifecycle.Read)
   maxDataStorageInTbs?: float64;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The software version of the database servers (dom0) in the Exadata infrastructure.")
   @visibility(Lifecycle.Read)
   dbServerVersion?: string;
@@ -299,6 +303,7 @@ model CloudExadataInfrastructureProperties {
   @visibility(Lifecycle.Read)
   nextMaintenanceRunId?: Ocid;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("Monthly Db Server version")
   @visibility(Lifecycle.Read)
   monthlyDbServerVersion?: string;

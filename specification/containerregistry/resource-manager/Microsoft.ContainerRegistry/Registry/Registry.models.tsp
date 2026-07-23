@@ -139,6 +139,7 @@ union PublicNetworkAccess {
 /**
  * Whether to allow trusted Azure services to access a network restricted registry.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 union NetworkRuleBypassOptions {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -255,6 +256,7 @@ enum ContainerRegistryResourceType {
 /**
  * A request to check whether a container registry name is available.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model RegistryNameCheckRequest {
   /**
    * The name of the container registry.

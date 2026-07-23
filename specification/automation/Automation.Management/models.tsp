@@ -5477,6 +5477,7 @@ model updateConfigurationMachineRunProperties {
   /**
    * Operating system target of the software update configuration triggered this run
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   osType?: string;
 
@@ -5633,6 +5634,7 @@ model softwareUpdateConfigurationRunProperties {
   /**
    * Operating system target of the software update configuration triggered this run
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   osType?: string;
 

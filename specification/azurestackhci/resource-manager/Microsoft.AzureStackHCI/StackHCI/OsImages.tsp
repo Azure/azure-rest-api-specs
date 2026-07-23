@@ -12,6 +12,7 @@ namespace Microsoft.AzureStackHCI;
 /**
  * Represents a os image resource.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @parentResource(SubscriptionLocationResource)
 @added(Versions.v2026_05_01_preview)
 model OsImage is Azure.ResourceManager.ProxyResource<OsImageProperties> {
@@ -21,6 +22,7 @@ model OsImage is Azure.ResourceManager.ProxyResource<OsImageProperties> {
   >;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @armResourceOperations
 @added(Versions.v2026_05_01_preview)
 interface OsImages {

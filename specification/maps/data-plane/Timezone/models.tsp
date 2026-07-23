@@ -5,6 +5,7 @@ import "./common/common.tsp";
 namespace MapsTimezone;
 
 /** Options for timezone information returned in the result. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 union TimezoneOptions {
   string,
 
@@ -266,6 +267,7 @@ model TimeTransition {
  * details for failed operations. (This also follows the OData error response
  * format.).
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model ErrorResponse {
   /**

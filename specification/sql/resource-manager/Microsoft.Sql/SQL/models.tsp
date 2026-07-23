@@ -3061,6 +3061,7 @@ union SyncAgentState {
 /**
  * Type of the sync agent linked database.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 union SyncMemberDbType {
   string,
 
@@ -5183,6 +5184,7 @@ model DatabaseAutomaticTuningProperties {
 /**
  * Automatic tuning properties for individual advisors.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.DatabaseAutomaticTuning)
 model AutomaticTuningOptions {
@@ -7706,6 +7708,7 @@ model CertificateInfo {
 /**
  * Distributed availability group failover.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.DistributedAvailabilityGroups)
 model DistributedAvailabilityGroupsFailoverRequest {
@@ -8269,11 +8272,13 @@ model ServerFirewallRuleProperties {
   /**
    * The start IP address of the firewall rule. Must be IPv4 format. Use value '0.0.0.0' for all Azure-internal IP addresses.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   startIpAddress?: string;
 
   /**
    * The end IP address of the firewall rule. Must be IPv4 format. Must be greater than or equal to startIpAddress. Use value '0.0.0.0' for all Azure-internal IP addresses.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   endIpAddress?: string;
 }
 
@@ -9056,6 +9061,7 @@ model JobStepOutput {
 /**
  * The execution options of a job step.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.JobSteps)
 model JobStepExecutionOptions {
@@ -13094,6 +13100,7 @@ model TopQueries {
 /**
  * Validate azure key vault encryption key.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ManagedInstances)
 model ManagedInstanceValidateAzureKeyVaultEncryptionKeyRequest {
@@ -13860,6 +13867,7 @@ model AutomaticTuningServerProperties {
 /**
  * Automatic tuning properties for individual advisors.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ServerAutomaticTuning)
 model AutomaticTuningServerOptions {
@@ -14207,6 +14215,7 @@ model ServerOperationProperties {
 /**
  * A request to check whether the specified name for a resource is available.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.Servers)
 model CheckNameAvailabilityRequest {
@@ -14219,6 +14228,7 @@ model CheckNameAvailabilityRequest {
 /**
  * The result of a name availability check.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.Servers)
 model CheckNameAvailabilityResponse {

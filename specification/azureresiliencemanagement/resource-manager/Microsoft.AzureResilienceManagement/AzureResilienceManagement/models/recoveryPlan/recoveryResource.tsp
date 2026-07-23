@@ -90,6 +90,7 @@ model RecoveryResource is ProxyResource<RecoveryResourceProperties> {
   name: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("RecoveryResources post action request to update in batch.")
 model UpdateRecoveryResourcesRequest {
   @doc("A list of recovery orchestration resources whose properties need to be updated.")
@@ -104,6 +105,7 @@ model UpdateRecoveryResourcesRequest {
   ]>[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("RecoveryResources post action request to update in batch.")
 model UpdateRecoveryResourcesResponse {
   @doc("A list of error details associated with resources for which the update has failed.")

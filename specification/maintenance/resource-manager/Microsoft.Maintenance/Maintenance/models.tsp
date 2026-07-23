@@ -171,6 +171,7 @@ enum TagOperators {
 /**
  * Response of ScheduledEvents acknowledge
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ScheduledEventsApproveResponse {
   /**
    * Successfully Approved
@@ -508,6 +509,7 @@ model ConfigurationAssignmentFilterProperties {
   /**
    * List of allowed operating systems.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osTypes?: string[];
 
   /**

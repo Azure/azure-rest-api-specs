@@ -16,6 +16,7 @@ model DbSystemShape is ProxyResource<DbSystemShapeProperties> {
   name: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read-only resource. No provisioning state provided."
 @doc("DbSystemShape resource model")
 model DbSystemShapeProperties {
@@ -54,6 +55,7 @@ model DbSystemShapeProperties {
   @doc("The maximum memory available per database node for this shape. Only applicable to ExaCC Elastic shapes.")
   availableMemoryPerNodeInGbs?: int32;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The maximum Db Node storage available per database node for this shape. Only applicable to ExaCC Elastic shapes.")
   availableDbNodePerNodeInGbs?: int32;
 
@@ -66,9 +68,11 @@ model DbSystemShapeProperties {
   @doc("The minimum memory that need be allocated per node for this shape.")
   minMemoryPerNodeInGbs?: int32;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The maximum Db Node storage that can be enabled for this shape.")
   availableDbNodeStorageInGbs?: int32;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The minimum Db Node storage that need be allocated per node for this shape.")
   minDbNodeStoragePerNodeInGbs?: int32;
 
@@ -109,6 +113,7 @@ model DbSystemShapeProperties {
   shapeAttributes?: string[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @added(Versions.v20241201_preview)
 @doc("Provides GiMinorVersion query parameter for list operations.")
 model DbSystemShapeFilter {

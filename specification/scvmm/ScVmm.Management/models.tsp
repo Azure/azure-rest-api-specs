@@ -55,6 +55,7 @@ union ProvisioningState {
 }
 
 /** Virtual machine operating system type. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 union OsType {
   /** Windows operating system. */
   Windows: "Windows",
@@ -333,10 +334,12 @@ model VirtualMachineTemplateProperties {
   vmmServerId?: VmmServerId;
 
   /** Gets the type of the os. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   osType?: OsType;
 
   /** Gets os name. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   osName?: string;
 
@@ -567,6 +570,7 @@ model VirtualMachineInstanceProperties {
   availabilitySets?: AvailabilitySetListItem[];
 
   /** OS properties. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   osProfile?: OsProfileForVmInstance;
 
@@ -627,6 +631,7 @@ model AvailabilitySetListItem {
 }
 
 /** Defines the resource properties. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model OsProfileForVmInstance {
   /** Gets or sets the admin username. */
   @added(Versions.v2025_03_13)
@@ -641,14 +646,17 @@ model OsProfileForVmInstance {
   computerName?: string;
 
   /** Gets the type of the os. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   osType?: OsType;
 
   /** Gets os sku. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   osSku?: string;
 
   /** Gets os version. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   osVersion?: string;
 
@@ -827,6 +835,7 @@ model Checkpoint {
 }
 
 /** Defines the stop action properties. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model StopVirtualMachineOptions {
   /** Gets or sets a value indicating whether to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Defaults to false. */
   skipShutdown?: SkipShutdown = SkipShutdown.`false`;
@@ -952,10 +961,12 @@ model VirtualMachineTemplateInventoryItem extends InventoryItemProperties {
   memoryMB?: int32;
 
   /** Gets the type of the os. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   osType?: OsType;
 
   /** Gets os name. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   osName?: string;
 
@@ -966,14 +977,17 @@ model VirtualMachineTemplateInventoryItem extends InventoryItemProperties {
 /** The Virtual machine inventory item. */
 model VirtualMachineInventoryItem extends InventoryItemProperties {
   /** Gets the type of the os. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   osType?: OsType;
 
   /** Gets os name. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   osName?: string;
 
   /** Gets os version. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   osVersion?: string;
 
@@ -987,6 +1001,7 @@ model VirtualMachineInventoryItem extends InventoryItemProperties {
   generation?: int64;
 
   /** Gets or sets the nic ip addresses. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipAddresses?: string[];
 
   /** Cloud inventory resource details where the VM is present. */

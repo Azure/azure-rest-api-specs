@@ -134,6 +134,7 @@ enum EncryptionAlgorithmType {
 }
 
 /** The path expiry options. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 union PathExpiryOptions {
   /** Never expire. */
   NeverExpire: "NeverExpire",
@@ -293,6 +294,7 @@ model AclFailedEntry {
 }
 
 /** The response for set access control recursive operations. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SetAccessControlRecursiveResponse {
   /** The number of directories successfully processed. */
   directoriesSuccessful?: int32;
@@ -310,6 +312,7 @@ model SetAccessControlRecursiveResponse {
 // List Blobs Hierarchy models (XML)
 
 /** An enumeration of blobs. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @Xml.name("EnumerationResults")
 model ListBlobsHierarchySegmentResponse {
   /** The service endpoint. */

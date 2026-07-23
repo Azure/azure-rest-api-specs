@@ -41,6 +41,7 @@ model AgentBase {
   discoveryExtensions?: Record<unknown>;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Foundry agent creation request without name (name is provided at Discovery agent level).")
 @added(Versions.`2026-02-01-preview`)
 model FoundryAgentCreateRequest {

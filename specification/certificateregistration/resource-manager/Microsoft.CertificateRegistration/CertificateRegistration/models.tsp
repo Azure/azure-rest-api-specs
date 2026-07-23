@@ -377,6 +377,7 @@ model CertificateOrderContact {
 /**
  * App Service error response.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model DefaultErrorResponse {
   /**
@@ -627,6 +628,7 @@ model AppServiceCertificatePatchResource extends ProxyOnlyResource {
 /**
  * Class representing certificate reissue request.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ReissueCertificateOrderRequest extends ProxyOnlyResource {
   /**
@@ -663,6 +665,7 @@ model ReissueCertificateOrderRequestProperties {
 /**
  * Class representing certificate renew request.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RenewCertificateOrderRequest extends ProxyOnlyResource {
   /**

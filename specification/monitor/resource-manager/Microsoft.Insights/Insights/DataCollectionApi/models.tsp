@@ -12,6 +12,7 @@ namespace DataCollectionApi;
 /**
  * The configuration to set whether network access from public internet to the endpoints are allowed.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 union KnownPublicNetworkAccessOptions {
   string,
 

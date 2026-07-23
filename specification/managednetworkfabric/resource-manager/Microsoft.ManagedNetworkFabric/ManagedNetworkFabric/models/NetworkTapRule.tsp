@@ -98,6 +98,7 @@ model NetworkTapRuleMatchConfiguration {
   @minValue(1)
   sequenceNumber?: int64;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("Type of IP Address. IPv4 or IPv6")
   ipAddressType?: IPAddressType;
 
@@ -121,6 +122,7 @@ model NetworkTapRuleMatchConfigurationPatch {
   @minValue(1)
   sequenceNumber?: int64;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("Type of IP Address. IPv4 or IPv6")
   ipAddressType?: IPAddressType;
 
@@ -320,6 +322,7 @@ model GlobalNetworkTapRuleActionPatchProperties {
   truncate?: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Response for Network Tap Rule resync operation.")
 model NetworkTapRuleResyncResponse {
   ...OperationStatusResult;

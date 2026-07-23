@@ -24,6 +24,7 @@ namespace Microsoft.Network;
 model IpAllocation extends Common.Resource {
   properties?: IpAllocationPropertiesFormat;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   @path
   @key("ipAllocationName")
@@ -36,6 +37,7 @@ model IpAllocation extends Common.Resource {
   etag?: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 @armResourceOperations

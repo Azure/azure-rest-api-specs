@@ -24,6 +24,7 @@ model TaskAssignee {
   type: ByType;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Request body for starting a task.")
 model StartTaskRequest {
   @doc("Assignee that will execute the task. Optional.")

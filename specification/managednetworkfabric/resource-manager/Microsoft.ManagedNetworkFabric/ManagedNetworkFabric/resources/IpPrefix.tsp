@@ -11,6 +11,7 @@ model IpPrefix is Azure.ResourceManager.TrackedResource<
   IpPrefixProperties,
   false
 > {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("Name of the IP Prefix.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
@@ -22,6 +23,7 @@ model IpPrefix is Azure.ResourceManager.TrackedResource<
 
 @@doc(IpPrefix.properties, "The IP Prefix properties");
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @armResourceOperations
 interface IpPrefixes {
   @doc("Implements IP Prefix GET method.")

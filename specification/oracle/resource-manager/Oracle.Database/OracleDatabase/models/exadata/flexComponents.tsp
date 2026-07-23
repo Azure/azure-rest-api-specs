@@ -36,6 +36,7 @@ model FlexComponentProperties {
   @visibility(Lifecycle.Read)
   availableCoreCount?: int32;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The maximum storage that can be enabled on the Storage Server for this Flex Component.")
   @visibility(Lifecycle.Read)
   availableDbStorageInGbs?: int32;

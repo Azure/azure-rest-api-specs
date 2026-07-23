@@ -294,6 +294,7 @@ union SystemShapes {
   string,
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @added(Versions.v20250701_preview)
 @doc("Allowed values for BaseDb System Shapes")
 union BaseDbSystemShapes {

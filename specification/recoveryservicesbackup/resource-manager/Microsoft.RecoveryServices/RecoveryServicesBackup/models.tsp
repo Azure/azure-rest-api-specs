@@ -1619,6 +1619,7 @@ model BackupResourceConfig {
  * 2. VM is already protected
  * 3. Any VM related configuration passed in properties.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model PreValidateEnableBackupRequest {
   /**
    * ProtectedItem Type- VM, SqlDataBase, AzureFileShare etc
@@ -1644,6 +1645,7 @@ model PreValidateEnableBackupRequest {
 /**
  * Response contract for enable backup validation request
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model PreValidateEnableBackupResponse {
   /**
    * Validation Status
@@ -1772,6 +1774,7 @@ model FeatureSupportRequest {
 /**
  * Response for feature support requests for Azure IaasVm
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AzureVMResourceFeatureSupportResponse {
   /**
@@ -2285,6 +2288,7 @@ model PrepareDataMoveRequest {
 /**
  * Operation result response for Vault Storage Config
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @discriminator("objectType")
 model VaultStorageConfigOperationResultResponse {
   /**
@@ -2660,6 +2664,7 @@ model OperationResultInfoBase {
 /**
  * This is the base class for operation result responses.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model OperationWorkerResponse {
   /**
    * HTTP Status Code of the operation.
@@ -2703,6 +2708,7 @@ model ValidateOperationRequestResource {
 /**
  * Base class for validate operation request.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @discriminator("objectType")
 model ValidateOperationRequest {
   /**
@@ -2712,6 +2718,7 @@ model ValidateOperationRequest {
   objectType: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ValidateOperationsResponse {
   /**
@@ -2723,6 +2730,7 @@ model ValidateOperationsResponse {
 /**
  * Base class for validate operation response.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ValidateOperationResponse {
   /**
    * Gets the validation result
@@ -3215,6 +3223,7 @@ model MoveRPAcrossTiersRequest {
 /**
  * ListRecoveryPointsRecommendedForMoveRequest Request
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ListRecoveryPointsRecommendedForMoveRequest {
   /**
    * Gets the class type.
@@ -3287,6 +3296,7 @@ model UnlockDeleteResponse {
 /**
  * Patch Request content to update recovery point for given RecoveryPointId
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2026_01_31_preview)
 @removed(Versions.v2026_02_01)
 @added(Versions.v2026_03_31_preview)
@@ -3333,6 +3343,7 @@ model PatchRecoveryPointPropertiesInput {
  * Base class for tiering cost request.
  * Specific cost request types are derived from this class.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @discriminator("objectType")
 model FetchTieringCostInfoRequest {
   /**
@@ -4991,6 +5002,7 @@ model RecoveryPointMoveReadinessInfo {
 /**
  * AzureWorkload SAP Hana -specific restore. Specifically for PointInTime/Log restore
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AzureWorkloadPointInTimeRestoreRequest extends RestoreRequest {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -5128,6 +5140,7 @@ alias AzureWorkloadSAPHanaPointInTimeRestoreRequestProperties = {
 /**
  * AzureWorkload SAP Hana -specific restore. Specifically for PointInTime/Log restore
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SAP acronym in naming"
 model AzureWorkloadSAPHanaPointInTimeRestoreRequest extends RestoreRequest {
   /**
@@ -5142,6 +5155,7 @@ model AzureWorkloadSAPHanaPointInTimeRestoreRequest extends RestoreRequest {
 /**
  * AzureWorkload SAP Hana-specific restore.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SAP acronym in naming"
 model AzureWorkloadSAPHanaRestoreRequest extends RestoreRequest {
   /**
@@ -5182,6 +5196,7 @@ model AzureWorkloadSAPAsePointInTimeRecoveryPoint extends RecoveryPoint {
 /**
  * AzureWorkload SAP Ase-specific restore. Specifically for PointInTime/Log restore
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SAP acronym in naming"
 model AzureWorkloadSAPAsePointInTimeRestoreRequest extends RestoreRequest {
   /**
@@ -5200,6 +5215,7 @@ model AzureWorkloadSAPAsePointInTimeRestoreRequest extends RestoreRequest {
 /**
  * AzureWorkload SAP Ase-specific restore.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SAP acronym in naming"
 model AzureWorkloadSAPAseRestoreRequest extends RestoreRequest {
   /**
@@ -5325,6 +5341,7 @@ alias AzureWorkloadSQLPointInTimeRestoreRequestProperties = {
 /**
  * AzureWorkload SQL -specific restore. Specifically for PointInTime/Log restore
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SQL acronym in naming"
 model AzureWorkloadSQLPointInTimeRestoreRequest extends RestoreRequest {
   /**
@@ -5358,6 +5375,7 @@ alias AzureWorkloadSQLRestoreRequestProperties = {
 /**
  * AzureWorkload SQL -specific restore. Specifically for full/diff restore
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SQL acronym in naming"
 model AzureWorkloadSQLRestoreRequest extends RestoreRequest {
   /**
@@ -6254,6 +6272,7 @@ model SecuredVMDetails {
   /**
    * Gets or Sets Disk Encryption Set Id for Secured VM OS Disk
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   securedVMOsDiskEncryptionSetId?: string;
 }
@@ -6821,6 +6840,7 @@ model OperationResultInfo extends OperationResultInfoBase {
 /**
  * Prepare DataMove Response
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model PrepareDataMoveResponse
   extends VaultStorageConfigOperationResultResponse {
   /**
@@ -6993,6 +7013,7 @@ model SimpleSchedulePolicyV2 extends SchedulePolicy {
 /**
  * AzureRestoreValidation request.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ValidateIaasVMRestoreOperationRequest extends ValidateOperationRequest {
   /**
@@ -7013,6 +7034,7 @@ alias ValidateRestoreOperationRequestProperties = {
 /**
  * AzureRestoreValidation request.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ValidateRestoreOperationRequest extends ValidateOperationRequest {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -7221,6 +7243,7 @@ model AzureFileShareProtectableItem extends WorkloadProtectableItem {
 /**
  * Update snapshot Uri with the correct friendly Name of the source Azure file share.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AzureFileShareProvisionILRRequest extends ILRRequest {
   /**
@@ -8001,6 +8024,7 @@ model AzureWorkloadBackupRequest extends BackupRequest {
 /**
  * Azure backup goal feature specific request.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AzureBackupGoalFeatureSupportRequest extends FeatureSupportRequest {
   /**
    * backup support feature type.
@@ -8036,6 +8060,7 @@ model AzureResourceProtectionIntent extends ProtectionIntent {
 /**
  * AzureResource(IaaS VM) Specific feature support request
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AzureVMResourceFeatureSupportRequest extends FeatureSupportRequest {
   /**
@@ -8294,6 +8319,7 @@ model ClientScriptForConnect {
   /**
    * OS type - Windows, Linux etc. for which this file / folder restore client script works.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osType?: string;
 
   /**
@@ -8407,6 +8433,7 @@ model IaasVMBackupRequest extends BackupRequest {
 /**
  * Restore files/folders from a backup copy of IaaS VM.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IaasVMILRRegistrationRequest extends ILRRequest {
   /**
@@ -8623,6 +8650,7 @@ model OperationStatusValidateOperationExtendedInfo
 /**
  * AzureWorkload SAP Hana-specific restore with integrated rehydration of recovery point.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SAP acronym in naming"
 model AzureWorkloadSAPHanaPointInTimeRestoreWithRehydrateRequest
   extends RestoreRequest {
@@ -8659,6 +8687,7 @@ model RecoveryPointRehydrationInfo {
 /**
  * AzureWorkload SAP Hana-specific restore with integrated rehydration of recovery point.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SAP acronym in naming"
 model AzureWorkloadSAPHanaRestoreWithRehydrateRequest extends RestoreRequest {
   /**
@@ -8677,6 +8706,7 @@ model AzureWorkloadSAPHanaRestoreWithRehydrateRequest extends RestoreRequest {
 /**
  * AzureWorkload SQL-specific restore with integrated rehydration of recovery point.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SQL acronym in naming"
 model AzureWorkloadSQLPointInTimeRestoreWithRehydrateRequest
   extends RestoreRequest {
@@ -8698,6 +8728,7 @@ model AzureWorkloadSQLPointInTimeRestoreWithRehydrateRequest
 /**
  * AzureWorkload SQL-specific restore with integrated rehydration of recovery point
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SQL acronym in naming"
 model AzureWorkloadSQLRestoreWithRehydrateRequest extends RestoreRequest {
   /**
@@ -8717,6 +8748,7 @@ model AzureWorkloadSQLRestoreWithRehydrateRequest extends RestoreRequest {
 /**
  * IaaS VM workload-specific restore with integrated rehydration of recovery point.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IaasVMRestoreWithRehydrationRequest extends RestoreRequest {
   /**
@@ -8735,6 +8767,7 @@ model IaasVMRestoreWithRehydrationRequest extends RestoreRequest {
 /**
  * Request parameters for fetching cost info of rehydration
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model FetchTieringCostInfoForRehydrationRequest
   extends FetchTieringCostInfoRequest {
   /**
@@ -8819,6 +8852,7 @@ model TieringCostSavingInfo extends TieringCostInfo {
 /**
  * Request parameters for tiering cost info for policy
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model FetchTieringCostSavingsInfoForPolicyRequest
   extends FetchTieringCostInfoRequest {
   /**
@@ -8835,6 +8869,7 @@ model FetchTieringCostSavingsInfoForPolicyRequest
 /**
  * Request parameters for tiering cost info for protected item
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model FetchTieringCostSavingsInfoForProtectedItemRequest
   extends FetchTieringCostInfoRequest {
   /**
@@ -8856,6 +8891,7 @@ model FetchTieringCostSavingsInfoForProtectedItemRequest
 /**
  * Request parameters for tiering cost info for vault
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model FetchTieringCostSavingsInfoForVaultRequest
   extends FetchTieringCostInfoRequest {
   /**
@@ -8867,6 +8903,7 @@ model FetchTieringCostSavingsInfoForVaultRequest
 /**
  * Operations List response which contains list of available APIs.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ClientDiscoveryResponse {
   /**
    * List of available operations.
@@ -8962,6 +8999,7 @@ model CrossTenantVaultMappingProperties {
 /**
  * Request to remove a cross-tenant vault mapping for cross-tenant restore.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2026_03_31_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
@@ -8992,6 +9030,7 @@ union VaultMappingState {
  * Response for CheckVaultMappingStatus API.
  * Contains information about whether a source vault is mapped to a target vault.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2026_03_31_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
@@ -9010,6 +9049,7 @@ model CrossTenantVaultMappingStatusResponse {
 /**
  * Request to generate a vault credential certificate for cross-tenant restore.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2026_03_31_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
@@ -9023,6 +9063,7 @@ model VaultCredentialCertificateRequest {
 /**
  * Options for self-signed certificate generation.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2026_03_31_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
@@ -9037,6 +9078,7 @@ model VaultCredentialCertificateCreateOptions {
  * Response containing the generated vault credential certificate
  * and associated AAD identity details for MARS agent registration.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2026_03_31_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)

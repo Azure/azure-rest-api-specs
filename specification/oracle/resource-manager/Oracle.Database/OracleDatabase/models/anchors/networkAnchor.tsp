@@ -75,11 +75,13 @@ model NetworkAnchorProperties {
   @visibility(Lifecycle.Create)
   dnsListeningEndpointAllowedCidrs?: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @added(Versions.v20250701_preview)
   @doc("DNS listening endpoint IP address")
   @visibility(Lifecycle.Read)
   dnsListeningEndpointIpAddress?: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @added(Versions.v20250701_preview)
   @doc("DNS forwarding endpoint IP address")
   @visibility(Lifecycle.Read)
@@ -111,6 +113,7 @@ model DnsForwardingRule {
   @visibility(Lifecycle.Create)
   domainNames: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("Forwarding ip address")
   @visibility(Lifecycle.Create)
   forwardingIpAddress: string;

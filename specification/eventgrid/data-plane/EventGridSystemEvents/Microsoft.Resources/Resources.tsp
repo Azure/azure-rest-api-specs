@@ -46,11 +46,13 @@ namespace Microsoft.EventGrid.SystemEvents {
   }
 
   /** The details of the HTTP request. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
   model ResourceHttpRequest {
     /** The client request ID. */
     clientRequestId?: string;
 
     /** The client IP address. */
+    #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
     clientIpAddress?: string;
 
     /** The request method. */

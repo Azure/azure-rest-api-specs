@@ -31,6 +31,7 @@ model SupportedVersionProperties {
   @doc("Operating system and firmware combined versions.")
   version?: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("Operating system version.")
   vendorOsVersion?: string;
 

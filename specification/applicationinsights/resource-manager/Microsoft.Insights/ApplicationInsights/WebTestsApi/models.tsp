@@ -140,6 +140,7 @@ model WebTestPropertiesConfiguration {
 /**
  * The collection of request properties
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model WebTestPropertiesRequest {
   /**
    * Url location to test.

@@ -2283,6 +2283,7 @@ union DocumentIntelligenceLayoutSkillMarkdownHeaderDepth {
 }
 
 /** Controls the cardinality of the content extracted from the document by the skill. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 union DocumentIntelligenceLayoutSkillExtractionOptions {
   string,
 
@@ -3279,6 +3280,7 @@ model ListDataSourcesResult {
 }
 
 /** The type of the keysOrIds. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DocumentKeysOrIds {
   /** document keys to be reset */
   documentKeys?: string[];
@@ -3902,6 +3904,7 @@ model ListSkillsetsResult {
 }
 
 /** The type of the skill names. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict"
 model SkillNames {
   /** the names of skills to be reset. */
@@ -4015,6 +4018,7 @@ model SearchIndex {
 }
 
 /** Represents a search index definition, which describes the fields and search behavior of an index. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SearchIndexResponse {
   /** The name of the index. */
   name: string;
@@ -4218,6 +4222,7 @@ model ScoringFunction {
 }
 
 /** Defines options to control Cross-Origin Resource Sharing (CORS) for an index. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CorsOptions {
   /** The list of origins from which JavaScript code will be granted access to your index. Can contain a list of hosts of the form {protocol}://{fully-qualified-domain-name}[:{port#}], or a single '*' to allow all origins (not recommended). */
   allowedOrigins: string[];
@@ -4422,6 +4427,7 @@ model VectorSearchCompression {
 }
 
 /** Contains the options for rescoring. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model RescoringOptions {
   /** If set to true, after the initial search on the compressed vectors, the similarity scores are recalculated using the full-precision vectors. This will improve recall at the expense of latency. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
@@ -4496,6 +4502,7 @@ model GetIndexStatisticsResult {
 }
 
 /** Specifies some text and analysis components used to break that text into tokens. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AnalyzeRequest {
   /** The text to break into tokens. */
   text: string;
@@ -7045,6 +7052,7 @@ model ContentUnderstandingSkill extends SearchIndexerSkill {
 }
 
 /** Controls the cardinality of the content extracted from the document by the skill. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 union ContentUnderstandingSkillExtractionOptions {
   string,
 

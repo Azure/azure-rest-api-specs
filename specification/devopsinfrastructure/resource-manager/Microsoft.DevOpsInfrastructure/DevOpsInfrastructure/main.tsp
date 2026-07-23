@@ -235,6 +235,7 @@ model VmSize {
 
 @doc("The storage profile of the VMSS.")
 model StorageProfile {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The Azure SKU name of the machines in the pool.")
   osDiskStorageAccountType?: OsDiskStorageAccountType;
 
@@ -419,6 +420,7 @@ model NetworkProfile {
   @madeOptional(Microsoft.DevOpsInfrastructure.Versions.v2025_09_20)
   subnetId?: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The number of static public IP addresses for outgoing connections assigned to the pool.")
   @added(Microsoft.DevOpsInfrastructure.Versions.v2025_09_20)
   staticIpAddressCount?: int32;

@@ -71,6 +71,7 @@ model AzureCosmosDBChatExtensionParameters {
   embeddingDependency: OnYourDataVectorizationSource;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "this represents the case-sensitive wire format"
 @doc("Optional settings to control how fields are processed when using a configured Azure Cosmos DB resource.")
 @added(ServiceApiVersions.v2024_02_15_Preview)

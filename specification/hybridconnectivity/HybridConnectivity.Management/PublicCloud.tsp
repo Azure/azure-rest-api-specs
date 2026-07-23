@@ -17,6 +17,7 @@ namespace Microsoft.HybridConnectivity;
 
 //------------------- Generate Aws Template -------------------
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("ConnectorId and SolutionTypes and their properties to Generate AWS CFT Template.")
 model GenerateAwsTemplateRequest {
   @doc("The name of public cloud connector")
@@ -367,6 +368,7 @@ interface GenerateAwsTemplate {
 /**
  * The HybridConnectivity post operation response
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model"
 model GenerateAwsTemplateResponse {}
 

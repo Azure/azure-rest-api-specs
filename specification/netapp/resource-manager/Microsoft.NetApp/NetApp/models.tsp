@@ -511,6 +511,7 @@ model LogSpecification {
 /**
  * Resource name availability request content.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ResourceNameAvailabilityRequest {
   /**
    * Resource name to verify.
@@ -531,6 +532,7 @@ model ResourceNameAvailabilityRequest {
 /**
  * Information regarding availability of a resource.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CheckAvailabilityResponse {
   /**
    * <code>true</code> indicates name is valid and available. <code>false</code> indicates the name is invalid, unavailable, or both.
@@ -551,6 +553,7 @@ model CheckAvailabilityResponse {
 /**
  * File path availability request content - availability is based on the name and the subnetId.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model FilePathAvailabilityRequest {
   /**
    * File path to verify.
@@ -572,6 +575,7 @@ model FilePathAvailabilityRequest {
 /**
  * Quota availability request content.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model QuotaAvailabilityRequest {
   /**
    * Name of the resource to verify.
@@ -688,6 +692,7 @@ model RegionInfoAvailabilityZoneMappingsItem {
 /**
  * Network sibling set query.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model QueryNetworkSiblingSetRequest {
   /**
    * Network Sibling Set ID for a group of volumes sharing networking resources in a subnet.
@@ -776,6 +781,7 @@ model NicInfo {
 /**
  * Network sibling set update.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model UpdateNetworkSiblingSetRequest {
   /**
    * Network Sibling Set ID for a group of volumes sharing networking resources in a subnet.
@@ -809,6 +815,7 @@ model UpdateNetworkSiblingSetRequest {
 /**
  * Encryption transition request
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model EncryptionTransitionRequest {
   /**
    * Identifier for the virtual network

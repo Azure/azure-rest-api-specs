@@ -405,6 +405,7 @@ model IpMatchConditionPatch {
   @doc("IP Prefix Type that needs to be matched.")
   prefixType?: PrefixType;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The list of IP Prefixes that need to be matched.")
   @minItems(1)
   @removed(Versions.v2025_07_15)
@@ -415,6 +416,7 @@ model IpMatchConditionPatch {
   @added(Versions.v2025_07_15)
   ipPrefixValues?: string[];
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The List of IP Group Names that need to be matched.")
   @minItems(1)
   @removed(Versions.v2025_07_15)
@@ -443,6 +445,7 @@ model CommonDynamicMatchConfiguration {
 
 @doc("Dynamic match configuration object.")
 model CommonDynamicMatchConfigurationPatch {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @Azure.ResourceManager.identifiers(#[])
   @doc("List of IP Groups.")
   ipGroups?: IpGroupPatchProperties[];
@@ -456,6 +459,7 @@ model CommonDynamicMatchConfigurationPatch {
   portGroups?: PortGroupPatchProperties[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("IP Group properties.")
 model IpGroupProperties {
   @doc("IP Group name.")
@@ -538,6 +542,7 @@ model CommonPostActionResponseForStateUpdate extends CommonErrorResponse {
   configurationState?: ConfigurationState;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending common error response"
 @doc("The response of the action validate configuration.")
 model ValidateConfigurationResponse extends CommonErrorResponse {
@@ -771,6 +776,7 @@ model TagsUpdate {
   ...ArmTagsProperty;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("Layer 3 primary and secondary IP Address prefixes.")
 model Layer3IpPrefixPatchProperties is Layer3IpPrefixProperties;
 
@@ -1310,6 +1316,7 @@ model BmpExportPolicyPatchProperties {
   exportPolicies?: BmpExportPolicy[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Update Administrative State Response.")
 @added(Versions.v2025_07_15)
 model UpdateAdministrativeStateResponse {

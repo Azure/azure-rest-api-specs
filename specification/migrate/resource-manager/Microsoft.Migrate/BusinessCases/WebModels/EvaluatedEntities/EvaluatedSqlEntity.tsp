@@ -62,6 +62,7 @@ model EvaluatedSqlEntityProperties {
   @visibility(Lifecycle.Read)
   virtualizationType?: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("DB count in instance.")
   @visibility(Lifecycle.Read)
   dbCount?: int32;

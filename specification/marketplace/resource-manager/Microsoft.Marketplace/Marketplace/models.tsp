@@ -286,6 +286,7 @@ model SystemData {
 /**
  * Error response indicates Microsoft.Marketplace service is not able to process the incoming request. The reason is provided in the error message.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model ErrorResponse {
   /**
@@ -314,6 +315,7 @@ model ErrorResponseError {
 /**
  * Response object of query if are there existing offers in the collections.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AnyExistingOffersInTheCollectionsResponse {
   /**
    * Boolean answer, true if exists at least a single offer in an enabled collection, otherwise, false.
@@ -524,6 +526,7 @@ model Rule {
 /**
  * Billing accounts response object
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BillingAccountsResponse {
   /**
    * Billing accounts list
@@ -554,6 +557,7 @@ model CollectionsToSubscriptionsMappingProperties {
 /**
  * A map of collections subscriptions details
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CollectionsToSubscriptionsMappingResponse {
   /**
    * The map of collections subscriptions
@@ -818,6 +822,7 @@ model BulkCollectionsResponse {
   failed?: CollectionsDetails[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model OfferListResponse is Azure.Core.Page<Offer>;
 

@@ -73,6 +73,7 @@ model ExadbVmClusterProperties {
   @visibility(Lifecycle.Create, Lifecycle.Read)
   enabledEcpuCount: int32;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The Azure Resource ID of the Exadata Database Storage Vault.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   exascaleDbStorageVaultId: ExascaleDbStorageVaultResourceId;
@@ -228,6 +229,7 @@ model ExadbVmClusterStorageDetails {
 @added(Versions.v20241201_preview)
 @doc("Details of removing Virtual Machines from the Exadata VM cluster on Exascale Infrastructure. Applies to Exadata Database Service on Exascale Infrastructure only.")
 model RemoveVirtualMachineFromExadbVmClusterDetails {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The list of ExaCS DB nodes for the Exadata VM cluster on Exascale Infrastructure to be removed.")
   @Azure.ResourceManager.identifiers(#[])
   dbNodes: Array<DbNodeDetails>;

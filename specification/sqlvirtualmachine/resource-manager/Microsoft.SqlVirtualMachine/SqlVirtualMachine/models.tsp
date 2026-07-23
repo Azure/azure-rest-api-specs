@@ -298,6 +298,7 @@ union TroubleshootingScenario {
 /**
  * Additional VM Patching solution enabled on the Virtual Machine
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 union AdditionalOsPatch {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -353,6 +354,7 @@ enum AssessmentDayOfWeek {
 /**
  * Operating System of the current SQL Virtual Machine.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum OsType {
   Windows,
@@ -384,6 +386,7 @@ model AvailabilityGroupListenerProperties {
   /**
    * List of multi subnet IP configurations for an AG listener.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @identifiers(#[])
   multiSubnetIpConfigurations?: MultiSubnetIpConfiguration[];
 
@@ -410,11 +413,13 @@ model LoadBalancerConfiguration {
   /**
    * Private IP address.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   privateIpAddress?: PrivateIPAddress;
 
   /**
    * Resource id of the public IP.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   publicIpAddressResourceId?: string;
 
   /**
@@ -451,10 +456,12 @@ model PrivateIPAddress {
 /**
  * Multi subnet ip configuration for an availability group listener.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model MultiSubnetIpConfiguration {
   /**
    * Private IP address.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   privateIpAddress: PrivateIPAddress;
 
   /**
@@ -736,6 +743,7 @@ model SqlVirtualMachineProperties {
   /**
    * Domain credentials for setting up Windows Server Failover Cluster for SQL availability group.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   wsfcStaticIp?: string;
 
   /**
@@ -793,6 +801,7 @@ model SqlVirtualMachineProperties {
   /**
    * Operating System of the current SQL Virtual Machine.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   osType?: OsType;
 }
@@ -1139,11 +1148,13 @@ model StorageConfigurationSettings {
   /**
    * SQL Server TempDb Storage Settings.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   sqlTempDbSettings?: SQLTempDbSettings;
 
   /**
    * SQL Server SystemDb Storage on DataPool if true.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   sqlSystemDbOnDataDisk?: boolean;
 
   /**
@@ -1373,6 +1384,7 @@ model VirtualMachineIdentity {
 /**
  * Configure disk config assessment for databases in your SQL virtual machine.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DiskConfigAssessmentRequest {
   /**
    * Boolean to run disk config Assessment. Use false to fetch past Assessment.

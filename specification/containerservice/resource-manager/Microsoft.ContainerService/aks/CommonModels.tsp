@@ -1707,6 +1707,7 @@ model NodeImageVersion {
   /**
    * The operating system of the node image. Example: AKSUbuntu
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   os?: string;
 
   /**
@@ -2525,6 +2526,7 @@ model ContainerServiceNetworkProfile {
   /**
    * The IP families used to specify IP versions available to the cluster. IP families are used to determine single-stack or dual-stack clusters. For single-stack, the expected value is IPv4. For dual-stack, the expected values are IPv4 and IPv6.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipFamilies?: IPFamily[];
 
   /**
@@ -2645,6 +2647,7 @@ model BastionProfile {
    *
    * This field cannot be updated. To change IP address after creation, please disable and re-enable the managed bastion with the new public IP address.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Create, Lifecycle.Read)
   publicIpAddressId?: Azure.Core.armResourceIdentifier<[
     {

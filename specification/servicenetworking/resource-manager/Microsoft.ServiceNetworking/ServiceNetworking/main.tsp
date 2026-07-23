@@ -150,6 +150,7 @@ model SecurityPolicyProperties {
   wafPolicy?: WafPolicy;
 
   /** Ip Access Policy of the Traffic Controller Security Policy. Single Security Policy can have only one policy type set. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @added(Versions.v2025_03_01_preview)
   ipAccessRulesPolicy?: IpAccessRulesPolicy;
 
@@ -177,6 +178,7 @@ model WafPolicy {
 }
 
 /** Ip Access Policy */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @added(Versions.v2025_03_01_preview)
 model IpAccessRulesPolicy {
   /** Ip Access Policy Rules List */
@@ -203,6 +205,7 @@ model IpAccessRule {
   action: IpAccessRuleAction;
 }
 /** Action of Ip Access Rule */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @added(Versions.v2025_03_01_preview)
 union IpAccessRuleAction {
   string,
@@ -220,6 +223,7 @@ model SecurityPolicyConfigurations {
   wafSecurityPolicy?: WafSecurityPolicy;
 
   /** Contains reference to a IpAccessRules-type security policy. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @added(Versions.v2025_03_01_preview)
   ipAccessRulesSecurityPolicy?: IpAccessRulesSecurityPolicy;
 }
@@ -231,6 +235,7 @@ model WafSecurityPolicy {
 }
 
 /** IpAccessRules Security Policy */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @added(Versions.v2025_03_01_preview)
 model IpAccessRulesSecurityPolicy {
   /** Resource ID of the Ip Access Rules Security Policy */

@@ -148,6 +148,7 @@ alias GetBrowsersParams = {
   @doc("The run id provided by client for corresponding remote test run.")
   runId?: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @query
   @doc("The os provided by client for remote test runs.")
   os?: OS = OS.Linux;

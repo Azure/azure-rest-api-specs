@@ -241,6 +241,7 @@ model HttpRequestInfo {
   /**
    * the client Ip Address
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   clientIpAddress?: string;
 
   /**

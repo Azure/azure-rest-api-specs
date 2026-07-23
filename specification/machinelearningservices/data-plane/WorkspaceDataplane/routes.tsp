@@ -39,6 +39,7 @@ interface Workspaces {
 }
 
 /** Accepted response with location header for polling. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AcceptedResponse {
   /** HTTP status code. */
   @statusCode statusCode: 202;

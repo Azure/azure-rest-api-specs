@@ -221,6 +221,7 @@ interface Projects {
     | ErrorResponse;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Response for tier limit check.")
 @added(MongoDB.Atlas.Versions.v2026_03_01_preview)
 model TierLimitReachedResponse {
@@ -246,6 +247,7 @@ model ProjectLimitStatus {
   isReached: boolean;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Response for regions by cluster tier.")
 @added(MongoDB.Atlas.Versions.v2026_03_01_preview)
 model RegionsByTierResponse {
@@ -292,6 +294,7 @@ model ClusterProperties {
   @visibility(Lifecycle.Create, Lifecycle.Read)
   regionName: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("MongoDB version running on the cluster.")
   @visibility(Lifecycle.Read)
   mongoDbVersion?: string;

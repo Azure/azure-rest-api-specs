@@ -1052,6 +1052,7 @@ model PolicySetDefinitionVersionProperties {
 /**
  * The policy token request properties.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model PolicyTokenRequest {
   /**
    * The resource operation to acquire a token for.
@@ -1088,6 +1089,7 @@ model PolicyTokenOperation {
 /**
  * The policy token response properties.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model PolicyTokenResponse {
   /**
    * The result of the completed token acquisition operation. Possible values are Succeeded and Failed.

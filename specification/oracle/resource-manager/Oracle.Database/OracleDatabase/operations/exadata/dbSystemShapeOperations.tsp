@@ -7,6 +7,7 @@ using TypeSpec.Http;
 
 namespace Oracle.Database;
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @armResourceOperations
 interface DbSystemShapes extends OracleLocationBasedResource<DbSystemShape> {
   #suppress "Deprecated" "Backward compatibility"

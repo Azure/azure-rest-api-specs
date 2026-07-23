@@ -360,6 +360,7 @@ model ServerInstanceProperties {
 /**
  * Defines the request body for updating Server Instances resource.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model UpdateServerInstanceRequest {
   /**
    * Server instances properties.
@@ -462,6 +463,7 @@ model ExcelPerformanceData extends PerformanceData {
   /**
    * Provide the source Database size in GB. Applicable only if SAP instance type for this server instance is 'DB'.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "GB is short for Gigabytes."
   @visibility(Lifecycle.Read)
   totalSourceDbSizeGB?: int32;

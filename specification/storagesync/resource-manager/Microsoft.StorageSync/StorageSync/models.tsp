@@ -2676,6 +2676,7 @@ model OperationEntityListResult is Azure.Core.Page<OperationEntity>;
 /**
  * Standard OK response with Azure request tracking headers.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CustomOkResponse {
   @doc("HTTP 200 OK status code")
   @statusCode

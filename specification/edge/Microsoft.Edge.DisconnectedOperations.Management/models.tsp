@@ -320,6 +320,7 @@ model ImageUpdateProperties {
   @doc("Details of security updates included in this image release.")
   securityUpdates: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   @doc("The operating system version provided by this image update.")
   osVersion: string;

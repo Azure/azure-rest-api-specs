@@ -383,6 +383,7 @@ model ScheduledActionResource {
 
 @@identifiers(ResourceListResponse.value, #[]);
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve the existing C# SDK name."
 @added(Versions.`2026-07-06-preview`)
 model ResourceListResponse is Azure.Core.Page<ScheduledActionResource>;
 
@@ -400,6 +401,7 @@ model ScheduledActionResourceInput {
   notificationSettings?: Array<NotificationProperties>;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve the existing C# SDK name."
 @added(Versions.`2026-07-06-preview`)
 @doc("Request model to attach a list of scheduled action resources.")
 model ResourceAttachRequest {
@@ -408,6 +410,7 @@ model ResourceAttachRequest {
   resources: Array<ScheduledActionResourceInput>;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve the existing C# SDK name."
 @added(Versions.`2026-07-06-preview`)
 @doc("Request model to detach a list of scheduled action resources.")
 model ResourceDetachRequest {
@@ -415,6 +418,7 @@ model ResourceDetachRequest {
   resources: Array<ValidScheduledActionResourceId>;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve the existing C# SDK name."
 @added(Versions.`2026-07-06-preview`)
 @doc("Request model perform a resource operation in a list of resources")
 model ResourcePatchRequest {
@@ -423,6 +427,7 @@ model ResourcePatchRequest {
   resources: Array<ScheduledActionResourceInput>;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve the existing C# SDK name."
 @added(Versions.`2026-07-06-preview`)
 @doc("The request to cancel an occurrence.")
 model CancelOccurrenceRequest {
@@ -443,6 +448,7 @@ model ResourceStatus {
   error?: Azure.Core.Foundations.Error;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve the existing C# SDK name."
 @added(Versions.`2026-07-06-preview`)
 @doc("The response from scheduled action resource requests, which contains the status of each resource")
 model ResourceOperationResponse {
@@ -529,6 +535,7 @@ model ScheduledActionsExtensionProperties {
   resourceNotificationSettings?: Array<NotificationProperties>;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve the existing C# SDK name."
 @added(Versions.`2026-07-06-preview`)
 @doc("The response from scheduled action resource requests, which contains the status of each resource")
 model ScheduledActionResourceOperationResponse {
@@ -626,9 +633,11 @@ model OccurrenceResource is ScheduledActionResource {
 
 @@identifiers(OccurrenceResourceListResponse.value, #[]);
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve the existing C# SDK name."
 @added(Versions.`2026-07-06-preview`)
 model OccurrenceResourceListResponse is Azure.Core.Page<OccurrenceResource>;
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve the existing C# SDK name."
 @added(Versions.`2026-07-06-preview`)
 @doc("Request to ask for a delay in an occurrence, delay should be set to client local time eg (PST) 2025-05-30T06:35:00-07:00")
 model DelayRequest {

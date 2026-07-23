@@ -685,6 +685,7 @@ model WorkspaceProperties {
   provisioningState?: ProvisioningState;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Properties for generating an upload URL")
 model GenerateUploadUrlRequest {
   @doc("A unique ID for the firmware to be uploaded.")

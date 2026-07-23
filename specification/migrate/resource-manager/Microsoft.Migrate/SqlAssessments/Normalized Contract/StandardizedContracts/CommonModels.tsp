@@ -21,6 +21,7 @@ model SharedResourcesDto {
   @identifiers(#[])
   sharedLogDisks?: AzureManagedDiskSkuDto[];
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("Gets the list of shared Temporary database disks.")
   @visibility(Lifecycle.Read)
   @identifiers(#[])
@@ -205,6 +206,7 @@ model AssessedNetworkAdaptersV3 {
   @doc("Gets the mac address.")
   macAddress?: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("Gets the ip addresses.")
   @visibility(Lifecycle.Read)
   ipAddresses?: string[];

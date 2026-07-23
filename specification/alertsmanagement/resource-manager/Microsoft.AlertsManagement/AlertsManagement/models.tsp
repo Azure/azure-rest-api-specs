@@ -682,6 +682,7 @@ model ProxyResource {
 /**
  * An error response from the service.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model AlertsManagementErrorResponse {
   /**
@@ -947,6 +948,7 @@ model AlertEnrichmentsList is Azure.Core.Page<AlertEnrichmentResponse>;
 /**
  * The alert's enrichments.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AlertEnrichmentResponse
   extends Azure.ResourceManager.Foundations.ProxyResource {

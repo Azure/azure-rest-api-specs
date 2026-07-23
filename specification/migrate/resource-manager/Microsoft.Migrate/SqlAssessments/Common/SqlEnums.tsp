@@ -60,6 +60,7 @@ union SkuReplicationMode {
   string,
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("Os License")
 union OsLicense {
   @doc("Unknown Os License")

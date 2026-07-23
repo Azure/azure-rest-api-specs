@@ -45,6 +45,7 @@ model InsightModelConfiguration {
   modelDeploymentName: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The request of the insights report.")
 @discriminator("type")
 @extension("x-ms-foundry-meta", InsightsRequiredPreviews)
@@ -53,6 +54,7 @@ model InsightRequest {
   type: InsightType;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Insights on set of Evaluation Results")
 @extension("x-ms-foundry-meta", InsightsRequiredPreviews)
 model EvaluationRunClusterInsightRequest extends InsightRequest {
@@ -69,6 +71,7 @@ model EvaluationRunClusterInsightRequest extends InsightRequest {
   modelConfiguration?: InsightModelConfiguration;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Insights on set of Agent Evaluation Results")
 @extension("x-ms-foundry-meta", InsightsRequiredPreviews)
 model AgentClusterInsightRequest extends InsightRequest {
@@ -82,6 +85,7 @@ model AgentClusterInsightRequest extends InsightRequest {
   modelConfiguration?: InsightModelConfiguration;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Evaluation Comparison Request")
 @extension("x-ms-foundry-meta", InsightsRequiredPreviews)
 model EvaluationComparisonInsightRequest extends InsightRequest {
