@@ -202,6 +202,17 @@
     - app/data-plane/DynamicSessions/tspconfig.yaml
 
 - tool: TypeSpecValidation
+  reason: Python SDK generation is intentionally excluded because this service has no existing Python SDK package.
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-python.emitter-output-dir
+    - options.@azure-tools/typespec-python.namespace
+    - options.@azure-tools/typespec-python.generate-sample
+    - options.@azure-tools/typespec-python.generate-test
+  paths:
+    - app/resource-manager/Microsoft.App/SreAgent/tspconfig.yaml
+
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
