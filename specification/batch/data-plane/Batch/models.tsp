@@ -1819,6 +1819,10 @@ model BatchPoolSpecification {
   @added(Versions.v2026_08_01)
   vmSkuProfile?: VirtualMachineSkuProfile;
 
+  @doc("Specifies the hardware settings for the Compute Nodes.")
+  @added(Versions.v2026_08_01)
+  vmHardwareProfile?: VirtualMachineHardwareProfile;
+
   @doc("The number of task slots that can be used to run concurrent tasks on a single compute node in the pool. The default value is 1. The maximum value is the smaller of 4 times the number of cores of the vmSize of the pool or 256.")
   taskSlotsPerNode?: int32;
 
@@ -1926,10 +1930,10 @@ model VirtualMachineConfiguration {
 @added(Versions.v2026_08_01)
 @doc("Specifies the set of VM sizes and the allocation strategy used to allocate Compute Nodes for an Instance Mix Pool.")
 model VirtualMachineSkuProfile {
-  @doc("The list of VM sizes (1 to 5) that may be allocated for the Pool. All sizes must share the same vCPU count and VM family.")
+  @doc("The list of VM sizes (1 to 5) that may be allocated for the Pool. All sizes must share the same vCPU count and VM family. This must be specified when the vmSkuProfile is provided during Pool creation.")
   @minItems(1)
   @maxItems(5)
-  vmSizes: VirtualMachineSkuProfileVmSize[];
+  vmSizes?: VirtualMachineSkuProfileVmSize[];
 
   @doc("The allocation strategy used to select VM sizes from vmSizes. Defaults to lowestPrice when not specified.")
   allocationStrategy?: VirtualMachineSkuAllocationStrategy;
@@ -1958,6 +1962,26 @@ union VirtualMachineSkuAllocationStrategy {
 
   @doc("Follow the customer-defined ranking via the 0-based rank, falling back to the next rank when a preferred SKU is unavailable.")
   Prioritized: "prioritized",
+}
+
+@added(Versions.v2026_08_01)
+@doc("Specifies the hardware settings for the Compute Nodes.")
+model VirtualMachineHardwareProfile {
+  @doc("Specifies the properties for customizing the size of the virtual machine.")
+  vmSizeProperties?: VMSizeProperties;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "VMSizeProperties matches the Azure Compute VM size customization model naming."
+@added(Versions.v2026_08_01)
+@doc("Specifies the properties for customizing the size of the virtual machine.")
+model VMSizeProperties {
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "vCPUsAvailable matches the Azure Compute VM size property naming."
+  @doc("Specifies the number of vCPUs available for the VM. When this property is not specified in the request body the default behavior is to set it to the value of vCPUs available for that VM size.")
+  vCPUsAvailable?: int32;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "vCPUsPerCore matches the Azure Compute VM size property naming."
+  @doc("Specifies the vCPU to physical core ratio. When this property is not specified in the request body the default behavior is set to the value of vCPUsPerCore for the VM Size. Setting this property to 1 also means that hyper-threading is disabled.")
+  vCPUsPerCore?: int32;
 }
 
 @doc("Windows operating system settings to apply to the virtual machine.")
@@ -2986,6 +3010,11 @@ model BatchPool {
   @added(Versions.v2026_08_01)
   vmSkuProfile?: VirtualMachineSkuProfile;
 
+  @doc("Specifies the hardware settings for the Compute Nodes.")
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_08_01)
+  vmHardwareProfile?: VirtualMachineHardwareProfile;
+
   @doc("The timeout for allocation of Compute Nodes to the Pool. This is the timeout for the most recent resize operation. (The initial sizing when the Pool is created counts as a resize.) The default value is 15 minutes. The time duration is specified in ISO 8601 format.")
   @visibility(Lifecycle.Read)
   resizeTimeout?: duration;
@@ -3092,6 +3121,10 @@ model BatchPoolCreateOptions {
   @added(Versions.v2026_08_01)
   vmSkuProfile?: VirtualMachineSkuProfile;
 
+  @doc("Specifies the hardware settings for the Compute Nodes.")
+  @added(Versions.v2026_08_01)
+  vmHardwareProfile?: VirtualMachineHardwareProfile;
+
   @doc("The timeout for allocation of Compute Nodes to the Pool. This timeout applies only to manual scaling; it has no effect when enableAutoScale is set to true. The default value is 15 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service returns an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request). The time duration is specified in ISO 8601 format.")
   resizeTimeout?: duration;
 
@@ -3179,6 +3212,10 @@ model BatchPoolUpdateOptions {
   @doc("Specifies the profile of VM sizes and the allocation strategy used to allocate Compute Nodes for an Instance Mix Pool. When specified, vmSize must be 'Mix'.<br /><br />This field can be updated only when the pool is empty.")
   @added(Versions.v2026_08_01)
   vmSkuProfile?: VirtualMachineSkuProfile;
+
+  @doc("Specifies the hardware settings for the Compute Nodes.<br /><br />This field can be updated only when the pool is empty.")
+  @added(Versions.v2026_08_01)
+  vmHardwareProfile?: VirtualMachineHardwareProfile;
 
   @doc("The number of task slots that can be used to run concurrent tasks on a single compute node in the pool. The default value is 1. The maximum value is the smaller of 4 times the number of cores of the vmSize of the pool or 256.<br /><br />This field can be updated only when the pool is empty.")
   taskSlotsPerNode?: int32;

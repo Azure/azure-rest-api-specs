@@ -12411,6 +12411,11 @@
           "description": "Specifies the profile of VM sizes and the allocation strategy used to allocate Compute Nodes for an Instance Mix Pool. When specified, vmSize must be 'Mix'. This property can only be changed while the Pool has no Compute Nodes.",
           "readOnly": true
         },
+        "vmHardwareProfile": {
+          "$ref": "#/definitions/VirtualMachineHardwareProfile",
+          "description": "Specifies the hardware settings for the Compute Nodes.",
+          "readOnly": true
+        },
         "resizeTimeout": {
           "type": "string",
           "format": "duration",
@@ -12579,6 +12584,10 @@
         "vmSkuProfile": {
           "$ref": "#/definitions/VirtualMachineSkuProfile",
           "description": "Specifies the profile of VM sizes and the allocation strategy used to allocate Compute Nodes for an Instance Mix Pool. When specified, vmSize must be 'Mix'. This property can only be changed while the Pool has no Compute Nodes."
+        },
+        "vmHardwareProfile": {
+          "$ref": "#/definitions/VirtualMachineHardwareProfile",
+          "description": "Specifies the hardware settings for the Compute Nodes."
         },
         "resizeTimeout": {
           "type": "string",
@@ -13070,6 +13079,10 @@
           "$ref": "#/definitions/VirtualMachineSkuProfile",
           "description": "Specifies the profile of VM sizes and the allocation strategy used to allocate Compute Nodes for an Instance Mix Pool. When specified, vmSize must be 'Mix'. This property can only be changed while the Pool has no Compute Nodes."
         },
+        "vmHardwareProfile": {
+          "$ref": "#/definitions/VirtualMachineHardwareProfile",
+          "description": "Specifies the hardware settings for the Compute Nodes."
+        },
         "taskSlotsPerNode": {
           "type": "integer",
           "format": "int32",
@@ -13173,8 +13186,12 @@
           "description": "The virtual machine configuration for the Pool. This property must be specified."
         },
         "vmSkuProfile": {
-          "$ref": "#/definitions/VirtualMachineSkuProfileUpdate",
+          "$ref": "#/definitions/VirtualMachineSkuProfile",
           "description": "Specifies the profile of VM sizes and the allocation strategy used to allocate Compute Nodes for an Instance Mix Pool. When specified, vmSize must be 'Mix'. This property can only be changed while the Pool has no Compute Nodes."
+        },
+        "vmHardwareProfile": {
+          "$ref": "#/definitions/VirtualMachineHardwareProfile",
+          "description": "Specifies the hardware settings for the Compute Nodes."
         },
         "taskSlotsPerNode": {
           "type": "integer",
@@ -13353,8 +13370,12 @@
           "description": "The virtual machine configuration for the Pool. This property must be specified.<br /><br />This field can be updated only when the pool is empty."
         },
         "vmSkuProfile": {
-          "$ref": "#/definitions/VirtualMachineSkuProfileUpdate",
+          "$ref": "#/definitions/VirtualMachineSkuProfile",
           "description": "Specifies the profile of VM sizes and the allocation strategy used to allocate Compute Nodes for an Instance Mix Pool. When specified, vmSize must be 'Mix'.<br /><br />This field can be updated only when the pool is empty."
+        },
+        "vmHardwareProfile": {
+          "$ref": "#/definitions/VirtualMachineHardwareProfile",
+          "description": "Specifies the hardware settings for the Compute Nodes.<br /><br />This field can be updated only when the pool is empty."
         },
         "taskSlotsPerNode": {
           "type": "integer",
@@ -16563,6 +16584,22 @@
         }
       }
     },
+    "VMSizeProperties": {
+      "type": "object",
+      "description": "Specifies the properties for customizing the size of the virtual machine.",
+      "properties": {
+        "vCPUsAvailable": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the number of vCPUs available for the VM. When this property is not specified in the request body the default behavior is to set it to the value of vCPUs available for that VM size."
+        },
+        "vCPUsPerCore": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the vCPU to physical core ratio. When this property is not specified in the request body the default behavior is set to the value of vCPUsPerCore for the VM Size. Setting this property to 1 also means that hyper-threading is disabled."
+        }
+      }
+    },
     "VirtualMachineConfiguration": {
       "type": "object",
       "description": "The configuration for Compute Nodes in a Pool based on the Azure Virtual\nMachines infrastructure.",
@@ -16691,6 +16728,16 @@
         }
       }
     },
+    "VirtualMachineHardwareProfile": {
+      "type": "object",
+      "description": "Specifies the hardware settings for the Compute Nodes.",
+      "properties": {
+        "vmSizeProperties": {
+          "$ref": "#/definitions/VMSizeProperties",
+          "description": "Specifies the properties for customizing the size of the virtual machine."
+        }
+      }
+    },
     "VirtualMachineInfo": {
       "type": "object",
       "description": "Info about the current state of the virtual machine.",
@@ -16741,29 +16788,7 @@
       "properties": {
         "vmSizes": {
           "type": "array",
-          "description": "The list of VM sizes (1 to 5) that may be allocated for the Pool. All sizes must share the same vCPU count and VM family.",
-          "minItems": 1,
-          "maxItems": 5,
-          "items": {
-            "$ref": "#/definitions/VirtualMachineSkuProfileVmSize"
-          }
-        },
-        "allocationStrategy": {
-          "$ref": "#/definitions/VirtualMachineSkuAllocationStrategy",
-          "description": "The allocation strategy used to select VM sizes from vmSizes. Defaults to lowestPrice when not specified."
-        }
-      },
-      "required": [
-        "vmSizes"
-      ]
-    },
-    "VirtualMachineSkuProfileUpdate": {
-      "type": "object",
-      "description": "Specifies the set of VM sizes and the allocation strategy used to allocate Compute Nodes for an Instance Mix Pool.",
-      "properties": {
-        "vmSizes": {
-          "type": "array",
-          "description": "The list of VM sizes (1 to 5) that may be allocated for the Pool. All sizes must share the same vCPU count and VM family.",
+          "description": "The list of VM sizes (1 to 5) that may be allocated for the Pool. All sizes must share the same vCPU count and VM family. This must be specified when the vmSkuProfile is provided during Pool creation.",
           "minItems": 1,
           "maxItems": 5,
           "items": {
