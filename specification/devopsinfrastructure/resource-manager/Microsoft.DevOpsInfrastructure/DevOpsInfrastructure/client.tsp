@@ -139,5 +139,5 @@ using Microsoft.DevOpsInfrastructure;
 @@clientName(VmssFabricProfile.osProfile, "OSProfile", "csharp");
 @@clientName(OsDiskStorageAccountType, "OSDiskStorageAccountType", "csharp");
 
-@@clientName(StorageAccountType.StandardSSDLRS, "StandardSSDLRS", "$DO_NOT_NORMALIZE$javascript");
-@@clientName(StorageAccountType.StandardSSDZRS, "StandardSSDZRS", "$DO_NOT_NORMALIZE$javascript");
+@@clientName(StorageAccountType.StandardSSDLRS, "$DO_NOT_NORMALIZE$StandardSSDLRS", "javascript");
+@@clientName(StorageAccountType.StandardSSDZRS, "$DO_NOT_NORMALIZE$StandardSSDZRS", "javascript");
