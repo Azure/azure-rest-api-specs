@@ -9062,7 +9062,7 @@ model CapacityReservationInstanceView {
 }
 
 /**
- * Defines the schedule for Block and future capacity reservations. Specifies the schedule during which capacity reservation is active and VM or VMSS resource can be allocated using reservation. This property is required and supported when the capacity reservation group type is 'Block'. For Block capacity reservations, the scheduleProfile, start, and end fields are immutable after creation. Please refer to https://aka.ms/blockcapacityreservation for more details. Minimum API version for Block capacity reservations: 2025-04-01.  In a 'Targeted' capacity reservation group, future capacity reservations must use this property with only a start time. Minimum API version for future capacity reservations: 2026-04-01.
+ * Defines the schedule for Block and future capacity reservations. Specifies the schedule during which capacity reservation is active and VM or VMSS resource can be allocated using reservation. This property is required and supported when the capacity reservation group type is 'Block'. For Block capacity reservations, the scheduleProfile, start, and end fields are immutable after creation. Please refer to https://aka.ms/blockcapacityreservation for more details. Minimum API version for Block capacity reservations: 2025-04-01.  In a 'Targeted' capacity reservation group, future capacity reservations must use this property with only a start time, which can be changed until the ‘modifiableUntil’ time. Minimum API version for future capacity reservations: 2026-04-01.
  */
 @added(Versions.v2025_04_01)
 model ScheduleProfile {
@@ -9126,7 +9126,7 @@ union ReservationType {
   string,
 
   /**
-   * To consume on demand or future allocated capacity reservation when a capacity reservation group is provided. Minimum API version for future capacity reservations: 2026-04-01.
+   * To consume on-demand or future allocated capacity reservations when a capacity reservation group is provided. Minimum API version for future capacity reservations: 2026-04-01.
    */
   Targeted: "Targeted",
 
@@ -9268,7 +9268,7 @@ model CapacityReservationProperties {
   timeCreated?: utcDateTime;
 
   /**
-   * Defines the schedule for Block and future capacity reservations. Specifies the schedule during which capacity reservation is active and VM or VMSS resource can be allocated using reservation. This property is required and supported when the capacity reservation group type is 'Block'. For Block capacity reservations, the scheduleProfile, start, and end fields are immutable after creation. Please refer to https://aka.ms/blockcapacityreservation for more details. Minimum API version for Block capacity reservations: 2025-04-01.  In a 'Targeted' capacity reservation group, future capacity reservations must use this property with only a start time. Minimum API version for future capacity reservations: 2026-04-01.
+   * Defines the schedule for Block and future capacity reservations. Specifies the schedule during which capacity reservation is active and VM or VMSS resource can be allocated using reservation. This property is required and supported when the capacity reservation group type is 'Block'. For Block capacity reservations, the scheduleProfile, start, and end fields are immutable after creation. Please refer to https://aka.ms/blockcapacityreservation for more details. Minimum API version for Block capacity reservations: 2025-04-01.  In a 'Targeted' capacity reservation group, future capacity reservations must use this property with only a start time, which can be changed until the ‘modifiableUntil’ time. Minimum API version for future capacity reservations: 2026-04-01.
    */
   @added(Versions.v2025_04_01)
   scheduleProfile?: ScheduleProfile;
