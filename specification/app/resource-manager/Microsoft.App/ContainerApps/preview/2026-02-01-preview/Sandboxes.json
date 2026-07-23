@@ -1,0 +1,475 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2026-02-01-preview",
+    "title": "ContainerApps API Client - Sandboxes"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/sandboxes/{sandboxName}": {
+      "get": {
+        "tags": [
+          "Sandboxes"
+        ],
+        "summary": "Get the properties of a Sandbox.",
+        "operationId": "Sandboxes_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sandboxName",
+            "in": "path",
+            "description": "Name of the Sandbox.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/Sandbox"
+            }
+          },
+          "404": {
+            "description": "Not found.",
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Sandbox": {
+            "$ref": "./examples/Sandboxes_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Sandboxes"
+        ],
+        "summary": "Create or update a Sandbox.",
+        "description": "Create or update a Sandbox.",
+        "operationId": "Sandboxes_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sandboxName",
+            "in": "path",
+            "description": "Name of the Sandbox.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sandboxEnvelope",
+            "in": "body",
+            "description": "Properties used to create or update a Sandbox",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Sandbox"
+            }
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Sandbox"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Sandbox"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Create or Update Sandbox": {
+            "$ref": "./examples/Sandboxes_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Sandboxes"
+        ],
+        "summary": "Delete a Sandbox.",
+        "description": "Delete a Sandbox.",
+        "operationId": "Sandboxes_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sandboxName",
+            "in": "path",
+            "description": "Name of the Sandbox.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sandbox deleted successfully."
+          },
+          "204": {
+            "description": "Sandbox does not exist."
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Sandbox": {
+            "$ref": "./examples/Sandboxes_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/sandboxes": {
+      "get": {
+        "tags": [
+          "Sandboxes"
+        ],
+        "summary": "Get the Sandboxes in a given resource group.",
+        "operationId": "Sandboxes_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SandboxCollection"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Sandboxes by resource group": {
+            "$ref": "./examples/Sandboxes_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Sandbox": {
+      "description": "Sandbox resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Sandbox resource specific properties",
+          "type": "object",
+          "properties": {
+            "id": {
+              "description": "Sandbox identifier",
+              "type": "string",
+              "readOnly": true
+            },
+            "createdAt": {
+              "description": "Timestamp when the sandbox was created",
+              "type": "string",
+              "format": "date-time",
+              "readOnly": true
+            },
+            "state": {
+              "description": "Provisioning state of the sandbox",
+              "enum": [
+                "Pending",
+                "Running",
+                "Stopped",
+                "Failed",
+                "Deleted"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "SandboxProvisionState",
+                "modelAsString": true
+              }
+            },
+            "snapshotId": {
+              "description": "Snapshot identifier",
+              "type": "string"
+            },
+            "ports": {
+              "description": "List of ports exposed by the sandbox",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SandboxPort"
+              },
+              "readOnly": true
+            },
+            "labels": {
+              "description": "Labels for the sandbox",
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "vmmType": {
+              "description": "VMM type",
+              "type": "string"
+            },
+            "entrypoint": {
+              "description": "Entrypoint command",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "cmd": {
+              "description": "Command arguments",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "sourcesRef": {
+              "description": "Reference to sandbox sources",
+              "$ref": "#/definitions/SandboxSource",
+              "x-ms-mutability": [
+                "create",
+                "read",
+                "update"
+              ]
+            },
+            "resources": {
+              "description": "Resource requirements for the sandbox",
+              "$ref": "#/definitions/SandboxResources",
+              "x-ms-mutability": [
+                "create",
+                "read",
+                "update"
+              ]
+            },
+            "connections": {
+              "description": "List of connection IDs",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "sourcesRef",
+            "resources"
+          ],
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SandboxPort": {
+      "description": "Sandbox port configuration",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Port name",
+          "type": "string"
+        },
+        "port": {
+          "description": "Port number",
+          "type": "integer",
+          "format": "int32"
+        },
+        "url": {
+          "description": "URL to access the port",
+          "type": "string",
+          "format": "uri"
+        },
+        "auth": {
+          "description": "Authentication configuration for the port",
+          "$ref": "#/definitions/PortAuthConfig"
+        },
+        "activationMode": {
+          "description": "Port activation mode",
+          "enum": [
+            "Manual",
+            "OnDemand"
+          ],
+          "type": "string",
+          "default": "Manual",
+          "x-ms-enum": {
+            "name": "PortActivationMode",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "port",
+        "url"
+      ]
+    },
+    "PortAuthConfig": {
+      "description": "Port authentication configuration",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "Authentication provider",
+          "type": "string"
+        },
+        "settings": {
+          "description": "Provider-specific settings",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SandboxSource": {
+      "description": "Sandbox source configuration",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Source type",
+          "enum": [
+            "Image",
+            "Snapshot"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SandboxSourceType",
+            "modelAsString": true
+          }
+        },
+        "image": {
+          "description": "Container image reference",
+          "type": "string"
+        },
+        "snapshotId": {
+          "description": "Snapshot identifier",
+          "type": "string"
+        }
+      }
+    },
+    "SandboxResources": {
+      "description": "Sandbox resource requirements",
+      "type": "object",
+      "properties": {
+        "cpu": {
+          "description": "CPU allocation",
+          "type": "number",
+          "format": "double"
+        },
+        "memory": {
+          "description": "Memory allocation in GB",
+          "type": "string"
+        },
+        "disk": {
+          "description": "Disk allocation in GB",
+          "type": "string"
+        }
+      }
+    },
+    "SandboxCollection": {
+      "description": "Collection of Sandboxes",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Sandbox"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "value"
+      ]
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}
