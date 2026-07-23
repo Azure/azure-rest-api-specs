@@ -8,9 +8,9 @@ import {
   getCheckRunTuple,
   getExistingLabels,
   getImpactAssessment,
-  getTypeSpecSuppressionsSection,
   updateLabels,
 } from "../../src/summarize-checks/summarize-checks.js";
+import { getTypeSpecSuppressionsSection } from "../../src/summarize-checks/typespec-suppressions-summary.js";
 import { createMockCore, createMockGithub } from "../mocks.js";
 
 /**
