@@ -26,7 +26,7 @@ model SqlOnPremSettings is ProxyResource<SqlOnPremSettingsProperties> {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Operations on the resource are sync"
-@doc("Properties for SQL OnPrem Settings, including compute, storage, network, facility, labor, security, and management settings.")
+@doc("Properties for SQL OnPrem Settings, including compute and security settings.")
 @added(AssessmentProjectApiVersions.v2025_09_09_preview)
 model SqlOnPremSettingsProperties is AzureResourceProperties {
   @doc("Configuration and cost details related to compute resources in the on-premises environment.")
