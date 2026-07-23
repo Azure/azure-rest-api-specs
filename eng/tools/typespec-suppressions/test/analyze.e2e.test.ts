@@ -8,8 +8,8 @@ import { analyzeTypeSpecSuppressions } from "../src/index.ts";
 async function initTempRepo(): Promise<string> {
   const repoRoot = await mkdtemp(path.join(os.tmpdir(), "typespec-suppressions-"));
   execFileSync("git", ["init"], { cwd: repoRoot });
-  execFileSync("git", ["config", "user.name", "Copilot"], { cwd: repoRoot });
-  execFileSync("git", ["config", "user.email", "copilot@example.com"], { cwd: repoRoot });
+  execFileSync("git", ["config", "user.name", "Test"], { cwd: repoRoot });
+  execFileSync("git", ["config", "user.email", "test@example.com"], { cwd: repoRoot });
   return repoRoot;
 }
 
