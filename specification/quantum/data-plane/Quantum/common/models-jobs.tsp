@@ -74,6 +74,14 @@ model QuantumComputingData {
   count: int64;
 }
 
+/** The position of a job within its device queue. */
+@added(QuantumWorkspaceAPIVersion.v2026_08_01_preview)
+model JobQueuePositionResponse {
+  /** The zero-based position of the job, or null if it is not within the first 1,000 entries in the queue. */
+  @visibility(Lifecycle.Read)
+  queuePosition?: int32;
+}
+
 /** A job to be run in the workspace. */
 @resource("jobs")
 @parentResource(Quantum.Workspace.QuantumWorkspace)
