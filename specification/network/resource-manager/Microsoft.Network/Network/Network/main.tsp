@@ -38,6 +38,7 @@ import "./ExpressRouteCrossConnection.tsp";
 import "./ExpressRoutePortsLocation.tsp";
 import "./ExpressRoutePort.tsp";
 import "./ExpressRoutePortAuthorization.tsp";
+import "./ExpressRouteLag.tsp";
 import "./FirewallPolicy.tsp";
 import "./FirewallPolicyRuleCollectionGroup.tsp";
 import "./SignaturesOverrides.tsp";

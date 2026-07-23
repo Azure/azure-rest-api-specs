@@ -1514,6 +1514,12 @@ union ExpressRouteCircuitSkuTier {
    * Local
    */
   Local: "Local",
+
+  /**
+   * MultiCloud tier for cross-cloud connectivity.
+   */
+  @added(Versions.v2025_09_01)
+  MultiCloud: "MultiCloud",
 }
 
 /**
@@ -1558,6 +1564,35 @@ union ServiceProviderProvisioningState {
    * Deprovisioning
    */
   Deprovisioning: "Deprovisioning",
+
+  /**
+   * DeProvisioned State
+   */
+  @added(Versions.v2025_09_01)
+  DeProvisioned: "DeProvisioned",
+}
+
+/**
+ * The resiliency level of the ExpressRoute circuit.
+ */
+@added(Versions.v2025_09_01)
+union ResiliencyLevel {
+  string,
+
+  /**
+   * Standard resiliency level.
+   */
+  Standard: "Standard",
+
+  /**
+   * High resiliency level.
+   */
+  High: "High",
+
+  /**
+   * Maximum resiliency level.
+   */
+  Maximum: "Maximum",
 }
 
 /**
@@ -1575,6 +1610,60 @@ union ExpressRoutePortsEncapsulation {
    * QinQ
    */
   QinQ: "QinQ",
+}
+
+/**
+ * Encapsulation method on LAG.
+ */
+@added(Versions.v2025_09_01)
+union ExpressRouteLagEncapsulation {
+  string,
+
+  /**
+   * IEEE 802.1Q encapsulation.
+   */
+  Dot1Q: "Dot1Q",
+
+  /**
+   * IEEE 802.1ad encapsulation.
+   */
+  QinQ: "QinQ",
+}
+
+/**
+ * The billing type of the ExpressRouteLag resource.
+ */
+@added(Versions.v2025_09_01)
+union ExpressRouteLagBillingType {
+  string,
+
+  /**
+   * Metered data transfer billing.
+   */
+  MeteredData: "MeteredData",
+
+  /**
+   * Unlimited data transfer billing.
+   */
+  UnlimitedData: "UnlimitedData",
+}
+
+/**
+ * LACP timer configuration.
+ */
+@added(Versions.v2025_09_01)
+union ExpressRouteLagLacpTimer {
+  string,
+
+  /**
+   * Fast LACP timer (30 seconds).
+   */
+  Fast: "Fast",
+
+  /**
+   * Slow LACP timer (90 seconds).
+   */
+  Slow: "Slow",
 }
 
 /**
@@ -8581,6 +8670,12 @@ model ApplicationGatewayGlobalConfiguration {
    * Enable response buffering.
    */
   enableResponseBuffering?: boolean;
+
+  /**
+   * Disable default server header in response.
+   */
+  @added(Versions.v2025_09_01)
+  disableDefaultServerHeaderInResponse?: boolean;
 }
 
 /**
@@ -11286,6 +11381,26 @@ model ExpressRouteCircuitPropertiesFormat {
   stag?: int32;
 
   /**
+   * The resiliency level of the ExpressRoute circuit.
+   */
+  @added(Versions.v2025_09_01)
+  @visibility(Lifecycle.Read)
+  resiliencyLevel?: ResiliencyLevel;
+
+  /**
+   * Account ID of customer account on partner cloud provider.
+   */
+  @added(Versions.v2025_09_01)
+  partnerAccountId?: string;
+
+  /**
+   * Activation Key from partner cloud provider.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "activationKey is not a secret value, it is a base64 encoded string used for multi-cloud circuit provisioning."
+  @added(Versions.v2025_09_01)
+  activationKey?: string;
+
+  /**
    * The provisioning state of the express route circuit resource.
    */
   @visibility(Lifecycle.Read)
@@ -12116,6 +12231,307 @@ model ExpressRouteProviderPortProperties {
    * Remaining Bandwidth of the port in Mbps
    */
   remainingBandwidthInMbps?: int32;
+}
+
+/**
+ * Parameters for updating ExpressRouteLag tags or identity.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The Network RP TypeSpec project uses Azure.ResourceManager.Legacy patterns for consistency with existing ExpressRoute resources."
+@added(Versions.v2025_09_01)
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@summary("ExpressRouteLag Update Tags or Identity Request")
+model ExpressRouteLagUpdateTagsOrIdentityRequest {
+  /**
+   * The identity of ExpressRouteLag, if configured.
+   */
+  identity?: Common.ManagedServiceIdentity;
+
+  ...TagsObject;
+}
+
+/**
+ * Properties specific to ExpressRouteLag resources.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The Network RP TypeSpec project uses Azure.ResourceManager.Legacy patterns for consistency with existing ExpressRoute resources."
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@summary("ExpressRouteLag Resource Properties")
+@added(Versions.v2025_09_01)
+model ExpressRouteLagPropertiesFormat {
+  /**
+   * The name of the peering location that the ExpressRouteLag is mapped to physically.
+   */
+  peeringLocation?: string;
+
+  /**
+   * Bandwidth of procured LAG in Gbps.
+   */
+  bandwidthInGbps?: int32;
+
+  /**
+   * Aggregate Gbps of associated circuit bandwidths.
+   */
+  @visibility(Lifecycle.Read)
+  provisionedBandwidthInGbps?: float64;
+
+  /**
+   * Maximum transmission unit of the LAG.
+   */
+  @visibility(Lifecycle.Read)
+  mtu?: string;
+
+  /**
+   * Encapsulation method on LAG.
+   */
+  encapsulation?: ExpressRouteLagEncapsulation;
+
+  /**
+   * Ether type of the LAG.
+   */
+  @visibility(Lifecycle.Read)
+  etherType?: string;
+
+  /**
+   * The set of links of the ExpressRouteLag resource.
+   */
+  @summary("ExpressRouteLagLink Sub-Resources")
+  links?: ExpressRouteLagLink[];
+
+  /**
+   * The date and time when the ExpressRouteLag was allocated.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-string-datetime" "Backend emits allocationDate as a non-ISO 8601 formatted string (e.g. '6/16/2026 5:28:06 PM'); the property is preserved as string to maintain wire compatibility with the existing ExpressRouteLag service contract."
+  @visibility(Lifecycle.Read)
+  allocationDate?: string;
+
+  /**
+   * The provisioning state of the express route LAG resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+
+  /**
+   * The resource GUID property of the express route LAG resource.
+   */
+  @visibility(Lifecycle.Read)
+  resourceGuid?: string;
+
+  /**
+   * The billing type of the ExpressRouteLag resource.
+   */
+  billingType?: ExpressRouteLagBillingType;
+
+  /**
+   * Number of ports in the LAG.
+   */
+  @minValue(1)
+  numberOfPorts?: int32;
+
+  /**
+   * Minimum number of active ports required for LAG.
+   */
+  @minValue(1)
+  minimumActivePortsRequired?: int32;
+
+  /**
+   * LACP timer configuration.
+   */
+  lacpTimer?: ExpressRouteLagLacpTimer;
+}
+
+/**
+ * ExpressRouteLagLink child resource definition.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The Network RP TypeSpec project uses Azure.ResourceManager.Legacy patterns for consistency with existing ExpressRoute resources."
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "This child resource uses composition with properties object to maintain consistency with existing Network RP sub-resource modeling patterns."
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@summary("ExpressRouteLagLink")
+@added(Versions.v2025_09_01)
+model ExpressRouteLagLink extends SubResource {
+  /**
+   * ExpressRouteLagLink properties.
+   */
+  properties?: ExpressRouteLagLinkPropertiesFormat;
+
+  /** The unique identifier of the resource. */
+  @visibility(Lifecycle.Read)
+  id: string;
+
+  /** The type of the resource. */
+  @visibility(Lifecycle.Read)
+  type: string;
+
+  /**
+   * Name of child link resource that is unique among child link resources of the parent.
+   */
+  @visibility(Lifecycle.Read)
+  name: string;
+
+  /**
+   * A unique read-only string that changes whenever the resource is updated.
+   */
+  @visibility(Lifecycle.Read)
+  etag?: string;
+}
+
+/**
+ * Properties specific to ExpressRouteLagLink resources.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The Network RP TypeSpec project uses Azure.ResourceManager.Legacy patterns for consistency with existing ExpressRoute resources."
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@summary("ExpressRouteLagLink Resource Properties")
+@added(Versions.v2025_09_01)
+model ExpressRouteLagLinkPropertiesFormat {
+  /**
+   * Name of Azure router associated with link.
+   */
+  @visibility(Lifecycle.Read)
+  routerName?: string;
+
+  /**
+   * Name of Azure router interface.
+   */
+  @visibility(Lifecycle.Read)
+  interfaceName?: string;
+
+  /**
+   * Administrative state of the link.
+   */
+  adminState?: ExpressRouteLinkAdminState;
+
+  /**
+   * The provisioning state of the express route LAG link resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+
+  /**
+   * MacSec configuration.
+   */
+  macSecConfig?: ExpressRouteLinkMacSecConfig;
+
+  /**
+   * The set of members of the ExpressRouteLagLink resource.
+   */
+  @summary("ExpressRouteLagMember Sub-Resources")
+  members?: ExpressRouteLagMember[];
+}
+
+/**
+ * ExpressRouteLagMember child resource definition.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The Network RP TypeSpec project uses Azure.ResourceManager.Legacy patterns for consistency with existing ExpressRoute resources."
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "This child resource uses composition with properties object to maintain consistency with existing Network RP sub-resource modeling patterns."
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@summary("ExpressRouteLagMember")
+@added(Versions.v2025_09_01)
+model ExpressRouteLagMember extends SubResource {
+  /**
+   * ExpressRouteLagMember properties.
+   */
+  properties?: ExpressRouteLagMemberPropertiesFormat;
+
+  /** The unique identifier of the resource. */
+  @visibility(Lifecycle.Read)
+  id: string;
+
+  /** The type of the resource. */
+  @visibility(Lifecycle.Read)
+  type: string;
+
+  /**
+   * Name of child member resource that is unique among child member resources of the parent.
+   */
+  @visibility(Lifecycle.Read)
+  name: string;
+
+  /**
+   * A unique read-only string that changes whenever the resource is updated.
+   */
+  @visibility(Lifecycle.Read)
+  etag?: string;
+}
+
+/**
+ * Properties specific to ExpressRouteLagMember resources.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The Network RP TypeSpec project uses Azure.ResourceManager.Legacy patterns for consistency with existing ExpressRoute resources."
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@summary("ExpressRouteLagMember Resource Properties")
+@added(Versions.v2025_09_01)
+model ExpressRouteLagMemberPropertiesFormat {
+  /**
+   * Name of Azure router interface.
+   */
+  @visibility(Lifecycle.Read)
+  interfaceName?: string;
+
+  /**
+   * Mapping between physical port to patch panel port.
+   */
+  @visibility(Lifecycle.Read)
+  patchPanelId?: string;
+
+  /**
+   * Mapping of physical patch panel to rack.
+   */
+  @visibility(Lifecycle.Read)
+  rackId?: string;
+
+  /**
+   * Cololocation for ExpressRoute member.
+   */
+  @visibility(Lifecycle.Read)
+  coloLocation?: string;
+
+  /**
+   * Physical fiber port type.
+   */
+  @visibility(Lifecycle.Read)
+  connectorType?: ExpressRouteLinkConnectorType;
+
+  /**
+   * Administrative state of the member port.
+   */
+  adminState?: ExpressRouteLinkAdminState;
+
+  /**
+   * The provisioning state of the express route LAG member resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
+/**
+ * The customer name to be printed on a letter of authorization for ExpressRouteLag.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "LOA is the standard acronym for 'Letter of Authorization' and is used consistently in service operations."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The Network RP TypeSpec project uses Azure.ResourceManager.Legacy patterns for consistency with existing ExpressRoute resources."
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@added(Versions.v2025_09_01)
+model GenerateExpressRouteLagsLOARequest {
+  /**
+   * The customer name.
+   */
+  customerName: string;
+
+  /**
+   * The list of member names for which LOA should be generated.
+   */
+  members?: string[];
+}
+
+/**
+ * Response for GenerateExpressRouteLagsLOA API service call.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "LOA is the standard acronym for 'Letter of Authorization' and is used consistently in service operations."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The Network RP TypeSpec project uses Azure.ResourceManager.Legacy patterns for consistency with existing ExpressRoute resources."
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@added(Versions.v2025_09_01)
+model GenerateExpressRouteLagsLOAResult {
+  /**
+   * The content as a base64 encoded string.
+   */
+  encodedContent?: string;
 }
 
 /**
@@ -26142,6 +26558,24 @@ model ExpressRoutePortListResult is Azure.Core.Page<ExpressRoutePort>;
 @Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 model ExpressRoutePortAuthorizationListResult
   is Azure.Core.Page<ExpressRoutePortAuthorization>;
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The Network RP TypeSpec project uses Azure.ResourceManager.Legacy patterns for consistency with existing ExpressRoute resources."
+@summary("ExpressRoute LAG List Result")
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@added(Versions.v2025_09_01)
+model ExpressRouteLagListResult is Azure.Core.Page<ExpressRouteLag>;
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The Network RP TypeSpec project uses Azure.ResourceManager.Legacy patterns for consistency with existing ExpressRoute resources."
+@summary("ExpressRoute LAG Link List Result")
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@added(Versions.v2025_09_01)
+model ExpressRouteLagLinkListResult is Azure.Core.Page<ExpressRouteLagLink>;
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The Network RP TypeSpec project uses Azure.ResourceManager.Legacy patterns for consistency with existing ExpressRoute resources."
+@summary("ExpressRoute LAG Member List Result")
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@added(Versions.v2025_09_01)
+model ExpressRouteLagMemberListResult is Azure.Core.Page<ExpressRouteLagMember>;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @summary("ExpressRoutePorts Location List Result")

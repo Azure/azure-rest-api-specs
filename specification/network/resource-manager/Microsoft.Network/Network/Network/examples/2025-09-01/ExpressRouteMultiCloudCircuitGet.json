@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "circuitName": "circuitName",
+    "resourceGroupName": "rg1",
+    "api-version": "2025-09-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "circuitName",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/circuitName",
+        "etag": "W/\"00000000-0000-0000-0000-000000000000\"",
+        "type": "Microsoft.Network/expressRouteCircuits",
+        "location": "eastus2euap",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "authorizations": [],
+          "serviceProviderProperties": {
+            "serviceProviderName": "AWS",
+            "peeringLocation": "uswest2",
+            "bandwidthInMbps": 200
+          },
+          "partnerAccountId": "123-456-789",
+          "activationKey": "ew0KICAic2hhcmVkQ29ubmVjdGlvblV1aWQiOiAiM2YxYTZjOWUtOGIzZi00YjllLTljM2EtMmU2ZDdmNGExYzU5IiwNCiAgImNvbm5lY3Rpb25TaXplTWJwcyI6IDIwMCwNCiAgImRlc3RpbmF0aW9uQWNjb3VudCI6ICI3ZDc0N2VlZC1iNDRjLTQyNTctOGQ0My1kZjllYmQ5NDU0NmIiDQp9",
+          "resiliencyLevel": "Maximum",
+          "circuitProvisioningState": "Enabled",
+          "allowClassicOperations": false,
+          "serviceKey": "a1410692-0000-4ceb-b94a-b90b94d398d1",
+          "serviceProviderProvisioningState": "DeProvisioned"
+        },
+        "sku": {
+          "name": "MultiCloud_MeteredData",
+          "tier": "MultiCloud",
+          "family": "MeteredData"
+        }
+      }
+    }
+  },
+  "operationId": "ExpressRouteCircuits_Get",
+  "title": "Get MultiCloud ExpressRouteCircuit"
+}
