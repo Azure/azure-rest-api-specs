@@ -163,6 +163,33 @@
 
 - tool: TypeSpecValidation
   reason: >
+    This is the Compute RP-root aggregate project. Its main.tsp only re-imports
+    the sub-project services (Compute, ComputeDisk, ComputeGallery, ComputeSku)
+    via client.tsp to provide a single entrypoint for combined SDK generation. It
+    emits no swagger and owns no examples of its own (examples live in each
+    sub-project folder), so the "main.tsp must contain examples folder" check does
+    not apply at the aggregate root.
+    Responsibility: Service team.
+  rules: [FolderStructure]
+  paths:
+    - .
+
+- tool: TypeSpecValidation
+  reason: >
+    This is the Compute RP-root aggregate project. Its main.tsp only re-imports
+    the sub-project services via client.tsp to provide a single entrypoint for
+    combined SDK generation; it intentionally does not configure the
+    @azure-tools/typespec-autorest emitter because it emits no swagger of its own
+    (each sub-project - Compute, ComputeDisk, ComputeGallery, ComputeSku - emits
+    its own ComputeRP/DiskRP/GalleryRP/skus swagger). Requiring the autorest
+    emitter here would produce a duplicate combined swagger.
+    Responsibility: Service team.
+  rules: [EmitAutorest]
+  paths:
+    - .
+
+- tool: TypeSpecValidation
+  reason: >
     Not ready to generate SDKs from TypeSpec.
     Responsibility: Service team with SDK team collaboration.
     More info: https://aka.ms/azsdk/spec-gen-sdk-config.
