@@ -40,6 +40,7 @@ union ClientEventType {
 
   /** Updates authorization headers for an active BYOM connection. */
   byom_credential_update: "byom_credential.update",
+
 }
 
 /**
@@ -49,9 +50,10 @@ union ClientEventType {
  * `session.created/updated`, `response.text.*`, `response.audio_transcript.*`,
  * `response.content_part.*`, `response.output_item.*`, `response.created/done`,
  * `response.function_call_arguments.*`, `mcp_list_tools.*`,
- * `response.mcp_call*.*`, `output_audio_buffer.cleared/started/stopped`) are
+ * `response.mcp_call*.*`, and `output_audio_buffer.cleared`) are
  * consumed from OpenAI directly (with Azure payloads re-injected via `custom.tsp`
- * augmentations where needed); only Azure-only server event types are listed here.
+ * augmentations where needed). OpenAI server events not exposed by stable v1 are
+ * version-fenced in `custom.tsp`; only Azure-only event types are listed here.
  */
 union ServerEventType {
   string,
@@ -84,21 +86,27 @@ union ServerEventType {
   response_video_delta: "response.video.delta",
 
   /** Web search call is searching. */
+  @removed(Versions.v1)
   response_web_search_call_searching: "response.web_search_call.searching",
 
   /** Web search call is in progress. */
+  @removed(Versions.v1)
   response_web_search_call_in_progress: "response.web_search_call.in_progress",
 
   /** Web search call completed. */
+  @removed(Versions.v1)
   response_web_search_call_completed: "response.web_search_call.completed",
 
   /** File search call is searching. */
+  @removed(Versions.v1)
   response_file_search_call_searching: "response.file_search_call.searching",
 
   /** File search call is in progress. */
+  @removed(Versions.v1)
   response_file_search_call_in_progress: "response.file_search_call.in_progress",
 
   /** File search call completed. */
+  @removed(Versions.v1)
   response_file_search_call_completed: "response.file_search_call.completed",
 
   /** Audio transcript annotation added. */
@@ -106,6 +114,7 @@ union ServerEventType {
   response_audio_transcript_annotation_added: "response.audio_transcript.annotation.added",
 
   /** Invocation passthrough delta from hosted agent. */
+  @removed(Versions.v1)
   response_invocation_delta: "response.invocation.delta",
 
   /** Returned when the WebRTC SDP negotiation completes successfully. */

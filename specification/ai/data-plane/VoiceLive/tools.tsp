@@ -34,5 +34,8 @@ union VoiceLiveTool {
 union VoiceLiveToolChoice {
   OpenAI.ToolChoiceOptions,
   OpenAI.ToolChoiceFunction,
+
+  /** Forced MCP selection is preview-only until runtime support is implemented. */
+  @removed(Versions.v1)
   OpenAI.ToolChoiceMCP,
 }

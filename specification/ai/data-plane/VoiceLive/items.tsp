@@ -8,14 +8,16 @@ using TypeSpec.OpenAPI;
 namespace VoiceLive;
 
 // Message, function-call, and MCP item types are consumed from OpenAI GA
-// Realtime; only Azure-only web/file search item types remain here.
+// Realtime; preview-only Azure web/file search item types remain here.
 union ItemType {
   string,
 
   /** Web search call item. */
+  @removed(Versions.v1)
   web_search_call: "web_search_call",
 
   /** File search call item. */
+  @removed(Versions.v1)
   file_search_call: "file_search_call",
 }
 
@@ -66,12 +68,13 @@ model AzureResponseItem {
 
 /**
  * A conversation item returned by the service. Message, function-call, and MCP
- * response items are consumed from OpenAI's GA Realtime models; VoiceLive
- * contributes its own web/file search response items via `AzureResponseItem`.
+ * response items are consumed from OpenAI's GA Realtime models; the preview
+ * channel additionally contributes web/file search items via `AzureResponseItem`.
  */
 @oneOf
 union ResponseItem {
   /** VoiceLive web/file search response items (Azure-specific). */
+  @removed(Versions.v1)
   AzureResponseItem,
 
   /** Message item (OpenAI GA Realtime; system/user/assistant). */
@@ -172,6 +175,7 @@ model ActionFind {
 
 /** A response item that represents a web search call. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@removed(Versions.v1)
 @usage(ResponseUsage)
 model ResponseWebSearchCallItem extends AzureResponseItem {
   /** The type of the item. Always 'web_search_call'. */
@@ -204,6 +208,7 @@ model FileSearchResult {
 
 /** A response item that represents a file search call. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@removed(Versions.v1)
 @usage(ResponseUsage)
 model ResponseFileSearchCallItem extends AzureResponseItem {
   /** The type of the item. Always 'file_search_call'. */

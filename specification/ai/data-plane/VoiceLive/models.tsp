@@ -184,8 +184,8 @@ model ConversationItemBase {
 /**
  * The response resource: the OpenAI GA Realtime response (`RealtimeResponse`)
  * plus Azure extensions. The inherited `output` list is retyped to VoiceLive's
- * `ResponseItem` union so Azure-specific response items (message, MCP, web/file
- * search) are preserved alongside OpenAI's function-call items. VoiceLive migrates
+ * `ResponseItem` union so standard message, function, and MCP items are preserved;
+ * preview additionally includes Azure web/file-search items. VoiceLive migrates
  * from the beta response shape to GA: `modalities`/`output_audio_format`/`voice`
  * are replaced by the inherited GA `output_modalities` and nested `audio`.
  */
@@ -439,45 +439,86 @@ model ServerEventResponseAnimationVisemeDone extends ServerEvent {
   content_index: int32;
 }
 
-/**
- * Create a new VoiceLive response with these parameters: the OpenAI GA Realtime
- * `RealtimeResponseCreateParams` plus Azure extensions. VoiceLive migrates from
- * the beta shape to GA — `modalities`/`voice`/`output_audio_format` are replaced
- * by the inherited GA `output_modalities` and nested `audio`, and `reasoning_effort`
- * by the inherited GA `reasoning`.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Intentionally extending the OpenAI GA response-create params to migrate VoiceLive from the Realtime beta shape to GA."
+/** Response-level audio configuration. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
-@usage(ResponseUsage)
-model ResponseCreateParams extends OpenAI.RealtimeResponseCreateParams {
-  /** Whether to commit the response to the conversation. Defaults to true. (Azure extension) */
-  commit?: boolean = true;
+@usage(RequestUsage)
+model ResponseCreateAudio {
+  /** Output audio configuration for this response. */
+  output?: AudioOutputConfig;
+}
 
-  /** Whether to cancel any ongoing generation before starting this one. Defaults to true. (Azure extension) */
-  cancel_previous?: boolean = true;
+/** Conversation association for a generated response. */
+union ResponseConversation {
+  auto: "auto",
+  none: "none",
+}
 
-  /** Input items to append to the conversation context before generating a response. (Azure extension) */
-  append_input_items?: ConversationRequestItem[];
+/** Create a new VoiceLive response using the OpenAI Realtime GA wire shape. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@usage(RequestUsage)
+model ResponseCreateParams {
+  /** Whether this response is added to the default conversation. */
+  conversation?: ResponseConversation = ResponseConversation.auto;
 
-  /**
-   * Input items to be used as the context for this response.
-   * An empty array clears previous context. (Azure extension)
-   */
-  input_items?: ConversationRequestItem[];
+  /** Inline GA conversation context for this response. */
+  input?: ConversationRequestItem[];
 
-  /** Sampling temperature for the model, limited to [0.6, 1.2]. Defaults to 0.8. (Azure extension) */
-  temperature?: float32;
+  /** Instructions applied only to this response. */
+  instructions?: string;
 
-  /**
-   * Create the response with pre-generated assistant message. The message item would be
-   * added into the conversation history and returned with synthesized audio output in the created response. (Azure extension)
-   */
+  /** Maximum output tokens for this response. */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Matches the OpenAI Realtime max-token wire shape."
+  max_output_tokens?: integer | "inf";
+
+  /** Up to 16 string key-value metadata pairs. */
+  metadata?: Record<string>;
+
+  /** Modalities the response may return. */
+  output_modalities?: SessionModality[];
+
+  /** Response-level audio output configuration. */
+  audio?: ResponseCreateAudio;
+
+  /** Function tools available for this response. */
+  tools?: OpenAI.RealtimeFunctionTool[];
+
+  /** Tool selection behavior for this response. */
+  tool_choice?: VoiceLiveToolChoice;
+
+  /** Create the response with a pre-generated assistant message. */
   pre_generated_assistant_message?: OpenAI.RealtimeConversationItemMessageAssistant;
 
-  /** Configuration for interim response generation during latency or tool calls. (Azure extension) */
+  /** Configuration for interim response generation during latency or tool calls. */
   interim_response?: InterimResponseConfig;
 
-  /** Input data to invoke the hosted agent. (Azure extension) */
+  /** Whether compatible realtime models may call tools in parallel. */
+  parallel_tool_calls?: boolean;
+
+  /** Reasoning configuration for compatible realtime models. */
+  reasoning?: OpenAI.RealtimeReasoning;
+
+  /** Preview response-commit behavior. Use `conversation` in v1. */
+  @removed(Versions.v1)
+  commit?: boolean = true;
+
+  /** Preview cancellation behavior. Send `response.cancel` explicitly in v1. */
+  @removed(Versions.v1)
+  cancel_previous?: boolean = true;
+
+  /** Preview input append behavior. Build the v1 `input` list explicitly. */
+  @removed(Versions.v1)
+  append_input_items?: ConversationRequestItem[];
+
+  /** Preview response input field. An empty array clears context; use `input` in v1. */
+  @removed(Versions.v1)
+  input_items?: ConversationRequestItem[];
+
+  /** Preview response-level temperature. Configure compatible cascaded v1 sessions instead. */
+  @removed(Versions.v1)
+  temperature?: float32;
+
+  /** Preview hosted-agent invocation input. Hosted agents are excluded from v1. */
+  @removed(Versions.v1)
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "Opaque passthrough: values are user-provided input forwarded to the hosted agent, whose schema is not defined by this API."
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Opaque passthrough JSON from hosted agent; values are not limited to strings."
   invoke_input?: Record<unknown>;
@@ -546,6 +587,7 @@ model ServerEventResponseVideoDelta extends ServerEvent {
 
 /** Returned when a web search call is searching. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@removed(Versions.v1)
 @usage(ResponseUsage)
 model ServerEventResponseWebSearchCallSearching extends ServerEvent {
   /** The event type, must be `response.web_search_call.searching`. */
@@ -566,6 +608,7 @@ model ServerEventResponseWebSearchCallSearching extends ServerEvent {
 
 /** Returned when a web search call is in progress. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@removed(Versions.v1)
 @usage(ResponseUsage)
 model ServerEventResponseWebSearchCallInProgress extends ServerEvent {
   /** The event type, must be `response.web_search_call.in_progress`. */
@@ -586,6 +629,7 @@ model ServerEventResponseWebSearchCallInProgress extends ServerEvent {
 
 /** Returned when a web search call has completed. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@removed(Versions.v1)
 @usage(ResponseUsage)
 model ServerEventResponseWebSearchCallCompleted extends ServerEvent {
   /** The event type, must be `response.web_search_call.completed`. */
@@ -606,6 +650,7 @@ model ServerEventResponseWebSearchCallCompleted extends ServerEvent {
 
 /** Returned when a file search call is searching. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@removed(Versions.v1)
 @usage(ResponseUsage)
 model ServerEventResponseFileSearchCallSearching extends ServerEvent {
   /** The event type, must be `response.file_search_call.searching`. */
@@ -626,6 +671,7 @@ model ServerEventResponseFileSearchCallSearching extends ServerEvent {
 
 /** Returned when a file search call is in progress. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@removed(Versions.v1)
 @usage(ResponseUsage)
 model ServerEventResponseFileSearchCallInProgress extends ServerEvent {
   /** The event type, must be `response.file_search_call.in_progress`. */
@@ -646,6 +692,7 @@ model ServerEventResponseFileSearchCallInProgress extends ServerEvent {
 
 /** Returned when a file search call has completed. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@removed(Versions.v1)
 @usage(ResponseUsage)
 model ServerEventResponseFileSearchCallCompleted extends ServerEvent {
   /** The event type, must be `response.file_search_call.completed`. */
@@ -698,6 +745,7 @@ model ServerEventResponseAudioTranscriptAnnotationAdded extends ServerEvent {
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Opaque passthrough: delta contains raw SSE event JSON from the hosted agent, whose schema is not defined by this API."
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Opaque passthrough JSON from hosted agent SSE event; values are not limited to strings."
+@removed(Versions.v1)
 @usage(ResponseUsage)
 model ServerEventResponseInvocationDelta extends ServerEvent {
   /** The event type, must be `response.invocation.delta`. */

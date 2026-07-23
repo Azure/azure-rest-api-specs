@@ -15,7 +15,7 @@ namespace VoiceLive;
 // Azure-specific audio types and adding Azure-only fields.
 
 /** GA Realtime nested audio configuration (`audio.input` / `audio.output`) for a VoiceLive session. */
-@usage(RequestUsage)
+@usage(DualUsage)
 model AudioConfig {
   /** Input audio configuration. */
   input?: AudioInputConfig;
@@ -24,12 +24,59 @@ model AudioConfig {
   output?: AudioOutputConfig;
 }
 
+/** Audio format MIME types supported by VoiceLive v1. */
+union AudioFormatType {
+  string,
+  pcm: "audio/pcm",
+  pcmu: "audio/pcmu",
+  pcma: "audio/pcma",
+}
+
+/** Voice implementations available through VoiceLive. */
+union VoiceType {
+  string,
+  openai: "openai",
+  azure_standard: "azure-standard",
+  azure_custom: "azure-custom",
+  azure_personal: "azure-personal",
+  avatar_voice_sync: "avatar-voice-sync",
+  azure_realtime_native: "azure-realtime-native",
+}
+
+/** Base audio format object used by VoiceLive v1. */
+@discriminator("type")
+@usage(DualUsage)
+model AudioFormat {
+  type: AudioFormatType;
+}
+
+/** PCM audio with an explicit sample rate. */
+@usage(DualUsage)
+model PcmAudioFormat extends AudioFormat {
+  type: AudioFormatType.pcm;
+
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "VoiceLive supports these runtime PCM sample rates."
+  rate?: 8000 | 16000 | 24000 = 24000;
+}
+
+/** G.711 μ-law audio at 8 kHz. */
+@usage(DualUsage)
+model PcmuAudioFormat extends AudioFormat {
+  type: AudioFormatType.pcmu;
+}
+
+/** G.711 A-law audio at 8 kHz. */
+@usage(DualUsage)
+model PcmaAudioFormat extends AudioFormat {
+  type: AudioFormatType.pcma;
+}
+
 /** Input audio configuration (OpenAI GA Realtime `audio.input` shape, with Azure extensions). */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
-@usage(RequestUsage)
+@usage(DualUsage)
 model AudioInputConfig {
-  /** Input audio format. Default is 'pcm16'. */
-  format?: InputAudioFormat = InputAudioFormat.pcm16;
+  /** Input audio format. Defaults to 24 kHz PCM. */
+  format?: AudioFormat;
 
   /** Configuration for input audio transcription. */
   transcription?: AudioInputTranscriptionOptions;
@@ -40,9 +87,6 @@ model AudioInputConfig {
   /** Type of turn detection to use. */
   turn_detection?: OpenAI.RealtimeTurnDetection;
 
-  /** Input audio sampling rate in Hz (Azure extension). Available values: for pcm16 - 8000, 16000, 24000; for g711 - 8000. */
-  sampling_rate?: int32 = 24000;
-
   /** Configuration for echo cancellation during server-side audio processing (Azure extension). */
   echo_cancellation?: AudioEchoCancellation;
 }
@@ -52,27 +96,55 @@ model AudioInputConfig {
 
 /** Output audio configuration (OpenAI GA Realtime `audio.output` shape, with Azure extensions). */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
-@usage(RequestUsage)
+@usage(DualUsage)
 model AudioOutputConfig {
-  /** Output audio format. Default is 'pcm16'. */
-  format?: OutputAudioFormat = OutputAudioFormat.pcm16;
+  /** Output audio format. Defaults to 24 kHz PCM. */
+  format?: AudioFormat;
 
-  /** The voice configuration. */
-  voice?: Voice;
+  /** Voice name. */
+  voice?: string = "alloy";
 
-  /** Types of timestamps to include in audio response content (Azure extension). */
-  timestamp_types?: AudioTimestampType[];
+  /** Voice implementation selected for synthesis. */
+  voice_type?: VoiceType = VoiceType.openai;
+
+  /** Numeric voice speed. */
+  speed?: float32;
+
+  /** Voice variation temperature. */
+  @minValue(0)
+  @maxValue(1)
+  voice_temperature?: float32;
+
+  /** URL of a custom pronunciation lexicon. */
+  custom_lexicon_url?: string;
+
+  /** URL of a custom text normalization configuration. */
+  custom_text_normalization_url?: string;
+
+  /** Preferred locales for multilingual synthesis. */
+  prefer_locales?: string[];
+
+  /** Enforced output locale. */
+  locale?: string;
+
+  /** Voice speaking style. */
+  style?: string;
+
+  /** Voice pitch adjustment. */
+  pitch?: string;
+
+  /** Voice volume adjustment. */
+  volume?: string;
+
+  /** Azure custom voice endpoint identifier. */
+  custom_voice_endpoint_id?: string;
+
+  /** Azure personal/avatar voice model. */
+  personal_voice_model?: string;
+
+  /** Types of timestamps to include in audio response content. */
+  output_audio_timestamp_types?: AudioTimestampType[];
 }
-
-// VoiceLive migrates its session from the OpenAI Realtime beta shape to GA:
-// `RequestSession` now extends `OpenAI.RealtimeSessionCreateRequestGA`, inheriting
-// the GA fields (`model`, `instructions`, `output_modalities`, `tools`,
-// `tool_choice`, `parallel_tool_calls`, `reasoning`, `max_output_tokens`,
-// `include`, `tracing`, `truncation`, `prompt`, `type`). The inherited `audio`
-// field is retyped to VoiceLive's Azure `AudioConfig` (GA nesting + Azure audio
-// types and fields). Azure-only session fields are added in the body.
-#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Foundry-approved: retype the inherited GA `audio` field to VoiceLive's Azure `AudioConfig` without mutating the imported OpenAI source."
-@@changePropertyType(OpenAI.RealtimeSessionCreateRequestGA.audio, AudioConfig);
 
 // The GA response `output` list is retyped to VoiceLive's `ResponseItem` union so
 // Azure-specific response items (message, MCP, web/file search) are preserved.
@@ -88,7 +160,7 @@ model AudioOutputConfig {
 #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Mirrors OpenAI's inline `@oneOf` session union, swapping the realtime session for VoiceLive's RequestSession."
 @@changePropertyType(
   OpenAI.RealtimeClientEventSessionUpdate.session,
-  RequestSession | OpenAI.RealtimeTranscriptionSessionCreateRequestGA
+  SessionUpdateConfig
 );
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Retype the GA client-event payloads to VoiceLive's Azure-extended types."
@@ -151,11 +223,25 @@ model AudioOutputConfig {
   ResponseItem
 );
 
-// VoiceLive fences the WebRTC audio-playback events to preview-only (they were
-// `@removed(Versions.v1)` before consuming OpenAI's GA models). Re-apply the
-// version fence to OpenAI's consumed events so they remain preview-only in v1.
+// Fence imported OpenAI events that are not exposed by the VoiceLive v1
+// WebSocket contract.
 @@removed(OpenAI.RealtimeServerEventOutputAudioBufferStarted, Versions.v1);
 @@removed(OpenAI.RealtimeServerEventOutputAudioBufferStopped, Versions.v1);
+@@removed(OpenAI.RealtimeServerEventConversationCreated, Versions.v1);
+@@removed(OpenAI.RealtimeServerEventInputAudioBufferDtmfEventReceived, Versions.v1);
+@@removed(OpenAI.RealtimeServerEventRateLimitsUpdated, Versions.v1);
+
+// VoiceLive reuses the OpenAI event names for avatar media-buffer clearing but
+// has different semantics: clearing buffered avatar output does not stop TTS,
+// and the acknowledgement does not include a response_id.
+@@doc(
+  OpenAI.RealtimeClientEventOutputAudioBufferClear,
+  "Clears buffered VoiceLive avatar media output without stopping TTS synthesis."
+);
+@@doc(
+  OpenAI.RealtimeServerEventOutputAudioBufferCleared,
+  "Confirms that buffered VoiceLive avatar media output was cleared. response_id is empty when no model response is active."
+);
 
 // `session.created` / `session.updated` server events: retype the GA `session`
 // payload (an `@oneOf` union) to VoiceLive's Azure-extended `ResponseSession`.
@@ -163,14 +249,14 @@ model AudioOutputConfig {
 #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Mirrors OpenAI's inline `@oneOf` session union, swapping the realtime session for VoiceLive's ResponseSession."
 @@changePropertyType(
   OpenAI.RealtimeServerEventSessionCreated.session,
-  ResponseSession | OpenAI.RealtimeTranscriptionSessionCreateResponseGA
+  SessionResponseConfig
 );
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Retype the GA server-event `session` payload to VoiceLive's Azure-extended `ResponseSession`."
 #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Mirrors OpenAI's inline `@oneOf` session union, swapping the realtime session for VoiceLive's ResponseSession."
 @@changePropertyType(
   OpenAI.RealtimeServerEventSessionUpdated.session,
-  ResponseSession | OpenAI.RealtimeTranscriptionSessionCreateResponseGA
+  SessionResponseConfig
 );
 
 // `response.content_part.added` / `.done` server events are consumed from OpenAI
@@ -189,34 +275,98 @@ model AudioOutputConfig {
   }
 );
 
-/**
- * VoiceLive session configuration: the OpenAI GA Realtime session
- * (`RealtimeSessionCreateRequestGA`) plus Azure-specific extensions.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Intentionally extending the OpenAI GA session to inherit its fields and migrate VoiceLive from the Realtime beta shape to GA."
+/** Output modalities supported by VoiceLive sessions. */
+union SessionModality {
+  string,
+  text: "text",
+  audio: "audio",
+  animation: "animation",
+  avatar: "avatar",
+}
+
+/** Voice-optimized instruction adaptation. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
-@usage(RequestUsage)
-model RequestSession extends OpenAI.RealtimeSessionCreateRequestGA {
-  /** The animation configuration for the session (Azure extension). */
+@usage(DualUsage)
+model VoiceAdaptation {
+  /** Adaptation strategy. */
+  type: "auto";
+
+  /** Server-generated voice-optimized instructions. */
+  additional_instructions?: string;
+}
+
+/** VoiceLive v1 realtime session configuration. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@usage(DualUsage)
+model RequestSession {
+  /** The session type. VoiceLive v1 supports realtime sessions only. */
+  type: "realtime";
+
+  /** Modalities the service may return. */
+  output_modalities?: SessionModality[];
+
+  /** Session instructions. */
+  instructions?: string;
+
+  /** Nested input and output audio configuration. */
+  audio?: AudioConfig;
+
+  /** Additional fields to include in server outputs. */
+  include?: string[];
+
+  /** Tools available to the model. */
+  tools?: VoiceLiveTool[];
+
+  /** Tool selection behavior. */
+  tool_choice?: VoiceLiveToolChoice;
+
+  /** Whether multiple tool calls may run in parallel. */
+  parallel_tool_calls?: boolean;
+
+  /** Reasoning configuration for compatible realtime models. */
+  reasoning?: OpenAI.RealtimeReasoning;
+
+  /** Maximum output tokens for one response. */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Matches the OpenAI Realtime max-token wire shape."
+  max_output_tokens?: integer | "inf";
+
+  /** The animation configuration for the session. */
   animation?: Animation;
 
-  /** Configuration for avatar streaming and behavior during the session (Azure extension). */
+  /** Configuration for avatar streaming and behavior during the session. */
   avatar?: AvatarConfig;
 
-  /** Controls the randomness of the model's output. Range: 0.0 to 1.0. Default is 0.7. (Azure extension) */
+  /**
+   * Controls randomness for compatible cascaded pipelines. Native realtime
+   * pipelines reject this property because the upstream realtime API does not
+   * support session temperature.
+   */
+  @minValue(0)
+  @maxValue(1)
   temperature?: float32;
 
-  /** Configuration for interim response generation during latency or tool calls (Azure extension). */
+  /** Configuration for interim response generation during latency or tool calls. */
   interim_response?: InterimResponseConfig;
 
+  /** Voice-optimized instruction adaptation. */
+  voice_adaptation?: VoiceAdaptation;
+
+  /** Delimiter appended to generated responses. */
+  response_delimiter?: string;
+
   /**
-   * Set of up to 16 key-value pairs that can be attached to the session (Azure extension). This is
+   * Set of up to 16 key-value pairs that can be attached to the session. This is
    * useful for storing additional information about the session in a structured format, such as
    * tracking IDs, user context, or application-specific labels. These key-value pairs are also
    * included in Foundry resource logs for tracing and diagnostics. Keys can be a maximum of 64
    * characters long and values can be a maximum of 512 characters long.
    */
   metadata?: Record<string>;
+}
+
+/** Session update payloads supported by VoiceLive. */
+union SessionUpdateConfig {
+  RequestSession,
 }
 
 /** Base for session configuration in the response. */
@@ -226,15 +376,27 @@ model ResponseSession is RequestSession {
   ...SessionBase;
 
   /** The agent configuration for the session, if applicable. */
+  @removed(Versions.v1)
   agent?: AgentConfig;
 
   /** The unique identifier for the session. */
-  id?: string;
+  id: string;
+
+  /** The response object type. */
+  object: "realtime.session";
+
+  /** The selected model. */
+  `model`: string;
 
   /** Expiration time for the session. This value is set by the server and cannot be changed with `session.update`. */
   #suppress "@microsoft/azure-openapi-validator/IntegerTypeMustHaveFormat" "The unixtime format is present, but the legacy rule only allows int32 or int64."
   @encode(DateTimeKnownEncoding.unixTimestamp, int64)
   expires_at?: utcDateTime;
+}
+
+/** Session response payloads supported by VoiceLive. */
+union SessionResponseConfig {
+  ResponseSession,
 }
 
 /** Supported OpenAI voice names (string enum). */
@@ -741,7 +903,8 @@ model AudioInputTranscriptionOptions {
   /**
    * The transcription model to use. Supported values:
    * 'whisper-1', 'gpt-4o-transcribe', 'gpt-4o-mini-transcribe',
-   * 'mai-transcribe-1', 'azure-speech'.
+   * 'gpt-4o-transcribe-diarize', 'azure-speech', 'azure-mrs',
+   * 'mai-transcribe-1', 'mai-transcribe-1.5', and 'mai-transcribe'.
    */
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Keeping inline union to avoid breaking changes."
   `model`:
@@ -750,8 +913,11 @@ model AudioInputTranscriptionOptions {
     | "gpt-4o-transcribe"
     | "gpt-4o-mini-transcribe"
     | "gpt-4o-transcribe-diarize"
+    | "azure-speech"
+    | "azure-mrs"
     | "mai-transcribe-1"
-    | "azure-speech";
+    | "mai-transcribe-1.5"
+    | "mai-transcribe";
 
   /** Optional language code in BCP-47 (e.g., 'en-US'), or ISO-639-1 (e.g., 'en'), or multi languages with auto detection, (e.g., 'en,zh'). */
   language?: string;
