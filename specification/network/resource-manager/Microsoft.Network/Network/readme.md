@@ -106,6 +106,15 @@ suppressions:
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationSecurityGroups/{applicationSecurityGroupName}/addressPrefixSets"]
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationSecurityGroups/{applicationSecurityGroupName}/addressPrefixSets/{addressPrefixSetName}"]
+    from: expressRoute.json
+    reason: The emitted {$ref, readOnly true} shape matches all pre-existing peer resources in expressRoute.json (ExpressRouteCircuit, ExpressRoutePort, etc.). A Network-RP-wide TypeSpec correction is tracked separately.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteLags/{expressRouteLagName}"].get.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteLags/{expressRouteLagName}"].put.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteLags/{expressRouteLagName}"].put.responses["201"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteLags/{expressRouteLagName}"].patch.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteLags/{expressRouteLagName}/links/{linkName}"].get.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteLags/{expressRouteLagName}/links/{linkName}/members/{memberName}"].get.responses["200"].schema
   - code: ResourceNameRestriction
     from: interconnectGroup.json
     reason: Subgroup is a read-only child resource with no PUT operation. Pattern restriction is not applicable.
@@ -141,6 +150,36 @@ suppressions:
     reason: Not a standard azure resource.
     where:
       - $.definitions.GetServiceGatewayServicesResult
+  - code: ProvisioningStateMustBeReadOnly
+    from: networkWatcher.json
+    reason: >-
+      The TypeSpec emitter correctly places readOnly: true as a sibling of $ref, which AutoRest
+      supports (along with description, title, nullable, and x-* extensions). The TypeSpec source
+      correctly marks provisioningState with @visibility(Lifecycle.Read). The lintdiff rule does
+      not recognize readOnly next to $ref, so this suppression is needed.
+      See: https://github.com/Azure/typespec-azure/issues/4611
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/connectionAnalyzers/{connectionAnalyzerName}"].get.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/connectionAnalyzers/{connectionAnalyzerName}"].put.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/connectionAnalyzers/{connectionAnalyzerName}"].put.responses["201"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/connectionAnalyzers/{connectionAnalyzerName}"].patch.responses["200"].schema
+  - code: XMSSecretInResponse
+    from: expressRoute.json
+    reason: >-
+      activationKey is not a secret value, it is a base64 encoded string used for multi-cloud circuit provisioning.
+    where:
+      - $.definitions.ExpressRouteCircuit.properties.properties.properties.activationKey
+      - $.definitions.ExpressRouteCircuitPropertiesFormat.properties.activationKey
+  - code: ResourceNameRestriction
+    from: virtualNetwork.json
+    reason: The resource name parameter 'virtualNetworkName' is not defined with a 'pattern' restriction. Suppress it to avoid breaking change because it is referenced by all Virtual Network APIs.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/moveIpConfigurations"]
+  - code: PostResponseCodes
+    from: virtualNetwork.json
+    reason: LRO POST operation returns 200 with no schema for completion status and 202 for async acceptance. This is the standard TypeSpec ArmResourceActionAsync pattern for void LRO operations.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/moveIpConfigurations"].post
 directive:
   - from: specification/common-types/resource-management/v6/types.json
     where: "$.definitions.ProxyResource"
