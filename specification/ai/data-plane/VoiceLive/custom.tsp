@@ -47,6 +47,9 @@ model AudioInputConfig {
   echo_cancellation?: AudioEchoCancellation;
 }
 
+// Multichannel session fields, per-event channel context, and input_audio_buffer.all_idle are
+// private runtime features and are intentionally excluded from the public TypeSpec surface.
+
 /** Output audio configuration (OpenAI GA Realtime `audio.output` shape, with Azure extensions). */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(RequestUsage)
