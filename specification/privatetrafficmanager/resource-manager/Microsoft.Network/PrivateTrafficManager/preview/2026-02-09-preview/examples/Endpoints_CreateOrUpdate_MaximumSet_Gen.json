@@ -1,0 +1,80 @@
+{
+  "title": "Endpoints_CreateOrUpdate_MaximumSet",
+  "operationId": "Endpoints_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2026-02-09-preview",
+    "subscriptionId": "10B6D88D-ADF4-4281-B3D0-B5A6702DEEDA",
+    "resourceGroupName": "rgprivateTrafficManager",
+    "privateTrafficManagerProfileName": "my-resource-name",
+    "endpointName": "my-resource-name",
+    "resource": {
+      "properties": {
+        "target": "10.0.0.1",
+        "monitoringTarget": "10.0.0.1",
+        "endpointStatus": "Enabled",
+        "kind": "Endpoint",
+        "weight": 100,
+        "priority": 10,
+        "alwaysServe": "Enabled",
+        "healthPolicyId": "/subscriptions/10B6D88D-ADF4-4281-B3D0-B5A6702DEEDA/resourceGroups/rgprivateTrafficManager/providers/Microsoft.Network/privateTrafficManagerProfiles/myProfile/healthPolicies/myHealthPolicy"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "target": "10.0.0.1",
+          "monitoringTarget": "10.0.0.1",
+          "endpointStatus": "Enabled",
+          "kind": "Endpoint",
+          "weight": 100,
+          "priority": 10,
+          "alwaysServe": "Enabled",
+          "healthPolicyId": "/subscriptions/10B6D88D-ADF4-4281-B3D0-B5A6702DEEDA/resourceGroups/rgprivateTrafficManager/providers/Microsoft.Network/privateTrafficManagerProfiles/myProfile/healthPolicies/myHealthPolicy",
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/10B6D88D-ADF4-4281-B3D0-B5A6702DEEDA/resourceGroups/rgprivateTrafficManager/providers/Microsoft.Network/privateTrafficManagerProfiles/myProfile/endpoints/myEndpoint",
+        "name": "myEndpoint",
+        "type": "Microsoft.Network/privateTrafficManagerProfiles/endpoints",
+        "systemData": {
+          "createdBy": "user@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-02-18T10:05:58.138Z",
+          "lastModifiedBy": "user@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-02-18T10:05:58.139Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "target": "10.0.0.1",
+          "monitoringTarget": "10.0.0.1",
+          "endpointStatus": "Enabled",
+          "kind": "Endpoint",
+          "weight": 100,
+          "priority": 10,
+          "alwaysServe": "Enabled",
+          "healthPolicyId": "/subscriptions/10B6D88D-ADF4-4281-B3D0-B5A6702DEEDA/resourceGroups/rgprivateTrafficManager/providers/Microsoft.Network/privateTrafficManagerProfiles/myProfile/healthPolicies/myHealthPolicy",
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/10B6D88D-ADF4-4281-B3D0-B5A6702DEEDA/resourceGroups/rgprivateTrafficManager/providers/Microsoft.Network/privateTrafficManagerProfiles/myProfile/endpoints/myEndpoint",
+        "name": "myEndpoint",
+        "type": "Microsoft.Network/privateTrafficManagerProfiles/endpoints",
+        "systemData": {
+          "createdBy": "user@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-02-18T10:05:58.138Z",
+          "lastModifiedBy": "user@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-02-18T10:05:58.139Z"
+        }
+      }
+    }
+  }
+}
