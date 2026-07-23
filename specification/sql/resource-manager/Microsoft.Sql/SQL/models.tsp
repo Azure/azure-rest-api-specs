@@ -2280,17 +2280,17 @@ union ManagedInstanceAdministratorType {
 @added(Versions.v2025_08_01_preview)
 enum ManagedInstanceAdministratorPrincipalType {
   /**
-   * User
+   * Indicates that the principal is a user.
    */
   User,
 
   /**
-   * Group
+   * Indicates that the principal is a group.
    */
   Group,
 
   /**
-   * Application
+   * Indicates that the principal is an application.
    */
   Application,
 }
