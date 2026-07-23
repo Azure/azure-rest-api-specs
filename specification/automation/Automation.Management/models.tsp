@@ -2552,6 +2552,7 @@ model AutomationAccountProperties {
   /**
    * URL of automation hybrid service which is used for hybrid worker on-boarding.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   automationHybridServiceUrl?: string;
 }
 
@@ -3740,7 +3741,7 @@ model JobProperties {
   /**
    * Gets or sets the id of the job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "Converted from swagger specification."
   @format("uuid")
   jobId?: string;
 
@@ -3763,14 +3764,14 @@ model JobProperties {
   /**
    * Gets or sets the start time of the job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Converted from swagger specification."
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime?: utcDateTime | null;
 
   /**
    * Gets or sets the end time of the job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Converted from swagger specification."
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime?: utcDateTime | null;
 
@@ -3782,26 +3783,27 @@ model JobProperties {
   /**
    * Gets or sets the last modified time of the job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Converted from swagger specification."
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModifiedTime?: utcDateTime | null;
 
   /**
    * Gets or sets the last status modified time of the job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Converted from swagger specification."
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastStatusModifiedTime?: utcDateTime | null;
 
   /**
    * Gets or sets the parameters of the job.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Converted from swagger specification."
   parameters?: Record<string>;
 
   /**
    * The current provisioning state of the job.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Converted from swagger specification."
   @visibility(Lifecycle.Read)
   provisioningState?: JobProvisioningState;
 }
@@ -5754,6 +5756,7 @@ model SourceControlCreateOrUpdateProperties {
   /**
    * The repo url of the source control.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @maxLength(2000)
   repoUrl?: string;
 
@@ -5824,6 +5827,7 @@ model SourceControlProperties {
   /**
    * The repo url of the source control.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   repoUrl?: string;
 
   /**

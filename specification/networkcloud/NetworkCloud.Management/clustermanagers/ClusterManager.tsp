@@ -14,13 +14,12 @@ namespace Microsoft.NetworkCloud;
 /**
  * The name of the cluster manager.
  */
-model ClusterManagerNameParameter
-  is ResourceNameParameter<
-    Resource = ClusterManager,
-    KeyName = "clusterManagerName",
-    SegmentName = "clusterManagers",
-    NamePattern = "^([a-zA-Z0-9][a-zA-Z0-9-_]{0,28}[a-zA-Z0-9])$"
-  >;
+model ClusterManagerNameParameter is ResourceNameParameter<
+  Resource = ClusterManager,
+  KeyName = "clusterManagerName",
+  SegmentName = "clusterManagers",
+  NamePattern = "^([a-zA-Z0-9][a-zA-Z0-9-_]{0,28}[a-zA-Z0-9])$"
+>;
 
 /**
  * ClusterManager represents a control-plane to manage one or more on-premises clusters.

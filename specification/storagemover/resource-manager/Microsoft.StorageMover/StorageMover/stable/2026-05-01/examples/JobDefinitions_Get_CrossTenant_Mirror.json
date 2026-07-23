@@ -1,0 +1,36 @@
+{
+  "operationId": "JobDefinitions_Get",
+  "parameters": {
+    "api-version": "2026-05-01",
+    "jobDefinitionName": "examples-jobDefinitionName",
+    "projectName": "partner-projectName",
+    "resourceGroupName": "partner-rg",
+    "storageMoverName": "partner-storageMover",
+    "subscriptionId": "0a2b3c4d-5e6f-7081-92a3-b4c5d6e7f809"
+  },
+  "title": "JobDefinitions_Get_CrossTenant_Mirror",
+  "responses": {
+    "200": {
+      "body": {
+        "name": "examples-jobDefinitionName",
+        "type": "Microsoft.StorageMover/storageMovers/jobDefinitions",
+        "id": "/subscriptions/0a2b3c4d-5e6f-7081-92a3-b4c5d6e7f809/resourceGroups/partner-rg/providers/Microsoft.StorageMover/storageMovers/partner-storageMover/projects/partner-projectName/jobDefinitions/examples-jobDefinitionName",
+        "properties": {
+          "description": "Cross-tenant Blob-to-Blob copy job (guest-tenant mirror). This read-only mirror is created by the resource provider in the target (guest) tenant alongside the local target endpoint; the source endpoint lives in the partner (host) tenant.",
+          "copyMode": "Mirror",
+          "jobType": "CloudToCloud",
+          "sourceName": "examples-sourceEndpointName",
+          "sourceResourceId": "/subscriptions/60bcfc77-6589-4da2-b7fd-f9ec9322cf95/resourceGroups/examples-rg/providers/Microsoft.StorageMover/storageMovers/examples-storageMoverName/endpoints/examples-sourceEndpointName",
+          "sourceSubpath": "/",
+          "targetName": "partner-targetEndpoint",
+          "targetResourceId": "/subscriptions/0a2b3c4d-5e6f-7081-92a3-b4c5d6e7f809/resourceGroups/partner-rg/providers/Microsoft.StorageMover/storageMovers/partner-storageMover/endpoints/partner-targetEndpoint",
+          "targetSubpath": "/",
+          "isCrossTenantJob": true,
+          "crossTenantEndpointTenantId": "99999999-8888-7777-6666-555555555555",
+          "crossTenantEndpointResourceId": "/subscriptions/60bcfc77-6589-4da2-b7fd-f9ec9322cf95/resourceGroups/examples-rg/providers/Microsoft.StorageMover/storageMovers/examples-storageMoverName/endpoints/examples-sourceEndpointName",
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

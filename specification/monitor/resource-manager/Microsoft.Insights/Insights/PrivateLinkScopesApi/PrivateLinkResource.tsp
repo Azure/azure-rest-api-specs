@@ -14,7 +14,6 @@ namespace PrivateLinkScopesApi;
 /**
  * A private link resource
  */
-@parentResource(AzureMonitorPrivateLinkScope)
 model PrivateLinkResource is PrivateLink;
 alias PrivateLinkOperations = PrivateLinks<PrivateLinkResource>;
 
@@ -29,7 +28,7 @@ interface PrivateLinkResources {
     "privateLinkResourceName",
     "groupName"
   )
-  get is PrivateLinkOperations.Read<PrivateLinkResource>;
+  get is PrivateLinkOperations.Read<AzureMonitorPrivateLinkScope>;
 
   /**
    * Gets the private link resources that need to be created for a Azure Monitor PrivateLinkScope.
@@ -41,7 +40,7 @@ interface PrivateLinkResources {
     "privateLinkResourceName",
     "groupName"
   )
-  listByPrivateLinkScope is PrivateLinkOperations.ListSinglePageByParent<PrivateLinkResource>;
+  listByPrivateLinkScope is PrivateLinkOperations.ListSinglePageByParent<AzureMonitorPrivateLinkScope>;
 }
 
 @@doc(PrivateLinkResource.properties, "Resource properties.");

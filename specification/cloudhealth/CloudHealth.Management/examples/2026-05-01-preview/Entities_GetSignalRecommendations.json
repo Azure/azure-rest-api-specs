@@ -3,60 +3,82 @@
   "operationId": "Entities_GetSignalRecommendations",
   "parameters": {
     "api-version": "2026-05-01-preview",
-    "subscriptionId": "4980D7D5-4E07-47AD-AD34-E76C6BC9F061",
-    "resourceGroupName": "rgopenapi",
-    "healthModelName": "myHealthModel",
-    "entityName": "entity1"
+    "subscriptionId": "abcdef12-3456-7890-abcd-ef1234567890",
+    "resourceGroupName": "online-store-rg",
+    "healthModelName": "online-store",
+    "entityName": "orders-db"
   },
   "responses": {
     "200": {
       "body": {
         "recommendedSignals": [
           {
-            "signalId": "aa2a796a-d4b3-4fbc-952c-23798e0d8e3c",
-            "metricNamespace": "microsoft.compute/virtualmachines",
-            "metricName": "Percentage CPU",
+            "signalId": "sql-cpu-percent",
+            "metricNamespace": "Microsoft.Sql/servers/databases",
+            "metricName": "cpu_percent",
             "aggregationType": "Average",
             "unit": "Percent",
             "timeGrain": "PT5M",
             "evaluationRules": {
               "degradedRule": {
                 "operator": "GreaterThan",
-                "threshold": 85.0
+                "threshold": 70
               },
               "unhealthyRule": {
                 "operator": "GreaterThan",
-                "threshold": 90.0
+                "threshold": 90
               }
             }
           },
           {
-            "signalId": "c6b62f3d-426d-4239-90d7-081d8fb6852b",
-            "metricNamespace": "microsoft.compute/virtualmachines",
-            "metricName": "Available Memory Bytes",
+            "signalId": "sql-dtu-consumption",
+            "metricNamespace": "Microsoft.Sql/servers/databases",
+            "metricName": "dtu_consumption_percent",
             "aggregationType": "Average",
-            "unit": "Bytes",
+            "unit": "Percent",
             "timeGrain": "PT5M",
             "evaluationRules": {
+              "degradedRule": {
+                "operator": "GreaterThan",
+                "threshold": 75
+              },
               "unhealthyRule": {
-                "operator": "LessThan",
-                "threshold": 1000000000
+                "operator": "GreaterThan",
+                "threshold": 90
               }
             }
           }
         ],
         "recommendedConfigurations": [
           {
-            "signalId": "52bdf074-69b3-41d2-a9de-f4359562ed7d",
-            "metricNamespace": "microsoft.compute/virtualmachines",
-            "metricName": "Data Disk Queue Depth",
-            "aggregationType": "Average",
+            "signalId": "sql-storage-percent",
+            "metricNamespace": "Microsoft.Sql/servers/databases",
+            "metricName": "storage_percent",
+            "aggregationType": "Maximum",
+            "unit": "Percent",
+            "timeGrain": "PT15M",
+            "evaluationRules": {
+              "degradedRule": {
+                "operator": "GreaterThan",
+                "threshold": 80
+              },
+              "unhealthyRule": {
+                "operator": "GreaterThan",
+                "threshold": 95
+              }
+            }
+          },
+          {
+            "signalId": "sql-deadlocks",
+            "metricNamespace": "Microsoft.Sql/servers/databases",
+            "metricName": "deadlock",
+            "aggregationType": "Total",
             "unit": "Count",
             "timeGrain": "PT5M",
             "evaluationRules": {
               "unhealthyRule": {
-                "operator": "Dynamic",
-                "sensitivity": "Medium"
+                "operator": "GreaterThan",
+                "threshold": 0
               }
             }
           }

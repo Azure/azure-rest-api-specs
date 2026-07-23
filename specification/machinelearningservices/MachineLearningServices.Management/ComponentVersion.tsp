@@ -11,12 +11,16 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.MachineLearningServices;
+
+// cspell:ignore Learnin
 /**
  * Azure Resource Manager resource envelope.
  */
 @parentResource(ComponentContainer)
-model ComponentVersion
-  is Azure.ResourceManager.ProxyResource<ComponentVersionProperties, false> {
+model ComponentVersion is Azure.ResourceManager.ProxyResource<
+  ComponentVersionProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = ComponentVersion,
     KeyName = "version",
@@ -56,7 +60,7 @@ interface ComponentVersionOps
         version: string,
       },
       ErrorResponse,
-      "MachineLearningRegistryComponentVersion"
+      "MachineLearninRegistryComponentVersion"
     > {}
 
 @armResourceOperations
