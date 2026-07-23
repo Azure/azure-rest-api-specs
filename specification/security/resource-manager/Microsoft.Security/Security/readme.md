@@ -297,6 +297,15 @@ input-file:
   - preview/2024-10-01-preview/operations.json
 ```
 
+### Tag: package-preview-2026-08-01-preview
+
+These settings apply only when `--tag=package-preview-2026-08-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-08-01-preview'
+input-file:
+  - preview/2026-08-01-preview/securityConnectors.json
+```
+
 ### Tag: package-preview-2024-08-01-preview
 
 These settings apply only when `--tag=package-preview-2024-08-01-preview` is specified on the command line.
@@ -703,7 +712,7 @@ input-file:
 - preview/2023-02-15-preview/sensitivitySettings.json
 - preview/2023-05-01-preview/healthReports.json
 - preview/2023-12-01-preview/security-Automations.json
-- preview/2024-08-01-preview/securityConnectors.json
+- preview/2026-08-01-preview/securityConnectors.json
 - stable/2025-05-04/security-Assessment.json
 - preview/2025-09-01-preview/defenderForStorageSettings.json
 - preview/2025-11-01-preview/securityConnectorsDevOps.json
