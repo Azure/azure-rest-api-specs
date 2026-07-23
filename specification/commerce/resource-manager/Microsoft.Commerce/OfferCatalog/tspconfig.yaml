@@ -1,0 +1,45 @@
+parameters:
+  "service-dir":
+    default: "sdk/commerce"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    emitter-output-dir: "{project-root}"
+    output-file: "{version-status}/{version}/offerCatalog.json"
+    examples-dir: "{project-root}/examples"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+    use-read-only-status-schema: true
+  "@azure-tools/typespec-python":
+    service-dir: "sdk/offercatalog"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-offercatalog"
+    namespace: "azure.mgmt.offercatalog"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    service-dir: "sdk/offercatalog"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-offercatalog"
+    namespace: "com.azure.resourcemanager.offercatalog"
+    service-name: "Offer Catalog"
+    flavor: "azure"
+  "@azure-tools/typespec-ts":
+    service-dir: "sdk/offercatalog"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-offercatalog"
+    flavor: "azure"
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-offercatalog"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/offercatalog"
+    emitter-output-dir: "{output-dir}/{service-dir}/armoffercatalog"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armoffercatalog"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
