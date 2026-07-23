@@ -164,6 +164,11 @@ using TypeSpec.Versioning;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(NetworkFabric.properties);
 
+@@clientName(EdgeConnectors.create::parameters.resource, "body");
+@@clientName(EdgeConnectors.update::parameters.properties, "body");
+@@clientName(Fabrics.create::parameters.resource, "body");
+@@clientName(Fabrics.update::parameters.properties, "body");
+
 @@clientName(NetworkToNetworkInterconnects.create::parameters.resource, "body");
 @@clientName(
   NetworkToNetworkInterconnects.update::parameters.properties,
