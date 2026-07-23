@@ -1,0 +1,48 @@
+output-dir: "{project-root}/../"
+parameters:
+  "service-dir":
+    default: "sdk/discovery"
+# No default emitters: Discovery.Combined is a client-generation entrypoint. Each
+# language SDK invokes tsp-client with an explicit emitter (options below). The
+# spec-repo toolchain only ships the autorest emitter, which this project does not
+# use, so the default emit list is intentionally empty.
+emit: []
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+options:
+  "@azure-tools/typespec-client-generator-cli":
+    additionalDirectories:
+      - "specification/discovery/Discovery.Workspace"
+      - "specification/discovery/Discovery.Bookshelf"
+      - "specification/discovery/Discovery.Common"
+  "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.AI.Discovery"
+    namespace: Azure.AI.Discovery
+    package-name: Azure.AI.Discovery
+    model-namespace: false
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/ai-discovery"
+    is-modular-library: true
+    experimental-extensible-enums: true
+    examples-dir: "{project-root}/examples"
+    flavor: azure
+    package-details:
+      name: "@azure/ai-discovery"
+  "@azure-tools/typespec-java":
+    package-dir: "azure-ai-discovery"
+    emitter-output-dir: "{output-dir}/{service-dir}/{package-dir}"
+    namespace: com.azure.ai.discovery
+    service-name: "Discovery"
+    examples-dir: "{project-root}/examples"
+    generate-samples: true
+    generate-tests: true
+    flavor: azure
+  "@azure-tools/typespec-python":
+    package-dir: "azure-ai-discovery"
+    package-name: "azure-ai-discovery"
+    emitter-output-dir: "{output-dir}/{service-dir}/{package-dir}"
+    namespace: "azure.ai.discovery"
+    generate-test: true
+    generate-sample: true
+    flavor: azure

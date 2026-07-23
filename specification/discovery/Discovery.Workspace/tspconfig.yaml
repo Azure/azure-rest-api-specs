@@ -7,7 +7,6 @@ emit:
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
-    - "@azure-tools/typespec-azure-rulesets/client-sdk"
 options:
   "@azure-tools/typespec-autorest":
     emitter-output-dir: "{project-root}/.."
@@ -24,22 +23,6 @@ options:
     generate-test: true
     generate-sample: true
     flavor: azure
-  "@azure-tools/typespec-csharp":
-    # NOTE: /Azure.AI.Discovery suffix after _workspace is a workaround because @azure-typespec/http-client-csharp
-    # does not support package-dir. Without it, CI derives packageName from the last path segment (_workspace)
-    # instead of Azure.AI.Discovery, causing csproj and CHANGELOG lookup failures.
-    emitter-output-dir: "{output-dir}/{service-dir}/Azure.AI.Discovery/_workspace/Azure.AI.Discovery"
-    omit-unreachable-types: true
-    namespace: Azure.AI.Discovery
-    package-name: Azure.AI.Discovery
-    model-namespace: false
-    flavor: azure
-    examples-dir: "{project-dir}/examples"
-    clear-output-folder: true
-  "@azure-typespec/http-client-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/Azure.AI.Discovery/_workspace/Azure.AI.Discovery"
-    namespace: Azure.AI.Discovery
-    model-namespace: false
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-discovery-workspace"
     omit-unreachable-types: true
@@ -48,12 +31,6 @@ options:
     flavor: azure
     package-details:
       name: "@azure/ai-discovery-workspace"
-  "@azure-tools/typespec-java":
-    package-dir: "azure-ai-discovery"
-    emitter-output-dir: "{output-dir}/{service-dir}/{package-dir}"
-    omit-unreachable-types: true
-    namespace: com.azure.ai.discovery
-    flavor: azure
   # "@azure-tools/typespec-go":
   #   module: "github.com/Azure/azure-sdk-for-go/{service-dir}/azworkspace"
   #   omit-unreachable-types: true
@@ -64,4 +41,5 @@ options:
   #   slice-elements-byval: true
   #   flavor: azure
   "@azure-tools/typespec-client-generator-cli":
-    additionalDirectories: []
+    additionalDirectories:
+      - "specification/discovery/Discovery.Common"
