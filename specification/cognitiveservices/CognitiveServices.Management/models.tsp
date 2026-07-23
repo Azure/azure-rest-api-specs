@@ -3166,6 +3166,88 @@ model DeploymentProperties {
    * Routing configuration for the model-router deployment. This property is only applicable when the deployed model is 'model-router' version 2025-11-18 or later. Allows you to select the models subset for routing and the routing mode (balanced, quality, cost) for routing across all supported models or the model subset.
    */
   routing?: DeploymentRouting;
+
+  /**
+   * Attestation data about the organization deploying the model, forwarded to the model provider. This property is required when deploying partner models whose 'model.format' is 'Anthropic', and is ignored for all other model formats. Omitting it for an Anthropic deployment causes the deployment to fail during provisioning with an 'AnthropicOrganizationCreationFailed' error.
+   */
+  @added(Versions.v2026_05_15_preview)
+  modelProviderData?: ModelProviderData;
+}
+
+/**
+ * Industry of the organization deploying a partner model. Values are lowercase.
+ */
+@added(Versions.v2026_05_15_preview)
+union ModelProviderIndustry {
+  string,
+
+  /**
+   * Technology sector organization.
+   */
+  Technology: "technology",
+
+  /**
+   * Financial services sector organization.
+   */
+  Finance: "finance",
+
+  /**
+   * Healthcare sector organization.
+   */
+  Healthcare: "healthcare",
+
+  /**
+   * Education sector organization.
+   */
+  Education: "education",
+
+  /**
+   * Retail sector organization.
+   */
+  Retail: "retail",
+
+  /**
+   * Manufacturing sector organization.
+   */
+  Manufacturing: "manufacturing",
+
+  /**
+   * Government sector organization.
+   */
+  Government: "government",
+
+  /**
+   * Media sector organization.
+   */
+  Media: "media",
+
+  /**
+   * An industry not covered by the other values.
+   */
+  Other: "other",
+}
+
+/**
+ * Attestation data about the organization deploying a partner model, forwarded to the model provider when the deployment is created.
+ */
+@added(Versions.v2026_05_15_preview)
+model ModelProviderData {
+  /**
+   * Legal entity name of the organization deploying the model.
+   */
+  organizationName: string;
+
+  /**
+   * Country of the organization deploying the model, as a two-letter ISO 3166-1 alpha-2 code.
+   */
+  @minLength(2)
+  @maxLength(2)
+  countryCode: string;
+
+  /**
+   * Industry of the organization deploying the model.
+   */
+  industry: ModelProviderIndustry;
 }
 
 /**
