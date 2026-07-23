@@ -731,7 +731,7 @@ model defenderForContainersAwsOffering extends cloudOffering {
   @added(Versions.v2026_08_01_preview)
   containerAntiMalwareEnabled?: boolean;
 
-    /**
+  /**
    * Is audit logs data collection enabled
    */
   enableAuditLogsAutoProvisioning?: boolean;
@@ -1375,7 +1375,7 @@ model defenderForContainersGcpOffering extends cloudOffering {
    */
   @added(Versions.v2026_08_01_preview)
   containerAntiMalwareEnabled?: boolean;
-  
+
   /**
    * Is Microsoft Defender for Cloud Kubernetes agent auto provisioning enabled
    */
