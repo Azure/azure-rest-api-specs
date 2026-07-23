@@ -37,6 +37,9 @@ union ClientEventType {
 
   /** Signals that the streamed input text content for an item is complete. */
   input_text_done: "input_text.done",
+
+  /** Updates authorization headers for an active BYOM connection. */
+  byom_credential_update: "byom_credential.update",
 }
 
 /**
@@ -53,6 +56,7 @@ union ClientEventType {
 union ServerEventType {
   string,
   warning: "warning",
+  byom_credential_updated: "byom_credential.updated",
   session_avatar_connecting: "session.avatar.connecting",
   response_animation_blendshapes_delta: "response.animation_blendshapes.delta",
   response_animation_blendshapes_done: "response.animation_blendshapes.done",

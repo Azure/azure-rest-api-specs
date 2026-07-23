@@ -163,6 +163,17 @@ model ClientEventInputTextDone extends ClientEvent {
   content_index?: int32 = 0;
 }
 
+/** Updates authorization headers for an active bring-your-own-model connection. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@usage(RequestUsage)
+model ClientEventBYOMCredentialUpdate extends ClientEvent {
+  /** The event type, must be `byom_credential.update`. */
+  type: ClientEventType.byom_credential_update;
+
+  /** Authorization header names and values to apply to subsequent BYOM requests. */
+  authorization_headers: Record<string>;
+}
+
 // Tool customization: establish custom, enriched discriminated type hierarchy
 /** The item to add to the conversation. */
 @usage(RequestUsage)
@@ -225,6 +236,17 @@ model ServerEventWarning extends ServerEvent {
 
   /** Details of the warning. */
   warning: ServerEventWarningDetails;
+}
+
+/** Confirms that BYOM authorization headers were updated. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@usage(ResponseUsage)
+model ServerEventBYOMCredentialUpdated extends ServerEvent {
+  /** The event type, must be `byom_credential.updated`. */
+  type: ServerEventType.byom_credential_updated;
+
+  /** Updated authorization header names with their values redacted. */
+  authorization_headers: Record<string>;
 }
 
 // ServerEventSessionCreated consumed from OpenAI GA (OpenAI.RealtimeServerEventSessionCreated; session payload retyped in custom.tsp)

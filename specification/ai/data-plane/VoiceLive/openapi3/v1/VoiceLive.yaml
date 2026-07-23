@@ -960,9 +960,29 @@ components:
           session.avatar.connect: '#/components/schemas/ClientEventSessionAvatarConnect'
           input_text.delta: '#/components/schemas/ClientEventInputTextDelta'
           input_text.done: '#/components/schemas/ClientEventInputTextDone'
+          byom_credential.update: '#/components/schemas/ClientEventBYOMCredentialUpdate'
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeClientEvent'
       description: A voicelive client event.
+    ClientEventBYOMCredentialUpdate:
+      type: object
+      required:
+        - type
+        - authorization_headers
+      properties:
+        type:
+          type: string
+          enum:
+            - byom_credential.update
+          description: The event type, must be `byom_credential.update`.
+        authorization_headers:
+          type: object
+          unevaluatedProperties:
+            type: string
+          description: Authorization header names and values to apply to subsequent BYOM requests.
+      allOf:
+        - $ref: '#/components/schemas/ClientEvent'
+      description: Updates authorization headers for an active bring-your-own-model connection.
     ClientEventInputTextDelta:
       type: object
       required:
@@ -1039,6 +1059,7 @@ components:
             - session.avatar.connect
             - input_text.delta
             - input_text.done
+            - byom_credential.update
       description: |-
         Azure-specific client event types. Client events that exist in OpenAI GA
         Realtime (`session.update`, `input_audio_buffer.*`, `conversation.item.*`,
@@ -2579,6 +2600,7 @@ components:
           session.avatar.connect: '#/components/schemas/ClientEvent'
           input_text.delta: '#/components/schemas/ClientEvent'
           input_text.done: '#/components/schemas/ClientEvent'
+          byom_credential.update: '#/components/schemas/ClientEvent'
       description: A realtime client event.
     OpenAI.RealtimeClientEventConversationItemCreate:
       type: object
@@ -3959,6 +3981,7 @@ components:
           response.mcp_call.failed: '#/components/schemas/OpenAI.RealtimeServerEventResponseMCPCallFailed'
           error: '#/components/schemas/OpenAI.RealtimeServerEventRealtimeServerEventError'
           warning: '#/components/schemas/ServerEvent'
+          byom_credential.updated: '#/components/schemas/ServerEvent'
           session.avatar.connecting: '#/components/schemas/ServerEvent'
           response.animation_blendshapes.delta: '#/components/schemas/ServerEvent'
           response.animation_blendshapes.done: '#/components/schemas/ServerEvent'
@@ -7627,6 +7650,7 @@ components:
         propertyName: type
         mapping:
           warning: '#/components/schemas/ServerEventWarning'
+          byom_credential.updated: '#/components/schemas/ServerEventBYOMCredentialUpdated'
           session.avatar.connecting: '#/components/schemas/ServerEventSessionAvatarConnecting'
           response.animation_blendshapes.delta: '#/components/schemas/ServerEventResponseAnimationBlendshapeDelta'
           response.animation_blendshapes.done: '#/components/schemas/ServerEventResponseAnimationBlendshapeDone'
@@ -7648,6 +7672,25 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeServerEvent'
       description: A voicelive server event.
+    ServerEventBYOMCredentialUpdated:
+      type: object
+      required:
+        - type
+        - authorization_headers
+      properties:
+        type:
+          type: string
+          enum:
+            - byom_credential.updated
+          description: The event type, must be `byom_credential.updated`.
+        authorization_headers:
+          type: object
+          unevaluatedProperties:
+            type: string
+          description: Updated authorization header names with their values redacted.
+      allOf:
+        - $ref: '#/components/schemas/ServerEvent'
+      description: Confirms that BYOM authorization headers were updated.
     ServerEventResponseAnimationBlendshapeDelta:
       type: object
       required:
@@ -8162,6 +8205,7 @@ components:
         - type: string
           enum:
             - warning
+            - byom_credential.updated
             - session.avatar.connecting
             - response.animation_blendshapes.delta
             - response.animation_blendshapes.done

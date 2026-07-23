@@ -1196,6 +1196,7 @@
             "input_audio.clear": "#/components/schemas/ClientEventInputAudioClear",
             "input_text.delta": "#/components/schemas/ClientEventInputTextDelta",
             "input_text.done": "#/components/schemas/ClientEventInputTextDone",
+            "byom_credential.update": "#/components/schemas/ClientEventBYOMCredentialUpdate",
             "rtc.call.sdp.create": "#/components/schemas/ClientEventRtcCallSdpCreate"
           }
         },
@@ -1205,6 +1206,35 @@
           }
         ],
         "description": "A voicelive client event."
+      },
+      "ClientEventBYOMCredentialUpdate": {
+        "type": "object",
+        "required": [
+          "type",
+          "authorization_headers"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "byom_credential.update"
+            ],
+            "description": "The event type, must be `byom_credential.update`."
+          },
+          "authorization_headers": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "type": "string"
+            },
+            "description": "Authorization header names and values to apply to subsequent BYOM requests."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ClientEvent"
+          }
+        ],
+        "description": "Updates authorization headers for an active bring-your-own-model connection."
       },
       "ClientEventInputAudioClear": {
         "type": "object",
@@ -1477,7 +1507,8 @@
               "session.avatar.connect",
               "rtc.call.sdp.create",
               "input_text.delta",
-              "input_text.done"
+              "input_text.done",
+              "byom_credential.update"
             ]
           }
         ],
@@ -3764,7 +3795,8 @@
             "session.avatar.connect": "#/components/schemas/ClientEvent",
             "rtc.call.sdp.create": "#/components/schemas/ClientEvent",
             "input_text.delta": "#/components/schemas/ClientEvent",
-            "input_text.done": "#/components/schemas/ClientEvent"
+            "input_text.done": "#/components/schemas/ClientEvent",
+            "byom_credential.update": "#/components/schemas/ClientEvent"
           }
         },
         "description": "A realtime client event."
@@ -5409,6 +5441,7 @@
             "response.mcp_call.failed": "#/components/schemas/OpenAI.RealtimeServerEventResponseMCPCallFailed",
             "error": "#/components/schemas/OpenAI.RealtimeServerEventRealtimeServerEventError",
             "warning": "#/components/schemas/ServerEvent",
+            "byom_credential.updated": "#/components/schemas/ServerEvent",
             "session.avatar.connecting": "#/components/schemas/ServerEvent",
             "response.animation_blendshapes.delta": "#/components/schemas/ServerEvent",
             "response.animation_blendshapes.done": "#/components/schemas/ServerEvent",
@@ -9668,6 +9701,7 @@
           "propertyName": "type",
           "mapping": {
             "warning": "#/components/schemas/ServerEventWarning",
+            "byom_credential.updated": "#/components/schemas/ServerEventBYOMCredentialUpdated",
             "session.avatar.connecting": "#/components/schemas/ServerEventSessionAvatarConnecting",
             "response.animation_blendshapes.delta": "#/components/schemas/ServerEventResponseAnimationBlendshapeDelta",
             "response.animation_blendshapes.done": "#/components/schemas/ServerEventResponseAnimationBlendshapeDone",
@@ -9696,6 +9730,35 @@
           }
         ],
         "description": "A voicelive server event."
+      },
+      "ServerEventBYOMCredentialUpdated": {
+        "type": "object",
+        "required": [
+          "type",
+          "authorization_headers"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "byom_credential.updated"
+            ],
+            "description": "The event type, must be `byom_credential.updated`."
+          },
+          "authorization_headers": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "type": "string"
+            },
+            "description": "Updated authorization header names with their values redacted."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ServerEvent"
+          }
+        ],
+        "description": "Confirms that BYOM authorization headers were updated."
       },
       "ServerEventResponseAnimationBlendshapeDelta": {
         "type": "object",
@@ -10499,6 +10562,7 @@
             "type": "string",
             "enum": [
               "warning",
+              "byom_credential.updated",
               "session.avatar.connecting",
               "response.animation_blendshapes.delta",
               "response.animation_blendshapes.done",
