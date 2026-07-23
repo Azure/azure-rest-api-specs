@@ -3355,15 +3355,18 @@
       "properties": {
         "overallCost": {
           "$ref": "#/definitions/CostComponentDetails",
-          "description": "Overall aggregated total, capex, and opex costs for on-premises workloads."
+          "description": "Overall aggregated total, capex, and opex costs for on-premises workloads.",
+          "readOnly": true
         },
         "costDetails": {
           "$ref": "#/definitions/CostDetailsV2",
-          "description": "Detailed breakdown of on-premises cost components."
+          "description": "Detailed breakdown of on-premises cost components.",
+          "readOnly": true
         },
         "sustainabilityDetails": {
           "$ref": "#/definitions/CarbonEmissionsDetails",
-          "description": "Carbon emission details associated with on-premises workloads."
+          "description": "Carbon emission details associated with on-premises workloads.",
+          "readOnly": true
         },
         "yearlyOnPremisesEsu": {
           "type": "array",
@@ -3371,6 +3374,7 @@
           "items": {
             "$ref": "#/definitions/YearlyEsuDetails"
           },
+          "readOnly": true,
           "x-ms-identifiers": [
             "year"
           ]
