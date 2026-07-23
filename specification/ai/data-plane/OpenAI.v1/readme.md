@@ -19,11 +19,13 @@ openapi-type: data-plane
 ## OpenAI.v1 v1 (generated)
 These settings apply only when `--tag=release_v1` is specified on the command line.
 
-``` yaml $(tag) == 'release_v1'
+``` 
+yaml $(tag) == 'release_v1'
 ```
 
 ## OpenAI.v1 preview (generated)
 These settings apply only when `--tag=release_preview` is specified on the command line.
 
-``` yaml $(tag) == 'release_preview'
+``` 
+yaml $(tag) == 'release_preview'
 ```
