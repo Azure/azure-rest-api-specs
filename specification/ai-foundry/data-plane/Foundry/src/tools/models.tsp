@@ -20,8 +20,9 @@ namespace Azure.AI.Projects {
     memory_search_preview: "memory_search_preview",
     work_iq_preview: "work_iq_preview",
     fabric_iq_preview: "fabric_iq_preview",
-    web_iq_preview: "web_iq_preview",
     toolbox_search_preview: "toolbox_search_preview",
+    @removed(Versions.v1)
+    web_iq_preview: "web_iq_preview",
   }
 
   // General availability tools:
@@ -865,6 +866,7 @@ namespace Azure.AI.Projects {
   /**
    * A WebIQ server-side tool.
    */
+  @removed(Versions.v1)
   @extension("x-ms-foundry-meta", PreviewTool)
   model WebIQPreviewTool extends OpenAI.Tool {
     /**
