@@ -44,7 +44,7 @@
     }
   ],
   "paths": {
-    "/{scopeId}/providers/Microsoft.Security/datascanners": {
+    "/{scopeId}/providers/Microsoft.Security/dataScanners": {
       "get": {
         "operationId": "DataScanners_List",
         "tags": [
@@ -79,7 +79,10 @@
           }
         },
         "x-ms-examples": {
-          "Lists all data scanner resources for the specified scope.": {
+          "Lists all data scanner resources at resource group scope.": {
+            "$ref": "./examples/DataScanners/ListDataScannersResourceGroupScope.json"
+          },
+          "Lists all data scanner resources at subscription scope.": {
             "$ref": "./examples/DataScanners/ListDataScanners.json"
           }
         },
@@ -88,7 +91,7 @@
         }
       }
     },
-    "/{scopeId}/providers/Microsoft.Security/datascanners/{scannerName}": {
+    "/{scopeId}/providers/Microsoft.Security/dataScanners/{scannerName}": {
       "get": {
         "operationId": "DataScanners_Get",
         "tags": [
@@ -131,7 +134,10 @@
           }
         },
         "x-ms-examples": {
-          "Gets a data scanner resource for the specified scope.": {
+          "Gets a data scanner resource at resource group scope.": {
+            "$ref": "./examples/DataScanners/GetDataScannerResourceGroupScope.json"
+          },
+          "Gets a data scanner resource at subscription scope.": {
             "$ref": "./examples/DataScanners/GetDataScanner.json"
           }
         }
@@ -193,7 +199,10 @@
           }
         },
         "x-ms-examples": {
-          "Creates or updates a data scanner resource for the specified scope.": {
+          "Creates or updates a data scanner resource at resource group scope.": {
+            "$ref": "./examples/DataScanners/CreateOrUpdateDataScannerResourceGroupScope.json"
+          },
+          "Creates or updates a data scanner resource at subscription scope.": {
             "$ref": "./examples/DataScanners/CreateOrUpdateDataScanner.json"
           }
         }
@@ -240,7 +249,10 @@
           }
         },
         "x-ms-examples": {
-          "Deletes a data scanner resource for the specified scope.": {
+          "Deletes a data scanner resource at resource group scope.": {
+            "$ref": "./examples/DataScanners/DeleteDataScannerResourceGroupScope.json"
+          },
+          "Deletes a data scanner resource at subscription scope.": {
             "$ref": "./examples/DataScanners/DeleteDataScanner.json"
           }
         }
