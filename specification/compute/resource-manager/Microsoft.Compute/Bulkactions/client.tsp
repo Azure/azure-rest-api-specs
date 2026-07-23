@@ -54,6 +54,18 @@ namespace Microsoft.Compute;
   "!autorest"
 );
 
+// Disambiguate LaunchBulkInstancesOperation's custom InnerError from the standard
+// Azure.Core.Foundations.InnerError that the folded ScheduledActions error models pull in
+// (via Azure.Core.Foundations.Error). Flattening-language SDKs (C#/Java/Python) require unique
+// client names; the standard type keeps "InnerError", BA's custom one is renamed.
+@@clientName(Microsoft.Compute.InnerError, "BulkInstancesInnerError", "csharp");
+@@clientName(Microsoft.Compute.InnerError, "BulkInstancesInnerError", "java");
+@@clientName(
+  Microsoft.Compute.InnerError,
+  "BulkInstancesInnerError",
+  "python,go,javascript"
+);
+
 @@clientName(CancelOperationsResponse, "CancelBulkOperationsResult", "csharp");
 @@clientName(DeadlineType, "BulkActionDeadlineKind", "csharp");
 @@clientName(
@@ -225,45 +237,6 @@ namespace Microsoft.Compute;
   "csharp"
 );
 
-// C# only: expose subscriptionId as Guid? (UUID) while keeping the spec/OpenAPI type as string to avoid ARM GuidUsage lint.
-@@alternateType(
-  ResourceOperationDetails.subscriptionId,
-  Azure.Core.uuid,
-  "csharp"
-);
-
-@@clientName(
-  DeallocateResourceOperationResponse.type,
-  "ResourceTypeName",
-  "csharp"
-);
-
-@@clientName(
-  HibernateResourceOperationResponse.type,
-  "ResourceTypeName",
-  "csharp"
-);
-
-@@clientName(
-  DeleteResourceOperationResponse.type,
-  "ResourceTypeName",
-  "csharp"
-);
-
-@@clientName(
-  CreateResourceOperationResponse.type,
-  "ResourceTypeName",
-  "csharp"
-);
-
-@@clientName(
-  ReimageResourceOperationResponse.type,
-  "ResourceTypeName",
-  "csharp"
-);
-
-@@clientName(StartResourceOperationResponse.type, "ResourceTypeName", "csharp");
-
 // =====================================================================
 // Fix: Go SDK Validation incorrectly detects networkApiVersion as an API version
 // parameter because its name contains "apiversion". This causes
@@ -279,6 +252,14 @@ namespace Microsoft.Compute;
 #suppress "@azure-tools/typespec-client-generator-core/client-option" "Preserve type for public API surface"
 #suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Preserve type for public API surface"
 @@clientOption(ExecutionParameters, "disable-safe-flatten", true, "csharp");
+
+// ResourcesWithContext (added in 2026-07-06-preview) is a single-property model whose inner
+// property would safe-flatten into a "Resources" member, colliding with the existing
+// UserRequestResources "Resources" on the Execute*Content models. Disable safe-flatten to keep
+// it as a distinct type and avoid the duplicate-member (CS0102) build break in the C# SDK.
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Preserve type for public API surface"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Preserve type for public API surface"
+@@clientOption(ResourcesWithContext, "disable-safe-flatten", true, "csharp");
 
 @@clientName(CancelOperationsRequest, "CancelBulkOperationsContent", "csharp");
 @@clientName(
