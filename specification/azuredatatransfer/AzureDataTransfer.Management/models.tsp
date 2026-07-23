@@ -1,12 +1,10 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@azure-tools/typespec-client-generator-core";
 import "./models.flowprofile.tsp";
 
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
-using Azure.ClientGenerator.Core;
 using Versioning;
 
 namespace Microsoft.AzureDataTransfer;
@@ -1492,7 +1490,6 @@ model Action {
   justification?: string;
 }
 
-@@clientName(ActionType, "DateTransferActionType", "!autorest");
 /**
  * The type of action to be executed.
  */
