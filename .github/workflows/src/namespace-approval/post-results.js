@@ -32,7 +32,7 @@ const NamespaceResultsSchema = z.object({
  * @param {string} owner
  * @param {string} repo
  * @param {number} runId
- * @returns {Promise<z.infer<typeof NamespaceResultsSchema>>}
+ * @returns {Promise<z.infer<typeof NamespaceResultsSchema> | null>}
  */
 async function downloadNamespaceResults(github, core, owner, repo, runId) {
   const artifacts = await github.paginate(github.rest.actions.listWorkflowRunArtifacts, {
@@ -50,7 +50,10 @@ async function downloadNamespaceResults(github, core, owner, repo, runId) {
   })[0];
 
   if (!artifact) {
-    throw new Error(`No namespace-results artifact found for run ${runId}`);
+    core.info(
+      `No namespace-results artifact found for run ${runId} (PR likely has no tspconfig changes)`,
+    );
+    return null;
   }
 
   const download = await github.rest.actions.downloadArtifact({
@@ -95,7 +98,7 @@ function getApprovers(approversConfig, isMgmt, language) {
   const approvers = approversConfig["data-plane"]?.[language];
   if (!approvers) {
     throw new Error(
-      `No approvers configured for language "${language}" in .github/namespace-approvers.yml`,
+      `No approvers configured for language "${language}" in .github/protected-labels.yml`,
     );
   }
   return approvers;
@@ -205,7 +208,7 @@ function buildCommentBody({
   if (resetLanguages && resetLanguages.length > 0) {
     body += `\n> ⚠️ **Namespace changed** — approvals for ${resetLanguages.join(", ")} have been reset.\n`;
   }
-  body += `\n_Approver list: [.github/namespace-approvers.yml](../blob/${baseRef}/.github/namespace-approvers.yml)_\n`;
+  body += `\n_Approver list: [.github/protected-labels.yml](../blob/${baseRef}/.github/protected-labels.yml)_\n`;
   body += `_Process: [.github/workflows/src/namespace-approval/NAMESPACE-REVIEW-PROCESS.md](../blob/${baseRef}/.github/workflows/src/namespace-approval/NAMESPACE-REVIEW-PROCESS.md)_\n`;
   body += `_Namespaces extracted from tspconfig.yaml emitter options_`;
   return body;
@@ -218,6 +221,11 @@ export default async function postResults({ github, context, core }) {
   const { owner, repo, issue_number, run_id } = await extractInputs(github, context, core);
   const approversConfig = await loadApproversConfig();
   const results = await downloadNamespaceResults(github, core, owner, repo, run_id);
+
+  if (!results) {
+    core.info("No namespace results to process (PR has no tspconfig changes), exiting gracefully");
+    return;
+  }
 
   const { data: pr } = await github.rest.pulls.get({
     owner,
