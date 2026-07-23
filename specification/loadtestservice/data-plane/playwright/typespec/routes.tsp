@@ -82,5 +82,5 @@ interface BrowserSessions {
 
   @added(Versions.v2026_06_01_preview)
   @doc("Creates or updates a browser session for the specified session and workspace ID. The sourceId and sourceType are supplied through request headers. Requires Bearer JWT access token provided by Entra ID.")
-  createOrUpdate is Operations.ResourceCreateOrUpdate<BrowserSessionCreateOrUpdate>;
+  createOrUpdate is Operations.ResourceCreateOrUpdate<BrowserSession>;
 }
