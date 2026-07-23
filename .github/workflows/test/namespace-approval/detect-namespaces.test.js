@@ -237,7 +237,6 @@ describe("detect-namespaces (dual tsp compile)", () => {
     // Both base-ref tspconfig and metadata output exist
     existsSyncMock.mockReturnValue(true);
 
-    let callCount = 0;
     execFileMock.mockImplementation((_cmd, _args, cbOrOpts, maybeCb) => {
       const cb = typeof cbOrOpts === "function" ? cbOrOpts : maybeCb;
       if (cb) cb(null, "", "");
@@ -372,7 +371,6 @@ describe("detect-namespaces (dual tsp compile)", () => {
     const file = "specification/compute/Compute.Management/tspconfig.yaml";
     mockFileStatuses([file]);
 
-    let readCount = 0;
     existsSyncMock.mockImplementation((/** @type {string} */ path) => {
       if (path.includes("base-ref") && path.includes("typespec-metadata.json")) {
         return false; // base compile output missing

@@ -175,45 +175,55 @@ This produces `typespec-metadata.json` with the following structure:
     "type": "management"
   },
   "languages": {
-    "java": [{
-      "emitterName": "@azure-tools/typespec-java",
-      "packageName": "azure-resourcemanager-containerservice",
-      "namespace": "com.azure.resourcemanager.containerservice"
-    }],
-    "typescript": [{
-      "emitterName": "@azure-tools/typespec-ts",
-      "packageName": "@azure/arm-containerservice",
-      "namespace": "Azure.ContainerService"
-    }],
-    "python": [{
-      "emitterName": "@azure-tools/typespec-python",
-      "packageName": "azure-mgmt-containerservice",
-      "namespace": "azure.mgmt.containerservice"
-    }],
-    "csharp": [{
-      "emitterName": "@azure-typespec/http-client-csharp-mgmt",
-      "packageName": "Azure.ResourceManager.ContainerService",
-      "namespace": "Azure.ResourceManager.ContainerService"
-    }],
-    "go": [{
-      "emitterName": "@azure-tools/typespec-go",
-      "packageName": "sdk/resourcemanager/containerservice/armcontainerservice",
-      "namespace": "armcontainerservice"
-    }]
+    "java": [
+      {
+        "emitterName": "@azure-tools/typespec-java",
+        "packageName": "azure-resourcemanager-containerservice",
+        "namespace": "com.azure.resourcemanager.containerservice"
+      }
+    ],
+    "typescript": [
+      {
+        "emitterName": "@azure-tools/typespec-ts",
+        "packageName": "@azure/arm-containerservice",
+        "namespace": "Azure.ContainerService"
+      }
+    ],
+    "python": [
+      {
+        "emitterName": "@azure-tools/typespec-python",
+        "packageName": "azure-mgmt-containerservice",
+        "namespace": "azure.mgmt.containerservice"
+      }
+    ],
+    "csharp": [
+      {
+        "emitterName": "@azure-typespec/http-client-csharp-mgmt",
+        "packageName": "Azure.ResourceManager.ContainerService",
+        "namespace": "Azure.ResourceManager.ContainerService"
+      }
+    ],
+    "go": [
+      {
+        "emitterName": "@azure-tools/typespec-go",
+        "packageName": "sdk/resourcemanager/containerservice/armcontainerservice",
+        "namespace": "armcontainerservice"
+      }
+    ]
   }
 }
 ```
 
 ### What is extracted per language
 
-| Language | `packageName` (what architects approve) | `namespace` | Source in tspconfig |
-|----------|----------------------------------------|-------------|---------------------|
-| .NET | NuGet package ID (e.g., `Azure.ResourceManager.Compute`) | Same as package name | `namespace` option |
-| Java | Maven artifact ID (e.g., `azure-resourcemanager-compute`) | Java namespace (e.g., `com.azure.resourcemanager.compute`) | `package-dir` or output dir |
-| Python | PyPI package name (e.g., `azure-mgmt-compute`) | Python module path (e.g., `azure.mgmt.compute`) | Last segment of `emitter-output-dir` |
-| TypeScript | npm package name (e.g., `@azure/arm-compute`) | TypeSpec namespace | `package-details.name` |
-| Go | Module path (e.g., `sdk/resourcemanager/compute/armcompute`) | Go package name | Combination of `service-dir` + `emitter-output-dir` |
-| Rust | Crate name (e.g., `azure_resourcemanager_compute`) | Rust module path | `emitter-output-dir` |
+| Language   | `packageName` (what architects approve)                      | `namespace`                                                | Source in tspconfig                                 |
+| ---------- | ------------------------------------------------------------ | ---------------------------------------------------------- | --------------------------------------------------- |
+| .NET       | NuGet package ID (e.g., `Azure.ResourceManager.Compute`)     | Same as package name                                       | `namespace` option                                  |
+| Java       | Maven artifact ID (e.g., `azure-resourcemanager-compute`)    | Java namespace (e.g., `com.azure.resourcemanager.compute`) | `package-dir` or output dir                         |
+| Python     | PyPI package name (e.g., `azure-mgmt-compute`)               | Python module path (e.g., `azure.mgmt.compute`)            | Last segment of `emitter-output-dir`                |
+| TypeScript | npm package name (e.g., `@azure/arm-compute`)                | TypeSpec namespace                                         | `package-details.name`                              |
+| Go         | Module path (e.g., `sdk/resourcemanager/compute/armcompute`) | Go package name                                            | Combination of `service-dir` + `emitter-output-dir` |
+| Rust       | Crate name (e.g., `azure_resourcemanager_compute`)           | Rust module path                                           | `emitter-output-dir`                                |
 
 ### Dual compile for change detection
 
@@ -233,16 +243,16 @@ from the PR head are treated as new and require approval.
 The emitter uses language keys like `csharp`, `http-client-csharp`, `http-client-csharp-mgmt`
 which are mapped to the workflow's label keys:
 
-| Emitter key | Label key |
-|-------------|-----------|
-| `csharp` | `dotnet` |
-| `http-client-csharp` | `dotnet` |
-| `http-client-csharp-mgmt` | `dotnet` |
-| `java` | `java` |
-| `python` | `python` |
-| `typescript` | `typescript` |
-| `go` | `go` |
-| `rust` | `rust` |
+| Emitter key               | Label key    |
+| ------------------------- | ------------ |
+| `csharp`                  | `dotnet`     |
+| `http-client-csharp`      | `dotnet`     |
+| `http-client-csharp-mgmt` | `dotnet`     |
+| `java`                    | `java`       |
+| `python`                  | `python`     |
+| `typescript`              | `typescript` |
+| `go`                      | `go`         |
+| `rust`                    | `rust`       |
 
 Multiple .NET emitters (e.g., mgmt + provisioning library) are valid. When multiple emitters
 map to the same label key, the first entry is used for the approval check.
