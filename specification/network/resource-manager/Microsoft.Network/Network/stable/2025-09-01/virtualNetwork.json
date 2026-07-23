@@ -8334,6 +8334,12 @@
         "x-ms-examples": {
           "Get NetworkVirtualAppliance": {
             "$ref": "./examples/NetworkVirtualApplianceGet.json"
+          },
+          "Get NetworkVirtualAppliance in VNet with Dual Stack": {
+            "$ref": "./examples/NetworkVirtualApplianceVnetDualStackGet.json"
+          },
+          "Get NetworkVirtualAppliance in Virtual Hub with Dual Stack": {
+            "$ref": "./examples/NetworkVirtualApplianceVhubDualStackGet.json"
           }
         }
       },
@@ -8407,6 +8413,12 @@
           }
         },
         "x-ms-examples": {
+          "Create NVA in VNet for IPv4": {
+            "$ref": "./examples/NetworkVirtualApplianceVnetIPv4Put.json"
+          },
+          "Create NVA in VNet for IPv4 and IPv6": {
+            "$ref": "./examples/NetworkVirtualApplianceVnetDualStackPut.json"
+          },
           "Create NVA in VNet with PrivateNic & PublicNic": {
             "$ref": "./examples/NetworkVirtualApplianceVnetBasicPut.json"
           },
@@ -8421,6 +8433,12 @@
           },
           "Create NVA in VNet with PrivateNic, PublicNic & AdditionalPublicNic": {
             "$ref": "./examples/NetworkVirtualApplianceVnetAdditionalPublicPut.json"
+          },
+          "Create NVA in Virtual Hub for IPv4": {
+            "$ref": "./examples/NetworkVirtualApplianceVhubIPv4Put.json"
+          },
+          "Create NVA in Virtual Hub for IPv4 and IPv6": {
+            "$ref": "./examples/NetworkVirtualApplianceVhubDualStackPut.json"
           },
           "Create NetworkVirtualAppliance": {
             "$ref": "./examples/NetworkVirtualAppliancePut.json"
@@ -12484,6 +12502,80 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/moveIpConfigurations": {
+      "post": {
+        "operationId": "VirtualNetworks_MoveIpConfigurations",
+        "tags": [
+          "VirtualNetworks"
+        ],
+        "description": "Move IP configurations from one virtual network to another.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualNetworkName",
+            "in": "path",
+            "description": "The name of the virtual network.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Parameters supplied to move IP configurations from one virtual network to another.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MoveIpConfigurationsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully."
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Move IP Configurations": {
+            "$ref": "./examples/VirtualNetworkMoveIpConfigurations.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets": {
@@ -18778,6 +18870,62 @@
         }
       }
     },
+    "MoveIpConfigurationItem": {
+      "type": "object",
+      "description": "An item representing a source and target IP configuration for a move operation.",
+      "properties": {
+        "sourceIpConfiguration": {
+          "$ref": "#/definitions/MoveIpConfigurationResourceReference",
+          "description": "The source IP configuration to move from."
+        },
+        "targetIpConfiguration": {
+          "$ref": "#/definitions/MoveIpConfigurationResourceReference",
+          "description": "The target IP configuration to move to."
+        }
+      },
+      "required": [
+        "sourceIpConfiguration",
+        "targetIpConfiguration"
+      ]
+    },
+    "MoveIpConfigurationResourceReference": {
+      "type": "object",
+      "description": "Reference to an IP configuration resource by ARM resource ID.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The ARM resource ID of the IP configuration.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/networkInterfaces/ipConfigurations"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "MoveIpConfigurationsRequest": {
+      "type": "object",
+      "description": "Request body for the MoveIpConfigurations operation.",
+      "properties": {
+        "moveIpConfigurationItems": {
+          "type": "array",
+          "description": "A list of IP configuration move items.",
+          "items": {
+            "$ref": "#/definitions/MoveIpConfigurationItem"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "moveIpConfigurationItems"
+      ]
+    },
     "NatGatewayListResult": {
       "type": "object",
       "description": "The response of a NatGateway list operation.",
@@ -19201,6 +19349,11 @@
           "description": "Address Prefix.",
           "readOnly": true
         },
+        "addressPrefixV6": {
+          "type": "string",
+          "description": "Address Prefix for Dual-Stack NVAs.",
+          "readOnly": true
+        },
         "bootStrapConfigurationBlobs": {
           "type": "array",
           "description": "BootStrapConfigurationBlobs storage URLs.",
@@ -19312,9 +19465,23 @@
             "$ref": "#/definitions/NvaInterfaceConfigurationsProperties"
           }
         },
+        "addressFamily": {
+          "type": "array",
+          "description": "The address families to deploy the NVA in. [\"IPv4\", \"IPv6\"] deploys a dual-stack NVA (the vHub/VNet must also be dual-stack). [\"IPv4\"], an empty array, or omitting the field deploys an IPv4-only NVA. The value \"IPv6\" may only appear in combination with \"IPv4\"; standalone [\"IPv6\"] is reserved for future use and is rejected by the service today.",
+          "maxItems": 2,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "./common.json#/definitions/Common.IPVersion"
+          }
+        },
         "privateIpAddress": {
           "type": "string",
           "description": "A Internal Load Balancer's HA port frontend IP address. Can be used to set routes & UDR to load balance traffic between NVA instances",
+          "readOnly": true
+        },
+        "privateIpAddressV6": {
+          "type": "string",
+          "description": "An Internal Load Balancer's HA port frontend IPv6 address. Can be used to set routes & UDR to load balance traffic between NVA instances. This field appears in dual-stack NVAs.",
           "readOnly": true
         },
         "migrationStatus": {
@@ -21115,6 +21282,16 @@
         "privateIpAddress": {
           "type": "string",
           "description": "Private IP address.",
+          "readOnly": true
+        },
+        "publicIpAddressV6": {
+          "type": "string",
+          "description": "Public IPv6 address. Populated for dual-stack NVAs, including on additional-NIC configurations when the NVA is dual-stack.",
+          "readOnly": true
+        },
+        "privateIpAddressV6": {
+          "type": "string",
+          "description": "Private IPv6 address. Populated for dual-stack NVAs, including on additional-NIC configurations when the NVA is dual-stack.",
           "readOnly": true
         },
         "instanceName": {

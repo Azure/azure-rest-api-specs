@@ -2336,6 +2336,24 @@
         ]
       }
     },
+    "Common.LoadBalancerMode": {
+      "type": "string",
+      "description": "The load balancer mode. Set to `Advanced` to enable additional capabilities on a Standard SKU load balancer. Advanced mode must be specified at creation and cannot be changed afterward.",
+      "enum": [
+        "Advanced"
+      ],
+      "x-ms-enum": {
+        "name": "LoadBalancerMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Advanced",
+            "value": "Advanced",
+            "description": "Advanced mode, which enables additional capabilities on a Standard SKU load balancer."
+          }
+        ]
+      }
+    },
     "Common.LoadBalancerOutboundRuleProtocol": {
       "type": "string",
       "description": "The protocol for the outbound rule in load balancer.",
@@ -3577,6 +3595,84 @@
         ]
       }
     },
+    "ConnectionAnalyzerEndpointType": {
+      "type": "string",
+      "description": "The endpoint type for a connection analyzer source or destination.",
+      "enum": [
+        "VM",
+        "VMSS",
+        "ExternalAddress",
+        "BastionHost",
+        "ApplicationGateway"
+      ],
+      "x-ms-enum": {
+        "name": "ConnectionAnalyzerEndpointType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "VM",
+            "value": "VM",
+            "description": "An Azure virtual machine endpoint, identified by its ARM resource ID."
+          },
+          {
+            "name": "VMSS",
+            "value": "VMSS",
+            "description": "An Azure virtual machine scale set (or scale set instance) endpoint, identified by its ARM resource ID."
+          },
+          {
+            "name": "ExternalAddress",
+            "value": "ExternalAddress",
+            "description": "An external endpoint reachable from outside Azure, identified by an IP address or FQDN."
+          },
+          {
+            "name": "BastionHost",
+            "value": "BastionHost",
+            "description": "An Azure Bastion host endpoint, identified by its ARM resource ID."
+          },
+          {
+            "name": "ApplicationGateway",
+            "value": "ApplicationGateway",
+            "description": "An Application Gateway endpoint, identified by its ARM resource ID."
+          }
+        ]
+      }
+    },
+    "ConnectionAnalyzerStatus": {
+      "type": "string",
+      "description": "Current execution status of the connection analyzer.",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Succeeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "ConnectionAnalyzerStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "The connection analyzer has been created but execution has not yet begun."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "The connection analyzer is currently running its diagnostic operations."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The connection analyzer completed all diagnostic operations successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The connection analyzer failed to complete its diagnostic operations."
+          }
+        ]
+      }
+    },
     "ConnectionAuthenticationType": {
       "type": "string",
       "description": "Gateway connection authentication type.",
@@ -4017,6 +4113,48 @@
             "name": "DHGroup24",
             "value": "DHGroup24",
             "description": "DHGroup24"
+          }
+        ]
+      }
+    },
+    "DiagnosticOperation": {
+      "type": "string",
+      "description": "The type of diagnostic operation to run on a connection analyzer.",
+      "enum": [
+        "NextHop",
+        "NSG",
+        "PortScan",
+        "ConnectivityCheck",
+        "ExpressRouteDiagnostic"
+      ],
+      "x-ms-enum": {
+        "name": "DiagnosticOperation",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NextHop",
+            "value": "NextHop",
+            "description": "Determines the next hop for traffic from the source to the destination."
+          },
+          {
+            "name": "NSG",
+            "value": "NSG",
+            "description": "Evaluates the network security group rules that apply to the traffic."
+          },
+          {
+            "name": "PortScan",
+            "value": "PortScan",
+            "description": "Scans the destination ports to determine their reachability."
+          },
+          {
+            "name": "ConnectivityCheck",
+            "value": "ConnectivityCheck",
+            "description": "Performs an end-to-end connectivity check between the source and destination."
+          },
+          {
+            "name": "ExpressRouteDiagnostic",
+            "value": "ExpressRouteDiagnostic",
+            "description": "Runs Express Route specific diagnostics for the connection."
           }
         ]
       }
@@ -4495,7 +4633,8 @@
         "Standard",
         "Premium",
         "Basic",
-        "Local"
+        "Local",
+        "MultiCloud"
       ],
       "x-ms-enum": {
         "name": "ExpressRouteCircuitSkuTier",
@@ -4520,6 +4659,11 @@
             "name": "Local",
             "value": "Local",
             "description": "Local"
+          },
+          {
+            "name": "MultiCloud",
+            "value": "MultiCloud",
+            "description": "MultiCloud tier for cross-cloud connectivity."
           }
         ]
       }
@@ -4568,6 +4712,78 @@
             "name": "Secondary",
             "value": "Secondary",
             "description": "Secondary link."
+          }
+        ]
+      }
+    },
+    "ExpressRouteLagBillingType": {
+      "type": "string",
+      "description": "The billing type of the ExpressRouteLag resource.",
+      "enum": [
+        "MeteredData",
+        "UnlimitedData"
+      ],
+      "x-ms-enum": {
+        "name": "ExpressRouteLagBillingType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "MeteredData",
+            "value": "MeteredData",
+            "description": "Metered data transfer billing."
+          },
+          {
+            "name": "UnlimitedData",
+            "value": "UnlimitedData",
+            "description": "Unlimited data transfer billing."
+          }
+        ]
+      }
+    },
+    "ExpressRouteLagEncapsulation": {
+      "type": "string",
+      "description": "Encapsulation method on LAG.",
+      "enum": [
+        "Dot1Q",
+        "QinQ"
+      ],
+      "x-ms-enum": {
+        "name": "ExpressRouteLagEncapsulation",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Dot1Q",
+            "value": "Dot1Q",
+            "description": "IEEE 802.1Q encapsulation."
+          },
+          {
+            "name": "QinQ",
+            "value": "QinQ",
+            "description": "IEEE 802.1ad encapsulation."
+          }
+        ]
+      }
+    },
+    "ExpressRouteLagLacpTimer": {
+      "type": "string",
+      "description": "LACP timer configuration.",
+      "enum": [
+        "Fast",
+        "Slow"
+      ],
+      "x-ms-enum": {
+        "name": "ExpressRouteLagLacpTimer",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Fast",
+            "value": "Fast",
+            "description": "Fast LACP timer (30 seconds)."
+          },
+          {
+            "name": "Slow",
+            "value": "Slow",
+            "description": "Slow LACP timer (90 seconds)."
           }
         ]
       }
@@ -7346,6 +7562,36 @@
       },
       "x-ms-azure-resource": true
     },
+    "ResiliencyLevel": {
+      "type": "string",
+      "description": "The resiliency level of the ExpressRoute circuit.",
+      "enum": [
+        "Standard",
+        "High",
+        "Maximum"
+      ],
+      "x-ms-enum": {
+        "name": "ResiliencyLevel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "Standard resiliency level."
+          },
+          {
+            "name": "High",
+            "value": "High",
+            "description": "High resiliency level."
+          },
+          {
+            "name": "Maximum",
+            "value": "Maximum",
+            "description": "Maximum resiliency level."
+          }
+        ]
+      }
+    },
     "ResiliencyModel": {
       "type": "string",
       "description": "Property to indicate if the Express Route Gateway has resiliency model of MultiHomed or SingleHomed",
@@ -7977,7 +8223,8 @@
         "NotProvisioned",
         "Provisioning",
         "Provisioned",
-        "Deprovisioning"
+        "Deprovisioning",
+        "DeProvisioned"
       ],
       "x-ms-enum": {
         "name": "ServiceProviderProvisioningState",
@@ -8002,6 +8249,11 @@
             "name": "Deprovisioning",
             "value": "Deprovisioning",
             "description": "Deprovisioning"
+          },
+          {
+            "name": "DeProvisioned",
+            "value": "DeProvisioned",
+            "description": "DeProvisioned State"
           }
         ]
       }
