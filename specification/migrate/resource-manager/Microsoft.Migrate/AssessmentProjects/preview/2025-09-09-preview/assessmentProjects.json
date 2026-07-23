@@ -3485,19 +3485,15 @@
       "properties": {
         "sasUriDetails": {
           "$ref": "#/definitions/SasUriDetails",
-          "description": "The operation result sas Uri.",
+          "description": "The operation result sas Uri. Populated only when the operation reaches a terminal Succeeded status.",
           "readOnly": true
         },
         "armUri": {
           "type": "string",
-          "description": "An ARM URI that can be used to access the operation result.",
+          "description": "An Azure Resource Manager URI that can be used to access the operation result. Populated only when the operation reaches a terminal Succeeded status.",
           "readOnly": true
         }
-      },
-      "required": [
-        "sasUriDetails",
-        "armUri"
-      ]
+      }
     },
     "OperationResults": {
       "type": "object",
