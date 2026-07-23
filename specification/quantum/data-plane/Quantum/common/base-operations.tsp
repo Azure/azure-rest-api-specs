@@ -105,6 +105,13 @@ namespace Quantum.Workspace.Services {
     Response = Resource
   >;
 
+  /** Operation to act on a resource without returning content. */
+  op NoContentActionOperation<Resource extends TypeSpec.Reflection.Model> is AzureCoreOperations.ResourceAction<
+    Resource = Resource,
+    Parameters = {},
+    Response = TypeSpec.Http.NoContentResponse
+  >;
+
   /** Operation to list a resource. */
   alias ListOperation<Resource extends TypeSpec.Reflection.Model> = AzureCoreOperations.ResourceList<Resource>;
 

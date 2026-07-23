@@ -7,6 +7,7 @@ import "./operations.tsp";
 import "../common/models.tsp";
 import "../common/models-jobs.tsp";
 
+using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Quantum.Workspace;
@@ -41,6 +42,26 @@ namespace Quantum.Workspace.Services {
     /** Request the cancellation of an existing job. */
     @added(QuantumWorkspaceAPIVersion.v2025_12_01_preview)
     cancel is ActionOperation<JobDetails>;
+
+    /** Resume a failed or cancelled job that has remaining shots. */
+    @added(QuantumWorkspaceAPIVersion.v2026_08_01_preview)
+    resume is NoContentActionOperation<JobDetails>;
+
+    /** Get the position of a job within its device queue. */
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No standard Azure.Core operation models a GET subresource of an existing resource."
+    @added(QuantumWorkspaceAPIVersion.v2026_08_01_preview)
+    @get
+    getQueuePosition is Azure.Core.Foundations.ResourceOperation<
+      JobDetails,
+      {
+        /** The queue-position path segment. */
+        @path
+        queuePosition: "queuePosition";
+      },
+      Azure.Core.Foundations.ResourceOkResponse<JobQueuePositionResponse>,
+      DefaultServiceTraits,
+      Azure.Core.Foundations.ErrorResponse
+    >;
 
     /** Get job by its id. */
     get is GetOperation<JobDetails>;

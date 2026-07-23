@@ -25,4 +25,8 @@ enum QuantumWorkspaceAPIVersion {
 
   /** 2026-01-15-preview */
   v2026_01_15_preview: "2026-01-15-preview",
+
+  /** 2026-08-01-preview */
+  @Azure.Core.previewVersion
+  v2026_08_01_preview: "2026-08-01-preview",
 }
