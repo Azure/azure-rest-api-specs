@@ -353,6 +353,15 @@ model ContainerConfiguration {
   @doc("The container image for the hosted agent.")
   @example("my-registry.azurecr.io/my-hosted-agent:latest")
   image: string;
+
+  @doc("""
+    The id (or name) of a Foundry project connection that authorizes pulling `image` from a private
+    container registry. Used only for registry authentication and never affects the image name —
+    `image` remains a fully-qualified `host/repo:tag` literal. Omit for public images or when the
+    registry is accessible via the project's managed identity (for example, Azure Container Registry).
+    """)
+  @example("jfrog-foundryagents")
+  registry_connection_id?: string;
 }
 
 @doc("Code-based deployment configuration for a hosted agent.")
