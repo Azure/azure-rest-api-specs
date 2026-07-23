@@ -1,0 +1,79 @@
+{
+  "operationId": "ArcDeployments_Create",
+  "title": "CreateArcDeploymentWithTemplate",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resourceGroupName",
+    "accountName": "accountName",
+    "deploymentName": "qwen-template-arc",
+    "api-version": "2026-07-15-preview",
+    "resource": {
+      "properties": {
+        "model": {
+          "format": "OpenAI",
+          "name": "qwen3"
+        },
+        "extensionId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.Kubernetes/connectedClusters/edge-cluster/providers/Microsoft.KubernetesConfiguration/extensions/inference-operator",
+        "runtime": "vllm",
+        "compute": "gpu",
+        "replicas": 2,
+        "resources": {
+          "limits": {
+            "gpu": 5
+          }
+        },
+        "nodeSelector": {
+          "agentpool": "a100"
+        },
+        "deploymentTemplate": "azureml://registries/azureml-openai-oss/deploymenttemplates/vllm-qwen--qwen3-5-0-8b/versions/1"
+      },
+      "sku": {
+        "name": "Arc"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "azure-asyncoperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CognitiveServices/locations/eastus/operationResults/00000000-0000-0000-0000-000000000011?api-version=2026-07-15-preview",
+        "location": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CognitiveServices/locations/eastus/operationResults/00000000-0000-0000-0000-000000000011?operationResultResponseType=Location&api-version=2026-07-15-preview"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/arcDeployments/qwen-template-arc",
+        "name": "qwen-template-arc",
+        "type": "Microsoft.CognitiveServices/accounts/arcDeployments",
+        "properties": {
+          "model": {
+            "format": "OpenAI",
+            "name": "qwen3"
+          },
+          "extensionId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.Kubernetes/connectedClusters/edge-cluster/providers/Microsoft.KubernetesConfiguration/extensions/inference-operator",
+          "runtime": "vllm",
+          "compute": "gpu",
+          "replicas": 2,
+          "resources": {
+            "limits": {
+              "gpu": 5
+            }
+          },
+          "nodeSelector": {
+            "agentpool": "a100"
+          },
+          "deploymentTemplate": "azureml://registries/azureml-openai-oss/deploymenttemplates/vllm-qwen--qwen3-5-0-8b/versions/1",
+          "vllmParameters": {
+            "tensorParallelSize": 2,
+            "maxModelLen": 8192,
+            "gpuMemoryUtilization": 0.9,
+            "enforceEager": false
+          },
+          "provisioningState": "Creating",
+          "deploymentState": "Running",
+          "raiPolicyName": "Microsoft.DefaultV2"
+        },
+        "sku": {
+          "name": "Arc"
+        }
+      }
+    }
+  }
+}

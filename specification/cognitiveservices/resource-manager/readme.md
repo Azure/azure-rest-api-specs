@@ -69,6 +69,18 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}"].put
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/connections/{connectionName}"].put
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/connections/{connectionName}"].put
+  - code: ProvisioningStateSpecifiedForLROPut
+    reason: Arc deployment PUT is intentionally create-only and returns only 201 for accepted creates; updates are supported through PATCH.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/arcDeployments/{deploymentName}"].put
+  - code: PutResponseCodes
+    reason: Arc deployment PUT is intentionally create-only; updates to existing Arc deployments are supported through PATCH.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/arcDeployments/{deploymentName}"].put
+  - code: PatchSkuProperty
+    reason: Arc deployment SKU is immutable after create; PATCH only supports replicas, resources, and nodeSelector.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/arcDeployments/{deploymentName}"].patch.parameters[5]
   - code: PatchResponseCodes
     reason: This is existing behavior in all other APIs and already in stable version, will keep the same.
     where:
@@ -162,6 +174,12 @@ suppressions:
     reason: EvaluateDeploymentPoliciesResponse.results is a dictionary keyed by deployment name, mapping each hypothetical deployment to its policy evaluation result. Keys are user-provided deployment names from the request.
     where:
       - $.definitions.EvaluateDeploymentPoliciesResponse.properties.results
+  - code: AvoidAdditionalProperties
+    reason: Arc deployment nodeSelector and capabilities are user-defined or service-resolved key-value property bags whose keys are dynamic and not predefined by the service.
+    where:
+      - $.definitions.ArcDeploymentProperties.properties.nodeSelector
+      - $.definitions.ArcDeploymentUpdateProperties.properties.nodeSelector
+      - $.definitions.ArcDeploymentProperties.properties.capabilities
 ```
 ### Tag: package-2026-07-01
 

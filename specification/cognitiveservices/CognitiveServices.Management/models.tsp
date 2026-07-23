@@ -50,6 +50,10 @@ union ProvisioningState {
   Canceled: "Canceled",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "CognitiveServices-specific: DNS records are being resolved during account creation"
   ResolvingDNS: "ResolvingDNS",
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Resource is unreachable"
+  @added(Versions.v2026_07_15_preview)
+  ExtensionUnreachable: "ExtensionUnreachable",
 }
 
 /**

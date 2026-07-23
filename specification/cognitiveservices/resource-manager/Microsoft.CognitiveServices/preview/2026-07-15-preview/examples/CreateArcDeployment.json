@@ -1,0 +1,81 @@
+{
+  "operationId": "ArcDeployments_Create",
+  "title": "CreateArcDeployment",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resourceGroupName",
+    "accountName": "accountName",
+    "deploymentName": "phi-3-arc",
+    "api-version": "2026-07-15-preview",
+    "resource": {
+      "properties": {
+        "model": {
+          "format": "OpenAI",
+          "name": "phi-3-mini"
+        },
+        "extensionId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.Kubernetes/connectedClusters/edge-cluster/providers/Microsoft.KubernetesConfiguration/extensions/inference-operator",
+        "runtime": "onnx-genai",
+        "compute": "cpu",
+        "replicas": 2,
+        "resources": {
+          "requests": {
+            "cpu": "8",
+            "memory": "16Gi"
+          },
+          "limits": {
+            "cpu": "8",
+            "memory": "16Gi"
+          }
+        },
+        "nodeSelector": {
+          "agentpool": "cpu"
+        }
+      },
+      "sku": {
+        "name": "Arc"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "azure-asyncoperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CognitiveServices/locations/eastus/operationResults/00000000-0000-0000-0000-000000000010?api-version=2026-07-15-preview",
+        "location": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CognitiveServices/locations/eastus/operationResults/00000000-0000-0000-0000-000000000010?operationResultResponseType=Location&api-version=2026-07-15-preview"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/arcDeployments/phi-3-arc",
+        "name": "phi-3-arc",
+        "type": "Microsoft.CognitiveServices/accounts/arcDeployments",
+        "properties": {
+          "model": {
+            "format": "OpenAI",
+            "name": "phi-3-mini"
+          },
+          "extensionId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.Kubernetes/connectedClusters/edge-cluster/providers/Microsoft.KubernetesConfiguration/extensions/inference-operator",
+          "runtime": "onnx-genai",
+          "compute": "cpu",
+          "replicas": 2,
+          "resources": {
+            "requests": {
+              "cpu": "8",
+              "memory": "16Gi"
+            },
+            "limits": {
+              "cpu": "8",
+              "memory": "16Gi"
+            }
+          },
+          "nodeSelector": {
+            "agentpool": "cpu"
+          },
+          "provisioningState": "Creating",
+          "deploymentState": "Running",
+          "raiPolicyName": "Microsoft.DefaultV2"
+        },
+        "sku": {
+          "name": "Arc"
+        }
+      }
+    }
+  }
+}
