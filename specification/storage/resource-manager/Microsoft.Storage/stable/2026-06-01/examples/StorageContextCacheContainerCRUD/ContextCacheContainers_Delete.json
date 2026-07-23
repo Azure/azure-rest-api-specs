@@ -1,0 +1,28 @@
+{
+  "operationId": "ContextCacheContainers_Delete",
+  "title": "Delete a Context Cache Container",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "api-version": "2026-06-01",
+    "contextCacheName": "testaccount",
+    "contextCacheContainerName": "gpt4-prompts"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Storage/locations/eastus/operationStatuses/00000000-0000-0000-0000-000000000002?api-version=2026-06-01",
+        "Retry-After": "10"
+      }
+    },
+    "204": {},
+    "default": {
+      "body": {
+        "error": {
+          "code": "ResourceNotFound",
+          "message": "Container gpt4-prompts not found"
+        }
+      }
+    }
+  }
+}
