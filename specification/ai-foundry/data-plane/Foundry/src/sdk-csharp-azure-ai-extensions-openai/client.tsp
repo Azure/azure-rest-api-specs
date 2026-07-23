@@ -511,7 +511,7 @@ namespace Azure.AI.Projects {
     },
     "csharp"
   );
-  //@@alternateType(OpenAI.MCPToolRequireApproval, {  identity: "OpenAI.Responses.McpToolCallApprovalPolicy",  package: "OpenAI",  minVersion: "2.12.0"}, "csharp");
+  @@alternateType(OpenAI.MCPToolRequireApproval, {  identity: "OpenAI.Responses.McpToolCallApprovalPolicy",  package: "OpenAI",  minVersion: "2.12.0"}, "csharp");
   @@alternateType(
     OpenAI.MCPToolFilter,
     {
