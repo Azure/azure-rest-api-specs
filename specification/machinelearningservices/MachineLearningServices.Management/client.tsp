@@ -131,6 +131,22 @@ using Microsoft.MachineLearningServices;
 @@clientName(CodeVersion, "MachineLearningCodeVersion", "csharp");
 @@clientName(ComponentContainer, "MachineLearningComponentContainer", "csharp");
 @@clientName(ComponentVersion, "MachineLearningComponentVersion", "csharp");
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Rename generated C# registry component resource classes"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Rename generated C# registry component resource classes"
+@@clientOption(
+  ComponentContainers.get,
+  "resource-name",
+  "MachineLearningRegistryComponentContainer",
+  "csharp"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Rename generated C# registry component version resource classes"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Rename generated C# registry component version resource classes"
+@@clientOption(
+  ComponentVersions.get,
+  "resource-name",
+  "MachineLearningRegistryComponentVersion",
+  "csharp"
+);
 @@clientName(Compute, "MachineLearningComputeProperties", "csharp");
 @@clientName(ComputeResource, "MachineLearningCompute", "csharp");
 @@clientName(DataContainer, "MachineLearningDataContainer", "csharp");
@@ -1433,6 +1449,8 @@ using Microsoft.MachineLearningServices;
 @@clientName(NotebookAccessTokenResult.hostName, "hostname", "java");
 @@clientName(UserAccountCredentials.adminUserName, "adminUsername", "java");
 @@clientName(ComputeInstanceSshSettings.adminUserName, "adminUsername", "java");
+@@clientName(DockerCredential.userName, "username", "java");
+@@clientName(ComputeInstanceCreatedBy.userName, "username", "java");
 
 // Java casing fixes for FQDN-related types
 @@clientName(ExternalFQDNResponse, "ExternalFqdnResponse", "java");
@@ -1456,11 +1474,15 @@ using Microsoft.MachineLearningServices;
 );
 
 // Java casing fixes for AKS-related types
-@@clientName(AksNetworkingConfiguration, "AKSNetworkingConfiguration", "java");
-@@clientName(AksComputeSecrets, "AKSComputeSecrets", "java");
+@@clientName(AKS, "Aks", "java");
+@@clientName(AKSSchema, "AksSchema", "java");
+@@clientName(AKSSchemaProperties, "AksSchemaProperties", "java");
+@@clientName(AksNetworkingConfiguration.dnsServiceIP, "dnsServiceIp", "java");
+
+// Java casing fix for PAT-related types
 @@clientName(
-  AksComputeSecretsProperties,
-  "AKSComputeSecretsProperties",
+  PATAuthTypeWorkspaceConnectionProperties,
+  "PatAuthTypeWorkspaceConnectionProperties",
   "java"
 );
 

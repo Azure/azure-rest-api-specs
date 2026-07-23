@@ -17,13 +17,12 @@ namespace Microsoft.ContainerService;
 /**
  * Available Safeguards Version
  */
-@added(Versions.v2026_04_02_preview)
+@added(Versions.v2026_05_02_preview)
 @parentResource(SubscriptionLocationResource)
-model SafeguardsAvailableVersion
-  is Azure.ResourceManager.ProxyResource<
-    SafeguardsAvailableVersionsProperties,
-    false
-  > {
+model SafeguardsAvailableVersion is Azure.ResourceManager.ProxyResource<
+  SafeguardsAvailableVersionsProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = SafeguardsAvailableVersion,
     KeyName = "version",
@@ -41,7 +40,7 @@ model SafeguardsAvailableVersion
 );
 
 @armResourceOperations
-@added(Versions.v2026_04_02_preview)
+@added(Versions.v2026_05_02_preview)
 interface SafeguardsAvailableVersions {
   /**
    * Contains Safeguards version along with its support info and whether it is a default version.
@@ -70,7 +69,7 @@ interface SafeguardsAvailableVersions {
 /**
  * Whether the version is preview or stable.
  */
-@added(Versions.v2026_04_02_preview)
+@added(Versions.v2026_05_02_preview)
 union SafeguardsSupport {
   string,
 
@@ -89,7 +88,7 @@ union SafeguardsSupport {
  * Whether the version is default or not and support info.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "AKS uses custom provisioning states beyond standard ARM states. Using string type for forward compatibility."
-@added(Versions.v2026_04_02_preview)
+@added(Versions.v2026_05_02_preview)
 model SafeguardsAvailableVersionsProperties {
   /** Whether this is the default version. */
   @visibility(Lifecycle.Read)
@@ -105,6 +104,6 @@ model SafeguardsAvailableVersionsProperties {
 /**
  * Hold values properties, which is array of SafeguardsVersions
  */
-@added(Versions.v2026_04_02_preview)
+@added(Versions.v2026_05_02_preview)
 model SafeguardsAvailableVersionsList
   is Azure.Core.Page<SafeguardsAvailableVersion>;

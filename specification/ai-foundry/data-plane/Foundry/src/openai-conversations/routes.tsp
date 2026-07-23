@@ -13,18 +13,20 @@ namespace Azure.AI.Projects;
 @tag("Conversations")
 interface Conversations {
   /**
-   * Create a conversation.
+   * Creates a new conversation resource.
    */
+  @summary("Create a conversation")
   @post
   @operationId("createConversation")
   createConversation is OpenAIOperation<
-    OpenAI.CreateConversationBody,
+    OpenAI.CreateConversationBody & UserDelegationHeader,
     OpenAI.ConversationResource
   >;
 
   /**
-   * Update a conversation.
+   * Modifies the specified conversation's properties.
    */
+  @summary("Update a conversation")
   @route("{conversation_id}")
   @post
   @operationId("updateConversation")
@@ -34,13 +36,15 @@ interface Conversations {
       @path conversation_id: string;
 
       ...OpenAI.UpdateConversationBody;
+      ...UserDelegationHeader;
     },
     OpenAI.ConversationResource
   >;
 
   /**
-   * Retrieves a conversation.
+   * Retrieves the specified conversation and its metadata.
    */
+  @summary("Retrieve a conversation")
   @route("{conversation_id}")
   @get
   @operationId("getConversation")
@@ -48,13 +52,16 @@ interface Conversations {
     {
       /** The id of the conversation to retrieve. */
       @path conversation_id: string;
+
+      ...UserDelegationHeader;
     },
     OpenAI.ConversationResource
   >;
 
   /**
-   * Deletes a conversation.
+   * Removes the specified conversation resource from the current project.
    */
+  @summary("Delete a conversation")
   @route("{conversation_id}")
   @delete
   @operationId("deleteConversation")
@@ -62,6 +69,8 @@ interface Conversations {
     {
       /** The id of the conversation to delete. */
       @path conversation_id: string;
+
+      ...UserDelegationHeader;
     },
     OpenAI.DeletedConversationResource
   >;
@@ -70,8 +79,9 @@ interface Conversations {
   // It does not exist in the upstream OpenAI API as of 2025-09-23.
 
   /**
-   * Returns the list of all conversations.
+   * Returns the conversations available in the current project.
    */
+  @summary("List conversations")
   @get
   @operationId("listConversations")
   @list
@@ -80,13 +90,15 @@ interface Conversations {
       ...CommonPageQueryParameters;
       ...AgentNameQueryParam;
       ...AgentIdQueryParam;
+      ...UserDelegationHeader;
     },
     AgentsPagedResult<OpenAI.ConversationResource>
   >;
 
   /**
-   * Create items in a conversation with the given ID.
+   * Adds one or more items to the specified conversation.
    */
+  @summary("Create conversation items")
   @route("{conversation_id}/items")
   @post
   @operationId("createConversationItems")
@@ -105,13 +117,16 @@ interface Conversations {
       #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
       @maxItems(20)
       items: OpenAI.Item[];
+
+      ...UserDelegationHeader;
     },
     OpenAI.ConversationItemList
   >;
 
   /**
-   * Get a single item from a conversation with the given IDs.
+   * Retrieves a specific item from the specified conversation.
    */
+  @summary("Get a conversation item")
   @route("{conversation_id}/items/{item_id}")
   @get
   @operationId("getConversationItem")
@@ -122,13 +137,16 @@ interface Conversations {
 
       /** The id of the conversation item to retrieve. */
       @path item_id: string;
+
+      ...UserDelegationHeader;
     },
     OpenAI.OutputItem
   >;
 
   /**
-   * Delete an item from a conversation with the given IDs.
+   * Removes the specified item from a conversation.
    */
+  @summary("Delete a conversation item")
   @route("{conversation_id}/items/{item_id}")
   @delete
   @operationId("deleteConversationItem")
@@ -139,13 +157,16 @@ interface Conversations {
 
       /** The id of the conversation item to delete. */
       @path item_id: string;
+
+      ...UserDelegationHeader;
     },
     OpenAI.ConversationResource
   >;
 
   /**
-   * List all items for a conversation with the given ID.
+   * Returns the items belonging to the specified conversation.
    */
+  @summary("List conversation items")
   @route("{conversation_id}/items")
   @get
   @operationId("listConversationItems")
@@ -157,6 +178,7 @@ interface Conversations {
 
       ...CommonPageQueryParameters;
       ...ItemTypeQueryParameter;
+      ...UserDelegationHeader;
     },
     AgentsPagedResult<OpenAI.OutputItem>
   >;
