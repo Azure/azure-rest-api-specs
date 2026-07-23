@@ -79,7 +79,7 @@ All items below are **wire-compatible** (a live caller is unaffected); they are 
 
 - `KnowledgeBase`: `retrieveDefaults` (`KnowledgeBaseRetrieveDefaults`: `maxRuntimeInSeconds`, `maxOutputDocuments`), `tags` (`Record<string>`, up to 10 user-defined key-value pairs for categorizing a knowledge base and attributing usage/costs).
 - `FileKnowledgeSource`: `corsOptions`; `FileKnowledgeSourceParameters`: `queryHints`.
-- File upload/metadata: `FileUploadMetadata` (`fileName`, `metadata`, `extractionMode`), `FileKnowledgeSourceExtractionMode` (`minimal`, `standard`); `KnowledgeSourceFile`: `prefix`, `metadata`, `parsingMode`, `extractionMode`.
+- File upload/metadata: `FileUploadMetadata` (`fileName`, `metadata` — the service chooses parsing and extraction mode; the caller does not supply them), `FileKnowledgeSourceExtractionMode` (`minimal`, `standard`); `KnowledgeSourceFile`: `prefix`, `metadata`, `parsingMode`, `extractionMode`.
 - Service limits: `maxVectorIndexSizePerIndexInBytes` (per-index vector index memory quota, in bytes).
 - `AzureOpenAIModelName`: `gpt-5.6-sol`, `gpt-5.6-terra`, `gpt-5.6-luna`.
 

@@ -8768,7 +8768,7 @@
     },
     "FileUploadMetadata": {
       "type": "object",
-      "description": "The JSON 'metadata' part of a multipart/form-data file upload: the full file name/path, custom key/value metadata, and an optional per-file extraction override. The parsing mode is auto-detected from the file and is not supplied by the caller.",
+      "description": "The JSON 'metadata' part of a multipart/form-data file upload: the full file name/path and custom key/value metadata. The parsing mode and extraction mode are both chosen by the service and are not supplied by the caller.",
       "properties": {
         "fileName": {
           "type": "string",
@@ -8780,10 +8780,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "extractionMode": {
-          "$ref": "#/definitions/FileKnowledgeSourceExtractionMode",
-          "description": "Optional extraction mode override for the file."
         }
       }
     },
