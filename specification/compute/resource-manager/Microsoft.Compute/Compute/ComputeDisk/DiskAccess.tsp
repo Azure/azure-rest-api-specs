@@ -20,7 +20,7 @@ model DiskAccess
     Resource = DiskAccess,
     KeyName = "diskAccessName",
     SegmentName = "diskAccesses",
-    NamePattern = ""
+    NamePattern = "^[^_\\W][\\w-._]{0,79}(?<![-.])$"
   >;
 
   /**
@@ -103,7 +103,7 @@ interface DiskAccesses {
 
 @@doc(
   DiskAccess.name,
-  "The name of the disk access resource that is being created. The name can't be changed after the disk encryption set is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters."
+  "The name of the disk access resource that is being created. The name can't be changed after the disk encryption set is created. Supported characters for the name are a-z, A-Z, 0-9, underscore (_), hyphen (-), and dot (.). The maximum name length is 80 characters."
 );
 @@doc(DiskAccess.properties, "");
 @@doc(
