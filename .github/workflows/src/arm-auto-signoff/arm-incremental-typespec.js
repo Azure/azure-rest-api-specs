@@ -89,15 +89,25 @@ export async function incrementalTypeSpec(core) {
       }
     }
 
-    // If a readme is changed, to be conservative, handle as if every input file in the readme were changed
-    const readme = new Readme(resolve(options.cwd ?? "", readmeFile), {
-      content: readmeText,
-      logger: options.logger,
-    });
-    const tags = await readme.getTags();
-    const inputFiles = [...tags.values()].flatMap((t) =>
-      [...t.inputFiles.keys()].map((p) => relative(dirname(readme.path), p)),
-    );
+    let inputFiles;
+    try {
+      // If a readme is changed, to be conservative, handle as if every input file in the readme were changed
+      const readme = new Readme(resolve(options.cwd ?? "", readmeFile), {
+        content: readmeText,
+        logger: options.logger,
+      });
+      const tags = await readme.getTags();
+      inputFiles = [...tags.values()].flatMap((t) =>
+        [...t.inputFiles.keys()].map((p) => relative(dirname(readme.path), p)),
+      );
+    } catch (error) {
+      if (error instanceof Error) {
+        core.info(`File "${readmeFile}" could not be parsed: ${error.message}`);
+        return false;
+      }
+
+      throw error;
+    }
 
     inputFiles.forEach((f) => {
       changedReadmeInputFiles.add(join(dirname(readmeFile), f));
