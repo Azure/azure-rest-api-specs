@@ -17,6 +17,15 @@ API version is controlled by the `@azure-tools/typespec-autorest` emitter in tsp
 openapi-type: data-plane
 ```
 
+### Tag: package-2026-07-31-preview
+
+These settings apply only when `--tag=package-2026-07-31-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-07-31-preview'
+input-file:
+  - preview/2026-07-31-preview/VoiceLive.json
+```
+
 ### Tag: package-2026-07-15
 
 These settings apply only when `--tag=package-2026-07-15` is specified on the command line.

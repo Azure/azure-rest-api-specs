@@ -177,4 +177,28 @@ union ServerEventType {
   @added(Versions.v2026_06_01_preview)
   @removed(Versions.v2026_07_15)
   output_audio_buffer_stopped: "output_audio_buffer.stopped",
+
+  /** A new inbound SIP call has arrived and is awaiting a customer accept or reject decision. */
+  @added(Versions.v2026_07_31_preview)
+  realtime_call_incoming: "realtime.call.incoming",
+
+  /** An accepted SIP call is connected and the Voice Live session is active. */
+  @added(Versions.v2026_07_31_preview)
+  realtime_call_connected: "realtime.call.connected",
+
+  /** A SIP call has reached a terminal disconnected state. */
+  @added(Versions.v2026_07_31_preview)
+  realtime_call_disconnected: "realtime.call.disconnected",
+
+  /** A SIP call failed during setup or runtime. */
+  @added(Versions.v2026_07_31_preview)
+  realtime_call_failed: "realtime.call.failed",
+
+  /** A blind SIP transfer (REFER) completed successfully. */
+  @added(Versions.v2026_07_31_preview)
+  realtime_call_transfer_succeeded: "realtime.call.transfer.succeeded",
+
+  /** A blind SIP transfer (REFER) failed. */
+  @added(Versions.v2026_07_31_preview)
+  realtime_call_transfer_failed: "realtime.call.transfer.failed",
 }
