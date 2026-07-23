@@ -151,7 +151,7 @@ using Common;
  */
 @Azure.ResourceManager.Legacy.features(Features)
 @armProviderNamespace
-@service(#{ title: "NetworkManagementClient" })
+@service(#{ title: "WebApplicationFirewallManagement" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.Network;
