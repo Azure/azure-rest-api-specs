@@ -64,6 +64,11 @@ namespace Azure.AI.Projects {
   @@withoutOmittedProperties(OpenAI.ItemMessage, "id");
   @@withoutOmittedProperties(OpenAI.ItemMessage, "status");
 
+  // Remove output-assigned "id" from ItemFunctionToolCall in input context.
+  // Function call input items require type/call_id/name/arguments; the server
+  // assigns id later when the item is persisted or returned as output.
+  @@withoutOmittedProperties(OpenAI.ItemFunctionToolCall, "id");
+
   // Fix ItemMessage.content to match the upstream EasyInputMessage format.
   // The Responses-only view inherits content: MessageContent[] from the output-
   // oriented Message model. The upstream EasyInputMessage accepts either a plain
