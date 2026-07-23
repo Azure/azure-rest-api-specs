@@ -232,7 +232,10 @@ interface ServiceGateways {
   "ServiceGateways_UpdateAddressLocations"
 );
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "The LRO variant uses a different TypeSpec member name to enable versioning, but must preserve the original operationId for wire backward compatibility with 2025-05-01 and 2025-07-01."
-@@operationId(ServiceGateways.updateServicesLro, "ServiceGateways_UpdateServices");
+@@operationId(
+  ServiceGateways.updateServicesLro,
+  "ServiceGateways_UpdateServices"
+);
 @@doc(
   ServiceGateways.updateAddressLocationsLro::parameters.body,
   "Parameters supplied to create or update address locations in service gateway operation."
