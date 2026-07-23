@@ -126,6 +126,21 @@ components:
             - blendshapes
             - viseme_id
       description: Specifies the types of animation data to output.
+    AssignedManagedIdentity:
+      type: object
+      required:
+        - type
+        - audience
+      properties:
+        type:
+          type: string
+          enum:
+            - assigned_managed_identity
+        audience:
+          type: string
+        client_id:
+          type: string
+      description: Managed identity authorization for an MCP server.
     AudioConfig:
       type: object
       properties:
@@ -1332,6 +1347,14 @@ components:
             format: int32
           description: The bytes that were used to generate the log probability.
       description: A single log probability entry for a token.
+    McpResponseScheduling:
+      type: string
+      enum:
+        - silent
+        - when_idle
+        - interrupt
+        - skip_if_busy
+      description: Response scheduling after locally executed MCP calls.
     OAIVoice:
       anyOf:
         - type: string
@@ -1348,329 +1371,6 @@ components:
             - marin
             - cedar
       description: Supported OpenAI voice names (string enum).
-    OpenAI.ApplyPatchToolParam:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
-          enum:
-            - apply_patch
-          description: The type of the tool. Always `apply_patch`.
-          x-stainless-const: true
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.Tool'
-      description: Allows the assistant to create, delete, or update files using unified diffs.
-      title: Apply patch tool
-    OpenAI.ApproximateLocation:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
-          enum:
-            - approximate
-          description: The type of location approximation. Always `approximate`.
-          x-stainless-const: true
-          default: approximate
-        country:
-          anyOf:
-            - type: string
-            - type: 'null'
-        region:
-          anyOf:
-            - type: string
-            - type: 'null'
-        city:
-          anyOf:
-            - type: string
-            - type: 'null'
-        timezone:
-          anyOf:
-            - type: string
-            - type: 'null'
-    OpenAI.AutoCodeInterpreterToolParam:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
-          enum:
-            - auto
-          description: Always `auto`.
-          x-stainless-const: true
-          default: auto
-        file_ids:
-          type: array
-          items:
-            type: string
-          maxItems: 50
-          description: An optional list of uploaded files to make available to your code.
-        memory_limit:
-          anyOf:
-            - $ref: '#/components/schemas/OpenAI.ContainerMemoryLimit'
-            - type: 'null'
-        network_policy:
-          $ref: '#/components/schemas/OpenAI.ContainerNetworkPolicyParam'
-      description: Configuration for a code interpreter container. Optionally specify the IDs of the files to run the code on.
-      title: Automatic Code Interpreter Tool Parameters
-    OpenAI.CodeInterpreterTool:
-      type: object
-      required:
-        - type
-        - container
-      properties:
-        type:
-          type: string
-          enum:
-            - code_interpreter
-          description: The type of the code interpreter tool. Always `code_interpreter`.
-          x-stainless-const: true
-        container:
-          oneOf:
-            - type: string
-            - $ref: '#/components/schemas/OpenAI.AutoCodeInterpreterToolParam'
-          description: |-
-            The code interpreter container. Can be a container ID or an object that
-              specifies uploaded file IDs to make available to your code, along with an
-              optional `memory_limit` setting.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.Tool'
-      description: A tool that runs Python code to help generate a response to a prompt.
-      title: Code interpreter
-    OpenAI.ComparisonFilter:
-      type: object
-      required:
-        - type
-        - key
-        - value
-      properties:
-        type:
-          type: string
-          enum:
-            - eq
-            - ne
-            - gt
-            - gte
-            - lt
-            - lte
-            - in
-            - nin
-          description: |-
-            Specifies the comparison operator: `eq`, `ne`, `gt`, `gte`, `lt`, `lte`, `in`, `nin`.
-              - `eq`: equals
-              - `ne`: not equal
-              - `gt`: greater than
-              - `gte`: greater than or equal
-              - `lt`: less than
-              - `lte`: less than or equal
-              - `in`: in
-              - `nin`: not in
-          default: eq
-        key:
-          type: string
-          description: The key to compare against the value.
-        value:
-          oneOf:
-            - type: string
-            - type: number
-            - type: boolean
-            - type: array
-              items:
-                anyOf:
-                  - type: string
-                  - type: number
-          description: The value to compare against the attribute key; supports string, number, or boolean types.
-      description: A filter used to compare a specified attribute key to a given value using a defined comparison operation.
-      title: Comparison Filter
-      x-oaiMeta:
-        name: ComparisonFilter
-    OpenAI.CompoundFilter:
-      type: object
-      required:
-        - type
-        - filters
-      properties:
-        type:
-          type: string
-          enum:
-            - and
-            - or
-          description: 'Type of operation: `and` or `or`.'
-        filters:
-          type: array
-          items:
-            anyOf:
-              - $ref: '#/components/schemas/OpenAI.ComparisonFilter'
-              - {}
-          description: Array of filters to combine. Items can be `ComparisonFilter` or `CompoundFilter`.
-      description: Combine multiple filters using `and` or `or`.
-      title: Compound Filter
-      x-oaiMeta:
-        name: CompoundFilter
-    OpenAI.ComputerEnvironment:
-      type: string
-      enum:
-        - windows
-        - mac
-        - linux
-        - ubuntu
-        - browser
-    OpenAI.ComputerTool:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
-          enum:
-            - computer
-          description: The type of the computer tool. Always `computer`.
-          x-stainless-const: true
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.Tool'
-      description: A tool that controls a virtual computer. Learn more about the [computer tool](https://platform.openai.com/docs/guides/tools-computer-use).
-      title: Computer
-    OpenAI.ComputerUsePreviewTool:
-      type: object
-      required:
-        - type
-        - environment
-        - display_width
-        - display_height
-      properties:
-        type:
-          type: string
-          enum:
-            - computer_use_preview
-          description: The type of the computer use tool. Always `computer_use_preview`.
-          x-stainless-const: true
-        environment:
-          $ref: '#/components/schemas/OpenAI.ComputerEnvironment'
-          description: The type of computer environment to control.
-        display_width:
-          type: integer
-          description: The width of the computer display.
-        display_height:
-          type: integer
-          description: The height of the computer display.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.Tool'
-      description: A tool that controls a virtual computer. Learn more about the [computer tool](https://platform.openai.com/docs/guides/tools-computer-use).
-      title: Computer use preview
-    OpenAI.ContainerAutoParam:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
-          enum:
-            - container_auto
-          description: Automatically creates a container for this request
-          x-stainless-const: true
-        file_ids:
-          type: array
-          items:
-            type: string
-          maxItems: 50
-          description: An optional list of uploaded files to make available to your code.
-        memory_limit:
-          anyOf:
-            - $ref: '#/components/schemas/OpenAI.ContainerMemoryLimit'
-            - type: 'null'
-        skills:
-          type: array
-          items:
-            $ref: '#/components/schemas/OpenAI.ContainerSkill'
-          maxItems: 200
-          description: An optional list of skills referenced by id or inline data.
-        network_policy:
-          $ref: '#/components/schemas/OpenAI.ContainerNetworkPolicyParam'
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.FunctionShellToolParamEnvironment'
-    OpenAI.ContainerMemoryLimit:
-      type: string
-      enum:
-        - 1g
-        - 4g
-        - 16g
-        - 64g
-    OpenAI.ContainerNetworkPolicyAllowlistParam:
-      type: object
-      required:
-        - type
-        - allowed_domains
-      properties:
-        type:
-          type: string
-          enum:
-            - allowlist
-          description: Allow outbound network access only to specified domains. Always `allowlist`.
-          x-stainless-const: true
-        allowed_domains:
-          type: array
-          items:
-            type: string
-          minItems: 1
-          description: A list of allowed domains when type is `allowlist`.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.ContainerNetworkPolicyParam'
-    OpenAI.ContainerNetworkPolicyDisabledParam:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
-          enum:
-            - disabled
-          description: Disable outbound network access. Always `disabled`.
-          x-stainless-const: true
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.ContainerNetworkPolicyParam'
-    OpenAI.ContainerNetworkPolicyParam:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          $ref: '#/components/schemas/OpenAI.ContainerNetworkPolicyParamType'
-      discriminator:
-        propertyName: type
-        mapping:
-          disabled: '#/components/schemas/OpenAI.ContainerNetworkPolicyDisabledParam'
-          allowlist: '#/components/schemas/OpenAI.ContainerNetworkPolicyAllowlistParam'
-      description: Network access policy for the container.
-    OpenAI.ContainerNetworkPolicyParamType:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - disabled
-            - allowlist
-    OpenAI.ContainerSkill:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          $ref: '#/components/schemas/OpenAI.ContainerSkillType'
-      discriminator:
-        propertyName: type
-        mapping:
-          skill_reference: '#/components/schemas/OpenAI.SkillReferenceParam'
-          inline: '#/components/schemas/OpenAI.InlineSkillParam'
-    OpenAI.ContainerSkillType:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - skill_reference
-            - inline
     OpenAI.CreateTranscriptionResponseJsonUsage:
       type: object
       required:
@@ -1691,492 +1391,6 @@ components:
           enum:
             - tokens
             - duration
-    OpenAI.CustomGrammarFormatParam:
-      type: object
-      required:
-        - type
-        - syntax
-        - definition
-      properties:
-        type:
-          type: string
-          enum:
-            - grammar
-          description: Grammar format. Always `grammar`.
-          x-stainless-const: true
-        syntax:
-          $ref: '#/components/schemas/OpenAI.GrammarSyntax1'
-          description: The syntax of the grammar definition. One of `lark` or `regex`.
-        definition:
-          type: string
-          description: The grammar definition.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.CustomToolParamFormat'
-      description: A grammar defined by the user.
-      title: Grammar format
-    OpenAI.CustomTextFormatParam:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
-          enum:
-            - text
-          description: Unconstrained text format. Always `text`.
-          x-stainless-const: true
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.CustomToolParamFormat'
-      description: Unconstrained free-form text.
-      title: Text format
-    OpenAI.CustomToolParam:
-      type: object
-      required:
-        - type
-        - name
-      properties:
-        type:
-          type: string
-          enum:
-            - custom
-          description: The type of the custom tool. Always `custom`.
-          x-stainless-const: true
-        name:
-          type: string
-          description: The name of the custom tool, used to identify it in tool calls.
-        description:
-          type: string
-          description: Optional description of the custom tool, used to provide more context.
-        format:
-          $ref: '#/components/schemas/OpenAI.CustomToolParamFormat'
-          description: The input format for the custom tool. Default is unconstrained text.
-        defer_loading:
-          type: boolean
-          description: Whether this tool should be deferred and discovered via tool search.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.Tool'
-      description: A custom tool that processes input using a specified format. Learn more about   [custom tools](/docs/guides/function-calling#custom-tools)
-      title: Custom tool
-    OpenAI.CustomToolParamFormat:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          $ref: '#/components/schemas/OpenAI.CustomToolParamFormatType'
-      discriminator:
-        propertyName: type
-        mapping:
-          text: '#/components/schemas/OpenAI.CustomTextFormatParam'
-          grammar: '#/components/schemas/OpenAI.CustomGrammarFormatParam'
-      description: The input format for the custom tool. Default is unconstrained text.
-    OpenAI.CustomToolParamFormatType:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - text
-            - grammar
-    OpenAI.EmptyModelParam:
-      type: object
-    OpenAI.FileSearchTool:
-      type: object
-      required:
-        - type
-        - vector_store_ids
-      properties:
-        type:
-          type: string
-          enum:
-            - file_search
-          description: The type of the file search tool. Always `file_search`.
-          x-stainless-const: true
-        vector_store_ids:
-          type: array
-          items:
-            type: string
-          description: The IDs of the vector stores to search.
-        max_num_results:
-          type: integer
-          description: The maximum number of results to return. This number should be between 1 and 50 inclusive.
-        ranking_options:
-          $ref: '#/components/schemas/OpenAI.RankingOptions'
-          description: Ranking options for search.
-        filters:
-          anyOf:
-            - $ref: '#/components/schemas/OpenAI.Filters'
-            - type: 'null'
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.Tool'
-      description: A tool that searches for relevant content from uploaded files. Learn more about the [file search tool](https://platform.openai.com/docs/guides/tools-file-search).
-      title: File search
-    OpenAI.Filters:
-      anyOf:
-        - $ref: '#/components/schemas/OpenAI.ComparisonFilter'
-        - $ref: '#/components/schemas/OpenAI.CompoundFilter'
-    OpenAI.FunctionShellToolParam:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
-          enum:
-            - shell
-          description: The type of the shell tool. Always `shell`.
-          x-stainless-const: true
-        environment:
-          anyOf:
-            - $ref: '#/components/schemas/OpenAI.FunctionShellToolParamEnvironment'
-            - type: 'null'
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.Tool'
-      description: A tool that allows the model to execute shell commands.
-      title: Shell tool
-    OpenAI.FunctionShellToolParamEnvironment:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          $ref: '#/components/schemas/OpenAI.FunctionShellToolParamEnvironmentType'
-      discriminator:
-        propertyName: type
-        mapping:
-          local: '#/components/schemas/OpenAI.FunctionShellToolParamEnvironmentLocalEnvironmentParam'
-          container_reference: '#/components/schemas/OpenAI.FunctionShellToolParamEnvironmentContainerReferenceParam'
-          container_auto: '#/components/schemas/OpenAI.ContainerAutoParam'
-    OpenAI.FunctionShellToolParamEnvironmentContainerReferenceParam:
-      type: object
-      required:
-        - type
-        - container_id
-      properties:
-        type:
-          type: string
-          enum:
-            - container_reference
-          description: References a container created with the /v1/containers endpoint
-          x-stainless-const: true
-          default: container_reference
-        container_id:
-          type: string
-          description: The ID of the referenced container.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.FunctionShellToolParamEnvironment'
-    OpenAI.FunctionShellToolParamEnvironmentLocalEnvironmentParam:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
-          enum:
-            - local
-          description: Use a local computer environment.
-          x-stainless-const: true
-          default: local
-        skills:
-          type: array
-          items:
-            $ref: '#/components/schemas/OpenAI.LocalSkillParam'
-          maxItems: 200
-          description: An optional list of skills.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.FunctionShellToolParamEnvironment'
-    OpenAI.FunctionShellToolParamEnvironmentType:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - container_auto
-            - local
-            - container_reference
-    OpenAI.FunctionTool:
-      type: object
-      required:
-        - type
-        - name
-        - parameters
-        - strict
-      properties:
-        type:
-          type: string
-          enum:
-            - function
-          description: The type of the function tool. Always `function`.
-          x-stainless-const: true
-        name:
-          type: string
-          description: The name of the function to call.
-        description:
-          anyOf:
-            - type: string
-            - type: 'null'
-        parameters:
-          anyOf:
-            - type: object
-              unevaluatedProperties: {}
-            - type: 'null'
-        strict:
-          anyOf:
-            - type: boolean
-            - type: 'null'
-        defer_loading:
-          type: boolean
-          description: Whether this function is deferred and loaded via tool search.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.Tool'
-      description: Defines a function in your own code the model can choose to call. Learn more about [function calling](https://platform.openai.com/docs/guides/function-calling).
-      title: Function
-    OpenAI.FunctionToolParam:
-      type: object
-      required:
-        - name
-        - type
-      properties:
-        name:
-          type: string
-          minLength: 1
-          maxLength: 128
-          pattern: ^[a-zA-Z0-9_-]+$
-        description:
-          anyOf:
-            - type: string
-            - type: 'null'
-        parameters:
-          anyOf:
-            - $ref: '#/components/schemas/OpenAI.EmptyModelParam'
-            - type: 'null'
-        strict:
-          anyOf:
-            - type: boolean
-            - type: 'null'
-        type:
-          type: string
-          enum:
-            - function
-          x-stainless-const: true
-          default: function
-        defer_loading:
-          type: boolean
-          description: Whether this function should be deferred and discovered via tool search.
-    OpenAI.GrammarSyntax1:
-      type: string
-      enum:
-        - lark
-        - regex
-    OpenAI.HybridSearchOptions:
-      type: object
-      required:
-        - embedding_weight
-        - text_weight
-      properties:
-        embedding_weight:
-          type: number
-          description: The weight of the embedding in the reciprocal ranking fusion.
-        text_weight:
-          type: number
-          description: The weight of the text in the reciprocal ranking fusion.
-    OpenAI.ImageGenActionEnum:
-      type: string
-      enum:
-        - generate
-        - edit
-        - auto
-    OpenAI.ImageGenTool:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
-          enum:
-            - image_generation
-          description: The type of the image generation tool. Always `image_generation`.
-          x-stainless-const: true
-        model:
-          anyOf:
-            - type: string
-            - type: string
-              enum:
-                - gpt-image-1
-                - gpt-image-1-mini
-                - gpt-image-1.5
-          default: gpt-image-1
-        quality:
-          type: string
-          enum:
-            - low
-            - medium
-            - high
-            - auto
-          description: |-
-            The quality of the generated image. One of `low`, `medium`, `high`,
-              or `auto`. Default: `auto`.
-          default: auto
-        size:
-          anyOf:
-            - type: string
-            - type: string
-              enum:
-                - 1024x1024
-                - 1024x1536
-                - 1536x1024
-                - auto
-          description: The size of the generated images. For `gpt-image-2` and `gpt-image-2-2026-04-21`, arbitrary resolutions are supported as `WIDTHxHEIGHT` strings, for example `1536x864`. Width and height must both be divisible by 16 and the requested aspect ratio must be between 1:3 and 3:1. Resolutions above `2560x1440` are experimental, and the maximum supported resolution is `3840x2160`. The requested size must also satisfy the model's current pixel and edge limits. The standard sizes `1024x1024`, `1536x1024`, and `1024x1536` are supported by the GPT image models; `auto` is supported for models that allow automatic sizing. For `dall-e-2`, use one of `256x256`, `512x512`, or `1024x1024`. For `dall-e-3`, use one of `1024x1024`, `1792x1024`, or `1024x1792`.
-          default: auto
-        output_format:
-          type: string
-          enum:
-            - png
-            - webp
-            - jpeg
-          description: |-
-            The output format of the generated image. One of `png`, `webp`, or
-              `jpeg`. Default: `png`.
-          default: png
-        output_compression:
-          type: integer
-          minimum: 0
-          maximum: 100
-          description: 'Compression level for the output image. Default: 100.'
-          default: 100
-        moderation:
-          type: string
-          enum:
-            - auto
-            - low
-          description: 'Moderation level for the generated image. Default: `auto`.'
-          default: auto
-        background:
-          type: string
-          enum:
-            - transparent
-            - opaque
-            - auto
-          description: |-
-            Background type for the generated image. One of `transparent`,
-              `opaque`, or `auto`. Default: `auto`.
-          default: auto
-        input_fidelity:
-          anyOf:
-            - $ref: '#/components/schemas/OpenAI.InputFidelity'
-            - type: 'null'
-        input_image_mask:
-          $ref: '#/components/schemas/OpenAI.ImageGenToolInputImageMask'
-          description: |-
-            Optional mask for inpainting. Contains `image_url`
-              (string, optional) and `file_id` (string, optional).
-        partial_images:
-          type: integer
-          minimum: 0
-          maximum: 3
-          description: Number of partial images to generate in streaming mode, from 0 (default value) to 3.
-        action:
-          $ref: '#/components/schemas/OpenAI.ImageGenActionEnum'
-          description: 'Whether to generate a new image or edit an existing image. Default: `auto`.'
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.Tool'
-      description: A tool that generates images using the GPT image models.
-      title: Image generation tool
-    OpenAI.ImageGenToolInputImageMask:
-      type: object
-      properties:
-        image_url:
-          type: string
-          format: uri
-        file_id:
-          type: string
-    OpenAI.InlineSkillParam:
-      type: object
-      required:
-        - type
-        - name
-        - description
-        - source
-      properties:
-        type:
-          type: string
-          enum:
-            - inline
-          description: Defines an inline skill for this request.
-          x-stainless-const: true
-        name:
-          type: string
-          description: The name of the skill.
-        description:
-          type: string
-          description: The description of the skill.
-        source:
-          $ref: '#/components/schemas/OpenAI.InlineSkillSourceParam'
-          description: Inline skill payload
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.ContainerSkill'
-    OpenAI.InlineSkillSourceParam:
-      type: object
-      required:
-        - type
-        - media_type
-        - data
-      properties:
-        type:
-          type: string
-          enum:
-            - base64
-          description: The type of the inline skill source. Must be `base64`.
-          x-stainless-const: true
-          default: base64
-        media_type:
-          type: string
-          enum:
-            - application/zip
-          description: The media type of the inline skill payload. Must be `application/zip`.
-          x-stainless-const: true
-          default: application/zip
-        data:
-          type: string
-          minLength: 1
-          maxLength: 70254592
-          description: Base64-encoded skill zip bundle.
-      description: Inline skill payload
-    OpenAI.InputFidelity:
-      type: string
-      enum:
-        - high
-        - low
-      description: Control how much effort the model will exert to match the style and features, especially facial features, of input images. This parameter is only supported for `gpt-image-1` and `gpt-image-1.5` and later models, unsupported for `gpt-image-1-mini`. Supports `high` and `low`. Defaults to `low`.
-    OpenAI.LocalShellToolParam:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
-          enum:
-            - local_shell
-          description: The type of the local shell tool. Always `local_shell`.
-          x-stainless-const: true
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.Tool'
-      description: A tool that allows the model to execute shell commands in a local environment.
-      title: Local shell tool
-    OpenAI.LocalSkillParam:
-      type: object
-      required:
-        - name
-        - description
-        - path
-      properties:
-        name:
-          type: string
-          description: The name of the skill.
-        description:
-          type: string
-          description: The description of the skill.
-        path:
-          type: string
-          description: The path to the directory containing the skill.
     OpenAI.LogProbProperties:
       type: object
       required:
@@ -2222,121 +1436,6 @@ components:
       type: object
     OpenAI.MCPListToolsToolInputSchema:
       type: object
-    OpenAI.MCPTool:
-      type: object
-      required:
-        - type
-        - server_label
-      properties:
-        type:
-          type: string
-          enum:
-            - mcp
-          description: The type of the MCP tool. Always `mcp`.
-          x-stainless-const: true
-        server_label:
-          type: string
-          description: A label for this MCP server, used to identify it in tool calls.
-        server_url:
-          type: string
-          format: uri
-          description: |-
-            The URL for the MCP server. One of `server_url`, `connector_id`, or
-              `tunnel_id` must be provided.
-        connector_id:
-          type: string
-          enum:
-            - connector_dropbox
-            - connector_gmail
-            - connector_googlecalendar
-            - connector_googledrive
-            - connector_microsoftteams
-            - connector_outlookcalendar
-            - connector_outlookemail
-            - connector_sharepoint
-          description: |-
-            Identifier for service connectors, like those available in ChatGPT. One of
-              `server_url`, `connector_id`, or `tunnel_id` must be provided. Learn more
-              about service connectors [here](/docs/guides/tools-remote-mcp#connectors).
-              Currently supported `connector_id` values are:
-              - Dropbox: `connector_dropbox`
-              - Gmail: `connector_gmail`
-              - Google Calendar: `connector_googlecalendar`
-              - Google Drive: `connector_googledrive`
-              - Microsoft Teams: `connector_microsoftteams`
-              - Outlook Calendar: `connector_outlookcalendar`
-              - Outlook Email: `connector_outlookemail`
-              - SharePoint: `connector_sharepoint`
-        tunnel_id:
-          type: string
-          pattern: ^tunnel_[a-z0-9]{32}$
-          description: |-
-            The Secure MCP Tunnel ID to use instead of a direct server URL. One of
-              `server_url`, `connector_id`, or `tunnel_id` must be provided.
-        authorization:
-          type: string
-          description: |-
-            An OAuth access token that can be used with a remote MCP server, either
-              with a custom MCP server URL or a service connector. Your application
-              must handle the OAuth authorization flow and provide the token here.
-        server_description:
-          type: string
-          description: Optional description of the MCP server, used to provide more context.
-        headers:
-          anyOf:
-            - type: object
-              unevaluatedProperties:
-                type: string
-            - type: 'null'
-        allowed_tools:
-          anyOf:
-            - type: array
-              items:
-                type: string
-            - $ref: '#/components/schemas/OpenAI.MCPToolFilter'
-            - type: 'null'
-        require_approval:
-          anyOf:
-            - $ref: '#/components/schemas/OpenAI.MCPToolRequireApproval'
-            - type: string
-              enum:
-                - always
-                - never
-            - type: 'null'
-          default: always
-        defer_loading:
-          type: boolean
-          description: Whether this MCP tool is deferred and discovered via tool search.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.Tool'
-      description: |-
-        Give the model access to additional tools via remote Model Context Protocol
-        (MCP) servers. [Learn more about MCP](/docs/guides/tools-remote-mcp).
-      title: MCP tool
-    OpenAI.MCPToolFilter:
-      type: object
-      properties:
-        tool_names:
-          type: array
-          items:
-            type: string
-          description: List of allowed tool names.
-          title: MCP allowed tools
-        read_only:
-          type: boolean
-          description: |-
-            Indicates whether or not a tool modifies data or is read-only. If an
-              MCP server is [annotated with `readOnlyHint`](https://modelcontextprotocol.io/specification/2025-06-18/schema#toolannotations-readonlyhint),
-              it will match this filter.
-      description: A filter object to specify which tools are allowed.
-      title: MCP tool filter
-    OpenAI.MCPToolRequireApproval:
-      type: object
-      properties:
-        always:
-          $ref: '#/components/schemas/OpenAI.MCPToolFilter'
-        never:
-          $ref: '#/components/schemas/OpenAI.MCPToolFilter'
     OpenAI.Metadata:
       type: object
       unevaluatedProperties:
@@ -2348,63 +1447,12 @@ components:
         Keys are strings with a maximum length of 64 characters. Values are strings
         with a maximum length of 512 characters.
       x-oaiTypeLabel: map
-    OpenAI.NamespaceToolParam:
-      type: object
-      required:
-        - type
-        - name
-        - description
-        - tools
-      properties:
-        type:
-          type: string
-          enum:
-            - namespace
-          description: The type of the tool. Always `namespace`.
-          x-stainless-const: true
-        name:
-          type: string
-          minLength: 1
-          description: The namespace name used in tool calls (for example, `crm`).
-        description:
-          type: string
-          minLength: 1
-          description: A description of the namespace shown to the model.
-        tools:
-          type: array
-          items:
-            anyOf:
-              - $ref: '#/components/schemas/OpenAI.FunctionToolParam'
-              - $ref: '#/components/schemas/OpenAI.CustomToolParam'
-          minItems: 1
-          description: The function/custom tools available inside this namespace.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.Tool'
-      description: Groups function/custom tools under a shared namespace.
-      title: Namespace
     OpenAI.NoiseReductionType:
       type: string
       enum:
         - near_field
         - far_field
       description: Type of noise reduction. `near_field` is for close-talking microphones such as headphones, `far_field` is for far-field microphones such as laptop or conference room microphones.
-    OpenAI.RankerVersionType:
-      type: string
-      enum:
-        - auto
-        - default-2024-11-15
-    OpenAI.RankingOptions:
-      type: object
-      properties:
-        ranker:
-          $ref: '#/components/schemas/OpenAI.RankerVersionType'
-          description: The ranker to use for the file search.
-        score_threshold:
-          type: number
-          description: The score threshold for the file search, a number between 0 and 1. Numbers closer to 1 will attempt to return only the most relevant results, but may return fewer results.
-        hybrid_search:
-          $ref: '#/components/schemas/OpenAI.HybridSearchOptions'
-          description: Weights that control how reciprocal rank fusion balances semantic embedding matches versus sparse keyword matches when hybrid search is enabled.
     OpenAI.RealtimeAudioFormats:
       type: object
       required:
@@ -6016,39 +5064,6 @@ components:
           enum:
             - server_vad
             - semantic_vad
-    OpenAI.SearchContentType:
-      type: string
-      enum:
-        - text
-        - image
-    OpenAI.SearchContextSize:
-      type: string
-      enum:
-        - low
-        - medium
-        - high
-    OpenAI.SkillReferenceParam:
-      type: object
-      required:
-        - type
-        - skill_id
-      properties:
-        type:
-          type: string
-          enum:
-            - skill_reference
-          description: References a skill created with the /v1/skills endpoint.
-          x-stainless-const: true
-        skill_id:
-          type: string
-          minLength: 1
-          maxLength: 64
-          description: The ID of the referenced skill.
-        version:
-          type: string
-          description: Optional skill version. Use a positive integer or 'latest'. Omit for default.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.ContainerSkill'
     OpenAI.SpecificApplyPatchParam:
       type: object
       required:
@@ -6079,32 +5094,6 @@ components:
         - $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
       description: Forces the model to call the shell tool when a tool call is required.
       title: Specific shell tool choice
-    OpenAI.Tool:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          $ref: '#/components/schemas/OpenAI.ToolType'
-      discriminator:
-        propertyName: type
-        mapping:
-          code_interpreter: '#/components/schemas/OpenAI.CodeInterpreterTool'
-          function: '#/components/schemas/OpenAI.FunctionTool'
-          file_search: '#/components/schemas/OpenAI.FileSearchTool'
-          computer_use_preview: '#/components/schemas/OpenAI.ComputerUsePreviewTool'
-          web_search: '#/components/schemas/OpenAI.WebSearchTool'
-          image_generation: '#/components/schemas/OpenAI.ImageGenTool'
-          local_shell: '#/components/schemas/OpenAI.LocalShellToolParam'
-          shell: '#/components/schemas/OpenAI.FunctionShellToolParam'
-          custom: '#/components/schemas/OpenAI.CustomToolParam'
-          web_search_preview: '#/components/schemas/OpenAI.WebSearchPreviewTool'
-          apply_patch: '#/components/schemas/OpenAI.ApplyPatchToolParam'
-          computer: '#/components/schemas/OpenAI.ComputerTool'
-          namespace: '#/components/schemas/OpenAI.NamespaceToolParam'
-          tool_search: '#/components/schemas/OpenAI.ToolSearchToolParam'
-          mcp: '#/components/schemas/OpenAI.MCPTool'
-      description: A tool that can be used to generate a response.
     OpenAI.ToolChoiceAllowed:
       type: object
       required:
@@ -6380,57 +5369,6 @@ components:
       description: |-
         Indicates that the model should use a built-in tool to generate a response.
         [Learn more about built-in tools](https://platform.openai.com/docs/guides/tools).
-    OpenAI.ToolSearchExecutionType:
-      type: string
-      enum:
-        - server
-        - client
-    OpenAI.ToolSearchToolParam:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
-          enum:
-            - tool_search
-          description: The type of the tool. Always `tool_search`.
-          x-stainless-const: true
-        execution:
-          $ref: '#/components/schemas/OpenAI.ToolSearchExecutionType'
-          description: Whether tool search is executed by the server or by the client.
-        description:
-          anyOf:
-            - type: string
-            - type: 'null'
-        parameters:
-          anyOf:
-            - $ref: '#/components/schemas/OpenAI.EmptyModelParam'
-            - type: 'null'
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.Tool'
-      description: Hosted or BYOT tool search configuration for deferred tools.
-      title: Tool search tool
-    OpenAI.ToolType:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - function
-            - file_search
-            - computer
-            - computer_use_preview
-            - web_search
-            - mcp
-            - code_interpreter
-            - image_generation
-            - local_shell
-            - shell
-            - custom
-            - namespace
-            - tool_search
-            - web_search_preview
-            - apply_patch
     OpenAI.TranscriptTextUsageDuration:
       type: object
       required:
@@ -6504,103 +5442,6 @@ components:
             - verse
             - marin
             - cedar
-    OpenAI.WebSearchApproximateLocation:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
-          enum:
-            - approximate
-          description: The type of location approximation. Always `approximate`.
-          x-stainless-const: true
-          default: approximate
-        country:
-          anyOf:
-            - type: string
-            - type: 'null'
-        region:
-          anyOf:
-            - type: string
-            - type: 'null'
-        city:
-          anyOf:
-            - type: string
-            - type: 'null'
-        timezone:
-          anyOf:
-            - type: string
-            - type: 'null'
-      description: The approximate location of the user.
-      title: Web search approximate location
-    OpenAI.WebSearchPreviewTool:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
-          enum:
-            - web_search_preview
-          description: The type of the web search tool. One of `web_search_preview` or `web_search_preview_2025_03_11`.
-          x-stainless-const: true
-        user_location:
-          anyOf:
-            - $ref: '#/components/schemas/OpenAI.ApproximateLocation'
-            - type: 'null'
-        search_context_size:
-          $ref: '#/components/schemas/OpenAI.SearchContextSize'
-          description: High level guidance for the amount of context window space to use for the search. One of `low`, `medium`, or `high`. `medium` is the default.
-        search_content_types:
-          type: array
-          items:
-            $ref: '#/components/schemas/OpenAI.SearchContentType'
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.Tool'
-      description: This tool searches the web for relevant results to use in a response. Learn more about the [web search tool](https://platform.openai.com/docs/guides/tools-web-search).
-      title: Web search preview
-    OpenAI.WebSearchTool:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
-          enum:
-            - web_search
-          description: The type of the web search tool. One of `web_search` or `web_search_2025_08_26`.
-        filters:
-          anyOf:
-            - $ref: '#/components/schemas/OpenAI.WebSearchToolFilters'
-            - type: 'null'
-        user_location:
-          anyOf:
-            - $ref: '#/components/schemas/OpenAI.WebSearchApproximateLocation'
-            - type: 'null'
-        search_context_size:
-          type: string
-          enum:
-            - low
-            - medium
-            - high
-          description: High level guidance for the amount of context window space to use for the search. One of `low`, `medium`, or `high`. `medium` is the default.
-          default: medium
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.Tool'
-      description: |-
-        Search the Internet for sources related to the prompt. Learn more about the
-        [web search tool](/docs/guides/tools-web-search).
-      title: Web search
-    OpenAI.WebSearchToolFilters:
-      type: object
-      properties:
-        allowed_domains:
-          anyOf:
-            - type: array
-              items:
-                type: string
-            - type: 'null'
     OpenAIVoice:
       type: object
       required:
@@ -7448,13 +6289,70 @@ components:
           type: string
           description: Server-generated voice-optimized instructions.
       description: Voice-optimized instruction adaptation.
+    VoiceLiveMcpApprovalMode:
+      type: string
+      enum:
+        - never
+        - always
+      description: MCP approval modes accepted by VoiceLive.
+    VoiceLiveMcpApprovalRules:
+      type: object
+      properties:
+        never:
+          type: array
+          items:
+            type: string
+        always:
+          type: array
+          items:
+            type: string
+      description: Per-tool MCP approval rules.
+    VoiceLiveMcpAuthorization:
+      oneOf:
+        - type: string
+        - $ref: '#/components/schemas/AssignedManagedIdentity'
+      description: MCP authorization accepted by VoiceLive.
+    VoiceLiveMcpRequireApproval:
+      oneOf:
+        - $ref: '#/components/schemas/VoiceLiveMcpApprovalMode'
+        - $ref: '#/components/schemas/VoiceLiveMcpApprovalRules'
+      description: MCP approval configuration accepted by VoiceLive.
+    VoiceLiveMcpTool:
+      type: object
+      required:
+        - type
+        - server_label
+        - server_url
+      properties:
+        type:
+          type: string
+          enum:
+            - mcp
+        server_label:
+          type: string
+        server_url:
+          type: string
+        authorization:
+          $ref: '#/components/schemas/VoiceLiveMcpAuthorization'
+        headers:
+          type: object
+          unevaluatedProperties:
+            type: string
+        allowed_tools:
+          type: array
+          items:
+            type: string
+        require_approval:
+          $ref: '#/components/schemas/VoiceLiveMcpRequireApproval'
+        response_scheduling:
+          $ref: '#/components/schemas/McpResponseScheduling'
+          default: silent
+      description: Remote MCP server configuration supported by VoiceLive.
     VoiceLiveTool:
       oneOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeFunctionTool'
-        - $ref: '#/components/schemas/OpenAI.MCPTool'
-      description: |-
-        A tool available to the model during a VoiceLive session. Consumes the OpenAI
-        GA Realtime tool models: `function` tools and remote `mcp` tools.
+        - $ref: '#/components/schemas/VoiceLiveMcpTool'
+      description: A tool available to the model during a VoiceLive session.
     VoiceLiveToolChoice:
       oneOf:
         - $ref: '#/components/schemas/OpenAI.ToolChoiceOptions'
