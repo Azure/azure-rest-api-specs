@@ -15,9 +15,10 @@ import "./wacasmroutes.tsp";
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations interface is intentionally excluded"
 @armProviderNamespace
 @service(#{ title: "Azure Migrate Assessment Service" })
 @versioned(WACAApiVersions)
 @doc("Azure Migrate Resource Provider management API.")
 namespace Microsoft.Migrate;
+
+interface Operations extends Azure.ResourceManager.Operations {}
