@@ -24,7 +24,21 @@ These are the global settings for the API.
 
 ```yaml
 openapi-type: arm
-tag: package-preview-2026-02
+tag: package-preview-2026-06
+```
+
+### Tag: package-preview-2026-06
+
+These settings apply only when `--tag=package-preview-2026-06` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-06'
+input-file:
+  - preview/2026-06-01-preview/waves.json
+suppressions:
+  - code: AvoidAdditionalProperties
+    reason: AMH feature is widely adopted and requires additionalProperties for these swagger properties.
+  - code: DescriptionMustNotBeNodeName
+    reason: Migrate Project swagger is not in typespec.
 ```
 
 ### Tag: package-preview-2026-02
