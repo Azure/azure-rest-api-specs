@@ -52,11 +52,3 @@ suppressions:
   - code: OperationsAPIImplementation
     reason: Microsoft.Migrate resource provider has one RP with multiple SDKs. Operations API is centrally implemented at the AssessmentProjects level and intentionally excluded from individual service specifications to avoid duplication across multiple SDK instances.
 ```
-
-## Suppression
-
-``` yaml
-directive:
-  - suppress: MISSING_APIS_IN_DEFAULT_TAG
-    reason: The AVS-related business case operations (avsSummaries, evaluatedAvsMachines, evaluatedMachines and compareSummary) were intentionally removed in the 2025-09-09-preview version (the default tag) after breaking-change board review. These APIs remain available in the earlier package-preview-2024-03 tag.
-```
