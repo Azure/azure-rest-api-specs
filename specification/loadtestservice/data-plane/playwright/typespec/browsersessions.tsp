@@ -69,7 +69,7 @@ model BrowserSession {
   @added(Versions.v2026_06_01_preview)
   browserRegion?: string;
 
-  @doc("The websocket endpoint that can be used to connect to the browser session.")
+  @doc("The websocket endpoint that can be used to connect to the browser session. This is only returned when the session is created.")
   @visibility(Lifecycle.Read)
   @added(Versions.v2026_06_01_preview)
   browserEndpoint?: string;
