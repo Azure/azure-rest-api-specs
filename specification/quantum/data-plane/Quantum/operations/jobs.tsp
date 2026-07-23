@@ -42,6 +42,10 @@ namespace Quantum.Workspace.Services {
     @added(QuantumWorkspaceAPIVersion.v2025_12_01_preview)
     cancel is ActionOperation<JobDetails>;
 
+    /** Resume a failed or cancelled job that has remaining shots. */
+    @added(QuantumWorkspaceAPIVersion.v2026_08_01_preview)
+    resume is NoContentActionOperation<JobDetails>;
+
     /** Get job by its id. */
     get is GetOperation<JobDetails>;
 

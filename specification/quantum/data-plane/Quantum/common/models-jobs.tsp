@@ -124,6 +124,31 @@ model JobDetails extends ItemDetails {
   @visibility(Lifecycle.Read)
   quantumComputingData?: QuantumComputingData;
 
+  /** The total number of shots requested for the job. */
+  @added(QuantumWorkspaceAPIVersion.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  shots?: int32;
+
+  /** The number of times the job has been resumed. */
+  @added(QuantumWorkspaceAPIVersion.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  resumeCount?: int32;
+
+  /** The number of shots that completed successfully. */
+  @added(QuantumWorkspaceAPIVersion.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  shotsSucceeded?: int32;
+
+  /** The number of shots that failed. */
+  @added(QuantumWorkspaceAPIVersion.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  shotsFailed?: int32;
+
+  /** The number of shots processed during output translation. */
+  @added(QuantumWorkspaceAPIVersion.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  shotsTranslated?: int32;
+
   /** The input parameters for the job. JSON object used by the target solver. It is expected that the size of this object is small and only used to specify parameters for the execution target, not the input data. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   inputParams?: {};

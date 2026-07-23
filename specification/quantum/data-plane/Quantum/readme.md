@@ -24,15 +24,14 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 These are the global settings for the quantum.
 
-``` yaml
+```yaml
 openapi-type: data-plane
-tag: package-2026-01-15-preview
+tag: package-2026-08-01-preview
 suppressions:
   - code: OperationId
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/jobs/{jobId}"].put.operationId
-    reason:
-      A Quantum Workspace job can only be created via the PUT method (can't be updated or replaced). 
+    reason: A Quantum Workspace job can only be created via the PUT method (can't be updated or replaced).
   - code: DeleteInOperationName
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/jobs/{jobId}"].delete.operationId
@@ -50,13 +49,20 @@ suppressions:
   - code: OperationId
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/sessions/{sessionId}"].put.operationId
-    reason:
-      A Quantum Workspace session has an intentional pattern of `open` (with a PUT) and `close` (with a POST action). 
+    reason: A Quantum Workspace session has an intentional pattern of `open` (with a PUT) and `close` (with a POST action).
   - code: PutInOperationName
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/sessions/{sessionId}"].put.operationId
-    reason:
-      A Quantum Workspace session has an intentional pattern of `open` (with a PUT) and `close` (with a POST action). 
+    reason: A Quantum Workspace session has an intentional pattern of `open` (with a PUT) and `close` (with a POST action).
+```
+
+### Tag: package-2026-08-01-preview
+
+These settings apply only when `--tag=package-2026-08-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-08-01-preview'
+input-file:
+  - preview/2026-08-01-preview/quantum.json
 ```
 
 ### Tag: package-2026-01-15-preview
@@ -86,15 +92,14 @@ input-file:
   - preview/2025-09-01-preview/quantum.json
 ```
 
-``` yaml
+```yaml
 openapi-type: data-plane
 tag: package-2024-10-01-preview
 suppressions:
   - code: OperationId
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/jobs/{jobId}"].put.operationId
-    reason:
-      A Quantum Workspace job can only be created via the PUT method (can't be updated or replaced). 
+    reason: A Quantum Workspace job can only be created via the PUT method (can't be updated or replaced).
   - code: DeleteInOperationName
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/jobs/{jobId}"].delete.operationId
@@ -112,19 +117,17 @@ suppressions:
   - code: OperationId
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/sessions/{sessionId}"].put.operationId
-    reason:
-      A Quantum Workspace session has an intentional pattern of `open` (with a PUT) and `close` (with a POST action). 
+    reason: A Quantum Workspace session has an intentional pattern of `open` (with a PUT) and `close` (with a POST action).
   - code: PutInOperationName
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/sessions/{sessionId}"].put.operationId
-    reason:
-      A Quantum Workspace session has an intentional pattern of `open` (with a PUT) and `close` (with a POST action). 
+    reason: A Quantum Workspace session has an intentional pattern of `open` (with a PUT) and `close` (with a POST action).
   - code: PatchContentType
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/jobs/{jobId}"].patch.consumes
     reason:
       For historical reasons and backward compatibility, the Job Update operation
-      uses a JsonPatchDocument. 
+      uses a JsonPatchDocument.
 ```
 
 ### Tag: package-2024-10-01-preview
@@ -149,7 +152,7 @@ input-file:
 
 These settings apply only when `--tag=package-2023-11-13-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2023-11-13-preview'
+```yaml $(tag) == 'package-2023-11-13-preview'
 input-file:
   - preview/2023-11-13-preview/quantum.json
 ```
@@ -158,7 +161,7 @@ input-file:
 
 These settings apply only when `--tag=package-2022-09-12-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2022-09-12-preview'
+```yaml $(tag) == 'package-2022-09-12-preview'
 input-file:
   - preview/2022-09-12-preview/quantum.json
 ```
@@ -167,7 +170,7 @@ input-file:
 
 These settings apply only when `--tag=package-2021-11-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2021-11-01-preview'
+```yaml $(tag) == 'package-2021-11-01-preview'
 input-file:
   - preview/2021-11-01-preview/quantum.json
 ```
@@ -176,7 +179,7 @@ input-file:
 
 These settings apply only when `--tag=package-2021-05-06-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2021-05-06-preview'
+```yaml $(tag) == 'package-2021-05-06-preview'
 input-file:
   - preview/2021-05-06-preview/quantum.json
 ```
@@ -185,7 +188,7 @@ input-file:
 
 These settings apply only when `--tag=package-2019-11-04-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2019-11-04-preview'
+```yaml $(tag) == 'package-2019-11-04-preview'
 input-file:
   - preview/2019-11-04-preview/quantum.json
 ```
