@@ -88,12 +88,17 @@ interface ServiceGroups {
 
   /**
    * List the descendant serviceGroups of the serviceGroup, ordered by hierarchy.
+   *
+   * This is a paginated POST action. To fetch subsequent pages, re-POST to the URL
+   * in the response's nextLink field with the response's skipToken included in the
+   * request body. SDKs do not natively support POST-based pagination, so callers
+   * must loop manually until nextLink is absent.
    */
   @added(Versions.v2026_03_01_preview)
   listDescendants is ArmResourceActionSync<
     ServiceGroup,
     ListDescendantsRequest,
-    ArmResponse<ServiceGroupCollectionResponse>,
+    ArmResponse<ListDescendantsResponse>,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
   >;
 }

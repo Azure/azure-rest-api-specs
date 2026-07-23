@@ -123,7 +123,32 @@ model ServiceGroupCollectionResponse is Azure.Core.Page<ServiceGroup>;
 @added(Versions.v2026_03_01_preview)
 model ListDescendantsRequest {
   /**
-   * An opaque pagination token returned via nextLink to fetch the next page of results.
+   * An opaque pagination token returned in the previous response's skipToken field.
+   * Include this value in the request body to fetch the next page of results.
+   */
+  skipToken?: string;
+}
+
+/**
+ * Response for the listDescendants action. Contains a page of service groups
+ * plus pagination tokens for fetching subsequent pages.
+ */
+@added(Versions.v2026_03_01_preview)
+model ListDescendantsResponse {
+  /**
+   * The page of descendant service groups.
+   */
+  value: ServiceGroup[];
+
+  /**
+   * URL of the next page. When present, callers must re-POST to this URL with
+   * the skipToken value from this response in the request body.
+   */
+  nextLink?: url;
+
+  /**
+   * Opaque pagination token. When present, callers must include this value in
+   * the request body of the next POST call to fetch the next page of results.
    */
   skipToken?: string;
 }
