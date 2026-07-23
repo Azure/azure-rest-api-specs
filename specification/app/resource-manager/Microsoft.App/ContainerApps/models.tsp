@@ -6447,12 +6447,14 @@ model McpServerSettings {
   /**
    * Indicates whether the MCP server is enabled.
    */
-  isMcpServerEnabled?: boolean = false;
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a bugfix for backend compatibility"
+  isMCPServerEnabled?: boolean = false;
 
   /**
    * Indicates whether the MCP server API key is disabled.
    */
-  isMcpServerApiKeyDisabled?: boolean = false;
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a bugfix for backend compatibility"
+  isMCPServerApiKeyDisabled?: boolean = false;
 
   /**
    * The endpoint of the MCP server.
