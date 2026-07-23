@@ -1449,6 +1449,8 @@ using Microsoft.MachineLearningServices;
 @@clientName(NotebookAccessTokenResult.hostName, "hostname", "java");
 @@clientName(UserAccountCredentials.adminUserName, "adminUsername", "java");
 @@clientName(ComputeInstanceSshSettings.adminUserName, "adminUsername", "java");
+@@clientName(DockerCredential.userName, "username", "java");
+@@clientName(ComputeInstanceCreatedBy.userName, "username", "java");
 
 // Java casing fixes for FQDN-related types
 @@clientName(ExternalFQDNResponse, "ExternalFqdnResponse", "java");
@@ -1472,11 +1474,15 @@ using Microsoft.MachineLearningServices;
 );
 
 // Java casing fixes for AKS-related types
-@@clientName(AksNetworkingConfiguration, "AKSNetworkingConfiguration", "java");
-@@clientName(AksComputeSecrets, "AKSComputeSecrets", "java");
+@@clientName(AKS, "Aks", "java");
+@@clientName(AKSSchema, "AksSchema", "java");
+@@clientName(AKSSchemaProperties, "AksSchemaProperties", "java");
+@@clientName(AksNetworkingConfiguration.dnsServiceIP, "dnsServiceIp", "java");
+
+// Java casing fix for PAT-related types
 @@clientName(
-  AksComputeSecretsProperties,
-  "AKSComputeSecretsProperties",
+  PATAuthTypeWorkspaceConnectionProperties,
+  "PatAuthTypeWorkspaceConnectionProperties",
   "java"
 );
 
