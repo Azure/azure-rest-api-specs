@@ -137,6 +137,7 @@ import "./routes.tsp";
 import "./VirtualNetworkAppliance.tsp";
 import "./ServiceGateway.tsp";
 import "./InterconnectGroup.tsp";
+import "./AddressPrefixSet.tsp";
 import "../Common/main.tsp";
 
 using TypeSpec.Rest;
