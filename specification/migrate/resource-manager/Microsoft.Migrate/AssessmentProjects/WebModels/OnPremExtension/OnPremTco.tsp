@@ -232,6 +232,7 @@ model ManagementCostDetails {
   managementCost: float64;
 
   @doc("Breakdown of individual management cost components.")
+  @identifiers(#["name"])
   managementCostComponents: CostComponent[];
 }
 
@@ -242,6 +243,7 @@ model LicenseCostDetails {
   licenseCost: float64;
 
   @doc("Breakdown of individual license cost components.")
+  @identifiers(#["name"])
   licenseCostComponents: CostComponent[];
 }
 
@@ -296,12 +298,15 @@ model CarbonEmissionMetric {
 @added(AssessmentProjectApiVersions.v2025_09_09_preview)
 model CarbonEmissionsDetails {
   @doc("Scope 1 carbon emission metrics.")
+  @identifiers(#["name"])
   scope1: CarbonEmissionMetric[];
 
   @doc("Scope 2 carbon emission metrics.")
+  @identifiers(#["name"])
   scope2: CarbonEmissionMetric[];
 
   @doc("Scope 3 carbon emission metrics.")
+  @identifiers(#["name"])
   scope3: CarbonEmissionMetric[];
 }
 
