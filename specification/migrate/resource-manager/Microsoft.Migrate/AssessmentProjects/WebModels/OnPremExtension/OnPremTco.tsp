@@ -30,15 +30,19 @@ model OnPremTco
 @added(AssessmentProjectApiVersions.v2025_09_09_preview)
 model OnPremTcoProperties {
   @doc("Overall aggregated total, capex, and opex costs for on-premises workloads.")
+  @visibility(Lifecycle.Read)
   overallCost: CostComponentDetails;
 
   @doc("Detailed breakdown of on-premises cost components.")
+  @visibility(Lifecycle.Read)
   costDetails: CostDetailsV2;
 
   @doc("Carbon emission details associated with on-premises workloads.")
+  @visibility(Lifecycle.Read)
   sustainabilityDetails: CarbonEmissionsDetails;
 
   @doc("Year-wise Extended Security Update (ESU) costs for on-premises workloads.")
+  @visibility(Lifecycle.Read)
   @identifiers(#["year"])
   yearlyOnPremisesEsu: YearlyEsuDetails[];
 }
