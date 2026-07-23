@@ -150,5 +150,6 @@ model ListDescendantsResponse {
    * Opaque pagination token. When present, callers must include this value in
    * the request body of the next POST call to fetch the next page of results.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "skipToken is the standard Azure OData paging continuation token, not a secret. The linter flags it due to the 'Token' substring in the name; the property carries opaque pagination state and is not sensitive."
   skipToken?: string;
 }
