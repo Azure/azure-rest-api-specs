@@ -1102,33 +1102,18 @@
           "readOnly": true
         },
         "operatingSystem": {
-          "type": "string",
-          "description": "The browser session operating system. Defaults to Linux.",
-          "default": "Linux",
-          "enum": [
-            "Linux",
-            "Windows"
-          ],
-          "x-ms-enum": {
-            "name": "OS",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Linux",
-                "value": "Linux",
-                "description": "Linux operating system."
-              },
-              {
-                "name": "Windows",
-                "value": "Windows",
-                "description": "Windows operating system."
-              }
-            ]
-          }
+          "$ref": "#/definitions/OS",
+          "description": "The browser session operating system."
         }
       },
       "required": [
-        "id"
+        "id",
+        "displayName",
+        "creatorId",
+        "status",
+        "source",
+        "browserType",
+        "operatingSystem"
       ]
     },
     "BrowserSessionSource": {
@@ -1288,6 +1273,30 @@
             "create"
           ]
         }
+      }
+    },
+    "OS": {
+      "type": "string",
+      "description": "The operating system to configure for remote script execution.",
+      "enum": [
+        "Linux",
+        "Windows"
+      ],
+      "x-ms-enum": {
+        "name": "OS",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Linux",
+            "value": "Linux",
+            "description": "Linux operating system."
+          },
+          {
+            "name": "Windows",
+            "value": "Windows",
+            "description": "Windows operating system."
+          }
+        ]
       }
     },
     "PagedAccessToken": {

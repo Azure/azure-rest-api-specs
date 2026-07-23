@@ -26,10 +26,11 @@ model BrowserSession {
   @doc("The browser session display name.")
   @minLength(1)
   @maxLength(200)
-  displayName?: string;
+  displayName: string;
 
   @doc("The browser session creator's ID.")
   @visibility(Lifecycle.Read)
+  @madeOptional(Versions.v2026_06_01_preview)
   creatorId?: string;
 
   @doc("The browser session start time in UTC.")
@@ -46,18 +47,22 @@ model BrowserSession {
 
   @doc("The browser session status.")
   @visibility(Lifecycle.Read)
+  @madeOptional(Versions.v2026_06_01_preview)
   status?: BrowserSessionStatus;
 
   @doc("The browser session source details.")
   @visibility(Lifecycle.Read)
+  @madeOptional(Versions.v2026_06_01_preview)
   source?: BrowserSessionSource;
 
   @doc("The browser session browser type.")
   @visibility(Lifecycle.Read)
+  @madeOptional(Versions.v2026_06_01_preview)
   browserType?: BrowserType;
 
-  @doc("The browser session operating system. Defaults to Linux.")
-  operatingSystem?: OS = OS.Linux;
+  @doc("The browser session operating system.")
+  @madeOptional(Versions.v2026_06_01_preview)
+  operatingSystem?: OS;
 
   @doc("The region where the provisioned browser container is located.")
   @visibility(Lifecycle.Read)
