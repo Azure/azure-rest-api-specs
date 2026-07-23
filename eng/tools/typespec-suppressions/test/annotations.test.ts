@@ -1,5 +1,9 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { emitSuppressionAnnotations, formatSuppressionAnnotation } from "../src/annotations.ts";
+import {
+  classifySuppression,
+  emitSuppressionAnnotations,
+  formatSuppressionAnnotation,
+} from "../src/annotations.ts";
 import type { SuppressionChange, SuppressionRecord } from "../src/types.ts";
 
 function makeRecord(overrides: Partial<SuppressionRecord> = {}): SuppressionRecord {
@@ -20,57 +24,111 @@ function makeRecord(overrides: Partial<SuppressionRecord> = {}): SuppressionReco
   };
 }
 
+describe("classifySuppression", () => {
+  it("classifies a justified new suppression as new-suppression", () => {
+    expect(classifySuppression(makeRecord(), "new")).toBe("new-suppression");
+  });
+
+  it("classifies a justified changed suppression as changed-justification", () => {
+    expect(classifySuppression(makeRecord(), "changed")).toBe("changed-justification");
+  });
+
+  it("classifies a blank justification as missing-justification regardless of origin", () => {
+    expect(classifySuppression(makeRecord({ justification: "   " }), "new")).toBe(
+      "missing-justification",
+    );
+    expect(classifySuppression(makeRecord({ justification: "" }), "changed")).toBe(
+      "missing-justification",
+    );
+  });
+});
+
 describe("formatSuppressionAnnotation", () => {
   it("anchors the warning to the source file and location", () => {
-    const annotation = formatSuppressionAnnotation(makeRecord());
+    const annotation = formatSuppressionAnnotation(makeRecord(), "new");
 
-    expect(annotation).toContain("::warning ");
     expect(annotation).toContain("file=specification/contoso/Contoso.Widget/main.tsp");
     expect(annotation).toContain("line=42");
     expect(annotation).toContain("col=3");
-    expect(annotation).toContain("title=New/changed TypeSpec Suppression - REVIEW REQUIRED");
   });
 
-  it("lays out the body as encoded newline-separated lines", () => {
-    const annotation = formatSuppressionAnnotation(makeRecord());
+  it("emits a ::warning with the New Suppression title for a justified new suppression", () => {
+    const annotation = formatSuppressionAnnotation(makeRecord(), "new");
+
+    expect(annotation).toContain("::warning ");
+    expect(annotation).toContain("title=⚠️ New Suppression");
+    expect(annotation).toContain(
+      "This PR introduces a new suppression that requires review and approval.",
+    );
+  });
+
+  it("emits a ::warning with the Changed Justification title for a justified changed suppression", () => {
+    const annotation = formatSuppressionAnnotation(makeRecord(), "changed");
+
+    expect(annotation).toContain("::warning ");
+    expect(annotation).toContain("title=⚠️ Changed Justification");
+    expect(annotation).toContain("The justification for an existing suppression changed");
+  });
+
+  it("emits a ::error with the Missing Justification title when the justification is blank", () => {
+    const annotation = formatSuppressionAnnotation(makeRecord({ justification: "   " }), "new");
+
+    expect(annotation).toContain("::error ");
+    expect(annotation).not.toContain("::warning ");
+    expect(annotation).toContain("title=❌ Missing Justification");
+    expect(annotation).toContain("This suppression is missing a justification");
+  });
+
+  it("treats a blank justification as ::error even for a changed suppression (missing wins)", () => {
+    const annotation = formatSuppressionAnnotation(makeRecord({ justification: "" }), "changed");
+
+    expect(annotation).toContain("::error ");
+    expect(annotation).toContain("title=❌ Missing Justification");
+    expect(annotation).not.toContain("Changed Justification");
+  });
+
+  it("includes the shared reviewer guidance in the body", () => {
+    const annotation = formatSuppressionAnnotation(makeRecord(), "new");
 
     expect(annotation).toContain(
       "Authors should avoid adding new suppressions and prefer fixing the underlying issue",
     );
+  });
+
+  it("includes the rule docs line when a documentation URL is available", () => {
+    const annotation = formatSuppressionAnnotation(makeRecord(), "new");
+
     expect(annotation).toContain(
       "**Rule docs**: https://azure.github.io/typespec-azure/docs/libraries/azure-core/rules/no-enum",
     );
-    // Body lines are joined with newlines and encoded as %0A for the workflow command.
-    expect(annotation).toContain("%0A");
-    expect(annotation).not.toContain("\n");
-  });
-
-  it("omits the rule name and, when justified, the justification text", () => {
-    const annotation = formatSuppressionAnnotation(makeRecord());
-
-    expect(annotation).not.toContain("@azure-tools/typespec-azure-core/no-enum");
-    expect(annotation).not.toContain("Legacy enum kept for backward compatibility");
-    expect(annotation).not.toContain("NO JUSTIFICATION PROVIDED");
   });
 
   it("omits the docs clause when no documentation URL is available", () => {
-    const annotation = formatSuppressionAnnotation(makeRecord({ ruleMetadata: undefined }));
+    const annotation = formatSuppressionAnnotation(makeRecord({ ruleMetadata: undefined }), "new");
 
     expect(annotation).not.toContain("Rule docs");
   });
 
-  it("flags a missing justification", () => {
-    const annotation = formatSuppressionAnnotation(makeRecord({ justification: "   " }));
+  it("omits the rule name and justification text from the body", () => {
+    const annotation = formatSuppressionAnnotation(makeRecord(), "new");
 
-    expect(annotation).toContain("NO JUSTIFICATION PROVIDED — a justification is required.");
+    expect(annotation).not.toContain("@azure-tools/typespec-azure-core/no-enum");
+    expect(annotation).not.toContain("Legacy enum kept for backward compatibility");
+  });
+
+  it("encodes newlines as %0A and never emits a literal newline", () => {
+    const annotation = formatSuppressionAnnotation(makeRecord(), "new");
+
+    expect(annotation).toContain("%0A");
+    expect(annotation).not.toContain("\n");
   });
 
   it("escapes newlines and percent signs in the message", () => {
     const annotation = formatSuppressionAnnotation(
       makeRecord({
-        justification: "   ",
         ruleMetadata: { documentationUrl: "https://example.com/docs%20guide" },
       }),
+      "new",
     );
 
     expect(annotation).toContain("https://example.com/docs%2520guide");
@@ -84,7 +142,7 @@ describe("emitSuppressionAnnotations", () => {
     vi.restoreAllMocks();
   });
 
-  it("emits one warning per new and changed suppression, anchored to the head location", () => {
+  it("emits one annotation per new and changed suppression, anchored to the head location", () => {
     const logSpy = vi.spyOn(console, "log").mockImplementation(() => {});
 
     const changed: SuppressionChange = {
@@ -106,12 +164,15 @@ describe("emitSuppressionAnnotations", () => {
 
     expect(logSpy).toHaveBeenCalledTimes(2);
     const [first, second] = logSpy.mock.calls.map((call) => call[0]);
+    // New suppression is classified with the New Suppression title.
     expect(first).toContain("file=specification/contoso/Contoso.Widget/main.tsp");
     expect(first).toContain("line=42");
-    // Changed suppression is anchored to the head-side (after) location, not the before line.
+    expect(first).toContain("title=⚠️ New Suppression");
+    // Changed suppression is anchored to the head-side (after) location and title.
     expect(second).toContain("file=specification/contoso/Contoso.Widget/models.tsp");
     expect(second).toContain("line=55");
     expect(second).not.toContain("line=10");
+    expect(second).toContain("title=⚠️ Changed Justification");
   });
 
   it("emits nothing when there are no new or changed suppressions", () => {
