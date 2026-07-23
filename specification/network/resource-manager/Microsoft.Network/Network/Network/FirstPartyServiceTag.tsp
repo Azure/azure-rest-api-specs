@@ -18,11 +18,19 @@ namespace Microsoft.Network;
 /**
  * First party service tag resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Follows the shared Network Common.Resource pattern used by every resource in this converted project"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Network resources extend the shared Common.Resource custom resource for backward compatibility with the existing swagger hierarchy"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Back compatibility with the previous Network AutoRest C# hierarchy"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy.feature decorator is required for swagger file splitting in this converted project"
 @added(Versions.v2025_09_01)
 @Azure.ResourceManager.Legacy.feature(Features.firstPartyServiceTag)
-model FirstPartyServiceTag
-  is TrackedResource<FirstPartyServiceTagPropertiesFormat> {
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model FirstPartyServiceTag extends Common.Resource {
+  /**
+   * Properties of the first party service tag.
+   */
+  properties?: FirstPartyServiceTagPropertiesFormat;
+
   /**
    * The name of the first party service tag.
    */
