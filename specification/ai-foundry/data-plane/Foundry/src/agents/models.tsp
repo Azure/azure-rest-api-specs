@@ -591,6 +591,60 @@ model EntraAuthorizationScheme extends AgentEndpointAuthorizationScheme {
   type: AgentEndpointAuthorizationSchemeType.Entra;
 }
 
+@doc("The Entra sign-in type governing which Entra application the agent endpoint validates inbound tokens against.")
+union EntraSignInType {
+  string,
+
+  @doc("Sign-in using the Foundry application (ai.azure.com). Inbound tokens are validated against the Foundry application audience. This is the default when a sign-in configuration is not specified.")
+  foundry: "foundry",
+
+  @doc("Agent-blueprint sign-in. The agent endpoint validates inbound tokens against the agent's blueprint application.")
+  agent_blueprint: "agent_blueprint",
+}
+
+@doc("""
+  Entra sign-in configuration for the agent endpoint. The `type` property discriminates the concrete
+  configuration type; type-specific inputs (such as token validation) are carried only by the types
+  that support them. Defaults to Foundry sign-in when not specified.
+  """)
+@discriminator("type")
+model EntraSignInConfig {
+  @doc("The Entra sign-in type.")
+  type: EntraSignInType;
+}
+
+@doc("Foundry Entra sign-in configuration. The agent endpoint validates inbound tokens against the Foundry application (ai.azure.com). This is the default when a sign-in configuration is not specified.")
+model FoundryEntraSignInConfig extends EntraSignInConfig {
+  @doc("The Entra sign-in type. Always 'foundry'.")
+  type: EntraSignInType.foundry;
+}
+
+@doc("Agent-blueprint Entra sign-in configuration. The agent endpoint validates inbound tokens against the agent's blueprint application.")
+model AgentBlueprintEntraSignInConfig extends EntraSignInConfig {
+  @doc("The Entra sign-in type. Always 'agent_blueprint'.")
+  type: EntraSignInType.agent_blueprint;
+
+  @doc("The validation applied to inbound bearer tokens presented to the agent endpoint in agent-blueprint sign-in mode.")
+  validation?: EntraValidationConfiguration;
+}
+
+@doc("""
+  Validation applied to an inbound bearer token addressed to the agent's blueprint audience. Each
+  list is defaulted to a single value when the agent is switched to the 'agent_blueprint' sign-in
+  mode (audience = blueprint resource URI, tenant = subscription tenant, required scope = default
+  scope declared on the blueprint).
+  """)
+model EntraValidationConfiguration {
+  @doc("The set of accepted token audiences (the `aud` claim). Typically the agent blueprint resource URI (e.g. `api://{agentBlueprintId}`).")
+  allowed_audiences?: string[];
+
+  @doc("The set of accepted token tenants (the `tid` claim). Typically the subscription tenant.")
+  allowed_tenants?: string[];
+
+  @doc("The scopes (the `scp` claim) that must all be present on an inbound token. Typically the default scope declared on the agent blueprint.")
+  required_scopes?: string[];
+}
+
 model BotServiceAuthorizationScheme extends AgentEndpointAuthorizationScheme {
   type: AgentEndpointAuthorizationSchemeType.BotService;
 }
@@ -666,8 +720,11 @@ model AgentEndpointConfig {
   @doc("Per-protocol configuration for the agent endpoint.")
   protocol_configuration?: ProtocolConfiguration;
 
-  @doc("The authorization schemes supported by the agent endpoint")
+  @doc("The authorization schemes supported by the agent endpoint.")
   authorization_schemes?: AgentEndpointAuthorizationScheme[];
+
+  @doc("The Entra sign-in configuration governing which Entra application the agent endpoint validates inbound tokens against (and represents the calling user as for downstream on-behalf-of access). The service defaults 'foundry' behavior if a value is not specified by the caller.")
+  entra_sign_in_config?: EntraSignInConfig;
 }
 
 model AgentIdentity {
