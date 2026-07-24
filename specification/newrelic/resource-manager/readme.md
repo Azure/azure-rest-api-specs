@@ -27,7 +27,7 @@ These are the global settings for the newrelic.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2025-05-01-preview
+tag: package-2026-06-01
 ```
 
 ### Tag: package-2022-07-01-preview
@@ -109,6 +109,19 @@ These settings apply only when `--tag=package-2025-05-01-preview` is specified o
 ```yaml $(tag) == 'package-2025-05-01-preview'
 input-file:
   - NewRelic.Observability/preview/2025-05-01-preview/NewRelic.json
+suppressions:
+  - code: ProvisioningStateMustBeReadOnly
+    from: NewRelic.json
+    reason: Seems like a tool bug, as the visibility is set to read only in definition of ProvisioningState.
+```
+
+### Tag: package-2026-06-01
+
+These settings apply only when `--tag=package-2026-06-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-06-01'
+input-file:
+  - NewRelic.Observability/stable/2026-06-01/NewRelic.json
 suppressions:
   - code: ProvisioningStateMustBeReadOnly
     from: NewRelic.json
