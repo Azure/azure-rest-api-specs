@@ -16,6 +16,8 @@ import "./back-compatible.tsp";
 import "./CloudHsmCluster.tsp";
 import "./PrivateEndpointConnection.tsp";
 import "./DedicatedHsm.tsp";
+import "./PaymentHsmCluster.tsp";
+import "./PaymentHsmClusterPrivateEndpointConnection.tsp";
 import "./client.tsp";
 
 using TypeSpec.Rest;
@@ -41,6 +43,11 @@ enum Versions {
    * The 2025-03-31 API version.
    */
   v2025_03_31: "2025-03-31",
+
+  /**
+   * The 2025-12-01-preview API version.
+   */
+  v2025_12_01_preview: "2025-12-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
