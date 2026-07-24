@@ -4930,6 +4930,10 @@
               ]
             }
           }
+        },
+        "dranet": {
+          "$ref": "#/definitions/DRANETProfile",
+          "description": "DRANET settings of an agent pool."
         }
       }
     },
@@ -5588,6 +5592,40 @@
           },
           "readOnly": true,
           "x-ms-identifiers": []
+        }
+      }
+    },
+    "DRANETMode": {
+      "type": "string",
+      "description": "The DRANET mode for the agent pool.",
+      "enum": [
+        "Unmanaged",
+        "Managed"
+      ],
+      "x-ms-enum": {
+        "name": "DRANETMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unmanaged",
+            "value": "Unmanaged",
+            "description": "DRANET is not managed by AKS."
+          },
+          {
+            "name": "Managed",
+            "value": "Managed",
+            "description": "DRANET is managed by AKS."
+          }
+        ]
+      }
+    },
+    "DRANETProfile": {
+      "type": "object",
+      "description": "DRANET settings of an agent pool.",
+      "properties": {
+        "mode": {
+          "$ref": "#/definitions/DRANETMode",
+          "description": "The DRANET mode for the agent pool."
         }
       }
     },

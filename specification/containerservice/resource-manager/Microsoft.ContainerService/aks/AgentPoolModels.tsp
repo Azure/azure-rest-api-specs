@@ -826,28 +826,29 @@ model AgentPoolNetworkProfile {
   @identifiers(#[])
   secondaryNetworkInterfaces?: AgentPoolNetworkInterface[];
 
-  /** DRANET settings for the agent pool. Set `mode` to `Managed` to have AKS install and manage DRANET/RDMA networking components for this agent pool. If omitted or set to `Unmanaged`, AKS does not install or manage DRANET for this agent pool. */
-  @added(Versions.v2026_05_02_preview)
-  dranetProfile?: DRANETProfile;
+  /** DRANET settings of an agent pool. */
+  @added(Versions.v2026_06_01)
+  dranet?: DRANETProfile;
 }
 
-/** DRANET settings for an agent pool. */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "DRANET is the approved feature acronym casing for this API."
-@added(Versions.v2026_05_02_preview)
+/** DRANET settings of an agent pool. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "DRANET is the approved public API acronym."
+@added(Versions.v2026_06_01)
 model DRANETProfile {
-  /** The DRANET lifecycle mode for this agent pool. To enable AKS-managed DRANET, set this value to `Managed`. To disable AKS-managed DRANET, set this value to `Unmanaged`. */
+  /** The DRANET mode for the agent pool. */
   mode?: DRANETMode;
 }
 
-/** The DRANET lifecycle mode for an agent pool. */
-@added(Versions.v2026_05_02_preview)
+/** The DRANET mode for the agent pool. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "DRANET is the approved public API acronym."
+@added(Versions.v2026_06_01)
 union DRANETMode {
   string,
 
-  /** DRANET is not managed by AKS for this agent pool. */
+  /** DRANET is not managed by AKS. */
   Unmanaged: "Unmanaged",
 
-  /** DRANET is managed by AKS for this agent pool. AKS installs, updates, and removes the DRANET core extension according to agent-pool state. */
+  /** DRANET is managed by AKS. */
   Managed: "Managed",
 }
 

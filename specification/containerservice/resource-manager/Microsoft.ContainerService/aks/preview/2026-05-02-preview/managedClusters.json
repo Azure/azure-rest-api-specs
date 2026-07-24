@@ -7621,10 +7621,6 @@
             "$ref": "#/definitions/AgentPoolNetworkInterface"
           },
           "x-ms-identifiers": []
-        },
-        "dranetProfile": {
-          "$ref": "#/definitions/DRANETProfile",
-          "description": "DRANET settings for the agent pool. Set `mode` to `Managed` to have AKS install and manage DRANET/RDMA networking components for this agent pool. If omitted or set to `Unmanaged`, AKS does not install or manage DRANET for this agent pool."
         }
       }
     },
@@ -8894,40 +8890,6 @@
           },
           "readOnly": true,
           "x-ms-identifiers": []
-        }
-      }
-    },
-    "DRANETMode": {
-      "type": "string",
-      "description": "The DRANET lifecycle mode for an agent pool.",
-      "enum": [
-        "Unmanaged",
-        "Managed"
-      ],
-      "x-ms-enum": {
-        "name": "DRANETMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Unmanaged",
-            "value": "Unmanaged",
-            "description": "DRANET is not managed by AKS for this agent pool."
-          },
-          {
-            "name": "Managed",
-            "value": "Managed",
-            "description": "DRANET is managed by AKS for this agent pool. AKS installs, updates, and removes the DRANET core extension according to agent-pool state."
-          }
-        ]
-      }
-    },
-    "DRANETProfile": {
-      "type": "object",
-      "description": "DRANET settings for an agent pool.",
-      "properties": {
-        "mode": {
-          "$ref": "#/definitions/DRANETMode",
-          "description": "The DRANET lifecycle mode for this agent pool. To enable AKS-managed DRANET, set this value to `Managed`. To disable AKS-managed DRANET, set this value to `Unmanaged`."
         }
       }
     },
