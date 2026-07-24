@@ -12,6 +12,18 @@ namespace Customizations;
 @@clientName(KeyVault, "Secret", "rust");
 @@clientName(KeyVault, "Client", "go");
 
+// C# customizations: the public Key Vault Secrets surface in .NET is the
+// hand-written `SecretClient`, so the generated low-level transport is renamed
+// to avoid colliding with the user-facing types. The TypeSpec emitter places
+// these in the same namespace, and an internal handwritten `SecretAttributes`
+// struct already exists in `Azure.Security.KeyVault.Secrets`. Renaming the
+// wire model for C# only keeps the .NET source tree compilable while leaving
+// every other language unaffected.
+@@clientName(KeyVault, "KeyVaultSecretsClient", "csharp");
+@@clientName(SecretAttributes, "SecretAttributesBundle", "csharp");
+
+@@access(KeyVault, Access.internal, "csharp");
+
 using KeyVault;
 
 // Make optional path parameter required for all languages

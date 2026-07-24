@@ -13,24 +13,22 @@ namespace Microsoft.NetworkCloud;
 /**
  * The name of the bare metal machine key set.
  */
-model BareMetalMachineKeySetNameParameter
-  is ResourceNameParameter<
-    Resource = BareMetalMachineKeySet,
-    KeyName = "bareMetalMachineKeySetName",
-    SegmentName = "bareMetalMachineKeySets",
-    NamePattern = "^([a-zA-Z0-9][a-zA-Z0-9-_]{0,28}[a-zA-Z0-9])$"
-  >;
+model BareMetalMachineKeySetNameParameter is ResourceNameParameter<
+  Resource = BareMetalMachineKeySet,
+  KeyName = "bareMetalMachineKeySetName",
+  SegmentName = "bareMetalMachineKeySets",
+  NamePattern = "^([a-zA-Z0-9][a-zA-Z0-9-_]{0,28}[a-zA-Z0-9])$"
+>;
 
 /**
  * BareMetalMachineKeySet represents the bare metal machine key set.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "legacy resource using legacy features"
 @parentResource(Cluster)
-model BareMetalMachineKeySet
-  is Azure.ResourceManager.TrackedResource<
-    BareMetalMachineKeySetProperties,
-    false
-  > {
+model BareMetalMachineKeySet is Azure.ResourceManager.TrackedResource<
+  BareMetalMachineKeySetProperties,
+  false
+> {
   ...BareMetalMachineKeySetNameParameter;
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
   ...RequiredExtendedLocationProperty;

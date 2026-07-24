@@ -13,13 +13,12 @@ namespace Microsoft.NetworkCloud;
 /**
  * The name of the feature.
  */
-model KubernetesClusterFeatureNameParameter
-  is ResourceNameParameter<
-    Resource = KubernetesClusterFeature,
-    KeyName = "featureName",
-    SegmentName = "features",
-    NamePattern = "^([a-zA-Z0-9][a-zA-Z0-9-]{0,61}[a-zA-Z0-9])$"
-  >;
+model KubernetesClusterFeatureNameParameter is ResourceNameParameter<
+  Resource = KubernetesClusterFeature,
+  KeyName = "featureName",
+  SegmentName = "features",
+  NamePattern = "^([a-zA-Z0-9][a-zA-Z0-9-]{0,61}[a-zA-Z0-9])$"
+>;
 
 /**
  * KubernetesClusterFeature represents the feature of a Kubernetes cluster.

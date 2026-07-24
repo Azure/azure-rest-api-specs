@@ -7783,7 +7783,7 @@
     },
     "Capability": {
       "type": "object",
-      "description": "Capability, to match in Solution Templates and Targets",
+      "description": "Capability, to match in Solution Templates & Targets",
       "properties": {
         "name": {
           "type": "string",
@@ -8298,7 +8298,7 @@
     },
     "DiagnosticUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the Diagnostic.",
+      "description": "The updatable properties of the Diagnostic.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/DiagnosticUpdateProperties",
@@ -8315,7 +8315,14 @@
     },
     "DiagnosticUpdateProperties": {
       "type": "object",
-      "description": "The updatable properties of the Diagnostic."
+      "description": "The updatable properties of the Diagnostic.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
     },
     "DynamicSchema": {
       "type": "object",
@@ -9496,7 +9503,7 @@
     },
     "SchemaUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the Schema.",
+      "description": "The updatable properties of the Schema.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/SchemaUpdateProperties",
@@ -9513,7 +9520,19 @@
     },
     "SchemaUpdateProperties": {
       "type": "object",
-      "description": "The updatable properties of the Schema."
+      "description": "The updatable properties of the Schema.",
+      "properties": {
+        "currentVersion": {
+          "type": "string",
+          "description": "Current Version of schema",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of resource",
+          "readOnly": true
+        }
+      }
     },
     "SchemaVersion": {
       "type": "object",
@@ -10092,7 +10111,7 @@
     },
     "SolutionUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the Solution.",
+      "description": "The updatable properties of the Solution.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/SolutionUpdateProperties",
@@ -10102,7 +10121,28 @@
     },
     "SolutionUpdateProperties": {
       "type": "object",
-      "description": "The updatable properties of the Solution."
+      "description": "The updatable properties of the Solution.",
+      "properties": {
+        "solutionTemplateId": {
+          "type": "string",
+          "description": "Solution template Id",
+          "readOnly": true
+        },
+        "availableSolutionTemplateVersions": {
+          "type": "array",
+          "description": "List of latest revisions for available solution template versions",
+          "items": {
+            "$ref": "#/definitions/AvailableSolutionTemplateVersion"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of resource",
+          "readOnly": true
+        }
+      }
     },
     "SolutionVersion": {
       "type": "object",

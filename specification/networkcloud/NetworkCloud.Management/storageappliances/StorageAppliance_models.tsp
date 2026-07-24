@@ -110,7 +110,11 @@ union RemoteVendorManagementStatus {
  * The log level for the monitoring configuration status of the storage appliance.
  */
 @added(Versions.v2026_05_01_preview)
-union StorageApplianceMetricsConfigurationStatusLogLevel {
+@renamedFrom(
+  Versions.v2026_07_01,
+  "StorageApplianceMetricsConfigurationStatusLogLevel"
+)
+union StorageApplianceMonitoringConfigurationStatusLogLevel {
   string,
 
   /**
@@ -128,7 +132,11 @@ union StorageApplianceMetricsConfigurationStatusLogLevel {
  * The metrics level for the monitoring configuration status of the storage appliance.
  */
 @added(Versions.v2026_05_01_preview)
-union StorageApplianceMetricsConfigurationStatusMetricsLevel {
+@renamedFrom(
+  Versions.v2026_07_01,
+  "StorageApplianceMetricsConfigurationStatusMetricsLevel"
+)
+union StorageApplianceMonitoringConfigurationStatusMetricsLevel {
   string,
 
   /**
@@ -166,16 +174,16 @@ model StorageApplianceProperties {
  */
 model StorageApplianceSpec {
   /**
-   * The credentials of the administrative interface on this storage appliance.
-   */
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  administratorCredentials: AdministrativeCredentials;
-
-  /**
    * The resource ID of the rack where this storage appliance resides.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   rackId: Azure.Core.armResourceIdentifier;
+
+  /**
+   * The SKU for the storage appliance.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  storageApplianceSkuId: string;
 
   /**
    * The slot the storage appliance is in the rack based on the BOM configuration.
@@ -191,10 +199,10 @@ model StorageApplianceSpec {
   serialNumber: string;
 
   /**
-   * The SKU for the storage appliance.
+   * The credentials of the administrative interface on this storage appliance.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  storageApplianceSkuId: string;
+  administratorCredentials: AdministrativeCredentials;
 }
 
 /**
@@ -389,10 +397,10 @@ model StorageApplianceMonitoringConfigurationStatus {
   /**
    * The log level for the monitoring configuration status of the storage appliance.
    */
-  logLevel?: StorageApplianceMetricsConfigurationStatusLogLevel;
+  logLevel?: StorageApplianceMonitoringConfigurationStatusLogLevel;
 
   /**
    * The metrics level for the monitoring configuration status of the storage appliance.
    */
-  metricsLevel?: StorageApplianceMetricsConfigurationStatusMetricsLevel;
+  metricsLevel?: StorageApplianceMonitoringConfigurationStatusMetricsLevel;
 }

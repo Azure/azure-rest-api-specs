@@ -43,7 +43,7 @@ alias ManagedInstanceLongTermRetentionBackupOps = Azure.ResourceManager.Legacy.L
     @path
     @segment("locations")
     @key
-    locationName: string;
+    locationName: Azure.Core.azureLocation;
 
     /** The name of the managed instance. */
     @path
@@ -63,7 +63,8 @@ alias ManagedInstanceLongTermRetentionBackupOps = Azure.ResourceManager.Legacy.L
     @segment("longTermRetentionManagedInstanceBackups")
     @key
     backupName: string;
-  }
+  },
+  ResourceName = "SubscriptionLongTermRetentionManagedInstanceBackup"
 >;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -120,7 +121,7 @@ alias LongTermRetentionManagedInstanceBackupOps = Azure.ResourceManager.Legacy.L
     @path
     @segment("locations")
     @key
-    locationName: string;
+    locationName: Azure.Core.azureLocation;
 
     /** The name of the managed instance. */
     @path
@@ -140,7 +141,8 @@ alias LongTermRetentionManagedInstanceBackupOps = Azure.ResourceManager.Legacy.L
     @segment("longTermRetentionManagedInstanceBackups")
     @key
     backupName: string;
-  }
+  },
+  ResourceName = "ResourceGroupLongTermRetentionManagedInstanceBackup"
 >;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

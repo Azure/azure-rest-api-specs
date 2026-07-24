@@ -233,6 +233,12 @@ const CHECK_METADATA = [
     troubleshootingGuide: checkAndDiagramTsg(3),
   },
   {
+    precedence: 1,
+    name: "Namespace Approval",
+    suppressionLabels: [],
+    troubleshootingGuide: defaultTsg,
+  },
+  {
     precedence: 10,
     name: AUTOMATED_CHECK_NAME,
     suppressionLabels: [],

@@ -11,6 +11,7 @@ import "./deviceGroup.tsp";
 import "./deployment.tsp";
 import "./device.tsp";
 import "./back-compatible.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

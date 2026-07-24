@@ -9,16 +9,29 @@ using PureStorage.Block;
 @@clientName(PureStorage.Block, "PureStorageBlockMgmtClient", "java");
 
 // Client-specific naming overrides
-@@clientName(HealthResponse, "StoragePoolHealthInfo");
-@@clientName(ServiceInitializationData, "ServiceInitializationInfo");
+@@clientName(HealthResponse, "StoragePoolHealthInfo", "!autorest");
+@@clientName(
+  ServiceInitializationData,
+  "ServiceInitializationInfo",
+  "!autorest"
+);
 
 // Rename sddcResourceId field to avsClusterResourceId in all models
-@@clientName(AzureVmwareService.sddcResourceId, "clusterResourceId");
-@@clientName(ServiceInitializationHandle.sddcResourceId, "clusterResourceId");
-@@clientName(AvsStatus.sddcResourceId, "clusterResourceId");
+@@clientName(
+  AzureVmwareService.sddcResourceId,
+  "clusterResourceId",
+  "!autorest"
+);
+@@clientName(
+  ServiceInitializationHandle.sddcResourceId,
+  "clusterResourceId",
+  "!autorest"
+);
+@@clientName(AvsStatus.sddcResourceId, "clusterResourceId", "!autorest");
 @@clientName(
   StoragePoolEnableAvsConnectionPost.sddcResourceId,
-  "clusterResourceId"
+  "clusterResourceId",
+  "!autorest"
 );
 
 // CSharp

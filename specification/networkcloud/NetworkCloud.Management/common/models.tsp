@@ -4,6 +4,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 namespace Microsoft.NetworkCloud;
 
@@ -318,6 +319,25 @@ model AdministrativeCredentials {
 }
 
 /**
+ * AdministrativeCredentialsPatch represents the admin credentials for the device requiring password-based authentication.
+ */
+@added(Versions.v2026_07_01)
+model AdministrativeCredentialsPatch {
+  /**
+   * The password of the administrator of the device used during initialization.
+   */
+  @minLength(1)
+  @secret
+  password?: string;
+
+  /**
+   * The username of the administrator of the device used during initialization.
+   */
+  @minLength(1)
+  username?: string;
+}
+
+/**
  * CertificateInfo represents the non-private information of an X.509 Certificate.
  */
 model CertificateInfo {
@@ -429,6 +449,18 @@ model SshPublicKey {
    */
   @minLength(1)
   keyData: string;
+}
+
+/**
+ * SshPublicKeyPatch represents the public key used to authenticate with a resource through SSH.
+ */
+@added(Versions.v2026_07_01)
+model SshPublicKeyPatch {
+  /**
+   * The SSH public key data.
+   */
+  @minLength(1)
+  keyData?: string;
 }
 
 /**
@@ -568,6 +600,7 @@ model OperationStatusResultProperties {
   /**
    * For actions that run commands or scripts, the URL where the full output of the script output can be retrieved.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   resultUrl?: url;
 }
