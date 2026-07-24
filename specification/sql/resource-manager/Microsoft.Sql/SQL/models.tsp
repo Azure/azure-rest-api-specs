@@ -4393,6 +4393,16 @@ model ServerBlobAuditingPolicyProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   storageAccountSubscriptionId?: Azure.Core.uuid;
+
+  /**
+   * Specifies the required fields to include in audit events (optional).
+   * Format: Comma-separated field names enclosed in single quotes (e.g., 'event_time,action_id,statement').
+   * Can only be specified when isAzureMonitorTargetEnabled is true.
+   * For the complete list of valid field names, see the audit_event table schema documentation.
+  */
+  @added(Versions.v2025_08_01_preview)
+  requiredFields?: string;
+
 }
 
 /**
@@ -4529,6 +4539,15 @@ model DatabaseBlobAuditingPolicyProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   storageAccountSubscriptionId?: Azure.Core.uuid;
+
+  /**
+   * Specifies the required fields to include in audit events (optional).
+   * Format: Comma-separated field names enclosed in single quotes (e.g., 'event_time,action_id,statement').
+   * Can only be specified when isAzureMonitorTargetEnabled is true.
+   * For the complete list of valid field names, see the audit_event table schema documentation.
+  */
+  @added(Versions.v2025_08_01_preview)
+  requiredFields?: string;
 }
 
 /**
@@ -4670,6 +4689,15 @@ model ExtendedDatabaseBlobAuditingPolicyProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   storageAccountSubscriptionId?: Azure.Core.uuid;
+
+  /**
+   * Specifies the required fields to include in audit events (optional).
+   * Format: Comma-separated field names enclosed in single quotes (e.g., 'event_time,action_id,statement').
+   * Can only be specified when isAzureMonitorTargetEnabled is true.
+   * For the complete list of valid field names, see the audit_event table schema documentation.
+  */
+  @added(Versions.v2025_08_01_preview)
+  requiredFields?: string;
 }
 
 /**
@@ -4826,6 +4854,15 @@ model ExtendedServerBlobAuditingPolicyProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   storageAccountSubscriptionId?: Azure.Core.uuid;
+
+  /**
+   * Specifies the required fields to include in audit events (optional).
+   * Format: Comma-separated field names enclosed in single quotes (e.g., 'event_time,action_id,statement').
+   * Can only be specified when isAzureMonitorTargetEnabled is true.
+   * For the complete list of valid field names, see the audit_event table schema documentation.
+  */
+  @added(Versions.v2025_08_01_preview)
+  requiredFields?: string;
 }
 
 /**
