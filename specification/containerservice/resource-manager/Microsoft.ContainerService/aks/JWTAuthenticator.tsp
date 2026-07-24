@@ -21,10 +21,8 @@ namespace Microsoft.ContainerService;
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
 @parentResource(ManagedCluster)
 @added(Versions.v2026_06_02_preview)
-model JWTAuthenticator is Azure.ResourceManager.ProxyResource<
-  JWTAuthenticatorProperties,
-  false
-> {
+model JWTAuthenticator
+  is Azure.ResourceManager.ProxyResource<JWTAuthenticatorProperties, false> {
   ...ResourceNameParameter<
     Resource = JWTAuthenticator,
     KeyName = "jwtAuthenticatorName",
@@ -36,12 +34,10 @@ model JWTAuthenticator is Azure.ResourceManager.ProxyResource<
 @@maxLength(JWTAuthenticator.name, 24);
 @@minLength(JWTAuthenticator.name, 1);
 @@doc(JWTAuthenticator.name, "The name of the JWT authenticator.");
-@@doc(
-  JWTAuthenticator.properties,
+@@doc(JWTAuthenticator.properties,
   "The properties of JWTAuthenticator. For details on how to configure the properties of a JWT authenticator, please refer to the Kubernetes documentation: https://kubernetes.io/docs/reference/access-authn-authz/authentication/#using-authentication-configuration. Please note that not all fields available in the Kubernetes documentation are supported by AKS. For troubleshooting, please see https://aka.ms/aks-external-issuers-docs."
 );
-@@doc(
-  JWTAuthenticators.createOrUpdate::parameters.resource,
+@@doc(JWTAuthenticators.createOrUpdate::parameters.resource,
   "The JWT authenticator to create or update."
 );
 
@@ -154,6 +150,20 @@ model JWTAuthenticatorProperties {
    */
   @identifiers(#[])
   userValidationRules?: JWTAuthenticatorValidationRule[];
+
+  /**
+   * PEM-encoded CA certificate bundle used to validate the connection when fetching discovery information. Use this for issuer endpoints that use private certificate authorities
+   * or environments where TLS inspection is performed.
+   *
+   * The bundle must contain only CERTIFICATE PEM blocks, up to 10 CA certificates, and must be no larger than 20 KB in total. Include all CA certificates needed to validate
+   * the issuer endpoint's TLS certificate. Certificate revocation checking is not supported.
+   *
+   * If provided, only these CAs are trusted instead of the well-known root CAs.
+   * If not provided and the managed cluster's properties.securityProfile.customCATrustCertificates is set, those certificates will be used instead. Otherwise, only the well-known
+   * root CAs are trusted.
+   */
+  @added(Versions.v2026_06_02_preview)
+  certificateAuthorityBundle?: string;
 }
 
 /**
