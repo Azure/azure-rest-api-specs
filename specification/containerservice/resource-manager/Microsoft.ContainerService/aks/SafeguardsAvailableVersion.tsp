@@ -19,10 +19,11 @@ namespace Microsoft.ContainerService;
  */
 @added(Versions.v2026_06_02_preview)
 @parentResource(SubscriptionLocationResource)
-model SafeguardsAvailableVersion is Azure.ResourceManager.ProxyResource<
-  SafeguardsAvailableVersionsProperties,
-  false
-> {
+model SafeguardsAvailableVersion
+  is Azure.ResourceManager.ProxyResource<
+    SafeguardsAvailableVersionsProperties,
+    false
+  > {
   ...ResourceNameParameter<
     Resource = SafeguardsAvailableVersion,
     KeyName = "version",

@@ -31,7 +31,8 @@ enum Versions {
 /**
  * Scheduled event.
  */
-model ScheduledEvent is Azure.ResourceManager.ProxyResource<ScheduledEventProperties> {
+model ScheduledEvent
+  is Azure.ResourceManager.ProxyResource<ScheduledEventProperties> {
   ...ResourceNameParameter<
     Resource = ScheduledEvent,
     KeyName = "scheduledEventName",
@@ -68,7 +69,13 @@ model ScheduledEventProperties {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserves the existing scheduledEvents swagger x-ms-enum metadata."
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Keeps the enum inline to preserve the existing scheduledEvents swagger shape."
   @extension("x-ms-enum", #{ name: "eventStatus", modelAsString: true })
-  eventStatus?: "Scheduled" | "Started" | "Completed" | "Cancelled" | "Failed" | string;
+  eventStatus?:
+    | "Scheduled"
+    | "Started"
+    | "Completed"
+    | "Cancelled"
+    | "Failed"
+    | string;
 
   /**
    * The details of the event.

@@ -19,10 +19,11 @@ namespace Microsoft.ContainerService;
  */
 @added(Versions.v2026_06_02_preview)
 @parentResource(SubscriptionLocationResource)
-model GuardrailsAvailableVersion is Azure.ResourceManager.ProxyResource<
-  GuardrailsAvailableVersionsProperties,
-  false
-> {
+model GuardrailsAvailableVersion
+  is Azure.ResourceManager.ProxyResource<
+    GuardrailsAvailableVersionsProperties,
+    false
+  > {
   ...ResourceNameParameter<
     Resource = GuardrailsAvailableVersion,
     KeyName = "version",

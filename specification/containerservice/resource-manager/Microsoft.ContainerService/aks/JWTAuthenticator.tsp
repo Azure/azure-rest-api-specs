@@ -21,10 +21,8 @@ namespace Microsoft.ContainerService;
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
 @parentResource(ManagedCluster)
 @added(Versions.v2026_06_02_preview)
-model JWTAuthenticator is Azure.ResourceManager.ProxyResource<
-  JWTAuthenticatorProperties,
-  false
-> {
+model JWTAuthenticator
+  is Azure.ResourceManager.ProxyResource<JWTAuthenticatorProperties, false> {
   ...ResourceNameParameter<
     Resource = JWTAuthenticator,
     KeyName = "jwtAuthenticatorName",
