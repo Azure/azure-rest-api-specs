@@ -19829,6 +19829,13 @@ model PublicIPPrefixPropertiesFormat {
    * NatGateway of Public IP Prefix.
    */
   natGateway?: NatGateway;
+
+  /**
+   * Whether the public IP prefix SKU has been upgraded from Standard to StandardV2.
+   */
+  @added(Versions.v2025_09_01)
+  @visibility(Lifecycle.Read)
+  upgradedToV2?: boolean;
 }
 
 /**
