@@ -57,6 +57,10 @@
       "parent": "Agents Root"
     },
     {
+      "name": "Agent Microsoft 365 Publishing",
+      "parent": "Agents Root"
+    },
+    {
       "name": "Platform APIs"
     },
     {
@@ -2637,6 +2641,226 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/UpdateAgentFromManifestRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/agents/{agent_name}/microsoft365/publish": {
+      "post": {
+        "operationId": "Microsoft365Publishing_publishAgentToMicrosoft365",
+        "summary": "Publish an agent to Microsoft 365",
+        "description": "Publishes a Foundry agent to Microsoft 365 / Microsoft Teams and returns the published title and\nTeams app ids.",
+        "parameters": [
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent to publish.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft365PublishResponse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Microsoft 365 Publishing"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Microsoft365PublishRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/agents/{agent_name}/microsoft365/publishdefaults": {
+      "get": {
+        "operationId": "Microsoft365Publishing_getMicrosoft365PublishDefaults",
+        "summary": "Get Microsoft 365 publish defaults",
+        "description": "Returns default and previously-published values used to pre-populate a Microsoft 365 publish\nrequest for a Foundry agent.",
+        "parameters": [
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent to get publish defaults for.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "publishAsDigitalWorker",
+            "in": "query",
+            "required": false,
+            "description": "When true, returns defaults for publishing the agent as an autopilot (digital worker) agent.",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft365PublishDefaults"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Microsoft 365 Publishing"
+        ]
+      }
+    },
+    "/agents/{agent_name}/microsoft365/zip": {
+      "post": {
+        "operationId": "Microsoft365Publishing_getMicrosoft365AppPackage",
+        "summary": "Generate a Microsoft 365 app package",
+        "description": "Generates the Microsoft Teams app package (zip) for a Foundry agent from the supplied publish\nrequest, without publishing it. Returns the app package as `application/zip`.",
+        "parameters": [
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent to generate the app package for.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The generated Microsoft 365 app package (Microsoft Teams app zip).",
+            "content": {
+              "application/zip": {
+                "schema": {
+                  "contentMediaType": "application/zip"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Microsoft 365 Publishing"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Microsoft365PublishRequest"
               }
             }
           }
@@ -26319,6 +26543,194 @@
             "MemoryStores=V1Preview"
           ]
         }
+      },
+      "Microsoft365AgenticUserTemplate": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Identifier of the agentic-user template."
+          },
+          "file": {
+            "type": "string",
+            "description": "Name of the agentic-user template file embedded in the generated app package."
+          },
+          "schemaVersion": {
+            "type": "string",
+            "description": "Schema version of the agentic-user template."
+          },
+          "agentIdentityBlueprintId": {
+            "type": "string",
+            "description": "Blueprint identity client id used for the agentic user."
+          },
+          "communicationProtocol": {
+            "type": "string",
+            "description": "Communication protocol used by the agentic user."
+          }
+        },
+        "description": "An agentic-user template describing how the agent participates as an agentic user in Microsoft 365.\nOnly used when `useAgenticUserTemplate` is true on the publish request."
+      },
+      "Microsoft365PublishDefaults": {
+        "type": "object",
+        "properties": {
+          "appPublishScope": {
+            "$ref": "#/components/schemas/Microsoft365PublishScope",
+            "description": "The publish scope."
+          },
+          "agentName": {
+            "type": "string",
+            "description": "The agent name."
+          },
+          "agentDisplayName": {
+            "type": "string",
+            "description": "The user-facing display name for the agent. Defaults to the agent name if not previously\noverridden."
+          },
+          "appRegistrationClientId": {
+            "type": "string",
+            "description": "The app-registration client id associated with the agent."
+          },
+          "appVersion": {
+            "type": "string",
+            "description": "The most recently published app version."
+          },
+          "recommendedNextAppVersion": {
+            "type": "string",
+            "description": "The recommended next app version (the most recent app version, incremented)."
+          },
+          "titleId": {
+            "type": "string",
+            "description": "The Microsoft 365 title id of the previously-published app, if any."
+          },
+          "teamsAppId": {
+            "type": "string",
+            "description": "The Microsoft Teams app id of the previously-published app, if any."
+          },
+          "shortDescription": {
+            "type": "string",
+            "description": "Short, one-line description shown in the Teams app listing."
+          },
+          "fullDescription": {
+            "type": "string",
+            "description": "Full description shown on the Teams app details page."
+          },
+          "developerName": {
+            "type": "string",
+            "description": "Display name of the developer / publisher."
+          },
+          "developerWebsiteUrl": {
+            "type": "string",
+            "description": "Developer / publisher website URL."
+          },
+          "privacyUrl": {
+            "type": "string",
+            "description": "Privacy policy URL."
+          },
+          "termsOfUseUrl": {
+            "type": "string",
+            "description": "Terms-of-use URL."
+          }
+        },
+        "description": "Default and previously-published values used to pre-populate a Microsoft 365 publish request for a\nFoundry agent."
+      },
+      "Microsoft365PublishRequest": {
+        "type": "object",
+        "required": [
+          "publishScope"
+        ],
+        "properties": {
+          "agentDisplayName": {
+            "type": "string",
+            "description": "Display name used as the published Teams app name. When omitted, the agent name from the route is\nused."
+          },
+          "botServiceArmId": {
+            "type": "string",
+            "description": "ARM resource id of the Azure Bot Service that fronts this agent in Microsoft Teams. Required for\nworkspaces on the default bot-based Teams backend; optional for workspaces on the API-based backend."
+          },
+          "publishAsAutopilot": {
+            "type": "boolean",
+            "description": "When true, the agent is published as an autopilot (digital worker) agent: the bot id is taken from\nthe agent's blueprint identity and the generated Teams manifest is marked as a digital worker."
+          },
+          "useAgenticUserTemplate": {
+            "type": "boolean",
+            "description": "When true, the supplied `agenticUserTemplate` is embedded in the generated Teams app package.",
+            "default": false
+          },
+          "agenticUserTemplate": {
+            "$ref": "#/components/schemas/Microsoft365AgenticUserTemplate",
+            "description": "Optional agentic-user template. Required when `useAgenticUserTemplate` is true."
+          },
+          "publishScope": {
+            "$ref": "#/components/schemas/Microsoft365PublishScope",
+            "description": "Publish scope for the Teams app."
+          },
+          "appVersion": {
+            "type": "string",
+            "description": "App version (for example `1.2.3`) written into the Teams manifest. May contain only digits and\nperiods, must not start with `0`, and must end with a digit. When omitted, a platform default is\nused."
+          },
+          "shortDescription": {
+            "type": "string",
+            "description": "Short, one-line description shown in the Teams app listing."
+          },
+          "fullDescription": {
+            "type": "string",
+            "description": "Full description shown on the Teams app details page."
+          },
+          "developerName": {
+            "type": "string",
+            "description": "Display name of the developer / publisher shown in the Teams app listing."
+          },
+          "developerWebsiteUrl": {
+            "type": "string",
+            "description": "Developer / publisher website URL shown in the Teams app listing. Must be an https URL."
+          },
+          "privacyUrl": {
+            "type": "string",
+            "description": "Privacy policy URL shown in the Teams app listing. Must be an http or https URL."
+          },
+          "termsOfUseUrl": {
+            "type": "string",
+            "description": "Terms-of-use URL shown in the Teams app listing."
+          },
+          "colorIconBase64": {
+            "type": "string",
+            "description": "Optional base64-encoded PNG used as the color (full-bleed) icon in the Teams app package. Must be a\n192x192 PNG (perfect square, no border or rounded corners). Max 1 MB after decode. When omitted, the\nplatform default color icon is used."
+          },
+          "outlineIconBase64": {
+            "type": "string",
+            "description": "Optional base64-encoded PNG used as the outline icon in the Teams app package. Must be a 32x32 PNG.\nMax 1 MB after decode. When omitted, the platform default outline icon is used."
+          }
+        },
+        "description": "Request body for publishing a Foundry agent to Microsoft 365 / Microsoft Teams. The agent is\nidentified by the `agent_name` in the route and resolved server-side, so the agent id, bot id, and\napp-registration id are not supplied in the body."
+      },
+      "Microsoft365PublishResponse": {
+        "type": "object",
+        "properties": {
+          "titleId": {
+            "type": "string",
+            "description": "The Microsoft 365 title id of the published app."
+          },
+          "teamsAppId": {
+            "type": "string",
+            "description": "The Microsoft Teams app id of the published app."
+          }
+        },
+        "description": "Response from publishing an agent to Microsoft 365 / Microsoft Teams."
+      },
+      "Microsoft365PublishScope": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "Personal",
+              "Shared",
+              "Tenant"
+            ]
+          }
+        ],
+        "description": "The publish scope for the generated Microsoft Teams app."
       },
       "MicrosoftFabricPreviewTool": {
         "type": "object",
