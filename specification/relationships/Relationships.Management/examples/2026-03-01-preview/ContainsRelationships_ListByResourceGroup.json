@@ -1,0 +1,46 @@
+{
+  "title": "ContainsRelationships_ListByResourceGroup",
+  "operationId": "ContainsRelationships_ListByResourceGroup",
+  "parameters": {
+    "api-version": "2026-03-01-preview",
+    "subscriptionId": "a925f2f7-5c63-4b7b-8799-25a5f97bc3b2",
+    "resourceGroupName": "testrg"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/a925f2f7-5c63-4b7b-8799-25a5f97bc3b2/resourceGroups/testrg/providers/Microsoft.Relationships/contains/contains1",
+            "type": "Microsoft.Relationships/contains",
+            "properties": {
+              "sourceId": "/subscriptions/a925f2f7-5c63-4b7b-8799-25a5f97bc3b2/resourceGroups/testrg",
+              "targetId": "/subscriptions/a925f2f7-5c63-4b7b-8799-25a5f97bc3b2/resourceGroups/testrg/providers/Microsoft.Web/sites/app1",
+              "targetTenant": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+              "metadata": {
+                "sourceType": "Microsoft.Resources/subscriptions/resourceGroups",
+                "targetType": "Microsoft.Web/sites"
+              },
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "id": "/subscriptions/a925f2f7-5c63-4b7b-8799-25a5f97bc3b2/resourceGroups/testrg/providers/Microsoft.Relationships/contains/contains2",
+            "type": "Microsoft.Relationships/contains",
+            "properties": {
+              "sourceId": "/subscriptions/a925f2f7-5c63-4b7b-8799-25a5f97bc3b2/resourceGroups/testrg",
+              "targetId": "/subscriptions/a925f2f7-5c63-4b7b-8799-25a5f97bc3b2/resourceGroups/testrg/providers/Microsoft.Storage/storageAccounts/teststorage",
+              "targetTenant": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+              "metadata": {
+                "sourceType": "Microsoft.Resources/subscriptions/resourceGroups",
+                "targetType": "Microsoft.Storage/storageAccounts"
+              },
+              "provisioningState": "Succeeded"
+            }
+          }
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/a925f2f7-5c63-4b7b-8799-25a5f97bc3b2/resourceGroups/testrg/providers/Microsoft.Relationships/contains?api-version=2026-03-01-preview&$skipToken=abc123"
+      }
+    }
+  }
+}

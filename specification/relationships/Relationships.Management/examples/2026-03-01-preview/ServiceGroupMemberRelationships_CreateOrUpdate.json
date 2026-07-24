@@ -2,13 +2,13 @@
   "title": "ServiceGroupMemberRelationships_CreateOrUpdate",
   "operationId": "ServiceGroupMemberRelationships_CreateOrUpdate",
   "parameters": {
-    "api-version": "2023-09-01-preview",
+    "api-version": "2026-03-01-preview",
     "resourceUri": "subscriptions/a925f2f7-5c63-4b7b-8799-25a5f97bc3b2/resourceGroups/testrg/providers/Microsoft.DocumentDb/databaseAccounts/test-db-account",
     "name": "sg1",
     "resource": {
       "properties": {
-        "targetId": "/providers/Microsoft.Management/serviceGroups/sg1",
-        "targetTenant": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+        "sourceId": "/providers/Microsoft.Management/serviceGroups/sg1",
+        "sourceTenant": "72f988bf-86f1-41af-91ab-2d7cd011db47"
       }
     }
   },
@@ -16,16 +16,16 @@
     "200": {
       "body": {
         "properties": {
-          "sourceId": "/subscriptions/a925f2f7-5c63-4b7b-8799-25a5f97bc3b2/resourceGroups/testrg/providers/Microsoft.DocumentDb/databaseAccounts/test-db-account",
-          "targetId": "/providers/Microsoft.Management/serviceGroups/sg1",
-          "targetTenant": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+          "sourceId": "/providers/Microsoft.Management/serviceGroups/sg1",
+          "targetId": "/subscriptions/a925f2f7-5c63-4b7b-8799-25a5f97bc3b2/resourceGroups/testrg/providers/Microsoft.DocumentDb/databaseAccounts/test-db-account",
+          "sourceTenant": "72f988bf-86f1-41af-91ab-2d7cd011db47",
           "originInformation": {
-            "relationshipOriginType": "SystemExplicitlyCreated",
+            "relationshipOriginType": "UserExplicitlyCreated",
             "discoveryEngine": "PEM"
           },
           "metadata": {
-            "sourceType": "Microsoft.DocumentDb/databaseAccounts",
-            "targetType": "Microsoft.Management/serviceGroups"
+            "sourceType": "Microsoft.Management/serviceGroups",
+            "targetType": "Microsoft.DocumentDb/databaseAccounts"
           },
           "provisioningState": "Succeeded"
         },
@@ -37,16 +37,16 @@
     "201": {
       "body": {
         "properties": {
-          "sourceId": "/subscriptions/a925f2f7-5c63-4b7b-8799-25a5f97bc3b2/resourceGroups/testrg/providers/Microsoft.DocumentDb/databaseAccounts/test-db-account",
-          "targetId": "/providers/Microsoft.Management/serviceGroups/sg1",
-          "targetTenant": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+          "sourceId": "/providers/Microsoft.Management/serviceGroups/sg1",
+          "targetId": "/subscriptions/a925f2f7-5c63-4b7b-8799-25a5f97bc3b2/resourceGroups/testrg/providers/Microsoft.DocumentDb/databaseAccounts/test-db-account",
+          "sourceTenant": "72f988bf-86f1-41af-91ab-2d7cd011db47",
           "originInformation": {
-            "relationshipOriginType": "SystemExplicitlyCreated",
+            "relationshipOriginType": "UserExplicitlyCreated",
             "discoveryEngine": "PEM"
           },
           "metadata": {
-            "sourceType": "Microsoft.DocumentDb/databaseAccounts",
-            "targetType": "Microsoft.Management/serviceGroups"
+            "sourceType": "Microsoft.Management/serviceGroups",
+            "targetType": "Microsoft.DocumentDb/databaseAccounts"
           },
           "provisioningState": "Provisioning"
         },

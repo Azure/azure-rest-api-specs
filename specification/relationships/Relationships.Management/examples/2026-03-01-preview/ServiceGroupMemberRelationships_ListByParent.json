@@ -1,0 +1,52 @@
+{
+  "title": "ServiceGroupMemberRelationships_ListByParent",
+  "operationId": "ServiceGroupMemberRelationships_ListByParent",
+  "parameters": {
+    "api-version": "2026-03-01-preview",
+    "resourceUri": "subscriptions/a925f2f7-5c63-4b7b-8799-25a5f97bc3b2/resourceGroups/testrg/providers/Microsoft.DocumentDb/databaseAccounts/test-db-account"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/a925f2f7-5c63-4b7b-8799-25a5f97bc3b2/resourceGroups/testrg/providers/Microsoft.DocumentDb/databaseAccounts/test-db-account/providers/Microsoft.Relationships/ServiceGroupMember/sg1",
+            "name": "sg1",
+            "type": "Microsoft.Relationships/ServiceGroupMember",
+            "properties": {
+              "sourceId": "/providers/Microsoft.Management/serviceGroups/sg1",
+              "targetId": "/subscriptions/a925f2f7-5c63-4b7b-8799-25a5f97bc3b2/resourceGroups/testrg/providers/Microsoft.DocumentDb/databaseAccounts/test-db-account",
+              "sourceTenant": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+              "originInformation": {
+                "relationshipOriginType": "UserExplicitlyCreated"
+              },
+              "metadata": {
+                "sourceType": "Microsoft.Management/serviceGroups",
+                "targetType": "Microsoft.DocumentDb/databaseAccounts"
+              },
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "id": "/subscriptions/a925f2f7-5c63-4b7b-8799-25a5f97bc3b2/resourceGroups/testrg/providers/Microsoft.DocumentDb/databaseAccounts/test-db-account/providers/Microsoft.Relationships/ServiceGroupMember/sg2",
+            "name": "sg2",
+            "type": "Microsoft.Relationships/ServiceGroupMember",
+            "properties": {
+              "sourceId": "/providers/Microsoft.Management/serviceGroups/sg2",
+              "targetId": "/subscriptions/a925f2f7-5c63-4b7b-8799-25a5f97bc3b2/resourceGroups/testrg/providers/Microsoft.DocumentDb/databaseAccounts/test-db-account",
+              "sourceTenant": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+              "originInformation": {
+                "relationshipOriginType": "ServiceExplicitlyCreated"
+              },
+              "metadata": {
+                "sourceType": "Microsoft.Management/serviceGroups",
+                "targetType": "Microsoft.DocumentDb/databaseAccounts"
+              },
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
