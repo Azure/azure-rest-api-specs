@@ -4528,6 +4528,16 @@
         }
       }
     },
+    "HardwareProfile": {
+      "type": "object",
+      "description": "Specifies the hardware settings for the compute nodes.",
+      "properties": {
+        "vmSizeProperties": {
+          "$ref": "#/definitions/VMSizeProperties",
+          "description": "Specifies the properties for customizing the size of the virtual machine."
+        }
+      }
+    },
     "HostEndpointSettings": {
       "type": "object",
       "description": "Specifies particular host endpoint settings.",
@@ -5707,8 +5717,8 @@
           "$ref": "#/definitions/VirtualMachineSkuProfile",
           "description": "Specifies the profile of VM sizes and the allocation strategy used to allocate compute nodes for an Instance Mix pool. When specified, vmSize must be \"Mix\". This property can only be changed while the pool has no compute nodes."
         },
-        "vmHardwareProfile": {
-          "$ref": "#/definitions/VirtualMachineHardwareProfile",
+        "hardwareProfile": {
+          "$ref": "#/definitions/HardwareProfile",
           "description": "Specifies the hardware settings for the compute nodes."
         },
         "deploymentConfiguration": {
@@ -7100,16 +7110,6 @@
           "format": "int32",
           "description": "The core quota for the VM family for the Batch account.",
           "readOnly": true
-        }
-      }
-    },
-    "VirtualMachineHardwareProfile": {
-      "type": "object",
-      "description": "Specifies the hardware settings for the compute nodes.",
-      "properties": {
-        "vmSizeProperties": {
-          "$ref": "#/definitions/VMSizeProperties",
-          "description": "Specifies the properties for customizing the size of the virtual machine."
         }
       }
     },

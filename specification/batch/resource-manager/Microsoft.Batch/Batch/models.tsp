@@ -2140,7 +2140,7 @@ model PoolProperties {
    * Specifies the hardware settings for the compute nodes.
    */
   @added(Versions.v2026_08_01)
-  vmHardwareProfile?: VirtualMachineHardwareProfile;
+  hardwareProfile?: HardwareProfile;
 
   /**
    * Deployment configuration properties.
@@ -2446,7 +2446,7 @@ union VirtualMachineSkuAllocationStrategy {
  * Specifies the hardware settings for the compute nodes.
  */
 @added(Versions.v2026_08_01)
-model VirtualMachineHardwareProfile {
+model HardwareProfile {
   /**
    * Specifies the properties for customizing the size of the virtual machine.
    */
