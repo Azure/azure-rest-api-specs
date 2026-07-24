@@ -19,8 +19,8 @@ namespace Microsoft.EdgeZones;
 
 /** Api versions */
 enum Versions {
-  /** 2024-04-01-preview api version */
-  `2024-04-01-preview`,
+  /** 2026-10-01 api version */
+  `2026-10-01`,
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
