@@ -60,6 +60,15 @@ directive:
     where: $.paths
     from: applications.json
     reason: Suppression of OperationsAPI as it doesn't apply to this specific file.
+  - suppress: OperationsAPIImplementation
+    from: datascanners.json
+    reason: >-
+      The Microsoft.Security operations API (the standard
+      /providers/Microsoft.Security/operations list) is owned by a separate
+      TypeSpec project (OperationsAPI, which emits security-Operations.json) and
+      is shared across the resource provider. This spec defines only the
+      datascanners resource type and intentionally does not redefine that shared
+      operations API.
   - suppress: TopLevelResourcesListBySubscription
     where: $.definitions.Pricing
     from: pricings.json
@@ -180,6 +189,15 @@ suppressions:
   - code: ParametersInPost
     from: sqlVulnerabilityAssessmentsScanOperations.json
     reason: The databaseName query parameter is required for server-level routes where the database is not part of the ARM resource ID path.
+```
+
+### Tag: package-2026-08
+
+These settings apply only when `--tag=package-2026-08` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-08'
+input-file:
+  - stable/2026-08-01/datascanners.json
 ```
 
 ### Tag: package-2026-01
@@ -720,6 +738,7 @@ input-file:
 - preview/2025-10-01-preview/pricings.json
 - stable/2024-08-01/security-SecurityStandards.json
 - stable/2026-01-01/privateLinks.json
+- stable/2026-08-01/datascanners.json
 
 # Autorest suppressions
 suppressions:

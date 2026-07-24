@@ -1,0 +1,360 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Center",
+    "version": "2026-08-01",
+    "description": "API spec for Microsoft.Security (Azure Security Center) data scanners resource provider.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "DataScanners"
+    }
+  ],
+  "paths": {
+    "/{scopeId}/providers/Microsoft.Security/dataScanners": {
+      "get": {
+        "operationId": "DataScanners_List",
+        "tags": [
+          "DataScanners"
+        ],
+        "description": "Lists all data scanner resources for the specified scope.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scopeId",
+            "in": "path",
+            "description": "The scope of the data scanner. Valid scopes are a subscription (format: 'subscriptions/{subscriptionId}') or a resource group (format: 'subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}').",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DataScannerList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists all data scanner resources at resource group scope.": {
+            "$ref": "./examples/DataScanners/ListDataScannersResourceGroupScope.json"
+          },
+          "Lists all data scanner resources at subscription scope.": {
+            "$ref": "./examples/DataScanners/ListDataScanners.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{scopeId}/providers/Microsoft.Security/dataScanners/{scannerName}": {
+      "get": {
+        "operationId": "DataScanners_Get",
+        "tags": [
+          "DataScanners"
+        ],
+        "description": "Gets a data scanner resource for the specified scope.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scopeId",
+            "in": "path",
+            "description": "The scope of the data scanner. Valid scopes are a subscription (format: 'subscriptions/{subscriptionId}') or a resource group (format: 'subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}').",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "scannerName",
+            "in": "path",
+            "description": "The name of the data scanner.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{1,260}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DataScanner"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a data scanner resource at resource group scope.": {
+            "$ref": "./examples/DataScanners/GetDataScannerResourceGroupScope.json"
+          },
+          "Gets a data scanner resource at subscription scope.": {
+            "$ref": "./examples/DataScanners/GetDataScanner.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "DataScanners_CreateOrUpdate",
+        "tags": [
+          "DataScanners"
+        ],
+        "description": "Creates or updates a data scanner resource for the specified scope.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scopeId",
+            "in": "path",
+            "description": "The scope of the data scanner. Valid scopes are a subscription (format: 'subscriptions/{subscriptionId}') or a resource group (format: 'subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}').",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "scannerName",
+            "in": "path",
+            "description": "The name of the data scanner.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{1,260}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The data scanner resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataScanner"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'DataScanner' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DataScanner"
+            }
+          },
+          "201": {
+            "description": "Resource 'DataScanner' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DataScanner"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates or updates a data scanner resource at resource group scope.": {
+            "$ref": "./examples/DataScanners/CreateOrUpdateDataScannerResourceGroupScope.json"
+          },
+          "Creates or updates a data scanner resource at subscription scope.": {
+            "$ref": "./examples/DataScanners/CreateOrUpdateDataScanner.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DataScanners_Delete",
+        "tags": [
+          "DataScanners"
+        ],
+        "description": "Deletes a data scanner resource for the specified scope.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scopeId",
+            "in": "path",
+            "description": "The scope of the data scanner. Valid scopes are a subscription (format: 'subscriptions/{subscriptionId}') or a resource group (format: 'subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}').",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "scannerName",
+            "in": "path",
+            "description": "The name of the data scanner.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{1,260}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes a data scanner resource at resource group scope.": {
+            "$ref": "./examples/DataScanners/DeleteDataScannerResourceGroupScope.json"
+          },
+          "Deletes a data scanner resource at subscription scope.": {
+            "$ref": "./examples/DataScanners/DeleteDataScanner.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Common.CloudError": {
+      "type": "object",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Common.CloudErrorBody",
+          "description": "The error object."
+        }
+      },
+      "x-ms-external": true
+    },
+    "Common.CloudErrorBody": {
+      "type": "object",
+      "description": "The error detail.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The error target.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "The error details.",
+          "items": {
+            "$ref": "#/definitions/Common.CloudErrorBody"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "The error additional info.",
+          "items": {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorAdditionalInfo"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      },
+      "x-ms-external": true
+    },
+    "DataScanner": {
+      "type": "object",
+      "description": "The data scanner resource used by Defender for Storage to scan data for malware and sensitive data discovery.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DataScannerProperties",
+          "description": "Data scanner resource properties."
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DataScannerList": {
+      "type": "object",
+      "description": "List of data scanner resources.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of data scanner resources.",
+          "items": {
+            "$ref": "#/definitions/DataScanner"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URI to fetch the next page."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DataScannerProperties": {
+      "type": "object",
+      "description": "Data scanner resource properties."
+    }
+  },
+  "parameters": {}
+}
