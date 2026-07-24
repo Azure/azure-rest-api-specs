@@ -825,6 +825,31 @@ model AgentPoolNetworkProfile {
   @added(Versions.v2026_06_02_preview)
   @identifiers(#[])
   secondaryNetworkInterfaces?: AgentPoolNetworkInterface[];
+
+  /** DRANET settings of an agent pool. */
+  @added(Versions.v2026_06_01)
+  dranet?: DRANETProfile;
+}
+
+/** DRANET settings of an agent pool. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "DRANET is the approved public API acronym."
+@added(Versions.v2026_06_01)
+model DRANETProfile {
+  /** The DRANET mode for the agent pool. */
+  mode?: DRANETMode;
+}
+
+/** The DRANET mode for the agent pool. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "DRANET is the approved public API acronym."
+@added(Versions.v2026_06_01)
+union DRANETMode {
+  string,
+
+  /** DRANET is not managed by AKS. */
+  Unmanaged: "Unmanaged",
+
+  /** DRANET is managed by AKS. */
+  Managed: "Managed",
 }
 
 /** Type of network interface to be provisioned on each virtual machine instance. For more information, see https://aka.ms/aks/multi-nic */
