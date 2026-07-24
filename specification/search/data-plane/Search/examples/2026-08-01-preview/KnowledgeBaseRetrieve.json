@@ -1,0 +1,272 @@
+{
+  "operationId": "KnowledgeRetrieval_Retrieve",
+  "title": "KnowledgeBaseRetrieve",
+  "parameters": {
+    "endpoint": "https://typespecpreviewexampleservice.search.windows.net",
+    "knowledgeBaseName": "base-preview-test",
+    "api-version": "2026-08-01-preview",
+    "Accept": "application/json;odata.metadata=minimal",
+    "x-ms-query-source-authorization": null,
+    "x-ms-query-work-iq-source-authorization": null,
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
+    "retrievalRequest": {
+      "messages": [
+        {
+          "role": "user",
+          "content": [
+            {
+              "type": "text",
+              "text": "hello world"
+            }
+          ]
+        }
+      ],
+      "maxRuntimeInSeconds": 60,
+      "maxOutputSize": 100000,
+      "maxOutputDocuments": 50,
+      "retrievalReasoningEffort": {
+        "kind": "low"
+      },
+      "includeActivity": true,
+      "outputMode": "answerSynthesis",
+      "knowledgeSourceParams": [
+        {
+          "knowledgeSourceName": "ks-preview-test",
+          "includeReferences": true,
+          "includeReferenceSourceData": true,
+          "alwaysQuerySource": false,
+          "neverQuerySource": false,
+          "failOnError": false,
+          "rerankerThreshold": 2.1,
+          "resultsProcessing": "rerank",
+          "kind": "searchIndex",
+          "filterAddOn": "foo eq bar",
+          "queryHintOverrides": {
+            "filters": [
+              {
+                "field": "country",
+                "fieldValues": [
+                  "United States",
+                  "Japan",
+                  "France",
+                  "Germany"
+                ],
+                "filterInstructions": "Country associated with the document."
+              }
+            ],
+            "boosts": [
+              {
+                "kind": "fieldValue",
+                "boostInstructions": "Prefer documents matching the user's locale.",
+                "field": "language",
+                "fieldValues": [
+                  "en-US",
+                  "ja-JP",
+                  "fr-FR",
+                  "de-DE"
+                ],
+                "boost": 1.5
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "response": [
+          {
+            "content": [
+              {
+                "type": "text",
+                "text": "[{...}]"
+              }
+            ]
+          }
+        ],
+        "activity": [
+          {
+            "type": "modelQueryPlanning",
+            "id": 0,
+            "inputTokens": 11,
+            "outputTokens": 22,
+            "elapsedMs": 10,
+            "model": {
+              "modelName": "gpt-4o",
+              "deploymentId": "gpt-4o-deployment"
+            }
+          },
+          {
+            "type": "searchIndex",
+            "id": 1,
+            "knowledgeSourceName": "ks-preview-test",
+            "queryTime": "2025-01-01T00:08:45.045Z",
+            "count": 2,
+            "elapsedMs": 1234,
+            "searchIndexArguments": {
+              "search": "hello world",
+              "filter": "(category eq 'news') and (foo eq bar)",
+              "semanticConfigurationName": "testconfig",
+              "sourceDataFields": [
+                {
+                  "name": "category"
+                },
+                {
+                  "name": "description"
+                },
+                {
+                  "name": "ownerId"
+                },
+                {
+                  "name": "id"
+                }
+              ],
+              "searchFields": []
+            }
+          },
+          {
+            "type": "searchIndex",
+            "id": 2,
+            "knowledgeSourceName": "ks-preview-test",
+            "queryTime": "2025-01-01T00:08:45.045Z",
+            "count": 2,
+            "elapsedMs": 1234,
+            "searchIndexArguments": {
+              "search": "hello world two",
+              "filter": "(category eq 'news') and (foo eq bar)",
+              "semanticConfigurationName": "testconfig",
+              "sourceDataFields": [
+                {
+                  "name": "category"
+                },
+                {
+                  "name": "description"
+                },
+                {
+                  "name": "ownerId"
+                },
+                {
+                  "name": "id"
+                }
+              ],
+              "searchFields": []
+            }
+          },
+          {
+            "type": "modelAnswerSynthesis",
+            "id": 3,
+            "inputTokens": 11,
+            "outputTokens": 22,
+            "elapsedMs": 10,
+            "model": {
+              "modelName": "gpt-4o",
+              "deploymentId": "gpt-4o-deployment"
+            }
+          },
+          {
+            "type": "agenticReasoning",
+            "id": 4,
+            "reasoningTokens": 78,
+            "retrievalReasoningEffort": {
+              "kind": "low"
+            }
+          }
+        ],
+        "references": [
+          {
+            "type": "searchIndex",
+            "id": "83dd7d40",
+            "activitySource": 1,
+            "sourceData": {
+              "id": "myDocKey1",
+              "title": "high_doc",
+              "content": "hello world"
+            },
+            "rerankerScore": 4,
+            "docKey": "myDocKey1",
+            "citationUrl": "https://typespecpreviewexampleservice.search.windows.net/indexes/preview-test/docs/myDocKey1?$select=category%2Cdescription%2CownerId%2Cid&api-version=2026-08-01-preview"
+          },
+          {
+            "type": "searchIndex",
+            "id": "83dd7d41",
+            "activitySource": 1,
+            "sourceData": {
+              "id": "myDocKey2",
+              "title": "low_doc",
+              "content": "goodbye world"
+            },
+            "rerankerScore": 3.9,
+            "docKey": "myDocKey2",
+            "citationUrl": "https://typespecpreviewexampleservice.search.windows.net/indexes/preview-test/docs/myDocKey2?$select=category%2Cdescription%2CownerId%2Cid&api-version=2026-08-01-preview"
+          }
+        ]
+      }
+    },
+    "206": {
+      "body": {
+        "response": [
+          {
+            "content": [
+              {
+                "type": "text",
+                "text": "Partial results were returned before the retrieval completed."
+              }
+            ]
+          }
+        ],
+        "activity": [
+          {
+            "type": "modelQueryPlanning",
+            "id": 0,
+            "inputTokens": 11,
+            "outputTokens": 22,
+            "elapsedMs": 10,
+            "model": {
+              "modelName": "gpt-4o",
+              "deploymentId": "gpt-4o-deployment"
+            }
+          },
+          {
+            "type": "searchIndex",
+            "id": 1,
+            "knowledgeSourceName": "ks-preview-test",
+            "queryTime": "2025-01-01T00:08:45.045Z",
+            "count": 1,
+            "elapsedMs": 1234,
+            "searchIndexArguments": {
+              "search": "hello world",
+              "filter": "(category eq 'news') and (foo eq bar)",
+              "semanticConfigurationName": "testconfig",
+              "sourceDataFields": [
+                {
+                  "name": "category"
+                },
+                {
+                  "name": "id"
+                }
+              ],
+              "searchFields": []
+            }
+          }
+        ],
+        "references": [
+          {
+            "type": "searchIndex",
+            "id": "83dd7d40",
+            "activitySource": 1,
+            "sourceData": {
+              "id": "myDocKey1",
+              "title": "high_doc",
+              "content": "hello world"
+            },
+            "rerankerScore": 4,
+            "docKey": "myDocKey1",
+            "citationUrl": "https://typespecpreviewexampleservice.search.windows.net/indexes/preview-test/docs/myDocKey1?$select=category%2Cdescription%2CownerId%2Cid&api-version=2026-08-01-preview"
+          }
+        ]
+      }
+    }
+  }
+}

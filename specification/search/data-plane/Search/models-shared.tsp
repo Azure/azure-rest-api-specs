@@ -39,6 +39,35 @@ alias acceptHeaderNone = {
   accept?: "application/json;odata.metadata=none";
 };
 
+/** Specifies how the search parameter is interpreted when narrowing down a listing result set. Currently only 'prefix' is supported. */
+@added(Versions.v2026_08_01_preview)
+union ListingSearchType {
+  string,
+
+  /** Matches items whose name starts with the value of the search parameter. */
+  Prefix: "prefix",
+}
+
+/** Reusable server-driven pagination query parameters shared by all listing operations. */
+alias listingPaginationQuery = {
+  /** A string used to narrow down the listing so that fewer results need to be paged through. If omitted or an empty string is passed, no narrowing is applied. */
+  @added(Versions.v2026_08_01_preview)
+  @query
+  search?: string;
+
+  /** The maximum number of items to return in a single page. The server enforces a maximum; if omitted, the server determines a suitable default. */
+  @added(Versions.v2026_08_01_preview)
+  @minValue(1)
+  @maxValue(3000)
+  @query
+  pageSize?: int32;
+
+  /** Specifies how the search parameter is interpreted. Currently only 'prefix' is supported. */
+  @added(Versions.v2026_08_01_preview)
+  @query
+  searchType?: ListingSearchType = ListingSearchType.Prefix;
+};
+
 alias selectQuery = {
   /** Selects which top-level properties to retrieve. Specified as a comma-separated list of JSON property names, or '*' for all properties. The default is all properties. */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Pre-existing API contract"
@@ -109,6 +138,14 @@ alias querySourceAuthorizationHeader = {
   @removed(Versions.v2026_04_01)
   @header("x-ms-query-source-authorization")
   querySourceAuthorization?: string;
+};
+
+alias queryWorkIQSourceAuthorizationHeader = {
+  /** User assertion token for a customer-owned Entra app registration configured on a Work IQ knowledge source. Used for on-behalf-of authentication to the Work IQ API. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "WorkIQ is a product name where IQ is an acronym."
+  @added(Versions.v2026_08_01_preview)
+  @header("x-ms-query-work-iq-source-authorization")
+  queryWorkIQSourceAuthorization?: string;
 };
 
 alias enableElevatedReadHeader = {

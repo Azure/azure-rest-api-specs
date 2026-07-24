@@ -1,0 +1,57 @@
+{
+  "operationId": "KnowledgeSources_Create",
+  "title": "SearchServiceCreateKnowledgeSourceWorkIQ",
+  "parameters": {
+    "endpoint": "https://previewexampleservice.search.windows.net",
+    "api-version": "2026-08-01-preview",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
+    "knowledgeSource": {
+      "workIQParameters": {
+        "entraAppAuthentication": {
+          "applicationId": "00000000-0000-0000-0000-000000000000",
+          "federatedCredentialId": "00000000-0000-0000-0000-000000000001",
+          "tenantId": "00000000-0000-0000-0000-000000000002"
+        }
+      },
+      "name": "ks-workiq-test",
+      "description": "Description of the WorkIQ knowledge source.",
+      "kind": "workIQ",
+      "@odata.etag": "0x1234568AE7E58A1",
+      "encryptionKey": {
+        "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
+        "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
+        "keyVaultUri": "https://myKeyVault.vault.azure.net",
+        "accessCredentials": {
+          "applicationId": "00000000-0000-0000-0000-000000000000",
+          "applicationSecret": "<applicationSecret>"
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "@odata.etag": "0x1234568AE7E58A1",
+        "name": "ks-workiq-test",
+        "kind": "workIQ",
+        "description": "Description of the WorkIQ knowledge source.",
+        "encryptionKey": {
+          "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
+          "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
+          "keyVaultUri": "https://myKeyVault.vault.azure.net",
+          "accessCredentials": {
+            "applicationId": "00000000-0000-0000-0000-000000000000",
+            "applicationSecret": "<applicationSecret>"
+          }
+        },
+        "workIQParameters": {
+          "entraAppAuthentication": {
+            "applicationId": "00000000-0000-0000-0000-000000000000",
+            "federatedCredentialId": "00000000-0000-0000-0000-000000000001",
+            "tenantId": "00000000-0000-0000-0000-000000000002"
+          }
+        }
+      }
+    }
+  }
+}

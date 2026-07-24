@@ -1,0 +1,184 @@
+{
+  "operationId": "KnowledgeRetrieval_Retrieve",
+  "title": "KnowledgeBaseRetrieveWithSourceExclusion",
+  "parameters": {
+    "endpoint": "https://previewexampleservice.search.windows.net",
+    "knowledgeBaseName": "support-kb",
+    "api-version": "2026-08-01-preview",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
+    "x-ms-query-source-authorization": null,
+    "x-ms-query-work-iq-source-authorization": null,
+    "retrievalRequest": {
+      "messages": [
+        {
+          "role": "user",
+          "content": [
+            {
+              "text": "Explain the SSO provisioning steps from the product documentation only.",
+              "type": "text"
+            }
+          ]
+        }
+      ],
+      "includeActivity": true,
+      "outputMode": "answerSynthesis",
+      "knowledgeSourceParams": [
+        {
+          "knowledgeSourceName": "product-docs-ks",
+          "includeReferences": true,
+          "includeReferenceSourceData": true,
+          "kind": "searchIndex"
+        },
+        {
+          "knowledgeSourceName": "troubleshooting-ks",
+          "neverQuerySource": true,
+          "kind": "searchIndex"
+        },
+        {
+          "knowledgeSourceName": "release-notes-web",
+          "neverQuerySource": true,
+          "kind": "web"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "response": [
+          {
+            "content": [
+              {
+                "type": "text",
+                "text": "To provision SSO, register the enterprise application, configure the redirect URI, upload the signing certificate, and complete the tenant-specific identity settings described in the product documentation."
+              }
+            ]
+          }
+        ],
+        "activity": [
+          {
+            "type": "modelQueryPlanning",
+            "id": 0,
+            "inputTokens": 11,
+            "outputTokens": 22,
+            "elapsedMs": 10
+          },
+          {
+            "type": "searchIndex",
+            "id": 1,
+            "knowledgeSourceName": "product-docs-ks",
+            "queryTime": "2025-01-01T00:08:45.045Z",
+            "count": 4,
+            "elapsedMs": 64,
+            "searchIndexArguments": {
+              "search": "SSO provisioning steps",
+              "sourceDataFields": [
+                {
+                  "name": "title"
+                },
+                {
+                  "name": "content"
+                },
+                {
+                  "name": "id"
+                }
+              ],
+              "searchFields": [],
+              "semanticConfigurationName": "testconfig"
+            }
+          },
+          {
+            "type": "agenticReasoning",
+            "id": 2,
+            "retrievalReasoningEffort": {
+              "kind": "low"
+            },
+            "reasoningTokens": 74
+          },
+          {
+            "type": "modelAnswerSynthesis",
+            "id": 3,
+            "inputTokens": 664,
+            "outputTokens": 1328,
+            "elapsedMs": 10
+          }
+        ],
+        "references": [
+          {
+            "type": "searchIndex",
+            "id": "83dd7d40",
+            "activitySource": 1,
+            "sourceData": {
+              "id": "sso-provisioning-guide",
+              "title": "SSO provisioning guide",
+              "content": "Register the enterprise application and configure the redirect URI."
+            },
+            "rerankerScore": 3.5,
+            "docKey": "sso-provisioning-guide"
+          }
+        ]
+      }
+    },
+    "206": {
+      "body": {
+        "response": [
+          {
+            "content": [
+              {
+                "type": "text",
+                "text": "Partial results were returned before the retrieval completed."
+              }
+            ]
+          }
+        ],
+        "activity": [
+          {
+            "type": "modelQueryPlanning",
+            "id": 0,
+            "inputTokens": 11,
+            "outputTokens": 22,
+            "elapsedMs": 10
+          },
+          {
+            "type": "searchIndex",
+            "id": 1,
+            "knowledgeSourceName": "product-docs-ks",
+            "queryTime": "2025-01-01T00:08:45.045Z",
+            "count": 1,
+            "elapsedMs": 64,
+            "searchIndexArguments": {
+              "search": "SSO provisioning steps",
+              "sourceDataFields": [
+                {
+                  "name": "title"
+                },
+                {
+                  "name": "content"
+                },
+                {
+                  "name": "id"
+                }
+              ],
+              "searchFields": [],
+              "semanticConfigurationName": "testconfig"
+            }
+          }
+        ],
+        "references": [
+          {
+            "type": "searchIndex",
+            "id": "83dd7d40",
+            "activitySource": 1,
+            "sourceData": {
+              "id": "sso-provisioning-guide",
+              "title": "SSO provisioning guide",
+              "content": "Register the enterprise application and configure the redirect URI."
+            },
+            "rerankerScore": 3.5,
+            "docKey": "sso-provisioning-guide"
+          }
+        ]
+      }
+    }
+  }
+}
