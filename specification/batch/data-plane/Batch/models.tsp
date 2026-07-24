@@ -1821,7 +1821,7 @@ model BatchPoolSpecification {
 
   @doc("Specifies the hardware settings for the Compute Nodes.")
   @added(Versions.v2026_08_01)
-  vmHardwareProfile?: VirtualMachineHardwareProfile;
+  hardwareProfile?: HardwareProfile;
 
   @doc("The number of task slots that can be used to run concurrent tasks on a single compute node in the pool. The default value is 1. The maximum value is the smaller of 4 times the number of cores of the vmSize of the pool or 256.")
   taskSlotsPerNode?: int32;
@@ -1966,7 +1966,7 @@ union VirtualMachineSkuAllocationStrategy {
 
 @added(Versions.v2026_08_01)
 @doc("Specifies the hardware settings for the Compute Nodes.")
-model VirtualMachineHardwareProfile {
+model HardwareProfile {
   @doc("Specifies the properties for customizing the size of the virtual machine.")
   vmSizeProperties?: VMSizeProperties;
 }
@@ -3013,7 +3013,7 @@ model BatchPool {
   @doc("Specifies the hardware settings for the Compute Nodes.")
   @visibility(Lifecycle.Read)
   @added(Versions.v2026_08_01)
-  vmHardwareProfile?: VirtualMachineHardwareProfile;
+  hardwareProfile?: HardwareProfile;
 
   @doc("The timeout for allocation of Compute Nodes to the Pool. This is the timeout for the most recent resize operation. (The initial sizing when the Pool is created counts as a resize.) The default value is 15 minutes. The time duration is specified in ISO 8601 format.")
   @visibility(Lifecycle.Read)
@@ -3123,7 +3123,7 @@ model BatchPoolCreateOptions {
 
   @doc("Specifies the hardware settings for the Compute Nodes.")
   @added(Versions.v2026_08_01)
-  vmHardwareProfile?: VirtualMachineHardwareProfile;
+  hardwareProfile?: HardwareProfile;
 
   @doc("The timeout for allocation of Compute Nodes to the Pool. This timeout applies only to manual scaling; it has no effect when enableAutoScale is set to true. The default value is 15 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service returns an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request). The time duration is specified in ISO 8601 format.")
   resizeTimeout?: duration;
@@ -3215,7 +3215,7 @@ model BatchPoolUpdateOptions {
 
   @doc("Specifies the hardware settings for the Compute Nodes.<br /><br />This field can be updated only when the pool is empty.")
   @added(Versions.v2026_08_01)
-  vmHardwareProfile?: VirtualMachineHardwareProfile;
+  hardwareProfile?: HardwareProfile;
 
   @doc("The number of task slots that can be used to run concurrent tasks on a single compute node in the pool. The default value is 1. The maximum value is the smaller of 4 times the number of cores of the vmSize of the pool or 256.<br /><br />This field can be updated only when the pool is empty.")
   taskSlotsPerNode?: int32;

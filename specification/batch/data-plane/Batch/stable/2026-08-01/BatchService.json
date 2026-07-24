@@ -12411,8 +12411,8 @@
           "description": "Specifies the profile of VM sizes and the allocation strategy used to allocate Compute Nodes for an Instance Mix Pool. When specified, vmSize must be 'Mix'. This property can only be changed while the Pool has no Compute Nodes.",
           "readOnly": true
         },
-        "vmHardwareProfile": {
-          "$ref": "#/definitions/VirtualMachineHardwareProfile",
+        "hardwareProfile": {
+          "$ref": "#/definitions/HardwareProfile",
           "description": "Specifies the hardware settings for the Compute Nodes.",
           "readOnly": true
         },
@@ -12585,8 +12585,8 @@
           "$ref": "#/definitions/VirtualMachineSkuProfile",
           "description": "Specifies the profile of VM sizes and the allocation strategy used to allocate Compute Nodes for an Instance Mix Pool. When specified, vmSize must be 'Mix'. This property can only be changed while the Pool has no Compute Nodes."
         },
-        "vmHardwareProfile": {
-          "$ref": "#/definitions/VirtualMachineHardwareProfile",
+        "hardwareProfile": {
+          "$ref": "#/definitions/HardwareProfile",
           "description": "Specifies the hardware settings for the Compute Nodes."
         },
         "resizeTimeout": {
@@ -13079,8 +13079,8 @@
           "$ref": "#/definitions/VirtualMachineSkuProfile",
           "description": "Specifies the profile of VM sizes and the allocation strategy used to allocate Compute Nodes for an Instance Mix Pool. When specified, vmSize must be 'Mix'. This property can only be changed while the Pool has no Compute Nodes."
         },
-        "vmHardwareProfile": {
-          "$ref": "#/definitions/VirtualMachineHardwareProfile",
+        "hardwareProfile": {
+          "$ref": "#/definitions/HardwareProfile",
           "description": "Specifies the hardware settings for the Compute Nodes."
         },
         "taskSlotsPerNode": {
@@ -13189,8 +13189,8 @@
           "$ref": "#/definitions/VirtualMachineSkuProfile",
           "description": "Specifies the profile of VM sizes and the allocation strategy used to allocate Compute Nodes for an Instance Mix Pool. When specified, vmSize must be 'Mix'. This property can only be changed while the Pool has no Compute Nodes."
         },
-        "vmHardwareProfile": {
-          "$ref": "#/definitions/VirtualMachineHardwareProfile",
+        "hardwareProfile": {
+          "$ref": "#/definitions/HardwareProfile",
           "description": "Specifies the hardware settings for the Compute Nodes."
         },
         "taskSlotsPerNode": {
@@ -13373,8 +13373,8 @@
           "$ref": "#/definitions/VirtualMachineSkuProfile",
           "description": "Specifies the profile of VM sizes and the allocation strategy used to allocate Compute Nodes for an Instance Mix Pool. When specified, vmSize must be 'Mix'.<br /><br />This field can be updated only when the pool is empty."
         },
-        "vmHardwareProfile": {
-          "$ref": "#/definitions/VirtualMachineHardwareProfile",
+        "hardwareProfile": {
+          "$ref": "#/definitions/HardwareProfile",
           "description": "Specifies the hardware settings for the Compute Nodes.<br /><br />This field can be updated only when the pool is empty."
         },
         "taskSlotsPerNode": {
@@ -15401,6 +15401,16 @@
         "contentLength"
       ]
     },
+    "HardwareProfile": {
+      "type": "object",
+      "description": "Specifies the hardware settings for the Compute Nodes.",
+      "properties": {
+        "vmSizeProperties": {
+          "$ref": "#/definitions/VMSizeProperties",
+          "description": "Specifies the properties for customizing the size of the virtual machine."
+        }
+      }
+    },
     "HostEndpointSettings": {
       "type": "object",
       "description": "Specifies particular host endpoint settings.",
@@ -16725,16 +16735,6 @@
         "serviceArtifactReference": {
           "$ref": "#/definitions/ServiceArtifactReferenceUpdate",
           "description": "Specifies the service artifact reference id used to set same image version for all virtual machines in the scale set when using 'latest' image version. The service artifact reference id in the form of /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/galleries/{galleryName}/serviceArtifacts/{serviceArtifactName}/vmArtifactsProfiles/{vmArtifactsProfilesName}"
-        }
-      }
-    },
-    "VirtualMachineHardwareProfile": {
-      "type": "object",
-      "description": "Specifies the hardware settings for the Compute Nodes.",
-      "properties": {
-        "vmSizeProperties": {
-          "$ref": "#/definitions/VMSizeProperties",
-          "description": "Specifies the properties for customizing the size of the virtual machine."
         }
       }
     },
