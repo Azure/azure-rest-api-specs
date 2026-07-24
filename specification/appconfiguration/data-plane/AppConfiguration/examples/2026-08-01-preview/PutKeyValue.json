@@ -1,0 +1,43 @@
+{
+  "operationId": "PutKeyValue",
+  "title": "Creates a key-value.",
+  "parameters": {
+    "endpoint": "https://{exampleAppConfigurationName}.azconfig.io",
+    "api-version": "2026-08-01-preview",
+    "key": "Message"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Content-Type": "application/vnd.microsoft.appconfig.kv+json",
+        "ETag": "W/\"tnIHBkDYQwtdNMLoWtr5aybkKwL\"",
+        "Last-Modified": "Tue, 27 Aug 2019 16:52:32 GMT",
+        "Sync-Token": "zAJw6V16=NjotMSM3ODk3NjM=;sn=789763"
+      },
+      "body": {
+        "etag": "tnIHBkDYQwtdNMLoWtr5aybkKwL",
+        "key": "Message",
+        "label": null,
+        "content_type": null,
+        "value": "Hello World!",
+        "tags": {},
+        "locked": false,
+        "last_modified": "2019-08-27T16:52:32+00:00"
+      }
+    },
+    "default": {
+      "headers": {
+        "Content-Type": "application/problem+json",
+        "Sync-Token": "zAJw6V16=NjotMSM3ODk3NjM=;sn=789763"
+      },
+      "body": {
+        "type": "ForbiddenBySchema",
+        "title": "StringLengthOutOfRange",
+        "instanceLocation": "/value/snapshot_name",
+        "keywordLocation": "/properties/value/$ref/properties/snapshot_name/maxLength",
+        "schema": "appconfig://contoso/schemas/schema-name",
+        "status": 400
+      }
+    }
+  }
+}
