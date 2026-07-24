@@ -64,7 +64,8 @@ interface ProcessModuleInfoOps
         @segment("modules")
         @key
         baseAddress: string,
-      }
+      },
+      ResourceName = "SiteInstanceProcessModule"
     > {}
 
 @tag("WebApps")
@@ -117,7 +118,8 @@ interface ProcessModuleInfoOperationGroupOps
         @segment("modules")
         @key
         baseAddress: string,
-      }
+      },
+      ResourceName = "SiteProcessModule"
     > {}
 
 @tag("WebApps")
@@ -182,7 +184,8 @@ interface InstanceProcessModuleSlotOperationGroupOps
         @segment("modules")
         @key
         baseAddress: string,
-      }
+      },
+      ResourceName = "SiteSlotInstanceProcessModule"
     > {}
 
 @tag("WebApps")
@@ -242,7 +245,8 @@ interface ProcessModuleSlotOperationGroupOps
         @segment("modules")
         @key
         baseAddress: string,
-      }
+      },
+      ResourceName = "SiteSlotProcessModule"
     > {}
 
 @tag("WebApps")

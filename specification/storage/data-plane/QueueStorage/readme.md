@@ -35,7 +35,7 @@ add-credentials: true
 
 These settings apply only when `--tag=package-2026-04-tsp` is specified on the command line.
 
-```yaml $(tag) == 'package-2026-06-tsp'
+```yaml $(tag) == 'package-2026-04-tsp'
 input-file:
   - stable/2026-04-06/generated_queue.json
 ```

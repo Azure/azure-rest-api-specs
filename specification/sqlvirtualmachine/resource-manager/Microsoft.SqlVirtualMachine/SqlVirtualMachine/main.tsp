@@ -16,6 +16,7 @@ import "./models.tsp";
 import "./AvailabilityGroupListener.tsp";
 import "./SqlVirtualMachineGroup.tsp";
 import "./SqlVirtualMachine.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

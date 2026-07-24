@@ -1,0 +1,15 @@
+id: openai-typespec-update-negative-001
+name: Anti-Trigger - General TypeSpec Authoring
+description: |
+  Test that the skill does not activate for a request that is about
+  changing TypeSpec API definitions rather than updating the OpenAI
+  package dependency.
+tags:
+  - negative-test
+  - anti-trigger
+inputs:
+  prompt: "Add a new property to my TypeSpec model and update the API version."
+expected:
+  output_not_contains:
+    - "npm i @azure-tools/openai-typespec --save-exact"
+    - "@azure-tools/openai-typespec"

@@ -885,6 +885,7 @@ model DicomServiceProperties {
   /**
    * The url of the Dicom Services.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   serviceUrl?: string;
 
@@ -986,6 +987,7 @@ model EncryptionCustomerManagedKeyEncryption {
   /**
    * The URL of the key to use for encryption
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   keyEncryptionKeyUrl?: string;
 }
 

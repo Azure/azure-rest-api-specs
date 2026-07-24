@@ -32,7 +32,7 @@ using Azure.ClientGenerator.Core;
 );
 @@clientName(
   Microsoft.HorizonDb.HorizonDbClusterForPatchUpdate,
-  "HorizonDBClusterForPatchUpdate",
+  "HorizonDBClusterPatch",
   "csharp"
 );
 @@clientName(
@@ -82,7 +82,7 @@ using Azure.ClientGenerator.Core;
 );
 @@clientName(
   Microsoft.HorizonDb.HorizonDbParameterGroupForPatchUpdate,
-  "HorizonDBParameterGroupForPatchUpdate",
+  "HorizonDBParameterGroupPatch",
   "csharp"
 );
 @@clientName(
@@ -139,7 +139,7 @@ using Azure.ClientGenerator.Core;
 );
 @@clientName(
   Microsoft.HorizonDb.HorizonDbReplicaForPatchUpdate,
-  "HorizonDBReplicaForPatchUpdate",
+  "HorizonDBReplicaPatch",
   "csharp"
 );
 @@clientName(
@@ -187,6 +187,11 @@ using Azure.ClientGenerator.Core;
 @@clientName(
   Azure.ResourceManager.PrivateEndpointConnectionProperties,
   "HorizonDBPrivateEndpointConnectionProperties",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.PrivateEndpointConnectionUpdate.properties,
+  "HorizonDBPrivateEndpointConnectionPatchProperties",
   "csharp"
 );
 @@clientName(

@@ -13,11 +13,10 @@ namespace Microsoft.ApiManagement;
 /**
  * A single API Management service resource in List or Get response.
  */
-model ApiManagementServiceResource
-  is Azure.ResourceManager.TrackedResource<
-    ApiManagementServiceProperties,
-    false
-  > {
+model ApiManagementServiceResource is Azure.ResourceManager.TrackedResource<
+  ApiManagementServiceProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = ApiManagementServiceResource,
     KeyName = "serviceName",
@@ -177,7 +176,7 @@ interface ApiManagementServiceResources {
     ApiManagementServiceResource,
     Response =
       | ArmDeletedResponse
-      | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ApiManagementServiceResource> &
+      | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = void> &
           Azure.Core.Foundations.RetryAfterHeader> & {
           @bodyRoot
           _: ApiManagementServiceResource;
@@ -873,7 +872,6 @@ interface ApiManagementServiceResources {
   ApiManagementServiceResource.name,
   "The name of the API Management service."
 );
-@@encodedName(ApiManagementServiceResource.etag, "application/json", "etag");
 @@doc(
   ApiManagementServiceResource.properties,
   "Properties of the API Management service."

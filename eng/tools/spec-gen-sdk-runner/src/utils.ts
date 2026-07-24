@@ -3,7 +3,7 @@ import { exec, spawn, spawnSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 import { inspect, promisify } from "node:util";
-import { LogLevel, logMessage } from "./log.js";
+import { LogLevel, logMessage } from "./log.ts";
 
 type Dirent = fs.Dirent;
 
@@ -55,6 +55,14 @@ export function findReadmeFiles(directory: string): string[] {
 export function getArgumentValue(args: string[], flag: string, defaultValue: string): string {
   const index = args.indexOf(flag);
   return index !== -1 && args[index + 1] ? args[index + 1] : defaultValue;
+}
+
+export function isPrivateSpecRepo(specRepoHttpsUrl: string): boolean {
+  const normalizedUrl = specRepoHttpsUrl
+    .toLowerCase()
+    .replace(/\.git$/, "")
+    .replace(/\/$/, "");
+  return normalizedUrl.endsWith("-pr");
 }
 
 /*

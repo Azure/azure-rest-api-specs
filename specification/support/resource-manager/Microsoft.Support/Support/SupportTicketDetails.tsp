@@ -15,11 +15,10 @@ namespace Microsoft.Support;
 /**
  * Object that represents SupportTicketDetails resource.
  */
-model SupportTicketDetails
-  is Azure.ResourceManager.ProxyResource<
-    SupportTicketDetailsProperties,
-    false
-  > {
+model SupportTicketDetails is Azure.ResourceManager.ProxyResource<
+  SupportTicketDetailsProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = SupportTicketDetails,
     KeyName = "supportTicketName",
@@ -127,7 +126,7 @@ interface SupportTickets {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("LookUpResourceId_Post")
-  @added(Versions.v2025_06_01_preview)
+  @added(Versions.v2026_06_01)
   lookUpResourceId is ArmProviderActionSync<
     Request = LookUpResourceIdRequest,
     Response = LookUpResourceIdResponse
