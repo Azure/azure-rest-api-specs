@@ -15863,6 +15863,11 @@ model AzurePostgreSqlLinkedServiceTypeProperties {
   timeout?: Dfe<int32>;
 
   /**
+   * The time to wait (in seconds) while trying to establish a connection before terminating the attempt and generating an error. Type: integer.
+   */
+  connectionTimeout?: Dfe<int32>;
+
+  /**
    * The time to wait (in seconds) while trying to execute a command before terminating the attempt and generating an error. Set to zero for infinity. Type: integer.
    */
   commandTimeout?: Dfe<int32>;
