@@ -81,7 +81,7 @@ interface Pipelines {
   approveConnection is ArmResourceActionAsync<
     Pipeline,
     ResourceBody,
-    ArmConnectionResponse
+    Connection
   >;
 
   /**
@@ -129,7 +129,7 @@ interface Pipelines {
   rejectConnection is ArmResourceActionAsync<
     Pipeline,
     ResourceBody,
-    ArmConnectionResponse
+    Connection
   >;
 }
 
