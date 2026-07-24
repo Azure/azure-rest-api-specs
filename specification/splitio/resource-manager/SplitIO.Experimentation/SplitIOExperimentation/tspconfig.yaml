@@ -3,9 +3,10 @@ emit:
   - "@azure-tools/typespec-autorest"
 options:
   "@azure-tools/typespec-autorest":
-    emitter-output-dir: "{project-root}/.."
+    emitter-output-dir: "{project-root}"
     azure-resource-provider-folder: "resource-manager"
-    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/splitio.json"
+    output-file: "{version-status}/{version}/splitio.json"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
