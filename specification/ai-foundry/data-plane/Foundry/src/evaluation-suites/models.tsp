@@ -2,7 +2,7 @@ import "@typespec/openapi";
 
 import "../common/models.tsp";
 import "../common/servicepatterns.tsp";
-import "../openai-evaluations/models.tsp";
+import "../openai/evaluations/models.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.OpenAPI;
@@ -344,8 +344,10 @@ model EvaluationSuiteDataGenerationOptions {
 
 @doc("Evaluation suite generation job resource — a long-running job that generates testing criteria and optionally a dataset from source materials. On success, the result is the persisted EvaluationSuiteVersion.")
 @extension("x-ms-foundry-meta", EvaluationSuitesRequiredPreviews)
-model EvaluationSuiteGenerationJob
-  is JobLike<EvaluationSuiteVersion, EvaluationSuiteGenerationJobInputs> {
+model EvaluationSuiteGenerationJob is JobLike<
+  EvaluationSuiteVersion,
+  EvaluationSuiteGenerationJobInputs
+> {
   @doc("The timestamp when the job was created, represented in Unix time.")
   @visibility(Lifecycle.Read)
   created_at: FoundryTimestamp;

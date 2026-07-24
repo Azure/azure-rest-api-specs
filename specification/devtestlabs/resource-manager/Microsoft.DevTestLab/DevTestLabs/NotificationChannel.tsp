@@ -13,8 +13,10 @@ namespace Microsoft.DevTestLab;
  * A notification.
  */
 @parentResource(Lab)
-model NotificationChannel
-  is Azure.ResourceManager.ProxyResource<NotificationChannelProperties, false> {
+model NotificationChannel is Azure.ResourceManager.ProxyResource<
+  NotificationChannelProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = NotificationChannel,
     KeyName = "notificationChannelName",

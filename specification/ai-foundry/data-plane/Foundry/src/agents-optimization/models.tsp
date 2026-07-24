@@ -9,7 +9,7 @@
 
 import "../common/models.tsp";
 import "../common/servicepatterns.tsp";
-import "../openai-evaluations/models.tsp";
+import "../openai/evaluations/models.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.OpenAPI;
@@ -17,7 +17,9 @@ using TypeSpec.OpenAPI;
 namespace Azure.AI.Projects;
 
 const AgentOptimizationRequiredPreviews = #{
-  conditional_previews: #[FoundryFeaturesOptInKeys.agents_optimization_v2_preview],
+  conditional_previews: #[
+    FoundryFeaturesOptInKeys.agents_optimization_v2_preview
+  ],
 };
 
 // ---------------------------------------------------------------------------
@@ -194,6 +196,10 @@ model OptimizationOptions {
 
   @doc("Evaluation granularity. Null/omitted means per-item single-turn. Set to 'conversation' for per-conversation multi-turn simulation scoring.")
   evaluation_level?: EvaluationLevel;
+
+  @doc("Maximum number of consecutive reflective minibatch rejections before stopping early. A 'stall' occurs when the optimizer proposes a prompt change, evaluates it on a small subset, and the score does not improve — so no full validation-set evaluation is triggered. The counter resets whenever a minibatch passes and its full-validation score beats the current best. Only a sustained plateau of `max_stalls` consecutive minibatch failures triggers the stop. The service defaults to 5 if a value is not specified by the caller. Must be >= 1 when set.")
+  @minValue(1)
+  max_stalls?: int32 = 5;
 }
 
 @doc("Caller-supplied inputs for an optimization job.")
@@ -341,8 +347,10 @@ model OptimizationJob is JobLike<OptimizationJobResult, OptimizationJobInputs> {
 
 @doc("Slim job representation returned by the LIST endpoint.")
 @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-model OptimizationJobListItem
-  is OmitProperties<OptimizationJob, "inputs" | "result" | "warnings"> {
+model OptimizationJobListItem is OmitProperties<
+  OptimizationJob,
+  "inputs" | "result" | "warnings"
+> {
   @doc("The agent targeted by this optimization job.")
   @visibility(Lifecycle.Read)
   agent?: OptimizationAgentIdentifier;

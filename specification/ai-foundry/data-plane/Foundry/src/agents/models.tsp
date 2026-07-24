@@ -1,4 +1,4 @@
-import "../openai-responses/models.tsp";
+import "../openai/responses/models.tsp";
 import "../common/servicepatterns.tsp";
 
 using TypeSpec.Http;
@@ -15,7 +15,6 @@ const AllConditionalAgentDefinitionPreviews = #{
   ],
 };
 
-@extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
 model CreateAgentVersionRequest {
   ...MetadataPropertyForRequest;
 
@@ -33,7 +32,9 @@ model CreateAgentVersionRequest {
   @doc("(Preview) Whether this agent version is a draft (candidate) rather than a release. The service defaults to `false` if a value is not specified by the caller. Draft versions are recorded but excluded from default 'latest' resolution and are not auto-promoted.")
   @extension(
     "x-ms-foundry-meta",
-    #{ conditional_previews: #[AgentDefinitionOptInKeys.draft_agents_v1_preview] }
+    #{
+      conditional_previews: #[AgentDefinitionOptInKeys.draft_agents_v1_preview],
+    }
   )
   draft?: boolean = false;
 }
@@ -190,7 +191,9 @@ model AgentVersionObject {
   @doc("Whether this agent version is a draft (candidate) rather than a release. Draft versions are recorded but excluded from default 'latest' resolution and are not auto-promoted. Defaults to false.")
   @extension(
     "x-ms-foundry-meta",
-    #{ conditional_previews: #[AgentDefinitionOptInKeys.draft_agents_v1_preview] }
+    #{
+      conditional_previews: #[AgentDefinitionOptInKeys.draft_agents_v1_preview],
+    }
   )
   draft?: boolean = false;
 
@@ -266,7 +269,6 @@ model RaiConfig {
 }
 
 @discriminator("kind")
-@extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
 model AgentDefinition {
   kind: AgentKind;
 
@@ -674,6 +676,20 @@ model AgentIdentity {
 
   @doc("The client ID of the agent instance. Also referred to as the instance ID")
   client_id: string;
+
+  @doc("The status of the agent identity. Present for both the agent instance identity and the agent blueprint.")
+  status?: AgentIdentityStatus;
+}
+
+@doc("The status of an agent identity, applicable to both the agent instance identity and the agent blueprint.")
+union AgentIdentityStatus {
+  string,
+
+  @doc("The agent identity is active and can be used to access resources.")
+  active: "active",
+
+  @doc("The agent identity is disabled and cannot be used to access resources.")
+  disabled: "disabled",
 }
 
 union AgentBlueprintReferenceType {

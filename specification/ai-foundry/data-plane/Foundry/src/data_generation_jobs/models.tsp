@@ -6,7 +6,9 @@ using TypeSpec.OpenAPI;
 namespace Azure.AI.Projects;
 
 const DataGenerationJobsRequiredPreviews = #{
-  conditional_previews: #[FoundryFeaturesOptInKeys.data_generation_jobs_v1_preview],
+  conditional_previews: #[
+    FoundryFeaturesOptInKeys.data_generation_jobs_v1_preview
+  ],
 };
 
 @doc("The supported data generation job types.")
@@ -22,6 +24,9 @@ union DataGenerationJobType {
 
   @doc("Tool calling conversation between user and agent.")
   tool_use: "tool_use",
+
+  @doc("Task generation for evaluation scenarios.")
+  task_generation: "task_generation",
 }
 
 @doc("LLM model options for data generation jobs.")
@@ -78,8 +83,10 @@ model DataGenerationJobResult {
 
 @doc("Data Generation Job resource.")
 @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
-model DataGenerationJob
-  is JobLike<DataGenerationJobResult, DataGenerationJobInputs> {
+model DataGenerationJob is JobLike<
+  DataGenerationJobResult,
+  DataGenerationJobInputs
+> {
   @doc("The timestamp when the job was created, represented in Unix time (seconds since January 1, 1970).")
   @visibility(Lifecycle.Read)
   created_at: FoundryTimestamp;
@@ -216,6 +223,13 @@ model SimpleQnADataGenerationJobOptions extends DataGenerationJobOptions {
 model TracesDataGenerationJobOptions extends DataGenerationJobOptions {
   @doc("The data generation job type, which is Traces for this model.")
   type: "traces";
+}
+
+@doc("The options for a task generation data generation job. Use with multiturn evaluation scenarios and with prompt, file, or agent sources. Generated dataset rows include fields such as `id`, `category`, `test_case_description`, and `desired_num_turns`.")
+@extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
+model TaskGenerationDataGenerationJobOptions extends DataGenerationJobOptions {
+  @doc("The data generation job type, which is TaskGeneration for this model.")
+  type: "task_generation";
 }
 
 @doc("The options for a data generation job with ToolUse type. Used only for fine-tuning scenarios.")

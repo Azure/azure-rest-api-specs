@@ -4,7 +4,7 @@ using Azure.ClientGenerator.Core;
 using Microsoft.Datadog;
 
 // csharp configurations
-@@clientName(Microsoft.Datadog, "MicrosoftDatadogClient", "javascript");
+@@clientName(Microsoft.Datadog, "MicrosoftDatadogClient", "javascript,python");
 @@clientName(BillingInfoResponse, "DatadogBillingInfoResult", "csharp");
 @@clientName(
   CreateResourceSupportedResponse,
@@ -200,6 +200,11 @@ using Microsoft.Datadog;
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
+@@alternateType(
+  ActivateSaaSParameterRequest.saaSResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
 @@alternateType(PartnerBillingEntity.partnerEntityUri, url, "csharp");
 @@alternateType(DatadogSingleSignOnProperties.singleSignOnUrl, url, "csharp");
 @@alternateType(DatadogOrganizationProperties.redirectUri, url, "csharp");
@@ -228,3 +233,5 @@ model DatadogAgreement extends Azure.ResourceManager.CommonTypes.Resource {
     "id" | "name" | "type" | "systemData"
   >;
 }
+
+@@clientName(ActivateSaaSParameterRequest.saaSResourceId, "saaSGuid", "go");

@@ -8,7 +8,7 @@ import "../models/routes.tsp";
 import "../deployments/routes.tsp";
 import "../red-teams/routes.tsp";
 import "../evaluation-rules/routes.tsp";
-import "../openai-evaluations/models.tsp";
+import "../openai/evaluations/models.tsp";
 import "../evaluation-taxonomies/routes.tsp";
 import "../evaluators/routes.tsp";
 import "../insights/routes.tsp";
@@ -188,7 +188,6 @@ namespace Azure.AI.Projects;
 
 @@clientName(AttackStrategy.Base64, "Base_64");
 @@clientName(AttackStrategy.ROT13, "ROT_13");
-
 
 // --------------------------------------------------------------------------------
 // Usage / Public accessibility overrides
