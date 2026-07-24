@@ -197,10 +197,10 @@ using Azure.AI.Projects;
 
 @@clientName(WorkIQPreviewTool, "WorkIqPreviewTool", "java");
 @@clientName(FabricIQPreviewTool, "FabricIqPreviewTool", "java");
-@@clientName(WebIQPreviewTool, "WebIqPreviewTool", "java");
+//@@clientName(WebIQPreviewTool, "WebIqPreviewTool", "java");
 @@clientName(WorkIQPreviewToolboxTool, "WorkIqPreviewToolboxTool", "java");
 @@clientName(FabricIQPreviewToolboxTool, "FabricIqPreviewToolboxTool", "java");
-@@clientName(WebIQPreviewToolboxTool, "WebIqPreviewToolboxTool", "java");
+//@@clientName(WebIQPreviewToolboxTool, "WebIqPreviewToolboxTool", "java");
 
 @@clientName(AgentOptimizationJobs.create, "createOptimizationJob", "java");
 @@clientName(AgentOptimizationJobs.get, "getOptimizationJob", "java");
