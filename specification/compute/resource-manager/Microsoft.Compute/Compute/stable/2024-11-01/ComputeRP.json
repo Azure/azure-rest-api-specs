@@ -18486,7 +18486,7 @@
         },
         "typeHandlerVersion": {
           "type": "string",
-          "description": "Specifies the version of the script handler."
+          "description": "Specifies the Major.Minor.Patch.Hotfix version of the script handler. Azure platform will deliver the latest Patch.Hotfix version in the Major.Minor series."
         },
         "status": {
           "$ref": "#/definitions/InstanceViewStatus",
@@ -18555,7 +18555,7 @@
         },
         "typeHandlerVersion": {
           "type": "string",
-          "description": "Specifies the version of the script handler."
+          "description": "Specifies the Major.Minor.Patch.Hotfix version of the script handler. Azure platform will deliver the latest Patch.Hotfix version in the Major.Minor series."
         },
         "substatuses": {
           "type": "array",
@@ -18593,7 +18593,7 @@
         },
         "typeHandlerVersion": {
           "type": "string",
-          "description": "Specifies the version of the script handler."
+          "description": "Specifies the Major.Minor version of the script handler. Customer is able to specify only the Major.Minor version of an extension, Azure platform will deliver the latest Patch.Hotfix version in the Major.Minor series."
         },
         "autoUpgradeMinorVersion": {
           "type": "boolean",
@@ -18669,7 +18669,7 @@
         },
         "typeHandlerVersion": {
           "type": "string",
-          "description": "Specifies the version of the script handler."
+          "description": "Specifies the Major.Minor version of the script handler. Customer is able to specify only the Major.Minor version of an extension, Azure platform will deliver the latest Patch.Hotfix version in the Major.Minor series."
         },
         "autoUpgradeMinorVersion": {
           "type": "boolean",
@@ -19277,7 +19277,7 @@
     },
     "VirtualMachinePriorityTypes": {
       "type": "string",
-      "description": "Specifies the priority for a standalone virtual machine or the virtual machines in the scale set. 'Low' enum will be deprecated in the future, please use 'Spot' as the enum to deploy Azure Spot VM/VMSS.",
+      "description": "Specifies the priority for a standalone virtual machine or the virtual machines in the scale set.",
       "enum": [
         "Regular",
         "Low",
@@ -19289,15 +19289,18 @@
         "values": [
           {
             "name": "Regular",
-            "value": "Regular"
+            "value": "Regular",
+            "description": "Regular Priority for a standalone virtual machine or the virtual machines in the scale set.\nThis is the default priority and it will be used to deploy regular VM/VMSS."
           },
           {
             "name": "Low",
-            "value": "Low"
+            "value": "Low",
+            "description": "Low priority for a standalone virtual machine or the virtual machines in the scale set. Will be Deprecated, use Spot instead."
           },
           {
             "name": "Spot",
-            "value": "Spot"
+            "value": "Spot",
+            "description": "Spot priority for a standalone virtual machine or the virtual machines in the scale set."
           }
         ]
       }
@@ -19902,7 +19905,7 @@
         },
         "typeHandlerVersion": {
           "type": "string",
-          "description": "Specifies the version of the script handler."
+          "description": "Specifies the Major.Minor version of the script handler. Customer is able to specify only the Major.Minor version of an extension, Azure platform will deliver the latest Patch.Hotfix version in the Major.Minor series."
         },
         "autoUpgradeMinorVersion": {
           "type": "boolean",

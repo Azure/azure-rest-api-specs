@@ -13097,7 +13097,7 @@
         },
         "reservationType": {
           "$ref": "#/definitions/ReservationType",
-          "description": "Indicates the type of capacity reservation. Allowed values are 'Block' for block capacity reservations and 'Targeted' for reservations that enable a VM to consume a specific capacity reservation when a capacity reservation group is provided. The reservation type is immutable and cannot be changed after it is assigned."
+          "description": "Indicates the type of capacity reservation. Allowed values are 'Block' for block capacity reservations that enable a VM to consume capacity only from this capacity block when it is associated using a capacity reservation group, 'Targeted' for reservations that enable a VM to consume capacity from an explicitly associated capacity reservation group and fall back to the publicly available capacity if the reservation is full, and 'Open' for reservations that a VM consumes when it is eligible from an implicitly associated capacity reservation group with the matching VM size and zone without associating that capacity reservation group and fall back to the publicly available capacity if the reservation is full. The reservation type is immutable and cannot be changed after the capacity reservation group is created."
         }
       }
     },
@@ -16516,7 +16516,7 @@
     },
     "ReservationType": {
       "type": "string",
-      "description": "Indicates the type of capacity reservation. Allowed values are 'Block' for block capacity reservations and 'Targeted' for reservations that enable a VM to consume a specific capacity reservation when a capacity reservation group is provided. The reservation type is immutable and cannot be changed after it is assigned.",
+      "description": "Indicates the type of capacity reservation. Allowed values are 'Block' for block capacity reservations that enable a VM to consume capacity only from this capacity block when it is associated using a capacity reservation group, 'Targeted' for reservations that enable a VM to consume capacity from an explicitly associated capacity reservation group and fall back to the publicly available capacity if the reservation is full, and 'Open' for reservations that a VM consumes when it is eligible from an implicitly associated capacity reservation group with the matching VM size and zone without associating that capacity reservation group and fall back to the publicly available capacity if the reservation is full. The reservation type is immutable and cannot be changed after the capacity reservation group is created.",
       "enum": [
         "Targeted",
         "Block"
@@ -16528,12 +16528,12 @@
           {
             "name": "Targeted",
             "value": "Targeted",
-            "description": "To consume on demand allocated capacity reservation when a capacity reservation group is provided."
+            "description": "Reservations that enable a VM to consume capacity from an explicitly associated capacity reservation group and fall back to the publicly available capacity if the reservation is full."
           },
           {
             "name": "Block",
             "value": "Block",
-            "description": "To consume scheduled allocated block capacity reservation when a capacity reservation group is provided."
+            "description": "Block capacity reservations that enable a VM to consume capacity only from this capacity block when it is associated using a capacity reservation group."
           }
         ]
       }
@@ -18863,7 +18863,7 @@
         },
         "typeHandlerVersion": {
           "type": "string",
-          "description": "Specifies the version of the script handler."
+          "description": "Specifies the Major.Minor.Patch.Hotfix version of the script handler. Azure platform will deliver the latest Patch.Hotfix version in the Major.Minor series."
         },
         "status": {
           "$ref": "#/definitions/InstanceViewStatus",
@@ -18932,7 +18932,7 @@
         },
         "typeHandlerVersion": {
           "type": "string",
-          "description": "Specifies the version of the script handler."
+          "description": "Specifies the Major.Minor.Patch.Hotfix version of the script handler. Azure platform will deliver the latest Patch.Hotfix version in the Major.Minor series."
         },
         "substatuses": {
           "type": "array",
@@ -18970,7 +18970,7 @@
         },
         "typeHandlerVersion": {
           "type": "string",
-          "description": "Specifies the version of the script handler."
+          "description": "Specifies the Major.Minor version of the script handler. Customer is able to specify only the Major.Minor version of an extension, Azure platform will deliver the latest Patch.Hotfix version in the Major.Minor series."
         },
         "autoUpgradeMinorVersion": {
           "type": "boolean",
@@ -19046,7 +19046,7 @@
         },
         "typeHandlerVersion": {
           "type": "string",
-          "description": "Specifies the version of the script handler."
+          "description": "Specifies the Major.Minor version of the script handler. Customer is able to specify only the Major.Minor version of an extension, Azure platform will deliver the latest Patch.Hotfix version in the Major.Minor series."
         },
         "autoUpgradeMinorVersion": {
           "type": "boolean",
@@ -19661,7 +19661,7 @@
     },
     "VirtualMachinePriorityTypes": {
       "type": "string",
-      "description": "Specifies the priority for a standalone virtual machine or the virtual machines in the scale set. 'Low' enum will be deprecated in the future, please use 'Spot' as the enum to deploy Azure Spot VM/VMSS.",
+      "description": "Specifies the priority for a standalone virtual machine or the virtual machines in the scale set.",
       "enum": [
         "Regular",
         "Low",
@@ -19673,15 +19673,18 @@
         "values": [
           {
             "name": "Regular",
-            "value": "Regular"
+            "value": "Regular",
+            "description": "Regular Priority for a standalone virtual machine or the virtual machines in the scale set.\nThis is the default priority and it will be used to deploy regular VM/VMSS."
           },
           {
             "name": "Low",
-            "value": "Low"
+            "value": "Low",
+            "description": "Low priority for a standalone virtual machine or the virtual machines in the scale set. Will be Deprecated, use Spot instead."
           },
           {
             "name": "Spot",
-            "value": "Spot"
+            "value": "Spot",
+            "description": "Spot priority for a standalone virtual machine or the virtual machines in the scale set."
           }
         ]
       }
@@ -20305,7 +20308,7 @@
         },
         "typeHandlerVersion": {
           "type": "string",
-          "description": "Specifies the version of the script handler."
+          "description": "Specifies the Major.Minor version of the script handler. Customer is able to specify only the Major.Minor version of an extension, Azure platform will deliver the latest Patch.Hotfix version in the Major.Minor series."
         },
         "autoUpgradeMinorVersion": {
           "type": "boolean",

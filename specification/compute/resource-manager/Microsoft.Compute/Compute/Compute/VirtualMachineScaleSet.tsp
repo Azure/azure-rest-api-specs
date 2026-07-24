@@ -496,6 +496,20 @@ interface VirtualMachineScaleSets {
     Response = OkResponse,
     LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
+
+  /**
+   * Migrates one or more virtual machines in a VM scale set to an availability zone.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "migrateVMAvailabilityZone is a no-body LRO POST; 202+204 is the accurate contract per LintDiff PostResponseCodes requirements"
+  @tag("VirtualMachineScaleSets")
+  @added(Versions.v2026_04_01)
+  @action("migrateVMAvailabilityZone")
+  migrateVMAvailabilityZone is ComputeResourceActionAsync<
+    VirtualMachineScaleSet,
+    MigrateVMAvailabilityZoneInput,
+    Response = ArmNoContentResponse<"Resource operation accepted.">,
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+  >;
 }
 
 @@doc(VirtualMachineScaleSet.name, "The name of the VM scale set.");
@@ -566,4 +580,8 @@ interface VirtualMachineScaleSets {
 @@doc(
   VirtualMachineScaleSets.scaleOut::parameters.body,
   "The input object for ScaleOut API."
+);
+@@doc(
+  VirtualMachineScaleSets.migrateVMAvailabilityZone::parameters.body,
+  "The input object for the MigrateVMAvailabilityZone API."
 );

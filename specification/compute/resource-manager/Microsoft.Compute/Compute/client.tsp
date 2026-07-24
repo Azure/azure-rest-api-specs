@@ -59,6 +59,10 @@ namespace ComputeCombine;
 // PurchasePlan needs input usage for premium layer constructor and setters
 @@usage(PurchasePlan, Azure.ClientGenerator.Core.Usage.input, "java");
 
+// ResourceSku.apiVersions is a list of supported API versions for a SKU, not the service API version.
+// Suppress the name-based heuristic that incorrectly treats it as the service API version parameter.
+@@apiVersion(ResourceSku.apiVersions, false);
+
 // Property name changes: retain old Java names for ComputeGallery and ComputeSku models
 @@clientName(AccessControlRulesIdentity.userName, "username", "java");
 @@clientName(ResourceSkuCosts.meterID, "meterId", "java");
@@ -948,7 +952,10 @@ model VMSizePropertiesWithAdditionalProperties {
 // `OperatingSystemTypes` (closed enum, Windows/Linux) was named `SupportedOperatingSystemType`
 // in the old SDK; the union `OperatingSystemType` kept its spec name (extensible struct).
 @@clientName(OperatingSystemTypes, "SupportedOperatingSystemType", "csharp");
-@@clientName(ReservationType, "CapacityReservationType", "csharp");
+// Breaking change in v2026-04-01: the `ReservationType` union (on capacity reservation groups,
+// added in v2025-04-01) previously shipped in the .NET SDK as `CapacityReservationType`. The
+// alias is removed so the csharp name matches the spec, freeing `CapacityReservationType` for
+// the new VM instance-view union added in v2026-04-01.
 @@clientName(ApiErrorBase, "ComputeApiErrorBase", "csharp");
 @@clientName(
   VMGalleryApplication,

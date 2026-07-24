@@ -34,7 +34,7 @@ These are the global settings for the Compute API.
 title: ComputeManagementClient
 description: Compute Client
 openapi-type: arm
-tag: package-2025-12-03
+tag: package-2026-04-01-only
 
 directive:
   - where:
@@ -342,16 +342,29 @@ suppressions:
   - code: PatchResponseCodes
     reason: PATCH and PUT follow the same behavior and response codes in Compute. Keeping it for legacy reasons.
     from: GalleryRP.json
+  - code: PatchResponseCodes
+    reason: PATCH and PUT follow the same behavior and response codes in Compute. Keeping it for legacy reasons.
+    from: ComputeRP.json
   - code: PatchBodyParametersSchema
     reason: PATCH and PUT follow the same behavior and response codes in Compute. Keeping it for legacy reasons.
     from: GalleryRP.json
   - code: LroPatch202
     reason: PATCH and PUT follow the same behavior and response codes in Compute. Keeping it for legacy reasons.
     from: GalleryRP.json
+  - code: LroPatch202
+    from: ComputeRP.json
+    reason: PATCH and PUT follow the same behavior and response codes in Compute. Keeping it for legacy reasons.
+  - code: DeleteResponseCodes
+    from: ComputeRP.json
+    reason: Behavior is align with other existing API for this RP
   - code: AvoidAdditionalProperties
     reason: The gallery backend service just treats this as a bag of properties to pass to downstream services.
     from: GalleryRP.json
     where: $.definitions.AccessControlRulesPrivilege.properties.queryParameters
+  - code: AvoidAdditionalProperties
+    reason: usedReservedCountBySubscription is a read-only response projection of the RP's internal map of used reserved capacity count keyed by the consuming subscription id (GUID). The map shape reflects an established contract between CRP and its downstream consumers, which key directly on the subscription id; converting it to an array would break those existing contracts and require coordinated breaking changes across all consumers. Narrow exception for this single read-only property, approved by the ARM team and owned by the Compute service team.
+    from: ComputeRP.json
+    where: $.definitions.CapacityReservationUtilization.properties.usedReservedCountBySubscription
   - code: GetCollectionOnlyHasValueAndNextLink
     from: GalleryRP.json
     reason: Existing issue from last version.
@@ -868,6 +881,14 @@ suppressions:
     reason: Existing property name maintained for backward compatibility.
     from: ComputeRP.json
     where: $.definitions.DedicatedHostGroupPropertiesAdditionalCapabilities.properties.ultraSSDEnabled
+  - code: ParametersInPointGet
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/diagnosticRunCommands/{runCommandName}"].get.parameters
+    reason: Required query parameter for GET
+  - code: ParametersInPointGet
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/diagnosticRunCommands/{runCommandName}"].get.parameters
+    reason: Required query parameter for GET
 ```
 ### Tag: package-2025-12-03
 
@@ -891,6 +912,27 @@ input-file:
   - stable/2026-03-02/DiskRP.json
   - stable/2021-07-01/skus.json
   - stable/2025-03-03/GalleryRP.json
+```
+
+### Tag: package-2026-04-01
+
+These settings apply only when `--tag=package-2026-04-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2026-04-01'
+input-file:
+  - stable/2026-04-01/ComputeRP.json
+  - stable/2025-01-02/DiskRP.json
+  - stable/2021-07-01/skus.json
+  - stable/2024-03-03/GalleryRP.json
+```
+
+### Tag: package-2026-04-01-only
+
+These settings apply only when `--tag=package-2026-04-01-only` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-04-01-only'
+input-file:
+  - stable/2026-04-01/ComputeRP.json
 ```
 
 ### Tag: package-2026-03-01
