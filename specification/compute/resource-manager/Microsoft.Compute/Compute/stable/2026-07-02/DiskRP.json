@@ -1666,6 +1666,80 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/disks/{diskName}/claimResource": {
+      "post": {
+        "operationId": "Disks_ClaimResource",
+        "tags": [
+          "Disks"
+        ],
+        "description": "Claims a managed disk for an owner resource that is not a virtual machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "diskName",
+            "in": "path",
+            "description": "The name of the managed disk that is being created. The name can't be changed after the disk is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "claimRequest",
+            "in": "body",
+            "description": "Claim resource request data supplied in the body of the claim disk operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClaimRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Disk"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Claim a managed disk for an owner resource that is not a virtual machine.": {
+            "$ref": "./examples/diskExamples/Disk_ClaimResource.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Disk"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/disks/{diskName}/endGetAccess": {
       "post": {
         "operationId": "Disks_RevokeAccess",
@@ -1723,6 +1797,80 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/disks/{diskName}/unclaimResource": {
+      "post": {
+        "operationId": "Disks_UnclaimResource",
+        "tags": [
+          "Disks"
+        ],
+        "description": "Unclaims a disk from an existing owner resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "diskName",
+            "in": "path",
+            "description": "The name of the managed disk that is being created. The name can't be changed after the disk is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "unclaimRequest",
+            "in": "body",
+            "description": "Unclaim resource request data supplied in the body of the unclaim disk operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UnclaimRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Disk"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Unclaim a managed disk from an owner resource.": {
+            "$ref": "./examples/diskExamples/Disk_UnclaimResource.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Disk"
         },
         "x-ms-long-running-operation": true
       }
@@ -2717,6 +2865,20 @@
         ]
       }
     },
+    "ClaimRequest": {
+      "type": "object",
+      "description": "Request body for disk claim operation.",
+      "properties": {
+        "ownerResource": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The Azure resource ID of the resource claiming ownership of this disk."
+        }
+      },
+      "required": [
+        "ownerResource"
+      ]
+    },
     "Common.Architecture": {
       "type": "string",
       "description": "CPU architecture supported by an OS disk.",
@@ -3517,6 +3679,11 @@
         "availabilityPolicy": {
           "$ref": "#/definitions/AvailabilityPolicy",
           "description": "Determines how platform treats disk failures"
+        },
+        "qadIdentifier": {
+          "type": "string",
+          "description": "Contains the claim identifier for a disk claimed by an ownerResource.",
+          "readOnly": true
         }
       },
       "required": [
@@ -3769,7 +3936,8 @@
         "ActiveSAS",
         "ActiveSASFrozen",
         "ReadyToUpload",
-        "ActiveUpload"
+        "ActiveUpload",
+        "Claimed"
       ],
       "x-ms-enum": {
         "name": "DiskState",
@@ -3814,6 +3982,11 @@
             "name": "ActiveUpload",
             "value": "ActiveUpload",
             "description": "A disk is created for upload and a write token has been issued for uploading to it."
+          },
+          {
+            "name": "Claimed",
+            "value": "Claimed",
+            "description": "The disk has been claimed by an owner resource."
           }
         ]
       }
@@ -5051,6 +5224,24 @@
           }
         ]
       }
+    },
+    "UnclaimRequest": {
+      "type": "object",
+      "description": "Request body for disk unclaim operation.",
+      "properties": {
+        "ownerResource": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The Azure resource ID of the resource releasing ownership of this disk."
+        },
+        "force": {
+          "type": "boolean",
+          "description": "Indicates whether the unclaim operation should be forced."
+        }
+      },
+      "required": [
+        "ownerResource"
+      ]
     }
   },
   "parameters": {}
