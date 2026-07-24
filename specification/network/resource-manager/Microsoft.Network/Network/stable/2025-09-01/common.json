@@ -2414,7 +2414,8 @@
       "enum": [
         "Basic",
         "Standard",
-        "Gateway"
+        "Gateway",
+        "Service"
       ],
       "x-ms-enum": {
         "name": "LoadBalancerSkuName",
@@ -2434,6 +2435,11 @@
             "name": "Gateway",
             "value": "Gateway",
             "description": "Gateway"
+          },
+          {
+            "name": "Service",
+            "value": "Service",
+            "description": "Service load balancer SKU."
           }
         ]
       }
@@ -8178,6 +8184,17 @@
             "description": "High"
           }
         ]
+      }
+    },
+    "ServiceGatewayActionOkResponseBody": {
+      "type": "object",
+      "description": "Empty success response.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "The status of the operation.",
+          "readOnly": true
+        }
       }
     },
     "ServiceGatewaySkuName": {
