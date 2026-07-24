@@ -4,21 +4,40 @@ parameters:
   "dependencies":
     default: ""
 emit:
-  - "@azure-tools/typespec-autorest"
+  - "@typespec/openapi3"
+# VoiceLive emits OpenAPI 3.1 via `@typespec/openapi3` only. It consumes the OpenAI GA
+# Realtime TypeSpec, which uses `oneOf` unions and bare `integer`/`numeric` scalars that
+# the Swagger 2.0 `@azure-tools/typespec-autorest` emitter cannot represent without
+# emitting `nonspecific-scalar` warnings that fail `tsp compile --warn-as-error`. The
+# OpenAPI 3.1 output is the accurate contract for this service.
+imports:
+  - "@azure-tools/openai-typespec/models/realtime"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
     - "@azure-tools/typespec-azure-rulesets/client-sdk"
+  disable:
+    "@azure-tools/typespec-azure-core/documentation-required": "Some OpenAI models do not contain docstrings."
+    "@azure-tools/typespec-azure-core/no-nullable": "Some OpenAI models still contain <> | null notation."
+    "@azure-tools/typespec-azure-core/no-closed-literal-union": "OpenAI incompliance"
+    "@azure-tools/typespec-azure-core/no-openapi": "OpenAI GA models use @oneOf / OpenAPI extensions."
+    "@azure-tools/typespec-azure-core/no-multiple-discriminator": "OpenAI contains multiple discriminators."
+    "@azure-tools/typespec-azure-core/no-unknown": "unknowns are used in OpenAI package."
+    "@azure-tools/typespec-azure-core/no-query-explode": "Explode is used in OpenAI package."
+    "@azure-tools/typespec-client-generator-core/property-name-conflict": "OpenAI package has conflict."
+    "@azure-tools/typespec-azure-core/no-enum": "OpenAI uses enums."
 options:
-  "@azure-tools/typespec-autorest":
+  "@typespec/openapi3":
     emitter-output-dir: "{project-root}"
+    output-file: "openapi3/{version}/VoiceLive.{file-type}"
+    file-type: [yaml, json]
     omit-unreachable-types: false
-    output-file: "{version-status}/{version}/VoiceLive.json"
-    azure-resource-provider-folder: "data-plane"
-    emit-lro-options: "none"
+    openapi-versions:
+      - "3.1.0"
   "@azure-tools/typespec-python":
     package-dir: "azure-ai-voicelive"
     namespace: "azure.ai.voicelive"
+    api-version: "virtual-public-preview"
     generate-test: false
     generate-sample: false
     flavor: azure
@@ -26,16 +45,19 @@ options:
     emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-voicelive"
   "@azure-tools/typespec-csharp":
     emitter-output-dir: "{output-dir}/{service-dir}/Azure.AI.VoiceLive"
+    api-version: "virtual-public-preview"
     clear-output-folder: true
     model-namespace: false
     namespace: "Azure.AI.VoiceLive"
     flavor: azure
   "@azure-typespec/http-client-csharp":
     namespace: Azure.AI.VoiceLive
+    api-version: "virtual-public-preview"
     model-namespace: false
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
+    api-version: "virtual-public-preview"
     emitter-output-dir: "{output-dir}/{service-dir}/ai-voicelive"
     package-details:
       name: "@azure/ai-voicelive"
@@ -47,6 +69,7 @@ options:
   "@azure-tools/typespec-java":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-voicelive"
     namespace: com.azure.ai.voicelive
+    api-version: "virtual-public-preview"
     use-eclipse-language-server: false
     custom-types-subpackage: implementation.models
     flavor: azure

@@ -3,188 +3,236 @@ import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 
+// Foundry pattern: fold the consumed OpenAI namespace into the VoiceLive SDK
+// namespace so generated types surface under the Azure namespace instead of a
+// segregated `OpenAI` namespace (mirrors AI Foundry's `@@clientNamespace(OpenAI, ...)`).
+// JavaScript is a flat modular library (no namespace segregation), so no clientNamespace
+// override is needed there.
+@@clientNamespace(OpenAI, "Azure.AI.VoiceLive", "csharp");
+@@clientNamespace(OpenAI, "azure.ai.voicelive", "python");
+@@clientNamespace(OpenAI, "com.azure.ai.voicelive", "java");
+
 @@clientName(VoiceLive.AzureRealtimeNativeVoice.type, "Kind", "csharp");
 @@clientName(
-  VoiceLive.RequestSession.parallel_tool_calls,
-  "AllowParallelToolCalls",
-  "csharp"
-);
-@@clientName(
-  VoiceLive.ResponseSession.parallel_tool_calls,
+  OpenAI.RealtimeSessionCreateRequestGA.parallel_tool_calls,
   "AllowParallelToolCalls",
   "csharp"
 );
 @@clientName(VoiceLive.ResponseSession.expires_at, "ExpiresOn", "csharp");
 
-@@access(VoiceLive.ClientEventSessionUpdate, Access.public, "python");
-@@access(VoiceLive.ClientEventInputAudioBufferAppend, Access.public, "python");
-@@access(VoiceLive.ClientEventInputAudioBufferCommit, Access.public, "python");
-@@access(VoiceLive.ClientEventInputAudioBufferClear, Access.public, "python");
+@@access(OpenAI.RealtimeClientEventSessionUpdate, Access.public, "python");
+@@access(
+  OpenAI.RealtimeClientEventInputAudioBufferAppend,
+  Access.public,
+  "python"
+);
+@@access(
+  OpenAI.RealtimeClientEventInputAudioBufferCommit,
+  Access.public,
+  "python"
+);
+@@access(
+  OpenAI.RealtimeClientEventInputAudioBufferClear,
+  Access.public,
+  "python"
+);
 @@access(VoiceLive.ClientEventInputAudioTurnStart, Access.public, "python");
 @@access(VoiceLive.ClientEventInputAudioTurnAppend, Access.public, "python");
 @@access(VoiceLive.ClientEventInputAudioTurnEnd, Access.public, "python");
 @@access(VoiceLive.ClientEventInputAudioTurnCancel, Access.public, "python");
 @@access(VoiceLive.ClientEventInputAudioClear, Access.public, "python");
-@@access(VoiceLive.ClientEventConversationItemCreate, Access.public, "python");
 @@access(
-  VoiceLive.ClientEventConversationItemRetrieve,
+  OpenAI.RealtimeClientEventConversationItemCreate,
   Access.public,
   "python"
 );
 @@access(
-  VoiceLive.ClientEventConversationItemTruncate,
+  OpenAI.RealtimeClientEventConversationItemRetrieve,
   Access.public,
   "python"
 );
-@@access(VoiceLive.ClientEventConversationItemDelete, Access.public, "python");
-@@access(VoiceLive.ClientEventResponseCreate, Access.public, "python");
-@@access(VoiceLive.ClientEventResponseCancel, Access.public, "python");
+@@access(
+  OpenAI.RealtimeClientEventConversationItemTruncate,
+  Access.public,
+  "python"
+);
+@@access(
+  OpenAI.RealtimeClientEventConversationItemDelete,
+  Access.public,
+  "python"
+);
+@@access(OpenAI.RealtimeClientEventResponseCreate, Access.public, "python");
+@@access(OpenAI.RealtimeClientEventResponseCancel, Access.public, "python");
 @@access(VoiceLive.ClientEventSessionAvatarConnect, Access.public, "python");
 
 @@access(VoiceLive.ServerEventSessionAvatarConnecting, Access.public, "python");
-@@access(VoiceLive.ServerEventSessionCreated, Access.public, "python");
-@@access(VoiceLive.ServerEventResponseAudioDelta, Access.public, "python");
+@@access(OpenAI.RealtimeServerEventSessionCreated, Access.public, "python");
+@@access(OpenAI.RealtimeServerEventResponseAudioDelta, Access.public, "python");
 @@access(VoiceLive.ResponseItem, Access.public, "python");
 @@access(VoiceLive.Response, Access.public, "python");
-@@access(VoiceLive.ServerEventConversationItemCreated, Access.public, "python");
-@@access(VoiceLive.ServerEventConversationItemDeleted, Access.public, "python");
 @@access(
-  VoiceLive.ServerEventConversationItemInputAudioTranscriptionCompleted,
+  OpenAI.RealtimeServerEventConversationItemCreated,
   Access.public,
   "python"
 );
 @@access(
-  VoiceLive.ServerEventConversationItemInputAudioTranscriptionDelta,
+  OpenAI.RealtimeServerEventConversationItemDeleted,
   Access.public,
   "python"
 );
 @@access(
-  VoiceLive.ServerEventConversationItemInputAudioTranscriptionFailed,
+  OpenAI.RealtimeServerEventConversationItemInputAudioTranscriptionCompleted,
   Access.public,
   "python"
 );
 @@access(
-  VoiceLive.ServerEventConversationItemRetrieved,
+  OpenAI.RealtimeServerEventConversationItemInputAudioTranscriptionDelta,
   Access.public,
   "python"
 );
 @@access(
-  VoiceLive.ServerEventConversationItemTruncated,
-  Access.public,
-  "python"
-);
-@@access(VoiceLive.ServerEventError, Access.public, "python");
-@@access(VoiceLive.ServerEventInputAudioBufferCleared, Access.public, "python");
-@@access(
-  VoiceLive.ServerEventInputAudioBufferCommitted,
+  OpenAI.RealtimeServerEventConversationItemInputAudioTranscriptionFailed,
   Access.public,
   "python"
 );
 @@access(
-  VoiceLive.ServerEventInputAudioBufferSpeechStarted,
+  OpenAI.RealtimeServerEventConversationItemRetrieved,
   Access.public,
   "python"
 );
 @@access(
-  VoiceLive.ServerEventInputAudioBufferSpeechStopped,
-  Access.public,
-  "python"
-);
-@@access(VoiceLive.ServerEventResponseAudioDone, Access.public, "python");
-@@access(
-  VoiceLive.ServerEventResponseAudioTranscriptDelta,
+  OpenAI.RealtimeServerEventConversationItemTruncated,
   Access.public,
   "python"
 );
 @@access(
-  VoiceLive.ServerEventResponseAudioTranscriptDone,
+  OpenAI.RealtimeServerEventRealtimeServerEventError,
   Access.public,
   "python"
 );
 @@access(
-  VoiceLive.ServerEventResponseContentPartAdded,
-  Access.public,
-  "python"
-);
-@@access(VoiceLive.ServerEventResponseContentPartDone, Access.public, "python");
-@@access(VoiceLive.ServerEventResponseCreated, Access.public, "python");
-@@access(VoiceLive.ServerEventResponseDone, Access.public, "python");
-@@access(
-  VoiceLive.ServerEventResponseFunctionCallArgumentsDelta,
+  OpenAI.RealtimeServerEventInputAudioBufferCleared,
   Access.public,
   "python"
 );
 @@access(
-  VoiceLive.ServerEventResponseFunctionCallArgumentsDone,
+  OpenAI.RealtimeServerEventInputAudioBufferCommitted,
   Access.public,
   "python"
 );
-@@access(VoiceLive.ServerEventResponseOutputItemAdded, Access.public, "python");
-@@access(VoiceLive.ServerEventResponseOutputItemDone, Access.public, "python");
-@@access(VoiceLive.ServerEventResponseTextDelta, Access.public, "python");
-@@access(VoiceLive.ServerEventResponseTextDone, Access.public, "python");
-@@access(VoiceLive.ServerEventSessionUpdated, Access.public, "python");
+@@access(
+  OpenAI.RealtimeServerEventInputAudioBufferSpeechStarted,
+  Access.public,
+  "python"
+);
+@@access(
+  OpenAI.RealtimeServerEventInputAudioBufferSpeechStopped,
+  Access.public,
+  "python"
+);
+@@access(OpenAI.RealtimeServerEventResponseAudioDone, Access.public, "python");
+@@access(
+  OpenAI.RealtimeServerEventResponseAudioTranscriptDelta,
+  Access.public,
+  "python"
+);
+@@access(
+  OpenAI.RealtimeServerEventResponseAudioTranscriptDone,
+  Access.public,
+  "python"
+);
+@@access(
+  OpenAI.RealtimeServerEventResponseContentPartAdded,
+  Access.public,
+  "python"
+);
+@@access(
+  OpenAI.RealtimeServerEventResponseContentPartDone,
+  Access.public,
+  "python"
+);
+@@access(OpenAI.RealtimeServerEventResponseCreated, Access.public, "python");
+@@access(OpenAI.RealtimeServerEventResponseDone, Access.public, "python");
+@@access(
+  OpenAI.RealtimeServerEventResponseFunctionCallArgumentsDelta,
+  Access.public,
+  "python"
+);
+@@access(
+  OpenAI.RealtimeServerEventResponseFunctionCallArgumentsDone,
+  Access.public,
+  "python"
+);
+@@access(
+  OpenAI.RealtimeServerEventResponseOutputItemAdded,
+  Access.public,
+  "python"
+);
+@@access(
+  OpenAI.RealtimeServerEventResponseOutputItemDone,
+  Access.public,
+  "python"
+);
+@@access(OpenAI.RealtimeServerEventResponseTextDelta, Access.public, "python");
+@@access(OpenAI.RealtimeServerEventResponseTextDone, Access.public, "python");
+@@access(OpenAI.RealtimeServerEventSessionUpdated, Access.public, "python");
 
 @@access(VoiceLive.ClientEventRtcCallSdpCreate, Access.public, "python");
 @@access(VoiceLive.ServerEventRtcCallSdpCreated, Access.public, "python");
 @@access(VoiceLive.ServerEventRtcCallError, Access.public, "python");
 @@access(VoiceLive.RtcCallErrorDetails, Access.public, "python");
 @@access(
-  VoiceLive.ServerEventOutputAudioBufferStarted,
+  OpenAI.RealtimeServerEventOutputAudioBufferStarted,
   Access.public,
   "python"
 );
 @@access(
-  VoiceLive.ServerEventOutputAudioBufferStopped,
+  OpenAI.RealtimeServerEventOutputAudioBufferStopped,
   Access.public,
   "python"
 );
-
-@@access(VoiceLive.ToolChoice, Access.public, "python");
 
 @@clientName(VoiceLive.Scene, "SceneParams", "csharp");
 @@access(VoiceLive.Voice, Access.public, "python");
 
 @@clientName(VoiceLive.OAIVoice, "OpenAIVoiceName", "python");
-@@clientName(VoiceLive.ToolChoiceObject, "ToolChoiceSelection", "python");
-@@clientName(
-  VoiceLive.ToolChoiceFunctionObject,
-  "ToolChoiceFunctionSelection",
-  "python"
-);
 @@clientName(VoiceLive.AvatarConfig.type, "avatar_type", "python");
 
 @@access(VoiceLive.ServerEvent, Access.public, "csharp");
-@@access(VoiceLive.ServerEventSessionCreated, Access.public, "csharp");
+@@access(OpenAI.RealtimeServerEventSessionCreated, Access.public, "csharp");
 @@access(VoiceLive.ClientEvent, Access.internal, "csharp");
 @@access(
-  VoiceLive.ClientEventConversationItemCreate,
+  OpenAI.RealtimeClientEventConversationItemCreate,
   Access.internal,
   "csharp"
 );
 @@access(
-  VoiceLive.ClientEventConversationItemDelete,
+  OpenAI.RealtimeClientEventConversationItemDelete,
   Access.internal,
   "csharp"
 );
 @@access(
-  VoiceLive.ClientEventConversationItemRetrieve,
+  OpenAI.RealtimeClientEventConversationItemRetrieve,
   Access.internal,
   "csharp"
 );
 @@access(
-  VoiceLive.ClientEventConversationItemTruncate,
+  OpenAI.RealtimeClientEventConversationItemTruncate,
   Access.internal,
   "csharp"
 );
 @@access(
-  VoiceLive.ClientEventInputAudioBufferAppend,
+  OpenAI.RealtimeClientEventInputAudioBufferAppend,
   Access.internal,
   "csharp"
 );
-@@access(VoiceLive.ClientEventInputAudioBufferClear, Access.internal, "csharp");
 @@access(
-  VoiceLive.ClientEventInputAudioBufferCommit,
+  OpenAI.RealtimeClientEventInputAudioBufferClear,
+  Access.internal,
+  "csharp"
+);
+@@access(
+  OpenAI.RealtimeClientEventInputAudioBufferCommit,
   Access.internal,
   "csharp"
 );
@@ -193,58 +241,64 @@ using Azure.ClientGenerator.Core;
 @@access(VoiceLive.ClientEventInputAudioTurnCancel, Access.internal, "csharp");
 @@access(VoiceLive.ClientEventInputAudioTurnEnd, Access.internal, "csharp");
 @@access(VoiceLive.ClientEventInputAudioTurnStart, Access.internal, "csharp");
-@@access(VoiceLive.ClientEventResponseCancel, Access.internal, "csharp");
-@@access(VoiceLive.ClientEventResponseCreate, Access.internal, "csharp");
+@@access(OpenAI.RealtimeClientEventResponseCancel, Access.internal, "csharp");
+@@access(OpenAI.RealtimeClientEventResponseCreate, Access.internal, "csharp");
 @@access(VoiceLive.ClientEventSessionAvatarConnect, Access.internal, "csharp");
-@@access(VoiceLive.ClientEventSessionUpdate, Access.internal, "csharp");
+@@access(OpenAI.RealtimeClientEventSessionUpdate, Access.internal, "csharp");
 @@access(VoiceLive.ClientEventRtcCallSdpCreate, Access.internal, "csharp");
 @@access(VoiceLive.ServerEventRtcCallSdpCreated, Access.public, "csharp");
 @@access(VoiceLive.ServerEventRtcCallError, Access.public, "csharp");
 @@access(VoiceLive.RtcCallErrorDetails, Access.public, "csharp");
 @@access(
-  VoiceLive.ServerEventOutputAudioBufferStarted,
+  OpenAI.RealtimeServerEventOutputAudioBufferStarted,
   Access.public,
   "csharp"
 );
 @@access(
-  VoiceLive.ServerEventOutputAudioBufferStopped,
+  OpenAI.RealtimeServerEventOutputAudioBufferStopped,
   Access.public,
   "csharp"
 );
 @@access(VoiceLive.VideoCrop.bottom_right, Access.internal, "csharp");
 @@access(VoiceLive.VideoCrop.top_left, Access.internal, "csharp");
-@@access(VoiceLive.Response.voice, Access.internal, "csharp");
-@@access(VoiceLive.ToolChoiceFunctionObject, Access.internal, "csharp");
-@@access(VoiceLive.ToolChoiceObject, Access.internal, "csharp");
-@@access(VoiceLive.ServerEventMcpListToolsInProgress, Access.public, "csharp");
-@@access(VoiceLive.ServerEventMcpListToolsCompleted, Access.public, "csharp");
-@@access(VoiceLive.ServerEventMcpListToolsFailed, Access.public, "csharp");
 @@access(
-  VoiceLive.ServerEventResponseMcpCallArgumentsDelta,
+  OpenAI.RealtimeServerEventMCPListToolsInProgress,
   Access.public,
   "csharp"
 );
 @@access(
-  VoiceLive.ServerEventResponseMcpCallArgumentsDone,
+  OpenAI.RealtimeServerEventMCPListToolsCompleted,
+  Access.public,
+  "csharp"
+);
+@@access(OpenAI.RealtimeServerEventMCPListToolsFailed, Access.public, "csharp");
+@@access(
+  OpenAI.RealtimeServerEventResponseMCPCallArgumentsDelta,
   Access.public,
   "csharp"
 );
 @@access(
-  VoiceLive.ServerEventResponseMcpCallInProgress,
+  OpenAI.RealtimeServerEventResponseMCPCallArgumentsDone,
   Access.public,
   "csharp"
 );
 @@access(
-  VoiceLive.ServerEventResponseMcpCallCompleted,
+  OpenAI.RealtimeServerEventResponseMCPCallInProgress,
   Access.public,
   "csharp"
 );
-@@access(VoiceLive.ServerEventResponseMcpCallFailed, Access.public, "csharp");
-@@access(VoiceLive.MCPApprovalResponseRequestItem, Access.internal, "csharp");
+@@access(
+  OpenAI.RealtimeServerEventResponseMCPCallCompleted,
+  Access.public,
+  "csharp"
+);
+@@access(
+  OpenAI.RealtimeServerEventResponseMCPCallFailed,
+  Access.public,
+  "csharp"
+);
 
-@@clientName(VoiceLive.Modality, "InteractionModality", "csharp");
 @@clientName(VoiceLive.Animation, "AnimationOptions", "csharp");
-@@clientName(VoiceLive.Tool, "VoiceLiveToolInvocation", "csharp");
 @@clientName(
   VoiceLive.AzureCustomVoice.custom_lexicon_url,
   "CustomLexiconUri",
@@ -255,30 +309,15 @@ using Azure.ClientGenerator.Core;
 @@clientName(VoiceLive.VideoCrop.top_left, "TopLeftInternal", "csharp");
 @@clientName(VoiceLive.Response, "SessionResponse", "csharp");
 @@clientName(VoiceLive.AgentConfig, "RespondingAgentOptions", "csharp");
-@@clientName(VoiceLive.FunctionTool, "VoiceLiveFunctionDefinition", "csharp");
-@@clientName(VoiceLive.Tool, "VoiceLiveToolDefinition", "csharp");
-@@clientName(VoiceLive.ContentPart, "VoiceLiveContentPart", "csharp");
-@@clientName(VoiceLive.MessageRole, "ResponseMessageRole", "csharp");
 @@clientName(VoiceLive.ResponseItem, "SessionResponseItem", "csharp");
-@@clientName(
-  VoiceLive.ResponseMessageItem,
-  "SessionResponseMessageItem",
-  "csharp"
-);
-@@clientName(VoiceLive.ResponseStatus, "SessionResponseStatus", "csharp");
-@@clientName(
-  VoiceLive.ResponseItemStatus,
-  "SessionResponseItemStatus",
-  "csharp"
-);
 @@clientName(VoiceLive.ServerEvent, "SessionUpdate", "csharp");
 @@clientName(
-  VoiceLive.ServerEventSessionCreated,
+  OpenAI.RealtimeServerEventSessionCreated,
   "SessionUpdateSessionCreated",
   "csharp"
 );
 @@clientName(
-  VoiceLive.ServerEventSessionUpdated,
+  OpenAI.RealtimeServerEventSessionUpdated,
   "SessionUpdateSessionUpdated",
   "csharp"
 );
@@ -288,52 +327,52 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 @@clientName(
-  VoiceLive.ServerEventInputAudioBufferSpeechStarted,
+  OpenAI.RealtimeServerEventInputAudioBufferSpeechStarted,
   "SessionUpdateInputAudioBufferSpeechStarted",
   "csharp"
 );
 @@clientName(
-  VoiceLive.ServerEventInputAudioBufferSpeechStopped,
+  OpenAI.RealtimeServerEventInputAudioBufferSpeechStopped,
   "SessionUpdateInputAudioBufferSpeechStopped",
   "csharp"
 );
 @@clientName(
-  VoiceLive.ServerEventInputAudioBufferCleared,
+  OpenAI.RealtimeServerEventInputAudioBufferCleared,
   "SessionUpdateInputAudioBufferCleared",
   "csharp"
 );
 @@clientName(
-  VoiceLive.ServerEventInputAudioBufferCommitted,
+  OpenAI.RealtimeServerEventInputAudioBufferCommitted,
   "SessionUpdateInputAudioBufferCommitted",
   "csharp"
 );
 @@clientName(
-  VoiceLive.ServerEventResponseCreated,
+  OpenAI.RealtimeServerEventResponseCreated,
   "SessionUpdateResponseCreated",
   "csharp"
 );
 @@clientName(
-  VoiceLive.ServerEventResponseDone,
+  OpenAI.RealtimeServerEventResponseDone,
   "SessionUpdateResponseDone",
   "csharp"
 );
 @@clientName(
-  VoiceLive.ServerEventResponseAudioDelta,
+  OpenAI.RealtimeServerEventResponseAudioDelta,
   "SessionUpdateResponseAudioDelta",
   "csharp"
 );
 @@clientName(
-  VoiceLive.ServerEventResponseAudioDone,
+  OpenAI.RealtimeServerEventResponseAudioDone,
   "SessionUpdateResponseAudioDone",
   "csharp"
 );
 @@clientName(
-  VoiceLive.ServerEventResponseAudioTranscriptDelta,
+  OpenAI.RealtimeServerEventResponseAudioTranscriptDelta,
   "SessionUpdateResponseAudioTranscriptDelta",
   "csharp"
 );
 @@clientName(
-  VoiceLive.ServerEventResponseAudioTranscriptDone,
+  OpenAI.RealtimeServerEventResponseAudioTranscriptDone,
   "SessionUpdateResponseAudioTranscriptDone",
   "csharp"
 );
@@ -348,42 +387,42 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 @@clientName(
-  VoiceLive.ServerEventResponseTextDelta,
+  OpenAI.RealtimeServerEventResponseTextDelta,
   "SessionUpdateResponseTextDelta",
   "csharp"
 );
 @@clientName(
-  VoiceLive.ServerEventResponseTextDone,
+  OpenAI.RealtimeServerEventResponseTextDone,
   "SessionUpdateResponseTextDone",
   "csharp"
 );
 @@clientName(
-  VoiceLive.ServerEventResponseContentPartAdded,
+  OpenAI.RealtimeServerEventResponseContentPartAdded,
   "SessionUpdateResponseContentPartAdded",
   "csharp"
 );
 @@clientName(
-  VoiceLive.ServerEventResponseContentPartDone,
+  OpenAI.RealtimeServerEventResponseContentPartDone,
   "SessionUpdateResponseContentPartDone",
   "csharp"
 );
 @@clientName(
-  VoiceLive.ServerEventResponseOutputItemAdded,
+  OpenAI.RealtimeServerEventResponseOutputItemAdded,
   "SessionUpdateResponseOutputItemAdded",
   "csharp"
 );
 @@clientName(
-  VoiceLive.ServerEventResponseOutputItemDone,
+  OpenAI.RealtimeServerEventResponseOutputItemDone,
   "SessionUpdateResponseOutputItemDone",
   "csharp"
 );
 @@clientName(
-  VoiceLive.ServerEventResponseFunctionCallArgumentsDelta,
+  OpenAI.RealtimeServerEventResponseFunctionCallArgumentsDelta,
   "SessionUpdateResponseFunctionCallArgumentsDelta",
   "csharp"
 );
 @@clientName(
-  VoiceLive.ServerEventResponseFunctionCallArgumentsDone,
+  OpenAI.RealtimeServerEventResponseFunctionCallArgumentsDone,
   "SessionUpdateResponseFunctionCallArgumentsDone",
   "csharp"
 );
@@ -408,47 +447,51 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 @@clientName(
-  VoiceLive.ServerEventConversationItemCreated,
+  OpenAI.RealtimeServerEventConversationItemCreated,
   "SessionUpdateConversationItemCreated",
   "csharp"
 );
 @@clientName(
-  VoiceLive.ServerEventConversationItemDeleted,
+  OpenAI.RealtimeServerEventConversationItemDeleted,
   "SessionUpdateConversationItemDeleted",
   "csharp"
 );
 @@clientName(
-  VoiceLive.ServerEventConversationItemRetrieved,
+  OpenAI.RealtimeServerEventConversationItemRetrieved,
   "SessionUpdateConversationItemRetrieved",
   "csharp"
 );
 @@clientName(
-  VoiceLive.ServerEventConversationItemTruncated,
+  OpenAI.RealtimeServerEventConversationItemTruncated,
   "SessionUpdateConversationItemTruncated",
   "csharp"
 );
 @@clientName(
-  VoiceLive.ServerEventConversationItemInputAudioTranscriptionCompleted,
+  OpenAI.RealtimeServerEventConversationItemInputAudioTranscriptionCompleted,
   "SessionUpdateConversationItemInputAudioTranscriptionCompleted",
   "csharp"
 );
 @@clientName(
-  VoiceLive.ServerEventConversationItemInputAudioTranscriptionDelta,
+  OpenAI.RealtimeServerEventConversationItemInputAudioTranscriptionDelta,
   "SessionUpdateConversationItemInputAudioTranscriptionDelta",
   "csharp"
 );
 @@clientName(
-  VoiceLive.ServerEventConversationItemInputAudioTranscriptionFailed,
+  OpenAI.RealtimeServerEventConversationItemInputAudioTranscriptionFailed,
   "SessionUpdateConversationItemInputAudioTranscriptionFailed",
   "csharp"
 );
-@@clientName(VoiceLive.ServerEventError, "SessionUpdateError", "csharp");
 @@clientName(
-  VoiceLive.ServerEventErrorDetails,
+  OpenAI.RealtimeServerEventRealtimeServerEventError,
+  "SessionUpdateError",
+  "csharp"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventErrorError,
   "SessionUpdateErrorDetails",
   "csharp"
 );
-@@clientName(VoiceLive.TokenUsage, "ResponseTokenStatistics", "csharp");
+@@clientName(OpenAI.RealtimeResponseUsage, "ResponseTokenStatistics", "csharp");
 @@clientName(VoiceLive.RequestSession, "VoiceLiveSessionOptions", "csharp");
 @@clientName(VoiceLive.ResponseSession, "VoiceLiveSessionResponse", "csharp");
 @@clientName(VoiceLive.AvatarConfig, "AvatarConfiguration", "csharp");
@@ -495,17 +538,14 @@ using Azure.ClientGenerator.Core;
   "CustomTextNormalizationUri",
   "csharp"
 );
-@@clientName(VoiceLive.MCPApprovalType, "McpApprovalKind", "csharp");
-@@clientName(VoiceLive.ReasoningEffort.xhigh, "ExtraHigh", "csharp");
 @@clientName(VoiceLive.AvatarConfigTypes, "AvatarConfigKind", "csharp");
 @@clientName(
   VoiceLive.PersonalVoiceModels.`MAI-Voice-1`,
   "MaiVoice1",
   "csharp"
 );
-@@clientName(VoiceLive.RequestImageContentPart.image_url, "Uri", "csharp");
 @@clientName(
-  VoiceLive.ServerEventConversationItemInputAudioTranscriptionCompleted.logprobs,
+  OpenAI.RealtimeServerEventConversationItemInputAudioTranscriptionCompleted.logprobs,
   "LogProbs",
   "csharp"
 );
@@ -524,7 +564,11 @@ using Azure.ClientGenerator.Core;
   "TimeoutMs",
   "csharp"
 );
-@@clientName(VoiceLive.ServerVad, "ServerVadTurnDetection", "csharp");
+@@clientName(
+  OpenAI.RealtimeTurnDetectionServerVad,
+  "ServerVadTurnDetection",
+  "csharp"
+);
 @@clientName(
   VoiceLive.AzureSemanticVad,
   "AzureSemanticVadTurnDetection",
@@ -556,67 +600,66 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 @@clientName(
-  VoiceLive.ServerEventMcpListToolsInProgress,
+  OpenAI.RealtimeServerEventMCPListToolsInProgress,
   "SessionUpdateMcpListToolsInProgress",
   "csharp"
 );
 @@clientName(
-  VoiceLive.ServerEventMcpListToolsCompleted,
+  OpenAI.RealtimeServerEventMCPListToolsCompleted,
   "SessionUpdateMcpListToolsCompleted",
   "csharp"
 );
 @@clientName(
-  VoiceLive.ServerEventMcpListToolsFailed,
+  OpenAI.RealtimeServerEventMCPListToolsFailed,
   "SessionUpdateMcpListToolsFailed",
   "csharp"
 );
 @@clientName(
-  VoiceLive.ServerEventResponseMcpCallArgumentsDelta,
+  OpenAI.RealtimeServerEventResponseMCPCallArgumentsDelta,
   "SessionUpdateResponseMcpCallArgumentsDelta",
   "csharp"
 );
 @@clientName(
-  VoiceLive.ServerEventResponseMcpCallArgumentsDone,
+  OpenAI.RealtimeServerEventResponseMCPCallArgumentsDone,
   "SessionUpdateResponseMcpCallArgumentsDone",
   "csharp"
 );
 @@clientName(
-  VoiceLive.ServerEventResponseMcpCallInProgress,
+  OpenAI.RealtimeServerEventResponseMCPCallInProgress,
   "SessionUpdateResponseMcpCallInProgress",
   "csharp"
 );
 @@clientName(
-  VoiceLive.ServerEventResponseMcpCallCompleted,
+  OpenAI.RealtimeServerEventResponseMCPCallCompleted,
   "SessionUpdateResponseMcpCallCompleted",
   "csharp"
 );
 @@clientName(
-  VoiceLive.ServerEventResponseMcpCallFailed,
+  OpenAI.RealtimeServerEventResponseMCPCallFailed,
   "SessionUpdateResponseMcpCallFailed",
   "csharp"
 );
 @@clientName(
-  VoiceLive.ResponseMCPListToolItem,
+  OpenAI.RealtimeMCPListTools,
   "SessionResponseMcpListToolItem",
   "csharp"
 );
 @@clientName(
-  VoiceLive.ResponseMCPCallItem,
+  OpenAI.RealtimeMCPToolCall,
   "SessionResponseMcpCallItem",
   "csharp"
 );
 @@clientName(
-  VoiceLive.ResponseMCPApprovalRequestItem,
+  OpenAI.RealtimeMCPApprovalRequest,
   "SessionResponseMcpApprovalRequestItem",
   "csharp"
 );
 @@clientName(
-  VoiceLive.ResponseMCPApprovalResponseItem,
+  OpenAI.RealtimeMCPApprovalResponse,
   "SessionResponseMcpApprovalResponseItem",
   "csharp"
 );
-@@clientName(VoiceLive.MCPServer, "VoiceLiveMcpServerDefinition", "csharp");
-@@clientName(VoiceLive.MCPTool, "VoiceLiveMcpTool", "csharp");
+@@clientName(OpenAI.MCPListToolsTool, "VoiceLiveMcpTool", "csharp");
 @@clientName(VoiceLive.Background, "VideoBackground", "csharp");
 @@alternateType(
   VoiceLive.AzureAvatarVoiceSyncVoice.custom_lexicon_url,
@@ -645,131 +688,200 @@ using Azure.ClientGenerator.Core;
   url,
   "csharp"
 );
-@@alternateType(VoiceLive.RequestImageContentPart.image_url, url, "csharp");
-@@alternateType(VoiceLive.RequestSession.turn_detection, unknown, "csharp");
-@@alternateType(VoiceLive.MCPServer.server_url, url, "csharp");
+@@alternateType(VoiceLive.AudioInputConfig.turn_detection, unknown, "csharp");
 
-@@access(VoiceLive.ClientEventSessionUpdate, Access.public, "java");
-@@access(VoiceLive.ClientEventInputAudioBufferAppend, Access.public, "java");
-@@access(VoiceLive.ClientEventInputAudioBufferCommit, Access.public, "java");
-@@access(VoiceLive.ClientEventInputAudioBufferClear, Access.public, "java");
+@@access(OpenAI.RealtimeClientEventSessionUpdate, Access.public, "java");
+@@access(
+  OpenAI.RealtimeClientEventInputAudioBufferAppend,
+  Access.public,
+  "java"
+);
+@@access(
+  OpenAI.RealtimeClientEventInputAudioBufferCommit,
+  Access.public,
+  "java"
+);
+@@access(
+  OpenAI.RealtimeClientEventInputAudioBufferClear,
+  Access.public,
+  "java"
+);
 @@access(VoiceLive.ClientEventInputAudioTurnStart, Access.public, "java");
 @@access(VoiceLive.ClientEventInputAudioTurnAppend, Access.public, "java");
 @@access(VoiceLive.ClientEventInputAudioTurnEnd, Access.public, "java");
 @@access(VoiceLive.ClientEventInputAudioTurnCancel, Access.public, "java");
 @@access(VoiceLive.ClientEventInputAudioClear, Access.public, "java");
-@@access(VoiceLive.ClientEventConversationItemCreate, Access.public, "java");
-@@access(VoiceLive.ClientEventConversationItemRetrieve, Access.public, "java");
-@@access(VoiceLive.ClientEventConversationItemTruncate, Access.public, "java");
-@@access(VoiceLive.ClientEventConversationItemDelete, Access.public, "java");
-@@access(VoiceLive.ClientEventResponseCreate, Access.public, "java");
-@@access(VoiceLive.ClientEventResponseCancel, Access.public, "java");
+@@access(
+  OpenAI.RealtimeClientEventConversationItemCreate,
+  Access.public,
+  "java"
+);
+@@access(
+  OpenAI.RealtimeClientEventConversationItemRetrieve,
+  Access.public,
+  "java"
+);
+@@access(
+  OpenAI.RealtimeClientEventConversationItemTruncate,
+  Access.public,
+  "java"
+);
+@@access(
+  OpenAI.RealtimeClientEventConversationItemDelete,
+  Access.public,
+  "java"
+);
+@@access(OpenAI.RealtimeClientEventResponseCreate, Access.public, "java");
+@@access(OpenAI.RealtimeClientEventResponseCancel, Access.public, "java");
 @@access(VoiceLive.ClientEventSessionAvatarConnect, Access.public, "java");
 
 @@access(VoiceLive.ServerEventSessionAvatarConnecting, Access.public, "java");
-@@access(VoiceLive.ServerEventSessionCreated, Access.public, "java");
-@@access(VoiceLive.ServerEventResponseAudioDelta, Access.public, "java");
+@@access(OpenAI.RealtimeServerEventSessionCreated, Access.public, "java");
+@@access(OpenAI.RealtimeServerEventResponseAudioDelta, Access.public, "java");
 @@access(VoiceLive.ResponseItem, Access.public, "java");
 @@access(VoiceLive.Response, Access.public, "java");
-@@access(VoiceLive.ServerEventConversationItemCreated, Access.public, "java");
-@@access(VoiceLive.ServerEventConversationItemDeleted, Access.public, "java");
 @@access(
-  VoiceLive.ServerEventConversationItemInputAudioTranscriptionCompleted,
+  OpenAI.RealtimeServerEventConversationItemCreated,
   Access.public,
   "java"
 );
 @@access(
-  VoiceLive.ServerEventConversationItemInputAudioTranscriptionDelta,
+  OpenAI.RealtimeServerEventConversationItemDeleted,
   Access.public,
   "java"
 );
 @@access(
-  VoiceLive.ServerEventConversationItemInputAudioTranscriptionFailed,
-  Access.public,
-  "java"
-);
-@@access(VoiceLive.ServerEventConversationItemRetrieved, Access.public, "java");
-@@access(VoiceLive.ServerEventConversationItemTruncated, Access.public, "java");
-@@access(VoiceLive.ServerEventError, Access.public, "java");
-@@access(VoiceLive.ServerEventInputAudioBufferCleared, Access.public, "java");
-@@access(VoiceLive.ServerEventInputAudioBufferCommitted, Access.public, "java");
-@@access(
-  VoiceLive.ServerEventInputAudioBufferSpeechStarted,
+  OpenAI.RealtimeServerEventConversationItemInputAudioTranscriptionCompleted,
   Access.public,
   "java"
 );
 @@access(
-  VoiceLive.ServerEventInputAudioBufferSpeechStopped,
-  Access.public,
-  "java"
-);
-@@access(VoiceLive.ServerEventResponseAudioDone, Access.public, "java");
-@@access(
-  VoiceLive.ServerEventResponseAudioTranscriptDelta,
+  OpenAI.RealtimeServerEventConversationItemInputAudioTranscriptionDelta,
   Access.public,
   "java"
 );
 @@access(
-  VoiceLive.ServerEventResponseAudioTranscriptDone,
-  Access.public,
-  "java"
-);
-@@access(VoiceLive.ServerEventResponseContentPartAdded, Access.public, "java");
-@@access(VoiceLive.ServerEventResponseContentPartDone, Access.public, "java");
-@@access(VoiceLive.ServerEventResponseCreated, Access.public, "java");
-@@access(VoiceLive.ServerEventResponseDone, Access.public, "java");
-@@access(
-  VoiceLive.ServerEventResponseFunctionCallArgumentsDelta,
+  OpenAI.RealtimeServerEventConversationItemInputAudioTranscriptionFailed,
   Access.public,
   "java"
 );
 @@access(
-  VoiceLive.ServerEventResponseFunctionCallArgumentsDone,
+  OpenAI.RealtimeServerEventConversationItemRetrieved,
   Access.public,
   "java"
 );
-@@access(VoiceLive.ServerEventResponseOutputItemAdded, Access.public, "java");
-@@access(VoiceLive.ServerEventResponseOutputItemDone, Access.public, "java");
-@@access(VoiceLive.ServerEventResponseTextDelta, Access.public, "java");
-@@access(VoiceLive.ServerEventResponseTextDone, Access.public, "java");
-@@access(VoiceLive.ServerEventSessionUpdated, Access.public, "java");
+@@access(
+  OpenAI.RealtimeServerEventConversationItemTruncated,
+  Access.public,
+  "java"
+);
+@@access(
+  OpenAI.RealtimeServerEventRealtimeServerEventError,
+  Access.public,
+  "java"
+);
+@@access(
+  OpenAI.RealtimeServerEventInputAudioBufferCleared,
+  Access.public,
+  "java"
+);
+@@access(
+  OpenAI.RealtimeServerEventInputAudioBufferCommitted,
+  Access.public,
+  "java"
+);
+@@access(
+  OpenAI.RealtimeServerEventInputAudioBufferSpeechStarted,
+  Access.public,
+  "java"
+);
+@@access(
+  OpenAI.RealtimeServerEventInputAudioBufferSpeechStopped,
+  Access.public,
+  "java"
+);
+@@access(OpenAI.RealtimeServerEventResponseAudioDone, Access.public, "java");
+@@access(
+  OpenAI.RealtimeServerEventResponseAudioTranscriptDelta,
+  Access.public,
+  "java"
+);
+@@access(
+  OpenAI.RealtimeServerEventResponseAudioTranscriptDone,
+  Access.public,
+  "java"
+);
+@@access(
+  OpenAI.RealtimeServerEventResponseContentPartAdded,
+  Access.public,
+  "java"
+);
+@@access(
+  OpenAI.RealtimeServerEventResponseContentPartDone,
+  Access.public,
+  "java"
+);
+@@access(OpenAI.RealtimeServerEventResponseCreated, Access.public, "java");
+@@access(OpenAI.RealtimeServerEventResponseDone, Access.public, "java");
+@@access(
+  OpenAI.RealtimeServerEventResponseFunctionCallArgumentsDelta,
+  Access.public,
+  "java"
+);
+@@access(
+  OpenAI.RealtimeServerEventResponseFunctionCallArgumentsDone,
+  Access.public,
+  "java"
+);
+@@access(
+  OpenAI.RealtimeServerEventResponseOutputItemAdded,
+  Access.public,
+  "java"
+);
+@@access(
+  OpenAI.RealtimeServerEventResponseOutputItemDone,
+  Access.public,
+  "java"
+);
+@@access(OpenAI.RealtimeServerEventResponseTextDelta, Access.public, "java");
+@@access(OpenAI.RealtimeServerEventResponseTextDone, Access.public, "java");
+@@access(OpenAI.RealtimeServerEventSessionUpdated, Access.public, "java");
 
 @@access(VoiceLive.ClientEventRtcCallSdpCreate, Access.public, "java");
 @@access(VoiceLive.ServerEventRtcCallSdpCreated, Access.public, "java");
 @@access(VoiceLive.ServerEventRtcCallError, Access.public, "java");
 @@access(VoiceLive.RtcCallErrorDetails, Access.public, "java");
-@@access(VoiceLive.ServerEventOutputAudioBufferStarted, Access.public, "java");
-@@access(VoiceLive.ServerEventOutputAudioBufferStopped, Access.public, "java");
-
-@@access(VoiceLive.ToolChoice, Access.public, "java");
-@@access(VoiceLive.Voice, Access.public, "java");
-
-@@clientName(VoiceLive.OAIVoice, "OpenAIVoiceName", "java");
-@@clientName(VoiceLive.ToolChoiceObject, "ToolChoiceSelection", "java");
-@@clientName(
-  VoiceLive.ToolChoiceFunctionObject,
-  "ToolChoiceFunctionSelection",
+@@access(
+  OpenAI.RealtimeServerEventOutputAudioBufferStarted,
+  Access.public,
+  "java"
+);
+@@access(
+  OpenAI.RealtimeServerEventOutputAudioBufferStopped,
+  Access.public,
   "java"
 );
 
-@@clientName(VoiceLive.Modality, "InteractionModality", "java");
+@@access(VoiceLive.Voice, Access.public, "java");
+
+@@clientName(VoiceLive.OAIVoice, "OpenAIVoiceName", "java");
+
 @@clientName(VoiceLive.ClientEvent, "SessionClientEvent", "java");
 @@clientName(VoiceLive.Animation, "AnimationOptions", "java");
 @@clientName(VoiceLive.Animation.outputs, "outputTypes", "java");
 @@clientName(VoiceLive.LogProbProperties.logprob, "logProb", "java");
 @@clientName(
-  VoiceLive.ServerEventConversationItemInputAudioTranscriptionCompleted.logprobs,
+  OpenAI.RealtimeServerEventConversationItemInputAudioTranscriptionCompleted.logprobs,
   "logProbs",
   "java"
 );
 @@clientName(
-  VoiceLive.ServerEventConversationItemInputAudioTranscriptionDelta.logprobs,
+  OpenAI.RealtimeServerEventConversationItemInputAudioTranscriptionDelta.logprobs,
   "logProbs",
   "java"
 );
 @@clientName(VoiceLive.RequestSession.animation, "animationOptions", "java");
 @@clientName(VoiceLive.ResponseSession.animation, "animationOptions", "java");
-@@clientName(VoiceLive.Tool, "VoiceLiveToolInvocation", "java");
 @@clientName(
   VoiceLive.AzureCustomVoice.custom_lexicon_url,
   "CustomLexiconUri",
@@ -779,26 +891,15 @@ using Azure.ClientGenerator.Core;
 @@clientName(VoiceLive.VideoCrop.top_left, "TopLeftInternal", "java");
 @@clientName(VoiceLive.Response, "SessionResponse", "java");
 @@clientName(VoiceLive.AgentConfig, "RespondingAgentOptions", "java");
-@@clientName(VoiceLive.FunctionTool, "VoiceLiveFunctionDefinition", "java");
-@@clientName(VoiceLive.Tool, "VoiceLiveToolDefinition", "java");
-@@clientName(VoiceLive.ContentPart, "VoiceLiveContentPart", "java");
-@@clientName(VoiceLive.MessageRole, "ResponseMessageRole", "java");
 @@clientName(VoiceLive.ResponseItem, "SessionResponseItem", "java");
-@@clientName(
-  VoiceLive.ResponseMessageItem,
-  "SessionResponseMessageItem",
-  "java"
-);
-@@clientName(VoiceLive.ResponseStatus, "SessionResponseStatus", "java");
-@@clientName(VoiceLive.ResponseItemStatus, "SessionResponseItemStatus", "java");
 @@clientName(VoiceLive.ServerEvent, "SessionServerEvent", "java");
 @@clientName(
-  VoiceLive.ServerEventSessionCreated,
+  OpenAI.RealtimeServerEventSessionCreated,
   "SessionUpdateSessionCreated",
   "java"
 );
 @@clientName(
-  VoiceLive.ServerEventSessionUpdated,
+  OpenAI.RealtimeServerEventSessionUpdated,
   "SessionUpdateSessionUpdated",
   "java"
 );
@@ -808,52 +909,52 @@ using Azure.ClientGenerator.Core;
   "java"
 );
 @@clientName(
-  VoiceLive.ServerEventInputAudioBufferSpeechStarted,
+  OpenAI.RealtimeServerEventInputAudioBufferSpeechStarted,
   "SessionUpdateInputAudioBufferSpeechStarted",
   "java"
 );
 @@clientName(
-  VoiceLive.ServerEventInputAudioBufferSpeechStopped,
+  OpenAI.RealtimeServerEventInputAudioBufferSpeechStopped,
   "SessionUpdateInputAudioBufferSpeechStopped",
   "java"
 );
 @@clientName(
-  VoiceLive.ServerEventInputAudioBufferCleared,
+  OpenAI.RealtimeServerEventInputAudioBufferCleared,
   "SessionUpdateInputAudioBufferCleared",
   "java"
 );
 @@clientName(
-  VoiceLive.ServerEventInputAudioBufferCommitted,
+  OpenAI.RealtimeServerEventInputAudioBufferCommitted,
   "SessionUpdateInputAudioBufferCommitted",
   "java"
 );
 @@clientName(
-  VoiceLive.ServerEventResponseCreated,
+  OpenAI.RealtimeServerEventResponseCreated,
   "SessionUpdateResponseCreated",
   "java"
 );
 @@clientName(
-  VoiceLive.ServerEventResponseDone,
+  OpenAI.RealtimeServerEventResponseDone,
   "SessionUpdateResponseDone",
   "java"
 );
 @@clientName(
-  VoiceLive.ServerEventResponseAudioDelta,
+  OpenAI.RealtimeServerEventResponseAudioDelta,
   "SessionUpdateResponseAudioDelta",
   "java"
 );
 @@clientName(
-  VoiceLive.ServerEventResponseAudioDone,
+  OpenAI.RealtimeServerEventResponseAudioDone,
   "SessionUpdateResponseAudioDone",
   "java"
 );
 @@clientName(
-  VoiceLive.ServerEventResponseAudioTranscriptDelta,
+  OpenAI.RealtimeServerEventResponseAudioTranscriptDelta,
   "SessionUpdateResponseAudioTranscriptDelta",
   "java"
 );
 @@clientName(
-  VoiceLive.ServerEventResponseAudioTranscriptDone,
+  OpenAI.RealtimeServerEventResponseAudioTranscriptDone,
   "SessionUpdateResponseAudioTranscriptDone",
   "java"
 );
@@ -868,42 +969,42 @@ using Azure.ClientGenerator.Core;
   "java"
 );
 @@clientName(
-  VoiceLive.ServerEventResponseTextDelta,
+  OpenAI.RealtimeServerEventResponseTextDelta,
   "SessionUpdateResponseTextDelta",
   "java"
 );
 @@clientName(
-  VoiceLive.ServerEventResponseTextDone,
+  OpenAI.RealtimeServerEventResponseTextDone,
   "SessionUpdateResponseTextDone",
   "java"
 );
 @@clientName(
-  VoiceLive.ServerEventResponseContentPartAdded,
+  OpenAI.RealtimeServerEventResponseContentPartAdded,
   "SessionUpdateResponseContentPartAdded",
   "java"
 );
 @@clientName(
-  VoiceLive.ServerEventResponseContentPartDone,
+  OpenAI.RealtimeServerEventResponseContentPartDone,
   "SessionUpdateResponseContentPartDone",
   "java"
 );
 @@clientName(
-  VoiceLive.ServerEventResponseOutputItemAdded,
+  OpenAI.RealtimeServerEventResponseOutputItemAdded,
   "SessionUpdateResponseOutputItemAdded",
   "java"
 );
 @@clientName(
-  VoiceLive.ServerEventResponseOutputItemDone,
+  OpenAI.RealtimeServerEventResponseOutputItemDone,
   "SessionUpdateResponseOutputItemDone",
   "java"
 );
 @@clientName(
-  VoiceLive.ServerEventResponseFunctionCallArgumentsDelta,
+  OpenAI.RealtimeServerEventResponseFunctionCallArgumentsDelta,
   "SessionUpdateResponseFunctionCallArgumentsDelta",
   "java"
 );
 @@clientName(
-  VoiceLive.ServerEventResponseFunctionCallArgumentsDone,
+  OpenAI.RealtimeServerEventResponseFunctionCallArgumentsDone,
   "SessionUpdateResponseFunctionCallArgumentsDone",
   "java"
 );
@@ -928,96 +1029,111 @@ using Azure.ClientGenerator.Core;
   "java"
 );
 @@clientName(
-  VoiceLive.ServerEventConversationItemCreated,
+  OpenAI.RealtimeServerEventConversationItemCreated,
   "SessionUpdateConversationItemCreated",
   "java"
 );
 @@clientName(
-  VoiceLive.ServerEventConversationItemDeleted,
+  OpenAI.RealtimeServerEventConversationItemDeleted,
   "SessionUpdateConversationItemDeleted",
   "java"
 );
 @@clientName(
-  VoiceLive.ServerEventConversationItemRetrieved,
+  OpenAI.RealtimeServerEventConversationItemRetrieved,
   "SessionUpdateConversationItemRetrieved",
   "java"
 );
 @@clientName(
-  VoiceLive.ServerEventConversationItemTruncated,
+  OpenAI.RealtimeServerEventConversationItemTruncated,
   "SessionUpdateConversationItemTruncated",
   "java"
 );
 @@clientName(
-  VoiceLive.ServerEventConversationItemInputAudioTranscriptionCompleted,
+  OpenAI.RealtimeServerEventConversationItemInputAudioTranscriptionCompleted,
   "SessionUpdateConversationItemInputAudioTranscriptionCompleted",
   "java"
 );
 @@clientName(
-  VoiceLive.ServerEventConversationItemInputAudioTranscriptionDelta,
+  OpenAI.RealtimeServerEventConversationItemInputAudioTranscriptionDelta,
   "SessionUpdateConversationItemInputAudioTranscriptionDelta",
   "java"
 );
 @@clientName(
-  VoiceLive.ServerEventConversationItemInputAudioTranscriptionFailed,
+  OpenAI.RealtimeServerEventConversationItemInputAudioTranscriptionFailed,
   "SessionUpdateConversationItemInputAudioTranscriptionFailed",
   "java"
 );
-@@clientName(VoiceLive.ServerEventError, "SessionUpdateError", "java");
 @@clientName(
-  VoiceLive.ServerEventErrorDetails,
+  OpenAI.RealtimeServerEventRealtimeServerEventError,
+  "SessionUpdateError",
+  "java"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventErrorError,
   "SessionUpdateErrorDetails",
   "java"
 );
 @@clientName(
-  VoiceLive.CachedTokenDetails.text_tokens,
+  OpenAI.RealtimeResponseUsageInputTokenDetailsCachedTokensDetails.text_tokens,
   "textTokenCount",
   "java"
 );
 @@clientName(
-  VoiceLive.CachedTokenDetails.audio_tokens,
+  OpenAI.RealtimeResponseUsageInputTokenDetailsCachedTokensDetails.audio_tokens,
   "audioTokenCount",
   "java"
 );
 @@clientName(
-  VoiceLive.CachedTokenDetails.image_tokens,
+  OpenAI.RealtimeResponseUsageInputTokenDetailsCachedTokensDetails.image_tokens,
   "imageTokenCount",
   "java"
 );
 @@clientName(
-  VoiceLive.InputTokenDetails.cached_tokens,
+  OpenAI.RealtimeResponseUsageInputTokenDetails.cached_tokens,
   "cachedTokenCount",
   "java"
 );
-@@clientName(VoiceLive.InputTokenDetails.text_tokens, "textTokenCount", "java");
 @@clientName(
-  VoiceLive.InputTokenDetails.audio_tokens,
-  "audioTokenCount",
-  "java"
-);
-@@clientName(
-  VoiceLive.InputTokenDetails.image_tokens,
-  "imageTokenCount",
-  "java"
-);
-@@clientName(
-  VoiceLive.OutputTokenDetails.text_tokens,
+  OpenAI.RealtimeResponseUsageInputTokenDetails.text_tokens,
   "textTokenCount",
   "java"
 );
 @@clientName(
-  VoiceLive.OutputTokenDetails.audio_tokens,
+  OpenAI.RealtimeResponseUsageInputTokenDetails.audio_tokens,
   "audioTokenCount",
   "java"
 );
 @@clientName(
-  VoiceLive.OutputTokenDetails.reasoning_tokens,
-  "reasoningTokenCount",
+  OpenAI.RealtimeResponseUsageInputTokenDetails.image_tokens,
+  "imageTokenCount",
   "java"
 );
-@@clientName(VoiceLive.TokenUsage.total_tokens, "totalTokenCount", "java");
-@@clientName(VoiceLive.TokenUsage.input_tokens, "inputTokenCount", "java");
-@@clientName(VoiceLive.TokenUsage.output_tokens, "outputTokenCount", "java");
-@@clientName(VoiceLive.TokenUsage, "ResponseTokenStatistics", "java");
+@@clientName(
+  OpenAI.RealtimeResponseUsageOutputTokenDetails.text_tokens,
+  "textTokenCount",
+  "java"
+);
+@@clientName(
+  OpenAI.RealtimeResponseUsageOutputTokenDetails.audio_tokens,
+  "audioTokenCount",
+  "java"
+);
+@@clientName(
+  OpenAI.RealtimeResponseUsage.total_tokens,
+  "totalTokenCount",
+  "java"
+);
+@@clientName(
+  OpenAI.RealtimeResponseUsage.input_tokens,
+  "inputTokenCount",
+  "java"
+);
+@@clientName(
+  OpenAI.RealtimeResponseUsage.output_tokens,
+  "outputTokenCount",
+  "java"
+);
+@@clientName(OpenAI.RealtimeResponseUsage, "ResponseTokenStatistics", "java");
 @@clientName(VoiceLive.RequestSession, "VoiceLiveSessionOptions", "java");
 @@clientName(VoiceLive.ResponseSession, "VoiceLiveSessionResponse", "java");
 @@clientName(VoiceLive.AvatarConfig, "AvatarOptions", "java");
@@ -1034,7 +1150,11 @@ using Azure.ClientGenerator.Core;
   "TimeoutMs",
   "java"
 );
-@@clientName(VoiceLive.ServerVad, "ServerVadTurnDetection", "java");
+@@clientName(
+  OpenAI.RealtimeTurnDetectionServerVad,
+  "ServerVadTurnDetection",
+  "java"
+);
 @@clientName(
   VoiceLive.AzureSemanticVad,
   "AzureSemanticVadTurnDetection",
@@ -1066,27 +1186,16 @@ using Azure.ClientGenerator.Core;
   "java"
 );
 @@clientName(VoiceLive.Background, "VideoBackground", "java");
-@@clientName(VoiceLive.MCPTool, "McpTool", "java");
-@@clientName(VoiceLive.MCPServer, "McpServer", "java");
-@@clientName(VoiceLive.MCPApprovalType, "McpApprovalType", "java");
+@@clientName(OpenAI.MCPListToolsTool, "McpTool", "java");
+@@clientName(OpenAI.RealtimeMCPListTools, "ResponseMcpListToolItem", "java");
+@@clientName(OpenAI.RealtimeMCPToolCall, "ResponseMcpCallItem", "java");
 @@clientName(
-  VoiceLive.MCPApprovalResponseRequestItem,
-  "McpApprovalResponseRequestItem",
-  "java"
-);
-@@clientName(
-  VoiceLive.ResponseMCPListToolItem,
-  "ResponseMcpListToolItem",
-  "java"
-);
-@@clientName(VoiceLive.ResponseMCPCallItem, "ResponseMcpCallItem", "java");
-@@clientName(
-  VoiceLive.ResponseMCPApprovalRequestItem,
+  OpenAI.RealtimeMCPApprovalRequest,
   "ResponseMcpApprovalRequestItem",
   "java"
 );
 @@clientName(
-  VoiceLive.ResponseMCPApprovalResponseItem,
+  OpenAI.RealtimeMCPApprovalResponse,
   "ResponseMcpApprovalResponseItem",
   "java"
 );
@@ -1097,22 +1206,22 @@ using Azure.ClientGenerator.Core;
   "javascript"
 );
 @@clientName(
-  VoiceLive.ClientEventConversationItemTruncate.audio_end_ms,
+  OpenAI.RealtimeClientEventConversationItemTruncate.audio_end_ms,
   "audioEndInMs",
   "javascript"
 );
 @@clientName(
-  VoiceLive.ServerEventConversationItemTruncated.audio_end_ms,
+  OpenAI.RealtimeServerEventConversationItemTruncated.audio_end_ms,
   "audioEndInMs",
   "javascript"
 );
 @@clientName(
-  VoiceLive.ServerEventInputAudioBufferSpeechStopped.audio_end_ms,
+  OpenAI.RealtimeServerEventInputAudioBufferSpeechStopped.audio_end_ms,
   "audioEndInMs",
   "javascript"
 );
 @@clientName(
-  VoiceLive.ServerEventInputAudioBufferSpeechStarted.audio_start_ms,
+  OpenAI.RealtimeServerEventInputAudioBufferSpeechStarted.audio_start_ms,
   "audioStartInMs",
   "javascript"
 );
@@ -1149,12 +1258,12 @@ using Azure.ClientGenerator.Core;
 );
 
 @@clientName(
-  VoiceLive.ServerVad.prefix_padding_ms,
+  OpenAI.RealtimeTurnDetectionServerVad.prefix_padding_ms,
   "prefixPaddingInMs",
   "javascript"
 );
 @@clientName(
-  VoiceLive.ServerVad.silence_duration_ms,
+  OpenAI.RealtimeTurnDetectionServerVad.silence_duration_ms,
   "silenceDurationInMs",
   "javascript"
 );
@@ -1207,13 +1316,6 @@ using Azure.ClientGenerator.Core;
   "javascript"
 );
 
-@@clientName(VoiceLive.ToolChoiceObject, "ToolChoiceSelection", "javascript");
-@@clientName(
-  VoiceLive.ToolChoiceFunctionObject,
-  "ToolChoiceFunctionSelection",
-  "javascript"
-);
-
 @@clientName(
   VoiceLive.InterimResponseConfigBase.latency_threshold_ms,
   "latencyThresholdInMs",
@@ -1256,3 +1358,82 @@ using Azure.ClientGenerator.Core;
 namespace VoiceLiveClient {
 
 }
+
+// -----------------------------------------------------------------------
+// Foundry pattern: hide OpenAI Responses-API tool models that are pulled in
+// transitively via `OpenAI.MCPTool extends OpenAI.Tool` but are NOT supported
+// by the Realtime/VoiceLive surface (computer / web-search / file-search /
+// image-gen / code-interpreter / shell / skill / container tools + their
+// params & filters). Marked internal so they don't appear in generated SDKs.
+// (VoiceLive only supports `function` and `mcp` tools.)
+// -----------------------------------------------------------------------
+@@access(OpenAI.ApplyPatchToolParam, Access.internal);
+@@access(OpenAI.ApproximateLocation, Access.internal);
+@@access(OpenAI.AutoCodeInterpreterToolParam, Access.internal);
+@@access(OpenAI.CodeInterpreterTool, Access.internal);
+@@access(OpenAI.ComparisonFilter, Access.internal);
+@@access(OpenAI.CompoundFilter, Access.internal);
+@@access(OpenAI.ComputerEnvironment, Access.internal);
+@@access(OpenAI.ComputerTool, Access.internal);
+@@access(OpenAI.ComputerUsePreviewTool, Access.internal);
+@@access(OpenAI.ContainerAutoParam, Access.internal);
+@@access(OpenAI.ContainerMemoryLimit, Access.internal);
+@@access(OpenAI.ContainerNetworkPolicyAllowlistParam, Access.internal);
+@@access(OpenAI.ContainerNetworkPolicyDisabledParam, Access.internal);
+@@access(OpenAI.ContainerNetworkPolicyParam, Access.internal);
+@@access(OpenAI.ContainerSkill, Access.internal);
+@@access(OpenAI.CustomGrammarFormatParam, Access.internal);
+@@access(OpenAI.CustomTextFormatParam, Access.internal);
+@@access(OpenAI.CustomToolParam, Access.internal);
+@@access(OpenAI.CustomToolParamFormat, Access.internal);
+@@access(OpenAI.EmptyModelParam, Access.internal);
+@@access(OpenAI.FileInputDetail, Access.internal);
+@@access(OpenAI.FileSearchTool, Access.internal);
+@@access(OpenAI.Filters, Access.internal);
+@@access(OpenAI.FunctionShellToolParam, Access.internal);
+@@access(OpenAI.FunctionShellToolParamEnvironment, Access.internal);
+@@access(
+  OpenAI.FunctionShellToolParamEnvironmentContainerReferenceParam,
+  Access.internal
+);
+@@access(
+  OpenAI.FunctionShellToolParamEnvironmentLocalEnvironmentParam,
+  Access.internal
+);
+@@access(OpenAI.FunctionTool, Access.internal);
+@@access(OpenAI.FunctionToolParam, Access.internal);
+@@access(OpenAI.HybridSearchOptions, Access.internal);
+@@access(OpenAI.ImageDetail, Access.internal);
+@@access(OpenAI.ImageGenTool, Access.internal);
+@@access(OpenAI.ImageGenToolInputImageMask, Access.internal);
+@@access(OpenAI.InlineSkillParam, Access.internal);
+@@access(OpenAI.InlineSkillSourceParam, Access.internal);
+@@access(OpenAI.InputFidelity, Access.internal);
+@@access(OpenAI.InputFileContent, Access.internal);
+@@access(OpenAI.InputImageContent, Access.internal);
+@@access(OpenAI.InputTextContent, Access.internal);
+@@access(OpenAI.LocalShellToolParam, Access.internal);
+@@access(OpenAI.LocalSkillParam, Access.internal);
+@@access(OpenAI.Metadata, Access.internal);
+@@access(OpenAI.NamespaceToolParam, Access.internal);
+@@access(OpenAI.Prompt, Access.internal);
+@@access(OpenAI.RankingOptions, Access.internal);
+@@access(OpenAI.ResponsePromptVariables, Access.internal);
+@@access(OpenAI.SkillReferenceParam, Access.internal);
+@@access(OpenAI.SpecificApplyPatchParam, Access.internal);
+@@access(OpenAI.SpecificFunctionShellParam, Access.internal);
+@@access(OpenAI.ToolChoiceAllowed, Access.internal);
+@@access(OpenAI.ToolChoiceCodeInterpreter, Access.internal);
+@@access(OpenAI.ToolChoiceComputer, Access.internal);
+@@access(OpenAI.ToolChoiceComputerUse, Access.internal);
+@@access(OpenAI.ToolChoiceComputerUsePreview, Access.internal);
+@@access(OpenAI.ToolChoiceCustom, Access.internal);
+@@access(OpenAI.ToolChoiceFileSearch, Access.internal);
+@@access(OpenAI.ToolChoiceImageGeneration, Access.internal);
+@@access(OpenAI.ToolChoiceWebSearchPreview, Access.internal);
+@@access(OpenAI.ToolChoiceWebSearchPreview20250311, Access.internal);
+@@access(OpenAI.ToolSearchToolParam, Access.internal);
+@@access(OpenAI.WebSearchApproximateLocation, Access.internal);
+@@access(OpenAI.WebSearchPreviewTool, Access.internal);
+@@access(OpenAI.WebSearchTool, Access.internal);
+@@access(OpenAI.WebSearchToolFilters, Access.internal);
