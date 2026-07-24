@@ -370,9 +370,25 @@ namespace Azure.AI.Projects {
   @@alternateType(SharepointPreviewTool, { identity: "Azure.AI.Extensions.OpenAI.SharepointPreviewTool", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
   @@alternateType(SharepointGroundingToolCall, { identity: "Azure.AI.Extensions.OpenAI.SharepointGroundingToolCall", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
   @@alternateType(SharepointGroundingToolCallOutput, { identity: "Azure.AI.Extensions.OpenAI.SharepointGroundingToolCallOutput", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
-  @@alternateType(StructuredOutputsOutputItem, { identity: "Azure.AI.Extensions.OpenAI.StructuredOutputsOutputItem", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
   @@alternateType(WorkIQPreviewTool, { identity: "Azure.AI.Extensions.OpenAI.WorkIQPreviewTool", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
-  @@alternateType(WorkflowActionOutputItem, { identity: "Azure.AI.Extensions.OpenAI.WorkflowActionOutputItem", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
+
+  // AgentServer custom/server code still consumes these protocol helper models
+  // directly. Keep them generated locally even though data-plane clients are
+  // scoped out and the shared OpenAI base is alternated to OpenAI.Responses.
+  @@usage(ApiErrorResponse, Usage.output | Usage.json);
+  @@usage(OpenAI.Error, Usage.output | Usage.json);
+  @@usage(StructuredOutputsOutputItem, Usage.output | Usage.json);
+  @@usage(WorkflowActionOutputItem, Usage.output | Usage.json);
+  @@alternateType(OpenAI.OutputItemLocalShellToolCall, { identity: "Azure.AI.Extensions.OpenAI.OutputItemLocalShellToolCall", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
+  @@alternateType(OpenAI.OutputItemLocalShellToolCallOutput, { identity: "Azure.AI.Extensions.OpenAI.OutputItemLocalShellToolCallOutput", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
+  @@alternateType(OpenAI.OutputItemFunctionShellCall, { identity: "Azure.AI.Extensions.OpenAI.OutputItemFunctionShellCall", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
+  @@alternateType(OpenAI.OutputItemFunctionShellCallOutput, { identity: "Azure.AI.Extensions.OpenAI.OutputItemFunctionShellCallOutput", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
+  @@alternateType(OpenAI.OutputItemCompactionBody, { identity: "Azure.AI.Extensions.OpenAI.OutputItemCompactionBody", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
+  @@alternateType(OpenAI.FunctionShellCallItemParam, { identity: "Azure.AI.Extensions.OpenAI.FunctionShellCallItemParam", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
+  @@alternateType(OpenAI.FunctionShellCallOutputItemParam, { identity: "Azure.AI.Extensions.OpenAI.FunctionShellCallOutputItemParam", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
+  @@alternateType(OpenAI.FunctionShellCallItemParamEnvironment, { identity: "Azure.AI.Extensions.OpenAI.FunctionShellCallItemParamEnvironment", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
+  @@alternateType(OpenAI.FunctionShellCallOutputOutcomeParam, { identity: "Azure.AI.Extensions.OpenAI.FunctionShellCallOutputOutcomeParam", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
+  @@alternateType(OpenAI.OutputMessageContent, { identity: "Azure.AI.Extensions.OpenAI.OutputMessageContent", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
 
   // Remove created_by from specific models to avoid and facilitate base union
   @@withoutOmittedProperties(
@@ -403,7 +419,5 @@ namespace Azure.AI.Projects {
   @@access(UpdateAgentRequest, Access.public);
   @@usage(UpdateAgentRequest, Usage.input);
 
-  @@access(OpenAI.ItemCustomToolCallOutput, Access.public);
-  @@usage(OpenAI.ItemCustomToolCallOutput, Usage.input | Usage.output);
-  @@clientName(OpenAI.ItemCustomToolCallOutput, "OutputItemCustomToolCallOutput");
+  @@alternateType(OpenAI.ItemCustomToolCallOutput, { identity: "OpenAI.Responses.FunctionCallOutputResponseItem", package: "OpenAI", minVersion: "2.12.0" }, "csharp");
 }
