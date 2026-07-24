@@ -23,6 +23,13 @@ model ConnectedRegistry
     SegmentName = "connectedRegistries",
     NamePattern = "^[a-zA-Z0-9]*$"
   >;
+
+  /**
+   * The user-assigned managed identity used by the on-prem connected registry to authenticate with the cloud registry for sync operations.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Unable to use `added` decorator on spread property. Use `...ManagedServiceIdentityProperty` instead when feature has been GA'd."
+  @added(Versions.vLatestPreview)
+  identity?: IdentityProperties;
 }
 
 @armResourceOperations
