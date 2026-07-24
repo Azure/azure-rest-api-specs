@@ -1,0 +1,171 @@
+{
+  "operationId": "FeatureFlagClient_PutFeatureFlag",
+  "title": "Creates a feature flag.",
+  "parameters": {
+    "endpoint": "https://{exampleAppConfigurationName}.azconfig.io",
+    "api-version": "2026-05-01-preview",
+    "name": "myFlag",
+    "entity": {
+      "enabled": true,
+      "description": "A feature flag with a time window filter",
+      "conditions": {
+        "requirement_type": "All",
+        "filters": [
+          {
+            "name": "Microsoft.TimeWindow",
+            "parameters": {
+              "Start": "2026-05-01T00:00:00Z",
+              "End": "2026-12-31T23:59:59Z"
+            }
+          }
+        ]
+      },
+      "variants": [
+        {
+          "name": "On",
+          "value": "true",
+          "content_type": "application/json",
+          "status_override": "None"
+        },
+        {
+          "name": "Off",
+          "value": "false",
+          "content_type": "application/json",
+          "status_override": "Disabled"
+        }
+      ],
+      "allocation": {
+        "default_when_disabled": "Off",
+        "default_when_enabled": "On",
+        "percentile": [
+          {
+            "variant": "On",
+            "from": 0,
+            "to": 80
+          },
+          {
+            "variant": "Off",
+            "from": 80,
+            "to": 100
+          }
+        ],
+        "user": [
+          {
+            "variant": "On",
+            "users": [
+              "alice",
+              "bob"
+            ]
+          }
+        ],
+        "group": [
+          {
+            "variant": "On",
+            "groups": [
+              "beta-testers"
+            ]
+          }
+        ],
+        "seed": "myFlag"
+      },
+      "telemetry": {
+        "enabled": true,
+        "metadata": {
+          "Tags.Environment": "production"
+        }
+      },
+      "tags": {
+        "team": "platform",
+        "environment": "production"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Content-Type": "application/json;profile=\"https://azconfig.io/mime-profiles/ff\";charset=utf-8",
+        "ETag": "W/\"7XpB48ET4VAlB9068ft6fKMyA3m\"",
+        "Last-Modified": "Tue, 27 Aug 2024 16:52:32 GMT",
+        "Sync-Token": "zAJw6V16=NjotMSM3ODk3NjM=;sn=789763"
+      },
+      "body": {
+        "etag": "7XpB48ET4VAlB9068ft6fKMyA3m",
+        "label": null,
+        "name": "myFlag",
+        "enabled": true,
+        "description": "A feature flag with a time window filter",
+        "conditions": {
+          "requirement_type": "All",
+          "filters": [
+            {
+              "name": "Microsoft.TimeWindow",
+              "parameters": {
+                "Start": "2026-05-01T00:00:00Z",
+                "End": "2026-12-31T23:59:59Z"
+              }
+            }
+          ]
+        },
+        "variants": [
+          {
+            "name": "On",
+            "value": "true",
+            "content_type": "application/json",
+            "status_override": "None"
+          },
+          {
+            "name": "Off",
+            "value": "false",
+            "content_type": "application/json",
+            "status_override": "Disabled"
+          }
+        ],
+        "allocation": {
+          "default_when_disabled": "Off",
+          "default_when_enabled": "On",
+          "percentile": [
+            {
+              "variant": "On",
+              "from": 0,
+              "to": 80
+            },
+            {
+              "variant": "Off",
+              "from": 80,
+              "to": 100
+            }
+          ],
+          "user": [
+            {
+              "variant": "On",
+              "users": [
+                "alice",
+                "bob"
+              ]
+            }
+          ],
+          "group": [
+            {
+              "variant": "On",
+              "groups": [
+                "beta-testers"
+              ]
+            }
+          ],
+          "seed": "myFlag"
+        },
+        "telemetry": {
+          "enabled": true,
+          "metadata": {
+            "Tags.Environment": "production"
+          }
+        },
+        "tags": {
+          "team": "platform",
+          "environment": "production"
+        },
+        "last_modified": "2024-08-27T16:52:32+00:00"
+      }
+    }
+  }
+}
