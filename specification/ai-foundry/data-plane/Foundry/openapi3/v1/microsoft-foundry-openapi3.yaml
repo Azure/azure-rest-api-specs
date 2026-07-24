@@ -44099,6 +44099,7 @@ components:
           red_team_taxonomy: '#/components/schemas/RedTeamTaxonomyItemGenerationParams'
           response_retrieval: '#/components/schemas/ResponseRetrievalItemGenerationParams'
           conversation_gen_preview: '#/components/schemas/ConversationGenPreviewItemGenerationParams'
+          target_completion: '#/components/schemas/TargetCompletionItemGenerationParams'
           synthetic_data_gen_preview: '#/components/schemas/SyntheticDataGenerationPreviewItemGenerationParams'
       description: Represents the set of parameters used to control item generation operations.
     ItemGenerationParamsType:
@@ -44112,6 +44113,7 @@ components:
             - red_team_taxonomy
             - synthetic_data_gen_preview
             - conversation_gen_preview
+            - target_completion
       description: The types of parameters for red team item generation.
     JobStatus:
       anyOf:
@@ -74301,6 +74303,25 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvalRunDataSource'
       description: Represents a data source for target-based completion evaluation configuration.
+    TargetCompletionItemGenerationParams:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - target_completion
+          description: The type of item generation parameters, always `target_completion`.
+        max_concurrency:
+          type: integer
+          format: int32
+          minimum: 1
+          description: The maximum number of target completions to execute concurrently. The services defaults to 1 if a value is not specified by the caller, which invokes the target sequentially.
+          default: 1
+      allOf:
+        - $ref: '#/components/schemas/ItemGenerationParams'
+      description: Represents the parameters for target completion item generation.
     TargetUpdate:
       type: object
       required:

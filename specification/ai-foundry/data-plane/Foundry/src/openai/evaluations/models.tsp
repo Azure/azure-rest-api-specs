@@ -220,6 +220,9 @@ union ItemGenerationParamsType {
 
   /** Parameters for conversation simulation item generation. */
   conversationGenPreview: "conversation_gen_preview",
+
+  /** Parameters for target completion item generation. */
+  targetCompletion: "target_completion",
 }
 
 /** The types of parameters for synthetic data generation item generation. */
@@ -527,6 +530,16 @@ model ConversationGenPreviewItemGenerationParams extends ItemGenerationParams {
 
   /** Sampling parameters for the conversation generation. */
   sampling_params?: ModelSamplingParams;
+}
+
+/** Represents the parameters for target completion item generation. */
+model TargetCompletionItemGenerationParams extends ItemGenerationParams {
+  /** The type of item generation parameters, always `target_completion`. */
+  type: ItemGenerationParamsType.targetCompletion;
+
+  /** The maximum number of target completions to execute concurrently. The services defaults to 1 if a value is not specified by the caller, which invokes the target sequentially. */
+  @minValue(1)
+  max_concurrency?: int32 = 1;
 }
 
 // ── Trace Source types ────────────────────────────────────────────────────────
