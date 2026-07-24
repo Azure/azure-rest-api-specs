@@ -8,6 +8,7 @@ import "./common.models.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.Core;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Chaos;
 
@@ -16,8 +17,7 @@ namespace Microsoft.Chaos;
  */
 @parentResource(Workspace)
 @singleton("latest")
-model WorkspaceDiscovery
-  is Azure.ResourceManager.ProxyResource<WorkspaceDiscoveryProperties> {
+model WorkspaceDiscovery is ProxyResource<WorkspaceDiscoveryProperties> {
   ...ResourceNameParameter<
     Resource = WorkspaceDiscovery,
     KeyName = "discoveryName",
@@ -60,7 +60,14 @@ model WorkspaceDiscoveryProperties {
    * The workspace ID this discovery belongs to.
    */
   @visibility(Lifecycle.Read)
-  workspaceId: string;
+  workspaceId: Azure.Core.armResourceIdentifier;
+
+  /**
+   * The resource snapshot ID produced by this discovery.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  resourceSnapshotId?: string;
 }
 
 /**
