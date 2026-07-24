@@ -883,7 +883,7 @@ namespace Azure.AI.Projects {
 
   @@usage(FabricIQPreviewTool, Usage.input | Usage.output);
   @@clientName(FabricIQPreviewTool.server_url, "ServerUri");
-  @@clientName(WebIQPreviewTool.server_url, "ServerUri");
+  //@@clientName(WebIQPreviewTool.server_url, "ServerUri");
   @@clientName(
     CaptureStructuredOutputsTool.outputs,
     "OutputDefinition",
