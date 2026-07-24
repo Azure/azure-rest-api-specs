@@ -23669,6 +23669,18 @@ model VirtualHubProperties {
   virtualRouterIps?: string[];
 
   /**
+   * IPv6 Address-prefix for this VirtualHub.
+   */
+  @added(Versions.v2025_09_01)
+  addressPrefixV6?: string;
+
+  /**
+   * VirtualRouter IPv6 IPs.
+   */
+  @added(Versions.v2025_09_01)
+  virtualRouterIpsV6?: string[];
+
+  /**
    * Flag to control transit for VirtualRouter hub.
    */
   allowBranchToBranchTraffic?: boolean;
@@ -24008,10 +24020,34 @@ model HubVirtualNetworkConnectionProperties {
   routingConfiguration?: RoutingConfiguration;
 
   /**
+   * Enable Only IPv6 Peering for this connection.
+   */
+  @added(Versions.v2025_09_01)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  enableOnlyIpv6Peering?: EnableOnlyIpv6PeeringState;
+
+  /**
    * The provisioning state of the hub virtual network connection resource.
    */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+}
+
+/**
+ * The state of IPv6 peering.
+ */
+union EnableOnlyIpv6PeeringState {
+  string,
+
+  /**
+   * IPv6 peering is enabled.
+   */
+  Enabled: "Enabled",
+
+  /**
+   * IPv6 peering is disabled.
+   */
+  Disabled: "Disabled",
 }
 
 /**
