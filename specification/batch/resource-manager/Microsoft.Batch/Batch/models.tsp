@@ -264,6 +264,7 @@ enum AuthenticationMode {
   /**
    * The authentication mode using task authentication tokens.
    */
+  @removed(Versions.v2026_08_01)
   TaskAuthenticationToken,
 }
 
@@ -647,6 +648,28 @@ enum ComputeNodeDeallocationOption {
    * Allow currently running tasks to complete, then wait for all task data retention periods to expire. Schedule no new tasks while waiting. Remove nodes when all task retention periods have expired.
    */
   RetainedData,
+}
+
+/**
+ * Determines what to do with a node and its running task(s) after it has been selected for deallocation. This is the set of values that can be requested; `RetainedData` is no longer accepted as of the 2026-08-01 API version.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "legacy design"
+@added(Versions.v2026_08_01)
+enum RequestedComputeNodeDeallocationOption {
+  /**
+   * Terminate running task processes and requeue the tasks. The tasks will run again when a node is available. Remove nodes as soon as tasks have been terminated.
+   */
+  Requeue,
+
+  /**
+   * Terminate running tasks. The tasks will be completed with failureInfo indicating that they were terminated, and will not run again. Remove nodes as soon as tasks have been terminated.
+   */
+  Terminate,
+
+  /**
+   * Allow currently running tasks to complete. Schedule no new tasks while waiting. Remove nodes when all tasks have completed.
+   */
+  TaskCompletion,
 }
 
 /**
@@ -1629,14 +1652,14 @@ model ApplicationPackageProperties {
   format?: string;
 
   /**
-   * The URL for the application package in Azure Storage.
+   * The URL for the application package in Azure Storage. This property is only returned for the PUT application package (create or update) operation. For the GET application package and POST activate application package operations, this property is not populated for API versions newer than 2025-06-01.
    */
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   storageUrl?: string;
 
   /**
-   * The UTC time at which the Azure Storage URL will expire.
+   * The UTC time at which the Azure Storage URL will expire. This property is only returned for the PUT application package (create or update) operation. For the GET application package and POST activate application package operations, this property is not populated for API versions newer than 2025-06-01.
    */
   @visibility(Lifecycle.Read)
   storageUrlExpiry?: utcDateTime;
@@ -2108,6 +2131,18 @@ model PoolProperties {
   vmSize?: string;
 
   /**
+   * Specifies the profile of VM sizes and the allocation strategy used to allocate compute nodes for an Instance Mix pool. When specified, vmSize must be "Mix". This property can only be changed while the pool has no compute nodes.
+   */
+  @added(Versions.v2026_08_01)
+  vmSkuProfile?: VirtualMachineSkuProfile;
+
+  /**
+   * Specifies the hardware settings for the compute nodes.
+   */
+  @added(Versions.v2026_08_01)
+  hardwareProfile?: HardwareProfile;
+
+  /**
    * Deployment configuration properties.
    */
   @summary("This property describes the virtual machines that the pool nodes will be deployed on.")
@@ -2346,6 +2381,95 @@ model VirtualMachineConfiguration {
    */
   @summary("Specifies the service artifact reference id used to set same image version for all virtual machines in the scale set when using 'latest' image version.")
   serviceArtifactReference?: ServiceArtifactReference;
+}
+
+/**
+ * Specifies the set of VM sizes and the allocation strategy used to allocate compute nodes for an Instance Mix pool.
+ */
+@added(Versions.v2026_08_01)
+model VirtualMachineSkuProfile {
+  /**
+   * The list of VM sizes (1 to 5) that may be allocated for the pool. All sizes must share the same vCPU count and VM family. This must be specified when the vmSkuProfile is provided during pool creation.
+   */
+  @minItems(1)
+  @maxItems(5)
+  @identifiers(#["name"])
+  vmSizes?: VirtualMachineSkuProfileVMSize[];
+
+  /**
+   * The allocation strategy used to select VM sizes from vmSizes. Defaults to LowestPrice when not specified.
+   */
+  allocationStrategy?: VirtualMachineSkuAllocationStrategy;
+}
+
+/**
+ * Specifies a single VM size that may be allocated for an Instance Mix pool.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "VMSize matches the existing Batch vmSize terminology for VM sizes."
+@added(Versions.v2026_08_01)
+model VirtualMachineSkuProfileVMSize {
+  /**
+   * The name of the VM size (for example, "Standard_D8s_v5").
+   */
+  name: string;
+
+  /**
+   * The 0-based rank (a.k.a. priority) associated with this VM size. Lower values indicate higher priority. Rank is required only when the allocation strategy is 'Prioritized' and must be omitted otherwise.
+   */
+  rank?: int32;
+}
+
+/**
+ * Specifies the allocation strategy that the Fungible Compute Platform uses to select VM sizes from the vmSkuProfile when allocating nodes for an Instance Mix pool.
+ */
+@added(Versions.v2026_08_01)
+union VirtualMachineSkuAllocationStrategy {
+  string,
+
+  /**
+   * Select the cheapest available SKU in the region. This is the default strategy.
+   */
+  LowestPrice: "LowestPrice",
+
+  /**
+   * Select the SKU with the most regional physical capacity.
+   */
+  CapacityOptimized: "CapacityOptimized",
+
+  /**
+   * Follow the customer-defined ranking via the 0-based rank, falling back to the next rank when a preferred SKU is unavailable.
+   */
+  Prioritized: "Prioritized",
+}
+
+/**
+ * Specifies the hardware settings for the compute nodes.
+ */
+@added(Versions.v2026_08_01)
+model HardwareProfile {
+  /**
+   * Specifies the properties for customizing the size of the virtual machine.
+   */
+  vmSizeProperties?: VMSizeProperties;
+}
+
+/**
+ * Specifies the properties for customizing the size of the virtual machine.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "VMSizeProperties matches the Azure Compute VM size customization model naming."
+@added(Versions.v2026_08_01)
+model VMSizeProperties {
+  /**
+   * Specifies the number of vCPUs available for the VM. When this property is not specified in the request body the default behavior is to set it to the value of vCPUs available for that VM size.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "vCPUsAvailable matches the Azure Compute VM size property naming."
+  vCPUsAvailable?: int32;
+
+  /**
+   * Specifies the vCPU to physical core ratio. When this property is not specified in the request body the default behavior is set to the value of vCPUsPerCore for the VM Size. **Setting this property to 1 also means that hyper-threading is disabled.**
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "vCPUsPerCore matches the Azure Compute VM size property naming."
+  vCPUsPerCore?: int32;
 }
 
 /**
@@ -2875,7 +2999,8 @@ model FixedScaleSettings {
    */
   @summary("Determines what to do with a node and its running task(s) after it has been selected for deallocation.")
   @visibility(Lifecycle.Create, Lifecycle.Update)
-  nodeDeallocationOption?: ComputeNodeDeallocationOption;
+  @typeChangedFrom(Versions.v2026_08_01, ComputeNodeDeallocationOption)
+  nodeDeallocationOption?: RequestedComputeNodeDeallocationOption;
 }
 
 /**

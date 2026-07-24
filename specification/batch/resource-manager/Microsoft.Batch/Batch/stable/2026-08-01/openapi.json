@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "BatchManagementClient",
-    "version": "2025-06-01",
+    "version": "2026-08-01",
     "description": "The Batch Management Client.",
     "x-typespec-generated": [
       {
@@ -2971,8 +2971,7 @@
       "description": "The authentication mode for the Batch account.",
       "enum": [
         "SharedKey",
-        "AAD",
-        "TaskAuthenticationToken"
+        "AAD"
       ],
       "x-ms-enum": {
         "name": "AuthenticationMode",
@@ -2987,11 +2986,6 @@
             "name": "AAD",
             "value": "AAD",
             "description": "The authentication mode using Microsoft Entra ID."
-          },
-          {
-            "name": "TaskAuthenticationToken",
-            "value": "TaskAuthenticationToken",
-            "description": "The authentication mode using task authentication tokens."
           }
         ]
       }
@@ -4524,13 +4518,23 @@
           "description": "At least one of targetDedicatedNodes, targetLowPriorityNodes must be set."
         },
         "nodeDeallocationOption": {
-          "$ref": "#/definitions/ComputeNodeDeallocationOption",
+          "$ref": "#/definitions/RequestedComputeNodeDeallocationOption",
           "title": "Determines what to do with a node and its running task(s) after it has been selected for deallocation.",
           "description": "If omitted, the default value is Requeue.",
           "x-ms-mutability": [
             "update",
             "create"
           ]
+        }
+      }
+    },
+    "HardwareProfile": {
+      "type": "object",
+      "description": "Specifies the hardware settings for the compute nodes.",
+      "properties": {
+        "vmSizeProperties": {
+          "$ref": "#/definitions/VMSizeProperties",
+          "description": "Specifies the properties for customizing the size of the virtual machine."
         }
       }
     },
@@ -5709,6 +5713,14 @@
           "title": "The size of virtual machines in the pool. All VMs in a pool are the same size.",
           "description": "For information about available VM sizes, see Sizes for Virtual Machines in Azure (https://learn.microsoft.com/azure/virtual-machines/sizes/overview). Batch supports all Azure VM sizes except STANDARD_A0 and those with premium storage (STANDARD_GS, STANDARD_DS, and STANDARD_DSV2 series)."
         },
+        "vmSkuProfile": {
+          "$ref": "#/definitions/VirtualMachineSkuProfile",
+          "description": "Specifies the profile of VM sizes and the allocation strategy used to allocate compute nodes for an Instance Mix pool. When specified, vmSize must be \"Mix\". This property can only be changed while the pool has no compute nodes."
+        },
+        "hardwareProfile": {
+          "$ref": "#/definitions/HardwareProfile",
+          "description": "Specifies the hardware settings for the compute nodes."
+        },
         "deploymentConfiguration": {
           "$ref": "#/definitions/DeploymentConfiguration",
           "title": "This property describes the virtual machines that the pool nodes will be deployed on.",
@@ -6183,6 +6195,36 @@
           },
           "x-ms-identifiers": []
         }
+      }
+    },
+    "RequestedComputeNodeDeallocationOption": {
+      "type": "string",
+      "description": "Determines what to do with a node and its running task(s) after it has been selected for deallocation. This is the set of values that can be requested; `RetainedData` is no longer accepted as of the 2026-08-01 API version.",
+      "enum": [
+        "Requeue",
+        "Terminate",
+        "TaskCompletion"
+      ],
+      "x-ms-enum": {
+        "name": "RequestedComputeNodeDeallocationOption",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Requeue",
+            "value": "Requeue",
+            "description": "Terminate running task processes and requeue the tasks. The tasks will run again when a node is available. Remove nodes as soon as tasks have been terminated."
+          },
+          {
+            "name": "Terminate",
+            "value": "Terminate",
+            "description": "Terminate running tasks. The tasks will be completed with failureInfo indicating that they were terminated, and will not run again. Remove nodes as soon as tasks have been terminated."
+          },
+          {
+            "name": "TaskCompletion",
+            "value": "TaskCompletion",
+            "description": "Allow currently running tasks to complete. Schedule no new tasks while waiting. Remove nodes when all tasks have completed."
+          }
+        ]
       }
     },
     "ResizeError": {
@@ -6954,6 +6996,22 @@
         "type"
       ]
     },
+    "VMSizeProperties": {
+      "type": "object",
+      "description": "Specifies the properties for customizing the size of the virtual machine.",
+      "properties": {
+        "vCPUsAvailable": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the number of vCPUs available for the VM. When this property is not specified in the request body the default behavior is to set it to the value of vCPUs available for that VM size."
+        },
+        "vCPUsPerCore": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the vCPU to physical core ratio. When this property is not specified in the request body the default behavior is set to the value of vCPUsPerCore for the VM Size. **Setting this property to 1 also means that hyper-threading is disabled.**"
+        }
+      }
+    },
     "VirtualMachineConfiguration": {
       "type": "object",
       "title": "The configuration for compute nodes in a pool based on the Azure Virtual Machines infrastructure.",
@@ -7054,6 +7112,76 @@
           "readOnly": true
         }
       }
+    },
+    "VirtualMachineSkuAllocationStrategy": {
+      "type": "string",
+      "description": "Specifies the allocation strategy that the Fungible Compute Platform uses to select VM sizes from the vmSkuProfile when allocating nodes for an Instance Mix pool.",
+      "enum": [
+        "LowestPrice",
+        "CapacityOptimized",
+        "Prioritized"
+      ],
+      "x-ms-enum": {
+        "name": "VirtualMachineSkuAllocationStrategy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "LowestPrice",
+            "value": "LowestPrice",
+            "description": "Select the cheapest available SKU in the region. This is the default strategy."
+          },
+          {
+            "name": "CapacityOptimized",
+            "value": "CapacityOptimized",
+            "description": "Select the SKU with the most regional physical capacity."
+          },
+          {
+            "name": "Prioritized",
+            "value": "Prioritized",
+            "description": "Follow the customer-defined ranking via the 0-based rank, falling back to the next rank when a preferred SKU is unavailable."
+          }
+        ]
+      }
+    },
+    "VirtualMachineSkuProfile": {
+      "type": "object",
+      "description": "Specifies the set of VM sizes and the allocation strategy used to allocate compute nodes for an Instance Mix pool.",
+      "properties": {
+        "vmSizes": {
+          "type": "array",
+          "description": "The list of VM sizes (1 to 5) that may be allocated for the pool. All sizes must share the same vCPU count and VM family. This must be specified when the vmSkuProfile is provided during pool creation.",
+          "minItems": 1,
+          "maxItems": 5,
+          "items": {
+            "$ref": "#/definitions/VirtualMachineSkuProfileVMSize"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "allocationStrategy": {
+          "$ref": "#/definitions/VirtualMachineSkuAllocationStrategy",
+          "description": "The allocation strategy used to select VM sizes from vmSizes. Defaults to LowestPrice when not specified."
+        }
+      }
+    },
+    "VirtualMachineSkuProfileVMSize": {
+      "type": "object",
+      "description": "Specifies a single VM size that may be allocated for an Instance Mix pool.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the VM size (for example, \"Standard_D8s_v5\")."
+        },
+        "rank": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The 0-based rank (a.k.a. priority) associated with this VM size. Lower values indicate higher priority. Rank is required only when the allocation strategy is 'Prioritized' and must be omitted otherwise."
+        }
+      },
+      "required": [
+        "name"
+      ]
     },
     "WindowsConfiguration": {
       "type": "object",
