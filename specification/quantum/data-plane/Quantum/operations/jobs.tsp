@@ -7,6 +7,7 @@ import "./operations.tsp";
 import "../common/models.tsp";
 import "../common/models-jobs.tsp";
 
+using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Quantum.Workspace;
@@ -21,8 +22,10 @@ namespace Quantum.Workspace.Services {
     create is CreateOperation<JobDetails>;
 
     /** Update job properties. */
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Uses a custom signature to keep JobUpdateOptions as PATCH request while returning JobDetails on the shared jobs route."
+    @sharedRoute
     @added(QuantumWorkspaceAPIVersion.v2025_09_01_preview)
-    update is PatchOperation<JobUpdateOptions>;
+    update is PatchOperation<JobUpdateOptions, JobDetails>;
 
     /** OLD METHOD: Update job properties. */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" """
@@ -30,6 +33,7 @@ namespace Quantum.Workspace.Services {
       The Azure.Core.ResourceUpdate does not support NoContentResponse and the JsonPatchDocument request body.
       See https://github.com/Azure/typespec-azure/issues/475
       """
+    @sharedRoute
     @removed(QuantumWorkspaceAPIVersion.v2025_09_01_preview)
     @renamedFrom(QuantumWorkspaceAPIVersion.v2025_09_01_preview, "update")
     updateOld is PatchOperationOld<JobDetails>;
