@@ -25,7 +25,7 @@ These are the global settings for the Relay API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2024-01
+tag: package-2026-01
 ```
 
 ### Tag: package-2021-11-01
@@ -81,6 +81,15 @@ These settings apply only when `--tag=package-2024-01` is specified on the comma
 ``` yaml $(tag) == 'package-2024-01'
 input-file:
 - stable/2024-01-01/relay.json
+```
+
+### Tag: package-2026-01
+
+These settings apply only when `--tag=package-2026-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2026-01'
+input-file:
+- stable/2026-01-01/relay.json
 ```
 
 ---

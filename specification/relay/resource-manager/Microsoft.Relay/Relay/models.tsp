@@ -1,8 +1,10 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 namespace Microsoft.Relay;
@@ -328,6 +330,23 @@ model Sku {
 }
 
 /**
+ * The minimum TLS version for the cluster to support, e.g. 1.2
+ */
+union TlsVersion {
+  string,
+
+  /**
+   * TLS version 1.2
+   */
+  `1.2`: "1.2",
+
+  /**
+   * TLS version 1.3
+   */
+  `1.3`: "1.3",
+}
+
+/**
  * Properties of the namespace.
  */
 model RelayNamespaceProperties {
@@ -379,6 +398,12 @@ model RelayNamespaceProperties {
    * This determines if traffic is allowed over public network. By default it is enabled.
    */
   publicNetworkAccess?: PublicNetworkAccess = "Enabled";
+
+  /**
+   * The minimum TLS version for the cluster to support, e.g. 1.2
+   */
+  @added(Versions.v2026_01_01)
+  minimumTlsVersion?: TlsVersion = "1.2";
 }
 
 /**
