@@ -211,6 +211,30 @@ interface SingleDocumentTranslationClient {
   "javascript"
 );
 
+@@clientName(
+  DocumentTranslation.GetTranslationsStatusOptions.maxpagesize,
+  "maxPageSize",
+  "javascript"
+);
+
+@@clientName(
+  DocumentTranslation.GetDocumentsStatusOptions.maxpagesize,
+  "maxPageSize",
+  "javascript"
+);
+
+@@clientName(
+  DocumentTranslation.GetTranslationsStatusOptions.orderby,
+  "orderBy",
+  "javascript"
+);
+
+@@clientName(
+  DocumentTranslation.GetDocumentsStatusOptions.orderby,
+  "orderBy",
+  "javascript"
+);
+
 @@clientName(DocumentTranslation.Glossary.format, "file_format", "python");
 
 @@clientName(DocumentTranslation.Glossary.version, "format_version", "python");
