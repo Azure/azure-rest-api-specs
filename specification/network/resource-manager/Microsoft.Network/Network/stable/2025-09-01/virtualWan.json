@@ -8540,6 +8540,14 @@
           "$ref": "#/definitions/RoutingConfiguration",
           "description": "The Routing Configuration indicating the associated and propagated route tables on this connection."
         },
+        "enableOnlyIpv6Peering": {
+          "$ref": "./common.json#/definitions/EnableOnlyIpv6PeeringState",
+          "description": "Enable Only IPv6 Peering for this connection.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "provisioningState": {
           "$ref": "./common.json#/definitions/Common.ProvisioningState",
           "description": "The provisioning state of the hub virtual network connection resource.",
@@ -9748,6 +9756,17 @@
         "virtualRouterIps": {
           "type": "array",
           "description": "VirtualRouter IPs.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "addressPrefixV6": {
+          "type": "string",
+          "description": "IPv6 Address-prefix for this VirtualHub."
+        },
+        "virtualRouterIpsV6": {
+          "type": "array",
+          "description": "VirtualRouter IPv6 IPs.",
           "items": {
             "type": "string"
           }
