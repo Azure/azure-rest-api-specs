@@ -50,6 +50,20 @@ interface SingleDocumentTranslationClient {
   "!autorest"
 );
 
+@@clientDoc(
+  DocumentTranslationClient,
+  "Client for the Azure AI Document Translation service, used to translate batches of documents stored in Azure Blob Storage.",
+  DocumentationMode.replace,
+  "javascript"
+);
+
+@@clientDoc(
+  SingleDocumentTranslationClient,
+  "Client for the Azure AI Document Translation service, used to translate a single document.",
+  DocumentationMode.replace,
+  "javascript"
+);
+
 @@clientName(
   DocumentTranslation.StatusSummary,
   "translationStatusSummary",
@@ -161,6 +175,42 @@ interface SingleDocumentTranslationClient {
   "python"
 );
 
+@@clientName(
+  DocumentTranslation.TranslationStatus.createdDateTimeUtc,
+  "createdAt",
+  "javascript"
+);
+
+@@clientName(
+  DocumentTranslation.TranslationStatus.lastActionDateTimeUtc,
+  "lastActionAt",
+  "javascript"
+);
+
+@@clientName(
+  DocumentTranslation.GetTranslationsStatusOptions.createdDateTimeUtcStart,
+  "createdAfter",
+  "javascript"
+);
+
+@@clientName(
+  DocumentTranslation.GetTranslationsStatusOptions.createdDateTimeUtcEnd,
+  "createdBefore",
+  "javascript"
+);
+
+@@clientName(
+  DocumentTranslation.GetDocumentsStatusOptions.createdDateTimeUtcStart,
+  "createdAfter",
+  "javascript"
+);
+
+@@clientName(
+  DocumentTranslation.GetDocumentsStatusOptions.createdDateTimeUtcEnd,
+  "createdBefore",
+  "javascript"
+);
+
 @@clientName(DocumentTranslation.Glossary.format, "file_format", "python");
 
 @@clientName(DocumentTranslation.Glossary.version, "format_version", "python");
@@ -181,6 +231,18 @@ interface SingleDocumentTranslationClient {
   DocumentTranslation.DocumentStatus.lastActionDateTimeUtc,
   "last_updated_on",
   "python"
+);
+
+@@clientName(
+  DocumentTranslation.DocumentStatus.createdDateTimeUtc,
+  "createdAt",
+  "javascript"
+);
+
+@@clientName(
+  DocumentTranslation.DocumentStatus.lastActionDateTimeUtc,
+  "lastActionAt",
+  "javascript"
 );
 
 @@clientName(
