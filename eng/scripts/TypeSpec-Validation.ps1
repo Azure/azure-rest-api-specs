@@ -34,6 +34,8 @@ foreach ($typespecFolder in $typespecFolders) {
 }
 
 $typespecFoldersWithFailures = @()
+$suppressedCount = 0
+$passedCount = 0
 if ($typespecFolders) {
   $typespecFolders = $typespecFolders.Split('', [System.StringSplitOptions]::RemoveEmptyEntries)
   foreach ($typespecFolder in $typespecFolders) {
@@ -44,6 +46,7 @@ if ($typespecFolders) {
       if ($suppression) {
         $reason = $suppression["reason"] ?? "<no reason specified>"
         LogInfo "Suppressed: $reason"
+        $suppressedCount++
         LogGroupEnd
         continue
       }
@@ -68,6 +71,9 @@ if ($typespecFolders) {
       $errorString += "`nFor more detailed docs see https://aka.ms/azsdk/specs/typespec-validation"
       LogError $errorString
     }
+    else {
+      $passedCount++
+    }
     if ($GitClean) {
       git restore .
       git clean -df
@@ -81,6 +87,49 @@ else {
     LogJobFailure
     exit 1
   }
+}
+
+# Write job summary to GITHUB_STEP_SUMMARY if available
+if ($env:GITHUB_STEP_SUMMARY) {
+  $summary = @()
+
+  if ($typespecFoldersWithFailures.Count -gt 0) {
+    $summary += "### :x: TypeSpec Validation: $($typespecFoldersWithFailures.Count) spec(s) failed"
+    $summary += ""
+
+    if ($passedCount -gt 0 -or $suppressedCount -gt 0) {
+      $parts = @(":x: $($typespecFoldersWithFailures.Count) failed")
+      if ($passedCount -gt 0) { $parts += ":white_check_mark: $passedCount passed" }
+      if ($suppressedCount -gt 0) { $parts += ":fast_forward: $suppressedCount suppressed" }
+      $summary += ($parts -join " | ")
+      $summary += ""
+    }
+
+    $summary += "| Failed spec |"
+    $summary += "| --- |"
+    foreach ($folder in $typespecFoldersWithFailures) {
+      $summary += "| ``$folder`` |"
+    }
+    $summary += ""
+    $summary += "Run locally to reproduce ([docs](https://aka.ms/azsdk/specs/typespec-validation)):"
+    $summary += ""
+    $summary += '```bash'
+    $summary += "npm ci"
+    foreach ($folder in $typespecFoldersWithFailures) {
+      $summary += "npx tsv $folder"
+    }
+    $summary += '```'
+  }
+  else {
+    $totalChecked = $passedCount + $suppressedCount
+    $summary += "### :white_check_mark: TypeSpec Validation: all $totalChecked spec(s) passed"
+    if ($suppressedCount -gt 0) {
+      $summary += ""
+      $summary += ":white_check_mark: $passedCount passed | :fast_forward: $suppressedCount suppressed"
+    }
+  }
+
+  $summary -join "`n" | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append -Encoding utf8
 }
 
 if ($typespecFoldersWithFailures.Count -gt 0) {
