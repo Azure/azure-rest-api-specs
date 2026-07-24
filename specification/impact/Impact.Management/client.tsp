@@ -1,8 +1,13 @@
 import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
+import "@typespec/versioning";
 
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ClientGenerator.Core;
+using Azure.ResourceManager;
 using Microsoft.Impact;
 
 @@clientName(Microsoft.Impact, "ImpactReportingMgmtClient", "java");
@@ -73,4 +78,39 @@ using Microsoft.Impact;
   Azure.ResourceManager.CommonTypes.Resource.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
+);
+
+// JavaScript SDK visibility workaround:
+// For write operations whose body models contain server-side read-only properties
+// that are also required, provide write-specific models that omit those fields so
+// JS SDK users are not forced to supply server-computed values.
+// Pattern: https://github.com/Azure/azure-rest-api-specs/pull/42784
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Write-only helper models for JS SDK alternate types; operations are defined on the original resources in connectors.tsp"
+namespace Microsoft.Impact {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
+  @doc("Connector properties for create/update operations, omitting server-side read-only fields (connectorId, tenantId, lastRunTimeStamp, processingState, processingStateMessage are required+read-only in the canonical model).")
+  model ConnectorPropertiesCreate {
+    @doc("connector type")
+    connectorType: Platform;
+  }
+
+  @subscriptionResource
+  @doc("Connector resource for create/update operations.")
+  model ConnectorResourceCreate
+    is Azure.ResourceManager.ProxyResource<ConnectorPropertiesCreate> {
+    @doc("The name of the connector")
+    @pattern("^[a-zA-Z0-9-]{3,24}$")
+    @key("connectorName")
+    @segment("connectors")
+    @path
+    name: string;
+
+    ...ConnectorManagedUserAssignedIdentityProperty;
+  }
+}
+
+@@alternateType(
+  Connectors.createOrUpdate::parameters.resource,
+  ConnectorResourceCreate,
+  "javascript"
 );
