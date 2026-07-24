@@ -38,13 +38,6 @@ model Compute is Azure.ResourceManager.ProxyResource<ComputeProperties, false> {
   etag?: string;
 
   /**
-   * The location of the compute resource.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API defines 'location' on the ProxyResource envelope to track compute region independently from the parent account"
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  location?: string;
-
-  /**
    * Resource tags.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API defines 'tags' on the resource envelope for backward compatibility"
@@ -78,8 +71,24 @@ interface Computes {
   /**
    * Creates or updates a compute associated with the Cognitive Services account.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Compute creation is a long-running operation that returns 202 Accepted in addition to 200/201; the additional async response is intentional."
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "The operation is tracked via the Azure-AsyncOperation header; the service does not return a Location header for this LRO."
   @tag("Computes")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Compute>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    Compute,
+    Response =
+      | ArmResourceUpdatedResponse<Compute>
+      | ArmResourceCreatedResponse<
+          Compute,
+          ArmAsyncOperationHeader<FinalResult = Compute> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse<
+          "Resource creation accepted.",
+          ArmAsyncOperationHeader<FinalResult = Compute> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+  >;
 
   /**
    * Updates a compute associated with the Cognitive Services account.

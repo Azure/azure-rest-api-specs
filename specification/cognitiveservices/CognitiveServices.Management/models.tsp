@@ -5977,6 +5977,12 @@ model ComputeProperties {
   computeType: ComputeType;
 
   /**
+   * The location of the compute resource.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location?: string;
+
+  /**
    * Provisioning state of the compute resource.
    */
   @visibility(Lifecycle.Read)
