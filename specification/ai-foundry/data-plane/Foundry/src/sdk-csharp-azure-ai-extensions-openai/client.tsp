@@ -1,7 +1,7 @@
 import "../sdk-common/error.default.tsp";
 import "../common/servicepatterns.tsp";
-import "../openai-conversations/routes.tsp";
-import "../openai-responses/routes.tsp";
+import "../openai/conversations/routes.tsp";
+import "../openai/responses/routes.tsp";
 import "../toolboxes/models.tsp";
 import "../agents/models.tsp";
 import "../skills/models.tsp";
@@ -413,6 +413,7 @@ namespace Azure.AI.Projects {
   );
   @@clientName(A2APreviewTool.base_url, "BaseUri");
   @@clientName(FabricIQPreviewTool.server_url, "ServerUri");
+  //@@clientName(WebIQPreviewTool.server_url, "ServerUri");
   @@clientName(
     CaptureStructuredOutputsTool.outputs,
     "OutputDefinition",

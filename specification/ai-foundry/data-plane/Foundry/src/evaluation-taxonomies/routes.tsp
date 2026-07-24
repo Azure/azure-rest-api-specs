@@ -8,10 +8,12 @@ namespace Azure.AI.Projects;
 alias EvaluationTaxonomiesPreviewHeader = WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.evaluations_v1_preview>;
 
 alias EvaluationTaxonomiesFilterQueryParamsTraits = {
+  /** The input name query parameter. */
   @query("inputName")
   @doc("Filter by the evaluation input name.")
   inputName?: string;
 
+  /** The input type query parameter. */
   @query("inputType")
   @doc("Filter by taxonomy input type.")
   inputType?: string;
@@ -73,7 +75,6 @@ interface EvaluationTaxonomies {
   /** Modifies the specified evaluation taxonomy with the provided changes. */
   #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @summary("Update an evaluation taxonomy")
-  @doc("Update an evaluation taxonomy.")
   @patch(#{ implicitOptionality: true })
   @route("/evaluationtaxonomies/{name}")
   update is FoundryOperation<
