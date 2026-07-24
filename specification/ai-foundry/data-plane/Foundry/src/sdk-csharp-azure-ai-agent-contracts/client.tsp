@@ -29,6 +29,7 @@ namespace Azure.AI.Projects {
   @@scope(Responses.cancelResponse, "!csharp");
   @@scope(Responses.listInputItems, "!csharp");
   @@scope(Responses.listResponses, "!csharp");
+  @@scope(Responses.Compactconversation, "!csharp");
 
   @@scope(Conversations.createConversation, "!csharp");
   @@scope(Conversations.updateConversation, "!csharp");
