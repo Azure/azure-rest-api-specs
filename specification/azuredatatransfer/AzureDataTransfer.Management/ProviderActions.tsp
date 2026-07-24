@@ -65,6 +65,16 @@ interface AzureDataTransfer {
     Request = Schema,
     Response = ValidateSchemaResult
   >;
+
+  /**
+   * Retrieves the pipeline metadata associated with a specified pipeline.
+   */
+  @added(Versions.v2026_02_06_preview)
+  @autoRoute
+  listPipelineMetadata is ArmProviderActionSync<
+    Request = ListPipelineMetadataRequest,
+    Response = ListPipelineMetadataResult
+  >;
 }
 
 @@clientName(
