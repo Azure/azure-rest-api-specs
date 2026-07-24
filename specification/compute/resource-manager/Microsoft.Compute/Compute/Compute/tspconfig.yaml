@@ -1,5 +1,14 @@
+parameters:
+  "service-dir":
+    default: "sdk/compute"
 emit:
   - "@azure-tools/typespec-autorest"
+  - "@azure-typespec/http-client-csharp-mgmt"
+  - "@azure-typespec/http-client-csharp-provisioning"
+  - "@azure-tools/typespec-go"
+  - "@azure-tools/typespec-python"
+  - "@azure-tools/typespec-ts"
+  - "@azure-tools/typespec-java"
 options:
   "@azure-tools/typespec-autorest":
     emitter-output-dir: "{project-root}"
@@ -8,6 +17,52 @@ options:
     arm-types-dir: "{project-root}/../../../../../common-types/resource-management"
     examples-dir: "{project-root}/examples"
     emit-lro-options: "all"
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.Compute"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+  "@azure-typespec/http-client-csharp-provisioning":
+    namespace: "Azure.Provisioning.Compute"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/compute"
+    emitter-output-dir: "{output-dir}/{service-dir}/armcompute"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armcompute/v8"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-compute"
+    namespace: "azure.mgmt.compute"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-compute"
+    flavor: azure
+    experimental-extensible-enums: true
+    compatibility-lro: true
+    package-details:
+      name: "@azure/arm-compute"
+  "@azure-tools/typespec-java":
+    service-dir: "sdk/compute"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-compute"
+    namespace: "com.azure.resourcemanager.compute"
+    service-name: "Compute"
+    flavor: azure
+    premium: true
+    generate-tests: false
+    client-side-validations: true
+    enable-sync-stack: false
+    use-object-for-unknown: true
+    float32-as-double: false
+    preserve-model:
+      - AvailabilitySetSkuTypes
+    remove-inner:
+      - StorageProfile
+    advanced-versioning: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
