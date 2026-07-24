@@ -267,3 +267,36 @@ namespace Microsoft.Compute;
   "GetBulkOperationStatusContent",
   "csharp"
 );
+
+// =====================================================================
+// .NET Management SDK review (AZC0030) type-name fixes (C# only)
+// =====================================================================
+// SUFFIX010: "Update" is reserved for PATCH-body models; this is a merge-patch body.
+@@clientName(
+  ScheduledActionsScheduleUpdate,
+  "ScheduledActionsSchedulePatch",
+  "csharp"
+);
+// SUFFIX004: "Options" is reserved for ClientOptions subclasses.
+@@clientName(DeleteOptions, "DeleteConfig", "csharp");
+@@clientName(DiffDiskOptions, "DiffDiskConfig", "csharp");
+// ACRONYM002: fix "Bulkaction" casing to match the "BulkAction*" prefix used package-wide.
+@@clientName(BulkactionVMExtension, "BulkActionVMExtension", "csharp");
+// ACRONYM001: 2-letter acronym "Vm" must be uppercase "VM".
+@@clientName(
+  BulkActionVmExtensionProperties,
+  "BulkActionVMExtensionProperties",
+  "csharp"
+);
+// ARMCOMMON001: avoid redefining the ARM-framework "ResourceType"; use a domain-scoped name.
+@@clientName(ResourceType, "ComputeBulkActionsResourceType", "csharp");
+// ARMCOMMON001: avoid redefining the ARM-framework "SubResource"; use a domain-scoped name.
+@@clientName(SubResource, "ComputeBulkActionsSubResource", "csharp");
+// Contextual naming: "Language" is too generic and collides across packages.
+@@clientName(Language, "ScheduledActionLanguage", "csharp");
+// Contextual naming: scope the generic "ProvisioningState" to its operation.
+@@clientName(
+  ProvisioningState,
+  "BulkInstancesOperationProvisioningState",
+  "csharp"
+);
