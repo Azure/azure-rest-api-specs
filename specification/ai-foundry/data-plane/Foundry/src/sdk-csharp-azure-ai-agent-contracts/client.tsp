@@ -332,11 +332,17 @@ namespace Azure.AI.Projects {
   @@alternateType(OpenAI.ToolType, { identity: "OpenAI.Responses.ResponseToolKind", package: "OpenAI", minVersion: "2.12.0" }, "csharp");
   @@alternateType(OpenAI.OutputItem, { identity: "OpenAI.Responses.ResponseItem", package: "OpenAI", minVersion: "2.12.0" }, "csharp");
   @@alternateType(OpenAI.InputItem, { identity: "OpenAI.Responses.ResponseItem", package: "OpenAI", minVersion: "2.12.0" }, "csharp");
+  @@alternateType(OpenAI.ItemMessage, { identity: "OpenAI.Responses.MessageResponseItem", package: "OpenAI", minVersion: "2.12.0" }, "csharp");
+  @@alternateType(OpenAI.OutputMessage, { identity: "OpenAI.Responses.MessageResponseItem", package: "OpenAI", minVersion: "2.12.0" }, "csharp");
   @@alternateType(OpenAI.Tool, { identity: "OpenAI.Responses.ResponseTool", package: "OpenAI", minVersion: "2.12.0" }, "csharp");
+  @@alternateType(OpenAI.Message, { identity: "OpenAI.Responses.MessageResponseItem", package: "OpenAI", minVersion: "2.12.0" }, "csharp");
   @@alternateType(OpenAI.Response, { identity: "OpenAI.Responses.ResponseResult", package: "OpenAI", minVersion: "2.12.0" }, "csharp");
+  @@alternateType(OpenAI.ResponseError, { identity: "OpenAI.Responses.ResponseError", package: "OpenAI", minVersion: "2.12.0" }, "csharp");
+  @@alternateType(OpenAI.ResponseErrorCode, { identity: "OpenAI.Responses.ResponseErrorCode", package: "OpenAI", minVersion: "2.12.0" }, "csharp");
   @@alternateType(OpenAI.CreateResponse, { identity: "OpenAI.Responses.CreateResponseOptions", package: "OpenAI", minVersion: "2.12.0" }, "csharp");
   @@alternateType(OpenAI.ResponseStreamEvent, { identity: "OpenAI.Responses.ResponseStreamEvent", package: "OpenAI", minVersion: "2.12.0" }, "csharp");
 
+  @@alternateType(AgentReference, { identity: "Azure.AI.Extensions.OpenAI.AgentReference", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
   @@alternateType(A2APreviewTool, { identity: "Azure.AI.Extensions.OpenAI.A2APreviewTool", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
   @@alternateType(A2AToolCall, { identity: "Azure.AI.Extensions.OpenAI.A2AToolCall", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
   @@alternateType(A2AToolCallOutput, { identity: "Azure.AI.Extensions.OpenAI.A2AToolCallOutput", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
