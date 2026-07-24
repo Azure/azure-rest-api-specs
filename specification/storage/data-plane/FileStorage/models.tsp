@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/xml";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
 
 namespace Storage.File;
@@ -984,6 +986,27 @@ model ShareFileRangeList {
   @Xml.unwrapped
   @Xml.name("ClearRange")
   clearRanges?: ClearRange[];
+}
+
+/** The paginated list of file ranges */
+@added(Versions.v2026_10_06)
+@Xml.name("Ranges")
+model ShareFileRangeListSegment {
+  /** The file ranges. */
+  @pageItems
+  @Xml.unwrapped
+  @Xml.name("Range")
+  ranges?: FileRange[];
+
+  /** The clear ranges. */
+  @Xml.unwrapped
+  @Xml.name("ClearRange")
+  clearRanges?: ClearRange[];
+
+  /** The next marker. */
+  @continuationToken
+  @Xml.name("NextMarker")
+  nextMarker?: string;
 }
 
 /**
