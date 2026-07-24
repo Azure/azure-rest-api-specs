@@ -293,14 +293,19 @@ by other validations in this repo):
 
 ### What to do
 
-1. Review each surfaced suppression and confirm it is intentional and has a clear
-   justification. Every suppression should include a meaningful justification
-   string; suppressions with no justification are flagged.
-2. If a suppression is unnecessary, remove the `#suppress` directive (or the
-   `linter.disable` entry in `tspconfig.yaml`) and fix the underlying lint issue
-   instead.
-3. If the suppression is legitimate and requires approval, ask the appropriate
-   reviewer to apply the `Approved-TypeSpecSuppression` label.
+Suppressions should be a **last resort**. Before approving or justifying a
+suppression, prefer fixing the underlying issue:
+
+1. **Address the underlying lint issue first.** For each surfaced suppression,
+   determine whether the flagged rule can instead be resolved in the spec. If so,
+   remove the `#suppress` directive (or the `linter.disable` entry in
+   `tspconfig.yaml`) and fix the underlying problem rather than suppressing it.
+2. **Only if the suppression is genuinely necessary**, ensure it has a clear,
+   meaningful justification. Every suppression must include a justification
+   string explaining why the rule cannot be satisfied; suppressions with no
+   justification are flagged.
+3. **If the suppression is legitimate and requires approval**, ask the
+   appropriate reviewer to apply the `Approved-TypeSpecSuppression` label.
 
 ### Reproduce locally
 
