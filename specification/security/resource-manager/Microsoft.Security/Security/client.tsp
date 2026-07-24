@@ -2121,7 +2121,8 @@ model CSharpSecurityAssessmentStatusResult
 );
 @@alternateType(
   AdvancedThreatProtectionSettingNameAlias.settingName,
-  "current"
+  "current",
+  "python"
 );
 // The C# management generator recognizes these resources as singleton resources only
 // when the final name parameter is modeled as a closed literal union. Keep the
@@ -2164,7 +2165,8 @@ union CSharpAdvancedThreatProtectionSettingName {
 );
 @@Azure.ClientGenerator.Core.alternateType(
   ServerVulnerabilityAssessmentNameAlias.serverVulnerabilityAssessment,
-  "default"
+  "default",
+  "python"
 );
 // The C# management generator recognizes these resources as singleton resources only
 // when the final name parameter is modeled as a closed literal union. Keep the
