@@ -52,13 +52,13 @@ describe("formatSuppressionAnnotation", () => {
     expect(annotation).toContain("col=3");
   });
 
-  it("emits a ::warning with the New Suppression title for a justified new suppression", () => {
+  it("emits a ::warning with the New Suppression title and reviewer guidance for a justified new suppression", () => {
     const annotation = formatSuppressionAnnotation(makeRecord(), "new");
 
     expect(annotation).toContain("::warning ");
     expect(annotation).toContain("title=⚠️ New Suppression");
     expect(annotation).toContain(
-      "This PR introduces a new suppression that requires review and approval.",
+      "Authors should avoid adding new suppressions and prefer fixing the underlying issue",
     );
   });
 
@@ -87,11 +87,15 @@ describe("formatSuppressionAnnotation", () => {
     expect(annotation).not.toContain("Changed Justification");
   });
 
-  it("includes the shared reviewer guidance in the body", () => {
-    const annotation = formatSuppressionAnnotation(makeRecord(), "new");
+  it("includes the reviewer guidance only in the New Suppression body", () => {
+    const guidance =
+      "Authors should avoid adding new suppressions and prefer fixing the underlying issue";
 
-    expect(annotation).toContain(
-      "Authors should avoid adding new suppressions and prefer fixing the underlying issue",
+    expect(formatSuppressionAnnotation(makeRecord(), "new")).toContain(guidance);
+    // Guidance is no longer appended to the other categories.
+    expect(formatSuppressionAnnotation(makeRecord(), "changed")).not.toContain(guidance);
+    expect(formatSuppressionAnnotation(makeRecord({ justification: "  " }), "new")).not.toContain(
+      guidance,
     );
   });
 

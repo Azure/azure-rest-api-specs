@@ -28,10 +28,6 @@ interface SuppressionAnnotationCategory {
   body: string;
 }
 
-const SUPPRESSION_GUIDANCE =
-  "Authors should avoid adding new suppressions and prefer fixing the underlying issue; " +
-  "reviewers should approve only when there is a clear, compelling justification and no reasonable alternative.";
-
 const SUPPRESSION_ANNOTATION_CATEGORIES: Record<
   SuppressionAnnotationCategoryId,
   SuppressionAnnotationCategory
@@ -49,8 +45,8 @@ const SUPPRESSION_ANNOTATION_CATEGORIES: Record<
     icon: "⚠️",
     title: "New Suppression",
     body:
-      "This PR introduces a new suppression that requires review and approval. Prefer fixing the " +
-      "underlying issue when reasonable.",
+      "Authors should avoid adding new suppressions and prefer fixing the underlying issue; " +
+      "reviewers should approve only when there is a clear, compelling justification and no reasonable alternative.",
   },
   "changed-justification": {
     level: "warning",
@@ -101,7 +97,7 @@ function buildAnnotationMessage(
   // GitHub renders `%0A`-encoded newlines in the annotation message body (but not in the
   // `title` property), so lay the details out one per line for readability. Newline
   // encoding is handled by escapeAnnotationMessage in formatSuppressionAnnotation.
-  const lines: string[] = [category.body, SUPPRESSION_GUIDANCE];
+  const lines: string[] = [category.body];
 
   const documentationUrl = suppression.ruleMetadata?.documentationUrl;
   if (documentationUrl) {
