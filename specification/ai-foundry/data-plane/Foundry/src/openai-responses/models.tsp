@@ -52,6 +52,51 @@ namespace Azure.AI.Projects {
 
     /** The structured inputs to the response that can participate in prompt template substitution or tool argument bindings. */
     structured_inputs?: Record<unknown>;
+
+    /**
+     * A request-level routing configuration for Azure Model Router deployments.
+     * Allows per-request routing constraints, such as a hard price ceiling, that compose with the
+     * deployment-level routing mode. Requests that omit this object behave exactly as before, and
+     * it is ignored by deployments that are not Model Router deployments.
+     */
+    routing_config?: RoutingConfiguration;
+  }
+
+  /**
+   * A request-level routing configuration for Azure Model Router deployments.
+   * Allows per-request routing constraints, such as a hard price ceiling, that compose with the
+   * deployment-level routing mode. Requests that omit this object behave exactly as before, and
+   * it is ignored by deployments that are not Model Router deployments.
+   */
+  model RoutingConfiguration {
+    /**
+     * An optional hard price ceiling (USD per 1M tokens) applied before model selection.
+     * Models whose input and/or output token price exceeds the specified thresholds are
+     * excluded from the candidate pool prior to routing optimization.
+     */
+    price_limit?: RoutingPriceLimit;
+  }
+
+  /**
+   * Specifies the maximum acceptable token price (USD per 1M tokens) for input and/or output
+   * tokens when routing a request. Acts as a hard filter: models exceeding either specified
+   * threshold are removed from the candidate pool before routing optimization. Both fields are
+   * optional; specifying either or both is valid.
+   */
+  model RoutingPriceLimit {
+    /**
+     * The maximum acceptable input token price, expressed in USD per 1M tokens. Models whose
+     * input price exceeds this value are excluded from the candidate pool.
+     */
+    @minValue(0)
+    input?: float32;
+
+    /**
+     * The maximum acceptable output token price, expressed in USD per 1M tokens. Models whose
+     * output price exceeds this value are excluded from the candidate pool.
+     */
+    @minValue(0)
+    output?: float32;
   }
 
   @@copyProperties(
