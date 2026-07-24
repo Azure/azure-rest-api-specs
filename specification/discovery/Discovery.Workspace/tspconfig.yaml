@@ -24,18 +24,6 @@ options:
     generate-test: true
     generate-sample: true
     flavor: azure
-  "@azure-tools/typespec-csharp":
-    # NOTE: /Azure.AI.Discovery suffix after _workspace is a workaround because @azure-typespec/http-client-csharp
-    # does not support package-dir. Without it, CI derives packageName from the last path segment (_workspace)
-    # instead of Azure.AI.Discovery, causing csproj and CHANGELOG lookup failures.
-    emitter-output-dir: "{output-dir}/{service-dir}/Azure.AI.Discovery/_workspace/Azure.AI.Discovery"
-    omit-unreachable-types: true
-    namespace: Azure.AI.Discovery
-    package-name: Azure.AI.Discovery
-    model-namespace: false
-    flavor: azure
-    examples-dir: "{project-dir}/examples"
-    clear-output-folder: true
   "@azure-typespec/http-client-csharp":
     emitter-output-dir: "{output-dir}/{service-dir}/Azure.AI.Discovery/_workspace/Azure.AI.Discovery"
     namespace: Azure.AI.Discovery

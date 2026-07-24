@@ -8,11 +8,8 @@ emit:
     # Uncomment this line and add "@azure-tools/typespec-python" to your package.json to generate Python code
     #- "@azure-tools/typespec-python"
     #- "@azure-tools/typespec-ts"
-    #- "@azure-tools/typespec-csharp"
     # Uncomment this line and add "@azure-tools/typespec-java" to your package.json to generate Java code
     # "@azure-tools/typespec-java": true
-    # Uncomment this line and add "@azure-tools/typespec-csharp" to your package.json to generate C# code
-    # "@azure-tools/typespec-csharp": true
     # Uncomment this line and add "@azure-tools/typespec-ts" to your package.json to generate Typescript code
     # "@azure-tools/typespec-ts": true
 linter:
@@ -47,13 +44,6 @@ options:
       name: "@azure-rest/load-testing"
       description: "This package contains Microsoft Azure LoadTestingClient client library."
       version: 1.0.1
-    flavor: azure
-  "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/sdk/loadtestservice/{namespace}"
-    clear-output-folder: true
-    namespace: "Azure.Developer.LoadTesting"
-    generate-sample-project: false
-    model-namespace: false
     flavor: azure
   "@azure-tools/typespec-java":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-developer-loadtesting"
