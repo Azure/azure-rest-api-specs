@@ -5,7 +5,7 @@
     "api-version": "2026-02-09-preview",
     "subscriptionId": "10B6D88D-ADF4-4281-B3D0-B5A6702DEEDA",
     "resourceGroupName": "rgprivateTrafficManager",
-    "privateTrafficManagerProfileName": "my-profile",
+    "privateTrafficManagerProfileName": "myProfile",
     "profileProbingGatewayName": "myProbingGateway",
     "properties": {
       "properties": {
@@ -16,18 +16,26 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/10B6D88D-ADF4-4281-B3D0-B5A6702DEEDA/resourceGroups/rgprivateTrafficManager/providers/Microsoft.Network/privateTrafficManagerProfiles/my-profile/probingGateways/myProbingGateway",
+        "id": "/subscriptions/10B6D88D-ADF4-4281-B3D0-B5A6702DEEDA/resourceGroups/rgprivateTrafficManager/providers/Microsoft.Network/privateTrafficManagerProfiles/myProfile/probingGateways/myProbingGateway",
         "name": "myProbingGateway",
         "type": "Microsoft.Network/privateTrafficManagerProfiles/probingGateways",
         "properties": {
           "probingGatewayId": "/subscriptions/A1B2C3D4-E5F6-7890-ABCD-1234567890EF/resourceGroups/rgProbingInfra/providers/Microsoft.Network/probingGateways/pgw-westus-001",
           "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdBy": "user@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-02-18T10:05:58.138Z",
+          "lastModifiedBy": "user@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-02-18T10:05:58.139Z"
         }
       }
     },
     "202": {
       "headers": {
-        "location": "https://contoso.com/operationstatus"
+        "location": "https://management.azure.com/subscriptions/10B6D88D-ADF4-4281-B3D0-B5A6702DEEDA/providers/Microsoft.Network/locations/eastus/operationStatuses/6d3e9f5a-1234-4a2b-9cde-0123456789ab?api-version=2026-02-09-preview"
       }
     }
   }

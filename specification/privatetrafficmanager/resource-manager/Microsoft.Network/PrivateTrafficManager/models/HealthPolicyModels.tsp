@@ -40,7 +40,7 @@ model ProbeConfig {
   @doc("The path relative to the endpoint domain name used to probe for endpoint health.")
   path?: string;
 
-  @doc("The monitor interval for endpoints in this profile. This is the interval at which Traffic Manager will check the health of each endpoint in this profile. Allowed values: 5, 10, or 30 seconds.")
+  @doc("The monitor interval for endpoints in this profile. This is the interval at which Traffic Manager will check the health of each endpoint in this profile. Allowed values: 10 or 30 seconds.")
   intervalInSeconds?: int64;
 
   @doc("The monitor timeout for endpoints in this profile. This is the time that Traffic Manager allows endpoints in this profile to response to the health check.")

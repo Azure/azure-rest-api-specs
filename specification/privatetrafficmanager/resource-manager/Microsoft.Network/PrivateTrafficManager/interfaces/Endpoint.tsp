@@ -1,10 +1,12 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
+import "@typespec/http";
 import "@typespec/rest";
 import "../models/EndpointModels.tsp";
 
 using Rest;
+using TypeSpec.Http;
 using Azure.ResourceManager;
 
 namespace Microsoft.Network;
@@ -28,7 +30,14 @@ interface Endpoints {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Endpoint>;
 
   @doc("Updates a Private Traffic Manager endpoint.")
-  update is ArmResourcePatchAsync<Endpoint, EndpointProperties>;
+  @patch(#{ implicitOptionality: false })
+  update is ArmCustomPatchAsync<
+    Endpoint,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      Endpoint,
+      EndpointProperties
+    >
+  >;
 
   @doc("Deletes a Private Traffic Manager endpoint.")
   delete is ArmResourceDeleteWithoutOkAsync<Endpoint>;
