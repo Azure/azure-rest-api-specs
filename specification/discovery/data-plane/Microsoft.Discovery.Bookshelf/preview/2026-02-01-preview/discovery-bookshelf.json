@@ -876,7 +876,7 @@
     },
     "IndexingRequest": {
       "type": "object",
-      "description": "Resources for indexing operation",
+      "description": "Parameters for indexing operation",
       "properties": {
         "nodePoolId": {
           "type": "string",
@@ -994,6 +994,11 @@
           "description": "Provisioning state.",
           "readOnly": true
         },
+        "status": {
+          "$ref": "#/definitions/IndexingStatus",
+          "description": "The status",
+          "readOnly": true
+        },
         "createdAt": {
           "type": "string",
           "format": "date-time",
@@ -1055,11 +1060,6 @@
             "update",
             "create"
           ]
-        },
-        "status": {
-          "$ref": "#/definitions/IndexingStatus",
-          "description": "The status",
-          "readOnly": true
         }
       },
       "required": [
@@ -1094,7 +1094,7 @@
     },
     "KnowledgeBaseOperationStatus": {
       "type": "object",
-      "description": "Status of a KnowledgeBase operation",
+      "description": "Status indicating the KnowledgeBase operation.",
       "properties": {
         "id": {
           "type": "string",
@@ -1166,6 +1166,11 @@
           "description": "Provisioning state.",
           "readOnly": true
         },
+        "status": {
+          "$ref": "#/definitions/IndexingStatus",
+          "description": "The status",
+          "readOnly": true
+        },
         "createdAt": {
           "type": "string",
           "format": "date-time",
@@ -1227,11 +1232,6 @@
             "update",
             "create"
           ]
-        },
-        "status": {
-          "$ref": "#/definitions/IndexingStatus",
-          "description": "The status",
-          "readOnly": true
         }
       },
       "required": [
