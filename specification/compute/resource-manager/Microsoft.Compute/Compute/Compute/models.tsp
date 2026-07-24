@@ -3063,21 +3063,25 @@ model VirtualMachineScaleSetIPConfigurationProperties {
   /**
    * Specifies an array of references to backend address pools of application gateways. A scale set can reference backend address pools of multiple application gateways. Multiple scale sets cannot use the same application gateway.
    */
+  @identifiers(#["id"])
   applicationGatewayBackendAddressPools?: SubResource[];
 
   /**
    * Specifies an array of references to application security group.
    */
+  @identifiers(#["id"])
   applicationSecurityGroups?: SubResource[];
 
   /**
    * Specifies an array of references to backend address pools of load balancers. A scale set can reference backend address pools of one public and one internal load balancer. Multiple scale sets cannot use the same basic sku load balancer.
    */
+  @identifiers(#["id"])
   loadBalancerBackendAddressPools?: SubResource[];
 
   /**
    * Specifies an array of references to inbound Nat pools of the load balancers. A scale set can reference inbound nat pools of one public and one internal load balancer. Multiple scale sets cannot use the same basic sku load balancer.
    */
+  @identifiers(#["id"])
   loadBalancerInboundNatPools?: SubResource[];
 }
 
@@ -4384,21 +4388,25 @@ model VirtualMachineScaleSetUpdateIPConfigurationProperties {
   /**
    * The application gateway backend address pools.
    */
+  @identifiers(#["id"])
   applicationGatewayBackendAddressPools?: SubResource[];
 
   /**
    * Specifies an array of references to application security group.
    */
+  @identifiers(#["id"])
   applicationSecurityGroups?: SubResource[];
 
   /**
    * The load balancer backend address pools.
    */
+  @identifiers(#["id"])
   loadBalancerBackendAddressPools?: SubResource[];
 
   /**
    * The load balancer inbound nat pools.
    */
+  @identifiers(#["id"])
   loadBalancerInboundNatPools?: SubResource[];
 }
 
@@ -6048,16 +6056,19 @@ model VirtualMachineNetworkInterfaceIPConfigurationProperties {
   /**
    * Specifies an array of references to application security group.
    */
+  @identifiers(#["id"])
   applicationSecurityGroups?: SubResource[];
 
   /**
    * Specifies an array of references to backend address pools of application gateways. A virtual machine can reference backend address pools of multiple application gateways. Multiple virtual machines cannot use the same application gateway.
    */
+  @identifiers(#["id"])
   applicationGatewayBackendAddressPools?: SubResource[];
 
   /**
    * Specifies an array of references to backend address pools of load balancers. A virtual machine can reference backend address pools of one public and one internal load balancer. [Multiple virtual machines cannot use the same basic sku load balancer].
    */
+  @identifiers(#["id"])
   loadBalancerBackendAddressPools?: SubResource[];
 }
 
@@ -7820,6 +7831,7 @@ model AvailabilitySetProperties {
   /**
    * A list of references to all virtual machines in the availability set.
    */
+  @identifiers(#["id"])
   virtualMachines?: SubResource[];
 
   /**
@@ -8022,8 +8034,8 @@ model DedicatedHostGroupProperties {
   /**
    * A list of references to all dedicated hosts in the dedicated host group.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "For backward compatibility"
   @visibility(Lifecycle.Read)
+  @identifiers(#["id"])
   hosts?: SubResourceReadOnly[];
 
   /**
@@ -8175,6 +8187,7 @@ model DedicatedHostProperties {
    * A list of references to all virtual machines in the Dedicated Host.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#["id"])
   virtualMachines?: SubResourceReadOnly[];
 
   /**
@@ -8407,6 +8420,7 @@ model InterconnectGroupProfile {
   /**
    * The list of subgroup references within the interconnect group.
    */
+  @identifiers(#["id"])
   subgroups?: SubResource[];
 }
 
@@ -9009,12 +9023,14 @@ model CapacityReservationGroupProperties {
    * A list of all capacity reservation resource ids that belong to capacity reservation group.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#["id"])
   capacityReservations?: SubResourceReadOnly[];
 
   /**
    * A list of references to all virtual machines associated to the capacity reservation group.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#["id"])
   virtualMachinesAssociated?: SubResourceReadOnly[];
 
   /**
@@ -9111,6 +9127,7 @@ model CapacityReservationUtilization {
    * A list of all virtual machines resource ids allocated against the capacity reservation.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#["id"])
   virtualMachinesAllocated?: SubResourceReadOnly[];
 
   /**
@@ -9127,6 +9144,7 @@ model ResourceSharingProfile {
   /**
    * Specifies an array of subscription resource IDs that capacity reservation group is shared with. Block Capacity Reservations does not support sharing across subscriptions. **Note:** Minimum api-version: 2023-09-01. Please refer to https://aka.ms/computereservationsharing for more details.
    */
+  @identifiers(#["id"])
   subscriptionIds?: SubResource[];
 }
 
@@ -9240,6 +9258,7 @@ model CapacityReservationProperties {
    * A list of all virtual machine resource ids that are associated with the capacity reservation.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#["id"])
   virtualMachinesAssociated?: SubResourceReadOnly[];
 
   /**

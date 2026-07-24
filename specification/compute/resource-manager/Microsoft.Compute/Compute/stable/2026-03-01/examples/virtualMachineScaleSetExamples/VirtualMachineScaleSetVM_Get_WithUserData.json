@@ -2,7 +2,7 @@
   "parameters": {
     "subscriptionId": "{subscription-id}",
     "resourceGroupName": "myResourceGroup",
-    "vmScaleSetName": "{vmss-name}",
+    "vmScaleSetName": "myVirtualMachineScaleSet",
     "instanceId": "0",
     "api-version": "2026-03-01",
     "expand": "UserData"
@@ -11,7 +11,7 @@
     "200": {
       "body": {
         "name": "{vmss-vm-name}",
-        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}/virtualMachines/0",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/myVirtualMachineScaleSet/virtualMachines/0",
         "type": "Microsoft.Compute/virtualMachineScaleSets/virtualMachines",
         "location": "westus",
         "tags": {
@@ -98,7 +98,7 @@
           "networkProfile": {
             "networkInterfaces": [
               {
-                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}/virtualMachines/0/networkInterfaces/vmsstestnetconfig5415"
+                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/myVirtualMachineScaleSet/virtualMachines/0/networkInterfaces/vmsstestnetconfig5415"
               }
             ]
           },
