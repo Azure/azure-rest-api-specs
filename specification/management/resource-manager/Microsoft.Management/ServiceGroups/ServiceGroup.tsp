@@ -2,12 +2,14 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Management;
 /**
@@ -81,6 +83,23 @@ interface ServiceGroups {
     ServiceGroup,
     void,
     ArmResponse<ServiceGroupCollectionResponse>,
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
+  >;
+
+  /**
+   * List the descendant serviceGroups of the serviceGroup, ordered by hierarchy.
+   *
+   * This is a paginated POST action. When the response contains a skipToken,
+   * more results are available; callers must re-POST to the same listDescendants
+   * URL with that skipToken value in the request body to fetch the next page.
+   * When skipToken is absent, the current page is the last page. SDKs do not
+   * natively support POST-based pagination, so callers must loop manually.
+   */
+  @added(Versions.v2026_03_01_preview)
+  listDescendants is ArmResourceActionSync<
+    ServiceGroup,
+    ListDescendantsRequest,
+    ArmResponse<ListDescendantsResponse>,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
   >;
 }

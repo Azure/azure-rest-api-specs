@@ -26,7 +26,17 @@ These are the global settings for the API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2024-02-preview
+tag: package-2026-03-preview
+```
+
+### Tag: package-2026-03-preview
+
+These settings apply only when `--tag=package-2026-03-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-03-preview'
+input-file:
+  - preview/2026-03-01-preview/serviceGroups.json
+v3: true
 ```
 
 ### Tag: package-2024-02-preview
@@ -48,6 +58,14 @@ suppressions:
     reason: These are tenant level APIs and resource types by design.
     from: serviceGroups.json
     where: $.paths["/providers/Microsoft.Management/serviceGroups/{serviceGroupName}"]
+  - code: XMSSecretInResponse
+    reason: skipToken is the standard Azure OData paging continuation token, not a secret. The linter flags it due to the "Token" substring in the name; the property carries opaque pagination state and is not sensitive.
+    from: serviceGroups.json
+    where: $.definitions.ListDescendantsRequest.properties.skipToken
+  - code: XMSSecretInResponse
+    reason: skipToken is the standard Azure OData paging continuation token, not a secret. The linter flags it due to the "Token" substring in the name; the property carries opaque pagination state and is not sensitive.
+    from: serviceGroups.json
+    where: $.definitions.ListDescendantsResponse.properties.skipToken
 ```
 ---
 
