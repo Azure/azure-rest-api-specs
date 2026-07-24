@@ -32,4 +32,7 @@ namespace Azure.Batch;
 enum Versions {
   @doc("API Version 2025-06-01")
   v2025_06_01: "2025-06-01",
+
+  @doc("API Version 2026-08-01")
+  v2026_08_01: "2026-08-01",
 }
