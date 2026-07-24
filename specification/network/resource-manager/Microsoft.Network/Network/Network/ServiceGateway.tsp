@@ -127,6 +127,8 @@ interface ServiceGateways {
    * For address-level partial updates, if no services are provided, the existing services will be considered for deletion.
    */
   @removed(Versions.v2025_09_01)
+  @action("updateAddressLocations")
+  @sharedRoute
   updateAddressLocationsLro is ArmResourceActionAsync<
     ServiceGateway,
     ServiceGatewayUpdateAddressLocationsRequest,
@@ -150,6 +152,7 @@ interface ServiceGateways {
    * For address-level partial updates, if no services are provided, the existing services will be considered for deletion.
    */
   @added(Versions.v2025_09_01)
+  @sharedRoute
   updateAddressLocations is ArmResourceActionSync<
     ServiceGateway,
     ServiceGatewayUpdateAddressLocationsRequest,
@@ -165,6 +168,8 @@ interface ServiceGateways {
    * Partial update modifies only the specified services.
    */
   @removed(Versions.v2025_09_01)
+  @action("updateServices")
+  @sharedRoute
   updateServicesLro is ArmResourceActionAsync<
     ServiceGateway,
     ServiceGatewayUpdateServicesRequest,
@@ -182,6 +187,7 @@ interface ServiceGateways {
    * Partial update modifies only the specified services.
    */
   @added(Versions.v2025_09_01)
+  @sharedRoute
   updateServices is ArmResourceActionSync<
     ServiceGateway,
     ServiceGatewayUpdateServicesRequest,
