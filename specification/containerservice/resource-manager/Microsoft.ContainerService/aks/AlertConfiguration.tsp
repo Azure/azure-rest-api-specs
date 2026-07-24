@@ -13,7 +13,7 @@ namespace Microsoft.ContainerService;
 /**
  * The mode of the alert configuration.
  */
-@added(Versions.v2026_05_02_preview)
+@added(Versions.v2026_06_02_preview)
 union AlertConfigurationMode {
   string,
 
@@ -32,7 +32,7 @@ union AlertConfigurationMode {
 /**
  * The current provisioning state of the alert configuration.
  */
-@added(Versions.v2026_05_02_preview)
+@added(Versions.v2026_06_02_preview)
 union AlertConfigurationProvisioningState {
   ResourceProvisioningState,
 
@@ -55,7 +55,7 @@ union AlertConfigurationProvisioningState {
 /**
  * Notification settings for the alert configuration.
  */
-@added(Versions.v2026_05_02_preview)
+@added(Versions.v2026_06_02_preview)
 model AlertNotification {
   /**
    * The resource ID of the Azure Monitor action group to send notifications to.
@@ -70,7 +70,7 @@ model AlertNotification {
 /**
  * Properties of the alert configuration.
  */
-@added(Versions.v2026_05_02_preview)
+@added(Versions.v2026_06_02_preview)
 model AlertConfigurationProperties {
   /**
    * The mode of the alert configuration. Specifies how AKS manages the alerts.
@@ -93,7 +93,7 @@ model AlertConfigurationProperties {
  * Alert configuration for a managed cluster. Allows configuring AKS-managed alerts
  * that notify users of important cluster events and conditions.
  */
-@added(Versions.v2026_05_02_preview)
+@added(Versions.v2026_06_02_preview)
 @parentResource(ManagedCluster)
 model AlertConfiguration
   is Azure.ResourceManager.ProxyResource<AlertConfigurationProperties> {
@@ -106,7 +106,7 @@ model AlertConfiguration
 }
 
 @armResourceOperations
-@added(Versions.v2026_05_02_preview)
+@added(Versions.v2026_06_02_preview)
 interface AlertConfigurations {
   /**
    * Gets the specified alert configuration of a managed cluster.

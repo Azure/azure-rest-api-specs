@@ -11,7 +11,7 @@ namespace Microsoft.ContainerService;
 /**
  * Bootstrap configuration for a FlexNode pool.
  */
-@added(Versions.v2026_05_02_preview)
+@added(Versions.v2026_06_02_preview)
 model PoolBootstrapData {
   /**
    * Azure environment and cluster identity information.
@@ -41,7 +41,7 @@ model PoolBootstrapData {
 /**
  * Azure configuration returned as part of FlexNode bootstrap data.
  */
-@added(Versions.v2026_05_02_preview)
+@added(Versions.v2026_06_02_preview)
 model BootstrapAzureConfig {
   /**
    * Azure Resource Manager endpoint for the cloud environment.
@@ -72,7 +72,7 @@ model BootstrapAzureConfig {
 /**
  * Target AKS cluster for FlexNode bootstrap.
  */
-@added(Versions.v2026_05_02_preview)
+@added(Versions.v2026_06_02_preview)
 model BootstrapTargetCluster {
   /**
    * Azure resource ID of the target AKS cluster.
@@ -84,7 +84,7 @@ model BootstrapTargetCluster {
 /**
  * Bootstrap token information.
  */
-@added(Versions.v2026_05_02_preview)
+@added(Versions.v2026_06_02_preview)
 model BootstrapTokenInfo {
   /**
    * Short-lived bootstrap token for kubelet. Do not cache or log.
@@ -97,7 +97,7 @@ model BootstrapTokenInfo {
 /**
  * Component versions returned as part of FlexNode bootstrap data.
  */
-@added(Versions.v2026_05_02_preview)
+@added(Versions.v2026_06_02_preview)
 model BootstrapComponentVersions {
   /**
    * Kubernetes version.
@@ -121,7 +121,7 @@ model BootstrapComponentVersions {
 /**
  * Network configuration returned as part of FlexNode bootstrap data.
  */
-@added(Versions.v2026_05_02_preview)
+@added(Versions.v2026_06_02_preview)
 model BootstrapNetworkingConfig {
   /**
    * IP address of the cluster DNS service.
@@ -140,7 +140,7 @@ model BootstrapNetworkingConfig {
 /**
  * Node configuration returned as part of FlexNode bootstrap data.
  */
-@added(Versions.v2026_05_02_preview)
+@added(Versions.v2026_06_02_preview)
 model BootstrapNodeConfig {
   /**
    * Maximum pods per node.
@@ -171,7 +171,7 @@ model BootstrapNodeConfig {
 /**
  * Kubelet configuration returned as part of FlexNode bootstrap data.
  */
-@added(Versions.v2026_05_02_preview)
+@added(Versions.v2026_06_02_preview)
 model BootstrapKubeletConfig {
   /**
    * FQDN of the Kubernetes API server.
@@ -192,5 +192,5 @@ model BootstrapKubeletConfig {
  * Empty request body for listing FlexNode bootstrap data.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "The POST action accepts an empty JSON object for forward-compatible request shape."
-@added(Versions.v2026_05_02_preview)
+@added(Versions.v2026_06_02_preview)
 model ListBootstrapDataRequest {}
