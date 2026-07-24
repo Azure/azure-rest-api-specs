@@ -45,7 +45,7 @@ jobs:
         with:
           script: |
             const { default: detectNamespaces } =
-              await import('${{ github.workspace }}/.github/workflows/src/namespace-approval/detect-namespaces.js');
+              await import('${{ github.workspace }}/.github/workflows/src/package-name-approval/detect-namespaces.js');
             await detectNamespaces({ github, context, core });
 
       - name: Upload package name results
