@@ -25,6 +25,12 @@ enum Versions {
    * The 2025-04-01 API version.
    */
   v2025_04_01: "2025-04-01",
+
+  /**
+   * The 2026-05-01-preview API version.
+   */
+  @Azure.Core.previewVersion
+  v2026_05_01_preview: "2026-05-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -202,6 +208,42 @@ union OrderByColumnEnum {
   string,
 }
 
+@doc("Sorting is supported for columns in billing account scoped ItemDetailsReport. This object includes the column names that sorting is allowed for. Select one of these supported values. The ResourceGroup column is not supported for billing account scope.")
+@added(Versions.v2026_05_01_preview)
+union BillingAccountOrderByColumnEnum {
+  @doc("The itemName filed in ItemDetailsReport result, see CarbonEmissionItemDetailData for more information.")
+  ItemName: "ItemName",
+
+  @doc("The latestMonthEmissions filed in ItemDetailsReport result, see CarbonEmissionItemDetailData for more information.")
+  LatestMonthEmissions: "LatestMonthEmissions",
+
+  @doc("The previousMonthEmissions filed in ItemDetailsReport result, see CarbonEmissionItemDetailData for more information.")
+  PreviousMonthEmissions: "PreviousMonthEmissions",
+
+  @doc("The monthOverMonthEmissionsChangeRatio filed in ItemDetailsReport result, see CarbonEmissionItemDetailData for more information.")
+  MonthOverMonthEmissionsChangeRatio: "MonthOverMonthEmissionsChangeRatio",
+
+  @doc("The monthlyEmissionsChangeValue filed in ItemDetailsReport result, see CarbonEmissionItemDetailData for more information.")
+  MonthlyEmissionsChangeValue: "MonthlyEmissionsChangeValue",
+
+  string,
+}
+
+@doc("Supported category types for billing account scoped queries. The ResourceGroup and Resource category types are not supported for billing account scope.")
+@added(Versions.v2026_05_01_preview)
+union BillingAccountCategoryTypeEnum {
+  @doc("Emissions aggregated at the subscription level.")
+  Subscription: "Subscription",
+
+  @doc("Emissions aggregated at the location level.")
+  Location: "Location",
+
+  @doc("Emissions aggregated at the resource type level.")
+  ResourceType: "ResourceType",
+
+  string,
+}
+
 @doc("Query Parameters for ItemDetailsReport")
 model ItemDetailsQueryFilter extends QueryFilter {
   @doc("Specifies that the report type is an item details report for granular carbon emissions data. This is a paginated report.")
@@ -221,8 +263,106 @@ model ItemDetailsQueryFilter extends QueryFilter {
   @minValue(1)
   pageSize: int32;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "skipToken is a pagination token, not a secret"
   @doc("Pagination token for fetching the next page of data. This token is nullable and will be returned in the previous response if additional data pages are available.")
   skipToken?: string;
+}
+
+@doc("Query filter parameter for billing account scoped carbon emissions queries. The billing account ID is derived from the URL scope parameter.")
+@added(Versions.v2026_05_01_preview)
+@discriminator("reportType")
+model BillingAccountQueryFilter {
+  @doc("The ReportType requested for carbon emissions data. Required. Specifies how data is aggregated and displayed in the output, as explained in the ReportTypeEnum.")
+  reportType: ReportTypeEnum;
+
+  @doc("The start and end dates for carbon emissions data. Required. For ItemDetailsReport and TopItemsSummaryReport, only one month of data is supported at a time, so start and end dates should be equal within DateRange (e.g., start: 2024-06-01 and end: 2024-06-01).")
+  dateRange: DateRange;
+
+  @doc("List of subscription IDs for which carbon emissions data is requested. Optional. Each subscription ID should be in lowercase format. If not provided, data for all subscriptions under the billing account will be returned.")
+  subscriptionList?: string[];
+
+  @doc("List of resource types for carbon emissions data. Optional. Each resource type should be specified in lowercase, following the format 'microsoft.{service}/{resourceType}', e.g., 'microsoft.storage/storageaccounts'.")
+  resourceTypeList?: string[];
+
+  @doc("List of locations(Azure Region Display Name) for carbon emissions data, with each location specified in lowercase (e.g., 'east us'). Optional. You can use the command 'az account list-locations -o table' to find Azure Region Display Names.")
+  locationList?: string[];
+
+  @doc("List of carbon emission scopes. Required. Accepts one or more values from EmissionScopeEnum (e.g., Scope1, Scope2, Scope3) in list form. The output will include the total emissions for the specified scopes.")
+  carbonScopeList: EmissionScopeEnum[];
+}
+
+@doc("Query filter parameter to configure OverallSummaryReport queries scoped to a billing account.")
+@added(Versions.v2026_05_01_preview)
+model BillingAccountOverallSummaryReportQueryFilter
+  extends BillingAccountQueryFilter {
+  @doc("Specifies that the report type is an overall summary report for carbon emissions data.")
+  reportType: ReportTypeEnum.OverallSummaryReport;
+}
+
+@doc("Query filter parameter to configure MonthlySummaryReport queries scoped to a billing account.")
+@added(Versions.v2026_05_01_preview)
+model BillingAccountMonthlySummaryReportQueryFilter
+  extends BillingAccountQueryFilter {
+  @doc("Specifies that the report type is a monthly summary report for carbon emissions data.")
+  reportType: ReportTypeEnum.MonthlySummaryReport;
+}
+
+@doc("Query filter parameter to configure TopItemsSummaryReport queries scoped to a billing account.")
+@added(Versions.v2026_05_01_preview)
+model BillingAccountTopItemsSummaryReportQueryFilter
+  extends BillingAccountQueryFilter {
+  @doc("Specifies that the report type is a top items summary report for carbon emissions data.")
+  reportType: ReportTypeEnum.TopItemsSummaryReport;
+
+  @doc("Specifies the category type for which to retrieve top-emitting items.")
+  categoryType: BillingAccountCategoryTypeEnum;
+
+  @doc("The number of top items to return, based on emissions. This value must be between 1 and 10.")
+  @maxValue(10)
+  @minValue(1)
+  topItems: int32;
+}
+
+@doc("Query filter parameter to configure TopItemsMonthlySummaryReport queries scoped to a billing account.")
+@added(Versions.v2026_05_01_preview)
+model BillingAccountTopItemsMonthlySummaryReportQueryFilter
+  extends BillingAccountQueryFilter {
+  @doc("Specifies that the report type is a top items monthly summary report for carbon emissions data.")
+  reportType: ReportTypeEnum.TopItemsMonthlySummaryReport;
+
+  @doc("Specifies the category type to retrieve top-emitting items, aggregated by month.")
+  categoryType: BillingAccountCategoryTypeEnum;
+
+  @doc("The number of top items to return, based on emissions. Must be between 1 and 10.")
+  @maxValue(10)
+  @minValue(1)
+  topItems: int32;
+}
+
+@doc("Query filter parameter to configure ItemDetailsReport queries scoped to a billing account.")
+@added(Versions.v2026_05_01_preview)
+model BillingAccountItemDetailsReportQueryFilter
+  extends BillingAccountQueryFilter {
+  @doc("Specifies that the report type is an item details report for carbon emissions data.")
+  reportType: ReportTypeEnum.ItemDetailsReport;
+
+  @doc("Specifies the category type for item details.")
+  categoryType: BillingAccountCategoryTypeEnum;
+
+  @doc("Page size for server paging. Optional. Default value is 1000 items per page.")
+  @maxValue(5000)
+  @minValue(1)
+  pageSize: int32;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "skipToken is a pagination token, not a secret"
+  @doc("Pagination token for fetching the next page of data. Optional.")
+  skipToken?: string;
+
+  @doc("The column name to order the results by. See supported values in BillingAccountOrderByColumnEnum.")
+  orderBy?: BillingAccountOrderByColumnEnum;
+
+  @doc("Sort direction.")
+  sortDirection?: SortDirectionEnum;
 }
 
 @doc("Access Decision for each Subscription")
@@ -360,7 +500,6 @@ model ResourceGroupCarbonEmissionTopItemsSummaryData
   @doc("Subscription Id")
   subscriptionId: string;
 
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("Resource Group url, value format is '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}'")
   resourceGroupUrl: string;
 }
@@ -423,7 +562,6 @@ model ResourceGroupCarbonEmissionTopItemMonthlySummaryData
   @doc("Subscription Id")
   subscriptionId: string;
 
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("Resource Group url, the format is '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}'")
   resourceGroupUrl: string;
 }
@@ -481,7 +619,6 @@ model ResourceGroupCarbonEmissionItemDetailData extends CarbonEmissionData {
   @doc("Subscription Id")
   subscriptionId: string;
 
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("Resource Group url, value format is '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}'")
   resourceGroupUrl: string;
 }
@@ -490,9 +627,10 @@ model ResourceGroupCarbonEmissionItemDetailData extends CarbonEmissionData {
 model CarbonEmissionDataListResult {
   @doc("The CarbonEmissionData items on this page")
   @Azure.ResourceManager.identifiers(#[])
+  @pageItems
   value: CarbonEmissionData[];
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "skipToken is a pagination token, not a secret"
   @doc("The pagination token to fetch next page data, it's null or empty if it doesn't have next page data")
   skipToken?: string;
 
@@ -515,6 +653,8 @@ model CarbonEmissionDataAvailableDateRange {
 interface CarbonService {
   @doc("API for Carbon Emissions Reports")
   @post
+  @list
+  @armResourceCollectionAction
   @route("/providers/Microsoft.Carbon/carbonEmissionReports")
   queryCarbonEmissionReports(
     ...ApiVersionParameter,
@@ -530,4 +670,20 @@ interface CarbonService {
   queryCarbonEmissionDataAvailableDateRange(...ApiVersionParameter):
     | ArmResponse<CarbonEmissionDataAvailableDateRange>
     | ErrorResponse;
+
+  @doc("API for Carbon Emissions Reports scoped to a billing account.")
+  @added(Versions.v2026_05_01_preview)
+  @post
+  @route("/{+scope}/providers/Microsoft.Carbon/carbonEmissionReports")
+  queryCarbonEmissionReportsByBillingAccount(
+    ...ApiVersionParameter,
+
+    @doc("The scope associated with carbon emission report operations. This includes '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope.")
+    @path
+    scope: string,
+
+    @body
+    @doc("Query parameters")
+    queryParameters: BillingAccountQueryFilter,
+  ): CarbonEmissionDataListResult | ErrorResponse;
 }

@@ -28,6 +28,19 @@ title: CarbonOptimizationClient
 openapi-type: arm
 openapi-subtype: rpaas
 tag: package-2025-04-01
+suppressions:
+  - code: XMSSecretInResponse
+    reason: skipToken is a pagination cursor token used for fetching subsequent pages of data, not a secret credential. It is safe to return in responses.
+    from: main.json
+```
+
+### Tag: package-2026-05-01-preview
+
+These settings apply only when `--tag=package-2026-05-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2026-05-01-preview'
+input-file:
+- Microsoft.Carbon/preview/2026-05-01-preview/main.json
 ```
 
 
