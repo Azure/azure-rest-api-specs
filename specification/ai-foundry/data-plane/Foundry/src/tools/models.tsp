@@ -1,4 +1,5 @@
 import "../memory-stores/models.tsp";
+import "../toolboxes/models.tsp";
 
 using Azure.Core.Experimental;
 using TypeSpec.Versioning;
@@ -21,6 +22,7 @@ namespace Azure.AI.Projects {
     work_iq_preview: "work_iq_preview",
     fabric_iq_preview: "fabric_iq_preview",
     toolbox_search_preview: "toolbox_search_preview",
+
     @removed(Versions.v1)
     web_iq_preview: "web_iq_preview",
   }
