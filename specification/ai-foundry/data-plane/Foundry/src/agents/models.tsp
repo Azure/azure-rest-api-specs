@@ -125,6 +125,17 @@ union AgentState {
   disabled: "disabled",
 }
 
+@doc("Indicates the source of an agent's operational state. Empty when the state is not derived from a specific source.")
+union AgentStateSource {
+  string,
+
+  @doc("The state is derived from the agent's instance identity.")
+  agent_instance_identity: "agent_instance_identity",
+
+  @doc("The state is derived from the agent's blueprint.")
+  agent_blueprint: "agent_blueprint",
+}
+
 model AgentObject {
   @doc("The object type, which is always 'agent'.")
   object: AgentObjectType.agent;
@@ -139,6 +150,10 @@ model AgentObject {
   @doc("The operational state of the agent. Controls whether the agent endpoint accepts or rejects requests.")
   @visibility(Lifecycle.Read)
   state: AgentState;
+
+  @doc("The source of the agent's operational state. When the agent is disabled, indicates where the disabled state originates from. Empty when not derived from a specific source.")
+  @visibility(Lifecycle.Read)
+  state_source?: AgentStateSource;
 
   @doc("The latest version of the agent.")
   versions: {
