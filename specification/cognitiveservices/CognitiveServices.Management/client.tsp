@@ -1079,7 +1079,7 @@ op regenerateKeyCustom(
 
 // Type changes: use standard ARM types for etag, location, identity
 @@alternateType(Compute.etag, eTag, "csharp");
-@@alternateType(Compute.location, azureLocation, "csharp");
+@@alternateType(ComputeProperties.location, azureLocation, "csharp");
 @@alternateType(
   Compute.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
