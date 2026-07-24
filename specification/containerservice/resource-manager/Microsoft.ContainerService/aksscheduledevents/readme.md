@@ -7,6 +7,10 @@ This is the AutoRest configuration file for AKS scheduled events.
 ``` yaml
 openapi-type: arm
 tag: package-2026-06
+suppressions:
+  - code: OperationsAPIImplementation
+    from: scheduledEvents.json
+    reason: scheduledEvents is a schema-only Azure Resource Notifications contract and intentionally does not define customer-callable ARM operations.
 ```
 
 ### Tag: package-2026-06
