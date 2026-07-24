@@ -1095,11 +1095,6 @@ namespace Azure.ResourceManager.ContainerService.Models {
   "csharp"
 );
 @@clientName(
-  ManagedClusterAzureMonitorProfileContainerInsights.disableCustomMetrics,
-  "IsCustomMetricsDisabled",
-  "csharp"
-);
-@@clientName(
   ManagedClusterAzureMonitorProfileContainerInsights.disablePrometheusMetricsScraping,
   "IsPrometheusMetricsScrapingDisabled",
   "csharp"

@@ -3773,9 +3773,9 @@ model ManagedClusterAzureMonitorProfile {
   metrics?: ManagedClusterAzureMonitorProfileMetrics;
 
   /**
-   * Azure Monitor Container Insights Profile for Kubernetes Events, Inventory and Container stdout & stderr logs etc. See aka.ms/AzureMonitorContainerInsights for an overview.
+   * Set this to enable and configure Azure Monitor Container Insights for the cluster, which collects Kubernetes events, inventory, and container stdout & stderr logs. See aka.ms/AzureMonitorContainerInsights for an overview.
    */
-  @added(Versions.v2026_06_02_preview)
+  @added(Versions.v2026_06_01)
   containerInsights?: ManagedClusterAzureMonitorProfileContainerInsights;
 
   /**
@@ -3833,9 +3833,9 @@ model ManagedClusterAzureMonitorProfileMetricsControlPlane {
 }
 
 /**
- * Azure Monitor Container Insights Profile for Kubernetes Events, Inventory and Container stdout & stderr logs etc. See aka.ms/AzureMonitorContainerInsights for an overview.
+ * Azure Monitor Container Insights profile. Represents the configuration for collecting Kubernetes events, inventory, and container stdout & stderr logs. See aka.ms/AzureMonitorContainerInsights for an overview.
  */
-@added(Versions.v2026_06_02_preview)
+@added(Versions.v2026_06_01)
 model ManagedClusterAzureMonitorProfileContainerInsights {
   /**
    * Indicates if Azure Monitor Container Insights Logs Addon is enabled or not.
@@ -3857,26 +3857,21 @@ model ManagedClusterAzureMonitorProfileContainerInsights {
   syslogPort?: int64;
 
   /**
-   * Indicates whether custom metrics collection has to be disabled or not. If not specified the default is false. No custom metrics will be emitted if this field is false but the container insights enabled field is false
-   */
-  disableCustomMetrics?: boolean;
-
-  /**
-   * Indicates whether prometheus metrics scraping is disabled or not. If not specified the default is false. No prometheus metrics will be emitted if this field is false but the container insights enabled field is false
+   * Indicates whether prometheus metrics scraping is disabled or not. If not specified the default is false i.e. the prometheus scraping is enabled.
    */
   disablePrometheusMetricsScraping?: boolean;
 
   /**
-   * Configures container network logs ingestion with Azure Monitor. Which network logs to ingest is controlled by the CRD found in the following links. No network logs are ingested by default. More information on container network logs can be found at https://aka.ms/ContainerNetworkLogsDoc. More information on configuring container network log can be found at https://aka.ms/acns/howtoenablecnl. If not specified, the default is Disabled.
+   * Configures container network logs ingestion with Azure Monitor. The log types ingested are controlled by the associated CRD; if unspecified, defaults to `Disabled`. See https://aka.ms/ContainerNetworkLogsDoc and https://aka.ms/acns/howtoenablecnl for details.
    */
-  @added(Versions.v2026_06_02_preview)
+  @added(Versions.v2026_06_01)
   containerNetworkLogs?: ContainerNetworkLogs;
 }
 
 /**
- * Configures container network logs ingestion with Azure Monitor. Which network logs to ingest is controlled by the CRD found in the following links. No network logs are ingested by default. More information on container network logs can be found at https://aka.ms/ContainerNetworkLogsDoc. More information on configuring container network log can be found at https://aka.ms/acns/howtoenablecnl. If not specified, the default is Disabled.
+ * Allowed values for container network logs ingestion with Azure Monitor. When `Enabled`, the specific log types ingested are controlled by the associated CRD; defaults to `Disabled`. See https://aka.ms/ContainerNetworkLogsDoc and https://aka.ms/acns/howtoenablecnl for details.
  */
-@added(Versions.v2026_06_02_preview)
+@added(Versions.v2026_06_01)
 union ContainerNetworkLogs {
   string,
 
@@ -3902,15 +3897,15 @@ model ManagedClusterAzureMonitorProfileAppMonitoring {
   autoInstrumentation?: ManagedClusterAzureMonitorProfileAppMonitoringAutoInstrumentation;
 
   /**
-   * Application Monitoring Open Telemetry Metrics Profile for AKS. Collects OpenTelemetry metrics of the application using Azure Monitor OpenTelemetry based SDKs. See https://aka.ms/AKSAppMonitoringDocs and https://aka.ms/AzureMonitorApplicationMonitoring for an overview.
+   * Application Monitoring OpenTelemetry Metrics Profile for AKS. Collects OpenTelemetry metrics of the application using Azure Monitor OpenTelemetry based SDKs. See https://aka.ms/AKSAppMonitoringDocs and https://aka.ms/AzureMonitorApplicationMonitoring for an overview.
    */
-  @added(Versions.v2026_06_02_preview)
+  @added(Versions.v2026_06_01)
   openTelemetryMetrics?: ManagedClusterAzureMonitorProfileAppMonitoringOpenTelemetryMetrics;
 
   /**
-   * Application Monitoring Open Telemetry Logs and Traces Profile for AKS. Collects OpenTelemetry logs and traces of the application using Azure Monitor OpenTelemetry based SDKs. See https://aka.ms/AKSAppMonitoringDocs and https://aka.ms/AzureMonitorApplicationMonitoring for an overview.
+   * Application Monitoring OpenTelemetry logs and traces profile for AKS. Collects OpenTelemetry logs and traces of the application using Azure Monitor OpenTelemetry based SDKs. See https://aka.ms/AKSAppMonitoringDocs and https://aka.ms/AzureMonitorApplicationMonitoring for an overview.
    */
-  @added(Versions.v2026_06_02_preview)
+  @added(Versions.v2026_06_01)
   openTelemetryLogsAndTraces?: ManagedClusterAzureMonitorProfileAppMonitoringOpenTelemetryLogsAndTraces;
 }
 
@@ -3926,43 +3921,43 @@ model ManagedClusterAzureMonitorProfileAppMonitoringAutoInstrumentation {
 }
 
 /**
- * Application Monitoring Open Telemetry Metrics Profile for AKS. Collects OpenTelemetry metrics of the application using Azure Monitor OpenTelemetry based SDKs. See https://aka.ms/AKSAppMonitoringDocs and https://aka.ms/AzureMonitorApplicationMonitoring for an overview.
+ * Application Monitoring OpenTelemetry Metrics Profile for AKS. Collects OpenTelemetry metrics of the application using Azure Monitor OpenTelemetry based SDKs. See https://aka.ms/AKSAppMonitoringDocs and https://aka.ms/AzureMonitorApplicationMonitoring for an overview.
  */
-@added(Versions.v2026_06_02_preview)
+@added(Versions.v2026_06_01)
 model ManagedClusterAzureMonitorProfileAppMonitoringOpenTelemetryMetrics {
   /**
-   * Indicates if Application Monitoring Open Telemetry Metrics is enabled or not.
+   * Indicates if Application Monitoring OpenTelemetry Metrics is enabled or not.
    */
   enabled?: boolean;
 
   /**
-   * The host port for Open Telemetry HTTP/PROTOBUF metrics. If not specified, the default port is 28333.
+   * The host port for OpenTelemetry HTTP/PROTOBUF metrics. If not specified, the default port is 28333.
    */
   httpPort?: int64;
 
   /**
-   * The host port for Open Telemetry GRPC metrics. If not specified, the default port is 28334.
+   * The host port for OpenTelemetry GRPC metrics. If not specified, the default port is 28334.
    */
   grpcPort?: int64;
 }
 
 /**
- * Application Monitoring Open Telemetry Logs and Traces Profile for AKS. Collects OpenTelemetry logs and traces of the application using Azure Monitor OpenTelemetry based SDKs. See https://aka.ms/AKSAppMonitoringDocs and https://aka.ms/AzureMonitorApplicationMonitoring for an overview.
+ * Application Monitoring OpenTelemetry logs and traces profile for AKS. Collects OpenTelemetry logs and traces of the application using Azure Monitor OpenTelemetry based SDKs. See https://aka.ms/AKSAppMonitoringDocs and https://aka.ms/AzureMonitorApplicationMonitoring for an overview.
  */
-@added(Versions.v2026_06_02_preview)
+@added(Versions.v2026_06_01)
 model ManagedClusterAzureMonitorProfileAppMonitoringOpenTelemetryLogsAndTraces {
   /**
-   * Indicates if Application Monitoring Open Telemetry Logs and traces is enabled or not.
+   * Indicates if Application Monitoring OpenTelemetry Logs and traces is enabled or not.
    */
   enabled?: boolean;
 
   /**
-   * The host port for Open Telemetry HTTP/PROTOBUF logs and traces. If not specified, the default port is 28331.
+   * The host port for OpenTelemetry HTTP/PROTOBUF logs and traces. If not specified, the default port is 28331.
    */
   httpPort?: int64;
 
   /**
-   * The host port for Open Telemetry GRPC logs and traces. If not specified, the default port is 28332.
+   * The host port for OpenTelemetry GRPC logs and traces. If not specified, the default port is 28332.
    */
   grpcPort?: int64;
 }
