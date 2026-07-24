@@ -5,6 +5,11 @@ suppressions applicable to a given tool and path. Validation tools across the
 `Azure/azure-rest-api-specs` repository use it to let spec authors suppress specific checks for
 specific files or directories.
 
+> **Not what you're looking for?** This tool is for suppressing **validation-tool checks** via
+> `suppressions.yaml`. To suppress a **TypeSpec lint rule** (`#suppress` directives in `.tsp` files or
+> `linter.disable` entries in `tspconfig.yaml`), see
+> [`TypeSpec Suppressions` CI check](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/ci-fix.md#typespec-suppressions).
+
 This document has two audiences:
 
 - **[Usage](#usage)** — for _users_ of the suppressions API, how to author `suppressions.yaml`

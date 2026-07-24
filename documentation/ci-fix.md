@@ -32,6 +32,7 @@ If you need help with your specs PR, please first thoroughly read the [aka.ms/az
   - [`Swagger SemanticValidation`](#swagger-semanticvalidation)
   - [Spell Check](#spell-check)
   - [`TypeSpec Validation`](#typespec-validation)
+  - [`TypeSpec Suppressions`](#typespec-suppressions)
   - [`license/cla`](#licensecla)
 - [Suppression Process](#suppression-process)
 - [Checks not covered by this guide](#checks-not-covered-by-this-guide)
@@ -255,6 +256,62 @@ For more information see [cspell configuration](https://cspell.org/configuration
 
 https://github.com/Azure/azure-rest-api-specs/wiki/TypeSpec-Validation
 
+## `TypeSpec Suppressions`
+
+> [!NOTE]
+>
+> This check is currently in **testing mode and is non-blocking** — it surfaces
+> information and inline warnings but does not currently prevent your PR from
+> merging. It is distinct from the AutoRest/`suppressions.yaml` flow described in
+> [Suppression Process](#suppression-process) below.
+
+This check detects **new or changed TypeSpec lint suppressions** introduced by
+your PR and surfaces them for review. It analyzes two kinds of suppressions in
+the TypeSpec projects impacted by your changes:
+
+- **Inline suppressions**: `#suppress` directives in `.tsp` files.
+- **Config suppressions**: `linter.disable` entries in `tspconfig.yaml`.
+
+The check runs as the following workflows (mirroring the three-run structure used
+by other validations in this repo):
+
+| Check name | Purpose |
+|------------|---------|
+| `TypeSpec Suppressions - Analyze Code` | Computes the impacted TypeSpec folders, runs the analyzer, writes the markdown summary + a JSON report artifact (`typespec-suppressions-report`), and emits inline `::warning` annotations anchored to each suppression on the PR diff. |
+| `TypeSpec Suppressions - Set Status` | Reports the check status; approval is granted by applying the `Approved-TypeSpecSuppression` label. |
+| `TypeSpec Suppressions - Test` | Runs the analyzer tool's own test suite. |
+
+### Where to see the results
+
+- A **"TypeSpec suppressions requiring review"** section is added to the
+  "Next Steps to Merge" PR comment, listing the new/changed suppressions with
+  their rule, source location, and justification.
+- **Inline `::warning` annotations** appear on the PR diff at each suppression's
+  source location.
+- The full structured report is uploaded as the `typespec-suppressions-report`
+  build artifact.
+
+### What to do
+
+1. Review each surfaced suppression and confirm it is intentional and has a clear
+   justification. Every suppression should include a meaningful justification
+   string; suppressions with no justification are flagged.
+2. If a suppression is unnecessary, remove the `#suppress` directive (or the
+   `linter.disable` entry in `tspconfig.yaml`) and fix the underlying lint issue
+   instead.
+3. If the suppression is legitimate and requires approval, ask the appropriate
+   reviewer to apply the `Approved-TypeSpecSuppression` label.
+
+### Reproduce locally
+
+The check is powered by the `@azure-tools/typespec-suppressions` CLI. See
+[`eng/tools/typespec-suppressions/README.md`](https://github.com/Azure/azure-rest-api-specs/blob/main/eng/tools/typespec-suppressions/README.md)
+for usage. For example, to compare your branch against `main`:
+
+``` powershell
+npx typespec-suppressions --base origin/main <path-to-typespec-project-folder>
+```
+
 ## `license/cla`
 
 This check is owned by One Engineering System. See [1ES GitHub inside Microsoft] for help.
@@ -264,6 +321,12 @@ This check is owned by One Engineering System. See [1ES GitHub inside Microsoft]
 In case there are validation errors reported against your service that you believe do not apply,
 we have a suppression process you can follow to permanently remove these reported errors for your specs.
 Refer to the [suppression guide](https://aka.ms/pr-suppressions) for detailed guidance.
+
+This process (backed by `suppressions.yaml` files and the `Approved-Suppression` label) applies to
+most validation checks. It is separate from TypeSpec *lint* suppressions (`#suppress` directives and
+`tspconfig.yaml` `linter.disable` entries), which are surfaced by the
+[`TypeSpec Suppressions`](#typespec-suppressions) check and approved via the `Approved-TypeSpecSuppression`
+label.
 
 # Checks not covered by this guide
 
