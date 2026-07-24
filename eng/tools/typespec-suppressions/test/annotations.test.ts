@@ -76,7 +76,8 @@ describe("formatSuppressionAnnotation", () => {
     expect(annotation).toContain("::error ");
     expect(annotation).not.toContain("::warning ");
     expect(annotation).toContain("title=❌ Missing Justification");
-    expect(annotation).toContain("This suppression is missing a justification");
+    expect(annotation).toContain("Authors must justify this suppression before review can proceed");
+    expect(annotation).toContain("Review stays pending until a justification is added");
   });
 
   it("treats a blank justification as ::error even for a changed suppression (missing wins)", () => {
@@ -99,18 +100,13 @@ describe("formatSuppressionAnnotation", () => {
     );
   });
 
-  it("includes the rule docs line when a documentation URL is available", () => {
+  it("never includes a rule docs line, even when a documentation URL is available", () => {
     const annotation = formatSuppressionAnnotation(makeRecord(), "new");
 
-    expect(annotation).toContain(
-      "**Rule docs**: https://azure.github.io/typespec-azure/docs/libraries/azure-core/rules/no-enum",
-    );
-  });
-
-  it("omits the docs clause when no documentation URL is available", () => {
-    const annotation = formatSuppressionAnnotation(makeRecord({ ruleMetadata: undefined }), "new");
-
     expect(annotation).not.toContain("Rule docs");
+    expect(annotation).not.toContain(
+      "https://azure.github.io/typespec-azure/docs/libraries/azure-core/rules/no-enum",
+    );
   });
 
   it("omits the rule name and justification text from the body", () => {
@@ -120,23 +116,9 @@ describe("formatSuppressionAnnotation", () => {
     expect(annotation).not.toContain("Legacy enum kept for backward compatibility");
   });
 
-  it("encodes newlines as %0A and never emits a literal newline", () => {
+  it("never emits a literal newline in the message", () => {
     const annotation = formatSuppressionAnnotation(makeRecord(), "new");
 
-    expect(annotation).toContain("%0A");
-    expect(annotation).not.toContain("\n");
-  });
-
-  it("escapes newlines and percent signs in the message", () => {
-    const annotation = formatSuppressionAnnotation(
-      makeRecord({
-        ruleMetadata: { documentationUrl: "https://example.com/docs%20guide" },
-      }),
-      "new",
-    );
-
-    expect(annotation).toContain("https://example.com/docs%2520guide");
-    expect(annotation).toContain("%0A");
     expect(annotation).not.toContain("\n");
   });
 });
