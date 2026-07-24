@@ -9798,6 +9798,9 @@
         "x-ms-examples": {
           "Get instance view of a virtual machine from a VM scale set placed on a dedicated host group through automatic placement.": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSetVM_Get_InstanceViewAutoPlacedOnDedicatedHostGroup.json"
+          },
+          "Get instance view of a virtual machine from a VM scale set that is eligible for and consuming an open capacity reservation.": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSetVM_Get_InstanceViewWithCapacityReservationType.json"
           }
         }
       }
@@ -24410,6 +24413,11 @@
         "interconnectInstanceView": {
           "$ref": "#/definitions/InterconnectInstanceView",
           "description": "The Interconnect runtime view of the Scale Set VM instance. Minimum api-version: 2026-03-01.",
+          "readOnly": true
+        },
+        "capacityReservationType": {
+          "$ref": "#/definitions/CapacityReservationType",
+          "description": "Specifies which type of capacity reservation the virtual machine scale set VM instance will consume capacity from if eligible or whether it is explicitly opted out from being associated and consuming capacity from any reserved capacity available in the subscription. Minimum api-version: 2026-04-01.",
           "readOnly": true
         }
       }

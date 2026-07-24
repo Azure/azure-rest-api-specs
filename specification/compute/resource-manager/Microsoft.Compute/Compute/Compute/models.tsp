@@ -5310,6 +5310,13 @@ model VirtualMachineScaleSetVMInstanceView {
   @added(Versions.v2026_03_01)
   @visibility(Lifecycle.Read)
   interconnectInstanceView?: InterconnectInstanceView;
+
+  /**
+   * Specifies which type of capacity reservation the virtual machine scale set VM instance will consume capacity from if eligible or whether it is explicitly opted out from being associated and consuming capacity from any reserved capacity available in the subscription. Minimum api-version: 2026-04-01.
+   */
+  @added(Versions.v2026_04_01)
+  @visibility(Lifecycle.Read)
+  capacityReservationType?: CapacityReservationType;
 }
 
 /**
