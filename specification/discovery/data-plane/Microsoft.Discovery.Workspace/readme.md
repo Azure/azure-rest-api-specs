@@ -22,7 +22,30 @@ These are the global settings for the Microsoft.Discovery.Workspace API.
 
 ```yaml
 openapi-type: data-plane
-tag: package-2026-02-01-preview
+tag: package-2026-06-01
+```
+
+### Tag: package-2026-06-01
+
+These settings apply only when `--tag=package-2026-06-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-06-01'
+input-file:
+  - stable/2026-06-01/discovery-workspace.json
+suppressions:
+  - code: AvoidAnonymousTypes
+    reason: LRO status response uses inline OperationStatus model from Azure.Core templates
+    from: discovery-workspace.json
+    where:
+      - $.paths["/projects/{projectName}/investigations/{investigationName}"].delete.responses["202"].schema
+      - $.paths["/projects/{projectName}/investigations/{investigationName}/operations/{operationId}"].get.responses["200"].schema
+      - $.paths["/tools/projects/{projectName}:run"].post.responses["202"].schema
+      - $.paths["/tools/projects/{projectName}/operations/{operationId}"].get.responses["200"].schema
+  - code: LroExtension
+    reason: cancelRun Does not expose polling semantics.
+    from: discovery-workspace.json
+    where:
+      - $.paths["/tools/projects/{projectName}/operations/{operationId}:cancel"].post
 ```
 
 ### Tag: package-2026-02-01-preview
@@ -47,3 +70,4 @@ suppressions:
     where:
       - $.paths["/tools/projects/{projectName}/operations/{operationId}:cancel"].post
 ```
+

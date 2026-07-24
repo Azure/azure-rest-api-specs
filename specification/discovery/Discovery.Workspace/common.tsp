@@ -1,4 +1,4 @@
-import "./shared.tsp";
+import "../Discovery.Common/shared.tsp";
 import "@typespec/http";
 import "@typespec/versioning";
 

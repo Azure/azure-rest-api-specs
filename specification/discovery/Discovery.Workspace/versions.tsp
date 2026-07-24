@@ -9,4 +9,7 @@ namespace Microsoft.Discovery.Workspace;
 enum Versions {
   @doc("The 2026-02-01-preview version of the Microsoft.Discovery service data plane.")
   `2026-02-01-preview`,
+
+  @doc("The 2026-06-01 version of the Microsoft.Discovery service data plane.")
+  `2026-06-01`,
 }

@@ -43,6 +43,7 @@
   "securityDefinitions": {
     "OAuth2Auth": {
       "type": "oauth2",
+      "description": "OAuth2 implicit flow for authenticating with the Discovery Workspace API. Uses Azure Active Directory for authorization.",
       "flow": "implicit",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
       "scopes": {
@@ -1407,14 +1408,6 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "taskName",
-            "in": "path",
-            "description": "The task name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{1,75}$"
-          },
-          {
             "name": "projectName",
             "in": "path",
             "description": "The project name.",
@@ -1429,6 +1422,14 @@
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "taskName",
+            "in": "path",
+            "description": "The task name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{1,75}$"
           },
           {
             "name": "body",
@@ -2002,34 +2003,28 @@
         "createdAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The timestamp when the resource was created",
-          "readOnly": true
+          "description": "The timestamp when the resource was created."
         },
         "createdBy": {
           "type": "string",
-          "description": "The ID of the user who created this resource.",
-          "readOnly": true
+          "description": "The ID of the user who created this resource."
         },
         "createdByType": {
           "$ref": "#/definitions/Microsoft.Discovery.Common.ByType",
-          "description": "The type of user who created this resource.",
-          "readOnly": true
+          "description": "The type of user who created this resource."
         },
         "lastModifiedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The timestamp when the resource was last updated",
-          "readOnly": true
+          "description": "The timestamp when the resource was last updated"
         },
         "lastModifiedBy": {
           "type": "string",
-          "description": "The ID of the user who updated this resource.",
-          "readOnly": true
+          "description": "The ID of the user who updated this resource."
         },
         "lastModifiedByType": {
           "$ref": "#/definitions/Microsoft.Discovery.Common.ByType",
-          "description": "The type of user who updated this resource.",
-          "readOnly": true
+          "description": "The type of user who updated this resource."
         },
         "displayName": {
           "type": "string",
@@ -2065,6 +2060,32 @@
       "type": "object",
       "description": "A conversation.",
       "properties": {
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the resource was created."
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "The ID of the user who created this resource."
+        },
+        "createdByType": {
+          "$ref": "#/definitions/Microsoft.Discovery.Common.ByType",
+          "description": "The type of user who created this resource."
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the resource was last updated"
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "The ID of the user who updated this resource."
+        },
+        "lastModifiedByType": {
+          "$ref": "#/definitions/Microsoft.Discovery.Common.ByType",
+          "description": "The type of user who updated this resource."
+        },
         "displayName": {
           "type": "string",
           "description": "The title",
@@ -2146,34 +2167,28 @@
         "createdAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The timestamp when the resource was created",
-          "readOnly": true
+          "description": "The timestamp when the resource was created."
         },
         "createdBy": {
           "type": "string",
-          "description": "The ID of the user who created this resource.",
-          "readOnly": true
+          "description": "The ID of the user who created this resource."
         },
         "createdByType": {
           "$ref": "#/definitions/Microsoft.Discovery.Common.ByType",
-          "description": "The type of user who created this resource.",
-          "readOnly": true
+          "description": "The type of user who created this resource."
         },
         "lastModifiedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The timestamp when the resource was last updated",
-          "readOnly": true
+          "description": "The timestamp when the resource was last updated"
         },
         "lastModifiedBy": {
           "type": "string",
-          "description": "The ID of the user who updated this resource.",
-          "readOnly": true
+          "description": "The ID of the user who updated this resource."
         },
         "lastModifiedByType": {
           "$ref": "#/definitions/Microsoft.Discovery.Common.ByType",
-          "description": "The type of user who updated this resource.",
-          "readOnly": true
+          "description": "The type of user who updated this resource."
         }
       },
       "required": [
@@ -3519,8 +3534,7 @@
         "createdAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The timestamp when the resource was created",
-          "readOnly": true
+          "description": "The timestamp when the resource was created."
         }
       },
       "required": [
