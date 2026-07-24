@@ -987,7 +987,8 @@ describe("Summarize Checks Unit Tests", () => {
         'the best practices documented by ARM at <a href="https://aka.ms/armapibestpractices">aka.ms/armapibestpractices</a>.</b> ' +
         "If you do intend to release the APIs to your customers by merging this PR, add the <code>PublishToCustomers</code> label " +
         "to your PR in acknowledgement of the above. Otherwise, retarget this PR onto a feature branch, i.e. with prefix <code>release-</code> " +
-        '(see <a href="https://aka.ms/azsdk/api-versions#release--branches">aka.ms/azsdk/api-versions#release--branches</a>).</li>' +
+        '(see <a href="https://aka.ms/azsdk/api-versions#release--branches">aka.ms/azsdk/api-versions#release--branches</a>). ' +
+        '❗If you don\'t have permissions to add the label, request <code>write access</code> per <a href="https://aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories">aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories</a>.</li>' +
         "<li>❌ This PR has at least one change violating Azure versioning policy (label: <code>VersioningReviewRequired</code>).<br/>To unblock this PR, either a) " +
         'introduce a new API version with these changes instead of modifying an existing API version, or b) follow the process at <a href="https://aka.ms/brch">aka.ms/brch</a>.' +
         "</li><li>❌ The required check named <code>TypeSpec Validation</code> has failed. Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult " +
