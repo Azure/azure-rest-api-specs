@@ -274,6 +274,7 @@ model KnowledgeBaseSearchOperationResponse
 interface KnowledgeBases {
   @doc("Creates or updates a KnowledgeBase.")
   @pollingOperation(KnowledgeBases.getOperationStatus)
+  @finalOperation(KnowledgeBases.get)
   @added(Versions.`2026-06-01`)
   createOrUpdate is StandardResourceOperations.LongRunningResourceCreateOrUpdate<KnowledgeBase>;
 
