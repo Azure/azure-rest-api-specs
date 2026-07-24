@@ -27,7 +27,16 @@ These are the global settings for the storagemover.
 ``` yaml
 openapi-type: arm
 openapi-subtype: providerHub
-tag: package-2025-12
+tag: package-2026-05
+```
+### Tag: package-2026-05
+
+These settings apply only when `--tag=package-2026-05` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-05'
+input-file:
+  - stable/2026-05-01/storagemover.json
+
 ```
 
 ### Tag: package-2025-12

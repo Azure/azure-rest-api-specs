@@ -32,7 +32,7 @@ const NamespaceResultsSchema = z.object({
  * @param {string} owner
  * @param {string} repo
  * @param {number} runId
- * @returns {Promise<z.infer<typeof NamespaceResultsSchema>>}
+ * @returns {Promise<z.infer<typeof NamespaceResultsSchema> | null>}
  */
 async function downloadNamespaceResults(github, core, owner, repo, runId) {
   const artifacts = await github.paginate(github.rest.actions.listWorkflowRunArtifacts, {
@@ -50,7 +50,10 @@ async function downloadNamespaceResults(github, core, owner, repo, runId) {
   })[0];
 
   if (!artifact) {
-    throw new Error(`No namespace-results artifact found for run ${runId}`);
+    core.info(
+      `No namespace-results artifact found for run ${runId} (PR likely has no tspconfig changes)`,
+    );
+    return null;
   }
 
   const download = await github.rest.actions.downloadArtifact({
@@ -218,6 +221,11 @@ export default async function postResults({ github, context, core }) {
   const { owner, repo, issue_number, run_id } = await extractInputs(github, context, core);
   const approversConfig = await loadApproversConfig();
   const results = await downloadNamespaceResults(github, core, owner, repo, run_id);
+
+  if (!results) {
+    core.info("No namespace results to process (PR has no tspconfig changes), exiting gracefully");
+    return;
+  }
 
   const { data: pr } = await github.rest.pulls.get({
     owner,
