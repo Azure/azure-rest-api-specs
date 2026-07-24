@@ -868,6 +868,20 @@ union GeographicallyRedundantBackup {
 }
 
 /**
+ * Indicates if the server is configured to create immutable backups.
+ */
+@added(Versions.v2026_07_01)
+union ImmutableBackup {
+  string,
+
+  /** Server is configured to create immutable backups. */
+  Enabled: "Enabled",
+
+  /** Server is not configured to create immutable backups. */
+  Disabled: "Disabled",
+}
+
+/**
  * Indicates if public network access is enabled or not.
  */
 union ServerPublicNetworkAccessState {
@@ -3188,6 +3202,12 @@ model Backup {
   geoRedundantBackup?: GeographicallyRedundantBackup = GeographicallyRedundantBackup.Disabled;
 
   /**
+   * Indicates if the server is configured to create immutable backups.
+   */
+  @added(Versions.v2026_07_01)
+  immutableBackup?: ImmutableBackup;
+
+  /**
    * Earliest restore point time (ISO8601 format) for a server.
    */
   @visibility(Lifecycle.Read)
@@ -3472,6 +3492,12 @@ model BackupForPatch {
    */
   @visibility(Lifecycle.Read)
   geoRedundantBackup?: GeographicallyRedundantBackup;
+
+  /**
+   * Indicates if the server is configured to create immutable backups.
+   */
+  @added(Versions.v2026_07_01)
+  immutableBackup?: ImmutableBackup;
 
   /**
    * Earliest restore point time (ISO8601 format) for a server.
