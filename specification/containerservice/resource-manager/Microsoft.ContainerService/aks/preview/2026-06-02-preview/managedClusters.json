@@ -8379,6 +8379,34 @@
         }
       }
     },
+    "CapacityReservation": {
+      "type": "object",
+      "description": "The Capacity Reservation to provide virtual machines from a reserved group of Machines",
+      "properties": {
+        "capacityReservationGroup": {
+          "$ref": "#/definitions/CapacityReservationGroup",
+          "description": "The Capacity Reservation Group to provide virtual machines from a reserved group of Machines"
+        }
+      }
+    },
+    "CapacityReservationGroup": {
+      "type": "object",
+      "description": "The Capacity Reservation Group to provide virtual machines from a reserved group of Machines",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The fully qualified resource ID of the Capacity Reservation Group to provide virtual machines from a reserved group of Machines. This is of the form: '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Compute/capacityreservationgroups/{capacityReservationGroupName}' Customers use it to create a Machine with a specified CRG. For more information see [Capacity Reservation](aka.ms/CapacityReservation)",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Compute/CapacityReservationGroups"
+              }
+            ]
+          }
+        }
+      }
+    },
     "ClusterUpgradeSettings": {
       "type": "object",
       "description": "Settings for upgrading a cluster.",
@@ -11048,6 +11076,10 @@
         "localDNSProfile": {
           "$ref": "#/definitions/LocalDNSProfile",
           "description": "Configures the per-node local DNS, with VnetDNS and KubeDNS overrides. LocalDNS helps improve performance and reliability of DNS resolution in an AKS cluster. For more details see aka.ms/aks/localdns."
+        },
+        "capacityReservation": {
+          "$ref": "#/definitions/CapacityReservation",
+          "description": "The Capacity Reservation Group to provide virtual machines from a reserved group of Machines"
         }
       }
     },
