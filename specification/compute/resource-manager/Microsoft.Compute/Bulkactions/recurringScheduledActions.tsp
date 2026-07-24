@@ -694,6 +694,7 @@ model OccurrenceExtensionResource
 interface ScheduledActions {
   get is ArmResourceRead<ScheduledAction>;
 
+  @doc("Create a Recurring Bulk Action")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<ScheduledAction>;
 
   update is ArmCustomPatchAsync<
@@ -720,9 +721,9 @@ interface ScheduledActions {
   @list
   @get
   @doc("List resources attached to Scheduled Actions")
-  listResources(...ResourceInstanceParameters<ScheduledActionResource>):
-    | ArmResponse<ResourceListResponse>
-    | ErrorResponse;
+  listResources(
+    ...ResourceInstanceParameters<ScheduledActionResource>,
+  ): ArmResponse<ResourceListResponse> | ErrorResponse;
 
   /** Attach resources to the scheduled action so they are included in future occurrences. */
   attachResources is ArmResourceActionAsync<
@@ -807,9 +808,7 @@ interface ScheduledActionOperationStatus {
     @minLength(1)
     @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
     operationId: string,
-  ):
-    | ArmResponse<Azure.ResourceManager.CommonTypes.OperationStatusResult>
-    | ErrorResponse;
+  ): ArmResponse<Azure.ResourceManager.CommonTypes.OperationStatusResult> | ErrorResponse;
 }
 
 // ------------------ Occurrence operations ------------------
@@ -826,9 +825,9 @@ interface Occurrences {
   @list
   @get
   @doc("List resources attached to Scheduled Actions for the given occurrence")
-  listResources(...ResourceInstanceParameters<OccurrenceResource>):
-    | ArmResponse<OccurrenceResourceListResponse>
-    | ErrorResponse;
+  listResources(
+    ...ResourceInstanceParameters<OccurrenceResource>,
+  ): ArmResponse<OccurrenceResourceListResponse> | ErrorResponse;
 
   /** Cancel the occurrence so its pending operations do not run. */
   cancel is ArmResourceActionAsync<
