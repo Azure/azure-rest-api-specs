@@ -117,6 +117,8 @@ namespace Azure.AI.Projects {
   @@clientName(ToolArgumentBinding, "StructuredInputToolArgumentBinding");
   @@clientName(FabricIQPreviewTool.server_url, "ServerUri");
   @@clientName(FabricIQPreviewToolboxTool.server_url, "ServerUri");
+  //@@clientName(WebIQPreviewTool.server_url, "ServerUri");
+  //@@clientName(WebIQPreviewToolboxTool.server_url, "ServerUri");
 
   // --------------------------------------------------------------------------------
   // Renames and visibility changes for targeted suppressions
