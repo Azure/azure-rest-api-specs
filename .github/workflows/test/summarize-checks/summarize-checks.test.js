@@ -1536,7 +1536,7 @@ describe("Summarize Checks Unit Tests", () => {
             "abc123",
             impactAssessment,
           ),
-        ).resolves.toContain("https://aka.ms/azsdk/tspsuppressionfeedback");
+        ).resolves.toContain("https://aka.ms/tsp-suppress/feedback");
         await expect(
           getTypeSpecSuppressionsSection(
             github,

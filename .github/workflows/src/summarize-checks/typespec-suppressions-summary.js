@@ -436,7 +436,7 @@ export async function getTypeSpecSuppressionsSection(
     "",
     'For an overview of TypeSpec linting rules <a href="https://aka.ms/tsp-suppress/tsp-to-lintdiff">click here</a>.<br/>For a mapping from ARM lintdiff rules to corresponding TypeSpec linting rules <a href="https://aka.ms/tsp-suppress/lintdiff-to-tsp">click here</a>.',
     "",
-    '💬 Have feedback on the TypeSpec suppression flow? <a href="https://aka.ms/azsdk/tspsuppressionfeedback">Let us know</a>.',
+    '💬 Have feedback on the TypeSpec suppression flow? <a href="https://aka.ms/tsp-suppress/feedback">Let us know</a>.',
     "</details>",
   );
   return sectionLines.join("\n");
