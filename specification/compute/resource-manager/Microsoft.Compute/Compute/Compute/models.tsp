@@ -2645,9 +2645,9 @@ model VirtualMachineScaleSetStorageProfile {
   diskControllerType?: DiskControllerTypes;
 
   /**
-   * Specifies the API version used for additionalDiskProperties of managed disks.
+   * Specifies the API version used for additionalDiskProperties of managed disks. The value must be in the format YYYY-MM-DD (e.g., "2026-04-01").
    */
-  @added(Versions.v2026_03_01)
+  @added(Versions.v2026_04_01)
   diskApiVersion?: string;
 }
 
@@ -2812,7 +2812,7 @@ model VirtualMachineScaleSetManagedDiskParameters {
   /**
    * Specifies additional properties for the managed disk that can be set at the time of implicit creation of the disk.
    */
-  @added(Versions.v2026_03_01)
+  @added(Versions.v2026_04_01)
   additionalDiskProperties?: AdditionalDiskProperties;
 }
 
@@ -4189,9 +4189,9 @@ model VirtualMachineScaleSetUpdateStorageProfile {
   diskControllerType?: DiskControllerTypes;
 
   /**
-   * Specifies the API version used for additionalDiskProperties of managed disks.
+   * Specifies the API version used for additionalDiskProperties of managed disks. The value must be in the format YYYY-MM-DD (e.g., "2026-04-01").
    */
-  @added(Versions.v2026_03_01)
+  @added(Versions.v2026_04_01)
   diskApiVersion?: string;
 }
 
@@ -5594,9 +5594,9 @@ model StorageProfile {
   alignRegionalDisksToVMZone?: boolean;
 
   /**
-   * Specifies the API version used for additionalDiskProperties of managed disks.
+   * Specifies the API version used for additionalDiskProperties of managed disks. The value must be in the format YYYY-MM-DD (e.g., "2026-04-01").
    */
-  @added(Versions.v2026_03_01)
+  @added(Versions.v2026_04_01)
   diskApiVersion?: string;
 }
 
@@ -5716,14 +5716,14 @@ model ManagedDiskParameters extends SubResource {
   /**
    * Specifies additional properties for the managed disk that can be set at the time of implicit creation of the disk.
    */
-  @added(Versions.v2026_03_01)
+  @added(Versions.v2026_04_01)
   additionalDiskProperties?: AdditionalDiskProperties;
 }
 
 /**
  * Specifies additional properties for a managed disk that can be set at the time of implicit creation of the disk.
  */
-@added(Versions.v2026_03_01)
+@added(Versions.v2026_04_01)
 model AdditionalDiskProperties {
   /**
    * Specifies the managed disk properties that can be set on the disk at the time of implicit creation of the disk.
@@ -5734,7 +5734,7 @@ model AdditionalDiskProperties {
 /**
  * Specifies the properties of a managed disk that can be updated when attaching the disk to a virtual machine.
  */
-@added(Versions.v2026_03_01)
+@added(Versions.v2026_04_01)
 model ManagedDiskProperties {
   /**
    * Performance tier of the disk (e.g, P4, S10) as described here: https://azure.microsoft.com/en-us/pricing/details/managed-disks/. Does not apply to Ultra disks.
@@ -5779,6 +5779,7 @@ model ManagedDiskProperties {
   /**
    * The total number of IOPS that will be allowed across all VMs mounting the shared disk as ReadOnly. One operation can transfer between 4k and 256k bytes.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name follows existing disk API naming convention"
   diskIOPSReadOnly?: int64;
 
   /**
@@ -5796,7 +5797,7 @@ model ManagedDiskProperties {
 /**
  * In the case of an availability or connectivity issue with the disk, specify the behavior of your VM.
  */
-@added(Versions.v2026_03_01)
+@added(Versions.v2026_04_01)
 model DiskAvailabilityPolicy {
   /**
    * Determines on how to handle disks with slow I/O.
@@ -5807,7 +5808,7 @@ model DiskAvailabilityPolicy {
 /**
  * Determines on how to handle disks with slow I/O.
  */
-@added(Versions.v2026_03_01)
+@added(Versions.v2026_04_01)
 union AvailabilityPolicyDiskDelay {
   string,
 
@@ -5825,7 +5826,7 @@ union AvailabilityPolicyDiskDelay {
 /**
  * Policy for accessing the disk via network.
  */
-@added(Versions.v2026_03_01)
+@added(Versions.v2026_04_01)
 union NetworkAccessPolicy {
   string,
 
