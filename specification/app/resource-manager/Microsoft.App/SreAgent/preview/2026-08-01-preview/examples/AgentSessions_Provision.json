@@ -1,0 +1,44 @@
+{
+  "title": "AgentSessions_Provision",
+  "operationId": "AgentSessions_Provision",
+  "parameters": {
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
+    "resourceGroupName": "examplerg",
+    "agentSessionName": "session1",
+    "api-version": "2026-08-01-preview",
+    "ifMatch": "\"00000000-0000-0000-0000-000000000000\""
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/agentSessions/session1",
+        "name": "session1",
+        "type": "Microsoft.App/agentSessions",
+        "location": "eastus",
+        "eTag": "\"00000000-0000-0000-0000-000000000001\"",
+        "systemData": {
+          "createdAt": "2026-07-16T20:00:00Z",
+          "lastModifiedAt": "2026-07-16T20:35:00Z"
+        },
+        "properties": {
+          "resourceIds": [
+            "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/containerApps/app1"
+          ],
+          "additionalSubscriptionIds": [],
+          "provisioningState": "Succeeded",
+          "sandbox": {
+            "endpoint": "wss://session1.sreagent.example.com/",
+            "expiresAt": "2026-07-16T21:05:00Z"
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/providers/Microsoft.App/locations/eastus/operationStatuses/87654321-4321-4321-4321-210987654321",
+        "location": "https://management.azure.com/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/providers/Microsoft.App/locations/eastus/operationResults/87654321-4321-4321-4321-210987654321",
+        "Retry-After": "10"
+      }
+    }
+  }
+}
