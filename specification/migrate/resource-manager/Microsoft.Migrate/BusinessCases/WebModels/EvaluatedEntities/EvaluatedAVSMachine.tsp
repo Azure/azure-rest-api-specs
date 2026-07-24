@@ -17,6 +17,7 @@ namespace Microsoft.Migrate;
 
 @doc("Evaluated AVS machine resource.")
 @parentResource(BusinessCase)
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 model EvaluatedAvsMachine is ProxyResource<EvaluatedAvsMachineProperties> {
   @doc("Business case Evaluated AVS machine ARM name")
   @key("evaluatedAvsMachineName")
@@ -29,6 +30,7 @@ model EvaluatedAvsMachine is ProxyResource<EvaluatedAvsMachineProperties> {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "This is a hydrated resource with no PUT call."
 @doc("Evaluated AVS machine properties class.")
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 model EvaluatedAvsMachineProperties {
   @doc("Machine Id.")
   @visibility(Lifecycle.Read)
