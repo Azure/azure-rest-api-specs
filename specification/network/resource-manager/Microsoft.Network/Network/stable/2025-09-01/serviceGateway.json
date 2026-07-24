@@ -490,7 +490,7 @@
           {
             "name": "parameters",
             "in": "body",
-            "description": "Parameters supplied to the create or updates address locations in service gateway operation.",
+            "description": "Parameters supplied to create or update address locations in service gateway operation.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ServiceGatewayUpdateAddressLocationsRequest"
@@ -498,22 +498,11 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
+          "200": {
+            "description": "Status-only success response for synchronous service gateway update actions.",
+            "schema": {
+              "$ref": "./common.json#/definitions/ServiceGatewayActionOkResponseBody"
             }
-          },
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -529,11 +518,7 @@
           "Partial Update: Create, update, or delete address locations in the service gateway.": {
             "$ref": "./examples/ServiceGatewayPartialUpdateAddressLocationsRequest.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/serviceGateways/{serviceGatewayName}/updateServices": {
@@ -564,7 +549,7 @@
           {
             "name": "parameters",
             "in": "body",
-            "description": "Parameters supplied to the create or updates services in service gateway operation.",
+            "description": "Parameters supplied to create or update services in service gateway operation.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ServiceGatewayUpdateServicesRequest"
@@ -572,22 +557,11 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
+          "200": {
+            "description": "Status-only success response for synchronous service gateway update actions.",
+            "schema": {
+              "$ref": "./common.json#/definitions/ServiceGatewayActionOkResponseBody"
             }
-          },
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -600,11 +574,7 @@
           "Create or full update services in service gateway": {
             "$ref": "./examples/ServiceGatewayUpdateServicesRequest.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     }
   },

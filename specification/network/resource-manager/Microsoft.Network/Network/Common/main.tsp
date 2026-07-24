@@ -265,6 +265,12 @@ union LoadBalancerSkuName {
    * Gateway
    */
   Gateway: "Gateway",
+
+  /**
+   * Service load balancer SKU.
+   */
+  @added(Versions.v2025_09_01)
+  Service: "Service",
 }
 
 /**
