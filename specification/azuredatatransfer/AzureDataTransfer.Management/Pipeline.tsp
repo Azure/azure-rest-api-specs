@@ -27,8 +27,6 @@ model Pipeline is Azure.ResourceManager.TrackedResource<PipelineProperties> {
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
 
-model ArmPipelineResponse is ArmResponse<Pipeline>;
-
 /**
  * Defines the set of operations available for managing Pipeline resources.
  */
@@ -90,7 +88,7 @@ interface Pipelines {
   executeAction is ArmResourceActionAsync<
     Pipeline,
     Action,
-    ArmPipelineResponse
+    Pipeline
   >;
 
   /**
