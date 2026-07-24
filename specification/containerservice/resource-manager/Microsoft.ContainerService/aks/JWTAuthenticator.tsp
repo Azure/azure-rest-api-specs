@@ -21,8 +21,10 @@ namespace Microsoft.ContainerService;
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
 @parentResource(ManagedCluster)
 @added(Versions.v2026_06_02_preview)
-model JWTAuthenticator
-  is Azure.ResourceManager.ProxyResource<JWTAuthenticatorProperties, false> {
+model JWTAuthenticator is Azure.ResourceManager.ProxyResource<
+  JWTAuthenticatorProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = JWTAuthenticator,
     KeyName = "jwtAuthenticatorName",
@@ -34,10 +36,12 @@ model JWTAuthenticator
 @@maxLength(JWTAuthenticator.name, 24);
 @@minLength(JWTAuthenticator.name, 1);
 @@doc(JWTAuthenticator.name, "The name of the JWT authenticator.");
-@@doc(JWTAuthenticator.properties,
+@@doc(
+  JWTAuthenticator.properties,
   "The properties of JWTAuthenticator. For details on how to configure the properties of a JWT authenticator, please refer to the Kubernetes documentation: https://kubernetes.io/docs/reference/access-authn-authz/authentication/#using-authentication-configuration. Please note that not all fields available in the Kubernetes documentation are supported by AKS. For troubleshooting, please see https://aka.ms/aks-external-issuers-docs."
 );
-@@doc(JWTAuthenticators.createOrUpdate::parameters.resource,
+@@doc(
+  JWTAuthenticators.createOrUpdate::parameters.resource,
   "The JWT authenticator to create or update."
 );
 
