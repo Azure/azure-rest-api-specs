@@ -25,5 +25,9 @@ using Microsoft.KubernetesConfiguration;
   ExtensionTypeVersionForReleaseTrainOperationGroup.clusterListVersions,
   ExtensionTypes
 );
+@@clientLocation(ExtensionTypeSupportedLocations.listSupportedLocations,
+  ExtensionTypes
+);
 @@visibility(ExtensionTypeVersionsList.value, Lifecycle.Read);
 @@visibility(ExtensionTypesList.value, Lifecycle.Read);
+@@visibility(SupportedLocationsResult.value, Lifecycle.Read);
