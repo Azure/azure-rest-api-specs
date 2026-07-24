@@ -320,6 +320,16 @@ model ChatCompletionsOptions {
   userSecurityContext?: UserSecurityContext;
 
   /**
+    * A request-level routing configuration for Azure Model Router deployments. This enables
+    * per-request routing constraints, such as a hard price ceiling, that compose with the
+    * deployment-level routing mode. Requests that omit this object behave as before, and this
+    * configuration is ignored for deployments that are not Model Router deployments.
+   */
+  @added(ServiceApiVersions.v2024_10_01_Preview)
+  @encodedName("application/json", "routing_config")
+  routingConfig?: RoutingConfiguration;
+
+  /**
    * Output types that you would like the model to generate for this request.
    * Most models are capable of generating text, which is the default: `["text"]`
    * The `gpt-4o-audio-preview` model can also be used to generate audio. To
@@ -343,6 +353,46 @@ model ChatCompletionsOptions {
    */
   @added(ServiceApiVersions.v2025_01_01_Preview)
   audio?: AudioOutputParameters;
+}
+
+/**
+ * A request-level routing configuration for Azure Model Router deployments. Introduced to
+ * allow per-request routing constraints, such as a hard price ceiling, that compose with the
+ * deployment-level routing mode. Requests that omit this object behave exactly as before, and
+ * it is ignored by deployments that are not Model Router deployments.
+ */
+@added(ServiceApiVersions.v2024_10_01_Preview)
+model RoutingConfiguration {
+  /**
+   * An optional hard price ceiling (USD per 1M tokens) applied before model selection.
+   * Models whose input and/or output token price exceeds the specified thresholds are
+   * excluded from the candidate pool prior to routing optimization.
+   */
+  @encodedName("application/json", "price_limit")
+  priceLimit?: RoutingPriceLimit;
+}
+
+/**
+ * Specifies the maximum acceptable token price (USD per 1M tokens) for input and/or output
+ * tokens when routing a request. Acts as a hard filter: models exceeding either specified
+ * threshold are removed from the candidate pool before routing optimization. Both fields are
+ * optional; specifying either or both is valid.
+ */
+@added(ServiceApiVersions.v2024_10_01_Preview)
+model RoutingPriceLimit {
+  /**
+   * The maximum acceptable input token price, expressed in USD per 1M tokens. Models whose
+   * input price exceeds this value are excluded from the candidate pool.
+   */
+  @minValue(0)
+  input?: float32;
+
+  /**
+   * The maximum acceptable output token price, expressed in USD per 1M tokens. Models whose
+   * output price exceeds this value are excluded from the candidate pool.
+   */
+  @minValue(0)
+  output?: float32;
 }
 
 /** Values for the reasoning */
