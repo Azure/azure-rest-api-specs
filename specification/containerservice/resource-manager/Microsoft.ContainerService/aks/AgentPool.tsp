@@ -126,16 +126,15 @@ interface AgentPools {
   upgradeNodeImageVersion is ArmResourceActionAsyncBase<
     AgentPool,
     void,
+    | {
+        ...AcceptedResponse;
+        ...ArmCombinedLroHeaders<FinalResult = void>;
+        ...Azure.Core.Foundations.RetryAfterHeader;
 
-      | {
-          ...AcceptedResponse;
-          ...ArmCombinedLroHeaders<FinalResult = void>;
-          ...Azure.Core.Foundations.RetryAfterHeader;
-
-          @body
-          body: AgentPool;
-        }
-      | OkResponse,
+        @body
+        body: AgentPool;
+      }
+    | OkResponse,
     Foundations.DefaultBaseParameters<AgentPool>
   >;
 
