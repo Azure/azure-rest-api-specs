@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "PureStorage.Block",
-    "version": "2026-01-01-preview",
+    "version": "2024-11-01",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -58,12 +58,6 @@
     },
     {
       "name": "AvsVmVolumes"
-    },
-    {
-      "name": "VolumeGroups"
-    },
-    {
-      "name": "Volumes"
     }
   ],
   "paths": {
@@ -76,20 +70,20 @@
         "description": "List the operations for the provider",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -115,10 +109,10 @@
         "description": "List reservations by Azure subscription ID",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -131,7 +125,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -154,10 +148,10 @@
         "description": "List storage pools by Azure subscription ID",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -170,7 +164,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -193,13 +187,13 @@
         "description": "List reservations by resource group",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
@@ -212,7 +206,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -235,13 +229,13 @@
         "description": "Get a reservation",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "reservationName",
@@ -264,7 +258,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -282,13 +276,13 @@
         "description": "Create a reservation",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "reservationName",
@@ -337,7 +331,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -359,13 +353,13 @@
         "description": "Update a reservation",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "reservationName",
@@ -411,7 +405,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -433,13 +427,13 @@
         "description": "Delete a reservation",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "reservationName",
@@ -473,7 +467,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -497,13 +491,13 @@
         "description": "Provides a summarized report along with actions for resources billed via given reservation",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "reservationName",
@@ -526,7 +520,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -546,13 +540,13 @@
         "description": "Provides various statistics about resources billed via given reservation.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "reservationName",
@@ -575,7 +569,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -595,13 +589,13 @@
         "description": "Limits constraining certain resource properties.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "reservationName",
@@ -624,7 +618,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -644,13 +638,13 @@
         "description": "List storage pools by resource group",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
@@ -663,7 +657,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -686,13 +680,13 @@
         "description": "Get a storage pool",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "storagePoolName",
@@ -715,7 +709,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -733,13 +727,13 @@
         "description": "Create a storage pool",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "storagePoolName",
@@ -788,7 +782,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -810,13 +804,13 @@
         "description": "Update a storage pool",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "storagePoolName",
@@ -862,7 +856,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -884,13 +878,13 @@
         "description": "Delete a storage pool",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "storagePoolName",
@@ -924,7 +918,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -948,13 +942,13 @@
         "description": "List AVS storage containers by storage pool",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "storagePoolName",
@@ -977,7 +971,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1000,13 +994,13 @@
         "description": "Get an AVS storage container",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "storagePoolName",
@@ -1037,7 +1031,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1055,13 +1049,13 @@
         "description": "Delete an AVS storage container",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "storagePoolName",
@@ -1103,7 +1097,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1127,13 +1121,13 @@
         "description": "List volumes in an AVS storage container",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "storagePoolName",
@@ -1164,7 +1158,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1187,13 +1181,13 @@
         "description": "Get a volume in an AVS storage container",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "storagePoolName",
@@ -1232,7 +1226,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1250,13 +1244,13 @@
         "description": "Update a volume in an AVS storage container",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "storagePoolName",
@@ -1318,7 +1312,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1340,13 +1334,13 @@
         "description": "Delete a volume in an AVS storage container",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "storagePoolName",
@@ -1396,7 +1390,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1420,13 +1414,13 @@
         "description": "List AVS VMs by storage pool",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "storagePoolName",
@@ -1449,7 +1443,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1472,13 +1466,13 @@
         "description": "Get an AVS VM",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "storagePoolName",
@@ -1509,7 +1503,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1527,13 +1521,13 @@
         "description": "Update an AVS VM",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "storagePoolName",
@@ -1587,7 +1581,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1609,13 +1603,13 @@
         "description": "Delete an AVS VM",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "storagePoolName",
@@ -1657,7 +1651,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1681,13 +1675,13 @@
         "description": "List volumes in an AVS VM",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "storagePoolName",
@@ -1718,7 +1712,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1741,13 +1735,13 @@
         "description": "Get a volume in an AVS VM",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "storagePoolName",
@@ -1786,7 +1780,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1804,13 +1798,13 @@
         "description": "Update a volume in an AVS VM",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "storagePoolName",
@@ -1872,7 +1866,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1894,13 +1888,13 @@
         "description": "Delete a volume in an AVS VM",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "storagePoolName",
@@ -1950,7 +1944,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1974,13 +1968,13 @@
         "description": "Disable the existing AVS connection",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "storagePoolName",
@@ -2016,7 +2010,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2040,13 +2034,13 @@
         "description": "Initiate a connection between the storage pool and a specified AVS SDDC resource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "storagePoolName",
@@ -2091,7 +2085,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2115,13 +2109,13 @@
         "description": "Finalize an already started AVS connection to a specific AVS SDDC",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "storagePoolName",
@@ -2166,7 +2160,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2190,13 +2184,13 @@
         "description": "Returns current information about an on-going connection to an AVS instance",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "storagePoolName",
@@ -2219,7 +2213,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2239,13 +2233,13 @@
         "description": "Returns the status of the storage pool connection to AVS",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "storagePoolName",
@@ -2268,7 +2262,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2288,13 +2282,13 @@
         "description": "Retrieve health metrics of a storage pool",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "storagePoolName",
@@ -2317,7 +2311,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2337,13 +2331,13 @@
         "description": "Test and repair, if needed, all configuration elements of the storage pool connection to the AVS instance",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "storagePoolName",
@@ -2379,7 +2373,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2390,878 +2384,6 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/storagePools/{storagePoolName}/volumeGroups": {
-      "get": {
-        "operationId": "VolumeGroups_ListByStoragePool",
-        "tags": [
-          "VolumeGroups"
-        ],
-        "description": "List volume groups by storage pool",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "storagePoolName",
-            "in": "path",
-            "description": "Name of the storage pool",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 127,
-            "pattern": "^[a-zA-Z0-9\\-_]{1,127}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/VolumeGroupListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "VolumeGroups_ListByStoragePool": {
-            "$ref": "./examples/VolumeGroups_ListByStoragePool_MaximumSet_Gen.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/storagePools/{storagePoolName}/volumeGroups/{volumeGroupName}": {
-      "get": {
-        "operationId": "VolumeGroups_Get",
-        "tags": [
-          "VolumeGroups"
-        ],
-        "description": "Get a volume group",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "storagePoolName",
-            "in": "path",
-            "description": "Name of the storage pool",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 127,
-            "pattern": "^[a-zA-Z0-9\\-_]{1,127}$"
-          },
-          {
-            "name": "volumeGroupName",
-            "in": "path",
-            "description": "Name of the volume group",
-            "required": true,
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 40,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]{0,38}[A-Za-z0-9]$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/VolumeGroup"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "VolumeGroups_Get": {
-            "$ref": "./examples/VolumeGroups_Get_MaximumSet_Gen.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "VolumeGroups_Create",
-        "tags": [
-          "VolumeGroups"
-        ],
-        "description": "Create a volume group",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "storagePoolName",
-            "in": "path",
-            "description": "Name of the storage pool",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 127,
-            "pattern": "^[a-zA-Z0-9\\-_]{1,127}$"
-          },
-          {
-            "name": "volumeGroupName",
-            "in": "path",
-            "description": "Name of the volume group",
-            "required": true,
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 40,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]{0,38}[A-Za-z0-9]$"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "Resource create parameters.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/VolumeGroup"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'VolumeGroup' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/VolumeGroup"
-            }
-          },
-          "201": {
-            "description": "Resource 'VolumeGroup' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/VolumeGroup"
-            },
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "VolumeGroups_Create": {
-            "$ref": "./examples/VolumeGroups_Create_MaximumSet_Gen.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "patch": {
-        "operationId": "VolumeGroups_Update",
-        "tags": [
-          "VolumeGroups"
-        ],
-        "description": "Update a volume group",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "storagePoolName",
-            "in": "path",
-            "description": "Name of the storage pool",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 127,
-            "pattern": "^[a-zA-Z0-9\\-_]{1,127}$"
-          },
-          {
-            "name": "volumeGroupName",
-            "in": "path",
-            "description": "Name of the volume group",
-            "required": true,
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 40,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]{0,38}[A-Za-z0-9]$"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/VolumeGroupUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/VolumeGroup"
-            }
-          },
-          "202": {
-            "description": "Resource update request accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "VolumeGroups_Update": {
-            "$ref": "./examples/VolumeGroups_Update_MaximumSet_Gen.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "delete": {
-        "operationId": "VolumeGroups_Delete",
-        "tags": [
-          "VolumeGroups"
-        ],
-        "description": "Delete a volume group",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "storagePoolName",
-            "in": "path",
-            "description": "Name of the storage pool",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 127,
-            "pattern": "^[a-zA-Z0-9\\-_]{1,127}$"
-          },
-          {
-            "name": "volumeGroupName",
-            "in": "path",
-            "description": "Name of the volume group",
-            "required": true,
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 40,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]{0,38}[A-Za-z0-9]$"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Resource deletion accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "VolumeGroups_Delete": {
-            "$ref": "./examples/VolumeGroups_Delete_MaximumSet_Gen.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/storagePools/{storagePoolName}/volumeGroups/{volumeGroupName}/getStatus": {
-      "post": {
-        "operationId": "VolumeGroups_GetStatus",
-        "tags": [
-          "VolumeGroups"
-        ],
-        "description": "Get current status and space information of the volume group",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "storagePoolName",
-            "in": "path",
-            "description": "Name of the storage pool",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 127,
-            "pattern": "^[a-zA-Z0-9\\-_]{1,127}$"
-          },
-          {
-            "name": "volumeGroupName",
-            "in": "path",
-            "description": "Name of the volume group",
-            "required": true,
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 40,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]{0,38}[A-Za-z0-9]$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/VolumeGroupStatus"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "VolumeGroups_GetStatus": {
-            "$ref": "./examples/VolumeGroups_GetStatus_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/storagePools/{storagePoolName}/volumeGroups/{volumeGroupName}/listConnectionParameters": {
-      "post": {
-        "operationId": "VolumeGroups_ListConnectionParameters",
-        "tags": [
-          "VolumeGroups"
-        ],
-        "description": "Get connection parameters for ISCSI connection to the volume group",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "storagePoolName",
-            "in": "path",
-            "description": "Name of the storage pool",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 127,
-            "pattern": "^[a-zA-Z0-9\\-_]{1,127}$"
-          },
-          {
-            "name": "volumeGroupName",
-            "in": "path",
-            "description": "Name of the volume group",
-            "required": true,
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 40,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]{0,38}[A-Za-z0-9]$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ConnectionParametersResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "VolumeGroups_ListConnectionParameters": {
-            "$ref": "./examples/VolumeGroups_ListConnectionParameters_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/storagePools/{storagePoolName}/volumeGroups/{volumeGroupName}/volumes": {
-      "get": {
-        "operationId": "Volumes_ListByVolumeGroup",
-        "tags": [
-          "Volumes"
-        ],
-        "description": "List volumes by volume group",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "storagePoolName",
-            "in": "path",
-            "description": "Name of the storage pool",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 127,
-            "pattern": "^[a-zA-Z0-9\\-_]{1,127}$"
-          },
-          {
-            "name": "volumeGroupName",
-            "in": "path",
-            "description": "Name of the volume group",
-            "required": true,
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 40,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]{0,38}[A-Za-z0-9]$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/VolumeListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Volumes_ListByVolumeGroup": {
-            "$ref": "./examples/Volumes_ListByVolumeGroup_MaximumSet_Gen.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/storagePools/{storagePoolName}/volumeGroups/{volumeGroupName}/volumes/{volumeName}": {
-      "get": {
-        "operationId": "Volumes_Get",
-        "tags": [
-          "Volumes"
-        ],
-        "description": "Get a volume",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "storagePoolName",
-            "in": "path",
-            "description": "Name of the storage pool",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 127,
-            "pattern": "^[a-zA-Z0-9\\-_]{1,127}$"
-          },
-          {
-            "name": "volumeGroupName",
-            "in": "path",
-            "description": "Name of the volume group",
-            "required": true,
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 40,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]{0,38}[A-Za-z0-9]$"
-          },
-          {
-            "name": "volumeName",
-            "in": "path",
-            "description": "Name of the volume. Maximum length is 40 characters during creation; names up to 64 characters may appear in list and get responses for system-generated volumes.",
-            "required": true,
-            "type": "string",
-            "minLength": 2,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*[A-Za-z0-9]$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/Volume"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Volumes_Get": {
-            "$ref": "./examples/Volumes_Get_MaximumSet_Gen.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "Volumes_Create",
-        "tags": [
-          "Volumes"
-        ],
-        "description": "Create a volume",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "storagePoolName",
-            "in": "path",
-            "description": "Name of the storage pool",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 127,
-            "pattern": "^[a-zA-Z0-9\\-_]{1,127}$"
-          },
-          {
-            "name": "volumeGroupName",
-            "in": "path",
-            "description": "Name of the volume group",
-            "required": true,
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 40,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]{0,38}[A-Za-z0-9]$"
-          },
-          {
-            "name": "volumeName",
-            "in": "path",
-            "description": "Name of the volume. Maximum length is 40 characters during creation; names up to 64 characters may appear in list and get responses for system-generated volumes.",
-            "required": true,
-            "type": "string",
-            "minLength": 2,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*[A-Za-z0-9]$"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "Resource create parameters.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Volume"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'Volume' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/Volume"
-            }
-          },
-          "201": {
-            "description": "Resource 'Volume' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/Volume"
-            },
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Volumes_Create": {
-            "$ref": "./examples/Volumes_Create_MaximumSet_Gen.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "patch": {
-        "operationId": "Volumes_Update",
-        "tags": [
-          "Volumes"
-        ],
-        "description": "Update a volume",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "storagePoolName",
-            "in": "path",
-            "description": "Name of the storage pool",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 127,
-            "pattern": "^[a-zA-Z0-9\\-_]{1,127}$"
-          },
-          {
-            "name": "volumeGroupName",
-            "in": "path",
-            "description": "Name of the volume group",
-            "required": true,
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 40,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]{0,38}[A-Za-z0-9]$"
-          },
-          {
-            "name": "volumeName",
-            "in": "path",
-            "description": "Name of the volume. Maximum length is 40 characters during creation; names up to 64 characters may appear in list and get responses for system-generated volumes.",
-            "required": true,
-            "type": "string",
-            "minLength": 2,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*[A-Za-z0-9]$"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/VolumeUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/Volume"
-            }
-          },
-          "202": {
-            "description": "Resource update request accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Volumes_Update": {
-            "$ref": "./examples/Volumes_Update_MaximumSet_Gen.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "delete": {
-        "operationId": "Volumes_Delete",
-        "tags": [
-          "Volumes"
-        ],
-        "description": "Delete a volume",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "storagePoolName",
-            "in": "path",
-            "description": "Name of the storage pool",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 127,
-            "pattern": "^[a-zA-Z0-9\\-_]{1,127}$"
-          },
-          {
-            "name": "volumeGroupName",
-            "in": "path",
-            "description": "Name of the volume group",
-            "required": true,
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 40,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]{0,38}[A-Za-z0-9]$"
-          },
-          {
-            "name": "volumeName",
-            "in": "path",
-            "description": "Name of the volume. Maximum length is 40 characters during creation; names up to 64 characters may appear in list and get responses for system-generated volumes.",
-            "required": true,
-            "type": "string",
-            "minLength": 2,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*[A-Za-z0-9]$"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Resource deletion accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Volumes_Delete": {
-            "$ref": "./examples/Volumes_Delete_MaximumSet_Gen.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -3414,7 +2536,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -3492,7 +2614,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -3554,7 +2676,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -3698,7 +2820,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -3796,55 +2918,6 @@
         "avsEnabled"
       ]
     },
-    "AzureVolumeProperties": {
-      "type": "object",
-      "description": "Properties of an Azure volume",
-      "properties": {
-        "space": {
-          "$ref": "#/definitions/Space",
-          "description": "Storage space usage for the volume",
-          "readOnly": true
-        },
-        "provisionedSize": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Currently provisioned size of the volume, in bytes",
-          "minimum": 1048576
-        },
-        "serialNumber": {
-          "type": "string",
-          "description": "Serial number of the volume",
-          "readOnly": true
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Volume creation date, as an RFC 3339 timestamp",
-          "readOnly": true
-        },
-        "sourceVolumeResourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Azure resource ID of the source volume for cloning",
-          "x-ms-mutability": [
-            "create"
-          ]
-        },
-        "sourceVolumeGroupResourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Azure Resource ID of the source volume group to clone from.",
-          "x-ms-mutability": [
-            "create"
-          ]
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/LiftrBase.ProvisioningState",
-          "description": "Provisioning state of the resource",
-          "readOnly": true
-        }
-      }
-    },
     "BandwidthUsage": {
       "type": "object",
       "description": "Bandwidth usage metrics",
@@ -3913,19 +2986,6 @@
         "propertyName",
         "currentValue",
         "severity"
-      ]
-    },
-    "ConnectionParametersResponse": {
-      "type": "object",
-      "description": "Connection parameters response",
-      "properties": {
-        "iscsi": {
-          "$ref": "#/definitions/IscsiConnectionParameters",
-          "description": "ISCSI connection parameters"
-        }
-      },
-      "required": [
-        "iscsi"
       ]
     },
     "HealthDetails": {
@@ -4015,47 +3075,6 @@
         "current",
         "provisioned",
         "max"
-      ]
-    },
-    "IscsiConnectionParameters": {
-      "type": "object",
-      "description": "ISCSI connection parameters",
-      "properties": {
-        "endpoints": {
-          "type": "array",
-          "description": "List of ISCSI endpoints for connection",
-          "items": {
-            "$ref": "#/definitions/IscsiEndpoint"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "endpoints"
-      ]
-    },
-    "IscsiEndpoint": {
-      "type": "object",
-      "description": "ISCSI connection endpoint details",
-      "properties": {
-        "ip": {
-          "type": "string",
-          "description": "IP address of the endpoint"
-        },
-        "port": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Port number of the endpoint"
-        },
-        "iqn": {
-          "type": "string",
-          "description": "IQN (iSCSI Qualified Name) of the endpoint"
-        }
-      },
-      "required": [
-        "ip",
-        "port",
-        "iqn"
       ]
     },
     "LiftrBase.Address": {
@@ -4325,22 +3344,6 @@
         "performancePolicy"
       ]
     },
-    "PerformanceParameters": {
-      "type": "object",
-      "description": "Performance parameters for volume group",
-      "properties": {
-        "bandwidthLimitMbPerSec": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Bandwidth limit in MB per second"
-        },
-        "iopsLimit": {
-          "type": "integer",
-          "format": "int64",
-          "description": "IOPS limit"
-        }
-      }
-    },
     "PerformancePolicyLimits": {
       "type": "object",
       "description": "internal",
@@ -4358,22 +3361,6 @@
         "iopsLimit",
         "bandwidthLimit"
       ]
-    },
-    "ProtectionParameters": {
-      "type": "object",
-      "description": "Protection parameters for volume group",
-      "properties": {
-        "retention": {
-          "type": "string",
-          "format": "duration",
-          "description": "Retention period for snapshots in ISO 8601 duration format"
-        },
-        "frequency": {
-          "type": "string",
-          "format": "duration",
-          "description": "Snapshot frequency in ISO 8601 duration format"
-        }
-      }
     },
     "ProtectionPolicyLimits": {
       "type": "object",
@@ -4453,7 +3440,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -4740,13 +3727,13 @@
           "x-ms-client-flatten": true
         },
         "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -4897,7 +3884,7 @@
       "description": "The type used for update operations of the StoragePool.",
       "properties": {
         "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
         },
         "tags": {
@@ -5062,21 +4049,6 @@
         "vnetId"
       ]
     },
-    "Volume": {
-      "type": "object",
-      "description": "Azure Volume resource",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/AzureVolumeProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
     "VolumeContainerType": {
       "type": "string",
       "description": "Specify which control plane handles the lifecycle of the volume container",
@@ -5095,130 +4067,6 @@
         ]
       }
     },
-    "VolumeGroup": {
-      "type": "object",
-      "description": "Volume Group resource",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/VolumeGroupProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
-        }
-      ]
-    },
-    "VolumeGroupListResult": {
-      "type": "object",
-      "description": "The response of a VolumeGroup list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The VolumeGroup items on this page",
-          "items": {
-            "$ref": "#/definitions/VolumeGroup"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "VolumeGroupProperties": {
-      "type": "object",
-      "description": "Properties of a volume group",
-      "properties": {
-        "storagePoolInternalId": {
-          "type": "string",
-          "description": "Pure Storage's internal ID of the storage pool",
-          "readOnly": true
-        },
-        "volumeGroupInternalId": {
-          "type": "string",
-          "description": "Pure Storage's internal ID of the volume group",
-          "readOnly": true
-        },
-        "sourceVolumeGroupResourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Azure resource ID of the source volume group for cloning",
-          "x-ms-mutability": [
-            "create"
-          ]
-        },
-        "performanceParameters": {
-          "$ref": "#/definitions/PerformanceParameters",
-          "description": "Performance parameters for the volume group"
-        },
-        "protectionParameters": {
-          "$ref": "#/definitions/ProtectionParameters",
-          "description": "Protection parameters for the volume group"
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/LiftrBase.ProvisioningState",
-          "description": "Provisioning state of the resource",
-          "readOnly": true
-        }
-      }
-    },
-    "VolumeGroupStatus": {
-      "type": "object",
-      "description": "Volume group status information",
-      "properties": {
-        "space": {
-          "$ref": "#/definitions/Space",
-          "description": "Storage space usage for the volume group"
-        },
-        "connectedHostCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of hosts currently connected to the volume group"
-        }
-      },
-      "required": [
-        "space",
-        "connectedHostCount"
-      ]
-    },
-    "VolumeGroupUpdate": {
-      "type": "object",
-      "description": "The type used for update operations of the VolumeGroup.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/VolumeGroupUpdateProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "VolumeGroupUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the VolumeGroup.",
-      "properties": {
-        "performanceParameters": {
-          "$ref": "#/definitions/PerformanceParameters",
-          "description": "Performance parameters for the volume group"
-        },
-        "protectionParameters": {
-          "$ref": "#/definitions/ProtectionParameters",
-          "description": "Protection parameters for the volume group"
-        }
-      }
-    },
     "VolumeLimits": {
       "type": "object",
       "description": "Limits used for volumes",
@@ -5230,27 +4078,6 @@
       },
       "required": [
         "provisionedSize"
-      ]
-    },
-    "VolumeListResult": {
-      "type": "object",
-      "description": "The response of a Volume list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The Volume items on this page",
-          "items": {
-            "$ref": "#/definitions/Volume"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "VolumeProperties": {
@@ -5337,29 +4164,6 @@
             "description": "AVS/VMware"
           }
         ]
-      }
-    },
-    "VolumeUpdate": {
-      "type": "object",
-      "description": "The type used for update operations of the Volume.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/VolumeUpdateProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "VolumeUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the Volume.",
-      "properties": {
-        "provisionedSize": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Currently provisioned size of the volume, in bytes",
-          "minimum": 1048576
-        }
       }
     }
   },
