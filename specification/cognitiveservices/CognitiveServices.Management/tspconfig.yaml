@@ -38,7 +38,7 @@ options:
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/cognitiveservices"
     emitter-output-dir: "{output-dir}/{service-dir}/armcognitiveservices"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armcognitiveservices"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armcognitiveservices/v4"
     fix-const-stuttering: false
     flavor: "azure"
     generate-samples: true
@@ -48,3 +48,4 @@ options:
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"

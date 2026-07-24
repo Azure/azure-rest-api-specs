@@ -14,7 +14,7 @@ model DocumentTranslateContent {
   document: HttpPart<bytes>;
 
   @doc("Glossary-translation memory will be used during translation in the form. ")
-  glossary?: HttpPart<bytes[]>;
+  glossary?: HttpPart<bytes>[];
 }
 
 @doc("Document Translate Result / Response.")
@@ -46,10 +46,10 @@ model DocumentTranslateResult {
 @doc("Format types")
 union FileFormatType {
   @doc("Document type file format")
-  Document: "document",
+  Document: "Document",
 
   @doc("Glossary type file format")
-  Glossary: "glossary",
+  Glossary: "Glossary",
 
   string,
 }
@@ -167,6 +167,7 @@ model BatchRequest {
 
 @doc("Source of the input documents")
 model SourceInput {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("Location of the folder / container or single file with your documents")
   sourceUrl: string;
 
@@ -203,6 +204,7 @@ model DocumentFilter {
 
 @doc("Destination for the finished translated documents")
 model TargetInput {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("Location of the folder / container with your documents")
   targetUrl: string;
 
@@ -221,6 +223,7 @@ model TargetInput {
 
 @doc("Glossary / translation memory for the request")
 model Glossary {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("""
     Location of the glossary. 
     We will use the file extension to extract the

@@ -29,7 +29,11 @@ using Microsoft.ContainerRegistry;
 
 @@usage(Webhook, Usage.input | Usage.output, "java");
 
-@@clientName(MyPrivateLinkResource, "PrivateLinkResource", "java");
+@@clientName(
+  MyPrivateLinkResource,
+  "PrivateLinkResource",
+  "java,javascript,go,python"
+);
 
 @@clientName(IPRule.value, "$DO_NOT_NORMALIZE$iPAddressOrRange", "javascript");
 
@@ -307,6 +311,11 @@ namespace Microsoft.ContainerRegistry {
 @@clientName(LoggingProperties, "ConnectedRegistryLogging", "csharp");
 @@clientName(LoginServerProperties, "ConnectedRegistryLoginServer", "csharp");
 @@clientName(MetadataSearch, "ContainerRegistryMetadataSearch", "csharp");
+@@clientName(
+  WritableCacheRepos,
+  "ContainerRegistryWritableCacheRepos",
+  "csharp"
+);
 @@clientName(
   Microsoft.ContainerRegistry.ContainerRegistryResourceTypeExtensible,
   "ContainerRegistryResourceType",

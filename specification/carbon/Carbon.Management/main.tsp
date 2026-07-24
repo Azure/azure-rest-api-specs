@@ -4,6 +4,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-autorest";
+import "./client.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
@@ -359,6 +360,7 @@ model ResourceGroupCarbonEmissionTopItemsSummaryData
   @doc("Subscription Id")
   subscriptionId: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("Resource Group url, value format is '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}'")
   resourceGroupUrl: string;
 }
@@ -421,6 +423,7 @@ model ResourceGroupCarbonEmissionTopItemMonthlySummaryData
   @doc("Subscription Id")
   subscriptionId: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("Resource Group url, the format is '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}'")
   resourceGroupUrl: string;
 }
@@ -478,6 +481,7 @@ model ResourceGroupCarbonEmissionItemDetailData extends CarbonEmissionData {
   @doc("Subscription Id")
   subscriptionId: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("Resource Group url, value format is '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}'")
   resourceGroupUrl: string;
 }

@@ -53,7 +53,8 @@ interface MigrateMySqlStatusOps
         @segment("migratemysql")
         @key
         status: "status",
-      }
+      },
+      ResourceName = "SiteMigrateMySqlStatus"
     > {}
 
 @tag("WebApps")
@@ -95,7 +96,8 @@ interface MigrateMySqlStatusOperationGroupOps
         @segment("migratemysql")
         @key
         status: "status",
-      }
+      },
+      ResourceName = "MigrateMySqlStatus"
     > {}
 
 @tag("WebApps")

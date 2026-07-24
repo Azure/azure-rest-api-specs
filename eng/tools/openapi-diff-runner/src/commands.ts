@@ -15,19 +15,19 @@ import {
   isSameVersionBreakingType,
   logFullOadMessagesList,
   outputBreakingChangeLabelVariables,
-} from "./command-helpers.js";
+} from "./command-helpers.ts";
 import {
   checkBreakingChangeOnSameVersion,
   checkCrossVersionBreakingChange,
   createBreakingChangeDetectionContext,
-} from "./detect-breaking-change.js";
-import { generateBreakingChangeResultSummary } from "./generate-report.js";
-import { LOG_PREFIX, logMessage } from "./log.js";
-import { Context } from "./types/breaking-change.js";
-import { RawMessageRecord, ResultMessageRecord } from "./types/message.js";
-import { createOadTrace, generateOadMarkdown, setOadBaseBranch } from "./types/oad-types.js";
-import { checkPrTargetsProductionBranch } from "./utils/common-utils.js";
-import { appendMarkdownToLog } from "./utils/oad-message-processor.js";
+} from "./detect-breaking-change.ts";
+import { generateBreakingChangeResultSummary } from "./generate-report.ts";
+import { LOG_PREFIX, logMessage } from "./log.ts";
+import { type Context } from "./types/breaking-change.ts";
+import { type RawMessageRecord, type ResultMessageRecord } from "./types/message.ts";
+import { createOadTrace, generateOadMarkdown, setOadBaseBranch } from "./types/oad-types.ts";
+import { checkPrTargetsProductionBranch } from "./utils/common-utils.ts";
+import { appendMarkdownToLog } from "./utils/oad-message-processor.ts";
 
 /**
  * The function validateBreakingChange() is executed with type SameVersion or CrossVersion

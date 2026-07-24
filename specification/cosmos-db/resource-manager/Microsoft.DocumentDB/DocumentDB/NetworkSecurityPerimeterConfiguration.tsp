@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./DatabaseAccountGetResults.tsp";
 
@@ -9,12 +10,14 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.DocumentDB;
 /**
  * Network security perimeter (NSP) configuration resource
  */
 @parentResource(DatabaseAccountGetResults)
+@added(Versions.v2026_04_01_preview)
 model NetworkSecurityPerimeterConfiguration
   is Azure.ResourceManager.ProxyResource<Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeterConfigurationProperties> {
   ...ResourceNameParameter<
@@ -25,6 +28,7 @@ model NetworkSecurityPerimeterConfiguration
   >;
 }
 
+@added(Versions.v2026_04_01_preview)
 @armResourceOperations
 interface NetworkSecurityPerimeterConfigurations {
   /**

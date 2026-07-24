@@ -1,12 +1,12 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { BreakingChangeLabelsToBeAdded } from "../../src/command-helpers.js";
-import { logMessage, logWarning } from "../../src/log.js";
-import { ApiVersionLifecycleStage } from "../../src/types/breaking-change.js";
-import { OadMessage } from "../../src/types/oad-types.js";
-import { applyRules } from "../../src/utils/apply-rules.js";
+import { BreakingChangeLabelsToBeAdded } from "../../src/command-helpers.ts";
+import { logMessage, logWarning } from "../../src/log.ts";
+import { ApiVersionLifecycleStage } from "../../src/types/breaking-change.ts";
+import { type OadMessage } from "../../src/types/oad-types.ts";
+import { applyRules } from "../../src/utils/apply-rules.ts";
 
 // Mock the command-helpers module
-vi.mock("../../src/command-helpers.js", () => ({
+vi.mock("../../src/command-helpers.ts", () => ({
   BreakingChangeLabelsToBeAdded: {
     add: vi.fn(),
     clear: vi.fn(),
@@ -15,7 +15,7 @@ vi.mock("../../src/command-helpers.js", () => ({
 }));
 
 // Mock the log module
-vi.mock("../../src/log.js", () => ({
+vi.mock("../../src/log.ts", () => ({
   logMessage: vi.fn(),
   logMessageAsync: vi.fn(),
   logWarning: vi.fn(),
@@ -27,7 +27,7 @@ vi.mock("../../src/log.js", () => ({
 }));
 
 // Mock the oad-rule-map module
-vi.mock("../../src/utils/oad-rule-map.js", () => ({
+vi.mock("../../src/utils/oad-rule-map.ts", () => ({
   oadMessagesRuleMap: [
     {
       scenario: "SameVersion",

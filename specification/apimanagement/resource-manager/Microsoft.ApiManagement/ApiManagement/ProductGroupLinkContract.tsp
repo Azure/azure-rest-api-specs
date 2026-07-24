@@ -60,7 +60,8 @@ interface ProductGroupLinkContractOps
         @minLength(1)
         @maxLength(80)
         groupLinkId: string,
-      }
+      },
+      ResourceName = "ServiceProductGroupLink"
     > {}
 
 @armResourceOperations
@@ -162,7 +163,8 @@ interface WorkspaceProductGroupLinkOps
         @minLength(1)
         @maxLength(80)
         groupLinkId: string,
-      }
+      },
+      ResourceName = "ServiceWorkspaceProductGroupLink"
     > {}
 
 @armResourceOperations

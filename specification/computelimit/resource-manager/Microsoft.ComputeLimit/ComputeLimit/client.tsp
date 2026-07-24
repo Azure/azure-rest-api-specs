@@ -24,8 +24,13 @@ using Microsoft.ComputeLimit;
 @@clientName(FeatureState, "ComputeLimitFeatureState", "csharp");
 @@clientName(
   FeatureEnableRequest,
-  "ComputeLimitFeatureEnableRequest",
+  "ComputeLimitFeatureEnableContent",
   "csharp"
 );
 @@clientName(VmFamily, "ComputeLimitVmFamily", "csharp");
 @@clientName(VmFamilyProperties, "ComputeLimitVmFamilyProperties", "csharp");
+@@clientName(
+  SetMemberCapOverridesRequest,
+  "ComputeLimitSetMemberCapOverridesContent",
+  "csharp"
+);
