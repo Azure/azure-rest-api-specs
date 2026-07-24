@@ -54,7 +54,13 @@ enum Versions {
   v2024_11_30: "2024-11-30",
 
   /**
+   * The 2026-04-30 API version.
+   */
+  v2026_04_30: "2026-04-30",
+
+  /**
    * The 2025-05-31-preview API version.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/version-progression" "The 2026 stable contract branches from 2024 and does not include the 2025 preview-only features."
   v2025_05_31_preview: "2025-05-31-preview",
 }
