@@ -1,0 +1,72 @@
+{
+  "parameters": {
+    "serverName": "testpgflex",
+    "resourceGroupName": "testrg",
+    "api-version": "2025-01-01-preview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "sku": {
+          "name": "Standard_D4ds_v5",
+          "tier": "GeneralPurpose"
+        },
+        "systemData": {
+          "createdAt": "2024-12-02T21:26:40.2439205Z"
+        },
+        "properties": {
+          "replica": {
+            "role": "Primary",
+            "capacity": 5
+          },
+          "storage": {
+            "type": "",
+            "iops": 500,
+            "tier": "P10",
+            "storageSizeGB": 128,
+            "autoGrow": "Disabled"
+          },
+          "network": {
+            "publicNetworkAccess": "Enabled"
+          },
+          "privateEndpointConnections": [],
+          "dataEncryption": {
+            "type": "SystemManaged"
+          },
+          "authConfig": {
+            "activeDirectoryAuth": "Disabled",
+            "passwordAuth": "Enabled"
+          },
+          "fullyQualifiedDomainName": "testpgflex.postgres.database.azure.com",
+          "version": "16",
+          "minorVersion": "8",
+          "administratorLogin": "login",
+          "state": "Ready",
+          "availabilityZone": "1",
+          "backup": {
+            "backupRetentionDays": 7,
+            "geoRedundantBackup": "Enabled",
+            "earliestRestoreDate": "2025-02-25T02:11:46.457806+00:00"
+          },
+          "highAvailability": {
+            "mode": "Disabled",
+            "state": "NotEnabled"
+          },
+          "maintenanceWindow": {
+            "customWindow": "Disabled",
+            "dayOfWeek": 0,
+            "startHour": 0,
+            "startMinute": 0
+          },
+          "replicationRole": "Primary",
+          "replicaCapacity": 5
+        },
+        "location": "East US",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/testpgflex",
+        "name": "testpgflex",
+        "type": "Microsoft.DBforPostgreSQL/flexibleServers"
+      }
+    }
+  }
+}
