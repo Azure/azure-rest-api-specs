@@ -43,8 +43,12 @@ function createMockGithubImpl() {
       },
       issues: {
         addLabels: vi.fn(),
+        createComment: vi.fn(),
+        deleteComment: vi.fn(),
+        listComments: vi.fn().mockResolvedValue({ data: [] }),
         listLabelsOnIssue: vi.fn().mockResolvedValue({ data: [] }),
         removeLabel: vi.fn(),
+        updateComment: vi.fn(),
       },
       pulls: {
         get: vi.fn(),
