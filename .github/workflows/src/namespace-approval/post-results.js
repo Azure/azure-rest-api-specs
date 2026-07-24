@@ -95,7 +95,7 @@ function getApprovers(approversConfig, isMgmt, language) {
   const approvers = approversConfig["data-plane"]?.[language];
   if (!approvers) {
     throw new Error(
-      `No approvers configured for language "${language}" in .github/namespace-approvers.yml`,
+      `No approvers configured for language "${language}" in .github/protected-labels.yml`,
     );
   }
   return approvers;
@@ -205,7 +205,7 @@ function buildCommentBody({
   if (resetLanguages && resetLanguages.length > 0) {
     body += `\n> ⚠️ **Namespace changed** — approvals for ${resetLanguages.join(", ")} have been reset.\n`;
   }
-  body += `\n_Approver list: [.github/namespace-approvers.yml](../blob/${baseRef}/.github/namespace-approvers.yml)_\n`;
+  body += `\n_Approver list: [.github/protected-labels.yml](../blob/${baseRef}/.github/protected-labels.yml)_\n`;
   body += `_Process: [.github/workflows/src/namespace-approval/NAMESPACE-REVIEW-PROCESS.md](../blob/${baseRef}/.github/workflows/src/namespace-approval/NAMESPACE-REVIEW-PROCESS.md)_\n`;
   body += `_Namespaces extracted from tspconfig.yaml emitter options_`;
   return body;

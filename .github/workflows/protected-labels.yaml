@@ -1,0 +1,34 @@
+# Protected Labels - Enforces that only authorized users can apply certain labels.
+# Reads authorized users from .github/protected-labels.yml.
+# If an unauthorized user applies a protected label, the bot removes it and posts a warning.
+name: "Protected Labels"
+
+on:
+  pull_request_target:
+    types:
+      - labeled
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  check-label:
+    name: Check Protected Label
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          sparse-checkout: |
+            .github/
+
+      - name: Install dependencies for github-script actions
+        uses: ./.github/actions/install-deps-github-script
+
+      - name: Validate label authorization
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const { default: checkLabel } =
+              await import('${{ github.workspace }}/.github/workflows/src/protected-labels/check-label.js');
+            await checkLabel({ github, context, core });

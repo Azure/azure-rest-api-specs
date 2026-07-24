@@ -61,7 +61,8 @@ async function handleUnlabeled({
 
   /** @type {string[]} */
   const allApprovers = getAllApprovers(approversConfig);
-  if (allApprovers.includes(actor)) {
+  const actorLower = actor.toLowerCase();
+  if (allApprovers.some((u) => u.toLowerCase() === actorLower)) {
     core.info(`${actor} is an authorized approver, allowing label removal`);
     return;
   }
@@ -91,7 +92,6 @@ async function handleUnlabeled({
 async function handleLabeled({
   github,
   core,
-  approversConfig,
   owner,
   repo,
   targetLabel,
@@ -104,10 +104,10 @@ async function handleLabeled({
   let langsToApprove;
 
   if (targetLabel === "namespace-approved-all") {
-    /** @type {string[]} */
-    const allApprovers = getAllApprovers(approversConfig);
-
-    if (!allApprovers.includes(actor)) {
+    // namespace-approved-all is a shortcut for management-plane only.
+    // On mgmt PRs, a single label approves all pending languages at once.
+    // Auth (who can apply) is enforced by check-label.js (protected-labels workflow).
+    if (!isMgmt) {
       await github.rest.issues.removeLabel({
         owner,
         repo,
@@ -118,7 +118,7 @@ async function handleLabeled({
         owner,
         repo,
         issue_number: prNumber,
-        body: `⚠️ @${actor} is not authorized to use \`namespace-approved-all\`. This shortcut is available to authorized namespace approvers.\n\nLabel removed.`,
+        body: `⚠️ \`namespace-approved-all\` is only available on management-plane PRs. Use per-language \`namespace-<lang>-approved\` labels instead.\n\nLabel removed.`,
       });
       return;
     }
@@ -133,33 +133,11 @@ async function handleLabeled({
       return;
     }
 
+    // Auth (who can apply) is enforced by check-label.js (protected-labels workflow).
+    // Both workflows run concurrently on labeled events, so there's a brief window
+    // where this processes before check-label.js removes an unauthorized label.
+    // State reconciles on the next event (label removal triggers unlabeled handler).
     const lang = match[1];
-    /** @type {string[]} */
-    let authorizedList;
-    if (isMgmt && approversConfig["management-plane"]?.all) {
-      authorizedList = approversConfig["management-plane"].all;
-    } else {
-      const langApprovers = approversConfig["data-plane"]?.[lang] ?? [];
-      const globalApprovers = approversConfig["data-plane"]?.global ?? [];
-      authorizedList = [...new Set([...langApprovers, ...globalApprovers])];
-    }
-
-    if (!authorizedList.includes(actor)) {
-      await github.rest.issues.removeLabel({
-        owner,
-        repo,
-        issue_number: prNumber,
-        name: targetLabel,
-      });
-      await github.rest.issues.createComment({
-        owner,
-        repo,
-        issue_number: prNumber,
-        body: `⚠️ @${actor} is not authorized to approve **${lang}** namespace. Authorized approvers: ${authorizedList.join(", ")}.\n\nLabel \`${targetLabel}\` has been removed.`,
-      });
-      return;
-    }
-
     langsToApprove = [lang];
   }
 
@@ -268,7 +246,7 @@ export default async function validateApproval({ github, context, core }) {
   );
   const targetLabel = payload.label.name;
   const actor = payload.sender.login;
-  const isMgmt = labels.includes("Mgmt");
+  const isMgmt = labels.includes("Mgmt") || labels.includes("resource-manager");
 
   if (payload.action === "unlabeled") {
     return await handleUnlabeled({
