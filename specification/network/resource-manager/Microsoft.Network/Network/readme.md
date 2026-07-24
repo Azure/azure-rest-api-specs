@@ -175,6 +175,30 @@ suppressions:
     where:
       - $.definitions.GetServiceGatewayServicesResult
   - code: ProvisioningStateMustBeReadOnly
+    from: firewallPolicy.json
+    reason: The emitted {$ref, readOnly true} shape matches all pre-existing FirewallPolicy child resources (e.g. FirewallPolicyRuleCollectionGroup) which reference Common.ProvisioningState. A Network-RP-wide TypeSpec correction is tracked separately.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/kubeSelectorGroups/{kubeSelectorGroupName}"].get.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/kubeSelectorGroups/{kubeSelectorGroupName}"].put.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/kubeSelectorGroups/{kubeSelectorGroupName}"].put.responses["201"].schema
+  - code: AvoidAdditionalProperties
+    from: firewallPolicy.json
+    reason: >-
+      KubeLabelSelector.matchLabels intentionally represents an open-ended Kubernetes label map
+      (string-to-string dictionary) and therefore requires additionalProperties.
+    where:
+      - $.definitions.KubeLabelSelector.properties.matchLabels
+  - code: ResourceNameRestriction
+    from: firewallPolicy.json
+    reason: >-
+      firewallPolicyName is the name parameter of the parent FirewallPolicy resource, inherited by
+      the KubeSelectorGroup child path via @parentResource. The child does not define or own the
+      parent's name parameter, so the naming pattern restriction is governed by the FirewallPolicy
+      resource and is not applicable on the child path.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/kubeSelectorGroups"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/kubeSelectorGroups/{kubeSelectorGroupName}"]
+  - code: ProvisioningStateMustBeReadOnly
     from: firstPartyServiceTag.json
     reason: >-
       The TypeSpec emitter correctly places readOnly: true as a sibling of $ref, which AutoRest
