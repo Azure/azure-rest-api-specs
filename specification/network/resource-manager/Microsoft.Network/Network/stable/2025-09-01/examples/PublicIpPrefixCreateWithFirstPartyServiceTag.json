@@ -1,0 +1,84 @@
+{
+  "parameters": {
+    "api-version": "2025-09-01",
+    "parameters": {
+      "location": "westus",
+      "properties": {
+        "ipTags": [
+          {
+            "ipTagType": "FirstPartyUsage",
+            "tag": "SQL",
+            "firstPartyServiceTagId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/firstPartyServiceTags/myServiceTag"
+          }
+        ],
+        "prefixLength": 30,
+        "publicIPAddressVersion": "IPv4"
+      },
+      "sku": {
+        "name": "Standard",
+        "tier": "Regional"
+      }
+    },
+    "publicIpPrefixName": "test-ipprefix",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "test-ipprefix",
+        "type": "Microsoft.Network/publicIPPrefixes",
+        "etag": "W/\"00000000-0000-0000-0000-00000000\"",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/publicIPPrefixes/test-ipprefix",
+        "location": "westus",
+        "properties": {
+          "ipPrefix": "192.168.254.2/30",
+          "ipTags": [
+            {
+              "ipTagType": "FirstPartyUsage",
+              "tag": "SQL",
+              "firstPartyServiceTagId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/firstPartyServiceTags/myServiceTag"
+            }
+          ],
+          "prefixLength": 30,
+          "provisioningState": "Succeeded",
+          "publicIPAddressVersion": "IPv4",
+          "resourceGuid": "00000000-0000-0000-0000-00000000"
+        },
+        "sku": {
+          "name": "Standard",
+          "tier": "Regional"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "test-ipprefix",
+        "type": "Microsoft.Network/publicIPPrefixes",
+        "etag": "W/\"00000000-0000-0000-0000-00000000\"",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/publicIPPrefixes/test-ipprefix",
+        "location": "westus",
+        "properties": {
+          "ipPrefix": "192.168.254.2/30",
+          "ipTags": [
+            {
+              "ipTagType": "FirstPartyUsage",
+              "tag": "SQL",
+              "firstPartyServiceTagId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/firstPartyServiceTags/myServiceTag"
+            }
+          ],
+          "prefixLength": 30,
+          "provisioningState": "Succeeded",
+          "publicIPAddressVersion": "IPv4",
+          "resourceGuid": "00000000-0000-0000-0000-00000000"
+        },
+        "sku": {
+          "name": "Standard",
+          "tier": "Regional"
+        }
+      }
+    }
+  },
+  "operationId": "PublicIPPrefixes_CreateOrUpdate",
+  "title": "Create public IP prefix with first party service tag"
+}

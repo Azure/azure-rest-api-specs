@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "WebApplicationFirewallManagement",
-    "version": "2025-07-01",
+    "version": "2025-09-01",
     "description": "APIs to manage Microsoft Azure network resources.",
     "x-typespec-generated": [
       {
@@ -40,17 +40,17 @@
   },
   "tags": [
     {
-      "name": "VirtualNetworkAppliances"
+      "name": "FirstPartyServiceTags"
     }
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/virtualNetworkAppliances": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/firstPartyServiceTags": {
       "get": {
-        "operationId": "VirtualNetworkAppliances_ListAll",
+        "operationId": "FirstPartyServiceTags_ListAll",
         "tags": [
-          "VirtualNetworkAppliances"
+          "FirstPartyServiceTags"
         ],
-        "description": "Gets all virtual network appliances in a subscription.",
+        "description": "Gets all the first party service tags in a subscription.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -63,7 +63,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/VirtualNetworkApplianceListResult"
+              "$ref": "#/definitions/FirstPartyServiceTagListResult"
             }
           },
           "default": {
@@ -74,8 +74,8 @@
           }
         },
         "x-ms-examples": {
-          "List all virtual network appliances": {
-            "$ref": "./examples/VirtualNetworkAppliances_ListBySubscription.json"
+          "List all first party service tags": {
+            "$ref": "./examples/FirstPartyServiceTagListAll.json"
           }
         },
         "x-ms-pageable": {
@@ -83,13 +83,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkAppliances": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firstPartyServiceTags": {
       "get": {
-        "operationId": "VirtualNetworkAppliances_List",
+        "operationId": "FirstPartyServiceTags_List",
         "tags": [
-          "VirtualNetworkAppliances"
+          "FirstPartyServiceTags"
         ],
-        "description": "Gets all virtual network appliances in a resource group.",
+        "description": "Gets all the first party service tags in a resource group.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -105,7 +105,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/VirtualNetworkApplianceListResult"
+              "$ref": "#/definitions/FirstPartyServiceTagListResult"
             }
           },
           "default": {
@@ -116,8 +116,8 @@
           }
         },
         "x-ms-examples": {
-          "List virtual network appliances in resource group": {
-            "$ref": "./examples/VirtualNetworkAppliances_List.json"
+          "List first party service tags in resource group": {
+            "$ref": "./examples/FirstPartyServiceTagList.json"
           }
         },
         "x-ms-pageable": {
@@ -125,13 +125,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkAppliances/{virtualNetworkApplianceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firstPartyServiceTags/{firstPartyServiceTagName}": {
       "get": {
-        "operationId": "VirtualNetworkAppliances_Get",
+        "operationId": "FirstPartyServiceTags_Get",
         "tags": [
-          "VirtualNetworkAppliances"
+          "FirstPartyServiceTags"
         ],
-        "description": "Gets information about the specified virtual network appliance.",
+        "description": "Gets the specified first party service tag.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -143,19 +143,20 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "virtualNetworkApplianceName",
+            "name": "firstPartyServiceTagName",
             "in": "path",
-            "description": "The name of the virtual network appliance.",
+            "description": "The name of the first party service tag.",
             "required": true,
             "type": "string",
-            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+            "maxLength": 80,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,79}$"
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/VirtualNetworkAppliance"
+              "$ref": "#/definitions/FirstPartyServiceTag"
             }
           },
           "default": {
@@ -166,17 +167,17 @@
           }
         },
         "x-ms-examples": {
-          "Get virtual network appliance": {
-            "$ref": "./examples/VirtualNetworkAppliances_Get.json"
+          "Get first party service tag": {
+            "$ref": "./examples/FirstPartyServiceTagGet.json"
           }
         }
       },
       "put": {
-        "operationId": "VirtualNetworkAppliances_CreateOrUpdate",
+        "operationId": "FirstPartyServiceTags_CreateOrUpdate",
         "tags": [
-          "VirtualNetworkAppliances"
+          "FirstPartyServiceTags"
         ],
-        "description": "Creates or updates a virtual network appliance.",
+        "description": "Creates or updates a first party service tag.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -188,34 +189,35 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "virtualNetworkApplianceName",
+            "name": "firstPartyServiceTagName",
             "in": "path",
-            "description": "The name of the virtual network appliance.",
+            "description": "The name of the first party service tag.",
             "required": true,
             "type": "string",
-            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+            "maxLength": 80,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,79}$"
           },
           {
             "name": "parameters",
             "in": "body",
-            "description": "Parameters supplied to the create or update virtual network appliance operation.",
+            "description": "Parameters supplied to the create or update first party service tag operation.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/VirtualNetworkAppliance"
+              "$ref": "#/definitions/FirstPartyServiceTag"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'VirtualNetworkAppliance' update operation succeeded",
+            "description": "Resource 'FirstPartyServiceTag' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/VirtualNetworkAppliance"
+              "$ref": "#/definitions/FirstPartyServiceTag"
             }
           },
           "201": {
-            "description": "Resource 'VirtualNetworkAppliance' create operation succeeded",
+            "description": "Resource 'FirstPartyServiceTag' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/VirtualNetworkAppliance"
+              "$ref": "#/definitions/FirstPartyServiceTag"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -237,22 +239,22 @@
           }
         },
         "x-ms-examples": {
-          "Create virtual network appliance": {
-            "$ref": "./examples/VirtualNetworkAppliances_CreateOrUpdate.json"
+          "Create first party service tag": {
+            "$ref": "./examples/FirstPartyServiceTagCreate.json"
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/VirtualNetworkAppliance"
+          "final-state-schema": "#/definitions/FirstPartyServiceTag"
         },
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "operationId": "VirtualNetworkAppliances_UpdateTags",
+        "operationId": "FirstPartyServiceTags_UpdateTags",
         "tags": [
-          "VirtualNetworkAppliances"
+          "FirstPartyServiceTags"
         ],
-        "description": "Updates a virtual network appliance tags.",
+        "description": "Updates a first party service tag tags.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -264,17 +266,18 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "virtualNetworkApplianceName",
+            "name": "firstPartyServiceTagName",
             "in": "path",
-            "description": "The name of the virtual network appliance.",
+            "description": "The name of the first party service tag.",
             "required": true,
             "type": "string",
-            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+            "maxLength": 80,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,79}$"
           },
           {
             "name": "parameters",
             "in": "body",
-            "description": "Parameters supplied to update virtual network appliance tags.",
+            "description": "Parameters supplied to update first party service tag tags.",
             "required": true,
             "schema": {
               "$ref": "./common.json#/definitions/TagsObject"
@@ -285,7 +288,21 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/VirtualNetworkAppliance"
+              "$ref": "#/definitions/FirstPartyServiceTag"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -296,17 +313,22 @@
           }
         },
         "x-ms-examples": {
-          "Update virtual network appliance tags": {
-            "$ref": "./examples/VirtualNetworkAppliances_UpdateTags.json"
+          "Update first party service tag tags": {
+            "$ref": "./examples/FirstPartyServiceTagUpdateTags.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/FirstPartyServiceTag"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "VirtualNetworkAppliances_Delete",
+        "operationId": "FirstPartyServiceTags_Delete",
         "tags": [
-          "VirtualNetworkAppliances"
+          "FirstPartyServiceTags"
         ],
-        "description": "Deletes the specified virtual network appliance.",
+        "description": "Deletes the specified first party service tag.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -318,15 +340,19 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "virtualNetworkApplianceName",
+            "name": "firstPartyServiceTagName",
             "in": "path",
-            "description": "The name of the virtual network appliance.",
+            "description": "The name of the first party service tag.",
             "required": true,
             "type": "string",
-            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+            "maxLength": 80,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,79}$"
           }
         ],
         "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
@@ -352,8 +378,8 @@
           }
         },
         "x-ms-examples": {
-          "Delete virtual network appliance": {
-            "$ref": "./examples/VirtualNetworkAppliances_Delete.json"
+          "Delete first party service tag": {
+            "$ref": "./examples/FirstPartyServiceTagDelete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -364,14 +390,23 @@
     }
   },
   "definitions": {
-    "VirtualNetworkAppliance": {
+    "FirstPartyServiceTag": {
       "type": "object",
-      "description": "A virtual network appliance in a resource group.",
+      "description": "First party service tag resource.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/VirtualNetworkAppliancePropertiesFormat",
-          "description": "Properties of the virtual network appliance.",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/FirstPartyServiceTagPropertiesFormat",
+          "description": "Properties of the first party service tag."
+        },
+        "id": {
+          "type": "string",
+          "description": "The unique identifier of the resource.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource.",
+          "readOnly": true
         },
         "etag": {
           "type": "string",
@@ -385,72 +420,15 @@
         }
       ]
     },
-    "VirtualNetworkApplianceIpConfiguration": {
+    "FirstPartyServiceTagListResult": {
       "type": "object",
-      "description": "The virtual network appliance ip configuration.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/VirtualNetworkApplianceIpConfigurationProperties",
-          "description": "Properties of the virtual network appliance ip configuration.",
-          "x-ms-client-flatten": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of virtual network appliance ip configuration."
-        },
-        "etag": {
-          "type": "string",
-          "description": "A unique read-only string that changes whenever the resource is updated.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The resource type.",
-          "readOnly": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./common.json#/definitions/Common.SubResource"
-        }
-      ]
-    },
-    "VirtualNetworkApplianceIpConfigurationProperties": {
-      "type": "object",
-      "description": "Properties of virtual network appliance IP configuration.",
-      "properties": {
-        "privateIPAddress": {
-          "type": "string",
-          "description": "The private IP address of the IP configuration."
-        },
-        "privateIPAllocationMethod": {
-          "$ref": "./common.json#/definitions/Common.IPAllocationMethod",
-          "description": "The private IP address allocation method."
-        },
-        "primary": {
-          "type": "boolean",
-          "description": "Whether the ip configuration is primary or not."
-        },
-        "provisioningState": {
-          "$ref": "./common.json#/definitions/Common.ProvisioningState",
-          "description": "The provisioning state of the private link service IP configuration resource.",
-          "readOnly": true
-        },
-        "privateIPAddressVersion": {
-          "$ref": "./common.json#/definitions/Common.IPVersion",
-          "description": "Whether the specific IP configuration is IPv4 or IPv6. Default is IPv4."
-        }
-      }
-    },
-    "VirtualNetworkApplianceListResult": {
-      "type": "object",
-      "description": "The response of a VirtualNetworkAppliance list operation.",
+      "description": "The response of a FirstPartyServiceTag list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The VirtualNetworkAppliance items on this page",
+          "description": "The FirstPartyServiceTag items on this page",
           "items": {
-            "$ref": "#/definitions/VirtualNetworkAppliance"
+            "$ref": "#/definitions/FirstPartyServiceTag"
           }
         },
         "nextLink": {
@@ -463,42 +441,33 @@
         "value"
       ]
     },
-    "VirtualNetworkAppliancePropertiesFormat": {
+    "FirstPartyServiceTagPropertiesFormat": {
       "type": "object",
-      "description": "VirtualNetworkAppliance properties.",
+      "description": "Properties of the first party service tag.",
       "properties": {
-        "bandwidthInGbps": {
-          "type": "number",
-          "format": "double",
-          "description": "Bandwidth of the VirtualNetworkAppliance resource in Gbps."
+        "value": {
+          "type": "string",
+          "description": "The value of the first party service tag."
         },
-        "ipConfigurations": {
-          "type": "array",
-          "description": "A list of IPConfigurations of the virtual network appliance.",
-          "items": {
-            "$ref": "#/definitions/VirtualNetworkApplianceIpConfiguration"
-          },
-          "readOnly": true
-        },
-        "privateIPAddressVersion": {
-          "$ref": "./common.json#/definitions/VirtualNetworkApplianceIpVersionType",
-          "description": "Whether the specific virtual network appliance is IPv4 or Dual Stack. Default is IPv4."
-        },
-        "provisioningState": {
-          "$ref": "./common.json#/definitions/Common.ProvisioningState",
-          "description": "The provisioning state of the virtual network appliance resource.",
+        "failedReason": {
+          "type": "string",
+          "description": "The reason for failure, if any.",
           "readOnly": true
         },
         "resourceGuid": {
           "type": "string",
-          "description": "The resource GUID property of the virtual network appliance resource.",
+          "description": "The resource GUID property of the first party service tag resource.",
           "readOnly": true
         },
-        "subnet": {
-          "$ref": "./virtualNetwork.json#/definitions/Common.Subnet",
-          "description": "The reference to the subnet resource."
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/Common.ProvisioningState",
+          "description": "The provisioning state of the first party service tag resource.",
+          "readOnly": true
         }
-      }
+      },
+      "required": [
+        "value"
+      ]
     }
   },
   "parameters": {}

@@ -3,7 +3,7 @@
   "info": {
     "title": "WebApplicationFirewallManagement",
     "version": "2025-09-01",
-    "description": "APIs to manage web application firewall rules.",
+    "description": "APIs to manage Microsoft Azure network resources.",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -10846,6 +10846,9 @@
           },
           "Create public IP address defaults with StandardV2 Sku": {
             "$ref": "./examples/PublicIpAddressCreateDefaultsStandardV2Sku.json"
+          },
+          "Create public IP address with first party service tag": {
+            "$ref": "./examples/PublicIpAddressCreateWithFirstPartyServiceTag.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -11363,6 +11366,9 @@
           },
           "Create public IP prefix defaults with StandardV2 Sku": {
             "$ref": "./examples/PublicIpPrefixCreateDefaultsStandardV2Sku.json"
+          },
+          "Create public IP prefix with first party service tag": {
+            "$ref": "./examples/PublicIpPrefixCreateWithFirstPartyServiceTag.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -15676,6 +15682,18 @@
         "tag": {
           "type": "string",
           "description": "The value of the IP tag associated with the public IP. Example: SQL."
+        },
+        "firstPartyServiceTagId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of the first party service tag associated with the IP tag.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/firstPartyServiceTags"
+              }
+            ]
+          }
         }
       }
     },

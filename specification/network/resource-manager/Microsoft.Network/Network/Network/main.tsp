@@ -137,6 +137,7 @@ import "./routes.tsp";
 import "./VirtualNetworkAppliance.tsp";
 import "./ServiceGateway.tsp";
 import "./InterconnectGroup.tsp";
+import "./FirstPartyServiceTag.tsp";
 import "./AddressPrefixSet.tsp";
 import "../Common/main.tsp";
 
@@ -148,7 +149,7 @@ using Azure.ResourceManager;
 using TypeSpec.Versioning;
 using Common;
 /**
- * APIs to manage web application firewall rules.
+ * APIs to manage Microsoft Azure network resources.
  */
 @Azure.ResourceManager.Legacy.features(Features)
 @armProviderNamespace
