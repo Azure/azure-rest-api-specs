@@ -348,6 +348,24 @@ using Azure.Core;
   armResourceIdentifier,
   "csharp"
 );
+// managementGroupId holds a full ARM resource id
+// ('/providers/Microsoft.Management/managementGroups/{name}'), so surface it as
+// ResourceIdentifier rather than a plain string, matching the other id fields.
+@@alternateType(
+  ReservationRecommendationDetailsProperties.managementGroupId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  LegacyManagementGroupScopeReservationRecommendationProperties.managementGroupId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  ModernManagementGroupScopeReservationRecommendationProperties.managementGroupId,
+  armResourceIdentifier,
+  "csharp"
+);
 @@alternateType(
   ReservationRecommendationDetailsModel.location,
   azureLocation,

@@ -2,8 +2,10 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/versioning";
 
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Consumption;
 
@@ -239,6 +241,12 @@ union Scope {
   Single: "Single",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Shared: "Shared",
+
+  /**
+   * Management group scoped recommendation.
+   */
+  @added(Versions.v2026_06_01)
+  ManagementGroup: "ManagementGroup",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1428,6 +1436,27 @@ model ReservationRecommendationDetailsProperties {
    */
   @visibility(Lifecycle.Read)
   usage?: ReservationRecommendationDetailsUsageProperties;
+
+  /**
+   * Management group id associated with management group scoped recommendation.
+   */
+  @added(Versions.v2026_06_01)
+  @visibility(Lifecycle.Read)
+  managementGroupId?: string;
+
+  /**
+   * The tenant ID associated with the management group. Populated only when managementGroupId is populated.
+   */
+  @added(Versions.v2026_06_01)
+  @visibility(Lifecycle.Read)
+  tenantId?: string;
+
+  /**
+   * Projected usage details used for generating the recommendation.
+   */
+  @added(Versions.v2026_06_01)
+  @visibility(Lifecycle.Read)
+  projectedUsage?: ReservationRecommendationDetailsProjectedUsage;
 }
 
 /**
@@ -1591,6 +1620,19 @@ model ReservationRecommendationDetailsUsageProperties {
    */
   @visibility(Lifecycle.Read)
   usageGrain?: string;
+}
+
+/**
+ * Details about projected usage data that has been used for computing the recommendation.
+ */
+@added(Versions.v2026_06_01)
+model ReservationRecommendationDetailsProjectedUsage {
+  /**
+   * Total projected retail usage in commitment units (CUs).
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "CUs is an accepted abbreviation for Commitment Units"
+  @visibility(Lifecycle.Read)
+  totalRetailUsageInCUs?: float32;
 }
 
 /**
@@ -3744,6 +3786,30 @@ model LegacySharedScopeReservationRecommendationProperties
 }
 
 /**
+ * The properties of the legacy reservation recommendation for management group scope.
+ */
+@added(Versions.v2026_06_01)
+model LegacyManagementGroupScopeReservationRecommendationProperties
+  extends LegacyReservationRecommendationProperties {
+  /**
+   * Management group id associated with management group scoped recommendation.
+   */
+  @visibility(Lifecycle.Read)
+  managementGroupId?: string;
+
+  /**
+   * The tenant ID associated with the management group. Populated only when managementGroupId is populated.
+   */
+  @visibility(Lifecycle.Read)
+  tenantId?: string;
+
+  /**
+   * Shared or single recommendation.
+   */
+  scope: "ManagementGroup";
+}
+
+/**
  * Modern reservation recommendation.
  */
 model ModernReservationRecommendation extends ReservationRecommendation {
@@ -3912,6 +3978,30 @@ model ModernSharedScopeReservationRecommendationProperties
    * Shared or single recommendation.
    */
   scope: "Shared";
+}
+
+/**
+ * The properties of the modern reservation recommendation for management group scope.
+ */
+@added(Versions.v2026_06_01)
+model ModernManagementGroupScopeReservationRecommendationProperties
+  extends ModernReservationRecommendationProperties {
+  /**
+   * Management group id associated with management group scoped recommendation.
+   */
+  @visibility(Lifecycle.Read)
+  managementGroupId?: string;
+
+  /**
+   * The tenant ID associated with the management group. Populated only when managementGroupId is populated.
+   */
+  @visibility(Lifecycle.Read)
+  tenantId?: string;
+
+  /**
+   * Shared or single recommendation.
+   */
+  scope: "ManagementGroup";
 }
 
 /**
