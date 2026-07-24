@@ -250,12 +250,30 @@ union PredictionType {
  */
 union Aggregated {
   string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @removed(Versions.v2026_01_01_preview)
   week: "week",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @removed(Versions.v2026_01_01_preview)
   day: "day",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @removed(Versions.v2026_01_01_preview)
   month: "month",
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2026_01_01_preview)
+  Daily: "Daily",
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2026_01_01_preview)
+  Weekly: "Weekly",
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2026_01_01_preview)
+  Monthly: "Monthly",
 }
 
 /**
@@ -1045,7 +1063,21 @@ model AdvisorScoreEntityProperties {
   /**
    * The details of latest available score.
    */
+  @removed(Versions.v2026_01_01_preview)
   lastRefreshedScore?: ScoreEntity;
+
+  /**
+   * The details of latest available score.
+   */
+  @added(Versions.v2026_01_01_preview)
+  @renamedFrom(Versions.v2026_01_01_preview, "lastRefreshedScore")
+  latestScore?: ScoreEntity;
+
+  /**
+   * The details of previous available score.
+   */
+  @added(Versions.v2026_01_01_preview)
+  previousScore?: ScoreEntity;
 
   /**
    * The historic Advisor score data.
@@ -1065,6 +1097,12 @@ model ScoreEntity {
   date?: string;
 
   /**
+   * The date and time when the score was processed.
+   */
+  @added(Versions.v2026_01_01_preview)
+  processedTime?: string;
+
+  /**
    * The percentage score.
    */
   score?: float32;
@@ -1075,9 +1113,23 @@ model ScoreEntity {
   consumptionUnits?: float32;
 
   /**
+   * The number of applicable resources.
+   */
+  @added(Versions.v2026_01_01_preview)
+  applicableResources?: float32;
+
+  /**
    * The number of impacted resources.
    */
+  @removed(Versions.v2026_01_01_preview)
   impactedResourceCount?: float32;
+
+  /**
+   * The number of impacted resources.
+   */
+  @added(Versions.v2026_01_01_preview)
+  @renamedFrom(Versions.v2026_01_01_preview, "impactedResourceCount")
+  impactedResources?: float32;
 
   /**
    * The potential percentage increase in overall score at subscription level once all recommendations in this scope are implemented.
@@ -1088,6 +1140,7 @@ model ScoreEntity {
    * The count of impacted categories.
    */
   @visibility(Lifecycle.Read)
+  @removed(Versions.v2026_01_01_preview)
   categoryCount?: float32;
 }
 
@@ -1433,6 +1486,14 @@ model OperationEntityListResult is Azure.Core.Page<OperationEntity>;
 @@doc(
   AdvisorScoreEntityProperties.lastRefreshedScore,
   "The details of latest available score."
+);
+@@doc(
+  AdvisorScoreEntityProperties.latestScore,
+  "The details of latest available score."
+);
+@@doc(
+  AdvisorScoreEntityProperties.previousScore,
+  "The details of previous available score."
 );
 @@doc(
   AdvisorScoreEntityProperties.timeSeries,
