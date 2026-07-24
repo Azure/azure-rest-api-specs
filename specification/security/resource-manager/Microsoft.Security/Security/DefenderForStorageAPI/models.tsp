@@ -1,11 +1,13 @@
 ﻿import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Common;
@@ -311,4 +313,108 @@ model FilesScanSummary {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   scannedFilesInGB?: float64;
+}
+
+/**
+ * The matching strategy for the filter.
+ */
+@added(Versions.v2026_01_01_preview)
+union MatchType {
+  string,
+
+  /**
+   * Match resources with values starting with the specified string.
+   */
+  Prefix: "Prefix",
+
+  /**
+   * Match resources with the exact value specified.
+   */
+  Exact: "Exact",
+}
+
+/**
+ * Filter with value and matching strategy.
+ */
+@added(Versions.v2026_01_01_preview)
+model MatchFilter {
+  /**
+   * The value to match against.
+   */
+  value: string;
+
+  /**
+   * The matching strategy for the filter.
+   */
+  match: MatchType;
+}
+
+/**
+ * Filter for blob scanning. At least one of 'container' or 'blob' must be specified; a request with neither is rejected by the service. If only container is provided, all blobs in that container are scanned. If only blob is provided, blobs matching the filter across all containers are scanned.
+ */
+@added(Versions.v2026_01_01_preview)
+model BlobScanFilter {
+  /**
+   * Optional filter for the blob container to scan. If not provided, the blob filter will apply across all containers.
+   */
+  container?: MatchFilter;
+
+  /**
+   * Optional filter for specific blob(s). If container is specified, this filters blobs within that container. If container is not specified, this filters blobs across all containers.
+   */
+  blob?: MatchFilter;
+}
+
+/**
+ * Filter for file scanning. At least one of 'share' or 'file' must be specified; a request with neither is rejected by the service. If only share is provided, all files in that share are scanned. If only file is provided, files matching the filter across all shares are scanned.
+ */
+@added(Versions.v2026_01_01_preview)
+model FileScanFilter {
+  /**
+   * Optional filter for the file share to scan. If not provided, the file filter will apply across all shares.
+   */
+  share?: MatchFilter;
+
+  /**
+   * Optional filter for specific file(s). If share is specified, this filters files within that share. If share is not specified, this filters files across all shares.
+   */
+  file?: MatchFilter;
+}
+
+/**
+ * Filters to scope the malware scan.
+ */
+@added(Versions.v2026_01_01_preview)
+model MalwareScanFilters {
+  /**
+   * Optional filter for blob scanning. Specifies which blobs to scan.
+   */
+  blobs?: BlobScanFilter;
+
+  /**
+   * Optional filter for file scanning. Specifies which files to scan.
+   */
+  files?: FileScanFilter;
+}
+
+/**
+ * Properties for the malware scan request.
+ */
+@added(Versions.v2026_01_01_preview)
+model StartMalwareScanRequestProperties {
+  /**
+   * Optional filters to scope the malware scan to specific blobs or files.
+   */
+  filters?: MalwareScanFilters;
+}
+
+/**
+ * Request body for starting a malware scan with optional filters.
+ */
+@added(Versions.v2026_01_01_preview)
+model StartMalwareScanRequest {
+  /**
+   * Properties for the malware scan request.
+   */
+  properties?: StartMalwareScanRequestProperties;
 }
