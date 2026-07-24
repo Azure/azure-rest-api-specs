@@ -6378,6 +6378,42 @@
         ]
       }
     },
+    "LabelSelectorOperator": {
+      "type": "string",
+      "description": "operator represents a Kubernetes label selector requirement's relationship to a set of values.",
+      "enum": [
+        "In",
+        "NotIn",
+        "Exists",
+        "DoesNotExist"
+      ],
+      "x-ms-enum": {
+        "name": "LabelSelectorOperator",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "In",
+            "value": "In",
+            "description": "The label value must be in the supplied set of values."
+          },
+          {
+            "name": "NotIn",
+            "value": "NotIn",
+            "description": "The label value must not be in the supplied set of values."
+          },
+          {
+            "name": "Exists",
+            "value": "Exists",
+            "description": "The label key must exist, regardless of its value."
+          },
+          {
+            "name": "DoesNotExist",
+            "value": "DoesNotExist",
+            "description": "The label key must not exist."
+          }
+        ]
+      }
+    },
     "MaintenanceTestCategory": {
       "type": "string",
       "description": "The type of maintenance that can occur during an ExpressRoute failover test.",

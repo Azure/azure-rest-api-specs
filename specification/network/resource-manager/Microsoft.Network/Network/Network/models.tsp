@@ -12553,6 +12553,13 @@ model FirewallPolicyPropertiesFormat {
   ruleCollectionGroups?: SubResource[];
 
   /**
+   * List of references to FirewallPolicyKubeSelectorGroups.
+   */
+  @added(Versions.v2025_09_01)
+  @visibility(Lifecycle.Read)
+  kubeSelectorGroups?: SubResource[];
+
+  /**
    * The provisioning state of the firewall policy resource.
    */
   @visibility(Lifecycle.Read)
@@ -12956,6 +12963,77 @@ model FirewallPolicySku {
 }
 
 /**
+ * Kubernetes Label Selector for matching labels in Kubernetes Selector Groups.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "KubeLabelSelector belongs to the firewallPolicy resource tree, which uses the ARM Legacy resource pattern; @Azure.ResourceManager.Legacy.feature is required to keep these child types consistent with the parent firewall policy."
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
+@added(Versions.v2025_09_01)
+model KubeLabelSelector {
+  /**
+   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
+   * map is equivalent to an element of matchExpressions, whose key field is "key", the
+   * operator is "In", and the values array contains only "value". The requirements are ANDed.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "matchLabels is a pass-through, user-defined Kubernetes label map of arbitrary string key/value pairs chosen by the user and not validated or owned by the service, mirroring Kubernetes LabelSelector.matchLabels; a Record<string> is required to represent it."
+  matchLabels?: Record<string>;
+
+  /**
+   * matchExpressions is a list of label selector requirements. The requirements are ANDed.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "LabelSelectorExpression has no single identifying property; it mirrors the Kubernetes label selector requirement (key/operator/values), which has no unique key, so no x-ms-identifiers can be provided."
+  matchExpressions?: LabelSelectorExpression[];
+}
+
+/**
+ * operator represents a Kubernetes label selector requirement's relationship to a set of values.
+ */
+@added(Versions.v2025_09_01)
+union LabelSelectorOperator {
+  /** The label value must be in the supplied set of values. */
+  In: "In",
+
+  /** The label value must not be in the supplied set of values. */
+  NotIn: "NotIn",
+
+  /** The label key must exist, regardless of its value. */
+  Exists: "Exists",
+
+  /** The label key must not exist. */
+  DoesNotExist: "DoesNotExist",
+
+  string,
+}
+
+/**
+ * A label selector requirement is a selector that contains values, a key, and an operator that
+ * relates the key and values.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "LabelSelectorExpression belongs to the firewallPolicy resource tree, which uses the ARM Legacy resource pattern; @Azure.ResourceManager.Legacy.feature is required to keep these child types consistent with the parent firewall policy."
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
+@added(Versions.v2025_09_01)
+model LabelSelectorExpression {
+  /**
+   * key is a string of 63 characters or less, and must consist of alphanumeric characters,
+   * '-', '_' or '.'.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "key here is a Kubernetes label selector key, not a secret/credential"
+  key?: string;
+
+  /**
+   * operator represents a key's relationship to a set of values.
+   * Valid operators are In, NotIn, Exists and DoesNotExist.
+   */
+  operator?: LabelSelectorOperator;
+
+  /**
+   * values is an array of string values. If the operator is In or NotIn,
+   * the values array must be non-empty. If the operator is Exists or DoesNotExist,
+   * the values array must be empty.
+   */
+  values?: string[];
+}
+
+/**
  * Properties of the rule collection group.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -12982,6 +13060,30 @@ model FirewallPolicyRuleCollectionGroupProperties {
 
   /**
    * The provisioning state of the firewall policy rule collection group resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
+/**
+ * Properties of the Kubernetes Selector Group.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FirewallPolicyKubeSelectorGroupProperties belongs to the firewallPolicy resource tree, which uses the ARM Legacy resource pattern; @Azure.ResourceManager.Legacy.feature is required to keep these child types consistent with the parent firewall policy."
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
+@added(Versions.v2025_09_01)
+model FirewallPolicyKubeSelectorGroupProperties {
+  /**
+   * Kubernetes Pod selector for matching pods in the Kubernetes cluster.
+   */
+  podSelector?: KubeLabelSelector;
+
+  /**
+   * Kubernetes Namespace selector for matching namespaces in the Kubernetes cluster.
+   */
+  namespaceSelector?: KubeLabelSelector;
+
+  /**
+   * The provisioning state of the firewall policy Kubernetes selector group resource.
    */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
@@ -26027,6 +26129,12 @@ model ApplicationRule extends FirewallPolicyRule {
   sourceIpGroups?: string[];
 
   /**
+   * List of source Kubernetes Selector Groups for this rule.
+   */
+  @added(Versions.v2025_09_01)
+  sourceKubeSelectorGroups?: string[];
+
+  /**
    * Terminate TLS connections for this rule.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -26177,6 +26285,12 @@ model NetworkRule extends FirewallPolicyRule {
    * List of destination FQDNs.
    */
   destinationFqdns?: string[];
+
+  /**
+   * List of source Kubernetes Selector Groups for this rule.
+   */
+  @added(Versions.v2025_09_01)
+  sourceKubeSelectorGroups?: string[];
 
   /**
    * Rule Type.

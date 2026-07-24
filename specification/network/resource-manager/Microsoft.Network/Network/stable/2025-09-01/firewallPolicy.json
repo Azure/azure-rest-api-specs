@@ -44,6 +44,9 @@
     },
     {
       "name": "FirewallPolicyRuleCollectionGroups"
+    },
+    {
+      "name": "FirewallPolicyKubeSelectorGroups"
     }
   ],
   "paths": {
@@ -576,6 +579,259 @@
             "$ref": "./examples/FirewallPolicyDraftDelete.json"
           }
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/kubeSelectorGroups": {
+      "get": {
+        "operationId": "FirewallPolicyKubeSelectorGroups_List",
+        "tags": [
+          "FirewallPolicyKubeSelectorGroups"
+        ],
+        "description": "Lists all FirewallPolicyKubeSelectorGroups in a FirewallPolicy resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "firewallPolicyName",
+            "in": "path",
+            "description": "The name of the Firewall Policy.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FirewallPolicyKubeSelectorGroupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all FirewallPolicyKubeSelectorGroups for a given FirewallPolicy": {
+            "$ref": "./examples/FirewallPolicyKubeSelectorGroupList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/kubeSelectorGroups/{kubeSelectorGroupName}": {
+      "get": {
+        "operationId": "FirewallPolicyKubeSelectorGroups_Get",
+        "tags": [
+          "FirewallPolicyKubeSelectorGroups"
+        ],
+        "description": "Gets the specified FirewallPolicyKubeSelectorGroup.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "firewallPolicyName",
+            "in": "path",
+            "description": "The name of the Firewall Policy.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "kubeSelectorGroupName",
+            "in": "path",
+            "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-._]{0,78}[a-zA-Z0-9_])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FirewallPolicyKubeSelectorGroup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get FirewallPolicyKubeSelectorGroup": {
+            "$ref": "./examples/FirewallPolicyKubeSelectorGroupGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "FirewallPolicyKubeSelectorGroups_CreateOrUpdate",
+        "tags": [
+          "FirewallPolicyKubeSelectorGroups"
+        ],
+        "description": "Creates or updates the specified FirewallPolicyKubeSelectorGroup.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "firewallPolicyName",
+            "in": "path",
+            "description": "The name of the Firewall Policy.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "kubeSelectorGroupName",
+            "in": "path",
+            "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-._]{0,78}[a-zA-Z0-9_])?$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Parameters supplied to the create or update FirewallPolicyKubeSelectorGroup operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FirewallPolicyKubeSelectorGroup"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'FirewallPolicyKubeSelectorGroup' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/FirewallPolicyKubeSelectorGroup"
+            }
+          },
+          "201": {
+            "description": "Resource 'FirewallPolicyKubeSelectorGroup' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/FirewallPolicyKubeSelectorGroup"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create FirewallPolicyKubeSelectorGroup": {
+            "$ref": "./examples/FirewallPolicyKubeSelectorGroupPut.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/FirewallPolicyKubeSelectorGroup"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "FirewallPolicyKubeSelectorGroups_Delete",
+        "tags": [
+          "FirewallPolicyKubeSelectorGroups"
+        ],
+        "description": "Deletes the specified FirewallPolicyKubeSelectorGroup.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "firewallPolicyName",
+            "in": "path",
+            "description": "The name of the Firewall Policy.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "kubeSelectorGroupName",
+            "in": "path",
+            "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-._]{0,78}[a-zA-Z0-9_])?$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete FirewallPolicyKubeSelectorGroup": {
+            "$ref": "./examples/FirewallPolicyKubeSelectorGroupDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/listIdpsFilterOptions": {
@@ -1364,6 +1620,13 @@
             "type": "string"
           }
         },
+        "sourceKubeSelectorGroups": {
+          "type": "array",
+          "description": "List of source Kubernetes Selector Groups for this rule.",
+          "items": {
+            "type": "string"
+          }
+        },
         "terminateTLS": {
           "type": "boolean",
           "description": "Terminate TLS connections for this rule."
@@ -1746,6 +2009,66 @@
         }
       }
     },
+    "FirewallPolicyKubeSelectorGroup": {
+      "type": "object",
+      "description": "Firewall Policy Kubernetes Selector Group resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FirewallPolicyKubeSelectorGroupProperties",
+          "description": "The properties of the firewall policy Kubernetes selector group."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/Common.SubResourceModel"
+        }
+      ]
+    },
+    "FirewallPolicyKubeSelectorGroupListResult": {
+      "type": "object",
+      "description": "The response of a FirewallPolicyKubeSelectorGroup list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The FirewallPolicyKubeSelectorGroup items on this page",
+          "items": {
+            "$ref": "#/definitions/FirewallPolicyKubeSelectorGroup"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "FirewallPolicyKubeSelectorGroupProperties": {
+      "type": "object",
+      "description": "Properties of the Kubernetes Selector Group.",
+      "properties": {
+        "podSelector": {
+          "$ref": "#/definitions/KubeLabelSelector",
+          "description": "Kubernetes Pod selector for matching pods in the Kubernetes cluster."
+        },
+        "namespaceSelector": {
+          "$ref": "#/definitions/KubeLabelSelector",
+          "description": "Kubernetes Namespace selector for matching namespaces in the Kubernetes cluster."
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/Common.ProvisioningState",
+          "description": "The provisioning state of the firewall policy Kubernetes selector group resource.",
+          "readOnly": true
+        }
+      }
+    },
     "FirewallPolicyListResult": {
       "type": "object",
       "description": "The response of a FirewallPolicy list operation.",
@@ -1845,6 +2168,14 @@
         "ruleCollectionGroups": {
           "type": "array",
           "description": "List of references to FirewallPolicyRuleCollectionGroups.",
+          "items": {
+            "$ref": "./common.json#/definitions/Common.SubResource"
+          },
+          "readOnly": true
+        },
+        "kubeSelectorGroups": {
+          "type": "array",
+          "description": "List of references to FirewallPolicyKubeSelectorGroups.",
           "items": {
             "$ref": "./common.json#/definitions/Common.SubResource"
           },
@@ -2202,6 +2533,47 @@
         }
       }
     },
+    "KubeLabelSelector": {
+      "type": "object",
+      "description": "Kubernetes Label Selector for matching labels in Kubernetes Selector Groups.",
+      "properties": {
+        "matchLabels": {
+          "type": "object",
+          "description": "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "matchExpressions": {
+          "type": "array",
+          "description": "matchExpressions is a list of label selector requirements. The requirements are ANDed.",
+          "items": {
+            "$ref": "#/definitions/LabelSelectorExpression"
+          }
+        }
+      }
+    },
+    "LabelSelectorExpression": {
+      "type": "object",
+      "description": "A label selector requirement is a selector that contains values, a key, and an operator that\nrelates the key and values.",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "key is a string of 63 characters or less, and must consist of alphanumeric characters,\n'-', '_' or '.'."
+        },
+        "operator": {
+          "$ref": "./common.json#/definitions/LabelSelectorOperator",
+          "description": "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist."
+        },
+        "values": {
+          "type": "array",
+          "description": "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "NatRule": {
       "type": "object",
       "description": "Rule of type nat.",
@@ -2310,6 +2682,13 @@
         "destinationFqdns": {
           "type": "array",
           "description": "List of destination FQDNs.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sourceKubeSelectorGroups": {
+          "type": "array",
+          "description": "List of source Kubernetes Selector Groups for this rule.",
           "items": {
             "type": "string"
           }
