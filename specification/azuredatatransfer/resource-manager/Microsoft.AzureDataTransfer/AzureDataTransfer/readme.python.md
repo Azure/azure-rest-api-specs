@@ -6,13 +6,13 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-package-name: azure-mgmt-azuredatatransfer
-namespace: azure.mgmt.azuredatatransfer
+package-name: azure-mgmt-datatransfer
+namespace: azure.mgmt.datatransfer
 package-version: 1.0.0b1
 clear-output-folder: true
 ```
 
 ``` yaml $(python)
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/azuredatatransfer/azure-mgmt-azuredatatransfer/azure/mgmt/azuredatatransfer
+output-folder: $(python-sdks-folder)/datatransfer/azure-mgmt-datatransfer/azure/mgmt/datatransfer
 ```
