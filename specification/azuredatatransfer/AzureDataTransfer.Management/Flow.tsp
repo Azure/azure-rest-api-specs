@@ -142,20 +142,12 @@ interface Flows {
   /**
    * Sets the passphrase of the specified flow.
    */
-  setPassphrase is ArmResourceActionAsync<
-    Flow,
-    SetStreamPassphrase,
-    Flow
-  >;
+  setPassphrase is ArmResourceActionAsync<Flow, SetStreamPassphrase, Flow>;
 
   /**
    * Set the source addresses for the specified flow.
    */
-  setSourceAddresses is ArmResourceActionAsync<
-    Flow,
-    SetSourceAddresses,
-    Flow
-  >;
+  setSourceAddresses is ArmResourceActionAsync<Flow, SetSourceAddresses, Flow>;
 }
 
 @@maxLength(Flow.name, 64);

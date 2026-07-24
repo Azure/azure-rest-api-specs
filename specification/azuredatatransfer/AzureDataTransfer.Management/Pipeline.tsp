@@ -85,11 +85,7 @@ interface Pipelines {
   /**
    * Executes a privileged or administrative action on the specified Pipeline.
    */
-  executeAction is ArmResourceActionAsync<
-    Pipeline,
-    Action,
-    Pipeline
-  >;
+  executeAction is ArmResourceActionAsync<Pipeline, Action, Pipeline>;
 
   /**
    * Lists all Flows associated with the specified Pipeline.

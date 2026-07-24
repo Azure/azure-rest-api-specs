@@ -71,11 +71,7 @@ interface Connections {
   /**
    * Links the connection to its pending connection.
    */
-  link is ArmResourceActionAsync<
-    Connection,
-    ResourceBody,
-    Connection
-  >;
+  link is ArmResourceActionAsync<Connection, ResourceBody, Connection>;
 
   /**
    * Lists all pending remote connections that are linkable to this connection.
