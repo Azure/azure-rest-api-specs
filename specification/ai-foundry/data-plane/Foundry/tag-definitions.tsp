@@ -24,6 +24,7 @@ using OpenAPI;
   #{ name: "Agent Session Files", parent: "Agents Root" },
   #{ name: "Agent Versions", parent: "Agents Root" },
   #{ name: "Agent Containers", parent: "Agents Root" },
+  #{ name: "Agent Microsoft 365 Publishing", parent: "Agents Root" },
   #{ name: "Platform APIs" },
   #{ name: "Datasets", parent: "Platform APIs" },
   #{ name: "Indexes", parent: "Platform APIs" },
