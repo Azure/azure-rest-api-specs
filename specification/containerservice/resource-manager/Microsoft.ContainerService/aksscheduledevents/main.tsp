@@ -15,7 +15,7 @@ using TypeSpec.OpenAPI;
 @armProviderNamespace
 @service(#{ title: "ContainerServiceClient" })
 @versioned(Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
 namespace Microsoft.ContainerService;
 
 /**
