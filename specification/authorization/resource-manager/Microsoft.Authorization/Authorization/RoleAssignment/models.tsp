@@ -139,3 +139,47 @@ model RoleAssignmentFilter {
    */
   principalId?: string;
 }
+
+// Java and Python retain the existing shared SDK PrincipalType through the
+// combined client's language-scoped alternate-type customization.
+/**
+ * The principal type of the assigned principal ID.
+ */
+union PrincipalType {
+  string,
+
+  /**
+   * User
+   */
+  User: "User",
+
+  /**
+   * Group
+   */
+  Group: "Group",
+
+  /**
+   * ServicePrincipal
+   */
+  ServicePrincipal: "ServicePrincipal",
+
+  /**
+   * ForeignGroup
+   */
+  ForeignGroup: "ForeignGroup",
+
+  /**
+   * Device
+   */
+  Device: "Device",
+
+  /**
+   * Agent identity derived from a user.
+   */
+  AgentUser: "AgentUser",
+
+  /**
+   * Agent identity derived from a service principal.
+   */
+  AgentServicePrincipal: "AgentServicePrincipal",
+}

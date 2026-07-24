@@ -25,7 +25,7 @@ model Endpoint is Azure.ResourceManager.ProxyResource<
     Resource = Endpoint,
     KeyName = "endpointName",
     SegmentName = "endpoints",
-    NamePattern = ""
+    NamePattern = "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$"
   >;
 
   /**
