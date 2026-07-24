@@ -6,6 +6,19 @@ This is the AutoRest configuration file for Network.
 
 ---
 
+## Note: VMSS `2018-10-01` captured-schema exception
+
+The `stable/2018-10-01/vmssNetwork.json` spec is an **intentional, long-standing exception** to the "same-version stable API surface must not change" (captured-schema) rule. These VMSS network APIs have always pinned the `2018-10-01` api-version while returning the **latest** `NetworkInterface` and `PublicIPAddress` types. Consequently, additive changes to the shared `Common` types (e.g., new properties such as `firstPartyServiceTagId`) ripple into `2018-10-01` **by design**, and BreakingChange/versioning tooling may flag them (e.g., OAD rule [`1041 AddedPropertyInResponse`](https://github.com/Azure/openapi-diff/blob/main/docs/rules/1041.md)). This is expected and has already been signed off for SDKs, PowerShell, CLI, and Terraform. Do not "fix" this by scoping the property out of `2018-10-01`.
+
+Precedent (the latest network types have long been captured under `2018-10-01`):
+
+- [`stable/2025-01-01/vmssNetworkInterface.json` (L6)](https://github.com/Azure/azure-rest-api-specs/blob/main/specification/network/resource-manager/Microsoft.Network/Network/stable/2025-01-01/vmssNetworkInterface.json#L6)
+- [`stable/2024-10-01/vmssNetworkInterface.json` (L6)](https://github.com/Azure/azure-rest-api-specs/blob/main/specification/network/resource-manager/Microsoft.Network/Network/stable/2024-10-01/vmssNetworkInterface.json#L6)
+- The same `2018-10-01` spec was similarly updated during the `2025-07-01` TypeSpec network version update in [PR #42717](https://github.com/Azure/azure-rest-api-specs/pull/42717).
+- Full history of previously checked-in changes to these types: [VMSS network schema changes 2019-07-01 to 2025-01-01](https://github.com/markcowl/azure-rest-api-specs/blob/markcowl/vmss-network-schema-change-report/specification/network/resource-manager/Microsoft.Network/Network/Vmss/vmss-network-api-schema-changes-2019-07-01-to-2025-01-01.md).
+
+---
+
 ## Getting Started
 
 To build the SDK for Network, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
@@ -43,6 +56,7 @@ input-file:
   - stable/2025-09-01/expressRoute.json
   - stable/2025-09-01/firewall.json
   - stable/2025-09-01/firewallPolicy.json
+  - stable/2025-09-01/firstPartyServiceTag.json
   - stable/2025-09-01/interconnectGroup.json
   - stable/2025-09-01/loadBalancer.json
   - stable/2025-09-01/networkGateway.json
@@ -56,6 +70,14 @@ input-file:
   - stable/2025-09-01/virtualWan.json
   - stable/2018-10-01/vmssNetwork.json
 suppressions:
+  - code: ResourceNameRestriction
+    from: virtualNetwork.json
+    reason: networkVirtualApplianceName is an existing parent resource path parameter established in prior API versions (2025-07-01 and earlier). Adding a pattern constraint would be a breaking change to those versions.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/prepareMigration"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/executeMigration"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/commitMigration"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/abortMigration"]
   - code: ParametersInPointGet
     from: loadBalancer.json
     where:
@@ -79,6 +101,7 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/linkReferences/{linkReferenceName}"].delete
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/links/{linkName}"].delete
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firstPartyServiceTags/{firstPartyServiceTagName}"].delete
   - code: ProvisioningStateMustBeReadOnly
     from: interconnectGroup.json
     reason: provisioningState is correctly marked readOnly in the referenced schema. The linter does not follow $ref chains to verify readOnly.
@@ -88,6 +111,24 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/interconnectGroups/{interconnectGroupName}"].put.responses["201"].schema
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/interconnectGroups/{interconnectGroupName}"].patch.responses["200"].schema
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/interconnectGroups/{interconnectGroupName}/subgroups/{subgroupName}"].get.responses["200"].schema
+  - code: ProvisioningStateMustBeReadOnly
+    from: virtualNetwork.json
+    reason: >-
+      provisioningState is correctly marked readOnly as a sibling of $ref in the generated swagger.
+      The TypeSpec source uses @visibility(Lifecycle.Read) on provisioningState. The lint rule does
+      not follow $ref chains to verify readOnly. See: https://github.com/Azure/typespec-azure/issues/4611
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationSecurityGroups/{applicationSecurityGroupName}/addressPrefixSets/{addressPrefixSetName}"].get.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationSecurityGroups/{applicationSecurityGroupName}/addressPrefixSets/{addressPrefixSetName}"].put.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationSecurityGroups/{applicationSecurityGroupName}/addressPrefixSets/{addressPrefixSetName}"].put.responses["201"].schema
+  - code: ResourceNameRestriction
+    from: virtualNetwork.json
+    reason: >-
+      applicationSecurityGroupName is an existing parent resource path parameter established in prior
+      API versions. Adding a pattern constraint would be a breaking change to existing clients.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationSecurityGroups/{applicationSecurityGroupName}/addressPrefixSets"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationSecurityGroups/{applicationSecurityGroupName}/addressPrefixSets/{addressPrefixSetName}"]
   - code: ProvisioningStateMustBeReadOnly
     from: expressRoute.json
     reason: The emitted {$ref, readOnly true} shape matches all pre-existing peer resources in expressRoute.json (ExpressRouteCircuit, ExpressRoutePort, etc.). A Network-RP-wide TypeSpec correction is tracked separately.
@@ -157,6 +198,14 @@ suppressions:
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/kubeSelectorGroups"]
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/kubeSelectorGroups/{kubeSelectorGroupName}"]
+  - code: ProvisioningStateMustBeReadOnly
+    from: firstPartyServiceTag.json
+    reason: >-
+      The TypeSpec emitter correctly places readOnly: true as a sibling of $ref, which AutoRest
+      supports (along with description, title, nullable, and x-* extensions). The TypeSpec source
+      correctly marks provisioningState with @visibility(Lifecycle.Read). The lintdiff rule does
+      not recognize readOnly next to $ref, so this suppression is needed.
+      See: https://github.com/Azure/typespec-azure/issues/4611
   - code: ProvisioningStateMustBeReadOnly
     from: networkWatcher.json
     reason: >-
@@ -261,6 +310,24 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/interconnectGroups/{interconnectGroupName}"].put.responses["201"].schema
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/interconnectGroups/{interconnectGroupName}"].patch.responses["200"].schema
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/interconnectGroups/{interconnectGroupName}/subgroups/{subgroupName}"].get.responses["200"].schema
+  - code: ProvisioningStateMustBeReadOnly
+    from: virtualNetwork.json
+    reason: >-
+      provisioningState is correctly marked readOnly as a sibling of $ref in the generated swagger.
+      The TypeSpec source uses @visibility(Lifecycle.Read) on provisioningState. The lint rule does
+      not follow $ref chains to verify readOnly. See: https://github.com/Azure/typespec-azure/issues/4611
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationSecurityGroups/{applicationSecurityGroupName}/addressPrefixSets/{addressPrefixSetName}"].get.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationSecurityGroups/{applicationSecurityGroupName}/addressPrefixSets/{addressPrefixSetName}"].put.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationSecurityGroups/{applicationSecurityGroupName}/addressPrefixSets/{addressPrefixSetName}"].put.responses["201"].schema
+  - code: ResourceNameRestriction
+    from: virtualNetwork.json
+    reason: >-
+      applicationSecurityGroupName is an existing parent resource path parameter established in prior
+      API versions. Adding a pattern constraint would be a breaking change to existing clients.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationSecurityGroups/{applicationSecurityGroupName}/addressPrefixSets"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationSecurityGroups/{applicationSecurityGroupName}/addressPrefixSets/{addressPrefixSetName}"]
   - code: ResourceNameRestriction
     from: interconnectGroup.json
     reason: Subgroup is a read-only child resource with no PUT operation. Pattern restriction is not applicable.

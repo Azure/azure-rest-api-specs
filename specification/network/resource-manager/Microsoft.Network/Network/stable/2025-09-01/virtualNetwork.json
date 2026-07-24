@@ -3,7 +3,7 @@
   "info": {
     "title": "WebApplicationFirewallManagement",
     "version": "2025-09-01",
-    "description": "APIs to manage web application firewall rules.",
+    "description": "APIs to manage Microsoft Azure network resources.",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -164,6 +164,9 @@
     },
     {
       "name": "Usages"
+    },
+    {
+      "name": "AddressPrefixSets"
     }
   ],
   "paths": {
@@ -2071,6 +2074,259 @@
         "x-ms-examples": {
           "Delete application security group": {
             "$ref": "./examples/ApplicationSecurityGroupDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationSecurityGroups/{applicationSecurityGroupName}/addressPrefixSets": {
+      "get": {
+        "operationId": "AddressPrefixSets_List",
+        "tags": [
+          "AddressPrefixSets"
+        ],
+        "description": "Gets all address prefix sets in an application security group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "applicationSecurityGroupName",
+            "in": "path",
+            "description": "The name of the application security group.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AddressPrefixSetListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List address prefix sets": {
+            "$ref": "./examples/AddressPrefixSetList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationSecurityGroups/{applicationSecurityGroupName}/addressPrefixSets/{addressPrefixSetName}": {
+      "get": {
+        "operationId": "AddressPrefixSets_Get",
+        "tags": [
+          "AddressPrefixSets"
+        ],
+        "description": "Gets the specified address prefix set.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "applicationSecurityGroupName",
+            "in": "path",
+            "description": "The name of the application security group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "addressPrefixSetName",
+            "in": "path",
+            "description": "The name of the address prefix set.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9_.-]{0,78}[a-zA-Z0-9_])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AddressPrefixSet"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get address prefix set": {
+            "$ref": "./examples/AddressPrefixSetGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AddressPrefixSets_CreateOrUpdate",
+        "tags": [
+          "AddressPrefixSets"
+        ],
+        "description": "Creates or updates an address prefix set.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "applicationSecurityGroupName",
+            "in": "path",
+            "description": "The name of the application security group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "addressPrefixSetName",
+            "in": "path",
+            "description": "The name of the address prefix set.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9_.-]{0,78}[a-zA-Z0-9_])?$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Parameters supplied to the create or update address prefix set operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddressPrefixSet"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'AddressPrefixSet' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AddressPrefixSet"
+            }
+          },
+          "201": {
+            "description": "Resource 'AddressPrefixSet' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AddressPrefixSet"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create address prefix set": {
+            "$ref": "./examples/AddressPrefixSetCreate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/AddressPrefixSet"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "AddressPrefixSets_Delete",
+        "tags": [
+          "AddressPrefixSets"
+        ],
+        "description": "Deletes the specified address prefix set.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "applicationSecurityGroupName",
+            "in": "path",
+            "description": "The name of the application security group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "addressPrefixSetName",
+            "in": "path",
+            "description": "The name of the address prefix set.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9_.-]{0,78}[a-zA-Z0-9_])?$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete address prefix set": {
+            "$ref": "./examples/AddressPrefixSetDelete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -8569,6 +8825,207 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/abortMigration": {
+      "post": {
+        "operationId": "NetworkVirtualAppliances_AbortMigration",
+        "tags": [
+          "NetworkVirtualAppliances"
+        ],
+        "description": "Aborts an in-progress migration of the specified Network Virtual Appliance and rolls back to the previous state.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "networkVirtualApplianceName",
+            "in": "path",
+            "description": "The name of Network Virtual Appliance.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Action completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Abort migration of a NetworkVirtualAppliance to the new ILB architecture": {
+            "$ref": "./examples/NetworkVirtualApplianceAbortMigration.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/commitMigration": {
+      "post": {
+        "operationId": "NetworkVirtualAppliances_CommitMigration",
+        "tags": [
+          "NetworkVirtualAppliances"
+        ],
+        "description": "Commits the migration of the specified Network Virtual Appliance. This finalizes a previously executed migration workflow.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "networkVirtualApplianceName",
+            "in": "path",
+            "description": "The name of Network Virtual Appliance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Parameters supplied to commit the migration of the Network Virtual Appliance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NetworkVirtualApplianceCommitMigrationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Action completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Commit migration of a NetworkVirtualAppliance to the new ILB architecture": {
+            "$ref": "./examples/NetworkVirtualApplianceCommitMigration.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/executeMigration": {
+      "post": {
+        "operationId": "NetworkVirtualAppliances_ExecuteMigration",
+        "tags": [
+          "NetworkVirtualAppliances"
+        ],
+        "description": "Executes the migration of the specified Network Virtual Appliance. This step performs the migration workflow that was previously prepared.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "networkVirtualApplianceName",
+            "in": "path",
+            "description": "The name of Network Virtual Appliance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Parameters supplied to execute the migration of the Network Virtual Appliance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NetworkVirtualApplianceExecuteMigrationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Action completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Execute migration of a NetworkVirtualAppliance to the new ILB architecture": {
+            "$ref": "./examples/NetworkVirtualApplianceExecuteMigration.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/getBootDiagnosticLogs": {
       "post": {
         "operationId": "NetworkVirtualAppliances_GetBootDiagnosticLogs",
@@ -8768,6 +9225,76 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/InboundSecurityRule"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/prepareMigration": {
+      "post": {
+        "operationId": "NetworkVirtualAppliances_PrepareMigration",
+        "tags": [
+          "NetworkVirtualAppliances"
+        ],
+        "description": "Prepares the migration of the specified Network Virtual Appliance. This is the first step of a migration workflow, such as migrating to a new OS version or to the new internal load balancer architecture.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "networkVirtualApplianceName",
+            "in": "path",
+            "description": "The name of Network Virtual Appliance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Parameters supplied to prepare the migration of the Network Virtual Appliance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NetworkVirtualAppliancePrepareMigrationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Action completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Prepare migration of a NetworkVirtualAppliance to the new ILB architecture": {
+            "$ref": "./examples/NetworkVirtualAppliancePrepareMigration.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -10319,6 +10846,9 @@
           },
           "Create public IP address defaults with StandardV2 Sku": {
             "$ref": "./examples/PublicIpAddressCreateDefaultsStandardV2Sku.json"
+          },
+          "Create public IP address with first party service tag": {
+            "$ref": "./examples/PublicIpAddressCreateWithFirstPartyServiceTag.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -10836,6 +11366,9 @@
           },
           "Create public IP prefix defaults with StandardV2 Sku": {
             "$ref": "./examples/PublicIpPrefixCreateDefaultsStandardV2Sku.json"
+          },
+          "Create public IP prefix with first party service tag": {
+            "$ref": "./examples/PublicIpPrefixCreateWithFirstPartyServiceTag.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -14233,6 +14766,64 @@
     }
   },
   "definitions": {
+    "AddressPrefixSet": {
+      "type": "object",
+      "description": "Address prefix set child resource of an application security group.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AddressPrefixSetPropertiesFormat",
+          "description": "Properties of the address prefix set."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AddressPrefixSetListResult": {
+      "type": "object",
+      "description": "The response of a AddressPrefixSet list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AddressPrefixSet items on this page",
+          "items": {
+            "$ref": "#/definitions/AddressPrefixSet"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AddressPrefixSetPropertiesFormat": {
+      "type": "object",
+      "description": "Properties of address prefix set.",
+      "properties": {
+        "addressPrefixes": {
+          "type": "array",
+          "description": "The list of address prefixes in CIDR notation. Supports both IPv4 and IPv6 CIDR notation (e.g. '10.0.0.0/16', '2001:db8::/32').",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/Common.ProvisioningState",
+          "description": "The provisioning state of the address prefix set resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "addressPrefixes"
+      ]
+    },
     "ApplicationSecurityGroupListResult": {
       "type": "object",
       "description": "The response of a ApplicationSecurityGroup list operation.",
@@ -15091,6 +15682,18 @@
         "tag": {
           "type": "string",
           "description": "The value of the IP tag associated with the public IP. Example: SQL."
+        },
+        "firstPartyServiceTagId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of the first party service tag associated with the IP tag.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/firstPartyServiceTags"
+              }
+            ]
+          }
         }
       }
     },
@@ -18930,6 +19533,52 @@
         }
       }
     },
+    "NetworkVirtualApplianceCommitMigrationProperties": {
+      "type": "object",
+      "description": "Properties supplied to commit the migration of a Network Virtual Appliance.",
+      "properties": {
+        "migrationType": {
+          "$ref": "./common.json#/definitions/MigrationType",
+          "description": "The type of migration workflow to commit."
+        }
+      },
+      "required": [
+        "migrationType"
+      ]
+    },
+    "NetworkVirtualApplianceCommitMigrationRequest": {
+      "type": "object",
+      "description": "Parameters supplied to commit the migration of a Network Virtual Appliance.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NetworkVirtualApplianceCommitMigrationProperties",
+          "description": "Properties of the commit migration request."
+        }
+      }
+    },
+    "NetworkVirtualApplianceExecuteMigrationProperties": {
+      "type": "object",
+      "description": "Properties supplied to execute the migration of a Network Virtual Appliance.",
+      "properties": {
+        "migrationType": {
+          "$ref": "./common.json#/definitions/MigrationType",
+          "description": "The type of migration workflow to execute."
+        }
+      },
+      "required": [
+        "migrationType"
+      ]
+    },
+    "NetworkVirtualApplianceExecuteMigrationRequest": {
+      "type": "object",
+      "description": "Parameters supplied to execute the migration of a Network Virtual Appliance.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NetworkVirtualApplianceExecuteMigrationProperties",
+          "description": "Properties of the execute migration request."
+        }
+      }
+    },
     "NetworkVirtualApplianceInstanceId": {
       "type": "object",
       "properties": {
@@ -18973,6 +19622,51 @@
       "required": [
         "value"
       ]
+    },
+    "NetworkVirtualApplianceMigrationStatus": {
+      "type": "object",
+      "description": "The migration status of a Network Virtual Appliance.",
+      "properties": {
+        "migrationType": {
+          "$ref": "./common.json#/definitions/MigrationType",
+          "description": "The type of migration workflow currently in progress or last performed."
+        },
+        "migrationPhase": {
+          "type": "string",
+          "description": "The current phase of the migration workflow (for example, Prepare, Execute, Commit, or Abort)."
+        },
+        "migrationPhaseStatus": {
+          "type": "string",
+          "description": "The detailed status of the current migration phase."
+        }
+      }
+    },
+    "NetworkVirtualAppliancePrepareMigrationProperties": {
+      "type": "object",
+      "description": "Properties supplied to prepare the migration of a Network Virtual Appliance.",
+      "properties": {
+        "migrationType": {
+          "$ref": "./common.json#/definitions/MigrationType",
+          "description": "The type of migration workflow to prepare."
+        },
+        "marketPlaceVersion": {
+          "type": "string",
+          "description": "The marketplace version to migrate to. Applicable when migrationType is MigrateToNewOSVersion."
+        }
+      },
+      "required": [
+        "migrationType"
+      ]
+    },
+    "NetworkVirtualAppliancePrepareMigrationRequest": {
+      "type": "object",
+      "description": "Parameters supplied to prepare the migration of a Network Virtual Appliance.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NetworkVirtualAppliancePrepareMigrationProperties",
+          "description": "Properties of the prepare migration request."
+        }
+      }
     },
     "NetworkVirtualAppliancePropertiesFormat": {
       "type": "object",
@@ -19120,6 +19814,11 @@
         "privateIpAddressV6": {
           "type": "string",
           "description": "An Internal Load Balancer's HA port frontend IPv6 address. Can be used to set routes & UDR to load balance traffic between NVA instances. This field appears in dual-stack NVAs.",
+          "readOnly": true
+        },
+        "migrationStatus": {
+          "$ref": "#/definitions/NetworkVirtualApplianceMigrationStatus",
+          "description": "The migration status of the Network Virtual Appliance.",
           "readOnly": true
         }
       }
