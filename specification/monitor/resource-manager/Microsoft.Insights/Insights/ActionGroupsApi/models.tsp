@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Microsoft.Common;
@@ -21,6 +23,42 @@ union IncidentManagementService {
    * Icm
    */
   Icm: "Icm",
+}
+
+/**
+ * Indicates the email verification status of the receiver for the email One-Time Passcode (OTP) verification feature.
+ */
+union VerificationStatus {
+  string,
+
+  /**
+   * Verification is not applicable and the receiver is treated as allowed (legacy behavior).
+   */
+  LegacyAllowed: "LegacyAllowed",
+
+  /**
+   * A one-time passcode has been sent and is awaiting user confirmation.
+   */
+  VerificationPending: "VerificationPending",
+
+  /**
+   * The receiver endpoint has been successfully verified.
+   */
+  Verified: "Verified",
+}
+
+/**
+ * An email receiver.
+ */
+model EmailReceiver {
+  ...Microsoft.Common.EmailReceiver;
+
+  /**
+   * The email verification status of the receiver. This is a read-only property that reflects the current state of the email One-Time Passcode (OTP) verification for this receiver.
+   */
+  @added(Versions.v2026_09_01)
+  @visibility(Lifecycle.Read)
+  verificationStatus?: VerificationStatus;
 }
 
 /**
@@ -43,6 +81,7 @@ model ActionGroup {
    * The list of email receivers that are part of this action group.
    */
   @identifiers(#[])
+  @typeChangedFrom(Versions.v2026_09_01, Microsoft.Common.EmailReceiver[])
   emailReceivers?: EmailReceiver[];
 
   /**
@@ -152,7 +191,7 @@ model WebhookReceiver {
   tenantId?: string;
 
   /**
-   * The principal id of the managed identity. The value can be "None", "SystemAssigned"
+   * The principal id of the referenced managed identity.
    */
   managedIdentity?: string;
 }
@@ -227,7 +266,7 @@ model AutomationRunbookReceiver {
   useCommonAlertSchema?: boolean = false;
 
   /**
-   * The principal id of the managed identity. The value can be "None", "SystemAssigned"
+   * The principal id of the referenced managed identity.
    */
   managedIdentity?: string;
 }
@@ -258,9 +297,15 @@ model LogicAppReceiver {
   useCommonAlertSchema?: boolean = false;
 
   /**
-   * The principal id of the managed identity. The value can be "None", "SystemAssigned"
+   * The principal id of the referenced managed identity.
    */
   managedIdentity?: string;
+
+  /**
+   * The trigger name of the Logic App.
+   */
+  @added(Versions.v2026_09_01)
+  triggerName?: string;
 }
 
 /**
@@ -294,9 +339,15 @@ model AzureFunctionReceiver {
   useCommonAlertSchema?: boolean = false;
 
   /**
-   * The principal id of the managed identity. The value can be "None", "SystemAssigned"
+   * The principal id of the referenced managed identity.
    */
   managedIdentity?: string;
+
+  /**
+   * The Application ID URI from the AAD App Registration.
+   */
+  @added(Versions.v2026_09_01)
+  scope?: string;
 }
 
 /**
@@ -354,9 +405,19 @@ model EventHubReceiver {
   subscriptionId: string;
 
   /**
-   * The principal id of the managed identity. The value can be "None", "SystemAssigned"
+   * The principal id of the referenced managed identity.
    */
   managedIdentity?: string;
+
+  /**
+   * The ARM based resourceId of the Event Hub resource.
+   */
+  @added(Versions.v2026_09_01)
+  resourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.EventHub/namespaces";
+    }
+  ]>;
 }
 
 /**
@@ -475,6 +536,7 @@ model NotificationRequestBody {
    * The list of email receivers that are part of this action group.
    */
   @identifiers(#[])
+  @typeChangedFrom(Versions.v2026_09_01, Microsoft.Common.EmailReceiver[])
   emailReceivers?: EmailReceiver[];
 
   /**
