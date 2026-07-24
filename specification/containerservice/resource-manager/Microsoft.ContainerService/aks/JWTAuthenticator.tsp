@@ -154,6 +154,20 @@ model JWTAuthenticatorProperties {
    */
   @identifiers(#[])
   userValidationRules?: JWTAuthenticatorValidationRule[];
+
+  /**
+   * PEM-encoded CA certificate bundle used to validate the connection when fetching discovery information. Use this for issuer endpoints that use private certificate authorities
+   * or environments where TLS inspection is performed.
+   *
+   * The bundle must contain only CERTIFICATE PEM blocks, up to 10 CA certificates, and must be no larger than 20 KB in total. Include all CA certificates needed to validate
+   * the issuer endpoint's TLS certificate. Certificate revocation checking is not supported.
+   *
+   * If provided, only these CAs are trusted instead of the well-known root CAs.
+   * If not provided and the managed cluster's properties.securityProfile.customCATrustCertificates is set, those certificates will be used instead. Otherwise, only the well-known
+   * root CAs are trusted.
+   */
+  @added(Versions.v2026_06_02_preview)
+  certificateAuthorityBundle?: string;
 }
 
 /**
