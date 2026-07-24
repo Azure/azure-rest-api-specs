@@ -1,4 +1,4 @@
-name: "Namespace Approval - Analyze Code"
+name: "Package Name Approval - Analyze Code"
 
 on:
   pull_request:
@@ -24,22 +24,34 @@ jobs:
         with:
           fetch-depth: 2
 
+      - name: Checkout base branch for comparison
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          path: base-ref
+
       - name: Setup Node and install dependencies
         uses: ./.github/actions/setup-node-install-deps
 
-      - name: Detect namespace changes
+      - name: Install dependencies in base checkout
+        run: npm install --ignore-scripts
+        working-directory: base-ref
+
+      - name: Detect package name changes
         id: detect
         uses: actions/github-script@v8
+        env:
+          BASE_REF_DIR: ${{ github.workspace }}/base-ref
         with:
           script: |
             const { default: detectNamespaces } =
               await import('${{ github.workspace }}/.github/workflows/src/namespace-approval/detect-namespaces.js');
             await detectNamespaces({ github, context, core });
 
-      - name: Upload namespace results
+      - name: Upload package name results
         if: always() && steps.detect.outputs.results
         uses: actions/upload-artifact@v7
         with:
-          name: namespace-results
+          name: package-name-results
           path: ${{ steps.detect.outputs.results_path }}
           if-no-files-found: ignore
