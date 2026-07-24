@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Storage Cache Mgmt Client",
-    "version": "2026-01-01",
+    "version": "2026-08-01",
     "description": "A Storage Cache provides scalable caching service for NAS clients, serving data from either NFSv3 or Blob at-rest storage (referred to as \"Storage Targets\"). These operations allow you to manage Caches.",
     "x-typespec-generated": [
       {
@@ -59,6 +59,9 @@
     },
     {
       "name": "expansionJobs"
+    },
+    {
+      "name": "rebalanceJobs"
     },
     {
       "name": "Caches"
@@ -2344,6 +2347,284 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/amlFilesystems/{amlFilesystemName}/rebalanceJobs": {
+      "get": {
+        "operationId": "RebalanceJobs_ListByAmlFilesystem",
+        "tags": [
+          "rebalanceJobs"
+        ],
+        "description": "Returns all the rebalance jobs the user has access to under an AML File System.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "amlFilesystemName",
+            "in": "path",
+            "description": "Name for the AML file system. Allows alphanumerics, underscores, and hyphens. Start and end with alphanumeric.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 80,
+            "pattern": "^[0-9a-zA-Z][-0-9a-zA-Z_]{0,78}[0-9a-zA-Z]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RebalanceJobsListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RebalanceJobs_ListByAmlFilesystem": {
+            "$ref": "./examples/RebalanceJobs_ListByAmlFilesystem.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/amlFilesystems/{amlFilesystemName}/rebalanceJobs/{rebalanceJobName}": {
+      "get": {
+        "operationId": "RebalanceJobs_Get",
+        "tags": [
+          "rebalanceJobs"
+        ],
+        "description": "Returns a rebalance job.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "amlFilesystemName",
+            "in": "path",
+            "description": "Name for the AML file system. Allows alphanumerics, underscores, and hyphens. Start and end with alphanumeric.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 80,
+            "pattern": "^[0-9a-zA-Z][-0-9a-zA-Z_]{0,78}[0-9a-zA-Z]$"
+          },
+          {
+            "name": "rebalanceJobName",
+            "in": "path",
+            "description": "Name for the rebalance job. Allows alphanumerics, underscores, and hyphens. Start and end with alphanumeric.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 80,
+            "pattern": "^[0-9a-zA-Z][-0-9a-zA-Z_]{0,78}[0-9a-zA-Z]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RebalanceJob"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RebalanceJobs_Get": {
+            "$ref": "./examples/RebalanceJobs_Get.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "RebalanceJobs_Update",
+        "tags": [
+          "rebalanceJobs"
+        ],
+        "description": "Update a rebalance job instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "amlFilesystemName",
+            "in": "path",
+            "description": "Name for the AML file system. Allows alphanumerics, underscores, and hyphens. Start and end with alphanumeric.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 80,
+            "pattern": "^[0-9a-zA-Z][-0-9a-zA-Z_]{0,78}[0-9a-zA-Z]$"
+          },
+          {
+            "name": "rebalanceJobName",
+            "in": "path",
+            "description": "Name for the rebalance job. Allows alphanumerics, underscores, and hyphens. Start and end with alphanumeric.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 80,
+            "pattern": "^[0-9a-zA-Z][-0-9a-zA-Z_]{0,78}[0-9a-zA-Z]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "Object containing the user-selectable properties of the rebalance job. If read-only properties are included, they must match the existing values of those properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RebalanceJobUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RebalanceJob"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RebalanceJobs_Update": {
+            "$ref": "./examples/RebalanceJobs_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/RebalanceJob"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "RebalanceJobs_Delete",
+        "tags": [
+          "rebalanceJobs"
+        ],
+        "description": "Schedules a rebalance job for deletion.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "amlFilesystemName",
+            "in": "path",
+            "description": "Name for the AML file system. Allows alphanumerics, underscores, and hyphens. Start and end with alphanumeric.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 80,
+            "pattern": "^[0-9a-zA-Z][-0-9a-zA-Z_]{0,78}[0-9a-zA-Z]$"
+          },
+          {
+            "name": "rebalanceJobName",
+            "in": "path",
+            "description": "Name for the rebalance job. Allows alphanumerics, underscores, and hyphens. Start and end with alphanumeric.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 80,
+            "pattern": "^[0-9a-zA-Z][-0-9a-zA-Z_]{0,78}[0-9a-zA-Z]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RebalanceJobs_Delete": {
+            "$ref": "./examples/RebalanceJobs_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches": {
       "get": {
         "operationId": "Caches_ListByResourceGroup",
@@ -3689,7 +3970,7 @@
           }
         },
         "x-ms-examples": {
-          "Caches_DnsRefresh": {
+          "StorageTargets_DnsRefresh": {
             "$ref": "./examples/StorageTargets_DnsRefresh.json"
           }
         },
@@ -6568,6 +6849,28 @@
           "description": "The status of the expansion job.",
           "readOnly": true,
           "x-ms-client-flatten": true
+        },
+        "runRebalanceJob": {
+          "type": "boolean",
+          "description": "When true, expansion creates a RebalanceJob after completing. Optional, defaults to false.",
+          "default": false,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "rebalanceJobId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Fully qualified ARM resource ID of the child rebalance job created by this expansion. Populated after RebalanceJob is created.",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.StorageCache/amlFilesystems/rebalanceJobs"
+              }
+            ]
+          }
         }
       }
     },
@@ -7860,6 +8163,316 @@
             "description": "NotAvailableForSubscription"
           }
         ]
+      }
+    },
+    "RebalanceJob": {
+      "type": "object",
+      "description": "A rebalance job instance. Rebalances OST data across storage targets after a cluster expansion.\nFollows Azure Resource Manager standards: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RebalanceJobProperties",
+          "description": "Properties of the rebalance job."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "RebalanceJobAdminStatus": {
+      "type": "string",
+      "description": "The administrative status of the rebalance job. Active means the job is running normally. Cancel requests the job to stop.",
+      "enum": [
+        "Active",
+        "Cancel"
+      ],
+      "x-ms-enum": {
+        "name": "RebalanceJobAdminStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "The rebalance job is running normally."
+          },
+          {
+            "name": "Cancel",
+            "value": "Cancel",
+            "description": "Request the rebalance job to stop."
+          }
+        ]
+      }
+    },
+    "RebalanceJobProperties": {
+      "type": "object",
+      "description": "Properties of the rebalance job.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/RebalanceJobPropertiesProvisioningState",
+          "description": "ARM provisioning state, see https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#provisioningstate-property",
+          "readOnly": true
+        },
+        "adminStatus": {
+          "$ref": "#/definitions/RebalanceJobAdminStatus",
+          "description": "The current administrative status of the rebalance job. 'Active' indicates the job is running normally; 'Cancel' indicates cancellation has been requested.",
+          "readOnly": true
+        },
+        "expansionJobId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Fully qualified ARM resource ID of the parent expansion job that initiated this rebalance. Populated when the rebalance was created as part of an expansion.",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.StorageCache/amlFilesystems/expansionJobs"
+              }
+            ]
+          }
+        },
+        "status": {
+          "$ref": "#/definitions/RebalanceJobPropertiesStatus",
+          "description": "The status of the rebalance job.",
+          "readOnly": true
+        }
+      }
+    },
+    "RebalanceJobPropertiesProvisioningState": {
+      "type": "string",
+      "description": "ARM provisioning state for the rebalance job.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Creating",
+        "Updating",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "RebalanceJobPropertiesProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "Resource is being created."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Resource is being updated."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Resource is being deleted."
+          }
+        ]
+      }
+    },
+    "RebalanceJobPropertiesStatus": {
+      "type": "object",
+      "description": "The status of the rebalance job.",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/RebalanceJobStatusType",
+          "description": "The operational state of the rebalance job. InProgress indicates the rebalance is running on the cluster. Cancelling indicates a cancel has been requested. Canceled indicates the rebalance was cancelled. Completed indicates the rebalance finished successfully. Failed indicates the rebalance was unable to complete due to a fatal error. Deleting indicates the job is being cleaned up during deletion. RollingBack indicates the orchestrator is rolling back provisioned resources after a failure.",
+          "readOnly": true
+        },
+        "statusCode": {
+          "type": "string",
+          "description": "Server-defined status code for rebalance job.",
+          "readOnly": true
+        },
+        "statusMessage": {
+          "type": "string",
+          "description": "Server-defined status message for rebalance job.",
+          "readOnly": true
+        },
+        "percentComplete": {
+          "type": "number",
+          "format": "float",
+          "description": "The percentage of rebalance job completion.",
+          "minimum": 0,
+          "maximum": 100,
+          "readOnly": true
+        },
+        "balancePercent": {
+          "type": "number",
+          "format": "double",
+          "description": "The balance percentage (0-100). Represents cumulative progress since the rebalance started. Reported in periodic rebalance status updates. Resets to 0 if the rebalancer node restarts.",
+          "minimum": 0,
+          "maximum": 100,
+          "readOnly": true
+        },
+        "estimatedRemainingSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Estimated remaining time in seconds. Omitted during initial assessment before the rebalancer has enough data to estimate.",
+          "readOnly": true
+        },
+        "filesMigrated": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total number of files migrated since the rebalance started. Counts OST-phase (data) work items. Reported in periodic rebalance status updates. Resets to 0 if the rebalancer node restarts.",
+          "readOnly": true
+        },
+        "dirsMigrated": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total number of directories migrated since the rebalance started. Counts MDT-phase (metadata) work items, reported separately from filesMigrated (OST-phase data migrations). Reported in periodic rebalance status updates. Resets to 0 if the rebalancer node restarts.",
+          "readOnly": true
+        },
+        "bytesMoved": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total number of bytes moved since the rebalance started. Reported in periodic rebalance status updates. Resets to 0 if the rebalancer node restarts.",
+          "readOnly": true
+        },
+        "filesMovedPerSecond": {
+          "type": "number",
+          "format": "double",
+          "description": "Average files moved per second over the most recent reporting interval.",
+          "readOnly": true
+        },
+        "throughputMiBps": {
+          "type": "number",
+          "format": "double",
+          "description": "Average throughput in mebibytes per second (1024x1024 bytes per second) over the most recent reporting interval.",
+          "readOnly": true
+        },
+        "totalErrors": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total cumulative non-skip errors since the rebalance started. Reported in periodic rebalance status updates. Resets to 0 if the rebalancer node restarts.",
+          "readOnly": true
+        },
+        "totalSkipped": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total cumulative benign skips since the rebalance started: files intentionally not migrated (for example, a lost migration lease or a stale layout), as distinct from the hard failures counted in totalErrors. Reported in periodic rebalance status updates. Resets to 0 if the rebalancer node restarts.",
+          "readOnly": true
+        },
+        "startTimeUTC": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time (in UTC) the rebalance job started.",
+          "readOnly": true
+        },
+        "completionTimeUTC": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time (in UTC) when the rebalance job completed. Only populated when the job reaches a terminal state (Completed, Failed, or Canceled).",
+          "readOnly": true
+        }
+      }
+    },
+    "RebalanceJobStatusType": {
+      "type": "string",
+      "description": "The operational state of the rebalance job. InProgress indicates the rebalance is running on the cluster. Cancelling indicates a cancel has been requested. Canceled indicates the rebalance was cancelled. Completed indicates the rebalance finished successfully (imbalance below low watermark). Failed indicates the rebalance was unable to complete due to a fatal error. Deleting indicates the job is being cleaned up during deletion. RollingBack indicates the orchestrator is rolling back provisioned resources after a failure.",
+      "enum": [
+        "InProgress",
+        "Cancelling",
+        "Canceled",
+        "Completed",
+        "Failed",
+        "Deleting",
+        "RollingBack"
+      ],
+      "x-ms-enum": {
+        "name": "RebalanceJobStatusType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The rebalance job is currently running on the cluster."
+          },
+          {
+            "name": "Cancelling",
+            "value": "Cancelling",
+            "description": "A cancel has been requested and the job is stopping."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The rebalance job was canceled before completion."
+          },
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "The rebalance job finished successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The rebalance job failed due to a fatal error."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The job is being cleaned up during deletion."
+          },
+          {
+            "name": "RollingBack",
+            "value": "RollingBack",
+            "description": "The orchestrator is rolling back provisioned resources after a failure."
+          }
+        ]
+      }
+    },
+    "RebalanceJobUpdate": {
+      "type": "object",
+      "description": "A rebalance job update instance.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RebalanceJobUpdateProperties",
+          "description": "Properties for the rebalance job update."
+        }
+      }
+    },
+    "RebalanceJobUpdateProperties": {
+      "type": "object",
+      "description": "Properties for updating a rebalance job.",
+      "properties": {
+        "adminStatus": {
+          "$ref": "#/definitions/RebalanceJobAdminStatus",
+          "description": "The administrative status of the rebalance job. Passing in a value of 'Cancel' will cancel the current active rebalance job."
+        }
+      }
+    },
+    "RebalanceJobsListResult": {
+      "type": "object",
+      "description": "Result of the request to list rebalance jobs. It contains a list of rebalance jobs and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of rebalance jobs.",
+          "items": {
+            "$ref": "#/definitions/RebalanceJob"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL to get the next set of rebalance job list results, if there are any."
+        }
       }
     },
     "RequiredAmlFilesystemSubnetsSize": {

@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "amlFilesystemName": "fs1",
+    "api-version": "2026-08-01",
+    "rebalanceJobName": "expansionjob1-rebalance",
+    "resourceGroupName": "scgroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "properties": {
+      "properties": {
+        "adminStatus": "Cancel"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "expansionjob1-rebalance",
+        "type": "Microsoft.StorageCache/amlFilesystems/rebalanceJobs",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.StorageCache/amlFilesystems/fs1/rebalanceJobs/expansionjob1-rebalance",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "adminStatus": "Cancel",
+          "expansionJobId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.StorageCache/amlFilesystems/fs1/expansionJobs/expansionjob1",
+          "status": {
+            "state": "InProgress",
+            "statusCode": "CancelRequested",
+            "statusMessage": "Rebalance cancellation has been requested.",
+            "percentComplete": 70,
+            "balancePercent": 67.8,
+            "filesMigrated": 320000,
+            "dirsMigrated": 25000,
+            "bytesMoved": 3435973836,
+            "filesMovedPerSecond": 0,
+            "throughputMiBps": 0,
+            "totalErrors": 2,
+            "totalSkipped": 150,
+            "startTimeUTC": "2025-09-12T10:00:00Z"
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.StorageCache/locations/eastus/ascOperations/00000000-0000-0000-0000-000000000000?api-version=2026-08-01",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.StorageCache/locations/eastus/ascOperations/00000000-0000-0000-0000-000000000000?monitor=true&api-version=2026-08-01"
+      }
+    }
+  },
+  "operationId": "RebalanceJobs_Update",
+  "title": "RebalanceJobs_Update"
+}
