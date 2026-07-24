@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "api-version": "2024-10-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "networkManagerName": "testNetworkManager",
+    "ruleCollectionName": "testRuleCollection",
+    "configurationName": "myTestRoutingConfig"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkmanagers/testNetworkManager/routingConfigurations/myTestRoutingConfig/ruleCollections/testRuleCollection/rules/SampleAdminRule",
+            "type": "Microsoft.Network/networkManagers/routingConfigurations/ruleCollections/rules",
+            "name": "SampleRoutingRule",
+            "systemData": {
+              "createdBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
+              "createdByType": "User",
+              "createdAt": "2021-01-11T18:52:27Z",
+              "lastModifiedBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2021-01-11T18:52:27Z"
+            },
+            "properties": {
+              "description": "This is Sample Admin Rule",
+              "destination": {
+                "destinationAddress": "10.0.0.0/16",
+                "type": "AddressPrefix"
+              },
+              "nextHop": {
+                "nextHopAddress": "",
+                "nextHopType": "VirtualNetworkGateway"
+              },
+              "provisioningState": "Succeeded",
+              "resourceGuid": "00000000-0000-0000-0000-000000000000"
+            }
+          }
+        ],
+        "nextLink": "{baseurl}/subscriptions/subscriptionC/resourceGroup/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/networkManagers/routingConfigurations/myTestRoutingConfig/ruleCollections/testRuleCollection/rules?api-version=2024-10-01&$skipToken=10"
+      }
+    }
+  }
+}
