@@ -41,6 +41,7 @@ model EkmConnection {
    * The connectivity mode used to reach the EKM proxy. Defaults to "Public". In "PrivateEndpoint" mode, the host field holds the name of a private endpoint (peName) instead of a DNS name or IP address.
    */
   @added(KeyVault.Versions.v2026_07_01_preview)
+  @encodedName("application/json", "connectivity_mode")
   connectivityMode?: EkmConnectivityMode;
 }
 
