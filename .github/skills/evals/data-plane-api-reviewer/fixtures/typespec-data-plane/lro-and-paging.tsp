@@ -1,7 +1,3 @@
-// FIXTURE (positive): LRO and pagination shape. Seeded violations: DP-LRO-01,
-// DP-LRO-03, DP-LRO-04, DP-PAGE-01, DP-PAGE-02, DP-PAGE-03.
-// Not a real service. Not under specification/; not compiled by CI.
-
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
@@ -31,10 +27,6 @@ model TrainedModel {
   artifactUri: url;
 }
 
-// VIOLATION (DP-LRO-01): the status monitor has no `error` member, so a caller
-// that polls to `Failed` has no way to learn why. It also omits `Canceled`
-// while a cancel operation exists (DP-LRO-03), and offers no way to reach the
-// result.
 @doc("Status of a training job.")
 model TrainingStatus {
   @doc("The unique identifier of the training job.")
@@ -77,9 +69,6 @@ model DatasetPage {
 }
 
 interface Training {
-  // VIOLATION (DP-LRO-04): `@pollingOperation` points at `getModel`, which
-  // returns the model rather than the status monitor. An SDK poller built from
-  // this never terminates.
   @doc("Starts training a model.")
   @pollingOperation(Training.getModel)
   @route("/models:train")
@@ -96,24 +85,16 @@ interface Training {
   @get
   getTrainingStatus(@path jobId: string): TrainingStatus;
 
-  // VIOLATION (DP-LRO-03): a cancel operation exists, but `Canceled` is not a
-  // reachable state in TrainingState.
   @doc("Cancels a training job.")
   @route("/trainingJobs/{jobId}:cancel")
   @post
   cancelTraining(@path jobId: string): void;
 
-  // VIOLATION (DP-PAGE-01): unbounded, customer-populated collection returned
-  // as a bare array with no paging.
   @doc("Lists all trained models.")
   @route("/models")
   @get
   listModels(): TrainedModel[];
 
-  // VIOLATION (DP-PAGE-02): a sibling list in the same service uses a
-  // completely different paging shape.
-  // VIOLATION (DP-PAGE-03): `pageSize` and `skip` instead of `maxpagesize`,
-  // over a mutable collection.
   @doc("Lists datasets.")
   @route("/datasets")
   @get

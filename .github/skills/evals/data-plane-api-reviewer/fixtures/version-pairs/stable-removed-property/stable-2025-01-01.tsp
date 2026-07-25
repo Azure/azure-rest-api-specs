@@ -1,8 +1,3 @@
-// FIXTURE (positive, version pair -- PREVIOUS stable version).
-// Paired with stable-2026-01-01.tsp, which removes a property, narrows a
-// union, and tightens an optional request property in a STABLE version.
-// Not a real service. Not under specification/; not compiled by CI.
-
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";

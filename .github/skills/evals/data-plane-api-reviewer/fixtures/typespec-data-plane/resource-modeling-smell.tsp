@@ -1,8 +1,3 @@
-// FIXTURE (positive): RPC over HTTP. Nothing is addressable; every operation is
-// a POST to a verb-shaped path. Seeded violations: DP-MODEL-01, DP-MODEL-02,
-// DP-MODEL-04.
-// Not a real service. Not under specification/; not compiled by CI.
-
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
@@ -50,11 +45,6 @@ model ConfigIdRequest {
   configId: string;
 }
 
-// VIOLATION (DP-MODEL-02): PipelineConfig has an identity (`configId`) and a
-// full lifecycle, but no addressable path. Nothing can link to a config.
-// VIOLATION (DP-MODEL-01) x4: create/get/list/delete expressed as POST actions.
-// VIOLATION (DP-MODEL-04): there is no update path at all -- a config can be
-// created and deleted but never modified.
 interface Pipeline {
   @doc("Creates a pipeline configuration.")
   @route("/createConfig")

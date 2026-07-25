@@ -1,10 +1,3 @@
-// FIXTURE (TRUE NEGATIVE, version pair -- PREVIOUS preview version).
-// Paired with preview-2026-02-01-preview.tsp, which removes a property and
-// narrows a union. Both versions are PREVIEW, so the change is permitted:
-// preview API versions carry no backward-compatibility guarantee.
-// The reviewer must not raise a blocking breaking-change finding.
-// Not a real service. Not under specification/; not compiled by CI.
-
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";

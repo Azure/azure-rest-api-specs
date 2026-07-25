@@ -183,14 +183,40 @@ cd .github/skills/evals
 
 Run `Get-Help .\run-evals.ps1 -Detailed` for all parameters.
 
-### `runs` vs `-Repeat`
+### `runs` vs `-Repeat` — these multiply
 
-These multiply, and it is easy to burn four times the intended budget by
-setting both. `runs: 3` in `defaults` means vally executes each stimulus three
-times _within one suite run_; `-Repeat 3` executes the whole suite three times.
-The phase-2 gate wants three executions per stimulus, which `runs: 3` already
-provides — so `-Repeat` is for checking stability _across_ suite runs, not for
-reaching the gate's trial count. Leave it at 1 unless that is what you want.
+`runs: 3` in `defaults` means vally executes each stimulus three times _within
+one suite run_. `-Repeat 3` executes the whole suite three times. Setting both
+gives **nine** executions per stimulus, not three.
+
+The phase-2 gate wants three executions per stimulus, and `runs: 3` already
+provides that, so:
+
+| Goal                                  | Setting                           | Executions per stimulus |
+| ------------------------------------- | --------------------------------- | ----------------------- |
+| The phase-2 gate                      | `runs: 3` (default), no `-Repeat` | 3                       |
+| Stability _across_ suite runs         | `runs: 3` + `-Repeat 3`           | 9                       |
+| Fast iteration while editing a grader | `--runs 1`                        | 1                       |
+
+Earlier versions of this file and of `run-evals.ps1` showed
+`-Suite "eval-true-negatives" -Repeat 3` as _the_ gate command. That was wrong
+and invited a 9× run.
+
+### Cost and duration
+
+Measured on the first real run: **7 stimuli at `runs: 3` = 21 trials, 30.2
+minutes wall clock, ~2.44M tokens, ~496 AIU** — roughly 24 AIU and 86 seconds
+per trial, at `--workers 1`.
+
+It scales close to linearly with fixture count, so a 20-fixture true-negative
+suite is on the order of **1,400 AIU and 90 minutes**. That is affordable for a
+deliberate pre-merge gate run by a maintainer. It is _not_ affordable as
+per-PR CI, and that constraint should be assumed by anyone proposing to wire
+the suite into a required check.
+
+`--workers` above 1 shortens wall clock but contends with any other Copilot
+session on the machine; the failure mode is a timeout, which reads as a
+stimulus failure.
 
 ## First real run (2026-07-25)
 
@@ -233,23 +259,24 @@ see the caveat below. The one real false positive was on
 a `DP-MODEL-04` "missing delete operation" finding on a fixture whose defects
 are all linter-owned. The judge caught it; the mechanical graders did not.
 
-### Known-unsound: the graders and the fixtures
+### Both defects that run exposed are now fixed
 
-Do not read a pass here as evidence until these two are resolved.
+Neither was fixed at the time the run was recorded, so the numbers above were
+produced against the defective versions. **The run's per-stimulus results are
+not a valid baseline** and the suite needs re-running.
 
-- **The `output-not-matches` graders are mention-based, not
-  assertion-based.** They fail when a rule ID appears anywhere in the output.
-  But the ideal true-negative answer _cites the rule it considered and explains
-  why it does not fire_ — so the graders punish the correct answer. Three
-  stimuli (`tn-bounded-list-and-singleton`, `tn-legitimate-action-not-crud`,
-  `tn-runtime-behavioral-not-static`) failed 0/3 this way while producing
-  textbook-correct output.
-- **The fixtures leak their own labels.** Every `tn-*.tsp` opens with a comment
-  saying `FIXTURE (TRUE NEGATIVE ...)` and, in some cases, "the correct review
-  output is silence. Any blocking finding on this file is a test failure." The
-  agent reads the file. A true-negative suite that tells the agent the answer
-  measures instruction-following, not false-positive resistance — and the agent
-  still produced a false positive on one of them anyway.
+- **Mention-based graders → assertion-based.** They failed when a rule ID
+  appeared anywhere, but the ideal true-negative answer _cites the rule it
+  considered and explains why it does not fire_ — so they punished the correct
+  answer. Three stimuli failed 0/3 this way while producing textbook-correct
+  output. See "Grader audit" below.
+- **Fixtures no longer leak their labels.** Every `tn-*.tsp` used to open with
+  `FIXTURE (TRUE NEGATIVE ...)` and, in some cases, "the correct review output
+  is silence. Any blocking finding on this file is a test failure." Positive
+  fixtures were worse: they annotated each seeded defect inline with
+  `// VIOLATION (DP-MODEL-01)`, handing the agent the exact string the
+  `output-contains` grader matched. All provenance now lives in
+  [`fixtures/MANIFEST.md`](fixtures/MANIFEST.md), which the agent never reads.
 
 ## Grader audit: assertions satisfiable by negation
 
@@ -336,15 +363,75 @@ This is the shape a sound mechanical grader has — match on vocabulary that
 cannot appear innocently, not on topic words that appear in both a finding and
 its refutation.
 
-### Status
+### Status: fixed
 
-**Not fixed.** Rewriting graders from mention-matching to assertion-matching
-changes what the suite measures and interacts with the fixture-labelling
-question, so it is pending a maintainer decision rather than applied
-unilaterally. Until then, treat every mechanical grader result in this suite as
-advisory and the LLM-judge `prompt` grader as the load-bearing signal — in the
-first run the judge was the only grader that caught the one real false
-positive, and the only one that did not manufacture false failures.
+All 30 mechanical graders are now assertion-based, and a CI check keeps them
+that way.
+
+**The discriminator is the report's own finding syntax.** The format defined in
+[`data-plane-api-reviewer.agent.md`](../../../agents/data-plane-api-reviewer.agent.md)
+renders a finding as:
+
+```markdown
+**[DP-VIS-02] Secret readable in response** -- `path/models.tsp:42`
+```
+
+A rule the agent merely _considered_ appears as a plain bold rule ID in a
+table, with no brackets. So `\[DP-VIS-0[0-9]\]` means "reported a finding" and
+`\bDP-VIS-0[0-9]\b` means "mentioned the rule at all". Switching every rule-ID
+grader to the bracketed form fixes both polarities at once — the positive
+graders stop passing on a miss, and the negative graders stop firing on a
+refutation.
+
+Where no bracketed form applies, the pattern was narrowed to phrasing that is
+_inherently_ an assertion (`should be camelCase`, `must not be nullable`), or
+replaced with "no finding of any kind was raised". Two graders that banned
+topic vocabulary — the runtime-behaviour word list and the linter rule names —
+could not be made sound at all, because the correct answer uses exactly that
+vocabulary to say what it is declining to flag; both were replaced with a
+bracketed-rule-ID ban, which as a bonus catches the one real false positive the
+first run found.
+
+**Enforced by** `checkGraderSoundness` in
+[`.github/workflows/src/data-plane-review-alignment.js`](../../../workflows/src/data-plane-review-alignment.js).
+Every grader is tested against two probes: a "correctly declining" sample it
+must _not_ match, and a real report it _must_ match. A grader that fires on the
+first is unsound; one that misses the second is inert and passes vacuously.
+
+The LLM-judge `prompt` grader remains the load-bearing signal regardless — in
+the first run it was the only grader that caught the real false positive and
+the only one that manufactured no false failures. The mechanical graders are
+there to make regressions cheap to spot, not to adjudicate quality.
+
+## Known limitation: these evals test the skill, not the agent
+
+vally has no concept of an agent file. A stimulus loads the
+[`azure-api-review`](../../azure-api-review/SKILL.md) skill via
+`environment.skills` and runs a bare Copilot CLI against the prompt. So this
+suite exercises the **skill's guidance and rule definitions** and nothing else.
+
+Untested by every eval in this directory:
+
+| Untested                              | Defined in                                                                                    |
+| ------------------------------------- | --------------------------------------------------------------------------------------------- |
+| Persona and severity calibration      | `data-plane-api-reviewer.agent.md` §Severity                                                  |
+| Report format and self-identification | `data-plane-api-reviewer.agent.md` §Report format                                             |
+| The 15-finding cap                    | `data-plane-api-reviewer.agent.md` §Report format                                             |
+| The silence checklist                 | `data-plane-api-reviewer.agent.md`                                                            |
+| Critic dispatch and FAIL handling     | `data-plane-api-review-critic.agent.md`, `protocols/data-plane-api-review-critic.protocol.md` |
+| Scope gate and PR-diff handling       | `.github/workflows/data-plane-api-review.md`                                                  |
+
+This is **accepted for v1** rather than worked around. Two consequences worth
+holding onto:
+
+1. Graders keyed on the report format (the `🔴` and `\[DP-XXX-NN\]` patterns)
+   assume a vocabulary the agent under evaluation was never given. They work
+   because the skill's own examples use it, not because anything enforces it.
+   That is why the false-positive metric in `run-evals.ps1` now reconciles
+   against a grader-derived count instead of trusting glyph counts alone.
+2. **Phase 0 dark launch is what exercises the agent file**, running the real
+   workflow with the real agent over already-merged PRs. Nothing here
+   substitutes for it.
 
 ## Known coverage gaps
 
@@ -457,14 +544,30 @@ and the alignment check does not constrain it.
 
 ## Adding tests
 
-1. Add a fixture under `fixtures/`, with a header comment naming the seeded
-   violations -- or, for a true negative, naming the false positive it
-   guards against and prefixing the filename with `tn-`.
-2. Add the stimulus to the matching `vally/eval-*.yaml`.
-3. If it is a true negative, prefix the **stimulus name** with `tn-` as well,
-   so it counts toward the false-positive metric.
-4. Keep the true-negative share at or above 40%.
-5. Give each stimulus both a mechanical grader (`output-contains` /
-   `output-not-matches`) and an LLM-judge `prompt` grader with a rubric. The
-   mechanical grader catches the obvious regression; the rubric catches the
-   reviewer being technically right and useless.
+1. **Write the fixture so it reads like a real spec.** No header comment
+   naming what it is, no `// VIOLATION (DP-...)` annotations, no statement
+   about what the reviewer should report. The agent reads this file. In-world
+   `@doc` text a real service author would plausibly have written is fine and
+   often the point — `tn-legitimate-deviation.tsp` documents _why_ its list is
+   unpaged, and reading that correctly is the reviewer's job.
+2. **Record the provenance in [`fixtures/MANIFEST.md`](fixtures/MANIFEST.md)**
+   — what it seeds or guards against, and which stimuli consume it.
+3. Prefix a true-negative **filename** with `tn-`. The agent never sees it; it
+   only ever sees the neutral `dest` path.
+4. Add the stimulus to the matching `vally/eval-*.yaml`, and declare
+   `environment.skills: ["../../../azure-api-review"]`. **Without it the
+   stimulus runs against a bare model** — see the first-run notes above.
+5. Prefix a true-negative **stimulus name** with `tn-` too, so it counts toward
+   the false-positive metric and the blocking gate.
+6. Keep the true-negative share at or above 40%, and prefer a **new** fixture
+   over a fourth stimulus against an existing one — see "The true-negative
+   denominator is 5, not 7".
+7. Give each stimulus a mechanical grader **and** an LLM-judge `prompt` grader
+   with a rubric. The mechanical grader makes a regression cheap to spot; the
+   rubric catches the reviewer being technically right and useless.
+8. **Write mechanical graders against the finding syntax, not the vocabulary.**
+   Use `output-matches` with the bracketed form `\\[DP-XXX-NN\\]`, never
+   `output-contains` with a bare rule ID: a rule the agent considered and
+   declined appears as a plain bold ID in a table, so a bare match cannot tell
+   a finding from its refutation. `checkGraderSoundness` fails the build if a
+   grader fires on a correctly-silent answer or is inert against a real report.

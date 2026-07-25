@@ -10,6 +10,15 @@
 #      suite" - a statement that means nothing if production runs a different model. The judge
 #      model is checked separately and is frozen, because changing it invalidates comparison
 #      against every historical run.
+#
+#   3. No eval fixture may tell the agent what it is or what the correct review output is. The
+#      agent reads the fixture; a true negative that announces itself measures instruction-
+#      following, not false-positive resistance.
+#
+#   4. No mechanical grader may fire on an agent that is correctly declining to raise a finding.
+#      A correct answer cites the rule it considered, so a grader keyed on the bare rule ID
+#      punishes the right answer - and an agent that MISSES a violation still emits the rule ID
+#      in a "considered" table, so a bare substring match passes on a complete miss.
 name: "Data-Plane Review Alignment"
 
 on:
@@ -18,6 +27,7 @@ on:
       - "package.json"
       - "package-lock.json"
       - ".github/skills/azure-api-review/references/data-plane-linter-rule-coverage.md"
+      - ".github/skills/evals/data-plane-api-reviewer/fixtures/**"
       - ".github/skills/evals/data-plane-api-reviewer/vally/*.yaml"
       - ".github/workflows/data-plane-api-review.md"
       - ".github/workflows/data-plane-review-alignment.yaml"

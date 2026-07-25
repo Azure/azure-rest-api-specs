@@ -42,11 +42,10 @@ stimuli:
       expect_skills:
         - azure-api-review
     graders:
-      - type: output-contains
+      - type: output-matches
         name: "reports LRO findings"
         config:
-          strings:
-            - "DP-LRO-"
+          pattern: "\\[DP-LRO-0[0-9]\\]"
       - type: output-not-matches
         name: "does not recommend the ARM polling contract"
         config:
@@ -77,11 +76,10 @@ stimuli:
       expect_skills:
         - azure-api-review
     graders:
-      - type: output-contains
+      - type: output-matches
         name: "reports pagination findings"
         config:
-          strings:
-            - "DP-PAGE-"
+          pattern: "\\[DP-PAGE-0[0-9]\\]"
       - type: prompt
     rubric:
       - The agent identifies a list operation over an unbounded collection that returns a bare array with no nextLink and no @pagedResult, and reports it under DP-PAGE-01 or the equivalent.

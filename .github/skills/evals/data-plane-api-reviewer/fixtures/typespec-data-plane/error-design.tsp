@@ -1,7 +1,3 @@
-// FIXTURE (positive): error design. Seeded violations: DP-ERR-01, DP-ERR-02,
-// DP-ERR-03, DP-ERR-05.
-// Not a real service. Not under specification/; not compiled by CI.
-
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
@@ -22,13 +18,6 @@ enum Versions {
   v2026_01_01: "2026-01-01",
 }
 
-// VIOLATION (DP-ERR-05): a bespoke error envelope instead of
-// Azure.Core.Foundations.ErrorResponse. SDK consumers get a service-specific
-// exception type unrelated to every other Azure client.
-// VIOLATION (DP-ERR-01): `code` is an undocumented bare string with no
-// enumeration of possible values anywhere in the spec.
-// VIOLATION (DP-ERR-02): no `target`, despite a structured request body.
-// VIOLATION (DP-ERR-04): no `innererror`.
 @doc("An error.")
 @error
 model InvoiceError {
@@ -72,10 +61,6 @@ model InvoiceLineItem {
   amount: float64;
 }
 
-// VIOLATION (DP-ERR-03): the documented failure text restates the code and
-// leaks internals. The operation documents that many distinct validation
-// failures all return the single code `InvalidRequest`, which callers cannot
-// branch on.
 @doc("""
   Submits an invoice for processing.
 

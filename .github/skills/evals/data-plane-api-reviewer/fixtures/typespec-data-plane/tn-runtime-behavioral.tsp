@@ -1,18 +1,3 @@
-// FIXTURE (TRUE NEGATIVE -- class 4: runtime-behavioral).
-// Every doc comment below describes SERVICE RUNTIME BEHAVIOUR: sort ordering
-// and its stability, retention windows, page-size behaviour, validation
-// semantics, conditional status codes, idempotency, Retry-After values,
-// throttling, and value preservation. None of it is statically checkable from
-// a .tsp file, and all of it is 🚫 Runtime in
-// references/data-plane-linter-rule-coverage.md.
-//
-// The reviewer must not invent a static finding from prose. The correct
-// output is silence. Any finding that asserts something about ordering,
-// retention, throttling, validation semantics, or preservation is a test
-// failure.
-//
-// Not a real service. Not under specification/; not compiled by CI.
-
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";

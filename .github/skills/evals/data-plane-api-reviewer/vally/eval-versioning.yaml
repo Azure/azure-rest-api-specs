@@ -53,15 +53,14 @@ stimuli:
       expect_skills:
         - azure-api-review
     graders:
-      - type: output-contains
+      - type: output-matches
         name: "reports breaking changes"
         config:
-          strings:
-            - "DP-VERSION-"
+          pattern: "\\[DP-VERSION-0[0-9]\\]"
       - type: output-matches
         name: "raises stable-version breaking changes at blocking severity"
         config:
-          pattern: "(?im)^\\s*(?:[-*+]\\s*|#{1,6}\\s*)?🔴|\\bseverity\\W{0,6}blocking\\b"
+          pattern: "(?im)^\\s*(?:[-*+]\\s*|#{1,6}\\s*)?🔴"
       - type: prompt
     rubric:
       - "The agent identifies the removed response property `lastEvaluatedAt` as a breaking change against the previously shipped stable version."

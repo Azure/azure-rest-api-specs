@@ -39,11 +39,10 @@ stimuli:
       expect_skills:
         - azure-api-review
     graders:
-      - type: output-contains
+      - type: output-matches
         name: "reports CRUD in disguise"
         config:
-          strings:
-            - "DP-MODEL-01"
+          pattern: "\\[DP-MODEL-01\\]"
       - type: prompt
     rubric:
       - The agent identifies that POST actions in this specification are CRUD operations wearing an action name, and reports them under DP-MODEL-01.
@@ -71,11 +70,10 @@ stimuli:
       expect_skills:
         - azure-api-review
     graders:
-      - type: output-contains
+      - type: output-matches
         name: "reports addressability or symmetry problems"
         config:
-          strings:
-            - "DP-MODEL-"
+          pattern: "\\[DP-MODEL-0[2-9]\\]"
       - type: prompt
     rubric:
       - The agent identifies that entities returned by this API are not individually addressable - there is no GET by identity for things the service clearly models as durable entities - and reports it under DP-MODEL-02.

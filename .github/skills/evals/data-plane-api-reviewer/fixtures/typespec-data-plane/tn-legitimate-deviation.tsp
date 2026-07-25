@@ -1,17 +1,3 @@
-// FIXTURE (TRUE NEGATIVE -- class 2: legitimate deviation).
-// Everything here LOOKS like a violation and is correct:
-//   - POST :analyze is a genuine computation, not CRUD in disguise.
-//   - listSupportedLanguages is unpaged because the collection is bounded and
-//     documented as such.
-//   - Configuration is a singleton because there is exactly one per account.
-//   - AnalysisMode is a genuinely closed union: the wire protocol admits
-//     exactly two values.
-//   - There is no delete for Configuration because it cannot be deleted, only
-//     reset -- and that is documented.
-// The correct review output is silence, or at most a question. Any blocking
-// finding is a test failure.
-// Not a real service. Not under specification/; not compiled by CI.
-
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";

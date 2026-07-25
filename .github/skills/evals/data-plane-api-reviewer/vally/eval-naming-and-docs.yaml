@@ -41,15 +41,14 @@ stimuli:
       expect_skills:
         - azure-api-review
     graders:
-      - type: output-contains
+      - type: output-matches
         name: "reports naming-clarity findings"
         config:
-          strings:
-            - "DP-NAME-"
+          pattern: "\\[DP-NAME-0[0-9]\\]"
       - type: output-not-matches
         name: "does not report linter-owned casing"
         config:
-          pattern: "(?i)\\bcasing-style\\b|\\bshould be camelCase\\b|\\bshould be PascalCase\\b"
+          pattern: "(?i)\\bshould be (camelCase|PascalCase)\\b"
       - type: prompt
     rubric:
       - The agent identifies opaque, abbreviated, or numbered property names - names that are correctly cased but convey nothing about what the value means - and reports them under DP-NAME-01 or the equivalent clarity rule, with a concrete suggested replacement for each.
@@ -77,15 +76,14 @@ stimuli:
       expect_skills:
         - azure-api-review
     graders:
-      - type: output-contains
+      - type: output-matches
         name: "reports documentation-quality findings"
         config:
-          strings:
-            - "DP-DOC-"
+          pattern: "\\[DP-DOC-0[0-9]\\]"
       - type: output-not-matches
         name: "does not report linter-owned doc presence"
         config:
-          pattern: "(?i)\\bdocumentation-required\\b|\\bmissing @doc\\b"
+          pattern: "(?i)\\bmissing @doc\\b"
       - type: prompt
     rubric:
       - The agent identifies tautological documentation - @doc text that restates the property name and adds no information, such as "The name." on a property called `name` - and reports it under DP-DOC-01 or the equivalent.

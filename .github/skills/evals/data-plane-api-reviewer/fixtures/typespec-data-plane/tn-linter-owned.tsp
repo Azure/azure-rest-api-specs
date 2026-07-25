@@ -1,24 +1,3 @@
-// FIXTURE (TRUE NEGATIVE -- class 3: linter-owned violations).
-// Every defect in this file is already caught mechanically by a shipped
-// @azure-tools/typespec-azure-core rule at 🔒 Linted status in
-// references/data-plane-linter-rule-coverage.md. The reviewer must stay
-// silent on all of them: CI already reports them, and a second report is
-// noise. Any finding naming one of these rules is a test failure.
-//
-// Seeded, with the owning rule:
-//   enum instead of union          -> no-enum
-//   string | null property         -> no-nullable
-//   @format decorator              -> no-format
-//   unknown-typed property         -> no-unknown
-//   generic `numeric` type         -> no-generic-numeric
-//   missing @doc on model/property -> documentation-required
-//   snake_case declaration name    -> casing-style
-//   raw array request body         -> request-body-problem
-//   explicit @route on a standard
-//     resource operation           -> no-explicit-routes-resource-ops
-//
-// Not a real service. Not under specification/; not compiled by CI.
-
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";

@@ -3,16 +3,22 @@ import { tmpdir } from "os";
 import { dirname, join } from "path";
 import { describe, expect, it } from "vitest";
 import checkDataPlaneReviewAlignment, {
+  checkFixtureLabelLeakage,
+  checkGraderSoundness,
   checkLinterAlignment,
   checkModelAlignment,
+  compileGraderPattern,
+  CORRECT_SILENCE_PROBE,
   COVERAGE_FILE,
   EVAL_DIR,
+  findFixtureLeakage,
   FROZEN_JUDGE_MODEL,
   GATE_EVAL_FILE,
   getEngineModel,
   getEvalModels,
   getPinnedVersion,
   getVerifiedVersion,
+  REAL_FINDINGS_PROBE,
   WORKFLOW_FILE,
 } from "../src/data-plane-review-alignment.js";
 import { createMockCore } from "./mocks.js";
@@ -307,8 +313,174 @@ describe("checkModelAlignment", () => {
   });
 });
 
+describe("findFixtureLeakage", () => {
+  it("accepts a fixture that reads like a real spec", () => {
+    const content = [
+      'import "@typespec/http";',
+      "",
+      '@doc("Lists the languages the analyzer supports. This collection is fixed by the service, is currently 42 entries, and is documented never to exceed 200; it is therefore returned unpaged.")',
+      "op listSupportedLanguages(): SupportedLanguage[];",
+    ].join("\n");
+
+    expect(findFixtureLeakage(content)).toEqual([]);
+  });
+
+  it("catches a true-negative label", () => {
+    const content = '// FIXTURE (TRUE NEGATIVE -- class 2).\nimport "@typespec/http";';
+
+    const hits = findFixtureLeakage(content);
+    expect(hits).toHaveLength(1);
+    expect(hits[0].line).toBe(1);
+  });
+
+  it("catches an inline violation annotation naming a rule ID", () => {
+    const content = [
+      "model Widget {",
+      "  // VIOLATION (DP-MODEL-01): this is a PATCH.",
+      "  name: string;",
+      "}",
+    ].join("\n");
+
+    const hits = findFixtureLeakage(content);
+    expect(hits).toHaveLength(1);
+    expect(hits[0].why).toMatch(/annotates a seeded defect/);
+  });
+
+  it("catches a statement about what the reviewer should report", () => {
+    const content = "// The reviewer must stay silent on all of them.";
+
+    expect(findFixtureLeakage(content)).toHaveLength(1);
+  });
+
+  it("catches a bare rule ID anywhere, including inside a doc string", () => {
+    const content = '@doc("See DP-VIS-02 for why this is fine.")';
+
+    expect(findFixtureLeakage(content)).toHaveLength(1);
+  });
+});
+
+describe("checkFixtureLabelLeakage", () => {
+  it("passes on the real fixtures", async () => {
+    const core = createMockCore();
+
+    await expect(checkFixtureLabelLeakage({ core, rootDir: REAL_ROOT })).resolves.toBe(true);
+
+    expect(core.setFailed).not.toBeCalled();
+  });
+});
+
+describe("compileGraderPattern", () => {
+  it("honours a leading inline flag group", () => {
+    const re = compileGraderPattern("(?im)^\\s*🔴");
+
+    expect(re.flags).toContain("i");
+    expect(re.flags).toContain("m");
+    expect(re.test("  🔴 Blocking")).toBe(true);
+  });
+
+  it("compiles a pattern with no flag group", () => {
+    expect(compileGraderPattern("\\[DP-VIS-0[0-9]\\]").test("**[DP-VIS-02]**")).toBe(true);
+  });
+});
+
+describe("checkGraderSoundness", () => {
+  it("passes on the real eval suite", async () => {
+    const core = createMockCore();
+
+    await expect(checkGraderSoundness({ core, rootDir: REAL_ROOT })).resolves.toBe(true);
+
+    expect(core.setFailed).not.toBeCalled();
+  });
+
+  it("distinguishes a considered rule from a reported finding", () => {
+    // The exact defect from the first run: a bare rule ID matches the
+    // "considered but declined" table, the bracketed form does not.
+    const bare = compileGraderPattern("\\bDP-PAGE-0[0-9]\\b");
+    const bracketed = compileGraderPattern("\\[DP-PAGE-0[0-9]\\]");
+
+    expect(bare.test(CORRECT_SILENCE_PROBE)).toBe(true);
+    expect(bracketed.test(CORRECT_SILENCE_PROBE)).toBe(false);
+    expect(bracketed.test(REAL_FINDINGS_PROBE)).toBe(true);
+  });
+
+  it("rejects a grader that fires on correct silence", async () => {
+    const core = createMockCore();
+    const rootDir = await createFixtureRepo();
+    await writeNested(
+      join(rootDir, EVAL_DIR, GATE_EVAL_FILE),
+      [
+        "name: gate",
+        "defaults:",
+        "  model: claude-opus-4.6",
+        `  judge_model: ${FROZEN_JUDGE_MODEL}`,
+        "stimuli:",
+        "  - name: tn-example",
+        "    graders:",
+        "      - type: output-not-matches",
+        '        name: "no pagination false positive"',
+        "        config:",
+        '          pattern: "\\\\bDP-PAGE-0[0-9]\\\\b"',
+      ].join("\n"),
+    );
+
+    await expect(checkGraderSoundness({ core, rootDir })).resolves.toBe(false);
+
+    expect(core.setFailed).toBeCalledWith(expect.stringContaining("fires on correct silence"));
+  });
+
+  it("rejects output-contains, which matches a bare substring", async () => {
+    const core = createMockCore();
+    const rootDir = await createFixtureRepo();
+    await writeNested(
+      join(rootDir, EVAL_DIR, GATE_EVAL_FILE),
+      [
+        "name: gate",
+        "defaults:",
+        "  model: claude-opus-4.6",
+        `  judge_model: ${FROZEN_JUDGE_MODEL}`,
+        "stimuli:",
+        "  - name: positive-example",
+        "    graders:",
+        "      - type: output-contains",
+        '        name: "reports pagination findings"',
+        "        config:",
+        '          strings: ["DP-PAGE-"]',
+      ].join("\n"),
+    );
+
+    await expect(checkGraderSoundness({ core, rootDir })).resolves.toBe(false);
+
+    expect(core.setFailed).toBeCalledWith(expect.stringContaining("has no pattern"));
+  });
+
+  it("rejects an inert grader", async () => {
+    const core = createMockCore();
+    const rootDir = await createFixtureRepo();
+    await writeNested(
+      join(rootDir, EVAL_DIR, GATE_EVAL_FILE),
+      [
+        "name: gate",
+        "defaults:",
+        "  model: claude-opus-4.6",
+        `  judge_model: ${FROZEN_JUDGE_MODEL}`,
+        "stimuli:",
+        "  - name: positive-example",
+        "    graders:",
+        "      - type: output-matches",
+        '        name: "reports something that never appears"',
+        "        config:",
+        '          pattern: "\\\\[DP-NOSUCHRULE-01\\\\]"',
+      ].join("\n"),
+    );
+
+    await expect(checkGraderSoundness({ core, rootDir })).resolves.toBe(false);
+
+    expect(core.setFailed).toBeCalledWith(expect.stringContaining("inert"));
+  });
+});
+
 describe("checkDataPlaneReviewAlignment", () => {
-  it("runs both checks even when the first fails", async () => {
+  it("runs every check even when the first fails", async () => {
     const core = createMockCore();
     const rootDir = await createFixtureRepo({
       pinnedVersion: "0.71.0",
@@ -317,7 +489,8 @@ describe("checkDataPlaneReviewAlignment", () => {
 
     await expect(checkDataPlaneReviewAlignment({ core, rootDir })).resolves.toBe(false);
 
-    expect(core.setFailed).toBeCalledTimes(2);
+    // linter + model fail; fixture and grader checks fail on the missing dirs.
+    expect(core.setFailed.mock.calls.length).toBeGreaterThanOrEqual(2);
   });
 
   it("stays aligned in the real repository", async () => {

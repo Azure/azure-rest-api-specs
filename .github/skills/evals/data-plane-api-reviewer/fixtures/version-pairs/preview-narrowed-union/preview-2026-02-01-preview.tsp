@@ -1,16 +1,3 @@
-// FIXTURE (TRUE NEGATIVE, version pair -- NEW preview version).
-// Relative to preview-2026-01-01-preview.tsp this removes `armOverrides` and
-// drops the `Adaptive` union member. Both versions are PREVIEW, so neither
-// change is a guideline violation: preview API versions carry no
-// backward-compatibility guarantee, and trialling then withdrawing a shape is
-// exactly what preview is for.
-//
-// The reviewer must NOT report a blocking breaking-change finding here. A
-// note observing that consumers of the preview must migrate is acceptable
-// only at suggestion severity.
-//
-// Not a real service. Not under specification/; not compiled by CI.
-
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";

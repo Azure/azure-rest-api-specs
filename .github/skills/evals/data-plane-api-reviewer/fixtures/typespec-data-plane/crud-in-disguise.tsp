@@ -1,7 +1,3 @@
-// FIXTURE (positive): POST actions that are standard CRUD operations wearing a
-// costume. Seeded violations: DP-MODEL-01 x3.
-// Not a real service. Not under specification/; not compiled by CI.
-
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
@@ -64,22 +60,16 @@ interface Widgets {
   @doc("Gets a widget by name.")
   get is StandardResourceOperations.ResourceRead<Widget>;
 
-  // VIOLATION (DP-MODEL-01): this is a PATCH. The name is a CRUD synonym, the
-  // request body is a subset of the resource, and the response is the resource.
-  // Replacement: StandardResourceOperations.ResourceCreateOrUpdate<Widget>.
   @doc("Updates an existing widget.")
   @route("/widgets/{name}:updateWidget")
   @post
   updateWidget(@path name: string, @body body: WidgetUpdate): Widget;
 
-  // VIOLATION (DP-MODEL-01): this is a DELETE.
   @doc("Removes a widget from the catalog.")
   @route("/widgets/{name}:removeWidget")
   @post
   removeWidget(@path name: string): void;
 
-  // VIOLATION (DP-MODEL-01): this is a LIST. `:query` here only filters the
-  // collection and returns the resource model unchanged.
   @doc("Queries widgets in the catalog.")
   @route("/widgets:query")
   @post

@@ -1,9 +1,3 @@
-// FIXTURE (positive, version pair -- NEW stable version).
-// Seeded violations against stable-2025-01-01.tsp: DP-VERSION-01 (property
-// removed, union narrowed, optional request property made required, type
-// changed) and DP-VERSION-03 (no @added / @removed / @renamedFrom anywhere).
-// Not a real service. Not under specification/; not compiled by CI.
-
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
@@ -41,20 +35,14 @@ model AlertRule {
   @doc("Severity assigned to alerts raised by this rule.")
   severity: AlertSeverity;
 
-  // BREAKING (DP-VERSION-01): type changed int32 -> float64.
   @doc("Threshold above which the rule fires, in events per minute.")
   thresholdPerMinute: float64;
 
   @doc("Whether the rule is currently evaluated.")
   enabled: boolean;
 
-  // BREAKING (DP-VERSION-01): `lastEvaluatedAt` was removed from the response
-  // model with no @removed decorator, so existing callers lose the field.
 }
 
-// BREAKING (DP-VERSION-01): the union was open in 2025-01-01 and is closed
-// here, and the `Informational` member was dropped. Values the service may
-// still emit no longer deserialize.
 @doc("Severity of an alert.")
 union AlertSeverity {
   @doc("A condition worth investigating.")
@@ -75,7 +63,6 @@ model AlertRuleCreate {
   @doc("Threshold above which the rule fires, in events per minute.")
   thresholdPerMinute: float64;
 
-  // BREAKING (DP-VERSION-01): optional request property made required.
   @doc("Notification channel identifier.")
   notificationChannel: string;
 }

@@ -1,8 +1,3 @@
-// FIXTURE (TRUE NEGATIVE -- class 1: clean spec).
-// A fully compliant Azure.Core data-plane service. The correct review output
-// is silence. Any blocking finding on this file is a test failure.
-// Not a real service. Not under specification/; not compiled by CI.
-
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
