@@ -136,12 +136,12 @@ violation in its report.
 
 ## Failure handling
 
-| Situation                        | Reviewer behavior                                                                        |
-| -------------------------------- | ---------------------------------------------------------------------------------------- |
-| Dispatch fails / no critique     | Say so in the report and **downgrade every Blocking finding to Warning**.                |
-| Critique malformed / cannot be parsed | Treat as dispatch failure.                                                          |
-| Critique FAILs every finding     | Emit "No findings" plus a note that the critic rejected all candidates. Do not override. |
-| Critique returns extra findings  | Ignore them; note the protocol violation.                                                |
+| Situation                             | Reviewer behavior                                                                        |
+| ------------------------------------- | ---------------------------------------------------------------------------------------- |
+| Dispatch fails / no critique          | Say so in the report and **downgrade every Blocking finding to Warning**.                |
+| Critique malformed / cannot be parsed | Treat as dispatch failure.                                                               |
+| Critique FAILs every finding          | Emit "No findings" plus a note that the critic rejected all candidates. Do not override. |
+| Critique returns extra findings       | Ignore them; note the protocol violation.                                                |
 
 ## Non-goals
 

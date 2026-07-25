@@ -128,9 +128,11 @@ Which is which is decided by the **linter interlock**,
 [`azure-api-review/references/data-plane-linter-rule-coverage.md`](azure-api-review/references/data-plane-linter-rule-coverage.md),
 not by the agent's judgment. That file is version-pinned to the
 `@azure-tools/typespec-azure-core` version this repository resolves, and
-[`.github/workflows/data-plane-linter-alignment.yaml`](../workflows/data-plane-linter-alignment.yaml)
+[`.github/workflows/data-plane-review-alignment.yaml`](../workflows/data-plane-review-alignment.yaml)
 fails the build if the two drift apart -- so every linter bump forces a human
-to re-verify the table.
+to re-verify the table. The same check asserts that the model the workflow runs
+in production equals the model the true-negative eval suite measures, since the
+promotion gate is meaningless otherwise.
 
 Findings are re-verified by the **Data-Plane API Review Critic**
 ([`.github/agents/data-plane-api-review-critic.agent.md`](../agents/data-plane-api-review-critic.agent.md)),

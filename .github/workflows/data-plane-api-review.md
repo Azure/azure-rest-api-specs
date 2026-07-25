@@ -40,15 +40,23 @@ permissions:
 # request" vector -- do not change this.
 checkout:
   repository: ${{ github.repository }}
-# Pinned deliberately. The eval suite at
-# .github/skills/evals/data-plane-api-reviewer/ measures the false-positive rate
-# on THIS model. An unpinned engine resolves to whatever
-# `vars.GH_AW_MODEL_AGENT_COPILOT` says, which can change without a PR -- and
-# an FP rate measured on one model transfers nothing to another. The phase-2
-# and phase-3 promotion gates depend on that measurement being meaningful.
-# If you change this value, change `model:` in
-# .github/skills/evals/data-plane-api-reviewer/vally/*.yaml in the same PR and
-# re-run the true-negative suite BEFORE merging.
+# Pinned deliberately, and pinned to the SAME value as `model:` in
+# .github/skills/evals/data-plane-api-reviewer/vally/eval-true-negatives.yaml --
+# that file defines the phase-2 promotion gate, so if production runs a
+# different model the gate certifies a configuration we never ship. An unpinned
+# engine resolves to whatever `vars.GH_AW_MODEL_AGENT_COPILOT` says, which can
+# change without a PR.
+#
+# `engine.model` is passed through to the Copilot CLI as `COPILOT_MODEL`
+# verbatim; gh-aw does not validate it. `claude-opus-4.6` was verified to be a
+# valid Copilot CLI model identifier, so the vally `model:` namespace and the
+# gh-aw `engine.model` namespace coincide for this value and no mapping is
+# needed.
+#
+# Do NOT upgrade to a newer model piecemeal. A model change is a re-baselining
+# event: bump this pin and every `model:` in the eval suite in the SAME PR,
+# re-run the full suite, and compare against the previous baseline. Bumping one
+# side alone is caught by .github/workflows/data-plane-review-alignment.yaml.
 engine:
   id: copilot
   model: claude-opus-4.6
@@ -77,6 +85,16 @@ safe-outputs:
     run-success: "🔍 [{workflow_name}]({run_url}) finished. ✅"
     run-failure: "🔍 [{workflow_name}]({run_url}) {status}. ❌"
   noop:
+  # `engine.model` above also propagates to gh-aw's threat-detection step, which
+  # would otherwise run the review model. Threat detection is a cheap
+  # classification task, not a judgment task, so it is pinned separately and
+  # deliberately decoupled from the review model. Changing this value does NOT
+  # affect the eval-measured promotion gate, and the alignment check does not
+  # constrain it.
+  threat-detection:
+    engine:
+      id: copilot
+      model: claude-sonnet-4.6
 timeout-minutes: 20
 ---
 
@@ -166,3 +184,34 @@ shipped version is pure noise.
 
 Changing the model above without re-running the eval suite invalidates every
 gate in this table.
+[`.github/workflows/data-plane-review-alignment.yaml`](./data-plane-review-alignment.yaml)
+fails the build if the pin here and the pin in the eval suite diverge.
+
+### Two-stage split seam (not implemented in v1)
+
+At phase 3 this workflow fires on every `[opened, synchronize]` event, and
+running Opus on every one of them is expensive at this repo's PR volume. The
+intended answer is a two-stage split: a cheap triage pass decides whether the PR
+contains anything reviewable, and only then escalates to the review model. ARM
+already has this shape --
+[`.github/skills/evals/arm-api-reviewer/vally/eval-fast-path-triage.yaml`](../skills/evals/arm-api-reviewer/vally/eval-fast-path-triage.yaml)
+evaluates exactly such a pass on `claude-sonnet-4.6`.
+
+v1 does not implement it, but nothing here forecloses it. The seam is:
+
+- **Triage contract.** Input: the PR's changed-file list plus, at most, the diff
+  of the changed `.tsp` files. Output: a binary escalate/exit decision, answering
+  only "does this PR change data-plane TypeSpec in a way a design reviewer could
+  have an opinion about". No findings, no severities, no comment. Constraint 2
+  above ("Scope gate") is already written as a standalone predicate, so it
+  becomes the triage prompt nearly verbatim.
+- **Where it lands.** As a separate gh-aw workflow whose `safe-outputs` is
+  `noop`, gated on the same label/path conditions, that dispatches this workflow
+  on escalation -- or as a preceding job in this workflow's `on.steps`. Either
+  keeps the review stage's prompt, tools, and agent file untouched.
+- **Model.** Triage runs the cheap model; the review stage keeps the pinned
+  `engine.model`. **Only the review stage's model is constrained to equal the
+  eval pin** -- the eval suite measures review output, not triage decisions. If
+  a triage stage is added, give it its own eval file and its own recall bar (a
+  triage false negative silently suppresses a whole review, which is a
+  materially different failure from a review false positive).

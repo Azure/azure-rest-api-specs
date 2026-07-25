@@ -167,7 +167,7 @@ consumption.
   before flagging these to avoid duplicating linter findings. For the
   data plane this soft convention is replaced by a hard interlock --
   [`data-plane-linter-rule-coverage.md`](references/data-plane-linter-rule-coverage.md),
-  whose header pin is enforced by the `data-plane-linter-alignment` CI check.
+  whose header pin is enforced by the `data-plane-review-alignment` CI check.
 - To avoid conflicts with the
   [azure-typespec-author](../../skills/azure-typespec-author/SKILL.md)
   skill (used for TypeSpec code generation), coordinate rule changes

@@ -7,7 +7,7 @@
          https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md
      The pinned version above MUST match the `@azure-tools/typespec-azure-core`
      version in the repository root `package.json`. The
-     `data-plane-linter-alignment` CI check enforces this: when the package is
+     `data-plane-review-alignment` CI check enforces this: when the package is
      bumped, the check fails until a maintainer re-verifies this table and
      updates the version and date above.
      The upstream documents always take precedence if there is a conflict. -->
@@ -227,12 +227,14 @@ third are enforcement.
    `@azure-tools/typespec-azure-core` version this table was verified against,
    following the convention already used by
    [`linter-rule-coverage.md`](linter-rule-coverage.md).
-2. **`data-plane-linter-alignment` CI check.** It reads the pinned
+2. **`data-plane-review-alignment` CI check.** It reads the pinned
    `@azure-tools/typespec-azure-core` version from the repository root
    `package.json` and fails if it differs from the version recorded in this
    file's header. Every linter bump therefore forces a human to re-verify this
    table before the bump can merge. This is the only moment at which the table
-   can silently go stale, so it is the only moment that needs a gate.
+   can silently go stale, so it is the only moment that needs a gate. The same
+   check also asserts that the model the reviewer runs in production equals the
+   model its true-negative eval suite measures.
 3. **Eval coupling.** When a rule moves ⏳ -> 🔒, the same PR MUST add a
    true-negative eval stimulus asserting the agent no longer reports it. The
    interlock is then regression-tested rather than merely documented.
