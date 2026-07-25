@@ -1,0 +1,165 @@
+# Data-Plane Review Report Format
+
+**This file is the single, authoritative definition of the data-plane
+reviewer's finding syntax and severity vocabulary.** Everything that produces
+or grades a data-plane review reads it from here:
+
+| Consumer                                                                                         | Uses this file for                                       |
+| ------------------------------------------------------------------------------------------------ | -------------------------------------------------------- |
+| [`data-plane-api-reviewer.agent.md`](../../../agents/data-plane-api-reviewer.agent.md)           | The format it emits (§"Report format" defers to here)    |
+| [`data-plane-api-review-critic.agent.md`](../../../agents/data-plane-api-review-critic.agent.md) | The severity ceilings it enforces                        |
+| [`evals/data-plane-api-reviewer/vally/eval-*.yaml`](../../evals/data-plane-api-reviewer/vally/)  | The syntax every mechanical grader matches on            |
+| [`data-plane-review-alignment.js`](../../../workflows/src/data-plane-review-alignment.js)        | The contract it asserts is present and grader-compatible |
+
+## Why it lives in the skill and not in the agent file
+
+It used to live only in the agent file, and that caused a real defect.
+
+The eval harness (vally) has **no concept of an agent file**. A stimulus loads
+this skill and runs a bare agent against a prompt. So a format defined only in
+the agent file is invisible to every eval — while the graders were matching on
+that very format. The result: graders keyed on `[DP-XXX-NN]` and `🔴` against
+an agent that had never been told to emit either. Measured across the 21
+recorded trials of the first real run: **0 bracketed rule IDs, 0 `🔴`, 18 bare
+`DP-XXX-NN`.** Every positive detection grader would have failed, and every
+true-negative grader would have passed vacuously.
+
+Defining the format here makes production and evaluation share one source. If
+you change anything in this file, the agent, the critic, and every grader
+change with it — which is the point.
+
+## Finding syntax
+
+Every finding is a bolded, **bracketed** rule ID, a short title, and a
+`file:line`:
+
+```markdown
+**[DP-VIS-02] Secret readable in response** --
+`specification/foo/data-plane/Foo/models.tsp:42`
+```
+
+Then, in order: a quoted source excerpt, the reason with a link to the
+authoritative source, and a concrete fix as a code block.
+
+### The brackets are load-bearing — do not drop them
+
+They are what distinguishes **reporting a finding** from **citing a rule you
+considered and declined to raise**. A competent review does both, often in the
+same output:
+
+| Text                                                                         | Meaning                        |
+| ---------------------------------------------------------------------------- | ------------------------------ |
+| `**[DP-PAGE-01] Unbounded collection returned unpaged** -- \`main.tsp:102\`` | A finding. Graders must match. |
+| `\| **DP-PAGE-01** (list ops paged) \| ✅ Pass \| Collection is bounded. \|` | Considered, not raised.        |
+| `DP-VERSION-01: N/A -- no prior version to compare against.`                 | Considered, not raised.        |
+
+A grader keyed on a bare `DP-PAGE-01` cannot tell these apart, so it fires on
+the second and third — punishing the correct answer on a true negative, and
+passing on a missed violation in the positive direction. Both failure modes
+were live in this suite before the bracketed form was adopted.
+
+**Therefore:** use the bracketed form **only** for findings you are actually
+raising. When you mention a rule you considered and did not raise, write the
+rule ID bare, without brackets.
+
+## Severity
+
+| Severity   | Glyph | Meaning                                                      | Use when                                                                                                        |
+| ---------- | ----- | ------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------- |
+| Blocking   | 🔴    | Ships a defect that is expensive or impossible to fix later. | Secret exposure; breaking change in a stable version; CRUD-in-disguise in a new service's first stable version. |
+| Warning    | 🟡    | Should be fixed; will cause customer or SDK pain.            | Most `DP-*` rule violations.                                                                                    |
+| Suggestion | 💡    | Improvement, or a grey-area trade-off.                       | Everything from [`data-plane-design-decisions.md`](data-plane-design-decisions.md); most doc findings.          |
+| Question   | --    | You are not sure, and the author has context you lack.       | Whenever the honest answer is "it depends".                                                                     |
+
+Severity glyphs appear as section headings — `### 🔴 Blocking` — and nowhere
+else. Do not use a glyph mid-sentence: graders anchor on line position to avoid
+counting `"no 🔴 blocking findings"` as a blocking finding, and prose glyphs
+defeat that.
+
+**Blocking is rare.** For a maintenance-edit PR it is reserved for secret
+exposure and breaking changes, nothing else. More than three Blocking findings
+in one run means you are over-escalating — the documented failure mode of the
+ARM reviewer (`evals/arm-api-reviewer/README.md` §Known limitations).
+
+## Document shape
+
+````markdown
+## Data-Plane API Review
+
+_Automated review by Copilot (data-plane API reviewer agent). Reviewed `<n>`
+TypeSpec file(s) at `<short-sha>` against the Azure REST API Guidelines. This
+is advisory and does not replace human API review._
+
+<!-- when there are no findings -->
+
+No findings. The changed data-plane TypeSpec looks consistent with the
+Guidelines in the areas this review covers (resource modeling, versioning,
+error design, LRO/paging, visibility, naming clarity, documentation quality).
+
+<!-- when there are findings -->
+
+### 🔴 Blocking
+
+**[DP-VIS-02] Secret readable in response** --
+`specification/foo/data-plane/Foo/models.tsp:42`
+
+```tsp
+accountKey: string;
+```
+
+`accountKey` is readable, so it is returned by both `get` and `list`. Per
+[Azure REST API Guidelines -- Sensitive data](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md),
+credentials must not be returned in resource bodies.
+
+**Fix:** mark it `@secret` with write-only visibility, and expose it through a
+dedicated `:listKeys` operation.
+
+```tsp
+@secret
+@visibility(Lifecycle.Create, Lifecycle.Update)
+accountKey: string;
+```
+
+### 🟡 Warning
+
+...
+
+### 💡 Suggestion
+
+...
+
+### Questions
+
+- ... (grey areas from `data-plane-design-decisions.md` -- present the
+  trade-off, do not decide)
+
+---
+
+**Not reviewed:** items enforced by `@azure-tools/typespec-azure-core`
+(reported by CI, not here) and guideline statements about runtime service
+behavior, which are not observable in a specification.
+````
+
+## Rules for the report
+
+- **Identify yourself as an agent in the first line.** The report may be posted
+  verbatim to a pull request, and readers must know it is machine-generated.
+- **Order:** Blocking, Warning, Suggestion, Questions. Within a severity, by
+  file then line.
+- **Cap:** at most 15 findings. If more survive, keep the highest-severity 15
+  and state the count omitted. A 40-item report does not get read.
+- **Group** naming and documentation findings of the same kind into one entry
+  with multiple line references.
+- **Every finding** carries a bracketed rule ID, a `file:line`, a quoted source
+  excerpt, a reason, and a concrete fix. No fix, no finding.
+- **No praise sections, no summary of what the PR does, no restating the diff.**
+  The author knows what they wrote.
+- **Never** claim CI status you have not read, and never duplicate a finding CI
+  already reported.
+
+## Silence is a valid report
+
+If nothing survives the interlock filter, self-verification, and the critic,
+emit the "no findings" form above. Do not pad. A clean specification receiving
+a clean review is the system working, and it is the outcome the true-negative
+eval suite exists to protect.

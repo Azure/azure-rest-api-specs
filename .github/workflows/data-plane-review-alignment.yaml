@@ -19,6 +19,11 @@
 #      A correct answer cites the rule it considered, so a grader keyed on the bare rule ID
 #      punishes the right answer - and an agent that MISSES a violation still emits the rule ID
 #      in a "considered" table, so a bare substring match passes on a complete miss.
+#
+#   5. The report-format contract the graders match on must live in the SKILL, which the eval
+#      harness loads - not only in the agent file, which it does not. A format defined in the
+#      wrong place is invisible to every eval that grades it, and surfaces as a ~100%
+#      false-failure rate after a 30-minute run rather than as a failed check.
 name: "Data-Plane Review Alignment"
 
 on:
@@ -26,7 +31,9 @@ on:
     paths:
       - "package.json"
       - "package-lock.json"
+      - ".github/agents/data-plane-api-reviewer.agent.md"
       - ".github/skills/azure-api-review/references/data-plane-linter-rule-coverage.md"
+      - ".github/skills/azure-api-review/references/data-plane-report-format.md"
       - ".github/skills/evals/data-plane-api-reviewer/fixtures/**"
       - ".github/skills/evals/data-plane-api-reviewer/vally/*.yaml"
       - ".github/workflows/data-plane-api-review.md"

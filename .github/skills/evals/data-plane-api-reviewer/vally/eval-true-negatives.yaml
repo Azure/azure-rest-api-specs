@@ -206,13 +206,17 @@ stimuli:
         - azure-api-review
     graders:
       - type: output-not-matches
-        name: "no duplicate report of linted rules"
+        name: "no finding raised on a linter-owned file"
         config:
           pattern: "\\[DP-[A-Z]+-0[0-9]\\]"
       - type: output-not-matches
+        name: "no linter-owned rule raised as a finding"
+        config:
+          pattern: "(?i)\\*\\*\\[DP-[A-Z]+-\\d\\d\\][^*\\n]*\\b(no-enum|no-nullable|no-format|no-unknown|no-generic-numeric|documentation-required|casing-style|request-body-problem|no-explicit-routes-resource-ops)\\b"
+      - type: output-not-matches
         name: "no restatement of linted defects in prose"
         config:
-          pattern: "(?i)\\b(must|should) (be|use) an? (extensible )?union\\b|\\buse `?union`? instead of `?enum`?\\b|\\b(must|should) not be nullable\\b"
+          pattern: "(?i)\\b(must|should) (be|use) an? (extensible )?union\\b|\\buse `?union`? instead of `?enum`?\\b|\\b(must|should) not be nullable\\b|\\bavoid @format\\b|\\bmissing @doc\\b"
       - type: prompt
     rubric:
       - "Every defect in this file is already caught mechanically by a shipped @azure-tools/typespec-azure-core rule listed at 🔒 Linted in references/data-plane-linter-rule-coverage.md: no-enum, no-nullable, no-format, no-unknown, no-generic-numeric, documentation-required, casing-style, request-body-problem, and no-explicit-routes-resource-ops."
@@ -239,9 +243,13 @@ stimuli:
         - azure-api-review
     graders:
       - type: output-not-matches
-        name: "no findings invented from runtime prose"
+        name: "no finding raised on a runtime-behavioral file"
         config:
           pattern: "\\[DP-[A-Z]+-0[0-9]\\]"
+      - type: output-not-matches
+        name: "no runtime behaviour raised as a finding"
+        config:
+          pattern: "(?i)\\*\\*\\[DP-[A-Z]+-\\d\\d\\][^*\\n]*\\b(sort order|sort ordering|ordering guarantee|retention (window|period|policy)|page size|throttl|rate limit|Retry-After|idempotenc|value preservation)\\b"
       - type: output-not-matches
         name: "no blocking findings"
         config:

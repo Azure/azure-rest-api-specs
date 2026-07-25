@@ -400,6 +400,31 @@ Every grader is tested against two probes: a "correctly declining" sample it
 must _not_ match, and a real report it _must_ match. A grader that fires on the
 first is unsound; one that misses the second is inert and passes vacuously.
 
+### Coverage restored after the rewrite
+
+The bracketed-ID rewrite made two graders strictly narrower than their names
+claimed, which is its own kind of dishonesty — a grader whose name overstates
+what it tests is worse than an absent one. Both were renamed to what they
+actually assert, and a companion grader was added to restore the lost coverage
+soundly:
+
+| Grader                                               | Now asserts                                        |
+| ---------------------------------------------------- | -------------------------------------------------- |
+| `no finding raised on a linter-owned file`           | no finding of any kind (was "no duplicate report") |
+| `no linter-owned rule raised as a finding`           | no linter rule name in **finding-title position**  |
+| `no finding raised on a runtime-behavioral file`     | no finding of any kind (was "not invented from…")  |
+| `no runtime behaviour raised as a finding`           | no runtime topic in **finding-title position**     |
+| `does not raise casing-style as a finding`           | `casing-style` in finding-title position           |
+| `does not raise documentation-required as a finding` | `documentation-required` in finding-title position |
+
+The companion graders anchor to `**[DP-XXX-NN] …`, so a deferral sentence
+("Deferred to the linter: `no-enum`, `casing-style`") does not trip them while
+a finding titled "casing-style violation on `accountID`" does. That is the same
+structural hook as everywhere else, applied to vocabulary that could not
+otherwise be banned. `no restatement of linted defects in prose` also regained
+`avoid @format` and `missing @doc`, both inherently assertive; the unsound bare
+`snake_case` alternative stays dropped.
+
 The LLM-judge `prompt` grader remains the load-bearing signal regardless. In
 the first run it was the only grader that caught the real false positive and
 the only one that manufactured none — and that is evidence about **mechanical
@@ -446,26 +471,62 @@ suite exercises the **skill's guidance and rule definitions** and nothing else.
 
 Untested by every eval in this directory:
 
-| Untested                              | Defined in                                                                                    |
-| ------------------------------------- | --------------------------------------------------------------------------------------------- |
-| Persona and severity calibration      | `data-plane-api-reviewer.agent.md` §Severity                                                  |
-| Report format and self-identification | `data-plane-api-reviewer.agent.md` §Report format                                             |
-| The 15-finding cap                    | `data-plane-api-reviewer.agent.md` §Report format                                             |
-| The silence checklist                 | `data-plane-api-reviewer.agent.md`                                                            |
-| Critic dispatch and FAIL handling     | `data-plane-api-review-critic.agent.md`, `protocols/data-plane-api-review-critic.protocol.md` |
-| Scope gate and PR-diff handling       | `.github/workflows/data-plane-api-review.md`                                                  |
+| Untested                          | Defined in                                                                                    |
+| --------------------------------- | --------------------------------------------------------------------------------------------- |
+| Persona and severity calibration  | `data-plane-api-reviewer.agent.md` §Persona                                                   |
+| Self-identification as an agent   | `data-plane-api-reviewer.agent.md`                                                            |
+| The 15-finding cap                | enforced by the agent, not by the format contract                                             |
+| The silence checklist             | `data-plane-api-reviewer.agent.md`                                                            |
+| Critic dispatch and FAIL handling | `data-plane-api-review-critic.agent.md`, `protocols/data-plane-api-review-critic.protocol.md` |
+| Scope gate and PR-diff handling   | `.github/workflows/data-plane-api-review.md`                                                  |
 
 This is **accepted for v1** rather than worked around. Two consequences worth
 holding onto:
 
-1. Graders keyed on the report format (the `🔴` and `\[DP-XXX-NN\]` patterns)
-   assume a vocabulary the agent under evaluation was never given. They work
-   because the skill's own examples use it, not because anything enforces it.
-   That is why the false-positive metric in `run-evals.ps1` now reconciles
-   against a grader-derived count instead of trusting glyph counts alone.
+1. **The report format is deliberately not in that list any more.** It used to
+   be, and that was a defect rather than a limitation — see the correction
+   below.
 2. **Phase 0 dark launch is what exercises the agent file**, running the real
    workflow with the real agent over already-merged PRs. Nothing here
    substitutes for it.
+
+### Correction: the report format now lives in the skill
+
+**An earlier version of this section claimed the format-keyed graders "work
+because the skill's own examples use it, not because anything enforces it."
+That was asserted without checking, and it was false.** If you remember that
+framing, discard it.
+
+At the time it was written the finding syntax and severity glyphs were defined
+**only** in `data-plane-api-reviewer.agent.md`, which vally never loads. The
+skill contained zero bracketed rule IDs and no report-format definition at all.
+Measured across the 21 recorded trials of the first run, the agent emitted:
+
+| Form                    | Trials containing it |
+| ----------------------- | -------------------- |
+| Bracketed `[DP-XXX-NN]` | **0**                |
+| `🔴`                    | **0**                |
+| Bare `DP-XXX-NN`        | 18                   |
+
+Run in that state, every positive detection grader would have failed and every
+true-negative grader would have passed vacuously — a ~100% false-failure rate
+on the positive suite, discovered only after a 30-minute, ~500-AIU run.
+
+The fix was to move the contract into the skill, where both production and the
+evals read it:
+[`references/data-plane-report-format.md`](../../azure-api-review/references/data-plane-report-format.md).
+The agent file now defers to it and does not restate it. `checkReportFormatContract`
+in
+[`data-plane-review-alignment.js`](../../../workflows/src/data-plane-review-alignment.js)
+asserts the contract is present in what vally loads, that every positive grader
+matches a syntax the contract teaches, and that the agent has not grown a
+second copy — so this class of drift fails at pull-request time rather than
+after an eval run.
+
+**Still unverified:** that an agent loading the skill actually emits the
+bracketed form. The 21 recorded trials are _pre-change_ output and can only
+confirm what the agent does **without** the contract. Confirming the fix
+requires a fresh run.
 
 ## Known coverage gaps
 

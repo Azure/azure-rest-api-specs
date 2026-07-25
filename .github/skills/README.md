@@ -134,6 +134,14 @@ to re-verify the table. The same check asserts that the model the workflow runs
 in production equals the model the true-negative eval suite measures, since the
 promotion gate is meaningless otherwise.
 
+The reviewer's **report format** — the bracketed `[DP-XXX-NN]` finding syntax
+and the 🔴/🟡/💡 severity glyphs — is defined in
+[`azure-api-review/references/data-plane-report-format.md`](azure-api-review/references/data-plane-report-format.md)
+rather than in the agent file, so that the eval harness (which loads the skill
+and has no concept of an agent file) grades the format the agent is actually
+told to emit. The same alignment check enforces that, because the previous
+arrangement failed silently until a full eval run was attempted.
+
 Findings are re-verified by the **Data-Plane API Review Critic**
 ([`.github/agents/data-plane-api-review-critic.agent.md`](../agents/data-plane-api-review-critic.agent.md)),
 which hunts false positives only.

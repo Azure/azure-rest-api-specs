@@ -49,6 +49,10 @@ stimuli:
         name: "does not report linter-owned casing"
         config:
           pattern: "(?i)\\bshould be (camelCase|PascalCase)\\b"
+      - type: output-not-matches
+        name: "does not raise casing-style as a finding"
+        config:
+          pattern: "(?i)\\*\\*\\[DP-[A-Z]+-\\d\\d\\][^*\\n]*\\bcasing-style\\b"
       - type: prompt
     rubric:
       - The agent identifies opaque, abbreviated, or numbered property names - names that are correctly cased but convey nothing about what the value means - and reports them under DP-NAME-01 or the equivalent clarity rule, with a concrete suggested replacement for each.
@@ -84,6 +88,10 @@ stimuli:
         name: "does not report linter-owned doc presence"
         config:
           pattern: "(?i)\\bmissing @doc\\b"
+      - type: output-not-matches
+        name: "does not raise documentation-required as a finding"
+        config:
+          pattern: "(?i)\\*\\*\\[DP-[A-Z]+-\\d\\d\\][^*\\n]*\\bdocumentation-required\\b"
       - type: prompt
     rubric:
       - The agent identifies tautological documentation - @doc text that restates the property name and adds no information, such as "The name." on a property called `name` - and reports it under DP-DOC-01 or the equivalent.

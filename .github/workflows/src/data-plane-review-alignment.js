@@ -313,9 +313,17 @@ export const REAL_FINDINGS_PROBE = [
   "**[DP-LRO-01] Status monitor has no error member** -- `main.tsp:30`",
   "**[DP-NAME-01] Non-obvious abbreviation** -- `main.tsp:29`",
   "**[DP-DOC-01] Tautological documentation** -- `main.tsp:24`",
+  // Findings that duplicate a linter rule or invent a runtime-behaviour claim.
+  // Both are defects the true-negative graders exist to catch, and both are
+  // only distinguishable from a legitimate deferral by their position: a
+  // bracketed rule ID at the head of the line.
+  "**[DP-NAME-01] casing-style violation on `accountID`** -- `main.tsp:29`",
+  "**[DP-DOC-01] documentation-required not satisfied** -- `main.tsp:12`",
+  "**[DP-PAGE-02] Sort order is unspecified across pages** -- `main.tsp:88`",
   "The `mode` union must be extensible; add `string`.",
   "`accountId` should be camelCase.",
   "Missing @doc on `Widget`.",
+  "Avoid @format on `createdAt`.",
   "Use `Azure-AsyncOperation` for polling, with `final-state-via`.",
   "The `state` enum should be a union.",
   "`retryCount` must not be nullable.",
@@ -431,6 +439,187 @@ export async function checkGraderSoundness({ core, rootDir }) {
       "Match the report's finding syntax instead -- `\\[DP-XXX-NN\\]`, bracketed --",
       "or phrasing that is inherently an assertion. If neither is possible, delete",
       "the mechanical grader and rely on the LLM judge.",
+    ].join("\n"),
+  );
+
+  return false;
+}
+
+/** The report-format contract, inside the skill so the eval harness loads it. */
+export const REPORT_FORMAT_FILE =
+  ".github/skills/azure-api-review/references/data-plane-report-format.md";
+
+/** The reviewer agent file, which must defer to the contract rather than restate it. */
+export const AGENT_FILE = ".github/agents/data-plane-api-reviewer.agent.md";
+
+/**
+ * Fails when the report-format contract the graders depend on is not present in
+ * what the eval harness actually loads, or when the agent file has grown a
+ * second copy of it.
+ *
+ * This exists because the defect it guards was invisible until a run was
+ * attempted. The format was defined only in the agent file; vally loads the
+ * skill and has no concept of an agent file; and the graders matched on the
+ * format. Nothing failed at PR time -- it would have surfaced as a ~100%
+ * false-failure rate on the positive suite after a 30-minute, ~500-AIU run.
+ *
+ * Three properties are asserted:
+ *
+ *   1. The contract file exists and defines the bracketed finding syntax and
+ *      the severity glyphs, so a skill-only agent is told to emit what the
+ *      graders match.
+ *   2. Its example finding satisfies the graders' own patterns. This is the
+ *      end-to-end link: if someone changes the syntax here, the graders that
+ *      match on it must change in the same pull request.
+ *   3. The agent file points at it and does not restate it, so the two cannot
+ *      drift apart again.
+ *
+ * @param {object} options
+ * @param {typeof import("@actions/core")} options.core
+ * @param {string} options.rootDir
+ * @returns {Promise<boolean>} true when the contract holds
+ */
+export async function checkReportFormatContract({ core, rootDir }) {
+  /** @type {string[]} */
+  const problems = [];
+
+  /** @type {string} */
+  let contract;
+  try {
+    contract = await readFile(join(rootDir, REPORT_FORMAT_FILE), "utf8");
+  } catch {
+    core.setFailed(
+      `${REPORT_FORMAT_FILE} is missing. It is the only definition of the finding ` +
+        "syntax that the eval harness loads; without it every mechanical grader " +
+        "matches a format the agent under evaluation was never given.",
+    );
+    return false;
+  }
+
+  // 1. The contract must define what the graders match.
+  if (!/\[DP-[A-Z]+-\d\d\]/.test(contract)) {
+    problems.push(
+      `${REPORT_FORMAT_FILE} does not show the bracketed \`[DP-XXX-NN]\` finding syntax.`,
+    );
+  }
+  for (const glyph of ["🔴", "🟡", "💡"]) {
+    if (!contract.includes(glyph)) {
+      problems.push(`${REPORT_FORMAT_FILE} does not define the ${glyph} severity glyph.`);
+    }
+  }
+
+  // 2. The graders and the contract must speak the same syntax. Requiring the
+  //    contract to carry an example for every rule family would be padding a
+  //    document to satisfy a checker, so the assertion is structural instead:
+  //    each positive grader either matches the bracketed family the contract
+  //    teaches, or matches a severity glyph the contract defines. Plus one
+  //    end-to-end proof that the two shapes really are compatible.
+  const evalDir = join(rootDir, EVAL_DIR);
+  /** @type {string[]} */
+  let evalFiles = [];
+  try {
+    evalFiles = (await readdir(evalDir)).filter((f) => f.startsWith("eval-"));
+  } catch {
+    /* checkModelAlignment reports a missing eval directory. */
+  }
+
+  const contractFinding = contract.match(/\*\*\[DP-[A-Z]+-\d\d\][^\n]*/)?.[0];
+  if (!contractFinding) {
+    problems.push(
+      `${REPORT_FORMAT_FILE} has no example finding line of the form ` +
+        "`**[DP-XXX-NN] Title** -- `file:line``.",
+    );
+  }
+
+  let compatibleGraders = 0;
+
+  for (const file of evalFiles.sort()) {
+    const doc = /** @type {any} */ (yaml.load(await readFile(join(evalDir, file), "utf8")));
+    for (const stimulus of doc?.stimuli ?? []) {
+      for (const grader of stimulus.graders ?? []) {
+        // Only positive assertions are checked. An `output-not-matches` grader
+        // is supposed to miss, and the contract deliberately contains a
+        // "considered but not raised" example for exactly that reason.
+        if (grader.type !== "output-matches") continue;
+        const pattern = grader.config?.pattern;
+        if (!pattern) continue;
+
+        const targetsBracketedForm = /\\\[DP-/.test(pattern);
+        const targetsDefinedGlyph = ["🔴", "🟡", "💡"].some(
+          (g) => pattern.includes(g) && contract.includes(g),
+        );
+
+        if (!targetsBracketedForm && !targetsDefinedGlyph) {
+          problems.push(
+            `${file} :: "${grader.name}" asserts a finding using a syntax the\n` +
+              `      contract does not teach.\n` +
+              `      ${pattern}\n` +
+              "      Positive graders must match either the bracketed `[DP-XXX-NN]` form or a\n" +
+              "      severity glyph defined in the contract, or they are matching a shape the\n" +
+              "      agent is never told to emit.",
+          );
+          continue;
+        }
+
+        // End-to-end: does this grader actually fire on the contract's own
+        // example? Only meaningful for graders whose rule family the example
+        // happens to use, but one such grader proves the shapes line up.
+        if (contractFinding) {
+          try {
+            if (compileGraderPattern(pattern).test(contractFinding)) compatibleGraders++;
+          } catch {
+            /* checkGraderSoundness reports uncompilable patterns. */
+          }
+        }
+      }
+    }
+  }
+
+  if (contractFinding && evalFiles.length > 0 && compatibleGraders === 0) {
+    problems.push(
+      `No grader matches the example finding in ${REPORT_FORMAT_FILE}:\n` +
+        `      ${contractFinding}\n` +
+        "      The contract and the graders have drifted into different syntaxes.",
+    );
+  }
+
+  // 3. The agent must defer, not duplicate.
+  const agent = await readFile(join(rootDir, AGENT_FILE), "utf8");
+  if (!agent.includes("data-plane-report-format.md")) {
+    problems.push(
+      `${AGENT_FILE} does not reference ${REPORT_FORMAT_FILE}. The agent must be ` +
+        "pointed at the contract, or production and the evals describe different formats.",
+    );
+  }
+  // A full template in the agent file is the duplication that caused the drift.
+  // The fenced markdown block plus the self-identification line is the tell.
+  if (/```+markdown[\s\S]*?Automated review by Copilot/.test(agent)) {
+    problems.push(
+      `${AGENT_FILE} contains its own copy of the report template. Delete it and ` +
+        `defer to ${REPORT_FORMAT_FILE}; a second copy is what let the format drift ` +
+        "out of what the eval harness loads.",
+    );
+  }
+
+  if (problems.length === 0) {
+    core.info("Report-format contract is present in the skill and matches every grader.");
+    return true;
+  }
+
+  core.setFailed(
+    [
+      "The report-format contract and the graders that depend on it are out of sync:",
+      "",
+      ...problems.map((p) => `  - ${p}`),
+      "",
+      "Why this is enforced: the eval harness (vally) loads the SKILL, not the agent",
+      "file. A finding syntax defined only in the agent file is invisible to every",
+      "eval that grades it. That is not hypothetical -- measured across the 21 trials",
+      "of the first real run, the agent emitted 0 bracketed rule IDs and 0 🔴 glyphs,",
+      "because the format lived somewhere it never read.",
+      "",
+      `Keep ${REPORT_FORMAT_FILE} authoritative, keep the agent deferring to it, and`,
+      "change the graders in the same pull request as the syntax.",
     ].join("\n"),
   );
 
@@ -597,6 +786,7 @@ export default async function checkDataPlaneReviewAlignment({ core, rootDir = pr
     await checkModelAlignment({ core, rootDir }),
     await checkFixtureLabelLeakage({ core, rootDir }),
     await checkGraderSoundness({ core, rootDir }),
+    await checkReportFormatContract({ core, rootDir }),
   ];
 
   return results.every(Boolean);

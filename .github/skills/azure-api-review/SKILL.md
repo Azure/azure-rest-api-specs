@@ -64,6 +64,7 @@ must not load the other plane's files** -- see "Anti-inheritance" below.
 | Reference                                                                               | Rule Area                                                                        | Key Rule IDs             |
 | --------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | ------------------------ |
 | [data-plane-linter-rule-coverage.md](references/data-plane-linter-rule-coverage.md)     | `typespec-azure-core` rule → agent-behavior interlock (**read this first**)      | --                       |
+| [data-plane-report-format.md](references/data-plane-report-format.md)                   | Finding syntax, severity glyphs, document shape (**authoritative**)              | --                       |
 | [data-plane-resource-modeling.md](references/data-plane-resource-modeling.md)           | Addressability, actions-vs-CRUD, operation symmetry, versioning/breaking changes | DP-MODEL-_, DP-VERSION-_ |
 | [data-plane-lro-and-paging.md](references/data-plane-lro-and-paging.md)                 | Status-monitor contract, polling linkage, paging shape and consistency           | DP-LRO-_, DP-PAGE-_      |
 | [data-plane-error-design.md](references/data-plane-error-design.md)                     | Stable `code` values, `target`, actionable messages, `innererror`                | DP-ERR-\*                |

@@ -119,6 +119,9 @@ Load from the [`azure-api-review`](../skills/azure-api-review/SKILL.md) skill.
 
 - [`data-plane-linter-rule-coverage.md`](../skills/azure-api-review/references/data-plane-linter-rule-coverage.md)
   -- the interlock. Determines what you are allowed to report at all.
+- [`data-plane-report-format.md`](../skills/azure-api-review/references/data-plane-report-format.md)
+  -- the finding syntax and severity vocabulary you must emit. **Authoritative.**
+  This file does not restate it.
 
 **Data-plane rule references:**
 
@@ -307,97 +310,33 @@ You have no mutating GitHub tools and must not attempt to acquire any.
 
 ---
 
-## Report format
+## Report format and severity
 
-Identify yourself as an agent in the first line. This is required: the report
-may be posted verbatim to a PR, and readers must know it is machine-generated.
+**Defined in
+[`data-plane-report-format.md`](../skills/azure-api-review/references/data-plane-report-format.md),
+which is authoritative.** Read it and follow it exactly. It specifies the
+bracketed `[DP-XXX-NN]` finding syntax, the 🔴/🟡/💡 severity glyphs and when
+each applies, the document shape, the 15-finding cap, and the "no findings"
+form.
 
-````markdown
-## Data-Plane API Review
+It lives in the skill rather than here because the eval harness loads the skill
+and has no concept of an agent file. A format defined only in this file is
+invisible to every eval that grades it -- which was a real defect, not a
+hypothetical one. Do not restate the format here; a second copy is what let the
+two drift apart.
 
-_Automated review by Copilot (data-plane API reviewer agent). Reviewed
-`<n>` TypeSpec file(s) at `<short-sha>` against the Azure REST API Guidelines.
-This is advisory and does not replace human API review._
+Three points are repeated below only because they are the ones most often got
+wrong, and getting them wrong is expensive:
 
-<!-- when there are no findings -->
-
-No findings. The changed data-plane TypeSpec looks consistent with the
-Guidelines in the areas this review covers (resource modeling, versioning,
-error design, LRO/paging, visibility, naming clarity, documentation quality).
-
-<!-- when there are findings -->
-
-### 🔴 Blocking
-
-**[DP-VIS-02] Secret readable in response** --
-`specification/foo/data-plane/Foo/models.tsp:42`
-
-```tsp
-accountKey: string;
-```
-
-`accountKey` is readable, so it is returned by both `get` and `list`. Per
-[Azure REST API Guidelines -- Sensitive data](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md),
-credentials must not be returned in resource bodies.
-
-**Fix:** mark it `@secret` with write-only visibility, and expose it through a
-dedicated `:listKeys` operation.
-
-```tsp
-@secret
-@visibility(Lifecycle.Create, Lifecycle.Update)
-accountKey: string;
-```
-
-### 🟡 Warning
-
-...
-
-### 💡 Suggestion
-
-...
-
-### Questions
-
-- ... (grey areas from `data-plane-design-decisions.md` -- present the
-  trade-off, do not decide)
-
----
-
-**Not reviewed:** items enforced by `@azure-tools/typespec-azure-core`
-(reported by CI, not here) and guideline statements about runtime service
-behavior, which are not observable in a specification.
-````
-
-Rules for the report:
-
-- **Order:** Blocking, Warning, Suggestion, Questions. Within a severity, by
-  file then line.
-- **Cap:** at most 15 findings. If more survive, keep the highest-severity 15
-  and state the count that was omitted. A 40-item report does not get read.
-- **Group** naming and doc findings of the same kind into one entry with
-  multiple line references.
-- **Every finding** carries a rule ID, a `file:line`, a quoted source excerpt,
-  a reason, and a concrete fix. No fix, no finding.
-- **No praise sections, no summary of what the PR does, no restating the diff.**
-  The author knows what they wrote.
-- **Never** claim CI status you have not read, and never duplicate a finding CI
-  already reported.
-
-## Severity
-
-| Severity      | Meaning                                                      | Use when                                                                                                        |
-| ------------- | ------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------- |
-| 🔴 Blocking   | Ships a defect that is expensive or impossible to fix later. | Secret exposure; breaking change in a stable version; CRUD-in-disguise in a new service's first stable version. |
-| 🟡 Warning    | Should be fixed; will cause customer or SDK pain.            | Most `DP-*` rule violations.                                                                                    |
-| 💡 Suggestion | Improvement, or a grey-area trade-off.                       | Everything from `data-plane-design-decisions.md`; most doc findings.                                            |
-| Question      | You are not sure, and the author has context you lack.       | Whenever the honest answer is "it depends".                                                                     |
-
-**Blocking is rare.** For a maintenance-edit PR, Blocking is reserved for
-secret exposure and breaking changes -- nothing else. If a run produces more
-than three Blocking findings, re-read them: you are probably over-escalating,
-which is the documented failure mode of the ARM reviewer
-(`evals/arm-api-reviewer/README.md` §Known limitations).
+- **Brackets mark a finding.** `**[DP-VIS-02] Title**` is a finding you are
+  raising. A rule you considered and declined to raise is written bare --
+  `DP-VIS-02` -- with no brackets. Graders depend on that distinction, and so
+  does any human skimming your output.
+- **Severity glyphs are section headings only**, never mid-sentence.
+- **Blocking is rare.** For a maintenance-edit PR it is secret exposure and
+  breaking changes, nothing else. More than three in one run means you are
+  over-escalating -- the documented failure mode of the ARM reviewer
+  (`evals/arm-api-reviewer/README.md` §Known limitations).
 
 ## Silence checklist
 

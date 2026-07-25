@@ -3,10 +3,12 @@ import { tmpdir } from "os";
 import { dirname, join } from "path";
 import { describe, expect, it } from "vitest";
 import checkDataPlaneReviewAlignment, {
+  AGENT_FILE,
   checkFixtureLabelLeakage,
   checkGraderSoundness,
   checkLinterAlignment,
   checkModelAlignment,
+  checkReportFormatContract,
   compileGraderPattern,
   CORRECT_SILENCE_PROBE,
   COVERAGE_FILE,
@@ -19,6 +21,7 @@ import checkDataPlaneReviewAlignment, {
   getPinnedVersion,
   getVerifiedVersion,
   REAL_FINDINGS_PROBE,
+  REPORT_FORMAT_FILE,
   WORKFLOW_FILE,
 } from "../src/data-plane-review-alignment.js";
 import { createMockCore } from "./mocks.js";
@@ -476,6 +479,126 @@ describe("checkGraderSoundness", () => {
     await expect(checkGraderSoundness({ core, rootDir })).resolves.toBe(false);
 
     expect(core.setFailed).toBeCalledWith(expect.stringContaining("inert"));
+  });
+});
+
+describe("checkReportFormatContract", () => {
+  it("passes on the real repository", async () => {
+    const core = createMockCore();
+
+    await expect(checkReportFormatContract({ core, rootDir: REAL_ROOT })).resolves.toBe(true);
+
+    expect(core.setFailed).not.toBeCalled();
+  });
+
+  it("catches the original defect: format defined only in the agent file", async () => {
+    // The regression this check exists for. vally loads the skill, not the
+    // agent, so a contract that lives only in the agent file is invisible to
+    // every eval that grades it.
+    const core = createMockCore();
+    const rootDir = await createFixtureRepo();
+    await writeNested(join(rootDir, AGENT_FILE), "# Agent\n\n**[DP-VIS-02] Title** -- `a.tsp:1`\n");
+
+    await expect(checkReportFormatContract({ core, rootDir })).resolves.toBe(false);
+
+    expect(core.setFailed).toBeCalledWith(expect.stringContaining("is missing"));
+  });
+
+  it("requires the contract to show the bracketed finding syntax", async () => {
+    const core = createMockCore();
+    const rootDir = await createFixtureRepo();
+    await writeNested(
+      join(rootDir, REPORT_FORMAT_FILE),
+      "# Format\n\nReport findings as DP-VIS-02 with a file and line.\n\n🔴 🟡 💡\n",
+    );
+    await writeNested(join(rootDir, AGENT_FILE), "See data-plane-report-format.md.\n");
+
+    await expect(checkReportFormatContract({ core, rootDir })).resolves.toBe(false);
+
+    expect(core.setFailed).toBeCalledWith(expect.stringContaining("bracketed"));
+  });
+
+  it("requires the contract to define every severity glyph", async () => {
+    const core = createMockCore();
+    const rootDir = await createFixtureRepo();
+    await writeNested(
+      join(rootDir, REPORT_FORMAT_FILE),
+      "# Format\n\n**[DP-VIS-02] Title** -- `a.tsp:1`\n\n🔴 only\n",
+    );
+    await writeNested(join(rootDir, AGENT_FILE), "See data-plane-report-format.md.\n");
+
+    await expect(checkReportFormatContract({ core, rootDir })).resolves.toBe(false);
+
+    expect(core.setFailed).toBeCalledWith(expect.stringContaining("🟡"));
+  });
+
+  it("rejects an agent file that restates the template instead of deferring", async () => {
+    const core = createMockCore();
+    const rootDir = await createFixtureRepo();
+    await writeNested(
+      join(rootDir, REPORT_FORMAT_FILE),
+      "# Format\n\n**[DP-VIS-02] Title** -- `a.tsp:1`\n\n🔴 🟡 💡\n",
+    );
+    await writeNested(
+      join(rootDir, AGENT_FILE),
+      [
+        "See data-plane-report-format.md.",
+        "",
+        "```markdown",
+        "## Data-Plane API Review",
+        "",
+        "_Automated review by Copilot (data-plane API reviewer agent)._",
+        "```",
+      ].join("\n"),
+    );
+
+    await expect(checkReportFormatContract({ core, rootDir })).resolves.toBe(false);
+
+    expect(core.setFailed).toBeCalledWith(expect.stringContaining("own copy of the report"));
+  });
+
+  it("rejects an agent file that does not reference the contract", async () => {
+    const core = createMockCore();
+    const rootDir = await createFixtureRepo();
+    await writeNested(
+      join(rootDir, REPORT_FORMAT_FILE),
+      "# Format\n\n**[DP-VIS-02] Title** -- `a.tsp:1`\n\n🔴 🟡 💡\n",
+    );
+    await writeNested(join(rootDir, AGENT_FILE), "# Agent\n\nNo pointer here.\n");
+
+    await expect(checkReportFormatContract({ core, rootDir })).resolves.toBe(false);
+
+    expect(core.setFailed).toBeCalledWith(expect.stringContaining("does not reference"));
+  });
+
+  it("rejects a positive grader using a syntax the contract does not teach", async () => {
+    const core = createMockCore();
+    const rootDir = await createFixtureRepo();
+    await writeNested(
+      join(rootDir, REPORT_FORMAT_FILE),
+      "# Format\n\n**[DP-VIS-02] Title** -- `a.tsp:1`\n\n🔴 🟡 💡\n",
+    );
+    await writeNested(join(rootDir, AGENT_FILE), "See data-plane-report-format.md.\n");
+    await writeNested(
+      join(rootDir, EVAL_DIR, GATE_EVAL_FILE),
+      [
+        "name: gate",
+        "defaults:",
+        "  model: claude-opus-4.6",
+        `  judge_model: ${FROZEN_JUDGE_MODEL}`,
+        "stimuli:",
+        "  - name: positive-example",
+        "    graders:",
+        "      - type: output-matches",
+        '        name: "reports something"',
+        "        config:",
+        '          pattern: "(?i)\\\\bfound a problem\\\\b"',
+      ].join("\n"),
+    );
+
+    await expect(checkReportFormatContract({ core, rootDir })).resolves.toBe(false);
+
+    expect(core.setFailed).toBeCalledWith(expect.stringContaining("does not teach"));
   });
 });
 
