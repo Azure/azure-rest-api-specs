@@ -3,7 +3,7 @@ name: azure-api-review
 license: MIT
 metadata:
   version: "1.0.0"
-description: "Shared Azure REST API review rules for OpenAPI (Swagger) and TypeSpec specifications. Contains cross-cutting review guidelines used by ARM API reviewers, code review agents, and CI workflows. USE FOR: reviewing API specs for naming, security, property design, resource lifecycle, and versioning compliance. DO NOT USE FOR: authoring TypeSpec files (use azure-typespec-author), SDK generation, or releasing packages."
+description: "Shared Azure REST API review rules for OpenAPI (Swagger) and TypeSpec specifications. Contains cross-cutting review guidelines plus plane-specific references used by the ARM and data-plane API reviewers, code review agents, and CI workflows. USE FOR: reviewing API specs for naming, security, property design, resource lifecycle, error design, and versioning compliance. DO NOT USE FOR: authoring TypeSpec files (use azure-typespec-author), SDK generation, or releasing packages."
 ---
 
 # Azure API Review -- Shared Rules
@@ -25,13 +25,28 @@ Each reference file covers one cross-cutting rule area with:
 - Format-specific guidance for OpenAPI JSON and TypeSpec
 - Rule IDs for citation in review findings
 
+References are grouped by the plane they apply to. **A reviewer for one plane
+must not load the other plane's files** -- see "Anti-inheritance" below.
+
+### Cross-cutting (both planes)
+
+| Reference                                                         | Rule Area                                                                          | Key Rule IDs                                  |
+| ----------------------------------------------------------------- | ---------------------------------------------------------------------------------- | --------------------------------------------- |
+| [secret-detection.md](references/secret-detection.md)             | Proactive secret detection in API properties                                       | SEC-SECRET-DETECT                             |
+| [pattern-validation.md](references/pattern-validation.md)         | Allowlist vs. denylist `pattern` constraints; Unicode bypass risk; severity matrix | OAPI-PATTERN-ALLOWLIST                        |
+| [think-in-graphs.md](references/think-in-graphs.md)               | Whole-graph review method: orphans, asymmetry, cross-model reachability            | --                                            |
+| [example-quality.md](references/example-quality.md)               | Example file quality: orphan detection, coverage, descriptive values               | EX-ORPHAN, EX-COVERAGE, EX-DESCRIPTIVE-VALUES |
+| [enum-best-practices.md](references/enum-best-practices.md)       | Enum extensibility and boolean alternatives                                        | --                                            |
+| [downstream-ci-impact.md](references/downstream-ci-impact.md)     | Do not recommend a fix that trips a required CI check                              | --                                            |
+| [reviewer-posted-parity.md](references/reviewer-posted-parity.md) | Presented-vs-posted parity (interactive chat reviewers only)                       | --                                            |
+
+### ARM control-plane only
+
 | Reference                                                                     | Rule Area                                                                                    | Key Rule IDs                                         |
 | ----------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
-| [secret-detection.md](references/secret-detection.md)                         | Proactive secret detection in API properties                                                 | SEC-SECRET-DETECT                                    |
 | [property-mutability.md](references/property-mutability.md)                   | Write-only, conditional read-only, immutability, update tolerance, and field ownership rules | OAPI027, OAPI020, OAPI029, OAPI030, OAPI031, OAPI034 |
 | [provisioning-state.md](references/provisioning-state.md)                     | `provisioningState` requirements for ARM resources                                           | RPC-Async-V1-02, RPC-Async-V1-03                     |
-| [naming-conventions.md](references/naming-conventions.md)                     | Naming, casing, and Azure terminology                                                        | --                                                   |
-| [enum-best-practices.md](references/enum-best-practices.md)                   | Enum extensibility and boolean alternatives                                                  | --                                                   |
+| [naming-conventions.md](references/naming-conventions.md)                     | Naming, casing, and Azure terminology (URL grammar is ARM-specific)                          | --                                                   |
 | [tracked-resource-lifecycle.md](references/tracked-resource-lifecycle.md)     | Required CRUD operations and resource move for tracked ARM resources                         | RPC-Put-V1-22, RPC-Get-V1-05, RPC003                 |
 | [policy-compatibility.md](references/policy-compatibility.md)                 | Azure Policy compatibility rules for API design                                              | PLCY001–PLCY009                                      |
 | [template-deployment.md](references/template-deployment.md)                   | ARM Template Deployment engine compatibility                                                 | TD001–TD003                                          |
@@ -39,11 +54,42 @@ Each reference file covers one cross-cutting rule area with:
 | [field-ownership.md](references/field-ownership.md)                           | Value preservation (array ordering, data types, casing)                                      | OAPI024, OAPI025, OAPI026                            |
 | [what-if-preflight-compliance.md](references/what-if-preflight-compliance.md) | What-If noise prevention and preflight validation contract                                   | WHATIF-001–005, PREFLIGHT-001–005                    |
 | [lro-final-state-via.md](references/lro-final-state-via.md)                   | LRO polling and `final-state-via` decision table                                             | --                                                   |
-| [suppression-review-criteria.md](references/suppression-review-criteria.md)   | Suppression approval/rejection decision framework                                            | RPC-SUPPRESS-GA, RPC-SUPPRESS-SCOPE                  |
-| [linter-rule-coverage.md](references/linter-rule-coverage.md)                 | Linter rule ID → instruction file mapping (130+ rules)                                       | --                                                   |
-| [example-quality.md](references/example-quality.md)                           | Example file quality: orphan detection, coverage, descriptive values                         | EX-ORPHAN, EX-COVERAGE, EX-DESCRIPTIVE-VALUES        |
+| [suppression-review-criteria.md](references/suppression-review-criteria.md)   | Suppression approval/rejection decision framework (readme.md directives)                     | RPC-SUPPRESS-GA, RPC-SUPPRESS-SCOPE                  |
+| [linter-rule-coverage.md](references/linter-rule-coverage.md)                 | LintDiff rule ID → instruction file mapping (130+ rules)                                     | --                                                   |
 | [design-decisions.md](references/design-decisions.md)                         | Grey-area design trade-off frameworks (10 decision matrices)                                 | DD-001–DD-010                                        |
-| [pattern-validation.md](references/pattern-validation.md)                     | Allowlist vs. denylist `pattern` constraints; Unicode bypass risk; severity matrix           | OAPI-PATTERN-ALLOWLIST                               |
+| [guid-and-uuid-on-arm.md](references/guid-and-uuid-on-arm.md)                 | Why ARM specs must not use `format: uuid` (**reversed** on the data plane)                   | --                                                   |
+
+### Data-plane only
+
+| Reference                                                                               | Rule Area                                                                        | Key Rule IDs             |
+| --------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | ------------------------ |
+| [data-plane-linter-rule-coverage.md](references/data-plane-linter-rule-coverage.md)     | `typespec-azure-core` rule → agent-behavior interlock (**read this first**)      | --                       |
+| [data-plane-resource-modeling.md](references/data-plane-resource-modeling.md)           | Addressability, actions-vs-CRUD, operation symmetry, versioning/breaking changes | DP-MODEL-_, DP-VERSION-_ |
+| [data-plane-lro-and-paging.md](references/data-plane-lro-and-paging.md)                 | Status-monitor contract, polling linkage, paging shape and consistency           | DP-LRO-_, DP-PAGE-_      |
+| [data-plane-error-design.md](references/data-plane-error-design.md)                     | Stable `code` values, `target`, actionable messages, `innererror`                | DP-ERR-\*                |
+| [data-plane-naming-and-docs.md](references/data-plane-naming-and-docs.md)               | Naming **clarity** (not casing) and documentation quality beyond presence        | DP-NAME-_, DP-DOC-_      |
+| [data-plane-visibility-and-secrets.md](references/data-plane-visibility-and-secrets.md) | `@visibility(Lifecycle.*)` consistency, write-only properties, secret exposure   | DP-VIS-\*                |
+| [data-plane-design-decisions.md](references/data-plane-design-decisions.md)             | Grey-area data-plane trade-off frameworks (6 decision matrices)                  | DDP-001–DDP-006          |
+
+### Anti-inheritance
+
+Two ARM references give **actively wrong** advice if applied to the data plane:
+
+- [`guid-and-uuid-on-arm.md`](references/guid-and-uuid-on-arm.md) forbids
+  `format: uuid`. That is an ARM-only reversal;
+  `openapi-review.instructions.md` §"Data types" requires data-plane specs to
+  **use** `format: uuid`. A data-plane reviewer must not load this file.
+- [`field-ownership.md`](references/field-ownership.md) (OAPI024/025/026)
+  describes runtime service behavior (array-order, type, and casing
+  preservation). It is unobservable in a spec and is explicitly out of scope for
+  the data-plane reviewer.
+
+One cross-cutting reference is scoped by consumer rather than by plane:
+
+- [`reviewer-posted-parity.md`](references/reviewer-posted-parity.md) applies
+  only to reviewers that post their own comments from an interactive session.
+  Agents whose only write channel is gh-aw `safe-outputs` never own the post and
+  must not implement its parity machinery.
 
 ## Authoritative External Sources
 
@@ -56,7 +102,7 @@ These external documents are the upstream authorities. When they conflict with e
 
 ## Design Principles
 
-These principles guide how the ARM API Reviewer agent, its instruction
+These principles guide how the API Reviewer agents, their instruction
 files, and reference files are designed and maintained:
 
 1. **Expert persona.** The agent operates as a seasoned
@@ -70,6 +116,15 @@ files, and reference files are designed and maintained:
    SDK, a security hole, or an inconsistency that millions of Azure
    customers will encounter. Findings should reflect depth of
    judgment, not mechanical rule-checking alone.
+
+   **Calibration differs by consumer.** For an interactive, human-driven
+   reviewer, a missed violation is the dominant cost. For an unattended
+   CI bot posting to a service team's PR, a false positive is: a bot that
+   is wrong gets muted, after which it catches nothing. The data-plane
+   reviewer therefore reports only what it can anchor to a specific line
+   and a specific guideline section, and treats silence as a valid
+   output.
+
 2. **Consistency and reusability.** Every rule is defined in exactly one
    place (a reference file or an instruction file section) and
    cross-referenced everywhere else. No duplication. When the same
@@ -109,7 +164,10 @@ consumption.
   always takes precedence.
 - Rules that overlap with existing linter checks are annotated with
   `(Also enforced by: ...)`. The review agent should check CI results
-  before flagging these to avoid duplicating linter findings.
+  before flagging these to avoid duplicating linter findings. For the
+  data plane this soft convention is replaced by a hard interlock --
+  [`data-plane-linter-rule-coverage.md`](references/data-plane-linter-rule-coverage.md),
+  whose header pin is enforced by the `data-plane-linter-alignment` CI check.
 - To avoid conflicts with the
   [azure-typespec-author](../../skills/azure-typespec-author/SKILL.md)
   skill (used for TypeSpec code generation), coordinate rule changes
@@ -141,3 +199,12 @@ The format-specific instruction files reference these shared rules:
 | `arm-api-review.instructions.md`  | `specification/**/resource-manager/**/*.json` | References shared rules + adds ARM-specific rules (path structure, PUT/PATCH/DELETE contracts, LRO, ARG compatibility) |
 | `openapi-review.instructions.md`  | `specification/**/*.json`                     | References shared rules + adds generic OpenAPI rules (file structure, x-ms extensions, examples, security definitions) |
 | `typespec-review.instructions.md` | `specification/**/*.tsp`                      | References shared rules + adds TypeSpec-specific rules (decorators, project structure, anti-patterns)                  |
+
+## Consumers
+
+| Consumer                                                                            | Loads                                        |
+| ----------------------------------------------------------------------------------- | -------------------------------------------- |
+| [`arm-api-reviewer.agent.md`](../../agents/arm-api-reviewer.agent.md)               | Cross-cutting + ARM control-plane references |
+| [`data-plane-api-reviewer.agent.md`](../../agents/data-plane-api-reviewer.agent.md) | Cross-cutting + data-plane references        |
+| [`copilot-review-instructions.md`](../../copilot-review-instructions.md)            | Cross-cutting references                     |
+| CI workflows                                                                        | Individual references as needed              |
