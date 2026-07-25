@@ -353,15 +353,17 @@ and nothing in the first run did — latent, not active. Noting it because it is
 the same defect, half-corrected: fixing the visible half of a pattern bug and
 leaving the rest is how this class survives review.
 
-### E. Immune
+### E. Immune — and the template to copy
 
 One grader: **`does not recommend the ARM polling contract`**
 (`Azure-AsyncOperation`, `final-state-via`,
 `x-ms-long-running-operation-options`). These tokens have no legitimate reason
 to appear in a data-plane review in any polarity, so mention _is_ the defect.
-This is the shape a sound mechanical grader has — match on vocabulary that
-cannot appear innocently, not on topic words that appear in both a finding and
-its refutation.
+
+**This is the property a sound mechanical grader has**, and it is the test to
+apply to any new one: match vocabulary that cannot appear innocently, never
+topic words that appear in both a finding and its refutation. If a candidate
+grader cannot meet it, prefer the LLM judge over a cleverer regex.
 
 ### Status: fixed
 
@@ -398,10 +400,42 @@ Every grader is tested against two probes: a "correctly declining" sample it
 must _not_ match, and a real report it _must_ match. A grader that fires on the
 first is unsound; one that misses the second is inert and passes vacuously.
 
-The LLM-judge `prompt` grader remains the load-bearing signal regardless — in
+The LLM-judge `prompt` grader remains the load-bearing signal regardless. In
 the first run it was the only grader that caught the real false positive and
-the only one that manufactured no false failures. The mechanical graders are
-there to make regressions cheap to spot, not to adjudicate quality.
+the only one that manufactured none — and that is evidence about **mechanical
+matchers in this domain generally**, not just about the specific broken
+patterns. Review output is prose that argues; a regex cannot tell an assertion
+from its refutation without a structural hook, and the bracketed-rule-ID form
+is the only such hook available. Where a candidate grader cannot be made to
+satisfy the "mention _is_ the defect" property that the ARM-polling grader has,
+**do not contort the regex — drop it and let the judge handle it.** A mechanical
+grader that is 90% right is worse than none, because its failures are silent
+and are trusted.
+
+The mechanical graders exist to make regressions cheap to spot, not to
+adjudicate quality.
+
+### Order the two fixes were applied, and why
+
+Fixtures first, graders second.
+
+The two interact — grader patterns are written against what the agent actually
+emits, and what the agent emits was being shaped by the leaked labels. Tuning
+graders against leaked-fixture behaviour would have calibrated them to an
+artifact: an agent told "silence is correct" produces different, shorter output
+than one reasoning from the spec alone, so a grader that looked sound against
+the former could be unsound against the latter.
+
+De-labelling also has no design content — it is unconditionally correct and
+there is no version of the suite that wants it left in. The grader rewrite did
+have a design decision (which structural hook distinguishes a finding from a
+mention), and that decision is better made once the inputs are clean.
+
+The ordering had no effect on the outcome in the end, because the hook turned
+out to come from the **report format** rather than from fixture content. But it
+would have mattered had the answer been "match the phrasing the agent tends to
+use", which was the other candidate and would have been calibrated to leaked
+behaviour.
 
 ## Known limitation: these evals test the skill, not the agent
 
