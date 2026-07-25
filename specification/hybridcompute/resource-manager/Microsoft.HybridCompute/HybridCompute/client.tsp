@@ -5,8 +5,7 @@ using Azure.ClientGenerator.Core;
 using Azure.ClientGenerator.Core.Legacy;
 using Microsoft.HybridCompute;
 
-@@clientName(
-  Microsoft.HybridCompute,
+@@clientName(Microsoft.HybridCompute,
   "HybridComputeManagementClient",
   "javascript,python"
 );
@@ -17,8 +16,7 @@ using Microsoft.HybridCompute;
 
 @@alternateType(Disk.id, Azure.Core.armResourceIdentifier, "csharp");
 
-@@alternateType(
-  NetworkInterface.id,
+@@alternateType(NetworkInterface.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
@@ -28,14 +26,12 @@ using Microsoft.HybridCompute;
 @@clientName(ExtensionType, "HybridComputeExtensionType", "csharp");
 @@clientName(IdentityKeyStore, "HybridComputeIdentityKeyStore", "csharp");
 @@clientName(OperationValue, "HybridComputeOperationValue", "csharp");
-@@clientName(
-  OperationValueDisplay,
+@@clientName(OperationValueDisplay,
   "HybridComputeOperationValueDisplay",
   "csharp"
 );
 @@clientName(ServiceExtension, "HybridComputeServiceExtension", "csharp");
-@@clientName(
-  ServiceExtensionPublicNetworkAccess,
+@@clientName(ServiceExtensionPublicNetworkAccess,
   "HybridComputeServiceExtensionPublicNetworkAccess",
   "csharp"
 );
@@ -61,40 +57,33 @@ union CustomPublicNetworkAccessType {
    */
   SecuredByPerimeter: "SecuredByPerimeter",
 }
-@@alternateType(
-  PublicNetworkAccessType,
+@@alternateType(PublicNetworkAccessType,
   CustomPublicNetworkAccessType,
   "javascript,python,go,csharp"
 );
-@@clientName(
-  CustomPublicNetworkAccessType,
+@@clientName(CustomPublicNetworkAccessType,
   "PublicNetworkAccessType",
   "javascript,python,go"
 );
-@@clientName(
-  CustomPublicNetworkAccessType,
+@@clientName(CustomPublicNetworkAccessType,
   "HybridComputePublicNetworkAccessType",
   "csharp"
 );
 
-@@clientName(
-  VMGuestPatchClassification_Windows,
+@@clientName(VMGuestPatchClassification_Windows,
   "VMGuestPatchClassificationWindows",
   "python"
 );
-@@clientName(
-  VMGuestPatchClassification_Linux,
+@@clientName(VMGuestPatchClassification_Linux,
   "VMGuestPatchClassificationLinux",
   "python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "To mitigate breaking change for legacy Python SDK"
-@@Legacy.clientDefaultValue(
-  LicenseProfileNameAlias.licenseProfileName,
+@@Legacy.clientDefaultValue(LicenseProfileNameAlias.licenseProfileName,
   "default",
   "python,csharp"
 );
-@@Azure.ClientGenerator.Core.alternateType(
-  LicenseProfileNameAlias.licenseProfileName,
+@@Azure.ClientGenerator.Core.alternateType(LicenseProfileNameAlias.licenseProfileName,
   "default"
 );
 @@clientLocation(Machines.setupExtensions, Microsoft.HybridCompute, "!go");
@@ -103,16 +92,14 @@ union CustomPublicNetworkAccessType {
 @@clientLocation(Machines.setupExtensions, "ManagementClient", "go");
 @@clientLocation(Machines.upgradeExtensions, "ManagementClient", "go");
 
-@@clientName(
-  Machines.getValidationDetailsForMachine,
+@@clientName(Machines.getValidationDetailsForMachine,
   "GetValidationDetailsForMachinePrivateLinkScope",
   "csharp"
 );
 
 // C# backward-compat renames to match GA SDK (AutoRest prepend-rp-prefix + rename-mapping)
 @@clientName(CloudMetadata, "HybridComputeCloudMetadata", "csharp");
-@@clientName(
-  ConfigurationExtension,
+@@clientName(ConfigurationExtension,
   "HybridComputeConfigurationExtension",
   "csharp"
 );
@@ -129,8 +116,7 @@ union CustomPublicNetworkAccessType {
 @@clientName(LicenseTarget, "HybridComputeLicenseTarget", "csharp");
 @@clientName(LicenseType, "HybridComputeLicenseType", "csharp");
 @@clientName(LinuxParameters, "HybridComputeLinuxParameters", "csharp");
-@@clientName(
-  Azure.ResourceManager.CommonTypes.LocationData,
+@@clientName(Azure.ResourceManager.CommonTypes.LocationData,
   "HybridComputeLocation",
   "csharp"
 );
@@ -141,15 +127,13 @@ union CustomPublicNetworkAccessType {
 @@clientName(NetworkProfile, "HybridComputeNetworkProfile", "csharp");
 @@clientName(OSProfile, "HybridComputeOSProfile", "csharp");
 @@clientName(OsType, "HybridComputeOSType", "csharp");
-@@clientName(
-  PrivateEndpointConnectionProperties,
+@@clientName(PrivateEndpointConnectionProperties,
   "HybridComputePrivateEndpointConnectionProperties",
   "csharp"
 );
 @@clientName(ProductFeature, "HybridComputeProductFeature", "csharp");
 @@clientName(ProvisioningState, "HybridComputeProvisioningState", "csharp");
-@@clientName(
-  PublicNetworkAccessType,
+@@clientName(PublicNetworkAccessType,
   "HybridComputePublicNetworkAccessType",
   "csharp"
 );
@@ -164,24 +148,20 @@ union CustomPublicNetworkAccessType {
 @@clientName(AccessRuleDirection, "HybridComputeAccessRuleDirection", "csharp");
 @@clientName(ProgramYear, "HybridComputeProgramYear", "csharp");
 @@clientName(ProvisioningIssue, "HybridComputeProvisioningIssue", "csharp");
-@@clientName(
-  ProvisioningIssueSeverity,
+@@clientName(ProvisioningIssueSeverity,
   "HybridComputeProvisioningIssueSeverity",
   "csharp"
 );
-@@clientName(
-  ProvisioningIssueType,
+@@clientName(ProvisioningIssueType,
   "HybridComputeProvisioningIssueType",
   "csharp"
 );
 @@clientName(LicenseProfile, "HybridComputeLicenseProfile", "csharp");
-@@clientName(
-  LicenseProfileUpdate,
+@@clientName(LicenseProfileUpdate,
   "HybridComputeLicenseProfilePatch",
   "csharp"
 );
-@@clientName(
-  ProductFeatureUpdate,
+@@clientName(ProductFeatureUpdate,
   "HybridComputeProductFeatureUpdate",
   "csharp"
 );
@@ -192,25 +172,21 @@ union CustomPublicNetworkAccessType {
 @@clientName(FirmwareProfile, "HybridComputeFirmwareProfile", "csharp");
 @@clientName(AssessmentModeTypes, "AssessmentModeType", "csharp");
 @@clientName(PatchModeTypes, "PatchModeType", "csharp");
-@@clientName(
-  VMGuestPatchClassification_Windows,
+@@clientName(VMGuestPatchClassification_Windows,
   "VmGuestPatchClassificationWindow",
   "csharp"
 );
-@@clientName(
-  VMGuestPatchClassification_Linux,
+@@clientName(VMGuestPatchClassification_Linux,
   "VmGuestPatchClassificationLinux",
   "csharp"
 );
 
 // C# rename-mapping equivalents
-@@clientName(
-  OSProfileLinuxConfiguration,
+@@clientName(OSProfileLinuxConfiguration,
   "HybridComputeLinuxConfiguration",
   "csharp"
 );
-@@clientName(
-  OSProfileWindowsConfiguration,
+@@clientName(OSProfileWindowsConfiguration,
   "HybridComputeWindowsConfiguration",
   "csharp"
 );
@@ -234,8 +210,7 @@ union CustomPublicNetworkAccessType {
 @@clientName(MachineProperties.osProfile, "OSProfile", "csharp");
 @@clientName(MachineUpdateProperties.osProfile, "OSProfile", "csharp");
 @@clientName(Machines.networkProfileGet, "GetNetworkProfile", "csharp");
-@@clientName(
-  PrivateEndpointConnection,
+@@clientName(PrivateEndpointConnection,
   "HybridComputePrivateEndpointConnection",
   "csharp"
 );
@@ -250,8 +225,7 @@ union CustomPublicNetworkAccessType {
 @@clientName(ArcKindEnum.AWS, "Aws", "csharp");
 
 // Type rename: MachineInstallPatchesParameters -> MachineInstallPatchesContent
-@@clientName(
-  MachineInstallPatchesParameters,
+@@clientName(MachineInstallPatchesParameters,
   "MachineInstallPatchesContent",
   "csharp"
 );
@@ -268,8 +242,7 @@ union CustomPublicNetworkAccessType {
 @@clientName(MachineProperties.osVersion, "OSVersion", "csharp");
 
 // AgentUpgrade property renames
-@@clientName(
-  AgentUpgrade.enableAutomaticUpgrade,
+@@clientName(AgentUpgrade.enableAutomaticUpgrade,
   "IsAutomaticUpgradeEnabled",
   "csharp"
 );
@@ -279,8 +252,7 @@ union CustomPublicNetworkAccessType {
 @@clientName(PatchSettings.enableHotpatching, "IsHotpatchingEnabled", "csharp");
 
 // ConfigurationExtension.type -> ConfigurationExtensionType
-@@clientName(
-  ConfigurationExtension.type,
+@@clientName(ConfigurationExtension.type,
   "ConfigurationExtensionType",
   "csharp"
 );
@@ -302,8 +274,7 @@ union CustomPublicNetworkAccessType {
 @@clientName(EsuServerType.Datacenter, "DataCenter", "csharp");
 
 // LicenseProfileProductType enum member rename
-@@clientName(
-  LicenseProfileProductType.WindowsIoTEnterprise,
+@@clientName(LicenseProfileProductType.WindowsIoTEnterprise,
   "WindowsIotEnterprise",
   "csharp"
 );
@@ -314,15 +285,13 @@ union CustomPublicNetworkAccessType {
 @@clientName(PatchServiceUsed.YUM, "Yum", "csharp");
 
 // PrivateEndpointConnectionProperties.privateLinkServiceConnectionState -> ConnectionState
-@@clientName(
-  PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
+@@clientName(PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
   "ConnectionState",
   "csharp"
 );
 
 // MachineAssessPatchesResult property renames
-@@clientName(
-  MachineAssessPatchesResult.rebootPending,
+@@clientName(MachineAssessPatchesResult.rebootPending,
   "IsRebootPending",
   "csharp"
 );
@@ -330,25 +299,21 @@ union CustomPublicNetworkAccessType {
 @@clientName(MachineInstallPatchesResult.osType, "OSType", "csharp");
 
 // MachineExtension type property renames (old AutoRest SDK used model-qualified names)
-@@clientName(
-  MachineExtensionProperties.type,
+@@clientName(MachineExtensionProperties.type,
   "MachineExtensionPropertiesType",
   "csharp"
 );
-@@clientName(
-  MachineExtensionInstanceView.type,
+@@clientName(MachineExtensionInstanceView.type,
   "MachineExtensionInstanceViewType",
   "csharp"
 );
-@@clientName(
-  MachineExtensionUpdateProperties.type,
+@@clientName(MachineExtensionUpdateProperties.type,
   "MachineExtensionUpdatePropertiesType",
   "csharp"
 );
 
 // LicenseProfileMachineInstanceView.softwareAssuranceCustomer -> IsSoftwareAssuranceCustomer
-@@clientName(
-  LicenseProfileMachineInstanceViewSoftwareAssurance.softwareAssuranceCustomer,
+@@clientName(LicenseProfileMachineInstanceViewSoftwareAssurance.softwareAssuranceCustomer,
   "IsSoftwareAssuranceCustomer",
   "csharp"
 );
@@ -359,15 +324,13 @@ union CustomPublicNetworkAccessType {
 @@alternateType(MachineProperties.vmUuid, Azure.Core.uuid, "csharp");
 
 // armResourceIdentifier alternate type: old AutoRest SDK generated ResourceIdentifier for gatewayId
-@@alternateType(
-  GatewayProperties.gatewayId,
+@@alternateType(GatewayProperties.gatewayId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
 
 // C# API review naming/type fixes for new TypeSpec-generated surface
-@@alternateType(
-  MachineProperties.hardwareResourceId,
+@@alternateType(MachineProperties.hardwareResourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
@@ -376,8 +339,7 @@ union CustomPublicNetworkAccessType {
 // MachineRunCommandData backward compatibility with the existing SDK API.
 @@alternateType(MachineRunCommandProperties.outputBlobUri, url, "csharp");
 @@alternateType(MachineRunCommandProperties.errorBlobUri, url, "csharp");
-@@clientName(
-  MachineRunCommandProperties.asyncExecution,
+@@clientName(MachineRunCommandProperties.asyncExecution,
   "IsAsyncExecution",
   "csharp"
 );
@@ -389,38 +351,43 @@ union CustomPublicNetworkAccessType {
 @@alternateType(RunCommandManagedIdentity.objectId, Azure.Core.uuid, "csharp");
 
 // C# backward-compat fixes for ApiCompat issues found during MPG migration.
-@@alternateType(
-  PrivateEndpointProperty.id,
+@@alternateType(PrivateEndpointProperty.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(
-  PrivateEndpointConnectionDataModel.id,
+@@alternateType(PrivateEndpointConnectionDataModel.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the previous .NET resource-data shape for backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
-  PrivateEndpointConnectionDataModel,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(PrivateEndpointConnectionDataModel,
   Azure.ResourceManager.Foundations.ProxyResource,
   "csharp"
 );
 
 @@usage(PrivateLinkResource, Usage.input | Usage.output, "csharp");
 @@usage(PrivateLinkResourceProperties, Usage.input | Usage.output, "csharp");
-@@usage(
-  LicenseProfileMachineInstanceView,
+@@usage(LicenseProfileMachineInstanceView,
   Usage.input | Usage.output,
   "csharp"
 );
-@@usage(
-  LicenseProfileMachineInstanceViewSoftwareAssurance,
+@@usage(LicenseProfileMachineInstanceViewSoftwareAssurance,
   Usage.input | Usage.output,
   "csharp"
 );
-@@usage(
-  LicenseProfileArmProductProfileProperties,
+@@usage(LicenseProfileArmProductProfileProperties,
   Usage.input | Usage.output,
   "csharp"
+);
+
+// Java backward-compat: preserve the original SDK type names after the common-types bump
+// (Identity -> ManagedServiceIdentity, ResourceIdentityType -> ManagedServiceIdentityType).
+@@clientName(Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "Identity",
+  "java"
+);
+@@clientName(Azure.ResourceManager.CommonTypes.ManagedServiceIdentityType,
+  "ResourceIdentityType",
+  "java"
 );
