@@ -1,0 +1,12 @@
+- tool: TypeSpecValidation
+  paths:
+    - tspconfig.yaml
+  rules:
+    - SdkTspConfigValidation
+  sub-rules:
+    # Suppress validation for Go emitter - intentionally not generating Go SDK due to emitter bug
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.emitter-output-dir
+    - options.@azure-tools/typespec-go.module
+    - options.@azure-tools/typespec-go.containing-module
+  reason: 'Go SDK generation removed due to emitter bug with parameter expansion (unexpected correspondingMethodParams.length of 10). Only generating C#, Java, TypeScript, and Python SDKs.'
