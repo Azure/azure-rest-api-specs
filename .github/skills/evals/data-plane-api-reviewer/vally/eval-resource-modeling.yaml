@@ -23,6 +23,8 @@ scoring:
 stimuli:
   - name: crud-in-disguise-post-actions
     environment:
+      skills:
+        - "../../../azure-api-review"
       files:
         - src: "../fixtures/typespec-data-plane/crud-in-disguise.tsp"
           dest: "specification/widgetstore/data-plane/Contoso.WidgetStore/stable/2026-01-01/widgets.tsp"
@@ -52,6 +54,8 @@ stimuli:
 
   - name: unaddressable-query-only-model
     environment:
+      skills:
+        - "../../../azure-api-review"
       files:
         - src: "../fixtures/typespec-data-plane/resource-modeling-smell.tsp"
           dest: "specification/telemetrystore/data-plane/Contoso.TelemetryStore/stable/2026-01-01/telemetry.tsp"

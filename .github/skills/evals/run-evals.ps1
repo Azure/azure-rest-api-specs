@@ -159,7 +159,20 @@ $OutputEncoding = [System.Text.Encoding]::UTF8
     Counting from the recorded output rather than from graders means new stimuli
     are picked up automatically with no grader changes.
 
-    Returns a PSCustomObject with StimulusCount, Blocking, and NonBlocking.
+    Returns a PSCustomObject with StimulusCount, Blocking, NonBlocking, and
+    Observed. `Observed` is $true when at least one severity glyph was counted
+    in the mandated position, i.e. the agent actually spoke this report
+    format's vocabulary at least once.
+
+    Observed alone does not validate the counts. The real check is
+    reconciliation against Get-TrueNegativeGraderFailures: if the graders
+    failed trials while this function counted nothing, the two are measuring
+    different things and the zeros here are blind, not clean. That is not
+    hypothetical -- the first real run of the data-plane suite produced a
+    genuine invented finding and 12 failed trials while this function
+    reported 0 blocking / 0 non-blocking, because vally has no concept of an
+    agent file and the 🔴/🟡/💡 vocabulary defined in
+    `.github/agents/data-plane-api-reviewer.agent.md` was never in play.
 #>
 function Get-TrueNegativeFindingCounts {
     param([string]$JsonlPath)
@@ -167,9 +180,10 @@ function Get-TrueNegativeFindingCounts {
     $blocking = 0
     $nonBlocking = 0
     $stimulusCount = 0
+    $glyphSeen = $false
 
     if (-not (Test-Path $JsonlPath)) {
-        return [PSCustomObject]@{ StimulusCount = 0; Blocking = 0; NonBlocking = 0 }
+        return [PSCustomObject]@{ StimulusCount = 0; Blocking = 0; NonBlocking = 0; Observed = $false }
     }
 
     foreach ($line in (Get-Content $JsonlPath)) {
@@ -206,9 +220,9 @@ function Get-TrueNegativeFindingCounts {
         # findings, not a finding.
         $logicalLines = [regex]::Split($line, '(?:\\r)?\\n|\r?\n')
         foreach ($ll in $logicalLines) {
-            if ($ll -match "^\s*(?:[-*+]\s*|#{1,6}\s*)?`u{1F534}") { $blocking++ }
-            if ($ll -match "^\s*(?:[-*+]\s*|#{1,6}\s*)?`u{1F7E1}") { $nonBlocking++ }
-            if ($ll -match "^\s*(?:[-*+]\s*|#{1,6}\s*)?`u{1F4A1}") { $nonBlocking++ }
+            if ($ll -match "^\s*(?:[-*+]\s*|#{1,6}\s*)?`u{1F534}") { $blocking++; $glyphSeen = $true }
+            if ($ll -match "^\s*(?:[-*+]\s*|#{1,6}\s*)?`u{1F7E1}") { $nonBlocking++; $glyphSeen = $true }
+            if ($ll -match "^\s*(?:[-*+]\s*|#{1,6}\s*)?`u{1F4A1}") { $nonBlocking++; $glyphSeen = $true }
         }
     }
 
@@ -216,6 +230,61 @@ function Get-TrueNegativeFindingCounts {
         StimulusCount = $stimulusCount
         Blocking      = $blocking
         NonBlocking   = $nonBlocking
+        Observed      = $glyphSeen
+    }
+}
+
+<#
+.SYNOPSIS
+    Counts failed true-negative trials from grader outcomes.
+
+.DESCRIPTION
+    The severity-glyph metric above measures how LOUD a false positive was.
+    This one measures whether one happened at all, by reading the graders'
+    verdicts rather than the agent's formatting. It is the metric the
+    "a single true-negative failure is blocking" rule is written against.
+
+    Two independent signals are needed because they fail differently: the
+    glyph metric goes blind when the report format is absent, and the grader
+    metric inherits whatever bugs live in the grader patterns. Neither alone
+    is trustworthy; a disagreement between them is itself a finding.
+
+    Returns StimulusCount (trials), FailedTrials, and FailedStimuli (names).
+#>
+function Get-TrueNegativeGraderFailures {
+    param([string]$JsonlPath)
+
+    $failedTrials = 0
+    $trials = 0
+    $failedNames = New-Object System.Collections.Generic.HashSet[string]
+
+    if (-not (Test-Path $JsonlPath)) {
+        return [PSCustomObject]@{ StimulusCount = 0; FailedTrials = 0; FailedStimuli = @() }
+    }
+
+    foreach ($line in (Get-Content $JsonlPath)) {
+        if (-not $line.Trim()) { continue }
+        try { $rec = $line | ConvertFrom-Json } catch { continue }
+        if ($null -eq $rec.PSObject.Properties['trajectory'] -or $null -eq $rec.trajectory) { continue }
+        if ($null -eq $rec.trajectory.PSObject.Properties['stimulus'] -or $null -eq $rec.trajectory.stimulus) { continue }
+
+        $stimName = $rec.trajectory.stimulus.name
+        if (-not $stimName -or $stimName -notlike 'tn-*') { continue }
+
+        $trials++
+        $passed = ($null -ne $rec.PSObject.Properties['gradeResult'] -and
+                   $null -ne $rec.gradeResult -and
+                   $rec.gradeResult.passed -eq $true)
+        if (-not $passed) {
+            $failedTrials++
+            $null = $failedNames.Add($stimName)
+        }
+    }
+
+    return [PSCustomObject]@{
+        StimulusCount = $trials
+        FailedTrials  = $failedTrials
+        FailedStimuli = @($failedNames)
     }
 }
 
@@ -602,17 +671,43 @@ for ($runIndex = 1; $runIndex -le $Repeat; $runIndex++) {
         #                     about to start ignoring the bot.
         #
         # Counted mechanically from the severity glyphs in the recorded agent
-        # output, so no grader change is needed when stimuli are added.
+        # output, so no grader change is needed when stimuli are added --
+        # but see `Observed` below: when the report format never appears the
+        # counts are blind, and a blind metric must not print 0.
         $tnMetrics = Get-TrueNegativeFindingCounts -JsonlPath $jsonlFile
+        $tnGrader  = Get-TrueNegativeGraderFailures -JsonlPath $jsonlFile
+        # The glyph counts are only trustworthy when they agree with the
+        # graders. Graders failing while the glyph counter sees nothing means
+        # the counter is blind to whatever the agent actually emitted -- print
+        # UNMEASURED rather than a zero that reads like a pass.
+        $tnGlyphBlind = ($tnGrader.FailedTrials -gt 0 -and
+                         ($tnMetrics.Blocking + $tnMetrics.NonBlocking) -eq 0)
         if ($tnMetrics.StimulusCount -gt 0) {
-            $blockingColor = if ($tnMetrics.Blocking -eq 0) { "Green" } else { "Red" }
             Write-Host "  True-negative false positives:" -ForegroundColor DarkGray
-            Write-Host ("    Stimuli evaluated : {0}" -f $tnMetrics.StimulusCount) -ForegroundColor DarkGray
-            Write-Host ("    Blocking FPs      : {0}   [GATING -- must be 0]" -f $tnMetrics.Blocking) -ForegroundColor $blockingColor
-            Write-Host ("    Non-blocking FPs  : {0}   [tracked, not gating -- watch the trend]" -f $tnMetrics.NonBlocking) -ForegroundColor DarkYellow
-            if ($tnMetrics.StimulusCount -gt 0) {
+            Write-Host ("    Trials evaluated  : {0}" -f $tnMetrics.StimulusCount) -ForegroundColor DarkGray
+
+            if (-not $tnGlyphBlind) {
+                $blockingColor = if ($tnMetrics.Blocking -eq 0) { "Green" } else { "Red" }
+                Write-Host ("    Blocking FPs      : {0}   [GATING -- must be 0]" -f $tnMetrics.Blocking) -ForegroundColor $blockingColor
+                Write-Host ("    Non-blocking FPs  : {0}   [tracked, not gating -- watch the trend]" -f $tnMetrics.NonBlocking) -ForegroundColor DarkYellow
                 $fpPerStimulus = [math]::Round($tnMetrics.NonBlocking / $tnMetrics.StimulusCount, 2)
                 Write-Host ("    Non-blocking/stim : {0}" -f $fpPerStimulus) -ForegroundColor DarkYellow
+            } else {
+                Write-Host "    Blocking FPs      : UNMEASURED   [GATING -- treated as NOT met]" -ForegroundColor Red
+                Write-Host "    Non-blocking FPs  : UNMEASURED" -ForegroundColor Red
+                Write-Host ("      {0} true-negative trial(s) failed but the severity-glyph counter" -f $tnGrader.FailedTrials) -ForegroundColor DarkYellow
+                Write-Host "      found no findings in the mandated report format. The two metrics" -ForegroundColor DarkYellow
+                Write-Host "      disagree, so the glyph counts are blind rather than clean." -ForegroundColor DarkYellow
+                Write-Host "      Read the failing outputs before trusting any FP number." -ForegroundColor DarkYellow
+            }
+
+            # Grader-derived, independent of the agent's formatting. This is
+            # the signal the "a single true-negative failure is blocking" rule
+            # is written against.
+            $tnFailColor = if ($tnGrader.FailedTrials -eq 0) { "Green" } else { "Red" }
+            Write-Host ("    TN trials failed  : {0}/{1}   [GATING -- must be 0]" -f $tnGrader.FailedTrials, $tnGrader.StimulusCount) -ForegroundColor $tnFailColor
+            if ($tnGrader.FailedTrials -gt 0) {
+                Write-Host ("      Stimuli: {0}" -f (($tnGrader.FailedStimuli | Sort-Object) -join ", ")) -ForegroundColor Red
             }
             Write-Host ""
         }
@@ -639,6 +734,8 @@ for ($runIndex = 1; $runIndex -le $Repeat; $runIndex++) {
         TnStimuli   = $tnMetrics.StimulusCount
         TnBlockFp   = $tnMetrics.Blocking
         TnSoftFp    = $tnMetrics.NonBlocking
+        TnObserved  = (-not $tnGlyphBlind)
+        TnFailed    = $tnGrader.FailedTrials
         DurationMin = [math]::Round($evalDuration.TotalMinutes, 1)
         ExitCode    = $evalExitCode
         OutputDir   = $outputDir
@@ -648,6 +745,18 @@ for ($runIndex = 1; $runIndex -le $Repeat; $runIndex++) {
     # Surface the worst exit code so CI can gate on it.
     if ($evalExitCode -ne 0 -and $overallExitCode -eq 0) {
         $overallExitCode = $evalExitCode
+    }
+
+    # vally's own pass/fail uses `scoring.threshold`, which is an aggregate:
+    # a suite can score above threshold while individual stimuli fail. That is
+    # reasonable for a capability suite and wrong for a true-negative gate,
+    # where the stated rule is that a single failure is blocking. Observed
+    # concretely on the first real run: 12 of 21 trials failed, including one
+    # genuine invented finding, and vally still exited 0 at 75% vs a 70%
+    # threshold. Fail the run here so CI cannot go green on that.
+    if ($tnGrader.FailedTrials -gt 0 -and $overallExitCode -eq 0) {
+        Write-Host ("  [GATE] {0} true-negative trial(s) failed -- a single failure is blocking." -f $tnGrader.FailedTrials) -ForegroundColor Red
+        $overallExitCode = 1
     }
 
     # Cooldown between runs (skip after the final run). Gives Copilot agent
@@ -695,17 +804,33 @@ if ($Repeat -gt 1) {
     if ($aggTnStimuli -gt 0) {
         $aggTnBlocking = ($runSummaries | Measure-Object -Property TnBlockFp -Sum).Sum
         $aggTnSoft     = ($runSummaries | Measure-Object -Property TnSoftFp  -Sum).Sum
+        $aggTnFailed   = ($runSummaries | Measure-Object -Property TnFailed  -Sum).Sum
+        $aggObserved   = @($runSummaries | Where-Object { $_.TnObserved }).Count -eq $runSummaries.Count
 
         Write-Host ""
         Write-Host "  True-negative false positives (all runs):" -ForegroundColor DarkGray
-        Write-Host ("    Blocking     : {0}" -f $aggTnBlocking) -ForegroundColor $(if ($aggTnBlocking -eq 0) { "Green" } else { "Red" })
-        Write-Host ("    Non-blocking : {0} over {1} TN stimulus runs ({2} per stimulus)" -f `
-            $aggTnSoft, $aggTnStimuli, [math]::Round($aggTnSoft / $aggTnStimuli, 2)) -ForegroundColor DarkYellow
+        if ($aggObserved) {
+            Write-Host ("    Blocking     : {0}" -f $aggTnBlocking) -ForegroundColor $(if ($aggTnBlocking -eq 0) { "Green" } else { "Red" })
+            Write-Host ("    Non-blocking : {0} over {1} TN stimulus runs ({2} per stimulus)" -f `
+                $aggTnSoft, $aggTnStimuli, [math]::Round($aggTnSoft / $aggTnStimuli, 2)) -ForegroundColor DarkYellow
+        } else {
+            Write-Host "    Blocking     : UNMEASURED (glyph counter disagrees with graders)" -ForegroundColor Red
+            Write-Host "    Non-blocking : UNMEASURED" -ForegroundColor Red
+        }
+        Write-Host ("    TN failures  : {0} trial(s)" -f $aggTnFailed) -ForegroundColor $(if ($aggTnFailed -eq 0) { "Green" } else { "Red" })
 
-        if ($Repeat -ge 3 -and $aggTnBlocking -eq 0) {
+        # The gate needs THREE things, not one: enough runs, a metric that
+        # actually observed something, and zero failures. Any of the three
+        # missing means the bar is not met -- an unmeasured run is not a
+        # passing run.
+        if ($Repeat -lt 3) {
+            Write-Host "    [GATE] Fewer than 3 runs -- phase-2 bar not evaluated." -ForegroundColor DarkYellow
+        } elseif (-not $aggObserved) {
+            Write-Host "    [GATE] False positives UNMEASURED -- phase-2 bar NOT met." -ForegroundColor Red
+        } elseif ($aggTnBlocking -gt 0 -or $aggTnFailed -gt 0) {
+            Write-Host "    [GATE] Blocking FPs or TN failures present -- phase-2 bar NOT met." -ForegroundColor Red
+        } else {
             Write-Host "    [GATE] Zero blocking FPs across $Repeat runs -- phase-2 bar met." -ForegroundColor Green
-        } elseif ($aggTnBlocking -gt 0) {
-            Write-Host "    [GATE] Blocking FPs present -- phase-2 bar NOT met." -ForegroundColor Red
         }
         Write-Host ""
     }

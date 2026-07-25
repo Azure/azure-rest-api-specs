@@ -25,6 +25,8 @@ scoring:
 stimuli:
   - name: opaque-but-correctly-cased-names
     environment:
+      skills:
+        - "../../../azure-api-review"
       files:
         - src: "../fixtures/typespec-data-plane/naming-clarity.tsp"
           dest: "specification/deviceregistry/data-plane/Contoso.DeviceRegistry/stable/2026-01-01/devices.tsp"
@@ -58,6 +60,8 @@ stimuli:
 
   - name: tautological-and-missing-substance-docs
     environment:
+      skills:
+        - "../../../azure-api-review"
       files:
         - src: "../fixtures/typespec-data-plane/doc-quality.tsp"
           dest: "specification/schedulerservice/data-plane/Contoso.Scheduler/stable/2026-01-01/scheduler.tsp"

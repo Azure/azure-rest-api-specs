@@ -44,6 +44,8 @@ stimuli:
   # TN-01 -- Clean, fully compliant Azure.Core service.
   - name: tn-clean-service-no-blocking-findings
     environment:
+      skills:
+        - "../../../azure-api-review"
       files:
         - src: "../fixtures/typespec-data-plane/tn-clean-service.tsp"
           dest: "specification/contosonotebook/data-plane/Contoso.Notebook/stable/2026-01-01/notebook.tsp"
@@ -78,6 +80,8 @@ stimuli:
   # TN-02 -- Legitimate deviation: a POST action that is genuinely not CRUD.
   - name: tn-legitimate-action-not-crud
     environment:
+      skills:
+        - "../../../azure-api-review"
       files:
         - src: "../fixtures/typespec-data-plane/tn-legitimate-deviation.tsp"
           dest: "specification/textanalyzer/data-plane/Contoso.TextAnalyzer/stable/2026-01-01/analyzer.tsp"
@@ -111,6 +115,8 @@ stimuli:
   # singleton with no collection and no delete.
   - name: tn-bounded-list-and-singleton
     environment:
+      skills:
+        - "../../../azure-api-review"
       files:
         - src: "../fixtures/typespec-data-plane/tn-legitimate-deviation.tsp"
           dest: "specification/textanalyzer/data-plane/Contoso.TextAnalyzer/stable/2026-01-01/analyzer.tsp"
@@ -148,6 +154,8 @@ stimuli:
   # TN-04 -- Legitimate deviation: a genuinely closed union.
   - name: tn-closed-union-justified
     environment:
+      skills:
+        - "../../../azure-api-review"
       files:
         - src: "../fixtures/typespec-data-plane/tn-legitimate-deviation.tsp"
           dest: "specification/textanalyzer/data-plane/Contoso.TextAnalyzer/stable/2026-01-01/analyzer.tsp"
@@ -182,6 +190,8 @@ stimuli:
   # linter rules already catch. The agent must stay silent on all of them.
   - name: tn-linter-owned-violations-silent
     environment:
+      skills:
+        - "../../../azure-api-review"
       files:
         - src: "../fixtures/typespec-data-plane/tn-linter-owned.tsp"
           dest: "specification/inventory/data-plane/Contoso.Inventory/stable/2026-01-01/inventory.tsp"
@@ -213,6 +223,8 @@ stimuli:
   # TN-06 -- Runtime-behavioral statements are not statically checkable.
   - name: tn-runtime-behavioral-not-static
     environment:
+      skills:
+        - "../../../azure-api-review"
       files:
         - src: "../fixtures/typespec-data-plane/tn-runtime-behavioral.tsp"
           dest: "specification/auditlog/data-plane/Contoso.AuditLog/stable/2026-01-01/auditlog.tsp"
@@ -245,6 +257,8 @@ stimuli:
   # TN-07 -- Preview-to-preview breaking change is permitted.
   - name: tn-preview-breaking-change-allowed
     environment:
+      skills:
+        - "../../../azure-api-review"
       files:
         - src: "../fixtures/version-pairs/preview-narrowed-union/preview-2026-01-01-preview.tsp"
           dest: "specification/experimentrunner/data-plane/Contoso.ExperimentRunner/preview/2026-01-01-preview/experiments.tsp"

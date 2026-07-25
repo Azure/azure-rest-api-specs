@@ -180,6 +180,74 @@ cd .github/skills/evals
 
 Run `Get-Help .\run-evals.ps1 -Detailed` for all parameters.
 
+### `runs` vs `-Repeat`
+
+These multiply, and it is easy to burn four times the intended budget by
+setting both. `runs: 3` in `defaults` means vally executes each stimulus three
+times _within one suite run_; `-Repeat 3` executes the whole suite three times.
+The phase-2 gate wants three executions per stimulus, which `runs: 3` already
+provides — so `-Repeat` is for checking stability _across_ suite runs, not for
+reaching the gate's trial count. Leave it at 1 unless that is what you want.
+
+## First real run (2026-07-25)
+
+The suite's first end-to-end execution. Recorded because a clean-looking
+summary here was actively misleading and the details matter more than the
+score.
+
+**Configuration:** `eval-true-negatives`, `claude-opus-4.6`, judge
+`claude-sonnet-4.6`, `runs: 3`, `--workers 1`.
+
+**Result:** 21 trials, 9 passed, 12 failed. 30.2 min wall clock, ~2.44M tokens,
+~496 AIU (≈24 AIU per trial). vally itself reported the suite as **passing** at
+75% against its 0.7 `scoring.threshold`, and exited 0.
+
+**Three harness defects it exposed, all now fixed:**
+
+1. **Skills were never loaded.** `paths.skills` in `.vally.yaml` is only read
+   when `--skill-dir` is passed, which neither `run-evals.ps1` nor any eval
+   file did. Every stimulus ran against a bare Copilot CLI: 25K tokens, 1 tool
+   call, `Skills used 0`. Fixed by declaring `environment.skills` per stimulus,
+   which vally treats as fail-loud (a missing `SKILL.md` aborts the run) rather
+   than the silent no-op `--skill-dir` gives you. After the fix: 116K tokens,
+   7 tool calls, `Skills used 1`. **The ARM suite has the same defect** — it
+   was inherited, not introduced here.
+2. **The false-positive metric was blind.** It counts 🔴/🟡/💡 glyphs, but
+   vally has no concept of an agent file, so the report format defined in
+   `.github/agents/data-plane-api-reviewer.agent.md` is never in play. It
+   reported `Blocking FPs: 0 [GATING -- must be 0]` on a run containing a real
+   invented finding. It now reconciles against a grader-derived count and
+   prints `UNMEASURED` when the two disagree.
+3. **The runner exited 0 on a failed gate.** vally's `scoring.threshold` is an
+   aggregate, so a suite can clear it while individual stimuli fail. For a
+   true-negative gate whose stated rule is that a single failure is blocking,
+   that is wrong. `run-evals.ps1` now fails the run when any `tn-` trial fails.
+
+**What the agent actually did:** mostly well. Of the five stimuli that failed
+at least one trial, four failed on grader artifacts rather than agent error —
+see the caveat below. The one real false positive was on
+`tn-linter-owned-violations-silent`, where in 2 of 3 trials the agent invented
+a `DP-MODEL-04` "missing delete operation" finding on a fixture whose defects
+are all linter-owned. The judge caught it; the mechanical graders did not.
+
+### Known-unsound: the graders and the fixtures
+
+Do not read a pass here as evidence until these two are resolved.
+
+- **The `output-not-matches` graders are mention-based, not
+  assertion-based.** They fail when a rule ID appears anywhere in the output.
+  But the ideal true-negative answer _cites the rule it considered and explains
+  why it does not fire_ — so the graders punish the correct answer. Three
+  stimuli (`tn-bounded-list-and-singleton`, `tn-legitimate-action-not-crud`,
+  `tn-runtime-behavioral-not-static`) failed 0/3 this way while producing
+  textbook-correct output.
+- **The fixtures leak their own labels.** Every `tn-*.tsp` opens with a comment
+  saying `FIXTURE (TRUE NEGATIVE ...)` and, in some cases, "the correct review
+  output is silence. Any blocking finding on this file is a test failure." The
+  agent reads the file. A true-negative suite that tells the agent the answer
+  measures instruction-following, not false-positive resistance — and the agent
+  still produced a false positive on one of them anyway.
+
 ## Model pinning
 
 Two separate pins, with two separate rules.

@@ -25,6 +25,8 @@ scoring:
 stimuli:
   - name: lro-missing-status-monitor
     environment:
+      skills:
+        - "../../../azure-api-review"
       files:
         - src: "../fixtures/typespec-data-plane/lro-and-paging.tsp"
           dest: "specification/batchtranslate/data-plane/Contoso.BatchTranslate/stable/2026-01-01/translate.tsp"
@@ -59,6 +61,8 @@ stimuli:
 
   - name: unpaged-unbounded-list
     environment:
+      skills:
+        - "../../../azure-api-review"
       files:
         - src: "../fixtures/typespec-data-plane/lro-and-paging.tsp"
           dest: "specification/batchtranslate/data-plane/Contoso.BatchTranslate/stable/2026-01-01/translate.tsp"
