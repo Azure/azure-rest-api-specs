@@ -1,0 +1,42 @@
+# Data-Plane Linter Alignment - Fails when the @azure-tools/typespec-azure-core version
+# pinned in package.json drifts from the version the data-plane linter coverage map was
+# verified against. A linter bump can move rules between the agent-owned and
+# linter-enforced sets; when that happens the coverage map must be re-verified or the
+# Data-Plane API Reviewer agent starts double-reporting findings CI already surfaces.
+name: "Data-Plane Linter Alignment"
+
+on:
+  pull_request:
+    paths:
+      - "package.json"
+      - "package-lock.json"
+      - ".github/skills/azure-api-review/references/data-plane-linter-rule-coverage.md"
+      - ".github/workflows/data-plane-linter-alignment.yaml"
+      - ".github/workflows/src/data-plane-linter-alignment.js"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check-alignment:
+    name: Check Data-Plane Linter Alignment
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          sparse-checkout: |
+            .github/
+            package.json
+          sparse-checkout-cone-mode: false
+
+      - name: Install dependencies for github-script actions
+        uses: ./.github/actions/install-deps-github-script
+
+      - name: Compare pinned linter version against the coverage map
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const { default: checkDataPlaneLinterAlignment } =
+              await import('${{ github.workspace }}/.github/workflows/src/data-plane-linter-alignment.js');
+            await checkDataPlaneLinterAlignment({ core, rootDir: '${{ github.workspace }}' });
