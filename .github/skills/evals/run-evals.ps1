@@ -16,7 +16,11 @@
     Prerequisites:
       - Node.js >= 20 and npm (https://nodejs.org/)
       - Git
-      - VS Code with GitHub Copilot active (the executor uses Copilot agent sessions)
+      - An authenticated GitHub Copilot CLI on PATH. The default `copilot-sdk`
+        executor spawns it directly -- this runs headless and does NOT require
+        VS Code. (Concurrent VS Code Copilot sessions can still contend for
+        capacity, which is why -Workers defaults to 1.)
+      - Access to github.com/microsoft/vally, which is a private repository.
 
     The script will:
       1. Clone microsoft/vally (or pull latest if already cloned)

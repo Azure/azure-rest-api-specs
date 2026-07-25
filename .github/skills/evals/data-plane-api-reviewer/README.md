@@ -156,8 +156,11 @@ cd .github/skills/evals
 
 ## Quick start
 
-Prerequisites: [Node.js](https://nodejs.org/) >= 20, npm, Git, and VS Code
-with GitHub Copilot active.
+Prerequisites: [Node.js](https://nodejs.org/) >= 20, npm, Git, an
+authenticated GitHub Copilot CLI on `PATH`, and access to the private
+`microsoft/vally` repository. **This runs headless** — vally's default
+`copilot-sdk` executor spawns the Copilot CLI directly, so VS Code is not
+required.
 
 `run-evals.ps1` lives at the evals root and serves every suite; select one
 with `-SuiteDir`.
@@ -247,6 +250,153 @@ Do not read a pass here as evidence until these two are resolved.
   agent reads the file. A true-negative suite that tells the agent the answer
   measures instruction-following, not false-positive resistance — and the agent
   still produced a false positive on one of them anyway.
+
+## Grader audit: assertions satisfiable by negation
+
+Prompted by a real defect: a grader matching `🔴` or `blocking` anywhere scored
+`"No blocking findings"` — the _ideal_ true-negative output — as a blocking
+false positive. That was not an isolated slip. Every rubric that has never been
+executed is an untested hypothesis, so all 24 mechanical graders in this suite
+were audited for the same class: **a match that can be satisfied, or tripped,
+by negation, absence phrasing, or a quotation.**
+
+The finding is that the class is pervasive. **One of 24 graders is immune.**
+
+### A. Positive graders satisfiable by negation — false PASS
+
+Nine graders assert the agent _found_ something by looking for a rule-ID
+prefix:
+
+```yaml
+- type: output-contains
+  config: { strings: ["DP-MODEL-01"] }
+```
+
+An agent that **misses** the violation still satisfies this, because the
+observed house style is to tabulate every rule considered:
+
+| Rule                             | Verdict | Rationale     |
+| -------------------------------- | ------- | ------------- |
+| **DP-MODEL-01** (actions ≠ CRUD) | ✅ Pass | _…reasoning…_ |
+
+That table is not hypothetical — it is copied from the agent's real output in
+the first run. `output-contains "DP-MODEL-01"` passes on it.
+
+This is the **more dangerous direction** of the bug. On a true-negative
+stimulus, mention-matching causes a false alarm: loud, visible, annoying. On a
+positive stimulus it causes a silent false pass, which reads as evidence the
+reviewer works. All nine are affected: `DP-ERR-`, `DP-LRO-`, `DP-PAGE-`,
+`DP-NAME-`, `DP-DOC-`, `DP-MODEL-01`, `DP-MODEL-`, `DP-VERSION-`, `DP-VIS-`
+(×2). None has ever been executed — only the true-negative file has been run —
+so this is inference from observed agent behaviour, not a measured failure.
+
+### B. Negative graders trippable by legitimate mention — false FAIL
+
+Thirteen graders. Ten are confirmed defective by the first run; the rest are
+latent. Representative cases:
+
+| Grader                                                  | Trips on                                                        |
+| ------------------------------------------------------- | --------------------------------------------------------------- |
+| `\bDP-MODEL-01\b\|\bcrud in disguise\b`                 | "…is **not** CRUD in disguise" — confirmed, 0/3                 |
+| runtime-word list (`sort order`, `retention window`, …) | the agent listing what it _declined_ to flag — confirmed, 0/3   |
+| `\b(no-enum\|casing-style\|…)\b`                        | "deferred to the linter: no-enum, casing-style" — confirmed     |
+| `\bmissing (delete\|DELETE)\b`                          | "no missing delete operation" — confirmed                       |
+| `\bDP-(MODEL\|DOC\|NAME\|VIS)-0[0-9]\b` on `tn-clean-…` | a ✅ Pass table — latent, passed 3/3 only because none appeared |
+
+### C. Greedy `.*` spanning a negation
+
+Two patterns join a topic and a verdict word with `.*`, which matches across a
+whole line and so joins clauses that negate each other:
+
+- `\bbreaking change\b.*\b(violat|not permitted|must not|prohibited)\b` matches
+  _"this **is** a breaking change, but preview versions are **not prohibited**
+  from making them"_ — confirmed, cost `tn-preview-breaking-change-allowed` 1
+  of 3 trials.
+- `\bclosed (enum|union)\b.*\b(violat|error|blocking)\b` matches _"the closed
+  union is justified; this is **not** a violation"_ — latent.
+
+### D. Half-fixed severity pattern
+
+`(?im)^\s*(?:[-*+]\s*|#{1,6}\s*)?🔴|\bseverity\W{0,6}blocking\b` appears in
+nine graders. The earlier fix anchored the **glyph** alternative to line start
+but left the **word** alternative unanchored, so `Severity: Blocking` in a
+summary table or legend still matches regardless of the count beside it. It
+requires that literal token order, so "at blocking severity" does not trip it,
+and nothing in the first run did — latent, not active. Noting it because it is
+the same defect, half-corrected: fixing the visible half of a pattern bug and
+leaving the rest is how this class survives review.
+
+### E. Immune
+
+One grader: **`does not recommend the ARM polling contract`**
+(`Azure-AsyncOperation`, `final-state-via`,
+`x-ms-long-running-operation-options`). These tokens have no legitimate reason
+to appear in a data-plane review in any polarity, so mention _is_ the defect.
+This is the shape a sound mechanical grader has — match on vocabulary that
+cannot appear innocently, not on topic words that appear in both a finding and
+its refutation.
+
+### Status
+
+**Not fixed.** Rewriting graders from mention-matching to assertion-matching
+changes what the suite measures and interacts with the fixture-labelling
+question, so it is pending a maintainer decision rather than applied
+unilaterally. Until then, treat every mechanical grader result in this suite as
+advisory and the LLM-judge `prompt` grader as the load-bearing signal — in the
+first run the judge was the only grader that caught the one real false
+positive, and the only one that did not manufacture false failures.
+
+## Known coverage gaps
+
+Read this before concluding anything from the "41% true negatives" figure.
+
+### The padding class is not stimulated at all
+
+The false-positive mode most likely to get this bot muted in practice is
+**not** a confident wrong finding on a clean spec. It is a spec that is 90%
+fine and has one genuine issue, where the reviewer reports the real finding and
+then pads with three or four adjacent low-value ones to look thorough.
+Reviewers tolerate a wrong finding; they stop reading a bot that buries a good
+finding in noise.
+
+**Nothing in this suite stimulates that.** Every true negative is all-clean or
+all-legitimate, and every positive fixture is seeded densely enough that
+padding is indistinguishable from thoroughness. There is no mixed-signal
+fixture — one real defect plus a large correct remainder — and so the
+non-blocking false-positive metric, which exists precisely to catch this trend,
+currently has nothing to count on. A flat non-blocking FP number today is a
+measurement of absence, not of good behaviour.
+
+### The true-negative denominator is 5, not 7
+
+Three of the seven true-negative stimuli (`tn-legitimate-action-not-crud`,
+`tn-bounded-list-and-singleton`, `tn-closed-union-justified`) all run against
+the same fixture, `fixtures/typespec-data-plane/tn-legitimate-deviation.tsp`.
+Counting stimuli overstates independence:
+
+| Fixture                       | Stimuli |
+| ----------------------------- | ------- |
+| `tn-legitimate-deviation.tsp` | 3       |
+| `tn-clean-service.tsp`        | 1       |
+| `tn-linter-owned.tsp`         | 1       |
+| `tn-runtime-behavioral.tsp`   | 1       |
+| `version-pairs/preview-*.tsp` | 1       |
+
+Any fixture-level flaw — the label leakage above, an unrealistic construction,
+a compile error — hits all three at once. Their _graders_ are distinct, so they
+do not necessarily pass or fail together (in the first run,
+`tn-closed-union-justified` passed 3/3 while the other two failed 0/3), but
+they share a single input and a single author's idea of what a legitimate
+deviation looks like. Five distinct fixtures is a thin base for a promotion
+gate.
+
+### Consequence for the promotion gate
+
+Because of these gaps, the synthetic true-negative suite cannot by itself
+qualify the reviewer for phase 2. See the phase 0 dark launch in
+[`.github/workflows/data-plane-api-review.md`](../../../workflows/data-plane-api-review.md):
+real merged data-plane pull requests are a better false-positive source than
+synthetic fixtures, and are the only place the padding class shows up at all.
 
 ## Model pinning
 

@@ -169,18 +169,53 @@ Suggestion → Questions.
 This workflow is at **Phase 1** of a four-phase ladder. Do not skip steps; each
 gate exists because the previous one produced evidence.
 
-| Phase | Trigger                                                              | Outputs                              | Gate to advance                                                                                                                                            |
-| ----- | -------------------------------------------------------------------- | ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 0     | `workflow_dispatch` only                                             | Run log only (`noop`)                | FP rate on a hand-picked corpus of merged data-plane PRs at or below the eval bar.                                                                         |
-| **1** | **Label `data-plane-api-review-needed` (current)**                   | **One summary comment**              | **True-negative suite green: 0 blocking-severity FPs across 3 runs; non-blocking FP count trending flat or down; phase-1 comments demonstrably acted on.** |
-| 2     | Same label                                                           | Summary comment + ≤5 inline comments | Sustained low FP rate on real PRs over a meaningful sample.                                                                                                |
-| 3     | `[opened, synchronize]` + path filter + new-version-only guard       | Same as phase 2                      | --                                                                                                                                                         |
-| 4     | Paired `DataPlaneAPIReviewRequired` / `DataPlaneAPISignedOff` labels | Sign-off gate                        | Separate workstream; needs `.github/protected-labels.yml` and `labelling.js` integration.                                                                  |
+| Phase | Trigger                                                              | Outputs                              | Gate to advance                                                                                                                                                                                |
+| ----- | -------------------------------------------------------------------- | ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 0     | `workflow_dispatch` only                                             | Run log only (`noop`)                | FP rate on a corpus of merged data-plane PRs at or below the eval bar, **and** new true-negative fixtures derived from the failures it surfaces. See "Phase 0 qualifies the eval suite" below. |
+| **1** | **Label `data-plane-api-review-needed` (current)**                   | **One summary comment**              | **True-negative suite green (0 blocking FPs across 3 runs) AND phase-0 evidence on real PRs; non-blocking FP count trending flat or down; phase-1 comments demonstrably acted on.**            |
+| 2     | Same label                                                           | Summary comment + ≤5 inline comments | Sustained low FP rate on real PRs over a meaningful sample.                                                                                                                                    |
+| 3     | `[opened, synchronize]` + path filter + new-version-only guard       | Same as phase 2                      | --                                                                                                                                                                                             |
+| 4     | Paired `DataPlaneAPIReviewRequired` / `DataPlaneAPISignedOff` labels | Sign-off gate                        | Separate workstream; needs `.github/protected-labels.yml` and `labelling.js` integration.                                                                                                      |
 
 Phase 3 requires **two** guards, not one: a path filter on
 `specification/**/data-plane/**/*.tsp`, and a first-step check that the PR
 introduces a new API version directory. Commenting on a two-line fix to a
 shipped version is pure noise.
+
+### Phase 0 qualifies the eval suite, not just the reviewer
+
+Phase 0 is not a warm-up. It is the only place two things can be established
+that the synthetic true-negative suite cannot establish on its own, and
+**phase-2 promotion depends on evidence from it — not on the synthetic suite
+alone.**
+
+1. **Real pull requests are a better false-positive source than fixtures.**
+   Synthetic true negatives are written by the same person who wrote the rules,
+   against the same mental model, and the current ones announce in a header
+   comment that they are true negatives. A merged data-plane PR does none of
+   that. It is also messier in the ways that actually generate false positives:
+   partial edits, unusual-but-accepted patterns, service-specific conventions,
+   and prior review history the agent cannot see.
+2. **It is the only place the padding class appears.** The failure mode most
+   likely to get this bot muted is a 90%-fine spec where the reviewer reports
+   one genuine issue and then pads with adjacent low-value findings. Every
+   synthetic true negative is all-clean or all-legitimate, so nothing in the
+   suite stimulates it — see "Known coverage gaps" in
+   [the eval README](../skills/evals/data-plane-api-reviewer/README.md). Real
+   merged PRs are almost all of this shape.
+
+So phase 0 runs the reviewer over a corpus of already-merged data-plane PRs
+with `safe-outputs: noop`, and its output is read by a human. Two things come
+out of it: a false-positive rate on realistic input, and a set of _new
+fixtures derived from observed failures_ rather than guessed ones. The second
+is what makes the true-negative suite worth gating on afterwards.
+
+The suite and the dark launch check different things and neither substitutes
+for the other: the suite is a **regression** check — cheap, repeatable, run
+per-PR — while the dark launch is a **validity** check on whether the suite is
+measuring anything real. Passing the suite while never having run against a
+real PR means only that the reviewer has not regressed against assumptions
+never tested.
 
 Changing the model above without re-running the eval suite invalidates every
 gate in this table.
