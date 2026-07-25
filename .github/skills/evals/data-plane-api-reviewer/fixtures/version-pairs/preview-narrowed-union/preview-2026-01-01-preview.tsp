@@ -1,0 +1,76 @@
+// FIXTURE (TRUE NEGATIVE, version pair -- PREVIOUS preview version).
+// Paired with preview-2026-02-01-preview.tsp, which removes a property and
+// narrows a union. Both versions are PREVIEW, so the change is permitted:
+// preview API versions carry no backward-compatibility guarantee.
+// The reviewer must not raise a blocking breaking-change finding.
+// Not a real service. Not under specification/; not compiled by CI.
+
+import "@typespec/http";
+import "@typespec/rest";
+import "@typespec/versioning";
+import "@azure-tools/typespec-azure-core";
+
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
+using Azure.Core;
+
+@service(#{ title: "Experiment Runner" })
+@versioned(Versions)
+@server("https://{endpoint}", "Experiment Runner service", { endpoint: string })
+namespace ExperimentRunner;
+
+@doc("Service API versions.")
+enum Versions {
+  @doc("The 2026-01-01-preview version.")
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  v2026_01_01_preview: "2026-01-01-preview",
+}
+
+@doc("A configured experiment.")
+@resource("experiments")
+model Experiment {
+  @doc("Name of the experiment. Immutable after creation.")
+  @key
+  @visibility(Lifecycle.Read)
+  name: string;
+
+  @doc("Strategy used to allocate traffic between experiment arms.")
+  allocationStrategy: AllocationStrategy;
+
+  @doc("Fraction of eligible traffic entering the experiment, from 0.0 to 1.0.")
+  trafficFraction: float32;
+
+  @doc("Experimental field used during the preview to trial per-arm overrides. Subject to removal.")
+  armOverrides?: Record<float32>;
+
+  @doc("Time at which the experiment was created, in UTC.")
+  @visibility(Lifecycle.Read)
+  createdAt: utcDateTime;
+}
+
+@doc("Strategy used to allocate traffic between experiment arms.")
+union AllocationStrategy {
+  string,
+
+  @doc("Split traffic evenly across all arms.")
+  Even: "Even",
+
+  @doc("Split traffic according to explicitly configured weights.")
+  Weighted: "Weighted",
+
+  @doc("Shift traffic towards better-performing arms as results accrue. Under evaluation during the preview.")
+  Adaptive: "Adaptive",
+}
+
+@doc("Operations on experiments.")
+interface Experiments {
+  @doc("Gets an experiment.")
+  get is StandardResourceOperations.ResourceRead<Experiment>;
+
+  @doc("Creates or replaces an experiment.")
+  createOrReplace is StandardResourceOperations.ResourceCreateOrReplace<Experiment>;
+
+  @doc("Lists experiments.")
+  list is StandardResourceOperations.ResourceList<Experiment>;
+}

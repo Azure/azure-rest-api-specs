@@ -1,0 +1,93 @@
+// FIXTURE (positive): POST actions that are standard CRUD operations wearing a
+// costume. Seeded violations: DP-MODEL-01 x3.
+// Not a real service. Not under specification/; not compiled by CI.
+
+import "@typespec/http";
+import "@typespec/rest";
+import "@typespec/versioning";
+import "@azure-tools/typespec-azure-core";
+
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
+using Azure.Core;
+
+@service(#{ title: "Widget Catalog" })
+@versioned(Versions)
+@server("https://{endpoint}", "Widget Catalog service", { endpoint: string })
+namespace WidgetCatalog;
+
+enum Versions {
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  v2026_01_01: "2026-01-01",
+}
+
+@doc("A widget in the catalog.")
+@resource("widgets")
+model Widget {
+  @doc("The unique name of the widget within the catalog.")
+  @key
+  @visibility(Lifecycle.Read)
+  name: string;
+
+  @doc("Human-readable display name shown in the portal.")
+  displayName: string;
+
+  @doc("Physical width of the widget in millimetres.")
+  widthInMillimetres: int32;
+
+  @doc("Current lifecycle state of the widget.")
+  state: WidgetState;
+}
+
+@doc("Lifecycle state of a widget.")
+union WidgetState {
+  string,
+
+  @doc("The widget is available for use.")
+  Active: "Active",
+
+  @doc("The widget is retired and cannot be used in new requests.")
+  Retired: "Retired",
+}
+
+@doc("Payload for updating a widget.")
+model WidgetUpdate {
+  @doc("Human-readable display name shown in the portal.")
+  displayName?: string;
+
+  @doc("Physical width of the widget in millimetres.")
+  widthInMillimetres?: int32;
+}
+
+interface Widgets {
+  @doc("Gets a widget by name.")
+  get is StandardResourceOperations.ResourceRead<Widget>;
+
+  // VIOLATION (DP-MODEL-01): this is a PATCH. The name is a CRUD synonym, the
+  // request body is a subset of the resource, and the response is the resource.
+  // Replacement: StandardResourceOperations.ResourceCreateOrUpdate<Widget>.
+  @doc("Updates an existing widget.")
+  @route("/widgets/{name}:updateWidget")
+  @post
+  updateWidget(@path name: string, @body body: WidgetUpdate): Widget;
+
+  // VIOLATION (DP-MODEL-01): this is a DELETE.
+  @doc("Removes a widget from the catalog.")
+  @route("/widgets/{name}:removeWidget")
+  @post
+  removeWidget(@path name: string): void;
+
+  // VIOLATION (DP-MODEL-01): this is a LIST. `:query` here only filters the
+  // collection and returns the resource model unchanged.
+  @doc("Queries widgets in the catalog.")
+  @route("/widgets:query")
+  @post
+  queryWidgets(@body body: WidgetQuery): Widget[];
+}
+
+@doc("Filter criteria for a widget query.")
+model WidgetQuery {
+  @doc("Only return widgets in this state.")
+  state?: WidgetState;
+}
