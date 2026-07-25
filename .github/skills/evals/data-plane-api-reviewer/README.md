@@ -128,6 +128,20 @@ muted: nobody disables a bot over one wrong blocking finding, they disable it
 over forty low-value suggestions. Watch it climb _before_ reviewers start
 ignoring the bot, not after.
 
+Both the metric and the `output-not-matches` graders anchor severity glyphs
+to the **start of a line**, optionally behind a list bullet or a heading
+marker. That is deliberate. A bare substring match scores `no 🔴 blocking
+findings` -- which is the output we want -- as a blocking false positive,
+inverting the metric it exists to measure. A glyph that is not the first
+token on its line is prose _about_ findings, not a finding.
+
+The consequence is that the metric depends on the report format in
+[`data-plane-api-reviewer.agent.md`](../../../agents/data-plane-api-reviewer.agent.md)
+-- specifically on findings appearing under a `### 🔴 Blocking` heading or as
+glyph-led entries. If that format changes, change the anchoring in
+`run-evals.ps1` and in the graders in the same pull request, or the gate
+silently stops measuring anything.
+
 ### Promotion gate
 
 Rollout phase 2 -- switching on inline review comments in

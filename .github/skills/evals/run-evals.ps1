@@ -195,11 +195,21 @@ function Get-TrueNegativeFindingCounts {
         $stimulusCount++
 
         # Count severity glyphs in the raw record. The record embeds the agent
-        # output as JSON-escaped text, so a plain substring count is both
-        # sufficient and robust to schema changes in the trajectory shape.
-        $blocking += ([regex]::Matches($line, [regex]::Escape("`u{1F534}"))).Count
-        $nonBlocking += ([regex]::Matches($line, [regex]::Escape("`u{1F7E1}"))).Count
-        $nonBlocking += ([regex]::Matches($line, [regex]::Escape("`u{1F4A1}"))).Count
+        # output as JSON-escaped text, so split on the escaped newline sequence
+        # and test each logical output line.
+        #
+        # Anchoring to line start matters. A bare substring count would score
+        # "no 🔴 blocking findings" -- which is the output we WANT -- as a
+        # blocking false positive, inverting the metric. Findings appear either
+        # as a severity heading ("### 🔴 Blocking") or as a bulleted entry, so
+        # a glyph that is not the first token on its line is prose about
+        # findings, not a finding.
+        $logicalLines = [regex]::Split($line, '(?:\\r)?\\n|\r?\n')
+        foreach ($ll in $logicalLines) {
+            if ($ll -match "^\s*(?:[-*+]\s*|#{1,6}\s*)?`u{1F534}") { $blocking++ }
+            if ($ll -match "^\s*(?:[-*+]\s*|#{1,6}\s*)?`u{1F7E1}") { $nonBlocking++ }
+            if ($ll -match "^\s*(?:[-*+]\s*|#{1,6}\s*)?`u{1F4A1}") { $nonBlocking++ }
+        }
     }
 
     return [PSCustomObject]@{
