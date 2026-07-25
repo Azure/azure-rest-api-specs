@@ -441,4 +441,46 @@ interface SingleDocumentTranslationClient {
   "java"
 );
 
+@@clientName(
+  DocumentTranslation.StatusSummary.totalImageScansSucceeded,
+  "totalImageScansSucceededCount",
+  "java"
+);
+
+@@clientName(
+  DocumentTranslation.StatusSummary.totalImageScansFailed,
+  "totalImageScansFailedCount",
+  "java"
+);
+
+@@clientName(
+  DocumentTranslation.DocumentStatus.totalImageScansSucceeded,
+  "totalImageScansSucceededCount",
+  "java"
+);
+
+@@clientName(
+  DocumentTranslation.DocumentStatus.totalImageScansFailed,
+  "totalImageScansFailedCount",
+  "java"
+);
+
+@@clientName(
+  DocumentTranslation.DocumentStatus.characterCharged,
+  "characterChargedCount",
+  "java"
+);
+
+@@clientName(
+  DocumentTranslation.DocumentStatus.imageCharged,
+  "imageChargedCount",
+  "java"
+);
+
+@@clientName(
+  DocumentTranslation.DocumentStatus.imageCharacterDetected,
+  "imageCharacterDetectedCount",
+  "java"
+);
+
 @@usage(DocumentTranslation.DocumentTranslateContent, Usage.json, "csharp");
