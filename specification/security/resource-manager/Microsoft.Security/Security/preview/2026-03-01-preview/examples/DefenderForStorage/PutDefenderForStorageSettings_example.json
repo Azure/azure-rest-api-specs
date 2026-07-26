@@ -22,11 +22,13 @@
             },
             "isEnabled": true
           },
-          "scanResultsEventGridTopicResourceId": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/SampleRG/providers/Microsoft.EventGrid/topics/sampletopic"
+          "scanResultsEventGridTopicResourceId": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/SampleRG/providers/Microsoft.EventGrid/topics/sampletopic",
+          "scannerResourceId": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/securityOperators/malwareScanningOperator"
         },
         "overrideSubscriptionLevelSettings": true,
         "sensitiveDataDiscovery": {
-          "isEnabled": true
+          "isEnabled": true,
+          "scannerResourceId": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/securityOperators/sensitiveDataDiscoveryOperator"
         }
       }
     },
@@ -63,11 +65,14 @@
             "operationStatus": {
               "code": "Succeeded"
             },
-            "scanResultsEventGridTopicResourceId": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/SampleRG/providers/Microsoft.EventGrid/topics/sampletopic"
+            "scanResultsEventGridTopicResourceId": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/SampleRG/providers/Microsoft.EventGrid/topics/sampletopic",
+            "scannerResourceId": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/securityOperators/malwareScanningOperator"
           },
+          "managedBy": "None",
           "overrideSubscriptionLevelSettings": true,
           "sensitiveDataDiscovery": {
             "isEnabled": true,
+            "scannerResourceId": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/securityOperators/sensitiveDataDiscoveryOperator",
             "operationStatus": {
               "code": "Succeeded"
             }
@@ -89,14 +94,17 @@
               "capGBPerMonth": -1,
               "isEnabled": false
             },
+            "scannerResourceId": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/securityOperators/malwareScanningOperator",
             "operationStatus": {
               "code": "PartialSuccess",
               "message": "Failed to setup data scanner."
             }
           },
+          "managedBy": "None",
           "overrideSubscriptionLevelSettings": true,
           "sensitiveDataDiscovery": {
             "isEnabled": false,
+            "scannerResourceId": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/securityOperators/sensitiveDataDiscoveryOperator",
             "operationStatus": {
               "code": "PartialSuccess",
               "message": "Failed to setup data scanner."

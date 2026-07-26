@@ -49,6 +49,29 @@ union AutomatedResponseType {
 }
 
 /**
+ * Indicates whether this resource's Defender for Storage settings are managed by a higher MDC enforcement scope and which component is managing them.
+ */
+@added(Versions.v2026_03_01_preview)
+union ManagedByType {
+  string,
+
+  /**
+   * The resource's Defender for Storage settings are not managed by a higher enforcement scope.
+   */
+  None: "None",
+
+  /**
+   * The resource's Defender for Storage settings are managed by Microsoft Defender XDR.
+   */
+  MicrosoftDefenderXDR: "MicrosoftDefenderXDR",
+
+  /**
+   * The resource's Defender for Storage settings are managed by the subscription-level settings enforcer.
+   */
+  SubscriptionSettingsEnforcer: "SubscriptionSettingsEnforcer",
+}
+
+/**
  * List of Defender for Storage settings.
  */
 model DefenderForStorageSettingList {
@@ -90,6 +113,13 @@ model DefenderForStorageSettingProperties {
    * Indicates whether the settings defined for this storage account should override the settings defined for the subscription.
    */
   overrideSubscriptionLevelSettings?: boolean;
+
+  /**
+   * Indicates whether this resource's Defender for Storage settings are managed by a higher MDC enforcement scope and which component is managing them. When set to a value other than 'None', the resource-level settings become read-only and can only be modified by the managing component. Possible values: 'None' (not managed), 'MicrosoftDefenderXDR' (managed by Microsoft Defender XDR), 'SubscriptionSettingsEnforcer' (managed by subscription-level settings enforcer).
+   */
+  @added(Versions.v2026_03_01_preview)
+  @visibility(Lifecycle.Read)
+  managedBy?: ManagedByType;
 }
 
 /**
@@ -119,6 +149,22 @@ model MalwareScanningProperties {
    * Optional. Specifies the automated response action to take when malware is detected.
    */
   automatedResponse?: AutomatedResponseType = AutomatedResponseType.None;
+
+  /**
+   * Optional. Resource id of the scanner resource (e.g., securityOperator or dataScanner) whose identity will be used for malware scanning.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The scanner resource id is nullable in the API contract to allow explicitly clearing a previously configured scanner."
+  @added(Versions.v2026_03_01_preview)
+  scannerResourceId?:
+    | Azure.Core.armResourceIdentifier<[
+        {
+          type: "Microsoft.Security/securityOperators";
+        },
+        {
+          type: "Microsoft.Security/dataScanners";
+        }
+      ]>
+    | null;
 
   /**
    * Upon failure or partial success. Additional data describing Malware Scanning enable/disable operation.
@@ -183,6 +229,22 @@ model SensitiveDataDiscoveryProperties {
    * Indicates whether Sensitive Data Discovery should be enabled.
    */
   isEnabled?: boolean;
+
+  /**
+   * Optional. Resource id of the scanner resource (e.g., securityOperator or dataScanner) whose identity will be used for sensitive data discovery.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The scanner resource id is nullable in the API contract to allow explicitly clearing a previously configured scanner."
+  @added(Versions.v2026_03_01_preview)
+  scannerResourceId?:
+    | Azure.Core.armResourceIdentifier<[
+        {
+          type: "Microsoft.Security/securityOperators";
+        },
+        {
+          type: "Microsoft.Security/dataScanners";
+        }
+      ]>
+    | null;
 
   /**
    * Upon failure or partial success. Additional data describing Sensitive Data Discovery enable/disable operation.
