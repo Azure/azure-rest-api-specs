@@ -15,7 +15,7 @@ namespace DataScannersAPI;
 /**
  * The data scanner resource used by Defender for Storage to scan data for malware and sensitive data discovery.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter" "The data scanner is an extension resource addressable at multiple scopes (a subscription or a resource group) through a single {scopeId} path parameter, matching the sibling PricingsAPI modeling. The extension base parameter and the scopeId parameter are both required to express this."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter" "The data scanner is an extension resource addressable at multiple scopes (a subscription or a resource group) through a single {scopeId} path parameter. The extension base parameter and the scopeId parameter are both required to express this."
 @extensionResource
 model DataScanner
   is Azure.ResourceManager.ExtensionResource<DataScannerProperties> {
@@ -25,7 +25,7 @@ model DataScanner
     SegmentName = "dataScanners",
     NamePattern = "^[a-zA-Z0-9-]{1,260}$"
   >;
-  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
+  ...Azure.ResourceManager.ManagedSystemAssignedIdentityProperty;
 }
 
 alias DataScannersOps = Azure.ResourceManager.Legacy.ExtensionOperations<
