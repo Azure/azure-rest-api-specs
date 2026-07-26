@@ -39921,9 +39921,9 @@ components:
     AgentBlueprintEntraSignInConfig:
       type: object
       required:
-        - sign_in_type
+        - entra_sign_in_type
       properties:
-        sign_in_type:
+        entra_sign_in_type:
           type: string
           enum:
             - agent_blueprint
@@ -39937,7 +39937,7 @@ components:
     AgentBlueprintEntraSignInConfigUpdate:
       type: object
       properties:
-        sign_in_type:
+        entra_sign_in_type:
           type: string
           enum:
             - agent_blueprint
@@ -44020,35 +44020,35 @@ components:
     EntraSignInConfig:
       type: object
       required:
-        - sign_in_type
+        - entra_sign_in_type
       properties:
-        sign_in_type:
+        entra_sign_in_type:
           $ref: '#/components/schemas/EntraSignInType'
           description: The Entra sign-in type.
       discriminator:
-        propertyName: sign_in_type
+        propertyName: entra_sign_in_type
         mapping:
           foundry: '#/components/schemas/FoundryEntraSignInConfig'
           agent_blueprint: '#/components/schemas/AgentBlueprintEntraSignInConfig'
       description: |-
-        Entra sign-in configuration for the agent endpoint. The `sign_in_type` property discriminates the concrete
+        Entra sign-in configuration for the agent endpoint. The `entra_sign_in_type` property discriminates the concrete
         configuration type; type-specific inputs (such as token validation) are carried only by the types
         that support them. Defaults to Foundry sign-in when not specified.
     EntraSignInConfigUpdate:
       type: object
       required:
-        - sign_in_type
+        - entra_sign_in_type
       properties:
-        sign_in_type:
+        entra_sign_in_type:
           $ref: '#/components/schemas/EntraSignInType'
           description: The Entra sign-in type.
       discriminator:
-        propertyName: sign_in_type
+        propertyName: entra_sign_in_type
         mapping:
           foundry: '#/components/schemas/FoundryEntraSignInConfigUpdate'
           agent_blueprint: '#/components/schemas/AgentBlueprintEntraSignInConfigUpdate'
       description: |-
-        Entra sign-in configuration for the agent endpoint. The `sign_in_type` property discriminates the concrete
+        Entra sign-in configuration for the agent endpoint. The `entra_sign_in_type` property discriminates the concrete
         configuration type; type-specific inputs (such as token validation) are carried only by the types
         that support them. Defaults to Foundry sign-in when not specified.
     EntraSignInType:
@@ -46569,9 +46569,9 @@ components:
     FoundryEntraSignInConfig:
       type: object
       required:
-        - sign_in_type
+        - entra_sign_in_type
       properties:
-        sign_in_type:
+        entra_sign_in_type:
           type: string
           enum:
             - foundry
@@ -46582,7 +46582,7 @@ components:
     FoundryEntraSignInConfigUpdate:
       type: object
       properties:
-        sign_in_type:
+        entra_sign_in_type:
           type: string
           enum:
             - foundry
