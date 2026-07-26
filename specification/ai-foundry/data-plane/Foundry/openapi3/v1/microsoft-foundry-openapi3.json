@@ -26511,7 +26511,7 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/SignInConfig"
+            "$ref": "#/components/schemas/EntraSignInConfig"
           }
         ],
         "description": "Agent-blueprint Entra sign-in configuration. The agent endpoint validates inbound tokens against the agent's blueprint application."
@@ -26533,7 +26533,7 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/SignInConfigUpdate"
+            "$ref": "#/components/schemas/EntraSignInConfigUpdate"
           }
         ],
         "description": "Agent-blueprint Entra sign-in configuration. The agent endpoint validates inbound tokens against the agent's blueprint application."
@@ -26865,7 +26865,7 @@
             "description": "The authorization schemes supported by the agent endpoint."
           },
           "entra_sign_in_config": {
-            "$ref": "#/components/schemas/SignInConfig",
+            "$ref": "#/components/schemas/EntraSignInConfig",
             "description": "The Entra sign-in configuration governing which Entra application the agent endpoint validates inbound tokens against (and represents the calling user as for downstream on-behalf-of access). The service defaults 'foundry' behavior if a value is not specified by the caller."
           }
         }
@@ -26889,7 +26889,7 @@
             "description": "The authorization schemes supported by the agent endpoint."
           },
           "entra_sign_in_config": {
-            "$ref": "#/components/schemas/SignInConfigUpdate",
+            "$ref": "#/components/schemas/EntraSignInConfigUpdate",
             "description": "The Entra sign-in configuration governing which Entra application the agent endpoint validates inbound tokens against (and represents the calling user as for downstream on-behalf-of access). The service defaults 'foundry' behavior if a value is not specified by the caller."
           }
         }
@@ -31611,7 +31611,7 @@
         ],
         "description": "Entra ID credential definition"
       },
-      "SignInConfig": {
+      "EntraSignInConfig": {
         "type": "object",
         "required": [
           "sign_in_type"
@@ -31631,7 +31631,7 @@
         },
         "description": "Entra sign-in configuration for the agent endpoint. The `sign_in_type` property discriminates the concrete\nconfiguration type; type-specific inputs (such as token validation) are carried only by the types\nthat support them. Defaults to Foundry sign-in when not specified."
       },
-      "SignInConfigUpdate": {
+      "EntraSignInConfigUpdate": {
         "type": "object",
         "required": [
           "sign_in_type"
@@ -34086,7 +34086,7 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/SignInConfig"
+            "$ref": "#/components/schemas/EntraSignInConfig"
           }
         ],
         "description": "Foundry Entra sign-in configuration. The agent endpoint validates inbound tokens against the Foundry application (ai.azure.com). This is the default when a sign-in configuration is not specified."
@@ -34104,7 +34104,7 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/SignInConfigUpdate"
+            "$ref": "#/components/schemas/EntraSignInConfigUpdate"
           }
         ],
         "description": "Foundry Entra sign-in configuration. The agent endpoint validates inbound tokens against the Foundry application (ai.azure.com). This is the default when a sign-in configuration is not specified."

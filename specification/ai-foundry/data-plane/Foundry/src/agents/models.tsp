@@ -608,19 +608,19 @@ union EntraSignInType {
   types that support them. Defaults to Foundry sign-in when not specified.
   """)
 @discriminator("sign_in_type")
-model SignInConfig {
+model EntraSignInConfig {
   @doc("The Entra sign-in type.")
   sign_in_type: EntraSignInType;
 }
 
 @doc("Foundry Entra sign-in configuration. The agent endpoint validates inbound tokens against the Foundry application (ai.azure.com). This is the default when a sign-in configuration is not specified.")
-model FoundryEntraSignInConfig extends SignInConfig {
+model FoundryEntraSignInConfig extends EntraSignInConfig {
   @doc("The Entra sign-in type. Always 'foundry'.")
   sign_in_type: EntraSignInType.foundry;
 }
 
 @doc("Agent-blueprint Entra sign-in configuration. The agent endpoint validates inbound tokens against the agent's blueprint application.")
-model AgentBlueprintEntraSignInConfig extends SignInConfig {
+model AgentBlueprintEntraSignInConfig extends EntraSignInConfig {
   @doc("The Entra sign-in type. Always 'agent_blueprint'.")
   sign_in_type: EntraSignInType.agent_blueprint;
 
@@ -730,7 +730,7 @@ model AgentEndpointConfig {
   authorization_schemes?: AgentEndpointAuthorizationScheme[];
 
   @doc("The Entra sign-in configuration governing which Entra application the agent endpoint validates inbound tokens against (and represents the calling user as for downstream on-behalf-of access). The service defaults 'foundry' behavior if a value is not specified by the caller.")
-  entra_sign_in_config?: SignInConfig;
+  entra_sign_in_config?: EntraSignInConfig;
 }
 
 model AgentIdentity {
