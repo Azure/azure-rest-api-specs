@@ -2,15 +2,17 @@ parameters:
   "service-dir":
     default: "sdk/ai"
 options:
-  "@azure-tools/typespec-python":
-    package-mode: "dataplane"
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-voiceagents"
-    package-name: "azure-ai-voiceagents"
-    namespace: "azure.ai.voiceagents"
+  "@azure-tools/typespec-java":
     api-version: "v1"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-voiceagents"
+    namespace: "com.azure.ai.voiceagents"
+    service-name: "VoiceAgents"
+    partial-update: true
+    enable-sync-stack: true
+    generate-tests: false
+    generate-samples: false
+    custom-types-subpackage: "implementation.models"
     flavor: azure
-    generate-test: false
-    generate-sample: false
   "@azure-tools/typespec-client-generator-cli":
     additionalDirectories:
       - specification/ai-foundry/data-plane/Foundry/src/agents
