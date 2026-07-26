@@ -1599,6 +1599,7 @@ enum StatusLevelTypes {
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum UpgradeState {
   RollingForward,
+  RollingBack,
   Cancelled,
   Completed,
   Faulted,
@@ -1620,6 +1621,7 @@ enum UpgradeOperationInvoker {
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum RollingUpgradeStatusCode {
   RollingForward,
+  RollingBack,
   Cancelled,
   Completed,
   Faulted,
@@ -2461,6 +2463,7 @@ model WinRMListener {
   /**
    * This is the URL of a certificate that has been uploaded to Key Vault as a secret. For adding a secret to the Key Vault, see [Add a key or secret to the key vault](https://docs.microsoft.com/azure/key-vault/key-vault-get-started/#add). In this case, your certificate needs to be the Base64 encoding of the following JSON Object which is encoded in UTF-8: <br><br> {<br>  "data":"<Base64-encoded-certificate>",<br>  "dataType":"pfx",<br>  "password":"<pfx-file-password>"<br>} <br> To install certificates on a virtual machine it is recommended to use the [Azure Key Vault virtual machine extension for Linux](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-linux) or the [Azure Key Vault virtual machine extension for Windows](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-windows).
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   certificateUrl?: string;
 }
 
@@ -2578,6 +2581,7 @@ model VaultCertificate {
   /**
    * This is the URL of a certificate that has been uploaded to Key Vault as a secret. For adding a secret to the Key Vault, see [Add a key or secret to the key vault](https://docs.microsoft.com/azure/key-vault/key-vault-get-started/#add). In this case, your certificate needs to be It is the Base64 encoding of the following JSON Object which is encoded in UTF-8: <br><br> {<br>  "data":"<Base64-encoded-certificate>",<br>  "dataType":"pfx",<br>  "password":"<pfx-file-password>"<br>} <br> To install certificates on a virtual machine it is recommended to use the [Azure Key Vault virtual machine extension for Linux](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-linux) or the [Azure Key Vault virtual machine extension for Windows](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-windows).
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   certificateUrl?: string;
 
   /**
@@ -3383,6 +3387,7 @@ model KeyVaultSecretReference {
   /**
    * The URL referencing a secret in a Key Vault.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   secretUrl: string;
 
   /**
@@ -5382,6 +5387,7 @@ model KeyVaultKeyReference {
   /**
    * The URL referencing a key encryption key in Key Vault.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   keyUrl: string;
 
   /**

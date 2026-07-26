@@ -483,6 +483,26 @@ namespace ComputeCombine;
   "csharp"
 );
 @@clientName(
+  ComputeGallery.SharedGalleryInvites.gallerySharingAccept,
+  "AcceptGallerySharing",
+  "csharp"
+);
+@@clientName(
+  ComputeGallery.SharedGalleryInvites.gallerySharingReject,
+  "RejectGallerySharing",
+  "csharp"
+);
+@@clientName(
+  ComputeGallery.TenantLevelSharedGalleryInvites.tenantLevelGallerySharingAccept,
+  "AcceptTenantLevelGallerySharing",
+  "csharp"
+);
+@@clientName(
+  ComputeGallery.TenantLevelSharedGalleryInvites.tenantLevelGallerySharingReject,
+  "RejectTenantLevelGallerySharing",
+  "csharp"
+);
+@@clientName(
   ComputeGallery.Galleries.listByArtifactName,
   "GetSoftDeletedResourcesByArtifactName",
   "csharp"

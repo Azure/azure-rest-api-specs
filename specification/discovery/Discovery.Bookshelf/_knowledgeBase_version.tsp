@@ -3,7 +3,8 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "./_knowledgeBase.tsp";
-import "./shared.tsp";
+import "./_knowledgeBase_operation.tsp";
+import "../Discovery.Common/shared.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -18,6 +19,7 @@ namespace Microsoft.Discovery.Bookshelf;
 @doc("A version.")
 @resource("versions")
 @parentResource(KnowledgeBase)
+@removed(Versions.`2026-06-01`)
 model KnowledgeBaseVersion {
   @doc("The version name.")
   @visibility(Lifecycle.Read)
@@ -27,40 +29,6 @@ model KnowledgeBaseVersion {
   name: string;
 
   ...BaseKnowledgeBase;
-}
-
-@doc("Resources for indexing operation")
-model IndexingRequest {
-  @doc("Node pool ID")
-  nodePoolId: string;
-
-  @doc("Project ID")
-  projectId?: string;
-
-  @removed(Versions.`2026-02-01-preview`)
-  @doc("Storage ID")
-  storageId?: string;
-}
-
-@doc("Supercomputer run ID")
-model IndexingResponse {
-  @doc("Run ID")
-  runId: string;
-}
-
-@doc("Status of a KnowledgeBase operation")
-model KnowledgeBaseOperationStatus {
-  @doc("The unique ID of the operation.")
-  id: string;
-
-  @doc("The status of the operation")
-  status: Azure.Core.Foundations.OperationState;
-
-  @doc("Error object that describes the error when status is 'Failed'.")
-  error?: Azure.Core.Foundations.Error;
-
-  @doc("The KnowledgeBaseVersion result of the operation.")
-  result?: KnowledgeBaseVersion;
 }
 
 /** Response body for a long-running delete operation. */
@@ -73,6 +41,22 @@ model KnowledgeBaseDeleteResponse {
 
   @doc("Error object that describes the error when status is 'Failed'.")
   error?: Azure.Core.Foundations.Error;
+}
+
+@doc("Status indicating the KnowledgeBase operation.")
+@removed(Versions.`2026-06-01`)
+model KnowledgeBaseOperationStatus {
+  @doc("The unique ID of the operation.")
+  id: string;
+
+  @doc("The status of the operation")
+  status: Azure.Core.Foundations.OperationState;
+
+  @doc("Error object that describes the error when status is 'Failed'.")
+  error?: Azure.Core.Foundations.Error;
+
+  @doc("The KnowledgeBaseVersion result of the operation.")
+  result?: KnowledgeBaseVersion;
 }
 
 /**
@@ -96,6 +80,7 @@ op GetResourceOperationStatus<
   Traits
 >;
 
+@removed(Versions.`2026-06-01`)
 interface KnowledgeBaseVersions {
   @doc("Creates or updates a KnowledgeBaseVersion.")
   createOrUpdate is StandardResourceOperations.ResourceCreateOrUpdate<KnowledgeBaseVersion>;
