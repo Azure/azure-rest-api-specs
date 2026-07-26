@@ -1,4 +1,4 @@
-﻿import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
@@ -60,5 +60,5 @@ interface EntityQueryTemplates {
 
 @@doc(EntityQueryTemplate.name, "entity query template ID");
 
-@@added(EntityQueryTemplate, Versions.v2025_10_01_preview);
-@@added(EntityQueryTemplates, Versions.v2025_10_01_preview);
+@@added(EntityQueryTemplate, Versions.v2026_08_01_preview);
+@@added(EntityQueryTemplates, Versions.v2026_08_01_preview);

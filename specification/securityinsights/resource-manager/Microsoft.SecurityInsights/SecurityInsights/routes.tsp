@@ -27,7 +27,7 @@ model EntityResource {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 interface DataConnectorsCheckRequirementsOperationGroup {
   /**
    * Get requirements state for a data connector type.
@@ -66,7 +66,7 @@ interface DataConnectorsCheckRequirementsOperationGroup {
 @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/enrichment/{enrichmentType}/listGeodataByIp")
 @post
 @tag("Enrichment")
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 op listGeodataByIp(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -101,7 +101,7 @@ op listGeodataByIp(
 @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/enrichment/{enrichmentType}/listWhoisByDomain")
 @post
 @tag("Enrichment")
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 op listWhoisByDomain(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -237,7 +237,7 @@ interface ThreatIntelligenceIndicatorMetricsOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 interface ThreatIntelligenceOperationGroup {
   /**
    * Gets the count of all TI objects for the workspace.
