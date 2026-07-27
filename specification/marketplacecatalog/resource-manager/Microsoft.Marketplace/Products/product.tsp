@@ -701,8 +701,8 @@ model Availability {
   @doc("Display rank")
   displayRank: int32;
 
-  @doc("Availability token for non term based availabilities")
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "This is a non-sensitive availability identifier, not a credential; the name matches the service contract."
+  @doc("Availability token for non term based availabilities")
   token?: string;
 
   @doc("Prerequisite constraints for the availability")
