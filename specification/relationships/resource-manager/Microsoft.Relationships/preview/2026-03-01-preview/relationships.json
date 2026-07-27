@@ -528,15 +528,6 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "filter"
-          },
-          {
-            "name": "$top",
-            "in": "query",
-            "description": "The maximum number of results to return.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "x-ms-client-name": "top"
           }
         ],
         "responses": {
@@ -584,15 +575,6 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "filter"
-          },
-          {
-            "name": "$top",
-            "in": "query",
-            "description": "The maximum number of results to return.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "x-ms-client-name": "top"
           }
         ],
         "responses": {
@@ -686,11 +668,13 @@
         "targetId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The relationship target resource id."
+          "description": "The relationship target resource id.",
+          "readOnly": true
         },
         "targetTenant": {
           "type": "string",
-          "description": "The relationship target tenant id."
+          "description": "The relationship target tenant id.",
+          "readOnly": true
         },
         "originInformation": {
           "$ref": "#/definitions/RelationshipOriginInformation",

@@ -236,9 +236,11 @@ model ContainsRelationshipProperties {
   ]>;
 
   @doc("The relationship target resource id.")
+  @visibility(Lifecycle.Read)
   targetId: armResourceIdentifier;
 
   @doc("The relationship target tenant id.")
+  @visibility(Lifecycle.Read)
   targetTenant?: string;
 
   @doc("Information about the origin of the relationship.")
@@ -301,10 +303,6 @@ interface ContainsRelationships {
       @doc("Filters the results by target resource type. Example: properties.metadata.targetType eq 'Microsoft.Compute/virtualMachines'")
       @query("$filter")
       filter?: string;
-
-      @doc("The maximum number of results to return.")
-      @query("$top")
-      top?: int32;
     }
   >;
 
@@ -320,9 +318,5 @@ interface ContainsRelationships {
     @doc("Filters the results by target resource type. Example: properties.metadata.targetType eq 'Microsoft.Compute/virtualMachines'")
     @query("$filter")
     filter?: string,
-
-    @doc("The maximum number of results to return.")
-    @query("$top")
-    top?: int32,
   ): ArmResponse<ResourceListResult<ContainsRelationship>> | ErrorResponse;
 }
