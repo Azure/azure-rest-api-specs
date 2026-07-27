@@ -39,6 +39,7 @@ import {
   reqMetCheckTsg,
   typeSpecRequirementArmTsg,
   typeSpecRequirementDataPlaneTsg,
+  typeSpecSuppressionsTsg,
 } from "./tsgs.js";
 
 import fs from "fs/promises";
@@ -186,6 +187,12 @@ const CHECK_METADATA = [
   },
   {
     precedence: 5,
+    name: "TypeSpec Suppressions",
+    suppressionLabels: ["Approved-TypeSpecSuppression"],
+    troubleshootingGuide: typeSpecSuppressionsTsg,
+  },
+  {
+    precedence: 5,
     name: "Swagger Lint(RPaaS)",
     suppressionLabels: [],
     troubleshootingGuide: defaultTsg,
@@ -234,7 +241,7 @@ const CHECK_METADATA = [
   },
   {
     precedence: 1,
-    name: "Namespace Approval",
+    name: "Package Name Approval",
     suppressionLabels: [],
     troubleshootingGuide: defaultTsg,
   },
