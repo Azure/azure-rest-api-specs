@@ -131,7 +131,7 @@ model ManagedIdentityCredential {
   ModelSource. Only the project ARM id is required; the Foundry account and its
   data-plane endpoint (`*.services.ai.azure.com`) are resolved by the platform
   from the project (the account is the project's parent resource).
-
+  
   Authentication uses the user-assigned managed identity referenced in the
   ModelSource `credential.managedIdentity`, which the customer must grant the
   `Foundry User` role (role definition id 53ca6127-db72-4b80-b1b0-d745d6d5456d)
@@ -143,7 +143,6 @@ model MicrosoftFoundrySource {
   @doc("The ARM resource id of the Foundry project. The scope on which the referenced managed identity must hold the `Foundry User` role. The account and endpoint host are derived from this id.")
   projectResourceId: FoundryProjectResourceId;
 }
-
 
 @added(Versions.v2026_05_02_preview)
 @armResourceOperations

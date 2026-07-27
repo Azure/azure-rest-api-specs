@@ -67,13 +67,13 @@ model ModelDeploymentProperties {
 
   @visibility(Lifecycle.Create, Lifecycle.Read)
   @doc("""
-  Full ARM resource id of the model to deploy. Accepts either a catalog
-  `AIModel` id or a customer-registered `CustomAIModel` id (including
-  MicrosoftFoundry-backed models). When a `CustomAIModel` is referenced and
-  `modelSourceResourceId` is omitted, the deployment inherits the
-  `modelSourceResourceId` recorded on the `CustomAIModel`. Immutable after
-  creation.
-  """)
+    Full ARM resource id of the model to deploy. Accepts either a catalog
+    `AIModel` id or a customer-registered `CustomAIModel` id (including
+    MicrosoftFoundry-backed models). When a `CustomAIModel` is referenced and
+    `modelSourceResourceId` is omitted, the deployment inherits the
+    `modelSourceResourceId` recorded on the `CustomAIModel`. Immutable after
+    creation.
+    """)
   modelResourceId: AIModelResourceId;
 
   @visibility(Lifecycle.Create, Lifecycle.Read)
