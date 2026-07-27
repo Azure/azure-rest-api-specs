@@ -8,6 +8,7 @@ using Azure.ResourceManager;
 using Microsoft.Relationships;
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.Core;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -47,6 +48,11 @@ namespace Microsoft.Relationships {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   model ServiceGroupMemberRelationshipPropertiesCreateOrUpdate {
+    @added(Versions.`2026-03-01-preview`)
+    @doc("The relationship source resource id. Must be a service group.")
+    sourceId: armResourceIdentifier;
+
+    @removed(Versions.`2026-03-01-preview`)
     @doc("The relationship target resource id.")
     targetId: armResourceIdentifier<[
       {
@@ -55,6 +61,11 @@ namespace Microsoft.Relationships {
       }
     ]>;
 
+    @added(Versions.`2026-03-01-preview`)
+    @doc("The relationship source tenant id.")
+    sourceTenant?: string;
+
+    @removed(Versions.`2026-03-01-preview`)
     @doc("The relationship target tenant id.")
     targetTenant?: string;
   }
