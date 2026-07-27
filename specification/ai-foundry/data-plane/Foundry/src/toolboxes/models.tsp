@@ -101,6 +101,7 @@ union ToolboxToolType {
   fabric_iq_preview: ToolboxFabricIQPreviewToolType,
   toolbox_search: ToolboxSearchToolType,
   toolbox_search_preview: ToolboxSearchPreviewToolType,
+
   @removed(Versions.v1)
   web_iq_preview: ToolboxWebIQPreviewToolType,
 }
