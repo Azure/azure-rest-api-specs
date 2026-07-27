@@ -1441,9 +1441,13 @@
       "type": "object",
       "description": "The Advisor score data.",
       "properties": {
-        "lastRefreshedScore": {
+        "latestScore": {
           "$ref": "#/definitions/ScoreEntity",
           "description": "The details of latest available score."
+        },
+        "previousScore": {
+          "$ref": "#/definitions/ScoreEntity",
+          "description": "The details of the previous available score."
         },
         "timeSeries": {
           "type": "array",
@@ -1471,25 +1475,28 @@
       "type": "string",
       "description": "The aggregation level of the score.",
       "enum": [
-        "week",
-        "day",
-        "month"
+        "Daily",
+        "Weekly",
+        "Monthly"
       ],
       "x-ms-enum": {
         "name": "Aggregated",
         "modelAsString": true,
         "values": [
           {
-            "name": "week",
-            "value": "week"
+            "name": "Daily",
+            "value": "Daily",
+            "description": "Daily score aggregation."
           },
           {
-            "name": "day",
-            "value": "day"
+            "name": "Weekly",
+            "value": "Weekly",
+            "description": "Weekly score aggregation."
           },
           {
-            "name": "month",
-            "value": "month"
+            "name": "Monthly",
+            "value": "Monthly",
+            "description": "Monthly score aggregation."
           }
         ]
       }
@@ -2686,6 +2693,11 @@
           "type": "string",
           "description": "The date score was calculated."
         },
+        "processedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the score was processed."
+        },
         "score": {
           "type": "number",
           "format": "float",
@@ -2696,21 +2708,20 @@
           "format": "float",
           "description": "The consumption units for the score."
         },
-        "impactedResourceCount": {
-          "type": "number",
-          "format": "float",
+        "applicableResources": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of applicable resources."
+        },
+        "impactedResources": {
+          "type": "integer",
+          "format": "int32",
           "description": "The number of impacted resources."
         },
         "potentialScoreIncrease": {
           "type": "number",
           "format": "float",
           "description": "The potential percentage increase in overall score at subscription level once all recommendations in this scope are implemented."
-        },
-        "categoryCount": {
-          "type": "number",
-          "format": "float",
-          "description": "The count of impacted categories.",
-          "readOnly": true
         }
       }
     },
