@@ -3,7 +3,7 @@ parameters:
     default: "sdk/migrate"
 emit:
   - "@azure-tools/typespec-autorest"
-output-dir: "{project-root}/../"
+output-dir: "{project-root}/../../"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
@@ -15,12 +15,9 @@ options:
     use-read-only-status-schema: true
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     examples-dir: "{project-root}/examples"
-  "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    flavor: azure
-    clear-output-folder: true
-    model-namespace: true
+  "@azure-typespec/http-client-csharp-mgmt":
     namespace: "Azure.ResourceManager.Migrate"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-migrate"
     namespace: "azure.mgmt.migrate"
