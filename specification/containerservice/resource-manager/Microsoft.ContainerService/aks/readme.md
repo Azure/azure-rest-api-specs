@@ -1558,4 +1558,12 @@ directive:
     from: managedClusters.json
     where: $.definitions.VmSkusListResult
     reason: The List VM Skus API is a proxy for the Compute Resource Skus API. Defining a GET endpoint that follows the SKU contract (which in turn does not follow the standard ARM resource model) is allowed as previously discussed in an ARM API review email thread. (tilovell@microsoft.com, suhasrao@microsoft.com)
+  - suppress: BodyTopLevelProperties
+    from: managedClusters.json
+    where: $.definitions.OperationStatusResult
+    reason: OperationStatusResult mirrors the ARM common type shape (`error`, `operations`, `resourceId`, plus `status`, `percentComplete`, `startTime`, `endTime`, etc.) and adds the AKS-specific read-only `operationType` and `subOperationType` properties. It is only used as an async-operation-status response body, not as a PUT resource body, so the tracked-resource envelope restriction does not apply.
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: managedClusters.json
+    where: $.definitions.OperationStatusResult
+    reason: OperationStatusResult is an async-operation-status response envelope, not an ARM tracked or proxy resource. It inherits `id` and `name` from the ARM common OperationStatusResult; the tracked-resource-shape check (name/id/type readOnly) does not apply.
 ```

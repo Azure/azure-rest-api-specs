@@ -189,7 +189,11 @@ model AgentPoolCustomize
 @@clientName(AgentPools.update::parameters.properties, "parameters");
 @@clientName(AgentPools.deleteMachines::parameters.body, "machines");
 @@clientLocation(AgentPools.getByAgentPool, "OperationStatusResult", "!csharp");
-@@clientLocation(AgentPools.listByAgentPool, "OperationStatusResult", "!csharp");
+@@clientLocation(
+  AgentPools.listByAgentPool,
+  "OperationStatusResult",
+  "!csharp"
+);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(AgentPool.properties);
 
