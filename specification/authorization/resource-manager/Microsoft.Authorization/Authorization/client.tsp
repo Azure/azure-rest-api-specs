@@ -91,7 +91,7 @@ union RoleManagementScopeType {
 @@alternateType(
   Microsoft.RoleAssignment.RoleAssignmentProperties.principalType,
   Microsoft.Common.PrincipalType,
-  "java,python"
+  "csharp,java,python"
 );
 
 // Restore C# GA resource, model, and extensible-enum names.
