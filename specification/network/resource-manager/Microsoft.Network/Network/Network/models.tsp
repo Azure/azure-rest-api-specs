@@ -21638,7 +21638,6 @@ model GatewayRoute {
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This model is part of the existing Network Gateway resource type and must use legacy patterns for backward compatibility"
 @Azure.ResourceManager.Legacy.feature(Features.networkGateway)
-@added(Versions.v2025_09_01)
 model GatewayEffectiveRouteListResult {
   /**
    * List of gateway effective routes.
@@ -21653,7 +21652,6 @@ model GatewayEffectiveRouteListResult {
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This model is part of the existing Network Gateway resource type and must use legacy patterns for backward compatibility"
 @Azure.ResourceManager.Legacy.feature(Features.networkGateway)
-@added(Versions.v2025_09_01)
 model GatewayEffectiveRoute {
   /**
    * The gateway's local address.
