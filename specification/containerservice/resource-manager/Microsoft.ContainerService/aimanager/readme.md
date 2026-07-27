@@ -51,7 +51,7 @@ suppressions:
     reason: Free-form override key/value pairs documented per release.
   - code: AvoidAdditionalProperties
     from: aimanagers.json
-    where: $.definitions.CustomAIModelSpec.architectureParams
+    where: $.definitions.CustomAIModelSpec.properties.architectureParams
     reason: Key/value pairs or model architectire parameters.
 ```
 
