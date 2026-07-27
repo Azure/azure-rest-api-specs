@@ -599,6 +599,7 @@ model ExportJobResultUrl {
   /**
    * URL to download the result of the Export Job.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   resultUrl: string;
 }
 

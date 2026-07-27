@@ -29,8 +29,8 @@ const rules = {
     description: "@azure/arm-{name}",
   },
   python: {
-    pattern: "^azure-mgmt-[a-z0-9]+$",
-    description: "azure-mgmt-{name}",
+    pattern: "^azure\\.mgmt\\.[a-z0-9]+$",
+    description: "azure.mgmt.{name}",
   },
 };
 
@@ -123,13 +123,18 @@ describe("validate-format", () => {
   });
 
   describe("python", () => {
-    it("should accept valid Python package name", () => {
-      const result = validateNamespaceFormat("python", "azure-mgmt-compute", rules);
+    it("should accept valid Python namespace", () => {
+      const result = validateNamespaceFormat("python", "azure.mgmt.compute", rules);
       expect(result.valid).toBe(true);
     });
 
     it("should reject non-mgmt prefix", () => {
-      const result = validateNamespaceFormat("python", "azure-compute", rules);
+      const result = validateNamespaceFormat("python", "azure.compute", rules);
+      expect(result.valid).toBe(false);
+    });
+
+    it("should reject dash-separated package name format", () => {
+      const result = validateNamespaceFormat("python", "azure-mgmt-compute", rules);
       expect(result.valid).toBe(false);
     });
   });
@@ -147,7 +152,7 @@ describe("validate-format", () => {
       const namespaces = {
         dotnet: "Azure.ResourceManager.Compute",
         java: "INVALID-NAME",
-        python: "azure-mgmt-network",
+        python: "azure.mgmt.network",
       };
 
       const results = validateAllNamespaces(namespaces, rules);
