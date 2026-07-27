@@ -306,7 +306,7 @@ using Microsoft.OperationalInsights;
 );
 @@clientName(
   ProvisioningStateEnum,
-  "OperationalInsightsNetworkSecurityPerimeterProvisioningState",
+  "OperationalInsightsSummaryLogsProvisioningState",
   "csharp"
 );
 @@clientName(
@@ -316,7 +316,7 @@ using Microsoft.OperationalInsights;
 );
 @@clientName(
   RuleTypeEnum,
-  "OperationalInsightsNetworkSecurityPerimeterRuleType",
+  "OperationalInsightsSummaryLogsRuleType",
   "csharp"
 );
 @@clientName(Schema, "OperationalInsightsSchema", "csharp");
@@ -328,7 +328,7 @@ using Microsoft.OperationalInsights;
 @@clientName(SkuNameEnum, "OperationalInsightsSkuName", "csharp");
 @@clientName(
   StatusCodeEnum,
-  "OperationalInsightsNetworkSecurityPerimeterStatusCode",
+  "OperationalInsightsSummaryLogsStatusCode",
   "csharp"
 );
 @@clientName(TablePlanEnum, "OperationalInsightsTablePlan", "csharp");
