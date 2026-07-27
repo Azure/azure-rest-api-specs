@@ -173,7 +173,7 @@ stimuli:
       - type: output-not-matches
         name: "no extensible-union false positive"
         config:
-          pattern: "(?i)\\b(must|should) be (an )?extensible\\b"
+          pattern: "(?i)\\b(must|should)\\W{1,4}be\\W{1,4}(an\\W{1,4})?extensible\\b"
       - type: output-not-matches
         name: "no blocking findings"
         config:
@@ -216,7 +216,7 @@ stimuli:
       - type: output-not-matches
         name: "no restatement of linted defects in prose"
         config:
-          pattern: "(?i)\\b(must|should) (be|use) an? (extensible )?union\\b|\\buse `?union`? instead of `?enum`?\\b|\\b(must|should) not be nullable\\b|\\bavoid @format\\b|\\bmissing @doc\\b"
+          pattern: "(?i)\\b(must|should)\\W{1,4}(be|use)\\W{1,4}an?\\W{1,4}(extensible\\W{1,4})?union\\b|\\buse\\W{1,4}`?union`?\\W{1,4}instead\\W{1,4}of\\W{1,4}`?enum`?\\b|\\b(must|should)\\W{1,4}not\\W{1,4}be\\W{1,4}nullable\\b|\\bavoid\\W{1,4}@format\\b|\\bmissing\\W{1,4}@doc\\b"
       - type: prompt
     rubric:
       - "Every defect in this file is already caught mechanically by a shipped @azure-tools/typespec-azure-core rule listed at 🔒 Linted in references/data-plane-linter-rule-coverage.md: no-enum, no-nullable, no-format, no-unknown, no-generic-numeric, documentation-required, casing-style, request-body-problem, and no-explicit-routes-resource-ops."

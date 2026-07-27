@@ -48,7 +48,7 @@ stimuli:
       - type: output-not-matches
         name: "does not report linter-owned casing"
         config:
-          pattern: "(?i)\\bshould be (camelCase|PascalCase)\\b"
+          pattern: "(?i)\\bshould\\W{1,4}be\\W{1,4}(camelCase|PascalCase)\\b"
       - type: output-not-matches
         name: "does not raise casing-style as a finding"
         config:
@@ -87,7 +87,7 @@ stimuli:
       - type: output-not-matches
         name: "does not report linter-owned doc presence"
         config:
-          pattern: "(?i)\\bmissing @doc\\b"
+          pattern: "(?i)\\bmissing\\W{1,4}@doc\\b"
       - type: output-not-matches
         name: "does not raise documentation-required as a finding"
         config:
