@@ -31,40 +31,56 @@ interface Applications {
   /**
    * Get a specific application for the requested scope by applicationId
    */
-  get is Azure.ResourceManager.Extension.Read<
-    Azure.ResourceManager.Extension.Subscription,
+  get is SubscriptionSecurityApplicationOps.Read<
     Application,
-    Error = CloudError
+    ErrorType = CloudError
   >;
 
   /**
    * Creates or update a security application on the given subscription.
    */
-  createOrUpdate is Azure.ResourceManager.Extension.CreateOrReplaceSync<
-    Azure.ResourceManager.Extension.Subscription,
+  createOrUpdate is SubscriptionSecurityApplicationOps.CreateOrUpdateSync<
     Application,
-    Error = CloudError
+    ErrorType = CloudError
   >;
 
   /**
    * Delete an Application over a given scope
    */
-  delete is Azure.ResourceManager.Extension.DeleteSync<
-    Azure.ResourceManager.Extension.Subscription,
+  delete is SubscriptionSecurityApplicationOps.DeleteSync<
     Application,
-    Error = CloudError
+    ErrorType = CloudError
   >;
 
   /**
    * Get a list of all relevant applications over a subscription level scope
    */
-  list is Azure.ResourceManager.Extension.ListByTarget<
-    Azure.ResourceManager.Extension.Subscription,
+  list is SubscriptionSecurityApplicationOps.List<
     Application,
     Response = ArmResponse<ApplicationsList>,
-    Error = CloudError
+    ErrorType = CloudError
   >;
 }
+alias SubscriptionSecurityApplicationOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+  },
+  {
+    ...Azure.ResourceManager.Extension.ExtensionProviderNamespace<Application>;
+  },
+  {
+    ...Azure.ResourceManager.Extension.ExtensionProviderNamespace<Application>;
+
+    /** The security Application key - unique key for the standard application */
+    @path
+    @segment("applications")
+    @key
+    applicationId: string;
+  },
+  "SubscriptionSecurityApplication"
+>;
+
 alias SecurityConnectorApplicationOps = Azure.ResourceManager.Legacy.ExtensionOperations<
   {
     ...ApiVersionParameter;
@@ -94,7 +110,8 @@ alias SecurityConnectorApplicationOps = Azure.ResourceManager.Legacy.ExtensionOp
     @segment("applications")
     @key
     applicationId: string;
-  }
+  },
+  "SecurityConnectorApplication"
 >;
 
 @armResourceOperations(#{ omitTags: true })

@@ -46,20 +46,41 @@ interface SingleDocumentTranslationClient {
   documentTranslate is DocumentTranslation.DocumentTranslationOperations.documentTranslate;
 }
 
-@@clientName(SingleDocumentTranslationClient.documentTranslate, "translate");
+@@clientName(
+  SingleDocumentTranslationClient.documentTranslate,
+  "translate",
+  "!autorest"
+);
 
-@@clientName(DocumentTranslation.StatusSummary, "translationStatusSummary");
+@@clientName(
+  DocumentTranslation.StatusSummary,
+  "translationStatusSummary",
+  "!autorest"
+);
 
-@@clientName(DocumentTranslation.StorageSource, "translationStorageSource");
+@@clientName(
+  DocumentTranslation.StorageSource,
+  "translationStorageSource",
+  "!autorest"
+);
 
 @@clientName(
   DocumentTranslation.GetTranslationsStatusOptions.ids,
-  "translationIds"
+  "translationIds",
+  "!autorest"
 );
 
-@@clientName(DocumentTranslation.GetDocumentsStatusOptions.id, "translationId");
+@@clientName(
+  DocumentTranslation.GetDocumentsStatusOptions.id,
+  "translationId",
+  "!autorest"
+);
 
-@@clientName(DocumentTranslation.GetDocumentsStatusOptions.ids, "documentIds");
+@@clientName(
+  DocumentTranslation.GetDocumentsStatusOptions.ids,
+  "documentIds",
+  "!autorest"
+);
 
 @@clientName(
   DocumentTranslation.DocumentTranslateBody.body,
@@ -331,3 +352,5 @@ interface SingleDocumentTranslationClient {
   "totalImagesChargedCount",
   "java"
 );
+
+@@usage(DocumentTranslation.DocumentTranslateContent, Usage.json, "csharp");

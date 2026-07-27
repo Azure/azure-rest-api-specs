@@ -60,7 +60,8 @@ interface ProductApiLinkContractOps
         @minLength(1)
         @maxLength(80)
         apiLinkId: string,
-      }
+      },
+      ResourceName = "ServiceProductApiLink"
     > {}
 
 @armResourceOperations
@@ -162,7 +163,8 @@ interface WorkspaceProductApiLinkOps
         @minLength(1)
         @maxLength(80)
         apiLinkId: string,
-      }
+      },
+      ResourceName = "ServiceWorkspaceProductApiLink"
     > {}
 
 @armResourceOperations

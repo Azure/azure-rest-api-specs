@@ -22,6 +22,7 @@ import "./TriageRecommendation.tsp";
 import "./TriageResource.tsp";
 import "./routes.tsp";
 import "./back-compatible.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

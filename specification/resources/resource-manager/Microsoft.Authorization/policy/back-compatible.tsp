@@ -86,6 +86,10 @@ using Microsoft.Authorization;
   PolicyTokensOperationGroup.acquireAtManagementGroup,
   "PolicyTokens"
 );
+@@clientLocation(
+  PolicyTokensOperationGroup.acquireAtResourceGroup,
+  "PolicyTokens"
+);
 @@clientName(PolicyTokensOperationGroup.acquire::parameters.body, "parameters");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."

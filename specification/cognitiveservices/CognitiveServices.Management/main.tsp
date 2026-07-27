@@ -44,6 +44,7 @@ import "./Compute.tsp";
 import "./Workbench.tsp";
 import "./ManagedComputeCapacity.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -93,6 +94,11 @@ enum Versions {
    * The 2026-05-01 API version.
    */
   v2026_05_01: "2026-05-01",
+
+  /**
+   * The 2026-05-15-preview API version.
+   */
+  v2026_05_15_preview: "2026-05-15-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

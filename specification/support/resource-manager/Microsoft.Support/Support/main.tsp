@@ -22,6 +22,7 @@ import "./ChatTranscriptDetails.tsp";
 import "./FileWorkspaceDetails.tsp";
 import "./FileDetails.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -52,6 +53,12 @@ enum Versions {
    */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2026_06_01: "2026-06-01",
+
+  /**
+   * The 2026-07-01 API version.
+   */
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  v2026_07_01: "2026-07-01",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

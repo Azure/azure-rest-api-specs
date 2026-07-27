@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "api-version": "2024-07-01-preview",
+    "connectorName": "connectorName",
+    "location": "westus",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "authType": "secret",
+          "isConnectionAvailable": true,
+          "reportEndTimeUtc": "2020-07-12T22:06:09Z",
+          "reportStartTimeUtc": "2020-07-12T22:05:09Z",
+          "validationDetail": [
+            {
+              "name": "TargetExistence",
+              "description": "The target existence is validated",
+              "result": "success"
+            },
+            {
+              "name": "TargetNetworkAccess",
+              "description": "Deny public network access is set to yes. Please confirm you are using private endpoint connection to access target resource.",
+              "result": "warning"
+            }
+          ]
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-AsyncOperation": "http://azure.async.operation/status"
+      }
+    }
+  },
+  "operationId": "Connector_Validate",
+  "title": "ValidateConnectorSuccess"
+}

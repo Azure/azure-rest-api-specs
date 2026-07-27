@@ -14,6 +14,7 @@ import "./vmAttributes.tsp";
 import "./ComputeDiagnosticBase.tsp";
 import "./SkuMixPlacementBase.tsp";
 import "./back-compatible.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
