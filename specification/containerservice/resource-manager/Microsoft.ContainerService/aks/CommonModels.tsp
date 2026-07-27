@@ -4362,6 +4362,27 @@ model SubResource {
 }
 
 /**
+ * The current status of an async operation.
+ */
+model OperationStatusResult {
+  ...Azure.ResourceManager.CommonTypes.OperationStatusResult;
+
+  /**
+   * The type of the operation.
+   */
+  @added(Versions.v2026_06_02_preview)
+  @visibility(Lifecycle.Read)
+  operationType?: string;
+
+  /**
+   * The type of the suboperation.
+   */
+  @added(Versions.v2026_06_02_preview)
+  @visibility(Lifecycle.Read)
+  subOperationType?: string;
+}
+
+/**
  * The operations list. It contains an URL link to get the next set of results.
  */
 model OperationStatusResultList is Azure.Core.Page<OperationStatusResult>;

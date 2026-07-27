@@ -642,7 +642,7 @@ interface ManagedClusters {
   operationStatusResultGet is ManagedClusterOps.ActionSync<
     ManagedCluster,
     void,
-    ArmResponse<Azure.ResourceManager.CommonTypes.OperationStatusResult>,
+    ArmResponse<OperationStatusResult>,
     Parameters = {
       /**
        * The ID of an ongoing async operation.

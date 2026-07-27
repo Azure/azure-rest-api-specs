@@ -1324,6 +1324,7 @@ namespace Azure.ResourceManager.ContainerService.Models {
 @@scope(ManagedClusters.operationStatusResultList, "!csharp");
 @@scope(ManagedClusters.operationStatusResultGet, "!csharp");
 @@scope(AgentPools.getByAgentPool, "!csharp");
+@@scope(AgentPools.listByAgentPool, "!csharp");
 @@scope(Operations.list, "!csharp");
 
 // we add this model in this namespace in order to replace some models with this model via alternateType decorator
