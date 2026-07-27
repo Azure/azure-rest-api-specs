@@ -96,6 +96,11 @@ using Microsoft.ContainerService;
   "count_ipv6",
   "python"
 );
+@@clientName(
+  ManagedClusterManagedOutboundIPProfile.countIPv6,
+  "count_ipv6",
+  "python"
+);
 
 @@clientName(
   ManagedClusterPodIdentityProvisioningError.error,
