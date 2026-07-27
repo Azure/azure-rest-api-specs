@@ -237,7 +237,6 @@ using Microsoft.ServiceBus;
   "csharp"
 );
 @@clientName(NWRuleSetIpRules.ipMask, "IPMask", "csharp");
-@@clientName(CorrelationFilter.properties, "ApplicationProperties", "csharp");
 @@clientName(CorrelationFilter.to, "SendTo", "csharp");
 @@clientName(CorrelationFilter.label, "Subject", "csharp");
 @@clientName(SBNamespaceProperties.zoneRedundant, "IsZoneRedundant", "csharp");
