@@ -15,9 +15,7 @@ namespace Microsoft.ContainerService;
 @added(Versions.v2026_08_02_preview)
 @doc("""
   A custom AI model registered by the customer and scoped to a specific
-  AIManager. The RP delegates a dry-run to the in-cluster KAITO operator to
-  validate architecture support against the cluster's runtime and to fetch
-  model metadata into `spec`.
+  AIManager.
   """)
 @resource("customAIModels")
 @parentResource(AIManager)
@@ -44,7 +42,7 @@ model CustomAIModelProperties {
     The model identifier, interpreted per the referenced ModelSource type.
     For `HuggingFace` sources this is the upstream `<org>/<repo>` id, e.g.
     `meta-llama/Llama-2-7b-chat`. For `MicrosoftFoundry` sources this is
-    `modelName/version`, e.g. `private-qwen/1` (the platform splits model and
+    `modelName/version`, e.g. `private-llama/1` (the platform splits model and
     version on the final `/`). Immutable after creation.
     """)
   modelId: string;
@@ -57,7 +55,7 @@ model CustomAIModelProperties {
   description?: string;
 
   @visibility(Lifecycle.Read)
-  @doc("Read-only. Platform-resolved specification of the model, populated by the pre-flight dry-run against the in-cluster KAITO operator.")
+  @doc("Read-only. Platform-resolved specification of the model.")
   spec?: CustomAIModelSpec;
 }
 
@@ -102,7 +100,7 @@ union CustomAIModelProvisioningState {
 interface CustomAIModels {
   get is ArmResourceRead<CustomAIModel>;
 
-  @doc("Create or update a `CustomAIModel`. This is a full-replace operation: any optional property omitted from the request body is reset to its default value, or cleared if it has no default. To safely modify a subset of fields (e.g. `description`), perform a GET, modify the returned resource, and PUT it back using the returned ETag via the `If-Match` header. A PUT that changes the immutable `modelId` or `modelSourceResourceId` is rejected. Initiates a KAITO dry-run; provisioning state evolves asynchronously.")
+  @doc("Create or update a `CustomAIModel`. This is a full-replace operation: any optional property omitted from the request body is reset to its default value, or cleared if it has no default. To safely modify a subset of fields (e.g. `description`), perform a GET, modify the returned resource, and PUT it back using the returned ETag via the `If-Match` header. A PUT that changes the immutable `modelId` or `modelSourceResourceId` is rejected.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     CustomAIModel,
     Azure.ResourceManager.Foundations.BaseParameters<CustomAIModel> &
