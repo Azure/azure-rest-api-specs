@@ -21634,6 +21634,75 @@ model GatewayRoute {
 }
 
 /**
+ * List of virtual network gateway effective routes.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This model is part of the existing Network Gateway resource type and must use legacy patterns for backward compatibility"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
+@added(Versions.v2025_09_01)
+model GatewayEffectiveRouteListResult {
+  /**
+   * List of gateway effective routes.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Effective route items have no single stable identifier property to key on."
+  @pageItems
+  value?: GatewayEffectiveRoute[];
+}
+
+/**
+ * Gateway effective routing details.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This model is part of the existing Network Gateway resource type and must use legacy patterns for backward compatibility"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
+@added(Versions.v2025_09_01)
+model GatewayEffectiveRoute {
+  /**
+   * The gateway's local address.
+   */
+  @visibility(Lifecycle.Read)
+  localAddress?: string;
+
+  /**
+   * The list of address prefixes for the effective route.
+   */
+  @visibility(Lifecycle.Read)
+  addressPrefixes?: string[];
+
+  /**
+   * The IP address of the next hop for the effective route.
+   */
+  @visibility(Lifecycle.Read)
+  nextHopIpAddress?: string;
+
+  /**
+   * The next hop type of the effective route.
+   */
+  @visibility(Lifecycle.Read)
+  nextHopType?: GatewayEffectiveRouteNextHopType;
+}
+
+/**
+ * The next hop type of a gateway effective route.
+ */
+union GatewayEffectiveRouteNextHopType {
+  string,
+
+  /**
+   * Tunnel
+   */
+  Tunnel: "Tunnel",
+
+  /**
+   * VirtualNetwork
+   */
+  VirtualNetwork: "VirtualNetwork",
+
+  /**
+   * Unknown
+   */
+  Unknown: "Unknown",
+}
+
+/**
  * Gateway Resiliency Information
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
