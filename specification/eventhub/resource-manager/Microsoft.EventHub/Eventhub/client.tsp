@@ -307,6 +307,49 @@ using Microsoft.EventHub;
   Usage.input | Usage.output,
   "csharp"
 );
+
+// Preserve the resource name constraints emitted by the reflection-based provisioning generator.
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Name constraints for provisioning compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Name constraints for provisioning compatibility"
+@@clientOption(
+  EventHubsCluster,
+  "resource-name-constraint",
+  #{ minLength: 6, maxLength: 50, pattern: "^[a-zA-Z0-9-]+$" },
+  "csharp"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Name constraints for provisioning compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Name constraints for provisioning compatibility"
+@@clientOption(
+  EventHubsNamespace,
+  "resource-name-constraint",
+  #{ minLength: 1, maxLength: 256, pattern: "^[a-zA-Z0-9._-]+$" },
+  "csharp"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Name constraints for provisioning compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Name constraints for provisioning compatibility"
+@@clientOption(
+  AuthorizationRule,
+  "resource-name-constraint",
+  #{ minLength: 1, maxLength: 50, pattern: "^[a-zA-Z0-9._-]+$" },
+  "csharp"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Name constraints for provisioning compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Name constraints for provisioning compatibility"
+@@clientOption(
+  ConsumerGroup,
+  "resource-name-constraint",
+  #{ minLength: 1, maxLength: 50, pattern: "^[a-zA-Z0-9._-]+$" },
+  "csharp"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Name constraints for provisioning compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Name constraints for provisioning compatibility"
+@@clientOption(
+  ArmDisasterRecovery,
+  "resource-name-constraint",
+  #{ minLength: 6, maxLength: 50, pattern: "^[a-zA-Z0-9-]+$" },
+  "csharp"
+);
+
 // Mark list operations as pageable for C# backward compatibility
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility with pageable list operations"
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(
