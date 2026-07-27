@@ -1819,10 +1819,6 @@ model BatchPoolSpecification {
   @added(Versions.v2026_08_01)
   vmSkuProfile?: VirtualMachineSkuProfile;
 
-  @doc("Specifies the hardware settings for the Compute Nodes.")
-  @added(Versions.v2026_08_01)
-  hardwareProfile?: HardwareProfile;
-
   @doc("The number of task slots that can be used to run concurrent tasks on a single compute node in the pool. The default value is 1. The maximum value is the smaller of 4 times the number of cores of the vmSize of the pool or 256.")
   taskSlotsPerNode?: int32;
 
