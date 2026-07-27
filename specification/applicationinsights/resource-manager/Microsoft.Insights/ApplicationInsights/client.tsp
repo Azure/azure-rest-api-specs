@@ -121,11 +121,13 @@ namespace ApplicationInsightsManagementClient;
   "DeleteAnalyticsItem",
   "csharp"
 );
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Confirmed overload operations: Annotations list/get both map to the GA GetAnnotations method as distinct overloads (different parameters)."
 @@clientName(
   ComponentAPIs.AnnotationsOperationGroup.list,
   "GetAnnotations",
   "csharp"
 );
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Confirmed overload operations: Annotations list/get both map to the GA GetAnnotations method as distinct overloads (different parameters)."
 @@clientName(
   ComponentAPIs.AnnotationsOperationGroup.get,
   "GetAnnotations",
@@ -386,12 +388,16 @@ namespace ApplicationInsightsManagementClient;
 // same `Workbook` model, so the emitter names both `WorkbookResource` (duplicate
 // accessor). Set an explicit resource-name on each Read op to give them distinct
 // GA names and split them into two resources.
-@@clientOption(WorkbooksApi.Workbooks.get,
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Restore the distinct GA C# resource names for the workbook and its revision, which share the Workbook model."
+@@clientOption(
+  WorkbooksApi.Workbooks.get,
   "resource-name",
   "ApplicationInsightsWorkbook",
   "csharp"
 );
-@@clientOption(WorkbooksApi.WorkbookOperationGroup.revisionGet,
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Restore the distinct GA C# resource names for the workbook and its revision, which share the Workbook model."
+@@clientOption(
+  WorkbooksApi.WorkbookOperationGroup.revisionGet,
   "resource-name",
   "ApplicationInsightsWorkbookRevision",
   "csharp"
@@ -401,115 +407,168 @@ namespace ApplicationInsightsManagementClient;
 // rename-mapping to match the GA (1.1.0) public surface. ----
 
 // Boolean/property name renames (Is* prefixes, *InSeconds, *On).
-@@clientName(Components.ApplicationInsightsComponentProperties.DisableIpMasking,
+@@clientName(
+  Components.ApplicationInsightsComponentProperties.DisableIpMasking,
   "IsDisableIPMasking",
   "csharp"
 );
-@@clientName(Components.ApplicationInsightsComponentProperties.ImmediatePurgeDataOn30Days,
+@@clientName(
+  Components.ApplicationInsightsComponentProperties.ImmediatePurgeDataOn30Days,
   "IsImmediatePurgeDataOn30Days",
   "csharp"
 );
-@@clientName(Components.ApplicationInsightsComponentProperties.DisableLocalAuth,
+@@clientName(
+  Components.ApplicationInsightsComponentProperties.DisableLocalAuth,
   "IsDisableLocalAuth",
   "csharp"
 );
-@@clientName(Components.ApplicationInsightsComponentProperties.ForceCustomerStorageForProfiler,
+@@clientName(
+  Components.ApplicationInsightsComponentProperties.ForceCustomerStorageForProfiler,
   "IsForceCustomerStorageForProfiler",
   "csharp"
 );
-@@clientName(ComponentAPIs.ApplicationInsightsComponentDataVolumeCap.StopSendNotificationWhenHitThreshold,
+@@clientName(
+  ComponentAPIs.ApplicationInsightsComponentDataVolumeCap.StopSendNotificationWhenHitThreshold,
   "IsStopSendNotificationWhenHitThreshold",
   "csharp"
 );
-@@clientName(ComponentAPIs.ApplicationInsightsComponentDataVolumeCap.StopSendNotificationWhenHitCap,
+@@clientName(
+  ComponentAPIs.ApplicationInsightsComponentDataVolumeCap.StopSendNotificationWhenHitCap,
   "IsStopSendNotificationWhenHitCap",
   "csharp"
 );
-@@clientName(ComponentAPIs.ApplicationInsightsComponentProactiveDetectionConfiguration.enabled,
+@@clientName(
+  ComponentAPIs.ApplicationInsightsComponentProactiveDetectionConfiguration.enabled,
   "IsEnabled",
   "csharp"
 );
-@@clientName(ComponentAPIs.ApplicationInsightsComponentProactiveDetectionConfiguration.lastUpdatedTime,
+@@clientName(
+  ComponentAPIs.ApplicationInsightsComponentProactiveDetectionConfiguration.lastUpdatedTime,
   "LastUpdatedOn",
   "csharp"
 );
-@@clientName(ComponentAPIs.ApplicationInsightsComponentFeatureCapabilities.SupportExportData,
+@@clientName(
+  ComponentAPIs.ApplicationInsightsComponentFeatureCapabilities.SupportExportData,
   "IsExportDataSupported",
   "csharp"
 );
-@@clientName(ComponentAPIs.ApplicationInsightsComponentProactiveDetectionConfigurationRuleDefinitions.SupportsEmailNotifications,
+@@clientName(
+  ComponentAPIs.ApplicationInsightsComponentProactiveDetectionConfigurationRuleDefinitions.SupportsEmailNotifications,
   "IsEmailNotificationsSupported",
   "csharp"
 );
-@@clientName(ComponentAPIs.ApplicationInsightsComponentExportConfiguration.NotificationQueueEnabled,
+@@clientName(
+  ComponentAPIs.ApplicationInsightsComponentExportConfiguration.NotificationQueueEnabled,
   "IsNotificationQueueEnabled",
   "csharp"
 );
-@@clientName(ComponentAPIs.ApplicationInsightsComponentExportConfiguration.LastUserUpdate,
+@@clientName(
+  ComponentAPIs.ApplicationInsightsComponentExportConfiguration.LastUserUpdate,
   "LastUserUpdatedOn",
   "csharp"
 );
-@@clientName(ComponentAPIs.ApplicationInsightsComponentExportConfiguration.LastSuccessTime,
+@@clientName(
+  ComponentAPIs.ApplicationInsightsComponentExportConfiguration.LastSuccessTime,
   "LastSucceededOn",
   "csharp"
 );
-@@clientName(ComponentAPIs.ApplicationInsightsComponentExportConfiguration.LastGapTime,
+@@clientName(
+  ComponentAPIs.ApplicationInsightsComponentExportConfiguration.LastGapTime,
   "LastGappedOn",
   "csharp"
 );
-@@clientName(ComponentAPIs.ApplicationInsightsComponentExportRequest.NotificationQueueEnabled,
+@@clientName(
+  ComponentAPIs.ApplicationInsightsComponentExportRequest.NotificationQueueEnabled,
   "IsNotificationQueueEnabled",
   "csharp"
 );
 @@clientName(ComponentAPIs.Annotation.EventTime, "EventOccurredOn", "csharp");
-@@clientName(ComponentAPIs.ApplicationInsightsComponentAPIKey.createdDate,
+@@clientName(
+  ComponentAPIs.ApplicationInsightsComponentAPIKey.createdDate,
   "CreatedOn",
   "csharp"
 );
-@@clientName(ComponentAPIs.ApplicationInsightsComponentFeature.ResouceId,
+@@clientName(
+  ComponentAPIs.ApplicationInsightsComponentFeature.ResouceId,
   "ResourceId",
   "csharp"
 );
-@@clientName(ComponentAPIs.ApplicationInsightsComponentQuotaStatus.ExpirationTime,
+@@clientName(
+  ComponentAPIs.ApplicationInsightsComponentQuotaStatus.ExpirationTime,
   "ExpireOn",
   "csharp"
 );
-@@clientName(ComponentAPIs.WorkItemCreateConfiguration.ValidateOnly,
+@@clientName(
+  ComponentAPIs.WorkItemCreateConfiguration.ValidateOnly,
   "IsValidateOnly",
   "csharp"
 );
-@@clientName(Favorites.ApplicationInsightsComponentFavorite.TimeModified,
+@@clientName(
+  Favorites.ApplicationInsightsComponentFavorite.TimeModified,
   "ModifiedOn",
   "csharp"
 );
 @@clientName(WebTestsApi.WebTestProperties.Enabled, "IsEnabled", "csharp");
-@@clientName(WebTestsApi.WebTestProperties.Frequency, "FrequencyInSeconds", "csharp");
-@@clientName(WebTestsApi.WebTestProperties.Timeout, "TimeoutInSeconds", "csharp");
-@@clientName(WebTestsApi.WebTestProperties.RetryEnabled, "IsRetryEnabled", "csharp");
-@@clientName(WebTestsApi.WebTestPropertiesValidationRules.SSLCheck, "CheckSsl", "csharp");
-@@clientName(WebTestsApi.WebTestPropertiesValidationRules.SSLCertRemainingLifetimeCheck,
+@@clientName(
+  WebTestsApi.WebTestProperties.Frequency,
+  "FrequencyInSeconds",
+  "csharp"
+);
+@@clientName(
+  WebTestsApi.WebTestProperties.Timeout,
+  "TimeoutInSeconds",
+  "csharp"
+);
+@@clientName(
+  WebTestsApi.WebTestProperties.RetryEnabled,
+  "IsRetryEnabled",
+  "csharp"
+);
+@@clientName(
+  WebTestsApi.WebTestPropertiesValidationRules.SSLCheck,
+  "CheckSsl",
+  "csharp"
+);
+@@clientName(
+  WebTestsApi.WebTestPropertiesValidationRules.SSLCertRemainingLifetimeCheck,
   "SslCertRemainingLifetimeCheck",
   "csharp"
 );
-@@clientName(AnalyticsItems.ApplicationInsightsComponentAnalyticsItem.TimeCreated,
+@@clientName(
+  AnalyticsItems.ApplicationInsightsComponentAnalyticsItem.TimeCreated,
   "CreatedOn",
   "csharp"
 );
-@@clientName(AnalyticsItems.ApplicationInsightsComponentAnalyticsItem.TimeModified,
+@@clientName(
+  AnalyticsItems.ApplicationInsightsComponentAnalyticsItem.TimeModified,
   "ModifiedOn",
   "csharp"
 );
-@@clientName(AnalyticsItems.ApplicationInsightsComponentAnalyticsItem.Type,
+@@clientName(
+  AnalyticsItems.ApplicationInsightsComponentAnalyticsItem.Type,
   "ComponentItemType",
   "csharp"
 );
-@@clientName(WorkbooksApi.WorkbookProperties.timeModified, "ModifiedOn", "csharp");
+@@clientName(
+  WorkbooksApi.WorkbookProperties.timeModified,
+  "ModifiedOn",
+  "csharp"
+);
 @@clientName(WorkbooksApi.WorkbookProperties.sourceId, "SourceId", "csharp");
-@@clientName(WorkbooksApi.WorkbookProperties.storageUri, "StorageUri", "csharp");
-@@clientName(WorkbookTemplatesApi.WorkbookTemplateGallery.type, "WorkbookType", "csharp");
+@@clientName(
+  WorkbooksApi.WorkbookProperties.storageUri,
+  "StorageUri",
+  "csharp"
+);
+@@clientName(
+  WorkbookTemplatesApi.WorkbookTemplateGallery.type,
+  "WorkbookType",
+  "csharp"
+);
 @@clientName(Components.ApplicationInsightsComponent.etag, "ETag", "csharp");
 @@clientName(WorkbooksApi.Workbook.etag, "ETag", "csharp");
-@@clientName(ComponentAPIs.ApplicationInsightsComponentAPIKey,
+@@clientName(
+  ComponentAPIs.ApplicationInsightsComponentAPIKey,
   "ApplicationInsightsComponentApiKey",
   "csharp"
 );
@@ -517,76 +576,107 @@ namespace ApplicationInsightsManagementClient;
 // Enum member renames.
 @@clientName(WebTestsApi.WebTestKind.multistep, "MultiStep", "csharp");
 @@clientName(ApplicationInsightsCommonTypes.CategoryType.TSG, "Tsg", "csharp");
-@@clientName(AnalyticsItems.ItemScopePath.myanalyticsItems, "MyAnalyticsItems", "csharp");
+@@clientName(
+  AnalyticsItems.ItemScopePath.myanalyticsItems,
+  "MyAnalyticsItems",
+  "csharp"
+);
 
 // Operation method-name renames (component convenience list ops + live token).
-@@clientName(WebTestsApi.WebTestsOperationGroup.listByComponent, "GetWebTests", "csharp");
-@@clientName(WebTestLocation.webTestLocationsOperationGroup.list,
+@@clientName(
+  WebTestsApi.WebTestsOperationGroup.listByComponent,
+  "GetWebTests",
+  "csharp"
+);
+@@clientName(
+  WebTestLocation.webTestLocationsOperationGroup.list,
   "GetWebTestLocations",
   "csharp"
 );
-@@clientName(LiveTokenApi.LiveTokenOperationGroup.get, "GetLiveToken", "csharp");
+@@clientName(
+  LiveTokenApi.LiveTokenOperationGroup.get,
+  "GetLiveToken",
+  "csharp"
+);
 
 // Type hints: string -> DateTimeOffset (utcDateTime), ARM id, Guid, Uri, ETag.
-@@alternateType(ComponentAPIs.ApplicationInsightsComponentProactiveDetectionConfiguration.lastUpdatedTime,
+@@alternateType(
+  ComponentAPIs.ApplicationInsightsComponentProactiveDetectionConfiguration.lastUpdatedTime,
   utcDateTime,
   "csharp"
 );
-@@alternateType(ComponentAPIs.ApplicationInsightsComponentExportConfiguration.LastUserUpdate,
+@@alternateType(
+  ComponentAPIs.ApplicationInsightsComponentExportConfiguration.LastUserUpdate,
   utcDateTime,
   "csharp"
 );
-@@alternateType(ComponentAPIs.ApplicationInsightsComponentExportConfiguration.LastSuccessTime,
+@@alternateType(
+  ComponentAPIs.ApplicationInsightsComponentExportConfiguration.LastSuccessTime,
   utcDateTime,
   "csharp"
 );
-@@alternateType(ComponentAPIs.ApplicationInsightsComponentExportConfiguration.LastGapTime,
+@@alternateType(
+  ComponentAPIs.ApplicationInsightsComponentExportConfiguration.LastGapTime,
   utcDateTime,
   "csharp"
 );
-@@alternateType(ComponentAPIs.ApplicationInsightsComponentAPIKey.createdDate,
+@@alternateType(
+  ComponentAPIs.ApplicationInsightsComponentAPIKey.createdDate,
   utcDateTime,
   "csharp"
 );
-@@alternateType(ComponentAPIs.ApplicationInsightsComponentQuotaStatus.ExpirationTime,
+@@alternateType(
+  ComponentAPIs.ApplicationInsightsComponentQuotaStatus.ExpirationTime,
   utcDateTime,
   "csharp"
 );
-@@alternateType(Favorites.ApplicationInsightsComponentFavorite.TimeModified,
+@@alternateType(
+  Favorites.ApplicationInsightsComponentFavorite.TimeModified,
   utcDateTime,
   "csharp"
 );
-@@alternateType(AnalyticsItems.ApplicationInsightsComponentAnalyticsItem.TimeCreated,
+@@alternateType(
+  AnalyticsItems.ApplicationInsightsComponentAnalyticsItem.TimeCreated,
   utcDateTime,
   "csharp"
 );
-@@alternateType(AnalyticsItems.ApplicationInsightsComponentAnalyticsItem.TimeModified,
+@@alternateType(
+  AnalyticsItems.ApplicationInsightsComponentAnalyticsItem.TimeModified,
   utcDateTime,
   "csharp"
 );
-@@alternateType(Components.ApplicationInsightsComponentProperties.WorkspaceResourceId,
+@@alternateType(
+  Components.ApplicationInsightsComponentProperties.WorkspaceResourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(ComponentAPIs.ApplicationInsightsComponentFeature.ResouceId,
+@@alternateType(
+  ComponentAPIs.ApplicationInsightsComponentFeature.ResouceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(WorkbooksApi.WorkbookProperties.sourceId,
+@@alternateType(
+  WorkbooksApi.WorkbookProperties.sourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(Components.ApplicationInsightsComponentProperties.TenantId,
+@@alternateType(
+  Components.ApplicationInsightsComponentProperties.TenantId,
   Azure.Core.uuid,
   "csharp"
 );
 @@alternateType(WorkbooksApi.WorkbookProperties.storageUri, url, "csharp");
-@@alternateType(Components.ApplicationInsightsComponent.etag, Azure.Core.eTag, "csharp");
+@@alternateType(
+  Components.ApplicationInsightsComponent.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
 @@alternateType(WorkbooksApi.Workbook.etag, Azure.Core.eTag, "csharp");
 
 // Workbook identity: GA exposes the standard ManagedServiceIdentity envelope, not the
 // converted custom WorkbookResourceIdentity model.
-@@alternateType(WorkbooksApi.Workbook.identity,
+@@alternateType(
+  WorkbooksApi.Workbook.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
