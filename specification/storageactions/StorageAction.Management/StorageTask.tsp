@@ -15,8 +15,10 @@ namespace Microsoft.StorageActions;
 /**
  * Represents Storage Task.
  */
-model StorageTask
-  is Azure.ResourceManager.TrackedResource<StorageTaskProperties, false> {
+model StorageTask is Azure.ResourceManager.TrackedResource<
+  StorageTaskProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = StorageTask,
     KeyName = "storageTaskName",

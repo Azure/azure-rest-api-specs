@@ -245,6 +245,7 @@ using Microsoft.OperationalInsights;
   "csharp"
 );
 @@clientName(AssociatedWorkspace.associateDate, "AssociatedOn", "csharp");
+@@alternateType(AssociatedWorkspace.workspaceId, uuid, "csharp");
 @@alternateType(ClusterProperties.clusterId, uuid, "csharp");
 @@clientName(
   ClusterEntityStatus,
@@ -260,6 +261,11 @@ using Microsoft.OperationalInsights;
 @@clientName(
   ClusterReplicationProperties,
   "OperationalInsightsClusterReplicationProperties",
+  "csharp"
+);
+@@alternateType(
+  ClusterReplicationProperties.location,
+  Azure.Core.azureLocation,
   "csharp"
 );
 @@clientName(
@@ -281,6 +287,7 @@ using Microsoft.OperationalInsights;
   "OperationalInsightsKeyVaultProperties",
   "csharp"
 );
+@@alternateType(KeyVaultProperties.keyVaultUri, url, "csharp");
 @@clientName(
   LinkedServiceEntityStatus,
   "OperationalInsightsLinkedServiceEntityStatus",
@@ -290,6 +297,11 @@ using Microsoft.OperationalInsights;
 @@clientName(
   PrivateLinkScopedResource,
   "OperationalInsightsPrivateLinkScopedResourceInfo",
+  "csharp"
+);
+@@alternateType(
+  PrivateLinkScopedResource.resourceId,
+  armResourceIdentifier,
   "csharp"
 );
 @@clientName(
@@ -322,6 +334,8 @@ using Microsoft.OperationalInsights;
 @@clientName(TablePlanEnum, "OperationalInsightsTablePlan", "csharp");
 @@clientName(SearchResults, "OperationalInsightsTableSearchResults", "csharp");
 @@clientName(RestoredLogs, "OperationalInsightsTableRestoredLogs", "csharp");
+@@alternateType(SearchResults.azureAsyncOperationId, uuid, "csharp");
+@@alternateType(RestoredLogs.azureAsyncOperationId, uuid, "csharp");
 @@clientName(
   ResultStatistics,
   "OperationalInsightsTableResultStatistics",
@@ -360,9 +374,19 @@ using Microsoft.OperationalInsights;
   "OperationalInsightsWorkspaceFeatures",
   "csharp"
 );
+@@alternateType(
+  WorkspaceFeatures.clusterResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
 @@clientName(
   WorkspaceReplicationProperties,
   "OperationalInsightsWorkspaceReplicationProperties",
+  "csharp"
+);
+@@alternateType(
+  WorkspaceReplicationProperties.location,
+  Azure.Core.azureLocation,
   "csharp"
 );
 @@clientName(

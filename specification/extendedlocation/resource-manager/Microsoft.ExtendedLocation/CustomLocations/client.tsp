@@ -108,6 +108,8 @@ op customLocationsUpdate(
   ...SubscriptionIdParameter,
   ...ResourceGroupParameter,
   provider: "Microsoft.ExtendedLocation",
+
+  @path
   resourceName: string,
 
   /**
@@ -134,8 +136,13 @@ op resourceSyncRulesUpdate(
   ...SubscriptionIdParameter,
   ...ResourceGroupParameter,
   provider: "Microsoft.ExtendedLocation",
+
+  @path
   resourceName: string,
+
+  @path
   childResourceName: string,
+
   properties?: resourceSyncRuleProperties,
 
   /**

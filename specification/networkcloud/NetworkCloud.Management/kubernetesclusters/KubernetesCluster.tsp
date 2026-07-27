@@ -12,20 +12,21 @@ namespace Microsoft.NetworkCloud;
 /**
  * The name of the Kubernetes cluster.
  */
-model KubernetesClusterNameParameter
-  is ResourceNameParameter<
-    Resource = KubernetesCluster,
-    KeyName = "kubernetesClusterName",
-    SegmentName = "kubernetesClusters",
-    NamePattern = "^([a-zA-Z0-9][a-zA-Z0-9-_]{0,28}[a-zA-Z0-9])$"
-  >;
+model KubernetesClusterNameParameter is ResourceNameParameter<
+  Resource = KubernetesCluster,
+  KeyName = "kubernetesClusterName",
+  SegmentName = "kubernetesClusters",
+  NamePattern = "^([a-zA-Z0-9][a-zA-Z0-9-_]{0,28}[a-zA-Z0-9])$"
+>;
 
 /**
  * KubernetesCluster represents the Kubernetes cluster hosted on Network Cloud.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "legacy resource using legacy features"
-model KubernetesCluster
-  is Azure.ResourceManager.TrackedResource<KubernetesClusterProperties, false> {
+model KubernetesCluster is Azure.ResourceManager.TrackedResource<
+  KubernetesClusterProperties,
+  false
+> {
   ...KubernetesClusterNameParameter;
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
   ...RequiredExtendedLocationProperty;

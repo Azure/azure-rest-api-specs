@@ -199,6 +199,26 @@ model RedisCommonPropertiesRedisConfigurationRecordString {
 );
 @@scope(Operations.list, "!csharp");
 @@clientName(RedisResource, "Redis", "csharp");
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Name constraints for provisioning"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Name constraints for provisioning"
+@@clientOption(
+  RedisResource,
+  "resource-name-constraint",
+  #{
+    minLength: 1,
+    maxLength: 63,
+    pattern: "^([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]|[a-zA-Z0-9])$",
+  },
+  "csharp"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Name constraints for provisioning"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Name constraints for provisioning"
+@@clientOption(
+  RedisFirewallRule,
+  "resource-name-constraint",
+  #{ minLength: 1, maxLength: 256, pattern: "^[a-zA-Z0-9]+$" },
+  "csharp"
+);
 #suppress "@azure-tools/typespec-client-generator-core/client-option" "RBAC roles for provisioning"
 @@clientOption(
   RedisResource,
