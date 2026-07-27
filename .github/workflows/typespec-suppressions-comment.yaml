@@ -1,0 +1,46 @@
+name: "TypeSpec Suppressions - Post Comment"
+
+on:
+  # Refresh the comment as soon as the analyzer report is available.
+  workflow_run:
+    # Trigger on both old and new names, to handle the rename more gracefully
+    workflows:
+      [
+        "TypeSpec Suppressions - Analyze Code",
+        "\\[TEST-IGNORE\\] TypeSpec Suppressions - Analyze Code",
+      ]
+    types: [completed]
+  # Refresh the ✅/❌ approval status when the Approved-TypeSpecSuppression label is
+  # added or removed. Must run on pull_request_target instead of pull_request, since
+  # the latter cannot trigger on labels from bot accounts in fork PRs, and it is
+  # privileged so it can post comments on fork PRs.
+  pull_request_target:
+    types:
+      - labeled
+      - unlabeled
+
+permissions:
+  actions: read
+  contents: read
+  pull-requests: write
+
+jobs:
+  post-comment:
+    name: Post TypeSpec Suppressions Comment
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          sparse-checkout: |
+            .github/
+
+      - name: Install dependencies for github-script actions
+        uses: ./.github/actions/install-deps-github-script
+
+      - name: Post TypeSpec suppressions review comment
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const { default: postSuppressionsResults } =
+              await import('${{ github.workspace }}/.github/workflows/src/typespec-suppressions/post-results.js');
+            await postSuppressionsResults({ github, context, core });
