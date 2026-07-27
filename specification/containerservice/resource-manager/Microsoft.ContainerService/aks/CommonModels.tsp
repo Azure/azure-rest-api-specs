@@ -4364,9 +4364,9 @@ model SubResource {
 /**
  * The current status of an async operation.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "OperationStatusResult follows the ARM common type shape by inheritance."
-model OperationStatusResult
-  extends Azure.ResourceManager.CommonTypes.OperationStatusResult {
+model OperationStatusResult {
+  ...Azure.ResourceManager.CommonTypes.OperationStatusResult;
+
   /**
    * The type of the operation.
    */
