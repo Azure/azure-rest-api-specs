@@ -35,3 +35,25 @@ using Microsoft.Solutions;
   "java"
 );
 @@clientName(ApplicationDefinitions.get, "getById", "java");
+
+@@access(ApplicationDefinitionOpsById.getById, Access.internal, "csharp");
+@@access(
+  ApplicationDefinitionOpsById.createOrUpdateById,
+  Access.internal,
+  "csharp"
+);
+@@access(ApplicationDefinitionOpsById.updateById, Access.internal, "csharp");
+@@access(ApplicationDefinitionOpsById.deleteById, Access.internal, "csharp");
+
+@@clientName(JitApproverDefinition, "JitApprover", "csharp");
+@@clientName(
+  ApplicationPackageLockingPolicyDefinition,
+  "ApplicationPackageLockingPolicy",
+  "csharp"
+);
+@@clientName(UpdateAccessDefinition, "UpdateAccessContent", "csharp");
+@@clientName(
+  ListTokenRequest,
+  "ManagedApplicationsListTokenRequestContent",
+  "csharp"
+);
