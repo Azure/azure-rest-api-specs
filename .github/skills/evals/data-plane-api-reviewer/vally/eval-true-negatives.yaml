@@ -66,9 +66,9 @@ stimuli:
         config:
           pattern: "(?im)^\\s*(?:[-*+]\\s*|#{1,6}\\s*)?🔴"
       - type: output-not-matches
-        name: "no invented modeling or doc findings"
+        name: "no finding raised on a clean specification"
         config:
-          pattern: "\\[DP-(MODEL|DOC|NAME|VIS)-0[0-9]\\]"
+          pattern: "\\*\\*\\[[A-Z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)+\\]"
       - type: prompt
     rubric:
       - The specification is compliant. It uses Azure.Core standard operations, an extensible union with documented members, @key with @visibility(Lifecycle.Read), descriptive @doc on every model, property, operation, and union member, a parent/child resource relationship, and paged list operations via ResourceList.
@@ -99,7 +99,7 @@ stimuli:
       - type: output-not-matches
         name: "no CRUD-in-disguise false positive"
         config:
-          pattern: "\\[DP-MODEL-01\\]"
+          pattern: "\\*\\*\\[DP-MODEL-01\\]"
       - type: output-not-matches
         name: "no blocking findings"
         config:
@@ -134,11 +134,11 @@ stimuli:
       - type: output-not-matches
         name: "no pagination false positive"
         config:
-          pattern: "\\[DP-PAGE-0[0-9]\\]"
+          pattern: "\\*\\*\\[DP-PAGE-0[0-9]\\]"
       - type: output-not-matches
         name: "no operation-symmetry false positive"
         config:
-          pattern: "\\[DP-MODEL-04\\]"
+          pattern: "\\*\\*\\[DP-MODEL-04\\]"
       - type: output-not-matches
         name: "no blocking findings"
         config:
@@ -208,11 +208,11 @@ stimuli:
       - type: output-not-matches
         name: "no finding raised on a linter-owned file"
         config:
-          pattern: "\\[DP-[A-Z]+-0[0-9]\\]"
+          pattern: "\\*\\*\\[[A-Z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)+\\]"
       - type: output-not-matches
         name: "no linter-owned rule raised as a finding"
         config:
-          pattern: "(?i)\\*\\*\\[DP-[A-Z]+-\\d\\d\\][^*\\n]*\\b(no-enum|no-nullable|no-format|no-unknown|no-generic-numeric|documentation-required|casing-style|request-body-problem|no-explicit-routes-resource-ops)\\b"
+          pattern: "(?i)\\*\\*\\[[A-Z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)+\\][^*\\n]*\\b(no-enum|no-nullable|no-format|no-unknown|no-generic-numeric|documentation-required|casing-style|request-body-problem|no-explicit-routes-resource-ops)\\b"
       - type: output-not-matches
         name: "no restatement of linted defects in prose"
         config:
@@ -245,11 +245,11 @@ stimuli:
       - type: output-not-matches
         name: "no finding raised on a runtime-behavioral file"
         config:
-          pattern: "\\[DP-[A-Z]+-0[0-9]\\]"
+          pattern: "\\*\\*\\[[A-Z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)+\\]"
       - type: output-not-matches
         name: "no runtime behaviour raised as a finding"
         config:
-          pattern: "(?i)\\*\\*\\[DP-[A-Z]+-\\d\\d\\][^*\\n]*\\b(sort order|sort ordering|ordering guarantee|retention (window|period|policy)|page size|throttl|rate limit|Retry-After|idempotenc|value preservation)\\b"
+          pattern: "(?i)\\*\\*\\[[A-Z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)+\\][^*\\n]*\\b(sort order|sort ordering|ordering guarantee|retention (window|period|policy)|page size|throttl|rate limit|Retry-After|idempotenc|value preservation)\\b"
       - type: output-not-matches
         name: "no blocking findings"
         config:
@@ -293,7 +293,7 @@ stimuli:
       - type: output-not-matches
         name: "no breaking-change violation claim"
         config:
-          pattern: "\\[DP-VERSION-0[0-9]\\]"
+          pattern: "\\*\\*\\[DP-VERSION-0[0-9]\\]"
       - type: prompt
     rubric:
       - Both API versions are preview. Preview versions carry no backward-compatibility guarantee, so removing `armOverrides` and dropping the `Adaptive` union member is permitted - trialling a shape and then withdrawing it is precisely what preview exists for.

@@ -400,6 +400,60 @@ Every grader is tested against two probes: a "correctly declining" sample it
 must _not_ match, and a real report it _must_ match. A grader that fires on the
 first is unsound; one that misses the second is inert and passes vacuously.
 
+### Non-DP rule IDs — widened 2026-07-27
+
+The smoke test showed the agent raising `**[SEC-SECRET-DETECT] ...**`, applying
+the bracketed convention to a **cross-cutting** rule ID. Three true-negative
+graders assumed the `DP-XXX-NN` shape and so could not see such a finding,
+meaning the suite would have reported a _cleaner_ false-positive rate than
+reality — the one direction an FP-defense suite cannot afford.
+
+Widened to the general finding form, which spans all 9 rule-ID families
+enumerated in
+[`data-plane-report-format.md`](../../azure-api-review/references/data-plane-report-format.md)
+§"Rule-ID vocabulary", including mixed-case IDs like `RPC-Put-V1-11`:
+
+```
+\*\*\[[A-Z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)+\]
+```
+
+Validated against 21 real recorded trials plus the contract and an adversarial
+set: **zero over-matches.** It does not match `**[Note]**` (no hyphen),
+`**[RFC 2119]**` (space), `[DP-VIS-02](link)` (not bold), checkboxes, or the
+considered-rules table.
+
+Two things this surfaced beyond the original gap:
+
+- **Positive graders lacked the bold anchor.** `\[DP-VIS-0[0-9]\]` would match
+  `See [DP-VIS-02](../references/…)` — a link the agent plausibly writes while
+  explaining why a rule does _not_ apply. All 10 specific graders now carry
+  `\*\*`, which makes them **more** precise without widening their rule family.
+- **`checkGraderSoundness` was blind to the same gap.** It now carries a
+  `NON_DP_FINDING_PROBE` and flags any _family-agnostic_ grader — one matching
+  two different DP families, so it is asserting "no finding of any kind" —
+  that cannot see non-DP IDs. Specific-trap graders naming a single rule are
+  deliberately exempt. Verified it fails on a re-narrowed grader.
+
+**Residual gap, not fixed.** Four true-negative stimuli
+(`tn-legitimate-action-not-crud`, `tn-bounded-list-and-singleton`,
+`tn-closed-union-justified`, `tn-preview-breaking-change-allowed`) carry only
+specific-trap graders plus a severity-glyph grader. Measured precisely:
+
+|                  | blocking non-DP FP                             | non-blocking non-DP FP |
+| ---------------- | ---------------------------------------------- | ---------------------- |
+| All 7 TN stimuli | **caught** (glyph graders are family-agnostic) | 3 of 7 caught          |
+
+So the **phase-2 gating metric is fully covered** — a blocking false positive
+of any family is caught on every stimulus. What is uncovered is a _non-blocking_
+non-DP finding on those four, which feeds the tracked-but-not-gating metric.
+
+Left unfixed deliberately: those four stimuli's rubrics explicitly tolerate
+suggestion-severity output ("asking whether the 200-entry bound is contractual,
+at 💡 Suggestion severity, is acceptable"). A blanket ban on bracketed findings
+would contradict them and produce false failures. Resolving that needs a
+decision about whether a true negative may contain a suggestion at all — which
+is a scope question, not a pattern question.
+
 ### Coverage restored after the rewrite
 
 The bracketed-ID rewrite made two graders strictly narrower than their names

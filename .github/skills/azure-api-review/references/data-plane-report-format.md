@@ -62,6 +62,41 @@ were live in this suite before the bracketed form was adopted.
 raising. When you mention a rule you considered and did not raise, write the
 rule ID bare, without brackets.
 
+### Rule-ID vocabulary
+
+The grading scheme depends on knowing every ID family a review can cite, so it
+is recorded here. Enumerated from citation contexts across `SKILL.md` and all
+`references/*.md`: **60 distinct IDs in 9 families.**
+
+| Family       | Shape                    | Example                  | Source                                  |
+| ------------ | ------------------------ | ------------------------ | --------------------------------------- |
+| `DP-`        | `DP-<AREA>-NN`           | `DP-VIS-02`              | the six data-plane references           |
+| `DDP-`       | `DDP-NNN`                | `DDP-002`                | `data-plane-design-decisions.md`        |
+| `SEC-`       | `SEC-<WORD>-<WORD>`      | `SEC-SECRET-DETECT`      | `secret-detection.md` (cross-cutting)   |
+| `EX-`        | `EX-<WORD>`              | `EX-ORPHAN`              | `example-quality.md` (cross-cutting)    |
+| `OAPI-`      | `OAPI-<WORD>-<WORD>`     | `OAPI-PATTERN-ALLOWLIST` | `pattern-validation.md` (cross-cutting) |
+| `RPC-`       | mixed case, multi-hyphen | `RPC-Put-V1-11`          | ARM references — must not be cited here |
+| `PREFLIGHT-` | `PREFLIGHT-NNN`          | `PREFLIGHT-001`          | ARM references — must not be cited here |
+| `WHATIF-`    | `WHATIF-NNN`             | `WHATIF-001`             | ARM references — must not be cited here |
+| `SECRET-`    | legacy alias             | `SECRET-DETECT`          | `secret-detection.md`                   |
+
+Two consequences the graders depend on:
+
+- **Not every ID starts with `DP-`.** A data-plane review legitimately cites
+  `SEC-SECRET-DETECT` and `EX-ORPHAN`; this was observed in a live run. Any
+  grader asserting "no finding of any kind" must therefore match the general
+  form, not the `DP-` shape:
+  ```
+  \*\*\[[A-Z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)+\]
+  ```
+- **Not every ID is all-caps.** `RPC-Put-V1-11` is mixed case. The ARM families
+  are listed because a _mistaken_ citation of one is still a finding a
+  true-negative grader must be able to see — not because a data-plane review
+  should ever cite them.
+
+The pattern above requires at least one hyphen, which is what keeps it from
+matching bolded prose like `**[Note]**` or `**[TODO]**`.
+
 ## Severity
 
 | Severity   | Glyph | Meaning                                                      | Use when                                                                                                        |

@@ -440,6 +440,94 @@ describe("checkGraderSoundness", () => {
     expect(bracketed.test(REAL_FINDINGS_PROBE)).toBe(true);
   });
 
+  it("requires the bold anchor to survive a markdown link to the rule", () => {
+    // `See [DP-VIS-02](../references/...)` is something the agent plausibly
+    // writes while explaining why a rule does NOT apply.
+    const unanchored = compileGraderPattern("\\[DP-VIS-0[0-9]\\]");
+    const anchored = compileGraderPattern("\\*\\*\\[DP-VIS-0[0-9]\\]");
+
+    expect(unanchored.test(CORRECT_SILENCE_PROBE)).toBe(true);
+    expect(anchored.test(CORRECT_SILENCE_PROBE)).toBe(false);
+    expect(anchored.test(REAL_FINDINGS_PROBE)).toBe(true);
+  });
+
+  it("the general finding pattern spans every rule-ID family the skill defines", () => {
+    const general = compileGraderPattern("\\*\\*\\[[A-Z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)+\\]");
+
+    for (const id of ["DP-VIS-02", "SEC-SECRET-DETECT", "EX-ORPHAN", "DDP-002", "RPC-Put-V1-11"]) {
+      expect(general.test(`**[${id}] Title** -- \`x.tsp:1\``), id).toBe(true);
+    }
+  });
+
+  it("the general finding pattern does not match non-findings", () => {
+    const general = compileGraderPattern("\\*\\*\\[[A-Z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)+\\]");
+
+    expect(general.test(CORRECT_SILENCE_PROBE)).toBe(false);
+    for (const text of [
+      "**[Note]** emphasis, no hyphen",
+      "**[RFC 2119]** contains a space",
+      "See [DP-VIS-02](refs/x.md) — a link, not bold",
+      "- [ ] a task checkbox",
+      "| **DP-VIS-02** (secrets) | Pass |",
+    ]) {
+      expect(general.test(text), text).toBe(false);
+    }
+  });
+
+  it("rejects a family-agnostic grader that cannot see non-DP rule IDs", async () => {
+    // The gap the smoke test exposed: a grader asserting "no finding of any
+    // kind" that only knows the DP-XXX-NN shape.
+    const core = createMockCore();
+    const rootDir = await createFixtureRepo();
+    await writeNested(
+      join(rootDir, EVAL_DIR, GATE_EVAL_FILE),
+      [
+        "name: gate",
+        "defaults:",
+        "  model: claude-opus-4.6",
+        `  judge_model: ${FROZEN_JUDGE_MODEL}`,
+        "stimuli:",
+        "  - name: tn-example",
+        "    graders:",
+        "      - type: output-not-matches",
+        '        name: "no finding raised"',
+        "        config:",
+        '          pattern: "\\\\*\\\\*\\\\[DP-[A-Z]+-\\\\d\\\\d\\\\]"',
+      ].join("\n"),
+    );
+
+    await expect(checkGraderSoundness({ core, rootDir })).resolves.toBe(false);
+
+    expect(core.setFailed).toBeCalledWith(expect.stringContaining("non-DP rule ID"));
+  });
+
+  it("leaves specific-trap graders alone", async () => {
+    // A grader naming ONE rule is asserting a specific trap did not fire. It
+    // is correct for it to ignore other families, so it must not be flagged.
+    const core = createMockCore();
+    const rootDir = await createFixtureRepo();
+    await writeNested(
+      join(rootDir, EVAL_DIR, GATE_EVAL_FILE),
+      [
+        "name: gate",
+        "defaults:",
+        "  model: claude-opus-4.6",
+        `  judge_model: ${FROZEN_JUDGE_MODEL}`,
+        "stimuli:",
+        "  - name: tn-example",
+        "    graders:",
+        "      - type: output-not-matches",
+        '        name: "no CRUD-in-disguise false positive"',
+        "        config:",
+        '          pattern: "\\\\*\\\\*\\\\[DP-MODEL-01\\\\]"',
+      ].join("\n"),
+    );
+
+    await expect(checkGraderSoundness({ core, rootDir })).resolves.toBe(true);
+
+    expect(core.setFailed).not.toBeCalled();
+  });
+
   it("rejects a grader that fires on correct silence", async () => {
     const core = createMockCore();
     const rootDir = await createFixtureRepo();

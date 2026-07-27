@@ -290,7 +290,9 @@ export async function checkFixtureLabelLeakage({ core, rootDir }) {
 export const CORRECT_SILENCE_PROBE = [
   "| **DP-MODEL-01** (actions ≠ CRUD) | ✅ Pass | Stateless computation. |",
   "| **DP-PAGE-01** (list ops paged) | ✅ Pass | Collection is bounded. |",
+  "| **SEC-SECRET-DETECT** (credentials) | ✅ Pass | No credential-shaped properties. |",
   "DP-VERSION-01: N/A — no prior version to compare against.",
+  "See [DP-VIS-02](../references/data-plane-visibility-and-secrets.md) for the rule.",
   "This is **not** CRUD in disguise.",
   "No missing delete operation; `:reset` is the delete-equivalent.",
   "Deferred to the linter: no-enum, casing-style, documentation-required.",
@@ -299,6 +301,41 @@ export const CORRECT_SILENCE_PROBE = [
   "No blocking findings. Severity: Blocking — none.",
   "The closed union is justified; this is not a violation.",
   "This is a breaking change, but preview versions are not prohibited from making them.",
+].join("\n");
+
+/**
+ * A report whose findings use only NON-`DP-` rule-ID families.
+ *
+ * Adding non-DP findings to {@link REAL_FINDINGS_PROBE} alone cannot catch a
+ * grader that has been narrowed back to the `DP-XXX-NN` shape, because that
+ * probe also contains DP findings, which such a grader still matches. This
+ * probe isolates the case.
+ *
+ * It deliberately carries **no severity glyph**. An earlier draft opened with
+ * `### 🔴 Blocking`, which let a stimulus's severity grader match it and so
+ * reported coverage the rule-ID graders did not actually have. The probe must
+ * isolate the rule-ID dimension and nothing else.
+ *
+ * The families are real. `SEC-SECRET-DETECT` was observed in a live run;
+ * `EX-*`, `DDP-*` and the mixed-case `RPC-Put-V1-11` all appear in the skill
+ * corpus the agent loads.
+ */
+export const NON_DP_FINDING_PROBE = [
+  "**[SEC-SECRET-DETECT] Credential-shaped property is readable** -- `main.tsp:33`",
+  "**[EX-ORPHAN] Example references a removed operation** -- `examples/get.json:1`",
+  "**[DDP-002] Batch endpoint trade-off** -- `main.tsp:70`",
+  "**[RPC-Put-V1-11] Mixed-case rule identifier** -- `main.json:12`",
+].join("\n");
+
+/**
+ * Two DP findings from different rule families, used to tell a *family-agnostic*
+ * grader from a *specific-trap* one. A grader matching both is asserting
+ * "no finding of any kind"; a grader matching only one is naming a specific
+ * trap and is correct to stay narrow.
+ */
+export const TWO_DP_FAMILIES_PROBE = [
+  "**[DP-VIS-02] Secret readable in response** -- `main.tsp:36`",
+  "**[DP-PAGE-01] Unbounded collection returned unpaged** -- `main.tsp:102`",
 ].join("\n");
 
 /**
@@ -322,6 +359,15 @@ export const REAL_FINDINGS_PROBE = [
   "**[DP-LRO-01] Status monitor has no error member** -- `main.tsp:30`",
   "**[DP-NAME-01] Non-obvious abbreviation** -- `main.tsp:29`",
   "**[DP-DOC-01] Tautological documentation** -- `main.tsp:24`",
+  // Non-DP rule-ID families. The agent really does use the bracketed
+  // convention for cross-cutting IDs -- SEC-SECRET-DETECT was observed in a
+  // live run -- so a grader that only knows the DP-XXX-NN shape silently
+  // under-reports false positives. Keeping these in the probe means
+  // checkGraderSoundness fails a grader that cannot see them.
+  "**[SEC-SECRET-DETECT] Credential-shaped property is readable** -- `main.tsp:33`",
+  "**[EX-ORPHAN] Example references a removed operation** -- `examples/get.json:1`",
+  "**[DDP-002] Batch endpoint trade-off** -- `main.tsp:70`",
+  "**[RPC-Put-V1-11] Mixed-case rule identifier** -- `main.json:12`",
   // Findings that duplicate a linter rule or invent a runtime-behavior claim.
   // Both are defects the true-negative graders exist to catch, and both are
   // only distinguishable from a legitimate deferral by their position: a
@@ -422,6 +468,27 @@ export async function checkGraderSoundness({ core, rootDir }) {
             `${file} :: "${grader.name}" is inert -- it does not fire on a report\n` +
               `      containing real findings, so its verdict is vacuous.\n` +
               `      ${pattern}`,
+          );
+        }
+
+        // A grader matching two different DP families is family-agnostic: it is
+        // asserting "no finding of any kind", not "this specific trap did not
+        // fire". Such a grader must also see non-DP families, or it silently
+        // under-reports false positives -- the agent really does raise
+        // **[SEC-SECRET-DETECT] ...** findings. A grader matching only one
+        // family is naming a specific trap and is correct to stay narrow.
+        const familyAgnostic =
+          TWO_DP_FAMILIES_PROBE.split("\n").every((line) => regex.test(line)) &&
+          !regex.test(CORRECT_SILENCE_PROBE);
+
+        if (familyAgnostic && !regex.test(NON_DP_FINDING_PROBE)) {
+          problems.push(
+            `${file} :: "${grader.name}" is family-agnostic across DP rules but\n` +
+              "      cannot see a finding raised under a non-DP rule ID.\n" +
+              `      ${pattern}\n` +
+              "      A false positive reported as **[SEC-SECRET-DETECT] ...** would pass\n" +
+              "      silently. Use the general finding form:\n" +
+              String.raw`        \*\*\[[A-Z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)+\]`,
           );
         }
       }
