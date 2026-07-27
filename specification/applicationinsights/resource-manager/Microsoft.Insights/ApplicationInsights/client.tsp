@@ -506,10 +506,6 @@ namespace ApplicationInsightsManagementClient;
 @@clientName(WorkbooksApi.WorkbookProperties.timeModified, "ModifiedOn", "csharp");
 @@clientName(WorkbooksApi.WorkbookProperties.sourceId, "SourceId", "csharp");
 @@clientName(WorkbooksApi.WorkbookProperties.storageUri, "StorageUri", "csharp");
-@@clientName(WorkbookTemplatesApi.WorkbookTemplateProperties.localized,
-  "LocalizedGalleries",
-  "csharp"
-);
 @@clientName(WorkbookTemplatesApi.WorkbookTemplateGallery.type, "WorkbookType", "csharp");
 @@clientName(Components.ApplicationInsightsComponent.etag, "ETag", "csharp");
 @@clientName(WorkbooksApi.Workbook.etag, "ETag", "csharp");
