@@ -226,6 +226,9 @@ model ProductDetails {
 
   @doc("Indicates that the SKU has add-ons")
   hasAddOns?: boolean;
+
+  @doc("The product code")
+  productCode?: string;
 }
 
 @doc("Returns a subset of Plan attributes")
