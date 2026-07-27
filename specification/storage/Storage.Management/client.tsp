@@ -445,6 +445,10 @@ op getDeletedAccountCustomizedForJs(
 @@clientName(ExtendedLocationTypes, "StorageExtendedLocationTypes", "csharp");
 @@clientName(IdentityType, "StorageIdentityType", "csharp");
 @@clientName(UserAssignedIdentity, "StorageUserAssignedIdentity", "csharp");
+// Keep Python model names distinct from ARM common types after introducing
+// ManagedServiceIdentity on ContextCache resources.
+@@clientName(UserAssignedIdentity, "StorageUserAssignedIdentity", "python");
+@@clientName(UserAssignedIdentity, "StorageUserAssignedIdentity", "java");
 
 // Rename NspAccessRulePropertiesSubscriptionsItem to prevent the generator from mapping
 // it to ARM's SubResource type (which has an internal DeserializeSubResource method).
