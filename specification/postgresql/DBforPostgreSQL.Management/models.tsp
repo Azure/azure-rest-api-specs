@@ -882,6 +882,20 @@ union ImmutableBackup {
 }
 
 /**
+ * Indicates if FIPS (Federal Information Processing Standards) mode is enabled on the server.
+ */
+@added(Versions.v2026_07_01)
+union FipsMode {
+  string,
+
+  /** FIPS mode is enabled on the server. */
+  Enabled: "Enabled",
+
+  /** FIPS mode is disabled on the server. */
+  Disabled: "Disabled",
+}
+
+/**
  * Indicates if public network access is enabled or not.
  */
 union ServerPublicNetworkAccessState {
@@ -3089,6 +3103,10 @@ model ServerProperties {
    */
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   cluster?: Cluster;
+
+  @doc("Indicates if FIPS (Federal Information Processing Standards) mode is enabled on the server. If not specified on create, it defaults to Disabled.")
+  @added(Versions.v2026_07_01)
+  fipsMode?: FipsMode = FipsMode.Disabled;
 }
 
 /**
@@ -3491,6 +3509,10 @@ model ServerPropertiesForPatch {
    */
   @visibility(Lifecycle.Read, Lifecycle.Update)
   cluster?: Cluster;
+
+  @doc("Indicates if FIPS (Federal Information Processing Standards) mode is enabled on the server. If not specified, the current value is preserved.")
+  @added(Versions.v2026_07_01)
+  fipsMode?: FipsMode;
 }
 
 /**

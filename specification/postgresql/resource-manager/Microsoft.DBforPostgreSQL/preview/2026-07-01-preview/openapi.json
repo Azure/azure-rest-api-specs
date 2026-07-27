@@ -692,6 +692,9 @@
           }
         },
         "x-ms-examples": {
+          "Enable or disable FIPS mode on an existing server.": {
+            "$ref": "./examples/ServersUpdateFIPS.json"
+          },
           "Promote a read replica to a standalone server with forced data synchronization. Meaning that it doesn't wait for data in the read replica to be synchronized with its source server before it initiates the promotion to a standalone server.": {
             "$ref": "./examples/ServersPromoteReplicaAsForcedStandaloneServer.json"
           },
@@ -6597,6 +6600,30 @@
         ]
       }
     },
+    "FipsMode": {
+      "type": "string",
+      "description": "Indicates if FIPS (Federal Information Processing Standards) mode is enabled on the server.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "FipsMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "FIPS mode is enabled on the server."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "FIPS mode is disabled on the server."
+          }
+        ]
+      }
+    },
     "FirewallRule": {
       "type": "object",
       "description": "Firewall rule.",
@@ -9555,6 +9582,31 @@
             "update",
             "create"
           ]
+        },
+        "fipsMode": {
+          "type": "string",
+          "description": "Indicates if FIPS (Federal Information Processing Standards) mode is enabled on the server. If not specified on create, it defaults to Disabled.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "FipsMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "FIPS mode is enabled on the server."
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "FIPS mode is disabled on the server."
+              }
+            ]
+          }
         }
       }
     },
@@ -9658,6 +9710,10 @@
             "read",
             "update"
           ]
+        },
+        "fipsMode": {
+          "$ref": "#/definitions/FipsMode",
+          "description": "Indicates if FIPS (Federal Information Processing Standards) mode is enabled on the server. If not specified, the current value is preserved."
         }
       }
     },
