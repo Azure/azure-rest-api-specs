@@ -328,7 +328,18 @@ union RoleManagementScopeType {
 );
 @@clientName(
   Microsoft.Authorization.NotificationDeliveryMechanism,
-  "NotificationDeliveryType",
+  "RoleManagementNotificationDeliveryType",
+  "csharp"
+);
+// Keep the resource's full properties wrapper distinct from the expanded public model below.
+@@clientName(
+  Microsoft.Authorization.RoleManagementPolicyAssignmentProperties,
+  "RoleManagementPolicyAssignmentDataProperties",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Authorization.PolicyAssignmentProperties,
+  "RoleManagementPolicyAssignmentProperties",
   "csharp"
 );
 @@clientName(
@@ -353,7 +364,12 @@ union RoleManagementScopeType {
 );
 @@clientName(
   Microsoft.Authorization.RoleManagementPolicyNotificationRule.notificationType,
-  "NotificationDeliveryType",
+  "RoleManagementNotificationDeliveryType",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Authorization.RoleManagementPolicyAssignmentProperties.policyAssignmentProperties,
+  "RoleManagementPolicyAssignmentProperties",
   "csharp"
 );
 @@clientName(
