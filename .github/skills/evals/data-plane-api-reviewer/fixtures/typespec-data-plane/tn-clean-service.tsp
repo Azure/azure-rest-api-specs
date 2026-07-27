@@ -36,8 +36,8 @@ model Notebook {
   @maxLength(256)
   title: string;
 
-  @doc("Colour used to render the notebook in client applications.")
-  colour: NotebookColour;
+  @doc("Color used to render the notebook in client applications.")
+  color: NotebookColor;
 
   @doc("Number of notes currently in the notebook. Maintained by the service.")
   @visibility(Lifecycle.Read)
@@ -52,11 +52,11 @@ model Notebook {
   updatedAt: utcDateTime;
 }
 
-@doc("Colour used to render a notebook. The set of colours may grow in future API versions.")
-union NotebookColour {
+@doc("Color used to render a notebook. The set of colors may grow in future API versions.")
+union NotebookColor {
   string,
 
-  @doc("The default colour, used when the caller does not choose one.")
+  @doc("The default color, used when the caller does not choose one.")
   Blue: "Blue",
 
   @doc("A green notebook.")

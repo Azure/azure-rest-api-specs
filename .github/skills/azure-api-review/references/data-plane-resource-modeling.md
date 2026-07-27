@@ -122,6 +122,20 @@ today, but maybe", prefer the collection.
 Resources **SHOULD** expose a coherent set of operations. Flag asymmetries; each
 one is a question the author should answer, not automatically a defect.
 
+**Raise these as Questions, not assertions.** The Guidelines contain no `DO`
+requiring a delete operation, and plenty of legitimate resources have none:
+append-only audit logs, immutable records, singletons created with their
+parent, resources whose deletion is expressed as a reset or a state
+transition. An asymmetry is a prompt to ask, never on its own a finding at
+Warning or above.
+
+**Do not raise it at all when the specification already answers the
+question** — a `@doc` explaining that a configuration cannot be deleted, only
+reset, _is_ the cleanup story. Asking again is noise, and asking on every
+resource that lacks a delete is how this rule becomes the reviewer's verbal
+tic. If several resources in one PR share the same asymmetry, raise it **once**
+for the service, not once per resource.
+
 | Shape found                  | Question to raise                                                             |
 | ---------------------------- | ----------------------------------------------------------------------------- |
 | Create without read          | How does a caller confirm what was created, or read it back after a restart?  |

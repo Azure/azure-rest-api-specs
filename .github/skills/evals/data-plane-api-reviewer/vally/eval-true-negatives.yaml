@@ -291,9 +291,26 @@ stimuli:
         config:
           pattern: "(?im)^\\s*(?:[-*+]\\s*|#{1,6}\\s*)?🔴"
       - type: output-not-matches
-        name: "no breaking-change violation claim"
+        name: "no stable-version breaking-change claim"
         config:
-          pattern: "\\*\\*\\[DP-VERSION-0[0-9]\\]"
+          # Narrowed from the whole DP-VERSION- family to DP-VERSION-01, which
+          # is the rule the rubric actually forbids ("breaking changes in a
+          # stable version"). DP-VERSION-02 is the preview rule and is
+          # legitimately raisable at Suggestion severity -- the rubric itself
+          # permits noting that preview consumers must migrate. DP-VERSION-03
+          # (decorator correctness) is a different rule again; the fixture
+          # annotates both removals with @removed, so raising it would be a
+          # genuine false positive, but it is caught by the general
+          # "no finding" graders rather than by banning the family here.
+          pattern: "\\*\\*\\[DP-VERSION-01\\]"
+      - type: output-not-matches
+        name: "no incorrect decorator finding on a correctly annotated pair"
+        config:
+          # Both removals carry @removed(Versions.v2026_02_01_preview), so a
+          # DP-VERSION-03 finding here is a false positive. Added when the
+          # grader above was narrowed, so the narrowing does not leave the
+          # stimulus trivially passable.
+          pattern: "\\*\\*\\[DP-VERSION-03\\]"
       - type: prompt
     rubric:
       - Both API versions are preview. Preview versions carry no backward-compatibility guarantee, so removing `armOverrides` and dropping the `Adaptive` union member is permitted - trialling a shape and then withdrawing it is precisely what preview exists for.

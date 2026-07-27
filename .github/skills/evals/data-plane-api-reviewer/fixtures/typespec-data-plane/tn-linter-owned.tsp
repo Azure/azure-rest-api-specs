@@ -20,7 +20,6 @@ enum Versions {
   v2026_01_01: "2026-01-01",
 }
 
-// LINTER-OWNED: no-enum. Should be an extensible `union`.
 @doc("Condition of a stocked item.")
 enum ItemCondition {
   @doc("Unopened and undamaged.")
@@ -44,32 +43,25 @@ model Item {
   @doc("Condition the item is currently in.")
   condition: ItemCondition;
 
-  // LINTER-OWNED: no-nullable. Should be `description?: string`.
   @doc("Free-text description supplied by the supplier.")
   description: string | null;
 
-  // LINTER-OWNED: no-format. Constraints belong in @pattern / scalar types.
   @doc("Contact address of the supplier.")
   @format("email")
   supplierEmail: string;
 
-  // LINTER-OWNED: no-unknown.
   @doc("Supplier-specific attributes, passed through unchanged.")
   supplierAttributes: unknown;
 
-  // LINTER-OWNED: no-generic-numeric. Should be int32 or float64.
   @doc("Quantity currently on hand at the default warehouse.")
   quantityOnHand: numeric;
 
-  // LINTER-OWNED: documentation-required. No @doc at all.
   unitPriceUsd: float64;
 
-  // LINTER-OWNED: casing-style. Should be camelCase.
   @doc("Warehouse the item is stored in.")
   warehouse_id: string;
 }
 
-// LINTER-OWNED: documentation-required. No @doc on the model.
 model BulkAdjustment {
   @doc("Stock-keeping unit of the item to adjust.")
   sku: string;
@@ -78,9 +70,13 @@ model BulkAdjustment {
   delta: int32;
 }
 
-@doc("Operations on inventory items.")
+@doc("""
+  Operations on inventory items. Items are never removed: an item that is no
+  longer stocked is retained with a zero quantity so that historical orders
+  referencing its SKU continue to resolve. There is therefore no delete
+  operation.
+  """)
 interface Items {
-  // LINTER-OWNED: no-explicit-routes-resource-ops.
   @doc("Gets an item by SKU.")
   @route("/items/{sku}")
   get is StandardResourceOperations.ResourceRead<Item>;
@@ -91,7 +87,6 @@ interface Items {
   @doc("Lists items in inventory.")
   list is StandardResourceOperations.ResourceList<Item>;
 
-  // LINTER-OWNED: request-body-problem. Raw array request body.
   @doc("Applies a batch of quantity adjustments.")
   @route("/items:bulkAdjust")
   @post

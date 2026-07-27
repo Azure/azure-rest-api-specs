@@ -20,9 +20,31 @@ of enums for better versioning.
 
 ---
 
-## Extensible Enums (Required)
+## Extensible Enums (Strongly Recommended)
 
-Every enum **MUST** be modeled as extensible to avoid breaking changes when new values are added.
+The Azure REST API Guidelines state this as a `SHOULD` with an explicit
+exception, quoted verbatim:
+
+> :ballot_box_with_check: **YOU SHOULD** use extensible enumerations **unless
+> you are positive that the symbol set will NEVER change over time.**
+
+So: model every enum as extensible **unless the specification states a
+rationale for a genuinely fixed value set** — for example, a set the wire
+protocol or an external standard fixes, where adding a value would require a
+new request shape rather than a new member.
+
+**For reviewers:** a closed enum accompanied by a documented rationale is the
+Guideline's own exception being exercised, not a violation. Assess whether the
+rationale is plausible; if it is, raise nothing. If it is doubtful, ask a
+question or raise a Suggestion. **Never raise this Blocking, and never write
+that the Guidelines forbid a closed enum** — they do not. See "Normative
+strength and documented rationale" in [`SKILL.md`](../SKILL.md).
+
+A closed enum with **no** stated rationale is a normal Warning-level finding.
+
+_(Note: `@azure-tools/typespec-azure-core/no-enum` enforces the TypeSpec
+`enum`-vs-`union` distinction mechanically. For data-plane specs that rule is
+🔒 Linted — CI reports it, the reviewer does not.)_
 
 ### OpenAPI JSON
 

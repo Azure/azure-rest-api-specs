@@ -22,7 +22,7 @@ enum Versions {
 
 @doc("Input to a text analysis request.")
 model AnalyzeRequest {
-  @doc("Text to analyse. Maximum 10,000 characters.")
+  @doc("Text to analyze. Maximum 10,000 characters.")
   @maxLength(10000)
   text: string;
 
@@ -83,7 +83,7 @@ model Configuration {
 @doc("Analysis operations.")
 interface Analysis {
   @doc("""
-    Analyses a block of text and returns sentiment, detected language, and key
+    Analyzes a block of text and returns sentiment, detected language, and key
     phrases. The result is computed on demand, is not addressable, and is not
     retained by the service; callers that need to keep a result must store it
     themselves.

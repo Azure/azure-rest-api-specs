@@ -497,6 +497,95 @@ solution:
 So an unmeasurable class became a partially-measured one. Treat a flat count as
 weak evidence and a rising one as a reason to look.
 
+### Unrun graders are untested hypotheses
+
+**Four grader defects have now been found, and every one was in a grader that
+had never been executed.** Listed in the order they surfaced:
+
+| #   | Defect                                                                                             | Found by                        |
+| --- | -------------------------------------------------------------------------------------------------- | ------------------------------- |
+| 1   | `🔴` matched anywhere, so `"No blocking findings"` — the ideal output — scored as a blocking FP    | code review before any run      |
+| 2   | Bare rule IDs matched a considered-but-declined table, punishing the correct answer                | first real run                  |
+| 3   | Positive graders lacked `\*\*`, so a markdown link to a rule satisfied "did it report X?"          | adding a link line to the probe |
+| 4   | `**MUST** be extensible` evaded `\bmust be extensible\b` — markdown emphasis breaks literal spaces | full run                        |
+
+Defects 1 and 3 were found by _reasoning about_ the graders; 2 and 4 only by
+running them. All four share one shape: **the grader matched the vocabulary of
+a claim rather than the claim.** Each looked plainly correct when written.
+
+The rule this justifies: **a grader that has never executed is a hypothesis,
+not working code.** Treat a green result from a first-run grader as
+unvalidated, and prefer the LLM judge's verdict where the two disagree — in the
+first run the judge was the only grader that caught the real false positive and
+the only one that manufactured none.
+
+`checkGraderSoundness` exists to convert some of this class into a
+pull-request-time failure, but it can only test the properties someone thought
+to encode. Defect 4 passed it.
+
+## Second full run (2026-07-27) — first uncontaminated measurement
+
+Both suites, `claude-opus-4.6`, judge `claude-sonnet-4.6`. TN at `runs: 3`
+(21 trials), positives at `runs: 1` (10 trials). **31 trials, 981 AIU,
+43 min** — 33% over the ~740 AIU estimate, because de-labelled fixtures make
+the agent actually analyse rather than be told the answer (3.07M tokens on TN
+vs 2.44M in the labelled run).
+
+### Detection works — the first validated evidence
+
+**10/10 positive stimuli found their seeded defect**, in finding position, with
+the right rule family, every grader match verified by position rather than
+taken on trust. Suite scores 75–100%. This answered the question the project
+had been unable to answer: the reviewer does detect violations.
+
+### The gate fails
+
+| Metric           | Value          | Verdict               |
+| ---------------- | -------------- | --------------------- |
+| Blocking FPs     | 1              | **FAILS** (must be 0) |
+| Non-blocking FPs | 44 (2.1/trial) | tracked               |
+| TN trials failed | 17/21          | fails                 |
+| TN pass rate     | 19%            | —                     |
+
+The 19% is the honest number, and it is far worse than the 42.9% of the first
+run — because the first run measured fixtures that told the agent silence was
+correct. **This is the first FP measurement not contaminated by label
+leakage.**
+
+The blocking false positive was the agent overriding a documented rationale:
+on `tn-closed-union-justified` it wrote _"the inline doc comment argues the set
+is intentionally closed, but the Guidelines do not permit this"_ and raised it
+Blocking. Both halves were wrong — the Guidelines say
+`YOU SHOULD ... unless you are positive the symbol set will NEVER change`, and
+a `SHOULD` cannot support a Blocking finding. It appeared in **1 of 3** trials,
+the worst profile for a gate.
+
+### Two failures were not the agent's fault
+
+- **`tn-clean-service` 0/3 was a fixture defect.** The fixture used British
+  `colour`/`NotebookColour`; Azure uses US English. The agent was right, all
+  three trials, and the judge agreed. **Those three trials are miscounted as
+  false positives, so the true rate is better than 19%.** A second fixture had
+  the same defect (`analyse`); both are now corrected.
+- **`DP-MODEL-04` appeared in 12 of 31 trials**, which looked like padding.
+  It was a corpus artifact: 9 of 11 fixtures had no delete operation, so the
+  agent was making a consistent, defensible observation about a uniform
+  silhouette. The fixtures have since been diversified.
+
+### Fixes applied in response
+
+1. Skill-wide guidance on **normative strength and documented rationale** — a
+   `SHOULD` can never be Blocking, and a documented rationale is the exception
+   the Guideline grants, to be assessed for plausibility rather than overridden.
+2. `enum-best-practices.md` had flattened the Guideline's `SHOULD ... unless`
+   into **"Every enum MUST be modeled as extensible"** — the direct source of
+   the blocking FP. Corrected, with the exception restored.
+3. `DP-PAGE-01` and `DP-MODEL-04` reworded to carry their upstream conditions
+   and to say plainly that a documented rationale ends the enquiry.
+4. Fixture spelling corrected; fixture silhouettes diversified.
+5. Preview-versioning grader narrowed from the `DP-VERSION-` family to
+   `DP-VERSION-01`, the rule the rubric actually forbids.
+
 ### Coverage restored after the rewrite
 
 The bracketed-ID rewrite made two graders strictly narrower than their names

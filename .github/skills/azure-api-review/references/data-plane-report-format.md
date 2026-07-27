@@ -116,6 +116,14 @@ exposure and breaking changes, nothing else. More than three Blocking findings
 in one run means you are over-escalating — the documented failure mode of the
 ARM reviewer (`evals/arm-api-reviewer/README.md` §Known limitations).
 
+**Blocking requires a `DO` / `DO NOT` Guideline, or a correctness or security
+defect.** A `YOU SHOULD` / `YOU SHOULD NOT` statement can never justify a
+Blocking finding, however strongly you disagree with the spec's choice — cap it
+at Warning. And where the spec documents a rationale for a `SHOULD`-level
+choice, it is exercising the exception the Guideline itself grants: judge the
+rationale's plausibility, and if it holds, raise nothing. See "Normative
+strength and documented rationale" in [`SKILL.md`](../SKILL.md).
+
 ## Document shape
 
 ````markdown

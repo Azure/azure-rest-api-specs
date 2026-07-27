@@ -97,10 +97,23 @@ that it is correct.
 Any operation returning a collection **SHOULD** be paged, using the `Azure.Core`
 paging templates so the response carries `value` and `nextLink`.
 
+The upstream Guideline states this conditionally, verbatim:
+
+> :ballot_box_with_check: **YOU SHOULD** support paging today **if there is
+> ever a chance in the future that the number of items can grow to be very
+> large.**
+
+The condition is part of the rule. A collection the service fixes — supported
+languages, regions, a documented and small sub-collection — does not meet it,
+so an unpaged list there is **not a violation** and there is nothing to report.
+
 **Do not flag** a non-paged list when the collection is provably bounded and
-small -- for example, a fixed set of supported languages or regions, or a
-sub-collection whose maximum size is documented and small. Ask before asserting.
-A reviewer that demands paging on every array is the archetypal noisy bot.
+small, and **do not flag it merely because the bound is stated in a `@doc`
+rather than enforced by the type system** — a documented bound is exactly the
+evidence this exception asks for. Assess whether the stated bound is plausible;
+if it is, stay silent. If you doubt it, ask a question at Suggestion severity
+rather than asserting a violation. A reviewer that demands paging on every
+array is the archetypal noisy bot.
 
 Signals that paging is genuinely missing:
 

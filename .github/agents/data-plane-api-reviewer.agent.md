@@ -285,7 +285,21 @@ not softened:
    drop the citation and, with it, the finding.
 5. Confirm the severity matches the reference file's declared severity. You may
    lower it. You may not raise it.
-6. Confirm the fix compiles as TypeSpec, at least structurally.
+6. **Check the normative strength.** If the underlying Guideline says
+   `YOU SHOULD` / `YOU SHOULD NOT`, the finding may not be Blocking — cap it at
+   Warning. Blocking is for `DO` / `DO NOT` violations, secret exposure, and
+   breaking changes in a stable version.
+7. **Check for a stated rationale.** If the spec documents _why_ it makes a
+   `SHOULD`-level choice — a `@doc` explaining that a value set is fixed by the
+   wire protocol, that a collection is bounded, that a resource cannot be
+   deleted — then it is exercising the exception the Guideline itself grants.
+   Judge whether the rationale is **plausible**, not whether it matches the
+   default. Plausible: drop the finding. Doubtful: ask a question at Suggestion
+   severity. Never assert that the Guidelines forbid something they express as
+   a `SHOULD` — that is factually wrong about the source text. See
+   "Normative strength and documented rationale" in
+   [`SKILL.md`](../skills/azure-api-review/SKILL.md).
+8. Confirm the fix compiles as TypeSpec, at least structurally.
 
 ### Step 7 -- Critic
 
@@ -354,4 +368,12 @@ Before emitting any finding, confirm all six:
    breaking change.
 6. The critic returned `PASS` or `DOWNGRADE`, not `FAIL`.
 
-Any "no" means drop it. Dropping is cheap. Being wrong is not.
+And two that decide the severity rather than the existence of the finding:
+
+7. If the spec states a rationale for this choice, the rationale is
+   **implausible** -- not merely different from the default. A plausible
+   documented rationale means no finding at all.
+8. If the underlying Guideline is `YOU SHOULD` rather than `DO`, the severity
+   is Warning or below.
+
+Any "no" on 1-6 means drop it. Dropping is cheap. Being wrong is not.

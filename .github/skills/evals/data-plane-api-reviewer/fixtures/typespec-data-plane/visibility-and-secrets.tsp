@@ -56,6 +56,9 @@ interface Connectors {
   @doc("Creates or updates a connector.")
   createOrUpdate is StandardResourceOperations.ResourceCreateOrUpdate<Connector>;
 
+  @doc("Deletes a connector and revokes its stored credentials.")
+  delete is StandardResourceOperations.ResourceDelete<Connector>;
+
   @doc("Lists connectors.")
   list is StandardResourceOperations.ResourceList<Connector>;
 }

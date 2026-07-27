@@ -126,20 +126,78 @@ files, and reference files are designed and maintained:
    and a specific guideline section, and treats silence as a valid
    output.
 
-2. **Consistency and reusability.** Every rule is defined in exactly one
+1. **Normative strength is part of the rule.** Azure REST API Guidelines
+   statements carry an explicit strength -- `DO` / `DO NOT`,
+   `YOU SHOULD` / `YOU SHOULD NOT`, `YOU MAY` -- and that strength
+   governs how a finding may be raised. See "Normative strength and
+   documented rationale" below. Flattening a `YOU SHOULD ... unless X`
+   into a bare `MUST` in a reference file is a defect: it discards the
+   exception the Guideline itself grants, and produces confident,
+   wrong findings.
+
+1. **Consistency and reusability.** Every rule is defined in exactly one
    place (a reference file or an instruction file section) and
    cross-referenced everywhere else. No duplication. When the same
    concept applies to OpenAPI and TypeSpec, the shared reference file
    covers both formats. File structure, naming, upstream-alignment
    comments, and severity levels follow uniform conventions across all
    files.
-3. **Low maintenance overhead.** The files are designed so that
+1. **Low maintenance overhead.** The files are designed so that
    maintainers spend minimal effort. Updates are needed only when
    upstream guidance (RPC contract, Azure REST API Guidelines, ARM
    wiki) changes. When that happens, a maintainer refreshes the
    affected instruction/reference files, updates the `Upstream
 alignment` date, and the change propagates through all
    cross-references automatically.
+
+## Normative strength and documented rationale
+
+Azure REST API Guidelines statements are tagged with an explicit strength.
+That tag is part of the rule, and it constrains both **whether** a finding may
+be raised and **at what severity**.
+
+| Guideline tag                   | Meaning               | Maximum finding severity                        |
+| ------------------------------- | --------------------- | ----------------------------------------------- |
+| `DO` / `DO NOT`                 | Requirement           | **Blocking** (when the consequence warrants it) |
+| `YOU SHOULD` / `YOU SHOULD NOT` | Strong recommendation | **Warning** — never Blocking                    |
+| `YOU MAY`                       | Permission            | Suggestion or Question only                     |
+
+Blocking is additionally reserved for genuine correctness or security defects
+— secret exposure, a breaking change in a stable version — regardless of tag.
+
+### A documented rationale is not a deviation
+
+Several Guideline statements carry an explicit exception clause. The clearest
+example, quoted verbatim:
+
+> :ballot_box_with_check: **YOU SHOULD** use extensible enumerations **unless
+> you are positive that the symbol set will NEVER change over time.**
+
+The `unless` is part of the rule, not a loophole around it. When a
+specification states a rationale for a `SHOULD`-level choice — in a `@doc`, a
+comment, or the PR description — the reviewer's job is to **assess whether that
+rationale is plausible**, not to override it because the default differs.
+
+- Rationale plausible → **no finding.** The spec is exercising the exception
+  the Guideline grants.
+- Rationale doubtful → at most a **Suggestion**, usually better as a
+  **Question**: "the doc says the value set is fixed by the wire protocol — is
+  that contractual, or could a third mode appear?"
+- Rationale absent → normal severity for the rule applies.
+
+**Never write that the Guidelines forbid something they express as a
+`SHOULD`.** Asserting "the Guidelines do not permit this" about a
+`YOU SHOULD` statement is factually wrong about the source text, and it is
+worse than silence: it is confidently wrong, in writing, on a service team's
+pull request.
+
+### Reference files must preserve the exception
+
+When a reference file restates a Guideline, it carries the exception with it.
+A reference that flattens `YOU SHOULD ... unless X` into `MUST` manufactures a
+requirement that does not exist upstream, and every agent reading that file
+inherits the error. If a reference and the Guidelines disagree, **the
+Guidelines win** — see "Authoritative External Sources" above.
 
 ## Maintenance & Upstream Alignment
 

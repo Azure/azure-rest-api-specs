@@ -151,6 +151,21 @@ const LEAKAGE_PATTERNS = [
   { pattern: /^\s*\/\/\s*(VIOLATION|BREAKING)\b/im, why: "annotates a seeded defect inline" },
   { pattern: /\bseeded\b/i, why: "describes the file's seeded defects" },
   { pattern: /\bDP-[A-Z]+-\d/, why: "names a rule ID the graders match on" },
+  // A comment naming the mechanism that owns a defect is the same leak in a
+  // different vocabulary: `// LINTER-OWNED: no-enum` tells the agent both that
+  // there is a defect on the next line and who owns it. Found in
+  // tn-linter-owned.tsp after the first widening pass missed it.
+  {
+    pattern:
+      /^\s*\/\/[^\n]*\b(LINTER[- ]OWNED|AGENT[- ]OWNED|RUNTIME[- ]ONLY|NOT[- ]A[- ]DEFECT)\b/im,
+    why: "names the mechanism that owns a defect on the following line",
+  },
+  // Bare azure-core rule names in a comment do the same job without the label.
+  {
+    pattern:
+      /^\s*\/\/[^\n]*\b(no-enum|no-nullable|no-format|no-unknown|no-generic-numeric|documentation-required|casing-style|request-body-problem|no-explicit-routes-resource-ops|use-standard-operations)\b/im,
+    why: "names a linter rule in a comment, flagging the defect for the agent",
+  },
   {
     pattern: /\b(reviewer|agent)\s+(must|should|may)\b/i,
     why: "states what the reviewer is expected to do",
@@ -355,6 +370,7 @@ export const REAL_FINDINGS_PROBE = [
   "**[DP-MODEL-04] No update path** -- `main.tsp:51`",
   "**[DP-PAGE-01] Unbounded collection returned unpaged** -- `main.tsp:102`",
   "**[DP-VERSION-01] Property removed** -- `main.tsp:45`",
+  "**[DP-VERSION-03] Missing @added on a new property** -- `main.tsp:47`",
   "**[DP-ERR-01] Undocumented error code** -- `main.tsp:24`",
   "**[DP-LRO-01] Status monitor has no error member** -- `main.tsp:30`",
   "**[DP-NAME-01] Non-obvious abbreviation** -- `main.tsp:29`",
