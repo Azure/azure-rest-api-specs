@@ -312,32 +312,120 @@ namespace Microsoft.Compute;
 @@clientName(ResourceIdentityType, "ComputeBulkActionsIdentityType", "csharp");
 
 // ACRONYM001: acronym enum members must be PascalCase. exact() preserves the wire value.
-@@clientName(AcceleratorType.GPU, Azure.ClientGenerator.Core.exact("Gpu"), "csharp");
-@@clientName(AcceleratorType.FPGA, Azure.ClientGenerator.Core.exact("Fpga"), "csharp");
-@@clientName(LocalStorageDiskType.HDD, Azure.ClientGenerator.Core.exact("Hdd"), "csharp");
-@@clientName(LocalStorageDiskType.SSD, Azure.ClientGenerator.Core.exact("Ssd"), "csharp");
+@@clientName(
+  AcceleratorType.GPU,
+  Azure.ClientGenerator.Core.exact("Gpu"),
+  "csharp"
+);
+@@clientName(
+  AcceleratorType.FPGA,
+  Azure.ClientGenerator.Core.exact("Fpga"),
+  "csharp"
+);
+@@clientName(
+  LocalStorageDiskType.HDD,
+  Azure.ClientGenerator.Core.exact("Hdd"),
+  "csharp"
+);
+@@clientName(
+  LocalStorageDiskType.SSD,
+  Azure.ClientGenerator.Core.exact("Ssd"),
+  "csharp"
+);
 
 // BOOL001: boolean properties need a verb prefix (Is/Should/Does/etc.).
-@@clientName(AdditionalCapabilities.ultraSSDEnabled, "IsUltraSsdEnabled", "csharp");
-@@clientName(AdditionalCapabilities.hibernationEnabled, "IsHibernationEnabled", "csharp");
-@@clientName(ExecutionParameters.verifyVmAgentHealth, "ShouldVerifyVmAgentHealth", "csharp");
+@@clientName(
+  AdditionalCapabilities.ultraSSDEnabled,
+  "IsUltraSsdEnabled",
+  "csharp"
+);
+@@clientName(
+  AdditionalCapabilities.hibernationEnabled,
+  "IsHibernationEnabled",
+  "csharp"
+);
+@@clientName(
+  ExecutionParameters.verifyVmAgentHealth,
+  "ShouldVerifyVmAgentHealth",
+  "csharp"
+);
 @@clientName(VirtualMachineReimageParameters.tempDisk, "IsTempDisk", "csharp");
-@@clientName(BulkActionVmExtensionProperties.autoUpgradeMinorVersion, "IsAutoUpgradeMinorVersion", "csharp");
-@@clientName(BulkActionVmExtensionProperties.suppressFailures, "IsSuppressFailures", "csharp");
+@@clientName(
+  BulkActionVmExtensionProperties.autoUpgradeMinorVersion,
+  "IsAutoUpgradeMinorVersion",
+  "csharp"
+);
+@@clientName(
+  BulkActionVmExtensionProperties.suppressFailures,
+  "IsSuppressFailures",
+  "csharp"
+);
 @@clientName(DataDisk.toBeDetached, "IsToBeDetached", "csharp");
-@@clientName(DataDisk.writeAcceleratorEnabled, "IsWriteAcceleratorEnabled", "csharp");
-@@clientName(LinuxConfiguration.provisionVMAgent, "IsProvisionVMAgent", "csharp");
-@@clientName(LinuxVMGuestPatchAutomaticByPlatformSettings.bypassPlatformSafetyChecksOnUserSchedule, "ShouldBypassPlatformSafetyChecksOnUserSchedule", "csharp");
-@@clientName(NetworkInterfaceReferenceProperties.primary, "IsPrimary", "csharp");
-@@clientName(OSDisk.writeAcceleratorEnabled, "IsWriteAcceleratorEnabled", "csharp");
-@@clientName(OSProfile.requireGuestProvisionSignal, "DoesRequireGuestProvisionSignal", "csharp");
-@@clientName(ProxyAgentSettings.addProxyAgentExtension, "ShouldAddProxyAgentExtension", "csharp");
-@@clientName(AllInstancesDown.automaticallyApprove, "IsAllInstancesDownAutomaticallyApproved", "csharp");
+@@clientName(
+  DataDisk.writeAcceleratorEnabled,
+  "IsWriteAcceleratorEnabled",
+  "csharp"
+);
+@@clientName(
+  LinuxConfiguration.provisionVMAgent,
+  "IsProvisionVMAgent",
+  "csharp"
+);
+@@clientName(
+  LinuxVMGuestPatchAutomaticByPlatformSettings.bypassPlatformSafetyChecksOnUserSchedule,
+  "ShouldBypassPlatformSafetyChecksOnUserSchedule",
+  "csharp"
+);
+@@clientName(
+  NetworkInterfaceReferenceProperties.primary,
+  "IsPrimary",
+  "csharp"
+);
+@@clientName(
+  OSDisk.writeAcceleratorEnabled,
+  "IsWriteAcceleratorEnabled",
+  "csharp"
+);
+@@clientName(
+  OSProfile.requireGuestProvisionSignal,
+  "DoesRequireGuestProvisionSignal",
+  "csharp"
+);
+@@clientName(
+  ProxyAgentSettings.addProxyAgentExtension,
+  "ShouldAddProxyAgentExtension",
+  "csharp"
+);
+@@clientName(
+  AllInstancesDown.automaticallyApprove,
+  "IsAllInstancesDownAutomaticallyApproved",
+  "csharp"
+);
 @@clientName(SecurityProfile.encryptionAtHost, "IsEncryptionAtHost", "csharp");
 @@clientName(UefiSettings.secureBootEnabled, "IsSecureBootEnabled", "csharp");
 @@clientName(UefiSettings.vTpmEnabled, "IsVTpmEnabled", "csharp");
-@@clientName(VirtualMachineNetworkInterfaceConfigurationProperties.primary, "IsPrimary", "csharp");
-@@clientName(VirtualMachineNetworkInterfaceIPConfigurationProperties.primary, "IsPrimary", "csharp");
-@@clientName(VMGalleryApplication.treatFailureAsDeploymentFailure, "IsTreatFailureAsDeploymentFailure", "csharp");
-@@clientName(WindowsConfiguration.provisionVMAgent, "IsProvisionVMAgent", "csharp");
-@@clientName(WindowsVMGuestPatchAutomaticByPlatformSettings.bypassPlatformSafetyChecksOnUserSchedule, "ShouldBypassPlatformSafetyChecksOnUserSchedule", "csharp");
+@@clientName(
+  VirtualMachineNetworkInterfaceConfigurationProperties.primary,
+  "IsPrimary",
+  "csharp"
+);
+@@clientName(
+  VirtualMachineNetworkInterfaceIPConfigurationProperties.primary,
+  "IsPrimary",
+  "csharp"
+);
+@@clientName(
+  VMGalleryApplication.treatFailureAsDeploymentFailure,
+  "IsTreatFailureAsDeploymentFailure",
+  "csharp"
+);
+@@clientName(
+  WindowsConfiguration.provisionVMAgent,
+  "IsProvisionVMAgent",
+  "csharp"
+);
+@@clientName(
+  WindowsVMGuestPatchAutomaticByPlatformSettings.bypassPlatformSafetyChecksOnUserSchedule,
+  "ShouldBypassPlatformSafetyChecksOnUserSchedule",
+  "csharp"
+);
