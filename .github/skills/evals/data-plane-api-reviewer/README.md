@@ -586,7 +586,7 @@ Two separate pins, with two separate rules.
 
 ### `model` — must equal production
 
-`model` in every eval file **must** stay equal to `engine.model` in
+`model` in every eval file **must** stay equal to the top-level `model:` in
 [`.github/workflows/data-plane-api-review.md`](../../../workflows/data-plane-api-review.md).
 Both are currently `claude-opus-4.6`.
 
@@ -595,12 +595,16 @@ false-positive rate is the promotion criterion for rollout phases 2 and 3;
 measuring it on one model and running production on another certifies a
 configuration that is never shipped.
 
-`vally`'s `model:` and gh-aw's `engine.model` are nominally different
-namespaces — gh-aw passes `engine.model` through to the Copilot CLI as
-`COPILOT_MODEL` without validating it. `claude-opus-4.6` was verified to be a
-valid Copilot CLI model identifier, so for this value the two namespaces
-coincide and no mapping is needed. If a future model's identifiers differ
-between the two, document the mapping next to both pins.
+`vally`'s `model:` and gh-aw's are nominally different namespaces — gh-aw
+passes its pin through to the Copilot CLI as `COPILOT_MODEL` without validating
+it. `claude-opus-4.6` was verified to be a valid Copilot CLI model identifier,
+so for this value the two namespaces coincide and no mapping is needed. If a
+future model's identifiers differ between the two, document the mapping next to
+both pins.
+
+The workflow pin was spelled `engine.model` until gh-aw v0.83.1 deprecated that
+form in favour of a top-level `model:`. The alignment check accepts both, so a
+rebase onto an older branch does not break the invariant.
 
 ### `judge_model` — frozen, deliberately not equal to production
 
@@ -618,8 +622,8 @@ newer model loses comparability with the ARM baseline and requires re-baselining
 the entire true-negative set. Treat a model change as a deliberate, separately
 evaluated change:
 
-1. Bump `model` in every `vally/eval-*.yaml` **and** `engine.model` in the
-   workflow, in the same pull request.
+1. Bump `model` in every `vally/eval-*.yaml` **and** the top-level `model:` in
+   the workflow, in the same pull request.
 2. Re-run the full suite and compare against the previous baseline run.
 3. Leave `judge_model` alone.
 4. Do not fold the bump into an unrelated change.
@@ -630,12 +634,12 @@ eval model diverge, and when `judge_model` drifts from the frozen baseline.
 
 ### What is _not_ coupled
 
-The gh-aw threat-detection step has its own `engine.model`
-(`safe-outputs.threat-detection.engine` in the workflow), pinned to
-`claude-sonnet-4.6`. Without that override it inherits `engine.model` and runs
-the expensive review model on a cheap classification task. It is intentionally
-decoupled: this suite measures review output, not threat-detection decisions,
-and the alignment check does not constrain it.
+The gh-aw threat-detection step has its own engine model
+(`safe-outputs.threat-detection.engine.model` in the workflow), pinned to
+`claude-sonnet-4.6`. Without that override it inherits the workflow's `model:`
+and runs the expensive review model on a cheap classification task. It is
+intentionally decoupled: this suite measures review output, not
+threat-detection decisions, and the alignment check does not constrain it.
 
 ## Adding tests
 

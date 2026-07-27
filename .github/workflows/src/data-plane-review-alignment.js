@@ -77,7 +77,15 @@ export function getVerifiedVersion(coverageContent) {
 }
 
 /**
- * Extracts `engine.model` from a gh-aw workflow's Markdown frontmatter.
+ * Extracts the pinned agent model from a gh-aw workflow's Markdown frontmatter.
+ *
+ * gh-aw v0.83.1 deprecated `engine.model` in favour of a top-level `model:`,
+ * so both spellings are accepted. The top-level form wins when both are
+ * present, matching the compiler's own precedence.
+ *
+ * This deliberately reads only the *agent* model. `safe-outputs.threat-detection.engine.model`
+ * is a separate, intentionally decoupled pin -- threat detection is a cheap
+ * classification task and is not what the eval suite measures.
  *
  * @param {string} workflowContent
  * @returns {string} the pinned model identifier
@@ -90,13 +98,14 @@ export function getEngineModel(workflowContent) {
   }
 
   const frontmatter = /** @type {any} */ (yaml.load(match[1]));
-  const model = frontmatter?.engine?.model;
+  const model = frontmatter?.model ?? frontmatter?.engine?.model;
 
   if (!model) {
     throw new Error(
-      `${WORKFLOW_FILE} does not pin engine.model. An unpinned engine resolves to ` +
-        "vars.GH_AW_MODEL_AGENT_COPILOT, which can change without a pull request -- and a " +
-        "false-positive rate measured on one model transfers nothing to another.",
+      `${WORKFLOW_FILE} does not pin a model (top-level \`model:\`, or the deprecated ` +
+        "`engine.model`). An unpinned engine resolves to vars.GH_AW_MODEL_AGENT_COPILOT, " +
+        "which can change without a pull request -- and a false-positive rate measured on " +
+        "one model transfers nothing to another.",
     );
   }
 
@@ -313,7 +322,7 @@ export const REAL_FINDINGS_PROBE = [
   "**[DP-LRO-01] Status monitor has no error member** -- `main.tsp:30`",
   "**[DP-NAME-01] Non-obvious abbreviation** -- `main.tsp:29`",
   "**[DP-DOC-01] Tautological documentation** -- `main.tsp:24`",
-  // Findings that duplicate a linter rule or invent a runtime-behaviour claim.
+  // Findings that duplicate a linter rule or invent a runtime-behavior claim.
   // Both are defects the true-negative graders exist to catch, and both are
   // only distinguishable from a legitimate deferral by their position: a
   // bracketed rule ID at the head of the line.
@@ -568,7 +577,7 @@ export async function checkReportFormatContract({ core, rootDir }) {
           try {
             if (compileGraderPattern(pattern).test(contractFinding)) compatibleGraders++;
           } catch {
-            /* checkGraderSoundness reports uncompilable patterns. */
+            /* checkGraderSoundness reports patterns that do not compile. */
           }
         }
       }

@@ -198,10 +198,13 @@ Read the interlock **first**. It determines what is reportable. Then read only
 the rule references relevant to what the diff actually contains -- there is no
 value in loading the LRO reference for a PR with no LROs.
 
-Determine the pinned `@azure-tools/typespec-azure-core` version from the repo's
-`package.json`. If it differs from the interlock header's pinned version, say so
-in the report and treat every ⏳/🔒 boundary as uncertain -- prefer questions to
-assertions for that run.
+Determine the pinned `@azure-tools/typespec-azure-core` version by fetching the
+repository's root `package.json` with `github/get_file_contents`. **Do not
+expect it on disk** -- this workflow declares `checkout: false`, so the only
+files present locally are the agent and skill instructions under `.github/`.
+If the pinned version differs from the interlock header's pinned version, say
+so in the report and treat every ⏳/🔒 boundary as uncertain -- prefer questions
+to assertions for that run.
 
 ### Step 3 -- Graph pass
 

@@ -86,7 +86,7 @@ async function createFixtureRepo({
       'description: "test"',
       "engine:",
       "  id: copilot",
-      ...(engineModel ? [`  model: ${engineModel}`] : []),
+      ...(engineModel ? [`model: ${engineModel}`] : []),
       "---",
       "",
       "# Body",
@@ -155,21 +155,55 @@ describe("getVerifiedVersion", () => {
 });
 
 describe("getEngineModel", () => {
-  it("reads engine.model from frontmatter", () => {
+  it("reads the top-level model (gh-aw >= 0.83.1)", () => {
+    const content = "---\nengine:\n  id: copilot\nmodel: claude-opus-4.6\n---\n\n# Body\n";
+
+    expect(getEngineModel(content)).toBe("claude-opus-4.6");
+  });
+
+  it("still reads the deprecated engine.model", () => {
     const content = "---\nengine:\n  id: copilot\n  model: claude-opus-4.6\n---\n\n# Body\n";
 
     expect(getEngineModel(content)).toBe("claude-opus-4.6");
   });
 
+  it("prefers the top-level model when both are present", () => {
+    const content =
+      "---\nengine:\n  id: copilot\n  model: old-model\nmodel: claude-opus-4.6\n---\n\n# Body\n";
+
+    expect(getEngineModel(content)).toBe("claude-opus-4.6");
+  });
+
+  it("ignores the decoupled threat-detection model", () => {
+    // safe-outputs.threat-detection.engine.model is intentionally a different
+    // model; the eval-equivalence invariant must not read it.
+    const content = [
+      "---",
+      "engine:",
+      "  id: copilot",
+      "model: claude-opus-4.6",
+      "safe-outputs:",
+      "  threat-detection:",
+      "    engine:",
+      "      id: copilot",
+      "      model: claude-sonnet-4.6",
+      "---",
+      "",
+      "# Body",
+    ].join("\n");
+
+    expect(getEngineModel(content)).toBe("claude-opus-4.6");
+  });
+
   it("ignores a --- that is not frontmatter", () => {
-    const content = "---\nengine:\n  model: a-model\n---\n\ntext\n\n---\n\nmore text\n";
+    const content = "---\nengine:\n  id: copilot\nmodel: a-model\n---\n\ntext\n\n---\n\nmore\n";
 
     expect(getEngineModel(content)).toBe("a-model");
   });
 
-  it("throws when engine.model is absent", () => {
+  it("throws when no model is pinned in either spelling", () => {
     expect(() => getEngineModel("---\nengine:\n  id: copilot\n---\n\n# Body\n")).toThrow(
-      /does not pin engine\.model/,
+      /does not pin a model/,
     );
   });
 

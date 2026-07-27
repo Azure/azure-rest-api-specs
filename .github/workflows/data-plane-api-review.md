@@ -32,14 +32,11 @@ if: github.event_name == 'workflow_dispatch' || github.event.label.name == 'data
 permissions:
   contents: read
   pull-requests: read
-# Check out the TRUSTED base repository only, never the PR head. The agent
-# needs this checkout to read its own instruction files (.github/agents/*,
-# .github/skills/azure-api-review/references/*); it reads the PR's changed
-# spec files through the GitHub API at the pinned head SHA instead. Checking
-# out fork head content under `pull_request_target` is the classic "pwn
-# request" vector -- do not change this.
-checkout:
-  repository: ${{ github.repository }}
+# The agent reads PR files through the GitHub MCP toolsets, never from disk,
+# so no checkout is needed — and pull_request_target must not check out fork code.
+# gh-aw still sparse-checks-out `.github`, which is where this agent's own
+# instruction and skill files live, so they remain readable.
+checkout: false
 # Pinned deliberately, and pinned to the SAME value as `model:` in
 # .github/skills/evals/data-plane-api-reviewer/vally/eval-true-negatives.yaml --
 # that file defines the phase-2 promotion gate, so if production runs a
@@ -47,11 +44,11 @@ checkout:
 # engine resolves to whatever `vars.GH_AW_MODEL_AGENT_COPILOT` says, which can
 # change without a PR.
 #
-# `engine.model` is passed through to the Copilot CLI as `COPILOT_MODEL`
+# The top-level `model:` is passed through to the Copilot CLI as `COPILOT_MODEL`
 # verbatim; gh-aw does not validate it. `claude-opus-4.6` was verified to be a
-# valid Copilot CLI model identifier, so the vally `model:` namespace and the
-# gh-aw `engine.model` namespace coincide for this value and no mapping is
-# needed.
+# valid Copilot CLI model identifier, so the vally `model:` namespace and gh-aw's
+# coincide for this value and no mapping is needed. (This was `engine.model`
+# until gh-aw v0.83.1 deprecated that spelling; the compiled output is identical.)
 #
 # Do NOT upgrade to a newer model piecemeal. A model change is a re-baselining
 # event: bump this pin and every `model:` in the eval suite in the SAME PR,
@@ -59,7 +56,7 @@ checkout:
 # side alone is caught by .github/workflows/data-plane-review-alignment.yaml.
 engine:
   id: copilot
-  model: claude-opus-4.6
+model: claude-opus-4.6
 tools:
   github:
     # Read-only toolsets only. This workflow reads untrusted fork content, and
@@ -85,8 +82,8 @@ safe-outputs:
     run-success: "🔍 [{workflow_name}]({run_url}) finished. ✅"
     run-failure: "🔍 [{workflow_name}]({run_url}) {status}. ❌"
   noop:
-  # `engine.model` above also propagates to gh-aw's threat-detection step, which
-  # would otherwise run the review model. Threat detection is a cheap
+  # The `model:` pin above also propagates to gh-aw's threat-detection step,
+  # which would otherwise run the review model. Threat detection is a cheap
   # classification task, not a judgment task, so it is pinned separately and
   # deliberately decoupled from the review model. Changing this value does NOT
   # affect the eval-measured promotion gate, and the alignment check does not
@@ -245,8 +242,8 @@ v1 does not implement it, but nothing here forecloses it. The seam is:
   on escalation -- or as a preceding job in this workflow's `on.steps`. Either
   keeps the review stage's prompt, tools, and agent file untouched.
 - **Model.** Triage runs the cheap model; the review stage keeps the pinned
-  `engine.model`. **Only the review stage's model is constrained to equal the
-  eval pin** -- the eval suite measures review output, not triage decisions. If
-  a triage stage is added, give it its own eval file and its own recall bar (a
-  triage false negative silently suppresses a whole review, which is a
+  top-level `model:`. **Only the review stage's model is constrained to equal
+  the eval pin** -- the eval suite measures review output, not triage decisions.
+  If a triage stage is added, give it its own eval file and its own recall bar
+  (a triage false negative silently suppresses a whole review, which is a
   materially different failure from a review false positive).
