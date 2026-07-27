@@ -266,7 +266,48 @@ model ToolboxSkillReference extends ToolboxSkill {
   version?: string;
 }
 
-@doc("A toolbox that stores reusable tool definitions for agents.")
+/**
+ * The kind of content stored in a toolbox.
+ */
+union ToolboxKind {
+  /**
+   * A toolbox containing reusable tools and skills.
+   */
+  default: "default",
+
+  /**
+   * A toolbox providing knowledge retrieval over configured knowledge sources.
+   */
+  knowledge_base: "knowledge_base",
+}
+
+/**
+ * A knowledge source used by a knowledge-base toolbox.
+ */
+model ToolboxKnowledgeSourceReference {
+  /**
+   * The name of the knowledge source.
+   */
+  name: string;
+}
+
+/**
+ * Retrieval and answer-synthesis configuration for a knowledge-base toolbox.
+ *
+ * Additional properties map to Search Knowledge Base retrieval properties and
+ * are retained so retrieval behavior can evolve without requiring a new
+ * toolbox contract for each additive option.
+ */
+model ToolboxKnowledgeRetrieval {
+  /**
+   * The models that may be used for retrieval and answer synthesis.
+   */
+  models?: string[];
+
+  ...Record<unknown>;
+}
+
+@doc("A toolbox that stores reusable tools or knowledge-retrieval configuration.")
 model ToolboxObject {
   @doc("The unique identifier of the toolbox.")
   id: string;
@@ -274,6 +315,9 @@ model ToolboxObject {
   @doc("The name of the toolbox.")
   @maxLength(256)
   name: string;
+
+  @doc("The kind of toolbox. Existing toolboxes that omit this property are interpreted as `default`.")
+  kind?: ToolboxKind;
 
   @doc("The version identifier that the toolbox currently points to. Defaults to the latest version. Can be changed via updateToolbox.")
   default_version: string;
@@ -301,21 +345,42 @@ model ToolboxVersionObject {
   @encode("unixTimestamp", int32)
   created_at: utcDateTime;
 
-  @doc("The list of tools contained in this toolbox version.")
-  tools: ToolboxTool[];
+  @doc("The kind of toolbox version. Existing versions that omit this property are interpreted as `default`.")
+  kind?: ToolboxKind;
 
-  @doc("The list of skill sources included in this toolbox version.")
+  @doc("The list of tools contained in this toolbox version. Not allowed when `kind` is `knowledge_base`.")
+  tools?: ToolboxTool[];
+
+  @doc("The list of skill sources included in this toolbox version. Not allowed when `kind` is `knowledge_base`.")
   skills?: ToolboxSkill[];
 
-  @doc("Policy configuration for the toolbox version.")
+  @doc("Policy configuration for the toolbox version. Not allowed when `kind` is `knowledge_base`.")
   policies?: ToolboxPolicies;
+
+  @doc("Knowledge sources for a `knowledge_base` toolbox version. Required for that kind and otherwise not allowed.")
+  @minItems(1)
+  knowledge_sources?: ToolboxKnowledgeSourceReference[];
+
+  @doc("Retrieval configuration for a `knowledge_base` toolbox version. Required for that kind and otherwise not allowed.")
+  knowledge_retrieval?: ToolboxKnowledgeRetrieval;
 }
 
+/**
+ * The contents of a new toolbox version.
+ *
+ * The service validates fields according to `kind`. A `default` toolbox must
+ * contain at least one tool or skill and cannot contain knowledge fields. A
+ * `knowledge_base` toolbox must contain `knowledge_sources` and
+ * `knowledge_retrieval` and cannot contain tools, skills, or policies.
+ */
 alias CreateToolboxVersionRequest = {
   @doc("The name of the toolbox. If the toolbox does not exist, it will be created.")
   @path
   @maxLength(256)
   name: string;
+
+  @doc("The kind of toolbox version. When omitted, the service interprets it as `default`.")
+  kind?: ToolboxKind;
 
   @doc("A human-readable description of the toolbox.")
   @maxLength(512)
@@ -324,14 +389,21 @@ alias CreateToolboxVersionRequest = {
   @doc("Arbitrary key-value metadata to associate with the toolbox.")
   metadata?: Record<string>;
 
-  @doc("The list of tools to include in this version.")
-  tools: ToolboxTool[];
+  @doc("The list of tools to include in this version. Not allowed when `kind` is `knowledge_base`.")
+  tools?: ToolboxTool[];
 
-  @doc("The list of skill sources to include in this version. A skill reference specifies a skill name and optionally a version. If version is omitted, the skill's default version is used.")
+  @doc("The list of skill sources to include in this version. A skill reference specifies a skill name and optionally a version. If version is omitted, the skill's default version is used. Not allowed when `kind` is `knowledge_base`.")
   skills?: ToolboxSkill[];
 
-  @doc("Policy configuration for this toolbox version.")
+  @doc("Policy configuration for this toolbox version. Not allowed when `kind` is `knowledge_base`.")
   policies?: ToolboxPolicies;
+
+  @doc("Knowledge sources for a `knowledge_base` toolbox. Required for that kind and otherwise not allowed.")
+  @minItems(1)
+  knowledge_sources?: ToolboxKnowledgeSourceReference[];
+
+  @doc("Retrieval configuration for a `knowledge_base` toolbox. Required for that kind and otherwise not allowed.")
+  knowledge_retrieval?: ToolboxKnowledgeRetrieval;
 };
 
 alias GetToolboxRequest = {
