@@ -2,6 +2,7 @@ import "@typespec/rest";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./aimanager.tsp";
 import "./helpers.tsp";
+import "./aimodel.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -62,7 +63,7 @@ model CustomAIModelProperties {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "AIModel is a valid name"
 @added(Versions.v2026_08_02_preview)
 @doc("Platform-resolved specification of a custom model. Extends `ModelSpec` with custom model-specific metadata. All fields are read-only.")
-model CustomAIModelSpec extends ModelSpec {
+model CustomAIModelSpec is ModelSpec {
   @visibility(Lifecycle.Read)
   @doc("The model's file size, e.g. `27.31Gi`.")
   modelFileSize?: string;

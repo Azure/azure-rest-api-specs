@@ -7,6 +7,7 @@ import "./aimodel.tsp";
 import "./modelsource.tsp";
 import "./modeldeployment.tsp";
 import "./client.tsp";
+import "./customaimodel.tsp";
 
 using Azure.ResourceManager;
 using Azure.Core;
