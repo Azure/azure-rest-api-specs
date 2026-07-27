@@ -52,6 +52,54 @@ namespace Azure.AI.Projects {
 
     /** The structured inputs to the response that can participate in prompt template substitution or tool argument bindings. */
     structured_inputs?: Record<unknown>;
+
+    /**
+     * Per-request configuration for Model Router inference calls.
+     * Supported on Model Router endpoints (deployed or instant if supported).
+     * Returns a 400 (Bad Request) error when the target is not a Model Router endpoint.
+     */
+    routing_config?: RoutingConfiguration;
+  }
+
+  /**
+   * Per-request configuration for Model Router inference calls.
+   * Supported on Model Router endpoints (deployed or instant if supported).
+   * Returns a 400 (Bad Request) error when the target is not a Model Router endpoint.
+   */
+  model RoutingConfiguration {
+    /**
+     * A request-level hard price ceiling (USD per 1M tokens) that filters the model
+     * candidate pool before routing optimization. Composes with the deployment-level
+     * routing mode (Balanced, Quality, or Cost): the price filter narrows the pool first,
+     * then the mode selects from the remaining models.
+     *
+     * If omitted, no price filtering is applied and behavior is identical to today.
+     */
+    price_limit?: RoutingPriceLimit;
+  }
+
+  /**
+   * Maximum acceptable token price thresholds for input and/or output tokens.
+   * Models exceeding any specified threshold are excluded from routing.
+   *
+   * When the filter eliminates all models, the service returns a 400 Bad Request
+   * with an actionable error message indicating no models satisfy the constraints.
+   *
+   */
+  model RoutingPriceLimit {
+    /**
+     * Maximum input token price in USD per 1M tokens. Models whose input price
+     * exceeds this value are excluded. When omitted, input price is unconstrained.
+     */
+    @minValue(0)
+    input?: float32;
+
+    /**
+     * Maximum output token price in USD per 1M tokens. Models whose output price
+     * exceeds this value are excluded. When omitted, output price is unconstrained.
+     */
+    @minValue(0)
+    output?: float32;
   }
 
   @@copyProperties(

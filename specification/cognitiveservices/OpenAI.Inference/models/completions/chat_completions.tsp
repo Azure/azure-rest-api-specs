@@ -320,6 +320,15 @@ model ChatCompletionsOptions {
   userSecurityContext?: UserSecurityContext;
 
   /**
+   * Per-request configuration for Model Router inference calls.
+   * Supported on Model Router endpoints (deployed or instant if supported).
+   * Returns a 400 (Bad Request) error when the target is not a Model Router endpoint.
+   */
+  @added(ServiceApiVersions.v2024_10_01_Preview)
+  @encodedName("application/json", "routing_config")
+  routingConfig?: RoutingConfiguration;
+
+  /**
    * Output types that you would like the model to generate for this request.
    * Most models are capable of generating text, which is the default: `["text"]`
    * The `gpt-4o-audio-preview` model can also be used to generate audio. To
@@ -343,6 +352,50 @@ model ChatCompletionsOptions {
    */
   @added(ServiceApiVersions.v2025_01_01_Preview)
   audio?: AudioOutputParameters;
+}
+
+/**
+ * Per-request configuration for Model Router inference calls.
+ * Supported on Model Router endpoints (deployed or instant if supported).
+ * Returns a 400 (Bad Request) error when the target is not a Model Router endpoint.
+ */
+@added(ServiceApiVersions.v2024_10_01_Preview)
+model RoutingConfiguration {
+  /**
+   * A request-level hard price ceiling (USD per 1M tokens) that filters the model
+   * candidate pool before routing optimization. Composes with the deployment-level
+   * routing mode (Balanced, Quality, or Cost): the price filter narrows the pool first,
+   * then the mode selects from the remaining models.
+   *
+   * If omitted, no price filtering is applied and behavior is identical to today.
+   */
+  @encodedName("application/json", "price_limit")
+  priceLimit?: RoutingPriceLimit;
+}
+
+/**
+ * Maximum acceptable token price thresholds for input and/or output tokens.
+ * Models exceeding any specified threshold are excluded from routing.
+ *
+ * When the filter eliminates all models, the service returns a 400 Bad Request
+ * with an actionable error message indicating no models satisfy the constraints.
+ *
+ */
+@added(ServiceApiVersions.v2024_10_01_Preview)
+model RoutingPriceLimit {
+  /**
+   * Maximum input token price in USD per 1M tokens. Models whose input price
+   * exceeds this value are excluded. When omitted, input price is unconstrained.
+   */
+  @minValue(0)
+  input?: float32;
+
+  /**
+   * Maximum output token price in USD per 1M tokens. Models whose output price
+   * exceeds this value are excluded. When omitted, output price is unconstrained.
+   */
+  @minValue(0)
+  output?: float32;
 }
 
 /** Values for the reasoning */
