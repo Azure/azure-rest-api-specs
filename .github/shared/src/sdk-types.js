@@ -25,6 +25,16 @@ export const APIViewRequestDataSchema = z.object({ packageName: z.string(), file
  * @typedef {import("zod").infer<typeof APIViewRequestDataSchema>} APIViewRequestData
  */
 
+export const SdkBreakingChangeSchema = z.object({ breakingchange: z.string(), category: z.string(), resolution: z.string().optional() });
+/**
+ * @typedef {import("zod").infer<typeof AzsdkSdkBreakingChangeSchema>} SdkBreakingChange
+ */
+
+export const SdkBreakingChangeDataSchema = z.object({ packageName: z.string(), breakingchanges: z.array(SdkBreakingChangeSchema) });
+/**
+ * @typedef {import("zod").infer<typeof SdkBreakingChangeDataSchema>} SdkBreakingChangeData
+ */
+
 /**
  * Represents the result of the spec-gen-sdk generation process.
  */
@@ -36,6 +46,7 @@ export const SpecGenSdkArtifactInfoSchema = z.object({
   labelAction: z.boolean().optional(),
   isSpecGenSdkCheckRequired: z.boolean(),
   apiViewRequestData: z.array(APIViewRequestDataSchema),
+  breakingchangeData: z.array(SdkBreakingChangeDataSchema)
 });
 /**
  * @typedef {import("zod").infer<typeof SpecGenSdkArtifactInfoSchema>} SpecGenSdkArtifactInfo

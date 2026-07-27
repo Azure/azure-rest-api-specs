@@ -1,5 +1,6 @@
 import {
   type APIViewRequestData,
+  type SdkBreakingChangeData,
   sdkLabels,
   SdkName,
   SdkNameSchema,
@@ -381,6 +382,7 @@ export function generateArtifact(
   hasTypeSpecProjects: boolean,
   stagedArtifactsFolder: string,
   apiViewRequestData: APIViewRequestData[],
+  breakingchangeData: SdkBreakingChangeData[],
   sdkGenerationExecuted: boolean = true,
 ): number {
   const specGenSdkArtifactName = "spec-gen-sdk-artifact";
@@ -412,6 +414,7 @@ export function generateArtifact(
       labelAction: hasBreakingChange,
       isSpecGenSdkCheckRequired,
       apiViewRequestData: apiViewRequestData,
+      breakingchangeData: breakingchangeData,
     };
     fs.writeFileSync(
       path.join(commandInput.workingFolder, specGenSdkArtifactPath, specGenSdkArtifactFileName),
@@ -490,7 +493,7 @@ export function selectGenerationTool(
   readmePath?: string,
   sdkLanguage?: SdkName,
 ): GenerationTool {
-  if (sdkLanguage === "azure-sdk-for-rust") {
+  if (sdkLanguage === "azure-sdk-for-rust" || sdkLanguage === "azure-sdk-for-go") {
     if (!tspConfigPath && readmePath) {
       return "skipped";
     }
@@ -545,6 +548,21 @@ export function prepareAzsdkGenerateCommand(
   ];
 }
 
+export function prepareAzsdkBreakingChangeDetectCommand(
+  commandInput: SpecGenSdkCmdInput,
+  packagePath: string,
+  tspConfigRelativePath: string,
+): string[] {
+  const tspConfigFullPath = path.join(commandInput.localSpecRepoPath, tspConfigRelativePath);
+  return [
+    "pkg",
+    "detect-breaking-change",
+    "--package-path",
+    packagePath,
+    "--tsp-config-path",
+    tspConfigFullPath,
+  ];
+}
 /**
  * Prepare the azsdk pkg build command arguments.
  *

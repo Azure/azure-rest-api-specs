@@ -37,6 +37,9 @@ parameters:
   - name: TriggerSource
     type: string
     default: 'unspecified'
+  - name: AzuresdkCopilotGithubPat
+    type: string
+    default: ""
 
 stages:
 - stage: ${{ iif(eq(parameters.SpecBatchTypes, ''), 'Build', format('Build_{0}', replace(parameters.SpecBatchTypes, '-', '_'))) }}
@@ -228,10 +231,20 @@ stages:
       - template: /eng/common/pipelines/templates/steps/install-azsdk-cli.yml
         parameters:
           SourceRootPath: $(SpecRepoDirectory)
-          Condition: and(succeeded(), contains(variables['SdkRepoName'], 'rust'))
-
+          Condition: succeeded()
       - script: |
-          set -euo pipefail  # Exit on error, undefined vars, and pipeline failures
+          set -euo pipefail
+          bash "$(SdkRepoDirectory)/eng/scripts/automation_init.sh"
+        displayName: 'Run automation init script'
+        condition: and(succeeded(), contains(variables['SdkRepoDirectory'], 'azure-sdk-for-go'))
+      - script: |
+          # set -euo pipefail  # Exit on error, undefined vars, and pipeline failures
+          # export PATH="$PATH"
+          
+          # bash "$(SdkRepoDirectory)/eng/scripts/automation_init.sh"
+
+          export PATH="/mnt/vss/_work/1/s/gofolder/bin:$PATH"
+          
           optional_params=""
           sdk_gen_info="Configurations: "
 
@@ -273,9 +286,23 @@ stages:
           echo "##vso[task.setvariable variable=GeneratedSDKInformation]$sdk_gen_info"
           echo "$sdk_gen_info"
 
+          env | sort
+
+          which generator
+
           cd $(SpecRepoDirectory)
           echo "##[group]Run npm ci"
           npm ci
+
+          echo "##[group]npm install -g @github/copilot-sdk"
+          npm install -g @github/copilot-sdk
+
+          echo "##[group]npm install -g @github/copilot"
+          npm install -g @github/copilot@1.0.40
+
+          export AZSDK_COPILOT_CLI_PATH=$(which copilot)
+          copilot --version
+
           echo "##[endgroup]"
           node $(SpecRepoDirectory)/eng/tools/spec-gen-sdk-runner/cmd/spec-gen-sdk-runner.js \
             --scp $(SpecRepoDirectory) \
@@ -285,11 +312,19 @@ stages:
             --commit $updatedSpecRepoCommit \
             --spec-repo-url ${{ parameters.SpecRepoUrl }} \
             $optional_params || true # return true always to suppress exit error logging
+          
+          echo "check generator"
+          which generator
+
+          echo "call azsdk detect tool"
+
+          # $(AZSDK) package detect-breaking-change --package-path $(SdkRepoDirectory)/sdk/resourcemanager/webpubsub/armwebpubsub --tsp-config-path $(SpecRepoDirectory)/specification/webpubsub/resource-manager/Microsoft.SignalRService/SignalRService/tspconfig.yaml
         displayName: 'Generate SDK'
         ${{ if eq(parameters.ForceCreateEvenWithFailures, true) }}:
           continueOnError: true
         env:
           npm_config_userconfig: "$(Agent.TempDirectory)/gen-sdk/.npmrc"
+          GITHUB_TOKEN: ${{ parameters.AzuresdkCopilotGithubPat }}
 
       - template: /eng/common/pipelines/templates/steps/publish-artifact.yml
         parameters:
