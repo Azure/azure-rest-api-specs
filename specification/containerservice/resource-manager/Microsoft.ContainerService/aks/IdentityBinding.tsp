@@ -140,6 +140,47 @@ model IdentityBindingProperties {
    */
   @visibility(Lifecycle.Read)
   provisioningState?: IdentityBindingProvisioningState;
+
+  /**
+   * Optional list of subjects authorized to use this identity binding for
+   * token exchange. Each entry pairs a required namespace label selector
+   * with an optional service account label selector; selectors within an
+   * entry are AND'd, and multiple entries are OR'd. When omitted or empty,
+   * authorization falls back exclusively to ClusterRole/ClusterRoleBinding
+   * evaluation. Maximum 100 entries.
+   */
+  @added(Versions.v2026_05_02_preview)
+  @identifiers(#[])
+  @maxItems(100)
+  allowedSubjects?: AllowedSubject[];
+}
+
+/**
+ * A subject authorized to use the identity binding for token exchange.
+ * The namespace selector is required and must be non-empty. The service
+ * account selector is optional; when omitted, all service accounts in
+ * matching namespaces are authorized. Selectors within a single
+ * AllowedSubject are AND'd; multiple AllowedSubjects on an
+ * IdentityBinding are OR'd.
+ */
+@added(Versions.v2026_05_02_preview)
+model AllowedSubject {
+  /**
+   * Label selector matching the namespaces in which this identity may be
+   * used. Must be non-empty: an empty selector would match every namespace
+   * and is rejected to prevent overly permissive bindings. Use the built-in
+   * `kubernetes.io/metadata.name` label to target specific namespaces by
+   * name.
+   */
+  namespaceSelector: LabelSelector;
+
+  /**
+   * Optional label selector matching the service accounts (within the
+   * namespaces matched by `namespaceSelector`) that may use this identity.
+   * When omitted, all service accounts in matching namespaces are
+   * authorized. When provided, it must be non-empty.
+   */
+  serviceAccountSelector?: LabelSelector;
 }
 
 /**
