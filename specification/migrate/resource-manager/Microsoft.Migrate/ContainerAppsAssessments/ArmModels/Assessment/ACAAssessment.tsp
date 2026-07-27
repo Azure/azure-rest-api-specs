@@ -29,9 +29,8 @@ model ContainerAppsAssessment
 }
 
 @doc("Azure Container Apps Assessment Properties.")
-model ContainerAppsAssessmentProperties
-  is AssessmentProperties<
-    Scope,
-    ContainerAppsAssessmentSettings,
-    AssessmentDetails
-  >;
+model ContainerAppsAssessmentProperties is AssessmentProperties<
+  Scope,
+  ContainerAppsAssessmentSettings,
+  AssessmentDetails
+>;
