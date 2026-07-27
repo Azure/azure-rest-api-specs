@@ -8670,7 +8670,6 @@
             "loadBalancer",
             "userDefinedRouting",
             "managedNATGateway",
-            "managedNATGatewayV2",
             "userAssignedNATGateway",
             "none"
           ],
@@ -8692,11 +8691,6 @@
                 "name": "managedNATGateway",
                 "value": "managedNATGateway",
                 "description": "The AKS-managed NAT gateway is used for egress."
-              },
-              {
-                "name": "managedNATGatewayV2",
-                "value": "managedNATGatewayV2",
-                "description": "The AKS-managed NAT gateway V2 is used for egress."
               },
               {
                 "name": "userAssignedNATGateway",
@@ -12629,6 +12623,10 @@
       "type": "object",
       "description": "Profile of the managed cluster NAT gateway.",
       "properties": {
+        "sku": {
+          "$ref": "#/definitions/ManagedClusterNATGatewaySku",
+          "description": "The SKU of the managed cluster NAT Gateway. Defaults to 'StandardV2' where available in the region, otherwise 'Standard'."
+        },
         "managedOutboundIPProfile": {
           "$ref": "#/definitions/ManagedClusterManagedOutboundIPProfile",
           "description": "Profile of the managed outbound IP resources of the cluster NAT gateway."
@@ -12693,6 +12691,30 @@
           "minimum": 4,
           "maximum": 120
         }
+      }
+    },
+    "ManagedClusterNATGatewaySku": {
+      "type": "string",
+      "description": "The SKU of a managed cluster NAT Gateway.",
+      "enum": [
+        "Standard",
+        "StandardV2"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedClusterNATGatewaySku",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "Use a Standard SKU NAT Gateway."
+          },
+          {
+            "name": "StandardV2",
+            "value": "StandardV2",
+            "description": "Use a StandardV2 SKU NAT Gateway. This is the default for new clusters in regions where it is available."
+          }
+        ]
       }
     },
     "ManagedClusterNodeProvisioningProfile": {

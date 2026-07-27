@@ -517,7 +517,6 @@ using Microsoft.ContainerService;
 );
 @@clientName(OutboundType, "ContainerServiceOutboundType", "csharp");
 @@clientName(OutboundType.managedNATGateway, "ManagedNatGateway", "csharp");
-@@clientName(OutboundType.managedNATGatewayV2, "ManagedNatGatewayV2", "csharp");
 @@clientName(
   OutboundType.userAssignedNATGateway,
   "UserAssignedNatGateway",

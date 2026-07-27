@@ -932,12 +932,6 @@ union OutboundType {
   managedNATGateway: "managedNATGateway",
 
   /**
-   * The AKS-managed NAT gateway V2 is used for egress.
-   */
-  @added(Versions.v2026_06_02_preview)
-  managedNATGatewayV2: "managedNATGatewayV2",
-
-  /**
    * The user-assigned NAT gateway associated to the cluster subnet is used for egress. This is an advanced scenario and requires proper network configuration.
    */
   userAssignedNATGateway: "userAssignedNATGateway",
@@ -2768,10 +2762,34 @@ model ManagedClusterLoadBalancerProfileOutboundIPs {
 }
 
 /**
+ * The SKU of a managed cluster NAT Gateway.
+ */
+@added(Versions.v2026_06_01)
+union ManagedClusterNATGatewaySku {
+  string,
+
+  /**
+   * Use a Standard SKU NAT Gateway.
+   */
+  Standard: "Standard",
+
+  /**
+   * Use a StandardV2 SKU NAT Gateway. This is the default for new clusters in regions where it is available.
+   */
+  StandardV2: "StandardV2",
+}
+
+/**
  * Profile of the managed cluster NAT gateway.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
 model ManagedClusterNATGatewayProfile {
+  /**
+   * The SKU of the managed cluster NAT Gateway. Defaults to 'StandardV2' where available in the region, otherwise 'Standard'.
+   */
+  @added(Versions.v2026_06_01)
+  sku?: ManagedClusterNATGatewaySku;
+
   /**
    * Profile of the managed outbound IP resources of the cluster NAT gateway.
    */
