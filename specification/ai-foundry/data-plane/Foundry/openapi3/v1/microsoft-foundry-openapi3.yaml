@@ -3,6 +3,7 @@ info:
   title: Microsoft Foundry
   version: v1
 tags:
+  - name: Knowledge Sources
   - name: Responses Root
     description: Responses
   - name: Responses
@@ -5110,6 +5111,279 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Insights
+  /knowledge_sources:
+    post:
+      operationId: createKnowledgeSource
+      summary: Create a knowledge source
+      description: Creates a knowledge source in the current project.
+      parameters:
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KnowledgeSourceObject'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Knowledge Sources
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  maxLength: 256
+                  description: The name and identifier of the knowledge source.
+                kind:
+                  type: string
+                  enum:
+                    - web
+                  description: The kind of knowledge source. Always `web`.
+              required:
+                - name
+                - kind
+              unevaluatedProperties: {}
+    get:
+      operationId: listKnowledgeSources
+      summary: List knowledge sources
+      description: Lists knowledge sources in the current project.
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          description: |-
+            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+            default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: |-
+            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
+            for descending order.
+          schema:
+            $ref: '#/components/schemas/PageOrder'
+          explode: false
+        - name: after
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: before
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - has_more
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/KnowledgeSourceObject'
+                    description: The requested list of items.
+                  first_id:
+                    type: string
+                    description: The first ID represented in this list.
+                  last_id:
+                    type: string
+                    description: The last ID represented in this list.
+                  has_more:
+                    type: boolean
+                    description: A value indicating whether there are additional values available not captured in this list.
+                description: The response data for a requested list of items.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Knowledge Sources
+  /knowledge_sources/{name}:
+    post:
+      operationId: updateKnowledgeSource
+      summary: Update a knowledge source
+      description: Updates the specified knowledge source.
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: The name and identifier of the knowledge source.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KnowledgeSourceObject'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Knowledge Sources
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                kind:
+                  type: string
+                  enum:
+                    - web
+                  description: The kind of knowledge source. Always `web`.
+              unevaluatedProperties: {}
+    get:
+      operationId: getKnowledgeSource
+      summary: Get a knowledge source
+      description: Retrieves the specified knowledge source.
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: The name of the knowledge source.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KnowledgeSourceObject'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Knowledge Sources
+    delete:
+      operationId: deleteKnowledgeSource
+      summary: Delete a knowledge source
+      description: Deletes the specified knowledge source.
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: The name of the knowledge source.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '204':
+          description: 'There is no content to send for this request, but the headers may be useful. '
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Knowledge Sources
   /memory_stores:
     post:
       operationId: createMemoryStore
@@ -37425,6 +37699,9 @@ paths:
             schema:
               type: object
               properties:
+                kind:
+                  $ref: '#/components/schemas/ToolboxKind'
+                  description: The kind of toolbox version. When omitted, the service interprets it as `default`.
                 description:
                   type: string
                   maxLength: 512
@@ -37438,17 +37715,24 @@ paths:
                   type: array
                   items:
                     $ref: '#/components/schemas/ToolboxTool'
-                  description: The list of tools to include in this version.
+                  description: The list of tools to include in this version. Not allowed when `kind` is `knowledge_base`.
                 skills:
                   type: array
                   items:
                     $ref: '#/components/schemas/ToolboxSkill'
-                  description: The list of skill sources to include in this version. A skill reference specifies a skill name and optionally a version. If version is omitted, the skill's default version is used.
+                  description: The list of skill sources to include in this version. A skill reference specifies a skill name and optionally a version. If version is omitted, the skill's default version is used. Not allowed when `kind` is `knowledge_base`.
                 policies:
                   $ref: '#/components/schemas/ToolboxPolicies'
-                  description: Policy configuration for this toolbox version.
-              required:
-                - tools
+                  description: Policy configuration for this toolbox version. Not allowed when `kind` is `knowledge_base`.
+                knowledge_sources:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ToolboxKnowledgeSourceReference'
+                  minItems: 1
+                  description: Knowledge sources for a `knowledge_base` toolbox. Required for that kind and otherwise not allowed.
+                knowledge_retrieval:
+                  $ref: '#/components/schemas/ToolboxKnowledgeRetrieval'
+                  description: Retrieval configuration for a `knowledge_base` toolbox. Required for that kind and otherwise not allowed.
     get:
       operationId: listToolboxVersions
       summary: List toolbox versions
@@ -38329,6 +38613,10 @@ components:
           $ref: '#/components/schemas/AgentState'
           description: The operational state of the agent. Controls whether the agent endpoint accepts or rejects requests.
           readOnly: true
+        state_source:
+          $ref: '#/components/schemas/AgentStateSource'
+          description: The source of the agent's operational state. When the agent is disabled, indicates where the disabled state originates from. Empty when not derived from a specific source.
+          readOnly: true
         versions:
           type: object
           properties:
@@ -38428,6 +38716,14 @@ components:
             - enabled
             - disabled
       description: The operational state of an agent.
+    AgentStateSource:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - agent_instance_identity
+            - agent_blueprint
+      description: Indicates the source of an agent's operational state. Empty when the state is not derived from a specific source.
     AgentTaxonomyInput:
       type: object
       required:
@@ -44124,6 +44420,23 @@ components:
             - failed
             - cancelled
       description: Extensible status values shared by Foundry jobs.
+    KnowledgeSourceObject:
+      type: object
+      required:
+        - name
+        - kind
+      properties:
+        name:
+          type: string
+          maxLength: 256
+          description: The name and identifier of the knowledge source.
+        kind:
+          type: string
+          enum:
+            - web
+          description: The kind of knowledge source. Always `web`.
+      unevaluatedProperties: {}
+      description: A reusable knowledge source in the current Foundry project.
     LoraConfig:
       type: object
       properties:
@@ -74606,6 +74919,36 @@ components:
       x-ms-foundry-meta:
         conditional_previews:
           - DataGenerationJobs=V1Preview
+    ToolboxKind:
+      type: string
+      enum:
+        - default
+        - knowledge_base
+      description: The kind of content stored in a toolbox.
+    ToolboxKnowledgeRetrieval:
+      type: object
+      properties:
+        models:
+          type: array
+          items:
+            type: string
+          description: The models that may be used for retrieval and answer synthesis.
+      unevaluatedProperties: {}
+      description: |-
+        Retrieval and answer-synthesis configuration for a knowledge-base toolbox.
+
+        Additional properties map to Search Knowledge Base retrieval properties and
+        are retained so retrieval behavior can evolve without requiring a new
+        toolbox contract for each additive option.
+    ToolboxKnowledgeSourceReference:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: The name of the knowledge source.
+      description: A knowledge source used by a knowledge-base toolbox.
     ToolboxObject:
       type: object
       required:
@@ -74620,10 +74963,13 @@ components:
           type: string
           maxLength: 256
           description: The name of the toolbox.
+        kind:
+          $ref: '#/components/schemas/ToolboxKind'
+          description: The kind of toolbox. Existing toolboxes that omit this property are interpreted as `default`.
         default_version:
           type: string
           description: The version identifier that the toolbox currently points to. Defaults to the latest version. Can be changed via updateToolbox.
-      description: A toolbox that stores reusable tool definitions for agents.
+      description: A toolbox that stores reusable tools or knowledge-retrieval configuration.
     ToolboxPolicies:
       type: object
       properties:
@@ -74744,7 +75090,6 @@ components:
         - name
         - version
         - created_at
-        - tools
       properties:
         metadata:
           anyOf:
@@ -74778,19 +75123,31 @@ components:
           type: integer
           format: unixtime
           description: The Unix timestamp (seconds) when the toolbox version was created.
+        kind:
+          $ref: '#/components/schemas/ToolboxKind'
+          description: The kind of toolbox version. Existing versions that omit this property are interpreted as `default`.
         tools:
           type: array
           items:
             $ref: '#/components/schemas/ToolboxTool'
-          description: The list of tools contained in this toolbox version.
+          description: The list of tools contained in this toolbox version. Not allowed when `kind` is `knowledge_base`.
         skills:
           type: array
           items:
             $ref: '#/components/schemas/ToolboxSkill'
-          description: The list of skill sources included in this toolbox version.
+          description: The list of skill sources included in this toolbox version. Not allowed when `kind` is `knowledge_base`.
         policies:
           $ref: '#/components/schemas/ToolboxPolicies'
-          description: Policy configuration for the toolbox version.
+          description: Policy configuration for the toolbox version. Not allowed when `kind` is `knowledge_base`.
+        knowledge_sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/ToolboxKnowledgeSourceReference'
+          minItems: 1
+          description: Knowledge sources for a `knowledge_base` toolbox version. Required for that kind and otherwise not allowed.
+        knowledge_retrieval:
+          $ref: '#/components/schemas/ToolboxKnowledgeRetrieval'
+          description: Retrieval configuration for a `knowledge_base` toolbox version. Required for that kind and otherwise not allowed.
       description: A specific version of a toolbox.
     TraceIdTraceSource:
       type: object
