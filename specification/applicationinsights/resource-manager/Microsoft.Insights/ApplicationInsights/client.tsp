@@ -397,15 +397,200 @@ namespace ApplicationInsightsManagementClient;
   "csharp"
 );
 
-// The Component and WebTest resources were converted as ARM "custom resources" that
-// extend a hand-written envelope whose `id` is a plain string (not TrackedResource),
-// so the generated resource ctor `: this(client, data.Id)` cannot bind a string to
-// the (ArmClient, ResourceIdentifier) ctor. Type `id` as an ARM resource id.
-@@alternateType(Components.ComponentsResource.id,
+// ---- Property/enum/operation renames + type hints porting the remaining AutoRest
+// rename-mapping to match the GA (1.1.0) public surface. ----
+
+// Boolean/property name renames (Is* prefixes, *InSeconds, *On).
+@@clientName(Components.ApplicationInsightsComponentProperties.DisableIpMasking,
+  "IsDisableIPMasking",
+  "csharp"
+);
+@@clientName(Components.ApplicationInsightsComponentProperties.ImmediatePurgeDataOn30Days,
+  "IsImmediatePurgeDataOn30Days",
+  "csharp"
+);
+@@clientName(Components.ApplicationInsightsComponentProperties.DisableLocalAuth,
+  "IsDisableLocalAuth",
+  "csharp"
+);
+@@clientName(Components.ApplicationInsightsComponentProperties.ForceCustomerStorageForProfiler,
+  "IsForceCustomerStorageForProfiler",
+  "csharp"
+);
+@@clientName(ComponentAPIs.ApplicationInsightsComponentDataVolumeCap.StopSendNotificationWhenHitThreshold,
+  "IsStopSendNotificationWhenHitThreshold",
+  "csharp"
+);
+@@clientName(ComponentAPIs.ApplicationInsightsComponentDataVolumeCap.StopSendNotificationWhenHitCap,
+  "IsStopSendNotificationWhenHitCap",
+  "csharp"
+);
+@@clientName(ComponentAPIs.ApplicationInsightsComponentProactiveDetectionConfiguration.enabled,
+  "IsEnabled",
+  "csharp"
+);
+@@clientName(ComponentAPIs.ApplicationInsightsComponentProactiveDetectionConfiguration.lastUpdatedTime,
+  "LastUpdatedOn",
+  "csharp"
+);
+@@clientName(ComponentAPIs.ApplicationInsightsComponentFeatureCapabilities.SupportExportData,
+  "IsExportDataSupported",
+  "csharp"
+);
+@@clientName(ComponentAPIs.ApplicationInsightsComponentProactiveDetectionConfigurationRuleDefinitions.SupportsEmailNotifications,
+  "IsEmailNotificationsSupported",
+  "csharp"
+);
+@@clientName(ComponentAPIs.ApplicationInsightsComponentExportConfiguration.NotificationQueueEnabled,
+  "IsNotificationQueueEnabled",
+  "csharp"
+);
+@@clientName(ComponentAPIs.ApplicationInsightsComponentExportConfiguration.LastUserUpdate,
+  "LastUserUpdatedOn",
+  "csharp"
+);
+@@clientName(ComponentAPIs.ApplicationInsightsComponentExportConfiguration.LastSuccessTime,
+  "LastSucceededOn",
+  "csharp"
+);
+@@clientName(ComponentAPIs.ApplicationInsightsComponentExportConfiguration.LastGapTime,
+  "LastGappedOn",
+  "csharp"
+);
+@@clientName(ComponentAPIs.ApplicationInsightsComponentExportRequest.NotificationQueueEnabled,
+  "IsNotificationQueueEnabled",
+  "csharp"
+);
+@@clientName(ComponentAPIs.Annotation.EventTime, "EventOccurredOn", "csharp");
+@@clientName(ComponentAPIs.ApplicationInsightsComponentAPIKey.createdDate,
+  "CreatedOn",
+  "csharp"
+);
+@@clientName(ComponentAPIs.ApplicationInsightsComponentFeature.ResouceId,
+  "ResourceId",
+  "csharp"
+);
+@@clientName(ComponentAPIs.ApplicationInsightsComponentQuotaStatus.ExpirationTime,
+  "ExpireOn",
+  "csharp"
+);
+@@clientName(ComponentAPIs.WorkItemCreateConfiguration.ValidateOnly,
+  "IsValidateOnly",
+  "csharp"
+);
+@@clientName(Favorites.ApplicationInsightsComponentFavorite.TimeModified,
+  "ModifiedOn",
+  "csharp"
+);
+@@clientName(WebTestsApi.WebTestProperties.Enabled, "IsEnabled", "csharp");
+@@clientName(WebTestsApi.WebTestProperties.Frequency, "FrequencyInSeconds", "csharp");
+@@clientName(WebTestsApi.WebTestProperties.Timeout, "TimeoutInSeconds", "csharp");
+@@clientName(WebTestsApi.WebTestProperties.RetryEnabled, "IsRetryEnabled", "csharp");
+@@clientName(WebTestsApi.WebTestPropertiesValidationRules.SSLCheck, "CheckSsl", "csharp");
+@@clientName(WebTestsApi.WebTestPropertiesValidationRules.SSLCertRemainingLifetimeCheck,
+  "SslCertRemainingLifetimeCheck",
+  "csharp"
+);
+@@clientName(AnalyticsItems.ApplicationInsightsComponentAnalyticsItem.TimeCreated,
+  "CreatedOn",
+  "csharp"
+);
+@@clientName(AnalyticsItems.ApplicationInsightsComponentAnalyticsItem.TimeModified,
+  "ModifiedOn",
+  "csharp"
+);
+@@clientName(AnalyticsItems.ApplicationInsightsComponentAnalyticsItem.Type,
+  "ComponentItemType",
+  "csharp"
+);
+@@clientName(WorkbooksApi.WorkbookProperties.timeModified, "ModifiedOn", "csharp");
+@@clientName(WorkbooksApi.WorkbookProperties.sourceId, "SourceId", "csharp");
+@@clientName(WorkbooksApi.WorkbookProperties.storageUri, "StorageUri", "csharp");
+@@clientName(WorkbookTemplatesApi.WorkbookTemplateProperties.localized,
+  "LocalizedGalleries",
+  "csharp"
+);
+@@clientName(WorkbookTemplatesApi.WorkbookTemplateGallery.type, "WorkbookType", "csharp");
+@@clientName(Components.ApplicationInsightsComponent.etag, "ETag", "csharp");
+@@clientName(WorkbooksApi.Workbook.etag, "ETag", "csharp");
+@@clientName(ComponentAPIs.ApplicationInsightsComponentAPIKey,
+  "ApplicationInsightsComponentApiKey",
+  "csharp"
+);
+
+// Enum member renames.
+@@clientName(WebTestsApi.WebTestKind.multistep, "MultiStep", "csharp");
+@@clientName(ApplicationInsightsCommonTypes.CategoryType.TSG, "Tsg", "csharp");
+@@clientName(AnalyticsItems.ItemScopePath.myanalyticsItems, "MyAnalyticsItems", "csharp");
+
+// Operation method-name renames (component convenience list ops + live token).
+@@clientName(WebTestsApi.WebTestsOperationGroup.listByComponent, "GetWebTests", "csharp");
+@@clientName(WebTestLocation.webTestLocationsOperationGroup.list,
+  "GetWebTestLocations",
+  "csharp"
+);
+@@clientName(LiveTokenApi.LiveTokenOperationGroup.get, "GetLiveToken", "csharp");
+
+// Type hints: string -> DateTimeOffset (utcDateTime), ARM id, Guid, Uri, ETag.
+@@alternateType(ComponentAPIs.ApplicationInsightsComponentProactiveDetectionConfiguration.lastUpdatedTime,
+  utcDateTime,
+  "csharp"
+);
+@@alternateType(ComponentAPIs.ApplicationInsightsComponentExportConfiguration.LastUserUpdate,
+  utcDateTime,
+  "csharp"
+);
+@@alternateType(ComponentAPIs.ApplicationInsightsComponentExportConfiguration.LastSuccessTime,
+  utcDateTime,
+  "csharp"
+);
+@@alternateType(ComponentAPIs.ApplicationInsightsComponentExportConfiguration.LastGapTime,
+  utcDateTime,
+  "csharp"
+);
+@@alternateType(ComponentAPIs.ApplicationInsightsComponentAPIKey.createdDate,
+  utcDateTime,
+  "csharp"
+);
+@@alternateType(ComponentAPIs.ApplicationInsightsComponentQuotaStatus.ExpirationTime,
+  utcDateTime,
+  "csharp"
+);
+@@alternateType(Favorites.ApplicationInsightsComponentFavorite.TimeModified,
+  utcDateTime,
+  "csharp"
+);
+@@alternateType(AnalyticsItems.ApplicationInsightsComponentAnalyticsItem.TimeCreated,
+  utcDateTime,
+  "csharp"
+);
+@@alternateType(AnalyticsItems.ApplicationInsightsComponentAnalyticsItem.TimeModified,
+  utcDateTime,
+  "csharp"
+);
+@@alternateType(Components.ApplicationInsightsComponentProperties.WorkspaceResourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(WebTestsApi.WebtestsResource.id,
+@@alternateType(ComponentAPIs.ApplicationInsightsComponentFeature.ResouceId,
   Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(WorkbooksApi.WorkbookProperties.sourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(Components.ApplicationInsightsComponentProperties.TenantId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(WorkbooksApi.WorkbookProperties.storageUri, url, "csharp");
+@@alternateType(Components.ApplicationInsightsComponent.etag, Azure.Core.eTag, "csharp");
+@@alternateType(WorkbooksApi.Workbook.etag, Azure.Core.eTag, "csharp");
+
+// Workbook identity: GA exposes the standard ManagedServiceIdentity envelope, not the
+// converted custom WorkbookResourceIdentity model.
+@@alternateType(WorkbooksApi.Workbook.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
