@@ -6,6 +6,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "../Common/Models.tsp";
 import "../Common/Enums.tsp";
 import "../../Common/ArmModels/AzureResourceProperties.tsp";
+import "../../Common/StandardizedContracts/CarbonEmissionsDetails.tsp";
 
 using Autorest;
 using TypeSpec.Http;
@@ -19,6 +20,7 @@ namespace Microsoft.Migrate;
 
 @doc("Avs summary REST resource.")
 @parentResource(BusinessCase)
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 model AvsSummary is ProxyResource<AvsSummaryProperties> {
   @doc("Gets the Name of the Avs Summary.")
   @key("avsSummaryName")
@@ -31,6 +33,7 @@ model AvsSummary is ProxyResource<AvsSummaryProperties> {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "This is a hydrated resource with no PUT call."
 @doc("Avs summary properties class.")
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 model AvsSummaryProperties {
   @doc("The Azure Avs summary.")
   @visibility(Lifecycle.Read)
@@ -42,6 +45,7 @@ model AvsSummaryProperties {
 }
 
 @doc("The Azure AVS summary.")
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 model AzureAvsSummary {
   @doc("Shows the year-on-year cost overall.")
   @visibility(Lifecycle.Read)
@@ -61,6 +65,7 @@ model AzureAvsSummary {
 }
 
 @doc("Azure Avs Node summary.")
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 model AvsNodeSummary {
   @doc("Servers suitable for migration.")
   @visibility(Lifecycle.Read)
@@ -121,6 +126,7 @@ model AvsNodeSummary {
 }
 
 @doc("Error Details")
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 model ErrorDetail {
   @doc("Error Code")
   @visibility(Lifecycle.Read)
@@ -132,6 +138,7 @@ model ErrorDetail {
 }
 
 @doc("Estimated network")
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 model EstimatedNetwork {
   @doc("Network SKU type.")
   @visibility(Lifecycle.Read)
@@ -143,6 +150,7 @@ model EstimatedNetwork {
 }
 
 @doc("Estimated external storage")
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 model EstimatedExternalStorage {
   @doc("External storage type")
   @visibility(Lifecycle.Read)
@@ -163,6 +171,7 @@ model EstimatedExternalStorage {
 }
 
 @doc("Azure Avs Node summary.")
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 model RecommendedAvsNodeTypeSummary {
   @doc("AVS node type.")
   @visibility(Lifecycle.Read)

@@ -1,0 +1,303 @@
+{
+  "title": "OnPremTcoOperations_Get_MaximumSet_Gen",
+  "operationId": "OnPremTcoOperations_Get",
+  "parameters": {
+    "resourceUri": "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/exampleResourceGroup/providers/Microsoft.Migrate/assessmentProjects/exampleAssessmentProject",
+    "api-version": "2025-09-09-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "default",
+        "type": "Microsoft.Migrate/assessmentProjects/onPremTcoDetails",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/exampleResourceGroup/providers/Microsoft.Migrate/assessmentProjects/exampleAssessmentProject/providers/Microsoft.Migrate/onPremTcoDetails/default",
+        "properties": {
+          "overallCost": {
+            "totalCost": 4633.771706613171,
+            "capexCost": 374.19343256372616,
+            "opexCost": 2811.2824994015577,
+            "costLineItems": [
+              {
+                "pillar": "Network",
+                "name": "NetworkAcquisitionCost",
+                "value": 1250.75,
+                "costType": "CapexCost"
+              },
+              {
+                "pillar": "Network",
+                "name": "NetworkMaintenanceCost",
+                "value": 320.5,
+                "costType": "OpexCost"
+              }
+            ]
+          },
+          "costDetails": {
+            "storageCost": {
+              "totalCost": 66,
+              "capexCost": 60,
+              "opexCost": 6,
+              "costLineItems": [
+                {
+                  "pillar": "Storage",
+                  "name": "StorageAcquisitionCost",
+                  "value": 60,
+                  "costType": "CapexCost"
+                },
+                {
+                  "pillar": "Storage",
+                  "name": "StorageMaintenanceCost",
+                  "value": 6,
+                  "costType": "OpexCost"
+                }
+              ]
+            },
+            "computeCost": {
+              "totalCost": 1505.5971746478874,
+              "capexCost": 307.3014,
+              "opexCost": 0,
+              "costLineItems": [
+                {
+                  "pillar": "Compute",
+                  "name": "HardwareAcquisitionCost",
+                  "value": 307.3014,
+                  "costType": "CapexCost"
+                }
+              ]
+            },
+            "itLaborCost": {
+              "totalCost": 1145.0823529411764,
+              "capexCost": 0,
+              "opexCost": 1145.0823529411764,
+              "costLineItems": [
+                {
+                  "pillar": "ItLabor",
+                  "name": "LaborCost",
+                  "value": 1145.0823529411764,
+                  "costType": "OpexCost"
+                }
+              ]
+            },
+            "networkCost": {
+              "totalCost": 7.9258374482850655,
+              "capexCost": 6.892032563726144,
+              "opexCost": 1.0338048845589216,
+              "costLineItems": [
+                {
+                  "pillar": "Network",
+                  "name": "NetworkAcquisitionCost",
+                  "value": 6.892032563726144,
+                  "costType": "CapexCost"
+                },
+                {
+                  "pillar": "Network",
+                  "name": "NetworkMaintenanceCost",
+                  "value": 1.0338048845589216,
+                  "costType": "OpexCost"
+                }
+              ]
+            },
+            "securityCost": 250,
+            "securityCostDetails": {
+              "totalCost": 250,
+              "capexCost": 0,
+              "opexCost": 250,
+              "costLineItems": [
+                {
+                  "pillar": "Security",
+                  "name": "SecurityCost",
+                  "value": 250,
+                  "costType": "OpexCost"
+                }
+              ]
+            },
+            "managementCostDetails": {
+              "managementCost": 1551.5502478258225,
+              "managementCostComponents": [
+                {
+                  "name": "VSphereManagementCost",
+                  "value": 104.664902998236
+                },
+                {
+                  "name": "ThirdPartyManagementCost",
+                  "value": 0.910344827586207
+                },
+                {
+                  "name": "OtherMonitoringManagementCost",
+                  "value": 430
+                },
+                {
+                  "name": "OtherPatchingManagementCost",
+                  "value": 430
+                },
+                {
+                  "name": "OtherDataProtectionManagementCost",
+                  "value": 580
+                },
+                {
+                  "name": "None",
+                  "value": 5.975
+                }
+              ]
+            },
+            "managementCost": {
+              "totalCost": 1551.5502478258225,
+              "capexCost": 0,
+              "opexCost": 1551.5502478258225,
+              "costLineItems": [
+                {
+                  "pillar": "Management",
+                  "name": "VSphereManagementCost",
+                  "value": 104.664902998236,
+                  "costType": "OpexCost"
+                },
+                {
+                  "pillar": "Management",
+                  "name": "ThirdPartyManagementCost",
+                  "value": 0.910344827586207,
+                  "costType": "OpexCost"
+                },
+                {
+                  "pillar": "Management",
+                  "name": "OtherMonitoringManagementCost",
+                  "value": 430,
+                  "costType": "OpexCost"
+                },
+                {
+                  "pillar": "Management",
+                  "name": "OtherPatchingManagementCost",
+                  "value": 430,
+                  "costType": "OpexCost"
+                },
+                {
+                  "pillar": "Management",
+                  "name": "OtherDataProtectionManagementCost",
+                  "value": 580,
+                  "costType": "OpexCost"
+                },
+                {
+                  "pillar": "Management",
+                  "name": "ManagementCost",
+                  "value": 5.975,
+                  "costType": "OpexCost"
+                }
+              ]
+            },
+            "facilitiesCost": {
+              "totalCost": 107.61609375,
+              "capexCost": 0,
+              "opexCost": 107.61609375,
+              "costLineItems": [
+                {
+                  "pillar": "Facilities",
+                  "name": "FacilitiesCost",
+                  "value": 107.61609375,
+                  "costType": "OpexCost"
+                }
+              ]
+            },
+            "licenseCostDetails": {
+              "licenseCost": 1198.2957746478874,
+              "licenseCostComponents": [
+                {
+                  "name": "WindowsLicenseCost",
+                  "value": 0
+                },
+                {
+                  "name": "LinuxLicenseCost",
+                  "value": 799
+                },
+                {
+                  "name": "VirtualizationLicenseCost",
+                  "value": 399.2957746478873
+                }
+              ]
+            },
+            "licensingCost": {
+              "totalCost": 1198.2957746478874,
+              "capexCost": 0,
+              "opexCost": 1198.2957746478874,
+              "costLineItems": [
+                {
+                  "pillar": "Licensing",
+                  "name": "WindowsLicenseCost",
+                  "value": 0,
+                  "costType": "OpexCost"
+                },
+                {
+                  "pillar": "Licensing",
+                  "name": "LinuxLicenseCost",
+                  "value": 799,
+                  "costType": "OpexCost"
+                },
+                {
+                  "pillar": "Licensing",
+                  "name": "VirtualizationLicenseCost",
+                  "value": 399.2957746478873,
+                  "costType": "OpexCost"
+                }
+              ]
+            }
+          },
+          "sustainabilityDetails": {
+            "scope1": [
+              {
+                "name": "MonthlyComputeEmissions",
+                "value": 0.000128630382909298
+              },
+              {
+                "name": "MonthlyStorageEmissions",
+                "value": 2.4680687287845735e-7
+              }
+            ],
+            "scope2": [
+              {
+                "name": "MonthlyComputeEmissions",
+                "value": 0.00553993234117714
+              },
+              {
+                "name": "MonthlyStorageEmissions",
+                "value": 0.000021515624999999996
+              }
+            ],
+            "scope3": [
+              {
+                "name": "MonthlyComputeEmissions",
+                "value": 0.024856000000000007
+              },
+              {
+                "name": "MonthlyStorageEmissions",
+                "value": 0.0001536
+              }
+            ]
+          },
+          "yearlyOnPremisesEsu": [
+            {
+              "year": "Year0",
+              "value": 0
+            },
+            {
+              "year": "Year1",
+              "value": 0
+            },
+            {
+              "year": "Year2",
+              "value": 0
+            },
+            {
+              "year": "Year3",
+              "value": 0
+            }
+          ]
+        },
+        "systemData": {
+          "createdBy": "sakanwar",
+          "createdByType": "User",
+          "createdAt": "2023-09-15T07:22:18.589Z",
+          "lastModifiedBy": "sakanwar",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-09-15T07:22:18.589Z"
+        }
+      }
+    }
+  }
+}

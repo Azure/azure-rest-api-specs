@@ -17,6 +17,7 @@ namespace Microsoft.Migrate;
 
 @doc("Evaluated web app resource.")
 @parentResource(BusinessCase)
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 model EvaluatedWebApp is ProxyResource<EvaluatedWebAppProperties> {
   @doc("Business case Evaluated web App ARM name")
   @key("evaluatedWebAppName")
@@ -29,6 +30,7 @@ model EvaluatedWebApp is ProxyResource<EvaluatedWebAppProperties> {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "This is a hydrated resource with no PUT call."
 @doc("Evaluated web app properties class.")
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 model EvaluatedWebAppProperties {
   @doc("Recommended Azure target.")
   recommendedAzureTarget?: string;

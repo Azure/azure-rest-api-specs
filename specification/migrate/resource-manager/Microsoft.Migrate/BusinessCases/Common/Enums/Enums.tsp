@@ -3,6 +3,7 @@ using TypeSpec.Versioning;
 
 namespace Microsoft.Migrate;
 
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 @doc("Assessment Status.")
 union AssessmentStatus {
   @doc("Assessment is Created.")
@@ -35,6 +36,7 @@ union AssessmentStatus {
   string,
 }
 
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 @doc("Assessment Sizing Criteria.")
 union AssessmentSizingCriterion {
   @doc("Performance Data based Sizing.")
@@ -46,6 +48,7 @@ union AssessmentSizingCriterion {
   string,
 }
 
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 @doc("Cloud Suitability for Azure.")
 union CloudSuitability {
   @doc("Unknown. Indicates missing data.")
@@ -404,6 +407,7 @@ union SavingsOptions {
   string,
 }
 
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 @doc("Premium Disk Support")
 union PremiumDiskSupport {
   @doc("Premium Disk Supported")
@@ -415,6 +419,7 @@ union PremiumDiskSupport {
   string,
 }
 
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 @doc("Web Server Type.")
 union WebServerType {
   @doc("Unknown. Indicates Missing Data.")
@@ -429,6 +434,7 @@ union WebServerType {
   string,
 }
 
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 @doc("Web App Type.")
 union WebAppType {
   @doc("Unknown. Indicates Missing Data.")
@@ -443,6 +449,7 @@ union WebAppType {
   string,
 }
 
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 @doc("Wep App Tier.")
 union AzureWebAppTier {
   @doc("Unknown. Indicates Missing Data.")

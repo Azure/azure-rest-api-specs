@@ -202,6 +202,7 @@ union BusinessCaseState {
   @doc("Unknown State.")
   Unknown: "Unknown",
 
+  @removed(BusinessCaseApiVersions.v2025_09_09_preview)
   @doc("InProgress  State.")
   InProgress: "InProgress",
 
@@ -211,14 +212,40 @@ union BusinessCaseState {
   @doc("OutDated State.")
   OutDated: "OutDated",
 
+  @removed(BusinessCaseApiVersions.v2025_09_09_preview)
   @doc("Invalid State.")
   Invalid: "Invalid",
 
+  @removed(BusinessCaseApiVersions.v2025_09_09_preview)
   @doc("OutOfSync State.")
   OutOfSync: "OutOfSync",
 
+  @added(BusinessCaseApiVersions.v2025_09_09_preview)
+  @doc("In progress state.")
+  Started: "Started",
+
+  @added(BusinessCaseApiVersions.v2025_09_09_preview)
+  @doc("In entities getting tagged on static data state.")
+  Tagging: "Tagging",
+
+  @added(BusinessCaseApiVersions.v2025_09_09_preview)
+  @doc("In Artifacts Created state.")
+  ArtifactsCreation: "ArtifactsCreation",
+
+  @added(BusinessCaseApiVersions.v2025_09_09_preview)
+  @doc("Computation of the business case.")
+  Computing: "Computing",
+
   @doc("Failed State.")
   Failed: "Failed",
+
+  @added(BusinessCaseApiVersions.v2025_09_09_preview)
+  @doc("The deleting business case state.")
+  Deleting: "Deleting",
+
+  @added(BusinessCaseApiVersions.v2025_09_09_preview)
+  @doc("The updating business case state.")
+  Updating: "Updating",
 
   string,
 }
@@ -255,6 +282,7 @@ union ReportType {
 }
 
 @doc("Business case supported WebApp types.")
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 union WebAppTypes {
   @doc("Unknown WebApp Type.")
   Unknown: "Unknown",
@@ -264,47 +292,6 @@ union WebAppTypes {
 
   @doc("Java Tomcat Type.")
   Java: "Java",
-
-  string,
-}
-
-@doc("Management Cost Component Names.")
-union ManagementCostComponentName {
-  @doc("Unknown Management Cost Component.")
-  Unknown: "Unknown",
-
-  @doc("System Center License Cost.")
-  SystemCenterLicenseCost: "SystemCenterLicenseCost",
-
-  @doc("VSphere eManagement Cost.")
-  VSphereManagementCost: "VSphereManagementCost",
-
-  @doc("Third Party Management Cost.")
-  ThirdPartyManagementCost: "ThirdPartyManagementCost",
-
-  @doc("Other Monitoring Cost.")
-  OtherMonitoringCost: "OtherMonitoringCost",
-
-  @doc("Other Data Protection Cost.")
-  OtherDataProtectionCost: "OtherDataProtectionCost",
-
-  @doc("Other Patching Cost.")
-  OtherPatchingCost: "OtherPatchingCost",
-
-  @doc("Azure Monitoring Cost.")
-  AzureMonitoringCost: "AzureMonitoringCost",
-
-  @doc("Azure Patching Cost.")
-  AzurePatchingCost: "AzurePatchingCost",
-
-  @doc("Azure Data Protection Cost.")
-  AzureDataProtectionCost: "AzureDataProtectionCost",
-
-  @doc("Azure Arc Monitoring Cost.")
-  AzureArcMonitoringCost: "AzureArcMonitoringCost",
-
-  @doc("Azure Arc Patching Cost.")
-  AzureArcPatchingCost: "AzureArcPatchingCost",
 
   string,
 }
@@ -415,6 +402,10 @@ union ExternalStorageType {
   @doc("Azure Elastic SAN with Capacity SKU.")
   AzureElasticSanCapacity: "AzureElasticSanCapacity",
 
+  @added(BusinessCaseApiVersions.v2025_09_09_preview)
+  @doc("ANF external storage with Flexible Service Level SKU.")
+  AnfFlexibleServiceLevel: "AnfFlexibleServiceLevel",
+
   string,
 }
 
@@ -437,6 +428,23 @@ union NetworkSkuType {
 
   @doc("Azure Private Link Ingress network type.")
   AzurePrivateLinkIngress: "AzurePrivateLinkIngress",
+
+  string,
+}
+
+@doc("The licensing program.")
+union LicensingProgram {
+  @doc("Retail/Pay as you go.")
+  Retail: "Retail",
+
+  @doc("Not known")
+  Unknown: "Unknown",
+
+  @doc("Enterprise agreement.")
+  EA: "EA",
+
+  @doc("Microsoft customer agreement.")
+  MCA: "MCA",
 
   string,
 }

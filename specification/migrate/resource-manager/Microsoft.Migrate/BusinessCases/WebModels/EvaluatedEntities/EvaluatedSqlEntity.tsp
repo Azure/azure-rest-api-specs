@@ -17,6 +17,7 @@ namespace Microsoft.Migrate;
 
 @doc("Evaluated sql entity resource.")
 @parentResource(BusinessCase)
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 model EvaluatedSqlEntity is ProxyResource<EvaluatedSqlEntityProperties> {
   @doc("Business case Evaluated sql entity ARM name")
   @key("evaluatedSqlEntityName")
@@ -29,6 +30,7 @@ model EvaluatedSqlEntity is ProxyResource<EvaluatedSqlEntityProperties> {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "This is a hydrated resource with no PUT call."
 @doc("Evaluated sql entity properties class.")
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 model EvaluatedSqlEntityProperties {
   @doc("Server name.")
   @visibility(Lifecycle.Read)
