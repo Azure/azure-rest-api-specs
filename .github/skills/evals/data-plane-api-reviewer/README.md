@@ -434,25 +434,68 @@ Two things this surfaced beyond the original gap:
   that cannot see non-DP IDs. Specific-trap graders naming a single rule are
   deliberately exempt. Verified it fails on a re-narrowed grader.
 
-**Residual gap, not fixed.** Four true-negative stimuli
-(`tn-legitimate-action-not-crud`, `tn-bounded-list-and-singleton`,
-`tn-closed-union-justified`, `tn-preview-breaking-change-allowed`) carry only
-specific-trap graders plus a severity-glyph grader. Measured precisely:
+**Residual gap: measurement half now closed, tolerance question left open.**
+Four true-negative stimuli (`tn-legitimate-action-not-crud`,
+`tn-bounded-list-and-singleton`, `tn-closed-union-justified`,
+`tn-preview-breaking-change-allowed`) carry only specific-trap graders plus a
+severity-glyph grader. Measured precisely:
 
 |                  | blocking non-DP FP                             | non-blocking non-DP FP |
 | ---------------- | ---------------------------------------------- | ---------------------- |
 | All 7 TN stimuli | **caught** (glyph graders are family-agnostic) | 3 of 7 caught          |
 
 So the **phase-2 gating metric is fully covered** — a blocking false positive
-of any family is caught on every stimulus. What is uncovered is a _non-blocking_
-non-DP finding on those four, which feeds the tracked-but-not-gating metric.
+of any family is caught on every stimulus. What the _graders_ do not catch on
+those four is a non-blocking non-DP finding.
 
-Left unfixed deliberately: those four stimuli's rubrics explicitly tolerate
-suggestion-severity output ("asking whether the 200-entry bound is contractual,
-at 💡 Suggestion severity, is acceptable"). A blanket ban on bracketed findings
-would contradict them and produce false failures. Resolving that needs a
-decision about whether a true negative may contain a suggestion at all — which
-is a scope question, not a pattern question.
+That is now **counted** even where it is not gated.
+`Get-TrueNegativeFindingCounts` in [`run-evals.ps1`](../run-evals.ps1) tallies
+every bracketed finding in finding position, at every severity,
+family-agnostically, charging each to the severity section it appears under.
+Non-blocking findings feed the tracked metric and do not fail the run.
+
+**The four rubrics' tolerance of suggestion-severity output is deliberate, not
+an oversight.** "Asking whether the 200-entry bound is contractual, at
+💡 Suggestion severity, is acceptable" is a real editorial position: a true
+negative may ask a question without being wrong. Banning bracketed findings
+outright would contradict it and manufacture false failures. So the split is
+the tracked-vs-gated rule applied consistently — suggestions on a true negative
+are **counted and trended, never gated**. Whether a true negative should be
+allowed to contain a suggestion at all remains open, and is an editorial
+question rather than a pattern question.
+
+### The padding class's first instrument
+
+That counter is the first thing in this suite able to measure **padding** at
+all — the failure mode where the reviewer finds one real issue and pads with
+adjacent low-value ones. Until now nothing could see it: the graders ask "did
+rule X fire?", and the previous counter counted severity _sections_, so five
+padded findings under one `### 🔴 Blocking` heading scored as one.
+
+The smoke test produced a concrete instance. On a fixture seeded only with
+`DP-VIS-*`, the agent additionally raised `**[DP-MODEL-04] Create/update
+without delete**` — defensible on the file's actual content, phrased as a
+question, at Warning severity, but off the stimulus's focus. That is the shape
+padding takes, and the counter now records it.
+
+**What it still does not cover**, so the instrument is not mistaken for a
+solution:
+
+- **No fixture is designed to provoke padding.** Every true negative is
+  all-clean or all-legitimate, and every positive fixture is seeded densely
+  enough that padding is indistinguishable from thoroughness. The counter can
+  only observe padding that happens to occur, not elicit it. The missing
+  fixture is a mostly-fine spec with exactly one real defect.
+- **It counts on true negatives only.** Padding around a _genuine_ finding on a
+  positive stimulus — the commonest real-world form — is not counted, because
+  there a finding is not by definition a false positive and the counter cannot
+  tell padding from thoroughness.
+- **It is a count, not a judgment.** A rising number is a reason to go and read
+  the reports; it does not distinguish four weak-but-valid findings from four
+  invented ones. Only the LLM judge does that.
+
+So an unmeasurable class became a partially-measured one. Treat a flat count as
+weak evidence and a rising one as a reason to look.
 
 ### Coverage restored after the rewrite
 
@@ -586,7 +629,7 @@ requires a fresh run.
 
 Read this before concluding anything from the "41% true negatives" figure.
 
-### The padding class is not stimulated at all
+### The padding class is only partially instrumented
 
 The false-positive mode most likely to get this bot muted in practice is
 **not** a confident wrong finding on a clean spec. It is a spec that is 90%
@@ -595,13 +638,18 @@ then pads with three or four adjacent low-value ones to look thorough.
 Reviewers tolerate a wrong finding; they stop reading a bot that buries a good
 finding in noise.
 
-**Nothing in this suite stimulates that.** Every true negative is all-clean or
-all-legitimate, and every positive fixture is seeded densely enough that
-padding is indistinguishable from thoroughness. There is no mixed-signal
-fixture — one real defect plus a large correct remainder — and so the
-non-blocking false-positive metric, which exists precisely to catch this trend,
-currently has nothing to count on. A flat non-blocking FP number today is a
-measurement of absence, not of good behaviour.
+As of 2026-07-27 this is **partially measured** rather than invisible: the
+family-agnostic finding counter tallies every bracketed finding on a true
+negative at every severity, so padding that occurs is at least recorded. See
+"The padding class's first instrument" above for what that does and does not
+buy, in detail.
+
+What remains missing is the **stimulus**: no fixture is designed to provoke
+padding. Every true negative is all-clean or all-legitimate, and every positive
+fixture is seeded densely enough that padding is indistinguishable from
+thoroughness. The counter can observe padding that happens to occur; it cannot
+elicit it, and it does not count padding around a genuine finding on a positive
+stimulus, which is the commonest real-world form.
 
 ### The true-negative denominator is 5, not 7
 

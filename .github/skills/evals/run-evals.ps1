@@ -158,15 +158,38 @@ $OutputEncoding = [System.Text.Encoding]::UTF8
     `tn-` name prefix (the convention used by the data-plane suite) or by living
     in an eval file whose name contains "true-negative".
 
-    Severity is read from the glyphs the report format mandates:
-      🔴 blocking, 🟡 warning, 💡 suggestion.
-    Counting from the recorded output rather than from graders means new stimuli
-    are picked up automatically with no grader changes.
+    Findings are counted from the report's own finding syntax, defined in
+    `references/data-plane-report-format.md`:
+
+        ### 🔴 Blocking            <- severity section heading
+        **[DP-VIS-02] Title** ...  <- one finding
+
+    The counter walks the report in order: a severity heading sets the current
+    severity, and each subsequent bracketed finding is charged to it. That is
+    deliberately NOT the same as counting glyphs. An earlier version counted
+    severity glyphs at line start, which counts *sections* -- five blocking
+    false positives under one `### 🔴 Blocking` heading scored as 1. Harmless
+    for the gate, which only asks whether the count is zero, but a large
+    undercount for the non-blocking trend, which is the whole point of
+    tracking it.
+
+    The finding pattern is family-agnostic on purpose. The agent really does
+    raise `**[SEC-SECRET-DETECT] ...**` and other non-`DP-` IDs, and a counter
+    keyed to the `DP-XXX-NN` shape under-reports the false-positive rate. See
+    "Rule-ID vocabulary" in the report-format reference for the nine families.
+
+    Severity policy, per the tracked-vs-gated split:
+      Blocking     -- GATING. Any blocking finding of any family fails the gate.
+      Non-blocking -- TRACKED, NOT GATING. Warning and suggestion findings on a
+                      true negative are counted and trended, because that is
+                      what quietly gets a review bot muted, but they do not
+                      fail the run. Four true-negative rubrics deliberately
+                      tolerate suggestion-severity output; this counts that
+                      output without contradicting them.
 
     Returns a PSCustomObject with StimulusCount, Blocking, NonBlocking, and
-    Observed. `Observed` is $true when at least one severity glyph was counted
-    in the mandated position, i.e. the agent actually spoke this report
-    format's vocabulary at least once.
+    Observed. `Observed` is $true when the agent spoke this report format's
+    vocabulary at least once.
 
     Observed alone does not validate the counts. The real check is
     reconciliation against Get-TrueNegativeGraderFailures: if the graders
@@ -174,9 +197,8 @@ $OutputEncoding = [System.Text.Encoding]::UTF8
     different things and the zeros here are blind, not clean. That is not
     hypothetical -- the first real run of the data-plane suite produced a
     genuine invented finding and 12 failed trials while this function
-    reported 0 blocking / 0 non-blocking, because vally has no concept of an
-    agent file and the 🔴/🟡/💡 vocabulary defined in
-    `.github/agents/data-plane-api-reviewer.agent.md` was never in play.
+    reported 0 blocking / 0 non-blocking, because the report format lived only
+    in the agent file, which the eval harness never loads.
 #>
 function Get-TrueNegativeFindingCounts {
     param([string]$JsonlPath)
@@ -185,6 +207,11 @@ function Get-TrueNegativeFindingCounts {
     $nonBlocking = 0
     $stimulusCount = 0
     $glyphSeen = $false
+
+    # A finding: bold-bracketed rule ID at the start of a line. Requires at
+    # least one hyphen so it cannot match bolded prose like **[Note]**, and
+    # tolerates mixed case so IDs like RPC-Put-V1-11 are not missed.
+    $findingPattern = '^\s*\*\*\[[A-Z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)+\]'
 
     if (-not (Test-Path $JsonlPath)) {
         return [PSCustomObject]@{ StimulusCount = 0; Blocking = 0; NonBlocking = 0; Observed = $false }
@@ -212,22 +239,39 @@ function Get-TrueNegativeFindingCounts {
 
         $stimulusCount++
 
-        # Count severity glyphs in the raw record. The record embeds the agent
-        # output as JSON-escaped text, so split on the escaped newline sequence
-        # and test each logical output line.
-        #
-        # Anchoring to line start matters. A bare substring count would score
-        # "no 🔴 blocking findings" -- which is the output we WANT -- as a
-        # blocking false positive, inverting the metric. Findings appear either
-        # as a severity heading ("### 🔴 Blocking") or as a bulleted entry, so
-        # a glyph that is not the first token on its line is prose about
-        # findings, not a finding.
-        $logicalLines = [regex]::Split($line, '(?:\\r)?\\n|\r?\n')
-        foreach ($ll in $logicalLines) {
-            if ($ll -match "^\s*(?:[-*+]\s*|#{1,6}\s*)?`u{1F534}") { $blocking++; $glyphSeen = $true }
-            if ($ll -match "^\s*(?:[-*+]\s*|#{1,6}\s*)?`u{1F7E1}") { $nonBlocking++; $glyphSeen = $true }
-            if ($ll -match "^\s*(?:[-*+]\s*|#{1,6}\s*)?`u{1F4A1}") { $nonBlocking++; $glyphSeen = $true }
+        # Read the agent's output field rather than scanning the raw JSON line.
+        # The record also embeds the prompt, the rubric, and the grader
+        # patterns, all of which mention rule IDs and severity glyphs; scanning
+        # the raw line risks counting the test's own scaffolding as findings.
+        if ($null -eq $rec.trajectory -or $null -eq $rec.trajectory.PSObject.Properties['output']) { continue }
+        $output = "$($rec.trajectory.output)"
+        if (-not $output) { continue }
+
+        # Walk the report in order so each finding is charged to the severity
+        # section it appears under.
+        $currentSeverity = 'unsectioned'
+        foreach ($ll in ($output -split '\r?\n')) {
+            if ($ll -match "^\s*(?:[-*+]\s*|#{1,6}\s*)?`u{1F534}") { $currentSeverity = 'blocking'; $glyphSeen = $true; continue }
+            if ($ll -match "^\s*(?:[-*+]\s*|#{1,6}\s*)?`u{1F7E1}") { $currentSeverity = 'nonblocking'; $glyphSeen = $true; continue }
+            if ($ll -match "^\s*(?:[-*+]\s*|#{1,6}\s*)?`u{1F4A1}") { $currentSeverity = 'nonblocking'; $glyphSeen = $true; continue }
+            # A "Questions" heading ends the finding sections. Questions are
+            # bullets rather than findings, and the rubrics permit them.
+            if ($ll -match '^\s*#{1,6}\s*Questions\b') { $currentSeverity = 'questions'; continue }
+
+            if ($ll -match $findingPattern) {
+                $glyphSeen = $true
+                # An unsectioned finding is charged to non-blocking: it is real
+                # output that should be trended, but promoting it to the gate
+                # on the strength of a missing heading would be unfair.
+                if ($currentSeverity -eq 'blocking') { $blocking++ } else { $nonBlocking++ }
+            }
         }
+
+        # Belt and braces for the gate: a blocking severity heading with no
+        # parseable finding under it still counts as a blocking false positive,
+        # so this metric can only ever be stricter than the glyph-only version
+        # it replaced, never looser.
+        if ($blocking -eq 0 -and $output -match "(?m)^\s*(?:[-*+]\s*|#{1,6}\s*)?`u{1F534}") { $blocking++ }
     }
 
     return [PSCustomObject]@{
