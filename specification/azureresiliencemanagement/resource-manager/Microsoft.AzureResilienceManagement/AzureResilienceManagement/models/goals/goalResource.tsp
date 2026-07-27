@@ -23,10 +23,20 @@ model GoalResourceProperties {
   resourceArmId: armResourceIdentifier;
 
   @doc("Flag which depicts whether the Arm resource is excluded for high availability recommendation.")
-  highAvailabilityGoalParticipation: ExclusionState;
+  @madeOptional(Versions.v2026_03_01_preview)
+  highAvailabilityGoalParticipation?: ExclusionState;
 
   @doc("Flag which depicts whether the Arm resource is manually attested for high availability recommendation.")
-  highAvailabilityAttestationStatus: AttestationState;
+  @madeOptional(Versions.v2026_03_01_preview)
+  highAvailabilityAttestationStatus?: AttestationState;
+
+  @doc("Flag which depicts whether the Arm resource is excluded for zonal resiliency recommendation.")
+  @added(Versions.v2026_03_01_preview)
+  zonalGoalParticipation?: ExclusionState;
+
+  @doc("Flag which depicts whether the Arm resource is manually attested for zonal resiliency recommendation.")
+  @added(Versions.v2026_03_01_preview)
+  zonalAttestationStatus?: AttestationState;
 
   @doc("Flag which depicts whether the Arm resource is excluded for disaster recovery recommendation.")
   disasterRecoveryGoalParticipation?: ExclusionState;
@@ -34,13 +44,31 @@ model GoalResourceProperties {
   @doc("Flag which depicts whether the Arm resource is manually attested for disaster recovery recommendation.")
   disasterRecoveryAttestationStatus?: AttestationState;
 
+  @doc("Flag which depicts whether the Arm resource is excluded for regional resiliency recommendation.")
+  @added(Versions.v2026_03_01_preview)
+  regionalGoalParticipation?: ExclusionState;
+
+  @doc("Flag which depicts whether the Arm resource is manually attested for regional resiliency recommendation.")
+  @added(Versions.v2026_03_01_preview)
+  regionalAttestationStatus?: AttestationState;
+
   @doc("Reason for exclusion from high availability goals.")
   @visibility(Lifecycle.Read)
   exclusionReasonForHighAvailabilityGoals?: ExclusionReason;
 
+  @doc("Reason for exclusion from zonal resiliency goals.")
+  @added(Versions.v2026_03_01_preview)
+  @visibility(Lifecycle.Read)
+  zonalExclusionReason?: ExclusionReason;
+
   @doc("Reason for exclusion from disaster recovery goals.")
   @visibility(Lifecycle.Read)
   exclusionReasonForDisasterRecoveryGoals?: ExclusionReason;
+
+  @doc("Reason for exclusion from regional resiliency goals.")
+  @added(Versions.v2026_03_01_preview)
+  @visibility(Lifecycle.Read)
+  regionalExclusionReason?: ExclusionReason;
 
   @added(Versions.v2026_03_01_preview)
   @doc("List of user confirmations for high availability solutions.")

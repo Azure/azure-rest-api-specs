@@ -8688,6 +8688,22 @@
           "$ref": "#/definitions/GoalAssignmentType",
           "description": "The type of goal assignment."
         },
+        "requireZonalResiliency": {
+          "$ref": "#/definitions/RequirementSelected",
+          "description": "Whether zonal resiliency is required for this goal assignment."
+        },
+        "requireRegionalResiliency": {
+          "$ref": "#/definitions/RequirementSelected",
+          "description": "Whether regional resiliency is required for this goal assignment."
+        },
+        "regionalRecoveryPointObjective": {
+          "type": "string",
+          "description": "The regional recovery point objective (RPO) expressed as an ISO 8601 duration."
+        },
+        "regionalRecoveryTimeObjective": {
+          "type": "string",
+          "description": "The regional recovery time objective (RTO) expressed as an ISO 8601 duration."
+        },
         "serviceLevelResources": {
           "type": "array",
           "description": "List of service level resources.",
@@ -8705,33 +8721,6 @@
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
           "description": "Details of any errors encountered during the operation.",
           "readOnly": true
-        }
-      },
-      "required": [
-        "goalTemplateId",
-        "goalAssignmentType"
-      ]
-    },
-    "GoalAssignmentPropertiesUpdate": {
-      "type": "object",
-      "description": "Definition of goal assignment property.",
-      "properties": {
-        "goalTemplateId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Arm id of the goal template."
-        },
-        "goalAssignmentType": {
-          "$ref": "#/definitions/GoalAssignmentType",
-          "description": "The type of goal assignment."
-        },
-        "serviceLevelResources": {
-          "type": "array",
-          "description": "List of service level resources.",
-          "items": {
-            "$ref": "#/definitions/ServiceLevelResource"
-          },
-          "x-ms-identifiers": []
         }
       }
     },
@@ -8758,7 +8747,7 @@
       "description": "Goal assignment a AzureResilienceProviderHub resource",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/GoalAssignmentPropertiesUpdate",
+          "$ref": "#/definitions/GoalAssignmentProperties",
           "description": "The resource-specific properties for this resource."
         }
       },
@@ -8821,6 +8810,14 @@
           "$ref": "#/definitions/AttestationState",
           "description": "Flag which depicts whether the Arm resource is manually attested for high availability recommendation."
         },
+        "zonalGoalParticipation": {
+          "$ref": "#/definitions/ExclusionState",
+          "description": "Flag which depicts whether the Arm resource is excluded for zonal resiliency recommendation."
+        },
+        "zonalAttestationStatus": {
+          "$ref": "#/definitions/AttestationState",
+          "description": "Flag which depicts whether the Arm resource is manually attested for zonal resiliency recommendation."
+        },
         "disasterRecoveryGoalParticipation": {
           "$ref": "#/definitions/ExclusionState",
           "description": "Flag which depicts whether the Arm resource is excluded for disaster recovery recommendation."
@@ -8829,14 +8826,32 @@
           "$ref": "#/definitions/AttestationState",
           "description": "Flag which depicts whether the Arm resource is manually attested for disaster recovery recommendation."
         },
+        "regionalGoalParticipation": {
+          "$ref": "#/definitions/ExclusionState",
+          "description": "Flag which depicts whether the Arm resource is excluded for regional resiliency recommendation."
+        },
+        "regionalAttestationStatus": {
+          "$ref": "#/definitions/AttestationState",
+          "description": "Flag which depicts whether the Arm resource is manually attested for regional resiliency recommendation."
+        },
         "exclusionReasonForHighAvailabilityGoals": {
           "$ref": "#/definitions/ExclusionReason",
           "description": "Reason for exclusion from high availability goals.",
           "readOnly": true
         },
+        "zonalExclusionReason": {
+          "$ref": "#/definitions/ExclusionReason",
+          "description": "Reason for exclusion from zonal resiliency goals.",
+          "readOnly": true
+        },
         "exclusionReasonForDisasterRecoveryGoals": {
           "$ref": "#/definitions/ExclusionReason",
           "description": "Reason for exclusion from disaster recovery goals.",
+          "readOnly": true
+        },
+        "regionalExclusionReason": {
+          "$ref": "#/definitions/ExclusionReason",
+          "description": "Reason for exclusion from regional resiliency goals.",
           "readOnly": true
         },
         "userConfirmationForHighAvailability": {
@@ -8867,9 +8882,7 @@
         }
       },
       "required": [
-        "resourceArmId",
-        "highAvailabilityGoalParticipation",
-        "highAvailabilityAttestationStatus"
+        "resourceArmId"
       ]
     },
     "GoalTemplate": {
