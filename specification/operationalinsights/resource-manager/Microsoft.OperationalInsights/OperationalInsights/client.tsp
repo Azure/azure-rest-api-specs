@@ -314,11 +314,7 @@ using Microsoft.OperationalInsights;
   "OperationalInsightsPublicNetworkAccessType",
   "csharp"
 );
-@@clientName(
-  RuleTypeEnum,
-  "OperationalInsightsSummaryLogsRuleType",
-  "csharp"
-);
+@@clientName(RuleTypeEnum, "OperationalInsightsSummaryLogsRuleType", "csharp");
 @@clientName(Schema, "OperationalInsightsSchema", "csharp");
 @@clientName(
   Severity,
