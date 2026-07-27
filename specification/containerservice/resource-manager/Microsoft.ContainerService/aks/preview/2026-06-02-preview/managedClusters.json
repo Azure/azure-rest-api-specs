@@ -8575,7 +8575,7 @@
     },
     "ContainerNetworkLogs": {
       "type": "string",
-      "description": "Configures container network logs ingestion with Azure Monitor. Which network logs to ingest is controlled by the CRD found in the following links. No network logs are ingested by default. More information on container network logs can be found at https://aka.ms/ContainerNetworkLogsDoc. More information on configuring container network log can be found at https://aka.ms/acns/howtoenablecnl. If not specified, the default is Disabled.",
+      "description": "Allowed values for container network logs ingestion with Azure Monitor. When `Enabled`, the specific log types ingested are controlled by the associated CRD; defaults to `Disabled`. See https://aka.ms/ContainerNetworkLogsDoc and https://aka.ms/acns/howtoenablecnl for details.",
       "enum": [
         "Disabled",
         "Enabled"
@@ -11967,7 +11967,7 @@
         },
         "containerInsights": {
           "$ref": "#/definitions/ManagedClusterAzureMonitorProfileContainerInsights",
-          "description": "Azure Monitor Container Insights Profile for Kubernetes Events, Inventory and Container stdout & stderr logs etc. See aka.ms/AzureMonitorContainerInsights for an overview."
+          "description": "Set this to enable and configure Azure Monitor Container Insights for the cluster, which collects Kubernetes events, inventory, and container stdout & stderr logs. See aka.ms/AzureMonitorContainerInsights for an overview."
         },
         "appMonitoring": {
           "$ref": "#/definitions/ManagedClusterAzureMonitorProfileAppMonitoring",
@@ -11985,11 +11985,11 @@
         },
         "openTelemetryMetrics": {
           "$ref": "#/definitions/ManagedClusterAzureMonitorProfileAppMonitoringOpenTelemetryMetrics",
-          "description": "Application Monitoring Open Telemetry Metrics Profile for AKS. Collects OpenTelemetry metrics of the application using Azure Monitor OpenTelemetry based SDKs. See https://aka.ms/AKSAppMonitoringDocs and https://aka.ms/AzureMonitorApplicationMonitoring for an overview."
+          "description": "Application Monitoring OpenTelemetry Metrics Profile for AKS. Collects OpenTelemetry metrics of the application using Azure Monitor OpenTelemetry based SDKs. See https://aka.ms/AKSAppMonitoringDocs and https://aka.ms/AzureMonitorApplicationMonitoring for an overview."
         },
         "openTelemetryLogsAndTraces": {
           "$ref": "#/definitions/ManagedClusterAzureMonitorProfileAppMonitoringOpenTelemetryLogsAndTraces",
-          "description": "Application Monitoring Open Telemetry Logs and Traces Profile for AKS. Collects OpenTelemetry logs and traces of the application using Azure Monitor OpenTelemetry based SDKs. See https://aka.ms/AKSAppMonitoringDocs and https://aka.ms/AzureMonitorApplicationMonitoring for an overview."
+          "description": "Application Monitoring OpenTelemetry logs and traces profile for AKS. Collects OpenTelemetry logs and traces of the application using Azure Monitor OpenTelemetry based SDKs. See https://aka.ms/AKSAppMonitoringDocs and https://aka.ms/AzureMonitorApplicationMonitoring for an overview."
         }
       }
     },
@@ -12005,47 +12005,47 @@
     },
     "ManagedClusterAzureMonitorProfileAppMonitoringOpenTelemetryLogsAndTraces": {
       "type": "object",
-      "description": "Application Monitoring Open Telemetry Logs and Traces Profile for AKS. Collects OpenTelemetry logs and traces of the application using Azure Monitor OpenTelemetry based SDKs. See https://aka.ms/AKSAppMonitoringDocs and https://aka.ms/AzureMonitorApplicationMonitoring for an overview.",
+      "description": "Application Monitoring OpenTelemetry logs and traces profile for AKS. Collects OpenTelemetry logs and traces of the application using Azure Monitor OpenTelemetry based SDKs. See https://aka.ms/AKSAppMonitoringDocs and https://aka.ms/AzureMonitorApplicationMonitoring for an overview.",
       "properties": {
         "enabled": {
           "type": "boolean",
-          "description": "Indicates if Application Monitoring Open Telemetry Logs and traces is enabled or not."
+          "description": "Indicates if Application Monitoring OpenTelemetry Logs and traces is enabled or not."
         },
         "httpPort": {
           "type": "integer",
           "format": "int64",
-          "description": "The host port for Open Telemetry HTTP/PROTOBUF logs and traces. If not specified, the default port is 28331."
+          "description": "The host port for OpenTelemetry HTTP/PROTOBUF logs and traces. If not specified, the default port is 28331."
         },
         "grpcPort": {
           "type": "integer",
           "format": "int64",
-          "description": "The host port for Open Telemetry GRPC logs and traces. If not specified, the default port is 28332."
+          "description": "The host port for OpenTelemetry GRPC logs and traces. If not specified, the default port is 28332."
         }
       }
     },
     "ManagedClusterAzureMonitorProfileAppMonitoringOpenTelemetryMetrics": {
       "type": "object",
-      "description": "Application Monitoring Open Telemetry Metrics Profile for AKS. Collects OpenTelemetry metrics of the application using Azure Monitor OpenTelemetry based SDKs. See https://aka.ms/AKSAppMonitoringDocs and https://aka.ms/AzureMonitorApplicationMonitoring for an overview.",
+      "description": "Application Monitoring OpenTelemetry Metrics Profile for AKS. Collects OpenTelemetry metrics of the application using Azure Monitor OpenTelemetry based SDKs. See https://aka.ms/AKSAppMonitoringDocs and https://aka.ms/AzureMonitorApplicationMonitoring for an overview.",
       "properties": {
         "enabled": {
           "type": "boolean",
-          "description": "Indicates if Application Monitoring Open Telemetry Metrics is enabled or not."
+          "description": "Indicates if Application Monitoring OpenTelemetry Metrics is enabled or not."
         },
         "httpPort": {
           "type": "integer",
           "format": "int64",
-          "description": "The host port for Open Telemetry HTTP/PROTOBUF metrics. If not specified, the default port is 28333."
+          "description": "The host port for OpenTelemetry HTTP/PROTOBUF metrics. If not specified, the default port is 28333."
         },
         "grpcPort": {
           "type": "integer",
           "format": "int64",
-          "description": "The host port for Open Telemetry GRPC metrics. If not specified, the default port is 28334."
+          "description": "The host port for OpenTelemetry GRPC metrics. If not specified, the default port is 28334."
         }
       }
     },
     "ManagedClusterAzureMonitorProfileContainerInsights": {
       "type": "object",
-      "description": "Azure Monitor Container Insights Profile for Kubernetes Events, Inventory and Container stdout & stderr logs etc. See aka.ms/AzureMonitorContainerInsights for an overview.",
+      "description": "Azure Monitor Container Insights profile. Represents the configuration for collecting Kubernetes events, inventory, and container stdout & stderr logs. See aka.ms/AzureMonitorContainerInsights for an overview.",
       "properties": {
         "enabled": {
           "type": "boolean",
@@ -12068,17 +12068,13 @@
           "format": "int64",
           "description": "The syslog host port. If not specified, the default port is 28330."
         },
-        "disableCustomMetrics": {
-          "type": "boolean",
-          "description": "Indicates whether custom metrics collection has to be disabled or not. If not specified the default is false. No custom metrics will be emitted if this field is false but the container insights enabled field is false"
-        },
         "disablePrometheusMetricsScraping": {
           "type": "boolean",
-          "description": "Indicates whether prometheus metrics scraping is disabled or not. If not specified the default is false. No prometheus metrics will be emitted if this field is false but the container insights enabled field is false"
+          "description": "Indicates whether prometheus metrics scraping is disabled or not. If not specified the default is false i.e. the prometheus scraping is enabled."
         },
         "containerNetworkLogs": {
           "$ref": "#/definitions/ContainerNetworkLogs",
-          "description": "Configures container network logs ingestion with Azure Monitor. Which network logs to ingest is controlled by the CRD found in the following links. No network logs are ingested by default. More information on container network logs can be found at https://aka.ms/ContainerNetworkLogsDoc. More information on configuring container network log can be found at https://aka.ms/acns/howtoenablecnl. If not specified, the default is Disabled."
+          "description": "Configures container network logs ingestion with Azure Monitor. The log types ingested are controlled by the associated CRD; if unspecified, defaults to `Disabled`. See https://aka.ms/ContainerNetworkLogsDoc and https://aka.ms/acns/howtoenablecnl for details."
         }
       }
     },
