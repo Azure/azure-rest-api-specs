@@ -30,12 +30,11 @@ interface ContainerAppsAssessmentOperations {
   @added(ContainerAppsApiVersions.v2025_09_09_preview)
   delete is ArmResourceDeleteSync<ContainerAppsAssessment>;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Download URL Post Action body is empty."
   @added(ContainerAppsApiVersions.v2025_09_09_preview)
   @doc("Get URL for downloading Azure Container Apps Assessment Report.")
   downloadUrl is ArmResourceActionAsync<
     ContainerAppsAssessment,
-    {},
+    void,
     DownloadUrl
   >;
 }
