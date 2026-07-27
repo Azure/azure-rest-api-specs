@@ -168,6 +168,7 @@ model AgentEvaluation {
 @doc("Abstract base model representing a single message in a conversation.")
 @discriminator("role")
 @removed(Versions.v1)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Message {
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
   @doc("The role of the message author. Known values: 'system', 'assistant', 'developer', 'user'.")

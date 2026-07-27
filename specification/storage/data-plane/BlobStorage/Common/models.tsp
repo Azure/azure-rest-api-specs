@@ -21,6 +21,7 @@ scalar base64Bytes extends bytes;
  */
 @error
 @mediaTypeHint("application/xml")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Error {
   /** The error code. */
   @header("x-ms-error-code")
@@ -52,6 +53,7 @@ model Error {
 
 /** Error codes returned by the Azure Blob Storage service. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union StorageErrorCode {
   /** Account already exists. */
   AccountAlreadyExists: "AccountAlreadyExists",
@@ -409,6 +411,7 @@ union StorageErrorCode {
 /// Models
 
 /** Represents a single block in a block blob. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Block {
   /** The base64 encoded block ID. */
   @Xml.name("Name")
@@ -420,6 +423,7 @@ model Block {
 }
 
 /** Contains the committed and uncommitted blocks in a block blob. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model BlockList {
   /** The list of committed blocks. */
   @Xml.name("CommittedBlocks")
@@ -533,6 +537,7 @@ enum FilterBlobsIncludeItem {
 
 /** The account kind. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 enum AccountKind {
   /** A general-purpose account. */
   Storage: "Storage",
@@ -552,6 +557,7 @@ enum AccountKind {
 
 /** The account SKU. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 enum SkuName {
   /** The standard LRS SKU. */
   StandardLRS: "Standard_LRS",
@@ -681,6 +687,7 @@ model ContainerProperties {
 }
 
 /** Stats for the storage service. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model StorageServiceStats {
   /** The geo-replication stats. */
   @Xml.name("GeoReplication") geoReplication?: GeoReplication;
@@ -699,6 +706,7 @@ model GeoReplication {
 }
 
 /** The geo-replication status. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union GeoReplicationStatusType {
   /** Geo-replication is live. */
   Live: "live",
@@ -728,6 +736,7 @@ model KeyInfo {
 }
 
 /** A user delegation key. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model UserDelegationKey {
   /** The Entra ID object ID in GUID format. */
   @Xml.name("SignedOid") signedOid: uuid;
@@ -760,6 +769,7 @@ model UserDelegationKey {
 }
 
 /** The public access type. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union PublicAccessType {
   /** Blob access. */
   Blob: "blob",
@@ -773,6 +783,7 @@ union PublicAccessType {
 
 /** The copy status. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 enum CopyStatus {
   /** The copy operation is pending. */
   Pending: "pending",
@@ -789,6 +800,7 @@ enum CopyStatus {
 
 /** The lease duration. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 enum LeaseDuration {
   /** The lease is of infinite duration. */
   Infinite: "infinite",
@@ -799,6 +811,7 @@ enum LeaseDuration {
 
 /** The lease state. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 enum LeaseState {
   /** The lease is available. */
   Available: "available",
@@ -818,6 +831,7 @@ enum LeaseState {
 
 /** The lease status. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 enum LeaseStatus {
   /** The lease is unlocked. */
   Unlocked: "unlocked",
@@ -847,6 +861,7 @@ model AccessPolicy {
 }
 
 /** The access tiers. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union AccessTier {
   /** The P4 access tier. */
   P4: "P4",
@@ -905,6 +920,7 @@ union AccessTier {
 }
 
 /** The archive status. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union ArchiveStatus {
   /** The archive status is rehydrating pending to Hot. */
   RehydratePendingToHot: "rehydrate-pending-to-hot",
@@ -925,6 +941,7 @@ union ArchiveStatus {
 
 /** Represents a blob. */
 @Xml.name("Blob")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model BlobItem {
   /** The name of the blob. */
   @Xml.name("Name") name: BlobName;
@@ -961,6 +978,7 @@ model BlobItem {
 
 /** The properties of a blob. */
 @Xml.name("Properties")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model BlobProperties {
   /** The date-time the blob was created. */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
@@ -1116,6 +1134,7 @@ model BlobProperties {
 
 /** The immutability policy mode. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 enum ImmutabilityPolicyMode {
   /** Response only. The immutability policy is mutable. */
   Mutable: "mutable",
@@ -1129,6 +1148,7 @@ enum ImmutabilityPolicyMode {
 
 /** The blob type. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 enum BlobType {
   /** The blob is a block blob. */
   BlockBlob: "BlockBlob",
@@ -1142,6 +1162,7 @@ enum BlobType {
 
 /** The priority of the rehydrate operation. */
 @Xml.name("RehydratePriority")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union RehydratePriority {
   /** The rehydrate priority is high. */
   High: "High",
@@ -1182,6 +1203,7 @@ model ObjectReplicationMetadata is Record<string>;
 
 /** The blob service properties. */
 @Xml.name("StorageServiceProperties")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model BlobServiceProperties {
   /** The logging properties. */
   @Xml.name("Logging") logging?: Logging;
@@ -2346,6 +2368,7 @@ alias BlobContentTypeParameter = {
 };
 
 /** The premium page blob access tier types. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union PremiumPageBlobAccessTier {
   /** The premium page blob access tier is P4. */
   P4: "P4",
@@ -2410,6 +2433,7 @@ alias EncryptionAlgorithmParameter = {
 
 /** The algorithm used to produce the encryption key hash. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 enum EncryptionAlgorithmType {
   /** The AES256 encryption algorithm. */
   AES256: "AES256",

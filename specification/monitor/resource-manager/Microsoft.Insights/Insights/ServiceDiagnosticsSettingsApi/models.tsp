@@ -91,6 +91,7 @@ model LogSettings {
 /**
  * An azure resource object
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Resource {
   /**
    * Azure resource Id

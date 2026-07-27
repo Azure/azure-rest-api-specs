@@ -59,6 +59,7 @@ union FieldType {
 }
 
 /** The HTTP status code. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union HttpStatusCode {
   string,
 
@@ -775,6 +776,7 @@ model ErrorAdditionalInfo {
 
 /** The error response. */
 @error
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ErrorResponse {
   /** The root error. */
   error?: RootError;

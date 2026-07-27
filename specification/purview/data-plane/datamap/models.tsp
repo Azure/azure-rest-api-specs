@@ -21,6 +21,7 @@ union BusinessAttributeUpdateBehavior {
 }
 
 @doc("Status - can be active or deleted")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union EntityStatus {
   string,
 

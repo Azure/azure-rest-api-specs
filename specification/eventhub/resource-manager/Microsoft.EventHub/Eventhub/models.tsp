@@ -74,6 +74,7 @@ union Mode {
 /**
  * Name of this SKU.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union SkuName {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
@@ -416,6 +417,7 @@ enum RoleDisasterRecovery {
  * Enumerates the possible values for the status of the Event Hub.
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "This is a fixed enum from the original OpenAPI specification. Changing to an extensible union would be a breaking change for existing clients."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 enum EntityStatus {
   Active,
   Disabled,
@@ -668,6 +670,7 @@ model TrackedResource extends Resource {
 /**
  * Common fields that are returned in the response for all Azure Resource Manager resources
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Resource {
   /**
    * Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
@@ -1600,6 +1603,7 @@ model ArmDisasterRecoveryProperties {
 /**
  * A Event Hub REST API operation
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Operation {
   /**
    * Operation name: {provider}/{resource}/{operation}

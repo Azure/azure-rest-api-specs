@@ -236,6 +236,7 @@ alias SearchKnowledgeBaseOperation<
 
 /** Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.). */
 @error
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ErrorResponse {
   /** The error object. */
   error?: ErrorDetail;

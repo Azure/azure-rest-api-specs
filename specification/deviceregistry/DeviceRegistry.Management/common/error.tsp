@@ -8,6 +8,7 @@ namespace Microsoft.DeviceRegistry;
 
 @doc("Defines the error object with properties.")
 @added(Versions.v2025_07_01_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Error {
   @doc("Error code for classification of errors (ex: '400', '404', '500', etc.).")
   @visibility(Lifecycle.Read)

@@ -10,6 +10,7 @@ namespace Microsoft.EventGrid.SystemEvents;
 Describes the schema of the properties under resource info which are common
 across all ARN system topic events
 */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ResourceNotificationsResourceUpdatedDetails {
   /** id of the resource for which the event is being emitted */
   id: string;
@@ -34,6 +35,7 @@ model ResourceNotificationsResourceUpdatedDetails {
 }
 
 /** details of operational info */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ResourceNotificationsOperationalDetails {
   /** Date and Time when resource was updated */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
@@ -42,6 +44,7 @@ model ResourceNotificationsOperationalDetails {
 }
 
 /** Describes the schema of the common properties across all ARN system topic events */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ResourceNotificationsResourceUpdatedEventData {
   /** resourceInfo details for update event */
   resourceInfo: ResourceNotificationsResourceUpdatedDetails;
@@ -57,6 +60,7 @@ model ResourceNotificationsResourceUpdatedEventData {
 Describes the schema of the properties under resource info which are common
 across all ARN system topic delete events
 */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ResourceNotificationsResourceDeletedDetails {
   /** id of the resource for which the event is being emitted */
   id: string;
@@ -72,6 +76,7 @@ model ResourceNotificationsResourceDeletedDetails {
 Describes the schema of the common properties across all ARN system topic
 delete events
 */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ResourceNotificationsResourceDeletedEventData {
   /** resourceInfo details for delete event */
   resourceInfo: ResourceNotificationsResourceDeletedDetails;

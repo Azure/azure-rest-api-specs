@@ -17,5 +17,6 @@ Schema of the Data property of an event grid event for a Microsoft.ResourceNotif
 @example(
   MicrosoftResourceNotificationsContainerServiceEventResourcesScheduledEventEmittedExample
 )
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ResourceNotificationsContainerServiceEventResourcesScheduledEventData
   extends ResourceNotificationsResourceUpdatedEventData {}

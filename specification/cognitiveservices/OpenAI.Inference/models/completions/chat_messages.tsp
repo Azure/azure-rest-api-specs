@@ -16,6 +16,7 @@ namespace Azure.OpenAI;
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "External API shape is defined in OpenAPI 3.0 as oneOf."
 @removed(ServiceApiVersions.v2024_08_01_Preview)
 @doc("The contents of the user message, with available input types varying by selected model.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union ChatMessageContent {
   string,
 

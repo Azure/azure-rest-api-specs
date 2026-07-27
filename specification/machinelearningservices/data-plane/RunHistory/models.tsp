@@ -657,6 +657,7 @@ model ErrorResponse {
 }
 
 /** An event associated with a run. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Event {
   /** Gets the event name. */
   name?: string;
@@ -871,6 +872,7 @@ model ListMetrics {
 model LongRunningNullResponse {}
 
 /** A metric definition. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model MetricDefinition {
   /** The metric key. */
   metricKey?: DerivedMetricKey;

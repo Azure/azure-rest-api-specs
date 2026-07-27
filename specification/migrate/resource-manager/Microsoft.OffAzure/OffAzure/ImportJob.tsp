@@ -15,6 +15,7 @@ namespace Microsoft.OffAzure;
  * A host resource belonging to a site resource.
  */
 @parentResource(ImportSite)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ImportJob is Azure.ResourceManager.ProxyResource<JobProperties> {
   ...ResourceNameParameter<
     Resource = ImportJob,

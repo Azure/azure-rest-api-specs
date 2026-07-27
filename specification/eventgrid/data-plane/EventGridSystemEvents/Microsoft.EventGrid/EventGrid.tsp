@@ -4,6 +4,7 @@ using TypeSpec.Versioning;
 namespace Microsoft.EventGrid.SystemEvents;
 
 /** EventGrid MQTT Client State */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union EventGridMQTTClientState {
   /** Enabled */
   "Enabled",
@@ -15,6 +16,7 @@ union EventGridMQTTClientState {
 }
 
 /** EventGrid MQTT Client Disconnection Reason */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union EventGridMQTTClientDisconnectionReason {
   /** The client got disconnected for any authentication reasons (for example, certificate expired, client got disabled, or client configuration changed). */
   "ClientAuthenticationError",
@@ -53,6 +55,7 @@ union EventGridMQTTClientDisconnectionReason {
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.EventGrid.SubscriptionValidationEvent event. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model SubscriptionValidationEventData {
   /** The validation code sent by Azure Event Grid to validate an event subscription.
    * To complete the validation handshake, the subscriber must either respond with this validation code as part of the validation response,
@@ -72,6 +75,7 @@ either the validationCode or the validationUrl received in a
 SubscriptionValidationEvent. When the validationCode is used, the
 SubscriptionValidationResponse can be used to build the response.
 */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model SubscriptionValidationResponse {
   /** The validation response sent by the subscriber to Azure Event Grid to complete the validation of an event subscription. */
   validationResponse: string;
@@ -81,6 +85,7 @@ model SubscriptionValidationResponse {
 Schema of the Data property of an EventGridEvent for a
 Microsoft.EventGrid.SubscriptionDeletedEvent event.
 */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model SubscriptionDeletedEventData {
   /** The Azure resource ID of the deleted event subscription. */
   eventSubscriptionId: string;
@@ -89,6 +94,7 @@ model SubscriptionDeletedEventData {
 /** Event data for Microsoft.EventGrid.MQTTClientCreatedOrUpdated event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Following Swagger Inheritance"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "MQTT is an acronym and should be all caps"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model EventGridMQTTClientCreatedOrUpdatedEventData
   extends EventGridMQTTClientEventData {
   /** Configured state of the client. The value could be Enabled or Disabled */
@@ -115,6 +121,7 @@ model EventGridMQTTClientCreatedOrUpdatedEventData
 
 /** Schema of the Data property of an EventGridEvent for MQTT Client state changes. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "MQTT is an acronym and should be all caps"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model EventGridMQTTClientEventData {
   /** 
 Unique identifier for the MQTT client that the client presents to the service
@@ -133,12 +140,14 @@ long, and supports UTF-8 characters.
 /** Event data for Microsoft.EventGrid.MQTTClientDeleted event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Following Swagger Inheritance"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "MQTT is an acronym and should be all caps"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model EventGridMQTTClientDeletedEventData
   extends EventGridMQTTClientEventData {}
 
 /** Event data for Microsoft.EventGrid.MQTTClientSessionConnected event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Following Swagger Inheritance"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "MQTT is an acronym and should be all caps"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model EventGridMQTTClientSessionConnectedEventData
   extends EventGridMQTTClientEventData {
   /** 
@@ -159,6 +168,7 @@ than the previous event.
 /** Event data for Microsoft.EventGrid.MQTTClientSessionDisconnected event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Following Swagger Inheritance"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "MQTT is an acronym and should be all caps"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model EventGridMQTTClientSessionDisconnectedEventData
   extends EventGridMQTTClientEventData {
   /**

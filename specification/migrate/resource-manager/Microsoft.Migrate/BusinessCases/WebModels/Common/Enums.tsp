@@ -359,6 +359,7 @@ union AzureArcState {
 
 @doc("Scope type.")
 @added(BusinessCaseApiVersions.v2024_03_03_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union ScopeType {
   @doc("Enum for Datacenter.")
   Datacenter: "Datacenter",

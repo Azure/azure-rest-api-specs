@@ -66,6 +66,7 @@ model CloudError {
 /**
  * Describes an Azure resource.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Resource {
   /**
    * Resource Id
@@ -167,6 +168,7 @@ union SettingName {
 /**
  * The current provisioning state of the resource. Indicates the status of the last operation performed on the resource.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union ProvisioningState {
   string,
 
@@ -235,6 +237,7 @@ union CreatedByType {
 /**
  * Aggregative state based on the standard's supported controls states
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union State {
   string,
 
@@ -355,6 +358,7 @@ union Severity {
  * Details of the resource that was assessed
  */
 @discriminator("source")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ResourceDetails {
   /**
    * The platform where the assessed resource resides

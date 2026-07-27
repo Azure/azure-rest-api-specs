@@ -31,6 +31,7 @@ alias AADToken = OAuth2Auth<[
 /**
  * Type of ranker to be used.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union RankerKind {
   string,
 
@@ -48,6 +49,7 @@ union RankerKind {
 /**
  * Set to 'OR' or 'AND' for using corresponding logical operation.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union LogicalOperationKind {
   string,
 
@@ -260,6 +262,7 @@ union StringIndexType {
 /**
  * Parameters to query a knowledge base.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AnswersOptions {
   /**
    * Exact QnA ID to fetch from the knowledge base, this field takes priority over
@@ -324,6 +327,7 @@ model AnswersOptions {
 /**
  * Context object with previous QnA's information.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model KnowledgeBaseAnswerContext {
   /**
    * Previous turn top answer result QnA ID.
@@ -339,6 +343,7 @@ model KnowledgeBaseAnswerContext {
 /**
  * filters over knowledge base.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model QueryFilters {
   /**
    * Find QnAs that are associated with the given list of metadata.
@@ -360,6 +365,7 @@ model QueryFilters {
 /**
  * Find QnAs that are associated with the given list of metadata.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model MetadataFilter {
   /** Dictionary of string */
   metadata?: MetadataRecord[];
@@ -373,6 +379,7 @@ model MetadataFilter {
 /**
  * Object to provide the key value pair for each metadata.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model MetadataRecord {
   /**
    * Metadata Key from Metadata dictionary used in the QnA.
@@ -388,6 +395,7 @@ model MetadataRecord {
 /**
  * To configure Answer span prediction feature.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ShortAnswerOptions {
   /**
    * Enable or disable Answer Span prediction.
@@ -462,6 +470,7 @@ model PrebuiltQueryMatchingPolicy extends MatchingPolicy {
 /**
  * Represents List of Question Answers.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AnswersResult {
   /**
    * Represents Answer Result list.
@@ -472,6 +481,7 @@ model AnswersResult {
 /**
  * Represents knowledge base answer.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model KnowledgeBaseAnswer {
   /**
    * List of questions associated with the answer.
@@ -520,6 +530,7 @@ model KnowledgeBaseAnswer {
 /**
  * Dialog associated with Answer.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model KnowledgeBaseAnswerDialog {
   /**
    * To mark if a prompt is relevant only with a previous question or not. If true,
@@ -538,6 +549,7 @@ model KnowledgeBaseAnswerDialog {
 /**
  * Prompt for an answer.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model KnowledgeBaseAnswerPrompt {
   /**
    * Index of the prompt - used in ordering of the prompts.
@@ -559,6 +571,7 @@ model KnowledgeBaseAnswerPrompt {
 /**
  * Answer span object of QnA.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AnswerSpan {
   /**
    * Predicted text of answer span.
@@ -587,9 +600,11 @@ model AnswerSpan {
  * Error response.
  */
 @error
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ErrorResponse is Azure.Core.Foundations.ErrorResponseBase<Error>;
 
 /** The error response object returned when the service encounters some errors during processing the request. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Error {
   /** One of a server-defined set of error codes. */
   code: ErrorCode;
@@ -643,6 +658,7 @@ model InnerErrorModel {
 /**
  * The question and text record parameters to answer.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AnswersFromTextOptions {
   /**
    * User question to query against the given text records.
@@ -672,6 +688,7 @@ model AnswersFromTextOptions {
 /**
  * Represent input text record to be queried.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model TextDocument {
   /**
    * Unique identifier for the text record.
@@ -687,6 +704,7 @@ model TextDocument {
 /**
  * Represents the answer results.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AnswersFromTextResult {
   /**
    * Represents the answer results.
@@ -697,6 +715,7 @@ model AnswersFromTextResult {
 /**
  * Represents answer result.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model TextAnswer {
   /**
    * Answer.

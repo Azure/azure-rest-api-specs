@@ -17,6 +17,7 @@ event.
 @example(
   MicrosoftResourceNotificationsHealthResourcesAvailabilityStatusChangedExample
 )
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ResourceNotificationsHealthResourcesAvailabilityStatusChangedEventData
   extends ResourceNotificationsResourceUpdatedEventData {}
 
@@ -26,5 +27,6 @@ Microsoft.ResourceNotifications.HealthResources.ResourceAnnotated event.
 */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 @example(MicrosoftResourceNotificationsHealthResourcesResourceAnnotatedExample)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ResourceNotificationsHealthResourcesAnnotatedEventData
   extends ResourceNotificationsResourceUpdatedEventData {}

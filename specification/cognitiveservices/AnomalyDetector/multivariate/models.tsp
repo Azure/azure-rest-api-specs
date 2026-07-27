@@ -98,6 +98,7 @@ model MultivariateBatchDetectionResultSummary {
 
 @doc("Error information that the API returned.")
 @error
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ErrorResponse {
   @doc("Error code.")
   code: string;
@@ -404,6 +405,7 @@ model MultivariateLastDetectionResult {
 
 @doc("Error response.")
 @error
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ResponseError {
   @header("x-ms-error-code")
   @doc("Error code.")

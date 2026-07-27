@@ -42,6 +42,7 @@ model WithDescription {
 
 @doc("Enum for resource visibility Scope.")
 @removed(Versions.`2026-02-01-preview`)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union Scope {
   /** The resource is Archived/discarded. */
   Archived: "Archived",

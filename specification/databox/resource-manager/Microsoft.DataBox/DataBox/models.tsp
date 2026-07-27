@@ -11,6 +11,7 @@ namespace Microsoft.DataBox;
 /**
  * Name of the stage which is in progress.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union StageName {
   string,
 
@@ -824,6 +825,7 @@ enum JobDeliveryType {
  */
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 enum SkuName {
   /**
    * Data Box.
@@ -2490,6 +2492,7 @@ model PackageCarrierDetails {
 /**
  * Msi identity details of the resource
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ResourceIdentity {
   /**
    * Identity type
@@ -4235,6 +4238,7 @@ model OperationDisplay {
 /**
  * Operation entity.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Operation {
   /** 
     Name of the operation. Format: {resourceProviderNamespace}/{resourceType}/{read|write|delete|action}

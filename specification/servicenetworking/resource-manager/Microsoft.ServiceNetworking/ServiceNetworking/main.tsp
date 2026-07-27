@@ -304,6 +304,7 @@ union ProvisioningState {
 }
 
 /** Resource ID definition used by parent to reference child resources. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ResourceId {
   /** Resource ID of child resource. */
   id: string;

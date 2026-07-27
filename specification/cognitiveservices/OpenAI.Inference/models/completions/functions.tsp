@@ -43,6 +43,7 @@ alias FunctionCallConfig = FunctionCallPreset | FunctionName;
   The definition of a caller-specified function that chat completions may invoke in response to matching user input.
   """)
 @added(ServiceApiVersions.v2023_07_01_Preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model FunctionDefinition {
   @doc("The name of the function to be called.")
   name: string;

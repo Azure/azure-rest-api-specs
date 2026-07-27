@@ -2393,6 +2393,7 @@ union AzureSecurityOfferingType {
 }
 
 @doc("Scope type")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union ScopeType {
   @doc("ServerGroupId - Scope type")
   ServerGroupId: "ServerGroupId",

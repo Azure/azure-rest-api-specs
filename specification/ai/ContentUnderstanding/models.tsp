@@ -816,6 +816,7 @@ model UsageDetails {
 
 @added(Versions.v2025_11_01)
 @doc("Copy authorization details for cross-resource copy.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model CopyAuthorization {
   @doc("Full path of the source analyzer.")
   source: string;

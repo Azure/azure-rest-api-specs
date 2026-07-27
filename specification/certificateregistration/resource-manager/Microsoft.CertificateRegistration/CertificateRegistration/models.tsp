@@ -1167,6 +1167,7 @@ model Dimension {
 /**
  * Retention policy of a resource metric.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model MetricAvailability {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   timeGrain?: string;

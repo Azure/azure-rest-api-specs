@@ -597,6 +597,7 @@ model ActivityFunctionParameters {
 
 @doc("The function argument and description.")
 @added(Versions.v2025_05_15_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model FunctionArgument {
   @doc("The type of an argument, for example 'string' or 'number'.")
   type: string;

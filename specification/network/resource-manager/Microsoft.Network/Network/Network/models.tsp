@@ -8800,6 +8800,7 @@ model ApplicationGatewayPrivateLinkResourceProperties {
  * Common error representation.
  */
 @error
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Error {
   /**
    * Error code.
@@ -8831,6 +8832,7 @@ model Error {
 /**
  * Common error details representation.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ErrorDetails {
   /**
    * Error code.
@@ -15086,6 +15088,7 @@ model ContainerNetworkInterfaceConfigurationPropertiesFormat {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Container extends SubResource {}
 
 /**
@@ -16452,6 +16455,7 @@ model InboundSecurityRules {
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 @error
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ErrorResponse {
   /**
    * The error details object.
@@ -18569,6 +18573,7 @@ model ConnectionMonitorListResult {
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.networkingOperations)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Operation {
   /**
    * Operation name: {provider}/{resource}/{operation}.

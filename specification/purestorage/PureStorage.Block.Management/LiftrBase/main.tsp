@@ -195,6 +195,7 @@ union SingleSignOnStates {
 
 @doc("The status of the current operation.")
 @Azure.Core.lroStatus
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union ProvisioningState {
   ResourceProvisioningState,
 

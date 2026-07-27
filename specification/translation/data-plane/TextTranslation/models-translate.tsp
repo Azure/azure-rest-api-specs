@@ -425,6 +425,7 @@ model TranslatedTextItem {
 }
 
 @doc("An object describing the detected language.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model DetectedLanguage {
   @doc("A string representing the code of the detected language.")
   language: string;

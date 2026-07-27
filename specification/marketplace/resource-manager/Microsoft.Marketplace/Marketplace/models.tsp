@@ -220,6 +220,7 @@ model Recipient {
 /**
  * An Azure resource.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Resource {
   /**
    * The resource ID.
@@ -287,6 +288,7 @@ model SystemData {
  * Error response indicates Microsoft.Marketplace service is not able to process the incoming request. The reason is provided in the error message.
  */
 @error
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ErrorResponse {
   /**
    * The details of the error.

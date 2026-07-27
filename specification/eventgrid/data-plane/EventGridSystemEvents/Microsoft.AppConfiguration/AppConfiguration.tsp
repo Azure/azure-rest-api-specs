@@ -5,6 +5,7 @@ namespace Microsoft.EventGrid.SystemEvents;
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.AppConfiguration.KeyValueModified event. */
 @example(MicrosoftAppConfigurationKeyValueModifiedExample)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AppConfigurationKeyValueModifiedEventData {
   /** The key used to identify the key-value that was modified. */
   key: string;
@@ -22,6 +23,7 @@ model AppConfigurationKeyValueModifiedEventData {
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.AppConfiguration.KeyValueDeleted event. */
 @example(MicrosoftAppConfigurationKeyValueDeletedExample)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AppConfigurationKeyValueDeletedEventData {
   /** The key used to identify the key-value that was deleted. */
   key: string;
@@ -37,6 +39,7 @@ model AppConfigurationKeyValueDeletedEventData {
 }
 
 /** Schema of common properties of snapshot events */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AppConfigurationSnapshotEventData {
   /** The name of the snapshot. */
   name: string;
@@ -51,11 +54,13 @@ model AppConfigurationSnapshotEventData {
 /** Schema of the Data property of an EventGridEvent for a Microsoft.AppConfiguration.SnapshotCreated event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 @example(MicrosoftAppConfigurationSnapshotCreatedExample)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AppConfigurationSnapshotCreatedEventData
   extends AppConfigurationSnapshotEventData {}
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.AppConfiguration.SnapshotModified event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 @example(MicrosoftAppConfigurationSnapshotModifiedExample)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AppConfigurationSnapshotModifiedEventData
   extends AppConfigurationSnapshotEventData {}

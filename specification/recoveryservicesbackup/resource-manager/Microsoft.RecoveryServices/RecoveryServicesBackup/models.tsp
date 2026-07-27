@@ -1412,6 +1412,7 @@ union RehydrationPriority {
  * HTTP Status Code of the operation.
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 enum HttpStatusCode {
   Continue,
   SwitchingProtocols,

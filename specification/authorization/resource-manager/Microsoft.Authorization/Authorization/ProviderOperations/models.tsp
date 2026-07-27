@@ -12,6 +12,7 @@ namespace Microsoft.ProviderOperations;
 /**
  * Resource Type
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ResourceType {
   /**
    * The resource type name.

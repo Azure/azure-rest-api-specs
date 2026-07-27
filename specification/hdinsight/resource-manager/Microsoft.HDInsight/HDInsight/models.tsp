@@ -271,6 +271,7 @@ union PrivateLink {
 /**
  * The type of identity used for the cluster. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union ResourceIdentityType {
   string,
 
@@ -888,6 +889,7 @@ model ApplicationGetEndpoint {
 /**
  * The error message associated with the cluster creation.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Errors {
   /**
    * The error code.
@@ -1010,6 +1012,7 @@ model IPConfigurationProperties {
 /**
  * The azure resource id.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ResourceId {
   /**
    * The azure resource id.
@@ -1020,6 +1023,7 @@ model ResourceId {
 /**
  * Common fields that are returned in the response for all Azure Resource Manager resources
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Resource {
   /**
    * Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
@@ -2600,6 +2604,7 @@ model OperationListResult {
 /**
  * The HDInsight REST API operation.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Operation {
   /**
    * The operation name: {provider}/{resource}/{operation}

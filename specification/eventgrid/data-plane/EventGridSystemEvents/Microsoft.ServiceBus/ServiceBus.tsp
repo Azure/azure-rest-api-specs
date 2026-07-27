@@ -3,12 +3,14 @@ import "./ServiceBusExample.tsp";
 namespace Microsoft.EventGrid.SystemEvents {
   /** Schema of the Data property of an EventGridEvent for a Microsoft.ServiceBus.ActiveMessagesAvailableWithNoListeners event. */
   @example(MicrosoftServiceBusActiveMessagesAvailableWithNoListenersExample)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
   model ServiceBusActiveMessagesAvailableWithNoListenersEventData {
     ...ServiceBusBaseEventData;
   }
 
   /** Schema of the Data property of an EventGridEvent for a Microsoft.ServiceBus.DeadletterMessagesAvailableWithNoListeners event. */
   @example(MicrosoftServiceBusDeadletterMessagesAvailableWithNoListenersExample)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
   model ServiceBusDeadletterMessagesAvailableWithNoListenersEventData {
     ...ServiceBusBaseEventData;
   }
@@ -17,6 +19,7 @@ namespace Microsoft.EventGrid.SystemEvents {
   @example(
     MicrosoftServiceBusActiveMessagesAvailablePeriodicNotificationsExample
   )
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
   model ServiceBusActiveMessagesAvailablePeriodicNotificationsEventData {
     ...ServiceBusBaseEventData;
   }
@@ -25,6 +28,7 @@ namespace Microsoft.EventGrid.SystemEvents {
   @example(
     MicrosoftServiceBusDeadletterMessagesAvailablePeriodicNotificationsExample
   )
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
   model ServiceBusDeadletterMessagesAvailablePeriodicNotificationsEventData {
     ...ServiceBusBaseEventData;
   }

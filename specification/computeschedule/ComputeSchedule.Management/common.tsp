@@ -32,6 +32,7 @@ model KeyVaultSecretReference {
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 @added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 enum ResourceIdentityType {
   SystemAssigned,
   UserAssigned,
@@ -103,6 +104,7 @@ union ZonePlacementPolicyType {
  * Describes the user-defined constraints for resource hardware placement.
  */
 @added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Placement {
   /**
    * Specifies the policy for resource's placement in availability zone. Possible values are: **Any** (used for Virtual Machines), **Auto** (used for Virtual Machine Scale Sets) - An availability zone will be automatically picked by system as part of resource creation.

@@ -538,6 +538,7 @@ enum KeyRotationPolicyActionType {
  * SKU name to specify whether the key vault is a standard vault or a premium vault.
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 enum SkuName {
   standard,
   premium,
@@ -644,6 +645,7 @@ model KeyCreateParameters {
  * The properties of the key.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model KeyProperties {
   /**
    * The attributes of the key.
@@ -771,6 +773,7 @@ model KeyRotationPolicyAttributes {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model LifetimeAction {
   /**
    * The trigger of key rotation policy lifetimeAction.
@@ -805,6 +808,7 @@ model Action {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model KeyReleasePolicy {
   /**
    * Content type and version of key release policy
@@ -1955,6 +1959,7 @@ model ManagedHsmError {
 /**
  * The server error.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Error {
   /**
    * The error code.
@@ -2261,6 +2266,7 @@ model SecretCreateOrUpdateParameters {
  * Properties of the secret
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model SecretProperties {
   /**
    * The value of the secret. NOTE: 'value' will never be returned from the service, as APIs using this model are is intended for internal use in ARM deployments. Users should use the data-plane REST service for interaction with vault secrets.
@@ -2431,6 +2437,7 @@ model OperationDisplay {
 /**
  * Key Vault REST API operation definition.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Operation {
   /**
    * Operation name: {provider}/{resource}/{operation}

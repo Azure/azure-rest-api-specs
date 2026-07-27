@@ -6,72 +6,86 @@ using TypeSpec.Versioning;
 namespace Microsoft.EventGrid.SystemEvents {
   // /** sku of app service plan. */
   /** Detail of action on the app. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
   model AppEventTypeDetail {
     /** Type of action of the operation. */
     action?: AppAction;
   }
 
   /** Schema of the Data property of an EventGridEvent for a Microsoft.Web.AppUpdated event. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
   model WebAppUpdatedEventData {
     ...WebAppBaseEventData;
   }
 
   /** Schema of the Data property of an EventGridEvent for a Microsoft.Web.BackupOperationStarted event. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
   model WebBackupOperationStartedEventData {
     ...WebAppBaseEventData;
   }
 
   /** Schema of the Data property of an EventGridEvent for a Microsoft.Web.BackupOperationCompleted event. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
   model WebBackupOperationCompletedEventData {
     ...WebAppBaseEventData;
   }
 
   /** Schema of the Data property of an EventGridEvent for a Microsoft.Web.BackupOperationFailed event. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
   model WebBackupOperationFailedEventData {
     ...WebAppBaseEventData;
   }
 
   /** Schema of the Data property of an EventGridEvent for a Microsoft.Web.RestoreOperationStarted event. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
   model WebRestoreOperationStartedEventData {
     ...WebAppBaseEventData;
   }
 
   /** Schema of the Data property of an EventGridEvent for a Microsoft.Web.RestoreOperationCompleted event. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
   model WebRestoreOperationCompletedEventData {
     ...WebAppBaseEventData;
   }
 
   /** Schema of the Data property of an EventGridEvent for a Microsoft.Web.RestoreOperationFailed event. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
   model WebRestoreOperationFailedEventData {
     ...WebAppBaseEventData;
   }
 
   /** Schema of the Data property of an EventGridEvent for a Microsoft.Web.SlotSwapStarted event. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
   model WebSlotSwapStartedEventData {
     ...WebAppBaseEventData;
   }
 
   /** Schema of the Data property of an EventGridEvent for a Microsoft.Web.SlotSwapCompleted event. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
   model WebSlotSwapCompletedEventData {
     ...WebAppBaseEventData;
   }
 
   /** Schema of the Data property of an EventGridEvent for a Microsoft.Web.SlotSwapFailed event. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
   model WebSlotSwapFailedEventData {
     ...WebAppBaseEventData;
   }
 
   /** Schema of the Data property of an EventGridEvent for a Microsoft.Web.SlotSwapWithPreviewStarted event. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
   model WebSlotSwapWithPreviewStartedEventData {
     ...WebAppBaseEventData;
   }
 
   /** Schema of the Data property of an EventGridEvent for a Microsoft.Web.SlotSwapWithPreviewCancelled event. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
   model WebSlotSwapWithPreviewCancelledEventData {
     ...WebAppBaseEventData;
   }
 
   /** Schema of the Data property of an EventGridEvent for a Microsoft.Web.AppServicePlanUpdated event. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
   model WebAppServicePlanUpdatedEventData {
     /** Detail of action on the app service plan. */
     appServicePlanEventTypeDetail?: AppServicePlanEventTypeDetail;
@@ -99,6 +113,7 @@ namespace Microsoft.EventGrid.SystemEvents {
   }
 
   /** Type of action of the operation */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
   union AppAction {
     /** Web app was restarted. */
     "Restarted",
@@ -122,6 +137,7 @@ namespace Microsoft.EventGrid.SystemEvents {
   }
 
   /** Kind of environment where app service plan is. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
   union StampKind {
     /** App Service Plan is running on a public stamp. */
     "Public",
@@ -136,6 +152,7 @@ namespace Microsoft.EventGrid.SystemEvents {
   }
 
   /** Type of action on the app service plan. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
   union AppServicePlanAction {
     /** App Service plan is being updated. */
     "Updated",
@@ -144,6 +161,7 @@ namespace Microsoft.EventGrid.SystemEvents {
   }
 
   /** Detail of action on the app service plan. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
   model AppServicePlanEventTypeDetail {
     /** Kind of environment where app service plan is. */
     stampKind?: StampKind;
@@ -156,6 +174,7 @@ namespace Microsoft.EventGrid.SystemEvents {
   }
 
   /** Asynchronous operation status of the operation on the app service plan. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
   union AsyncStatus {
     /** Async operation has started. */
     "Started",
@@ -193,6 +212,7 @@ namespace Microsoft.EventGrid.SystemEvents {
   };
 
   /** sku of app service plan. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
   model WebAppServicePlanUpdatedEventDataSku {
     /** name of app service plan sku. */
     name?: string;

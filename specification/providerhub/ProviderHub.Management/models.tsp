@@ -3457,6 +3457,7 @@ model CustomRolloutStatus {
 /**
  * Error information.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ExtendedErrorInfo {
   /**
    * The error code.
@@ -3489,6 +3490,7 @@ model ExtendedErrorInfo {
 /**
  * Error information.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model TypedErrorInfo {
   /**
    * The type of the error.
@@ -3924,6 +3926,7 @@ model ResourceProviderManifestRequestHeaderOptions
   extends RequestHeaderOptions {}
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ResourceType {
   /**
    * The resource type name.

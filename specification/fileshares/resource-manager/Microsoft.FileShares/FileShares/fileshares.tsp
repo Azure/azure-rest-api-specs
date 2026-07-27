@@ -73,6 +73,7 @@ union Protocol {
 }
 
 @doc("Share root squash enum.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union ShareRootSquash {
   string,
 

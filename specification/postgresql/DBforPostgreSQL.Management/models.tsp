@@ -2742,6 +2742,7 @@ model OperationProperties {
 /**
  * REST API operation definition.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Operation {
   /**
    * Name of the operation being performed on this particular object.

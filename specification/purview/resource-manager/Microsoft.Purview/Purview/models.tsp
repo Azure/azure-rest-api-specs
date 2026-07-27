@@ -1327,6 +1327,7 @@ model Credentials {
 /**
  * Operation resource
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Operation {
   /**
    * The response model for get operation properties

@@ -102,6 +102,7 @@ union DateTimeSubKind {
 }
 
 /** The length unit of measurement. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union LengthUnit {
   string,
 
@@ -756,6 +757,7 @@ union role {
 }
 
 /** Set to 'OR' or 'AND' for using corresponding logical operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union LogicalOperationKind {
   string,
 
@@ -874,6 +876,7 @@ union ErrorCode {
 
 /** Predicted sentiment */
 @added(Versions.v2023_04_01)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union TextSentiment {
   string,
 
@@ -905,6 +908,7 @@ union StringIndexType {
 }
 
 /** Type of ranker to be used */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union RankerKind {
   string,
 

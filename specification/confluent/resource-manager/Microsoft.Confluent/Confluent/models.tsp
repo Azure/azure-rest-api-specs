@@ -345,6 +345,7 @@ model ErrorResponseBody {
 /**
  * An Confluent REST API operation.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model OperationResult {
   /**
    * Operation name: {provider}/{resource}/{operation}
@@ -1836,6 +1837,7 @@ model ListTopicsSuccessResponse is Azure.Core.Page<TopicRecord>;
  * Topic Properties
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model TopicProperties {
   /**
    * Type of topic

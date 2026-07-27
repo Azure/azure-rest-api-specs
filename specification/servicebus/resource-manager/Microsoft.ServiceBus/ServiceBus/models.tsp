@@ -225,6 +225,7 @@ union PublicNetworkAccessFlag {
  * Name of this SKU.
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 enum SkuName {
   Basic,
   Standard,
@@ -678,6 +679,7 @@ model NamespaceReplicaLocation {
  * The resource management error response.
  */
 @error
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ErrorResponse {
   /**
    * The error object.
@@ -1156,6 +1158,7 @@ model NspAccessRulePropertiesSubscriptionsItem {
 /**
  * A Service Bus REST API operation
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Operation {
   /**
    * Operation name: {provider}/{resource}/{operation}

@@ -1404,6 +1404,7 @@ union RoutingIdentityType {
 /**
  * The name of the SKU.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union SkuName {
   string,
 
@@ -2823,6 +2824,7 @@ model InboundIpRule {
 /**
  * Describes an EventGrid Resource Sku.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ResourceSku {
   /**
    * The Sku name of the resource. The possible values are: Basic or Premium.
@@ -3024,6 +3026,7 @@ model DeliveryAttributeMapping {
 /**
  * Properties of the event subscription.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model SubscriptionProperties {
   /**
    * Provisioning state of the event subscription.
@@ -3530,6 +3533,7 @@ model EventSubscriptionUpdateParameters {
 /**
  * Properties of the namespace resource.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model NamespaceProperties {
   /**
    * List of private endpoint connections.
@@ -4135,6 +4139,7 @@ model TopicRegenerateKeyRequest {
 /**
  * Represents an operation returned by the GetOperations request.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Operation {
   /**
    * Name of the operation.
@@ -4964,6 +4969,7 @@ model SystemTopicUpdateParameters {
 /**
  * Properties of the Topic.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model TopicProperties {
   /**
    * List of private endpoint connections.

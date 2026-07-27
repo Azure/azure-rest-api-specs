@@ -84,6 +84,7 @@ union AccountState {
 }
 
 @doc("The Azure subscription state.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union SubscriptionState {
   string,
 

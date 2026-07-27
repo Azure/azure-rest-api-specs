@@ -1637,6 +1637,7 @@ namespace Azure.ResourceManager.Models {
  * The type of identity used for the managed cluster. For more information see [use managed identities in AKS](https://docs.microsoft.com/azure/aks/use-managed-identity).
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Backward compatibility for Java SDK by using enum in place of string union type"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 enum ResourceIdentityType {
   /**
    * Use an implicitly created system assigned managed identity to manage cluster resources. Master components in the control plane such as kube-controller-manager will use the system assigned managed identity to manipulate Azure resources.

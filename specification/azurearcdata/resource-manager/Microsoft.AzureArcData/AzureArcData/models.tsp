@@ -281,6 +281,7 @@ union CreatedByType {
 /**
  * The provisioning state of the failover group resource.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union ProvisioningState {
   string,
 
@@ -745,6 +746,7 @@ union Role {
 /**
  * The encryption algorithm(s) used by the endpoint.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union EncryptionAlgorithm {
   string,
 
@@ -1139,6 +1141,7 @@ union JobStatus {
 /**
  * The activation state of the license.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union State {
   string,
 
@@ -1505,6 +1508,7 @@ union ActivationState {
 /**
  * The Azure scope to which the license will apply.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union ScopeType {
   string,
 
@@ -2121,6 +2125,7 @@ enum ClusterType {
 /**
  * Azure Data Services on Azure Arc operation definition.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Operation {
   /**
    * The name of the operation being performed on this particular object.

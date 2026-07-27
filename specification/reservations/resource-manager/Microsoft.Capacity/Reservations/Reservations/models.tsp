@@ -1125,6 +1125,7 @@ model ScopeProperties {
  * Error information
  */
 @error
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Error {
   /**
    * Extended error information including error code and error message
@@ -1136,6 +1137,7 @@ model Error {
 /**
  * Extended error information including error code and error message
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ExtendedErrorInfo {
   /**
    * Error code describing the reason that service is not able to process the incoming request
@@ -1384,6 +1386,7 @@ model PurchaseRequest {
 /**
  * The name of sku
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model SkuName {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   name?: string;
@@ -3004,6 +3007,7 @@ model ReservationSummary {
  * Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.
  */
 @error
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ErrorResponse {
   /**
    * The details of the error.
@@ -3014,6 +3018,7 @@ model ErrorResponse {
 /**
  * The details of the error.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ErrorDetails {
   /**
    * Error code.

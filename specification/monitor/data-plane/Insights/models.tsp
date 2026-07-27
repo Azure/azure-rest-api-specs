@@ -5,6 +5,7 @@ using Azure.ResourceManager;
 namespace MonitorQueryMetrics;
 
 /** The unit of the metric. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union MetricUnit {
   string,
 
@@ -58,12 +59,14 @@ model ResourceIdList {
 }
 
 /** The metrics result for a resource. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model MetricResultsResponse {
   /** The collection of metric data responses per resource, per metric. */
   values?: MetricResultsResponseValuesItem[];
 }
 
 /** The metric data response for a resource. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model MetricResultsResponseValuesItem {
   /** The start time, in datetime format, for which the data was retrieved. */
   starttime: string;
@@ -94,6 +97,7 @@ model MetricResultsResponseValuesItem {
 }
 
 /** The result data of a query. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Metric {
   /** The metric Id. */
   id: string;
@@ -134,6 +138,7 @@ model LocalizableString {
  * A time series result type. The discriminator value is always TimeSeries in this
  * case.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model TimeSeriesElement {
   /** The metadata values returned if $filter was specified in the call. */
   @identifiers(#["name"])
@@ -157,6 +162,7 @@ model MetadataValue {
 }
 
 /** Represents a metric value. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model MetricValue {
   /** The timestamp for the metric value in ISO 8601 format. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.

@@ -172,6 +172,7 @@ model AnalyzeTextLROTask is TaskIdentifier {
 
 /** The result object for the analyze task. */
 @discriminator("kind")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AnalyzeTextTaskResult {
   /** The kind of task result. */
   kind: AnalyzeTextTaskResultsKind;
@@ -367,6 +368,7 @@ model DocumentDetectedLanguage {
 
 /** Error response. */
 @error
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ErrorResponse is Azure.Core.Foundations.ErrorResponseBase<Error>;
 
 /** An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses. */
@@ -696,6 +698,7 @@ union ErrorCode {
 
 /** Predicted sentiment for document (Negative, Neutral, Positive, or Mixed). */
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" // defined as closed enum
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union DocumentSentimentValue {
   /** Positive statement */
   positive: "positive",
@@ -711,6 +714,7 @@ union DocumentSentimentValue {
 }
 
 /** Represents the confidence scores between 0 and 1 across all sentiment classes: positive, neutral, negative. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model SentimentConfidenceScores {
   /** Confidence score for positive sentiment */
   positive: float64;

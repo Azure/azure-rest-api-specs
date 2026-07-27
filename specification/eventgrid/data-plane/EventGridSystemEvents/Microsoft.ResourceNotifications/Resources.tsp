@@ -14,6 +14,7 @@ Microsoft.ResourceNotifications.Resources.CreatedOrUpdated event.
 */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 @example(MicrosoftResourceNotificationsResourcesCreatedOrUpdatedExample)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ResourceNotificationsResourceManagementCreatedOrUpdatedEventData
   extends ResourceNotificationsResourceUpdatedEventData {}
 
@@ -23,5 +24,6 @@ Microsoft.ResourceNotifications.Resources.Deleted event.
 */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 @example(MicrosoftResourceNotificationsResourcesDeletedExample)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ResourceNotificationsResourceManagementDeletedEventData
   extends ResourceNotificationsResourceDeletedEventData {}

@@ -520,6 +520,7 @@ model JwksDocument {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Property names follow RFC 7517 (JSON Web Key) and cannot be changed to Azure camelCase."
 @doc("rfc7517 JSON Web Key representation adapted from a shared swagger definition in the common types")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model JsonWebKey {
   @doc("The \"alg\" (algorithm) parameter identifies the algorithm intended for\nuse with the key.  The values used should either be registered in the\nIANA \"JSON Web Signature and Encryption Algorithms\" registry\nestablished by [JWA] or be a value that contains a Collision-\nResistant Name.")
   alg?: string;

@@ -87,6 +87,7 @@ union DiscoveryScenario {
 /**
  * The status of the current operation.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union ProvisioningState {
   string,
 
@@ -1804,6 +1805,7 @@ model PrivateEndpointConnectionPropertiesV2 {
 /**
  * PrivateEndpointModelsResourceId
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ResourceId {
   /**
    * id name
@@ -2484,6 +2486,7 @@ model JobProperties {
 /**
  * Error contract returned when some exception occurs in Rest API.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ErrorDetails {
   /**
    * Gets the error code.
@@ -5291,6 +5294,7 @@ model FileMetaData {
 /**
  * The properties of a server machine tracked resource
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Errors {
   /**
    * Gets the error message.

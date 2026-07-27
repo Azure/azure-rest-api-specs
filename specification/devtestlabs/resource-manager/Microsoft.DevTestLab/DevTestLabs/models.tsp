@@ -59,6 +59,7 @@ union EnableStatus {
 /**
  * The status code for the operation.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union HttpStatusCode {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -656,6 +657,7 @@ model LabSupportProperties {
 /**
  * An Operation Result
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model OperationResult {
   /**
    * The operation status.
@@ -2635,6 +2637,7 @@ model SecretList is Azure.Core.Page<Secret>;
 /**
  * Properties of a secret.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model SecretProperties {
   /**
    * The value of the secret for secret creation.

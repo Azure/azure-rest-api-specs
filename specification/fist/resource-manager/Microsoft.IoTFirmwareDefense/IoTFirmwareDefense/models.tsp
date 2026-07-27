@@ -32,6 +32,7 @@ union Status {
 }
 
 @doc("The status of a firmware analysis job.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union ProvisioningState {
   string,
 

@@ -448,6 +448,7 @@ union SignalOperator {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Self-explanatory"
 @doc("Metric aggregation type")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union MetricAggregationType {
   string,
   None: "None",

@@ -11,6 +11,7 @@ using TypeSpec.Versioning;
 namespace Search;
 
 /** Defines the type of a datasource. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union SearchIndexerDataSourceType {
   string,
 
@@ -40,6 +41,7 @@ union SearchIndexerDataSourceType {
 }
 
 /** Represents the parsing mode for indexing from an Azure blob data source. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union BlobIndexerParsingMode {
   string,
 
@@ -100,6 +102,7 @@ union MarkdownHeaderDepth {
 }
 
 /** Specifies the data to extract from Azure blob storage and tells the indexer which data to extract from image content when "imageAction" is set to a value other than "none".  This applies to embedded image content in a .PDF or other application, or image files such as .jpg and .png, in Azure blobs. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union BlobIndexerDataToExtract {
   string,
 
@@ -114,6 +117,7 @@ union BlobIndexerDataToExtract {
 }
 
 /** Determines how to process embedded images and image files in Azure blob storage.  Setting the "imageAction" configuration to any value other than "none" requires that a skillset also be attached to that indexer. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union BlobIndexerImageAction {
   string,
 
@@ -128,6 +132,7 @@ union BlobIndexerImageAction {
 }
 
 /** Determines algorithm for text extraction from PDF files in Azure blob storage. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union BlobIndexerPDFTextRotationAlgorithm {
   string,
 
@@ -139,6 +144,7 @@ union BlobIndexerPDFTextRotationAlgorithm {
 }
 
 /** Specifies the environment in which the indexer should execute. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union IndexerExecutionEnvironment {
   string,
 
@@ -175,6 +181,7 @@ union IndexingMode {
 }
 
 /** Defines behavior of the index projections in relation to the rest of the indexer. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union IndexProjectionMode {
   string,
 
@@ -186,6 +193,7 @@ union IndexProjectionMode {
 }
 
 /** Defines the data type of a field in a search index. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union SearchFieldDataType {
   string,
 
@@ -230,6 +238,7 @@ union SearchFieldDataType {
 }
 
 /** Defines the names of all text analyzers supported by the search engine. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union LexicalAnalyzerName {
   string,
 
@@ -534,6 +543,7 @@ union LexicalNormalizerName {
 }
 
 /** The encoding format for interpreting vector field contents. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union VectorEncodingFormat {
   string,
 
@@ -592,6 +602,7 @@ union VectorSearchCompressionRescoreStorageMethod {
 }
 
 /** Defines the names of all tokenizers supported by the search engine. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union LexicalTokenizerName {
   string,
 
@@ -636,6 +647,7 @@ union LexicalTokenizerName {
 }
 
 /** Defines the names of all token filters supported by the search engine. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union TokenFilterName {
   string,
 
@@ -743,6 +755,7 @@ union TokenFilterName {
 }
 
 /** Defines the names of all character filters supported by the search engine. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union CharFilterName {
   string,
 
@@ -751,6 +764,7 @@ union CharFilterName {
 }
 
 /** Defines a regular expression flag that can be used in the pattern analyzer and pattern tokenizer. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union RegexFlags {
   string,
 
@@ -780,6 +794,7 @@ union RegexFlags {
 }
 
 /** The similarity metric to use for vector comparisons. It is recommended to choose the same similarity metric as the embedding model was trained on. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union VectorSearchAlgorithmMetric {
   string,
 
@@ -797,6 +812,7 @@ union VectorSearchAlgorithmMetric {
 }
 
 /** The quantized data type of compressed vector values. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union VectorSearchCompressionTarget {
   string,
 
@@ -805,6 +821,7 @@ union VectorSearchCompressionTarget {
 }
 
 /** The Azure Open AI model name that will be called. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union AzureOpenAIModelName {
   string,
 
@@ -901,6 +918,7 @@ union AIFoundryModelCatalogName {
 }
 
 /** The language codes supported for input text by KeyPhraseExtractionSkill. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union KeyPhraseExtractionSkillLanguage {
   string,
 
@@ -954,6 +972,7 @@ union KeyPhraseExtractionSkillLanguage {
 }
 
 /** The language codes supported for input by OcrSkill. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union OcrSkillLanguage {
   string,
 
@@ -1469,6 +1488,7 @@ union OcrSkillLanguage {
 }
 
 /** Defines the sequence of characters to use between the lines of text recognized by the OCR skill. The default value is "space". */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union OcrLineEnding {
   string,
 
@@ -1486,6 +1506,7 @@ union OcrLineEnding {
 }
 
 /** The language codes supported for input by ImageAnalysisSkill. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union ImageAnalysisSkillLanguage {
   string,
 
@@ -1647,6 +1668,7 @@ union ImageAnalysisSkillLanguage {
 }
 
 /** The strings indicating what visual feature types to return. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union VisualFeature {
   string,
 
@@ -1673,6 +1695,7 @@ union VisualFeature {
 }
 
 /** A string indicating which domain-specific details to return. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union ImageDetail {
   string,
 
@@ -1684,6 +1707,7 @@ union ImageDetail {
 }
 
 /** A string indicating what entity categories to return. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union EntityCategory {
   string,
 
@@ -1710,6 +1734,7 @@ union EntityCategory {
 }
 
 /** The language codes supported for input text by EntityRecognitionSkill. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union EntityRecognitionSkillLanguage {
   string,
 
@@ -1795,6 +1820,7 @@ union PIIDetectionSkillMaskingMode {
 }
 
 /** The language codes supported for input text by SentimentSkill. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union SentimentSkillLanguage {
   string,
 
@@ -1845,6 +1871,7 @@ union SentimentSkillLanguage {
 }
 
 /** The language codes supported for input text by SplitSkill. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union SplitSkillLanguage {
   string,
 
@@ -1949,6 +1976,7 @@ union SplitSkillLanguage {
 }
 
 /** A value indicating which split mode to perform. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union TextSplitMode {
   string,
 
@@ -1988,6 +2016,7 @@ union SplitSkillEncoderModelName {
 }
 
 /** The language codes supported for input text by CustomEntityLookupSkill. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union CustomEntityLookupSkillLanguage {
   string,
 
@@ -2020,6 +2049,7 @@ union CustomEntityLookupSkillLanguage {
 }
 
 /** The language codes supported for input text by TextTranslationSkill. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union TextTranslationSkillLanguage {
   string,
 
@@ -2303,6 +2333,7 @@ union DocumentIntelligenceLayoutSkillChunkingUnit {
 
 /** Represents the overall indexer status. */
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Closed enum by design"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union IndexerStatus {
   /** Indicates that the indexer is in an unknown state. */
   Unknown: "unknown",
@@ -2316,6 +2347,7 @@ union IndexerStatus {
 
 /** Represents the status of an individual indexer execution. */
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Closed enum by design"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union IndexerExecutionStatus {
   /** An indexer invocation has failed, but the failure may be transient. Indexer invocations will continue per schedule. */
   TransientFailure: "transientFailure",
@@ -2332,6 +2364,7 @@ union IndexerExecutionStatus {
 
 /** Defines the function used to interpolate score boosting across a range of documents. */
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Closed enum by design"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union ScoringFunctionInterpolation {
   /** Boosts scores by a linearly decreasing amount. This is the default interpolation for scoring functions. */
   Linear: "linear",
@@ -2348,6 +2381,7 @@ union ScoringFunctionInterpolation {
 
 /** Defines the aggregation function used to combine the results of all the scoring functions in a scoring profile. */
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Closed enum by design"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union ScoringFunctionAggregation {
   /** Boost scores by the sum of all scoring function results. */
   Sum: "sum",
@@ -2370,6 +2404,7 @@ union ScoringFunctionAggregation {
 
 /** Represents classes of characters on which a token filter can operate. */
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Closed enum by design"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union TokenCharacterKind {
   /** Keeps letters in tokens. */
   Letter: "letter",
@@ -2389,6 +2424,7 @@ union TokenCharacterKind {
 
 /** Lists the languages supported by the Microsoft language tokenizer. */
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Closed enum by design"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union MicrosoftTokenizerLanguage {
   /** Selects the Microsoft tokenizer for Bangla. */
   Bangla: "bangla",
@@ -2519,6 +2555,7 @@ union MicrosoftTokenizerLanguage {
 
 /** Lists the languages supported by the Microsoft language stemming tokenizer. */
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Closed enum by design"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union MicrosoftStemmingTokenizerLanguage {
   /** Selects the Microsoft stemming tokenizer for Arabic. */
   Arabic: "arabic",
@@ -2658,6 +2695,7 @@ union MicrosoftStemmingTokenizerLanguage {
 
 /** Scripts that can be ignored by CjkBigramTokenFilter. */
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Closed enum by design"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union CjkBigramTokenFilterScripts {
   /** Ignore Han script when forming bigrams of CJK terms. */
   Han: "han",
@@ -2674,6 +2712,7 @@ union CjkBigramTokenFilterScripts {
 
 /** Specifies which side of the input an n-gram should be generated from. */
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Closed enum by design"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union EdgeNGramTokenFilterSide {
   /** Specifies that the n-gram should be generated from the front of the input. */
   Front: "front",
@@ -2684,6 +2723,7 @@ union EdgeNGramTokenFilterSide {
 
 /** Identifies the type of phonetic encoder to use with a PhoneticTokenFilter. */
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Closed enum by design"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union PhoneticEncoder {
   /** Encodes a token into a Metaphone value. */
   Metaphone: "metaphone",
@@ -2721,6 +2761,7 @@ union PhoneticEncoder {
 
 /** The language to use for a Snowball token filter. */
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Closed enum by design"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union SnowballTokenFilterLanguage {
   /** Selects the Lucene Snowball stemming tokenizer for Armenian. */
   Armenian: "armenian",
@@ -2791,6 +2832,7 @@ union SnowballTokenFilterLanguage {
 
 /** The language to use for a stemmer token filter. */
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Closed enum by design"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union StemmerTokenFilterLanguage {
   /** Selects the Lucene stemming tokenizer for Arabic. */
   Arabic: "arabic",
@@ -2957,6 +2999,7 @@ union StemmerTokenFilterLanguage {
 
 /** Identifies a predefined list of language-specific stopwords. */
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Closed enum by design"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union StopwordsList {
   /** Selects the stopword list for Arabic. */
   Arabic: "arabic",
@@ -3152,6 +3195,7 @@ model IndexerResyncBody {
 }
 
 /** Represents a datasource definition, which can be used to configure an indexer. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model SearchIndexerDataSource {
   /** The name of the datasource. */
   name: string;
@@ -3210,6 +3254,7 @@ model DataSourceCredentials {
 }
 
 /** Represents information about the entity (such as Azure SQL table or CosmosDB collection) that will be indexed. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model SearchIndexerDataContainer {
   /** The name of the table or view (for Azure SQL data source) or collection (for CosmosDB data source) that will be indexed. */
   name: string;
@@ -3220,6 +3265,7 @@ model SearchIndexerDataContainer {
 
 /** Base type for data change detection policies. */
 @discriminator("@odata.type")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model DataChangeDetectionPolicy {
   /** The discriminator for derived types. */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
@@ -3229,6 +3275,7 @@ model DataChangeDetectionPolicy {
 
 /** Base type for data deletion detection policies. */
 @discriminator("@odata.type")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model DataDeletionDetectionPolicy {
   /** The discriminator for derived types. */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
@@ -3237,6 +3284,7 @@ model DataDeletionDetectionPolicy {
 }
 
 /** A customer-managed encryption key in Azure Key Vault. Keys that you create and manage can be used to encrypt or decrypt data-at-rest, such as indexes and synonym maps. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model SearchResourceEncryptionKey {
   /** The name of your Azure Key Vault key to be used to encrypt your data at rest. */
   keyVaultKeyName: string;
@@ -3288,6 +3336,7 @@ model DocumentKeysOrIds {
 }
 
 /** Represents an indexer. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model SearchIndexer {
   /** The name of the indexer. */
   name: string;
@@ -3338,6 +3387,7 @@ model SearchIndexer {
 }
 
 /** Represents a schedule for indexer execution. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model IndexingSchedule {
   /** The interval of time between indexer executions. */
   interval: duration;
@@ -3347,6 +3397,7 @@ model IndexingSchedule {
 }
 
 /** Represents parameters for indexer execution. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model IndexingParameters {
   /** The number of items that are read from the data source and indexed as a single batch in order to improve performance. The default depends on the data source type. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
@@ -3367,6 +3418,7 @@ model IndexingParameters {
 
 /** A dictionary of indexer-specific configuration properties. Each name is the name of a specific property. Each value must be of a primitive type. */
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model IndexingParametersConfiguration {
   ...Record<unknown>;
 
@@ -3430,6 +3482,7 @@ model IndexingParametersConfiguration {
 }
 
 /** Defines a mapping between a field in a data source and a target field in an index. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model FieldMapping {
   /** The name of the field in the data source. */
   sourceFieldName: string;
@@ -3443,6 +3496,7 @@ model FieldMapping {
 }
 
 /** Represents a function that transforms a value from a data source before indexing. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model FieldMappingFunction {
   /** The name of the field mapping function. */
   name: string;
@@ -3481,6 +3535,7 @@ model ListIndexersResult {
 }
 
 /** Represents the current status and execution history of an indexer. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model SearchIndexerStatus {
   /** The name of the indexer. */
   @visibility(Lifecycle.Read)
@@ -3516,6 +3571,7 @@ model SearchIndexerStatus {
 }
 
 /** Represents the result of an individual indexer execution. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model IndexerExecutionResult {
   /** The outcome of this indexer execution. */
   @visibility(Lifecycle.Read)
@@ -3612,6 +3668,7 @@ model IndexerCurrentState {
 
 /** Represents an item- or document-level indexing error. */
 @error
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model SearchIndexerError {
   /** The key of the item for which indexing failed. */
   @visibility(Lifecycle.Read)
@@ -3639,6 +3696,7 @@ model SearchIndexerError {
 }
 
 /** Represents an item-level warning. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model SearchIndexerWarning {
   /** The key of the item which generated a warning. */
   @visibility(Lifecycle.Read)
@@ -3662,6 +3720,7 @@ model SearchIndexerWarning {
 }
 
 /** Represents the limits that can be applied to an indexer. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model SearchIndexerLimits {
   /** The maximum duration that the indexer is permitted to run for one execution. */
   @visibility(Lifecycle.Read)
@@ -3693,6 +3752,7 @@ model IndexerRuntime {
 }
 
 /** A list of skills. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model SearchIndexerSkillset {
   /** The name of the skillset. */
   name: string;
@@ -3723,6 +3783,7 @@ model SearchIndexerSkillset {
 
 /** Base type for skills. */
 @discriminator("@odata.type")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model SearchIndexerSkill {
   /** The discriminator for derived types. */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
@@ -3746,6 +3807,7 @@ model SearchIndexerSkill {
 }
 
 /** Input field mapping for a skill. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model InputFieldMappingEntry {
   /** The name of the input. */
   name: string;
@@ -3761,6 +3823,7 @@ model InputFieldMappingEntry {
 }
 
 /** Output field mapping for a skill. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model OutputFieldMappingEntry {
   /** The name of the output defined by the skill. */
   name: string;
@@ -3771,6 +3834,7 @@ model OutputFieldMappingEntry {
 
 /** Base type for describing any Azure AI service resource attached to a skillset. */
 @discriminator("@odata.type")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model CognitiveServicesAccount {
   /** The discriminator for derived types. */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
@@ -3782,6 +3846,7 @@ model CognitiveServicesAccount {
 }
 
 /** Definition of additional projections to azure blob, table, or files, of enriched data. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model SearchIndexerKnowledgeStore {
   /** The connection string to the storage account projections will be stored in. */
   storageConnectionString: string;
@@ -3801,6 +3866,7 @@ model SearchIndexerKnowledgeStore {
 }
 
 /** Container object for various projection selectors. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model SearchIndexerKnowledgeStoreProjection {
   /** Projections to Azure Table storage. */
   tables?: SearchIndexerKnowledgeStoreTableProjectionSelector[];
@@ -3814,6 +3880,7 @@ model SearchIndexerKnowledgeStoreProjection {
 
 /** Description for what data to store in Azure Tables. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model SearchIndexerKnowledgeStoreTableProjectionSelector
   extends SearchIndexerKnowledgeStoreProjectionSelector {
   /** Name of generated key to store projection under. */
@@ -3824,6 +3891,7 @@ model SearchIndexerKnowledgeStoreTableProjectionSelector
 }
 
 /** Abstract class to share properties between concrete selectors. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model SearchIndexerKnowledgeStoreProjectionSelector {
   /** Name of reference key to different projection. */
   referenceKeyName?: string;
@@ -3843,11 +3911,13 @@ model SearchIndexerKnowledgeStoreProjectionSelector {
 
 /** Projection definition for what data to store in Azure Blob. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model SearchIndexerKnowledgeStoreObjectProjectionSelector
   extends SearchIndexerKnowledgeStoreBlobProjectionSelector {}
 
 /** Abstract class to share properties between concrete selectors. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model SearchIndexerKnowledgeStoreBlobProjectionSelector
   extends SearchIndexerKnowledgeStoreProjectionSelector {
   /** Blob container to store projections in. */
@@ -3856,10 +3926,12 @@ model SearchIndexerKnowledgeStoreBlobProjectionSelector
 
 /** Projection definition for what data to store in Azure Files. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model SearchIndexerKnowledgeStoreFileProjectionSelector
   extends SearchIndexerKnowledgeStoreBlobProjectionSelector {}
 
 /** Definition of additional projections to secondary search indexes. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model SearchIndexerIndexProjection {
   /** A list of projections to be performed to secondary search indexes. */
   selectors: SearchIndexerIndexProjectionSelector[];
@@ -3870,6 +3942,7 @@ model SearchIndexerIndexProjection {
 }
 
 /** Description for what data to store in the designated search index. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model SearchIndexerIndexProjectionSelector {
   /** Name of the search index to project to. Must have a key field with the 'keyword' analyzer set. */
   targetIndexName: string;
@@ -3886,6 +3959,7 @@ model SearchIndexerIndexProjectionSelector {
 
 /** A dictionary of index projection-specific configuration properties. Each name is the name of a specific property. Each value must be of a primitive type. */
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model SearchIndexerIndexProjectionsParameters {
   ...Record<unknown>;
 
@@ -3909,6 +3983,7 @@ model SkillNames {
 }
 
 /** Represents a synonym map definition. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model SynonymMap {
   /** The name of the synonym map. */
   name: string;
@@ -3940,6 +4015,7 @@ model ListSynonymMapsResult {
 }
 
 /** Represents a search index definition, which describes the fields and search behavior of an index. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model SearchIndex {
   /** The name of the index. */
   name: string;
@@ -4086,6 +4162,7 @@ model SearchIndexResponse {
 }
 
 /** Represents a field in an index definition, which describes the name, data type, and search behavior of a field. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model SearchField {
   /** The name of the field, which must be unique within the fields collection of the index or parent field. */
   name: string;
@@ -4179,6 +4256,7 @@ model SearchField {
 }
 
 /** Defines parameters for a search index that influence scoring in search queries. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ScoringProfile {
   /** The name of the scoring profile. */
   name: string;
@@ -4195,6 +4273,7 @@ model ScoringProfile {
 }
 
 /** Defines weights on index fields for which matches should boost scoring in search queries. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model TextWeights {
   /** The dictionary of per-field weights to boost document scoring. The keys are field names and the values are the weights for each field. */
   weights: Record<float64>;
@@ -4203,6 +4282,7 @@ model TextWeights {
 /** Base type for functions that can modify document scores during ranking. */
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
 @discriminator("type")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ScoringFunction {
   /** The name of the field used as input to the scoring function. */
   fieldName: string;
@@ -4218,6 +4298,7 @@ model ScoringFunction {
 }
 
 /** Defines options to control Cross-Origin Resource Sharing (CORS) for an index. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model CorsOptions {
   /** The list of origins from which JavaScript code will be granted access to your index. Can contain a list of hosts of the form {protocol}://{fully-qualified-domain-name}[:{port#}], or a single '*' to allow all origins (not recommended). */
   allowedOrigins: string[];
@@ -4228,6 +4309,7 @@ model CorsOptions {
 }
 
 /** Defines how the Suggest API should apply to a group of fields in the index. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model SearchSuggester {
   /** The name of the suggester. */
   name: string;
@@ -4241,6 +4323,7 @@ model SearchSuggester {
 
 /** Base type for analyzers. */
 @discriminator("@odata.type")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model LexicalAnalyzer {
   /** The discriminator for derived types. */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
@@ -4253,6 +4336,7 @@ model LexicalAnalyzer {
 
 /** Base type for tokenizers. */
 @discriminator("@odata.type")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model LexicalTokenizer {
   /** The discriminator for derived types. */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
@@ -4265,6 +4349,7 @@ model LexicalTokenizer {
 
 /** Base type for token filters. */
 @discriminator("@odata.type")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model TokenFilter {
   /** The discriminator for derived types. */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
@@ -4277,6 +4362,7 @@ model TokenFilter {
 
 /** Base type for character filters. */
 @discriminator("@odata.type")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model CharFilter {
   /** The discriminator for derived types. */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
@@ -4301,6 +4387,7 @@ model LexicalNormalizer {
 
 /** Base type for similarity algorithms. Similarity algorithms are used to calculate scores that tie queries to documents. The higher the score, the more relevant the document is to that specific query. Those scores are used to rank the search results. */
 @discriminator("@odata.type")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model SimilarityAlgorithm {
   /** The discriminator for derived types. */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
@@ -4309,6 +4396,7 @@ model SimilarityAlgorithm {
 }
 
 /** Defines parameters for a search index that influence semantic capabilities. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model SemanticSearch {
   /** Allows you to set the name of a default semantic configuration in your index, making it optional to pass it on as a query parameter every time. */
   defaultConfiguration?: string;
@@ -4318,6 +4406,7 @@ model SemanticSearch {
 }
 
 /** Defines a specific configuration to be used in the context of semantic capabilities. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model SemanticConfiguration {
   /** The name of the semantic configuration. */
   name: string;
@@ -4336,6 +4425,7 @@ model SemanticConfiguration {
 }
 
 /** Describes the title, content, and keywords fields to be used for semantic ranking, captions, highlights, and answers. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model SemanticPrioritizedFields {
   /** Defines the title field to be used for semantic ranking, captions, highlights, and answers. If you don't have a title field in your index, leave this blank. */
   titleField?: SemanticField;
@@ -4348,12 +4438,14 @@ model SemanticPrioritizedFields {
 }
 
 /** A field that is used as part of the semantic configuration. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model SemanticField {
   /** File name */
   fieldName: string;
 }
 
 /** Contains configuration options related to vector search. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model VectorSearch {
   /** Defines combinations of configurations to use with vector search. */
   profiles?: VectorSearchProfile[];
@@ -4369,6 +4461,7 @@ model VectorSearch {
 }
 
 /** Defines a combination of configurations to use with vector search. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model VectorSearchProfile {
   /** The name to associate with this particular vector search profile. */
   name: string;
@@ -4385,6 +4478,7 @@ model VectorSearchProfile {
 
 /** Contains configuration options specific to the algorithm used during indexing or querying. */
 @discriminator("kind")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model VectorSearchAlgorithmConfiguration {
   /** The name to associate with this particular configuration. */
   name: string;
@@ -4395,6 +4489,7 @@ model VectorSearchAlgorithmConfiguration {
 
 /** Specifies the vectorization method to be used during query time. */
 @discriminator("kind")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model VectorSearchVectorizer {
   /** The name to associate with this particular vectorization method. */
   name: string;
@@ -4405,6 +4500,7 @@ model VectorSearchVectorizer {
 
 /** Contains configuration options specific to the compression method used during indexing or querying. */
 @discriminator("kind")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model VectorSearchCompression {
   /** The name to associate with this particular configuration. */
   name: string;
@@ -4481,6 +4577,7 @@ model ListIndexesSelectedResult {
 }
 
 /** Statistics for a given index. Statistics are collected periodically and are not guaranteed to always be up-to-date. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model GetIndexStatisticsResult {
   /** The number of documents in the index. */
   @visibility(Lifecycle.Read)
@@ -4496,6 +4593,7 @@ model GetIndexStatisticsResult {
 }
 
 /** Specifies some text and analysis components used to break that text into tokens. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AnalyzeRequest {
   /** The text to break into tokens. */
   text: string;
@@ -4517,12 +4615,14 @@ model AnalyzeRequest {
 }
 
 /** The result of testing an analyzer on text. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AnalyzeResult {
   /** The list of tokens returned by the analyzer specified in the request. */
   tokens: AnalyzedTokenInfo[];
 }
 
 /** Information about a token returned by an analyzer. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AnalyzedTokenInfo {
   /** The token returned by the analyzer. */
   @visibility(Lifecycle.Read)
@@ -5330,6 +5430,7 @@ model CreatedResources {
 }
 
 /** Response from a get service statistics request. If successful, it includes service level counters and limits. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model SearchServiceStatistics {
   /** Service level resource counters. */
   counters: SearchServiceCounters;
@@ -5344,6 +5445,7 @@ model SearchServiceStatistics {
 }
 
 /** Represents service-level resource counters and quotas. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model SearchServiceCounters {
   /** Total number of aliases. */
   aliasesCount: ResourceCounter;
@@ -5382,6 +5484,7 @@ model SearchServiceCounters {
 }
 
 /** Represents a resource's usage and quota. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ResourceCounter {
   /** The resource usage amount. */
   usage: int64;
@@ -5392,6 +5495,7 @@ model ResourceCounter {
 }
 
 /** Represents various service level limits. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model SearchServiceLimits {
   /** The maximum allowed fields per index. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
@@ -5448,6 +5552,7 @@ model SharePointConnectorAppRegistration {
 }
 
 /** Allows you to take control over the process of converting text into indexable/searchable tokens. It's a user-defined configuration consisting of a single predefined tokenizer and one or more filters. The tokenizer is responsible for breaking text into tokens, and the filters for modifying tokens emitted by the tokenizer. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model CustomAnalyzer extends LexicalAnalyzer {
   /** The name of the tokenizer to use to divide continuous text into a sequence of tokens, such as breaking a sentence into words. */
   tokenizer: LexicalTokenizerName;
@@ -5464,6 +5569,7 @@ model CustomAnalyzer extends LexicalAnalyzer {
 }
 
 /** Flexibly separates text into terms via a regular expression pattern. This analyzer is implemented using Apache Lucene. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model PatternAnalyzer extends LexicalAnalyzer {
   /** A value indicating whether terms should be lower-cased. Default is true. */
   lowercase?: boolean = true;
@@ -5486,6 +5592,7 @@ model PatternAnalyzer extends LexicalAnalyzer {
 }
 
 /** Standard Apache Lucene analyzer; Composed of the standard tokenizer, lowercase filter and stop filter. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model LuceneStandardAnalyzer extends LexicalAnalyzer {
   /** The maximum token length. Default is 255. Tokens longer than the maximum length are split. The maximum token length that can be used is 300 characters. */
   @maxValue(300)
@@ -5500,6 +5607,7 @@ model LuceneStandardAnalyzer extends LexicalAnalyzer {
 }
 
 /** Divides text at non-letters; Applies the lowercase and stopword token filters. This analyzer is implemented using Apache Lucene. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model StopAnalyzer extends LexicalAnalyzer {
   /** A list of stopwords. */
   stopwords?: string[];
@@ -5523,6 +5631,7 @@ model CustomNormalizer extends LexicalNormalizer {
 }
 
 /** Grammar-based tokenizer that is suitable for processing most European-language documents. This tokenizer is implemented using Apache Lucene. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ClassicTokenizer extends LexicalTokenizer {
   /** The maximum token length. Default is 255. Tokens longer than the maximum length are split. The maximum token length that can be used is 300 characters. */
   @maxValue(300)
@@ -5535,6 +5644,7 @@ model ClassicTokenizer extends LexicalTokenizer {
 
 /** Tokenizes the input from an edge into n-grams of the given size(s). This tokenizer is implemented using Apache Lucene. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model EdgeNGramTokenizer extends LexicalTokenizer {
   /** The minimum n-gram length. Default is 1. Maximum is 300. Must be less than the value of maxGram. */
   @maxValue(300)
@@ -5554,6 +5664,7 @@ model EdgeNGramTokenizer extends LexicalTokenizer {
 
 /** Emits the entire input as a single token. This tokenizer is implemented using Apache Lucene. */
 #deprecated "Use KeywordTokenizerV2 instead."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model KeywordTokenizer extends LexicalTokenizer {
   /** The read buffer size in bytes. Default is 256. */
   bufferSize?: int32 = 256;
@@ -5575,6 +5686,7 @@ model KeywordTokenizerV2 extends LexicalTokenizer {
 }
 
 /** Divides text using language-specific rules. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model MicrosoftLanguageTokenizer extends LexicalTokenizer {
   /** The maximum token length. Tokens longer than the maximum length are split. Maximum token length that can be used is 300 characters. Tokens longer than 300 characters are first split into tokens of length 300 and then each of those tokens is split based on the max token length set. Default is 255. */
   @maxValue(300)
@@ -5592,6 +5704,7 @@ model MicrosoftLanguageTokenizer extends LexicalTokenizer {
 }
 
 /** Divides text using language-specific rules and reduces words to their base forms. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model MicrosoftLanguageStemmingTokenizer extends LexicalTokenizer {
   /** The maximum token length. Tokens longer than the maximum length are split. Maximum token length that can be used is 300 characters. Tokens longer than 300 characters are first split into tokens of length 300 and then each of those tokens is split based on the max token length set. Default is 255. */
   @maxValue(300)
@@ -5610,6 +5723,7 @@ model MicrosoftLanguageStemmingTokenizer extends LexicalTokenizer {
 
 /** Tokenizes the input into n-grams of the given size(s). This tokenizer is implemented using Apache Lucene. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model NGramTokenizer extends LexicalTokenizer {
   /** The minimum n-gram length. Default is 1. Maximum is 300. Must be less than the value of maxGram. */
   @maxValue(300)
@@ -5653,6 +5767,7 @@ model PathHierarchyTokenizerV2 extends LexicalTokenizer {
 }
 
 /** Tokenizer that uses regex pattern matching to construct distinct tokens. This tokenizer is implemented using Apache Lucene. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model PatternTokenizer extends LexicalTokenizer {
   /** A regular expression pattern to match token separators. Default is an expression that matches one or more non-word characters. */
   pattern?: string = "\\W+";
@@ -5673,6 +5788,7 @@ model PatternTokenizer extends LexicalTokenizer {
 
 /** Breaks text following the Unicode Text Segmentation rules. This tokenizer is implemented using Apache Lucene. */
 #deprecated "LuceneStandardTokenizer is deprecated. Use LuceneStandardTokenizerV2 instead."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model LuceneStandardTokenizer extends LexicalTokenizer {
   /** The maximum token length. Default is 255. Tokens longer than the maximum length are split. */
   maxTokenLength?: int32 = 255;
@@ -5683,6 +5799,7 @@ model LuceneStandardTokenizer extends LexicalTokenizer {
 }
 
 /** Breaks text following the Unicode Text Segmentation rules. This tokenizer is implemented using Apache Lucene. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model LuceneStandardTokenizerV2 extends LexicalTokenizer {
   /** The maximum token length. Default is 255. Tokens longer than the maximum length are split. The maximum token length that can be used is 300 characters. */
   @maxValue(300)
@@ -5694,6 +5811,7 @@ model LuceneStandardTokenizerV2 extends LexicalTokenizer {
 }
 
 /** Tokenizes urls and emails as one token. This tokenizer is implemented using Apache Lucene. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model UaxUrlEmailTokenizer extends LexicalTokenizer {
   /** The maximum token length. Default is 255. Tokens longer than the maximum length are split. The maximum token length that can be used is 300 characters. */
   @maxValue(300)
@@ -5705,6 +5823,7 @@ model UaxUrlEmailTokenizer extends LexicalTokenizer {
 }
 
 /** Converts alphabetic, numeric, and symbolic Unicode characters which are not in the first 127 ASCII characters (the "Basic Latin" Unicode block) into their ASCII equivalents, if such equivalents exist. This token filter is implemented using Apache Lucene. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AsciiFoldingTokenFilter extends TokenFilter {
   /** A value indicating whether the original token will be kept. Default is false. */
   preserveOriginal?: boolean = false;
@@ -5715,6 +5834,7 @@ model AsciiFoldingTokenFilter extends TokenFilter {
 }
 
 /** Forms bigrams of CJK terms that are generated from the standard tokenizer. This token filter is implemented using Apache Lucene. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model CjkBigramTokenFilter extends TokenFilter {
   /** The scripts to ignore. */
   ignoreScripts?: CjkBigramTokenFilterScripts[];
@@ -5728,6 +5848,7 @@ model CjkBigramTokenFilter extends TokenFilter {
 }
 
 /** Construct bigrams for frequently occurring terms while indexing. Single terms are still indexed too, with bigrams overlaid. This token filter is implemented using Apache Lucene. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model CommonGramTokenFilter extends TokenFilter {
   /** The set of common words. */
   commonWords: string[];
@@ -5744,6 +5865,7 @@ model CommonGramTokenFilter extends TokenFilter {
 }
 
 /** Decomposes compound words found in many Germanic languages. This token filter is implemented using Apache Lucene. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model DictionaryDecompounderTokenFilter extends TokenFilter {
   /** The list of words to match against. */
   wordList: string[];
@@ -5806,6 +5928,7 @@ model EdgeNGramTokenFilterV2 extends TokenFilter {
 }
 
 /** Removes elisions. For example, "l'avion" (the plane) will be converted to "avion" (plane). This token filter is implemented using Apache Lucene. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ElisionTokenFilter extends TokenFilter {
   /** The set of articles to remove. */
   articles?: string[];
@@ -5816,6 +5939,7 @@ model ElisionTokenFilter extends TokenFilter {
 }
 
 /** A token filter that only keeps tokens with text contained in a specified list of words. This token filter is implemented using Apache Lucene. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model KeepTokenFilter extends TokenFilter {
   /** The list of words to keep. */
   keepWords: string[];
@@ -5829,6 +5953,7 @@ model KeepTokenFilter extends TokenFilter {
 }
 
 /** Marks terms as keywords. This token filter is implemented using Apache Lucene. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model KeywordMarkerTokenFilter extends TokenFilter {
   /** A list of words to mark as keywords. */
   keywords: string[];
@@ -5842,6 +5967,7 @@ model KeywordMarkerTokenFilter extends TokenFilter {
 }
 
 /** Removes words that are too long or too short. This token filter is implemented using Apache Lucene. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model LengthTokenFilter extends TokenFilter {
   /** The minimum length in characters. Default is 0. Maximum is 300. Must be less than the value of max. */
   @maxValue(300)
@@ -5857,6 +5983,7 @@ model LengthTokenFilter extends TokenFilter {
 }
 
 /** Limits the number of tokens while indexing. This token filter is implemented using Apache Lucene. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model LimitTokenFilter extends TokenFilter {
   /** The maximum number of tokens to produce. Default is 1. */
   maxTokenCount?: int32 = 1;
@@ -5872,6 +5999,7 @@ model LimitTokenFilter extends TokenFilter {
 /** Generates n-grams of the given size(s). This token filter is implemented using Apache Lucene. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
 #deprecated "NGramTokenFilter is deprecated. Use NGramTokenFilterV2 instead."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model NGramTokenFilter extends TokenFilter {
   /** The minimum n-gram length. Default is 1. Must be less than the value of maxGram. */
   minGram?: int32 = 1;
@@ -5901,6 +6029,7 @@ model NGramTokenFilterV2 extends TokenFilter {
 }
 
 /** Uses Java regexes to emit multiple tokens - one for each capture group in one or more patterns. This token filter is implemented using Apache Lucene. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model PatternCaptureTokenFilter extends TokenFilter {
   /** A list of patterns to match against each token. */
   patterns: string[];
@@ -5914,6 +6043,7 @@ model PatternCaptureTokenFilter extends TokenFilter {
 }
 
 /** A character filter that replaces characters in the input string. It uses a regular expression to identify character sequences to preserve and a replacement pattern to identify characters to replace. For example, given the input text "aa bb aa bb", pattern "(aa)\\s+(bb)", and replacement "$1#$2", the result would be "aa#bb aa#bb". This token filter is implemented using Apache Lucene. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model PatternReplaceTokenFilter extends TokenFilter {
   /** A regular expression pattern. */
   pattern: string;
@@ -5927,6 +6057,7 @@ model PatternReplaceTokenFilter extends TokenFilter {
 }
 
 /** Create tokens for phonetic matches. This token filter is implemented using Apache Lucene. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model PhoneticTokenFilter extends TokenFilter {
   /** The phonetic encoder to use. Default is "metaphone". */
   encoder?: PhoneticEncoder = PhoneticEncoder.Metaphone;
@@ -5940,6 +6071,7 @@ model PhoneticTokenFilter extends TokenFilter {
 }
 
 /** Creates combinations of tokens as a single token. This token filter is implemented using Apache Lucene. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ShingleTokenFilter extends TokenFilter {
   /** The maximum shingle size. Default and minimum value is 2. */
   @minValue(2)
@@ -5967,6 +6099,7 @@ model ShingleTokenFilter extends TokenFilter {
 }
 
 /** A filter that stems words using a Snowball-generated stemmer. This token filter is implemented using Apache Lucene. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model SnowballTokenFilter extends TokenFilter {
   /** The language to use. */
   language: SnowballTokenFilterLanguage;
@@ -5977,6 +6110,7 @@ model SnowballTokenFilter extends TokenFilter {
 }
 
 /** Language specific stemming filter. This token filter is implemented using Apache Lucene. See https://learn.microsoft.com/rest/api/searchservice/Custom-analyzers-in-Azure-Search#TokenFilters */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model StemmerTokenFilter extends TokenFilter {
   /** The language to use. */
   language: StemmerTokenFilterLanguage;
@@ -5987,6 +6121,7 @@ model StemmerTokenFilter extends TokenFilter {
 }
 
 /** Provides the ability to override other stemming filters with custom dictionary-based stemming. Any dictionary-stemmed terms will be marked as keywords so that they will not be stemmed with stemmers down the chain. Must be placed before any stemming filters. This token filter is implemented using Apache Lucene. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/StemmerOverrideFilter.html */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model StemmerOverrideTokenFilter extends TokenFilter {
   /** A list of stemming rules in the following format: "word => stem", for example: "ran => run". */
   rules: string[];
@@ -5997,6 +6132,7 @@ model StemmerOverrideTokenFilter extends TokenFilter {
 }
 
 /** Removes stop words from a token stream. This token filter is implemented using Apache Lucene. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/StopFilter.html */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model StopwordsTokenFilter extends TokenFilter {
   /** The list of stopwords. This property and the stopwords list property cannot both be set. */
   stopwords?: string[];
@@ -6016,6 +6152,7 @@ model StopwordsTokenFilter extends TokenFilter {
 }
 
 /** Matches single or multi-word synonyms in a token stream. This token filter is implemented using Apache Lucene. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model SynonymTokenFilter extends TokenFilter {
   /** A list of synonyms in following one of two formats: 1. incredible, unbelievable, fabulous => amazing - all terms on the left side of => symbol will be replaced with all terms on its right side; 2. incredible, unbelievable, fabulous, amazing - comma separated list of equivalent words. Set the expand option to change how this list is interpreted. */
   synonyms: string[];
@@ -6032,6 +6169,7 @@ model SynonymTokenFilter extends TokenFilter {
 }
 
 /** Truncates the terms to a specific length. This token filter is implemented using Apache Lucene. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model TruncateTokenFilter extends TokenFilter {
   /** The length at which terms will be truncated. Default and maximum is 300. */
   @maxValue(300)
@@ -6043,6 +6181,7 @@ model TruncateTokenFilter extends TokenFilter {
 }
 
 /** Filters out tokens with same text as the previous token. This token filter is implemented using Apache Lucene. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model UniqueTokenFilter extends TokenFilter {
   /** A value indicating whether to remove duplicates only at the same position. Default is false. */
   onlyOnSamePosition?: boolean = false;
@@ -6053,6 +6192,7 @@ model UniqueTokenFilter extends TokenFilter {
 }
 
 /** Splits words into subwords and performs optional transformations on subword groups. This token filter is implemented using Apache Lucene. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model WordDelimiterTokenFilter extends TokenFilter {
   /** A value indicating whether to generate part words. If set, causes parts of words to be generated; for example "AzureSearch" becomes "Azure" "Search". Default is true. */
   generateWordParts?: boolean = true;
@@ -6090,6 +6230,7 @@ model WordDelimiterTokenFilter extends TokenFilter {
 }
 
 /** A character filter that applies mappings defined with the mappings option. Matching is greedy (longest pattern matching at a given point wins). Replacement is allowed to be the empty string. This character filter is implemented using Apache Lucene. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model MappingCharFilter extends CharFilter {
   /** A list of mappings of the following format: "a=>b" (all occurrences of the character "a" will be replaced with character "b"). */
   mappings: string[];
@@ -6100,6 +6241,7 @@ model MappingCharFilter extends CharFilter {
 }
 
 /** A character filter that replaces characters in the input string. It uses a regular expression to identify character sequences to preserve and a replacement pattern to identify characters to replace. For example, given the input text "aa bb aa bb", pattern "(aa)\\s+(bb)", and replacement "$1#$2", the result would be "aa#bb aa#bb". This character filter is implemented using Apache Lucene. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model PatternReplaceCharFilter extends CharFilter {
   /** A regular expression pattern. */
   pattern: string;
@@ -6113,6 +6255,7 @@ model PatternReplaceCharFilter extends CharFilter {
 }
 
 /** Legacy similarity algorithm which uses the Lucene TFIDFSimilarity implementation of TF-IDF. This variation of TF-IDF introduces static document length normalization as well as coordinating factors that penalize documents that only partially match the searched queries. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ClassicSimilarityAlgorithm extends SimilarityAlgorithm {
   /** The discriminator for derived types. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
@@ -6121,6 +6264,7 @@ model ClassicSimilarityAlgorithm extends SimilarityAlgorithm {
 
 /** Ranking function based on the Okapi BM25 similarity algorithm. BM25 is a TF-IDF-like algorithm that includes length normalization (controlled by the 'b' parameter) as well as term frequency saturation (controlled by the 'k1' parameter). */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model BM25SimilarityAlgorithm extends SimilarityAlgorithm {
   /** This property controls the scaling function between the term frequency of each matching terms and the final relevance score of a document-query pair. By default, a value of 1.2 is used. A value of 0.0 means the score does not scale with an increase in term frequency. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
@@ -6136,6 +6280,7 @@ model BM25SimilarityAlgorithm extends SimilarityAlgorithm {
 }
 
 /** Contains configuration options specific to the HNSW approximate nearest neighbors algorithm used during indexing and querying. The HNSW algorithm offers a tunable trade-off between search speed and accuracy. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model HnswAlgorithmConfiguration extends VectorSearchAlgorithmConfiguration {
   /** Contains the parameters specific to HNSW algorithm. */
   hnswParameters?: HnswParameters;
@@ -6145,6 +6290,7 @@ model HnswAlgorithmConfiguration extends VectorSearchAlgorithmConfiguration {
 }
 
 /** Contains the parameters specific to the HNSW algorithm. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model HnswParameters {
   /** The number of bi-directional links created for every new element during construction. Increasing this parameter value may improve recall and reduce retrieval times for datasets with high intrinsic dimensionality at the expense of increased memory consumption and longer indexing time. */
   @maxValue(10)
@@ -6167,6 +6313,7 @@ model HnswParameters {
 }
 
 /** Contains configuration options specific to the exhaustive KNN algorithm used during querying, which will perform brute-force search across the entire vector index. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ExhaustiveKnnAlgorithmConfiguration
   extends VectorSearchAlgorithmConfiguration {
   /** Contains the parameters specific to exhaustive KNN algorithm. */
@@ -6177,6 +6324,7 @@ model ExhaustiveKnnAlgorithmConfiguration
 }
 
 /** Contains the parameters specific to exhaustive KNN algorithm. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ExhaustiveKnnParameters {
   /** The similarity metric to use for vector comparisons. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
@@ -6184,6 +6332,7 @@ model ExhaustiveKnnParameters {
 }
 
 /** Contains configuration options specific to the scalar quantization compression method used during indexing and querying. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ScalarQuantizationCompression extends VectorSearchCompression {
   /** Contains the parameters specific to Scalar Quantization. */
   scalarQuantizationParameters?: ScalarQuantizationParameters;
@@ -6193,6 +6342,7 @@ model ScalarQuantizationCompression extends VectorSearchCompression {
 }
 
 /** Contains the parameters specific to Scalar Quantization. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ScalarQuantizationParameters {
   /** The quantized data type of compressed vector values. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
@@ -6200,6 +6350,7 @@ model ScalarQuantizationParameters {
 }
 
 /** Contains configuration options specific to the binary quantization compression method used during indexing and querying. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model BinaryQuantizationCompression extends VectorSearchCompression {
   /** The name of the kind of compression method being configured for use with vector search. */
   kind: "binaryQuantization";
@@ -6207,6 +6358,7 @@ model BinaryQuantizationCompression extends VectorSearchCompression {
 
 /** Specifies the Azure OpenAI resource used to vectorize a query string. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AzureOpenAIVectorizer extends VectorSearchVectorizer {
   /** Contains the parameters specific to Azure OpenAI embedding vectorization. */
   azureOpenAIParameters?: AzureOpenAIVectorizerParameters;
@@ -6217,6 +6369,7 @@ model AzureOpenAIVectorizer extends VectorSearchVectorizer {
 
 /** Specifies the parameters for connecting to the Azure OpenAI resource. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AzureOpenAIVectorizerParameters {
   /** The resource URI of the Azure OpenAI resource. */
   resourceUri?: url;
@@ -6236,6 +6389,7 @@ model AzureOpenAIVectorizerParameters {
 
 /** Abstract base type for data identities. */
 @discriminator("@odata.type")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model SearchIndexerDataIdentity {
   /** A URI fragment specifying the type of identity. */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
@@ -6244,6 +6398,7 @@ model SearchIndexerDataIdentity {
 }
 
 /** Specifies a user-defined vectorizer for generating the vector embedding of a query string. Integration of an external vectorizer is achieved using the custom Web API interface of a skillset. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model WebApiVectorizer extends VectorSearchVectorizer {
   /** Specifies the properties of the user-defined vectorizer. */
   customWebApiParameters?: WebApiVectorizerParameters;
@@ -6253,6 +6408,7 @@ model WebApiVectorizer extends VectorSearchVectorizer {
 }
 
 /** Specifies the properties for connecting to a user-defined vectorizer. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model WebApiVectorizerParameters {
   /** The URI of the Web API providing the vectorizer. */
   uri?: url;
@@ -6343,6 +6499,7 @@ model AMLParameters {
 }
 
 /** Clears the identity property of a datasource. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model SearchIndexerDataNoneIdentity extends SearchIndexerDataIdentity {
   /** The discriminator for derived types. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
@@ -6350,6 +6507,7 @@ model SearchIndexerDataNoneIdentity extends SearchIndexerDataIdentity {
 }
 
 /** Specifies the identity for a datasource to use. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model SearchIndexerDataUserAssignedIdentity extends SearchIndexerDataIdentity {
   /** The fully qualified Azure resource Id of a user assigned managed identity typically in the form "/subscriptions/12345678-1234-1234-1234-1234567890ab/resourceGroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId" that should have been assigned to the search service. */
   userAssignedIdentity: string;
@@ -6364,6 +6522,7 @@ model SearchIndexerDataUserAssignedIdentity extends SearchIndexerDataIdentity {
 }
 
 /** Defines a data change detection policy that captures changes based on the value of a high water mark column. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model HighWaterMarkChangeDetectionPolicy extends DataChangeDetectionPolicy {
   /** The name of the high water mark column. */
   highWaterMarkColumnName: string;
@@ -6374,6 +6533,7 @@ model HighWaterMarkChangeDetectionPolicy extends DataChangeDetectionPolicy {
 }
 
 /** Defines a data change detection policy that captures changes using the Integrated Change Tracking feature of Azure SQL Database. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model SqlIntegratedChangeTrackingPolicy extends DataChangeDetectionPolicy {
   /** A URI fragment specifying the type of data change detection policy. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
@@ -6381,6 +6541,7 @@ model SqlIntegratedChangeTrackingPolicy extends DataChangeDetectionPolicy {
 }
 
 /** Defines a data deletion detection policy that implements a soft-deletion strategy. It determines whether an item should be deleted based on the value of a designated 'soft delete' column. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model SoftDeleteColumnDeletionDetectionPolicy
   extends DataDeletionDetectionPolicy {
   /** The name of the column to use for soft-deletion detection. */
@@ -6403,6 +6564,7 @@ model NativeBlobSoftDeleteDeletionDetectionPolicy
 }
 
 /** Defines a function that boosts scores based on distance from a geographic location. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model DistanceScoringFunction extends ScoringFunction {
   /** Parameter values for the distance scoring function. */
   distance: DistanceScoringParameters;
@@ -6412,6 +6574,7 @@ model DistanceScoringFunction extends ScoringFunction {
 }
 
 /** Provides parameter values to a distance scoring function. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model DistanceScoringParameters {
   /** The name of the parameter passed in search queries to specify the reference location. */
   referencePointParameter: string;
@@ -6421,6 +6584,7 @@ model DistanceScoringParameters {
 }
 
 /** Defines a function that boosts scores based on the value of a date-time field. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model FreshnessScoringFunction extends ScoringFunction {
   /** Parameter values for the freshness scoring function. */
   freshness: FreshnessScoringParameters;
@@ -6430,12 +6594,14 @@ model FreshnessScoringFunction extends ScoringFunction {
 }
 
 /** Provides parameter values to a freshness scoring function. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model FreshnessScoringParameters {
   /** The expiration period after which boosting will stop for a particular document. */
   boostingDuration: duration;
 }
 
 /** Defines a function that boosts scores based on the magnitude of a numeric field. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model MagnitudeScoringFunction extends ScoringFunction {
   /** Parameter values for the magnitude scoring function. */
   magnitude: MagnitudeScoringParameters;
@@ -6445,6 +6611,7 @@ model MagnitudeScoringFunction extends ScoringFunction {
 }
 
 /** Provides parameter values to a magnitude scoring function. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model MagnitudeScoringParameters {
   /** The field value at which boosting starts. */
   boostingRangeStart: float64;
@@ -6457,6 +6624,7 @@ model MagnitudeScoringParameters {
 }
 
 /** Defines a function that boosts scores of documents with string values matching a given list of tags. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model TagScoringFunction extends ScoringFunction {
   /** Parameter values for the tag scoring function. */
   tag: TagScoringParameters;
@@ -6466,6 +6634,7 @@ model TagScoringFunction extends ScoringFunction {
 }
 
 /** Provides parameter values to a tag scoring function. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model TagScoringParameters {
   /** The name of the parameter passed in search queries to specify the list of tags to compare against the target field. */
   tagsParameter: string;
@@ -6481,6 +6650,7 @@ model SearchIndexerKnowledgeStoreParameters {
 }
 
 /** An empty object that represents the default Azure AI service resource for a skillset. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model DefaultCognitiveServicesAccount extends CognitiveServicesAccount {
   /** A URI fragment specifying the type of Azure AI service resource attached to a skillset. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
@@ -6488,6 +6658,7 @@ model DefaultCognitiveServicesAccount extends CognitiveServicesAccount {
 }
 
 /** The multi-region account key of an Azure AI service resource that's attached to a skillset. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model CognitiveServicesAccountKey extends CognitiveServicesAccount {
   /** The key used to provision the Azure AI service resource attached to a skillset. */
   key: string;
@@ -6529,6 +6700,7 @@ model AIServicesAccountIdentity extends CognitiveServicesAccount {
 }
 
 /** An object that contains information about the matches that were found, and related metadata. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model CustomEntity {
   /** The top-level entity descriptor. Matches in the skill output will be grouped by this name, and it should represent the "normalized" form of the text being found. */
   name: string;
@@ -6579,6 +6751,7 @@ model CustomEntity {
 }
 
 /** A complex object that can be used to specify alternative spellings or synonyms to the root entity name. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model CustomEntityAlias {
   /** The text of the alias. */
   text: string;
@@ -6597,6 +6770,7 @@ model CustomEntityAlias {
 }
 
 /** A skill that enables scenarios that require a Boolean operation to determine the data to assign to an output. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ConditionalSkill extends SearchIndexerSkill {
   /** A URI fragment specifying the type of skill. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
@@ -6604,6 +6778,7 @@ model ConditionalSkill extends SearchIndexerSkill {
 }
 
 /** A skill that uses text analytics for key phrase extraction. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model KeyPhraseExtractionSkill extends SearchIndexerSkill {
   /** A value indicating which language code to use. Default is `en`. */
   defaultLanguageCode?: KeyPhraseExtractionSkillLanguage;
@@ -6622,6 +6797,7 @@ model KeyPhraseExtractionSkill extends SearchIndexerSkill {
 }
 
 /** A skill that extracts text from image files. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model OcrSkill extends SearchIndexerSkill {
   /** A value indicating which language code to use. Default is `en`. */
   defaultLanguageCode?: OcrSkillLanguage;
@@ -6638,6 +6814,7 @@ model OcrSkill extends SearchIndexerSkill {
 }
 
 /** A skill that analyzes image files. It extracts a rich set of visual features based on the image content. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ImageAnalysisSkill extends SearchIndexerSkill {
   /** A value indicating which language code to use. Default is `en`. */
   defaultLanguageCode?: ImageAnalysisSkillLanguage;
@@ -6654,6 +6831,7 @@ model ImageAnalysisSkill extends SearchIndexerSkill {
 }
 
 /** A skill that detects the language of input text and reports a single language code for every document submitted on the request. The language code is paired with a score indicating the confidence of the analysis. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model LanguageDetectionSkill extends SearchIndexerSkill {
   /** A country code to use as a hint to the language detection model if it cannot disambiguate the language. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
@@ -6669,6 +6847,7 @@ model LanguageDetectionSkill extends SearchIndexerSkill {
 }
 
 /** A skill for reshaping the outputs. It creates a complex type to support composite fields (also known as multipart fields). */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ShaperSkill extends SearchIndexerSkill {
   /** A URI fragment specifying the type of skill. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
@@ -6676,6 +6855,7 @@ model ShaperSkill extends SearchIndexerSkill {
 }
 
 /** A skill for merging two or more strings into a single unified string, with an optional user-defined delimiter separating each component part. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model MergeSkill extends SearchIndexerSkill {
   /** The tag indicates the start of the merged text. By default, the tag is an empty space. */
   insertPreTag?: string = " ";
@@ -6707,6 +6887,7 @@ model SentimentSkillV3 extends SearchIndexerSkill {
 }
 
 /** Using the Text Analytics API, extracts linked entities from text. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model EntityLinkingSkill extends SearchIndexerSkill {
   /** A value indicating which language code to use. Default is `en`. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
@@ -6727,6 +6908,7 @@ model EntityLinkingSkill extends SearchIndexerSkill {
 }
 
 /** Using the Text Analytics API, extracts entities of different types from text. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model EntityRecognitionSkillV3 extends SearchIndexerSkill {
   /** A list of entity categories that should be extracted. */
   categories?: EntityCategory[];
@@ -6751,6 +6933,7 @@ model EntityRecognitionSkillV3 extends SearchIndexerSkill {
 
 /** Using the Text Analytics API, extracts personal information from an input text and gives you the option of masking it. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model PIIDetectionSkill extends SearchIndexerSkill {
   /** A value indicating which language code to use. Default is `en`. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
@@ -6785,6 +6968,7 @@ model PIIDetectionSkill extends SearchIndexerSkill {
 }
 
 /** A skill to split a string into chunks of text. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model SplitSkill extends SearchIndexerSkill {
   /** A value indicating which language code to use. Default is `en`. */
   defaultLanguageCode?: SplitSkillLanguage;
@@ -6834,6 +7018,7 @@ model AzureOpenAITokenizerParameters {
 }
 
 /** A skill looks for text from a custom, user-defined list of words and phrases. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model CustomEntityLookupSkill extends SearchIndexerSkill {
   /** A value indicating which language code to use. Default is `en`. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
@@ -6865,6 +7050,7 @@ model CustomEntityLookupSkill extends SearchIndexerSkill {
 }
 
 /** A skill to translate text from one language to another. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model TextTranslationSkill extends SearchIndexerSkill {
   /** The language code to translate documents into for documents that don't specify the to language explicitly. */
   defaultToLanguageCode: TextTranslationSkillLanguage;
@@ -6882,6 +7068,7 @@ model TextTranslationSkill extends SearchIndexerSkill {
 }
 
 /** A skill that extracts content from a file within the enrichment pipeline. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model DocumentExtractionSkill extends SearchIndexerSkill {
   /** The parsingMode for the skill. Will be set to 'default' if not defined. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
@@ -6935,6 +7122,7 @@ model DocumentIntelligenceLayoutSkill extends SearchIndexerSkill {
 }
 
 /** A skill that can call a Web API endpoint, allowing you to extend a skillset by having it call your custom code. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model WebApiSkill extends SearchIndexerSkill {
   /** The url for the Web API. */
   uri: string;
@@ -7004,6 +7192,7 @@ model AzureMachineLearningSkill extends SearchIndexerSkill {
 
 /** Allows you to generate a vector embedding for a given text input using the Azure OpenAI resource. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AzureOpenAIEmbeddingSkill extends SearchIndexerSkill {
   ...AzureOpenAIVectorizerParameters;
 

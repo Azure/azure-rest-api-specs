@@ -3885,6 +3885,7 @@ model NetworkConfigurationProperties {
 /**
  * Public key information for client authentication
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model KeyProperties {
   /**
    * Current public key details

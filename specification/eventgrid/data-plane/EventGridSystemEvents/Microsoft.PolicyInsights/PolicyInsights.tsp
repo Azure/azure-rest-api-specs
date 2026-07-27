@@ -5,17 +5,20 @@ using TypeSpec.Versioning;
 namespace Microsoft.EventGrid.SystemEvents {
   /** Schema of the Data property of an EventGridEvent for a Microsoft.PolicyInsights.PolicyStateCreated event. */
   @example(MicrosoftPolicyInsightsPolicyStateCreatedExample)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
   model PolicyInsightsPolicyStateCreatedEventData {
     ...PolicyInsightsBaseEventData;
   }
 
   /** Schema of the Data property of an EventGridEvent for a Microsoft.PolicyInsights.PolicyStateChanged event. */
   @example(MicrosoftPolicyInsightsPolicyStateChangedExample)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
   model PolicyInsightsPolicyStateChangedEventData {
     ...PolicyInsightsBaseEventData;
   }
 
   /** Schema of the Data property of an EventGridEvent for a Microsoft.PolicyInsights.PolicyStateDeleted event. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
   model PolicyInsightsPolicyStateDeletedEventData {
     ...PolicyInsightsBaseEventData;
   }

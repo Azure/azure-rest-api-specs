@@ -16,6 +16,7 @@ namespace Microsoft.NetApp;
 scalar FileName extends string;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union MetricAggregationType {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -318,6 +319,7 @@ union NetAppProvisioningState {
 /**
  * Microsoft.NetApp REST API operation definition.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Operation {
   /**
    * Operation name: {provider}/{resource}/{operation}
@@ -673,6 +675,7 @@ model RegionInfo {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 @clientName("AvailabilityZoneMapping", "csharp")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model RegionInfoAvailabilityZoneMappingsItem {
   /**
    * Logical availability zone.

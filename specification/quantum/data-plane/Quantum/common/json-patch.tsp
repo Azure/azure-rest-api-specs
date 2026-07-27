@@ -54,4 +54,5 @@ model JsonPatchObject {
 
 /** A JSONPatch document as defined by RFC 6902. */
 @removed(QuantumWorkspaceAPIVersion.v2025_09_01_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model JsonPatchDocument is JsonPatchObject[];

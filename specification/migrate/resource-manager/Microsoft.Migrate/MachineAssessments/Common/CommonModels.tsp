@@ -33,6 +33,7 @@ union UltraDiskSupport {
 }
 
 @doc("Error web model class.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Error {
   @doc("Gets the error ID.")
   @visibility(Lifecycle.Read)

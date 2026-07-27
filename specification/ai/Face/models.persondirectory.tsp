@@ -22,6 +22,7 @@ model PersonDirectoryPerson {
 
 @resource("operations")
 @doc("Long running operation resource for person directory.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model OperationResult {
   @key
   @visibility(Lifecycle.Read)

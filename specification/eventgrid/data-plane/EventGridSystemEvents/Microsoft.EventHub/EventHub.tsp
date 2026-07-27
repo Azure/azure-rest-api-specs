@@ -6,6 +6,7 @@ namespace Microsoft.EventGrid.SystemEvents;
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.EventHub.CaptureFileCreated event. */
 @example(MicrosoftEventHubCaptureFileCreatedExample)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model EventHubCaptureFileCreatedEventData {
   /** The path to the capture file. */
   fileUrl: string;

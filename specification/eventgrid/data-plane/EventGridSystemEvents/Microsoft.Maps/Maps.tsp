@@ -7,18 +7,22 @@ namespace Microsoft.EventGrid.SystemEvents;
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Maps.GeofenceEntered event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 @example(MicrosoftMapsGeofenceEnteredExample)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model MapsGeofenceEnteredEventData extends MapsGeofenceEventProperties {}
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Maps.GeofenceExited event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model MapsGeofenceExitedEventData extends MapsGeofenceEventProperties {}
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Maps.GeofenceResult event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 @example(MicrosoftMapsGeofenceResultExample)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model MapsGeofenceResultEventData extends MapsGeofenceEventProperties {}
 
 /** Schema of the Data property of an EventGridEvent for a Geofence event (GeofenceEntered, GeofenceExited, GeofenceResult). */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model MapsGeofenceEventProperties {
   /** Lists of the geometry ID of the geofence which is expired relative to the user time in the request. */
   @visibility(Lifecycle.Read)
@@ -38,6 +42,7 @@ model MapsGeofenceEventProperties {
 }
 
 /** The geofence geometry. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model MapsGeofenceGeometry {
   /** ID of the device. */
   deviceId: string;

@@ -121,6 +121,7 @@ union MessageAttachmentToolDefinition {
 @discriminator("type")
 @doc("An abstract representation of a single item of thread message content.")
 @added(ServiceApiVersions.v2024_02_15_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model MessageContent {
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   @doc("The object type.")

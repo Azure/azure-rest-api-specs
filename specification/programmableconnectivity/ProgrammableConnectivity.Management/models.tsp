@@ -16,6 +16,7 @@ interface Operations extends Azure.ResourceManager.Operations {}
 /**
  * The provisioning state of a resource.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union ProvisioningState {
   /**
    * Resource has been created.

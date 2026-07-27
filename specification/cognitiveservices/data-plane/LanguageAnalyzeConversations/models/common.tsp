@@ -15,6 +15,7 @@ namespace Language.Conversations;
 
 /** Error response. */
 @error
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ErrorResponse is Azure.Core.Foundations.ErrorResponseBase<Error>;
 
 /** The error object. */
@@ -176,12 +177,14 @@ model PreBuiltResult {
 }
 
 /** Represents List of Question Answers. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AnswersResult {
   /** Represents Answer Result list. */
   answers?: Array<KnowledgeBaseAnswer>;
 }
 
 /** Represents knowledge base answer. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model KnowledgeBaseAnswer {
   /** List of questions associated with the answer. */
   questions?: Array<string>;
@@ -211,6 +214,7 @@ model KnowledgeBaseAnswer {
 }
 
 /** Dialog associated with Answer. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model KnowledgeBaseAnswerDialog {
   /** To mark if a prompt is relevant only with a previous question or not. If true, do not include this QnA as search result for queries without context; otherwise, if false, ignores context and includes this QnA in search result. */
   isContextOnly?: boolean;
@@ -221,6 +225,7 @@ model KnowledgeBaseAnswerDialog {
 }
 
 /** Prompt for an answer. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model KnowledgeBaseAnswerPrompt {
   /** Index of the prompt - used in ordering of the prompts. */
   displayOrder?: int32;
@@ -234,6 +239,7 @@ model KnowledgeBaseAnswerPrompt {
 }
 
 /** Answer span object of QnA. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AnswerSpan {
   /** Predicted text of answer span. */
   text?: string;
@@ -302,6 +308,7 @@ model ShortAnswerOptions {
 }
 
 /** Context object with previous QnA's information. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model KnowledgeBaseAnswerContext {
   /** Previous turn top answer result QnA ID. */
   previousQnaId: int32;
@@ -311,6 +318,7 @@ model KnowledgeBaseAnswerContext {
 }
 
 /** filters over knowledge base. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model QueryFilters {
   /** filters over knowledge base. */
   metadataFilter?: MetadataFilter;
@@ -323,6 +331,7 @@ model QueryFilters {
 }
 
 /** Find QnAs that are associated with the given list of metadata. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model MetadataFilter {
   /** List of metadata. */
   metadata?: Array<MetadataRecord>;
@@ -332,6 +341,7 @@ model MetadataFilter {
 }
 
 /** Object to provide the key value pair for each metadata. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model MetadataRecord {
   /** Metadata Key from Metadata dictionary used in the QnA. */
   key: string;
@@ -345,6 +355,7 @@ model SourceFilter is Array<string>;
 
 /** Represents the confidence scores between 0 and 1 across all sentiment classes: positive, neutral, negative. */
 @added(Versions.v2023_04_01)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model SentimentConfidenceScores {
   /** Confidence score for positive sentiment */
   positive: float64;

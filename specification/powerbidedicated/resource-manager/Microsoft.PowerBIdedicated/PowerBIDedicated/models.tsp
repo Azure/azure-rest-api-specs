@@ -27,6 +27,7 @@ union CapacitySkuTier {
 /**
  * The current state of PowerBI Dedicated resource. The state is to indicate more states outside of resource provisioning.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union State {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -211,6 +212,7 @@ model DedicatedCapacityAdministrators {
  * The error object
  */
 @error
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ErrorResponse {
   /**
    * The error object.
@@ -560,6 +562,7 @@ model OperationListResult {
 /**
  * Capacities REST API operation.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Operation {
   /**
    * Operation name: {provider}/{resource}/{operation}.

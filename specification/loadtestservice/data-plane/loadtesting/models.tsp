@@ -288,6 +288,7 @@ union Aggregation {
 }
 
 @doc("Metric unit.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union MetricUnit {
   string,
   @doc("No unit specified.") "NotSpecified",
@@ -995,6 +996,7 @@ model TestRunInsightColumn {
 }
 
 @doc("Error details if there is any failure in load test run")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ErrorDetails {
   @doc("Error code if there is any failure in load test run.")
   @visibility(Lifecycle.Read)
@@ -1186,6 +1188,7 @@ model MetricNamespaceCollection {
 }
 
 @doc("Metric namespace class specifies the metadata for a metric namespace.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model MetricNamespace {
   @doc("The namespace description.")
   description?: string;
@@ -1201,6 +1204,7 @@ model MetricDefinitionCollection {
 }
 
 @doc("Metric definition")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model MetricDefinition {
   @doc("List of dimensions")
   dimensions?: NameAndDescription[];
@@ -1240,6 +1244,7 @@ model NameAndDescription {
 }
 
 @doc("Metric availability specifies the time grain (aggregation interval or frequency)")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model MetricAvailability {
   @doc("""
     The time grain specifies the aggregation interval for the metric. Expressed as
@@ -1282,6 +1287,7 @@ model TimeSeriesElement {
 }
 
 @doc("Represents a metric value.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model MetricValue {
   @doc("The timestamp for the metric value in RFC 3339 format.")
   timestamp?: utcDateTime;

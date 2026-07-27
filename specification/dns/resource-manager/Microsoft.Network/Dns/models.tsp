@@ -607,6 +607,7 @@ model ZoneProperties {
 /**
  * Common properties of an Azure Resource Manager resource
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Resource {
   /**
    * Resource ID.

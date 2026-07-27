@@ -8,6 +8,7 @@ namespace Microsoft.EventGrid.SystemEvents {
 
   /** Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.FhirResourceCreated event. */
   @example(MicrosoftHealthcareApisFhirResourceCreatedExample)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
   model HealthcareFhirResourceCreatedEventData {
     /** Type of HL7 FHIR resource. */
     @madeRequired(ServiceApiVersions.v2024_01_01)
@@ -26,6 +27,7 @@ namespace Microsoft.EventGrid.SystemEvents {
 
   /** Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.FhirResourceUpdated event. */
   @example(MicrosoftHealthcareApisFhirResourceUpdatedExample)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
   model HealthcareFhirResourceUpdatedEventData {
     /** Type of HL7 FHIR resource. */
     @madeRequired(ServiceApiVersions.v2024_01_01)
@@ -44,6 +46,7 @@ namespace Microsoft.EventGrid.SystemEvents {
 
   /** Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.FhirResourceDeleted event. */
   @example(MicrosoftHealthcareApisFhirResourceDeletedExample)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
   model HealthcareFhirResourceDeletedEventData {
     /** Type of HL7 FHIR resource. */
     @madeRequired(ServiceApiVersions.v2024_01_01)
@@ -62,6 +65,7 @@ namespace Microsoft.EventGrid.SystemEvents {
 
   /** Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.DicomImageCreated event. */
   @example(MicrosoftHealthcareApisDicomImageCreatedExample)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
   model HealthcareDicomImageCreatedEventData {
     /** Data partition name */
     partitionName: string;
@@ -85,6 +89,7 @@ namespace Microsoft.EventGrid.SystemEvents {
 
   /** Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.DicomImageDeleted event. */
   @example(MicrosoftHealthcareApisDicomImageDeletedExample)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
   model HealthcareDicomImageDeletedEventData {
     /** Data partition name */
     partitionName: string;
@@ -108,6 +113,7 @@ namespace Microsoft.EventGrid.SystemEvents {
 
   /** Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.DicomImageUpdated event. */
   @example(MicrosoftHealthcareApisDicomImageUpdatedExample)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
   model HealthcareDicomImageUpdatedEventData {
     /** Data partition name */
     partitionName: string;
@@ -130,6 +136,7 @@ namespace Microsoft.EventGrid.SystemEvents {
   }
 
   /** Schema of FHIR resource type enumeration. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
   union HealthcareFhirResourceType {
     /** The FHIR resource type defined in STU3 and R4. */
     "Account",
