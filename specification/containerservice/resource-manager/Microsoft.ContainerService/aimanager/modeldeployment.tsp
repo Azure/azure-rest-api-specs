@@ -28,6 +28,19 @@ scalar AIModelResourceId
     }
   ]>;
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "AIModel is a valid name"
+@added(Versions.v2026_08_02_preview)
+@doc("The ARM resource id of an AIModel.")
+scalar DeployableModelResourceId
+  extends Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ContainerService/aiModels",
+    },
+    {
+      type: "Microsoft.ContainerService/aiManagers/customAIModels",
+    }
+  ]>;
+
 @added(Versions.v2026_05_02_preview)
 @doc("The ARM resource id of a ModelSource.")
 scalar ModelSourceResourceId
@@ -74,7 +87,8 @@ model ModelDeploymentProperties {
     `modelSourceResourceId` recorded on the `CustomAIModel`. Immutable after
     creation.
     """)
-  modelResourceId: AIModelResourceId;
+  @typeChangedFrom(Versions.v2026_08_02_preview, AIModelResourceId)
+  modelResourceId: DeployableModelResourceId;
 
   @visibility(Lifecycle.Create, Lifecycle.Read)
   @doc("Full ARM resource id of a `ModelSource` to use when pulling artifacts for this deployment. Immutable after creation.")

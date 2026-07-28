@@ -49,7 +49,15 @@ model CustomAIModelProperties {
   modelId: string;
 
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  @doc("ARM resource id of the ModelSource to use when pulling artifacts. Required for `MicrosoftFoundry` sources and for gated/private `HuggingFace` repositories; omitted for public models. Immutable after creation.")
+  @doc("""
+    The HuggingFace model identifier of the base model used to train
+    the custom model. This is the upstream `<org>/<repo>` id, e.g.
+    `meta-llama/Llama-2-7b-chat`. Immutable after creation.
+    """)
+  baseModelId: string;
+
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @doc("Azure resource id of the ModelSource to use when pulling artifacts. Required for `MicrosoftFoundry` sources and for gated/private `HuggingFace` repositories; omitted for public models. Immutable after creation.")
   modelSourceResourceId?: ModelSourceResourceId;
 
   @doc("Optional. Free-form description of the model. Mutable via a full-replace PUT.")
@@ -63,20 +71,7 @@ model CustomAIModelProperties {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "AIModel is a valid name"
 @added(Versions.v2026_08_02_preview)
 @doc("Platform-resolved specification of a custom model. Extends `ModelSpec` with custom model-specific metadata. All fields are read-only.")
-model CustomAIModelSpec is ModelSpec {
-  @visibility(Lifecycle.Read)
-  @doc("The model's file size, e.g. `27.31Gi`.")
-  modelFileSize?: string;
-
-  @visibility(Lifecycle.Read)
-  @doc("The model architecture classes, e.g. `[\"Phi3ForCausalLM\", \"LlamaForCausalLM\"]`. Determines compatibility with the underlying LLM runtime.")
-  architectures?: string[];
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Open-ended set of architecture parameters extracted from config.json; the key set varies by model family."
-  @visibility(Lifecycle.Read)
-  @doc("Critical model architecture parameters extracted from config.json. Keys include: hiddenSize, numHiddenLayers, numAttentionHeads, numKeyValueHeads. All values are integers.")
-  architectureParams?: Record<int32>;
-}
+model CustomAIModelSpec is ModelSpec {}
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "AIModel is a valid name"
 @added(Versions.v2026_08_02_preview)
