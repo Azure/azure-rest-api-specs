@@ -289,7 +289,7 @@ namespace Microsoft.Compute;
   "csharp"
 );
 // ARMCOMMON001: avoid redefining the ARM-framework "ResourceType"; use a domain-scoped name.
-@@clientName(ResourceType, "ComputeBulkActionsResourceType", "csharp");
+@@clientName(ResourceType, "ScheduledActionsResourceType", "csharp");
 // ARMCOMMON001: avoid redefining the ARM-framework "SubResource"; use a domain-scoped name.
 @@clientName(SubResource, "ComputeBulkActionsSubResource", "csharp");
 // Contextual naming: "Language" is too generic and collides across packages.
