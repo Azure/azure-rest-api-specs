@@ -72,7 +72,7 @@ model CustomAIModelProperties {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "AIModel is a valid name"
 @added(Versions.v2026_08_02_preview)
 @doc("Platform-resolved specification of a custom model. Extends `ModelSpec` with custom model-specific metadata. All fields are read-only.")
-model CustomAIModelSpec is ModelSpec {}
+model CustomAIModelSpec is ModelSpec;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "AIModel is a valid name"
 @added(Versions.v2026_08_02_preview)
