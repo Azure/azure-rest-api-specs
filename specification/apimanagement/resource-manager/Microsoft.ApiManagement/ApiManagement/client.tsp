@@ -283,6 +283,21 @@ op replacePurge(
   "csharp"
 );
 @@clientName(
+  GatewayHostnameConfigurationContractProperties.tls10Enabled,
+  "IsTls10Enabled",
+  "csharp"
+);
+@@clientName(
+  GatewayHostnameConfigurationContractProperties.tls11Enabled,
+  "IsTls11Enabled",
+  "csharp"
+);
+@@clientName(
+  GatewayHostnameConfigurationContractProperties.http2Enabled,
+  Azure.ClientGenerator.Core.exact("IsHttp2_0Enabled"),
+  "csharp"
+);
+@@clientName(
   ApiManagementServiceBaseProperties.zoneRedundant,
   "IsZoneRedundant",
   "csharp"
@@ -545,6 +560,30 @@ op replacePurge(
 @@clientName(
   GatewayHostnameConfigurationContract,
   "ApiManagementGatewayHostnameConfiguration",
+  "csharp"
+);
+@@clientName(LLMDiagnosticSettings, "LlmDiagnosticSettings", "csharp");
+@@clientName(
+  LLMMessageDiagnosticSettings,
+  "LlmMessageDiagnosticSettings",
+  "csharp"
+);
+@@clientName(KeyVaultFetchCode, "ApiManagementKeyVaultFetchCode", "csharp");
+@@clientName(McpProperties, "ApiManagementMcpProperties", "csharp");
+@@clientName(
+  AuthorizationProviderKeyVaultContract.updated,
+  "UpdatedOn",
+  "csharp"
+);
+@@clientName(GatewayHostnameBindingCertificate.expiry, "ExpireOn", "csharp");
+@@clientName(
+  GatewayHostnameBindingKeyVaultLastStatus.timeStampUtc,
+  "LastAttemptedOn",
+  "csharp"
+);
+@@clientName(
+  GatewayHostnameBindingKeyVaultLastStatus.lastSuccessTimeStampUtc,
+  "LastSucceededOn",
   "csharp"
 );
 @@clientName(IssueAttachmentContract, "ApiIssueAttachment", "csharp");

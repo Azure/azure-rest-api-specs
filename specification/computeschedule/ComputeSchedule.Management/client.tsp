@@ -20,10 +20,14 @@ using TypeSpec.Versioning;
 @@clientName(DelayRequest, "OccurrenceDelayContent", "csharp");
 // [DATE001] DateTimeOffset properties should use an "On"/"At" suffix in C#.
 @@clientName(DelayRequest.delay, "DelayOn", "csharp");
-@@clientName(Language, "NotificationLanguage", "csharp");
+@@clientName(Language, "ComputeScheduleNotificationLanguage", "csharp");
 @@clientName(Month, "ScheduledActionsScheduleMonth", "csharp");
 @@clientName(WeekDay, "ScheduledActionsScheduleWeekDay", "csharp");
-@@clientName(NotificationProperties, "NotificationSettings", "csharp");
+@@clientName(
+  NotificationProperties,
+  "ComputeScheduleNotificationSettings",
+  "csharp"
+);
 @@clientName(NotificationProperties.disabled, "IsDisabled", "csharp");
 
 @@clientName(
@@ -436,13 +440,84 @@ model ResourcePatchRequestInput {
 // =====================================================================
 @@clientName(
   AdditionalCapabilities.ultraSSDEnabled,
-  "UltraSsdEnabled",
+  "IsUltraSsdEnabled",
   "csharp"
 );
-@@clientName(LinuxConfiguration.provisionVMAgent, "ProvisionVmAgent", "csharp");
+@@clientName(
+  AdditionalCapabilities.hibernationEnabled,
+  "IsHibernationEnabled",
+  "csharp"
+);
+@@clientName(
+  BulkActionVmExtensionProperties.autoUpgradeMinorVersion,
+  "IsAutoUpgradeMinorVersion",
+  "csharp"
+);
+@@clientName(
+  BulkActionVmExtensionProperties.suppressFailures,
+  "IsSuppressFailures",
+  "csharp"
+);
+@@clientName(
+  LinuxConfiguration.provisionVMAgent,
+  "IsProvisionVmAgent",
+  "csharp"
+);
 @@clientName(
   WindowsConfiguration.provisionVMAgent,
-  "ProvisionVmAgent",
+  "IsProvisionVmAgent",
+  "csharp"
+);
+@@clientName(
+  LinuxVMGuestPatchAutomaticByPlatformSettings.bypassPlatformSafetyChecksOnUserSchedule,
+  "IsBypassPlatformSafetyChecksOnUserSchedule",
+  "csharp"
+);
+@@clientName(
+  WindowsVMGuestPatchAutomaticByPlatformSettings.bypassPlatformSafetyChecksOnUserSchedule,
+  "IsBypassPlatformSafetyChecksOnUserSchedule",
+  "csharp"
+);
+@@clientName(
+  ProxyAgentSettings.addProxyAgentExtension,
+  "IsAddProxyAgentExtension",
+  "csharp"
+);
+@@clientName(SecurityProfile.encryptionAtHost, "IsEncryptionAtHost", "csharp");
+@@clientName(DataDisk.toBeDetached, "IsToBeDetached", "csharp");
+@@clientName(
+  DataDisk.writeAcceleratorEnabled,
+  "IsWriteAcceleratorEnabled",
+  "csharp"
+);
+@@clientName(
+  NetworkInterfaceReferenceProperties.primary,
+  "IsPrimary",
+  "csharp"
+);
+@@clientName(
+  VirtualMachineNetworkInterfaceConfigurationProperties.primary,
+  "IsPrimary",
+  "csharp"
+);
+@@clientName(
+  VirtualMachineNetworkInterfaceIPConfigurationProperties.primary,
+  "IsPrimary",
+  "csharp"
+);
+@@clientName(
+  OSDisk.writeAcceleratorEnabled,
+  "IsWriteAcceleratorEnabled",
+  "csharp"
+);
+@@clientName(
+  OSProfile.requireGuestProvisionSignal,
+  "IsRequireGuestProvisionSignal",
+  "csharp"
+);
+@@clientName(
+  VMGalleryApplication.treatFailureAsDeploymentFailure,
+  "IsTreatFailureAsDeploymentFailure",
   "csharp"
 );
 @@clientName(UefiSettings.secureBootEnabled, "IsSecureBootEnabled", "csharp");
@@ -478,6 +553,11 @@ model ResourcePatchRequestInput {
 
 // ARM Resource IDs -> ResourceIdentifier
 @@alternateType(SubResource.id, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(
+  EncryptionIdentity.userAssignedIdentityResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
 
 // String URIs -> System.Uri
 @@alternateType(VirtualHardDisk.uri, url, "csharp");
@@ -488,40 +568,84 @@ model ResourcePatchRequestInput {
 @@alternateType(VaultCertificate.certificateUrl, url, "csharp");
 
 // =====================================================================
-// C# type renames: Prefix core VM types with "VirtualMachine" to match
-// Azure.ResourceManager.Compute SDK naming conventions
+// C# type renames: Prefix VM types with the service name to avoid
+// collisions with Azure.ResourceManager.Compute.
 // =====================================================================
-@@clientName(OSDisk, "VirtualMachineOSDisk", "csharp");
-@@clientName(OSProfile, "VirtualMachineOSProfile", "csharp");
-@@clientName(DataDisk, "VirtualMachineDataDisk", "csharp");
-@@clientName(NetworkProfile, "VirtualMachineNetworkProfile", "csharp");
-@@clientName(StorageProfile, "VirtualMachineStorageProfile", "csharp");
-@@clientName(HardwareProfile, "VirtualMachineHardwareProfile", "csharp");
-@@clientName(VmSizeProperties, "VirtualMachineSizeProperties", "csharp");
+@@clientName(OSDisk, "ComputeScheduleVirtualMachineOSDisk", "csharp");
+@@clientName(OSProfile, "ComputeScheduleVirtualMachineOSProfile", "csharp");
+@@clientName(DataDisk, "ComputeScheduleVirtualMachineDataDisk", "csharp");
+@@clientName(NetworkProfile, "ComputeScheduleVirtualMachineNetworkProfile", "csharp");
+@@clientName(StorageProfile, "ComputeScheduleVirtualMachineStorageProfile", "csharp");
+@@clientName(HardwareProfile, "ComputeScheduleVirtualMachineHardwareProfile", "csharp");
+@@clientName(VmSizeProperties, "ComputeScheduleVirtualMachineSizeProperties", "csharp");
 @@clientName(
   NetworkInterfaceReference,
-  "VirtualMachineNetworkInterfaceReference",
+  "ComputeScheduleVirtualMachineNetworkInterfaceReference",
+  "csharp"
+);
+@@clientName(
+  NetworkInterfaceReferenceProperties,
+  "ComputeScheduleVirtualMachineNetworkInterfaceReferenceProperties",
+  "csharp"
+);
+@@clientName(
+  VirtualMachineNetworkInterfaceConfiguration,
+  "ComputeScheduleVirtualMachineNetworkInterfaceConfiguration",
+  "csharp"
+);
+@@clientName(
+  VirtualMachineNetworkInterfaceConfigurationProperties,
+  "ComputeScheduleVirtualMachineNetworkInterfaceConfigurationProperties",
+  "csharp"
+);
+@@clientName(
+  VirtualMachineNetworkInterfaceIPConfiguration,
+  "ComputeScheduleVirtualMachineNetworkInterfaceIPConfiguration",
+  "csharp"
+);
+@@clientName(
+  VirtualMachineNetworkInterfaceIPConfigurationProperties,
+  "ComputeScheduleVirtualMachineNetworkInterfaceIPConfigurationProperties",
+  "csharp"
+);
+@@clientName(
+  VirtualMachinePublicIPAddressConfiguration,
+  "ComputeScheduleVirtualMachinePublicIPAddressConfiguration",
+  "csharp"
+);
+@@clientName(
+  VirtualMachinePublicIPAddressConfigurationProperties,
+  "ComputeScheduleVirtualMachinePublicIPAddressConfigurationProperties",
+  "csharp"
+);
+@@clientName(
+  VirtualMachinePublicIPAddressDnsSettingsConfiguration,
+  "ComputeScheduleVirtualMachinePublicIPAddressDnsSettingsConfiguration",
+  "csharp"
+);
+@@clientName(
+  VirtualMachineIpTag,
+  "ComputeScheduleVirtualMachineIpTag",
   "csharp"
 );
 
 // =====================================================================
-// C# type renames: Match Compute SDK type names
+// C# type renames: Add service and feature context
 // =====================================================================
-@@clientName(SshPublicKey, "SshPublicKeyConfiguration", "csharp");
+@@clientName(
+  SshPublicKey,
+  "ComputeScheduleSshPublicKeyConfiguration",
+  "csharp"
+);
 @@clientName(
   BulkActionVMProperties,
-  "BulkActionVirtualMachineProperties",
+  "ComputeScheduleBulkActionVirtualMachineProperties",
   "csharp"
 );
 @@clientName(BulkActionVMExtension, "BulkActionVmExtension", "csharp");
 @@clientName(
   BulkActionVmExtensionProperties,
-  "BulkActionVirtualMachineExtensionProperties",
-  "csharp"
-);
-@@clientName(
-  NetworkInterfaceReferenceProperties,
-  "VirtualMachineNetworkInterfaceReferenceProperties",
+  "ComputeScheduleBulkActionVirtualMachineExtensionProperties",
   "csharp"
 );
 @@clientName(
@@ -535,19 +659,190 @@ model ResourcePatchRequestInput {
 // =====================================================================
 // C# enum renames: Singular names to match Compute SDK conventions
 // =====================================================================
-@@clientName(CachingTypes, "CachingType", "csharp");
-@@clientName(SecurityTypes, "SecurityType", "csharp");
-@@clientName(OperatingSystemTypes, "OperatingSystemType", "csharp");
-@@clientName(DiskControllerTypes, "DiskControllerType", "csharp");
-@@clientName(DiskCreateOptionTypes, "DiskCreateOptionType", "csharp");
-@@clientName(DiskDeleteOptionTypes, "DiskDeleteOptionType", "csharp");
-@@clientName(DiskDetachOptionTypes, "DiskDetachOptionType", "csharp");
-@@clientName(IPVersions, "IPVersion", "csharp");
-@@clientName(ProtocolTypes, "WinRMListenerProtocolType", "csharp");
-@@clientName(DomainNameLabelScopeTypes, "DomainNameLabelScopeType", "csharp");
-@@clientName(SecurityEncryptionTypes, "SecurityEncryptionType", "csharp");
-@@clientName(StorageAccountTypes, "StorageAccountType", "csharp");
-@@clientName(SettingNames, "SettingName", "csharp");
+@@clientName(CachingTypes, "ComputeScheduleCachingType", "csharp");
+@@clientName(SecurityTypes, "ComputeScheduleSecurityType", "csharp");
+@@clientName(
+  OperatingSystemTypes,
+  "ComputeScheduleOperatingSystemType",
+  "csharp"
+);
+@@clientName(
+  DiskControllerTypes,
+  "ComputeScheduleDiskControllerType",
+  "csharp"
+);
+@@clientName(
+  DiskCreateOptionTypes,
+  "ComputeScheduleDiskCreateOptionType",
+  "csharp"
+);
+@@clientName(
+  DiskDeleteOptionTypes,
+  "ComputeScheduleDiskDeleteOptionType",
+  "csharp"
+);
+@@clientName(
+  DiskDetachOptionTypes,
+  "ComputeScheduleDiskDetachOptionType",
+  "csharp"
+);
+@@clientName(IPVersions, "ComputeScheduleIPVersion", "csharp");
+@@clientName(
+  ProtocolTypes,
+  "ComputeScheduleWinRMListenerProtocolType",
+  "csharp"
+);
+@@clientName(
+  DomainNameLabelScopeTypes,
+  "ComputeScheduleDomainNameLabelScopeType",
+  "csharp"
+);
+@@clientName(
+  SecurityEncryptionTypes,
+  "ComputeScheduleSecurityEncryptionType",
+  "csharp"
+);
+@@clientName(
+  StorageAccountTypes,
+  "ComputeScheduleStorageAccountType",
+  "csharp"
+);
+@@clientName(SettingNames, "ComputeScheduleSettingName", "csharp");
+
+// =====================================================================
+// C# contextual type names: distinguish ComputeSchedule VM payload
+// models from similarly named Azure.ResourceManager.Compute models.
+// =====================================================================
+@@clientName(Mode, "ComputeScheduleMode", "csharp");
+@@clientName(SubResource, "ComputeScheduleSubResourceInfo", "csharp");
+@@clientName(SecurityProfile, "ComputeScheduleSecurityProfile", "csharp");
+@@clientName(
+  AdditionalUnattendContent,
+  "ComputeScheduleAdditionalUnattendContent",
+  "csharp"
+);
+@@clientName(PatchSettings, "ComputeSchedulePatchSettings", "csharp");
+@@clientName(
+  LinuxPatchAssessmentMode,
+  "ComputeScheduleLinuxPatchAssessmentMode",
+  "csharp"
+);
+@@clientName(
+  WindowsPatchAssessmentMode,
+  "ComputeScheduleWindowsPatchAssessmentMode",
+  "csharp"
+);
+@@clientName(
+  PublicIPAddressSku,
+  "ComputeSchedulePublicIPAddressSku",
+  "csharp"
+);
+@@clientName(
+  PublicIPAddressSkuName,
+  "ComputeSchedulePublicIPAddressSkuName",
+  "csharp"
+);
+@@clientName(
+  PublicIPAddressSkuTier,
+  "ComputeSchedulePublicIPAddressSkuTier",
+  "csharp"
+);
+@@clientName(
+  PublicIPAllocationMethod,
+  "ComputeSchedulePublicIPAllocationMethod",
+  "csharp"
+);
+@@clientName(NetworkApiVersion, "ComputeScheduleNetworkApiVersion", "csharp");
+@@clientName(
+  NetworkInterfaceAuxiliaryMode,
+  "ComputeScheduleNetworkInterfaceAuxiliaryMode",
+  "csharp"
+);
+@@clientName(
+  NetworkInterfaceAuxiliarySku,
+  "ComputeScheduleNetworkInterfaceAuxiliarySku",
+  "csharp"
+);
+@@clientName(
+  ScheduledEventsPolicy,
+  "ComputeScheduleScheduledEventsPolicy",
+  "csharp"
+);
+@@clientName(
+  ScheduledEventsProfile,
+  "ComputeScheduleScheduledEventsProfile",
+  "csharp"
+);
+@@clientName(
+  TerminateNotificationProfile,
+  "ComputeScheduleTerminateNotificationProfile",
+  "csharp"
+);
+@@clientName(ProxyAgentSettings, "ComputeScheduleProxyAgentSettings", "csharp");
+@@clientName(DeleteOptions, "ComputeScheduleDeleteConfig", "csharp");
+@@clientName(DiffDiskOptions, "ComputeScheduleDiffDiskConfig", "csharp");
+@@clientName(NotificationType, "ComputeScheduleNotificationType", "csharp");
+@@clientName(
+  ResourceResultSummary,
+  "ComputeScheduleResourceResultSummary",
+  "csharp"
+);
+@@clientName(
+  ZonePlacementPolicyType,
+  "ComputeScheduleZonePlacementPolicyType",
+  "csharp"
+);
+@@clientName(
+  AdditionalCapabilities,
+  "ComputeScheduleAdditionalCapabilities",
+  "csharp"
+);
+@@clientName(BootDiagnostics, "ComputeScheduleBootDiagnostics", "csharp");
+@@clientName(ImageReference, "ComputeScheduleImageReference", "csharp");
+@@clientName(Placement, "ComputeSchedulePlacement", "csharp");
+@@clientName(DiffDiskSettings, "ComputeScheduleDiffDiskSettings", "csharp");
+@@clientName(DiffDiskPlacement, "ComputeScheduleDiffDiskPlacement", "csharp");
+@@clientName(
+  DiskEncryptionSettings,
+  "ComputeScheduleDiskEncryptionSettings",
+  "csharp"
+);
+@@clientName(
+  EventGridAndResourceGraph,
+  "ComputeScheduleEventGridAndResourceGraph",
+  "csharp"
+);
+@@clientName(
+  HostEndpointSettings,
+  "ComputeScheduleHostEndpointSettings",
+  "csharp"
+);
+@@clientName(
+  KeyVaultKeyReference,
+  "ComputeScheduleKeyVaultKeyReference",
+  "csharp"
+);
+@@clientName(
+  KeyVaultSecretReference,
+  "ComputeScheduleKeyVaultSecretReference",
+  "csharp"
+);
+@@clientName(LinuxConfiguration, "ComputeScheduleLinuxConfiguration", "csharp");
+@@clientName(LinuxPatchSettings, "ComputeScheduleLinuxPatchSettings", "csharp");
+@@clientName(
+  OSImageNotificationProfile,
+  "ComputeScheduleOSImageNotificationProfile",
+  "csharp"
+);
+@@clientName(UefiSettings, "ComputeScheduleUefiSettings", "csharp");
+@@clientName(VaultCertificate, "ComputeScheduleVaultCertificate", "csharp");
+@@clientName(VaultSecretGroup, "ComputeScheduleVaultSecretGroup", "csharp");
+@@clientName(
+  WindowsConfiguration,
+  "ComputeScheduleWindowsConfiguration",
+  "csharp"
+);
+@@clientName(WinRMListener, "ComputeScheduleWinRMListener", "csharp");
 
 // =====================================================================
 // C# property renames: Match Compute SDK property names
@@ -604,34 +899,48 @@ namespace Azure.ResourceManager.Models {
 // .NET Framework Design Guidelines for two-letter acronyms in compound
 // identifiers). Aligns with Azure.ResourceManager.Compute SDK naming.
 // =====================================================================
-@@clientName(BulkVMConfiguration, "BulkVmConfiguration", "csharp");
-@@clientName(VMGalleryApplication, "VmGalleryApplication", "csharp");
-@@clientName(LinuxVMGuestPatchMode, "LinuxVmGuestPatchMode", "csharp");
+@@clientName(
+  BulkVMConfiguration,
+  "ComputeScheduleBulkVmConfiguration",
+  "csharp"
+);
+@@clientName(
+  VMGalleryApplication,
+  "ComputeScheduleVmGalleryApplication",
+  "csharp"
+);
+@@clientName(
+  LinuxVMGuestPatchMode,
+  "ComputeScheduleLinuxVmGuestPatchMode",
+  "csharp"
+);
 @@clientName(
   LinuxVMGuestPatchAutomaticByPlatformSettings,
-  "LinuxVmGuestPatchAutomaticByPlatformSettings",
+  "ComputeScheduleLinuxVmGuestPatchAutomaticByPlatformSettings",
   "csharp"
 );
 @@clientName(
   LinuxVMGuestPatchAutomaticByPlatformRebootSetting,
-  "LinuxVmGuestPatchAutomaticByPlatformRebootSetting",
+  "ComputeScheduleLinuxVmGuestPatchAutomaticByPlatformRebootSetting",
   "csharp"
 );
-@@clientName(WindowsVMGuestPatchMode, "WindowsVmGuestPatchMode", "csharp");
+@@clientName(
+  WindowsVMGuestPatchMode,
+  "ComputeScheduleWindowsVmGuestPatchMode",
+  "csharp"
+);
 @@clientName(
   WindowsVMGuestPatchAutomaticByPlatformSettings,
-  "WindowsVmGuestPatchAutomaticByPlatformSettings",
+  "ComputeScheduleWindowsVmGuestPatchAutomaticByPlatformSettings",
   "csharp"
 );
 @@clientName(
   WindowsVMGuestPatchAutomaticByPlatformRebootSetting,
-  "WindowsVmGuestPatchAutomaticByPlatformRebootSetting",
+  "ComputeScheduleWindowsVmGuestPatchAutomaticByPlatformRebootSetting",
   "csharp"
 );
-// VMDiskSecurityProfile -> VirtualMachineDiskSecurityProfile to match the
-// type name used by Azure.ResourceManager.Compute.
 @@clientName(
   VMDiskSecurityProfile,
-  "VirtualMachineDiskSecurityProfile",
+  "ComputeScheduleVirtualMachineDiskSecurityProfile",
   "csharp"
 );
