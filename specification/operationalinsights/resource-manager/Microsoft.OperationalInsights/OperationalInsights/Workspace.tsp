@@ -382,9 +382,13 @@ interface Workspaces {
    */
   @tag("Workspaces")
   @autoRoute
+  @returnTypeChangedFrom(
+    Versions.v2026_03_01,
+    ArmResponse<WorkspacePurgeStatusResponse> | ErrorResponse
+  )
   getPurgeStatus is PurgeOps.Read<
     Workspace,
-    Response = ArmResponse<WorkspacePurgeStatusResponse>
+    Response = ArmResponse<Azure.ResourceManager.CommonTypes.OperationStatusResult>
   >;
 
   /**
@@ -392,20 +396,14 @@ interface Workspaces {
    *
    * This operation deletes data lake data (Auxiliary tables, or Analytics tables mirrored to the data lake) for the specified table within the given time range. The operation is long-running; poll the URL returned in the Azure-AsyncOperation response header to track its status.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "The service returns the operationId in the 202 response body so callers can correlate the asynchronous purge operation."
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "The service tracks the operation via the Azure-AsyncOperation header only; it does not return a Location header."
   @added(Versions.v2026_03_01)
   @tag("Workspaces")
   @autoRoute
-  @Azure.Core.useFinalStateVia("azure-async-operation")
   purgeLakeData is ArmResourceActionAsyncBase<
     Workspace,
     WorkspacePurgeLakeDataBody,
-    ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = void> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: WorkspacePurgeResponse;
-    },
+    ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Workspace>
   >;
 

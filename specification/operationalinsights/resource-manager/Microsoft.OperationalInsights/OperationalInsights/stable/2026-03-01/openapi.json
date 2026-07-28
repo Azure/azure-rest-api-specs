@@ -3379,7 +3379,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/WorkspacePurgeStatusResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
             }
           },
           "default": {
@@ -3502,14 +3502,16 @@
         ],
         "responses": {
           "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "schema": {
-              "$ref": "#/definitions/WorkspacePurgeResponse"
-            },
+            "description": "Resource operation accepted.",
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -3531,7 +3533,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -6983,30 +6985,6 @@
         ]
       }
     },
-    "PurgeState": {
-      "type": "string",
-      "description": "Status of the operation represented by the requested Id.",
-      "enum": [
-        "pending",
-        "completed"
-      ],
-      "x-ms-enum": {
-        "name": "PurgeState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "pending",
-            "value": "pending",
-            "description": "pending"
-          },
-          {
-            "name": "completed",
-            "value": "completed",
-            "description": "completed"
-          }
-        ]
-      }
-    },
     "RestoredLogs": {
       "type": "object",
       "description": "Restore parameters.",
@@ -8814,19 +8792,6 @@
       },
       "required": [
         "operationId"
-      ]
-    },
-    "WorkspacePurgeStatusResponse": {
-      "type": "object",
-      "description": "Response containing status for a specific purge operation.",
-      "properties": {
-        "status": {
-          "$ref": "#/definitions/PurgeState",
-          "description": "Status of the operation represented by the requested Id."
-        }
-      },
-      "required": [
-        "status"
       ]
     },
     "WorkspaceReplicationProperties": {
