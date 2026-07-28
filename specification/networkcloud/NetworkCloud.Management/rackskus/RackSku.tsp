@@ -11,13 +11,12 @@ namespace Microsoft.NetworkCloud;
  * The name of the rack SKU.
  */
 @subscriptionResource
-model RackSkuNameParameter
-  is ResourceNameParameter<
-    Resource = RackSku,
-    KeyName = "rackSkuName",
-    SegmentName = "rackSkus",
-    NamePattern = "^([a-zA-Z0-9][a-zA-Z0-9-_]{0,126}[a-zA-Z0-9])$"
-  >;
+model RackSkuNameParameter is ResourceNameParameter<
+  Resource = RackSku,
+  KeyName = "rackSkuName",
+  SegmentName = "rackSkus",
+  NamePattern = "^([a-zA-Z0-9][a-zA-Z0-9-_]{0,126}[a-zA-Z0-9])$"
+>;
 
 /**
  * RackSku represents the SKU information of the rack.

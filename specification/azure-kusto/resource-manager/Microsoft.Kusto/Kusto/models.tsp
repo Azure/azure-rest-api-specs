@@ -2703,6 +2703,7 @@ model ScriptProperties {
   /**
    * The url to the KQL script blob file. Must not be used together with scriptContent property
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   scriptUrl?: string;
 
   /**

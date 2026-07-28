@@ -22,6 +22,9 @@ models and views consumed from `tspconfig.yaml` files in this repo.
   such as:
   - `@azure-tools/openai-typespec/models/...`
   - `@azure-tools/openai-typespec/views/client-emitters/...`
+- In this environment, npm may be configured with `min-release-age=7` in
+  the global npm config at `C:\nvm4w\nodejs\etc\npmrc`. This blocks
+  same-day package versions unless the lock file already pins them.
 
 ## Required Update Rule
 
@@ -46,6 +49,16 @@ OpenAI definition package.
 2. **Update with an exact install** using `npm i
 @azure-tools/openai-typespec --save-exact` (or append `@<version>` if
    the user specified a version).
+   - If npm fails with an age-gate error like `No matching version found
+for @azure-tools/openai-typespec@1.21.1 with a date before
+2026-06-30, 10:37:15 a.m.`, check `npm config get min-release-age`
+     and the global npm config path with `npm config get globalconfig`.
+   - For a targeted install of a known-published version blocked only by
+     this age gate, rerun the exact install with `--min-release-age=0`,
+     for example:
+     ```powershell
+     npm i @azure-tools/openai-typespec@<version> --save-exact --min-release-age=0
+     ```
 3. **Check the resulting version spec** in `package.json`.
    - If the dependency value contains a caret (`^`), warn the user that
      the package is not pinned exactly and should be changed to an exact

@@ -1284,7 +1284,7 @@ model ResponseCreateParams {
   @added(Versions.v2026_04_10)
   interim_response?: InterimResponseConfig;
 
-  /** Input data to invoke the hosted agent. This feature is in preview. */
+  /** Input data to invoke the hosted agent. */
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "Opaque passthrough: values are user-provided input forwarded to the hosted agent, whose schema is not defined by this API."
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Opaque passthrough JSON from hosted agent; values are not limited to strings."
   @added(Versions.v2026_06_01_preview)
@@ -1773,6 +1773,7 @@ model ClientEventOutputAudioBufferClear extends ClientEvent {
 /** Sent by the client to initiate a WebRTC session with an SDP offer. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // snake_case to remain close to OpenAI style.
 @added(Versions.v2026_06_01_preview)
+@removed(Versions.v2026_07_15)
 @usage(RequestUsage)
 model ClientEventRtcCallSdpCreate extends ClientEvent {
   /** The event type, must be `rtc.call.sdp.create`. */
@@ -1788,6 +1789,7 @@ model ClientEventRtcCallSdpCreate extends ClientEvent {
 /** Returned when the WebRTC SDP negotiation completes successfully. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // snake_case to remain close to OpenAI style.
 @added(Versions.v2026_06_01_preview)
+@removed(Versions.v2026_07_15)
 @usage(ResponseUsage)
 model ServerEventRtcCallSdpCreated extends ServerEvent {
   /** The event type, must be `rtc.call.sdp.created`. */
@@ -1805,6 +1807,7 @@ model ServerEventRtcCallSdpCreated extends ServerEvent {
 /** Error details for RTC call errors. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // snake_case to remain close to OpenAI style.
 @added(Versions.v2026_06_01_preview)
+@removed(Versions.v2026_07_15)
 @usage(ResponseUsage)
 model RtcCallErrorDetails {
   /** The error category: `invalid_request_error` or `server_error`. */
@@ -1820,6 +1823,7 @@ model RtcCallErrorDetails {
 /** Returned when a WebRTC call operation fails. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // snake_case to remain close to OpenAI style.
 @added(Versions.v2026_06_01_preview)
+@removed(Versions.v2026_07_15)
 @usage(ResponseUsage)
 model ServerEventRtcCallError extends ServerEvent {
   /** The event type, must be `rtc.call.error`. */
@@ -1840,6 +1844,7 @@ model ServerEventRtcCallError extends ServerEvent {
 /** Returned when model audio output starts playing. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // snake_case to remain close to OpenAI style.
 @added(Versions.v2026_06_01_preview)
+@removed(Versions.v2026_07_15)
 @usage(ResponseUsage)
 model ServerEventOutputAudioBufferStarted extends ServerEvent {
   /** The event type, must be `output_audio_buffer.started`. */
@@ -1852,6 +1857,7 @@ model ServerEventOutputAudioBufferStarted extends ServerEvent {
 /** Returned when model audio output finishes playing. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // snake_case to remain close to OpenAI style.
 @added(Versions.v2026_06_01_preview)
+@removed(Versions.v2026_07_15)
 @usage(ResponseUsage)
 model ServerEventOutputAudioBufferStopped extends ServerEvent {
   /** The event type, must be `output_audio_buffer.stopped`. */

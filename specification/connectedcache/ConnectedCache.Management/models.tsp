@@ -107,6 +107,14 @@ union autoUpdateRingType {
 
   /** customer selection of fast / auto update to install mcc on their physical vm */
   Fast: "Fast",
+
+  /** customer selection of stable update to install mcc on their physical vm */
+  @added(Versions.v2026_06_01)
+  Stable: "Stable",
+
+  /** customer selection of beta update to install mcc on their physical vm */
+  @added(Versions.v2026_06_01)
+  Beta: "Beta",
 }
 
 @doc("Update Cycle type")
@@ -512,6 +520,10 @@ model CacheNodeEntity {
   @visibility(Lifecycle.Read)
   cidrCsvLastUpdateTime?: utcDateTime;
 
+  @added(Versions.v2026_06_01)
+  @doc("Cache node resource Bgp network interface.")
+  bgpNetworkInterface?: string;
+
   @doc("Cache node resource last Bgp Cidr Csv update timestamp")
   @visibility(Lifecycle.Read)
   bgpCidrCsvLastUpdateTime?: utcDateTime;
@@ -605,7 +617,7 @@ model CacheNodeEntity {
   @doc("FQDN(fully qualified domain name) value of the mcc cache node")
   fullyQualifiedDomainName?: string;
 
-  @doc("Auto Update Ring Type which is slow or fast etc.")
+  @doc("Auto Update Ring Type which is stable or beta as new values. slow or fast are legacy from version 2026-06-01.")
   autoUpdateRingType?: autoUpdateRingType;
 
   @doc("Customer requested week of month for mcc install of auto update cycle. 0 is default no selection. 1-5 are valid weeks of month, 1 is first week, 2 is second week, etc.")
@@ -621,6 +633,26 @@ model CacheNodeEntity {
   @doc("Customer requested time of the day for mcc install of auto update cycle, should be hh:mm")
   @pattern("^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$")
   autoUpdateRequestedTime?: string;
+
+  @added(Versions.v2026_06_01)
+  @doc("Cache node port firewall rule creation opt-in for port 80 property")
+  openFirewallPort80?: boolean;
+
+  @added(Versions.v2026_06_01)
+  @doc("Cache node port firewall rule creation opt-in for port 443 property")
+  openFirewallPort443?: boolean;
+
+  @added(Versions.v2026_06_01)
+  @doc("Cache node port firewall rule creation opt-in for port 5000 property")
+  openFirewallPort5000?: boolean;
+
+  @added(Versions.v2026_06_01)
+  @doc("Cache node port firewall rule creation opt-in for port 5001 property")
+  openFirewallPort5001?: boolean;
+
+  @added(Versions.v2026_06_01)
+  @doc("Connected Cache runtime account type")
+  runtimeAccountType?: string;
 }
 
 @doc("Model representing cache node for connected cache resource")
@@ -691,6 +723,7 @@ model AdditionalCacheNodeProperties {
   @doc("proxyUrl configuration of the cache node")
   proxyUrlConfiguration?: ProxyUrlConfiguration;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("Cache node resource Mcc proxy Url")
   @removed(Versions.v2024_11_30_preview)
   proxyUrl?: string;
@@ -753,6 +786,66 @@ model AdditionalCacheNodeProperties {
   @visibility(Lifecycle.Read)
   tlsStatus?: string;
 
+  @added(Versions.v2026_06_01)
+  @doc("Operating system edition of the cache node host machine")
+  @visibility(Lifecycle.Read)
+  hostOsEdition?: string;
+
+  @added(Versions.v2026_06_01)
+  @doc("Operating system version of the cache node host machine")
+  @visibility(Lifecycle.Read)
+  hostOsVersion?: string;
+
+  @added(Versions.v2026_06_01)
+  @doc("Operating system build of the cache node host machine")
+  @visibility(Lifecycle.Read)
+  hostOsBuild?: string;
+
+  @added(Versions.v2026_06_01)
+  @doc("Operating system edition of the WSL Linux distribution used to run the cache node on Windows host machines")
+  @visibility(Lifecycle.Read)
+  distroOsEditionWsl?: string;
+
+  @added(Versions.v2026_06_01)
+  @doc("Operating system version of the WSL Linux distribution used to run the cache node on Windows host machines")
+  @visibility(Lifecycle.Read)
+  distroOsVersionWsl?: string;
+
+  @added(Versions.v2026_06_01)
+  @doc("Operating system build of the WSL Linux distribution used to run the cache node on Windows host machines")
+  @visibility(Lifecycle.Read)
+  distroOsBuildWsl?: string;
+
+  @added(Versions.v2026_06_01)
+  @doc("Operating system edition of container used to run the cache node")
+  @visibility(Lifecycle.Read)
+  containerOsEdition?: string;
+
+  @added(Versions.v2026_06_01)
+  @doc("Operating system version of the container used to run the cache node")
+  @visibility(Lifecycle.Read)
+  containerOsVersion?: string;
+
+  @added(Versions.v2026_06_01)
+  @doc("Operating system build of the container used to run the cache node")
+  @visibility(Lifecycle.Read)
+  containerOsBuild?: string;
+
+  @added(Versions.v2026_06_01)
+  @doc("Version of the Windows deployment application used to deploy the cache node")
+  @visibility(Lifecycle.Read)
+  installVersionMsix?: string;
+
+  @added(Versions.v2026_06_01)
+  @doc("Version of the installation scripts used to deploy the cache node")
+  @visibility(Lifecycle.Read)
+  installVersionScript?: string;
+
+  @added(Versions.v2026_06_01)
+  @doc("Version of the Windows Subsystem for Linux application version used to run the cache node on the Windows host machine")
+  @visibility(Lifecycle.Read)
+  appVersionWsl?: string;
+
   @doc("Optional property #1 of Mcc response object")
   optionalProperty1?: string;
 
@@ -794,6 +887,7 @@ model BgpConfiguration {
 
 @doc("ProxyUrl configuration of cache node")
 model ProxyUrlConfiguration {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("Host Proxy Address configuration along with port number. This can be a proxy or ip address. ex: xx.xx.xx.xxxx:80 or host name http://exampleproxy.com:80")
   proxyUrl?: string;
 }
@@ -854,6 +948,7 @@ model CacheNodeInstallProperties {
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
   @added(Versions.v2024_11_30_preview)
   @doc("Cache node resource drive configurations.")
+  @Azure.ResourceManager.identifiers(#[])
   driveConfiguration?: CacheNodeDriveConfiguration[];
 
   @added(Versions.v2024_11_30_preview)
@@ -883,6 +978,7 @@ model MccCacheNodeAutoUpdateHistoryProperties {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
   @doc("Cache node resource auto update history information.")
+  @Azure.ResourceManager.identifiers(#[])
   autoUpdateHistory?: MccCacheNodeAutoUpdateInfo[];
 }
 
@@ -980,6 +1076,7 @@ model MccCacheNodeIssueHistoryProperties {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
   @doc("Cache node resource issue details history.")
+  @Azure.ResourceManager.identifiers(#[])
   mccIssueHistory?: MccIssue[];
 }
 
@@ -1033,6 +1130,7 @@ model MccCacheNodeTlsCertificateProperties {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
   @doc("Cache node resource tls certificate history details.")
+  @Azure.ResourceManager.identifiers(#[])
   tlsCertificateHistory?: MccCacheNodeTlsCertificate[];
 }
 
@@ -1046,6 +1144,11 @@ model MccCacheNodeTlsCertificate {
   @doc("Mcc cache node Tls certificate file name.")
   @visibility(Lifecycle.Read)
   certificateFileName?: string;
+
+  @added(Versions.v2026_06_01)
+  @doc("Mcc cache node Tls certificate Type.")
+  @visibility(Lifecycle.Read)
+  certType?: string;
 
   @doc("Mcc cache node Tls certificate thumbprint.")
   @visibility(Lifecycle.Read)

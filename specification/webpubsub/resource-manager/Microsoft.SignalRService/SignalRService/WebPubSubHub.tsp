@@ -13,8 +13,10 @@ namespace Microsoft.SignalRService;
  * A hub setting
  */
 @parentResource(WebPubSubResource)
-model WebPubSubHub
-  is Azure.ResourceManager.ProxyResource<WebPubSubHubProperties, false> {
+model WebPubSubHub is Azure.ResourceManager.ProxyResource<
+  WebPubSubHubProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = WebPubSubHub,
     KeyName = "hubName",
