@@ -1026,7 +1026,7 @@ model NvidiaGPUProfile {
    * Kubernetes device plugin. DRA installs the NVIDIA DRA driver.
    */
   @added(Versions.v2026_06_02_preview)
-  driverMode?: NvidiaDriverMode = #"DevicePlugin";
+  driverMode?: NvidiaDriverMode = NvidiaDriverMode.DevicePlugin;
 
   /**
    * Sets the MIG (Multi-Instance GPU) strategy that will be used for managed MIG support. For more information about the different strategies, visit aka.ms/aks/managed-gpu. When not specified, the default is None.
