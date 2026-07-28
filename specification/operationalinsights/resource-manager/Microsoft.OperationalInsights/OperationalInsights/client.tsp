@@ -136,6 +136,17 @@ using Microsoft.OperationalInsights;
   "SummaryLogsProvisioningState",
   "java,python"
 );
+@@clientName(SummaryLogsProperties.ruleType, "SummaryLogsRuleType", "csharp");
+@@clientName(
+  SummaryLogsProperties.statusCode,
+  "SummaryLogsStatusCode",
+  "csharp"
+);
+@@clientName(
+  SummaryLogsProperties.provisioningState,
+  "SummaryLogsProvisioningState",
+  "csharp"
+);
 @@clientName(
   OperationalInsightsTableProvisioningState,
   "ProvisioningStateEnum",
