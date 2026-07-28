@@ -60,6 +60,26 @@ alias BulkCreateCustomSubscriptionParams = {
   ...SubscriptionIdParameter;
 };
 
+@added(Versions.`2026-08-06-preview`)
+@doc("Information about a virtual machine resolved for a BulkCreateCustom operation.")
+model BulkCreateCustomVirtualMachineInfo {
+  @doc("The resolved Azure virtual machine name.")
+  name?: string;
+
+  @doc("The virtual machine size selected for the virtual machine.")
+  vmSize?: string;
+
+  @doc("The subscription-relative logical availability zone selected for the virtual machine.")
+  zone?: string;
+}
+
+@added(Versions.`2026-08-06-preview`)
+@doc("A virtual machine resource resolved for a BulkCreateCustom operation.")
+model BulkCreateCustomResource {
+  @doc("Information about the resolved virtual machine.")
+  virtualMachineInfo?: BulkCreateCustomVirtualMachineInfo;
+}
+
 // ============================================================
 // Resource: BulkCreateCustom
 //
@@ -80,6 +100,13 @@ model BulkCreateCustomEnvelope {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Tags is a standard ARM resource property."
   @doc("Resource tags.")
   tags?: Record<string>;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "The synchronous BulkCreateCustom PUT response returns resolved per-VM allocation metadata at the top level."
+  @added(Versions.`2026-08-06-preview`)
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
+  @doc("The virtual machine resources resolved for the operation. This property is returned only when virtual machine information is enabled for a synchronous create response.")
+  resources?: Array<BulkCreateCustomResource>;
 
   ...ManagedServiceIdentityProperty;
   ...ResourcePlanProperty;
