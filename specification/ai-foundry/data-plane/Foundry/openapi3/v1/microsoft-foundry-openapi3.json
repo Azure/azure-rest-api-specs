@@ -23047,9 +23047,6 @@
             "$ref": "#/components/parameters/ListRoutinesParameters.after"
           },
           {
-            "$ref": "#/components/parameters/ListRoutinesParameters.before"
-          },
-          {
             "$ref": "#/components/parameters/ListRoutinesParameters.order"
           },
           {
@@ -23069,33 +23066,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "required": [
-                    "data",
-                    "has_more"
-                  ],
-                  "properties": {
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/Routine"
-                      },
-                      "description": "The requested list of items."
-                    },
-                    "first_id": {
-                      "type": "string",
-                      "description": "The first ID represented in this list."
-                    },
-                    "last_id": {
-                      "type": "string",
-                      "description": "The last ID represented in this list."
-                    },
-                    "has_more": {
-                      "type": "boolean",
-                      "description": "A value indicating whether there are additional values available not captured in this list."
-                    }
-                  },
-                  "description": "The response data for a requested list of items."
+                  "$ref": "#/components/schemas/PagedRoutine"
                 }
               }
             }
@@ -23383,9 +23354,6 @@
             "$ref": "#/components/parameters/ListRoutineRunsParameters.after"
           },
           {
-            "$ref": "#/components/parameters/ListRoutineRunsParameters.before"
-          },
-          {
             "$ref": "#/components/parameters/ListRoutineRunsParameters.order"
           },
           {
@@ -23405,33 +23373,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "required": [
-                    "data",
-                    "has_more"
-                  ],
-                  "properties": {
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/RoutineRun"
-                      },
-                      "description": "The requested list of items."
-                    },
-                    "first_id": {
-                      "type": "string",
-                      "description": "The first ID represented in this list."
-                    },
-                    "last_id": {
-                      "type": "string",
-                      "description": "The last ID represented in this list."
-                    },
-                    "has_more": {
-                      "type": "boolean",
-                      "description": "A value indicating whether there are additional values available not captured in this list."
-                    }
-                  },
-                  "description": "The response data for a requested list of items."
+                  "$ref": "#/components/schemas/PagedRoutineRun"
                 }
               }
             }
@@ -26026,17 +25968,7 @@
         "name": "after",
         "in": "query",
         "required": false,
-        "description": "An opaque cursor returned as last_id by the previous list-runs response.",
-        "schema": {
-          "type": "string"
-        },
-        "explode": false
-      },
-      "ListRoutineRunsParameters.before": {
-        "name": "before",
-        "in": "query",
-        "required": false,
-        "description": "Unsupported. Reserved for future backward pagination support.",
+        "description": "An opaque cursor identifying the run after which to start returning results. Prefer following the `nextLink` returned by the previous list-runs response.",
         "schema": {
           "type": "string"
         },
@@ -26087,17 +26019,7 @@
         "name": "after",
         "in": "query",
         "required": false,
-        "description": "An opaque cursor returned as last_id by the previous list response.",
-        "schema": {
-          "type": "string"
-        },
-        "explode": false
-      },
-      "ListRoutinesParameters.before": {
-        "name": "before",
-        "in": "query",
-        "required": false,
-        "description": "Unsupported. Reserved for future backward pagination support.",
+        "description": "An opaque cursor identifying the item after which to start returning results. Prefer following the `nextLink` returned by the previous list response.",
         "schema": {
           "type": "string"
         },
@@ -26894,6 +26816,11 @@
             "description": "The operational state of the agent. Controls whether the agent endpoint accepts or rejects requests.",
             "readOnly": true
           },
+          "state_source": {
+            "$ref": "#/components/schemas/AgentStateSource",
+            "description": "The source of the agent's operational state. When the agent is disabled, indicates where the disabled state originates from. Empty when not derived from a specific source.",
+            "readOnly": true
+          },
           "versions": {
             "type": "object",
             "properties": {
@@ -27033,6 +26960,21 @@
           }
         ],
         "description": "The operational state of an agent."
+      },
+      "AgentStateSource": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "agent_instance_identity",
+              "agent_blueprint"
+            ]
+          }
+        ],
+        "description": "Indicates the source of an agent's operational state. Empty when the state is not derived from a specific source."
       },
       "AgentTaxonomyInput": {
         "type": "object",
@@ -74105,6 +74047,48 @@
           }
         },
         "description": "Paged collection of RedTeam items"
+      },
+      "PagedRoutine": {
+        "type": "object",
+        "required": [
+          "value"
+        ],
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Routine"
+            },
+            "description": "The Routine items on this page"
+          },
+          "nextLink": {
+            "type": "string",
+            "format": "uri",
+            "description": "The link to the next page of items"
+          }
+        },
+        "description": "Paged collection of Routine items"
+      },
+      "PagedRoutineRun": {
+        "type": "object",
+        "required": [
+          "value"
+        ],
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RoutineRun"
+            },
+            "description": "The RoutineRun items on this page"
+          },
+          "nextLink": {
+            "type": "string",
+            "format": "uri",
+            "description": "The link to the next page of items"
+          }
+        },
+        "description": "Paged collection of RoutineRun items"
       },
       "PagedSchedule": {
         "type": "object",

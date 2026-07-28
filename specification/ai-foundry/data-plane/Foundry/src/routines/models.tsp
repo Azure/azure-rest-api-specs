@@ -435,14 +435,9 @@ model ListRoutinesParameters {
   @query
   limit?: int32;
 
-  @doc("An opaque cursor returned as last_id by the previous list response.")
+  @doc("An opaque cursor identifying the item after which to start returning results. Prefer following the `nextLink` returned by the previous list response.")
   @query
-  @continuationToken
   after?: string;
-
-  @doc("Unsupported. Reserved for future backward pagination support.")
-  @query
-  before?: string;
 
   @doc("The ordering direction. Supported values are asc and desc.")
   @query
@@ -472,14 +467,9 @@ model ListRoutineRunsParameters {
   @query
   limit?: int32;
 
-  @doc("An opaque cursor returned as last_id by the previous list-runs response.")
+  @doc("An opaque cursor identifying the run after which to start returning results. Prefer following the `nextLink` returned by the previous list-runs response.")
   @query
-  @continuationToken
   after?: string;
-
-  @doc("Unsupported. Reserved for future backward pagination support.")
-  @query
-  before?: string;
 
   @doc("The ordering direction. Supported values are asc and desc.")
   @query
