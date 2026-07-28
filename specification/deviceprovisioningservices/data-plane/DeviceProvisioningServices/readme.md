@@ -4,8 +4,8 @@
 
 This is the AutoRest configuration file for Device Provisioning Service.
 
-> **TypeSpec Migration**: The stable `2021-10-01` and preview `2025-07-01-preview`/`2026-11-02-preview` device and service APIs have been migrated to TypeSpec.
-> The OpenAPI files in `stable/2021-10-01/`, `preview/2025-07-01-preview/`, and `preview/2026-11-02-preview/` are now generated from TypeSpec source.
+> **TypeSpec Migration**: The stable `2021-10-01`/`2026-11-01` and preview `2025-07-01-preview`/`2026-11-02-preview` device and service APIs have been migrated to TypeSpec.
+> The OpenAPI files in `stable/2021-10-01/`, `preview/2025-07-01-preview/`, `stable/2026-11-01/`, and `preview/2026-11-02-preview/` are now generated from TypeSpec source.
 > TypeSpec source files (versioned — emit stable and preview versions):
 >
 > - Device API: [device/main.tsp](device/main.tsp)
@@ -54,6 +54,26 @@ These settings apply only when `--tag=package-preview-2026-11-service` is specif
 input-file:
   - preview/2026-11-02-preview/service.json
 title: ProvisioningServiceClient
+```
+
+### Tag: package-2026-11-01-service
+
+These settings apply only when `--tag=package-2026-11-01-service` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-11-01-service'
+input-file:
+  - stable/2026-11-01/service.json
+title: ProvisioningServiceClient
+```
+
+### Tag: package-2026-11-01-device
+
+These settings apply only when `--tag=package-2026-11-01-device` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-11-01-device'
+input-file:
+  - stable/2026-11-01/device.json
+title: ProvisioningDeviceClient
 ```
 
 ### Tag: package-preview-2025-07-service
