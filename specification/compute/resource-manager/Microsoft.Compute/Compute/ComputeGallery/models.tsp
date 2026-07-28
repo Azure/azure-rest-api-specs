@@ -879,6 +879,11 @@ union MetadataType {
   SecretsProvisioningImageMetadata: "SecretsProvisioningImageMetadata",
 
   /**
+   * Metadata related to user-provided secrets provisioning for the image.
+   */
+  UserProvidedSecretsProvisioningMetadata: "UserProvidedSecretsProvisioningMetadata",
+
+  /**
    * Unknown metadata type.
    */
   Unknown: "Unknown",
