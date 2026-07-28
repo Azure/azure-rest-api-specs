@@ -44,14 +44,14 @@ model AuditEvent {
   recordedAt: utcDateTime;
 
   @doc("Principal that performed the audited action.")
-  @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   actor: string;
 
   @doc("""
     Action that was performed, as a service-defined verb such as
     `resource.create`.
     """)
-  @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   action: string;
 
   @doc("""
@@ -59,7 +59,7 @@ model AuditEvent {
     preserves key order, key casing, and value types exactly as submitted, and
     returns them unchanged.
     """)
-  @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   annotations: Record<string>;
 }
 
@@ -97,26 +97,19 @@ interface Events {
   >;
 
   @doc("""
-    Submits an audit event for ingestion.
+    Records an audit event.
 
-    The request is idempotent on `clientRequestId`: resubmitting the same
-    identifier within the deduplication window of 24 hours returns the
-    originally recorded event rather than creating a second one.
+    The service assigns `id` and `recordedAt`; the caller supplies `actor`,
+    `action`, and `annotations`.
+
+    Repeatable requests are supported: resubmitting the same
+    `Repeatability-Request-ID` within the deduplication window of 24 hours
+    returns the originally recorded event rather than creating a second one.
 
     The service validates `action` against the set of verbs registered for the
     tenant and rejects unknown verbs with 400. Validation is performed after
     authorization, so an unauthorized caller receives 403 without learning
     whether the verb is valid.
     """)
-  @route("/events:record")
-  @post
-  record(
-    @doc("Caller-supplied identifier used for deduplication.")
-    @header
-    clientRequestId: uuid,
-
-    @doc("The event to record.")
-    @body
-    body: AuditEvent,
-  ): AuditEvent;
+  create is StandardResourceOperations.ResourceCreateWithServiceProvidedName<AuditEvent>;
 }

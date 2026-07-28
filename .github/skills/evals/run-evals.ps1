@@ -187,6 +187,14 @@ $OutputEncoding = [System.Text.Encoding]::UTF8
                       tolerate suggestion-severity output; this counts that
                       output without contradicting them.
 
+    Retracted findings are NOT counted. The reviewer has emitted a finding and
+    then withdrawn it in the same report ("_(Retracted -- contact info, not a
+    secret.)_", or a blocking heading followed by "No Blocking findings"). That
+    is a format violation, not a wrong assertion: the report's own conclusion is
+    correct, so charging it to the false-positive metric would overstate the
+    noise a reader actually experiences. A grader fails it on format grounds
+    instead -- the same tracked-vs-gated split used for malformed Questions.
+
     Returns a PSCustomObject with StimulusCount, Blocking, NonBlocking, and
     Observed. `Observed` is $true when the agent spoke this report format's
     vocabulary at least once.
@@ -250,13 +258,26 @@ function Get-TrueNegativeFindingCounts {
         # Walk the report in order so each finding is charged to the severity
         # section it appears under.
         $currentSeverity = 'unsectioned'
+        $lastCharged = $null   # which bucket the previous finding went into
         foreach ($ll in ($output -split '\r?\n')) {
             if ($ll -match "^\s*(?:[-*+]\s*|#{1,6}\s*)?`u{1F534}") { $currentSeverity = 'blocking'; $glyphSeen = $true; continue }
             if ($ll -match "^\s*(?:[-*+]\s*|#{1,6}\s*)?`u{1F7E1}") { $currentSeverity = 'nonblocking'; $glyphSeen = $true; continue }
             if ($ll -match "^\s*(?:[-*+]\s*|#{1,6}\s*)?`u{1F4A1}") { $currentSeverity = 'nonblocking'; $glyphSeen = $true; continue }
             # A "Questions" heading ends the finding sections. Questions are
             # bullets rather than findings, and the rubrics permit them.
-            if ($ll -match '^\s*#{1,6}\s*Questions\b') { $currentSeverity = 'questions'; continue }
+            if ($ll -match '^\s*#{1,6}\s*Questions\b') { $currentSeverity = 'questions'; $lastCharged = $null; continue }
+
+            # A retraction withdraws the finding that preceded it. Un-count it:
+            # the report's own conclusion is correct, so it is a format
+            # violation rather than a false positive. Graders fail it instead.
+            if ($ll -match '\(\s*Retracted\b' -or
+                $ll -match '^\s*\**\s*No\s+(Blocking|Warning|Suggestion)\s+findings\b') {
+                if ($null -ne $lastCharged) {
+                    if ($lastCharged -eq 'blocking') { $blocking-- } else { $nonBlocking-- }
+                    $lastCharged = $null
+                }
+                continue
+            }
 
             if ($ll -match $findingPattern) {
                 $glyphSeen = $true
@@ -265,11 +286,12 @@ function Get-TrueNegativeFindingCounts {
                 # and even if the agent writes it in bracketed form it must not
                 # be charged to the false-positive metric -- the rubrics permit
                 # questions on a true negative.
-                if ($currentSeverity -eq 'questions') { continue }
+                if ($currentSeverity -eq 'questions') { $lastCharged = $null; continue }
                 # An unsectioned finding is charged to non-blocking: it is real
                 # output that should be trended, but promoting it to the gate
                 # on the strength of a missing heading would be unfair.
-                if ($currentSeverity -eq 'blocking') { $blocking++ } else { $nonBlocking++ }
+                if ($currentSeverity -eq 'blocking') { $blocking++; $lastCharged = 'blocking' }
+                else { $nonBlocking++; $lastCharged = 'nonblocking' }
             }
         }
 
@@ -277,7 +299,15 @@ function Get-TrueNegativeFindingCounts {
         # parseable finding under it still counts as a blocking false positive,
         # so this metric can only ever be stricter than the glyph-only version
         # it replaced, never looser.
-        if ($blocking -eq 0 -and $output -match "(?m)^\s*(?:[-*+]\s*|#{1,6}\s*)?`u{1F534}") { $blocking++ }
+        #
+        # Suppressed when the report retracts a finding, otherwise this clause
+        # would re-add the very finding the retraction handling just removed:
+        # the heading is still present, and the count is back to zero, so the
+        # two rules fight and the retraction loses.
+        $hasRetraction = $output -match '\(\s*Retracted\b' -or
+                         $output -match '(?m)^\s*\**\s*No\s+(Blocking|Warning|Suggestion)\s+findings\b'
+        if ($blocking -eq 0 -and -not $hasRetraction -and
+            $output -match "(?m)^\s*(?:[-*+]\s*|#{1,6}\s*)?`u{1F534}") { $blocking++ }
     }
 
     return [PSCustomObject]@{

@@ -405,6 +405,10 @@ export const REAL_FINDINGS_PROBE = [
   "Use `Azure-AsyncOperation` for polling, with `final-state-via`.",
   "The `state` enum should be a union.",
   "`retryCount` must not be nullable.",
+  // A retracted finding: emitted, then withdrawn in the same report. The
+  // "no retracted findings" grader exists to catch this, so it must be visible
+  // here or that grader reads as inert.
+  "_(Retracted — `supplierEmail` is contact info, not a secret.)_",
 ].join("\n");
 
 /**

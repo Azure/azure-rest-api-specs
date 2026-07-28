@@ -243,3 +243,26 @@ If nothing survives the interlock filter, self-verification, and the critic,
 emit the "no findings" form above. Do not pad. A clean specification receiving
 a clean review is the system working, and it is the outcome the true-negative
 eval suite exists to protect.
+
+## Never emit a finding you then retract
+
+Revise before you emit, not after. A report must not contain a finding
+followed by a retraction — no "_(Retracted — on reflection this is contact
+info, not a secret.)_", no finding under a `### 🔴 Blocking` heading followed
+by "No Blocking findings."
+
+This has happened. The reviewer raised `**[DP-VIS-02] Secret readable in
+response**`, then retracted it two lines later and concluded "No Blocking
+findings" — leaving both in the report. The conclusion was correct and the
+self-correction was good judgment, but the output was worse than either
+outcome alone: a reader skimming headings sees a blocking secret-exposure
+finding that the author has already withdrawn.
+
+Self-correction belongs in your reasoning, not in the report. If you write a
+finding and then decide it does not hold, **delete it** — including its
+severity heading if nothing else sits under it. The report is a conclusion, not
+a transcript.
+
+A retracted finding is scored as a **format violation**: it does not count as a
+false positive, because the report's own conclusion is correct, but it fails
+the report contract.
