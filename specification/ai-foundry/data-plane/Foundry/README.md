@@ -2,6 +2,25 @@
 
 This folder contains the TypeSpec for all data-plane REST APIs of the Foundry service.
 
+> see https://aka.ms/autorest
+
+This is the AutoRest configuration file for Foundry.
+
+## Configuration
+
+```yaml
+title: Azure AI Foundry
+openapi-type: data-plane
+tag: package-virtual-public-preview
+```
+
+### Tag: package-virtual-public-preview
+
+```yaml $(tag) == 'package-virtual-public-preview'
+input-file:
+  - openapi3/virtual-public-preview/microsoft-foundry-openapi3.json
+```
+
 ## Contributing
 
 ### Adding preview features
@@ -76,4 +95,3 @@ If you want to emit Python SDK from latest TypeSpec in this folder do the follow
   - `tsp-client update` to use the TypeSpec commit mentioned in the local tsp-location.yaml file
 - After the code was emitted, run the script `post-emitter-fixes.cmd`
 - To review your changes, send a PR for merging your topic branch into branch `feature/azure-ai-projects/2.0.0b1`
-
