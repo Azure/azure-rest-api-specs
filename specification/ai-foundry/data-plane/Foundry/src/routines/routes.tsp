@@ -72,7 +72,7 @@ interface Routines {
   listRoutines is FoundryDataPlanePreviewOperation<
     FoundryFeaturesOptInKeys.routines_v1_preview,
     ListRoutinesParameters,
-    AgentsPagedResult<Routine>
+    Azure.Core.Page<Routine>
   >;
 
   /** Deletes the specified routine. */
@@ -99,7 +99,7 @@ interface Routines {
   listRoutineRuns is FoundryDataPlanePreviewOperation<
     FoundryFeaturesOptInKeys.routines_v1_preview,
     ListRoutineRunsParameters,
-    AgentsPagedResult<RoutineRun>
+    Azure.Core.Page<RoutineRun>
   >;
 
   /** Queues an asynchronous dispatch for the specified routine. */
