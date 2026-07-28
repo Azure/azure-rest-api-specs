@@ -119,8 +119,8 @@ model EntityRecognitionLROResult extends AnalyzeTextLROResult {
 }
 
 /** Contains all the entity categories detected by entity recognition. */
-@added(Versions.v2024_11_01)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@added(Versions.v2024_11_01)
 union EntityCategory {
   string,
 
@@ -560,8 +560,8 @@ union AreaUnit {
 }
 
 /** The length unit of measurement. */
-@added(Versions.v2024_11_01)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@added(Versions.v2024_11_01)
 union LengthUnit {
   string,
 

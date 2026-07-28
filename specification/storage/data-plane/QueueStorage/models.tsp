@@ -195,8 +195,8 @@ enum ListQueuesIncludeType {
 }
 
 /** The service properties. */
-@Xml.name("StorageServiceProperties")
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@Xml.name("StorageServiceProperties")
 model QueueServiceProperties {
   /** The logging properties. */
   @Xml.name("Logging") logging?: Logging;
@@ -259,8 +259,8 @@ model Metrics {
 }
 
 /** The CORS rules. */
-@Xml.name("CorsRule")
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@Xml.name("CorsRule")
 model CorsRule {
   /** The allowed origins. */
   @Xml.name("AllowedOrigins") allowedOrigins: string;
@@ -281,9 +281,9 @@ model CorsRule {
 }
 
 /** The error response. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @error
 @mediaTypeHint("application/xml")
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Error {
   /** The error code. */
   @header("x-ms-error-code")
@@ -365,8 +365,8 @@ model ListQueuesResponse {
 }
 
 /** An Azure Storage Queue. */
-@Xml.name("Queue")
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@Xml.name("Queue")
 model QueueItem {
   /** The name of the queue. */
   @Xml.name("Name") name: string;
@@ -484,8 +484,8 @@ model QueueMessage {
 }
 
 /** The sent queue message. */
-@Xml.name("QueueMessage")
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@Xml.name("QueueMessage")
 model SentMessage {
   /** The ID of the message. */
   @Xml.name("MessageId") messageId: string;
@@ -513,8 +513,8 @@ model SentMessage {
 }
 
 /** The peeked queue message. */
-@Xml.name("QueueMessage")
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@Xml.name("QueueMessage")
 model PeekedMessage {
   /** The ID of the message. */
   @Xml.name("MessageId") messageId: string;

@@ -1115,8 +1115,8 @@ model Resource {
 /**
  * Contains details when the response code indicates an error.
  */
-@error
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@error
 model ErrorResponse {
   /**
    * The error details.

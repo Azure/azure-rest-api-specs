@@ -6,8 +6,8 @@ namespace Microsoft.EventGrid.SystemEvents;
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Maps.GeofenceEntered event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@example(MicrosoftMapsGeofenceEnteredExample)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@example(MicrosoftMapsGeofenceEnteredExample)
 model MapsGeofenceEnteredEventData extends MapsGeofenceEventProperties {}
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Maps.GeofenceExited event. */
@@ -17,8 +17,8 @@ model MapsGeofenceExitedEventData extends MapsGeofenceEventProperties {}
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Maps.GeofenceResult event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@example(MicrosoftMapsGeofenceResultExample)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@example(MicrosoftMapsGeofenceResultExample)
 model MapsGeofenceResultEventData extends MapsGeofenceEventProperties {}
 
 /** Schema of the Data property of an EventGridEvent for a Geofence event (GeofenceEntered, GeofenceExited, GeofenceResult). */

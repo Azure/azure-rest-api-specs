@@ -78,8 +78,8 @@ model EmbeddingConfiguration {
   embeddingField: string;
 }
 
-@doc("Field mapping configuration class")
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@doc("Field mapping configuration class")
 model FieldMapping {
   @doc("List of fields with text content")
   @visibility(Lifecycle.Create)

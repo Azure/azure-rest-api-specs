@@ -958,8 +958,8 @@ model SearchRequest {
 }
 
 /** The query parameters for vector and hybrid search queries. */
-@discriminator("kind")
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@discriminator("kind")
 model VectorQuery {
   /** Number of nearest neighbors to return as top hits. */
   k?: int32;

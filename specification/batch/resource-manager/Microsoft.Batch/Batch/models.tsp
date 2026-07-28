@@ -1747,8 +1747,8 @@ model SkuCapability {
 /**
  * A REST API operation
  */
-@summary("A REST API operation")
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@summary("A REST API operation")
 model Operation {
   /**
    * This is of the format {provider}/{resource}/{operation}
@@ -1871,8 +1871,8 @@ model ListCertificatesResult is Azure.Core.Page<Certificate>;
  * Certificate properties.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Legacy Design"
-@removed(Versions.v2025_06_01)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@removed(Versions.v2025_06_01)
 model CertificateProperties extends CertificateBaseProperties {
   /**
    *  The provisioned state of the resource

@@ -4,8 +4,8 @@ import "./ContainerServiceExample.tsp";
 namespace Microsoft.EventGrid.SystemEvents;
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.NewKubernetesVersionAvailable event */
-@example(MicrosoftContainerServiceNewKubernetesVersionAvailableExample)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@example(MicrosoftContainerServiceNewKubernetesVersionAvailableExample)
 model ContainerServiceNewKubernetesVersionAvailableEventData {
   /** The highest PATCH Kubernetes version for the highest MINOR version supported by ManagedCluster resource */
   latestSupportedKubernetesVersion: string;
@@ -22,36 +22,36 @@ model ContainerServiceNewKubernetesVersionAvailableEventData {
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.ClusterSupportEnded event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@example(MicrosoftContainerServiceClusterSupportEndedExample)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@example(MicrosoftContainerServiceClusterSupportEndedExample)
 model ContainerServiceClusterSupportEndedEventData
   extends ContainerServiceClusterSupportEventData {}
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.ClusterSupportEnding event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@example(MicrosoftContainerServiceClusterSupportEndingExample)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@example(MicrosoftContainerServiceClusterSupportEndingExample)
 model ContainerServiceClusterSupportEndingEventData
   extends ContainerServiceClusterSupportEventData {}
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.NodePoolRollingStarted event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@example(MicrosoftContainerServiceNodePoolRollingStartedExample)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@example(MicrosoftContainerServiceNodePoolRollingStartedExample)
 model ContainerServiceNodePoolRollingStartedEventData
   extends ContainerServiceNodePoolRollingEventData {}
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.NodePoolRollingSucceeded event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@example(MicrosoftContainerServiceNodePoolRollingSucceededExample)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@example(MicrosoftContainerServiceNodePoolRollingSucceededExample)
 model ContainerServiceNodePoolRollingSucceededEventData
   extends ContainerServiceNodePoolRollingEventData {}
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.NodePoolRollingFailed event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@example(MicrosoftContainerServiceNodePoolRollingFailedExample)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@example(MicrosoftContainerServiceNodePoolRollingFailedExample)
 model ContainerServiceNodePoolRollingFailedEventData
   extends ContainerServiceNodePoolRollingEventData {}
 

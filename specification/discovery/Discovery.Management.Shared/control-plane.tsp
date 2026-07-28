@@ -17,8 +17,8 @@ using Microsoft.Discovery.Shared;
 namespace Microsoft.Discovery;
 
 /** The resource provisioning state. */
-@lroStatus
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@lroStatus
 union ProvisioningState {
   ResourceProvisioningState,
 
@@ -120,9 +120,9 @@ model Credential {
   ...Microsoft.Discovery.Shared.WithDescription;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("The managed identity credential properties.")
 @removed(Versions.v2026_02_01_preview)
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ManagedIdentityCredential extends Credential {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   kind: CredentialType.ManagedIdentity;

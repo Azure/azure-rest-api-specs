@@ -14,8 +14,8 @@ using Azure.Core.Traits;
 namespace Language.Conversations;
 
 /** Error response. */
-@error
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@error
 model ErrorResponse is Azure.Core.Foundations.ErrorResponseBase<Error>;
 
 /** The error object. */
@@ -354,8 +354,8 @@ model MetadataRecord {
 model SourceFilter is Array<string>;
 
 /** Represents the confidence scores between 0 and 1 across all sentiment classes: positive, neutral, negative. */
-@added(Versions.v2023_04_01)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@added(Versions.v2023_04_01)
 model SentimentConfidenceScores {
   /** Confidence score for positive sentiment */
   positive: float64;

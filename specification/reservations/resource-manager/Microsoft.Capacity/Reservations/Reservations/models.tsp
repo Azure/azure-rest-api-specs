@@ -1124,8 +1124,8 @@ model ScopeProperties {
 /**
  * Error information
  */
-@error
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@error
 model Error {
   /**
    * Extended error information including error code and error message
@@ -3006,8 +3006,8 @@ model ReservationSummary {
 /**
  * Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.
  */
-@error
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@error
 model ErrorResponse {
   /**
    * The details of the error.

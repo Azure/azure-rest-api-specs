@@ -896,8 +896,8 @@ op setImmutabilityPolicyOptionalExpiry is StorageOperationNoBody<
 // elements/properties in a different order than defined in the swagger.
 
 /** The service properties. */
-@Xml.name("StorageServiceProperties")
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@Xml.name("StorageServiceProperties")
 model BlobServicePropertiesCsharp {
   /** The logging properties. */
   @Xml.name("Logging") logging?: BlobServiceProperties.logging;

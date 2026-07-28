@@ -6,29 +6,29 @@ namespace Microsoft.EventGrid.SystemEvents;
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ContainerRegistry.ImagePushed event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@example(MicrosoftContainerRegistryImagePushedExample)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@example(MicrosoftContainerRegistryImagePushedExample)
 model ContainerRegistryImagePushedEventData
   extends ContainerRegistryEventData {}
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ContainerRegistry.ImageDeleted event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@example(MicrosoftContainerRegistryImageDeletedExample)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@example(MicrosoftContainerRegistryImageDeletedExample)
 model ContainerRegistryImageDeletedEventData
   extends ContainerRegistryEventData {}
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ContainerRegistry.ChartPushed event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@example(MicrosoftContainerRegistryChartPushedExample)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@example(MicrosoftContainerRegistryChartPushedExample)
 model ContainerRegistryChartPushedEventData
   extends ContainerRegistryArtifactEventData {}
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ContainerRegistry.ChartDeleted event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@example(MicrosoftContainerRegistryChartDeletedExample)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@example(MicrosoftContainerRegistryChartDeletedExample)
 model ContainerRegistryChartDeletedEventData
   extends ContainerRegistryArtifactEventData {}
 

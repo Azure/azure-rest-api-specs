@@ -5,8 +5,8 @@ namespace Microsoft.EventGrid.SystemEvents;
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.AVS.PrivateCloudUpdating event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@example(MicrosoftAVSPrivateCloudUpdatingExample)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@example(MicrosoftAVSPrivateCloudUpdatingExample)
 model AvsPrivateCloudUpdatingEventData extends AvsPrivateCloudEventData {}
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.AVS.PrivateCloudUpdated event. */
@@ -39,8 +39,8 @@ model AvsClusterUpdatingEventData extends AvsClusterEventData {}
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.AVS.ClusterUpdated event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@example(MicrosoftAVSClusterUpdatedExample)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@example(MicrosoftAVSClusterUpdatedExample)
 model AvsClusterUpdatedEventData extends AvsClusterEventData {}
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.AVS.ClusterFailed event. */
@@ -73,8 +73,8 @@ model AvsScriptExecutionCancelledEventData
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.AVS.ScriptExecutionFailed event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@example(MicrosoftAVSScriptExecutionFailedExample)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@example(MicrosoftAVSScriptExecutionFailedExample)
 model AvsScriptExecutionFailedEventData extends AvsScriptExecutionEventData {
   /** Failure reason of an event. */
   failureMessage?: string;

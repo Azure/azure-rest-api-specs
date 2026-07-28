@@ -357,8 +357,8 @@ union Severity {
 /**
  * Details of the resource that was assessed
  */
-@discriminator("source")
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@discriminator("source")
 model ResourceDetails {
   /**
    * The platform where the assessed resource resides

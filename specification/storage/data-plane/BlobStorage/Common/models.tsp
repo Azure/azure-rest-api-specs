@@ -19,9 +19,9 @@ scalar base64Bytes extends bytes;
  *
  * This defines the wire format only. Language SDKs wrap this in idiomatic error types.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @error
 @mediaTypeHint("application/xml")
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Error {
   /** The error code. */
   @header("x-ms-error-code")
@@ -940,8 +940,8 @@ union ArchiveStatus {
 }
 
 /** Represents a blob. */
-@Xml.name("Blob")
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@Xml.name("Blob")
 model BlobItem {
   /** The name of the blob. */
   @Xml.name("Name") name: BlobName;
@@ -977,8 +977,8 @@ model BlobItem {
 }
 
 /** The properties of a blob. */
-@Xml.name("Properties")
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@Xml.name("Properties")
 model BlobProperties {
   /** The date-time the blob was created. */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
@@ -1161,8 +1161,8 @@ enum BlobType {
 }
 
 /** The priority of the rehydrate operation. */
-@Xml.name("RehydratePriority")
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@Xml.name("RehydratePriority")
 union RehydratePriority {
   /** The rehydrate priority is high. */
   High: "High",
@@ -1202,8 +1202,8 @@ model ObjectReplicationMetadata is Record<string>;
 /// Service Properties
 
 /** The blob service properties. */
-@Xml.name("StorageServiceProperties")
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@Xml.name("StorageServiceProperties")
 model BlobServiceProperties {
   /** The logging properties. */
   @Xml.name("Logging") logging?: Logging;

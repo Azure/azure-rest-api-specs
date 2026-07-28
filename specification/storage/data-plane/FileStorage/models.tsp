@@ -920,8 +920,8 @@ model RetentionPolicy {
 }
 
 /** Settings for SMB multichannel */
-@Xml.name("Multichannel")
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@Xml.name("Multichannel")
 model SmbMultichannel {
   /** If SMB multichannel is enabled. */
   @Xml.name("Enabled") enabled?: boolean;
@@ -948,8 +948,8 @@ model ClearRange {
 }
 
 /** Protocol settings */
-@Xml.name("ProtocolSettings")
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@Xml.name("ProtocolSettings")
 model ShareProtocolSettings {
   /** Settings for SMB protocol. */
   @Xml.name("SMB") smb?: ShareSmbSettings;
@@ -959,8 +959,8 @@ model ShareProtocolSettings {
 }
 
 /** Settings for SMB protocol. */
-@Xml.name("SMB")
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@Xml.name("SMB")
 model ShareSmbSettings {
   /** Settings for SMB Multichannel. */
   @Xml.name("Multichannel") multichannel?: SmbMultichannel;
@@ -1030,9 +1030,9 @@ model ShareFileRangeListSegment {
  *
  * This defines the wire format only. Language SDKs wrap this in idiomatic error types.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @error
 @mediaTypeHint("application/xml")
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Error {
   /** The error code. */
   @header("x-ms-error-code")

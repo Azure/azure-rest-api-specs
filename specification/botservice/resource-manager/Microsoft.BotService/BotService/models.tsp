@@ -854,8 +854,8 @@ model Sku {
 /**
  * Bot Service error object.
  */
-@error
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@error
 model Error {
   /**
    * The error body.

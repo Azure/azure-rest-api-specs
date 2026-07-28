@@ -534,8 +534,8 @@ model AzureContainerFolderDocumentLocation extends DocumentLocation {
 }
 
 /** Error response. */
-@error
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@error
 model ErrorResponse is Azure.Core.Foundations.ErrorResponseBase<Error>;
 
 /** An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses. */

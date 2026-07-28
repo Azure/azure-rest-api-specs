@@ -66,8 +66,8 @@ union CloudSuitability {
   string,
 }
 
-@doc("The status of the current operation.")
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@doc("The status of the current operation.")
 union ProvisioningState {
   @doc("Resource provisioning Successful.")
   Succeeded: "Succeeded",
@@ -93,8 +93,8 @@ union ProvisioningState {
   string,
 }
 
-@doc("Location for Azure.")
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@doc("Location for Azure.")
 union AzureLocation {
   @doc("Unknown Location for Azure")
   Unknown: "Unknown",

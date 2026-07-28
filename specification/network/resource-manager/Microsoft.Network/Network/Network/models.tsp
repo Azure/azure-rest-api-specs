@@ -8799,8 +8799,8 @@ model ApplicationGatewayPrivateLinkResourceProperties {
 /**
  * Common error representation.
  */
-@error
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@error
 model Error {
   /**
    * Error code.
@@ -15087,8 +15087,8 @@ model ContainerNetworkInterfaceConfigurationPropertiesFormat {
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model Container extends SubResource {}
 
 /**
@@ -16453,9 +16453,9 @@ model InboundSecurityRules {
  * The error object.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 @error
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ErrorResponse {
   /**
    * The error details object.
@@ -18572,8 +18572,8 @@ model ConnectionMonitorListResult {
  * Network REST API operation definition.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.networkingOperations)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@Azure.ResourceManager.Legacy.feature(Features.networkingOperations)
 model Operation {
   /**
    * Operation name: {provider}/{resource}/{operation}.

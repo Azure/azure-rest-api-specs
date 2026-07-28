@@ -60,8 +60,8 @@ model DocumentContent extends AnalysisContent {
   segments?: DocumentContentSegment[];
 }
 
-@doc("Length unit used by the width, height, and source properties.")
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@doc("Length unit used by the width, height, and source properties.")
 union LengthUnit {
   string,
 
@@ -72,8 +72,8 @@ union LengthUnit {
   "inch",
 }
 
-@doc("Content from a document page.")
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@doc("Content from a document page.")
 model DocumentPage {
   @doc("Page number (1-based).")
   @minValue(1)
@@ -110,12 +110,12 @@ model DocumentPage {
   formulas?: DocumentFormula[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("""
   Word in a document, consisting of a contiguous sequence of characters.
   For non-space delimited languages, such as Chinese, Japanese, and Korean, 
   each character is represented as its own word.
   """)
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model DocumentWord {
   @doc("Word text.")
   content: string;
@@ -132,8 +132,8 @@ model DocumentWord {
   confidence?: float32;
 }
 
-@doc("Line in a document, consisting of an contiguous sequence of words.")
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@doc("Line in a document, consisting of an contiguous sequence of words.")
 model DocumentLine {
   @doc("Line text.")
   content: string;
@@ -145,8 +145,8 @@ model DocumentLine {
   span?: ContentSpan;
 }
 
-@doc("Barcode in a document.")
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@doc("Barcode in a document.")
 model DocumentBarcode {
   @doc("Barcode kind.")
   kind: DocumentBarcodeKind;
@@ -166,8 +166,8 @@ model DocumentBarcode {
   confidence?: float32;
 }
 
-@doc("Mathematical formula in a document.")
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@doc("Mathematical formula in a document.")
 model DocumentFormula {
   @doc("Formula kind.")
   kind: DocumentFormulaKind;
@@ -187,11 +187,11 @@ model DocumentFormula {
   confidence?: float32;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("""
   Paragraph in a document, generally consisting of an contiguous sequence of lines
   with common alignment and spacing.
   """)
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model DocumentParagraph {
   @doc("Semantic role of the paragraph.")
   role?: SemanticRole;
@@ -206,8 +206,8 @@ model DocumentParagraph {
   span?: ContentSpan;
 }
 
-@doc("Table in a document, consisting table cells arranged in a rectangular layout.")
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@doc("Table in a document, consisting table cells arranged in a rectangular layout.")
 model DocumentTable {
   @doc("Number of rows in the table.")
   @minValue(1)
@@ -237,8 +237,8 @@ model DocumentTable {
   role?: SemanticRole;
 }
 
-@doc("Table cell in a document table.")
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@doc("Table cell in a document table.")
 model DocumentTableCell {
   @doc("Table cell kind.")
   kind?: DocumentTableCellKind = DocumentTableCellKind.content;
@@ -285,9 +285,9 @@ union DocumentFigureKind {
   mermaid: "mermaid",
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Figure in a document.")
 @discriminator("kind")
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model DocumentFigure {
   @added(Versions.v2025_11_01)
   @doc("Figure kind.")
@@ -341,8 +341,8 @@ model DocumentMermaidFigure extends DocumentFigure {
   content: string;
 }
 
-@doc("Section in a document.")
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@doc("Section in a document.")
 model DocumentSection {
   @doc("Span of the section in the markdown content.")
   span?: ContentSpan;
@@ -351,8 +351,8 @@ model DocumentSection {
   elements?: DocumentElement[];
 }
 
-@doc("Caption of a table or figure.")
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@doc("Caption of a table or figure.")
 model DocumentCaption {
   @doc("Content of the caption.")
   content: string;
@@ -367,8 +367,8 @@ model DocumentCaption {
   elements?: DocumentElement[];
 }
 
-@doc("Footnote of a table or figure.")
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@doc("Footnote of a table or figure.")
 model DocumentFootnote {
   @doc("Content of the footnote.")
   content: string;
@@ -389,8 +389,8 @@ model DocumentFootnote {
   """)
 scalar DocumentElement extends string;
 
-@doc("Barcode kind.")
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@doc("Barcode kind.")
 union DocumentBarcodeKind {
   string,
 
@@ -446,8 +446,8 @@ union DocumentBarcodeKind {
   MaxiCode: "MaxiCode",
 }
 
-@doc("Formula kind.")
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@doc("Formula kind.")
 union DocumentFormulaKind {
   string,
 
@@ -484,8 +484,8 @@ union SemanticRole {
   formulaBlock: "formulaBlock",
 }
 
-@doc("Table cell kind.")
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@doc("Table cell kind.")
 union DocumentTableCellKind {
   string,
 

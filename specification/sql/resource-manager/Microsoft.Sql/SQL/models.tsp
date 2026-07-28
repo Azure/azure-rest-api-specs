@@ -13386,8 +13386,8 @@ model NSPProvisioningIssueProperties {
  * SQL REST API operation definition.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.Operations)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@Azure.ResourceManager.Legacy.feature(Features.Operations)
 model Operation {
   /**
    * The name of the operation being performed on this particular object.

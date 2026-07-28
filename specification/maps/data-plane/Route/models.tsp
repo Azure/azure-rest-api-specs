@@ -2712,8 +2712,8 @@ model RouteOperationResult {
  * details for failed operations. (This also follows the OData error response
  * format.).
  */
-@error
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@error
 model ErrorResponse {
   /**
    * Error code of the error that occurred.

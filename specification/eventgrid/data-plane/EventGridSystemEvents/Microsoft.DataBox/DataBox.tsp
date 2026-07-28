@@ -4,22 +4,22 @@ using TypeSpec.Versioning;
 /** EG DataBox Data Model */
 namespace Microsoft.EventGrid.SystemEvents {
   /** Schema of the Data property of an EventGridEvent for a Microsoft.DataBox.CopyStarted event. */
-  @example(MicrosoftDataBoxCopyStartedExample)
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+  @example(MicrosoftDataBoxCopyStartedExample)
   model DataBoxCopyStartedEventData {
     ...DataBoxBase;
   }
 
   /** Schema of the Data property of an EventGridEvent for a Microsoft.DataBox.CopyCompleted event. */
-  @example(MicrosoftDataBoxCopyCompletedExample)
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+  @example(MicrosoftDataBoxCopyCompletedExample)
   model DataBoxCopyCompletedEventData {
     ...DataBoxBase;
   }
 
   /** Schema of the Data property of an EventGridEvent for a Microsoft.DataBox.OrderCompleted event. */
-  @example(MicrosoftDataBoxOrderCompletedExample)
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+  @example(MicrosoftDataBoxOrderCompletedExample)
   model DataBoxOrderCompletedEventData {
     ...DataBoxBase;
   }

@@ -137,9 +137,9 @@ union MigrateResultType {
   string,
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @added(Versions.v2025_07_01_preview)
 @doc("Scope of the migrate resources operation.")
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union Scope {
   @doc("Scoping the migration to resourceIds provided")
   Resources: "Resources",

@@ -238,8 +238,8 @@ model OperationListResult is Azure.Core.Page<Operation>;
 /**
  * Details of a REST API operation, returned from the Resource Provider Operations API
  */
-@summary("Microsoft.ManagedIdentity Operation.")
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@summary("Microsoft.ManagedIdentity Operation.")
 model Operation {
   /** 
     The name of the operation, as per Resource-Based Access Control (RBAC). Examples: "Microsoft.Compute/virtualMachines/write", "Microsoft.Compute/virtualMachines/capture/action"

@@ -33,8 +33,8 @@ model EmployeeProperties {
 }
 
 /** The resource provisioning state. */
-@lroStatus
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@lroStatus
 union ProvisioningState {
   ResourceProvisioningState,
 

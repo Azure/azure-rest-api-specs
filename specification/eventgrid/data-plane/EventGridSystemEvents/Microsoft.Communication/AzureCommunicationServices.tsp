@@ -297,8 +297,8 @@ model AcsChatParticipantRemovedFromThreadEventData
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.SMSDeliveryReportReceived event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@example(MicrosoftCommunicationSMSDeliveryReportReceivedExample)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@example(MicrosoftCommunicationSMSDeliveryReportReceivedExample)
 model AcsSmsDeliveryReportReceivedEventData extends AcsSmsEventBaseProperties {
   /** Status of Delivery */
   deliveryStatus: string;
@@ -320,8 +320,8 @@ model AcsSmsDeliveryReportReceivedEventData extends AcsSmsEventBaseProperties {
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.SMSReceived event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@example(MicrosoftCommunicationSMSReceivedExample)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@example(MicrosoftCommunicationSMSReceivedExample)
 model AcsSmsReceivedEventData extends AcsSmsEventBaseProperties {
   /** The SMS content */
   message: string;
@@ -337,8 +337,8 @@ model AcsSmsReceivedEventData extends AcsSmsEventBaseProperties {
 //TODO: This might need some fixing
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RecordingFileStatusUpdated event. */
-@example(MicrosoftCommunicationRecordingFileStatusUpdatedExample)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@example(MicrosoftCommunicationRecordingFileStatusUpdatedExample)
 model AcsRecordingFileStatusUpdatedEventData {
   /** The details of recording storage information */
   recordingStorageInfo: AcsRecordingStorageInfoProperties;
@@ -395,8 +395,8 @@ model AcsEmailDeliveryReportReceivedEventData {
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.EmailEngagementTrackingReportReceived event. */
-@example(MicrosoftCommunicationEmailEngagementTrackingReportReceivedExample)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@example(MicrosoftCommunicationEmailEngagementTrackingReportReceivedExample)
 model AcsEmailEngagementTrackingReportReceivedEventData {
   /** The Sender Email Address */
   sender?: string;
@@ -424,8 +424,8 @@ model AcsEmailEngagementTrackingReportReceivedEventData {
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobCancelled event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@example(MicrosoftCommunicationRouterJobCancelledExample)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@example(MicrosoftCommunicationRouterJobCancelledExample)
 model AcsRouterJobCancelledEventData extends AcsRouterJobEventData {
   /** Router Job Note */
   note?: string;
@@ -468,8 +468,8 @@ model AcsRouterJobClassifiedEventData extends AcsRouterJobEventData {
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobClosed event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@example(MicrosoftCommunicationRouterJobClosedExample)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@example(MicrosoftCommunicationRouterJobClosedExample)
 model AcsRouterJobClosedEventData extends AcsRouterJobEventData {
   /** Router Job Closed Assignment Id */
   assignmentId?: string;
@@ -483,8 +483,8 @@ model AcsRouterJobClosedEventData extends AcsRouterJobEventData {
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobCompleted event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@example(MicrosoftCommunicationRouterJobCompletedExample)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@example(MicrosoftCommunicationRouterJobCompletedExample)
 model AcsRouterJobCompletedEventData extends AcsRouterJobEventData {
   /** Router Job Completed Assignment Id */
   assignmentId?: string;
@@ -495,14 +495,14 @@ model AcsRouterJobCompletedEventData extends AcsRouterJobEventData {
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobDeleted event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@example(MicrosoftCommunicationRouterJobDeletedExample)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@example(MicrosoftCommunicationRouterJobDeletedExample)
 model AcsRouterJobDeletedEventData extends AcsRouterJobEventData {}
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobExceptionTriggered event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@example(MicrosoftCommunicationRouterJobExceptionTriggeredExample)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@example(MicrosoftCommunicationRouterJobExceptionTriggeredExample)
 model AcsRouterJobExceptionTriggeredEventData extends AcsRouterJobEventData {
   /** Router Job Exception Triggered Rule Key */
   ruleKey?: string;
@@ -626,8 +626,8 @@ model AcsRouterJobSchedulingFailedEventData extends AcsRouterJobEventData {
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobUnassigned event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@example(MicrosoftCommunicationRouterJobUnassignedExample)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@example(MicrosoftCommunicationRouterJobUnassignedExample)
 model AcsRouterJobUnassignedEventData extends AcsRouterJobEventData {
   /** Router Job Unassigned Assignment Id */
   assignmentId?: string;
@@ -684,8 +684,8 @@ model AcsRouterJobWorkerSelectorsExpiredEventData
 model AcsRouterWorkerDeletedEventData extends AcsRouterWorkerEventData {}
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerDeregistered event */
-@example(MicrosoftCommunicationRouterWorkerDeregisteredExample)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@example(MicrosoftCommunicationRouterWorkerDeregisteredExample)
 model AcsRouterWorkerDeregisteredEventData {
   /** Router Worker Deregistered Worker Id */
   workerId?: string;
@@ -727,8 +727,8 @@ model AcsRouterWorkerOfferAcceptedEventData extends AcsRouterWorkerEventData {
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerOfferDeclined event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@example(MicrosoftCommunicationRouterWorkerOfferDeclinedExample)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@example(MicrosoftCommunicationRouterWorkerOfferDeclinedExample)
 model AcsRouterWorkerOfferDeclinedEventData extends AcsRouterWorkerEventData {
   /** Router Worker Offer Declined Queue Id */
   queueId?: string;
@@ -739,8 +739,8 @@ model AcsRouterWorkerOfferDeclinedEventData extends AcsRouterWorkerEventData {
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerOfferExpired event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@example(MicrosoftCommunicationRouterWorkerOfferExpiredExample)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@example(MicrosoftCommunicationRouterWorkerOfferExpiredExample)
 model AcsRouterWorkerOfferExpiredEventData extends AcsRouterWorkerEventData {
   /** Router Worker Offer Expired Queue Id */
   queueId?: string;
@@ -792,8 +792,8 @@ model AcsRouterWorkerOfferIssuedEventData extends AcsRouterWorkerEventData {
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerOfferRevoked event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@example(MicrosoftCommunicationRouterWorkerOfferRevokedExample)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@example(MicrosoftCommunicationRouterWorkerOfferRevokedExample)
 model AcsRouterWorkerOfferRevokedEventData extends AcsRouterWorkerEventData {
   /** Router Worker Offer Revoked Queue Id */
   queueId?: string;
@@ -803,8 +803,8 @@ model AcsRouterWorkerOfferRevokedEventData extends AcsRouterWorkerEventData {
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerRegistered event */
-@example(MicrosoftCommunicationRouterWorkerRegisteredExample)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@example(MicrosoftCommunicationRouterWorkerRegisteredExample)
 model AcsRouterWorkerRegisteredEventData {
   /** Router Worker Registered Worker Id */
   workerId?: string;
@@ -1491,8 +1491,8 @@ model CommunicationUserIdentifierModel {
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerUpdated event. */
-@example(MicrosoftCommunicationRouterWorkerUpdatedExample)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@example(MicrosoftCommunicationRouterWorkerUpdatedExample)
 model AcsRouterWorkerUpdatedEventData {
   /** Router Worker Updated Worker Id */
   workerId?: string;
@@ -1523,8 +1523,8 @@ model AcsRouterWorkerUpdatedEventData {
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.AdvancedMessageDeliveryStatusUpdated event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@example(MicrosoftCommunicationAdvancedMessageDeliveryStatusUpdatedExample)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@example(MicrosoftCommunicationAdvancedMessageDeliveryStatusUpdatedExample)
 model AcsMessageDeliveryStatusUpdatedEventData extends AcsMessageEventData {
   /** The message id */
   messageId?: string;
@@ -1545,8 +1545,8 @@ model AcsMessageDeliveryStatusUpdatedEventData extends AcsMessageEventData {
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.AdvancedMessageReceived event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@example(MicrosoftCommunicationAdvancedMessageReceivedExample)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@example(MicrosoftCommunicationAdvancedMessageReceivedExample)
 model AcsMessageReceivedEventData extends AcsMessageEventData {
   /** Optional. The message content */
   content?: string;

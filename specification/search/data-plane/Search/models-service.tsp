@@ -3264,8 +3264,8 @@ model SearchIndexerDataContainer {
 }
 
 /** Base type for data change detection policies. */
-@discriminator("@odata.type")
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@discriminator("@odata.type")
 model DataChangeDetectionPolicy {
   /** The discriminator for derived types. */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
@@ -3274,8 +3274,8 @@ model DataChangeDetectionPolicy {
 }
 
 /** Base type for data deletion detection policies. */
-@discriminator("@odata.type")
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@discriminator("@odata.type")
 model DataDeletionDetectionPolicy {
   /** The discriminator for derived types. */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
@@ -3667,8 +3667,8 @@ model IndexerCurrentState {
 }
 
 /** Represents an item- or document-level indexing error. */
-@error
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@error
 model SearchIndexerError {
   /** The key of the item for which indexing failed. */
   @visibility(Lifecycle.Read)
@@ -3782,8 +3782,8 @@ model SearchIndexerSkillset {
 }
 
 /** Base type for skills. */
-@discriminator("@odata.type")
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@discriminator("@odata.type")
 model SearchIndexerSkill {
   /** The discriminator for derived types. */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
@@ -3833,8 +3833,8 @@ model OutputFieldMappingEntry {
 }
 
 /** Base type for describing any Azure AI service resource attached to a skillset. */
-@discriminator("@odata.type")
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@discriminator("@odata.type")
 model CognitiveServicesAccount {
   /** The discriminator for derived types. */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
@@ -4281,8 +4281,8 @@ model TextWeights {
 
 /** Base type for functions that can modify document scores during ranking. */
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-@discriminator("type")
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@discriminator("type")
 model ScoringFunction {
   /** The name of the field used as input to the scoring function. */
   fieldName: string;
@@ -4322,8 +4322,8 @@ model SearchSuggester {
 }
 
 /** Base type for analyzers. */
-@discriminator("@odata.type")
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@discriminator("@odata.type")
 model LexicalAnalyzer {
   /** The discriminator for derived types. */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
@@ -4335,8 +4335,8 @@ model LexicalAnalyzer {
 }
 
 /** Base type for tokenizers. */
-@discriminator("@odata.type")
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@discriminator("@odata.type")
 model LexicalTokenizer {
   /** The discriminator for derived types. */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
@@ -4348,8 +4348,8 @@ model LexicalTokenizer {
 }
 
 /** Base type for token filters. */
-@discriminator("@odata.type")
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@discriminator("@odata.type")
 model TokenFilter {
   /** The discriminator for derived types. */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
@@ -4361,8 +4361,8 @@ model TokenFilter {
 }
 
 /** Base type for character filters. */
-@discriminator("@odata.type")
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@discriminator("@odata.type")
 model CharFilter {
   /** The discriminator for derived types. */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
@@ -4386,8 +4386,8 @@ model LexicalNormalizer {
 }
 
 /** Base type for similarity algorithms. Similarity algorithms are used to calculate scores that tie queries to documents. The higher the score, the more relevant the document is to that specific query. Those scores are used to rank the search results. */
-@discriminator("@odata.type")
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@discriminator("@odata.type")
 model SimilarityAlgorithm {
   /** The discriminator for derived types. */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
@@ -4477,8 +4477,8 @@ model VectorSearchProfile {
 }
 
 /** Contains configuration options specific to the algorithm used during indexing or querying. */
-@discriminator("kind")
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@discriminator("kind")
 model VectorSearchAlgorithmConfiguration {
   /** The name to associate with this particular configuration. */
   name: string;
@@ -4488,8 +4488,8 @@ model VectorSearchAlgorithmConfiguration {
 }
 
 /** Specifies the vectorization method to be used during query time. */
-@discriminator("kind")
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@discriminator("kind")
 model VectorSearchVectorizer {
   /** The name to associate with this particular vectorization method. */
   name: string;
@@ -4499,8 +4499,8 @@ model VectorSearchVectorizer {
 }
 
 /** Contains configuration options specific to the compression method used during indexing or querying. */
-@discriminator("kind")
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@discriminator("kind")
 model VectorSearchCompression {
   /** The name to associate with this particular configuration. */
   name: string;
@@ -6388,8 +6388,8 @@ model AzureOpenAIVectorizerParameters {
 }
 
 /** Abstract base type for data identities. */
-@discriminator("@odata.type")
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@discriminator("@odata.type")
 model SearchIndexerDataIdentity {
   /** A URI fragment specifying the type of identity. */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"

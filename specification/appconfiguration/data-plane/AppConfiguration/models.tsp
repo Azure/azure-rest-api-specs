@@ -43,8 +43,8 @@ union KeyValueFields {
   string,
 }
 
-@doc("Snapshot fields.")
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@doc("Snapshot fields.")
 union SnapshotFields {
   @doc("Name field.")
   name: "name",
@@ -329,8 +329,8 @@ model Label {
   name?: string;
 }
 
-@doc("Details of a long running operation.")
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@doc("Details of a long running operation.")
 model OperationDetails {
   @doc("The unique id of the operation.")
   id: string;

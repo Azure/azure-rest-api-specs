@@ -599,8 +599,8 @@ model AnswerSpan {
 /**
  * Error response.
  */
-@error
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@error
 model ErrorResponse is Azure.Core.Foundations.ErrorResponseBase<Error>;
 
 /** The error response object returned when the service encounters some errors during processing the request. */

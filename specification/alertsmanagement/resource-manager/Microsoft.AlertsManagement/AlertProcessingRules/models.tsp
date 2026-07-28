@@ -378,8 +378,8 @@ model Resource {
 /**
  * An error response from the service.
  */
-@error
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@error
 model ErrorResponse {
   /**
    * Details of error response.

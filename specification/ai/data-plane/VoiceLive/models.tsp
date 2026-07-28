@@ -37,9 +37,9 @@ model VoiceLiveErrorDetails {
 }
 
 /** Standard error response envelope. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @error
 @usage(ResponseUsage)
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ErrorResponse {
   /** Error object returned in case of API failure. */
   error: VoiceLiveErrorDetails;

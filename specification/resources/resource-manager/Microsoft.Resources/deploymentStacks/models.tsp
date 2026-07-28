@@ -543,8 +543,8 @@ model DeploymentStacksParametersLink {
 /**
  * Deployment external input for parameterization.
  */
-@added(Versions.v2025_07_01)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@added(Versions.v2025_07_01)
 model DeploymentExternalInput {
   /**
    * External input value.
@@ -556,8 +556,8 @@ model DeploymentExternalInput {
 /**
  * Deployment external input definition for parameterization.
  */
-@added(Versions.v2025_07_01)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@added(Versions.v2025_07_01)
 model DeploymentExternalInputDefinition {
   /**
    * The kind of external input.
@@ -763,8 +763,8 @@ model DeploymentStackTemplateDefinition {
 /**
  * The value or how to get a value for an extension config property.
  */
-@added(Versions.v2025_07_01)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@added(Versions.v2025_07_01)
 model DeploymentExtensionConfigItem {
   /**
    * The type of the value.

@@ -23,9 +23,9 @@ namespace Microsoft.Compute;
 
 // ------------------ Shared enums ------------------
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @added(Versions.`2026-07-06-preview`)
 @doc("The type of resource being targeted")
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union ResourceType {
   @doc("Resources defined are Virtual Machines")
   VirtualMachine: "VirtualMachine",
@@ -541,9 +541,9 @@ model ScheduledActionResourceOperationResponse {
   resourcesStatuses: Array<ResourceStatus>;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @added(Versions.`2026-07-06-preview`)
 @doc("The scheduled action resource")
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ScheduledAction is TrackedResource<ScheduledActionProperties> {
   ...ResourceNameParameter<ScheduledAction>;
 }

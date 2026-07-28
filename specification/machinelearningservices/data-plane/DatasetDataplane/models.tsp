@@ -775,8 +775,8 @@ model ErrorAdditionalInfo {
 }
 
 /** The error response. */
-@error
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@error
 model ErrorResponse {
   /** The root error. */
   error?: RootError;

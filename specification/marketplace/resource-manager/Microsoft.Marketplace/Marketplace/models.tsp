@@ -287,8 +287,8 @@ model SystemData {
 /**
  * Error response indicates Microsoft.Marketplace service is not able to process the incoming request. The reason is provided in the error message.
  */
-@error
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@error
 model ErrorResponse {
   /**
    * The details of the error.

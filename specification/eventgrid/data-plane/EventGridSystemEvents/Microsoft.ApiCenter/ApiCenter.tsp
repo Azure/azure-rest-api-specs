@@ -3,8 +3,8 @@ import "./ApiCenterExample.tsp";
 namespace Microsoft.EventGrid.SystemEvents;
 
 /** Schema of the data property of an EventGridEvent for a Microsoft.ApiCenter.ApiDefinitionAdded event. */
-@example(ApiCenterApiDefinitionAddedExample)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@example(ApiCenterApiDefinitionAddedExample)
 model ApiCenterApiDefinitionAddedEventData {
   /** API definition title. */
   title: string;
@@ -17,8 +17,8 @@ model ApiCenterApiDefinitionAddedEventData {
 }
 
 /** Schema of the data property of an EventGridEvent for a Microsoft.ApiCenter.ApiDefinitionUpdated event. */
-@example(ApiCenterApiDefinitionUpdatedExample)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@example(ApiCenterApiDefinitionUpdatedExample)
 model ApiCenterApiDefinitionUpdatedEventData {
   /** API definition title. */
   title: string;

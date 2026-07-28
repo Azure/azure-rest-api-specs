@@ -5,183 +5,183 @@ using TypeSpec.Versioning;
 namespace Microsoft.EventGrid.SystemEvents;
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.UserCreated event. */
-@example(MicrosoftApiManagementUserCreatedExample)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@example(MicrosoftApiManagementUserCreatedExample)
 model ApiManagementUserCreatedEventData {
   ...ApiManagementBase;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.UserUpdated event. */
-@example(MicrosoftApiManagementUserUpdatedExample)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@example(MicrosoftApiManagementUserUpdatedExample)
 model ApiManagementUserUpdatedEventData {
   ...ApiManagementBase;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.UserDeleted event. */
-@example(MicrosoftApiManagementUserDeletedExample)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@example(MicrosoftApiManagementUserDeletedExample)
 model ApiManagementUserDeletedEventData {
   ...ApiManagementBase;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.SubscriptionCreated event. */
-@example(MicrosoftApiManagementSubscriptionCreatedExample)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@example(MicrosoftApiManagementSubscriptionCreatedExample)
 model ApiManagementSubscriptionCreatedEventData {
   ...ApiManagementBase;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.SubscriptionUpdated event. */
-@example(MicrosoftApiManagementSubscriptionUpdatedExample)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@example(MicrosoftApiManagementSubscriptionUpdatedExample)
 model ApiManagementSubscriptionUpdatedEventData {
   ...ApiManagementBase;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.SubscriptionDeleted event. */
-@example(MicrosoftApiManagementSubscriptionDeletedExample)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@example(MicrosoftApiManagementSubscriptionDeletedExample)
 model ApiManagementSubscriptionDeletedEventData {
   ...ApiManagementBase;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.ProductCreated event. */
-@example(MicrosoftApiManagementProductCreatedExample)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@example(MicrosoftApiManagementProductCreatedExample)
 model ApiManagementProductCreatedEventData {
   ...ApiManagementBase;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.ProductUpdated event. */
-@example(MicrosoftApiManagementProductUpdatedExample)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@example(MicrosoftApiManagementProductUpdatedExample)
 model ApiManagementProductUpdatedEventData {
   ...ApiManagementBase;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.ProductDeleted event. */
-@example(MicrosoftApiManagementProductDeletedExample)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@example(MicrosoftApiManagementProductDeletedExample)
 model ApiManagementProductDeletedEventData {
   ...ApiManagementBase;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.APICreated event. */
-@example(MicrosoftApiManagementAPICreatedExample)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@example(MicrosoftApiManagementAPICreatedExample)
 model ApiManagementApiCreatedEventData {
   ...ApiManagementBase;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.APIUpdated event. */
-@example(MicrosoftApiManagementAPIUpdatedExample)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@example(MicrosoftApiManagementAPIUpdatedExample)
 model ApiManagementApiUpdatedEventData {
   ...ApiManagementBase;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.APIDeleted event. */
-@example(MicrosoftApiManagementAPIDeletedExample)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@example(MicrosoftApiManagementAPIDeletedExample)
 model ApiManagementApiDeletedEventData {
   ...ApiManagementBase;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.APIReleaseCreated event. */
-@example(MicrosoftApiManagementAPIReleaseCreatedExample)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@example(MicrosoftApiManagementAPIReleaseCreatedExample)
 model ApiManagementApiReleaseCreatedEventData {
   ...ApiManagementBase;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.APIReleaseUpdated event. */
-@example(MicrosoftApiManagementAPIReleaseUpdatedExample)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@example(MicrosoftApiManagementAPIReleaseUpdatedExample)
 model ApiManagementApiReleaseUpdatedEventData {
   ...ApiManagementBase;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.APIReleaseDeleted event. */
-@example(MicrosoftApiManagementAPIReleaseDeletedExample)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@example(MicrosoftApiManagementAPIReleaseDeletedExample)
 model ApiManagementApiReleaseDeletedEventData {
   ...ApiManagementBase;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.GatewayCreated event. */
-@example(MicrosoftApiManagementGatewayCreatedExample)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@example(MicrosoftApiManagementGatewayCreatedExample)
 model ApiManagementGatewayCreatedEventData {
   ...ApiGatewayBase;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.GatewayUpdated event. */
-@example(MicrosoftApiManagementGatewayUpdatedExample)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@example(MicrosoftApiManagementGatewayUpdatedExample)
 model ApiManagementGatewayUpdatedEventData {
   ...ApiGatewayBase;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.GatewayDeleted event. */
-@example(MicrosoftApiManagementGatewayDeletedExample)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@example(MicrosoftApiManagementGatewayDeletedExample)
 model ApiManagementGatewayDeletedEventData {
   ...ApiGatewayBase;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.GatewayHostnameConfigurationCreated event. */
-@example(MicrosoftApiManagementGatewayHostnameConfigurationCreatedExample)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@example(MicrosoftApiManagementGatewayHostnameConfigurationCreatedExample)
 model ApiManagementGatewayHostnameConfigurationCreatedEventData {
   ...ApiGatewayHostnameBase;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.GatewayHostnameConfigurationUpdated event. */
-@example(MicrosoftApiManagementGatewayHostnameConfigurationUpdatedExample)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@example(MicrosoftApiManagementGatewayHostnameConfigurationUpdatedExample)
 model ApiManagementGatewayHostnameConfigurationUpdatedEventData {
   ...ApiGatewayHostnameBase;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.GatewayHostnameConfigurationDeleted event. */
-@example(MicrosoftApiManagementGatewayHostnameConfigurationDeletedExample)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@example(MicrosoftApiManagementGatewayHostnameConfigurationDeletedExample)
 model ApiManagementGatewayHostnameConfigurationDeletedEventData {
   ...ApiGatewayHostnameBase;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.GatewayCertificateAuthorityCreated event. */
-@example(MicrosoftApiManagementGatewayCertificateAuthorityCreatedExample)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@example(MicrosoftApiManagementGatewayCertificateAuthorityCreatedExample)
 model ApiManagementGatewayCertificateAuthorityCreatedEventData {
   ...ApiGatewayCertificateBase;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.GatewayCertificateAuthorityUpdated event. */
-@example(MicrosoftApiManagementGatewayCertificateAuthorityUpdatedExample)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@example(MicrosoftApiManagementGatewayCertificateAuthorityUpdatedExample)
 model ApiManagementGatewayCertificateAuthorityUpdatedEventData {
   ...ApiGatewayCertificateBase;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.GatewayCertificateAuthorityDeleted event. */
-@example(MicrosoftApiManagementGatewayCertificateAuthorityDeletedExample)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@example(MicrosoftApiManagementGatewayCertificateAuthorityDeletedExample)
 model ApiManagementGatewayCertificateAuthorityDeletedEventData {
   ...ApiGatewayCertificateBase;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.GatewayAPIAdded event. */
-@example(MicrosoftApiManagementGatewayAPIAddedExample)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@example(MicrosoftApiManagementGatewayAPIAddedExample)
 model ApiManagementGatewayApiAddedEventData {
   ...ApiGatewayApiBase;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.GatewayAPIRemoved event. */
-@example(MicrosoftApiManagementGatewayAPIRemovedExample)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@example(MicrosoftApiManagementGatewayAPIRemovedExample)
 model ApiManagementGatewayApiRemovedEventData {
   ...ApiGatewayApiBase;
 }

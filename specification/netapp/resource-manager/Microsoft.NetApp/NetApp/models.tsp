@@ -674,8 +674,8 @@ model RegionInfo {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-@clientName("AvailabilityZoneMapping", "csharp")
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@clientName("AvailabilityZoneMapping", "csharp")
 model RegionInfoAvailabilityZoneMappingsItem {
   /**
    * Logical availability zone.

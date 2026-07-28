@@ -214,8 +214,8 @@ model StorageProperties {
   provisioningState?: ResourceProvisioningState;
 }
 
-@doc("Storage Type of Commvault Storage")
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@doc("Storage Type of Commvault Storage")
 union StorageType {
   @doc("Air Gap Protect")
   AirGapProtect: "Air_Gap_Protect",

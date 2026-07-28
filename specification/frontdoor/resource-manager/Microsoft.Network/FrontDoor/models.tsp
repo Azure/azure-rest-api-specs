@@ -2181,8 +2181,8 @@ model BasicResource {
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
 model Resource {
   /**
    * Resource ID.
@@ -2255,8 +2255,8 @@ model ResourcewithSettableName {
 /**
  * Error response indicates Front Door service is not able to process the incoming request. The reason is provided in the error message.
  */
-@error
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@error
 model ErrorResponse {
   /**
    * Error code.

@@ -54,8 +54,8 @@ namespace Microsoft.EventGrid {
 
   alias StandardOperations = Azure.Core.StandardResourceOperations;
 
-  @doc("Properties of an event published to an Azure Messaging EventGrid Namespace topic using the CloudEvent 1.0 Schema.")
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+  @doc("Properties of an event published to an Azure Messaging EventGrid Namespace topic using the CloudEvent 1.0 Schema.")
   model CloudEvent {
     @doc("An identifier for the event. The combination of id and source must be unique for each distinct event.")
     id: string;

@@ -363,8 +363,8 @@ model SecretProperties {
 /**
  * The media type (MIME type).
  */
-@Versioning.added(KeyVault.Versions.v2025_06_01_preview)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@Versioning.added(KeyVault.Versions.v2025_06_01_preview)
 union ContentType {
   string,
 

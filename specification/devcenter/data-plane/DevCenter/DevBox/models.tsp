@@ -75,9 +75,9 @@ union DevBoxProvisioningState {
   string,
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Indicates the general provisioning state.")
 @added(APIVersions.v2025_04_01_preview)
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union ProvisioningState {
   @doc("Resource is creating.") Creating: "Creating",
   @doc("Resource is being updated.") Updating: "Updating",
@@ -87,8 +87,8 @@ union ProvisioningState {
   string,
 }
 
-@doc("Indicates the Dev Box compute.")
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@doc("Indicates the Dev Box compute.")
 union SkuName {
   @doc("Intel, 8 vCPU, 32 GB RAM, 256 GB Storage.")
   general_i_8c32gb256ssd_v2: "general_i_8c32gb256ssd_v2",

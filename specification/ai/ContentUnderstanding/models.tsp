@@ -814,9 +814,9 @@ model UsageDetails {
   tokens?: Record<int32>;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @added(Versions.v2025_11_01)
 @doc("Copy authorization details for cross-resource copy.")
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model CopyAuthorization {
   @doc("Full path of the source analyzer.")
   source: string;

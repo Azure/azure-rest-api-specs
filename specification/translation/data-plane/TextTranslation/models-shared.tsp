@@ -30,9 +30,9 @@ alias CommonResultHeaders = {
   requestId: string;
 };
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Representation of the Error Response from Translator Service.")
 @error
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ErrorResponse {
   ...CommonResultHeaders;
 
@@ -40,8 +40,8 @@ model ErrorResponse {
   error: ErrorDetails;
 }
 
-@doc("Error details as returned by Translator Service.")
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
+@doc("Error details as returned by Translator Service.")
 model ErrorDetails {
   @removed(APIVersion.v2025_10_01_preview)
   @renamedFrom(APIVersion.v2025_10_01_preview, "code")
