@@ -429,3 +429,37 @@ namespace Microsoft.Compute;
   "ShouldBypassPlatformSafetyChecksOnUserSchedule",
   "csharp"
 );
+
+// =====================================================================
+// .NET Management SDK review (AZC0030) suffix fixes (C# only)
+// SUFFIX rules: "Request" -> "Content", "Response" -> "Result", "Parameters" -> "Content".
+// =====================================================================
+@@clientName(
+  AcknowledgeBulkOperationErrorsRequest,
+  "AcknowledgeBulkOperationErrorsRequestContent",
+  "csharp"
+);
+@@clientName(
+  AcknowledgeBulkOperationErrorsResponse,
+  "AcknowledgeBulkOperationErrorsResponseResult",
+  "csharp"
+);
+@@clientName(
+  CancelOccurrenceRequest,
+  "CancelOccurrenceRequestContent",
+  "csharp"
+);
+@@clientName(DelayRequest, "DelayRequestContent", "csharp");
+@@clientName(
+  RecurringScheduledActionsExecutionParameters,
+  "RecurringScheduledActionsExecutionParametersContent",
+  "csharp"
+);
+@@clientName(ResourceAttachRequest, "ResourceAttachRequestContent", "csharp");
+@@clientName(ResourceDetachRequest, "ResourceDetachRequestContent", "csharp");
+@@clientName(
+  ResourceOperationResponse,
+  "ResourceOperationResponseResult",
+  "csharp"
+);
+@@clientName(ResourcePatchRequest, "ResourcePatchRequestContent", "csharp");
