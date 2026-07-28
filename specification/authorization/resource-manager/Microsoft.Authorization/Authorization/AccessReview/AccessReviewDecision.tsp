@@ -10,7 +10,7 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-namespace Microsoft.AttributeNamespaces;
+namespace Microsoft.AccessReview;
 /**
  * Access Review.
  */
