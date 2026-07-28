@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2025-01-01",
+    "version": "2026-08-01",
     "title": "AdvisorManagementClient",
     "description": "REST APIs for Azure Advisor"
   },
@@ -920,6 +920,115 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews": {
+      "get": {
+        "tags": [
+          "ResiliencyReviews"
+        ],
+        "summary": "Get list of resiliency reviews.",
+        "description": "Get list of Azure Advisor resiliency reviews.",
+        "operationId": "ResiliencyReviews_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The number of items to be included in the result.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "description": "The number of items to skip before starting to collect the result set.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply.<br>Filter can be applied to properties ['reviewStatus', 'reviewId'] with operators ['eq', 'and', 'or'].<br>Example:<br>- $filter=reviewStatus eq 'New'",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Successfully retrieved resiliency reviews.",
+            "schema": {
+              "$ref": "#/definitions/ResiliencyReviewListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ListResiliencyReviews": {
+            "$ref": "./examples/ResiliencyReviewsList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}": {
+      "get": {
+        "tags": [
+          "ResiliencyReviews"
+        ],
+        "summary": "Get existing resiliency review.",
+        "description": "Get existing Azure Advisor resiliency review by id.",
+        "operationId": "ResiliencyReviews_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "name": "reviewId",
+            "in": "path",
+            "description": "Existing review id. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Successfully retrieved the resiliency review.",
+            "schema": {
+              "$ref": "#/definitions/ResiliencyReview"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "GetResiliencyReview": {
+            "$ref": "./examples/ResiliencyReviewsGet.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1716,6 +1825,115 @@
             }
           }
         }
+      }
+    },
+    "ResiliencyReview": {
+      "description": "The Advisor resiliency review data structure.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ResiliencyReviewProperties",
+          "description": "Advisor resiliency review properties.",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/systemData",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "readOnly": true
+        }
+      }
+    },
+    "ResiliencyReviewProperties": {
+      "description": "Resiliency review properties.",
+      "type": "object",
+      "properties": {
+        "reviewName": {
+          "type": "string",
+          "description": "Review name.",
+          "readOnly": true
+        },
+        "workloadName": {
+          "type": "string",
+          "description": "Workload Name.",
+          "readOnly": true
+        },
+        "reviewStatus": {
+          "$ref": "#/definitions/ReviewStatus",
+          "description": "Review status.",
+          "readOnly": true
+        },
+        "recommendationsCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Review recommendations count.",
+          "readOnly": true
+        },
+        "publishedAt": {
+          "type": "string",
+          "description": "Review last published timestamp.",
+          "readOnly": true
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Review last updated timestamp.",
+          "readOnly": true
+        }
+      }
+    },
+    "ResiliencyReviewListResult": {
+      "description": "The list of Advisor resiliency reviews.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of resiliency reviews.",
+          "items": {
+            "$ref": "#/definitions/ResiliencyReview"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ReviewStatus": {
+      "type": "string",
+      "description": "Review status.",
+      "enum": [
+        "New",
+        "InProgress",
+        "Completed"
+      ],
+      "x-ms-enum": {
+        "name": "ReviewStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "New",
+            "value": "New",
+            "description": "The review has been newly created."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The review is currently in progress."
+          },
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "The review has been completed."
+          }
+        ]
       }
     }
   },
