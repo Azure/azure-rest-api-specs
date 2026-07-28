@@ -1020,26 +1020,6 @@ components:
           type: string
           description: Background image URL. Cannot be set if `color` is provided.
       description: Defines a video background, either a solid color or an image URL (mutually exclusive).
-    ClientEvent:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          $ref: '#/components/schemas/ClientEventType'
-          description: The type of event.
-        event_id:
-          type: string
-      discriminator:
-        propertyName: type
-        mapping:
-          session.avatar.connect: '#/components/schemas/ClientEventSessionAvatarConnect'
-          input_text.delta: '#/components/schemas/ClientEventInputTextDelta'
-          input_text.done: '#/components/schemas/ClientEventInputTextDone'
-          byom_credential.update: '#/components/schemas/ClientEventBYOMCredentialUpdate'
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.RealtimeClientEvent'
-      description: A voicelive client event.
     ClientEventBYOMCredentialUpdate:
       type: object
       required:
@@ -1051,13 +1031,15 @@ components:
           enum:
             - byom_credential.update
           description: The event type, must be `byom_credential.update`.
+        event_id:
+          type: string
         authorization_headers:
           type: object
           unevaluatedProperties:
             type: string
           description: Authorization header names and values to apply to subsequent BYOM requests.
       allOf:
-        - $ref: '#/components/schemas/ClientEvent'
+        - $ref: '#/components/schemas/OpenAI.RealtimeClientEvent'
       description: Updates authorization headers for an active bring-your-own-model connection.
     ClientEventInputTextDelta:
       type: object
@@ -1071,6 +1053,8 @@ components:
           enum:
             - input_text.delta
           description: The event type, must be `input_text.delta`.
+        event_id:
+          type: string
         id:
           type: string
           description: The ID of the item the text delta is being appended to.
@@ -1083,7 +1067,7 @@ components:
           description: The index of the content part within the item the delta applies to.
           default: 0
       allOf:
-        - $ref: '#/components/schemas/ClientEvent'
+        - $ref: '#/components/schemas/OpenAI.RealtimeClientEvent'
       description: Streams a delta of input text content into the specified item.
     ClientEventInputTextDone:
       type: object
@@ -1096,6 +1080,8 @@ components:
           enum:
             - input_text.done
           description: The event type, must be `input_text.done`.
+        event_id:
+          type: string
         id:
           type: string
           description: The ID of the item whose text content has finished streaming.
@@ -1105,7 +1091,7 @@ components:
           description: The index of the content part within the item.
           default: 0
       allOf:
-        - $ref: '#/components/schemas/ClientEvent'
+        - $ref: '#/components/schemas/OpenAI.RealtimeClientEvent'
       description: Signals that the streamed input text content for the specified item is complete.
     ClientEventSessionAvatarConnect:
       type: object
@@ -1118,29 +1104,17 @@ components:
           enum:
             - session.avatar.connect
           description: The event type, must be 'session.avatar.connect'.
+        event_id:
+          type: string
         client_sdp:
           type: string
           description: The client's SDP offer.
       allOf:
-        - $ref: '#/components/schemas/ClientEvent'
+        - $ref: '#/components/schemas/OpenAI.RealtimeClientEvent'
       description: |-
         Sent when the client connects and provides its SDP (Session Description Protocol)
 
         for avatar-related media negotiation.
-    ClientEventType:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - session.avatar.connect
-            - input_text.delta
-            - input_text.done
-            - byom_credential.update
-      description: |-
-        Azure-specific client event types. Client events that exist in OpenAI GA
-        Realtime (`session.update`, `input_audio_buffer.*`, `conversation.item.*`,
-        `response.create`/`.cancel`, `output_audio_buffer.clear`) are consumed from
-        OpenAI directly; only Azure-only client event types are listed here.
     ConversationItemBase:
       type: object
       description: The item to add to the conversation.
@@ -1521,6 +1495,9 @@ components:
       discriminator:
         propertyName: type
         mapping:
+          input_text.delta: '#/components/schemas/ClientEventInputTextDelta'
+          input_text.done: '#/components/schemas/ClientEventInputTextDone'
+          byom_credential.update: '#/components/schemas/ClientEventBYOMCredentialUpdate'
           conversation.item.create: '#/components/schemas/OpenAI.RealtimeClientEventConversationItemCreate'
           conversation.item.delete: '#/components/schemas/OpenAI.RealtimeClientEventConversationItemDelete'
           conversation.item.retrieve: '#/components/schemas/OpenAI.RealtimeClientEventConversationItemRetrieve'
@@ -1532,10 +1509,7 @@ components:
           response.cancel: '#/components/schemas/OpenAI.RealtimeClientEventResponseCancel'
           response.create: '#/components/schemas/OpenAI.RealtimeClientEventResponseCreate'
           session.update: '#/components/schemas/OpenAI.RealtimeClientEventSessionUpdate'
-          session.avatar.connect: '#/components/schemas/ClientEvent'
-          input_text.delta: '#/components/schemas/ClientEvent'
-          input_text.done: '#/components/schemas/ClientEvent'
-          byom_credential.update: '#/components/schemas/ClientEvent'
+          session.avatar.connect: '#/components/schemas/ClientEventSessionAvatarConnect'
       description: A realtime client event.
     OpenAI.RealtimeClientEventConversationItemCreate:
       type: object
@@ -2764,6 +2738,13 @@ components:
       discriminator:
         propertyName: type
         mapping:
+          byom_credential.updated: '#/components/schemas/ServerEventBYOMCredentialUpdated'
+          session.avatar.connecting: '#/components/schemas/ServerEventSessionAvatarConnecting'
+          response.audio_timestamp.delta: '#/components/schemas/ServerEventResponseAudioTimestampDelta'
+          response.audio_timestamp.done: '#/components/schemas/ServerEventResponseAudioTimestampDone'
+          session.avatar.switch_to_speaking: '#/components/schemas/ServerEventSessionAvatarSwitchToSpeaking'
+          session.avatar.switch_to_idle: '#/components/schemas/ServerEventSessionAvatarSwitchToIdle'
+          response.video.delta: '#/components/schemas/ServerEventResponseVideoDelta'
           conversation.item.created: '#/components/schemas/OpenAI.RealtimeServerEventConversationItemCreated'
           conversation.item.deleted: '#/components/schemas/OpenAI.RealtimeServerEventConversationItemDeleted'
           conversation.item.input_audio_transcription.completed: '#/components/schemas/OpenAI.RealtimeServerEventConversationItemInputAudioTranscriptionCompleted'
@@ -2805,14 +2786,7 @@ components:
           response.mcp_call.completed: '#/components/schemas/OpenAI.RealtimeServerEventResponseMCPCallCompleted'
           response.mcp_call.failed: '#/components/schemas/OpenAI.RealtimeServerEventResponseMCPCallFailed'
           error: '#/components/schemas/OpenAI.RealtimeServerEventRealtimeServerEventError'
-          warning: '#/components/schemas/ServerEvent'
-          byom_credential.updated: '#/components/schemas/ServerEvent'
-          session.avatar.connecting: '#/components/schemas/ServerEvent'
-          response.audio_timestamp.delta: '#/components/schemas/ServerEvent'
-          response.audio_timestamp.done: '#/components/schemas/ServerEvent'
-          session.avatar.switch_to_speaking: '#/components/schemas/ServerEvent'
-          session.avatar.switch_to_idle: '#/components/schemas/ServerEvent'
-          response.video.delta: '#/components/schemas/ServerEvent'
+          warning: '#/components/schemas/ServerEventWarning'
       description: A realtime server event.
     OpenAI.RealtimeServerEventConversationItemAdded:
       type: object
@@ -5852,30 +5826,6 @@ components:
           description: Amplitude of the avatar movement. Range is (0, 1]. Values in (0, 1) mean reduced amplitude, 1 means full amplitude.
           default: 0
       description: Configuration for avatar's zoom level, position, rotation and movement amplitude in the video frame.
-    ServerEvent:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          $ref: '#/components/schemas/ServerEventType'
-          description: The type of event.
-        event_id:
-          type: string
-      discriminator:
-        propertyName: type
-        mapping:
-          warning: '#/components/schemas/ServerEventWarning'
-          byom_credential.updated: '#/components/schemas/ServerEventBYOMCredentialUpdated'
-          session.avatar.connecting: '#/components/schemas/ServerEventSessionAvatarConnecting'
-          response.audio_timestamp.delta: '#/components/schemas/ServerEventResponseAudioTimestampDelta'
-          response.audio_timestamp.done: '#/components/schemas/ServerEventResponseAudioTimestampDone'
-          session.avatar.switch_to_speaking: '#/components/schemas/ServerEventSessionAvatarSwitchToSpeaking'
-          session.avatar.switch_to_idle: '#/components/schemas/ServerEventSessionAvatarSwitchToIdle'
-          response.video.delta: '#/components/schemas/ServerEventResponseVideoDelta'
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.RealtimeServerEvent'
-      description: A voicelive server event.
     ServerEventBYOMCredentialUpdated:
       type: object
       required:
@@ -5887,13 +5837,15 @@ components:
           enum:
             - byom_credential.updated
           description: The event type, must be `byom_credential.updated`.
+        event_id:
+          type: string
         authorization_headers:
           type: object
           unevaluatedProperties:
             type: string
           description: Updated authorization header names with their values redacted.
       allOf:
-        - $ref: '#/components/schemas/ServerEvent'
+        - $ref: '#/components/schemas/OpenAI.RealtimeServerEvent'
       description: Confirms that BYOM authorization headers were updated.
     ServerEventResponseAudioTimestampDelta:
       type: object
@@ -5912,6 +5864,8 @@ components:
           type: string
           enum:
             - response.audio_timestamp.delta
+        event_id:
+          type: string
         response_id:
           type: string
         item_id:
@@ -5935,7 +5889,7 @@ components:
           enum:
             - word
       allOf:
-        - $ref: '#/components/schemas/ServerEvent'
+        - $ref: '#/components/schemas/OpenAI.RealtimeServerEvent'
       description: Represents a word-level audio timestamp delta for a response.
     ServerEventResponseAudioTimestampDone:
       type: object
@@ -5950,6 +5904,8 @@ components:
           type: string
           enum:
             - response.audio_timestamp.done
+        event_id:
+          type: string
         response_id:
           type: string
         item_id:
@@ -5961,7 +5917,7 @@ components:
           type: integer
           format: int32
       allOf:
-        - $ref: '#/components/schemas/ServerEvent'
+        - $ref: '#/components/schemas/OpenAI.RealtimeServerEvent'
       description: Indicates completion of audio timestamp delivery for a response.
     ServerEventResponseVideoDelta:
       type: object
@@ -5976,6 +5932,8 @@ components:
           enum:
             - response.video.delta
           description: The event type, must be `response.video.delta`.
+        event_id:
+          type: string
         output_index:
           type: integer
           format: int32
@@ -5987,7 +5945,7 @@ components:
           type: string
           description: The base64-encoded video frame data.
       allOf:
-        - $ref: '#/components/schemas/ServerEvent'
+        - $ref: '#/components/schemas/OpenAI.RealtimeServerEvent'
       description: Returned when avatar video frame data is streamed.
     ServerEventSessionAvatarConnecting:
       type: object
@@ -6000,11 +5958,13 @@ components:
           enum:
             - session.avatar.connecting
           description: The event type, must be 'session.avatar.connecting'.
+        event_id:
+          type: string
         server_sdp:
           type: string
           description: The server's SDP answer for the avatar connection.
       allOf:
-        - $ref: '#/components/schemas/ServerEvent'
+        - $ref: '#/components/schemas/OpenAI.RealtimeServerEvent'
       description: Sent when the server is in the process of establishing an avatar media connection and provides its SDP answer.
     ServerEventSessionAvatarSwitchToIdle:
       type: object
@@ -6016,11 +5976,13 @@ components:
           enum:
             - session.avatar.switch_to_idle
           description: The event type, must be `session.avatar.switch_to_idle`.
+        event_id:
+          type: string
         turn_id:
           type: string
           description: The ID of the turn associated with the avatar state change.
       allOf:
-        - $ref: '#/components/schemas/ServerEvent'
+        - $ref: '#/components/schemas/OpenAI.RealtimeServerEvent'
       description: Returned when the avatar switches to idle state.
     ServerEventSessionAvatarSwitchToSpeaking:
       type: object
@@ -6032,36 +5994,14 @@ components:
           enum:
             - session.avatar.switch_to_speaking
           description: The event type, must be `session.avatar.switch_to_speaking`.
+        event_id:
+          type: string
         turn_id:
           type: string
           description: The ID of the turn associated with the avatar state change.
       allOf:
-        - $ref: '#/components/schemas/ServerEvent'
+        - $ref: '#/components/schemas/OpenAI.RealtimeServerEvent'
       description: Returned when the avatar switches to speaking state.
-    ServerEventType:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - warning
-            - byom_credential.updated
-            - session.avatar.connecting
-            - response.audio_timestamp.delta
-            - response.audio_timestamp.done
-            - session.avatar.switch_to_speaking
-            - session.avatar.switch_to_idle
-            - response.video.delta
-      description: |-
-        Azure-specific server event types. Server events that exist in OpenAI GA
-        Realtime (error, `input_audio_buffer.*`, `conversation.item.created/deleted/`
-        `truncated/retrieved`, `conversation.item.input_audio_transcription.*`,
-        `session.created/updated`, `response.text.*`, `response.audio_transcript.*`,
-        `response.content_part.*`, `response.output_item.*`, `response.created/done`,
-        `response.function_call_arguments.*`, `mcp_list_tools.*`,
-        `response.mcp_call*.*`, and `output_audio_buffer.cleared`) are
-        consumed from OpenAI directly (with Azure payloads re-injected via `custom.tsp`
-        augmentations where needed). OpenAI server events not exposed by stable v1 are
-        version-fenced in `custom.tsp`; only Azure-only event types are listed here.
     ServerEventWarning:
       type: object
       required:
@@ -6073,11 +6013,13 @@ components:
           enum:
             - warning
           description: The event type, must be `warning`.
+        event_id:
+          type: string
         warning:
           $ref: '#/components/schemas/ServerEventWarningDetails'
           description: Details of the warning.
       allOf:
-        - $ref: '#/components/schemas/ServerEvent'
+        - $ref: '#/components/schemas/OpenAI.RealtimeServerEvent'
       description: |-
         Returned when a warning occurs that does not interrupt the conversation flow.
         Warnings are informational and the session will continue normally.

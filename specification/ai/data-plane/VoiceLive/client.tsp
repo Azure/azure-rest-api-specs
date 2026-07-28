@@ -12,6 +12,296 @@ using Azure.ClientGenerator.Core;
 @@clientNamespace(OpenAI, "azure.ai.voicelive", "python");
 @@clientNamespace(OpenAI, "com.azure.ai.voicelive", "java");
 
+// De-brand OpenAI GA "Realtime" types on the VoiceLive SDK surface. VoiceLive is
+// itself a realtime API, so the OpenAI-specific `Realtime` prefix is redundant.
+// These map the consumed OpenAI GA models to VoiceLive's own (pre-`Realtime`) names
+// for all languages. Left untouched: types that already carry a deliberate VoiceLive
+// name; the two `*EventType` discriminator enums (VoiceLive owns same-named enums);
+// `RealtimeResponse` (base of `VoiceLive.Response`); and the `ConversationItem*`,
+// `FunctionTool*`, `Reasoning*` families whose stripped names collide with OpenAI's
+// Responses-API twins (kept `Realtime`-prefixed to disambiguate).
+@@clientName(OpenAI.RealtimeAudioFormats, "AudioFormats");
+@@clientName(OpenAI.RealtimeAudioFormatsAudioPcm, "AudioFormatsAudioPcm");
+@@clientName(OpenAI.RealtimeAudioFormatsAudioPcma, "AudioFormatsAudioPcma");
+@@clientName(OpenAI.RealtimeAudioFormatsAudioPcmu, "AudioFormatsAudioPcmu");
+@@clientName(OpenAI.RealtimeAudioFormatsType, "AudioFormatsType");
+@@clientName(OpenAI.RealtimeClientEvent, "ClientEvent");
+@@clientName(
+  OpenAI.RealtimeClientEventOutputAudioBufferClear,
+  "ClientEventOutputAudioBufferClear"
+);
+@@clientName(
+  OpenAI.RealtimeClientEventConversationItemCreate,
+  "ClientEventConversationItemCreate"
+);
+@@clientName(
+  OpenAI.RealtimeClientEventConversationItemDelete,
+  "ClientEventConversationItemDelete"
+);
+@@clientName(
+  OpenAI.RealtimeClientEventConversationItemRetrieve,
+  "ClientEventConversationItemRetrieve"
+);
+@@clientName(
+  OpenAI.RealtimeClientEventConversationItemTruncate,
+  "ClientEventConversationItemTruncate"
+);
+@@clientName(
+  OpenAI.RealtimeClientEventInputAudioBufferAppend,
+  "ClientEventInputAudioBufferAppend"
+);
+@@clientName(
+  OpenAI.RealtimeClientEventInputAudioBufferClear,
+  "ClientEventInputAudioBufferClear"
+);
+@@clientName(
+  OpenAI.RealtimeClientEventInputAudioBufferCommit,
+  "ClientEventInputAudioBufferCommit"
+);
+@@clientName(
+  OpenAI.RealtimeClientEventResponseCancel,
+  "ClientEventResponseCancel"
+);
+@@clientName(
+  OpenAI.RealtimeClientEventResponseCreate,
+  "ClientEventResponseCreate"
+);
+@@clientName(
+  OpenAI.RealtimeClientEventSessionUpdate,
+  "ClientEventSessionUpdate"
+);
+@@clientName(OpenAI.RealtimeMCPError, "MCPError");
+@@clientName(OpenAI.RealtimeMcpErrorType, "McpErrorType");
+@@clientName(OpenAI.RealtimeMCPHTTPError, "MCPHTTPError");
+@@clientName(OpenAI.RealtimeMCPProtocolError, "MCPProtocolError");
+@@clientName(OpenAI.RealtimeMCPToolExecutionError, "MCPToolExecutionError");
+@@clientName(OpenAI.RealtimeResponseAudio, "ResponseAudio");
+@@clientName(OpenAI.RealtimeResponseAudioOutput, "ResponseAudioOutput");
+@@clientName(OpenAI.RealtimeResponseStatusDetails, "ResponseStatusDetails");
+@@clientName(
+  OpenAI.RealtimeResponseStatusDetailsError,
+  "ResponseStatusDetailsError"
+);
+@@clientName(
+  OpenAI.RealtimeResponseUsageInputTokenDetails,
+  "ResponseUsageInputTokenDetails"
+);
+@@clientName(
+  OpenAI.RealtimeResponseUsageInputTokenDetailsCachedTokensDetails,
+  "ResponseUsageInputTokenDetailsCachedTokensDetails"
+);
+@@clientName(
+  OpenAI.RealtimeResponseUsageOutputTokenDetails,
+  "ResponseUsageOutputTokenDetails"
+);
+@@clientName(OpenAI.RealtimeServerEvent, "ServerEvent");
+@@clientName(
+  OpenAI.RealtimeServerEventConversationItemAdded,
+  "ServerEventConversationItemAdded"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventConversationItemDone,
+  "ServerEventConversationItemDone"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventConversationItemInputAudioTranscriptionFailedError,
+  "ServerEventConversationItemInputAudioTranscriptionFailedError"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventConversationItemInputAudioTranscriptionSegment,
+  "ServerEventConversationItemInputAudioTranscriptionSegment"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventInputAudioBufferTimeoutTriggered,
+  "ServerEventInputAudioBufferTimeoutTriggered"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventOutputAudioBufferCleared,
+  "ServerEventOutputAudioBufferCleared"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventResponseContentPartAddedPart,
+  "ServerEventResponseContentPartAddedPart"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventResponseContentPartDonePart,
+  "ServerEventResponseContentPartDonePart"
+);
+@@clientName(OpenAI.RealtimeTurnDetection, "TurnDetection");
+@@clientName(
+  OpenAI.RealtimeTurnDetectionSemanticVad,
+  "TurnDetectionSemanticVad"
+);
+@@clientName(OpenAI.RealtimeTurnDetectionType, "TurnDetectionType");
+
+// Server events: old GA named these `SessionUpdate*` in the C#/Java SDKs but kept the
+// default `ServerEvent*` names in Python/JS. The language-scoped `SessionUpdate*`
+// overrides below still win for C#/Java; these global names restore the old GA
+// `ServerEvent*` names for Python/JS (and any unscoped language).
+@@clientName(
+  OpenAI.RealtimeServerEventRealtimeServerEventError,
+  "ServerEventError"
+);
+@@clientName(OpenAI.RealtimeServerEventErrorError, "ServerEventErrorDetails");
+@@clientName(
+  OpenAI.RealtimeServerEventConversationItemCreated,
+  "ServerEventConversationItemCreated"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventConversationItemDeleted,
+  "ServerEventConversationItemDeleted"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventConversationItemInputAudioTranscriptionCompleted,
+  "ServerEventConversationItemInputAudioTranscriptionCompleted"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventConversationItemInputAudioTranscriptionDelta,
+  "ServerEventConversationItemInputAudioTranscriptionDelta"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventConversationItemInputAudioTranscriptionFailed,
+  "ServerEventConversationItemInputAudioTranscriptionFailed"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventConversationItemRetrieved,
+  "ServerEventConversationItemRetrieved"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventConversationItemTruncated,
+  "ServerEventConversationItemTruncated"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventInputAudioBufferCleared,
+  "ServerEventInputAudioBufferCleared"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventInputAudioBufferCommitted,
+  "ServerEventInputAudioBufferCommitted"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventInputAudioBufferSpeechStarted,
+  "ServerEventInputAudioBufferSpeechStarted"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventInputAudioBufferSpeechStopped,
+  "ServerEventInputAudioBufferSpeechStopped"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventMCPListToolsCompleted,
+  "ServerEventMcpListToolsCompleted"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventMCPListToolsFailed,
+  "ServerEventMcpListToolsFailed"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventMCPListToolsInProgress,
+  "ServerEventMcpListToolsInProgress"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventResponseAudioDelta,
+  "ServerEventResponseAudioDelta"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventResponseAudioDone,
+  "ServerEventResponseAudioDone"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventResponseAudioTranscriptDelta,
+  "ServerEventResponseAudioTranscriptDelta"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventResponseAudioTranscriptDone,
+  "ServerEventResponseAudioTranscriptDone"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventResponseContentPartAdded,
+  "ServerEventResponseContentPartAdded"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventResponseContentPartDone,
+  "ServerEventResponseContentPartDone"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventResponseCreated,
+  "ServerEventResponseCreated"
+);
+@@clientName(OpenAI.RealtimeServerEventResponseDone, "ServerEventResponseDone");
+@@clientName(
+  OpenAI.RealtimeServerEventResponseFunctionCallArgumentsDelta,
+  "ServerEventResponseFunctionCallArgumentsDelta"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventResponseFunctionCallArgumentsDone,
+  "ServerEventResponseFunctionCallArgumentsDone"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventResponseMCPCallArgumentsDelta,
+  "ServerEventResponseMcpCallArgumentsDelta"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventResponseMCPCallArgumentsDone,
+  "ServerEventResponseMcpCallArgumentsDone"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventResponseMCPCallCompleted,
+  "ServerEventResponseMcpCallCompleted"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventResponseMCPCallFailed,
+  "ServerEventResponseMcpCallFailed"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventResponseMCPCallInProgress,
+  "ServerEventResponseMcpCallInProgress"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventResponseOutputItemAdded,
+  "ServerEventResponseOutputItemAdded"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventResponseOutputItemDone,
+  "ServerEventResponseOutputItemDone"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventResponseTextDelta,
+  "ServerEventResponseTextDelta"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventResponseTextDone,
+  "ServerEventResponseTextDone"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventSessionCreated,
+  "ServerEventSessionCreated"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventSessionUpdated,
+  "ServerEventSessionUpdated"
+);
+
+// Reference the old VoiceLive GA names for the OpenAI GA conversation-item and tool
+// types (no `Realtime`/`VoiceLive` wording). The concrete item leaves map back to the
+// old item type names; `FunctionTool`/`ReasoningEffort` reuse the old names after moving
+// the hidden (internal) OpenAI Responses-API twins off those names so tcgc stays unique.
+@@clientName(OpenAI.FunctionTool, "ResponsesFunctionTool");
+@@clientName(OpenAI.ReasoningEffort, "ResponsesReasoningEffort");
+@@clientName(OpenAI.RealtimeConversationItemMessage, "MessageItem");
+@@clientName(
+  OpenAI.RealtimeConversationItemMessageAssistant,
+  "AssistantMessageItem"
+);
+@@clientName(OpenAI.RealtimeConversationItemMessageSystem, "SystemMessageItem");
+@@clientName(OpenAI.RealtimeConversationItemMessageUser, "UserMessageItem");
+@@clientName(OpenAI.RealtimeConversationItemFunctionCall, "FunctionCallItem");
+@@clientName(
+  OpenAI.RealtimeConversationItemFunctionCallOutput,
+  "FunctionCallOutputItem"
+);
+@@clientName(OpenAI.RealtimeFunctionTool, "FunctionTool");
+@@clientName(OpenAI.RealtimeReasoningEffort, "ReasoningEffort");
+
 @@clientName(VoiceLive.AzureRealtimeNativeVoice.type, "Kind", "csharp");
 @@clientName(
   OpenAI.RealtimeSessionCreateRequestGA.parallel_tool_calls,
@@ -198,9 +488,7 @@ using Azure.ClientGenerator.Core;
 @@clientName(VoiceLive.OAIVoice, "OpenAIVoiceName", "python");
 @@clientName(VoiceLive.AvatarConfig.type, "avatar_type", "python");
 
-@@access(VoiceLive.ServerEvent, Access.public, "csharp");
 @@access(OpenAI.RealtimeServerEventSessionCreated, Access.public, "csharp");
-@@access(VoiceLive.ClientEvent, Access.internal, "csharp");
 @@access(
   OpenAI.RealtimeClientEventConversationItemCreate,
   Access.internal,
@@ -310,7 +598,6 @@ using Azure.ClientGenerator.Core;
 @@clientName(VoiceLive.Response, "SessionResponse", "csharp");
 @@clientName(VoiceLive.AgentConfig, "RespondingAgentOptions", "csharp");
 @@clientName(VoiceLive.ResponseItem, "SessionResponseItem", "csharp");
-@@clientName(VoiceLive.ServerEvent, "SessionUpdate", "csharp");
 @@clientName(
   OpenAI.RealtimeServerEventSessionCreated,
   "SessionUpdateSessionCreated",
@@ -866,7 +1153,6 @@ using Azure.ClientGenerator.Core;
 
 @@clientName(VoiceLive.OAIVoice, "OpenAIVoiceName", "java");
 
-@@clientName(VoiceLive.ClientEvent, "SessionClientEvent", "java");
 @@clientName(VoiceLive.Animation, "AnimationOptions", "java");
 @@clientName(VoiceLive.Animation.outputs, "outputTypes", "java");
 @@clientName(VoiceLive.LogProbProperties.logprob, "logProb", "java");
@@ -892,7 +1178,6 @@ using Azure.ClientGenerator.Core;
 @@clientName(VoiceLive.Response, "SessionResponse", "java");
 @@clientName(VoiceLive.AgentConfig, "RespondingAgentOptions", "java");
 @@clientName(VoiceLive.ResponseItem, "SessionResponseItem", "java");
-@@clientName(VoiceLive.ServerEvent, "SessionServerEvent", "java");
 @@clientName(
   OpenAI.RealtimeServerEventSessionCreated,
   "SessionUpdateSessionCreated",

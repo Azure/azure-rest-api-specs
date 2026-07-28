@@ -1,4 +1,3 @@
-import "./events.tsp";
 import "./items.tsp";
 import "./tools.tsp";
 import "@azure-tools/typespec-client-generator-core";

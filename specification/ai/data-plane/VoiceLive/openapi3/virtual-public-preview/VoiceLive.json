@@ -1281,42 +1281,6 @@
         },
         "description": "Defines a video background, either a solid color or an image URL (mutually exclusive)."
       },
-      "ClientEvent": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "$ref": "#/components/schemas/ClientEventType",
-            "description": "The type of event."
-          },
-          "event_id": {
-            "type": "string"
-          }
-        },
-        "discriminator": {
-          "propertyName": "type",
-          "mapping": {
-            "session.avatar.connect": "#/components/schemas/ClientEventSessionAvatarConnect",
-            "input_audio.turn.start": "#/components/schemas/ClientEventInputAudioTurnStart",
-            "input_audio.turn.append": "#/components/schemas/ClientEventInputAudioTurnAppend",
-            "input_audio.turn.end": "#/components/schemas/ClientEventInputAudioTurnEnd",
-            "input_audio.turn.cancel": "#/components/schemas/ClientEventInputAudioTurnCancel",
-            "input_audio.clear": "#/components/schemas/ClientEventInputAudioClear",
-            "input_text.delta": "#/components/schemas/ClientEventInputTextDelta",
-            "input_text.done": "#/components/schemas/ClientEventInputTextDone",
-            "byom_credential.update": "#/components/schemas/ClientEventBYOMCredentialUpdate",
-            "rtc.call.sdp.create": "#/components/schemas/ClientEventRtcCallSdpCreate"
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.RealtimeClientEvent"
-          }
-        ],
-        "description": "A voicelive client event."
-      },
       "ClientEventBYOMCredentialUpdate": {
         "type": "object",
         "required": [
@@ -1331,6 +1295,9 @@
             ],
             "description": "The event type, must be `byom_credential.update`."
           },
+          "event_id": {
+            "type": "string"
+          },
           "authorization_headers": {
             "type": "object",
             "unevaluatedProperties": {
@@ -1341,7 +1308,7 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/ClientEvent"
+            "$ref": "#/components/schemas/OpenAI.RealtimeClientEvent"
           }
         ],
         "description": "Updates authorization headers for an active bring-your-own-model connection."
@@ -1358,11 +1325,14 @@
               "input_audio.clear"
             ],
             "description": "The event type, must be 'input_audio.clear'."
+          },
+          "event_id": {
+            "type": "string"
           }
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/ClientEvent"
+            "$ref": "#/components/schemas/OpenAI.RealtimeClientEvent"
           }
         ],
         "description": "Clears all input audio currently being streamed."
@@ -1382,6 +1352,9 @@
             ],
             "description": "The event type, must be 'input_audio.turn.append'."
           },
+          "event_id": {
+            "type": "string"
+          },
           "turn_id": {
             "type": "string",
             "description": "The ID of the turn this audio is part of."
@@ -1393,7 +1366,7 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/ClientEvent"
+            "$ref": "#/components/schemas/OpenAI.RealtimeClientEvent"
           }
         ],
         "description": "Appends audio data to an ongoing input turn."
@@ -1412,6 +1385,9 @@
             ],
             "description": "The event type, must be 'input_audio.turn.cancel'."
           },
+          "event_id": {
+            "type": "string"
+          },
           "turn_id": {
             "type": "string",
             "description": "The ID of the turn to cancel."
@@ -1419,7 +1395,7 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/ClientEvent"
+            "$ref": "#/components/schemas/OpenAI.RealtimeClientEvent"
           }
         ],
         "description": "Cancels an in-progress input audio turn."
@@ -1438,6 +1414,9 @@
             ],
             "description": "The event type, must be 'input_audio.turn.end'."
           },
+          "event_id": {
+            "type": "string"
+          },
           "turn_id": {
             "type": "string",
             "description": "The ID of the audio turn being ended."
@@ -1445,7 +1424,7 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/ClientEvent"
+            "$ref": "#/components/schemas/OpenAI.RealtimeClientEvent"
           }
         ],
         "description": "Marks the end of an audio input turn."
@@ -1464,6 +1443,9 @@
             ],
             "description": "The event type, must be 'input_audio.turn.start'."
           },
+          "event_id": {
+            "type": "string"
+          },
           "turn_id": {
             "type": "string",
             "description": "Unique identifier for the input audio turn."
@@ -1471,7 +1453,7 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/ClientEvent"
+            "$ref": "#/components/schemas/OpenAI.RealtimeClientEvent"
           }
         ],
         "description": "Indicates the start of a new audio input turn."
@@ -1491,6 +1473,9 @@
             ],
             "description": "The event type, must be `input_text.delta`."
           },
+          "event_id": {
+            "type": "string"
+          },
           "id": {
             "type": "string",
             "description": "The ID of the item the text delta is being appended to."
@@ -1508,7 +1493,7 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/ClientEvent"
+            "$ref": "#/components/schemas/OpenAI.RealtimeClientEvent"
           }
         ],
         "description": "Streams a delta of input text content into the specified item."
@@ -1527,6 +1512,9 @@
             ],
             "description": "The event type, must be `input_text.done`."
           },
+          "event_id": {
+            "type": "string"
+          },
           "id": {
             "type": "string",
             "description": "The ID of the item whose text content has finished streaming."
@@ -1540,7 +1528,7 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/ClientEvent"
+            "$ref": "#/components/schemas/OpenAI.RealtimeClientEvent"
           }
         ],
         "description": "Signals that the streamed input text content for the specified item is complete."
@@ -1559,6 +1547,9 @@
             ],
             "description": "The event type, must be `rtc.call.sdp.create`."
           },
+          "event_id": {
+            "type": "string"
+          },
           "sdp_offer": {
             "type": "string",
             "description": "The SDP offer from the client for WebRTC negotiation."
@@ -1570,7 +1561,7 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/ClientEvent"
+            "$ref": "#/components/schemas/OpenAI.RealtimeClientEvent"
           }
         ],
         "description": "Sent by the client to initiate a WebRTC session with an SDP offer."
@@ -1589,6 +1580,9 @@
             ],
             "description": "The event type, must be 'session.avatar.connect'."
           },
+          "event_id": {
+            "type": "string"
+          },
           "client_sdp": {
             "type": "string",
             "description": "The client's SDP offer."
@@ -1596,33 +1590,10 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/ClientEvent"
+            "$ref": "#/components/schemas/OpenAI.RealtimeClientEvent"
           }
         ],
         "description": "Sent when the client connects and provides its SDP (Session Description Protocol)\n\nfor avatar-related media negotiation."
-      },
-      "ClientEventType": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "input_audio.turn.start",
-              "input_audio.turn.append",
-              "input_audio.turn.end",
-              "input_audio.turn.cancel",
-              "input_audio.clear",
-              "session.avatar.connect",
-              "rtc.call.sdp.create",
-              "input_text.delta",
-              "input_text.done",
-              "byom_credential.update"
-            ]
-          }
-        ],
-        "description": "Azure-specific client event types. Client events that exist in OpenAI GA\nRealtime (`session.update`, `input_audio_buffer.*`, `conversation.item.*`,\n`response.create`/`.cancel`, `output_audio_buffer.clear`) are consumed from\nOpenAI directly; only Azure-only client event types are listed here."
       },
       "ConversationItemBase": {
         "type": "object",
@@ -2212,6 +2183,15 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
+            "input_audio.turn.start": "#/components/schemas/ClientEventInputAudioTurnStart",
+            "input_audio.turn.append": "#/components/schemas/ClientEventInputAudioTurnAppend",
+            "input_audio.turn.end": "#/components/schemas/ClientEventInputAudioTurnEnd",
+            "input_audio.turn.cancel": "#/components/schemas/ClientEventInputAudioTurnCancel",
+            "input_audio.clear": "#/components/schemas/ClientEventInputAudioClear",
+            "input_text.delta": "#/components/schemas/ClientEventInputTextDelta",
+            "input_text.done": "#/components/schemas/ClientEventInputTextDone",
+            "byom_credential.update": "#/components/schemas/ClientEventBYOMCredentialUpdate",
+            "rtc.call.sdp.create": "#/components/schemas/ClientEventRtcCallSdpCreate",
             "conversation.item.create": "#/components/schemas/OpenAI.RealtimeClientEventConversationItemCreate",
             "conversation.item.delete": "#/components/schemas/OpenAI.RealtimeClientEventConversationItemDelete",
             "conversation.item.retrieve": "#/components/schemas/OpenAI.RealtimeClientEventConversationItemRetrieve",
@@ -2223,16 +2203,7 @@
             "response.cancel": "#/components/schemas/OpenAI.RealtimeClientEventResponseCancel",
             "response.create": "#/components/schemas/OpenAI.RealtimeClientEventResponseCreate",
             "session.update": "#/components/schemas/OpenAI.RealtimeClientEventSessionUpdate",
-            "input_audio.turn.start": "#/components/schemas/ClientEvent",
-            "input_audio.turn.append": "#/components/schemas/ClientEvent",
-            "input_audio.turn.end": "#/components/schemas/ClientEvent",
-            "input_audio.turn.cancel": "#/components/schemas/ClientEvent",
-            "input_audio.clear": "#/components/schemas/ClientEvent",
-            "session.avatar.connect": "#/components/schemas/ClientEvent",
-            "rtc.call.sdp.create": "#/components/schemas/ClientEvent",
-            "input_text.delta": "#/components/schemas/ClientEvent",
-            "input_text.done": "#/components/schemas/ClientEvent",
-            "byom_credential.update": "#/components/schemas/ClientEvent"
+            "session.avatar.connect": "#/components/schemas/ClientEventSessionAvatarConnect"
           }
         },
         "description": "A realtime client event."
@@ -3692,6 +3663,22 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
+            "byom_credential.updated": "#/components/schemas/ServerEventBYOMCredentialUpdated",
+            "session.avatar.connecting": "#/components/schemas/ServerEventSessionAvatarConnecting",
+            "response.audio_timestamp.delta": "#/components/schemas/ServerEventResponseAudioTimestampDelta",
+            "response.audio_timestamp.done": "#/components/schemas/ServerEventResponseAudioTimestampDone",
+            "session.avatar.switch_to_speaking": "#/components/schemas/ServerEventSessionAvatarSwitchToSpeaking",
+            "session.avatar.switch_to_idle": "#/components/schemas/ServerEventSessionAvatarSwitchToIdle",
+            "response.video.delta": "#/components/schemas/ServerEventResponseVideoDelta",
+            "response.web_search_call.searching": "#/components/schemas/ServerEventResponseWebSearchCallSearching",
+            "response.web_search_call.in_progress": "#/components/schemas/ServerEventResponseWebSearchCallInProgress",
+            "response.web_search_call.completed": "#/components/schemas/ServerEventResponseWebSearchCallCompleted",
+            "response.file_search_call.searching": "#/components/schemas/ServerEventResponseFileSearchCallSearching",
+            "response.file_search_call.in_progress": "#/components/schemas/ServerEventResponseFileSearchCallInProgress",
+            "response.file_search_call.completed": "#/components/schemas/ServerEventResponseFileSearchCallCompleted",
+            "response.invocation.delta": "#/components/schemas/ServerEventResponseInvocationDelta",
+            "rtc.call.sdp.created": "#/components/schemas/ServerEventRtcCallSdpCreated",
+            "rtc.call.error": "#/components/schemas/ServerEventRtcCallError",
             "conversation.created": "#/components/schemas/OpenAI.RealtimeServerEventConversationCreated",
             "conversation.item.created": "#/components/schemas/OpenAI.RealtimeServerEventConversationItemCreated",
             "conversation.item.deleted": "#/components/schemas/OpenAI.RealtimeServerEventConversationItemDeleted",
@@ -3738,23 +3725,7 @@
             "response.mcp_call.completed": "#/components/schemas/OpenAI.RealtimeServerEventResponseMCPCallCompleted",
             "response.mcp_call.failed": "#/components/schemas/OpenAI.RealtimeServerEventResponseMCPCallFailed",
             "error": "#/components/schemas/OpenAI.RealtimeServerEventRealtimeServerEventError",
-            "warning": "#/components/schemas/ServerEvent",
-            "byom_credential.updated": "#/components/schemas/ServerEvent",
-            "session.avatar.connecting": "#/components/schemas/ServerEvent",
-            "response.audio_timestamp.delta": "#/components/schemas/ServerEvent",
-            "response.audio_timestamp.done": "#/components/schemas/ServerEvent",
-            "session.avatar.switch_to_speaking": "#/components/schemas/ServerEvent",
-            "session.avatar.switch_to_idle": "#/components/schemas/ServerEvent",
-            "response.video.delta": "#/components/schemas/ServerEvent",
-            "response.web_search_call.searching": "#/components/schemas/ServerEvent",
-            "response.web_search_call.in_progress": "#/components/schemas/ServerEvent",
-            "response.web_search_call.completed": "#/components/schemas/ServerEvent",
-            "response.file_search_call.searching": "#/components/schemas/ServerEvent",
-            "response.file_search_call.in_progress": "#/components/schemas/ServerEvent",
-            "response.file_search_call.completed": "#/components/schemas/ServerEvent",
-            "response.invocation.delta": "#/components/schemas/ServerEvent",
-            "rtc.call.sdp.created": "#/components/schemas/ServerEvent",
-            "rtc.call.error": "#/components/schemas/ServerEvent"
+            "warning": "#/components/schemas/ServerEventWarning"
           }
         },
         "description": "A realtime server event."
@@ -7458,49 +7429,6 @@
         },
         "description": "Configuration for avatar's zoom level, position, rotation and movement amplitude in the video frame."
       },
-      "ServerEvent": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "$ref": "#/components/schemas/ServerEventType",
-            "description": "The type of event."
-          },
-          "event_id": {
-            "type": "string"
-          }
-        },
-        "discriminator": {
-          "propertyName": "type",
-          "mapping": {
-            "warning": "#/components/schemas/ServerEventWarning",
-            "byom_credential.updated": "#/components/schemas/ServerEventBYOMCredentialUpdated",
-            "session.avatar.connecting": "#/components/schemas/ServerEventSessionAvatarConnecting",
-            "response.audio_timestamp.delta": "#/components/schemas/ServerEventResponseAudioTimestampDelta",
-            "response.audio_timestamp.done": "#/components/schemas/ServerEventResponseAudioTimestampDone",
-            "session.avatar.switch_to_speaking": "#/components/schemas/ServerEventSessionAvatarSwitchToSpeaking",
-            "session.avatar.switch_to_idle": "#/components/schemas/ServerEventSessionAvatarSwitchToIdle",
-            "response.video.delta": "#/components/schemas/ServerEventResponseVideoDelta",
-            "response.web_search_call.searching": "#/components/schemas/ServerEventResponseWebSearchCallSearching",
-            "response.web_search_call.in_progress": "#/components/schemas/ServerEventResponseWebSearchCallInProgress",
-            "response.web_search_call.completed": "#/components/schemas/ServerEventResponseWebSearchCallCompleted",
-            "response.file_search_call.searching": "#/components/schemas/ServerEventResponseFileSearchCallSearching",
-            "response.file_search_call.in_progress": "#/components/schemas/ServerEventResponseFileSearchCallInProgress",
-            "response.file_search_call.completed": "#/components/schemas/ServerEventResponseFileSearchCallCompleted",
-            "response.invocation.delta": "#/components/schemas/ServerEventResponseInvocationDelta",
-            "rtc.call.sdp.created": "#/components/schemas/ServerEventRtcCallSdpCreated",
-            "rtc.call.error": "#/components/schemas/ServerEventRtcCallError"
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.RealtimeServerEvent"
-          }
-        ],
-        "description": "A voicelive server event."
-      },
       "ServerEventBYOMCredentialUpdated": {
         "type": "object",
         "required": [
@@ -7515,6 +7443,9 @@
             ],
             "description": "The event type, must be `byom_credential.updated`."
           },
+          "event_id": {
+            "type": "string"
+          },
           "authorization_headers": {
             "type": "object",
             "unevaluatedProperties": {
@@ -7525,7 +7456,7 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/ServerEvent"
+            "$ref": "#/components/schemas/OpenAI.RealtimeServerEvent"
           }
         ],
         "description": "Confirms that BYOM authorization headers were updated."
@@ -7549,6 +7480,9 @@
             "enum": [
               "response.audio_timestamp.delta"
             ]
+          },
+          "event_id": {
+            "type": "string"
           },
           "response_id": {
             "type": "string"
@@ -7584,7 +7518,7 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/ServerEvent"
+            "$ref": "#/components/schemas/OpenAI.RealtimeServerEvent"
           }
         ],
         "description": "Represents a word-level audio timestamp delta for a response."
@@ -7605,6 +7539,9 @@
               "response.audio_timestamp.done"
             ]
           },
+          "event_id": {
+            "type": "string"
+          },
           "response_id": {
             "type": "string"
           },
@@ -7622,7 +7559,7 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/ServerEvent"
+            "$ref": "#/components/schemas/OpenAI.RealtimeServerEvent"
           }
         ],
         "description": "Indicates completion of audio timestamp delivery for a response."
@@ -7644,6 +7581,9 @@
             ],
             "description": "The event type, must be `response.file_search_call.completed`."
           },
+          "event_id": {
+            "type": "string"
+          },
           "response_id": {
             "type": "string",
             "description": "The ID of the response."
@@ -7665,7 +7605,7 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/ServerEvent"
+            "$ref": "#/components/schemas/OpenAI.RealtimeServerEvent"
           }
         ],
         "description": "Returned when a file search call has completed."
@@ -7687,6 +7627,9 @@
             ],
             "description": "The event type, must be `response.file_search_call.in_progress`."
           },
+          "event_id": {
+            "type": "string"
+          },
           "response_id": {
             "type": "string",
             "description": "The ID of the response."
@@ -7708,7 +7651,7 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/ServerEvent"
+            "$ref": "#/components/schemas/OpenAI.RealtimeServerEvent"
           }
         ],
         "description": "Returned when a file search call is in progress."
@@ -7730,6 +7673,9 @@
             ],
             "description": "The event type, must be `response.file_search_call.searching`."
           },
+          "event_id": {
+            "type": "string"
+          },
           "response_id": {
             "type": "string",
             "description": "The ID of the response."
@@ -7751,7 +7697,7 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/ServerEvent"
+            "$ref": "#/components/schemas/OpenAI.RealtimeServerEvent"
           }
         ],
         "description": "Returned when a file search call is searching."
@@ -7770,6 +7716,9 @@
             ],
             "description": "The event type, must be `response.invocation.delta`."
           },
+          "event_id": {
+            "type": "string"
+          },
           "delta": {
             "type": "object",
             "unevaluatedProperties": {},
@@ -7778,7 +7727,7 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/ServerEvent"
+            "$ref": "#/components/schemas/OpenAI.RealtimeServerEvent"
           }
         ],
         "description": "Returned when a hosted agent invocation produces a non-speech SSE event, passed through as-is."
@@ -7799,6 +7748,9 @@
             ],
             "description": "The event type, must be `response.video.delta`."
           },
+          "event_id": {
+            "type": "string"
+          },
           "output_index": {
             "type": "integer",
             "format": "int32",
@@ -7815,7 +7767,7 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/ServerEvent"
+            "$ref": "#/components/schemas/OpenAI.RealtimeServerEvent"
           }
         ],
         "description": "Returned when avatar video frame data is streamed."
@@ -7837,6 +7789,9 @@
             ],
             "description": "The event type, must be `response.web_search_call.completed`."
           },
+          "event_id": {
+            "type": "string"
+          },
           "response_id": {
             "type": "string",
             "description": "The ID of the response."
@@ -7858,7 +7813,7 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/ServerEvent"
+            "$ref": "#/components/schemas/OpenAI.RealtimeServerEvent"
           }
         ],
         "description": "Returned when a web search call has completed."
@@ -7880,6 +7835,9 @@
             ],
             "description": "The event type, must be `response.web_search_call.in_progress`."
           },
+          "event_id": {
+            "type": "string"
+          },
           "response_id": {
             "type": "string",
             "description": "The ID of the response."
@@ -7901,7 +7859,7 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/ServerEvent"
+            "$ref": "#/components/schemas/OpenAI.RealtimeServerEvent"
           }
         ],
         "description": "Returned when a web search call is in progress."
@@ -7923,6 +7881,9 @@
             ],
             "description": "The event type, must be `response.web_search_call.searching`."
           },
+          "event_id": {
+            "type": "string"
+          },
           "response_id": {
             "type": "string",
             "description": "The ID of the response."
@@ -7944,7 +7905,7 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/ServerEvent"
+            "$ref": "#/components/schemas/OpenAI.RealtimeServerEvent"
           }
         ],
         "description": "Returned when a web search call is searching."
@@ -7963,6 +7924,9 @@
             ],
             "description": "The event type, must be `rtc.call.error`."
           },
+          "event_id": {
+            "type": "string"
+          },
           "operation": {
             "type": "string",
             "description": "The operation that caused the error (e.g., `rtc.call.sdp.create`)."
@@ -7978,7 +7942,7 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/ServerEvent"
+            "$ref": "#/components/schemas/OpenAI.RealtimeServerEvent"
           }
         ],
         "description": "Returned when a WebRTC call operation fails."
@@ -7998,6 +7962,9 @@
             ],
             "description": "The event type, must be `rtc.call.sdp.created`."
           },
+          "event_id": {
+            "type": "string"
+          },
           "rtc_call_id": {
             "type": "string",
             "description": "The unique identifier for this RTC call session."
@@ -8009,7 +7976,7 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/ServerEvent"
+            "$ref": "#/components/schemas/OpenAI.RealtimeServerEvent"
           }
         ],
         "description": "Returned when the WebRTC SDP negotiation completes successfully."
@@ -8028,6 +7995,9 @@
             ],
             "description": "The event type, must be 'session.avatar.connecting'."
           },
+          "event_id": {
+            "type": "string"
+          },
           "server_sdp": {
             "type": "string",
             "description": "The server's SDP answer for the avatar connection."
@@ -8035,7 +8005,7 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/ServerEvent"
+            "$ref": "#/components/schemas/OpenAI.RealtimeServerEvent"
           }
         ],
         "description": "Sent when the server is in the process of establishing an avatar media connection and provides its SDP answer."
@@ -8053,6 +8023,9 @@
             ],
             "description": "The event type, must be `session.avatar.switch_to_idle`."
           },
+          "event_id": {
+            "type": "string"
+          },
           "turn_id": {
             "type": "string",
             "description": "The ID of the turn associated with the avatar state change."
@@ -8060,7 +8033,7 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/ServerEvent"
+            "$ref": "#/components/schemas/OpenAI.RealtimeServerEvent"
           }
         ],
         "description": "Returned when the avatar switches to idle state."
@@ -8078,6 +8051,9 @@
             ],
             "description": "The event type, must be `session.avatar.switch_to_speaking`."
           },
+          "event_id": {
+            "type": "string"
+          },
           "turn_id": {
             "type": "string",
             "description": "The ID of the turn associated with the avatar state change."
@@ -8085,40 +8061,10 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/ServerEvent"
+            "$ref": "#/components/schemas/OpenAI.RealtimeServerEvent"
           }
         ],
         "description": "Returned when the avatar switches to speaking state."
-      },
-      "ServerEventType": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "warning",
-              "byom_credential.updated",
-              "session.avatar.connecting",
-              "response.audio_timestamp.delta",
-              "response.audio_timestamp.done",
-              "session.avatar.switch_to_speaking",
-              "session.avatar.switch_to_idle",
-              "response.video.delta",
-              "response.web_search_call.searching",
-              "response.web_search_call.in_progress",
-              "response.web_search_call.completed",
-              "response.file_search_call.searching",
-              "response.file_search_call.in_progress",
-              "response.file_search_call.completed",
-              "response.invocation.delta",
-              "rtc.call.sdp.created",
-              "rtc.call.error"
-            ]
-          }
-        ],
-        "description": "Azure-specific server event types. Server events that exist in OpenAI GA\nRealtime (error, `input_audio_buffer.*`, `conversation.item.created/deleted/`\n`truncated/retrieved`, `conversation.item.input_audio_transcription.*`,\n`session.created/updated`, `response.text.*`, `response.audio_transcript.*`,\n`response.content_part.*`, `response.output_item.*`, `response.created/done`,\n`response.function_call_arguments.*`, `mcp_list_tools.*`,\n`response.mcp_call*.*`, and `output_audio_buffer.cleared`) are\nconsumed from OpenAI directly (with Azure payloads re-injected via `custom.tsp`\naugmentations where needed). OpenAI server events not exposed by stable v1 are\nversion-fenced in `custom.tsp`; only Azure-only event types are listed here."
       },
       "ServerEventWarning": {
         "type": "object",
@@ -8134,6 +8080,9 @@
             ],
             "description": "The event type, must be `warning`."
           },
+          "event_id": {
+            "type": "string"
+          },
           "warning": {
             "$ref": "#/components/schemas/ServerEventWarningDetails",
             "description": "Details of the warning."
@@ -8141,7 +8090,7 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/ServerEvent"
+            "$ref": "#/components/schemas/OpenAI.RealtimeServerEvent"
           }
         ],
         "description": "Returned when a warning occurs that does not interrupt the conversation flow.\nWarnings are informational and the session will continue normally."

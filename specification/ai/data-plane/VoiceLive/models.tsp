@@ -1,6 +1,5 @@
 import "./client.tsp";
 import "./custom.tsp";
-import "./events.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
@@ -41,18 +40,6 @@ model LogProbProperties {
 // extends `OpenAI.RealtimeClientEvent`; simple/rich events are consumed from
 // OpenAI directly (see `custom.tsp` augmentations), and Azure-only events extend
 // this base (transitively OpenAI's).
-/** A voicelive client event. */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending the OpenAI GA client-event base so Azure-only client events ride on GA."
-@discriminator("type")
-@usage(RequestUsage)
-model ClientEvent extends OpenAI.RealtimeClientEvent {
-  /** The type of event. */
-  type: ClientEventType;
-
-  event_id?: string;
-}
-
 // `session.update` client event is consumed from OpenAI GA
 // (`RealtimeClientEventSessionUpdate`), with its `session` payload retyped to
 // VoiceLive's `RequestSession` in custom.tsp.
@@ -65,9 +52,11 @@ model ClientEvent extends OpenAI.RealtimeClientEvent {
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(RequestUsage)
-model ClientEventSessionAvatarConnect extends ClientEvent {
+model ClientEventSessionAvatarConnect extends OpenAI.RealtimeClientEvent {
   /** The event type, must be 'session.avatar.connect'. */
-  type: ClientEventType.session_avatar_connect;
+  type: "session.avatar.connect";
+
+  event_id?: string;
 
   /** The client's SDP offer. */
   client_sdp: string;
@@ -77,9 +66,11 @@ model ClientEventSessionAvatarConnect extends ClientEvent {
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @removed(Versions.v1)
 @usage(RequestUsage)
-model ClientEventInputAudioTurnStart extends ClientEvent {
+model ClientEventInputAudioTurnStart extends OpenAI.RealtimeClientEvent {
   /** The event type, must be 'input_audio.turn.start'. */
-  type: ClientEventType.input_audio_turn_start;
+  type: "input_audio.turn.start";
+
+  event_id?: string;
 
   /** Unique identifier for the input audio turn. */
   turn_id: string;
@@ -89,9 +80,11 @@ model ClientEventInputAudioTurnStart extends ClientEvent {
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @removed(Versions.v1)
 @usage(RequestUsage)
-model ClientEventInputAudioTurnAppend extends ClientEvent {
+model ClientEventInputAudioTurnAppend extends OpenAI.RealtimeClientEvent {
   /** The event type, must be 'input_audio.turn.append'. */
-  type: ClientEventType.input_audio_turn_append;
+  type: "input_audio.turn.append";
+
+  event_id?: string;
 
   /** The ID of the turn this audio is part of. */
   turn_id: string;
@@ -104,9 +97,11 @@ model ClientEventInputAudioTurnAppend extends ClientEvent {
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @removed(Versions.v1)
 @usage(RequestUsage)
-model ClientEventInputAudioTurnEnd extends ClientEvent {
+model ClientEventInputAudioTurnEnd extends OpenAI.RealtimeClientEvent {
   /** The event type, must be 'input_audio.turn.end'. */
-  type: ClientEventType.input_audio_turn_end;
+  type: "input_audio.turn.end";
+
+  event_id?: string;
 
   /** The ID of the audio turn being ended. */
   turn_id: string;
@@ -116,28 +111,35 @@ model ClientEventInputAudioTurnEnd extends ClientEvent {
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @removed(Versions.v1)
 @usage(RequestUsage)
-model ClientEventInputAudioTurnCancel extends ClientEvent {
+model ClientEventInputAudioTurnCancel extends OpenAI.RealtimeClientEvent {
   /** The event type, must be 'input_audio.turn.cancel'. */
-  type: ClientEventType.input_audio_turn_cancel;
+  type: "input_audio.turn.cancel";
+
+  event_id?: string;
 
   /** The ID of the turn to cancel. */
   turn_id: string;
 }
 
 /** Clears all input audio currently being streamed. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // `event_id` matches OpenAI GA snake_case.
 @removed(Versions.v1)
 @usage(RequestUsage)
-model ClientEventInputAudioClear extends ClientEvent {
+model ClientEventInputAudioClear extends OpenAI.RealtimeClientEvent {
   /** The event type, must be 'input_audio.clear'. */
-  type: ClientEventType.input_audio_clear;
+  type: "input_audio.clear";
+
+  event_id?: string;
 }
 
 /** Streams a delta of input text content into the specified item. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(RequestUsage)
-model ClientEventInputTextDelta extends ClientEvent {
+model ClientEventInputTextDelta extends OpenAI.RealtimeClientEvent {
   /** The event type, must be `input_text.delta`. */
-  type: ClientEventType.input_text_delta;
+  type: "input_text.delta";
+
+  event_id?: string;
 
   /** The ID of the item the text delta is being appended to. */
   id: string;
@@ -152,9 +154,11 @@ model ClientEventInputTextDelta extends ClientEvent {
 /** Signals that the streamed input text content for the specified item is complete. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(RequestUsage)
-model ClientEventInputTextDone extends ClientEvent {
+model ClientEventInputTextDone extends OpenAI.RealtimeClientEvent {
   /** The event type, must be `input_text.done`. */
-  type: ClientEventType.input_text_done;
+  type: "input_text.done";
+
+  event_id?: string;
 
   /** The ID of the item whose text content has finished streaming. */
   id: string;
@@ -166,9 +170,11 @@ model ClientEventInputTextDone extends ClientEvent {
 /** Updates authorization headers for an active bring-your-own-model connection. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(RequestUsage)
-model ClientEventBYOMCredentialUpdate extends ClientEvent {
+model ClientEventBYOMCredentialUpdate extends OpenAI.RealtimeClientEvent {
   /** The event type, must be `byom_credential.update`. */
-  type: ClientEventType.byom_credential_update;
+  type: "byom_credential.update";
+
+  event_id?: string;
 
   /** Authorization header names and values to apply to subsequent BYOM requests. */
   authorization_headers: Record<string>;
@@ -229,10 +235,13 @@ model ServerEventWarningDetails {
  * Returned when a warning occurs that does not interrupt the conversation flow.
  * Warnings are informational and the session will continue normally.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // `event_id` matches OpenAI GA snake_case.
 @usage(ResponseUsage)
-model ServerEventWarning extends ServerEvent {
+model ServerEventWarning extends OpenAI.RealtimeServerEvent {
   /** The event type, must be `warning`. */
-  type: ServerEventType.warning;
+  type: "warning";
+
+  event_id?: string;
 
   /** Details of the warning. */
   warning: ServerEventWarningDetails;
@@ -241,24 +250,26 @@ model ServerEventWarning extends ServerEvent {
 /** Confirms that BYOM authorization headers were updated. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(ResponseUsage)
-model ServerEventBYOMCredentialUpdated extends ServerEvent {
+model ServerEventBYOMCredentialUpdated extends OpenAI.RealtimeServerEvent {
   /** The event type, must be `byom_credential.updated`. */
-  type: ServerEventType.byom_credential_updated;
+  type: "byom_credential.updated";
+
+  event_id?: string;
 
   /** Updated authorization header names with their values redacted. */
   authorization_headers: Record<string>;
 }
-
-// ServerEventSessionCreated consumed from OpenAI GA (OpenAI.RealtimeServerEventSessionCreated; session payload retyped in custom.tsp)
 
 // ServerEventSessionUpdated consumed from OpenAI GA (OpenAI.RealtimeServerEventSessionUpdated; session payload retyped in custom.tsp)
 
 /** Sent when the server is in the process of establishing an avatar media connection and provides its SDP answer. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(ResponseUsage)
-model ServerEventSessionAvatarConnecting extends ServerEvent {
+model ServerEventSessionAvatarConnecting extends OpenAI.RealtimeServerEvent {
   /** The event type, must be 'session.avatar.connecting'. */
-  type: ServerEventType.session_avatar_connecting;
+  type: "session.avatar.connecting";
+
+  event_id?: string;
 
   /** The server's SDP answer for the avatar connection. */
   server_sdp: string;
@@ -273,18 +284,6 @@ model SessionBase {}
 // extends `OpenAI.RealtimeServerEvent`; simple/rich events are consumed from
 // OpenAI directly (see `custom.tsp` augmentations), and Azure-only events extend
 // this base (transitively OpenAI's).
-/** A voicelive server event. */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending the OpenAI GA server-event base so Azure-only server events ride on GA."
-@discriminator("type")
-@usage(ResponseUsage)
-model ServerEvent extends OpenAI.RealtimeServerEvent {
-  /** The type of event. */
-  type: ServerEventType;
-
-  event_id?: string;
-}
-
 // `input_audio_buffer.committed` / `.cleared` / `.speech_started` /
 // `.speech_stopped` and `conversation.item.created` server events are consumed
 // from OpenAI GA directly (`conversation.item.created`'s `item` payload is
@@ -364,8 +363,10 @@ model TranscriptionPhrase {
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @removed(Versions.PuPr)
 @usage(ResponseUsage)
-model ServerEventResponseAnimationBlendshapeDelta extends ServerEvent {
-  type: ServerEventType.response_animation_blendshapes_delta;
+model ServerEventResponseAnimationBlendshapeDelta
+  extends OpenAI.RealtimeServerEvent {
+  type: "response.animation_blendshapes.delta";
+  event_id?: string;
   response_id: string;
   item_id: string;
   output_index: int32;
@@ -380,8 +381,10 @@ model ServerEventResponseAnimationBlendshapeDelta extends ServerEvent {
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @removed(Versions.PuPr)
 @usage(ResponseUsage)
-model ServerEventResponseAnimationBlendshapeDone extends ServerEvent {
-  type: ServerEventType.response_animation_blendshapes_done;
+model ServerEventResponseAnimationBlendshapeDone
+  extends OpenAI.RealtimeServerEvent {
+  type: "response.animation_blendshapes.done";
+  event_id?: string;
   response_id: string;
   item_id: string;
   output_index: int32;
@@ -390,8 +393,10 @@ model ServerEventResponseAnimationBlendshapeDone extends ServerEvent {
 /** Represents a word-level audio timestamp delta for a response. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(ResponseUsage)
-model ServerEventResponseAudioTimestampDelta extends ServerEvent {
-  type: ServerEventType.response_audio_timestamp_delta;
+model ServerEventResponseAudioTimestampDelta
+  extends OpenAI.RealtimeServerEvent {
+  type: "response.audio_timestamp.delta";
+  event_id?: string;
   response_id: string;
   item_id: string;
   output_index: int32;
@@ -405,8 +410,9 @@ model ServerEventResponseAudioTimestampDelta extends ServerEvent {
 /** Indicates completion of audio timestamp delivery for a response. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(ResponseUsage)
-model ServerEventResponseAudioTimestampDone extends ServerEvent {
-  type: ServerEventType.response_audio_timestamp_done;
+model ServerEventResponseAudioTimestampDone extends OpenAI.RealtimeServerEvent {
+  type: "response.audio_timestamp.done";
+  event_id?: string;
   response_id: string;
   item_id: string;
   output_index: int32;
@@ -417,8 +423,10 @@ model ServerEventResponseAudioTimestampDone extends ServerEvent {
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @removed(Versions.PuPr)
 @usage(ResponseUsage)
-model ServerEventResponseAnimationVisemeDelta extends ServerEvent {
-  type: ServerEventType.response_animation_viseme_delta;
+model ServerEventResponseAnimationVisemeDelta
+  extends OpenAI.RealtimeServerEvent {
+  type: "response.animation_viseme.delta";
+  event_id?: string;
   response_id: string;
   item_id: string;
   output_index: int32;
@@ -431,8 +439,10 @@ model ServerEventResponseAnimationVisemeDelta extends ServerEvent {
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @removed(Versions.PuPr)
 @usage(ResponseUsage)
-model ServerEventResponseAnimationVisemeDone extends ServerEvent {
-  type: ServerEventType.response_animation_viseme_done;
+model ServerEventResponseAnimationVisemeDone
+  extends OpenAI.RealtimeServerEvent {
+  type: "response.animation_viseme.done";
+  event_id?: string;
   response_id: string;
   item_id: string;
   output_index: int32;
@@ -549,9 +559,12 @@ model ResponseCreateParams {
 /** Returned when the avatar switches to speaking state. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(ResponseUsage)
-model ServerEventSessionAvatarSwitchToSpeaking extends ServerEvent {
+model ServerEventSessionAvatarSwitchToSpeaking
+  extends OpenAI.RealtimeServerEvent {
   /** The event type, must be `session.avatar.switch_to_speaking`. */
-  type: ServerEventType.session_avatar_switch_to_speaking;
+  type: "session.avatar.switch_to_speaking";
+
+  event_id?: string;
 
   /** The ID of the turn associated with the avatar state change. */
   turn_id?: string;
@@ -560,9 +573,11 @@ model ServerEventSessionAvatarSwitchToSpeaking extends ServerEvent {
 /** Returned when the avatar switches to idle state. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(ResponseUsage)
-model ServerEventSessionAvatarSwitchToIdle extends ServerEvent {
+model ServerEventSessionAvatarSwitchToIdle extends OpenAI.RealtimeServerEvent {
   /** The event type, must be `session.avatar.switch_to_idle`. */
-  type: ServerEventType.session_avatar_switch_to_idle;
+  type: "session.avatar.switch_to_idle";
+
+  event_id?: string;
 
   /** The ID of the turn associated with the avatar state change. */
   turn_id?: string;
@@ -571,9 +586,11 @@ model ServerEventSessionAvatarSwitchToIdle extends ServerEvent {
 /** Returned when avatar video frame data is streamed. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(ResponseUsage)
-model ServerEventResponseVideoDelta extends ServerEvent {
+model ServerEventResponseVideoDelta extends OpenAI.RealtimeServerEvent {
   /** The event type, must be `response.video.delta`. */
-  type: ServerEventType.response_video_delta;
+  type: "response.video.delta";
+
+  event_id?: string;
 
   /** The index of the output item in the response. */
   output_index: int32;
@@ -589,9 +606,12 @@ model ServerEventResponseVideoDelta extends ServerEvent {
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @removed(Versions.v1)
 @usage(ResponseUsage)
-model ServerEventResponseWebSearchCallSearching extends ServerEvent {
+model ServerEventResponseWebSearchCallSearching
+  extends OpenAI.RealtimeServerEvent {
   /** The event type, must be `response.web_search_call.searching`. */
-  type: ServerEventType.response_web_search_call_searching;
+  type: "response.web_search_call.searching";
+
+  event_id?: string;
 
   /** The ID of the response. */
   response_id: string;
@@ -610,9 +630,12 @@ model ServerEventResponseWebSearchCallSearching extends ServerEvent {
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @removed(Versions.v1)
 @usage(ResponseUsage)
-model ServerEventResponseWebSearchCallInProgress extends ServerEvent {
+model ServerEventResponseWebSearchCallInProgress
+  extends OpenAI.RealtimeServerEvent {
   /** The event type, must be `response.web_search_call.in_progress`. */
-  type: ServerEventType.response_web_search_call_in_progress;
+  type: "response.web_search_call.in_progress";
+
+  event_id?: string;
 
   /** The ID of the response. */
   response_id: string;
@@ -631,9 +654,12 @@ model ServerEventResponseWebSearchCallInProgress extends ServerEvent {
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @removed(Versions.v1)
 @usage(ResponseUsage)
-model ServerEventResponseWebSearchCallCompleted extends ServerEvent {
+model ServerEventResponseWebSearchCallCompleted
+  extends OpenAI.RealtimeServerEvent {
   /** The event type, must be `response.web_search_call.completed`. */
-  type: ServerEventType.response_web_search_call_completed;
+  type: "response.web_search_call.completed";
+
+  event_id?: string;
 
   /** The ID of the response. */
   response_id: string;
@@ -652,9 +678,12 @@ model ServerEventResponseWebSearchCallCompleted extends ServerEvent {
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @removed(Versions.v1)
 @usage(ResponseUsage)
-model ServerEventResponseFileSearchCallSearching extends ServerEvent {
+model ServerEventResponseFileSearchCallSearching
+  extends OpenAI.RealtimeServerEvent {
   /** The event type, must be `response.file_search_call.searching`. */
-  type: ServerEventType.response_file_search_call_searching;
+  type: "response.file_search_call.searching";
+
+  event_id?: string;
 
   /** The ID of the response. */
   response_id: string;
@@ -673,9 +702,12 @@ model ServerEventResponseFileSearchCallSearching extends ServerEvent {
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @removed(Versions.v1)
 @usage(ResponseUsage)
-model ServerEventResponseFileSearchCallInProgress extends ServerEvent {
+model ServerEventResponseFileSearchCallInProgress
+  extends OpenAI.RealtimeServerEvent {
   /** The event type, must be `response.file_search_call.in_progress`. */
-  type: ServerEventType.response_file_search_call_in_progress;
+  type: "response.file_search_call.in_progress";
+
+  event_id?: string;
 
   /** The ID of the response. */
   response_id: string;
@@ -694,9 +726,12 @@ model ServerEventResponseFileSearchCallInProgress extends ServerEvent {
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @removed(Versions.v1)
 @usage(ResponseUsage)
-model ServerEventResponseFileSearchCallCompleted extends ServerEvent {
+model ServerEventResponseFileSearchCallCompleted
+  extends OpenAI.RealtimeServerEvent {
   /** The event type, must be `response.file_search_call.completed`. */
-  type: ServerEventType.response_file_search_call_completed;
+  type: "response.file_search_call.completed";
+
+  event_id?: string;
 
   /** The ID of the response. */
   response_id: string;
@@ -718,9 +753,12 @@ model ServerEventResponseFileSearchCallCompleted extends ServerEvent {
 #suppress "@azure-tools/typespec-azure-core/no-unknown" // The annotation can be of any type.
 @removed(Versions.PuPr)
 @usage(ResponseUsage)
-model ServerEventResponseAudioTranscriptAnnotationAdded extends ServerEvent {
+model ServerEventResponseAudioTranscriptAnnotationAdded
+  extends OpenAI.RealtimeServerEvent {
   /** The event type, must be `response.audio_transcript.annotation.added`. */
-  type: ServerEventType.response_audio_transcript_annotation_added;
+  type: "response.audio_transcript.annotation.added";
+
+  event_id?: string;
 
   /** The ID of the response. */
   response_id: string;
@@ -747,9 +785,11 @@ model ServerEventResponseAudioTranscriptAnnotationAdded extends ServerEvent {
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Opaque passthrough JSON from hosted agent SSE event; values are not limited to strings."
 @removed(Versions.v1)
 @usage(ResponseUsage)
-model ServerEventResponseInvocationDelta extends ServerEvent {
+model ServerEventResponseInvocationDelta extends OpenAI.RealtimeServerEvent {
   /** The event type, must be `response.invocation.delta`. */
-  type: ServerEventType.response_invocation_delta;
+  type: "response.invocation.delta";
+
+  event_id?: string;
 
   /** The raw event data from the hosted agent invocation. */
   delta: Record<unknown>;
@@ -778,9 +818,11 @@ model ServerEventResponseInvocationDelta extends ServerEvent {
 #suppress "@azure-tools/typespec-azure-core/casing-style" // snake_case to remain close to OpenAI style.
 @removed(Versions.v1)
 @usage(RequestUsage)
-model ClientEventRtcCallSdpCreate extends ClientEvent {
+model ClientEventRtcCallSdpCreate extends OpenAI.RealtimeClientEvent {
   /** The event type, must be `rtc.call.sdp.create`. */
-  type: ClientEventType.rtc_call_sdp_create;
+  type: "rtc.call.sdp.create";
+
+  event_id?: string;
 
   /** The SDP offer from the client for WebRTC negotiation. */
   sdp_offer: string;
@@ -793,9 +835,11 @@ model ClientEventRtcCallSdpCreate extends ClientEvent {
 #suppress "@azure-tools/typespec-azure-core/casing-style" // snake_case to remain close to OpenAI style.
 @removed(Versions.v1)
 @usage(ResponseUsage)
-model ServerEventRtcCallSdpCreated extends ServerEvent {
+model ServerEventRtcCallSdpCreated extends OpenAI.RealtimeServerEvent {
   /** The event type, must be `rtc.call.sdp.created`. */
-  type: ServerEventType.rtc_call_sdp_created;
+  type: "rtc.call.sdp.created";
+
+  event_id?: string;
 
   /** The unique identifier for this RTC call session. */
   rtc_call_id: string;
@@ -825,9 +869,11 @@ model RtcCallErrorDetails {
 #suppress "@azure-tools/typespec-azure-core/casing-style" // snake_case to remain close to OpenAI style.
 @removed(Versions.v1)
 @usage(ResponseUsage)
-model ServerEventRtcCallError extends ServerEvent {
+model ServerEventRtcCallError extends OpenAI.RealtimeServerEvent {
   /** The event type, must be `rtc.call.error`. */
-  type: ServerEventType.rtc_call_error;
+  type: "rtc.call.error";
+
+  event_id?: string;
 
   /** The operation that caused the error (e.g., `rtc.call.sdp.create`). */
   operation?: string;
