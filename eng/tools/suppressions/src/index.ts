@@ -3,13 +3,13 @@ import { getSuppressions, type Suppression } from "./suppressions.ts";
 
 function getUsage(): string {
   return (
-    "  Usage: npx get-suppressions <tool-name> <path-to-file-or-directory>\n" +
+    "  Usage: pnpm exec get-suppressions <tool-name> <path-to-file-or-directory>\n" +
     "Returns: JSON array of suppressions, with specified tool name, applying to file or directory (may be empty)\n" +
     "\n" +
-    "Example: npx get-suppressions TypeSpecRequirement specification/foo/data-plane/Foo/stable/2023-01-01/Foo.json\n" +
+    "Example: pnpm exec get-suppressions TypeSpecRequirement specification/foo/data-plane/Foo/stable/2023-01-01/Foo.json\n" +
     'Returns: [{"tool":"TypeSpecRequirement","paths":["data-plane/Foo/stable/2023-01-01/*.json"],"reason":"foo"}]\n' +
     "\n" +
-    "Example: npx get-suppressions TypeSpecValidation specification/foo/Microsoft.Foo\n" +
+    "Example: pnpm exec get-suppressions TypeSpecValidation specification/foo/Microsoft.Foo\n" +
     'Returns: [{"tool":"TypeSpecValidation","paths":["**"],"reason":"foo"}]\n'
   );
 }

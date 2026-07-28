@@ -23,36 +23,37 @@ If you are developing within your own ADO repo first and then submitting into `a
 
 #### 2.1 With local machine development
 
-- [Node.js LTS](https://nodejs.org/en) version 18 or above (LTS Recommended).
- Ensure you can run the npm command in a command prompt:
+- [Node.js LTS](https://nodejs.org/en) version 24 or above (LTS Recommended).
+ This repo uses [pnpm](https://pnpm.io/) as its package manager (pinned via the `packageManager`
+ field in the root `package.json`). Install it with `npm install -g pnpm`, then ensure you can run pnpm:
 
-  ```npm
-    npm --version
+  ```sh
+    pnpm --version
   ```
 
 - Run following command in the **repository root folder**. This will install required packages such as TypeSpec
  compilers and Azure Library packages.
 
   ```npm
-     npm ci
+     pnpm ci
   ```
 
 - Ensure you can run TypeSpec command within the repo folders.
 
   ```npm
-     npx tsp --version
+     pnpm tsp --version
   ```
 
 - One-time set up: Install TypeSpec VisualStudio or VS Code extensions to get syntex highlighting, tool tips in IDE:
   
   ```npm
-    npx tsp code install
+    pnpm tsp code install
   ```
 
   OR
 
     ```npm
-      npx tsp vs install
+      pnpm tsp vs install
     ```
 
 #### 2.2  VS Code with local docker .devcontainer
@@ -87,12 +88,12 @@ Please first review recommended folder structure detailed in [this document](htt
 2. Create a new TypeSpec project based on Azure template with command:
 
     ```cli
-       npx tsp init https://aka.ms/typespec/azure-init
+       pnpm tsp init https://aka.ms/typespec/azure-init
     ```
 3. Compile the generated TypeSpec project with command:
 
     ```cli
-      npx tsp compile .
+      pnpm tsp compile .
     ```
 
     The generated OpenAPI files should be correctly placed in the `{service}`folders following the naming conventions.
@@ -133,8 +134,8 @@ Please first review recommended folder structure detailed in [this document](htt
        git pull upstream <target-branch>
       ```
 
-   - in the root directory, run `npm install`
-   - in the project directory, `npx tsp compile`. This will generate OpenAPI files under `{service}` folders.
+   - in the root directory, run `pnpm install`
+   - in the project directory, `pnpm tsp compile`. This will generate OpenAPI files under `{service}` folders.
 
 6. Ensure all generated files under `{service}` have been added to PR.
 

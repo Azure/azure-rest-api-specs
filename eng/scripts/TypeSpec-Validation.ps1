@@ -49,22 +49,26 @@ if ($typespecFolders) {
       }
     }
 
-    # Example: '{"checkingAllSpecs"=true}'
+    # Example: '{"checkingAllSpecs":true}'
     $context = @{ checkingAllSpecs = $checkingAllSpecs } | ConvertTo-Json -Compress
 
-    LogInfo "npm exec --no -- tsv $typespecFolder ""$context"""
+    # Invoke the tsv entrypoint with node directly instead of through the pnpm
+    # shim. On Windows the pnpm shim re-quotes arguments and strips the double
+    # quotes from the JSON context (so JSON.parse fails); calling node avoids it.
+    $tsvScript = Join-Path $PSScriptRoot ".." "tools" "typespec-validation" "cmd" "tsv.js"
+    LogInfo "node $tsvScript $typespecFolder ""$context"""
 
     if ($DryRun) {
       LogGroupEnd
       continue
     }
 
-    npm exec --no -- tsv $typespecFolder "$context" 2>&1 | Write-Host
+    node $tsvScript $typespecFolder "$context" 2>&1 | Write-Host
     if ($LASTEXITCODE) {
       $typespecFoldersWithFailures += $typespecFolder
       $errorString = "TypeSpec Validation failed for project $typespecFolder run the following command locally to validate."
-      $errorString += "`n > npm ci"
-      $errorString += "`n > npx tsv $typespecFolder"
+      $errorString += "`n > pnpm install"
+      $errorString += "`n > pnpm tsv $typespecFolder"
       $errorString += "`nFor more detailed docs see https://aka.ms/azsdk/specs/typespec-validation"
       LogError $errorString
     }
@@ -85,9 +89,9 @@ else {
 
 if ($typespecFoldersWithFailures.Count -gt 0) {
   LogInfo "TypeSpec Validation failed for some folder to fix run and address any errors:"
-  LogInfo " > npm ci"
+  LogInfo " > pnpm install"
   foreach ($typespecFolderWithFailure in $typespecFoldersWithFailures) {
-    LogInfo " > npx tsv $typespecFolderWithFailure"
+    LogInfo " > pnpm tsv $typespecFolderWithFailure"
   }
   LogInfo "For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation"
   LogJobFailure

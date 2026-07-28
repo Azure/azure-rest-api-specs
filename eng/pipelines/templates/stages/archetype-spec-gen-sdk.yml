@@ -274,8 +274,13 @@ stages:
           echo "$sdk_gen_info"
 
           cd $(SpecRepoDirectory)
-          echo "##[group]Run npm ci"
-          npm ci
+          echo "##[group]Run pnpm install"
+          npm run install-pnpm
+          # Use the repo's committed .npmrc (public npmjs registry) for pnpm so the
+          # package manager version switch can verify registry signatures. The
+          # step-level npm_config_userconfig points at the authenticated Azure
+          # Artifacts feed, which does not serve registry signatures.
+          npm_config_userconfig="$(SpecRepoDirectory)/.npmrc" pnpm install --frozen-lockfile
           echo "##[endgroup]"
           node $(SpecRepoDirectory)/eng/tools/spec-gen-sdk-runner/cmd/spec-gen-sdk-runner.js \
             --scp $(SpecRepoDirectory) \

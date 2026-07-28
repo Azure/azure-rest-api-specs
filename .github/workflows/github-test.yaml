@@ -54,13 +54,12 @@ jobs:
         with:
           # actions/github-script@v8 uses Node 24
           node-version: 24.x
-          working-directory: ./${{ matrix.folder }}
 
-      - run: npm run test:ci
+      - run: pnpm run test:ci
 
-      - run: npm run lint
+      - run: pnpm run lint
 
-      - run: npm run format:check:ci
+      - run: pnpm run format:check:ci
 
       # Content copied from https://raw.githubusercontent.com/rhysd/actionlint/2ab3a12c7848f6c15faca9a92612ef4261d0e370/.github/actionlint-matcher.json
       - if: ${{ matrix.folder == '.github' && matrix.os == 'ubuntu'}}

@@ -12,7 +12,7 @@ on:
         description: Paths for sparse checkout
         type: string
       lint:
-        description: Run 'npm run lint' if true
+        description: Run 'pnpm lint' if true
         required: false
         type: boolean
 
@@ -48,18 +48,18 @@ jobs:
           node-version: ${{ matrix.node-version }}.x
 
       - name: Build
-        run: npm run build
+        run: pnpm run build
         working-directory: ./eng/tools/${{ inputs.package }}
 
       - name: Test
-        run: npm run test:ci
+        run: pnpm run test:ci
         working-directory: ./eng/tools/${{ inputs.package }}
 
       - name: Lint
-        run: npm run lint
+        run: pnpm run lint
         if: inputs.lint == true
         working-directory: ./eng/tools/${{ inputs.package }}
 
       - name: Check Formatting
-        run: npm run format:check:ci
+        run: pnpm run format:check:ci
         working-directory: ./eng/tools/${{ inputs.package }}

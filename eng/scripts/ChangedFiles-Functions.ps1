@@ -50,7 +50,8 @@ function Get-ChangedCoreFiles($changedFiles = (Get-ChangedFiles)) {
   $rootFiles = @(
     ".gitattributes",
     ".prettierrc.json",
-    "package-lock.json",
+    "pnpm-lock.yaml",
+    "pnpm-workspace.yaml",
     "package.json",
     "tsconfig.json",
     "specification/suppressions.yaml"
