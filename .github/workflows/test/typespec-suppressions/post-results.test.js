@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { createMockCore, createMockGithub } from "../mocks.js";
+import { createMockContext, createMockCore, createMockGithub } from "../mocks.js";
 
 vi.mock("../../src/context.js", () => ({
   extractInputs: vi.fn(),
@@ -26,10 +26,17 @@ const { default: postSuppressionsResults } =
 
 describe("post-results", () => {
   const mockCore = createMockCore();
-  const context = /** @type {any} */ ({
-    eventName: "workflow_run",
-    payload: {},
-  });
+  const context = createMockContext();
+
+  /**
+   * @param {import("../mocks.js").GitHub} github
+   * @returns {import("@actions/github-script").AsyncFunctionArguments}
+   */
+  function args(github) {
+    return /** @type {import("@actions/github-script").AsyncFunctionArguments} */ (
+      /** @type {unknown} */ ({ github, context, core: mockCore })
+    );
+  }
 
   beforeEach(() => {
     vi.mocked(extractInputs).mockReset();
@@ -46,7 +53,7 @@ describe("post-results", () => {
         run_id: 1,
       }),
     );
-    parseExistingComments.mockReturnValue([undefined, undefined]);
+    vi.mocked(parseExistingComments).mockReturnValue([undefined, undefined]);
   });
 
   /**
@@ -63,9 +70,9 @@ describe("post-results", () => {
 
   it("posts the sticky comment when suppressions require review", async () => {
     const github = githubWithLabels([]);
-    buildSuppressionsComment.mockResolvedValue("BODY: suppressions requiring review");
+    vi.mocked(buildSuppressionsComment).mockResolvedValue("BODY: suppressions requiring review");
 
-    await postSuppressionsResults({ github, context, core: mockCore });
+    await postSuppressionsResults(args(github));
 
     expect(buildSuppressionsComment).toHaveBeenCalledWith(
       github,
@@ -88,9 +95,9 @@ describe("post-results", () => {
 
   it("passes the current PR labels through for approval state", async () => {
     const github = githubWithLabels(["Approved-TypeSpecSuppression", "other"]);
-    buildSuppressionsComment.mockResolvedValue("BODY");
+    vi.mocked(buildSuppressionsComment).mockResolvedValue("BODY");
 
-    await postSuppressionsResults({ github, context, core: mockCore });
+    await postSuppressionsResults(args(github));
 
     expect(buildSuppressionsComment).toHaveBeenCalledWith(
       github,
@@ -104,10 +111,10 @@ describe("post-results", () => {
 
   it("resolves an existing comment when nothing requires review", async () => {
     const github = githubWithLabels([]);
-    buildSuppressionsComment.mockResolvedValue(undefined);
-    parseExistingComments.mockReturnValue([99, "previous body"]);
+    vi.mocked(buildSuppressionsComment).mockResolvedValue(undefined);
+    vi.mocked(parseExistingComments).mockReturnValue([99, "previous body"]);
 
-    await postSuppressionsResults({ github, context, core: mockCore });
+    await postSuppressionsResults(args(github));
 
     expect(commentOrUpdate).toHaveBeenCalledTimes(1);
     const call = vi.mocked(commentOrUpdate).mock.calls[0];
@@ -118,10 +125,10 @@ describe("post-results", () => {
 
   it("does nothing when nothing requires review and no prior comment exists", async () => {
     const github = githubWithLabels([]);
-    buildSuppressionsComment.mockResolvedValue(undefined);
-    parseExistingComments.mockReturnValue([undefined, undefined]);
+    vi.mocked(buildSuppressionsComment).mockResolvedValue(undefined);
+    vi.mocked(parseExistingComments).mockReturnValue([undefined, undefined]);
 
-    await postSuppressionsResults({ github, context, core: mockCore });
+    await postSuppressionsResults(args(github));
 
     expect(commentOrUpdate).not.toHaveBeenCalled();
   });

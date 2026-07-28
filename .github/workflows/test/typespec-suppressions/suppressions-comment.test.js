@@ -24,7 +24,7 @@ function mockArtifactDownload(report) {
 }
 
 /**
- * @param {import("../mocks.js").GitHub} github
+ * @param {import("../mocks.js").MockGithub} github
  * @param {object} [runOverrides]
  */
 function mockAnalyzeCodeRun(github, runOverrides = {}) {
@@ -85,6 +85,7 @@ describe("renderSuppressionsCommentBody", () => {
   });
 
   it("reflects approval status in the heading and status cells", () => {
+    /** @type {import("../../src/typespec-suppressions/suppressions-comment.js").TypeSpecSuppressionsReport} */
     const report = {
       requiresApproval: true,
       newSuppressions: [
