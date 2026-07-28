@@ -217,18 +217,41 @@ model IndividualEnrollment {
 
   /**
    * Linked Azure Device Registry credential policy name (optional).
-   * @deprecated Use certificatePolicyResourceId instead.
+   * @deprecated Use certificatePolicyName instead.
    */
   #suppress "deprecated" "Preserving for backward compatibility until CMS public preview deprecation"
   @added(Versions.v2025_07_01_preview)
-  @removed(Versions.v2026_07_01_preview)
+  @removed(Versions.v2026_11_02_preview)
   credentialPolicyName?: string;
 
   /**
-   * Azure Device Registry certificate policy resource ID.
+   * Name of the Azure Device Registry namespace that contains the referenced
+   * certificate authority and certificate policy.
    */
-  @added(Versions.v2026_07_01_preview)
-  certificatePolicyResourceId?: string;
+  @added(Versions.v2026_11_02_preview)
+  @minLength(3)
+  @maxLength(64)
+  @pattern("^[a-z0-9][a-z0-9-]*[a-z0-9]$")
+  namespaceName?: string;
+
+  /**
+   * Name of the Azure Device Registry certificate authority resource that owns the
+   * referenced certificate policy.
+   */
+  @added(Versions.v2026_11_02_preview)
+  @minLength(3)
+  @maxLength(63)
+  @pattern("^[0-9a-zA-Z][a-zA-Z0-9-]*$")
+  certificateAuthorityName?: string;
+
+  /**
+   * Name of the Azure Device Registry certificate policy resource.
+   */
+  @added(Versions.v2026_11_02_preview)
+  @minLength(3)
+  @maxLength(63)
+  @pattern("^[0-9a-zA-Z][a-zA-Z0-9-]*$")
+  certificatePolicyName?: string;
 
   /**
    * Current registration status.
@@ -785,18 +808,41 @@ model EnrollmentGroup {
 
   /**
    * Linked Azure Device Registry credential policy name (optional).
-   * @deprecated Use certificatePolicyResourceId instead.
+   * @deprecated Use certificatePolicyName instead.
    */
   #suppress "deprecated" "Preserving for backward compatibility until CMS public preview deprecation"
   @added(Versions.v2025_07_01_preview)
-  @removed(Versions.v2026_07_01_preview)
+  @removed(Versions.v2026_11_02_preview)
   credentialPolicyName?: string;
 
   /**
-   * Azure Device Registry certificate policy resource ID.
+   * Name of the Azure Device Registry namespace that contains the referenced
+   * certificate authority and certificate policy.
    */
-  @added(Versions.v2026_07_01_preview)
-  certificatePolicyResourceId?: string;
+  @added(Versions.v2026_11_02_preview)
+  @minLength(3)
+  @maxLength(64)
+  @pattern("^[a-z0-9][a-z0-9-]*[a-z0-9]$")
+  namespaceName?: string;
+
+  /**
+   * Name of the Azure Device Registry certificate authority resource that owns the
+   * referenced certificate policy.
+   */
+  @added(Versions.v2026_11_02_preview)
+  @minLength(3)
+  @maxLength(63)
+  @pattern("^[0-9a-zA-Z][a-zA-Z0-9-]*$")
+  certificateAuthorityName?: string;
+
+  /**
+   * Name of the Azure Device Registry certificate policy resource.
+   */
+  @added(Versions.v2026_11_02_preview)
+  @minLength(3)
+  @maxLength(63)
+  @pattern("^[0-9a-zA-Z][a-zA-Z0-9-]*$")
+  certificatePolicyName?: string;
 
   /**
    * Initial device twin.

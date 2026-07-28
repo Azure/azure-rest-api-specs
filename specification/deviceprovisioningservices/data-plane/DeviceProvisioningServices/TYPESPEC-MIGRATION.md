@@ -448,7 +448,10 @@ constraint now makes that behavior explicit in the spec.
 
 ## API Versions
 
-Both TypeSpec projects emit two API versions from a single source:
+Both TypeSpec projects emit multiple API versions from a single source:
 
 - **`2021-10-01` (stable):** All features. `registerDevice` is available. No `credentialPolicyName`.
 - **`2025-07-01-preview`:** Adds `registerDeviceAndIssueCertificate` (replaces `registerDevice`), `credentialPolicyName` on enrollments, `issuedCertificateChain` and `csr` on device registration models.
+- **`2026-11-02-preview`:** Adds Azure Device Registry (ADR) certificate policy references on enrollments (`namespaceName`, `certificateAuthorityName`, `certificatePolicyName`, replacing `credentialPolicyName`) and Azure Device Update (ADU) device operations on the device API (`requestUpdates`, `requestOnboardingUpdates`, `reportUpdateStatus`).
+
+> **Note:** The tables and counts elsewhere in this document are a historical snapshot of the original stable → TypeSpec migration (2021-10-01 + 2025-07-01-preview) and are not updated for later preview versions.
