@@ -300,6 +300,8 @@ suppression, prefer fixing the underlying issue:
    determine whether the flagged rule can instead be resolved in the spec. If so,
    remove the `#suppress` directive (or the `linter.disable` entry in
    `tspconfig.yaml`) and fix the underlying problem rather than suppressing it.
+   For more information on TypeSpec linting rules, see:
+   https://aka.ms/tsp-suppress/tsp-to-lintdiff
 2. **Only if the suppression is genuinely necessary**, ensure it has a clear,
    meaningful justification. Every suppression must include a justification
    string explaining why the rule cannot be satisfied; suppressions with no
