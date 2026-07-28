@@ -15,7 +15,9 @@ namespace Microsoft.Sql;
  * Azure Active Directory administrator.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Server)
+@Azure.ResourceManager.Legacy.feature(Features.ServerAzureADAdministrators)
 model ServerAzureADAdministrator
   is Azure.ResourceManager.ProxyResource<AdministratorProperties> {
   ...ResourceNameParameter<
@@ -28,7 +30,9 @@ model ServerAzureADAdministrator
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.ServerAzureADAdministrators)
 interface ServerAzureADAdministrators {
   /**
    * Gets a Azure Active Directory administrator.
@@ -41,11 +45,14 @@ interface ServerAzureADAdministrators {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ServerAzureADAdministrator,
-    Response = ArmResourceUpdatedResponse<ServerAzureADAdministrator> | ArmResourceCreatedResponse<
-      ServerAzureADAdministrator,
-      ArmLroLocationHeader<FinalResult = ServerAzureADAdministrator> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceUpdatedResponse<ServerAzureADAdministrator>
+      | ArmResourceCreatedResponse<
+          ServerAzureADAdministrator,
+          ArmLroLocationHeader<FinalResult = ServerAzureADAdministrator> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**
@@ -54,7 +61,10 @@ interface ServerAzureADAdministrators {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     ServerAzureADAdministrator,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -66,10 +76,12 @@ interface ServerAzureADAdministrators {
   >;
 }
 
-@@doc(ServerAzureADAdministrator.name,
+@@doc(
+  ServerAzureADAdministrator.name,
   "The name of server active directory administrator."
 );
 @@doc(ServerAzureADAdministrator.properties, "Resource properties.");
-@@doc(ServerAzureADAdministrators.createOrUpdate::parameters.resource,
+@@doc(
+  ServerAzureADAdministrators.createOrUpdate::parameters.resource,
   "The requested Azure Active Directory administrator Resource state."
 );
