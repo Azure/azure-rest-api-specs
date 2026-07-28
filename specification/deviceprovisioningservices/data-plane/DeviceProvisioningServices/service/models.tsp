@@ -340,6 +340,23 @@ model IndividualEnrollment {
 }
 
 /**
+ * Connection profile capability of an assigned IoT Hub, forwarded verbatim from
+ * the hub. Indicates the MQTT protocol version the device should use to connect.
+ * Modeled as an extensible union so future hub capabilities pass through without a
+ * breaking change; an absent or null value resolves to 'classic'.
+ */
+@added(Versions.v2026_11_02_preview)
+union ConnectionProfile {
+  string,
+
+  /** Classic MQTT 3.x capable IoT Hub. This is the default when unspecified. */
+  classic: "classic",
+
+  /** MQTT 5 capable IoT Hub. */
+  mqttV5: "mqttV5",
+}
+
+/**
  * Device registration state.
  */
 model DeviceRegistrationState {
@@ -363,6 +380,15 @@ model DeviceRegistrationState {
    */
   @visibility(Lifecycle.Read)
   assignedHub?: string;
+
+  /**
+   * The connection profile capability of the assigned IoT Hub, forwarded verbatim
+   * from the hub. Indicates the MQTT protocol version the device should use to
+   * connect. An absent or null value resolves to 'classic'.
+   */
+  @added(Versions.v2026_11_02_preview)
+  @visibility(Lifecycle.Read)
+  connectionProfile?: ConnectionProfile;
 
   /**
    * Device ID.
