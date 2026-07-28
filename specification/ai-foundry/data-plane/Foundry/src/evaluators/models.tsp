@@ -203,14 +203,39 @@ model SupersededDimension {
 union RubricHealthConfidence {
   string,
 
-  @doc("The health signals are incomplete or insufficiently supported.")
+  @doc("The health signals contain structural evidence only or are otherwise insufficiently supported.")
   low: "low",
 
-  @doc("The health signals have sufficient structural evidence but limited empirical support.")
+  @doc("The health signals contain structural evidence and sufficient evaluation evidence.")
   med: "med",
 
-  @doc("The health signals include strong supporting evidence.")
+  @doc("The health signals contain structural evidence, sufficient evaluation evidence, and sufficient human annotation evidence.")
   high: "high",
+}
+
+@doc("Similarity metrics used to compute rubric health.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+union RubricHealthSimilarityMetric {
+  string,
+
+  @doc("Cosine similarity.")
+  cosine: "cosine",
+}
+
+@doc("Service-generated information about how rubric health was computed.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+model RubricHealthComputationMetadata {
+  @doc("The version of the rubric-health component definitions, normalization, and aggregate coefficients.")
+  algorithm_version: string;
+
+  @doc("A stable identifier for the vectorizer or embedding model used to compute diversity and coverage.")
+  vectorizer: string;
+
+  @doc("The model snapshot or implementation revision of the vectorizer, when available independently from the vectorizer identifier.")
+  vectorizer_version?: string;
+
+  @doc("The similarity metric used with the generated vectors.")
+  similarity_metric: RubricHealthSimilarityMetric;
 }
 
 @doc("Service-generated health signals for a rubric evaluator.")
@@ -238,6 +263,9 @@ model RubricHealth {
 
   @doc("The completeness of the evidence used to compute the health signals.")
   confidence?: RubricHealthConfidence;
+
+  @doc("Information identifying the algorithm and vectorizer used to compute the health signals.")
+  computation?: RubricHealthComputationMetadata;
 }
 
 @doc("Rubric-based evaluator definition — stores dimensions produced by the generate API. Used for both quality and safety evaluators.")

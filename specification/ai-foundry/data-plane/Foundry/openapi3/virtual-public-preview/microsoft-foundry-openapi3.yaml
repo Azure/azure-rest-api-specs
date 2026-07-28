@@ -40273,7 +40273,33 @@ components:
         confidence:
           $ref: '#/components/schemas/RubricHealthConfidence'
           description: The completeness of the evidence used to compute the health signals.
+        computation:
+          $ref: '#/components/schemas/RubricHealthComputationMetadata'
+          description: Information identifying the algorithm and vectorizer used to compute the health signals.
       description: Service-generated health signals for a rubric evaluator.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
+    RubricHealthComputationMetadata:
+      type: object
+      required:
+        - algorithm_version
+        - vectorizer
+        - similarity_metric
+      properties:
+        algorithm_version:
+          type: string
+          description: The version of the rubric-health component definitions, normalization, and aggregate coefficients.
+        vectorizer:
+          type: string
+          description: A stable identifier for the vectorizer or embedding model used to compute diversity and coverage.
+        vectorizer_version:
+          type: string
+          description: The model snapshot or implementation revision of the vectorizer, when available independently from the vectorizer identifier.
+        similarity_metric:
+          $ref: '#/components/schemas/RubricHealthSimilarityMetric'
+          description: The similarity metric used with the generated vectors.
+      description: Service-generated information about how rubric health was computed.
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
@@ -40286,6 +40312,16 @@ components:
             - med
             - high
       description: The completeness of the evidence used to compute rubric health.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
+    RubricHealthSimilarityMetric:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - cosine
+      description: Similarity metrics used to compute rubric health.
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
