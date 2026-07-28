@@ -163,10 +163,12 @@ read-only inspection"):
   `git checkout` of branches you do not currently have checked out,
   `git tag -d`, anything that mutates the working tree or remote.
 - Any file write (`Set-Content`, `Out-File`, `>` / `>>` redirects,
-`Add-Content`, `New-Item -ItemType File` outside a temp directory used
-purely for ephemeral fetched content). The critic produces output as
-chat text only; it does not write to the workspace.
+  `Add-Content`, `New-Item -ItemType File` outside a temp directory used
+  purely for ephemeral fetched content). The critic produces output as
+  chat text only; it does not write to the workspace.
+
 <!-- cspell:ignore choco -->
+
 - Any installer / package manager (`npm`, `pip`, `winget`, `choco`, etc.),
   `Invoke-WebRequest` to write a downloaded file into the workspace, or
   any command that mounts, modifies, or executes downloaded content.
@@ -222,9 +224,11 @@ and adds Critic-specific behavioral notes that are not in the protocol.
 3. The **full** findings report as produced in Step 6.
 4. The list of files reviewed.
 5. The previous-version path and base SHA/ref used for `[NEW]`/`[EXISTING]`
-classification (for example, `base-sha: <sha>; path: <path>`), or
-"None - new service".
+   classification (for example, `base-sha: <sha>; path: <path>`), or
+   "None - new service".
+
 <!-- cspell:ignore REPOST -->
+
 6. **The Step 5.5 reconciliation plan** (verbatim) - per-finding actions
    (POST-NEW / SKIP-COVERED / RESOLVE-AND-REPOST / REPLY-LINE-SHIFT) and
    per-existing-thread dispositions (THANK-AND-RESOLVE /

@@ -12,12 +12,7 @@ import { SdkName } from "@azure-tools/specs-shared/sdk-types";
  * - notEnabled: The generation process exited due to missing language configuration.
  */
 export type ExecutionResult =
-  | "pending"
-  | "inProgress"
-  | "failed"
-  | "succeeded"
-  | "warning"
-  | "notEnabled";
+  "pending" | "inProgress" | "failed" | "succeeded" | "warning" | "notEnabled";
 
 /**
  * Represents a package entry in the execution report.

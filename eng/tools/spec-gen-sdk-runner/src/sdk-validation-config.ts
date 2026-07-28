@@ -34,9 +34,7 @@ export interface SdkValidationConfigValidationResult {
 }
 
 type ReadSdkValidationConfigResult =
-  | { status: "absent" }
-  | { status: "invalid" }
-  | { status: "valid"; config: SdkValidationConfig };
+  { status: "absent" } | { status: "invalid" } | { status: "valid"; config: SdkValidationConfig };
 
 const validSdkNames = new Set<string>(Object.values(SdkName));
 const allowedRootKeys = new Set(["languages"]);
