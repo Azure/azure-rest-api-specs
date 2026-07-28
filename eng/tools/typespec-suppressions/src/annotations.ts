@@ -13,9 +13,7 @@ export type SuppressionOrigin = "new" | "changed";
  * `required-fix`, `auto-generated`, or `policy-violation`.
  */
 export type SuppressionAnnotationCategoryId =
-  | "missing-justification"
-  | "new-suppression"
-  | "changed-justification";
+  "missing-justification" | "new-suppression" | "changed-justification";
 
 interface SuppressionAnnotationCategory {
   /** GitHub Actions workflow-command annotation level. */
