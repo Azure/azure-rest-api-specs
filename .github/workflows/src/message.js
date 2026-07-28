@@ -7,6 +7,9 @@ import * as z from "zod";
  * @readonly
  * @enum {"Info" | "Warning" | "Error"}
  */
+/**
+ * @typedef {(typeof MessageLevel)[keyof typeof MessageLevel]} MessageLevel
+ */
 export const MessageLevel = Object.freeze({
   Info: "Info",
   Warning: "Warning",
@@ -43,6 +46,9 @@ export const BaseMessageRecordSchema = z.object({
 /**
  * @readonly
  * @enum {"Raw" | "Result"}
+ */
+/**
+ * @typedef {(typeof MessageType)[keyof typeof MessageType]} MessageType
  */
 export const MessageType = Object.freeze({
   Raw: "Raw",

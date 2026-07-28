@@ -197,7 +197,7 @@ async function getResourceTypesAtRef(git, gitRef, specPath, branchName) {
  *
  * @param {Object} params
  * @param {string[]} params.rmFiles - Resource-manager file paths changed in the PR
- * @param {import("@actions/core")} params.core - GitHub Actions core for logging
+ * @param {typeof import("@actions/core")} params.core - GitHub Actions core for logging
  * @returns {Promise<Array<{rpNamespace: string, orgName: string, serviceName: string, newResourceTypes: Array<{resourceType: string, provider: string, modelName: string | null, operations: string[]}>}>>}
  */
 export async function detectNewResourceTypes({ rmFiles, core }) {

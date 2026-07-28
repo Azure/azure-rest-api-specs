@@ -174,10 +174,10 @@ export const ImpactAssessmentSchema = z.object({
 
 /**
  * @typedef {Object} ChangeHandler
- * @property {function(PRChange): void} [SwaggerFile]
- * @property {function(PRChange): void} [TypeSpecFile]
- * @property {function(PRChange): void} [ExampleFile]
- * @property {function(PRChange): void} [ReadmeFile]
+ * @property {(change: PRChange) => void} [SwaggerFile]
+ * @property {(change: PRChange) => void} [TypeSpecFile]
+ * @property {(change: PRChange) => void} [ExampleFile]
+ * @property {(change: PRChange) => void} [ReadmeFile]
  */
 
 /**

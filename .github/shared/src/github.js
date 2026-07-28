@@ -8,6 +8,9 @@ export const PER_PAGE_MAX = 100;
  * @readonly
  * @enum {"completed" | "expected" | "failure" | "in_progress" | "pending" | "queued" | "requested" | "startup_failure" | "waiting" }
  */
+/**
+ * @typedef {(typeof CheckStatus)[keyof typeof CheckStatus]} CheckStatus
+ */
 export const CheckStatus = Object.freeze({
   /**
    * @description The check run completed and has a conclusion.
@@ -53,6 +56,9 @@ export const CheckStatus = Object.freeze({
  * @readonly
  * @enum {"action_required" | "cancelled" | "failure" | "neutral" | "skipped" | "stale" | "success" | "timed_out" }
  */
+/**
+ * @typedef {(typeof CheckConclusion)[keyof typeof CheckConclusion]} CheckConclusion
+ */
 export const CheckConclusion = Object.freeze({
   /**
    * @description The check run provided required actions upon its completion. For more information, see Using the REST API to interact with checks.
@@ -93,6 +99,9 @@ export const CheckConclusion = Object.freeze({
  *
  * @readonly
  * @enum {"error" | "failure" | "pending" | "success"}
+ */
+/**
+ * @typedef {(typeof CommitStatusState)[keyof typeof CommitStatusState]} CommitStatusState
  */
 export const CommitStatusState = Object.freeze({
   ERROR: "error",

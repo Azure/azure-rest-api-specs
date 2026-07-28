@@ -104,10 +104,12 @@ export function createMockRequestError(status) {
 }
 
 /**
- * @returns {Context & ReturnType<createMockContextImpl>}
+ * @returns {Context & ReturnType<typeof createMockContextImpl>}
  */
 export function createMockContext() {
-  return /** @type {Context & ReturnType<createMockContextImpl>} */ (createMockContextImpl());
+  return /** @type {Context & ReturnType<typeof createMockContextImpl>} */ (
+    createMockContextImpl()
+  );
 }
 
 // Partial mock of `context` parameter passed into github-script actions

@@ -890,7 +890,7 @@ export function createNextStepsComment(
 }
 
 /**
- * @param {import("@actions/core")} core
+ * @param {typeof import("@actions/core")} core
  * @param {string[]} labels
  * @param {string} targetBranch // this is in the format of "repo/branch"
  * @param {boolean} requiredCheckInfosPresent
