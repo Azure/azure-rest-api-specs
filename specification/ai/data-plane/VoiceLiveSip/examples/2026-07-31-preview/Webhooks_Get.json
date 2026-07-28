@@ -1,0 +1,33 @@
+{
+  "operationId": "Webhooks_Get",
+  "title": "Get a webhook registration",
+  "parameters": {
+    "endpoint": "https://my-resource.services.ai.azure.com",
+    "api-version": "2026-07-31-preview",
+    "webhook_id": "wh_abc123"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "object": "webhook.endpoint",
+        "id": "wh_abc123",
+        "name": "Production SIP Webhook",
+        "url": "https://your-domain.com/webhooks/sip",
+        "event_types": [
+          "realtime.call.incoming",
+          "realtime.call.connected",
+          "realtime.call.disconnected"
+        ],
+        "support_info": {
+          "display_name": "John Doe",
+          "contact_email": "john.doe@example.com",
+          "description": "Primary support contact for production webhooks"
+        },
+        "enabled": true,
+        "created_at": 1718640600,
+        "updated_at": 1718640600,
+        "signing_secret_hint": "abc1"
+      }
+    }
+  }
+}

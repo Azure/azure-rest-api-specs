@@ -1,0 +1,1123 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "VoiceLiveSip",
+    "version": "2026-07-31-preview",
+    "description": "The Voice Live SIP control-plane API. This HTTP data-plane surface manages inbound SIP call\ncontrol (accept, reject, transfer, hangup), webhook registrations for SIP call lifecycle events,\nand resource-level SIP configuration. Real-time media and the `realtime.call.*` call lifecycle\nevents are delivered over the separate WebSocket-based `VoiceLive` data-plane contract.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "description": "Supported Voice Live resource endpoint (protocol and hostname, for example\n`https://my-resource.services.ai.azure.com`).",
+        "required": true,
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "OAuth2Auth": [
+        "https://cognitiveservices.azure.com/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+      "scopes": {
+        "https://cognitiveservices.azure.com/.default": ""
+      }
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/voice-agent/realtime/sip/calls/{call_id}/accept": {
+      "post": {
+        "operationId": "Calls_Accept",
+        "summary": "Accept an inbound SIP call",
+        "description": "Accepts an inbound SIP call and starts the Voice Live agent session.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "call_id",
+            "in": "path",
+            "description": "The route-bound SIP call identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configuration",
+            "in": "body",
+            "description": "The Voice Live agent configuration applied to the accepted call.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SipAcceptCallRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SipAcceptCallResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/SipErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Accept an inbound SIP call": {
+            "$ref": "./examples/Calls_Accept.json"
+          }
+        }
+      }
+    },
+    "/voice-agent/realtime/sip/calls/{call_id}/hangup": {
+      "post": {
+        "operationId": "Calls_Hangup",
+        "summary": "Hang up a SIP call",
+        "description": "Terminates an active SIP call.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "call_id",
+            "in": "path",
+            "description": "The route-bound SIP call identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The hangup request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SipHangupCallRequest"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/SipErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Hang up a SIP call": {
+            "$ref": "./examples/Calls_Hangup.json"
+          }
+        }
+      }
+    },
+    "/voice-agent/realtime/sip/calls/{call_id}/refer": {
+      "post": {
+        "operationId": "Calls_Refer",
+        "summary": "Transfer a SIP call (blind transfer)",
+        "description": "Starts a blind transfer (REFER) of an active SIP call to another SIP target.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "call_id",
+            "in": "path",
+            "description": "The route-bound SIP call identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The transfer request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SipReferCallRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/SipReferCallResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/SipErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Transfer a SIP call (blind transfer)": {
+            "$ref": "./examples/Calls_Refer.json"
+          }
+        }
+      }
+    },
+    "/voice-agent/realtime/sip/calls/{call_id}/reject": {
+      "post": {
+        "operationId": "Calls_Reject",
+        "summary": "Reject an inbound SIP call",
+        "description": "Rejects an inbound SIP call with an optional SIP status code and reason.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "call_id",
+            "in": "path",
+            "description": "The route-bound SIP call identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The reject request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SipRejectCallRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SipRejectCallResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/SipErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Reject an inbound SIP call": {
+            "$ref": "./examples/Calls_Reject.json"
+          }
+        }
+      }
+    },
+    "/voice-agent/realtime/sip/configurations": {
+      "post": {
+        "operationId": "Configurations_CreateOrUpdate",
+        "summary": "Create or update the resource SIP configuration",
+        "description": "Creates or partially updates the authenticated resource's SIP configuration.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The upsert-configuration request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SipUpsertConfigurationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SipConfiguration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/SipErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update the resource SIP configuration": {
+            "$ref": "./examples/Configurations_CreateOrUpdate.json"
+          }
+        }
+      }
+    },
+    "/voice-agent/realtime/sip/webhooks": {
+      "get": {
+        "operationId": "Webhooks_List",
+        "summary": "List webhook registrations",
+        "description": "Lists all webhook registrations for the authenticated resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SipWebhookList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/SipErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List webhook registrations": {
+            "$ref": "./examples/Webhooks_List.json"
+          }
+        }
+      },
+      "post": {
+        "operationId": "Webhooks_Create",
+        "summary": "Create a webhook registration",
+        "description": "Creates a webhook registration for receiving SIP call lifecycle events.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The create-webhook request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SipCreateWebhookRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SipWebhookEndpoint"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/SipErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a webhook registration": {
+            "$ref": "./examples/Webhooks_Create.json"
+          }
+        }
+      }
+    },
+    "/voice-agent/realtime/sip/webhooks/{webhook_id}": {
+      "get": {
+        "operationId": "Webhooks_Get",
+        "summary": "Get a webhook registration",
+        "description": "Gets a single webhook registration by identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "webhook_id",
+            "in": "path",
+            "description": "The webhook registration identifier.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SipWebhookEndpoint"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/SipErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a webhook registration": {
+            "$ref": "./examples/Webhooks_Get.json"
+          }
+        }
+      },
+      "post": {
+        "operationId": "Webhooks_Update",
+        "summary": "Update a webhook registration",
+        "description": "Updates an existing webhook registration. Omitted fields retain their stored values.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "webhook_id",
+            "in": "path",
+            "description": "The webhook registration identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The update-webhook request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SipUpdateWebhookRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SipWebhookEndpoint"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/SipErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a webhook registration": {
+            "$ref": "./examples/Webhooks_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Webhooks_Delete",
+        "summary": "Delete a webhook registration",
+        "description": "Deletes a webhook registration.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "webhook_id",
+            "in": "path",
+            "description": "The webhook registration identifier.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/SipErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a webhook registration": {
+            "$ref": "./examples/Webhooks_Delete.json"
+          }
+        }
+      }
+    },
+    "/voice-agent/realtime/sip/webhooks/{webhook_id}/rotate_secret": {
+      "post": {
+        "operationId": "Webhooks_RotateSecret",
+        "summary": "Rotate a webhook signing secret",
+        "description": "Rotates the webhook signing secret. The previous secret remains valid for a grace period.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "webhook_id",
+            "in": "path",
+            "description": "The webhook registration identifier.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SipWebhookEndpoint"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/SipErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Rotate a webhook signing secret": {
+            "$ref": "./examples/Webhooks_RotateSecret.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SipAcceptCallRequest": {
+      "type": "object",
+      "description": "The request body for accepting an inbound SIP call. The body is an open Voice Live agent\nconfiguration object (the same shape accepted by the realtime `session.update` event); all\nproperties are passed through to the accepted call's Voice Live session.",
+      "additionalProperties": {}
+    },
+    "SipAcceptCallResult": {
+      "type": "object",
+      "description": "The result of accepting an inbound SIP call.",
+      "properties": {
+        "call_id": {
+          "type": "string",
+          "description": "The accepted SIP call identifier."
+        },
+        "state": {
+          "$ref": "#/definitions/SipCallState",
+          "description": "The current call state."
+        },
+        "voice_live_session_id": {
+          "type": "string",
+          "description": "The Voice Live session identifier, present once runtime setup has created one."
+        }
+      },
+      "required": [
+        "call_id",
+        "state"
+      ]
+    },
+    "SipCallIdentity": {
+      "type": "object",
+      "description": "The APIM-authenticated resource identity captured for downstream SIP calls.",
+      "properties": {
+        "internal_id": {
+          "type": "string",
+          "description": "The resource internal identifier (32-character hex GUID)."
+        },
+        "resource_id": {
+          "type": "string",
+          "description": "The full ARM resource identifier."
+        },
+        "subscription_id": {
+          "type": "string",
+          "description": "The Azure subscription identifier."
+        },
+        "tenant_id": {
+          "type": "string",
+          "description": "The Azure tenant identifier."
+        },
+        "product_id": {
+          "type": "string",
+          "description": "The optional APIM product identifier associated with the call."
+        }
+      },
+      "required": [
+        "internal_id",
+        "resource_id",
+        "subscription_id",
+        "tenant_id"
+      ]
+    },
+    "SipCallState": {
+      "type": "string",
+      "description": "The lifecycle state of a SIP call.",
+      "enum": [
+        "WaitingForCustomer",
+        "Accepting",
+        "Accepted",
+        "Connected",
+        "Rejecting",
+        "Transferring",
+        "Terminating",
+        "Disconnected",
+        "Failed",
+        "Expired"
+      ],
+      "x-ms-enum": {
+        "name": "SipCallState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "waiting_for_customer",
+            "value": "WaitingForCustomer",
+            "description": "The inbound INVITE has arrived and the call is awaiting a customer decision."
+          },
+          {
+            "name": "accepting",
+            "value": "Accepting",
+            "description": "The customer accepted the call and runtime setup is in progress."
+          },
+          {
+            "name": "accepted",
+            "value": "Accepted",
+            "description": "The SDP answer has been received but the call is not fully connected yet."
+          },
+          {
+            "name": "connected",
+            "value": "Connected",
+            "description": "The Voice Live runtime is configured and the call is active."
+          },
+          {
+            "name": "rejecting",
+            "value": "Rejecting",
+            "description": "The customer rejected a waiting call and rejection is in progress."
+          },
+          {
+            "name": "transferring",
+            "value": "Transferring",
+            "description": "A blind transfer is in progress."
+          },
+          {
+            "name": "terminating",
+            "value": "Terminating",
+            "description": "Call termination and cleanup are in progress."
+          },
+          {
+            "name": "disconnected",
+            "value": "Disconnected",
+            "description": "The call ended normally or by an explicit hangup, reject, or transfer completion."
+          },
+          {
+            "name": "failed",
+            "value": "Failed",
+            "description": "The call failed because setup or runtime control could not complete."
+          },
+          {
+            "name": "expired",
+            "value": "Expired",
+            "description": "The waiting call expired before the customer made a decision."
+          }
+        ]
+      }
+    },
+    "SipCallTerminalReason": {
+      "type": "string",
+      "description": "The terminal reason recorded when a SIP call leaves the active state machine.",
+      "enum": [
+        "Rejected",
+        "CustomerHangup",
+        "SipProxyTerminate",
+        "DecisionTimeout",
+        "SetupFailure",
+        "TransferSucceeded",
+        "RuntimeError"
+      ],
+      "x-ms-enum": {
+        "name": "SipCallTerminalReason",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "rejected",
+            "value": "Rejected",
+            "description": "The customer rejected the inbound call."
+          },
+          {
+            "name": "customer_hangup",
+            "value": "CustomerHangup",
+            "description": "The customer requested hangup."
+          },
+          {
+            "name": "sip_proxy_terminate",
+            "value": "SipProxyTerminate",
+            "description": "The caller-side SIP leg ended."
+          },
+          {
+            "name": "decision_timeout",
+            "value": "DecisionTimeout",
+            "description": "The inbound decision timeout expired."
+          },
+          {
+            "name": "setup_failure",
+            "value": "SetupFailure",
+            "description": "Runtime setup failed before the call connected."
+          },
+          {
+            "name": "transfer_succeeded",
+            "value": "TransferSucceeded",
+            "description": "A blind transfer completed successfully."
+          },
+          {
+            "name": "runtime_error",
+            "value": "RuntimeError",
+            "description": "A fatal runtime error ended the call."
+          }
+        ]
+      }
+    },
+    "SipConfiguration": {
+      "type": "object",
+      "description": "The customer-facing resource-level SIP configuration. The digest password is never returned.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The configuration identifier. Always `sip_configuration`.",
+          "enum": [
+            "sip_configuration"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "object": {
+          "type": "string",
+          "description": "The object type. Always `sip.configuration`.",
+          "enum": [
+            "sip.configuration"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "password_set": {
+          "type": "boolean",
+          "description": "Whether a digest password is configured."
+        },
+        "allowed_source_cidrs": {
+          "type": "array",
+          "description": "The normalized signaling source allowlist.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "call_identity": {
+          "$ref": "#/definitions/SipCallIdentity",
+          "description": "The APIM-authenticated resource identity captured for downstream SIP calls."
+        },
+        "voice_live_agent_configuration": {
+          "type": "object",
+          "description": "The stored default Voice Live agent configuration.",
+          "additionalProperties": {}
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The configuration creation time, as Unix epoch seconds."
+        },
+        "updated_at": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The most recent configuration update time, as Unix epoch seconds."
+        }
+      },
+      "required": [
+        "id",
+        "object",
+        "password_set",
+        "allowed_source_cidrs",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    "SipCreateWebhookRequest": {
+      "type": "object",
+      "description": "The request body for creating a webhook registration.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The human-readable webhook name.",
+          "maxLength": 128
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "The HTTPS endpoint URL that receives webhook deliveries."
+        },
+        "event_types": {
+          "type": "array",
+          "description": "The event types to subscribe to. Defaults to `[\"*\"]` (all supported event types).",
+          "default": [
+            "*"
+          ],
+          "items": {
+            "type": "string"
+          }
+        },
+        "support_info": {
+          "$ref": "#/definitions/SipWebhookSupportInfo",
+          "description": "The optional support metadata for the webhook."
+        }
+      },
+      "required": [
+        "url"
+      ]
+    },
+    "SipErrorResponse": {
+      "type": "object",
+      "description": "An error response returned by a Voice Live SIP control-plane operation.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "A URI reference identifying the problem type, for example `https://aka.ms/voicelive/sip/errors/call_not_found`."
+        },
+        "title": {
+          "type": "string",
+          "description": "A short, human-readable summary of the problem type."
+        },
+        "status": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The HTTP status code generated for this occurrence of the problem."
+        },
+        "detail": {
+          "type": "string",
+          "description": "A human-readable explanation specific to this occurrence of the problem."
+        },
+        "instance": {
+          "type": "string",
+          "description": "A URI reference identifying the specific occurrence of the problem (typically the request path)."
+        },
+        "code": {
+          "type": "string",
+          "description": "A machine-readable error code, for example `call_not_found` or `invalid_request`."
+        },
+        "retryable": {
+          "type": "boolean",
+          "description": "Whether retrying the request may succeed."
+        },
+        "trace_id": {
+          "type": "string",
+          "description": "The request correlation identifier, echoed for support diagnostics."
+        },
+        "sub_code": {
+          "type": "string",
+          "description": "An optional finer-grained error sub-code."
+        },
+        "call_id": {
+          "type": "string",
+          "description": "The SIP call identifier the error relates to, when applicable."
+        },
+        "state": {
+          "type": "string",
+          "description": "The SIP call state at the time of the error, when applicable."
+        },
+        "errors": {
+          "type": "object",
+          "description": "Per-field validation messages, present on `400` validation errors.",
+          "additionalProperties": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        }
+      }
+    },
+    "SipHangupCallRequest": {
+      "type": "object",
+      "description": "The request body for hanging up a SIP call.",
+      "properties": {
+        "reason": {
+          "type": "string",
+          "description": "The optional customer-visible hangup reason."
+        }
+      }
+    },
+    "SipReferCallRequest": {
+      "type": "object",
+      "description": "The request body for a blind transfer (REFER) of a SIP call.",
+      "properties": {
+        "target_uri": {
+          "type": "string",
+          "description": "The transfer target SIP URI, for example `sip:+15551234567@pstn.example.com`."
+        }
+      },
+      "required": [
+        "target_uri"
+      ]
+    },
+    "SipReferCallResult": {
+      "type": "object",
+      "description": "The result of starting a blind transfer (REFER) of a SIP call.",
+      "properties": {
+        "call_id": {
+          "type": "string",
+          "description": "The transferred SIP call identifier."
+        },
+        "transfer_id": {
+          "type": "string",
+          "description": "The transfer identifier used to correlate asynchronous REFER status updates."
+        },
+        "state": {
+          "$ref": "#/definitions/SipCallState",
+          "description": "The current call state."
+        }
+      },
+      "required": [
+        "call_id",
+        "transfer_id",
+        "state"
+      ]
+    },
+    "SipRejectCallRequest": {
+      "type": "object",
+      "description": "The request body for rejecting an inbound SIP call.",
+      "properties": {
+        "status_code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The SIP status code to use for rejection. Defaults to `486` (Busy Here). The service does not\nconstrain the range; any SIP response code the caller wants to return may be supplied.",
+          "default": 486
+        },
+        "reason": {
+          "type": "string",
+          "description": "The optional customer-visible rejection reason."
+        }
+      }
+    },
+    "SipRejectCallResult": {
+      "type": "object",
+      "description": "The result of rejecting an inbound SIP call.",
+      "properties": {
+        "call_id": {
+          "type": "string",
+          "description": "The rejected SIP call identifier."
+        },
+        "state": {
+          "$ref": "#/definitions/SipCallState",
+          "description": "The resulting call state."
+        },
+        "terminal_reason": {
+          "$ref": "#/definitions/SipCallTerminalReason",
+          "description": "The terminal reason for the call."
+        }
+      },
+      "required": [
+        "call_id",
+        "state",
+        "terminal_reason"
+      ]
+    },
+    "SipUpdateWebhookRequest": {
+      "type": "object",
+      "description": "The request body for updating a webhook registration. Omitted fields retain their stored values.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The updated webhook name.",
+          "maxLength": 128
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "The updated HTTPS endpoint URL."
+        },
+        "event_types": {
+          "type": "array",
+          "description": "The updated event types to subscribe to.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether the webhook is enabled for delivery."
+        },
+        "support_info": {
+          "$ref": "#/definitions/SipWebhookSupportInfo",
+          "description": "The updated support metadata for the webhook."
+        }
+      }
+    },
+    "SipUpsertConfigurationRequest": {
+      "type": "object",
+      "description": "The request body for creating or partially updating the resource-level SIP configuration. At least\none field is required; omitted fields retain their stored values.",
+      "properties": {
+        "password": {
+          "type": "string",
+          "description": "The SIP digest password to create or replace.",
+          "maxLength": 512
+        },
+        "allowed_source_cidrs": {
+          "type": "array",
+          "description": "The signaling source IP addresses or CIDRs to replace. An empty array clears the allowlist.",
+          "maxItems": 64,
+          "items": {
+            "type": "string"
+          }
+        },
+        "voice_live_agent_configuration": {
+          "type": "object",
+          "description": "The default Voice Live agent configuration to create or replace. Uses the same open model and\nsession configuration shape accepted by the SIP call accept API.",
+          "additionalProperties": {}
+        }
+      }
+    },
+    "SipWebhookEndpoint": {
+      "type": "object",
+      "description": "A customer webhook registration.",
+      "properties": {
+        "object": {
+          "type": "string",
+          "description": "The object type. Always `webhook.endpoint`.",
+          "enum": [
+            "webhook.endpoint"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "id": {
+          "type": "string",
+          "description": "The webhook registration identifier (prefixed `wh_`)."
+        },
+        "name": {
+          "type": "string",
+          "description": "The human-readable webhook name.",
+          "maxLength": 128
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "The HTTPS endpoint URL that receives webhook deliveries."
+        },
+        "event_types": {
+          "type": "array",
+          "description": "The event types the webhook is subscribed to.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "support_info": {
+          "$ref": "#/definitions/SipWebhookSupportInfo",
+          "description": "The support metadata for the webhook."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether the webhook is enabled for delivery."
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The creation time, as Unix epoch seconds."
+        },
+        "updated_at": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The last update time, as Unix epoch seconds."
+        },
+        "signing_secret": {
+          "type": "string",
+          "description": "The full signing secret. Returned only when the endpoint is created or its secret is rotated."
+        },
+        "signing_secret_hint": {
+          "type": "string",
+          "description": "A non-sensitive hint of the stored signing secret."
+        }
+      },
+      "required": [
+        "object",
+        "id",
+        "url",
+        "event_types",
+        "support_info",
+        "enabled",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    "SipWebhookList": {
+      "type": "object",
+      "description": "A list of webhook registrations.",
+      "properties": {
+        "object": {
+          "type": "string",
+          "description": "The object type. Always `list`.",
+          "enum": [
+            "list"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "data": {
+          "type": "array",
+          "description": "The webhook registrations.",
+          "items": {
+            "$ref": "#/definitions/SipWebhookEndpoint"
+          }
+        }
+      },
+      "required": [
+        "object",
+        "data"
+      ]
+    },
+    "SipWebhookSupportInfo": {
+      "type": "object",
+      "description": "Customer-provided support metadata for a webhook registration.",
+      "properties": {
+        "display_name": {
+          "type": "string",
+          "description": "The support contact display name.",
+          "maxLength": 128
+        },
+        "contact_email": {
+          "type": "string",
+          "description": "The support contact email address.",
+          "maxLength": 320
+        },
+        "description": {
+          "type": "string",
+          "description": "A free-form description of the webhook or its support contact.",
+          "maxLength": 1024
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    }
+  }
+}

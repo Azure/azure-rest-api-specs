@@ -28,4 +28,7 @@ enum Versions {
 
   /** Version 2026-07-15. */
   v2026_07_15: "2026-07-15",
+
+  /** Version 2026-07-31-preview. */
+  v2026_07_31_preview: "2026-07-31-preview",
 }

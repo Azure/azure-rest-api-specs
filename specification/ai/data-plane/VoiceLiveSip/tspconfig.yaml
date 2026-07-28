@@ -1,0 +1,55 @@
+parameters:
+  "service-dir":
+    default: "sdk/voicelive"
+  "dependencies":
+    default: ""
+emit:
+  - "@azure-tools/typespec-autorest"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"
+options:
+  "@azure-tools/typespec-autorest":
+    emitter-output-dir: "{project-root}"
+    omit-unreachable-types: false
+    output-file: "{version-status}/{version}/VoiceLiveSip.json"
+    azure-resource-provider-folder: "data-plane"
+    emit-lro-options: "none"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-ai-voicelive-sip"
+    namespace: "azure.ai.voicelive.sip"
+    generate-test: false
+    generate-sample: false
+    flavor: azure
+    package-name: "azure-ai-voicelive-sip"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-voicelive-sip"
+  "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.AI.VoiceLive.Sip"
+    clear-output-folder: true
+    model-namespace: false
+    namespace: "Azure.AI.VoiceLive.Sip"
+    flavor: azure
+  "@azure-typespec/http-client-csharp":
+    namespace: Azure.AI.VoiceLive.Sip
+    model-namespace: false
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+  "@azure-tools/typespec-ts":
+    experimental-extensible-enums: true
+    emitter-output-dir: "{output-dir}/{service-dir}/ai-voicelive-sip"
+    package-details:
+      name: "@azure/ai-voicelive-sip"
+    flavor: azure
+    is-modular-library: true
+    generate-metadata: false
+    generate-test: false
+    src-folder: "generated"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-voicelive-sip"
+    namespace: com.azure.ai.voicelive.sip
+    use-eclipse-language-server: false
+    custom-types-subpackage: implementation.models
+    flavor: azure
+    partial-update: true
+    dev-options:
+      loglevel: info
