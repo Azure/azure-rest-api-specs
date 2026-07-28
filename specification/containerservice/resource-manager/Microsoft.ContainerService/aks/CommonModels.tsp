@@ -2807,7 +2807,7 @@ model ManagedClusterNATGatewayProfile {
    * Desired outbound IP Prefix resources for the managed NAT Gateway. Only compatible with NAT Gateway V2.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
-  @added(Versions.v2026_06_02_preview)
+  @added(Versions.v2026_06_01)
   outboundIPPrefixes?: {
     /**
      * A list of public IP prefix resources.
@@ -2824,7 +2824,7 @@ model ManagedClusterNATGatewayProfile {
    * Desired outbound IP resources for the managed NAT Gateway.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
-  @added(Versions.v2026_06_02_preview)
+  @added(Versions.v2026_06_01)
   outboundIPs?: {
     /**
      * A list of public IP resources.
@@ -2860,7 +2860,7 @@ model ManagedClusterManagedOutboundIPProfile {
    * The desired number of IPv6 outbound IPs created/managed by Azure. Allowed values must be in the range of 1 to 16 (inclusive).
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
-  @added(Versions.v2026_06_02_preview)
+  @added(Versions.v2026_06_01)
   @maxValue(16)
   @minValue(1)
   countIPv6?: int32;
