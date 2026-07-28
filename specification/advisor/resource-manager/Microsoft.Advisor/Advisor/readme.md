@@ -35,6 +35,91 @@ These settings apply only when `--tag=package-2026-08` is specified on the comma
 ```yaml $(tag) == 'package-2026-08'
 input-file:
   - stable/2026-08-01/advisor.json
+suppressions:
+  - code: GetResponseCodes
+    reason: Pre-existing design from prior stable versions, cannot change without breaking clients.
+    from:
+      - advisor.json
+  - code: NoErrorCodeResponses
+    reason: Pre-existing 404 responses from prior stable versions, cannot change without breaking clients.
+    from:
+      - advisor.json
+  - code: PutResponseCodes
+    reason: Pre-existing PUT response codes from prior stable versions, cannot change without breaking clients.
+    from:
+      - advisor.json
+  - code: PathContainsResourceGroup
+    reason: Pre-existing path design from prior stable versions, cannot change without breaking clients.
+    from:
+      - advisor.json
+  - code: ParametersOrder
+    reason: Pre-existing parameter order from prior stable versions, cannot change without breaking clients.
+    from:
+      - advisor.json
+  - code: LroExtension
+    reason: Pre-existing design from prior stable versions, cannot change without breaking clients.
+    from:
+      - advisor.json
+  - code: PostResponseCodes
+    reason: Pre-existing design from prior stable versions, cannot change without breaking clients.
+    from:
+      - advisor.json
+  - code: XMSLongRunningOperationProperty
+    reason: Pre-existing design from prior stable versions, cannot change without breaking clients.
+    from:
+      - advisor.json
+  - code: GuidUsage
+    reason: Pre-existing GUID usage from prior stable versions, cannot change without breaking clients.
+    from:
+      - advisor.json
+  - code: LroLocationHeader
+    reason: Pre-existing design from prior stable versions, cannot change without breaking clients.
+    from:
+      - advisor.json
+  - code: OperationsApiResponseSchema
+    reason: Pre-existing operations schema from prior stable versions, cannot change without breaking clients.
+    from:
+      - advisor.json
+  - code: OperationsApiSchemaUsesCommonTypes
+    reason: Pre-existing operations schema from prior stable versions, cannot change without breaking clients.
+    from:
+      - advisor.json
+  - code: XmsPageableForListCalls
+    reason: Pre-existing design from prior stable versions, cannot change without breaking clients.
+    from:
+      - advisor.json
+  - code: GetCollectionOnlyHasValueAndNextLink
+    reason: Pre-existing response schema from prior stable versions, cannot change without breaking clients.
+    from:
+      - advisor.json
+  - code: RequiredPropertiesMissingInResourceModel
+    reason: Pre-existing model design from prior stable versions, cannot change without breaking clients.
+    from:
+      - advisor.json
+  - code: TopLevelResourcesListByResourceGroup
+    reason: Pre-existing design from prior stable versions, cannot change without breaking clients.
+    from:
+      - advisor.json
+  - code: TopLevelResourcesListBySubscription
+    reason: Pre-existing design from prior stable versions, cannot change without breaking clients.
+    from:
+      - advisor.json
+  - code: AvoidAdditionalProperties
+    reason: Pre-existing model design from prior stable versions, cannot change without breaking clients.
+    from:
+      - advisor.json
+  - code: DeleteResponseCodes
+    reason: Pre-existing design from prior stable versions, cannot change without breaking clients.
+    from:
+      - advisor.json
+  - code: DeleteOperationResponses
+    reason: Pre-existing design from prior stable versions, cannot change without breaking clients.
+    from:
+      - advisor.json
+  - code: XmsParameterLocation
+    reason: Pre-existing global parameter design from prior stable versions, cannot change without breaking clients.
+    from:
+      - advisor.json
 ```
 
 ### Tag: package-2026-03-preview
