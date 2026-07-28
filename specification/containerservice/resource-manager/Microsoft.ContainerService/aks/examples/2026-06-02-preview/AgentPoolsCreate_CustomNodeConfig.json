@@ -13,6 +13,7 @@
           "cpuCfsQuota": true,
           "cpuCfsQuotaPeriod": "200ms",
           "cpuManagerPolicy": "static",
+          "evictionMaxPodGracePeriodInSeconds": 60,
           "failSwapOn": false,
           "hardEvictionThreshold": {
             "memoryAvailable": "500Mi",
@@ -24,6 +25,16 @@
           "kubeReserved": {
             "cpuMillicores": 200,
             "memoryMB": 1024
+          },
+          "softEvictionGracePeriod": {
+            "memoryAvailable": "1m30s",
+            "nodeFsAvailable": "2m",
+            "nodeFsInodesFree": "2m"
+          },
+          "softEvictionThreshold": {
+            "memoryAvailable": "750Mi",
+            "nodeFsAvailable": "20%",
+            "nodeFsInodesFree": "15%"
           },
           "topologyManagerPolicy": "best-effort"
         },
@@ -64,6 +75,7 @@
             "cpuCfsQuota": true,
             "cpuCfsQuotaPeriod": "200ms",
             "cpuManagerPolicy": "static",
+            "evictionMaxPodGracePeriodInSeconds": 60,
             "failSwapOn": false,
             "hardEvictionThreshold": {
               "memoryAvailable": "500Mi",
@@ -77,6 +89,16 @@
               "memoryMB": 1024
             },
             "seccompDefault": "Unconfined",
+            "softEvictionGracePeriod": {
+              "memoryAvailable": "1m30s",
+              "nodeFsAvailable": "2m",
+              "nodeFsInodesFree": "2m"
+            },
+            "softEvictionThreshold": {
+              "memoryAvailable": "750Mi",
+              "nodeFsAvailable": "20%",
+              "nodeFsInodesFree": "15%"
+            },
             "topologyManagerPolicy": "best-effort"
           },
           "linuxOSConfig": {
@@ -114,6 +136,7 @@
             "cpuCfsQuota": true,
             "cpuCfsQuotaPeriod": "200ms",
             "cpuManagerPolicy": "static",
+            "evictionMaxPodGracePeriodInSeconds": 60,
             "failSwapOn": false,
             "hardEvictionThreshold": {
               "memoryAvailable": "500Mi",
@@ -127,6 +150,16 @@
               "memoryMB": 1024
             },
             "podMaxPids": 100,
+            "softEvictionGracePeriod": {
+              "memoryAvailable": "1m30s",
+              "nodeFsAvailable": "2m",
+              "nodeFsInodesFree": "2m"
+            },
+            "softEvictionThreshold": {
+              "memoryAvailable": "750Mi",
+              "nodeFsAvailable": "20%",
+              "nodeFsInodesFree": "15%"
+            },
             "topologyManagerPolicy": "best-effort"
           },
           "linuxOSConfig": {

@@ -556,6 +556,25 @@ model KubeletConfig {
    */
   @added(Versions.v2026_06_02_preview)
   hardEvictionThreshold?: HardEvictionThreshold;
+
+  /**
+   * Soft eviction thresholds for kubelet. When crossed, pods are evicted after the paired softEvictionGracePeriod. System defaults apply when the cluster's `enableNodeHardening` property is true; otherwise no soft eviction is configured. For each signal (memoryAvailable, nodeFsAvailable, nodeFsInodesFree), the entries in softEvictionThreshold and softEvictionGracePeriod must be in the same state: both omitted (default), both non-empty (override), or both empty strings (opt that signal out). Only applicable for Linux nodepools. See https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/#soft-eviction-thresholds.
+   */
+  @added(Versions.v2026_06_02_preview)
+  softEvictionThreshold?: SoftEvictionThreshold;
+
+  /**
+   * Grace periods for soft eviction signals — how long a threshold must be held before pod eviction. Same defaulting and pairing rules as softEvictionThreshold. Values are Go-style duration strings (e.g. '1m30s'); supported units are 'ns', 'us', 'ms', 's', 'm', and 'h'. Only applicable for Linux nodepools.
+   */
+  @added(Versions.v2026_06_02_preview)
+  softEvictionGracePeriod?: SoftEvictionGracePeriod;
+
+  /**
+   * Maximum grace period, in seconds, for pods to terminate during a soft eviction; caps the pod's terminationGracePeriodSeconds. Default is 60, applied when the cluster's `enableNodeHardening` property is true. Only applicable for Linux nodepools.
+   */
+  @added(Versions.v2026_06_02_preview)
+  @minValue(0)
+  evictionMaxPodGracePeriodInSeconds?: int32;
 }
 
 /**
@@ -592,6 +611,48 @@ model HardEvictionThreshold {
 
   /**
    * The threshold for available inodes on the node filesystem below which pod eviction is triggered. Accepts absolute inode counts (e.g. '100000') or percentage values (e.g. '5%'). Percentage values must be greater than or equal to the system default of 5%.
+   */
+  nodeFsInodesFree?: string;
+}
+
+/**
+ * Soft eviction thresholds for kubelet. These thresholds trigger graceful pod eviction when node resources drop below the specified values for at least the corresponding grace period defined in softEvictionGracePeriod. Supported formats are Ki, Mi, Gi, or percentages using %.
+ */
+@added(Versions.v2026_06_02_preview)
+model SoftEvictionThreshold {
+  /**
+   * The threshold for available memory below which soft pod eviction is triggered. Accepts absolute values (e.g. '500Mi') or percentage values (e.g. '5%'). Absolute minimum is 100Mi; percentage minimum is 2%. Default uses a capacity-based step ladder: 500Mi for nodes with <=8GiB, 750Mi for 16GiB, and 1024Mi (1Gi) for >=32GiB. Must also be greater than the effective hardEvictionThreshold.memoryAvailable.
+   */
+  memoryAvailable?: string;
+
+  /**
+   * The threshold for available node filesystem space below which soft pod eviction is triggered. Accepts absolute values (e.g. '1Gi') or percentage values (e.g. '10%'). Default is '12%'. Must be greater than or equal to 10% and greater than the effective hardEvictionThreshold.nodeFsAvailable.
+   */
+  nodeFsAvailable?: string;
+
+  /**
+   * The threshold for available inodes on the node filesystem below which soft pod eviction is triggered. Accepts absolute inode counts (e.g. '100000') or percentage values (e.g. '5%'). Default is '7%'. Percentage values must be greater than or equal to 5% and greater than the effective hardEvictionThreshold.nodeFsInodesFree.
+   */
+  nodeFsInodesFree?: string;
+}
+
+/**
+ * Grace periods for kubelet soft eviction thresholds. Each field is a Go-style duration string (e.g. '1m30s') that specifies how long the corresponding soft eviction signal must be crossed before pod eviction is triggered. A grace period only applies when the matching soft eviction threshold is set.
+ */
+@added(Versions.v2026_06_02_preview)
+model SoftEvictionGracePeriod {
+  /**
+   * The grace period for the memoryAvailable soft eviction signal, expressed as a Go-style duration string (e.g. '30s', '1m30s'). Supported units are 'ns', 'us', 'ms', 's', 'm', and 'h'. Must be greater than or equal to '30s'. Default is '30s'.
+   */
+  memoryAvailable?: string;
+
+  /**
+   * The grace period for the nodeFsAvailable soft eviction signal, expressed as a Go-style duration string (e.g. '30s', '1m30s'). Supported units are 'ns', 'us', 'ms', 's', 'm', and 'h'. Must be greater than or equal to '30s'. Default is '2m'.
+   */
+  nodeFsAvailable?: string;
+
+  /**
+   * The grace period for the nodeFsInodesFree soft eviction signal, expressed as a Go-style duration string (e.g. '30s', '1m30s'). Supported units are 'ns', 'us', 'ms', 's', 'm', and 'h'. Must be greater than or equal to '30s'. Default is '2m'.
    */
   nodeFsInodesFree?: string;
 }
