@@ -203,6 +203,10 @@ directive:
     suppress:
       - DefinitionsPropertiesNamesCamelCase
   - where:
+      - $.definitions.ManagedDiskProperties.properties.diskIOPSReadOnly
+    suppress:
+      - DefinitionsPropertiesNamesCamelCase
+  - where:
       - $.definitions.DataDisk.properties.diskIOPSReadWrite
     suppress:
       - DefinitionsPropertiesNamesCamelCase
