@@ -1928,10 +1928,10 @@ model ManagedClusterProperties {
   supportPlan?: KubernetesSupportPlan;
 
   /**
-   * Whether to enable FIPS mode at the cluster level. When enabled, this setting enforces FIPS compliance for all AKS-managed components, such as the node operating system, addons, and [managed containerized components](https://aka.ms/aks/components/docs). See [Enable cluster-wide FIPS](https://aka.ms/aks/fips) for more details. When this property is enabled, all node pools in the cluster must also be FIPS-enabled.
+   * Whether to enable FIPS mode at the cluster level. When enabled, this setting enforces FIPS compliance for all AKS-managed components, such as the node operating system, addons, and [managed containerized components](https://aka.ms/aks/components/docs). See [Enable cluster-wide FIPS](https://aka.ms/aks/fips) for more details. When this property is enabled, all node pools in the cluster must also be FIPS-enabled. Although this property is available in a stable API version, cluster-wide FIPS remains a preview feature. Write requests whose resulting cluster state has this property set to true require the `Microsoft.ContainerService/EnableFIPSPreview` subscription feature registration.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for consistency with existing FIPS properties in AKS."
-  @added(Versions.v2026_07_02_preview)
+  @added(Versions.v2026_07_01)
   enableFIPS?: boolean;
 
   /**
