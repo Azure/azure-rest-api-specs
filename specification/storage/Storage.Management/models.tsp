@@ -1631,7 +1631,7 @@ model BlobAccessPointConfigurationConnection {
   /**
    * Name of the Blob Access Point Configuration to connect to.
    */
-  blobAccessPointConfigurationName: string;
+  blobAccessPointConfigurationName?: string;
 
   /**
    * System-generated unique identifier of the Blob Access Point Configuration to connect to. If not provided on create, the service looks up and persists the current unique id.
