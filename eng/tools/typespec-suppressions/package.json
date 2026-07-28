@@ -1,0 +1,33 @@
+{
+  "name": "@azure-tools/typespec-suppressions",
+  "private": true,
+  "type": "module",
+  "main": "src/index.ts",
+  "bin": {
+    "typespec-suppressions": "cmd/typespec-suppressions.js"
+  },
+  "scripts": {
+    "build": "tsc --noEmit",
+    "format": "prettier . --ignore-path ../.prettierignore --write",
+    "format:check": "prettier . --ignore-path ../.prettierignore --check",
+    "format:check:ci": "prettier . --ignore-path ../.prettierignore --check --log-level debug",
+    "test": "vitest --run",
+    "test:ci": "vitest run --coverage --reporter=verbose"
+  },
+  "dependencies": {
+    "@typespec/compiler": "1.14.0",
+    "simple-git": "^3.36.0",
+    "yaml": "^2.4.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@vitest/coverage-v8": "^4.1.0",
+    "prettier": "3.8.3",
+    "prettier-plugin-organize-imports": "^4.2.0",
+    "typescript": "~6.0.2",
+    "vitest": "^4.1.0"
+  },
+  "engines": {
+    "node": ">=24.14.1"
+  }
+}
