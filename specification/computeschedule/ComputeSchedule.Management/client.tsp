@@ -688,38 +688,8 @@ model ResourcePatchRequestInput {
   "csharp"
 );
 @@clientName(
-  LinuxVMGuestPatchAutomaticByPlatformRebootSetting,
-  "ComputeScheduleLinuxVmGuestPatchAutomaticByPlatformRebootSetting",
-  "csharp"
-);
-@@clientName(
-  LinuxVMGuestPatchAutomaticByPlatformSettings,
-  "ComputeScheduleLinuxVmGuestPatchAutomaticByPlatformSettings",
-  "csharp"
-);
-@@clientName(
-  LinuxVMGuestPatchMode,
-  "ComputeScheduleLinuxVmGuestPatchMode",
-  "csharp"
-);
-@@clientName(
   WindowsPatchAssessmentMode,
   "ComputeScheduleWindowsPatchAssessmentMode",
-  "csharp"
-);
-@@clientName(
-  WindowsVMGuestPatchAutomaticByPlatformRebootSetting,
-  "ComputeScheduleWindowsVmGuestPatchAutomaticByPlatformRebootSetting",
-  "csharp"
-);
-@@clientName(
-  WindowsVMGuestPatchAutomaticByPlatformSettings,
-  "ComputeScheduleWindowsVmGuestPatchAutomaticByPlatformSettings",
-  "csharp"
-);
-@@clientName(
-  WindowsVMGuestPatchMode,
-  "ComputeScheduleWindowsVmGuestPatchMode",
   "csharp"
 );
 @@clientName(
@@ -891,26 +861,34 @@ namespace Azure.ResourceManager.Models {
 // =====================================================================
 @@clientName(BulkVMConfiguration, "BulkVmConfiguration", "csharp");
 @@clientName(VMGalleryApplication, "VmGalleryApplication", "csharp");
-@@clientName(LinuxVMGuestPatchMode, "LinuxVmGuestPatchMode", "csharp");
+@@clientName(
+  LinuxVMGuestPatchMode,
+  "ComputeScheduleLinuxVmGuestPatchMode",
+  "csharp"
+);
 @@clientName(
   LinuxVMGuestPatchAutomaticByPlatformSettings,
-  "LinuxVmGuestPatchAutomaticByPlatformSettings",
+  "ComputeScheduleLinuxVmGuestPatchAutomaticByPlatformSettings",
   "csharp"
 );
 @@clientName(
   LinuxVMGuestPatchAutomaticByPlatformRebootSetting,
-  "LinuxVmGuestPatchAutomaticByPlatformRebootSetting",
+  "ComputeScheduleLinuxVmGuestPatchAutomaticByPlatformRebootSetting",
   "csharp"
 );
-@@clientName(WindowsVMGuestPatchMode, "WindowsVmGuestPatchMode", "csharp");
+@@clientName(
+  WindowsVMGuestPatchMode,
+  "ComputeScheduleWindowsVmGuestPatchMode",
+  "csharp"
+);
 @@clientName(
   WindowsVMGuestPatchAutomaticByPlatformSettings,
-  "WindowsVmGuestPatchAutomaticByPlatformSettings",
+  "ComputeScheduleWindowsVmGuestPatchAutomaticByPlatformSettings",
   "csharp"
 );
 @@clientName(
   WindowsVMGuestPatchAutomaticByPlatformRebootSetting,
-  "WindowsVmGuestPatchAutomaticByPlatformRebootSetting",
+  "ComputeScheduleWindowsVmGuestPatchAutomaticByPlatformRebootSetting",
   "csharp"
 );
 // VMDiskSecurityProfile -> VirtualMachineDiskSecurityProfile to match the
