@@ -78,6 +78,12 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/executeMigration"]
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/commitMigration"]
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/abortMigration"]
+  - code: ResourceNameRestriction
+    from: expressRoute.json
+    reason: circuitName, authorizationName and expressRoutePortName are existing parent/resource path parameters established in prior API versions (2025-07-01 and earlier). Adding a pattern constraint would be a breaking change to those versions.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/authorizations/{authorizationName}/listkeys"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRoutePorts/{expressRoutePortName}/authorizations/{authorizationName}/listkeys"]
   - code: ParametersInPointGet
     from: loadBalancer.json
     where:

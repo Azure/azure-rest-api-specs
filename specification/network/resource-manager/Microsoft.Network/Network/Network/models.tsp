@@ -10936,7 +10936,9 @@ model ExpressRouteAuthorizationKey {
   /**
    * The authorization key.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-secret must be emitted so ARM's XMSSecretInResponse linter recognizes this response-only key as a secret; there is no first-class TypeSpec decorator that emits x-ms-secret."
   @secret
+  @TypeSpec.OpenAPI.extension("x-ms-secret", true)
   authorizationKey?: string;
 }
 
