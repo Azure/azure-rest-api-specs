@@ -6,7 +6,6 @@ using Azure.Core;
 using Azure.ClientGenerator.Core;
 using Reservations;
 
-#suppress "@azure-tools/typespec-client-generator-core/inconsistent-multiple-service-dependency" "temporarily suppressing"
 @client({
   name: "ReservationsClient",
   service: [Quota, Reservations],
