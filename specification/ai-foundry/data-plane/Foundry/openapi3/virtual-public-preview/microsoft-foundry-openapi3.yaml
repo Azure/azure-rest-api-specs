@@ -40503,6 +40503,10 @@ components:
           $ref: '#/components/schemas/AgentState'
           description: The operational state of the agent. Controls whether the agent endpoint accepts or rejects requests.
           readOnly: true
+        state_source:
+          $ref: '#/components/schemas/AgentStateSource'
+          description: The source of the agent's operational state. When the agent is disabled, indicates where the disabled state originates from. Empty when not derived from a specific source.
+          readOnly: true
         versions:
           type: object
           properties:
@@ -40602,6 +40606,14 @@ components:
             - enabled
             - disabled
       description: The operational state of an agent.
+    AgentStateSource:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - agent_instance_identity
+            - agent_blueprint
+      description: Indicates the source of an agent's operational state. Empty when the state is not derived from a specific source.
     AgentTaxonomyInput:
       type: object
       required:
@@ -78440,10 +78452,6 @@ components:
         server_label:
           type: string
           description: The label of the WebIQ MCP server to connect to.
-        server_url:
-          type: string
-          format: uri
-          description: The URL of the WebIQ MCP server. If not provided, the URL from the project connection will be used.
         require_approval:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.MCPToolRequireApproval'
@@ -78473,10 +78481,6 @@ components:
         server_label:
           type: string
           description: The label of the WebIQ MCP server to connect to.
-        server_url:
-          type: string
-          format: uri
-          description: The URL of the WebIQ MCP server. If not provided, the URL from the project connection will be used.
         require_approval:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.MCPToolRequireApproval'
