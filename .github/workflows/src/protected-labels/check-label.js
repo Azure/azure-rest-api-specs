@@ -109,7 +109,7 @@ function resolveAuthorizedUsers(entry, plane) {
  *
  * @param {object} params
  * @param {import("@actions/github-script").AsyncFunctionArguments["github"]} params.github
- * @param {import("@actions/core")} params.core
+ * @param {typeof import("@actions/core")} params.core
  * @param {string} params.owner
  * @param {string} params.repo
  * @param {number} params.issueNumber

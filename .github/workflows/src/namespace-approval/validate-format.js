@@ -16,7 +16,7 @@ const DEFAULT_RULES_PATH = ".github/package-name-format-rules.yml";
 /**
  * Load format rules from YAML config.
  *
- * @param {import("@actions/core")} core
+ * @param {typeof import("@actions/core")} core
  * @param {string} [rulesPath]
  * @returns {Promise<FormatRulesConfig | null>}
  */

@@ -9,7 +9,7 @@ import { Duration, formatDuration, getDuration, subtract } from "../../shared/sr
  */
 
 /**
- * @param {import("@octokit/endpoint").endpoint} endpoint
+ * @param {typeof import("@octokit/endpoint").endpoint} endpoint
  * @param {import('../../shared/src/logger.js').ILogger} logger
  * @returns {(options: import("@octokit/types").RequestParameters & {url: string, method: string}) => void}
  */

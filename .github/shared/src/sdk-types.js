@@ -6,6 +6,9 @@ import * as z from "zod";
  * @readonly
  * @enum {"azure-sdk-for-go" | "azure-sdk-for-java" | "azure-sdk-for-js" | "azure-sdk-for-net" | "azure-sdk-for-python" | "azure-sdk-for-rust"}
  */
+/**
+ * @typedef {(typeof SdkName)[keyof typeof SdkName]} SdkName
+ */
 export const SdkName = Object.freeze({
   Go: "azure-sdk-for-go",
   Java: "azure-sdk-for-java",
