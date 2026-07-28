@@ -10929,6 +10929,18 @@ model AuthorizationPropertiesFormat {
 }
 
 /**
+ * The authorization key.
+ */
+@added(Versions.v2025_09_01)
+model ExpressRouteAuthorizationKey {
+  /**
+   * The authorization key.
+   */
+  @secret
+  authorizationKey?: string;
+}
+
+/**
  * Properties of the express route circuit peering.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

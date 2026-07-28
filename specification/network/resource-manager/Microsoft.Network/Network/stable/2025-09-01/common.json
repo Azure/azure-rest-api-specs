@@ -4572,6 +4572,16 @@
         ]
       }
     },
+    "ExpressRouteAuthorizationKey": {
+      "type": "object",
+      "description": "The authorization key.",
+      "properties": {
+        "authorizationKey": {
+          "type": "string",
+          "description": "The authorization key."
+        }
+      }
+    },
     "ExpressRouteCircuitPeeringAdvertisedPublicPrefixState": {
       "type": "string",
       "description": "The advertised public prefix state of the Peering resource.",
@@ -5684,6 +5694,36 @@
             "name": "Basic",
             "value": "Basic",
             "description": "Basic"
+          }
+        ]
+      }
+    },
+    "GatewayEffectiveRouteNextHopType": {
+      "type": "string",
+      "description": "The next hop type of a gateway effective route.",
+      "enum": [
+        "Tunnel",
+        "VirtualNetwork",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "GatewayEffectiveRouteNextHopType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Tunnel",
+            "value": "Tunnel",
+            "description": "Tunnel"
+          },
+          {
+            "name": "VirtualNetwork",
+            "value": "VirtualNetwork",
+            "description": "VirtualNetwork"
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown"
           }
         ]
       }
