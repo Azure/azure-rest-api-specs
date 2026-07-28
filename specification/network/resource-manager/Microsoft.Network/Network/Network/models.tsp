@@ -21688,17 +21688,17 @@ union GatewayEffectiveRouteNextHopType {
   string,
 
   /**
-   * Tunnel
+   * The next hop is a VPN tunnel.
    */
   Tunnel: "Tunnel",
 
   /**
-   * VirtualNetwork
+   * The next hop is within the local virtual network.
    */
   VirtualNetwork: "VirtualNetwork",
 
   /**
-   * Unknown
+   * The next hop type could not be determined.
    */
   Unknown: "Unknown",
 }
