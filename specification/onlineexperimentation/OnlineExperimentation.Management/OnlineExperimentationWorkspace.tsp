@@ -89,6 +89,7 @@ interface OnlineExperimentationWorkspaces {
   /**
    * Patch an online experimentation workspace.
    */
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     OnlineExperimentationWorkspace,

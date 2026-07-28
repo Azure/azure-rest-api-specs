@@ -92,7 +92,8 @@ interface Workspaces {
 @@minLength(Workspace.name, 3);
 @@doc(Workspace.name, "The name of the workspace");
 @@doc(Workspace.properties, "Detailed properties for Workspace");
-@@doc(Workspaces.createOrUpdate::parameters.resource,
+@@doc(
+  Workspaces.createOrUpdate::parameters.resource,
   "Object containing Workspace definitions."
 );
 @@clientName(Workspaces.update::parameters.body, "workspace");

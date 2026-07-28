@@ -134,7 +134,8 @@ interface SessionHosts {
 
 @@maxLength(SessionHost.name, 48);
 @@minLength(SessionHost.name, 3);
-@@doc(SessionHost.name,
+@@doc(
+  SessionHost.name,
   "The name of the session host within the specified host pool"
 );
 @@doc(SessionHost.properties, "Detailed properties for SessionHost");

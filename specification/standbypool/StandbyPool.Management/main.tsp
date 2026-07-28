@@ -11,3 +11,4 @@ import "./standbyVirtualMachinePoolRuntimeView.tsp";
 import "./standbyContainerGroupPool.tsp";
 import "./standbyContainerGroupPoolRuntimeView.tsp";
 import "./back-compatible.tsp";
+import "./client.tsp";

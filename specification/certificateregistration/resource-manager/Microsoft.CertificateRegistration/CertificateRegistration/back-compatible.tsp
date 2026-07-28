@@ -18,71 +18,88 @@ using Microsoft.CertificateRegistration;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(SiteSeal.html);
-@@clientName(AppServiceCertificateOrders.createOrUpdate::parameters.resource,
+@@clientName(
+  AppServiceCertificateOrders.createOrUpdate::parameters.resource,
   "certificateDistinguishedName"
 );
-@@clientName(AppServiceCertificateOrders.update::parameters.properties,
+@@clientName(
+  AppServiceCertificateOrders.update::parameters.properties,
   "certificateDistinguishedName"
 );
-@@clientName(AppServiceCertificateOrders.reissue::parameters.body,
+@@clientName(
+  AppServiceCertificateOrders.reissue::parameters.body,
   "reissueCertificateOrderRequest"
 );
-@@clientName(AppServiceCertificateOrders.renew::parameters.body,
+@@clientName(
+  AppServiceCertificateOrders.renew::parameters.body,
   "renewCertificateOrderRequest"
 );
-@@clientName(AppServiceCertificateOrders.resendRequestEmails::parameters.body,
+@@clientName(
+  AppServiceCertificateOrders.resendRequestEmails::parameters.body,
   "nameIdentifier"
 );
-@@clientName(AppServiceCertificateOrders.retrieveSiteSeal::parameters.body,
+@@clientName(
+  AppServiceCertificateOrders.retrieveSiteSeal::parameters.body,
   "siteSealRequest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AppServiceCertificateOrder.properties);
 
-@@clientLocation(AppServiceCertificateResources.getCertificate,
+@@clientLocation(
+  AppServiceCertificateResources.getCertificate,
   AppServiceCertificateOrders,
   "!csharp"
 );
-@@clientLocation(AppServiceCertificateResources.createOrUpdateCertificate,
+@@clientLocation(
+  AppServiceCertificateResources.createOrUpdateCertificate,
   AppServiceCertificateOrders,
   "!csharp"
 );
-@@clientName(AppServiceCertificateResources.createOrUpdateCertificate::parameters.resource,
+@@clientName(
+  AppServiceCertificateResources.createOrUpdateCertificate::parameters.resource,
   "keyVaultCertificate"
 );
-@@clientLocation(AppServiceCertificateResources.updateCertificate,
+@@clientLocation(
+  AppServiceCertificateResources.updateCertificate,
   AppServiceCertificateOrders,
   "!csharp"
 );
-@@clientName(AppServiceCertificateResources.updateCertificate::parameters.properties,
+@@clientName(
+  AppServiceCertificateResources.updateCertificate::parameters.properties,
   "keyVaultCertificate"
 );
-@@clientLocation(AppServiceCertificateResources.deleteCertificate,
+@@clientLocation(
+  AppServiceCertificateResources.deleteCertificate,
   AppServiceCertificateOrders,
   "!csharp"
 );
-@@clientLocation(AppServiceCertificateResources.listCertificates,
+@@clientLocation(
+  AppServiceCertificateResources.listCertificates,
   AppServiceCertificateOrders,
   "!csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AppServiceCertificateResource.properties);
-@@clientLocation(CertificateOrdersDiagnostics.getAppServiceCertificateOrderDetectorResponse,
+@@clientLocation(
+  CertificateOrdersDiagnostics.getAppServiceCertificateOrderDetectorResponse,
   CertificateOrdersDiagnostics,
   "!csharp"
 );
-@@clientLocation(CertificateOrdersDiagnostics.listAppServiceCertificateOrderDetectorResponse,
+@@clientLocation(
+  CertificateOrdersDiagnostics.listAppServiceCertificateOrderDetectorResponse,
   CertificateOrdersDiagnostics,
   "!csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(DetectorResponse.properties);
-@@clientLocation(AppServiceCertificateOrdersOperationGroup.validatePurchaseInformation,
+@@clientLocation(
+  AppServiceCertificateOrdersOperationGroup.validatePurchaseInformation,
   AppServiceCertificateOrders,
   "!csharp"
 );
 @@clientLocation(Operations.list, "CertificateRegistrationProvider", "!csharp");
 @@clientName(Operations.list, "ListOperations");
-@@clientName(AppServiceCertificateOrdersOperationGroup.validatePurchaseInformation::parameters.body,
+@@clientName(
+  AppServiceCertificateOrdersOperationGroup.validatePurchaseInformation::parameters.body,
   "appServiceCertificateOrder"
 );

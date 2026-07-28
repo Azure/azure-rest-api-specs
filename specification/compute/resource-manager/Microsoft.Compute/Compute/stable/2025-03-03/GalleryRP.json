@@ -43,6 +43,12 @@
       "name": "Galleries"
     },
     {
+      "name": "SoftDelete"
+    },
+    {
+      "name": "GallerySharingUpdate"
+    },
+    {
       "name": "GalleryImages"
     },
     {
@@ -995,7 +1001,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Gallery"
         },
         "x-ms-long-running-operation": true
       },
@@ -1064,7 +1071,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Gallery"
         },
         "x-ms-long-running-operation": true
       },
@@ -1330,7 +1338,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/GalleryApplication"
         },
         "x-ms-long-running-operation": true
       },
@@ -1406,7 +1415,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/GalleryApplication"
         },
         "x-ms-long-running-operation": true
       },
@@ -1728,7 +1738,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/GalleryApplicationVersion"
         },
         "x-ms-long-running-operation": true
       },
@@ -1811,7 +1822,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/GalleryApplicationVersion"
         },
         "x-ms-long-running-operation": true
       },
@@ -2091,7 +2103,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/GalleryImage"
         },
         "x-ms-long-running-operation": true
       },
@@ -2170,7 +2183,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/GalleryImage"
         },
         "x-ms-long-running-operation": true
       },
@@ -2534,7 +2548,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/GalleryImageVersion"
         },
         "x-ms-long-running-operation": true
       },
@@ -2623,7 +2638,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/GalleryImageVersion"
         },
         "x-ms-long-running-operation": true
       },
@@ -2886,7 +2902,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/GalleryInVMAccessControlProfile"
         },
         "x-ms-long-running-operation": true
       },
@@ -2962,7 +2979,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/GalleryInVMAccessControlProfile"
         },
         "x-ms-long-running-operation": true
       },
@@ -3235,7 +3253,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/GalleryInVMAccessControlProfileVersion"
         },
         "x-ms-long-running-operation": true
       },
@@ -3318,7 +3337,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/GalleryInVMAccessControlProfileVersion"
         },
         "x-ms-long-running-operation": true
       },
@@ -3579,7 +3599,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/GalleryScript"
         },
         "x-ms-long-running-operation": true
       },
@@ -3659,7 +3680,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/GalleryScript"
         },
         "x-ms-long-running-operation": true
       },
@@ -3946,7 +3968,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/GalleryScriptVersion"
         },
         "x-ms-long-running-operation": true
       },
@@ -4038,7 +4061,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/GalleryScriptVersion"
         },
         "x-ms-long-running-operation": true
       },
@@ -4127,7 +4151,7 @@
       "post": {
         "operationId": "GallerySharingProfile_Update",
         "tags": [
-          "Galleries"
+          "GallerySharingUpdate"
         ],
         "description": "Update sharing profile of a gallery.",
         "parameters": [
@@ -4201,7 +4225,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/SharingUpdate"
         },
         "x-ms-long-running-operation": true
       }
@@ -4210,7 +4235,7 @@
       "get": {
         "operationId": "SoftDeletedResource_ListByArtifactName",
         "tags": [
-          "Galleries"
+          "SoftDelete"
         ],
         "description": "List soft-deleted resources of an artifact in the gallery, such as soft-deleted gallery image version of an image.",
         "parameters": [

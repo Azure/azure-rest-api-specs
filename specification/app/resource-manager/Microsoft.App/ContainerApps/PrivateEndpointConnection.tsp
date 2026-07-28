@@ -81,10 +81,12 @@ interface PrivateEndpointConnections {
   list is PrivateEndpointConnectionOps.List<PrivateEndpointConnection>;
 }
 
-@@doc(PrivateEndpointConnection.name,
+@@doc(
+  PrivateEndpointConnection.name,
   "The name of the private endpoint connection associated with the Azure resource."
 );
 @@doc(PrivateEndpointConnection.properties, "Resource properties.");
-@@doc(PrivateEndpointConnections.createOrUpdate::parameters.resource,
+@@doc(
+  PrivateEndpointConnections.createOrUpdate::parameters.resource,
   "The resource of private endpoint and its properties"
 );

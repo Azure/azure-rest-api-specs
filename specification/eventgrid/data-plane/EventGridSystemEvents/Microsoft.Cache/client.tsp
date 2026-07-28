@@ -2,42 +2,54 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 //Models
-@@usage(Microsoft.EventGrid.SystemEvents.RedisPatchingCompletedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.RedisPatchingCompletedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.RedisPatchingCompletedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.RedisPatchingCompletedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.RedisScalingCompletedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.RedisScalingCompletedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.RedisScalingCompletedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.RedisScalingCompletedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.RedisExportRDBCompletedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.RedisExportRDBCompletedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.RedisExportRDBCompletedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.RedisExportRDBCompletedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.RedisImportRDBCompletedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.RedisImportRDBCompletedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.RedisImportRDBCompletedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.RedisImportRDBCompletedEventData,
   Access.public
 );
 //Enums
 
 //useSystemTextJsonConverter decorators
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.RedisPatchingCompletedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.RedisPatchingCompletedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.RedisScalingCompletedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.RedisScalingCompletedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.RedisExportRDBCompletedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.RedisExportRDBCompletedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.RedisImportRDBCompletedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.RedisImportRDBCompletedEventData,
   "csharp"
 );

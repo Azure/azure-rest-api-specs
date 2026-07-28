@@ -34,7 +34,8 @@ interface SolutionResourceSelfHelps {
 
 @@maxLength(SolutionResourceSelfHelp.name, 100);
 @@minLength(SolutionResourceSelfHelp.name, 1);
-@@doc(SolutionResourceSelfHelp.name,
+@@doc(
+  SolutionResourceSelfHelp.name,
   "SolutionId is a unique id to identify a solution. You can retrieve the solution id using the Discovery api - https://learn.microsoft.com/en-us/rest/api/help/discovery-solution/list?view=rest-help-2023-09-01-preview&tabs=HTTP"
 );
 @@doc(SolutionResourceSelfHelp.properties, "Solution result");

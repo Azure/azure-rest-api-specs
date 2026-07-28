@@ -11,20 +11,21 @@ namespace Microsoft.NetworkCloud;
 /**
  * The name of the storage appliance.
  */
-model StorageApplianceNameParameter
-  is ResourceNameParameter<
-    Resource = StorageAppliance,
-    KeyName = "storageApplianceName",
-    SegmentName = "storageAppliances",
-    NamePattern = "^([a-zA-Z0-9][a-zA-Z0-9-_]{0,28}[a-zA-Z0-9])$"
-  >;
+model StorageApplianceNameParameter is ResourceNameParameter<
+  Resource = StorageAppliance,
+  KeyName = "storageApplianceName",
+  SegmentName = "storageAppliances",
+  NamePattern = "^([a-zA-Z0-9][a-zA-Z0-9-_]{0,28}[a-zA-Z0-9])$"
+>;
 
 /**
  * StorageAppliance represents on-premises Network Cloud storage appliance.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "legacy resource using legacy features"
-model StorageAppliance
-  is Azure.ResourceManager.TrackedResource<StorageApplianceProperties, false> {
+model StorageAppliance is Azure.ResourceManager.TrackedResource<
+  StorageApplianceProperties,
+  false
+> {
   ...StorageApplianceNameParameter;
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
   ...RequiredExtendedLocationProperty;
@@ -75,7 +76,9 @@ interface StorageAppliances {
       ...IfMatchParameter;
       ...IfNoneMatchParameter;
     },
-    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -133,11 +136,13 @@ interface StorageAppliances {
 
 @@doc(StorageAppliance.name, "The name of the storage appliance.");
 @@doc(StorageAppliance.properties, "The list of the resource properties.");
-@@doc(StorageAppliances.createOrUpdate::parameters.resource,
+@@doc(
+  StorageAppliances.createOrUpdate::parameters.resource,
   "The request body."
 );
 @@doc(StorageAppliances.update::parameters.properties, "The request body.");
-@@doc(StorageAppliances.enableRemoteVendorManagement::parameters.body,
+@@doc(
+  StorageAppliances.enableRemoteVendorManagement::parameters.body,
   "The request body."
 );
 @@doc(StorageAppliances.runReadCommands::parameters.body, "The request body.");

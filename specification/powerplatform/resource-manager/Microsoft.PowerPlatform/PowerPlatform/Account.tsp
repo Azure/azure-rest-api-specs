@@ -63,12 +63,15 @@ interface Accounts {
 }
 
 @@doc(Account.name, "Name of the account.");
-@@doc(Account.properties,
+@@doc(
+  Account.properties,
   "The properties that define configuration for the account."
 );
-@@doc(Accounts.createOrUpdate::parameters.resource,
+@@doc(
+  Accounts.createOrUpdate::parameters.resource,
   "Parameters supplied to create or update an account."
 );
-@@doc(Accounts.update::parameters.properties,
+@@doc(
+  Accounts.update::parameters.properties,
   "Parameters supplied to update an account."
 );

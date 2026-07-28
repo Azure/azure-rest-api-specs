@@ -7,18 +7,20 @@ using Data.Tables;
 namespace ClientCustomizations;
 
 @@clientNamespace(Data.Tables, "Azure.Data.Tables._generated", "python");
-@@clientNamespace(Data.Tables.Service,
+@@clientNamespace(
+  Data.Tables.Service,
   "Azure.Data.Tables._generated",
   "python"
 );
 @@clientNamespace(Data.Tables.Table, "Azure.Data.Tables._generated", "python");
-@@clientNamespace(ClientCustomizations,
+@@clientNamespace(
+  ClientCustomizations,
   "Azure.Data.Tables._generated",
   "python"
 );
 
-@@alternateType(Data.Tables.AccessPolicy.start, string, "python");
-@@alternateType(Data.Tables.AccessPolicy.expiry, string, "python");
+@@alternateType(AccessPolicy.start, string, "python,javascript");
+@@alternateType(AccessPolicy.expiry, string, "python,javascript");
 
 /** The signed identifier. */
 model SignedIdentifier {
@@ -28,4 +30,8 @@ model SignedIdentifier {
   /** The access policy for the signed identifier. */
   @Xml.name("AccessPolicy") accessPolicy?: AccessPolicy;
 }
-@@alternateType(Data.Tables.SignedIdentifier, SignedIdentifier, "python");
+@@alternateType(SignedIdentifier, SignedIdentifier, "python");
+
+@@clientName(TablesServiceError, "TableServiceError", "javascript");
+@@clientName(Metrics.includeApis, "includeAPIs", "javascript");
+@@clientName(EtagResponseHeader.eTag, "etag", "javascript");

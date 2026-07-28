@@ -57,8 +57,10 @@ interface ApplicationGatewayPrivateEndpointConnections {
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   update is ArmResourceCreateOrReplaceAsync<
     ApplicationGatewayPrivateEndpointConnection,
-    Response = ArmResourceUpdatedResponse<ApplicationGatewayPrivateEndpointConnection> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader> &
-      Azure.Core.Foundations.RetryAfterHeader),
+    Response =
+      | ArmResourceUpdatedResponse<ApplicationGatewayPrivateEndpointConnection>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader> &
+          Azure.Core.Foundations.RetryAfterHeader),
     Error = CloudError
   >;
 
@@ -68,7 +70,10 @@ interface ApplicationGatewayPrivateEndpointConnections {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     ApplicationGatewayPrivateEndpointConnection,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -81,12 +86,15 @@ interface ApplicationGatewayPrivateEndpointConnections {
   >;
 }
 
-@@doc(ApplicationGatewayPrivateEndpointConnection.name,
+@@doc(
+  ApplicationGatewayPrivateEndpointConnection.name,
   "Name of the private endpoint connection on an application gateway."
 );
-@@doc(ApplicationGatewayPrivateEndpointConnection.properties,
+@@doc(
+  ApplicationGatewayPrivateEndpointConnection.properties,
   "Properties of the application gateway private endpoint connection."
 );
-@@doc(ApplicationGatewayPrivateEndpointConnections.update::parameters.resource,
+@@doc(
+  ApplicationGatewayPrivateEndpointConnections.update::parameters.resource,
   "Parameters supplied to update application gateway private endpoint connection operation."
 );

@@ -66,9 +66,8 @@ interface DatabaseMigrationSqlMis {
        * Optional migration operation ID. If this is provided, then details of migration operation for that ID are retrieved. If not provided (default), then details related to most recent or current operation are retrieved.
        */
       #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @format("uuid")
       @query("migrationOperationId")
-      migrationOperationId?: string;
+      migrationOperationId?: Azure.Core.uuid;
 
       /**
        * Complete migration details be included in the response.
@@ -101,8 +100,11 @@ interface DatabaseMigrationSqlMis {
       @query("force")
       force?: boolean;
     },
-    Response = ArmResponse<DatabaseMigrationSqlMi> | ArmDeleteAcceptedLroResponse<ArmLroLocationHeader<FinalResult = DatabaseMigrationSqlMi> &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmResponse<DatabaseMigrationSqlMi>
+      | ArmDeleteAcceptedLroResponse<ArmLroLocationHeader<FinalResult = DatabaseMigrationSqlMi> &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -133,15 +135,19 @@ interface DatabaseMigrationSqlMis {
 }
 
 @@doc(DatabaseMigrationSqlMi.name, "The name of the target database.");
-@@doc(DatabaseMigrationSqlMi.properties,
+@@doc(
+  DatabaseMigrationSqlMi.properties,
   "Database Migration Resource properties for SQL Managed Instance."
 );
-@@doc(DatabaseMigrationSqlMis.createOrUpdate::parameters.resource,
+@@doc(
+  DatabaseMigrationSqlMis.createOrUpdate::parameters.resource,
   "Details of SqlMigrationService resource."
 );
-@@doc(DatabaseMigrationSqlMis.cancel::parameters.body,
+@@doc(
+  DatabaseMigrationSqlMis.cancel::parameters.body,
   "Required migration operation ID for which cancel will be initiated."
 );
-@@doc(DatabaseMigrationSqlMis.cutover::parameters.body,
+@@doc(
+  DatabaseMigrationSqlMis.cutover::parameters.body,
   "Required migration operation ID for which cutover will be initiated."
 );

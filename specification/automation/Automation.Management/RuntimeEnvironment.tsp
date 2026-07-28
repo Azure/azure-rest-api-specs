@@ -69,12 +69,15 @@ interface RuntimeEnvironments {
 }
 
 @@doc(RuntimeEnvironment.name, "The name of the Runtime Environment.");
-@@doc(RuntimeEnvironment.properties,
+@@doc(
+  RuntimeEnvironment.properties,
   "Gets or sets the Runtime Environment properties."
 );
-@@doc(RuntimeEnvironments.create::parameters.resource,
+@@doc(
+  RuntimeEnvironments.create::parameters.resource,
   "Parameters supplied to the create  the runtime environment."
 );
-@@doc(RuntimeEnvironments.update::parameters.properties,
+@@doc(
+  RuntimeEnvironments.update::parameters.properties,
   "Parameters supplied to the Runtime Environment"
 );

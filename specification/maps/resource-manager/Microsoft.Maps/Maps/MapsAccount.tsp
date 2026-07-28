@@ -115,15 +115,19 @@ interface Accounts {
 @@minLength(MapsAccount.name, 1);
 @@doc(MapsAccount.name, "The name of the Maps Account.");
 @@doc(MapsAccount.properties, "The map account properties.");
-@@doc(Accounts.createOrUpdate::parameters.resource,
+@@doc(
+  Accounts.createOrUpdate::parameters.resource,
   "The new or updated parameters for the Maps Account."
 );
-@@doc(Accounts.update::parameters.properties,
+@@doc(
+  Accounts.update::parameters.properties,
   "The updated parameters for the Maps Account."
 );
-@@doc(Accounts.listSas::parameters.body,
+@@doc(
+  Accounts.listSas::parameters.body,
   "The updated parameters for the Maps Account."
 );
-@@doc(Accounts.regenerateKeys::parameters.body,
+@@doc(
+  Accounts.regenerateKeys::parameters.body,
   "Which key to regenerate:  primary or secondary."
 );

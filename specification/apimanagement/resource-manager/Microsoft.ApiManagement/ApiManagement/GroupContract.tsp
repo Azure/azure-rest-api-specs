@@ -51,7 +51,8 @@ interface GroupContractOps
         @minLength(1)
         @maxLength(256)
         groupId: string,
-      }
+      },
+      ResourceName = "ApiManagementGroup"
     > {}
 
 alias GroupUserParentParameters = {
@@ -93,7 +94,7 @@ alias GroupUserOps = Azure.ResourceManager.Legacy.RoutedOperations<
   GroupUserParentParameters,
   GroupUserParameters,
   ResourceRoute = #{
-    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ApiManagement/service/{serviceName}/groups/{groupId}/users",
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/groups/{groupId}/users",
   }
 >;
 
@@ -147,7 +148,7 @@ alias WorkspaceGroupUserOps = Azure.ResourceManager.Legacy.RoutedOperations<
   WorkspaceGroupUserParentParameters,
   WorkspaceGroupUserParameters,
   ResourceRoute = #{
-    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ApiManagement/service/{serviceName}/workspaces/{workspaceId}/groups/{groupId}/users",
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/workspaces/{workspaceId}/groups/{groupId}/users",
   }
 >;
 
@@ -163,7 +164,7 @@ interface GroupContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -177,7 +178,7 @@ interface GroupContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -195,19 +196,21 @@ interface GroupContracts {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response = (ArmResponse<GroupContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      etag: string;
-    }) | (ArmCreatedResponse<GroupContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      etag: string;
-    })
+    Response =
+      | (ArmResponse<GroupContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          eTag: string;
+        })
+      | (ArmCreatedResponse<GroupContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          eTag: string;
+        })
   >;
 
   /**
@@ -230,7 +233,7 @@ interface GroupContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -331,7 +334,9 @@ interface GroupContracts {
   create is GroupContractOps.CreateOrUpdateSync<
     GroupContract,
     Request = void,
-    Response = ArmResponse<UserContract> | ArmResourceCreatedSyncResponse<UserContract>,
+    Response =
+      | ArmResponse<UserContract>
+      | ArmResourceCreatedSyncResponse<UserContract>,
     Parameters = {
       /**
        * User identifier. Must be unique in the current API Management service instance.
@@ -391,7 +396,8 @@ interface WorkspaceGroupOps
         @minLength(1)
         @maxLength(256)
         groupId: string,
-      }
+      },
+      ResourceName = "ServiceWorkspaceGroup"
     > {}
 
 @armResourceOperations(#{ allowStaticRoutes: true })
@@ -406,7 +412,7 @@ interface WorkspaceGroup {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -420,7 +426,7 @@ interface WorkspaceGroup {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -438,19 +444,21 @@ interface WorkspaceGroup {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response = (ArmResponse<GroupContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      etag: string;
-    }) | (ArmResourceCreatedSyncResponse<GroupContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      etag: string;
-    })
+    Response =
+      | (ArmResponse<GroupContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          eTag: string;
+        })
+      | (ArmResourceCreatedSyncResponse<GroupContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          eTag: string;
+        })
   >;
 
   /**
@@ -473,7 +481,7 @@ interface WorkspaceGroup {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -575,7 +583,9 @@ interface WorkspaceGroup {
   create is WorkspaceGroupOps.CreateOrUpdateSync<
     GroupContract,
     Request = void,
-    Response = ArmResponse<UserContract> | ArmResourceCreatedSyncResponse<UserContract>,
+    Response =
+      | ArmResponse<UserContract>
+      | ArmResourceCreatedSyncResponse<UserContract>,
     Parameters = {
       /**
        * User identifier. Must be unique in the current API Management service instance.
@@ -603,7 +613,8 @@ interface WorkspaceGroup {
 
 @@maxLength(GroupContract.name, 256);
 @@minLength(GroupContract.name, 1);
-@@doc(GroupContract.name,
+@@doc(
+  GroupContract.name,
   "Group identifier. Must be unique in the current API Management service instance."
 );
 @@doc(GroupContract.properties, "Group entity contract properties.");

@@ -72,16 +72,20 @@ interface FederatedIdentityCredentials {
   >;
 }
 
-@@clientName(FederatedIdentityCredentials.createOrUpdate::parameters.resource,
+@@clientName(
+  FederatedIdentityCredentials.createOrUpdate::parameters.resource,
   "parameters"
 );
 
-@@doc(FederatedIdentityCredential.name,
+@@doc(
+  FederatedIdentityCredential.name,
   "The name of the federated identity credential resource."
 );
-@@doc(FederatedIdentityCredential.properties,
+@@doc(
+  FederatedIdentityCredential.properties,
   "The properties associated with the federated identity credential."
 );
-@@doc(FederatedIdentityCredentials.createOrUpdate::parameters.resource,
+@@doc(
+  FederatedIdentityCredentials.createOrUpdate::parameters.resource,
   "Parameters to create or update the federated identity credential."
 );

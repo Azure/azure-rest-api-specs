@@ -1,18 +1,18 @@
 import { describe, expect, test } from "vitest";
 
-import { ReadmeAffectedTags } from "../src/lintdiff-types.js";
+import { type ReadmeAffectedTags } from "../src/lintdiff-types.ts";
 import {
   buildState,
   getAffectedServices,
   getChangedSwaggers,
   getService,
   reconcileChangedFilesAndTags,
-} from "../src/processChanges.js";
+} from "../src/processChanges.ts";
 
 import { Readme } from "@azure-tools/specs-shared/readme";
 import { Tag } from "@azure-tools/specs-shared/tag";
 import { resolve } from "node:path";
-import { isWindows } from "./test-util.js";
+import { isWindows } from "./test-util.ts";
 
 declare module "vitest" {
   interface Assertion {

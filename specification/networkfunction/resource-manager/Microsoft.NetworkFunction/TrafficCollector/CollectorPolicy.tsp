@@ -76,7 +76,10 @@ interface CollectorPolicies {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     CollectorPolicy,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -88,9 +91,11 @@ interface CollectorPolicies {
 
 @@doc(CollectorPolicy.name, "Collector Policy Name");
 @@doc(CollectorPolicy.properties, "Properties of the Collector Policy.");
-@@doc(CollectorPolicies.createOrUpdate::parameters.resource,
+@@doc(
+  CollectorPolicies.createOrUpdate::parameters.resource,
   "The parameters to provide for the created Collector Policy."
 );
-@@Azure.ClientGenerator.Core.clientName(CollectorPolicies.updateTags::parameters.properties,
+@@Azure.ClientGenerator.Core.clientName(
+  CollectorPolicies.updateTags::parameters.properties,
   "parameters"
 );

@@ -19,18 +19,21 @@ using Microsoft.Datadog;
 @@clientName(DatadogMonitorResources.delete, "Delete");
 
 @@clientLocation(DatadogMonitorResources.listByResourceGroup, "Monitors");
-@@clientName(DatadogMonitorResources.listByResourceGroup,
+@@clientName(
+  DatadogMonitorResources.listByResourceGroup,
   "ListByResourceGroup"
 );
 
 @@clientLocation(DatadogMonitorResources.list, "Monitors", "!csharp");
 @@clientName(DatadogMonitorResources.list, "List", "!csharp");
 @@clientLocation(DatadogMonitorResources.manageSreAgentConnectors, "Monitors");
-@@clientName(DatadogMonitorResources.manageSreAgentConnectors::parameters.body,
+@@clientName(
+  DatadogMonitorResources.manageSreAgentConnectors::parameters.body,
   "request"
 );
 @@clientLocation(DatadogMonitorResources.getDefaultApplicationKey, "Monitors");
-@@clientName(DatadogMonitorResources.getDefaultApplicationKey,
+@@clientName(
+  DatadogMonitorResources.getDefaultApplicationKey,
   "GetDefaultApplicationKey"
 );
 
@@ -47,17 +50,20 @@ using Microsoft.Datadog;
 @@clientName(DatadogMonitorResources.listHosts, "ListHosts");
 
 @@clientLocation(DatadogMonitorResources.listLinkedResources, "Monitors");
-@@clientName(DatadogMonitorResources.listLinkedResources,
+@@clientName(
+  DatadogMonitorResources.listLinkedResources,
   "ListLinkedResources"
 );
 
 @@clientLocation(DatadogMonitorResources.listMonitoredResources, "Monitors");
-@@clientName(DatadogMonitorResources.listMonitoredResources,
+@@clientName(
+  DatadogMonitorResources.listMonitoredResources,
   "ListMonitoredResources"
 );
 
 @@clientLocation(DatadogMonitorResources.refreshSetPasswordLink, "Monitors");
-@@clientName(DatadogMonitorResources.refreshSetPasswordLink,
+@@clientName(
+  DatadogMonitorResources.refreshSetPasswordLink,
   "RefreshSetPasswordLink"
 );
 
@@ -66,31 +72,37 @@ using Microsoft.Datadog;
 @@clientLocation(DatadogMonitorResources.resubscribe, "Organizations");
 
 // DatadogSingleSignOnResources operations
-@@clientLocation(DatadogSingleSignOnResources.get,
+@@clientLocation(
+  DatadogSingleSignOnResources.get,
   "SingleSignOnConfigurations"
 );
 @@clientName(DatadogSingleSignOnResources.get, "Get");
 
-@@clientLocation(DatadogSingleSignOnResources.create,
+@@clientLocation(
+  DatadogSingleSignOnResources.create,
   "SingleSignOnConfigurations"
 );
 @@clientName(DatadogSingleSignOnResources.create, "CreateOrUpdate");
 
-@@clientLocation(DatadogSingleSignOnResources.list,
+@@clientLocation(
+  DatadogSingleSignOnResources.list,
   "SingleSignOnConfigurations"
 );
 @@clientName(DatadogSingleSignOnResources.list, "List");
 
 // MarketplaceAgreementsOperationGroup operations
-@@clientLocation(MarketplaceAgreementsOperationGroup.list,
+@@clientLocation(
+  MarketplaceAgreementsOperationGroup.list,
   "MarketplaceAgreements"
 );
 @@clientName(MarketplaceAgreementsOperationGroup.list, "List");
 
-@@clientLocation(MarketplaceAgreementsOperationGroup.createOrUpdate,
+@@clientLocation(
+  MarketplaceAgreementsOperationGroup.createOrUpdate,
   "MarketplaceAgreements"
 );
-@@clientName(MarketplaceAgreementsOperationGroup.createOrUpdate,
+@@clientName(
+  MarketplaceAgreementsOperationGroup.createOrUpdate,
   "CreateOrUpdate"
 );
 
@@ -109,13 +121,16 @@ using Microsoft.Datadog;
 
 @@clientName(DatadogSingleSignOnResources.create::parameters.resource, "body");
 
-@@clientName(MonitoredSubscriptions.createorUpdate::parameters.resource,
+@@clientName(
+  MonitoredSubscriptions.createorUpdate::parameters.resource,
   "body"
 );
 @@clientName(MonitoredSubscriptions.update::parameters.resource, "body");
-@@summary(Operations.list,
+@@summary(
+  Operations.list,
   "List all operations provided by Microsoft.Datadog for the 2025-06-11 api version."
 );
-@@doc(Operations.list,
+@@doc(
+  Operations.list,
   "List all operations provided by Microsoft.Datadog for the 2025-06-11 api version."
 );

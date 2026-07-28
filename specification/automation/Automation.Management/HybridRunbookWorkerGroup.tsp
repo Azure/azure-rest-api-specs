@@ -90,12 +90,15 @@ interface HybridRunbookWorkerGroups {
 }
 
 @@doc(HybridRunbookWorkerGroup.name, "The hybrid runbook worker group name");
-@@doc(HybridRunbookWorkerGroup.properties,
+@@doc(
+  HybridRunbookWorkerGroup.properties,
   "Gets or sets the hybrid worker group properties."
 );
-@@doc(HybridRunbookWorkerGroups.create::parameters.resource,
+@@doc(
+  HybridRunbookWorkerGroups.create::parameters.resource,
   "The create or update parameters for hybrid runbook worker group."
 );
-@@doc(HybridRunbookWorkerGroups.update::parameters.properties,
+@@doc(
+  HybridRunbookWorkerGroups.update::parameters.properties,
   "The hybrid runbook worker group"
 );

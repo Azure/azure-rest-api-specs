@@ -79,6 +79,7 @@ model ChatMessageImageContentItem extends ChatMessageContentItem {
   /** The discriminated object type: always 'image_url' for this type. */
   type: "image_url";
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("An internet location, which must be accessible to the model,from which the image may be retrieved.")
   @encodedName("application/json", "image_url")
   imageUrl: ChatMessageImageUrl;
@@ -191,7 +192,12 @@ model ChatRequestUserMessage extends ChatRequestMessage {
     ServiceApiVersions.v2025_01_01_Preview,
     string | ChatMessageTextContentItem[] | ChatMessageImageContentItem[]
   )
-  content: string | (ChatMessageTextContentItem | ChatMessageImageContentItem | ChatMessageAudioContentItem)[];
+  content:
+    | string
+    | (
+        | ChatMessageTextContentItem
+        | ChatMessageImageContentItem
+        | ChatMessageAudioContentItem)[];
 
   @doc("An optional name for the participant.")
   name?: string;

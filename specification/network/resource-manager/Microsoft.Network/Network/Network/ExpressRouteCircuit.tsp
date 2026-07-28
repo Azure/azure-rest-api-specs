@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "../Common/main.tsp";
 
@@ -9,6 +10,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 using Common;
 
 namespace Microsoft.Network;
@@ -80,7 +82,10 @@ interface ExpressRouteCircuits {
   @tag("ExpressRouteCircuits")
   delete is ArmResourceDeleteWithoutOkAsync<
     ExpressRouteCircuit,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -108,15 +113,138 @@ interface ExpressRouteCircuits {
     ArmResponse<ExpressRouteCircuitStats>,
     Error = CloudError
   >;
+
+  /**
+   * Retrieves the details of all the link failover tests performed on the express route circuit.
+   */
+  @tag("ExpressRouteCircuits")
+  @action("getCircuitLinkFailoverAllTestsDetails")
+  @added(Versions.v2025_07_01)
+  getCircuitLinkFailoverAllTestsDetails is ArmResourceActionAsync<
+    ExpressRouteCircuit,
+    void,
+    Response = {
+      #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @body body: ExpressRouteLinkFailoverAllTestsDetailsList;
+    },
+    Parameters = {
+      /**
+       * The type of failover test.
+       */
+      @query("failoverTestType")
+      failoverTestType?: string;
+
+      /**
+       * Fetch only the latest tests.
+       */
+      @query("fetchLatest")
+      fetchLatest?: boolean;
+    },
+    LroHeaders = ArmLroLocationHeader<FinalResult = ExpressRouteLinkFailoverAllTestsDetailsList> &
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = CloudError
+  >;
+
+  /**
+   * Retrieves the details of a particular link failover test performed on the express route circuit.
+   */
+  @tag("ExpressRouteCircuits")
+  @action("getCircuitLinkFailoverSingleTestDetails")
+  @added(Versions.v2025_07_01)
+  getCircuitLinkFailoverSingleTestDetails is ArmResourceActionAsync<
+    ExpressRouteCircuit,
+    void,
+    Response = {
+      #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @body body: ExpressRouteLinkFailoverSingleTestDetailsList;
+    },
+    Parameters = {
+      /**
+       * The link type.
+       */
+      @query("linkType")
+      linkType: string;
+
+      /**
+       * The circuit test category.
+       */
+      @query("circuitTestCategory")
+      circuitTestCategory: string;
+
+      /**
+       * The unique Guid value which identifies the test.
+       */
+      @query("failoverTestId")
+      failoverTestId: string;
+    },
+    LroHeaders = ArmLroLocationHeader<FinalResult = ExpressRouteLinkFailoverSingleTestDetailsList> &
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = CloudError
+  >;
+
+  /**
+   * Starts link failover simulation on the express route circuit for the specified link type and test category.
+   */
+  @tag("ExpressRouteCircuits")
+  @action("startCircuitLinkFailoverTest")
+  @added(Versions.v2025_07_01)
+  startCircuitLinkFailoverTest is ArmResourceActionAsync<
+    ExpressRouteCircuit,
+    void,
+    {
+      /** The result of the start circuit link failover test operation. */
+      @body body: stringApplicationJson;
+    },
+    Parameters = {
+      /**
+       * The link type.
+       */
+      @query("linkType")
+      linkType: string;
+
+      /**
+       * The circuit test category.
+       */
+      @query("circuitTestCategory")
+      circuitTestCategory: string;
+    },
+    LroHeaders = ArmLroLocationHeader<FinalResult = stringApplicationJson> &
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = CloudError
+  >;
+
+  /**
+   * Stops link failover simulation on the express route circuit.
+   */
+  @tag("ExpressRouteCircuits")
+  @action("stopCircuitLinkFailoverTest")
+  @added(Versions.v2025_07_01)
+  stopCircuitLinkFailoverTest is ArmResourceActionAsync<
+    ExpressRouteCircuit,
+    {
+      /** Parameters supplied to stop the link failover simulation on the express route circuit. */
+      @bodyRoot stopParameters: ExpressRouteLinkFailoverStopApiParameters;
+    },
+    {
+      /** The result of the stop circuit link failover test operation. */
+      @body body: stringApplicationJson;
+    },
+    LroHeaders = ArmLroLocationHeader<FinalResult = stringApplicationJson> &
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = CloudError
+  >;
 }
 
 @@doc(ExpressRouteCircuit.name, "The name of express route circuit.");
-@@doc(ExpressRouteCircuit.properties,
+@@doc(
+  ExpressRouteCircuit.properties,
   "Properties of the express route circuit."
 );
-@@doc(ExpressRouteCircuits.createOrUpdate::parameters.resource,
+@@doc(
+  ExpressRouteCircuits.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update express route circuit operation."
 );
-@@doc(ExpressRouteCircuits.updateTags::parameters.properties,
+@@doc(
+  ExpressRouteCircuits.updateTags::parameters.properties,
   "Parameters supplied to update express route circuit tags."
 );

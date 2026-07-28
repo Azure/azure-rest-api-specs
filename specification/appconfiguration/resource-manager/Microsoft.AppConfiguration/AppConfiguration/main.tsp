@@ -23,6 +23,7 @@ import "./Replica.tsp";
 import "./Snapshot.tsp";
 import "./routes.tsp";
 import "./legacy.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

@@ -24,14 +24,15 @@ interface Occurrences {
   @get
   @list
   @doc("List resources attached to Scheduled Actions for the given occurrence")
-  listResources(
-    ...ResourceInstanceParameters<OccurrenceResource>,
-  ): ArmResponse<OccurrenceResourceListResponse> | ErrorResponse;
+  listResources(...ResourceInstanceParameters<OccurrenceResource>):
+    | ArmResponse<OccurrenceResourceListResponse>
+    | ErrorResponse;
   cancel is ArmResourceActionSync<
     Occurrence,
     CancelOccurrenceRequest,
     ResourceOperationResponse
   >;
+  @doc("A long-running resource action.")
   delay is ArmResourceActionAsync<
     Occurrence,
     DelayRequest,

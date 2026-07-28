@@ -85,8 +85,11 @@ interface MhsmPrivateEndpointConnections {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     MhsmPrivateEndpointConnection,
-    Response = ArmResponse<MhsmPrivateEndpointConnection> | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = MhsmPrivateEndpointConnection> &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse,
+    Response =
+      | ArmResponse<MhsmPrivateEndpointConnection>
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = MhsmPrivateEndpointConnection> &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -100,10 +103,12 @@ interface MhsmPrivateEndpointConnections {
   >;
 }
 
-@@doc(MhsmPrivateEndpointConnection.name,
+@@doc(
+  MhsmPrivateEndpointConnection.name,
   "Name of the private endpoint connection associated with the managed hsm pool."
 );
 @@doc(MhsmPrivateEndpointConnection.properties, "Resource properties.");
-@@doc(MhsmPrivateEndpointConnections.put::parameters.resource,
+@@doc(
+  MhsmPrivateEndpointConnections.put::parameters.resource,
   "The intended state of private endpoint connection."
 );

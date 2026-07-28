@@ -34,6 +34,27 @@ union StorageStoreType {
   string,
 }
 
+@doc("The protocol to use for mounting an Azure Storage Blob store.")
+@added(Versions.v2026_06_01)
+union BlobStorageMountProtocol {
+  @doc("NFS protocol. Version of NFS used may vary based on storage type")
+  NFS: "NFS",
+
+  @doc("Blobfuse in file cache mode.")
+  BlobfuseCaching: "BlobfuseCaching",
+
+  string,
+}
+
+@doc("The protocol to use for mounting an Azure NetApp Files store.")
+@added(Versions.v2026_06_01)
+union NetAppMountProtocol {
+  @doc("NFS protocol. Version of NFS used may vary based on storage type")
+  NFS: "NFS",
+
+  string,
+}
+
 @discriminator("kind")
 @doc("An abstract representation of storage store kind.")
 @added(Versions.v2026_02_01_preview)
@@ -50,6 +71,11 @@ model AzureStorageBlobStore extends StorageStore {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   kind: StorageStoreType.AzureStorageBlob;
 
+  @doc("The protocol to use for mounting the storage store.")
+  @added(Versions.v2026_06_01)
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  mountProtocol?: BlobStorageMountProtocol = BlobStorageMountProtocol.BlobfuseCaching;
+
   ...WithStorageAccountId;
 }
 
@@ -59,6 +85,11 @@ model AzureNetAppFilesStore extends StorageStore {
   /** Azure NetApp Files */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   kind: StorageStoreType.AzureNetAppFiles;
+
+  @doc("The protocol to use for mounting the storage store.")
+  @added(Versions.v2026_06_01)
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  mountProtocol?: NetAppMountProtocol = NetAppMountProtocol.NFS;
 
   ...WithNetAppVolumeId;
 }

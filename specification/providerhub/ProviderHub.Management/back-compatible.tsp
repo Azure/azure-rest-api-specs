@@ -4,58 +4,71 @@ using Azure.ClientGenerator.Core;
 using Microsoft.ProviderHub;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(OperationsContentProperties.contents,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  OperationsContentProperties.contents,
   "!python,!js"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ResourceManagementAction.resources,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ResourceManagementAction.resources,
   "!python,!js"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(OperationsContent.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  OperationsContent.properties,
   "!python,!js"
 );
 
 @@clientName(CustomRollouts.createOrUpdate::parameters.resource, "properties");
 
-@@clientName(ProviderRegistrations.createOrUpdate::parameters.resource,
+@@clientName(
+  ProviderRegistrations.createOrUpdate::parameters.resource,
   "properties"
 );
 @@clientLocation(ProviderRegistrations.generateManifest, Microsoft.ProviderHub);
 @@clientLocation(ProviderRegistrations.checkinManifest, Microsoft.ProviderHub);
-@@clientName(ProviderRegistrations.checkinManifest::parameters.body,
+@@clientName(
+  ProviderRegistrations.checkinManifest::parameters.body,
   "checkinManifestParams"
 );
 @@clientLocation(ProviderRegistrations.deleteResources, "ResourceActions");
-@@clientName(ProviderRegistrations.deleteResources::parameters.body,
+@@clientName(
+  ProviderRegistrations.deleteResources::parameters.body,
   "properties"
 );
-@@clientLocation(ProviderRegistrations.newRegionFrontloadReleaseGenerateManifest,
+@@clientLocation(
+  ProviderRegistrations.newRegionFrontloadReleaseGenerateManifest,
   NewRegionFrontloadRelease
 );
-@@clientName(ProviderRegistrations.newRegionFrontloadReleaseGenerateManifest,
+@@clientName(
+  ProviderRegistrations.newRegionFrontloadReleaseGenerateManifest,
   "GenerateManifest"
 );
-@@clientName(ProviderRegistrations.newRegionFrontloadReleaseGenerateManifest::parameters.body,
+@@clientName(
+  ProviderRegistrations.newRegionFrontloadReleaseGenerateManifest::parameters.body,
   "properties"
 );
 
-@@clientName(ResourceTypeRegistrations.createOrUpdate::parameters.resource,
+@@clientName(
+  ResourceTypeRegistrations.createOrUpdate::parameters.resource,
   "properties"
 );
 
 @@clientName(DefaultRollouts.createOrUpdate::parameters.resource, "properties");
-@@clientName(NewRegionFrontloadRelease.createOrUpdate::parameters.resource,
+@@clientName(
+  NewRegionFrontloadRelease.createOrUpdate::parameters.resource,
   "properties"
 );
 
-@@clientName(NotificationRegistrations.createOrUpdate::parameters.resource,
+@@clientName(
+  NotificationRegistrations.createOrUpdate::parameters.resource,
   "properties"
 );
 
 @@clientLocation(OperationsPutContents.listByProviderRegistration, Operations);
 @@clientLocation(OperationsPutContents.createOrUpdate, Operations);
-@@clientName(OperationsPutContents.createOrUpdate::parameters.resource,
+@@clientName(
+  OperationsPutContents.createOrUpdate::parameters.resource,
   "OperationsPutContent"
 );
 @@clientLocation(OperationsPutContents.delete, Operations);
@@ -65,33 +78,41 @@ using Microsoft.ProviderHub;
 @@clientName(SkuResources.createOrUpdate::parameters.resource, "properties");
 @@clientLocation(SkuResources.delete, Skus);
 @@clientLocation(SkuResources.listByResourceTypeRegistrations, Skus);
-@@clientName(Skus.createOrUpdateNestedResourceTypeFirst::parameters.resource,
+@@clientName(
+  Skus.createOrUpdateNestedResourceTypeFirst::parameters.resource,
   "properties"
 );
 @@clientLocation(SkuResourceOperations.getNestedResourceTypeSecond, Skus);
-@@clientLocation(SkuResourceOperations.createOrUpdateNestedResourceTypeSecond,
+@@clientLocation(
+  SkuResourceOperations.createOrUpdateNestedResourceTypeSecond,
   Skus
 );
-@@clientName(SkuResourceOperations.createOrUpdateNestedResourceTypeSecond::parameters.resource,
+@@clientName(
+  SkuResourceOperations.createOrUpdateNestedResourceTypeSecond::parameters.resource,
   "properties"
 );
 @@clientLocation(SkuResourceOperations.deleteNestedResourceTypeSecond, Skus);
-@@clientLocation(SkuResourceOperations.listByResourceTypeRegistrationsNestedResourceTypeSecond,
+@@clientLocation(
+  SkuResourceOperations.listByResourceTypeRegistrationsNestedResourceTypeSecond,
   Skus
 );
 @@clientLocation(SkuResourceOperationGroup.getNestedResourceTypeThird, Skus);
-@@clientLocation(SkuResourceOperationGroup.createOrUpdateNestedResourceTypeThird,
+@@clientLocation(
+  SkuResourceOperationGroup.createOrUpdateNestedResourceTypeThird,
   Skus
 );
-@@clientName(SkuResourceOperationGroup.createOrUpdateNestedResourceTypeThird::parameters.resource,
+@@clientName(
+  SkuResourceOperationGroup.createOrUpdateNestedResourceTypeThird::parameters.resource,
   "properties"
 );
 @@clientLocation(SkuResourceOperationGroup.deleteNestedResourceTypeThird, Skus);
-@@clientLocation(SkuResourceOperationGroup.listByResourceTypeRegistrationsNestedResourceTypeThird,
+@@clientLocation(
+  SkuResourceOperationGroup.listByResourceTypeRegistrationsNestedResourceTypeThird,
   Skus
 );
 
-@@clientName(AuthorizedApplications.createOrUpdate::parameters.resource,
+@@clientName(
+  AuthorizedApplications.createOrUpdate::parameters.resource,
   "properties"
 );
 
@@ -102,39 +123,48 @@ using Microsoft.ProviderHub;
 @@clientLocation(SkuResources.get, SkuResources, "csharp");
 @@clientLocation(SkuResources.createOrUpdate, SkuResources, "csharp");
 @@clientLocation(SkuResources.delete, SkuResources, "csharp");
-@@clientLocation(SkuResources.listByResourceTypeRegistrations,
+@@clientLocation(
+  SkuResources.listByResourceTypeRegistrations,
   SkuResources,
   "csharp"
 );
-@@clientLocation(SkuResourceOperations.getNestedResourceTypeSecond,
+@@clientLocation(
+  SkuResourceOperations.getNestedResourceTypeSecond,
   SkuResourceOperations,
   "csharp"
 );
-@@clientLocation(SkuResourceOperations.createOrUpdateNestedResourceTypeSecond,
+@@clientLocation(
+  SkuResourceOperations.createOrUpdateNestedResourceTypeSecond,
   SkuResourceOperations,
   "csharp"
 );
-@@clientLocation(SkuResourceOperations.deleteNestedResourceTypeSecond,
+@@clientLocation(
+  SkuResourceOperations.deleteNestedResourceTypeSecond,
   SkuResourceOperations,
   "csharp"
 );
-@@clientLocation(SkuResourceOperations.listByResourceTypeRegistrationsNestedResourceTypeSecond,
+@@clientLocation(
+  SkuResourceOperations.listByResourceTypeRegistrationsNestedResourceTypeSecond,
   SkuResourceOperations,
   "csharp"
 );
-@@clientLocation(SkuResourceOperationGroup.getNestedResourceTypeThird,
+@@clientLocation(
+  SkuResourceOperationGroup.getNestedResourceTypeThird,
   SkuResourceOperationGroup,
   "csharp"
 );
-@@clientLocation(SkuResourceOperationGroup.createOrUpdateNestedResourceTypeThird,
+@@clientLocation(
+  SkuResourceOperationGroup.createOrUpdateNestedResourceTypeThird,
   SkuResourceOperationGroup,
   "csharp"
 );
-@@clientLocation(SkuResourceOperationGroup.deleteNestedResourceTypeThird,
+@@clientLocation(
+  SkuResourceOperationGroup.deleteNestedResourceTypeThird,
   SkuResourceOperationGroup,
   "csharp"
 );
-@@clientLocation(SkuResourceOperationGroup.listByResourceTypeRegistrationsNestedResourceTypeThird,
+@@clientLocation(
+  SkuResourceOperationGroup.listByResourceTypeRegistrationsNestedResourceTypeThird,
   SkuResourceOperationGroup,
   "csharp"
 );

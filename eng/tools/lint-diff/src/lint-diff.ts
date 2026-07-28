@@ -1,11 +1,11 @@
 import { SpecModelError } from "@azure-tools/specs-shared/spec-model-error";
 import { writeFile } from "node:fs/promises";
-import { inspect, parseArgs, ParseArgsConfig } from "node:util";
-import { correlateRuns } from "./correlateResults.js";
-import { generateAutoRestErrorReport, generateLintDiffReport } from "./generateReport.js";
-import { getRunList } from "./processChanges.js";
-import { getAutorestErrors, runChecks } from "./runChecks.js";
-import { getDependencyVersion, getPathToDependency, pathExists } from "./util.js";
+import { inspect, parseArgs, type ParseArgsConfig } from "node:util";
+import { correlateRuns } from "./correlateResults.ts";
+import { generateAutoRestErrorReport, generateLintDiffReport } from "./generateReport.ts";
+import { getRunList } from "./processChanges.ts";
+import { getAutorestErrors, runChecks } from "./runChecks.ts";
+import { getDependencyVersion, getPathToDependency, pathExists } from "./util.ts";
 
 function usage() {
   console.log("TODO: Write up usage");

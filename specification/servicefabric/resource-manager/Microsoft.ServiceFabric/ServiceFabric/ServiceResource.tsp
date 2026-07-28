@@ -112,14 +112,17 @@ interface ServiceResources {
   >;
 }
 
-@@doc(ServiceResource.name,
+@@doc(
+  ServiceResource.name,
   "The name of the service resource in the format of {applicationName}~{serviceName}."
 );
 @@doc(ServiceResource.properties, "The service resource properties.");
-@@doc(ServiceResources.createOrUpdate::parameters.resource,
+@@doc(
+  ServiceResources.createOrUpdate::parameters.resource,
   "The service resource."
 );
-@@doc(ServiceResources.update::parameters.properties,
+@@doc(
+  ServiceResources.update::parameters.properties,
   "The service resource for patch operations."
 );
 
