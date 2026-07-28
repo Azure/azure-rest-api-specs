@@ -4501,3 +4501,22 @@ model NodeDisruptionProfile {
    */
   nodeDisruptionPolicy?: NodeDisruptionPolicy;
 }
+
+
+/**
+ * NVIDIA GPU resource allocation mode.
+ */
+@added(Versions.v2026_06_02_preview)
+union NvidiaDriverMode {
+  string,
+
+  /**
+   * NVIDIA Kubernetes device plugin is installed on the nodes for resource allocation and scheduling.
+   */
+  DevicePlugin: "DevicePlugin",
+
+  /**
+   * NVIDIA Device Resource Allocation (DRA) driver is installed on the nodes for resource allocation and scheduling.
+   */
+  DRA: "DRA",
+}
