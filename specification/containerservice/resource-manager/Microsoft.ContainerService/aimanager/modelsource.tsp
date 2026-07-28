@@ -111,15 +111,12 @@ model InlineCredential {
 @added(Versions.v2026_08_02_preview)
 @doc("A credential backed by a customer-owned user-assigned managed identity. The platform authenticates to the model source as this identity via Workload Identity; no secret is stored. Because the platform generally has no read access to a customer's identity, the `clientId` is supplied by the caller rather than resolved by the service.")
 model ManagedIdentityCredential {
-  @visibility(Lifecycle.Create, Lifecycle.Update)
   @doc("The ARM resource id of the user-assigned managed identity to authenticate with. Only user-assigned identities are supported. The RP first-party application must be granted `Managed Identity Operator` on this identity so it can be federated for Workload Identity.")
   resourceId: UserAssignedIdentityResourceId;
 
-  @visibility(Lifecycle.Create, Lifecycle.Update)
   @doc("The client (application) id of the identity, supplied by the caller. Used by the platform to annotate the in-cluster puller ServiceAccount for Workload Identity. Must match `resourceId`.")
   clientId: string;
 
-  @visibility(Lifecycle.Create, Lifecycle.Update)
   @doc("The home tenant id of the identity, supplied by the caller. Used to annotate the in-cluster puller ServiceAccount (`azure.workload.identity/tenant-id`) for the Workload Identity token exchange. Must match `resourceId`.")
   tenantId: string;
 }
