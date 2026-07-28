@@ -53,7 +53,7 @@ jobs:
       - template: /eng/common/pipelines/templates/steps/sparse-checkout.yml
         parameters:
           SkipCheckoutNone: true
-          TokenToUseForAuth: $(azuresdk-github-pat)
+          TokenToUseForAuth: $(GH_TOKEN_MicrosoftDocs)
           # Path does not need to be set because sparse-checkout.yml already
           # checks out files in the repo root
           Repositories:
