@@ -45398,6 +45398,35 @@ components:
             - failed
             - cancelled
       description: Extensible status values shared by Foundry jobs.
+    LlmGeneratedVoiceGreetingConfig:
+      type: object
+      required:
+        - type
+        - prompt
+      properties:
+        type:
+          type: string
+          enum:
+            - llm_generated
+        prompt:
+          type: string
+          minLength: 1
+          description: The non-empty prompt that guides the opening response. Supports template substitution via `structured_inputs`.
+        fallback_text:
+          type: string
+          minLength: 1
+          description: Optional non-empty deterministic text spoken if generation fails before output starts. Supports template substitution via `structured_inputs`.
+        tool_choice:
+          allOf:
+            - $ref: '#/components/schemas/VoiceGreetingToolChoice'
+          description: Whether the opening response may use configured session tools. Defaults to `none`.
+          default: none
+      allOf:
+        - $ref: '#/components/schemas/VoiceGreetingConfig'
+      description: A session-start greeting authored by the configured session model.
+      x-ms-foundry-meta:
+        required_previews:
+          - PromptVoiceAgents=V1Preview
     LoraConfig:
       type: object
       properties:
@@ -74372,6 +74401,13 @@ components:
             - type: string
             - type: 'null'
           description: A system (or developer) message inserted into the model's context. Supports template substitution via `structured_inputs`, rendered per session before the live session starts.
+        greeting:
+          allOf:
+            - $ref: '#/components/schemas/VoiceGreetingConfig'
+          description: |-
+            Optional session-start greeting. The service renders greeting strings with `structured_inputs` before the
+            live session starts and sends the result through Voice Live's native initial-session greeting contract.
+            Omit this field to wait for user input.
         audio:
           allOf:
             - $ref: '#/components/schemas/VoiceAudioConfig'
@@ -76050,6 +76086,26 @@ components:
             - Http
             - Grpc
       description: The transport protocol for telemetry export.
+    TemplateVoiceGreetingConfig:
+      type: object
+      required:
+        - type
+        - text
+      properties:
+        type:
+          type: string
+          enum:
+            - template
+        text:
+          type: string
+          minLength: 1
+          description: The non-empty text to speak. Supports template substitution via `structured_inputs`.
+      allOf:
+        - $ref: '#/components/schemas/VoiceGreetingConfig'
+      description: A deterministic session-start greeting synthesized from exact caller-provided text.
+      x-ms-foundry-meta:
+        required_previews:
+          - PromptVoiceAgents=V1Preview
     TestingCriterionAzureAIEvaluator:
       type: object
       required:
@@ -77121,6 +77177,43 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeConversationItemFunctionCallOutput'
       description: A function call output item.
+      x-ms-foundry-meta:
+        required_previews:
+          - PromptVoiceAgents=V1Preview
+    VoiceGreetingConfig:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          allOf:
+            - $ref: '#/components/schemas/VoiceGreetingType'
+          description: The greeting mode.
+      discriminator:
+        propertyName: type
+        mapping:
+          template: '#/components/schemas/TemplateVoiceGreetingConfig'
+          llm_generated: '#/components/schemas/LlmGeneratedVoiceGreetingConfig'
+      description: A proactive assistant greeting produced once at the start of a voice session.
+      x-ms-foundry-meta:
+        required_previews:
+          - PromptVoiceAgents=V1Preview
+    VoiceGreetingToolChoice:
+      type: string
+      enum:
+        - none
+        - auto
+        - required
+      description: Tool-selection policy for an LLM-generated session-start greeting.
+      x-ms-foundry-meta:
+        required_previews:
+          - PromptVoiceAgents=V1Preview
+    VoiceGreetingType:
+      type: string
+      enum:
+        - template
+        - llm_generated
+      description: The supported session-start greeting modes.
       x-ms-foundry-meta:
         required_previews:
           - PromptVoiceAgents=V1Preview

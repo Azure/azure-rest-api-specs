@@ -362,6 +362,13 @@ model PromptVoiceAgentDefinition extends AgentDefinition {
   instructions?: string | null;
 
   @doc("""
+    Optional session-start greeting. The service renders greeting strings with `structured_inputs` before the
+    live session starts and sends the result through Voice Live's native initial-session greeting contract.
+    Omit this field to wait for user input.
+    """)
+  greeting?: VoiceGreetingConfig;
+
+  @doc("""
     The audio stack configuration (input/output format, voice, turn detection, noise reduction, transcription),
     following the OpenAI Realtime session schema that Voice Live implements and extends. Authored here as the
     control-plane defaults; a client may override the overridable fields per session at connect time.
@@ -434,6 +441,59 @@ union VoiceAgentTool {
 
   @doc("A reference to a Foundry toolbox, executed by Voice Live via the toolbox MCP endpoint.")
   toolbox: VoiceToolboxTool,
+}
+
+@doc("A proactive assistant greeting produced once at the start of a voice session.")
+@discriminator("type")
+@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+model VoiceGreetingConfig {
+  @doc("The greeting mode.")
+  type: VoiceGreetingType;
+}
+
+@doc("The supported session-start greeting modes.")
+@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+union VoiceGreetingType {
+  @doc("Speak caller-provided text through the normal assistant speech-output path.")
+  template: "template",
+
+  @doc("Ask the configured session model to generate the opening response.")
+  llm_generated: "llm_generated",
+}
+
+@doc("A deterministic session-start greeting synthesized from exact caller-provided text.")
+@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+model TemplateVoiceGreetingConfig extends VoiceGreetingConfig {
+  type: VoiceGreetingType.template;
+
+  @doc("The non-empty text to speak. Supports template substitution via `structured_inputs`.")
+  @minLength(1)
+  text: string;
+}
+
+@doc("A session-start greeting authored by the configured session model.")
+@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+model LlmGeneratedVoiceGreetingConfig extends VoiceGreetingConfig {
+  type: VoiceGreetingType.llm_generated;
+
+  @doc("The non-empty prompt that guides the opening response. Supports template substitution via `structured_inputs`.")
+  @minLength(1)
+  prompt: string;
+
+  @doc("Optional non-empty deterministic text spoken if generation fails before output starts. Supports template substitution via `structured_inputs`.")
+  @minLength(1)
+  fallback_text?: string;
+
+  @doc("Whether the opening response may use configured session tools. Defaults to `none`.")
+  tool_choice?: VoiceGreetingToolChoice = VoiceGreetingToolChoice.none;
+}
+
+@doc("Tool-selection policy for an LLM-generated session-start greeting.")
+@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+union VoiceGreetingToolChoice {
+  none: "none",
+  auto: "auto",
+  required: "required",
 }
 
 @doc("A Voice Live built-in control (system) tool that acts on the live session itself, e.g. ending the call. Executed natively by Voice Live; no customer code or external auth.")
