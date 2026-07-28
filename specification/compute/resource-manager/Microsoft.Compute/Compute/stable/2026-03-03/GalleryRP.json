@@ -6266,6 +6266,15 @@
           "$ref": "#/definitions/ValidationsProfile",
           "description": "This is the validations profile of a Gallery Image Version.",
           "readOnly": true
+        },
+        "imageMetadataProfiles": {
+          "type": "array",
+          "description": "The image metadata profiles associated with the gallery image version.",
+          "items": {
+            "$ref": "#/definitions/ImageMetadataProfile"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -7117,6 +7126,32 @@
         "modelAsString": false
       }
     },
+    "ImageMetadataProfile": {
+      "type": "object",
+      "description": "Describes the metadata profile of an image.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/MetadataType",
+          "description": "The type of metadata."
+        },
+        "publicMetadataList": {
+          "type": "array",
+          "description": "The list of public metadata key-value pairs.",
+          "items": {
+            "$ref": "#/definitions/MetadataKeyValue"
+          },
+          "x-ms-identifiers": []
+        },
+        "internalMetadataList": {
+          "type": "array",
+          "description": "The list of internal metadata key-value pairs.",
+          "items": {
+            "$ref": "#/definitions/MetadataKeyValue"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
     "ImagePurchasePlan": {
       "type": "object",
       "description": "Describes the gallery image definition purchase plan. This is used by marketplace images.",
@@ -7142,7 +7177,53 @@
         "uefiSettings": {
           "$ref": "#/definitions/GalleryImageVersionUefiSettings",
           "description": "Contains UEFI settings for the image version."
+        },
+        "secretsProvisioningSettings": {
+          "$ref": "#/definitions/SecretsProvisioningSettings",
+          "description": "Specifies the secrets provisioning settings for the gallery image version. Used on create or update to configure secrets provisioning.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
         }
+      }
+    },
+    "MetadataKeyValue": {
+      "type": "object",
+      "description": "Describes a key-value pair for image metadata.",
+      "properties": {
+        "metadataKey": {
+          "type": "string",
+          "description": "The metadata key."
+        },
+        "metadataValue": {
+          "type": "string",
+          "description": "The metadata value."
+        }
+      }
+    },
+    "MetadataType": {
+      "type": "string",
+      "description": "The type of metadata associated with the image.",
+      "enum": [
+        "SecretsProvisioningImageMetadata",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "MetadataType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SecretsProvisioningImageMetadata",
+            "value": "SecretsProvisioningImageMetadata",
+            "description": "Metadata related to secrets provisioning for the image."
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown metadata type."
+          }
+        ]
       }
     },
     "OSDiskImageEncryption": {
@@ -7464,6 +7545,48 @@
       },
       "required": [
         "scriptLink"
+      ]
+    },
+    "SecretsProvisioningComponent": {
+      "type": "object",
+      "description": "Describes a component involved in secrets provisioning.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the component (e.g., \"OS\", \"CloudInit\", \"AzureGuestAgent\", \"SecretsProvisioningLibrary\")."
+        },
+        "version": {
+          "type": "string",
+          "description": "The version of the component."
+        }
+      },
+      "required": [
+        "name",
+        "version"
+      ]
+    },
+    "SecretsProvisioningSettings": {
+      "type": "object",
+      "description": "Describes the secrets provisioning settings for a gallery image version.",
+      "properties": {
+        "isSupported": {
+          "type": "boolean",
+          "description": "Specifies whether secrets provisioning is enabled."
+        },
+        "osName": {
+          "type": "string",
+          "description": "The name of the operating system (e.g., \"mariner\")."
+        },
+        "components": {
+          "type": "array",
+          "description": "The list of component versions involved in secrets provisioning.",
+          "items": {
+            "$ref": "#/definitions/SecretsProvisioningComponent"
+          }
+        }
+      },
+      "required": [
+        "isSupported"
       ]
     },
     "ShareInviteStatus": {
