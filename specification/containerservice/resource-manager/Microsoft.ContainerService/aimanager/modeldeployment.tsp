@@ -22,9 +22,6 @@ scalar AIModelResourceId
   extends Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ContainerService/aiModels",
-    },
-    {
-      type: "Microsoft.ContainerService/aiManagers/customAIModels",
     }
   ]>;
 
