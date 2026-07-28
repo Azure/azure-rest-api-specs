@@ -1,11 +1,13 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/openapi";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using OpenAPI;
 using Versioning;
 using Azure.ResourceManager;
 using Common;
@@ -898,6 +900,8 @@ model MetadataKeyValue {
    * The metadata key.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "metadataKey is not sensitive, it is a key name for metadata"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-secret annotation required by Swagger linter to mark non-secret properties containing 'key' in name"
+  @extension("x-ms-secret", false)
   metadataKey?: string;
 
   /**
@@ -963,6 +967,7 @@ model SecretsProvisioningSettings {
   /**
    * The list of component versions involved in secrets provisioning.
    */
+  @identifiers(#[])
   components?: SecretsProvisioningComponent[];
 }
 
