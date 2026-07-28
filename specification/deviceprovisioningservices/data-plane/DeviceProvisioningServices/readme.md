@@ -33,7 +33,7 @@ These are the global settings for the API.
 
 ```yaml
 openapi-type: data-plane
-tag: package-2021-10-01-device
+tag: package-2026-11-01-device
 ```
 
 ### Tag: package-preview-2026-11-device
