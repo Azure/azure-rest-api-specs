@@ -25,7 +25,7 @@ These are the global settings for the Relay API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2026-01
+tag: package-2026-07-preview
 ```
 
 ### Tag: package-2021-11-01
@@ -129,6 +129,56 @@ directive:
     reason: The long-running response headers are inherited from the existing Relay service contract; changing them would be breaking.
   - suppress: LroExtension
     reason: The long-running operation metadata is inherited from the existing Relay service contract; changing it could alter client behavior.
+  - suppress: AllProxyResourcesShouldHaveDelete
+    reason: NetworkRuleSet is an inherited singleton child resource and the Relay service does not expose a delete operation for it.
+```
+
+### Tag: package-2026-07-preview
+
+These settings apply only when `--tag=package-2026-07-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2026-07-preview'
+input-file:
+- preview/2026-07-01-preview/relay.json
+directive:
+  - suppress: LatestVersionOfCommonTypesMustBeUsed
+    reason: This preview carries forward the 2026-01-01 Relay contract, which emits ARM common-types v3. Moving inherited resources to v6 would change schemas outside the scope of the Relay cluster feature.
+  - suppress: ResourceNameRestriction
+    reason: Adding name patterns to inherited Relay resources would tighten the accepted names compared with the 2026-01-01 contract.
+  - suppress: PutResponseCodes
+    reason: The inherited PUT response codes are part of the existing Relay service contract and changing them would be breaking.
+  - suppress: PatchResponseCodes
+    reason: The inherited PATCH response codes are part of the existing Relay service contract and changing them would be breaking.
+  - suppress: DeleteResponseCodes
+    reason: The inherited DELETE response codes are part of the existing Relay service contract and changing them would be breaking.
+  - suppress: GetResponseCodes
+    reason: The inherited GET response codes are part of the existing Relay service contract and changing them would be breaking.
+  - suppress: AvoidMsdnReferences
+    reason: The external documentation links are inherited from 2026-01-01 and are unrelated to the Relay cluster feature.
+  - suppress: EnumInsteadOfBoolean
+    reason: The inherited boolean properties are part of the existing Relay contract and changing their wire types would be breaking.
+  - suppress: RequestSchemaForTrackedResourcesMustHaveTags
+    reason: Adding tags to inherited request schemas would change the existing Relay API contract.
+  - suppress: LocationMustHaveXmsMutability
+    reason: The inherited location mutability is part of the existing generated contract and changing it could alter generated client behavior.
+  - suppress: TrackedResourcePatchOperation
+    reason: The affected inherited resource types do not support additional PATCH operations in the Relay service.
+  - suppress: ProvisioningStateMustBeReadOnly
+    reason: The inherited provisioning-state shapes are outside the scope of the Relay cluster feature.
+  - suppress: XMSSecretInResponse
+    reason: Adding x-ms-secret to the inherited access-key response would change the generated SDK surface.
+  - suppress: SchemaDescriptionOrTitle
+    reason: The inherited schema shape is unrelated to the Relay cluster feature.
+  - suppress: PageableOperation
+    reason: Adding paging metadata would change the generated SDK surface for an inherited list operation.
+  - suppress: XmsPageableForListCalls
+    reason: Adding paging metadata would change the generated SDK surface for an inherited list operation.
+  - suppress: NestedResourcesMustHaveListOperation
+    reason: NetworkRuleSet is an inherited singleton child resource and the Relay service does not expose a list operation for it.
+  - suppress: LroLocationHeader
+    reason: The inherited long-running response headers are part of the existing Relay service contract.
+  - suppress: LroExtension
+    reason: The inherited long-running operation metadata is part of the existing Relay service contract.
   - suppress: AllProxyResourcesShouldHaveDelete
     reason: NetworkRuleSet is an inherited singleton child resource and the Relay service does not expose a delete operation for it.
 ```
