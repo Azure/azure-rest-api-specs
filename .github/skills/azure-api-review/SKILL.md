@@ -199,6 +199,32 @@ requirement that does not exist upstream, and every agent reading that file
 inherits the error. If a reference and the Guidelines disagree, **the
 Guidelines win** — see "Authoritative External Sources" above.
 
+### The `Severity` field is the single source of severity truth
+
+A reference file's own prose is **this skill's synthesis**, not a quotation of
+the Guidelines, unless it explicitly says otherwise. So:
+
+- **The `Severity:` field decides how loud a finding may be.** A rule body
+  saying `**MUST**` does not make the rule `DO`-level, and does not license
+  Blocking. Read the field.
+- **Quote the upstream verb rather than inventing one.** Where a reference
+  restates a Guideline, it should cite the anchor and quote the tag, as
+  `DP-PAGE-01` and the extensible-enum guidance now do. Where a rule is our own
+  synthesis of vague upstream direction — `DO focus heavily on clear &
+consistent naming` cannot tell you whether `cfg` is too opaque — the rule
+  should say so, so its `**MUST**` is not mistaken for a sourced requirement.
+- **Never escalate on the strength of a reference-body verb.** If the field says
+  Warning and the body says `MUST`, the answer is Warning.
+
+Rules currently wording themselves `MUST` at Warning severity without citing an
+upstream anchor: `DP-ERR-01`, `DP-ERR-05`, `DP-LRO-01`, `DP-PAGE-02`,
+`DP-NAME-02`, `DP-NAME-04`, `DP-DOC-02`, `DP-MODEL-01`, `DP-VERSION-03`. Most
+do have a genuine upstream `DO` behind them — `DP-MODEL-01` restates
+`DO NOT use an action operation when the operation behavior could reasonably be
+defined as one of the standard REST … operations`, and `DP-NAME-02` restates
+`DO … include the time unit` — but until each carries its citation, treat the
+field as authoritative and the verb as emphasis.
+
 ## Maintenance & Upstream Alignment
 
 The instruction files and reference files in this skill are **derived

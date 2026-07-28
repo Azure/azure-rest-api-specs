@@ -25,7 +25,18 @@ and are not restated here. This file covers how visibility and secrecy interact.
 - **Rule ID:** `DP-VIS-01`
 - **Severity:** Warning
 
-A property accepted on write but never returned on read **MUST** be either a
+Upstream anchor: the Azure REST API Guidelines say
+:white\*check_mark: **DO** \_use the same JSON schema for PUT request/response,
+PATCH response, GET response, and POST request/response on a given URL path …
+this allows one SDK type for input/output operations and **enables the response
+to be passed back in a request\***
+([`rest-response-body-is-resource-schema`](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md)).
+The round-trip argument below is that clause applied to a single property.
+**The rule is this skill's synthesis, so its strength is the `Severity` field
+above, not the upstream verb** — a write-only property degrades round-tripping
+without breaking the shared schema, so it does not warrant Blocking.
+
+A property accepted on write but never returned on read should be either a
 secret or explicitly justified. Otherwise the caller cannot read back what they
 configured, cannot diff desired against actual state, and cannot round-trip a
 GET into a PUT.

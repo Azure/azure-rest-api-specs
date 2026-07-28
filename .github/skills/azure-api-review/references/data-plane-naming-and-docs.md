@@ -32,7 +32,16 @@ perfectly `camelCase`. Same for `@doc("The name.")`, which satisfies
 - **Rule ID:** `DP-NAME-01`
 - **Severity:** Warning
 
-Names **MUST** be understandable without reading the implementation. Flag:
+Upstream anchor: the Azure REST API Guidelines say
+:white*check_mark: **DO** \_focus heavily on clear & consistent naming*
+([`rest-clear-naming`](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md)).
+That `DO` is a direction of travel, not a testable predicate — it cannot tell
+you whether `cfg` specifically is too opaque. **The rule below is this skill's
+synthesis of what that direction means in practice, so its strength is the
+`Severity` field above, not the upstream verb.** Do not escalate to Blocking on
+the strength of the upstream `DO`.
+
+Names should be understandable without reading the implementation. Flag:
 
 - Non-obvious abbreviations: `cfg`, `desc`, `attr`, `res`, `ctx`, `mgr`, `svc`,
   `tmp`, `val`, `num`.
