@@ -60,11 +60,11 @@ model CapacityOverageProperties {
 @doc("The capacity overage state for the Fabric capacity resource.")
 @added(Microsoft.Fabric.Versions.v2026_08_01_preview)
 union CapacityOverageState {
-  @doc("Capacity overage is enabled.")
-  Enabled: "Enabled",
-
   @doc("Capacity overage is disabled.")
   Disabled: "Disabled",
+
+  @doc("Capacity overage is enabled.")
+  Enabled: "Enabled",
 
   string,
 }
