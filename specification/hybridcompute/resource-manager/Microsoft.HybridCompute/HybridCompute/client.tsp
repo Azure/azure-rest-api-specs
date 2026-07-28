@@ -424,3 +424,25 @@ union CustomPublicNetworkAccessType {
   Usage.input | Usage.output,
   "csharp"
 );
+
+// Java backward-compat: preserve the original SDK type names after the common-types bump
+// (Identity -> ManagedServiceIdentity, ResourceIdentityType -> ManagedServiceIdentityType).
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "Identity",
+  "java"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentityType,
+  "ResourceIdentityType",
+  "java"
+);
+// The v3 common-types Identity/ResourceIdentityType are @removed(v6) and not emitted in the
+// latest-only Java SDK, but they remain reachable via older api-versions. Rename them out of the
+// way so the v6 -> old-name renames above do not trigger duplicate-client-name in the java scope.
+@@clientName(Azure.ResourceManager.CommonTypes.Identity, "IdentityV3", "java");
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ResourceIdentityType,
+  "ResourceIdentityTypeV3",
+  "java"
+);
