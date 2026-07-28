@@ -10,6 +10,7 @@ emit:
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"
 
 options:
   "@azure-tools/typespec-autorest":
@@ -19,10 +20,10 @@ options:
   # Uncomment this line and add "@azure-tools/typespec-python" to your package.json to generate Python code
   "@azure-tools/typespec-python":
     flavor: azure
-    "basic-setup-py": true
     "package-version": "1.0.0b1"
     "emitter-output-dir": "{output-dir}/{service-dir}/azure-keyvault-securitydomain"
     "package-name": "azure-keyvault-securitydomain"
+    "namespace": "azure.keyvault.securitydomain"
     "output-path": "."
   # Uncomment this line and add "@azure-tools/typespec-java" to your package.json to generate Java code
   # "@azure-tools/typespec-java": true

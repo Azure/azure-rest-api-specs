@@ -56,7 +56,8 @@ interface VnetRoutesOps
         @segment("routes")
         @key
         routeName: string,
-      }
+      },
+      ResourceName = "AppServicePlanVirtualNetworkConnectionRoute"
     > {}
 
 @tag("AppServicePlans")
@@ -79,7 +80,10 @@ interface VnetRoutes {
   @summary("Create or update a Virtual Network route in an App Service plan.")
   createOrUpdateVnetRoute is ArmResourceCreateOrReplaceSync<
     VnetRoute,
-    Response = ArmResourceUpdatedResponse<VnetRoute> | ArmBadRequestResponse | ArmNotFoundResponse,
+    Response =
+      | ArmResourceUpdatedResponse<VnetRoute>
+      | ArmBadRequestResponse
+      | ArmNotFoundResponse,
     Error = DefaultErrorResponse
   >;
 
@@ -91,7 +95,10 @@ interface VnetRoutes {
   updateVnetRoute is ArmCustomPatchSync<
     VnetRoute,
     PatchModel = VnetRoute,
-    Response = ArmResourceUpdatedResponse<VnetRoute> | ArmBadRequestResponse | ArmNotFoundResponse,
+    Response =
+      | ArmResourceUpdatedResponse<VnetRoute>
+      | ArmBadRequestResponse
+      | ArmNotFoundResponse,
     Error = DefaultErrorResponse
   >;
 
@@ -119,9 +126,11 @@ interface VnetRoutes {
 
 @@doc(VnetRoute.name, "Name of the Virtual Network route.");
 @@doc(VnetRoute.properties, "VnetRoute resource specific properties");
-@@doc(VnetRoutes.createOrUpdateVnetRoute::parameters.resource,
+@@doc(
+  VnetRoutes.createOrUpdateVnetRoute::parameters.resource,
   "Definition of the Virtual Network route."
 );
-@@doc(VnetRoutes.updateVnetRoute::parameters.properties,
+@@doc(
+  VnetRoutes.updateVnetRoute::parameters.properties,
   "Definition of the Virtual Network route."
 );

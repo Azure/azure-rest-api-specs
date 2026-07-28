@@ -8,11 +8,13 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.App;
 /**
  * Configuration to setup App Resiliency
  */
+@removed(Versions.v2026_01_01)
 model AppResiliency
   is Azure.ResourceManager.ProxyResource<AppResiliencyProperties> {
   ...ResourceNameParameter<
@@ -48,6 +50,7 @@ alias AppResiliencyOps = Azure.ResourceManager.Legacy.LegacyOperations<
   ErrorType = DefaultErrorResponse
 >;
 
+@removed(Versions.v2026_01_01)
 @armResourceOperations
 @tag("AppResiliency")
 interface AppResiliencies {
@@ -91,9 +94,11 @@ interface AppResiliencies {
 
 @@doc(AppResiliency.name, "Name of the resiliency policy.");
 @@doc(AppResiliency.properties, "App Resiliency resource specific properties");
-@@doc(AppResiliencies.createOrUpdate::parameters.resource,
+@@doc(
+  AppResiliencies.createOrUpdate::parameters.resource,
   "The resiliency policy to create or update."
 );
-@@doc(AppResiliencies.update::parameters.properties,
+@@doc(
+  AppResiliencies.update::parameters.properties,
   "The resiliency policy to update."
 );

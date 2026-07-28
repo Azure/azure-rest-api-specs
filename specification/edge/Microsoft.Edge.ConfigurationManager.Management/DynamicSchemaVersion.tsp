@@ -5,7 +5,6 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "./ProvisioningState.tsp";
-import "./DynamicSchemaVersion.tsp";
 import "./SchemaVersion.tsp";
 
 using TypeSpec.OpenAPI;

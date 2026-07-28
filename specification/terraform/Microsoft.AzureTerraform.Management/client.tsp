@@ -5,22 +5,26 @@ using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using Microsoft.AzureTerraform;
 
-@@clientName(Microsoft.AzureTerraform.Terraform,
+@@clientName(
+  Microsoft.AzureTerraform.Terraform,
   "TerraformInterface",
   "csharp"
 );
 @@clientName(Type, "CommonExportType", "csharp");
 @@clientName(BaseExportModel, "CommonExportProperties", "csharp");
-@@clientName(BaseExportModel.fullProperties,
+@@clientName(
+  BaseExportModel.fullProperties,
   "IsOutputFullPropertiesEnabled",
   "csharp"
 );
 @@clientName(BaseExportModel.maskSensitive, "IsMaskSensitiveEnabled", "csharp");
-@@clientName(BaseExportModel.excludeAzureResource,
+@@clientName(
+  BaseExportModel.excludeAzureResource,
   "AzureResourcesToExclude",
   "csharp"
 );
-@@clientName(BaseExportModel.excludeTerraformResource,
+@@clientName(
+  BaseExportModel.excludeTerraformResource,
   "TerraformResourcesToExclude",
   "csharp"
 );
@@ -33,7 +37,8 @@ using Microsoft.AzureTerraform;
 @@clientName(ExportResourceGroup, "ExportResourceGroupTerraform", "csharp");
 @@clientName(ExportResult, "TerraformExportResult", "csharp");
 @@clientName(ExportResult.skippedResources, "SkippedResourceIds", "csharp");
-@@clientName(ResourceProvisioningState,
+@@clientName(
+  ResourceProvisioningState,
   "TerraformResourceProvisioningState",
   "csharp"
 );
@@ -42,7 +47,8 @@ using Microsoft.AzureTerraform;
 @@clientName(targetProvider.azurerm, "AzureRM", "csharp");
 @@clientName(Terraform.exportTerraform, "ExportTerraform", "csharp");
 @@clientName(Microsoft.AzureTerraform, "TerraformMgmtClient", "python");
-@@clientName(authorizationScopeFilter,
+@@clientName(
+  authorizationScopeFilter,
   "TerraformAuthorizationScopeFilter",
   "csharp"
 );

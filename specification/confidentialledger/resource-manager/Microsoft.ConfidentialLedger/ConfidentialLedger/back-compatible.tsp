@@ -3,16 +3,20 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.ConfidentialLedger;
 
-@@clientName(ConfidentialLedgers.create::parameters.resource,
+@@clientName(
+  ConfidentialLedgers.create::parameters.resource,
   "confidentialLedger"
 );
-@@clientName(ConfidentialLedgers.update::parameters.properties,
+@@clientName(
+  ConfidentialLedgers.update::parameters.properties,
   "confidentialLedger"
 );
-@@clientName(ConfidentialLedgers.filesExport::parameters.body,
+@@clientName(
+  ConfidentialLedgers.filesExport::parameters.body,
   "confidentialLedger"
 );
-@@clientName(ConfidentialLedgerRestoreOps.restore::parameters.body,
+@@clientName(
+  ConfidentialLedgerRestoreOps.restore::parameters.body,
   "confidentialLedger"
 );
 

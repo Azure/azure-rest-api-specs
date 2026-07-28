@@ -185,7 +185,8 @@ interface ExtensionTypeVersionForReleaseTrainOperationGroup {
   >;
 }
 
-@@doc(ExtensionTypeVersionForReleaseTrain.name,
+@@doc(
+  ExtensionTypeVersionForReleaseTrain.name,
   "Version number of the Extension Type."
 );
 @@doc(ExtensionTypeVersionForReleaseTrain.properties, "");

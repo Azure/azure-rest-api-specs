@@ -96,9 +96,11 @@ interface SavingsPlanModels {
 
 @@doc(SavingsPlanModel.name, "ID of the savings plan");
 @@doc(SavingsPlanModel.properties, "Savings plan properties");
-@@doc(SavingsPlanModels.updateByBillingAccount::parameters.properties,
+@@doc(
+  SavingsPlanModels.updateByBillingAccount::parameters.properties,
   "Request body for patching a savings plan order alias"
 );
-@@doc(SavingsPlanModels.validateUpdateByBillingAccount::parameters.body,
+@@doc(
+  SavingsPlanModels.validateUpdateByBillingAccount::parameters.body,
   "Request body for patching a savings plan order alias"
 );

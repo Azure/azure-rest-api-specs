@@ -13,46 +13,60 @@ using TypeSpec.Versioning;
 namespace Microsoft.ComputeBulkActions;
 
 // --------------- Request Body Naming ---------------
-@@clientName(BulkActions.virtualMachinesExecuteDeallocate::parameters.body,
+@@clientName(
+  BulkActions.virtualMachinesExecuteDeallocate::parameters.body,
   "requestBody"
 );
-@@doc(BulkActions.virtualMachinesExecuteDeallocate::parameters.body,
+@@doc(
+  BulkActions.virtualMachinesExecuteDeallocate::parameters.body,
   "The request body"
 );
-@@clientName(BulkActions.virtualMachinesExecuteHibernate::parameters.body,
+@@clientName(
+  BulkActions.virtualMachinesExecuteHibernate::parameters.body,
   "requestBody"
 );
-@@doc(BulkActions.virtualMachinesExecuteHibernate::parameters.body,
+@@doc(
+  BulkActions.virtualMachinesExecuteHibernate::parameters.body,
   "The request body"
 );
-@@clientName(BulkActions.virtualMachinesExecuteStart::parameters.body,
+@@clientName(
+  BulkActions.virtualMachinesExecuteStart::parameters.body,
   "requestBody"
 );
-@@doc(BulkActions.virtualMachinesExecuteStart::parameters.body,
+@@doc(
+  BulkActions.virtualMachinesExecuteStart::parameters.body,
   "The request body"
 );
-@@clientName(BulkActions.virtualMachinesExecuteCreate::parameters.body,
+@@clientName(
+  BulkActions.virtualMachinesExecuteCreate::parameters.body,
   "requestBody"
 );
-@@doc(BulkActions.virtualMachinesExecuteCreate::parameters.body,
+@@doc(
+  BulkActions.virtualMachinesExecuteCreate::parameters.body,
   "The request body"
 );
-@@clientName(BulkActions.virtualMachinesExecuteDelete::parameters.body,
+@@clientName(
+  BulkActions.virtualMachinesExecuteDelete::parameters.body,
   "requestBody"
 );
-@@doc(BulkActions.virtualMachinesExecuteDelete::parameters.body,
+@@doc(
+  BulkActions.virtualMachinesExecuteDelete::parameters.body,
   "The request body"
 );
-@@clientName(BulkActions.virtualMachinesGetOperationStatus::parameters.body,
+@@clientName(
+  BulkActions.virtualMachinesGetOperationStatus::parameters.body,
   "requestBody"
 );
-@@doc(BulkActions.virtualMachinesGetOperationStatus::parameters.body,
+@@doc(
+  BulkActions.virtualMachinesGetOperationStatus::parameters.body,
   "The request body"
 );
-@@clientName(BulkActions.virtualMachinesCancelOperations::parameters.body,
+@@clientName(
+  BulkActions.virtualMachinesCancelOperations::parameters.body,
   "requestBody"
 );
-@@doc(BulkActions.virtualMachinesCancelOperations::parameters.body,
+@@doc(
+  BulkActions.virtualMachinesCancelOperations::parameters.body,
   "The request body"
 );
 

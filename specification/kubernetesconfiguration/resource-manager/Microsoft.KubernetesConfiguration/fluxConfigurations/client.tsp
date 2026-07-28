@@ -3,59 +3,71 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 
-@@clientName(Microsoft.KubernetesConfiguration,
+@@clientName(
+  Microsoft.KubernetesConfiguration,
   "KubernetesConfigurationFluxConfigurationsMgmtClient",
   "python"
 );
 
-@@clientName(Microsoft.KubernetesConfiguration,
+@@clientName(
+  Microsoft.KubernetesConfiguration,
   "FluxConfigurationClient",
   "javascript"
 );
 
 @@clientName(Microsoft.KubernetesConfiguration, "FluxConfigClient", "java");
-@@clientName(Microsoft.KubernetesConfiguration.KustomizationDefinition.wait,
+@@clientName(
+  Microsoft.KubernetesConfiguration.KustomizationDefinition.wait,
   "waitValue",
   "java"
 );
-@@clientName(Microsoft.KubernetesConfiguration.KustomizationPatchDefinition.wait,
+@@clientName(
+  Microsoft.KubernetesConfiguration.KustomizationPatchDefinition.wait,
   "waitValue",
   "java"
 );
 
-@@clientName(Microsoft.KubernetesConfiguration.OCIRepositoryDefinition,
+@@clientName(
+  Microsoft.KubernetesConfiguration.OCIRepositoryDefinition,
   "OciRepositoryDefinition",
   "java"
 );
 
-@@clientName(Microsoft.KubernetesConfiguration.OCIRepositoryRefDefinition,
+@@clientName(
+  Microsoft.KubernetesConfiguration.OCIRepositoryRefDefinition,
   "OciRepositoryRefDefinition",
   "java"
 );
 
-@@clientName(Microsoft.KubernetesConfiguration.SourceKindType.OCIRepository,
+@@clientName(
+  Microsoft.KubernetesConfiguration.SourceKindType.OCIRepository,
   "OciRepository",
   "java"
 );
 
-@@clientName(Microsoft.KubernetesConfiguration.OCIRepositoryPatchDefinition,
+@@clientName(
+  Microsoft.KubernetesConfiguration.OCIRepositoryPatchDefinition,
   "OciRepositoryPatchDefinition",
   "java"
 );
 
-@@clientName(Microsoft.KubernetesConfiguration.OCIRepositoryRefPatchDefinition,
+@@clientName(
+  Microsoft.KubernetesConfiguration.OCIRepositoryRefPatchDefinition,
   "OciRepositoryRefPatchDefinition",
   "java"
 );
-@@clientName(Microsoft.KubernetesConfiguration.FluxConfigurations.fluxConfigOperationStatusGet,
+@@clientName(
+  Microsoft.KubernetesConfiguration.FluxConfigurations.fluxConfigOperationStatusGet,
   "OperationStatus",
   "java"
 );
-@@clientName(Microsoft.KubernetesConfiguration.FluxConfigurations,
+@@clientName(
+  Microsoft.KubernetesConfiguration.FluxConfigurations,
   "FluxConfigs",
   "java"
 );
-@@clientName(Microsoft.KubernetesConfiguration.FluxConfigurationPatchProperties,
+@@clientName(
+  Microsoft.KubernetesConfiguration.FluxConfigurationPatchProperties,
   "FluxConfigPatchProperties",
   "java"
 );

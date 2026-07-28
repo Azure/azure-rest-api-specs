@@ -157,7 +157,10 @@ interface ExpressRouteCircuitPeerings {
   @autoRoute
   delete is ArmResourceDeleteWithoutOkAsync<
     ExpressRouteCircuitPeering,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -181,8 +184,10 @@ interface ExpressRouteCircuitPeerings {
     ExpressRouteCircuitPeering,
     void,
     void,
-    Response = ArmResponse<ExpressRouteCircuitsArpTableListResult> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ExpressRouteCircuitsArpTableListResult> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response =
+      | ArmResponse<ExpressRouteCircuitsArpTableListResult>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ExpressRouteCircuitsArpTableListResult> &
+          Azure.Core.Foundations.RetryAfterHeader>,
     OverrideErrorType = CloudError
   >;
 
@@ -196,8 +201,10 @@ interface ExpressRouteCircuitPeerings {
     ExpressRouteCircuitPeering,
     void,
     void,
-    Response = ArmResponse<ExpressRouteCircuitsRoutesTableListResult> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ExpressRouteCircuitsRoutesTableListResult> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response =
+      | ArmResponse<ExpressRouteCircuitsRoutesTableListResult>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ExpressRouteCircuitsRoutesTableListResult> &
+          Azure.Core.Foundations.RetryAfterHeader>,
     OverrideErrorType = CloudError
   >;
 
@@ -211,8 +218,10 @@ interface ExpressRouteCircuitPeerings {
     ExpressRouteCircuitPeering,
     void,
     void,
-    Response = ArmResponse<ExpressRouteCircuitsRoutesTableSummaryListResult> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ExpressRouteCircuitsRoutesTableSummaryListResult> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response =
+      | ArmResponse<ExpressRouteCircuitsRoutesTableSummaryListResult>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ExpressRouteCircuitsRoutesTableSummaryListResult> &
+          Azure.Core.Foundations.RetryAfterHeader>,
     OverrideErrorType = CloudError
   >;
 
@@ -232,9 +241,11 @@ interface ExpressRouteCircuitPeerings {
 }
 
 @@doc(ExpressRouteCircuitPeering.name, "The name of the peering.");
-@@doc(ExpressRouteCircuitPeering.properties,
+@@doc(
+  ExpressRouteCircuitPeering.properties,
   "Properties of the express route circuit peering."
 );
-@@doc(ExpressRouteCircuitPeerings.createOrUpdate::parameters.resource,
+@@doc(
+  ExpressRouteCircuitPeerings.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update express route circuit peering operation."
 );

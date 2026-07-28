@@ -115,7 +115,10 @@ interface EventSubscriptions {
    * Get properties of a nested event subscription for a domain topic.
    */
   @summary("Get a nested event subscription for domain topic.")
-  get is EventSubscriptionOps.Read<EventSubscription>;
+  get is EventSubscriptionOps.Read<
+    EventSubscription,
+    OverrideResourceName = "DomainTopicEventSubscription"
+  >;
 
   /**
    * Asynchronously creates a new event subscription or updates an existing event subscription.
@@ -124,7 +127,8 @@ interface EventSubscriptions {
   createOrUpdate is EventSubscriptionOps.CreateOrUpdateAsync<
     EventSubscription,
     LroHeaders = ArmLroLocationHeader<FinalResult = EventSubscription> &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    OverrideResourceName = "DomainTopicEventSubscription"
   >;
 
   /**
@@ -139,7 +143,8 @@ interface EventSubscriptions {
       EventSubscription,
       LroHeaders = ArmLroLocationHeader<FinalResult = EventSubscription> &
         Azure.Core.Foundations.RetryAfterHeader
-    >
+    >,
+    OverrideResourceName = "DomainTopicEventSubscription"
   >;
 
   /**
@@ -149,7 +154,11 @@ interface EventSubscriptions {
   @summary("Delete a nested event subscription for a domain topic.")
   delete is EventSubscriptionOps.DeleteWithoutOkAsync<
     EventSubscription,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
+    OverrideResourceName = "DomainTopicEventSubscription"
   >;
 
   /**
@@ -171,7 +180,8 @@ interface EventSubscriptions {
       @query("$top")
       $top?: int32;
     },
-    Response = ArmResponse<EventSubscriptionsListResult>
+    Response = ArmResponse<EventSubscriptionsListResult>,
+    OverrideResourceName = "DomainTopicEventSubscription"
   >;
 
   /**
@@ -181,7 +191,8 @@ interface EventSubscriptions {
   getDeliveryAttributes is EventSubscriptionOps.ActionSync<
     EventSubscription,
     void,
-    ArmResponse<DeliveryAttributeListResult>
+    ArmResponse<DeliveryAttributeListResult>,
+    OverrideResourceName = "DomainTopicEventSubscription"
   >;
 
   /**
@@ -191,7 +202,8 @@ interface EventSubscriptions {
   getFullUrl is EventSubscriptionOps.ActionSync<
     EventSubscription,
     void,
-    ArmResponse<EventSubscriptionFullUrl>
+    ArmResponse<EventSubscriptionFullUrl>,
+    OverrideResourceName = "DomainTopicEventSubscription"
   >;
 
   /**
@@ -214,7 +226,8 @@ interface EventSubscriptions {
       @query
       $top?: int32;
     },
-    Response = ArmResponse<EventSubscriptionsListResult>
+    Response = ArmResponse<EventSubscriptionsListResult>,
+    OverrideResourceName = "EventSubscription"
   >;
 
   /**
@@ -236,7 +249,8 @@ interface EventSubscriptions {
       @query("$top")
       $top?: int32;
     },
-    Response = ArmResponse<EventSubscriptionsListResult>
+    Response = ArmResponse<EventSubscriptionsListResult>,
+    OverrideResourceName = "DomainTopicEventSubscription"
   >;
 }
 alias TopicEventSubscriptionOps = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -267,7 +281,10 @@ interface TopicEventSubscriptions {
    * Get properties of an event subscription of a topic.
    */
   @summary("Get an event subscription of a topic.")
-  get is TopicEventSubscriptionOps.Read<EventSubscription>;
+  get is TopicEventSubscriptionOps.Read<
+    EventSubscription,
+    OverrideResourceName = "TopicEventSubscription"
+  >;
 
   /**
    * Asynchronously creates a new event subscription or updates an existing event subscription.
@@ -276,7 +293,8 @@ interface TopicEventSubscriptions {
   createOrUpdate is TopicEventSubscriptionOps.CreateOrUpdateAsync<
     EventSubscription,
     LroHeaders = ArmLroLocationHeader<FinalResult = EventSubscription> &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    OverrideResourceName = "TopicEventSubscription"
   >;
 
   /**
@@ -291,7 +309,8 @@ interface TopicEventSubscriptions {
       EventSubscription,
       LroHeaders = ArmLroLocationHeader<FinalResult = EventSubscription> &
         Azure.Core.Foundations.RetryAfterHeader
-    >
+    >,
+    OverrideResourceName = "TopicEventSubscription"
   >;
 
   /**
@@ -301,7 +320,11 @@ interface TopicEventSubscriptions {
   @summary("Delete an event subscription for a topic.")
   delete is TopicEventSubscriptionOps.DeleteWithoutOkAsync<
     EventSubscription,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
+    OverrideResourceName = "TopicEventSubscription"
   >;
 
   /**
@@ -323,7 +346,8 @@ interface TopicEventSubscriptions {
       @query("$top")
       $top?: int32;
     },
-    Response = ArmResponse<EventSubscriptionsListResult>
+    Response = ArmResponse<EventSubscriptionsListResult>,
+    OverrideResourceName = "TopicEventSubscription"
   >;
 
   /**
@@ -333,7 +357,8 @@ interface TopicEventSubscriptions {
   getDeliveryAttributes is TopicEventSubscriptionOps.ActionSync<
     EventSubscription,
     void,
-    ArmResponse<DeliveryAttributeListResult>
+    ArmResponse<DeliveryAttributeListResult>,
+    OverrideResourceName = "TopicEventSubscription"
   >;
 
   /**
@@ -343,7 +368,8 @@ interface TopicEventSubscriptions {
   getFullUrl is TopicEventSubscriptionOps.ActionSync<
     EventSubscription,
     void,
-    ArmResponse<EventSubscriptionFullUrl>
+    ArmResponse<EventSubscriptionFullUrl>,
+    OverrideResourceName = "TopicEventSubscription"
   >;
 }
 alias DomainEventSubscriptionOps = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -374,7 +400,10 @@ interface DomainEventSubscriptions {
    * Get properties of an event subscription of a domain.
    */
   @summary("Get an event subscription of a domain.")
-  get is DomainEventSubscriptionOps.Read<EventSubscription>;
+  get is DomainEventSubscriptionOps.Read<
+    EventSubscription,
+    OverrideResourceName = "DomainEventSubscription"
+  >;
 
   /**
    * Asynchronously creates a new event subscription or updates an existing event subscription.
@@ -383,7 +412,8 @@ interface DomainEventSubscriptions {
   createOrUpdate is DomainEventSubscriptionOps.CreateOrUpdateAsync<
     EventSubscription,
     LroHeaders = ArmLroLocationHeader<FinalResult = EventSubscription> &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    OverrideResourceName = "DomainEventSubscription"
   >;
 
   /**
@@ -397,7 +427,8 @@ interface DomainEventSubscriptions {
     Response = ArmResourceCreatedResponse<
       EventSubscription,
       LroHeaders = ArmLroLocationHeader<FinalResult = EventSubscription>
-    >
+    >,
+    OverrideResourceName = "DomainEventSubscription"
   >;
 
   /**
@@ -407,7 +438,11 @@ interface DomainEventSubscriptions {
   @summary("Delete an event subscription for a domain.")
   delete is DomainEventSubscriptionOps.DeleteWithoutOkAsync<
     EventSubscription,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
+    OverrideResourceName = "DomainEventSubscription"
   >;
 
   /**
@@ -429,7 +464,8 @@ interface DomainEventSubscriptions {
       @query("$top")
       $top?: int32;
     },
-    Response = ArmResponse<EventSubscriptionsListResult>
+    Response = ArmResponse<EventSubscriptionsListResult>,
+    OverrideResourceName = "DomainEventSubscription"
   >;
 
   /**
@@ -439,7 +475,8 @@ interface DomainEventSubscriptions {
   getDeliveryAttributes is DomainEventSubscriptionOps.ActionSync<
     EventSubscription,
     void,
-    ArmResponse<DeliveryAttributeListResult>
+    ArmResponse<DeliveryAttributeListResult>,
+    OverrideResourceName = "DomainEventSubscription"
   >;
 
   /**
@@ -449,7 +486,8 @@ interface DomainEventSubscriptions {
   getFullUrl is DomainEventSubscriptionOps.ActionSync<
     EventSubscription,
     void,
-    ArmResponse<EventSubscriptionFullUrl>
+    ArmResponse<EventSubscriptionFullUrl>,
+    OverrideResourceName = "DomainEventSubscription"
   >;
 }
 alias EventSubscriptionOperationGroupOps = Azure.ResourceManager.Legacy.ExtensionOperations<
@@ -484,7 +522,10 @@ interface EventSubscriptionOperationGroup {
    * Get properties of an event subscription.
    */
   @summary("Get an event subscription.")
-  get is EventSubscriptionOperationGroupOps.Read<EventSubscription>;
+  get is EventSubscriptionOperationGroupOps.Read<
+    EventSubscription,
+    OverrideResourceName = "EventSubscription"
+  >;
 
   /**
    * Asynchronously creates a new event subscription or updates an existing event subscription based on the specified scope.
@@ -497,7 +538,8 @@ interface EventSubscriptionOperationGroup {
       EventSubscription,
       ArmLroLocationHeader<FinalResult = EventSubscription> &
         Azure.Core.Foundations.RetryAfterHeader
-    >
+    >,
+    OverrideResourceName = "EventSubscription"
   >;
 
   /**
@@ -511,7 +553,8 @@ interface EventSubscriptionOperationGroup {
     Response = ArmResourceCreatedResponse<
       EventSubscription,
       LroHeaders = ArmLroLocationHeader<FinalResult = EventSubscription>
-    >
+    >,
+    OverrideResourceName = "EventSubscription"
   >;
 
   /**
@@ -521,7 +564,11 @@ interface EventSubscriptionOperationGroup {
   @summary("Delete an event subscription.")
   delete is EventSubscriptionOperationGroupOps.DeleteWithoutOkAsync<
     EventSubscription,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
+    OverrideResourceName = "EventSubscription"
   >;
 
   /**
@@ -544,7 +591,8 @@ interface EventSubscriptionOperationGroup {
       @query("$top")
       $top?: int32;
     },
-    Response = ArmResponse<EventSubscriptionsListResult>
+    Response = ArmResponse<EventSubscriptionsListResult>,
+    OverrideResourceName = "EventSubscription"
   >;
 
   /**
@@ -566,7 +614,8 @@ interface EventSubscriptionOperationGroup {
       @query("$top")
       $top?: int32;
     },
-    Response = ArmResponse<EventSubscriptionsListResult>
+    Response = ArmResponse<EventSubscriptionsListResult>,
+    OverrideResourceName = "EventSubscription"
   >;
   /**
    * Get all delivery attributes for an event subscription.
@@ -575,7 +624,8 @@ interface EventSubscriptionOperationGroup {
   getDeliveryAttributes is EventSubscriptionOperationGroupOps.ActionSync<
     Extension.ScopeParameter,
     void,
-    ArmResponse<DeliveryAttributeListResult>
+    ArmResponse<DeliveryAttributeListResult>,
+    OverrideResourceName = "EventSubscription"
   >;
 
   /**
@@ -585,7 +635,8 @@ interface EventSubscriptionOperationGroup {
   getFullUrl is EventSubscriptionOperationGroupOps.ActionSync<
     Extension.ScopeParameter,
     void,
-    ArmResponse<EventSubscriptionFullUrl>
+    ArmResponse<EventSubscriptionFullUrl>,
+    OverrideResourceName = "EventSubscription"
   >;
 }
 alias SystemTopicEventSubscriptionOps = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -616,7 +667,10 @@ interface SystemTopicEventSubscriptions {
    * Get an event subscription.
    */
   @summary("Get an event subscription of a system topic.")
-  get is SystemTopicEventSubscriptionOps.Read<EventSubscription>;
+  get is SystemTopicEventSubscriptionOps.Read<
+    EventSubscription,
+    OverrideResourceName = "SystemTopicEventSubscription"
+  >;
 
   /**
    * Asynchronously creates or updates an event subscription with the specified parameters. Existing event subscriptions will be updated with this API.
@@ -629,7 +683,8 @@ interface SystemTopicEventSubscriptions {
       EventSubscription,
       ArmLroLocationHeader<FinalResult = EventSubscription> &
         Azure.Core.Foundations.RetryAfterHeader
-    >
+    >,
+    OverrideResourceName = "SystemTopicEventSubscription"
   >;
 
   /**
@@ -644,7 +699,8 @@ interface SystemTopicEventSubscriptions {
       EventSubscription,
       LroHeaders = ArmLroLocationHeader<FinalResult = EventSubscription> &
         Azure.Core.Foundations.RetryAfterHeader
-    >
+    >,
+    OverrideResourceName = "SystemTopicEventSubscription"
   >;
 
   /**
@@ -654,7 +710,11 @@ interface SystemTopicEventSubscriptions {
   @summary("Delete an event subscription of a system topic.")
   delete is SystemTopicEventSubscriptionOps.DeleteWithoutOkAsync<
     EventSubscription,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
+    OverrideResourceName = "SystemTopicEventSubscription"
   >;
 
   /**
@@ -676,7 +736,8 @@ interface SystemTopicEventSubscriptions {
       @query("$top")
       $top?: int32;
     },
-    Response = ArmResponse<EventSubscriptionsListResult>
+    Response = ArmResponse<EventSubscriptionsListResult>,
+    OverrideResourceName = "SystemTopicEventSubscription"
   >;
 
   /**
@@ -686,7 +747,8 @@ interface SystemTopicEventSubscriptions {
   getDeliveryAttributes is SystemTopicEventSubscriptionOps.ActionSync<
     EventSubscription,
     void,
-    ArmResponse<DeliveryAttributeListResult>
+    ArmResponse<DeliveryAttributeListResult>,
+    OverrideResourceName = "SystemTopicEventSubscription"
   >;
 
   /**
@@ -696,7 +758,8 @@ interface SystemTopicEventSubscriptions {
   getFullUrl is SystemTopicEventSubscriptionOps.ActionSync<
     EventSubscription,
     void,
-    ArmResponse<EventSubscriptionFullUrl>
+    ArmResponse<EventSubscriptionFullUrl>,
+    OverrideResourceName = "SystemTopicEventSubscription"
   >;
 }
 alias PartnerTopicEventSubscriptionOps = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -727,7 +790,10 @@ interface PartnerTopicEventSubscriptions {
    * Get properties of an event subscription of a partner topic.
    */
   @summary("Get an event subscription of a partner topic.")
-  get is PartnerTopicEventSubscriptionOps.Read<EventSubscription>;
+  get is PartnerTopicEventSubscriptionOps.Read<
+    EventSubscription,
+    OverrideResourceName = "PartnerTopicEventSubscription"
+  >;
 
   /**
    * Asynchronously creates or updates an event subscription of a partner topic with the specified parameters. Existing event subscriptions will be updated with this API.
@@ -736,7 +802,8 @@ interface PartnerTopicEventSubscriptions {
   createOrUpdate is PartnerTopicEventSubscriptionOps.CreateOrUpdateAsync<
     EventSubscription,
     LroHeaders = ArmLroLocationHeader<FinalResult = EventSubscription> &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    OverrideResourceName = "PartnerTopicEventSubscription"
   >;
 
   /**
@@ -751,7 +818,8 @@ interface PartnerTopicEventSubscriptions {
       EventSubscription,
       LroHeaders = ArmLroLocationHeader<FinalResult = EventSubscription> &
         Azure.Core.Foundations.RetryAfterHeader
-    >
+    >,
+    OverrideResourceName = "PartnerTopicEventSubscription"
   >;
 
   /**
@@ -761,7 +829,11 @@ interface PartnerTopicEventSubscriptions {
   @summary("Delete an event subscription of a partner topic.")
   delete is PartnerTopicEventSubscriptionOps.DeleteWithoutOkAsync<
     EventSubscription,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
+    OverrideResourceName = "PartnerTopicEventSubscription"
   >;
 
   /**
@@ -783,7 +855,8 @@ interface PartnerTopicEventSubscriptions {
       @query("$top")
       $top?: int32;
     },
-    Response = ArmResponse<EventSubscriptionsListResult>
+    Response = ArmResponse<EventSubscriptionsListResult>,
+    OverrideResourceName = "PartnerTopicEventSubscription"
   >;
 
   /**
@@ -793,7 +866,8 @@ interface PartnerTopicEventSubscriptions {
   getFullUrl is PartnerTopicEventSubscriptionOps.ActionSync<
     EventSubscription,
     void,
-    ArmResponse<EventSubscriptionFullUrl>
+    ArmResponse<EventSubscriptionFullUrl>,
+    OverrideResourceName = "PartnerTopicEventSubscription"
   >;
 
   /**
@@ -803,45 +877,58 @@ interface PartnerTopicEventSubscriptions {
   getDeliveryAttributes is PartnerTopicEventSubscriptionOps.ActionSync<
     EventSubscription,
     void,
-    ArmResponse<DeliveryAttributeListResult>
+    ArmResponse<DeliveryAttributeListResult>,
+    OverrideResourceName = "PartnerTopicEventSubscription"
   >;
 }
 
 @@doc(EventSubscription.name, "Name of the event subscription to be found.");
 @@doc(EventSubscription.properties, "Properties of the event subscription.");
-@@doc(EventSubscriptions.createOrUpdate::parameters.resource,
+@@doc(
+  EventSubscriptions.createOrUpdate::parameters.resource,
   "Event subscription properties containing the destination and filter information."
 );
-@@doc(EventSubscriptions.update::parameters.properties,
+@@doc(
+  EventSubscriptions.update::parameters.properties,
   "Updated event subscription information."
 );
-@@doc(TopicEventSubscriptions.createOrUpdate::parameters.resource,
+@@doc(
+  TopicEventSubscriptions.createOrUpdate::parameters.resource,
   "Event subscription properties containing the destination and filter information."
 );
-@@doc(TopicEventSubscriptions.update::parameters.properties,
+@@doc(
+  TopicEventSubscriptions.update::parameters.properties,
   "Updated event subscription information."
 );
-@@doc(DomainEventSubscriptions.createOrUpdate::parameters.resource,
+@@doc(
+  DomainEventSubscriptions.createOrUpdate::parameters.resource,
   "Event subscription properties containing the destination and filter information."
 );
-@@doc(DomainEventSubscriptions.update::parameters.properties,
+@@doc(
+  DomainEventSubscriptions.update::parameters.properties,
   "Updated event subscription information."
 );
-@@doc(EventSubscriptionOperationGroup.createOrUpdate::parameters.resource,
+@@doc(
+  EventSubscriptionOperationGroup.createOrUpdate::parameters.resource,
   "Event subscription properties containing the destination and filter information."
 );
-@@doc(EventSubscriptionOperationGroup.update::parameters.properties,
+@@doc(
+  EventSubscriptionOperationGroup.update::parameters.properties,
   "Updated event subscription information."
 );
-@@doc(SystemTopicEventSubscriptions.createOrUpdate::parameters.resource,
+@@doc(
+  SystemTopicEventSubscriptions.createOrUpdate::parameters.resource,
   "Event subscription properties containing the destination and filter information."
 );
-@@doc(SystemTopicEventSubscriptions.update::parameters.properties,
+@@doc(
+  SystemTopicEventSubscriptions.update::parameters.properties,
   "Updated event subscription information."
 );
-@@doc(PartnerTopicEventSubscriptions.createOrUpdate::parameters.resource,
+@@doc(
+  PartnerTopicEventSubscriptions.createOrUpdate::parameters.resource,
   "Event subscription properties containing the destination and filter information."
 );
-@@doc(PartnerTopicEventSubscriptions.update::parameters.properties,
+@@doc(
+  PartnerTopicEventSubscriptions.update::parameters.properties,
   "Updated event subscription information."
 );

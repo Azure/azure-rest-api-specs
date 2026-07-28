@@ -14,8 +14,10 @@ namespace Microsoft.DesktopVirtualization;
 /**
  * Represents a HostPool definition.
  */
-model HostPool
-  is Azure.ResourceManager.TrackedResource<HostPoolProperties, false> {
+model HostPool is Azure.ResourceManager.TrackedResource<
+  HostPoolProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = HostPool,
     KeyName = "hostPoolName",
@@ -233,11 +235,13 @@ interface HostPools {
 
 @@maxLength(HostPool.name, 64);
 @@minLength(HostPool.name, 3);
-@@doc(HostPool.name,
+@@doc(
+  HostPool.name,
   "The name of the host pool within the specified resource group"
 );
 @@doc(HostPool.properties, "Detailed properties for HostPool");
-@@doc(HostPools.createOrUpdate::parameters.resource,
+@@doc(
+  HostPools.createOrUpdate::parameters.resource,
   "Object containing HostPool definitions."
 );
 @@clientName(HostPools.update::parameters.body, "hostPool");

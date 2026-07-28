@@ -13,22 +13,23 @@ namespace Microsoft.NetworkCloud;
  * The name of the access bridge.
  */
 @added(Versions.v2026_01_01_preview)
-model AccessBridgeNameParameter
-  is ResourceNameParameter<
-    Resource = AccessBridge,
-    KeyName = "accessBridgeName",
-    SegmentName = "accessBridges",
-    NamePattern = "",
-    Type = AccessBridgeAllowedName
-  >;
+model AccessBridgeNameParameter is ResourceNameParameter<
+  Resource = AccessBridge,
+  KeyName = "accessBridgeName",
+  SegmentName = "accessBridges",
+  NamePattern = "",
+  Type = AccessBridgeAllowedName
+>;
 
 /**
  * AccessBridge represents a managed access bridge resource.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "legacy resource using legacy features"
 @added(Versions.v2026_01_01_preview)
-model AccessBridge
-  is Azure.ResourceManager.TrackedResource<AccessBridgeProperties, false> {
+model AccessBridge is Azure.ResourceManager.TrackedResource<
+  AccessBridgeProperties,
+  false
+> {
   ...AccessBridgeNameParameter;
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
   ...RequiredExtendedLocationProperty;
@@ -75,7 +76,9 @@ interface AccessBridges {
       ...IfMatchParameter;
       ...IfNoneMatchParameter;
     },
-    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -105,7 +108,8 @@ interface AccessBridges {
 
 @@doc(AccessBridge.name, "The name of the access bridge.");
 @@doc(AccessBridge.properties, "The list of the resource properties.");
-@@doc(AccessBridges.createOrUpdate::parameters.resource,
+@@doc(
+  AccessBridges.createOrUpdate::parameters.resource,
   "The access bridge configuration."
 );
 @@doc(AccessBridges.update::parameters.properties, "The request body.");

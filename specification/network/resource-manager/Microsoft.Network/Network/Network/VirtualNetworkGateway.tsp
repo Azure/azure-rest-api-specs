@@ -90,7 +90,10 @@ interface VirtualNetworkGateways {
   @tag("VirtualNetworkGateways")
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualNetworkGateway,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -538,36 +541,47 @@ interface VirtualNetworkGateways {
 }
 
 @@doc(VirtualNetworkGateway.name, "The name of the virtual network gateway.");
-@@doc(VirtualNetworkGateway.properties,
+@@doc(
+  VirtualNetworkGateway.properties,
   "Properties of the virtual network gateway."
 );
-@@doc(VirtualNetworkGateways.createOrUpdate::parameters.resource,
+@@doc(
+  VirtualNetworkGateways.createOrUpdate::parameters.resource,
   "Parameters supplied to create or update virtual network gateway operation."
 );
-@@doc(VirtualNetworkGateways.updateTags::parameters.properties,
+@@doc(
+  VirtualNetworkGateways.updateTags::parameters.properties,
   "Parameters supplied to update virtual network gateway tags."
 );
-@@doc(VirtualNetworkGateways.generatevpnclientpackage::parameters.body,
+@@doc(
+  VirtualNetworkGateways.generatevpnclientpackage::parameters.body,
   "Parameters supplied to the generate virtual network gateway VPN client package operation."
 );
-@@doc(VirtualNetworkGateways.generateVpnProfile::parameters.body,
+@@doc(
+  VirtualNetworkGateways.generateVpnProfile::parameters.body,
   "Parameters supplied to the generate virtual network gateway VPN client package operation."
 );
-@@doc(VirtualNetworkGateways.setVpnclientIpsecParameters::parameters.body,
+@@doc(
+  VirtualNetworkGateways.setVpnclientIpsecParameters::parameters.body,
   "Parameters supplied to the Begin Set vpnclient ipsec parameters of Virtual Network Gateway P2S client operation through Network resource provider."
 );
-@@doc(VirtualNetworkGateways.startPacketCapture::parameters.body,
+@@doc(
+  VirtualNetworkGateways.startPacketCapture::parameters.body,
   "Virtual network gateway packet capture parameters supplied to start packet capture on gateway."
 );
-@@doc(VirtualNetworkGateways.stopPacketCapture::parameters.body,
+@@doc(
+  VirtualNetworkGateways.stopPacketCapture::parameters.body,
   "Virtual network gateway packet capture parameters supplied to stop packet capture on gateway."
 );
-@@doc(VirtualNetworkGateways.stopExpressRouteSiteFailoverSimulation::parameters.body,
+@@doc(
+  VirtualNetworkGateways.stopExpressRouteSiteFailoverSimulation::parameters.body,
   "Virtual network gateway stop simulation parameters supplied to stop failover simulation on gateway."
 );
-@@doc(VirtualNetworkGateways.disconnectVirtualNetworkGatewayVpnConnections::parameters.body,
+@@doc(
+  VirtualNetworkGateways.disconnectVirtualNetworkGatewayVpnConnections::parameters.body,
   "The parameters are supplied to disconnect vpn connections."
 );
-@@doc(VirtualNetworkGateways.invokePrepareMigration::parameters.body,
+@@doc(
+  VirtualNetworkGateways.invokePrepareMigration::parameters.body,
   "Parameters supplied to the Begin Prepare migration on basic vpn gateway through Network resource provider."
 );

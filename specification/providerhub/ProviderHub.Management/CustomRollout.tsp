@@ -13,8 +13,10 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.ProviderHub;
 
 @parentResource(ProviderRegistration)
-model CustomRollout
-  is Azure.ResourceManager.ProxyResource<CustomRolloutProperties, false> {
+model CustomRollout is Azure.ResourceManager.ProxyResource<
+  CustomRolloutProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = CustomRollout,
     KeyName = "rolloutName",
@@ -57,6 +59,7 @@ interface CustomRollouts {
 @@maxLength(CustomRollout.name, 260);
 @@doc(CustomRollout.name, "The rollout name.");
 @@doc(CustomRollout.properties, "Properties of the rollout.");
-@@doc(CustomRollouts.createOrUpdate::parameters.resource,
+@@doc(
+  CustomRollouts.createOrUpdate::parameters.resource,
   "The custom rollout properties supplied to the CreateOrUpdate operation."
 );

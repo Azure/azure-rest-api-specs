@@ -17,8 +17,10 @@ namespace Microsoft.Storage;
  */
 @parentResource(StorageAccount)
 @added(Versions.v2025_08_01)
-model Connector
-  is Azure.ResourceManager.TrackedResource<StorageConnectorProperties, false> {
+model Connector is Azure.ResourceManager.TrackedResource<
+  StorageConnectorProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = Connector,
     KeyName = "connectorName",
@@ -43,7 +45,7 @@ interface Connectors {
   /**
    * Update a Storage Connector.
    */
-  update is ArmResourcePatchAsync<Connector, StorageConnectorProperties>;
+  update is ArmCustomPatchAsync<Connector, PatchModel = ConnectorUpdate>;
 
   /**
    * Delete a Storage Connector.
@@ -72,12 +74,15 @@ interface Connectors {
 @@minLength(Connector.name, 3);
 @@doc(Connector.name, "The name of the Storage Connector.");
 @@doc(Connector.properties, "The properties of the Storage Connector.");
-@@doc(Connectors.create::parameters.resource,
+@@doc(
+  Connectors.create::parameters.resource,
   "Create a Storage Connector if it does not already exist; otherwise, error out. This API will not allow you to replace an already existing resource."
 );
-@@doc(Connectors.update::parameters.properties,
+@@doc(
+  Connectors.update::parameters.properties,
   "The updated properties of the Storage Connector."
 );
-@@doc(Connectors.testExistingConnection::parameters.body,
+@@doc(
+  Connectors.testExistingConnection::parameters.body,
   "This method is used to verify that the connection to the backing data store works. This API is designed to be used for monitoring and debugging purposes. From the caller’s perspective, this method does the following: Calls List on the backing data store, attempting to list up to one blob/object/etc. If the above succeeds, and if a blob/object/etc is found, calls Get on that object, attempting to download one byte."
 );

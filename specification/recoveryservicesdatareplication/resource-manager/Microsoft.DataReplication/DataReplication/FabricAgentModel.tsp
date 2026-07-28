@@ -26,7 +26,8 @@ model FabricAgentModel
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-openapi"
-@@OpenAPI.extension(FabricAgent.create::parameters.resource,
+@@OpenAPI.extension(
+  FabricAgent.create::parameters.resource,
   "x-ms-client-name",
   "body"
 );

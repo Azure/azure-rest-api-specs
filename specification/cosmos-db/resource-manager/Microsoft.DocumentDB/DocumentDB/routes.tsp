@@ -31,7 +31,10 @@ interface DatabaseAccountsOperationGroup {
     @pattern("^[a-z0-9]+(-[a-z0-9]+)*")
     @path
     accountName: string,
-  ): OkResponse | NotFoundResponse | Azure.ResourceManager.CommonTypes.ErrorResponse;
+  ):
+    | OkResponse
+    | NotFoundResponse
+    | Azure.ResourceManager.CommonTypes.ErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

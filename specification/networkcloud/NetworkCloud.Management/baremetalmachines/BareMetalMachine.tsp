@@ -7,25 +7,27 @@ import "./BareMetalMachine_models.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Microsoft.NetworkCloud;
 /**
  * The name of the bare metal machine.
  */
-model BareMetalMachineNameParameter
-  is ResourceNameParameter<
-    Resource = BareMetalMachine,
-    KeyName = "bareMetalMachineName",
-    SegmentName = "bareMetalMachines",
-    NamePattern = "^([a-zA-Z0-9][a-zA-Z0-9]{0,62}[a-zA-Z0-9])$"
-  >;
+model BareMetalMachineNameParameter is ResourceNameParameter<
+  Resource = BareMetalMachine,
+  KeyName = "bareMetalMachineName",
+  SegmentName = "bareMetalMachines",
+  NamePattern = "^([a-zA-Z0-9][a-zA-Z0-9]{0,62}[a-zA-Z0-9])$"
+>;
 
 /**
  * BareMetalMachine represents the physical machine in the rack.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "legacy resource using legacy features"
-model BareMetalMachine
-  is Azure.ResourceManager.TrackedResource<BareMetalMachineProperties, false> {
+model BareMetalMachine is Azure.ResourceManager.TrackedResource<
+  BareMetalMachineProperties,
+  false
+> {
   ...BareMetalMachineNameParameter;
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
   ...RequiredExtendedLocationProperty;
@@ -76,7 +78,9 @@ interface BareMetalMachines {
       ...IfMatchParameter;
       ...IfNoneMatchParameter;
     },
-    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -123,10 +127,26 @@ interface BareMetalMachines {
     OptionalRequestBody = true
   >;
 
+  // Note: added optional body with 2026-05-01-preview to support safeguard mode parameter.
   /**
    * Reimage the provided bare metal machine.
    */
-  reimage is ActionAsync<BareMetalMachine, void, OperationStatusResult>;
+  @renamedFrom(Versions.v2026_05_01_preview, "reimage")
+  @removed(Versions.v2026_05_01_preview)
+  @sharedRoute
+  reimageOld is ActionAsync<BareMetalMachine, void, OperationStatusResult>;
+
+  /**
+   * Reimage the provided bare metal machine.
+   */
+  @added(Versions.v2026_05_01_preview)
+  @sharedRoute
+  reimage is ActionAsync<
+    BareMetalMachine,
+    BareMetalMachineReimageParameters,
+    OperationStatusResult,
+    OptionalRequestBody = true
+  >;
 
   /**
    * Replace the provided bare metal machine.
@@ -192,7 +212,8 @@ interface BareMetalMachines {
 
 @@doc(BareMetalMachine.name, "The name of the bare metal machine.");
 @@doc(BareMetalMachine.properties, "The list of the resource properties.");
-@@doc(BareMetalMachines.createOrUpdate::parameters.resource,
+@@doc(
+  BareMetalMachines.createOrUpdate::parameters.resource,
   "The request body."
 );
 @@doc(BareMetalMachines.update::parameters.properties, "The request body.");
@@ -201,7 +222,8 @@ interface BareMetalMachines {
 @@doc(BareMetalMachines.replace::parameters.body, "The request body.");
 @@doc(BareMetalMachines.runCommand::parameters.body, "The request body.");
 @@doc(BareMetalMachines.runDataExtracts::parameters.body, "The request body.");
-@@doc(BareMetalMachines.runDataExtractsRestricted::parameters.body,
+@@doc(
+  BareMetalMachines.runDataExtractsRestricted::parameters.body,
   "The request body."
 );
 @@doc(BareMetalMachines.runReadCommands::parameters.body, "The request body.");

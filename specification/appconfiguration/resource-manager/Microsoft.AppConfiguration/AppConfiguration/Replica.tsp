@@ -50,8 +50,11 @@ interface Replicas {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     Replica,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -71,6 +74,7 @@ interface Replicas {
 
 @@doc(Replica.name, "The name of the replica.");
 @@doc(Replica.properties, "All replica properties.");
-@@doc(Replicas.create::parameters.resource,
+@@doc(
+  Replicas.create::parameters.resource,
   "The parameters for creating a replica."
 );

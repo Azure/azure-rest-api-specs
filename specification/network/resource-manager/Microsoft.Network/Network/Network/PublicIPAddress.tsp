@@ -166,7 +166,10 @@ interface PublicIPAddressOperationGroup {
   @tag("PublicIPAddresses")
   delete is PublicIPAddressOperationGroupOps.DeleteWithoutOkAsync<
     PublicIPAddress,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     OverrideErrorType = CloudError
   >;
 
@@ -207,8 +210,10 @@ interface PublicIPAddressOperationGroup {
     PublicIPAddress,
     ReserveCloudServicePublicIpAddressRequest,
     Result = void,
-    Response = ArmResponse<PublicIPAddress> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PublicIPAddress> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response =
+      | ArmResponse<PublicIPAddress>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PublicIPAddress> &
+          Azure.Core.Foundations.RetryAfterHeader>,
     OverrideErrorType = CloudError
   >;
 
@@ -220,23 +225,29 @@ interface PublicIPAddressOperationGroup {
     PublicIPAddress,
     DisassociateCloudServicePublicIpRequest,
     Result = void,
-    Response = ArmResponse<PublicIPAddress> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PublicIPAddress> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response =
+      | ArmResponse<PublicIPAddress>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PublicIPAddress> &
+          Azure.Core.Foundations.RetryAfterHeader>,
     OverrideErrorType = CloudError
   >;
 }
 
 @@doc(PublicIPAddress.name, "The name of the public IP Address.");
 @@doc(PublicIPAddress.properties, "Public IP address properties.");
-@@doc(PublicIPAddressOperationGroup.createOrUpdate::parameters.resource,
+@@doc(
+  PublicIPAddressOperationGroup.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update public IP address operation."
 );
-@@doc(PublicIPAddressOperationGroup.updateTags::parameters.properties,
+@@doc(
+  PublicIPAddressOperationGroup.updateTags::parameters.properties,
   "Parameters supplied to update public IP address tags."
 );
-@@doc(PublicIPAddressOperationGroup.reserveCloudServicePublicIpAddress::parameters.body,
+@@doc(
+  PublicIPAddressOperationGroup.reserveCloudServicePublicIpAddress::parameters.body,
   "Parameter that define which Public IP Address should be associated in place of given Public IP Address."
 );
-@@doc(PublicIPAddressOperationGroup.disassociateCloudServiceReservedPublicIp::parameters.body,
+@@doc(
+  PublicIPAddressOperationGroup.disassociateCloudServiceReservedPublicIp::parameters.body,
   "Parameter that define which Public IP Address should be associated in place of given Public IP Address."
 );

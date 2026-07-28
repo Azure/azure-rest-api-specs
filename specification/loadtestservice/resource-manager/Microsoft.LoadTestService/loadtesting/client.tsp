@@ -12,7 +12,8 @@ namespace Customizations;
 @@clientName(type, "LoadTestingCmkIdentityType", "csharp");
 @@clientName(LoadTestResource, "LoadTestingResource", "csharp");
 @@clientName(QuotaResource, "LoadTestingQuota", "csharp");
-@@clientName(EncryptionProperties,
+@@clientName(
+  EncryptionProperties,
   "LoadTestingCmkEncryptionProperties",
   "csharp"
 );
@@ -20,35 +21,42 @@ namespace Customizations;
 @@clientName(EndpointDependency, "LoadTestingEndpointDependency", "csharp");
 @@clientName(EndpointDetail, "LoadTestingEndpointDetail", "csharp");
 @@clientName(QuotaBucketRequest, "LoadTestingQuotaBucketContent", "csharp");
-@@clientName(QuotaBucketRequestPropertiesDimensions,
+@@clientName(
+  QuotaBucketRequestPropertiesDimensions,
   "LoadTestingQuotaBucketDimensions",
   "csharp"
 );
 @@clientName(ResourceState, "LoadTestingProvisioningState", "csharp");
-@@clientName(QuotaBucketRequestPropertiesDimensions,
+@@clientName(
+  QuotaBucketRequestPropertiesDimensions,
   "LoadTestingQuotaBucketDimensions",
   "csharp"
 );
-@@clientName(OutboundEnvironmentEndpoint,
+@@clientName(
+  OutboundEnvironmentEndpoint,
   "LoadTestingOutboundEnvironmentEndpoint",
   "csharp"
 );
-@@clientName(Quotas.checkAvailability,
+@@clientName(
+  Quotas.checkAvailability,
   "CheckLoadTestingQuotaAvailability",
   "csharp"
 );
-@@clientName(LoadTests.outboundNetworkDependenciesEndpoints,
+@@clientName(
+  LoadTests.outboundNetworkDependenciesEndpoints,
   "GetOutboundNetworkDependenciesEndpoints",
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(QuotaResource.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  QuotaResource.properties,
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(LoadTestResource.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  LoadTestResource.properties,
   "csharp"
 );
 
@@ -65,12 +73,14 @@ model CheckQuotaAvailabilityResponseReplacement
   ...OmitProperties<CheckQuotaAvailabilityResponse, "id" | "name" | "type">;
 }
 
-@@alternateType(CheckQuotaAvailabilityResponse,
+@@alternateType(
+  CheckQuotaAvailabilityResponse,
   CheckQuotaAvailabilityResponseReplacement,
   "csharp"
 );
 
-@@clientName(CheckQuotaAvailabilityResponseReplacement,
+@@clientName(
+  CheckQuotaAvailabilityResponseReplacement,
   "LoadTestingQuotaAvailabilityResult",
   "csharp"
 );
@@ -86,76 +96,91 @@ model QuotaBucketRequestReplacement
 }
 @@alternateType(QuotaBucketRequest, QuotaBucketRequestReplacement, "csharp");
 
-@@clientName(QuotaBucketRequestReplacement,
+@@clientName(
+  QuotaBucketRequestReplacement,
   "LoadTestingQuotaBucketContent",
   "csharp"
 );
-@@alternateType(QuotaBucketRequestPropertiesDimensions.location,
+@@alternateType(
+  QuotaBucketRequestPropertiesDimensions.location,
   Azure.Core.azureLocation,
   "csharp"
 );
 
-@@usage(CheckQuotaAvailabilityResponseReplacement,
+@@usage(
+  CheckQuotaAvailabilityResponseReplacement,
   Usage.input | Usage.output,
   "csharp"
 );
 
-@@alternateType(EncryptionPropertiesIdentity.resourceId,
+@@alternateType(
+  EncryptionPropertiesIdentity.resourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
 @@clientName(EncryptionPropertiesIdentity.type, "IdentityType", "csharp");
 
 // Fix breaking changes: preserve method names from 1.1.2 GA
-@@clientName(Microsoft.LoadTestService.Quotas.checkAvailability,
+@@clientName(
+  Microsoft.LoadTestService.Quotas.checkAvailability,
   "CheckLoadTestingQuotaAvailability",
   "csharp"
 );
-@@clientName(Microsoft.LoadTestService.LoadTests.outboundNetworkDependenciesEndpoints,
+@@clientName(
+  Microsoft.LoadTestService.LoadTests.outboundNetworkDependenciesEndpoints,
   "GetOutboundNetworkDependenciesEndpoints",
   "csharp"
 );
 
 // Fix naming: model ends with 'Request', should use 'Content' suffix (AZC0030)
-@@clientName(MaxMonthlyVirtualUserHoursLimitRequest,
+@@clientName(
+  MaxMonthlyVirtualUserHoursLimitRequest,
   "MaxMonthlyVirtualUserHoursLimitContent",
   "csharp"
 );
 
 // Remove 'Resource' from model names
 @@clientName(LoadTestMappingResource, "LoadTestMapping", "csharp");
-@@clientName(LoadTestProfileMappingResource,
+@@clientName(
+  LoadTestProfileMappingResource,
   "LoadTestProfileMapping",
   "csharp"
 );
-@@clientName(MaxMonthlyVirtualUserHoursResourceProperties,
+@@clientName(
+  MaxMonthlyVirtualUserHoursResourceProperties,
   "MaxMonthlyVirtualUserHoursProperties",
   "csharp"
 );
-@@clientName(MaxMonthlyVirtualUserHoursResource,
+@@clientName(
+  MaxMonthlyVirtualUserHoursResource,
   "MaxMonthlyVirtualUserHours",
   "csharp"
 );
 
 // Fix property types: resource IDs should use ResourceIdentifier
-@@alternateType(LoadTestMappingProperties.sourceResourceId,
+@@alternateType(
+  LoadTestMappingProperties.sourceResourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(LoadTestMappingProperties.azureLoadTestingResourceId,
+@@alternateType(
+  LoadTestMappingProperties.azureLoadTestingResourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(LoadTestProfileMappingProperties.sourceResourceId,
+@@alternateType(
+  LoadTestProfileMappingProperties.sourceResourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(LoadTestProfileMappingProperties.azureLoadTestingResourceId,
+@@alternateType(
+  LoadTestProfileMappingProperties.azureLoadTestingResourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(LoadTestResourceUpdate.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  LoadTestResourceUpdate.properties,
   "csharp"
 );

@@ -14,13 +14,15 @@ using Azure.Core.Traits;
 @doc("Live Metrics REST APIs.")
 @versioned(Versions)
 @useAuth(
-  NoAuth | OAuth2Auth<[
-    {
-      type: OAuth2FlowType.implicit,
-      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
-      scopes: ["https://monitor.azure.com/.default"],
-    }
-  ]>
+
+    | NoAuth
+    | OAuth2Auth<[
+        {
+          type: OAuth2FlowType.implicit,
+          authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
+          scopes: ["https://monitor.azure.com/.default"],
+        }
+      ]>
 )
 @service(#{ title: "Live Metrics REST APIs for client SDKs." })
 @server(

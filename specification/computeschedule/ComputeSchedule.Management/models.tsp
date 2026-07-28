@@ -602,7 +602,7 @@ model VmSizeProfile {
   name: string;
 
   @doc("The rank of this VM size in the priority order")
-  rank: int32;
+  rank?: int32;
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2026-03-01-preview`)
@@ -622,14 +622,14 @@ model ZonePreference {
   zone: string;
 
   @doc("The rank of this zone in the priority order")
-  rank: int32;
+  rank?: int32;
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2026-03-01-preview`)
 @doc("The zone allocation policy for distributing VMs across availability zones")
 model ZoneAllocationPolicy {
   @doc("The distribution strategy for zone allocation")
-  distributionStrategy?: DistributionStrategy;
+  distributionStrategy: DistributionStrategy;
 
   @identifiers(#[])
   @doc("The zone preferences for allocation priority")

@@ -43,7 +43,10 @@ interface VirtualNetworkPeerings {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualNetworkPeering,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -54,9 +57,11 @@ interface VirtualNetworkPeerings {
 }
 
 @@doc(VirtualNetworkPeering.name, "The name of the virtual network peering.");
-@@doc(VirtualNetworkPeering.properties,
+@@doc(
+  VirtualNetworkPeering.properties,
   "Properties of the virtual network peering."
 );
-@@doc(VirtualNetworkPeerings.createOrUpdate::parameters.resource,
+@@doc(
+  VirtualNetworkPeerings.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update virtual network peering operation."
 );

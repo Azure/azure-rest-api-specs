@@ -25,12 +25,14 @@ model VaultModel
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-openapi"
-@@OpenAPI.extension(Vault.create::parameters.resource,
+@@OpenAPI.extension(
+  Vault.create::parameters.resource,
   "x-ms-client-name",
   "body"
 );
 #suppress "@azure-tools/typespec-azure-core/no-openapi"
-@@OpenAPI.extension(Vault.update::parameters.properties,
+@@OpenAPI.extension(
+  Vault.update::parameters.properties,
   "x-ms-client-name",
   "body"
 );

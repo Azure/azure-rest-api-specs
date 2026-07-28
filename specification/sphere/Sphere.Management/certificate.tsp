@@ -63,9 +63,11 @@ interface Certificates {
   >;
 }
 
-@@doc(Certificates.retrieveProofOfPossessionNonce::parameters.body,
+@@doc(
+  Certificates.retrieveProofOfPossessionNonce::parameters.body,
   "Proof of possession nonce request body "
 );
-@@clientName(Certificates.retrieveProofOfPossessionNonce::parameters.body,
+@@clientName(
+  Certificates.retrieveProofOfPossessionNonce::parameters.body,
   "proofOfPossessionNonceRequest"
 );

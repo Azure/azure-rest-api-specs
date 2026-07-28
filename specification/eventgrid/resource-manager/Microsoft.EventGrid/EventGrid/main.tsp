@@ -13,10 +13,11 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./back-compatible.tsp";
+import "./client.tsp";
 import "./CaCertificate.tsp";
 import "./Channel.tsp";
 import "./ClientGroup.tsp";
-import "./Client.tsp";
+import "./ClientResource.tsp";
 import "./Domain.tsp";
 import "./DomainTopic.tsp";
 import "./EventSubscription.tsp";
@@ -68,6 +69,7 @@ enum Versions {
 interface Operations
   extends Azure.ResourceManager.Legacy.Operations<ArmResponse<OperationsListResult>> {}
 @@summary(Operations.list, "List available operations.");
-@@doc(Operations.list,
+@@doc(
+  Operations.list,
   "List the available operations supported by the Microsoft.EventGrid resource provider."
 );

@@ -70,7 +70,10 @@ interface RoutingRuleCollections {
       @query("force")
       force?: boolean;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -98,12 +101,15 @@ interface RoutingRuleCollections {
   >;
 }
 
-@@doc(RoutingRuleCollection.name,
+@@doc(
+  RoutingRuleCollection.name,
   "The name of the network manager routing Configuration rule collection."
 );
-@@doc(RoutingRuleCollection.properties,
+@@doc(
+  RoutingRuleCollection.properties,
   "Indicates the properties for the network manager routing rule collection."
 );
-@@doc(RoutingRuleCollections.createOrUpdate::parameters.resource,
+@@doc(
+  RoutingRuleCollections.createOrUpdate::parameters.resource,
   "The Rule Collection to create or update"
 );

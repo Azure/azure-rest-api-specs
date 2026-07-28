@@ -131,14 +131,17 @@ interface SubscriptionRaiPolicy {
   delete is SubscriptionRaiPolicyOps.DeleteWithoutOkAsync<RaiPolicy>;
 }
 
-@@doc(RaiPolicy.name,
+@@doc(
+  RaiPolicy.name,
   "The name of the RaiPolicy associated with the Cognitive Services Account"
 );
 @@encodedName(RaiPolicy.etag, "application/json", "etag");
 @@doc(RaiPolicy.properties, "Properties of Cognitive Services RaiPolicy.");
-@@doc(RaiPolicies.createOrUpdate::parameters.resource,
+@@doc(
+  RaiPolicies.createOrUpdate::parameters.resource,
   "Properties describing the Content Filters."
 );
-@@doc(SubscriptionRaiPolicy.createOrUpdate::parameters.resource,
+@@doc(
+  SubscriptionRaiPolicy.createOrUpdate::parameters.resource,
   "Properties describing the Content Filters."
 );

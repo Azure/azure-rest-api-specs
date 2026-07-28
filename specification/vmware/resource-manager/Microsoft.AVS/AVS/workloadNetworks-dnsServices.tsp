@@ -49,11 +49,13 @@ interface WorkloadNetworkDnsServices {
     | ErrorResponse;
 }
 
-@@clientName(WorkloadNetworkDnsServices.create::parameters.resource,
+@@clientName(
+  WorkloadNetworkDnsServices.create::parameters.resource,
   "workloadNetworkDnsService"
 );
 
-@@clientName(WorkloadNetworkDnsServices.update::parameters.properties,
+@@clientName(
+  WorkloadNetworkDnsServices.update::parameters.properties,
   "workloadNetworkDnsService"
 );
 

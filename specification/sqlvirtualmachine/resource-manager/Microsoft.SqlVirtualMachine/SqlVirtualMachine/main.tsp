@@ -16,6 +16,7 @@ import "./models.tsp";
 import "./AvailabilityGroupListener.tsp";
 import "./SqlVirtualMachineGroup.tsp";
 import "./SqlVirtualMachine.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -54,6 +55,7 @@ interface Operations
       ErrorResponse
     > {}
 
-@@doc(Operations.list,
+@@doc(
+  Operations.list,
   "Lists all of the available SQL Virtual Machine Rest API operations."
 );

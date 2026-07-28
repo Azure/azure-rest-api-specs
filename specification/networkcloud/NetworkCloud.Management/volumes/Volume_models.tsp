@@ -4,6 +4,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 namespace Microsoft.NetworkCloud;
 
@@ -120,6 +121,17 @@ model VolumeStatus {
   @visibility(Lifecycle.Read)
   @minValue(0)
   allocatedSizeMiB?: int64;
+
+  /**
+   * The assigned resource ID of the storage appliance that hosts the volume.
+   */
+  @added(Versions.v2026_05_01_preview)
+  @visibility(Lifecycle.Read)
+  assignedStorageApplianceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.NetworkCloud/storageAppliances";
+    }
+  ]>;
 
   /**
    * The list of resource IDs that attach the volume. It may include virtual machines and Hybrid AKS clusters.

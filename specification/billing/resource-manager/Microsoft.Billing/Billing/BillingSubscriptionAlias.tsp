@@ -73,8 +73,11 @@ interface BillingSubscriptionAliases {
   @tag("BillingSubscription")
   createOrUpdate is BillingSubscriptionAliasOps.CreateOrUpdateAsync<
     BillingSubscriptionAlias,
-    Response = ArmResourceUpdatedResponse<BillingSubscriptionAlias> | ArmResourceCreatedResponse<BillingSubscriptionAlias> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BillingSubscriptionAlias> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<BillingSubscriptionAlias>
+      | ArmResourceCreatedResponse<BillingSubscriptionAlias>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BillingSubscriptionAlias> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -134,12 +137,15 @@ alias BillingSubscriptionAliasesListByBillingAccountParameters = {
   search?: string;
 };
 
-@@doc(BillingSubscriptionAlias.name,
+@@doc(
+  BillingSubscriptionAlias.name,
   "The ID that uniquely identifies a subscription alias."
 );
-@@doc(BillingSubscriptionAlias.properties,
+@@doc(
+  BillingSubscriptionAlias.properties,
   "The properties of a(n) BillingSubscriptionAlias"
 );
-@@doc(BillingSubscriptionAliases.createOrUpdate::parameters.resource,
+@@doc(
+  BillingSubscriptionAliases.createOrUpdate::parameters.resource,
   "A billing subscription alias."
 );

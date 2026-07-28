@@ -19,7 +19,7 @@ namespace ComputeGallery;
 @parentResource(SharedGalleryImage)
 model SharedGalleryImageVersion
   is ProxyResourceShared<SharedGalleryImageVersionProperties> {
-  ...Azure.ResourceManager.Legacy.ResourceNameParameter<
+  ...ResourceNameParameter<
     Resource = SharedGalleryImageVersion,
     KeyName = "galleryImageVersionName",
     SegmentName = "versions",
@@ -37,7 +37,7 @@ interface SharedGalleryImageVersions {
   /**
    * List shared gallery image versions by subscription id or tenant id.
    */
-  list is Azure.ResourceManager.Legacy.ComputeArmResourceListByParent<
+  list is ComputeResourceListByParent<
     SharedGalleryImageVersion,
     Parameters = {
       /**
@@ -50,9 +50,11 @@ interface SharedGalleryImageVersions {
   >;
 }
 
-@@doc(SharedGalleryImageVersion.name,
+@@doc(
+  SharedGalleryImageVersion.name,
   "The name of the gallery image version to be created. Needs to follow semantic version name pattern: The allowed characters are digit and period. Digits must be within the range of a 32-bit integer. Format: <MajorVersion>.<MinorVersion>.<Patch>"
 );
-@@doc(SharedGalleryImageVersion.properties,
+@@doc(
+  SharedGalleryImageVersion.properties,
   "Describes the properties of a gallery image version."
 );

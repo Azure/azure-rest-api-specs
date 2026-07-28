@@ -8,16 +8,19 @@ using Azure.ClientGenerator.Core;
 @@clientName(Microsoft.Workloads, "MigrationDiscoverySapMgmtClient", "java");
 
 @@clientName(Microsoft.Workloads.SAPDiscoverySite, "SapDiscoverySite", "java");
-@@clientName(Microsoft.Workloads.SAPDiscoverySiteProperties,
+@@clientName(
+  Microsoft.Workloads.SAPDiscoverySiteProperties,
   "SapDiscoverySiteProperties",
   "java"
 );
-@@clientName(Microsoft.Workloads.SAPDiscoverySites,
+@@clientName(
+  Microsoft.Workloads.SAPDiscoverySites,
   "SapDiscoverySites",
   "java"
 );
 @@clientName(Microsoft.Workloads.SAPInstance, "SapInstance", "java");
-@@clientName(Microsoft.Workloads.SAPInstanceProperties,
+@@clientName(
+  Microsoft.Workloads.SAPInstanceProperties,
   "SapInstanceProperties",
   "java"
 );

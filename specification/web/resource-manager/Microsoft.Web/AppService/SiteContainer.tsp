@@ -53,7 +53,8 @@ interface SiteContainerOps
         @key
         @pattern("(^[a-zA-Z0-9]$)|(^[a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]$)")
         containerName: string,
-      }
+      },
+      ResourceName = "SiteContainer"
     > {}
 
 @tag("WebApps")
@@ -124,7 +125,8 @@ interface SiteContainerOperationGroupOps
         @key
         @pattern("(^[a-zA-Z0-9]$)|(^[a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]$)")
         containerName: string,
-      }
+      },
+      ResourceName = "SiteSlotSiteContainer"
     > {}
 
 @tag("WebApps")
@@ -170,9 +172,11 @@ interface SiteContainerOperationGroup {
 
 @@doc(SiteContainer.name, "Site Container Name");
 @@doc(SiteContainer.properties, "SiteContainer resource specific properties");
-@@doc(SiteContainers.createOrUpdateSiteContainer::parameters.resource,
+@@doc(
+  SiteContainers.createOrUpdateSiteContainer::parameters.resource,
   "Container Entity"
 );
-@@doc(SiteContainerOperationGroup.createOrUpdateSiteContainerSlot::parameters.resource,
+@@doc(
+  SiteContainerOperationGroup.createOrUpdateSiteContainerSlot::parameters.resource,
   "Container Entity"
 );
