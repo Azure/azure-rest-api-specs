@@ -61,6 +61,7 @@ model CustomAIModelProperties {
   modelSourceResourceId?: ModelSourceResourceId;
 
   @doc("Optional. Free-form description of the model. Mutable via a full-replace PUT.")
+  @maxLength(250)
   description?: string;
 
   @visibility(Lifecycle.Read)
