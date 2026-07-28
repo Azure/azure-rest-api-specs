@@ -6,7 +6,7 @@ vi.mock("../../src/context.js", () => ({
 }));
 
 import { extractInputs } from "../../src/context.js";
-import statusCheck from "../../src/namespace-approval/status-check.js";
+import statusCheck from "../../src/package-name-approval/status-check.js";
 
 describe("status-check", () => {
   /** @type {ReturnType<typeof createMockGithub>} */

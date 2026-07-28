@@ -55,14 +55,14 @@ vi.mock("../../../shared/src/changed-files.js", () => ({
 }));
 
 // Mock format validation
-vi.mock("../../src/namespace-approval/validate-format.js", () => ({
+vi.mock("../../src/package-name-approval/validate-format.js", () => ({
   loadFormatRules: vi.fn().mockReturnValue(null),
   validateAllNamespaces: vi.fn().mockReturnValue([]),
 }));
 
 // Import after mocks
 const { default: detectNamespaces } =
-  await import("../../src/namespace-approval/detect-namespaces.js");
+  await import("../../src/package-name-approval/detect-namespaces.js");
 const { getChangedFilesStatuses } = await import("../../../shared/src/changed-files.js");
 
 /** @type {import("vitest").Mock} */
