@@ -4,12 +4,14 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./BatchAccount.tsp";
+import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Versioning;
+using Azure.ClientGenerator.Core;
 
 namespace Microsoft.Batch;
 /**
