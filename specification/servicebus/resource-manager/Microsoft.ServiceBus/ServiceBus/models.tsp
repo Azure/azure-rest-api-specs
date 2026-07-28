@@ -1521,11 +1521,13 @@ model SBQueueProperties {
   /**
    * A value indicating if this queue requires duplicate detection.
    */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   requiresDuplicateDetection?: boolean;
 
   /**
    * A value that indicates whether the queue supports the concept of sessions.
    */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   requiresSession?: boolean;
 
   /**
@@ -1566,6 +1568,7 @@ model SBQueueProperties {
   /**
    * A value that indicates whether the queue is to be partitioned across multiple message brokers.
    */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   enablePartitioning?: boolean;
 
   /**
@@ -1687,6 +1690,7 @@ model SBTopicProperties {
   /**
    * Value indicating if this topic requires duplicate detection.
    */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   requiresDuplicateDetection?: boolean;
 
   /**
@@ -1717,6 +1721,7 @@ model SBTopicProperties {
   /**
    * Value that indicates whether the topic to be partitioned across multiple message brokers is enabled.
    */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   enablePartitioning?: boolean;
 
   /**
@@ -1899,6 +1904,7 @@ model SBSubscriptionProperties {
   /**
    * Value indicating if a subscription supports the concept of sessions.
    */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   requiresSession?: boolean;
 
   /**
@@ -1954,6 +1960,7 @@ model SBSubscriptionProperties {
   /**
    * Value that indicates whether the subscription has an affinity to the client id.
    */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   isClientAffine?: boolean;
 
   /**
