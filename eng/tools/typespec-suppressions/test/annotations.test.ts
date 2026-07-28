@@ -105,7 +105,7 @@ describe("emitSuppressionAnnotations", () => {
     });
 
     expect(logSpy).toHaveBeenCalledTimes(2);
-    const [first, second] = logSpy.mock.calls.map((call) => call[0]);
+    const [first, second] = logSpy.mock.calls.map((call) => call[0] as string);
     expect(first).toContain("file=specification/contoso/Contoso.Widget/main.tsp");
     expect(first).toContain("line=42");
     // Changed suppression is anchored to the head-side (after) location, not the before line.
