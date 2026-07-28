@@ -568,24 +568,69 @@ model ResourcePatchRequestInput {
 @@alternateType(VaultCertificate.certificateUrl, url, "csharp");
 
 // =====================================================================
-// C# type renames: Prefix core VM types with "VirtualMachine" to match
-// Azure.ResourceManager.Compute SDK naming conventions
+// C# type renames: Prefix VM types with the service name to avoid
+// collisions with Azure.ResourceManager.Compute.
 // =====================================================================
-@@clientName(OSDisk, "VirtualMachineOSDisk", "csharp");
-@@clientName(OSProfile, "VirtualMachineOSProfile", "csharp");
-@@clientName(DataDisk, "VirtualMachineDataDisk", "csharp");
-@@clientName(NetworkProfile, "VirtualMachineNetworkProfile", "csharp");
-@@clientName(StorageProfile, "VirtualMachineStorageProfile", "csharp");
-@@clientName(HardwareProfile, "VirtualMachineHardwareProfile", "csharp");
-@@clientName(VmSizeProperties, "VirtualMachineSizeProperties", "csharp");
+@@clientName(OSDisk, "ComputeScheduleVirtualMachineOSDisk", "csharp");
+@@clientName(OSProfile, "ComputeScheduleVirtualMachineOSProfile", "csharp");
+@@clientName(DataDisk, "ComputeScheduleVirtualMachineDataDisk", "csharp");
+@@clientName(NetworkProfile, "ComputeScheduleVirtualMachineNetworkProfile", "csharp");
+@@clientName(StorageProfile, "ComputeScheduleVirtualMachineStorageProfile", "csharp");
+@@clientName(HardwareProfile, "ComputeScheduleVirtualMachineHardwareProfile", "csharp");
+@@clientName(VmSizeProperties, "ComputeScheduleVirtualMachineSizeProperties", "csharp");
 @@clientName(
   NetworkInterfaceReference,
-  "VirtualMachineNetworkInterfaceReference",
+  "ComputeScheduleVirtualMachineNetworkInterfaceReference",
+  "csharp"
+);
+@@clientName(
+  NetworkInterfaceReferenceProperties,
+  "ComputeScheduleVirtualMachineNetworkInterfaceReferenceProperties",
+  "csharp"
+);
+@@clientName(
+  VirtualMachineNetworkInterfaceConfiguration,
+  "ComputeScheduleVirtualMachineNetworkInterfaceConfiguration",
+  "csharp"
+);
+@@clientName(
+  VirtualMachineNetworkInterfaceConfigurationProperties,
+  "ComputeScheduleVirtualMachineNetworkInterfaceConfigurationProperties",
+  "csharp"
+);
+@@clientName(
+  VirtualMachineNetworkInterfaceIPConfiguration,
+  "ComputeScheduleVirtualMachineNetworkInterfaceIPConfiguration",
+  "csharp"
+);
+@@clientName(
+  VirtualMachineNetworkInterfaceIPConfigurationProperties,
+  "ComputeScheduleVirtualMachineNetworkInterfaceIPConfigurationProperties",
+  "csharp"
+);
+@@clientName(
+  VirtualMachinePublicIPAddressConfiguration,
+  "ComputeScheduleVirtualMachinePublicIPAddressConfiguration",
+  "csharp"
+);
+@@clientName(
+  VirtualMachinePublicIPAddressConfigurationProperties,
+  "ComputeScheduleVirtualMachinePublicIPAddressConfigurationProperties",
+  "csharp"
+);
+@@clientName(
+  VirtualMachinePublicIPAddressDnsSettingsConfiguration,
+  "ComputeScheduleVirtualMachinePublicIPAddressDnsSettingsConfiguration",
+  "csharp"
+);
+@@clientName(
+  VirtualMachineIpTag,
+  "ComputeScheduleVirtualMachineIpTag",
   "csharp"
 );
 
 // =====================================================================
-// C# type renames: Match Compute SDK type names
+// C# type renames: Add service and feature context
 // =====================================================================
 @@clientName(
   SshPublicKey,
@@ -594,18 +639,13 @@ model ResourcePatchRequestInput {
 );
 @@clientName(
   BulkActionVMProperties,
-  "BulkActionVirtualMachineProperties",
+  "ComputeScheduleBulkActionVirtualMachineProperties",
   "csharp"
 );
 @@clientName(BulkActionVMExtension, "BulkActionVmExtension", "csharp");
 @@clientName(
   BulkActionVmExtensionProperties,
-  "BulkActionVirtualMachineExtensionProperties",
-  "csharp"
-);
-@@clientName(
-  NetworkInterfaceReferenceProperties,
-  "VirtualMachineNetworkInterfaceReferenceProperties",
+  "ComputeScheduleBulkActionVirtualMachineExtensionProperties",
   "csharp"
 );
 @@clientName(
@@ -859,8 +899,16 @@ namespace Azure.ResourceManager.Models {
 // .NET Framework Design Guidelines for two-letter acronyms in compound
 // identifiers). Aligns with Azure.ResourceManager.Compute SDK naming.
 // =====================================================================
-@@clientName(BulkVMConfiguration, "BulkVmConfiguration", "csharp");
-@@clientName(VMGalleryApplication, "VmGalleryApplication", "csharp");
+@@clientName(
+  BulkVMConfiguration,
+  "ComputeScheduleBulkVmConfiguration",
+  "csharp"
+);
+@@clientName(
+  VMGalleryApplication,
+  "ComputeScheduleVmGalleryApplication",
+  "csharp"
+);
 @@clientName(
   LinuxVMGuestPatchMode,
   "ComputeScheduleLinuxVmGuestPatchMode",
@@ -891,10 +939,8 @@ namespace Azure.ResourceManager.Models {
   "ComputeScheduleWindowsVmGuestPatchAutomaticByPlatformRebootSetting",
   "csharp"
 );
-// VMDiskSecurityProfile -> VirtualMachineDiskSecurityProfile to match the
-// type name used by Azure.ResourceManager.Compute.
 @@clientName(
   VMDiskSecurityProfile,
-  "VirtualMachineDiskSecurityProfile",
+  "ComputeScheduleVirtualMachineDiskSecurityProfile",
   "csharp"
 );
