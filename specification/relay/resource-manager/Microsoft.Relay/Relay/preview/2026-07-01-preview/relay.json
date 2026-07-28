@@ -239,21 +239,14 @@
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
           },
           {
-            "name": "operationId",
-            "in": "path",
-            "description": "The ID of the Relay cluster operation.",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/OperationIdParameter"
           },
           {
             "name": "isAsyncHeader",
             "in": "query",
             "description": "Indicates that the response uses the Azure asynchronous operation status shape.",
             "required": true,
-            "type": "boolean",
-            "enum": [
-              true
-            ]
+            "type": "boolean"
           },
           {
             "name": "resourceName",
@@ -272,7 +265,15 @@
               "cluster"
             ],
             "x-ms-enum": {
-              "modelAsString": false
+              "name": "ClusterOperationResourceType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Cluster",
+                  "value": "cluster",
+                  "description": "A Relay cluster resource."
+                }
+              ]
             }
           },
           {
@@ -555,7 +556,7 @@
             "description": "The Relay cluster properties to update.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RelayCluster"
+              "$ref": "#/definitions/RelayClusterUpdate"
             }
           }
         ],
@@ -4041,6 +4042,53 @@
             "description": "The dedicated Relay cluster SKU."
           }
         ]
+      }
+    },
+    "RelayClusterSkuUpdate": {
+      "type": "object",
+      "description": "Mutable Relay cluster SKU parameters.",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/RelayClusterSkuName",
+          "description": "Name of the Relay cluster SKU."
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of capacity units assigned to the Relay cluster.",
+          "minimum": 1
+        }
+      }
+    },
+    "RelayClusterUpdate": {
+      "type": "object",
+      "description": "Parameters for updating a Relay cluster.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RelayClusterUpdateProperties",
+          "description": "Mutable Relay cluster properties."
+        },
+        "sku": {
+          "$ref": "#/definitions/RelayClusterSkuUpdate",
+          "description": "The Relay cluster SKU."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "RelayClusterUpdateProperties": {
+      "type": "object",
+      "description": "Mutable Relay cluster properties.",
+      "properties": {
+        "zoneRedundant": {
+          "type": "boolean",
+          "description": "Indicates whether the Relay cluster is zone redundant."
+        }
       }
     },
     "RelayNamespace": {

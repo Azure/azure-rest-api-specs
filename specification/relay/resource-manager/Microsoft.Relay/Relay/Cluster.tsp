@@ -118,6 +118,56 @@ model RelayClusterProperties {
 }
 
 /**
+ * Mutable Relay cluster properties.
+ */
+@added(Versions.v2026_07_01_preview)
+model RelayClusterUpdateProperties {
+  /**
+   * Indicates whether the Relay cluster is zone redundant.
+   */
+  zoneRedundant?: boolean;
+}
+
+/**
+ * Mutable Relay cluster SKU parameters.
+ */
+@added(Versions.v2026_07_01_preview)
+model RelayClusterSkuUpdate {
+  /**
+   * Name of the Relay cluster SKU.
+   */
+  name?: RelayClusterSkuName;
+
+  /**
+   * The number of capacity units assigned to the Relay cluster.
+   */
+  @minValue(1)
+  capacity?: int32;
+}
+
+/**
+ * Parameters for updating a Relay cluster.
+ */
+@added(Versions.v2026_07_01_preview)
+model RelayClusterUpdate {
+  /**
+   * Mutable Relay cluster properties.
+   */
+  properties?: RelayClusterUpdateProperties;
+
+  /**
+   * The Relay cluster SKU.
+   */
+  sku?: RelayClusterSkuUpdate;
+
+  /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "The Relay cluster wire contract uses a string dictionary for tags."
+  tags?: Record<string>;
+}
+
+/**
  * A Relay dedicated cluster.
  */
 @added(Versions.v2026_07_01_preview)
@@ -322,7 +372,7 @@ interface Clusters {
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     RelayCluster,
-    PatchModel = RelayCluster,
+    PatchModel = RelayClusterUpdate,
     Response =
       | ArmResponse<RelayCluster>
       | ArmResourceCreatedResponse<RelayCluster>

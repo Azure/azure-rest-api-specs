@@ -25,7 +25,7 @@ These are the global settings for the Relay API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2026-07-preview
+tag: package-2026-01
 ```
 
 ### Tag: package-2021-11-01
@@ -181,6 +181,32 @@ directive:
     reason: The inherited long-running operation metadata is part of the existing Relay service contract.
   - suppress: AllProxyResourcesShouldHaveDelete
     reason: NetworkRuleSet is an inherited singleton child resource and the Relay service does not expose a delete operation for it.
+  - suppress: OperationIdNounVerb
+    reason: Clusters_ListAvailableClusterRegion matches the established Event Hubs cluster operation name and keeps the corresponding Relay and Event Hubs SDK surfaces consistent.
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Relay/availableClusterRegions"].get.operationId
+  - suppress: GetCollectionOnlyHasValueAndNextLink
+    reason: These operations return collections of region, SKU, or resource-ID values rather than collections of ARM resources, so the ARM resource-list envelope rule does not apply.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Relay/availableClusterRegions"].get.responses.200.schema.properties
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/clusters/{clusterName}/skus"].get.responses.200.schema.properties
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/clusters/{clusterName}/namespaces"].get.responses.200.schema.properties
+  - suppress: ParametersInPointGet
+    reason: This is the implemented Relay long-running operation status endpoint, not a resource point GET; the query parameters identify the cluster operation being polled.
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Relay/locations/{location}/clusterOperationResults/{operationId}"].get.parameters
+  - suppress: ParameterNotUsingCommonTypes
+    reason: resourceGroupName is a query parameter required by the Relay operation coordinator rather than the ARM resource-group path parameter defined by common types.
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Relay/locations/{location}/clusterOperationResults/{operationId}"].get.parameters[7].name
+  - suppress: RequiredPropertiesMissingInResourceModel
+    reason: These definitions are non-resource list response wrappers whose names trigger the resource-model heuristic; their items are regions, SKU descriptions, or namespace resource IDs.
+    where:
+      - $.definitions.AvailableRelayClustersList
+      - $.definitions.RelayClusterSkuListResult
+      - $.definitions.RelayNamespaceIdListResult
+  - suppress: PatchBodyParametersSchema
+    reason: The inherited namespace PATCH request carries forward the 2026-01-01 wire contract, including its name and publicNetworkAccess schema behavior.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}"].patch.parameters[4].schema.properties.properties
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}"].patch.parameters[4].schema.properties.sku
 ```
 
 ---

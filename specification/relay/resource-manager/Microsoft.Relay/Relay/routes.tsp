@@ -15,6 +15,19 @@ using TypeSpec.Versioning;
 
 namespace Microsoft.Relay;
 
+/**
+ * Resource type supported by Relay cluster operation polling.
+ */
+@added(Versions.v2026_07_01_preview)
+union ClusterOperationResourceType {
+  string,
+
+  /**
+   * A Relay cluster resource.
+   */
+  Cluster: "cluster",
+}
+
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "This interface contains a provider-level action rather than resource operations."
 @added(Versions.v2026_07_01_preview)
 interface ClustersOperationGroup {
@@ -44,18 +57,13 @@ interface ClusterOperationResults {
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
     ...LocationResourceParameter,
-
-    /**
-     * The ID of the Relay cluster operation.
-     */
-    @path
-    operationId: string,
+    ...Azure.ResourceManager.Foundations.OperationIdParameter,
 
     /**
      * Indicates that the response uses the Azure asynchronous operation status shape.
      */
     @query
-    isAsyncHeader: true,
+    isAsyncHeader: boolean,
 
     /**
      * The Relay cluster name.
@@ -67,7 +75,7 @@ interface ClusterOperationResults {
      * The resource type used by the Relay cluster operation coordinator.
      */
     @query
-    resourceType: "cluster",
+    resourceType: ClusterOperationResourceType,
 
     /**
      * The resource group containing the Relay cluster.
