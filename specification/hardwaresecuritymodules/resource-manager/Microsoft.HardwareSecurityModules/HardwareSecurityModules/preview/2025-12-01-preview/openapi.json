@@ -3335,8 +3335,26 @@
           "type": "string",
           "description": "Payment HSM Cluster status message",
           "readOnly": true
+        },
+        "applicationTrustedIssuer": {
+          "type": "string",
+          "description": "The application trusted issuer for the Payment HSM Cluster",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "managementTrustedIssuer": {
+          "type": "string",
+          "description": "The management trusted issuer for the Payment HSM Cluster",
+          "x-ms-mutability": [
+            "create"
+          ]
         }
-      }
+      },
+      "required": [
+        "applicationTrustedIssuer",
+        "managementTrustedIssuer"
+      ]
     },
     "PaymentHsmClusterSku": {
       "type": "object",

@@ -883,6 +883,18 @@ model PaymentHsmClusterProperties {
    */
   @visibility(Lifecycle.Read)
   statusMessage?: string;
+
+  /**
+   * The application trusted issuer for the Payment HSM Cluster
+   */
+  @visibility(Lifecycle.Create)
+  applicationTrustedIssuer: string;
+
+  /**
+   * The management trusted issuer for the Payment HSM Cluster
+   */
+  @visibility(Lifecycle.Create)
+  managementTrustedIssuer: string;
 }
 
 /**
