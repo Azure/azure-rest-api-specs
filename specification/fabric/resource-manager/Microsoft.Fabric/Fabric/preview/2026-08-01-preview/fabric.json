@@ -757,40 +757,7 @@
         "members"
       ]
     },
-    "CapacityOverageNotificationProperties": {
-      "type": "object",
-      "description": "The notification properties for capacity overage.",
-      "properties": {
-        "email": {
-          "$ref": "#/definitions/CapacityOverageNotificationState",
-          "description": "The email notification state for capacity overage."
-        }
-      }
-    },
-    "CapacityOverageNotificationState": {
-      "type": "string",
-      "description": "The notification state for capacity overage.",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "CapacityOverageNotificationState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Enabled",
-            "value": "Enabled",
-            "description": "Capacity overage notifications are enabled."
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "Capacity overage notifications are disabled."
-          }
-        ]
-      }
-    },
+
     "CapacityOverageProperties": {
       "type": "object",
       "description": "The capacity overage properties of the Fabric capacity resource",
@@ -804,10 +771,6 @@
           "format": "int32",
           "description": "24-hour rolling threshold for capacity overage. Reaching this threshold results in capacity throttling.",
           "minimum": 0
-        },
-        "notifications": {
-          "$ref": "#/definitions/CapacityOverageNotificationProperties",
-          "description": "The notification properties for capacity overage."
         }
       }
     },
