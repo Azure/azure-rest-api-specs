@@ -2924,27 +2924,15 @@
       "properties": {
         "resourceId": {
           "$ref": "#/definitions/UserAssignedIdentityResourceId",
-          "description": "The ARM resource id of the user-assigned managed identity to authenticate with. Only user-assigned identities are supported. The RP first-party application must be granted `Managed Identity Operator` on this identity so it can be federated for Workload Identity.",
-          "x-ms-mutability": [
-            "update",
-            "create"
-          ]
+          "description": "The ARM resource id of the user-assigned managed identity to authenticate with. Only user-assigned identities are supported. The RP first-party application must be granted `Managed Identity Operator` on this identity so it can be federated for Workload Identity."
         },
         "clientId": {
           "type": "string",
-          "description": "The client (application) id of the identity, supplied by the caller. Used by the platform to annotate the in-cluster puller ServiceAccount for Workload Identity. Must match `resourceId`.",
-          "x-ms-mutability": [
-            "update",
-            "create"
-          ]
+          "description": "The client (application) id of the identity, supplied by the caller. Used by the platform to annotate the in-cluster puller ServiceAccount for Workload Identity. Must match `resourceId`."
         },
         "tenantId": {
           "type": "string",
-          "description": "The home tenant id of the identity, supplied by the caller. Used to annotate the in-cluster puller ServiceAccount (`azure.workload.identity/tenant-id`) for the Workload Identity token exchange. Must match `resourceId`.",
-          "x-ms-mutability": [
-            "update",
-            "create"
-          ]
+          "description": "The home tenant id of the identity, supplied by the caller. Used to annotate the in-cluster puller ServiceAccount (`azure.workload.identity/tenant-id`) for the Workload Identity token exchange. Must match `resourceId`."
         }
       },
       "required": [
