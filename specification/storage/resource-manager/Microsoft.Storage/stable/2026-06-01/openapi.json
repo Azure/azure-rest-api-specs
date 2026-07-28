@@ -2261,6 +2261,9 @@
           }
         },
         "x-ms-examples": {
+          "PutContainerWithBlobAccessPointConfiguration": {
+            "$ref": "./examples/BlobContainersPutBlobAccessPointConfiguration.json"
+          },
           "PutContainerWithDefaultEncryptionScope": {
             "$ref": "./examples/BlobContainersPutDefaultEncryptionScope.json"
           },
@@ -9355,6 +9358,20 @@
         "directoryServiceOptions"
       ]
     },
+    "BlobAccessPointConfigurationConnection": {
+      "type": "object",
+      "description": "Blob Access Point configuration associated with a blob container.",
+      "properties": {
+        "blobAccessPointConfigurationName": {
+          "type": "string",
+          "description": "Name of the Blob Access Point Configuration to connect to."
+        },
+        "blobAccessPointConfigurationUniqueId": {
+          "type": "string",
+          "description": "System-generated unique identifier of the Blob Access Point Configuration to connect to. If not provided on create, the service looks up and persists the current unique id."
+        }
+      }
+    },
     "BlobContainer": {
       "type": "object",
       "description": "Properties of the blob container, including Id, resource name, resource type, Etag.",
@@ -9992,6 +10009,10 @@
         "enableNfsV3AllSquash": {
           "type": "boolean",
           "description": "Enable NFSv3 all squash on blob container."
+        },
+        "blobAccessPointConfiguration": {
+          "$ref": "#/definitions/BlobAccessPointConfigurationConnection",
+          "description": "Configuration that attaches this container to a Blob Access Point. If set, the container is a read-only virtual container whose read/list requests are forwarded to the connected backing data store. Cannot be changed, removed, or added after container creation."
         }
       }
     },
