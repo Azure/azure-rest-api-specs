@@ -14,15 +14,55 @@ namespace Quota;
  * Quota request details.
  */
 @parentResource(LocationProxy)
-model QuotaRequestDetails
-  is Azure.ResourceManager.ProxyResource<QuotaRequestProperties> {
-  ...ResourceNameParameter<
-    Resource = QuotaRequestDetails,
-    KeyName = "id",
-    SegmentName = "serviceLimitsRequests",
-    NamePattern = ""
-  >;
+@Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
+model QuotaRequestDetails {
+  /** Quota request ID. */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /** Quota request name. */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /** Quota request details. */
+  properties?: QuotaRequestProperties;
+
+  /** Resource type */
+  @visibility(Lifecycle.Read)
+  type?: string;
 }
+
+alias QuotaRequestDetailsOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...Azure.ResourceManager.ProviderNamespace<QuotaRequestDetails>;
+
+    /**
+     * Azure resource provider ID.
+     */
+    @segment("resourceProviders")
+    @path
+    @key
+    providerId: string;
+
+    /**
+     * Azure region.
+     */
+    @segment("locations")
+    @path
+    @key
+    location: string;
+  },
+  {
+    /** Quota Request ID. */
+    @path
+    @segment("serviceLimitsRequests")
+    @key
+    id: string;
+  },
+  ErrorType = ExceptionResponse
+>;
 
 model QuotaRequestGetBaseParam
   is Azure.ResourceManager.Foundations.SubscriptionBaseParameters;
@@ -36,20 +76,14 @@ interface QuotaRequestStatus {
    * For the specified Azure region (location), get the details and status of the quota request by the quota request ID for the resources of the resource provider. The PUT request for the quota (service limit) returns a response with the requestId parameter.
    */
   @tag("QuotaRequests")
-  get is ArmResourceRead<
-    QuotaRequestDetails,
-    QuotaRequestGetBaseParam,
-    Error = ExceptionResponse
-  >;
+  get is QuotaRequestDetailsOps.Read<QuotaRequestDetails>;
 
   /**
    * For the specified Azure region (location), subscription, and resource provider, get the history of the quota requests for the past year. To select specific quota requests, use the oData filter.
    */
   @tag("QuotaRequests")
-  list is ArmResourceListByParent<
+  list is QuotaRequestDetailsOps.List<
     QuotaRequestDetails,
-    QuotaRequestListBaseParam,
-    Error = ExceptionResponse,
     Parameters = {
       /**
        * | Field | Supported operators |
@@ -76,5 +110,4 @@ interface QuotaRequestStatus {
   >;
 }
 
-@@doc(QuotaRequestDetails.name, "Quota Request ID.");
 @@doc(QuotaRequestDetails.properties, "Quota request details.");

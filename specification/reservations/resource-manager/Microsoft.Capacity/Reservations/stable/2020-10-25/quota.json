@@ -578,17 +578,28 @@
       "type": "object",
       "description": "Quota request details.",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Quota request ID.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Quota request name.",
+          "readOnly": true
+        },
         "properties": {
           "$ref": "#/definitions/QuotaRequestProperties",
           "description": "Quota request details.",
           "x-ms-client-flatten": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type",
+          "readOnly": true
         }
       },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
-        }
-      ]
+      "x-ms-azure-resource": true
     },
     "QuotaRequestDetailsList": {
       "type": "object",
