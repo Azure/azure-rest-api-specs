@@ -20,7 +20,7 @@ using TypeSpec.Versioning;
 @@clientName(DelayRequest, "OccurrenceDelayContent", "csharp");
 // [DATE001] DateTimeOffset properties should use an "On"/"At" suffix in C#.
 @@clientName(DelayRequest.delay, "DelayOn", "csharp");
-@@clientName(Language, "NotificationLanguage", "csharp");
+@@clientName(Language, "ComputeScheduleNotificationLanguage", "csharp");
 @@clientName(Month, "ScheduledActionsScheduleMonth", "csharp");
 @@clientName(WeekDay, "ScheduledActionsScheduleWeekDay", "csharp");
 @@clientName(
@@ -621,7 +621,11 @@ model ResourcePatchRequestInput {
 // =====================================================================
 @@clientName(CachingTypes, "ComputeScheduleCachingType", "csharp");
 @@clientName(SecurityTypes, "ComputeScheduleSecurityType", "csharp");
-@@clientName(OperatingSystemTypes, "OperatingSystemType", "csharp");
+@@clientName(
+  OperatingSystemTypes,
+  "ComputeScheduleOperatingSystemType",
+  "csharp"
+);
 @@clientName(
   DiskControllerTypes,
   "ComputeScheduleDiskControllerType",
@@ -648,8 +652,16 @@ model ResourcePatchRequestInput {
   "ComputeScheduleWinRMListenerProtocolType",
   "csharp"
 );
-@@clientName(DomainNameLabelScopeTypes, "DomainNameLabelScopeType", "csharp");
-@@clientName(SecurityEncryptionTypes, "SecurityEncryptionType", "csharp");
+@@clientName(
+  DomainNameLabelScopeTypes,
+  "ComputeScheduleDomainNameLabelScopeType",
+  "csharp"
+);
+@@clientName(
+  SecurityEncryptionTypes,
+  "ComputeScheduleSecurityEncryptionType",
+  "csharp"
+);
 @@clientName(
   StorageAccountTypes,
   "ComputeScheduleStorageAccountType",
@@ -665,6 +677,112 @@ model ResourcePatchRequestInput {
 @@clientName(SubResource, "ComputeScheduleSubResourceInfo", "csharp");
 @@clientName(SecurityProfile, "ComputeScheduleSecurityProfile", "csharp");
 @@clientName(
+  AdditionalUnattendContent,
+  "ComputeScheduleAdditionalUnattendContent",
+  "csharp"
+);
+@@clientName(PatchSettings, "ComputeSchedulePatchSettings", "csharp");
+@@clientName(
+  LinuxPatchAssessmentMode,
+  "ComputeScheduleLinuxPatchAssessmentMode",
+  "csharp"
+);
+@@clientName(
+  LinuxVMGuestPatchAutomaticByPlatformRebootSetting,
+  "ComputeScheduleLinuxVmGuestPatchAutomaticByPlatformRebootSetting",
+  "csharp"
+);
+@@clientName(
+  LinuxVMGuestPatchAutomaticByPlatformSettings,
+  "ComputeScheduleLinuxVmGuestPatchAutomaticByPlatformSettings",
+  "csharp"
+);
+@@clientName(
+  LinuxVMGuestPatchMode,
+  "ComputeScheduleLinuxVmGuestPatchMode",
+  "csharp"
+);
+@@clientName(
+  WindowsPatchAssessmentMode,
+  "ComputeScheduleWindowsPatchAssessmentMode",
+  "csharp"
+);
+@@clientName(
+  WindowsVMGuestPatchAutomaticByPlatformRebootSetting,
+  "ComputeScheduleWindowsVmGuestPatchAutomaticByPlatformRebootSetting",
+  "csharp"
+);
+@@clientName(
+  WindowsVMGuestPatchAutomaticByPlatformSettings,
+  "ComputeScheduleWindowsVmGuestPatchAutomaticByPlatformSettings",
+  "csharp"
+);
+@@clientName(
+  WindowsVMGuestPatchMode,
+  "ComputeScheduleWindowsVmGuestPatchMode",
+  "csharp"
+);
+@@clientName(
+  PublicIPAddressSku,
+  "ComputeSchedulePublicIPAddressSku",
+  "csharp"
+);
+@@clientName(
+  PublicIPAddressSkuName,
+  "ComputeSchedulePublicIPAddressSkuName",
+  "csharp"
+);
+@@clientName(
+  PublicIPAddressSkuTier,
+  "ComputeSchedulePublicIPAddressSkuTier",
+  "csharp"
+);
+@@clientName(
+  PublicIPAllocationMethod,
+  "ComputeSchedulePublicIPAllocationMethod",
+  "csharp"
+);
+@@clientName(NetworkApiVersion, "ComputeScheduleNetworkApiVersion", "csharp");
+@@clientName(
+  NetworkInterfaceAuxiliaryMode,
+  "ComputeScheduleNetworkInterfaceAuxiliaryMode",
+  "csharp"
+);
+@@clientName(
+  NetworkInterfaceAuxiliarySku,
+  "ComputeScheduleNetworkInterfaceAuxiliarySku",
+  "csharp"
+);
+@@clientName(
+  ScheduledEventsPolicy,
+  "ComputeScheduleScheduledEventsPolicy",
+  "csharp"
+);
+@@clientName(
+  ScheduledEventsProfile,
+  "ComputeScheduleScheduledEventsProfile",
+  "csharp"
+);
+@@clientName(
+  TerminateNotificationProfile,
+  "ComputeScheduleTerminateNotificationProfile",
+  "csharp"
+);
+@@clientName(ProxyAgentSettings, "ComputeScheduleProxyAgentSettings", "csharp");
+@@clientName(DeleteOptions, "ComputeScheduleDeleteConfig", "csharp");
+@@clientName(DiffDiskOptions, "ComputeScheduleDiffDiskConfig", "csharp");
+@@clientName(NotificationType, "ComputeScheduleNotificationType", "csharp");
+@@clientName(
+  ResourceResultSummary,
+  "ComputeScheduleResourceResultSummary",
+  "csharp"
+);
+@@clientName(
+  ZonePlacementPolicyType,
+  "ComputeScheduleZonePlacementPolicyType",
+  "csharp"
+);
+@@clientName(
   AdditionalCapabilities,
   "ComputeScheduleAdditionalCapabilities",
   "csharp"
@@ -672,8 +790,6 @@ model ResourcePatchRequestInput {
 @@clientName(BootDiagnostics, "ComputeScheduleBootDiagnostics", "csharp");
 @@clientName(ImageReference, "ComputeScheduleImageReference", "csharp");
 @@clientName(Placement, "ComputeSchedulePlacement", "csharp");
-@@clientName(DiffDiskOptions, "DiffDiskConfig", "csharp");
-@@clientName(DeleteOptions, "DeleteConfig", "csharp");
 @@clientName(DiffDiskSettings, "ComputeScheduleDiffDiskSettings", "csharp");
 @@clientName(DiffDiskPlacement, "ComputeScheduleDiffDiskPlacement", "csharp");
 @@clientName(
