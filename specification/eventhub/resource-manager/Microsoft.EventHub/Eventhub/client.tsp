@@ -174,7 +174,7 @@ using Microsoft.EventHub;
   "EventHubsNamespaceGeoDataReplicationProperties",
   "csharp"
 );
-@@clientName(GeoDRRoleType, "EventHubsNamespaceGeoDRRoleType", "csharp");
+@@clientName(GeoDRRoleType, "EventHubsNamespaceGeoDrRoleType", "csharp");
 @@alternateType(
   NamespaceReplicaLocation.clusterArmId,
   Azure.Core.armResourceIdentifier,
@@ -185,6 +185,11 @@ using Microsoft.EventHub;
 @@clientName(
   NamespaceReplicaLocation,
   "EventHubsNamespaceReplicaLocation",
+  "csharp"
+);
+@@clientName(
+  NetworkRuleSetListResult,
+  "EventHubsNetworkRuleSetListResult",
   "csharp"
 );
 @@clientName(ErrorDetail, "EventHubsErrorDetail", "csharp");
@@ -401,7 +406,7 @@ using Microsoft.EventHub;
   "csharp"
 );
 @@clientName(NetworkRuleSetProperties.ipRules, "IPRules", "csharp");
-@@clientName(IpAddressType, "EventHubIPAddressType", "csharp");
+@@clientName(IpAddressType, "EventHubsIPAddressType", "csharp");
 @@clientName(EHNamespaceProperties.ipAddressType, "IPAddressType", "csharp");
 @@clientName(NamespaceReplicaLocation.roleType, "RoleType", "csharp");
 @@clientName(
