@@ -384,6 +384,10 @@ suppressions:
   - code: XMSSecretInResponse
     reason: Existing secret fields maintained for backward compatibility.
     from: ComputeRP.json
+  - code: XMSSecretInResponse
+    reason: metadataKey is a metadata field name identifier, not a cryptographic secret or API key.
+    from: GalleryRP.json
+    where: $.definitions.MetadataKeyValue.properties.metadataKey
   - code: LroLocationHeader
     reason: Existing LRO operation does not include Location header for backward compatibility.
     from: ComputeRP.json
