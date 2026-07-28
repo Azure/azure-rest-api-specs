@@ -69,8 +69,6 @@ union CapacityOverageState {
   string,
 }
 
-
-
 @doc("The administration properties of the Fabric capacity resource")
 model CapacityAdministration {
   @doc("An array of administrator user identities.")
