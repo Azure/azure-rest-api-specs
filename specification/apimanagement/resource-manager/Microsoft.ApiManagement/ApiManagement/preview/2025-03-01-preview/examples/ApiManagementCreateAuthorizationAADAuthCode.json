@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01-preview",
+    "authorizationId": "authz2",
+    "authorizationProviderId": "aadwithauthcode",
+    "parameters": {
+      "properties": {
+        "authorizationType": "OAuth2",
+        "oauth2grantType": "AuthorizationCode"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "authz2",
+        "type": "Microsoft.ApiManagement/service/authorizationProviders/authorizations",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/authorizationProviders/aadwithauthcode/authorizations/authz2",
+        "properties": {
+          "authorizationType": "OAuth2",
+          "error": {
+            "code": "Unauthenticated",
+            "message": "This connection is not authenticated."
+          },
+          "oauth2grantType": "AuthorizationCode",
+          "status": "Error"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "authz2",
+        "type": "Microsoft.ApiManagement/service/authorizationProviders/authorizations",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/authorizationProviders/aadwithauthcode/authorizations/authz2",
+        "properties": {
+          "authorizationType": "OAuth2",
+          "error": {
+            "code": "Unauthenticated",
+            "message": "This connection is not authenticated."
+          },
+          "oauth2grantType": "AuthorizationCode",
+          "status": "Error"
+        }
+      }
+    }
+  },
+  "operationId": "Authorization_CreateOrUpdate",
+  "title": "ApiManagementCreateAuthorizationAADAuthCode"
+}

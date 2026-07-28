@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "endpoint": "{endpoint}",
+    "managedVirtualNetworkName": "defaultv2",
+    "managedPrivateEndpointName": "myManagedPrivateEndpoint",
+    "api-version": "2023-09-01",
+    "body": {
+      "properties": {
+        "groupId": "myGroupId",
+        "privateLinkResourceId": "myPrivateLinkResourceId"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "x-ms-request-id": "d5496da4-9c52-402f-b067-83cc9ddea888"
+      },
+      "body": {
+        "name": "myManagedPrivateEndpoint",
+        "properties": {
+          "connectionState": {
+            "actionsRequired": "None",
+            "description": "test descrption",
+            "status": "Approved"
+          },
+          "fqdns": [
+            "fqdns1"
+          ],
+          "groupId": "myGroupId",
+          "privateLinkResourceId": "myPrivateLinkResourceId",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "x-ms-request-id": "d5496da4-9c52-402f-b067-83cc9ddea888"
+      },
+      "body": {
+        "name": "myManagedPrivateEndpoint",
+        "properties": {
+          "connectionState": {
+            "actionsRequired": "None",
+            "description": "test descrption",
+            "status": "Approved"
+          },
+          "fqdns": [
+            "fqdns1"
+          ],
+          "groupId": "myGroupId",
+          "privateLinkResourceId": "myPrivateLinkResourceId",
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

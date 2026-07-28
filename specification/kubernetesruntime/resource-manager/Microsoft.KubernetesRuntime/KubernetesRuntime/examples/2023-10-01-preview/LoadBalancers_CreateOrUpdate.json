@@ -1,0 +1,59 @@
+{
+  "operationId": "LoadBalancers_CreateOrUpdate",
+  "title": "LoadBalancers_CreateOrUpdate",
+  "parameters": {
+    "resourceUri": "subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/example/providers/Microsoft.Kubernetes/connectedClusters/cluster1",
+    "loadBalancerName": "testlb",
+    "api-version": "2023-10-01-preview",
+    "resource": {
+      "properties": {
+        "addresses": [
+          "192.168.50.1/24",
+          "192.168.51.2-192.168.51.10"
+        ],
+        "serviceSelector": {
+          "app": "frontend"
+        },
+        "advertiseMode": "ARP"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/example/providers/Microsoft.Kubernetes/connectedClusters/cluster1/providers/Microsoft.KubernetesRuntime/loadBalancers/testlb",
+        "name": "testlb",
+        "type": "Microsoft.KubernetesRuntime/loadBalancers",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "addresses": [
+            "192.168.50.1/24",
+            "192.168.51.2-192.168.51.10"
+          ],
+          "serviceSelector": {
+            "app": "frontend"
+          },
+          "advertiseMode": "ARP"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/example/providers/Microsoft.Kubernetes/connectedClusters/cluster1/providers/Microsoft.KubernetesRuntime/loadBalancers/testlb",
+        "name": "testlb",
+        "type": "Microsoft.KubernetesRuntime/loadBalancers",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "addresses": [
+            "192.168.50.1/24",
+            "192.168.51.2-192.168.51.10"
+          ],
+          "serviceSelector": {
+            "app": "frontend"
+          },
+          "advertiseMode": "ARP"
+        }
+      }
+    }
+  }
+}

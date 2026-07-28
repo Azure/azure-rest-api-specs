@@ -1,0 +1,25 @@
+{
+  "operationId": "BeginAzureBatchImageGeneration",
+  "title": "Starts the generation of a batch of images from a text caption",
+  "parameters": {
+    "endpoint": "{endpoint}",
+    "api-version": "2023-09-01-preview",
+    "body": {
+      "prompt": "a monkey eating a banana",
+      "size": "256x256",
+      "n": 1
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "operation-location": "{endpoint}/openai/operations/images/<operation_id>?api-version=2023-06-01-preview"
+      },
+      "body": {
+        "id": "<operation_id>",
+        "status": "notRunning",
+        "created": 0
+      }
+    }
+  }
+}

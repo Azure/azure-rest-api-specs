@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "resourceName": "testHub",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2019-07-01-preview",
+    "subscriptionId": "91d12660-3dec-467a-be2a-213b5544ddc0"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "resourceType": "Microsoft.Devices/IotHubs",
+            "sku": {
+              "name": "S1",
+              "tier": "Standard"
+            },
+            "capacity": {
+              "default": 1,
+              "scaleType": "Manual"
+            }
+          },
+          {
+            "resourceType": "Microsoft.Devices/IotHubs",
+            "sku": {
+              "name": "S2",
+              "tier": "Standard"
+            },
+            "capacity": {
+              "minimum": 1,
+              "maximum": 200,
+              "default": 1,
+              "scaleType": "Manual"
+            }
+          },
+          {
+            "resourceType": "Microsoft.Devices/IotHubs",
+            "sku": {
+              "name": "S3",
+              "tier": "Standard"
+            },
+            "capacity": {
+              "minimum": 1,
+              "maximum": 10,
+              "default": 1,
+              "scaleType": "Manual"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

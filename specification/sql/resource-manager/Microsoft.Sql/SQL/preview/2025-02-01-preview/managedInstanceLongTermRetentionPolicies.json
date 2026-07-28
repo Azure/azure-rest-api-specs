@@ -1,0 +1,431 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SqlManagementClient",
+    "version": "2025-02-01-preview",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "ManagedInstanceLongTermRetentionPolicies"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/backupLongTermRetentionPolicies": {
+      "get": {
+        "operationId": "ManagedInstanceLongTermRetentionPolicies_ListByDatabase",
+        "tags": [
+          "ManagedInstanceLongTermRetentionPolicies"
+        ],
+        "description": "Gets a database's long term retention policy.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceLongTermRetentionPolicyListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the long term retention policies for the managed database.": {
+            "$ref": "./examples/ManagedInstanceLongTermRetentionPolicyListByDatabase.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/backupLongTermRetentionPolicies/{policyName}": {
+      "get": {
+        "operationId": "ManagedInstanceLongTermRetentionPolicies_Get",
+        "tags": [
+          "ManagedInstanceLongTermRetentionPolicies"
+        ],
+        "description": "Gets a managed database's long term retention policy.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "policyName",
+            "in": "path",
+            "description": "The policy name. Should always be Default.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "ManagedInstanceLongTermRetentionPolicyName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "default",
+                  "value": "default",
+                  "description": "default"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceLongTermRetentionPolicy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the long term retention policy for the managed database.": {
+            "$ref": "./examples/ManagedInstanceLongTermRetentionPolicyGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ManagedInstanceLongTermRetentionPolicies_CreateOrUpdate",
+        "tags": [
+          "ManagedInstanceLongTermRetentionPolicies"
+        ],
+        "description": "Sets a managed database's long term retention policy.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "policyName",
+            "in": "path",
+            "description": "The policy name. Should always be Default.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "ManagedInstanceLongTermRetentionPolicyName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "default",
+                  "value": "default",
+                  "description": "default"
+                }
+              ]
+            }
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The long term retention policy info.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceLongTermRetentionPolicy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ManagedInstanceLongTermRetentionPolicy' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceLongTermRetentionPolicy"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update the LTR policy for the managed database.": {
+            "$ref": "./examples/ManagedInstanceLongTermRetentionPolicyCreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ManagedInstanceLongTermRetentionPolicy"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ManagedInstanceLongTermRetentionPolicies_Delete",
+        "tags": [
+          "ManagedInstanceLongTermRetentionPolicies"
+        ],
+        "description": "Deletes a managed database's long term retention policy.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "policyName",
+            "in": "path",
+            "description": "The policy name. Should always be Default.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "ManagedInstanceLongTermRetentionPolicyName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "default",
+                  "value": "default",
+                  "description": "default"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceLongTermRetentionPolicy"
+            }
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes the LTR policy for the managed database.": {
+            "$ref": "./examples/ManagedInstanceLongTermRetentionPolicyDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ManagedInstanceLongTermRetentionPolicy"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "ManagedInstanceLongTermRetentionPolicy": {
+      "type": "object",
+      "description": "A long term retention policy.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ManagedInstanceLongTermRetentionPolicyProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ManagedInstanceLongTermRetentionPolicyListResult": {
+      "type": "object",
+      "description": "The response of a ManagedInstanceLongTermRetentionPolicy list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ManagedInstanceLongTermRetentionPolicy items on this page",
+          "items": {
+            "$ref": "#/definitions/ManagedInstanceLongTermRetentionPolicy"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ManagedInstanceLongTermRetentionPolicyProperties": {
+      "type": "object",
+      "description": "Properties of a long term retention policy",
+      "properties": {
+        "backupStorageAccessTier": {
+          "$ref": "./common.json#/definitions/BackupStorageAccessTier",
+          "description": "The BackupStorageAccessTier for the LTR backups"
+        },
+        "weeklyRetention": {
+          "type": "string",
+          "description": "The weekly retention policy for an LTR backup in an ISO 8601 format."
+        },
+        "monthlyRetention": {
+          "type": "string",
+          "description": "The monthly retention policy for an LTR backup in an ISO 8601 format."
+        },
+        "yearlyRetention": {
+          "type": "string",
+          "description": "The yearly retention policy for an LTR backup in an ISO 8601 format."
+        },
+        "weekOfYear": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The week of year to take the yearly backup in an ISO 8601 format."
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

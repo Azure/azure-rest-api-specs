@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "api-version": "2023-09-01",
+    "billingAccountId": "12345",
+    "filter": "properties/usageDate ge 2022-10-15 and properties/usageDate le 2022-10-18",
+    "grain": "Daily"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/providers/Microsoft.Billing/billingAccounts/12345/providers/Microsoft.CostManagement/benefitUtilizationSummaries/66cccc66-6ccc-6c66-666c-66cc6c6c66c6_222d22dd-d2d2-2dd2-222d-2dd2222ddddd_20211116",
+            "kind": "SavingsPlan",
+            "name": "66cccc66-6ccc-6c66-666c-66cc6c6c66c6_222d22dd-d2d2-2dd2-222d-2dd2222ddddd_20211116",
+            "type": "Microsoft.CostManagement/benefitUtilizationSummaries",
+            "properties": {
+              "armSkuName": "Compute_Savings_Plan",
+              "avgUtilizationPercentage": 90,
+              "benefitOrderId": "/providers/Microsoft.BillingBenefits/savingsPlanOrders/66cccc66-6ccc-6c66-666c-66cc6c6c66c6",
+              "benefitId": "/providers/Microsoft.BillingBenefits/savingsPlanOrders/66cccc66-6ccc-6c66-666c-66cc6c6c66c6/savingsPlans/222d22dd-d2d2-2dd2-222d-2dd2222ddddd",
+              "benefitType": "SavingsPlan",
+              "maxUtilizationPercentage": 100,
+              "minUtilizationPercentage": 80,
+              "usageDate": "2022-10-16T00:00:00Z"
+            }
+          },
+          {
+            "id": "/providers/Microsoft.Billing/billingAccounts/12345/providers/Microsoft.CostManagement/benefitUtilizationSummaries/88cccc88-8ccc-8c88-888c-88cc8c8c88c8_444d44dd-d4d4-4dd4-444d-4dd4444ddddd_20211117",
+            "kind": "SavingsPlan",
+            "name": "88cccc88-8ccc-8c88-888c-88cc8c8c88c8_444d44dd-d4d4-4dd4-444d-4dd4444ddddd_20211117",
+            "type": "Microsoft.CostManagement/benefitUtilizationSummaries",
+            "properties": {
+              "armSkuName": "Compute_Savings_Plan",
+              "avgUtilizationPercentage": 60,
+              "benefitOrderId": "/providers/Microsoft.BillingBenefits/savingsPlanOrders/88cccc88-8ccc-8c88-888c-88cc8c8c88c8",
+              "benefitId": "/providers/Microsoft.BillingBenefits/savingsPlanOrders/88cccc88-8ccc-8c88-888c-88cc8c8c88c8/savingsPlans/444d44dd-d4d4-4dd4-444d-4dd4444ddddd",
+              "benefitType": "SavingsPlan",
+              "maxUtilizationPercentage": 70,
+              "minUtilizationPercentage": 50,
+              "usageDate": "2022-10-17T00:00:00Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

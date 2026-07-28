@@ -1,0 +1,79 @@
+{
+  "parameters": {
+    "api-version": "2020-01-01",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "resourceType": "workspaces",
+            "name": "Basic",
+            "tier": "Basic",
+            "locations": [
+              "westus"
+            ],
+            "locationInfo": [
+              {
+                "location": "westus",
+                "zones": [
+                  "westus-AZ02",
+                  "westus-AZ01"
+                ]
+              }
+            ],
+            "capabilities": [
+              {
+                "name": "automatedml_readhyperdrivesdk",
+                "value": "{\n  \"id\": \"automatedml_ readhyperdrivesdk\",\n  \"name\": \"Read hyperdrive SDK\",\n  \"description\": \"Read only access to Hyperdrive in the SDK\"\n}"
+              },
+              {
+                "name": "workspace_upgradeworkspacesdk",
+                "value": "{\n  \"id\": \"workspace_upgradeworkspacesdk\",\n  \"name\": \"Upgrade workspace SDK\",\n  \"description\": \"Upgrade workspace from Basic to enterprise from the SDK\"\n}"
+              }
+            ],
+            "restrictions": []
+          },
+          {
+            "resourceType": "workspaces",
+            "name": "Enterprise",
+            "tier": "Enterprise",
+            "locations": [
+              "westus"
+            ],
+            "locationInfo": [
+              {
+                "location": "westus",
+                "zones": [
+                  "westus-AZ01"
+                ],
+                "zoneDetails": [
+                  {
+                    "name": [
+                      "westus-AZ01"
+                    ],
+                    "capabilities": [
+                      {
+                        "name": "automatedml_createeditexperimentssdk",
+                        "value": "{\n  \"id\": \"automatedml_createeditexperimentssdk\",\n  \"name\": \"Create edit experiments SDK\",\n  \"description\": \"Create, edit or delete AutoML experiments in the SDK\"\n}"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "capabilities": [
+              {
+                "name": "automatedml_createeditexperimentssdk",
+                "value": "{\n  \"id\": \"automatedml_createeditexperimentssdk\",\n  \"name\": \"Create edit experiments SDK\",\n  \"description\": \"Create, edit or delete AutoML experiments in the SDK\"\n}"
+              }
+            ],
+            "restrictions": []
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}

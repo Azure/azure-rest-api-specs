@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "api-version": "2026-05-31-preview",
+    "containerName": "StorageContainer;Storage;SwaggerTestRg;swaggertestsa",
+    "fabricName": "Azure",
+    "parameters": {
+      "properties": {
+        "objectType": "AzureFileShareRestoreRequest",
+        "recoveryType": "OriginalLocation",
+        "sourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/SwaggerTestRg/providers/Microsoft.Storage/storageAccounts/swaggertestsa",
+        "copyOptions": "Overwrite",
+        "restoreRequestType": "FullShareRestore",
+        "identityInfo": {
+          "isSystemAssignedIdentity": true
+        }
+      }
+    },
+    "protectedItemName": "AzureFileShare;testshare",
+    "recoveryPointId": "932886657837421071",
+    "resourceGroupName": "SwaggerTestRg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "vaultName": "swaggertestvault"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/swaggertestvault/backupFabrics/Azure/protectionContainers/StorageContainer;Storage;SwaggerTestRg;swaggertestsa/protectedItems/AzureFileShare;testshare/operationsStatus/00000000-0000-0000-0000-000000000000?api-version=2026-05-31-preview",
+        "Location": "https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/swaggertestvault/backupFabrics/Azure/protectionContainers/StorageContainer;Storage;SwaggerTestRg;swaggertestsa/protectedItems/AzureFileShare;testshare/operationResults/00000000-0000-0000-0000-000000000000?api-version=2026-05-31-preview",
+        "Retry-After": 60
+      }
+    }
+  },
+  "operationId": "Restores_Trigger",
+  "title": "Restore Azure File Share to Original Location with Managed Identity"
+}

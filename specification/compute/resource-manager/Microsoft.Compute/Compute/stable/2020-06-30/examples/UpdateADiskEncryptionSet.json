@@ -1,0 +1,71 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2020-06-30",
+    "diskEncryptionSetName": "myDiskEncryptionSet",
+    "diskEncryptionSet": {
+      "properties": {
+        "activeKey": {
+          "sourceVault": {
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault"
+          },
+          "keyUrl": "https://myvmvault.vault-int.azure-int.net/keys/{key}"
+        },
+        "encryptionType": "EncryptionAtRestWithCustomerKey"
+      },
+      "tags": {
+        "department": "Development",
+        "project": "Encryption"
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "body": {
+        "name": "myDiskEncryptionSet",
+        "location": "West US",
+        "identity": {
+          "type": "SystemAssigned"
+        },
+        "properties": {
+          "activeKey": {
+            "sourceVault": {
+              "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault"
+            },
+            "keyUrl": "https://myvmvault.vault-int.azure-int.net/keys/{key}"
+          },
+          "encryptionType": "EncryptionAtRestWithCustomerKey",
+          "previousKeys": []
+        },
+        "tags": {
+          "department": "Development",
+          "project": "Encryption"
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "name": "myDiskEncryptionSet",
+        "location": "West US",
+        "identity": {
+          "type": "SystemAssigned"
+        },
+        "properties": {
+          "activeKey": {
+            "sourceVault": {
+              "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault"
+            },
+            "keyUrl": "https://myvmvault.vault-int.azure-int.net/keys/{key}"
+          },
+          "encryptionType": "EncryptionAtRestWithCustomerKey",
+          "previousKeys": []
+        },
+        "tags": {
+          "department": "Development",
+          "project": "Encryption"
+        }
+      }
+    }
+  }
+}

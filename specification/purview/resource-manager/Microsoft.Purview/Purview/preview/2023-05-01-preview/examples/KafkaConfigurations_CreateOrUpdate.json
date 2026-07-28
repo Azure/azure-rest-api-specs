@@ -1,0 +1,79 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "rgpurview",
+    "accountName": "account1",
+    "kafkaConfigurationName": "kafkaConfigName",
+    "kafkaConfiguration": {
+      "properties": {
+        "eventStreamingState": "Enabled",
+        "eventStreamingType": "Azure",
+        "consumerGroup": "consumerGroup",
+        "credentials": {
+          "identityId": "/subscriptions/47e8596d-ee73-4eb2-b6b4-cc13c2b87ssd/resourceGroups/testRG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/testId",
+          "type": "UserAssigned"
+        },
+        "eventHubType": "Notification",
+        "eventHubPartitionId": "partitionId",
+        "eventHubResourceId": "/subscriptions/225be6fe-ec1c-4d51-a368-f69348d2e6c5/resourceGroups/testRG/providers/Microsoft.EventHub/namespaces/eventHubNameSpaceName"
+      }
+    },
+    "api-version": "2023-05-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "kafkaConfigName",
+        "properties": {
+          "eventStreamingState": "Enabled",
+          "eventStreamingType": "Azure",
+          "consumerGroup": "consumerGroup",
+          "credentials": {
+            "identityId": "/subscriptions/47e8596d-ee73-4eb2-b6b4-cc13c2b87ssd/resourceGroups/testRG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/testId",
+            "type": "UserAssigned"
+          },
+          "eventHubType": "Notification",
+          "eventHubPartitionId": "aaaaa",
+          "eventHubResourceId": "/subscriptions/225be6fe-ec1c-4d51-a368-f69348d2e6c5/resourceGroups/testRG/providers/Microsoft.EventHub/namespaces/eventHubNameSpaceName"
+        },
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/SampleResourceGroup/providers/Microsoft.Purview/accounts/account1/kafkaConfigurations/default",
+        "systemData": {
+          "createdAt": "2022-03-09T01:36:27.637Z",
+          "createdBy": "User@user",
+          "createdByType": "User",
+          "lastModifiedAt": "2022-03-09T01:36:27.637Z",
+          "lastModifiedBy": "User",
+          "lastModifiedByType": "User"
+        },
+        "type": "Microsoft.Purview/accounts/kafkaconfiguration"
+      }
+    },
+    "201": {
+      "body": {
+        "name": "kafkaConfigName",
+        "properties": {
+          "eventStreamingState": "Enabled",
+          "eventStreamingType": "Azure",
+          "consumerGroup": "consumerGroup",
+          "credentials": {
+            "identityId": "/subscriptions/47e8596d-ee73-4eb2-b6b4-cc13c2b87ssd/resourceGroups/testRG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/testId",
+            "type": "UserAssigned"
+          },
+          "eventHubType": "Notification",
+          "eventHubPartitionId": "aaaaa",
+          "eventHubResourceId": "/subscriptions/225be6fe-ec1c-4d51-a368-f69348d2e6c5/resourceGroups/testRG/providers/Microsoft.EventHub/namespaces/eventHubNameSpaceName"
+        },
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/SampleResourceGroup/providers/Microsoft.Purview/accounts/account1/kafkaConfigurations/default",
+        "systemData": {
+          "createdAt": "2022-03-09T01:36:27.637Z",
+          "createdBy": "User@user",
+          "createdByType": "User",
+          "lastModifiedAt": "2022-03-09T01:36:27.637Z",
+          "lastModifiedBy": "User",
+          "lastModifiedByType": "User"
+        },
+        "type": "Microsoft.Purview/accounts/kafkaconfiguration"
+      }
+    }
+  }
+}

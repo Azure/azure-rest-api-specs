@@ -1,0 +1,581 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-01-01",
+    "title": "DeploymentAdminClient",
+    "description": "Deployment Admin Client."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Deployment.Admin/locations/global/productDeployments": {
+      "get": {
+        "x-ms-examples": {
+          "List the product deployments": {
+            "$ref": "./examples/ProductDeployment/List.json"
+          }
+        },
+        "description": "Invokes bootstrap action on the product deployment",
+        "tags": [
+          "ProductDeployments"
+        ],
+        "operationId": "ProductDeployments_List",
+        "parameters": [
+          {
+            "$ref": "Deployment.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Deployment.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/ProductDeploymentsList"
+            }
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Deployment.json#/definitions/ExtendedErrorInfo"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Deployment.Admin/locations/global/productDeployments/{productId}": {
+      "get": {
+        "x-ms-examples": {
+          "Gets the specified product deployment": {
+            "$ref": "./examples/ProductDeployment/Get.json"
+          }
+        },
+        "description": "Invokes bootstrap action on the product deployment",
+        "tags": [
+          "ProductDeployments"
+        ],
+        "operationId": "ProductDeployments_Get",
+        "parameters": [
+          {
+            "$ref": "Deployment.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Deployment.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "Deployment.json#/parameters/ProductIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/ProductDeploymentResourceEntity"
+            }
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Deployment.json#/definitions/ExtendedErrorInfo"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Deployment.Admin/locations/global/productDeployments/{productId}/bootstrap": {
+      "post": {
+        "x-ms-examples": {
+          "Invokes bootstrap action on the product deployment": {
+            "$ref": "./examples/ProductDeployment/Bootstrap.json"
+          }
+        },
+        "description": "Invokes bootstrap action on the product deployment",
+        "tags": [
+          "ProductDeployments"
+        ],
+        "operationId": "BootstrapAction_Product",
+        "parameters": [
+          {
+            "$ref": "Deployment.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Deployment.json#/parameters/ProductIdParameter"
+          },
+          {
+            "$ref": "ProductDeployment.json#/parameters/BootstrapActionParameter"
+          },
+          {
+            "$ref": "Deployment.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok"
+          },
+          "202": {
+            "description": "ACCEPTED"
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Deployment.json#/definitions/ExtendedErrorInfo"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Deployment.Admin/locations/global/productDeployments/{productId}/deploy": {
+      "post": {
+        "x-ms-examples": {
+          "Invokes deploy action on the product": {
+            "$ref": "./examples/ProductDeployment/Deploy.json"
+          }
+        },
+        "description": "Invokes deploy action on the product",
+        "tags": [
+          "ProductDeployments"
+        ],
+        "operationId": "DeployAction_Product",
+        "parameters": [
+          {
+            "$ref": "Deployment.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Deployment.json#/parameters/ProductIdParameter"
+          },
+          {
+            "$ref": "ProductDeployment.json#/parameters/DeployActionParameter"
+          },
+          {
+            "$ref": "Deployment.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok"
+          },
+          "202": {
+            "description": "ACCEPTED"
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Deployment.json#/definitions/ExtendedErrorInfo"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Deployment.Admin/locations/global/productDeployments/{productId}/remove": {
+      "post": {
+        "x-ms-examples": {
+          "Invokes remove action on the product deployment": {
+            "$ref": "./examples/ProductDeployment/Remove.json"
+          }
+        },
+        "description": "Invokes remove action on the product deployment",
+        "tags": [
+          "ProductDeployments"
+        ],
+        "operationId": "RemoveAction_Product",
+        "parameters": [
+          {
+            "$ref": "Deployment.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Deployment.json#/parameters/ProductIdParameter"
+          },
+          {
+            "$ref": "Deployment.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok"
+          },
+          "202": {
+            "description": "ACCEPTED"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Deployment.json#/definitions/ExtendedErrorInfo"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Deployment.Admin/locations/global/productDeployments/{productId}/rotateSecrets": {
+      "post": {
+        "x-ms-examples": {
+          "Invokes rotate secrets action on the product deployment": {
+            "$ref": "./examples/ProductDeployment/RotateSecrets.json"
+          }
+        },
+        "description": "Invokes rotate secrets action on the product deployment",
+        "tags": [
+          "ProductDeployments"
+        ],
+        "operationId": "RotateSecretsAction_Product",
+        "parameters": [
+          {
+            "$ref": "Deployment.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Deployment.json#/parameters/ProductIdParameter"
+          },
+          {
+            "$ref": "Deployment.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "ACCEPTED"
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Deployment.json#/definitions/ExtendedErrorInfo"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Deployment.Admin/locations/global/productDeployments/{productId}/executeRunner": {
+      "post": {
+        "x-ms-examples": {
+          "Invokes rotate secrets action on the product deployment": {
+            "$ref": "./examples/ProductDeployment/ExecuteRunner.json"
+          }
+        },
+        "description": "Invokes execute runner action on the product deployment",
+        "tags": [
+          "ProductDeployments"
+        ],
+        "operationId": "ExecuteRunnerAction_Product",
+        "parameters": [
+          {
+            "$ref": "Deployment.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Deployment.json#/parameters/ProductIdParameter"
+          },
+          {
+            "$ref": "Deployment.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ExecuteRunnerActionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "ACCEPTED"
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Deployment.json#/definitions/ExtendedErrorInfo"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "ProductDeploymentsList": {
+      "description": "List of Product Deployments.",
+      "properties": {
+        "value": {
+          "description": "List of Product Deployments.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProductDeploymentResourceEntity"
+          }
+        },
+        "nextLink": {
+          "description": "URI to the next page.",
+          "type": "string"
+        }
+      }
+    },
+    "ProductDeploymentResourceEntity": {
+      "type": "object",
+      "description": "Product deployment entity",
+      "properties": {
+        "properties": {
+          "description": "Product deployment resource properties",
+          "$ref": "#/definitions/ProductDeploymentsProperties",
+          "x-ms-client-flatten": true
+        },
+        "eTag": {
+          "description": "entity tag",
+          "type": "string"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "Deployment.json#/definitions/Resource"
+        }
+      ]
+    },
+    "ProductDeploymentsProperties": {
+      "type": "object",
+      "description": "Product deployment resource properties",
+      "properties": {
+        "status": {
+          "description": "Status of the product deployment.",
+          "$ref": "#/definitions/DeploymentStatus"
+        },
+        "subscriptionId": {
+          "description": "The product subscription identifier",
+          "type": "string"
+        },
+        "deployment": {
+          "description": "The current deployment information",
+          "$ref": "#/definitions/DeploymentInfo"
+        },
+        "lastSuccessfulDeployment": {
+          "description": "The last successful deployment information",
+          "$ref": "#/definitions/DeploymentInfo"
+        },
+        "secretRotation": {
+          "description": "Resource provider secret rotation information",
+          "$ref": "#/definitions/SecretRotationInfo"
+        },
+        "internalState": {
+          "description": "Product deployment resource internal state",
+          "$ref": "#/definitions/ProductDeploymentsInternalState"
+        },
+        "error": {
+          "description": "Error Information",
+          "$ref": "Deployment.json#/definitions/ExtendedErrorInfo"
+        },
+        "externalAccess": {
+          "description": "Resource provider secret rotation information",
+          "$ref": "#/definitions/ExternalAccessInfo"
+        },
+        "provisioningState": {
+          "description": "The provisioning state",
+          "type": "string"
+        },
+        "productId": {
+          "description": "The product identifier",
+          "type": "string"
+        }
+      }
+    },
+    "DeploymentStatus": {
+      "description": "Status of an operation.",
+      "type": "string",
+      "enum": [
+        "None",
+        "Bootstrapping",
+        "BootstrapSucceeded",
+        "BootstrapFailed",
+        "Deploying",
+        "DeploymentSucceeded",
+        "DeploymentFailed",
+        "Updating",
+        "UpdateSucceeded",
+        "UpdateFailed",
+        "Removing",
+        "RemoveFailed",
+        "SecretRotationInProgress",
+        "SecretRotationSucceeded",
+        "SecretRotationFailed",
+        "Migrated"
+      ],
+      "x-ms-enum": {
+        "name": "DeploymentStatus",
+        "modelAsString": true
+      }
+    },
+    "DeploymentInfo": {
+      "type": "object",
+      "description": "Resource provider deployment information",
+      "properties": {
+        "version": {
+          "description": "The product version",
+          "type": "string"
+        },
+        "parameters": {
+          "description": "The latest deployment parameters as JToken",
+          "type": "string"
+        },
+        "actionPlanInstanceResourceId": {
+          "description": "The identifier of the latest action plan instance resource.",
+          "type": "string"
+        },
+        "eTag": {
+          "description": "entity tag",
+          "type": "string"
+        }
+      }
+    },
+    "SecretRotationInfo": {
+      "type": "object",
+      "description": "Resource provider deployment information",
+      "properties": {
+        "secretRotationPlanInstanceResourceId": {
+          "description": "The identifier of the latest secret rotation plan instance resource.",
+          "type": "string"
+        }
+      }
+    },
+    "ExternalAccessInfo": {
+      "type": "object",
+      "description": "Resource provider deployment information",
+      "properties": {
+        "principalId": {
+          "description": "The object identifier of the user, group or service principal that have access to resource provider subscription.",
+          "type": "string"
+        },
+        "expirationTime": {
+          "description": "The deployment start time",
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "ProductDeploymentsInternalState": {
+      "type": "object",
+      "description": "Resource type internal state",
+      "properties": {
+        "jobId": {
+          "description": "The latest deployment job identifier",
+          "type": "string"
+        },
+        "intermediateVaultId": {
+          "description": "The intermediate vault resource identifier",
+          "type": "string"
+        },
+        "intermediateVaultUri": {
+          "description": "The intermediate vault Uri.",
+          "type": "string"
+        },
+        "externalAccessRoleAssignmentId": {
+          "description": "The current external access role assignment identifier",
+          "type": "string"
+        }
+      }
+    },
+    "DeployActionParameters": {
+      "description": "Parameters for deploy action",
+      "type": "object",
+      "properties": {
+        "version": {
+          "description": "Generic Version object",
+          "type": "string"
+        },
+        "parameters": {
+          "description": "Deployment parameters, value in JToken",
+          "type": "object"
+        }
+      }
+    },
+    "BootStrapActionParameters": {
+      "description": "Parameters for bootstrap action",
+      "type": "object",
+      "properties": {
+        "version": {
+          "description": "Generic Version object",
+          "type": "string"
+        }
+      }
+    },
+    "ExecuteRunnerActionParameters": {
+      "description": "Parameters for execute runner action",
+      "type": "object",
+      "properties": {
+        "parameters": {
+          "description": "Execute Runner parameters, value in JToken",
+          "type": "object"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ResourceGroupParameter": {
+      "description": "The resource group the resource is located under.",
+      "name": "resourceGroup",
+      "in": "path",
+      "type": "string",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "BootstrapActionParameter": {
+      "description": "Represents bootstrap action parameter",
+      "name": "bootstrapActionParameter",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/BootStrapActionParameters"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "DeployActionParameter": {
+      "description": "Represents bootstrap action parameter",
+      "name": "deployActionParameter",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/DeployActionParameters"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "ExecuteRunnerActionParameter": {
+      "description": "Represents execute runner action parameter",
+      "name": "executeRunnerActionParameter",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/ExecuteRunnerActionParameters"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

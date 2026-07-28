@@ -1,0 +1,40 @@
+{
+  "title": "Translate Text with minimum properties",
+  "operationId": "Translate",
+  "parameters": {
+    "api-version": "2026-06-06",
+    "body": {
+      "inputs": [
+        {
+          "text": "This is a test.",
+          "targets": [
+            {
+              "language": "cs"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "detectedLanguage": {
+              "language": "en",
+              "score": 0.12345
+            },
+            "translations": [
+              {
+                "language": "cs",
+                "sourceCharacters": 15,
+                "text": "Tohle je test."
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

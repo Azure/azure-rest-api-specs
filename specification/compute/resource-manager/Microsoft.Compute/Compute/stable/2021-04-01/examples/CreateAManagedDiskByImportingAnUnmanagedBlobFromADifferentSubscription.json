@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2021-04-01",
+    "diskName": "myDisk",
+    "disk": {
+      "location": "West US",
+      "properties": {
+        "creationData": {
+          "createOption": "Import",
+          "storageAccountId": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/myStorageAccount",
+          "sourceUri": "https://mystorageaccount.blob.core.windows.net/osimages/osimage.vhd"
+        }
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "body": {
+        "name": "myDisk",
+        "location": "West US",
+        "properties": {
+          "provisioningState": "Updating",
+          "creationData": {
+            "createOption": "Import",
+            "storageAccountId": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/myStorageAccount",
+            "sourceUri": "https://mystorageaccount.blob.core.windows.net/osimages/osimage.vhd"
+          }
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "name": "myDisk",
+        "location": "West US",
+        "properties": {
+          "provisioningState": "Updating",
+          "creationData": {
+            "createOption": "Import",
+            "storageAccountId": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/myStorageAccount",
+            "sourceUri": "https://mystorageaccount.blob.core.windows.net/osimages/osimage.vhd"
+          }
+        }
+      }
+    }
+  }
+}

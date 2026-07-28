@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "myResourceGroup",
+    "machineName": "myMachine",
+    "api-version": "2023-06-20-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "networkInterfaces": [
+          {
+            "ipAddresses": [
+              {
+                "address": "192.168.12.345",
+                "ipAddressVersion": "IPv4",
+                "subnet": {
+                  "addressPrefix": "192.168.12.0/24"
+                }
+              }
+            ]
+          },
+          {
+            "ipAddresses": [
+              {
+                "address": "1001:0:34aa:5000:1234:aaaa:bbbb:cccc",
+                "ipAddressVersion": "IPv6",
+                "subnet": {
+                  "addressPrefix": "1001:0:34aa:5000::/64"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

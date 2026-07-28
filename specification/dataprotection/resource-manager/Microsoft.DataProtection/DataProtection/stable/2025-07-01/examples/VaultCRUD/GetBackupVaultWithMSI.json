@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "api-version": "2025-07-01",
+    "resourceGroupName": "SampleResourceGroup",
+    "subscriptionId": "0b352192-dcac-4cc7-992e-a96190ccc68c",
+    "vaultName": "swaggerExample"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "swaggerExample",
+        "type": "Microsoft.DataProtection/Backupvaults",
+        "id": "/subscriptions/0b352192-dcac-4cc7-992e-a96190ccc68c/resourceGroups/SampleResourceGroup/providers/Microsoft.DataProtection/Backupvaults/swaggerExample",
+        "location": "WestUS",
+        "properties": {
+          "bcdrSecurityLevel": "Good",
+          "featureSettings": {
+            "crossRegionRestoreSettings": {
+              "state": "Enabled"
+            }
+          },
+          "provisioningState": "Succeeded",
+          "secureScore": "Adequate",
+          "securitySettings": {
+            "softDeleteSettings": {
+              "retentionDurationInDays": 14,
+              "state": "Enabled"
+            }
+          },
+          "storageSettings": [
+            {
+              "type": "LocallyRedundant",
+              "datastoreType": "VaultStore"
+            }
+          ]
+        },
+        "tags": {
+          "key1": "val1"
+        }
+      }
+    }
+  },
+  "operationId": "BackupVaults_Get",
+  "title": "Get BackupVault With MSI"
+}

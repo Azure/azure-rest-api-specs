@@ -1,0 +1,11 @@
+suppressions:
+  azure-sdk-for-go:
+    - package: sdk/resourcemanager/eventhub/armeventhub
+      breaking-changes:
+        - Operation `*NamespacesClient.Update` has been changed to LRO, use `*NamespacesClient.BeginUpdate` instead.
+        - Struct `ErrorAdditionalInfo` has been removed
+        - Struct `ErrorDetail` has been removed
+        - Struct `ErrorResponse` has been removed
+        - Struct `ProxyResource` has been removed
+        - Struct `Resource` has been removed
+        - Struct `TrackedResource` has been removed

@@ -1,0 +1,61 @@
+{
+  "parameters": {
+    "name": "test-ase",
+    "api-version": "2025-05-01",
+    "privateEndpointConnectionName": "fa38656c-034e-43d8-adce-fe06ce039c98",
+    "privateEndpointWrapper": {
+      "properties": {
+        "privateLinkServiceConnectionState": {
+          "description": "Approved by johndoe@company.com",
+          "status": "Approved"
+        }
+      }
+    },
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "fa38656c-034e-43d8-adce-fe06ce039c98",
+        "type": "Microsoft.Web/hostingEnvironments/privateEndpointConnections",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-rg/providers/Microsoft.Web/hostingEnvironments/test-ase/privateEndpointConnections/fa38656c-034e-43d8-adce-fe06ce039c98",
+        "properties": {
+          "ipAddresses": [],
+          "privateEndpoint": {
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-rg/providers/Microsoft.Network/test-privateEndpoint"
+          },
+          "privateLinkServiceConnectionState": {
+            "description": "Approved by johndoe@company.com",
+            "actionsRequired": "None",
+            "status": "Approved"
+          },
+          "provisioningState": "Succeeded"
+        }
+      },
+      "headers": {}
+    },
+    "202": {
+      "body": {
+        "name": "fa38656c-034e-43d8-adce-fe06ce039c98",
+        "type": "Microsoft.Web/hostingEnvironments/privateEndpointConnections",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-rg/providers/Microsoft.Web/hostingEnvironments/test-ase/privateEndpointConnections/fa38656c-034e-43d8-adce-fe06ce039c98",
+        "properties": {
+          "ipAddresses": [],
+          "privateEndpoint": {
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-rg/providers/Microsoft.Network/test-privateEndpoint"
+          },
+          "privateLinkServiceConnectionState": {
+            "description": "Approved by johndoe@company.com",
+            "actionsRequired": "None",
+            "status": "Approved"
+          },
+          "provisioningState": "Succeeded"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "AppServiceEnvironments_ApproveOrRejectPrivateEndpointConnection",
+  "title": "Approves or rejects a private endpoint connection."
+}

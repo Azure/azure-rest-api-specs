@@ -1,0 +1,46 @@
+name: Question/Query
+description: Use this template to file a question/query for the API Spec team that are not bugs or feature requests.
+title: "[Question]"
+
+labels:
+  - question
+
+body:
+  - type: input
+    id: api_spec
+    attributes:
+      label: API Spec link
+      description: "Link to the OpenAPI or TypeSpec spec"
+      placeholder: "e.g. https://github.com/Azure/azure-rest-api-specs/blob/main/specification/containerservice/Fleet.Management/main.tsp"
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: API Spec version
+      description: "Version of the API Spec"
+      placeholder: "e.g. 2023-10-15"
+    validations:
+      required: true
+
+  - type: textarea
+    id: background
+    attributes:
+      label: Question/Query
+      description: How can we help?
+      placeholder: Description
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: |
+        Please provide more information on your environment:
+          * Hosting platform or OS and .NET runtime version (`dotnet --info` output for .NET Core projects): [e.g. Azure AppService or Windows 10 .NET Framework 4.8]
+          * IDE and version: [e.g. Visual Studio 16.3]
+      placeholder: Environment
+    validations:
+      required: false

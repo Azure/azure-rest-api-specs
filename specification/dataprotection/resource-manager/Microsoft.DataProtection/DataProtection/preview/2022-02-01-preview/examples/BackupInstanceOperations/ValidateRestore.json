@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "subscriptionId": "04cf684a-d41f-4550-9f70-7708a3a2283b",
+    "resourceGroupName": "000pikumar",
+    "vaultName": "PratikPrivatePreviewVault1",
+    "api-version": "2022-02-01-preview",
+    "backupInstanceName": "testInstance1",
+    "parameters": {
+      "restoreRequestObject": {
+        "objectType": "AzureBackupRecoveryPointBasedRestoreRequest",
+        "recoveryPointId": "hardcodedRP",
+        "sourceDataStoreType": "VaultStore",
+        "sourceResourceId": "/subscriptions/f75d8d8b-6735-4697-82e1-1a7a3ff0d5d4/resourceGroups/viveksipgtest/providers/Microsoft.DBforPostgreSQL/servers/viveksipgtest/databases/testdb",
+        "restoreTargetInfo": {
+          "objectType": "RestoreTargetInfo",
+          "recoveryOption": "FailIfExists",
+          "datasourceSetInfo": {
+            "objectType": "DatasourceSet",
+            "resourceID": "/subscriptions/f75d8d8b-6735-4697-82e1-1a7a3ff0d5d4/resourceGroups/viveksipgtest/providers/Microsoft.DBforPostgreSQL/servers/viveksipgtest",
+            "resourceName": "viveksipgtest",
+            "resourceType": "Microsoft.DBforPostgreSQL/servers",
+            "resourceUri": "",
+            "resourceLocation": "",
+            "datasourceType": "Microsoft.DBforPostgreSQL/servers/databases"
+          },
+          "datasourceInfo": {
+            "objectType": "Datasource",
+            "resourceID": "/subscriptions/f75d8d8b-6735-4697-82e1-1a7a3ff0d5d4/resourceGroups/viveksipgtest/providers/Microsoft.DBforPostgreSQL/servers/viveksipgtest/databases/targetdb",
+            "resourceName": "targetdb",
+            "resourceType": "Microsoft.DBforPostgreSQL/servers/databases",
+            "resourceUri": "",
+            "resourceLocation": "",
+            "datasourceType": "Microsoft.DBforPostgreSQL/servers/databases"
+          },
+          "datasourceAuthCredentials": {
+            "secretStoreResource": {
+              "uri": "https://samplevault.vault.azure.net/secrets/credentials",
+              "secretStoreType": "AzureKeyVault"
+            },
+            "objectType": "SecretStoreBasedAuthCredentials"
+          },
+          "restoreLocation": "southeastasia"
+        }
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/04cf684a-d41f-4550-9f70-7708a3a2283b/resourceGroups/000pikumar/providers/Microsoft.DataProtection/operationResults/ZTA4YjQ0ZGYtYmNkNS00YTk1LWFjZTMtOTc1MjNmZWIxYWZlO2Y1ODg1MzA3LWJkNjItNDQ2OC05ZjZlLTJkMGM2NjNiNmJmNg==?api-version=2022-02-01-preview",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/04cf684a-d41f-4550-9f70-7708a3a2283b/resourceGroups/000pikumar/providers/Microsoft.DataProtection/backupVaults/PratikPrivatePreviewVault1/operationStatus/ZTA4YjQ0ZGYtYmNkNS00YTk1LWFjZTMtOTc1MjNmZWIxYWZlO2Y1ODg1MzA3LWJkNjItNDQ2OC05ZjZlLTJkMGM2NjNiNmJmNg==?api-version=2022-02-01-preview",
+        "Retry-After": "60"
+      }
+    },
+    "200": {
+      "body": {
+        "jobId": "c60cb49-63e8-4b21-b9bd-26277b3fdfae",
+        "objectType": "OperationJobExtendedInfo"
+      }
+    }
+  }
+}

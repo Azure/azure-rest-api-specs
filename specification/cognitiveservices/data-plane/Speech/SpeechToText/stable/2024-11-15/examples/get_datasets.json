@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "Endpoint": "https://westus.api.cognitive.microsoft.com/",
+    "Ocp-Apim-Subscription-Key": "{API Key}",
+    "api-version": "2024-11-15",
+    "skip": 0,
+    "top": 2,
+    "filter": "createdDateTime%20ge%202018-01-24T09:54:39Z"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "values": [
+          {
+            "self": "https://westus.api.cognitive.microsoft.com/speechtotext/datasets/9d5f4100-5f8e-4dd6-bd83-9bbbf50d57f1?api-version=2024-11-15",
+            "displayName": "Acoustic dataset",
+            "locale": "en-US",
+            "createdDateTime": "2019-01-07T11:34:12Z",
+            "lastActionDateTime": "2019-01-07T11:36:07Z",
+            "kind": "Acoustic",
+            "links": {
+              "files": "https://westus.api.cognitive.microsoft.com/speechtotext/datasets/9d5f4100-5f8e-4dd6-bd83-9bbbf50d57f1/files?api-version=2024-11-15"
+            },
+            "properties": {
+              "acceptedLineCount": 11,
+              "rejectedLineCount": 2,
+              "durationMilliseconds": 252000,
+              "textNormalizationKind": "Default"
+            },
+            "contentUrl": "https://www.contoso.com/acousticdata/sourcelocation",
+            "status": "Succeeded"
+          },
+          {
+            "self": "https://westus.api.cognitive.microsoft.com/speechtotext/datasets/cdc91c24-3972-496d-a12f-209c35f4cc6c?api-version=2024-11-15",
+            "displayName": "Language dataset",
+            "locale": "en-US",
+            "createdDateTime": "2019-01-07T11:34:12Z",
+            "lastActionDateTime": "2019-01-07T11:36:07Z",
+            "kind": "Language",
+            "links": {
+              "files": "https://westus.api.cognitive.microsoft.com/speechtotext/datasets/cdc91c24-3972-496d-a12f-209c35f4cc6c/files?api-version=2024-11-15"
+            },
+            "properties": {
+              "acceptedLineCount": 11,
+              "rejectedLineCount": 2,
+              "durationMilliseconds": 0,
+              "textNormalizationKind": "Default"
+            },
+            "contentUrl": "https://www.contoso.com/LanguageData/SourceLocation",
+            "status": "Succeeded"
+          }
+        ],
+        "@nextLink": "https://westus.api.cognitive.microsoft.com/speechtotext/datasets?skip=2&top=2&filter=createdDateTime%20ge%202018-01-24T09:54:39Z&api-version=2024-11-15"
+      }
+    }
+  }
+}

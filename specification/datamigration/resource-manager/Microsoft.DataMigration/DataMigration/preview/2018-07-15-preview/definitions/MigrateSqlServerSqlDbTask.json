@@ -1,0 +1,373 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Database Migration Service Resource Provider",
+    "version": "2018-07-15-preview"
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {},
+  "definitions": {
+    "MigrateSqlServerSqlDbTaskInput": {
+      "type": "object",
+      "description": "Input for the task that migrates on-prem SQL Server databases to Azure SQL Database",
+      "properties": {
+        "selectedDatabases": {
+          "type": "array",
+          "description": "Databases to migrate",
+          "items": {
+            "$ref": "./TasksCommon.json#/definitions/MigrateSqlServerSqlDbDatabaseInput"
+          }
+        },
+        "validationOptions": {
+          "description": "Options for enabling various post migration validations. Available options, \n 1.) Data Integrity Check: Performs a checksum based comparison on source and target tables after the migration to ensure the correctness of the data. \n 2.) Schema Validation: Performs a thorough schema comparison between the source and target tables and provides a list of differences between the source and target database, 3.) Query Analysis: Executes a set of queries picked up automatically either from the Query Plan Cache or Query Store and execute them and compares the execution time between the source and target database.",
+          "$ref": "./MigrationValidation.json#/definitions/MigrationValidationOptions"
+        }
+      },
+      "required": [
+        "selectedDatabases"
+      ],
+      "allOf": [
+        {
+          "$ref": "./TasksCommon.json#/definitions/SqlMigrationTaskInput"
+        }
+      ]
+    },
+    "MigrateSqlServerSqlDbTaskOutput": {
+      "type": "object",
+      "description": "Output for the task that migrates on-prem SQL Server databases to Azure SQL Database",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Result identifier",
+          "readOnly": true
+        },
+        "resultType": {
+          "description": "Result type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "resultType"
+      ],
+      "discriminator": "resultType"
+    },
+    "MigrateSqlServerSqlDbTaskOutputMigrationLevel": {
+      "x-ms-discriminator-value": "MigrationLevelOutput",
+      "type": "object",
+      "properties": {
+        "startedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Migration start time",
+          "readOnly": true
+        },
+        "endedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Migration end time",
+          "readOnly": true
+        },
+        "durationInSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Duration of task execution in seconds.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "./TasksCommon.json#/definitions/MigrationStatus",
+          "description": "Current status of migration",
+          "readOnly": true
+        },
+        "statusMessage": {
+          "type": "string",
+          "description": "Migration status message",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Migration progress message",
+          "readOnly": true
+        },
+        "databases": {
+          "type": "string",
+          "description": "Selected databases as a map from database name to database id",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "databaseSummary": {
+          "type": "string",
+          "description": "Summary of database results in the migration",
+          "additionalProperties": {
+            "$ref": "#/definitions/DatabaseSummaryResult"
+          },
+          "readOnly": true
+        },
+        "migrationValidationResult": {
+          "type": "object",
+          "description": "Migration Validation Results",
+          "$ref": "./MigrationValidation.json#/definitions/MigrationValidationResult"
+        },
+        "migrationReportResult": {
+          "type": "object",
+          "description": "Migration Report Result, provides unique url for downloading your migration report.",
+          "$ref": "./MigrationValidation.json#/definitions/MigrationReportResult"
+        },
+        "sourceServerVersion": {
+          "type": "string",
+          "description": "Source server version",
+          "readOnly": true
+        },
+        "sourceServerBrandVersion": {
+          "type": "string",
+          "description": "Source server brand version",
+          "readOnly": true
+        },
+        "targetServerVersion": {
+          "type": "string",
+          "description": "Target server version",
+          "readOnly": true
+        },
+        "targetServerBrandVersion": {
+          "type": "string",
+          "description": "Target server brand version",
+          "readOnly": true
+        },
+        "exceptionsAndWarnings": {
+          "description": "Migration exceptions and warnings.",
+          "type": "array",
+          "items": {
+            "$ref": "./Common.json#/definitions/ReportableException"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/MigrateSqlServerSqlDbTaskOutput"
+        }
+      ]
+    },
+    "MigrateSqlServerSqlDbTaskOutputDatabaseLevel": {
+      "type": "object",
+      "x-ms-discriminator-value": "DatabaseLevelOutput",
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "Name of the item",
+          "readOnly": true
+        },
+        "startedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Migration start time",
+          "readOnly": true
+        },
+        "endedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Migration end time",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "./TasksCommon.json#/definitions/MigrationState",
+          "description": "Current state of migration",
+          "readOnly": true
+        },
+        "stage": {
+          "$ref": "./TasksCommon.json#/definitions/DatabaseMigrationStage",
+          "description": "Migration stage that this database is in",
+          "readOnly": true
+        },
+        "statusMessage": {
+          "type": "string",
+          "description": "Status message",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Migration progress message",
+          "readOnly": true
+        },
+        "numberOfObjects": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of objects",
+          "readOnly": true
+        },
+        "numberOfObjectsCompleted": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of successfully completed objects",
+          "readOnly": true
+        },
+        "errorCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of database/object errors.",
+          "readOnly": true
+        },
+        "errorPrefix": {
+          "type": "string",
+          "description": "Wildcard string prefix to use for querying all errors of the item",
+          "readOnly": true
+        },
+        "resultPrefix": {
+          "type": "string",
+          "description": "Wildcard string prefix to use for querying all sub-tem results of the item",
+          "readOnly": true
+        },
+        "exceptionsAndWarnings": {
+          "description": "Migration exceptions and warnings.",
+          "type": "array",
+          "items": {
+            "$ref": "./Common.json#/definitions/ReportableException"
+          },
+          "readOnly": true
+        },
+        "objectSummary": {
+          "type": "string",
+          "description": "Summary of object results in the migration",
+          "additionalProperties": {
+            "$ref": "./TasksCommon.json#/definitions/DataItemMigrationSummaryResult"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/MigrateSqlServerSqlDbTaskOutput"
+        }
+      ]
+    },
+    "MigrateSqlServerSqlDbTaskOutputTableLevel": {
+      "type": "object",
+      "x-ms-discriminator-value": "TableLevelOutput",
+      "properties": {
+        "objectName": {
+          "type": "string",
+          "description": "Name of the item",
+          "readOnly": true
+        },
+        "startedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Migration start time",
+          "readOnly": true
+        },
+        "endedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Migration end time",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "./TasksCommon.json#/definitions/MigrationState",
+          "description": "Current state of migration",
+          "readOnly": true
+        },
+        "statusMessage": {
+          "type": "string",
+          "description": "Status message",
+          "readOnly": true
+        },
+        "itemsCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of items",
+          "readOnly": true
+        },
+        "itemsCompletedCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of successfully completed items",
+          "readOnly": true
+        },
+        "errorPrefix": {
+          "type": "string",
+          "description": "Wildcard string prefix to use for querying all errors of the item",
+          "readOnly": true
+        },
+        "resultPrefix": {
+          "type": "string",
+          "description": "Wildcard string prefix to use for querying all sub-tem results of the item",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/MigrateSqlServerSqlDbTaskOutput"
+        }
+      ]
+    },
+    "MigrateSqlServerSqlDbTaskOutputError": {
+      "type": "object",
+      "x-ms-discriminator-value": "ErrorOutput",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the exception",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "./Common.json#/definitions/ReportableException",
+          "description": "Migration error",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/MigrateSqlServerSqlDbTaskOutput"
+        }
+      ]
+    },
+    "DatabaseSummaryResult": {
+      "type": "object",
+      "description": "Summary of database results in the migration",
+      "properties": {
+        "sizeMB": {
+          "type": "number",
+          "format": "double",
+          "description": "Size of the database in megabytes",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./TasksCommon.json#/definitions/DataItemMigrationSummaryResult"
+        }
+      ]
+    },
+    "MigrateSqlServerSqlDbTaskOutputValidationResult": {
+      "x-ms-discriminator-value": "MigrationValidationOutput",
+      "type": "object",
+      "$ref": "./MigrationValidation.json#/definitions/MigrationValidationResult",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MigrateSqlServerSqlDbTaskOutput"
+        }
+      ]
+    },
+    "MigrateSqlServerSqlDbTaskOutputDatabaseLevelValidationResult": {
+      "x-ms-discriminator-value": "MigrationDatabaseLevelValidationOutput",
+      "type": "object",
+      "$ref": "./MigrationValidation.json#/definitions/MigrationValidationDatabaseLevelResult",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MigrateSqlServerSqlDbTaskOutput"
+        }
+      ]
+    }
+  }
+}

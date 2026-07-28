@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myRG",
+    "accountName": "account1",
+    "poolName": "customPool1",
+    "api-version": "2025-03-01-preview",
+    "body": {
+      "location": "eastus",
+      "properties": {
+        "size": 4398046511104,
+        "serviceLevel": "Flexible",
+        "qosType": "Manual",
+        "customThroughputMibps": 128
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/capacityPools/customPool1",
+        "name": "account1/customPool1",
+        "type": "Microsoft.NetApp/netAppAccounts/capacityPools",
+        "location": "eastus",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "poolId": "00000000-0000-0000-0000-000000000000",
+          "serviceLevel": "Flexible",
+          "size": 4398046511104,
+          "qosType": "Manual",
+          "totalThroughputMibps": 128,
+          "customThroughputMibps": 128
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/capacityPools/customPool1",
+        "name": "account1/customPool1",
+        "type": "Microsoft.NetApp/netAppAccounts/capacityPools",
+        "location": "eastus",
+        "properties": {
+          "provisioningState": "Creating",
+          "poolId": "00000000-0000-0000-0000-000000000000",
+          "serviceLevel": "Flexible",
+          "size": 4398046511104,
+          "qosType": "Manual",
+          "totalThroughputMibps": 128,
+          "customThroughputMibps": 128
+        }
+      }
+    }
+  }
+}

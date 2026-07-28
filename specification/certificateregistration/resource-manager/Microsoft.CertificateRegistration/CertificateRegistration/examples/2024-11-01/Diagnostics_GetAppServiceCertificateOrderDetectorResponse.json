@@ -1,0 +1,92 @@
+{
+  "parameters": {
+    "api-version": "2024-11-01",
+    "certificateOrderName": "SampleCertificateOrderName",
+    "detectorName": "AutoRenewStatus",
+    "resourceGroupName": "Sample-WestUSResourceGroup",
+    "subscriptionId": "5700fc96-77b4-4f8d-afce-c353d8c443bd"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "AutoRenewStatus",
+        "id": "/subscriptions/5700fc96-77b4-4f8d-afce-c353d8c443bd/resourceGroups/Sample-WestUSResourceGroup/providers/Microsoft.CertificateRegistration/certificateOrders/SampleCertificateOrderName/detectors/AutoRenewStatus",
+        "properties": {
+          "dataset": [
+            {
+              "renderingProperties": {
+                "type": "Insights",
+                "description": null,
+                "title": null
+              },
+              "table": {
+                "columns": [
+                  {
+                    "columnName": "Status",
+                    "columnType": null,
+                    "dataType": "String"
+                  },
+                  {
+                    "columnName": "Message",
+                    "columnType": null,
+                    "dataType": "String"
+                  },
+                  {
+                    "columnName": "Data.Name",
+                    "columnType": null,
+                    "dataType": "String"
+                  },
+                  {
+                    "columnName": "Data.Value",
+                    "columnType": null,
+                    "dataType": "String"
+                  },
+                  {
+                    "columnName": "Expanded",
+                    "columnType": null,
+                    "dataType": "String"
+                  },
+                  {
+                    "columnName": "Solutions",
+                    "columnType": null,
+                    "dataType": "String"
+                  }
+                ],
+                "rows": [
+                  [
+                    "Info",
+                    "App Service Certificate name SampleCertificateOrderName",
+                    "Certificate for",
+                    "<b>*.mysampledomain.com</b>",
+                    "False",
+                    "null"
+                  ],
+                  [
+                    "Info",
+                    "App Service Certificate name SampleCertificateOrderName",
+                    "Certificate Status",
+                    "<b>Issued</b>",
+                    "False",
+                    "null"
+                  ]
+                ],
+                "tableName": ""
+              }
+            }
+          ],
+          "metadata": {
+            "name": "AutoRenewStatus",
+            "type": "Detector",
+            "description": "Check auto renew status",
+            "category": null,
+            "id": "AutoRenewStatus",
+            "score": 0,
+            "supportTopicList": []
+          }
+        }
+      }
+    }
+  },
+  "operationId": "CertificateOrdersDiagnostics_GetAppServiceCertificateOrderDetectorResponse",
+  "title": "Get app service certificate order detector response"
+}

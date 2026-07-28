@@ -1,0 +1,2173 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2024-02-02-preview",
+    "title": "ContainerApps API Client"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {},
+  "definitions": {
+    "EnvironmentVar": {
+      "description": "Container App container environment variable.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Environment variable name.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Non-secret environment variable value.",
+          "type": "string"
+        },
+        "secretRef": {
+          "description": "Name of the Container App secret from which to pull the environment variable value.",
+          "type": "string"
+        }
+      }
+    },
+    "WorkloadProfileName": {
+      "description": "Workload profile name for container apps to execute on.",
+      "type": "string"
+    },
+    "WorkloadProfileType": {
+      "description": "Workload profile type for container apps to execute on.",
+      "type": "string"
+    },
+    "BaseContainer": {
+      "description": "Container App base container definition.",
+      "type": "object",
+      "properties": {
+        "image": {
+          "description": "Container image tag.",
+          "type": "string"
+        },
+        "imageType": {
+          "description": "The type of the image. Set to CloudBuild to let the system manages the image, where user will not be able to update image through image field. Set to ContainerImage for user provided image.",
+          "type": "string",
+          "enum": [
+            "CloudBuild",
+            "ContainerImage"
+          ],
+          "x-ms-enum": {
+            "name": "imageType",
+            "modelAsString": true
+          }
+        },
+        "name": {
+          "description": "Custom container name.",
+          "type": "string"
+        },
+        "command": {
+          "description": "Container start command.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "args": {
+          "description": "Container start command arguments.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "env": {
+          "description": "Container environment variables.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EnvironmentVar"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "resources": {
+          "$ref": "#/definitions/ContainerResources",
+          "description": "Container resource requirements."
+        },
+        "volumeMounts": {
+          "description": "Container volume mounts.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VolumeMount"
+          },
+          "x-ms-identifiers": [
+            "volumeName"
+          ]
+        }
+      }
+    },
+    "InitContainer": {
+      "description": "Container App init container definition",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseContainer"
+        }
+      ]
+    },
+    "Container": {
+      "description": "Container App container definition",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseContainer"
+        }
+      ],
+      "properties": {
+        "probes": {
+          "description": "List of probes for the container.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContainerAppProbe"
+          },
+          "x-ms-identifiers": [
+            "type"
+          ]
+        }
+      }
+    },
+    "ContainerResources": {
+      "description": "Container App container resource requirements.",
+      "type": "object",
+      "properties": {
+        "cpu": {
+          "format": "double",
+          "description": "Required CPU in cores, e.g. 0.5",
+          "type": "number"
+        },
+        "memory": {
+          "description": "Required memory, e.g. \"250Mb\"",
+          "type": "string"
+        },
+        "ephemeralStorage": {
+          "description": "Ephemeral Storage, e.g. \"1Gi\"",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ContainerAppProbe": {
+      "description": "Probe describes a health check to be performed against a container to determine whether it is alive or ready to receive traffic.",
+      "type": "object",
+      "properties": {
+        "failureThreshold": {
+          "description": "Minimum consecutive failures for the probe to be considered failed after having succeeded. Defaults to 3. Minimum value is 1. Maximum value is 10.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "httpGet": {
+          "description": "HTTPGet specifies the http request to perform.",
+          "type": "object",
+          "required": [
+            "port"
+          ],
+          "properties": {
+            "host": {
+              "description": "Host name to connect to, defaults to the pod IP. You probably want to set \"Host\" in httpHeaders instead.",
+              "type": "string"
+            },
+            "httpHeaders": {
+              "description": "Custom headers to set in the request. HTTP allows repeated headers.",
+              "type": "array",
+              "items": {
+                "description": "HTTPHeader describes a custom header to be used in HTTP probes",
+                "type": "object",
+                "required": [
+                  "name",
+                  "value"
+                ],
+                "properties": {
+                  "name": {
+                    "description": "The header field name",
+                    "type": "string"
+                  },
+                  "value": {
+                    "description": "The header field value",
+                    "type": "string"
+                  }
+                }
+              },
+              "x-ms-identifiers": [
+                "name"
+              ]
+            },
+            "path": {
+              "description": "Path to access on the HTTP server.",
+              "type": "string"
+            },
+            "port": {
+              "description": "Name or number of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
+              "type": "integer",
+              "format": "int32"
+            },
+            "scheme": {
+              "description": "Scheme to use for connecting to the host. Defaults to HTTP.",
+              "enum": [
+                "HTTP",
+                "HTTPS"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "Scheme",
+                "modelAsString": true
+              }
+            }
+          }
+        },
+        "initialDelaySeconds": {
+          "description": "Number of seconds after the container has started before liveness probes are initiated. Minimum value is 1. Maximum value is 60.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "periodSeconds": {
+          "description": "How often (in seconds) to perform the probe. Default to 10 seconds. Minimum value is 1. Maximum value is 240.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "successThreshold": {
+          "description": "Minimum consecutive successes for the probe to be considered successful after having failed. Defaults to 1. Must be 1 for liveness and startup. Minimum value is 1. Maximum value is 10.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "tcpSocket": {
+          "description": "TCPSocket specifies an action involving a TCP port. TCP hooks not yet supported.",
+          "type": "object",
+          "required": [
+            "port"
+          ],
+          "properties": {
+            "host": {
+              "description": "Optional: Host name to connect to, defaults to the pod IP.",
+              "type": "string"
+            },
+            "port": {
+              "description": "Number or name of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        },
+        "terminationGracePeriodSeconds": {
+          "description": "Optional duration in seconds the pod needs to terminate gracefully upon probe failure. The grace period is the duration in seconds after the processes running in the pod are sent a termination signal and the time when the processes are forcibly halted with a kill signal. Set this value longer than the expected cleanup time for your process. If this value is nil, the pod's terminationGracePeriodSeconds will be used. Otherwise, this value overrides the value provided by the pod spec. Value must be non-negative integer. The value zero indicates stop immediately via the kill signal (no opportunity to shut down). This is an alpha field and requires enabling ProbeTerminationGracePeriod feature gate. Maximum value is 3600 seconds (1 hour)",
+          "type": "integer",
+          "format": "int64"
+        },
+        "timeoutSeconds": {
+          "description": "Number of seconds after which the probe times out. Defaults to 1 second. Minimum value is 1. Maximum value is 240.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "type": {
+          "description": "The type of probe.",
+          "enum": [
+            "Liveness",
+            "Readiness",
+            "Startup"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Type",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ContainerRegistryWithCustomImage": {
+      "type": "object",
+      "properties": {
+        "server": {
+          "type": "string",
+          "description": "Login server of the container registry that the final image should be uploaded to. Builder resource needs to have this container registry defined along with an identity to use to access it."
+        },
+        "image": {
+          "type": "string",
+          "description": "Full name that the final image should be uploaded as, including both image name and tag."
+        }
+      },
+      "description": "Container registry that the final image will be uploaded to.",
+      "required": [
+        "server"
+      ]
+    },
+    "CustomScaleRule": {
+      "description": "Container App container Custom scaling rule.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Type of the custom scale rule\neg: azure-servicebus, redis etc.",
+          "type": "string"
+        },
+        "metadata": {
+          "description": "Metadata properties to describe custom scale rule.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "auth": {
+          "description": "Authentication secrets for the custom scale rule.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScaleRuleAuth"
+          },
+          "x-ms-identifiers": [
+            "triggerParameter"
+          ]
+        },
+        "identity": {
+          "description": "The resource ID of a user-assigned managed identity that is assigned to the Container App, or 'system' for system-assigned identity.",
+          "type": "string"
+        }
+      }
+    },
+    "CustomDomainConfiguration": {
+      "type": "object",
+      "description": "Configuration properties for apps environment custom domain",
+      "properties": {
+        "customDomainVerificationId": {
+          "description": "Id used to verify domain name ownership",
+          "type": "string",
+          "readOnly": true
+        },
+        "dnsSuffix": {
+          "type": "string",
+          "description": "Dns suffix for the environment domain",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "certificateKeyVaultProperties": {
+          "description": "Certificate stored in Azure Key Vault.",
+          "$ref": "#/definitions/CertificateKeyVaultProperties"
+        },
+        "certificateValue": {
+          "format": "byte",
+          "description": "PFX or PEM blob",
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "certificatePassword": {
+          "description": "Certificate password",
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "expirationDate": {
+          "format": "date-time",
+          "description": "Certificate expiration date.",
+          "type": "string",
+          "readOnly": true
+        },
+        "thumbprint": {
+          "description": "Certificate thumbprint.",
+          "type": "string",
+          "readOnly": true
+        },
+        "subjectName": {
+          "description": "Subject name of the certificate.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DefaultErrorResponse": {
+      "description": "App Service error response.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "Error model.",
+          "type": "object",
+          "properties": {
+            "code": {
+              "description": "Standardized string to programmatically identify the error.",
+              "type": "string",
+              "readOnly": true
+            },
+            "message": {
+              "description": "Detailed error description and debugging information.",
+              "type": "string",
+              "readOnly": true
+            },
+            "target": {
+              "description": "Detailed error description and debugging information.",
+              "type": "string",
+              "readOnly": true
+            },
+            "details": {
+              "type": "array",
+              "description": "Details or the error",
+              "items": {
+                "description": "Detailed errors.",
+                "type": "object",
+                "properties": {
+                  "code": {
+                    "description": "Standardized string to programmatically identify the error.",
+                    "type": "string",
+                    "readOnly": true
+                  },
+                  "message": {
+                    "description": "Detailed error description and debugging information.",
+                    "type": "string",
+                    "readOnly": true
+                  },
+                  "target": {
+                    "description": "Detailed error description and debugging information.",
+                    "type": "string",
+                    "readOnly": true
+                  }
+                },
+                "readOnly": true
+              },
+              "x-ms-identifiers": [
+                "code"
+              ]
+            },
+            "innererror": {
+              "description": "More information to debug error.",
+              "type": "string",
+              "readOnly": true
+            }
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "HttpGet": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "URL to make HTTP GET request against."
+        },
+        "fileName": {
+          "type": "string",
+          "description": "Name of the file that the request should be saved to."
+        },
+        "headers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of headers to send with the request."
+        }
+      },
+      "description": "Model representing a http get request.",
+      "required": [
+        "url"
+      ]
+    },
+    "HttpScaleRule": {
+      "description": "Container App container Http scaling rule.",
+      "type": "object",
+      "properties": {
+        "metadata": {
+          "description": "Metadata properties to describe http scale rule.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "auth": {
+          "description": "Authentication secrets for the custom scale rule.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScaleRuleAuth"
+          },
+          "x-ms-identifiers": [
+            "triggerParameter"
+          ]
+        },
+        "identity": {
+          "description": "The resource ID of a user-assigned managed identity that is assigned to the Container App, or 'system' for system-assigned identity.",
+          "type": "string"
+        }
+      }
+    },
+    "PreBuildStep": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of the pre-build step."
+        },
+        "scripts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of custom commands to run."
+        },
+        "httpGet": {
+          "$ref": "./CommonDefinitions.json#/definitions/HttpGet",
+          "description": "Http get request to send before the build.",
+          "x-ms-identifiers": []
+        }
+      },
+      "description": "Model representing a pre-build step."
+    },
+    "TcpScaleRule": {
+      "description": "Container App container Tcp scaling rule.",
+      "type": "object",
+      "properties": {
+        "metadata": {
+          "description": "Metadata properties to describe tcp scale rule.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "auth": {
+          "description": "Authentication secrets for the tcp scale rule.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScaleRuleAuth"
+          },
+          "x-ms-identifiers": [
+            "triggerParameter"
+          ]
+        },
+        "identity": {
+          "description": "The resource ID of a user-assigned managed identity that is assigned to the Container App, or 'system' for system-assigned identity.",
+          "type": "string"
+        }
+      }
+    },
+    "QueueScaleRule": {
+      "description": "Container App container Azure Queue based scaling rule.",
+      "type": "object",
+      "properties": {
+        "accountName": {
+          "description": "Storage account name. required if using managed identity to authenticate",
+          "type": "string"
+        },
+        "queueName": {
+          "description": "Queue name.",
+          "type": "string"
+        },
+        "queueLength": {
+          "format": "int32",
+          "description": "Queue length.",
+          "type": "integer"
+        },
+        "auth": {
+          "description": "Authentication secrets for the queue scale rule.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScaleRuleAuth"
+          },
+          "x-ms-identifiers": [
+            "triggerParameter"
+          ]
+        },
+        "identity": {
+          "description": "The resource ID of a user-assigned managed identity that is assigned to the Container App, or 'system' for system-assigned identity.",
+          "type": "string"
+        }
+      }
+    },
+    "Scale": {
+      "description": "Container App scaling configurations.",
+      "type": "object",
+      "properties": {
+        "minReplicas": {
+          "format": "int32",
+          "description": "Optional. Minimum number of container replicas.",
+          "type": "integer"
+        },
+        "maxReplicas": {
+          "format": "int32",
+          "description": "Optional. Maximum number of container replicas. Defaults to 10 if not set.",
+          "type": "integer",
+          "default": 10
+        },
+        "rules": {
+          "description": "Scaling rules.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScaleRule"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "ScaleRule": {
+      "description": "Container App container scaling rule.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Scale Rule Name",
+          "type": "string"
+        },
+        "azureQueue": {
+          "$ref": "#/definitions/QueueScaleRule",
+          "description": "Azure Queue based scaling."
+        },
+        "custom": {
+          "$ref": "#/definitions/CustomScaleRule",
+          "description": "Custom scale rule."
+        },
+        "http": {
+          "$ref": "#/definitions/HttpScaleRule",
+          "description": "HTTP requests based scaling."
+        },
+        "tcp": {
+          "$ref": "#/definitions/TcpScaleRule",
+          "description": "Tcp requests based scaling."
+        }
+      }
+    },
+    "ScaleRuleAuth": {
+      "description": "Auth Secrets for Scale Rule",
+      "type": "object",
+      "properties": {
+        "secretRef": {
+          "description": "Name of the secret from which to pull the auth params.",
+          "type": "string"
+        },
+        "triggerParameter": {
+          "description": "Trigger Parameter that uses the secret",
+          "type": "string"
+        }
+      }
+    },
+    "Secret": {
+      "description": "Secret definition.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Secret Name.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Secret Value.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
+          "x-ms-secret": true
+        },
+        "identity": {
+          "description": "Resource ID of a managed identity to authenticate with Azure Key Vault, or System to use a system-assigned identity.",
+          "type": "string"
+        },
+        "keyVaultUrl": {
+          "description": "Azure Key Vault URL pointing to the secret referenced by the container app.",
+          "type": "string"
+        }
+      }
+    },
+    "Template": {
+      "description": "Container App versioned application definition.\nDefines the desired state of an immutable revision.\nAny changes to this section Will result in a new revision being created",
+      "type": "object",
+      "properties": {
+        "revisionSuffix": {
+          "description": "User friendly suffix that is appended to the revision name",
+          "type": "string"
+        },
+        "terminationGracePeriodSeconds": {
+          "description": "Optional duration in seconds the Container App Instance needs to terminate gracefully. Value must be non-negative integer. The value zero indicates stop immediately via the kill signal (no opportunity to shut down). If this value is nil, the default grace period will be used instead. Set this value longer than the expected cleanup time for your process. Defaults to 30 seconds.",
+          "format": "int64",
+          "type": "integer"
+        },
+        "initContainers": {
+          "description": "List of specialized containers that run before app containers.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InitContainer"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "containers": {
+          "description": "List of container definitions for the Container App.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Container"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "scale": {
+          "$ref": "#/definitions/Scale",
+          "description": "Scaling properties for the Container App."
+        },
+        "volumes": {
+          "description": "List of volume definitions for the Container App.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Volume"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "serviceBinds": {
+          "description": "List of container app services bound to the app",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceBind"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "Volume": {
+      "description": "Volume definitions for the Container App.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Volume name.",
+          "type": "string"
+        },
+        "storageType": {
+          "description": "Storage type for the volume. If not provided, use EmptyDir.",
+          "enum": [
+            "AzureFile",
+            "EmptyDir",
+            "Secret",
+            "NfsAzureFile",
+            "Smb"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "StorageType",
+            "modelAsString": true
+          }
+        },
+        "storageName": {
+          "description": "Name of storage resource. No need to provide for EmptyDir and Secret.",
+          "type": "string"
+        },
+        "secrets": {
+          "description": "List of secrets to be added in volume. If no secrets are provided, all secrets in collection will be added to volume.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SecretVolumeItem"
+          },
+          "x-ms-identifiers": [
+            "secretRef"
+          ]
+        },
+        "mountOptions": {
+          "description": "Mount options used while mounting the Azure file share or NFS Azure file share. Must be a comma-separated string.",
+          "type": "string"
+        }
+      }
+    },
+    "SecretVolumeItem": {
+      "description": "Secret to be added to volume.",
+      "type": "object",
+      "properties": {
+        "secretRef": {
+          "description": "Name of the Container App secret from which to pull the secret value.",
+          "type": "string"
+        },
+        "path": {
+          "description": "Path to project secret to. If no path is provided, path defaults to name of secret listed in secretRef.",
+          "type": "string"
+        }
+      }
+    },
+    "VolumeMount": {
+      "description": "Volume mount for the Container App.",
+      "type": "object",
+      "properties": {
+        "volumeName": {
+          "description": "This must match the Name of a Volume.",
+          "type": "string"
+        },
+        "mountPath": {
+          "description": "Path within the container at which the volume should be mounted.Must not contain ':'.",
+          "type": "string"
+        },
+        "subPath": {
+          "description": "Path within the volume from which the container's volume should be mounted. Defaults to \"\" (volume's root).",
+          "type": "string"
+        }
+      }
+    },
+    "DaprComponentsCollection": {
+      "description": "Dapr Components ARM resource.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DaprComponent"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DaprComponent": {
+      "description": "Dapr Component.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Dapr Component resource specific properties",
+          "type": "object",
+          "properties": {
+            "componentType": {
+              "description": "Component type",
+              "type": "string"
+            },
+            "version": {
+              "description": "Component version",
+              "type": "string"
+            },
+            "ignoreErrors": {
+              "description": "Boolean describing if the component errors are ignores",
+              "type": "boolean",
+              "default": false
+            },
+            "initTimeout": {
+              "description": "Initialization timeout",
+              "type": "string"
+            },
+            "secrets": {
+              "description": "Collection of secrets used by a Dapr component",
+              "type": "array",
+              "items": {
+                "$ref": "./CommonDefinitions.json#/definitions/Secret"
+              },
+              "x-ms-identifiers": [
+                "name"
+              ]
+            },
+            "secretStoreComponent": {
+              "description": "Name of a Dapr component to retrieve component secrets from",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "Component metadata",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DaprMetadata"
+              },
+              "x-ms-identifiers": [
+                "name"
+              ]
+            },
+            "scopes": {
+              "description": "Names of container apps that can use this Dapr component",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "serviceComponentBind": {
+              "description": "List of container app services that are bound to the Dapr component",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DaprComponentServiceBinding"
+              },
+              "x-ms-identifiers": [
+                "name"
+              ]
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "DaprMetadata": {
+      "description": "Dapr component metadata.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Metadata property name.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Metadata property value.",
+          "type": "string"
+        },
+        "secretRef": {
+          "description": "Name of the Dapr Component secret from which to pull the metadata property value.",
+          "type": "string"
+        }
+      }
+    },
+    "DaprComponentServiceBinding": {
+      "description": "Configuration to bind a Dapr Component to a dev ContainerApp Service",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the service bind",
+          "type": "string"
+        },
+        "serviceId": {
+          "description": "Resource id of the target service",
+          "type": "string"
+        },
+        "metadata": {
+          "description": "Service bind metadata",
+          "type": "array",
+          "$ref": "#/definitions/DaprServiceBindMetadata"
+        }
+      }
+    },
+    "DaprServiceBindMetadata": {
+      "description": "Dapr component metadata.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Service bind metadata property name.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Service bind metadata property value.",
+          "type": "string"
+        }
+      }
+    },
+    "DaprSecretsCollection": {
+      "description": "Dapr component Secrets Collection for ListSecrets Action.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of secrets used by a Dapr component",
+          "type": "array",
+          "items": {
+            "$ref": "./CommonDefinitions.json#/definitions/DaprSecret"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "DaprSecret": {
+      "description": "Dapr component Secret for ListSecrets Action",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Secret Name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "description": "Secret Value.",
+          "type": "string",
+          "x-ms-secret": true,
+          "readOnly": true
+        }
+      }
+    },
+    "ExtendedLocation": {
+      "type": "object",
+      "description": "The complex type of the extended location.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the extended location."
+        },
+        "type": {
+          "$ref": "#/definitions/ExtendedLocationType",
+          "description": "The type of the extended location."
+        }
+      }
+    },
+    "DaprComponentResiliencyPoliciesCollection": {
+      "description": "Dapr Component Resiliency Policies ARM resource.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DaprComponentResiliencyPolicy"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DaprComponentResiliencyPolicy": {
+      "description": "Dapr Component Resiliency Policy.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Dapr Component Resiliency Policy resource specific properties",
+          "type": "object",
+          "properties": {
+            "inboundPolicy": {
+              "description": "The optional inbound component resiliency policy configuration",
+              "$ref": "#/definitions/DaprComponentResiliencyPolicyConfiguration"
+            },
+            "outboundPolicy": {
+              "description": "The optional outbound component resiliency policy configuration",
+              "$ref": "#/definitions/DaprComponentResiliencyPolicyConfiguration"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "DaprComponentResiliencyPolicyConfiguration": {
+      "description": "Dapr Component Resiliency Policy Configuration.",
+      "type": "object",
+      "properties": {
+        "httpRetryPolicy": {
+          "description": "The optional HTTP retry policy configuration",
+          "$ref": "#/definitions/DaprComponentResiliencyPolicyHttpRetryPolicyConfiguration"
+        },
+        "timeoutPolicy": {
+          "description": "The optional timeout policy configuration",
+          "$ref": "#/definitions/DaprComponentResiliencyPolicyTimeoutPolicyConfiguration"
+        },
+        "circuitBreakerPolicy": {
+          "description": "The optional circuit breaker policy configuration",
+          "$ref": "#/definitions/DaprComponentResiliencyPolicyCircuitBreakerPolicyConfiguration"
+        }
+      },
+      "additionalProperties": false
+    },
+    "DaprComponentResiliencyPolicyCircuitBreakerPolicyConfiguration": {
+      "description": "Dapr Component Resiliency Policy Circuit Breaker Policy Configuration.",
+      "type": "object",
+      "properties": {
+        "consecutiveErrors": {
+          "description": "The number of consecutive errors before the circuit is opened.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "timeoutInSeconds": {
+          "description": "The interval in seconds until a retry attempt is made after the circuit is opened.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "intervalInSeconds": {
+          "description": "The optional interval in seconds after which the error count resets to 0. An interval of 0 will never reset. If not specified, the timeoutInSeconds value will be used.",
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "additionalProperties": false
+    },
+    "DaprComponentResiliencyPolicyHttpRetryPolicyConfiguration": {
+      "description": "Dapr Component Resiliency Policy HTTP Retry Policy Configuration.",
+      "type": "object",
+      "properties": {
+        "maxRetries": {
+          "description": "The optional maximum number of retries",
+          "type": "integer",
+          "format": "int32"
+        },
+        "retryBackOff": {
+          "description": "The optional retry backoff configuration",
+          "$ref": "#/definitions/DaprComponentResiliencyPolicyHttpRetryBackOffConfiguration"
+        }
+      },
+      "additionalProperties": false
+    },
+    "DaprComponentResiliencyPolicyHttpRetryBackOffConfiguration": {
+      "description": "Dapr Component Resiliency Policy HTTP Retry Backoff Configuration.",
+      "type": "object",
+      "properties": {
+        "initialDelayInMilliseconds": {
+          "description": "The optional initial delay in milliseconds before an operation is retried",
+          "type": "integer",
+          "format": "int32"
+        },
+        "maxIntervalInMilliseconds": {
+          "description": "The optional maximum time interval in milliseconds between retry attempts",
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "additionalProperties": false
+    },
+    "DaprComponentResiliencyPolicyTimeoutPolicyConfiguration": {
+      "description": "Dapr Component Resiliency Policy Timeout Policy Configuration.",
+      "type": "object",
+      "properties": {
+        "responseTimeoutInSeconds": {
+          "description": "The optional response timeout in seconds",
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "additionalProperties": false
+    },
+    "DaprSubscriptionsCollection": {
+      "description": "Dapr Subscriptions ARM resource.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DaprSubscription"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DaprSubscription": {
+      "description": "Dapr PubSub Event Subscription.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Dapr PubSub Event Subscription resource specific properties",
+          "type": "object",
+          "properties": {
+            "pubsubName": {
+              "description": "Dapr PubSub component name",
+              "type": "string"
+            },
+            "topic": {
+              "description": "Topic name",
+              "type": "string"
+            },
+            "deadLetterTopic": {
+              "description": "Deadletter topic name",
+              "type": "string"
+            },
+            "routes": {
+              "description": "Subscription routes",
+              "$ref": "#/definitions/DaprSubscriptionRoutes"
+            },
+            "scopes": {
+              "description": "Application scopes to restrict the subscription to specific apps.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "metadata": {
+              "description": "Subscription metadata",
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "bulkSubscribe": {
+              "description": "Bulk subscription options",
+              "$ref": "#/definitions/DaprSubscriptionBulkSubscribeOptions"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "DaprSubscriptionBulkSubscribeOptions": {
+      "description": "Dapr PubSub Bulk Subscription Options.",
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "description": "Enable bulk subscription",
+          "type": "boolean",
+          "default": false
+        },
+        "maxMessagesCount": {
+          "description": "Maximum number of messages to deliver in a bulk message.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "maxAwaitDurationMs": {
+          "description": "Maximum duration in milliseconds to wait before a bulk message is sent to the app.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "DaprSubscriptionRoutes": {
+      "description": "Dapr PubSub Event Subscription Routes configuration.",
+      "type": "object",
+      "properties": {
+        "rules": {
+          "description": "The list of Dapr PubSub Event Subscription Route Rules.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DaprSubscriptionRouteRule"
+          },
+          "x-ms-identifiers": []
+        },
+        "default": {
+          "description": "The default path to deliver events that do not match any of the rules.",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "DaprSubscriptionRouteRule": {
+      "description": "Dapr Pubsub Event Subscription Route Rule is used to specify the condition for sending a message to a specific path.",
+      "type": "object",
+      "properties": {
+        "match": {
+          "description": "The optional CEL expression used to match the event. If the match is not specified, then the route is considered the default. The rules are tested in the order specified, so they should be define from most-to-least specific. The default route should appear last in the list.",
+          "type": "string"
+        },
+        "path": {
+          "description": "The path for events that match this rule",
+          "type": "string"
+        }
+      }
+    },
+    "ExtendedLocationType": {
+      "type": "string",
+      "description": "The type of extendedLocation.",
+      "enum": [
+        "CustomLocation"
+      ],
+      "x-ms-enum": {
+        "name": "ExtendedLocationTypes",
+        "modelAsString": true
+      }
+    },
+    "AzureFileProperties": {
+      "description": "Azure File Properties.",
+      "type": "object",
+      "properties": {
+        "accountName": {
+          "description": "Storage account name for azure file.",
+          "type": "string"
+        },
+        "accountKey": {
+          "description": "Storage account key for azure file.",
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "accessMode": {
+          "description": "Access mode for storage",
+          "enum": [
+            "ReadOnly",
+            "ReadWrite"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AccessMode",
+            "modelAsString": true
+          }
+        },
+        "shareName": {
+          "description": "Azure file share name.",
+          "type": "string"
+        }
+      }
+    },
+    "NfsAzureFileProperties": {
+      "description": "NFS Azure File Properties.",
+      "type": "object",
+      "properties": {
+        "server": {
+          "description": "Server for NFS azure file.",
+          "type": "string"
+        },
+        "accessMode": {
+          "description": "Access mode for storage",
+          "enum": [
+            "ReadOnly",
+            "ReadWrite"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AccessMode",
+            "modelAsString": true
+          }
+        },
+        "shareName": {
+          "description": "NFS Azure file share name.",
+          "type": "string"
+        }
+      }
+    },
+    "SmbStorage": {
+      "description": "SMB storage properties",
+      "type": "object",
+      "properties": {
+        "host": {
+          "description": "The host name or IP address of the SMB server.",
+          "type": "string"
+        },
+        "shareName": {
+          "description": "The path to the SMB shared folder.",
+          "type": "string"
+        },
+        "username": {
+          "description": "The user to log on to the SMB server.",
+          "type": "string"
+        },
+        "domain": {
+          "description": "The domain name for the user.",
+          "type": "string"
+        },
+        "password": {
+          "description": "The password for the user.",
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "accessMode": {
+          "description": "Access mode for storage",
+          "enum": [
+            "ReadOnly",
+            "ReadWrite"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AccessMode",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "CertificateKeyVaultProperties": {
+      "description": "Properties for a certificate stored in a Key Vault.",
+      "type": "object",
+      "properties": {
+        "identity": {
+          "description": "Resource ID of a managed identity to authenticate with Azure Key Vault, or System to use a system-assigned identity.",
+          "type": "string"
+        },
+        "keyVaultUrl": {
+          "description": "URL pointing to the Azure Key Vault secret that holds the certificate.",
+          "type": "string"
+        }
+      }
+    },
+    "Certificate": {
+      "description": "Certificate used for Custom Domain bindings of Container Apps in a Managed Environment",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Certificate resource specific properties",
+          "type": "object",
+          "properties": {
+            "provisioningState": {
+              "description": "Provisioning state of the certificate.",
+              "enum": [
+                "Succeeded",
+                "Failed",
+                "Canceled",
+                "DeleteFailed",
+                "Pending"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "CertificateProvisioningState",
+                "modelAsString": true
+              }
+            },
+            "certificateKeyVaultProperties": {
+              "description": "Properties for a certificate stored in a Key Vault.",
+              "$ref": "#/definitions/CertificateKeyVaultProperties"
+            },
+            "password": {
+              "description": "Certificate password.",
+              "type": "string",
+              "x-ms-mutability": [
+                "create"
+              ],
+              "x-ms-secret": true
+            },
+            "subjectName": {
+              "description": "Subject name of the certificate.",
+              "type": "string",
+              "readOnly": true
+            },
+            "subjectAlternativeNames": {
+              "description": "Subject alternative names the certificate applies to.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "readOnly": true
+            },
+            "value": {
+              "format": "byte",
+              "description": "PFX or PEM blob",
+              "type": "string",
+              "x-ms-mutability": [
+                "create"
+              ],
+              "x-ms-secret": true
+            },
+            "issuer": {
+              "description": "Certificate issuer.",
+              "type": "string",
+              "readOnly": true
+            },
+            "issueDate": {
+              "format": "date-time",
+              "description": "Certificate issue Date.",
+              "type": "string",
+              "readOnly": true
+            },
+            "expirationDate": {
+              "format": "date-time",
+              "description": "Certificate expiration date.",
+              "type": "string",
+              "readOnly": true
+            },
+            "thumbprint": {
+              "description": "Certificate thumbprint.",
+              "type": "string",
+              "readOnly": true
+            },
+            "valid": {
+              "description": "Is the certificate valid?.",
+              "type": "boolean",
+              "readOnly": true
+            },
+            "publicKeyHash": {
+              "description": "Public key hash.",
+              "type": "string",
+              "readOnly": true
+            },
+            "certificateType": {
+              "description": "The type of the certificate. Allowed values are `ServerSSLCertificate` and `ImagePullTrustedCA`",
+              "type": "string",
+              "enum": [
+                "ServerSSLCertificate",
+                "ImagePullTrustedCA"
+              ],
+              "x-ms-enum": {
+                "name": "CertificateType",
+                "modelAsString": true
+              }
+            }
+          }
+        }
+      },
+      "x-ms-client-flatten": true
+    },
+    "CertificateCollection": {
+      "description": "Collection of Certificates.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Certificate"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "CertificatePatch": {
+      "description": "A certificate to update",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Application-specific metadata in the form of key-value pairs."
+        }
+      }
+    },
+    "ManagedCertificate": {
+      "description": "Managed certificates used for Custom Domain bindings of Container Apps in a Managed Environment",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Certificate resource specific properties",
+          "type": "object",
+          "properties": {
+            "provisioningState": {
+              "description": "Provisioning state of the certificate.",
+              "enum": [
+                "Succeeded",
+                "Failed",
+                "Canceled",
+                "DeleteFailed",
+                "Pending"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "CertificateProvisioningState",
+                "modelAsString": true
+              }
+            },
+            "subjectName": {
+              "description": "Subject name of the certificate.",
+              "type": "string"
+            },
+            "error": {
+              "description": "Any error occurred during the certificate provision.",
+              "type": "string",
+              "readOnly": true
+            },
+            "domainControlValidation": {
+              "description": "Selected type of domain control validation for managed certificates.",
+              "enum": [
+                "CNAME",
+                "HTTP",
+                "TXT"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "ManagedCertificateDomainControlValidation",
+                "modelAsString": true
+              }
+            },
+            "validationToken": {
+              "description": "A TXT token used for DNS TXT domain control validation when issuing this type of managed certificates.",
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        }
+      },
+      "x-ms-client-flatten": true
+    },
+    "ManagedCertificatePatch": {
+      "description": "A managed certificate to update",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Application-specific metadata in the form of key-value pairs."
+        }
+      }
+    },
+    "ManagedCertificateCollection": {
+      "description": "Collection of Managed Certificates.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedCertificate"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "JobTemplate": {
+      "description": "Container Apps Job versioned application definition. Defines the desired state of an immutable revision. Any changes to this section Will result in a new revision being created",
+      "type": "object",
+      "properties": {
+        "initContainers": {
+          "description": "List of specialized containers that run before app containers.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InitContainer"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "containers": {
+          "description": "List of container definitions for the Container App.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Container"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "volumes": {
+          "description": "List of volume definitions for the Container App.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Volume"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "ServiceBind": {
+      "description": "Configuration to bind a ContainerApp to a dev ContainerApp Service",
+      "type": "object",
+      "properties": {
+        "serviceId": {
+          "description": "Resource id of the target service",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the service bind",
+          "type": "string"
+        },
+        "clientType": {
+          "description": "Type of the client to be used to connect to the service",
+          "type": "string"
+        },
+        "customizedKeys": {
+          "description": "Customized keys for customizing injected values to the app",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AppResiliencyCollection": {
+      "description": "Collection of AppResiliency policies",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AppResiliency"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "AppResiliency": {
+      "description": "Configuration to setup App Resiliency",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "type": "object",
+          "description": "App Resiliency resource specific properties",
+          "properties": {
+            "timeoutPolicy": {
+              "description": "Policy to set request timeouts",
+              "$ref": "#/definitions/TimeoutPolicy"
+            },
+            "httpRetryPolicy": {
+              "description": "Policy that defines http request retry conditions",
+              "$ref": "#/definitions/HttpRetryPolicy"
+            },
+            "tcpRetryPolicy": {
+              "description": "Policy that defines tcp request retry conditions",
+              "$ref": "#/definitions/TcpRetryPolicy"
+            },
+            "circuitBreakerPolicy": {
+              "description": "Policy that defines circuit breaker conditions",
+              "$ref": "#/definitions/CircuitBreakerPolicy"
+            },
+            "httpConnectionPool": {
+              "description": "Defines parameters for http connection pooling",
+              "$ref": "#/definitions/HttpConnectionPool"
+            },
+            "tcpConnectionPool": {
+              "description": "Defines parameters for tcp connection pooling",
+              "$ref": "#/definitions/TcpConnectionPool"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "TimeoutPolicy": {
+      "description": "Policy to set request timeouts",
+      "type": "object",
+      "properties": {
+        "responseTimeoutInSeconds": {
+          "description": "Timeout, in seconds, for a request to respond",
+          "format": "int32",
+          "type": "integer"
+        },
+        "connectionTimeoutInSeconds": {
+          "description": "Timeout, in seconds, for a request to initiate a connection",
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "HttpRetryPolicy": {
+      "description": "Policy that defines http request retry conditions",
+      "type": "object",
+      "properties": {
+        "maxRetries": {
+          "description": "Maximum number of times a request will retry",
+          "format": "int32",
+          "type": "integer"
+        },
+        "retryBackOff": {
+          "description": "Settings for retry backoff characteristics",
+          "type": "object",
+          "properties": {
+            "initialDelayInMilliseconds": {
+              "description": "Initial delay, in milliseconds, before retrying a request",
+              "format": "int64",
+              "type": "integer"
+            },
+            "maxIntervalInMilliseconds": {
+              "description": "Maximum interval, in milliseconds, between retries",
+              "format": "int64",
+              "type": "integer"
+            }
+          },
+          "x-ms-client-flatten": true
+        },
+        "matches": {
+          "description": "Conditions that must be met for a request to be retried",
+          "type": "object",
+          "properties": {
+            "headers": {
+              "description": "Headers that must be present for a request to be retried",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/HeaderMatch"
+              },
+              "x-ms-identifiers": [
+                "header"
+              ]
+            },
+            "httpStatusCodes": {
+              "description": "Additional http status codes that can trigger a retry",
+              "type": "array",
+              "items": {
+                "format": "int32",
+                "type": "integer"
+              },
+              "x-ms-identifiers": []
+            },
+            "errors": {
+              "description": "Errors that can trigger a retry",
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "x-ms-identifiers": []
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-client-flatten": true
+    },
+    "TcpRetryPolicy": {
+      "description": "Policy that defines tcp request retry conditions",
+      "type": "object",
+      "properties": {
+        "maxConnectAttempts": {
+          "description": "Maximum number of attempts to connect to the tcp service",
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "CircuitBreakerPolicy": {
+      "description": "Policy that defines circuit breaker conditions",
+      "type": "object",
+      "properties": {
+        "consecutiveErrors": {
+          "description": "Number of consecutive errors before the circuit breaker opens",
+          "format": "int32",
+          "type": "integer"
+        },
+        "intervalInSeconds": {
+          "description": "The time interval, in seconds, between endpoint checks. This can result in opening the circuit breaker if the check fails as well as closing the circuit breaker if the check succeeds. Defaults to 10s.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "maxEjectionPercent": {
+          "description": "Maximum percentage of hosts that will be ejected after failure threshold has been met",
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "HttpConnectionPool": {
+      "description": "Defines parameters for http connection pooling",
+      "type": "object",
+      "properties": {
+        "http1MaxPendingRequests": {
+          "description": "Maximum number of pending http1 requests allowed",
+          "format": "int32",
+          "type": "integer"
+        },
+        "http2MaxRequests": {
+          "description": "Maximum number of http2 requests allowed",
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "TcpConnectionPool": {
+      "description": "Defines parameters for tcp connection pooling",
+      "type": "object",
+      "properties": {
+        "maxConnections": {
+          "description": "Maximum number of tcp connections allowed",
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "HeaderMatch": {
+      "description": "Conditions required to match a header",
+      "type": "object",
+      "properties": {
+        "header": {
+          "description": "Name of the header",
+          "type": "string"
+        },
+        "match": {
+          "description": "Type of match to perform",
+          "type": "object",
+          "properties": {
+            "exactMatch": {
+              "description": "Exact value of the header",
+              "type": "string"
+            },
+            "prefixMatch": {
+              "description": "Prefix value of the header",
+              "type": "string"
+            },
+            "suffixMatch": {
+              "description": "Suffix value of the header",
+              "type": "string"
+            },
+            "regexMatch": {
+              "description": "Regex value of the header",
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "EnvironmentVariable": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Environment variable name."
+        },
+        "value": {
+          "type": "string",
+          "description": "Environment variable value."
+        }
+      },
+      "description": "Model representing an environment variable.",
+      "required": [
+        "name",
+        "value"
+      ]
+    },
+    "PrivateEndpoint": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "format": "arm-id",
+          "description": "The ARM identifier for Private Endpoint"
+        }
+      },
+      "description": "The Private Endpoint resource."
+    },
+    "PrivateEndpointConnection": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "x-ms-client-flatten": true,
+          "description": "Resource properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ],
+      "description": "The Private Endpoint Connection resource."
+    },
+    "PrivateEndpointConnectionProperties": {
+      "type": "object",
+      "properties": {
+        "groupIds": {
+          "description": "The group ids for the private endpoint resource.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "privateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpoint",
+          "description": "The resource of private end point."
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkServiceConnectionState",
+          "description": "A collection of information about the state of the connection between service consumer and provider."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProvisioningState",
+          "description": "The provisioning state of the private endpoint connection resource."
+        }
+      },
+      "required": [
+        "privateLinkServiceConnectionState"
+      ],
+      "description": "Properties of the private endpoint connection."
+    },
+    "PrivateLinkServiceConnectionState": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/PrivateEndpointServiceConnectionStatus",
+          "description": "Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service."
+        },
+        "description": {
+          "type": "string",
+          "description": "The reason for approval/rejection of the connection."
+        },
+        "actionsRequired": {
+          "type": "string",
+          "description": "A message indicating if changes on the service provider require any updates on the consumer."
+        }
+      },
+      "description": "A collection of information about the state of the connection between service consumer and provider."
+    },
+    "PrivateEndpointServiceConnectionStatus": {
+      "type": "string",
+      "description": "The private endpoint connection status.",
+      "enum": [
+        "Pending",
+        "Approved",
+        "Rejected",
+        "Disconnected"
+      ],
+      "x-ms-enum": {
+        "name": "PrivateEndpointServiceConnectionStatus",
+        "modelAsString": true
+      }
+    },
+    "PrivateEndpointConnectionProvisioningState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The current provisioning state.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Waiting",
+        "Updating",
+        "Deleting",
+        "Pending"
+      ],
+      "x-ms-enum": {
+        "name": "PrivateEndpointConnectionProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "PrivateLinkResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ],
+      "description": "A private link resource"
+    },
+    "PrivateLinkResourceProperties": {
+      "type": "object",
+      "properties": {
+        "groupId": {
+          "description": "The private link resource group id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "requiredMembers": {
+          "description": "The private link resource required member names.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "requiredZoneNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The private link resource private link DNS zone name."
+        }
+      },
+      "description": "Properties of a private link resource."
+    },
+    "PrivateEndpointConnectionListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of private endpoint connections",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL to get the next set of operation list results (if there are any).",
+          "readOnly": true
+        }
+      },
+      "description": "List of private endpoint connection associated with the specified resource"
+    },
+    "PrivateLinkResourceListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of private link resources",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL to get the next set of operation list results (if there are any).",
+          "readOnly": true
+        }
+      },
+      "description": "A list of private link resources"
+    },
+    "IdentitySettings": {
+      "description": "Optional settings for a Managed Identity that is assigned to the Container App.",
+      "type": "object",
+      "required": [
+        "identity"
+      ],
+      "properties": {
+        "identity": {
+          "description": "The resource ID of a user-assigned managed identity that is assigned to the Container App, or 'system' for system-assigned identity.",
+          "type": "string"
+        },
+        "lifecycle": {
+          "description": "Use to select the lifecycle stages of a Container App during which the Managed Identity should be available.",
+          "enum": [
+            "Init",
+            "Main",
+            "None",
+            "All"
+          ],
+          "type": "string",
+          "default": "All",
+          "x-ms-enum": {
+            "name": "IdentitySettingsLifeCycle",
+            "modelAsString": true
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

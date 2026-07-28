@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "vmName": "myVM",
+    "vmExtensionName": "myVMExtension",
+    "api-version": "2021-07-01",
+    "extensionParameters": {
+      "properties": {
+        "autoUpgradeMinorVersion": true,
+        "publisher": "extPublisher",
+        "type": "extType",
+        "typeHandlerVersion": "1.2",
+        "suppressFailures": true,
+        "settings": {
+          "UserName": "xyz@microsoft.com"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myVMExtension",
+        "type": "Microsoft.Compute/virtualMachines/extensions",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM/extensions/myVMExtension",
+        "location": "westus",
+        "properties": {
+          "autoUpgradeMinorVersion": true,
+          "provisioningState": "Creating",
+          "publisher": "extPublisher",
+          "type": "extType",
+          "typeHandlerVersion": "1.2",
+          "suppressFailures": true,
+          "settings": {
+            "UserName": "xyz@microsoft.com"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "parameters": {
+    "subscriptionId": "187f412d-1758-44d9-b052-169e2564721d",
+    "resourceGroupName": "MyResourceGroup",
+    "activityLogAlertName": "SampleActivityLogAlertRule",
+    "api-version": "2020-10-01",
+    "activityLogAlertRule": {
+      "location": "Global",
+      "tags": {},
+      "properties": {
+        "scopes": [
+          "/subscriptions/187f412d-1758-44d9-b052-169e2564721d"
+        ],
+        "condition": {
+          "allOf": [
+            {
+              "field": "category",
+              "equals": "Administrative"
+            },
+            {
+              "field": "level",
+              "equals": "Error"
+            }
+          ]
+        },
+        "actions": {
+          "actionGroups": [
+            {
+              "actionGroupId": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/MyResourceGroup/providers/Microsoft.Insights/actionGroups/SampleActionGroup",
+              "webhookProperties": {
+                "sampleWebhookProperty": "SamplePropertyValue"
+              }
+            }
+          ]
+        },
+        "enabled": true,
+        "description": "Description of sample Activity Log Alert rule."
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/MyResourceGroup/providers/microsoft.insights/activityLogAlerts/SampleActivityLogAlertRule",
+        "type": "Microsoft.Insights/ActivityLogAlerts",
+        "name": "SampleActivityLogAlertRule",
+        "location": "Global",
+        "tags": {},
+        "properties": {
+          "scopes": [
+            "subscriptions/187f412d-1758-44d9-b052-169e2564721d"
+          ],
+          "condition": {
+            "allOf": [
+              {
+                "field": "Category",
+                "equals": "Administrative"
+              },
+              {
+                "field": "Level",
+                "equals": "Error"
+              }
+            ]
+          },
+          "actions": {
+            "actionGroups": [
+              {
+                "actionGroupId": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/MyResourceGroup/providers/microsoft.insights/actionGroups/SampleActionGroup",
+                "webhookProperties": {
+                  "sampleWebhookProperty": "SamplePropertyValue"
+                }
+              }
+            ]
+          },
+          "enabled": true,
+          "description": "Description of sample Activity Log Alert rule."
+        }
+      }
+    },
+    "201": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/MyResourceGroup/providers/microsoft.insights/activityLogAlerts/SampleActivityLogAlertRule",
+        "type": "Microsoft.Insights/ActivityLogAlerts",
+        "name": "SampleActivityLogAlertRule",
+        "location": "Global",
+        "tags": {},
+        "properties": {
+          "scopes": [
+            "subscriptions/187f412d-1758-44d9-b052-169e2564721d"
+          ],
+          "condition": {
+            "allOf": [
+              {
+                "field": "Category",
+                "equals": "Administrative"
+              },
+              {
+                "field": "Level",
+                "equals": "Error"
+              }
+            ]
+          },
+          "actions": {
+            "actionGroups": [
+              {
+                "actionGroupId": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/MyResourceGroup/providers/microsoft.insights/actionGroups/SampleActionGroup",
+                "webhookProperties": {
+                  "sampleWebhookProperty": "SamplePropertyValue"
+                }
+              }
+            ]
+          },
+          "enabled": true,
+          "description": "Description of sample Activity Log Alert rule."
+        }
+      }
+    }
+  }
+}

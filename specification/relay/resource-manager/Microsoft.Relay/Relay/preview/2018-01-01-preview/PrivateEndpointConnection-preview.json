@@ -1,0 +1,432 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Relay API",
+    "description": "Use these API to manage Azure Relay resources through Azure Resource Manager.",
+    "version": "2018-01-01-preview",
+    "x-ms-code-generation-settings": {
+      "name": "RelayManagementClient"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/privateEndpointConnections": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnections_ListByNamespace",
+        "x-ms-examples": {
+          "RelayPrivateEndpointConnections": {
+            "$ref": "./examples/PrivateEndpointConnections/PrivateEndpointConnectionsList.json"
+          }
+        },
+        "description": "Lists all Private Endpoint Connections for the Relay namespace.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Private Endpoint Connections for given namespace returned successfully",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "put": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnections_Put",
+        "x-ms-examples": {
+          "RelayPutPrivateEndpointConnection": {
+            "$ref": "./examples/PrivateEndpointConnections/PrivateEndpointConnectionsCreate.json"
+          }
+        },
+        "description": "Updates the specified private endpoint connection associated with the Relay namespace.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/privateEndpointConnectionName"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            },
+            "description": "The intended state of private endpoint connection."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The state of private endpoint connection was updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "202": {
+            "description": "update request for  state of private endpoint connection is accepted.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnections_Delete",
+        "x-ms-examples": {
+          "RelayDeletePrivateEndpointConnections": {
+            "$ref": "./examples/PrivateEndpointConnections/PrivateEndpointConnectionsDelete.json"
+          }
+        },
+        "description": "Deletes the specified private endpoint connection associated with the relay namespace.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/privateEndpointConnectionName"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The private endpoint connection does not exist."
+          },
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnections_Get",
+        "x-ms-examples": {
+          "RelayGetPrivateEndpointConnections": {
+            "$ref": "./examples/PrivateEndpointConnections/PrivateEndpointConnectionsGet.json"
+          }
+        },
+        "description": "Gets the specified private endpoint connection associated with the Relay Namespace.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/privateEndpointConnectionName"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Private endpoint connection successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/privateEndpointConnections/{privateEndpointConnectionName}/operationStatus/{privateEndpointConnectionName}": {
+      "get": {
+        "tags": [
+          "OperationStatus"
+        ],
+        "operationId": "OperationStatusPrivateEndpointConnections_Get",
+        "x-ms-examples": {
+          "RelayPrivateEndpointConnectionsoperationStatus": {
+            "$ref": "./examples/PrivateEndpointConnections/OperationStatusPrivateEndpointConnectionsGet.json"
+          }
+        },
+        "description": "Gets the Operation status of private endpoint connection associated with Relay namespace.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/privateEndpointConnectionName"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/OperationTypeParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation Status for Private endpoint connection successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatusItem"
+            }
+          },
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "PrivateEndpointConnectionListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of private link resources",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          }
+        }
+      },
+      "description": "A list of private link resources"
+    },
+    "PrivateEndpointConnectionItem": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "x-ms-client-flatten": true,
+          "description": "Private endpoint connection properties."
+        }
+      },
+      "description": "Private endpoint connection item."
+    },
+    "PrivateEndpointConnection": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "x-ms-client-flatten": true,
+          "description": "Resource properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../common/v1/definitions.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Private endpoint connection resource.",
+      "x-ms-azure-resource": true
+    },
+    "PrivateEndpointConnectionProperties": {
+      "properties": {
+        "privateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpoint",
+          "description": "Properties of the private endpoint object."
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkServiceConnectionState",
+          "description": "Approval state of the private link connection."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProvisioningState",
+          "description": "Provisioning state of the private endpoint connection."
+        }
+      },
+      "description": "Properties of the private endpoint connection resource."
+    },
+    "PrivateEndpoint": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Full identifier of the private endpoint resource."
+        }
+      },
+      "description": "Private endpoint object properties."
+    },
+    "PrivateLinkServiceConnectionState": {
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/PrivateEndpointServiceConnectionStatus",
+          "description": "Indicates whether the connection has been approved, rejected or removed by the Relay Namespace owner."
+        },
+        "description": {
+          "type": "string",
+          "description": "The reason for approval or rejection."
+        },
+        "actionRequired": {
+          "type": "string",
+          "description": "A message indicating if changes on the service provider require any updates on the consumer."
+        }
+      },
+      "description": "An object that represents the approval state of the private link connection."
+    },
+    "PrivateEndpointServiceConnectionStatus": {
+      "type": "string",
+      "description": "The private endpoint connection status.",
+      "enum": [
+        "Pending",
+        "Approved",
+        "Rejected",
+        "Disconnected"
+      ],
+      "x-ms-enum": {
+        "name": "PrivateEndpointServiceConnectionStatus",
+        "modelAsString": true
+      }
+    },
+    "PrivateEndpointConnectionProvisioningState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The current provisioning state.",
+      "enum": [
+        "Unknown",
+        "Succeeded",
+        "Creating",
+        "Updating",
+        "UpdatingByProxy",
+        "Deleting",
+        "DeletingByProxy"
+      ],
+      "x-ms-enum": {
+        "name": "PrivateEndpointConnectionProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "OperationStatusItem": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Full identifier of the private endpoint connection resource."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "name of the private endpoint connection resource."
+        },
+        "status": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Status of private endpoint connection operation."
+        }
+      },
+      "description": "Operation Status object properties."
+    }
+  },
+  "parameters": {
+    "privateEndpointConnectionName": {
+      "name": "privateEndpointConnectionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "description": "The PrivateEndpointConnection name."
+    },
+    "OperationTypeParameter": {
+      "name": "operationType",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client API version."
+    }
+  }
+}

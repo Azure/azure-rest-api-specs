@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "api-version": "2019-08-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "azfwtest",
+    "azureFirewallName": "fw1",
+    "parameters": {
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "fw1",
+        "id": "/subscriptions/subid/resourceGroups/azfwtest/providers/Microsoft.Network/azureFirewalls/fw1",
+        "type": "Microsoft.Network/azureFirewalls",
+        "location": "brazilsouth",
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "threatIntelMode": "Alert"
+        }
+      }
+    }
+  }
+}

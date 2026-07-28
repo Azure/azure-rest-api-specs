@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "testrg123",
+    "domainName": "example.com",
+    "api-version": "2021-03-01"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.DomainRegistration/domains/example.com",
+        "name": "example.com",
+        "type": "Microsoft.DomainRegistration/domains",
+        "location": "global",
+        "tags": {},
+        "properties": {
+          "authCode": "exampleAuthCode",
+          "registrationStatus": "Active",
+          "provisioningState": "Succeeded",
+          "nameServers": [
+            "ns01.ote.domaincontrol.com",
+            "ns02.ote.domaincontrol.com"
+          ],
+          "privacy": false,
+          "createdTime": "2021-09-10T19:30:53Z",
+          "expirationTime": "2022-09-10T19:30:53Z",
+          "autoRenew": true,
+          "readyForDnsRecordManagement": true,
+          "managedHostNames": [],
+          "domainNotRenewableReasons": [
+            "ExpirationNotInRenewalTimeRange"
+          ],
+          "dnsType": "DefaultDomainRegistrarDns"
+        }
+      }
+    },
+    "400": {}
+  }
+}

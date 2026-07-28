@@ -1,0 +1,761 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2024-12-01",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Ec2Snapshots"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/ec2Snapshots": {
+      "get": {
+        "operationId": "Ec2Snapshots_ListBySubscription",
+        "tags": [
+          "Ec2Snapshots"
+        ],
+        "description": "List Ec2Snapshot resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Ec2SnapshotListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Ec2Snapshots_ListBySubscription": {
+            "$ref": "./examples/Ec2Snapshots_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/ec2Snapshots": {
+      "get": {
+        "operationId": "Ec2Snapshots_ListByResourceGroup",
+        "tags": [
+          "Ec2Snapshots"
+        ],
+        "description": "List Ec2Snapshot resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Ec2SnapshotListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Ec2Snapshots_ListByResourceGroup": {
+            "$ref": "./examples/Ec2Snapshots_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/ec2Snapshots/{name}": {
+      "get": {
+        "operationId": "Ec2Snapshots_Get",
+        "tags": [
+          "Ec2Snapshots"
+        ],
+        "description": "Get a Ec2Snapshot",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of Ec2Snapshot",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Ec2Snapshot"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Ec2Snapshots_Get": {
+            "$ref": "./examples/Ec2Snapshots_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Ec2Snapshots_CreateOrReplace",
+        "tags": [
+          "Ec2Snapshots"
+        ],
+        "description": "Create a Ec2Snapshot. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of Ec2Snapshot",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Ec2Snapshot"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Ec2Snapshot' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Ec2Snapshot"
+            }
+          },
+          "201": {
+            "description": "Resource 'Ec2Snapshot' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Ec2Snapshot"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Ec2Snapshots_CreateOrReplace": {
+            "$ref": "./examples/Ec2Snapshots_CreateOrReplace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Ec2Snapshots_Update",
+        "tags": [
+          "Ec2Snapshots"
+        ],
+        "description": "Update a Ec2Snapshot",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of Ec2Snapshot",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Ec2SnapshotTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Ec2Snapshot"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Ec2Snapshots_Update": {
+            "$ref": "./examples/Ec2Snapshots_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Ec2Snapshots_Delete",
+        "tags": [
+          "Ec2Snapshots"
+        ],
+        "description": "Delete a Ec2Snapshot",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of Ec2Snapshot",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Ec2Snapshots_Delete": {
+            "$ref": "./examples/Ec2Snapshots_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AwsEc2SnapshotProperties": {
+      "type": "object",
+      "description": "Definition of awsEc2Snapshot",
+      "properties": {
+        "dataEncryptionKeyId": {
+          "type": "string",
+          "description": "<p>The data encryption key identifier for the snapshot. This value is a unique identifier that corresponds to the data encryption key that was used to encrypt the original volume or snapshot copy. Because data encryption keys are inherited by volumes created from snapshots, and vice versa, if snapshots share the same data encryption key identifier, then they belong to the same volume/snapshot lineage. This parameter is only returned by <a>DescribeSnapshots</a>.</p>"
+        },
+        "description": {
+          "type": "string",
+          "description": "<p>The description for the snapshot.</p>"
+        },
+        "encrypted": {
+          "type": "boolean",
+          "description": "<p>Indicates whether the snapshot is encrypted.</p>"
+        },
+        "kmsKeyId": {
+          "type": "string",
+          "description": "<p>The Amazon Resource Name (ARN) of the Key Management Service (KMS) KMS key that was used to protect the volume encryption key for the parent volume.</p>"
+        },
+        "outpostArn": {
+          "type": "string",
+          "description": "<p>The ARN of the Outpost on which the snapshot is stored. For more information, see <a href='https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html'>Amazon EBS local snapshots on Outposts</a> in the <i>Amazon EBS User Guide</i>.</p>"
+        },
+        "ownerAlias": {
+          "type": "string",
+          "description": "<p>The Amazon Web Services owner alias, from an Amazon-maintained list (<code>amazon</code>). This is not the user-configured Amazon Web Services account alias set using the IAM console.</p>"
+        },
+        "ownerId": {
+          "type": "string",
+          "description": "<p>The ID of the Amazon Web Services account that owns the EBS snapshot.</p>"
+        },
+        "progress": {
+          "type": "string",
+          "description": "<p>The progress of the snapshot, as a percentage.</p>"
+        },
+        "restoreExpiryTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "<p>Only for archived snapshots that are temporarily restored. Indicates the date and time when a temporarily restored snapshot will be automatically re-archived.</p>"
+        },
+        "snapshotId": {
+          "type": "string",
+          "description": "<p>The ID of the snapshot. Each snapshot receives a unique identifier when it is created.</p>"
+        },
+        "sseType": {
+          "$ref": "#/definitions/SSETypeEnumValue",
+          "description": "<p>Reserved for future use.</p>"
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "<p>The time stamp when the snapshot was initiated.</p>"
+        },
+        "state": {
+          "$ref": "#/definitions/SnapshotStateEnumValue",
+          "description": "<p>The snapshot state.</p>"
+        },
+        "stateMessage": {
+          "type": "string",
+          "description": "<p>Encrypted Amazon EBS snapshots are copied asynchronously. If a snapshot copy operation fails (for example, if the proper Key Management Service (KMS) permissions are not obtained) this field displays error state details to help you diagnose why the error occurred. This parameter is only returned by <a>DescribeSnapshots</a>.</p>"
+        },
+        "storageTier": {
+          "$ref": "#/definitions/StorageTierEnumValue",
+          "description": "<p>The storage tier in which the snapshot is stored. <code>standard</code> indicates that the snapshot is stored in the standard snapshot storage tier and that it is ready for use. <code>archive</code> indicates that the snapshot is currently archived and that it must be restored before it can be used.</p>"
+        },
+        "tags": {
+          "type": "array",
+          "description": "<p>Any tags assigned to the snapshot.</p>",
+          "items": {
+            "$ref": "#/definitions/Tag"
+          },
+          "x-ms-identifiers": []
+        },
+        "volumeId": {
+          "type": "string",
+          "description": "<p>The ID of the volume that was used to create the snapshot. Snapshots created by the <a>CopySnapshot</a> action have an arbitrary volume ID that should not be used for any purpose.</p>"
+        },
+        "volumeSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "<p>The size of the volume, in GiB.</p>"
+        }
+      }
+    },
+    "Ec2Snapshot": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/Ec2SnapshotProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "Ec2SnapshotListResult": {
+      "type": "object",
+      "description": "The response of a Ec2Snapshot list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Ec2Snapshot items on this page",
+          "items": {
+            "$ref": "#/definitions/Ec2Snapshot"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "Ec2SnapshotProperties": {
+      "type": "object",
+      "description": "Definition of Ec2Snapshot",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsEc2SnapshotProperties",
+          "description": "AWS Properties"
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Public Cloud Connectors Resource ID"
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "AWS Account ID"
+        },
+        "arn": {
+          "type": "string",
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "AWS Source Schema"
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "AWS Region"
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "AWS Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "Ec2SnapshotTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in Ec2Snapshot resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "SSEType": {
+      "type": "string",
+      "description": "SSEType enum",
+      "enum": [
+        "none",
+        "sse-ebs",
+        "sse-kms"
+      ],
+      "x-ms-enum": {
+        "name": "SSEType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "none",
+            "description": "SSEType enum none"
+          },
+          {
+            "name": "SseEbs",
+            "value": "sse-ebs",
+            "description": "SSEType enum sse-ebs"
+          },
+          {
+            "name": "SseKms",
+            "value": "sse-kms",
+            "description": "SSEType enum sse-kms"
+          }
+        ]
+      }
+    },
+    "SSETypeEnumValue": {
+      "type": "object",
+      "description": "Definition of SSETypeEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/SSEType",
+          "description": "Property value"
+        }
+      }
+    },
+    "SnapshotState": {
+      "type": "string",
+      "description": "SnapshotState enum",
+      "enum": [
+        "completed",
+        "error",
+        "pending",
+        "recoverable",
+        "recovering"
+      ],
+      "x-ms-enum": {
+        "name": "SnapshotState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Completed",
+            "value": "completed",
+            "description": "SnapshotState enum completed"
+          },
+          {
+            "name": "Error",
+            "value": "error",
+            "description": "SnapshotState enum error"
+          },
+          {
+            "name": "Pending",
+            "value": "pending",
+            "description": "SnapshotState enum pending"
+          },
+          {
+            "name": "Recoverable",
+            "value": "recoverable",
+            "description": "SnapshotState enum recoverable"
+          },
+          {
+            "name": "Recovering",
+            "value": "recovering",
+            "description": "SnapshotState enum recovering"
+          }
+        ]
+      }
+    },
+    "SnapshotStateEnumValue": {
+      "type": "object",
+      "description": "Definition of SnapshotStateEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/SnapshotState",
+          "description": "Property value"
+        }
+      }
+    },
+    "StorageTier": {
+      "type": "string",
+      "description": "StorageTier enum",
+      "enum": [
+        "archive",
+        "standard"
+      ],
+      "x-ms-enum": {
+        "name": "StorageTier",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Archive",
+            "value": "archive",
+            "description": "StorageTier enum archive"
+          },
+          {
+            "name": "Standard",
+            "value": "standard",
+            "description": "StorageTier enum standard"
+          }
+        ]
+      }
+    },
+    "StorageTierEnumValue": {
+      "type": "object",
+      "description": "Definition of StorageTierEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/StorageTier",
+          "description": "Property value"
+        }
+      }
+    },
+    "Tag": {
+      "type": "object",
+      "description": "Definition of Tag",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "<p>The key of the tag.</p> <p>Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with <code>aws:</code>.</p>"
+        },
+        "value": {
+          "type": "string",
+          "description": "<p>The value of the tag.</p> <p>Constraints: Tag values are case-sensitive and accept a maximum of 256 Unicode characters.</p>"
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

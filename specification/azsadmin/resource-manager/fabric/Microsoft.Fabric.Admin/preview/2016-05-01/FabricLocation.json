@@ -5,7 +5,7 @@
     "title": "FabricAdminClient",
     "version": "2016-05-01"
   },
-  "host": "adminmanagement.local.azurestack.external",
+  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
@@ -98,12 +98,13 @@
   },
   "definitions": {
     "FabricLocation": {
-      "description": "Place holder for fabric location.",
+      "description": "Fabric Location resource.",
       "type": "object",
       "properties": {
         "properties": {
-          "description": "Empty object.",
-          "type": "object"
+          "description": "Properties of a FabricLocation.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/FabricLocationModel"
         }
       },
       "allOf": [
@@ -111,6 +112,63 @@
           "$ref": "Fabric.json#/definitions/Resource"
         }
       ]
+    },
+    "FabricLocationModel": {
+      "description": "All properties of a fabric location resource.",
+      "type": "object",
+      "properties": {
+        "pepIpAddresses": {
+          "description": "The IP addresses of the privileged endpoints.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "timeServer": {
+          "description": "The IP address of the time server.",
+          "type": "string"
+        },
+        "stampInformationId": {
+          "description": "The deployment id of the stamp.",
+          "type": "string"
+        },
+        "externalDNSIPAddress01": {
+          "description": "First external IP address of the DNS server.",
+          "type": "string"
+        },
+        "externalDNSIPAddress02": {
+          "description": "Second external IP Address of the DNS server.",
+          "type": "string"
+        },
+        "exclusiveAdminOperationRunning": {
+          "description": "Value for whether an exclusive admin operation is running.",
+          "type": "boolean"
+        },
+        "exclusiveAdminOperationName": {
+          "description": "Name of the running exclusive admin operation.",
+          "type": "string"
+        },
+        "startUpActionPlanStartTime": {
+          "description": "Last known stamp start time for the start up action plan.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "startUpActionPlanEndTime": {
+          "description": "Last known stamp stop time for the start up action plan.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "shutDownActionPlanStartTime": {
+          "description": "Last known stamp start time for the shut down action plan",
+          "type": "string",
+          "format": "date-time"
+        },
+        "shutDownActionPlanEndTime": {
+          "description": "Last known stamp stop time for the shut down action plan.",
+          "type": "string",
+          "format": "date-time"
+        }
+      }
     },
     "FabricLocationList": {
       "description": "Pageable list of fabric locations.",

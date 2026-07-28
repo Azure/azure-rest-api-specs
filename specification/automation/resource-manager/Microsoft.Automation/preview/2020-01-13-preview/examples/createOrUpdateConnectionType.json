@@ -1,0 +1,63 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg",
+    "automationAccountName": "myAutomationAccount22",
+    "connectionTypeName": "myCT",
+    "api-version": "2020-01-13-preview",
+    "parameters": {
+      "name": "myCT",
+      "properties": {
+        "isGlobal": false,
+        "fieldDefinitions": {
+          "myStringField": {
+            "isEncrypted": false,
+            "isOptional": false,
+            "type": "string"
+          },
+          "myBoolField": {
+            "isEncrypted": false,
+            "isOptional": false,
+            "type": "bool"
+          },
+          "myStringFieldEncrypted": {
+            "isEncrypted": true,
+            "isOptional": false,
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount22/connectionTypes/myCT",
+        "name": "myCT",
+        "properties": {
+          "isGlobal": false,
+          "fieldDefinitions": {
+            "myStringField": {
+              "isEncrypted": false,
+              "isOptional": false,
+              "type": "string"
+            },
+            "myBoolField": {
+              "isEncrypted": false,
+              "isOptional": false,
+              "type": "bool"
+            },
+            "myStringFieldEncrypted": {
+              "isEncrypted": true,
+              "isOptional": false,
+              "type": "string"
+            }
+          },
+          "creationTime": "2017-03-27T03:47:53.433+00:00",
+          "lastModifiedTime": "2017-03-27T03:47:53.433+00:00"
+        }
+      }
+    }
+  }
+}

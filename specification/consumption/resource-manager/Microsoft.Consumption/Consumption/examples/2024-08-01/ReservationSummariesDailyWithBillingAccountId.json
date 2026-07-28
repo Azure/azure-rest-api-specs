@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "$filter": "properties/usageDate ge 2017-10-01 AND properties/usageDate le 2017-11-20",
+    "api-version": "2024-08-01",
+    "grain": "daily",
+    "resourceScope": "providers/Microsoft.Billing/billingAccounts/12345"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "reservationSummaries_Id1",
+            "type": "Microsoft.Consumption/reservationSummaries",
+            "id": "/providers/Microsoft.Billing/billingAccounts/12345/providers/Microsoft.Consumption/reservationSummaries/reservationSummaries_Id1",
+            "properties": {
+              "avgUtilizationPercentage": 0,
+              "maxUtilizationPercentage": 0,
+              "minUtilizationPercentage": 0,
+              "reservationId": "00000000-0000-0000-0000-000000000000",
+              "reservationOrderId": "00000000-0000-0000-0000-000000000000",
+              "reservedHours": 720,
+              "skuName": "Standard_B1s",
+              "usageDate": "2018-09-01T00:00:00-07:00",
+              "usedHours": 0
+            },
+            "tags": null
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ReservationsSummaries_List",
+  "title": "ReservationSummariesDailyWithBillingAccountId"
+}

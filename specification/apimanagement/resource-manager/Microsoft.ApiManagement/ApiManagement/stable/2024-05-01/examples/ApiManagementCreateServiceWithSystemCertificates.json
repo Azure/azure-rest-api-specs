@@ -1,0 +1,169 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2024-05-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "parameters": {
+      "properties": {
+        "certificates": [
+          {
+            "encodedCertificate": "*******Base64 encoded Certificate******************",
+            "certificatePassword": "Password",
+            "storeName": "CertificateAuthority"
+          }
+        ],
+        "publisherEmail": "apim@autorestsdk.com",
+        "publisherName": "autorestsdk"
+      },
+      "sku": {
+        "name": "Basic",
+        "capacity": 1
+      },
+      "location": "Central US",
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2",
+        "tag3": "value3"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/operationresults/ZWFzdHVzOmFuZHktdGVzdGluZy0yMDIyLTA0LTAxLXByZXZpZXctNF9BY3RfODQ2ZWE4Ng==?api-version=2024-05-01&asyncResponse",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/operationresults/ZWFzdHVzOmFuZHktdGVzdGluZy0yMDIyLTA0LTAxLXByZXZpZXctNF9BY3RfODQ2ZWE4Ng==?api-version=2024-05-01&asyncResponse"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1",
+        "name": "apimService1",
+        "type": "Microsoft.ApiManagement/service",
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2",
+          "tag3": "value3"
+        },
+        "location": "Central US",
+        "etag": "AAAAAAAp3TM=",
+        "properties": {
+          "publisherEmail": "apim@autorestsdk.com",
+          "publisherName": "autorestsdk",
+          "notificationSenderEmail": "apimgmt-noreply@mail.windowsazure.com",
+          "provisioningState": "Created",
+          "targetProvisioningState": "Activating",
+          "createdAtUtc": "2019-12-18T06:33:28.0906918Z",
+          "hostnameConfigurations": [
+            {
+              "type": "Proxy",
+              "hostName": "apimService1.azure-api.net",
+              "negotiateClientCertificate": false,
+              "defaultSslBinding": true
+            }
+          ],
+          "virtualNetworkType": "None",
+          "certificates": [
+            {
+              "storeName": "CertificateAuthority",
+              "certificate": {
+                "expiry": "2036-01-01T07:00:00+00:00",
+                "thumbprint": "8E989652CABCF585ACBFCB9C2C91F1D174FDB3A2",
+                "subject": "CN=*.msitesting.net"
+              }
+            }
+          ],
+          "disableGateway": false,
+          "platformVersion": "stv2",
+          "apiVersionConstraint": {}
+        },
+        "sku": {
+          "name": "Basic",
+          "capacity": 1
+        },
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "Application",
+          "createdAt": "2020-02-01T01:01:01.1075056Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2020-02-02T02:03:01.1974346Z"
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1",
+        "name": "apimService1",
+        "type": "Microsoft.ApiManagement/service",
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2",
+          "tag3": "value3"
+        },
+        "location": "Central US",
+        "etag": "AAAAAAAp3UM=",
+        "properties": {
+          "publisherEmail": "apim@autorestsdk.com",
+          "publisherName": "autorestsdk",
+          "notificationSenderEmail": "apimgmt-noreply@mail.windowsazure.com",
+          "provisioningState": "Succeeded",
+          "targetProvisioningState": "",
+          "createdAtUtc": "2019-12-18T06:33:28.0906918Z",
+          "gatewayUrl": "https://apimService1.azure-api.net",
+          "gatewayRegionalUrl": "https://apimService1-centralus-01.regional.azure-api.net",
+          "portalUrl": "https://apimService1.portal.azure-api.net",
+          "developerPortalUrl": "https://apimService1.developer.azure-api.net",
+          "managementApiUrl": "https://apimService1.management.azure-api.net",
+          "scmUrl": "https://apimService1.scm.azure-api.net",
+          "hostnameConfigurations": [
+            {
+              "type": "Proxy",
+              "hostName": "apimService1.azure-api.net",
+              "negotiateClientCertificate": false,
+              "defaultSslBinding": true,
+              "certificateSource": "BuiltIn"
+            }
+          ],
+          "publicIPAddresses": [
+            "40.113.223.117"
+          ],
+          "customProperties": {
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls10": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls11": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Ssl30": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Ciphers.TripleDes168": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls10": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls11": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Ssl30": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Protocols.Server.Http2": "False"
+          },
+          "virtualNetworkType": "None",
+          "certificates": [
+            {
+              "storeName": "CertificateAuthority",
+              "certificate": {
+                "expiry": "2036-01-01T07:00:00+00:00",
+                "thumbprint": "8E989652CABCF585ACBFCB9C2C91F1D174FDB3A2",
+                "subject": "CN=*.msitesting.net"
+              }
+            }
+          ],
+          "disableGateway": false,
+          "platformVersion": "stv2",
+          "apiVersionConstraint": {}
+        },
+        "sku": {
+          "name": "Basic",
+          "capacity": 1
+        },
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "Application",
+          "createdAt": "2020-02-01T01:01:01.1075056Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2020-02-02T02:03:01.1974346Z"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "parameters": {
+    "api-version": "2025-06-01-preview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "exampleresourcegroup",
+    "serverName": "exampleserver",
+    "migrationName": "examplemigration",
+    "parameters": {
+      "properties": {
+        "sourceDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBForPostgreSql/servers/examplesource",
+        "dbsToMigrate": [
+          "exampledatabase1",
+          "exampledatabase2",
+          "exampledatabase3",
+          "exampledatabase4"
+        ],
+        "secretParameters": {
+          "adminCredentials": {
+            "sourceServerPassword": "examplesourcepassword",
+            "targetServerPassword": "exampletargetpassword"
+          }
+        },
+        "migrationMode": "Offline",
+        "migrateRoles": "True",
+        "overwriteDbsInTarget": "True"
+      },
+      "location": "eastus"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "migrationId": "d3ceacbb-a5fd-43dc-a9db-6022b5154856",
+          "currentStatus": {
+            "state": "InProgress",
+            "error": "",
+            "currentSubStateDetails": {
+              "currentSubState": "PerformingPreRequisiteSteps"
+            }
+          },
+          "sourceDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBForPostgreSql/servers/examplesource",
+          "targetDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBForPostgreSql/flexibleServers/exampletarget",
+          "dbsToMigrate": [
+            "exampledatabase1",
+            "exampledatabase2",
+            "exampledatabase3",
+            "exampledatabase4"
+          ],
+          "setupLogicalReplicationOnSourceDbIfNeeded": "False",
+          "overwriteDbsInTarget": "True",
+          "migrationWindowStartTimeInUtc": "2025-06-01T18:30:22.123456Z",
+          "startDataMigration": "False",
+          "triggerCutover": "False",
+          "migrateRoles": "True"
+        },
+        "tags": {
+          "key1624": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        "location": "eastus",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBForPostgreSql/flexibleServers/exampletarget/migrations/examplemigration",
+        "name": "examplemigration",
+        "type": "Microsoft.DBForPostgreSql/flexibleServers/migrations"
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "migrationId": "d3ceacbb-a5fd-43dc-a9db-6022b5154856",
+          "currentStatus": {
+            "state": "InProgress",
+            "error": "",
+            "currentSubStateDetails": {
+              "currentSubState": "PerformingPreRequisiteSteps"
+            }
+          },
+          "sourceDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBForPostgreSql/servers/examplesource",
+          "targetDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBForPostgreSql/flexibleServers/exampletarget",
+          "dbsToMigrate": [
+            "exampledatabase1",
+            "exampledatabase2",
+            "exampledatabase3",
+            "exampledatabase4"
+          ],
+          "setupLogicalReplicationOnSourceDbIfNeeded": "False",
+          "overwriteDbsInTarget": "True",
+          "migrationWindowStartTimeInUtc": "2025-06-01T18:30:22.123456Z",
+          "startDataMigration": "False",
+          "triggerCutover": "False",
+          "migrateRoles": "True"
+        },
+        "tags": {
+          "key1624": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        "location": "eastus",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBForPostgreSql/flexibleServers/exampletarget/migrations/examplemigration",
+        "name": "examplemigration",
+        "type": "Microsoft.DBForPostgreSql/flexibleServers/migrations"
+      }
+    }
+  }
+}

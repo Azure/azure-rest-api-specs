@@ -229,7 +229,7 @@
               "$ref": "#/definitions/SentimentBatchResult"
             }
           },
-          "500": {
+          "default": {
             "description": "Error Response",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
@@ -259,25 +259,6 @@
             "$ref": "#/definitions/MultiLanguageInput"
           }
         }
-      },
-      "example": {
-        "documents": [
-          {
-            "language": "en",
-            "id": "1",
-            "text": "Hello world. This is some input text that I love."
-          },
-          {
-            "language": "fr",
-            "id": "2",
-            "text": "Bonjour tout le monde"
-          },
-          {
-            "language": "es",
-            "id": "3",
-            "text": "La carretera estaba atascada. Había mucho tráfico el día de ayer."
-          }
-        ]
       }
     },
     "MultiLanguageInput": {
@@ -557,25 +538,6 @@
             "$ref": "#/definitions/LanguageInput"
           }
         }
-      },
-      "example": {
-        "documents": [
-          {
-            "countryHint": "en",
-            "id": "1",
-            "text": "Hello world. This is some input text that I love."
-          },
-          {
-            "countryHint": "fr",
-            "id": "2",
-            "text": "Bonjour tout le monde"
-          },
-          {
-            "countryHint": "es",
-            "id": "3",
-            "text": "La carretera estaba atascada. Había mucho tráfico el día de ayer."
-          }
-        ]
       }
     },
     "LanguageInput": {

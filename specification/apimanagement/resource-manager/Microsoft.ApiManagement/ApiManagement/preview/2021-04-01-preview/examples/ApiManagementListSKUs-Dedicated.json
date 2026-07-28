@@ -1,0 +1,77 @@
+{
+  "parameters": {
+    "api-version": "2021-04-01-preview",
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "resourceType": "Microsoft.ApiManagement/service",
+            "sku": {
+              "name": "Developer"
+            },
+            "capacity": {
+              "minimum": 1,
+              "maximum": 1,
+              "default": 1,
+              "scaleType": "none"
+            }
+          },
+          {
+            "resourceType": "Microsoft.ApiManagement/service",
+            "sku": {
+              "name": "Basic"
+            },
+            "capacity": {
+              "minimum": 1,
+              "maximum": 2,
+              "default": 1,
+              "scaleType": "manual"
+            }
+          },
+          {
+            "resourceType": "Microsoft.ApiManagement/service",
+            "sku": {
+              "name": "Standard"
+            },
+            "capacity": {
+              "minimum": 1,
+              "maximum": 4,
+              "default": 1,
+              "scaleType": "automatic"
+            }
+          },
+          {
+            "resourceType": "Microsoft.ApiManagement/service",
+            "sku": {
+              "name": "Premium"
+            },
+            "capacity": {
+              "minimum": 1,
+              "maximum": 10,
+              "default": 1,
+              "scaleType": "automatic"
+            }
+          },
+          {
+            "resourceType": "Microsoft.ApiManagement/service",
+            "sku": {
+              "name": "Isolated"
+            },
+            "capacity": {
+              "minimum": 1,
+              "maximum": 1,
+              "default": 1,
+              "scaleType": "automatic"
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}

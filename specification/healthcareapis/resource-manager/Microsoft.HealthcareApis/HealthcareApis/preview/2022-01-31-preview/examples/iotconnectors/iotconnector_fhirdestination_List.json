@@ -1,0 +1,108 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "testRG",
+    "workspaceName": "workspace1",
+    "iotConnectorName": "blue",
+    "api-version": "2022-01-31-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "string",
+        "value": [
+          {
+            "name": "dest1",
+            "id": "/subscriptions/subid/resourceGroups/testRG/providers/Microsoft.HealthcareApis/workspaces/workspace1/iotconnectors/blue/fhirdestinations/dest1",
+            "type": "Microsoft.HealthcareApis/workspaces/iotconnectors/fhirdestinations",
+            "location": "westus",
+            "etag": "00000000-0000-0000-f5ac-912ca49e01d6",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "resourceIdentityResolutionType": "Create",
+              "fhirServiceResourceId": "subscriptions/11111111-2222-3333-4444-555566667777/resourceGroups/myrg/providers/Microsoft.HealthcareApis/workspaces/myworkspace/fhirservices/myfhirservice",
+              "fhirMapping": {
+                "content": {
+                  "templateType": "CollectionFhirTemplate",
+                  "template": [
+                    {
+                      "templateType": "CodeValueFhir",
+                      "template": {
+                        "codes": [
+                          {
+                            "code": "8867-4",
+                            "system": "http://loinc.org",
+                            "display": "Heart rate"
+                          }
+                        ],
+                        "periodInterval": 60,
+                        "typeName": "heartrate",
+                        "value": {
+                          "defaultPeriod": 5000,
+                          "unit": "count/min",
+                          "valueName": "hr",
+                          "valueType": "SampledData"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "systemData": {
+              "createdBy": "string",
+              "createdAt": "2021-01-28T19:26:24.072Z",
+              "lastModifiedBy": "string",
+              "lastModifiedAt": "2021-01-28T19:26:24.072Z"
+            }
+          },
+          {
+            "name": "dest2",
+            "id": "/subscriptions/subid/resourceGroups/testRG/providers/Microsoft.HealthcareApis/workspaces/workspace1/iotconnectors/blue/fhirdestinations/dest2",
+            "type": "Microsoft.HealthcareApis/workspaces/iotconnectors/fhirdestinations",
+            "location": "westus",
+            "etag": "00000000-0000-0000-f6ac-912ca49e01d6",
+            "properties": {
+              "provisioningState": "Suceeded",
+              "resourceIdentityResolutionType": "Lookup",
+              "fhirServiceResourceId": "subscriptions/11111111-2222-3333-4444-555566667777/resourceGroups/myrg/providers/Microsoft.HealthcareApis/workspaces/myworkspace/fhirservices/myfhirservice",
+              "fhirMapping": {
+                "content": {
+                  "templateType": "CollectionFhirTemplate",
+                  "template": [
+                    {
+                      "templateType": "CodeValueFhir",
+                      "template": {
+                        "codes": [
+                          {
+                            "code": "8867-4",
+                            "system": "http://loinc.org",
+                            "display": "Heart rate"
+                          }
+                        ],
+                        "periodInterval": 60,
+                        "typeName": "heartrate",
+                        "value": {
+                          "defaultPeriod": 5000,
+                          "unit": "count/min",
+                          "valueName": "hr",
+                          "valueType": "SampledData"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "systemData": {
+              "createdBy": "string",
+              "createdAt": "2021-01-27T19:26:24.072Z",
+              "lastModifiedBy": "string",
+              "lastModifiedAt": "2021-01-27T19:26:24.072Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

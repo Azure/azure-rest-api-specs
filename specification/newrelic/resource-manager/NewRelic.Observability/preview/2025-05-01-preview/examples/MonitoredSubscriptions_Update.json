@@ -1,0 +1,152 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01-preview",
+    "configurationName": "default",
+    "monitorName": "myMonitor",
+    "requestBody": {
+      "properties": {
+        "monitoredSubscriptionList": [
+          {
+            "status": "Active",
+            "subscriptionId": "/subscriptions/00000000-0000-0000-0000-000000000000",
+            "tagRules": {
+              "logRules": {
+                "filteringTags": [
+                  {
+                    "name": "saokgpjvdlorciqbjmjxazpee",
+                    "action": "Include",
+                    "value": "sarxrqsxouhdjwsrqqicbeirdb"
+                  }
+                ],
+                "sendAadLogs": "Enabled",
+                "sendActivityLogs": "Enabled",
+                "sendSubscriptionLogs": "Enabled"
+              },
+              "metricRules": {
+                "filteringTags": [
+                  {
+                    "name": "saokgpjvdlorciqbjmjxazpee",
+                    "action": "Include",
+                    "value": "sarxrqsxouhdjwsrqqicbeirdb"
+                  }
+                ],
+                "userEmail": "test@testing.com"
+              },
+              "provisioningState": "Accepted"
+            }
+          },
+          {
+            "status": "Failed",
+            "subscriptionId": "/subscriptions/00000000-0000-0000-0000-000000000001",
+            "tagRules": {
+              "logRules": {
+                "filteringTags": [
+                  {
+                    "name": "saokgpjvdlorciqbjmjxazpee",
+                    "action": "Include",
+                    "value": "sarxrqsxouhdjwsrqqicbeirdb"
+                  }
+                ],
+                "sendAadLogs": "Enabled",
+                "sendActivityLogs": "Enabled",
+                "sendSubscriptionLogs": "Enabled"
+              },
+              "metricRules": {
+                "filteringTags": [
+                  {
+                    "name": "saokgpjvdlorciqbjmjxazpee",
+                    "action": "Include",
+                    "value": "sarxrqsxouhdjwsrqqicbeirdb"
+                  }
+                ],
+                "userEmail": "test@testing.com"
+              },
+              "provisioningState": "Accepted"
+            }
+          }
+        ],
+        "operation": "AddComplete"
+      }
+    },
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "default",
+        "type": "NewRelic.Observability/monitors/monitoredSubscriptions",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/NewRelic.Observability/monitors/myMonitor/monitoredSubscriptions/default",
+        "properties": {
+          "monitoredSubscriptionList": [
+            {
+              "status": "Active",
+              "subscriptionId": "/subscriptions/00000000-0000-0000-0000-000000000000",
+              "tagRules": {
+                "logRules": {
+                  "filteringTags": [
+                    {
+                      "name": "saokgpjvdlorciqbjmjxazpee",
+                      "action": "Include",
+                      "value": "sarxrqsxouhdjwsrqqicbeirdb"
+                    }
+                  ],
+                  "sendAadLogs": "Enabled",
+                  "sendActivityLogs": "Enabled",
+                  "sendSubscriptionLogs": "Enabled"
+                },
+                "metricRules": {
+                  "filteringTags": [
+                    {
+                      "name": "saokgpjvdlorciqbjmjxazpee",
+                      "action": "Include",
+                      "value": "sarxrqsxouhdjwsrqqicbeirdb"
+                    }
+                  ],
+                  "userEmail": "test@testing.com"
+                },
+                "provisioningState": "Accepted"
+              }
+            },
+            {
+              "status": "Failed",
+              "subscriptionId": "/subscriptions/00000000-0000-0000-0000-000000000001",
+              "tagRules": {
+                "logRules": {
+                  "filteringTags": [
+                    {
+                      "name": "saokgpjvdlorciqbjmjxazpee",
+                      "action": "Include",
+                      "value": "sarxrqsxouhdjwsrqqicbeirdb"
+                    }
+                  ],
+                  "sendAadLogs": "Enabled",
+                  "sendActivityLogs": "Enabled",
+                  "sendSubscriptionLogs": "Enabled"
+                },
+                "metricRules": {
+                  "filteringTags": [
+                    {
+                      "name": "saokgpjvdlorciqbjmjxazpee",
+                      "action": "Include",
+                      "value": "sarxrqsxouhdjwsrqqicbeirdb"
+                    }
+                  ],
+                  "userEmail": "test@testing.com"
+                },
+                "provisioningState": "Accepted"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/subid/resourceGroups/peerTest/providers/NewRelic.Observability/monitors/test?api-version=2025-05-01-preview"
+      }
+    }
+  },
+  "operationId": "MonitoredSubscriptions_Update",
+  "title": "Monitors_UpdateMonitoredSubscriptions"
+}

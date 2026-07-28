@@ -1,0 +1,39 @@
+{
+  "title": "Adds participants to a specific conversation",
+  "operationId": "ConversationThreadOperations_AddParticipants",
+  "parameters": {
+    "api-version": "2025-04-01-preview",
+    "content-type": "application/json",
+    "conversationId": "19:34adfa4f-cedf-4dc0-ba29-b6d1a69ab345@thread.v2",
+    "options": {
+      "participants": [
+        {
+          "displayName": "Customer",
+          "kind": "external",
+          "contacts": [
+            {
+              "id": "12345678901",
+              "kind": "whatsApp"
+            }
+          ]
+        },
+        {
+          "displayName": "Support",
+          "kind": "internal",
+          "contact": {
+            "id": "8:acs:uuid1",
+            "kind": "communication"
+          }
+        }
+      ]
+    },
+    "endpoint": "https://my-resource.communication.azure.com"
+  },
+  "responses": {
+    "207": {
+      "body": {
+        "invalidParticipants": []
+      }
+    }
+  }
+}

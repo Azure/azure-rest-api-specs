@@ -1,0 +1,26 @@
+{
+  "operationId": "QuestionAnsweringProjects_UpdateSourcesFromFiles",
+  "title": "Update sources from files",
+  "parameters": {
+    "Content-Type": "multipart/form-data",
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "api-version": "2025-05-15-preview",
+    "files": [
+      "{binary file 1}",
+      "{binary file 2}"
+    ],
+    "fileOperations": [
+      "{ \"operation\": \"add\", \"fileDisplayName\": \"DemoSourceFile\", \"fileSource\": \"DemoSourceFile.pdf\" }"
+    ],
+    "projectName": "proj1"
+  },
+  "responses": {
+    "202": {
+      "description": "A successful call results with an Operation-Location header used to check the status of the analysis job.",
+      "headers": {
+        "Operation-Location": "https://<resource-endpoint>/language/authoring/query-knowledgebases/projects/proj1/sources/jobs/job1?api-version=2025-05-15-preview"
+      }
+    }
+  }
+}

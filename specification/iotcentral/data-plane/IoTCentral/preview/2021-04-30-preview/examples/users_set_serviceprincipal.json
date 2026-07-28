@@ -1,0 +1,36 @@
+{
+  "title": "Add or replace a service principal in your application",
+  "description": "Add or replace an AAD service principal in your application.",
+  "parameters": {
+    "centralDnsSuffixInPath": "azureiotcentral.com",
+    "baseDomain": "azureiotcentral.com",
+    "subdomain": "appsubdomain",
+    "userId": "123",
+    "api-version": "preview",
+    "body": {
+      "type": "ServicePrincipalUser",
+      "tenantId": "<tenant Id>",
+      "objectId": "<object Id>",
+      "roles": [
+        {
+          "role": "<role Id>"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "123",
+        "type": "ServicePrincipalUser",
+        "tenantId": "<tenant Id>",
+        "objectId": "<object Id>",
+        "roles": [
+          {
+            "role": "<role Id>"
+          }
+        ]
+      }
+    }
+  }
+}

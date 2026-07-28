@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "api-version": "2022-05-01-preview",
+    "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
+    "resourceGroupName": "myRg",
+    "workspaceName": "myWorkspace",
+    "ruleId": "73e01a99-5cd7-4139-a149-9f2736ff2ab5"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/alertRules/73e01a99-5cd7-4139-a149-9f2736ff2ab5",
+        "name": "73e01a99-5cd7-4139-a149-9f2736ff2ab5",
+        "type": "Microsoft.SecurityInsights/alertRules",
+        "kind": "NRT",
+        "etag": "\"0300bf09-0000-0000-0000-5c37296e0000\"",
+        "properties": {
+          "alertRuleTemplateName": null,
+          "displayName": "Rule2",
+          "description": "",
+          "severity": "High",
+          "enabled": true,
+          "tactics": [
+            "Persistence",
+            "LateralMovement"
+          ],
+          "techniques": [
+            "T1037",
+            "T1021"
+          ],
+          "query": "ProtectionStatus | extend HostCustomEntity = Computer | extend IPCustomEntity = ComputerIP_Hidden",
+          "suppressionDuration": "PT1H",
+          "suppressionEnabled": false,
+          "lastModifiedUtc": "2019-01-01T13:15:30Z",
+          "incidentConfiguration": {
+            "createIncident": true,
+            "groupingConfiguration": {
+              "enabled": true,
+              "reopenClosedIncident": false,
+              "lookbackDuration": "PT5H",
+              "matchingMethod": "Selected",
+              "groupByEntities": [
+                "Host",
+                "Account"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

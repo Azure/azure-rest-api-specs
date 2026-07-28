@@ -1,0 +1,69 @@
+{
+  "parameters": {
+    "api-version": "2020-04-01",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "DefaultRuleSet_1.0",
+            "id": "/subscriptions/subid/providers/Microsoft.Network/FrontDoorWebApplicationFirewallManagedRuleSets",
+            "type": "Microsoft.Network/frontdoorwebapplicationfirewallmanagedrulesets",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "ruleSetId": "8125d145-ddc5-4d90-9bc3-24c5f2de69a2",
+              "ruleSetType": "DefaultRuleSet",
+              "ruleSetVersion": "1.0",
+              "ruleGroups": [
+                {
+                  "ruleGroupName": "SQLI",
+                  "description": "SQL injection",
+                  "rules": [
+                    {
+                      "ruleId": "942100",
+                      "description": "SQL Injection Attack Detected via libinjection",
+                      "defaultState": "Enabled",
+                      "defaultAction": "Block"
+                    },
+                    {
+                      "ruleId": "942110",
+                      "description": "SQL Injection Attack: Common Injection Testing Detected",
+                      "defaultState": "Enabled",
+                      "defaultAction": "Block"
+                    }
+                  ]
+                },
+                {
+                  "ruleGroupName": "XSS",
+                  "description": "Cross-site scripting",
+                  "rules": [
+                    {
+                      "ruleId": "941100",
+                      "description": "XSS Attack Detected via libinjection",
+                      "defaultState": "Enabled",
+                      "defaultAction": "Block"
+                    },
+                    {
+                      "ruleId": "941101",
+                      "description": "XSS Attack Detected via libinjection",
+                      "defaultState": "Enabled",
+                      "defaultAction": "Block"
+                    },
+                    {
+                      "ruleId": "941110",
+                      "description": "XSS Filter - Category 1: Script Tag Vector",
+                      "defaultState": "Enabled",
+                      "defaultAction": "Block"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

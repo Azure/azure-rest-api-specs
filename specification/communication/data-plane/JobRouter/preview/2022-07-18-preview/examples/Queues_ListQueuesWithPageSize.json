@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "endpoint": "https://contoso.westus.communications.azure.com",
+    "api-version": "2022-07-18-preview",
+    "maxpagesize": 2
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "queue": {
+              "id": "MainQueue",
+              "name": "Main",
+              "distributionPolicyId": "MainDistributionPolicy",
+              "labels": {},
+              "exceptionPolicyId": "MainExceptionPolicy"
+            },
+            "etag": "etag"
+          },
+          {
+            "queue": {
+              "id": "SecondaryQueue",
+              "name": "Secondary",
+              "distributionPolicyId": "SecondaryDistributionPolicy",
+              "labels": {},
+              "exceptionPolicyId": "SecondaryExceptionPolicy"
+            },
+            "etag": "etag"
+          }
+        ],
+        "nextLink": "null"
+      }
+    }
+  }
+}

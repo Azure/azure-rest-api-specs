@@ -1,0 +1,76 @@
+{
+  "parameters": {
+    "api-version": "2022-02-01",
+    "jobName": "58776d0b-3141-48b2-a377-9ad863eb160d",
+    "resourceName": "vault1",
+    "resourceGroupName": "resourceGroupPS1",
+    "subscriptionId": "c183865e-6077-46f2-a3b1-deb0f4f4650a",
+    "resumeJobParams": {
+      "properties": {
+        "comments": " "
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/Subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/resourceGroupPS1/providers/Microsoft.RecoveryServices/vaults/vault1/replicationJobs/58776d0b-3141-48b2-a377-9ad863eb160d",
+        "name": "58776d0b-3141-48b2-a377-9ad863eb160d",
+        "properties": {
+          "activityId": "1b808dfe-0451-44ac-894c-c7270711cd8c ActivityId: 9f6f849e-922a-43ec-a7a6-0be45fc85c56",
+          "scenarioName": "TestFailover",
+          "friendlyName": "Test failover",
+          "state": "Suspended",
+          "stateDescription": "WaitingForStopTestFailover",
+          "tasks": [],
+          "errors": [],
+          "startTime": "2017-04-25T09:57:57.0357829Z",
+          "allowedActions": [
+            "Cancel",
+            "Resume"
+          ],
+          "targetObjectId": "f8491e4f-817a-40dd-a90c-af773978c75b",
+          "targetObjectName": "vm1",
+          "targetInstanceType": "ProtectionEntity",
+          "customDetails": {
+            "instanceType": "TestFailoverJobDetails",
+            "testFailoverStatus": "Completed",
+            "comments": " ",
+            "networkName": "vnetavrai",
+            "networkFriendlyName": "vnetavrai",
+            "networkType": "VmNetworkAsInput",
+            "protectedItemDetails": [
+              {
+                "name": "f8491e4f-817a-40dd-a90c-af773978c75b",
+                "friendlyName": "vm1",
+                "testVmName": "vm1-test",
+                "testVmFriendlyName": "vm1-test",
+                "networkConnectionStatus": "Connected",
+                "networkFriendlyName": "vnetavrai",
+                "subnet": "Subnet1"
+              }
+            ],
+            "affectedObjectDetails": {
+              "PrimaryVmId": "f8491e4f-817a-40dd-a90c-af773978c75b",
+              "PrimaryVmName": "vm1",
+              "RecoveryVmId": "",
+              "RecoveryVmName": "vm1",
+              "ProtectionProfileId": "af095a1e-1f1b-5365-87c9-99162ebcfaf0",
+              "PrimaryCloudId": "cloud_6d224fc6-f326-5d35-96de-fbf51efb3179",
+              "PrimaryCloudName": "cloud1",
+              "RecoveryCloudId": "d38048d4-b460-4791-8ece-108395ee8478",
+              "RecoveryCloudName": "Microsoft Azure",
+              "PrimaryVmmId": "6d224fc6-f326-5d35-96de-fbf51efb3179",
+              "PrimaryVmmName": "cloud1",
+              "RecoveryVmmId": "21a9403c-6ec1-44f2-b744-b4e50b792387",
+              "RecoveryVmmName": "Microsoft Azure",
+              "PrimaryFabricProviderId": "HyperVSite",
+              "RecoveryFabricProviderId": "Azure"
+            }
+          }
+        }
+      }
+    },
+    "202": {}
+  }
+}

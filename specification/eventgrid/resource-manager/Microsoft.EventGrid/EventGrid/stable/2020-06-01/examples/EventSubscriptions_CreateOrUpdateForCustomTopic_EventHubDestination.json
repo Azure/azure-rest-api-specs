@@ -1,0 +1,61 @@
+{
+  "parameters": {
+    "api-version": "2020-04-01-preview",
+    "scope": "subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourceGroups/examplerg/providers/Microsoft.EventGrid/topics/exampletopic1",
+    "eventSubscriptionName": "examplesubscription1",
+    "eventSubscriptionInfo": {
+      "properties": {
+        "destination": {
+          "endpointType": "EventHub",
+          "properties": {
+            "resourceId": "/subscriptions/55f3dcd4-cac7-43b4-990b-a139d62a1eb2/resourceGroups/TestRG/providers/Microsoft.EventHub/namespaces/ContosoNamespace/eventhubs/EH1"
+          }
+        },
+        "filter": {
+          "isSubjectCaseSensitive": false,
+          "subjectBeginsWith": "ExamplePrefix",
+          "subjectEndsWith": "ExampleSuffix"
+        },
+        "deadLetterDestination": {
+          "endpointType": "StorageBlob",
+          "properties": {
+            "resourceId": "/subscriptions/55f3dcd4-cac7-43b4-990b-a139d62a1eb2/resourceGroups/TestRG/providers/Microsoft.Storage/storageAccounts/contosostg",
+            "blobContainerName": "contosocontainer"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "properties": {
+          "destination": {
+            "properties": {
+              "resourceId": "/subscriptions/55f3dcd4-cac7-43b4-990b-a139d62a1eb2/resourceGroups/TestRG/providers/Microsoft.EventHub/namespaces/ContosoNamespace/eventhubs/EH1"
+            },
+            "endpointType": "EventHub"
+          },
+          "filter": {
+            "isSubjectCaseSensitive": false,
+            "subjectBeginsWith": "ExamplePrefix",
+            "subjectEndsWith": "ExampleSuffix"
+          },
+          "topic": "/subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourceGroups/examplerg/providers/Microsoft.EventGrid/topics/exampletopic1",
+          "provisioningState": "Creating",
+          "labels": null,
+          "deadLetterDestination": {
+            "endpointType": "StorageBlob",
+            "properties": {
+              "resourceId": "/subscriptions/55f3dcd4-cac7-43b4-990b-a139d62a1eb2/resourceGroups/TestRG/providers/Microsoft.Storage/storageAccounts/contosostg",
+              "blobContainerName": "contosocontainer"
+            }
+          }
+        },
+        "id": "/subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourceGroups/examplerg/providers/Microsoft.EventGrid/topics/exampletopic1/providers/Microsoft.EventGrid/eventSubscriptions/examplesubscription1",
+        "name": "examplesubscription1",
+        "type": "Microsoft.EventGrid/eventSubscriptions"
+      }
+    }
+  }
+}

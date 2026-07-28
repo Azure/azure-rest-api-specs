@@ -1,0 +1,133 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ApplicationInsightsManagementClient",
+    "version": "2021-10-14",
+    "description": "Composite Swagger for Application Insights Management Client",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "LiveToken"
+    }
+  ],
+  "paths": {
+    "/{resourceUri}/providers/Microsoft.Insights/generatelivetoken": {
+      "post": {
+        "operationId": "LiveToken_Get",
+        "tags": [
+          "LiveToken"
+        ],
+        "description": "**Gets an access token for live metrics stream data.**",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/LiveTokenResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsCommonTypes.ErrorResponseLinkedStorage"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get live token for resource": {
+            "$ref": "./examples/LiveTokenGet.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ApplicationInsightsCommonTypes.ErrorResponseLinkedStorage": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ApplicationInsightsCommonTypes.ErrorResponseLinkedStorageError",
+          "description": "Error response indicates Insights service is not able to process the incoming request. The reason is provided in the error message."
+        }
+      }
+    },
+    "ApplicationInsightsCommonTypes.ErrorResponseLinkedStorageError": {
+      "type": "object",
+      "description": "Error response indicates Insights service is not able to process the incoming request. The reason is provided in the error message.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message indicating why the operation failed.",
+          "readOnly": true
+        }
+      }
+    },
+    "LiveTokenResponse": {
+      "type": "object",
+      "description": "The response to a live token query.",
+      "properties": {
+        "liveToken": {
+          "type": "string",
+          "description": "JWT token for accessing live metrics stream data.",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "Azure.ResourceManager.ResourceUriParameter": {
+      "name": "resourceUri",
+      "in": "path",
+      "description": "The fully qualified Azure Resource manager identifier of the resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    }
+  }
+}

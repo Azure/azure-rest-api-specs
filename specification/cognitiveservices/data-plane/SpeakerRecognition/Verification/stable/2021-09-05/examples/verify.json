@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "endpoint": "https://westus.api.cognitive.microsoft.com",
+    "api-version": "2021-09-05",
+    "Content-Type": "audio/wav; codecs=audio/pcm",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "profileId": "49a36324-fc4b-4387-aa06-090cfbf0064f",
+    "audioData": "{binary file date}"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "recognitionResult": "accept",
+        "score": 0.63
+      }
+    },
+    "default": {
+      "headers": {
+        "Content-Type": "application/json",
+        "x-ms-error-code": "Error Code"
+      },
+      "body": {
+        "error": {
+          "code": "Error Code",
+          "message": "Erro Messae"
+        }
+      }
+    }
+  }
+}

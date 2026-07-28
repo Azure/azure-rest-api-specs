@@ -1,0 +1,789 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "HybridComputeManagementClient",
+    "description": "The Hybrid Compute Management Client.",
+    "version": "2019-03-18-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{name}": {
+      "put": {
+        "tags": [
+          "machines"
+        ],
+        "operationId": "Machines_CreateOrUpdate",
+        "description": "The operation to create or update a hybrid machine resource identity in Azure.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the hybrid machine."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Machine"
+            },
+            "description": "Parameters supplied to the Create hybrid machine operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Machine"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {}
+      },
+      "patch": {
+        "tags": [
+          "machines"
+        ],
+        "operationId": "Machines_Update",
+        "description": "The operation to update a hybrid machine.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the hybrid machine."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MachineUpdate"
+            },
+            "description": "Parameters supplied to the Update hybrid machine operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Machine"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {}
+      },
+      "delete": {
+        "tags": [
+          "machines"
+        ],
+        "operationId": "Machines_Delete",
+        "description": "The operation to remove a hybrid machine identity in Azure.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the hybrid machine."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {}
+      },
+      "get": {
+        "tags": [
+          "machines"
+        ],
+        "operationId": "Machines_Get",
+        "description": "Retrieves information about the model view or the instance view of a hybrid machine.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the hybrid machine."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The expand expression to apply on the operation.",
+            "enum": [
+              "instanceView"
+            ],
+            "x-ms-enum": {
+              "name": "InstanceViewTypes",
+              "modelAsString": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Machine"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {}
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{name}/reconnect": {
+      "post": {
+        "tags": [
+          "machines"
+        ],
+        "operationId": "Machines_Reconnect",
+        "description": "The operation to reconnect a hybrid machine resource to its identity in Azure.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the hybrid machine."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MachineReconnect"
+            },
+            "description": "Parameters supplied to the Reconnect hybrid machine operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Machine"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {}
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines": {
+      "get": {
+        "tags": [
+          "machines"
+        ],
+        "operationId": "Machines_ListByResourceGroup",
+        "description": "Lists all the hybrid machines in the specified resource group. Use the nextLink property in the response to get the next page of hybrid machines.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MachineListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {},
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridCompute/machines": {
+      "get": {
+        "tags": [
+          "machines"
+        ],
+        "operationId": "Machines_ListBySubscription",
+        "description": "Lists all the hybrid machines in the specified subscription. Use the nextLink property in the response to get the next page of hybrid machines.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MachineListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {},
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.HybridCompute/operations": {
+      "get": {
+        "tags": [
+          "operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "Gets a list of hybrid compute operations.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    }
+  },
+  "definitions": {
+    "OperationListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/OperationValue"
+          },
+          "description": "The list of compute operations"
+        }
+      },
+      "description": "The List Compute Operation operation response."
+    },
+    "OperationValue": {
+      "properties": {
+        "origin": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The origin of the compute operation."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the compute operation."
+        },
+        "display": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/OperationValueDisplay",
+          "description": "Display properties"
+        }
+      },
+      "description": "Describes the properties of a Compute Operation value."
+    },
+    "OperationValueDisplay": {
+      "properties": {
+        "operation": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The display name of the compute operation."
+        },
+        "resource": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The display name of the resource the operation applies to."
+        },
+        "description": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The description of the operation."
+        },
+        "provider": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The resource provider for the operation."
+        }
+      },
+      "description": "Describes the properties of a Hybrid Compute Operation Value Display."
+    },
+    "OSProfile": {
+      "readOnly": true,
+      "properties": {
+        "computerName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Specifies the host OS name of the hybrid machine."
+        }
+      },
+      "description": "Specifies the operating system settings for the hybrid machine."
+    },
+    "MachineProperties": {
+      "properties": {
+        "osProfile": {
+          "$ref": "#/definitions/OSProfile",
+          "description": "Specifies the operating system settings for the hybrid machine."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The provisioning state, which only appears in the response."
+        },
+        "status": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The status of the hybrid machine agent.",
+          "enum": [
+            "Connected",
+            "Disconnected",
+            "Error"
+          ],
+          "x-ms-enum": {
+            "name": "StatusTypes",
+            "modelAsString": false
+          }
+        },
+        "lastStatusChange": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The time of the last status change."
+        },
+        "errorDetails": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
+          },
+          "description": "Details about the error state."
+        },
+        "agentVersion": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The hybrid machine agent full version."
+        },
+        "vmId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Specifies the hybrid machine unique ID."
+        },
+        "displayName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Specifies the hybrid machine display name."
+        },
+        "machineFqdn": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Specifies the hybrid machine FQDN."
+        },
+        "physicalLocation": {
+          "type": "string",
+          "description": "Resource's Physical Location"
+        },
+        "clientPublicKey": {
+          "type": "string",
+          "description": "Public Key that the client provides to be used during initial resource onboarding"
+        },
+        "osName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The Operating System running on the hybrid machine."
+        },
+        "osVersion": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The version of Operating System running on the hybrid machine."
+        }
+      },
+      "description": "Describes the properties of a hybrid machine."
+    },
+    "MachineReconnectProperties": {
+      "properties": {
+        "vmId": {
+          "type": "string",
+          "description": "Specifies the hybrid machine unique ID."
+        },
+        "clientPublicKey": {
+          "type": "string",
+          "description": "Public Key that the client provides to be used during initial resource onboarding."
+        }
+      },
+      "description": "Describes the properties required to reconnect a hybrid machine."
+    },
+    "MachineUpdateProperties": {
+      "properties": {
+        "physicalLocation": {
+          "type": "string",
+          "description": "Resource's Physical Location"
+        }
+      },
+      "description": "Describes the ARM updatable properties of a hybrid machine."
+    },
+    "Machine": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/MachineProperties",
+          "description": "Hybrid Compute Machine properties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Describes a hybrid machine."
+    },
+    "MachineUpdate": {
+      "properties": {
+        "identity": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/Identity",
+          "description": "Hybrid Compute Machine Managed Identity"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/MachineUpdateProperties",
+          "description": "Hybrid Compute Machine properties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/UpdateResource"
+        }
+      ],
+      "description": "Describes a hybrid machine Update."
+    },
+    "MachineReconnect": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/MachineReconnectProperties",
+          "description": "Hybrid Compute Machine properties"
+        }
+      },
+      "description": "Describes a hybrid machine reconnect."
+    },
+    "MachineListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Machine"
+          },
+          "description": "The list of hybrid machines."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to fetch the next page of VMs. Call ListNext() with this URI to fetch the next page of hybrid machines."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The List hybrid machine operation response."
+    },
+    "Resource": {
+      "description": "The Resource model definition.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "identity": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/Identity",
+          "description": "Hybrid Compute Machine Managed Identity"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "x-ms-azure-resource": true
+    },
+    "UpdateResource": {
+      "description": "The Update Resource model definition.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      }
+    },
+    "ErrorDetail": {
+      "title": "Error details.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "The error's code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "A human readable error message.",
+          "type": "string"
+        },
+        "target": {
+          "description": "Indicates which property in the request is responsible for the error.",
+          "type": "string"
+        },
+        "details": {
+          "description": "Additional error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
+          }
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "ErrorResponse": {
+      "title": "Error response.",
+      "description": "Contains details when the response code indicates an error.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The error details.",
+          "$ref": "#/definitions/ErrorDetail"
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Identity": {
+      "title": "Managed Identity.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The identity type.",
+          "type": "string"
+        },
+        "principalId": {
+          "readOnly": true,
+          "description": "The identity's principal id.",
+          "type": "string"
+        },
+        "tenantId": {
+          "readOnly": true,
+          "description": "The identity's tenant id.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    }
+  }
+}

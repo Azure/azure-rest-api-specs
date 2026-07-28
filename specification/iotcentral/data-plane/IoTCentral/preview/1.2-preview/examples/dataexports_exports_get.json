@@ -1,0 +1,33 @@
+{
+  "title": "Get a data export",
+  "description": "Get a data export with Id.",
+  "parameters": {
+    "baseDomain": "azureiotcentral.com",
+    "subdomain": "appsubdomain",
+    "exportId": "export1",
+    "api-version": "1.2-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "export1",
+        "displayName": "Test Export 1",
+        "enabled": false,
+        "source": "telemetry",
+        "filter": "SELECT * FROM devices WHERE $displayName != \"abc\" AND $id = \"a\"",
+        "enrichments": {
+          "abc": {
+            "path": "$templateDisplayName"
+          }
+        },
+        "destinations": [
+          {
+            "id": "fa5792a4-ead3-41dc-a972-fbeed33d46ae",
+            "transform": "{ ApplicationId: .applicationId, Component: .component, DeviceName: .device.name }"
+          }
+        ],
+        "status": "notStarted"
+      }
+    }
+  }
+}

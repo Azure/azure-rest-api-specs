@@ -1,0 +1,67 @@
+{
+  "title": "List data exports in your application",
+  "description": "Get a list of data exports in your application.",
+  "parameters": {
+    "baseDomain": "azureiotcentral.com",
+    "subdomain": "appsubdomain",
+    "api-version": "1.2-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "export1",
+            "displayName": "Test Export 1",
+            "enabled": false,
+            "source": "telemetry",
+            "filter": "SELECT * FROM devices WHERE $displayName != \"abc\" AND $id = \"a\"",
+            "enrichments": {
+              "abc": {
+                "path": "$templateDisplayName"
+              }
+            },
+            "destinations": [
+              {
+                "id": "fa5792a4-ead3-41dc-a972-fbeed33d46ae",
+                "transform": "{ ApplicationId: .applicationId, Component: .component, DeviceName: .device.name }"
+              }
+            ],
+            "status": "notStarted"
+          },
+          {
+            "id": "export2",
+            "displayName": "Test Export 2",
+            "enabled": true,
+            "source": "telemetry",
+            "filter": "SELECT * FROM devices WHERE $id == \"a\"",
+            "enrichments": {
+              "abc": {
+                "path": "$deviceName"
+              }
+            },
+            "destinations": [
+              {
+                "id": "fa5792a4-ead3-41dc-a972-fbeed33d46ae"
+              }
+            ],
+            "status": "starting"
+          },
+          {
+            "id": "d7686dda-43d5-4e22-af4e-9518b0ebed29",
+            "displayName": "Test Export 3",
+            "enabled": true,
+            "source": "properties",
+            "filter": "SELECT * FROM devices WHERE CONTAINS($displayName, \"a\")",
+            "destinations": [
+              {
+                "id": "destination1"
+              }
+            ],
+            "status": "healthy"
+          }
+        ]
+      }
+    }
+  }
+}

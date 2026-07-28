@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "subscriptionId": "subId1",
+    "resourceGroupName": "rg1",
+    "clusterRp": "Microsoft.Kubernetes",
+    "clusterResourceName": "connectedClusters",
+    "sourceControlConfigurationName": "SRS_GitHubConfig",
+    "api-version": "2020-10-01-preview",
+    "clusterName": "clusterName1"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "description": "Details of the Source Control Configuration's current status.",
+      "body": {
+        "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/sourceControlConfigurations/SRS_GitHubConfig",
+        "type": "Microsoft.KubernetesConfiguration/sourceControlConfigurations",
+        "name": "SRS_GitHubConfig",
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "application",
+          "createdAt": "2020-09-08T05:10:57.027Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "application",
+          "lastModifiedAt": "2020-09-08T05:10:57.027Z"
+        },
+        "properties": {
+          "repositoryUrl": "git@github.com:k8sdeveloper425/flux-get-started",
+          "operatorNamespace": "SRS_Namespace",
+          "operatorInstanceName": "SRSGitHubFluxOp-01",
+          "operatorType": "Flux",
+          "operatorScope": "namespace",
+          "operatorParams": "--git-email=xyzgituser@users.srs.github.com",
+          "helmOperatorProperties": {
+            "chartVersion": "0.3.0",
+            "chartValues": "--set git.ssh.secretName=flux-git-deploy --set tillerNamespace=kube-system"
+          },
+          "repositoryPublicKey": "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAqvTzeL+BWgcHnC1CTBRMg2ZfCh9khlrvb2avFHiGG24rRvjLHlKqtfiiw+cZNCKskUyVKqamD2RHrhyn/wXvJ9fFRt0LhYLKn4hJhJaPx4IawdWnW1MUv4U+Mr8o3Cxps4EmiZemqri3fOrhzEIlPL272whKpzlDLV7L4W1XQIGmVPwQ93HTzKEd5uHuEuw6JyFftDDLlCnd3Q1kQ7HOabFEfcSSr9cMx2MU4j/Pjuf3Rd/CzeksvKtU009KSXSnWKm8LL1fihSc1H1WDTi8iuZtT63hsNYH1yxrPRpMVScs3ufLViAGO9NEHQSgDdl/OERQQqKisUn2Qm6adgmftw== rsa-key-20190909",
+          "sshKnownHostsContents": "c3NoLmRldi5henVyZS5jb20gc3NoLXJzYSBBQUFBQjNOemFDMXljMkVBQUFBREFRQUJBQUFCQVFDN0hyMW9UV3FOcU9sekdKT2ZHSjROYWtWeUl6ZjFyWFlkNGQ3d282akJsa0x2Q0E0b2RCbEwwbURVeVowL1FVZlRUcWV1K3RtMjJnT3N2K1ZyVlRNazZ2d1JVNzVnWS95OXV0NU1iM2JSNUJWNThkS1h5cTlBOVVlQjVDYWtlaG41WmdtNngxbUtvVnlmK0ZGbjI2aVlxWEpSZ3pJWlpjWjVWNmhyRTBRZzM5a1ptNGF6NDhvMEFVYmY2U3A0U0xkdm51TWEyc1ZOd0hCYm9TN0VKa201N1hRUFZVMy9RcHlOTEhiV0Rkend0cmxTK2V6MzBTM0FkWWhMS0VPeEFHOHdlT255cnRMSkFVZW45bVRrb2w4b0lJMWVkZjdtV1diV1ZmMG5CbWx5MjErblpjbUNUSVNRQnRkY3lQYUVubzdmRlFNREQyNi9zMGxmS29iNEt3OEg=",
+          "provisioningState": "Succeeded",
+          "complianceStatus": {
+            "complianceState": "Pending",
+            "lastConfigApplied": "2020-09-08T05:25:32.122Z",
+            "message": "Configuration successfully created",
+            "messageLevel": "Info"
+          }
+        }
+      }
+    }
+  }
+}

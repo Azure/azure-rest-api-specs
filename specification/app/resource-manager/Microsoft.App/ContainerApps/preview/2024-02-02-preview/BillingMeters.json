@@ -1,0 +1,128 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2024-02-02-preview",
+    "title": "ContainerApps API Client"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.App/locations/{location}/billingMeters": {
+      "get": {
+        "tags": [
+          "BillingMeters"
+        ],
+        "summary": "Get billing meters by location.",
+        "description": "Get all billingMeters for a location.",
+        "operationId": "BillingMeters_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BillingMeterCollection"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BillingMeters_Get": {
+            "$ref": "./examples/BillingMeters_Get.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "BillingMeter": {
+      "description": "Billing meter.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the resource"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\""
+        },
+        "location": {
+          "type": "string",
+          "description": "Region for the billing meter."
+        },
+        "properties": {
+          "description": "Revision resource specific properties",
+          "type": "object",
+          "properties": {
+            "category": {
+              "description": "Used to categorize billing meters.",
+              "type": "string"
+            },
+            "meterType": {
+              "type": "string",
+              "description": "Billing meter type."
+            },
+            "displayName": {
+              "type": "string",
+              "description": "The everyday name of the billing meter."
+            }
+          }
+        }
+      }
+    },
+    "BillingMeterCollection": {
+      "description": "Collection of billing meters.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of billing meters.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BillingMeter"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

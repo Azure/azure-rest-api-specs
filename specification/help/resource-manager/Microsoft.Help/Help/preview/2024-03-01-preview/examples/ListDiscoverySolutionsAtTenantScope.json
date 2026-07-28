@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "$filter": "ProblemClassificationId eq 'SampleProblemClassificationId1'",
+    "api-version": "2024-03-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "SampleProblemClassificationId1",
+            "type": "Microsoft.Help/discoverySolutions",
+            "id": "/providers/microsoft.help/discoverySolutions/SampleProblemClassificationId1",
+            "properties": {
+              "solutions": [
+                {
+                  "description": "This is an azure solution to troubleshoot subscription issues.",
+                  "requiredInputs": [
+                    "SubscriptionId"
+                  ],
+                  "solutionId": "SampleSolutionId1",
+                  "solutionType": "Diagnostics"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "DiscoverySolution_List",
+  "title": "List DiscoverySolutions at resource scope"
+}

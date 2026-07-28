@@ -1,0 +1,70 @@
+{
+  "parameters": {
+    "api-version": "2023-09-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "serviceName": "myservice"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "provisioningState": "Succeeded",
+              "public": true,
+              "url": "test-url",
+              "resourceRequests": {
+                "cpu": "1",
+                "memory": "1G"
+              },
+              "instances": [
+                {
+                  "name": "instance1",
+                  "status": "Running"
+                },
+                {
+                  "name": "instance2",
+                  "status": "Running"
+                }
+              ],
+              "operatorProperties": {
+                "resourceRequests": {
+                  "cpu": "1",
+                  "memory": "1G",
+                  "instanceCount": 2
+                },
+                "instances": [
+                  {
+                    "name": "instance1",
+                    "status": "Running"
+                  },
+                  {
+                    "name": "instance2",
+                    "status": "Running"
+                  }
+                ]
+              }
+            },
+            "sku": {
+              "name": "E0",
+              "tier": "Enterprise",
+              "capacity": 2
+            },
+            "systemData": {
+              "createdBy": "sample-user",
+              "createdByType": "User",
+              "createdAt": "2021-08-11T03:16:03.944Z",
+              "lastModifiedBy": "sample-user",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2021-08-11T03:17:03.944Z"
+            },
+            "type": "Microsoft.AppPlatform/Spring/gateways",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/gateways/default",
+            "name": "default"
+          }
+        ]
+      }
+    }
+  }
+}

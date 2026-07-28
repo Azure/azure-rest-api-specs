@@ -1,0 +1,28 @@
+{
+  "title": "Gets the signed-in user's permitted abilities in an environment type.",
+  "operationId": "Environments_GetEnvironmentTypeAbilities",
+  "parameters": {
+    "endpoint": "https://8a40af38-3b4c-4672-a6a4-5e964b1870ed-contosodevcenter.centralus.devcenter.azure.com/",
+    "projectName": "myProject",
+    "environmentTypeName": "devtestenv",
+    "userId": "me",
+    "api-version": "2024-09-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "abilitiesAsAdmin": [
+          "ReadEnvironments"
+        ],
+        "abilitiesAsDeveloper": [
+          "DeleteEnvironments",
+          "ManageEnvironmentActions",
+          "ReadEnvironmentActions",
+          "ReadEnvironmentOutputs",
+          "ReadEnvironments",
+          "WriteEnvironments"
+        ]
+      }
+    }
+  }
+}

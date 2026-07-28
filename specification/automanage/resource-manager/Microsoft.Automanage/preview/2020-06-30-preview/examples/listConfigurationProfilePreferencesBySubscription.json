@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "subscriptionId": "mySubscriptionId",
+    "api-version": "2020-06-30-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": [
+        {
+          "id": "/subscriptions/subscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.Automanage/configurationProfiles/defaultProfile1",
+          "name": "defaultProfile1",
+          "type": "Microsoft.Automanage/configurationProfiles",
+          "location": "East US",
+          "tags": {
+            "Organization": "Administration"
+          },
+          "properties": {
+            "configurationProfileType": "Azure Best Practices - Prod",
+            "preferences": {
+              "vmBackup": {
+                "timeZone": "Pacific Standard Time"
+              },
+              "antiMalware": {
+                "enableRealTimeProtection": "True"
+              }
+            }
+          }
+        },
+        {
+          "id": "/subscriptions/subscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.Automanage/configurationProfiles/defaultProfile2",
+          "name": "defaultProfile2",
+          "type": "Microsoft.Automanage/configurationProfiles",
+          "location": "East US",
+          "tags": {
+            "Organization": "Administration"
+          },
+          "properties": {
+            "configurationProfileType": "Azure Best Practices - TestDev",
+            "preferences": {
+              "vmBackup": {
+                "timeZone": "Pacific Standard Time"
+              },
+              "antiMalware": {
+                "enableRealTimeProtection": "False"
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

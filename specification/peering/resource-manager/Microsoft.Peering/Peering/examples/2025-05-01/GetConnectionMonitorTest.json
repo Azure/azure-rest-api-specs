@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01",
+    "connectionMonitorTestName": "connectionMonitorTestName",
+    "peeringServiceName": "peeringServiceName",
+    "resourceGroupName": "rgName",
+    "subscriptionId": "subId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "connectionMonitorTestName",
+        "id": "/subscriptions/subId/resourceGroups/rgName/providers/Microsoft.Peering/peeringServices/peeringServiceName/connectionMonitorTests/connectionMonitorTestName",
+        "properties": {
+          "path": [
+            "source",
+            "hop1",
+            "hop2",
+            "destination"
+          ],
+          "destination": "Example Destination",
+          "destinationPort": 443,
+          "isTestSuccessful": true,
+          "provisioningState": "Succeeded",
+          "sourceAgent": "Example Source Agent",
+          "testFrequencyInSec": 30
+        }
+      }
+    }
+  },
+  "operationId": "ConnectionMonitorTests_Get",
+  "title": "Get Connection Monitor Test"
+}

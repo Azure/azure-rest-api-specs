@@ -1,0 +1,51 @@
+{
+  "title": "Approval_Update",
+  "operationId": "Approval_Update",
+  "parameters": {
+    "resourceUri": "subscriptions/c64f6eca-bdc5-4bc2-88d6-f8f1dc23f86c/resourceGroups/TestMyRg/providers/Microsoft.Mission/enclaveconnections/TestMyEnclaveConnection",
+    "api-version": "2024-06-01-preview",
+    "subscriptionId": "c64f6eca-bdc5-4bc2-88d6-f8f1dc23f86c",
+    "resourceGroupName": "rgopenapi",
+    "approvalName": "TestApprovals",
+    "properties": {
+      "properties": {
+        "parent1": "string",
+        "parent2": "string",
+        "requestMetadata": {
+          "resourceAction": "string",
+          "approvalStatus": "Approved"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "parent1": "string",
+          "parent2": "string",
+          "requestMetadata": {
+            "resourceAction": "string",
+            "approvalStatus": "Approved"
+          }
+        },
+        "id": "/subscriptions/c64f6eca-bdc5-4bc2-88d6-f8f1dc23f86c/resourceGroups/TestMyRg/providers/Microsoft.Mission/approvals/TestApprovals",
+        "name": "TestApprovals",
+        "type": "Microsoft.Mission/approvals",
+        "systemData": {
+          "createdBy": "myAlias",
+          "createdByType": "User",
+          "createdAt": "2023-03-17T20:43:17.760Z",
+          "lastModifiedBy": "myAlias",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-03-17T20:43:17.760Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}

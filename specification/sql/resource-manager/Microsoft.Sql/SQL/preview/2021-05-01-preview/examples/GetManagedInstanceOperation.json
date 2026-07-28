@@ -1,0 +1,72 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "sqlcrudtest-7398",
+    "managedInstanceName": "sqlcrudtest-4645",
+    "operationId": "00000000-1111-2222-3333-444444444444",
+    "api-version": "2021-05-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "managedInstanceName": "sqlcrudtest-4645",
+          "operation": "UpsertManagedServer",
+          "operationFriendlyName": "UPDATE MANAGED SERVER",
+          "percentComplete": 100,
+          "startTime": "2019-12-06T11:08:44.49Z",
+          "state": "Cancelled",
+          "isCancellable": false,
+          "operationSteps": {
+            "totalSteps": "6",
+            "currentStep": 2,
+            "stepsList": [
+              {
+                "order": 1,
+                "name": "Request validation",
+                "status": "Completed",
+                "stepEndTime": "2019-12-06T11:08:45.57Z",
+                "stepStartTime": "2019-12-06T11:08:44.49Z",
+                "timeElapsed": "0"
+              },
+              {
+                "order": 2,
+                "name": "Virtual Cluster resize/creation",
+                "status": "Completed",
+                "stepEndTime": "2019-12-06T11:23:05.47Z",
+                "stepStartTime": "2019-12-06T11:08:46.05Z",
+                "timeElapsed": "14"
+              },
+              {
+                "order": 3,
+                "name": "New SQL Instance Startup",
+                "status": "Canceled",
+                "stepEndTime": "2019-12-06T11:23:11.51Z",
+                "stepStartTime": "2019-12-06T11:23:05.55Z",
+                "timeElapsed": "0"
+              },
+              {
+                "order": 4,
+                "name": "Seeding database files",
+                "status": "NotStarted"
+              },
+              {
+                "order": 5,
+                "name": "Preparing Failover and Failover",
+                "status": "NotStarted"
+              },
+              {
+                "order": 6,
+                "name": "Old SQL Instance cleanup",
+                "status": "NotStarted"
+              }
+            ]
+          }
+        },
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-7398/providers/Microsoft.Sql/managedInstances/sqlcrudtest-4645/operations/11111111-1111-1111-1111-111111111111",
+        "name": "11111111-1111-1111-1111-111111111111",
+        "type": "Microsoft.Sql/managedInstances/operations"
+      }
+    }
+  }
+}

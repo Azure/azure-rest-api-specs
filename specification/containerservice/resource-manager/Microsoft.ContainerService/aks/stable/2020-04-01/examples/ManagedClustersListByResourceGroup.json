@@ -1,0 +1,66 @@
+{
+  "parameters": {
+    "api-version": "2020-04-01",
+    "subscriptionId": "subid1",
+    "resourceGroupName": "rg1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters",
+            "location": "location1",
+            "name": "clustername1",
+            "tags": {
+              "archv2": "",
+              "tier": "production"
+            },
+            "type": "Microsoft.ContainerService/ManagedClusters",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "kubernetesVersion": "1.9.6",
+              "maxAgentPools": 1,
+              "dnsPrefix": "dnsprefix1",
+              "fqdn": "dnsprefix1-abcd1234.hcp.eastus.azmk8s.io",
+              "agentPoolProfiles": [
+                {
+                  "name": "nodepool1",
+                  "count": 3,
+                  "vmSize": "Standard_DS1_v2",
+                  "maxPods": 110,
+                  "osType": "Linux",
+                  "provisioningState": "Succeeded",
+                  "orchestratorVersion": "1.9.6"
+                }
+              ],
+              "linuxProfile": {
+                "adminUsername": "azureuser",
+                "ssh": {
+                  "publicKeys": [
+                    {
+                      "keyData": "keydata"
+                    }
+                  ]
+                }
+              },
+              "servicePrincipalProfile": {
+                "clientId": "clientid"
+              },
+              "nodeResourceGroup": "MC_rg1_clustername1_location1",
+              "enableRBAC": false,
+              "diskEncryptionSetID": "/subscriptions/subid1/resourceGroups/rg1/providers/Microsoft.Compute/diskEncryptionSets/des",
+              "networkProfile": {
+                "networkPlugin": "kubenet",
+                "podCidr": "10.244.0.0/16",
+                "serviceCidr": "10.0.0.0/16",
+                "dnsServiceIP": "10.0.0.10",
+                "dockerBridgeCidr": "172.17.0.1/16"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "title": "Get KubernetesResources - CronJob",
+  "operationId": "KubernetesResources_Get",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000001",
+    "resourceGroupName": "rg1",
+    "clusterRp": "Microsoft.Kubernetes",
+    "clusterResourceName": "connectedClusters",
+    "clusterName": "clusterName1",
+    "kubernetesResourceName": "cronjob-report-generator-default",
+    "api-version": "2026-07-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/kubernetesResources/cronjob-report-generator-default",
+        "name": "cronjob-report-generator-default",
+        "type": "Microsoft.KubernetesConfiguration/kubernetesResources",
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "Application",
+          "createdAt": "2026-06-01T10:00:00.000Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2026-06-01T10:00:00.000Z"
+        },
+        "properties": {
+          "apiVersion": "batch/v1",
+          "kind": "CronJob",
+          "metadata": {
+            "name": "report-generator",
+            "namespaceName": "default",
+            "uid": "c9d0e1f2-a3b4-5678-cdef-890123456789",
+            "resourceVersion": "8901234",
+            "generation": 3,
+            "creationTimestamp": "2026-01-05T00:00:00Z",
+            "labels": [
+              {
+                "name": "app",
+                "value": "report-generator"
+              }
+            ]
+          },
+          "spec": {
+            "schedule": "0 2 * * *",
+            "concurrencyPolicy": "Forbid",
+            "suspend": false,
+            "timeZone": "America/New_York",
+            "startingDeadlineSeconds": 60,
+            "completions": 1,
+            "parallelism": 1,
+            "backoffLimit": 2,
+            "containers": [
+              {
+                "name": "reporter",
+                "image": "myapp/reporter:latest",
+                "imagePullPolicy": "Always",
+                "envFrom": [
+                  {
+                    "configMapRef": "report-config"
+                  },
+                  {
+                    "secretRef": "report-credentials"
+                  }
+                ],
+                "resources": {
+                  "requests": {
+                    "cpu": "100m",
+                    "memory": "128Mi"
+                  },
+                  "limits": {
+                    "cpu": "1000m",
+                    "memory": "1Gi"
+                  }
+                }
+              }
+            ]
+          },
+          "status": {
+            "lastScheduleTime": "2026-06-04T02:00:00Z",
+            "lastSuccessfulTime": "2026-06-04T02:03:45Z",
+            "activeJobCount": 0,
+            "conditions": []
+          },
+          "events": [
+            {
+              "type": "Normal",
+              "reason": "SuccessfulCreate",
+              "age": "1d",
+              "from": "cronjob-controller",
+              "message": "Created job report-generator-28651200"
+            }
+          ],
+          "attachedToExtension": "azure-kube-inventory"
+        }
+      }
+    }
+  }
+}

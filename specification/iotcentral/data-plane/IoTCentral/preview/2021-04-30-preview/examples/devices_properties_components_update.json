@@ -1,0 +1,30 @@
+{
+  "title": "Update device properties in component",
+  "description": "Update some or all of the read-write property values within a component of a device.",
+  "parameters": {
+    "centralDnsSuffixInPath": "azureiotcentral.com",
+    "baseDomain": "azureiotcentral.com",
+    "subdomain": "appsubdomain",
+    "deviceId": "mx1",
+    "componentName": "settings",
+    "api-version": "preview",
+    "body": {
+      "fanSpeed": 101,
+      "irSwitch": true
+    }
+  },
+  "responses": {
+    "202": {
+      "body": {
+        "$metadata": {
+          "fanSpeed": {
+            "desiredValue": 101
+          },
+          "irSwitch": {
+            "desiredValue": true
+          }
+        }
+      }
+    }
+  }
+}

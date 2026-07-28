@@ -1,0 +1,69 @@
+{
+  "parameters": {
+    "api-version": "2022-02-01",
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "conn",
+            "type": "Microsoft.Network.Admin/adminVirtualNetworkGatewayConnections",
+            "location": "",
+            "id": "/subscriptions/215fcc5e-dfd4-4232-a116-cbace6ab525e/resourceGroups/exampleRG/providers/Microsoft.Network/connections/conn",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "connectionState": {
+                "status": "Connected",
+                "activeGateway": "AZSH-Gwy02"
+              },
+              "subscriptionId": "215fcc5e-dfd4-4232-a116-cbace6ab525e",
+              "resourceGroup": "exampleRG",
+              "localNetworkGatewayIPAddress": "10.10.10.10",
+              "localNetworkGatewayName": "lng",
+              "virtualNetworkGatewayIPAddress": "11.11.11.11",
+              "virtualNetworkGatewayName": "vng",
+              "sku": "HighPerformance",
+              "capacityReserved": 400,
+              "totalStampCapacity": 4200
+            }
+          },
+          {
+            "name": "conn2",
+            "type": "Microsoft.Network.Admin/adminVirtualNetworkGatewayConnections",
+            "location": "",
+            "id": "/subscriptions/215fcc5e-dfd4-4232-a116-cbace6ab525e/resourceGroups/exampleRG2/providers/Microsoft.Network/connections/conn2",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "connectionState": {
+                "status": "Disconnected",
+                "activeGateway": "AZSH-Gwy02",
+                "connectionError": {
+                  "status": "Failure",
+                  "lastUpdatedTime": "2021-12-10T17:18:19.0355713+00:00",
+                  "detailedInfo": [
+                    {
+                      "source": "Network Controller",
+                      "code": "13868",
+                      "message": "IPSEC Policy mismatch."
+                    }
+                  ]
+                }
+              },
+              "subscriptionId": "215fcc5e-dfd4-4232-a116-cbace6ab525e",
+              "resourceGroup": "exampleRG2",
+              "localNetworkGatewayIPAddress": "10.10.10.11",
+              "localNetworkGatewayName": "lng2",
+              "virtualNetworkGatewayIPAddress": "11.11.11.11",
+              "virtualNetworkGatewayName": "vng2",
+              "sku": "Basic",
+              "capacityReserved": 200,
+              "totalStampCapacity": 4200
+            }
+          }
+        ]
+      }
+    }
+  }
+}

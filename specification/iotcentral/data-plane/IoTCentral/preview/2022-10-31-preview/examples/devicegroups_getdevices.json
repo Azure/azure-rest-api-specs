@@ -1,0 +1,27 @@
+{
+  "title": "Get the devices of a device group",
+  "description": "Get the list of devices by device group ID.",
+  "parameters": {
+    "baseDomain": "azureiotcentral.com",
+    "subdomain": "appsubdomain",
+    "deviceGroupId": "myGroupId",
+    "api-version": "2022-10-31-preview",
+    "$count": true
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "CheckoutThermostat",
+            "displayName": "CheckoutThermostat",
+            "template": "dtmi:contoso:testDeviceTemplate;1",
+            "simulated": true,
+            "provisioned": true,
+            "enabled": true
+          }
+        ]
+      }
+    }
+  }
+}

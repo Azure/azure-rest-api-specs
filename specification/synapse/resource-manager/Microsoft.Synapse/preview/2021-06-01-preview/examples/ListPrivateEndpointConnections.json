@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "subscriptionId": "01234567-89ab-4def-0123-456789abcdef",
+    "resourceGroupName": "ExampleResourceGroup",
+    "workspaceName": "ExampleWorkspace",
+    "api-version": "2021-06-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/01234567-89ab-4def-0123-456789abcdef/resourceGroups/ExampleResourceGroup/providers/Microsoft.Synapse/workspaces/ExampleWorkspace/privateEndpointConnections/ExamplePrivateEndpointConnection",
+            "name": "sql",
+            "type": "Microsoft.Synapse/workspaces/privateEndpointConnections",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "privateEndpoint": {
+                "id": "/subscriptions/01234567-89ab-4def-0123-456789abcdef/resourceGroups/ExampleResourceGroup/providers/Microsoft.Network/privateEndpoints/ExamplePrivateEndpoint"
+              },
+              "privateLinkServiceConnectionState": {
+                "status": "Approved",
+                "description": "Auto-approved",
+                "actionsRequired": "None"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "Error code",
+          "message": "Error message"
+        }
+      }
+    }
+  }
+}

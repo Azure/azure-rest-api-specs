@@ -1,0 +1,95 @@
+{
+  "parameters": {
+    "WebTestDefinition": {
+      "location": "South Central US",
+      "properties": {
+        "Description": "Ping web test alert for mytestwebapp",
+        "Enabled": true,
+        "Frequency": 900,
+        "Kind": "standard",
+        "Locations": [
+          {
+            "Id": "us-fl-mia-edge"
+          }
+        ],
+        "Name": "my-webtest-my-component",
+        "Request": {
+          "Headers": [
+            {
+              "key": "Content-Language",
+              "value": "de-DE"
+            },
+            {
+              "key": "Accept-Language",
+              "value": "de-DE"
+            }
+          ],
+          "HttpVerb": "POST",
+          "RequestBody": "SGVsbG8gd29ybGQ=",
+          "RequestUrl": "https://bing.com"
+        },
+        "RetryEnabled": true,
+        "SyntheticMonitorId": "my-webtest-my-component",
+        "Timeout": 120,
+        "ValidationRules": {
+          "SSLCertRemainingLifetimeCheck": 100,
+          "SSLCheck": true
+        }
+      }
+    },
+    "api-version": "2022-06-15",
+    "resourceGroupName": "my-resource-group",
+    "subscriptionId": "subid",
+    "webTestName": "my-webtest-my-component"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "my-webtest-my-component",
+        "type": "Microsoft.Insights/webtests",
+        "id": "/subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Insights/webtests/my-webtest-my-component",
+        "location": "southcentralus",
+        "properties": {
+          "Description": "Ping web test alert for mytestwebapp",
+          "Enabled": true,
+          "Frequency": 900,
+          "Kind": "standard",
+          "Locations": [
+            {
+              "Id": "us-fl-mia-edge"
+            }
+          ],
+          "Name": "my-webtest-my-component",
+          "Request": {
+            "Headers": [
+              {
+                "key": "Content-Language",
+                "value": "de-DE"
+              },
+              {
+                "key": "Accept-Language",
+                "value": "de-DE"
+              }
+            ],
+            "HttpVerb": "POST",
+            "RequestBody": "SGVsbG8gd29ybGQ=",
+            "RequestUrl": "https://bing.com"
+          },
+          "RetryEnabled": true,
+          "SyntheticMonitorId": "my-webtest-my-component",
+          "Timeout": 120,
+          "ValidationRules": {
+            "SSLCertRemainingLifetimeCheck": 100,
+            "SSLCheck": true
+          },
+          "provisioningState": "Succeeded"
+        },
+        "tags": {
+          "hidden-link:/subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Insights/components/my-component": "Resource"
+        }
+      }
+    }
+  },
+  "operationId": "WebTests_CreateOrUpdate",
+  "title": "webTestCreateStandard"
+}

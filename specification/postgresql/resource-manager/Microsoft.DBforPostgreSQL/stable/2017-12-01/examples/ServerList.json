@@ -23,9 +23,12 @@
               },
               "version": "9.5",
               "sslEnforcement": "Enabled",
+              "minimalTlsVersion": "TLS1_1",
               "userVisibleState": "Ready",
               "fullyQualifiedDomainName": "pgtestsvc1.postgres.database.azure.com",
-              "earliestRestoreDate": "2018-03-04T21:01:55.1498475+00:00"
+              "earliestRestoreDate": "2018-03-04T21:01:55.1498475+00:00",
+              "publicNetworkAccess": "Enabled",
+              "privateEndpointConnections": []
             },
             "location": "westus",
             "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/servers/pgtestsvc1",
@@ -48,9 +51,27 @@
               },
               "version": "9.6",
               "sslEnforcement": "Enabled",
+              "minimalTlsVersion": "TLS1_2",
               "userVisibleState": "Ready",
               "fullyQualifiedDomainName": "pgtestsvc2.postgres.database.azure.com",
-              "earliestRestoreDate": "2018-03-07T21:01:55.1498475+00:00"
+              "earliestRestoreDate": "2018-03-07T21:01:55.1498475+00:00",
+              "publicNetworkAccess": "Enabled",
+              "privateEndpointConnections": [
+                {
+                  "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/servers/pgtestsvc2/privateEndpointConnections/private-endpoint-name-00000000-1111-2222-3333-444444444444",
+                  "properties": {
+                    "provisioningState": "Ready",
+                    "privateEndpoint": {
+                      "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/Default-Network/providers/Microsoft.Network/privateEndpoints/private-endpoint-name"
+                    },
+                    "privateLinkServiceConnectionState": {
+                      "status": "Approved",
+                      "description": "Auto-approved",
+                      "actionsRequired": "None"
+                    }
+                  }
+                }
+              ]
             },
             "location": "westus",
             "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/servers/pgtestsvc2",
@@ -73,9 +94,27 @@
               },
               "version": "9.6",
               "sslEnforcement": "Enabled",
+              "minimalTlsVersion": "TLS1_0",
               "userVisibleState": "Ready",
               "fullyQualifiedDomainName": "pgtestsvc3.postgres.database.azure.com",
-              "earliestRestoreDate": "2018-03-01T00:11:08.55+00:00"
+              "earliestRestoreDate": "2018-03-01T00:11:08.55+00:00",
+              "publicNetworkAccess": "Enabled",
+              "privateEndpointConnections": [
+                {
+                  "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/servers/pgtestsvc3/privateEndpointConnections/private-endpoint-name-00000000-1111-2222-3333-444444444444",
+                  "properties": {
+                    "provisioningState": "Ready",
+                    "privateEndpoint": {
+                      "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/Default-Network/providers/Microsoft.Network/privateEndpoints/private-endpoint-name"
+                    },
+                    "privateLinkServiceConnectionState": {
+                      "status": "Approved",
+                      "description": "Auto-approved",
+                      "actionsRequired": "None"
+                    }
+                  }
+                }
+              ]
             },
             "location": "westus",
             "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg1/providers/Microsoft.DBforPostgreSQL/servers/pgtestsvc3",
@@ -98,9 +137,12 @@
               },
               "version": "9.6",
               "sslEnforcement": "Enabled",
+              "minimalTlsVersion": "TLS1_0",
               "userVisibleState": "Ready",
               "fullyQualifiedDomainName": "pgtestsvc4.postgres.database.azure.com",
-              "earliestRestoreDate": "2018-03-14T21:08:24.637+00:00"
+              "earliestRestoreDate": "2018-03-14T21:08:24.637+00:00",
+              "publicNetworkAccess": "Enabled",
+              "privateEndpointConnections": []
             },
             "location": "westus",
             "tags": {

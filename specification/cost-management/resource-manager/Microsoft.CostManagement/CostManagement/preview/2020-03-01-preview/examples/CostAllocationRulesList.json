@@ -1,0 +1,128 @@
+{
+  "parameters": {
+    "api-version": "2020-03-01-preview",
+    "billingAccountId": "100"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "providers/Microsoft.Billing/billingAccounts/100/providers/Microsoft.CostManagement/costAllocationRules/testRule",
+            "name": "testRule",
+            "type": "Microsoft.CostManagement/costAllocationRules",
+            "properties": {
+              "description": "This is a testRule",
+              "createdDate": "2020-06-18T22:21:51.1287144Z",
+              "updatedDate": "2020-06-18T22:21:51.1287144Z",
+              "status": "NotActive",
+              "details": {
+                "sourceResources": [
+                  {
+                    "resourceType": "Dimension",
+                    "name": "ResourceGroupName",
+                    "values": [
+                      "sampleRG"
+                    ]
+                  }
+                ],
+                "targetResources": [
+                  {
+                    "resourceType": "Dimension",
+                    "policyType": "FixedProportion",
+                    "name": "ResourceGroupName",
+                    "values": [
+                      {
+                        "name": "destinationRG",
+                        "percentage": 50
+                      },
+                      {
+                        "name": "destinationRG2",
+                        "percentage": 50
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "id": "providers/Microsoft.Billing/billingAccounts/100/providers/Microsoft.CostManagement/costAllocationRules/testRule2",
+            "name": "testRule2",
+            "type": "Microsoft.CostManagement/costAllocationRules",
+            "properties": {
+              "description": "This is a second test Rule",
+              "createdDate": "2020-06-18T22:21:51.1287144Z",
+              "updatedDate": "2020-06-18T22:21:51.1287144Z",
+              "status": "Active",
+              "details": {
+                "sourceResources": [
+                  {
+                    "resourceType": "Dimension",
+                    "name": "SubscriptionId",
+                    "values": [
+                      "2A002F2D-536F-4D7C-90DA-3D0BAE879B0E"
+                    ]
+                  }
+                ],
+                "targetResources": [
+                  {
+                    "resourceType": "Tag",
+                    "policyType": "FixedProportion",
+                    "name": "category",
+                    "values": [
+                      {
+                        "name": "devops",
+                        "percentage": 100
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "id": "providers/Microsoft.Billing/billingAccounts/100/providers/Microsoft.CostManagement/costAllocationRules/testRule3",
+            "name": "testRule3",
+            "type": "Microsoft.CostManagement/costAllocationRules",
+            "properties": {
+              "description": "This is a third test Rule",
+              "createdDate": "2020-06-18T22:21:51.1287144Z",
+              "updatedDate": "2020-06-18T22:21:51.1287144Z",
+              "status": "Active",
+              "details": {
+                "sourceResources": [
+                  {
+                    "resourceType": "Tag",
+                    "name": "category",
+                    "values": [
+                      "devops"
+                    ]
+                  }
+                ],
+                "targetResources": [
+                  {
+                    "resourceType": "Dimension",
+                    "policyType": "FixedProportion",
+                    "name": "ResourceGroupName",
+                    "values": [
+                      {
+                        "name": "ResourceGroup",
+                        "percentage": 55.55
+                      },
+                      {
+                        "name": "ResourceGroupSecond",
+                        "percentage": 44.45
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}

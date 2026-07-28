@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "api-version": "2025-10-02-preview",
+    "environmentName": "testcontainerenv",
+    "resourceGroupName": "examplerg",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "type": "Microsoft.App/ManagedEnvironments/managedCertificates",
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/testcontainerenv/managedCertificates/certificate-firendly-name",
+            "location": "East US",
+            "properties": {
+              "domainControlValidation": "CNAME",
+              "provisioningState": "Succeeded",
+              "subjectName": "CN=my-subject-name.company.country.net"
+            }
+          },
+          {
+            "type": "Microsoft.App/ManagedEnvironments/managedCertificates",
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/testcontainerenv/managedCertificates/certificate-firendly-name-root",
+            "location": "East US",
+            "properties": {
+              "domainControlValidation": "HTTP",
+              "provisioningState": "Succeeded",
+              "subjectName": "CN=company.country.net"
+            }
+          },
+          {
+            "type": "Microsoft.App/ManagedEnvironments/managedCertificates",
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/testcontainerenv/managedCertificates/certificate-firendly-name-txt",
+            "location": "East US",
+            "properties": {
+              "domainControlValidation": "TXT",
+              "provisioningState": "Succeeded",
+              "subjectName": "CN=txt.company.country.net"
+            }
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "ManagedCertificates_List",
+  "title": "List Managed Certificates by Managed Environment"
+}

@@ -1,0 +1,5759 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "3.4-preview",
+    "title": "Custom Vision Training Client"
+  },
+  "host": "southcentralus.api.cognitive.microsoft.com",
+  "basePath": "/customvision/v3.4-preview/training",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/domains": {
+      "get": {
+        "tags": [
+          "DomainsApi"
+        ],
+        "summary": "Get a list of the available domains.",
+        "operationId": "GetDomains",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Domain"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful GetDomains request": {
+            "$ref": "./examples/GetDomains.json"
+          }
+        }
+      }
+    },
+    "/domains/{domainId}": {
+      "get": {
+        "tags": [
+          "DomainsApi"
+        ],
+        "summary": "Get information about a specific domain.",
+        "operationId": "GetDomain",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "The id of the domain to get information about.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Domain"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful GetDomain request": {
+            "$ref": "./examples/GetDomain.json"
+          }
+        }
+      }
+    },
+    "/projects": {
+      "get": {
+        "tags": [
+          "ProjectApi"
+        ],
+        "summary": "Get your projects.",
+        "operationId": "GetProjects",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Project"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful GetProjects request": {
+            "$ref": "./examples/GetProjects.json"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "ProjectApi"
+        ],
+        "summary": "Create a project.",
+        "operationId": "CreateProject",
+        "consumes": [
+          "application/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "description": "Name of the project.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "description",
+            "in": "query",
+            "description": "The description of the project.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "domainId",
+            "in": "query",
+            "description": "The id of the domain to use for this project. Defaults to General.",
+            "required": false,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "classificationType",
+            "in": "query",
+            "description": "The type of classifier to create for this project.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "Multiclass",
+              "Multilabel"
+            ]
+          },
+          {
+            "name": "targetExportPlatforms",
+            "in": "query",
+            "description": "List of platforms the trained model is intending exporting to.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "CoreML",
+                "TensorFlow",
+                "DockerFile",
+                "ONNX",
+                "VAIDK",
+                "OpenVino"
+              ]
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "name": "options",
+            "in": "body",
+            "description": "Additional project creation options.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/CreateProjectOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful CreateProject request": {
+            "$ref": "./examples/CreateProject.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectId}": {
+      "get": {
+        "tags": [
+          "ProjectApi"
+        ],
+        "summary": "Get a specific project.",
+        "operationId": "GetProject",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The id of the project to get.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful GetProject request": {
+            "$ref": "./examples/GetProject.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ProjectApi"
+        ],
+        "summary": "Delete a specific project.",
+        "operationId": "DeleteProject",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The project id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful DeleteProject request": {
+            "$ref": "./examples/DeleteProject.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ProjectApi"
+        ],
+        "summary": "Update a specific project.",
+        "operationId": "UpdateProject",
+        "consumes": [
+          "application/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The id of the project to update.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "updatedProject",
+            "in": "body",
+            "description": "The updated project model.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful UpdateProject request": {
+            "$ref": "./examples/UpdateProject.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectId}/artifacts": {
+      "get": {
+        "tags": [
+          "ProjectApi"
+        ],
+        "summary": "Get artifact content from blob storage, based on artifact relative path in the blob.",
+        "operationId": "GetArtifact",
+        "consumes": [],
+        "produces": [
+          "application/octet-stream"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The project id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "path",
+            "in": "query",
+            "description": "The relative path for artifact.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful GetArtifact request": {
+            "$ref": "./examples/GetArtifact.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectId}/export": {
+      "get": {
+        "tags": [
+          "ProjectApi"
+        ],
+        "summary": "Exports a project.",
+        "operationId": "ExportProject",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The project id of the project to export.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProjectExport"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful ExportProject request": {
+            "$ref": "./examples/ExportProject.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectId}/images": {
+      "get": {
+        "tags": [
+          "ImageApi"
+        ],
+        "summary": "Get images for a given project iteration or workspace.",
+        "description": "This API supports batching and range selection. By default it will only return first 50 images matching images.\r\nUse the {take} and {skip} parameters to control how many images to return in a given batch.\r\nThe filtering is on an and/or relationship. For example, if the provided tag ids are for the \"Dog\" and\r\n\"Cat\" tags, then only images tagged with Dog and/or Cat will be returned",
+        "operationId": "GetImages",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The project id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "iterationId",
+            "in": "query",
+            "description": "The iteration id. Defaults to workspace.",
+            "required": false,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "tagIds",
+            "in": "query",
+            "description": "A list of tags ids to filter the images. Defaults to all tagged images when null. Limited to 20.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid",
+              "x-nullable": false
+            },
+            "collectionFormat": "csv",
+            "maxItems": 20,
+            "minItems": 0
+          },
+          {
+            "name": "taggingStatus",
+            "in": "query",
+            "description": "The tagging status filter. It can be 'All', 'Tagged', or 'Untagged'. Defaults to 'All'.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "All",
+              "Tagged",
+              "Untagged"
+            ]
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "An expression to filter the images against image metadata. Only images where the expression evaluates to true are included in the response.\r\nThe expression supports eq (Equal), ne (Not equal), and (Logical and), or (Logical or) operators.\r\nHere is an example, metadata=key1 eq 'value1' and key2 ne 'value2'.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "The ordering. Defaults to newest.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "Newest",
+              "Oldest"
+            ]
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "description": "Maximum number of images to return. Defaults to 50, limited to 256.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 50,
+            "maximum": 256,
+            "minimum": 0
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "Number of images to skip before beginning the image batch. Defaults to 0.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 0
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Image"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful GetImages request": {
+            "$ref": "./examples/GetImages.json"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "ImageApi"
+        ],
+        "summary": "Add the provided images to the set of training images.",
+        "description": "This API accepts body content as multipart/form-data and application/octet-stream. When using multipart\r\nmultiple image files can be sent at once, with a maximum of 64 files.\r\nIf all images are successful created, 200(OK) status code will be returned.\r\nOtherwise, 207 (Multi-Status) status code will be returned and detail status for each image will be listed in the response payload.",
+        "operationId": "CreateImagesFromData",
+        "consumes": [
+          "multipart/form-data",
+          "application/octet-stream"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The project id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "tagIds",
+            "in": "query",
+            "description": "The tags ids with which to tag each image. Limited to 20.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid",
+              "x-nullable": false
+            },
+            "collectionFormat": "csv",
+            "maxItems": 20,
+            "minItems": 0
+          },
+          {
+            "name": "imageData",
+            "in": "formData",
+            "description": "Binary image data. Supported formats are JPEG, GIF, PNG, and BMP. Supports images up to 6MB.",
+            "required": true,
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ImageCreateSummary"
+            }
+          },
+          "207": {
+            "description": "207",
+            "schema": {
+              "$ref": "#/definitions/ImageCreateSummary"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful CreateImagesFromData request": {
+            "$ref": "./examples/CreateImagesFromData.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ImageApi"
+        ],
+        "summary": "Delete images from the set of training images.",
+        "operationId": "DeleteImages",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The project id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "imageIds",
+            "in": "query",
+            "description": "Ids of the images to be deleted. Limited to 256 images per batch.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid",
+              "x-nullable": false
+            },
+            "collectionFormat": "csv",
+            "maxItems": 256,
+            "minItems": 0
+          },
+          {
+            "name": "allImages",
+            "in": "query",
+            "description": "Flag to specify delete all images, specify this flag or a list of images. Using this flag will return a 202 response to indicate the images are being deleted.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "allIterations",
+            "in": "query",
+            "description": "Removes these images from all iterations, not just the current workspace. Using this flag will return a 202 response to indicate the images are being deleted.",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful DeleteImages request": {
+            "$ref": "./examples/DeleteImages.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectId}/images/{imageId}/regionproposals": {
+      "post": {
+        "tags": [
+          "ImageRegionProposalApi"
+        ],
+        "summary": "Get region proposals for an image. Returns empty array if no proposals are found.",
+        "description": "This API will get region proposals for an image along with confidences for the region. It returns an empty array if no proposals are found.",
+        "operationId": "GetImageRegionProposals",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The project id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "imageId",
+            "in": "path",
+            "description": "The image id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ImageRegionProposal"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful GetImageRegionProposals request": {
+            "$ref": "./examples/GetImageRegionProposals.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectId}/images/count": {
+      "get": {
+        "tags": [
+          "ImageApi"
+        ],
+        "summary": "Get the number of images.",
+        "description": "The filtering is on an and/or relationship. For example, if the provided tag ids are for the \"Dog\" and\r\n\"Cat\" tags, then only images tagged with Dog and/or Cat will be returned",
+        "operationId": "GetImageCount",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The project id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "iterationId",
+            "in": "query",
+            "description": "The iteration id. Defaults to workspace.",
+            "required": false,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "taggingStatus",
+            "in": "query",
+            "description": "The tagging status filter. It can be 'All', 'Tagged', or 'Untagged'. Defaults to 'All'.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "All",
+              "Tagged",
+              "Untagged"
+            ]
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "An expression to filter the images against image metadata. Only images where the expression evaluates to true are included in the response.\r\nThe expression supports eq (Equal), ne (Not equal), and (Logical and), or (Logical or) operators.\r\nHere is an example, metadata=key1 eq 'value1' and key2 ne 'value2'.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "tagIds",
+            "in": "query",
+            "description": "A list of tags ids to filter the images to count. Defaults to all tags when null.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid",
+              "x-nullable": false
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful GetImageCount request": {
+            "$ref": "./examples/GetImageCount.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectId}/images/files": {
+      "post": {
+        "tags": [
+          "ImageApi"
+        ],
+        "summary": "Add the provided batch of images to the set of training images.",
+        "description": "This API accepts a batch of files, and optionally tags, to create images. There is a limit of 64 images and 20 tags.\r\nIf all images are successful created, 200(OK) status code will be returned.\r\nOtherwise, 207 (Multi-Status) status code will be returned and detail status for each image will be listed in the response payload.",
+        "operationId": "CreateImagesFromFiles",
+        "consumes": [
+          "application/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The project id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "batch",
+            "in": "body",
+            "description": "The batch of image files to add. Limited to 64 images and 20 tags per batch.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImageFileCreateBatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ImageCreateSummary"
+            }
+          },
+          "207": {
+            "description": "207",
+            "schema": {
+              "$ref": "#/definitions/ImageCreateSummary"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful CreateImagesFromFiles request": {
+            "$ref": "./examples/CreateImagesFromFiles.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectId}/images/id": {
+      "get": {
+        "tags": [
+          "ImageApi"
+        ],
+        "summary": "Get images by id for a given project iteration.",
+        "description": "This API will return a set of Images for the specified tags and optionally iteration. If no iteration is specified the\r\ncurrent workspace is used.",
+        "operationId": "GetImagesByIds",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The project id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "imageIds",
+            "in": "query",
+            "description": "The list of image ids to retrieve. Limited to 256.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid",
+              "x-nullable": false
+            },
+            "collectionFormat": "csv",
+            "maxItems": 256,
+            "minItems": 0
+          },
+          {
+            "name": "iterationId",
+            "in": "query",
+            "description": "The iteration id. Defaults to workspace.",
+            "required": false,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Image"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful GetImagesByIds request": {
+            "$ref": "./examples/GetImagesByIds.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectId}/images/metadata": {
+      "post": {
+        "tags": [
+          "ImageApi"
+        ],
+        "summary": "Update metadata of images.",
+        "description": "This API accepts a batch of image Ids, and metadata, to update images. There is a limit of 64 images.",
+        "operationId": "UpdateImageMetadata",
+        "consumes": [
+          "application/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The project id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "imageIds",
+            "in": "query",
+            "description": "The list of image ids to update. Limited to 64.",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid",
+              "x-nullable": false
+            },
+            "collectionFormat": "csv",
+            "maxItems": 256,
+            "minItems": 0
+          },
+          {
+            "name": "metadata",
+            "in": "body",
+            "description": "The metadata to be updated to the specified images. Limited to 10 key-value pairs per image. The length of key is limited to 128. The length of value is limited to 256.",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ImageMetadataUpdateSummary"
+            }
+          },
+          "207": {
+            "description": "207",
+            "schema": {
+              "$ref": "#/definitions/ImageMetadataUpdateSummary"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful UpdateImageMetadata request": {
+            "$ref": "./examples/UpdateImageMetadata.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectId}/images/predictions": {
+      "post": {
+        "tags": [
+          "ImageApi"
+        ],
+        "summary": "Add the specified predicted images to the set of training images.",
+        "description": "This API creates a batch of images from predicted images specified. There is a limit of 64 images and 20 tags.\r\nIf all images are successful created, 200(OK) status code will be returned.\r\nOtherwise, 207 (Multi-Status) status code will be returned and detail status for each image will be listed in the response payload.",
+        "operationId": "CreateImagesFromPredictions",
+        "consumes": [
+          "application/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The project id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "batch",
+            "in": "body",
+            "description": "Image, tag ids, and metadata. Limited to 64 images and 20 tags per batch.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImageIdCreateBatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ImageCreateSummary"
+            }
+          },
+          "207": {
+            "description": "207",
+            "schema": {
+              "$ref": "#/definitions/ImageCreateSummary"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful CreateImagesFromPredictions request": {
+            "$ref": "./examples/CreateImagesFromPredictions.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectId}/images/regions": {
+      "post": {
+        "tags": [
+          "ImageApi"
+        ],
+        "summary": "Create a set of image regions.",
+        "description": "This API accepts a batch of image regions, and optionally tags, to update existing images with region information.\r\nThere is a limit of 64 entries in the batch.\r\nIf all regions are successful created, 200(OK) status code will be returned.\r\nOtherwise, 207 (Multi-Status) status code will be returned and detail status for each region will be listed in the response payload.",
+        "operationId": "CreateImageRegions",
+        "consumes": [
+          "application/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The project id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "batch",
+            "in": "body",
+            "description": "Batch of image regions which include a tag and bounding box. Limited to 64.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImageRegionCreateBatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ImageRegionCreateSummary"
+            }
+          },
+          "207": {
+            "description": "207",
+            "schema": {
+              "$ref": "#/definitions/ImageRegionCreateSummary"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful CreateImageRegions request": {
+            "$ref": "./examples/CreateImageRegions.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ImageApi"
+        ],
+        "summary": "Delete a set of image regions.",
+        "operationId": "DeleteImageRegions",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The project id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "regionIds",
+            "in": "query",
+            "description": "Regions to delete. Limited to 64.",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid",
+              "x-nullable": false
+            },
+            "collectionFormat": "csv",
+            "maxItems": 64,
+            "minItems": 0
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful DeleteImageRegions request": {
+            "$ref": "./examples/DeleteImageRegions.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectId}/images/suggested": {
+      "post": {
+        "tags": [
+          "ImageApi"
+        ],
+        "summary": "Get untagged images whose suggested tags match given tags. Returns empty array if no images are found.",
+        "description": "This API will fetch untagged images filtered by suggested tags Ids. It returns an empty array if no images are found.",
+        "operationId": "QuerySuggestedImages",
+        "consumes": [
+          "application/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The project id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "iterationId",
+            "in": "query",
+            "description": "IterationId to use for the suggested tags and regions.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "query",
+            "in": "body",
+            "description": "Contains properties we need to query suggested images.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SuggestedTagAndRegionQueryToken"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SuggestedTagAndRegionQuery"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful QuerySuggestedImages request": {
+            "$ref": "./examples/QuerySuggestedImages.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectId}/images/suggested/count": {
+      "post": {
+        "tags": [
+          "ImageApi"
+        ],
+        "summary": "Get count of images whose suggested tags match given tags and their probabilities are greater than or equal to the given threshold. Returns count as 0 if none found.",
+        "description": "This API takes in tagIds to get count of untagged images per suggested tags for a given threshold.",
+        "operationId": "QuerySuggestedImageCount",
+        "consumes": [
+          "application/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The project id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "iterationId",
+            "in": "query",
+            "description": "IterationId to use for the suggested tags and regions.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "query",
+            "in": "body",
+            "description": "Model that contains tagIds, threshold and projectType to query by.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TagFilter"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "format": "int32",
+                "type": "integer"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful QuerySuggestedImageCount request": {
+            "$ref": "./examples/QuerySuggestedImageCount.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectId}/images/tagged": {
+      "get": {
+        "tags": [
+          "ImageApi"
+        ],
+        "summary": "Get tagged images for a given project iteration.",
+        "description": "This API supports batching and range selection. By default it will only return first 50 images matching images.\r\nUse the {take} and {skip} parameters to control how many images to return in a given batch.\r\nThe filtering is on an and/or relationship. For example, if the provided tag ids are for the \"Dog\" and\r\n\"Cat\" tags, then only images tagged with Dog and/or Cat will be returned",
+        "operationId": "GetTaggedImages",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The project id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "iterationId",
+            "in": "query",
+            "description": "The iteration id. Defaults to workspace.",
+            "required": false,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "tagIds",
+            "in": "query",
+            "description": "A list of tags ids to filter the images. Defaults to all tagged images when null. Limited to 20.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid",
+              "x-nullable": false
+            },
+            "collectionFormat": "csv",
+            "maxItems": 20,
+            "minItems": 0
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "The ordering. Defaults to newest.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "Newest",
+              "Oldest"
+            ]
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "description": "Maximum number of images to return. Defaults to 50, limited to 256.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 50,
+            "maximum": 256,
+            "minimum": 0
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "Number of images to skip before beginning the image batch. Defaults to 0.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 0
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Image"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful GetTaggedImages request": {
+            "$ref": "./examples/GetTaggedImages.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectId}/images/tagged/count": {
+      "get": {
+        "tags": [
+          "ImageApi"
+        ],
+        "summary": "Gets the number of images tagged with the provided {tagIds}.",
+        "description": "The filtering is on an and/or relationship. For example, if the provided tag ids are for the \"Dog\" and\r\n\"Cat\" tags, then only images tagged with Dog and/or Cat will be returned",
+        "operationId": "GetTaggedImageCount",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The project id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "iterationId",
+            "in": "query",
+            "description": "The iteration id. Defaults to workspace.",
+            "required": false,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "tagIds",
+            "in": "query",
+            "description": "A list of tags ids to filter the images to count. Defaults to all tags when null.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid",
+              "x-nullable": false
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful GetTaggedImageCount request": {
+            "$ref": "./examples/GetTaggedImageCount.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectId}/images/tags": {
+      "post": {
+        "tags": [
+          "ImageApi"
+        ],
+        "summary": "Associate a set of images with a set of tags.",
+        "operationId": "CreateImageTags",
+        "consumes": [
+          "application/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The project id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "batch",
+            "in": "body",
+            "description": "Batch of image tags. Limited to 128 tags per batch.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImageTagCreateBatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ImageTagCreateSummary"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful CreateImageTags request": {
+            "$ref": "./examples/CreateImageTags.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ImageApi"
+        ],
+        "summary": "Remove a set of tags from a set of images.",
+        "operationId": "DeleteImageTags",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The project id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "imageIds",
+            "in": "query",
+            "description": "Image ids. Limited to 64 images.",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid",
+              "x-nullable": false
+            },
+            "collectionFormat": "csv",
+            "maxItems": 64,
+            "minItems": 0
+          },
+          {
+            "name": "tagIds",
+            "in": "query",
+            "description": "Tags to be deleted from the specified images. Limited to 20 tags.",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid",
+              "x-nullable": false
+            },
+            "collectionFormat": "csv",
+            "maxItems": 20,
+            "minItems": 0
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful DeleteImageTags request": {
+            "$ref": "./examples/DeleteImageTags.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectId}/images/untagged": {
+      "get": {
+        "tags": [
+          "ImageApi"
+        ],
+        "summary": "Get untagged images for a given project iteration.",
+        "description": "This API supports batching and range selection. By default it will only return first 50 images matching images.\r\nUse the {take} and {skip} parameters to control how many images to return in a given batch.",
+        "operationId": "GetUntaggedImages",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The project id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "iterationId",
+            "in": "query",
+            "description": "The iteration id. Defaults to workspace.",
+            "required": false,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "The ordering. Defaults to newest.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "Newest",
+              "Oldest"
+            ]
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "description": "Maximum number of images to return. Defaults to 50, limited to 256.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 50,
+            "maximum": 256,
+            "minimum": 0
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "Number of images to skip before beginning the image batch. Defaults to 0.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 0
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Image"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful GetUntaggedImages request": {
+            "$ref": "./examples/GetUntaggedImages.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectId}/images/untagged/count": {
+      "get": {
+        "tags": [
+          "ImageApi"
+        ],
+        "summary": "Gets the number of untagged images.",
+        "description": "This API returns the images which have no tags for a given project and optionally an iteration. If no iteration is specified the\r\ncurrent workspace is used.",
+        "operationId": "GetUntaggedImageCount",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The project id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "iterationId",
+            "in": "query",
+            "description": "The iteration id. Defaults to workspace.",
+            "required": false,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful GetUntaggedImageCount request": {
+            "$ref": "./examples/GetUntaggedImageCount.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectId}/images/urls": {
+      "post": {
+        "tags": [
+          "ImageApi"
+        ],
+        "summary": "Add the provided images urls to the set of training images.",
+        "description": "This API accepts a batch of urls, and optionally tags, to create images. There is a limit of 64 images and 20 tags.\r\nIf all images are successful created, 200(OK) status code will be returned.\r\nOtherwise, 207 (Multi-Status) status code will be returned and detail status for each image will be listed in the response payload.",
+        "operationId": "CreateImagesFromUrls",
+        "consumes": [
+          "application/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The project id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "batch",
+            "in": "body",
+            "description": "Image urls, tag ids, and metadata. Limited to 64 images and 20 tags per batch.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImageUrlCreateBatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ImageCreateSummary"
+            }
+          },
+          "207": {
+            "description": "207",
+            "schema": {
+              "$ref": "#/definitions/ImageCreateSummary"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful CreateImagesFromUrls request": {
+            "$ref": "./examples/CreateImagesFromUrls.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectId}/iterations": {
+      "get": {
+        "tags": [
+          "ProjectApi"
+        ],
+        "summary": "Get iterations for the project.",
+        "operationId": "GetIterations",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The project id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Iteration"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful GetIterations request": {
+            "$ref": "./examples/GetIterations.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectId}/iterations/{iterationId}": {
+      "get": {
+        "tags": [
+          "ProjectApi"
+        ],
+        "summary": "Get a specific iteration.",
+        "operationId": "GetIteration",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The id of the project the iteration belongs to.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "iterationId",
+            "in": "path",
+            "description": "The id of the iteration to get.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Iteration"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful GetIteration request": {
+            "$ref": "./examples/GetIteration.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ProjectApi"
+        ],
+        "summary": "Delete a specific iteration of a project.",
+        "operationId": "DeleteIteration",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The project id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "iterationId",
+            "in": "path",
+            "description": "The iteration id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful DeleteIteration request": {
+            "$ref": "./examples/DeleteIteration.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ProjectApi"
+        ],
+        "summary": "Update a specific iteration.",
+        "operationId": "UpdateIteration",
+        "consumes": [
+          "application/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "Project id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "iterationId",
+            "in": "path",
+            "description": "Iteration id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "updatedIteration",
+            "in": "body",
+            "description": "The updated iteration model.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Iteration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Iteration"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful UpdateIteration request": {
+            "$ref": "./examples/UpdateIteration.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectId}/iterations/{iterationId}/export": {
+      "get": {
+        "tags": [
+          "ProjectApi"
+        ],
+        "summary": "Get the list of exports for a specific iteration.",
+        "operationId": "GetExports",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The project id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "iterationId",
+            "in": "path",
+            "description": "The iteration id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Export"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful GetExports request": {
+            "$ref": "./examples/GetExports.json"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "ProjectApi"
+        ],
+        "summary": "Export a trained iteration.",
+        "operationId": "ExportIteration",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The project id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "iterationId",
+            "in": "path",
+            "description": "The iteration id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "platform",
+            "in": "query",
+            "description": "The target platform.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "CoreML",
+              "TensorFlow",
+              "DockerFile",
+              "ONNX",
+              "VAIDK",
+              "OpenVino"
+            ]
+          },
+          {
+            "name": "flavor",
+            "in": "query",
+            "description": "The flavor of the target platform.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "Linux",
+              "Windows",
+              "ONNX10",
+              "ONNX12",
+              "ARM",
+              "TensorFlowNormal",
+              "TensorFlowLite"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Export"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful ExportIteration request": {
+            "$ref": "./examples/ExportIteration.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectId}/iterations/{iterationId}/performance": {
+      "get": {
+        "tags": [
+          "ProjectApi"
+        ],
+        "summary": "Get detailed performance information about an iteration.",
+        "operationId": "GetIterationPerformance",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The id of the project the iteration belongs to.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "iterationId",
+            "in": "path",
+            "description": "The id of the iteration to get.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "threshold",
+            "in": "query",
+            "description": "The threshold used to determine true predictions.",
+            "required": false,
+            "type": "number",
+            "format": "float"
+          },
+          {
+            "name": "overlapThreshold",
+            "in": "query",
+            "description": "If applicable, the bounding box overlap threshold used to determine true predictions.",
+            "required": false,
+            "type": "number",
+            "format": "float"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IterationPerformance"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful GetIterationPerformance request": {
+            "$ref": "./examples/GetIterationPerformance.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectId}/iterations/{iterationId}/performance/images": {
+      "get": {
+        "tags": [
+          "ProjectApi"
+        ],
+        "summary": "Get image with its prediction for a given project iteration.",
+        "description": "This API supports batching and range selection. By default it will only return first 50 images matching images.\r\nUse the {take} and {skip} parameters to control how many images to return in a given batch.\r\nThe filtering is on an and/or relationship. For example, if the provided tag ids are for the \"Dog\" and\r\n\"Cat\" tags, then only images tagged with Dog and/or Cat will be returned",
+        "operationId": "GetImagePerformances",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The project id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "iterationId",
+            "in": "path",
+            "description": "The iteration id. Defaults to workspace.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "tagIds",
+            "in": "query",
+            "description": "A list of tags ids to filter the images. Defaults to all tagged images when null. Limited to 20.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid",
+              "x-nullable": false
+            },
+            "collectionFormat": "csv",
+            "maxItems": 20,
+            "minItems": 0
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "The ordering. Defaults to newest.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "Newest",
+              "Oldest"
+            ]
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "description": "Maximum number of images to return. Defaults to 50, limited to 256.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 50,
+            "maximum": 256,
+            "minimum": 0
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "Number of images to skip before beginning the image batch. Defaults to 0.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 0
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ImagePerformance"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful GetImagePerformances request": {
+            "$ref": "./examples/GetImagePerformances.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectId}/iterations/{iterationId}/performance/images/count": {
+      "get": {
+        "tags": [
+          "ProjectApi"
+        ],
+        "summary": "Gets the number of images tagged with the provided {tagIds} that have prediction results from\r\ntraining for the provided iteration {iterationId}.",
+        "description": "The filtering is on an and/or relationship. For example, if the provided tag ids are for the \"Dog\" and\r\n\"Cat\" tags, then only images tagged with Dog and/or Cat will be returned",
+        "operationId": "GetImagePerformanceCount",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The project id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "iterationId",
+            "in": "path",
+            "description": "The iteration id. Defaults to workspace.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "tagIds",
+            "in": "query",
+            "description": "A list of tags ids to filter the images to count. Defaults to all tags when null.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid",
+              "x-nullable": false
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful GetImagePerformanceCount request": {
+            "$ref": "./examples/GetImagePerformanceCount.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectId}/iterations/{iterationId}/publish": {
+      "post": {
+        "tags": [
+          "ProjectApi"
+        ],
+        "summary": "Publish a specific iteration.",
+        "operationId": "PublishIteration",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The project id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "iterationId",
+            "in": "path",
+            "description": "The iteration id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "publishName",
+            "in": "query",
+            "description": "The name to give the published iteration.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "predictionId",
+            "in": "query",
+            "description": "The id of the prediction resource to publish to.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "overwrite",
+            "in": "query",
+            "description": "Whether to overwrite the published model with the given name (default: false).",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful PublishIteration request": {
+            "$ref": "./examples/PublishIteration.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ProjectApi"
+        ],
+        "summary": "Unpublish a specific iteration.",
+        "operationId": "UnpublishIteration",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The project id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "iterationId",
+            "in": "path",
+            "description": "The iteration id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful UnpublishIteration request": {
+            "$ref": "./examples/UnpublishIteration.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectId}/predictions": {
+      "delete": {
+        "tags": [
+          "PredictionsApi"
+        ],
+        "summary": "Delete a set of predicted images and their associated prediction results.",
+        "operationId": "DeletePrediction",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The project id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "ids",
+            "in": "query",
+            "description": "The prediction ids. Limited to 64.",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid",
+              "x-nullable": false
+            },
+            "collectionFormat": "csv",
+            "maxItems": 64,
+            "minItems": 0
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful DeletePrediction request": {
+            "$ref": "./examples/DeletePrediction.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectId}/predictions/query": {
+      "post": {
+        "tags": [
+          "PredictionsApi"
+        ],
+        "summary": "Get images that were sent to your prediction endpoint.",
+        "operationId": "QueryPredictions",
+        "consumes": [
+          "application/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The project id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "query",
+            "in": "body",
+            "description": "Parameters used to query the predictions. Limited to combining 2 tags.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PredictionQueryToken"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PredictionQueryResult"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful QueryPredictions request": {
+            "$ref": "./examples/QueryPredictions.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectId}/quicktest/image": {
+      "post": {
+        "tags": [
+          "PredictionsApi"
+        ],
+        "summary": "Quick test an image.",
+        "operationId": "QuickTestImage",
+        "consumes": [
+          "multipart/form-data",
+          "application/octet-stream"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The project id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "iterationId",
+            "in": "query",
+            "description": "Optional. Specifies the id of a particular iteration to evaluate against.\r\n            The default iteration for the project will be used when not specified.",
+            "required": false,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "store",
+            "in": "query",
+            "description": "Optional. Specifies whether or not to store the result of this prediction. The default is true, to store.",
+            "required": false,
+            "type": "boolean",
+            "default": true
+          },
+          {
+            "name": "imageData",
+            "in": "formData",
+            "description": "Binary image data. Supported formats are JPEG, GIF, PNG, and BMP. Supports images up to 6MB.",
+            "required": true,
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ImagePrediction"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful QuickTestImage request": {
+            "$ref": "./examples/QuickTestImage.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectId}/quicktest/url": {
+      "post": {
+        "tags": [
+          "PredictionsApi"
+        ],
+        "summary": "Quick test an image url.",
+        "operationId": "QuickTestImageUrl",
+        "consumes": [
+          "application/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The project to evaluate against.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "imageUrl",
+            "in": "body",
+            "description": "An ImageUrl that contains the url of the image to be evaluated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImageUrl"
+            }
+          },
+          {
+            "name": "iterationId",
+            "in": "query",
+            "description": "Optional. Specifies the id of a particular iteration to evaluate against.\r\n            The default iteration for the project will be used when not specified.",
+            "required": false,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "store",
+            "in": "query",
+            "description": "Optional. Specifies whether or not to store the result of this prediction. The default is true, to store.",
+            "required": false,
+            "type": "boolean",
+            "default": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ImagePrediction"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful QuickTestImageUrl request": {
+            "$ref": "./examples/QuickTestImageUrl.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectId}/tags": {
+      "get": {
+        "tags": [
+          "TagsApi"
+        ],
+        "summary": "Get the tags for a given project and iteration.",
+        "operationId": "GetTags",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The project id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "iterationId",
+            "in": "query",
+            "description": "The iteration id. Defaults to workspace.",
+            "required": false,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Tag"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful GetTags request": {
+            "$ref": "./examples/GetTags.json"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "TagsApi"
+        ],
+        "summary": "Create a tag for the project.",
+        "operationId": "CreateTag",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The project id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "The tag name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "description",
+            "in": "query",
+            "description": "Optional description for the tag.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "Optional type for the tag.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "Regular",
+              "Negative",
+              "GeneralProduct"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Tag"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful CreateTag request": {
+            "$ref": "./examples/CreateTag.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectId}/tags/{tagId}": {
+      "get": {
+        "tags": [
+          "TagsApi"
+        ],
+        "summary": "Get information about a specific tag.",
+        "operationId": "GetTag",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The project this tag belongs to.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "tagId",
+            "in": "path",
+            "description": "The tag id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "iterationId",
+            "in": "query",
+            "description": "The iteration to retrieve this tag from. Optional, defaults to current training set.",
+            "required": false,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Tag"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful GetTag request": {
+            "$ref": "./examples/GetTag.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "TagsApi"
+        ],
+        "summary": "Delete a tag from the project.",
+        "operationId": "DeleteTag",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The project id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "tagId",
+            "in": "path",
+            "description": "Id of the tag to be deleted.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful DeleteTag request": {
+            "$ref": "./examples/DeleteTag.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "TagsApi"
+        ],
+        "summary": "Update a tag.",
+        "operationId": "UpdateTag",
+        "consumes": [
+          "application/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The project id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "tagId",
+            "in": "path",
+            "description": "The id of the target tag.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "updatedTag",
+            "in": "body",
+            "description": "The updated tag model.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Tag"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Tag"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful UpdateTag request": {
+            "$ref": "./examples/UpdateTag.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectId}/tagsandregions/suggestions": {
+      "post": {
+        "tags": [
+          "SuggestTagsAndRegionsApi"
+        ],
+        "summary": "Suggest tags and regions for an array/batch of untagged images. Returns empty array if no tags are found.",
+        "description": "This API will get suggested tags and regions for an array/batch of untagged images along with confidences for the tags. It returns an empty array if no tags are found.\r\nThere is a limit of 64 images in the batch.",
+        "operationId": "SuggestTagsAndRegions",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The project id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "iterationId",
+            "in": "query",
+            "description": "IterationId to use for tag and region suggestion.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "imageIds",
+            "in": "query",
+            "description": "Array of image ids tag suggestion are needed for. Use GetUntaggedImages API to get imageIds.",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid",
+              "x-nullable": false
+            },
+            "collectionFormat": "csv",
+            "maxItems": 64,
+            "minItems": 0
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SuggestedTagAndRegion"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful SuggestTagsAndRegions request": {
+            "$ref": "./examples/SuggestTagsAndRegions.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectId}/train": {
+      "post": {
+        "tags": [
+          "ProjectApi"
+        ],
+        "summary": "Queues project for training.",
+        "operationId": "TrainProject",
+        "consumes": [
+          "application/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The project id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "trainingType",
+            "in": "query",
+            "description": "The type of training to use to train the project (default: Regular).",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "Regular",
+              "Advanced"
+            ]
+          },
+          {
+            "name": "reservedBudgetInHours",
+            "in": "query",
+            "description": "The number of hours reserved as budget for training (if applicable).",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 0
+          },
+          {
+            "name": "forceTrain",
+            "in": "query",
+            "description": "Whether to force train even if dataset and configuration does not change (default: false).",
+            "required": false,
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "name": "notificationEmailAddress",
+            "in": "query",
+            "description": "The email address to send notification to when training finishes (default: null).",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "trainingParameters",
+            "in": "body",
+            "description": "Additional training parameters passed in to control how the project is trained.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/TrainingParameters"
+            },
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Iteration"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful TrainProject request": {
+            "$ref": "./examples/TrainProject.json"
+          }
+        }
+      }
+    },
+    "/projects/import": {
+      "post": {
+        "tags": [
+          "ProjectApi"
+        ],
+        "summary": "Imports a project.",
+        "operationId": "ImportProject",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "description": "Token generated from the export project call.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "Optional, name of the project to use instead of auto-generated name.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful ImportProject request": {
+            "$ref": "./examples/ImportProject.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "BoundingBox": {
+      "description": "Bounding box that defines a region of an image.",
+      "required": [
+        "left",
+        "top",
+        "width",
+        "height"
+      ],
+      "type": "object",
+      "properties": {
+        "left": {
+          "format": "float",
+          "description": "Coordinate of the left boundary.",
+          "type": "number",
+          "readOnly": false,
+          "x-nullable": false
+        },
+        "top": {
+          "format": "float",
+          "description": "Coordinate of the top boundary.",
+          "type": "number",
+          "readOnly": false,
+          "x-nullable": false
+        },
+        "width": {
+          "format": "float",
+          "description": "Width.",
+          "type": "number",
+          "readOnly": false,
+          "x-nullable": false
+        },
+        "height": {
+          "format": "float",
+          "description": "Height.",
+          "type": "number",
+          "readOnly": false,
+          "x-nullable": false
+        }
+      }
+    },
+    "CreateProjectOptions": {
+      "description": "Options used for createProject.",
+      "type": "object",
+      "properties": {
+        "exportModelContainerUri": {
+          "description": "The uri to the Azure Storage container that will be used to store exported models.",
+          "type": "string",
+          "readOnly": false,
+          "x-nullable": false
+        },
+        "notificationQueueUri": {
+          "description": "The uri to the Azure Storage queue that will be used to send project-related notifications. See <a href=\"https://go.microsoft.com/fwlink/?linkid=2144149\">Storage notifications</a> documentation for setup and message format.",
+          "type": "string",
+          "readOnly": false,
+          "x-nullable": false
+        }
+      }
+    },
+    "CustomBaseModelInfo": {
+      "required": [
+        "projectId",
+        "iterationId"
+      ],
+      "type": "object",
+      "properties": {
+        "projectId": {
+          "format": "uuid",
+          "description": "Project Id of the previously trained project to be used for current iteration's training.",
+          "type": "string",
+          "readOnly": false,
+          "x-nullable": false
+        },
+        "iterationId": {
+          "format": "uuid",
+          "description": "Iteration Id of the previously trained project to be used for current iteration's training.",
+          "type": "string",
+          "readOnly": false,
+          "x-nullable": false
+        }
+      }
+    },
+    "CustomVisionError": {
+      "required": [
+        "code",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "The error code.",
+          "enum": [
+            "NoError",
+            "BadRequest",
+            "BadRequestExceededBatchSize",
+            "BadRequestNotSupported",
+            "BadRequestInvalidIds",
+            "BadRequestProjectName",
+            "BadRequestProjectNameNotUnique",
+            "BadRequestProjectDescription",
+            "BadRequestProjectUnknownDomain",
+            "BadRequestProjectUnknownClassification",
+            "BadRequestProjectUnsupportedDomainTypeChange",
+            "BadRequestProjectUnsupportedExportPlatform",
+            "BadRequestProjectImagePreprocessingSettings",
+            "BadRequestProjectDuplicated",
+            "BadRequestIterationName",
+            "BadRequestIterationNameNotUnique",
+            "BadRequestIterationDescription",
+            "BadRequestIterationIsNotTrained",
+            "BadRequestIterationValidationFailed",
+            "BadRequestWorkspaceCannotBeModified",
+            "BadRequestWorkspaceNotDeletable",
+            "BadRequestTagName",
+            "BadRequestTagNameNotUnique",
+            "BadRequestTagDescription",
+            "BadRequestTagType",
+            "BadRequestMultipleNegativeTag",
+            "BadRequestMultipleGeneralProductTag",
+            "BadRequestImageTags",
+            "BadRequestImageRegions",
+            "BadRequestNegativeAndRegularTagOnSameImage",
+            "BadRequestUnsupportedDomain",
+            "BadRequestRequiredParamIsNull",
+            "BadRequestIterationIsPublished",
+            "BadRequestInvalidPublishName",
+            "BadRequestInvalidPublishTarget",
+            "BadRequestUnpublishFailed",
+            "BadRequestIterationNotPublished",
+            "BadRequestSubscriptionApi",
+            "BadRequestExceedProjectLimit",
+            "BadRequestExceedIterationPerProjectLimit",
+            "BadRequestExceedTagPerProjectLimit",
+            "BadRequestExceedTagPerImageLimit",
+            "BadRequestExceededQuota",
+            "BadRequestCannotMigrateProjectWithName",
+            "BadRequestNotLimitedTrial",
+            "BadRequestImageBatch",
+            "BadRequestImageStream",
+            "BadRequestImageUrl",
+            "BadRequestImageFormat",
+            "BadRequestImageSizeBytes",
+            "BadRequestImageDimensions",
+            "BadRequestImageAspectRatio",
+            "BadRequestImageExceededCount",
+            "BadRequestTrainingNotNeeded",
+            "BadRequestTrainingNotNeededButTrainingPipelineUpdated",
+            "BadRequestTrainingValidationFailed",
+            "BadRequestClassificationTrainingValidationFailed",
+            "BadRequestMultiClassClassificationTrainingValidationFailed",
+            "BadRequestMultiLabelClassificationTrainingValidationFailed",
+            "BadRequestDetectionTrainingValidationFailed",
+            "BadRequestTrainingAlreadyInProgress",
+            "BadRequestDetectionTrainingNotAllowNegativeTag",
+            "BadRequestInvalidEmailAddress",
+            "BadRequestRetiredDomainNotSupportedForTraining",
+            "BadRequestDomainNotSupportedForAdvancedTraining",
+            "BadRequestExportPlatformNotSupportedForAdvancedTraining",
+            "BadRequestReservedBudgetInHoursNotEnoughForAdvancedTraining",
+            "BadRequestCustomBaseModelIterationStatusNotCompleted",
+            "BadRequestCustomBaseModelDomainNotCompatible",
+            "BadRequestCustomBaseModelArchitectureRetired",
+            "BadRequestExportValidationFailed",
+            "BadRequestExportAlreadyInProgress",
+            "BadRequestPredictionIdsMissing",
+            "BadRequestPredictionIdsExceededCount",
+            "BadRequestPredictionTagsExceededCount",
+            "BadRequestPredictionResultsExceededCount",
+            "BadRequestPredictionInvalidApplicationName",
+            "BadRequestPredictionInvalidQueryParameters",
+            "BadRequestInvalidImportToken",
+            "BadRequestExportWhileTraining",
+            "BadRequestImageMetadataKey",
+            "BadRequestImageMetadataValue",
+            "BadRequestOperationNotSupported",
+            "BadRequestInvalidArtifactUri",
+            "BadRequestCustomerManagedKeyRevoked",
+            "BadRequestInvalidUri",
+            "BadRequestInvalid",
+            "UnsupportedMediaType",
+            "Forbidden",
+            "ForbiddenUser",
+            "ForbiddenUserResource",
+            "ForbiddenUserSignupDisabled",
+            "ForbiddenUserSignupAllowanceExceeded",
+            "ForbiddenUserDoesNotExist",
+            "ForbiddenUserDisabled",
+            "ForbiddenUserInsufficientCapability",
+            "ForbiddenDRModeEnabled",
+            "ForbiddenInvalid",
+            "NotFound",
+            "NotFoundProject",
+            "NotFoundProjectDefaultIteration",
+            "NotFoundIteration",
+            "NotFoundIterationPerformance",
+            "NotFoundTag",
+            "NotFoundImage",
+            "NotFoundDomain",
+            "NotFoundApimSubscription",
+            "NotFoundInvalid",
+            "Conflict",
+            "ConflictInvalid",
+            "ErrorUnknown",
+            "ErrorIterationCopyFailed",
+            "ErrorPreparePerformanceMigrationFailed",
+            "ErrorProjectInvalidWorkspace",
+            "ErrorProjectInvalidPipelineConfiguration",
+            "ErrorProjectInvalidDomain",
+            "ErrorProjectTrainingRequestFailed",
+            "ErrorProjectImportRequestFailed",
+            "ErrorProjectExportRequestFailed",
+            "ErrorFeaturizationServiceUnavailable",
+            "ErrorFeaturizationQueueTimeout",
+            "ErrorFeaturizationInvalidFeaturizer",
+            "ErrorFeaturizationAugmentationUnavailable",
+            "ErrorFeaturizationUnrecognizedJob",
+            "ErrorFeaturizationAugmentationError",
+            "ErrorExporterInvalidPlatform",
+            "ErrorExporterInvalidFeaturizer",
+            "ErrorExporterInvalidClassifier",
+            "ErrorPredictionServiceUnavailable",
+            "ErrorPredictionModelNotFound",
+            "ErrorPredictionModelNotCached",
+            "ErrorPrediction",
+            "ErrorPredictionStorage",
+            "ErrorRegionProposal",
+            "ErrorUnknownBaseModel",
+            "ErrorServerTimeOut",
+            "ErrorInvalid"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "CustomVisionErrorCodes",
+            "modelAsString": true
+          }
+        },
+        "message": {
+          "description": "A message explaining the error reported by the service.",
+          "type": "string"
+        }
+      }
+    },
+    "Domain": {
+      "description": "Domains are used as the starting point for your project. Each domain is optimized for specific types of images. Domains with compact in their name can be exported. For more information visit the <a href=\"https://go.microsoft.com/fwlink/?linkid=2117014\">domain documentation</a>.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "description": "Domain id.",
+          "type": "string",
+          "readOnly": true,
+          "example": "00000000-0000-0000-0000-000000000000",
+          "x-nullable": false
+        },
+        "name": {
+          "description": "Name of the domain, describing the types of images used to train it.",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "type": {
+          "description": "Domain type: Classification or ObjectDetection.",
+          "enum": [
+            "Classification",
+            "ObjectDetection"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false,
+          "x-ms-enum": {
+            "name": "DomainType",
+            "modelAsString": true
+          }
+        },
+        "exportable": {
+          "description": "Indicating if the domain is exportable.",
+          "type": "boolean",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "enabled": {
+          "description": "Indicating if the domain is enabled.",
+          "type": "boolean",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "exportablePlatforms": {
+          "description": "Platforms that the domain can be exported to.",
+          "type": "array",
+          "items": {
+            "enum": [
+              "CoreML",
+              "TensorFlow",
+              "DockerFile",
+              "ONNX",
+              "VAIDK",
+              "OpenVino"
+            ],
+            "type": "string",
+            "x-nullable": false
+          },
+          "readOnly": true
+        },
+        "modelInformation": {
+          "$ref": "#/definitions/ModelInformation",
+          "description": "Model information.",
+          "readOnly": true
+        }
+      }
+    },
+    "Export": {
+      "type": "object",
+      "properties": {
+        "platform": {
+          "description": "Platform of the export.",
+          "enum": [
+            "CoreML",
+            "TensorFlow",
+            "DockerFile",
+            "ONNX",
+            "VAIDK",
+            "OpenVino"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false,
+          "x-ms-enum": {
+            "name": "ExportPlatform",
+            "modelAsString": true
+          }
+        },
+        "status": {
+          "description": "Status of the export.",
+          "enum": [
+            "Exporting",
+            "Failed",
+            "Done"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false,
+          "x-ms-enum": {
+            "name": "ExportStatus",
+            "modelAsString": true
+          }
+        },
+        "downloadUri": {
+          "description": "URI used to download the model. If VNET feature is enabled this will be a relative path to be used with GetArtifact, otherwise this will be an absolute URI to the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "flavor": {
+          "description": "Flavor of the export. These are specializations of the export platform.\r\nDocker platform has valid flavors: Linux, Windows, ARM.\r\nTensorflow platform has valid flavors: TensorFlowNormal, TensorFlowLite.\r\nONNX platform has valid flavors: ONNX10, ONNX12.",
+          "enum": [
+            "Linux",
+            "Windows",
+            "ONNX10",
+            "ONNX12",
+            "ARM",
+            "TensorFlowNormal",
+            "TensorFlowLite"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": true,
+          "x-ms-enum": {
+            "name": "ExportFlavor",
+            "modelAsString": true
+          }
+        },
+        "newerVersionAvailable": {
+          "description": "Indicates an updated version of the export package is available and should be re-exported for the latest changes.",
+          "type": "boolean",
+          "readOnly": true,
+          "x-nullable": false
+        }
+      }
+    },
+    "Image": {
+      "description": "Image model to be sent as JSON.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "description": "Id of the image.",
+          "type": "string",
+          "readOnly": true,
+          "example": "00000000-0000-0000-0000-000000000000",
+          "x-nullable": false
+        },
+        "created": {
+          "format": "date-time",
+          "description": "Date the image was created.",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "width": {
+          "format": "int32",
+          "description": "Width of the image.",
+          "type": "integer",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "height": {
+          "format": "int32",
+          "description": "Height of the image.",
+          "type": "integer",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "resizedImageUri": {
+          "description": "The URI to the (resized) image used for training. If VNET feature is enabled this will be a relative path to be used with GetArtifact, otherwise this will be an absolute URI to the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "thumbnailUri": {
+          "description": "The URI to the thumbnail of the original image. If VNET feature is enabled this will be a relative path to be used with GetArtifact, otherwise this will be an absolute URI to the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "originalImageUri": {
+          "description": "The URI to the original uploaded image. If VNET feature is enabled this will be a relative path to be used with GetArtifact, otherwise this will be an absolute URI to the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "tags": {
+          "description": "Tags associated with this image.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImageTag"
+          },
+          "readOnly": true,
+          "x-nullable": true
+        },
+        "regions": {
+          "description": "Regions associated with this image.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImageRegion"
+          },
+          "readOnly": true,
+          "x-nullable": true
+        },
+        "metadata": {
+          "description": "Metadata associated with this image.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "x-nullable": true
+        }
+      }
+    },
+    "ImageCreateResult": {
+      "type": "object",
+      "properties": {
+        "sourceUrl": {
+          "description": "Source URL of the image.",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "status": {
+          "description": "Status of the image creation.",
+          "enum": [
+            "OK",
+            "OKDuplicate",
+            "ErrorSource",
+            "ErrorImageFormat",
+            "ErrorImageSize",
+            "ErrorStorage",
+            "ErrorLimitExceed",
+            "ErrorTagLimitExceed",
+            "ErrorRegionLimitExceed",
+            "ErrorUnknown",
+            "ErrorNegativeAndRegularTagOnSameImage",
+            "ErrorImageDimensions",
+            "ErrorInvalidTag"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false,
+          "x-ms-enum": {
+            "name": "ImageCreateStatus",
+            "modelAsString": true
+          }
+        },
+        "image": {
+          "$ref": "#/definitions/Image",
+          "description": "The image.",
+          "readOnly": true
+        }
+      }
+    },
+    "ImageCreateSummary": {
+      "type": "object",
+      "properties": {
+        "isBatchSuccessful": {
+          "description": "True if all of the images in the batch were created successfully, otherwise false.",
+          "type": "boolean",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "images": {
+          "description": "List of the image creation results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImageCreateResult",
+            "x-nullable": false
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ImageFileCreateBatch": {
+      "type": "object",
+      "properties": {
+        "images": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImageFileCreateEntry",
+            "x-nullable": false
+          },
+          "readOnly": false
+        },
+        "tagIds": {
+          "type": "array",
+          "items": {
+            "format": "uuid",
+            "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000",
+            "x-nullable": false
+          },
+          "readOnly": false
+        },
+        "metadata": {
+          "description": "The metadata of image. Limited to 10 key-value pairs per image. The length of key is limited to 128. The length of value is limited to 256.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": false,
+          "x-nullable": true
+        }
+      }
+    },
+    "ImageFileCreateEntry": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": false,
+          "x-nullable": false
+        },
+        "contents": {
+          "format": "byte",
+          "type": "string",
+          "readOnly": false
+        },
+        "tagIds": {
+          "type": "array",
+          "items": {
+            "format": "uuid",
+            "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000",
+            "x-nullable": false
+          },
+          "readOnly": false
+        },
+        "regions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Region",
+            "x-nullable": false
+          },
+          "readOnly": false
+        }
+      }
+    },
+    "ImageIdCreateBatch": {
+      "type": "object",
+      "properties": {
+        "images": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImageIdCreateEntry",
+            "x-nullable": false
+          },
+          "readOnly": false
+        },
+        "tagIds": {
+          "type": "array",
+          "items": {
+            "format": "uuid",
+            "type": "string",
+            "x-nullable": false
+          },
+          "readOnly": false
+        },
+        "metadata": {
+          "description": "The metadata of image. Limited to 10 key-value pairs per image. The length of key is limited to 128. The length of value is limited to 256.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": false,
+          "x-nullable": true
+        }
+      }
+    },
+    "ImageIdCreateEntry": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "description": "Id of the image.",
+          "type": "string",
+          "readOnly": false,
+          "x-nullable": false
+        },
+        "tagIds": {
+          "type": "array",
+          "items": {
+            "format": "uuid",
+            "type": "string",
+            "x-nullable": false
+          },
+          "readOnly": false
+        },
+        "regions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Region",
+            "x-nullable": false
+          },
+          "readOnly": false
+        }
+      }
+    },
+    "ImageMetadataUpdateEntry": {
+      "description": "Entry associating a metadata to an image.",
+      "type": "object",
+      "properties": {
+        "imageId": {
+          "format": "uuid",
+          "description": "Id of the image.",
+          "type": "string",
+          "readOnly": false,
+          "x-nullable": false
+        },
+        "status": {
+          "description": "Status of the metadata update.",
+          "enum": [
+            "OK",
+            "ErrorImageNotFound",
+            "ErrorLimitExceed",
+            "ErrorUnknown"
+          ],
+          "type": "string",
+          "readOnly": false,
+          "x-nullable": false,
+          "x-ms-enum": {
+            "name": "ImageMetadataUpdateStatus",
+            "modelAsString": true
+          }
+        },
+        "metadata": {
+          "description": "Metadata of the image.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": false,
+          "x-nullable": true
+        }
+      }
+    },
+    "ImageMetadataUpdateSummary": {
+      "type": "object",
+      "properties": {
+        "isBatchSuccessful": {
+          "type": "boolean",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "images": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImageMetadataUpdateEntry",
+            "x-nullable": false
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ImagePerformance": {
+      "description": "Image performance model.",
+      "type": "object",
+      "properties": {
+        "predictions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Prediction"
+          },
+          "readOnly": true,
+          "x-nullable": true
+        },
+        "id": {
+          "format": "uuid",
+          "description": "Id of the image.",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "created": {
+          "format": "date-time",
+          "description": "Date the image was created.",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "width": {
+          "format": "int32",
+          "description": "Width of the image.",
+          "type": "integer",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "height": {
+          "format": "int32",
+          "description": "Height of the image.",
+          "type": "integer",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "imageUri": {
+          "description": "The URI to the image used for training. If VNET feature is enabled this will be a relative path to be used with GetArtifact, otherwise this will be an absolute URI to the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "thumbnailUri": {
+          "description": "The URI to the thumbnail of the original image. If VNET feature is enabled this will be a relative path to be used with GetArtifact, otherwise this will be an absolute URI to the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "tags": {
+          "description": "Tags associated with this image.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImageTag"
+          },
+          "readOnly": true,
+          "x-nullable": true
+        },
+        "regions": {
+          "description": "Regions associated with this image.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImageRegion"
+          },
+          "readOnly": true,
+          "x-nullable": true
+        }
+      }
+    },
+    "ImagePrediction": {
+      "description": "Result of an image prediction request.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "description": "Prediction Id.",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "project": {
+          "format": "uuid",
+          "description": "Project Id.",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "iteration": {
+          "format": "uuid",
+          "description": "Iteration Id.",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "created": {
+          "format": "date-time",
+          "description": "Date this prediction was created.",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "predictions": {
+          "description": "List of predictions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Prediction",
+            "x-nullable": false
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ImageProcessingSettings": {
+      "description": "Represents image preprocessing settings used by image augmentation.",
+      "type": "object",
+      "properties": {
+        "augmentationMethods": {
+          "description": "Gets or sets enabled image transforms. The key corresponds to the transform name. If value is set to true, then correspondent transform is enabled. Otherwise this transform will not be used.\r\nAugmentation will be uniformly distributed among enabled transforms.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "boolean"
+          },
+          "readOnly": false,
+          "x-nullable": true
+        }
+      }
+    },
+    "ImageRegion": {
+      "required": [
+        "tagId",
+        "left",
+        "top",
+        "width",
+        "height"
+      ],
+      "type": "object",
+      "properties": {
+        "regionId": {
+          "format": "uuid",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "tagName": {
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "created": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "tagId": {
+          "format": "uuid",
+          "description": "Id of the tag associated with this region.",
+          "type": "string",
+          "readOnly": false,
+          "x-nullable": false
+        },
+        "left": {
+          "format": "float",
+          "description": "Coordinate of the left boundary.",
+          "type": "number",
+          "readOnly": false,
+          "x-nullable": false
+        },
+        "top": {
+          "format": "float",
+          "description": "Coordinate of the top boundary.",
+          "type": "number",
+          "readOnly": false,
+          "x-nullable": false
+        },
+        "width": {
+          "format": "float",
+          "description": "Width.",
+          "type": "number",
+          "readOnly": false,
+          "x-nullable": false
+        },
+        "height": {
+          "format": "float",
+          "description": "Height.",
+          "type": "number",
+          "readOnly": false,
+          "x-nullable": false
+        }
+      }
+    },
+    "ImageRegionCreateBatch": {
+      "description": "Batch of image region information to create.",
+      "type": "object",
+      "properties": {
+        "regions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImageRegionCreateEntry",
+            "x-nullable": false
+          },
+          "readOnly": false
+        }
+      }
+    },
+    "ImageRegionCreateEntry": {
+      "description": "Entry associating a region to an image.",
+      "required": [
+        "imageId",
+        "tagId",
+        "left",
+        "top",
+        "width",
+        "height"
+      ],
+      "type": "object",
+      "properties": {
+        "imageId": {
+          "format": "uuid",
+          "description": "Id of the image.",
+          "type": "string",
+          "readOnly": false,
+          "x-nullable": false
+        },
+        "tagId": {
+          "format": "uuid",
+          "description": "Id of the tag associated with this region.",
+          "type": "string",
+          "readOnly": false,
+          "x-nullable": false
+        },
+        "left": {
+          "format": "float",
+          "description": "Coordinate of the left boundary.",
+          "type": "number",
+          "readOnly": false,
+          "x-nullable": false
+        },
+        "top": {
+          "format": "float",
+          "description": "Coordinate of the top boundary.",
+          "type": "number",
+          "readOnly": false,
+          "x-nullable": false
+        },
+        "width": {
+          "format": "float",
+          "description": "Width.",
+          "type": "number",
+          "readOnly": false,
+          "x-nullable": false
+        },
+        "height": {
+          "format": "float",
+          "description": "Height.",
+          "type": "number",
+          "readOnly": false,
+          "x-nullable": false
+        }
+      }
+    },
+    "ImageRegionCreateResult": {
+      "required": [
+        "tagId",
+        "left",
+        "top",
+        "width",
+        "height"
+      ],
+      "type": "object",
+      "properties": {
+        "imageId": {
+          "format": "uuid",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "regionId": {
+          "format": "uuid",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "tagName": {
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "created": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "tagId": {
+          "format": "uuid",
+          "description": "Id of the tag associated with this region.",
+          "type": "string",
+          "readOnly": false,
+          "x-nullable": false
+        },
+        "left": {
+          "format": "float",
+          "description": "Coordinate of the left boundary.",
+          "type": "number",
+          "readOnly": false,
+          "x-nullable": false
+        },
+        "top": {
+          "format": "float",
+          "description": "Coordinate of the top boundary.",
+          "type": "number",
+          "readOnly": false,
+          "x-nullable": false
+        },
+        "width": {
+          "format": "float",
+          "description": "Width.",
+          "type": "number",
+          "readOnly": false,
+          "x-nullable": false
+        },
+        "height": {
+          "format": "float",
+          "description": "Height.",
+          "type": "number",
+          "readOnly": false,
+          "x-nullable": false
+        }
+      }
+    },
+    "ImageRegionCreateSummary": {
+      "type": "object",
+      "properties": {
+        "created": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImageRegionCreateResult"
+          },
+          "readOnly": false,
+          "x-nullable": true
+        },
+        "duplicated": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImageRegionCreateEntry"
+          },
+          "readOnly": false,
+          "x-nullable": true
+        },
+        "exceeded": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImageRegionCreateEntry"
+          },
+          "readOnly": false,
+          "x-nullable": true
+        }
+      }
+    },
+    "ImageRegionProposal": {
+      "type": "object",
+      "properties": {
+        "projectId": {
+          "format": "uuid",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "imageId": {
+          "format": "uuid",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "proposals": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RegionProposal",
+            "x-nullable": false
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ImageTag": {
+      "type": "object",
+      "properties": {
+        "tagId": {
+          "format": "uuid",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "tagName": {
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "created": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        }
+      }
+    },
+    "ImageTagCreateBatch": {
+      "description": "Batch of image tags.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Image Tag entries to include in this batch.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImageTagCreateEntry",
+            "x-nullable": false
+          },
+          "readOnly": false
+        }
+      }
+    },
+    "ImageTagCreateEntry": {
+      "description": "Entry associating a tag to an image.",
+      "type": "object",
+      "properties": {
+        "imageId": {
+          "format": "uuid",
+          "description": "Id of the image.",
+          "type": "string",
+          "readOnly": false,
+          "x-nullable": false
+        },
+        "tagId": {
+          "format": "uuid",
+          "description": "Id of the tag.",
+          "type": "string",
+          "readOnly": false,
+          "x-nullable": false
+        }
+      }
+    },
+    "ImageTagCreateSummary": {
+      "type": "object",
+      "properties": {
+        "created": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImageTagCreateEntry"
+          },
+          "readOnly": false,
+          "x-nullable": true
+        },
+        "duplicated": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImageTagCreateEntry"
+          },
+          "readOnly": false,
+          "x-nullable": true
+        },
+        "exceeded": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImageTagCreateEntry"
+          },
+          "readOnly": false,
+          "x-nullable": true
+        }
+      }
+    },
+    "ImageUrl": {
+      "description": "Image url.",
+      "required": [
+        "url"
+      ],
+      "type": "object",
+      "properties": {
+        "url": {
+          "description": "Url of the image.",
+          "type": "string",
+          "readOnly": false,
+          "x-nullable": false
+        }
+      }
+    },
+    "ImageUrlCreateBatch": {
+      "type": "object",
+      "properties": {
+        "images": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImageUrlCreateEntry",
+            "x-nullable": false
+          },
+          "readOnly": false
+        },
+        "tagIds": {
+          "type": "array",
+          "items": {
+            "format": "uuid",
+            "type": "string",
+            "x-nullable": false
+          },
+          "readOnly": false
+        },
+        "metadata": {
+          "description": "The metadata of image. Limited to 10 key-value pairs per image. The length of key is limited to 128. The length of value is limited to 256.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": false,
+          "x-nullable": true
+        }
+      }
+    },
+    "ImageUrlCreateEntry": {
+      "required": [
+        "url"
+      ],
+      "type": "object",
+      "properties": {
+        "url": {
+          "description": "Url of the image.",
+          "type": "string",
+          "readOnly": false,
+          "x-nullable": false
+        },
+        "tagIds": {
+          "type": "array",
+          "items": {
+            "format": "uuid",
+            "type": "string",
+            "x-nullable": false
+          },
+          "readOnly": false
+        },
+        "regions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Region",
+            "x-nullable": false
+          },
+          "readOnly": false
+        }
+      }
+    },
+    "Iteration": {
+      "description": "Iteration model to be sent over JSON.",
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "description": "Gets the id of the iteration.",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "name": {
+          "description": "Gets or sets the name of the iteration.",
+          "type": "string",
+          "readOnly": false,
+          "x-nullable": false
+        },
+        "status": {
+          "description": "Gets the current iteration status.",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "created": {
+          "format": "date-time",
+          "description": "Gets the time this iteration was completed.",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "lastModified": {
+          "format": "date-time",
+          "description": "Gets the time this iteration was last modified.",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "trainedAt": {
+          "format": "date-time",
+          "description": "Gets the time this iteration was last modified.",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": true
+        },
+        "projectId": {
+          "format": "uuid",
+          "description": "Gets the project id of the iteration.",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "exportable": {
+          "description": "Whether the iteration can be exported to another format for download.",
+          "type": "boolean",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "exportableTo": {
+          "description": "A set of platforms this iteration can export to.",
+          "type": "array",
+          "items": {
+            "enum": [
+              "CoreML",
+              "TensorFlow",
+              "DockerFile",
+              "ONNX",
+              "VAIDK",
+              "OpenVino"
+            ],
+            "type": "string",
+            "x-nullable": false
+          },
+          "readOnly": true
+        },
+        "domainId": {
+          "format": "uuid",
+          "description": "Get or sets a guid of the domain the iteration has been trained on.",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": true
+        },
+        "classificationType": {
+          "description": "Gets the classification type of the project.",
+          "enum": [
+            "Multiclass",
+            "Multilabel"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": true,
+          "x-ms-enum": {
+            "name": "Classifier",
+            "modelAsString": true
+          }
+        },
+        "trainingType": {
+          "description": "Gets the training type of the iteration.",
+          "enum": [
+            "Regular",
+            "Advanced"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false,
+          "x-ms-enum": {
+            "name": "TrainingType",
+            "modelAsString": true
+          }
+        },
+        "reservedBudgetInHours": {
+          "format": "int32",
+          "description": "Gets the reserved advanced training budget for the iteration.",
+          "type": "integer",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "trainingTimeInMinutes": {
+          "format": "int32",
+          "description": "Gets the training time for the iteration.",
+          "type": "integer",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "publishName": {
+          "description": "Name of the published model.",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "originalPublishResourceId": {
+          "description": "Resource Provider Id this iteration was originally published to.",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "customBaseModelInfo": {
+          "$ref": "#/definitions/CustomBaseModelInfo",
+          "description": "Information of the previously trained iteration which provides the base model for current iteration's training.\r\nDefault value of null specifies that no previously trained iteration will be used for incremental learning.",
+          "readOnly": true
+        },
+        "trainingErrorDetails": {
+          "description": "Training error details, when training fails.\r\nValue is null when training succeeds.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "IterationPerformance": {
+      "description": "Represents the detailed performance data for a trained iteration.",
+      "type": "object",
+      "properties": {
+        "perTagPerformance": {
+          "description": "Gets the per-tag performance details for this iteration.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TagPerformance",
+            "x-nullable": false
+          },
+          "readOnly": true
+        },
+        "precision": {
+          "format": "float",
+          "description": "Gets the precision.",
+          "type": "number",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "precisionStdDeviation": {
+          "format": "float",
+          "description": "Gets the standard deviation for the precision.",
+          "type": "number",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "recall": {
+          "format": "float",
+          "description": "Gets the recall.",
+          "type": "number",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "recallStdDeviation": {
+          "format": "float",
+          "description": "Gets the standard deviation for the recall.",
+          "type": "number",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "averagePrecision": {
+          "format": "float",
+          "description": "Gets the average precision when applicable.",
+          "type": "number",
+          "readOnly": true,
+          "x-nullable": true
+        }
+      }
+    },
+    "ModelInformation": {
+      "description": "Model information.",
+      "required": [
+        "description"
+      ],
+      "type": "object",
+      "properties": {
+        "estimatedModelSizeInMegabytes": {
+          "format": "int32",
+          "description": "Estimation of the exported FP32 Onnx model size (2 tags) in megabytes. This information is not present if the model cannot be exported.",
+          "type": "integer",
+          "readOnly": false
+        },
+        "description": {
+          "description": "Model description.",
+          "type": "string",
+          "readOnly": false,
+          "x-nullable": false
+        }
+      }
+    },
+    "Prediction": {
+      "description": "Prediction result.",
+      "type": "object",
+      "properties": {
+        "probability": {
+          "format": "float",
+          "description": "Probability of the tag.",
+          "type": "number",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "tagId": {
+          "format": "uuid",
+          "description": "Id of the predicted tag.",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "tagName": {
+          "description": "Name of the predicted tag.",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": true
+        },
+        "boundingBox": {
+          "$ref": "#/definitions/BoundingBox",
+          "description": "Bounding box of the prediction.",
+          "readOnly": true,
+          "x-nullable": true
+        },
+        "tagType": {
+          "description": "Type of the predicted tag.",
+          "enum": [
+            "Regular",
+            "Negative",
+            "GeneralProduct"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": true,
+          "x-ms-enum": {
+            "name": "TagType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "PredictionQueryResult": {
+      "description": "Query result of the prediction images that were sent to your prediction endpoint.",
+      "type": "object",
+      "properties": {
+        "token": {
+          "$ref": "#/definitions/PredictionQueryToken",
+          "description": "Prediction Query Token.",
+          "readOnly": false
+        },
+        "results": {
+          "description": "Result of an image prediction request.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StoredImagePrediction",
+            "x-nullable": false
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "PredictionQueryTag": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "type": "string",
+          "readOnly": false,
+          "x-nullable": false
+        },
+        "minThreshold": {
+          "format": "float",
+          "type": "number",
+          "readOnly": false,
+          "x-nullable": false
+        },
+        "maxThreshold": {
+          "format": "float",
+          "type": "number",
+          "readOnly": false,
+          "x-nullable": false
+        }
+      }
+    },
+    "PredictionQueryToken": {
+      "type": "object",
+      "properties": {
+        "session": {
+          "type": "string",
+          "readOnly": false,
+          "x-nullable": false
+        },
+        "continuation": {
+          "type": "string",
+          "readOnly": false,
+          "x-nullable": false
+        },
+        "maxCount": {
+          "format": "int32",
+          "type": "integer",
+          "readOnly": false,
+          "x-nullable": false
+        },
+        "orderBy": {
+          "enum": [
+            "Newest",
+            "Oldest",
+            "Suggested"
+          ],
+          "type": "string",
+          "readOnly": false,
+          "x-nullable": false,
+          "x-ms-enum": {
+            "name": "OrderBy",
+            "modelAsString": true
+          }
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PredictionQueryTag",
+            "x-nullable": false
+          },
+          "readOnly": false
+        },
+        "iterationId": {
+          "format": "uuid",
+          "type": "string",
+          "readOnly": false,
+          "x-nullable": true
+        },
+        "startTime": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": false,
+          "x-nullable": true
+        },
+        "endTime": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": false,
+          "x-nullable": true
+        },
+        "application": {
+          "type": "string",
+          "readOnly": false,
+          "x-nullable": false
+        }
+      }
+    },
+    "Project": {
+      "description": "Represents a project.",
+      "required": [
+        "name",
+        "description",
+        "settings"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "description": "Gets the project id.",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "name": {
+          "description": "Gets or sets the name of the project.",
+          "type": "string",
+          "readOnly": false,
+          "x-nullable": false
+        },
+        "description": {
+          "description": "Gets or sets the description of the project.",
+          "type": "string",
+          "readOnly": false,
+          "x-nullable": true
+        },
+        "settings": {
+          "$ref": "#/definitions/ProjectSettings",
+          "description": "Gets or sets the project settings.",
+          "readOnly": false
+        },
+        "created": {
+          "format": "date-time",
+          "description": "Gets the date this project was created.",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "lastModified": {
+          "format": "date-time",
+          "description": "Gets the date this project was last modified.",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "thumbnailUri": {
+          "description": "Gets the thumbnail url representing the image. If VNET feature is enabled this will be a relative path to be used with GetArtifact, otherwise this will be an absolute URI to the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "drModeEnabled": {
+          "description": "Gets if the Disaster Recovery (DR) mode is on, indicating the project is temporarily read-only.",
+          "type": "boolean",
+          "readOnly": true,
+          "x-nullable": true
+        },
+        "status": {
+          "description": "Gets the status of the project.",
+          "enum": [
+            "Succeeded",
+            "Importing",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": false,
+          "x-nullable": false,
+          "x-ms-enum": {
+            "name": "ProjectStatus",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ProjectExport": {
+      "description": "Represents information about a project export.",
+      "type": "object",
+      "properties": {
+        "iterationCount": {
+          "format": "int32",
+          "description": "Count of iterations that will be exported.",
+          "type": "integer",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "imageCount": {
+          "format": "int32",
+          "description": "Count of images that will be exported.",
+          "type": "integer",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "tagCount": {
+          "format": "int32",
+          "description": "Count of tags that will be exported.",
+          "type": "integer",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "regionCount": {
+          "format": "int32",
+          "description": "Count of regions that will be exported.",
+          "type": "integer",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "estimatedImportTimeInMS": {
+          "format": "int32",
+          "description": "Estimated time this project will take to import, can change based on network connectivity and load between\r\nsource and destination regions.",
+          "type": "integer",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "token": {
+          "description": "Opaque token that should be passed to ImportProject to perform the import. This token grants access to import this\r\nproject to all that have the token.",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        }
+      }
+    },
+    "ProjectSettings": {
+      "description": "Represents settings associated with a project.",
+      "type": "object",
+      "properties": {
+        "domainId": {
+          "format": "uuid",
+          "description": "Gets or sets the id of the Domain to use with this project.",
+          "type": "string",
+          "readOnly": false,
+          "x-nullable": false
+        },
+        "classificationType": {
+          "description": "Gets or sets the classification type of the project.",
+          "enum": [
+            "Multiclass",
+            "Multilabel"
+          ],
+          "type": "string",
+          "readOnly": false,
+          "x-nullable": true,
+          "x-ms-enum": {
+            "name": "Classifier",
+            "modelAsString": true
+          }
+        },
+        "targetExportPlatforms": {
+          "description": "A list of ExportPlatform that the trained model should be able to support.",
+          "type": "array",
+          "items": {
+            "enum": [
+              "CoreML",
+              "TensorFlow",
+              "DockerFile",
+              "ONNX",
+              "VAIDK",
+              "OpenVino"
+            ],
+            "type": "string",
+            "x-nullable": false
+          },
+          "readOnly": false
+        },
+        "useNegativeSet": {
+          "description": "Indicates if negative set is being used.",
+          "type": "boolean",
+          "readOnly": true,
+          "x-nullable": true
+        },
+        "detectionParameters": {
+          "description": "Detection parameters in use, if any.",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "imageProcessingSettings": {
+          "$ref": "#/definitions/ImageProcessingSettings",
+          "description": "Gets or sets image preprocessing settings.",
+          "readOnly": false
+        },
+        "exportModelContainerUri": {
+          "description": "The uri to the Azure Storage container that will be used to store exported models.",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": true
+        },
+        "notificationQueueUri": {
+          "description": "The uri to the Azure Storage queue that will be used to send project-related notifications. See <a href=\"https://go.microsoft.com/fwlink/?linkid=2144149\">Storage notifications</a> documentation for setup and message format.",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": true
+        }
+      }
+    },
+    "Region": {
+      "required": [
+        "tagId",
+        "left",
+        "top",
+        "width",
+        "height"
+      ],
+      "type": "object",
+      "properties": {
+        "tagId": {
+          "format": "uuid",
+          "description": "Id of the tag associated with this region.",
+          "type": "string",
+          "readOnly": false,
+          "x-nullable": false
+        },
+        "left": {
+          "format": "float",
+          "description": "Coordinate of the left boundary.",
+          "type": "number",
+          "readOnly": false,
+          "x-nullable": false
+        },
+        "top": {
+          "format": "float",
+          "description": "Coordinate of the top boundary.",
+          "type": "number",
+          "readOnly": false,
+          "x-nullable": false
+        },
+        "width": {
+          "format": "float",
+          "description": "Width.",
+          "type": "number",
+          "readOnly": false,
+          "x-nullable": false
+        },
+        "height": {
+          "format": "float",
+          "description": "Height.",
+          "type": "number",
+          "readOnly": false,
+          "x-nullable": false
+        }
+      }
+    },
+    "RegionProposal": {
+      "type": "object",
+      "properties": {
+        "confidence": {
+          "format": "float",
+          "type": "number",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "boundingBox": {
+          "$ref": "#/definitions/BoundingBox",
+          "readOnly": true
+        }
+      }
+    },
+    "StoredImagePrediction": {
+      "description": "Result of an image prediction request.",
+      "type": "object",
+      "properties": {
+        "resizedImageUri": {
+          "description": "The URI to the (resized) prediction image. If VNET feature is enabled this will be a relative path to be used with GetArtifact, otherwise this will be an absolute URI to the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "thumbnailUri": {
+          "description": "The URI to the thumbnail of the original prediction image. If VNET feature is enabled this will be a relative path to be used with GetArtifact, otherwise this will be an absolute URI to the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "originalImageUri": {
+          "description": "The URI to the original prediction image. If VNET feature is enabled this will be a relative path to be used with GetArtifact, otherwise this will be an absolute URI to the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "domain": {
+          "format": "uuid",
+          "description": "Domain used for the prediction.",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "id": {
+          "format": "uuid",
+          "description": "Prediction Id.",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "project": {
+          "format": "uuid",
+          "description": "Project Id.",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "iteration": {
+          "format": "uuid",
+          "description": "Iteration Id.",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "created": {
+          "format": "date-time",
+          "description": "Date this prediction was created.",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "predictions": {
+          "description": "List of predictions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Prediction",
+            "x-nullable": false
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "StoredSuggestedTagAndRegion": {
+      "description": "Result of a suggested tags and regions request of the untagged image.",
+      "type": "object",
+      "properties": {
+        "width": {
+          "format": "int32",
+          "description": "Width of the resized image.",
+          "type": "integer",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "height": {
+          "format": "int32",
+          "description": "Height of the resized image.",
+          "type": "integer",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "resizedImageUri": {
+          "description": "The URI to the (resized) prediction image. If VNET feature is enabled this will be a relative path to be used with GetArtifact, otherwise this will be an absolute URI to the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "thumbnailUri": {
+          "description": "The URI to the thumbnail of the original prediction image. If VNET feature is enabled this will be a relative path to be used with GetArtifact, otherwise this will be an absolute URI to the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "originalImageUri": {
+          "description": "The URI to the original prediction image. If VNET feature is enabled this will be a relative path to be used with GetArtifact, otherwise this will be an absolute URI to the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "domain": {
+          "format": "uuid",
+          "description": "Domain used for the prediction.",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "id": {
+          "format": "uuid",
+          "description": "Prediction Id.",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "project": {
+          "format": "uuid",
+          "description": "Project Id.",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "iteration": {
+          "format": "uuid",
+          "description": "Iteration Id.",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "created": {
+          "format": "date-time",
+          "description": "Date this prediction was created.",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "predictions": {
+          "description": "List of predictions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Prediction",
+            "x-nullable": false
+          },
+          "readOnly": true
+        },
+        "predictionUncertainty": {
+          "format": "double",
+          "description": "Uncertainty (entropy) of suggested tags or regions per image.",
+          "type": "number",
+          "readOnly": true,
+          "x-nullable": false
+        }
+      }
+    },
+    "SuggestedTagAndRegion": {
+      "description": "Result of a suggested tags and regions request.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "description": "Prediction Id.",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "project": {
+          "format": "uuid",
+          "description": "Project Id.",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "iteration": {
+          "format": "uuid",
+          "description": "Iteration Id.",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "created": {
+          "format": "date-time",
+          "description": "Date this prediction was created.",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "predictions": {
+          "description": "List of predictions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Prediction",
+            "x-nullable": false
+          },
+          "readOnly": true
+        },
+        "predictionUncertainty": {
+          "format": "double",
+          "description": "Uncertainty (entropy) of suggested tags or regions per image.",
+          "type": "number",
+          "readOnly": true,
+          "x-nullable": false
+        }
+      }
+    },
+    "SuggestedTagAndRegionQuery": {
+      "description": "The array of result images and token containing session and continuation Ids for the next query.",
+      "type": "object",
+      "properties": {
+        "token": {
+          "$ref": "#/definitions/SuggestedTagAndRegionQueryToken",
+          "description": "Contains properties we need to fetch suggested tags for.",
+          "readOnly": false
+        },
+        "results": {
+          "description": "Result of a suggested tags and regions request of the untagged image.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StoredSuggestedTagAndRegion",
+            "x-nullable": false
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "SuggestedTagAndRegionQueryToken": {
+      "description": "Contains properties we need to fetch suggested tags for. For the first call, Session and continuation set to null.\r\nThen on subsequent calls, uses the session/continuation from the previous SuggestedTagAndRegionQuery result to fetch additional results.",
+      "type": "object",
+      "properties": {
+        "tagIds": {
+          "description": "Existing TagIds in project to filter suggested tags on.",
+          "type": "array",
+          "items": {
+            "format": "uuid",
+            "type": "string",
+            "x-nullable": false
+          },
+          "readOnly": false
+        },
+        "threshold": {
+          "format": "double",
+          "description": "Confidence threshold to filter suggested tags on.",
+          "type": "number",
+          "readOnly": false,
+          "x-nullable": false
+        },
+        "session": {
+          "description": "SessionId for database query. Initially set to null but later used to paginate.",
+          "type": "string",
+          "readOnly": false,
+          "x-nullable": false
+        },
+        "continuation": {
+          "description": "Continuation Id for database pagination. Initially null but later used to paginate.",
+          "type": "string",
+          "readOnly": false,
+          "x-nullable": false
+        },
+        "maxCount": {
+          "format": "int32",
+          "description": "Maximum number of results you want to be returned in the response.",
+          "type": "integer",
+          "readOnly": false,
+          "x-nullable": false
+        },
+        "sortBy": {
+          "description": "OrderBy. Ordering mechanism for your results.",
+          "enum": [
+            "UncertaintyAscending",
+            "UncertaintyDescending"
+          ],
+          "type": "string",
+          "readOnly": false,
+          "x-nullable": false,
+          "x-ms-enum": {
+            "name": "SortBy",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "Tag": {
+      "description": "Represents a Tag.",
+      "required": [
+        "name",
+        "description",
+        "type"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "description": "Gets the Tag ID.",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "name": {
+          "description": "Gets or sets the name of the tag.",
+          "type": "string",
+          "readOnly": false,
+          "x-nullable": false
+        },
+        "description": {
+          "description": "Gets or sets the description of the tag.",
+          "type": "string",
+          "readOnly": false,
+          "x-nullable": true
+        },
+        "type": {
+          "description": "Gets or sets the type of the tag.",
+          "enum": [
+            "Regular",
+            "Negative",
+            "GeneralProduct"
+          ],
+          "type": "string",
+          "readOnly": false,
+          "x-nullable": false,
+          "x-ms-enum": {
+            "name": "TagType",
+            "modelAsString": true
+          }
+        },
+        "imageCount": {
+          "format": "int32",
+          "description": "Gets the number of images with this tag.",
+          "type": "integer",
+          "readOnly": true,
+          "x-nullable": false
+        }
+      }
+    },
+    "TagFilter": {
+      "description": "Model that query for counting of images whose suggested tags match given tags and their probability are greater than or equal to the given threshold.",
+      "type": "object",
+      "properties": {
+        "tagIds": {
+          "description": "Existing TagIds in project to get suggested tags count for.",
+          "type": "array",
+          "items": {
+            "format": "uuid",
+            "type": "string",
+            "x-nullable": false
+          },
+          "readOnly": false
+        },
+        "threshold": {
+          "format": "double",
+          "description": "Confidence threshold to filter suggested tags on.",
+          "type": "number",
+          "readOnly": false,
+          "x-nullable": false
+        }
+      }
+    },
+    "TagPerformance": {
+      "description": "Represents performance data for a particular tag in a trained iteration.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "precision": {
+          "format": "float",
+          "description": "Gets the precision.",
+          "type": "number",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "precisionStdDeviation": {
+          "format": "float",
+          "description": "Gets the standard deviation for the precision.",
+          "type": "number",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "recall": {
+          "format": "float",
+          "description": "Gets the recall.",
+          "type": "number",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "recallStdDeviation": {
+          "format": "float",
+          "description": "Gets the standard deviation for the recall.",
+          "type": "number",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "averagePrecision": {
+          "format": "float",
+          "description": "Gets the average precision when applicable.",
+          "type": "number",
+          "readOnly": true,
+          "x-nullable": true
+        }
+      }
+    },
+    "TrainingParameters": {
+      "description": "Parameters used for training.",
+      "type": "object",
+      "properties": {
+        "selectedTags": {
+          "description": "List of tags selected for this training session, other tags in the project will be ignored.",
+          "type": "array",
+          "items": {
+            "format": "uuid",
+            "type": "string",
+            "x-nullable": false
+          },
+          "readOnly": false
+        },
+        "customBaseModelInfo": {
+          "$ref": "#/definitions/CustomBaseModelInfo",
+          "description": "Information of the previously trained iteration which provides the base model for current iteration's training.",
+          "readOnly": false
+        }
+      }
+    }
+  },
+  "parameters": {
+    "Endpoint": {
+      "name": "Endpoint",
+      "in": "path",
+      "description": "Supported Cognitive Services endpoints.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client",
+      "x-ms-skip-url-encoding": true
+    }
+  },
+  "securityDefinitions": {
+    "apim_key": {
+      "type": "apiKey",
+      "name": "Training-Key",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "apim_key": []
+    }
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{Endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  }
+}

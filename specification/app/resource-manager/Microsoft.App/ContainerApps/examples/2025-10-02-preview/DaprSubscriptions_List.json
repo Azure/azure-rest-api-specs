@@ -1,0 +1,75 @@
+{
+  "parameters": {
+    "api-version": "2025-10-02-preview",
+    "environmentName": "myenvironment",
+    "resourceGroupName": "examplerg",
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "mybulksubscription",
+            "type": "Microsoft.App/managedEnvironments/daprSubscriptions",
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/daprSubscriptions/mybulksubscription",
+            "properties": {
+              "bulkSubscribe": {
+                "enabled": true,
+                "maxAwaitDurationMs": 500,
+                "maxMessagesCount": 123
+              },
+              "pubsubName": "mypubsubcomponent",
+              "routes": {
+                "default": "/products",
+                "rules": []
+              },
+              "topic": "inventory"
+            }
+          },
+          {
+            "name": "mydefaultsubscription",
+            "type": "Microsoft.App/managedEnvironments/daprSubscriptions",
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/daprSubscriptions/mydefaultsubscription",
+            "properties": {
+              "pubsubName": "mypubsubcomponent",
+              "routes": {
+                "default": "/products",
+                "rules": []
+              },
+              "topic": "inventory"
+            }
+          },
+          {
+            "name": "myroutingsubscription",
+            "type": "Microsoft.App/managedEnvironments/daprSubscriptions",
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/daprSubscriptions/myroutingsubscription",
+            "properties": {
+              "metadata": {
+                "foo": "bar",
+                "hello": "world"
+              },
+              "pubsubName": "mypubsubcomponent",
+              "routes": {
+                "default": "/products",
+                "rules": [
+                  {
+                    "path": "/widgets",
+                    "match": "event.type == 'widget'"
+                  },
+                  {
+                    "path": "/gadgets",
+                    "match": "event.type == 'gadget'"
+                  }
+                ]
+              },
+              "topic": "inventory"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "DaprSubscriptions_List",
+  "title": "List Dapr subscriptions"
+}

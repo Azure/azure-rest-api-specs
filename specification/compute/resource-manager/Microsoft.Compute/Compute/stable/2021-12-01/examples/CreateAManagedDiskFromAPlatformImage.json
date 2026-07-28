@@ -1,0 +1,73 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2021-12-01",
+    "diskName": "myDisk",
+    "disk": {
+      "location": "West US",
+      "properties": {
+        "osType": "Windows",
+        "creationData": {
+          "createOption": "FromImage",
+          "imageReference": {
+            "id": "/Subscriptions/{subscriptionId}/Providers/Microsoft.Compute/Locations/westus/Publishers/{publisher}/ArtifactTypes/VMImage/Offers/{offer}/Skus/{sku}/Versions/1.0.0"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "body": {
+        "name": "myDisk",
+        "location": "West US",
+        "properties": {
+          "osType": "Windows",
+          "hyperVGeneration": "V1",
+          "purchasePlan": {
+            "name": "{sku}",
+            "publisher": "{publisher}",
+            "product": "{offer}"
+          },
+          "supportedCapabilities": {
+            "acceleratedNetwork": true,
+            "architecture": "Arm64"
+          },
+          "creationData": {
+            "createOption": "FromImage",
+            "imageReference": {
+              "id": "/Subscriptions/{subscriptionId}/Providers/Microsoft.Compute/Locations/westus/Publishers/{publisher}/ArtifactTypes/VMImage/Offers/{offer}/Skus/{sku}/Versions/1.0.0"
+            }
+          },
+          "provisioningState": "Updating"
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "name": "myDisk",
+        "location": "West US",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "osType": "Windows",
+          "hyperVGeneration": "V1",
+          "purchasePlan": {
+            "name": "{sku}",
+            "publisher": "{publisher}",
+            "product": "{offer}"
+          },
+          "supportedCapabilities": {
+            "acceleratedNetwork": true
+          },
+          "creationData": {
+            "createOption": "FromImage",
+            "imageReference": {
+              "id": "/Subscriptions/{subscriptionId}/Providers/Microsoft.Compute/Locations/westus/Publishers/{publisher}/ArtifactTypes/VMImage/Offers/{offer}/Skus/{sku}/Versions/1.0.0"
+            }
+          }
+        }
+      }
+    }
+  }
+}

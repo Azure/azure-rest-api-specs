@@ -1,0 +1,68 @@
+{
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "TestResourceGroup",
+    "mongoClusterName": "myMongoCluster",
+    "api-version": "2023-09-15-preview",
+    "parameters": {
+      "location": "westus2",
+      "properties": {
+        "createMode": "PointInTimeRestore",
+        "restoreParameters": {
+          "pointInTimeUTC": "2023-01-13T20:07:35Z",
+          "sourceResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DocumentDB/mongoClusters/myOtherMongoCluster"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DocumentDB/mongoClusters/myMongoCluster",
+        "name": "myMongoCluster",
+        "type": "/Microsoft.DocumentDB/mongoClusters",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "administratorLogin": "mongoAdmin",
+          "serverVersion": "5.0",
+          "nodeGroupSpecs": [
+            {
+              "kind": "Shard",
+              "sku": "M30",
+              "diskSizeGB": 128,
+              "enableHa": true,
+              "nodeCount": 3
+            }
+          ],
+          "connectionString": "mongodb+srv://<user>:<password>@myMongoCluster.mongocluster.cosmos.azure.com",
+          "earliestRestoreTime": "2023-01-13T20:07:35Z"
+        },
+        "location": "westus2"
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DocumentDB/mongoClusters/myMongoCluster",
+        "name": "myMongoCluster",
+        "type": "/Microsoft.DocumentDB/mongoClusters",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "administratorLogin": "mongoAdmin",
+          "serverVersion": "5.0",
+          "nodeGroupSpecs": [
+            {
+              "kind": "Shard",
+              "sku": "M30",
+              "diskSizeGB": 128,
+              "enableHa": true,
+              "nodeCount": 3
+            }
+          ],
+          "connectionString": "mongodb+srv://<user>:<password>@myMongoCluster.mongocluster.cosmos.azure.com",
+          "earliestRestoreTime": "2023-01-13T20:07:35Z"
+        },
+        "location": "westus2"
+      }
+    }
+  }
+}

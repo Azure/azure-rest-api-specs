@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "SwaggerTestRg",
+    "vaultName": "NetSDKTestRsVault",
+    "operationId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2022-02-01"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/backupValidateOperationResults/00000000-0000-0000-0000-000000000000?api-version=2022-02-01",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/backupValidateOperationsStatuses/00000000-0000-0000-0000-000000000000?api-version=2022-02-01",
+        "Retry-After": 10
+      }
+    },
+    "200": {
+      "body": {
+        "validateOperationResponse": {
+          "validationResults": [
+            {
+              "code": "UserErrorCoreCountSubscriptionQuotaReached",
+              "message": "Core Count subscription quota has been reached.",
+              "recommendations": [
+                "Contact Azure support to increase the limits."
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}

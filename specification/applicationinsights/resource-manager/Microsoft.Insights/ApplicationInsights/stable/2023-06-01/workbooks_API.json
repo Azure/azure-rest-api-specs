@@ -1,0 +1,839 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ApplicationInsightsManagementClient",
+    "version": "2023-06-01",
+    "description": "Azure workbook resource type.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Insights/workbooks": {
+      "get": {
+        "operationId": "Workbooks_ListBySubscription",
+        "description": "Get all Workbooks defined within a specified subscription and category.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "description": "Category of workbook to return.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "workbook",
+              "TSG",
+              "performance",
+              "retention"
+            ],
+            "x-ms-enum": {
+              "name": "CategoryType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "workbook",
+                  "value": "workbook",
+                  "description": "workbook"
+                },
+                {
+                  "name": "TSG",
+                  "value": "TSG",
+                  "description": "TSG"
+                },
+                {
+                  "name": "performance",
+                  "value": "performance",
+                  "description": "performance"
+                },
+                {
+                  "name": "retention",
+                  "value": "retention",
+                  "description": "retention"
+                }
+              ]
+            }
+          },
+          {
+            "name": "tags",
+            "in": "query",
+            "description": "Tags presents on each workbook returned.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "name": "canFetchContent",
+            "in": "query",
+            "description": "Flag indicating whether or not to return the full content for each applicable workbook. If false, only return summary content for workbooks.",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WorkbooksListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/WorkbookError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WorkbooksList2": {
+            "$ref": "./examples/WorkbooksList2.json"
+          },
+          "WorkbooksListSub": {
+            "$ref": "./examples/WorkbooksListSub.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/workbooks": {
+      "get": {
+        "operationId": "Workbooks_ListByResourceGroup",
+        "description": "Get all Workbooks defined within a specified resource group and category.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "description": "Category of workbook to return.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "workbook",
+              "TSG",
+              "performance",
+              "retention"
+            ],
+            "x-ms-enum": {
+              "name": "CategoryType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "workbook",
+                  "value": "workbook",
+                  "description": "workbook"
+                },
+                {
+                  "name": "TSG",
+                  "value": "TSG",
+                  "description": "TSG"
+                },
+                {
+                  "name": "performance",
+                  "value": "performance",
+                  "description": "performance"
+                },
+                {
+                  "name": "retention",
+                  "value": "retention",
+                  "description": "retention"
+                }
+              ]
+            }
+          },
+          {
+            "name": "tags",
+            "in": "query",
+            "description": "Tags presents on each workbook returned.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "name": "sourceId",
+            "in": "query",
+            "description": "Azure Resource Id that will fetch all linked workbooks.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "canFetchContent",
+            "in": "query",
+            "description": "Flag indicating whether or not to return the full content for each applicable workbook. If false, only return summary content for workbooks.",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WorkbooksListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/WorkbookError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WorkbooksList": {
+            "$ref": "./examples/WorkbooksList.json"
+          },
+          "WorkbooksManagedList": {
+            "$ref": "./examples/WorkbooksManagedList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/workbooks/{resourceName}": {
+      "get": {
+        "operationId": "Workbooks_Get",
+        "description": "Get a single workbook by its resourceName.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the workbook resource. The value must be an UUID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "canFetchContent",
+            "in": "query",
+            "description": "Flag indicating whether or not to return the full content for each applicable workbook. If false, only return summary content for workbooks.",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Workbook"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/WorkbookError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WorkbookGet": {
+            "$ref": "./examples/WorkbookGet.json"
+          },
+          "WorkbookGet1": {
+            "$ref": "./examples/WorkbookGet1.json"
+          },
+          "WorkbookManagedGet": {
+            "$ref": "./examples/WorkbookManagedGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Workbooks_CreateOrUpdate",
+        "description": "Create a new workbook.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the workbook resource. The value must be an UUID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sourceId",
+            "in": "query",
+            "description": "Azure Resource Id that will fetch all linked workbooks.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "workbookProperties",
+            "in": "body",
+            "description": "Properties that need to be specified to create a new workbook.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Workbook"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Workbook' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Workbook"
+            }
+          },
+          "201": {
+            "description": "Resource 'Workbook' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Workbook"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/WorkbookError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WorkbookAdd": {
+            "$ref": "./examples/WorkbookAdd.json"
+          },
+          "WorkbookManagedAdd": {
+            "$ref": "./examples/WorkbookManagedAdd.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Workbooks_Update",
+        "description": "Updates a workbook that has already been added.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the workbook resource. The value must be an UUID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sourceId",
+            "in": "query",
+            "description": "Azure Resource Id that will fetch all linked workbooks.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "WorkbookUpdateParameters",
+            "in": "body",
+            "description": "Properties that need to be specified to create a new workbook.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/WorkbookUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Workbook"
+            }
+          },
+          "201": {
+            "description": "Resource 'Workbook' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Workbook"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/WorkbookError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WorkbookManagedUpdate": {
+            "$ref": "./examples/WorkbookManagedUpdate.json"
+          },
+          "WorkbookUpdate": {
+            "$ref": "./examples/WorkbookUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Workbooks_Delete",
+        "description": "Delete a workbook.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the workbook resource. The value must be an UUID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/WorkbookError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WorkbookDelete": {
+            "$ref": "./examples/WorkbookDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/workbooks/{resourceName}/revisions": {
+      "get": {
+        "operationId": "Workbooks_RevisionsList",
+        "description": "Get the revisions for the workbook defined by its resourceName.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the workbook resource. The value must be an UUID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WorkbooksListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/WorkbookError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WorkbookRevisionsList": {
+            "$ref": "./examples/WorkbookRevisionsList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/workbooks/{resourceName}/revisions/{revisionId}": {
+      "get": {
+        "operationId": "Workbooks_RevisionGet",
+        "description": "Get a single workbook revision defined by its revisionId.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the workbook resource. The value must be an UUID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "revisionId",
+            "in": "path",
+            "description": "The id of the workbook's revision.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Workbook"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/WorkbookError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WorkbookRevisionGet": {
+            "$ref": "./examples/WorkbookRevisionGet.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ApplicationInsightsCommonTypes.WorkbookSharedTypeKind": {
+      "type": "string",
+      "description": "The kind of workbook. Only valid value is shared.",
+      "enum": [
+        "shared"
+      ],
+      "x-ms-enum": {
+        "name": "WorkbookSharedTypeKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "shared",
+            "value": "shared",
+            "description": "shared"
+          }
+        ]
+      }
+    },
+    "Workbook": {
+      "type": "object",
+      "description": "A workbook definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WorkbookProperties",
+          "description": "Metadata describing a workbook for an Azure resource.",
+          "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "#/definitions/WorkbookResourceIdentity",
+          "description": "Identity used for BYOS"
+        },
+        "kind": {
+          "$ref": "#/definitions/ApplicationInsightsCommonTypes.WorkbookSharedTypeKind",
+          "description": "The kind of workbook. Only valid value is shared."
+        },
+        "etag": {
+          "type": "string",
+          "description": "Resource etag"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "WorkbookError": {
+      "type": "object",
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/WorkbookErrorDefinition",
+          "description": "The error details."
+        }
+      }
+    },
+    "WorkbookErrorDefinition": {
+      "type": "object",
+      "description": "Error definition.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Description of the error.",
+          "readOnly": true
+        },
+        "innererror": {
+          "$ref": "#/definitions/WorkbookInnerErrorTrace",
+          "description": "Internal error details.",
+          "readOnly": true
+        }
+      }
+    },
+    "WorkbookInnerErrorTrace": {
+      "type": "object",
+      "description": "Error details",
+      "properties": {
+        "trace": {
+          "type": "array",
+          "description": "detailed error trace",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "WorkbookProperties": {
+      "type": "object",
+      "description": "Properties that contain a workbook.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The user-defined name (display name) of the workbook."
+        },
+        "serializedData": {
+          "type": "string",
+          "description": "Configuration of this particular workbook. Configuration data is a string containing valid JSON",
+          "x-nullable": true
+        },
+        "version": {
+          "type": "string",
+          "description": "Workbook schema version format, like 'Notebook/1.0', which should match the workbook in serializedData"
+        },
+        "timeModified": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time in UTC of the last modification that was made to this workbook definition.",
+          "readOnly": true
+        },
+        "category": {
+          "type": "string",
+          "description": "Workbook category, as defined by the user at creation time."
+        },
+        "tags": {
+          "type": "array",
+          "description": "Being deprecated, please use the other tags field",
+          "items": {
+            "type": "string"
+          }
+        },
+        "userId": {
+          "type": "string",
+          "description": "Unique user id of the specific user that owns this workbook.",
+          "readOnly": true
+        },
+        "sourceId": {
+          "type": "string",
+          "description": "ResourceId for a source resource."
+        },
+        "storageUri": {
+          "type": "string",
+          "description": "The resourceId to the storage account when bring your own storage is used",
+          "x-nullable": true
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the workbook.",
+          "x-nullable": true
+        },
+        "revision": {
+          "type": "string",
+          "description": "The unique revision id for this workbook definition",
+          "x-nullable": true,
+          "readOnly": true
+        }
+      },
+      "required": [
+        "displayName",
+        "serializedData",
+        "category"
+      ]
+    },
+    "WorkbookPropertiesUpdateParameters": {
+      "type": "object",
+      "description": "Properties that contain a workbook for PATCH operation.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The user-defined name (display name) of the workbook."
+        },
+        "serializedData": {
+          "type": "string",
+          "description": "Configuration of this particular workbook. Configuration data is a string containing valid JSON"
+        },
+        "category": {
+          "type": "string",
+          "description": "Workbook category, as defined by the user at creation time."
+        },
+        "tags": {
+          "type": "array",
+          "description": "A list of 0 or more tags that are associated with this workbook definition",
+          "items": {
+            "type": "string"
+          }
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the workbook.",
+          "x-nullable": true
+        },
+        "revision": {
+          "type": "string",
+          "description": "The unique revision id for this workbook definition",
+          "x-nullable": true
+        }
+      }
+    },
+    "WorkbookResourceIdentity": {
+      "type": "object",
+      "description": "Identity used for BYOS",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
+        }
+      ]
+    },
+    "WorkbookUpdateParameters": {
+      "type": "object",
+      "description": "The parameters that can be provided when updating workbook properties properties.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/WorkbookUpdateSharedTypeKind",
+          "description": "The kind of workbook. Only valid value is shared."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/WorkbookPropertiesUpdateParameters",
+          "description": "Metadata describing a workbook for an Azure resource.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "WorkbookUpdateSharedTypeKind": {
+      "type": "string",
+      "description": "The kind of workbook. Only valid value is shared.",
+      "enum": [
+        "shared"
+      ],
+      "x-ms-enum": {
+        "name": "WorkbookUpdateSharedTypeKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "shared",
+            "value": "shared",
+            "description": "shared"
+          }
+        ]
+      }
+    },
+    "WorkbooksListResult": {
+      "type": "object",
+      "description": "Workbook list result.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "An array of workbooks.",
+          "items": {
+            "$ref": "#/definitions/Workbook"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of results."
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

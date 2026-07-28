@@ -1,0 +1,256 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2020-06-01-preview",
+    "subscriptionId": "subid",
+    "parameters": {
+      "properties": {
+        "hostnameConfigurations": [
+          {
+            "type": "Proxy",
+            "hostName": "gateway1.msitesting.net",
+            "keyVaultId": "https://rpbvtkeyvaultintegration.vault.azure.net/secrets/msitestingCert",
+            "identityClientId": "329419bc-adec-4dce-9568-25a6d486e468",
+            "defaultSslBinding": true
+          },
+          {
+            "type": "Management",
+            "hostName": "mgmt.msitesting.net",
+            "keyVaultId": "https://rpbvtkeyvaultintegration.vault.azure.net/secrets/msitestingCert",
+            "identityClientId": "329419bc-adec-4dce-9568-25a6d486e468"
+          },
+          {
+            "type": "Portal",
+            "hostName": "portal1.msitesting.net",
+            "keyVaultId": "https://rpbvtkeyvaultintegration.vault.azure.net/secrets/msitestingCert",
+            "identityClientId": "329419bc-adec-4dce-9568-25a6d486e468"
+          }
+        ],
+        "publisherEmail": "apim@autorestsdk.com",
+        "publisherName": "autorestsdk",
+        "virtualNetworkType": "None",
+        "apiVersionConstraint": {
+          "minApiVersion": "2019-01-01"
+        }
+      },
+      "sku": {
+        "name": "Premium",
+        "capacity": 1
+      },
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {}
+        }
+      },
+      "location": "North Europe",
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2",
+        "tag3": "value3"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/operationresults/bXVsdGlob3N0bmFtZW11bHRpcmVnaW9uc2VydmljZV9BY3RfZjFiOTZhMjc=?api-version=2020-06-01-preview"
+      },
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1",
+        "name": "apimService1",
+        "type": "Microsoft.ApiManagement/service",
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2",
+          "tag3": "value3"
+        },
+        "location": "North Europe",
+        "etag": "AAAAAAAigi8=",
+        "properties": {
+          "publisherEmail": "apim@autorestsdk.com",
+          "publisherName": "autorestsdk",
+          "notificationSenderEmail": "apimgmt-noreply@mail.windowsazure.com",
+          "provisioningState": "Created",
+          "targetProvisioningState": "Activating",
+          "createdAtUtc": "2020-09-13T22:30:20.7759747Z",
+          "hostnameConfigurations": [
+            {
+              "type": "Proxy",
+              "hostName": "apimService1.azure-api.net",
+              "negotiateClientCertificate": false,
+              "defaultSslBinding": false
+            },
+            {
+              "type": "Proxy",
+              "hostName": "gateway1.msitesting.net",
+              "keyVaultId": "https://rpbvtkeyvaultintegration.vault.azure.net/secrets/msitestingCert",
+              "negotiateClientCertificate": false,
+              "certificate": {
+                "expiry": "2037-01-01T07:00:00+00:00",
+                "thumbprint": "EA276907917CB5XXXXXXXXXXX690",
+                "subject": "CN=*.msitesting.net"
+              },
+              "defaultSslBinding": true,
+              "identityClientId": "329419bc-adec-4dce-9568-25a6d486e468"
+            },
+            {
+              "type": "Management",
+              "hostName": "mgmt.msitesting.net",
+              "keyVaultId": "https://rpbvtkeyvaultintegration.vault.azure.net/secrets/msitestingCert",
+              "negotiateClientCertificate": false,
+              "certificate": {
+                "expiry": "2037-01-01T07:00:00+00:00",
+                "thumbprint": "EA276907917CB5XXXXXXXXXXX690",
+                "subject": "CN=*.msitesting.net"
+              },
+              "defaultSslBinding": false,
+              "identityClientId": "329419bc-adec-4dce-9568-25a6d486e468"
+            },
+            {
+              "type": "Portal",
+              "hostName": "portal1.msitesting.net",
+              "keyVaultId": "https://rpbvtkeyvaultintegration.vault.azure.net/secrets/msitestingCert",
+              "negotiateClientCertificate": false,
+              "certificate": {
+                "expiry": "2037-01-01T07:00:00+00:00",
+                "thumbprint": "EA276907917CB5XXXXXXXXXXX690",
+                "subject": "CN=*.msitesting.net"
+              },
+              "defaultSslBinding": false,
+              "identityClientId": "329419bc-adec-4dce-9568-25a6d486e468"
+            }
+          ],
+          "virtualNetworkType": "None",
+          "disableGateway": false,
+          "apiVersionConstraint": {
+            "minApiVersion": "2019-01-01"
+          }
+        },
+        "sku": {
+          "name": "Premium",
+          "capacity": 1
+        },
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {}
+          }
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1",
+        "name": "apimService1",
+        "type": "Microsoft.ApiManagement/service",
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2",
+          "tag3": "value3"
+        },
+        "location": "North Europe",
+        "etag": "AAAAAAAigjU=",
+        "properties": {
+          "publisherEmail": "apim@autorestsdk.com",
+          "publisherName": "autorestsdk",
+          "notificationSenderEmail": "apimgmt-noreply@mail.windowsazure.com",
+          "provisioningState": "Succeeded",
+          "targetProvisioningState": "",
+          "createdAtUtc": "2020-09-13T22:30:20.7759747Z",
+          "gatewayUrl": "https://apimService1.azure-api.net",
+          "gatewayRegionalUrl": "https://apimService1-northeurope-01.regional.azure-api.net",
+          "portalUrl": "https://apimService1.portal.azure-api.net",
+          "developerPortalUrl": "https://apimService1.developer.azure-api.net",
+          "managementApiUrl": "https://apimService1.management.azure-api.net",
+          "scmUrl": "https://apimService1.scm.azure-api.net",
+          "hostnameConfigurations": [
+            {
+              "type": "Proxy",
+              "hostName": "apimService1.azure-api.net",
+              "negotiateClientCertificate": false,
+              "defaultSslBinding": false
+            },
+            {
+              "type": "Proxy",
+              "hostName": "gateway1.msitesting.net",
+              "keyVaultId": "https://rpbvtkeyvaultintegration.vault.azure.net/secrets/msitestingCert",
+              "negotiateClientCertificate": false,
+              "certificate": {
+                "expiry": "2037-01-01T07:00:00+00:00",
+                "thumbprint": "EA276907917CB5XXXXXXXXXXX690",
+                "subject": "CN=*.msitesting.net"
+              },
+              "defaultSslBinding": true,
+              "identityClientId": "329419bc-adec-4dce-9568-25a6d486e468"
+            },
+            {
+              "type": "Management",
+              "hostName": "mgmt.msitesting.net",
+              "keyVaultId": "https://rpbvtkeyvaultintegration.vault.azure.net/secrets/msitestingCert",
+              "negotiateClientCertificate": false,
+              "certificate": {
+                "expiry": "2037-01-01T07:00:00+00:00",
+                "thumbprint": "EA276907917CB5XXXXXXXXXXX690",
+                "subject": "CN=*.msitesting.net"
+              },
+              "defaultSslBinding": false,
+              "identityClientId": "329419bc-adec-4dce-9568-25a6d486e468"
+            },
+            {
+              "type": "Portal",
+              "hostName": "portal1.msitesting.net",
+              "keyVaultId": "https://rpbvtkeyvaultintegration.vault.azure.net/secrets/msitestingCert",
+              "negotiateClientCertificate": false,
+              "certificate": {
+                "expiry": "2037-01-01T07:00:00+00:00",
+                "thumbprint": "EA276907917CB5XXXXXXXXXXX690",
+                "subject": "CN=*.msitesting.net"
+              },
+              "defaultSslBinding": false,
+              "identityClientId": "329419bc-adec-4dce-9568-25a6d486e468"
+            }
+          ],
+          "publicIPAddresses": [
+            "40.112.74.192"
+          ],
+          "customProperties": {
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls10": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls11": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Ssl30": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Ciphers.TripleDes168": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls10": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls11": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Ssl30": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Protocols.Server.Http2": "False"
+          },
+          "virtualNetworkType": "None",
+          "disableGateway": false,
+          "apiVersionConstraint": {
+            "minApiVersion": "2019-01-01"
+          }
+        },
+        "sku": {
+          "name": "Premium",
+          "capacity": 1
+        },
+        "identity": {
+          "type": "UserAssigned",
+          "tenantId": "f686d426-8d16-xxxx-xxxx-ab578e110ccd",
+          "userAssignedIdentities": {
+            "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {
+              "principalId": "15e769b2-xxxx-xxxx-xxxx-3fd9a923ac3a",
+              "clientId": "329419bc-adec-4dce-9568-25a6d486e468"
+            }
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/operationresults/bXVsdGlob3N0bmFtZW11bHRpcmVnaW9uc2VydmljZV9BY3RfZjFiOTZhMjc=?api-version=2020-06-01-preview"
+      }
+    }
+  }
+}

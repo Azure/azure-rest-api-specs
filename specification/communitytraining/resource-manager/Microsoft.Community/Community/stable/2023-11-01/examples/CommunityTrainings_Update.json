@@ -1,0 +1,77 @@
+{
+  "title": "UpdateCommunityTrainings",
+  "operationId": "CommunityTrainings_Update",
+  "parameters": {
+    "api-version": "2023-11-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rgCommunityTraining",
+    "communityTrainingName": "ctApplication",
+    "properties": {
+      "sku": {
+        "name": "Commercial",
+        "tier": "Standard"
+      },
+      "tags": {},
+      "properties": {
+        "identityConfiguration": {
+          "identityType": "ADB2C",
+          "teamsEnabled": false,
+          "tenantId": "c1ffbb60-88cf-4b83-b54f-c47ae6220c19",
+          "domainName": "cttenant",
+          "clientId": "8c92390f-2f30-493d-bd13-d3c3eba3709d",
+          "clientSecret": "idenityConfigurationClientSecret",
+          "b2cAuthenticationPolicy": "B2C_1_signup_signin",
+          "b2cPasswordResetPolicy": "B2C_1_pwd_reset",
+          "customLoginParameters": "custom_hint"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgCommunityTraining/providers/Microsoft.Community/communityTrainings/ctApplication",
+        "name": "ctApplication",
+        "type": "Microsoft.Community/communityTrainings",
+        "properties": {
+          "portalName": "ctwebsite",
+          "portalAdminEmailAddress": "ctadmin@ct.com",
+          "portalOwnerOrganizationName": "CT Portal Owner Organization",
+          "portalOwnerEmailAddress": "ctcontact@ct.com",
+          "identityConfiguration": {
+            "identityType": "ADB2C",
+            "teamsEnabled": false,
+            "tenantId": "c1ffbb60-88cf-4b83-b54f-c47ae6220c19",
+            "domainName": "cttenant",
+            "clientId": "8c92390f-2f30-493d-bd13-d3c3eba3709d",
+            "b2cAuthenticationPolicy": "B2C_1_signup_signin",
+            "b2cPasswordResetPolicy": "B2C_1_pwd_reset",
+            "customLoginParameters": "custom_hint"
+          },
+          "zoneRedundancyEnabled": true,
+          "disasterRecoveryEnabled": true,
+          "provisioningState": "Succeeded"
+        },
+        "sku": {
+          "name": "Commercial",
+          "tier": "Standard"
+        },
+        "tags": {},
+        "location": "southeastasia",
+        "systemData": {
+          "createdBy": "ctowner@ct.com",
+          "createdByType": "User",
+          "createdAt": "2023-08-01T11:42:44.657Z",
+          "lastModifiedBy": "ctowner@ct.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-08-01T11:42:44.657Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Community/locations/southeastasia/operationStatuses/a9d7605b-20d2-44c9-bdaf-65d981f30403?api-version=2023-11-01"
+      }
+    }
+  }
+}

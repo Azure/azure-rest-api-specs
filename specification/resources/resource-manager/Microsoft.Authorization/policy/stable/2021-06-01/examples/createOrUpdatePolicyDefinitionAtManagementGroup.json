@@ -1,0 +1,90 @@
+{
+  "parameters": {
+    "managementGroupId": "MyManagementGroup",
+    "policyDefinitionName": "ResourceNaming",
+    "api-version": "2021-06-01",
+    "parameters": {
+      "properties": {
+        "mode": "All",
+        "displayName": "Enforce resource naming convention",
+        "description": "Force resource names to begin with given 'prefix' and/or end with given 'suffix'",
+        "metadata": {
+          "category": "Naming"
+        },
+        "policyRule": {
+          "if": {
+            "not": {
+              "field": "name",
+              "like": "[concat(parameters('prefix'), '*', parameters('suffix'))]"
+            }
+          },
+          "then": {
+            "effect": "deny"
+          }
+        },
+        "parameters": {
+          "prefix": {
+            "type": "String",
+            "metadata": {
+              "displayName": "Prefix",
+              "description": "Resource name prefix"
+            }
+          },
+          "suffix": {
+            "type": "String",
+            "metadata": {
+              "displayName": "Suffix",
+              "description": "Resource name suffix"
+            }
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {},
+      "body": {
+        "id": "/providers/Microsoft.Management/managementgroups/MyManagementGroup/providers/Microsoft.Authorization/policyDefinitions/ResourceNaming",
+        "type": "Microsoft.Authorization/policyDefinitions",
+        "name": "ResourceNaming",
+        "properties": {
+          "mode": "All",
+          "displayName": "Naming Convention",
+          "description": "Force resource names to begin with 'prefix' and end with 'suffix'",
+          "metadata": {
+            "category": "Naming"
+          },
+          "policyRule": {
+            "if": {
+              "not": {
+                "field": "name",
+                "like": "[concat(parameters('prefix'), '*', parameters('suffix'))]"
+              }
+            },
+            "then": {
+              "effect": "deny"
+            }
+          },
+          "parameters": {
+            "prefix": {
+              "type": "String",
+              "metadata": {
+                "displayName": "Prefix",
+                "description": "Resource name prefix"
+              }
+            },
+            "suffix": {
+              "type": "String",
+              "metadata": {
+                "displayName": "Suffix",
+                "description": "Resource name suffix"
+              }
+            }
+          },
+          "policyType": "Custom"
+        }
+      }
+    }
+  }
+}

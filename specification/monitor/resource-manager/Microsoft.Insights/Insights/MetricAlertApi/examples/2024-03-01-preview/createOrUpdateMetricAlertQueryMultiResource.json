@@ -1,0 +1,119 @@
+{
+  "parameters": {
+    "api-version": "2024-03-01-preview",
+    "parameters": {
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/2f1a501a-6e1d-4f37-a445-462d7f8a563d/resourceGroups/AdisTest/providers/Microsoft.ManagedIdentity/userAssignedIdentities/msi-test-euap": {}
+        }
+      },
+      "location": "eastus",
+      "properties": {
+        "description": "This is the description of the rule1",
+        "actionProperties": {
+          "Email.Sujbect": "my custom email subject"
+        },
+        "actions": [
+          {
+            "actionGroupId": "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourcegroups/gigtest/providers/microsoft.insights/actiongroups/group2"
+          }
+        ],
+        "criteria": {
+          "allOf": [
+            {
+              "name": "Metric1",
+              "criterionType": "StaticThresholdCriterion",
+              "query": "avg({\"system.cpu.utilization\"}) by (\"microsoft.resourceid\") > 90"
+            }
+          ],
+          "failingPeriods": {
+            "for": "PT5M"
+          },
+          "odata.type": "Microsoft.Azure.Monitor.PromQLCriteria"
+        },
+        "customProperties": {
+          "key11": "value11",
+          "key12": "value12"
+        },
+        "enabled": true,
+        "evaluationFrequency": "PT1M",
+        "resolveConfiguration": {
+          "autoResolved": true,
+          "timeToResolve": "PT10M"
+        },
+        "scopes": [
+          "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7"
+        ],
+        "severity": 3
+      },
+      "tags": {}
+    },
+    "resourceGroupName": "gigtest",
+    "ruleName": "chiricutin",
+    "subscriptionId": "14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "Microsoft.Insights/metricAlerts",
+        "id": "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/gigtest/providers/providers/microsoft.insights/metricalerts/chiricutin",
+        "identity": {
+          "type": "UserAssigned",
+          "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+          "userAssignedIdentities": {
+            "/subscriptions/2f1a501a-6e1d-4f37-a445-462d7f8a563d/resourceGroups/AdisTest/providers/Microsoft.ManagedIdentity/userAssignedIdentities/msi-test-euap": {
+              "clientId": "778f4d04-3c60-4622-a839-5cf05866c983",
+              "principalId": "669dd76d-cde8-4dc3-b882-1de566b0c628"
+            }
+          }
+        },
+        "location": "eastus",
+        "properties": {
+          "description": "This is the description of the rule1",
+          "actionProperties": {
+            "Email.Sujbect": "my custom email subject"
+          },
+          "actions": [
+            {
+              "actionGroupId": "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourcegroups/gigtest/providers/microsoft.insights/actiongroups/group2"
+            }
+          ],
+          "criteria": {
+            "allOf": [
+              {
+                "name": "Metric1",
+                "criterionType": "StaticThresholdCriterion",
+                "query": "avg({\"system.cpu.utilization\"}) by (\"microsoft.resourceid\") > 90"
+              }
+            ],
+            "failingPeriods": {
+              "for": "PT2M"
+            },
+            "odata.type": "Microsoft.Azure.Monitor.PromQLCriteria"
+          },
+          "customProperties": {
+            "key11": "value11",
+            "key12": "value12"
+          },
+          "enabled": true,
+          "evaluationFrequency": "PT1M",
+          "resolveConfiguration": {
+            "autoResolved": true,
+            "timeToResolve": "PT10M"
+          },
+          "scopes": [
+            "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7"
+          ],
+          "severity": 3
+        },
+        "tags": {
+          "hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest": "Resource"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "MetricAlerts_CreateOrUpdate",
+  "title": "Create or update a resource centric query based alert rule for Multiple Resources"
+}

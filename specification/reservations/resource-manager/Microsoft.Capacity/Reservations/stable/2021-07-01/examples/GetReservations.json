@@ -1,0 +1,78 @@
+{
+  "parameters": {
+    "api-version": "2021-07-01",
+    "$filter": "(properties%2farchived+eq+false)",
+    "$orderby": "properties/displayName asc",
+    "$skiptoken": "50",
+    "refreshsummary": "true",
+    "take": "1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/providers/microsoft.capacity/reservationOrders/00000000-0000-0000-0000-000000000001/reservations/00000000-0000-0000-0000-000000000000",
+            "name": "00000000-0000-0000-0000-000000000001/00000000-0000-0000-0000-000000000000",
+            "type": "Microsoft.Capacity/reservationOrders/reservations",
+            "location": "westus",
+            "sku": {
+              "name": "Standard_D1"
+            },
+            "properties": {
+              "appliedScopes": null,
+              "appliedScopeType": "Shared",
+              "displayName": "VM_RI_07-21-2020_12-06",
+              "displayProvisioningState": "Succeeded",
+              "effectiveDateTime": "2017-09-22T22:46:32.7632798Z",
+              "expiryDate": "2023-07-21",
+              "provisioningState": "Succeeded",
+              "provisioningSubState": null,
+              "purchaseDate": "2021-04-22",
+              "quantity": 2,
+              "renew": false,
+              "renewSource": "/providers/Microsoft.Capacity/reservationorders/00000000-0000-0000-0000-000000000002/reservations/00000000-0000-0000-0000-000000000003",
+              "reservedResourceType": "VirtualMachines",
+              "skuDescription": null,
+              "term": "P3Y",
+              "userFriendlyAppliedScopeType": "Shared",
+              "userFriendlyRenewState": "Off",
+              "utilization": {
+                "trend": "UP",
+                "aggregates": [
+                  {
+                    "grain": 1.0,
+                    "grainUnit": "days",
+                    "value": 0.05,
+                    "valueUnit": "percentage"
+                  },
+                  {
+                    "grain": 7.0,
+                    "grainUnit": "days",
+                    "value": 0.05,
+                    "valueUnit": "percentage"
+                  },
+                  {
+                    "grain": 30.0,
+                    "grainUnit": "days",
+                    "value": 0.05,
+                    "valueUnit": "percentage"
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "summary": {
+          "succeededCount": 1,
+          "failedCount": 0,
+          "expiringCount": 0,
+          "expiredCount": 0,
+          "pendingCount": 0,
+          "cancelledCount": 0
+        },
+        "nextLink": null
+      }
+    }
+  }
+}

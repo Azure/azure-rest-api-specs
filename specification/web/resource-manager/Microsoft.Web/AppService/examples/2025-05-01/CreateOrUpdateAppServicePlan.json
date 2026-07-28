@@ -1,0 +1,84 @@
+{
+  "parameters": {
+    "name": "testsf6141",
+    "api-version": "2025-05-01",
+    "appServicePlan": {
+      "kind": "app",
+      "location": "East US",
+      "properties": {},
+      "sku": {
+        "name": "P1",
+        "capacity": 1,
+        "family": "P",
+        "size": "P1",
+        "tier": "Premium"
+      }
+    },
+    "resourceGroupName": "testrg123",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testsf6141",
+        "type": "Microsoft.Web/serverfarms",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Web/serverfarms/testsf6141",
+        "kind": "app",
+        "location": "East US",
+        "properties": {
+          "asyncScalingEnabled": false,
+          "geoRegion": "East US",
+          "maximumNumberOfWorkers": 20,
+          "numberOfSites": 4,
+          "provisioningState": "Succeeded",
+          "reserved": false,
+          "status": "Ready",
+          "targetWorkerCount": 0,
+          "targetWorkerSizeId": 0
+        },
+        "sku": {
+          "name": "P1",
+          "capacity": 1,
+          "family": "P",
+          "size": "P1",
+          "tier": "Premium"
+        }
+      },
+      "headers": {}
+    },
+    "202": {
+      "body": {
+        "name": "testsf6141",
+        "type": "Microsoft.Web/serverfarms",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Web/serverfarms/testsf6141",
+        "kind": "app",
+        "location": "East US",
+        "properties": {
+          "asyncScalingEnabled": true,
+          "geoRegion": "East US",
+          "isSpot": false,
+          "maximumNumberOfWorkers": 20,
+          "numberOfSites": 4,
+          "provisioningState": "Succeeded",
+          "reserved": false,
+          "status": "Ready",
+          "targetWorkerCount": 0,
+          "targetWorkerSizeId": 0
+        },
+        "sku": {
+          "name": "P1",
+          "capacity": 1,
+          "family": "P",
+          "size": "P1",
+          "tier": "Premium"
+        }
+      },
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Web/serverfarms/testsf6141/operationresults/F0C6B8EC-0D53-432C-913B-1CD9E8CDE3A0",
+        "location": "https://management.azure.com/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Web/serverfarms/testsf6141/operationresults/F0C6B8EC-0D53-432C-913B-1CD9E8CDE3A0"
+      }
+    }
+  },
+  "operationId": "AppServicePlans_CreateOrUpdate",
+  "title": "Create Or Update App Service plan"
+}

@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "searchServiceName": "mysearchservice",
+    "resourceGroupName": "rg1",
+    "api-version": "2020-08-01-preview",
+    "subscriptionId": "subid",
+    "sharedPrivateLinkResourceName": "testResource",
+    "sharedPrivateLinkResource": {
+      "properties": {
+        "requestMessage": "please approve",
+        "groupId": "blob",
+        "privateLinkResourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Storage/storageAccounts/storageAccountName",
+        "resourceRegion": null
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Search/searchServices/mysearchService/sharedPrivateLinkResources/testResource/operationStatuses/08586060559526078782?api-version=2020-08-01-Preview",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Search/searchServices/mysearchService/sharedPrivateLinkResources/testResource/operationStatuses/08586060559526078782?api-version=2020-08-01-Preview"
+      }
+    },
+    "200": {
+      "body": {
+        "name": "testResource",
+        "type": "Microsoft.Search/searchServices/sharedPrivateLinkResources",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Search/searchServices/mysearchservice/sharedPrivateLinkResources/testResource",
+        "properties": {
+          "requestMessage": "please approve",
+          "groupId": "blob",
+          "privateLinkResourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Storage/storageAccounts/storageAccountName",
+          "status": "Pending",
+          "resourceRegion": null
+        }
+      }
+    }
+  }
+}

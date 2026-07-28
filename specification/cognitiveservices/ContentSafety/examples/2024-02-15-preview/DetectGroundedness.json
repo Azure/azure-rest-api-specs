@@ -1,0 +1,45 @@
+{
+  "title": "Detect Groundedness",
+  "operationId": "TextGroundednessDetectionOperations_DetectGroundednessOptions",
+  "parameters": {
+    "api-version": "2024-02-15-preview",
+    "body": {
+      "domain": "Generic",
+      "task": "Summarization",
+      "text": "The sun rises from the west.",
+      "groundingSources": [
+        "The sun rises from the east due to the visual effect caused by the Earth"
+      ],
+      "reasoning": true,
+      "llmResource": {
+        "resourceType": "AzureOpenAI",
+        "azureOpenAIEndpoint": "https://your-azure-openai-name.openai.azure.com",
+        "azureOpenAIDeploymentName": "deployment-1130"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "ungroundedDetected": true,
+        "ungroundedPercentage": 0,
+        "ungroundedDetails": [
+          {
+            "text": "string",
+            "offset": {
+              "utf8": 0,
+              "utf16": 0,
+              "codePoint": 0
+            },
+            "length": {
+              "utf8": 28,
+              "utf16": 28,
+              "codePoint": 28
+            },
+            "reason": "The sun rises from the east due to the visual effect caused by the Earth"
+          }
+        ]
+      }
+    }
+  }
+}

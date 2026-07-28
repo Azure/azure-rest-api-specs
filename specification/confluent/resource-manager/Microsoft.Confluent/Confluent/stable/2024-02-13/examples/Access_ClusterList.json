@@ -1,0 +1,75 @@
+{
+  "parameters": {
+    "api-version": "2024-02-13",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "organizationName": "myOrganization",
+    "environment": "env-00000",
+    "body": {
+      "searchFilters": {
+        "pageSize": "10",
+        "pageToken": "asc4fts4ft"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "kind": "ClusterList",
+        "metadata": {
+          "first": "https://api.confluent.cloud/cmk/v2/clusters",
+          "last": "https://api.confluent.cloud/cmk/v2/clusters?page_token=bcAOehAY8F16YD84Z1wT",
+          "prev": "https://api.confluent.cloud/cmk/v2/clusters?page_token=YIXRY97wWYmwzrax4dld",
+          "next": "https://api.confluent.cloud/cmk/v2/clusters?page_token=UvmDWOB1iwfAIBPj6EYb",
+          "total_size": 123
+        },
+        "data": [
+          {
+            "kind": "Cluster",
+            "id": "dlz-f3a90de",
+            "metadata": {
+              "self": "https://api.confluent.cloud/cmk/v2/clusters/lkc-12345",
+              "resource_name": "crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-abc123/cloud-cluster=lkc-12345",
+              "created_at": "2006-01-02T15:04:05-07:00",
+              "updated_at": "2006-01-02T15:04:05-07:00",
+              "deleted_at": "2006-01-02T15:04:05-07:00"
+            },
+            "spec": {
+              "display_name": "ProdKafkaCluster",
+              "availability": "SINGLE_ZONE",
+              "cloud": "GCP",
+              "region": "us-east4",
+              "config": {
+                "kind": "Basic"
+              },
+              "kafka_bootstrap_endpoint": "lkc-00000-00000.us-central1.gcp.glb.confluent.cloud:9092",
+              "http_endpoint": "https://lkc-00000-00000.us-central1.gcp.glb.confluent.cloud",
+              "api_endpoint": "https://pkac-00000.us-west-2.aws.confluent.cloud",
+              "environment": {
+                "id": "env-00000",
+                "environment": "string",
+                "related": "https://api.confluent.cloud/v2/environments/env-00000",
+                "resource_name": "https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000"
+              },
+              "network": {
+                "id": "n-00000",
+                "environment": "string",
+                "related": "https://api.confluent.cloud/networking/v1/networks/n-00000",
+                "resource_name": "https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-abc123/network=n-00000"
+              },
+              "byok": {
+                "id": "cck-00000",
+                "related": "https://api.confluent.cloud/byok/v1/keys/cck-00000",
+                "resource_name": "https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/key=cck-00000"
+              }
+            },
+            "status": {
+              "phase": "PROVISIONED",
+              "cku": 2
+            }
+          }
+        ]
+      }
+    }
+  }
+}

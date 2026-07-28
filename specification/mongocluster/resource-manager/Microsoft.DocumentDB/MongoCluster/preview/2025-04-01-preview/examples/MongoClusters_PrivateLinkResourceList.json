@@ -1,0 +1,32 @@
+{
+  "operationId": "PrivateLinks_ListByMongoCluster",
+  "title": "Lists the private link resources available on a Mongo Cluster resource.",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "TestGroup",
+    "mongoClusterName": "myMongoCluster",
+    "api-version": "2025-04-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DocumentDB/mongoClusters/myMongoCluster/privateLinkResources/MongoCluster",
+            "name": "MongoCluster",
+            "type": "Microsoft.DocumentDB/mongoClusters/privateLinkResources",
+            "properties": {
+              "groupId": "MongoCluster",
+              "requiredMembers": [
+                "c.p7ex3v2euquypn"
+              ],
+              "requiredZoneNames": [
+                "privatelink.mongocluster.cosmos.azure.com"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

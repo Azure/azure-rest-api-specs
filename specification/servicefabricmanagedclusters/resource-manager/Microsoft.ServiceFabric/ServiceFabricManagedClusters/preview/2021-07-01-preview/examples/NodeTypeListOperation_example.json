@@ -1,0 +1,93 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resRg",
+    "clusterName": "myCluster",
+    "api-version": "2021-07-01-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "type": "Microsoft.ServiceFabric/managedClusters/nodeTypes",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/managedClusters/myCluster/nodeTypes/FE",
+            "name": "FE",
+            "tags": {},
+            "sku": {
+              "name": "Standard_P0",
+              "tier": "Standard",
+              "capacity": 5
+            },
+            "properties": {
+              "isPrimary": true,
+              "dataDiskSizeGB": 100,
+              "dataDiskType": "StandardSSD_LRS",
+              "placementProperties": {},
+              "capacities": {},
+              "vmSize": "Standard_D2",
+              "vmImagePublisher": "MicrosoftWindowsServer",
+              "vmImageOffer": "WindowsServer",
+              "vmImageSku": "2016-Datacenter",
+              "vmImageVersion": "latest",
+              "vmInstanceCount": 5,
+              "isStateless": false
+            }
+          },
+          {
+            "type": "Microsoft.ServiceFabric/managedClusters/nodeTypes",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/managedClusters/myCluster/nodeTypes/BE",
+            "name": "BE",
+            "tags": {},
+            "sku": {
+              "name": "Standard_S0",
+              "tier": "Standard",
+              "capacity": 10
+            },
+            "properties": {
+              "isPrimary": false,
+              "dataDiskSizeGB": 200,
+              "dataDiskType": "Premium_LRS",
+              "placementProperties": {},
+              "capacities": {},
+              "vmSize": "Standard_DS3",
+              "vmImagePublisher": "MicrosoftWindowsServer",
+              "vmImageOffer": "WindowsServer",
+              "vmImageSku": "2016-Datacenter-Server-Core",
+              "vmImageVersion": "latest",
+              "vmInstanceCount": 10,
+              "isStateless": false,
+              "vmSecrets": [
+                {
+                  "sourceVault": {
+                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.KeyVault/vaults/myVault"
+                  },
+                  "vaultCertificates": [
+                    {
+                      "certificateStore": "My",
+                      "certificateUrl": "https://myVault.vault.azure.net:443/secrets/myCert/ef1a31d39e1f46bca33def54b6cda54c"
+                    }
+                  ]
+                }
+              ],
+              "vmExtensions": [
+                {
+                  "name": "Microsoft.Azure.Geneva.GenevaMonitoring",
+                  "properties": {
+                    "autoUpgradeMinorVersion": true,
+                    "publisher": "Microsoft.Azure.Geneva",
+                    "type": "GenevaMonitoring",
+                    "typeHandlerVersion": "2.0",
+                    "settings": {}
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "nextLink": ""
+      }
+    }
+  }
+}

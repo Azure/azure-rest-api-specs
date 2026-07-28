@@ -1,0 +1,77 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "default-azurebatch-japaneast",
+    "accountName": "sampleacct",
+    "poolName": "testpool",
+    "api-version": "2020-03-01",
+    "parameters": {
+      "properties": {
+        "vmSize": "STANDARD_D4",
+        "networkConfiguration": {
+          "subnetId": "/subscriptions/subid/resourceGroups/rg1234/providers/Microsoft.Network/virtualNetworks/network1234/subnets/subnet123",
+          "publicIPAddressConfiguration": {
+            "provision": "NoPublicIPAddresses"
+          }
+        },
+        "deploymentConfiguration": {
+          "virtualMachineConfiguration": {
+            "imageReference": {
+              "id": "/subscriptions/subid/resourceGroups/networking-group/providers/Microsoft.Compute/images/image-123"
+            },
+            "nodeAgentSkuId": "batch.node.ubuntu 18.04"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "ETag": "W/\"0x8D4EDFEBFADF4AB\""
+      },
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/pools/testpool",
+        "name": "testpool",
+        "type": "Microsoft.Batch/batchAccounts/pools",
+        "etag": "W/\"0x8D4EDFEBFADF4AB\"",
+        "properties": {
+          "lastModified": "2017-08-28T10:22:55.9407275Z",
+          "creationTime": "2017-08-28T10:22:55.9407275Z",
+          "provisioningState": "Succeeded",
+          "provisioningStateTransitionTime": "2017-08-28T10:22:55.9407275Z",
+          "allocationState": "Steady",
+          "allocationStateTransitionTime": "2017-08-28T10:22:55.9407275Z",
+          "vmSize": "STANDARD_D4",
+          "interNodeCommunication": "Disabled",
+          "maxTasksPerNode": 1,
+          "taskSchedulingPolicy": {
+            "nodeFillType": "Spread"
+          },
+          "networkConfiguration": {
+            "subnetId": "/subscriptions/subid/resourceGroups/rg1234/providers/Microsoft.Network/virtualNetworks/network1234/subnets/subnet123",
+            "publicIPAddressConfiguration": {
+              "provision": "NoPublicIPAddresses"
+            }
+          },
+          "deploymentConfiguration": {
+            "virtualMachineConfiguration": {
+              "imageReference": {
+                "id": "/subscriptions/subid/resourceGroups/networking-group/providers/Microsoft.Compute/images/image-123"
+              },
+              "nodeAgentSkuId": "batch.node.ubuntu 18.04"
+            }
+          },
+          "scaleSettings": {
+            "fixedScale": {
+              "targetDedicatedNodes": 0,
+              "targetLowPriorityNodes": 0
+            }
+          },
+          "currentDedicatedNodes": 0,
+          "currentLowPriorityNodes": 0
+        }
+      }
+    }
+  }
+}

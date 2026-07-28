@@ -1,0 +1,63 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "testrg",
+    "targetResourceName": "targetCosmosDbClusterName",
+    "migrationName": "migrationRequest",
+    "$expand": "MigrationStatusDetails",
+    "api-version": "2023-07-15-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "sourceMongoConnection": {
+            "host": "abc.mongodb.com",
+            "port": 88
+          },
+          "targetMongoConnection": {
+            "host": "xyz.mongocluster.cosmos.azure.com",
+            "port": 10255
+          },
+          "collectionList": [
+            {
+              "sourceDatabase": "sourceDb1",
+              "sourceCollection": "sourceCol1",
+              "targetDatabase": "targetDb1",
+              "targetCollection": "targetCol1",
+              "migrationProgressDetails": {
+                "migrationStatus": "Completed",
+                "sourceDocumentCount": 25544,
+                "processedDocumentCount": 25544,
+                "durationInSeconds": 400
+              }
+            },
+            {
+              "sourceDatabase": "sourceDb2",
+              "sourceCollection": "sourceCol2",
+              "targetDatabase": "sourceDb2",
+              "targetCollection": "sourceCol2",
+              "migrationProgressDetails": {
+                "migrationStatus": "Completed",
+                "sourceDocumentCount": 255,
+                "processedDocumentCount": 255,
+                "durationInSeconds": 100
+              }
+            }
+          ],
+          "scope": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.DocumentDB/mongoClusters/targetCosmosDbClusterName",
+          "provisioningState": "Succeeded",
+          "migrationService": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.DataMigration/migrationServices/testMigrationService",
+          "kind": "MongoToCosmosDbMongo",
+          "migrationStatus": "Succeeded",
+          "startedOn": "0001-01-01T08:00:00Z",
+          "endedOn": "0001-01-01T09:00:00Z",
+          "migrationOperationId": "858ba109-5ab7-4fa1-8aea-bea487cacdcd"
+        },
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.DocumentDB/mongoClusters/targetCosmosDbClusterName/providers/Microsoft.DataMigration/databaseMigrations/migrationRequest",
+        "name": "migrationRequest",
+        "type": "Microsoft.DataMigration/databaseMigrations"
+      }
+    }
+  }
+}

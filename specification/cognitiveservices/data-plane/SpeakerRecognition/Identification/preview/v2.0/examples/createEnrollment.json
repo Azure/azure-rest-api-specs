@@ -1,0 +1,114 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Content-Type": "audio/wav; codecs=audio/pcm",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "profileId": "49a36324-fc4b-4387-aa06-090cfbf0064f",
+    "audioData": "{binary file date}"
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "profileId": "49a36324-fc4b-4387-aa06-090cfbf0064f",
+        "enrollmentStatus": "Enrolling",
+        "enrollmentsCount": 1,
+        "enrollmentsLength": 1.83,
+        "enrollmentsSpeechLength": 1.35,
+        "remainingEnrollmentsSpeechLength": 18.65,
+        "audioLength": 1.83,
+        "audioSpeechLength": 1.35
+      }
+    },
+    "400": {
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "error": {
+          "code": "InvalidRequest",
+          "message": "Audio is too noisy."
+        }
+      }
+    },
+    "401": {
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "error": {
+          "code": "Unauthorized",
+          "message": "Request is not authorized. Make sure subscription key is included and valid."
+        }
+      }
+    },
+    "403": {
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "error": {
+          "code": "InvalidRequest",
+          "message": "Maximum allowed length across all profile enrollments is 300 seconds."
+        }
+      }
+    },
+    "404": {
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "error": {
+          "code": "Not Found",
+          "message": "Requested profile doesn't exist"
+        }
+      }
+    },
+    "409": {
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "error": {
+          "code": "Conflict",
+          "message": "Sending concurrent requests on same profile is not allowed."
+        }
+      }
+    },
+    "415": {
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "error": {
+          "code": "UnsupportedMediaType",
+          "message": "Unsupported media type. Only 'audio/wav; codecs=audio/pcm' is accepted."
+        }
+      }
+    },
+    "429": {
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "error": {
+          "code": "RateLimit",
+          "message": "Rate limit is exceeded."
+        }
+      }
+    },
+    "500": {
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "error": {
+          "code": "InternalServerError",
+          "message": "Internal Server Error."
+        }
+      }
+    }
+  }
+}

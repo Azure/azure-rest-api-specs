@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2021-04-01-preview",
+    "subscriptionId": "subid",
+    "diagnosticId": "applicationinsights",
+    "apiId": "57d1f7558aa04f15146d9d8a"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/echo-api/diagnostics/applicationinsights",
+        "type": "Microsoft.ApiManagement/service/apis/diagnostics",
+        "name": "applicationinsights",
+        "properties": {
+          "alwaysLog": "allErrors",
+          "httpCorrelationProtocol": "Legacy",
+          "logClientIp": true,
+          "loggerId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/loggers/aisamplingtest",
+          "sampling": {
+            "samplingType": "fixed",
+            "percentage": 100
+          },
+          "frontend": {
+            "request": {
+              "headers": [],
+              "body": {
+                "bytes": 100
+              }
+            },
+            "response": {
+              "headers": [],
+              "body": {
+                "bytes": 100
+              }
+            }
+          },
+          "backend": {
+            "request": {
+              "headers": [],
+              "body": {
+                "bytes": 100
+              }
+            },
+            "response": {
+              "headers": [],
+              "body": {
+                "bytes": 100
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

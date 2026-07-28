@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "subscriptionId": "ab7a8701-f7ef-471a-a2f4-d0ebbf494f77",
+    "providerNamespace": "Microsoft.Contoso",
+    "api-version": "2021-06-01-preview",
+    "resourceType": "testResourceType",
+    "sku": "testSku",
+    "nestedResourceTypeFirst": "nestedResourceTypeFirst",
+    "nestedResourceTypeSecond": "nestedResourceTypeSecond"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testSku",
+        "properties": {
+          "skuSettings": [
+            {
+              "name": "freeSku",
+              "tier": "Tier1",
+              "kind": "Standard"
+            },
+            {
+              "name": "premiumSku",
+              "tier": "Tier2",
+              "kind": "Premium",
+              "costs": [
+                {
+                  "meterId": "xxx"
+                }
+              ]
+            }
+          ]
+        },
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "User",
+          "createdAt": "2020-02-01T01:01:01.1075056Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-02-01T01:01:01.1075056Z"
+        }
+      }
+    }
+  }
+}

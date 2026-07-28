@@ -1,0 +1,18 @@
+{
+  "operationId": "MeshCodePackage_GetContainerLogs",
+  "description": "This example shows how to get logs from the container of service replica. If the container exists, the logs are returned with an OK (200) status code, otherwise an error is returned with an appropriate status code.",
+  "parameters": {
+    "api-version": "6.4-preview",
+    "applicationResourceName": "sbzDocApp",
+    "serviceResourceName": "sbzDocService",
+    "replicaName": "0",
+    "codePackageName": "sbzDocCode"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "Content": " * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)\n * Downloading style https://assets-cdn.github.com/assets/frameworks-8f281eb0a8d2308ceb36e714ba3c3aec.css\n * Downloading style https://assets-cdn.github.com/assets/github-a698da0d53574b056d3c79ac732d4a70.css\n * Downloading style https://assets-cdn.github.com/assets/site-83dc1f7ebc9c7461fe1eab799b56c4c4.css\n * Cached all downloads in /root/.grip/cache-4.5.2\n167.220.0.83 - - [06/Apr/2018 07:16:02] \"GET / HTTP/1.1\" 200 -\n167.220.0.83 - - [06/Apr/2018 07:16:02] \"GET /__/grip/asset/frameworks-8f281eb0a8d2308ceb36e714ba3c3aec.css HTTP/1.1\" 200 -\n167.220.0.83 - - [06/Apr/2018 07:16:02] \"GET /__/grip/asset/site-83dc1f7ebc9c7461fe1eab799b56c4c4.css HTTP/1.1\" 200 -\n167.220.0.83 - - [06/Apr/2018 07:16:02] \"GET /__/grip/asset/github-a698da0d53574b056d3c79ac732d4a70.css HTTP/1.1\" 200 -\n167.220.0.83 - - [06/Apr/2018 07:16:02] \"GET /__/grip/static/octicons/octicons.css HTTP/1.1\" 200 -\n167.220.0.83 - - [06/Apr/2018 07:16:03] \"GET /__/grip/static/octicons/octicons.woff2?ef21c39f0ca9b1b5116e5eb7ac5eabe6 HTTP/1.1\" 200 -\n167.220.0.83 - - [06/Apr/2018 07:16:03] \"GET /__/grip/static/favicon.ico HTTP/1.1\" 200 -\n167.220.0.83 - - [06/Apr/2018 07:16:05] \"GET /seabreeze-index.md HTTP/1.1\" 200 -\n167.220.0.83 - - [06/Apr/2018 07:16:09] \"GET /seabreeze-api-application_get.md HTTP/1.1\" 200 -\n"
+      }
+    }
+  }
+}

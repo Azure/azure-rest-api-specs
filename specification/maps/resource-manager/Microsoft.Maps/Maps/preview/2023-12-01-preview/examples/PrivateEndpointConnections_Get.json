@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "api-version": "2023-12-01-preview",
+    "subscriptionId": "21a9967a-e8a9-4656-a70b-96ff1c4d05a0",
+    "resourceGroupName": "myResourceGroup",
+    "accountName": "myMapsAccount",
+    "privateEndpointConnectionName": "privateEndpointConnectionName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/21a9967a-e8a9-4656-a70b-96ff1c4d05a0/resourceGroups/myResourceGroup/providers/Microsoft.Maps/accounts/myMapsAccount/privateEndpointConnections/privateEndpointConnectionName",
+        "name": "privateEndpointConnectionName",
+        "type": "Microsoft.StorageSync/storageSyncServices/privateEndpointConnections",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "privateEndpoint": {
+            "id": "/subscriptions/21a9967a-e8a9-4656-a70b-96ff1c4d05a0/resourceGroups/myResourceGroup/providers/Microsoft.Network/privateEndpoints/petest01"
+          },
+          "privateLinkServiceConnectionState": {
+            "status": "Approved",
+            "description": "Auto-Approved"
+          }
+        }
+      }
+    }
+  }
+}

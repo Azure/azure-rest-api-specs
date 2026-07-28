@@ -1,0 +1,69 @@
+{
+  "parameters": {
+    "subscriptionId": "ca3329af-5726-4096-ae4e-dd3365b1a93f",
+    "api-version": "2025-08-01-preview",
+    "parameters": {
+      "requests": [
+        {
+          "id": "rg1",
+          "method": "PUT",
+          "url": "/subscriptions/ca3329af-5726-4096-ae4e-dd3365b1a93f/resourceGroups/resourceGroup1?api-version=2019-05-01",
+          "body": {
+            "location": "westcentralus"
+          }
+        },
+        {
+          "id": "rg2",
+          "method": "PUT",
+          "url": "/subscriptions/ca3329af-5726-4096-ae4e-dd3365b1a93f/resourceGroups/resourceGroup2?api-version=2019-05-01",
+          "body": {
+            "location": "westcentralus",
+            "tags": {
+              "costcenter": "123"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/ca3329af-5726-4096-ae4e-dd3365b1a93f/providers/Microsoft.Resources/locations/westcentralus/batchOperationStatuses/6868a2ed",
+        "name": "6868a2ed",
+        "status": "Succeeded",
+        "startTime": "2022-09-20T12:00:01Z",
+        "endTime": "2022-09-20T12:00:03Z",
+        "percentComplete": 100,
+        "result": {
+          "responses": [
+            {
+              "id": "rg1",
+              "httpStatusCode": 200,
+              "status": "Succeeded",
+              "headers": {
+                "x-ms-request-id": "8b6e948d-c9f5-4a71-be22-c6a224fcac7a",
+                "location": "https://management.azure.com/subscriptions/ca3329af-5726-4096-ae4e-dd3365b1a93f/resourceGroups/resourceGroup1?api-version=2019-05-01"
+              }
+            },
+            {
+              "id": "rg2",
+              "httpStatusCode": 200,
+              "status": "Succeeded",
+              "headers": {
+                "x-ms-request-id": "27cf190c-0492-4072-9b3b-33616e8e9773",
+                "location": "https://management.azure.com/subscriptions/ca3329af-5726-4096-ae4e-dd3365b1a93f/resourceGroups/resourceGroup2?api-version=2019-05-01"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/ca3329af-5726-4096-ae4e-dd3365b1a93f/providers/Microsoft.Resources/locations/westcentralus/batchOperationStatuses/6868a2ed?api-version=2022-10-01",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ca3329af-5726-4096-ae4e-dd3365b1a93f/providers/Microsoft.Resources/locations/westcentralus/batchOperationStatuses/6868a2ed?api-version=2022-10-01"
+      }
+    }
+  }
+}

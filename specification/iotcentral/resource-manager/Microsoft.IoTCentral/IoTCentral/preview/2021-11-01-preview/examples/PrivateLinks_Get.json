@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resRg",
+    "resourceName": "myIoTCentralApp",
+    "groupId": "iotApp",
+    "api-version": "2021-11-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.IoTCentral/iotApps/myIoTCentralApp/privateLinkResources/iotApp",
+        "name": "iotApp",
+        "type": "Microsoft.IoTCentral/iotApps/privateLinkResources",
+        "properties": {
+          "groupId": "iotApp",
+          "requiredMembers": [
+            "myIoTCentralApp",
+            "iotc-00000000-0000-0000-0000-000000000000",
+            "iotc-00000000-0000-0000-0",
+            "saas-dps-00000000-0000-0000-0000-000000000000"
+          ],
+          "requiredZoneNames": [
+            "privatelink.azureiotcentral-test.com",
+            "privatelink.azure-devices.net",
+            "privatelink.servicebus.windows.net",
+            "privatelink.azure-devices-provisioning.net"
+          ]
+        }
+      }
+    }
+  }
+}

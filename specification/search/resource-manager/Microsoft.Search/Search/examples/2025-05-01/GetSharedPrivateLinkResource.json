@@ -1,0 +1,27 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01",
+    "resourceGroupName": "rg1",
+    "searchServiceName": "mysearchservice",
+    "sharedPrivateLinkResourceName": "testResource",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testResource",
+        "type": "Microsoft.Search/searchServices/sharedPrivateLinkResources",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Search/searchServices/mysearchservice/sharedPrivateLinkResources/testResource",
+        "properties": {
+          "groupId": "blob",
+          "privateLinkResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Storage/storageAccounts/storageAccountName",
+          "requestMessage": "please approve",
+          "resourceRegion": null,
+          "status": "Pending"
+        }
+      }
+    }
+  },
+  "operationId": "SharedPrivateLinkResources_Get",
+  "title": "SharedPrivateLinkResourceGet"
+}

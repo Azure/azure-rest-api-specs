@@ -1,0 +1,85 @@
+{
+  "parameters": {
+    "api-version": "2018-11-01-preview",
+    "resourceScope": "subscriptions/00000000-0000-0000-0000-000000000000",
+    "assignmentName": "assignSimpleBlueprint",
+    "assignment": {
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-resource-group/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-identity": {}
+        }
+      },
+      "location": "eastus",
+      "properties": {
+        "description": "enforce pre-defined simpleBlueprint to this XXXXXXXX subscription.",
+        "blueprintId": "/providers/Microsoft.Management/managementGroups/ContosoOnlineGroup/providers/Microsoft.Blueprint/blueprints/simpleBlueprint",
+        "parameters": {
+          "storageAccountType": {
+            "value": "Standard_LRS"
+          },
+          "costCenter": {
+            "value": "Contoso/Online/Shopping/Production"
+          },
+          "owners": {
+            "value": [
+              "johnDoe@contoso.com",
+              "johnsteam@contoso.com"
+            ]
+          }
+        },
+        "resourceGroups": {
+          "storageRG": {
+            "name": "defaultRG",
+            "location": "eastus"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "identity": {
+          "type": "UserAssigned",
+          "tenantId": "00000000-0000-0000-0000-000000000000",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-resource-group/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-identity": {
+              "principalId": "00000000-0000-0000-0000-000000000000",
+              "clientId": "00000000-0000-0000-0000-000000000000"
+            }
+          }
+        },
+        "location": "eastus",
+        "properties": {
+          "description": "enforce pre-defined simpleBlueprint to this XXXXXXXX subscription.",
+          "provisioningState": "creating",
+          "blueprintId": "/providers/Microsoft.Management/managementGroups/ContosoOnlineGroup/providers/Microsoft.Blueprint/blueprints/simpleBlueprint",
+          "parameters": {
+            "storageAccountType": {
+              "value": "Standard_LRS"
+            },
+            "costCenter": {
+              "value": "Contoso/Online/Shopping/Production"
+            },
+            "owners": {
+              "value": [
+                "johnDoe@contoso.com",
+                "johnsteam@contoso.com"
+              ]
+            }
+          },
+          "resourceGroups": {
+            "storageRG": {
+              "name": "defaultRG",
+              "location": "eastus"
+            }
+          }
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Blueprint/blueprintAssignments/assignSimpleBlueprint",
+        "type": "Microsoft.Blueprint/Assignment",
+        "name": "assignSimpleBlueprint"
+      }
+    }
+  }
+}
