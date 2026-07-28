@@ -1815,10 +1815,6 @@ model BatchPoolSpecification {
   @doc("The virtual machine configuration for the Pool. This property must be specified.")
   virtualMachineConfiguration?: VirtualMachineConfiguration;
 
-  @doc("Specifies the profile of VM sizes and the allocation strategy used to allocate Compute Nodes for an Instance Mix Pool. When specified, vmSize must be 'Mix'. This property can only be changed while the Pool has no Compute Nodes.")
-  @added(Versions.v2026_08_01)
-  vmSkuProfile?: VirtualMachineSkuProfile;
-
   @doc("The number of task slots that can be used to run concurrent tasks on a single compute node in the pool. The default value is 1. The maximum value is the smaller of 4 times the number of cores of the vmSize of the pool or 256.")
   taskSlotsPerNode?: int32;
 
