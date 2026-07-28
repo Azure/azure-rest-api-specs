@@ -1615,6 +1615,28 @@ model ContainerProperties {
    * Enable NFSv3 all squash on blob container.
    */
   enableNfsV3AllSquash?: boolean;
+
+  /**
+   * Configuration that attaches this container to a Blob Access Point. If set, the container is a read-only virtual container whose read/list requests are forwarded to the connected backing data store. Cannot be changed, removed, or added after container creation.
+   */
+  @added(Versions.v2026_06_01)
+  blobAccessPointConfiguration?: BlobAccessPointConfigurationConnection;
+}
+
+/**
+ * Blob Access Point configuration associated with a blob container.
+ */
+@added(Versions.v2026_06_01)
+model BlobAccessPointConfigurationConnection {
+  /**
+   * Name of the Blob Access Point Configuration to connect to.
+   */
+  blobAccessPointConfigurationName: string;
+
+  /**
+   * System-generated unique identifier of the Blob Access Point Configuration to connect to. If not provided on create, the service looks up and persists the current unique id.
+   */
+  blobAccessPointConfigurationUniqueId?: string;
 }
 
 /**
