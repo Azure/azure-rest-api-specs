@@ -1,3 +1,4 @@
+// cspell:ignore mqtt
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
