@@ -1,0 +1,29 @@
+{
+  "operationId": "Calls_Accept",
+  "title": "Accept an inbound SIP call",
+  "parameters": {
+    "endpoint": "https://my-resource.services.ai.azure.com",
+    "api-version": "2026-07-31-preview",
+    "call_id": "call_abc123",
+    "configuration": {
+      "model": "gpt-realtime",
+      "voice": "alloy",
+      "instructions": "You are a helpful assistant.",
+      "temperature": 0.7,
+      "max_response_output_tokens": 4096,
+      "modalities": [
+        "text",
+        "audio"
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "call_id": "call_abc123",
+        "state": "Accepted",
+        "voice_live_session_id": "sess_xyz789"
+      }
+    }
+  }
+}

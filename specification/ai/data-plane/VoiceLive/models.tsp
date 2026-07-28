@@ -1866,3 +1866,236 @@ model ServerEventOutputAudioBufferStopped extends ServerEvent {
   /** The ID of the response whose audio stopped playing. */
   response_id?: string;
 }
+
+// -----------------------------------------------------------------------
+// SIP call events added in v2026_07_31_preview
+//
+// Voice Live SIP integration surfaces inbound-call signaling to the customer
+// over the realtime WebSocket as `realtime.call.*` server events. Customer
+// call control (accept, reject, transfer, hangup) and webhook/configuration
+// management are performed over separate HTTP control-plane APIs and are not
+// part of this WebSocket data-plane contract. Inbound client messages on the
+// SIP customer WebSocket reuse the existing `ClientEvent` types.
+// -----------------------------------------------------------------------
+
+/** The lifecycle state of a SIP call reported in `realtime.call.*` lifecycle events. */
+@added(Versions.v2026_07_31_preview)
+union SipCallState {
+  string,
+
+  /** The inbound INVITE has arrived and the call is awaiting a customer decision. */
+  waiting_for_customer: "WaitingForCustomer",
+
+  /** The customer accepted the call and runtime setup is in progress. */
+  accepting: "Accepting",
+
+  /** The SDP answer has been received but the call is not fully connected yet. */
+  accepted: "Accepted",
+
+  /** The Voice Live runtime is configured and the call is active. */
+  connected: "Connected",
+
+  /** The customer rejected a waiting call and rejection is in progress. */
+  rejecting: "Rejecting",
+
+  /** A blind transfer is in progress. */
+  transferring: "Transferring",
+
+  /** Call termination and cleanup are in progress. */
+  terminating: "Terminating",
+
+  /** The call ended normally or by an explicit hangup, reject, or transfer completion. */
+  disconnected: "Disconnected",
+
+  /** The call failed because setup or runtime control could not complete. */
+  failed: "Failed",
+
+  /** The waiting call expired before the customer made a decision. */
+  expired: "Expired",
+}
+
+/** The terminal reason recorded when a SIP call leaves the active state machine. */
+@added(Versions.v2026_07_31_preview)
+union SipCallTerminalReason {
+  string,
+
+  /** The customer rejected the inbound call. */
+  rejected: "Rejected",
+
+  /** The customer requested hangup. */
+  customer_hangup: "CustomerHangup",
+
+  /** The caller-side SIP leg ended. */
+  sip_proxy_terminate: "SipProxyTerminate",
+
+  /** The inbound decision timeout expired. */
+  decision_timeout: "DecisionTimeout",
+
+  /** Runtime setup failed before the call connected. */
+  setup_failure: "SetupFailure",
+
+  /** A blind transfer completed successfully. */
+  transfer_succeeded: "TransferSucceeded",
+
+  /** A fatal runtime error ended the call. */
+  runtime_error: "RuntimeError",
+}
+
+/** The status of a blind SIP transfer (REFER) reported in `realtime.call.transfer.*` events. */
+@added(Versions.v2026_07_31_preview)
+union SipTransferState {
+  string,
+
+  /** The transfer was accepted by the SIP side and is in progress. */
+  trying: "trying",
+
+  /** The transfer completed successfully. */
+  succeeded: "succeeded",
+
+  /** The transfer failed. */
+  failed: "failed",
+}
+
+/** Emitted when a new inbound SIP call arrives and is awaiting a customer accept or reject decision. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // snake_case to remain close to OpenAI style.
+@added(Versions.v2026_07_31_preview)
+@usage(ResponseUsage)
+model ServerEventRealtimeCallIncoming extends ServerEvent {
+  /** The event type, must be `realtime.call.incoming`. */
+  type: ServerEventType.realtime_call_incoming;
+
+  /** The SIP call identifier. */
+  call_id: string;
+
+  /** The SIP chain identifier used for routing and correlation. */
+  chain_id: string;
+
+  /** The current call state. */
+  state: SipCallState;
+
+  /** The terminal reason, present when the call has reached a terminal state. */
+  terminal_reason?: SipCallTerminalReason;
+
+  /** The failure error code, present when the call failed. */
+  error_code?: string;
+}
+
+/** Emitted when an accepted SIP call is connected and the Voice Live session is active. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // snake_case to remain close to OpenAI style.
+@added(Versions.v2026_07_31_preview)
+@usage(ResponseUsage)
+model ServerEventRealtimeCallConnected extends ServerEvent {
+  /** The event type, must be `realtime.call.connected`. */
+  type: ServerEventType.realtime_call_connected;
+
+  /** The SIP call identifier. */
+  call_id: string;
+
+  /** The SIP chain identifier used for routing and correlation. */
+  chain_id: string;
+
+  /** The current call state. */
+  state: SipCallState;
+
+  /** The terminal reason, present when the call has reached a terminal state. */
+  terminal_reason?: SipCallTerminalReason;
+
+  /** The failure error code, present when the call failed. */
+  error_code?: string;
+}
+
+/** Emitted when a SIP call reaches a terminal disconnected state. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // snake_case to remain close to OpenAI style.
+@added(Versions.v2026_07_31_preview)
+@usage(ResponseUsage)
+model ServerEventRealtimeCallDisconnected extends ServerEvent {
+  /** The event type, must be `realtime.call.disconnected`. */
+  type: ServerEventType.realtime_call_disconnected;
+
+  /** The SIP call identifier. */
+  call_id: string;
+
+  /** The SIP chain identifier used for routing and correlation. */
+  chain_id: string;
+
+  /** The current call state. */
+  state: SipCallState;
+
+  /** The terminal reason, present when the call has reached a terminal state. */
+  terminal_reason?: SipCallTerminalReason;
+
+  /** The failure error code, present when the call failed. */
+  error_code?: string;
+}
+
+/** Emitted when a SIP call fails during setup or runtime. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // snake_case to remain close to OpenAI style.
+@added(Versions.v2026_07_31_preview)
+@usage(ResponseUsage)
+model ServerEventRealtimeCallFailed extends ServerEvent {
+  /** The event type, must be `realtime.call.failed`. */
+  type: ServerEventType.realtime_call_failed;
+
+  /** The SIP call identifier. */
+  call_id: string;
+
+  /** The SIP chain identifier used for routing and correlation. */
+  chain_id: string;
+
+  /** The current call state. */
+  state: SipCallState;
+
+  /** The terminal reason, present when the call has reached a terminal state. */
+  terminal_reason?: SipCallTerminalReason;
+
+  /** The failure error code, present when the call failed. */
+  error_code?: string;
+}
+
+/** Emitted after a blind SIP transfer (REFER) completes successfully. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // snake_case to remain close to OpenAI style.
+@added(Versions.v2026_07_31_preview)
+@usage(ResponseUsage)
+model ServerEventRealtimeCallTransferSucceeded extends ServerEvent {
+  /** The event type, must be `realtime.call.transfer.succeeded`. */
+  type: ServerEventType.realtime_call_transfer_succeeded;
+
+  /** The SIP call identifier. */
+  call_id: string;
+
+  /** The transfer identifier used to correlate asynchronous REFER status updates. */
+  transfer_id: string;
+
+  /** The transfer status. */
+  state: SipTransferState;
+
+  /** The optional SIP response code associated with the transfer outcome. */
+  sip_code?: int32;
+
+  /** The optional SIP status reason phrase. */
+  reason?: string;
+}
+
+/** Emitted after a blind SIP transfer (REFER) fails. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // snake_case to remain close to OpenAI style.
+@added(Versions.v2026_07_31_preview)
+@usage(ResponseUsage)
+model ServerEventRealtimeCallTransferFailed extends ServerEvent {
+  /** The event type, must be `realtime.call.transfer.failed`. */
+  type: ServerEventType.realtime_call_transfer_failed;
+
+  /** The SIP call identifier. */
+  call_id: string;
+
+  /** The transfer identifier used to correlate asynchronous REFER status updates. */
+  transfer_id: string;
+
+  /** The transfer status. */
+  state: SipTransferState;
+
+  /** The optional SIP response code associated with the transfer outcome. */
+  sip_code?: int32;
+
+  /** The optional SIP status reason phrase. */
+  reason?: string;
+}

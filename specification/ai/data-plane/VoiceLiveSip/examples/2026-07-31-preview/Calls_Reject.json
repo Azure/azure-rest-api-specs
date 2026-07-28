@@ -1,0 +1,22 @@
+{
+  "operationId": "Calls_Reject",
+  "title": "Reject an inbound SIP call",
+  "parameters": {
+    "endpoint": "https://my-resource.services.ai.azure.com",
+    "api-version": "2026-07-31-preview",
+    "call_id": "call_abc123",
+    "body": {
+      "status_code": 486,
+      "reason": "busy"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "call_id": "call_abc123",
+        "state": "Disconnected",
+        "terminal_reason": "Rejected"
+      }
+    }
+  }
+}
