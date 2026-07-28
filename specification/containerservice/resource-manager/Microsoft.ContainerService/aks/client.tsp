@@ -6,6 +6,11 @@ using Azure.ClientGenerator.Core.Legacy;
 using Azure.Core;
 using Microsoft.ContainerService;
 
+// Fix .NET code generation naming conflict: BootstrapAzureConfig has both an internal
+// BootstrapTokenInfo property and a flattened public string property that both resolve
+// to "BootstrapToken". Renaming the backing property avoids the CS0102 duplicate error.
+@@clientName(BootstrapAzureConfig.bootstrapToken, "BootstrapTokenDetail", "csharp");
+
 @@clientName(Microsoft.ContainerService.IPFamily, "IpFamily", "javascript");
 
 // Java specific renaming for backward compatibility
