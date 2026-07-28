@@ -2077,6 +2077,71 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getEffectiveRoutes": {
+      "post": {
+        "operationId": "VirtualNetworkGateways_GetEffectiveRoutes",
+        "tags": [
+          "VirtualNetworkGateways"
+        ],
+        "description": "This operation retrieves a list of effective routes for the virtual network gateway.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualNetworkGatewayName",
+            "in": "path",
+            "description": "The name of the virtual network gateway.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GatewayEffectiveRouteListResult"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetVirtualNetworkGatewayEffectiveRoutes": {
+            "$ref": "./examples/VirtualNetworkGatewayGetEffectiveRoutes.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/GatewayEffectiveRouteListResult"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getFailoverAllTestsDetails": {
       "post": {
         "operationId": "VirtualNetworkGateways_GetFailoverAllTestDetails",
@@ -4272,6 +4337,48 @@
         "ipConfigurationId",
         "customBgpIpAddress"
       ]
+    },
+    "GatewayEffectiveRoute": {
+      "type": "object",
+      "description": "Gateway effective routing details.",
+      "properties": {
+        "localAddress": {
+          "type": "string",
+          "description": "The gateway's local address.",
+          "readOnly": true
+        },
+        "addressPrefixes": {
+          "type": "array",
+          "description": "The list of address prefixes for the effective route.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "nextHopIpAddress": {
+          "type": "string",
+          "description": "The IP address of the next hop for the effective route.",
+          "readOnly": true
+        },
+        "nextHopType": {
+          "$ref": "./common.json#/definitions/GatewayEffectiveRouteNextHopType",
+          "description": "The next hop type of the effective route.",
+          "readOnly": true
+        }
+      }
+    },
+    "GatewayEffectiveRouteListResult": {
+      "type": "object",
+      "description": "List of virtual network gateway effective routes.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of gateway effective routes.",
+          "items": {
+            "$ref": "#/definitions/GatewayEffectiveRoute"
+          }
+        }
+      }
     },
     "GatewayResiliencyInformation": {
       "type": "object",
