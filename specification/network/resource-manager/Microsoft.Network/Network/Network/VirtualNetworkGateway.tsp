@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 using Common;
 
 namespace Microsoft.Network;
@@ -274,6 +275,7 @@ interface VirtualNetworkGateways {
   /**
    * This operation retrieves a list of effective routes for the virtual network gateway.
    */
+  @added(Versions.v2025_09_01)
   @tag("VirtualNetworkGateways")
   getEffectiveRoutes is ArmResourceActionAsync<
     VirtualNetworkGateway,
