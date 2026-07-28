@@ -117,17 +117,18 @@ today, but maybe", prefer the collection.
 ## DP-MODEL-04: Operation symmetry
 
 - **Rule ID:** `DP-MODEL-04`
-- **Severity:** Warning
+- **Severity:** Question
 
 Resources **SHOULD** expose a coherent set of operations. Flag asymmetries; each
 one is a question the author should answer, not automatically a defect.
 
-**Raise these as Questions, not assertions.** The Guidelines contain no `DO`
-requiring a delete operation, and plenty of legitimate resources have none:
-append-only audit logs, immutable records, singletons created with their
+**This rule produces Questions, never findings.** The Guidelines contain no
+`DO` requiring a delete operation, and plenty of legitimate resources have
+none: append-only audit logs, immutable records, singletons created with their
 parent, resources whose deletion is expressed as a reset or a state
-transition. An asymmetry is a prompt to ask, never on its own a finding at
-Warning or above.
+transition. An asymmetry is a prompt to ask, so it belongs in the `Questions`
+section of the report -- as a bullet, with no rule-ID heading and no severity
+glyph. It is never a bracketed finding at Suggestion or above.
 
 **Do not raise it at all when the specification already answers the
 question** — a `@doc` explaining that a configuration cannot be deleted, only

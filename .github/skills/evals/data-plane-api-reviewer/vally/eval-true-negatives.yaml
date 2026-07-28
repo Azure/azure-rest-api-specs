@@ -136,8 +136,14 @@ stimuli:
         config:
           pattern: "\\*\\*\\[DP-PAGE-0[0-9]\\]"
       - type: output-not-matches
-        name: "no operation-symmetry false positive"
+        name: "DP-MODEL-04 not raised as a finding"
         config:
+          # DP-MODEL-04's declared severity is Question, so it belongs in the
+          # Questions section as a bullet and must never appear in bracketed
+          # finding form. This grader catches the agent raising the asymmetry
+          # as a finding instead of asking it -- which is what it did 12 times
+          # in 31 trials on 2026-07-27, when the rule's Severity field still
+          # said Warning.
           pattern: "\\*\\*\\[DP-MODEL-04\\]"
       - type: output-not-matches
         name: "no blocking findings"

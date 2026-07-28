@@ -104,7 +104,43 @@ matching bolded prose like `**[Note]**` or `**[TODO]**`.
 | Blocking   | 🔴    | Ships a defect that is expensive or impossible to fix later. | Secret exposure; breaking change in a stable version; CRUD-in-disguise in a new service's first stable version. |
 | Warning    | 🟡    | Should be fixed; will cause customer or SDK pain.            | Most `DP-*` rule violations.                                                                                    |
 | Suggestion | 💡    | Improvement, or a grey-area trade-off.                       | Everything from [`data-plane-design-decisions.md`](data-plane-design-decisions.md); most doc findings.          |
-| Question   | --    | You are not sure, and the author has context you lack.       | Whenever the honest answer is "it depends".                                                                     |
+| Question   | --    | You are not sure, and the author has context you lack.       | Whenever the honest answer is "it depends". See "Questions are not findings".                                   |
+
+### Questions are not findings
+
+A rule whose declared severity is **Question** — `DP-MODEL-04`, and every
+`DDP-*` design-decision framework — does not produce a finding at all. It
+produces a bullet in the `### Questions` section, and it obeys different rules
+from the three glyph severities:
+
+|                       | Findings (🔴 🟡 💡)                | Questions                       |
+| --------------------- | ---------------------------------- | ------------------------------- |
+| Form                  | `**[RULE-ID] Title** -- file:line` | plain markdown bullet           |
+| Bracketed rule ID     | required                           | **must not** be used            |
+| `file:line`           | required                           | encouraged, inline in the prose |
+| Quoted source excerpt | required                           | optional                        |
+| Concrete fix          | required — no fix, no finding      | **must not** propose one        |
+| Counts toward the cap | yes                                | no                              |
+
+A Question asks; it does not assert. Write it so the author can answer "yes,
+because…" and be done:
+
+```markdown
+### Questions
+
+- `Item` has create, read, and list but no delete (`inventory.tsp:82`). Is an
+  item genuinely permanent, or is deletion handled elsewhere?
+- `AnalysisMode` is a closed union (`analyzer.tsp:41`). The doc says the wire
+  protocol fixes the value set — is that contractual?
+```
+
+**Do not** write a Question as a bracketed finding, do not give it a severity
+glyph, and do not attach a `**Fix:**` block. If you are proposing the fix, you
+are not asking a question — you are making a finding, and it must meet the
+finding bar or be dropped.
+
+If a Question has no answer that would change anything, drop it. A list of
+rhetorical questions is the same noise as a list of weak findings.
 
 Severity glyphs appear as section headings — `### 🔴 Blocking` — and nowhere
 else. Do not use a glyph mid-sentence: graders anchor on line position to avoid
@@ -173,8 +209,9 @@ accountKey: string;
 
 ### Questions
 
-- ... (grey areas from `data-plane-design-decisions.md` -- present the
-  trade-off, do not decide)
+- ... (plain bullets — grey areas from `data-plane-design-decisions.md`, and
+  `DP-MODEL-04` operation asymmetries. Present the trade-off, do not decide,
+  do not propose a fix.)
 
 ---
 

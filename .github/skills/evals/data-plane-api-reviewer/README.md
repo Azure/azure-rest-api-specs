@@ -497,6 +497,32 @@ solution:
 So an unmeasurable class became a partially-measured one. Treat a flat count as
 weak evidence and a rising one as a reason to look.
 
+### Known divergence: malformed Questions
+
+The finding counter and the true-negative graders disagree about one case, and
+the disagreement is deliberate but unresolved.
+
+`DP-MODEL-04`'s declared severity is **Question**, so a well-formed report puts
+it in the `### Questions` section as a bullet. Verified: a well-formed Question
+bullet trips **zero** graders and is counted by **neither** metric.
+
+A _malformed_ Question — the agent writing `**[DP-MODEL-04] …**` in bracketed
+finding form under the Questions heading — is treated differently by the two:
+
+|                        | verdict                                                                                                                      |
+| ---------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| Finding counter        | **excluded** — the rubrics permit questions on a true negative, so counting one as a false positive would inflate the metric |
+| TN graders (4 of them) | **fail** — a bracketed rule ID is a finding wherever it appears                                                              |
+
+Both positions are defensible: the counter measures noise the author
+experiences, the graders enforce the report contract. The practical effect is
+that a run whose only failures are malformed Questions shows failed trials with
+zero counted false positives — which the reconciliation check reports as
+`UNMEASURED`, correctly telling you the two metrics disagree.
+
+**Unresolved.** Left as-is pending a decision on whether a contract violation
+of this shape should fail the gate.
+
 ### Unrun graders are untested hypotheses
 
 **Four grader defects have now been found, and every one was in a grader that

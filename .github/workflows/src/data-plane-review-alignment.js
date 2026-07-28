@@ -367,7 +367,14 @@ export const REAL_FINDINGS_PROBE = [
   "### 🟡 Warning",
   "",
   "**[DP-MODEL-01] Update expressed as a POST action** -- `main.tsp:63`",
-  "**[DP-MODEL-04] No update path** -- `main.tsp:51`",
+  "**[DP-MODEL-02] Config has identity and lifecycle but no path** -- `main.tsp:51`",
+  // DP-MODEL-04's declared severity is Question, so the contract says it must
+  // never appear in bracketed form. It is here deliberately: that makes it a
+  // *contract violation*, and the "no operation-symmetry false positive"
+  // grader exists precisely to catch the agent raising it as a finding rather
+  // than asking it as a question. A grader must be able to see the failure it
+  // is named for.
+  "**[DP-MODEL-04] Create without delete** -- `main.tsp:82`",
   "**[DP-PAGE-01] Unbounded collection returned unpaged** -- `main.tsp:102`",
   "**[DP-VERSION-01] Property removed** -- `main.tsp:45`",
   "**[DP-VERSION-03] Missing @added on a new property** -- `main.tsp:47`",

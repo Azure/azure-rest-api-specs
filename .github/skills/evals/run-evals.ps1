@@ -260,6 +260,12 @@ function Get-TrueNegativeFindingCounts {
 
             if ($ll -match $findingPattern) {
                 $glyphSeen = $true
+                # Questions are not findings. A rule whose declared severity is
+                # Question (DP-MODEL-04) belongs in this section as a bullet,
+                # and even if the agent writes it in bracketed form it must not
+                # be charged to the false-positive metric -- the rubrics permit
+                # questions on a true negative.
+                if ($currentSeverity -eq 'questions') { continue }
                 # An unsectioned finding is charged to non-blocking: it is real
                 # output that should be trended, but promoting it to the gate
                 # on the strength of a missing heading would be unfair.
