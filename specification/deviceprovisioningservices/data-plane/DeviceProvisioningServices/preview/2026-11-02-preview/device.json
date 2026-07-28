@@ -494,6 +494,30 @@
         ]
       }
     },
+    "ConnectionProfile": {
+      "type": "string",
+      "description": "Connection profile capability of an assigned IoT Hub, forwarded verbatim from\nthe hub. Indicates the MQTT protocol version the device should use to connect.\nModeled as an extensible union so future hub capabilities pass through without a\nbreaking change; an absent or null value resolves to 'classic'.",
+      "enum": [
+        "classic",
+        "mqttV5"
+      ],
+      "x-ms-enum": {
+        "name": "ConnectionProfile",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "classic",
+            "value": "classic",
+            "description": "Classic MQTT 3.x capable IoT Hub. This is the default when unspecified."
+          },
+          {
+            "name": "mqttV5",
+            "value": "mqttV5",
+            "description": "MQTT 5 capable IoT Hub."
+          }
+        ]
+      }
+    },
     "DeviceRegistration": {
       "type": "object",
       "description": "Device registration.",
@@ -547,6 +571,11 @@
         "assignedHub": {
           "type": "string",
           "description": "Assigned Azure IoT Hub.",
+          "readOnly": true
+        },
+        "connectionProfile": {
+          "$ref": "#/definitions/ConnectionProfile",
+          "description": "The connection profile capability of the assigned IoT Hub, forwarded verbatim\nfrom the hub. Indicates the MQTT protocol version the device should use to\nconnect. An absent or null value resolves to 'classic'.",
           "readOnly": true
         },
         "deviceId": {
