@@ -432,8 +432,8 @@ union PersonalVoiceModel {
   @doc("The latest Dragon HD Omni model.")
   dragon_hd_omni_latest_neural: "DragonHDOmniLatestNeural",
 
-  @doc("The MAI-Voice-1 model.")
-  mai_voice_1: "MAI-Voice-1",
+  @doc("The MAI-Voice model.")
+  mai_voice: "MAI-Voice",
 }
 
 @doc("An Azure realtime-native voice configuration.")
