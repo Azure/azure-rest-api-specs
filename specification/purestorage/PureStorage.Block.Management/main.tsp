@@ -1,7 +1,7 @@
 import "./LiftrBase.Storage/main.tsp";
 import "./back-compatible.tsp";
-import "@typespec/openapi";
 import "./client.tsp";
+import "@typespec/openapi";
 
 @armProviderNamespace
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
@@ -30,7 +30,7 @@ enum Versions {
   @useDependency(LiftrBase.Storage.Versions.v1_preview)
   v2_preview: "2024-11-01-preview",
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/version-progression" "Existing API"
+  #suppress "@azure-tools/typespec-azure-resource-manager/version-progression" "LEGACY"
   @doc("Version 1 stable")
   @useDependency(LiftrBase.Versions.v1_stable)
   @useDependency(LiftrBase.Storage.Versions.v1_preview)
@@ -40,6 +40,14 @@ enum Versions {
   @useDependency(LiftrBase.Versions.v2026_01_01_preview)
   @useDependency(LiftrBase.Storage.Versions.v1_preview)
   v2026_01_01_preview: "2026-01-01-preview",
+
+  @doc("Version 4 preview with ActivateSaas support.")
+  @useDependency(LiftrBase.Versions.v2026_03_01_preview)
+  @useDependency(LiftrBase.Storage.Versions.v1_preview)
+  v2026_03_01_preview: "2026-03-01-preview",
+
+  @doc("Version 5 preview with Volume Group Snapshot support.")
+  v2026_05_01_preview: "2026-05-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -76,6 +84,27 @@ interface Reservations
   getBillingReport(...ResourceInstanceParameters<Reservation>):
     | ArmResponse<ReservationBillingUsageReport>
     | ErrorResponse;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Following Azure async operation pattern for long-running resource actions"
+  @added(Versions.v2026_03_01_preview)
+  @summary("Links a new SaaS to the reservation.")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  @doc("A long-running resource action.")
+  linkSaaS is ArmResourceActionAsync<
+    Reservation,
+    LinkSaaSRequest,
+    ArmResponse<Reservation>,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = Reservation> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  @added(Versions.v2026_03_01_preview)
+  @doc("Returns the latest SaaS linked to the reservation.")
+  latestLinkedSaaS is ArmResourceActionSync<
+    Reservation,
+    void,
+    ArmResponse<LatestLinkedSaaSResponse>
+  >;
 }
 
 @added(Versions.v2_preview)
@@ -233,6 +262,55 @@ model StoragePoolProperties {
   @doc("Azure resource ID of the Pure Storage Cloud service (reservation resource) this storage pool belongs to")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   reservationResourceId: string;
+
+  @added(Versions.v2026_05_01_preview)
+  @doc("Platform console access settings for the storage pool")
+  platformConsoleSettings?: PlatformConsoleSettings;
+}
+
+@added(Versions.v2026_05_01_preview)
+@doc("Settings for platform console access to the storage pool")
+model PlatformConsoleSettings {
+  @doc("Whether platform console access is enabled for the storage pool or not.When enabled is false, all console access is disabled regardless of individual interface settings.")
+  enabled?: boolean;
+
+  @doc("GUI access settings")
+  gui?: PlatformConsoleAccessSettings;
+
+  @doc("API access settings")
+  api?: PlatformConsoleAccessSettings;
+
+  @doc("CLI access settings")
+  cli?: PlatformConsoleAccessSettings;
+
+  @doc("Subnets configured for platform console access")
+  subnets?: PlatformConsoleSubnet[];
+
+  @doc("Default username for console access (system-populated)")
+  @visibility(Lifecycle.Read)
+  defaultUsername?: string;
+}
+
+@added(Versions.v2026_05_01_preview)
+@doc("Access settings for a platform console interface")
+model PlatformConsoleAccessSettings {
+  @doc("Whether this console interface access is enabled")
+  enabled: boolean;
+}
+
+@added(Versions.v2026_05_01_preview)
+@doc("Subnet configuration for platform console access")
+model PlatformConsoleSubnet {
+  @doc("Azure resource ID of the subnet")
+  id: Azure.Core.armResourceIdentifier;
+
+  @doc("Management IP address assigned to the subnet (system-populated)")
+  @visibility(Lifecycle.Read)
+  managementIpAddress?: string;
+
+  @doc("Service backend IP addresses assigned to the subnet (system-populated)")
+  @visibility(Lifecycle.Read)
+  serviceBackendIps?: string[];
 }
 
 @doc("Network in which the storage pool will be made available")
@@ -264,7 +342,9 @@ interface StoragePools {
   get is ArmResourceRead<StoragePool>;
   @doc("Create a storage pool")
   create is ArmResourceCreateOrUpdateAsync<StoragePool>;
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @doc("Update a storage pool")
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     StoragePool,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -382,6 +462,109 @@ interface StoragePools {
         ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
       >
     | ErrorResponse;
+
+  @added(Versions.v2026_05_01_preview)
+  @doc("Returns a one-time activation code for platform console access to the storage pool")
+  @armResourceAction(StoragePool)
+  @action("listPlatformConsoleActivationCode")
+  @post
+  listPlatformConsoleActivationCode(
+    ...ResourceInstanceParameters<StoragePool>,
+  ): ArmResponse<PlatformConsoleActivationCode> | ErrorResponse;
+
+  @added(Versions.v2026_05_01_preview)
+  @doc("Configure authentication settings for platform console access to the storage pool")
+  @armResourceAction(StoragePool)
+  @action("configurePlatformConsoleAuth")
+  @post
+  configurePlatformConsoleAuth(
+    ...ResourceInstanceParameters<StoragePool>,
+
+    @doc("Platform console authentication configuration")
+    @body
+    config: PlatformConsoleAuthConfig,
+  ): ArmResponse<PlatformConsoleAuthResult> | ErrorResponse;
+}
+
+@added(Versions.v2026_05_01_preview)
+@doc("One-time activation code for platform console access")
+model PlatformConsoleActivationCode {
+  @doc("Username to use when activating the console session")
+  username: string;
+
+  @doc("One-time activation code for platform console access")
+  @secret
+  activationCode: string;
+
+  @doc("Expiry time of the activation code in RFC3339 format")
+  expiresAt: utcDateTime;
+}
+
+@added(Versions.v2026_05_01_preview)
+@doc("Role assigned to a user on the platform console")
+union PlatformConsoleRole {
+  @doc("Full administrative access to the array")
+  arrayAdmin: "array_admin",
+
+  @doc("Administrative access to storage resources")
+  storageAdmin: "storage_admin",
+
+  @doc("Read-only access to the platform console")
+  readOnly: "read_only",
+
+  string,
+}
+
+@added(Versions.v2026_05_01_preview)
+@doc("Discriminator values for platform console authentication types. Extensible to support new auth mechanisms without API changes.")
+union PlatformConsoleAuthType {
+  @doc("SSH public key authentication")
+  ssh: "ssh",
+
+  string,
+}
+
+@added(Versions.v2026_05_01_preview)
+@discriminator("authType")
+@doc("Base model for platform console authentication configuration. Extend with a type-specific subtype for each auth mechanism.")
+model PlatformConsoleAuthConfig {
+  @doc("Authentication type discriminator")
+  authType: PlatformConsoleAuthType;
+}
+
+@added(Versions.v2026_05_01_preview)
+@doc("SSH-based platform console authentication configuration")
+model SshPlatformConsoleAuthConfig extends PlatformConsoleAuthConfig {
+  authType: "ssh";
+
+  @doc("Username to associate with the SSH public key")
+  username: string;
+
+  @doc("SSH public key in OpenSSH authorized_keys format")
+  publicKey: string;
+
+  @doc("Role to assign to the user on the platform console")
+  role: PlatformConsoleRole;
+}
+
+@added(Versions.v2026_05_01_preview)
+@discriminator("authType")
+@doc("Base model for platform console authentication result. Actual type depends on the authType used in the request.")
+model PlatformConsoleAuthResult {
+  @doc("Authentication type discriminator")
+  authType: PlatformConsoleAuthType;
+}
+
+@added(Versions.v2026_05_01_preview)
+@doc("SSH-based platform console authentication result")
+model SshPlatformConsoleAuthResult extends PlatformConsoleAuthResult {
+  authType: "ssh";
+
+  @doc("Username that was configured for the console session")
+  username: string;
+
+  @doc("Role assigned to the user on the platform console")
+  role: PlatformConsoleRole;
 }
 
 @doc("Limits constraining certain resource properties")
@@ -957,6 +1140,21 @@ model VolumeGroupProperties {
   @visibility(Lifecycle.Create)
   sourceVolumeGroupResourceId?: Azure.Core.armResourceIdentifier;
 
+  @added(Versions.v2026_05_01_preview)
+  @doc("Indicates the source type for volume group creation")
+  @visibility(Lifecycle.Create)
+  sourceType?: VolumeGroupSourceType;
+
+  @added(Versions.v2026_05_01_preview)
+  @doc("Azure resource ID of the volume group snapshot to restore from")
+  @visibility(Lifecycle.Create)
+  sourceSnapshotResourceId?: Azure.Core.armResourceIdentifier;
+
+  @added(Versions.v2026_05_01_preview)
+  @doc("Azure resource ID of the soft-deleted volume group to recover")
+  @visibility(Lifecycle.Create)
+  sourceRecoverableVolumeGroupResourceId?: Azure.Core.armResourceIdentifier;
+
   @doc("Performance parameters for the volume group")
   performanceParameters?: PerformanceParameters;
 
@@ -1016,6 +1214,35 @@ model ConnectionParametersResponse {
   iscsi: IscsiConnectionParameters;
 }
 
+@added(Versions.v2026_05_01_preview)
+@doc("Request to overwrite all volumes in a volume group from a snapshot")
+model VolumeGroupOverwriteRequest {
+  @doc("Azure resource ID of the volume group snapshot to restore from")
+  sourceSnapshotResourceId: Azure.Core.armResourceIdentifier;
+
+  @doc("Azure resource ID of the source volume group")
+  sourceVolumeGroupResourceId: Azure.Core.armResourceIdentifier;
+}
+
+@added(Versions.v2026_05_01_preview)
+@doc("Request to overwrite a volume's content from another volume or a snapshot")
+model VolumeOverwriteRequest {
+  @doc("Source type for the overwrite operation")
+  sourceType: VolumeSourceType;
+
+  @doc("Azure resource ID of the source volume group. Required when sourceType is 'snapshot' or when the source volume belongs to a different volume group than the target.")
+  sourceVolumeGroupResourceId?: Azure.Core.armResourceIdentifier;
+
+  @doc("Source volume group snapshot and volume snapshot name to restore from. Used when sourceType is 'snapshot'.")
+  sourceVolumeSnapshot?: VolumeSnapshotSource;
+
+  @doc("Serial number of the source volume to overwrite from. Used when sourceType is 'serialNumber'.")
+  sourceSerialNumber?: string;
+
+  @doc("Azure resource ID of the source volume to clone from. Used when sourceType is 'volume'.")
+  sourceVolumeResourceId?: Azure.Core.armResourceIdentifier;
+}
+
 @added(Versions.v2026_01_01_preview)
 @doc("Volume group status information")
 model VolumeGroupStatus {
@@ -1063,6 +1290,15 @@ interface VolumeGroups {
   getStatus(...ResourceInstanceParameters<VolumeGroup>):
     | ArmResponse<VolumeGroupStatus>
     | ErrorResponse;
+
+  @added(Versions.v2026_05_01_preview)
+  @doc("Restores a volume group to a specific snapshot state, including volume structure and data")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  overwrite is ArmResourceActionNoResponseContentAsync<
+    VolumeGroup,
+    VolumeGroupOverwriteRequest,
+    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
+  >;
 }
 
 @added(Versions.v2026_01_01_preview)
@@ -1077,6 +1313,57 @@ model Volume is ProxyResource<AzureVolumeProperties> {
   @minLength(2)
   @pattern("^[A-Za-z][A-Za-z0-9-]*[A-Za-z0-9]$")
   name: string;
+}
+
+@added(Versions.v2026_05_01_preview)
+@doc("Source type for volume creation")
+union VolumeSourceType {
+  @doc("No source; create an empty volume with the specified provisioned size")
+  none: "none",
+
+  @doc("Clone from an existing volume")
+  volume: "volume",
+
+  @doc("Import a volume by its serial number")
+  serialNumber: "serialNumber",
+
+  @doc("Restore from a volume group snapshot")
+  snapshot: "snapshot",
+
+  @doc("Recover a soft-deleted volume within the same volume group")
+  recoverableVolume: "recoverableVolume",
+
+  string,
+}
+
+@added(Versions.v2026_05_01_preview)
+@doc("Source type for volume group creation")
+union VolumeGroupSourceType {
+  @doc("No source; create an empty volume group")
+  none: "none",
+
+  @doc("Clone from an existing volume group")
+  volumeGroup: "volumeGroup",
+
+  @doc("Restore from a volume group snapshot")
+  snapshot: "snapshot",
+
+  @doc("Recover a soft-deleted volume group")
+  recoverableVolumeGroup: "recoverableVolumeGroup",
+
+  string,
+}
+
+@added(Versions.v2026_05_01_preview)
+@doc("Identifies the specific volume snapshot within a volume group snapshot to restore from")
+model VolumeSnapshotSource {
+  @doc("Azure resource ID of the volume group snapshot containing the desired volume snapshot")
+  @visibility(Lifecycle.Create)
+  volumeGroupSnapshotResourceId: Azure.Core.armResourceIdentifier;
+
+  @doc("Name of the volume snapshot within the volume group snapshot")
+  @visibility(Lifecycle.Create)
+  volumeSnapshotName: string;
 }
 
 @added(Versions.v2026_01_01_preview)
@@ -1106,6 +1393,31 @@ model AzureVolumeProperties {
   @visibility(Lifecycle.Create)
   sourceVolumeGroupResourceId?: Azure.Core.armResourceIdentifier;
 
+  @added(Versions.v2026_05_01_preview)
+  @doc("Indicates the source type for volume creation")
+  @visibility(Lifecycle.Create)
+  sourceType?: VolumeSourceType;
+
+  @added(Versions.v2026_05_01_preview)
+  @doc("Source volume group snapshot and volume snapshot name to restore from")
+  @visibility(Lifecycle.Create)
+  sourceVolumeSnapshot?: VolumeSnapshotSource;
+
+  @added(Versions.v2026_05_01_preview)
+  @doc("Serial number of the source volume to import")
+  @visibility(Lifecycle.Create)
+  sourceSerialNumber?: string;
+
+  @added(Versions.v2026_05_01_preview)
+  @doc("Azure resource ID of the soft-deleted volume to recover within the same volume group")
+  @visibility(Lifecycle.Create)
+  sourceRecoverableVolumeResourceId?: Azure.Core.armResourceIdentifier;
+
+  @added(Versions.v2026_05_01_preview)
+  @doc("Soft-deletion state of the volume")
+  @visibility(Lifecycle.Read)
+  softDeletion?: DestroyedStateProperties;
+
   @doc("Provisioning state of the resource")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
@@ -1132,4 +1444,312 @@ interface Volumes {
   delete is ArmResourceDeleteWithoutOkAsync<Volume>;
   @doc("List volumes by volume group")
   listByVolumeGroup is ArmResourceListByParent<Volume>;
+
+  @added(Versions.v2026_05_01_preview)
+  @doc("Overwrites the content of a volume from another volume or a snapshot")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  overwrite is ArmResourceActionNoResponseContentAsync<
+    Volume,
+    VolumeOverwriteRequest,
+    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
+  >;
+}
+
+@added(Versions.v2026_05_01_preview)
+@doc("Properties of a recoverable volume group")
+model RecoverableVolumeGroupProperties {
+  @doc("Date and time at which the volume group was created, as an RFC 3339 timestamp")
+  @visibility(Lifecycle.Read)
+  createdAt?: utcDateTime;
+
+  @doc("Soft-deletion state of the recoverable volume group")
+  @visibility(Lifecycle.Read)
+  softDeletion?: DestroyedStateProperties;
+
+  @doc("Performance parameters of the volume group")
+  @visibility(Lifecycle.Read)
+  performanceParameters?: PerformanceParameters;
+
+  @doc("Protection parameters of the volume group")
+  @visibility(Lifecycle.Read)
+  protectionParameters?: ProtectionParameters;
+
+  @doc("Storage space usage of the volume group")
+  @visibility(Lifecycle.Read)
+  space?: Space;
+
+  @doc("Provisioning state of the resource")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
+@added(Versions.v2026_05_01_preview)
+@doc("A destroyed volume group that is pending eradication")
+@parentResource(StoragePool)
+model RecoverableVolumeGroup
+  is ProxyResource<RecoverableVolumeGroupProperties> {
+  @doc("Name of the recoverable volume group")
+  @segment("recoverableVolumeGroups")
+  @key("recoverableVolumeGroupName")
+  @visibility(Lifecycle.Read)
+  @path
+  @minLength(2)
+  @maxLength(64)
+  @pattern("^[A-Za-z][A-Za-z0-9-]{0,62}[A-Za-z0-9]$")
+  name: string;
+}
+
+@added(Versions.v2026_05_01_preview)
+@armResourceOperations
+interface RecoverableVolumeGroups {
+  @added(Versions.v2026_05_01_preview)
+  @doc("Get a recoverable volume group")
+  get is ArmResourceRead<RecoverableVolumeGroup>;
+
+  @added(Versions.v2026_05_01_preview)
+  @doc("List all recoverable volume groups in a storage pool")
+  listByStoragePool is ArmResourceListByParent<RecoverableVolumeGroup>;
+
+  @added(Versions.v2026_05_01_preview)
+  @doc("Eradicate a recoverable volume group")
+  delete is ArmResourceDeleteWithoutOkAsync<RecoverableVolumeGroup>;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the correct casing for Software as a Service"
+@added(Versions.v2026_03_01_preview)
+@doc("SaaS guid for Activate SaaS Resource")
+model ActivateSaaSRequest {
+  @doc("SaaS guid for Activate SaaS Resource")
+  saasGuid: string;
+
+  @doc("Publisher Id for PureStorage resource")
+  publisherId?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Response model extending ProxyResource for consistency with Azure patterns"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the correct casing for Software as a Service"
+@added(Versions.v2026_03_01_preview)
+@doc("Marketplace SaaS resource details.")
+model SaaSResourceDetailsResponse
+  extends Azure.ResourceManager.CommonTypes.ProxyResource {
+  @doc("Id of the Marketplace SaaS Resource")
+  saasId?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the correct casing for Software as a Service"
+@added(Versions.v2026_03_01_preview)
+@doc("SaaS details for linking to a reservation.")
+model LinkSaaSRequest {
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the correct casing for Software as a Service"
+  @doc("SaaS resource id")
+  saaSResourceId: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the correct casing for Software as a Service"
+@added(Versions.v2026_03_01_preview)
+@doc("Response of get latest linked SaaS resource operation.")
+model LatestLinkedSaaSResponse {
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the correct casing for Software as a Service"
+  @doc("SaaS resource id")
+  saaSResourceId?: string;
+
+  @doc("Flag indicating if the SaaS resource is hidden")
+  isHiddenSaaS?: boolean;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Subscription-scoped operation group for SaaS activation"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the correct casing for Software as a Service"
+@added(Versions.v2026_03_01_preview)
+interface SaaSOperationGroup {
+  @doc("Activate the SaaS resource")
+  @autoRoute
+  @action("activateSaaS")
+  activateResource is ArmProviderActionAsync<
+    Request = ActivateSaaSRequest,
+    Response = SaaSResourceDetailsResponse,
+    Scope = SubscriptionActionScope,
+    Parameters = {}
+  >;
+}
+
+@added(Versions.v2026_05_01_preview)
+@doc("Soft-deletion (destroyed) state of a resource")
+model DestroyedStateProperties {
+  @doc("If false, the resource is active; if true, the resource has been destroyed")
+  @visibility(Lifecycle.Read)
+  destroyed: boolean;
+
+  @doc("Date and time at which the resource was destroyed, as an RFC 3339 timestamp")
+  @visibility(Lifecycle.Read)
+  destroyedAt?: utcDateTime;
+
+  @doc("Name of the resource before it was destroyed")
+  @visibility(Lifecycle.Read)
+  previousName?: string;
+
+  @doc("Date at which the resource will be eradicated and impossible to recover, as an RFC 3339 timestamp")
+  @visibility(Lifecycle.Read)
+  eradicationTimestamp?: utcDateTime;
+}
+
+@added(Versions.v2026_05_01_preview)
+@doc("Information about an individual volume snapshot within a volume group snapshot")
+model VolumeSnapshotInfo {
+  @doc("Name of the volume snapshot")
+  @visibility(Lifecycle.Read)
+  name: string;
+
+  @doc("Storage space usage of the volume snapshot")
+  @visibility(Lifecycle.Read)
+  space?: Space;
+
+  @doc("Provisioned size of the volume, in bytes")
+  @visibility(Lifecycle.Read)
+  provisionedSize?: int64;
+
+  @doc("Serial number of the volume")
+  @visibility(Lifecycle.Read)
+  serialNumber?: string;
+}
+
+@added(Versions.v2026_05_01_preview)
+@doc("Properties of a volume group snapshot")
+model VolumeGroupSnapshotProperties {
+  @doc("Azure resource ID of the source snapshot to recover from; omit for a new manual snapshot")
+  @visibility(Lifecycle.Create)
+  sourceSnapshotResourceId?: Azure.Core.armResourceIdentifier;
+
+  @doc("Date and time at which the snapshot was created, as an RFC 3339 timestamp")
+  @visibility(Lifecycle.Read)
+  createdAt?: utcDateTime;
+
+  @doc("Whether the snapshot was created by a protection policy")
+  @visibility(Lifecycle.Read)
+  createdByPolicy?: boolean;
+
+  @doc("Soft-deletion state of the snapshot")
+  @visibility(Lifecycle.Read)
+  softDeletion?: DestroyedStateProperties;
+
+  @doc("Storage space usage of the snapshot")
+  @visibility(Lifecycle.Read)
+  space?: Space;
+
+  @doc("List of individual volume snapshots included in this volume group snapshot; populated on single-get, empty or omitted on list for performance")
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
+  volumeSnapshots?: VolumeSnapshotInfo[];
+
+  @doc("Provisioning state of the resource")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
+@added(Versions.v2026_05_01_preview)
+@doc("A snapshot of a volume group")
+@parentResource(VolumeGroup)
+model VolumeGroupSnapshot is ProxyResource<VolumeGroupSnapshotProperties> {
+  @doc("Name of the volume group snapshot")
+  @segment("snapshots")
+  @key("snapshotName")
+  @visibility(Lifecycle.Read)
+  @path
+  @minLength(1)
+  @maxLength(64)
+  @pattern("^[A-Za-z0-9]([A-Za-z0-9-]{0,62}[A-Za-z0-9])?$")
+  name: string;
+}
+
+@added(Versions.v2026_05_01_preview)
+@doc("Paged list result for volume group snapshots")
+model VolumeGroupSnapshotListResult {
+  @pageItems
+  @doc("Array of volume group snapshots")
+  value: VolumeGroupSnapshot[];
+
+  @doc("URL to fetch the next page of results")
+  @nextLink
+  nextLink?: url;
+}
+
+@added(Versions.v2026_05_01_preview)
+@doc("List result for volume group snapshots returned by the listSnapshots POST action")
+model VolumeGroupSnapshotPostListResult {
+  @doc("Array of volume group snapshots")
+  value: VolumeGroupSnapshot[];
+
+  @doc("Number of snapshots in this response page")
+  count?: int32;
+
+  @doc("Total number of snapshots")
+  totalCount?: int32;
+}
+
+@added(Versions.v2026_05_01_preview)
+@doc("Request payload for listing volume group snapshots")
+model VolumeGroupSnapshotListRequest {
+  @doc("OData filter expression (e.g. filter=substringof('sna', name) and space/unique gt 1000)")
+  filter?: string;
+
+  @doc("OData order-by expression (e.g. orderby=name asc)")
+  orderby?: string;
+
+  @doc("Maximum number of results to return per page")
+  top?: int32;
+
+  @doc("Number of results to skip (page offset)")
+  skip?: int32;
+}
+
+@added(Versions.v2026_05_01_preview)
+@armResourceOperations
+interface VolumeGroupSnapshots {
+  @added(Versions.v2026_05_01_preview)
+  @doc("Get a volume group snapshot")
+  get is ArmResourceRead<VolumeGroupSnapshot>;
+
+  @added(Versions.v2026_05_01_preview)
+  @doc("Create a manual snapshot of a volume group, or recover from an existing snapshot by providing sourceSnapshotResourceId")
+  create is ArmResourceCreateOrUpdateAsync<VolumeGroupSnapshot>;
+
+  @added(Versions.v2026_05_01_preview)
+  @doc("Delete a volume group snapshot")
+  delete is ArmResourceDeleteWithoutOkAsync<VolumeGroupSnapshot>;
+
+  @added(Versions.v2026_05_01_preview)
+  @doc("List all snapshots for a given volume group")
+  listByVolumeGroup is ArmResourceListByParent<
+    VolumeGroupSnapshot,
+    Parameters = {
+      @doc("OData filter expression (e.g. $filter=substringof('sna', name) and space/unique gt 1000)")
+      @query("$filter")
+      filter?: string;
+
+      @doc("OData order-by expression (e.g. $orderby=name asc)")
+      @query("$orderby")
+      orderby?: string;
+
+      @doc("Maximum number of results to return per page")
+      @query("$top")
+      top?: int32;
+
+      @doc("Number of results to skip (page offset)")
+      @query("$skip")
+      skip?: int32;
+    },
+    Response = ArmResponse<VolumeGroupSnapshotListResult>
+  >;
+
+  @added(Versions.v2026_05_01_preview)
+  @doc("List all snapshots for a given volume group using POST with the same request and response contract")
+  @armResourceAction(VolumeGroup)
+  @action("listSnapshots")
+  @post
+  listSnapshots(
+    ...ResourceInstanceParameters<VolumeGroup>,
+
+    @doc("Snapshot list request payload")
+    @body
+    properties: VolumeGroupSnapshotListRequest,
+  ): ArmResponse<VolumeGroupSnapshotPostListResult> | ErrorResponse;
 }
