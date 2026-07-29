@@ -22,7 +22,11 @@ interface Experiments {
   @extension("x-ms-foundry-meta", ExperimentsRequiredPreviews)
   create is FoundryDataPlanePreviewOperation<
     FoundryFeaturesOptInKeys.experiments_v1_preview,
-    CreateExperimentRequest,
+    {
+      @doc("The experiment to create.")
+      @body
+      body: CreateExperimentRequest;
+    },
     {
       @statusCode statusCode: 201;
       @body body: Experiment;
@@ -45,20 +49,39 @@ interface Experiments {
   >;
 
   @summary("List experiments")
-  @doc("Returns the list of all experiments.")
+  @doc("Returns a cursor-paged list of experiments.")
   @route("experiments")
   @get
+  @list
   @extension("x-ms-foundry-meta", ExperimentsRequiredPreviews)
   list is FoundryDataPlanePreviewOperation<
     FoundryFeaturesOptInKeys.experiments_v1_preview,
     {
-      ...CursorPaginationParams;
+      ...CommonPageQueryParameters;
     },
-    OpenAIPage<Experiment>
+    AgentsPagedResult<Experiment>
+  >;
+
+  @summary("Update an experiment")
+  @doc("Applies a partial update to an experiment. Only experiments still in the 'created' state may be updated; omitted fields are left unchanged.")
+  @route("experiments/{experiment_id}")
+  @patch(#{ implicitOptionality: true })
+  @extension("x-ms-foundry-meta", ExperimentsRequiredPreviews)
+  update is FoundryDataPlanePreviewOperation<
+    FoundryFeaturesOptInKeys.experiments_v1_preview,
+    {
+      @doc("The unique identifier of the experiment to update.")
+      @path
+      experiment_id: string;
+
+      @header("Content-Type") contentType: "application/merge-patch+json";
+      ...PatchExperimentRequest;
+    },
+    Experiment
   >;
 
   @summary("Start an experiment")
-  @doc("Starts a created experiment. The service mints experiment_id and salt, write-locks the agent's version selector, and begins sticky-per-conversation routing.")
+  @doc("Starts a created experiment. The service mints the salt, materializes traffic steps, and begins sticky-per-conversation routing.")
   @route("experiments/{experiment_id}:start")
   @post
   @extension("x-ms-foundry-meta", ExperimentsRequiredPreviews)
@@ -73,7 +96,7 @@ interface Experiments {
   >;
 
   @summary("Stop an experiment")
-  @doc("Stops a running experiment. Routing collapses to the control variant and the agent's version selector is unlocked for editing.")
+  @doc("Stops a running experiment. Routing collapses to the control variant.")
   @route("experiments/{experiment_id}:stop")
   @post
   @extension("x-ms-foundry-meta", ExperimentsRequiredPreviews)
@@ -106,10 +129,28 @@ interface Experiments {
     Experiment
   >;
 
+  @summary("Delete an experiment")
+  @doc("Deletes a non-running experiment and its scorecard artifacts.")
+  @route("experiments/{experiment_id}")
+  @delete
+  @extension("x-ms-foundry-meta", ExperimentsRequiredPreviews)
+  delete is FoundryDataPlanePreviewOperation<
+    FoundryFeaturesOptInKeys.experiments_v1_preview,
+    {
+      @doc("The unique identifier of the experiment to delete.")
+      @path
+      experiment_id: string;
+    },
+    {
+      @statusCode statusCode: 204;
+    }
+  >;
+
   @summary("List scorecards")
-  @doc("Returns the list of generated scorecards for an experiment. Each scorecard is a table comparing metric values between variants.")
+  @doc("Returns a cursor-paged list of generated scorecards for an experiment. Each entry is a lightweight summary; use Get scorecard to retrieve the full metric rows.")
   @route("experiments/{experiment_id}/scorecards")
   @get
+  @list
   @extension("x-ms-foundry-meta", ExperimentsRequiredPreviews)
   listScorecards is FoundryDataPlanePreviewOperation<
     FoundryFeaturesOptInKeys.experiments_v1_preview,
@@ -117,11 +158,29 @@ interface Experiments {
       @doc("The unique identifier of the experiment.")
       @path
       experiment_id: string;
+
+      ...CommonPageQueryParameters;
     },
+    AgentsPagedResult<ScorecardSummary>
+  >;
+
+  @summary("Get a scorecard")
+  @doc("Retrieves a generated scorecard by id, including its full metric rows.")
+  @route("experiments/{experiment_id}/scorecards/{scorecard_id}")
+  @get
+  @extension("x-ms-foundry-meta", ExperimentsRequiredPreviews)
+  getScorecard is FoundryDataPlanePreviewOperation<
+    FoundryFeaturesOptInKeys.experiments_v1_preview,
     {
-      @doc("The list of scorecards.")
-      data: Scorecard[];
-    }
+      @doc("The unique identifier of the experiment.")
+      @path
+      experiment_id: string;
+
+      @doc("The unique identifier of the scorecard.")
+      @path
+      scorecard_id: string;
+    },
+    Scorecard
   >;
 
   @summary("Delete a scorecard")

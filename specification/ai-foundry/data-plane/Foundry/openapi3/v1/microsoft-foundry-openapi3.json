@@ -180,6 +180,11 @@
       "summary": "Agent optimization jobs"
     },
     {
+      "name": "Experiments",
+      "parent": "Platform APIs",
+      "summary": "Experiment lifecycle for A/B version traffic-split"
+    },
+    {
       "name": "EvaluatorGenerationJobs",
       "parent": "Platform APIs",
       "summary": "Evaluator generation jobs"
@@ -6960,7 +6965,7 @@
         ],
         "responses": {
           "201": {
-            "description": "The experiment was created successfully.",
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "content": {
               "application/json": {
                 "schema": {
@@ -7001,7 +7006,8 @@
                 "$ref": "#/components/schemas/CreateExperimentRequest"
               }
             }
-          }
+          },
+          "description": "The experiment to create."
         },
         "x-ms-foundry-meta": {
           "conditional_previews": [
@@ -7012,7 +7018,7 @@
       "get": {
         "operationId": "Experiments_list",
         "summary": "List experiments",
-        "description": "Returns the list of all experiments.",
+        "description": "Returns a cursor-paged list of experiments.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -7042,7 +7048,7 @@
             "name": "order",
             "in": "query",
             "required": false,
-            "description": "Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and `desc`\nfor descending order.",
+            "description": "Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`\nfor descending order.",
             "schema": {
               "$ref": "#/components/schemas/PageOrder"
             },
@@ -7052,7 +7058,7 @@
             "name": "after",
             "in": "query",
             "required": false,
-            "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list.",
+            "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include after=obj_foo in order to fetch the next page of the list.",
             "schema": {
               "type": "string"
             },
@@ -7062,7 +7068,7 @@
             "name": "before",
             "in": "query",
             "required": false,
-            "description": "A cursor for use in pagination. `before` is an object ID that defines your place in the list.",
+            "description": "A cursor for use in pagination. `before` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include before=obj_foo in order to fetch the previous page of the list.",
             "schema": {
               "type": "string"
             },
@@ -7096,7 +7102,7 @@
                       "items": {
                         "$ref": "#/components/schemas/Experiment"
                       },
-                      "description": "The requested list of experiments."
+                      "description": "The requested list of items."
                     },
                     "first_id": {
                       "type": "string",
@@ -7111,7 +7117,7 @@
                       "description": "A value indicating whether there are additional values available not captured in this list."
                     }
                   },
-                  "description": "The response data for a requested list of experiments."
+                  "description": "The response data for a requested list of items."
                 }
               }
             }
@@ -7225,13 +7231,11 @@
             "Experiments=V1Preview"
           ]
         }
-      }
-    },
-    "/experiments/{experiment_id}:start": {
-      "post": {
-        "operationId": "Experiments_start",
-        "summary": "Start an experiment",
-        "description": "Starts a created experiment. The service mints experiment_id and salt, write-locks the agent's version selector, and begins sticky-per-conversation routing.",
+      },
+      "patch": {
+        "operationId": "Experiments_update",
+        "summary": "Update an experiment",
+        "description": "Applies a partial update to an experiment. Only experiments still in the 'created' state may be updated; omitted fields are left unchanged.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -7249,18 +7253,25 @@
             "name": "experiment_id",
             "in": "path",
             "required": true,
-            "description": "The unique identifier of the experiment to start.",
+            "description": "The unique identifier of the experiment to update.",
             "schema": {
               "type": "string"
             }
           },
           {
-            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
           }
         ],
         "responses": {
           "200": {
-            "description": "The experiment was started successfully.",
+            "description": "The request has succeeded.",
             "content": {
               "application/json": {
                 "schema": {
@@ -7269,7 +7280,98 @@
               }
             }
           },
-          "default": {
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Experiments"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/merge-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatchExperimentRequest"
+              }
+            }
+          }
+        },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Experiments=V1Preview"
+          ]
+        }
+      },
+      "delete": {
+        "operationId": "Experiments_delete",
+        "summary": "Delete an experiment",
+        "description": "Deletes a non-running experiment and its scorecard artifacts.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Experiments=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "experiment_id",
+            "in": "path",
+            "required": true,
+            "description": "The unique identifier of the experiment to delete.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
             "description": "Server error",
             "content": {
               "application/json": {
@@ -7290,11 +7392,11 @@
         }
       }
     },
-    "/experiments/{experiment_id}:stop": {
-      "post": {
-        "operationId": "Experiments_stop",
-        "summary": "Stop an experiment",
-        "description": "Stops a running experiment. Routing collapses to the control variant and the agent's version selector is unlocked for editing.",
+    "/experiments/{experiment_id}/scorecards": {
+      "get": {
+        "operationId": "Experiments_listScorecards",
+        "summary": "List scorecards",
+        "description": "Returns a cursor-paged list of generated scorecards for an experiment. Each entry is a lightweight summary; use Get scorecard to retrieve the full metric rows.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -7312,7 +7414,164 @@
             "name": "experiment_id",
             "in": "path",
             "required": true,
-            "description": "The unique identifier of the experiment to stop.",
+            "description": "The unique identifier of the experiment.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the\ndefault is 20.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            },
+            "explode": false
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "description": "Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`\nfor descending order.",
+            "schema": {
+              "$ref": "#/components/schemas/PageOrder"
+            },
+            "explode": false
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include after=obj_foo in order to fetch the next page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `before` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data",
+                    "has_more"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/ScorecardSummary"
+                      },
+                      "description": "The requested list of items."
+                    },
+                    "first_id": {
+                      "type": "string",
+                      "description": "The first ID represented in this list."
+                    },
+                    "last_id": {
+                      "type": "string",
+                      "description": "The last ID represented in this list."
+                    },
+                    "has_more": {
+                      "type": "boolean",
+                      "description": "A value indicating whether there are additional values available not captured in this list."
+                    }
+                  },
+                  "description": "The response data for a requested list of items."
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Experiments"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Experiments=V1Preview"
+          ]
+        }
+      }
+    },
+    "/experiments/{experiment_id}/scorecards/{scorecard_id}": {
+      "get": {
+        "operationId": "Experiments_getScorecard",
+        "summary": "Get a scorecard",
+        "description": "Retrieves a generated scorecard by id, including its full metric rows.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Experiments=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "experiment_id",
+            "in": "path",
+            "required": true,
+            "description": "The unique identifier of the experiment.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "scorecard_id",
+            "in": "path",
+            "required": true,
+            "description": "The unique identifier of the scorecard.",
             "schema": {
               "type": "string"
             }
@@ -7330,14 +7589,94 @@
         ],
         "responses": {
           "200": {
-            "description": "The experiment was stopped successfully.",
+            "description": "The request has succeeded.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Experiment"
+                  "$ref": "#/components/schemas/Scorecard"
                 }
               }
             }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Experiments"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Experiments=V1Preview"
+          ]
+        }
+      },
+      "delete": {
+        "operationId": "Experiments_deleteScorecard",
+        "summary": "Delete a scorecard",
+        "description": "Deletes the scorecard record and its user-blob artifact. Does not stop or mutate the experiment itself.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Experiments=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "experiment_id",
+            "in": "path",
+            "required": true,
+            "description": "The unique identifier of the experiment.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "scorecard_id",
+            "in": "path",
+            "required": true,
+            "description": "The unique identifier of the scorecard to delete.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
           },
           "4XX": {
             "description": "Client error",
@@ -7410,7 +7749,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The experiment was promoted successfully.",
+            "description": "The request has succeeded.",
             "content": {
               "application/json": {
                 "schema": {
@@ -7451,7 +7790,8 @@
                 "$ref": "#/components/schemas/PromoteExperimentRequest"
               }
             }
-          }
+          },
+          "description": "The promotion request."
         },
         "x-ms-foundry-meta": {
           "conditional_previews": [
@@ -7460,11 +7800,11 @@
         }
       }
     },
-    "/experiments/{experiment_id}/scorecards": {
-      "get": {
-        "operationId": "Experiments_listScorecards",
-        "summary": "List scorecards",
-        "description": "Returns the list of generated scorecards for an experiment. Each scorecard is a table comparing metric values between variants.",
+    "/experiments/{experiment_id}:start": {
+      "post": {
+        "operationId": "Experiments_start",
+        "summary": "Start an experiment",
+        "description": "Starts a created experiment. The service mints the salt, materializes traffic steps, and begins sticky-per-conversation routing.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -7482,13 +7822,20 @@
             "name": "experiment_id",
             "in": "path",
             "required": true,
-            "description": "The unique identifier of the experiment.",
+            "description": "The unique identifier of the experiment to start.",
             "schema": {
               "type": "string"
             }
           },
           {
-            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
           }
         ],
         "responses": {
@@ -7497,24 +7844,22 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "required": [
-                    "data"
-                  ],
-                  "properties": {
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/Scorecard"
-                      },
-                      "description": "The list of scorecards."
-                    }
-                  }
+                  "$ref": "#/components/schemas/Experiment"
                 }
               }
             }
           },
-          "default": {
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
             "description": "Server error",
             "content": {
               "application/json": {
@@ -7535,11 +7880,11 @@
         }
       }
     },
-    "/experiments/{experiment_id}/scorecards/{scorecard_id}": {
-      "delete": {
-        "operationId": "Experiments_deleteScorecard",
-        "summary": "Delete a scorecard",
-        "description": "Deletes the scorecard record and its user-blob artifact. Does not stop or mutate the experiment itself.",
+    "/experiments/{experiment_id}:stop": {
+      "post": {
+        "operationId": "Experiments_stop",
+        "summary": "Stop an experiment",
+        "description": "Stops a running experiment. Routing collapses to the control variant.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -7557,29 +7902,44 @@
             "name": "experiment_id",
             "in": "path",
             "required": true,
-            "description": "The unique identifier of the experiment.",
+            "description": "The unique identifier of the experiment to stop.",
             "schema": {
               "type": "string"
             }
           },
           {
-            "name": "scorecard_id",
-            "in": "path",
+            "name": "api-version",
+            "in": "query",
             "required": true,
-            "description": "The unique identifier of the scorecard to delete.",
+            "description": "The API version to use for this operation.",
             "schema": {
               "type": "string"
-            }
-          },
-          {
-            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            },
+            "explode": false
           }
         ],
         "responses": {
-          "204": {
-            "description": "The scorecard was deleted successfully."
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Experiment"
+                }
+              }
+            }
           },
-          "default": {
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
             "description": "Server error",
             "content": {
               "application/json": {
@@ -13007,16 +13367,6 @@
                       "type": "string",
                       "description": "The model deployment to use for the creation of this response."
                     },
-                    "reasoning": {
-                      "anyOf": [
-                        {
-                          "$ref": "#/components/schemas/OpenAI.Reasoning"
-                        },
-                        {
-                          "type": "null"
-                        }
-                      ]
-                    },
                     "background": {
                       "anyOf": [
                         {
@@ -13139,6 +13489,16 @@
                         "$ref": "#/components/schemas/OpenAI.OutputItem"
                       },
                       "description": "An array of content items generated by the model.\n  - The length and order of items in the `output` array is dependent\n  on the model's response.\n  - Rather than accessing the first item in the `output` array and\n  assuming it's an `assistant` message with the content generated by\n  the model, you might consider using the `output_text` property where\n  supported in SDKs."
+                    },
+                    "reasoning": {
+                      "anyOf": [
+                        {
+                          "$ref": "#/components/schemas/OpenAI.Reasoning"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
                     },
                     "instructions": {
                       "anyOf": [
@@ -13361,16 +13721,6 @@
                     "type": "string",
                     "description": "The model deployment to use for the creation of this response."
                   },
-                  "reasoning": {
-                    "anyOf": [
-                      {
-                        "$ref": "#/components/schemas/OpenAI.Reasoning"
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
                   "background": {
                     "anyOf": [
                       {
@@ -13423,7 +13773,18 @@
                         "type": "null"
                       }
                     ],
+                    "deprecated": true,
                     "default": "disabled"
+                  },
+                  "reasoning": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/components/schemas/OpenAI.Reasoning"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
                   },
                   "input": {
                     "$ref": "#/components/schemas/OpenAI.InputParam"
@@ -18680,6 +19041,32 @@
         ],
         "description": "Agentic identity credential definition"
       },
+      "AgentsSafeRolloutExperiment": {
+        "type": "object",
+        "required": [
+          "type",
+          "target_agent"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "agents_safe_rollout"
+            ],
+            "description": "The A/B safe-rollout experiment kind."
+          },
+          "target_agent": {
+            "type": "string",
+            "description": "The name of the agent whose versions participate in the rollout."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Experiment"
+          }
+        ],
+        "description": "An experiment that safely rolls traffic between versions of one agent."
+      },
       "ApiErrorResponse": {
         "type": "object",
         "required": [
@@ -21684,6 +22071,32 @@
           ]
         }
       },
+      "CreateAgentsSafeRolloutExperimentRequest": {
+        "type": "object",
+        "required": [
+          "type",
+          "target_agent"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "agents_safe_rollout"
+            ],
+            "description": "The A/B safe-rollout experiment kind."
+          },
+          "target_agent": {
+            "type": "string",
+            "description": "The name of the agent targeted by the experiment."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CreateExperimentRequest"
+          }
+        ],
+        "description": "Request body for creating an agents_safe_rollout experiment."
+      },
       "CreateEvalRequest": {
         "type": "object",
         "required": [
@@ -21816,6 +22229,66 @@
           }
         },
         "title": "CreateEvalRunRequest"
+      },
+      "CreateExperimentRequest": {
+        "type": "object",
+        "required": [
+          "type",
+          "display_name",
+          "variants"
+        ],
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ExperimentType"
+              }
+            ],
+            "description": "The discriminated experiment kind."
+          },
+          "display_name": {
+            "type": "string",
+            "description": "A human-readable display name for the experiment."
+          },
+          "description": {
+            "type": "string",
+            "description": "A human-readable description of the experiment."
+          },
+          "duration_in_days": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The experiment duration in days. Drives only the service-managed scorecard refresh horizon; it does not end the experiment. Defaults to 7 when omitted."
+          },
+          "variants": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExperimentVariant"
+            },
+            "description": "The list of variants. Each variant id is an agent version number. Exactly one must have role 'control'. traffic_percentage must sum to 100."
+          },
+          "metrics": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExperimentMetric"
+            },
+            "description": "Optional list of metrics to attach to the experiment."
+          },
+          "evaluation": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ExperimentEvaluation"
+              }
+            ],
+            "description": "Optional scheduled evaluation configuration."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "agents_safe_rollout": "#/components/schemas/CreateAgentsSafeRolloutExperimentRequest"
+          }
+        },
+        "description": "Request body for creating an experiment."
       },
       "CreateSkillVersionFromFilesBody": {
         "type": "object",
@@ -24923,6 +25396,40 @@
           ]
         }
       },
+      "EvaluatorMetricSource": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "evaluator"
+            ],
+            "description": "The evaluator source kind."
+          },
+          "evaluator_name": {
+            "type": "string",
+            "description": "The evaluator name."
+          },
+          "evaluator_version": {
+            "type": "string",
+            "description": "The evaluator version to pin."
+          },
+          "parameters": {
+            "type": "object",
+            "unevaluatedProperties": {},
+            "description": "Additional evaluator parameters."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ExperimentMetricSource"
+          }
+        ],
+        "description": "A metric sourced from an evaluator (a judge that scores agent output)."
+      },
       "EvaluatorMetricType": {
         "anyOf": [
           {
@@ -25197,9 +25704,10 @@
           "state",
           "display_name",
           "variants",
+          "metrics",
           "experiment_steps",
           "assignment_properties",
-          "metrics"
+          "created_at"
         ],
         "properties": {
           "id": {
@@ -25208,10 +25716,21 @@
             "readOnly": true
           },
           "type": {
-            "$ref": "#/components/schemas/ExperimentType"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ExperimentType"
+              }
+            ],
+            "description": "The discriminated experiment kind."
           },
           "state": {
-            "$ref": "#/components/schemas/ExperimentState"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ExperimentState"
+              }
+            ],
+            "description": "The lifecycle state of the experiment.",
+            "readOnly": true
           },
           "display_name": {
             "type": "string",
@@ -25221,13 +25740,10 @@
             "type": "string",
             "description": "A human-readable description of the experiment."
           },
-          "target_agent": {
-            "type": "string",
-            "description": "The name of the agent this experiment targets. Required for agents_safe_rollout type."
-          },
-          "duration": {
-            "type": "string",
-            "description": "The ISO 8601 duration for the experiment (e.g. 'P3D' for 3 days). Defaults to P3D when omitted."
+          "duration_in_days": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The experiment duration in days. Drives only the service-managed scorecard refresh horizon (how long scorecards keep refreshing after start); it does not end the experiment — the experiment ends only when the caller stops or promotes it. Defaults to 7 when omitted."
           },
           "variants": {
             "type": "array",
@@ -25235,6 +25751,21 @@
               "$ref": "#/components/schemas/ExperimentVariant"
             },
             "description": "The list of variants participating in the experiment."
+          },
+          "metrics": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExperimentMetric"
+            },
+            "description": "The list of metrics attached to the experiment."
+          },
+          "evaluation": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ExperimentEvaluation"
+              }
+            ],
+            "description": "Configuration and service-managed resources for scheduled evaluation."
           },
           "experiment_steps": {
             "type": "array",
@@ -25245,36 +25776,55 @@
             "readOnly": true
           },
           "assignment_properties": {
-            "$ref": "#/components/schemas/ExperimentAssignmentProperties"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ExperimentAssignmentProperties"
+              }
+            ],
+            "description": "Properties controlling how traffic is assigned to variants.",
+            "readOnly": true
           },
-          "metrics": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ExperimentMetric"
-            },
-            "description": "The list of metrics (evaluation rules or inline evaluators) attached to the experiment."
+          "created_at": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              }
+            ],
+            "description": "The Unix timestamp (seconds) when the experiment was created.",
+            "readOnly": true
           },
           "started_at": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true,
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "description": "The Unix timestamp (seconds) when the experiment was started. Null if not yet started.",
             "readOnly": true
           },
-          "scheduled_start_at": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true,
-            "description": "The scheduled start time for the experiment (Unix timestamp). Null if started immediately."
-          },
-          "scheduled_end_at": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true,
-            "description": "The scheduled end time for the experiment (Unix timestamp). Null if no end is scheduled."
+          "end_at": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The actual end time (Unix seconds), set when the experiment is stopped or promoted. Null while the experiment is created or running.",
+            "readOnly": true
           }
         },
-        "description": "Represents an experiment that binds version routing to a lifecycle for A/B testing."
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "agents_safe_rollout": "#/components/schemas/AgentsSafeRolloutExperiment"
+          }
+        },
+        "description": "A materialized experiment that binds version routing to a lifecycle for A/B testing."
       },
       "ExperimentAssignmentProperties": {
         "type": "object",
@@ -25316,6 +25866,26 @@
         },
         "description": "A contiguous range of hash buckets assigned to a variant."
       },
+      "ExperimentEvaluation": {
+        "type": "object",
+        "properties": {
+          "model": {
+            "type": "string",
+            "description": "The deployed model used by evaluator-backed metrics."
+          },
+          "eval_id": {
+            "type": "string",
+            "description": "The service-managed evaluation group identifier.",
+            "readOnly": true
+          },
+          "schedule_id": {
+            "type": "string",
+            "description": "The service-managed schedule identifier.",
+            "readOnly": true
+          }
+        },
+        "description": "Configuration and service-managed resources for scheduled experiment evaluation."
+      },
       "ExperimentMetric": {
         "type": "object",
         "required": [
@@ -25328,13 +25898,60 @@
             "description": "The caller-defined metric name, unique within the experiment."
           },
           "desired_direction": {
-            "$ref": "#/components/schemas/ExperimentMetricDirection"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ExperimentMetricDirection"
+              }
+            ],
+            "description": "The desired direction for this metric. Optional; if omitted, the service infers from the evaluator defaults."
           },
           "definition": {
-            "$ref": "#/components/schemas/ExperimentMetricDefinition"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ExperimentMetricDefinition"
+              }
+            ],
+            "description": "The metric definition including data source and optional aggregation."
           }
         },
         "description": "A metric attached to the experiment — defines what to measure, how to aggregate, and where the data comes from."
+      },
+      "ExperimentMetricAggregation": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ExperimentMetricAggregationType"
+              }
+            ],
+            "description": "The aggregation function."
+          },
+          "percentile": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The percentile value (e.g. 95). Required when type is 'percentile'."
+          }
+        },
+        "description": "Aggregation configuration for a metric."
+      },
+      "ExperimentMetricAggregationType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "average",
+              "percentile"
+            ]
+          }
+        ],
+        "description": "The aggregation function for a metric."
       },
       "ExperimentMetricDefinition": {
         "type": "object",
@@ -25343,10 +25960,20 @@
         ],
         "properties": {
           "source": {
-            "$ref": "#/components/schemas/ExperimentMetricSource"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ExperimentMetricSource"
+              }
+            ],
+            "description": "The source of the metric data."
           },
           "aggregation": {
-            "$ref": "#/components/schemas/ExperimentMetricAggregation"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ExperimentMetricAggregation"
+              }
+            ],
+            "description": "Optional aggregation configuration. If omitted, the service uses the evaluator's default aggregation."
           }
         },
         "description": "The definition of a metric — wraps the data source and optional aggregation."
@@ -25360,44 +25987,36 @@
             "type": "string",
             "enum": [
               "increase",
-              "decrease"
+              "decrease",
+              "neutral"
             ]
           }
         ],
         "description": "The desired direction for a metric value."
       },
-      "ExperimentMetricAggregationType": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "average",
-              "percentile",
-              "rate"
-            ]
-          }
-        ],
-        "description": "The aggregation function for a metric."
-      },
-      "ExperimentMetricAggregation": {
+      "ExperimentMetricSource": {
         "type": "object",
         "required": [
           "type"
         ],
         "properties": {
           "type": {
-            "$ref": "#/components/schemas/ExperimentMetricAggregationType"
-          },
-          "percentile": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The percentile value (e.g. 95). Required when type is 'percentile'."
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ExperimentMetricSourceType"
+              }
+            ],
+            "description": "The type of metric source."
           }
         },
-        "description": "Aggregation configuration for a metric."
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "evaluator": "#/components/schemas/EvaluatorMetricSource",
+            "traces": "#/components/schemas/TracesMetricSource"
+          }
+        },
+        "description": "The source of a metric value, discriminated by type."
       },
       "ExperimentMetricSourceType": {
         "anyOf": [
@@ -25407,7 +26026,6 @@
           {
             "type": "string",
             "enum": [
-              "continuous_evaluation_rule",
               "evaluator",
               "traces"
             ]
@@ -25415,31 +26033,6 @@
         ],
         "description": "The type of metric source."
       },
-      "ExperimentMetricSource": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "$ref": "#/components/schemas/ExperimentMetricSourceType"
-          },
-          "rule_id": {
-            "type": "string",
-            "description": "The schedule ID of a continuous evaluation rule. Required when type is 'continuous_evaluation_rule'."
-          },
-          "evaluator_name": {
-            "type": "string",
-            "description": "The built-in evaluator name (e.g. 'builtin.groundedness'). Required when type is 'evaluator'."
-          },
-          "name": {
-            "type": "string",
-            "description": "The trace metric name (e.g. 'latency_ms'). Required when type is 'traces'."
-          }
-        },
-        "description": "The source of a metric value, discriminated by type."
-      },
-
       "ExperimentState": {
         "anyOf": [
           {
@@ -25469,15 +26062,25 @@
             "description": "The identifier for this experiment step."
           },
           "started_at": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true,
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "description": "The Unix timestamp (seconds) when this step started."
           },
           "stopped_at": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true,
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "description": "The Unix timestamp (seconds) when this step stopped. Null if still running."
           },
           "variant_traffic_maps": {
@@ -25516,12 +26119,22 @@
             "description": "The variant identifier. For agents_safe_rollout this is the agent version number."
           },
           "role": {
-            "$ref": "#/components/schemas/ExperimentVariantRole"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ExperimentVariantRole"
+              }
+            ],
+            "description": "The role of this variant in the experiment."
           },
           "traffic_percentage": {
             "type": "integer",
             "format": "int32",
-            "description": "The percentage of traffic to route to this variant. Required on create; may be omitted in materialized responses."
+            "description": "The percentage of traffic to route to this variant. Required on create; may be omitted in materialized responses (use experiment_steps instead)."
+          },
+          "required_sample_size": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The minimum number of observations required before this variant's scorecard results are considered reliable. Defaults to 100 when omitted."
           }
         },
         "description": "A variant participating in the experiment."
@@ -25567,183 +26180,6 @@
           }
         },
         "description": "Traffic allocation map for a single variant within an experiment step."
-      },
-      "CreateExperimentRequest": {
-        "type": "object",
-        "required": [
-          "type",
-          "display_name",
-          "variants"
-        ],
-        "properties": {
-          "type": {
-            "$ref": "#/components/schemas/ExperimentType"
-          },
-          "target_agent": {
-            "type": "string",
-            "description": "The name of the agent this experiment targets. Required for agents_safe_rollout type."
-          },
-          "display_name": {
-            "type": "string",
-            "description": "A human-readable display name for the experiment."
-          },
-          "description": {
-            "type": "string",
-            "description": "A human-readable description of the experiment."
-          },
-          "duration": {
-            "type": "string",
-            "description": "The ISO 8601 duration for the experiment (e.g. 'P3D' for 3 days). Defaults to P3D when omitted."
-          },
-          "variants": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ExperimentVariant"
-            },
-            "description": "The list of variants. Each variant id is an agent version number. Exactly one must have role 'control'. traffic_percentage must sum to 100."
-          },
-          "metrics": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ExperimentMetric"
-            },
-            "description": "Optional list of metrics (evaluation rules or inline evaluators) to attach to the experiment."
-          }
-        },
-        "description": "Request body for creating an experiment."
-      },
-      "PromoteExperimentRequest": {
-        "type": "object",
-        "required": [
-          "winner_variant_id"
-        ],
-        "properties": {
-          "winner_variant_id": {
-            "type": "string",
-            "description": "The variant id (agent version) to promote as the winner. The agent's version selector is replaced with a single 100% rule for this version."
-          }
-        },
-        "description": "Request body for promoting an experiment."
-      },
-      "ScorecardState": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "ready",
-              "computing",
-              "failed"
-            ]
-          }
-        ],
-        "description": "The state of a scorecard."
-      },
-      "ScorecardRow": {
-        "type": "object",
-        "required": [
-          "metric_name",
-          "label",
-          "desired_direction",
-          "control_stats",
-          "treatment_stats",
-          "delta",
-          "p_value"
-        ],
-        "properties": {
-          "metric_name": {
-            "type": "string",
-            "description": "The metric name this row corresponds to."
-          },
-          "label": {
-            "type": "string",
-            "description": "A human-readable label for the metric."
-          },
-          "desired_direction": {
-            "$ref": "#/components/schemas/ExperimentMetricDirection"
-          },
-          "control_stats": {
-            "$ref": "#/components/schemas/ScorecardVariantStats"
-          },
-          "treatment_stats": {
-            "$ref": "#/components/schemas/ScorecardVariantStats"
-          },
-          "delta": {
-            "type": "number",
-            "format": "double",
-            "description": "The absolute delta between treatment and control."
-          },
-          "p_value": {
-            "type": "number",
-            "format": "double",
-            "description": "The p-value for statistical significance."
-          }
-        },
-        "description": "A single row in a scorecard table — one metric comparison between control and treatment."
-      },
-      "ScorecardVariantStats": {
-        "type": "object",
-        "required": [
-          "count",
-          "average",
-          "std_dev"
-        ],
-        "properties": {
-          "count": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The number of observations."
-          },
-          "average": {
-            "type": "number",
-            "format": "double",
-            "description": "The arithmetic mean of the metric values."
-          },
-          "std_dev": {
-            "type": "number",
-            "format": "double",
-            "description": "The standard deviation of the metric values."
-          }
-        },
-        "description": "Summary statistics for a variant in a scorecard row."
-      },
-      "Scorecard": {
-        "type": "object",
-        "required": [
-          "id",
-          "experiment_id",
-          "state",
-          "artifact_uri",
-          "rows"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "The unique identifier of the scorecard.",
-            "readOnly": true
-          },
-          "experiment_id": {
-            "type": "string",
-            "description": "The experiment this scorecard belongs to."
-          },
-          "state": {
-            "$ref": "#/components/schemas/ScorecardState"
-          },
-          "artifact_uri": {
-            "type": "string",
-            "description": "The URI to the scorecard artifact in the user's blob storage."
-          },
-          "rows": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ScorecardRow"
-            },
-            "description": "The metric comparison rows."
-          }
-        },
-        "description": "A generated scorecard artifact — a table comparing metric values between variants."
       },
       "ExternalAgentDefinition": {
         "type": "object",
@@ -27364,7 +27800,7 @@
           "server_url": {
             "type": "string",
             "format": "uri",
-            "description": "The URL for the MCP server. One of `server_url` or `connector_id` must be\n  provided."
+            "description": "The URL for the MCP server. One of `server_url`, `connector_id`, or\n  `tunnel_id` must be provided."
           },
           "connector_id": {
             "type": "string",
@@ -27378,7 +27814,12 @@
               "connector_outlookemail",
               "connector_sharepoint"
             ],
-            "description": "Identifier for service connectors, like those available in ChatGPT. One of\n  `server_url` or `connector_id` must be provided. Learn more about service\n  connectors [here](/docs/guides/tools-remote-mcp#connectors).\n  Currently supported `connector_id` values are:\n  - Dropbox: `connector_dropbox`\n  - Gmail: `connector_gmail`\n  - Google Calendar: `connector_googlecalendar`\n  - Google Drive: `connector_googledrive`\n  - Microsoft Teams: `connector_microsoftteams`\n  - Outlook Calendar: `connector_outlookcalendar`\n  - Outlook Email: `connector_outlookemail`\n  - SharePoint: `connector_sharepoint`"
+            "description": "Identifier for service connectors, like those available in ChatGPT. One of\n  `server_url`, `connector_id`, or `tunnel_id` must be provided. Learn more\n  about service connectors [here](/docs/guides/tools-remote-mcp#connectors).\n  Currently supported `connector_id` values are:\n  - Dropbox: `connector_dropbox`\n  - Gmail: `connector_gmail`\n  - Google Calendar: `connector_googlecalendar`\n  - Google Drive: `connector_googledrive`\n  - Microsoft Teams: `connector_microsoftteams`\n  - Outlook Calendar: `connector_outlookcalendar`\n  - Outlook Email: `connector_outlookemail`\n  - SharePoint: `connector_sharepoint`"
+          },
+          "tunnel_id": {
+            "type": "string",
+            "pattern": "^tunnel_[a-z0-9]{32}$",
+            "description": "The Secure MCP Tunnel ID to use instead of a direct server URL. One of\n  `server_url`, `connector_id`, or `tunnel_id` must be provided."
           },
           "authorization": {
             "type": "string",
@@ -44152,7 +44593,7 @@
           "server_url": {
             "type": "string",
             "format": "uri",
-            "description": "The URL for the MCP server. One of `server_url` or `connector_id` must be\n  provided."
+            "description": "The URL for the MCP server. One of `server_url`, `connector_id`, or\n  `tunnel_id` must be provided."
           },
           "connector_id": {
             "type": "string",
@@ -44166,7 +44607,12 @@
               "connector_outlookemail",
               "connector_sharepoint"
             ],
-            "description": "Identifier for service connectors, like those available in ChatGPT. One of\n  `server_url` or `connector_id` must be provided. Learn more about service\n  connectors [here](/docs/guides/tools-remote-mcp#connectors).\n  Currently supported `connector_id` values are:\n  - Dropbox: `connector_dropbox`\n  - Gmail: `connector_gmail`\n  - Google Calendar: `connector_googlecalendar`\n  - Google Drive: `connector_googledrive`\n  - Microsoft Teams: `connector_microsoftteams`\n  - Outlook Calendar: `connector_outlookcalendar`\n  - Outlook Email: `connector_outlookemail`\n  - SharePoint: `connector_sharepoint`"
+            "description": "Identifier for service connectors, like those available in ChatGPT. One of\n  `server_url`, `connector_id`, or `tunnel_id` must be provided. Learn more\n  about service connectors [here](/docs/guides/tools-remote-mcp#connectors).\n  Currently supported `connector_id` values are:\n  - Dropbox: `connector_dropbox`\n  - Gmail: `connector_gmail`\n  - Google Calendar: `connector_googlecalendar`\n  - Google Drive: `connector_googledrive`\n  - Microsoft Teams: `connector_microsoftteams`\n  - Outlook Calendar: `connector_outlookcalendar`\n  - Outlook Email: `connector_outlookemail`\n  - SharePoint: `connector_sharepoint`"
+          },
+          "tunnel_id": {
+            "type": "string",
+            "pattern": "^tunnel_[a-z0-9]{32}$",
+            "description": "The Secure MCP Tunnel ID to use instead of a direct server URL. One of\n  `server_url`, `connector_id`, or `tunnel_id` must be provided."
           },
           "authorization": {
             "type": "string",
@@ -47018,6 +47464,21 @@
               }
             ]
           },
+          "context": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "auto",
+                  "current_turn",
+                  "all_turns"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "generate_summary": {
             "anyOf": [
               {
@@ -47181,16 +47642,6 @@
             "type": "string",
             "description": "The model deployment to use for the creation of this response."
           },
-          "reasoning": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.Reasoning"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
           "background": {
             "anyOf": [
               {
@@ -47313,6 +47764,16 @@
               "$ref": "#/components/schemas/OpenAI.OutputItem"
             },
             "description": "An array of content items generated by the model.\n  - The length and order of items in the `output` array is dependent\n  on the model's response.\n  - Rather than accessing the first item in the `output` array and\n  assuming it's an `assistant` message with the content generated by\n  the model, you might consider using the `output_text` property where\n  supported in SDKs."
+          },
+          "reasoning": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.Reasoning"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "instructions": {
             "anyOf": [
@@ -53485,6 +53946,55 @@
           }
         }
       },
+      "PatchExperimentRequest": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ExperimentType"
+              }
+            ],
+            "description": "The experiment kind. Must match the existing experiment."
+          },
+          "display_name": {
+            "type": "string",
+            "description": "The new display name. Left unchanged when omitted."
+          },
+          "description": {
+            "type": "string",
+            "description": "The new description. Left unchanged when omitted."
+          },
+          "duration_in_days": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The new duration in days. Left unchanged when omitted."
+          },
+          "variants": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExperimentVariant"
+            },
+            "description": "The replacement variant list. When provided it fully replaces the existing variants and must satisfy the same rules as on create."
+          },
+          "metrics": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExperimentMetric"
+            },
+            "description": "The replacement metric list. When provided it fully replaces the existing metrics."
+          },
+          "evaluation": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ExperimentEvaluation"
+              }
+            ],
+            "description": "The replacement scheduled evaluation configuration. Left unchanged when omitted."
+          }
+        },
+        "description": "Request body for patching an experiment. Only experiments still in the 'created' state may be\nupdated; omitted fields are left unchanged. Type-specific identity (e.g. agents_safe_rollout\ntarget_agent) is immutable and cannot be changed here."
+      },
       "PendingUploadRequest": {
         "type": "object",
         "required": [
@@ -53568,6 +54078,19 @@
             "MemoryStores=V1Preview"
           ]
         }
+      },
+      "PromoteExperimentRequest": {
+        "type": "object",
+        "required": [
+          "winner_variant_id"
+        ],
+        "properties": {
+          "winner_variant_id": {
+            "type": "string",
+            "description": "The variant id (agent version) to promote as the winner. The agent's version selector is replaced with a single 100% rule for this version."
+          }
+        },
+        "description": "Request body for promoting an experiment."
       },
       "PromotionInfo": {
         "type": "object",
@@ -55180,6 +55703,381 @@
             "Schedules=V1Preview"
           ]
         }
+      },
+      "Scorecard": {
+        "type": "object",
+        "required": [
+          "id",
+          "experiment_id",
+          "control_variant_id",
+          "treatment_variant_ids",
+          "window_start",
+          "window_end",
+          "created_at",
+          "state",
+          "rows"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique identifier of the scorecard."
+          },
+          "experiment_id": {
+            "type": "string",
+            "description": "The experiment this scorecard belongs to."
+          },
+          "control_variant_id": {
+            "type": "string",
+            "description": "The control (baseline) variant used by this scorecard."
+          },
+          "treatment_variant_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The treatment variants compared against the control in this scorecard."
+          },
+          "window_start": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              }
+            ],
+            "description": "The inclusive start of the observation window this scorecard was computed over, as a Unix timestamp (seconds)."
+          },
+          "window_end": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              }
+            ],
+            "description": "The exclusive end of the observation window this scorecard was computed over, as a Unix timestamp (seconds)."
+          },
+          "created_at": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              }
+            ],
+            "description": "The Unix timestamp (seconds) when this scorecard was generated."
+          },
+          "state": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ScorecardState"
+              }
+            ],
+            "description": "The state of the scorecard."
+          },
+          "error": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ScorecardError"
+              }
+            ],
+            "description": "Failure detail when the state is 'failed'. Null otherwise."
+          },
+          "metadata": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "type": "string"
+            },
+            "description": "Optional open key-value metadata for forward-compatible extension (e.g. compute window, template version). First-class data stays in typed fields, not here."
+          },
+          "rows": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ScorecardRow"
+            },
+            "description": "The metric comparison rows."
+          }
+        },
+        "description": "A generated scorecard artifact — a table comparing metric values between variants."
+      },
+      "ScorecardError": {
+        "type": "object",
+        "required": [
+          "code",
+          "message"
+        ],
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Stable, machine-readable failure category (e.g. 'compute_failed', 'internal_error', 'publish_failed')."
+          },
+          "message": {
+            "type": "string",
+            "description": "Human-readable (truncated) failure description."
+          }
+        },
+        "description": "Structured failure detail for a scorecard whose state is 'failed'."
+      },
+      "ScorecardMetricLevel": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "turn",
+              "conversation"
+            ]
+          }
+        ],
+        "description": "The granularity a scorecard metric is measured at."
+      },
+      "ScorecardPairComparison": {
+        "type": "object",
+        "required": [
+          "delta",
+          "p_value",
+          "treatment_effect"
+        ],
+        "properties": {
+          "delta": {
+            "type": "number",
+            "format": "double",
+            "description": "The signed delta: this variant's average minus the control's."
+          },
+          "p_value": {
+            "type": "number",
+            "format": "double",
+            "description": "The p-value for significance vs. the control."
+          },
+          "relative_difference": {
+            "anyOf": [
+              {
+                "type": "number",
+                "format": "double"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The relative difference vs. the control, or null when the control average is zero."
+          },
+          "treatment_effect": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ScorecardTreatmentEffect"
+              }
+            ],
+            "description": "The qualitative treatment effect vs. the control, classified from the p-value and thresholds."
+          }
+        },
+        "description": "A treatment variant's comparison against the scorecard's control for one metric."
+      },
+      "ScorecardRow": {
+        "type": "object",
+        "required": [
+          "metric_name",
+          "level",
+          "category",
+          "desired_direction",
+          "variants"
+        ],
+        "properties": {
+          "metric_name": {
+            "type": "string",
+            "description": "The metric name this row corresponds to."
+          },
+          "level": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ScorecardMetricLevel"
+              }
+            ],
+            "description": "The granularity this metric is measured at (turn or conversation)."
+          },
+          "category": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ExperimentMetricSourceType"
+              }
+            ],
+            "description": "The kind of source this metric is derived from (evaluator or traces)."
+          },
+          "desired_direction": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ExperimentMetricDirection"
+              }
+            ],
+            "description": "The desired direction for this metric."
+          },
+          "variants": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ScorecardVariantResult"
+            },
+            "description": "One result per variant (control plus every treatment) for this metric."
+          }
+        },
+        "description": "A single row in a scorecard table — one metric compared across every variant."
+      },
+      "ScorecardState": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "ready",
+              "computing",
+              "failed"
+            ]
+          }
+        ],
+        "description": "The state of a scorecard."
+      },
+      "ScorecardSummary": {
+        "type": "object",
+        "required": [
+          "id",
+          "experiment_id",
+          "control_variant_id",
+          "treatment_variant_ids",
+          "window_start",
+          "window_end",
+          "created_at",
+          "state",
+          "metric_count"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique identifier of the scorecard."
+          },
+          "experiment_id": {
+            "type": "string",
+            "description": "The experiment this scorecard belongs to."
+          },
+          "control_variant_id": {
+            "type": "string",
+            "description": "The control (baseline) variant used by this scorecard."
+          },
+          "treatment_variant_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The treatment variants compared against the control in this scorecard."
+          },
+          "window_start": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              }
+            ],
+            "description": "The inclusive start of the observation window this scorecard was computed over, as a Unix timestamp (seconds)."
+          },
+          "window_end": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              }
+            ],
+            "description": "The exclusive end of the observation window this scorecard was computed over, as a Unix timestamp (seconds)."
+          },
+          "created_at": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              }
+            ],
+            "description": "The Unix timestamp (seconds) when this scorecard was generated."
+          },
+          "state": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ScorecardState"
+              }
+            ],
+            "description": "The state of the scorecard."
+          },
+          "error": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ScorecardError"
+              }
+            ],
+            "description": "Failure detail when the state is 'failed'. Null otherwise."
+          },
+          "metadata": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "type": "string"
+            },
+            "description": "Optional open key-value metadata for forward-compatible extension (e.g. compute window, template version). First-class data stays in typed fields, not here."
+          },
+          "metric_count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of metric rows in the full scorecard."
+          }
+        },
+        "description": "Lightweight scorecard projection returned by list operations. The full metric rows are available only from the individual scorecard resource."
+      },
+      "ScorecardTreatmentEffect": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "improved",
+              "degraded",
+              "changed",
+              "inconclusive",
+              "insufficient_data",
+              "no_samples",
+              "unknown"
+            ]
+          }
+        ],
+        "description": "The qualitative outcome of a metric's treatment-vs-control comparison."
+      },
+      "ScorecardVariantResult": {
+        "type": "object",
+        "required": [
+          "variant_id",
+          "count",
+          "average",
+          "std_dev"
+        ],
+        "properties": {
+          "variant_id": {
+            "type": "string",
+            "description": "The variant identifier (for agents_safe_rollout this is the agent version number)."
+          },
+          "count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of observations."
+          },
+          "average": {
+            "type": "number",
+            "format": "double",
+            "description": "The arithmetic mean of the metric values."
+          },
+          "std_dev": {
+            "type": "number",
+            "format": "double",
+            "description": "The standard deviation of the metric values."
+          },
+          "comparison": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ScorecardPairComparison"
+              }
+            ],
+            "description": "This variant's comparison against the scorecard's control. Null for the control variant."
+          }
+        },
+        "description": "One variant's result for a metric row: its raw aggregates plus, for treatment variants, the comparison against the control."
       },
       "SessionDirectoryEntry": {
         "type": "object",
@@ -56828,6 +57726,35 @@
             "Evaluations=V1Preview"
           ]
         }
+      },
+      "TracesMetricSource": {
+        "type": "object",
+        "required": [
+          "type",
+          "attribute_names"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "traces"
+            ],
+            "description": "The traces source kind."
+          },
+          "attribute_names": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Trace attribute names the metric value is read from. Each attribute must be numeric, or boolean (coerced to 1/0). When more than one is given, the per-event value is the sum of the attributes; a missing attribute contributes 0 (partial rows are kept), and the event value is null only when every listed attribute is null."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ExperimentMetricSource"
+          }
+        ],
+        "description": "A metric sourced from trace/event attributes."
       },
       "TracesPreviewEvalRunDataSource": {
         "type": "object",
