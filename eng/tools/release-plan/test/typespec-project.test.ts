@@ -13,7 +13,7 @@ vi.mock("node:child_process", () => {
       args: string[] | undefined = [],
       options: { cwd?: string; encoding?: string } = {},
     ): SpawnSyncReturns<string> => {
-      if (cmd === "npx" && args?.some((a) => a.includes("tsp"))) {
+      if ((cmd === "tsp.cmd" || cmd === "tsp") && args?.[0] === "compile") {
         const projectDir = options.cwd || process.cwd();
         const mockData = mockMetadataMap.get(projectDir);
         if (mockData) {
