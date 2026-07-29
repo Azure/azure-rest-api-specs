@@ -129,7 +129,7 @@ model DependencyOfRelationshipProperties is BaseRelationshipProperties;
 model DependencyOfRelationship
   is ExtensionResource<DependencyOfRelationshipProperties> {
   @doc("Name of dependencyOf relationship.")
-  @pattern("^[a-zA-Z0-9]{3,64}$")
+  @pattern("^[a-zA-Z0-9._~-]{3,64}$")
   @visibility(Lifecycle.Read)
   @key
   @path
@@ -199,7 +199,7 @@ model ServiceGroupMemberRelationshipPropertiesV2 {
 model ServiceGroupMemberRelationship
   is ExtensionResource<ServiceGroupMemberRelationshipPropertiesV2> {
   @doc("Name of ServiceGroupMember relationship.")
-  @pattern("^[a-zA-Z0-9]{3,64}$")
+  @pattern("^[a-zA-Z0-9._~-]{3,64}$")
   @visibility(Lifecycle.Read)
   @key
   @path
@@ -261,7 +261,7 @@ model ContainsRelationshipProperties {
 model ContainsRelationship
   is ExtensionResource<ContainsRelationshipProperties> {
   @doc("Name of contains relationship.")
-  @pattern("^[a-zA-Z0-9]{3,64}$")
+  @pattern("^[a-zA-Z0-9._~-]{3,64}$")
   @visibility(Lifecycle.Read)
   @key
   @path

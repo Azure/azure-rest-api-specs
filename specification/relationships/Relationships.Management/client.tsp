@@ -17,7 +17,7 @@ namespace Microsoft.Relationships {
   model DependencyOfRelationshipCreateOrUpdate
     is ExtensionResource<DependencyOfRelationshipPropertiesCreateOrUpdate> {
     @doc("Name of dependencyOf relationship.")
-    @pattern("^[a-zA-Z0-9]{3,64}$")
+    @pattern("^[a-zA-Z0-9._~-]{3,64}$")
     @key
     @path
     @segment("dependencyOf")
@@ -38,7 +38,7 @@ namespace Microsoft.Relationships {
   model ServiceGroupMemberRelationshipCreateOrUpdate
     is ExtensionResource<ServiceGroupMemberRelationshipPropertiesCreateOrUpdate> {
     @doc("Name of ServiceGroupMember relationship.")
-    @pattern("^[a-zA-Z0-9]{3,64}$")
+    @pattern("^[a-zA-Z0-9._~-]{3,64}$")
     @key
     @path
     @segment("serviceGroupMember")
