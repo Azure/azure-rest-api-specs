@@ -195,7 +195,7 @@ function buildCommentBody({
     body += `\n> ⚠️ **Package name changed** -- approvals for ${resetLanguages.join(", ")} have been reset.\n`;
   }
   body += `\n_Approver list: [.github/protected-labels.yml](../blob/${baseRef}/.github/protected-labels.yml)_\n`;
-  body += `_Process: [.github/workflows/src/namespace-approval/PACKAGE-NAME-REVIEW-PROCESS.md](../blob/${baseRef}/.github/workflows/src/namespace-approval/PACKAGE-NAME-REVIEW-PROCESS.md)_\n`;
+  body += `_Process: [.github/workflows/src/package-name-approval/PACKAGE-NAME-REVIEW-PROCESS.md](../blob/${baseRef}/.github/workflows/src/package-name-approval/PACKAGE-NAME-REVIEW-PROCESS.md)_\n`;
   body += `_Package names extracted via tsp compile with typespec-metadata emitter_`;
   return body;
 }

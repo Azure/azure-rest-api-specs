@@ -10,7 +10,7 @@ vi.mock("js-yaml", () => ({
 
 import { readFile } from "fs/promises";
 import yaml from "js-yaml";
-import validateApproval from "../../src/namespace-approval/validate-approval.js";
+import validateApproval from "../../src/package-name-approval/validate-approval.js";
 
 /** Mock protected-labels.yml content (as yaml.load would return) */
 const protectedLabelsYaml = {
