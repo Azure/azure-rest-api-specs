@@ -52,33 +52,40 @@ using Microsoft.KubernetesConfiguration;
 );
 
 // C# type customizations for backward compatibility
-@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.Resource.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
 // C# fixes: rename interface to avoid namespace conflict (§4.9)
 @@clientName(ExtensionTypes, "ExtensionTypeInterface", "csharp");
-@@clientName(ClusterScopeSettingsProperties.allowMultipleInstances,
+@@clientName(
+  ClusterScopeSettingsProperties.allowMultipleInstances,
   "IsMultipleInstancesAllowed",
   "csharp"
 );
-@@clientName(ClusterScopeSettings,
+@@clientName(
+  ClusterScopeSettings,
   "ExtensionTypeClusterScopeSettings",
   "csharp"
 );
-@@clientName(ClusterScopeSettingsProperties,
+@@clientName(
+  ClusterScopeSettingsProperties,
   "ExtensionTypeClusterScopeSettingsProperties",
   "csharp"
 );
-@@clientName(ExtensionTypePropertiesPlanInfo,
+@@clientName(
+  ExtensionTypePropertiesPlanInfo,
   "ExtensionTypePlanInfo",
   "csharp"
 );
-@@clientName(ExtensionTypePropertiesSupportedScopes,
+@@clientName(
+  ExtensionTypePropertiesSupportedScopes,
   "ExtensionTypeSupportedScopes",
   "csharp"
 );
-@@clientName(ExtensionTypeVersionForReleaseTrainPropertiesUnsupportedKubernetesVersions,
+@@clientName(
+  ExtensionTypeVersionForReleaseTrainPropertiesUnsupportedKubernetesVersions,
   "ExtensionTypeUnsupportedKubernetesVersions",
   "csharp"
 );
