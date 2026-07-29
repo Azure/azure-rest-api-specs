@@ -30346,6 +30346,31 @@
         ],
         "description": "A wrapper data source that contains a polymorphic trace source to specify how traces are selected for evaluation."
       },
+      "AzureAvatarVoiceSyncVoice": {
+        "type": "object",
+        "required": [
+          "type",
+          "model"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "avatar-voice-sync"
+            ]
+          },
+          "model": {
+            "$ref": "#/components/schemas/PersonalVoiceModel",
+            "description": "The neural model used to synthesize the avatar voice."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AzureVoice"
+          }
+        ],
+        "description": "An Azure avatar voice-synchronization configuration. The runtime derives its voice name from the avatar character and style."
+      },
       "AzureContentFilterBlocklistIdResult": {
         "type": "object",
         "required": [
@@ -30671,6 +30696,38 @@
         },
         "description": "A content filter result indicating severity level and whether content was filtered."
       },
+      "AzureCustomVoice": {
+        "type": "object",
+        "required": [
+          "type",
+          "name",
+          "endpoint_id"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "azure-custom"
+            ]
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "description": "The custom voice name."
+          },
+          "endpoint_id": {
+            "type": "string",
+            "minLength": 1,
+            "description": "The Azure Speech custom voice deployment endpoint ID."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AzureVoice"
+          }
+        ],
+        "description": "An Azure custom neural voice configuration."
+      },
       "AzureFunctionBinding": {
         "type": "object",
         "required": [
@@ -30900,6 +30957,135 @@
           ]
         }
       },
+      "AzurePersonalVoice": {
+        "type": "object",
+        "required": [
+          "type",
+          "name",
+          "model"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "azure-personal"
+            ]
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "description": "The personal voice name."
+          },
+          "model": {
+            "$ref": "#/components/schemas/PersonalVoiceModel",
+            "description": "The neural model used by the personal voice."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AzureVoice"
+          }
+        ],
+        "description": "An Azure personal voice configuration."
+      },
+      "AzureRealtimeNativeVoice": {
+        "type": "object",
+        "required": [
+          "type",
+          "name"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "azure-realtime-native"
+            ],
+            "description": "The voice kind. Always `azure-realtime-native`."
+          },
+          "name": {
+            "$ref": "#/components/schemas/AzureRealtimeNativeVoiceName",
+            "description": "The Azure realtime-native voice name."
+          }
+        },
+        "description": "An Azure realtime-native voice configuration."
+      },
+      "AzureRealtimeNativeVoiceName": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "aarti",
+              "alvaro",
+              "andrew",
+              "antonio",
+              "ava",
+              "clara",
+              "dalia",
+              "denise",
+              "diego",
+              "diya",
+              "elsa",
+              "emma",
+              "florian",
+              "francisca",
+              "hyunsu",
+              "jorge",
+              "keita",
+              "liam",
+              "meera",
+              "nanami",
+              "natasha",
+              "niwat",
+              "premwadee",
+              "remy",
+              "ryan",
+              "seraphina",
+              "sonia",
+              "sunhi",
+              "sylvie",
+              "thierry",
+              "william",
+              "xiaoxiao",
+              "ximena",
+              "yunxi"
+            ]
+          }
+        ],
+        "description": "A known Azure realtime-native voice name. Additional values may be added over time."
+      },
+      "AzureStandardVoice": {
+        "type": "object",
+        "required": [
+          "type",
+          "name"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "azure-standard"
+            ]
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "description": "The Azure neural voice name."
+          },
+          "multi_talker_speaker_name": {
+            "type": "string",
+            "description": "The speaker name used by a multi-talker voice."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AzureVoice"
+          }
+        ],
+        "description": "An Azure standard neural voice configuration."
+      },
       "AzureUserSecurityContext": {
         "type": "object",
         "properties": {
@@ -30925,36 +31111,68 @@
       "AzureVoice": {
         "type": "object",
         "required": [
-          "type",
-          "name"
+          "type"
         ],
         "properties": {
           "type": {
             "$ref": "#/components/schemas/AzureVoiceType",
             "description": "The Azure voice kind."
           },
-          "name": {
-            "type": "string",
-            "description": "The Azure neural voice name, e.g. 'en-US-AvaNeural'."
+          "temperature": {
+            "type": "number",
+            "format": "float",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "The synthesis temperature, from 0 to 1."
           },
-          "style": {
+          "custom_lexicon_url": {
             "type": "string",
-            "description": "Optional speaking style, e.g. 'cheerful'."
+            "format": "uri",
+            "description": "The URL of a custom pronunciation lexicon."
           },
-          "pitch": {
+          "custom_text_normalization_url": {
             "type": "string",
-            "description": "Optional pitch adjustment, e.g. '+5%'."
+            "format": "uri",
+            "description": "The URL of a custom text-normalization service."
           },
-          "rate": {
-            "type": "string",
-            "description": "Optional rate adjustment, e.g. '+10%'."
+          "prefer_locales": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Preferred BCP-47 locales that influence language accents."
           },
           "locale": {
             "type": "string",
-            "description": "Optional BCP-47 locale override, e.g. 'en-US'."
+            "description": "The enforced BCP-47 locale. When omitted, the language is detected from the text."
+          },
+          "style": {
+            "type": "string",
+            "description": "The speaking style, such as `cheerful` or `sad`."
+          },
+          "pitch": {
+            "type": "string",
+            "description": "The SSML-compatible pitch adjustment, such as `+5%`."
+          },
+          "rate": {
+            "type": "string",
+            "description": "The SSML-compatible speaking-rate adjustment, such as `+10%`."
+          },
+          "volume": {
+            "type": "string",
+            "description": "The SSML-compatible volume adjustment, such as `+10` or `-6dB`."
           }
         },
-        "description": "An Azure neural voice with optional prosody. Built-in voices are specified as a bare string instead.",
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "azure-standard": "#/components/schemas/AzureStandardVoice",
+            "azure-custom": "#/components/schemas/AzureCustomVoice",
+            "azure-personal": "#/components/schemas/AzurePersonalVoice",
+            "avatar-voice-sync": "#/components/schemas/AzureAvatarVoiceSyncVoice"
+          }
+        },
+        "description": "Base configuration shared by Azure synthesized voices.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -30972,12 +31190,11 @@
               "azure-standard",
               "azure-custom",
               "azure-personal",
-              "avatar-voice-sync",
-              "azure-realtime-native"
+              "avatar-voice-sync"
             ]
           }
         ],
-        "description": "The Azure voice kind.",
+        "description": "The Azure synthesized voice kind. Additional values may be added over time.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -76350,6 +76567,27 @@
         "type": "number",
         "format": "double"
       },
+      "OpenAIVoice": {
+        "type": "object",
+        "required": [
+          "type",
+          "name"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "openai"
+            ],
+            "description": "The voice kind. Always `openai`."
+          },
+          "name": {
+            "$ref": "#/components/schemas/OpenAI.VoiceIdsShared",
+            "description": "The OpenAI built-in voice name."
+          }
+        },
+        "description": "An OpenAI built-in voice configuration with an explicit type discriminator."
+      },
       "OpenApiAnonymousAuthDetails": {
         "type": "object",
         "required": [
@@ -77567,6 +77805,22 @@
           }
         },
         "description": "Represents the response for a pending upload request"
+      },
+      "PersonalVoiceModel": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "DragonLatestNeural",
+              "DragonHDOmniLatestNeural",
+              "MAI-Voice"
+            ]
+          }
+        ],
+        "description": "A known neural model for an Azure personal or avatar voice. Additional values may be added over time."
       },
       "ProceduralMemoryItem": {
         "type": "object",
@@ -81628,6 +81882,20 @@
           ]
         }
       },
+      "VoiceAgentVoice": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/OpenAIVoice"
+          },
+          {
+            "$ref": "#/components/schemas/AzureVoice"
+          },
+          {
+            "$ref": "#/components/schemas/AzureRealtimeNativeVoice"
+          }
+        ],
+        "description": "A typed voice configuration accepted by a voice agent."
+      },
       "VoiceAssistantMessageItem": {
         "type": "object",
         "properties": {
@@ -81764,15 +82032,8 @@
             "description": "The output audio format."
           },
           "voice": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "$ref": "#/components/schemas/AzureVoice"
-              }
-            ],
-            "description": "The voice. Either a built-in voice name, such as `alloy`, or an Azure neural voice object."
+            "$ref": "#/components/schemas/VoiceAgentVoice",
+            "description": "The typed voice configuration."
           },
           "speed": {
             "type": "number",
@@ -82546,46 +82807,18 @@
         }
       },
       "VoiceResponseVoice": {
-        "type": "object",
-        "required": [
-          "type",
-          "name"
-        ],
-        "properties": {
-          "type": {
-            "$ref": "#/components/schemas/VoiceResponseVoiceType",
-            "description": "The voice kind."
-          },
-          "name": {
-            "type": "string",
-            "description": "The voice name."
-          }
-        },
-        "description": "The resolved voice identity used for a response, for example `{ \"type\": \"openai\", \"name\": \"alloy\" }`.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceResponseVoiceType": {
         "anyOf": [
           {
-            "type": "string"
+            "$ref": "#/components/schemas/OpenAIVoice"
           },
           {
-            "type": "string",
-            "enum": [
-              "openai",
-              "azure-standard",
-              "azure-custom",
-              "azure-personal",
-              "avatar-voice-sync",
-              "azure-realtime-native"
-            ]
+            "$ref": "#/components/schemas/AzureVoice"
+          },
+          {
+            "$ref": "#/components/schemas/AzureRealtimeNativeVoice"
           }
         ],
-        "description": "The voice kind recorded for a response. Known values cover every voice kind supported by a voice agent; additional values may be added over time."
+        "description": "The complete typed voice configuration used for a response."
       },
       "VoiceSystemMessageItem": {
         "type": "object",
