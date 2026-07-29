@@ -283,8 +283,8 @@ by other validations in this repo):
 
 ### Where to see the results
 
-- A **"TypeSpec suppressions requiring review"** section is added to the
-  "Next Steps to Merge" PR comment, listing the new/changed suppressions with
+- A **"TypeSpec suppressions requiring review"** comment is surfaced on the
+  PR , listing the new/changed suppressions with
   their rule, source location, and justification.
 - **Inline `::warning` annotations** appear on the PR diff at each suppression's
   source location.
