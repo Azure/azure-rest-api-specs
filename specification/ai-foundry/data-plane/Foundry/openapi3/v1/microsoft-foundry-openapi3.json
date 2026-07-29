@@ -4304,149 +4304,6 @@
         ]
       }
     },
-    "/agents/{agent_name}/versions/{agent_version}/invocations/docs/asyncapi.json": {
-      "get": {
-        "operationId": "AgentInvocations_getAgentInvocationAsyncApiSpecJson",
-        "description": "Retrieves the AsyncAPI (JSON) specification for an agent version's event-driven\ninvocation contract (e.g. the `invocations_ws` WebSocket protocol). AsyncAPI is the\ncompanion to OpenAPI for streaming/bidirectional surfaces that OpenAPI cannot express.\nReturns 404 if the agent does not publish an AsyncAPI specification. Publishing is\noptional; when published, both JSON and YAML representations are available.",
-        "parameters": [
-          {
-            "name": "agent_name",
-            "in": "path",
-            "required": true,
-            "description": "The name of the agent.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "agent_version",
-            "in": "path",
-            "required": true,
-            "description": "The version of the agent.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "unevaluatedProperties": {}
-                }
-              }
-            }
-          },
-          "4XX": {
-            "description": "Client error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          },
-          "5XX": {
-            "description": "Server error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Agent Invocations"
-        ]
-      }
-    },
-    "/agents/{agent_name}/versions/{agent_version}/invocations/docs/asyncapi.yaml": {
-      "get": {
-        "operationId": "AgentInvocations_getAgentInvocationAsyncApiSpecYaml",
-        "description": "Retrieves the AsyncAPI (YAML) specification for an agent version's event-driven\ninvocation contract. Companion to `getAgentInvocationAsyncApiSpecJson`; the path\nextension is authoritative for the returned content type (no `Accept` negotiation).\nReturns 404 if the agent does not publish an AsyncAPI specification.",
-        "parameters": [
-          {
-            "name": "agent_name",
-            "in": "path",
-            "required": true,
-            "description": "The name of the agent.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "agent_version",
-            "in": "path",
-            "required": true,
-            "description": "The version of the agent.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/yaml": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "4XX": {
-            "description": "Client error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          },
-          "5XX": {
-            "description": "Server error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Agent Invocations"
-        ]
-      }
-    },
     "/agents/{agent_name}/versions/{agent_version}/sessions/{session_id}:logstream": {
       "get": {
         "operationId": "Agents_getSessionLogStream",
@@ -29394,6 +29251,11 @@
             "description": "The operational state of the agent. Controls whether the agent endpoint accepts or rejects requests.",
             "readOnly": true
           },
+          "state_source": {
+            "$ref": "#/components/schemas/AgentStateSource",
+            "description": "The source of the agent's operational state. When the agent is disabled, indicates where the disabled state originates from. Empty when not derived from a specific source.",
+            "readOnly": true
+          },
           "versions": {
             "type": "object",
             "properties": {
@@ -29533,6 +29395,21 @@
           }
         ],
         "description": "The operational state of an agent."
+      },
+      "AgentStateSource": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "agent_instance_identity",
+              "agent_blueprint"
+            ]
+          }
+        ],
+        "description": "Indicates the source of an agent's operational state. Empty when the state is not derived from a specific source."
       },
       "AgentTaxonomyInput": {
         "type": "object",
@@ -33148,6 +33025,7 @@
           "mapping": {
             "simple_qna": "#/components/schemas/SimpleQnADataGenerationJobOptions",
             "traces": "#/components/schemas/TracesDataGenerationJobOptions",
+            "task_generation": "#/components/schemas/TaskGenerationDataGenerationJobOptions",
             "tool_use": "#/components/schemas/ToolUseFineTuningDataGenerationJobOptions"
           }
         },
@@ -33343,7 +33221,8 @@
             "enum": [
               "simple_qna",
               "traces",
-              "tool_use"
+              "tool_use",
+              "task_generation"
             ]
           }
         ],
@@ -73989,7 +73868,6 @@
             "a2a_preview": "#/components/schemas/A2APreviewTool",
             "work_iq_preview": "#/components/schemas/WorkIQPreviewTool",
             "fabric_iq_preview": "#/components/schemas/FabricIQPreviewTool",
-            "web_iq_preview": "#/components/schemas/WebIQPreviewTool",
             "memory_search_preview": "#/components/schemas/MemorySearchPreviewTool",
             "function": "#/components/schemas/OpenAI.FunctionTool",
             "mcp": "#/components/schemas/OpenAI.MCPTool",
@@ -74527,7 +74405,6 @@
               "memory_search_preview",
               "work_iq_preview",
               "fabric_iq_preview",
-              "web_iq_preview",
               "toolbox_search_preview",
               "azure_ai_search",
               "azure_function",
@@ -80105,6 +79982,32 @@
         },
         "description": "Base class for targets with discriminator support."
       },
+      "TaskGenerationDataGenerationJobOptions": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "task_generation"
+            ],
+            "description": "The data generation job type, which is TaskGeneration for this model."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DataGenerationJobOptions"
+          }
+        ],
+        "description": "The options for a task generation data generation job. Use with multiturn evaluation scenarios and with prompt, file, or agent sources. Generated dataset rows include fields such as `id`, `category`, `test_case_description`, and `desired_num_turns`.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
+      },
       "TaxonomyCategory": {
         "type": "object",
         "required": [
@@ -80662,7 +80565,6 @@
             "reminder_preview": "#/components/schemas/ReminderPreviewToolboxTool",
             "work_iq_preview": "#/components/schemas/WorkIQPreviewToolboxTool",
             "fabric_iq_preview": "#/components/schemas/FabricIQPreviewToolboxTool",
-            "web_iq_preview": "#/components/schemas/WebIQPreviewToolboxTool",
             "toolbox_search_preview": "#/components/schemas/ToolboxSearchPreviewToolboxTool",
             "toolbox_search": "#/components/schemas/ToolSearchToolboxTool"
           }
@@ -80683,7 +80585,6 @@
           "reminder_preview",
           "work_iq_preview",
           "fabric_iq_preview",
-          "web_iq_preview",
           "toolbox_search",
           "toolbox_search_preview"
         ],
@@ -81510,6 +81411,11 @@
           "state": {
             "$ref": "#/components/schemas/AgentState",
             "description": "The operational state of the agent. Controls whether the agent endpoint accepts or rejects requests.",
+            "readOnly": true
+          },
+          "state_source": {
+            "$ref": "#/components/schemas/AgentStateSource",
+            "description": "The source of the agent's operational state. When the agent is disabled, indicates where the disabled state originates from. Empty when not derived from a specific source.",
             "readOnly": true
           },
           "agent_endpoint": {
@@ -82852,115 +82758,6 @@
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "WebIQPreviewTool": {
-        "type": "object",
-        "required": [
-          "type",
-          "project_connection_id"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "web_iq_preview"
-            ],
-            "description": "The object type, which is always 'web_iq_preview'."
-          },
-          "project_connection_id": {
-            "type": "string",
-            "description": "The ID of the WebIQ project connection."
-          },
-          "server_label": {
-            "type": "string",
-            "description": "The label of the WebIQ MCP server to connect to."
-          },
-          "server_url": {
-            "type": "string",
-            "format": "uri",
-            "description": "The URL of the WebIQ MCP server. If not provided, the URL from the project connection will be used."
-          },
-          "require_approval": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.MCPToolRequireApproval"
-              },
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Whether the agent requires approval before executing actions. Default is always.",
-            "default": "always"
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.Tool"
-          }
-        ],
-        "description": "A WebIQ server-side tool.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "preview_tool"
-          ]
-        }
-      },
-      "WebIQPreviewToolboxTool": {
-        "type": "object",
-        "required": [
-          "type",
-          "project_connection_id"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "web_iq_preview"
-            ]
-          },
-          "project_connection_id": {
-            "type": "string",
-            "description": "The ID of the WebIQ project connection."
-          },
-          "server_label": {
-            "type": "string",
-            "description": "The label of the WebIQ MCP server to connect to."
-          },
-          "server_url": {
-            "type": "string",
-            "format": "uri",
-            "description": "The URL of the WebIQ MCP server. If not provided, the URL from the project connection will be used."
-          },
-          "require_approval": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.MCPToolRequireApproval"
-              },
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Whether the agent requires approval before executing actions. Default is always.",
-            "default": "always"
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/ToolboxTool"
-          }
-        ],
-        "description": "A WebIQ tool stored in a toolbox.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "preview_tool"
           ]
         }
       },
