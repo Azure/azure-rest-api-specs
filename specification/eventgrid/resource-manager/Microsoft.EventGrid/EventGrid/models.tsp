@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.Core;
 using Azure.ResourceManager.Foundations;
@@ -3582,6 +3584,12 @@ model NamespaceProperties {
    * Auto-scale configuration for the namespace resource
    */
   autoScaleConfiguration?: AutoScaleConfiguration;
+
+  /**
+   * This property indicates if IPv6 is enabled for the namespace.
+   */
+  @added(Versions.v2026_06_15_preview)
+  ipV6Enabled?: boolean;
 }
 
 /**
@@ -4023,6 +4031,12 @@ model NamespaceUpdateParameterProperties {
    * Auto-scale configuration for the namespace resource
    */
   autoScaleConfiguration?: UpdateAutoScaleConfiguration;
+
+  /**
+   * This property indicates if IPv6 is enabled for the namespace.
+   */
+  @added(Versions.v2026_06_15_preview)
+  ipV6Enabled?: boolean;
 }
 
 /**
