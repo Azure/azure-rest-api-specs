@@ -470,12 +470,6 @@ union PersonalVoiceModel {
 
   @doc("The MAI-Voice-1 model.")
   mai_voice_1: "MAI-Voice-1",
-
-  @doc("The latest Phoenix model.")
-  phoenix_latest_neural: "PhoenixLatestNeural",
-
-  @doc("The Phoenix V2 model.")
-  phoenix_v2_neural: "PhoenixV2Neural",
 }
 
 @doc("An Azure realtime-native voice configuration.")
