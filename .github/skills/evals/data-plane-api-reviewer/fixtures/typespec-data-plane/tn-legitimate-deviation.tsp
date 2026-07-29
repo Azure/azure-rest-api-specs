@@ -16,7 +16,6 @@ namespace TextAnalyzer;
 @doc("Service API versions.")
 enum Versions {
   @doc("The 2026-01-01 stable version.")
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2026_01_01: "2026-01-01",
 }
 

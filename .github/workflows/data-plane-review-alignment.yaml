@@ -24,6 +24,12 @@
 #      harness loads - not only in the agent file, which it does not. A format defined in the
 #      wrong place is invisible to every eval that grades it, and surfaces as a ~100%
 #      false-failure rate after a 30-minute run rather than as a failed check.
+#   6. Every eval fixture must compile. All 15 shipped carrying
+#      `@useDependency(Azure.Core.Versions.v1_0_Preview_2)` -- a namespace removed from
+#      typespec-azure-core, referenced by zero real specs in this repo -- so not one of them
+#      had ever compiled. vally never compiles fixtures, so nothing surfaced it. A fixture
+#      that does not compile cannot be trusted to mean what it says, and a true negative
+#      that is silently invalid measures nothing.
 name: "Data-Plane Review Alignment"
 
 on:
@@ -66,3 +72,35 @@ jobs:
             const { default: checkDataPlaneReviewAlignment } =
               await import('${{ github.workspace }}/.github/workflows/src/data-plane-review-alignment.js');
             await checkDataPlaneReviewAlignment({ core, rootDir: '${{ github.workspace }}' });
+
+  compile-fixtures:
+    name: Compile Data-Plane Eval Fixtures
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          sparse-checkout: |
+            .github/actions/
+            .github/skills/evals/data-plane-api-reviewer/fixtures/
+            package.json
+            package-lock.json
+          sparse-checkout-cone-mode: false
+
+      - uses: ./.github/actions/setup-node-install-deps
+
+      # Errors fail the job; warnings are printed but tolerated, because some
+      # fixtures deliberately seed linter-owned defects for the interlock evals.
+      - name: Compile every fixture
+        run: |
+          failed=0
+          for f in $(git ls-files '.github/skills/evals/data-plane-api-reviewer/fixtures/**/*.tsp'); do
+            echo "::group::$f"
+            if npx tsp compile "$f" --no-emit --pretty false; then
+              echo "ok"
+            else
+              echo "::error file=$f::Eval fixture does not compile"
+              failed=1
+            fi
+            echo "::endgroup::"
+          done
+          exit $failed

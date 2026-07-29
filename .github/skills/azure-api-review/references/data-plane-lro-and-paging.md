@@ -85,39 +85,49 @@ final result. A linkage that compiles but points at the wrong operation produces
 an SDK poller that never terminates -- the linter checks that a link exists, not
 that it is correct.
 
-### DP-LRO-05: Custom status monitors must be annotated
+### DP-LRO-05: Custom status monitors -- the parts the linter does not check
 
 - **Rule ID:** `DP-LRO-05`
-- **Severity:** Warning
+- **Severity:** Suggestion
 
-A service that does not use the `Azure.Core` LRO templates -- typically a
-grandfathered LRO with a hand-rolled status monitor -- must still tell the
-emitters how to read it. Without the annotations the shape is legible to a human
-and opaque to every SDK generator, so pollers are hand-written per language.
+A service with a hand-rolled status monitor -- typically a grandfathered LRO --
+must tell the emitters how to read it, or the shape is legible to a human and
+opaque to every SDK generator.
 
-On a custom status monitor, check for:
+**Most of this is linter-owned; check before reporting.** Verified empirically
+against `@azure-tools/typespec-azure-core` 0.70.0: a monitor whose status union
+uses a bespoke vocabulary (`Finished`/`Broken`/...) and marks nothing fails
+compilation with `lro-status-missing` (**error**) plus
+`polling-operation-no-status-monitor` (warning). A service therefore cannot ship
+a custom monitor without either `@lroSucceeded`/`@lroFailed` or the literal
+`Succeeded`/`Failed` values the linter recognises by name. **Never raise a
+finding for a missing `@lroSucceeded` or `@lroFailed`** -- it is 🔒, the build
+has already failed, and repeating it helps nobody.
 
-| Decorator         | Applies to                           | Marks                                          |
-| ----------------- | ------------------------------------ | ---------------------------------------------- |
-| `@lroStatus`      | `Enum` \| `Union` \| `ModelProperty` | the property or type carrying operation status |
-| `@lroSucceeded`   | `EnumMember` \| `UnionVariant`       | the terminal success state                     |
-| `@lroFailed`      | `EnumMember` \| `UnionVariant`       | the terminal failure state                     |
-| `@lroCanceled`    | `EnumMember` \| `UnionVariant`       | the terminal cancellation state                |
-| `@lroResult`      | `ModelProperty`                      | the result on success                          |
-| `@lroErrorResult` | `ModelProperty`                      | the error on failure                           |
+What the linter does **not** check, and you therefore own:
 
-All are in the `Azure.Core` namespace.
+| Decorator         | Applies to                     | Marks                           |
+| ----------------- | ------------------------------ | ------------------------------- |
+| `@lroCanceled`    | `EnumMember` \| `UnionVariant` | the terminal cancellation state |
+| `@lroResult`      | `ModelProperty`                | the result on success           |
+| `@lroErrorResult` | `ModelProperty`                | the error on failure            |
 
-`@lroStatus` alone is not enough and is the common partial adoption: it says
-_where_ status lives but not _which values are terminal_, so a generated poller
-cannot tell "Succeeded" from any other string. **Flag a custom `@lroStatus`
-monitor whose terminal states are not marked** with `@lroSucceeded` /
-`@lroFailed` (and `@lroCanceled` where the union has a cancelled state).
+All sit in the `Azure.Core` namespace alongside the linter-enforced
+`@lroStatus`, `@lroSucceeded` and `@lroFailed`.
 
-Prefer, and say so once: a service adopting the standard `Azure.Core` LRO
-templates gets all of this by construction. Raise that as a Suggestion, not a
-Blocking finding -- an existing service's monitor is usually grandfathered and
-changing it is breaking.
+Raise, at Suggestion severity:
+
+- A status union with a cancellation state that is not marked `@lroCanceled`.
+  It compiles clean, and a generated poller treats cancellation as an
+  unrecognised non-terminal state -- so the poller hangs on a cancelled
+  operation.
+- A monitor producing a result or an error with no `@lroResult` /
+  `@lroErrorResult`, so neither is typed for the SDK. This overlaps
+  `DP-LRO-01`; report it once, under whichever rule fits better.
+
+Never Blocking: an existing service's monitor is usually grandfathered and
+changing it is breaking. For a genuinely new service, note once that the
+standard `Azure.Core` LRO templates provide all of this by construction.
 
 ---
 

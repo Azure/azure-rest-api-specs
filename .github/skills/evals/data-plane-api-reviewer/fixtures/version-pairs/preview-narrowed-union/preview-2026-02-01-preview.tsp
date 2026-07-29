@@ -16,11 +16,9 @@ namespace ExperimentRunner;
 @doc("Service API versions.")
 enum Versions {
   @doc("The 2026-01-01-preview version.")
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2026_01_01_preview: "2026-01-01-preview",
 
   @doc("The 2026-02-01-preview version.")
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2026_02_01_preview: "2026-02-01-preview",
 }
 

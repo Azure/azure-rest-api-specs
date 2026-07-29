@@ -119,11 +119,28 @@ One fixture per review area, each seeded densely.
 | `typespec-data-plane/visibility-and-secrets.tsp` | `DP-VIS-02` ×2 (readable credential, no `@secret`), `DP-VIS-03` ×2 (secret reachable from list), `DP-VIS-01` (write-only non-secret), `DP-VIS-05` ×2 (server-assigned but writable), `DP-VIS-06` (optional *and* nullable) | `eval-visibility-and-secrets.yaml` |
 | `version-pairs/stable-removed-property/`       | `DP-VERSION-01` ×4 (type `int32`→`float64`, property removed, open union closed and a member dropped, optional request property made required) and `DP-VERSION-03` (no `@added`/`@removed`/`@renamedFrom` anywhere) | `eval-versioning.yaml`         |
 
-## Not compiled
+## Compilation
 
-No fixture is under `specification/`, none is a real service, and none is
-compiled by CI. Several would not `tsp compile` cleanly — that is intentional
-for the ones seeding structural defects.
+Every fixture **must** `tsp compile` cleanly (errors; warnings are tolerated,
+because some fixtures deliberately seed linter-owned defects for the interlock
+evals). The `compile-fixtures` job in
+[`.github/workflows/data-plane-review-alignment.yaml`](../../../../workflows/data-plane-review-alignment.yaml)
+enforces this.
+
+This section previously claimed non-compilation was intentional for fixtures
+seeding structural defects. That was wrong, and it hid a real bug: all 15
+fixtures carried `@useDependency(Azure.Core.Versions.v1_0_Preview_2)`, and
+`Azure.Core.Versions` no longer exists in `@azure-tools/typespec-azure-core`
+(the string `v1_0_Preview` appears nowhere in 0.70.0, and zero specs under
+`specification/` reference it). **Not one fixture had ever compiled.** The eval
+harness never compiles fixtures, so nothing surfaced it.
+
+A fixture that does not compile cannot be trusted to mean what it says, and a
+true negative that is silently invalid measures nothing. Seeded defects are
+*design* defects — CRUD-in-disguise, a missing `target`, an unreachable terminal
+state — and every one of them is expressible in TypeSpec that compiles.
+
+No fixture is under `specification/`, and none is a real service.
 
 ## Enforcement
 
