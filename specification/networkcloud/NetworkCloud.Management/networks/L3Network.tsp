@@ -11,20 +11,21 @@ namespace Microsoft.NetworkCloud;
 /**
  * The name of the L3 network.
  */
-model L3NetworkNameParameter
-  is ResourceNameParameter<
-    Resource = L3Network,
-    KeyName = "l3NetworkName",
-    SegmentName = "l3Networks",
-    NamePattern = "^([a-zA-Z0-9][a-zA-Z0-9-_]{0,28}[a-zA-Z0-9])$"
-  >;
+model L3NetworkNameParameter is ResourceNameParameter<
+  Resource = L3Network,
+  KeyName = "l3NetworkName",
+  SegmentName = "l3Networks",
+  NamePattern = "^([a-zA-Z0-9][a-zA-Z0-9-_]{0,28}[a-zA-Z0-9])$"
+>;
 
 /**
  * L3Network represents a network that utilizes a single isolation domain set up for layer-3 resources.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "legacy resource using legacy features"
-model L3Network
-  is Azure.ResourceManager.TrackedResource<L3NetworkProperties, false> {
+model L3Network is Azure.ResourceManager.TrackedResource<
+  L3NetworkProperties,
+  false
+> {
   ...L3NetworkNameParameter;
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
   ...RequiredExtendedLocationProperty;

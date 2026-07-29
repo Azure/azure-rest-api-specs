@@ -763,15 +763,48 @@ using TypeSpec.Versioning;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(DdosProtectionPlan.properties);
 
-@@clientLocation(DscpConfigurations.get, "DscpConfiguration");
-@@clientLocation(DscpConfigurations.createOrUpdate, "DscpConfiguration");
+@@clientLocation(DscpConfigurations.get, "DscpConfiguration", "!javascript");
+@@clientLocation(
+  DscpConfigurations.get,
+  "DscpConfigurationOperations",
+  "javascript"
+);
+@@clientLocation(
+  DscpConfigurations.createOrUpdate,
+  "DscpConfiguration",
+  "!javascript"
+);
+@@clientLocation(
+  DscpConfigurations.createOrUpdate,
+  "DscpConfigurationOperations",
+  "javascript"
+);
 @@clientName(
   DscpConfigurations.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientLocation(DscpConfigurations.delete, "DscpConfiguration");
-@@clientLocation(DscpConfigurations.list, "DscpConfiguration");
-@@clientLocation(DscpConfigurations.listAll, "DscpConfiguration");
+@@clientLocation(DscpConfigurations.delete, "DscpConfiguration", "!javascript");
+@@clientLocation(
+  DscpConfigurations.delete,
+  "DscpConfigurationOperations",
+  "javascript"
+);
+@@clientLocation(DscpConfigurations.list, "DscpConfiguration", "!javascript");
+@@clientLocation(
+  DscpConfigurations.list,
+  "DscpConfigurationOperations",
+  "javascript"
+);
+@@clientLocation(
+  DscpConfigurations.listAll,
+  "DscpConfiguration",
+  "!javascript"
+);
+@@clientLocation(
+  DscpConfigurations.listAll,
+  "DscpConfigurationOperations",
+  "javascript"
+);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(DscpConfiguration.properties);
 
@@ -1030,7 +1063,13 @@ using TypeSpec.Versioning;
 @@clientName(NetworkManagers.post::parameters.body, "parameters");
 @@clientLocation(
   NetworkManagers.networkManagerDeploymentStatusList,
-  "NetworkManagerDeploymentStatus"
+  "NetworkManagerDeploymentStatus",
+  "!javascript"
+);
+@@clientLocation(
+  NetworkManagers.networkManagerDeploymentStatusList,
+  "NetworkManagerDeploymentStatusOperations",
+  "javascript"
 );
 @@clientName(NetworkManagers.networkManagerDeploymentStatusList, "List");
 @@clientName(
@@ -1334,10 +1373,25 @@ using TypeSpec.Versioning;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(NetworkVirtualApplianceSku.properties);
 
-@@clientLocation(InboundSecurityRuleOperationGroup.get, "InboundSecurityRule");
+@@clientLocation(
+  InboundSecurityRuleOperationGroup.get,
+  "InboundSecurityRule",
+  "!javascript"
+);
+@@clientLocation(
+  InboundSecurityRuleOperationGroup.get,
+  "InboundSecurityRuleOperations",
+  "javascript"
+);
 @@clientLocation(
   InboundSecurityRuleOperationGroup.createOrUpdate,
-  "InboundSecurityRule"
+  "InboundSecurityRule",
+  "!javascript"
+);
+@@clientLocation(
+  InboundSecurityRuleOperationGroup.createOrUpdate,
+  "InboundSecurityRuleOperations",
+  "javascript"
 );
 @@clientName(
   InboundSecurityRuleOperationGroup.createOrUpdate::parameters.resource,
@@ -1939,14 +1993,26 @@ using TypeSpec.Versioning;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(HubRouteTable.properties);
 
-@@clientLocation(RoutingIntents.get, "RoutingIntent");
-@@clientLocation(RoutingIntents.createOrUpdate, "RoutingIntent");
+@@clientLocation(RoutingIntents.get, "RoutingIntent", "!javascript");
+@@clientLocation(RoutingIntents.get, "RoutingIntentOperations", "javascript");
+@@clientLocation(RoutingIntents.createOrUpdate, "RoutingIntent", "!javascript");
+@@clientLocation(
+  RoutingIntents.createOrUpdate,
+  "RoutingIntentOperations",
+  "javascript"
+);
 @@clientName(
   RoutingIntents.createOrUpdate::parameters.resource,
   "routingIntentParameters"
 );
-@@clientLocation(RoutingIntents.delete, "RoutingIntent");
-@@clientLocation(RoutingIntents.list, "RoutingIntent");
+@@clientLocation(RoutingIntents.delete, "RoutingIntent", "!javascript");
+@@clientLocation(
+  RoutingIntents.delete,
+  "RoutingIntentOperations",
+  "javascript"
+);
+@@clientLocation(RoutingIntents.list, "RoutingIntent", "!javascript");
+@@clientLocation(RoutingIntents.list, "RoutingIntentOperations", "javascript");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(RoutingIntent.properties);
 
@@ -2073,7 +2139,13 @@ using TypeSpec.Versioning;
 
 @@clientLocation(
   ServiceTagInformationOperationGroup.list,
-  "ServiceTagInformation"
+  "ServiceTagInformation",
+  "!javascript"
+);
+@@clientLocation(
+  ServiceTagInformationOperationGroup.list,
+  "ServiceTagInformationOperations",
+  "javascript"
 );
 
 @@clientLocation(UsagesOperationGroup.list, "Usages");
