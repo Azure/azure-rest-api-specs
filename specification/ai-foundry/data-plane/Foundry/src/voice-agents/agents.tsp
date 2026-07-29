@@ -186,9 +186,8 @@ model VoiceAudioOutputConfig {
   @doc("The output audio format.")
   format?: VoiceAudioFormat;
 
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "voice is a built-in voice name (bare string) or an Azure neural voice object."
-  @doc("The voice. Either a built-in voice name, such as `alloy`, or an Azure neural voice object.")
-  voice?: string | AzureVoice;
+  @doc("The voice. Either a built-in OpenAI voice name, such as `alloy`, or a typed voice configuration.")
+  voice?: VoiceAgentVoice;
 
   @doc("The speaking speed multiplier, from 0.25 to 1.5. Defaults to 1.")
   @minValue(0.25)
@@ -307,39 +306,257 @@ model VoiceInputTranscription {
   prompt?: string;
 }
 
-@doc("""
-  An Azure neural voice with optional prosody. Built-in voices are specified as a bare string instead.
-  """)
+@doc("A voice configuration accepted by a voice agent. Built-in OpenAI voices may also be specified as a bare string.")
+union VoiceAgentVoice {
+  OpenAI.VoiceIdsShared,
+  OpenAIVoice,
+  AzureVoice,
+  AzureRealtimeNativeVoice,
+}
+
+@doc("An OpenAI built-in voice configuration with an explicit type discriminator.")
+model OpenAIVoice {
+  @doc("The voice kind. Always `openai`.")
+  type: "openai";
+
+  @doc("The OpenAI built-in voice name.")
+  name: OpenAI.VoiceIdsShared;
+}
+
+@doc("Base configuration shared by Azure synthesized voices.")
+@discriminator("type")
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
 model AzureVoice {
   @doc("The Azure voice kind.")
   type: AzureVoiceType;
 
-  @doc("The Azure neural voice name, e.g. 'en-US-AvaNeural'.")
-  name: string;
+  @doc("The synthesis temperature, from 0 to 1.")
+  @minValue(0)
+  @maxValue(1)
+  temperature?: float32;
 
-  @doc("Optional speaking style, e.g. 'cheerful'.")
+  @doc("The URL of a custom pronunciation lexicon.")
+  custom_lexicon_url?: url;
+
+  @doc("The URL of a custom text-normalization service.")
+  custom_text_normalization_url?: url;
+
+  @doc("Preferred BCP-47 locales that influence language accents.")
+  prefer_locales?: string[];
+
+  @doc("The enforced BCP-47 locale. When omitted, the language is detected from the text.")
+  locale?: string;
+
+  @doc("The speaking style, such as `cheerful` or `sad`.")
   style?: string;
 
-  @doc("Optional pitch adjustment, e.g. '+5%'.")
+  @doc("The SSML-compatible pitch adjustment, such as `+5%`.")
   pitch?: string;
 
-  @doc("Optional rate adjustment, e.g. '+10%'.")
+  @doc("The SSML-compatible speaking-rate adjustment, such as `+10%`.")
   rate?: string;
 
-  @doc("Optional BCP-47 locale override, e.g. 'en-US'.")
-  locale?: string;
+  @doc("The SSML-compatible volume adjustment, such as `+10` or `-6dB`.")
+  volume?: string;
 }
 
-@doc("The Azure voice kind.")
+@doc("The Azure synthesized voice kind. Additional values may be added over time.")
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
 union AzureVoiceType {
   string,
+
+  @doc("An Azure standard neural voice.")
   azure_standard: "azure-standard",
+
+  @doc("An Azure custom neural voice.")
   azure_custom: "azure-custom",
+
+  @doc("An Azure personal voice.")
   azure_personal: "azure-personal",
+
+  @doc("An Azure avatar voice-synchronization voice.")
   avatar_voice_sync: "avatar-voice-sync",
-  azure_realtime_native: "azure-realtime-native",
+}
+
+@doc("An Azure standard neural voice configuration.")
+model AzureStandardVoice extends AzureVoice {
+  type: AzureVoiceType.azure_standard;
+
+  @doc("The Azure neural voice name.")
+  @minLength(1)
+  name: string;
+
+  @doc("The speaker name used by a multi-talker voice.")
+  multi_talker_speaker_name?: string;
+}
+
+@doc("An Azure custom neural voice configuration.")
+model AzureCustomVoice extends AzureVoice {
+  type: AzureVoiceType.azure_custom;
+
+  @doc("The custom voice name.")
+  @minLength(1)
+  name: string;
+
+  @doc("The Azure Speech custom voice deployment endpoint ID.")
+  @minLength(1)
+  endpoint_id: string;
+}
+
+@doc("An Azure personal voice configuration.")
+model AzurePersonalVoice extends AzureVoice {
+  type: AzureVoiceType.azure_personal;
+
+  @doc("The personal voice name.")
+  @minLength(1)
+  name: string;
+
+  @doc("The neural model used by the personal voice.")
+  `model`: PersonalVoiceModel;
+}
+
+@doc("An Azure avatar voice-synchronization configuration. The runtime derives its voice name from the avatar character and style.")
+model AzureAvatarVoiceSyncVoice extends AzureVoice {
+  type: AzureVoiceType.avatar_voice_sync;
+
+  @doc("The neural model used to synthesize the avatar voice.")
+  `model`: PersonalVoiceModel;
+}
+
+@doc("A known neural model for an Azure personal or avatar voice. Additional values may be added over time.")
+union PersonalVoiceModel {
+  string,
+
+  @doc("The latest Dragon model.")
+  dragon_latest_neural: "DragonLatestNeural",
+
+  @doc("The latest Dragon HD Omni model.")
+  dragon_hd_omni_latest_neural: "DragonHDOmniLatestNeural",
+
+  @doc("The MAI-Voice-1 model.")
+  mai_voice_1: "MAI-Voice-1",
+
+  @doc("The latest Phoenix model.")
+  phoenix_latest_neural: "PhoenixLatestNeural",
+
+  @doc("The Phoenix V2 model.")
+  phoenix_v2_neural: "PhoenixV2Neural",
+}
+
+@doc("An Azure realtime-native voice configuration.")
+model AzureRealtimeNativeVoice {
+  @doc("The voice kind. Always `azure-realtime-native`.")
+  type: "azure-realtime-native";
+
+  @doc("The Azure realtime-native voice name.")
+  name: AzureRealtimeNativeVoiceName;
+}
+
+@doc("A known Azure realtime-native voice name. Additional values may be added over time.")
+union AzureRealtimeNativeVoiceName {
+  string,
+
+  @doc("The Aarti voice.")
+  aarti: "aarti",
+
+  @doc("The Alvaro voice.")
+  alvaro: "alvaro",
+
+  @doc("The Andrew voice.")
+  andrew: "andrew",
+
+  @doc("The Antonio voice.")
+  antonio: "antonio",
+
+  @doc("The Ava voice.")
+  ava: "ava",
+
+  @doc("The Clara voice.")
+  clara: "clara",
+
+  @doc("The Dalia voice.")
+  dalia: "dalia",
+
+  @doc("The Denise voice.")
+  denise: "denise",
+
+  @doc("The Diego voice.")
+  diego: "diego",
+
+  @doc("The Diya voice.")
+  diya: "diya",
+
+  @doc("The Elsa voice.")
+  elsa: "elsa",
+
+  @doc("The Emma voice.")
+  emma: "emma",
+
+  @doc("The Florian voice.")
+  florian: "florian",
+
+  @doc("The Francisca voice.")
+  francisca: "francisca",
+
+  @doc("The Hyunsu voice.")
+  hyunsu: "hyunsu",
+
+  @doc("The Jorge voice.")
+  jorge: "jorge",
+
+  @doc("The Keita voice.")
+  keita: "keita",
+
+  @doc("The Liam voice.")
+  liam: "liam",
+
+  @doc("The Meera voice.")
+  meera: "meera",
+
+  @doc("The Nanami voice.")
+  nanami: "nanami",
+
+  @doc("The Natasha voice.")
+  natasha: "natasha",
+
+  @doc("The Niwat voice.")
+  niwat: "niwat",
+
+  @doc("The Premwadee voice.")
+  premwadee: "premwadee",
+
+  @doc("The Remy voice.")
+  remy: "remy",
+
+  @doc("The Ryan voice.")
+  ryan: "ryan",
+
+  @doc("The Seraphina voice.")
+  seraphina: "seraphina",
+
+  @doc("The Sonia voice.")
+  sonia: "sonia",
+
+  @doc("The Sunhi voice.")
+  sunhi: "sunhi",
+
+  @doc("The Sylvie voice.")
+  sylvie: "sylvie",
+
+  @doc("The Thierry voice.")
+  thierry: "thierry",
+
+  @doc("The William voice.")
+  william: "william",
+
+  @doc("The Xiaoxiao voice.")
+  xiaoxiao: "xiaoxiao",
+
+  @doc("The Ximena voice.")
+  ximena: "ximena",
+
+  @doc("The Yunxi voice.")
+  yunxi: "yunxi",
 }
 
 @doc("""
