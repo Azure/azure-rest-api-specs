@@ -186,25 +186,15 @@ function escapeHtml(value) {
 }
 
 /**
- * Inserts `<wbr>` break opportunities after path separators so long, unbroken
- * strings (rule names and source paths, which contain no spaces) can wrap
- * within their table cell instead of forcing the column wide. GitHub's HTML
- * sanitizer allows `<wbr>`, and it renders as a zero-width break hint. The input
- * is HTML-escaped first so the inserted markup is the only HTML in the result.
+ * Returns the file name (basename) of a path, e.g. `.../main.tsp` -> `main.tsp`.
+ * The full path is preserved in the link's href; only the visible label is
+ * shortened so the Source column stays narrow and readable.
  *
- * @param {string} value
- * @returns {string}
- */
-function withWrapPoints(value) {
-  return escapeHtml(value).replaceAll("/", "/<wbr>");
-}
-
-/**
  * @param {string} filePath
  * @returns {string}
  */
-function getPathSegment(filePath) {
-  return filePath.split("/").slice(-4).join("/");
+function getFileName(filePath) {
+  return filePath.split("/").pop() || filePath;
 }
 
 /**
@@ -235,7 +225,7 @@ function pluralize(count, singular, plural = `${singular}s`) {
  * @returns {string}
  */
 function renderRuleLabel(suppression) {
-  const label = `<code>${withWrapPoints(suppression.ruleName)}</code>`;
+  const label = `<code>${escapeHtml(suppression.ruleName)}</code>`;
   const documentationUrl = suppression.ruleMetadata?.documentationUrl;
   return documentationUrl ? `<a href="${documentationUrl}">${label}</a>` : label;
 }
@@ -248,7 +238,7 @@ function renderRuleLabel(suppression) {
  * @returns {string}
  */
 function renderSourceLink(owner, repo, head_sha, suppression) {
-  const sourceLabel = `${getPathSegment(suppression.sourceFile)}#L${suppression.location.line}`;
+  const sourceLabel = `${getFileName(suppression.sourceFile)}#L${suppression.location.line}`;
   const sourceUrl = getBlobLineLink(
     owner,
     repo,
@@ -256,7 +246,7 @@ function renderSourceLink(owner, repo, head_sha, suppression) {
     suppression.sourceFile,
     suppression.location.line,
   );
-  return `<a href="${sourceUrl}">${withWrapPoints(sourceLabel)}</a>`;
+  return `<a href="${sourceUrl}">${escapeHtml(sourceLabel)}</a>`;
 }
 
 /**

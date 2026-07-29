@@ -84,6 +84,10 @@ describe("renderSuppressionsCommentBody", () => {
     expect(body).toContain(
       "⚠️ Approval label not applied (not required during testing) — 1 suppression",
     );
+    // Source link text is the file name + line only (full path stays in the href).
+    expect(body).toContain(
+      '<a href="https://github.com/test-owner/test-repo/blob/abc123/specification/demo/main.tsp#L12">main.tsp#L12</a>',
+    );
   });
 
   it("reflects approval status in the heading and status cells", () => {
