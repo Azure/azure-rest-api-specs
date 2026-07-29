@@ -3612,7 +3612,7 @@ model FunctionsScaleAndConcurrency {
   alwaysReady?: FunctionsAlwaysReadyConfig[];
 
   /**
-   * The maximum number of on demand instances per function group in the function app.
+   * The maximum number of on demand instances per function group.
    */
   maximumInstanceCount?: int32;
 
