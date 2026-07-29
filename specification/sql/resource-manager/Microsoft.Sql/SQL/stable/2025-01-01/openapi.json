@@ -57421,7 +57421,7 @@
     },
     "ServerNetworkAccessFlag": {
       "type": "string",
-      "description": "Whether or not to restrict outbound network access for this server.  Value is optional but if passed in, must be 'Enabled' or 'Disabled'",
+      "description": "Whether or not to restrict outbound network access for this server.  Value is optional but if passed in, must be 'Enabled', 'Disabled', or 'SecuredByPerimeter'",
       "enum": [
         "Enabled",
         "Disabled",
@@ -57444,7 +57444,7 @@
           {
             "name": "SecuredByPerimeter",
             "value": "SecuredByPerimeter",
-            "description": "SecuredByPerimeter"
+            "description": "The network security perimeter configuration rules allow or disallow public network access to the resource. Requires an associated network security perimeter."
           }
         ]
       }
