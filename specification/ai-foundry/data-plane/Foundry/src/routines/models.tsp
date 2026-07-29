@@ -435,7 +435,7 @@ model ListRoutinesParameters {
   @query
   limit?: int32;
 
-  @doc("An opaque cursor identifying the item after which to start returning results. Prefer following the `nextLink` returned by the previous list response.")
+  @doc("An opaque continuation token identifying where to resume the list. Prefer following the `nextLink` returned by the previous response, which embeds this value.")
   @query
   after?: string;
 
@@ -467,7 +467,7 @@ model ListRoutineRunsParameters {
   @query
   limit?: int32;
 
-  @doc("An opaque cursor identifying the run after which to start returning results. Prefer following the `nextLink` returned by the previous list-runs response.")
+  @doc("An opaque continuation token identifying where to resume the list. Prefer following the `nextLink` returned by the previous response, which embeds this value.")
   @query
   after?: string;
 
