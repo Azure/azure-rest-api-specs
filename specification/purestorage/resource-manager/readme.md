@@ -30,6 +30,42 @@ openapi-subtype: rpaas
 tag: package-2024-11-01
 ```
 
+### Tag: package-2026-05-01-preview
+
+These settings apply only when `--tag=package-2026-05-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-05-01-preview'
+input-file:
+  - PureStorage.Block/preview/2026-05-01-preview/purestorage.json
+
+suppressions:
+  - code: PathContainsResourceType
+    reason: The resource provider name 'PureStorage.Block' cannot have 'Microsoft' in it as it is a Azure Native ISV service`.
+  - code: OperationIdNounVerb
+    reason: Volumes and VolumeGroups have parent child relationship so this is expected. It is False positive.
+  - code: GetCollectionOnlyHasValueAndNextLink
+    reason: VolumeGroupSnapshotListResult intentionally includes count and totalCount pagination metadata fields required by the service API.
+  - code: PostResponseCodes
+    reason: VolumeGroups_Overwrite and Volumes_Overwrite are async LRO POST actions using azure-async-operation polling. The 204 final state is returned by the polling endpoint, not the original POST URL, consistent with the existing enableAvsConnection/disableAvsConnection pattern in this spec.
+  - code: XmsPageableForListCalls
+    reason: Backend does not support nextLink-based pagination for list operations yet. Results are returned in a single response.
+```
+
+### Tag: package-2026-03-01-preview
+
+These settings apply only when `--tag=package-2026-03-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-03-01-preview'
+input-file:
+  - PureStorage.Block/preview/2026-03-01-preview/purestorage.json
+
+suppressions:
+  - code: PathContainsResourceType
+    reason: The resource provider name 'PureStorage.Block' cannot have 'Microsoft' in it as it is a Azure Native ISV service`.
+  - code: OperationIdNounVerb
+    reason: Volumes and VolumeGroups have parent child relationship so this is expected. It is False positive.
+```
+
 ### Tag: package-2026-01-01-preview
 
 These settings apply only when `--tag=package-2026-01-01-preview` is specified on the command line.
@@ -42,7 +78,7 @@ suppressions:
   - code: PathContainsResourceType
     reason: The resource provider name 'PureStorage.Block' cannot have 'Microsoft' in it as it is a Azure Native ISV service`.
   - code: OperationIdNounVerb
-    reason: VolumeGroups_ListByStoragePool and Volumes_ListByVolumeGroup follow the required parent-scoped listing pattern for nested resources.
+    reason: Volumes and VolumeGroups have parent child relationship so this is expected. It is False positive.
 ```
 
 ### Tag: package-2024-11-01
@@ -54,8 +90,8 @@ input-file:
   - PureStorage.Block/stable/2024-11-01/purestorage.json
 
 suppressions:
- - code: PathContainsResourceType
-   reason: The resource provider name 'PureStorage.Block' cannot have 'Microsoft' in it as it is a Azure Native ISV service`.
+  - code: PathContainsResourceType
+    reason: The resource provider name 'PureStorage.Block' cannot have 'Microsoft' in it as it is a Azure Native ISV service`.
 ```
 
 ### Tag: package-2024-10-01-preview
@@ -67,8 +103,8 @@ input-file:
   - PureStorage.Block/preview/2024-10-01-preview/purestorage.json
 
 suppressions:
- - code: PathContainsResourceType
-   reason: The resource provider name 'PureStorage.Block' cannot have 'Microsoft' in it as it is a Azure Native ISV service`.
+  - code: PathContainsResourceType
+    reason: The resource provider name 'PureStorage.Block' cannot have 'Microsoft' in it as it is a Azure Native ISV service`.
 ```
 
 ### Tag: package-2024-11-01-preview
@@ -80,6 +116,6 @@ input-file:
   - PureStorage.Block/preview/2024-11-01-preview/purestorage.json
 
 suppressions:
- - code: PathContainsResourceType
-   reason: The resource provider name 'PureStorage.Block' cannot have 'Microsoft' in it as it is a Azure Native ISV service`.
+  - code: PathContainsResourceType
+    reason: The resource provider name 'PureStorage.Block' cannot have 'Microsoft' in it as it is a Azure Native ISV service`.
 ```
