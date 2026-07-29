@@ -67,12 +67,6 @@ alias QuotaRequestDetailsOps = Azure.ResourceManager.Legacy.LegacyOperations<
   ErrorType = ExceptionResponse
 >;
 
-model QuotaRequestGetBaseParam
-  is Azure.ResourceManager.Foundations.SubscriptionBaseParameters;
-
-model QuotaRequestListBaseParam
-  is Azure.ResourceManager.Foundations.SubscriptionBaseParameters;
-
 @armResourceOperations(#{ omitTags: true })
 interface QuotaRequestStatus {
   /**
