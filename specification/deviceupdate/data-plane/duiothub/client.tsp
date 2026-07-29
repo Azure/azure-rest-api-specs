@@ -28,7 +28,7 @@ model DeviceUpdateClientOptions {
   },
   "!java,!csharp"
 )
-@convenientAPI(false, "python,javascript")
+@convenientAPI(false, "python")
 @client(
   {
     name: "DeviceUpdateClient",
