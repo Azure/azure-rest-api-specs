@@ -840,7 +840,7 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@scope(Storage.Blob.Blob.abortCopyFromUrl, "!rust");
 @@scope(Storage.Blob.Blob.copyFromUrl, "!rust");
 @@scope(Storage.Blob.Blob.setExpiry, "!rust");
-@@scope(Storage.Blob.Blob.startCopyFromUrl, "!rust");
+@@scope(Storage.Blob.Blob.startCopyFromUrl, "rust");
 @@scope(Storage.Blob.BlockBlob.query, "!rust");
 @@scope(Storage.Blob.PageBlob.copyIncremental, "!rust");
 @@scope(Storage.Blob.PageBlob.getPageRangesDiff, "!rust");
