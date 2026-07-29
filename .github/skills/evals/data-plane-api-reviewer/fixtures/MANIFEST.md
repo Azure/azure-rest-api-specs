@@ -121,11 +121,28 @@ One fixture per review area, each seeded densely.
 
 ## Compilation
 
-Every fixture **must** `tsp compile` cleanly (errors; warnings are tolerated,
-because some fixtures deliberately seed linter-owned defects for the interlock
-evals). The `compile-fixtures` job in
+Every fixture **must** `tsp compile` cleanly (errors; warnings are discussed
+below). The `compile-fixtures` job in
 [`.github/workflows/data-plane-review-alignment.yaml`](../../../../workflows/data-plane-review-alignment.yaml)
 enforces this.
+
+`typespec-data-plane/tspconfig.yaml` enables the
+`@azure-tools/typespec-azure-rulesets/data-plane` ruleset, so compiling a
+fixture applies the same linter the real specs get. Without it, `tsp compile`
+checks only the language and the corpus looks far cleaner than it is: with the
+ruleset switched on, `tn-legitimate-deviation.tsp` alone went from apparently
+fine to 15 warnings.
+
+**True-negative fixtures must be linter-clean.** A TN whose cleanliness depends
+on the reviewer correctly consulting the interlock is measuring the interlock,
+not the reviewer's judgement. `tn-clean-service`, `tn-legitimate-deviation` and
+`tn-runtime-behavioral` are therefore at zero warnings.
+`tn-linter-owned.tsp` is the deliberate exception: its whole purpose is to seed
+linter-owned defects and assert the agent stays silent about them.
+
+Positive fixtures may warn. They exist to carry seeded design defects, and the
+warnings are mostly `use-standard-operations` on deliberately non-standard
+shapes.
 
 This section previously claimed non-compilation was intentional for fixtures
 seeding structural defects. That was wrong, and it hid a real bug: all 15

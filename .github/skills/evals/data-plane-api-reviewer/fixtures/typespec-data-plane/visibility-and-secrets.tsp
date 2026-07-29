@@ -10,6 +10,15 @@ using Azure.Core;
 
 @service(#{ title: "Connector Registry" })
 @versioned(Versions)
+@useAuth(
+  OAuth2Auth<[
+    {
+      type: OAuth2FlowType.clientCredentials,
+      tokenUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+      scopes: ["https://connectorregistry.azure.com/.default"],
+    }
+  ]>
+)
 @server("https://{endpoint}", "Connector Registry service", { endpoint: string })
 namespace ConnectorRegistry;
 

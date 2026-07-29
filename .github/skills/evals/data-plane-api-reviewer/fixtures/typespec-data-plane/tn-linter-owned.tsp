@@ -10,6 +10,15 @@ using Azure.Core;
 
 @service(#{ title: "Inventory" })
 @versioned(Versions)
+@useAuth(
+  OAuth2Auth<[
+    {
+      type: OAuth2FlowType.clientCredentials,
+      tokenUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+      scopes: ["https://inventory.azure.com/.default"],
+    }
+  ]>
+)
 @server("https://{endpoint}", "Inventory service", { endpoint: string })
 namespace Inventory;
 

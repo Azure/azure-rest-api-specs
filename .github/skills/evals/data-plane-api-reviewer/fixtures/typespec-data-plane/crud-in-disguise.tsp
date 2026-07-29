@@ -10,6 +10,15 @@ using Azure.Core;
 
 @service(#{ title: "Widget Catalog" })
 @versioned(Versions)
+@useAuth(
+  OAuth2Auth<[
+    {
+      type: OAuth2FlowType.clientCredentials,
+      tokenUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+      scopes: ["https://widgetcatalog.azure.com/.default"],
+    }
+  ]>
+)
 @server("https://{endpoint}", "Widget Catalog service", { endpoint: string })
 namespace WidgetCatalog;
 
@@ -28,8 +37,8 @@ model Widget {
   @doc("Human-readable display name shown in the portal.")
   displayName: string;
 
-  @doc("Physical width of the widget in millimetres.")
-  widthInMillimetres: int32;
+  @doc("Physical width of the widget in millimeters.")
+  widthInMillimeters: int32;
 
   @doc("Current lifecycle state of the widget.")
   state: WidgetState;
@@ -51,8 +60,8 @@ model WidgetUpdate {
   @doc("Human-readable display name shown in the portal.")
   displayName?: string;
 
-  @doc("Physical width of the widget in millimetres.")
-  widthInMillimetres?: int32;
+  @doc("Physical width of the widget in millimeters.")
+  widthInMillimeters?: int32;
 }
 
 interface Widgets {

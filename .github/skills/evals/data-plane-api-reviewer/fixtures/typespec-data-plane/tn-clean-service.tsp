@@ -11,6 +11,15 @@ using Azure.Core.Traits;
 
 @service(#{ title: "Contoso Notebook" })
 @versioned(Versions)
+@useAuth(
+  OAuth2Auth<[
+    {
+      type: OAuth2FlowType.clientCredentials,
+      tokenUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+      scopes: ["https://contosonotebook.azure.com/.default"],
+    }
+  ]>
+)
 @server("https://{endpoint}", "Contoso Notebook service", { endpoint: string })
 namespace ContosoNotebook;
 

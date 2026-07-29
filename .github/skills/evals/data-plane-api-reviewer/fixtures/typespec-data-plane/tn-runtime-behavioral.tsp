@@ -11,8 +11,23 @@ using Azure.Core.Traits;
 
 @service(#{ title: "Audit Log" })
 @versioned(Versions)
+@useAuth(
+  OAuth2Auth<[
+    {
+      type: OAuth2FlowType.clientCredentials,
+      tokenUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+      scopes: ["https://auditlog.azure.com/.default"],
+    }
+  ]>
+)
 @server("https://{endpoint}", "Audit Log service", { endpoint: string })
 namespace AuditLog;
+
+alias ServiceTraits = SupportsRepeatableRequests &
+  NoConditionalRequests &
+  NoClientRequestId;
+
+alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
 
 @doc("Service API versions.")
 enum Versions {
@@ -72,7 +87,7 @@ interface Events {
     that the response does not disclose the existence of events in other
     tenants.
     """)
-  get is StandardResourceOperations.ResourceRead<AuditEvent>;
+  get is Operations.ResourceRead<AuditEvent>;
 
   @doc("""
     Lists audit events.
@@ -90,7 +105,7 @@ interface Events {
     `Retry-After` header whose value is computed from the caller's current
     quota consumption.
     """)
-  list is StandardResourceOperations.ResourceList<
+  list is Operations.ResourceList<
     AuditEvent,
     ListQueryParametersTrait<StandardListQueryParameters>
   >;
@@ -110,5 +125,6 @@ interface Events {
     authorization, so an unauthorized caller receives 403 without learning
     whether the verb is valid.
     """)
-  create is StandardResourceOperations.ResourceCreateWithServiceProvidedName<AuditEvent>;
+  create is Operations.ResourceCreateWithServiceProvidedName<AuditEvent>;
 }
+

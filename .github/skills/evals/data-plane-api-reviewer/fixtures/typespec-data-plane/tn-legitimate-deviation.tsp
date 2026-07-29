@@ -7,9 +7,19 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
+using Azure.Core.Traits;
 
 @service(#{ title: "Text Analyzer" })
 @versioned(Versions)
+@useAuth(
+  OAuth2Auth<[
+    {
+      type: OAuth2FlowType.clientCredentials,
+      tokenUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+      scopes: ["https://textanalyzer.azure.com/.default"],
+    }
+  ]>
+)
 @server("https://{endpoint}", "Text Analyzer service", { endpoint: string })
 namespace TextAnalyzer;
 
@@ -32,11 +42,8 @@ model AnalyzeRequest {
   mode?: AnalysisMode;
 }
 
-@doc("""
-  Depth of analysis to perform. This union is intentionally closed: the wire
-  protocol admits exactly these two values, and adding a third would require a
-  new request shape rather than a new enum member.
-  """)
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The wire protocol frames a request as either single-sentence or whole-document; a third depth would need a different request shape, not a third member, so the set cannot grow."
+@doc("Depth of analysis to perform.")
 union AnalysisMode {
   @doc("Sentence-level analysis only. Lower latency.")
   Shallow: "Shallow",
@@ -45,7 +52,7 @@ union AnalysisMode {
   Deep: "Deep",
 }
 
-@doc("Result of a text analysis request. Results are computed on demand and are not stored by the service.")
+@doc("Result of a text analysis request.")
 model AnalyzeResult {
   @doc("Overall sentiment score, from -1.0 (most negative) to 1.0 (most positive).")
   sentimentScore: float32;
@@ -66,8 +73,21 @@ model SupportedLanguage {
   displayName: string;
 }
 
-@doc("Account-level analyzer configuration. Exactly one configuration exists per account; it is created with the account and cannot be deleted, only reset to defaults.")
+@doc("The set of languages the analyzer supports.")
+model SupportedLanguageCollection {
+  @doc("The supported languages, ordered by tag.")
+  value: SupportedLanguage[];
+}
+
+@doc("Account-level analyzer configuration.")
+@resource("configurations")
 model Configuration {
+  @doc("Identifier of the configuration. The only supported value is 'default'.")
+  @key("configurationName")
+  @visibility(Lifecycle.Read)
+  @pattern("^default$")
+  name: string;
+
   @doc("Default analysis mode used when a request omits `mode`.")
   defaultMode: AnalysisMode;
 
@@ -88,8 +108,7 @@ interface Analysis {
     themselves.
     """)
   @route("/text:analyze")
-  @post
-  analyze(@body body: AnalyzeRequest): AnalyzeResult;
+  analyze is Azure.Core.RpcOperation<AnalyzeRequest, AnalyzeResult>;
 
   @doc("""
     Lists the languages the analyzer supports. This collection is fixed by the
@@ -98,28 +117,22 @@ interface Analysis {
     call.
     """)
   @route("/languages")
-  @get
-  listSupportedLanguages(): SupportedLanguage[];
+  getSupportedLanguages is Azure.Core.RpcOperation<{}, SupportedLanguageCollection>;
 }
 
-@doc("Configuration operations. The configuration is a singleton: exactly one exists per account.")
+@doc("Configuration operations.")
 interface Configurations {
   @doc("Gets the account's analyzer configuration.")
-  @route("/configuration")
-  @get
-  get(): Configuration;
+  getConfiguration is StandardResourceOperations.ResourceRead<Configuration>;
 
   @doc("Replaces the account's analyzer configuration.")
-  @route("/configuration")
-  @put
-  createOrReplace(@body body: Configuration): Configuration;
+  createOrReplaceConfiguration is StandardResourceOperations.ResourceCreateOrReplace<Configuration>;
 
   @doc("""
     Resets the account's analyzer configuration to service defaults. This is
     the delete-equivalent for a resource that cannot be absent: the
     configuration always exists for the lifetime of the account.
     """)
-  @route("/configuration:reset")
-  @post
-  reset(): Configuration;
+  resetConfiguration is StandardResourceOperations.ResourceAction<Configuration, {}, Configuration>;
 }
+

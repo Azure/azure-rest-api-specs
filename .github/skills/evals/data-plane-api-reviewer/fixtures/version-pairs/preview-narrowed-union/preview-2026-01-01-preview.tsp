@@ -10,6 +10,15 @@ using Azure.Core;
 
 @service(#{ title: "Experiment Runner" })
 @versioned(Versions)
+@useAuth(
+  OAuth2Auth<[
+    {
+      type: OAuth2FlowType.clientCredentials,
+      tokenUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+      scopes: ["https://experimentrunner.azure.com/.default"],
+    }
+  ]>
+)
 @server("https://{endpoint}", "Experiment Runner service", { endpoint: string })
 namespace ExperimentRunner;
 

@@ -425,6 +425,12 @@ export const REAL_FINDINGS_PROBE = [
   "**[DP-LRO-01] Status monitor has no error member** -- `main.tsp:30`",
   "**[DP-NAME-01] Non-obvious abbreviation** -- `main.tsp:29`",
   "**[DP-DOC-01] Tautological documentation** -- `main.tsp:24`",
+  // A doc-retroactivity finding: changing an unversioned @doc is claimed to
+  // alter the already-published version. Mechanically true, but there is no
+  // doc-versioning decorator in @typespec/versioning, so it is unactionable,
+  // unavoidable and non-breaking. Present so the grader that bans it can see
+  // the failure it is named for.
+  "**[DP-VERSION-04] Documentation changed retroactively on a published version** -- `main.tsp:18`",
   // Non-DP rule-ID families. The agent really does use the bracketed
   // convention for cross-cutting IDs -- SEC-SECRET-DETECT was observed in a
   // live run -- so a grader that only knows the DP-XXX-NN shape silently

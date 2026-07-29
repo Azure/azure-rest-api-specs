@@ -335,9 +335,29 @@ stimuli:
           # grader above was narrowed, so the narrowing does not leave the
           # stimulus trivially passable.
           pattern: "\\*\\*\\[DP-VERSION-03\\]"
+      - type: output-not-matches
+        name: "no doc-retroactivity finding"
+        config:
+          # The one confirmed case of the reviewer being genuinely too noisy,
+          # and the likely cause of this stimulus failing 0/3. The Adaptive
+          # member's @doc changes between the two versions, and because @doc is
+          # not versioned the new text also appears on the already-published
+          # 2026-01-01-preview. That is mechanically true and completely
+          # unactionable: @typespec/versioning 0.84.0 has no doc-versioning
+          # decorator at all (versioned, useDependency, added, removed,
+          # renamedFrom, madeOptional, madeRequired, typeChangedFrom,
+          # returnTypeChangedFrom -- and nothing else). It is also non-breaking,
+          # and here an improvement for the very consumers it supposedly harms:
+          # "Withdrawn after preview evaluation" tells them more than "Under
+          # evaluation during the preview" did.
+          #
+          # Matches a bracketed finding whose title pairs a documentation word
+          # with a retroactivity word, in either order.
+          pattern: "(?i)\\*\\*\\[[A-Z][A-Z0-9-]*\\][^*\\n]*(?:(?:doc|description)[^*\\n]*(?:retroactiv|already[- ]published|previously[- ]published|prior version|previous version|published version)|(?:retroactiv|already[- ]published|previously[- ]published|prior version|previous version|published version)[^*\\n]*(?:doc|description))"
       - type: prompt
     rubric:
       - Both API versions are preview. Preview versions carry no backward-compatibility guarantee, so removing `armOverrides` and dropping the `Adaptive` union member is permitted - trialling a shape and then withdrawing it is precisely what preview exists for.
       - Both removals are correctly annotated with @removed(Versions.v2026_02_01_preview), so the versioning decorators are also correct.
       - The agent MUST NOT report a breaking-change violation, and MUST NOT report any Blocking (🔴) finding. This is the single most likely versioning false positive and any such finding is a test failure.
       - Noting at 💡 Suggestion severity that existing preview consumers will need to migrate, or that the withdrawal should be called out in release notes, is acceptable and does not affect the grade.
+      - The `Adaptive` member's `@doc` text also changes between the two versions. Because `@doc` is not versioned, the new text appears on the already-published 2026-01-01-preview as well. Reporting this as a defect is a test failure. It is unactionable - `@typespec/versioning` has no doc-versioning decorator, so there is no fix to recommend - it is non-breaking, and here the new wording is strictly more informative for the consumers it supposedly harms.

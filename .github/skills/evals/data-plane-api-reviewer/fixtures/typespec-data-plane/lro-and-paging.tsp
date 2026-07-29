@@ -10,6 +10,15 @@ using Azure.Core;
 
 @service(#{ title: "Model Trainer" })
 @versioned(Versions)
+@useAuth(
+  OAuth2Auth<[
+    {
+      type: OAuth2FlowType.clientCredentials,
+      tokenUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+      scopes: ["https://modeltrainer.azure.com/.default"],
+    }
+  ]>
+)
 @server("https://{endpoint}", "Model Trainer service", { endpoint: string })
 namespace ModelTrainer;
 
@@ -54,7 +63,7 @@ model Dataset {
   @doc("The unique name of the dataset.")
   name: string;
 
-  @doc("Number of labelled examples in the dataset.")
+  @doc("Number of labeled examples in the dataset.")
   exampleCount: int32;
 }
 
