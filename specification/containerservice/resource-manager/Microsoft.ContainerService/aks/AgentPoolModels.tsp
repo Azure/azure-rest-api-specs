@@ -885,6 +885,7 @@ model AgentPoolNetworkProfile {
   /** Secondary network interface configurations for each VM in the agent pool. Each entry is a template: one physical NIC per entry is provisioned on every VM instance. These interfaces are created at agent pool creation time and are immutable. The length of the list must be less than the NIC capacity minus 1 for the VM size of the agent pool (AKS manages the primary NIC). For example, a Standard_D8a_v4 VM supports up to 4 NICs, so the maximum number of secondary interfaces allowed is 3. For mixed-SKU VM pools the effective capacity is the minimum across all SKUs: count(secondaryNetworkInterfaces) + 1 <= min(maxNICs). For more information, see https://aka.ms/aks/multi-nic */
   @added(Versions.v2026_06_02_preview)
   @identifiers(#[])
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   secondaryNetworkInterfaces?: AgentPoolNetworkInterface[];
 
   /** DRANET settings of an agent pool. */
