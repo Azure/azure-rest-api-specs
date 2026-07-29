@@ -15878,6 +15878,31 @@ model AzurePostgreSqlLinkedServiceTypeProperties {
   readBufferSize?: Dfe<int32>;
 
   /**
+   * Whether connection pooling should be used. Default value is true. Type: boolean.
+   */
+  pooling?: Dfe<boolean>;
+
+  /**
+   * The maximum number of connections allowed in the connection pool. Type: integer.
+   */
+  maxPoolSize?: Dfe<int32>;
+
+  /**
+   * The minimum number of connections the connection pool maintains. Type: integer.
+   */
+  minPoolSize?: Dfe<int32>;
+
+  /**
+   * The time (in seconds) to wait before closing idle connections in the pool if the count of all connections exceeds Minimum Pool Size. Type: integer.
+   */
+  connectionIdleLifetime?: Dfe<int32>;
+
+  /**
+   * How many seconds the pool waits before attempting to prune idle connections that are beyond idle lifetime. Type: integer.
+   */
+  connectionPruningInterval?: Dfe<int32>;
+
+  /**
    * Gets or sets the session timezone. Type: string.
    */
   timezone?: Dfe<string>;
