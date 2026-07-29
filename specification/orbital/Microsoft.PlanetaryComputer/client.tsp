@@ -1030,11 +1030,20 @@ interface SharedAccessSignature {
 @added(Versions.v2026_04_15)
 model GetItemPointOptions {
   /** STAC Collection Identifier. */
-  @path @maxLength(500) @pattern(".*") collectionId: string;
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
   /** STAC Item Identifier. */
-  @path @maxLength(500) @pattern(".*") itemId: string;
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  itemId: string;
+
   /** Longitude. */
   @path longitude: float32;
+
   /** Latitude. */
   @path latitude: float32;
 
@@ -1043,6 +1052,7 @@ model GetItemPointOptions {
 
   /** Coordinate Reference System of the input coords. Default to `epsg:4326`. */
   @query("coord_crs") coordinateReferenceSystem?: string;
+
   /** Resampling method. */
   @query("resampling") resampling?: Resampling = Resampling.nearest;
 }
@@ -1052,17 +1062,27 @@ model GetItemPointOptions {
 @added(Versions.v2026_04_15)
 model GetItemTileJsonOptions {
   /** STAC Collection Identifier. */
-  @path @maxLength(500) @pattern(".*") collectionId: string;
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
   /** STAC Item Identifier. */
-  @path @maxLength(500) @pattern(".*") itemId: string;
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  itemId: string;
 
   ...AssetQueryParameters;
   ...TerrainAlgorithmQueryParameters;
 
   /** Identifier selecting one of the TileMatrixSetId supported (default: 'WebMercatorQuad'). */
-  @query("TileMatrixSetId") tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
+  @query("TileMatrixSetId")
+  tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
+
   /** The format of the output tile image. */
   @query("tile_format") tileFormat?: TilerImageFormat;
+
   /** Tile scale factor affecting output size. */
   @query("tile_scale") tileScale?: int32 = 1;
 
@@ -1078,17 +1098,29 @@ model GetItemTileJsonOptions {
 @added(Versions.v2026_04_15)
 model GetItemTileJsonByTmsOptions {
   /** STAC Collection Identifier. */
-  @path @maxLength(500) @pattern(".*") collectionId: string;
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
   /** STAC Item Identifier. */
-  @path @maxLength(500) @pattern(".*") itemId: string;
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  itemId: string;
+
   /** Identifier selecting one of the TileMatrixSetId supported. */
-  @path @maxLength(500) @pattern(".*") tileMatrixSetId: string;
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  tileMatrixSetId: string;
 
   ...AssetQueryParameters;
   ...TerrainAlgorithmQueryParameters;
 
   /** The format of the output tile image. */
   @query("tile_format") tileFormat?: TilerImageFormat;
+
   /** Tile scale factor affecting output size. */
   @query("tile_scale") tileScale?: int32 = 1;
 
@@ -1104,7 +1136,10 @@ model GetItemTileJsonByTmsOptions {
 @added(Versions.v2026_04_15)
 model GetCollectionTileJsonOptions {
   /** STAC Collection Identifier. */
-  @path @maxLength(500) @pattern(".*") collectionId: string;
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
 
   ...AssetQueryParameters;
   ...MosaicSearchQueryParameters;
@@ -1113,9 +1148,12 @@ model GetCollectionTileJsonOptions {
   ...TerrainAlgorithmQueryParameters;
 
   /** Identifier selecting one of the TileMatrixSetId supported (default: 'WebMercatorQuad'). */
-  @query("TileMatrixSetId") tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
+  @query("TileMatrixSetId")
+  tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
+
   /** The format of the output tile image. */
   @query("tile_format") tileFormat?: TilerImageFormat;
+
   /** Tile scale factor affecting output size. */
   @query("tile_scale") tileScale?: int32 = 1;
 
@@ -1130,9 +1168,16 @@ model GetCollectionTileJsonOptions {
 @added(Versions.v2026_04_15)
 model GetCollectionTileJsonByTmsOptions {
   /** STAC Collection Identifier. */
-  @path @maxLength(500) @pattern(".*") collectionId: string;
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
   /** Identifier selecting one of the TileMatrixSetId supported. */
-  @path @maxLength(500) @pattern(".*") tileMatrixSetId: string;
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  tileMatrixSetId: string;
 
   ...AssetQueryParameters;
   ...MosaicSearchQueryParameters;
@@ -1142,6 +1187,7 @@ model GetCollectionTileJsonByTmsOptions {
 
   /** The format of the output tile image. */
   @query("tile_format") tileFormat?: TilerImageFormat;
+
   /** Tile scale factor affecting output size. */
   @query("tile_scale") tileScale?: int32 = 1;
 
@@ -1156,16 +1202,22 @@ model GetCollectionTileJsonByTmsOptions {
 @added(Versions.v2026_04_15)
 model GetSearchTileJsonOptions {
   /** Search Id (pgSTAC Search Hash). */
-  @path @maxLength(500) @pattern(".*") searchId: string;
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  searchId: string;
 
   ...AssetQueryParameters;
   ...MosaicSearchQueryParameters;
   ...SubDatasetQueryParameters;
 
   /** Identifier selecting one of the TileMatrixSetId supported (default: 'WebMercatorQuad'). */
-  @query("TileMatrixSetId") tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
+  @query("TileMatrixSetId")
+  tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
+
   /** The format of the output tile image. */
   @query("tile_format") tileFormat?: TilerImageFormat;
+
   /** Tile scale factor affecting output size. */
   @query("tile_scale") tileScale?: int32;
 
@@ -1173,27 +1225,39 @@ model GetSearchTileJsonOptions {
 
   /** Padding to apply to each tile edge. */
   @query padding?: int32;
+
   /** Buffer on each side of the given tile. */
   @query("buffer") buffer?: float32;
+
   /** rio-color formula. */
   @query("color_formula") colorFormula?: string;
+
   /** STAC Collection ID. */
   @query("collection") collectionId?: string;
+
   /** Resampling method. */
   @query("resampling") resampling?: Resampling = Resampling.nearest;
+
   /** Pixel selection method. */
-  @query("pixel_selection") pixelSelection?: PixelSelection = PixelSelection.first;
+  @query("pixel_selection")
+  pixelSelection?: PixelSelection = PixelSelection.first;
+
   /** Terrain algorithm name. */
   @query("algorithm") algorithm?: TerrainAlgorithm;
+
   /** Terrain algorithm parameters. */
   @query("algorithm_params") algorithmParams?: string;
+
   /** Rescale ranges. */
   #suppress "@azure-tools/typespec-azure-core/no-query-explode" "This is an existing service operation."
   @query(#{ explode: true }) rescale?: string[];
+
   /** Colormap name. */
   @query("colormap_name") colormapName?: ColorMapNames;
+
   /** JSON encoded custom Colormap. */
   @query("colormap") colormap?: string;
+
   /** Add mask to the output data. */
   @query("return_mask") returnMask?: boolean = true;
 }
@@ -1203,9 +1267,16 @@ model GetSearchTileJsonOptions {
 @added(Versions.v2026_04_15)
 model GetSearchTileJsonByTmsOptions {
   /** Search Id (pgSTAC Search Hash). */
-  @path @maxLength(500) @pattern(".*") searchId: string;
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  searchId: string;
+
   /** Identifier selecting one of the TileMatrixSetId supported. */
-  @path @maxLength(500) @pattern(".*") tileMatrixSetId: string;
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  tileMatrixSetId: string;
 
   ...AssetQueryParameters;
   ...MosaicSearchQueryParameters;
@@ -1214,6 +1285,7 @@ model GetSearchTileJsonByTmsOptions {
 
   /** The format of the output tile image. */
   @query("tile_format") tileFormat?: TilerImageFormat;
+
   /** Tile scale factor affecting output size. */
   @query("tile_scale") tileScale?: int32;
 
@@ -1228,9 +1300,14 @@ model GetSearchTileJsonByTmsOptions {
 @added(Versions.v2026_04_15)
 model GetCollectionPointOptions {
   /** STAC Collection Identifier. */
-  @path @maxLength(500) @pattern(".*") collectionId: string;
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
   /** Longitude. */
   @path longitude: float32;
+
   /** Latitude. */
   @path latitude: float32;
 
@@ -1241,6 +1318,7 @@ model GetCollectionPointOptions {
 
   /** Coordinate Reference System of the input coords. Default to `epsg:4326`. */
   @query("coord_crs") coordinateReferenceSystem?: string;
+
   /** Resampling method. */
   @query("resampling") resampling?: Resampling = Resampling.nearest;
 }
@@ -1250,9 +1328,14 @@ model GetCollectionPointOptions {
 @added(Versions.v2026_04_15)
 model GetSearchPointOptions {
   /** Search Id (pgSTAC Search Hash). */
-  @path @maxLength(500) @pattern(".*") searchId: string;
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  searchId: string;
+
   /** Longitude. */
   @path longitude: float32;
+
   /** Latitude. */
   @path latitude: float32;
 
@@ -1262,6 +1345,7 @@ model GetSearchPointOptions {
 
   /** Coordinate Reference System of the input coords. Default to `epsg:4326`. */
   @query("coord_crs") coordinateReferenceSystem?: string;
+
   /** Resampling method. */
   @query("resampling") resampling?: Resampling = Resampling.nearest;
 }
@@ -1271,9 +1355,16 @@ model GetSearchPointOptions {
 @added(Versions.v2026_04_15)
 model GetItemStatisticsOptions {
   /** STAC Collection Identifier. */
-  @path @maxLength(500) @pattern(".*") collectionId: string;
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
   /** STAC Item Identifier. */
-  @path @maxLength(500) @pattern(".*") itemId: string;
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  itemId: string;
 
   ...AssetQueryParameters;
   ...StatisticsQueryParameters;
@@ -1281,10 +1372,13 @@ model GetItemStatisticsOptions {
 
   /** Algorithm name. */
   @query("algorithm") algorithm?: string;
+
   /** Algorithm parameter. */
   @query("algorithm_params") algorithmParams?: string;
+
   /** Force output image height. */
   @query("height") height?: int32;
+
   /** Force output image width. */
   @query("width") width?: int32;
 }
@@ -1294,23 +1388,35 @@ model GetItemStatisticsOptions {
 @added(Versions.v2026_04_15)
 model GetItemAssetStatisticsOptions {
   /** STAC Collection Identifier. */
-  @path @maxLength(500) @pattern(".*") collectionId: string;
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
   /** STAC Item Identifier. */
-  @path @maxLength(500) @pattern(".*") itemId: string;
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  itemId: string;
 
   /** Dataset band indexes. */
   #suppress "@azure-tools/typespec-azure-core/no-query-explode" "This is an existing service operation."
   @query(#{ explode: true }) bidx?: int32[];
+
   /** Asset's names. */
   #suppress "@azure-tools/typespec-azure-core/no-query-explode" "This is an existing service operation."
   @query(#{ explode: true }) assets?: string[];
+
   /** Per asset band indexes. */
   #suppress "@azure-tools/typespec-azure-core/no-query-explode" "This is an existing service operation."
   @query("asset_bidx") assetBandIndices?: string[];
+
   /** Overwrite internal Nodata value. */
   @query("nodata") noData?: string;
+
   /** Apply internal Scale or Offset. */
   @query("unscale") unscale?: boolean;
+
   /** WarpKernel resampling algorithm (only used when doing re-projection). */
   @query("reproject") reproject?: WarpKernelResampling;
 
@@ -1319,9 +1425,13 @@ model GetItemAssetStatisticsOptions {
 
   /** Per asset band expression. */
   #suppress "@azure-tools/typespec-azure-core/no-query-explode" "This is an existing service operation."
-  @query("asset_expression") @query(#{ explode: true }) assetExpression?: string[];
+  @query("asset_expression")
+  @query(#{ explode: true })
+  assetExpression?: string[];
+
   /** Force output image height. */
   @query("height") height?: int32;
+
   /** Force output image width. */
   @query("width") width?: int32;
 }
@@ -1331,9 +1441,17 @@ model GetItemAssetStatisticsOptions {
 @added(Versions.v2026_04_15)
 model GetItemFeatureStatisticsOptions {
   /** STAC Collection Identifier. */
-  @path @maxLength(500) @pattern(".*") collectionId: string;
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
   /** STAC Item Identifier. */
-  @path @maxLength(500) @pattern(".*") itemId: string;
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  itemId: string;
+
   /** Request GeoJson body. */
   @body body: Feature;
 
@@ -1348,10 +1466,13 @@ model GetItemFeatureStatisticsOptions {
 
   /** Algorithm name. */
   @query("algorithm") algorithm?: string;
+
   /** Algorithm parameter. */
   @query("algorithm_params") algorithmParams?: string;
+
   /** Force output image height. */
   @query("height") height?: int32;
+
   /** Force output image width. */
   @query("width") width?: int32;
 }
@@ -1361,7 +1482,10 @@ model GetItemFeatureStatisticsOptions {
 @added(Versions.v2026_04_15)
 model GetCollectionTilesetsOptions {
   /** STAC Collection Identifier. */
-  @path @maxLength(500) @pattern(".*") collectionId: string;
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
 
   ...CollectionMosaicFilterQueryParameters;
   ...CollectionSubDatasetQueryParameters;
@@ -1372,9 +1496,16 @@ model GetCollectionTilesetsOptions {
 @added(Versions.v2026_04_15)
 model GetCollectionTilesetMetadataOptions {
   /** STAC Collection Identifier. */
-  @path @maxLength(500) @pattern(".*") collectionId: string;
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
   /** Identifier selecting one of the TileMatrixSetId supported. */
-  @path @maxLength(500) @pattern(".*") tileMatrixSetId: string;
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  tileMatrixSetId: string;
 
   ...CollectionMosaicFilterQueryParameters;
   ...CollectionSubDatasetQueryParameters;
@@ -1385,9 +1516,16 @@ model GetCollectionTilesetMetadataOptions {
 @added(Versions.v2026_04_15)
 model GetItemTilesetsOptions {
   /** STAC Collection Identifier. */
-  @path @maxLength(500) @pattern(".*") collectionId: string;
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
   /** STAC Item Identifier. */
-  @path @maxLength(500) @pattern(".*") itemId: string;
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  itemId: string;
 
   ...SubDatasetQueryParameters;
 }
@@ -1397,11 +1535,22 @@ model GetItemTilesetsOptions {
 @added(Versions.v2026_04_15)
 model GetItemTilesetMetadataOptions {
   /** STAC Collection Identifier. */
-  @path @maxLength(500) @pattern(".*") collectionId: string;
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
   /** STAC Item Identifier. */
-  @path @maxLength(500) @pattern(".*") itemId: string;
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  itemId: string;
+
   /** Identifier selecting one of the TileMatrixSetId supported. */
-  @path @maxLength(500) @pattern(".*") tileMatrixSetId: string;
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  tileMatrixSetId: string;
 
   ...SubDatasetQueryParameters;
 }
@@ -1411,9 +1560,16 @@ model GetItemTilesetMetadataOptions {
 @added(Versions.v2026_04_15)
 model GetItemInfoOptions {
   /** STAC Collection Identifier. */
-  @path @maxLength(500) @pattern(".*") collectionId: string;
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
   /** STAC Item Identifier. */
-  @path @maxLength(500) @pattern(".*") itemId: string;
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  itemId: string;
 
   ...SubDatasetQueryParameters;
 
@@ -1427,7 +1583,10 @@ model GetItemInfoOptions {
 @added(Versions.v2026_04_15)
 model GetSearchTilesetsOptions {
   /** Search Id (pgSTAC Search Hash). */
-  @path @maxLength(500) @pattern(".*") searchId: string;
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  searchId: string;
 
   ...SubDatasetQueryParameters;
 }
@@ -1437,9 +1596,16 @@ model GetSearchTilesetsOptions {
 @added(Versions.v2026_04_15)
 model GetSearchTilesetMetadataOptions {
   /** Search Id (pgSTAC Search Hash). */
-  @path @maxLength(500) @pattern(".*") searchId: string;
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  searchId: string;
+
   /** Identifier selecting one of the TileMatrixSetId supported. */
-  @path @maxLength(500) @pattern(".*") tileMatrixSetId: string;
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  tileMatrixSetId: string;
 
   ...SubDatasetQueryParameters;
 }
@@ -1453,6 +1619,7 @@ model GetSearchTilesetMetadataOptions {
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
 op getItemPointOverride(
   ...Azure.Core.Foundations.ApiVersionParameter,
+
   /** The options for the item point query. */
   options: GetItemPointOptions,
 ): TilerCoreModelsResponsesPoint;
@@ -1461,6 +1628,7 @@ op getItemPointOverride(
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
 op getItemTileJsonOverride(
   ...Azure.Core.Foundations.ApiVersionParameter,
+
   /** The options for the item TileJSON query. */
   options: GetItemTileJsonOptions,
 ): TileJsonMetadata;
@@ -1469,6 +1637,7 @@ op getItemTileJsonOverride(
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
 op getItemTileJsonByTmsOverride(
   ...Azure.Core.Foundations.ApiVersionParameter,
+
   /** The options for the item TileJSON by TMS query. */
   options: GetItemTileJsonByTmsOptions,
 ): TileJsonMetadata;
@@ -1477,6 +1646,7 @@ op getItemTileJsonByTmsOverride(
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
 op getCollectionTileJsonOverride(
   ...Azure.Core.Foundations.ApiVersionParameter,
+
   /** The options for the collection TileJSON query. */
   options: GetCollectionTileJsonOptions,
 ): TileJsonMetadata;
@@ -1485,6 +1655,7 @@ op getCollectionTileJsonOverride(
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
 op getCollectionTileJsonByTmsOverride(
   ...Azure.Core.Foundations.ApiVersionParameter,
+
   /** The options for the collection TileJSON by TMS query. */
   options: GetCollectionTileJsonByTmsOptions,
 ): TileJsonMetadata;
@@ -1493,6 +1664,7 @@ op getCollectionTileJsonByTmsOverride(
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
 op getSearchTileJsonOverride(
   ...Azure.Core.Foundations.ApiVersionParameter,
+
   /** The options for the search TileJSON query. */
   options: GetSearchTileJsonOptions,
 ): TileJsonMetadata;
@@ -1501,6 +1673,7 @@ op getSearchTileJsonOverride(
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
 op getSearchTileJsonByTmsOverride(
   ...Azure.Core.Foundations.ApiVersionParameter,
+
   /** The options for the search TileJSON by TMS query. */
   options: GetSearchTileJsonByTmsOptions,
 ): TileJsonMetadata;
@@ -1509,6 +1682,7 @@ op getSearchTileJsonByTmsOverride(
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
 op getCollectionPointOverride(
   ...Azure.Core.Foundations.ApiVersionParameter,
+
   /** The options for the collection point query. */
   options: GetCollectionPointOptions,
 ): TilerCoreModelsResponsesPoint;
@@ -1517,6 +1691,7 @@ op getCollectionPointOverride(
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
 op getSearchPointOverride(
   ...Azure.Core.Foundations.ApiVersionParameter,
+
   /** The options for the search point query. */
   options: GetSearchPointOptions,
 ): TilerCoreModelsResponsesPoint;
@@ -1525,6 +1700,7 @@ op getSearchPointOverride(
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
 op getItemStatisticsOverride(
   ...Azure.Core.Foundations.ApiVersionParameter,
+
   /** The options for the item statistics query. */
   options: GetItemStatisticsOptions,
 ): TilerStacItemStatistics;
@@ -1533,6 +1709,7 @@ op getItemStatisticsOverride(
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
 op getItemAssetStatisticsOverride(
   ...Azure.Core.Foundations.ApiVersionParameter,
+
   /** The options for the item asset statistics query. */
   options: GetItemAssetStatisticsOptions,
 ): AssetStatisticsResponse;
@@ -1541,6 +1718,7 @@ op getItemAssetStatisticsOverride(
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
 op getItemFeatureStatisticsOverride(
   ...Azure.Core.Foundations.ApiVersionParameter,
+
   /** The options for the item feature statistics query. */
   options: GetItemFeatureStatisticsOptions,
 ): StacItemStatisticsGeoJson;
@@ -1549,6 +1727,7 @@ op getItemFeatureStatisticsOverride(
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
 op getCollectionTilesetsOverride(
   ...Azure.Core.Foundations.ApiVersionParameter,
+
   /** The options for the collection tilesets query. */
   options: GetCollectionTilesetsOptions,
 ): TileSetList;
@@ -1557,6 +1736,7 @@ op getCollectionTilesetsOverride(
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
 op getCollectionTilesetMetadataOverride(
   ...Azure.Core.Foundations.ApiVersionParameter,
+
   /** The options for the collection tileset metadata query. */
   options: GetCollectionTilesetMetadataOptions,
 ): TileSetMetadata;
@@ -1565,6 +1745,7 @@ op getCollectionTilesetMetadataOverride(
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
 op getItemTilesetsOverride(
   ...Azure.Core.Foundations.ApiVersionParameter,
+
   /** The options for the item tilesets query. */
   options: GetItemTilesetsOptions,
 ): TileSetList;
@@ -1573,6 +1754,7 @@ op getItemTilesetsOverride(
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
 op getItemTilesetMetadataOverride(
   ...Azure.Core.Foundations.ApiVersionParameter,
+
   /** The options for the item tileset metadata query. */
   options: GetItemTilesetMetadataOptions,
 ): TileSetMetadata;
@@ -1581,6 +1763,7 @@ op getItemTilesetMetadataOverride(
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
 op getItemInfoOverride(
   ...Azure.Core.Foundations.ApiVersionParameter,
+
   /** The options for the item info query. */
   options: GetItemInfoOptions,
 ): TilerInfoMapResponse;
@@ -1589,6 +1772,7 @@ op getItemInfoOverride(
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
 op getItemInfoGeoJsonOverride(
   ...Azure.Core.Foundations.ApiVersionParameter,
+
   /** The options for the item info GeoJSON query. */
   options: GetItemInfoOptions,
 ): TilerInfoGeoJsonFeature;
@@ -1597,6 +1781,7 @@ op getItemInfoGeoJsonOverride(
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
 op getItemBoundsOverride(
   ...Azure.Core.Foundations.ApiVersionParameter,
+
   /** The options for the item bounds query. */
   options: GetItemTilesetsOptions,
 ): StacItemBounds;
@@ -1605,6 +1790,7 @@ op getItemBoundsOverride(
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
 op getSearchTilesetsOverride(
   ...Azure.Core.Foundations.ApiVersionParameter,
+
   /** The options for the search tilesets query. */
   options: GetSearchTilesetsOptions,
 ): TileSetList;
@@ -1613,6 +1799,7 @@ op getSearchTilesetsOverride(
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
 op getSearchTilesetMetadataOverride(
   ...Azure.Core.Foundations.ApiVersionParameter,
+
   /** The options for the search tileset metadata query. */
   options: GetSearchTilesetMetadataOptions,
 ): TileSetMetadata;
@@ -1630,15 +1817,27 @@ op getSearchTilesetMetadataOverride(
 @@protocolAPI(MosaicItemsTileJson.get, false, "csharp");
 
 // Item TileJSON By TMS
-@@override(MosaicItemsTileMatrixSetsTileJson.get, getItemTileJsonByTmsOverride, "csharp");
+@@override(
+  MosaicItemsTileMatrixSetsTileJson.get,
+  getItemTileJsonByTmsOverride,
+  "csharp"
+);
 @@protocolAPI(MosaicItemsTileMatrixSetsTileJson.get, false, "csharp");
 
 // Collection TileJSON
-@@override(MosaicCollectionsTileJson.get, getCollectionTileJsonOverride, "csharp");
+@@override(
+  MosaicCollectionsTileJson.get,
+  getCollectionTileJsonOverride,
+  "csharp"
+);
 @@protocolAPI(MosaicCollectionsTileJson.get, false, "csharp");
 
 // Collection TileJSON By TMS
-@@override(MosaicCollectionsTileMatrixSetsTileJson.get, getCollectionTileJsonByTmsOverride, "csharp");
+@@override(
+  MosaicCollectionsTileMatrixSetsTileJson.get,
+  getCollectionTileJsonByTmsOverride,
+  "csharp"
+);
 @@protocolAPI(MosaicCollectionsTileMatrixSetsTileJson.get, false, "csharp");
 
 // Search TileJSON
@@ -1646,11 +1845,19 @@ op getSearchTilesetMetadataOverride(
 @@protocolAPI(MosaicSearchesTileJson.get, false, "csharp");
 
 // Search TileJSON By TMS
-@@override(MosaicSearchesTileMatrixSetsTileJson.get, getSearchTileJsonByTmsOverride, "csharp");
+@@override(
+  MosaicSearchesTileMatrixSetsTileJson.get,
+  getSearchTileJsonByTmsOverride,
+  "csharp"
+);
 @@protocolAPI(MosaicSearchesTileMatrixSetsTileJson.get, false, "csharp");
 
 // Collection Point
-@@override(MosaicCollectionsPoint.getPoint, getCollectionPointOverride, "csharp");
+@@override(
+  MosaicCollectionsPoint.getPoint,
+  getCollectionPointOverride,
+  "csharp"
+);
 @@protocolAPI(MosaicCollectionsPoint.getPoint, false, "csharp");
 
 // Search Point
@@ -1662,19 +1869,35 @@ op getSearchTilesetMetadataOverride(
 @@protocolAPI(MosaicItemsStatistics.getAll, false, "csharp");
 
 // Item Asset Statistics
-@@override(MosaicItemsAssetStatistics.getAll, getItemAssetStatisticsOverride, "csharp");
+@@override(
+  MosaicItemsAssetStatistics.getAll,
+  getItemAssetStatisticsOverride,
+  "csharp"
+);
 @@protocolAPI(MosaicItemsAssetStatistics.getAll, false, "csharp");
 
 // Item Feature Statistics
-@@override(MosaicItemsGeoJsonStatistics.get, getItemFeatureStatisticsOverride, "csharp");
+@@override(
+  MosaicItemsGeoJsonStatistics.get,
+  getItemFeatureStatisticsOverride,
+  "csharp"
+);
 @@protocolAPI(MosaicItemsGeoJsonStatistics.get, false, "csharp");
 
 // Collection Tilesets
-@@override(MosaicCollectionsTileSetList.get, getCollectionTilesetsOverride, "csharp");
+@@override(
+  MosaicCollectionsTileSetList.get,
+  getCollectionTilesetsOverride,
+  "csharp"
+);
 @@protocolAPI(MosaicCollectionsTileSetList.get, false, "csharp");
 
 // Collection Tileset Metadata
-@@override(MosaicCollectionsTileSetMetadata.get, getCollectionTilesetMetadataOverride, "csharp");
+@@override(
+  MosaicCollectionsTileSetMetadata.get,
+  getCollectionTilesetMetadataOverride,
+  "csharp"
+);
 @@protocolAPI(MosaicCollectionsTileSetMetadata.get, false, "csharp");
 
 // Item Tilesets (getTilesets)
@@ -1682,7 +1905,11 @@ op getSearchTilesetMetadataOverride(
 @@protocolAPI(MosaicItemsTileSetList.get, false, "csharp");
 
 // Item Tileset Metadata (getTilesetMetadata)
-@@override(MosaicItemsTileSetMetadata.get, getItemTilesetMetadataOverride, "csharp");
+@@override(
+  MosaicItemsTileSetMetadata.get,
+  getItemTilesetMetadataOverride,
+  "csharp"
+);
 @@protocolAPI(MosaicItemsTileSetMetadata.get, false, "csharp");
 
 // Item Info
@@ -1702,7 +1929,11 @@ op getSearchTilesetMetadataOverride(
 @@protocolAPI(MosaicSearchesTileSetList.get, false, "csharp");
 
 // Search Tileset Metadata
-@@override(MosaicSearchesTileSetMetadata.get, getSearchTilesetMetadataOverride, "csharp");
+@@override(
+  MosaicSearchesTileSetMetadata.get,
+  getSearchTilesetMetadataOverride,
+  "csharp"
+);
 @@protocolAPI(MosaicSearchesTileSetMetadata.get, false, "csharp");
 
 // =============================================================================
