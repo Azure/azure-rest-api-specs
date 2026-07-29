@@ -81042,34 +81042,11 @@
             "description": "The voice kind. Always `openai`."
           },
           "name": {
-            "$ref": "#/components/schemas/OpenAIVoiceName",
+            "$ref": "#/components/schemas/OpenAI.VoiceIdsShared",
             "description": "The OpenAI built-in voice name."
           }
         },
         "description": "An OpenAI built-in voice configuration with an explicit type discriminator."
-      },
-      "OpenAIVoiceName": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "alloy",
-              "ash",
-              "ballad",
-              "cedar",
-              "coral",
-              "echo",
-              "marin",
-              "sage",
-              "shimmer",
-              "verse"
-            ]
-          }
-        ],
-        "description": "A known OpenAI built-in voice name. Additional values may be added over time."
       },
       "OpenApiAnonymousAuthDetails": {
         "type": "object",
@@ -86574,9 +86551,6 @@
       "VoiceAgentVoice": {
         "anyOf": [
           {
-            "$ref": "#/components/schemas/OpenAIVoiceName"
-          },
-          {
             "$ref": "#/components/schemas/OpenAIVoice"
           },
           {
@@ -86586,7 +86560,7 @@
             "$ref": "#/components/schemas/AzureRealtimeNativeVoice"
           }
         ],
-        "description": "A voice configuration accepted by a voice agent. Built-in OpenAI voices may also be specified as a bare string."
+        "description": "A typed voice configuration accepted by a voice agent."
       },
       "VoiceAssistantMessageItem": {
         "type": "object",
@@ -86725,7 +86699,7 @@
           },
           "voice": {
             "$ref": "#/components/schemas/VoiceAgentVoice",
-            "description": "The voice. Either a built-in OpenAI voice name, such as `alloy`, or a typed voice configuration."
+            "description": "The typed voice configuration."
           },
           "speed": {
             "type": "number",
