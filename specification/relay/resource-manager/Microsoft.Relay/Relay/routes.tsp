@@ -36,6 +36,7 @@ interface ClustersOperationGroup {
    */
   @autoRoute
   @get
+  @list
   @action("availableClusterRegions")
   listAvailableClusterRegion is ArmProviderActionSync<
     Response = AvailableRelayClustersList,
@@ -63,7 +64,7 @@ interface ClusterOperationResults {
      * Indicates that the response uses the Azure asynchronous operation status shape.
      */
     @query
-    isAsyncHeader: boolean,
+    isAsyncHeader: true,
 
     /**
      * The Relay cluster name.

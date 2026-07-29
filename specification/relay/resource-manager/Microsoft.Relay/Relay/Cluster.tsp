@@ -22,6 +22,28 @@ union RelayClusterSkuName {
 }
 
 /**
+ * Tier of the Relay cluster SKU.
+ */
+@added(Versions.v2026_07_01_preview)
+union RelayClusterSkuTier {
+  string,
+
+  /** The dedicated Relay cluster SKU tier. */
+  Dedicated: "Dedicated",
+}
+
+/**
+ * Scaling mode supported by a Relay cluster SKU.
+ */
+@added(Versions.v2026_07_01_preview)
+union RelayClusterSkuScaleType {
+  string,
+
+  /** Capacity can be scaled automatically. */
+  Automatic: "Automatic",
+}
+
+/**
  * Provisioning state of a Relay cluster.
  */
 @added(Versions.v2026_07_01_preview)
@@ -39,9 +61,6 @@ union RelayClusterProvisioningState {
 
   /** The cluster is being scaled. */
   Scaling: "Scaling",
-
-  /** The cluster is active. */
-  Active: "Active",
 
   /** The cluster operation failed. */
   Failed: "Failed",
@@ -112,19 +131,9 @@ model RelayClusterProperties {
   supportsScaling?: boolean;
 
   /**
-   * Indicates whether the Relay cluster is zone redundant.
+   * Indicates whether the Relay cluster was created as zone redundant.
    */
-  zoneRedundant?: boolean;
-}
-
-/**
- * Mutable Relay cluster properties.
- */
-@added(Versions.v2026_07_01_preview)
-model RelayClusterUpdateProperties {
-  /**
-   * Indicates whether the Relay cluster is zone redundant.
-   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   zoneRedundant?: boolean;
 }
 
@@ -151,20 +160,11 @@ model RelayClusterSkuUpdate {
 @added(Versions.v2026_07_01_preview)
 model RelayClusterUpdate {
   /**
-   * Mutable Relay cluster properties.
-   */
-  properties?: RelayClusterUpdateProperties;
-
-  /**
    * The Relay cluster SKU.
    */
   sku?: RelayClusterSkuUpdate;
 
-  /**
-   * Resource tags.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "The Relay cluster wire contract uses a string dictionary for tags."
-  tags?: Record<string>;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 }
 
 /**
@@ -172,12 +172,12 @@ model RelayClusterUpdate {
  */
 @added(Versions.v2026_07_01_preview)
 model RelayCluster
-  is Azure.ResourceManager.ProxyResource<RelayClusterProperties> {
+  is Azure.ResourceManager.TrackedResource<RelayClusterProperties> {
   ...ResourceNameParameter<
     Resource = RelayCluster,
     KeyName = "clusterName",
     SegmentName = "clusters",
-    NamePattern = ""
+    NamePattern = "^(?!.*--)[a-zA-Z][a-zA-Z0-9-]{4,48}[a-zA-Z0-9]$"
   >;
 
   /**
@@ -185,20 +185,6 @@ model RelayCluster
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "The Relay service implements the established Event Hubs cluster envelope with the SKU outside properties."
   sku?: RelayClusterSku;
-
-  /**
-   * The Azure region where the Relay cluster is located.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "The Relay service implements the established Event Hubs cluster envelope with location on the resource."
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  location?: string;
-
-  /**
-   * Resource tags.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "The Relay cluster wire contract uses a string dictionary for tags."
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "The Relay service implements the established Event Hubs cluster envelope with tags on the resource."
-  tags?: Record<string>;
 }
 
 /**
@@ -209,8 +195,15 @@ model RelayNamespaceIdListResult {
   /**
    * Relay namespace resource IDs assigned to the cluster.
    */
+  @pageItems
   @Azure.ResourceManager.identifiers(#["id"])
   value?: RelayNamespaceId[];
+
+  /**
+   * The link to the next page of results.
+   */
+  @nextLink
+  nextLink?: url;
 }
 
 /**
@@ -219,9 +212,13 @@ model RelayNamespaceIdListResult {
 @added(Versions.v2026_07_01_preview)
 model RelayNamespaceId {
   /**
-   * The full ARM resource ID of the Relay namespace.
+   * The full Azure resource ID of the Relay namespace.
    */
-  id?: string;
+  id?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Relay/namespaces";
+    }
+  ]>;
 }
 
 /**
@@ -232,8 +229,15 @@ model AvailableRelayClustersList {
   /**
    * Regions containing available pre-provisioned Relay clusters.
    */
+  @pageItems
   @Azure.ResourceManager.identifiers(#["location"])
   value?: AvailableRelayCluster[];
+
+  /**
+   * The link to the next page of results.
+   */
+  @nextLink
+  nextLink?: url;
 }
 
 /**
@@ -255,12 +259,19 @@ model RelayClusterSkuListResult {
   /**
    * The SKUs supported by the Relay cluster.
    */
+  @pageItems
   @Azure.ResourceManager.identifiers(#[
     "resourceType",
     "/sku/name",
     "/sku/tier"
   ])
   value?: RelayClusterSkuInfo[];
+
+  /**
+   * The link to the next page of results.
+   */
+  @nextLink
+  nextLink?: url;
 }
 
 /**
@@ -302,7 +313,7 @@ model RelayClusterSkuDetails {
    * The SKU tier.
    */
   @visibility(Lifecycle.Read)
-  tier?: RelayClusterSkuName;
+  tier?: RelayClusterSkuTier;
 }
 
 /**
@@ -338,7 +349,7 @@ model RelayClusterSkuCapacity {
    * The supported scaling mode.
    */
   @visibility(Lifecycle.Read)
-  scaleType?: string;
+  scaleType?: RelayClusterSkuScaleType;
 }
 
 @added(Versions.v2026_07_01_preview)
@@ -375,7 +386,6 @@ interface Clusters {
     PatchModel = RelayClusterUpdate,
     Response =
       | ArmResponse<RelayCluster>
-      | ArmResourceCreatedResponse<RelayCluster>
       | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = RelayCluster> &
           Azure.Core.Foundations.RetryAfterHeader>,
     Error = Azure.ResourceManager.CommonTypes.ErrorResponse
@@ -415,6 +425,7 @@ interface Clusters {
    * Lists Relay namespace resource IDs assigned to a Relay cluster.
    */
   @get
+  @list
   @action("namespaces")
   listNamespaces is ArmResourceActionSync<
     RelayCluster,
@@ -427,6 +438,7 @@ interface Clusters {
    * Lists SKUs supported by a Relay cluster.
    */
   @get
+  @list
   @action("skus")
   listSkus is ArmResourceActionSync<
     RelayCluster,

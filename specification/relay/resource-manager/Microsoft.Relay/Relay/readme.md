@@ -141,61 +141,96 @@ These settings apply only when `--tag=package-2026-07-preview` is specified on t
 input-file:
 - preview/2026-07-01-preview/relay.json
 directive:
-  - suppress: LatestVersionOfCommonTypesMustBeUsed
-    reason: This preview carries forward the 2026-01-01 Relay contract, which emits ARM common-types v3. Moving inherited resources to v6 would change schemas outside the scope of the Relay cluster feature.
   - suppress: ResourceNameRestriction
-    reason: Adding name patterns to inherited Relay resources would tighten the accepted names compared with the 2026-01-01 contract.
+    reason: Adding name patterns to inherited Relay resources would tighten the accepted names compared with the 2026-01-01 contract; the new cluster name uses the service-enforced pattern.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/authorizationRules"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/authorizationRules/{authorizationRuleName}"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/authorizationRules/{authorizationRuleName}/listKeys"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/authorizationRules/{authorizationRuleName}/regenerateKeys"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/hybridConnections"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/hybridConnections/{hybridConnectionName}"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/hybridConnections/{hybridConnectionName}/authorizationRules"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/hybridConnections/{hybridConnectionName}/authorizationRules/{authorizationRuleName}"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/hybridConnections/{hybridConnectionName}/authorizationRules/{authorizationRuleName}/listKeys"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/hybridConnections/{hybridConnectionName}/authorizationRules/{authorizationRuleName}/regenerateKeys"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/networkRuleSets/default"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/privateEndpointConnections"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/privateEndpointConnections/{privateEndpointConnectionName}"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/privateLinkResources"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/privateLinkResources/{privateLinkResourceName}"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/wcfRelays"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/wcfRelays/{relayName}"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/wcfRelays/{relayName}/authorizationRules"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/wcfRelays/{relayName}/authorizationRules/{authorizationRuleName}"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/wcfRelays/{relayName}/authorizationRules/{authorizationRuleName}/listKeys"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/wcfRelays/{relayName}/authorizationRules/{authorizationRuleName}/regenerateKeys"]
   - suppress: PutResponseCodes
-    reason: The inherited PUT response codes are part of the existing Relay service contract and changing them would be breaking.
+    reason: These responses match the implemented Relay contract. Cluster PUT uses 202 for asynchronous allocation, while inherited resource responses cannot be changed without breaking existing clients.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/clusters/{clusterName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/authorizationRules/{authorizationRuleName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/hybridConnections/{hybridConnectionName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/hybridConnections/{hybridConnectionName}/authorizationRules/{authorizationRuleName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/networkRuleSets/default"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/privateEndpointConnections/{privateEndpointConnectionName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/wcfRelays/{relayName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/wcfRelays/{relayName}/authorizationRules/{authorizationRuleName}"].put
   - suppress: PatchResponseCodes
-    reason: The inherited PATCH response codes are part of the existing Relay service contract and changing them would be breaking.
+    reason: The inherited namespace PATCH response codes are part of the existing Relay service contract and changing them would be breaking; the new cluster PATCH emits only 200 and 202.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}"].patch
   - suppress: DeleteResponseCodes
-    reason: The inherited DELETE response codes are part of the existing Relay service contract and changing them would be breaking.
+    reason: These responses match the implemented Relay contract. Cluster deletion can return 200 while starting cleanup, and inherited responses cannot be changed without breaking clients.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/clusters/{clusterName}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/privateEndpointConnections/{privateEndpointConnectionName}"].delete
   - suppress: GetResponseCodes
     reason: The inherited GET response codes are part of the existing Relay service contract and changing them would be breaking.
-  - suppress: AvoidMsdnReferences
-    reason: The external documentation links are inherited from 2026-01-01 and are unrelated to the Relay cluster feature.
-  - suppress: EnumInsteadOfBoolean
-    reason: The inherited boolean properties are part of the existing Relay contract and changing their wire types would be breaking.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/wcfRelays/{relayName}"].get
   - suppress: RequestSchemaForTrackedResourcesMustHaveTags
     reason: Adding tags to inherited request schemas would change the existing Relay API contract.
-  - suppress: LocationMustHaveXmsMutability
-    reason: The inherited location mutability is part of the existing generated contract and changing it could alter generated client behavior.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/authorizationRules/{authorizationRuleName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/hybridConnections/{hybridConnectionName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/hybridConnections/{hybridConnectionName}/authorizationRules/{authorizationRuleName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/privateEndpointConnections/{privateEndpointConnectionName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/wcfRelays/{relayName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/wcfRelays/{relayName}/authorizationRules/{authorizationRuleName}"].put
   - suppress: TrackedResourcePatchOperation
     reason: The affected inherited resource types do not support additional PATCH operations in the Relay service.
-  - suppress: ProvisioningStateMustBeReadOnly
-    reason: The inherited provisioning-state shapes are outside the scope of the Relay cluster feature.
+    where:
+      - $.definitions.AuthorizationRule
+      - $.definitions.HybridConnection
+      - $.definitions.PrivateEndpointConnection
+      - $.definitions.WcfRelay
   - suppress: XMSSecretInResponse
     reason: Adding x-ms-secret to the inherited access-key response would change the generated SDK surface.
-  - suppress: SchemaDescriptionOrTitle
-    reason: The inherited schema shape is unrelated to the Relay cluster feature.
-  - suppress: PageableOperation
-    reason: Adding paging metadata would change the generated SDK surface for an inherited list operation.
+    where:
+      - $.definitions.AccessKeys.properties.primaryKey
+      - $.definitions.AccessKeys.properties.secondaryKey
   - suppress: XmsPageableForListCalls
-    reason: Adding paging metadata would change the generated SDK surface for an inherited list operation.
+    reason: The inherited private-link list does not implement continuation tokens; emitting x-ms-pageable would describe unsupported service behavior.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/privateLinkResources"].get
   - suppress: NestedResourcesMustHaveListOperation
     reason: NetworkRuleSet is an inherited singleton child resource and the Relay service does not expose a list operation for it.
+    where: $.definitions.NetworkRuleSet
   - suppress: LroLocationHeader
     reason: The inherited long-running response headers are part of the existing Relay service contract.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/privateEndpointConnections/{privateEndpointConnectionName}"].put.responses.202
   - suppress: LroExtension
     reason: The inherited long-running operation metadata is part of the existing Relay service contract.
-  - suppress: AllProxyResourcesShouldHaveDelete
-    reason: NetworkRuleSet is an inherited singleton child resource and the Relay service does not expose a delete operation for it.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/privateEndpointConnections/{privateEndpointConnectionName}"].put
   - suppress: OperationIdNounVerb
     reason: Clusters_ListAvailableClusterRegion matches the established Event Hubs cluster operation name and keeps the corresponding Relay and Event Hubs SDK surfaces consistent.
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Relay/availableClusterRegions"].get.operationId
-  - suppress: GetCollectionOnlyHasValueAndNextLink
-    reason: These operations return collections of region, SKU, or resource-ID values rather than collections of ARM resources, so the ARM resource-list envelope rule does not apply.
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Relay/availableClusterRegions"].get.responses.200.schema.properties
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/clusters/{clusterName}/skus"].get.responses.200.schema.properties
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/clusters/{clusterName}/namespaces"].get.responses.200.schema.properties
   - suppress: ParametersInPointGet
     reason: This is the implemented Relay long-running operation status endpoint, not a resource point GET; the query parameters identify the cluster operation being polled.
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Relay/locations/{location}/clusterOperationResults/{operationId}"].get.parameters
-  - suppress: ParameterNotUsingCommonTypes
-    reason: resourceGroupName is a query parameter required by the Relay operation coordinator rather than the ARM resource-group path parameter defined by common types.
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Relay/locations/{location}/clusterOperationResults/{operationId}"].get.parameters[7].name
+  - suppress: XmsEnumValidation
+    reason: isAsyncHeader is constrained to true because this operation documents the Azure-AsyncOperation status response; false returns the final resource through the separate Location polling contract.
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Relay/locations/{location}/clusterOperationResults/{operationId}"].get.parameters[4]
   - suppress: RequiredPropertiesMissingInResourceModel
     reason: These definitions are non-resource list response wrappers whose names trigger the resource-model heuristic; their items are regions, SKU descriptions, or namespace resource IDs.
     where:

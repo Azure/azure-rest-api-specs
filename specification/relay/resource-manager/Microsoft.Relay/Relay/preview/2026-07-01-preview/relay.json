@@ -140,6 +140,9 @@
           "ListAvailableClusters": {
             "$ref": "./examples/Clusters/ListAvailableClustersGet.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -246,7 +249,10 @@
             "in": "query",
             "description": "Indicates that the response uses the Azure asynchronous operation status shape.",
             "required": true,
-            "type": "boolean"
+            "type": "boolean",
+            "enum": [
+              true
+            ]
           },
           {
             "name": "resourceName",
@@ -410,7 +416,8 @@
             "required": true,
             "type": "string",
             "minLength": 6,
-            "maxLength": 50
+            "maxLength": 50,
+            "pattern": "^(?!.*--)[a-zA-Z][a-zA-Z0-9-]{4,48}[a-zA-Z0-9]$"
           }
         ],
         "responses": {
@@ -456,7 +463,8 @@
             "required": true,
             "type": "string",
             "minLength": 6,
-            "maxLength": 50
+            "maxLength": 50,
+            "pattern": "^(?!.*--)[a-zA-Z][a-zA-Z0-9-]{4,48}[a-zA-Z0-9]$"
           },
           {
             "name": "resource",
@@ -548,7 +556,8 @@
             "required": true,
             "type": "string",
             "minLength": 6,
-            "maxLength": 50
+            "maxLength": 50,
+            "pattern": "^(?!.*--)[a-zA-Z][a-zA-Z0-9-]{4,48}[a-zA-Z0-9]$"
           },
           {
             "name": "properties",
@@ -565,19 +574,6 @@
             "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/RelayCluster"
-            }
-          },
-          "201": {
-            "description": "Resource 'RelayCluster' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/RelayCluster"
-            },
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
             }
           },
           "202": {
@@ -640,7 +636,8 @@
             "required": true,
             "type": "string",
             "minLength": 6,
-            "maxLength": 50
+            "maxLength": 50,
+            "pattern": "^(?!.*--)[a-zA-Z][a-zA-Z0-9-]{4,48}[a-zA-Z0-9]$"
           }
         ],
         "responses": {
@@ -711,7 +708,8 @@
             "required": true,
             "type": "string",
             "minLength": 6,
-            "maxLength": 50
+            "maxLength": 50,
+            "pattern": "^(?!.*--)[a-zA-Z][a-zA-Z0-9-]{4,48}[a-zA-Z0-9]$"
           }
         ],
         "responses": {
@@ -732,6 +730,9 @@
           "ListNamespacesInCluster": {
             "$ref": "./examples/Clusters/ListNamespacesInClusterGet.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -759,7 +760,8 @@
             "required": true,
             "type": "string",
             "minLength": 6,
-            "maxLength": 50
+            "maxLength": 50,
+            "pattern": "^(?!.*--)[a-zA-Z][a-zA-Z0-9-]{4,48}[a-zA-Z0-9]$"
           }
         ],
         "responses": {
@@ -780,6 +782,9 @@
           "ClusterSkusGet": {
             "$ref": "./examples/Clusters/ClusterSkusGet.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -3267,6 +3272,11 @@
           "x-ms-identifiers": [
             "location"
           ]
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of results."
         }
       }
     },
@@ -3378,7 +3388,8 @@
             "value": "Failed"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "HybridConnection": {
       "type": "object",
@@ -3768,26 +3779,11 @@
         "sku": {
           "$ref": "#/definitions/RelayClusterSku",
           "description": "The Relay cluster SKU."
-        },
-        "location": {
-          "type": "string",
-          "description": "The Azure region where the Relay cluster is located.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -3850,7 +3846,11 @@
         },
         "zoneRedundant": {
           "type": "boolean",
-          "description": "Indicates whether the Relay cluster is zone redundant."
+          "description": "Indicates whether the Relay cluster was created as zone redundant.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       }
     },
@@ -3862,7 +3862,6 @@
         "Creating",
         "Deleting",
         "Scaling",
-        "Active",
         "Failed",
         "Succeeded",
         "Canceled"
@@ -3892,11 +3891,6 @@
             "description": "The cluster is being scaled."
           },
           {
-            "name": "Active",
-            "value": "Active",
-            "description": "The cluster is active."
-          },
-          {
             "name": "Failed",
             "value": "Failed",
             "description": "The cluster operation failed."
@@ -3912,7 +3906,8 @@
             "description": "The cluster operation was canceled."
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "RelayClusterSku": {
       "type": "object",
@@ -3965,7 +3960,7 @@
           "readOnly": true
         },
         "scaleType": {
-          "type": "string",
+          "$ref": "#/definitions/RelayClusterSkuScaleType",
           "description": "The supported scaling mode.",
           "readOnly": true
         }
@@ -3981,7 +3976,7 @@
           "readOnly": true
         },
         "tier": {
-          "$ref": "#/definitions/RelayClusterSkuName",
+          "$ref": "#/definitions/RelayClusterSkuTier",
           "description": "The SKU tier.",
           "readOnly": true
         }
@@ -4023,6 +4018,11 @@
             "/sku/name",
             "/sku/tier"
           ]
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of results."
         }
       }
     },
@@ -4040,6 +4040,42 @@
             "name": "Dedicated",
             "value": "Dedicated",
             "description": "The dedicated Relay cluster SKU."
+          }
+        ]
+      }
+    },
+    "RelayClusterSkuScaleType": {
+      "type": "string",
+      "description": "Scaling mode supported by a Relay cluster SKU.",
+      "enum": [
+        "Automatic"
+      ],
+      "x-ms-enum": {
+        "name": "RelayClusterSkuScaleType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Automatic",
+            "value": "Automatic",
+            "description": "Capacity can be scaled automatically."
+          }
+        ]
+      }
+    },
+    "RelayClusterSkuTier": {
+      "type": "string",
+      "description": "Tier of the Relay cluster SKU.",
+      "enum": [
+        "Dedicated"
+      ],
+      "x-ms-enum": {
+        "name": "RelayClusterSkuTier",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Dedicated",
+            "value": "Dedicated",
+            "description": "The dedicated Relay cluster SKU tier."
           }
         ]
       }
@@ -4064,10 +4100,6 @@
       "type": "object",
       "description": "Parameters for updating a Relay cluster.",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/RelayClusterUpdateProperties",
-          "description": "Mutable Relay cluster properties."
-        },
         "sku": {
           "$ref": "#/definitions/RelayClusterSkuUpdate",
           "description": "The Relay cluster SKU."
@@ -4078,16 +4110,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        }
-      }
-    },
-    "RelayClusterUpdateProperties": {
-      "type": "object",
-      "description": "Mutable Relay cluster properties.",
-      "properties": {
-        "zoneRedundant": {
-          "type": "boolean",
-          "description": "Indicates whether the Relay cluster is zone redundant."
         }
       }
     },
@@ -4117,7 +4139,15 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "The full ARM resource ID of the Relay namespace."
+          "format": "arm-id",
+          "description": "The full Azure resource ID of the Relay namespace.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Relay/namespaces"
+              }
+            ]
+          }
         }
       }
     },
@@ -4134,6 +4164,11 @@
           "x-ms-identifiers": [
             "id"
           ]
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of results."
         }
       }
     },
