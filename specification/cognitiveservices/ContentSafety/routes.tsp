@@ -2,7 +2,11 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/http";
 import "@typespec/rest";
 import "@azure-tools/typespec-client-generator-core";
-import "./models.tsp";
+import "./models/text.tsp";
+import "./models/image.tsp";
+import "./models/text_blocklist.tsp";
+import "./models/others.tsp";
+import "./models/thread.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -12,6 +16,25 @@ using Azure.Core.Traits;
 using Azure.ClientGenerator.Core;
 
 namespace ContentSafety;
+
+interface ThreadOperations {
+  @added(ContentSafety.Versions.v2024_12_15_preview)
+  @summary("Analyze AgentTaskAdherence")
+  @doc("A synchronous API for analyzing agent task adherence in a conversation. It supports detecting harmful agentic behavior such as deviation from task and inappropriate tool calls.")
+  @route("/agent:analyzeTaskAdherence")
+  @post
+  analyzeAgentTaskAdherence is Azure.Core.RpcOperation<
+    {
+      @bodyRoot
+      @doc("The request body for analyzing agent task adherence.")
+      @clientName("options", "csharp")
+      @clientName("options", "python")
+      @clientName("options", "java")
+      body: AnalyzeTaskAdherenceRequest;
+    },
+    AnalyzeTaskAdherenceResult
+  >;
+}
 
 interface TextOperations {
   @summary("Analyze Text")
