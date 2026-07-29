@@ -3,7 +3,6 @@
 
 import "../common/models.tsp";
 import "../common/servicepatterns.tsp";
-import "../agents/models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;

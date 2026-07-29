@@ -16,6 +16,7 @@ import "../schedules/routes.tsp";
 import "../routines/routes.tsp";
 import "../skills/routes.tsp";
 import "../data_generation_jobs/routes.tsp";
+import "../experiments/routes.tsp";
 
 import "../sdk-common/ops-relocation-projects.tsp";
 

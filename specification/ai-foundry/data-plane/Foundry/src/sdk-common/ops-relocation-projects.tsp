@@ -117,3 +117,16 @@ interface Routines {}
 @@clientLocation(Azure.AI.Projects.Routines.deleteRoutine, Routines);
 @@clientLocation(Azure.AI.Projects.Routines.listRoutineRuns, Routines);
 @@clientLocation(Azure.AI.Projects.Routines.dispatchRoutineAsync, Routines);
+
+interface Experiments {}
+@@clientLocation(Azure.AI.Projects.Experiments.create, Experiments);
+@@clientLocation(Azure.AI.Projects.Experiments.get, Experiments);
+@@clientLocation(Azure.AI.Projects.Experiments.list, Experiments);
+@@clientLocation(Azure.AI.Projects.Experiments.update, Experiments);
+@@clientLocation(Azure.AI.Projects.Experiments.start, Experiments);
+@@clientLocation(Azure.AI.Projects.Experiments.stop, Experiments);
+@@clientLocation(Azure.AI.Projects.Experiments.promote, Experiments);
+@@clientLocation(Azure.AI.Projects.Experiments.delete, Experiments);
+@@clientLocation(Azure.AI.Projects.Experiments.listScorecards, Experiments);
+@@clientLocation(Azure.AI.Projects.Experiments.getScorecard, Experiments);
+@@clientLocation(Azure.AI.Projects.Experiments.deleteScorecard, Experiments);
