@@ -1,0 +1,51 @@
+{
+  "operationId": "Configurations_CreateOrUpdate",
+  "title": "Create or update the resource SIP configuration",
+  "parameters": {
+    "endpoint": "https://my-resource.services.ai.azure.com",
+    "api-version": "2026-07-31-preview",
+    "body": {
+      "password": "<SIP digest password>",
+      "allowed_source_cidrs": [
+        "203.0.113.10/32",
+        "2001:db8::/48"
+      ],
+      "voice_live_agent_configuration": {
+        "model": "gpt-realtime",
+        "session": {
+          "voice": "alloy",
+          "instructions": "You are a helpful assistant."
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "sip_configuration",
+        "object": "sip.configuration",
+        "password_set": true,
+        "allowed_source_cidrs": [
+          "203.0.113.10/32",
+          "2001:db8::/48"
+        ],
+        "call_identity": {
+          "internal_id": "0123456789abcdef0123456789abcdef",
+          "resource_id": "/subscriptions/12345678-1234-1234-1234-123456789abc/resourceGroups/my-rg/providers/Microsoft.CognitiveServices/accounts/my-voicelive-resource",
+          "subscription_id": "12345678-1234-1234-1234-123456789abc",
+          "tenant_id": "87654321-4321-4321-4321-cba987654321",
+          "product_id": "voice-live-sip"
+        },
+        "voice_live_agent_configuration": {
+          "model": "gpt-realtime",
+          "session": {
+            "voice": "alloy",
+            "instructions": "You are a helpful assistant."
+          }
+        },
+        "created_at": 1784073600,
+        "updated_at": 1784073600
+      }
+    }
+  }
+}

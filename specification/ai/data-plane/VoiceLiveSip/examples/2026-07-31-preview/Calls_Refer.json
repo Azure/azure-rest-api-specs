@@ -1,0 +1,21 @@
+{
+  "operationId": "Calls_Refer",
+  "title": "Transfer a SIP call (blind transfer)",
+  "parameters": {
+    "endpoint": "https://my-resource.services.ai.azure.com",
+    "api-version": "2026-07-31-preview",
+    "call_id": "call_abc123",
+    "body": {
+      "target_uri": "sip:+15551234567@pstn.example.com"
+    }
+  },
+  "responses": {
+    "202": {
+      "body": {
+        "call_id": "call_abc123",
+        "transfer_id": "xfer_def456",
+        "state": "Transferring"
+      }
+    }
+  }
+}

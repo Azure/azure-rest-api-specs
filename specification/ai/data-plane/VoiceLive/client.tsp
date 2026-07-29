@@ -129,6 +129,24 @@ using Azure.ClientGenerator.Core;
 @@access(VoiceLive.ServerEventRtcCallSdpCreated, Access.public, "python");
 @@access(VoiceLive.ServerEventRtcCallError, Access.public, "python");
 @@access(VoiceLive.RtcCallErrorDetails, Access.public, "python");
+@@access(VoiceLive.ServerEventRealtimeCallIncoming, Access.public, "python");
+@@access(VoiceLive.ServerEventRealtimeCallConnected, Access.public, "python");
+@@access(
+  VoiceLive.ServerEventRealtimeCallDisconnected,
+  Access.public,
+  "python"
+);
+@@access(VoiceLive.ServerEventRealtimeCallFailed, Access.public, "python");
+@@access(
+  VoiceLive.ServerEventRealtimeCallTransferSucceeded,
+  Access.public,
+  "python"
+);
+@@access(
+  VoiceLive.ServerEventRealtimeCallTransferFailed,
+  Access.public,
+  "python"
+);
 @@access(
   VoiceLive.ServerEventOutputAudioBufferStarted,
   Access.public,
@@ -201,6 +219,24 @@ using Azure.ClientGenerator.Core;
 @@access(VoiceLive.ServerEventRtcCallSdpCreated, Access.public, "csharp");
 @@access(VoiceLive.ServerEventRtcCallError, Access.public, "csharp");
 @@access(VoiceLive.RtcCallErrorDetails, Access.public, "csharp");
+@@access(VoiceLive.ServerEventRealtimeCallIncoming, Access.public, "csharp");
+@@access(VoiceLive.ServerEventRealtimeCallConnected, Access.public, "csharp");
+@@access(
+  VoiceLive.ServerEventRealtimeCallDisconnected,
+  Access.public,
+  "csharp"
+);
+@@access(VoiceLive.ServerEventRealtimeCallFailed, Access.public, "csharp");
+@@access(
+  VoiceLive.ServerEventRealtimeCallTransferSucceeded,
+  Access.public,
+  "csharp"
+);
+@@access(
+  VoiceLive.ServerEventRealtimeCallTransferFailed,
+  Access.public,
+  "csharp"
+);
 @@access(
   VoiceLive.ServerEventOutputAudioBufferStarted,
   Access.public,
@@ -738,6 +774,20 @@ using Azure.ClientGenerator.Core;
 @@access(VoiceLive.ServerEventRtcCallSdpCreated, Access.public, "java");
 @@access(VoiceLive.ServerEventRtcCallError, Access.public, "java");
 @@access(VoiceLive.RtcCallErrorDetails, Access.public, "java");
+@@access(VoiceLive.ServerEventRealtimeCallIncoming, Access.public, "java");
+@@access(VoiceLive.ServerEventRealtimeCallConnected, Access.public, "java");
+@@access(VoiceLive.ServerEventRealtimeCallDisconnected, Access.public, "java");
+@@access(VoiceLive.ServerEventRealtimeCallFailed, Access.public, "java");
+@@access(
+  VoiceLive.ServerEventRealtimeCallTransferSucceeded,
+  Access.public,
+  "java"
+);
+@@access(
+  VoiceLive.ServerEventRealtimeCallTransferFailed,
+  Access.public,
+  "java"
+);
 @@access(VoiceLive.ServerEventOutputAudioBufferStarted, Access.public, "java");
 @@access(VoiceLive.ServerEventOutputAudioBufferStopped, Access.public, "java");
 
