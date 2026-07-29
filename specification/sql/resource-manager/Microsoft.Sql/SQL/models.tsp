@@ -2274,28 +2274,6 @@ union ManagedInstanceAdministratorType {
   ActiveDirectory: "ActiveDirectory",
 }
 
-/**
- * Principal type of the managed instance administrator.
- */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_08_01_preview)
-enum ManagedInstanceAdministratorPrincipalType {
-  /**
-   * Indicates that the principal is a user.
-   */
-  User,
-
-  /**
-   * Indicates that the principal is a group.
-   */
-  Group,
-
-  /**
-   * Indicates that the principal is an application.
-   */
-  Application,
-}
-
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union AdministratorName {
   string,
@@ -2782,19 +2760,19 @@ union PrivateEndpointProvisioningState {
   string,
 
   /**
-   * Approving
+   * Created
    */
-  Approving: "Approving",
+  Created: "Created",
 
   /**
-   * Ready
+   * InProgress
    */
-  Ready: "Ready",
+  InProgress: "InProgress",
 
   /**
-   * Dropping
+   * Succeeded
    */
-  Dropping: "Dropping",
+  Succeeded: "Succeeded",
 
   /**
    * Failed
@@ -2802,9 +2780,9 @@ union PrivateEndpointProvisioningState {
   Failed: "Failed",
 
   /**
-   * Rejecting
+   * Canceled
    */
-  Rejecting: "Rejecting",
+  Canceled: "Canceled",
 }
 
 /**
@@ -7422,7 +7400,7 @@ model DataWarehouseUserActivitiesProperties {
 /**
  * The properties of a deleted server.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "DeletedServer is a read-only proxy resource that represents a deleted server record. It has no provisioning lifecycle and does not support provisioning state."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DeletedServerProperties {
   /**
    * The version of the deleted server.
@@ -7434,6 +7412,7 @@ model DeletedServerProperties {
    * The deletion time of the deleted server.
    */
   @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   deletionTime?: utcDateTime;
 
   /**
@@ -7460,6 +7439,7 @@ model DeletedServerProperties {
    */
   @added(Versions.v2025_08_01_preview)
   @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   scheduledPurgeTime?: utcDateTime;
 }
 
@@ -11796,12 +11776,6 @@ model ManagedInstanceAdministratorProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tenantId?: Azure.Core.uuid;
-
-  /**
-   * Principal type of the managed instance administrator.
-   */
-  @added(Versions.v2025_08_01_preview)
-  principalType?: ManagedInstanceAdministratorPrincipalType;
 }
 
 /**
