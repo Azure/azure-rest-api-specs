@@ -291,7 +291,8 @@ namespace Microsoft.Compute;
 // ARMCOMMON001: avoid redefining the ARM-framework "ResourceType"; use a domain-scoped name.
 @@clientName(ResourceType, "ScheduledActionsResourceType", "csharp");
 // ARMCOMMON001: avoid redefining the ARM-framework "SubResource"; use a domain-scoped name.
-@@clientName(SubResource, "ComputeBulkActionsSubResource", "csharp");
+// Suffix avoids ending in "Resource", which is reserved for ArmResource-derived types.
+@@clientName(SubResource, "ComputeBulkActionsSubResourceInfo", "csharp");
 // Contextual naming: "Language" is too generic and collides across packages.
 @@clientName(Language, "ScheduledActionLanguage", "csharp");
 // Contextual naming: scope the generic "ProvisioningState" to its operation.
@@ -463,3 +464,13 @@ namespace Microsoft.Compute;
   "csharp"
 );
 @@clientName(ResourcePatchRequest, "ResourcePatchRequestContent", "csharp");
+
+// Model types must not end in "Resource" (reserved for ArmResource-derived classes);
+// these plain models collide with the ScheduledAction/Occurrence ARM resource classes.
+@@clientName(
+  ScheduledActionResource,
+  "ScheduledActionResourceMetadata",
+  "csharp"
+);
+@@clientName(OccurrenceResource, "OccurrenceResourceMetadata", "csharp");
+@@clientName(OccurrenceExtensionResource, "OccurrenceExtension", "csharp");
