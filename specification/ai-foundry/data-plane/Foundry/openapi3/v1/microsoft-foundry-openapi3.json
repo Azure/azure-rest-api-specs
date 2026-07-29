@@ -38541,6 +38541,15 @@
           "telemetry_config": {
             "$ref": "#/components/schemas/TelemetryConfig",
             "description": "Optional customer-supplied telemetry configuration for exporting container logs, traces, and metrics."
+          },
+          "session_configuration": {
+            "$ref": "#/components/schemas/SessionConfiguration",
+            "description": "Optional session defaults (for example, the idle timeout) applied to sessions created for this agent version.",
+            "examples": [
+              {
+                "idle_timeout_seconds": 300
+              }
+            ]
           }
         },
         "allOf": [
@@ -80569,6 +80578,23 @@
             "VoiceAgents=V1Preview"
           ]
         }
+      },
+      "SessionConfiguration": {
+        "type": "object",
+        "properties": {
+          "idle_timeout_seconds": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 300,
+            "maximum": 3600,
+            "description": "The idle duration, in seconds, before a session's sandbox is suspended. Optional — when\nunset, the server default of 900 seconds is used. Must be between 300 and 3600 seconds\n(inclusive).",
+            "examples": [
+              300
+            ],
+            "default": 900
+          }
+        },
+        "description": "Session defaults applied to sessions created for a hosted agent version."
       },
       "SessionDirectoryEntry": {
         "type": "object",
