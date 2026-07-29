@@ -1,5 +1,5 @@
 //
-// This file is used for emitting the .NET client (package Azure.AI.VoiceAgents).
+// This file is used for emitting the .NET client (package Azure.AI.Agents.Voice).
 //
 // It is a dedicated permutation of the Foundry API surface that consumes only the
 // voice-first prompt agent routes authored under ../voice-agents (Azure/azure-rest-api-specs#43970),
@@ -20,17 +20,16 @@ using Azure.AI.Projects;
 // OpenAI and Azure.Core.Foundations types under this package's namespace.
 // Azure.AI.Projects is the root spec namespace the voice routes/models live in; without
 // this remap every generated type would leak into the Azure.AI.Projects namespace.
-@@clientNamespace(Azure.AI.Projects, "Azure.AI.VoiceAgents", "csharp");
-@@clientNamespace(OpenAI, "Azure.AI.VoiceAgents", "csharp");
-@@clientNamespace(Azure.Core.Foundations, "Azure.AI.VoiceAgents", "csharp");
+@@clientNamespace(Azure.AI.Projects, "Azure.AI.Agents.Voice", "csharp");
+@@clientNamespace(OpenAI, "Azure.AI.Agents.Voice", "csharp");
+@@clientNamespace(Azure.Core.Foundations, "Azure.AI.Agents.Voice", "csharp");
 
 // --------------------------------------------------------------------------------
 // Root client
 // --------------------------------------------------------------------------------
 @@clientName(Azure.AI.Projects, "VoiceAgentsClient");
 
-// The `VoiceAgents` operation-group subclient would otherwise share the exact name of
-// this package's namespace tail (Azure.AI.VoiceAgents), which C# forbids (it escapes the
-// namespace to Azure.AI._VoiceAgents). Rename the subclient to match Python's generated
-// operation-group name (VoiceAgentsOperations) and keep the namespace clean.
-@@clientName(Azure.AI.Projects.VoiceAgents, "VoiceAgentsOperations", "csharp");
+// Rename the `VoiceAgents` operation-group subclient to match Python's generated
+// operation-group name (VoiceAgentsOperations) and avoid a clash with the root
+// `VoiceAgentsClient`.
+@@clientName(Azure.AI.Projects.VoiceAgents, "VoiceAgentsOperations");
