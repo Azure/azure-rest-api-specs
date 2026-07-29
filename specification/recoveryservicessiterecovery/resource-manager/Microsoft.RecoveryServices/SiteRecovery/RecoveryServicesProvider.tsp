@@ -90,9 +90,8 @@ interface RecoveryServicesProviders {
   refreshProvider is ArmResourceActionAsyncBase<
     RecoveryServicesProvider,
     void,
-
-      | ArmResponse<RecoveryServicesProvider>
-      | RecoveryServicesProviderAcceptedLroResponse,
+    | ArmResponse<RecoveryServicesProvider>
+    | RecoveryServicesProviderAcceptedLroResponse,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<RecoveryServicesProvider>,
     Error = never
   >;

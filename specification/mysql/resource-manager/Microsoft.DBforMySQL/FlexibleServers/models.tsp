@@ -1223,6 +1223,7 @@ model ImportSourceProperties {
   /**
    * Uri of the import source storage.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   storageUrl?: string;
 

@@ -11,20 +11,21 @@ namespace Microsoft.NetworkCloud;
 /**
  * The name of the storage appliance.
  */
-model StorageApplianceNameParameter
-  is ResourceNameParameter<
-    Resource = StorageAppliance,
-    KeyName = "storageApplianceName",
-    SegmentName = "storageAppliances",
-    NamePattern = "^([a-zA-Z0-9][a-zA-Z0-9-_]{0,28}[a-zA-Z0-9])$"
-  >;
+model StorageApplianceNameParameter is ResourceNameParameter<
+  Resource = StorageAppliance,
+  KeyName = "storageApplianceName",
+  SegmentName = "storageAppliances",
+  NamePattern = "^([a-zA-Z0-9][a-zA-Z0-9-_]{0,28}[a-zA-Z0-9])$"
+>;
 
 /**
  * StorageAppliance represents on-premises Network Cloud storage appliance.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "legacy resource using legacy features"
-model StorageAppliance
-  is Azure.ResourceManager.TrackedResource<StorageApplianceProperties, false> {
+model StorageAppliance is Azure.ResourceManager.TrackedResource<
+  StorageApplianceProperties,
+  false
+> {
   ...StorageApplianceNameParameter;
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
   ...RequiredExtendedLocationProperty;

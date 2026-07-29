@@ -600,6 +600,7 @@ model OperationStatusResultProperties {
   /**
    * For actions that run commands or scripts, the URL where the full output of the script output can be retrieved.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   resultUrl?: url;
 }
