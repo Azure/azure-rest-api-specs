@@ -235,10 +235,13 @@ describe("validate-approval", () => {
       expect(github.rest.issues.removeLabel).toHaveBeenCalledWith(
         expect.objectContaining({ name: "package-name-approved-all" }),
       );
-      expect(github.rest.issues.createComment).toHaveBeenCalled();
-      const calls = vi.mocked(github.rest.issues.createComment).mock.calls;
-      const commentBody = String(/** @type {Record<string, unknown>} */ (calls[0][0]).body);
-      expect(commentBody).toContain("only available on management-plane");
+      expect(github.rest.issues.createComment).toHaveBeenCalledWith(
+        expect.objectContaining({
+          body: /** @type {unknown} */ (
+            expect.stringContaining("only available on management-plane")
+          ),
+        }),
+      );
     });
   });
 
@@ -258,10 +261,11 @@ describe("validate-approval", () => {
           labels: ["package-name-java-pending"],
         }),
       );
-      expect(github.rest.issues.createComment).toHaveBeenCalled();
-      const calls = vi.mocked(github.rest.issues.createComment).mock.calls;
-      const commentBody = String(/** @type {Record<string, unknown>} */ (calls[0][0]).body);
-      expect(commentBody).toContain("not authorized to remove");
+      expect(github.rest.issues.createComment).toHaveBeenCalledWith(
+        expect.objectContaining({
+          body: /** @type {unknown} */ (expect.stringContaining("not authorized to remove")),
+        }),
+      );
     });
 
     it("should allow trusted bot to remove pending label", async () => {
