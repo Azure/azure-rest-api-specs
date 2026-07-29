@@ -66,7 +66,10 @@ interface VirtualRouterPeerings {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualRouterPeering,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = Error
   >;
 
@@ -76,12 +79,15 @@ interface VirtualRouterPeerings {
   list is ArmResourceListByParent<VirtualRouterPeering, Error = Error>;
 }
 
-@@doc(VirtualRouterPeering.name,
+@@doc(
+  VirtualRouterPeering.name,
   "The name of the resource that is unique within a resource group. This name can be used to access the resource."
 );
-@@doc(VirtualRouterPeering.properties,
+@@doc(
+  VirtualRouterPeering.properties,
   "The properties of the Virtual Router Peering."
 );
-@@doc(VirtualRouterPeerings.createOrUpdate::parameters.resource,
+@@doc(
+  VirtualRouterPeerings.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update Virtual Router Peering operation."
 );

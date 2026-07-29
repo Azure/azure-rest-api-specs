@@ -100,11 +100,13 @@ interface Snapshots {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   create is ArmResourceCreateOrReplaceAsync<
     Snapshot,
-    Response = ArmResourceCreatedResponse<
-      Snapshot,
-      ArmLroLocationHeader<FinalResult = Snapshot> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceCreatedResponse<
+          Snapshot,
+          ArmLroLocationHeader<FinalResult = Snapshot> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**
@@ -119,7 +121,10 @@ interface Snapshots {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     Snapshot,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -146,12 +151,15 @@ interface Snapshots {
 
 @@doc(Snapshot.name, "The name of the snapshot");
 @@doc(Snapshot.properties, "Snapshot Properties");
-@@doc(Snapshots.create::parameters.resource,
+@@doc(
+  Snapshots.create::parameters.resource,
   "Snapshot object supplied in the body of the operation."
 );
-@@doc(Snapshots.update::parameters.properties,
+@@doc(
+  Snapshots.update::parameters.properties,
   "Snapshot object supplied in the body of the operation."
 );
-@@doc(Snapshots.restoreFiles::parameters.body,
+@@doc(
+  Snapshots.restoreFiles::parameters.body,
   "Restore payload supplied in the body of the operation."
 );

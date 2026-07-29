@@ -232,6 +232,20 @@ model CertificateAkvDetails {
   @minLength(1)
   @pattern("^[a-zA-Z0-9-]{1,127}$")
   certificateName?: string;
+
+  /**
+   * Optional resource ID of the managed identity that has access to the Azure Key Vault (AKV) secret. If a value is provided, it is used to find a matching entry in the account's collection of user-assigned managed identities. If no match is found, an exception is thrown. If no value is provided, the system-assigned managed identity is used.
+   */
+  @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_04_01)
+  @added(Versions.v2026_04_15_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
+  userAssignedIdentity?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
 }
 
 /**
@@ -258,6 +272,20 @@ model CredentialsAkvDetails {
   @minLength(1)
   @pattern("^[a-zA-Z0-9-]{1,127}$")
   secretName?: string;
+
+  /**
+   * Optional resource ID of the managed identity that has access to the Azure Key Vault (AKV) secret. If a value is provided, it is used to find a matching entry in the account's collection of user-assigned managed identities. If no match is found, an exception is thrown. If no value is provided, the system-assigned managed identity is used.
+   */
+  @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_04_01)
+  @added(Versions.v2026_04_15_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
+  userAssignedIdentity?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
 }
 
 /**
@@ -555,12 +583,15 @@ interface Buckets {
 @@minLength(Bucket.name, 3);
 @@doc(Bucket.name, "The name of the bucket");
 @@doc(Bucket.properties, "Bucket properties");
-@@doc(Buckets.createOrUpdate::parameters.resource,
+@@doc(
+  Buckets.createOrUpdate::parameters.resource,
   "The bucket details including user details, and the volume path that should be mounted inside the bucket."
 );
-@@doc(Buckets.update::parameters.properties,
+@@doc(
+  Buckets.update::parameters.properties,
   "The bucket details including user details, and the volume path that should be mounted inside the bucket."
 );
-@@doc(Buckets.generateCredentials::parameters.body,
+@@doc(
+  Buckets.generateCredentials::parameters.body,
   "The bucket's Access and Secret key pair expiry time expressed as the number of days from now."
 );

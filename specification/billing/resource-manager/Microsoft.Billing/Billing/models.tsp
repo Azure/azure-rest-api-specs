@@ -3310,7 +3310,6 @@ model PaymentOnAccount {
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PaymentOnAccountAmount extends Amount {}
 
 /**
@@ -3318,7 +3317,6 @@ model PaymentOnAccountAmount extends Amount {}
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AvailableBalancePropertiesTotalPaymentsOnAccount extends Amount {}
 
 /**
@@ -6438,6 +6436,7 @@ model InvoiceDocument {
   /**
    * The URL to download the invoice document if the source is external to Microsoft.Billing.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   externalUrl?: string;
 

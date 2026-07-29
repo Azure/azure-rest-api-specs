@@ -13,8 +13,10 @@ namespace Microsoft.DevTestLab;
  * A Service Fabric.
  */
 @parentResource(User)
-model ServiceFabric
-  is Azure.ResourceManager.ProxyResource<ServiceFabricProperties, false> {
+model ServiceFabric is Azure.ResourceManager.ProxyResource<
+  ServiceFabricProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = ServiceFabric,
     KeyName = "serviceFabricName",
@@ -72,7 +74,10 @@ interface ServiceFabrics {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     ServiceFabric,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**

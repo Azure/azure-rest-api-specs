@@ -102,9 +102,12 @@ interface OperationsResultsOperationGroup {
     #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @query
     operationResultResponseType: "Location",
-  ): OkResponse | (AcceptedResponse & {
-    /** URL to query the status of the operation. */
-    @header("Azure-AsyncOperation")
-    azureAsyncOperation: string;
-  }) | ErrorResponse;
+  ):
+    | OkResponse
+    | (AcceptedResponse & {
+        /** URL to query the status of the operation. */
+        @header("Azure-AsyncOperation")
+        azureAsyncOperation: string;
+      })
+    | ErrorResponse;
 }

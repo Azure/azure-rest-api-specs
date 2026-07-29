@@ -1066,7 +1066,7 @@
           {
             "name": "$filter",
             "in": "query",
-            "description": "The filter to apply to the recommendations.<br>Filter can be applied to properties ['ResourceId', 'ResourceGroup', 'RecommendationTypeGuid', '[Category](#category)'] with operators ['eq', 'and', 'or'].<br>Example:<br>- $filter=Category eq 'Cost' and ResourceGroup eq 'MyResourceGroup'",
+            "description": "The filter to apply to the recommendations.<br>Filter can be applied to properties ['ResourceId', 'ResourceGroup', 'RecommendationTypeGuid', '[Category](#category)', 'SubCategory', 'RetirementDate', '[RecommendationStatus](#recommendationStatus)'] with operators ['eq', 'and', 'or', 'lt', 'gt', 'le', 'ge']<br>.\n<br>**Note:** `Control` is a legacy filter property and will be deprecated in the future. Please use `SubCategory` for filtering recommendation subcategory.<br>\n<br>**Note:** `RecommendationStatus` filter is available from API Version 2026-02-01-preview and onwards.<br>\n<br>Valid options for SubCategory:<br>['BusinessContinuity', 'DisasterRecovery', 'HighAvailability', 'MonitoringAndAlerting', 'Other', 'Personalized', 'PrioritizedRecommendations', 'Scalability', 'ServiceUpgradeAndRetirement', 'Validation']<br>\n<br>Example:<br>- $filter=Category eq 'Cost' and ResourceGroup eq 'MyResourceGroup'<br>-$filter=SubCategory eq 'ServiceUpgradeAndRetirement' and RetirementDate le '2024-01-01' and RetirementDate ge '2028-01-01'",
             "required": false,
             "type": "string"
           },
@@ -2989,22 +2989,22 @@
           {
             "name": "New",
             "value": "New",
-            "description": "New"
+            "description": "The review has been newly created."
           },
           {
             "name": "InProgress",
             "value": "InProgress",
-            "description": "In Progress"
+            "description": "The review is currently in progress."
           },
           {
             "name": "Triaged",
             "value": "Triaged",
-            "description": "Triaged"
+            "description": "The review has been triaged."
           },
           {
             "name": "Completed",
             "value": "Completed",
-            "description": "Completed"
+            "description": "The review has been completed."
           }
         ]
       }

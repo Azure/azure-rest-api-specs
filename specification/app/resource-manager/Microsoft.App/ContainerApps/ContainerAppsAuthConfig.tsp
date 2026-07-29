@@ -65,6 +65,7 @@ interface ContainerAppsAuthConfigs {
 
 @@doc(AuthConfig.name, "Name of the Container App AuthConfig.");
 @@doc(AuthConfig.properties, "AuthConfig resource specific properties");
-@@doc(ContainerAppsAuthConfigs.createOrUpdate::parameters.resource,
+@@doc(
+  ContainerAppsAuthConfigs.createOrUpdate::parameters.resource,
   "Properties used to create a Container App AuthConfig"
 );

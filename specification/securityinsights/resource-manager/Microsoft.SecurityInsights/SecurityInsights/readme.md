@@ -32,37 +32,17 @@ tag: package-2025-09-01
 
 ---
 
-### Tag: package-2025-09-01
+### Tag: package-preview-2025-10-01
 
-These settings apply only when `--tag=package-2025-09-01` is specified on the command line.
+These settings apply only when `--tag=package-preview-2025-10-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2025-09-01'
+```yaml $(tag) == 'package-preview-2025-10-01'
 input-file:
-  - stable/2025-09-01/AlertRules.json
-  - stable/2025-09-01/AutomationRules.json
-  - stable/2025-09-01/Bookmarks.json
-  - stable/2025-09-01/ContentPackages.json
-  - stable/2025-09-01/ContentProductPackages.json
-  - stable/2025-09-01/ContentProductTemplates.json
-  - stable/2025-09-01/ContentTemplates.json
-  - stable/2025-09-01/dataConnectorDefinitions.json
-  - stable/2025-09-01/DataConnectors.json
-  - stable/2025-09-01/Incidents.json
-  - stable/2025-09-01/Metadata.json
-  - stable/2025-09-01/OnboardingStates.json
-  - stable/2025-09-01/operations.json
-  - stable/2025-09-01/SecurityMLAnalyticsSettings.json
-  - stable/2025-09-01/SourceControls.json
-  - stable/2025-09-01/ThreatIntelligence.json
-  - stable/2025-09-01/Watchlists.json
+  - preview/2025-10-01-preview/openapi.json
 suppressions:
   - code: AvoidAdditionalProperties
-    from: dataConnectors.json
+    from: openapi.json
     where:
-      - $.definitions.RestApiPollerDataConnectorProperties.properties.addOnAttributes
-      - $.definitions.RestApiPollerRequestConfig.properties.headers
-      - $.definitions.RestApiPollerRequestConfig.properties.queryParameters
-      - $.definitions.RestApiPollerRequestPagingNextPageUrlConfig.properties.nextPageUrlQueryParameters
       - $.definitions.GenericBlobSbsAuthModel.properties.credentialsConfig
       - $.definitions.GenericBlobSbsAuthModel.properties.storageAccountCredentialsConfig
       - $.definitions.JwtAuthModel.properties.userName
@@ -73,17 +53,163 @@ suppressions:
       - $.definitions.OAuthModel.properties.tokenEndpointQueryParameters
       - $.definitions.OAuthModel.properties.authorizationEndpointHeaders
       - $.definitions.OAuthModel.properties.authorizationEndpointQueryParameters
+      - $.definitions.RestApiPollerDataConnectorProperties.properties.addOnAttributes
+      - $.definitions.RestApiPollerRequestConfig.properties.headers
+      - $.definitions.RestApiPollerRequestConfig.properties.queryParameters
+      - $.definitions.RestApiPollerRequestPagingNextPageUrlConfig.properties.nextPageUrlQueryParameters
       - $.definitions.SessionAuthModel.properties.userName
       - $.definitions.SessionAuthModel.properties.password
       - $.definitions.SessionAuthModel.properties.queryParameters
       - $.definitions.SessionAuthModel.properties.headers
     reason: These properties are unknown and need to be specified by the customer (each request can have different values)
   - code: AvoidAdditionalProperties
-    from: AlertRules.json
+    from: openapi.json
+    where:
+      - $.definitions.EntityCommonProperties.properties.additionalData
+      - $.definitions.EntityEdges.properties.additionalData
+    reason: These properties are unknown and changed frequently (each request can have different values for each entity)
+  - code: AvoidAdditionalProperties
+    from: openapi.json
+    where:
+      - $.definitions.ActivityEntityQueriesProperties.properties.entitiesFilter
+    reason: These properties are unknown and changed frequently (each request can have different values for each entity)
+  - code: AvoidAdditionalProperties
+    from: openapi.json
+    where:
+      - $.definitions.ActivityEntityQueryTemplateProperties.properties.entitiesFilter
+    reason: These properties are unknown and changed frequently (each request can have different values for each entity)
+  - code: AvoidAdditionalProperties
+    from: openapi.json
+    where:
+      - $.definitions.NrtAlertRuleProperties.properties.customDetails
+      - $.definitions.NrtAlertRuleTemplateProperties.properties.customDetails
+      - $.definitions.QueryBasedAlertRuleTemplateProperties.properties.customDetails
+      - $.definitions.ScheduledAlertRuleCommonProperties.properties.customDetails
+      - $.definitions.ScheduledAlertRuleTemplateProperties.properties.customDetails
+    reason: These properties are unknown and changed frequently (each request can have different values for each entity)
+  - code: AvoidAdditionalProperties
+    from: openapi.json
+    where:
+      - $.definitions.RecommendationProperties.properties
+      - $.definitions.RecommendationProperties.properties.additionalProperties
+      - $.definitions.RecommendedSuggestion.properties
+      - $.definitions.RecommendedSuggestion.properties.additionalProperties
+    reason: These properties are unknown and changed frequently (each request can have different values for each entity)
+  - code: AvoidAdditionalProperties
+    from: openapi.json
+    where:
+      - $.definitions.TriggeredAnalyticsRuleRunProperties.properties.ruleRunAdditionalData
+    reason: TriggeredAnalyticsRuleRun does not include a property called "additionalProperties", it is only used to mark that 'ruleRunAdditionalData' is a dictionary or string to object.
+  - code: AvoidAdditionalProperties
+    from: openapi.json
+    where:
+      - $.definitions.TIObjectCommonProperties.properties.data
+      - $.definitions.ThreatIntelligenceExternalReference.properties.hashes
+      - $.definitions.ThreatIntelligenceIndicatorProperties.properties.extensions
+    reason: These properties are required in current API. The team is working on a new version of API to resolve it in the future release.
+  - code: AvoidAnonymousTypes
+    from: openapi.json
+    where:
+      - $.definitions.RecommendationProperties.properties.additionalProperties
+      - $.definitions.RecommendedSuggestion.properties.additionalProperties
+    reason: These properties are unknown (each request can have different values for each entity)
+  - code: GetCollectionOnlyHasValueAndNextLink
+    from: openapi.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/onboardingStates"].get.responses["200"].schema.properties
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/main/metrics"].get.responses["200"].schema.properties
+    reason: This API is published to customers and we have not changed it in the past year, nor will we be able to change it without breaking changes to customers.
+  - code: DefinitionsPropertiesNamesCamelCase
+    from: openapi.json
+    where:
+      - $.definitions.InsightQueryItemPropertiesTableQueryQueriesDefinitionsPropertiesItemsItem.properties.Query
+    reason: This API is published to customers and we have not changed it in the past year, nor will we be able to change it without breaking changes to customers.
+  - code: RequiredPropertiesMissingInResourceModel
+    from: openapi.json
+    where:
+      - $.definitions.OperationsList
+      - $.definitions.GetQueriesResponse
+      - $.definitions.ThreatIntelligenceMetricsList
+    reason: This API is published to customers and we have not changed it in the past year, nor will we be able to change it without breaking changes to customers.
+  - code: PutRequestResponseSchemeArm
+    from: openapi.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRules/{ruleId}/actions/{actionId}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/entityQueries/{entityQueryId}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/main/indicators/{name}"].put
+    reason: This API is published to customers and we have not changed it in the past year, nor will we be able to change it without breaking changes to customers.
+  - code: DeleteResponseCodes
+    from: openapi.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/fileImports/{fileImportId}"].delete
+    reason: This API is published to customers and we have not changed it in the past year, nor will we be able to change it without breaking changes to customers.
+```
+
+### Tag: package-2025-09-01
+
+These settings apply only when `--tag=package-2025-09-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-09-01'
+input-file:
+  - stable/2025-09-01/openapi.json
+suppressions:
+  - code: AvoidAdditionalProperties
+    from: openapi.json
+    where:
+      - $.definitions.GenericBlobSbsAuthModel.properties.credentialsConfig
+      - $.definitions.GenericBlobSbsAuthModel.properties.storageAccountCredentialsConfig
+      - $.definitions.JwtAuthModel.properties.userName
+      - $.definitions.JwtAuthModel.properties.password
+      - $.definitions.JwtAuthModel.properties.queryParameters
+      - $.definitions.JwtAuthModel.properties.headers
+      - $.definitions.OAuthModel.properties.tokenEndpointHeaders
+      - $.definitions.OAuthModel.properties.tokenEndpointQueryParameters
+      - $.definitions.OAuthModel.properties.authorizationEndpointHeaders
+      - $.definitions.OAuthModel.properties.authorizationEndpointQueryParameters
+      - $.definitions.RestApiPollerDataConnectorProperties.properties.addOnAttributes
+      - $.definitions.RestApiPollerRequestConfig.properties.headers
+      - $.definitions.RestApiPollerRequestConfig.properties.queryParameters
+      - $.definitions.RestApiPollerRequestPagingNextPageUrlConfig.properties.nextPageUrlQueryParameters
+      - $.definitions.SessionAuthModel.properties.userName
+      - $.definitions.SessionAuthModel.properties.password
+      - $.definitions.SessionAuthModel.properties.queryParameters
+      - $.definitions.SessionAuthModel.properties.headers
+    reason: These properties are unknown and need to be specified by the customer (each request can have different values)
+  - code: AvoidAdditionalProperties
+    from: openapi.json
+    where:
+      - $.definitions.EntityCommonProperties.properties.additionalData
+    reason: These properties are unknown and changed frequently (each request can have different values for each entity)
+  - code: AvoidAdditionalProperties
+    from: openapi.json
     where:
       - $.definitions.ScheduledAlertRuleCommonProperties.properties.customDetails
       - $.definitions.ScheduledAlertRuleTemplateProperties.properties.customDetails
     reason: These properties are unknown and changed frequently (each request can have different values for each entity)
+  - code: AvoidAdditionalProperties
+    from: openapi.json
+    where:
+      - $.definitions.ThreatIntelligenceExternalReference.properties.hashes
+      - $.definitions.ThreatIntelligenceIndicatorProperties.properties.extensions
+    reason: These properties are required in current API. The team is working on a new version of API to resolve it in the future release.
+  - code: GetCollectionOnlyHasValueAndNextLink
+    from: openapi.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/onboardingStates"].get.responses["200"].schema.properties
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/main/metrics"].get.responses["200"].schema.properties
+    reason: This API is published to customers and we have not changed it in the past year, nor will we be able to change it without breaking changes to customers.
+  - code: RequiredPropertiesMissingInResourceModel
+    from: openapi.json
+    where:
+      - $.definitions.OperationsList
+      - $.definitions.ThreatIntelligenceMetricsList
+    reason: This API is published to customers and we have not changed it in the past year, nor will we be able to change it without breaking changes to customers.
+  - code: PutRequestResponseSchemeArm
+    from: openapi.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRules/{ruleId}/actions/{actionId}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/main/indicators/{name}"].put
+    reason: This API is published to customers and we have not changed it in the past year, nor will we be able to change it without breaking changes to customers.
 ```
 
 ### Tag: package-preview-2025-07-01
@@ -95,46 +221,107 @@ input-file:
   - preview/2025-07-01-preview/openapi.json
 suppressions:
   - code: AvoidAdditionalProperties
-    from: dataConnectors.json
+    from: openapi.json
+    where:
+      - $.definitions.GenericBlobSbsAuthModel.properties.credentialsConfig
+      - $.definitions.GenericBlobSbsAuthModel.properties.storageAccountCredentialsConfig
+      - $.definitions.JwtAuthModel.properties.userName
+      - $.definitions.JwtAuthModel.properties.password
+      - $.definitions.JwtAuthModel.properties.queryParameters
+      - $.definitions.JwtAuthModel.properties.headers
+      - $.definitions.OAuthModel.properties.tokenEndpointHeaders
+      - $.definitions.OAuthModel.properties.tokenEndpointQueryParameters
+      - $.definitions.OAuthModel.properties.authorizationEndpointHeaders
+      - $.definitions.OAuthModel.properties.authorizationEndpointQueryParameters
+      - $.definitions.RestApiPollerDataConnectorProperties.properties.addOnAttributes
+      - $.definitions.RestApiPollerRequestConfig.properties.headers
+      - $.definitions.RestApiPollerRequestConfig.properties.queryParameters
+      - $.definitions.RestApiPollerRequestPagingNextPageUrlConfig.properties.nextPageUrlQueryParameters
+      - $.definitions.SessionAuthModel.properties.userName
+      - $.definitions.SessionAuthModel.properties.password
+      - $.definitions.SessionAuthModel.properties.queryParameters
+      - $.definitions.SessionAuthModel.properties.headers
     reason: These properties are unknown and need to be specified by the customer (each request can have different values)
   - code: AvoidAdditionalProperties
-    from: Entities.json
+    from: openapi.json
+    where:
+      - $.definitions.EntityCommonProperties.properties.additionalData
+      - $.definitions.EntityEdges.properties.additionalData
     reason: These properties are unknown and changed frequently (each request can have different values for each entity)
   - code: AvoidAdditionalProperties
-    from: EntityQueries.json
+    from: openapi.json
+    where:
+      - $.definitions.ActivityEntityQueriesProperties.properties.entitiesFilter
     reason: These properties are unknown and changed frequently (each request can have different values for each entity)
   - code: AvoidAdditionalProperties
-    from: EntityQueryTemplates.json
+    from: openapi.json
+    where:
+      - $.definitions.ActivityEntityQueryTemplateProperties.properties.entitiesFilter
     reason: These properties are unknown and changed frequently (each request can have different values for each entity)
   - code: AvoidAdditionalProperties
-    from: AlertRules.json
+    from: openapi.json
+    where:
+      - $.definitions.NrtAlertRuleProperties.properties.customDetails
+      - $.definitions.NrtAlertRuleTemplateProperties.properties.customDetails
+      - $.definitions.QueryBasedAlertRuleTemplateProperties.properties.customDetails
+      - $.definitions.ScheduledAlertRuleCommonProperties.properties.customDetails
+      - $.definitions.ScheduledAlertRuleTemplateProperties.properties.customDetails
     reason: These properties are unknown and changed frequently (each request can have different values for each entity)
   - code: AvoidAdditionalProperties
-    from: Recommendations.json
+    from: openapi.json
+    where:
+      - $.definitions.RecommendationProperties.properties
+      - $.definitions.RecommendationProperties.properties.additionalProperties
+      - $.definitions.RecommendedSuggestion.properties
+      - $.definitions.RecommendedSuggestion.properties.additionalProperties
     reason: These properties are unknown and changed frequently (each request can have different values for each entity)
-  - code: AvoidAnonymousTypes
-    from: Recommendations.json
-    reason: These properties are unknown (each request can have different values for each entity)
   - code: AvoidAdditionalProperties
-    from: TriggeredAnalyticsRuleRuns.json
+    from: openapi.json
+    where:
+      - $.definitions.TriggeredAnalyticsRuleRunProperties.properties.ruleRunAdditionalData
     reason: TriggeredAnalyticsRuleRun does not include a property called "additionalProperties", it is only used to mark that 'ruleRunAdditionalData' is a dictionary or string to object.
   - code: AvoidAdditionalProperties
-    from: ThreatIntelligenceQuery.json
+    from: openapi.json
+    where:
+      - $.definitions.TIObjectCommonProperties.properties.data
+      - $.definitions.ThreatIntelligenceExternalReference.properties.hashes
+      - $.definitions.ThreatIntelligenceIndicatorProperties.properties.extensions
     reason: These properties are required in current API. The team is working on a new version of API to resolve it in the future release.
+  - code: AvoidAnonymousTypes
+    from: openapi.json
+    where:
+      - $.definitions.RecommendationProperties.properties.additionalProperties
+      - $.definitions.RecommendedSuggestion.properties.additionalProperties
+    reason: These properties are unknown (each request can have different values for each entity)
   - code: GetCollectionOnlyHasValueAndNextLink
-    from: Entities.json
+    from: openapi.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/onboardingStates"].get.responses["200"].schema.properties
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/main/metrics"].get.responses["200"].schema.properties
     reason: This API is published to customers and we have not changed it in the past year, nor will we be able to change it without breaking changes to customers.
   - code: DefinitionsPropertiesNamesCamelCase
-    from: Entities.json
+    from: openapi.json
+    where:
+      - $.definitions.InsightQueryItemPropertiesTableQueryQueriesDefinitionsPropertiesItemsItem.properties.Query
     reason: This API is published to customers and we have not changed it in the past year, nor will we be able to change it without breaking changes to customers.
   - code: RequiredPropertiesMissingInResourceModel
-    from: Entities.json
+    from: openapi.json
+    where:
+      - $.definitions.OperationsList
+      - $.definitions.GetQueriesResponse
+      - $.definitions.ThreatIntelligenceMetricsList
     reason: This API is published to customers and we have not changed it in the past year, nor will we be able to change it without breaking changes to customers.
   - code: PutRequestResponseSchemeArm
-    from: EntityQueries.json
+    from: openapi.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRules/{ruleId}/actions/{actionId}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/entityQueries/{entityQueryId}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/main/indicators/{name}"].put
     reason: This API is published to customers and we have not changed it in the past year, nor will we be able to change it without breaking changes to customers.
   - code: DeleteResponseCodes
-    from: FileImports.json
+    from: openapi.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/fileImports/{fileImportId}"].delete
     reason: This API is published to customers and we have not changed it in the past year, nor will we be able to change it without breaking changes to customers.
 ```
 
@@ -200,7 +387,6 @@ input-file:
   - preview/2025-04-01-preview/Recommendations.json
   - preview/2025-04-01-preview/SecurityMLAnalyticsSettings.json
   - preview/2025-04-01-preview/Settings.json
-  - preview/2025-04-01-preview/SourceControls.json
   - preview/2025-04-01-preview/ThreatIntelligence.json
   - preview/2025-04-01-preview/ThreatIntelligenceCount.json
   - preview/2025-04-01-preview/ThreatIntelligenceQuery.json
@@ -275,7 +461,6 @@ input-file:
   - stable/2025-03-01/OnboardingStates.json
   - stable/2025-03-01/operations.json
   - stable/2025-03-01/SecurityMLAnalyticsSettings.json
-  - stable/2025-03-01/SourceControls.json
   - stable/2025-03-01/ThreatIntelligence.json
   - stable/2025-03-01/Watchlists.json
 suppressions:
@@ -314,7 +499,6 @@ input-file:
   - preview/2025-01-01-preview/Recommendations.json
   - preview/2025-01-01-preview/SecurityMLAnalyticsSettings.json
   - preview/2025-01-01-preview/Settings.json
-  - preview/2025-01-01-preview/SourceControls.json
   - preview/2025-01-01-preview/ThreatIntelligence.json
   - preview/2025-01-01-preview/ThreatIntelligenceCount.json
   - preview/2025-01-01-preview/ThreatIntelligenceQuery.json
@@ -356,7 +540,6 @@ input-file:
   - preview/2024-10-01-preview/Recommendations.json
   - preview/2024-10-01-preview/SecurityMLAnalyticsSettings.json
   - preview/2024-10-01-preview/Settings.json
-  - preview/2024-10-01-preview/SourceControls.json
   - preview/2024-10-01-preview/ThreatIntelligence.json
   - preview/2024-10-01-preview/ThreatIntelligenceCount.json
   - preview/2024-10-01-preview/ThreatIntelligenceQuery.json
@@ -426,7 +609,6 @@ input-file:
   - preview/2024-04-01-preview/Recommendations.json
   - preview/2024-04-01-preview/SecurityMLAnalyticsSettings.json
   - preview/2024-04-01-preview/Settings.json
-  - preview/2024-04-01-preview/SourceControls.json
   - preview/2024-04-01-preview/ThreatIntelligence.json
   - preview/2024-04-01-preview/ThreatIntelligenceCount.json
   - preview/2024-04-01-preview/ThreatIntelligenceQuery.json
@@ -529,7 +711,6 @@ input-file:
   - preview/2024-01-01-preview/Recommendations.json
   - preview/2024-01-01-preview/SecurityMLAnalyticsSettings.json
   - preview/2024-01-01-preview/Settings.json
-  - preview/2024-01-01-preview/SourceControls.json
   - preview/2024-01-01-preview/ThreatIntelligence.json
   - preview/2024-01-01-preview/ThreatIntelligenceCount.json
   - preview/2024-01-01-preview/ThreatIntelligenceQuery.json
@@ -571,7 +752,6 @@ input-file:
   - preview/2023-12-01-preview/Recommendations.json
   - preview/2023-12-01-preview/SecurityMLAnalyticsSettings.json
   - preview/2023-12-01-preview/Settings.json
-  - preview/2023-12-01-preview/SourceControls.json
   - preview/2023-12-01-preview/ThreatIntelligence.json
   - preview/2023-12-01-preview/TriggeredAnalyticsRuleRuns.json
   - preview/2023-12-01-preview/Watchlists.json
@@ -634,7 +814,6 @@ input-file:
   - preview/2023-10-01-preview/Recommendations.json
   - preview/2023-10-01-preview/SecurityMLAnalyticsSettings.json
   - preview/2023-10-01-preview/Settings.json
-  - preview/2023-10-01-preview/SourceControls.json
   - preview/2023-10-01-preview/ThreatIntelligence.json
   - preview/2023-10-01-preview/TriggeredAnalyticsRuleRuns.json
   - preview/2023-10-01-preview/Watchlists.json
@@ -674,7 +853,6 @@ input-file:
   - preview/2023-09-01-preview/Recommendations.json
   - preview/2023-09-01-preview/SecurityMLAnalyticsSettings.json
   - preview/2023-09-01-preview/Settings.json
-  - preview/2023-09-01-preview/SourceControls.json
   - preview/2023-09-01-preview/ThreatIntelligence.json
   - preview/2023-09-01-preview/TriggeredAnalyticsRuleRuns.json
   - preview/2023-09-01-preview/Watchlists.json
@@ -714,7 +892,6 @@ input-file:
   - preview/2023-08-01-preview/Recommendations.json
   - preview/2023-08-01-preview/SecurityMLAnalyticsSettings.json
   - preview/2023-08-01-preview/Settings.json
-  - preview/2023-08-01-preview/SourceControls.json
   - preview/2023-08-01-preview/ThreatIntelligence.json
   - preview/2023-08-01-preview/TriggeredAnalyticsRuleRuns.json
   - preview/2023-08-01-preview/Watchlists.json
@@ -754,7 +931,6 @@ input-file:
   - preview/2023-07-01-preview/Recommendations.json
   - preview/2023-07-01-preview/SecurityMLAnalyticsSettings.json
   - preview/2023-07-01-preview/Settings.json
-  - preview/2023-07-01-preview/SourceControls.json
   - preview/2023-07-01-preview/ThreatIntelligence.json
   - preview/2023-07-01-preview/TriggeredAnalyticsRuleRuns.json
   - preview/2023-07-01-preview/Watchlists.json
@@ -794,7 +970,6 @@ input-file:
   - preview/2023-06-01-preview/Recommendations.json
   - preview/2023-06-01-preview/SecurityMLAnalyticsSettings.json
   - preview/2023-06-01-preview/Settings.json
-  - preview/2023-06-01-preview/SourceControls.json
   - preview/2023-06-01-preview/ThreatIntelligence.json
   - preview/2023-06-01-preview/TriggeredAnalyticsRuleRuns.json
   - preview/2023-06-01-preview/Watchlists.json
@@ -833,7 +1008,6 @@ input-file:
   - preview/2023-05-01-preview/Recommendations.json
   - preview/2023-05-01-preview/SecurityMLAnalyticsSettings.json
   - preview/2023-05-01-preview/Settings.json
-  - preview/2023-05-01-preview/SourceControls.json
   - preview/2023-05-01-preview/ThreatIntelligence.json
   - preview/2023-05-01-preview/TriggeredAnalyticsRuleRuns.json
   - preview/2023-05-01-preview/Watchlists.json
@@ -871,7 +1045,6 @@ input-file:
   - preview/2023-04-01-preview/Recommendations.json
   - preview/2023-04-01-preview/SecurityMLAnalyticsSettings.json
   - preview/2023-04-01-preview/Settings.json
-  - preview/2023-04-01-preview/SourceControls.json
   - preview/2023-04-01-preview/ThreatIntelligence.json
   - preview/2023-04-01-preview/TriggeredAnalyticsRuleRuns.json
   - preview/2023-04-01-preview/Watchlists.json
@@ -904,7 +1077,6 @@ input-file:
   - preview/2023-03-01-preview/Recommendations.json
   - preview/2023-03-01-preview/SecurityMLAnalyticsSettings.json
   - preview/2023-03-01-preview/Settings.json
-  - preview/2023-03-01-preview/SourceControls.json
   - preview/2023-03-01-preview/ThreatIntelligence.json
   - preview/2023-03-01-preview/TriggeredAnalyticsRuleRuns.json
   - preview/2023-03-01-preview/Watchlists.json
@@ -953,7 +1125,6 @@ input-file:
   - preview/2023-02-01-preview/Recommendations.json
   - preview/2023-02-01-preview/SecurityMLAnalyticsSettings.json
   - preview/2023-02-01-preview/Settings.json
-  - preview/2023-02-01-preview/SourceControls.json
   - preview/2023-02-01-preview/ThreatIntelligence.json
   - preview/2023-02-01-preview/Watchlists.json
   - preview/2023-02-01-preview/dataConnectors.json
@@ -981,7 +1152,6 @@ input-file:
   - preview/2022-12-01-preview/Recommendations.json
   - preview/2022-12-01-preview/SecurityMLAnalyticsSettings.json
   - preview/2022-12-01-preview/Settings.json
-  - preview/2022-12-01-preview/SourceControls.json
   - preview/2022-12-01-preview/ThreatIntelligence.json
   - preview/2022-12-01-preview/Watchlists.json
   - preview/2022-12-01-preview/dataConnectors.json
@@ -1026,7 +1196,6 @@ input-file:
   - preview/2022-11-01-preview/OnboardingStates.json
   - preview/2022-11-01-preview/SecurityMLAnalyticsSettings.json
   - preview/2022-11-01-preview/Settings.json
-  - preview/2022-11-01-preview/SourceControls.json
   - preview/2022-11-01-preview/Recommendations.json
   - preview/2022-11-01-preview/ThreatIntelligence.json
   - preview/2022-11-01-preview/Watchlists.json
@@ -1054,7 +1223,6 @@ input-file:
   - preview/2022-10-01-preview/OnboardingStates.json
   - preview/2022-10-01-preview/SecurityMLAnalyticsSettings.json
   - preview/2022-10-01-preview/Settings.json
-  - preview/2022-10-01-preview/SourceControls.json
   - preview/2022-10-01-preview/ThreatIntelligence.json
   - preview/2022-10-01-preview/Watchlists.json
   - preview/2022-10-01-preview/dataConnectors.json
@@ -1081,7 +1249,6 @@ input-file:
   - preview/2022-09-01-preview/OnboardingStates.json
   - preview/2022-09-01-preview/SecurityMLAnalyticsSettings.json
   - preview/2022-09-01-preview/Settings.json
-  - preview/2022-09-01-preview/SourceControls.json
   - preview/2022-09-01-preview/ThreatIntelligence.json
   - preview/2022-09-01-preview/Watchlists.json
   - preview/2022-09-01-preview/dataConnectors.json
@@ -1108,7 +1275,6 @@ input-file:
   - preview/2022-08-01-preview/OnboardingStates.json
   - preview/2022-08-01-preview/SecurityMLAnalyticsSettings.json
   - preview/2022-08-01-preview/Settings.json
-  - preview/2022-08-01-preview/SourceControls.json
   - preview/2022-08-01-preview/ThreatIntelligence.json
   - preview/2022-08-01-preview/Watchlists.json
   - preview/2022-08-01-preview/dataConnectors.json
@@ -1134,7 +1300,6 @@ input-file:
   - preview/2022-07-01-preview/OnboardingStates.json
   - preview/2022-07-01-preview/SecurityMLAnalyticsSettings.json
   - preview/2022-07-01-preview/Settings.json
-  - preview/2022-07-01-preview/SourceControls.json
   - preview/2022-07-01-preview/ThreatIntelligence.json
   - preview/2022-07-01-preview/Watchlists.json
   - preview/2022-07-01-preview/dataConnectors.json
@@ -1177,7 +1342,6 @@ input-file:
   - preview/2022-06-01-preview/OnboardingStates.json
   - preview/2022-06-01-preview/SecurityMLAnalyticsSettings.json
   - preview/2022-06-01-preview/Settings.json
-  - preview/2022-06-01-preview/SourceControls.json
   - preview/2022-06-01-preview/ThreatIntelligence.json
   - preview/2022-06-01-preview/Watchlists.json
   - preview/2022-06-01-preview/dataConnectors.json
@@ -1203,7 +1367,6 @@ input-file:
   - preview/2022-05-01-preview/OnboardingStates.json
   - preview/2022-05-01-preview/SecurityMLAnalyticsSettings.json
   - preview/2022-05-01-preview/Settings.json
-  - preview/2022-05-01-preview/SourceControls.json
   - preview/2022-05-01-preview/ThreatIntelligence.json
   - preview/2022-05-01-preview/Watchlists.json
   - preview/2022-05-01-preview/dataConnectors.json
@@ -1228,7 +1391,6 @@ input-file:
   - preview/2022-04-01-preview/OfficeConsents.json
   - preview/2022-04-01-preview/OnboardingStates.json
   - preview/2022-04-01-preview/Settings.json
-  - preview/2022-04-01-preview/SourceControls.json
   - preview/2022-04-01-preview/ThreatIntelligence.json
   - preview/2022-04-01-preview/Watchlists.json
   - preview/2022-04-01-preview/dataConnectors.json
@@ -1253,7 +1415,6 @@ input-file:
   - preview/2022-01-01-preview/OfficeConsents.json
   - preview/2022-01-01-preview/OnboardingStates.json
   - preview/2022-01-01-preview/Settings.json
-  - preview/2022-01-01-preview/SourceControls.json
   - preview/2022-01-01-preview/ThreatIntelligence.json
   - preview/2022-01-01-preview/Watchlists.json
   - preview/2022-01-01-preview/dataConnectors.json
@@ -1278,7 +1439,6 @@ input-file:
   - preview/2021-10-01-preview/OfficeConsents.json
   - preview/2021-10-01-preview/OnboardingStates.json
   - preview/2021-10-01-preview/Settings.json
-  - preview/2021-10-01-preview/SourceControls.json
   - preview/2021-10-01-preview/ThreatIntelligence.json
   - preview/2021-10-01-preview/Watchlists.json
   - preview/2021-10-01-preview/dataConnectors.json
@@ -1301,7 +1461,6 @@ input-file:
 - preview/2021-09-01-preview/Metadata.json
 - preview/2021-09-01-preview/OnboardingStates.json
 - preview/2021-09-01-preview/Settings.json
-- preview/2021-09-01-preview/SourceControls.json
 - preview/2021-09-01-preview/Watchlists.json
 - preview/2021-09-01-preview/dataConnectors.json
 - preview/2021-09-01-preview/ThreatIntelligence.json
@@ -1367,7 +1526,6 @@ input-file:
 - preview/2021-03-01-preview/Settings.json
 - preview/2021-03-01-preview/OnboardingStates.json
 - preview/2021-03-01-preview/operations.json
-- preview/2021-03-01-preview/SourceControls.json
 - preview/2021-03-01-preview/dataConnectors.json
 - preview/2021-03-01-preview/Watchlists.json
 - preview/2021-03-01-preview/AlertRules.json

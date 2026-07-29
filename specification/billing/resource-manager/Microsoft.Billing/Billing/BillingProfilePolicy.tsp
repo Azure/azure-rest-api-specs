@@ -64,6 +64,7 @@ interface BillingProfilePolicies {
 
 @@doc(BillingProfilePolicy.name, "");
 @@doc(BillingProfilePolicy.properties, "A policy at billing profile scope.");
-@@doc(BillingProfilePolicies.createOrUpdateByBillingProfile::parameters.resource,
+@@doc(
+  BillingProfilePolicies.createOrUpdateByBillingProfile::parameters.resource,
   "A policy at billing profile scope."
 );

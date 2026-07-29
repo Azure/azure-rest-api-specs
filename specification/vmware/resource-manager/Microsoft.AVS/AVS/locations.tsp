@@ -19,9 +19,9 @@ interface Locations {
   @doc("Return quota for subscription by region")
   @armResourceAction(Location)
   @post
-  checkQuotaAvailability(
-    ...ResourceInstanceParameters<Location>,
-  ): ArmResponse<Quota> | ErrorResponse;
+  checkQuotaAvailability(...ResourceInstanceParameters<Location>):
+    | ArmResponse<Quota>
+    | ErrorResponse;
 }
 
 @doc("trial status")

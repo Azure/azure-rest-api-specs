@@ -1,0 +1,135 @@
+name: arm-api-reviewer-eval-pattern-validation
+description: |
+  Pattern constraint validation tests (17xxxx).
+  Validates detection of denylist (negated character class [^...]) patterns
+  in pattern constraints on path parameters, body properties, and TypeSpec
+  @pattern decorators. Verifies correct severity assignment: Blocking for
+  new properties/parameters, Warning for existing ones (OAPI-PATTERN-ALLOWLIST).
+
+tags:
+  area: arm-api-reviewer
+
+defaults:
+  runs: 1
+  timeout: "300s"
+  model: claude-opus-4.6
+  judge_model: claude-sonnet-4.6
+
+scoring:
+  threshold: 0.7
+
+stimuli:
+  # 170001 — New spec with denylist patterns on path parameter and body properties (blocking)
+  - name: detect-denylist-pattern-new-spec
+    environment:
+      files:
+        - src: "../fixtures/arm-openapi/denylist-pattern-new.json"
+          dest: "specification/patternsvc/resource-manager/Microsoft.PatternTest/stable/2025-01-01/patternsvc.json"
+    prompt: >
+      Review the following ARM resource-manager OpenAPI specification file for
+      compliance with Azure REST API Guidelines and ARM RPC rules. This is a new
+      service with no previous API version. Report all findings with rule IDs,
+      line numbers, and fix suggestions.
+
+      File: specification/patternsvc/resource-manager/Microsoft.PatternTest/stable/2025-01-01/patternsvc.json
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        name: "OAPI-PATTERN-ALLOWLIST rule cited"
+        config:
+          pattern: "OAPI-PATTERN-ALLOWLIST"
+      - type: output-matches
+        name: "denylist identified"
+        config:
+          pattern: "(?i)denylist|negated.character.class|\\[\\^"
+      - type: output-matches
+        name: "blocking severity for new property"
+        config:
+          pattern: "(?i)blocking|error|must.not|must not"
+      - type: prompt
+    rubric:
+      - Flagged the policyName path parameter pattern `^[^<>%&:\\?/]*[^<>%&:\\?/ ]+$` as a denylist violation (OAPI-PATTERN-ALLOWLIST)
+      - Flagged the displayName body property pattern `^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$` as a denylist violation (OAPI-PATTERN-ALLOWLIST)
+      - Flagged the description body property pattern `^[^\\x00-\\x1F]+$` as a denylist violation (OAPI-PATTERN-ALLOWLIST)
+      - Identified all violations as Blocking severity because this is a new spec with no previous API version
+      - Did NOT flag the category property pattern `^[A-Za-z][A-Za-z0-9 _-]{0,62}$` — it is a correct allowlist
+      - Recommended replacing each denylist with an allowlist derived from the service's actual validation rules
+
+  # 170002 — Existing property with denylist pattern carried forward (warning); new property
+  #           with denylist (blocking)
+  - name: detect-denylist-pattern-existing-vs-new
+    environment:
+      files:
+        - src: "../fixtures/version-pairs/denylist-pattern/stable-2024-01-01.json"
+          dest: "specification/policysvc/resource-manager/Microsoft.PolicySvc/stable/2024-01-01/policysvc.json"
+        - src: "../fixtures/version-pairs/denylist-pattern/stable-2025-01-01.json"
+          dest: "specification/policysvc/resource-manager/Microsoft.PolicySvc/stable/2025-01-01/policysvc.json"
+    prompt: >
+      Review the following ARM resource-manager OpenAPI specification files. The
+      new version is stable/2025-01-01 and the previous version is
+      stable/2024-01-01. Report all findings with rule IDs, line numbers, and
+      fix suggestions. Pay special attention to pattern constraint style
+      (allowlist vs denylist) and whether violations are new or pre-existing.
+
+      Previous version: specification/policysvc/resource-manager/Microsoft.PolicySvc/stable/2024-01-01/policysvc.json
+      New version: specification/policysvc/resource-manager/Microsoft.PolicySvc/stable/2025-01-01/policysvc.json
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        name: "OAPI-PATTERN-ALLOWLIST rule cited"
+        config:
+          pattern: "OAPI-PATTERN-ALLOWLIST"
+      - type: output-matches
+        name: "severity differentiation present"
+        config:
+          pattern: "(?i)(warning|warn|existing|pre.existing|prior).*(blocking|new|added)|(blocking|new|added).*(warning|warn|existing|pre.existing|prior)"
+      - type: prompt
+    rubric:
+      - Flagged the policyName path parameter pattern `^[^<>%&:\\?/]*[^<>%&:\\?/ ]+$` as a denylist (OAPI-PATTERN-ALLOWLIST)
+      - Identified policyName / displayName as a pre-existing violation (present in 2024-01-01) and assigned Warning severity
+      - Flagged the description property pattern `^[^\\x00-\\x1F\\x7F]+$` as a new denylist violation (only in 2025-01-01)
+      - Assigned Blocking severity to the new description property violation
+      - Differentiated between blocking (new) and warning (existing) severity for the two violations
+      - Noted the regression risk for existing properties: changing to an allowlist may reject values created under the denylist
+
+  # 170003 — TypeSpec fixture with denylist @pattern on resource key and body property (blocking)
+  - name: detect-denylist-pattern-typespec
+    environment:
+      files:
+        - src: "../fixtures/typespec/denylist-pattern-violations.tsp"
+          dest: "specification/policysvc/resource-manager/Microsoft.PolicyService/stable/2025-01-01/main.tsp"
+    prompt: >
+      Review the following ARM TypeSpec file for compliance with Azure REST API
+      Guidelines and ARM RPC rules. This is a new service with no previous API
+      version. Report all findings with rule IDs, line numbers, and fix
+      suggestions. Pay special attention to @pattern decorator values.
+
+      File: specification/policysvc/resource-manager/Microsoft.PolicyService/stable/2025-01-01/main.tsp
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        name: "OAPI-PATTERN-ALLOWLIST rule cited"
+        config:
+          pattern: "OAPI-PATTERN-ALLOWLIST"
+      - type: output-matches
+        name: "denylist identified"
+        config:
+          pattern: "(?i)denylist|negated.character.class|\\[\\^"
+      - type: output-matches
+        name: "blocking severity"
+        config:
+          pattern: "(?i)blocking|error|must.not|must not"
+      - type: prompt
+    rubric:
+      - Flagged the Policy resource key `@pattern("^[^<>%&:\\?/]*[^<>%&:\\?/ ]+$")` as a denylist violation (OAPI-PATTERN-ALLOWLIST)
+      - Flagged the displayName body property `@pattern("^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$")` as a denylist violation (OAPI-PATTERN-ALLOWLIST)
+      - Identified all violations as Blocking severity because this is a new spec
+      - Did NOT flag the category property `@pattern("^[A-Za-z][A-Za-z0-9 _-]{0,62}$")` — it is a correct allowlist
+      - Did NOT flag the slug property `@pattern("^(?![.-])[A-Za-z0-9_.-]{1,64}$")` — negative lookahead alongside a positive class is acceptable
+      - Recommended replacing each denylist @pattern with an allowlist

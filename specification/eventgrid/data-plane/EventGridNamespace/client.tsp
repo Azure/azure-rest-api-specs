@@ -164,14 +164,14 @@ namespace Customizations {
 @@access(FailedLockToken, Access.public);
 
 //Rename Enum
-@@clientName(ReleaseDelay.By0Seconds, "NoDelay");
-@@clientName(ReleaseDelay.By10Seconds, "TenSeconds");
-@@clientName(ReleaseDelay.By3600Seconds, "OneHour");
-@@clientName(ReleaseDelay.By600Seconds, "TenMinutes");
-@@clientName(ReleaseDelay.By60Seconds, "OneMinute");
+@@clientName(ReleaseDelay.By0Seconds, "NoDelay", "!autorest");
+@@clientName(ReleaseDelay.By10Seconds, "TenSeconds", "!autorest");
+@@clientName(ReleaseDelay.By3600Seconds, "OneHour", "!autorest");
+@@clientName(ReleaseDelay.By600Seconds, "TenMinutes", "!autorest");
+@@clientName(ReleaseDelay.By60Seconds, "OneMinute", "!autorest");
 
 //Rename RenewLocksResult
-@@clientName(RenewCloudEventLocksResult, "RenewLocksResult");
+@@clientName(RenewCloudEventLocksResult, "RenewLocksResult", "!autorest");
 
 //Rename value to details (ReceiveResult internal)
-@@clientName(ReceiveResult.value, "details");
+@@clientName(ReceiveResult.value, "details", "!autorest");

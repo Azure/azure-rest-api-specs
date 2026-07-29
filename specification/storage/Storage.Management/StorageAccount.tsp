@@ -114,8 +114,10 @@ interface StorageAccounts {
       Azure.ResourceManager.Foundations.DefaultBaseParameters<StorageAccount>
     >,
     StorageAccountCreateParameters,
-    Response = ArmResourceUpdatedResponse<StorageAccount> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = StorageAccount> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response =
+      | ArmResourceUpdatedResponse<StorageAccount>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = StorageAccount> &
+          Azure.Core.Foundations.RetryAfterHeader>,
     ErrorResponse = ErrorResponse
   >;
 
@@ -267,11 +269,13 @@ interface StorageAccounts {
     StorageAccount,
     BlobRestoreParameters,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<StorageAccount>,
-    Response = ArmResponse<BlobRestoreStatus> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BlobRestoreStatus> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: BlobRestoreStatus;
-    }),
+    Response =
+      | ArmResponse<BlobRestoreStatus>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BlobRestoreStatus> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: BlobRestoreStatus;
+        }),
     Error = ErrorResponse
   >;
 
@@ -326,28 +330,36 @@ interface StorageAccounts {
 
 @@maxLength(StorageAccount.name, 24);
 @@minLength(StorageAccount.name, 3);
-@@doc(StorageAccount.name,
+@@doc(
+  StorageAccount.name,
   "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only."
 );
 @@doc(StorageAccount.properties, "Properties of the storage account.");
-@@doc(StorageAccounts.create::parameters.resource,
+@@doc(
+  StorageAccounts.create::parameters.resource,
   "The parameters to provide for the created account."
 );
-@@doc(StorageAccounts.update::parameters.properties,
+@@doc(
+  StorageAccounts.update::parameters.properties,
   "The parameters to provide for the updated account."
 );
-@@doc(StorageAccounts.regenerateKey::parameters.body,
+@@doc(
+  StorageAccounts.regenerateKey::parameters.body,
   "Specifies name of the key which should be regenerated -- key1, key2, kerb1, kerb2."
 );
-@@doc(StorageAccounts.listAccountSAS::parameters.body,
+@@doc(
+  StorageAccounts.listAccountSAS::parameters.body,
   "The parameters to provide to list SAS credentials for the storage account."
 );
-@@doc(StorageAccounts.listServiceSAS::parameters.body,
+@@doc(
+  StorageAccounts.listServiceSAS::parameters.body,
   "The parameters to provide to list service SAS credentials."
 );
-@@doc(StorageAccounts.customerInitiatedMigration::parameters.body,
+@@doc(
+  StorageAccounts.customerInitiatedMigration::parameters.body,
   "The request parameters required to perform storage account migration."
 );
-@@doc(StorageAccounts.restoreBlobRanges::parameters.body,
+@@doc(
+  StorageAccounts.restoreBlobRanges::parameters.body,
   "The parameters to provide for restore blob ranges."
 );

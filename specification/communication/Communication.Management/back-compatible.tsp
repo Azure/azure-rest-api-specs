@@ -9,14 +9,17 @@ using Microsoft.Communication;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(UpdateDomainRequestParameters.properties);
 
-@@clientName(CommunicationServices.createOrUpdate::parameters.resource,
+@@clientName(
+  CommunicationServices.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientName(CommunicationServices.update::parameters.properties, "parameters");
-@@clientName(CommunicationServices.linkNotificationHub::parameters.body,
+@@clientName(
+  CommunicationServices.linkNotificationHub::parameters.body,
   "linkNotificationHubParameters"
 );
-@@clientName(CommunicationServices.regenerateKey::parameters.body,
+@@clientName(
+  CommunicationServices.regenerateKey::parameters.body,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -42,23 +45,27 @@ using Microsoft.Communication;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SmtpUsernameResource.properties);
 
-@@clientName(SuppressionLists.createOrUpdate::parameters.resource,
+@@clientName(
+  SuppressionLists.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SuppressionListResource.properties);
 
-@@clientName(SuppressionListAddresses.createOrUpdate::parameters.resource,
+@@clientName(
+  SuppressionListAddresses.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SuppressionListAddressResource.properties);
 
-@@clientName(CommunicationServices.checkNameAvailability::parameters.body,
+@@clientName(
+  CommunicationServices.checkNameAvailability::parameters.body,
   "nameAvailabilityParameters"
 );
 
-@@visibility(CommunicationServiceResource.identity,
+@@visibility(
+  CommunicationServiceResource.identity,
   Lifecycle.Read,
   Lifecycle.Create,
   Lifecycle.Update

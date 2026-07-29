@@ -13,21 +13,22 @@ namespace Microsoft.NetworkCloud;
  * The name of the Kubernetes version resource.
  */
 @added(Versions.v2026_01_01_preview)
-model KubernetesVersionNameParameter
-  is ResourceNameParameter<
-    Resource = KubernetesVersion,
-    KeyName = "kubernetesVersionName",
-    SegmentName = "kubernetesVersions",
-    NamePattern = "^default$"
-  >;
+model KubernetesVersionNameParameter is ResourceNameParameter<
+  Resource = KubernetesVersion,
+  KeyName = "kubernetesVersionName",
+  SegmentName = "kubernetesVersions",
+  NamePattern = "^default$"
+>;
 
 /**
  * KubernetesVersion represents the available Kubernetes versions for a cluster.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "legacy resource using legacy features"
 @added(Versions.v2026_01_01_preview)
-model KubernetesVersion
-  is Azure.ResourceManager.TrackedResource<KubernetesVersionProperties, false> {
+model KubernetesVersion is Azure.ResourceManager.TrackedResource<
+  KubernetesVersionProperties,
+  false
+> {
   ...KubernetesVersionNameParameter;
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
   ...RequiredExtendedLocationProperty;
@@ -79,7 +80,9 @@ interface KubernetesVersions {
       ...IfMatchParameter;
       ...IfNoneMatchParameter;
     },
-    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -109,7 +112,8 @@ interface KubernetesVersions {
 
 @@doc(KubernetesVersion.name, "The name of the Kubernetes version resource.");
 @@doc(KubernetesVersion.properties, "The list of the resource properties.");
-@@doc(KubernetesVersions.createOrUpdate::parameters.resource,
+@@doc(
+  KubernetesVersions.createOrUpdate::parameters.resource,
   "The request body."
 );
 @@doc(KubernetesVersions.update::parameters.properties, "The request body.");

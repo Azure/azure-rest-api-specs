@@ -13,8 +13,10 @@ namespace Microsoft.Databricks;
 /**
  * Information about workspace.
  */
-model Workspace
-  is Azure.ResourceManager.TrackedResource<WorkspaceProperties, false> {
+model Workspace is Azure.ResourceManager.TrackedResource<
+  WorkspaceProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = Workspace,
     KeyName = "workspaceName",
@@ -67,7 +69,10 @@ interface Workspaces {
   delete is ArmResourceDeleteWithoutOkAsync<
     Workspace,
     Parameters = WorkspaceDeleteParameters,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = ErrorResponse
   >;
 
@@ -113,7 +118,8 @@ alias WorkspaceDeleteParameters = {
 @@minLength(Workspace.name, 3);
 @@doc(Workspace.name, "The name of the workspace.");
 @@doc(Workspace.properties, "The workspace properties.");
-@@doc(Workspaces.createOrUpdate::parameters.resource,
+@@doc(
+  Workspaces.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update a workspace."
 );
 @@doc(Workspaces.update::parameters.properties, "The update to the workspace.");

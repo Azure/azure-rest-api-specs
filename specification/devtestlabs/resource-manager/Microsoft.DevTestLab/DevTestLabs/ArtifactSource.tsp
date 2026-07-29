@@ -13,8 +13,10 @@ namespace Microsoft.DevTestLab;
  * Properties of an artifact source.
  */
 @parentResource(Lab)
-model ArtifactSource
-  is Azure.ResourceManager.ProxyResource<ArtifactSourceProperties, false> {
+model ArtifactSource is Azure.ResourceManager.ProxyResource<
+  ArtifactSourceProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = ArtifactSource,
     KeyName = "artifactSourceName",
@@ -103,9 +105,11 @@ interface ArtifactSources {
 
 @@doc(ArtifactSource.name, "The name of the artifact source.");
 @@doc(ArtifactSource.properties, "The properties of the resource.");
-@@doc(ArtifactSources.createOrUpdate::parameters.resource,
+@@doc(
+  ArtifactSources.createOrUpdate::parameters.resource,
   "Properties of an artifact source."
 );
-@@doc(ArtifactSources.update::parameters.properties,
+@@doc(
+  ArtifactSources.update::parameters.properties,
   "Properties of an artifact source."
 );

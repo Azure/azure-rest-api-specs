@@ -101,7 +101,10 @@ interface PublicIPPrefixes {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     PublicIPPrefix,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -118,9 +121,11 @@ interface PublicIPPrefixes {
 
 @@doc(PublicIPPrefix.name, "The name of the public IP prefix.");
 @@doc(PublicIPPrefix.properties, "Public IP prefix properties.");
-@@doc(PublicIPPrefixes.createOrUpdate::parameters.resource,
+@@doc(
+  PublicIPPrefixes.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update public IP prefix operation."
 );
-@@doc(PublicIPPrefixes.updateTags::parameters.properties,
+@@doc(
+  PublicIPPrefixes.updateTags::parameters.properties,
   "Parameters supplied to update public IP prefix tags."
 );

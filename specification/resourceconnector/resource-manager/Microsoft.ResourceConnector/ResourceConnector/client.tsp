@@ -38,7 +38,8 @@ op AppliancesUpdateCustomized(
 /*
  * Python overrides
  */
-@@clientName(Microsoft.ResourceConnector,
+@@clientName(
+  Microsoft.ResourceConnector,
   "ResourceConnectorMgmtClient",
   "python"
 );
@@ -46,7 +47,8 @@ op AppliancesUpdateCustomized(
 /*
  * JavaScript overrides
  */
-@@clientName(Microsoft.ResourceConnector,
+@@clientName(
+  Microsoft.ResourceConnector,
   "ResourceConnectorManagementClient",
   "javascript"
 );
@@ -56,11 +58,13 @@ op AppliancesUpdateCustomized(
  */
 @@clientName(Microsoft.ResourceConnector.SSHKey, "SshKey", "java");
 // Fix property name case changes to maintain backward compatibility
-@@clientName(Microsoft.ResourceConnector.SSHKey.expirationTimeStamp,
+@@clientName(
+  Microsoft.ResourceConnector.SSHKey.expirationTimeStamp,
   "expirationTimestamp",
   "java"
 );
-@@clientName(Microsoft.ResourceConnector.SSHKey.creationTimeStamp,
+@@clientName(
+  Microsoft.ResourceConnector.SSHKey.creationTimeStamp,
   "creationTimestamp",
   "java"
 );
@@ -69,67 +73,82 @@ op AppliancesUpdateCustomized(
  * .NET overrides
  */
 @@clientName(Microsoft.ResourceConnector.Appliance, "Appliance", "csharp");
-@@clientName(Microsoft.ResourceConnector.SupportedVersionCatalogVersionData,
+@@clientName(
+  Microsoft.ResourceConnector.SupportedVersionCatalogVersionData,
   "SupportedVersionCatalogVersionDataField",
   "csharp"
 );
-@@clientName(Microsoft.ResourceConnector.ApplianceOperation,
+@@clientName(
+  Microsoft.ResourceConnector.ApplianceOperation,
   "OperationEntity",
   "csharp"
 );
-@@clientName(Microsoft.ResourceConnector.ApplianceOperationValueDisplay,
+@@clientName(
+  Microsoft.ResourceConnector.ApplianceOperationValueDisplay,
   "OperationDisplay",
   "csharp"
 );
-@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.Resource.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@clientName(Microsoft.ResourceConnector.ApplianceGetTelemetryConfigResult,
+@@clientName(
+  Microsoft.ResourceConnector.ApplianceGetTelemetryConfigResult,
   "ApplianceTelemetryConfigResult",
   "csharp"
 );
-@@clientName(Microsoft.ResourceConnector.ApplianceListCredentialResults,
+@@clientName(
+  Microsoft.ResourceConnector.ApplianceListCredentialResults,
   "ApplianceListCredentialResult",
   "csharp"
 );
-@@clientName(Microsoft.ResourceConnector.ApplianceListKeysResults,
+@@clientName(
+  Microsoft.ResourceConnector.ApplianceListKeysResults,
   "ApplianceListKeysResult",
   "csharp"
 );
-@@clientName(Microsoft.ResourceConnector.ArtifactProfile,
+@@clientName(
+  Microsoft.ResourceConnector.ArtifactProfile,
   "ApplianceArtifactProfile",
   "csharp"
 );
 @@clientName(Microsoft.ResourceConnector.Distro.AKSEdge, "AksEdge", "csharp");
-@@clientName(Microsoft.ResourceConnector.Provider,
+@@clientName(
+  Microsoft.ResourceConnector.Provider,
   "ApplianceProvider",
   "csharp"
 );
 @@clientName(Microsoft.ResourceConnector.Provider.VMWare, "VMware", "csharp");
 @@clientName(Microsoft.ResourceConnector.Provider.HCI, "Hci", "csharp");
 @@clientName(Microsoft.ResourceConnector.SSHKey, "ApplianceSshKey", "csharp");
-@@clientName(Microsoft.ResourceConnector.SupportedVersion,
+@@clientName(
+  Microsoft.ResourceConnector.SupportedVersion,
   "ApplianceSupportedVersion",
   "csharp"
 );
-@@clientName(Microsoft.ResourceConnector.SupportedVersionCatalogVersion,
+@@clientName(
+  Microsoft.ResourceConnector.SupportedVersionCatalogVersion,
   "ApplianceSupportedVersionCatalogVersion",
   "csharp"
 );
-@@clientName(Microsoft.ResourceConnector.SupportedVersionCatalogVersionData,
+@@clientName(
+  Microsoft.ResourceConnector.SupportedVersionCatalogVersionData,
   "ApplianceSupportedVersionCatalogVersionProperties",
   "csharp"
 );
-@@clientName(Microsoft.ResourceConnector.SupportedVersionMetadata,
+@@clientName(
+  Microsoft.ResourceConnector.SupportedVersionMetadata,
   "ApplianceSupportedVersionMetadata",
   "csharp"
 );
-@@clientName(Microsoft.ResourceConnector.UpgradeGraph,
+@@clientName(
+  Microsoft.ResourceConnector.UpgradeGraph,
   "ApplianceUpgradeGraph",
   "csharp"
 );
-@@clientName(Microsoft.ResourceConnector.UpgradeGraphProperties,
+@@clientName(
+  Microsoft.ResourceConnector.UpgradeGraphProperties,
   "ApplianceUpgradeGraphProperties",
   "csharp"
 );
@@ -140,12 +159,14 @@ op AppliancesUpdateCustomized(
 @@clientName(Status.UpgradingKVAIO, "UpgradingKvaio", "csharp");
 @@clientName(Status.ValidatingETCDHealth, "ValidatingEtcdHealth ", "csharp");
 @@clientName(Status.WaitingForKVAIO, "WaitingForKvaio", "csharp");
-@@clientName(Status.NetworkDNSUpdateComplete,
+@@clientName(
+  Status.NetworkDNSUpdateComplete,
   "NetworkDnsUpdateComplete",
   "csharp"
 );
 @@clientName(Status.NetworkDNSUpdateFailed, "NetworkDnsUpdateFailed", "csharp");
-@@clientName(Status.NetworkDNSUpdatePreparing,
+@@clientName(
+  Status.NetworkDNSUpdatePreparing,
   "NetworkDnsUpdatePreparing",
   "csharp"
 );
@@ -154,14 +175,16 @@ op AppliancesUpdateCustomized(
 @@clientName(Event, "ApplianceEvent", "csharp");
 @@clientName(NetworkProfile, "ApplianceNetworkProfile", "csharp");
 @@clientName(PatchableAppliance, "ResourceConnectorAppliancePatch", "csharp");
-@@clientName(AppliancesOperationGroup.getTelemetryConfig,
+@@clientName(
+  AppliancesOperationGroup.getTelemetryConfig,
   "GetApplianceTelemetryConfig",
   "csharp"
 );
 @@clientName(Provider.SCVMM, "Scvmm", "csharp");
 @@clientName(Appliances.createOrUpdate::parameters.resource, "data", "csharp");
 @@clientName(Appliances.update::parameters.properties, "patch", "csharp");
-@@alternateType(Appliance.identity,
+@@alternateType(
+  Appliance.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );

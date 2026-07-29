@@ -37,8 +37,10 @@ interface PrivateEndpointConnections {
   @Azure.Core.useFinalStateVia("location")
   create is PrivateEndpointOperations.CreateOrUpdateAsync<
     FileShare,
-    Response = ArmResourceUpdatedResponse<PrivateEndpointConnection> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PrivateEndpointConnection> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<PrivateEndpointConnection>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PrivateEndpointConnection> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -48,8 +50,11 @@ interface PrivateEndpointConnections {
   @Azure.Core.useFinalStateVia("location")
   delete is PrivateEndpointOperations.DeleteAsync<
     FileShare,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -63,6 +68,7 @@ interface PrivateEndpointConnections {
 }
 
 @@doc(PrivateEndpointConnection.properties, "Resource properties.");
-@@doc(PrivateEndpointConnections.create::parameters.resource,
+@@doc(
+  PrivateEndpointConnections.create::parameters.resource,
   "The private endpoint connection properties."
 );

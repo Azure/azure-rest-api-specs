@@ -9,6 +9,7 @@ import "@typespec/openapi";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Private;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Marketplace;
@@ -18,6 +19,8 @@ interface PrivateStoreCollectionOperationGroup {
   /**
    * Delete Private store collection. This is a workaround.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ResourceManager.Private.legacyResourceOperation(Collection, "action")
   @route("/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/collections/{collectionId}")
   @post
   post(
@@ -46,6 +49,8 @@ interface PrivateStoreCollectionOfferOperationGroup {
   /**
    * Delete Private store offer. This is a workaround.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ResourceManager.Private.legacyResourceOperation(Offer, "action")
   @route("/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/collections/{collectionId}/offers/{offerId}")
   @post
   post(

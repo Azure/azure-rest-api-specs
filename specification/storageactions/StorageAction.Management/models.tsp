@@ -567,19 +567,23 @@ model StorageTaskAssignment {
 
 model StorageTasksListResult is Azure.Core.Page<StorageTask>;
 
-@@doc(StorageTaskAssignmentsListResult.value,
+@@doc(
+  StorageTaskAssignmentsListResult.value,
   "List of Storage Task Assignment Resource IDs associated with this Storage Task."
 );
-@@doc(StorageTaskReportInstance.properties,
+@@doc(
+  StorageTaskReportInstance.properties,
   "Storage task execution report for a run instance."
 );
 @@identifiers(StorageTaskAssignmentsListResult.value, #[]);
 @@doc(StorageTaskReportSummary.value, "Gets storage tasks run result summary.");
 @@identifiers(StorageTaskReportSummary.value, #[]);
-@@doc(StorageTasksListResult,
+@@doc(
+  StorageTasksListResult,
   "The response from the List Storage Task operation."
 );
-@@doc(StorageTasksListResult.value,
+@@doc(
+  StorageTasksListResult.value,
   "Gets the list of storage tasks and their properties."
 );
 @@identifiers(StorageTasksListResult.value, #[]);

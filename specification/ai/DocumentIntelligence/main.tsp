@@ -2,6 +2,7 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "./routes.tsp";
+import "./client.tsp";
 
 using Azure.Core;
 using TypeSpec.Versioning;
@@ -11,14 +12,16 @@ using TypeSpec.Http;
 @doc("Extracts content, layout, and structured data from documents.")
 @versioned(DocumentIntelligence.Versions)
 @useAuth(
-  ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key"> | OAuth2Auth<[
-    {
-      type: OAuth2FlowType.authorizationCode,
-      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
-      tokenUrl: "https://login.microsoftonline.com/common/oauth2/token",
-      scopes: ["https://cognitiveservices.azure.com/.default"],
-    }
-  ]>
+
+    | ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">
+    | OAuth2Auth<[
+        {
+          type: OAuth2FlowType.authorizationCode,
+          authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
+          tokenUrl: "https://login.microsoftonline.com/common/oauth2/token",
+          scopes: ["https://cognitiveservices.azure.com/.default"],
+        }
+      ]>
 )
 @service(#{ title: "Document Intelligence (formerly Form Recognizer)" })
 @server(

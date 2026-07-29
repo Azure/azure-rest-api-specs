@@ -15,11 +15,10 @@ namespace Microsoft.Databricks;
  * Peerings in a VirtualNetwork resource
  */
 @parentResource(Workspace)
-model VirtualNetworkPeering
-  is Azure.ResourceManager.ProxyResource<
-    VirtualNetworkPeeringPropertiesFormat,
-    false
-  > {
+model VirtualNetworkPeering is Azure.ResourceManager.ProxyResource<
+  VirtualNetworkPeeringPropertiesFormat,
+  false
+> {
   ...ResourceNameParameter<
     Resource = VirtualNetworkPeering,
     KeyName = "peeringName",
@@ -64,7 +63,10 @@ interface VirtualNetworkPeerings {
   @operationId("vNetPeering_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualNetworkPeering,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = ErrorResponse
   >;
 
@@ -83,6 +85,7 @@ interface VirtualNetworkPeerings {
 
 @@doc(VirtualNetworkPeering.name, "The name of the workspace vNet peering.");
 @@doc(VirtualNetworkPeering.properties, "List of properties for vNet Peering");
-@@doc(VirtualNetworkPeerings.createOrUpdate::parameters.resource,
+@@doc(
+  VirtualNetworkPeerings.createOrUpdate::parameters.resource,
   "Parameters supplied to the create workspace vNet Peering."
 );

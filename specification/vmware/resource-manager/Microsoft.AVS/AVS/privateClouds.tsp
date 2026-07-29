@@ -32,11 +32,13 @@ interface PrivateClouds {
   update is ArmCustomPatchAsync<
     PrivateCloud,
     PrivateCloudUpdate,
-    Response = PrivateCloud | ArmResourceCreatedResponse<
-      PrivateCloud,
-      LroHeaders = ArmLroLocationHeader<FinalResult = PrivateCloud> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >
+    Response =
+      | PrivateCloud
+      | ArmResourceCreatedResponse<
+          PrivateCloud,
+          LroHeaders = ArmLroLocationHeader<FinalResult = PrivateCloud> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
   >;
 
   #suppress "deprecated"
@@ -466,6 +468,7 @@ model EncryptionKeyVaultProperties {
   @visibility(Lifecycle.Read)
   autoDetectedKeyVersion?: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("The URL of the vault.")
   keyVaultUrl?: string;
 

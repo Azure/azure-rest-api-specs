@@ -4,14 +4,9 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "./common.tsp";
 import "@typespec/openapi";
-import "@typespec/versioning";
 
-using TypeSpec.OpenAPI;
-using TypeSpec.Http;
-using TypeSpec.Rest;
-using TypeSpec.Versioning;
-using Azure.Core;
-using Azure.Core.Traits;
+using Rest;
+using Versioning;
 
 namespace Microsoft.MachineLearningServices;
 
@@ -40,6 +35,9 @@ model AssetVersion {
 
 @doc("DeploymentTemplate resource definition")
 model DeploymentTemplate is AssetVersion {
+  @doc("The display name of the deployment template.")
+  displayName?: string;
+
   @doc("The type of deployment template.")
   deploymentTemplateType: string;
 
@@ -66,6 +64,9 @@ model DeploymentTemplate is AssetVersion {
 
   @doc("List of allowed instance types for the deployment.")
   allowedInstanceType: string[];
+
+  @doc("Accelerator configurations for the deployment template.")
+  acceleratorMaps?: AcceleratorMap[];
 
   @doc("Default instance type for the deployment.")
   defaultInstanceType: string;
@@ -147,5 +148,6 @@ alias ResourceCreatedResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Ht
   T;
 
 #suppress "@azure-tools/typespec-providerhub/no-inline-model" "Need to create reponses correctly"
-alias ResourceCreatedOrOkResponse<T extends TypeSpec.Reflection.Model> = ResourceCreatedResponse<T> | (TypeSpec.Http.Response<200> &
-  T);
+alias ResourceCreatedOrOkResponse<T extends TypeSpec.Reflection.Model> =
+  | ResourceCreatedResponse<T>
+  | (TypeSpec.Http.Response<200> & T);

@@ -390,14 +390,14 @@
         },
         "tags": {
           "type": "object",
-          "description": "Resource tags.",
+          "description": "The tags of the resource.",
           "additionalProperties": {
             "type": "string"
           }
         },
         "location": {
           "type": "string",
-          "description": "The geo-location where the resource lives",
+          "description": "The location of the resource. Azure Activity Log Alert rules are supported on Global, West Europe and North Europe regions.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -406,7 +406,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
     },

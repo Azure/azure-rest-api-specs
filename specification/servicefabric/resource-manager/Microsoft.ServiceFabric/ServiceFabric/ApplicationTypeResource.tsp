@@ -89,13 +89,16 @@ interface ApplicationTypeResources {
   >;
 }
 
-@@doc(ApplicationTypeResource.name,
+@@doc(
+  ApplicationTypeResource.name,
   "The name of the application type name resource."
 );
-@@doc(ApplicationTypeResource.properties,
+@@doc(
+  ApplicationTypeResource.properties,
   "The application type name properties"
 );
-@@doc(ApplicationTypeResources.createOrUpdate::parameters.resource,
+@@doc(
+  ApplicationTypeResources.createOrUpdate::parameters.resource,
   "The application type name resource."
 );
 

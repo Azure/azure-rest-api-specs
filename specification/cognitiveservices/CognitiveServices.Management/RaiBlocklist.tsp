@@ -82,19 +82,24 @@ interface RaiBlocklists {
     NoContentResponse
   >;
 }
-@@doc(RaiBlocklist.name,
+@@doc(
+  RaiBlocklist.name,
   "The name of the RaiBlocklist associated with the Cognitive Services Account"
 );
 @@encodedName(RaiBlocklist.etag, "application/json", "etag");
-@@doc(RaiBlocklist.properties,
+@@doc(
+  RaiBlocklist.properties,
   "Properties of Cognitive Services RaiBlocklist."
 );
-@@doc(RaiBlocklists.createOrUpdate::parameters.resource,
+@@doc(
+  RaiBlocklists.createOrUpdate::parameters.resource,
   "Properties describing the custom blocklist."
 );
-@@doc(RaiBlocklists.batchAdd::parameters.body,
+@@doc(
+  RaiBlocklists.batchAdd::parameters.body,
   "Properties describing the custom blocklist items."
 );
-@@doc(RaiBlocklists.batchDelete::parameters.body,
+@@doc(
+  RaiBlocklists.batchDelete::parameters.body,
   "List of RAI Blocklist Items Names."
 );

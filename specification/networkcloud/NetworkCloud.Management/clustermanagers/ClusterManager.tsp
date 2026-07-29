@@ -14,13 +14,12 @@ namespace Microsoft.NetworkCloud;
 /**
  * The name of the cluster manager.
  */
-model ClusterManagerNameParameter
-  is ResourceNameParameter<
-    Resource = ClusterManager,
-    KeyName = "clusterManagerName",
-    SegmentName = "clusterManagers",
-    NamePattern = "^([a-zA-Z0-9][a-zA-Z0-9-_]{0,28}[a-zA-Z0-9])$"
-  >;
+model ClusterManagerNameParameter is ResourceNameParameter<
+  Resource = ClusterManager,
+  KeyName = "clusterManagerName",
+  SegmentName = "clusterManagers",
+  NamePattern = "^([a-zA-Z0-9][a-zA-Z0-9-_]{0,28}[a-zA-Z0-9])$"
+>;
 
 /**
  * ClusterManager represents a control-plane to manage one or more on-premises clusters.
@@ -81,7 +80,9 @@ interface ClusterManagers {
       ...IfMatchParameter;
       ...IfNoneMatchParameter;
     },
-    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -124,6 +125,7 @@ interface ClusterManagers {
 @@doc(ClusterManager.properties, "The list of the resource properties.");
 @@doc(ClusterManagers.createOrUpdate::parameters.resource, "The request body.");
 @@doc(ClusterManagers.update::parameters.properties, "The request body.");
-@@doc(ClusterManagers.updateRelayPrivateEndpointConnection::parameters.body,
+@@doc(
+  ClusterManagers.updateRelayPrivateEndpointConnection::parameters.body,
   "The request body."
 );

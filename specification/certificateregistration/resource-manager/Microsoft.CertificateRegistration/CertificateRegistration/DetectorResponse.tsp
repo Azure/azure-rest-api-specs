@@ -76,12 +76,15 @@ interface CertificateOrdersDiagnostics {
 }
 
 @@doc(DetectorResponse.name, "The detector name which needs to be run.");
-@@doc(DetectorResponse.properties,
+@@doc(
+  DetectorResponse.properties,
   "DetectorResponse resource specific properties"
 );
-@@summary(CertificateOrdersDiagnostics.listAppServiceCertificateOrderDetectorResponse,
+@@summary(
+  CertificateOrdersDiagnostics.listAppServiceCertificateOrderDetectorResponse,
   "Microsoft.CertificateRegistration to get the list of detectors for this RP."
 );
-@@summary(CertificateOrdersDiagnostics.getAppServiceCertificateOrderDetectorResponse,
+@@summary(
+  CertificateOrdersDiagnostics.getAppServiceCertificateOrderDetectorResponse,
   "Microsoft.CertificateRegistration call to get a detector response from App Lens."
 );

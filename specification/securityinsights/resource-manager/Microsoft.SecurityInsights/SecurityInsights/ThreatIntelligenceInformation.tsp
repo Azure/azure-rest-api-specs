@@ -42,7 +42,8 @@ interface ThreatIntelligenceInformationOperations {
   get is Extension.Read<
     OperationalInsights,
     ThreatIntelligenceInformation,
-    Error = CloudError
+    Error = CloudError,
+    OverrideResourceName = "SecurityInsightsThreatIntelligenceIndicator"
   >;
 
   /**
@@ -52,8 +53,11 @@ interface ThreatIntelligenceInformationOperations {
   create is Extension.CreateOrReplaceSync<
     OperationalInsights,
     ThreatIntelligenceIndicatorModel,
-    Response = ArmResourceUpdatedResponse<ThreatIntelligenceInformation> | ArmResourceCreatedSyncResponse<ThreatIntelligenceInformation>,
-    Error = CloudError
+    Response =
+      | ArmResourceUpdatedResponse<ThreatIntelligenceInformation>
+      | ArmResourceCreatedSyncResponse<ThreatIntelligenceInformation>,
+    Error = CloudError,
+    OverrideResourceName = "SecurityInsightsThreatIntelligenceIndicator"
   >;
 
   /**
@@ -63,7 +67,8 @@ interface ThreatIntelligenceInformationOperations {
   delete is Extension.DeleteSync<
     OperationalInsights,
     ThreatIntelligenceInformation,
-    Error = CloudError
+    Error = CloudError,
+    OverrideResourceName = "SecurityInsightsThreatIntelligenceIndicator"
   >;
 
   /**
@@ -99,7 +104,8 @@ interface ThreatIntelligenceInformationOperations {
       $orderby?: string;
     },
     Response = ArmResponse<ThreatIntelligenceInformationList>,
-    Error = CloudError
+    Error = CloudError,
+    OverrideResourceName = "SecurityInsightsThreatIntelligenceIndicator"
   >;
 
   /**
@@ -111,7 +117,8 @@ interface ThreatIntelligenceInformationOperations {
     ThreatIntelligenceInformation,
     ThreatIntelligenceAppendTags,
     OkResponse,
-    Error = CloudError
+    Error = CloudError,
+    OverrideResourceName = "SecurityInsightsThreatIntelligenceIndicator"
   >;
 
   /**
@@ -123,19 +130,24 @@ interface ThreatIntelligenceInformationOperations {
     ThreatIntelligenceInformation,
     ThreatIntelligenceIndicatorModel,
     ArmResponse<ThreatIntelligenceInformation>,
-    Error = CloudError
+    Error = CloudError,
+    OverrideResourceName = "SecurityInsightsThreatIntelligenceIndicator"
   >;
 }
 
-@@doc(ThreatIntelligenceInformation.name,
+@@doc(
+  ThreatIntelligenceInformation.name,
   "Threat intelligence indicator name field."
 );
-@@doc(ThreatIntelligenceInformationOperations.create::parameters.resource,
+@@doc(
+  ThreatIntelligenceInformationOperations.create::parameters.resource,
   "Properties of threat intelligence indicators to create and update."
 );
-@@doc(ThreatIntelligenceInformationOperations.appendTags::parameters.body,
+@@doc(
+  ThreatIntelligenceInformationOperations.appendTags::parameters.body,
   "The threat intelligence append tags request body"
 );
-@@doc(ThreatIntelligenceInformationOperations.replaceTags::parameters.body,
+@@doc(
+  ThreatIntelligenceInformationOperations.replaceTags::parameters.body,
   "Tags in the threat intelligence indicator to be replaced."
 );

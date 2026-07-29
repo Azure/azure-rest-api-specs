@@ -4,44 +4,56 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using ProvisioningServiceClient;
 
-@@clientLocation(IndividualEnrollmentOperationGroup.get,
+@@clientLocation(
+  IndividualEnrollmentOperationGroup.get,
   "IndividualEnrollment"
 );
-@@clientLocation(IndividualEnrollmentOperationGroup.createOrUpdate,
+@@clientLocation(
+  IndividualEnrollmentOperationGroup.createOrUpdate,
   "IndividualEnrollment"
 );
-@@clientLocation(IndividualEnrollmentOperationGroup.delete,
+@@clientLocation(
+  IndividualEnrollmentOperationGroup.delete,
   "IndividualEnrollment"
 );
-@@clientLocation(IndividualEnrollmentOperationGroup.query,
+@@clientLocation(
+  IndividualEnrollmentOperationGroup.query,
   "IndividualEnrollment"
 );
-@@clientLocation(IndividualEnrollmentOperationGroup.getAttestationMechanism,
+@@clientLocation(
+  IndividualEnrollmentOperationGroup.getAttestationMechanism,
   "IndividualEnrollment"
 );
-@@clientLocation(IndividualEnrollmentOperationGroup.runBulkOperation,
+@@clientLocation(
+  IndividualEnrollmentOperationGroup.runBulkOperation,
   "IndividualEnrollment"
 );
 
 @@clientLocation(EnrollmentGroupOperationGroup.get, "EnrollmentGroup");
-@@clientLocation(EnrollmentGroupOperationGroup.createOrUpdate,
+@@clientLocation(
+  EnrollmentGroupOperationGroup.createOrUpdate,
   "EnrollmentGroup"
 );
 @@clientLocation(EnrollmentGroupOperationGroup.delete, "EnrollmentGroup");
 @@clientLocation(EnrollmentGroupOperationGroup.query, "EnrollmentGroup");
-@@clientLocation(EnrollmentGroupOperationGroup.getAttestationMechanism,
+@@clientLocation(
+  EnrollmentGroupOperationGroup.getAttestationMechanism,
   "EnrollmentGroup"
 );
-@@clientLocation(EnrollmentGroupOperationGroup.runBulkOperation,
+@@clientLocation(
+  EnrollmentGroupOperationGroup.runBulkOperation,
   "EnrollmentGroup"
 );
 
-@@clientLocation(DeviceRegistrationStateOperationGroup.get,
+@@clientLocation(
+  DeviceRegistrationStateOperationGroup.get,
   "DeviceRegistrationState"
 );
-@@clientLocation(DeviceRegistrationStateOperationGroup.delete,
+@@clientLocation(
+  DeviceRegistrationStateOperationGroup.delete,
   "DeviceRegistrationState"
 );
-@@clientLocation(DeviceRegistrationStateOperationGroup.query,
+@@clientLocation(
+  DeviceRegistrationStateOperationGroup.query,
   "DeviceRegistrationState"
 );

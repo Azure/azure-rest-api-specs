@@ -414,9 +414,11 @@ interface AlertOperationGroup {
 
 @@doc(Alert.name, "Unique ID of an alert instance.");
 @@doc(Alert.properties, "Alert property bag");
-@@doc(Alerts.changeStateTenant::parameters.body,
+@@doc(
+  Alerts.changeStateTenant::parameters.body,
   "reason of change alert state"
 );
-@@doc(AlertOperationGroup.changeState::parameters.body,
+@@doc(
+  AlertOperationGroup.changeState::parameters.body,
   "reason of change alert state"
 );

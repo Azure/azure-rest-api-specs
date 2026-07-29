@@ -407,6 +407,20 @@ union AKSVolumeTypes {
 }
 
 /**
+ * Backup solution types for PostgreSQL Flexible Server.
+ */
+@added(Versions.v2026_04_01_preview)
+union BackupSolutionType {
+  string,
+
+  /** Logical backup type */
+  LogicalBackup: "LogicalBackup",
+
+  /** Physical backup type */
+  PhysicalBackup: "PhysicalBackup",
+}
+
+/**
  * backup support feature type.
  */
 union FeatureType {
@@ -1716,6 +1730,7 @@ model IdentityDetails {
   /**
    * ARM URL for User Assigned Identity.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   userAssignedIdentityArmUrl?: string;
 }
 
@@ -2061,6 +2076,7 @@ model AzureBackupJob {
   /**
    * Url which contains job's progress
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   progressUrl?: string;
 
@@ -2277,6 +2293,34 @@ model AzureBackupRehydrationRequest {
 }
 
 /**
+ * Type of Datasource object, used to initialize the right inherited type
+ */
+@added(Versions.v2026_04_01_preview)
+union ResumeProtectionRequestObjectType {
+  string,
+
+  @doc("Resume Protection Request Type.")
+  ResumeProtectionRequest: "ResumeProtectionRequest",
+}
+
+/**
+ * Request body of Resume protection when MSI is to be changed
+ */
+@discriminator("objectType")
+@added(Versions.v2026_04_01_preview)
+model ResumeProtectionRequest {
+  /**
+   * Type of Datasource object, used to initialize the right inherited type
+   */
+  objectType: ResumeProtectionRequestObjectType;
+
+  /**
+   * identity details of the MSI
+   */
+  identityDetails?: IdentityDetails;
+}
+
+/**
  * Request body of Stop protection when MUA is Enabled
  */
 model StopProtectionRequest {
@@ -2384,6 +2428,7 @@ model ExportJobsResult {
   /**
    * URL of the blob into which the serialized string of list of jobs is exported.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   blobUrl?: string;
 
@@ -2397,6 +2442,7 @@ model ExportJobsResult {
   /**
    * URL of the blob into which the ExcelFile is uploaded.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   excelFileBlobUrl?: string;
 
@@ -3194,6 +3240,20 @@ model AdlsBlobBackupDatasourceParametersForAutoProtection
    */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   objectType: "AdlsBlobBackupDatasourceParametersForAutoProtection";
+}
+
+/**
+ * Parameters to be used during configuration of backup of PostgreSQL Flexible Servers
+ */
+@added(Versions.v2026_04_01_preview)
+model PostgreSqlFlexibleServerBackupDatasourceParameters
+  extends BackupDatasourceParameters {
+  /**
+   * Type of backup taken, Logical/Physical
+   */
+  backupSolutionType?: BackupSolutionType;
+
+  objectType: "PostgreSqlFlexibleServerBackupDatasourceParameters";
 }
 
 /**

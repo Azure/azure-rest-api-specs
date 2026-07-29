@@ -11,13 +11,12 @@ namespace Microsoft.NetworkCloud;
 /**
  * The name of the cloud services network.
  */
-model CloudServicesNetworkNameParameter
-  is ResourceNameParameter<
-    Resource = CloudServicesNetwork,
-    KeyName = "cloudServicesNetworkName",
-    SegmentName = "cloudServicesNetworks",
-    NamePattern = "^([a-zA-Z0-9][a-zA-Z0-9-_]{0,28}[a-zA-Z0-9])$"
-  >;
+model CloudServicesNetworkNameParameter is ResourceNameParameter<
+  Resource = CloudServicesNetwork,
+  KeyName = "cloudServicesNetworkName",
+  SegmentName = "cloudServicesNetworks",
+  NamePattern = "^([a-zA-Z0-9][a-zA-Z0-9-_]{0,28}[a-zA-Z0-9])$"
+>;
 
 /**
  * Upon creation, the additional services that are provided by the platform will be allocated and represented in the status of this resource. All resources associated with this cloud services network will be part of the same layer 2 (L2) isolation domain. At least one service network must be created but may be reused across many virtual machines and/or Hybrid AKS clusters.
@@ -75,7 +74,9 @@ interface CloudServicesNetworks {
       ...IfMatchParameter;
       ...IfNoneMatchParameter;
     },
-    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -105,7 +106,8 @@ interface CloudServicesNetworks {
 
 @@doc(CloudServicesNetwork.name, "The name of the cloud services network.");
 @@doc(CloudServicesNetwork.properties, "The list of the resource properties.");
-@@doc(CloudServicesNetworks.createOrUpdate::parameters.resource,
+@@doc(
+  CloudServicesNetworks.createOrUpdate::parameters.resource,
   "The request body."
 );
 @@doc(CloudServicesNetworks.update::parameters.properties, "The request body.");

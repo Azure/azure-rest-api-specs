@@ -57,8 +57,8 @@ alias EvalRunOutputItemsQueryParameters = {
 @route("openai/v1/evals")
 @tag("Evals")
 interface Evals {
-  /** List evaluations for a project. */
-  @summary("List all evaluations")
+  /** Returns the evaluations configured in the current project. */
+  @summary("List evaluations")
   @list
   listEvals is OpenAIOperation<
     {
@@ -68,11 +68,11 @@ interface Evals {
   >;
 
   /**
-   * Create the structure of an evaluation that can be used to test a model's performance.
+   * Creates the structure of an evaluation that can be used to test a model's performance.
    * An evaluation is a set of testing criteria and the config for a data source, which dictates the schema of the data used in the evaluation. After creating an evaluation, you can run it on different models and model parameters. We support several types of graders and datasources.
    * For more information, see the [Evals guide](https://platform.openai.com/docs/guides/evals).
    */
-  @summary("Create evaluation")
+  @summary("Create an evaluation")
   @post
   createEval is OpenAIOperation<
     {
@@ -81,7 +81,7 @@ interface Evals {
     Eval
   >;
 
-  /** Delete an evaluation. */
+  /** Removes the specified evaluation and its associated data. */
   @summary("Delete an evaluation")
   @delete
   @route("{eval_id}")
@@ -94,7 +94,7 @@ interface Evals {
     DeleteEvalResponse
   >;
 
-  /** Get an evaluation by ID. */
+  /** Retrieves the specified evaluation and its configuration. */
   @summary("Get an evaluation")
   @get
   @route("{eval_id}")
@@ -107,7 +107,7 @@ interface Evals {
     Eval
   >;
 
-  /** Update certain properties of an evaluation. */
+  /** Updates certain properties of an evaluation. */
   @summary("Update an evaluation")
   @post
   @route("{eval_id}")
@@ -122,8 +122,8 @@ interface Evals {
     Eval
   >;
 
-  /** Get a list of runs for an evaluation. */
-  @summary("Get a list of runs for an evaluation")
+  /** Returns the runs associated with the specified evaluation. */
+  @summary("List evaluation runs")
   @list
   @route("{eval_id}/runs")
   listRuns is OpenAIOperation<
@@ -136,7 +136,8 @@ interface Evals {
     AgentsPagedResult<EvalRun>
   >;
 
-  @summary("Create evaluation run")
+  /** Creates an evaluation run for the specified evaluation. */
+  @summary("Create an evaluation run")
   @post
   @route("{eval_id}/runs")
   createEvalRun is OpenAIOperation<
@@ -150,8 +151,8 @@ interface Evals {
     EvalRun
   >;
 
-  /** Delete an eval run. */
-  @summary("Delete evaluation run")
+  /** Removes the specified evaluation run. */
+  @summary("Delete an evaluation run")
   @delete
   @route("{eval_id}/runs/{run_id}")
   deleteEvalRun is OpenAIOperation<
@@ -167,7 +168,7 @@ interface Evals {
     DeleteEvalRunResponse
   >;
 
-  /** Get an evaluation run by ID. */
+  /** Retrieves the specified evaluation run and its current status. */
   @summary("Get an evaluation run")
   @get
   @route("{eval_id}/runs/{run_id}")
@@ -184,8 +185,8 @@ interface Evals {
     EvalRun
   >;
 
-  /** Cancel an ongoing evaluation run. */
-  @summary("Cancel evaluation run")
+  /** Cancels an ongoing evaluation run. */
+  @summary("Cancel an evaluation run")
   @post
   @route("{eval_id}/runs/{run_id}")
   cancelEvalRun is OpenAIOperation<
@@ -201,8 +202,8 @@ interface Evals {
     EvalRun
   >;
 
-  /** Get a list of output items for an evaluation run. */
-  @summary("Get evaluation run output items")
+  /** Returns the output items produced by the specified evaluation run. */
+  @summary("List evaluation run output items")
   @list
   @route("{eval_id}/runs/{run_id}/output_items")
   getEvalRunOutputItems is OpenAIOperation<
@@ -219,7 +220,7 @@ interface Evals {
     AgentsPagedResult<EvalRunOutputItem>
   >;
 
-  /** Get an evaluation run output item by ID. */
+  /** Retrieves a single output item from the specified evaluation run. */
   @summary("Get an output item of an evaluation run")
   @get
   @route("{eval_id}/runs/{run_id}/output_items/{output_item_id}")

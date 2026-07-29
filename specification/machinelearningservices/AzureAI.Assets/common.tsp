@@ -80,3 +80,12 @@ model ProbeSettings {
   @doc("The HTTP method for the probe request.")
   httpMethod: string;
 }
+
+@doc("Accelerator configuration for a model instance.")
+model AcceleratorMap {
+  @doc("The type of accelerator (e.g. A100_80GB, H100_80GB).")
+  acceleratorType: string;
+
+  @doc("Number of accelerators allocated per model instance.")
+  numberOfAcceleratorsPerModelInstance: int32;
+}

@@ -65,24 +65,24 @@ interface ContentUnderstandingClient {
 // ============================================================================
 
 // Rename type as fieldType to avoid conflict with built-in 'type' keyword.
-@@clientName(ArrayField.type, "fieldType");
-@@clientName(BooleanField.type, "fieldType");
-@@clientName(DateField.type, "fieldType");
-@@clientName(IntegerField.type, "fieldType");
-@@clientName(NumberField.type, "fieldType");
-@@clientName(ObjectField.type, "fieldType");
-@@clientName(StringField.type, "fieldType");
-@@clientName(TimeField.type, "fieldType");
-@@clientName(JsonField.type, "fieldType");
+@@clientName(ArrayField.type, "fieldType", "!autorest");
+@@clientName(BooleanField.type, "fieldType", "!autorest");
+@@clientName(DateField.type, "fieldType", "!autorest");
+@@clientName(IntegerField.type, "fieldType", "!autorest");
+@@clientName(NumberField.type, "fieldType", "!autorest");
+@@clientName(ObjectField.type, "fieldType", "!autorest");
+@@clientName(StringField.type, "fieldType", "!autorest");
+@@clientName(TimeField.type, "fieldType", "!autorest");
+@@clientName(JsonField.type, "fieldType", "!autorest");
 
 // Rename 'items' to avoid conflict with built-in 'items' method.
-@@clientName(ContentFieldDefinition.items, "itemDefinition");
+@@clientName(ContentFieldDefinition.items, "itemDefinition", "!autorest");
 
-@@clientName(AnalyzeBinaryRequest.input, "binaryInput");
+@@clientName(AnalyzeBinaryRequest.input, "binaryInput", "!autorest");
 
 // Rename 'range' to 'contentRange' for clarity that it specifies content range.
-@@clientName(AnalysisInput.range, "contentRange");
-@@clientName(AnalyzeBinaryRequest.range, "contentRange");
+@@clientName(AnalysisInput.range, "contentRange", "!autorest");
+@@clientName(AnalyzeBinaryRequest.range, "contentRange", "!autorest");
 
 // TCGC infers request-body-only types as internal; override to public for the convenience API.
 @@access(AnalysisInput, Access.public);
@@ -130,7 +130,8 @@ op analyzeBinaryCustomSignature(
   apiVersion: string,
 ): AnalysisResult;
 
-@@override(ContentUnderstandingClient.analyzeBinary,
+@@override(
+  ContentUnderstandingClient.analyzeBinary,
   analyzeBinaryCustomSignature
 );
 
@@ -185,20 +186,23 @@ op analyzeCustomSignature(
 @@clientName(LabeledDataKnowledgeSource.containerUrl, "ContainerUri", "csharp");
 
 // .NET: boolean property "HasDynamicFieldSchema" (indicates whether result may contain additional fields).
-@@clientName(ContentAnalyzer.dynamicFieldSchema,
+@@clientName(
+  ContentAnalyzer.dynamicFieldSchema,
   "HasDynamicFieldSchema",
   "csharp"
 );
 
 // .NET: boolean properties on ContentAnalyzerConfig use "Should" prefix for clarity.
 @@clientName(ContentAnalyzerConfig.omitContent, "ShouldOmitContent", "csharp");
-@@clientName(ContentAnalyzerConfig.returnDetails,
+@@clientName(
+  ContentAnalyzerConfig.returnDetails,
   "ShouldReturnDetails",
   "csharp"
 );
 
 // .NET-specific naming: use GetAnalyzers instead of ListAnalyzers
-@@clientName(ContentUnderstandingClient.listAnalyzers,
+@@clientName(
+  ContentUnderstandingClient.listAnalyzers,
   "getAnalyzers",
   "csharp"
 );
@@ -226,17 +230,20 @@ op analyzeCustomSignature(
 // Java: boolean properties on ContentAnalyzerConfig follow set*Enabled / is*Enabled convention.
 @@clientName(ContentAnalyzerConfig.enableOcr, "ocrEnabled", "java");
 @@clientName(ContentAnalyzerConfig.enableLayout, "layoutEnabled", "java");
-@@clientName(ContentAnalyzerConfig.enableFigureDescription,
+@@clientName(
+  ContentAnalyzerConfig.enableFigureDescription,
   "figureDescriptionEnabled",
   "java"
 );
-@@clientName(ContentAnalyzerConfig.enableFigureAnalysis,
+@@clientName(
+  ContentAnalyzerConfig.enableFigureAnalysis,
   "figureAnalysisEnabled",
   "java"
 );
 @@clientName(ContentAnalyzerConfig.enableFormula, "formulaEnabled", "java");
 @@clientName(ContentAnalyzerConfig.enableSegment, "segmentEnabled", "java");
-@@clientName(ContentAnalyzerConfig.disableFaceBlurring,
+@@clientName(
+  ContentAnalyzerConfig.disableFaceBlurring,
   "faceBlurringDisabled",
   "java"
 );
@@ -246,7 +253,8 @@ op analyzeCustomSignature(
 // ============================================================================
 
 // Client-only docs clarifying that these properties accept raw binary bytes (not base64 strings) in Python SDK.
-@@clientDoc(AnalysisInput.data,
+@@clientDoc(
+  AnalysisInput.data,
   "Raw image bytes. Provide bytes-like object; do not base64-encode. Only one of url or data should be specified.",
   DocumentationMode.replace
 );

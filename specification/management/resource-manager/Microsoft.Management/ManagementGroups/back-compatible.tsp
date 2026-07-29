@@ -37,40 +37,49 @@ using Rest;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(EntityHierarchyItem.properties);
 
-@@clientName(ManagementGroups.createOrUpdate::parameters.resource,
+@@clientName(
+  ManagementGroups.createOrUpdate::parameters.resource,
   "createManagementGroupRequest"
 );
-@@clientName(ManagementGroups.update::parameters.properties,
+@@clientName(
+  ManagementGroups.update::parameters.properties,
   "patchGroupRequest"
 );
 @@clientLocation(ManagementGroups.list, "HierarchySettings");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(ManagementGroup.properties);
 
-@@clientLocation(SubscriptionUnderManagementGroups.getSubscription,
+@@clientLocation(
+  SubscriptionUnderManagementGroups.getSubscription,
   "ManagementGroupSubscriptions"
 );
-@@clientLocation(SubscriptionUnderManagementGroups.create,
+@@clientLocation(
+  SubscriptionUnderManagementGroups.create,
   "ManagementGroupSubscriptions"
 );
-@@clientLocation(SubscriptionUnderManagementGroups.delete,
+@@clientLocation(
+  SubscriptionUnderManagementGroups.delete,
   "ManagementGroupSubscriptions"
 );
-@@clientLocation(SubscriptionUnderManagementGroups.getSubscriptionsUnderManagementGroup,
+@@clientLocation(
+  SubscriptionUnderManagementGroups.getSubscriptionsUnderManagementGroup,
   "ManagementGroupSubscriptions"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(SubscriptionUnderManagementGroup.properties);
 
 @@clientLocation(HierarchySettingsOperationGroup.get, "HierarchySettings");
-@@clientLocation(HierarchySettingsOperationGroup.createOrUpdate,
+@@clientLocation(
+  HierarchySettingsOperationGroup.createOrUpdate,
   "HierarchySettings"
 );
-@@clientName(HierarchySettingsOperationGroup.createOrUpdate::parameters.resource,
+@@clientName(
+  HierarchySettingsOperationGroup.createOrUpdate::parameters.resource,
   "CreateTenantSettingsRequest"
 );
 @@clientLocation(HierarchySettingsOperationGroup.update, "HierarchySettings");
-@@clientName(HierarchySettingsOperationGroup.update::parameters.properties,
+@@clientName(
+  HierarchySettingsOperationGroup.update::parameters.properties,
   "CreateTenantSettingsRequest"
 );
 @@clientLocation(HierarchySettingsOperationGroup.delete, "HierarchySettings");
@@ -81,22 +90,26 @@ using Rest;
 
 @@clientLocation(EntitiesOperationGroup.list, "Entities");
 
-@@clientName(checkNameAvailability::parameters.body,
+@@clientName(
+  checkNameAvailability::parameters.body,
   "checkNameAvailabilityRequest"
 );
 
 // Customization to make subscriptionId a method parameter instead of the default client level parameter.
-@@override(SubscriptionUnderManagementGroups.getSubscription,
+@@override(
+  SubscriptionUnderManagementGroups.getSubscription,
   getSubscriptionCustomized
 );
 @@override(SubscriptionUnderManagementGroups.create, putSubscriptionCustomized);
-@@override(SubscriptionUnderManagementGroups.delete,
+@@override(
+  SubscriptionUnderManagementGroups.delete,
   deleteSubscriptionCustomized
 );
 
 @@clientLocation(GetSubscriptionId.subscriptionId, getSubscriptionCustomized);
 @@clientLocation(PutSubscriptionId.subscriptionId, putSubscriptionCustomized);
-@@clientLocation(DeleteSubscriptionId.subscriptionId,
+@@clientLocation(
+  DeleteSubscriptionId.subscriptionId,
   deleteSubscriptionCustomized
 );
 
