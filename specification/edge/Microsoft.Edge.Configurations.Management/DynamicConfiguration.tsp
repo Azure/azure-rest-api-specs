@@ -67,7 +67,7 @@ interface DynamicConfigurations {
   >;
 
   @doc("Delete a Dynamic Configuration Resource")
-  delete is ArmResourceDeleteSync<DynamicConfiguration>;
+  delete is ArmResourceDeleteAsync<DynamicConfiguration>;
 
   @doc("List Dynamic Configuration Resources")
   listByConfiguration is ArmResourceListByParent<DynamicConfiguration>;

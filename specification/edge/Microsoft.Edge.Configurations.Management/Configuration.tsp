@@ -43,7 +43,7 @@ interface Configurations {
   update is ArmResourcePatchSync<Configuration, ConfigurationProperties>;
 
   @doc("Delete a Configuration Resource")
-  delete is ArmResourceDeleteSync<Configuration>;
+  delete is ArmResourceDeleteAsync<Configuration>;
 
   @doc("List by specified resource group")
   listByResourceGroup is ArmResourceListByParent<Configuration>;
@@ -80,6 +80,6 @@ interface ConfigurationReferences {
     ConfigurationReference,
     ConfigurationReferenceProperties
   >;
-  delete is ArmResourceDeleteSync<ConfigurationReference>;
+  delete is ArmResourceDeleteAsync<ConfigurationReference>;
   list is ArmResourceListByParent<ConfigurationReference>;
 }
