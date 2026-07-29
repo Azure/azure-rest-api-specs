@@ -344,7 +344,7 @@ describe("checkModelAlignment", () => {
 
     await expect(checkModelAlignment({ core, rootDir })).resolves.toBe(false);
 
-    const message = core.setFailed.mock.calls[0][0];
+    const message = String(core.setFailed.mock.calls[0][0]);
     expect(message).toContain("claude-opus-5");
     expect(message).toContain("gpt-5.4");
   });

@@ -5,6 +5,42 @@ import yaml from "js-yaml";
 import { join } from "path";
 
 /**
+ * Shape of a vally eval file, to the depth these checks read. Declared so the
+ * loaded YAML is typed rather than `any` -- the lint config rejects unsafe
+ * member access, and silencing it per-line would hide real typos in the
+ * property names these checks depend on.
+ *
+ * @typedef {object} GraderConfig
+ * @property {string} [pattern]
+ * @property {string[]} [strings]
+ *
+ * @typedef {object} Grader
+ * @property {string} type
+ * @property {string} [name]
+ * @property {GraderConfig} [config]
+ *
+ * @typedef {object} Stimulus
+ * @property {string} name
+ * @property {Grader[]} [graders]
+ *
+ * @typedef {object} EvalDefaults
+ * @property {string} [model]
+ * @property {string} [judge_model]
+ *
+ * @typedef {object} EvalFile
+ * @property {EvalDefaults} [defaults]
+ * @property {Stimulus[]} [stimuli]
+ */
+
+/**
+ * Shape of the gh-aw workflow frontmatter these checks read.
+ *
+ * @typedef {object} WorkflowFrontmatter
+ * @property {string} [model]
+ * @property {{ model?: string }} [engine]
+ */
+
+/**
  * Path (relative to the repo root) of the data-plane linter interlock file whose
  * header pins the `@azure-tools/typespec-azure-core` version the
  * Data-Plane API Reviewer agent was verified against.
@@ -45,7 +81,14 @@ export const FROZEN_JUDGE_MODEL = "claude-sonnet-4.6";
  * @returns {string} the pinned version, with any range prefix stripped
  */
 export function getPinnedVersion(packageJsonContent) {
-  const pkg = JSON.parse(packageJsonContent);
+  // JSON.parse returns `any`; the double cast through `unknown` is the house
+  // pattern (see workflows/src/namespace-approval/detect-namespaces.js), and
+  // the rule fires on the assignment regardless of the cast.
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const pkg =
+    /** @type {{ dependencies?: Record<string, string>, devDependencies?: Record<string, string> }} */ (
+      /** @type {unknown} */ (JSON.parse(packageJsonContent))
+    );
   const spec = pkg.devDependencies?.[PACKAGE_NAME] ?? pkg.dependencies?.[PACKAGE_NAME];
 
   if (!spec) {
@@ -97,7 +140,7 @@ export function getEngineModel(workflowContent) {
     throw new Error(`Could not find YAML frontmatter in ${WORKFLOW_FILE}`);
   }
 
-  const frontmatter = /** @type {any} */ (yaml.load(match[1]));
+  const frontmatter = /** @type {WorkflowFrontmatter} */ (yaml.load(match[1]));
   const model = frontmatter?.model ?? frontmatter?.engine?.model;
 
   if (!model) {
@@ -119,7 +162,7 @@ export function getEngineModel(workflowContent) {
  * @returns {{ model?: string, judgeModel?: string }}
  */
 export function getEvalModels(evalContent) {
-  const doc = /** @type {any} */ (yaml.load(evalContent));
+  const doc = /** @type {EvalFile} */ (yaml.load(evalContent));
 
   return {
     model: doc?.defaults?.model,
@@ -456,7 +499,7 @@ export async function checkGraderSoundness({ core, rootDir }) {
   let count = 0;
 
   for (const file of files.sort()) {
-    const doc = /** @type {any} */ (yaml.load(await readFile(join(evalDir, file), "utf8")));
+    const doc = /** @type {EvalFile} */ (yaml.load(await readFile(join(evalDir, file), "utf8")));
 
     for (const stimulus of doc?.stimuli ?? []) {
       for (const grader of stimulus.graders ?? []) {
@@ -478,7 +521,7 @@ export async function checkGraderSoundness({ core, rootDir }) {
         try {
           regex = compileGraderPattern(pattern);
         } catch (error) {
-          problems.push(`${file} :: "${grader.name}" pattern does not compile: ${error}`);
+          problems.push(`${file} :: "${grader.name}" pattern does not compile: ${String(error)}`);
           continue;
         }
 
@@ -637,7 +680,7 @@ export async function checkReportFormatContract({ core, rootDir }) {
   let compatibleGraders = 0;
 
   for (const file of evalFiles.sort()) {
-    const doc = /** @type {any} */ (yaml.load(await readFile(join(evalDir, file), "utf8")));
+    const doc = /** @type {EvalFile} */ (yaml.load(await readFile(join(evalDir, file), "utf8")));
     for (const stimulus of doc?.stimuli ?? []) {
       for (const grader of stimulus.graders ?? []) {
         // Only positive assertions are checked. An `output-not-matches` grader
