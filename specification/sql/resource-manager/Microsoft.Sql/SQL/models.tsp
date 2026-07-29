@@ -2,12 +2,13 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-azure-core";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
-using TypeSpec.Versioning;
 
 namespace Microsoft.Sql;
 
@@ -2957,7 +2958,7 @@ union ServerWorkspaceFeature {
 }
 
 /**
- * Whether or not to restrict outbound network access for this server.  Value is optional but if passed in, must be 'Enabled' or 'Disabled'
+ * Whether or not to restrict outbound network access for this server.  Value is optional but if passed in, must be 'Enabled', 'Disabled', or 'SecuredByPerimeter'
  */
 union ServerNetworkAccessFlag {
   string,
@@ -2971,6 +2972,11 @@ union ServerNetworkAccessFlag {
    * Disabled
    */
   Disabled: "Disabled",
+
+  /**
+   * The network security perimeter configuration rules allow or disallow public network access to the resource. Requires an associated network security perimeter.
+   */
+  SecuredByPerimeter: "SecuredByPerimeter",
 }
 
 /**
@@ -14242,6 +14248,18 @@ model ServerUsageProperties {
    */
   @visibility(Lifecycle.Read)
   unit?: string;
+
+  /**
+   * The name of the resource.
+   */
+  @visibility(Lifecycle.Read)
+  resourceName?: string;
+
+  /**
+   * The next reset time for the metric (ISO8601 format).
+   */
+  @visibility(Lifecycle.Read)
+  nextResetTime?: utcDateTime;
 }
 
 /**

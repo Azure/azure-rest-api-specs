@@ -57544,10 +57544,11 @@
     },
     "ServerNetworkAccessFlag": {
       "type": "string",
-      "description": "Whether or not to restrict outbound network access for this server.  Value is optional but if passed in, must be 'Enabled' or 'Disabled'",
+      "description": "Whether or not to restrict outbound network access for this server.  Value is optional but if passed in, must be 'Enabled', 'Disabled', or 'SecuredByPerimeter'",
       "enum": [
         "Enabled",
-        "Disabled"
+        "Disabled",
+        "SecuredByPerimeter"
       ],
       "x-ms-enum": {
         "name": "ServerNetworkAccessFlag",
@@ -57562,6 +57563,11 @@
             "name": "Disabled",
             "value": "Disabled",
             "description": "Disabled"
+          },
+          {
+            "name": "SecuredByPerimeter",
+            "value": "SecuredByPerimeter",
+            "description": "The network security perimeter configuration rules allow or disallow public network access to the resource. Requires an associated network security perimeter."
           }
         ]
       }
@@ -58068,6 +58074,17 @@
         "unit": {
           "type": "string",
           "description": "Unit of the metric.",
+          "readOnly": true
+        },
+        "resourceName": {
+          "type": "string",
+          "description": "The name of the resource.",
+          "readOnly": true
+        },
+        "nextResetTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The next reset time for the metric (ISO8601 format).",
           "readOnly": true
         }
       }
