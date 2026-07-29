@@ -2994,7 +2994,7 @@ union ServerNetworkAccessFlag {
    * Disabled
    */
   Disabled: "Disabled",
-  
+
   /**
    * SecuredByPerimeter
    */
@@ -14274,7 +14274,7 @@ model ServerUsageProperties {
    */
   @visibility(Lifecycle.Read)
   unit?: string;
-  
+
   /**
    * The name of the resource.
    */
