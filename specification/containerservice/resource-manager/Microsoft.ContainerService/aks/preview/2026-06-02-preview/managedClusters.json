@@ -1875,6 +1875,9 @@
           "Create Agent Pool with Windows OSSKU": {
             "$ref": "./examples/AgentPoolsCreate_WindowsOSSKU.json"
           },
+          "Create Agent Pool with per-NIC public IP configuration": {
+            "$ref": "./examples/AgentPoolsCreate_PerNICPublicIP.json"
+          },
           "Create FlexNode Agent Pool": {
             "$ref": "./examples/AgentPoolsCreate_FlexNode.json"
           },
@@ -7514,6 +7517,57 @@
         ]
       }
     },
+    "AgentPoolNICPublicIPAddressConfiguration": {
+      "type": "object",
+      "description": "Public IP configuration applied to a secondary NIC on an agent pool.\n`ipTags` and `publicIPPrefixID` are mutually exclusive, matching the primary NIC's behavior.\nFor more information, see https://aka.ms/aks/dra-nic-iptags",
+      "properties": {
+        "publicIPAddressVersion": {
+          "$ref": "#/definitions/AgentPoolNICPublicIPAddressVersion",
+          "description": "IP version of the public IP provisioned for this NIC. Required: the presence of this\nproperty is what enables ILPIP provisioning for the NIC, so an empty block allocates\nnothing. Maps directly to the VM public IP address configuration's `publicIPAddressVersion`.\nOnly `IPv4` is accepted in this preview; `IPv6` is reserved for future support.\nImmutable after agent pool creation."
+        },
+        "ipTags": {
+          "type": "array",
+          "description": "IP tags to attach to the public IP allocated for this NIC.\nEach tag's `ipTagType` must be one of `FirstPartyUsage`, `NetworkDomain`, or `RoutingPreference`.\nMutually exclusive with `publicIPPrefixID`.\nImmutable after agent pool creation.",
+          "items": {
+            "$ref": "#/definitions/IPTag"
+          },
+          "x-ms-identifiers": []
+        },
+        "publicIPPrefixID": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of a public IP prefix to draw this NIC's public IP from.\nMutually exclusive with `ipTags`.\nImmutable after agent pool creation.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/publicIPPrefixes"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "publicIPAddressVersion"
+      ]
+    },
+    "AgentPoolNICPublicIPAddressVersion": {
+      "type": "string",
+      "description": "IP version for a secondary NIC's public IP. Only `IPv4` is accepted in\nthis preview. `IPv6` will be added when per-NIC IPv6 is supported.",
+      "enum": [
+        "IPv4"
+      ],
+      "x-ms-enum": {
+        "name": "AgentPoolNICPublicIPAddressVersion",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "IPv4",
+            "value": "IPv4",
+            "description": "The public IP allocated for the NIC will be IPv4."
+          }
+        ]
+      }
+    },
     "AgentPoolNetworkInterface": {
       "type": "object",
       "description": "Configuration of a secondary network interface provisioned on each VM instance in the agent pool. For more information, see https://aka.ms/aks/multi-nic",
@@ -7537,6 +7591,10 @@
         "enableAcceleratedNetworking": {
           "type": "boolean",
           "description": "Whether accelerated networking is enabled on this secondary NIC. If omitted, this defaults to true only when the agent pool VM SKU supports accelerated networking. Validation will fail if it is enabled on an unsupported SKU or NIC configuration."
+        },
+        "publicIPAddressConfiguration": {
+          "$ref": "#/definitions/AgentPoolNICPublicIPAddressConfiguration",
+          "description": "Public IP configuration for this secondary NIC. Only valid when `type` is `Standard`.\nA constrained projection of the VM public IP address configuration the agent pool stamps\nonto each NIC: set `publicIPAddressVersion` to provision a per-VM instance-level public IP\n(ILPIP) for the NIC, then optionally shape it with `ipTags` or `publicIPPrefixID`.\nOmitting this block provisions no public IP. Idle timeout is not configurable and matches\nthe primary NIC's fixed value.\nImmutable after agent pool creation.\nFor more information, see https://aka.ms/aks/dra-nic-iptags"
         }
       }
     },
@@ -7623,7 +7681,11 @@
           "items": {
             "$ref": "#/definitions/AgentPoolNetworkInterface"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [],
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "dranet": {
           "$ref": "#/definitions/DRANETProfile",
