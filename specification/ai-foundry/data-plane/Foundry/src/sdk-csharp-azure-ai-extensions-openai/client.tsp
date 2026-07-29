@@ -47,9 +47,6 @@ namespace Azure.AI.Projects {
   @@usage(OpenAI.UpdateConversationBody, Usage.input);
   @@access(OpenAI.UpdateConversationBody, Access.public);
 
-  @@usage(OpenAI.CreateResponse, Usage.input);
-  @@access(OpenAI.CreateResponse, Access.public);
-
   @@access(OpenAI.Metadata, Access.internal);
   @@clientName(OpenAI.Metadata, "InternalMetadataContainer");
 
