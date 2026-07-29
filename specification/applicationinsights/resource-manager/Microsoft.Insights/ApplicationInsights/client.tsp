@@ -26,7 +26,6 @@ using WorkbookTemplatesApi;
 
 using Azure.ClientGenerator.Core;
 
-#suppress "@azure-tools/typespec-client-generator-core/inconsistent-multiple-service-dependency" "temporarily suppressing"
 @client({
   name: "ApplicationInsightsManagementClient",
   service: [
