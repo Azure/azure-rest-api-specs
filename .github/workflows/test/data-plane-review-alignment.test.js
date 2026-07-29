@@ -594,7 +594,7 @@ describe("checkGraderSoundness", () => {
         "      - type: output-matches",
         '        name: "reports something that never appears"',
         "        config:",
-        '          pattern: "\\\\[DP-NOSUCHRULE-01\\\\]"',
+        '          pattern: "\\\\[DP-ABSENT-01\\\\]"',
       ].join("\n"),
     );
 
@@ -614,9 +614,9 @@ describe("checkReportFormatContract", () => {
   });
 
   it("catches the original defect: format defined only in the agent file", async () => {
-    // The regression this check exists for. vally loads the skill, not the
-    // agent, so a contract that lives only in the agent file is invisible to
-    // every eval that grades it.
+    // The regression this check exists for. The eval harness loads the skill,
+    // not the agent, so a contract that lives only in the agent file is
+    // invisible to every eval that grades it.
     const core = createMockCore();
     const rootDir = await createFixtureRepo();
     await writeNested(join(rootDir, AGENT_FILE), "# Agent\n\n**[DP-VIS-02] Title** -- `a.tsp:1`\n");
