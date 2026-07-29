@@ -149,7 +149,7 @@ describe("emitSuppressionAnnotations", () => {
     });
 
     expect(logSpy).toHaveBeenCalledTimes(2);
-    const [first, second] = logSpy.mock.calls.map((call) => call[0]);
+    const [first, second] = logSpy.mock.calls.map((call) => call[0] as string);
     // New suppression is classified with the New Suppression title.
     expect(first).toContain("file=specification/contoso/Contoso.Widget/main.tsp");
     expect(first).toContain("line=42");
