@@ -76582,11 +76582,34 @@
             "description": "The voice kind. Always `openai`."
           },
           "name": {
-            "$ref": "#/components/schemas/OpenAI.VoiceIdsShared",
+            "$ref": "#/components/schemas/OpenAIVoiceName",
             "description": "The OpenAI built-in voice name."
           }
         },
         "description": "An OpenAI built-in voice configuration with an explicit type discriminator."
+      },
+      "OpenAIVoiceName": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "alloy",
+              "ash",
+              "ballad",
+              "cedar",
+              "coral",
+              "echo",
+              "marin",
+              "sage",
+              "shimmer",
+              "verse"
+            ]
+          }
+        ],
+        "description": "A known OpenAI built-in voice name. Additional values may be added over time."
       },
       "OpenApiAnonymousAuthDetails": {
         "type": "object",
@@ -81890,7 +81913,7 @@
       "VoiceAgentVoice": {
         "anyOf": [
           {
-            "$ref": "#/components/schemas/OpenAI.VoiceIdsShared"
+            "$ref": "#/components/schemas/OpenAIVoiceName"
           },
           {
             "$ref": "#/components/schemas/OpenAIVoice"

@@ -308,10 +308,45 @@ model VoiceInputTranscription {
 
 @doc("A voice configuration accepted by a voice agent. Built-in OpenAI voices may also be specified as a bare string.")
 union VoiceAgentVoice {
-  OpenAI.VoiceIdsShared,
+  OpenAIVoiceName,
   OpenAIVoice,
   AzureVoice,
   AzureRealtimeNativeVoice,
+}
+
+@doc("A known OpenAI built-in voice name. Additional values may be added over time.")
+union OpenAIVoiceName {
+  string,
+
+  @doc("The Alloy voice.")
+  alloy: "alloy",
+
+  @doc("The Ash voice.")
+  ash: "ash",
+
+  @doc("The Ballad voice.")
+  ballad: "ballad",
+
+  @doc("The Cedar voice.")
+  cedar: "cedar",
+
+  @doc("The Coral voice.")
+  coral: "coral",
+
+  @doc("The Echo voice.")
+  echo: "echo",
+
+  @doc("The Marin voice.")
+  marin: "marin",
+
+  @doc("The Sage voice.")
+  sage: "sage",
+
+  @doc("The Shimmer voice.")
+  shimmer: "shimmer",
+
+  @doc("The Verse voice.")
+  verse: "verse",
 }
 
 @doc("An OpenAI built-in voice configuration with an explicit type discriminator.")
@@ -320,7 +355,7 @@ model OpenAIVoice {
   type: "openai";
 
   @doc("The OpenAI built-in voice name.")
-  name: OpenAI.VoiceIdsShared;
+  name: OpenAIVoiceName;
 }
 
 @doc("Base configuration shared by Azure synthesized voices.")
