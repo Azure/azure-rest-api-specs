@@ -1,0 +1,2340 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SqlManagementClient",
+    "version": "2025-01-01",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "LongTermRetentionBackups"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionBackups": {
+      "get": {
+        "operationId": "LongTermRetentionBackups_ListByLocation",
+        "tags": [
+          "LongTermRetentionBackups"
+        ],
+        "description": "Lists the long term retention backups for a given location.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "onlyLatestPerDatabase",
+            "in": "query",
+            "description": "Whether or not to only get the latest backup for each database.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "databaseState",
+            "in": "query",
+            "description": "Whether to query against just live databases, just deleted databases, or all databases.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "All",
+              "Live",
+              "Deleted"
+            ],
+            "x-ms-enum": {
+              "name": "DatabaseState",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "All",
+                  "value": "All",
+                  "description": "All"
+                },
+                {
+                  "name": "Live",
+                  "value": "Live",
+                  "description": "Live"
+                },
+                {
+                  "name": "Deleted",
+                  "value": "Deleted",
+                  "description": "Deleted"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/LongTermRetentionBackupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get all long term retention backups under the location.": {
+            "$ref": "./examples/LongTermRetentionBackupListByLocation.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionBackups": {
+      "get": {
+        "operationId": "LongTermRetentionBackups_ListByServer",
+        "tags": [
+          "LongTermRetentionBackups"
+        ],
+        "description": "Lists the long term retention backups for a given server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionServerName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "onlyLatestPerDatabase",
+            "in": "query",
+            "description": "Whether or not to only get the latest backup for each database.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "databaseState",
+            "in": "query",
+            "description": "Whether to query against just live databases, just deleted databases, or all databases.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "All",
+              "Live",
+              "Deleted"
+            ],
+            "x-ms-enum": {
+              "name": "DatabaseState",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "All",
+                  "value": "All",
+                  "description": "All"
+                },
+                {
+                  "name": "Live",
+                  "value": "Live",
+                  "description": "Live"
+                },
+                {
+                  "name": "Deleted",
+                  "value": "Deleted",
+                  "description": "Deleted"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/LongTermRetentionBackupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get all long term retention backups under the server.": {
+            "$ref": "./examples/LongTermRetentionBackupListByServer.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups": {
+      "get": {
+        "operationId": "LongTermRetentionBackups_ListByDatabase",
+        "tags": [
+          "LongTermRetentionBackups"
+        ],
+        "description": "Lists all long term retention backups for a database.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionServerName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionDatabaseName",
+            "in": "path",
+            "description": "The name of the database",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "onlyLatestPerDatabase",
+            "in": "query",
+            "description": "Whether or not to only get the latest backup for each database.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "databaseState",
+            "in": "query",
+            "description": "Whether to query against just live databases, just deleted databases, or all databases.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "All",
+              "Live",
+              "Deleted"
+            ],
+            "x-ms-enum": {
+              "name": "DatabaseState",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "All",
+                  "value": "All",
+                  "description": "All"
+                },
+                {
+                  "name": "Live",
+                  "value": "Live",
+                  "description": "Live"
+                },
+                {
+                  "name": "Deleted",
+                  "value": "Deleted",
+                  "description": "Deleted"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/LongTermRetentionBackupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get all long term retention backups under the database.": {
+            "$ref": "./examples/LongTermRetentionBackupListByDatabase.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}": {
+      "get": {
+        "operationId": "LongTermRetentionBackups_Get",
+        "tags": [
+          "LongTermRetentionBackups"
+        ],
+        "description": "Gets a long term retention backup.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionServerName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionDatabaseName",
+            "in": "path",
+            "description": "The name of the database",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupName",
+            "in": "path",
+            "description": "The backup name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LongTermRetentionBackup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the long term retention backup.": {
+            "$ref": "./examples/LongTermRetentionBackupGet.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "LongTermRetentionBackups_Delete",
+        "tags": [
+          "LongTermRetentionBackups"
+        ],
+        "description": "Deletes a long term retention backup.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionServerName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionDatabaseName",
+            "in": "path",
+            "description": "The name of the database",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupName",
+            "in": "path",
+            "description": "The backup name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete the long term retention backup.": {
+            "$ref": "./examples/LongTermRetentionBackupDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/changeAccessTier": {
+      "post": {
+        "operationId": "LongTermRetentionBackups_ChangeAccessTier",
+        "tags": [
+          "LongTermRetentionBackups"
+        ],
+        "description": "Change a long term retention backup access tier.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionServerName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionDatabaseName",
+            "in": "path",
+            "description": "The name of the database",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupName",
+            "in": "path",
+            "description": "The backup name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChangeLongTermRetentionBackupAccessTierParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LongTermRetentionBackup"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Change the long term retention backup storage access tier.": {
+            "$ref": "./examples/ChangeLongTermRetentionBackupAccessTier.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/LongTermRetentionBackup"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/copy": {
+      "post": {
+        "operationId": "LongTermRetentionBackups_Copy",
+        "tags": [
+          "LongTermRetentionBackups"
+        ],
+        "description": "Copy an existing long term retention backup.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionServerName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionDatabaseName",
+            "in": "path",
+            "description": "The name of the database",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupName",
+            "in": "path",
+            "description": "The backup name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The parameters needed for long term retention copy request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CopyLongTermRetentionBackupParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LongTermRetentionBackupOperationResult"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Copy the long term retention backup.": {
+            "$ref": "./examples/LongTermRetentionBackupCopy.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/LongTermRetentionBackupOperationResult"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/lockTimeBasedImmutability": {
+      "post": {
+        "operationId": "LongTermRetentionBackups_LockTimeBasedImmutability",
+        "tags": [
+          "LongTermRetentionBackups"
+        ],
+        "description": "Lock time based immutability of an existing long term retention backup.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionServerName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionDatabaseName",
+            "in": "path",
+            "description": "The name of the database",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupName",
+            "in": "path",
+            "description": "The backup name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LongTermRetentionBackup"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lock time based immutability of the long term retention backup.": {
+            "$ref": "./examples/LockTimeBasedImmutabilityLongTermRetentionBackup.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/LongTermRetentionBackup"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/removeLegalHoldImmutability": {
+      "post": {
+        "operationId": "LongTermRetentionBackups_RemoveLegalHoldImmutability",
+        "tags": [
+          "LongTermRetentionBackups"
+        ],
+        "description": "Remove legal hold immutability of an existing long term retention backup.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionServerName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionDatabaseName",
+            "in": "path",
+            "description": "The name of the database",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupName",
+            "in": "path",
+            "description": "The backup name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LongTermRetentionBackup"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Remove legal hold immutability of the long term retention backup.": {
+            "$ref": "./examples/RemoveLegalHoldImmutabilityLongTermRetentionBackup.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/LongTermRetentionBackup"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/removeTimeBasedImmutability": {
+      "post": {
+        "operationId": "LongTermRetentionBackups_RemoveTimeBasedImmutability",
+        "tags": [
+          "LongTermRetentionBackups"
+        ],
+        "description": "Remove time based immutability of an existing long term retention backup.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionServerName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionDatabaseName",
+            "in": "path",
+            "description": "The name of the database",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupName",
+            "in": "path",
+            "description": "The backup name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LongTermRetentionBackup"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Remove time based immutability of the long term retention backup.": {
+            "$ref": "./examples/RemoveTimeBasedImmutabilityLongTermRetentionBackup.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/LongTermRetentionBackup"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/setLegalHoldImmutability": {
+      "post": {
+        "operationId": "LongTermRetentionBackups_SetLegalHoldImmutability",
+        "tags": [
+          "LongTermRetentionBackups"
+        ],
+        "description": "Set legal hold immutability of an existing long term retention backup.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionServerName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionDatabaseName",
+            "in": "path",
+            "description": "The name of the database",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupName",
+            "in": "path",
+            "description": "The backup name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LongTermRetentionBackup"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Set legal hold immutability of the long term retention backup.": {
+            "$ref": "./examples/SetLegalHoldImmutabilityLongTermRetentionBackup.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/LongTermRetentionBackup"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/update": {
+      "post": {
+        "operationId": "LongTermRetentionBackups_Update",
+        "tags": [
+          "LongTermRetentionBackups"
+        ],
+        "description": "Updates an existing long term retention backup.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionServerName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionDatabaseName",
+            "in": "path",
+            "description": "The name of the database",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupName",
+            "in": "path",
+            "description": "The backup name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The requested backup resource state",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateLongTermRetentionBackupParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LongTermRetentionBackupOperationResult"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update the long term retention backup.": {
+            "$ref": "./examples/LongTermRetentionBackupUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/LongTermRetentionBackupOperationResult"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionBackups": {
+      "get": {
+        "operationId": "LongTermRetentionBackups_ListByResourceGroupLocation",
+        "tags": [
+          "LongTermRetentionBackups"
+        ],
+        "description": "Lists the long term retention backups for a given location based on resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "onlyLatestPerDatabase",
+            "in": "query",
+            "description": "Whether or not to only get the latest backup for each database.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "databaseState",
+            "in": "query",
+            "description": "Whether to query against just live databases, just deleted databases, or all databases.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "All",
+              "Live",
+              "Deleted"
+            ],
+            "x-ms-enum": {
+              "name": "DatabaseState",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "All",
+                  "value": "All",
+                  "description": "All"
+                },
+                {
+                  "name": "Live",
+                  "value": "Live",
+                  "description": "Live"
+                },
+                {
+                  "name": "Deleted",
+                  "value": "Deleted",
+                  "description": "Deleted"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/LongTermRetentionBackupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get all long term retention backups under the location based on resource group.": {
+            "$ref": "./examples/ResourceGroupBasedLongTermRetentionBackupListByLocation.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionBackups": {
+      "get": {
+        "operationId": "LongTermRetentionBackups_ListByResourceGroupServer",
+        "tags": [
+          "LongTermRetentionBackups"
+        ],
+        "description": "Lists the long term retention backups for a given server based on resource groups.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionServerName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "onlyLatestPerDatabase",
+            "in": "query",
+            "description": "Whether or not to only get the latest backup for each database.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "databaseState",
+            "in": "query",
+            "description": "Whether to query against just live databases, just deleted databases, or all databases.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "All",
+              "Live",
+              "Deleted"
+            ],
+            "x-ms-enum": {
+              "name": "DatabaseState",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "All",
+                  "value": "All",
+                  "description": "All"
+                },
+                {
+                  "name": "Live",
+                  "value": "Live",
+                  "description": "Live"
+                },
+                {
+                  "name": "Deleted",
+                  "value": "Deleted",
+                  "description": "Deleted"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/LongTermRetentionBackupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get all long term retention backups under the server based on resource group.": {
+            "$ref": "./examples/ResourceGroupBasedLongTermRetentionBackupListByServer.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups": {
+      "get": {
+        "operationId": "LongTermRetentionBackups_ListByResourceGroupDatabase",
+        "tags": [
+          "LongTermRetentionBackups"
+        ],
+        "description": "Lists all long term retention backups for a database based on a particular resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionServerName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionDatabaseName",
+            "in": "path",
+            "description": "The name of the database",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "onlyLatestPerDatabase",
+            "in": "query",
+            "description": "Whether or not to only get the latest backup for each database.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "databaseState",
+            "in": "query",
+            "description": "Whether to query against just live databases, just deleted databases, or all databases.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "All",
+              "Live",
+              "Deleted"
+            ],
+            "x-ms-enum": {
+              "name": "DatabaseState",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "All",
+                  "value": "All",
+                  "description": "All"
+                },
+                {
+                  "name": "Live",
+                  "value": "Live",
+                  "description": "Live"
+                },
+                {
+                  "name": "Deleted",
+                  "value": "Deleted",
+                  "description": "Deleted"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/LongTermRetentionBackupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get all long term retention backups under the database.": {
+            "$ref": "./examples/ResourceGroupBasedLongTermRetentionBackupListByDatabase.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}": {
+      "get": {
+        "operationId": "LongTermRetentionBackups_GetByResourceGroup",
+        "tags": [
+          "LongTermRetentionBackups"
+        ],
+        "description": "Gets a long term retention backup.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionServerName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionDatabaseName",
+            "in": "path",
+            "description": "The name of the database",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupName",
+            "in": "path",
+            "description": "The backup name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LongTermRetentionBackup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the long term retention backup.": {
+            "$ref": "./examples/ResourceGroupBasedLongTermRetentionBackupGet.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "LongTermRetentionBackups_DeleteByResourceGroup",
+        "tags": [
+          "LongTermRetentionBackups"
+        ],
+        "description": "Deletes a long term retention backup.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionServerName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionDatabaseName",
+            "in": "path",
+            "description": "The name of the database",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupName",
+            "in": "path",
+            "description": "The backup name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete the long term retention backup.": {
+            "$ref": "./examples/ResourceGroupBasedLongTermRetentionBackupDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/changeAccessTier": {
+      "post": {
+        "operationId": "LongTermRetentionBackups_ChangeAccessTierByResourceGroup",
+        "tags": [
+          "LongTermRetentionBackups"
+        ],
+        "description": "Change a long term retention backup access tier.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionServerName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionDatabaseName",
+            "in": "path",
+            "description": "The name of the database",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupName",
+            "in": "path",
+            "description": "The backup name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChangeLongTermRetentionBackupAccessTierParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LongTermRetentionBackup"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Change the long term retention backup storage access tier for a resource group.": {
+            "$ref": "./examples/ResourceGroupBasedChangeLongTermRetentionBackupAccessTier.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/LongTermRetentionBackup"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/copy": {
+      "post": {
+        "operationId": "LongTermRetentionBackups_CopyByResourceGroup",
+        "tags": [
+          "LongTermRetentionBackups"
+        ],
+        "description": "Copy an existing long term retention backup to a different server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionServerName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionDatabaseName",
+            "in": "path",
+            "description": "The name of the database",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupName",
+            "in": "path",
+            "description": "The backup name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The parameters needed for long term retention copy request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CopyLongTermRetentionBackupParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LongTermRetentionBackupOperationResult"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Copy the long term retention backup.": {
+            "$ref": "./examples/ResourceGroupBasedLongTermRetentionBackupCopy.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/LongTermRetentionBackupOperationResult"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/lockTimeBasedImmutability": {
+      "post": {
+        "operationId": "LongTermRetentionBackups_LockTimeBasedImmutabilityByResourceGroup",
+        "tags": [
+          "LongTermRetentionBackups"
+        ],
+        "description": "Lock time based immutability of an existing long term retention backup.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionServerName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionDatabaseName",
+            "in": "path",
+            "description": "The name of the database",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupName",
+            "in": "path",
+            "description": "The backup name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LongTermRetentionBackup"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lock time based immutability of the long term retention backup.": {
+            "$ref": "./examples/ResourceGroupBasedLockTimeBasedImmutabilityLongTermRetentionBackup.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/LongTermRetentionBackup"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/removeLegalHoldImmutability": {
+      "post": {
+        "operationId": "LongTermRetentionBackups_RemoveLegalHoldImmutabilityByResourceGroup",
+        "tags": [
+          "LongTermRetentionBackups"
+        ],
+        "description": "Remove legal hold immutability of an existing long term retention backup.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionServerName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionDatabaseName",
+            "in": "path",
+            "description": "The name of the database",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupName",
+            "in": "path",
+            "description": "The backup name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LongTermRetentionBackup"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Remove legal hold immutability of the long term retention backup.": {
+            "$ref": "./examples/ResourceGroupBasedRemoveLegalHoldImmutabilityLongTermRetentionBackup.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/LongTermRetentionBackup"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/removeTimeBasedImmutability": {
+      "post": {
+        "operationId": "LongTermRetentionBackups_RemoveTimeBasedImmutabilityByResourceGroup",
+        "tags": [
+          "LongTermRetentionBackups"
+        ],
+        "description": "Remove time based immutability of an existing long term retention backup.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionServerName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionDatabaseName",
+            "in": "path",
+            "description": "The name of the database",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupName",
+            "in": "path",
+            "description": "The backup name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LongTermRetentionBackup"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Remove time based immutability of the long term retention backup.": {
+            "$ref": "./examples/ResourceGroupBasedRemoveTimeBasedImmutabilityLongTermRetentionBackup.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/LongTermRetentionBackup"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/setLegalHoldImmutability": {
+      "post": {
+        "operationId": "LongTermRetentionBackups_SetLegalHoldImmutabilityByResourceGroup",
+        "tags": [
+          "LongTermRetentionBackups"
+        ],
+        "description": "Set legal hold immutability of an existing long term retention backup.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionServerName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionDatabaseName",
+            "in": "path",
+            "description": "The name of the database",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupName",
+            "in": "path",
+            "description": "The backup name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LongTermRetentionBackup"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Set legal hold immutability of the long term retention backup.": {
+            "$ref": "./examples/ResourceGroupBasedSetLegalHoldImmutabilityLongTermRetentionBackup.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/LongTermRetentionBackup"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/update": {
+      "post": {
+        "operationId": "LongTermRetentionBackups_UpdateByResourceGroup",
+        "tags": [
+          "LongTermRetentionBackups"
+        ],
+        "description": "Updates an existing long term retention backup.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionServerName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionDatabaseName",
+            "in": "path",
+            "description": "The name of the database",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupName",
+            "in": "path",
+            "description": "The backup name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The requested backup resource state",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateLongTermRetentionBackupParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LongTermRetentionBackupOperationResult"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update the long term retention backup.": {
+            "$ref": "./examples/ResourceGroupBasedLongTermRetentionBackupUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/LongTermRetentionBackupOperationResult"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "ChangeLongTermRetentionBackupAccessTierParameters": {
+      "type": "object",
+      "description": "Contains the information necessary to change long term retention backup access tier and related operation mode.",
+      "properties": {
+        "backupStorageAccessTier": {
+          "type": "string",
+          "description": "The long term retention backup storage access tier"
+        },
+        "operationMode": {
+          "type": "string",
+          "description": "The operation mode when updating ltr backup storage access tier"
+        }
+      },
+      "required": [
+        "backupStorageAccessTier",
+        "operationMode"
+      ]
+    },
+    "CopyLongTermRetentionBackupParameters": {
+      "type": "object",
+      "description": "Contains the information necessary to perform long term retention backup copy operation.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CopyLongTermRetentionBackupParametersProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "CopyLongTermRetentionBackupParametersProperties": {
+      "type": "object",
+      "description": "Contains the properties to perform long term retention backup copy operation.",
+      "properties": {
+        "targetSubscriptionId": {
+          "type": "string",
+          "description": "The subscription that owns the target server",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "targetResourceGroup": {
+          "type": "string",
+          "description": "The resource group that owns the target server",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "targetServerResourceId": {
+          "type": "string",
+          "description": "The resource Id of the target server that owns the database",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "targetServerFullyQualifiedDomainName": {
+          "type": "string",
+          "description": "The fully qualified domain name of the target server",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "targetDatabaseName": {
+          "type": "string",
+          "description": "The name of the database owns the copied backup.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "targetBackupStorageRedundancy": {
+          "$ref": "./common.json#/definitions/BackupStorageRedundancy",
+          "description": "The storage redundancy type of the copied backup",
+          "x-ms-mutability": [
+            "create"
+          ]
+        }
+      }
+    },
+    "LongTermRetentionBackup": {
+      "type": "object",
+      "description": "A long term retention backup.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LongTermRetentionBackupProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "LongTermRetentionBackupListResult": {
+      "type": "object",
+      "description": "A list of long term retention backups.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of results.",
+          "items": {
+            "$ref": "#/definitions/LongTermRetentionBackup"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to retrieve next page of results.",
+          "readOnly": true
+        }
+      }
+    },
+    "LongTermRetentionBackupOperationResult": {
+      "type": "object",
+      "description": "A LongTermRetentionBackup operation result resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LongTermRetentionOperationResultProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "LongTermRetentionBackupProperties": {
+      "type": "object",
+      "description": "Properties of a long term retention backup",
+      "properties": {
+        "serverName": {
+          "type": "string",
+          "description": "The server name that the backup database belong to.",
+          "readOnly": true
+        },
+        "serverCreateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The create time of the server.",
+          "readOnly": true
+        },
+        "databaseName": {
+          "type": "string",
+          "description": "The name of the database the backup belong to",
+          "readOnly": true
+        },
+        "databaseDeletionTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The delete time of the database",
+          "readOnly": true
+        },
+        "backupTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the backup was taken",
+          "readOnly": true
+        },
+        "backupExpirationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the long term retention backup will expire.",
+          "readOnly": true
+        },
+        "backupStorageRedundancy": {
+          "$ref": "./common.json#/definitions/BackupStorageRedundancy",
+          "description": "The storage redundancy type of the backup",
+          "readOnly": true
+        },
+        "requestedBackupStorageRedundancy": {
+          "$ref": "./common.json#/definitions/BackupStorageRedundancy",
+          "description": "The storage redundancy type of the backup",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        },
+        "isBackupImmutable": {
+          "type": "boolean",
+          "description": "The setting whether the LTR backup is immutable"
+        },
+        "timeBasedImmutability": {
+          "$ref": "./common.json#/definitions/TimeBasedImmutability",
+          "description": "The setting for whether or not time-based immutability is enabled for the LTR backup. When time-based immutability is enabled and locked, the backup cannot be deleted until BackupExpirationTime."
+        },
+        "timeBasedImmutabilityMode": {
+          "$ref": "./common.json#/definitions/TimeBasedImmutabilityMode",
+          "description": "The time-based immutability mode. Only applicable if time-based immutability is enabled."
+        },
+        "legalHoldImmutability": {
+          "$ref": "./common.json#/definitions/SetLegalHoldImmutability",
+          "description": "The setting for whether LegalHold is enabled or disabled on the LTR backup. When LegalHold is enabled, the backup cannot be deleted until the LegalHold is removed."
+        },
+        "backupStorageAccessTier": {
+          "$ref": "./common.json#/definitions/BackupStorageAccessTier",
+          "description": "The BackupStorageAccessTier for the LTR backup",
+          "readOnly": true
+        }
+      }
+    },
+    "LongTermRetentionOperationResultProperties": {
+      "type": "object",
+      "description": "Contains the operation result properties for long term retention backup operation.",
+      "properties": {
+        "requestId": {
+          "$ref": "./common.json#/definitions/Azure.Core.uuid",
+          "description": "Request Id.",
+          "readOnly": true
+        },
+        "operationType": {
+          "type": "string",
+          "description": "Operation type.",
+          "readOnly": true
+        },
+        "fromBackupResourceId": {
+          "type": "string",
+          "description": "Source backup resource id",
+          "readOnly": true
+        },
+        "toBackupResourceId": {
+          "type": "string",
+          "description": "Target backup resource id",
+          "readOnly": true
+        },
+        "targetBackupStorageRedundancy": {
+          "$ref": "./common.json#/definitions/BackupStorageRedundancy",
+          "description": "The storage redundancy type of the copied backup",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "Operation status",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Progress message",
+          "readOnly": true
+        }
+      }
+    },
+    "UpdateLongTermRetentionBackupParameters": {
+      "type": "object",
+      "description": "Contains the information necessary to perform long term retention backup update operation.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UpdateLongTermRetentionBackupParametersProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "UpdateLongTermRetentionBackupParametersProperties": {
+      "type": "object",
+      "description": "Contains the properties to perform long term retention backup copy operation.",
+      "properties": {
+        "requestedBackupStorageRedundancy": {
+          "$ref": "./common.json#/definitions/BackupStorageRedundancy",
+          "description": "The storage redundancy type of the copied backup",
+          "x-ms-mutability": [
+            "create"
+          ]
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

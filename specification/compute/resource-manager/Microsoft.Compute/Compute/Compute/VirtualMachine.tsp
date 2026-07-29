@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
@@ -9,6 +10,7 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Common;
+using TypeSpec.Versioning;
 
 namespace Compute;
 /**
@@ -250,6 +252,13 @@ interface VirtualMachines {
        */
       @query("hibernate")
       hibernate?: boolean;
+
+      /**
+       * Optional parameter to force deallocate a virtual machine. Default is false.
+       */
+      @added(Versions.v2025_11_01)
+      @query("forceDeallocate")
+      forceDeallocate?: boolean;
     },
     LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
@@ -420,30 +429,39 @@ interface VirtualMachines {
 }
 
 @@doc(VirtualMachine.name, "The name of the virtual machine.");
-@@doc(VirtualMachine.properties,
+@@doc(
+  VirtualMachine.properties,
   "Describes the properties of a Virtual Machine."
 );
-@@doc(VirtualMachines.createOrUpdate::parameters.resource,
+@@doc(
+  VirtualMachines.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create Virtual Machine operation."
 );
-@@doc(VirtualMachines.update::parameters.properties,
+@@doc(
+  VirtualMachines.update::parameters.properties,
   "Parameters supplied to the Update Virtual Machine operation."
 );
-@@doc(VirtualMachines.attachDetachDataDisks::parameters.body,
+@@doc(
+  VirtualMachines.attachDetachDataDisks::parameters.body,
   "Parameters supplied to the attach and detach data disks operation on the virtual machine."
 );
-@@doc(VirtualMachines.capture::parameters.body,
+@@doc(
+  VirtualMachines.capture::parameters.body,
   "Parameters supplied to the Capture Virtual Machine operation."
 );
-@@doc(VirtualMachines.installPatches::parameters.body,
+@@doc(
+  VirtualMachines.installPatches::parameters.body,
   "Input for InstallPatches as directly received by the API"
 );
-@@doc(VirtualMachines.reimage::parameters.body,
+@@doc(
+  VirtualMachines.reimage::parameters.body,
   "Parameters supplied to the Reimage Virtual Machine operation."
 );
-@@doc(VirtualMachines.runCommand::parameters.body,
+@@doc(
+  VirtualMachines.runCommand::parameters.body,
   "Parameters supplied to the Run command operation."
 );
-@@doc(VirtualMachines.migrateToVMScaleSet::parameters.body,
+@@doc(
+  VirtualMachines.migrateToVMScaleSet::parameters.body,
   "Parameters supplied to the Migrate Virtual Machine operation."
 );

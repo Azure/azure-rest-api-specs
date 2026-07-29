@@ -9,7 +9,9 @@ using TypeSpec.Versioning;
 
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "External API shape is defined in OpenAPI 3.0 as oneOf."
 #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Backwards compatibility with existing clients."
-alias ChatCompletionsToolSelection = ChatCompletionsToolSelectionPreset | ChatCompletionsNamedToolSelection;
+alias ChatCompletionsToolSelection =
+  | ChatCompletionsToolSelectionPreset
+  | ChatCompletionsNamedToolSelection;
 
 @added(ServiceApiVersions.v2024_02_15_Preview)
 @doc("Represents a generic policy for how a chat completions tool may be selected.")

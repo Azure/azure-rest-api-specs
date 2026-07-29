@@ -8,6 +8,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.SecurityInsights;
 /**
@@ -88,6 +89,10 @@ interface WorkspaceManagerMembers {
 
 @@doc(WorkspaceManagerMember.name, "The name of the workspace manager member");
 @@doc(WorkspaceManagerMember.properties, "The workspace manager member object");
-@@doc(WorkspaceManagerMembers.createOrUpdate::parameters.resource,
+@@doc(
+  WorkspaceManagerMembers.createOrUpdate::parameters.resource,
   "The workspace manager member object"
 );
+
+@@added(WorkspaceManagerMember, Versions.v2025_10_01_preview);
+@@added(WorkspaceManagerMembers, Versions.v2025_10_01_preview);

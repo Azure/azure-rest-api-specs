@@ -45,11 +45,13 @@ interface Webhooks {
   update is ArmCustomPatchAsync<
     Webhook,
     PatchModel = WebhookUpdateParameters,
-    Response = ArmResponse<Webhook> | ArmResourceCreatedResponse<
-      Webhook,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = Webhook> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >
+    Response =
+      | ArmResponse<Webhook>
+      | ArmResourceCreatedResponse<
+          Webhook,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = Webhook> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
   >;
 
   /**
@@ -58,7 +60,10 @@ interface Webhooks {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     Webhook,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -99,9 +104,11 @@ interface Webhooks {
 @@minLength(Webhook.name, 5);
 @@doc(Webhook.name, "The name of the webhook.");
 @@doc(Webhook.properties, "The properties of the webhook.");
-@@doc(Webhooks.create::parameters.resource,
+@@doc(
+  Webhooks.create::parameters.resource,
   "The parameters for creating a webhook."
 );
-@@doc(Webhooks.update::parameters.properties,
+@@doc(
+  Webhooks.update::parameters.properties,
   "The parameters for updating a webhook."
 );

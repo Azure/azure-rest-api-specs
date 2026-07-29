@@ -53,6 +53,7 @@ interface Targets {
 
 @@doc(Target.name, "String that represents a Target resource name.");
 @@doc(Target.properties, "The properties of the target resource.");
-@@doc(Targets.createOrUpdate::parameters.resource,
+@@doc(
+  Targets.createOrUpdate::parameters.resource,
   "Target resource to be created or updated."
 );

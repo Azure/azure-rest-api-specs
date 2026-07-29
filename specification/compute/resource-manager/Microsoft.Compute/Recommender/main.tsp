@@ -10,8 +10,11 @@
 import "@typespec/rest";
 import "@typespec/versioning";
 import "./models.tsp";
+import "./vmAttributes.tsp";
 import "./ComputeDiagnosticBase.tsp";
+import "./SkuMixPlacementBase.tsp";
 import "./back-compatible.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -39,4 +42,8 @@ enum Versions {
    * The 2025-06-05 API version.
    */
   v2025_06_05: "2025-06-05",
+
+  /** The 2026-05-05-preview API version. */
+  @Azure.Core.previewVersion
+  v2026_05_05_preview: "2026-05-05-preview",
 }

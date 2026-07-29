@@ -1,0 +1,83 @@
+{
+  "parameters": {
+    "api-version": "2026-05-01-preview",
+    "workspaceName": "exampleWorkspace",
+    "resourceGroupName": "exampleRG",
+    "subscriptionId": "6b052e15-03d3-4f17-b2e1-be7f07588291"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace/discoveredResources/a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+            "name": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+            "type": "Microsoft.Chaos/workspaces/discoveredResources",
+            "properties": {
+              "namespace": "Microsoft.Compute",
+              "resourceName": "myVirtualMachine",
+              "resourceType": "virtualMachines",
+              "fullyQualifiedIdentifier": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/myVirtualMachine",
+              "discoveredAt": "2025-01-15T10:30:00.000Z",
+              "scope": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG"
+            },
+            "systemData": {
+              "createdAt": "2025-01-15T10:30:00.000Z",
+              "createdBy": "system",
+              "createdByType": "Application",
+              "lastModifiedAt": "2025-01-15T10:30:00.000Z",
+              "lastModifiedBy": "system",
+              "lastModifiedByType": "Application"
+            }
+          },
+          {
+            "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace/discoveredResources/b2c3d4e5-f6a7-8901-bcde-f12345678901",
+            "name": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
+            "type": "Microsoft.Chaos/workspaces/discoveredResources",
+            "properties": {
+              "namespace": "Microsoft.Storage",
+              "resourceName": "mystorageaccount",
+              "resourceType": "storageAccounts",
+              "fullyQualifiedIdentifier": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Storage/storageAccounts/mystorageaccount",
+              "discoveredAt": "2025-01-15T11:00:00.000Z",
+              "scope": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG"
+            },
+            "systemData": {
+              "createdAt": "2025-01-15T11:00:00.000Z",
+              "createdBy": "system",
+              "createdByType": "Application",
+              "lastModifiedAt": "2025-01-15T11:00:00.000Z",
+              "lastModifiedBy": "system",
+              "lastModifiedByType": "Application"
+            }
+          },
+          {
+            "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace/discoveredResources/c3d4e5f6-a7b8-9012-cdef-123456789012",
+            "name": "c3d4e5f6-a7b8-9012-cdef-123456789012",
+            "type": "Microsoft.Chaos/workspaces/discoveredResources",
+            "properties": {
+              "namespace": "Microsoft.Network",
+              "resourceName": "myVirtualNetwork",
+              "resourceType": "virtualNetworks",
+              "fullyQualifiedIdentifier": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Network/virtualNetworks/myVirtualNetwork",
+              "discoveredAt": "2025-01-15T11:15:00.000Z",
+              "scope": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG"
+            },
+            "systemData": {
+              "createdAt": "2025-01-15T11:15:00.000Z",
+              "createdBy": "system",
+              "createdByType": "Application",
+              "lastModifiedAt": "2025-01-15T11:15:00.000Z",
+              "lastModifiedBy": "system",
+              "lastModifiedByType": "Application"
+            }
+          }
+        ],
+        "nextLink": null
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "DiscoveredResources_ListByWorkspace",
+  "title": "Get a list of discovered resources for a workspace."
+}

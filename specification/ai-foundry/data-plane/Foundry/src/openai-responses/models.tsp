@@ -13,14 +13,17 @@ namespace Azure.AI.Projects {
   // This is a temporary correction to the OpenAI source spec pending an upstream fix via overlay/origin.
   @@changePropertyType(OpenAI.MCPToolCall.error, Record<unknown>);
 
-  @@doc(OpenAI.CreateResponse.`model`,
+  @@doc(
+    OpenAI.CreateResponse.`model`,
     "The model deployment to use for the creation of this response."
   );
-  @@doc(OpenAI.Response.`model`,
+  @@doc(
+    OpenAI.Response.`model`,
     "The model deployment to use for the creation of this response."
   );
 
-  @@copyProperties(OpenAI.CreateResponse,
+  @@copyProperties(
+    OpenAI.CreateResponse,
     {
       /**
        * (Deprecated) Use agent_reference instead.
@@ -51,7 +54,8 @@ namespace Azure.AI.Projects {
     structured_inputs?: Record<unknown>;
   }
 
-  @@copyProperties(OpenAI.Response,
+  @@copyProperties(
+    OpenAI.Response,
     {
       /**
        * (Deprecated) Use agent_reference instead.
@@ -81,7 +85,8 @@ namespace Azure.AI.Projects {
   }
 
   @@withoutOmittedProperties(OpenAI.CodeInterpreterTool, "container");
-  @@copyProperties(OpenAI.CodeInterpreterTool,
+  @@copyProperties(
+    OpenAI.CodeInterpreterTool,
     {
       /** The code interpreter container. Can be a container ID or an object that
        * specifies uploaded file IDs to make available to your code, along with an
@@ -94,7 +99,8 @@ namespace Azure.AI.Projects {
   );
 
   // See GitHub issue https://github.com/microsoft/openai-openapi-pr/issues/644
-  @@summary(OpenAI.AutoCodeInterpreterToolParam,
+  @@summary(
+    OpenAI.AutoCodeInterpreterToolParam,
     "Automatic Code Interpreter Tool Parameters"
   );
 
@@ -150,6 +156,8 @@ namespace Azure.AI.Projects {
     structured_outputs: "structured_outputs",
     oauth_consent_request: "oauth_consent_request",
     memory_search_call: "memory_search_call",
+    memory_command_preview_call: "memory_command_preview_call",
+    memory_command_preview_call_output: "memory_command_preview_call_output",
     workflow_action: "workflow_action",
     a2a_preview_call: "a2a_preview_call",
     a2a_preview_call_output: "a2a_preview_call_output",
@@ -176,7 +184,8 @@ namespace Azure.AI.Projects {
   @@copyVariants(OpenAI.OutputItemType, _AgentItemType);
 
   /* created_by conflicts with the property in OpenAI.FunctionShellCall, ApplyPatchToolCall, and ApplyPatchToolCallOutput, to work around it we use a union type here */
-  @@copyProperties(OpenAI.OutputItem,
+  @@copyProperties(
+    OpenAI.OutputItem,
     {
       /** The information about the creator of the item */
       #suppress "@azure-tools/typespec-autorest/union-unsupported" "Temporary suppression to allow union type."
@@ -255,4 +264,215 @@ namespace Azure.AI.Projects {
     @doc("The server label for the OAuth consent request.")
     server_label: string;
   }
+
+  // ── Content Filter and Guardrail Types ──────────────────
+
+  @doc("A content filter result indicating severity level and whether content was filtered.")
+  model AzureContentFilterSeverityResult {
+    @doc("Whether the content was filtered.")
+    filtered: boolean;
+
+    @doc("The severity level of the content.")
+    severity: AzureContentFilterSeverity;
+  }
+
+  @doc("Ratings for the intensity and risk level of harmful content.")
+  union AzureContentFilterSeverity {
+    string,
+
+    @doc("Content appropriate for most audiences.")
+    safe: "safe",
+
+    @doc("Harmful content at a low intensity and risk level.")
+    low: "low",
+
+    @doc("Harmful content at a medium intensity and risk level.")
+    medium: "medium",
+
+    @doc("Harmful content at a high intensity and risk level.")
+    high: "high",
+  }
+
+  @doc("A content filter result indicating whether the content was detected and filtered.")
+  model AzureContentFilterDetectionResult {
+    @doc("Whether the content was filtered.")
+    filtered: boolean;
+
+    @doc("Whether the content category was detected.")
+    detected: boolean;
+  }
+
+  @doc("A content filter blocklist ID result.")
+  model AzureContentFilterBlocklistIdResult {
+    @doc("The ID of the custom blocklist.")
+    id: string;
+
+    @doc("Whether the blocklist resulted in filtering.")
+    filtered: boolean;
+  }
+
+  @doc("A collection of filtering results for configured custom blocklists.")
+  model AzureContentFilterBlocklistResult {
+    @doc("Whether any blocklist resulted in filtering.")
+    filtered: boolean;
+
+    @doc("The pairs of individual blocklist IDs and their filtering results.")
+    details?: AzureContentFilterBlocklistIdResult[];
+  }
+
+  @doc("A content filter detection result that includes a reason description.")
+  model AzureContentFilterDetectionWithReasonResult {
+    @doc("Whether the content was filtered.")
+    filtered: boolean;
+
+    @doc("Whether the content category was detected.")
+    detected: boolean;
+
+    @doc("A human-readable explanation of why the detection result was produced.")
+    reason?: string;
+  }
+
+  @doc("A representation of a span of completion text as used by Azure OpenAI content filter results.")
+  model AzureContentFilterCompletionTextSpan {
+    @doc("Offset of the UTF32 code point which begins the span.")
+    completion_start_offset: int32;
+
+    @doc("Offset of the first UTF32 code point which is excluded from the span.")
+    completion_end_offset: int32;
+  }
+
+  @doc("A content filter detection result with completion text span details.")
+  model AzureContentFilterCompletionTextSpanDetectionResult {
+    @doc("Whether the content was filtered.")
+    filtered: boolean;
+
+    @doc("Whether the content category was detected.")
+    detected: boolean;
+
+    @doc("Detailed information about the detected completion text spans.")
+    details: AzureContentFilterCompletionTextSpan[];
+  }
+
+  @doc("A content filter detection result that includes citation information for protected material.")
+  model AzureContentFilterDetectionWithCitationResult {
+    @doc("Whether the content was filtered.")
+    filtered: boolean;
+
+    @doc("Whether the content category was detected.")
+    detected: boolean;
+
+    @doc("Citation details describing the associated license and its location.")
+    citation?: AzureContentFilterCitation;
+  }
+
+  @doc("Citation details for protected material detection.")
+  model AzureContentFilterCitation {
+    @doc("The license associated with the detection.")
+    license?: string;
+
+    @doc("The URL associated with the license.")
+    url?: url;
+  }
+
+  @doc("Result details for an individual PII subcategory.")
+  model AzureContentFilterPiiSubCategoryResult {
+    @doc("The PII subcategory that was evaluated.")
+    sub_category: string;
+
+    @doc("Whether the content was filtered for this subcategory.")
+    filtered: boolean;
+
+    @doc("Whether the subcategory was detected in the content.")
+    detected: boolean;
+  }
+
+  @doc("A content filter detection result for Personally Identifiable Information.")
+  model AzureContentFilterPersonallyIdentifiableInformationResult {
+    @doc("Whether the content was filtered.")
+    filtered: boolean;
+
+    @doc("Whether PII was detected in the content.")
+    detected: boolean;
+
+    @doc("Detailed results for individual PII subcategories.")
+    sub_categories?: AzureContentFilterPiiSubCategoryResult[];
+  }
+
+  @doc("Content filter results for the Responses API.")
+  model AzureContentFilterResultsForResponses {
+    @doc("Severity result for sexual content.")
+    sexual?: AzureContentFilterSeverityResult;
+
+    @doc("Severity result for hate content.")
+    hate?: AzureContentFilterSeverityResult;
+
+    @doc("Severity result for violence content.")
+    violence?: AzureContentFilterSeverityResult;
+
+    @doc("Severity result for self-harm content.")
+    self_harm?: AzureContentFilterSeverityResult;
+
+    @doc("Detection result for profanity.")
+    profanity?: AzureContentFilterDetectionResult;
+
+    @doc("Results for configured custom blocklists.")
+    custom_blocklists?: AzureContentFilterBlocklistResult;
+
+    @doc("Detection result for jailbreak attempts.")
+    jailbreak?: AzureContentFilterDetectionResult;
+
+    @doc("Detection result for task adherence evaluation.")
+    task_adherence?: AzureContentFilterDetectionWithReasonResult;
+
+    @doc("Detection result for protected material text.")
+    protected_material_text?: AzureContentFilterDetectionResult;
+
+    @doc("Detection result for protected material code with citation.")
+    protected_material_code?: AzureContentFilterDetectionWithCitationResult;
+
+    @doc("Detection result for ungrounded material with completion text span details.")
+    ungrounded_material?: AzureContentFilterCompletionTextSpanDetectionResult;
+
+    @doc("Detection result for Personally Identifiable Information.")
+    personally_identifiable_information?: AzureContentFilterPersonallyIdentifiableInformationResult;
+
+    @doc("Detection result for indirect attacks.")
+    indirect_attack?: AzureContentFilterDetectionResult;
+
+    @doc("Error details if content filtering evaluation failed.")
+    error?: AzureContentFilterError;
+  }
+
+  @doc("Error details from the content filtering system.")
+  model AzureContentFilterError {
+    @doc("A machine-readable error code.")
+    code: int32;
+
+    @doc("A human-readable error message.")
+    message: string;
+  }
+
+  @doc("A content filter evaluation result for a specific source in the response.")
+  model ContentFilterResult {
+    @doc("Whether the content was blocked by the content filter.")
+    blocked: boolean;
+
+    @doc("The source type of the content filter evaluation (e.g., 'prompt', 'response', 'pre_tool_call', 'post_tool_call').")
+    source_type: string;
+
+    @doc("The content filter results for this evaluation.")
+    content_filter_results: AzureContentFilterResultsForResponses;
+
+    @doc("The ID of the tool call associated with this content filter result, if applicable.")
+    tool_call_id?: string;
+  }
+
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Experimental features applied to augment inherited OpenAI models"
+  @@copyProperties(
+    OpenAI.Response,
+    {
+      /** The content filter evaluation results. */
+      content_filters?: ContentFilterResult[],
+    }
+  );
 }

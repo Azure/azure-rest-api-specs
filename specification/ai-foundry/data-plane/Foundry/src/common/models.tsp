@@ -13,7 +13,8 @@ model ApiErrorResponse {
 }
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-@@copyProperties(OpenAI.Error,
+@@copyProperties(
+  OpenAI.Error,
   {
     details?: OpenAI.Error[],
     additionalInfo?: Record<unknown>,
@@ -21,90 +22,36 @@ model ApiErrorResponse {
   }
 );
 
-alias FoundryDataPlaneAzureTraits = SupportsClientRequestId &
-  NoRepeatableRequests &
-  NoConditionalRequests &
-  FoundryDataPlaneApiVersionParameter;
-
-alias FoundryAzureOperations<ExtraTraits> = Azure.Core.ResourceOperations<ExtraTraits &
-  FoundryDataPlaneAzureTraits>;
-
 alias ApiError = OpenAI.Error;
-
-alias FoundryDataPlaneApiVersionParameter = {
-  @doc("The API version to use for this operation.")
-  @query("api-version")
-  apiVersion: string;
-};
 
 alias AcceptJsonHeader = {
   @header accept: "application/json";
 };
 
-#suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" ""
-#suppress "@azure-tools/typespec-azure-core/no-response-body" ""
-op FoundryDataPlaneOperation<
-  Params extends Reflection.Model,
-  Response,
-  ErrorResponse = ApiErrorResponse
->(...Params, ...FoundryDataPlaneApiVersionParameter): Response | ErrorResponse;
-
-/** Feature opt-in keys for agent definition operations supporting hosted or workflow agents. */
-union AgentDefinitionOptInKeys {
-  hosted_agents_v1_preview: "HostedAgents=V1Preview",
-  workflow_agents_v1_preview: "WorkflowAgents=V1Preview",
-
-  @removed(Versions.v1)
-  container_agents_v1_preview: "ContainerAgents=V1Preview",
-}
-
-union FoundryFeaturesOptInKeys {
-  evaluations_v1_preview: "Evaluations=V1Preview",
-  schedules_v1_preview: "Schedules=V1Preview",
-  red_teams_v1_preview: "RedTeams=V1Preview",
-  insights_v1_preview: "Insights=V1Preview",
-  memory_stores_v1_preview: "MemoryStores=V1Preview",
-}
-
-alias WithRequiredFoundryPreviewHeader<RequiredPreviewOptInHeader extends FoundryFeaturesOptInKeys | AgentDefinitionOptInKeys> = {
-  /**
-   * A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-   */
-  @header("Foundry-Features")
-  foundry_features: RequiredPreviewOptInHeader;
+/**
+ * Optional request header carrying an opaque per-user identity for delegation.
+ * When present and the caller has the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission,
+ * the service scopes endpoint-scoped data (responses, conversations, sessions) to the
+ * supplied user identity instead of the caller's own identity.
+ * If the caller has delegation RBAC but does not pass this header, the caller's own identity is used.
+ */
+alias UserDelegationHeader = {
+  /** Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission. */
+  @header("x-ms-user-identity") user_identity?: string;
 };
 
-alias WithConditionalFoundryPreviewHeader<OptionalPreviewOptInHeader extends FoundryFeaturesOptInKeys | AgentDefinitionOptInKeys> = {
-  /**
-   * A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-   */
-  @header("Foundry-Features")
-  foundry_features?: OptionalPreviewOptInHeader;
-};
-
-#suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" ""
-#suppress "@azure-tools/typespec-azure-core/no-response-body" ""
-op FoundryDataPlanePreviewOperation<
-  AreaPreviewLabel extends FoundryFeaturesOptInKeys | AgentDefinitionOptInKeys,
-  Params extends Reflection.Model,
-  Response,
-  ErrorResponse = ApiErrorResponse
-> is FoundryDataPlaneOperation<
-  {
-    ...WithConditionalFoundryPreviewHeader<AreaPreviewLabel>;
-    ...Params;
-  },
-  Response,
-  ErrorResponse
->;
+// NOTE: Platform-internal headers (x-agent-foundry-call-id, x-foundry-foundation-token)
+// are NOT part of the public API spec. They are injected by the platform and resolved
+// server-side. If needed for contracts, they should be added in the contracts entry point.
 
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
+#suppress "@azure-tools/typespec-azure-core/response-schema-problem" "OpenAI Response schemas can be intentionally combined for documentation clarity"
 op OpenAIOperation<
   Params extends Reflection.Model,
   Response,
   ErrorResponse = ApiErrorResponse
->(...Params): Response | ErrorResponse;
+>(...Params): Response | AzureRangeErrorResponse<ErrorResponse>;
 
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
@@ -113,27 +60,9 @@ op OpenAIOperationWithPreview<
   Params extends Reflection.Model,
   Response,
   ErrorResponse = ApiErrorResponse
->(
-  ...WithConditionalFoundryPreviewHeader<AreaPreviewLabel>,
-  ...Params,
-): Response | ErrorResponse;
-
-@doc("The response data for a requested list of items.")
-model AgentsPagedResult<T> {
-  /** The requested list of items. */
-  @pageItems
-  data: T[];
-
-  /** The first ID represented in this list. */
-  first_id?: string;
-
-  /** The last ID represented in this list. */
-  @continuationToken
-  last_id?: string;
-
-  /** A value indicating whether there are additional values available not captured in this list. */
-  has_more: boolean;
-}
+>(...WithConditionalFoundryPreviewHeader<AreaPreviewLabel>, ...Params):
+  | Response
+  | AzureRangeErrorResponse<ErrorResponse>;
 
 alias AssetBase = {
   @doc("Asset ID, a unique identifier for the asset")
@@ -160,55 +89,6 @@ alias AssetBase = {
 
 alias ResourceCreatedResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Http.Response<201> &
   T;
-
-alias OkResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Http.Response<200> &
-  T;
-
-alias PageLimitQueryParameter = {
-  /**
-   * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
-   * default is 20.
-   */
-  @query limit?: int32 = 20;
-};
-
-union PageOrder {
-  "asc",
-  "desc",
-}
-
-alias PageOrderQueryParameter = {
-  /**
-   * Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
-   * for descending order.
-   */
-  @query order?: PageOrder;
-};
-
-alias PageAfterQueryParameter = {
-  /**
-   * A cursor for use in pagination. `after` is an object ID that defines your place in the list.
-   * For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
-   * subsequent call can include after=obj_foo in order to fetch the next page of the list.
-   */
-  @query @continuationToken after?: string;
-};
-
-alias PageBeforeQueryParameter = {
-  /**
-   * A cursor for use in pagination. `before` is an object ID that defines your place in the list.
-   * For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
-   * subsequent call can include before=obj_foo in order to fetch the previous page of the list.
-   */
-  @query before?: string;
-};
-
-alias CommonPageQueryParameters = {
-  ...PageLimitQueryParameter;
-  ...PageOrderQueryParameter;
-  ...PageAfterQueryParameter;
-  ...PageBeforeQueryParameter;
-};
 
 alias MetadataPropertyForRequest = {
   /**
@@ -239,3 +119,83 @@ alias SseResponseOf<T> = {
   @header("Content-Type") contentType: "text/event-stream";
   @body responseBody: T;
 };
+
+// ============================================================================
+// Shared Job Sources
+//
+// Source types shared across job types (evaluator generation, data generation,
+// and future job types such as optimization). Placed in common to avoid
+// duplication across job-specific model files.
+// ============================================================================
+
+// Common properties shared across all job source types. Spread into per-context
+// source variants alongside a context-specific discriminated base (e.g.,
+// `EvaluatorGenerationJobSource`). Modeled as an `alias` (not a `model`) since
+// it is a single-property fragment used purely for spreading — declaring a
+// named model adds no value over inlining the property.
+alias JobSourceDescription = {
+  @doc("Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities').")
+  description?: string;
+};
+
+@doc("Prompt source — inline text provided by the user. Reusable shape spread into per-context discriminated subtypes.")
+model PromptJobSource {
+  ...JobSourceDescription;
+
+  @doc("The source type for this source, which is Prompt.")
+  type: "prompt";
+
+  @doc("Inline prompt text (e.g., agent description, policy text, supplementary context).")
+  prompt: string;
+}
+
+@doc("Agent source — references an agent to fetch instructions and metadata from. For prompt agents, fetches the agent's system prompt. For other agent types, fetches available metadata (description, configuration). Add a separate prompt source entry to `sources[]` to provide supplementary text alongside the agent. Reusable shape spread into per-context discriminated subtypes.")
+model AgentJobSource {
+  ...JobSourceDescription;
+
+  @doc("The source type for this source, which is Agent.")
+  type: "agent";
+
+  @doc("The agent name to fetch instructions from.")
+  agent_name: string;
+
+  @doc("The agent version. If not specified, the latest version is used.")
+  agent_version?: string;
+}
+
+@doc("Traces source — conversation traces from Application Insights. Reusable shape spread into per-context discriminated subtypes.")
+model TracesJobSource {
+  ...JobSourceDescription;
+
+  @doc("The source type for this source, which is Traces.")
+  type: "traces";
+
+  @doc("The unique agent ID used to filter traces. Provide either `agent_id` or `agent_name` — at least one is required.")
+  agent_id?: string;
+
+  @doc("The agent name to fetch traces for. Provide either `agent_id` or `agent_name` — at least one is required.")
+  agent_name?: string;
+
+  @doc("The agent version. If not specified, traces for ALL versions of the agent are included within the time window.")
+  agent_version?: string;
+
+  @doc("Start of the time window (Unix timestamp in seconds) for fetching traces.")
+  start_time: FoundryTimestamp;
+
+  @doc("End of the time window (Unix timestamp in seconds). Defaults to current time.")
+  end_time?: FoundryTimestamp;
+}
+
+@doc("Dataset source — reference to a dataset. Reusable shape spread into per-context discriminated subtypes.")
+model DatasetJobSource {
+  ...JobSourceDescription;
+
+  @doc("The source type for this source, which is Dataset.")
+  type: "dataset";
+
+  @doc("The name of the dataset.")
+  name: string;
+
+  @doc("The version of the dataset. If not specified, the latest version is used.")
+  version?: string;
+}

@@ -4,11 +4,13 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./VerifierWorkspace.tsp";
+import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Common;
 
 namespace Microsoft.Network;
 /**
@@ -116,9 +118,11 @@ alias ReachabilityAnalysisRunsListParameters = {
 };
 
 @@doc(ReachabilityAnalysisRun.name, "Reachability Analysis Run name.");
-@@doc(ReachabilityAnalysisRun.properties,
+@@doc(
+  ReachabilityAnalysisRun.properties,
   "Represents the Reachability Analysis Run properties."
 );
-@@doc(ReachabilityAnalysisRuns.create::parameters.resource,
+@@doc(
+  ReachabilityAnalysisRuns.create::parameters.resource,
   "Analysis Run resource object to create/update."
 );

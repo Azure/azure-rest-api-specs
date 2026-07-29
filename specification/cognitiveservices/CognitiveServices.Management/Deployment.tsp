@@ -73,7 +73,10 @@ interface Deployments {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Delete response codes for 'update' match existing service endpoint behavior"
   delete is ArmResourceDeleteWithoutOkAsync<
     Deployment,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -104,14 +107,17 @@ interface Deployments {
   resume is ArmResourceActionSync<Deployment, void, ArmResponse<Deployment>>;
 }
 
-@@doc(Deployment.name,
+@@doc(
+  Deployment.name,
   "The name of the deployment associated with the Cognitive Services Account"
 );
 @@encodedName(Deployment.etag, "application/json", "etag");
-@@doc(Deployment.properties,
+@@doc(
+  Deployment.properties,
   "Properties of Cognitive Services account deployment."
 );
-@@doc(Deployments.createOrUpdate::parameters.resource,
+@@doc(
+  Deployments.createOrUpdate::parameters.resource,
   "The deployment properties."
 );
 @@doc(Deployments.update::parameters.properties, "The deployment properties.");

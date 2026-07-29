@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-namespace Microsoft.Network;
+namespace Common;
 /**
  * Network security rule.
  */
@@ -38,6 +38,7 @@ model SecurityRule extends SubResourceModel {
   etag?: string;
 }
 
-@@doc(SecurityRule.name,
+@@doc(
+  SecurityRule.name,
   "The name of the resource that is unique within a resource group. This name can be used to access the resource."
 );

@@ -131,9 +131,11 @@ interface CoordinatorConfigurationOps
 @@doc(ServerConfiguration.properties, "The properties of a configuration.");
 @@maxLength(ServerConfiguration.name, 90);
 @@minLength(ServerConfiguration.name, 1);
-@@doc(NodeConfigurations.updateOnNode::parameters.resource,
+@@doc(
+  NodeConfigurations.updateOnNode::parameters.resource,
   "The required parameters for updating a cluster configuration."
 );
-@@doc(CoordinatorConfigurations.updateOnCoordinator::parameters.resource,
+@@doc(
+  CoordinatorConfigurations.updateOnCoordinator::parameters.resource,
   "The required parameters for updating a cluster configuration."
 );

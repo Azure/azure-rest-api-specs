@@ -1,0 +1,59 @@
+{
+  "title": "GetEntry",
+  "operationId": "GetEntry",
+  "parameters": {
+    "api-version": "2026-03-26",
+    "accept": "application/scitt-receipt+cose",
+    "entryId": "2.131"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Content-Type": "application/scitt-receipt+cose"
+      },
+      "body": "{binary}"
+    },
+    "302": {
+      "headers": {
+        "Location": "https://example.com/entries/2.131",
+        "Retry-After": 5
+      }
+    },
+    "400": {
+      "headers": {
+        "Content-Type": "application/concise-problem-details+cbor"
+      },
+      "body": "{binary}"
+    },
+    "401": {
+      "headers": {
+        "Content-Type": "application/concise-problem-details+cbor"
+      },
+      "body": "{binary}"
+    },
+    "404": {
+      "headers": {
+        "Content-Type": "application/concise-problem-details+cbor"
+      },
+      "body": "{binary}"
+    },
+    "429": {
+      "headers": {
+        "Content-Type": "application/concise-problem-details+cbor"
+      },
+      "body": "{binary}"
+    },
+    "500": {
+      "headers": {
+        "Content-Type": "application/concise-problem-details+cbor"
+      },
+      "body": "{binary}"
+    },
+    "503": {
+      "headers": {
+        "Content-Type": "application/concise-problem-details+cbor"
+      },
+      "body": "{binary}"
+    }
+  }
+}

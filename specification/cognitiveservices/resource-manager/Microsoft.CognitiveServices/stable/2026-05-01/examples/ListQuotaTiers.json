@@ -1,0 +1,31 @@
+{
+  "operationId": "QuotaTiers_ListBySubscription",
+  "parameters": {
+    "api-version": "2026-05-01",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "title": "List the Quota Tier for a subscription",
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "default",
+            "type": "Microsoft.CognitiveServices/quotaTiers",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CognitiveServices/quotaTiers/default",
+            "properties": {
+              "assignmentDate": "2025-06-09T18:13:29.389Z",
+              "currentTierName": "Free-Tier",
+              "tierUpgradeEligibilityInfo": {
+                "nextTierName": "Tier-1",
+                "upgradeApplicableDate": "2025-06-15T18:13:29.389Z",
+                "upgradeAvailabilityStatus": "Available"
+              },
+              "tierUpgradePolicy": "OnceUpgradeIsAvailable"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

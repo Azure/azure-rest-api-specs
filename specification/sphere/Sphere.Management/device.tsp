@@ -72,9 +72,11 @@ interface Devices {
   >;
 }
 
-@@doc(Devices.generateCapabilityImage::parameters.body,
+@@doc(
+  Devices.generateCapabilityImage::parameters.body,
   "Generate capability image request body."
 );
-@@clientName(Devices.generateCapabilityImage::parameters.body,
+@@clientName(
+  Devices.generateCapabilityImage::parameters.body,
   "generateDeviceCapabilityRequest"
 );

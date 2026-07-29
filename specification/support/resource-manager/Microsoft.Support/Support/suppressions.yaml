@@ -13,3 +13,10 @@
 - tool: TypeSpecRequirement
   path: ./stable/2020-04-01/*.json
   reason: Brownfield service not ready to migrate
+- tool: TypeSpecValidation
+  rules:
+    - Compile
+  sub-rules:
+    - ExtraSwagger
+  path: ./preview/2025-06-01-preview/support.json
+  reason: Preview version 2025-06-01-preview has been promoted to stable 2026-06-01 and is no longer emitted by TypeSpec

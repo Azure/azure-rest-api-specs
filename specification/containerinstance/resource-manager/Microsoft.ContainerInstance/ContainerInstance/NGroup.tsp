@@ -5,6 +5,7 @@ import "@typespec/rest";
 import "./models.tsp";
 
 using TypeSpec.Rest;
+using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -15,14 +16,19 @@ namespace Microsoft.ContainerInstance;
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-model NGroup
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<NGroupProperties> {
+model NGroup is ProxyResource<NGroupProperties> {
   ...ResourceNameParameter<
     Resource = NGroup,
     KeyName = "ngroupsName",
     SegmentName = "ngroups",
     NamePattern = "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
   >;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  /** The geo-location where the resource lives */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  location?: string;
+
   ...Azure.ResourceManager.AvailabilityZonesProperty;
 
   /**
@@ -47,15 +53,17 @@ interface NGroups {
   @summary("NGroup PUT REST API")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     NGroup,
-    Response = (ArmResourceUpdatedResponse<NGroup> & {
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
-      @header("Azure-AsyncOperation")
-      `Azure-AsyncOperation`: string;
-    }) | ArmResourceCreatedResponse<
-      NGroup,
-      ArmAsyncOperationHeader<FinalResult = NGroup> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >
+    Response =
+      | (ArmResourceUpdatedResponse<NGroup> & {
+          #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+          @header("Azure-AsyncOperation")
+          `Azure-AsyncOperation`: string;
+        })
+      | ArmResourceCreatedResponse<
+          NGroup,
+          ArmAsyncOperationHeader<FinalResult = NGroup> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
   >;
 
   /**
@@ -66,18 +74,20 @@ interface NGroups {
   update is ArmCustomPatchAsync<
     NGroup,
     PatchModel = NGroupPatch,
-    Response = (ArmResponse<NGroup> & {
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
-      @header("Azure-AsyncOperation")
-      `Azure-AsyncOperation`: string;
-    }) | ArmAcceptedLroResponse<
-      "Resource update request accepted.",
-      ArmAsyncOperationHeader<FinalResult = NGroup> &
-        Azure.Core.Foundations.RetryAfterHeader & {
-          @header("Location")
-          Location: string;
-        }
-    >
+    Response =
+      | (ArmResponse<NGroup> & {
+          #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+          @header("Azure-AsyncOperation")
+          `Azure-AsyncOperation`: string;
+        })
+      | ArmAcceptedLroResponse<
+          "Resource update request accepted.",
+          ArmAsyncOperationHeader<FinalResult = NGroup> &
+            Azure.Core.Foundations.RetryAfterHeader & {
+              @header("Location")
+              Location: string;
+            }
+        >
   >;
 
   /**
@@ -87,11 +97,13 @@ interface NGroups {
   @summary("NGroups Delete REST API")
   delete is ArmResourceDeleteWithoutOkAsync<
     NGroup,
-    Response = (ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @header("Location")
-      Location: string;
-    }) | ArmDeletedNoContentResponse
+    Response =
+      | (ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @header("Location")
+          Location: string;
+        })
+      | ArmDeletedNoContentResponse
   >;
 
   /**

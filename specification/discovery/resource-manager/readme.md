@@ -24,7 +24,69 @@ These are the global settings for the Azure Discovery.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2026-02-01-preview
+tag: package-2026-06-01
+```
+
+### Tag: package-2026-06-01
+
+These settings apply only when `--tag=package-2026-06-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-06-01'
+input-file:
+  - Microsoft.Discovery/stable/2026-06-01/discovery.json
+suppressions:
+  - code: AvoidAdditionalProperties
+    reason: Enable customer to apply environment variables.
+    from:
+      - discovery.json
+    where: 
+      - $.definitions.ToolProperties.properties.environmentVariables
+      - $.definitions.ToolPropertiesUpdate.properties.environmentVariables
+  - code: AvoidAdditionalProperties
+    reason: Enable customer to definitionContent matching user defined formats.
+    from:
+      - discovery.json
+    where:
+      - $.definitions.WithDefinitionContent.properties.definitionContent
+      - $.definitions.ToolProperties.properties.definitionContent
+      - $.definitions.ToolPropertiesUpdate.properties.definitionContent
+  - code: AvoidAdditionalProperties
+    reason: Enable customer to assign identities to tools.
+    from:
+      - discovery.json
+    where:
+      - $.definitions.SupercomputerIdentities.properties.workloadIdentities
+      - $.definitions.SupercomputerIdentitiesUpdate.properties.workloadIdentities
+  - code: AvoidAdditionalProperties
+    reason: Workload identities are user-determined keys for managed identities.
+    from:
+      - discovery.json
+    where:
+      - $.definitions.BookshelfProperties.properties.workloadIdentities
+  - code: GuidUsage
+    reason: Need to match ARM managed identity schema.
+    from:
+      - discovery.json
+    where:
+      - $.definitions["Azure.Core.uuid"].format
+  - code: XMSSecretInResponse
+    reason: publicNetworkAccess is not a secret - it is a network configuration setting that controls public endpoint access.
+    from:
+      - discovery.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Discovery/bookshelves/{bookshelfName}"].get.responses["200"].schema.properties.properties.properties.publicNetworkAccess
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Discovery/bookshelves/{bookshelfName}"].put.responses["200"].schema.properties.properties.properties.publicNetworkAccess
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Discovery/bookshelves/{bookshelfName}"].put.responses["201"].schema.properties.properties.properties.publicNetworkAccess
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Discovery/workspaces/{workspaceName}"].get.responses["200"].schema.properties.properties.properties.publicNetworkAccess
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Discovery/workspaces/{workspaceName}"].put.responses["200"].schema.properties.properties.properties.publicNetworkAccess
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Discovery/workspaces/{workspaceName}"].put.responses["201"].schema.properties.properties.properties.publicNetworkAccess
+  - code: ResourceNameRestriction
+    reason: The privateLinkResourceName parameter is determined by the service and does not require a pattern restriction.
+    from:
+      - discovery.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Discovery/bookshelves/{bookshelfName}/privateLinkResources/{privateLinkResourceName}"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Discovery/workspaces/{workspaceName}/privateLinkResources/{privateLinkResourceName}"]
 ```
 
 ### Tag: package-2026-02-01-preview

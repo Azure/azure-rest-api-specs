@@ -39,6 +39,10 @@ model StandbyVirtualMachinePoolResourceProperties {
   @doc("Specifies the desired state of virtual machines in the pool.")
   virtualMachineState: VirtualMachineState;
 
+  @added(Microsoft.StandbyPool.Versions.`2026-04-01`)
+  @doc("Specifies the distribution of virtual machine states in the pool when virtualMachineState is set to Mix.")
+  vmStateDistribution?: VmStateDistribution;
+
   @doc("Specifies the fully qualified resource ID of a virtual machine scale set the pool is attached to.")
   @added(Microsoft.StandbyPool.Versions.`2023-12-01-preview`)
   attachedVirtualMachineScaleSetId?: armResourceIdentifier<[
@@ -65,6 +69,29 @@ union VirtualMachineState {
   @added(Microsoft.StandbyPool.Versions.`2025-03-01`)
   @doc("The virtual machine has released the lease on the underlying hardware and is powered off. Memory contents of the VM are stored in the OS disk.  When started again, applications and processes that were previously running in your VM resume from the state prior to hibernation.")
   Hibernated: "Hibernated",
+
+  @added(Microsoft.StandbyPool.Versions.`2026-04-01`)
+  @doc("The pool contains a mix of virtual machines in different states, as defined by the vmStateDistribution property.")
+  Mix: "Mix",
+}
+
+@added(Microsoft.StandbyPool.Versions.`2026-04-01`)
+@doc("Specifies the distribution of virtual machine states in the pool.")
+model VmStateDistribution {
+  @doc("Specifies the percentage of virtual machines in the Running state in the standby pool.")
+  @minValue(0)
+  @maxValue(100)
+  runningPercent?: int32;
+
+  @doc("Specifies the percentage of virtual machines in the Deallocated state in the standby pool.")
+  @minValue(0)
+  @maxValue(100)
+  deallocatedPercent?: int32;
+
+  @doc("Specifies the percentage of virtual machines in the Hibernated state in the standby pool.")
+  @minValue(0)
+  @maxValue(100)
+  hibernatedPercent?: int32;
 }
 
 @added(Microsoft.StandbyPool.Versions.`2023-12-01-preview`)

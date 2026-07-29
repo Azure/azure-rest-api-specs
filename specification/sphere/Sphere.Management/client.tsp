@@ -6,7 +6,8 @@ using Microsoft.AzureSphere;
 
 @@clientName(Microsoft.AzureSphere, "AzureSphereMgmtClient", "python");
 
-@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.Resource.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
@@ -15,27 +16,32 @@ using Microsoft.AzureSphere;
 @@alternateType(ImageProperties.uri, url, "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Catalog.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Catalog.properties,
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Certificate.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Certificate.properties,
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Deployment.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Deployment.properties,
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Device.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Device.properties,
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DeviceGroup.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  DeviceGroup.properties,
   "csharp"
 );
 
@@ -43,12 +49,14 @@ using Microsoft.AzureSphere;
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Image.properties, "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Product.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Product.properties,
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Device.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Device.properties,
   "csharp"
 );
 
@@ -63,12 +71,14 @@ using Microsoft.AzureSphere;
 @@clientName(DeviceGroup, "SphereDeviceGroup", "csharp");
 @@clientName(Image, "SphereImage", "csharp");
 @@clientName(Product, "SphereProduct", "csharp");
-@@clientName(AllowCrashDumpCollection,
+@@clientName(
+  AllowCrashDumpCollection,
   "SphereAllowCrashDumpCollectionStatus",
   "csharp"
 );
 @@clientName(CapabilityType, "SphereCapabilityType", "csharp");
-@@clientName(CertificateChainResponse,
+@@clientName(
+  CertificateChainResponse,
   "SphereCertificateChainResult",
   "csharp"
 );
@@ -79,32 +89,38 @@ using Microsoft.AzureSphere;
 @@clientName(OSFeedType, "SphereOSFeedType", "csharp");
 @@clientName(UpdatePolicy, "SphereUpdatePolicy", "csharp");
 @@clientName(ClaimDevicesRequest, "ClaimSphereDevicesContent", "csharp");
-@@clientName(ListDeviceGroupsRequest,
+@@clientName(
+  ListDeviceGroupsRequest,
   "ListSphereDeviceGroupsContent",
   "csharp"
 );
 @@clientName(CountDevicesResponse, "CountDevicesResult", "csharp");
-@@clientName(ProofOfPossessionNonceRequest,
+@@clientName(
+  ProofOfPossessionNonceRequest,
   "ProofOfPossessionNonceContent",
   "csharp"
 );
-@@clientName(GenerateCapabilityImageRequest,
+@@clientName(
+  GenerateCapabilityImageRequest,
   "GenerateCapabilityImageContent",
   "csharp"
 );
 
 @@clientName(DeviceProperties.lastOsUpdateUtc, "lastOSUpdateUtc", "csharp");
-@@clientName(DeviceProperties.lastInstalledOsVersion,
+@@clientName(
+  DeviceProperties.lastInstalledOsVersion,
   "lastInstalledOSVersion",
   "csharp"
 );
-@@clientName(DeviceProperties.lastAvailableOsVersion,
+@@clientName(
+  DeviceProperties.lastAvailableOsVersion,
   "lastAvailableOSVersion",
   "csharp"
 );
 @@clientName(DeviceGroupProperties.osFeedType, "OSFeedType", "csharp");
 @@clientName(DeviceGroupUpdateProperties.osFeedType, "OSFeedType", "csharp");
-@@clientName(UpdatePolicy.No3rdPartyAppUpdates,
+@@clientName(
+  UpdatePolicy.No3rdPartyAppUpdates,
   "No3RdPartyAppUpdates",
   "csharp"
 );

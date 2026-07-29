@@ -10,7 +10,7 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-namespace Microsoft.Network;
+namespace Common;
 /**
  * IPConfiguration in a network interface.
  */
@@ -37,6 +37,7 @@ model NetworkInterfaceIPConfiguration extends SubResourceModel {
   etag?: string;
 }
 
-@@doc(NetworkInterfaceIPConfiguration.name,
+@@doc(
+  NetworkInterfaceIPConfiguration.name,
   "The name of the resource that is unique within a resource group. This name can be used to access the resource."
 );

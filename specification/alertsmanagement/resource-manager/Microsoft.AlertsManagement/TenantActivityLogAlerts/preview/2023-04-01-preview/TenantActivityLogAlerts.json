@@ -529,20 +529,21 @@
           "description": "The Activity Log Alert rule properties of the resource.",
           "x-ms-client-flatten": true
         },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "location": {
           "type": "string",
-          "description": "The geo-location where the resource lives",
+          "description": "The location of the resource. Since Azure Activity Log Alerts is a global service, the location of the rules should always be 'global'.",
+          "default": "global",
           "x-ms-mutability": [
             "read",
             "create"
           ]
+        },
+        "tags": {
+          "type": "object",
+          "description": "The tags of the resource.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "required": [
@@ -550,7 +551,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },

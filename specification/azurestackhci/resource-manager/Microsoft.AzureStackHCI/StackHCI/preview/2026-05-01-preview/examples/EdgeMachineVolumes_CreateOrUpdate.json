@@ -1,0 +1,60 @@
+{
+  "title": "EdgeMachineVolumes_CreateOrUpdate",
+  "operationId": "EdgeMachineVolumes_CreateOrUpdate",
+  "parameters": {
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "resourceGroupName": "test-rg",
+    "edgeMachineName": "EdgeMachine01",
+    "volumeName": "vol-001",
+    "api-version": "2026-05-01-preview",
+    "resource": {
+      "properties": {
+        "volumeConfiguration": {
+          "reserved": ""
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "volumeConfiguration": {
+            "reserved": ""
+          },
+          "reportedProperties": {
+            "partitionId": "partition-001",
+            "offsetInBytes": 1048576,
+            "name": "DataVolume",
+            "path": "/data",
+            "parentDiskId": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/edgeMachines/EdgeMachine01/disks/disk-001",
+            "isBoot": false,
+            "sizeInBytes": "107374182400",
+            "sizeRemainingInBytes": "85899345920",
+            "fileSystem": "ext4"
+          },
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/edgeMachines/EdgeMachine01/volumes/vol-001",
+        "name": "vol-001",
+        "type": "Microsoft.AzureStackHCI/edgeMachines/volumes"
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "volumeConfiguration": {
+            "reserved": ""
+          },
+          "provisioningState": "Accepted"
+        },
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/edgeMachines/EdgeMachine01/volumes/vol-001",
+        "name": "vol-001",
+        "type": "Microsoft.AzureStackHCI/edgeMachines/volumes"
+      }
+    }
+  }
+}

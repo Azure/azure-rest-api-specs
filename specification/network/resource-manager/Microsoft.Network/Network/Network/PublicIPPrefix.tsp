@@ -3,11 +3,13 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
+import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Common;
 
 namespace Microsoft.Network;
 /**
@@ -19,7 +21,7 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Http.Private.includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
-model PublicIPPrefix extends Resource {
+model PublicIPPrefix extends Common.Resource {
   properties?: PublicIPPrefixPropertiesFormat;
 
   @visibility(Lifecycle.Read)
@@ -99,7 +101,10 @@ interface PublicIPPrefixes {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     PublicIPPrefix,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -116,9 +121,11 @@ interface PublicIPPrefixes {
 
 @@doc(PublicIPPrefix.name, "The name of the public IP prefix.");
 @@doc(PublicIPPrefix.properties, "Public IP prefix properties.");
-@@doc(PublicIPPrefixes.createOrUpdate::parameters.resource,
+@@doc(
+  PublicIPPrefixes.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update public IP prefix operation."
 );
-@@doc(PublicIPPrefixes.updateTags::parameters.properties,
+@@doc(
+  PublicIPPrefixes.updateTags::parameters.properties,
   "Parameters supplied to update public IP prefix tags."
 );

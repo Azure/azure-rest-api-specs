@@ -87,7 +87,7 @@ interface Sas {
    * must be associated with a Planetary Computer dataset indexed by the STAC API.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @tag("Shared Access Signature (SAS) Tokens to use with Azure SDKs")
+  @tag("Shared Access Signature (SAS) Tokens for GeoCatalog Asset Access")
   @route("/sas/token/{collectionId}")
   @get
   @summary("generate a SAS Token for the given Azure Blob storage account and container.")
@@ -117,7 +117,7 @@ interface Sas {
    * for managed storage account of this GeoCatalog.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @tag("Shared Access Signature (SAS) Tokens to use with Azure SDKs")
+  @tag("Shared Access Signature (SAS) Tokens for GeoCatalog Asset Access")
   @route("/sas/token/revoke")
   @post
   @summary("Revoke SAS token for the managed storage account of this GeoCatalog.")
@@ -140,7 +140,7 @@ interface Sas {
    * If the HREF is not a Azure Blob Storage HREF, then pass back the HREF unsigned.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @tag("Sign an HREF for read access")
+  @tag("Shared Access Signature (SAS) Tokens for GeoCatalog Asset Access")
   @route("/sas/sign")
   @get
   @summary("sign an HREF in the format of a URL and returns a SharedAccessSignatureSignedHrefResponse")

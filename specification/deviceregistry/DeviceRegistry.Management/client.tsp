@@ -1,16 +1,20 @@
 import "./main.tsp";
+import "@typespec/versioning";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
+using TypeSpec.Versioning;
 using Microsoft.DeviceRegistry;
 
 // Java Client configuration
-@@clientNamespace(Microsoft.DeviceRegistry,
+@@clientNamespace(
+  Microsoft.DeviceRegistry,
   "com.azure.resourcemanager.deviceregistry",
   "java"
 );
 
-@@clientName(Microsoft.DeviceRegistry,
+@@clientName(
+  Microsoft.DeviceRegistry,
   "DeviceRegistryManagementClient",
   "java"
 );
@@ -27,11 +31,13 @@ using Microsoft.DeviceRegistry;
 @@clientName(AssetStatusDataset, "DeviceRegistryAssetStatusDataset", "csharp");
 @@clientName(AssetStatusError, "DeviceRegistryAssetStatusError", "csharp");
 @@clientName(AssetStatusEvent, "DeviceRegistryAssetStatusEvent", "csharp");
-@@clientName(AssetEndpointProfile,
+@@clientName(
+  AssetEndpointProfile,
   "DeviceRegistryAssetEndpointProfile",
   "csharp"
 );
-@@clientName(AssetEndpointProfileProperties,
+@@clientName(
+  AssetEndpointProfileProperties,
   "DeviceRegistryAssetEndpointProfileProperties",
   "csharp"
 );
@@ -39,11 +45,13 @@ using Microsoft.DeviceRegistry;
 @@clientName(DataPointBase, "DeviceRegistryDataPointBase", "csharp");
 @@clientName(Dataset, "DeviceRegistryDataset", "csharp");
 @@clientName(DiscoveredAsset, "DeviceRegistryDiscoveredAsset", "csharp");
-@@clientName(DiscoveredAssetProperties,
+@@clientName(
+  DiscoveredAssetProperties,
   "DeviceRegistryDiscoveredAssetProperties",
   "csharp"
 );
-@@clientName(DiscoveredAssetEndpointProfile,
+@@clientName(
+  DiscoveredAssetEndpointProfile,
   "DeviceRegistryDiscoveredAssetEndpointProfile",
   "csharp"
 );
@@ -53,13 +61,15 @@ using Microsoft.DeviceRegistry;
 @@clientName(Schema, "DeviceRegistrySchema", "csharp");
 @@clientName(SchemaProperties, "DeviceRegistrySchemaProperties", "csharp");
 @@clientName(SchemaRegistry, "DeviceRegistrySchemaRegistry", "csharp");
-@@clientName(SchemaRegistryProperties,
+@@clientName(
+  SchemaRegistryProperties,
   "DeviceRegistrySchemaRegistryProperties",
   "csharp"
 );
 @@clientName(SchemaType, "DeviceRegistrySchemaType", "csharp");
 @@clientName(SchemaVersion, "DeviceRegistrySchemaVersion", "csharp");
-@@clientName(SchemaVersionProperties,
+@@clientName(
+  SchemaVersionProperties,
   "DeviceRegistrySchemaVersionProperties",
   "csharp"
 );
@@ -70,12 +80,14 @@ using Microsoft.DeviceRegistry;
 @@clientName(ProvisioningState, "DeviceRegistryProvisioningState", "csharp");
 @@clientName(Authentication, "DeviceRegistryAuthentication", "csharp");
 @@clientName(Topic, "DeviceRegistryTopic", "csharp");
-@@clientName(UsernamePasswordCredentials,
+@@clientName(
+  UsernamePasswordCredentials,
   "DeviceRegistryUsernamePasswordCredentials",
   "csharp"
 );
 @@clientName(X509Credentials, "DeviceRegistryX509Credentials", "csharp");
-@@alternateType(SchemaRegistryProperties.storageAccountContainerUrl,
+@@alternateType(
+  SchemaRegistryProperties.storageAccountContainerUrl,
   url,
   "csharp"
 );
@@ -84,71 +96,87 @@ using Microsoft.DeviceRegistry;
 @@alternateType(BillingContainer.etag, Azure.Core.eTag, "csharp");
 @@alternateType(DiscoveredAssetProperties.manufacturerUri, url, "csharp");
 @@alternateType(DiscoveredAssetProperties.documentationUri, url, "csharp");
-@@alternateType(SchemaRegistryProperties.storageAccountContainerUrl,
+@@alternateType(
+  SchemaRegistryProperties.storageAccountContainerUrl,
   url,
   "csharp"
 );
 @@clientName(Namespace, "DeviceRegistryNamespace", "csharp");
-@@clientName(NamespaceProperties,
+@@clientName(
+  NamespaceProperties,
   "DeviceRegistryNamespaceProperties",
   "csharp"
 );
 @@clientName(NamespaceAsset, "DeviceRegistryNamespaceAsset", "csharp");
-@@clientName(NamespaceAssetProperties,
+@@clientName(
+  NamespaceAssetProperties,
   "DeviceRegistryNamespaceAssetProperties",
   "csharp"
 );
 @@clientName(NamespaceDevice, "DeviceRegistryNamespaceDevice", "csharp");
-@@clientName(NamespaceDeviceProperties,
+@@clientName(
+  NamespaceDeviceProperties,
   "DeviceRegistryNamespaceDeviceProperties",
   "csharp"
 );
-@@clientName(NamespaceDiscoveredAsset,
+@@clientName(
+  NamespaceDiscoveredAsset,
   "DeviceRegistryNamespaceDiscoveredAsset",
   "csharp"
 );
-@@clientName(NamespaceDiscoveredAssetProperties,
+@@clientName(
+  NamespaceDiscoveredAssetProperties,
   "DeviceRegistryNamespaceDiscoveredAssetProperties",
   "csharp"
 );
-@@clientName(NamespaceDiscoveredDevice,
+@@clientName(
+  NamespaceDiscoveredDevice,
   "DeviceRegistryNamespaceDiscoveredDevice",
   "csharp"
 );
-@@clientName(NamespaceDiscoveredDeviceProperties,
+@@clientName(
+  NamespaceDiscoveredDeviceProperties,
   "DeviceRegistryNamespaceDiscoveredDeviceProperties",
   "csharp"
 );
 @@clientName(ErrorDetails, "DeviceRegistryErrorDetails", "csharp");
-@@clientName(NamespaceAssetStatus,
+@@clientName(
+  NamespaceAssetStatus,
   "DeviceRegistryNamespaceAssetStatus",
   "csharp"
 );
-@@clientName(NamespaceAssetStatusDataset,
+@@clientName(
+  NamespaceAssetStatusDataset,
   "DeviceRegistryNamespaceAssetStatusDataset",
   "csharp"
 );
-@@clientName(NamespaceAssetStatusEvent,
+@@clientName(
+  NamespaceAssetStatusEvent,
   "DeviceRegistryNamespaceAssetStatusEvent",
   "csharp"
 );
-@@clientName(NamespaceAssetStatusEventGroup,
+@@clientName(
+  NamespaceAssetStatusEventGroup,
   "DeviceRegistryNamespaceAssetStatusEventGroup",
   "csharp"
 );
-@@clientName(NamespaceAssetStatusManagementAction,
+@@clientName(
+  NamespaceAssetStatusManagementAction,
   "DeviceRegistryNamespaceAssetStatusManagementAction",
   "csharp"
 );
-@@clientName(NamespaceAssetStatusManagementGroup,
+@@clientName(
+  NamespaceAssetStatusManagementGroup,
   "DeviceRegistryNamespaceAssetStatusManagementGroup",
   "csharp"
 );
-@@clientName(NamespaceAssetStatusStream,
+@@clientName(
+  NamespaceAssetStatusStream,
   "DeviceRegistryNamespaceAssetStatusStream",
   "csharp"
 );
-@@clientName(NamespaceMessageSchemaReference,
+@@clientName(
+  NamespaceMessageSchemaReference,
   "DeviceRegistryNamespaceMessageSchemaReference",
   "csharp"
 );
@@ -159,7 +187,75 @@ using Microsoft.DeviceRegistry;
 @@clientName(MqttDestinationQos, "MqttDestinationQo", "csharp");
 
 // JavaScript Client configuration
-@@clientName(Microsoft.DeviceRegistry,
+@@clientName(
+  Microsoft.DeviceRegistry,
   "DeviceRegistryManagementClient",
+  "javascript"
+);
+
+// JavaScript SDK: use update-specific models for PoliciesV1.update to exclude
+// server-side read-only and create-only fields (e.g. provisioningState, keyType, subject, etc.)
+
+// Standalone update models - no @removed so they do not reference deleted types
+
+@added(Versions.v2025_11_01_preview)
+@removed(Versions.v2026_04_01)
+@doc("The configuration to set up an ICA.")
+model CertificateAuthorityConfigurationUpdate {
+  @added(Versions.v2026_03_01_preview)
+  @doc("Configuration for Bring Your Own Root.")
+  bringYourOwnRoot?: BringYourOwnRootUpdate;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" ""
+@added(Versions.v2026_03_01_preview)
+@removed(Versions.v2026_04_01)
+@doc("Configuration for Bring Your Own Root. When enabled, customers provide their own CA-signed certificates instead of using the service-managed CA.")
+model BringYourOwnRootUpdate {}
+
+@added(Versions.v2025_11_01_preview)
+@removed(Versions.v2026_04_01)
+@doc("The updatable leaf certificate configuration for Policy.")
+model LeafCertificateConfigurationUpdate {
+  @doc("The validity period in days.")
+  @minValue(7)
+  @maxValue(90)
+  validityPeriodInDays: int32;
+}
+
+@added(Versions.v2025_11_01_preview)
+@removed(Versions.v2026_04_01)
+@doc("The updatable certificate configuration for Policy.")
+model CertificateConfigurationUpdate {
+  @doc("The configuration to set up an ICA.")
+  certificateAuthorityConfiguration?: CertificateAuthorityConfigurationUpdate;
+
+  @doc("The leaf certificate configuration.")
+  leafCertificateConfiguration: LeafCertificateConfigurationUpdate;
+}
+
+@added(Versions.v2025_11_01_preview)
+@removed(Versions.v2026_04_01)
+@doc("Details of the Credential Policy.")
+model PolicyUpdateProperties {
+  @doc("The certificate configuration.")
+  certificate?: CertificateConfigurationUpdate;
+}
+
+@added(Versions.v2025_11_01_preview)
+@removed(Versions.v2026_04_01)
+@doc("A Credential Policy")
+model PolicyUpdate {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @doc("Resource tags.")
+  tags?: Record<string>;
+
+  @doc("The resource-specific properties for this resource.")
+  properties?: PolicyUpdateProperties;
+}
+
+@@alternateType(
+  Microsoft.DeviceRegistry.Policies.update::parameters.properties,
+  PolicyUpdate,
   "javascript"
 );

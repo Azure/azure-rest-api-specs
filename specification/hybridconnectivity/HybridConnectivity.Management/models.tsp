@@ -322,10 +322,12 @@ model ListIngressGatewayCredentialsRequest {
 }
 
 @@doc(EndpointsList.value, "The list of endpoint.");
-@@doc(EndpointsList.nextLink,
+@@doc(
+  EndpointsList.nextLink,
   "The link used to get the next page of endpoints list."
 );
 @@doc(ServiceConfigurationList.value, "The list of service configuration");
-@@doc(ServiceConfigurationList.nextLink,
+@@doc(
+  ServiceConfigurationList.nextLink,
   "The link to fetch the next page of connected cluster"
 );

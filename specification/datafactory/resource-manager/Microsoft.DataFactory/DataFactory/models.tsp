@@ -3688,6 +3688,7 @@ model EncryptionConfiguration {
   /**
    * The url of the Azure Key Vault used for CMK.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   vaultBaseUrl: string;
 
   /**
@@ -3834,6 +3835,7 @@ model GitHubAccessTokenRequest {
   /**
    * GitHub access token base URL.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   gitHubAccessTokenBaseUrl: string;
 }
 
@@ -3844,6 +3846,7 @@ model GitHubClientSecret {
   /**
    * Bring your own app client secret AKV URL.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   byoaSecretAkvUrl?: string;
 
   /**
@@ -3911,6 +3914,7 @@ model AccessPolicyResponse {
   /**
    * Data Plane service base URL.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   dataPlaneUrl?: string;
 }
 
@@ -5449,7 +5453,8 @@ model CreateDataFlowDebugSessionResponse {
 /**
  * A list of active debug sessions.
  */
-@@identifiers(QueryDataFlowDebugSessionsResponse.value,
+@@identifiers(
+  QueryDataFlowDebugSessionsResponse.value,
   #["dataFlowName", "sessionId"]
 );
 model QueryDataFlowDebugSessionsResponse
@@ -6977,6 +6982,7 @@ model HttpServerLocation extends DatasetLocation {
   /**
    * Specify the relativeUrl of http server. Type: string (or Expression with resultType string)
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   relativeUrl?: Dfe<string>;
 
   /**
@@ -8937,6 +8943,7 @@ model RestResourceDatasetTypeProperties {
   /**
    * The relative URL to the resource that the RESTful API provides. Type: string (or Expression with resultType string).
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   relativeUrl?: Dfe<string>;
 
   /**
@@ -9094,6 +9101,7 @@ model HttpDatasetTypeProperties {
   /**
    * The relative URL based on the URL in the HttpLinkedService refers to an HTTP file Type: string (or Expression with resultType string).
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   relativeUrl?: Dfe<string>;
 
   /**
@@ -12099,6 +12107,7 @@ model AzureKeyVaultLinkedServiceTypeProperties {
   /**
    * The base URL of the Azure Key Vault. e.g. https://myakv.vault.azure.net Type: string (or Expression with resultType string).
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   baseUrl: Dfe<string>;
 
   /**
@@ -12683,6 +12692,7 @@ model AmazonS3CompatibleLinkedServiceTypeProperties {
   /**
    * This value specifies the endpoint to access with the Amazon S3 Compatible Connector. This is an optional property; change it only if you want to try a different service endpoint or want to switch between https and http. Type: string (or Expression with resultType string).
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   serviceUrl?: Dfe<string>;
 
   /**
@@ -12729,6 +12739,7 @@ model OracleCloudStorageLinkedServiceTypeProperties {
   /**
    * This value specifies the endpoint to access with the Oracle Cloud Storage Connector. This is an optional property; change it only if you want to try a different service endpoint or want to switch between https and http. Type: string (or Expression with resultType string).
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   serviceUrl?: Dfe<string>;
 
   /**
@@ -12770,6 +12781,7 @@ model GoogleCloudStorageLinkedServiceTypeProperties {
   /**
    * This value specifies the endpoint to access with the Google Cloud Storage Connector. This is an optional property; change it only if you want to try a different service endpoint or want to switch between https and http. Type: string (or Expression with resultType string).
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   serviceUrl?: Dfe<string>;
 
   /**
@@ -14452,6 +14464,7 @@ model SalesforceLinkedServiceTypeProperties {
   /**
    * The URL of Salesforce instance. Default is 'https://login.salesforce.com'. To copy data from sandbox, specify 'https://test.salesforce.com'. To copy data from custom domain, specify, for example, 'https://[domain].my.salesforce.com'. Type: string (or Expression with resultType string).
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   environmentUrl?: Dfe<string>;
 
   /**
@@ -14503,6 +14516,7 @@ model SalesforceServiceCloudLinkedServiceTypeProperties {
   /**
    * The URL of Salesforce Service Cloud instance. Default is 'https://login.salesforce.com'. To copy data from sandbox, specify 'https://test.salesforce.com'. To copy data from custom domain, specify, for example, 'https://[domain].my.salesforce.com'. Type: string (or Expression with resultType string).
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   environmentUrl?: Dfe<string>;
 
   /**
@@ -15296,6 +15310,7 @@ model AmazonS3LinkedServiceTypeProperties {
   /**
    * This value specifies the endpoint to access with the S3 Connector. This is an optional property; change it only if you want to try a different service endpoint or want to switch between https and http. Type: string (or Expression with resultType string).
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   serviceUrl?: Dfe<string>;
 
   /**
@@ -18748,6 +18763,7 @@ model AzureFunctionLinkedServiceTypeProperties {
   /**
    * The endpoint of the Azure Function App. URL will be in the format https://<accountName>.azurewebsites.net. Type: string (or Expression with resultType string).
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   functionAppUrl: Dfe<string>;
 
   /**
@@ -18941,6 +18957,7 @@ model SharePointOnlineListLinkedServiceTypeProperties {
   /**
    * The URL of the SharePoint Online site. For example, https://contoso.sharepoint.com/sites/siteName. Type: string (or Expression with resultType string).
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   siteUrl: Dfe<string>;
 
   /**
@@ -19108,6 +19125,7 @@ model SalesforceV2LinkedServiceTypeProperties {
   /**
    * The URL of Salesforce instance. For example, 'https://[domain].my.salesforce.com'. Type: string (or Expression with resultType string).
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   environmentUrl?: Dfe<string>;
 
   /**
@@ -19159,6 +19177,7 @@ model SalesforceServiceCloudV2LinkedServiceTypeProperties {
   /**
    * The URL of Salesforce Service Cloud instance. For example, 'https://[domain].my.salesforce.com'. Type: string (or Expression with resultType string).
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   environmentUrl?: Dfe<string>;
 
   /**

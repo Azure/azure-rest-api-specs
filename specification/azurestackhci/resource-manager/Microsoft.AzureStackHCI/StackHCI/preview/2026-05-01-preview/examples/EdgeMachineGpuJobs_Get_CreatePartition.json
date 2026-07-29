@@ -1,0 +1,71 @@
+{
+  "title": "EdgeMachineGpuJobs_Get_CreatePartition",
+  "operationId": "EdgeMachineGpuJobs_Get",
+  "parameters": {
+    "api-version": "2026-05-01-preview",
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "resourceGroupName": "ArcInstance-rg",
+    "edgeMachineName": "machine1",
+    "gpuName": "default",
+    "jobsName": "CreatePartition"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "gpuId": "default",
+          "jobType": "CreatePartition",
+          "deploymentMode": "Validate",
+          "partitionCount": 4,
+          "provisioningState": "Succeeded",
+          "jobId": "egmijofqvbbkscxzfghmybzwdhfwny",
+          "startTimeUtc": "2024-12-03T11:31:42.387Z",
+          "endTimeUtc": "2024-12-03T11:31:42.387Z",
+          "status": "NotSpecified",
+          "reportedProperties": {
+            "percentComplete": 100,
+            "validationStatus": {
+              "status": "Success",
+              "steps": [
+                {
+                  "fullStepIndex": "0",
+                  "name": "Validate partition creation",
+                  "description": "Validate GPU partition creation prerequisites.",
+                  "startTimeUtc": "2024-12-03T11:31:42.387Z",
+                  "endTimeUtc": "2024-12-03T11:31:42.387Z",
+                  "status": "Success",
+                  "steps": []
+                }
+              ]
+            },
+            "deploymentStatus": {
+              "status": "Success",
+              "steps": [
+                {
+                  "fullStepIndex": "0",
+                  "name": "Create partitions",
+                  "description": "Create GPU partitions on the edge machine GPU.",
+                  "startTimeUtc": "2024-12-03T11:31:42.387Z",
+                  "endTimeUtc": "2024-12-03T11:31:42.387Z",
+                  "status": "Success",
+                  "steps": []
+                }
+              ]
+            }
+          }
+        },
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.AzureStackHCI/edgeMachines/machine-1/gpus/default/jobs/CreatePartition",
+        "name": "CreatePartition",
+        "type": "Microsoft.AzureStackHCI/edgeMachines/gpus/jobs",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2024-11-14T10:46:55.167Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-11-14T10:46:55.167Z"
+        }
+      }
+    }
+  }
+}

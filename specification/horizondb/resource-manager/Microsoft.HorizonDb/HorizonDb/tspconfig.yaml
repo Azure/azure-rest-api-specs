@@ -44,8 +44,9 @@ options:
     head-as-boolean: true
     inject-spans: true
   "@azure-typespec/http-client-csharp-mgmt":
-    namespace: "Azure.ResourceManager.HorizonDb"
+    namespace: "Azure.ResourceManager.HorizonDB"
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"

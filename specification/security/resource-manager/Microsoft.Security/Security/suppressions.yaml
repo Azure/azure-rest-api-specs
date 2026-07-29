@@ -172,3 +172,85 @@
 - tool: TypeSpecRequirement
   path: ./stable/2026-01-01/*.json
   reason: Brownfield service not ready to migrate
+
+- tool: TypeSpecValidation
+  reason: >
+    Not ready to split as independent services.
+  rules: [FolderStructure]
+  paths:
+    - AlertsAPI
+    - AlertsSuppressionRulesAPI
+    - ApiCollectionsAPI
+    - ApplicationsAPI
+    - AssessmentAPI
+    - ATPSettingsAPI
+    - AutomationsAPI
+    - Common
+    - ComplianceResultsAPI
+    - DefenderForStorageAPI
+    - GovernanceAPI
+    - HealthReportsAPI
+    - IoTSecurityAPI
+    - LegacySettingsAPI
+    - LocationsAPI
+    - MdeOnboardingAPI
+    - OperationsAPI
+    - PricingsAPI
+    - PrivateLinksAPI
+    - RegulatoryComplianceAPI
+    - SecureScoreAPI
+    - SecurityConnectorsAPI
+    - SecurityConnectorsDevOpsAPI
+    - SecurityOperatorsAPI
+    - SecuritySolutionsAPI
+    - SecurityStandardsAPI
+    - SensitivitySettingsAPI
+    - ServerVulnerabilityAssessmentsSettingsAPI
+    - SettingsAPI
+    - SqlVulnerabilityAssessmentsAPI
+    - StandardsAPI
+    - SubAssessmentsAPI
+    - TasksAPI
+- tool: TypeSpecValidation
+  reason: >
+    Not ready to split as independent services.
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.*
+    - options.@azure-tools/typespec-java.*
+    - options.@azure-tools/typespec-python.*
+    - options.@azure-tools/typespec-ts.*
+    - parameters.service-dir.default
+  paths:
+    - AlertsAPI/tspconfig.yaml
+    - AlertsSuppressionRulesAPI/tspconfig.yaml
+    - ApiCollectionsAPI/tspconfig.yaml
+    - ApplicationsAPI/tspconfig.yaml
+    - AssessmentAPI/tspconfig.yaml
+    - ATPSettingsAPI/tspconfig.yaml
+    - AutomationsAPI/tspconfig.yaml
+    - ComplianceResultsAPI/tspconfig.yaml
+    - DefenderForStorageAPI/tspconfig.yaml
+    - GovernanceAPI/tspconfig.yaml
+    - HealthReportsAPI/tspconfig.yaml
+    - IoTSecurityAPI/tspconfig.yaml
+    - LegacySettingsAPI/tspconfig.yaml
+    - LocationsAPI/tspconfig.yaml
+    - MdeOnboardingAPI/tspconfig.yaml
+    - OperationsAPI/tspconfig.yaml
+    - PricingsAPI/tspconfig.yaml
+    - PrivateLinksAPI/tspconfig.yaml
+    - RegulatoryComplianceAPI/tspconfig.yaml
+    - SecureScoreAPI/tspconfig.yaml
+    - SecurityConnectorsAPI/tspconfig.yaml
+    - SecurityConnectorsDevOpsAPI/tspconfig.yaml
+    - SecurityOperatorsAPI/tspconfig.yaml
+    - SecuritySolutionsAPI/tspconfig.yaml
+    - SecurityStandardsAPI/tspconfig.yaml
+    - SensitivitySettingsAPI/tspconfig.yaml
+    - ServerVulnerabilityAssessmentsSettingsAPI/tspconfig.yaml
+    - SettingsAPI/tspconfig.yaml
+    - SqlVulnerabilityAssessmentsAPI/tspconfig.yaml
+    - StandardsAPI/tspconfig.yaml
+    - SubAssessmentsAPI/tspconfig.yaml
+    - TasksAPI/tspconfig.yaml

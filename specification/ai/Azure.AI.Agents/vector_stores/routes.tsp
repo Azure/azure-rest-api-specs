@@ -26,9 +26,11 @@ namespace Azure.AI.Agents {
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
     @get
     @list
-    listVectorStores(...ApiVersionParameter, ...AgentsListOptions): {
-      ...AgentsPagedResult<VectorStore>;
-    } | AgentV1Error;
+    listVectorStores(...ApiVersionParameter, ...AgentsListOptions):
+      | {
+          ...AgentsPagedResult<VectorStore>;
+        }
+      | AgentV1Error;
 
     /**
      * Creates a vector store.

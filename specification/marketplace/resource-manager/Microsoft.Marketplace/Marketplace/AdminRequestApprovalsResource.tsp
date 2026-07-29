@@ -64,12 +64,15 @@ interface AdminRequestApprovalsResources {
   >;
 }
 
-@@doc(AdminRequestApprovalsResource.name,
+@@doc(
+  AdminRequestApprovalsResource.name,
   "The admin request approval ID to get create or update"
 );
-@@doc(AdminRequestApprovalsResource.properties,
+@@doc(
+  AdminRequestApprovalsResource.properties,
   "The privateStore admin Approval request data structure."
 );
-@@doc(AdminRequestApprovalsResources.updateAdminRequestApproval::parameters.resource,
+@@doc(
+  AdminRequestApprovalsResources.updateAdminRequestApproval::parameters.resource,
   ""
 );

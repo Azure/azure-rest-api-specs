@@ -42,11 +42,14 @@ interface AFDOriginGroups {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrReplaceAsync<
     AFDOriginGroup,
-    Response = ArmResourceUpdatedResponse<AFDOriginGroup> | ArmResourceCreatedResponse<AFDOriginGroup> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = AFDOriginGroup> &
-      ArmLroLocationHeader<FinalResult = AFDOriginGroup>> & {
-      @bodyRoot
-      _: AFDOriginGroup;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<AFDOriginGroup>
+      | ArmResourceCreatedResponse<AFDOriginGroup>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = AFDOriginGroup> &
+          ArmLroLocationHeader<FinalResult = AFDOriginGroup>> & {
+          @bodyRoot
+          _: AFDOriginGroup;
+        })
   >;
 
   /**
@@ -58,12 +61,14 @@ interface AFDOriginGroups {
   update is ArmCustomPatchAsync<
     AFDOriginGroup,
     PatchModel = AFDOriginGroupUpdateParameters,
-    Response = ArmResponse<AFDOriginGroup> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = AFDOriginGroup> &
-      ArmLroLocationHeader<FinalResult = AFDOriginGroup> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: AFDOriginGroup;
-    })
+    Response =
+      | ArmResponse<AFDOriginGroup>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = AFDOriginGroup> &
+          ArmLroLocationHeader<FinalResult = AFDOriginGroup> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: AFDOriginGroup;
+        })
   >;
 
   /**
@@ -73,8 +78,11 @@ interface AFDOriginGroups {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     AFDOriginGroup,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -95,10 +103,12 @@ interface AFDOriginGroups {
   >;
 }
 
-@@doc(AFDOriginGroup.name,
+@@doc(
+  AFDOriginGroup.name,
   "Name of the origin group which is unique within the endpoint."
 );
-@@doc(AFDOriginGroup.properties,
+@@doc(
+  AFDOriginGroup.properties,
   "The JSON object that contains the properties of the origin group."
 );
 @@doc(AFDOriginGroups.create::parameters.resource, "Origin group properties");

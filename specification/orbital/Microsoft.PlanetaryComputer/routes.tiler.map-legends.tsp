@@ -13,28 +13,16 @@ interface MapsIntervalLegends {
   /**
    * Generate values and color swatches mapping for a given interval classmap.
    *
-   * Returns a color map for intervals, where each interval is defined by:
-   * - A numeric range `[min, max]` representing the interval boundaries.
-   * - An RGBA color `[red, green, blue, alpha]` associated with the interval.
+   * Returns a color map for intervals, where each interval is defined by
+   * a numeric range [min, max] representing the interval boundaries and
+   * an RGBA color [red, green, blue, alpha] associated with the interval.
    *
    * The response is a 2D array of interval definitions, where each element is a pair:
-   * - The first element is an array of two numbers `[min, max]` defining the interval.
-   * - The second element is an array of four numbers `[red, green, blue, alpha]` defining the RGBA color.
+   * the first element is an array of two numbers [min, max] defining the interval,
+   * and the second element is an array of four numbers [red, green, blue, alpha] defining the RGBA color.
    *
-   * Example:
-   * ```json
-   * [
-   *   [
-   *     [-2, 0], [0, 0, 0, 0]
-   *   ],
-   *   [
-   *     [1, 32], [255, 255, 178, 255]
-   *   ]
-   * ]
-   * ```
-   * This example defines two intervals:
-   * - The interval `[-2, 0]` is mapped to the color `[0, 0, 0, 0]` (transparent black).
-   * - The interval `[1, 32]` is mapped to the color `[255, 255, 178, 255]` (opaque yellow).
+   * Example: [[ [-2, 0], [0, 0, 0, 0] ], [ [1, 32], [255, 255, 178, 255] ]].
+   * This defines two intervals: [-2, 0] mapped to transparent black and [1, 32] mapped to opaque yellow.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @summary("Get Interval Legend")

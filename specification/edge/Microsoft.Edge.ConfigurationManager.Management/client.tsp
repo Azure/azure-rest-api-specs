@@ -7,18 +7,21 @@ using Azure.ResourceManager;
 using Microsoft.Edge;
 
 @@clientName(Microsoft.Edge, "WorkloadOrchestrationMgmtClient", "python");
-@@clientName(Microsoft.Edge,
+@@clientName(
+  Microsoft.Edge,
   "WorkloadOrchestrationManagementClient",
   "javascript"
 );
 
 @@clientName(ConfigTemplate, "EdgeConfigTemplate", "csharp");
-@@clientName(ConfigTemplateProperties,
+@@clientName(
+  ConfigTemplateProperties,
   "EdgeConfigTemplateProperties",
   "csharp"
 );
 @@clientName(ConfigTemplateVersion, "EdgeConfigTemplateVersion", "csharp");
-@@clientName(ConfigTemplateVersionProperties,
+@@clientName(
+  ConfigTemplateVersionProperties,
   "EdgeConfigTemplateVersionProperties",
   "csharp"
 );
@@ -26,7 +29,8 @@ using Microsoft.Edge;
 @@clientName(ContextProperties, "EdgeContextProperties", "csharp");
 @@clientName(Diagnostic, "EdgeDiagnostic", "csharp");
 @@clientName(DiagnosticProperties, "EdgeDiagnosticProperties", "csharp");
-@@clientName(DiagnosticUpdateProperties,
+@@clientName(
+  DiagnosticUpdateProperties,
   "EdgeDiagnosticPatchProperties",
   "csharp"
 );
@@ -39,7 +43,8 @@ using Microsoft.Edge;
 @@clientName(Instance, "EdgeDeploymentInstance", "csharp");
 @@clientName(InstanceProperties, "EdgeDeploymentInstanceProperties", "csharp");
 @@clientName(InstanceHistory, "EdgeDeploymentInstanceHistory", "csharp");
-@@clientName(InstanceHistoryProperties,
+@@clientName(
+  InstanceHistoryProperties,
   "EdgeDeploymentInstanceHistoryProperties",
   "csharp"
 );
@@ -49,7 +54,8 @@ using Microsoft.Edge;
 @@clientName(SchemaProperties, "EdgeSchemaProperties", "csharp");
 @@clientName(SchemaUpdateProperties, "EdgeSchemaPatchProperties", "csharp");
 @@clientName(SchemaReference, "EdgeSchemaReference", "csharp");
-@@clientName(SchemaReferenceProperties,
+@@clientName(
+  SchemaReferenceProperties,
   "EdgeSchemaReferenceProperties",
   "csharp"
 );
@@ -59,21 +65,25 @@ using Microsoft.Edge;
 @@clientName(Solution, "EdgeSolution", "csharp");
 @@clientName(SolutionProperties, "EdgeSolutionProperties", "csharp");
 @@clientName(SolutionTemplate, "EdgeSolutionTemplate", "csharp");
-@@clientName(SolutionTemplateProperties,
+@@clientName(
+  SolutionTemplateProperties,
   "EdgeSolutionTemplateProperties",
   "csharp"
 );
-@@clientName(SolutionTemplateProperties.enableExternalValidation,
+@@clientName(
+  SolutionTemplateProperties.enableExternalValidation,
   "IsExternalValidationEnabled",
   "csharp"
 );
 @@clientName(SolutionTemplateVersion, "EdgeSolutionTemplateVersion", "csharp");
-@@clientName(SolutionTemplateVersionProperties,
+@@clientName(
+  SolutionTemplateVersionProperties,
   "EdgeSolutionTemplateVersionProperties",
   "csharp"
 );
 @@clientName(SolutionVersion, "EdgeSolutionVersion", "csharp");
-@@clientName(SolutionVersionProperties,
+@@clientName(
+  SolutionVersionProperties,
   "EdgeSolutionVersionProperties",
   "csharp"
 );
@@ -82,7 +92,8 @@ using Microsoft.Edge;
 @@clientName(Workflow, "EdgeWorkflow", "csharp");
 @@clientName(WorkflowProperties, "EdgeWorkflowProperties", "csharp");
 @@clientName(WorkflowVersion, "EdgeWorkflowVersion", "csharp");
-@@clientName(WorkflowVersionProperties,
+@@clientName(
+  WorkflowVersionProperties,
   "EdgeWorkflowVersionProperties",
   "csharp"
 );
@@ -102,22 +113,26 @@ using Microsoft.Edge;
 @@clientName(JobStepStatisticsBase, "EdgeJobStepStatistics", "csharp");
 @@clientName(JobType, "EdgeJobType", "csharp");
 @@clientName(OrchestratorType, "SolutionVersionOrchestratorType", "csharp");
-@@clientName(ProvisioningState,
+@@clientName(
+  ProvisioningState,
   "WorkloadOrchestrationProvisioningState",
   "csharp"
 );
-@@clientName(ReconciliationPolicyProperties,
+@@clientName(
+  ReconciliationPolicyProperties,
   "InstanceReconciliationPolicy",
   "csharp"
 );
 @@clientName(ReconciliationState, "InstanceReconciliationState", "csharp");
 @@clientName(ResourceState, "EdgeResourceState", "csharp");
 @@clientName(SolutionDependency, "EdgeSolutionDependency", "csharp");
-@@clientName(SchemaVersionWithUpdateType,
+@@clientName(
+  SchemaVersionWithUpdateType,
   "EdgeSchemaVersionWithUpdateType",
   "csharp"
 );
-@@clientName(SolutionTemplateVersionWithUpdateType,
+@@clientName(
+  SolutionTemplateVersionWithUpdateType,
   "EdgeSolutionTemplateVersionWithUpdateType",
   "csharp"
 );
@@ -131,28 +146,33 @@ using Microsoft.Edge;
 @@clientName(UpdateType, "EdgeUpdateType", "csharp");
 @@clientName(ValidationStatus, "SolutionInstanceValidationStatus", "csharp");
 
-@@clientName(BulkPublishSolutionParameter,
+@@clientName(
+  BulkPublishSolutionParameter,
   "BulkPublishSolutionContent",
   "csharp"
 );
 @@clientName(InstallSolutionParameter, "InstallSolutionContent", "csharp");
-@@clientName(BulkDeploySolutionParameter,
+@@clientName(
+  BulkDeploySolutionParameter,
   "BulkDeploySolutionContent",
   "csharp"
 );
 @@clientName(RemoveRevisionParameter, "RemoveRevisionContent", "csharp");
 @@clientName(RemoveVersionResponse, "RemoveVersionResult", "csharp");
-@@clientName(SolutionDependencyParameter,
+@@clientName(
+  SolutionDependencyParameter,
   "EdgeSolutionDependencyContent",
   "csharp"
 );
-@@clientName(SolutionTemplateParameter,
+@@clientName(
+  SolutionTemplateParameter,
   "EdgeSolutionTemplateContent",
   "csharp"
 );
 @@clientName(TaskOption, "EdgeWorkflowTaskConfig", "csharp");
 @@clientName(UninstallSolutionParameter, "UninstallSolutionContent", "csharp");
-@@clientName(UpdateExternalValidationStatusParameter,
+@@clientName(
+  UpdateExternalValidationStatusParameter,
   "UpdateExternalValidationStatusContent",
   "csharp"
 );
@@ -161,52 +181,64 @@ using Microsoft.Edge;
 @@clientName(DeployJobParameter, "DeployJobContent", "csharp");
 
 @@alternateType(EntityTagProperty.eTag, eTag, "csharp");
-@@alternateType(InstallSolutionParameter.solutionVersionId,
+@@alternateType(
+  InstallSolutionParameter.solutionVersionId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(RemoveRevisionParameter.solutionTemplateId,
+@@alternateType(
+  RemoveRevisionParameter.solutionTemplateId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(SolutionDependency.solutionVersionId,
+@@alternateType(
+  SolutionDependency.solutionVersionId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(SolutionDependency.solutionTemplateVersionId,
+@@alternateType(
+  SolutionDependency.solutionTemplateVersionId,
   armResourceIdentifier,
   "csharp"
 );
 @@alternateType(SolutionDependency.targetId, armResourceIdentifier, "csharp");
-@@alternateType(SolutionDependencyParameter.solutionVersionId,
+@@alternateType(
+  SolutionDependencyParameter.solutionVersionId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(SolutionDependencyParameter.solutionTemplateId,
+@@alternateType(
+  SolutionDependencyParameter.solutionTemplateId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(SolutionDependencyParameter.targetId,
+@@alternateType(
+  SolutionDependencyParameter.targetId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(SolutionTemplateParameter.solutionTemplateVersionId,
+@@alternateType(
+  SolutionTemplateParameter.solutionTemplateVersionId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(SolutionVersionParameter.solutionVersionId,
+@@alternateType(
+  SolutionVersionParameter.solutionVersionId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(UpdateExternalValidationStatusParameter.solutionVersionId,
+@@alternateType(
+  UpdateExternalValidationStatusParameter.solutionVersionId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(UninstallSolutionParameter.solutionTemplateId,
+@@alternateType(
+  UninstallSolutionParameter.solutionTemplateId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(RemoveRevisionParameter.solutionTemplateId,
+@@alternateType(
+  RemoveRevisionParameter.solutionTemplateId,
   armResourceIdentifier,
   "csharp"
 );

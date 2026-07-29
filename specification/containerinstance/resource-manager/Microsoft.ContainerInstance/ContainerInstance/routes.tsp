@@ -109,7 +109,7 @@ interface SubnetServiceAssociationLinkOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "For backward compatibility"
   @summary("Delete container group virtual network association links.")
-  @route("/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}/providers/Microsoft.ContainerInstance/serviceAssociationLinks/default")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}/providers/Microsoft.ContainerInstance/serviceAssociationLinks/default")
   @delete
   delete(
     ...ApiVersionParameter,

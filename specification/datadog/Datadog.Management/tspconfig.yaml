@@ -27,6 +27,7 @@ options:
     service-dir: sdk/datadog
     emitter-output-dir: "{output-dir}/{service-dir}/arm-datadog"
     flavor: "azure"
+    compatibility-lro: true
     experimental-extensible-enums: true
     package-details:
       name: "@azure/arm-datadog"
@@ -47,3 +48,4 @@ options:
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"

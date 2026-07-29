@@ -3,11 +3,13 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
+import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Common;
 
 namespace Microsoft.Network;
 /**
@@ -123,7 +125,10 @@ interface VpnGateways {
   @autoRoute
   delete is ArmResourceDeleteWithoutOkAsync<
     VpnGateway,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -225,11 +230,13 @@ interface VpnGateways {
     VpnGateway,
     VpnConnection,
     void,
-    Response = ArmResponse<VpnConnection> | ArmResourceCreatedResponse<
-      VpnConnection,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = VpnConnection> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >,
+    Response =
+      | ArmResponse<VpnConnection>
+      | ArmResourceCreatedResponse<
+          VpnConnection,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = VpnConnection> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >,
     OverrideErrorType = CloudError
   >;
 
@@ -242,10 +249,13 @@ interface VpnGateways {
     VpnGateway,
     void,
     void,
-    Response = {
-      @body body: void;
-    } | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = void> &
-      Azure.Core.Foundations.RetryAfterHeader> | NoContentResponse,
+    Response =
+      | {
+          @body body: void;
+        }
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | NoContentResponse,
     OverrideErrorType = CloudError
   >;
 
@@ -300,24 +310,31 @@ interface VpnGateways {
 
 @@doc(VpnGateway.name, "The name of the gateway.");
 @@doc(VpnGateway.properties, "Properties of the VPN gateway.");
-@@doc(VpnGateways.createOrUpdate::parameters.resource,
+@@doc(
+  VpnGateways.createOrUpdate::parameters.resource,
   "Parameters supplied to create or Update a virtual wan vpn gateway."
 );
-@@doc(VpnGateways.updateTags::parameters.properties,
+@@doc(
+  VpnGateways.updateTags::parameters.properties,
   "Parameters supplied to update a virtual wan vpn gateway tags."
 );
-@@doc(VpnGateways.startPacketCapture::parameters.body,
+@@doc(
+  VpnGateways.startPacketCapture::parameters.body,
   "Vpn gateway packet capture parameters supplied to start packet capture on vpn gateway."
 );
-@@doc(VpnGateways.stopPacketCapture::parameters.body,
+@@doc(
+  VpnGateways.stopPacketCapture::parameters.body,
   "Vpn gateway packet capture parameters supplied to stop packet capture on vpn gateway."
 );
-@@doc(VpnGateways.vpnConnectionsCreateOrUpdate::parameters.body,
+@@doc(
+  VpnGateways.vpnConnectionsCreateOrUpdate::parameters.body,
   "Parameters supplied to create or Update a VPN Connection."
 );
-@@doc(VpnGateways.vpnConnectionsStartPacketCapture::parameters.body,
+@@doc(
+  VpnGateways.vpnConnectionsStartPacketCapture::parameters.body,
   "Vpn Connection packet capture parameters supplied to start packet capture on gateway connection."
 );
-@@doc(VpnGateways.vpnConnectionsStopPacketCapture::parameters.body,
+@@doc(
+  VpnGateways.vpnConnectionsStopPacketCapture::parameters.body,
   "Vpn Connection packet capture parameters supplied to stop packet capture on gateway connection."
 );

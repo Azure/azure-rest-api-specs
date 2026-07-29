@@ -52,7 +52,10 @@ interface AvailabilityGroupListeners {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     AvailabilityGroupListener,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -61,10 +64,12 @@ interface AvailabilityGroupListeners {
   listByGroup is ArmResourceListByParent<AvailabilityGroupListener>;
 }
 
-@@doc(AvailabilityGroupListener.name,
+@@doc(
+  AvailabilityGroupListener.name,
   "Name of the availability group listener."
 );
 @@doc(AvailabilityGroupListener.properties, "Resource properties.");
-@@doc(AvailabilityGroupListeners.createOrUpdate::parameters.resource,
+@@doc(
+  AvailabilityGroupListeners.createOrUpdate::parameters.resource,
   "The availability group listener."
 );

@@ -15,8 +15,10 @@ using TypeSpec.Versioning;
 namespace Microsoft.MachineLearningServices;
 
 @parentResource(Workspace)
-model OutboundRuleBasicResource
-  is Azure.ResourceManager.ProxyResource<OutboundRule, false> {
+model OutboundRuleBasicResource is Azure.ResourceManager.ProxyResource<
+  OutboundRule,
+  false
+> {
   ...ResourceNameParameter<
     Resource = OutboundRuleBasicResource,
     KeyName = "ruleName",
@@ -48,7 +50,9 @@ interface OutboundRuleBasicResourceOps
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
         ruleName: string,
-      }
+      },
+      ErrorResponse,
+      "MachineLearningOutboundRuleBasic"
     > {}
 
 @armResourceOperations
@@ -66,8 +70,10 @@ interface OutboundRuleBasicResources {
   @summary("Creates or updates an outbound rule in the managed network of a machine learning workspace.")
   createOrUpdate is OutboundRuleBasicResourceOps.CreateOrUpdateAsync<
     OutboundRuleBasicResource,
-    Response = ArmResourceUpdatedResponse<OutboundRuleBasicResource> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OutboundRuleBasicResource>> &
-      Azure.Core.Foundations.RetryAfterHeader)
+    Response =
+      | ArmResourceUpdatedResponse<OutboundRuleBasicResource>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OutboundRuleBasicResource>> &
+          Azure.Core.Foundations.RetryAfterHeader)
   >;
 
   /**
@@ -77,7 +83,10 @@ interface OutboundRuleBasicResources {
   @summary("Deletes an outbound rule from the managed network of a machine learning workspace.")
   delete is OutboundRuleBasicResourceOps.DeleteWithoutOkAsync<
     OutboundRuleBasicResource,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -119,11 +128,17 @@ interface OutboundRuleBasicResourceOperationGroupOps
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
         ruleName: string,
-      }
+      },
+      ErrorResponse,
+      "ManagedNetworkOutboundRuleBasic"
     > {}
 
 @removed(Versions.v2025_12_01)
 @added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
 @armResourceOperations
 interface OutboundRuleBasicResourceOperationGroup {
   /**
@@ -135,8 +150,10 @@ interface OutboundRuleBasicResourceOperationGroup {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Existing API returns additional response codes"
   createOrUpdate is OutboundRuleBasicResourceOperationGroupOps.CreateOrUpdateAsync<
     OutboundRuleBasicResource,
-    Response = ArmResourceUpdatedResponse<OutboundRuleBasicResource> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OutboundRuleBasicResource>> &
-      Azure.Core.Foundations.RetryAfterHeader)
+    Response =
+      | ArmResourceUpdatedResponse<OutboundRuleBasicResource>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OutboundRuleBasicResource>> &
+          Azure.Core.Foundations.RetryAfterHeader)
   >;
 
   /**
@@ -155,15 +172,19 @@ interface OutboundRuleBasicResourceOperationGroup {
   >;
 }
 
-@@doc(OutboundRuleBasicResource.name,
+@@doc(
+  OutboundRuleBasicResource.name,
   "Name of the workspace managed network outbound rule"
 );
-@@doc(OutboundRuleBasicResource.properties,
+@@doc(
+  OutboundRuleBasicResource.properties,
   "Outbound Rule for the managed network of a machine learning workspace."
 );
-@@doc(OutboundRuleBasicResources.createOrUpdate::parameters.resource,
+@@doc(
+  OutboundRuleBasicResources.createOrUpdate::parameters.resource,
   "Outbound Rule to be created or updated in the managed network of a machine learning workspace."
 );
-@@doc(OutboundRuleBasicResourceOperationGroup.createOrUpdate::parameters.resource,
+@@doc(
+  OutboundRuleBasicResourceOperationGroup.createOrUpdate::parameters.resource,
   ""
 );

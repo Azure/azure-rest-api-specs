@@ -4,11 +4,13 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./ExpressRouteCircuitPeering.tsp";
+import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Common;
 
 namespace Microsoft.Network;
 /**
@@ -59,9 +61,11 @@ interface PeerExpressRouteCircuitConnections {
   >;
 }
 
-@@doc(PeerExpressRouteCircuitConnection.name,
+@@doc(
+  PeerExpressRouteCircuitConnection.name,
   "The name of the resource that is unique within a resource group. This name can be used to access the resource."
 );
-@@doc(PeerExpressRouteCircuitConnection.properties,
+@@doc(
+  PeerExpressRouteCircuitConnection.properties,
   "Properties of the peer express route circuit connection."
 );

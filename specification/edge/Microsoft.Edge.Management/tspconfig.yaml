@@ -17,6 +17,9 @@ options:
     azure-resource-provider-folder: "resource-manager"
     output-file: "{azure-resource-provider-folder}/{service-name}/edge/{version-status}/{version}/operations.json"
     arm-types-dir: "{project-root}/../../common-types/resource-management"
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.CommonEdgeSiteManagerOperations"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-java":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-commonedgesitemanageroperations"
     namespace: "com.azure.resourcemanager.commonedgesitemanageroperations"
@@ -33,12 +36,6 @@ options:
     emitter-output-dir: "{output-dir}/{service-dir}/arm-commonedgesitemanageroperations"
     package-details:
       name: "@azure/arm-commonedgesitemanageroperations"
-  "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    namespace: "Azure.ResourceManager.CommonEdgeSiteManagerOperations"
-    clear-output-folder: true
-    model-namespace: false
-    flavor: azure
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/commonedgesitemanageroperations"
     emitter-output-dir: "{output-dir}/{service-dir}/armcommonedgesitemanageroperations"
@@ -52,3 +49,4 @@ options:
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"

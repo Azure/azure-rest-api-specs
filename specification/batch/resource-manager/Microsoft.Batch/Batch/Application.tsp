@@ -92,15 +92,19 @@ interface Applications {
 
 @@maxLength(Application.name, 64);
 @@minLength(Application.name, 1);
-@@doc(Application.name,
+@@doc(
+  Application.name,
   "The name of the application. This must be unique within the account."
 );
-@@doc(Application.properties,
+@@doc(
+  Application.properties,
   "The properties associated with the Application."
 );
-@@doc(Applications.create::parameters.resource,
+@@doc(
+  Applications.create::parameters.resource,
   "The parameters for the request."
 );
-@@doc(Applications.update::parameters.properties,
+@@doc(
+  Applications.update::parameters.properties,
   "The parameters for the request."
 );

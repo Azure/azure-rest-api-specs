@@ -3,11 +3,13 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
+import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Common;
 
 namespace Microsoft.Network;
 /**
@@ -19,7 +21,7 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Http.Private.includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
-model NetworkProfile extends Resource {
+model NetworkProfile extends Common.Resource {
   properties?: NetworkProfilePropertiesFormat;
 
   @visibility(Lifecycle.Read)
@@ -77,7 +79,10 @@ interface NetworkProfiles {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     NetworkProfile,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -94,9 +99,11 @@ interface NetworkProfiles {
 
 @@doc(NetworkProfile.name, "The name of the public IP prefix.");
 @@doc(NetworkProfile.properties, "Network profile properties.");
-@@doc(NetworkProfiles.createOrUpdate::parameters.resource,
+@@doc(
+  NetworkProfiles.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update network profile operation."
 );
-@@doc(NetworkProfiles.updateTags::parameters.properties,
+@@doc(
+  NetworkProfiles.updateTags::parameters.properties,
   "Parameters supplied to update network profile tags."
 );

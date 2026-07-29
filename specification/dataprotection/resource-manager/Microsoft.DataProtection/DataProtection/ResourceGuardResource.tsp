@@ -80,9 +80,11 @@ interface ResourceGuardResources {
 
 @@doc(ResourceGuardResource.name, "The name of ResourceGuard");
 @@doc(ResourceGuardResource.properties, "ResourceGuardResource properties");
-@@doc(ResourceGuardResources.put::parameters.resource,
+@@doc(
+  ResourceGuardResources.put::parameters.resource,
   "Request body for operation"
 );
-@@doc(ResourceGuardResources.patch::parameters.properties,
+@@doc(
+  ResourceGuardResources.patch::parameters.properties,
   "Request body for operation"
 );

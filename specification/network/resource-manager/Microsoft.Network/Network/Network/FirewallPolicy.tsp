@@ -3,11 +3,13 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
+import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Common;
 
 namespace Microsoft.Network;
 /**
@@ -19,7 +21,7 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
 @Http.Private.includeInapplicableMetadataInPayload(false)
-model FirewallPolicy extends Resource {
+model FirewallPolicy extends Common.Resource {
   properties?: FirewallPolicyPropertiesFormat;
 
   @visibility(Lifecycle.Read)
@@ -37,7 +39,7 @@ model FirewallPolicy extends Resource {
    * The identity of the firewall policy.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  identity?: ManagedServiceIdentity;
+  identity?: Common.ManagedServiceIdentity;
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -87,7 +89,10 @@ interface FirewallPolicies {
   @tag("FirewallPolicies")
   delete is ArmResourceDeleteWithoutOkAsync<
     FirewallPolicy,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -141,13 +146,16 @@ interface FirewallPolicies {
 
 @@doc(FirewallPolicy.name, "The name of the Firewall Policy.");
 @@doc(FirewallPolicy.properties, "Properties of the firewall policy.");
-@@doc(FirewallPolicies.createOrUpdate::parameters.resource,
+@@doc(
+  FirewallPolicies.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update Firewall Policy operation."
 );
-@@doc(FirewallPolicies.updateTags::parameters.properties,
+@@doc(
+  FirewallPolicies.updateTags::parameters.properties,
   "Parameters supplied to update Azure Firewall Policy tags."
 );
 @@doc(FirewallPolicies.firewallPolicyIdpsSignaturesList::parameters.body, "");
-@@doc(FirewallPolicies.firewallPolicyIdpsSignaturesFilterValuesList::parameters.body,
+@@doc(
+  FirewallPolicies.firewallPolicyIdpsSignaturesFilterValuesList::parameters.body,
   ""
 );

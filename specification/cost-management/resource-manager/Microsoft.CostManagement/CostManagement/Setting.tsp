@@ -85,7 +85,7 @@ interface Settings {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/rest/api/cost-management/")
-  list is SettingsOps.List<
+  list is SettingsOps.ListSinglePage<
     Setting,
     Response = ArmResponse<SettingsListResult>,
     ErrorType = ErrorResponse
@@ -93,6 +93,7 @@ interface Settings {
 }
 
 @@doc(Setting.name, "Setting type.");
-@@doc(Settings.createOrUpdateByScope::parameters.resource,
+@@doc(
+  Settings.createOrUpdateByScope::parameters.resource,
   "Setting to be created or updated."
 );
