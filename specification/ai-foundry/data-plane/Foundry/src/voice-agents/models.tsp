@@ -97,14 +97,37 @@ union VoiceResponseStatus {
   failed: "failed",
 }
 
-@doc("The voice used for a response, for example `{ \"type\": \"openai\", \"name\": \"alloy\" }`.")
+@doc("The resolved voice identity used for a response, for example `{ \"type\": \"openai\", \"name\": \"alloy\" }`.")
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
 model VoiceResponseVoice {
-  @doc("The voice kind, e.g. `openai` or an Azure voice type.")
-  type: string;
+  @doc("The voice kind.")
+  type: VoiceResponseVoiceType;
 
   @doc("The voice name.")
   name: string;
+}
+
+@doc("The voice kind recorded for a response. Known values cover every voice kind supported by a voice agent; additional values may be added over time.")
+union VoiceResponseVoiceType {
+  string,
+
+  @doc("An OpenAI built-in voice.")
+  openai: "openai",
+
+  @doc("An Azure standard neural voice.")
+  azure_standard: "azure-standard",
+
+  @doc("An Azure custom neural voice.")
+  azure_custom: "azure-custom",
+
+  @doc("An Azure personal voice.")
+  azure_personal: "azure-personal",
+
+  @doc("An Azure avatar voice-synchronization voice.")
+  avatar_voice_sync: "avatar-voice-sync",
+
+  @doc("An Azure realtime native voice.")
+  azure_realtime_native: "azure-realtime-native",
 }
 
 @doc("The output audio format used for a response. Follows the OpenAI Realtime GA audio format discriminated union.")

@@ -78519,15 +78519,27 @@ components:
         - name
       properties:
         type:
-          type: string
-          description: The voice kind, e.g. `openai` or an Azure voice type.
+          $ref: '#/components/schemas/VoiceResponseVoiceType'
+          description: The voice kind.
         name:
           type: string
           description: The voice name.
-      description: 'The voice used for a response, for example `{ "type": "openai", "name": "alloy" }`.'
+      description: 'The resolved voice identity used for a response, for example `{ "type": "openai", "name": "alloy" }`.'
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
+    VoiceResponseVoiceType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - openai
+            - azure-standard
+            - azure-custom
+            - azure-personal
+            - avatar-voice-sync
+            - azure-realtime-native
+      description: The voice kind recorded for a response. Known values cover every voice kind supported by a voice agent; additional values may be added over time.
     VoiceSystemMessageItem:
       type: object
       properties:
