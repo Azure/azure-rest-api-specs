@@ -81,7 +81,9 @@ describe("renderSuppressionsCommentBody", () => {
 
     expect(body).toContain("## TypeSpec suppressions requiring review");
     expect(body).toContain("Suppressions are strongly discouraged");
-    expect(body).toContain("❌ Approval required — 1 suppression");
+    expect(body).toContain(
+      "⚠️ Approval label not applied (not required during testing) — 1 suppression",
+    );
   });
 
   it("reflects approval status in the heading and status cells", () => {
@@ -106,14 +108,14 @@ describe("renderSuppressionsCommentBody", () => {
       ...options,
       isApproved: false,
     });
-    expect(pending).toContain("❌ Approval required");
+    expect(pending).toContain("⚠️ Approval label not applied");
     expect(pending).toContain('<td align="center">❌</td>');
 
     const approved = renderSuppressionsCommentBody(report, {
       ...options,
       isApproved: true,
     });
-    expect(approved).toContain("✅ Approved");
+    expect(approved).toContain("✅ Approval label applied");
     expect(approved).toContain('<td align="center">✅</td>');
   });
 });
@@ -201,7 +203,9 @@ describe("buildSuppressionsComment", async () => {
       );
       expect(body).toContain("Suppressions are strongly discouraged");
       expect(body).toContain("https://aka.ms/tsp-suppress/feedback");
-      expect(body).toContain("❌ Approval required — 2 suppressions");
+      expect(body).toContain(
+        "⚠️ Approval label not applied (not required during testing) — 2 suppressions",
+      );
     },
   );
 
@@ -275,7 +279,7 @@ describe("buildSuppressionsComment", async () => {
         "abc123",
         [],
       );
-      expect(pending).toContain("❌ Approval required");
+      expect(pending).toContain("⚠️ Approval label not applied");
       expect(pending).toContain('<td align="center">❌</td>');
 
       const approved = await buildSuppressionsComment(
@@ -286,7 +290,7 @@ describe("buildSuppressionsComment", async () => {
         "abc123",
         ["Approved-TypeSpecSuppression"],
       );
-      expect(approved).toContain("✅ Approved");
+      expect(approved).toContain("✅ Approval label applied");
       expect(approved).toContain('<td align="center">✅</td>');
     },
   );
