@@ -14997,6 +14997,31 @@
           "$ref": "#/definitions/ManagementMode",
           "description": "The Managed GPU experience installs additional components, such as the Data Center GPU Manager (DCGM) metrics for monitoring, on top of the GPU driver for you. For more details of what is installed, check out aka.ms/aks/managed-gpu."
         },
+        "driverMode": {
+          "type": "string",
+          "description": "NVIDIA GPU resource allocation mode. DevicePlugin installs the NVIDIA\nKubernetes device plugin. DRA installs the NVIDIA DRA driver.",
+          "default": "DevicePlugin",
+          "enum": [
+            "DevicePlugin",
+            "DRA"
+          ],
+          "x-ms-enum": {
+            "name": "NvidiaDriverMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "DevicePlugin",
+                "value": "DevicePlugin",
+                "description": "NVIDIA Kubernetes device plugin is installed on the nodes for resource allocation and scheduling."
+              },
+              {
+                "name": "DRA",
+                "value": "DRA",
+                "description": "NVIDIA Device Resource Allocation (DRA) driver is installed on the nodes for resource allocation and scheduling."
+              }
+            ]
+          }
+        },
         "migStrategy": {
           "$ref": "#/definitions/MigStrategy",
           "description": "Sets the MIG (Multi-Instance GPU) strategy that will be used for managed MIG support. For more information about the different strategies, visit aka.ms/aks/managed-gpu. When not specified, the default is None."
