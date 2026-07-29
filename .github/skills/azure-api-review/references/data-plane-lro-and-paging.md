@@ -85,6 +85,40 @@ final result. A linkage that compiles but points at the wrong operation produces
 an SDK poller that never terminates -- the linter checks that a link exists, not
 that it is correct.
 
+### DP-LRO-05: Custom status monitors must be annotated
+
+- **Rule ID:** `DP-LRO-05`
+- **Severity:** Warning
+
+A service that does not use the `Azure.Core` LRO templates -- typically a
+grandfathered LRO with a hand-rolled status monitor -- must still tell the
+emitters how to read it. Without the annotations the shape is legible to a human
+and opaque to every SDK generator, so pollers are hand-written per language.
+
+On a custom status monitor, check for:
+
+| Decorator         | Applies to                           | Marks                                          |
+| ----------------- | ------------------------------------ | ---------------------------------------------- |
+| `@lroStatus`      | `Enum` \| `Union` \| `ModelProperty` | the property or type carrying operation status |
+| `@lroSucceeded`   | `EnumMember` \| `UnionVariant`       | the terminal success state                     |
+| `@lroFailed`      | `EnumMember` \| `UnionVariant`       | the terminal failure state                     |
+| `@lroCanceled`    | `EnumMember` \| `UnionVariant`       | the terminal cancellation state                |
+| `@lroResult`      | `ModelProperty`                      | the result on success                          |
+| `@lroErrorResult` | `ModelProperty`                      | the error on failure                           |
+
+All are in the `Azure.Core` namespace.
+
+`@lroStatus` alone is not enough and is the common partial adoption: it says
+_where_ status lives but not _which values are terminal_, so a generated poller
+cannot tell "Succeeded" from any other string. **Flag a custom `@lroStatus`
+monitor whose terminal states are not marked** with `@lroSucceeded` /
+`@lroFailed` (and `@lroCanceled` where the union has a cancelled state).
+
+Prefer, and say so once: a service adopting the standard `Azure.Core` LRO
+templates gets all of this by construction. Raise that as a Suggestion, not a
+Blocking finding -- an existing service's monitor is usually grandfathered and
+changing it is breaking.
+
 ---
 
 ## Pagination
@@ -103,13 +137,13 @@ The upstream Guideline states this conditionally, verbatim:
 > ever a chance in the future that the number of items can grow to be very
 > large.**
 
-The condition is part of the rule. A collection the service fixes — supported
-languages, regions, a documented and small sub-collection — does not meet it,
+The condition is part of the rule. A collection the service fixes -- supported
+languages, regions, a documented and small sub-collection -- does not meet it,
 so an unpaged list there is **not a violation** and there is nothing to report.
 
 **Do not flag** a non-paged list when the collection is provably bounded and
 small, and **do not flag it merely because the bound is stated in a `@doc`
-rather than enforced by the type system** — a documented bound is exactly the
+rather than enforced by the type system** -- a documented bound is exactly the
 evidence this exception asks for. Assess whether the stated bound is plausible;
 if it is, stay silent. If you doubt it, ask a question at Suggestion severity
 rather than asserting a violation. A reviewer that demands paging on every
