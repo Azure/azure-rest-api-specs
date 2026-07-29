@@ -2,9 +2,9 @@ import { describe, expect, it } from "vitest";
 import {
   validateAllNamespaces,
   validateNamespaceFormat,
-} from "../../src/namespace-approval/validate-format.js";
+} from "../../src/package-name-approval/validate-format.js";
 
-/** @type {import("../../src/namespace-approval/validate-format.js").FormatRulesConfig} */
+/** @type {import("../../src/package-name-approval/validate-format.js").FormatRulesConfig} */
 const rules = {
   dotnet: {
     pattern: "^Azure\\.ResourceManager\\.(?:[A-Z][a-zA-Z0-9]*)(?:\\.[A-Z][a-zA-Z0-9]*)?$",

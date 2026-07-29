@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from "vitest";
-import { parseCommentTable } from "../../src/namespace-approval/post-results.js";
+import { parseCommentTable } from "../../src/package-name-approval/post-results.js";
 
 // Import only the pure functions we can test without heavy mocking
 // buildCommentBody and getApprovers are the key testable units
