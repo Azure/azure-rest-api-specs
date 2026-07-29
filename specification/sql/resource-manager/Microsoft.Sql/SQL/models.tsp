@@ -2280,6 +2280,28 @@ union ManagedInstanceAdministratorType {
   ActiveDirectory: "ActiveDirectory",
 }
 
+/**
+ * Principal type of the managed instance administrator.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2025_08_01_preview)
+enum ManagedInstanceAdministratorPrincipalType {
+  /**
+   * Indicates that the principal is a user.
+   */
+  User,
+
+  /**
+   * Indicates that the principal is a group.
+   */
+  Group,
+
+  /**
+   * Indicates that the principal is an application.
+   */
+  Application,
+}
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union AdministratorName {
   string,
@@ -2766,18 +2788,39 @@ union PrivateEndpointProvisioningState {
   string,
 
   /**
+   * Approving
+   */
+  @removed(Versions.v2025_08_01_preview)
+  Approving: "Approving",
+
+  /**
    * Created
    */
+  @added(Versions.v2025_08_01_preview)
   Created: "Created",
+
+  /**
+   * Ready
+   */
+  @removed(Versions.v2025_08_01_preview)
+  Ready: "Ready",
 
   /**
    * InProgress
    */
+  @added(Versions.v2025_08_01_preview)
   InProgress: "InProgress",
+
+  /**
+   * Dropping
+   */
+  @removed(Versions.v2025_08_01_preview)
+  Dropping: "Dropping",
 
   /**
    * Succeeded
    */
+  @added(Versions.v2025_08_01_preview)
   Succeeded: "Succeeded",
 
   /**
@@ -2786,8 +2829,15 @@ union PrivateEndpointProvisioningState {
   Failed: "Failed",
 
   /**
+   * Rejecting
+   */
+  @removed(Versions.v2025_08_01_preview)
+  Rejecting: "Rejecting",
+
+  /**
    * Canceled
    */
+  @added(Versions.v2025_08_01_preview)
   Canceled: "Canceled",
 }
 
@@ -7464,7 +7514,7 @@ model DataWarehouseUserActivitiesProperties {
 /**
  * The properties of a deleted server.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "DeletedServer is a read-only proxy resource that represents a deleted server record. It has no provisioning lifecycle and does not support provisioning state."
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.DeletedServers)
 model DeletedServerProperties {
@@ -12070,6 +12120,12 @@ model ManagedInstanceAdministratorProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tenantId?: Azure.Core.uuid;
+
+  /**
+   * Principal type of the managed instance administrator.
+   */
+  @added(Versions.v2025_08_01_preview)
+  principalType?: ManagedInstanceAdministratorPrincipalType;
 }
 
 /**
