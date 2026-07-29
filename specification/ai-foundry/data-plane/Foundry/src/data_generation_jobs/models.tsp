@@ -25,8 +25,8 @@ union DataGenerationJobType {
   @doc("Tool calling conversation between user and agent.")
   tool_use: "tool_use",
 
-  @doc("Task generation for evaluation scenarios.")
-  task_generation: "task_generation",
+  @doc("Simulation seed for evaluation scenarios.")
+  simulation_seed: "simulation_seed",
 }
 
 @doc("LLM model options for data generation jobs.")
@@ -223,13 +223,16 @@ model SimpleQnADataGenerationJobOptions extends DataGenerationJobOptions {
 model TracesDataGenerationJobOptions extends DataGenerationJobOptions {
   @doc("The data generation job type, which is Traces for this model.")
   type: "traces";
+
+  @doc("Whether to redact personally identifiable information from traces. When omitted or set to true, PII is redacted. Set to false to opt out of redaction.")
+  pii_redaction?: boolean = true;
 }
 
-@doc("The options for a task generation data generation job. Use with multiturn evaluation scenarios and with prompt, file, or agent sources. Generated dataset rows include fields such as `id`, `category`, `test_case_description`, and `desired_num_turns`.")
+@doc("The options for a simulation seed data generation job. Use with multiturn evaluation scenarios and with prompt, file, or agent sources. Generated dataset rows include fields such as `id`, `category`, `test_case_description`, and `desired_num_turns`.")
 @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
-model TaskGenerationDataGenerationJobOptions extends DataGenerationJobOptions {
-  @doc("The data generation job type, which is TaskGeneration for this model.")
-  type: "task_generation";
+model SimulationSeedDataGenerationJobOptions extends DataGenerationJobOptions {
+  @doc("The data generation job type, which is SimulationSeed for this model.")
+  type: "simulation_seed";
 }
 
 @doc("The options for a data generation job with ToolUse type. Used only for fine-tuning scenarios.")

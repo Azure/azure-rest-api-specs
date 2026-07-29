@@ -33914,7 +33914,7 @@
           "mapping": {
             "simple_qna": "#/components/schemas/SimpleQnADataGenerationJobOptions",
             "traces": "#/components/schemas/TracesDataGenerationJobOptions",
-            "task_generation": "#/components/schemas/TaskGenerationDataGenerationJobOptions",
+            "simulation_seed": "#/components/schemas/SimulationSeedDataGenerationJobOptions",
             "tool_use": "#/components/schemas/ToolUseFineTuningDataGenerationJobOptions"
           }
         },
@@ -34111,7 +34111,7 @@
               "simple_qna",
               "traces",
               "tool_use",
-              "task_generation"
+              "simulation_seed"
             ]
           }
         ],
@@ -81138,7 +81138,7 @@
         },
         "description": "Base class for targets with discriminator support."
       },
-      "TaskGenerationDataGenerationJobOptions": {
+      "SimulationSeedDataGenerationJobOptions": {
         "type": "object",
         "required": [
           "type"
@@ -81147,9 +81147,9 @@
           "type": {
             "type": "string",
             "enum": [
-              "task_generation"
+              "simulation_seed"
             ],
-            "description": "The data generation job type, which is TaskGeneration for this model."
+            "description": "The data generation job type, which is SimulationSeed for this model."
           }
         },
         "allOf": [
@@ -81157,7 +81157,7 @@
             "$ref": "#/components/schemas/DataGenerationJobOptions"
           }
         ],
-        "description": "The options for a task generation data generation job. Use with multiturn evaluation scenarios and with prompt, file, or agent sources. Generated dataset rows include fields such as `id`, `category`, `test_case_description`, and `desired_num_turns`.",
+        "description": "The options for a simulation seed data generation job. Use with multiturn evaluation scenarios and with prompt, file, or agent sources. Generated dataset rows include fields such as `id`, `category`, `test_case_description`, and `desired_num_turns`.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "DataGenerationJobs=V1Preview"
@@ -81896,6 +81896,11 @@
               "traces"
             ],
             "description": "The data generation job type, which is Traces for this model."
+          },
+          "pii_redaction": {
+            "type": "boolean",
+            "default": true,
+            "description": "Whether to redact personally identifiable information from traces. When omitted or set to true, PII is redacted. Set to false to opt out of redaction."
           }
         },
         "allOf": [
