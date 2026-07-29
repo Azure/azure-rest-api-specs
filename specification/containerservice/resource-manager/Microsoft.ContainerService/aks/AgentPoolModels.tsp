@@ -944,53 +944,25 @@ model AgentPoolNetworkInterface {
   /** Whether accelerated networking is enabled on this secondary NIC. If omitted, this defaults to true only when the agent pool VM SKU supports accelerated networking. Validation will fail if it is enabled on an unsupported SKU or NIC configuration. */
   enableAcceleratedNetworking?: boolean;
 
-  /**
-   * Public IP configuration for this secondary NIC. Only valid when `type` is `Standard`.
-   * A constrained projection of the VM public IP address configuration the agent pool stamps
-   * onto each NIC: set `publicIPAddressVersion` to provision a per-VM instance-level public IP
-   * (ILPIP) for the NIC, then optionally shape it with `ipTags` or `publicIPPrefixID`.
-   * Omitting this block provisions no public IP. Idle timeout is not configurable and matches
-   * the primary NIC's fixed value.
-   * Immutable after agent pool creation.
-   * For more information, see https://aka.ms/aks/dra-nic-iptags
-   */
+  /** Public IP configuration for this secondary NIC. Only valid when `type` is `Standard`. Set `publicIPAddressVersion` to provision a per-VM instance-level public IP for the NIC, then optionally shape it with `ipTags` or `publicIPPrefixID`. If omitted, no public IP is provisioned. Idle timeout is not configurable. For more information, see https://aka.ms/aks/multi-nic */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for consistency with existing AKS public IP naming (nodePublicIPPrefixID, nodePublicIPTags)."
   @added(Versions.v2026_06_02_preview)
   publicIPAddressConfiguration?: AgentPoolNICPublicIPAddressConfiguration;
 }
 
-/**
- * Public IP configuration applied to a secondary NIC on an agent pool.
- * `ipTags` and `publicIPPrefixID` are mutually exclusive, matching the primary NIC's behavior.
- * For more information, see https://aka.ms/aks/dra-nic-iptags
- */
+/** Public IP configuration applied to a secondary NIC on an agent pool. `ipTags` and `publicIPPrefixID` are mutually exclusive, matching the primary NIC's behavior. For more information, see https://aka.ms/aks/multi-nic */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Model name maintained for consistency with existing AKS public IP naming (nodePublicIPPrefixID, nodePublicIPTags)."
 @added(Versions.v2026_06_02_preview)
 model AgentPoolNICPublicIPAddressConfiguration {
-  /**
-   * IP version of the public IP provisioned for this NIC. Required: the presence of this
-   * property is what enables ILPIP provisioning for the NIC, so an empty block allocates
-   * nothing. Maps directly to the VM public IP address configuration's `publicIPAddressVersion`.
-   * Only `IPv4` is accepted in this preview; `IPv6` is reserved for future support.
-   * Immutable after agent pool creation.
-   */
+  /** IP version of the public IP provisioned for this NIC. Required: its presence is what enables public IP provisioning, so an empty configuration allocates nothing. `IPv4` is the only accepted value. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for consistency with VMSS publicIPAddressVersion and existing AKS public IP naming."
   publicIPAddressVersion: AgentPoolNICPublicIPAddressVersion;
 
-  /**
-   * IP tags to attach to the public IP allocated for this NIC.
-   * Each tag's `ipTagType` must be one of `FirstPartyUsage`, `NetworkDomain`, or `RoutingPreference`.
-   * Mutually exclusive with `publicIPPrefixID`.
-   * Immutable after agent pool creation.
-   */
+  /** IP tags to attach to the public IP allocated for this NIC. Each tag's `ipTagType` must be `FirstPartyUsage`, `NetworkDomain`, or `RoutingPreference`. Mutually exclusive with `publicIPPrefixID`. */
   @identifiers(#[])
   ipTags?: IPTag[];
 
-  /**
-   * The resource ID of a public IP prefix to draw this NIC's public IP from.
-   * Mutually exclusive with `ipTags`.
-   * Immutable after agent pool creation.
-   */
+  /** The resource ID of a public IP prefix to draw this NIC's public IP from. Mutually exclusive with `ipTags`. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for consistency with existing AKS public IP naming (nodePublicIPPrefixID)."
   publicIPPrefixID?: Azure.Core.armResourceIdentifier<[
     {
@@ -999,10 +971,7 @@ model AgentPoolNICPublicIPAddressConfiguration {
   ]>;
 }
 
-/**
- * IP version for a secondary NIC's public IP. Only `IPv4` is accepted in
- * this preview. `IPv6` will be added when per-NIC IPv6 is supported.
- */
+/** IP version of the public IP allocated for a secondary NIC. `IPv4` is the only accepted value. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Value name maintained for consistency with VMSS publicIPAddressVersion (IPv4/IPv6)."
 @added(Versions.v2026_06_02_preview)
 union AgentPoolNICPublicIPAddressVersion {

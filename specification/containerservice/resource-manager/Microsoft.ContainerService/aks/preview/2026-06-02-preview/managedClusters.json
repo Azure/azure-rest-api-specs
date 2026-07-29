@@ -7519,15 +7519,15 @@
     },
     "AgentPoolNICPublicIPAddressConfiguration": {
       "type": "object",
-      "description": "Public IP configuration applied to a secondary NIC on an agent pool.\n`ipTags` and `publicIPPrefixID` are mutually exclusive, matching the primary NIC's behavior.\nFor more information, see https://aka.ms/aks/dra-nic-iptags",
+      "description": "Public IP configuration applied to a secondary NIC on an agent pool. `ipTags` and `publicIPPrefixID` are mutually exclusive, matching the primary NIC's behavior. For more information, see https://aka.ms/aks/multi-nic",
       "properties": {
         "publicIPAddressVersion": {
           "$ref": "#/definitions/AgentPoolNICPublicIPAddressVersion",
-          "description": "IP version of the public IP provisioned for this NIC. Required: the presence of this\nproperty is what enables ILPIP provisioning for the NIC, so an empty block allocates\nnothing. Maps directly to the VM public IP address configuration's `publicIPAddressVersion`.\nOnly `IPv4` is accepted in this preview; `IPv6` is reserved for future support.\nImmutable after agent pool creation."
+          "description": "IP version of the public IP provisioned for this NIC. Required: its presence is what enables public IP provisioning, so an empty configuration allocates nothing. `IPv4` is the only accepted value."
         },
         "ipTags": {
           "type": "array",
-          "description": "IP tags to attach to the public IP allocated for this NIC.\nEach tag's `ipTagType` must be one of `FirstPartyUsage`, `NetworkDomain`, or `RoutingPreference`.\nMutually exclusive with `publicIPPrefixID`.\nImmutable after agent pool creation.",
+          "description": "IP tags to attach to the public IP allocated for this NIC. Each tag's `ipTagType` must be `FirstPartyUsage`, `NetworkDomain`, or `RoutingPreference`. Mutually exclusive with `publicIPPrefixID`.",
           "items": {
             "$ref": "#/definitions/IPTag"
           },
@@ -7536,7 +7536,7 @@
         "publicIPPrefixID": {
           "type": "string",
           "format": "arm-id",
-          "description": "The resource ID of a public IP prefix to draw this NIC's public IP from.\nMutually exclusive with `ipTags`.\nImmutable after agent pool creation.",
+          "description": "The resource ID of a public IP prefix to draw this NIC's public IP from. Mutually exclusive with `ipTags`.",
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
@@ -7552,7 +7552,7 @@
     },
     "AgentPoolNICPublicIPAddressVersion": {
       "type": "string",
-      "description": "IP version for a secondary NIC's public IP. Only `IPv4` is accepted in\nthis preview. `IPv6` will be added when per-NIC IPv6 is supported.",
+      "description": "IP version of the public IP allocated for a secondary NIC. `IPv4` is the only accepted value.",
       "enum": [
         "IPv4"
       ],
@@ -7594,7 +7594,7 @@
         },
         "publicIPAddressConfiguration": {
           "$ref": "#/definitions/AgentPoolNICPublicIPAddressConfiguration",
-          "description": "Public IP configuration for this secondary NIC. Only valid when `type` is `Standard`.\nA constrained projection of the VM public IP address configuration the agent pool stamps\nonto each NIC: set `publicIPAddressVersion` to provision a per-VM instance-level public IP\n(ILPIP) for the NIC, then optionally shape it with `ipTags` or `publicIPPrefixID`.\nOmitting this block provisions no public IP. Idle timeout is not configurable and matches\nthe primary NIC's fixed value.\nImmutable after agent pool creation.\nFor more information, see https://aka.ms/aks/dra-nic-iptags"
+          "description": "Public IP configuration for this secondary NIC. Only valid when `type` is `Standard`. Set `publicIPAddressVersion` to provision a per-VM instance-level public IP for the NIC, then optionally shape it with `ipTags` or `publicIPPrefixID`. If omitted, no public IP is provisioned. Idle timeout is not configurable. For more information, see https://aka.ms/aks/multi-nic"
         }
       }
     },
