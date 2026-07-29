@@ -237,7 +237,8 @@ describe("validate-approval", () => {
       );
       expect(github.rest.issues.createComment).toHaveBeenCalled();
       const calls = vi.mocked(github.rest.issues.createComment).mock.calls;
-      const commentBody = String(/** @type {Record<string, unknown>} */ (calls[0][0]).body);
+      const callArg = /** @type {Record<string, unknown>} */ (calls[0][0]);
+      const commentBody = String(callArg.body);
       expect(commentBody).toContain("only available on management-plane");
     });
   });
@@ -260,7 +261,8 @@ describe("validate-approval", () => {
       );
       expect(github.rest.issues.createComment).toHaveBeenCalled();
       const calls = vi.mocked(github.rest.issues.createComment).mock.calls;
-      const commentBody = String(/** @type {Record<string, unknown>} */ (calls[0][0]).body);
+      const callArg = /** @type {Record<string, unknown>} */ (calls[0][0]);
+      const commentBody = String(callArg.body);
       expect(commentBody).toContain("not authorized to remove");
     });
 
