@@ -345,8 +345,8 @@ export function renderSuppressionsCommentBody(
 
   const statusCell = isApproved ? "✅" : "❌";
   const approvalState = isApproved
-    ? "✅ Approval label applied"
-    : "⚠️ Approval label not applied (not required during testing)";
+    ? "✅ Approved"
+    : "❌ Approval required (currently under testing, review NOT enforced)";
 
   const totalCount = newSuppressions.length + changedSuppressions.length;
 
@@ -357,7 +357,7 @@ export function renderSuppressionsCommentBody(
     "",
     `**Status:** ${summaryParts.join(" — ")}`,
     "",
-    "⚠️ <strong>This check is currently in testing mode and is non-blocking</strong> — it will not prevent this PR from merging, and applying the <code>Approved-TypeSpecSuppression</code> label is <strong>not currently required</strong>. This PR adds or updates the TypeSpec suppressions listed below. <strong>Suppressions are strongly discouraged</strong> — they bypass linter rules that protect API quality and consistency. Authors should avoid adding new suppressions and prefer fixing the underlying issue. The list below is surfaced for visibility and feedback while the check is being validated; the <strong>Status</strong> column shows ✅ once the label is applied and ❌ while it is not.",
+    "⚠️ <strong>This check is currently in testing mode and is non-blocking</strong> — it will not prevent this PR from merging. This PR adds or updates the TypeSpec suppressions listed below. <strong>Suppressions are strongly discouraged</strong> — they bypass linter rules that protect API quality and consistency. Authors should avoid adding new suppressions and prefer fixing the underlying issue; reviewers should approve only when there is a clear, compelling justification and no reasonable alternative. Review each linked rule and source location, then apply <code>Approved-TypeSpecSuppression</code> only if every justification is acceptable. The <strong>Status</strong> column shows ✅ once the label is applied and ❌ while approval is pending.",
     "",
   ];
 
