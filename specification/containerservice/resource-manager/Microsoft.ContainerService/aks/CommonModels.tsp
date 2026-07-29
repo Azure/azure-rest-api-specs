@@ -2146,6 +2146,7 @@ model ManagedClusterWindowsProfile {
   adminUsername: string;
 
   @secret
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   @doc("Specifies the password of the administrator account. <br><br> **Minimum-length:** 8 characters <br><br> **Max-length:** 123 characters <br><br> **Complexity requirements:** 3 out of 4 conditions below need to be fulfilled <br> Has lower characters <br>Has upper characters <br> Has a digit <br> Has a special character (Regex match [\\W_]) <br><br> **Disallowed values:** \"abc@123\", \"P@$$w0rd\", \"P@ssw0rd\", \"P@ssword123\", \"Pa$$word\", \"pass@word1\", \"Password!\", \"Password1\", \"Password22\", \"iloveyou!\"")
   adminPassword?: string;
 
@@ -2199,6 +2200,7 @@ model ManagedClusterServicePrincipalProfile {
    * The secret password associated with the service principal in plain text.
    */
   @secret
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   secret?: string;
 }
 
@@ -2983,6 +2985,7 @@ model ManagedClusterAADProfile {
    * (DEPRECATED) The server AAD application secret. Learn more at https://aka.ms/aks/aad-legacy.
    */
   @secret
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   serverAppSecret?: string;
 
   /**
