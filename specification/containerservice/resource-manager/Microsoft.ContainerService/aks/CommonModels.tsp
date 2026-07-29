@@ -4502,7 +4502,6 @@ model NodeDisruptionProfile {
   nodeDisruptionPolicy?: NodeDisruptionPolicy;
 }
 
-
 /**
  * NVIDIA GPU resource allocation mode.
  */
