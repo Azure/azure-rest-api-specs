@@ -1808,7 +1808,7 @@
           {
             "name": "Foundry-Features",
             "in": "header",
-            "required": false,
+            "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
@@ -1895,7 +1895,7 @@
           {
             "name": "Foundry-Features",
             "in": "header",
-            "required": false,
+            "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
@@ -1979,12 +1979,12 @@
       "get": {
         "operationId": "AgentEndpointConversations_getAgentConversationAudio",
         "summary": "Get a voice agent conversation's merged recording metadata",
-        "description": "Returns metadata for the whole-call merged stereo recording (user audio on the left channel, agent audio\non the right). The common metadata (format, sample rate, channels, channel layout, duration) is returned\nfor both Foundry-managed and bring-your-own-storage (BYOS) recordings; for BYOS the response additionally\nincludes `blob_path`, a direct path into the customer's own storage (no SAS) that the customer downloads\nwith their own credentials. The recording is built once from the per-turn segments after the session ends;\na request against an in-progress session returns `409`. Requires the conversation to have persisted audio\n(`store = true`); otherwise returns `404`.",
+        "description": "Returns metadata for the whole-call merged stereo recording (user audio on the left channel, agent audio\non the right). The common metadata (format, sample rate, channels, channel layout, duration) is returned\nfor both Foundry-managed and bring-your-own-storage (BYOS) recordings; for BYOS the response additionally\nincludes `blob_uri`, the URI of the recording in the customer's own storage (no SAS) that the customer downloads\nwith their own credentials. The recording is built once from the per-turn segments after the session ends;\na request against an in-progress session returns `409`. Requires the conversation to have persisted audio\n(`store = true`); otherwise returns `404`.",
         "parameters": [
           {
             "name": "Foundry-Features",
             "in": "header",
-            "required": false,
+            "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
@@ -2068,12 +2068,12 @@
       "get": {
         "operationId": "AgentEndpointConversations_getAgentConversationAudioContent",
         "summary": "Stream a voice agent conversation's merged recording",
-        "description": "Streams the whole-call merged stereo recording as a WAV (`audio/wav`) byte stream through the service\n(no SAS URL). This route serves Foundry-managed storage only. For bring-your-own-storage (BYOS)\nrecordings the bytes are not proxied — the caller must download directly from customer storage using the\n`blob_path` returned by the metadata route — so this route returns `409 Conflict` for BYOS recordings.\nA request against an in-progress session also returns `409` (a distinct condition: session-not-ended\nversus BYOS-download-required). A conversation without persisted audio (`store = false`) returns `404`.",
+        "description": "Streams the whole-call merged stereo recording as a WAV (`audio/wav`) byte stream through the service\n(no SAS URL). This route serves Foundry-managed storage only. For bring-your-own-storage (BYOS)\nrecordings the bytes are not proxied — the caller must download directly from customer storage using the\n`blob_uri` returned by the metadata route — so this route returns `409 Conflict` for BYOS recordings.\nA request against an in-progress session also returns `409` (a distinct condition: session-not-ended\nversus BYOS-download-required). A conversation without persisted audio (`store = false`) returns `404`.",
         "parameters": [
           {
             "name": "Foundry-Features",
             "in": "header",
-            "required": false,
+            "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
@@ -2162,7 +2162,7 @@
           {
             "name": "Foundry-Features",
             "in": "header",
-            "required": false,
+            "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
@@ -2319,7 +2319,7 @@
           {
             "name": "Foundry-Features",
             "in": "header",
-            "required": false,
+            "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
@@ -2412,12 +2412,12 @@
       "get": {
         "operationId": "AgentEndpointConversations_getAgentConversationItemAudio",
         "summary": "Get a voice agent conversation item's audio metadata",
-        "description": "Returns metadata for a single conversation item's audio segment, including the common playback facts\n(role, format/codec, sample rate, channels, offset, duration) for both Foundry-managed and\nbring-your-own-storage (BYOS) recordings; for BYOS the response additionally includes `blob_path`, a direct\npath into the customer's own storage (no SAS) that the customer downloads with their own credentials.\nRequires the conversation to have persisted audio (`store = true`); returns `404` when the conversation,\nitem, or its audio was not persisted.",
+        "description": "Returns metadata for a single conversation item's audio segment, including the common playback facts\n(role, format/codec, sample rate, channels, offset, duration) for both Foundry-managed and\nbring-your-own-storage (BYOS) recordings; for BYOS the response additionally includes `blob_uri`, the URI\nof the recording in the customer's own storage (no SAS) that the customer downloads with their own credentials.\nRequires the conversation to have persisted audio (`store = true`); returns `404` when the conversation,\nitem, or its audio was not persisted.",
         "parameters": [
           {
             "name": "Foundry-Features",
             "in": "header",
-            "required": false,
+            "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
@@ -2510,12 +2510,12 @@
       "get": {
         "operationId": "AgentEndpointConversations_getAgentConversationItemAudioContent",
         "summary": "Stream a voice agent conversation item's audio",
-        "description": "Streams a single conversation item's audio as a WAV (`audio/wav`) byte stream through the service (no SAS\nURL). This route serves Foundry-managed storage only. For bring-your-own-storage (BYOS) recordings the\nbytes are not proxied — the caller must download directly from customer storage using the `blob_path`\nreturned by the item's `/audio` metadata route — so this route returns `409 Conflict` for BYOS recordings.\nReturns `404` when the conversation, item, or its audio was not persisted (`store = false`).",
+        "description": "Streams a single conversation item's audio as a WAV (`audio/wav`) byte stream through the service (no SAS\nURL). This route serves Foundry-managed storage only. For bring-your-own-storage (BYOS) recordings the\nbytes are not proxied — the caller must download directly from customer storage using the `blob_uri`\nreturned by the item's `/audio` metadata route — so this route returns `409 Conflict` for BYOS recordings.\nReturns `404` when the conversation, item, or its audio was not persisted (`store = false`).",
         "parameters": [
           {
             "name": "Foundry-Features",
             "in": "header",
-            "required": false,
+            "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
@@ -2613,7 +2613,7 @@
           {
             "name": "Foundry-Features",
             "in": "header",
-            "required": false,
+            "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
@@ -2770,7 +2770,7 @@
           {
             "name": "Foundry-Features",
             "in": "header",
-            "required": false,
+            "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
@@ -2868,7 +2868,7 @@
           {
             "name": "Foundry-Features",
             "in": "header",
-            "required": false,
+            "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
@@ -29986,7 +29986,7 @@
           {
             "name": "Foundry-Features",
             "in": "header",
-            "required": false,
+            "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
@@ -30065,7 +30065,7 @@
           {
             "name": "Foundry-Features",
             "in": "header",
-            "required": false,
+            "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
@@ -30204,7 +30204,7 @@
           {
             "name": "Foundry-Features",
             "in": "header",
-            "required": false,
+            "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
@@ -30282,7 +30282,7 @@
           {
             "name": "Foundry-Features",
             "in": "header",
-            "required": false,
+            "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
@@ -30371,7 +30371,7 @@
           {
             "name": "Foundry-Features",
             "in": "header",
-            "required": false,
+            "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
@@ -30451,7 +30451,7 @@
           {
             "name": "Foundry-Features",
             "in": "header",
-            "required": false,
+            "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
@@ -30540,7 +30540,7 @@
           {
             "name": "Foundry-Features",
             "in": "header",
-            "required": false,
+            "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
@@ -30704,7 +30704,7 @@
           {
             "name": "Foundry-Features",
             "in": "header",
-            "required": false,
+            "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
@@ -30791,7 +30791,7 @@
           {
             "name": "Foundry-Features",
             "in": "header",
-            "required": false,
+            "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
@@ -30880,7 +30880,7 @@
           {
             "name": "Foundry-Features",
             "in": "header",
-            "required": false,
+            "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
@@ -30953,7 +30953,7 @@
           {
             "name": "Foundry-Features",
             "in": "header",
-            "required": false,
+            "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
@@ -31026,7 +31026,7 @@
           {
             "name": "Foundry-Features",
             "in": "header",
-            "required": false,
+            "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
@@ -83791,7 +83791,8 @@
           },
           "create_response": {
             "type": "boolean",
-            "description": "Whether the server automatically creates a response when a turn ends. Defaults to true."
+            "description": "Whether the server automatically creates a response when a turn ends. Defaults to true.",
+            "default": true
           }
         },
         "allOf": [
@@ -85993,14 +85994,7 @@
             "description": "The model to use for this agent, paired with `model_type`: the service-managed model name when `model_type` is `managed`, or the customer's Foundry deployment name when `model_type` is `self_deployed`. The model must support realtime or cascaded voice. The service derives the architecture from the selected model."
           },
           "instructions": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "string",
             "description": "A system (or developer) message inserted into the model's context. Supports template substitution via `structured_inputs`, rendered per session before the live session starts."
           },
           "audio": {
@@ -86012,7 +86006,10 @@
             "items": {
               "$ref": "#/components/schemas/VoiceOutputModality"
             },
-            "description": "The output modalities the agent produces. Defaults to `[\"audio\"]`. `animation` and `avatar` are available\nwhen an avatar is configured."
+            "description": "The output modalities the agent produces. Defaults to `[\"audio\"]`. `animation` and `avatar` are available\nwhen an avatar is configured.",
+            "default": [
+              "audio"
+            ]
           },
           "avatar": {
             "$ref": "#/components/schemas/VoiceAvatarConfig",
@@ -86661,6 +86658,9 @@
           },
           "deleted": {
             "type": "boolean",
+            "enum": [
+              true
+            ],
             "description": "Always `true` for a successful delete."
           }
         },
@@ -86793,12 +86793,13 @@
             "format": "int32",
             "description": "The duration of the audio segment, in milliseconds."
           },
-          "blob_path": {
+          "blob_uri": {
             "type": "string",
-            "description": "For bring-your-own-storage (BYOS) recordings only: a direct path/URL into the customer's own storage, without a SAS token — the customer downloads it using their own storage credentials. Absent for Foundry-managed storage, where the bytes are streamed via the item's `/audio/content` route instead."
+            "format": "uri",
+            "description": "For bring-your-own-storage (BYOS) recordings only: the URI of the recording in the customer's own storage, without a SAS token. The customer downloads it using their own storage credentials. Absent for Foundry-managed storage, where the bytes are streamed via the item's `/audio/content` route instead."
           }
         },
-        "description": "Metadata for a single conversation item's audio segment. For bring-your-own-storage (BYOS), the response includes\n`blob_path`, a direct customer-storage path or URL without a SAS token, that the customer accesses with their own\ncredentials. For Foundry-managed storage, `blob_path` is absent and the bytes are streamed through the item's\n`/audio/content` route.",
+        "description": "Metadata for a single conversation item's audio segment. For bring-your-own-storage (BYOS), the response includes\n`blob_uri`, a direct customer-storage URI without a SAS token, that the customer accesses with their own\ncredentials. For Foundry-managed storage, `blob_uri` is absent and the bytes are streamed through the item's\n`/audio/content` route.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -87043,12 +87044,13 @@
             "format": "int32",
             "description": "The total duration of the recording in milliseconds."
           },
-          "blob_path": {
+          "blob_uri": {
             "type": "string",
-            "description": "For bring-your-own-storage (BYOS) recordings only: a direct path/URL into the customer's own storage, without a SAS token — the customer downloads it using their own storage credentials. Absent for Foundry-managed storage, where the bytes are streamed via the `/audio/content` route instead."
+            "format": "uri",
+            "description": "For bring-your-own-storage (BYOS) recordings only: the URI of the recording in the customer's own storage, without a SAS token. The customer downloads it using their own storage credentials. Absent for Foundry-managed storage, where the bytes are streamed via the `/audio/content` route instead."
           }
         },
-        "description": "Metadata for the merged, whole-call stereo recording of a voice conversation (user audio on the left channel,\nagent audio on the right). Built once from the per-turn segments after the session ends and durably cached.\nThe common metadata (format, sample rate, channels, channel layout, duration) is returned for both\nFoundry-managed and bring-your-own-storage (BYOS) recordings. For BYOS the response also includes `blob_path`,\na direct path/URL into the customer's own storage (no SAS token) that the customer downloads using their own\nstorage credentials. For Foundry-managed storage `blob_path` is absent and the bytes are streamed via the\n`/audio/content` route instead.",
+        "description": "Metadata for the merged, whole-call stereo recording of a voice conversation (user audio on the left channel,\nagent audio on the right). Built once from the per-turn segments after the session ends and durably cached.\nThe common metadata (format, sample rate, channels, channel layout, duration) is returned for both\nFoundry-managed and bring-your-own-storage (BYOS) recordings. For BYOS the response also includes `blob_uri`,\nthe URI of the recording in the customer's own storage (no SAS token), which the customer downloads using their\nown storage credentials. For Foundry-managed storage `blob_uri` is absent and the bytes are streamed via the\n`/audio/content` route instead.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"

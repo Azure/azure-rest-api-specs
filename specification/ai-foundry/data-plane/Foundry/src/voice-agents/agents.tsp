@@ -44,7 +44,7 @@ model VoiceAgentDefinition {
   `model`: string;
 
   @doc("A system (or developer) message inserted into the model's context. Supports template substitution via `structured_inputs`, rendered per session before the live session starts.")
-  instructions?: string | null;
+  instructions?: string;
 
   @doc("""
     The audio configuration, including input and output formats, voice, turn detection, noise reduction, and
@@ -56,7 +56,7 @@ model VoiceAgentDefinition {
     The output modalities the agent produces. Defaults to `["audio"]`. `animation` and `avatar` are available
     when an avatar is configured.
     """)
-  output_modalities?: VoiceOutputModality[];
+  output_modalities?: VoiceOutputModality[] = #[VoiceOutputModality.audio];
 
   @doc("Optional avatar configuration. These values are session defaults and may be overridden when connecting.")
   avatar?: VoiceAvatarConfig;
@@ -272,7 +272,7 @@ model ServerVadTurnDetection extends VoiceTurnDetection {
   silence_duration_ms?: int32;
 
   @doc("Whether the server automatically creates a response when a turn ends. Defaults to true.")
-  create_response?: boolean;
+  create_response?: boolean = true;
 }
 
 @doc("Semantic (model-based) turn detection.")

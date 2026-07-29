@@ -67,7 +67,7 @@ model VoiceDeletedConversation {
   object: "voice.conversation.deleted";
 
   @doc("Always `true` for a successful delete.")
-  deleted: boolean;
+  deleted: true;
 }
 
 // ---------------------------------------------------------------------------
@@ -359,8 +359,8 @@ union VoiceConversationItem {
 
 @doc("""
   Metadata for a single conversation item's audio segment. For bring-your-own-storage (BYOS), the response includes
-  `blob_path`, a direct customer-storage path or URL without a SAS token, that the customer accesses with their own
-  credentials. For Foundry-managed storage, `blob_path` is absent and the bytes are streamed through the item's
+  `blob_uri`, a direct customer-storage URI without a SAS token, that the customer accesses with their own
+  credentials. For Foundry-managed storage, `blob_uri` is absent and the bytes are streamed through the item's
   `/audio/content` route.
   """)
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
@@ -392,8 +392,8 @@ model VoiceItemAudioResponse {
   @doc("The duration of the audio segment, in milliseconds.")
   duration_ms?: int32;
 
-  @doc("For bring-your-own-storage (BYOS) recordings only: a direct path/URL into the customer's own storage, without a SAS token — the customer downloads it using their own storage credentials. Absent for Foundry-managed storage, where the bytes are streamed via the item's `/audio/content` route instead.")
-  blob_path?: string;
+  @doc("For bring-your-own-storage (BYOS) recordings only: the URI of the recording in the customer's own storage, without a SAS token. The customer downloads it using their own storage credentials. Absent for Foundry-managed storage, where the bytes are streamed via the item's `/audio/content` route instead.")
+  blob_uri?: url;
 }
 
 @doc("A streamed WAV (`audio/wav`) audio response. The bytes are streamed through the service; no SAS URL is returned.")
@@ -422,9 +422,9 @@ model VoiceRecordingChannelLayout {
   Metadata for the merged, whole-call stereo recording of a voice conversation (user audio on the left channel,
   agent audio on the right). Built once from the per-turn segments after the session ends and durably cached.
   The common metadata (format, sample rate, channels, channel layout, duration) is returned for both
-  Foundry-managed and bring-your-own-storage (BYOS) recordings. For BYOS the response also includes `blob_path`,
-  a direct path/URL into the customer's own storage (no SAS token) that the customer downloads using their own
-  storage credentials. For Foundry-managed storage `blob_path` is absent and the bytes are streamed via the
+  Foundry-managed and bring-your-own-storage (BYOS) recordings. For BYOS the response also includes `blob_uri`,
+  the URI of the recording in the customer's own storage (no SAS token), which the customer downloads using their
+  own storage credentials. For Foundry-managed storage `blob_uri` is absent and the bytes are streamed via the
   `/audio/content` route instead.
   """)
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
@@ -447,6 +447,6 @@ model VoiceRecordingResponse {
   @doc("The total duration of the recording in milliseconds.")
   duration_ms: int32;
 
-  @doc("For bring-your-own-storage (BYOS) recordings only: a direct path/URL into the customer's own storage, without a SAS token — the customer downloads it using their own storage credentials. Absent for Foundry-managed storage, where the bytes are streamed via the `/audio/content` route instead.")
-  blob_path?: string;
+  @doc("For bring-your-own-storage (BYOS) recordings only: the URI of the recording in the customer's own storage, without a SAS token. The customer downloads it using their own storage credentials. Absent for Foundry-managed storage, where the bytes are streamed via the `/audio/content` route instead.")
+  blob_uri?: url;
 }

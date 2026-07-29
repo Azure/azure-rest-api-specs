@@ -1212,7 +1212,7 @@ paths:
       parameters:
         - name: Foundry-Features
           in: header
-          required: false
+          required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
             type: string
@@ -1270,7 +1270,7 @@ paths:
       parameters:
         - name: Foundry-Features
           in: header
-          required: false
+          required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
             type: string
@@ -1327,14 +1327,14 @@ paths:
         Returns metadata for the whole-call merged stereo recording (user audio on the left channel, agent audio
         on the right). The common metadata (format, sample rate, channels, channel layout, duration) is returned
         for both Foundry-managed and bring-your-own-storage (BYOS) recordings; for BYOS the response additionally
-        includes `blob_path`, a direct path into the customer's own storage (no SAS) that the customer downloads
+        includes `blob_uri`, the URI of the recording in the customer's own storage (no SAS) that the customer downloads
         with their own credentials. The recording is built once from the per-turn segments after the session ends;
         a request against an in-progress session returns `409`. Requires the conversation to have persisted audio
         (`store = true`); otherwise returns `404`.
       parameters:
         - name: Foundry-Features
           in: header
-          required: false
+          required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
             type: string
@@ -1391,13 +1391,13 @@ paths:
         Streams the whole-call merged stereo recording as a WAV (`audio/wav`) byte stream through the service
         (no SAS URL). This route serves Foundry-managed storage only. For bring-your-own-storage (BYOS)
         recordings the bytes are not proxied — the caller must download directly from customer storage using the
-        `blob_path` returned by the metadata route — so this route returns `409 Conflict` for BYOS recordings.
+        `blob_uri` returned by the metadata route — so this route returns `409 Conflict` for BYOS recordings.
         A request against an in-progress session also returns `409` (a distinct condition: session-not-ended
         versus BYOS-download-required). A conversation without persisted audio (`store = false`) returns `404`.
       parameters:
         - name: Foundry-Features
           in: header
-          required: false
+          required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
             type: string
@@ -1457,7 +1457,7 @@ paths:
       parameters:
         - name: Foundry-Features
           in: header
-          required: false
+          required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
             type: string
@@ -1578,7 +1578,7 @@ paths:
       parameters:
         - name: Foundry-Features
           in: header
-          required: false
+          required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
             type: string
@@ -1640,14 +1640,14 @@ paths:
       description: |-
         Returns metadata for a single conversation item's audio segment, including the common playback facts
         (role, format/codec, sample rate, channels, offset, duration) for both Foundry-managed and
-        bring-your-own-storage (BYOS) recordings; for BYOS the response additionally includes `blob_path`, a direct
-        path into the customer's own storage (no SAS) that the customer downloads with their own credentials.
+        bring-your-own-storage (BYOS) recordings; for BYOS the response additionally includes `blob_uri`, the URI
+        of the recording in the customer's own storage (no SAS) that the customer downloads with their own credentials.
         Requires the conversation to have persisted audio (`store = true`); returns `404` when the conversation,
         item, or its audio was not persisted.
       parameters:
         - name: Foundry-Features
           in: header
-          required: false
+          required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
             type: string
@@ -1709,13 +1709,13 @@ paths:
       description: |-
         Streams a single conversation item's audio as a WAV (`audio/wav`) byte stream through the service (no SAS
         URL). This route serves Foundry-managed storage only. For bring-your-own-storage (BYOS) recordings the
-        bytes are not proxied — the caller must download directly from customer storage using the `blob_path`
+        bytes are not proxied — the caller must download directly from customer storage using the `blob_uri`
         returned by the item's `/audio` metadata route — so this route returns `409 Conflict` for BYOS recordings.
         Returns `404` when the conversation, item, or its audio was not persisted (`store = false`).
       parameters:
         - name: Foundry-Features
           in: header
-          required: false
+          required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
             type: string
@@ -1781,7 +1781,7 @@ paths:
       parameters:
         - name: Foundry-Features
           in: header
-          required: false
+          required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
             type: string
@@ -1899,7 +1899,7 @@ paths:
       parameters:
         - name: Foundry-Features
           in: header
-          required: false
+          required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
             type: string
@@ -1966,7 +1966,7 @@ paths:
       parameters:
         - name: Foundry-Features
           in: header
-          required: false
+          required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
             type: string
@@ -38523,7 +38523,7 @@ paths:
       parameters:
         - name: Foundry-Features
           in: header
-          required: false
+          required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
             type: string
@@ -38573,7 +38573,7 @@ paths:
       parameters:
         - name: Foundry-Features
           in: header
-          required: false
+          required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
             type: string
@@ -38677,7 +38677,7 @@ paths:
       parameters:
         - name: Foundry-Features
           in: header
-          required: false
+          required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
             type: string
@@ -38729,7 +38729,7 @@ paths:
       parameters:
         - name: Foundry-Features
           in: header
-          required: false
+          required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
             type: string
@@ -38786,7 +38786,7 @@ paths:
       parameters:
         - name: Foundry-Features
           in: header
-          required: false
+          required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
             type: string
@@ -38837,7 +38837,7 @@ paths:
       parameters:
         - name: Foundry-Features
           in: header
-          required: false
+          required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
             type: string
@@ -38894,7 +38894,7 @@ paths:
       parameters:
         - name: Foundry-Features
           in: header
-          required: false
+          required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
             type: string
@@ -39015,7 +39015,7 @@ paths:
       parameters:
         - name: Foundry-Features
           in: header
-          required: false
+          required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
             type: string
@@ -39071,7 +39071,7 @@ paths:
       parameters:
         - name: Foundry-Features
           in: header
-          required: false
+          required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
             type: string
@@ -39130,7 +39130,7 @@ paths:
       parameters:
         - name: Foundry-Features
           in: header
-          required: false
+          required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
             type: string
@@ -39179,7 +39179,7 @@ paths:
       parameters:
         - name: Foundry-Features
           in: header
-          required: false
+          required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
             type: string
@@ -39230,7 +39230,7 @@ paths:
       parameters:
         - name: Foundry-Features
           in: header
-          required: false
+          required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
             type: string
@@ -76178,6 +76178,7 @@ components:
         create_response:
           type: boolean
           description: Whether the server automatically creates a response when a turn ends. Defaults to true.
+          default: true
       allOf:
         - $ref: '#/components/schemas/VoiceTurnDetection'
       description: Server-side voice activity detection (silence-based).
@@ -77663,9 +77664,7 @@ components:
           type: string
           description: "The model to use for this agent, paired with `model_type`: the service-managed model name when `model_type` is `managed`, or the customer's Foundry deployment name when `model_type` is `self_deployed`. The model must support realtime or cascaded voice. The service derives the architecture from the selected model."
         instructions:
-          anyOf:
-            - type: string
-            - type: 'null'
+          type: string
           description: A system (or developer) message inserted into the model's context. Supports template substitution via `structured_inputs`, rendered per session before the live session starts.
         audio:
           $ref: '#/components/schemas/VoiceAudioConfig'
@@ -77679,6 +77678,8 @@ components:
           description: |-
             The output modalities the agent produces. Defaults to `["audio"]`. `animation` and `avatar` are available
             when an avatar is configured.
+          default:
+            - audio
         avatar:
           $ref: '#/components/schemas/VoiceAvatarConfig'
           description: Optional avatar configuration. These values are session defaults and may be overridden when connecting.
@@ -78131,6 +78132,8 @@ components:
           description: The object type. Always `voice.conversation.deleted`.
         deleted:
           type: boolean
+          enum:
+            - true
           description: Always `true` for a successful delete.
       description: The response returned when a voice conversation is deleted.
       x-ms-foundry-meta:
@@ -78222,13 +78225,14 @@ components:
           type: integer
           format: int32
           description: The duration of the audio segment, in milliseconds.
-        blob_path:
+        blob_uri:
           type: string
-          description: "For bring-your-own-storage (BYOS) recordings only: a direct path/URL into the customer's own storage, without a SAS token — the customer downloads it using their own storage credentials. Absent for Foundry-managed storage, where the bytes are streamed via the item's `/audio/content` route instead."
+          format: uri
+          description: "For bring-your-own-storage (BYOS) recordings only: the URI of the recording in the customer's own storage, without a SAS token. The customer downloads it using their own storage credentials. Absent for Foundry-managed storage, where the bytes are streamed via the item's `/audio/content` route instead."
       description: |-
         Metadata for a single conversation item's audio segment. For bring-your-own-storage (BYOS), the response includes
-        `blob_path`, a direct customer-storage path or URL without a SAS token, that the customer accesses with their own
-        credentials. For Foundry-managed storage, `blob_path` is absent and the bytes are streamed through the item's
+        `blob_uri`, a direct customer-storage URI without a SAS token, that the customer accesses with their own
+        credentials. For Foundry-managed storage, `blob_uri` is absent and the bytes are streamed through the item's
         `/audio/content` route.
       x-ms-foundry-meta:
         required_previews:
@@ -78390,16 +78394,17 @@ components:
           type: integer
           format: int32
           description: The total duration of the recording in milliseconds.
-        blob_path:
+        blob_uri:
           type: string
-          description: "For bring-your-own-storage (BYOS) recordings only: a direct path/URL into the customer's own storage, without a SAS token — the customer downloads it using their own storage credentials. Absent for Foundry-managed storage, where the bytes are streamed via the `/audio/content` route instead."
+          format: uri
+          description: "For bring-your-own-storage (BYOS) recordings only: the URI of the recording in the customer's own storage, without a SAS token. The customer downloads it using their own storage credentials. Absent for Foundry-managed storage, where the bytes are streamed via the `/audio/content` route instead."
       description: |-
         Metadata for the merged, whole-call stereo recording of a voice conversation (user audio on the left channel,
         agent audio on the right). Built once from the per-turn segments after the session ends and durably cached.
         The common metadata (format, sample rate, channels, channel layout, duration) is returned for both
-        Foundry-managed and bring-your-own-storage (BYOS) recordings. For BYOS the response also includes `blob_path`,
-        a direct path/URL into the customer's own storage (no SAS token) that the customer downloads using their own
-        storage credentials. For Foundry-managed storage `blob_path` is absent and the bytes are streamed via the
+        Foundry-managed and bring-your-own-storage (BYOS) recordings. For BYOS the response also includes `blob_uri`,
+        the URI of the recording in the customer's own storage (no SAS token), which the customer downloads using their
+        own storage credentials. For Foundry-managed storage `blob_uri` is absent and the bytes are streamed via the
         `/audio/content` route instead.
       x-ms-foundry-meta:
         required_previews:

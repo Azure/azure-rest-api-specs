@@ -21,7 +21,7 @@ const PromptVoiceConversationRequiredPreviews = #{
  * default) nothing is persisted, so these routes return `404`. The merged-recording routes additionally
  * require the session to have ended and return `409` while it is still in progress.
  */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "The endpoint-scoped, read-only voice conversation projection and its nested response, item, and audio routes do not match a standard resource operation template."
 @tag("Agent Conversations")
 interface AgentEndpointConversations {
   /**
@@ -32,7 +32,7 @@ interface AgentEndpointConversations {
   @get
   @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}")
   @extension("x-ms-foundry-meta", PromptVoiceConversationRequiredPreviews)
-  getAgentConversation is FoundryDataPlanePreviewOperation<
+  getAgentConversation is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
       /** The name of the agent. */
@@ -52,7 +52,7 @@ interface AgentEndpointConversations {
   @delete
   @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}")
   @extension("x-ms-foundry-meta", PromptVoiceConversationRequiredPreviews)
-  deleteAgentConversation is FoundryDataPlanePreviewOperation<
+  deleteAgentConversation is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
       /** The name of the agent. */
@@ -74,7 +74,7 @@ interface AgentEndpointConversations {
   @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/responses")
   @list
   @extension("x-ms-foundry-meta", PromptVoiceConversationRequiredPreviews)
-  listAgentConversationResponses is FoundryDataPlanePreviewOperation<
+  listAgentConversationResponses is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
       /** The name of the agent. */
@@ -96,7 +96,7 @@ interface AgentEndpointConversations {
   @get
   @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/responses/{response_id}")
   @extension("x-ms-foundry-meta", PromptVoiceConversationRequiredPreviews)
-  getAgentConversationResponse is FoundryDataPlanePreviewOperation<
+  getAgentConversationResponse is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
       /** The name of the agent. */
@@ -122,7 +122,7 @@ interface AgentEndpointConversations {
   @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/responses/{response_id}/items")
   @list
   @extension("x-ms-foundry-meta", PromptVoiceConversationRequiredPreviews)
-  listAgentConversationResponseItems is FoundryDataPlanePreviewOperation<
+  listAgentConversationResponseItems is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
       /** The name of the agent. */
@@ -149,7 +149,7 @@ interface AgentEndpointConversations {
   @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items")
   @list
   @extension("x-ms-foundry-meta", PromptVoiceConversationRequiredPreviews)
-  listAgentConversationItems is FoundryDataPlanePreviewOperation<
+  listAgentConversationItems is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
       /** The name of the agent. */
@@ -174,7 +174,7 @@ interface AgentEndpointConversations {
   @get
   @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}")
   @extension("x-ms-foundry-meta", PromptVoiceConversationRequiredPreviews)
-  getAgentConversationItem is FoundryDataPlanePreviewOperation<
+  getAgentConversationItem is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
       /** The name of the agent. */
@@ -192,8 +192,8 @@ interface AgentEndpointConversations {
   /**
    * Returns metadata for a single conversation item's audio segment, including the common playback facts
    * (role, format/codec, sample rate, channels, offset, duration) for both Foundry-managed and
-   * bring-your-own-storage (BYOS) recordings; for BYOS the response additionally includes `blob_path`, a direct
-   * path into the customer's own storage (no SAS) that the customer downloads with their own credentials.
+   * bring-your-own-storage (BYOS) recordings; for BYOS the response additionally includes `blob_uri`, the URI
+   * of the recording in the customer's own storage (no SAS) that the customer downloads with their own credentials.
    * Requires the conversation to have persisted audio (`store = true`); returns `404` when the conversation,
    * item, or its audio was not persisted.
    */
@@ -201,7 +201,7 @@ interface AgentEndpointConversations {
   @get
   @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}/audio")
   @extension("x-ms-foundry-meta", PromptVoiceConversationRequiredPreviews)
-  getAgentConversationItemAudio is FoundryDataPlanePreviewOperation<
+  getAgentConversationItemAudio is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
       /** The name of the agent. */
@@ -219,7 +219,7 @@ interface AgentEndpointConversations {
   /**
    * Streams a single conversation item's audio as a WAV (`audio/wav`) byte stream through the service (no SAS
    * URL). This route serves Foundry-managed storage only. For bring-your-own-storage (BYOS) recordings the
-   * bytes are not proxied — the caller must download directly from customer storage using the `blob_path`
+   * bytes are not proxied — the caller must download directly from customer storage using the `blob_uri`
    * returned by the item's `/audio` metadata route — so this route returns `409 Conflict` for BYOS recordings.
    * Returns `404` when the conversation, item, or its audio was not persisted (`store = false`).
    */
@@ -227,7 +227,7 @@ interface AgentEndpointConversations {
   @get
   @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}/audio/content")
   @extension("x-ms-foundry-meta", PromptVoiceConversationRequiredPreviews)
-  getAgentConversationItemAudioContent is FoundryDataPlanePreviewOperation<
+  getAgentConversationItemAudioContent is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
       /** The name of the agent. */
@@ -246,7 +246,7 @@ interface AgentEndpointConversations {
    * Returns metadata for the whole-call merged stereo recording (user audio on the left channel, agent audio
    * on the right). The common metadata (format, sample rate, channels, channel layout, duration) is returned
    * for both Foundry-managed and bring-your-own-storage (BYOS) recordings; for BYOS the response additionally
-   * includes `blob_path`, a direct path into the customer's own storage (no SAS) that the customer downloads
+   * includes `blob_uri`, the URI of the recording in the customer's own storage (no SAS) that the customer downloads
    * with their own credentials. The recording is built once from the per-turn segments after the session ends;
    * a request against an in-progress session returns `409`. Requires the conversation to have persisted audio
    * (`store = true`); otherwise returns `404`.
@@ -255,7 +255,7 @@ interface AgentEndpointConversations {
   @get
   @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/audio")
   @extension("x-ms-foundry-meta", PromptVoiceConversationRequiredPreviews)
-  getAgentConversationAudio is FoundryDataPlanePreviewOperation<
+  getAgentConversationAudio is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
       /** The name of the agent. */
@@ -271,7 +271,7 @@ interface AgentEndpointConversations {
    * Streams the whole-call merged stereo recording as a WAV (`audio/wav`) byte stream through the service
    * (no SAS URL). This route serves Foundry-managed storage only. For bring-your-own-storage (BYOS)
    * recordings the bytes are not proxied — the caller must download directly from customer storage using the
-   * `blob_path` returned by the metadata route — so this route returns `409 Conflict` for BYOS recordings.
+   * `blob_uri` returned by the metadata route — so this route returns `409 Conflict` for BYOS recordings.
    * A request against an in-progress session also returns `409` (a distinct condition: session-not-ended
    * versus BYOS-download-required). A conversation without persisted audio (`store = false`) returns `404`.
    */
@@ -279,7 +279,7 @@ interface AgentEndpointConversations {
   @get
   @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/audio/content")
   @extension("x-ms-foundry-meta", PromptVoiceConversationRequiredPreviews)
-  getAgentConversationAudioContent is FoundryDataPlanePreviewOperation<
+  getAgentConversationAudioContent is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
       /** The name of the agent. */
@@ -292,7 +292,7 @@ interface AgentEndpointConversations {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Voice agents use a dedicated path family with create-or-version semantics and immutable version routes that do not match the standard resource operation templates."
 @doc("""
   Management of voice agents. These agents live on the dedicated `/voice_agents` path family: the text `/agents`
   surface neither accepts nor returns voice agents, and this surface accepts only voice agents. Each create or
@@ -307,7 +307,7 @@ interface VoiceAgents {
   @route("/voice_agents")
   @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
   @tag("Voice Agents")
-  createVoiceAgent is FoundryDataPlanePreviewOperation<
+  createVoiceAgent is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     CreateVoiceAgentRequest,
     VoiceAgentObject
@@ -322,7 +322,7 @@ interface VoiceAgents {
   @list
   @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
   @tag("Voice Agents")
-  listVoiceAgents is FoundryDataPlanePreviewOperation<
+  listVoiceAgents is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
       ...CommonPageQueryParameters;
@@ -338,7 +338,7 @@ interface VoiceAgents {
   @route("/voice_agents/{agent_name}")
   @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
   @tag("Voice Agents")
-  getVoiceAgent is FoundryDataPlanePreviewOperation<
+  getVoiceAgent is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
       /** The name of the voice agent to retrieve. */
@@ -356,7 +356,7 @@ interface VoiceAgents {
   @route("/voice_agents/{agent_name}")
   @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
   @tag("Voice Agents")
-  updateVoiceAgent is FoundryDataPlanePreviewOperation<
+  updateVoiceAgent is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
       /** The name of the voice agent to update. */
@@ -377,7 +377,7 @@ interface VoiceAgents {
   @route("/voice_agents/{agent_name}")
   @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
   @tag("Voice Agents")
-  deleteVoiceAgent is FoundryDataPlanePreviewOperation<
+  deleteVoiceAgent is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
       /** The name of the voice agent to delete. */
@@ -395,7 +395,7 @@ interface VoiceAgents {
   @route("/voice_agents/{agent_name}:enable")
   @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
   @tag("Voice Agents")
-  enableVoiceAgent is FoundryDataPlanePreviewOperation<
+  enableVoiceAgent is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
       @doc("The name of the voice agent to enable.")
@@ -414,7 +414,7 @@ interface VoiceAgents {
   @route("/voice_agents/{agent_name}:disable")
   @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
   @tag("Voice Agents")
-  disableVoiceAgent is FoundryDataPlanePreviewOperation<
+  disableVoiceAgent is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
       @doc("The name of the voice agent to disable.")
@@ -435,7 +435,7 @@ interface VoiceAgents {
   @route("/voice_agents:generate")
   @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
   @tag("Voice Agents")
-  generateVoiceAgent is FoundryDataPlanePreviewOperation<
+  generateVoiceAgent is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     GenerateVoiceAgentRequest,
     VoiceAgentObject
@@ -449,7 +449,7 @@ interface VoiceAgents {
   @route("/voice_agents/{agent_name}/versions")
   @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
   @tag("Voice Agent Versions")
-  createVoiceAgentVersion is FoundryDataPlanePreviewOperation<
+  createVoiceAgentVersion is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
       /** The name of the voice agent. */
@@ -471,7 +471,7 @@ interface VoiceAgents {
   @list
   @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
   @tag("Voice Agent Versions")
-  listVoiceAgentVersions is FoundryDataPlanePreviewOperation<
+  listVoiceAgentVersions is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
       /** The name of the voice agent to retrieve versions for. */
@@ -502,7 +502,7 @@ interface VoiceAgents {
   @route("/voice_agents/{agent_name}/versions/{agent_version}")
   @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
   @tag("Voice Agent Versions")
-  getVoiceAgentVersion is FoundryDataPlanePreviewOperation<
+  getVoiceAgentVersion is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
       /** The name of the voice agent to retrieve. */
@@ -522,7 +522,7 @@ interface VoiceAgents {
   @route("/voice_agents/{agent_name}/versions/{agent_version}")
   @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
   @tag("Voice Agent Versions")
-  deleteVoiceAgentVersion is FoundryDataPlanePreviewOperation<
+  deleteVoiceAgentVersion is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
       /** The name of the voice agent to delete. */
