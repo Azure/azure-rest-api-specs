@@ -240,4 +240,7 @@ op getEkmPrivateEndpoint is KeyVaultOperation<
 @summary("Lists the EKM proxy private endpoints.")
 @route("/ekm/privateendpoint")
 @get
-op listEkmPrivateEndpoints is KeyVaultOperation<{}, EkmPrivateEndpointListResult>;
+op listEkmPrivateEndpoints is KeyVaultOperation<
+  {},
+  EkmPrivateEndpointListResult
+>;
