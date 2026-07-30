@@ -104,6 +104,8 @@ using Microsoft.KubernetesConfiguration;
 );
 @@clientName(FluxConfigurationPatchProperties.suspend, "IsSuspended", "csharp");
 @@clientName(BucketPatchDefinition.insecure, "IsInsecure", "csharp");
+@@clientName(OCIRepositoryDefinition.insecure, "IsInsecure", "csharp");
+@@clientName(OCIRepositoryPatchDefinition.insecure, "IsInsecure", "csharp");
 @@clientName(KustomizationPatchDefinition.force, "IsForce", "csharp");
 @@clientName(KustomizationPatchDefinition.prune, "IsPrune", "csharp");
 @@clientName(KustomizationPatchDefinition.wait, "IsWait", "csharp");
@@ -140,18 +142,18 @@ using Microsoft.KubernetesConfiguration;
 );
 @@clientName(PostBuildDefinition, "PostBuild", "csharp");
 @@clientName(PostBuildPatchDefinition, "PostBuildPatch", "csharp");
-@@clientName(ServicePrincipalDefinition, "ServicePrincipal", "csharp");
+@@clientName(ServicePrincipalDefinition, "FluxServicePrincipal", "csharp");
 @@clientName(
   ServicePrincipalPatchDefinition,
-  "ServicePrincipalPatch",
+  "FluxServicePrincipalPatch",
   "csharp"
 );
 @@clientName(SubstituteFromDefinition, "SubstituteFrom", "csharp");
 @@clientName(SubstituteFromPatchDefinition, "SubstituteFromPatch", "csharp");
 @@clientName(TlsConfigDefinition, "TlsConfig", "csharp");
 @@clientName(TlsConfigPatchDefinition, "TlsConfigPatch", "csharp");
-@@clientName(VerifyDefinition, "Verify", "csharp");
-@@clientName(VerifyPatchDefinition, "VerifyPatch", "csharp");
+@@clientName(VerifyDefinition, "OciRepositoryVerify", "csharp");
+@@clientName(VerifyPatchDefinition, "OciRepositoryVerifyPatch", "csharp");
 @@clientName(
   HelmReleasePropertiesDefinition,
   "HelmReleaseProperties",
