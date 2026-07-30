@@ -468,6 +468,7 @@ model SignedIdentifier {
 }
 
 /** The result of the Find Blobs by Tags API. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @Xml.name("EnumerationResults")
 model FilteredBlobResponse {
   /** The service endpoint. */
@@ -2858,4 +2859,11 @@ alias ListBlobsStartFrom = {
   @added(Versions.v2026_02_06)
   @query
   startFrom?: string;
+};
+
+alias ListBlobsEndBefore = {
+  /** Filters the results to return only names that are ordered before this value. Currently only applies to Apache Arrow scenario. */
+  @added(Versions.v2026_12_06)
+  @query
+  endBefore?: string;
 };

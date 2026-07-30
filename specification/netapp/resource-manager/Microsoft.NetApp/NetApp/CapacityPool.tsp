@@ -18,8 +18,10 @@ namespace Microsoft.NetApp;
  * Capacity pool resource
  */
 @parentResource(NetAppAccount)
-model CapacityPool
-  is Azure.ResourceManager.TrackedResource<PoolProperties, false> {
+model CapacityPool is Azure.ResourceManager.TrackedResource<
+  PoolProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = CapacityPool,
     KeyName = "poolName",

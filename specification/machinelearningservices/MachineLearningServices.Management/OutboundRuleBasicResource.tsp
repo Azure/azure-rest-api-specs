@@ -15,8 +15,10 @@ using TypeSpec.Versioning;
 namespace Microsoft.MachineLearningServices;
 
 @parentResource(Workspace)
-model OutboundRuleBasicResource
-  is Azure.ResourceManager.ProxyResource<OutboundRule, false> {
+model OutboundRuleBasicResource is Azure.ResourceManager.ProxyResource<
+  OutboundRule,
+  false
+> {
   ...ResourceNameParameter<
     Resource = OutboundRuleBasicResource,
     KeyName = "ruleName",

@@ -153,11 +153,10 @@ interface ProtectionContainers {
   switchProtection is ArmResourceActionAsyncBase<
     ProtectionContainer,
     SwitchProtectionInput,
-
-      | ArmResponse<ProtectionContainer>
-      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ProtectionContainer> &
-          ArmAsyncOperationHeader<FinalResult = ProtectionContainer> &
-          Azure.Core.Foundations.RetryAfterHeader>,
+    | ArmResponse<ProtectionContainer>
+    | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ProtectionContainer> &
+        ArmAsyncOperationHeader<FinalResult = ProtectionContainer> &
+        Azure.Core.Foundations.RetryAfterHeader>,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<ProtectionContainer>,
     Error = never
   >;
