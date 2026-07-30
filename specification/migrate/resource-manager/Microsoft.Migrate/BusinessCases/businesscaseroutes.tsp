@@ -21,6 +21,7 @@ interface BusinessCaseOperations {
   delete is ArmResourceDeleteSync<BusinessCase>;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "POST Compare Summary body is empty."
+  @doc("A long-running resource action.")
   @summary("Get Compare summary report for Business case.")
   compareSummary is ArmResourceActionAsync<BusinessCase, {}, CompareSummary>;
 

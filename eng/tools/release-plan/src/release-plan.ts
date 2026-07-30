@@ -11,12 +11,11 @@ import type {
 } from "./types.ts";
 
 /**
- * Create a runner that invokes azsdk from a specific executable path.
- * @param azsdkPath Optional full path to the azsdk executable
+ * Create a runner that invokes azsdk using the AZSDK environment variable when present.
  * @returns Runner function that executes azsdk commands
  */
-export function createAzdskRunner(azsdkPath?: string): AzsdkRunner {
-  return (args: string[]) => runAzdskCommand(args, azsdkPath);
+export function createAzdskRunner(): AzsdkRunner {
+  return (args: string[]) => runAzdskCommand(args);
 }
 
 /**
@@ -201,15 +200,14 @@ function runCreateReleasePlan(
 /**
  * Run azsdk command synchronously.
  * @param args Command arguments to pass to azsdk
- * @param azsdkPath Optional full path to the azsdk executable
  * @returns Command execution result with exit code and output
  */
-export function runAzdskCommand(args: string[], azsdkPath?: string): CommandResult {
+export function runAzdskCommand(args: string[]): CommandResult {
   const envPath = process.env.PATH || "";
   const home = process.env.HOME || process.env.USERPROFILE || "";
   const homeBin = home ? join(home, "bin") : "";
   const mergedPath = homeBin ? `${homeBin}${path.delimiter}${envPath}` : envPath;
-  const executable = azsdkPath?.trim() || "azsdk";
+  const executable = process.env.AZSDK?.trim() || "azsdk";
 
   const result = spawnSync(executable, args, {
     encoding: "utf8",
@@ -224,6 +222,37 @@ export function runAzdskCommand(args: string[], azsdkPath?: string): CommandResu
     stdout: result.stdout || "",
     stderr: result.stderr || "",
   };
+}
+
+/**
+ * Retrieves release plan details by release plan id.
+ * @param releasePlanId Release plan id
+ * @param runner Optional runner used to execute the azsdk command
+ * @returns Parsed release plan object
+ * @throws Error if command fails or output cannot be parsed
+ */
+export function getReleasePlanById(releasePlanId: string, runner?: AzsdkRunner): ReleasePlanData {
+  const trimmedId = releasePlanId.trim();
+  if (!trimmedId) {
+    throw new Error("releasePlanId is required.");
+  }
+
+  const run: AzsdkRunner = runner ?? ((args: string[]) => runAzdskCommand(args));
+  const result = run(["release-plan", "get", "--release-plan-id", trimmedId, "--output", "json"]);
+
+  if (result.exitCode !== 0) {
+    throw new Error(`Release plan get failed. ${result.stderr || result.stdout}`);
+  }
+
+  try {
+    const parsed: unknown = JSON.parse(result.stdout);
+    if (parsed === null || typeof parsed !== "object" || Array.isArray(parsed)) {
+      throw new Error(`Expected JSON object from azsdk output: ${result.stdout}`);
+    }
+    return parsed as ReleasePlanData;
+  } catch {
+    throw new Error(`Failed to parse JSON from azsdk output: ${result.stdout}`);
+  }
 }
 
 /**
@@ -267,8 +296,8 @@ export function getApiReleaseType(isPreview: boolean, repoName: string): ApiRele
 /**
  * Determine SDK release type based on preview status.
  * @param isPreview Whether the API version is a preview version
- * @returns SDK release type (preview or stable)
+ * @returns SDK release type (beta or stable)
  */
-export function getSdkReleaseType(isPreview: boolean): "preview" | "stable" {
-  return isPreview ? "preview" : "stable";
+export function getSdkReleaseType(isPreview: boolean): "beta" | "stable" {
+  return isPreview ? "beta" : "stable";
 }
