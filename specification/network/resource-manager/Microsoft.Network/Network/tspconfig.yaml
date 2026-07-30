@@ -70,7 +70,10 @@ options:
   "@azure-typespec/http-client-csharp-provisioning":
     namespace: "Azure.Provisioning.Network"
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    api-version: "2025-05-01"
+    api-version:
+      Microsoft:
+        Network: "2025-05-01"
+        Compute: "2018-10-01"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
