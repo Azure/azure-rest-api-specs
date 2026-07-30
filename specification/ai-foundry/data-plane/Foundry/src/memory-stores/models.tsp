@@ -1,5 +1,5 @@
 import "../common/service.tsp";
-import "../openai-responses/models.tsp";
+import "../openai/responses/models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -7,13 +7,15 @@ using TypeSpec.OpenAPI;
 namespace Azure.AI.Projects;
 
 const MemoryStoreRequiredPreviews = #{
-  conditional_previews: #[FoundryFeaturesOptInKeys.memory_stores_v1_preview],
+  required_previews: #[FoundryFeaturesOptInKeys.memory_stores_v1_preview],
 };
 
+@extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
 union MemoryStoreObjectType {
   memoryStore: "memory_store",
   memoryStoreDeleted: "memory_store.deleted",
   memoryStoreScopeDeleted: "memory_store.scope.deleted",
+  memoryDeleted: "memory_store.item.deleted",
 }
 
 @doc("A memory store that can store and retrieve user memories.")
@@ -103,8 +105,15 @@ model MemoryStoreDefaultOptions {
   @doc("Specific categories or types of user profile information to extract and store.")
   user_profile_details?: string;
 
-  @doc("Whether to enable chat summary extraction and storage. Default is true.")
+  @doc("Whether to enable chat summary extraction and storage. Defaults to `true`.")
   chat_summary_enabled: boolean = true;
+
+  @doc("Whether to enable procedural memory extraction and storage. The service defaults to `true` if a value is not specified by the caller.")
+  procedural_memory_enabled?: boolean = true;
+
+  @doc("The default time-to-live for memories in seconds. A value of `0` indicates that memories do not expire. Defaults to `0`.")
+  @encode(DurationKnownEncoding.seconds, int32)
+  default_ttl_seconds?: duration = duration.fromISO("P0D");
 }
 
 @doc("Usage statistics of a memory store operation.")
@@ -119,6 +128,7 @@ model MemoryStoreOperationUsage {
 @doc("Status of a memory store update operation.")
 @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
 union MemoryStoreUpdateStatus {
+  string,
   queued: "queued",
   in_progress: "in_progress",
 
@@ -228,6 +238,9 @@ union MemoryItemKind {
 
   @doc("Summary of chat conversations.")
   chat_summary: "chat_summary",
+
+  @doc("Routine procedures extracted from conversations.")
+  procedural: "procedural",
 }
 
 @doc("A single memory item stored in the memory store, containing content and metadata.")
@@ -264,6 +277,13 @@ model ChatSummaryMemoryItem extends MemoryItem {
   kind: MemoryItemKind.chat_summary;
 }
 
+@doc("A memory item containing a procedure extracted from conversations.")
+@extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
+model ProceduralMemoryItem extends MemoryItem {
+  @doc("The kind of the memory item.")
+  kind: MemoryItemKind.procedural;
+}
+
 @doc("Response for deleting memories from a scope.")
 @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
 model MemoryStoreDeleteScopeResponse {
@@ -277,6 +297,19 @@ model MemoryStoreDeleteScopeResponse {
   scope: string;
 
   @doc("Whether the deletion operation was successful.")
+  deleted: boolean;
+}
+
+@doc("Response for deleting a memory item from a memory store.")
+@extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
+model DeleteMemoryResponse {
+  @doc("The object type. Always 'memory_store.item.deleted'.")
+  object: MemoryStoreObjectType.memoryDeleted;
+
+  @doc("The unique ID of the deleted memory item.")
+  memory_id: string;
+
+  @doc("Whether the memory item was successfully deleted.")
   deleted: boolean;
 }
 
@@ -384,4 +417,67 @@ alias MemoryStoreDeleteScopeRequest = {
 
   @doc("The namespace that logically groups and isolates memories to delete, such as a user ID.")
   scope: string;
+};
+
+alias CreateMemoryRequest = {
+  @doc("The name of the memory store.")
+  @path
+  name: string;
+
+  @doc("The namespace that logically groups and isolates memories, such as a user ID.")
+  scope: string;
+
+  @doc("The content of the memory.")
+  content: string;
+
+  @doc("The kind of the memory item.")
+  kind: MemoryItemKind;
+};
+
+alias UpdateMemoryRequest = {
+  @doc("The name of the memory store.")
+  @path
+  name: string;
+
+  @doc("The ID of the memory item to update.")
+  @path
+  memory_id: string;
+
+  @doc("The updated content of the memory.")
+  content: string;
+};
+
+alias GetMemoryRequest = {
+  @doc("The name of the memory store.")
+  @path
+  name: string;
+
+  @doc("The ID of the memory item to retrieve.")
+  @path
+  memory_id: string;
+};
+
+alias ListMemoriesRequest = {
+  @doc("The name of the memory store.")
+  @path
+  name: string;
+
+  @doc("The kind of the memory item.")
+  @query
+  kind?: MemoryItemKind;
+
+  @doc("The namespace that logically groups and isolates memories, such as a user ID.")
+  scope: string;
+
+  ...CommonPageQueryParameters;
+};
+
+alias DeleteMemoryRequest = {
+  @doc("The name of the memory store.")
+  @path
+  name: string;
+
+  @doc("The ID of the memory item to delete.")
+  @path
+  memory_id: string;
 };

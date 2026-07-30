@@ -208,15 +208,19 @@ op ArmListByBillingProfile<
  * Parameter model for listing a resource at the billing account scope.
  * @template Resource The type of the resource.
  */
-model BillingAccountScope<Resource extends Azure.ResourceManager.Foundations.Resource>
-  is ResourceParentParameters<Resource, BillingAccountBaseParameters>;
+model BillingAccountScope<Resource extends Azure.ResourceManager.Foundations.Resource> is ResourceParentParameters<
+  Resource,
+  BillingAccountBaseParameters
+>;
 
 /**
  * Parameter model for listing a resource at the billing profile scope.
  * @template Resource The type of the resource.
  */
-model BillingProfileScope<Resource extends Azure.ResourceManager.Foundations.Resource>
-  is ResourceParentParameters<Resource, BillingProfileBaseParameters>;
+model BillingProfileScope<Resource extends Azure.ResourceManager.Foundations.Resource> is ResourceParentParameters<
+  Resource,
+  BillingProfileBaseParameters
+>;
 
 /**
  * The static parameters for a billing account based resource.

@@ -15,11 +15,10 @@ namespace Microsoft.ApiManagement;
  * A single API Management gateway hostname binding resource in List or Get response.
  */
 @parentResource(ApiManagementGatewayResource)
-model GatewayHostnameBindingResource
-  is Azure.ResourceManager.ProxyResource<
-    GatewayHostnameBindingBaseProperties,
-    false
-  > {
+model GatewayHostnameBindingResource is Azure.ResourceManager.ProxyResource<
+  GatewayHostnameBindingBaseProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = GatewayHostnameBindingResource,
     KeyName = "hostnameBindingName",

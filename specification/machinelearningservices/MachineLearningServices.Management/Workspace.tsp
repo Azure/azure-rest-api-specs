@@ -15,8 +15,10 @@ namespace Microsoft.MachineLearningServices;
 /**
  * An object that represents a machine learning workspace.
  */
-model Workspace
-  is Azure.ResourceManager.ProxyResource<WorkspaceProperties, false> {
+model Workspace is Azure.ResourceManager.ProxyResource<
+  WorkspaceProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = Workspace,
     KeyName = "workspaceName",

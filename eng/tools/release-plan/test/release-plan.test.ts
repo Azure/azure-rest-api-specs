@@ -14,7 +14,7 @@ describe("release type helpers", () => {
   });
 
   it("sets SDK release type", () => {
-    expect(getSdkReleaseType(true)).toBe("preview");
+    expect(getSdkReleaseType(true)).toBe("beta");
     expect(getSdkReleaseType(false)).toBe("stable");
   });
 });
@@ -42,7 +42,7 @@ describe("ensureReleasePlan", () => {
     prUrl: "https://github.com/Azure/azure-rest-api-specs/pull/123",
     tspProjectPath: "specification/foo/Contoso.Service",
     apiReleaseType: "Public Preview" as const,
-    sdkReleaseType: "preview" as const,
+    sdkReleaseType: "beta" as const,
     targetMonth: "July 2026",
     apiVersion: "2026-06-01-preview",
     testReleasePlan: false,
