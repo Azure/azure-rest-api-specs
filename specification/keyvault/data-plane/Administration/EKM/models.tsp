@@ -194,30 +194,6 @@ union EkmPrivateEndpointOperationType {
 }
 
 /**
- * The status of a long-running EKM proxy private endpoint operation.
- */
-@added(KeyVault.Versions.v2026_07_01_preview)
-@lroStatus
-union EkmPrivateEndpointOperationStatus {
-  string,
-
-  /**
-   * The operation is in progress.
-   */
-  InProgress: "InProgress",
-
-  /**
-   * The operation successfully completed.
-   */
-  Succeeded: "Succeeded",
-
-  /**
-   * The operation failed.
-   */
-  Failed: "Failed",
-}
-
-/**
  * Parameters to create an EKM proxy private endpoint.
  */
 @added(KeyVault.Versions.v2026_07_01_preview)
@@ -346,7 +322,7 @@ model EkmPrivateEndpointOperation {
   /**
    * The status of the operation.
    */
-  status?: EkmPrivateEndpointOperationStatus;
+  status?: Azure.Core.Foundations.OperationState;
 
   /**
    * The status details of the operation.
@@ -356,16 +332,14 @@ model EkmPrivateEndpointOperation {
   /**
    * The start time of the operation in UTC.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Intentionally nullable attribute"
   @encode("unixTimestamp", int32)
-  startTime?: utcDateTime | null;
+  startTime?: utcDateTime;
 
   /**
    * The end time of the operation in UTC.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Intentionally nullable attribute"
   @encode("unixTimestamp", int32)
-  endTime?: utcDateTime | null;
+  endTime?: utcDateTime;
 
   /**
    * Error encountered, if any, during the operation.
