@@ -991,6 +991,7 @@ model ProtectionParameters {
 @added(Versions.v2026_01_01_preview)
 @doc("ISCSI connection endpoint details")
 model IscsiEndpoint {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("IP address of the endpoint")
   ip: string;
 
@@ -1009,6 +1010,7 @@ model IscsiConnectionParameters {
   endpoints: IscsiEndpoint[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2026_01_01_preview)
 @doc("Connection parameters response")
 model ConnectionParametersResponse {

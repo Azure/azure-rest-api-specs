@@ -3433,6 +3433,7 @@ model DeploymentSettingHostNetwork {
   /**
    * Optional parameter required only for 3 Nodes Switchless deployments. This allows users to specify IPs and Mask for Storage NICs when Network ATC is not assigning the IPs for storage automatically.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   enableStorageAutoIp?: boolean = false;
 }
 
@@ -5975,6 +5976,7 @@ model HciEdgeDeviceHostNetwork {
   /**
    * Optional parameter required only for 3 Nodes Switchless deployments. This allows users to specify IPs and Mask for Storage NICs when Network ATC is not assigning the IPs for storage automatically.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   enableStorageAutoIp?: boolean = false;
 }
@@ -6623,6 +6625,7 @@ model HciRepairServerJobProperties extends ClusterJobProperties {
 /**
  * Request for Add/Remove Devices to the pool.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2026_05_01_preview)
 model ListOfDevicesRequest {
   /**
@@ -6922,6 +6925,7 @@ model ProvisioningDetails {
   /**
    * Operating system profile.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osProfile: OsProvisionProfile;
 
   /**
@@ -7242,6 +7246,7 @@ model EdgeMachineReportedProperties {
   /**
    * OS Properties for edge machine.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   osProfile?: OsProfile;
 
@@ -7383,6 +7388,7 @@ model EdgeMachineNicDetail {
   /**
    * Subnet Mask of NIC
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   ip4Address?: string;
 
@@ -7473,18 +7479,21 @@ model OsProfile {
   /**
    * OS type (“windows", “linux”)
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   osType?: string;
 
   /**
    * OS SKU (e.g., “ Microsoft Azure Linux ROE“, “Azure Stack HCI", "Microsoft Azure Linux 3.0")
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   osSku?: string;
 
   /**
    * OS Version
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   osVersion?: string;
 
@@ -7699,6 +7708,7 @@ model EdgeMachineRemoteSupportJobProperties extends EdgeMachineJobProperties {
 /**
  * Represents the properties of an Azure Linux restricted operating environment Provision Os job.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @added(Versions.v2026_05_01_preview)
 model ProvisionOsJobProperties extends EdgeMachineJobProperties {
   /**
@@ -7731,12 +7741,14 @@ model DownloadRequest {
   /**
    * Operating system profile.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osProfile: DownloadOsProfile;
 }
 
 /**
  * Represents the properties of Download Os job.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @added(Versions.v2026_05_01_preview)
 model DownloadOsJobProperties extends EdgeMachineJobProperties {
   /**
@@ -7758,6 +7770,7 @@ model DownloadOsJobProperties extends EdgeMachineJobProperties {
 /**
  * Reported Properties for Provision Os job
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @added(Versions.v2026_05_01_preview)
 model ProvisionOsReportedProperties {
   ...JobReportedProperties;
@@ -7777,6 +7790,7 @@ model ProvisioningRequest {
   /**
    * Operating system profile.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osProfile: OsProvisionProfile;
 
   /**
@@ -7951,26 +7965,31 @@ model EdgeMachineJobReportedProperties {
 /**
  * Operating system profile.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @added(Versions.v2026_05_01_preview)
 model OsProvisionProfile {
   /**
    * Name of the operating system.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osName?: string;
 
   /**
    * Type of the operating system.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osType?: string;
 
   /**
    * Version of the operating system.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osVersion?: string;
 
   /**
    * Location of the operating system image.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osImageLocation?: string;
 
   /**
@@ -7998,26 +8017,31 @@ model OsProvisionProfile {
 /**
  * Operating system profile.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @added(Versions.v2026_05_01_preview)
 model DownloadOsProfile {
   /**
    * Name of the operating system.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osName?: string;
 
   /**
    * Type of the operating system.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osType?: string;
 
   /**
    * Version of the operating system.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osVersion?: string;
 
   /**
    * Location of the operating system image.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osImageLocation?: string;
 
   /**
@@ -8212,11 +8236,13 @@ model NetworkAdapter {
   /**
    * Type of IP assignment.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipAssignmentType: IpAssignmentType;
 
   /**
    * IP address.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipAddress?: string;
 
   /**
@@ -8232,6 +8258,7 @@ model NetworkAdapter {
   /**
    * IP address range.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipAddressRange?: IpAddressRange;
 
   /**
@@ -8281,11 +8308,13 @@ model IpAddressRange {
   /**
    * Start IP address.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   startIp: string;
 
   /**
    * End IP address.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   endIp: string;
 }
 
@@ -8402,6 +8431,7 @@ model ClusterJobListResult is Azure.Core.Page<ClusterJob>;
  * Represents properties of a os image resource.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "OsImage is a read-only catalog proxy resource exposing available OS images; it has no lifecycle and therefore no provisioningState."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @added(Versions.v2026_05_01_preview)
 model OsImageProperties {
   /**
@@ -9258,6 +9288,7 @@ model NetworkAdapterConfiguration {
   adapterName?: string;
 
   /** IP address. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ip4Address?: string;
 
   /** Subnet mask. */
@@ -9270,6 +9301,7 @@ model NetworkAdapterConfiguration {
   dnsServers?: string[];
 
   /** IP configuration type (Dhcp or Static). */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipInterfaceType?: IpInterfaceType;
 
   /** VLAN identifier for network segmentation. */
@@ -9291,6 +9323,7 @@ model NetworkAdapterReportedProperties {
   adapterName?: string;
 
   /** IP address. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ip4Address?: string;
 
   /** Subnet mask. */
@@ -9351,6 +9384,7 @@ model NetworkAdapterReportedProperties {
   nicStatus?: string;
 
   /** IP configuration type. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   ipInterfaceType?: IpInterfaceType;
 
