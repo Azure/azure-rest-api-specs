@@ -294,6 +294,97 @@ model EvaluatorGenerationTokenUsage {
   total_tokens: int64;
 }
 
+// ============================================================================
+// Rubric Generation Input-Quality Warnings
+// Advisory read-only warnings surfaced on terminal EvaluatorGenerationJob.
+// ============================================================================
+
+@doc("Warning source attribution for a rubric-generation input-quality warning. Per-source values (`prompt`, `agent`, `dataset`) match the source category visible to the generation runtime. `aggregate` is a synthetic value used only for warnings computed across successfully resolved sources. `traces` is not exposed because trace sources resolve into dataset content upstream.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+union RubricGenerationInputQualityWarningSource {
+  string,
+
+  @doc("The warning applies to an inline prompt source.")
+  prompt: "prompt",
+
+  @doc("The warning applies to an agent source.")
+  agent: "agent",
+
+  @doc("The warning applies to a dataset source (including trace-derived datasets).")
+  dataset: "dataset",
+
+  @doc("The warning is computed across all successfully resolved sources.")
+  aggregate: "aggregate",
+}
+
+@doc("Advisory severity for a rubric-generation input-quality warning. Initial value set: `warning`.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+union RubricGenerationInputQualityWarningSeverity {
+  string,
+
+  @doc("Non-fatal advisory; generation succeeded but output quality may be lower.")
+  warning: "warning",
+}
+
+@doc("Stable searchable machine-readable warning code for a rubric-generation input-quality warning. Values are `snake_case`; clients must tolerate additional service-defined identifiers.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+union RubricGenerationInputQualityWarningCode {
+  string,
+
+  @doc("A prompt source was empty or whitespace-only.")
+  empty_prompt: "empty_prompt",
+
+  @doc("A prompt source was non-empty but below the recommended minimum signal threshold.")
+  short_prompt: "short_prompt",
+
+  @doc("An agent source resolved successfully but had no usable instructions.")
+  empty_agent_instructions: "empty_agent_instructions",
+
+  @doc("An agent source had instructions below the recommended minimum signal threshold.")
+  short_agent_instructions: "short_agent_instructions",
+
+  @doc("A dataset source resolved but contained no usable content for rubric generation.")
+  empty_dataset_content: "empty_dataset_content",
+
+  @doc("Dataset content was below the recommended minimum signal threshold.")
+  short_dataset_content: "short_dataset_content",
+
+  @doc("A row-structured dataset had very few rows, so the generated rubric may not generalize.")
+  low_trace_count: "low_trace_count",
+
+  @doc("Combined resolved input across successfully resolved sources was below the recommended minimum signal threshold.")
+  insufficient_total_input: "insufficient_total_input",
+}
+
+@doc("A non-fatal advisory produced during rubric evaluator generation when resolved inputs are technically valid but likely too weak to produce a high-quality rubric. Read-only; service-generated. Persisted with the terminal EvaluatorGenerationJob.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+model RubricGenerationInputQualityWarning {
+  @doc("Stable searchable machine-readable warning code.")
+  code: RubricGenerationInputQualityWarningCode;
+
+  @doc("Advisory severity. Initial values: `warning`.")
+  severity: RubricGenerationInputQualityWarningSeverity;
+
+  @doc("Human-readable message suitable for direct SDK/CLI/UI display. Must not include raw prompt, instruction, dataset, or trace text.")
+  message: string;
+
+  @doc("Which source category the warning applies to. `aggregate` is used only for cross-source warnings.")
+  source: RubricGenerationInputQualityWarningSource;
+
+  @doc("Zero-based index into `EvaluatorGenerationJob.inputs.sources` when the warning applies to a specific source. Omitted for aggregate warnings and for warnings not tied to one source.")
+  @minValue(0)
+  source_index?: int32;
+}
+
+@doc("Category of a warning surfaced on a generated evaluator version. Extensible so new warning categories (e.g., safety, output quality) can be introduced without a breaking change.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+union GenerationWarningType {
+  string,
+
+  @doc("The paired EvaluatorGenerationJob emitted one or more input-quality advisories. Follow `generation_job_id` to fetch the detailed warning payloads.")
+  input_quality: "input_quality",
+}
+
 @doc("Evaluator Generation Job resource — a long-running job that generates rubric-based evaluator definitions from source materials. On success, the result is the persisted EvaluatorVersion.")
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model EvaluatorGenerationJob is JobLike<
@@ -311,6 +402,10 @@ model EvaluatorGenerationJob is JobLike<
   @doc("Token consumption summary. Populated when the job reaches a terminal state.")
   @visibility(Lifecycle.Read)
   usage?: EvaluatorGenerationTokenUsage;
+
+  @doc("Non-fatal input-quality advisories produced by the generation pipeline. Read-only; service-generated; populated only on terminal jobs when advisories fired. Omitted when generation was clean. Cleared when a subsequent `PATCH` to the paired `EvaluatorVersion.definition` invalidates the advisories.")
+  @visibility(Lifecycle.Read)
+  input_quality_warnings?: RubricGenerationInputQualityWarning[];
 }
 
 @doc("Evaluator Definition")
@@ -340,6 +435,14 @@ model EvaluatorVersion {
   @doc("Provenance artifacts from the generation pipeline. Read-only; present only on evaluator versions created via an EvaluatorGenerationJob. Each artifact resolves to a versioned Foundry Dataset.")
   @visibility(Lifecycle.Read)
   generation_artifacts?: EvaluatorGenerationArtifacts;
+
+  @doc("Read-only provenance link back to the EvaluatorGenerationJob that produced this version. Present only on evaluator versions created via the generation pipeline; absent for manually-created versions and unaffected by subsequent `PATCH` calls.")
+  @visibility(Lifecycle.Read)
+  generation_job_id?: string;
+
+  @doc("Categories of warnings surfaced on this generated evaluator version. Present only on versions created via an EvaluatorGenerationJob when the paired job produced non-empty warnings. Absent (treat as no warnings) when the version is not from generation, when the paired job was clean, or when a subsequent `PATCH` to `definition` cleared the paired job's advisories. Follow `generation_job_id` to fetch the detailed warning payloads.")
+  @visibility(Lifecycle.Read)
+  warnings?: GenerationWarningType[];
 
   @visibility(Lifecycle.Read)
   @doc("Creator of the evaluator")
