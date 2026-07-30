@@ -79705,6 +79705,37 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - preview_tool
+    ShellToolboxTool:
+      type: object
+      required:
+        - type
+        - name
+        - description
+      properties:
+        type:
+          type: string
+          enum:
+            - shell
+          description: The type of the tool. Always `shell`.
+        name:
+          type: string
+          minLength: 1
+          description: The unique name of this shell tool within the toolbox version.
+        description:
+          type: string
+          description: The description of this shell tool for use by the model.
+        allowed_callers:
+          anyOf:
+            - type: array
+              items:
+                $ref: '#/components/schemas/OpenAI.CallableToolAllowedCaller'
+            - type: 'null'
+        environment:
+          $ref: '#/components/schemas/ToolboxShellEnvironment'
+          description: The environment in which shell commands are executed.
+      allOf:
+        - $ref: '#/components/schemas/ToolboxTool'
+      description: A shell tool stored in a toolbox. This model is additive to toolbox configuration and does not modify the OpenAI tool contract or existing toolbox tool definitions.
     SimpleQnADataGenerationJobOptions:
       type: object
       required:
@@ -80391,6 +80422,68 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - preview_tool
+    ToolboxShellContainerAutoEnvironment:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - container_auto
+          description: The type of the shell execution environment. Always `container_auto`.
+        file_ids:
+          type: array
+          items:
+            type: string
+          maxItems: 50
+          description: An optional list of uploaded files to make available to your code.
+        memory_limit:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ContainerMemoryLimit'
+            - type: 'null'
+        skills:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.ContainerSkill'
+          maxItems: 200
+          description: An optional list of skills referenced by id or inline data.
+        network_policy:
+          $ref: '#/components/schemas/OpenAI.ContainerNetworkPolicyParam'
+      allOf:
+        - $ref: '#/components/schemas/ToolboxShellEnvironment'
+      description: An automatically provisioned container environment for a shell tool stored in a toolbox.
+    ToolboxShellContainerReferenceEnvironment:
+      type: object
+      required:
+        - type
+        - container_id
+      properties:
+        type:
+          type: string
+          enum:
+            - container_reference
+          description: The type of the shell execution environment. Always `container_reference`.
+        container_id:
+          type: string
+          description: The ID of the referenced container.
+      allOf:
+        - $ref: '#/components/schemas/ToolboxShellEnvironment'
+      description: An existing container environment for a shell tool stored in a toolbox.
+    ToolboxShellEnvironment:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          description: The type of the shell execution environment.
+      discriminator:
+        propertyName: type
+        mapping:
+          container_auto: '#/components/schemas/ToolboxShellContainerAutoEnvironment'
+          container_reference: '#/components/schemas/ToolboxShellContainerReferenceEnvironment'
+      description: An execution environment for a shell tool stored in a toolbox. This environment model is scoped to toolbox configuration and does not modify the OpenAI shell environment contract.
     ToolboxSkill:
       type: object
       required:
@@ -80452,6 +80545,7 @@ components:
           code_interpreter: '#/components/schemas/CodeInterpreterToolboxTool'
           file_search: '#/components/schemas/FileSearchToolboxTool'
           web_search: '#/components/schemas/WebSearchToolboxTool'
+          shell: '#/components/schemas/ShellToolboxTool'
           mcp: '#/components/schemas/MCPToolboxTool'
           azure_ai_search: '#/components/schemas/AzureAISearchToolboxTool'
           openapi: '#/components/schemas/OpenApiToolboxTool'
@@ -80470,6 +80564,7 @@ components:
         - code_interpreter
         - file_search
         - web_search
+        - shell
         - mcp
         - azure_ai_search
         - openapi

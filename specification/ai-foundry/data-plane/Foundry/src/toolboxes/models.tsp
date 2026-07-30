@@ -72,6 +72,7 @@ alias ToolFields<Source> = {
 alias ToolboxCodeInterpreterToolType = "code_interpreter";
 alias ToolboxFileSearchToolType = "file_search";
 alias ToolboxWebSearchToolType = "web_search";
+alias ToolboxShellToolType = "shell";
 alias ToolboxMCPToolType = "mcp";
 alias ToolboxAzureAISearchToolType = "azure_ai_search";
 alias ToolboxOpenApiToolType = "openapi";
@@ -91,6 +92,7 @@ union ToolboxToolType {
   code_interpreter: ToolboxCodeInterpreterToolType,
   file_search: ToolboxFileSearchToolType,
   web_search: ToolboxWebSearchToolType,
+  shell: ToolboxShellToolType,
   mcp: ToolboxMCPToolType,
   azure_ai_search: ToolboxAzureAISearchToolType,
   openapi: ToolboxOpenApiToolType,
@@ -142,6 +144,73 @@ model FileSearchToolboxTool extends ToolboxTool {
 model WebSearchToolboxTool extends ToolboxTool {
   type: ToolboxWebSearchToolType;
   ...ToolFields<OpenAI.WebSearchTool>;
+}
+
+/**
+ * An execution environment for a shell tool stored in a toolbox. This environment model is scoped to toolbox configuration and does not modify the OpenAI shell environment contract.
+ */
+@discriminator("type")
+model ToolboxShellEnvironment {
+  /**
+   * The type of the shell execution environment.
+   */
+  type: string;
+}
+
+/**
+ * An automatically provisioned container environment for a shell tool stored in a toolbox.
+ */
+model ToolboxShellContainerAutoEnvironment extends ToolboxShellEnvironment {
+  /**
+   * The type of the shell execution environment. Always `container_auto`.
+   */
+  type: "container_auto";
+
+  ...OmitProperties<OpenAI.ContainerAutoParam, "type">;
+}
+
+/**
+ * An existing container environment for a shell tool stored in a toolbox.
+ */
+model ToolboxShellContainerReferenceEnvironment
+  extends ToolboxShellEnvironment {
+  /**
+   * The type of the shell execution environment. Always `container_reference`.
+   */
+  type: "container_reference";
+
+  ...OmitProperties<
+    OpenAI.FunctionShellToolParamEnvironmentContainerReferenceParam,
+    "type"
+  >;
+}
+
+/**
+ * A shell tool stored in a toolbox. This model is additive to toolbox configuration and does not modify the OpenAI tool contract or existing toolbox tool definitions.
+ */
+model ShellToolboxTool extends ToolboxTool {
+  /**
+   * The type of the tool. Always `shell`.
+   */
+  type: ToolboxShellToolType;
+
+  /**
+   * The unique name of this shell tool within the toolbox version.
+   */
+  @minLength(1)
+  name: string;
+
+  /**
+   * The description of this shell tool for use by the model.
+   */
+  description: string;
+
+  ...OmitProperties<ToolFields<OpenAI.FunctionShellToolParam>, "environment">;
+
+  /**
+   * The environment in which shell commands are executed.
+   */
+  environment?: ToolboxShellEnvironment;
 }
 
 /**
