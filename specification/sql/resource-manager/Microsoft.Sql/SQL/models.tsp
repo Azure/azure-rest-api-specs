@@ -2787,7 +2787,7 @@ union PrivateEndpointProvisioningState {
   Approving: "Approving",
 
   /**
-   * Created
+   * Provisioning Created
    */
   @added(Versions.v2025_08_01_preview)
   Created: "Created",
@@ -2799,7 +2799,7 @@ union PrivateEndpointProvisioningState {
   Ready: "Ready",
 
   /**
-   * InProgress
+   * Provisioning InProgress
    */
   @added(Versions.v2025_08_01_preview)
   InProgress: "InProgress",
@@ -2811,7 +2811,7 @@ union PrivateEndpointProvisioningState {
   Dropping: "Dropping",
 
   /**
-   * Succeeded
+   * Provisioning Succeeded
    */
   @added(Versions.v2025_08_01_preview)
   Succeeded: "Succeeded",
@@ -2828,7 +2828,7 @@ union PrivateEndpointProvisioningState {
   Rejecting: "Rejecting",
 
   /**
-   * Canceled
+   * Provisioning Canceled
    */
   @added(Versions.v2025_08_01_preview)
   Canceled: "Canceled",
