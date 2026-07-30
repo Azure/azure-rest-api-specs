@@ -35,6 +35,8 @@ options:
     emitter-output-dir: "{output-dir}/{service-dir}/azure-iot-deviceupdate"
     namespace: com.azure.iot.deviceupdate
     flavor: azure
+    generate-protocol-methods: true
+    generate-convenience-methods: false
     generate-samples: false
     generate-tests: false
     customization-class: customization/src/main/java/DeviceUpdateCustomization.java
@@ -45,4 +47,6 @@ options:
     flavor: azure
   "@azure-typespec/http-client-csharp":
     namespace: "Azure.IoT.DeviceUpdate"
+    generate-protocol-methods: true
+    generate-convenience-methods: false
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
