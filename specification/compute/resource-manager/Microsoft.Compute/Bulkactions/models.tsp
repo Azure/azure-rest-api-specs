@@ -210,6 +210,9 @@ union PartialFulfillmentReason {
   @doc("The requested capacity could not be fully satisfied due to insufficient quota in the subscription.")
   InsufficientQuota: "InsufficientQuota",
 
+  @doc("The requested capacity was successfully satisfied without any partial fulfillment.")
+  None: "None",
+
   string,
 }
 
