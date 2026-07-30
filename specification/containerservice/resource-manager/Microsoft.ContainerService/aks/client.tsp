@@ -15,6 +15,12 @@ using Microsoft.ContainerService;
   "csharp"
 );
 
+// .NET SDK naming: "Request" suffix is reserved for HTTP pipeline types.
+@@clientName(ListBootstrapDataRequest, "ListBootstrapDataContent", "csharp");
+
+// .NET SDK naming: "Data" suffix is reserved for ResourceData/TrackedResourceData types.
+@@clientName(PoolBootstrapData, "PoolBootstrapInfo", "csharp");
+
 @@clientName(Microsoft.ContainerService.IPFamily, "IpFamily", "javascript");
 
 // Java specific renaming for backward compatibility

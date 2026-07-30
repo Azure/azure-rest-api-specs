@@ -186,11 +186,15 @@ function escapeHtml(value) {
 }
 
 /**
+ * Returns the file name (basename) of a path, e.g. `.../main.tsp` -> `main.tsp`.
+ * The full path is preserved in the link's href; only the visible label is
+ * shortened so the Source column stays narrow and readable.
+ *
  * @param {string} filePath
  * @returns {string}
  */
-function getPathSegment(filePath) {
-  return filePath.split("/").slice(-4).join("/");
+function getFileName(filePath) {
+  return filePath.split("/").pop() || filePath;
 }
 
 /**
@@ -234,7 +238,7 @@ function renderRuleLabel(suppression) {
  * @returns {string}
  */
 function renderSourceLink(owner, repo, head_sha, suppression) {
-  const sourceLabel = `${getPathSegment(suppression.sourceFile)}#L${suppression.location.line}`;
+  const sourceLabel = `${getFileName(suppression.sourceFile)}#L${suppression.location.line}`;
   const sourceUrl = getBlobLineLink(
     owner,
     repo,
@@ -340,7 +344,9 @@ export function renderSuppressionsCommentBody(
   const changedSuppressions = reported.changedSuppressions ?? [];
 
   const statusCell = isApproved ? "✅" : "❌";
-  const approvalState = isApproved ? "✅ Approved" : "❌ Approval required";
+  const approvalState = isApproved
+    ? "✅ Approved"
+    : "❌ Approval required (currently under testing, review NOT enforced)";
 
   const totalCount = newSuppressions.length + changedSuppressions.length;
 
@@ -351,7 +357,7 @@ export function renderSuppressionsCommentBody(
     "",
     `**Status:** ${summaryParts.join(" — ")}`,
     "",
-    "⚠️ This PR adds or updates the TypeSpec suppressions listed below. <strong>Suppressions are strongly discouraged</strong> — they bypass linter rules that protect API quality and consistency. Authors should avoid adding new suppressions and prefer fixing the underlying issue; reviewers should approve only when there is a clear, compelling justification and no reasonable alternative. Review each linked rule and source location, then apply <code>Approved-TypeSpecSuppression</code> only if every justification is acceptable. The <strong>Status</strong> column shows ✅ once the label is applied and ❌ while approval is pending.",
+    "⚠️ <strong>This check is currently in testing mode and is non-blocking</strong> — it will not prevent this PR from merging. This PR adds or updates the TypeSpec suppressions listed below. <strong>Suppressions are strongly discouraged</strong> — they bypass linter rules that protect API quality and consistency. Authors should avoid adding new suppressions and prefer fixing the underlying issue; reviewers should approve only when there is a clear, compelling justification and no reasonable alternative. Review each linked rule and source location, then apply <code>Approved-TypeSpecSuppression</code> only if every justification is acceptable. The <strong>Status</strong> column shows ✅ once the label is applied and ❌ while approval is pending.",
     "",
   ];
 
