@@ -25,7 +25,7 @@ model FeatureFlag
     Resource = FeatureFlag,
     KeyName = "featureFlagName",
     SegmentName = "featureFlags",
-    NamePattern = ""
+    NamePattern = "^[\\s\\S]{1,10000}$"
   >;
 }
 
@@ -81,6 +81,7 @@ model FeatureFlagProperties {
   /**
    * The variants of the feature flag.
    */
+  @identifiers(#["name"])
   variants?: FeatureFlagVariantDefinition[];
 
   /**
@@ -125,6 +126,7 @@ model FeatureFlagConditions {
   /**
    * The filters that conditionally enable or disable the feature flag.
    */
+  @identifiers(#["name"])
   filters?: FeatureFlagFilter[];
 }
 

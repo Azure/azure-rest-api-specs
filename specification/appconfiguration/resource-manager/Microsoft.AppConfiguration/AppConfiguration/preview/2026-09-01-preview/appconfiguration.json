@@ -782,7 +782,8 @@
             "in": "path",
             "description": "Identifier of feature flag name and label combination. The name and label are joined by the $ character. The label is optional.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[\\s\\S]{1,10000}$"
           }
         ],
         "responses": {
@@ -836,7 +837,8 @@
             "in": "path",
             "description": "Identifier of feature flag name and label combination. The name and label are joined by the $ character. The label is optional.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[\\s\\S]{1,10000}$"
           },
           {
             "name": "resource",
@@ -905,7 +907,8 @@
             "in": "path",
             "description": "Identifier of feature flag name and label combination. The name and label are joined by the $ character. The label is optional.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[\\s\\S]{1,10000}$"
           }
         ],
         "responses": {
@@ -2831,7 +2834,10 @@
           "description": "The filters that conditionally enable or disable the feature flag.",
           "items": {
             "$ref": "#/definitions/FeatureFlagFilter"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -2931,7 +2937,10 @@
           "description": "The variants of the feature flag.",
           "items": {
             "$ref": "#/definitions/FeatureFlagVariantDefinition"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "allocation": {
           "$ref": "#/definitions/FeatureFlagAllocation",
