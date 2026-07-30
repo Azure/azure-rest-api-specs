@@ -708,3 +708,14 @@ namespace ApplicationInsightsManagementClient;
   "ModifiedOn",
   "csharp"
 );
+// [TYPE] sourceId -> ResourceIdentifier, storageUri -> Uri (matches WorkbookProperties).
+@@alternateType(
+  DeletedWorkbookApi.DeletedWorkbookProperties.sourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  DeletedWorkbookApi.DeletedWorkbookProperties.storageUri,
+  url,
+  "csharp"
+);
