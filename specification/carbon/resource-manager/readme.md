@@ -41,7 +41,15 @@ suppressions:
   - code: XMSSecretInResponse
     reason: skipToken is a pagination cursor token, not a secret credential.
     from: main.json
+    where: $.definitions.BillingAccountItemDetailsReportQueryFilter.properties.skipToken
+  - code: XMSSecretInResponse
+    reason: skipToken is a pagination cursor token, not a secret credential.
+    from: main.json
     where: $.definitions.CarbonEmissionDataListResult.properties.skipToken
+  - code: XMSSecretInResponse
+    reason: skipToken is a pagination cursor token, not a secret credential.
+    from: main.json
+    where: $.definitions.ItemDetailsQueryFilter.properties.skipToken
 ```
 
 
