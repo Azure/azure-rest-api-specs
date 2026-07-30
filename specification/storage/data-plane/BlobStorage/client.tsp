@@ -837,7 +837,7 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 
 @@scope(Storage.Blob.Container.rename, "!rust");
 @@scope(Storage.Blob.Container.restore, "!rust");
-@@scope(Storage.Blob.Blob.abortCopyFromUrl, "!rust");
+@@scope(Storage.Blob.Blob.abortCopyFromUrl, "rust");
 @@scope(Storage.Blob.Blob.copyFromUrl, "!rust");
 @@scope(Storage.Blob.Blob.setExpiry, "!rust");
 @@scope(Storage.Blob.Blob.startCopyFromUrl, "rust");
