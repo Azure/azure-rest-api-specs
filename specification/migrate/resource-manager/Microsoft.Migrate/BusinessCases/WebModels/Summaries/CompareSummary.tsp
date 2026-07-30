@@ -1,8 +1,10 @@
 import "../Common/Models.tsp";
+import "../../Common/StandardizedContracts/CarbonEmissionsDetails.tsp";
 
 using TypeSpec.Versioning;
 using Microsoft.Migrate;
 
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 @doc("Compare summary class.")
 model CompareSummary {
   @doc("The azure PaaS cost.")

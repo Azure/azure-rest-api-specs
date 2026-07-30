@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "../Common/Models.tsp";
 import "../Common/Enums.tsp";
+import "../../Common/StandardizedContracts/CarbonEmissionsDetails.tsp";
 
 using Autorest;
 using TypeSpec.Http;
@@ -18,6 +19,7 @@ namespace Microsoft.Migrate;
 
 @doc("Paas summary REST resource.")
 @parentResource(BusinessCase)
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 model PaasSummary is ProxyResource<PaasSummaryProperties> {
   @doc("Gets the Name of the Paas Summary.")
   @key("paasSummaryName")
@@ -30,6 +32,7 @@ model PaasSummary is ProxyResource<PaasSummaryProperties> {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "This is a hydrated resource with no PUT call."
 @doc("Paas summary properties class.")
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 model PaasSummaryProperties {
   @doc("Shows the PaaS Azure summary.")
   @visibility(Lifecycle.Read)
@@ -41,6 +44,7 @@ model PaasSummaryProperties {
 }
 
 @doc("Shows the PaaS Azure summary.")
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 model AzurePaasSummary {
   @doc("Number of Sql instances.")
   @visibility(Lifecycle.Read)
@@ -104,6 +108,7 @@ model AzurePaasSummary {
 }
 
 @doc("Shows the estimated cost by target.")
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 model EstimatedCostByTarget {
   @doc("Azure SQL MI cost.")
   @visibility(Lifecycle.Read)
@@ -127,6 +132,7 @@ model EstimatedCostByTarget {
 }
 
 @doc("Shows the Azure SQL details.")
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 model AzureSqlSummary {
   @doc("Estimated cost by recommended offer.")
   @visibility(Lifecycle.Read)
@@ -150,6 +156,7 @@ model AzureSqlSummary {
 }
 
 @doc("The SQL service tier.")
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 model SqlServiceTier {
   @doc("The service tier name.")
   @visibility(Lifecycle.Read)
@@ -161,6 +168,7 @@ model SqlServiceTier {
 }
 
 @doc("Shows Azure App Service summary.")
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 model AzureAppServiceSummary {
   @doc("Estimated cost by recommendation offer.")
   @visibility(Lifecycle.Read)
@@ -179,6 +187,7 @@ model AzureAppServiceSummary {
 }
 
 @doc("The app service SKU with corresponding cost.")
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 model AppServiceSku {
   @doc("The SKU name.")
   @visibility(Lifecycle.Read)
@@ -194,6 +203,7 @@ model AppServiceSku {
 }
 
 @doc("The app type distribution.")
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 model WebAppDistribution {
   @doc("WebApp type.")
   @visibility(Lifecycle.Read)
@@ -205,6 +215,7 @@ model WebAppDistribution {
 }
 
 @doc("Shows Azure App Service Container summary.")
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 model AzureAppServiceContainerSummary {
   @doc("Estimated cost by recommendation offer.")
   @visibility(Lifecycle.Read)
@@ -223,6 +234,7 @@ model AzureAppServiceContainerSummary {
 }
 
 @doc("The Webapp target SKU with corresponding cost.")
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 model WebAppTargetSku {
   @doc("The SKU name.")
   @visibility(Lifecycle.Read)
@@ -238,6 +250,7 @@ model WebAppTargetSku {
 }
 
 @doc("Shows Azure Kubernetes Service summary.")
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 model AzureKubernetesServiceSummary {
   @doc("Estimated cost by recommendation offer.")
   @visibility(Lifecycle.Read)
@@ -256,6 +269,7 @@ model AzureKubernetesServiceSummary {
 }
 
 @doc("Shows platform as a service (PaaS) summary.")
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 model OnPremisesPaasSummary {
   @doc("Total servers.")
   @visibility(Lifecycle.Read)
@@ -315,6 +329,7 @@ model OnPremisesPaasSummary {
 }
 
 @doc("The on premises paas licensing cost.")
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 model OnPremisesPaasLicensingCost {
   @doc("The version.")
   @visibility(Lifecycle.Read)
@@ -330,6 +345,7 @@ model OnPremisesPaasLicensingCost {
 }
 
 @doc("The on premises SQL summary.")
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 model OnPremisesSqlSummary {
   @doc("The number of SQL instances.")
   @visibility(Lifecycle.Read)
@@ -355,6 +371,7 @@ model OnPremisesSqlSummary {
 }
 
 @doc("The SQL version details.")
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 model SqlVersionDetails {
   @doc("The SQL version.")
   @visibility(Lifecycle.Read)
@@ -366,6 +383,7 @@ model SqlVersionDetails {
 }
 
 @doc("The on premises web application summary.")
+@removed(BusinessCaseApiVersions.v2025_09_09_preview)
 model OnPremisesWebAppSummary {
   @doc("The number of web servers.")
   @visibility(Lifecycle.Read)

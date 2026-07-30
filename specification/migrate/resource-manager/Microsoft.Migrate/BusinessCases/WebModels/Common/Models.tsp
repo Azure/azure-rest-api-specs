@@ -13,70 +13,6 @@ using Azure.ResourceManager;
 using OpenAPI;
 using Microsoft.Migrate;
 
-@doc("The on premises PaaS cost.")
-model CostDetails {
-  @doc("The storage cost.")
-  @visibility(Lifecycle.Read)
-  storageCost?: float32;
-
-  @doc("The compute cost.")
-  @visibility(Lifecycle.Read)
-  computeCost?: float32;
-
-  @doc("The IT labor cost.")
-  @visibility(Lifecycle.Read)
-  itLaborCost?: float32;
-
-  @doc("The network cost.")
-  @visibility(Lifecycle.Read)
-  networkCost?: float32;
-
-  @doc("The windows AhubSavings.")
-  @visibility(Lifecycle.Read)
-  ahubSavings?: float32;
-
-  @doc("The linux AhubSavings.")
-  @visibility(Lifecycle.Read)
-  linuxAhubSavings?: float32;
-
-  @doc("Security Cost.")
-  @visibility(Lifecycle.Read)
-  securityCost?: float32;
-
-  @doc("Management Cost Details.")
-  @visibility(Lifecycle.Read)
-  managementCostDetails?: ManagementCostDetails;
-
-  @doc("esu savings.")
-  @visibility(Lifecycle.Read)
-  esuSavings?: float32;
-
-  @doc("The facilities cost.")
-  @visibility(Lifecycle.Read)
-  facilitiesCost?: float32;
-}
-
-@doc("Management Cost Details.")
-model ManagementCostDetails {
-  @doc("Management Cost.")
-  @visibility(Lifecycle.Read)
-  managementCost?: float32;
-
-  @doc("Management Cost Components.")
-  @visibility(Lifecycle.Read)
-  @identifiers(#[])
-  managementCostComponents?: ManagementCostComponent[];
-}
-
-@doc("Management Cost Component.")
-model ManagementCostComponent {
-  @doc("Name of Management Cost Component.")
-  name: ManagementCostComponentName;
-
-  @doc("Cost of Management Component.")
-  value?: float32;
-}
-
 @doc("Shows the year-on-year cost overall.")
 model YearOnYearEstimates {
   @doc("Year-on-Year on-premises cost.")
@@ -94,21 +30,25 @@ model YearOnYearEstimates {
   @identifiers(#[])
   savings?: YearOnYearCost[];
 
+  @removed(BusinessCaseApiVersions.v2025_09_09_preview)
   @doc("Year-on-Year on-premises capex cost.")
   @visibility(Lifecycle.Read)
   @identifiers(#[])
   onPremisesCapexCost?: YearOnYearCost[];
 
+  @removed(BusinessCaseApiVersions.v2025_09_09_preview)
   @doc("Year-on-Year on-premises opex cost.")
   @visibility(Lifecycle.Read)
   @identifiers(#[])
   onPremisesOpexCost?: YearOnYearCost[];
 
+  @removed(BusinessCaseApiVersions.v2025_09_09_preview)
   @doc("Year-on-Year azure capex cost.")
   @visibility(Lifecycle.Read)
   @identifiers(#[])
   azureCapexCost?: YearOnYearCost[];
 
+  @removed(BusinessCaseApiVersions.v2025_09_09_preview)
   @doc("Year-on-Year azure opex cost.")
   @visibility(Lifecycle.Read)
   @identifiers(#[])
@@ -296,39 +236,4 @@ model DistributionByType {
   @doc("Distribution Count.")
   @visibility(Lifecycle.Read)
   count?: int32;
-}
-
-@doc("Details of carbon emissions.")
-model CarbonEmissionsDetails {
-  @doc("Scope 1 emissions in metric tons of CO2 equivalent (MTCO2e).")
-  @visibility(Lifecycle.Read)
-  scope1: CarbonEmissionsScopeDetails;
-
-  @doc("Scope 2 emissions in metric tons of CO2 equivalent (MTCO2e).")
-  @visibility(Lifecycle.Read)
-  scope2: CarbonEmissionsScopeDetails;
-
-  @doc("Scope 3 emissions in metric tons of CO2 equivalent (MTCO2e).")
-  @visibility(Lifecycle.Read)
-  scope3: CarbonEmissionsScopeDetails;
-}
-
-@doc("Details of carbon emissions scope.")
-model CarbonEmissionsScopeDetails {
-  @doc("The compute emissions in metric tons of CO2 equivalent (MTCO2e).")
-  @visibility(Lifecycle.Read)
-  compute: float32;
-
-  @doc("The storage emissions in metric tons of CO2 equivalent (MTCO2e).")
-  @visibility(Lifecycle.Read)
-  storage: float32;
-}
-
-@doc("The generic name value pair.")
-model NameValuePair<TName, TValue> {
-  @doc("The name.")
-  name?: TName;
-
-  @doc("The value.")
-  value?: TValue;
 }
