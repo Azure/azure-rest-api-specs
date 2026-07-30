@@ -384,7 +384,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/JobDetails"
+              "$ref": "#/definitions/JobUpdateResponse"
             }
           },
           "default": {
@@ -1874,6 +1874,27 @@
             "update",
             "create"
           ]
+        }
+      }
+    },
+    "JobUpdateResponse": {
+      "type": "object",
+      "description": "Response returned when a job update succeeds.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the job."
+        },
+        "priority": {
+          "$ref": "#/definitions/Priority",
+          "description": "Priority of job."
+        },
+        "tags": {
+          "type": "array",
+          "description": "List of user-supplied tags associated with the job.",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
