@@ -2645,6 +2645,9 @@
           },
           "Get a targeted capacity reservation group.": {
             "$ref": "./examples/capacityReservationExamples/TargetedCapacityReservationGroup_Get.json"
+          },
+          "Get an open capacity reservation group with instance view.": {
+            "$ref": "./examples/capacityReservationExamples/OpenCapacityReservationGroup_Get.json"
           }
         }
       },
@@ -2710,6 +2713,9 @@
           },
           "Create or update a targeted capacity reservation group.": {
             "$ref": "./examples/capacityReservationExamples/TargetedCapacityReservationGroup_CreateOrUpdate.json"
+          },
+          "Create or update an open capacity reservation group.": {
+            "$ref": "./examples/capacityReservationExamples/OpenCapacityReservationGroup_CreateOrUpdate.json"
           }
         }
       },
@@ -2978,6 +2984,9 @@
           },
           "Get a targeted capacity reservation.": {
             "$ref": "./examples/capacityReservationExamples/TargetedCapacityReservation_Get.json"
+          },
+          "Get an open capacity reservation with instance view.": {
+            "$ref": "./examples/capacityReservationExamples/OpenCapacityReservation_Get.json"
           }
         }
       },
@@ -8594,6 +8603,9 @@
           },
           "Get VM scale set VM with VMSizeProperties": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSetVM_Get_WithVMSizeProperties.json"
+          },
+          "Get VM scale set VM with capacity reservation": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSetVM_Get_WithCapacityReservation.json"
           }
         }
       },
@@ -9795,6 +9807,9 @@
         "x-ms-examples": {
           "Get instance view of a virtual machine from a VM scale set placed on a dedicated host group through automatic placement.": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSetVM_Get_InstanceViewAutoPlacedOnDedicatedHostGroup.json"
+          },
+          "Get instance view of a virtual machine from a VM scale set that is eligible for and consuming an open capacity reservation.": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSetVM_Get_InstanceViewWithCapacityReservationType.json"
           }
         }
       }
@@ -11158,6 +11173,9 @@
           },
           "Create a VM with automatic zone placement": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithPlacement.json"
+          },
+          "Create a VM with capacity reservation assignment disabled": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithCapacityReservationAssignmentDisabled.json"
           },
           "Create a VM with encryption identity": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithEncryptionIdentity.json"
@@ -14498,7 +14516,7 @@
         },
         "reservationType": {
           "$ref": "#/definitions/ReservationType",
-          "description": "Indicates the type of capacity reservation. Allowed values are 'Block' for block capacity reservations and 'Targeted' for reservations that enable a VM to consume a specific capacity reservation when a capacity reservation group is provided. The reservation type is immutable and cannot be changed after it is assigned."
+          "description": "Indicates the type of capacity reservation. Allowed values are 'Block' for block capacity reservations that enable a VM to consume capacity only from this capacity block when it is associated using a capacity reservation group, 'Targeted' for reservations that enable a VM to consume capacity from an explicitly associated capacity reservation group and fall back to the publicly available capacity if the reservation is full, and 'Open' for reservations that a VM consumes when it is eligible from an implicitly associated capacity reservation group with the matching VM size and zone without associating that capacity reservation group and fall back to the publicly available capacity if the reservation is full. The reservation type is immutable and cannot be changed after the capacity reservation group is created."
         }
       }
     },
@@ -14600,6 +14618,10 @@
         "capacityReservationGroup": {
           "$ref": "../../common-types/v1/common.json#/definitions/SubResource",
           "description": "Specifies the capacity reservation group resource id that should be used for allocating the virtual machine or scaleset vm instances provided enough capacity has been reserved. Please refer to https://aka.ms/CapacityReservation for more details."
+        },
+        "disableCapacityReservationAssignment": {
+          "type": "boolean",
+          "description": "Specifies whether the virtual machine is explicitly opted out from being associated with any capacity reservation. When set to true, the virtual machine will not be allowed to implicitly or explicitly associate with any type of capacity reservation and will consume capacity from the publicly available capacity. Minimum api-version: 2026-04-01."
         }
       }
     },
@@ -14650,7 +14672,7 @@
         },
         "scheduleProfile": {
           "$ref": "#/definitions/ScheduleProfile",
-          "description": "Defines the schedule for Block and future capacity reservations. Specifies the schedule during which capacity reservation is active and VM or VMSS resource can be allocated using reservation. This property is required and supported when the capacity reservation group type is 'Block'. For Block capacity reservations, the scheduleProfile, start, and end fields are immutable after creation. Please refer to https://aka.ms/blockcapacityreservation for more details. Minimum API version for Block capacity reservations: 2025-04-01.  In a 'Targeted' capacity reservation group, future capacity reservations must use this property with only a start time, which can be changed until the ‘modifiableUntil’ time. Minimum API version for future capacity reservations: 2026-04-01."
+          "description": "Defines the schedule for Block and future capacity reservations. Specifies the schedule during which capacity reservation is active and VM or VMSS resource can be allocated using reservation. For Block capacity reservations, the scheduleProfile, start, and end fields are immutable after creation. Please refer to https://aka.ms/blockcapacityreservation for more details. Minimum API version for Block capacity reservations: 2025-04-01. Future capacity reservations must use this property with only a start time, which can be changed until the ‘modifiableUntil’ time. Minimum API version for future capacity reservations: 2026-04-01."
         }
       }
     },
@@ -14662,6 +14684,48 @@
           "$ref": "#/definitions/ReservationState",
           "description": "The current state of the capacity reservation."
         }
+      }
+    },
+    "CapacityReservationType": {
+      "type": "string",
+      "description": "Specifies which type of capacity reservation the virtual machine will consume capacity from if eligible or whether it is explicitly opted out from being associated and consuming capacity from any reserved capacity available in the subscription. Minimum api-version: 2026-04-01.",
+      "enum": [
+        "NotEligible",
+        "Targeted",
+        "Open",
+        "Disabled",
+        "Block"
+      ],
+      "x-ms-enum": {
+        "name": "CapacityReservationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotEligible",
+            "value": "NotEligible",
+            "description": "The virtual machine is not eligible to be implicitly associated with an open capacity reservation and is not explicitly associated with any capacity reservation group, so it will consume capacity from the publicly available capacity."
+          },
+          {
+            "name": "Targeted",
+            "value": "Targeted",
+            "description": "The virtual machine will consume capacity from a specific matching capacity reservation when associated with a capacity reservation group resource of type targeted, but can fall back to consume capacity from the publicly available capacity if there is no capacity available in the targeted reservation."
+          },
+          {
+            "name": "Open",
+            "value": "Open",
+            "description": "The virtual machine if eligible will implicitly associate and consume any available capacity from a matching open capacity reservation created or shared in the subscription. **Note:** The VM should not be explicitly associated with the open capacity reservation group resource containing the matching reservation."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "The virtual machine has capacity reservation assignment disabled and will not be allowed to implicitly or explicitly associate with any type of capacity reservation."
+          },
+          {
+            "name": "Block",
+            "value": "Block",
+            "description": "The virtual machine consumes capacity from a specific matching capacity reservation when associated with a capacity reservation group resource of type block, and will hit capacity failures if there is no available capacity in the block reservation."
+          }
+        ]
       }
     },
     "CapacityReservationUpdate": {
@@ -14699,6 +14763,15 @@
           "description": "A list of all virtual machines resource ids allocated against the capacity reservation.",
           "items": {
             "$ref": "../../common-types/v1/common.json#/definitions/SubResourceReadOnly"
+          },
+          "readOnly": true
+        },
+        "usedReservedCountBySubscription": {
+          "type": "object",
+          "description": "For open capacity reservations, this provides a map of the used reserved capacity count keyed by the subscription id (a GUID) that is consuming the capacity, i.e. each entry maps a consuming subscription id to the count of reserved capacity it is currently using. This is populated only for open capacity reservations and is not reported for targeted and block capacity reservations, which instead report allocation through virtualMachinesAllocated. Minimum api-version: 2026-04-01.",
+          "additionalProperties": {
+            "format": "int32",
+            "type": "integer"
           },
           "readOnly": true
         }
@@ -18488,10 +18561,11 @@
     },
     "ReservationType": {
       "type": "string",
-      "description": "Indicates the type of capacity reservation. Allowed values are 'Block' for block capacity reservations and 'Targeted' for reservations that enable a VM to consume a specific capacity reservation when a capacity reservation group is provided. The reservation type is immutable and cannot be changed after it is assigned.",
+      "description": "Indicates the type of capacity reservation. Allowed values are 'Block' for block capacity reservations that enable a VM to consume capacity only from this capacity block when it is associated using a capacity reservation group, 'Targeted' for reservations that enable a VM to consume capacity from an explicitly associated capacity reservation group and fall back to the publicly available capacity if the reservation is full, and 'Open' for reservations that a VM consumes when it is eligible from an implicitly associated capacity reservation group with the matching VM size and zone without associating that capacity reservation group and fall back to the publicly available capacity if the reservation is full. The reservation type is immutable and cannot be changed after the capacity reservation group is created.",
       "enum": [
         "Targeted",
-        "Block"
+        "Block",
+        "Open"
       ],
       "x-ms-enum": {
         "name": "ReservationType",
@@ -18500,12 +18574,17 @@
           {
             "name": "Targeted",
             "value": "Targeted",
-            "description": "To consume on-demand or future allocated capacity reservations when a capacity reservation group is provided. Minimum API version for future capacity reservations: 2026-04-01."
+            "description": "Reservations that enable a VM to consume capacity from an explicitly associated capacity reservation group and fall back to the publicly available capacity if the reservation is full."
           },
           {
             "name": "Block",
             "value": "Block",
-            "description": "To consume scheduled allocated block capacity reservation when a capacity reservation group is provided."
+            "description": "Block capacity reservations that enable a VM to consume capacity only from this capacity block when it is associated using a capacity reservation group."
+          },
+          {
+            "name": "Open",
+            "value": "Open",
+            "description": "Reservations that a VM consumes when it is eligible from an implicitly associated capacity reservation group with the matching VM size and zone without associating that capacity reservation group, and fall back to the publicly available capacity if the reservation is full. Minimum api-version: 2026-04-01."
           }
         ]
       }
@@ -21815,6 +21894,11 @@
           "$ref": "#/definitions/InterconnectInstanceView",
           "description": "The Interconnect runtime view of the Virtual Machine. Minimum api-version: 2026-03-01.",
           "readOnly": true
+        },
+        "capacityReservationType": {
+          "$ref": "#/definitions/CapacityReservationType",
+          "description": "Specifies which type of capacity reservation the virtual machine will consume capacity from if eligible or whether it is explicitly opted out from being associated and consuming capacity from any reserved capacity available in the subscription. Minimum api-version: 2026-04-01.",
+          "readOnly": true
         }
       }
     },
@@ -24418,6 +24502,11 @@
           "$ref": "#/definitions/InterconnectInstanceView",
           "description": "The Interconnect runtime view of the Scale Set VM instance. Minimum api-version: 2026-03-01.",
           "readOnly": true
+        },
+        "capacityReservationType": {
+          "$ref": "#/definitions/CapacityReservationType",
+          "description": "Specifies which type of capacity reservation the virtual machine scale set VM instance will consume capacity from if eligible or whether it is explicitly opted out from being associated and consuming capacity from any reserved capacity available in the subscription. Minimum api-version: 2026-04-01.",
+          "readOnly": true
         }
       }
     },
@@ -24649,6 +24738,10 @@
         "interconnectBlockProfile": {
           "$ref": "#/definitions/InterconnectBlockProfile",
           "description": "Specifies the Interconnect Block related details of a Scale Set VM instance. Minimum api-version: 2026-03-01."
+        },
+        "capacityReservation": {
+          "$ref": "#/definitions/CapacityReservationProfile",
+          "description": "Specifies information about the capacity reservation that is used to allocate the virtual machine scale set VM instance. The capacity reservation group is inherited from the parent virtual machine scale set and cannot be changed on the individual scale set VM instance. Minimum api-version: 2026-04-01."
         }
       }
     },

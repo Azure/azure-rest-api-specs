@@ -361,6 +361,10 @@ suppressions:
     reason: The gallery backend service just treats this as a bag of properties to pass to downstream services.
     from: GalleryRP.json
     where: $.definitions.AccessControlRulesPrivilege.properties.queryParameters
+  - code: AvoidAdditionalProperties
+    reason: usedReservedCountBySubscription is a read-only response projection of the RP's internal map of used reserved capacity count keyed by the consuming subscription id (GUID). The map shape reflects an established contract between CRP and its downstream consumers, which key directly on the subscription id; converting it to an array would break those existing contracts and require coordinated breaking changes across all consumers. Narrow exception for this single read-only property, approved by the ARM team and owned by the Compute service team.
+    from: ComputeRP.json
+    where: $.definitions.CapacityReservationUtilization.properties.usedReservedCountBySubscription
   - code: GetCollectionOnlyHasValueAndNextLink
     from: GalleryRP.json
     reason: Existing issue from last version.

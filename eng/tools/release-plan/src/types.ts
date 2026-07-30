@@ -106,6 +106,7 @@ export interface CommitProjectInfoResult {
   projectInfo: TypeSpecProjectInfo | null;
   prNumber?: number;
   hasNewApiVersionLabel: boolean;
+  isFolderMigration?: boolean;
 }
 
 export interface CliArguments {

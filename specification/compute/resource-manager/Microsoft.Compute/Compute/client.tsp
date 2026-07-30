@@ -952,7 +952,10 @@ model VMSizePropertiesWithAdditionalProperties {
 // `OperatingSystemTypes` (closed enum, Windows/Linux) was named `SupportedOperatingSystemType`
 // in the old SDK; the union `OperatingSystemType` kept its spec name (extensible struct).
 @@clientName(OperatingSystemTypes, "SupportedOperatingSystemType", "csharp");
-@@clientName(ReservationType, "CapacityReservationType", "csharp");
+// Breaking change in v2026-04-01: the `ReservationType` union (on capacity reservation groups,
+// added in v2025-04-01) previously shipped in the .NET SDK as `CapacityReservationType`. The
+// alias is removed so the csharp name matches the spec, freeing `CapacityReservationType` for
+// the new VM instance-view union added in v2026-04-01.
 @@clientName(ApiErrorBase, "ComputeApiErrorBase", "csharp");
 @@clientName(
   VMGalleryApplication,
