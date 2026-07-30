@@ -26898,11 +26898,6 @@
             "description": "The operational state of the agent. Controls whether the agent endpoint accepts or rejects requests.",
             "readOnly": true
           },
-          "state_source": {
-            "$ref": "#/components/schemas/AgentStateSource",
-            "description": "The source of the agent's operational state. When the agent is disabled, indicates where the disabled state originates from. Empty when not derived from a specific source.",
-            "readOnly": true
-          },
           "versions": {
             "type": "object",
             "properties": {
@@ -27042,21 +27037,6 @@
           }
         ],
         "description": "The operational state of an agent."
-      },
-      "AgentStateSource": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "agent_instance_identity",
-              "agent_blueprint"
-            ]
-          }
-        ],
-        "description": "Indicates the source of an agent's operational state. Empty when the state is not derived from a specific source."
       },
       "AgentTaxonomyInput": {
         "type": "object",
