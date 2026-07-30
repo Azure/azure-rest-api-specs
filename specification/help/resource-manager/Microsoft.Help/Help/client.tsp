@@ -4,6 +4,7 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.Help;
 
+@@clientName(Microsoft.Help, "SelfHelpMgmtClient", "python");
 @@clientName(Solutions, "SelfhelpSolutions", "csharp");
 @@clientName(ValidationScope.IpAddressFormat, "IPAddressFormat", "csharp");
 

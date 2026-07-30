@@ -29,6 +29,11 @@ using Microsoft.Cache;
   "IsSkipDataMigration",
   "csharp"
 );
+@@clientName(
+  AzureCacheForRedisMigrationProperties.forceMigrate,
+  "IsForceMigrate",
+  "csharp"
+);
 @@clientName(AofFrequency, "PersistenceSettingAofFrequency", "csharp");
 @@clientName(Cluster, "RedisEnterpriseCluster", "csharp");
 @@clientName(ClusteringPolicy, "RedisEnterpriseClusteringPolicy", "csharp");
@@ -105,6 +110,41 @@ using Microsoft.Cache;
   "RedisEnterpriseMigrationProvisioningState",
   "csharp"
 );
+@@clientName(
+  MigrationValidationRequest,
+  "RedisEnterpriseMigrationValidationRequestContent",
+  "csharp"
+);
+@@clientName(
+  MigrationValidationResponse,
+  "RedisEnterpriseMigrationValidationResponseResult",
+  "csharp"
+);
+@@clientName(
+  MigrationValidationRequest.skipDataMigration,
+  "IsSkipDataMigration",
+  "csharp"
+);
+@@clientName(
+  MigrationValidationRequest.forceMigrate,
+  "IsForceMigrate",
+  "csharp"
+);
+@@clientName(
+  MigrationValidationDisparity,
+  "RedisEnterpriseMigrationValidationDisparity",
+  "csharp"
+);
+@@clientName(
+  MigrationValidationError,
+  "RedisEnterpriseMigrationValidationError",
+  "csharp"
+);
+@@clientName(
+  MigrationValidationWarning,
+  "RedisEnterpriseMigrationValidationWarning",
+  "csharp"
+);
 @@clientName(OperationStatus, "RedisEnterpriseOperationStatus", "csharp");
 @@clientName(OperationStatus.error, "ErrorResponse", "csharp");
 @@clientName(OperationStatus.startTime, "StartOn", "csharp");
@@ -146,6 +186,21 @@ using Microsoft.Cache;
 @@clientName(SkuDetails, "RedisEnterpriseSkuDetails", "csharp");
 @@clientName(SkuDetailsList, "RedisEnterpriseSkuDetailsList", "csharp");
 @@clientName(TlsVersion, "RedisEnterpriseTlsVersion", "csharp");
+@@clientName(
+  TlsVersion.One0,
+  Azure.ClientGenerator.Core.exact("Tls1_0"),
+  "csharp"
+);
+@@clientName(
+  TlsVersion.One1,
+  Azure.ClientGenerator.Core.exact("Tls1_1"),
+  "csharp"
+);
+@@clientName(
+  TlsVersion.One2,
+  Azure.ClientGenerator.Core.exact("Tls1_2"),
+  "csharp"
+);
 @@clientName(
   OperationsStatusOperationGroup.get,
   "GetRedisEnterpriseOperationsStatus",

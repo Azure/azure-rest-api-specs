@@ -33,12 +33,13 @@ import "./TasksAPI/main.tsp";
 import "./csharp-arm-models.tsp";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
+import "@typespec/http";
 import "@typespec/versioning";
 
 using Azure.ClientGenerator.Core;
 using Azure.ClientGenerator.Core.Legacy;
 using TypeSpec.Versioning;
-using TypeSpec.Http;
+using Http;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.Core;
@@ -270,6 +271,8 @@ op privateEndpointConnectionsGetCustomization(
   ...Azure.ResourceManager.Legacy.Provider,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ...PrivateLinkNameParameter,
+
+  @path
   privateEndpointConnectionName: string,
 ): ArmResponse<Azure.ResourceManager.PrivateEndpointConnection> | ErrorResponse;
 
@@ -288,8 +291,11 @@ op privateEndpointConnectionsCreateOrUpdateCustomization(
   ...Azure.ResourceManager.Legacy.Provider,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ...PrivateLinkNameParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @path
   privateEndpointConnectionName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resource: PrivateLinksAPI.PrivateEndpointConnection,
 ):
@@ -321,7 +327,9 @@ op privateEndpointConnectionsDeleteCustomization(
   ...Azure.ResourceManager.Legacy.Provider,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ...PrivateLinkNameParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @path
   privateEndpointConnectionName: string,
 ):
   | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
@@ -361,7 +369,9 @@ op privateLinkResourcesGetCustomization(
   ...Azure.ResourceManager.Legacy.Provider,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ...PrivateLinkNameParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @path
   groupId: string,
 ): ArmResponse<PrivateLinkGroupResource> | ErrorResponse;
 
@@ -1369,7 +1379,7 @@ op privateLinkResourcesGetCustomization(
 );
 @@clientName(
   SecurityConnectorsAPI.GitlabScopeEnvironmentData,
-  "GitlabScopeEnvironmentInfo",
+  "GitLabScopeEnvironmentInfo",
   "csharp"
 );
 @@clientName(
@@ -1791,12 +1801,34 @@ model CSharpSecurityAssessmentStatusResult
 @@clientName(PricingsAPI.Enforce, "SecurityPolicyEnforce", "csharp");
 @@clientName(PricingsAPI.Extension, "SecurityConnectorExtension", "csharp");
 @@clientName(
+  PricingsAPI.Inherited,
+  "SecurityCenterPricingInheritance",
+  "csharp"
+);
+@@clientName(
+  PricingsAPI.ResourcesCoverageStatus,
+  "SecurityCenterResourcesCoverageStatus",
+  "csharp"
+);
+@@clientName(
   PricingsAPI.IsEnabled,
   "SecurityCenterExtensionIsEnabled",
   "csharp"
 );
 @@clientName(SecureScoreAPI.ControlType, "SecurityControlType", "csharp");
 @@clientName(SensitivitySettingsAPI.BuiltInInfoType.type, "Dns", "csharp");
+@@clientName(Common.SettingName.MCAS, "Mcas", "csharp");
+@@clientName(Common.SettingName.WDATP, "Wdatp", "csharp");
+@@clientName(
+  Common.SettingName.WDATP_EXCLUDE_LINUX_PUBLIC_PREVIEW,
+  "WdatpExcludeLinuxPublicPreview",
+  "csharp"
+);
+@@clientName(
+  Common.SettingName.WDATP_UNIFIED_SOLUTION,
+  "WdatpUnifiedSolution",
+  "csharp"
+);
 @@clientName(
   AlertsAPI.AlertSimulatorBundlesRequestProperties,
   "SecurityAlertSimulatorBundlesRequestProperties",
@@ -1809,14 +1841,58 @@ model CSharpSecurityAssessmentStatusResult
 );
 @@clientName(AlertsAPI.BundleType.DNS, "Dns", "csharp");
 @@clientName(
+  DefenderForStorageAPI.AutomatedResponseType,
+  "MalwareScanningAutomatedResponseType",
+  "csharp"
+);
+@@clientName(
   SecuritySolutionsAPI.ConnectionType,
   "SecurityCenterConnectionType",
   "csharp"
 );
+@@clientName(
+  HealthReportsAPI.StatusName,
+  "SecurityCenterHealthStatus",
+  "csharp"
+);
+@@clientName(
+  GovernanceAPI.OperationResultStatus,
+  "SecurityCenterOperationResultStatus",
+  "csharp"
+);
+@@clientName(
+  SqlVulnerabilityAssessmentsAPI.ScanOperationStatus,
+  "SqlVulnerabilityAssessmentScanOperationStatus",
+  "csharp"
+);
+@@clientName(
+  SecurityStandardsAPI.attestationComplianceState,
+  "StandardAssignmentAttestationComplianceState",
+  "csharp"
+);
+@@clientName(
+  SecurityStandardsAPI.StandardType,
+  "SecurityStandardType",
+  "csharp"
+);
 @@clientName(SecurityStandardsAPI.Effect, "SecurityCenterEffect", "csharp");
+@@clientName(SecurityStandardsAPI.StandardSupportedCloud.AWS, "Aws", "csharp");
+@@clientName(SecurityStandardsAPI.StandardSupportedCloud.GCP, "Gcp", "csharp");
 @@clientName(
   SecurityStandardsAPI.ExemptionCategory,
   "SecurityExemptionCategory",
+  "csharp"
+);
+@@clientName(StandardsAPI.StandardSupportedClouds.AWS, "Aws", "csharp");
+@@clientName(StandardsAPI.StandardSupportedClouds.GCP, "Gcp", "csharp");
+@@clientName(
+  SecurityConnectorsDevOpsAPI.InventoryKind,
+  "IotSecurityInventoryKind",
+  "csharp"
+);
+@@clientName(
+  SecurityConnectorsDevOpsAPI.InventoryListKind,
+  "IotSecurityInventoryListKind",
   "csharp"
 );
 @@clientName(
@@ -1912,6 +1988,11 @@ model CSharpSecurityAssessmentStatusResult
   "SecurityConnectorIdentity",
   "csharp"
 );
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ResourceIdentityType,
+  "SecurityConnectorIdentityType",
+  "csharp"
+);
 @@clientName(Common.ResourceDetails, "SecurityCenterResourceDetails", "csharp");
 @@clientName(
   HealthReportsAPI.resourceDetails,
@@ -1927,6 +2008,11 @@ model CSharpSecurityAssessmentStatusResult
 @@clientName(
   DefenderForStorageAPI.BlobScanResultsOptions,
   "BlobScanResultsConfig",
+  "csharp"
+);
+@@clientName(
+  SensitivitySettingsAPI.GetSensitivitySettingsResponsePropertiesMipInformation,
+  "SensitivitySettingsMipInformation",
   "csharp"
 );
 @@alternateType(

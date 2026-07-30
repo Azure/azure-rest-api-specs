@@ -9,7 +9,7 @@ Evaluation tests for the **ARM API Reviewer** agent using the
 arm-api-reviewer/
 ├── run-evals.ps1          # One-click script: clone, build, run, report
 ├── .vally.yaml            # Project config; filename fixed by the vally CLI
-├── vally/                 # Eval definitions (16 files)
+├── vally/                 # Eval definitions (17 files)
 │   ├── eval-arm-resource-structure.yaml
 │   ├── eval-property-design.yaml
 │   ├── eval-operations.yaml
@@ -25,8 +25,9 @@ arm-api-reviewer/
 │   ├── eval-citation-and-parity.yaml
 │   ├── eval-typespec-required.yaml
 │   ├── eval-fast-path-triage.yaml
-│   └── eval-protocol-safety.yaml
-├── fixtures/              # Test fixtures (36 data files + README)
+│   ├── eval-protocol-safety.yaml
+│   └── eval-pattern-validation.yaml
+├── fixtures/              # Test fixtures (39 data files + README)
 │   ├── arm-openapi/       # ARM OpenAPI specs with seeded violations
 │   ├── examples/          # Example JSON files (good and bad)
 │   ├── readme/            # readme.md suppression files
@@ -56,8 +57,9 @@ arm-api-reviewer/
 | 14xxxx | suppressions.yaml continuity  | 2     | Missing reason in new entry; security-rule suppression                                                                                                                                                                                                                                                          |
 | 15xxxx | Fast-path triage              | 3     | Examples-only fast path; schema change forces full; uncertain→full                                                                                                                                                                                                                                              |
 | 16xxxx | Protocol safety               | 11    | Subagent auto-unavailable; empty-response not pass; INVALIDATED stops session; downstream-rule telemetry; happy-path READY TO POST; Step 1 SHA pinning; iteration-2 reconciliation marker; override-reason marker; telemetry-degraded fallback; critic=unknown fallback; ARMChangesRequested skip on clean plan |
+| 17xxxx | Pattern constraint validation | 3     | Denylist `[^...]` pattern on path param (blocking); denylist on existing vs new property (warning vs blocking); TypeSpec `@pattern` denylist (blocking)                                                                                                                                                         |
 
-Total: 52 stimuli across 16 eval files.
+Total: 55 stimuli across 17 eval files.
 
 ## Fixtures
 
@@ -66,12 +68,12 @@ All 36 fixture data files live in `fixtures/` (plus a `README.md`). See
 descriptions, seeded violations, and guidance on reusing fixtures in other
 eval suites.
 
-- **15 ARM OpenAPI specs** in `arm-openapi/` -- 2 clean + 12 with seeded violations + 1 TypeSpec-generated
+- **15 ARM OpenAPI specs** in `arm-openapi/` -- 2 clean + 12 with seeded violations + 1 TypeSpec-generated + 1 denylist pattern
 - **3 example JSON files** in `examples/` -- 1 clean + 2 with issues
 - **2 readme.md files** in `readme/` -- suppression scenarios
 - **2 suppressions.yaml files** in `suppressions-yaml/` -- missing-reason and security-rule scenarios
-- **4 TypeSpec files** in `typespec/` -- segment/naming, secret/type, anti-pattern, x-ms-identifiers violations
-- **10 version-pair files** in `version-pairs/` -- 5 pairs for breaking change detection
+- **5 TypeSpec files** in `typespec/` -- segment/naming, secret/type, anti-pattern, x-ms-identifiers, denylist pattern violations
+- **12 version-pair files** in `version-pairs/` -- 5 pairs for breaking change detection + 1 pair for denylist pattern severity
 
 ## Quick Start
 
@@ -85,7 +87,7 @@ VS Code with GitHub Copilot active.
 ```powershell
 cd .github/skills/evals/arm-api-reviewer
 
-# Run the full suite (52 stimuli, sequential -- safest)
+# Run the full suite (55 stimuli, sequential -- safest)
 .\run-evals.ps1
 
 # Point to an existing vally clone instead of re-cloning
@@ -137,7 +139,7 @@ cd .github/skills/evals/arm-api-reviewer
 # (vally is a monorepo; the CLI binary lives under packages/cli)
 export VALLY_CLI="/path/to/vally/packages/cli/dist/index.js"
 
-# Run the full suite (all 52 stimuli, 5 concurrent workers)
+# Run the full suite (all 55 stimuli, 5 concurrent workers)
 node $VALLY_CLI eval --suite all --verbose
 
 # Run a single category
