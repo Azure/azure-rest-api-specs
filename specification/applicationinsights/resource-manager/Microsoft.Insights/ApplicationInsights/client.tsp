@@ -702,3 +702,9 @@ namespace ApplicationInsightsManagementClient;
   "ApplicationInsightsLinkedStorageType",
   "csharp"
 );
+// [DATE001] DateTimeOffset property should end with `On` (matches WorkbookProperties.timeModified).
+@@clientName(
+  DeletedWorkbookApi.DeletedWorkbookProperties.timeModified,
+  "ModifiedOn",
+  "csharp"
+);
