@@ -60,6 +60,7 @@ model InvestigationDataAssets {
   dataAssetIds: DataAssetId[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Request body for linking a data asset to an investigation.")
 @removed(Versions.`2026-02-01-preview`)
 model LinkDataAssetRequest {
@@ -67,6 +68,7 @@ model LinkDataAssetRequest {
   dataAssetId: DataAssetId;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Request body for unlinking a data asset from an investigation.")
 @removed(Versions.`2026-02-01-preview`)
 model UnlinkDataAssetRequest {
