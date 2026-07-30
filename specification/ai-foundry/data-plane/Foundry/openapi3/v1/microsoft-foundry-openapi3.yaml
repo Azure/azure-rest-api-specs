@@ -25080,6 +25080,12 @@ paths:
                   anyOf:
                     - $ref: '#/components/schemas/OpenAI.integer'
                     - type: 'null'
+                agent_session_id:
+                  type: string
+                  description: |-
+                    Optional session identifier for sandbox affinity. Currently only relevant for hosted agents.
+                    When provided, the request is routed to the same sandbox. When omitted, auto-derived from
+                    conversation_id/prev_response_id or a new UUID is generated.
                 agent_reference:
                   $ref: '#/components/schemas/AgentReference'
                   description: The agent to use for generating the response.
