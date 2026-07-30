@@ -680,3 +680,25 @@ namespace ApplicationInsightsManagementClient;
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
+
+// ===== Mgmt SDK review-comment resolutions (pullrequestreview-4816674351) =====
+// [RESNAME001] DeletedWorkbookResource derives from TrackedResource, so it must use the
+// `Data` suffix, not `Resource` (which is reserved for ArmResource subclasses).
+@@clientName(
+  DeletedWorkbookApi.DeletedWorkbookResource,
+  "DeletedWorkbookData",
+  "csharp"
+);
+// [TYPE002] etag should surface as the Azure.ETag struct, matching the Component/Workbook etag.
+@@clientName(DeletedWorkbookApi.DeletedWorkbookResource.etag, "ETag", "csharp");
+@@alternateType(
+  DeletedWorkbookApi.DeletedWorkbookResource.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+// [CONTEXT] StorageType is too generic; add ApplicationInsights linked-storage context.
+@@clientName(
+  ComponentLinkedStorageAccountApi.StorageType,
+  "ApplicationInsightsLinkedStorageType",
+  "csharp"
+);
