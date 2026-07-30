@@ -60,6 +60,26 @@ namespace Customization;
   "top",
   "csharp"
 );
+@@clientName(
+  DeviceUpdateOperationGroup.getUpdate::parameters.ifNoneMatch,
+  "if_none_match",
+  "python"
+);
+@@clientName(
+  DeviceUpdateOperationGroup.getFile::parameters.ifNoneMatch,
+  "if_none_match",
+  "python"
+);
+@@clientName(
+  DeviceUpdateOperationGroup.getOperationStatus::parameters.ifNoneMatch,
+  "if_none_match",
+  "python"
+);
+@@clientName(
+  DeviceManagementOperationGroup.getOperationStatus::parameters.ifNoneMatch,
+  "if_none_match",
+  "python"
+);
 
 // Hoist `instanceId` from per-operation parameter to client-constructor
 // parameter, matching the original swagger's
