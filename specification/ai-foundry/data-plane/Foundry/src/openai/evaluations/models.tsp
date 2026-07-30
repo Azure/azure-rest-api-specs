@@ -99,13 +99,51 @@ model AzureAIDataSourceConfig extends DataSourceConfig {
     | "benchmark_preview";
 }
 
+/** The set of available benchmark specifications. */
+union BenchmarkName {
+  string,
+
+  /** GPQA Diamond — graduate-level science reasoning. */
+  builtinGPQADiamond: "builtin.gpqa_diamond",
+
+  /** BBEH — BIG-Bench Extra Hard. */
+  builtinBBEH: "builtin.bbeh",
+
+  /** BIG-Bench Hard — challenging BIG-Bench tasks. */
+  builtinBigBenchHard: "builtin.bigbenchhard",
+
+  /** FrontierScience — frontier scientific reasoning. */
+  builtinFrontierScience: "builtin.frontierscience",
+
+  /** IFEval — instruction-following evaluation. */
+  builtinIFEval: "builtin.ifeval",
+
+  /** MuSR — multi-step reasoning. */
+  builtinMuSR: "builtin.musr",
+
+  /** TruthfulQA — truthfulness evaluation. */
+  builtinTruthfulQA: "builtin.truthful_qa",
+
+  /** AIME 2025 via inspect_ai framework. */
+  builtinInspectAIAIME2025: "builtin.inspect_ai.aime2025",
+
+  /** BrowseComp via inspect_ai framework — web browsing agent benchmark. */
+  builtinInspectAIBrowseComp: "builtin.inspect_ai.browse_comp",
+
+  /** ChemBench via inspect_ai framework — chemistry reasoning. */
+  builtinInspectAIChemBench: "builtin.inspect_ai.chembench",
+
+  /** Tau2-Bench Telecom via inspect_ai framework — dual-agent telecom benchmark. */
+  builtinInspectAITau2Telecom: "builtin.inspect_ai.tau2_telecom",
+}
+
 /** Data source configuration for benchmark evaluations. */
 model AzureAIBenchmarkDataSourceConfig extends AzureAIDataSourceConfig {
   /** Data schema scenario, always `benchmark` for benchmark evaluations. */
   scenario: "benchmark_preview";
 
   /** The name of the benchmark specification. */
-  benchmark_name: string;
+  benchmark_name: BenchmarkName;
 
   /** The version of the benchmark specification (e.g., '0.1'). Latest version if not specified. */
   benchmark_version?: string;
