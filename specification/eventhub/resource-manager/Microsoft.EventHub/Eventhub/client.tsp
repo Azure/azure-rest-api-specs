@@ -174,7 +174,7 @@ using Microsoft.EventHub;
   "EventHubsNamespaceGeoDataReplicationProperties",
   "csharp"
 );
-@@clientName(GeoDRRoleType, "EventHubsNamespaceGeoDRRoleType", "csharp");
+@@clientName(GeoDRRoleType, "EventHubsNamespaceGeoDrRoleType", "csharp");
 @@alternateType(
   NamespaceReplicaLocation.clusterArmId,
   Azure.Core.armResourceIdentifier,
@@ -185,6 +185,11 @@ using Microsoft.EventHub;
 @@clientName(
   NamespaceReplicaLocation,
   "EventHubsNamespaceReplicaLocation",
+  "csharp"
+);
+@@clientName(
+  NetworkRuleSetListResult,
+  "EventHubsNetworkRuleSetListResult",
   "csharp"
 );
 @@clientName(ErrorDetail, "EventHubsErrorDetail", "csharp");
@@ -302,6 +307,49 @@ using Microsoft.EventHub;
   Usage.input | Usage.output,
   "csharp"
 );
+
+// Preserve the resource name constraints emitted by the reflection-based provisioning generator.
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Name constraints for provisioning compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Name constraints for provisioning compatibility"
+@@clientOption(
+  EventHubsCluster,
+  "resource-name-constraint",
+  #{ minLength: 6, maxLength: 50, pattern: "^[a-zA-Z0-9-]+$" },
+  "csharp"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Name constraints for provisioning compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Name constraints for provisioning compatibility"
+@@clientOption(
+  EventHubsNamespace,
+  "resource-name-constraint",
+  #{ minLength: 1, maxLength: 256, pattern: "^[a-zA-Z0-9._-]+$" },
+  "csharp"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Name constraints for provisioning compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Name constraints for provisioning compatibility"
+@@clientOption(
+  AuthorizationRule,
+  "resource-name-constraint",
+  #{ minLength: 1, maxLength: 50, pattern: "^[a-zA-Z0-9._-]+$" },
+  "csharp"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Name constraints for provisioning compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Name constraints for provisioning compatibility"
+@@clientOption(
+  ConsumerGroup,
+  "resource-name-constraint",
+  #{ minLength: 1, maxLength: 50, pattern: "^[a-zA-Z0-9._-]+$" },
+  "csharp"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Name constraints for provisioning compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Name constraints for provisioning compatibility"
+@@clientOption(
+  ArmDisasterRecovery,
+  "resource-name-constraint",
+  #{ minLength: 6, maxLength: 50, pattern: "^[a-zA-Z0-9-]+$" },
+  "csharp"
+);
+
 // Mark list operations as pageable for C# backward compatibility
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility with pageable list operations"
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(
@@ -401,7 +449,7 @@ using Microsoft.EventHub;
   "csharp"
 );
 @@clientName(NetworkRuleSetProperties.ipRules, "IPRules", "csharp");
-@@clientName(IpAddressType, "EventHubIPAddressType", "csharp");
+@@clientName(IpAddressType, "EventHubsIPAddressType", "csharp");
 @@clientName(EHNamespaceProperties.ipAddressType, "IPAddressType", "csharp");
 @@clientName(NamespaceReplicaLocation.roleType, "RoleType", "csharp");
 @@clientName(
@@ -574,6 +622,33 @@ namespace Microsoft.EventHub {
     `Microsoft.KeyVault`: "Microsoft.KeyVault",
   }
 }
+
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "RBAC roles for provisioning"
+@@clientOption(
+  EventHubsCluster,
+  "resource-rbac-roles",
+  #{
+    AzureEventHubsDataOwner: "f526a384-b230-433a-b45c-95f59c4a2dec",
+    AzureEventHubsDataReceiver: "a638d3c7-ab3a-418d-83e6-5f17a39d4fde",
+    AzureEventHubsDataSender: "2b629674-e913-4c01-ae53-ef4638d8f975",
+    SchemaRegistryContributor: "5dffeca3-4936-4216-b2bc-10343a5abb25",
+    SchemaRegistryReader: "2c56ea50-c6b3-40a6-83c0-9d98858bc7d2",
+  },
+  "csharp"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "RBAC roles for provisioning"
+@@clientOption(
+  EventHubsNamespace,
+  "resource-rbac-roles",
+  #{
+    AzureEventHubsDataOwner: "f526a384-b230-433a-b45c-95f59c4a2dec",
+    AzureEventHubsDataReceiver: "a638d3c7-ab3a-418d-83e6-5f17a39d4fde",
+    AzureEventHubsDataSender: "2b629674-e913-4c01-ae53-ef4638d8f975",
+    SchemaRegistryContributor: "5dffeca3-4936-4216-b2bc-10343a5abb25",
+    SchemaRegistryReader: "2c56ea50-c6b3-40a6-83c0-9d98858bc7d2",
+  },
+  "csharp"
+);
 
 // We add this model in this namespace in order to replace some models with this model via alternateType decorator
 namespace Azure.ResourceManager.Models {
