@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.ComputeSchedule",
-    "version": "2026-03-01-preview",
+    "version": "2026-01-01-preview",
     "description": "Microsoft.ComputeSchedule Resource Provider management API.",
     "x-typespec-generated": [
       {
@@ -62,7 +62,7 @@
         "description": "List OccurrenceExtensionResource resources by parent",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
@@ -78,7 +78,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -101,7 +101,7 @@
         "description": "List ScheduledActionResources resources by parent",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
@@ -117,7 +117,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -140,20 +140,20 @@
         "description": "List the operations for the provider",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -176,10 +176,10 @@
         "description": "VirtualMachinesCancelOperations: Cancel a previously submitted (start/deallocate/hibernate) request",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "locationparameter",
@@ -209,7 +209,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -226,10 +226,10 @@
         "description": "[PRIVATE PREVIEW]: VirtualMachinesExecuteCreate: Execute create operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "locationparameter",
@@ -259,7 +259,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -270,66 +270,16 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ComputeSchedule/locations/{locationparameter}/virtualMachinesExecuteCreateFlex": {
-      "post": {
-        "operationId": "ScheduledActions_VirtualMachinesExecuteCreateFlex",
-        "description": "VirtualMachinesExecuteCreateFlex: Execute create operation for a batch of virtual machines with flex properties, this operation is triggered as soon as Computeschedule receives it.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "locationparameter",
-            "in": "path",
-            "description": "The location name.",
-            "required": true,
-            "type": "string",
-            "minLength": 1
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The request body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ExecuteCreateFlexRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/CreateFlexResourceOperationResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ScheduledActions_VirtualMachinesExecuteCreateFlex_MaximumSet": {
-            "$ref": "./examples/ScheduledActions_VirtualMachinesExecuteCreateFlex_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ComputeSchedule/locations/{locationparameter}/virtualMachinesExecuteDeallocate": {
       "post": {
         "operationId": "ScheduledActions_VirtualMachinesExecuteDeallocate",
         "description": "VirtualMachinesExecuteDeallocate: Execute deallocate operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "locationparameter",
@@ -359,7 +309,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -376,10 +326,10 @@
         "description": "[PRIVATE PREVIEW]: VirtualMachinesExecuteDelete: Execute delete operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "locationparameter",
@@ -409,7 +359,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -426,10 +376,10 @@
         "description": "VirtualMachinesExecuteHibernate: Execute hibernate operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "locationparameter",
@@ -459,7 +409,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -476,10 +426,10 @@
         "description": "VirtualMachinesExecuteStart: Execute start operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "locationparameter",
@@ -509,7 +459,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -526,10 +476,10 @@
         "description": "VirtualMachinesGetOperationErrors: Get error details on operation errors (like transient errors encountered, additional logs) if they exist.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "locationparameter",
@@ -559,7 +509,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -579,10 +529,10 @@
         "description": "VirtualMachinesGetOperationStatus: Polling endpoint to read status of operations performed on virtual machines",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "locationparameter",
@@ -612,7 +562,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -629,10 +579,10 @@
         "description": "VirtualMachinesSubmitDeallocate: Schedule deallocate operation for a batch of virtual machines at datetime in future.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "locationparameter",
@@ -662,7 +612,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -679,10 +629,10 @@
         "description": "VirtualMachinesSubmitHibernate: Schedule hibernate operation for a batch of virtual machines at datetime in future.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "locationparameter",
@@ -712,7 +662,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -729,10 +679,10 @@
         "description": "VirtualMachinesSubmitStart: Schedule start operation for a batch of virtual machines at datetime in future.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "locationparameter",
@@ -762,7 +712,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -779,10 +729,10 @@
         "description": "List ScheduledAction resources by subscription ID",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -795,7 +745,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -815,13 +765,13 @@
         "description": "List ScheduledAction resources by resource group",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
@@ -834,7 +784,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -854,13 +804,13 @@
         "description": "Get a ScheduledAction",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "scheduledActionName",
@@ -881,7 +831,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -896,13 +846,13 @@
         "description": "Create a ScheduledAction",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "scheduledActionName",
@@ -949,7 +899,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -968,13 +918,13 @@
         "description": "Update a ScheduledAction",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "scheduledActionName",
@@ -1004,7 +954,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1019,13 +969,13 @@
         "description": "Delete a ScheduledAction",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "scheduledActionName",
@@ -1057,7 +1007,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1078,13 +1028,13 @@
         "description": "A synchronous resource action.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "scheduledActionName",
@@ -1114,7 +1064,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1131,13 +1081,13 @@
         "description": "A synchronous resource action.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "scheduledActionName",
@@ -1167,7 +1117,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1184,13 +1134,13 @@
         "description": "A synchronous resource action.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "scheduledActionName",
@@ -1220,7 +1170,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1237,13 +1187,13 @@
         "description": "A synchronous resource action.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "scheduledActionName",
@@ -1261,7 +1211,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1278,13 +1228,13 @@
         "description": "A synchronous resource action.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "scheduledActionName",
@@ -1302,7 +1252,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1322,13 +1272,13 @@
         "description": "List Occurrence resources by ScheduledAction",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "scheduledActionName",
@@ -1349,7 +1299,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1372,13 +1322,13 @@
         "description": "Get a Occurrence",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "scheduledActionName",
@@ -1407,7 +1357,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1427,13 +1377,13 @@
         "description": "A synchronous resource action.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "scheduledActionName",
@@ -1471,7 +1421,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1491,13 +1441,13 @@
         "description": "A long-running resource action.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "scheduledActionName",
@@ -1549,7 +1499,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1573,13 +1523,13 @@
         "description": "List resources attached to Scheduled Actions for the given occurrence",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "scheduledActionName",
@@ -1608,7 +1558,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1628,13 +1578,13 @@
         "description": "A synchronous resource action.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "scheduledActionName",
@@ -1664,7 +1614,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1681,13 +1631,13 @@
         "description": "List resources attached to Scheduled Actions",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "scheduledActionName",
@@ -1708,7 +1658,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1728,13 +1678,13 @@
         "description": "A synchronous resource action.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "scheduledActionName",
@@ -1755,7 +1705,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1794,36 +1744,6 @@
             "name": "Hibernate",
             "value": "Hibernate",
             "description": "Perform hibernate and deallocate on the specified resources"
-          }
-        ]
-      }
-    },
-    "AllocationStrategy": {
-      "type": "string",
-      "description": "The allocation strategy for VM size selection",
-      "enum": [
-        "LowestPrice",
-        "Prioritized",
-        "CapacityOptimized"
-      ],
-      "x-ms-enum": {
-        "name": "AllocationStrategy",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "LowestPrice",
-            "value": "LowestPrice",
-            "description": "Platform prioritizes VM sizes with the lowest hourly cost"
-          },
-          {
-            "name": "Prioritized",
-            "value": "Prioritized",
-            "description": "Customer specifies a rank for each VM size, platform uses VM sizes in rank order"
-          },
-          {
-            "name": "CapacityOptimized",
-            "value": "CapacityOptimized",
-            "description": "Platform prioritizes VM sizes with the highest available capacity first"
           }
         ]
       }
@@ -1964,43 +1884,6 @@
       },
       "required": [
         "results"
-      ]
-    },
-    "CreateFlexResourceOperationResponse": {
-      "type": "object",
-      "description": "The response from a create flex request",
-      "properties": {
-        "description": {
-          "type": "string",
-          "description": "The description of the operation response"
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of resources used in the create flex request eg virtual machines"
-        },
-        "location": {
-          "$ref": "#/definitions/Azure.Core.azureLocation",
-          "description": "The location of the create flex request eg westus",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "results": {
-          "type": "array",
-          "description": "The results from the create flex request if no errors exist",
-          "items": {
-            "$ref": "#/definitions/ResourceOperation"
-          },
-          "x-ms-identifiers": [
-            "resourceId"
-          ]
-        }
-      },
-      "required": [
-        "description",
-        "type",
-        "location"
       ]
     },
     "CreateResourceOperationResponse": {
@@ -2173,64 +2056,6 @@
         "location"
       ]
     },
-    "DistributionStrategy": {
-      "type": "string",
-      "description": "The distribution strategy for zone allocation",
-      "enum": [
-        "BestEffortSingleZone",
-        "Prioritized",
-        "BestEffortBalanced",
-        "StrictBalanced"
-      ],
-      "x-ms-enum": {
-        "name": "DistributionStrategy",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "BestEffortSingleZone",
-            "value": "BestEffortSingleZone",
-            "description": "Platform attempts to place as many VMs as possible in a single zone, falls back to multiple zones if needed"
-          },
-          {
-            "name": "Prioritized",
-            "value": "Prioritized",
-            "description": "Platform uses customer-provided zone rankings to allocate VMs"
-          },
-          {
-            "name": "BestEffortBalanced",
-            "value": "BestEffortBalanced",
-            "description": "Platform attempts to evenly distribute VMs across all available zones with best effort"
-          },
-          {
-            "name": "StrictBalanced",
-            "value": "StrictBalanced",
-            "description": "Platform must evenly distribute VMs across zones, request is rejected if exact balance cannot be achieved"
-          }
-        ]
-      }
-    },
-    "ExecuteCreateFlexRequest": {
-      "type": "object",
-      "description": "The ExecuteCreateFlexRequest request for executeCreateFlex operations",
-      "properties": {
-        "resourceConfigParameters": {
-          "$ref": "#/definitions/ResourceProvisionFlexPayload",
-          "description": "Resource creation payload with flex properties"
-        },
-        "executionParameters": {
-          "$ref": "#/definitions/ExecutionParameters",
-          "description": "The execution parameters for the request"
-        },
-        "correlationid": {
-          "type": "string",
-          "description": "Correlationid item"
-        }
-      },
-      "required": [
-        "resourceConfigParameters",
-        "executionParameters"
-      ]
-    },
     "ExecuteCreateRequest": {
       "type": "object",
       "description": "The ExecuteCreateRequest request for create operations",
@@ -2382,39 +2207,6 @@
       "required": [
         "lastOpType",
         "status"
-      ]
-    },
-    "FlexProperties": {
-      "type": "object",
-      "description": "The flex properties for flexible VM creation",
-      "properties": {
-        "vmSizeProfiles": {
-          "type": "array",
-          "description": "The list of VM size profiles to use for flex creation",
-          "minItems": 1,
-          "maxItems": 5,
-          "items": {
-            "$ref": "#/definitions/VmSizeProfile"
-          },
-          "x-ms-identifiers": []
-        },
-        "osType": {
-          "$ref": "#/definitions/OsType",
-          "description": "The operating system type for the VMs"
-        },
-        "priorityProfile": {
-          "$ref": "#/definitions/PriorityProfile",
-          "description": "The priority profile for VM allocation"
-        },
-        "zoneAllocationPolicy": {
-          "$ref": "#/definitions/ZoneAllocationPolicy",
-          "description": "The zone allocation policy for distributing VMs across availability zones"
-        }
-      },
-      "required": [
-        "vmSizeProfiles",
-        "osType",
-        "priorityProfile"
       ]
     },
     "GetOperationErrorsRequest": {
@@ -2694,7 +2486,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -2754,7 +2546,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -3160,68 +2952,6 @@
         ]
       }
     },
-    "OsType": {
-      "type": "string",
-      "description": "The supported operating system types for flex VM creation",
-      "enum": [
-        "Windows",
-        "Linux"
-      ],
-      "x-ms-enum": {
-        "name": "OsType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Windows",
-            "value": "Windows",
-            "description": "Windows operating system"
-          },
-          {
-            "name": "Linux",
-            "value": "Linux",
-            "description": "Linux operating system"
-          }
-        ]
-      }
-    },
-    "PriorityProfile": {
-      "type": "object",
-      "description": "The priority profile for flex VM creation",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/PriorityType",
-          "description": "The priority type for VM allocation"
-        },
-        "allocationStrategy": {
-          "$ref": "#/definitions/AllocationStrategy",
-          "description": "The allocation strategy for VM size selection"
-        }
-      }
-    },
-    "PriorityType": {
-      "type": "string",
-      "description": "The priority type for VM allocation",
-      "enum": [
-        "Regular",
-        "Spot"
-      ],
-      "x-ms-enum": {
-        "name": "PriorityType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Regular",
-            "value": "Regular",
-            "description": "Regular priority VMs"
-          },
-          {
-            "name": "Spot",
-            "value": "Spot",
-            "description": "Spot priority VMs"
-          }
-        ]
-      }
-    },
     "ProvisioningState": {
       "type": "string",
       "description": "Provisioning state",
@@ -3360,9 +3090,7 @@
             "Unknown",
             "Start",
             "Deallocate",
-            "Hibernate",
-            "Create",
-            "Delete"
+            "Hibernate"
           ],
           "x-ms-enum": {
             "name": "ResourceOperationType",
@@ -3387,16 +3115,6 @@
                 "name": "Hibernate",
                 "value": "Hibernate",
                 "description": "Hibernate operations on the resources"
-              },
-              {
-                "name": "Create",
-                "value": "Create",
-                "description": "Create operations on the resources"
-              },
-              {
-                "name": "Delete",
-                "value": "Delete",
-                "description": "Delete operations on the resources"
               }
             ]
           }
@@ -3614,9 +3332,7 @@
         "Unknown",
         "Start",
         "Deallocate",
-        "Hibernate",
-        "Create",
-        "Delete"
+        "Hibernate"
       ],
       "x-ms-enum": {
         "name": "ResourceOperationType",
@@ -3641,16 +3357,6 @@
             "name": "Hibernate",
             "value": "Hibernate",
             "description": "Hibernate operations on the resources"
-          },
-          {
-            "name": "Create",
-            "value": "Create",
-            "description": "Create operations on the resources"
-          },
-          {
-            "name": "Delete",
-            "value": "Delete",
-            "description": "Delete operations on the resources"
           }
         ]
       }
@@ -3672,42 +3378,6 @@
       },
       "required": [
         "resources"
-      ]
-    },
-    "ResourceProvisionFlexPayload": {
-      "type": "object",
-      "description": "Resource creation data model for flex VM provisioning",
-      "properties": {
-        "baseProfile": {
-          "type": "object",
-          "description": "JSON object that contains VM properties that are common across all VMs in this batch",
-          "additionalProperties": {}
-        },
-        "resourceOverrides": {
-          "type": "array",
-          "description": "JSON array that contains VM properties that should be overridden for each VM in the batch",
-          "items": {
-            "type": "object",
-            "additionalProperties": {}
-          }
-        },
-        "resourceCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of VMs to be created"
-        },
-        "resourcePrefix": {
-          "type": "string",
-          "description": "If resourceOverrides doesn't contain name, service will create name based on prefix and resourceCount"
-        },
-        "flexProperties": {
-          "$ref": "#/definitions/FlexProperties",
-          "description": "The flex properties for flexible VM creation"
-        }
-      },
-      "required": [
-        "resourceCount",
-        "flexProperties"
       ]
     },
     "ResourceProvisionPayload": {
@@ -3917,7 +3587,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -4074,7 +3744,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -4468,25 +4138,6 @@
         ]
       }
     },
-    "VmSizeProfile": {
-      "type": "object",
-      "description": "A VM size profile with a name and rank for flex VM creation",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the VM size, eg Standard_D2ads_v5",
-          "minLength": 1
-        },
-        "rank": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The rank of this VM size in the priority order"
-        }
-      },
-      "required": [
-        "name"
-      ]
-    },
     "WeekDay": {
       "type": "string",
       "description": "Representation of the possible selection of days in a week in a gregorian calendar",
@@ -4546,45 +4197,6 @@
           }
         ]
       }
-    },
-    "ZoneAllocationPolicy": {
-      "type": "object",
-      "description": "The zone allocation policy for distributing VMs across availability zones",
-      "properties": {
-        "distributionStrategy": {
-          "$ref": "#/definitions/DistributionStrategy",
-          "description": "The distribution strategy for zone allocation"
-        },
-        "zonePreferences": {
-          "type": "array",
-          "description": "The zone preferences for allocation priority",
-          "items": {
-            "$ref": "#/definitions/ZonePreference"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "distributionStrategy"
-      ]
-    },
-    "ZonePreference": {
-      "type": "object",
-      "description": "A zone preference with a zone identifier and rank",
-      "properties": {
-        "zone": {
-          "type": "string",
-          "description": "The zone identifier"
-        },
-        "rank": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The rank of this zone in the priority order"
-        }
-      },
-      "required": [
-        "zone"
-      ]
     }
   },
   "parameters": {
