@@ -152,11 +152,11 @@ model ExperimentVariant {
   @doc("The role of this variant in the experiment.")
   role: ExperimentVariantRole;
 
-  @doc("The percentage of traffic to route to this variant. Required on create; may be omitted in materialized responses (use experiment_steps instead).")
-  traffic_percentage?: int32;
+  @doc("The percentage of traffic to route to this variant. Across all variants the percentages must sum to 100.")
+  traffic_percentage: int32;
 
-  @doc("The minimum number of observations required before this variant's scorecard results are considered reliable. Defaults to 100 when omitted.")
-  required_sample_size?: int32;
+  @doc("The minimum number of observations required before this variant's scorecard results are considered reliable. If omitted, the service defaults to 100.")
+  required_sample_size?: int32 = 100;
 }
 
 /** A contiguous range of hash buckets assigned to a variant. */
@@ -186,7 +186,7 @@ model ExperimentStep {
   id: string;
 
   @doc("The Unix timestamp (seconds) when this step started.")
-  started_at?: FoundryTimestamp | null;
+  started_at: FoundryTimestamp;
 
   @doc("The Unix timestamp (seconds) when this step stopped. Null if still running.")
   stopped_at?: FoundryTimestamp | null;
@@ -228,9 +228,9 @@ model EvaluatorMetricSource extends ExperimentMetricSource {
   type: ExperimentMetricSourceType.evaluator;
 
   @doc("The evaluator name.")
-  evaluator_name?: string;
+  evaluator_name: string;
 
-  @doc("The evaluator version to pin.")
+  @doc("The evaluator version to pin. If omitted, the service uses the latest version.")
   evaluator_version?: string;
 
   @doc("Additional evaluator parameters.")
@@ -464,8 +464,8 @@ model CreateExperimentRequest {
   @doc("A human-readable description of the experiment.")
   description?: string;
 
-  @doc("The experiment duration in days. Drives only the service-managed scorecard refresh horizon; it does not end the experiment. Defaults to 7 when omitted.")
-  duration_in_days?: int32;
+  @doc("The experiment duration in days. Drives only the service-managed scorecard refresh horizon; it does not end the experiment. If omitted, the service defaults to 7.")
+  duration_in_days?: int32 = 7;
 
   @doc("The list of variants. Each variant id is an agent version number. Exactly one must have role 'control'. traffic_percentage must sum to 100.")
   variants: ExperimentVariant[];
