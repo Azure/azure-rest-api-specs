@@ -19,6 +19,13 @@ model WebPubSubChatServiceClientOptions {
 interface WebPubSubChatServiceClient
   extends WebPubSubChat.WebPubSubChatServiceClient {}
 
+@@clientName(WebPubSubChat.ChatMessage, "WebPubSubChatMessage", "csharp");
+@@clientName(
+  WebPubSubChat.MessageContent,
+  "WebPubSubChatMessageContent",
+  "csharp"
+);
+
 @@clientInitialization(
   WebPubSubChatServiceClient,
   {
