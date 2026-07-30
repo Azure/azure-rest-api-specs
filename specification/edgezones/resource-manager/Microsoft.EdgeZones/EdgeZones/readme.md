@@ -27,12 +27,16 @@ These are the global settings for the edgezones.
 ```yaml
 openapi-type: arm
 openapi-subtype: providerHub
-tag: package-2024-04-01-preview
+tag: package-2026-10-01
 ```
 
-``` yaml
-modelerfour:
-  flatten-models: false
+### Tag: package-2026-10-01
+
+These settings apply only when `--tag=package-2026-10-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-10-01'
+input-file:
+  - stable/2026-10-01/edgezones.json
 ```
 
 ### Tag: package-2024-04-01-preview
@@ -72,3 +76,4 @@ See configuration in [readme.python.md](./readme.python.md)
 ## CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
+s
