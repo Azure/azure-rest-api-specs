@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "EventGridManagementClient",
-    "version": "2025-11-15-preview",
+    "version": "2026-06-15-preview",
     "description": "Azure EventGrid Management Client",
     "x-typespec-generated": [
       {
@@ -14967,6 +14967,30 @@
         ]
       }
     },
+    "IpAddressType": {
+      "type": "string",
+      "description": "IP address type for the namespace resource.",
+      "enum": [
+        "IPv4",
+        "DualStack"
+      ],
+      "x-ms-enum": {
+        "name": "IpAddressType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "IPv4",
+            "value": "IPv4",
+            "description": "IPv4"
+          },
+          {
+            "name": "DualStack",
+            "value": "DualStack",
+            "description": "DualStack"
+          }
+        ]
+      }
+    },
     "IsNotNullAdvancedFilter": {
       "type": "object",
       "description": "IsNotNull Advanced Filter.",
@@ -15340,6 +15364,10 @@
           "$ref": "#/definitions/TlsVersion",
           "description": "Minimum TLS version of the publisher allowed to publish to this namespace. Only TLS version 1.2 is supported."
         },
+        "ipAddressType": {
+          "$ref": "#/definitions/IpAddressType",
+          "description": "IP address type for the namespace resource."
+        },
         "autoScaleConfiguration": {
           "$ref": "#/definitions/AutoScaleConfiguration",
           "description": "Auto-scale configuration for the namespace resource"
@@ -15692,6 +15720,10 @@
             "$ref": "#/definitions/InboundIpRule"
           },
           "x-ms-identifiers": []
+        },
+        "ipAddressType": {
+          "$ref": "#/definitions/IpAddressType",
+          "description": "IP address type for the namespace resource."
         },
         "autoScaleConfiguration": {
           "$ref": "#/definitions/UpdateAutoScaleConfiguration",
@@ -19206,7 +19238,8 @@
       "enum": [
         "1.0",
         "1.1",
-        "1.2"
+        "1.2",
+        "1.3"
       ],
       "x-ms-enum": {
         "name": "TlsVersion",
@@ -19226,6 +19259,11 @@
             "name": "1.2",
             "value": "1.2",
             "description": "1.2"
+          },
+          {
+            "name": "1.3",
+            "value": "1.3",
+            "description": "1.3"
           }
         ]
       }
