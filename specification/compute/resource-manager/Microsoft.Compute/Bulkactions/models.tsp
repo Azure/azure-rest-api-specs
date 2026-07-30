@@ -189,6 +189,45 @@ union DistributionStrategy {
   string,
 }
 
+@added(Microsoft.Compute.Versions.`2026-08-06-preview`)
+@doc("Whether the service may launch fewer instances than requested when the full capacity cannot be satisfied.")
+union PartialFulfillmentMode {
+  @doc("Default. The service launches as much capacity as possible, up to the requested capacity.")
+  Enabled: "Enabled",
+
+  @doc("The service launches either all of the requested capacity or none of it.")
+  Disabled: "Disabled",
+
+  string,
+}
+
+@added(Microsoft.Compute.Versions.`2026-08-06-preview`)
+@doc("The reason the requested capacity could only be partially fulfilled.")
+union PartialFulfillmentReason {
+  @doc("The requested capacity could not be fully satisfied due to insufficient capacity in the region.")
+  InsufficientCapacity: "InsufficientCapacity",
+
+  @doc("The requested capacity could not be fully satisfied due to insufficient quota in the subscription.")
+  InsufficientQuota: "InsufficientQuota",
+
+  string,
+}
+
+@added(Microsoft.Compute.Versions.`2026-08-06-preview`)
+@doc("Controls partial fulfillment of the VMs or vCPUs requested by a BulkCreateCustom or LaunchBulkInstancesOperation request, and reports the outcome when partial fulfillment occurs.")
+model PartialFulfillmentPolicy {
+  @doc("Whether partial fulfillment is allowed. Defaults to Enabled. When set to Disabled, minCapacity must not be specified; a request that sets Disabled and also specifies minCapacity is rejected with 400 Bad Request.")
+  mode?: PartialFulfillmentMode = PartialFulfillmentMode.Enabled;
+
+  @visibility(Lifecycle.Read)
+  @doc("The amount of capacity that was successfully fulfilled, expressed in the units given by capacityType. Returned on the create response only when the request was partially fulfilled; otherwise null.")
+  fulfilledCapacity?: int32;
+
+  @visibility(Lifecycle.Read)
+  @doc("The reason the requested capacity was only partially fulfilled. Returned on the create response only when the request was partially fulfilled; otherwise null.")
+  reason?: PartialFulfillmentReason;
+}
+
 @added(Microsoft.Compute.Versions.`2026-04-06-preview`)
 @doc("A VM size profile with a name and rank for flex VM creation")
 model VmSizeProfile {
