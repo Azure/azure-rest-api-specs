@@ -93,9 +93,10 @@ jobs:
       - name: Compile every fixture
         run: |
           failed=0
+          config=".github/skills/evals/data-plane-api-reviewer/fixtures/typespec-data-plane/tspconfig.yaml"
           for f in $(git ls-files '.github/skills/evals/data-plane-api-reviewer/fixtures/**/*.tsp'); do
             echo "::group::$f"
-            if npx tsp compile "$f" --no-emit --pretty false; then
+            if npx tsp compile "$f" --config "$config" --no-emit --pretty false; then
               echo "ok"
             else
               echo "::error file=$f::Eval fixture does not compile"

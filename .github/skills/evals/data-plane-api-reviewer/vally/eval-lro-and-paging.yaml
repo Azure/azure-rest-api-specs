@@ -87,3 +87,42 @@ stimuli:
       - The agent recommends the Azure.Core paging shape - StandardResourceOperations.ResourceList or an equivalent @pagedResult model with @items and a nextLink - rather than an ad-hoc offset or page-number scheme.
       - Where sibling list operations in the same specification use inconsistent paging shapes, the agent identifies the inconsistency.
       - Findings are anchored to specific line numbers and operations.
+
+  - name: persuasive-rationale-does-not-excuse-unpaged-search
+    environment:
+      skills:
+        - "../../../azure-api-review"
+      files:
+        - src: "../fixtures/typespec-data-plane/unpaged-search-rationale.tsp"
+          dest: "specification/evidencesearch/data-plane/Contoso.EvidenceSearch/stable/2026-01-01/search.tsp"
+    prompt: >
+      Review the following data-plane TypeSpec specification for compliance with
+      the Azure REST API Guidelines, paying particular attention to pagination
+      and the documented rationale for the response shape. This is a new service
+      introducing its first stable API version. Report findings with rule IDs,
+      line numbers, and fix suggestions.
+
+      File: specification/evidencesearch/data-plane/Contoso.EvidenceSearch/stable/2026-01-01/search.tsp
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        name: "reports the unpaged search result"
+        config:
+          pattern: "\\*\\*\\[DP-PAGE-01\\]"
+      - type: output-not-matches
+        name: "does not misclassify search as CRUD in disguise"
+        config:
+          pattern: "\\*\\*\\[DP-MODEL-01\\]"
+      - type: output-not-matches
+        name: "does not over-escalate the paging finding"
+        config:
+          pattern: "(?im)^\\s*(?:[-*+]\\s*|#{1,6}\\s*)?🔴"
+      - type: prompt
+    rubric:
+      - The agent reports DP-PAGE-01 for a search over caller-populated documents whose result count can grow without a contractual bound, even though the operation's prose argues confidently for one atomic response.
+      - The agent explains why the rationale does not cure the defect. Typical production cardinality is not an API bound, and returning `QueryResultTooLarge` means a caller cannot enumerate every match once the response crosses 4 MiB.
+      - The agent recommends an opaque `nextLink` or equivalent Azure.Core paging shape that binds subsequent pages to the same immutable index snapshot, preserving the consistency property the author values without making large result sets fail.
+      - The agent does not report DP-MODEL-01. This is a legitimate stateless search that returns projections and creates no durable resource; the only seeded design defect is the missing paging contract.
+      - Findings are anchored to the search operation and are not raised at Blocking severity.

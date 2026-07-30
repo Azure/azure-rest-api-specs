@@ -451,6 +451,13 @@ describe("checkGraderSoundness", () => {
     expect(anchored.test(REAL_FINDINGS_PROBE)).toBe(true);
   });
 
+  it("supports exact rule graders for sparse positive fixtures", () => {
+    const exact = compileGraderPattern("\\*\\*\\[DP-VIS-01\\]");
+
+    expect(exact.test(CORRECT_SILENCE_PROBE)).toBe(false);
+    expect(exact.test(REAL_FINDINGS_PROBE)).toBe(true);
+  });
+
   it("the general finding pattern spans every rule-ID family the skill defines", () => {
     const general = compileGraderPattern("\\*\\*\\[[A-Z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)+\\]");
 

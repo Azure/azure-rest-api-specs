@@ -49,12 +49,13 @@ numbers already disagree. Run the suite if you want a count.
 ## Fixtures
 
 Fixtures are illustrative TypeSpec. They live outside `specification/`, are
-not compiled by CI, and are not intended to be shipped or copied into a real
-service. Several of them contain deliberate compile-level defects, because
-that is what is under test.
+compiled by the `compile-fixtures` CI job, and are not intended to be shipped
+or copied into a real service. Positive fixtures contain deliberate API-design
+defects, but every fixture is valid TypeSpec.
 
-Every fixture carries a header comment naming the seeded violations, or --
-for a true negative -- naming the false positive it exists to catch.
+Fixtures do not contain headers or comments naming their class, seeded rules,
+or expected output. The agent reads them. Provenance lives in
+[`fixtures/MANIFEST.md`](fixtures/MANIFEST.md), which the agent never sees.
 Fixtures whose name begins with `tn-` are true negatives.
 
 Credentials appearing in fixtures are obviously fake placeholders.
@@ -73,7 +74,7 @@ Credentials appearing in fixtures are obviously fake placeholders.
 
 ## The true-negative file
 
-`eval-true-negatives.yaml` covers four classes plus the preview carve-out:
+`eval-true-negatives.yaml` covers five classes plus the preview carve-out:
 
 1. **Clean spec** -- a fully compliant `Azure.Core` service. Assert silence.
 2. **Legitimate deviation** -- input that looks wrong and is right: a genuine
@@ -89,6 +90,9 @@ Credentials appearing in fixtures are obviously fake placeholders.
    ordering, retention windows, throttling, and idempotency. None of it is
    statically checkable. Assert that the reviewer does not manufacture a
    finding out of prose.
+5. **Additive stable evolution** -- a terse stable-to-stable pair that adds an
+   optional property and an open-union member with the correct `@added`
+   decorators. Assert silence on a common, compatible version bump.
 
 Plus **preview breaking changes**, which are permitted and are the single
 most likely versioning false positive.
@@ -478,24 +482,27 @@ without delete**` — defensible on the file's actual content, phrased as a
 question, at Warning severity, but off the stimulus's focus. That is the shape
 padding takes, and the counter now records it.
 
-**What it still does not cover**, so the instrument is not mistaken for a
-solution:
+**What the counter still does not cover**, so the instrument is not mistaken
+for a solution:
 
-- **No fixture is designed to provoke padding.** Every true negative is
-  all-clean or all-legitimate, and every positive fixture is seeded densely
-  enough that padding is indistinguishable from thoroughness. The counter can
-  only observe padding that happens to occur, not elicit it. The missing
-  fixture is a mostly-fine spec with exactly one real defect.
 - **It counts on true negatives only.** Padding around a _genuine_ finding on a
-  positive stimulus — the commonest real-world form — is not counted, because
-  there a finding is not by definition a false positive and the counter cannot
-  tell padding from thoroughness.
-- **It is a count, not a judgment.** A rising number is a reason to go and read
-  the reports; it does not distinguish four weak-but-valid findings from four
-  invented ones. Only the LLM judge does that.
+  positive stimulus is not part of this aggregate metric.
+- **It is a count, not a judgment.** A rising number is a reason to read the
+  reports; it does not distinguish weak-but-valid findings from invented ones.
 
-So an unmeasurable class became a partially-measured one. Treat a flat count as
-weak evidence and a rising one as a reason to look.
+A direct positive probe now covers the first limitation locally.
+`single-write-only-property-without-padding` presents one durable write-only
+property in an otherwise conventional service. Its mechanical grader accepts
+one bold-bracketed finding before `### Questions` and fails on a second; the
+LLM rubric requires that one finding to be `DP-VIS-01` at Warning severity.
+
+The threshold is intentionally **exactly one**, with no courtesy allowance.
+The fixture was built to remove adjacent ambiguity: complete CRUD and list
+operations, correct key and timestamp visibility, an extensible union, clear
+names, substantive docs, and the `url` scalar. Allowing one extra finding would
+make the probe unable to distinguish focused review from the padding it exists
+to elicit. Questions remain excluded because the report contract defines them
+as non-findings, and `run-evals.ps1` makes the same exclusion.
 
 ### Known divergence: malformed Questions
 
@@ -742,9 +749,25 @@ requires a fresh run.
 
 ## Known coverage gaps
 
-Read this before concluding anything from the "41% true negatives" figure.
+Read this before concluding anything from the 40% true-negative share.
 
-### The padding class is only partially instrumented
+### The prose-length confound is neutralized in aggregate
+
+The initial corpus had 12 multi-line `@doc("""` blocks across the four
+single-version true-negative fixtures and one across all positive fixtures.
+That let a model use "is this file arguing with me?" as a proxy for silence.
+
+The current source files contain **10** such blocks in true negatives and
+**11** in positives. `tn-clean-service`, `tn-linter-owned`, and the additive
+stable pair are terse; `notification-routing` and
+`unpaged-search-rationale` each contain five confident multi-line blocks while
+retaining a real defect. Long prose is now evidence on both sides, not a class
+label.
+
+This closes the obvious corpus-wide shortcut, not every linguistic shortcut.
+Only an eval run can show whether the model actually reads the rationales.
+
+### Padding has one direct probe, not representative coverage
 
 The false-positive mode most likely to get this bot muted in practice is
 **not** a confident wrong finding on a clean spec. It is a spec that is 90%
@@ -753,49 +776,61 @@ then pads with three or four adjacent low-value ones to look thorough.
 Reviewers tolerate a wrong finding; they stop reading a bot that buries a good
 finding in noise.
 
-As of 2026-07-27 this is **partially measured** rather than invisible: the
-family-agnostic finding counter tallies every bracketed finding on a true
-negative at every severity, so padding that occurs is at least recorded. See
-"The padding class's first instrument" above for what that does and does not
-buy, in detail.
+The family-agnostic counter records findings on true negatives, and the
+notification-routing stimulus now directly grades padding around one genuine
+finding. Its exactly-one threshold is deliberately strict for the reasons
+above.
 
-What remains missing is the **stimulus**: no fixture is designed to provoke
-padding. Every true negative is all-clean or all-legitimate, and every positive
-fixture is seeded densely enough that padding is indistinguishable from
-thoroughness. The counter can observe padding that happens to occur; it cannot
-elicit it, and it does not count padding around a genuine finding on a positive
-stimulus, which is the commonest real-world form.
+One synthetic service is not representative coverage. Padding can be triggered
+by many other contexts -- mixed old and new surface, multi-file graphs,
+versioned changes, and partially documented legacy APIs -- none of which this
+probe spans.
 
-### The true-negative denominator is 5, not 7
+### The true-negative denominator is 6, not 8
 
-Three of the seven true-negative stimuli (`tn-legitimate-action-not-crud`,
+Three of the eight true-negative stimuli (`tn-legitimate-action-not-crud`,
 `tn-bounded-list-and-singleton`, `tn-closed-union-justified`) all run against
 the same fixture, `fixtures/typespec-data-plane/tn-legitimate-deviation.tsp`.
 Counting stimuli overstates independence:
 
-| Fixture                       | Stimuli |
-| ----------------------------- | ------- |
-| `tn-legitimate-deviation.tsp` | 3       |
-| `tn-clean-service.tsp`        | 1       |
-| `tn-linter-owned.tsp`         | 1       |
-| `tn-runtime-behavioral.tsp`   | 1       |
-| `version-pairs/preview-*.tsp` | 1       |
+| Fixture                                   | Stimuli |
+| ----------------------------------------- | ------- |
+| `tn-legitimate-deviation.tsp`             | 3       |
+| `tn-clean-service.tsp`                    | 1       |
+| `tn-linter-owned.tsp`                     | 1       |
+| `tn-runtime-behavioral.tsp`               | 1       |
+| `version-pairs/preview-*.tsp`             | 1       |
+| `version-pairs/stable-additive-property/` | 1       |
 
 Any fixture-level flaw — the label leakage above, an unrealistic construction,
 a compile error — hits all three at once. Their _graders_ are distinct, so they
 do not necessarily pass or fail together (in the first run,
 `tn-closed-union-justified` passed 3/3 while the other two failed 0/3), but
 they share a single input and a single author's idea of what a legitimate
-deviation looks like. Five distinct fixtures is a thin base for a promotion
+deviation looks like. Six distinct fixtures is still a thin base for a promotion
 gate.
+
+### Suppression coverage is narrow
+
+`tn-legitimate-deviation.tsp` contains a real `#suppress` for a protocol-closed
+union with a specific technical justification. It covers the most important
+positive case: a reviewer should read and accept a sound suppression rather
+than restating its warning.
+
+There is still no positive fixture for an inaccurate, blanket, or placeholder
+suppression, and no coverage of suppression review outside union
+extensibility. This rebuild did not add one because prose confounding and
+padding were the higher-risk measurement failures.
 
 ### Consequence for the promotion gate
 
-Because of these gaps, the synthetic true-negative suite cannot by itself
-qualify the reviewer for phase 2. See the phase 0 dark launch in
+Because of these gaps, and because the new stimuli have not yet had an
+authorized vally run, the synthetic suite cannot bound a production
+false-positive rate or qualify the reviewer for phase 2 by itself. It can catch
+specific regressions. See the phase 0 dark launch in
 [`.github/workflows/data-plane-api-review.md`](../../../workflows/data-plane-api-review.md):
-real merged data-plane pull requests are a better false-positive source than
-synthetic fixtures, and are the only place the padding class shows up at all.
+real merged data-plane pull requests provide the distribution the synthetic
+corpus cannot.
 
 ## Model pinning
 
@@ -877,12 +912,13 @@ threat-detection decisions, and the alignment check does not constrain it.
    the false-positive metric and the blocking gate.
 6. Keep the true-negative share at or above 40%, and prefer a **new** fixture
    over a fourth stimulus against an existing one — see "The true-negative
-   denominator is 5, not 7".
+   denominator is 6, not 8".
 7. Give each stimulus a mechanical grader **and** an LLM-judge `prompt` grader
    with a rubric. The mechanical grader makes a regression cheap to spot; the
    rubric catches the reviewer being technically right and useless.
 8. **Write mechanical graders against the finding syntax, not the vocabulary.**
-   Use `output-matches` with the bracketed form `\\[DP-XXX-NN\\]`, never
+   Use `output-matches` with the bold-bracketed form
+   `\\*\\*\\[DP-XXX-NN\\]`, never
    `output-contains` with a bare rule ID: a rule the agent considered and
    declined appears as a plain bold ID in a table, so a bare match cannot tell
    a finding from its refutation. `checkGraderSoundness` fails the build if a

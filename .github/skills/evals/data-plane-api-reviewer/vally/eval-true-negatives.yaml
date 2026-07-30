@@ -9,13 +9,14 @@ description: |
   that the reviewer stays SILENT, or at most asks a question, on input that
   looks wrong and is not.
 
-  Four true-negative classes are covered:
+  Five true-negative classes are covered:
     1. Clean spec              -- tn-clean-service
     2. Legitimate deviation    -- tn-legitimate-action-not-crud,
                                   tn-bounded-list-and-singleton,
                                   tn-closed-union-justified
     3. Linter-owned            -- tn-linter-owned-violations-silent
     4. Runtime-behavioral      -- tn-runtime-behavioral-not-static
+    5. Additive stable version -- tn-stable-additive-version-allowed
   plus the preview-versioning carve-out -- tn-preview-breaking-change-allowed.
 
   DO NOT relax this file. Specifically, do not lower `runs`, and do not add
@@ -361,3 +362,43 @@ stimuli:
       - The agent MUST NOT report a breaking-change violation, and MUST NOT report any Blocking (🔴) finding. This is the single most likely versioning false positive and any such finding is a test failure.
       - Noting at 💡 Suggestion severity that existing preview consumers will need to migrate, or that the withdrawal should be called out in release notes, is acceptable and does not affect the grade.
       - The `Adaptive` member's `@doc` text also changes between the two versions. Because `@doc` is not versioned, the new text appears on the already-published 2026-01-01-preview as well. Reporting this as a defect is a test failure. It is unactionable - `@typespec/versioning` has no doc-versioning decorator, so there is no fix to recommend - it is non-breaking, and here the new wording is strictly more informative for the consumers it supposedly harms.
+
+  # TN-08 -- A stable version that is purely additive and correctly decorated.
+  - name: tn-stable-additive-version-allowed
+    environment:
+      skills:
+        - "../../../azure-api-review"
+      files:
+        - src: "../fixtures/version-pairs/stable-additive-property/stable-2025-01-01.tsp"
+          dest: "specification/documentcatalog/data-plane/Contoso.DocumentCatalog/stable/2025-01-01/documents.tsp"
+        - src: "../fixtures/version-pairs/stable-additive-property/stable-2026-01-01.tsp"
+          dest: "specification/documentcatalog/data-plane/Contoso.DocumentCatalog/stable/2026-01-01/documents.tsp"
+    prompt: >
+      Review the following data-plane TypeSpec specification for compliance with
+      the Azure REST API Guidelines. The pull request adds the 2026-01-01 stable
+      API version; 2025-01-01 is the previously shipped stable version and is
+      shown for comparison. Pay particular attention to versioning and backward
+      compatibility. Report findings with rule IDs, line numbers, and fix
+      suggestions.
+
+      New version: specification/documentcatalog/data-plane/Contoso.DocumentCatalog/stable/2026-01-01/documents.tsp
+      Previous version: specification/documentcatalog/data-plane/Contoso.DocumentCatalog/stable/2025-01-01/documents.tsp
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-not-matches
+        name: "no finding raised on a purely additive stable version"
+        config:
+          pattern: "\\*\\*\\[[A-Z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)+\\]"
+      - type: output-not-matches
+        name: "no blocking findings"
+        config:
+          pattern: "(?im)^\\s*(?:[-*+]\\s*|#{1,6}\\s*)?🔴"
+      - type: prompt
+    rubric:
+      - The 2026-01-01 stable API is purely additive. It adds an optional `summary` property and an `Archived` member to an already open string union; no existing property, operation, route, type, requiredness, or union member changes.
+      - Both additions are correctly annotated with @added(Versions.v2026_01_01), so they do not leak into the emitted 2025-01-01 surface.
+      - The agent MUST NOT report DP-VERSION-01, DP-VERSION-03, or any other finding. Additive stable evolution with correct decorators is the expected versioning pattern.
+      - The specifications are intentionally terse but substantive. Short one-line documentation is not evidence of a defect and must not be padded into documentation-quality findings.
+      - Silence, or a short statement that no issues were found, is the ideal output and scores full marks.

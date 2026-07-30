@@ -19,7 +19,13 @@ using Azure.Core;
     }
   ]>
 )
-@server("https://{endpoint}", "Inventory service", { endpoint: string })
+@server(
+  "https://{endpoint}",
+  "Inventory service",
+  {
+    endpoint: string,
+  }
+)
 namespace Inventory;
 
 @doc("Service API versions.")
@@ -78,12 +84,7 @@ model BulkAdjustment {
   delta: int32;
 }
 
-@doc("""
-  Operations on inventory items. Items are never removed: an item that is no
-  longer stocked is retained with a zero quantity so that historical orders
-  referencing its SKU continue to resolve. There is therefore no delete
-  operation.
-  """)
+@doc("Operations on inventory items.")
 interface Items {
   @doc("Gets an item by SKU.")
   @route("/items/{sku}")
@@ -91,6 +92,9 @@ interface Items {
 
   @doc("Creates or replaces an item.")
   createOrReplace is StandardResourceOperations.ResourceCreateOrReplace<Item>;
+
+  @doc("Deletes an item.")
+  delete is StandardResourceOperations.ResourceDelete<Item>;
 
   @doc("Lists items in inventory.")
   list is StandardResourceOperations.ResourceList<Item>;

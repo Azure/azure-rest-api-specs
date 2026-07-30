@@ -409,6 +409,7 @@ export const REAL_FINDINGS_PROBE = [
   "",
   "### 🟡 Warning",
   "",
+  "**[DP-VIS-01] Durable stored property is write-only** -- `main.tsp:55`",
   "**[DP-MODEL-01] Update expressed as a POST action** -- `main.tsp:63`",
   "**[DP-MODEL-02] Config has identity and lifecycle but no path** -- `main.tsp:51`",
   // DP-MODEL-04's declared severity is Question, so the contract says it must
