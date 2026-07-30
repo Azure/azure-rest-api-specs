@@ -35,11 +35,10 @@ alias WorkspaceConnectionListParameters = {
 };
 
 @parentResource(Workspace)
-model WorkspaceConnectionPropertiesV2BasicResource
-  is Azure.ResourceManager.ProxyResource<
-    WorkspaceConnectionPropertiesV2,
-    false
-  > {
+model WorkspaceConnectionPropertiesV2BasicResource is Azure.ResourceManager.ProxyResource<
+  WorkspaceConnectionPropertiesV2,
+  false
+> {
   ...ResourceNameParameter<
     Resource = WorkspaceConnectionPropertiesV2BasicResource,
     KeyName = "connectionName",

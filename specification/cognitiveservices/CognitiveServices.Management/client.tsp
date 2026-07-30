@@ -1,8 +1,9 @@
 import "@azure-tools/typespec-client-generator-core";
 import "./main.tsp";
+import "@typespec/http";
 import "@typespec/rest";
 
-using TypeSpec.Http;
+using Http;
 using TypeSpec.Rest;
 using Azure.Core;
 using Azure.ClientGenerator.Core;
@@ -71,7 +72,10 @@ op checkSkuAvailabilityCustom(
   ...SubscriptionIdParameter,
   ...SubscriptionActionScope,
   ...Azure.ResourceManager.Legacy.Provider,
+
+  @path
   location: string,
+
   skus: string[],
   type: string,
   kind: string,
