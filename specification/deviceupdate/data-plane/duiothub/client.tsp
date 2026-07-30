@@ -6,8 +6,6 @@ using DeviceUpdateClient;
 
 namespace Customization;
 
-@@alternateType(DeviceUpdateEndpoint, url, "csharp");
-
 @@clientName(LogCollection.operationId, "logCollectionId");
 
 @@clientName(
