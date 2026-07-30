@@ -2,13 +2,12 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-azure-core";
-import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Sql;
 
@@ -2784,17 +2783,38 @@ union PrivateEndpointProvisioningState {
   /**
    * Approving
    */
+  @removed(Versions.v2025_08_01_preview)
   Approving: "Approving",
+
+  /**
+   * Created
+   */
+  @added(Versions.v2025_08_01_preview)
+  Created: "Created",
 
   /**
    * Ready
    */
+  @removed(Versions.v2025_08_01_preview)
   Ready: "Ready",
+
+  /**
+   * InProgress
+   */
+  @added(Versions.v2025_08_01_preview)
+  InProgress: "InProgress",
 
   /**
    * Dropping
    */
+  @removed(Versions.v2025_08_01_preview)
   Dropping: "Dropping",
+
+  /**
+   * Succeeded
+   */
+  @added(Versions.v2025_08_01_preview)
+  Succeeded: "Succeeded",
 
   /**
    * Failed
@@ -2804,7 +2824,14 @@ union PrivateEndpointProvisioningState {
   /**
    * Rejecting
    */
+  @removed(Versions.v2025_08_01_preview)
   Rejecting: "Rejecting",
+
+  /**
+   * Canceled
+   */
+  @added(Versions.v2025_08_01_preview)
+  Canceled: "Canceled",
 }
 
 /**
@@ -2994,11 +3021,14 @@ union ServerNetworkAccessFlag {
    * Disabled
    */
   Disabled: "Disabled",
+<<<<<<< Updated upstream
 
   /**
    * The network security perimeter configuration rules allow or disallow public network access to the resource. Requires an associated network security perimeter.
    */
   SecuredByPerimeter: "SecuredByPerimeter",
+=======
+>>>>>>> Stashed changes
 }
 
 /**
@@ -7460,6 +7490,10 @@ model DeletedServerProperties {
    */
   @added(Versions.v2025_08_01_preview)
   @visibility(Lifecycle.Read)
+<<<<<<< Updated upstream
+=======
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+>>>>>>> Stashed changes
   scheduledPurgeTime?: utcDateTime;
 }
 
@@ -14274,18 +14308,6 @@ model ServerUsageProperties {
    */
   @visibility(Lifecycle.Read)
   unit?: string;
-
-  /**
-   * The name of the resource.
-   */
-  @visibility(Lifecycle.Read)
-  resourceName?: string;
-
-  /**
-   * The next reset time for the metric (ISO8601 format).
-   */
-  @visibility(Lifecycle.Read)
-  nextResetTime?: utcDateTime;
 }
 
 /**
