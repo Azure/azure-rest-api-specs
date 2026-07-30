@@ -39,6 +39,10 @@ enum Versions {
   /** 2026-07-03-preview version */
   @armCommonTypesVersion(CommonTypes.Versions.v6)
   v2026_07_03_preview: "2026-07-03-preview",
+
+  /** 2026-07-30-preview version */
+  @armCommonTypesVersion(CommonTypes.Versions.v6)
+  v2026_07_30_preview: "2026-07-30-preview",
 }
 
 model Pool is TrackedResource<PoolProperties> {
@@ -868,7 +872,7 @@ model QuotaName {
 }
 
 @doc("The agent size or sizes an ephemeral type compatibility check is evaluated against. This mirrors the SKU shape a pool already uses, so a caller can pass the SKU it is about to save without reshaping it.")
-@added(Microsoft.DevOpsInfrastructure.Versions.v2026_07_03_preview)
+@added(Microsoft.DevOpsInfrastructure.Versions.v2026_07_30_preview)
 model EphemeralTypeCompatibilitySku {
   @doc("The Azure SKU name of the machines in the pool. Use \"Mix\" together with vmSizes for an instance mix pool.")
   name: string;
@@ -879,7 +883,7 @@ model EphemeralTypeCompatibilitySku {
 }
 
 @doc("Asks which ephemeral OS disk placements can be used for a set of image versions on a set of agent sizes.")
-@added(Microsoft.DevOpsInfrastructure.Versions.v2026_07_03_preview)
+@added(Microsoft.DevOpsInfrastructure.Versions.v2026_07_30_preview)
 model EphemeralTypeCompatibilityRequest {
   @doc("The agent size or sizes to evaluate against.")
   sku: EphemeralTypeCompatibilitySku;
@@ -891,7 +895,7 @@ model EphemeralTypeCompatibilityRequest {
 }
 
 @doc("The compatibility result for a single requested image version. This contains either availableEphemeralTypes or error, never both, so that one image version failing to evaluate does not discard the results for the others.")
-@added(Microsoft.DevOpsInfrastructure.Versions.v2026_07_03_preview)
+@added(Microsoft.DevOpsInfrastructure.Versions.v2026_07_30_preview)
 model EphemeralTypeCompatibilityResult {
   @doc("The resource id of the image version this result is for, echoed from the request.")
   imageVersionResourceId: string;
@@ -904,14 +908,14 @@ model EphemeralTypeCompatibilityResult {
 }
 
 @doc("The per-image-version results of an ephemeral type compatibility check.")
-@added(Microsoft.DevOpsInfrastructure.Versions.v2026_07_03_preview)
+@added(Microsoft.DevOpsInfrastructure.Versions.v2026_07_30_preview)
 model EphemeralTypeCompatibilityListResult {
   @doc("The per-image-version results, in the order the image versions were requested.")
   @identifiers(#["imageVersionResourceId"])
   value: EphemeralTypeCompatibilityResult[];
 }
 
-@added(Microsoft.DevOpsInfrastructure.Versions.v2026_07_03_preview)
+@added(Microsoft.DevOpsInfrastructure.Versions.v2026_07_30_preview)
 @armResourceOperations
 interface EphemeralTypeCompatibility {
   @action("checkEphemeralTypeCompatibility")
