@@ -6,9 +6,7 @@ import "./routes.tsp";
 import "./client.tsp";
 
 using TypeSpec.Http;
-using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using Azure.Core;
 
 @service(#{ title: "ContentSafety Service" })
 @versioned(ContentSafety.Versions)
@@ -41,4 +39,7 @@ namespace ContentSafety;
 enum Versions {
   v2023_10_01: "2023-10-01",
   v2024_09_01: "2024-09-01",
+
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  v2024_09_15_Preview: "2024-09-15-preview",
 }
