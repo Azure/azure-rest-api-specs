@@ -767,6 +767,19 @@ label.
 This closes the obvious corpus-wide shortcut, not every linguistic shortcut.
 Only an eval run can show whether the model actually reads the rationales.
 
+### The new stimuli have never executed
+
+As of 2026-07-30, neither persuasive-prose positive
+(`single-write-only-property-without-padding` and
+`persuasive-rationale-does-not-excuse-unpaged-search`) nor the additive
+stable-to-stable true negative (`tn-stable-additive-version-allowed`) has run
+under vally. Historical suite results therefore say nothing about them.
+
+The padding grader is also entirely new and unexercised against model output.
+Its exactly-one-finding threshold passes static soundness and count-position
+probes, but remains a designed hypothesis until an authorized eval run measures
+it. Do not treat the threshold as empirical calibration.
+
 ### Padding has one direct probe, not representative coverage
 
 The false-positive mode most likely to get this bot muted in practice is
