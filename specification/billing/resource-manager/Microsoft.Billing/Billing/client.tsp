@@ -120,13 +120,7 @@ using Microsoft.Billing;
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
 @@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
-  BillingSubscriptionsListByCustomerParameters.includeDeleted,
-  false,
-  "python"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
-  BillingSubscriptionsListByCustomerAtBillingAccountParameters.includeDeleted,
+  BillingSubscriptionsListParameters.includeDeleted,
   false,
   "python"
 );
@@ -312,7 +306,7 @@ using Microsoft.Billing;
   "csharp"
 );
 @@clientName(
-  Customers.createOrUpdateByCustomer,
+  CustomerPolicies.createOrUpdateByCustomer,
   "createOrUpdateByCustomerPolicy",
   "csharp"
 );
@@ -443,9 +437,6 @@ using Microsoft.Billing;
   "NextBillingCycleBillingFrequency",
   "csharp"
 );
-@@clientName(Operation, "BillingOperationInfo", "csharp");
-@@clientName(OperationDisplay, "BillingOperationDisplay", "csharp");
-@@clientName(OperationListResult, "BillingOperationInfoListResult", "csharp");
 @@clientName(Participant, "BillingAgreementParticipant", "csharp");
 @@clientName(PartnerTransferDetails, "PartnerTransferDetail", "csharp");
 @@clientName(PatchProperties.renew, "IsRenewed", "csharp");
@@ -477,7 +468,6 @@ using Microsoft.Billing;
 @@clientName(ProductTransferStatus, "BillingProductTransferStatus", "csharp");
 @@clientName(ProductType, "BillingProductType", "csharp");
 @@clientName(ProductType.SAAS, "Saas", "csharp");
-@@clientName(ProvisioningState, "BillingProvisioningState", "csharp");
 @@clientName(
   ProvisioningTenantState,
   "BillingProvisioningTenantState",
@@ -811,7 +801,6 @@ using Microsoft.Billing;
 @@usage(BillingRoleDefinitionProperties, Usage.input, "csharp");
 @@usage(BillingSubscription, Usage.input, "csharp");
 @@usage(BillingSubscriptionAlias, Usage.input, "csharp");
-@@usage(BillingSubscriptionPatch, Usage.input, "csharp");
 @@usage(Customer, Usage.input, "csharp");
 @@usage(CustomerProperties, Usage.input, "csharp");
 @@usage(Department, Usage.input, "csharp");
@@ -854,37 +843,10 @@ using Microsoft.Billing;
 // Restore GA-public Sku model (the new spec marks it internal-only).
 @@access(Sku, Access.public, "csharp");
 
-// Restore GA inheritance: Reservation extended TrackedResource and the *Patch models extended
-// ProxyResource in 1.2.2. The new spec defines them as standalone models; this decorator
-// re-introduces the GA base type for source/binary compat.
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restores the GA 1.2.2 base type for source and binary compatibility."
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
-  BillingAccountPatch,
-  Azure.ResourceManager.CommonTypes.ProxyResource,
-  "csharp"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restores the GA 1.2.2 base type for source and binary compatibility."
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
-  BillingSubscriptionPatch,
-  Azure.ResourceManager.CommonTypes.ProxyResource,
-  "csharp"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restores the GA 1.2.2 base type for source and binary compatibility."
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
-  ProductPatch,
-  Azure.ResourceManager.CommonTypes.ProxyResource,
-  "csharp"
-);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restores the GA 1.2.2 base type for source and binary compatibility."
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   Reservation,
   Azure.ResourceManager.CommonTypes.TrackedResource,
-  "csharp"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restores the GA 1.2.2 base type for source and binary compatibility."
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
-  Transaction,
-  Azure.ResourceManager.CommonTypes.ProxyResource,
   "csharp"
 );
 

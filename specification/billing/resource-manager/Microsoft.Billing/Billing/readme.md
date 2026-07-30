@@ -33,197 +33,217 @@ tag: package-2024-04
 
 These settings apply only when `--tag=package-2024-04` is specified on the command line.
 
-These settings apply only when `--tag=package-2024-04` is specified on the command line.
-
 ```yaml $(tag) == 'package-2024-04'
 title: BillingManagementClient
 description: Billing Client
 input-file:
 - stable/2024-04-01/openapi.json
 suppressions:
-- code: AllProxyResourcesShouldHaveDelete
-  from: billingRequest.json
-  reason: Service design forces behavior
-- code: AllProxyResourcesShouldHaveDelete
-  from: billingSubscription.json
-  reason: Service design forces behavior
-- code: AllProxyResourcesShouldHaveDelete
-  from: policy.json
-  reason: Service design forces behavior
-- code: AllProxyResourcesShouldHaveDelete
-  from: transfers.json
-  reason: Service design forces behavior
-- code: AllTrackedResourcesMustHaveDelete
-  from: reservation.json
-  reason: Breaking change
-- code: AvoidAdditionalProperties
-  from: billingRequest.json
-  reason: Service design forces behavior
-- code: AvoidAdditionalProperties
-  from: billingSavingsPlan.json
-  reason: False positive. Used for "tags"
-- code: AvoidAdditionalProperties
-  from: billingSubscription.json
-  reason: Breaking change
-- code: AvoidAdditionalProperties
-  from: reservation.json
-  reason: False positive. Used for "tags"
-- code: AvoidAnonymousTypes
-  from: policy.json
-  reason: Service design forces behavior
-- code: EnumInsteadOfBoolean
-  from: associatedTenant.json
-  reason: Breaking Change
-- code: EnumInsteadOfBoolean
-  from: billingAccount.json
-  reason: Breaking Change
-- code: EnumInsteadOfBoolean
-  from: billingProfile.json
-  reason: Breaking Change
-- code: EnumInsteadOfBoolean
-  from: billingProperty.json
-  reason: Breaking Change
-- code: EnumInsteadOfBoolean
-  from: billingRoleAssignment.json
-  reason: Breaking Change
-- code: EnumInsteadOfBoolean
-  from: billingSavingsPlan.json
-  reason: Breaking Change
-- code: EnumInsteadOfBoolean
-  from: billingSubscription.json
-  reason: Breaking Change
-- code: EnumInsteadOfBoolean
-  from: enrollmentAccount.json
-  reason: Breaking Change
-- code: EnumInsteadOfBoolean
-  from: invoice.json
-  reason: Breaking Change
-- code: EnumInsteadOfBoolean
-  from: invoiceSection.json
-  reason: Breaking Change
-- code: EnumInsteadOfBoolean
-  from: operation.json
-  reason: Breaking Change
-- code: EnumInsteadOfBoolean
-  from: product.json
-  reason: Breaking Change
-- code: EnumInsteadOfBoolean
-  from: reservation.json
-  reason: Breaking Change
-- code: EnumInsteadOfBoolean
-  from: transaction.json
-  reason: Breaking Change
-- code: EnumInsteadOfBoolean
-  from: types.json
-  reason: Breaking Change
-- code: EvenSegmentedPathForPutOperation
-  from: policy.json
-  reason: False positive
-- code: GetCollectionOnlyHasValueAndNextLink
-  from: billingSavingsPlan.json
-  reason: Blocked on resolving this issue by wide adoption of partner services
-- code: GetCollectionOnlyHasValueAndNextLink
-  from: billingSubscription.json
-  reason: Breaking change
-- code: GetCollectionOnlyHasValueAndNextLink
-  from: reservation.json
-  reason: Breaking change
-- code: GetCollectionOnlyHasValueAndNextLink
-  from: transaction.json
-  reason: Breaking change
-- code: ListInOperationName
-  from: billingRoleAssignment.json
-  reason: Breaking Change
-- code: ListInOperationName
-  from: transfers.json
-  reason: Breaking Change
-- code: LroErrorContent
-  reason: Service design that generates API definition. Type defined in local types.json
-- code: OperationIdNounConflictingModelNames
-  from: billingProperty.json
-  reason: Breaking Change
-- code: OperationIdNounConflictingModelNames
-  from: billingRoleDefinition.json
-  reason: Breaking Change
-- code: OperationIdNounVerb
-  from: billingSavingsPlan.json
-  reason: False positive. SavingsPlan is a child resource of SavingsPlanOrder
-- code: OperationIdNounVerb
-  from: reservation.json
-  reason: False positive. Reservations can be a child resource of ReservationOrder.
-- code: OperationIdNounVerb
-  from: transaction.json
-  reason: False positive. TransactionSummary is an aggregation of transactions.
-- code: OperationsApiSchemaUsesCommonTypes
-  from: operation.json
-  reason: Service design that generates API definition. Type defined in local types.json
+- code: ProvisioningStateSpecifiedForLROPatch
+  from: openapi.json
+  where: $.paths.["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}"].patch.responses.200
+  reason: Brownfield service already in production + Billing Resources are tenant resources that are not provisioned under a subscription.
+- code: ProvisioningStateSpecifiedForLROPatch
+  from: openapi.json
+  where: $.paths.["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingSubscriptions/{billingSubscriptionName}"].patch.responses.200
+  reason: Brownfield service already in production + Billing Resources are tenant resources that are not provisioned under a subscription.
+- code: ProvisioningStateSpecifiedForLROPut
+  from: openapi.json
+  reason: Brownfield service already in production + Billing Resources are tenant resources that are not provisioned under a subscription.
+- code: LroExtension
+  from: openapi.json
+  reason: Brownfield service already in production + Billing Resources are tenant resources that are not provisioned under a subscription.
 - code: ParametersInPointGet
-  reason: Service design forces this behavior
-- code: ParametersInPost
-  from: billingAccount.json
-  reason: Breaking change
-- code: ParametersInPost
-  from: billingRoleAssignment.json
-  reason: Service design forces this behavior
-- code: ParametersInPost
-  from: invoice.json
-  reason: Breaking Change
-- code: ParameterNotDefinedInGlobalParameters
-  reason: Referenced in common types.json file
-- code: ParameterNotUsingCommonTypes
-  reason: Service design forces this behavior
-- code: PathForTrackedResourceTypes
-  from: reservation.json
-  reason: Breaking change
-- code: PostOperationIdContainsUrlVerb
-  from: billingAccount.json
-  reason: Breaking Change
-- code: PostOperationIdContainsUrlVerb
-  from: billingRoleAssignment.json
-  reason: Breaking Change
-- code: PutInOperationName
-  from: transfers.json
-  reason: Breaking Change
-- code: PutRequestResponseSchemeArm
-  from: transfers.json
-  reason: Design ensures only recipients choose products, not initiators, for security and access reasons. 
-- code: PutResponseCodes
-  from: billingProfile.json
-  reason: Breaking change
-- code: PutResponseCodes
-  from: billingSubscription.json
-  reason: Breaking change
-- code: PutResponseCodes
-  from: invoiceSection.json
-  reason: Breaking change
-- code: ResourceNameRestriction
-  from: billingSubscription.json
-  reason: Breaking change
-- code: ResourceNameRestriction
-  from: payment.json
-  reason: Breaking change
-- code: TenantLevelAPIsNotAllowed
-  reason: Specific validation rules do not apply to this service. Microsoft.Billing is a tenant level RP
+  from: openapi.json
+  reason: Brownfield service that already shipped expand on GETs.
 - code: TopLevelResourcesListBySubscription
-  reason: Specific validation rules do not apply to this service. Microsoft.Billing is a tenant level RP
+  from: openapi.json
+  where: $.definitions.BillingProperty
+  reason: BillingProperty is singleton with resource id default.
+- code: TopLevelResourcesListBySubscription
+  from: openapi.json
+  where: $.definitions.SubscriptionPolicy
+  reason: SubscriptionPolicy is singleton with resource id default.
+- code: TenantLevelAPIsNotAllowed
+  from: openapi.json
+  reason: This entire RP is a tenant level resource provider.
+- code: ParameterNotUsingCommonTypes
+  from: openapi.json
+  reason: subscriptionId param cannot use common parameter types because the segment name must be billingSubscriptions, not subscriptions.
+- code: ParameterNotDefinedInGlobalParameters
+  from: openapi.json
+  reason: subscriptionId param cannot use common parameter types because the segment name must be billingSubscriptions, not subscriptions.
+- code: PatchBodyParametersSchema
+  from: openapi.json
+  reason: Previously ARM approved before TypeSpec. When updating an address, the full address object, not just a few properties of it, are expected to be present.
+- code: ParametersSchemaAsTypeObject
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/addPaymentTerms"].post.parameters[2].schema.type
+  reason: Previously ARM approved before TypeSpec. The request body is an array of payment terms.
+- code: ParametersSchemaAsTypeObject
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/cancelPaymentTerms"].post.parameters[2].schema.type
+  reason: Previously ARM approved before TypeSpec. The request body is a date-time value.
+- code: ParametersSchemaAsTypeObject
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/downloadDocuments"].post.parameters[2].schema.type
+  reason: Previously ARM approved before TypeSpec. The request body is an array of document download requests.
+- code: ParametersSchemaAsTypeObject
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/validatePaymentTerms"].post.parameters[2].schema.type
+  reason: Previously ARM approved before TypeSpec. The request body is an array of payment terms.
+- code: ParametersSchemaAsTypeObject
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/default/billingSubscriptions/{subscriptionId}/downloadDocuments"].post.parameters[2].schema.type
+  reason: Previously ARM approved before TypeSpec. The request body is an array of document download requests.
+- code: GetCollectionOnlyHasValueAndNextLink
+  from: openapi.json
+  reason: Previously ARM approved before TypeSpec. TotalCount property also being present is desired.
+- code: SummaryAndDescriptionMustNotBeSame
+  from: openapi.json
+  reason: Previously ARM approved before TypeSpec.
+- code: OperationIdNounConflictingModelNames
+  from: openapi.json
+  reason: Previously ARM approved before TypeSpec. Do not want this kind of breaking change.
+- code: PostOperationIdContainsUrlVerb
+  from: openapi.json
+  reason: Previously ARM approved before TypeSpec. Verbs are more specific to the hierarchy of the billing role assignment being added. Address_Validate feels more natural than Address_ValidateAddress.
+- code: PutResponseCodes
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}"].put
+  reason: Previously ARM approved before TypeSpec. Is returning 200, 201, and 202 for LRO.
+- code: PutResponseCodes
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}"].put
+  reason: Previously ARM approved before TypeSpec. Is returning 200, 201, and 202 for LRO.
+- code: PutResponseCodes
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingSubscriptionAliases/{aliasName}"].put
+  reason: Previously ARM approved before TypeSpec. Is returning 200, 201, and 202 for LRO.
+- code: ListInOperationName
+  from: openapi.json
+  reason: Previously ARM approved before TypeSpec. Most are resolveBillingRoleAssignments which can find multiple role assignments. ValidateTransfer can find multiple validation results.
+- code: ParametersInPost
+  from: openapi.json
+  reason: Previously ARM approved before TypeSpec. Most are resolveBillingRoleAssignments, so filter parameters are necessary. DownloadInvoice, the documentName parameter is literally the invoice to download.
+- code: PutRequestResponseSchemeArm
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/customers/{customerName}/transfers/{transferName}"].put
+  reason: Previously ARM approved before TypeSpec. From what I can tell, the Get and the Put are both using the same model, PartnerTransferDetails.
+- code: PutInOperationName
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/customers/{customerName}/transfers/{transferName}"].put.operationId
+  reason: Previously ARM approved before TypeSpec. Do not want to take breaking change.
+- code: PutRequestResponseSchemeArm
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/transfers/{transferName}"].put
+  reason: Previously ARM approved before TypeSpec. From what I can tell, the Get and the Put are both using the same model, TransferDetails.
+- code: PutInOperationName
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/transfers/{transferName}"].put.operationId
+  reason: Previously ARM approved before TypeSpec. Do not want to take breaking change.
+- code: PostResponseCodes
+  from: openapi.json
+  reason: Previously ARM approved before TypeSpec.
+- code: XmsPageableForListCalls
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoices/{invoiceName}/transactionSummary"].get
+  reason: Previously ARM approved before TypeSpec. This isn't a list response.
+- code: OperationIdNounVerb
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoices/{invoiceName}/transactionSummary"].get.operationId
+  reason: Previously ARM approved before TypeSpec. Operation name Transactions_GetTransactionSummaryByInvoice makes sense for a Get.
+- code: OperationIdNounVerb
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoices/{invoiceName}/transactionsDownload"].post.operationId
+  reason: Previously ARM approved before TypeSpec. Operation Transactions_TransactionsDownloadByInvoice name makes sense for an action.
+- code: OperationIdNounVerb
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/reservationOrders/{reservationOrderId}/reservations"].get.operationId
+  reason: Previously ARM approved before TypeSpec. Operation Reservations_ListByReservationOrder name makes sense for a list get.
+- code: OperationIdNounVerb
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/reservationOrders/{reservationOrderId}/reservations/{reservationId}"].get.operationId
+  reason: Previously ARM approved before TypeSpec. Operation Reservations_GetByReservationOrder name makes sense for a list get.
+- code: OperationIdNounVerb
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/savingsPlanOrders/{savingsPlanOrderId}/savingsPlans"].get.operationId
+  reason: Previously ARM approved before TypeSpec. Operation SavingsPlans_ListBySavingsPlanOrder name makes sense for a list get.
+- code: PathForTrackedResourceTypes
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/reservationOrders/{reservationOrderId}/reservations/{reservationId}"]
+  reason: Previously ARM approved before TypeSpec. Not a tracked resource.
 - code: TrackedResourcesMustHavePut
-  from: reservation.json
-  reason: Breaking change
-- code: XmsPageableForListCalls
-  from: availableBalance.json
-  reason: Breaking change
-- code: XmsPageableForListCalls
-  from: billingProperty.json
-  reason: Breaking change
-- code: XmsPageableForListCalls
-  from: policy.json
-  reason: Breaking change
-- code: XmsPageableForListCalls
-  from: transaction.json
-  reason: Breaking change
-- code: XmsResourceInPutResponse
-  from: transfers.json
-  reason: Service design forces this behavior
+  from: openapi.json
+  where: $.definitions.Reservation
+  reason: Previously ARM approved before TypeSpec. Not a tracked resource.
+- code: AllTrackedResourcesMustHaveDelete
+  from: openapi.json
+  where: $.definitions.Reservation
+  reason: Previously ARM approved before TypeSpec. Not a tracked resource.
+- code: SubscriptionIdParameterInOperations
+  from: openapi.json
+  reason: Previously ARM approved before TypeSpec. The subscriptionId parameter used is for a billing subscription, not an Azure subscription.
+- code: ArmResourcePropertiesBag
+  from: openapi.json
+  where: $.definitions.Department
+  reason: Previously ARM approved before TypeSpec. Do not want to take a breaking change.
+- code: ArmResourcePropertiesBag
+  from: openapi.json
+  where: $.definitions.PaymentMethod
+  reason: Previously ARM approved before TypeSpec. Do not want to take a breaking change.
+- code: ArmResourcePropertiesBag
+  from: openapi.json
+  where: $.definitions.BillingRequest
+  reason: Previously ARM approved before TypeSpec. Do not want to take a breaking change.
+- code: AvoidAdditionalProperties
+  from: openapi.json
+  where: $.definitions.BillingSubscriptionAliasProperties.properties.billingPolicies
+  reason: Previously ARM approved before TypeSpec. billingPolicies property is already in production as a dictionary by design.
+- code: AvoidAdditionalProperties
+  from: openapi.json
+  where: $.definitions.BillingSubscriptionProperties.properties.billingPolicies
+  reason: Previously ARM approved before TypeSpec. billingPolicies property is already in production as a dictionary by design.
+- code: AvoidAdditionalProperties
+  from: openapi.json
+  where: $.definitions.BillingRequestProperties.properties.additionalInformation
+  reason: Previously ARM approved before TypeSpec. Billing Request additionalInformation property is already in production as a dictionary by design.
+- code: XmsIdentifierValidation
+  from: openapi.json
+  where: $.definitions.BillingPermissionListResult.properties.value
+  reason: Previously ARM approved before TypeSpec. Array items in the response are not objects, just string arrays.
+- code: RequiredPropertiesMissingInResourceModel
+  from: openapi.json
+  where: $.definitions.BillingPermissionListResult
+  reason: Previously ARM approved before TypeSpec. Response isn't an ARM resource.
+- code: RequiredPropertiesMissingInResourceModel
+  from: openapi.json
+  where: $.definitions.TransactionSummary
+  reason: Previously ARM approved before TypeSpec. Response isn't an ARM resource.
+- code: AllProxyResourcesShouldHaveDelete
+  from: openapi.json
+  where: $.definitions.PartnerTransferDetails
+  reason: Previously ARM approved before TypeSpec. A transfer is not a living resource, so it does not support delete operation.
+- code: AllProxyResourcesShouldHaveDelete
+  from: openapi.json
+  where: $.definitions.TransferDetails
+  reason: Previously ARM approved before TypeSpec. A transfer is not a living resource, so it does not support delete operation.
+- code: AllProxyResourcesShouldHaveDelete
+  from: openapi.json
+  where: $.definitions.BillingProfilePolicy
+  reason: Previously ARM approved before TypeSpec. Policies by design cannot be deleted, are system policies that can be toggled or read.
+- code: AllProxyResourcesShouldHaveDelete
+  from: openapi.json
+  where: $.definitions.BillingSubscriptionAlias
+  reason: Previously ARM approved before TypeSpec. A Billing Subscription Alias is not a distinct resource, just another means to reference a billing subscription.
+- code: AllProxyResourcesShouldHaveDelete
+  from: openapi.json
+  where: $.definitions.BillingAccountPolicy
+  reason: Previously ARM approved before TypeSpec. Policies by design cannot be deleted, are system policies that can be toggled or read.
+- code: AllProxyResourcesShouldHaveDelete
+  from: openapi.json
+  where: $.definitions.BillingRequest
+  reason: Previously ARM approved before TypeSpec. Billing requests do not get deleted. They still exist but expire over time.
 ```
 
 ### Tag: package-2021-10
