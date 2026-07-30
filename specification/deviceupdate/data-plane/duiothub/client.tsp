@@ -51,16 +51,6 @@ namespace Customization;
   "csharp"
 );
 @@clientName(
-  DeviceUpdateOperationGroup.listOperationStatuses::parameters.top,
-  "top",
-  "csharp"
-);
-@@clientName(
-  DeviceManagementOperationGroup.listOperationStatuses::parameters.top,
-  "top",
-  "csharp"
-);
-@@clientName(
   DeviceUpdateOperationGroup.getUpdate::parameters.ifNoneMatch,
   "if_none_match",
   "python"
