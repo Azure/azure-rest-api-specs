@@ -3021,14 +3021,11 @@ union ServerNetworkAccessFlag {
    * Disabled
    */
   Disabled: "Disabled",
-<<<<<<< Updated upstream
 
   /**
    * The network security perimeter configuration rules allow or disallow public network access to the resource. Requires an associated network security perimeter.
    */
   SecuredByPerimeter: "SecuredByPerimeter",
-=======
->>>>>>> Stashed changes
 }
 
 /**
@@ -7490,10 +7487,7 @@ model DeletedServerProperties {
    */
   @added(Versions.v2025_08_01_preview)
   @visibility(Lifecycle.Read)
-<<<<<<< Updated upstream
-=======
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
->>>>>>> Stashed changes
   scheduledPurgeTime?: utcDateTime;
 }
 
@@ -14308,6 +14302,18 @@ model ServerUsageProperties {
    */
   @visibility(Lifecycle.Read)
   unit?: string;
+
+  /**
+   * The name of the resource.
+   */
+  @visibility(Lifecycle.Read)
+  resourceName?: string;
+
+  /**
+   * The next reset time for the metric (ISO8601 format).
+   */
+  @visibility(Lifecycle.Read)
+  nextResetTime?: utcDateTime;
 }
 
 /**
