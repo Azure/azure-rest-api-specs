@@ -54,6 +54,9 @@
       "name": "SubscriptionUsages"
     },
     {
+      "name": "EphemeralTypeCompatibility"
+    },
+    {
       "name": "ImageVersions"
     }
   ],
@@ -135,6 +138,54 @@
         "x-ms-examples": {
           "Pools_CheckNameAvailability": {
             "$ref": "./examples/Pools_CheckNameAvailability.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DevOpsInfrastructure/locations/{location}/checkEphemeralTypeCompatibility": {
+      "post": {
+        "operationId": "EphemeralTypeCompatibility_Check",
+        "tags": [
+          "EphemeralTypeCompatibility"
+        ],
+        "description": "Checks which ephemeral OS disk placements can be used for a set of image versions on a set of agent sizes. A syntactically valid request returns 200 even when individual image versions fail to evaluate, so that one unreadable image version does not discard the results for the others. Those image versions carry an error instead of a list of available ephemeral types.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The ephemeral type compatibility request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EphemeralTypeCompatibilityRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EphemeralTypeCompatibilityListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EphemeralTypeCompatibility_Check": {
+            "$ref": "./examples/EphemeralTypeCompatibility_Check.json"
           }
         }
       }
@@ -1124,6 +1175,95 @@
           }
         ]
       }
+    },
+    "EphemeralTypeCompatibilityListResult": {
+      "type": "object",
+      "description": "The per-image-version results of an ephemeral type compatibility check.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The per-image-version results, in the order the image versions were requested.",
+          "items": {
+            "$ref": "#/definitions/EphemeralTypeCompatibilityResult"
+          },
+          "x-ms-identifiers": [
+            "imageVersionResourceId"
+          ]
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "EphemeralTypeCompatibilityRequest": {
+      "type": "object",
+      "description": "Asks which ephemeral OS disk placements can be used for a set of image versions on a set of agent sizes.",
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/EphemeralTypeCompatibilitySku",
+          "description": "The agent size or sizes to evaluate against."
+        },
+        "imageVersionResourceIds": {
+          "type": "array",
+          "description": "The resource ids of the image versions to evaluate. A version of 'latest' is resolved by the service.",
+          "minItems": 1,
+          "maxItems": 50,
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "sku",
+        "imageVersionResourceIds"
+      ]
+    },
+    "EphemeralTypeCompatibilityResult": {
+      "type": "object",
+      "description": "The compatibility result for a single requested image version. This contains either availableEphemeralTypes or error, never both, so that one image version failing to evaluate does not discard the results for the others.",
+      "properties": {
+        "imageVersionResourceId": {
+          "type": "string",
+          "description": "The resource id of the image version this result is for, echoed from the request."
+        },
+        "availableEphemeralTypes": {
+          "type": "array",
+          "description": "The ephemeral types that can be used for this image version on the requested agent sizes. Automatic is always included when the image version was evaluated successfully.",
+          "items": {
+            "$ref": "#/definitions/EphemeralType"
+          }
+        },
+        "error": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
+          "description": "The reason this image version could not be evaluated."
+        }
+      },
+      "required": [
+        "imageVersionResourceId"
+      ]
+    },
+    "EphemeralTypeCompatibilitySku": {
+      "type": "object",
+      "description": "The agent size or sizes an ephemeral type compatibility check is evaluated against. This mirrors the SKU shape a pool already uses, so a caller can pass the SKU it is about to save without reshaping it.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The Azure SKU name of the machines in the pool. Use \"Mix\" together with vmSizes for an instance mix pool."
+        },
+        "vmSizes": {
+          "type": "array",
+          "description": "Specifies VM sizes for instance-mix allocation. An explicit placement is only reported as available when every one of these sizes supports it.",
+          "items": {
+            "$ref": "#/definitions/VmSize"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      },
+      "required": [
+        "name"
+      ]
     },
     "FabricProfile": {
       "type": "object",

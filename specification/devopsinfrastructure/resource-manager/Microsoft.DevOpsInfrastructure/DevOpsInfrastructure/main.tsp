@@ -867,6 +867,69 @@ model QuotaName {
   localizedValue?: string;
 }
 
+@doc("The agent size or sizes an ephemeral type compatibility check is evaluated against. This mirrors the SKU shape a pool already uses, so a caller can pass the SKU it is about to save without reshaping it.")
+@added(Microsoft.DevOpsInfrastructure.Versions.v2026_07_03_preview)
+model EphemeralTypeCompatibilitySku {
+  @doc("The Azure SKU name of the machines in the pool. Use \"Mix\" together with vmSizes for an instance mix pool.")
+  name: string;
+
+  @doc("Specifies VM sizes for instance-mix allocation. An explicit placement is only reported as available when every one of these sizes supports it.")
+  @identifiers(#["name"])
+  vmSizes?: VmSize[];
+}
+
+@doc("Asks which ephemeral OS disk placements can be used for a set of image versions on a set of agent sizes.")
+@added(Microsoft.DevOpsInfrastructure.Versions.v2026_07_03_preview)
+model EphemeralTypeCompatibilityRequest {
+  @doc("The agent size or sizes to evaluate against.")
+  sku: EphemeralTypeCompatibilitySku;
+
+  @doc("The resource ids of the image versions to evaluate. A version of 'latest' is resolved by the service.")
+  @minItems(1)
+  @maxItems(50)
+  imageVersionResourceIds: string[];
+}
+
+@doc("The compatibility result for a single requested image version. This contains either availableEphemeralTypes or error, never both, so that one image version failing to evaluate does not discard the results for the others.")
+@added(Microsoft.DevOpsInfrastructure.Versions.v2026_07_03_preview)
+model EphemeralTypeCompatibilityResult {
+  @doc("The resource id of the image version this result is for, echoed from the request.")
+  imageVersionResourceId: string;
+
+  @doc("The ephemeral types that can be used for this image version on the requested agent sizes. Automatic is always included when the image version was evaluated successfully.")
+  availableEphemeralTypes?: EphemeralType[];
+
+  @doc("The reason this image version could not be evaluated.")
+  error?: Azure.ResourceManager.CommonTypes.ErrorDetail;
+}
+
+@doc("The per-image-version results of an ephemeral type compatibility check.")
+@added(Microsoft.DevOpsInfrastructure.Versions.v2026_07_03_preview)
+model EphemeralTypeCompatibilityListResult {
+  @doc("The per-image-version results, in the order the image versions were requested.")
+  @identifiers(#["imageVersionResourceId"])
+  value: EphemeralTypeCompatibilityResult[];
+}
+
+@added(Microsoft.DevOpsInfrastructure.Versions.v2026_07_03_preview)
+@armResourceOperations
+interface EphemeralTypeCompatibility {
+  @action("checkEphemeralTypeCompatibility")
+  @armProviderNameValue
+  @post
+  @doc("Checks which ephemeral OS disk placements can be used for a set of image versions on a set of agent sizes. A syntactically valid request returns 200 even when individual image versions fail to evaluate, so that one unreadable image version does not discard the results for the others. Those image versions carry an error instead of a list of available ephemeral types.")
+  check(
+    ...SubscriptionIdParameter,
+    ...Azure.ResourceManager.Foundations.DefaultProviderNamespace,
+    ...LocationResourceParameter,
+    ...ApiVersionParameter,
+
+    @doc("The ephemeral type compatibility request.")
+    @bodyRoot
+    body: EphemeralTypeCompatibilityRequest,
+  ): ArmResponse<EphemeralTypeCompatibilityListResult> | ErrorResponse;
+}
+
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "No ProvisioningState"
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-property" "No Identity"
 @doc("An image resource.")

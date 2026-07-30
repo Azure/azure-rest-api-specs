@@ -1,0 +1,41 @@
+{
+  "title": "EphemeralTypeCompatibility_Check",
+  "operationId": "EphemeralTypeCompatibility_Check",
+  "parameters": {
+    "subscriptionId": "a2e95d27-c161-4b61-bda4-11512c14c2c2",
+    "location": "eastus",
+    "api-version": "2026-07-03-preview",
+    "body": {
+      "sku": {
+        "name": "Standard_D4ads_v5"
+      },
+      "imageVersionResourceIds": [
+        "/subscriptions/a2e95d27-c161-4b61-bda4-11512c14c2c2/resourceGroups/images/providers/Microsoft.Compute/galleries/gallery/images/ubuntu-24.04/versions/latest",
+        "/subscriptions/a2e95d27-c161-4b61-bda4-11512c14c2c2/resourceGroups/private-images/providers/Microsoft.Compute/galleries/gallery/images/windows-2022/versions/1.0.0"
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "imageVersionResourceId": "/subscriptions/a2e95d27-c161-4b61-bda4-11512c14c2c2/resourceGroups/images/providers/Microsoft.Compute/galleries/gallery/images/ubuntu-24.04/versions/latest",
+            "availableEphemeralTypes": [
+              "Automatic",
+              "CacheDisk",
+              "ResourceDisk"
+            ]
+          },
+          {
+            "imageVersionResourceId": "/subscriptions/a2e95d27-c161-4b61-bda4-11512c14c2c2/resourceGroups/private-images/providers/Microsoft.Compute/galleries/gallery/images/windows-2022/versions/1.0.0",
+            "error": {
+              "code": "ImageNotFound",
+              "message": "The image version '/subscriptions/a2e95d27-c161-4b61-bda4-11512c14c2c2/resourceGroups/private-images/providers/Microsoft.Compute/galleries/gallery/images/windows-2022/versions/1.0.0' was not found."
+            }
+          }
+        ]
+      }
+    }
+  }
+}
