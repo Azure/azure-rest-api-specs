@@ -424,3 +424,144 @@ model VoiceRecordingResponse {
   @doc("For bring-your-own-storage (BYOS) recordings only: the URI of the recording in the customer's own storage, without a SAS token. The customer downloads it using their own storage credentials. Absent for Foundry-managed storage, where the bytes are streamed via the `/audio/content` route instead.")
   blob_uri?: url;
 }
+
+// ---------------------------------------------------------------------------
+// Agent telephony bindings
+// ---------------------------------------------------------------------------
+
+const AgentTelephonyConditionalPreviews = #{
+  conditional_previews: #[AgentDefinitionOptInKeys.voice_agents_v1_preview],
+};
+
+@doc("A telephony provider supported by an agent binding. The legacy input value `acs` is accepted for compatibility, but responses use `azure-communication-service`. Known values are stable; additional values may be added over time.")
+@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+union TelephonyProvider {
+  string,
+
+  @doc("Azure Communication Service, including Teams Phone Extensibility.")
+  azure_communication_service: "azure-communication-service",
+
+  @doc("Twilio Programmable Voice.")
+  twilio: "twilio",
+
+  @doc("Infobip Voice and Calls API.")
+  infobip: "infobip",
+}
+
+@doc("The lifecycle status of a telephony binding.")
+@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+union TelephonyBindingStatus {
+  string,
+  active: "active",
+  suspended: "suspended",
+}
+
+@doc("A destination type supported by a telephony transfer target.")
+@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+union TelephonyTransferDestinationKind {
+  string,
+  pstn: "pstn",
+  teams: "teams",
+  sip: "sip",
+}
+
+@doc("The provider-specific destination for a telephony transfer target.")
+@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+model TelephonyTransferDestination {
+  @doc("The destination type.")
+  kind: TelephonyTransferDestinationKind;
+
+  @doc("The destination value, such as an E.164 phone number, Teams user identifier, or SIP URI.")
+  value: string;
+}
+
+@doc("A named destination to which the voice agent may transfer a call.")
+@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+model TelephonyTransferTarget {
+  @doc("The unique name exposed to the voice agent for this transfer target.")
+  name: string;
+
+  @doc("A description that helps the voice agent decide when to use this target.")
+  description: string;
+
+  @doc("The provider-specific transfer destination.")
+  destination: TelephonyTransferDestination;
+}
+
+@doc("The request to bind a telephony identifier to the voice agent named in the request path.")
+@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+model CreateTelephonyBindingRequest {
+  @doc("The telephony provider.")
+  provider: TelephonyProvider;
+
+  @doc("The provider-specific dialed identifier, such as an Azure Communication Service resource-account identifier or E.164 phone number.")
+  identifier: string;
+
+  @doc("The destinations to which the voice agent may transfer calls.")
+  transfer_targets?: TelephonyTransferTarget[];
+
+  @doc("The Foundry connection that configures provider access. Azure Communication Service connections own the resource endpoint and identity. Twilio connections use the Account SID as their target and an ApiKey credential for the Auth Token.")
+  connection_name: string;
+}
+
+@doc("The request to update an existing telephony binding.")
+@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+model UpdateTelephonyBindingRequest {
+  @doc("The ETag returned by the latest read. Updates with a stale ETag fail.")
+  etag: string;
+
+  @doc("The new lifecycle status.")
+  status?: TelephonyBindingStatus;
+
+  @doc("Replacement transfer targets. An empty array clears all targets.")
+  transfer_targets?: TelephonyTransferTarget[];
+
+  @doc("The replacement Foundry connection that configures provider access.")
+  connection_name?: string;
+}
+
+@doc("A telephony identifier bound to the voice agent named in the request path.")
+@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+model TelephonyBinding {
+  @doc("The binding identifier in `{provider}:{identifier}` form.")
+  id: string;
+
+  @doc("The Foundry project that owns the binding.")
+  project_id: string;
+
+  @doc("The telephony provider.")
+  provider: TelephonyProvider;
+
+  @doc("The provider-specific dialed identifier.")
+  identifier: string;
+
+  @doc("The lifecycle status.")
+  status: TelephonyBindingStatus;
+
+  @doc("The destinations to which the voice agent may transfer calls.")
+  transfer_targets: TelephonyTransferTarget[];
+
+  @doc("The Foundry connection that configures provider access. Secrets are referenced, not returned.")
+  connection_name: string;
+
+  @doc("The service-generated webhook URL to configure with the telephony provider.")
+  incoming_call_url: url;
+
+  @doc("The current ETag for optimistic-concurrency updates.")
+  etag?: string;
+}
+
+@doc("A page of telephony bindings for one voice agent.")
+@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+model TelephonyBindingList {
+  @doc("The telephony bindings in this page.")
+  @pageItems
+  data: TelephonyBinding[];
+
+  @doc("Whether another page of bindings is available.")
+  has_more: boolean;
+
+  @doc("The cursor to pass as `after` to retrieve the next page.")
+  @continuationToken
+  next_cursor?: string;
+}

@@ -6,6 +6,7 @@ tags:
   - name: Agent Conversations
   - name: Voice Agents
   - name: Voice Agent Versions
+  - name: Agent Telephony
   - name: EvaluationSuiteGenerationJobs
   - name: Responses Root
     description: Responses
@@ -2842,6 +2843,316 @@ paths:
       x-ms-foundry-meta:
         required_previews:
           - ContainerAgents=V1Preview
+  /agents/{agent_name}/telephony:
+    post:
+      operationId: AgentTelephony_createTelephonyBinding
+      summary: Create an agent telephony binding
+      description: Creates a telephony binding for the voice agent named in the path.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - VoiceAgents=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the voice agent that owns the binding.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TelephonyBinding'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Telephony
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTelephonyBindingRequest'
+      x-ms-foundry-meta:
+        conditional_previews:
+          - VoiceAgents=V1Preview
+    get:
+      operationId: AgentTelephony_listTelephonyBindings
+      summary: List agent telephony bindings
+      description: Returns the telephony bindings owned by the voice agent named in the path.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - VoiceAgents=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the voice agent whose bindings are listed.
+          schema:
+            type: string
+        - name: provider
+          in: query
+          required: false
+          description: Filters bindings by provider.
+          schema:
+            $ref: '#/components/schemas/TelephonyProvider'
+          explode: false
+        - name: status
+          in: query
+          required: false
+          description: Filters bindings by lifecycle status.
+          schema:
+            $ref: '#/components/schemas/TelephonyBindingStatus'
+          explode: false
+        - name: limit
+          in: query
+          required: false
+          description: The maximum number of bindings to return.
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+            maximum: 100
+            default: 100
+          explode: false
+        - name: after
+          in: query
+          required: false
+          description: A cursor returned by the previous page.
+          schema:
+            type: string
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TelephonyBindingList'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Telephony
+      x-ms-foundry-meta:
+        conditional_previews:
+          - VoiceAgents=V1Preview
+  /agents/{agent_name}/telephony/{binding_id}:
+    get:
+      operationId: AgentTelephony_getTelephonyBinding
+      summary: Get an agent telephony binding
+      description: Retrieves a telephony binding owned by the voice agent named in the path.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - VoiceAgents=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the voice agent that owns the binding.
+          schema:
+            type: string
+        - name: binding_id
+          in: path
+          required: true
+          description: The binding identifier in `{provider}:{identifier}` form.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TelephonyBinding'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Telephony
+      x-ms-foundry-meta:
+        conditional_previews:
+          - VoiceAgents=V1Preview
+    patch:
+      operationId: AgentTelephony_updateTelephonyBinding
+      summary: Update an agent telephony binding
+      description: Updates a telephony binding owned by the voice agent named in the path.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - VoiceAgents=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the voice agent that owns the binding.
+          schema:
+            type: string
+        - name: binding_id
+          in: path
+          required: true
+          description: The binding identifier in `{provider}:{identifier}` form.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TelephonyBinding'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Telephony
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTelephonyBindingRequest'
+      x-ms-foundry-meta:
+        conditional_previews:
+          - VoiceAgents=V1Preview
+    delete:
+      operationId: AgentTelephony_deleteTelephonyBinding
+      summary: Delete an agent telephony binding
+      description: Deletes a telephony binding owned by the voice agent named in the path.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - VoiceAgents=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the voice agent that owns the binding.
+          schema:
+            type: string
+        - name: binding_id
+          in: path
+          required: true
+          description: The binding identifier in `{provider}:{identifier}` form.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '204':
+          description: There is no content to send for this request, but the headers may be useful.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Telephony
+      x-ms-foundry-meta:
+        conditional_previews:
+          - VoiceAgents=V1Preview
   /agents/{agent_name}/versions:
     post:
       operationId: Agents_createAgentVersion_Agents_createAgentVersionFromCode
@@ -44832,6 +45143,31 @@ components:
           description: Whether to set this version as the default. Defaults to false.
       required:
         - files
+    CreateTelephonyBindingRequest:
+      type: object
+      required:
+        - provider
+        - identifier
+        - connection_name
+      properties:
+        provider:
+          $ref: '#/components/schemas/TelephonyProvider'
+          description: The telephony provider.
+        identifier:
+          type: string
+          description: The provider-specific dialed identifier, such as an Azure Communication Service resource-account identifier or E.164 phone number.
+        transfer_targets:
+          type: array
+          items:
+            $ref: '#/components/schemas/TelephonyTransferTarget'
+          description: The destinations to which the voice agent may transfer calls.
+        connection_name:
+          type: string
+          description: The Foundry connection that configures provider access. Azure Communication Service connections own the resource endpoint and identity. Twilio connections use the Account SID as their target and an ApiKey credential for the Auth Token.
+      description: The request to bind a telephony identifier to the voice agent named in the request path.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - VoiceAgents=V1Preview
     CreateVoiceAgentRequest:
       type: object
       required:
@@ -80220,6 +80556,144 @@ components:
             - Http
             - Grpc
       description: The transport protocol for telemetry export.
+    TelephonyBinding:
+      type: object
+      required:
+        - id
+        - project_id
+        - provider
+        - identifier
+        - status
+        - transfer_targets
+        - connection_name
+        - incoming_call_url
+      properties:
+        id:
+          type: string
+          description: The binding identifier in `{provider}:{identifier}` form.
+        project_id:
+          type: string
+          description: The Foundry project that owns the binding.
+        provider:
+          $ref: '#/components/schemas/TelephonyProvider'
+          description: The telephony provider.
+        identifier:
+          type: string
+          description: The provider-specific dialed identifier.
+        status:
+          $ref: '#/components/schemas/TelephonyBindingStatus'
+          description: The lifecycle status.
+        transfer_targets:
+          type: array
+          items:
+            $ref: '#/components/schemas/TelephonyTransferTarget'
+          description: The destinations to which the voice agent may transfer calls.
+        connection_name:
+          type: string
+          description: The Foundry connection that configures provider access. Secrets are referenced, not returned.
+        incoming_call_url:
+          type: string
+          format: uri
+          description: The service-generated webhook URL to configure with the telephony provider.
+        etag:
+          type: string
+          description: The current ETag for optimistic-concurrency updates.
+      description: A telephony identifier bound to the voice agent named in the request path.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - VoiceAgents=V1Preview
+    TelephonyBindingList:
+      type: object
+      required:
+        - data
+        - has_more
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/TelephonyBinding'
+          description: The telephony bindings in this page.
+        has_more:
+          type: boolean
+          description: Whether another page of bindings is available.
+        next_cursor:
+          type: string
+          description: The cursor to pass as `after` to retrieve the next page.
+      description: A page of telephony bindings for one voice agent.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - VoiceAgents=V1Preview
+    TelephonyBindingStatus:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - active
+            - suspended
+      description: The lifecycle status of a telephony binding.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - VoiceAgents=V1Preview
+    TelephonyProvider:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - azure-communication-service
+            - twilio
+            - infobip
+      description: A telephony provider supported by an agent binding. The legacy input value `acs` is accepted for compatibility, but responses use `azure-communication-service`. Known values are stable; additional values may be added over time.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - VoiceAgents=V1Preview
+    TelephonyTransferDestination:
+      type: object
+      required:
+        - kind
+        - value
+      properties:
+        kind:
+          $ref: '#/components/schemas/TelephonyTransferDestinationKind'
+          description: The destination type.
+        value:
+          type: string
+          description: The destination value, such as an E.164 phone number, Teams user identifier, or SIP URI.
+      description: The provider-specific destination for a telephony transfer target.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - VoiceAgents=V1Preview
+    TelephonyTransferDestinationKind:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - pstn
+            - teams
+            - sip
+      description: A destination type supported by a telephony transfer target.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - VoiceAgents=V1Preview
+    TelephonyTransferTarget:
+      type: object
+      required:
+        - name
+        - description
+        - destination
+      properties:
+        name:
+          type: string
+          description: The unique name exposed to the voice agent for this transfer target.
+        description:
+          type: string
+          description: A description that helps the voice agent decide when to use this target.
+        destination:
+          $ref: '#/components/schemas/TelephonyTransferDestination'
+          description: The provider-specific transfer destination.
+      description: A named destination to which the voice agent may transfer a call.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - VoiceAgents=V1Preview
     TestingCriterionAzureAIEvaluator:
       type: object
       required:
@@ -80892,6 +81366,29 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - Models=V1Preview
+    UpdateTelephonyBindingRequest:
+      type: object
+      required:
+        - etag
+      properties:
+        etag:
+          type: string
+          description: The ETag returned by the latest read. Updates with a stale ETag fail.
+        status:
+          $ref: '#/components/schemas/TelephonyBindingStatus'
+          description: The new lifecycle status.
+        transfer_targets:
+          type: array
+          items:
+            $ref: '#/components/schemas/TelephonyTransferTarget'
+          description: Replacement transfer targets. An empty array clears all targets.
+        connection_name:
+          type: string
+          description: The replacement Foundry connection that configures provider access.
+      description: The request to update an existing telephony binding.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - VoiceAgents=V1Preview
     UpdateToolboxRequest:
       type: object
       required:

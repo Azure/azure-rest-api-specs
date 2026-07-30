@@ -534,3 +534,108 @@ interface VoiceAgents {
     DeleteAgentVersionResponse
   >;
 }
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Agent-scoped telephony bindings use a provider-specific identifier and custom page shape that do not match a standard resource operation template."
+@tag("Agent Telephony")
+interface AgentTelephony {
+  /** Creates a telephony binding for the voice agent named in the path. */
+  @summary("Create an agent telephony binding")
+  @post
+  @route("/agents/{agent_name}/telephony")
+  @extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+  createTelephonyBinding is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the voice agent that owns the binding. */
+      @path agent_name: string;
+
+      ...CreateTelephonyBindingRequest;
+    },
+    TelephonyBinding
+  >;
+
+  /** Returns the telephony bindings owned by the voice agent named in the path. */
+  @summary("List agent telephony bindings")
+  @get
+  @list
+  @route("/agents/{agent_name}/telephony")
+  @extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+  listTelephonyBindings is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the voice agent whose bindings are listed. */
+      @path agent_name: string;
+
+      /** Filters bindings by provider. */
+      @query provider?: TelephonyProvider;
+
+      /** Filters bindings by lifecycle status. */
+      @query status?: TelephonyBindingStatus;
+
+      /** The maximum number of bindings to return. */
+      @minValue(1)
+      @maxValue(100)
+      @query
+      limit?: int32 = 100;
+
+      /** A cursor returned by the previous page. */
+      @query
+      @continuationToken
+      after?: string;
+    },
+    TelephonyBindingList
+  >;
+
+  /** Retrieves a telephony binding owned by the voice agent named in the path. */
+  @summary("Get an agent telephony binding")
+  @get
+  @route("/agents/{agent_name}/telephony/{binding_id}")
+  @extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+  getTelephonyBinding is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the voice agent that owns the binding. */
+      @path agent_name: string;
+
+      /** The binding identifier in `{provider}:{identifier}` form. */
+      @path binding_id: string;
+    },
+    TelephonyBinding
+  >;
+
+  /** Updates a telephony binding owned by the voice agent named in the path. */
+  @summary("Update an agent telephony binding")
+  @patch
+  @route("/agents/{agent_name}/telephony/{binding_id}")
+  @extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+  updateTelephonyBinding is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the voice agent that owns the binding. */
+      @path agent_name: string;
+
+      /** The binding identifier in `{provider}:{identifier}` form. */
+      @path binding_id: string;
+
+      ...UpdateTelephonyBindingRequest;
+    },
+    TelephonyBinding
+  >;
+
+  /** Deletes a telephony binding owned by the voice agent named in the path. */
+  @summary("Delete an agent telephony binding")
+  @delete
+  @route("/agents/{agent_name}/telephony/{binding_id}")
+  @extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+  deleteTelephonyBinding is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the voice agent that owns the binding. */
+      @path agent_name: string;
+
+      /** The binding identifier in `{provider}:{identifier}` form. */
+      @path binding_id: string;
+    },
+    NoContentResponse
+  >;
+}
