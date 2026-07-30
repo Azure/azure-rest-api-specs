@@ -125,24 +125,44 @@ using Microsoft.KubernetesConfiguration;
 @@clientName(LayerSelectorDefinition, "LayerSelector", "csharp");
 @@clientName(LayerSelectorPatchDefinition, "LayerSelectorPatch", "csharp");
 @@clientName(MatchOidcIdentityDefinition, "MatchOidcIdentity", "csharp");
-@@clientName(MatchOidcIdentityPatchDefinition, "MatchOidcIdentityPatch", "csharp");
+@@clientName(
+  MatchOidcIdentityPatchDefinition,
+  "MatchOidcIdentityPatch",
+  "csharp"
+);
 @@clientName(OCIRepositoryDefinition, "OciRepository", "csharp");
 @@clientName(OCIRepositoryPatchDefinition, "OciRepositoryPatch", "csharp");
 @@clientName(OCIRepositoryRefDefinition, "OciRepositoryRef", "csharp");
-@@clientName(OCIRepositoryRefPatchDefinition, "OciRepositoryRefPatch", "csharp");
+@@clientName(
+  OCIRepositoryRefPatchDefinition,
+  "OciRepositoryRefPatch",
+  "csharp"
+);
 @@clientName(PostBuildDefinition, "PostBuild", "csharp");
 @@clientName(PostBuildPatchDefinition, "PostBuildPatch", "csharp");
 @@clientName(ServicePrincipalDefinition, "ServicePrincipal", "csharp");
-@@clientName(ServicePrincipalPatchDefinition, "ServicePrincipalPatch", "csharp");
+@@clientName(
+  ServicePrincipalPatchDefinition,
+  "ServicePrincipalPatch",
+  "csharp"
+);
 @@clientName(SubstituteFromDefinition, "SubstituteFrom", "csharp");
 @@clientName(SubstituteFromPatchDefinition, "SubstituteFromPatch", "csharp");
 @@clientName(TlsConfigDefinition, "TlsConfig", "csharp");
 @@clientName(TlsConfigPatchDefinition, "TlsConfigPatch", "csharp");
 @@clientName(VerifyDefinition, "Verify", "csharp");
 @@clientName(VerifyPatchDefinition, "VerifyPatch", "csharp");
-@@clientName(HelmReleasePropertiesDefinition, "HelmReleaseProperties", "csharp");
+@@clientName(
+  HelmReleasePropertiesDefinition,
+  "HelmReleaseProperties",
+  "csharp"
+);
 @@clientName(ObjectReferenceDefinition, "ObjectReference", "csharp");
-@@clientName(ObjectStatusConditionDefinition, "ObjectStatusCondition", "csharp");
+@@clientName(
+  ObjectStatusConditionDefinition,
+  "ObjectStatusCondition",
+  "csharp"
+);
 @@clientName(ObjectStatusDefinition, "ObjectStatus", "csharp");
 @@clientName(RepositoryRefDefinition, "RepositoryRef", "csharp");
 @@clientName(SourceKindType.OCIRepository, "OciRepository", "csharp");
