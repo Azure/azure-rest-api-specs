@@ -74845,10 +74845,10 @@ components:
           enum:
             - traces
           description: The data generation job type, which is Traces for this model.
-        pii_redaction:
+        redact_private_content:
           type: boolean
           default: true
-          description: Whether to redact personally identifiable information from traces. When omitted or set to true, PII is redacted. Set to false to opt out of redaction.
+          description: Whether to redact private content from traces. When omitted or set to true, private content is redacted. Set to false to opt out of redaction.
       allOf:
         - $ref: '#/components/schemas/DataGenerationJobOptions'
       description: The options for a data generation job with Traces type.

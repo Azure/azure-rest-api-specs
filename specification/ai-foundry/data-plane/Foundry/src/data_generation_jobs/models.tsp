@@ -224,8 +224,8 @@ model TracesDataGenerationJobOptions extends DataGenerationJobOptions {
   @doc("The data generation job type, which is Traces for this model.")
   type: "traces";
 
-  @doc("Whether to redact personally identifiable information from traces. When omitted or set to true, PII is redacted. Set to false to opt out of redaction.")
-  pii_redaction?: boolean = true;
+  @doc("Whether to redact private content from traces. When omitted or set to true, private content is redacted. Set to false to opt out of redaction.")
+  redact_private_content?: boolean = true;
 }
 
 @doc("The options for a simulation seed data generation job. Use with multiturn evaluation scenarios and with prompt, file, or agent sources. Generated dataset rows include fields such as `id`, `category`, `test_case_description`, and `desired_num_turns`.")
