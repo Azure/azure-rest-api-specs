@@ -27,6 +27,20 @@ enum Versions {
   `2026-03-01-preview`,
 }
 
+// Relationship resource name constraint. In 2023-09-01-preview the name was
+// restricted to alphanumerics (^[a-zA-Z0-9]{3,64}$). From 2026-03-01-preview the
+// constraint is relaxed to any character except ':' (reserved for namespaces),
+// keeping only the length bound. The per-version pattern is applied by swapping
+// the name property's scalar type with `@@typeChangedFrom` on each shared resource;
+// the shipped 2023-09-01-preview swagger is therefore left unchanged.
+@doc("The name of a relationship resource.")
+@pattern("^[^:]{3,64}$")
+scalar relationshipName extends string;
+
+@doc("The name of a relationship resource.")
+@pattern("^[a-zA-Z0-9]{3,64}$")
+scalar relationshipNameV1 extends string;
+
 /*
  * Base relationship types definitions
  */
@@ -129,13 +143,18 @@ model DependencyOfRelationshipProperties is BaseRelationshipProperties;
 model DependencyOfRelationship
   is ExtensionResource<DependencyOfRelationshipProperties> {
   @doc("Name of dependencyOf relationship.")
-  @pattern("^[a-zA-Z0-9._~-]{3,64}$")
   @visibility(Lifecycle.Read)
   @key
   @path
   @segment("dependencyOf")
-  name: string;
+  name: relationshipName;
 }
+
+@@typeChangedFrom(
+  DependencyOfRelationship.name,
+  Versions.`2026-03-01-preview`,
+  relationshipNameV1
+);
 
 /*
  * serviceGroupMember relationship type definition
@@ -199,13 +218,18 @@ model ServiceGroupMemberRelationshipPropertiesV2 {
 model ServiceGroupMemberRelationship
   is ExtensionResource<ServiceGroupMemberRelationshipPropertiesV2> {
   @doc("Name of ServiceGroupMember relationship.")
-  @pattern("^[a-zA-Z0-9._~-]{3,64}$")
   @visibility(Lifecycle.Read)
   @key
   @path
   @segment("serviceGroupMember")
-  name: string;
+  name: relationshipName;
 }
+
+@@typeChangedFrom(
+  ServiceGroupMemberRelationship.name,
+  Versions.`2026-03-01-preview`,
+  relationshipNameV1
+);
 
 // Swap the SGM properties type per version: 2023 uses the inherited-base shape,
 // 2026 uses the decoupled V2 shape.
@@ -261,12 +285,11 @@ model ContainsRelationshipProperties {
 model ContainsRelationship
   is ExtensionResource<ContainsRelationshipProperties> {
   @doc("Name of contains relationship.")
-  @pattern("^[a-zA-Z0-9._~-]{3,64}$")
   @visibility(Lifecycle.Read)
   @key
   @path
   @segment("contains")
-  name: string;
+  name: relationshipName;
 }
 
 /*
