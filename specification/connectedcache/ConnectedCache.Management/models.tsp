@@ -786,46 +786,55 @@ model AdditionalCacheNodeProperties {
   @visibility(Lifecycle.Read)
   tlsStatus?: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @added(Versions.v2026_06_01)
   @doc("Operating system edition of the cache node host machine")
   @visibility(Lifecycle.Read)
   hostOsEdition?: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @added(Versions.v2026_06_01)
   @doc("Operating system version of the cache node host machine")
   @visibility(Lifecycle.Read)
   hostOsVersion?: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @added(Versions.v2026_06_01)
   @doc("Operating system build of the cache node host machine")
   @visibility(Lifecycle.Read)
   hostOsBuild?: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @added(Versions.v2026_06_01)
   @doc("Operating system edition of the WSL Linux distribution used to run the cache node on Windows host machines")
   @visibility(Lifecycle.Read)
   distroOsEditionWsl?: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @added(Versions.v2026_06_01)
   @doc("Operating system version of the WSL Linux distribution used to run the cache node on Windows host machines")
   @visibility(Lifecycle.Read)
   distroOsVersionWsl?: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @added(Versions.v2026_06_01)
   @doc("Operating system build of the WSL Linux distribution used to run the cache node on Windows host machines")
   @visibility(Lifecycle.Read)
   distroOsBuildWsl?: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @added(Versions.v2026_06_01)
   @doc("Operating system edition of container used to run the cache node")
   @visibility(Lifecycle.Read)
   containerOsEdition?: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @added(Versions.v2026_06_01)
   @doc("Operating system version of the container used to run the cache node")
   @visibility(Lifecycle.Read)
   containerOsVersion?: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @added(Versions.v2026_06_01)
   @doc("Operating system build of the container used to run the cache node")
   @visibility(Lifecycle.Read)
