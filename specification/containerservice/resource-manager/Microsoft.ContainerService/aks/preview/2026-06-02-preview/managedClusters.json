@@ -1875,6 +1875,9 @@
           "Create Agent Pool with Windows OSSKU": {
             "$ref": "./examples/AgentPoolsCreate_WindowsOSSKU.json"
           },
+          "Create Agent Pool with per-NIC public IP configuration": {
+            "$ref": "./examples/AgentPoolsCreate_PerNICPublicIP.json"
+          },
           "Create FlexNode Agent Pool": {
             "$ref": "./examples/AgentPoolsCreate_FlexNode.json"
           },
@@ -7514,6 +7517,57 @@
         ]
       }
     },
+    "AgentPoolNICPublicIPAddressConfiguration": {
+      "type": "object",
+      "description": "Public IP configuration applied to a secondary NIC on an agent pool. `ipTags` and `publicIPPrefixID` are mutually exclusive, matching the primary NIC's behavior. For more information, see https://aka.ms/aks/multi-nic",
+      "properties": {
+        "publicIPAddressVersion": {
+          "$ref": "#/definitions/AgentPoolNICPublicIPAddressVersion",
+          "description": "IP version of the public IP provisioned for this NIC. Required: its presence is what enables public IP provisioning, so an empty configuration allocates nothing. `IPv4` is the only accepted value."
+        },
+        "ipTags": {
+          "type": "array",
+          "description": "IP tags to attach to the public IP allocated for this NIC. Each tag's `ipTagType` must be `FirstPartyUsage`, `NetworkDomain`, or `RoutingPreference`. Mutually exclusive with `publicIPPrefixID`.",
+          "items": {
+            "$ref": "#/definitions/IPTag"
+          },
+          "x-ms-identifiers": []
+        },
+        "publicIPPrefixID": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of a public IP prefix to draw this NIC's public IP from. Mutually exclusive with `ipTags`.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/publicIPPrefixes"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "publicIPAddressVersion"
+      ]
+    },
+    "AgentPoolNICPublicIPAddressVersion": {
+      "type": "string",
+      "description": "IP version of the public IP allocated for a secondary NIC. `IPv4` is the only accepted value.",
+      "enum": [
+        "IPv4"
+      ],
+      "x-ms-enum": {
+        "name": "AgentPoolNICPublicIPAddressVersion",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "IPv4",
+            "value": "IPv4",
+            "description": "The public IP allocated for the NIC will be IPv4."
+          }
+        ]
+      }
+    },
     "AgentPoolNetworkInterface": {
       "type": "object",
       "description": "Configuration of a secondary network interface provisioned on each VM instance in the agent pool. For more information, see https://aka.ms/aks/multi-nic",
@@ -7537,6 +7591,10 @@
         "enableAcceleratedNetworking": {
           "type": "boolean",
           "description": "Whether accelerated networking is enabled on this secondary NIC. If omitted, this defaults to true only when the agent pool VM SKU supports accelerated networking. Validation will fail if it is enabled on an unsupported SKU or NIC configuration."
+        },
+        "publicIPAddressConfiguration": {
+          "$ref": "#/definitions/AgentPoolNICPublicIPAddressConfiguration",
+          "description": "Public IP configuration for this secondary NIC. Only valid when `type` is `Standard`. Set `publicIPAddressVersion` to provision a per-VM instance-level public IP for the NIC, then optionally shape it with `ipTags` or `publicIPPrefixID`. If omitted, no public IP is provisioned. Idle timeout is not configurable. For more information, see https://aka.ms/aks/multi-nic"
         }
       }
     },
@@ -7623,7 +7681,11 @@
           "items": {
             "$ref": "#/definitions/AgentPoolNetworkInterface"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [],
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "dranet": {
           "$ref": "#/definitions/DRANETProfile",
