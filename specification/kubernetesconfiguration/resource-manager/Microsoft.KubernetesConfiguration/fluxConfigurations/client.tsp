@@ -113,22 +113,38 @@ using Microsoft.KubernetesConfiguration;
   "IsClientCertificateSendChain",
   "csharp"
 );
-@@clientName(OCIRepositoryDefinition, "OciRepositoryDefinition", "csharp");
-@@clientName(
-  OCIRepositoryRefDefinition,
-  "OciRepositoryRefDefinition",
-  "csharp"
-);
-@@clientName(
-  OCIRepositoryPatchDefinition,
-  "OciRepositoryPatchDefinition",
-  "csharp"
-);
-@@clientName(
-  OCIRepositoryRefPatchDefinition,
-  "OciRepositoryRefPatchDefinition",
-  "csharp"
-);
+// C# fixes (AZC0031): drop redundant "Definition" suffix from model type names
+@@clientName(AzureBlobDefinition, "AzureBlob", "csharp");
+@@clientName(AzureBlobPatchDefinition, "AzureBlobPatch", "csharp");
+@@clientName(BucketDefinition, "Bucket", "csharp");
+@@clientName(BucketPatchDefinition, "BucketPatch", "csharp");
+@@clientName(GitRepositoryDefinition, "GitRepository", "csharp");
+@@clientName(GitRepositoryPatchDefinition, "GitRepositoryPatch", "csharp");
+@@clientName(KustomizationDefinition, "Kustomization", "csharp");
+@@clientName(KustomizationPatchDefinition, "KustomizationPatch", "csharp");
+@@clientName(LayerSelectorDefinition, "LayerSelector", "csharp");
+@@clientName(LayerSelectorPatchDefinition, "LayerSelectorPatch", "csharp");
+@@clientName(MatchOidcIdentityDefinition, "MatchOidcIdentity", "csharp");
+@@clientName(MatchOidcIdentityPatchDefinition, "MatchOidcIdentityPatch", "csharp");
+@@clientName(OCIRepositoryDefinition, "OciRepository", "csharp");
+@@clientName(OCIRepositoryPatchDefinition, "OciRepositoryPatch", "csharp");
+@@clientName(OCIRepositoryRefDefinition, "OciRepositoryRef", "csharp");
+@@clientName(OCIRepositoryRefPatchDefinition, "OciRepositoryRefPatch", "csharp");
+@@clientName(PostBuildDefinition, "PostBuild", "csharp");
+@@clientName(PostBuildPatchDefinition, "PostBuildPatch", "csharp");
+@@clientName(ServicePrincipalDefinition, "ServicePrincipal", "csharp");
+@@clientName(ServicePrincipalPatchDefinition, "ServicePrincipalPatch", "csharp");
+@@clientName(SubstituteFromDefinition, "SubstituteFrom", "csharp");
+@@clientName(SubstituteFromPatchDefinition, "SubstituteFromPatch", "csharp");
+@@clientName(TlsConfigDefinition, "TlsConfig", "csharp");
+@@clientName(TlsConfigPatchDefinition, "TlsConfigPatch", "csharp");
+@@clientName(VerifyDefinition, "Verify", "csharp");
+@@clientName(VerifyPatchDefinition, "VerifyPatch", "csharp");
+@@clientName(HelmReleasePropertiesDefinition, "HelmReleaseProperties", "csharp");
+@@clientName(ObjectReferenceDefinition, "ObjectReference", "csharp");
+@@clientName(ObjectStatusConditionDefinition, "ObjectStatusCondition", "csharp");
+@@clientName(ObjectStatusDefinition, "ObjectStatus", "csharp");
+@@clientName(RepositoryRefDefinition, "RepositoryRef", "csharp");
 @@clientName(SourceKindType.OCIRepository, "OciRepository", "csharp");
 
 // Exclude OperationStatus APIs from C# SDK - they are built into the core library
