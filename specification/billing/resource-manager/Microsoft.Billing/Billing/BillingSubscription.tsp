@@ -1,14 +1,11 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
-import "@typespec/rest";
 import "./models.tsp";
 import "./BillingProfile.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.Billing;
 /**
@@ -22,14 +19,14 @@ model BillingSubscription
     Resource = BillingSubscription,
     KeyName = "billingSubscriptionName",
     SegmentName = "billingSubscriptions",
-    NamePattern = ""
+    NamePattern = GuidPattern
   >;
 
   /**
    * Dictionary of metadata associated with the resource. It may not be populated for all resource types. Maximum key/value length supported of 256 characters. Keys/value should not empty value nor null. Keys can not contain < > % & \ ? /
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing documentation to provide tags like this. Same type as types.tsp/TrackedResource."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing documentation to provide tags like this. Same type as types.tsp/TrackedResource."
   tags?: Record<string>;
 }
 
@@ -47,12 +44,14 @@ alias BillingSubscriptionOps = Azure.ResourceManager.Legacy.ExtensionOperations<
     @path
     @segment("billingAccounts")
     @key
+    @pattern(BillingAccountNamePattern)
     billingAccountName: string;
 
     /** The ID that uniquely identifies a billing profile. */
     @path
     @segment("billingProfiles")
     @key
+    @pattern(BillingProfileCustomerInvoiceSectionNamePattern)
     billingProfileName: string;
   },
   {},
@@ -61,6 +60,7 @@ alias BillingSubscriptionOps = Azure.ResourceManager.Legacy.ExtensionOperations<
     @path
     @segment("billingSubscriptions")
     @key
+    @pattern(GuidPattern)
     billingSubscriptionName: string;
   },
   "BillingProfileSubscription"
@@ -71,8 +71,6 @@ interface BillingSubscriptions {
   /**
    * Gets a subscription by its billing profile and ID. The operation is supported for billing accounts with agreement type Enterprise Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingSubscription")
   getByBillingProfile is BillingSubscriptionOps.Read<
     BillingSubscription,
@@ -88,8 +86,6 @@ interface BillingSubscriptions {
   /**
    * Lists the subscriptions that are billed to a billing profile. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement or Microsoft Partner Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingSubscription")
   listByBillingProfile is BillingSubscriptionOps.List<
     BillingSubscription,
@@ -111,6 +107,7 @@ alias BillingSubscriptionOperationGroupOps = Azure.ResourceManager.Legacy.Extens
     @path
     @segment("billingAccounts")
     @key
+    @pattern(BillingAccountNamePattern)
     billingAccountName: string;
   },
   {},
@@ -119,6 +116,7 @@ alias BillingSubscriptionOperationGroupOps = Azure.ResourceManager.Legacy.Extens
     @path
     @segment("billingSubscriptions")
     @key
+    @pattern(GuidPattern)
     billingSubscriptionName: string;
   },
   "BillingSubscription"
@@ -129,8 +127,6 @@ interface BillingSubscriptionOperationGroup {
   /**
    * Gets a subscription by its ID. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement,  Microsoft Partner Agreement, and Enterprise Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingSubscription")
   get is BillingSubscriptionOperationGroupOps.Read<
     BillingSubscription,
@@ -146,29 +142,22 @@ interface BillingSubscriptionOperationGroup {
   /**
    * Updates the properties of a billing subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingSubscription")
   @patch(#{ implicitOptionality: false })
   update is BillingSubscriptionOperationGroupOps.CustomPatchAsync<
     BillingSubscription,
-    PatchModel = BillingSubscriptionPatch
+    PatchModel = BillingSubscription
   >;
 
   /**
    * Cancels a billing subscription. This operation is supported only for billing accounts of type Microsoft Partner Agreement or Microsoft Customer Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingSubscription")
   delete is BillingSubscriptionOperationGroupOps.DeleteWithoutOkAsync<BillingSubscription>;
 
   /**
    * Lists the subscriptions for a billing account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingSubscription")
   listByBillingAccount is BillingSubscriptionOperationGroupOps.List<
     BillingSubscription,
@@ -179,8 +168,6 @@ interface BillingSubscriptionOperationGroup {
   /**
    * Cancels a usage-based subscription. This operation is supported only for billing accounts of type Microsoft Partner Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingSubscription")
   cancel is BillingSubscriptionOperationGroupOps.ActionAsync<
     BillingSubscription,
@@ -192,8 +179,6 @@ interface BillingSubscriptionOperationGroup {
   /**
    * Merges the billing subscription provided in the request with a target billing subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingSubscription")
   merge is BillingSubscriptionOperationGroupOps.ActionAsync<
     BillingSubscription,
@@ -204,8 +189,6 @@ interface BillingSubscriptionOperationGroup {
   /**
    * Moves charges for a subscription to a new invoice section. The new invoice section must belong to the same billing profile as the existing invoice section. This operation is supported for billing accounts with agreement type Microsoft Customer Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingSubscription")
   move is BillingSubscriptionOperationGroupOps.ActionAsync<
     BillingSubscription,
@@ -216,8 +199,6 @@ interface BillingSubscriptionOperationGroup {
   /**
    * Splits a subscription into a new subscription with quantity less than current subscription quantity and not equal to 0.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingSubscription")
   split is BillingSubscriptionOperationGroupOps.ActionAsync<
     BillingSubscription,
@@ -228,8 +209,6 @@ interface BillingSubscriptionOperationGroup {
   /**
    * Validates if charges for a subscription can be moved to a new invoice section. This operation is supported for billing accounts with agreement type Microsoft Customer Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingSubscription")
   validateMoveEligibility is BillingSubscriptionOperationGroupOps.ActionSync<
     BillingSubscription,
@@ -251,41 +230,7 @@ alias BillingSubscriptionsListByBillingProfileParameters = {
   @query("expand")
   expand?: string;
 
-  /**
-   * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.
-   */
-  @query("filter")
-  filter?: string;
-
-  /**
-   * The orderby query option allows clients to request resources in a particular order.
-   */
-  @query("orderBy")
-  orderBy?: string;
-
-  /**
-   * The top query option requests the number of items in the queried collection to be included in the result. The maximum supported value for top is 50.
-   */
-  @query("top")
-  top?: int64;
-
-  /**
-   * The skip query option requests the number of items in the queried collection that are to be skipped and not included in the result.
-   */
-  @query("skip")
-  skip?: int64;
-
-  /**
-   * The count query option allows clients to request a count of the matching resources included with the resources in the response.
-   */
-  @query("count")
-  count?: boolean;
-
-  /**
-   * The search query option allows clients to request items within a collection matching a free-text search expression. search is only supported for string fields.
-   */
-  @query("search")
-  search?: string;
+  ...DefaultODataParameters;
 };
 
 alias BillingSubscriptionsListByBillingAccountParameters = {
@@ -313,41 +258,7 @@ alias BillingSubscriptionsListByBillingAccountParameters = {
   @query("expand")
   expand?: string;
 
-  /**
-   * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.
-   */
-  @query("filter")
-  filter?: string;
-
-  /**
-   * The orderby query option allows clients to request resources in a particular order.
-   */
-  @query("orderBy")
-  orderBy?: string;
-
-  /**
-   * The top query option requests the number of items in the queried collection to be included in the result. The maximum supported value for top is 50.
-   */
-  @query("top")
-  top?: int64;
-
-  /**
-   * The skip query option requests the number of items in the queried collection that are to be skipped and not included in the result.
-   */
-  @query("skip")
-  skip?: int64;
-
-  /**
-   * The count query option allows clients to request a count of the matching resources included with the resources in the response.
-   */
-  @query("count")
-  count?: boolean;
-
-  /**
-   * The search query option allows clients to request items within a collection matching a free-text search expression. search is only supported for string fields.
-   */
-  @query("search")
-  search?: string;
+  ...DefaultODataParameters;
 };
 
 @@doc(

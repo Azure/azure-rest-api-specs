@@ -1,14 +1,11 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
-import "@typespec/rest";
 import "./models.tsp";
 import "./BillingProfile.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.Billing;
 /**
@@ -22,14 +19,14 @@ model BillingRoleAssignment
     Resource = BillingRoleAssignment,
     KeyName = "billingRoleAssignmentName",
     SegmentName = "billingRoleAssignments",
-    NamePattern = "^[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12}(_[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12})?$"
+    NamePattern = BillingRoleAssignmentPattern
   >;
 
   /**
    * Dictionary of metadata associated with the resource. It may not be populated for all resource types. Maximum key/value length supported of 256 characters. Keys/value should not empty value nor null. Keys can not contain < > % & \ ? /
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing documentation to provide tags like this. Same type as types.tsp/TrackedResource."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing documentation to provide tags like this. Same type as types.tsp/TrackedResource."
   tags?: Record<string>;
 }
 
@@ -47,14 +44,14 @@ alias BillingRoleAssignmentOps = Azure.ResourceManager.Legacy.ExtensionOperation
     @path
     @segment("billingAccounts")
     @key
-    @pattern("^([0-9]+|([Pp][Cc][Nn]\\.[A-Za-z0-9]+)|[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}(:[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}_[0-9]{4}(-[0-9]{2}){2})?)$")
+    @pattern(BillingAccountNamePattern)
     billingAccountName: string;
 
     /** The ID that uniquely identifies a billing profile. */
     @path
     @segment("billingProfiles")
     @key
-    @pattern("^[a-zA-Z\\d-_]{1,128}$")
+    @pattern(BillingProfileCustomerInvoiceSectionNamePattern)
     billingProfileName: string;
   },
   {},
@@ -63,7 +60,7 @@ alias BillingRoleAssignmentOps = Azure.ResourceManager.Legacy.ExtensionOperation
     @path
     @segment("billingRoleAssignments")
     @key
-    @pattern("^[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12}(_[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12})?$")
+    @pattern(BillingRoleAssignmentPattern)
     billingRoleAssignmentName: string;
   },
   "BillingProfileRoleAssignment"
@@ -74,24 +71,18 @@ interface BillingRoleAssignments {
   /**
    * Gets a role assignment for the caller on a billing profile. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleAssignment")
   getByBillingProfile is BillingRoleAssignmentOps.Read<BillingRoleAssignment>;
 
   /**
    * Deletes a role assignment on a billing profile. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleAssignment")
   deleteByBillingProfile is BillingRoleAssignmentOps.DeleteSync<BillingRoleAssignment>;
 
   /**
    * Lists the role assignments for the caller on a billing profile. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleAssignment")
   listByBillingProfile is BillingRoleAssignmentOps.List<
     BillingRoleAssignment,
@@ -131,21 +122,21 @@ alias BillingRoleAssignmentByCustomerOps = Azure.ResourceManager.Legacy.Extensio
     @path
     @segment("billingAccounts")
     @key
-    @pattern("^([0-9]+|([Pp][Cc][Nn]\\.[A-Za-z0-9]+)|[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}(:[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}_[0-9]{4}(-[0-9]{2}){2})?)$")
+    @pattern(BillingAccountNamePattern)
     billingAccountName: string;
 
     /** The ID that uniquely identifies a billing profile. */
     @path
     @segment("billingProfiles")
     @key
-    @pattern("^[a-zA-Z\\d-_]{1,128}$")
+    @pattern(BillingProfileCustomerInvoiceSectionNamePattern)
     billingProfileName: string;
 
     /** The ID that uniquely identifies a customer. */
     @path
     @segment("customers")
     @key
-    @pattern("^[a-zA-Z\\d-_]{1,128}$")
+    @pattern(BillingProfileCustomerInvoiceSectionNamePattern)
     customerName: string;
   },
   {},
@@ -154,7 +145,7 @@ alias BillingRoleAssignmentByCustomerOps = Azure.ResourceManager.Legacy.Extensio
     @path
     @segment("billingRoleAssignments")
     @key
-    @pattern("^[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12}(_[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12})?$")
+    @pattern(BillingRoleAssignmentPattern)
     billingRoleAssignmentName: string;
   },
   "BillingCustomerRoleAssignment"
@@ -165,24 +156,18 @@ interface BillingRoleAssignmentByCustomer {
   /**
    * Gets a role assignment for the caller on a customer. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleAssignment")
   getByCustomer is BillingRoleAssignmentByCustomerOps.Read<BillingRoleAssignment>;
 
   /**
    * Deletes a role assignment on a customer. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleAssignment")
   deleteByCustomer is BillingRoleAssignmentByCustomerOps.DeleteSync<BillingRoleAssignment>;
 
   /**
    * Lists the role assignments for the caller on customer. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleAssignment")
   listByCustomer is BillingRoleAssignmentByCustomerOps.List<
     BillingRoleAssignment,
@@ -222,21 +207,21 @@ alias BillingRoleAssignmentByInvoiceSectionOps = Azure.ResourceManager.Legacy.Ex
     @path
     @segment("billingAccounts")
     @key
-    @pattern("^([0-9]+|([Pp][Cc][Nn]\\.[A-Za-z0-9]+)|[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}(:[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}_[0-9]{4}(-[0-9]{2}){2})?)$")
+    @pattern(BillingAccountNamePattern)
     billingAccountName: string;
 
     /** The ID that uniquely identifies a billing profile. */
     @path
     @segment("billingProfiles")
     @key
-    @pattern("^[a-zA-Z\\d-_]{1,128}$")
+    @pattern(BillingProfileCustomerInvoiceSectionNamePattern)
     billingProfileName: string;
 
     /** The ID that uniquely identifies an invoice section. */
     @path
     @segment("invoiceSections")
     @key
-    @pattern("^[a-zA-Z\\d-_]{1,128}$")
+    @pattern(BillingProfileCustomerInvoiceSectionNamePattern)
     invoiceSectionName: string;
   },
   {},
@@ -245,7 +230,7 @@ alias BillingRoleAssignmentByInvoiceSectionOps = Azure.ResourceManager.Legacy.Ex
     @path
     @segment("billingRoleAssignments")
     @key
-    @pattern("^[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12}(_[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12})?$")
+    @pattern(BillingRoleAssignmentPattern)
     billingRoleAssignmentName: string;
   },
   "BillingInvoiceSectionRoleAssignment"
@@ -256,24 +241,18 @@ interface BillingRoleAssignmentByInvoiceSection {
   /**
    * Gets a role assignment for the caller on an invoice section. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleAssignment")
   getByInvoiceSection is BillingRoleAssignmentByInvoiceSectionOps.Read<BillingRoleAssignment>;
 
   /**
    * Deletes a role assignment on an invoice section. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleAssignment")
   deleteByInvoiceSection is BillingRoleAssignmentByInvoiceSectionOps.DeleteSync<BillingRoleAssignment>;
 
   /**
    * Lists the role assignments for the caller on an invoice section. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleAssignment")
   listByInvoiceSection is BillingRoleAssignmentByInvoiceSectionOps.List<
     BillingRoleAssignment,
@@ -313,7 +292,7 @@ alias BillingRoleAssignmentByBillingAccountOps = Azure.ResourceManager.Legacy.Ex
     @path
     @segment("billingAccounts")
     @key
-    @pattern("^([0-9]+|([Pp][Cc][Nn]\\.[A-Za-z0-9]+)|[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}(:[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}_[0-9]{4}(-[0-9]{2}){2})?)$")
+    @pattern(BillingAccountNamePattern)
     billingAccountName: string;
   },
   {},
@@ -322,7 +301,7 @@ alias BillingRoleAssignmentByBillingAccountOps = Azure.ResourceManager.Legacy.Ex
     @path
     @segment("billingRoleAssignments")
     @key
-    @pattern("^[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12}(_[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12})?$")
+    @pattern(BillingRoleAssignmentPattern)
     billingRoleAssignmentName: string;
   },
   "BillingRoleAssignment"
@@ -333,16 +312,12 @@ interface BillingRoleAssignmentByBillingAccount {
   /**
    * Gets a role assignment for the caller on a billing account. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement, Microsoft Customer Agreement or Enterprise Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleAssignment")
   getByBillingAccount is BillingRoleAssignmentByBillingAccountOps.Read<BillingRoleAssignment>;
 
   /**
    * Create or update a billing role assignment. The operation is supported only for billing accounts with agreement type Enterprise Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleAssignment")
   createOrUpdateByBillingAccount is BillingRoleAssignmentByBillingAccountOps.CreateOrUpdateAsync<
     BillingRoleAssignment,
@@ -353,16 +328,12 @@ interface BillingRoleAssignmentByBillingAccount {
   /**
    * Deletes a role assignment on a billing account. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement, Microsoft Customer Agreement or Enterprise Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleAssignment")
   deleteByBillingAccount is BillingRoleAssignmentByBillingAccountOps.DeleteSync<BillingRoleAssignment>;
 
   /**
    * Lists the role assignments for the caller on a billing account. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement, Microsoft Customer Agreement or Enterprise Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleAssignment")
   listByBillingAccount is BillingRoleAssignmentByBillingAccountOps.List<
     BillingRoleAssignment,
@@ -402,14 +373,14 @@ alias BillingRoleAssignmentByDepartmentOps = Azure.ResourceManager.Legacy.Extens
     @path
     @segment("billingAccounts")
     @key
-    @pattern("^([0-9]+|([Pp][Cc][Nn]\\.[A-Za-z0-9]+)|[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}(:[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}_[0-9]{4}(-[0-9]{2}){2})?)$")
+    @pattern(BillingAccountNamePattern)
     billingAccountName: string;
 
     /** The name of the department. */
     @path
     @segment("departments")
     @key
-    @pattern("^[a-zA-Z\\d-_]{1,128}$")
+    @pattern(BillingProfileCustomerInvoiceSectionNamePattern)
     departmentName: string;
   },
   {},
@@ -418,7 +389,7 @@ alias BillingRoleAssignmentByDepartmentOps = Azure.ResourceManager.Legacy.Extens
     @path
     @segment("billingRoleAssignments")
     @key
-    @pattern("^[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12}(_[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12})?$")
+    @pattern(BillingRoleAssignmentPattern)
     billingRoleAssignmentName: string;
   },
   "BillingDepartmentRoleAssignment"
@@ -429,16 +400,12 @@ interface BillingRoleAssignmentByDepartment {
   /**
    * Gets a role assignment for the caller on a department. The operation is supported only for billing accounts with agreement type Enterprise Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleAssignment")
   getByDepartment is BillingRoleAssignmentByDepartmentOps.Read<BillingRoleAssignment>;
 
   /**
    * Create or update a billing role assignment. The operation is supported only for billing accounts with agreement type Enterprise Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleAssignment")
   createOrUpdateByDepartment is BillingRoleAssignmentByDepartmentOps.CreateOrUpdateAsync<
     BillingRoleAssignment,
@@ -449,16 +416,12 @@ interface BillingRoleAssignmentByDepartment {
   /**
    * Deletes a role assignment on a department. The operation is supported only for billing accounts with agreement type Enterprise Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleAssignment")
   deleteByDepartment is BillingRoleAssignmentByDepartmentOps.DeleteSync<BillingRoleAssignment>;
 
   /**
    * Lists the role assignments for the caller on a department. The operation is supported for billing accounts of type Enterprise Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleAssignment")
   listByDepartment is BillingRoleAssignmentByDepartmentOps.List<
     BillingRoleAssignment,
@@ -479,14 +442,14 @@ alias BillingRoleAssignmentByEnrollmentAccountOps = Azure.ResourceManager.Legacy
     @path
     @segment("billingAccounts")
     @key
-    @pattern("^([0-9]+|([Pp][Cc][Nn]\\.[A-Za-z0-9]+)|[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}(:[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}_[0-9]{4}(-[0-9]{2}){2})?)$")
+    @pattern(BillingAccountNamePattern)
     billingAccountName: string;
 
     /** The name of the enrollment account. */
     @path
     @segment("enrollmentAccounts")
     @key
-    @pattern("^[a-zA-Z\\d-_]{1,128}$")
+    @pattern(BillingProfileCustomerInvoiceSectionNamePattern)
     enrollmentAccountName: string;
   },
   {},
@@ -495,7 +458,7 @@ alias BillingRoleAssignmentByEnrollmentAccountOps = Azure.ResourceManager.Legacy
     @path
     @segment("billingRoleAssignments")
     @key
-    @pattern("^[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12}(_[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12})?$")
+    @pattern(BillingRoleAssignmentPattern)
     billingRoleAssignmentName: string;
   },
   "BillingEnrollmentAccountRoleAssignment"
@@ -506,16 +469,12 @@ interface BillingRoleAssignmentByEnrollmentAccount {
   /**
    * Gets a role assignment for the caller on a enrollment Account. The operation is supported only for billing accounts with agreement type Enterprise Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleAssignment")
   getByEnrollmentAccount is BillingRoleAssignmentByEnrollmentAccountOps.Read<BillingRoleAssignment>;
 
   /**
    * Create or update a billing role assignment. The operation is supported only for billing accounts with agreement type Enterprise Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleAssignment")
   createOrUpdateByEnrollmentAccount is BillingRoleAssignmentByEnrollmentAccountOps.CreateOrUpdateAsync<
     BillingRoleAssignment,
@@ -526,16 +485,12 @@ interface BillingRoleAssignmentByEnrollmentAccount {
   /**
    * Deletes a role assignment on a enrollment Account. The operation is supported only for billing accounts with agreement type Enterprise Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleAssignment")
   deleteByEnrollmentAccount is BillingRoleAssignmentByEnrollmentAccountOps.DeleteSync<BillingRoleAssignment>;
 
   /**
    * Lists the role assignments for the caller on a enrollment account. The operation is supported for billing accounts of type Enterprise Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleAssignment")
   listByEnrollmentAccount is BillingRoleAssignmentByEnrollmentAccountOps.List<
     BillingRoleAssignment,

@@ -3,13 +3,19 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-azure-core";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
 using Azure.ResourceManager;
-using Azure.Core;
-using Azure.ResourceManager.Foundations;
+using TypeSpec.Http;
 
 namespace Microsoft.Billing;
+
+const BillingAccountNamePattern = string("^([0-9]+|([Pp][Cc][Nn]\\.[A-Za-z0-9]+)|[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}(:[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}_[0-9]{4}(-[0-9]{2}){2})?)$");
+const BillingProfileCustomerInvoiceSectionNamePattern = string("^[a-zA-Z\\d-_]{1,128}$");
+const BillingRoleAssignmentPattern = string("^[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12}(_[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12})?$");
+const InvoicePattern = string("^(H[0-9]-[A-Z0-9]+)$|^(?:([GHT]|HT){1}[A-Z0-9]{9})$|^(?:[D]{1}[A-Z0-9]{9})$|^(?:E{1}[B-Z0-9]{1}[A-Z0-9]{8})$|^(?:EA[A-Z0-9]{8})$");
+const AgreementNamePattern = string("^[a-fA-F0-9]{1,12}$");
+const GuidPattern = string("^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$");
+const LowerAlphaNumericPattern = string("^[a-z0-9]*$");
+const PaymentMethodPattern = string("^[A-Za-z0-9:_+\\-]{1,128}$");
 
 /**
  * The mode of acceptance for an agreement.
@@ -18,37 +24,37 @@ union AcceptanceMode {
   string,
 
   /**
-   * Other
+   * The Other option for the acceptance mode.
    */
   Other: "Other",
 
   /**
-   * ClickToAccept
+   * The ClickToAccept option for the acceptance mode.
    */
   ClickToAccept: "ClickToAccept",
 
   /**
-   * ESignEmbedded
+   * The ESignEmbedded option for the acceptance mode.
    */
   ESignEmbedded: "ESignEmbedded",
 
   /**
-   * ESignOffline
+   * The ESignOffline option for the acceptance mode.
    */
   ESignOffline: "ESignOffline",
 
   /**
-   * Implicit
+   * The Implicit option for the acceptance mode.
    */
   Implicit: "Implicit",
 
   /**
-   * Offline
+   * The Offline option for the acceptance mode.
    */
   Offline: "Offline",
 
   /**
-   * PhysicalSign
+   * The PhysicalSign option for the acceptance mode.
    */
   PhysicalSign: "PhysicalSign",
 }
@@ -60,32 +66,32 @@ union Category {
   string,
 
   /**
-   * Other
+   * The Other option for the category.
    */
   Other: "Other",
 
   /**
-   * AffiliatePurchaseTerms
+   * The AffiliatePurchaseTerms option for the category.
    */
   AffiliatePurchaseTerms: "AffiliatePurchaseTerms",
 
   /**
-   * IndirectForGovernmentAgreement
+   * The IndirectForGovernmentAgreement option for the category.
    */
   IndirectForGovernmentAgreement: "IndirectForGovernmentAgreement",
 
   /**
-   * MicrosoftCustomerAgreement
+   * The MicrosoftCustomerAgreement option for the category.
    */
   MicrosoftCustomerAgreement: "MicrosoftCustomerAgreement",
 
   /**
-   * MicrosoftPartnerAgreement
+   * The MicrosoftPartnerAgreement option for the category.
    */
   MicrosoftPartnerAgreement: "MicrosoftPartnerAgreement",
 
   /**
-   * UKCloudComputeFramework
+   * The UKCloudComputeFramework option for the category.
    */
   UKCloudComputeFramework: "UKCloudComputeFramework",
 }
@@ -97,22 +103,22 @@ union CreatedByType {
   string,
 
   /**
-   * User
+   * The User option for the created by type.
    */
   User: "User",
 
   /**
-   * Application
+   * The Application option for the created by type.
    */
   Application: "Application",
 
   /**
-   * ManagedIdentity
+   * The ManagedIdentity option for the created by type.
    */
   ManagedIdentity: "ManagedIdentity",
 
   /**
-   * Key
+   * The Key option for the created by type.
    */
   Key: "Key",
 }
@@ -120,61 +126,62 @@ union CreatedByType {
 /**
  * The provisioning state of the resource during a long-running operation.
  */
+@Azure.Core.lroStatus
 union ProvisioningState {
   string,
 
   /**
-   * Succeeded
+   * The Succeeded option for the provisioning state.
    */
   Succeeded: "Succeeded",
 
   /**
-   * Canceled
+   * The Canceled option for the provisioning state.
    */
   Canceled: "Canceled",
 
   /**
-   * Failed
+   * The Failed option for the provisioning state.
    */
   Failed: "Failed",
 
   /**
-   * New
+   * The New option for the provisioning state.
    */
   New: "New",
 
   /**
-   * Pending
+   * The Pending option for the provisioning state.
    */
   Pending: "Pending",
 
   /**
-   * Provisioning
+   * The Provisioning option for the provisioning state.
    */
   Provisioning: "Provisioning",
 
   /**
-   * PendingBilling
+   * The PendingBilling option for the provisioning state.
    */
   PendingBilling: "PendingBilling",
 
   /**
-   * ConfirmedBilling
+   * The ConfirmedBilling option for the provisioning state.
    */
   ConfirmedBilling: "ConfirmedBilling",
 
   /**
-   * Creating
+   * The Creating option for the provisioning state.
    */
   Creating: "Creating",
 
   /**
-   * Created
+   * The Created option for the provisioning state.
    */
   Created: "Created",
 
   /**
-   * Expired
+   * The Expired option for the provisioning state.
    */
   Expired: "Expired",
 }
@@ -186,22 +193,22 @@ union BillingManagementTenantState {
   string,
 
   /**
-   * Other
+   * The Other option for the billing management tenant state.
    */
   Other: "Other",
 
   /**
-   * NotAllowed
+   * The NotAllowed option for the billing management tenant state.
    */
   NotAllowed: "NotAllowed",
 
   /**
-   * Active
+   * The Active option for the billing management tenant state.
    */
   Active: "Active",
 
   /**
-   * Revoked
+   * The Revoked option for the billing management tenant state.
    */
   Revoked: "Revoked",
 }
@@ -213,37 +220,37 @@ union ProvisioningTenantState {
   string,
 
   /**
-   * Other
+   * The Other option for the provisioning tenant state.
    */
   Other: "Other",
 
   /**
-   * NotRequested
+   * The NotRequested option for the provisioning tenant state.
    */
   NotRequested: "NotRequested",
 
   /**
-   * Active
+   * The Active option for the provisioning tenant state.
    */
   Active: "Active",
 
   /**
-   * Pending
+   * The Pending option for the provisioning tenant state.
    */
   Pending: "Pending",
 
   /**
-   * BillingRequestExpired
+   * The BillingRequestExpired option for the provisioning tenant state.
    */
   BillingRequestExpired: "BillingRequestExpired",
 
   /**
-   * BillingRequestDeclined
+   * The BillingRequestDeclined option for the provisioning tenant state.
    */
   BillingRequestDeclined: "BillingRequestDeclined",
 
   /**
-   * Revoked
+   * The Revoked option for the provisioning tenant state.
    */
   Revoked: "Revoked",
 }
@@ -255,42 +262,42 @@ union PaymentMethodFamily {
   string,
 
   /**
-   * Other
+   * The Other option for the payment method family.
    */
   Other: "Other",
 
   /**
-   * None
+   * The None option for the payment method family.
    */
   None: "None",
 
   /**
-   * CreditCard
+   * The CreditCard option for the payment method family.
    */
   CreditCard: "CreditCard",
 
   /**
-   * Credits
+   * The Credits option for the payment method family.
    */
   Credits: "Credits",
 
   /**
-   * CheckWire
+   * The CheckWire option for the payment method family.
    */
   CheckWire: "CheckWire",
 
   /**
-   * EWallet
+   * The EWallet option for the payment method family.
    */
   EWallet: "EWallet",
 
   /**
-   * TaskOrder
+   * The TaskOrder option for the payment method family.
    */
   TaskOrder: "TaskOrder",
 
   /**
-   * DirectDebit
+   * The DirectDebit option for the payment method family.
    */
   DirectDebit: "DirectDebit",
 }
@@ -302,57 +309,57 @@ union AccountStatus {
   string,
 
   /**
-   * Other
+   * The Other option for the account status.
    */
   Other: "Other",
 
   /**
-   * Active
+   * The Active option for the account status.
    */
   Active: "Active",
 
   /**
-   * UnderReview
+   * The UnderReview option for the account status.
    */
   UnderReview: "UnderReview",
 
   /**
-   * Disabled
+   * The Disabled option for the account status.
    */
   Disabled: "Disabled",
 
   /**
-   * Deleted
+   * The Deleted option for the account status.
    */
   Deleted: "Deleted",
 
   /**
-   * Extended
+   * The Extended option for the account status.
    */
   Extended: "Extended",
 
   /**
-   * Pending
+   * The Pending option for the account status.
    */
   Pending: "Pending",
 
   /**
-   * New
+   * The New option for the account status.
    */
   New: "New",
 
   /**
-   * Expired
+   * The Expired option for the account status.
    */
   Expired: "Expired",
 
   /**
-   * Terminated
+   * The Terminated option for the account status.
    */
   Terminated: "Terminated",
 
   /**
-   * Transferred
+   * The Transferred option for the account status.
    */
   Transferred: "Transferred",
 }
@@ -364,47 +371,47 @@ union AccountType {
   string,
 
   /**
-   * Other
+   * The Other option for the account type.
    */
   Other: "Other",
 
   /**
-   * Enterprise
+   * The Enterprise option for the account type.
    */
   Enterprise: "Enterprise",
 
   /**
-   * Individual
+   * The Individual option for the account type.
    */
   Individual: "Individual",
 
   /**
-   * Partner
+   * The Partner option for the account type.
    */
   Partner: "Partner",
 
   /**
-   * Reseller
+   * The Reseller option for the account type.
    */
   Reseller: "Reseller",
 
   /**
-   * ClassicPartner
+   * The ClassicPartner option for the account type.
    */
   ClassicPartner: "ClassicPartner",
 
   /**
-   * Internal
+   * The Internal option for the account type.
    */
   Internal: "Internal",
 
   /**
-   * Tenant
+   * The Tenant option for the account type.
    */
   Tenant: "Tenant",
 
   /**
-   * Business
+   * The Business option for the account type.
    */
   Business: "Business",
 }
@@ -416,27 +423,27 @@ union AccountSubType {
   string,
 
   /**
-   * Other
+   * The Other option for the account sub type.
    */
   Other: "Other",
 
   /**
-   * None
+   * The None option for the account sub type.
    */
   None: "None",
 
   /**
-   * Individual
+   * The Individual option for the account sub type.
    */
   Individual: "Individual",
 
   /**
-   * Professional
+   * The Professional option for the account sub type.
    */
   Professional: "Professional",
 
   /**
-   * Enterprise
+   * The Enterprise option for the account sub type.
    */
   Enterprise: "Enterprise",
 }
@@ -448,32 +455,32 @@ union BillingAccountStatusReasonCode {
   string,
 
   /**
-   * Other
+   * The Other option for the billing account status reason code.
    */
   Other: "Other",
 
   /**
-   * UnusualActivity
+   * The UnusualActivity option for the billing account status reason code.
    */
   UnusualActivity: "UnusualActivity",
 
   /**
-   * ManuallyTerminated
+   * The ManuallyTerminated option for the billing account status reason code.
    */
   ManuallyTerminated: "ManuallyTerminated",
 
   /**
-   * Expired
+   * The Expired option for the billing account status reason code.
    */
   Expired: "Expired",
 
   /**
-   * Transferred
+   * The Transferred option for the billing account status reason code.
    */
   Transferred: "Transferred",
 
   /**
-   * TerminateProcessing
+   * The TerminateProcessing option for the billing account status reason code.
    */
   TerminateProcessing: "TerminateProcessing",
 }
@@ -485,27 +492,27 @@ union AgreementType {
   string,
 
   /**
-   * Other
+   * The Other option for the agreement type.
    */
   Other: "Other",
 
   /**
-   * MicrosoftCustomerAgreement
+   * The MicrosoftCustomerAgreement option for the agreement type.
    */
   MicrosoftCustomerAgreement: "MicrosoftCustomerAgreement",
 
   /**
-   * EnterpriseAgreement
+   * The EnterpriseAgreement option for the agreement type.
    */
   EnterpriseAgreement: "EnterpriseAgreement",
 
   /**
-   * MicrosoftOnlineServicesProgram
+   * The MicrosoftOnlineServicesProgram option for the agreement type.
    */
   MicrosoftOnlineServicesProgram: "MicrosoftOnlineServicesProgram",
 
   /**
-   * MicrosoftPartnerAgreement
+   * The MicrosoftPartnerAgreement option for the agreement type.
    */
   MicrosoftPartnerAgreement: "MicrosoftPartnerAgreement",
 }
@@ -517,17 +524,17 @@ union ExtendedTermOption {
   string,
 
   /**
-   * Other
+   * The Other option for the extended term option.
    */
   Other: "Other",
 
   /**
-   * Opted-In
+   * Indicates that the extended term option is enabled.
    */
   `Opted-In`: "Opted-In",
 
   /**
-   * Opted-Out
+   * Indicates that the extended term option is disabled.
    */
   `Opted-Out`: "Opted-Out",
 }
@@ -539,22 +546,22 @@ union SupportLevel {
   string,
 
   /**
-   * Other
+   * The Other option for the support level.
    */
   Other: "Other",
 
   /**
-   * Standard
+   * The Standard option for the support level.
    */
   Standard: "Standard",
 
   /**
-   * Pro-Direct
+   * Indicates the Pro-Direct support offer.
    */
   `Pro-Direct`: "Pro-Direct",
 
   /**
-   * Developer
+   * The Developer option for the support level.
    */
   Developer: "Developer",
 }
@@ -566,27 +573,27 @@ union MarkupStatus {
   string,
 
   /**
-   * Other
+   * The Other option for the markup status.
    */
   Other: "Other",
 
   /**
-   * Disabled
+   * The Disabled option for the markup status.
    */
   Disabled: "Disabled",
 
   /**
-   * Preview
+   * The Preview option for the markup status.
    */
   Preview: "Preview",
 
   /**
-   * Published
+   * The Published option for the markup status.
    */
   Published: "Published",
 
   /**
-   * Locked
+   * The Locked option for the markup status.
    */
   Locked: "Locked",
 }
@@ -598,32 +605,32 @@ union BillingRelationshipType {
   string,
 
   /**
-   * Other
+   * The Other option for the billing relationship type.
    */
   Other: "Other",
 
   /**
-   * Direct
+   * The Direct option for the billing relationship type.
    */
   Direct: "Direct",
 
   /**
-   * IndirectCustomer
+   * The IndirectCustomer option for the billing relationship type.
    */
   IndirectCustomer: "IndirectCustomer",
 
   /**
-   * IndirectPartner
+   * The IndirectPartner option for the billing relationship type.
    */
   IndirectPartner: "IndirectPartner",
 
   /**
-   * CSPPartner
+   * The CSPPartner option for the billing relationship type.
    */
   CSPPartner: "CSPPartner",
 
   /**
-   * CSPCustomer
+   * The CSPCustomer option for the billing relationship type.
    */
   CSPCustomer: "CSPCustomer",
 }
@@ -635,102 +642,102 @@ union TaxIdentifierType {
   string,
 
   /**
-   * Other
+   * The Other option for the tax identifier type.
    */
   Other: "Other",
 
   /**
-   * BrazilCcmId
+   * The BrazilCcmId option for the tax identifier type.
    */
   BrazilCcmId: "BrazilCcmId",
 
   /**
-   * BrazilCnpjId
+   * The BrazilCnpjId option for the tax identifier type.
    */
   BrazilCnpjId: "BrazilCnpjId",
 
   /**
-   * BrazilCpfId
+   * The BrazilCpfId option for the tax identifier type.
    */
   BrazilCpfId: "BrazilCpfId",
 
   /**
-   * CanadianFederalExempt
+   * The CanadianFederalExempt option for the tax identifier type.
    */
   CanadianFederalExempt: "CanadianFederalExempt",
 
   /**
-   * CanadianProvinceExempt
+   * The CanadianProvinceExempt option for the tax identifier type.
    */
   CanadianProvinceExempt: "CanadianProvinceExempt",
 
   /**
-   * ExternalTaxation
+   * The ExternalTaxation option for the tax identifier type.
    */
   ExternalTaxation: "ExternalTaxation",
 
   /**
-   * IndiaFederalTanId
+   * The IndiaFederalTanId option for the tax identifier type.
    */
   IndiaFederalTanId: "IndiaFederalTanId",
 
   /**
-   * IndiaFederalServiceTaxId
+   * The IndiaFederalServiceTaxId option for the tax identifier type.
    */
   IndiaFederalServiceTaxId: "IndiaFederalServiceTaxId",
 
   /**
-   * IndiaPanId
+   * The IndiaPanId option for the tax identifier type.
    */
   IndiaPanId: "IndiaPanId",
 
   /**
-   * IndiaStateCstId
+   * The IndiaStateCstId option for the tax identifier type.
    */
   IndiaStateCstId: "IndiaStateCstId",
 
   /**
-   * IndiaStateGstINId
+   * The IndiaStateGstINId option for the tax identifier type.
    */
   IndiaStateGstINId: "IndiaStateGstINId",
 
   /**
-   * IndiaStateVatId
+   * The IndiaStateVatId option for the tax identifier type.
    */
   IndiaStateVatId: "IndiaStateVatId",
 
   /**
-   * IntlExempt
+   * The IntlExempt option for the tax identifier type.
    */
   IntlExempt: "IntlExempt",
 
   /**
-   * USExempt
+   * The USExempt option for the tax identifier type.
    */
   USExempt: "USExempt",
 
   /**
-   * VatId
+   * The VatId option for the tax identifier type.
    */
   VatId: "VatId",
 
   /**
-   * LoveCode
+   * The LoveCode option for the tax identifier type.
    */
   LoveCode: "LoveCode",
 
   /**
-   * MobileBarCode
+   * The MobileBarCode option for the tax identifier type.
    */
   MobileBarCode: "MobileBarCode",
 
   /**
-   * NationalIdentificationNumber
+   * The NationalIdentificationNumber option for the tax identifier type.
    */
   NationalIdentificationNumber: "NationalIdentificationNumber",
 
   /**
-   * PublicSectorId
+   * The PublicSectorId option for the tax identifier type.
    */
   PublicSectorId: "PublicSectorId",
 }
@@ -742,17 +749,17 @@ union TaxIdentifierStatus {
   string,
 
   /**
-   * Other
+   * The Other option for the tax identifier status.
    */
   Other: "Other",
 
   /**
-   * Valid
+   * The Valid option for the tax identifier status.
    */
   Valid: "Valid",
 
   /**
-   * Invalid
+   * The Invalid option for the tax identifier status.
    */
   Invalid: "Invalid",
 }
@@ -764,32 +771,32 @@ union BillingProfileStatus {
   string,
 
   /**
-   * Other
+   * The Other option for the billing profile status.
    */
   Other: "Other",
 
   /**
-   * Active
+   * The Active option for the billing profile status.
    */
   Active: "Active",
 
   /**
-   * Disabled
+   * The Disabled option for the billing profile status.
    */
   Disabled: "Disabled",
 
   /**
-   * Warned
+   * The Warned option for the billing profile status.
    */
   Warned: "Warned",
 
   /**
-   * Deleted
+   * The Deleted option for the billing profile status.
    */
   Deleted: "Deleted",
 
   /**
-   * UnderReview
+   * The UnderReview option for the billing profile status.
    */
   UnderReview: "UnderReview",
 }
@@ -801,27 +808,27 @@ union BillingProfileStatusReasonCode {
   string,
 
   /**
-   * Other
+   * The Other option for the billing profile status reason code.
    */
   Other: "Other",
 
   /**
-   * PastDue
+   * The PastDue option for the billing profile status reason code.
    */
   PastDue: "PastDue",
 
   /**
-   * UnusualActivity
+   * The UnusualActivity option for the billing profile status reason code.
    */
   UnusualActivity: "UnusualActivity",
 
   /**
-   * SpendingLimitReached
+   * The SpendingLimitReached option for the billing profile status reason code.
    */
   SpendingLimitReached: "SpendingLimitReached",
 
   /**
-   * SpendingLimitExpired
+   * The SpendingLimitExpired option for the billing profile status reason code.
    */
   SpendingLimitExpired: "SpendingLimitExpired",
 }
@@ -833,12 +840,12 @@ union SpendingLimit {
   string,
 
   /**
-   * Off
+   * The Off option for the spending limit.
    */
   Off: "Off",
 
   /**
-   * On
+   * The On option for the spending limit.
    */
   On: "On",
 }
@@ -850,17 +857,17 @@ union PaymentTermsEligibilityStatus {
   string,
 
   /**
-   * Other
+   * The Other option for the payment terms eligibility status.
    */
   Other: "Other",
 
   /**
-   * Valid
+   * The Valid option for the payment terms eligibility status.
    */
   Valid: "Valid",
 
   /**
-   * Invalid
+   * The Invalid option for the payment terms eligibility status.
    */
   Invalid: "Invalid",
 }
@@ -872,52 +879,52 @@ union PaymentTermsEligibilityCode {
   string,
 
   /**
-   * Other
+   * The Other option for the payment terms eligibility code.
    */
   Other: "Other",
 
   /**
-   * OverlappingPaymentTerms
+   * The OverlappingPaymentTerms option for the payment terms eligibility code.
    */
   OverlappingPaymentTerms: "OverlappingPaymentTerms",
 
   /**
-   * InvalidDateFormat
+   * The InvalidDateFormat option for the payment terms eligibility code.
    */
   InvalidDateFormat: "InvalidDateFormat",
 
   /**
-   * InvalidDateRange
+   * The InvalidDateRange option for the payment terms eligibility code.
    */
   InvalidDateRange: "InvalidDateRange",
 
   /**
-   * InactiveBillingAccount
+   * The InactiveBillingAccount option for the payment terms eligibility code.
    */
   InactiveBillingAccount: "InactiveBillingAccount",
 
   /**
-   * InvalidBillingAccountType
+   * The InvalidBillingAccountType option for the payment terms eligibility code.
    */
   InvalidBillingAccountType: "InvalidBillingAccountType",
 
   /**
-   * NullOrEmptyPaymentTerms
+   * The NullOrEmptyPaymentTerms option for the payment terms eligibility code.
    */
   NullOrEmptyPaymentTerms: "NullOrEmptyPaymentTerms",
 
   /**
-   * BillingAccountNotFound
+   * The BillingAccountNotFound option for the payment terms eligibility code.
    */
   BillingAccountNotFound: "BillingAccountNotFound",
 
   /**
-   * IneligibleBillingAccountStatus
+   * The IneligibleBillingAccountStatus option for the payment terms eligibility code.
    */
   IneligibleBillingAccountStatus: "IneligibleBillingAccountStatus",
 
   /**
-   * InvalidTerms
+   * The InvalidTerms option for the payment terms eligibility code.
    */
   InvalidTerms: "InvalidTerms",
 }
@@ -929,17 +936,17 @@ union AddressValidationStatus {
   string,
 
   /**
-   * Other
+   * The Other option for the address validation status.
    */
   Other: "Other",
 
   /**
-   * Valid
+   * The Valid option for the address validation status.
    */
   Valid: "Valid",
 
   /**
-   * Invalid
+   * The Invalid option for the address validation status.
    */
   Invalid: "Invalid",
 }
@@ -951,17 +958,17 @@ union AccessDecision {
   string,
 
   /**
-   * Other
+   * The Other option for the access decision.
    */
   Other: "Other",
 
   /**
-   * Allowed
+   * The Allowed option for the access decision.
    */
   Allowed: "Allowed",
 
   /**
-   * NotAllowed
+   * The NotAllowed option for the access decision.
    */
   NotAllowed: "NotAllowed",
 }
@@ -973,12 +980,12 @@ union DeleteBillingProfileEligibilityStatus {
   string,
 
   /**
-   * Allowed
+   * The Allowed option for the delete billing profile eligibility status.
    */
   Allowed: "Allowed",
 
   /**
-   * NotAllowed
+   * The NotAllowed option for the delete billing profile eligibility status.
    */
   NotAllowed: "NotAllowed",
 }
@@ -990,47 +997,47 @@ union DeleteBillingProfileEligibilityCode {
   string,
 
   /**
-   * None
+   * The None option for the delete billing profile eligibility code.
    */
   None: "None",
 
   /**
-   * ActiveCredits
+   * The ActiveCredits option for the delete billing profile eligibility code.
    */
   ActiveCredits: "ActiveCredits",
 
   /**
-   * ActiveCreditCard
+   * The ActiveCreditCard option for the delete billing profile eligibility code.
    */
   ActiveCreditCard: "ActiveCreditCard",
 
   /**
-   * LastBillingProfile
+   * The LastBillingProfile option for the delete billing profile eligibility code.
    */
   LastBillingProfile: "LastBillingProfile",
 
   /**
-   * NotSupported
+   * The NotSupported option for the delete billing profile eligibility code.
    */
   NotSupported: "NotSupported",
 
   /**
-   * OutstandingCharges
+   * The OutstandingCharges option for the delete billing profile eligibility code.
    */
   OutstandingCharges: "OutstandingCharges",
 
   /**
-   * PendingCharges
+   * The PendingCharges option for the delete billing profile eligibility code.
    */
   PendingCharges: "PendingCharges",
 
   /**
-   * ReservedInstances
+   * The ReservedInstances option for the delete billing profile eligibility code.
    */
   ReservedInstances: "ReservedInstances",
 
   /**
-   * ActiveBillingSubscriptions
+   * The ActiveBillingSubscriptions option for the delete billing profile eligibility code.
    */
   ActiveBillingSubscriptions: "ActiveBillingSubscriptions",
 }
@@ -1042,77 +1049,77 @@ union SpendingLimitType {
   string,
 
   /**
-   * Other
+   * The Other option for the spending limit type.
    */
   Other: "Other",
 
   /**
-   * None
+   * The None option for the spending limit type.
    */
   None: "None",
 
   /**
-   * FreeAccount
+   * The FreeAccount option for the spending limit type.
    */
   FreeAccount: "FreeAccount",
 
   /**
-   * Sandbox
+   * The Sandbox option for the spending limit type.
    */
   Sandbox: "Sandbox",
 
   /**
-   * AzureForStudents
+   * The AzureForStudents option for the spending limit type.
    */
   AzureForStudents: "AzureForStudents",
 
   /**
-   * AcademicSponsorship
+   * The AcademicSponsorship option for the spending limit type.
    */
   AcademicSponsorship: "AcademicSponsorship",
 
   /**
-   * AzureConsumptionCredit
+   * The AzureConsumptionCredit option for the spending limit type.
    */
   AzureConsumptionCredit: "AzureConsumptionCredit",
 
   /**
-   * AzurePassSponsorship
+   * The AzurePassSponsorship option for the spending limit type.
    */
   AzurePassSponsorship: "AzurePassSponsorship",
 
   /**
-   * MpnSponsorship
+   * The MpnSponsorship option for the spending limit type.
    */
   MpnSponsorship: "MpnSponsorship",
 
   /**
-   * MSDN
+   * The MSDN option for the spending limit type.
    */
   MSDN: "MSDN",
 
   /**
-   * NonProfitSponsorship
+   * The NonProfitSponsorship option for the spending limit type.
    */
   NonProfitSponsorship: "NonProfitSponsorship",
 
   /**
-   * Sponsorship
+   * The Sponsorship option for the spending limit type.
    */
   Sponsorship: "Sponsorship",
 
   /**
-   * StartupSponsorship
+   * The StartupSponsorship option for the spending limit type.
    */
   StartupSponsorship: "StartupSponsorship",
 
   /**
-   * AzureForStudentsStarter
+   * The AzureForStudentsStarter option for the spending limit type.
    */
   AzureForStudentsStarter: "AzureForStudentsStarter",
 
   /**
-   * VisualStudio
+   * The VisualStudio option for the spending limit type.
    */
   VisualStudio: "VisualStudio",
 }
@@ -1124,32 +1131,32 @@ union SpendingLimitStatus {
   string,
 
   /**
-   * Other
+   * The Other option for the spending limit status.
    */
   Other: "Other",
 
   /**
-   * None
+   * The None option for the spending limit status.
    */
   None: "None",
 
   /**
-   * Active
+   * The Active option for the spending limit status.
    */
   Active: "Active",
 
   /**
-   * Expired
+   * The Expired option for the spending limit status.
    */
   Expired: "Expired",
 
   /**
-   * LimitReached
+   * The LimitReached option for the spending limit status.
    */
   LimitReached: "LimitReached",
 
   /**
-   * LimitRemoved
+   * The LimitRemoved option for the spending limit status.
    */
   LimitRemoved: "LimitRemoved",
 }
@@ -1161,37 +1168,37 @@ union CustomerStatus {
   string,
 
   /**
-   * Other
+   * The Other option for the customer status.
    */
   Other: "Other",
 
   /**
-   * Active
+   * The Active option for the customer status.
    */
   Active: "Active",
 
   /**
-   * Pending
+   * The Pending option for the customer status.
    */
   Pending: "Pending",
 
   /**
-   * Disabled
+   * The Disabled option for the customer status.
    */
   Disabled: "Disabled",
 
   /**
-   * Warned
+   * The Warned option for the customer status.
    */
   Warned: "Warned",
 
   /**
-   * Deleted
+   * The Deleted option for the customer status.
    */
   Deleted: "Deleted",
 
   /**
-   * UnderReview
+   * The UnderReview option for the customer status.
    */
   UnderReview: "UnderReview",
 }
@@ -1203,37 +1210,37 @@ union InvoiceSectionState {
   string,
 
   /**
-   * Other
+   * The Other option for the invoice section state.
    */
   Other: "Other",
 
   /**
-   * Active
+   * The Active option for the invoice section state.
    */
   Active: "Active",
 
   /**
-   * Deleted
+   * The Deleted option for the invoice section state.
    */
   Deleted: "Deleted",
 
   /**
-   * Disabled
+   * The Disabled option for the invoice section state.
    */
   Disabled: "Disabled",
 
   /**
-   * UnderReview
+   * The UnderReview option for the invoice section state.
    */
   UnderReview: "UnderReview",
 
   /**
-   * Warned
+   * The Warned option for the invoice section state.
    */
   Warned: "Warned",
 
   /**
-   * Restricted
+   * The Restricted option for the invoice section state.
    */
   Restricted: "Restricted",
 }
@@ -1245,27 +1252,27 @@ union InvoiceSectionStateReasonCode {
   string,
 
   /**
-   * Other
+   * The Other option for the invoice section state reason code.
    */
   Other: "Other",
 
   /**
-   * PastDue
+   * The PastDue option for the invoice section state reason code.
    */
   PastDue: "PastDue",
 
   /**
-   * UnusualActivity
+   * The UnusualActivity option for the invoice section state reason code.
    */
   UnusualActivity: "UnusualActivity",
 
   /**
-   * SpendingLimitReached
+   * The SpendingLimitReached option for the invoice section state reason code.
    */
   SpendingLimitReached: "SpendingLimitReached",
 
   /**
-   * SpendingLimitExpired
+   * The SpendingLimitExpired option for the invoice section state reason code.
    */
   SpendingLimitExpired: "SpendingLimitExpired",
 }
@@ -1277,62 +1284,62 @@ union BillingSubscriptionStatus {
   string,
 
   /**
-   * Other
+   * The Other option for the billing subscription status.
    */
   Other: "Other",
 
   /**
-   * Unknown
+   * The Unknown option for the billing subscription status.
    */
   Unknown: "Unknown",
 
   /**
-   * Active
+   * The Active option for the billing subscription status.
    */
   Active: "Active",
 
   /**
-   * Disabled
+   * The Disabled option for the billing subscription status.
    */
   Disabled: "Disabled",
 
   /**
-   * Deleted
+   * The Deleted option for the billing subscription status.
    */
   Deleted: "Deleted",
 
   /**
-   * Warned
+   * The Warned option for the billing subscription status.
    */
   Warned: "Warned",
 
   /**
-   * Expiring
+   * The Expiring option for the billing subscription status.
    */
   Expiring: "Expiring",
 
   /**
-   * Expired
+   * The Expired option for the billing subscription status.
    */
   Expired: "Expired",
 
   /**
-   * AutoRenew
+   * The AutoRenew option for the billing subscription status.
    */
   AutoRenew: "AutoRenew",
 
   /**
-   * Cancelled
+   * The Cancelled option for the billing subscription status.
    */
   Cancelled: "Cancelled",
 
   /**
-   * Suspended
+   * The Suspended option for the billing subscription status.
    */
   Suspended: "Suspended",
 
   /**
-   * Failed
+   * The Failed option for the billing subscription status.
    */
   Failed: "Failed",
 }
@@ -1344,47 +1351,47 @@ union SubscriptionStatusReason {
   string,
 
   /**
-   * None
+   * The None option for the subscription status reason.
    */
   None: "None",
 
   /**
-   * Cancelled
+   * The Cancelled option for the subscription status reason.
    */
   Cancelled: "Cancelled",
 
   /**
-   * PastDue
+   * The PastDue option for the subscription status reason.
    */
   PastDue: "PastDue",
 
   /**
-   * SuspiciousActivity
+   * The SuspiciousActivity option for the subscription status reason.
    */
   SuspiciousActivity: "SuspiciousActivity",
 
   /**
-   * Other
+   * The Other option for the subscription status reason.
    */
   Other: "Other",
 
   /**
-   * Transferred
+   * The Transferred option for the subscription status reason.
    */
   Transferred: "Transferred",
 
   /**
-   * PolicyViolation
+   * The PolicyViolation option for the subscription status reason.
    */
   PolicyViolation: "PolicyViolation",
 
   /**
-   * SpendingLimitReached
+   * The SpendingLimitReached option for the subscription status reason.
    */
   SpendingLimitReached: "SpendingLimitReached",
 
   /**
-   * Expired
+   * The Expired option for the subscription status reason.
    */
   Expired: "Expired",
 }
@@ -1396,27 +1403,27 @@ union SubscriptionBillingType {
   string,
 
   /**
-   * None
+   * The None option for the subscription billing type.
    */
   None: "None",
 
   /**
-   * Benefit
+   * The Benefit option for the subscription billing type.
    */
   Benefit: "Benefit",
 
   /**
-   * Free
+   * The Free option for the subscription billing type.
    */
   Free: "Free",
 
   /**
-   * Paid
+   * The Paid option for the subscription billing type.
    */
   Paid: "Paid",
 
   /**
-   * PrePaid
+   * The PrePaid option for the subscription billing type.
    */
   PrePaid: "PrePaid",
 }
@@ -1428,22 +1435,22 @@ union SubscriptionWorkloadType {
   string,
 
   /**
-   * None
+   * The None option for the subscription workload type.
    */
   None: "None",
 
   /**
-   * Production
+   * The Production option for the subscription workload type.
    */
   Production: "Production",
 
   /**
-   * DevTest
+   * The DevTest option for the subscription workload type.
    */
   DevTest: "DevTest",
 
   /**
-   * Internal
+   * The Internal option for the subscription workload type.
    */
   Internal: "Internal",
 }
@@ -1455,37 +1462,37 @@ union BillingRequestStatus {
   string,
 
   /**
-   * Other
+   * The Other option for the billing request status.
    */
   Other: "Other",
 
   /**
-   * Pending
+   * The Pending option for the billing request status.
    */
   Pending: "Pending",
 
   /**
-   * Approved
+   * The Approved option for the billing request status.
    */
   Approved: "Approved",
 
   /**
-   * Declined
+   * The Declined option for the billing request status.
    */
   Declined: "Declined",
 
   /**
-   * Cancelled
+   * The Cancelled option for the billing request status.
    */
   Cancelled: "Cancelled",
 
   /**
-   * Completed
+   * The Completed option for the billing request status.
    */
   Completed: "Completed",
 
   /**
-   * Expired
+   * The Expired option for the billing request status.
    */
   Expired: "Expired",
 }
@@ -1497,27 +1504,27 @@ union BillingRequestType {
   string,
 
   /**
-   * Other
+   * The Other option for the billing request type.
    */
   Other: "Other",
 
   /**
-   * InvoiceAccess
+   * The InvoiceAccess option for the billing request type.
    */
   InvoiceAccess: "InvoiceAccess",
 
   /**
-   * ProvisioningAccess
+   * The ProvisioningAccess option for the billing request type.
    */
   ProvisioningAccess: "ProvisioningAccess",
 
   /**
-   * RoleAssignment
+   * The RoleAssignment option for the billing request type.
    */
   RoleAssignment: "RoleAssignment",
 
   /**
-   * UpdateBillingPolicy
+   * The UpdateBillingPolicy option for the billing request type.
    */
   UpdateBillingPolicy: "UpdateBillingPolicy",
 }
@@ -1529,37 +1536,37 @@ union PrincipalType {
   string,
 
   /**
-   * Unknown
+   * The Unknown option for the principal type.
    */
   Unknown: "Unknown",
 
   /**
-   * None
+   * The None option for the principal type.
    */
   None: "None",
 
   /**
-   * User
+   * The User option for the principal type.
    */
   User: "User",
 
   /**
-   * Group
+   * The Group option for the principal type.
    */
   Group: "Group",
 
   /**
-   * DirectoryRole
+   * The DirectoryRole option for the principal type.
    */
   DirectoryRole: "DirectoryRole",
 
   /**
-   * ServicePrincipal
+   * The ServicePrincipal option for the principal type.
    */
   ServicePrincipal: "ServicePrincipal",
 
   /**
-   * Everyone
+   * The Everyone option for the principal type.
    */
   Everyone: "Everyone",
 }
@@ -1571,17 +1578,17 @@ union SavingsPlanTerm {
   string,
 
   /**
-   * P1Y
+   * The P1Y option for the savings plan term.
    */
   P1Y: "P1Y",
 
   /**
-   * P3Y
+   * The P3Y option for the savings plan term.
    */
   P3Y: "P3Y",
 
   /**
-   * P5Y
+   * The P5Y option for the savings plan term.
    */
   P5Y: "P5Y",
 }
@@ -1593,7 +1600,7 @@ union BillingPlan {
   string,
 
   /**
-   * P1M
+   * The P1M option for the billing plan.
    */
   P1M: "P1M",
 }
@@ -1605,32 +1612,32 @@ union PaymentStatus {
   string,
 
   /**
-   * Succeeded
+   * The Succeeded option for the payment status.
    */
   Succeeded: "Succeeded",
 
   /**
-   * Failed
+   * The Failed option for the payment status.
    */
   Failed: "Failed",
 
   /**
-   * Scheduled
+   * The Scheduled option for the payment status.
    */
   Scheduled: "Scheduled",
 
   /**
-   * Cancelled
+   * The Cancelled option for the payment status.
    */
   Cancelled: "Cancelled",
 
   /**
-   * Completed
+   * The Completed option for the payment status.
    */
   Completed: "Completed",
 
   /**
-   * Pending
+   * The Pending option for the payment status.
    */
   Pending: "Pending",
 }
@@ -1642,17 +1649,17 @@ union AppliedScopeType {
   string,
 
   /**
-   * Single
+   * The Single option for the applied scope type.
    */
   Single: "Single",
 
   /**
-   * Shared
+   * The Shared option for the applied scope type.
    */
   Shared: "Shared",
 
   /**
-   * ManagementGroup
+   * The ManagementGroup option for the applied scope type.
    */
   ManagementGroup: "ManagementGroup",
 }
@@ -1664,7 +1671,7 @@ union CommitmentGrain {
   string,
 
   /**
-   * Hourly
+   * The Hourly option for the commitment grain.
    */
   Hourly: "Hourly",
 }
@@ -1676,12 +1683,12 @@ union AutoRenew {
   string,
 
   /**
-   * Off
+   * The Off option for the auto renew.
    */
   Off: "Off",
 
   /**
-   * On
+   * The On option for the auto renew.
    */
   On: "On",
 }
@@ -1693,37 +1700,37 @@ union SubscriptionEnrollmentAccountStatus {
   string,
 
   /**
-   * Active
+   * The Active option for the subscription enrollment account status.
    */
   Active: "Active",
 
   /**
-   * Cancelled
+   * The Cancelled option for the subscription enrollment account status.
    */
   Cancelled: "Cancelled",
 
   /**
-   * Expired
+   * The Expired option for the subscription enrollment account status.
    */
   Expired: "Expired",
 
   /**
-   * Deleted
+   * The Deleted option for the subscription enrollment account status.
    */
   Deleted: "Deleted",
 
   /**
-   * TransferredOut
+   * The TransferredOut option for the subscription enrollment account status.
    */
   TransferredOut: "TransferredOut",
 
   /**
-   * Transferring
+   * The Transferring option for the subscription enrollment account status.
    */
   Transferring: "Transferring",
 
   /**
-   * Inactive
+   * The Inactive option for the subscription enrollment account status.
    */
   Inactive: "Inactive",
 }
@@ -1735,12 +1742,12 @@ union Cancellation {
   string,
 
   /**
-   * NotAllowed
+   * The NotAllowed option for the cancellation.
    */
   NotAllowed: "NotAllowed",
 
   /**
-   * Allowed
+   * The Allowed option for the cancellation.
    */
   Allowed: "Allowed",
 }
@@ -1752,17 +1759,17 @@ union BillingSubscriptionOperationStatus {
   string,
 
   /**
-   * Other
+   * The Other option for the billing subscription operation status.
    */
   Other: "Other",
 
   /**
-   * None
+   * The None option for the billing subscription operation status.
    */
   None: "None",
 
   /**
-   * LockedForUpdate
+   * The LockedForUpdate option for the billing subscription operation status.
    */
   LockedForUpdate: "LockedForUpdate",
 }
@@ -1774,17 +1781,17 @@ union CancellationReason {
   string,
 
   /**
-   * Other
+   * The Other option for the cancellation reason.
    */
   Other: "Other",
 
   /**
-   * Compromise
+   * The Compromise option for the cancellation reason.
    */
   Compromise: "Compromise",
 
   /**
-   * Dispute
+   * The Dispute option for the cancellation reason.
    */
   Dispute: "Dispute",
 }
@@ -1796,142 +1803,142 @@ union SubscriptionTransferValidationErrorCode {
   string,
 
   /**
-   * Other
+   * The Other option for the subscription transfer validation error code.
    */
   Other: "Other",
 
   /**
-   * BillingAccountInactive
+   * The BillingAccountInactive option for the subscription transfer validation error code.
    */
   BillingAccountInactive: "BillingAccountInactive",
 
   /**
-   * DestinationBillingProfileInactive
+   * The DestinationBillingProfileInactive option for the subscription transfer validation error code.
    */
   DestinationBillingProfileInactive: "DestinationBillingProfileInactive",
 
   /**
-   * DestinationBillingProfileNotFound
+   * The DestinationBillingProfileNotFound option for the subscription transfer validation error code.
    */
   DestinationBillingProfileNotFound: "DestinationBillingProfileNotFound",
 
   /**
-   * DestinationBillingProfilePastDue
+   * The DestinationBillingProfilePastDue option for the subscription transfer validation error code.
    */
   DestinationBillingProfilePastDue: "DestinationBillingProfilePastDue",
 
   /**
-   * DestinationInvoiceSectionInactive
+   * The DestinationInvoiceSectionInactive option for the subscription transfer validation error code.
    */
   DestinationInvoiceSectionInactive: "DestinationInvoiceSectionInactive",
 
   /**
-   * DestinationInvoiceSectionNotFound
+   * The DestinationInvoiceSectionNotFound option for the subscription transfer validation error code.
    */
   DestinationInvoiceSectionNotFound: "DestinationInvoiceSectionNotFound",
 
   /**
-   * InsufficientPermissionOnDestination
+   * The InsufficientPermissionOnDestination option for the subscription transfer validation error code.
    */
   InsufficientPermissionOnDestination: "InsufficientPermissionOnDestination",
 
   /**
-   * InsufficientPermissionOnSource
+   * The InsufficientPermissionOnSource option for the subscription transfer validation error code.
    */
   InsufficientPermissionOnSource: "InsufficientPermissionOnSource",
 
   /**
-   * InvalidDestination
+   * The InvalidDestination option for the subscription transfer validation error code.
    */
   InvalidDestination: "InvalidDestination",
 
   /**
-   * InvalidSource
+   * The InvalidSource option for the subscription transfer validation error code.
    */
   InvalidSource: "InvalidSource",
 
   /**
-   * MarketplaceNotEnabledOnDestination
+   * The MarketplaceNotEnabledOnDestination option for the subscription transfer validation error code.
    */
   MarketplaceNotEnabledOnDestination: "MarketplaceNotEnabledOnDestination",
 
   /**
-   * ProductInactive
+   * The ProductInactive option for the subscription transfer validation error code.
    */
   ProductInactive: "ProductInactive",
 
   /**
-   * ProductNotFound
+   * The ProductNotFound option for the subscription transfer validation error code.
    */
   ProductNotFound: "ProductNotFound",
 
   /**
-   * ProductTypeNotSupported
+   * The ProductTypeNotSupported option for the subscription transfer validation error code.
    */
   ProductTypeNotSupported: "ProductTypeNotSupported",
 
   /**
-   * SourceBillingProfilePastDue
+   * The SourceBillingProfilePastDue option for the subscription transfer validation error code.
    */
   SourceBillingProfilePastDue: "SourceBillingProfilePastDue",
 
   /**
-   * SourceInvoiceSectionInactive
+   * The SourceInvoiceSectionInactive option for the subscription transfer validation error code.
    */
   SourceInvoiceSectionInactive: "SourceInvoiceSectionInactive",
 
   /**
-   * AccountIsLocked
+   * The AccountIsLocked option for the subscription transfer validation error code.
    */
   AccountIsLocked: "AccountIsLocked",
 
   /**
-   * AssetHasCap
+   * The AssetHasCap option for the subscription transfer validation error code.
    */
   AssetHasCap: "AssetHasCap",
 
   /**
-   * AssetNotActive
+   * The AssetNotActive option for the subscription transfer validation error code.
    */
   AssetNotActive: "AssetNotActive",
 
   /**
-   * BillingProfilePastDue
+   * The BillingProfilePastDue option for the subscription transfer validation error code.
    */
   BillingProfilePastDue: "BillingProfilePastDue",
 
   /**
-   * CrossBillingAccountNotAllowed
+   * The CrossBillingAccountNotAllowed option for the subscription transfer validation error code.
    */
   CrossBillingAccountNotAllowed: "CrossBillingAccountNotAllowed",
 
   /**
-   * NoActiveAzurePlan
+   * The NoActiveAzurePlan option for the subscription transfer validation error code.
    */
   NoActiveAzurePlan: "NoActiveAzurePlan",
 
   /**
-   * None
+   * The None option for the subscription transfer validation error code.
    */
   None: "None",
 
   /**
-   * SubscriptionNotActive
+   * The SubscriptionNotActive option for the subscription transfer validation error code.
    */
   SubscriptionNotActive: "SubscriptionNotActive",
 
   /**
-   * SubscriptionHasReservations
+   * The SubscriptionHasReservations option for the subscription transfer validation error code.
    */
   SubscriptionHasReservations: "SubscriptionHasReservations",
 
   /**
-   * SubscriptionTypeNotSupported
+   * The SubscriptionTypeNotSupported option for the subscription transfer validation error code.
    */
   SubscriptionTypeNotSupported: "SubscriptionTypeNotSupported",
 
   /**
-   * InvoiceSectionIsRestricted
+   * The InvoiceSectionIsRestricted option for the subscription transfer validation error code.
    */
   InvoiceSectionIsRestricted: "InvoiceSectionIsRestricted",
 }
@@ -1943,37 +1950,37 @@ union InvoiceDocumentType {
   string,
 
   /**
-   * Other
+   * The Other option for the invoice document type.
    */
   Other: "Other",
 
   /**
-   * Invoice
+   * The Invoice option for the invoice document type.
    */
   Invoice: "Invoice",
 
   /**
-   * VoidNote
+   * The VoidNote option for the invoice document type.
    */
   VoidNote: "VoidNote",
 
   /**
-   * TaxReceipt
+   * The TaxReceipt option for the invoice document type.
    */
   TaxReceipt: "TaxReceipt",
 
   /**
-   * CreditNote
+   * The CreditNote option for the invoice document type.
    */
   CreditNote: "CreditNote",
 
   /**
-   * Summary
+   * The Summary option for the invoice document type.
    */
   Summary: "Summary",
 
   /**
-   * Transactions
+   * The Transactions option for the invoice document type.
    */
   Transactions: "Transactions",
 }
@@ -1985,17 +1992,17 @@ union DocumentSource {
   string,
 
   /**
-   * Other
+   * The Other option for the document source.
    */
   Other: "Other",
 
   /**
-   * DRS
+   * The DRS option for the document source.
    */
   DRS: "DRS",
 
   /**
-   * ENF
+   * The ENF option for the document source.
    */
   ENF: "ENF",
 }
@@ -2007,22 +2014,22 @@ union FailedPaymentReason {
   string,
 
   /**
-   * Other
+   * The Other option for the failed payment reason.
    */
   Other: "Other",
 
   /**
-   * BankDeclined
+   * The BankDeclined option for the failed payment reason.
    */
   BankDeclined: "BankDeclined",
 
   /**
-   * CardExpired
+   * The CardExpired option for the failed payment reason.
    */
   CardExpired: "CardExpired",
 
   /**
-   * IncorrectCardDetails
+   * The IncorrectCardDetails option for the failed payment reason.
    */
   IncorrectCardDetails: "IncorrectCardDetails",
 }
@@ -2034,22 +2041,22 @@ union InvoiceType {
   string,
 
   /**
-   * Other
+   * The Other option for the invoice type.
    */
   Other: "Other",
 
   /**
-   * AzureServices
+   * The AzureServices option for the invoice type.
    */
   AzureServices: "AzureServices",
 
   /**
-   * AzureMarketplace
+   * The AzureMarketplace option for the invoice type.
    */
   AzureMarketplace: "AzureMarketplace",
 
   /**
-   * AzureSupport
+   * The AzureSupport option for the invoice type.
    */
   AzureSupport: "AzureSupport",
 }
@@ -2061,32 +2068,32 @@ union InvoiceStatus {
   string,
 
   /**
-   * Other
+   * The Other option for the invoice status.
    */
   Other: "Other",
 
   /**
-   * Due
+   * The Due option for the invoice status.
    */
   Due: "Due",
 
   /**
-   * OverDue
+   * The OverDue option for the invoice status.
    */
   OverDue: "OverDue",
 
   /**
-   * Paid
+   * The Paid option for the invoice status.
    */
   Paid: "Paid",
 
   /**
-   * Void
+   * The Void option for the invoice status.
    */
   Void: "Void",
 
   /**
-   * Locked
+   * The Locked option for the invoice status.
    */
   Locked: "Locked",
 }
@@ -2098,12 +2105,12 @@ union SpecialTaxationType {
   string,
 
   /**
-   * SubtotalLevel
+   * The SubtotalLevel option for the special taxation type.
    */
   SubtotalLevel: "SubtotalLevel",
 
   /**
-   * InvoiceLevel
+   * The InvoiceLevel option for the special taxation type.
    */
   InvoiceLevel: "InvoiceLevel",
 }
@@ -2115,37 +2122,37 @@ union RefundStatus {
   string,
 
   /**
-   * Other
+   * The Other option for the refund status.
    */
   Other: "Other",
 
   /**
-   * Pending
+   * The Pending option for the refund status.
    */
   Pending: "Pending",
 
   /**
-   * Approved
+   * The Approved option for the refund status.
    */
   Approved: "Approved",
 
   /**
-   * Declined
+   * The Declined option for the refund status.
    */
   Declined: "Declined",
 
   /**
-   * Cancelled
+   * The Cancelled option for the refund status.
    */
   Cancelled: "Cancelled",
 
   /**
-   * Completed
+   * The Completed option for the refund status.
    */
   Completed: "Completed",
 
   /**
-   * Expired
+   * The Expired option for the refund status.
    */
   Expired: "Expired",
 }
@@ -2157,32 +2164,32 @@ union RefundReasonCode {
   string,
 
   /**
-   * Other
+   * The Other option for the refund reason code.
    */
   Other: "Other",
 
   /**
-   * AccidentalConversion
+   * The AccidentalConversion option for the refund reason code.
    */
   AccidentalConversion: "AccidentalConversion",
 
   /**
-   * UnclearPricing
+   * The UnclearPricing option for the refund reason code.
    */
   UnclearPricing: "UnclearPricing",
 
   /**
-   * AccidentalPurchase
+   * The AccidentalPurchase option for the refund reason code.
    */
   AccidentalPurchase: "AccidentalPurchase",
 
   /**
-   * ForgotToCancel
+   * The ForgotToCancel option for the refund reason code.
    */
   ForgotToCancel: "ForgotToCancel",
 
   /**
-   * UnclearDocumentation
+   * The UnclearDocumentation option for the refund reason code.
    */
   UnclearDocumentation: "UnclearDocumentation",
 }
@@ -2194,12 +2201,12 @@ union DeleteInvoiceSectionEligibilityStatus {
   string,
 
   /**
-   * Allowed
+   * The Allowed option for the delete invoice section eligibility status.
    */
   Allowed: "Allowed",
 
   /**
-   * NotAllowed
+   * The NotAllowed option for the delete invoice section eligibility status.
    */
   NotAllowed: "NotAllowed",
 }
@@ -2211,27 +2218,27 @@ union DeleteInvoiceSectionEligibilityCode {
   string,
 
   /**
-   * Other
+   * The Other option for the delete invoice section eligibility code.
    */
   Other: "Other",
 
   /**
-   * LastInvoiceSection
+   * The LastInvoiceSection option for the delete invoice section eligibility code.
    */
   LastInvoiceSection: "LastInvoiceSection",
 
   /**
-   * ActiveAzurePlans
+   * The ActiveAzurePlans option for the delete invoice section eligibility code.
    */
   ActiveAzurePlans: "ActiveAzurePlans",
 
   /**
-   * ReservedInstances
+   * The ReservedInstances option for the delete invoice section eligibility code.
    */
   ReservedInstances: "ReservedInstances",
 
   /**
-   * ActiveBillingSubscriptions
+   * The ActiveBillingSubscriptions option for the delete invoice section eligibility code.
    */
   ActiveBillingSubscriptions: "ActiveBillingSubscriptions",
 }
@@ -2243,22 +2250,24 @@ union PaymentMethodStatus {
   string,
 
   /**
-   * active
+   * The active option for the payment method status.
    */
   active: "active",
 
   /**
-   * inactive
+   * The inactive option for the payment method status.
    */
   inactive: "inactive",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+/**
+ * The service defined resource name.
+ */
 union ServiceDefinedResourceName {
   string,
 
   /**
-   * default
+   * The default option for the service defined resource name.
    */
   default: "default",
 }
@@ -2270,17 +2279,17 @@ union ViewChargesPolicy {
   string,
 
   /**
-   * Other
+   * The Other option for the view charges policy.
    */
   Other: "Other",
 
   /**
-   * Allowed
+   * The Allowed option for the view charges policy.
    */
   Allowed: "Allowed",
 
   /**
-   * NotAllowed
+   * The NotAllowed option for the view charges policy.
    */
   NotAllowed: "NotAllowed",
 }
@@ -2292,17 +2301,17 @@ union PolicyType {
   string,
 
   /**
-   * Other
+   * The Other option for the policy type.
    */
   Other: "Other",
 
   /**
-   * UserControlled
+   * The UserControlled option for the policy type.
    */
   UserControlled: "UserControlled",
 
   /**
-   * SystemControlled
+   * The SystemControlled option for the policy type.
    */
   SystemControlled: "SystemControlled",
 }
@@ -2314,27 +2323,27 @@ union EnrollmentAuthLevelState {
   string,
 
   /**
-   * Other
+   * The Other option for the enrollment auth level state.
    */
   Other: "Other",
 
   /**
-   * MicrosoftAccountOnly
+   * The MicrosoftAccountOnly option for the enrollment auth level state.
    */
   MicrosoftAccountOnly: "MicrosoftAccountOnly",
 
   /**
-   * MixedAccount
+   * The MixedAccount option for the enrollment auth level state.
    */
   MixedAccount: "MixedAccount",
 
   /**
-   * OrganizationalAccountCrossTenant
+   * The OrganizationalAccountCrossTenant option for the enrollment auth level state.
    */
   OrganizationalAccountCrossTenant: "OrganizationalAccountCrossTenant",
 
   /**
-   * OrganizationalAccountOnly
+   * The OrganizationalAccountOnly option for the enrollment auth level state.
    */
   OrganizationalAccountOnly: "OrganizationalAccountOnly",
 }
@@ -2346,22 +2355,22 @@ union EnrollmentAccountOwnerViewCharges {
   string,
 
   /**
-   * Other
+   * The Other option for the enrollment account owner view charges.
    */
   Other: "Other",
 
   /**
-   * Allowed
+   * The Allowed option for the enrollment account owner view charges.
    */
   Allowed: "Allowed",
 
   /**
-   * Disabled
+   * The Disabled option for the enrollment account owner view charges.
    */
   Disabled: "Disabled",
 
   /**
-   * NotAllowed
+   * The NotAllowed option for the enrollment account owner view charges.
    */
   NotAllowed: "NotAllowed",
 }
@@ -2373,22 +2382,22 @@ union EnrollmentDepartmentAdminViewCharges {
   string,
 
   /**
-   * Other
+   * The Other option for the enrollment department admin view charges.
    */
   Other: "Other",
 
   /**
-   * Allowed
+   * The Allowed option for the enrollment department admin view charges.
    */
   Allowed: "Allowed",
 
   /**
-   * Disabled
+   * The Disabled option for the enrollment department admin view charges.
    */
   Disabled: "Disabled",
 
   /**
-   * NotAllowed
+   * The NotAllowed option for the enrollment department admin view charges.
    */
   NotAllowed: "NotAllowed",
 }
@@ -2400,17 +2409,17 @@ union InvoiceSectionLabelManagementPolicy {
   string,
 
   /**
-   * Other
+   * The Other option for the invoice section label management policy.
    */
   Other: "Other",
 
   /**
-   * Allowed
+   * The Allowed option for the invoice section label management policy.
    */
   Allowed: "Allowed",
 
   /**
-   * NotAllowed
+   * The NotAllowed option for the invoice section label management policy.
    */
   NotAllowed: "NotAllowed",
 }
@@ -2422,27 +2431,27 @@ union MarketplacePurchasesPolicy {
   string,
 
   /**
-   * Other
+   * The Other option for the marketplace purchases policy.
    */
   Other: "Other",
 
   /**
-   * AllAllowed
+   * The AllAllowed option for the marketplace purchases policy.
    */
   AllAllowed: "AllAllowed",
 
   /**
-   * Disabled
+   * The Disabled option for the marketplace purchases policy.
    */
   Disabled: "Disabled",
 
   /**
-   * NotAllowed
+   * The NotAllowed option for the marketplace purchases policy.
    */
   NotAllowed: "NotAllowed",
 
   /**
-   * OnlyFreeAllowed
+   * The OnlyFreeAllowed option for the marketplace purchases policy.
    */
   OnlyFreeAllowed: "OnlyFreeAllowed",
 }
@@ -2454,22 +2463,22 @@ union ReservationPurchasesPolicy {
   string,
 
   /**
-   * Other
+   * The Other option for the reservation purchases policy.
    */
   Other: "Other",
 
   /**
-   * Allowed
+   * The Allowed option for the reservation purchases policy.
    */
   Allowed: "Allowed",
 
   /**
-   * Disabled
+   * The Disabled option for the reservation purchases policy.
    */
   Disabled: "Disabled",
 
   /**
-   * NotAllowed
+   * The NotAllowed option for the reservation purchases policy.
    */
   NotAllowed: "NotAllowed",
 }
@@ -2481,22 +2490,22 @@ union SavingsPlanPurchasesPolicy {
   string,
 
   /**
-   * Other
+   * The Other option for the savings plan purchases policy.
    */
   Other: "Other",
 
   /**
-   * Allowed
+   * The Allowed option for the savings plan purchases policy.
    */
   Allowed: "Allowed",
 
   /**
-   * Disabled
+   * The Disabled option for the savings plan purchases policy.
    */
   Disabled: "Disabled",
 
   /**
-   * NotAllowed
+   * The NotAllowed option for the savings plan purchases policy.
    */
   NotAllowed: "NotAllowed",
 }
@@ -2508,52 +2517,52 @@ union ProductStatus {
   string,
 
   /**
-   * Other
+   * The Other option for the product status.
    */
   Other: "Other",
 
   /**
-   * Active
+   * The Active option for the product status.
    */
   Active: "Active",
 
   /**
-   * Disabled
+   * The Disabled option for the product status.
    */
   Disabled: "Disabled",
 
   /**
-   * Deleted
+   * The Deleted option for the product status.
    */
   Deleted: "Deleted",
 
   /**
-   * PastDue
+   * The PastDue option for the product status.
    */
   PastDue: "PastDue",
 
   /**
-   * Expiring
+   * The Expiring option for the product status.
    */
   Expiring: "Expiring",
 
   /**
-   * Expired
+   * The Expired option for the product status.
    */
   Expired: "Expired",
 
   /**
-   * AutoRenew
+   * The AutoRenew option for the product status.
    */
   AutoRenew: "AutoRenew",
 
   /**
-   * Canceled
+   * The Canceled option for the product status.
    */
   Canceled: "Canceled",
 
   /**
-   * Suspended
+   * The Suspended option for the product status.
    */
   Suspended: "Suspended",
 }
@@ -2565,87 +2574,87 @@ union MoveValidationErrorCode {
   string,
 
   /**
-   * Other
+   * The Other option for the move validation error code.
    */
   Other: "Other",
 
   /**
-   * BillingAccountInactive
+   * The BillingAccountInactive option for the move validation error code.
    */
   BillingAccountInactive: "BillingAccountInactive",
 
   /**
-   * DestinationBillingProfileInactive
+   * The DestinationBillingProfileInactive option for the move validation error code.
    */
   DestinationBillingProfileInactive: "DestinationBillingProfileInactive",
 
   /**
-   * DestinationBillingProfileNotFound
+   * The DestinationBillingProfileNotFound option for the move validation error code.
    */
   DestinationBillingProfileNotFound: "DestinationBillingProfileNotFound",
 
   /**
-   * DestinationBillingProfilePastDue
+   * The DestinationBillingProfilePastDue option for the move validation error code.
    */
   DestinationBillingProfilePastDue: "DestinationBillingProfilePastDue",
 
   /**
-   * DestinationInvoiceSectionInactive
+   * The DestinationInvoiceSectionInactive option for the move validation error code.
    */
   DestinationInvoiceSectionInactive: "DestinationInvoiceSectionInactive",
 
   /**
-   * DestinationInvoiceSectionNotFound
+   * The DestinationInvoiceSectionNotFound option for the move validation error code.
    */
   DestinationInvoiceSectionNotFound: "DestinationInvoiceSectionNotFound",
 
   /**
-   * InsufficientPermissionOnDestination
+   * The InsufficientPermissionOnDestination option for the move validation error code.
    */
   InsufficientPermissionOnDestination: "InsufficientPermissionOnDestination",
 
   /**
-   * InsufficientPermissionOnSource
+   * The InsufficientPermissionOnSource option for the move validation error code.
    */
   InsufficientPermissionOnSource: "InsufficientPermissionOnSource",
 
   /**
-   * InvalidDestination
+   * The InvalidDestination option for the move validation error code.
    */
   InvalidDestination: "InvalidDestination",
 
   /**
-   * InvalidSource
+   * The InvalidSource option for the move validation error code.
    */
   InvalidSource: "InvalidSource",
 
   /**
-   * MarketplaceNotEnabledOnDestination
+   * The MarketplaceNotEnabledOnDestination option for the move validation error code.
    */
   MarketplaceNotEnabledOnDestination: "MarketplaceNotEnabledOnDestination",
 
   /**
-   * ProductInactive
+   * The ProductInactive option for the move validation error code.
    */
   ProductInactive: "ProductInactive",
 
   /**
-   * ProductNotFound
+   * The ProductNotFound option for the move validation error code.
    */
   ProductNotFound: "ProductNotFound",
 
   /**
-   * ProductTypeNotSupported
+   * The ProductTypeNotSupported option for the move validation error code.
    */
   ProductTypeNotSupported: "ProductTypeNotSupported",
 
   /**
-   * SourceBillingProfilePastDue
+   * The SourceBillingProfilePastDue option for the move validation error code.
    */
   SourceBillingProfilePastDue: "SourceBillingProfilePastDue",
 
   /**
-   * SourceInvoiceSectionInactive
+   * The SourceInvoiceSectionInactive option for the move validation error code.
    */
   SourceInvoiceSectionInactive: "SourceInvoiceSectionInactive",
 }
@@ -2657,12 +2666,12 @@ union InstanceFlexibility {
   string,
 
   /**
-   * On
+   * The On option for the instance flexibility.
    */
   On: "On",
 
   /**
-   * Off
+   * The Off option for the instance flexibility.
    */
   Off: "Off",
 }
@@ -2674,102 +2683,102 @@ union ReservationStatusCode {
   string,
 
   /**
-   * None
+   * The None option for the reservation status code.
    */
   None: "None",
 
   /**
-   * Pending
+   * The Pending option for the reservation status code.
    */
   Pending: "Pending",
 
   /**
-   * Processing
+   * The Processing option for the reservation status code.
    */
   Processing: "Processing",
 
   /**
-   * Active
+   * The Active option for the reservation status code.
    */
   Active: "Active",
 
   /**
-   * PurchaseError
+   * The PurchaseError option for the reservation status code.
    */
   PurchaseError: "PurchaseError",
 
   /**
-   * PaymentInstrumentError
+   * The PaymentInstrumentError option for the reservation status code.
    */
   PaymentInstrumentError: "PaymentInstrumentError",
 
   /**
-   * Split
+   * The Split option for the reservation status code.
    */
   Split: "Split",
 
   /**
-   * Merged
+   * The Merged option for the reservation status code.
    */
   Merged: "Merged",
 
   /**
-   * Expired
+   * The Expired option for the reservation status code.
    */
   Expired: "Expired",
 
   /**
-   * Succeeded
+   * The Succeeded option for the reservation status code.
    */
   Succeeded: "Succeeded",
 
   /**
-   * CapacityError
+   * The CapacityError option for the reservation status code.
    */
   CapacityError: "CapacityError",
 
   /**
-   * CapacityRestricted
+   * The CapacityRestricted option for the reservation status code.
    */
   CapacityRestricted: "CapacityRestricted",
 
   /**
-   * Exchanged
+   * The Exchanged option for the reservation status code.
    */
   Exchanged: "Exchanged",
 
   /**
-   * UnknownError
+   * The UnknownError option for the reservation status code.
    */
   UnknownError: "UnknownError",
 
   /**
-   * RiskCheckFailed
+   * The RiskCheckFailed option for the reservation status code.
    */
   RiskCheckFailed: "RiskCheckFailed",
 
   /**
-   * CreditLineCheckFailed
+   * The CreditLineCheckFailed option for the reservation status code.
    */
   CreditLineCheckFailed: "CreditLineCheckFailed",
 
   /**
-   * Warning
+   * The Warning option for the reservation status code.
    */
   Warning: "Warning",
 
   /**
-   * NoBenefitDueToSubscriptionTransfer
+   * The NoBenefitDueToSubscriptionTransfer option for the reservation status code.
    */
   NoBenefitDueToSubscriptionTransfer: "NoBenefitDueToSubscriptionTransfer",
 
   /**
-   * NoBenefitDueToSubscriptionDeletion
+   * The NoBenefitDueToSubscriptionDeletion option for the reservation status code.
    */
   NoBenefitDueToSubscriptionDeletion: "NoBenefitDueToSubscriptionDeletion",
 
   /**
-   * NoBenefit
+   * The NoBenefit option for the reservation status code.
    */
   NoBenefit: "NoBenefit",
 }
@@ -2781,32 +2790,34 @@ union ReservationBillingPlan {
   string,
 
   /**
-   * Upfront
+   * The Upfront option for the reservation billing plan.
    */
   Upfront: "Upfront",
 
   /**
-   * Monthly
+   * The Monthly option for the reservation billing plan.
    */
   Monthly: "Monthly",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+/**
+ * The type of transaction.
+ */
 union TransactionType {
   string,
 
   /**
-   * Other
+   * The Other option for the transaction type.
    */
   Other: "Other",
 
   /**
-   * Billed
+   * The Billed option for the transaction type.
    */
   Billed: "Billed",
 
   /**
-   * Unbilled
+   * The Unbilled option for the transaction type.
    */
   Unbilled: "Unbilled",
 }
@@ -2818,27 +2829,27 @@ union CreditType {
   string,
 
   /**
-   * Other
+   * The Other option for the credit type.
    */
   Other: "Other",
 
   /**
-   * AzureFreeCredit
+   * The AzureFreeCredit option for the credit type.
    */
   AzureFreeCredit: "AzureFreeCredit",
 
   /**
-   * AzureCreditOffer
+   * The AzureCreditOffer option for the credit type.
    */
   AzureCreditOffer: "AzureCreditOffer",
 
   /**
-   * ServiceInterruption
+   * The ServiceInterruption option for the credit type.
    */
   ServiceInterruption: "ServiceInterruption",
 
   /**
-   * Refund
+   * The Refund option for the credit type.
    */
   Refund: "Refund",
 }
@@ -2850,17 +2861,17 @@ union TransactionKind {
   string,
 
   /**
-   * Other
+   * The Other option for the transaction kind.
    */
   Other: "Other",
 
   /**
-   * All
+   * The All option for the transaction kind.
    */
   All: "All",
 
   /**
-   * Reservation
+   * The Reservation option for the transaction kind.
    */
   Reservation: "Reservation",
 }
@@ -2872,42 +2883,42 @@ union TransferStatus {
   string,
 
   /**
-   * Expired
+   * The Expired option for the transfer status.
    */
   Expired: "Expired",
 
   /**
-   * Pending
+   * The Pending option for the transfer status.
    */
   Pending: "Pending",
 
   /**
-   * InProgress
+   * The InProgress option for the transfer status.
    */
   InProgress: "InProgress",
 
   /**
-   * Completed
+   * The Completed option for the transfer status.
    */
   Completed: "Completed",
 
   /**
-   * CompletedWithErrors
+   * The CompletedWithErrors option for the transfer status.
    */
   CompletedWithErrors: "CompletedWithErrors",
 
   /**
-   * Failed
+   * The Failed option for the transfer status.
    */
   Failed: "Failed",
 
   /**
-   * Canceled
+   * The Canceled option for the transfer status.
    */
   Canceled: "Canceled",
 
   /**
-   * Declined
+   * The Declined option for the transfer status.
    */
   Declined: "Declined",
 }
@@ -2919,27 +2930,27 @@ union ProductType {
   string,
 
   /**
-   * AzureSubscription
+   * The AzureSubscription option for the product type.
    */
   AzureSubscription: "AzureSubscription",
 
   /**
-   * AzureReservation
+   * The AzureReservation option for the product type.
    */
   AzureReservation: "AzureReservation",
 
   /**
-   * Department
+   * The Department option for the product type.
    */
   Department: "Department",
 
   /**
-   * SavingsPlan
+   * The SavingsPlan option for the product type.
    */
   SavingsPlan: "SavingsPlan",
 
   /**
-   * SAAS
+   * The SAAS option for the product type.
    */
   SAAS: "SAAS",
 }
@@ -2951,22 +2962,22 @@ union ProductTransferStatus {
   string,
 
   /**
-   * NotStarted
+   * The NotStarted option for the product transfer status.
    */
   NotStarted: "NotStarted",
 
   /**
-   * InProgress
+   * The InProgress option for the product transfer status.
    */
   InProgress: "InProgress",
 
   /**
-   * Completed
+   * The Completed option for the product transfer status.
    */
   Completed: "Completed",
 
   /**
-   * Failed
+   * The Failed option for the product transfer status.
    */
   Failed: "Failed",
 }
@@ -2978,12 +2989,12 @@ union InitiatorCustomerType {
   string,
 
   /**
-   * Partner
+   * The Partner option for the initiator customer type.
    */
   Partner: "Partner",
 
   /**
-   * EA
+   * The EA option for the initiator customer type.
    */
   EA: "EA",
 }
@@ -2995,17 +3006,17 @@ union EligibleProductType {
   string,
 
   /**
-   * DevTestAzureSubscription
+   * The DevTestAzureSubscription option for the eligible product type.
    */
   DevTestAzureSubscription: "DevTestAzureSubscription",
 
   /**
-   * StandardAzureSubscription
+   * The StandardAzureSubscription option for the eligible product type.
    */
   StandardAzureSubscription: "StandardAzureSubscription",
 
   /**
-   * AzureReservation
+   * The AzureReservation option for the eligible product type.
    */
   AzureReservation: "AzureReservation",
 }
@@ -3017,22 +3028,22 @@ union SupportedAccountType {
   string,
 
   /**
-   * None
+   * The None option for the supported account type.
    */
   None: "None",
 
   /**
-   * Partner
+   * The Partner option for the supported account type.
    */
   Partner: "Partner",
 
   /**
-   * Individual
+   * The Individual option for the supported account type.
    */
   Individual: "Individual",
 
   /**
-   * Enterprise
+   * The Enterprise option for the supported account type.
    */
   Enterprise: "Enterprise",
 }
@@ -3040,7 +3051,7 @@ union SupportedAccountType {
 /**
  * An agreement.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not a subscription provisioned resource."
 model AgreementProperties {
   /**
    * The mode of acceptance for an agreement.
@@ -3077,14 +3088,12 @@ model AgreementProperties {
    * The date from which the agreement is effective.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   effectiveDate?: utcDateTime;
 
   /**
    * The date when the agreement expires.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   expirationDate?: utcDateTime;
 
   /**
@@ -3157,33 +3166,14 @@ model Participant {
    * The date when the status got changed.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   statusDate?: utcDateTime;
-}
-
-/**
- * Common fields that are returned in the response for all Azure Resource Manager resources.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model ProxyResourceWithTags
-  extends Azure.ResourceManager.CommonTypes.ProxyResource {
-  /**
-   * Dictionary of metadata associated with the resource. It may not be populated for all resource types. Maximum key/value length supported of 256 characters. Keys/value should not empty value nor null. Keys can not contain < > % & \ ? /
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: Record<string>;
 }
 
 /**
  * An associated tenant.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not a subscription provisioned resource."
 model AssociatedTenantProperties {
-  /**
-   * The provisioning state of the resource during a long-running operation.
-   */
-  @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
-
   /**
    * The name of the associated tenant.
    */
@@ -3214,12 +3204,12 @@ model AssociatedTenantProperties {
 /**
  * The Available Credit or Payment on Account Balance. The credit balance can be used to settle due or past due invoices.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not a subscription provisioned resource."
 model AvailableBalanceProperties {
   /**
    * Credit amount for immediate payment.
    */
-  amount?: AvailableBalancePropertiesAmount;
+  amount?: Amount;
 
   /**
    * The list of payments on accounts.
@@ -3231,15 +3221,8 @@ model AvailableBalanceProperties {
   /**
    * Total amount of payments on accounts.
    */
-  totalPaymentsOnAccount?: AvailableBalancePropertiesTotalPaymentsOnAccount;
+  totalPaymentsOnAccount?: Amount;
 }
-
-/**
- * Credit amount for immediate payment.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model AvailableBalancePropertiesAmount extends Amount {}
 
 /**
  * The amount.
@@ -3265,7 +3248,7 @@ model PaymentOnAccount {
   /**
    * Payment on Account amount.
    */
-  amount?: PaymentOnAccountAmount;
+  amount?: Amount;
 
   /**
    * The ID of the billing profile for the payments on account.
@@ -3295,7 +3278,6 @@ model PaymentOnAccount {
    * The date of the payments on account.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   date?: utcDateTime;
 
   /**
@@ -3304,20 +3286,6 @@ model PaymentOnAccount {
   @visibility(Lifecycle.Read)
   paymentMethodType?: PaymentMethodFamily;
 }
-
-/**
- * Payment on Account amount.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model PaymentOnAccountAmount extends Amount {}
-
-/**
- * Total amount of payments on accounts.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model AvailableBalancePropertiesTotalPaymentsOnAccount extends Amount {}
 
 /**
  * The properties of payment term.
@@ -3331,13 +3299,11 @@ model PaymentTerm {
   /**
    * The date on when the defined 'Payment Term' will be effective from and is always in UTC.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startDate?: utcDateTime;
 
   /**
    * The date on when the defined 'Payment Term' will end and is always in UTC.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endDate?: utcDateTime;
 
   /**
@@ -3350,13 +3316,8 @@ model PaymentTerm {
 /**
  * A billing account.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not a subscription provisioned resource."
 model BillingAccountProperties {
-  /**
-   * The provisioning state of the resource during a long-running operation.
-   */
-  @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
-
   /**
    * The current status of the billing account.
    */
@@ -3395,7 +3356,7 @@ model BillingAccountProperties {
   /**
    * The properties of an enrollment.
    */
-  enrollmentDetails?: BillingAccountPropertiesEnrollmentDetails;
+  enrollmentDetails?: EnrollmentDetails;
 
   /**
    * Indicates whether user has read access to the billing account.
@@ -3420,12 +3381,12 @@ model BillingAccountProperties {
   /**
    * The address of the individual or organization that is responsible for the billing account.
    */
-  soldTo?: BillingAccountPropertiesSoldTo;
+  soldTo?: AddressDetails;
 
   /**
    * Describes the registration number of the organization linked with the billing account.
    */
-  registrationNumber?: BillingAccountPropertiesRegistrationNumber;
+  registrationNumber?: RegistrationNumber;
 
   /**
    * Identifies the billing relationships represented by a billing account. The billing relationship may be between Microsoft, the customer, and/or a third-party.
@@ -3449,24 +3410,15 @@ model BillingAccountProperties {
 /**
  * The properties of an enrollment.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model BillingAccountPropertiesEnrollmentDetails extends EnrollmentDetails {}
-
-/**
- * The properties of an enrollment.
- */
 model EnrollmentDetails {
   /**
    * The start date of the enrollment.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startDate?: utcDateTime;
 
   /**
    * The end date of the enrollment.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endDate?: utcDateTime;
 
   /**
@@ -3537,7 +3489,7 @@ model EnrollmentDetails {
   /**
    * The properties of an enrollment which are applicable only for indirect enrollments.
    */
-  indirectRelationshipInfo?: EnrollmentDetailsIndirectRelationshipInfo;
+  indirectRelationshipInfo?: IndirectRelationshipInfo;
 
   /**
    * The contact who receives invoices of the enrollment.
@@ -3545,14 +3497,6 @@ model EnrollmentDetails {
   @visibility(Lifecycle.Read)
   invoiceRecipient?: string;
 }
-
-/**
- * The properties of an enrollment which are applicable only for indirect enrollments.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model EnrollmentDetailsIndirectRelationshipInfo
-  extends IndirectRelationshipInfo {}
 
 /**
  * Identifies the billing profile that is linked to another billing profile in indirect purchase motion.
@@ -3573,13 +3517,6 @@ model IndirectRelationshipInfo {
    */
   displayName?: string;
 }
-
-/**
- * The address of the individual or organization that is responsible for the billing account.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model BillingAccountPropertiesSoldTo extends AddressDetails {}
 
 /**
  * Address details.
@@ -3666,13 +3603,6 @@ model AddressDetails {
 /**
  * Describes the registration number of the organization linked with the billing account.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model BillingAccountPropertiesRegistrationNumber extends RegistrationNumber {}
-
-/**
- * Describes the registration number of the organization linked with the billing account.
- */
 model RegistrationNumber {
   /**
    * The unique identification number of the organization linked with the billing account.
@@ -3730,7 +3660,6 @@ model TransitionDetails {
    * The transition completion date.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   transitionDate?: utcDateTime;
 
   /**
@@ -3864,17 +3793,6 @@ model PaymentTermsEligibilityDetail {
 }
 
 /**
- * A billing account.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model BillingAccountPatch extends ProxyResourceWithTags {
-  /**
-   * A billing account.
-   */
-  properties?: BillingAccountProperties;
-}
-
-/**
  * Result of the address validation.
  */
 model AddressValidationResponse {
@@ -3981,13 +3899,8 @@ model DeleteBillingProfileEligibilityDetail {
 /**
  * A billing profile.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not a subscription provisioned resource."
 model BillingProfileProperties {
-  /**
-   * The provisioning state of the resource during a long-running operation.
-   */
-  @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
-
   /**
    * Identifies the billing relationship represented by the billing profile. The billing relationship may be between Microsoft, the customer, and/or a third-party.
    */
@@ -3997,7 +3910,7 @@ model BillingProfileProperties {
   /**
    * Billing address.
    */
-  billTo?: BillingProfilePropertiesBillTo;
+  billTo?: AddressDetails;
 
   /**
    * The currency in which the charges for the billing profile are billed.
@@ -4025,7 +3938,7 @@ model BillingProfileProperties {
   /**
    * Identifies the billing profile that is linked to another billing profile in indirect purchase motion.
    */
-  indirectRelationshipInfo?: BillingProfilePropertiesIndirectRelationshipInfo;
+  indirectRelationshipInfo?: IndirectRelationshipInfo;
 
   /**
    * The day of the month when the invoice for the billing profile is generated.
@@ -4051,12 +3964,12 @@ model BillingProfileProperties {
   /**
    * The default address where the products are shipped, or the services are being used. If a ship to is not specified for a product or a subscription, then this address will be used.
    */
-  shipTo?: BillingProfilePropertiesShipTo;
+  shipTo?: AddressDetails;
 
   /**
    * The address of the individual or organization that is responsible for the billing account.
    */
-  soldTo?: BillingProfilePropertiesSoldTo;
+  soldTo?: AddressDetails;
 
   /**
    * The billing profile spending limit.
@@ -4092,8 +4005,8 @@ model BillingProfileProperties {
   /**
    * Dictionary of metadata associated with the resource. Maximum key/value length supported of 256 characters. Keys/value should not empty value nor null. Keys can not contain < > % & \ ? /
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "Existing documentation where tags are in the model properties instead of the envelope. Back compat. Same type as TrackedResource.tags."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing documentation where tags are in the model properties instead of the envelope. Back compat. Same type as TrackedResource.tags."
   tags?: Record<string>;
 
   /**
@@ -4105,7 +4018,7 @@ model BillingProfileProperties {
   /**
    * The current payment term of the billing profile.
    */
-  currentPaymentTerm?: BillingProfilePropertiesCurrentPaymentTerm;
+  currentPaymentTerm?: PaymentTerm;
 
   /**
    * The other payment terms of the billing profile.
@@ -4114,35 +4027,6 @@ model BillingProfileProperties {
   @identifiers(#[])
   otherPaymentTerms?: PaymentTerm[];
 }
-
-/**
- * Billing address.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model BillingProfilePropertiesBillTo extends AddressDetails {}
-
-/**
- * Identifies the billing profile that is linked to another billing profile in indirect purchase motion.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model BillingProfilePropertiesIndirectRelationshipInfo
-  extends IndirectRelationshipInfo {}
-
-/**
- * The default address where the products are shipped, or the services are being used. If a ship to is not specified for a product or a subscription, then this address will be used.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model BillingProfilePropertiesShipTo extends AddressDetails {}
-
-/**
- * The address of the individual or organization that is responsible for the billing account.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model BillingProfilePropertiesSoldTo extends AddressDetails {}
 
 /**
  * The billing profile spending limit.
@@ -4161,13 +4045,11 @@ model SpendingLimitDetails {
   /**
    * The date when this spending limit goes into effect.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startDate?: utcDateTime;
 
   /**
    * The date when this spending limit is no longer in effect.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endDate?: utcDateTime;
 
   /**
@@ -4182,16 +4064,9 @@ model SpendingLimitDetails {
 }
 
 /**
- * The current payment term of the billing profile.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model BillingProfilePropertiesCurrentPaymentTerm extends PaymentTerm {}
-
-/**
  * A billing property.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not a subscription provisioned resource."
 model BillingPropertyProperties {
   /**
    * The type of agreement.
@@ -4395,7 +4270,7 @@ model BillingPropertyProperties {
   /**
    * The address of the individual or organization where service subscription is being used. Available for agreement type Microsoft Online Services Program. This property can be updated via patch.
    */
-  subscriptionServiceUsageAddress?: BillingPropertyPropertiesSubscriptionServiceUsageAddress;
+  subscriptionServiceUsageAddress?: AddressDetails;
 
   /**
    * The Azure workload type of the subscription.
@@ -4406,7 +4281,7 @@ model BillingPropertyProperties {
   /**
    * The enrollment details for the subscription. Available for billing accounts with agreement type Enterprise Agreement.
    */
-  enrollmentDetails?: BillingPropertyPropertiesEnrollmentDetails;
+  enrollmentDetails?: SubscriptionEnrollmentDetails;
 
   /**
    * Indicates whether user is the account admin.
@@ -4435,7 +4310,6 @@ model BillingSubscriptionStatusDetails {
    * The suspension effective date for a subscription. This field is not available for Enterprise Agreement billing accounts.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   effectiveDate?: utcDateTime;
 
   /**
@@ -4444,22 +4318,6 @@ model BillingSubscriptionStatusDetails {
   @visibility(Lifecycle.Read)
   reason?: SubscriptionStatusReason;
 }
-
-/**
- * The address of the individual or organization where service subscription is being used. Available for agreement type Microsoft Online Services Program. This property can be updated via patch.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model BillingPropertyPropertiesSubscriptionServiceUsageAddress
-  extends AddressDetails {}
-
-/**
- * The enrollment details for the subscription. Available for billing accounts with agreement type Enterprise Agreement.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model BillingPropertyPropertiesEnrollmentDetails
-  extends SubscriptionEnrollmentDetails {}
 
 /**
  * The enrollment details for the subscription. Available for billing accounts with agreement type Enterprise Agreement.
@@ -4494,29 +4352,23 @@ model SubscriptionEnrollmentDetails {
 /**
  * A request submitted by a user to manage billing. Users with an owner role on the scope can approve or decline these requests.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not a subscription provisioned resource."
 model BillingRequestProperties {
-  /**
-   * The provisioning state of the resource during a long-running operation.
-   */
-  @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
-
   /**
    * Additional information for the billing request.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing documentation where additionalInformation is a bag by design."
   additionalInformation?: Record<string>;
 
   /**
    * The principal of the request reviewer. Will only be set if request is approved.
    */
-  reviewedBy?: BillingRequestPropertiesReviewedBy;
+  reviewedBy?: Principal;
 
   /**
    * The date and time when the request was reviewed.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   reviewalDate?: utcDateTime;
 
   /**
@@ -4564,20 +4416,18 @@ model BillingRequestProperties {
   /**
    * The principal of the entity who created the request.
    */
-  createdBy?: BillingRequestPropertiesCreatedBy;
+  createdBy?: Principal;
 
   /**
    * The date and time when the request was created.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   creationDate?: utcDateTime;
 
   /**
    * The date and time when the request expires.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   expirationDate?: utcDateTime;
 
   /**
@@ -4669,28 +4519,20 @@ model BillingRequestProperties {
   /**
    * Type of billing request.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "Existing model naming. For back compat."
   type?: BillingRequestType;
 
   /**
    * The principal of the entity who last updated the request.
    */
-  lastUpdatedBy?: BillingRequestPropertiesLastUpdatedBy;
+  lastUpdatedBy?: Principal;
 
   /**
    * Date and time of last update.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastUpdatedDate?: utcDateTime;
 }
-
-/**
- * The principal of the request reviewer. Will only be set if request is approved.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model BillingRequestPropertiesReviewedBy extends Principal {}
 
 /**
  * A principal who has interacted with a billing entity.
@@ -4713,34 +4555,14 @@ model Principal {
 }
 
 /**
- * The principal of the entity who created the request.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model BillingRequestPropertiesCreatedBy extends Principal {}
-
-/**
- * The principal of the entity who last updated the request.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model BillingRequestPropertiesLastUpdatedBy extends Principal {}
-
-/**
  * The properties of the billing role assignment.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not a subscription provisioned resource."
 model BillingRoleAssignmentProperties {
-  /**
-   * The provisioning state of the resource during a long-running operation.
-   */
-  @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
-
   /**
    * The date the role assignment was created.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdOn?: utcDateTime;
 
   /**
@@ -4771,7 +4593,6 @@ model BillingRoleAssignmentProperties {
    * The date the role assignment was modified.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   modifiedOn?: utcDateTime;
 
   /**
@@ -4910,7 +4731,7 @@ model BillingRoleAssignmentProperties {
 /**
  * The properties of a role definition.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not a subscription provisioned resource."
 model BillingRoleDefinitionProperties {
   /**
    * The role description.
@@ -4954,9 +4775,8 @@ model SavingsPlanOrderModelProperties {
   /**
    * The provisioning state of the savings plan, e.g. Succeeded
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  provisioningState?: string;
+  provisioningState?: ProvisioningState;
 
   /**
    * Subscription that will be charged for purchasing SavingsPlan
@@ -4995,14 +4815,12 @@ model SavingsPlanOrderModelProperties {
    * DateTime when the savings plan benefit started.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   benefitStartTime?: utcDateTime;
 
   /**
    * DateTime when the savings plan will expire.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   expiryDateTime?: utcDateTime;
 
   /**
@@ -5010,7 +4828,9 @@ model SavingsPlanOrderModelProperties {
    */
   planInformation?: BillingPlanInformation;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /**
+   * Identifiers of the savings plans associated with this order.
+   */
   savingsPlans?: string[];
 
   /**
@@ -5044,7 +4864,9 @@ model BillingPlanInformation {
    */
   nextPaymentDueDate?: plainDate;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /**
+   * List of transactions associated with this billing plan.
+   */
   @identifiers(#[])
   transactions?: PaymentDetail[];
 }
@@ -5058,7 +4880,9 @@ model Price {
    */
   currencyCode?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /**
+   * The amount of money to be paid for the Order.
+   */
   amount?: float64;
 }
 
@@ -5136,8 +4960,9 @@ model SavingsPlanOrderModelList is Azure.Core.Page<SavingsPlanOrderModel>;
 /**
  * List of savings plans
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model SavingsPlanModelListResult extends SavingsPlanModelList {
+model SavingsPlanModelListResult {
+  ...SavingsPlanModelList;
+
   /**
    * The roll out count summary of the savings plans
    */
@@ -5248,28 +5073,24 @@ model SavingsPlanModelProperties {
    * DateTime of the savings plan starting when this version is effective from.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   effectiveDateTime?: utcDateTime;
 
   /**
    * This is the DateTime when the savings plan benefit starts.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   benefitStartTime?: utcDateTime;
 
   /**
    * This is the date-time when the savings plan will expire.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   expiryDateTime?: utcDateTime;
 
   /**
    * Date time when the savings plan was purchased.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   purchaseDateTime?: utcDateTime;
 
   /**
@@ -5363,8 +5184,9 @@ model PurchaseRequestProperties {
 /**
  * Commitment towards the benefit.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model Commitment extends Price {
+model Commitment {
+  ...Price;
+
   /**
    * Commitment grain.
    */
@@ -5465,7 +5287,7 @@ model SavingsPlanUpdateRequest {
   /**
    * Tags for this reservation
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing documentation where tags are in the model properties instead of the envelope. Back compat. Same type as TrackedResource.tags."
   tags?: Record<string>;
 }
 
@@ -5514,7 +5336,9 @@ model SavingsPlanUpdateValidateRequest {
  * Savings plan update validate response.
  */
 model SavingsPlanValidateResponse {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /**
+   * The benefits of a savings plan.
+   */
   @identifiers(#[])
   benefits?: SavingsPlanValidResponseProperty[];
 
@@ -5547,6 +5371,7 @@ model SavingsPlanValidResponseProperty {
 /**
  * The billing properties of a subscription.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not a subscription provisioned resource."
 model BillingSubscriptionProperties {
   /**
    * Indicates whether auto renewal is turned on or off for a product.
@@ -5576,7 +5401,7 @@ model BillingSubscriptionProperties {
   /**
    * Dictionary of billing policies associated with the subscription.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing documentation where billingPolicies is a bag by design."
   @visibility(Lifecycle.Read)
   billingPolicies?: Record<string>;
 
@@ -5699,7 +5524,6 @@ model BillingSubscriptionProperties {
    * Purchase date of the product in UTC time.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   purchaseDate?: utcDateTime;
 
   /**
@@ -5750,14 +5574,12 @@ model BillingSubscriptionProperties {
    * Start date of the term in UTC time.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   termStartDate?: utcDateTime;
 
   /**
    * End date of the term in UTC time.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   termEndDate?: utcDateTime;
 
   /**
@@ -5776,12 +5598,6 @@ model BillingSubscriptionProperties {
    */
   @visibility(Lifecycle.Read)
   operationStatus?: BillingSubscriptionOperationStatus;
-
-  /**
-   * The provisioning state of the resource during a long-running operation.
-   */
-  @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
 
   /**
    * The ID of the subscription.
@@ -5826,7 +5642,6 @@ model EnrollmentAccountSubscriptionDetails {
    * The enrollment Account and the subscription association start date. This field is available only for the Enterprise Agreement Type.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   enrollmentAccountStartDate?: utcDateTime;
 
   /**
@@ -5907,7 +5722,6 @@ model RenewalTermDetails {
    * End date of the term in UTC time.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   termEndDate?: utcDateTime;
 }
 
@@ -5925,16 +5739,15 @@ model SystemOverrides {
    * The end date in UTC time by when the self-serve cancellation ends.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   cancellationAllowedEndDate?: utcDateTime;
 }
 
 /**
  * A billing subscription alias.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model BillingSubscriptionAliasProperties extends BillingSubscriptionProperties {
+model BillingSubscriptionAliasProperties {
+  ...BillingSubscriptionProperties;
+
   /**
    * The ID of the billing subscription with the subscription alias.
    */
@@ -6060,20 +5873,9 @@ model MoveBillingSubscriptionErrorDetails {
 }
 
 /**
- * The billing properties of a subscription.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model BillingSubscriptionPatch extends ProxyResourceWithTags {
-  /**
-   * The properties of a(n) BillingSubscription
-   */
-  properties?: BillingSubscriptionProperties;
-}
-
-/**
  * A partner's customer.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not a subscription provisioned resource."
 model CustomerProperties {
   /**
    * The name of the billing profile.
@@ -6120,15 +5922,15 @@ model CustomerProperties {
   /**
    * Dictionary of metadata associated with the resource. Maximum key/value length supported of 256 characters. Keys/value should not empty value nor null. Keys can not contain < > % & \ ? /
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "Existing documentation where tags are in the model properties instead of the envelope. Back compat. Same type as TrackedResource.tags."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing documentation where tags are in the model properties instead of the envelope. Back compat. Same type as TrackedResource.tags."
   tags?: Record<string>;
 }
 
 /**
  * Optional grouping of enrollment accounts to segment costs into logical groupings and set budgets.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not a subscription provisioned resource."
 model DepartmentProperties {
   /**
    * The cost center associated with the department.
@@ -6143,7 +5945,7 @@ model DepartmentProperties {
   /**
    * The ID that uniquely identifies the department.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "Existing documentation where id is also in properties. For back compat."
   @visibility(Lifecycle.Read)
   id?: string;
 
@@ -6157,7 +5959,7 @@ model DepartmentProperties {
 /**
  * It is an organizational hierarchy within a billing account to administer and manage azure costs.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not a subscription provisioned resource."
 model EnrollmentAccountProperties {
   /**
    * The cost center associated with the enrollment account.
@@ -6208,36 +6010,34 @@ model EnrollmentAccountProperties {
    * The date from which the enrollment account became valid and functional.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startDate?: utcDateTime;
 
   /**
    * The date of expiration of the enrollment account.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endDate?: utcDateTime;
 }
 
 /**
  * An invoice.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not a subscription provisioned resource."
 model InvoiceProperties {
   /**
    * The amount due as of now.
    */
-  amountDue?: InvoicePropertiesAmountDue;
+  amountDue?: Amount;
 
   /**
    * The amount of Azure prepayment applied to the charges. This field is applicable to billing accounts with agreement type Microsoft Customer Agreement.
    */
-  azurePrepaymentApplied?: InvoicePropertiesAzurePrepaymentApplied;
+  azurePrepaymentApplied?: Amount;
 
   /**
    * The total charges for the invoice billing period.
    */
-  billedAmount?: InvoicePropertiesBilledAmount;
+  billedAmount?: Amount;
 
   /**
    * The Id of the active invoice which is originally billed after this invoice was voided. This field is applicable to the void invoices only.
@@ -6260,7 +6060,7 @@ model InvoiceProperties {
   /**
    * The total refund for returns and cancellations during the invoice billing period. This field is applicable to billing accounts with agreement type Microsoft Customer Agreement.
    */
-  creditAmount?: InvoicePropertiesCreditAmount;
+  creditAmount?: Amount;
 
   /**
    * The Id of the invoice which got voided and this credit note was issued as a result. This field is applicable to the credit notes only.
@@ -6285,7 +6085,6 @@ model InvoiceProperties {
    * The due date for the invoice.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   dueDate?: utcDateTime;
 
   /**
@@ -6298,27 +6097,24 @@ model InvoiceProperties {
   /**
    * The amount of free Azure credits applied to the charges. This field is applicable to billing accounts with agreement type Microsoft Customer Agreement.
    */
-  freeAzureCreditApplied?: InvoicePropertiesFreeAzureCreditApplied;
+  freeAzureCreditApplied?: Amount;
 
   /**
    * The date when the invoice was generated.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   invoiceDate?: utcDateTime;
 
   /**
    * The end date of the billing period for which the invoice is generated. The date is in MM-DD-YYYY format.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   invoicePeriodEndDate?: utcDateTime;
 
   /**
    * The start date of the billing period for which the invoice is generated. The date is in MM-DD-YYYY format.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   invoicePeriodStartDate?: utcDateTime;
 
   /**
@@ -6349,7 +6145,7 @@ model InvoiceProperties {
   /**
    * Rebill details for an invoice.
    */
-  rebillDetails?: InvoicePropertiesRebillDetails;
+  rebillDetails?: RebillDetails;
 
   /**
    * The current status of the invoice.
@@ -6378,51 +6174,23 @@ model InvoiceProperties {
   /**
    * The pre-tax amount due. This field is applicable to billing accounts with agreement type Microsoft Customer Agreement.
    */
-  subTotal?: InvoicePropertiesSubTotal;
+  subTotal?: Amount;
 
   /**
    * The amount of tax charged for the billing period. This field is applicable to billing accounts with agreement type Microsoft Customer Agreement.
    */
-  taxAmount?: InvoicePropertiesTaxAmount;
+  taxAmount?: Amount;
 
   /**
    * The amount due when the invoice was generated. This field is applicable to billing accounts with agreement type Microsoft Customer Agreement.
    */
-  totalAmount?: InvoicePropertiesTotalAmount;
+  totalAmount?: Amount;
 
   /**
    * The details of a refund request.
    */
-  refundDetails?: InvoicePropertiesRefundDetails;
+  refundDetails?: RefundDetailsSummary;
 }
-
-/**
- * The amount due as of now.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model InvoicePropertiesAmountDue extends Amount {}
-
-/**
- * The amount of Azure prepayment applied to the charges. This field is applicable to billing accounts with agreement type Microsoft Customer Agreement.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model InvoicePropertiesAzurePrepaymentApplied extends Amount {}
-
-/**
- * The total charges for the invoice billing period.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model InvoicePropertiesBilledAmount extends Amount {}
-
-/**
- * The total refund for returns and cancellations during the invoice billing period. This field is applicable to billing accounts with agreement type Microsoft Customer Agreement.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model InvoicePropertiesCreditAmount extends Amount {}
 
 /**
  * The properties of a document.
@@ -6474,7 +6242,6 @@ model FailedPayment {
    * The date when the payment was attempted.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   date?: utcDateTime;
 
   /**
@@ -6485,26 +6252,18 @@ model FailedPayment {
 }
 
 /**
- * The amount of free Azure credits applied to the charges. This field is applicable to billing accounts with agreement type Microsoft Customer Agreement.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model InvoicePropertiesFreeAzureCreditApplied extends Amount {}
-
-/**
  * An invoice payment.
  */
 model Payment {
   /**
    * The paid amount.
    */
-  amount?: PaymentAmount;
+  amount?: Amount;
 
   /**
    * The date when the payment was made.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   date?: utcDateTime;
 
   /**
@@ -6533,20 +6292,6 @@ model Payment {
 }
 
 /**
- * The paid amount.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model PaymentAmount extends Amount {}
-
-/**
- * Rebill details for an invoice.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model InvoicePropertiesRebillDetails extends RebillDetails {}
-
-/**
  * The rebill details of an invoice.
  */
 model RebillDetails {
@@ -6565,38 +6310,10 @@ model RebillDetails {
   /**
    * The rebill details of an invoice.
    */
-  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "Existing documentation where rebillDetails is in a type called RebillDetails. Back compat."
   @visibility(Lifecycle.Read)
   rebillDetails?: RebillDetails;
 }
-
-/**
- * The pre-tax amount due. This field is applicable to billing accounts with agreement type Microsoft Customer Agreement.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model InvoicePropertiesSubTotal extends Amount {}
-
-/**
- * The amount of tax charged for the billing period. This field is applicable to billing accounts with agreement type Microsoft Customer Agreement.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model InvoicePropertiesTaxAmount extends Amount {}
-
-/**
- * The amount due when the invoice was generated. This field is applicable to billing accounts with agreement type Microsoft Customer Agreement.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model InvoicePropertiesTotalAmount extends Amount {}
-
-/**
- * The details of a refund request.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model InvoicePropertiesRefundDetails extends RefundDetailsSummary {}
 
 /**
  * The details of refund request.
@@ -6606,32 +6323,29 @@ model RefundDetailsSummary {
    * Date when the refund was requested.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   requestedOn?: utcDateTime;
 
   /**
    * Date when the refund was approved.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   approvedOn?: utcDateTime;
 
   /**
    * Date when the refund was completed.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   completedOn?: utcDateTime;
 
   /**
    * The amount of refund requested.
    */
-  amountRequested?: RefundDetailsSummaryAmountRequested;
+  amountRequested?: Amount;
 
   /**
    * The amount refunded.
    */
-  amountRefunded?: RefundDetailsSummaryAmountRefunded;
+  amountRefunded?: Amount;
 
   /**
    * The invoice ID of the rebill invoice for a refund.
@@ -6663,20 +6377,6 @@ model RefundDetailsSummary {
   @visibility(Lifecycle.Read)
   refundReason?: RefundReasonCode;
 }
-
-/**
- * The amount of refund requested.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model RefundDetailsSummaryAmountRequested extends Amount {}
-
-/**
- * The amount refunded.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model RefundDetailsSummaryAmountRefunded extends Amount {}
 
 /**
  * A list of download details for individual documents.
@@ -6744,13 +6444,8 @@ model DeleteInvoiceSectionEligibilityDetail {
 /**
  * An invoice section.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not a subscription provisioned resource."
 model InvoiceSectionProperties {
-  /**
-   * The provisioning state of the resource during a long-running operation.
-   */
-  @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
-
   /**
    * The name of the invoice section.
    */
@@ -6780,86 +6475,15 @@ model InvoiceSectionProperties {
   /**
    * Dictionary of metadata associated with the resource. Maximum key/value length supported of 256 characters. Keys/value should not empty value nor null. Keys can not contain < > % & \ ? /
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "Existing documentation where tags are in the model properties instead of the envelope. Back compat. Same type as TrackedResource.tags."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing documentation where tags are in the model properties instead of the envelope. Back compat. Same type as TrackedResource.tags."
   tags?: Record<string>;
-}
-
-/**
- * Result of the request to list billing operations. It contains a list of operations and a URL link to get the next set of results.
- */
-model OperationListResult {
-  /**
-   * List of billing operations supported by the Microsoft.Billing resource provider.
-   */
-  @visibility(Lifecycle.Read)
-  @identifiers(#["name"])
-  @pageItems
-  value?: Operation[];
-
-  /**
-   * URL to get the next set of operation list results if there are any.
-   */
-  @nextLink
-  @visibility(Lifecycle.Read)
-  nextLink?: url;
-}
-
-/**
- * Details of a REST API operation, returned from the Resource Provider Operations API.
- */
-model Operation {
-  /**
-   * The name of the operation, as per Resource-Based Access Control (RBAC). Examples: "Microsoft.Compute/virtualMachines/write", "Microsoft.Compute/virtualMachines/capture/action".
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * Whether the operation applies to data-plane. This is "true" for data-plane operations and "false" for ARM/control-plane operations.
-   */
-  @visibility(Lifecycle.Read)
-  isDataAction?: boolean;
-
-  /**
-   * Localized display information for this particular operation.
-   */
-  display?: OperationDisplay;
-}
-
-/**
- * Localized display information for this particular operation.
- */
-model OperationDisplay {
-  /**
-   * The short, localized friendly description of the operation; suitable for tool tips and detailed views.
-   */
-  @visibility(Lifecycle.Read)
-  description?: string;
-
-  /**
-   * The concise, localized friendly name for the operation; suitable for dropdowns. E.g. "Create or Update Virtual Machine", "Restart Virtual Machine".
-   */
-  @visibility(Lifecycle.Read)
-  operation?: string;
-
-  /**
-   * The localized friendly form of the resource provider name, e.g. "Microsoft Monitoring Insights" or "Microsoft Compute".
-   */
-  @visibility(Lifecycle.Read)
-  provider?: string;
-
-  /**
-   * The localized friendly name of the resource type related to this operation. E.g. "Virtual Machines" or "Job Schedule Collections".
-   */
-  @visibility(Lifecycle.Read)
-  resource?: string;
 }
 
 /**
  * The properties of a payment method link.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not a subscription provisioned resource."
 model PaymentMethodLinkProperties {
   /**
    * The account holder name for the payment method. This is only supported for payment methods with family CreditCard.
@@ -6941,12 +6565,12 @@ model PaymentMethodLogo {
 /**
  * The properties of a payment method.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not a subscription provisioned resource."
 model PaymentMethodProperties {
   /**
    * Id of payment method.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "Existing documentation where id is also in properties. For back compat."
   @visibility(Lifecycle.Read)
   id?: string;
 
@@ -7000,13 +6624,8 @@ model PaymentMethodProperties {
 /**
  * A policy at customer scope.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not a subscription provisioned resource."
 model CustomerPolicyProperties {
-  /**
-   * The provisioning state of the resource during a long-running operation.
-   */
-  @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
-
   /**
    * The policy that controls whether the users in customer's organization can view charges at pay-as-you-go prices.
    */
@@ -7047,17 +6666,12 @@ model PolicySummary {
 /**
  * A policy at billing profile scope.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not a subscription provisioned resource."
 model BillingProfilePolicyProperties {
-  /**
-   * The provisioning state of the resource during a long-running operation.
-   */
-  @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
-
   /**
    * The policies for Enterprise Agreement enrollments.
    */
-  enterpriseAgreementPolicies?: BillingProfilePolicyPropertiesEnterpriseAgreementPolicies;
+  enterpriseAgreementPolicies?: EnterpriseAgreementPolicies;
 
   /**
    * The policy that controls invoice section label management at invoice section scope. This is allowed by default.
@@ -7094,14 +6708,6 @@ model BillingProfilePolicyProperties {
 /**
  * The policies for Enterprise Agreement enrollments.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model BillingProfilePolicyPropertiesEnterpriseAgreementPolicies
-  extends EnterpriseAgreementPolicies {}
-
-/**
- * The policies for Enterprise Agreement enrollments.
- */
 model EnterpriseAgreementPolicies {
   /**
    * The state showing the enrollment auth level.
@@ -7122,17 +6728,12 @@ model EnterpriseAgreementPolicies {
 /**
  * A policy at billing account scope.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not a subscription provisioned resource."
 model BillingAccountPolicyProperties {
-  /**
-   * The provisioning state of the resource during a long-running operation.
-   */
-  @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
-
   /**
    * The policies for Enterprise Agreement enrollments.
    */
-  enterpriseAgreementPolicies?: BillingAccountPolicyPropertiesEnterpriseAgreementPolicies;
+  enterpriseAgreementPolicies?: EnterpriseAgreementPolicies;
 
   /**
    * The policy that controls whether Azure marketplace purchases are allowed.
@@ -7157,23 +6758,10 @@ model BillingAccountPolicyProperties {
 }
 
 /**
- * The policies for Enterprise Agreement enrollments.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model BillingAccountPolicyPropertiesEnterpriseAgreementPolicies
-  extends EnterpriseAgreementPolicies {}
-
-/**
  * A policy at subscription scope.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not a subscription provisioned resource."
 model SubscriptionPolicyProperties {
-  /**
-   * The provisioning state of the resource during a long-running operation.
-   */
-  @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
-
   /**
    * List of all policies defined at the billing scope.
    */
@@ -7184,7 +6772,7 @@ model SubscriptionPolicyProperties {
 /**
  * A product.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not a subscription provisioned resource."
 model ProductProperties {
   /**
    * Indicates whether auto renewal is turned on or off for a product.
@@ -7254,7 +6842,7 @@ model ProductProperties {
   /**
    * The last month charges.
    */
-  lastCharge?: ProductPropertiesLastCharge;
+  lastCharge?: Amount;
 
   /**
    * The date of the last charge.
@@ -7313,22 +6901,8 @@ model ProductProperties {
   /**
    * Reseller for this product. The fields is not available for Microsoft Partner Agreement products.
    */
-  reseller?: ProductPropertiesReseller;
+  reseller?: Reseller;
 }
-
-/**
- * The last month charges.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model ProductPropertiesLastCharge extends Amount {}
-
-/**
- * Reseller for this product. The fields is not available for Microsoft Partner Agreement products.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model ProductPropertiesReseller extends Reseller {}
 
 /**
  * The properties of the product to initiate a transfer.
@@ -7353,16 +6927,8 @@ model MoveProductEligibilityResult {
   /**
    * Error details of the transfer eligibility validation.
    */
-  errorDetails?: MoveProductEligibilityResultErrorDetails;
+  errorDetails?: MoveProductErrorDetails;
 }
-
-/**
- * Error details of the transfer eligibility validation.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model MoveProductEligibilityResultErrorDetails
-  extends MoveProductErrorDetails {}
 
 /**
  * Error details of the transfer eligibility validation.
@@ -7385,17 +6951,6 @@ model MoveProductErrorDetails {
    */
   @visibility(Lifecycle.Read)
   details?: string;
-}
-
-/**
- * A product.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model ProductPatch extends ProxyResourceWithTags {
-  /**
-   * A product.
-   */
-  properties?: ProductProperties;
 }
 
 /**
@@ -7508,28 +7063,24 @@ model ReservationProperty {
   /**
    * The provisioning state of the reservation, e.g. Succeeded
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  provisioningState?: string;
+  provisioningState?: ProvisioningState;
 
   /**
    * The effective date time of the reservation
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   effectiveDateTime?: utcDateTime;
 
   /**
    * This is the DateTime when the reservation benefit started.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   benefitStartTime?: utcDateTime;
 
   /**
    * DateTime of the last time the reservation was updated.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastUpdatedDateTime?: utcDateTime;
 
   /**
@@ -7541,13 +7092,11 @@ model ReservationProperty {
   /**
    * This is the date-time when the reservation will expire.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   expiryDateTime?: utcDateTime;
 
   /**
    * This is the date-time when the Azure Hybrid Benefit needs to be reviewed.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   reviewDateTime?: utcDateTime;
 
   /**
@@ -7586,7 +7135,6 @@ model ReservationProperty {
   /**
    * This is the date-time when the reservation was purchased.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   purchaseDateTime?: utcDateTime;
 
   /**
@@ -7818,7 +7366,9 @@ model ReservationPurchaseRequest {
  * The name of sku
  */
 model SkuName {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /**
+   * The name of the sku
+   */
   name?: string;
 }
 
@@ -7827,7 +7377,7 @@ model SkuName {
  */
 model ReservationPurchaseRequestProperties {
   /**
-   * The reserved source type of the reservation, e.g. virtual machine.
+   * The reserved resource type of the reservation, e.g. virtual machine.
    */
   @visibility(Lifecycle.Read)
   reservedResourceType?: string;
@@ -7892,7 +7442,6 @@ model ReservationPurchaseRequestProperties {
   /**
    * This is the date-time when the Azure hybrid benefit needs to be reviewed.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   reviewDateTime?: utcDateTime;
 }
 
@@ -7980,7 +7529,8 @@ model Patch {
   /**
    * Tags for this reservation
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "Existing documentation where tags are in the model properties instead of the envelope. Back compat. Same type as TrackedResource.tags."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing documentation where tags are in the model properties instead of the envelope. Back compat. Same type as TrackedResource.tags."
   tags?: Record<string>;
 }
 
@@ -8013,17 +7563,20 @@ model PatchProperties {
    */
   renew?: boolean = false;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /**
+   * Properties for reservation renew
+   */
   renewProperties?: PatchPropertiesRenewProperties;
 
   /**
    * This is the date-time when the Azure hybrid benefit needs to be reviewed.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   reviewDateTime?: utcDateTime;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+/**
+ * Properties for reservation renew
+ */
 model PatchPropertiesRenewProperties {
   /**
    * The request for reservation purchase
@@ -8068,13 +7621,11 @@ model ReservationOrderProperty {
   /**
    * This is the DateTime when the reservation order was initially requested for purchase.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   requestDateTime?: utcDateTime;
 
   /**
    * This is the DateTime when the reservation order was created.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdDateTime?: utcDateTime;
 
   /**
@@ -8085,13 +7636,11 @@ model ReservationOrderProperty {
   /**
    * This is the date-time when the reservation order will expire.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   expiryDateTime?: utcDateTime;
 
   /**
    * This is the DateTime when the reservation benefit started.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   benefitStartTime?: utcDateTime;
 
   /**
@@ -8108,9 +7657,8 @@ model ReservationOrderProperty {
   /**
    * The provisioning state of the reservation, e.g. Succeeded
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  provisioningState?: string;
+  provisioningState?: ProvisioningState;
 
   /**
    * Represent the billing plans.
@@ -8122,13 +7670,14 @@ model ReservationOrderProperty {
    */
   planInformation?: ReservationOrderBillingPlanInformation;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /**
+   * List of transactions associated with the reservation order.
+   */
   reservations?: Reservation[];
 
   /**
    * This is the date-time when the Azure Hybrid Benefit needs to be reviewed.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   reviewDateTime?: utcDateTime;
 
   /**
@@ -8161,7 +7710,9 @@ model ReservationOrderBillingPlanInformation {
    */
   nextPaymentDueDate?: plainDate;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /**
+   * List of transactions associated with the billing plan.
+   */
   @identifiers(#[])
   transactions?: ReservationPaymentDetail[];
 }
@@ -8209,22 +7760,31 @@ model ReservationPaymentDetail {
 /**
  * A transaction.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model Transaction extends ProxyResourceWithTags {
+model Transaction
+  is Azure.ResourceManager.ProxyResource<TransactionProperties> {
+  ...ResourceNameParameter<
+    Resource = Transaction,
+    KeyName = "transactionName",
+    SegmentName = "transactions"
+  >;
+
   /**
-   * A transaction.
+   * Dictionary of metadata associated with the resource. It may not be populated for all resource types. Maximum key/value length supported of 256 characters. Keys/value should not empty value nor null. Keys can not contain < > % & \ ? /
    */
-  properties?: TransactionProperties;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing documentation to provide tags like this. Same type as types.tsp/TrackedResource."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing documentation to provide tags like this. Same type as types.tsp/TrackedResource."
+  tags?: Record<string>;
 }
 
 /**
  * A transaction.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not a subscription provisioned resource."
 model TransactionProperties {
   /**
    * The amount of any Azure credits automatically applied to this transaction.
    */
-  azureCreditApplied?: TransactionPropertiesAzureCreditApplied;
+  azureCreditApplied?: Amount;
 
   /**
    * Details of the Azure plan.
@@ -8239,8 +7799,7 @@ model TransactionProperties {
   /**
    * The name of the billing profile.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  billingProfileDisplayName?: unknown;
+  billingProfileDisplayName?: string;
 
   /**
    * The fully qualified ID that uniquely identifies a billing profile.
@@ -8250,7 +7809,7 @@ model TransactionProperties {
   /**
    * The amount of Microsoft Azure Consumption Commitment(MACC) decrement through the transaction.
    */
-  consumptionCommitmentDecremented?: TransactionPropertiesConsumptionCommitmentDecremented;
+  consumptionCommitmentDecremented?: Amount;
 
   /**
    * The name of the customer.
@@ -8270,7 +7829,6 @@ model TransactionProperties {
   /**
    * The date of transaction.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   date?: utcDateTime;
 
   /**
@@ -8281,7 +7839,7 @@ model TransactionProperties {
   /**
    * The price of the product after applying any discounts.
    */
-  effectivePrice?: TransactionPropertiesEffectivePrice;
+  effectivePrice?: Amount;
 
   /**
    * The exchange rate used to convert charged amount to billing currency, if applicable.
@@ -8321,7 +7879,7 @@ model TransactionProperties {
   /**
    * The retail price of the product.
    */
-  marketPrice?: TransactionPropertiesMarketPrice;
+  marketPrice?: Amount;
 
   /**
    * The part number of the product for which the transaction took place. The field is only applicable for Enterprise Agreement invoices.
@@ -8366,29 +7924,27 @@ model TransactionProperties {
   /**
    * The date of the purchase of the product, or the start date of the month in which usage started.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   servicePeriodStartDate?: utcDateTime;
 
   /**
    * The end date of the product term, or the end date of the month in which usage ended.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   servicePeriodEndDate?: utcDateTime;
 
   /**
    * The pre-tax charged amount for the transaction.
    */
-  subTotal?: TransactionPropertiesSubTotal;
+  subTotal?: Amount;
 
   /**
    * The tax amount applied to the transaction.
    */
-  tax?: TransactionPropertiesTax;
+  tax?: Amount;
 
   /**
    * The charge associated with the transaction.
    */
-  transactionAmount?: TransactionPropertiesTransactionAmount;
+  transactionAmount?: Amount;
 
   /**
    * The type of transaction.
@@ -8418,65 +7974,8 @@ model TransactionProperties {
   /**
    * The refund details of a transaction.
    */
-  refundTransactionDetails?: TransactionPropertiesRefundTransactionDetails;
+  refundTransactionDetails?: RefundTransactionDetails;
 }
-
-/**
- * The amount of any Azure credits automatically applied to this transaction.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model TransactionPropertiesAzureCreditApplied extends Amount {}
-
-/**
- * The amount of Microsoft Azure Consumption Commitment(MACC) decrement through the transaction.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model TransactionPropertiesConsumptionCommitmentDecremented extends Amount {}
-
-/**
- * The price of the product after applying any discounts.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model TransactionPropertiesEffectivePrice extends Amount {}
-
-/**
- * The retail price of the product.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model TransactionPropertiesMarketPrice extends Amount {}
-
-/**
- * The pre-tax charged amount for the transaction.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model TransactionPropertiesSubTotal extends Amount {}
-
-/**
- * The tax amount applied to the transaction.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model TransactionPropertiesTax extends Amount {}
-
-/**
- * The charge associated with the transaction.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model TransactionPropertiesTransactionAmount extends Amount {}
-
-/**
- * The refund details of a transaction.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model TransactionPropertiesRefundTransactionDetails
-  extends RefundTransactionDetails {}
 
 /**
  * The refund details of a transaction.
@@ -8485,32 +7984,18 @@ model RefundTransactionDetails {
   /**
    * The amount of refund requested.
    */
-  amountRequested?: RefundTransactionDetailsAmountRequested;
+  amountRequested?: Amount;
 
   /**
    * The amount refunded.
    */
-  amountRefunded?: RefundTransactionDetailsAmountRefunded;
+  amountRefunded?: Amount;
 
   /**
    * The ID of refund operation.
    */
   refundOperationId?: string;
 }
-
-/**
- * The amount of refund requested.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model RefundTransactionDetailsAmountRequested extends Amount {}
-
-/**
- * The amount refunded.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model RefundTransactionDetailsAmountRefunded extends Amount {}
 
 /**
  * A transaction summary.
@@ -8556,13 +8041,12 @@ model TransactionSummary {
 /**
  * Transfer details
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not a subscription provisioned resource."
 model TransferProperties {
   /**
    * The time at which the transfer request expires.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   expirationTime?: utcDateTime;
 
   /**
@@ -8677,13 +8161,12 @@ model InitiateTransferProperties {
 /**
  * Transfer Details.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not a subscription provisioned resource."
 model PartnerTransferProperties {
   /**
    * The time at which the transfer request expires.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   expirationTime?: utcDateTime;
 
   /**
@@ -8800,13 +8283,12 @@ model ProductDetails {
 /**
  * Transfer Details.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not a subscription provisioned resource."
 model RecipientTransferProperties {
   /**
    * The time at which the transfer request expires.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   expirationTime?: utcDateTime;
 
   /**
@@ -9087,6 +8569,44 @@ model BillingSubscriptionListResult {
   @identifiers(#["id"])
   value?: BillingSubscription[];
 }
+
+alias DefaultODataParameters = {
+  /**
+   * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.
+   */
+  @query("filter")
+  filter?: string;
+
+  /**
+   * The orderby query option allows clients to request resources in a particular order.
+   */
+  @query("orderBy")
+  orderBy?: string;
+
+  /**
+   * The top query option requests the number of items in the queried collection to be included in the result. The maximum supported value for top is 50.
+   */
+  @query("top")
+  top?: int64;
+
+  /**
+   * The skip query option requests the number of items in the queried collection that are to be skipped and not included in the result.
+   */
+  @query("skip")
+  skip?: int64;
+
+  /**
+   * The count query option allows clients to request a count of the matching resources included with the resources in the response.
+   */
+  @query("count")
+  count?: boolean;
+
+  /**
+   * The search query option allows clients to request items within a collection matching a free-text search expression. search is only supported for string fields.
+   */
+  @query("search")
+  search?: string;
+};
 
 model AgreementListResult is Azure.Core.Page<Agreement>;
 
