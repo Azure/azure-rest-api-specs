@@ -44,7 +44,8 @@ alias SecurityAssessmentMetadataResponseOps = Azure.ResourceManager.Legacy.Exten
     @segment("assessmentMetadata")
     @key
     assessmentMetadataName: string;
-  }
+  },
+  ResourceName = "TenantAssessmentMetadata"
 >;
 
 @armResourceOperations(#{ omitTags: true })
@@ -86,7 +87,8 @@ alias AssessmentsMetadatumOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @key
     assessmentMetadataName: string;
   },
-  {}
+  {},
+  ResourceName = "SubscriptionAssessmentMetadata"
 >;
 
 @armResourceOperations(#{ omitTags: true })

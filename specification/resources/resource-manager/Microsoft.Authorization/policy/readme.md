@@ -26,7 +26,7 @@ These are the global settings for the Resource API.
 title: PolicyClient
 description: Policy Client
 openapi-type: arm
-tag: package-policy-2026-06-stable
+tag: package-policy-2026-07-stable
 ```
 
 ### Tag: package-policy-2025-12-preview
@@ -54,6 +54,19 @@ suppressions:
     from: openapi.json
     reason: "policyAssignmentInstanceId is a server-generated, read-only GUID in the established service contract"
     where: $.definitions["Azure.Core.uuid"].format
+
+# Needed when there is more than one input file
+override-info:
+  title: PolicyClient
+```
+
+### Tag: package-policy-2026-07-stable
+
+These settings apply only when `--tag=package-policy-2026-07-stable` is specified on the command line.
+
+```yaml $(tag) == 'package-policy-2026-07-stable'
+input-file:
+  - stable/2026-07-01/openapi.json
 
 # Needed when there is more than one input file
 override-info:

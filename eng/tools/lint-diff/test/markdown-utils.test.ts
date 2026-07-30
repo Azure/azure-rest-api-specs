@@ -1,6 +1,6 @@
 import { readFile } from "fs/promises";
 import { join } from "node:path";
-import { Mock, beforeEach, describe, expect, test, vi } from "vitest";
+import { type Mock, beforeEach, describe, expect, test, vi } from "vitest";
 
 import { Readme } from "@azure-tools/specs-shared/readme";
 import {
@@ -9,7 +9,7 @@ import {
   getDocRawUrl,
   getOpenapiType,
   getRelatedArmRpcFromDoc,
-} from "../src/markdown-utils.js";
+} from "../src/markdown-utils.ts";
 
 vi.stubGlobal("fetch", vi.fn());
 
