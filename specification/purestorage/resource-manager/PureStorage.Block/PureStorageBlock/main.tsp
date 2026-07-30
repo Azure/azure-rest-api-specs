@@ -304,6 +304,7 @@ model PlatformConsoleSubnet {
   @doc("Azure resource ID of the subnet")
   id: Azure.Core.armResourceIdentifier;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("Management IP address assigned to the subnet (system-populated)")
   @visibility(Lifecycle.Read)
   managementIpAddress?: string;
@@ -1214,6 +1215,7 @@ model ConnectionParametersResponse {
   iscsi: IscsiConnectionParameters;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2026_05_01_preview)
 @doc("Request to overwrite all volumes in a volume group from a snapshot")
 model VolumeGroupOverwriteRequest {
@@ -1224,6 +1226,7 @@ model VolumeGroupOverwriteRequest {
   sourceVolumeGroupResourceId: Azure.Core.armResourceIdentifier;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2026_05_01_preview)
 @doc("Request to overwrite a volume's content from another volume or a snapshot")
 model VolumeOverwriteRequest {
@@ -1515,6 +1518,7 @@ interface RecoverableVolumeGroups {
   delete is ArmResourceDeleteWithoutOkAsync<RecoverableVolumeGroup>;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the correct casing for Software as a Service"
 @added(Versions.v2026_03_01_preview)
 @doc("SaaS guid for Activate SaaS Resource")
@@ -1526,6 +1530,7 @@ model ActivateSaaSRequest {
   publisherId?: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Response model extending ProxyResource for consistency with Azure patterns"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the correct casing for Software as a Service"
 @added(Versions.v2026_03_01_preview)
@@ -1536,6 +1541,7 @@ model SaaSResourceDetailsResponse
   saasId?: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the correct casing for Software as a Service"
 @added(Versions.v2026_03_01_preview)
 @doc("SaaS details for linking to a reservation.")
@@ -1545,6 +1551,7 @@ model LinkSaaSRequest {
   saaSResourceId: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the correct casing for Software as a Service"
 @added(Versions.v2026_03_01_preview)
 @doc("Response of get latest linked SaaS resource operation.")
@@ -1685,6 +1692,7 @@ model VolumeGroupSnapshotPostListResult {
   totalCount?: int32;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2026_05_01_preview)
 @doc("Request payload for listing volume group snapshots")
 model VolumeGroupSnapshotListRequest {
