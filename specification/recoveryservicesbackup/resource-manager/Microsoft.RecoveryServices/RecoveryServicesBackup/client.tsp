@@ -1742,7 +1742,9 @@ op protectionIntentResourcesCreateOrUpdate(
   fabricName: string,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   intentObjectName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   parameters: ProtectionIntentResource,
 ): ProtectionIntentResource;
@@ -1771,6 +1773,7 @@ op protectionIntentResourcesDelete(
   fabricName: string,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   intentObjectName: string,
 ): ArmDeletedNoContentResponse;
 
@@ -1798,6 +1801,7 @@ op protectionIntentResourcesGet(
   fabricName: string,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   intentObjectName: string,
 ): ProtectionIntentResource;
 
