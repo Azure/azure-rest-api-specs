@@ -1,9 +1,11 @@
 import "@azure-tools/typespec-client-generator-core";
+import "@typespec/http";
 import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 using Azure.ClientGenerator.Core.Legacy;
 using Azure.Core;
+using TypeSpec.Http;
 using Microsoft.Storage;
 
 @@clientName(ProvisioningState, "StorageAccountProvisioningState", "csharp");
@@ -378,9 +380,16 @@ union CSharpBlobInventoryPolicyName {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op getDeletedAccountCustomized(
   apiVersion: string,
+
+  @path
   deletedAccountName: string,
+
+  @path
   location: Azure.Core.azureLocation,
+
   ...Azure.ResourceManager.ProviderNamespace<Microsoft.Storage.DeletedAccount>,
+
+  @path
   subscriptionId: Azure.Core.uuid,
 ):
   | Azure.ResourceManager.ArmResponse<Microsoft.Storage.DeletedAccount>
@@ -394,9 +403,16 @@ op getDeletedAccountCustomized(
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op getDeletedAccountCustomizedForJs(
   ...Azure.ResourceManager.ApiVersionParameter,
+
+  @path
   deletedAccountName: string,
+
+  @path
   location: Azure.Core.azureLocation,
+
   ...Azure.ResourceManager.ProviderNamespace<Microsoft.Storage.DeletedAccount>,
+
+  @path
   subscriptionId: Azure.Core.uuid,
 ):
   | Azure.ResourceManager.ArmResponse<Microsoft.Storage.DeletedAccount>

@@ -15,8 +15,10 @@ namespace Microsoft.DataFactory;
  * Linked service resource type.
  */
 @parentResource(Factory)
-model LinkedServiceResource
-  is Azure.ResourceManager.ProxyResource<LinkedService, false> {
+model LinkedServiceResource is Azure.ResourceManager.ProxyResource<
+  LinkedService,
+  false
+> {
   ...ResourceNameParameter<
     Resource = LinkedServiceResource,
     KeyName = "linkedServiceName",

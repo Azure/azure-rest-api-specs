@@ -3652,6 +3652,7 @@ model RaiTopicProperties {
   /**
    * Sample blob url for the custom topic.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   sampleBlobUrl?: string;
 
   /**
@@ -4577,6 +4578,7 @@ model AgenticApplicationProperties extends ResourceBase {
    * The application's dedicated invocation endpoint.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "'baseUrl' is nullable in 'AgenticApplicationProperties' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   baseUrl?: string | null;
 
   /**
@@ -5119,6 +5121,7 @@ model ConnectionOAuth2 {
   /**
    * Required by Concur connection category
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   authUrl?: url;
 
   /**
@@ -5366,6 +5369,7 @@ model AgentCard {
    * URL for the Agent's documentation.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "'documentationUrl' is nullable in 'AgentCard' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   documentationUrl?: string | null;
 
   /**
@@ -6775,20 +6779,22 @@ union RaiEgressRuleType {
 /**
  * The match criteria for an egress rule.
  * If both host and path are omitted, the rule matches all traffic.
- * Host uses DNS wildcard syntax (e.g., "*.openai.com" matches "api.openai.com").
- * Path uses URI prefix matching with '*' as a single-segment wildcard (e.g., "/v1/*" matches "/v1/chat").
+ * Host uses DNS wildcard syntax (e.g., "\*.openai.com" matches "api.openai.com").
+ * Path uses URI prefix matching with an asterisk as a single-segment wildcard.
+ * For example, "/v1/\*" matches "/v1/chat".
  */
 @added(Versions.v2026_05_15_preview)
 model RaiEgressRuleMatch {
   /**
-   * Host pattern to match using DNS wildcard syntax (e.g., "*.openai.com").
-   * A leading "*." matches any subdomain. Omit to match all hosts.
+   * Host pattern to match using DNS wildcard syntax (e.g., "\*.openai.com").
+   * A leading "\*." matches any subdomain. Omit to match all hosts.
    */
   host?: string;
 
   /**
-   * Path pattern to match using URI prefix with '*' wildcard (e.g., "/v1/*").
-   * Omit to match all paths.
+   * Path pattern to match using URI prefix matching.
+   * An asterisk serves as a single-segment wildcard.
+   * For example, "/v1/\*" matches "/v1/chat". Omit to match all paths.
    */
   path?: string;
 }
