@@ -35,10 +35,13 @@ using Azure.Core;
     @extension("x-ms-parameter-grouping", #{ name: "account-options" })
     @extension("x-ms-parameter-location", "client")
     @format("url")
-    endpoint: string,
+    endpoint: DeviceUpdateEndpoint,
   }
 )
 namespace DeviceUpdateClient;
+
+/** The Device Update service endpoint. */
+scalar DeviceUpdateEndpoint extends string;
 
 /**
  * Azure Active Directory OAuth2 Flow.

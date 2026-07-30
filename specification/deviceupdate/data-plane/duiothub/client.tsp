@@ -6,11 +6,59 @@ using DeviceUpdateClient;
 
 namespace Customization;
 
+@@alternateType(DeviceUpdateEndpoint, url, "csharp");
+
 @@clientName(LogCollection.operationId, "logCollectionId");
 
 @@clientName(
   LogCollectionOperationDetailedStatus.operationId,
   "logCollectionId"
+);
+
+@@clientName(
+  DeviceManagementOperationGroup.listBestUpdatesForGroup,
+  "GetBestUpdatesForGroups",
+  "csharp"
+);
+@@clientName(
+  DeviceManagementOperationGroup.listDeploymentsForDeviceClassSubgroup,
+  "GetDeploymentsForDeviceClassSubgroups",
+  "csharp"
+);
+@@clientName(
+  DeviceManagementOperationGroup.listDeploymentsForGroup,
+  "GetDeploymentsForGroups",
+  "csharp"
+);
+@@clientName(
+  DeviceManagementOperationGroup.listDeviceClassSubgroupsForGroup,
+  "GetDeviceClassSubgroupsForGroups",
+  "csharp"
+);
+@@clientName(
+  DeviceManagementOperationGroup.listDeviceStatesForDeviceClassSubgroupDeployment,
+  "GetDeviceStatesForDeviceClassSubgroupDeployments",
+  "csharp"
+);
+@@clientName(
+  DeviceManagementOperationGroup.listInstallableUpdatesForDeviceClass,
+  "GetInstallableUpdatesForDeviceClasses",
+  "csharp"
+);
+@@clientName(
+  DeviceUpdateOperationGroup.importUpdate,
+  "StartImportUpdate",
+  "csharp"
+);
+@@clientName(
+  DeviceUpdateOperationGroup.listOperationStatuses::parameters.top,
+  "top",
+  "csharp"
+);
+@@clientName(
+  DeviceManagementOperationGroup.listOperationStatuses::parameters.top,
+  "top",
+  "csharp"
 );
 
 // Hoist `instanceId` from per-operation parameter to client-constructor
