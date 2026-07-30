@@ -1,10 +1,14 @@
 <!-- NOTE: This comment is for file maintainers only and is not rendered.
-     Upstream alignment: 2026-07-24
+     Upstream alignment: 2026-07-30
      Verified against:
        - @azure-tools/typespec-azure-core 0.70.0
        - @azure-tools/typespec-azure-rulesets 0.70.0 (data-plane ruleset)
        - Azure REST API Guidelines (vNext)
          https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md
+       - Azure/typespec-azure#5055, as reworked after architect review
+         (2026-07-30): reduced from three rules to one. See the
+         "🚷 Not a rule" section for the measurements behind the two
+         withdrawals; do not restore them to a linted state.
      The pinned version above MUST match the `@azure-tools/typespec-azure-core`
      version in the repository root `package.json`. The
      `data-plane-review-alignment` CI check enforces this: when the package is
@@ -39,6 +43,7 @@ plane. The two files are keyed on different rule sets and must not be merged.
 | ⏳ Landing    | Rule is merged upstream but is **not yet running** in this repo, because the pinned package version predates it. | **Agent owns it.** Report normally. Flips to 🔒 when the version bump lands.                                                                                                   |
 | 📋 Planned    | Rule is designed / in flight but not merged upstream.                                                            | **Agent owns it.** Report normally.                                                                                                                                            |
 | 🤖 Agent-only | No mechanical rule is possible or planned -- the statement requires judgment.                                    | **Agent owns it permanently.** This is the reviewer's core value.                                                                                                              |
+| 🚷 Not a rule | Proposed as a lint rule, measured against the spec corpus, and **deliberately rejected**. Not a defect.          | **Never report.** See the "🚷 Not a rule" section below for the measurement behind each.                                                                                       |
 | 🚫 Runtime    | The guideline statement constrains runtime service behavior and is not observable in a `.tsp` file.              | **Never report.** Not a gap; out of scope. See [scope boundary](#out-of-scope-runtime-behavioral-statements).                                                                  |
 | ❓ Unresolved | Named in the ruleset but no rule with that name is registered by the pinned `typespec-azure-core` version.       | **Agent owns it** until a maintainer confirms which rule (if any) it resolves to.                                                                                              |
 
@@ -134,17 +139,80 @@ These rules are merged in `Azure/typespec-azure` but are **not** in
 `typespec-azure-core` 0.70.0, which is the version this repository pins. Until
 the version bump lands, nothing enforces them in CI and **the agent owns them**.
 
-| Rule                              | What it enforces                                    | Upstream            |
-| --------------------------------- | --------------------------------------------------- | ------------------- |
-| `no-version-in-route`             | The api-version does not appear as a route segment. | typespec-azure#5055 |
-| `api-version-date-format`         | api-version values are `YYYY-MM-DD[-preview]`.      | typespec-azure#5055 |
-| `no-dollar-prefixed-query-params` | No `$`-prefixed query parameter names.              | typespec-azure#5055 |
+| Rule                              | What it enforces                       | Upstream            |
+| --------------------------------- | -------------------------------------- | ------------------- |
+| `no-dollar-prefixed-query-params` | No `$`-prefixed query parameter names. | typespec-azure#5055 |
 
-**When the bump lands:** move these rows to 🔒, update the pinned version and
+`#5055` originally proposed three rules. The other two were measured against the
+spec corpus during architect review and **withdrawn** -- see the "🚷 Not a rule"
+section below. Do not re-add them here.
+
+`no-dollar-prefixed-query-params` survived the same scrutiny because its 81
+existing sites are **legacy OData-derived services** (search, batch, cosmos-db
+Tables), not an ongoing pattern: a _new_ data-plane API using `$filter` is
+unambiguously wrong. That is the shape of a rule worth having -- a one-time
+suppression sweep, after which it earns its keep.
+
+**When the bump lands:** move this row to 🔒, update the pinned version and
 `Upstream alignment` date in the header comment, and -- in the same PR -- add a
-true-negative eval stimulus per rule asserting the agent no longer reports it.
-The CI check described below will fail until the header is updated, which is
-what forces this to happen.
+true-negative eval stimulus asserting the agent no longer reports it. The CI
+check described below will fail until the header is updated, which is what
+forces this to happen.
+
+---
+
+## 🚷 Not a rule -- measured and deliberately rejected
+
+Each entry below was **proposed as a lint rule and rejected on evidence**, not
+overlooked. The measurement is recorded so a future reader does not re-propose
+it, and so the distinction between "nobody thought about this" and "this was
+assessed and declined" stays legible.
+
+The bar is [Mark Cowlishaw's published criteria for when to write a linting
+rule](https://azure.github.io/typespec-azure/docs/howtos/contributing/when-to-write-a-linting-rule/).
+The threshold that decided both cases: a pattern present in **more than ~20% of
+the corpus is a convention, not a violation**, and a rule whose findings are all
+unfixable is noise regardless of whether the underlying guideline is correct.
+
+| Rejected rule                                      | Measurement                                                                                                                           | Agent behavior                                                                                                              |
+| -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `api-version-date-format` / `use-date-api-version` | Non-date api-version formats are used by **24/93 data-plane projects (25.8%)** and **10/38 services (26.3%)**. Both over the 20% bar. | **Silent. No rule, no agent guidance.** See below.                                                                          |
+| `no-version-in-route`                              | Fires on **254 corpus sites, every one unfixable** -- renaming a published route is a breaking change.                                | **Agent owns it**, narrowly -- see `DP-VERSION-04` in [`data-plane-resource-modeling.md`](data-plane-resource-modeling.md). |
+
+### `api-version-date-format` -- the agent stays silent
+
+Real non-date formats in the corpus include keyvault `7.5`/`7.6`, maps
+`1.0`/`1.1`, machinelearningservices `1.0.0`, ai/Face `v1.2`, monitor `v1`,
+schemaregistry `2021-10`, and translation `3.0`.
+
+At 26% of services this is a **convention, not a requirement**, so it is not a
+defect and there is nothing to report. This is the one 🚷 case where the
+rejection also extinguishes the agent's interest: `YYYY-MM-DD` remains the
+right default for a new API and belongs in authoring guidance, but a reviewer
+that flags a service for shipping `7.6` is asserting a requirement that does not
+exist. **Do not raise it, at any severity, including as a question.**
+
+### `no-version-in-route` -- rejected as a rule, kept as judgment
+
+This is the first genuine **linter -> agent handoff**, and the reasoning
+generalizes.
+
+The guideline itself is undisputed. What failed was the _mechanical_ rule: all
+254 sites are unfixable, because the version segment is either mandated by an
+external standard (ACR's `/v2/` comes from the OCI Distribution Spec, Purview's
+`/atlas/v2/` from Apache Atlas compatibility) or already shipped (ML's
+`/data/v1.0/`, where renaming breaks every published SDK).
+
+**The agent can make a distinction the linter cannot.** A linter sees one
+compiled program with no notion of what is new, so ACR's existing `/v2/` and a
+brand-new service's `/v3/` are indistinguishable to it. The agent reads the PR
+diff, so it can separate a route being _introduced_ -- actionable, and worth
+blocking -- from one it is merely re-reading.
+
+That premise is **assumed, not demonstrated**; see the caveat in
+[`DP-VERSION-04`](data-plane-resource-modeling.md).
+
+---
 
 ## 📋 Planned -- designed, not merged
 
@@ -168,6 +236,7 @@ No mechanical rule exists or is planned. These are the areas the agent is for.
 | LRO status-monitor semantics and paging shape consistency                            | [`data-plane-lro-and-paging.md`](data-plane-lro-and-paging.md)                            |
 | Visibility lifecycle consistency, write-only properties, secrets                     | [`data-plane-visibility-and-secrets.md`](data-plane-visibility-and-secrets.md)            |
 | Breaking changes vs. the previous stable version                                     | [`data-plane-resource-modeling.md`](data-plane-resource-modeling.md) (versioning section) |
+| Version segments in newly-added routes (`DP-VERSION-04`)                             | [`data-plane-resource-modeling.md`](data-plane-resource-modeling.md) (versioning section) |
 | Grey-area design trade-offs                                                          | [`data-plane-design-decisions.md`](data-plane-design-decisions.md)                        |
 | Secret detection                                                                     | [`secret-detection.md`](secret-detection.md) (cross-cutting)                              |
 | Allowlist-vs-denylist `pattern` constraints                                          | [`pattern-validation.md`](pattern-validation.md) (cross-cutting)                          |

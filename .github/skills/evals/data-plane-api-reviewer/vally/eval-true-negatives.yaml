@@ -402,3 +402,52 @@ stimuli:
       - The agent MUST NOT report DP-VERSION-01, DP-VERSION-03, or any other finding. Additive stable evolution with correct decorators is the expected versioning pattern.
       - The specifications are intentionally terse but substantive. Short one-line documentation is not evidence of a defect and must not be padded into documentation-quality findings.
       - Silence, or a short statement that no issues were found, is the ideal output and scores full marks.
+
+  # TN-09 -- A version segment in a route that is pre-existing AND mandated by an
+  # external protocol. This stimulus is the direct test of the linter -> agent
+  # handoff premise for DP-VERSION-04: the lint rule was withdrawn because all
+  # 254 corpus sites were unfixable, and the agent's claim to the guideline
+  # rests entirely on being able to tell a NEW route from a pre-existing one.
+  # Nothing has tested that claim before this stimulus. See the caveat in
+  # data-plane-resource-modeling.md (DP-VERSION-04).
+  - name: tn-standard-mandated-route-segment
+    environment:
+      skills:
+        - "../../../azure-api-review"
+      files:
+        - src: "../fixtures/version-pairs/tn-standard-mandated-route/stable-2025-01-01.tsp"
+          dest: "specification/artifactregistry/data-plane/Contoso.ArtifactRegistry/stable/2025-01-01/registry.tsp"
+        - src: "../fixtures/version-pairs/tn-standard-mandated-route/stable-2026-01-01.tsp"
+          dest: "specification/artifactregistry/data-plane/Contoso.ArtifactRegistry/stable/2026-01-01/registry.tsp"
+    prompt: >
+      Review the following data-plane TypeSpec specification for compliance with
+      the Azure REST API Guidelines. The pull request adds the 2026-01-01 stable
+      API version; 2025-01-01 is the previously shipped stable version and is
+      shown for comparison. Pay particular attention to routing and versioning.
+      Report findings with rule IDs, line numbers, and fix suggestions.
+
+      New version: specification/artifactregistry/data-plane/Contoso.ArtifactRegistry/stable/2026-01-01/registry.tsp
+      Previous version: specification/artifactregistry/data-plane/Contoso.ArtifactRegistry/stable/2025-01-01/registry.tsp
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-not-matches
+        name: "no finding raised on a pre-existing standard-mandated route"
+        config:
+          pattern: "\\*\\*\\[[A-Z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)+\\]"
+      - type: output-not-matches
+        name: "no blocking findings"
+        config:
+          # DP-VERSION-04 permits Blocking for a genuinely NEW route. Nothing
+          # here is new, so any Blocking finding means the new/pre-existing
+          # distinction was not made -- the precise failure this stimulus exists
+          # to detect.
+          pattern: "(?im)^\\s*(?:[-*+]\\s*|#{1,6}\\s*)?🔴"
+      - type: prompt
+    rubric:
+      - The `/v2` prefix appears on every route because it is applied at the namespace level. It is present identically in BOTH API versions, so this pull request does not introduce it.
+      - The namespace documentation states that `/v2/` is fixed by the OCI Distribution Specification, which defines the registry endpoint and requires clients to probe it. That is an external protocol conformance requirement, not a design choice the service is free to make.
+      - Reporting the version segment in the route is a test failure, at ANY severity, including as a question or a suggestion. Two independent reasons each suffice - the route is pre-existing, so renaming it would be a breaking change and the finding would be unactionable; and an external standard mandates the shape, which the documented rationale makes plain.
+      - The 2026-01-01 version is otherwise purely additive - an optional `platforms` property and a new `Platform` model, both correctly annotated with @added - so no versioning finding is warranted either.
+      - Silence, or a short statement that no issues were found, is the ideal output and scores full marks.

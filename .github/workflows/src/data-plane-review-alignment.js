@@ -422,6 +422,7 @@ export const REAL_FINDINGS_PROBE = [
   "**[DP-PAGE-01] Unbounded collection returned unpaged** -- `main.tsp:102`",
   "**[DP-VERSION-01] Property removed** -- `main.tsp:45`",
   "**[DP-VERSION-03] Missing @added on a new property** -- `main.tsp:47`",
+  "**[DP-VERSION-04] Version segment in a newly-added route** -- `main.tsp:71`",
   "**[DP-ERR-01] Undocumented error code** -- `main.tsp:24`",
   "**[DP-LRO-01] Status monitor has no error member** -- `main.tsp:30`",
   "**[DP-NAME-01] Non-obvious abbreviation** -- `main.tsp:29`",
@@ -431,7 +432,13 @@ export const REAL_FINDINGS_PROBE = [
   // doc-versioning decorator in @typespec/versioning, so it is unactionable,
   // unavoidable and non-breaking. Present so the grader that bans it can see
   // the failure it is named for.
-  "**[DP-VERSION-04] Documentation changed retroactively on a published version** -- `main.tsp:18`",
+  //
+  // The rule ID is deliberately one the skill does NOT define. An agent raising
+  // this has no rule to cite, so it invents one, and the grader must catch it
+  // by the shape of the claim rather than by a known ID. Do not substitute a
+  // real ID here: DP-VERSION-04 in particular is now the version-in-route rule,
+  // and using it would make this probe read as that rule misfiring.
+  "**[DP-VERSION-09] Documentation changed retroactively on a published version** -- `main.tsp:18`",
   // Non-DP rule-ID families. The agent really does use the bracketed
   // convention for cross-cutting IDs -- SEC-SECRET-DETECT was observed in a
   // live run -- so a grader that only knows the DP-XXX-NN shape silently

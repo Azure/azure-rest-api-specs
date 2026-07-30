@@ -215,6 +215,85 @@ Do raise, as a suggestion, a preview-to-preview break that looks unintentional
   confirm; this is a case where reading the emitted swagger as evidence is
   required, not optional.
 
+### DP-VERSION-04: Version segments in newly-added routes
+
+- **Rule ID:** `DP-VERSION-04`
+- **Severity:** Blocking permitted, but only for a genuinely new route -- see below
+- **Upstream anchor:** `versioning-no-version-in-path` --
+  ":no_entry: **DO NOT** include a version number segment in any operation path."
+
+The api-version belongs in a query parameter, not the path. A path segment like
+`/v1/` or `/v2.0/` pins every caller to a version at the URL level, which is the
+opposite of how Azure services version.
+
+**Only flag a version-like path segment on a route this PR adds or modifies.**
+That restriction is the whole rule, so apply it before anything else.
+
+#### Why the restriction exists
+
+This guideline had a lint rule proposed for it. The rule was **withdrawn**: it
+fired on 254 sites across the spec corpus and **every single one was
+unfixable**, because renaming a published route is a breaking change. A finding
+nobody can act on is noise, however correct it is.
+
+What a linter cannot see, and you can, is **which routes are new**. A linter is
+handed one compiled program with no notion of history, so an existing `/v2/` and
+a brand-new `/v3/` look identical to it. You read the PR diff. A new API
+introducing `/v1/` is a real, actionable finding -- the author can still change
+it, and it costs nothing today and a major version later. That is the entire
+value you add here, so spend your effort on the new/pre-existing distinction
+rather than on detecting the segment.
+
+See
+[`data-plane-linter-rule-coverage.md`](data-plane-linter-rule-coverage.md)
+🚷 for the measurement.
+
+#### Stay silent when
+
+- **The route already exists.** Not in the diff, not your business. Changing it
+  is a `DP-VERSION-01` breaking change, so the "fix" would be worse than the
+  defect.
+- **An external standard mandates the segment.** Some services implement a
+  wire protocol they do not own, and the path shape is a conformance
+  requirement rather than a design choice. Known examples -- container
+  registries carrying `/v2/` from the **OCI Distribution Spec**, catalog
+  services carrying `/atlas/v2/` for **Apache Atlas** compatibility.
+
+  Treat those as **illustrations of the pattern, not an allowlist**. The
+  question is never "is this service on the list" but "is this segment dictated
+  by a protocol the service must conform to". A spec implementing a documented
+  third-party protocol is the general case; those two are simply the instances
+  seen so far.
+
+- **The spec documents such a rationale.** Per the normative-strength rule in
+  [`SKILL.md`](../SKILL.md), a plausible documented rationale means **no finding
+  at all** -- not a downgraded one. Do not report a Suggestion "consider
+  removing `/v2/`" to a spec whose `@doc` already explains that the OCI spec
+  requires it. Judge whether the stated rationale is plausible, not whether it
+  matches the default.
+
+#### Severity
+
+The upstream verb is `DO NOT`, so Blocking **is** permitted -- but only for a
+new route in a new or preview API, where the author can still act. Anything
+touching a shipped stable path is capped at Suggestion, because the fix is a
+breaking change and the trade-off is the author's to make, not yours.
+
+#### Caveat: this rule rests on an untested assumption
+
+**The premise -- that you can reliably tell a newly-added route from a
+pre-existing one -- is an assumption, not a demonstrated capability.** The
+information is available to you (you read the PR through the GitHub API, and
+`Step 1 -- Pin and classify` records both head and base SHA), but **nothing has
+yet tested whether you actually use it** for this judgment. The eval stimuli for
+this rule have never been executed.
+
+If a measured run shows the distinction cannot be made reliably, the honest
+conclusion is that this guideline has **no automated enforcement at all** --
+neither lint nor agent -- and that is a more useful thing to know than a rule
+that quietly reproduces the 254-unfixable-findings failure in a different
+costume. Do not paper over it.
+
 ---
 
 ## What this file does not cover

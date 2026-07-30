@@ -118,11 +118,42 @@ breaking-change or decorator findings on the most common stable-to-stable
 shape, and against treating terse documentation as suspicious. Both files are
 linter-clean without depending on the interlock.
 
+### `version-pairs/tn-standard-mandated-route/`
+
+Class 7, the linter→agent handoff. Every route carries a `/v2` prefix, applied
+at namespace level, and it is **identical in both versions** — this PR does not
+introduce it. The namespace `@doc` states that `/v2/` is fixed by the OCI
+Distribution Specification.
+
+Guards against: any `DP-VERSION-04` finding, at any severity. Two independent
+reasons each suffice — the route is pre-existing, so the "fix" would be a
+breaking change; and an external protocol dictates the shape.
+
+**This is the only fixture that tests the premise `DP-VERSION-04` rests on.**
+The lint rule for this guideline was withdrawn because all 254 corpus sites
+were unfixable; the agent's claim to it is *solely* that it can tell a new route
+from a pre-existing one. Paired with `new-route-version-segment/` in
+`eval-versioning.yaml`: an agent passing the positive while failing this one is
+not making the distinction, it is flagging every `/v2/` it sees — the withdrawn
+lint rule, reimplemented at higher cost. **Neither stimulus has ever been
+executed.**
+
 ## Positive fixtures — findings are expected
 
 The original fixtures are mostly dense capability probes. The two rationale
 fixtures are deliberately sparse: each has one supported design finding amid
 otherwise conventional surface.
+
+`version-pairs/new-route-version-segment/` extends that pattern to versioning,
+and is deliberately the hardest positive in the corpus. Its `/v2/` route carries
+a fluent justification — the evaluation engine is versioned independently, so
+callers pin the engine they tested against — that is *plausible but invalid*: it
+describes an internal design preference, not conformance to a protocol the
+service does not control. `DP-VERSION-04` grants an exception only for the
+latter. The fixture therefore tests whether the reviewer **evaluates** a stated
+rationale or merely **detects** one, which is the failure mode the corpus review
+identified when it found that a defensive paragraph was, in practice, a reliable
+signal of a true negative. Here it is attached to a real defect.
 
 | Fixture                                            | Seeded                                                                                                                                                                                                                                         | Consumed by                        |
 | -------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------- |
@@ -136,6 +167,7 @@ otherwise conventional surface.
 | `typespec-data-plane/notification-routing.tsp`     | Exactly one `DP-VIS-01`: a durable, non-secret `routingLabel` is accepted on writes but never returned. Five multi-line docs include a confident caller-ownership rationale. A count grader rejects any second finding before `### Questions`. | `eval-visibility-and-secrets.yaml` |
 | `typespec-data-plane/unpaged-search-rationale.tsp` | Exactly one `DP-PAGE-01`: an unbounded search result has no paging contract. Five multi-line docs include a snapshot-consistency and common-case rationale that does not make large result sets enumerable.                                    | `eval-lro-and-paging.yaml`         |
 | `version-pairs/stable-removed-property/`           | `DP-VERSION-01` ×4 (type `int32`→`float64`, property removed, open union closed and a member dropped, optional request property made required) and `DP-VERSION-03` (no `@added`/`@removed`/`@renamedFrom` anywhere)                            | `eval-versioning.yaml`             |
+| `version-pairs/new-route-version-segment/`         | Exactly one `DP-VERSION-04`: the 2026-01-01 version adds `evaluate` at `/v2/flags:evaluate`, carrying `@added`, with no counterpart in 2025-01-01. Its `@doc` offers a confident but invalid rationale — see below.                            | `eval-versioning.yaml`             |
 
 ## Compilation
 
