@@ -171,11 +171,11 @@ model JobUpdateOptions {
 @added(QuantumWorkspaceAPIVersion.v2025_09_01_preview)
 model JobUpdateResponse {
   /** The name of the job. */
-  name?: string;
+  name: string;
 
   /** Priority of job. */
   priority?: Priority;
 
   /** List of user-supplied tags associated with the job. */
-  tags?: string[];
+  tags: string[];
 }
