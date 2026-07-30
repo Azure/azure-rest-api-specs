@@ -1565,5 +1565,5 @@ directive:
   - suppress: RequiredPropertiesMissingInResourceModel
     from: managedClusters.json
     where: $.definitions.OperationStatusResult
-    reason: OperationStatusResult is an async-operation-status response envelope, not an ARM tracked or proxy resource. It inherits `id` and `name` from the ARM common OperationStatusResult; the tracked-resource-shape check (name/id/type readOnly) does not apply.
+    reason: OperationStatusResult is an async-operation-status response envelope, not an ARM tracked or proxy resource. It locally declares the ARM common OperationStatusResult fields and adds AKS-specific read-only fields. Therefore, the tracked-resource requirement for read-only name/id/type properties does not apply.
 ```
