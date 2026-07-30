@@ -36,6 +36,7 @@ union RLEnvironmentDiskImageConversionStatus {
 model RLEnvironment {
   @doc("Hosted RLE environment identifier, assigned by the service.")
   @key("environmentId")
+  @encodedName("application/json", "id")
   @visibility(Lifecycle.Read)
   environmentId: string;
 
@@ -255,8 +256,10 @@ model RLEStepResult {
 @doc("Snapshot returned by the RLE environment `state` endpoint.")
 model RLEnvironmentState {
   @doc("Current episode identifier, when one is active.")
+  @encodedName("application/json", "episode_id")
   episodeId?: string;
 
   @doc("Number of completed steps in the current episode.")
+  @encodedName("application/json", "step_count")
   stepCount?: int32;
 }
