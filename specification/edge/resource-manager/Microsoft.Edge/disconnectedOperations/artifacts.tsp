@@ -4,7 +4,7 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./disconnectedOperations.tsp";
-import "../Microsoft.Edge.Shared/common.tsp";
+import "./shared/common.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
