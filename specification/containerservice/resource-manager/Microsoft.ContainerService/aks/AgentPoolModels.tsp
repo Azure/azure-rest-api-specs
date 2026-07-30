@@ -1312,3 +1312,69 @@ model AgentPoolDeleteMachinesParameter {
    */
   machineNames: string[];
 }
+
+/**
+ * Agent pool.
+ */
+@added(Versions.v2026_06_02_preview)
+model AgentPoolUpdate {
+  /**
+   * Properties for the agent pool.
+   */
+  properties?: AgentPoolUpdateProperties;
+}
+
+/**
+ * Properties for the agent pool.
+ */
+@added(Versions.v2026_06_02_preview)
+model AgentPoolUpdateProperties {
+  /**
+   * Number of agents (VMs) to host docker containers.
+   */
+  count?: int32;
+
+  /**
+   * Specifications on VirtualMachines agent pool.
+   */
+  virtualMachinesProfile?: AgentPoolUpdateVirtualMachinesProfile;
+}
+
+/**
+ * Specifications on VirtualMachines agent pool.
+ */
+@added(Versions.v2026_06_02_preview)
+model AgentPoolUpdateVirtualMachinesProfile {
+  /**
+   * Specifications on how to scale a VirtualMachines agent pool.
+   */
+  scale?: AgentPoolUpdateScaleProfile;
+}
+
+/**
+ * Specifications on how to scale a VirtualMachines agent pool.
+ */
+@added(Versions.v2026_06_02_preview)
+model AgentPoolUpdateScaleProfile {
+  /**
+   * Specifications on how to scale the VirtualMachines agent pool to a fixed size.
+   */
+  @identifiers(#[])
+  manual?: AgentPoolUpdateManualScaleProfile[];
+}
+
+/**
+ * Specifications on number of machines.
+ */
+@added(Versions.v2026_06_02_preview)
+model AgentPoolUpdateManualScaleProfile {
+  /**
+   * VM size that AKS will use when creating and scaling e.g. 'Standard_E4s_v3', 'Standard_E16s_v3' or 'Standard_D16s_v5'.
+   */
+  size?: string;
+
+  /**
+   * Number of nodes.
+   */
+  count?: int32;
+}

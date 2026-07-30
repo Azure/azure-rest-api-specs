@@ -4378,6 +4378,73 @@ model SubResource {
 }
 
 /**
+ * The current status of an async operation.
+ */
+model OperationStatusResult {
+  /**
+   * Fully qualified ID for the async operation.
+   */
+  id?: Azure.Core.armResourceIdentifier;
+
+  /**
+   * Name of the async operation.
+   */
+  name?: string;
+
+  /**
+   * Operation status.
+   */
+  status: string;
+
+  /**
+   * Percent of the operation that is complete.
+   */
+  @minValue(0)
+  @maxValue(100)
+  percentComplete?: float64;
+
+  /**
+   * The start time of the operation.
+   */
+  startTime?: utcDateTime;
+
+  /**
+   * The end time of the operation.
+   */
+  endTime?: utcDateTime;
+
+  /**
+   * The operations list.
+   */
+  operations?: OperationStatusResult[];
+
+  /**
+   * If present, details of the operation error.
+   */
+  error?: Azure.ResourceManager.CommonTypes.ErrorDetail;
+
+  /**
+   * Fully qualified ID of the resource against which the original async operation was started.
+   */
+  @visibility(Lifecycle.Read)
+  resourceId?: Azure.Core.armResourceIdentifier;
+
+  /**
+   * The type of the operation.
+   */
+  @added(Versions.v2026_06_02_preview)
+  @visibility(Lifecycle.Read)
+  operationType?: string;
+
+  /**
+   * The type of the suboperation.
+   */
+  @added(Versions.v2026_06_02_preview)
+  @visibility(Lifecycle.Read)
+  subOperationType?: string;
+}
+
+/**
  * The operations list. It contains an URL link to get the next set of results.
  */
 model OperationStatusResultList is Azure.Core.Page<OperationStatusResult>;
