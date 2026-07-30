@@ -19,7 +19,34 @@ using Microsoft.ContainerService;
 @@clientName(ListBootstrapDataRequest, "ListBootstrapDataContent", "csharp");
 
 // .NET SDK naming: "Data" suffix is reserved for ResourceData/TrackedResourceData types.
-@@clientName(PoolBootstrapData, "PoolBootstrapInfo", "csharp");
+@@clientName(PoolBootstrapData, "AgentPoolBootstrapInfo", "csharp");
+
+// .NET SDK naming: add RP/service context prefix for IntelliSense clarity.
+@@clientName(
+  AllowedSubject,
+  "ManagedClusterLoadBalancerAllowedSubject",
+  "csharp"
+);
+@@clientName(
+  AlertConfiguration,
+  "ContainerServiceAlertConfiguration",
+  "csharp"
+);
+@@clientName(
+  AlertConfigurationMode,
+  "ContainerServiceAlertConfigurationMode",
+  "csharp"
+);
+@@clientName(
+  AlertConfigurationProperties,
+  "ContainerServiceAlertConfigurationProperties",
+  "csharp"
+);
+@@clientName(
+  AlertConfigurationProvisioningState,
+  "ContainerServiceAlertConfigurationProvisioningState",
+  "csharp"
+);
 
 @@clientName(Microsoft.ContainerService.IPFamily, "IpFamily", "javascript");
 
