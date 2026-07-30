@@ -118,6 +118,38 @@ model ParentServiceGroupProperties {
 model ServiceGroupCollectionResponse is Azure.Core.Page<ServiceGroup>;
 
 /**
+ * Request body for the listAncestors action.
+ */
+@added(Versions.v2026_03_01_preview)
+model ListAncestorsRequest {
+  /**
+   * An opaque pagination token returned in the previous response's skipToken field.
+   * Include this value in the request body to fetch the next page of results.
+   */
+  skipToken?: string;
+}
+
+/**
+ * Response for the listAncestors action. Contains a page of ancestor service
+ * groups plus an opaque skipToken for fetching subsequent pages.
+ */
+@added(Versions.v2026_03_01_preview)
+model ListAncestorsResponse {
+  /**
+   * The page of ancestor service groups.
+   */
+  value: ServiceGroup[];
+
+  /**
+   * Opaque pagination token. When present, more results are available; callers
+   * must re-POST to the same listAncestors URL with this value in the request
+   * body to fetch the next page. When absent, the current page is the last page.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "skipToken is the standard Azure OData paging continuation token, not a secret. The linter flags it due to the 'Token' substring in the name; the property carries opaque pagination state and is not sensitive."
+  skipToken?: string;
+}
+
+/**
  * Request body for the listDescendants action.
  */
 @added(Versions.v2026_03_01_preview)

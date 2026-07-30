@@ -282,7 +282,7 @@
         "tags": [
           "ServiceGroups"
         ],
-        "description": "Get the details of the serviceGroup's ancestors",
+        "description": "Get the details of the serviceGroup's ancestors.\n\nThis is a paginated POST action. When the response contains a skipToken,\nmore results are available; callers must re-POST to the same listAncestors\nURL with that skipToken value in the request body to fetch the next page.\nWhen skipToken is absent, the current page is the last page. SDKs do not\nnatively support POST-based pagination, so callers must loop manually.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -294,13 +294,22 @@
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9\\-_().]{1,90}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ListAncestorsRequest"
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ServiceGroupCollectionResponse"
+              "$ref": "#/definitions/ListAncestorsResponse"
             }
           },
           "default": {
@@ -419,6 +428,36 @@
     }
   },
   "definitions": {
+    "ListAncestorsRequest": {
+      "type": "object",
+      "description": "Request body for the listAncestors action.",
+      "properties": {
+        "skipToken": {
+          "type": "string",
+          "description": "An opaque pagination token returned in the previous response's skipToken field.\nInclude this value in the request body to fetch the next page of results."
+        }
+      }
+    },
+    "ListAncestorsResponse": {
+      "type": "object",
+      "description": "Response for the listAncestors action. Contains a page of ancestor service\ngroups plus an opaque skipToken for fetching subsequent pages.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The page of ancestor service groups.",
+          "items": {
+            "$ref": "#/definitions/ServiceGroup"
+          }
+        },
+        "skipToken": {
+          "type": "string",
+          "description": "Opaque pagination token. When present, more results are available; callers\nmust re-POST to the same listAncestors URL with this value in the request\nbody to fetch the next page. When absent, the current page is the last page."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "ListDescendantsRequest": {
       "type": "object",
       "description": "Request body for the listDescendants action.",
@@ -591,27 +630,6 @@
         {
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
-      ]
-    },
-    "ServiceGroupCollectionResponse": {
-      "type": "object",
-      "description": "Response holding an array of service groups and a nextLink that supports pagination",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The ServiceGroup items on this page",
-          "items": {
-            "$ref": "#/definitions/ServiceGroup"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "ServiceGroupMember": {

@@ -79,10 +79,33 @@ interface ServiceGroups {
   /**
    * Get the details of the serviceGroup's ancestors
    */
+  @removed(Versions.v2026_03_01_preview)
+  @sharedRoute
   listAncestors is ArmResourceActionSync<
     ServiceGroup,
     void,
     ArmResponse<ServiceGroupCollectionResponse>,
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
+  >;
+
+  /**
+   * Get the details of the serviceGroup's ancestors.
+   *
+   * This is a paginated POST action. When the response contains a skipToken,
+   * more results are available; callers must re-POST to the same listAncestors
+   * URL with that skipToken value in the request body to fetch the next page.
+   * When skipToken is absent, the current page is the last page. SDKs do not
+   * natively support POST-based pagination, so callers must loop manually.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "operationId must be pinned so SDK method name stays 'ListAncestors' across the versioned reshape."
+  @added(Versions.v2026_03_01_preview)
+  @operationId("ServiceGroups_ListAncestors")
+  @action("listAncestors")
+  @sharedRoute
+  listAncestorsPaged is ArmResourceActionSync<
+    ServiceGroup,
+    ListAncestorsRequest,
+    ArmResponse<ListAncestorsResponse>,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
   >;
 

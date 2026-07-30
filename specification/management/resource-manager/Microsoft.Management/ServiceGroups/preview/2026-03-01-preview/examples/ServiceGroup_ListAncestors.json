@@ -1,12 +1,12 @@
 {
   "parameters": {
     "api-version": "2026-03-01-preview",
-    "serviceGroupName": "20000000-0001-0000-0000-000000000000"
+    "serviceGroupName": "20000000-0001-0000-0000-000000000000",
+    "body": {}
   },
   "responses": {
     "200": {
       "body": {
-        "nextLink": "https://abc.def.com/providers/Microsoft.Management/serviceGroups/20000000-0001-0000-0000-000000000000/listAncestors?api-version=2026-03-01-preview&skipToken=xyz",
         "value": [
           {
             "name": "Ancestor1",
@@ -25,10 +25,12 @@
               "displayName": "ServiceGroup Ancestor2"
             }
           }
-        ]
+        ],
+        "skipToken": "eyJsYXN0TGVmdEluZGV4Ijo0LjAsInJpZ2h0SW5kZXgiOjguMH0="
       }
     }
   },
   "operationId": "ServiceGroups_ListAncestors",
   "title": "ListServiceGroupAncestors"
 }
+
