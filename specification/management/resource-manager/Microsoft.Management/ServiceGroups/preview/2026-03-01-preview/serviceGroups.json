@@ -366,6 +366,56 @@
           }
         }
       }
+    },
+    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/listMembers": {
+      "post": {
+        "operationId": "ServiceGroups_ListMembers",
+        "tags": [
+          "ServiceGroups"
+        ],
+        "description": "List all members of the serviceGroup, including service groups, containers, and resources.\n\nThis is a paginated POST action. When the response contains a skipToken,\nmore results are available; callers must re-POST to the same listMembers\nURL with that skipToken value in the request body to fetch the next page.\nWhen skipToken is absent, the current page is the last page. SDKs do not\nnatively support POST-based pagination, so callers must loop manually.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "serviceGroupName",
+            "in": "path",
+            "description": "ServiceGroup Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9\\-_().]{1,90}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ListMembersRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ListMembersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListServiceGroupMembers": {
+            "$ref": "./examples/ServiceGroup_ListMembers.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -393,6 +443,36 @@
         "skipToken": {
           "type": "string",
           "description": "Opaque pagination token. When present, more results are available; callers\nmust re-POST to the same listDescendants URL with this value in the request\nbody to fetch the next page. When absent, the current page is the last page."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ListMembersRequest": {
+      "type": "object",
+      "description": "Request body for the listMembers action.",
+      "properties": {
+        "skipToken": {
+          "type": "string",
+          "description": "An opaque pagination token returned in the previous response's skipToken field.\nInclude this value in the request body to fetch the next page of results."
+        }
+      }
+    },
+    "ListMembersResponse": {
+      "type": "object",
+      "description": "Response for the listMembers action. Contains a page of service group members\nplus an opaque skipToken for fetching subsequent pages.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The page of service group members.",
+          "items": {
+            "$ref": "#/definitions/ServiceGroupMember"
+          }
+        },
+        "skipToken": {
+          "type": "string",
+          "description": "Opaque pagination token. When present, more results are available; callers\nmust re-POST to the same listMembers URL with this value in the request\nbody to fetch the next page. When absent, the current page is the last page."
         }
       },
       "required": [
@@ -459,6 +539,30 @@
         ]
       }
     },
+    "RelationshipType": {
+      "type": "string",
+      "description": "The type of relationship between a service group and its member.",
+      "enum": [
+        "Microsoft.Relationships/serviceGroupMembers",
+        "Microsoft.Relationships/contains"
+      ],
+      "x-ms-enum": {
+        "name": "RelationshipType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ServiceGroupMembers",
+            "value": "Microsoft.Relationships/serviceGroupMembers",
+            "description": "The member was explicitly added to the service group."
+          },
+          {
+            "name": "Contains",
+            "value": "Microsoft.Relationships/contains",
+            "description": "The member is included transitively because its container (for example, a\nresource group or subscription) is a direct member of the service group."
+          }
+        ]
+      }
+    },
     "ServiceGroup": {
       "type": "object",
       "description": "The serviceGroup details.",
@@ -509,6 +613,61 @@
       "required": [
         "value"
       ]
+    },
+    "ServiceGroupMember": {
+      "type": "object",
+      "description": "A member of a service group. Members can be service groups, containers\n(subscriptions, resource groups), or individual resources.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The fully qualified ID of the member. For example,\n/providers/Microsoft.Management/serviceGroups/child-sg,\n/subscriptions/{subId}/resourceGroups/{rgName}, or\n/subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.KeyVault/vaults/{vaultName}.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The resource type of the member. For example,\nMicrosoft.Management/serviceGroups, Microsoft.Resources/resourceGroups, or\nMicrosoft.KeyVault/vaults.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/ServiceGroupMemberProperties",
+          "description": "The properties of the service group member.",
+          "readOnly": true
+        }
+      }
+    },
+    "ServiceGroupMemberParent": {
+      "type": "object",
+      "description": "The parent service group of a service group member.",
+      "properties": {
+        "serviceGroupId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The fully qualified ID of the parent service group. For example,\n/providers/Microsoft.Management/serviceGroups/root-sg.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Management/serviceGroups"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "ServiceGroupMemberProperties": {
+      "type": "object",
+      "description": "The properties of a service group member.",
+      "properties": {
+        "relationshipType": {
+          "$ref": "#/definitions/RelationshipType",
+          "description": "The relationship type between the service group and this member. Absent\nwhen the member is itself a descendant service group (Microsoft.Management/serviceGroups).",
+          "readOnly": true
+        },
+        "parent": {
+          "$ref": "#/definitions/ServiceGroupMemberParent",
+          "description": "The parent service group under which this member is enumerated.",
+          "readOnly": true
+        }
+      }
     },
     "ServiceGroupProperties": {
       "type": "object",

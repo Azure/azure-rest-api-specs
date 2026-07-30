@@ -102,18 +102,32 @@ interface ServiceGroups {
     ArmResponse<ListDescendantsResponse>,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
   >;
+
+  /**
+   * List all members of the serviceGroup, including service groups, containers, and resources.
+   *
+   * This is a paginated POST action. When the response contains a skipToken,
+   * more results are available; callers must re-POST to the same listMembers
+   * URL with that skipToken value in the request body to fetch the next page.
+   * When skipToken is absent, the current page is the last page. SDKs do not
+   * natively support POST-based pagination, so callers must loop manually.
+   */
+  @added(Versions.v2026_03_01_preview)
+  listMembers is ArmResourceActionSync<
+    ServiceGroup,
+    ListMembersRequest,
+    ArmResponse<ListMembersResponse>,
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
+  >;
 }
 
 @@doc(ServiceGroup.name, "ServiceGroup Name.");
-@@doc(
-  ServiceGroup.properties,
+@@doc(ServiceGroup.properties,
   "ServiceGroup creation request body parameters."
 );
-@@doc(
-  ServiceGroups.createOrUpdateServiceGroup::parameters.resource,
+@@doc(ServiceGroups.createOrUpdateServiceGroup::parameters.resource,
   "ServiceGroup creation parameters"
 );
-@@doc(
-  ServiceGroups.updateServiceGroup::parameters.properties,
+@@doc(ServiceGroups.updateServiceGroup::parameters.properties,
   "ServiceGroup update parameters"
 );

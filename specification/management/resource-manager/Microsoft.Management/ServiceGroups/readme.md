@@ -66,6 +66,14 @@ suppressions:
     reason: skipToken is the standard Azure OData paging continuation token, not a secret. The linter flags it due to the "Token" substring in the name; the property carries opaque pagination state and is not sensitive.
     from: serviceGroups.json
     where: $.definitions.ListDescendantsResponse.properties.skipToken
+  - code: XMSSecretInResponse
+    reason: skipToken is the standard Azure OData paging continuation token, not a secret. The linter flags it due to the "Token" substring in the name; the property carries opaque pagination state and is not sensitive.
+    from: serviceGroups.json
+    where: $.definitions.ListMembersRequest.properties.skipToken
+  - code: XMSSecretInResponse
+    reason: skipToken is the standard Azure OData paging continuation token, not a secret. The linter flags it due to the "Token" substring in the name; the property carries opaque pagination state and is not sensitive.
+    from: serviceGroups.json
+    where: $.definitions.ListMembersResponse.properties.skipToken
 ```
 ---
 
