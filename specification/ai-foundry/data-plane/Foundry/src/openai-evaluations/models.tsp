@@ -112,23 +112,26 @@ union BenchmarkName {
   /** FrontierScience — frontier scientific reasoning. */
   builtinFrontierScience: "builtin.frontierscience",
 
+  /** IFEval — instruction-following evaluation. */
+  builtinIFEval: "builtin.ifeval",
+
   /** MuSR — multi-step reasoning. */
   builtinMuSR: "builtin.musr",
 
   /** TruthfulQA — truthfulness evaluation. */
   builtinTruthfulQA: "builtin.truthful_qa",
 
-  /** GPQA Diamond via inspect_ai framework. */
-  builtinInspectAIGPQADiamond: "builtin.inspect_ai.gpqa_diamond",
+  /** AIME 2025 via inspect_ai framework. */
+  builtinInspectAIAIME2025: "builtin.inspect_ai.aime2025",
 
-  /** ChemBench via inspect_ai framework. */
+  /** BrowseComp via inspect_ai framework — web browsing agent benchmark. */
+  builtinInspectAIBrowseComp: "builtin.inspect_ai.browse_comp",
+
+  /** ChemBench via inspect_ai framework — chemistry reasoning. */
   builtinInspectAIChemBench: "builtin.inspect_ai.chembench",
 
-  /** AIME 2025 via inspect_ai framework. */
-  builtinInspectAIAIME2025: "builtin.inspect_ai.aime_2025",
-
-  /** MuSR via inspect_ai framework. */
-  builtinInspectAIMuSR: "builtin.inspect_ai.musr",
+  /** Tau2-Bench Telecom via inspect_ai framework — dual-agent telecom benchmark. */
+  builtinInspectAITau2Telecom: "builtin.inspect_ai.tau2_telecom",
 }
 
 /** Data source configuration for benchmark evaluations. */
