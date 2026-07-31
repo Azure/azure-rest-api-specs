@@ -41,6 +41,72 @@
   "tags": [],
   "paths": {},
   "definitions": {
+    "EventStatus": {
+      "type": "string",
+      "description": "The status of the event.",
+      "enum": [
+        "Scheduled",
+        "Started",
+        "Completed",
+        "Cancelled",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "EventStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Scheduled",
+            "value": "Scheduled",
+            "description": "The event is scheduled."
+          },
+          {
+            "name": "Started",
+            "value": "Started",
+            "description": "The event has started."
+          },
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "The event completed."
+          },
+          {
+            "name": "Cancelled",
+            "value": "Cancelled",
+            "description": "The event was cancelled."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The event failed."
+          }
+        ]
+      }
+    },
+    "ResourceType": {
+      "type": "string",
+      "description": "The resource type of the event.",
+      "enum": [
+        "ManagedCluster",
+        "AgentPool"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ManagedCluster",
+            "value": "ManagedCluster",
+            "description": "The event applies to a managed cluster."
+          },
+          {
+            "name": "AgentPool",
+            "value": "AgentPool",
+            "description": "The event applies to an agent pool."
+          }
+        ]
+      }
+    },
     "ScheduledEvent": {
       "type": "object",
       "description": "Scheduled event.",
@@ -73,19 +139,8 @@
           "description": "The source of the event."
         },
         "eventStatus": {
-          "type": "string",
-          "description": "The status of the event.",
-          "enum": [
-            "Scheduled",
-            "Started",
-            "Completed",
-            "Cancelled",
-            "Failed"
-          ],
-          "x-ms-enum": {
-            "name": "eventStatus",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/EventStatus",
+          "description": "The status of the event."
         },
         "eventDetails": {
           "type": "string",
@@ -94,7 +149,7 @@
         "scheduledTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The time of the event is scheduled to start."
+          "description": "The time the event is scheduled to start."
         },
         "startTime": {
           "type": "string",
@@ -126,16 +181,8 @@
           }
         },
         "resourceType": {
-          "type": "string",
-          "description": "The resource type of the event.",
-          "enum": [
-            "ManagedCluster",
-            "AgentPool"
-          ],
-          "x-ms-enum": {
-            "name": "ResourceType",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ResourceType",
+          "description": "The resource type of the event."
         }
       }
     }
