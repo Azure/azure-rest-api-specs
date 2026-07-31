@@ -4961,7 +4961,8 @@
       "description": "SSH access method of an agent pool.",
       "enum": [
         "LocalUser",
-        "Disabled"
+        "Disabled",
+        "EntraId"
       ],
       "x-ms-enum": {
         "name": "AgentPoolSSHAccess",
@@ -4976,6 +4977,11 @@
             "name": "Disabled",
             "value": "Disabled",
             "description": "SSH service will be turned off on the node."
+          },
+          {
+            "name": "EntraId",
+            "value": "EntraId",
+            "description": "SSH to node with EntraId integration. More information can be found under https://aka.ms/aks/ssh/aad"
           }
         ]
       }
