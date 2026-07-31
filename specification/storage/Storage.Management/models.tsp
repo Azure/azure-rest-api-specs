@@ -6950,10 +6950,6 @@ model ContextCacheUpdate {
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 
   /** The managed service identity. */
-  @typeChangedFrom(
-    Versions.v2026_07_01,
-    Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentity
-  )
   identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 
   /** The updatable properties of the Context Cache. */

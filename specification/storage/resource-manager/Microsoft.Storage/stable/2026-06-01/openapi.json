@@ -602,6 +602,12 @@
           },
           "Create a Context Cache": {
             "$ref": "./examples/StorageContextCacheCRUD/ContextCaches_CreateOrUpdate.json"
+          },
+          "Create a Context Cache with system-assigned and user-assigned identity": {
+            "$ref": "./examples/StorageContextCacheCRUD/ContextCaches_CreateOrUpdate_SystemAssignedUserAssigned.json"
+          },
+          "Create a Context Cache with user-assigned identity": {
+            "$ref": "./examples/StorageContextCacheCRUD/ContextCaches_CreateOrUpdate_UserAssignedIdentity.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -10004,7 +10010,7 @@
           "description": "The resource-specific properties for this resource."
         },
         "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/SystemAssignedServiceIdentity",
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
         }
       },
@@ -10291,7 +10297,7 @@
           }
         },
         "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/SystemAssignedServiceIdentity",
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identity."
         },
         "properties": {

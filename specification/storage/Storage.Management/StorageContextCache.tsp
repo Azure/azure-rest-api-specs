@@ -31,13 +31,6 @@ model ContextCache is Azure.ResourceManager.TrackedResource<
   ...ManagedServiceIdentityProperty;
 }
 
-// Keep 2026-06-01 as SystemAssigned and broaden from 2026-07-01.
-@@typeChangedFrom(
-  ContextCache.identity,
-  Versions.v2026_07_01,
-  Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentity
-);
-
 @armResourceOperations
 @added(Versions.v2026_06_01)
 interface ContextCaches {
