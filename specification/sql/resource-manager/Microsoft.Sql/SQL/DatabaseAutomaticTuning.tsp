@@ -14,8 +14,10 @@ namespace Microsoft.Sql;
 /**
  * Database-level Automatic Tuning.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @singleton("current")
 @parentResource(Database)
+@Azure.ResourceManager.Legacy.feature(Features.DatabaseAutomaticTuning)
 model DatabaseAutomaticTuning
   is Azure.ResourceManager.ProxyResource<DatabaseAutomaticTuningProperties> {
   ...ResourceNameParameter<
@@ -26,7 +28,9 @@ model DatabaseAutomaticTuning
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
+@Azure.ResourceManager.Legacy.feature(Features.DatabaseAutomaticTuning)
 interface DatabaseAutomaticTunings {
   /**
    * Gets a database's automatic tuning.
@@ -47,6 +51,7 @@ interface DatabaseAutomaticTunings {
 
 @@doc(DatabaseAutomaticTuning.name, "");
 @@doc(DatabaseAutomaticTuning.properties, "Resource properties.");
-@@doc(DatabaseAutomaticTunings.update::parameters.properties,
+@@doc(
+  DatabaseAutomaticTunings.update::parameters.properties,
   "The requested automatic tuning resource state."
 );

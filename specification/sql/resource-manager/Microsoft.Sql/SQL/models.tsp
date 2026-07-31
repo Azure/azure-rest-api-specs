@@ -3014,7 +3014,7 @@ union ServerWorkspaceFeature {
 }
 
 /**
- * Whether or not to restrict outbound network access for this server.  Value is optional but if passed in, must be 'Enabled', 'Disabled', or 'SecuredByPerimeter'
+ * Whether or not to restrict outbound network access for this server.  Value is optional but if passed in, must be 'Enabled' or 'Disabled'
  */
 union ServerNetworkAccessFlag {
   string,
@@ -3030,7 +3030,7 @@ union ServerNetworkAccessFlag {
   Disabled: "Disabled",
 
   /**
-   * The network security perimeter configuration rules allow or disallow public network access to the resource. Requires an associated network security perimeter.
+   * SecuredByPerimeter
    */
   SecuredByPerimeter: "SecuredByPerimeter",
 }
@@ -7515,6 +7515,8 @@ model DataWarehouseUserActivitiesProperties {
  * The properties of a deleted server.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "DeletedServer is a read-only proxy resource that represents a deleted server record. It has no provisioning lifecycle and does not support provisioning state."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.DeletedServers)
 model DeletedServerProperties {
   /**
    * The version of the deleted server.
