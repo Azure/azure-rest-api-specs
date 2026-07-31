@@ -1,0 +1,81 @@
+{
+  "title": "Create Ledger Entry",
+  "operationId": "CreateLedgerEntry",
+  "parameters": {
+    "api-version": "2026-07-31-preview",
+    "collectionId": "Collection1",
+    "tags": "tag1,tag2,tag3",
+    "waitForCommit": true,
+    "ledgerUri": "myledger.confidentialledger.azure.com",
+    "entry": {
+      "contents": "New ledger entry contents.",
+      "preHooks": [
+        {
+          "functionId": "myFunction1",
+          "properties": {
+            "arguments": [
+              "arg1",
+              "arg2"
+            ],
+            "exportedFunctionName": "main",
+            "runtimeOptions": {
+              "log_exception_details": true,
+              "max_cached_interpreters": 0,
+              "max_execution_time_ms": 0,
+              "max_heap_bytes": 0,
+              "max_stack_bytes": 0,
+              "return_exception_details": true
+            }
+          }
+        }
+      ],
+      "postHooks": [
+        {
+          "functionId": "myFunction2",
+          "properties": {
+            "arguments": [
+              "arg3",
+              "arg4"
+            ],
+            "exportedFunctionName": "main",
+            "runtimeOptions": {
+              "log_exception_details": true,
+              "max_cached_interpreters": 0,
+              "max_execution_time_ms": 0,
+              "max_heap_bytes": 0,
+              "max_stack_bytes": 0,
+              "return_exception_details": true
+            }
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "x-ms-ccf-transaction-id": "2.15"
+      },
+      "body": {
+        "collectionId": "subledger:0",
+        "receipt": {
+          "cert": "-----BEGIN CERTIFICATE-----\nMIIBwzCCAUmgAwIBAgIRAMRXRsojcLOzbz90rSp67xQwCgYIKoZIzj0EAwMwFjEU\nMBIGA1UEAwwLQ0NGIE5ldHdvcmswHhcNMjIxMTI1MTE1NzM1WhcNMjMwMjIzMTE1\nNzM0WjATMREwDwYDVQQDDAhDQ0YgTm9kZTB2MBAGByqGSM49AgEGBSuBBAAiA2IA\nBFjnt5PbiuXlBDdWWJvR1d0niMIzx6hxRCs06d8MUwG49UvdqRc8aY2eeCuoGupG\n9uWA3WBaZoe3QcqUr0+S+WLYXP0TYRx0xQncbKZgSWa3bcFNqaosw1KnjbLaSIRR\nJKNeMFwwCQYDVR0TBAIwADAdBgNVHQ4EFgQUHOauq1jxw2NJMh0UrzkrWi/Vuxkw\nHwYDVR0jBBgwFoAUSyn9seKhGp3n74by4boUVRXOpvcwDwYDVR0RBAgwBocEfwAA\nATAKBggqhkjOPQQDAwNoADBlAjBuhyVaon0EVXKUnO59acJVcfN8fYbz8keieiov\nOHqVqSCc60mdNGugn1kUmCKtHWYCMQDDMnOFtyeTfHPCo4n48nyoCHdaTVyS/XIF\n83P94iQITIiCX9ZDxf/eqc8rcEvm63A=\n-----END CERTIFICATE-----\n",
+          "leafComponents": {
+            "claimsDigest": "4f3f3e86d7a473c41a15d6d52e8f22d8625801e8b105fcf833a93f830474f7ef",
+            "commitEvidence": "ce:2.15:3cc2bfd0e14c9fb8b3d4838d3dce19704ca83fa04720e044512f25581fc9b0a7",
+            "writeSetDigest": "f71b60aa93a6ae36bfcadaf852b2eb43e7f868bd95053c84dd4b67d11c05d516"
+          },
+          "nodeId": "ff9bf39b7150510ad437977d7010aa733e718b407df755b52b961e4c3b2708fd",
+          "proof": [
+            {
+              "left": "65e4256d7e7cbff2723de58dc1d8931e4683a328e720ba7c784a82b65d027b4a"
+            }
+          ],
+          "signature": "MGYCMQCYbEjjClnK63cpkb+LBM4XFugq99zPM8KLN9yKvXwV576mXd3fyUOrF84HJbAbO6gCMQCiebUALQkaSixwh4q3l3v+rd9pgBnH2HZpnby6vvJLGkYBDUAdR0kyYV5OEJva6N0="
+        },
+        "state": "Ready",
+        "transactionId": "2.15"
+      }
+    }
+  }
+}
