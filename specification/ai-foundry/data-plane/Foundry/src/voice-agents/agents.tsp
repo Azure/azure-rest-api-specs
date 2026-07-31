@@ -115,10 +115,16 @@ model ResponsePolicy {
   @doc("Whether the voice agent provides an immediate acknowledgement before forwarding a request to a subagent.")
   immediate_ack?: boolean;
 
+  @doc("Instructions that guide how the voice agent phrases the immediate acknowledgement. Ignored when `immediate_ack` is not `true`. When omitted, the service uses its default phrasing.")
+  ack_instructions?: string;
+
   @doc("The number of seconds without subagent content or user input before the voice agent provides a gap-filling response.")
   @minValue(5)
   @maxValue(120)
   gap_filling_interval?: int32;
+
+  @doc("Instructions that guide how the voice agent phrases a gap-filling response. Ignored when `gap_filling_interval` is omitted. When omitted, the service uses its default phrasing.")
+  gap_filling_instructions?: string;
 }
 
 @doc("""
