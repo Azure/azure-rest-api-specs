@@ -521,7 +521,7 @@ union AgentPoolSSHAccess {
   /**
    * SSH to node with EntraId integration. More information can be found under https://aka.ms/aks/ssh/aad
    */
-  @added(Versions.v2026_06_02_preview)
+  @added(Versions.v2026_06_01)
   EntraId: "EntraId",
 }
 
