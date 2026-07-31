@@ -170,6 +170,9 @@ java:
 ```yaml
 directive:
   - suppress: IntegerTypeMustHaveFormat
+    from: administration.json
+    reason: KV uses format "unixtime", which is not supported by the linter at the moment.
+  - suppress: IntegerTypeMustHaveFormat
     from: securitydomain.json
     reason: KV uses format "unixtime", which is not supported by the linter at the moment.
   - suppress: IntegerTypeMustHaveFormat
