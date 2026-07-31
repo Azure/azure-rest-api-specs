@@ -178,6 +178,7 @@ using PaloAltoNetworks.Cloudngfw;
 @@clientName(MarketplaceDetails, "PanFirewallMarketplaceDetails", "csharp");
 @@clientName(MonitorLog, "MonitorLogConfiguration", "csharp");
 @@alternateType(MonitorLog.id, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(MonitorLogV2.dcrId, Azure.Core.armResourceIdentifier, "csharp");
 @@clientName(NetworkProfile, "FirewallNetworkProfile", "csharp");
 @@clientName(NetworkProfile.publicIps, "PublicIPs", "csharp");
 @@clientName(NetworkProfile.egressNatIp, "EgressNatIP", "csharp");

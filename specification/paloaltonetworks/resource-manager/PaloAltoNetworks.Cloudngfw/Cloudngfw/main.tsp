@@ -28,6 +28,7 @@ import "./FqdnListLocalRulestackResource.tsp";
 import "./LocalRulesResource.tsp";
 import "./PrefixListResource.tsp";
 import "./CustomCaptureConfigurationsFirewallResource.tsp";
+import "./LogIngestionSettingsResource.tsp";
 import "./routes.tsp";
 import "./client.tsp";
 

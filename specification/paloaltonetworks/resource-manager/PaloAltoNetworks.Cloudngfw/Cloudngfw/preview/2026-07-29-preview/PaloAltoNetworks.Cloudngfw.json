@@ -85,6 +85,9 @@
     },
     {
       "name": "CustomCaptureConfigurationsFirewallResources"
+    },
+    {
+      "name": "LogIngestionSettingsResources"
     }
   ],
   "paths": {
@@ -3361,6 +3364,220 @@
           },
           "Firewalls_getSupportInfo_MinimumSet_Gen": {
             "$ref": "./examples/Firewalls_getSupportInfo_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PaloAltoNetworks.Cloudngfw/firewalls/{firewallName}/logIngestionSettings": {
+      "get": {
+        "operationId": "LogIngestionSettingsResources_ListByFirewall",
+        "tags": [
+          "LogIngestionSettingsResources"
+        ],
+        "description": "List the Log Ingestion Settings under a firewall. The resource is a singleton (name is fixed to 'default'), so the response contains at most one entry.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "firewallName",
+            "in": "path",
+            "description": "Firewall resource name",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?![-_])(?!.*[-_]{2})(?!.*[-_]$)[a-zA-Z0-9][a-zA-Z0-9-]{0,127}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LogIngestionSettingsResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LogIngestionSettingsResources_ListByFirewall_MaximumSet_Gen": {
+            "$ref": "./examples/LogIngestionSettingsResources_ListByFirewall_MaximumSet_Gen.json"
+          },
+          "LogIngestionSettingsResources_ListByFirewall_MinimumSet_Gen": {
+            "$ref": "./examples/LogIngestionSettingsResources_ListByFirewall_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PaloAltoNetworks.Cloudngfw/firewalls/{firewallName}/logIngestionSettings/default": {
+      "get": {
+        "operationId": "LogIngestionSettingsResources_Get",
+        "tags": [
+          "LogIngestionSettingsResources"
+        ],
+        "description": "Get the Log Ingestion Settings for a firewall. Live read from the partner. Returns 200 OK with the current settings, or 404 when log ingestion has not been configured.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "firewallName",
+            "in": "path",
+            "description": "Firewall resource name",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?![-_])(?!.*[-_]{2})(?!.*[-_]$)[a-zA-Z0-9][a-zA-Z0-9-]{0,127}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LogIngestionSettingsResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LogIngestionSettingsResources_Get_MaximumSet_Gen": {
+            "$ref": "./examples/LogIngestionSettingsResources_Get_MaximumSet_Gen.json"
+          },
+          "LogIngestionSettingsResources_Get_MinimumSet_Gen": {
+            "$ref": "./examples/LogIngestionSettingsResources_Get_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "LogIngestionSettingsResources_CreateOrUpdate",
+        "tags": [
+          "LogIngestionSettingsResources"
+        ],
+        "description": "Create or update the Log Ingestion Settings for a firewall. SYNC — forwards to the partner and returns 200 OK (or 201 Created on first create) with the persisted settings. commonDestination.monitorConfigurationsV2 (dcrId, logIngestionEndpoint, dcrImmutableId, streamName) drives where the firewall logs are ingested.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "firewallName",
+            "in": "path",
+            "description": "Firewall resource name",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?![-_])(?!.*[-_]{2})(?!.*[-_]$)[a-zA-Z0-9][a-zA-Z0-9-]{0,127}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LogIngestionSettingsResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'LogIngestionSettingsResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/LogIngestionSettingsResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'LogIngestionSettingsResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/LogIngestionSettingsResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LogIngestionSettingsResources_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/LogIngestionSettingsResources_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "LogIngestionSettingsResources_CreateOrUpdate_MinimumSet_Gen": {
+            "$ref": "./examples/LogIngestionSettingsResources_CreateOrUpdate_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "LogIngestionSettingsResources_Delete",
+        "tags": [
+          "LogIngestionSettingsResources"
+        ],
+        "description": "Delete (clear) the Log Ingestion Settings for a firewall. SYNC — soft-clears the DCR destination on the partner (logs have no partner delete API). Returns 200 on success or 204 when nothing is configured.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "firewallName",
+            "in": "path",
+            "description": "Firewall resource name",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?![-_])(?!.*[-_]{2})(?!.*[-_]$)[a-zA-Z0-9][a-zA-Z0-9-]{0,127}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LogIngestionSettingsResources_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/LogIngestionSettingsResources_Delete_MaximumSet_Gen.json"
+          },
+          "LogIngestionSettingsResources_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/LogIngestionSettingsResources_Delete_MinimumSet_Gen.json"
           }
         }
       }
@@ -7689,6 +7906,97 @@
         }
       }
     },
+    "LogDestinationV2": {
+      "type": "object",
+      "description": "Log Destination for the Azure Monitor Log Ingestion (Data Collection Rule) method. Carries the DCR-based `monitorConfigurationsV2`.",
+      "properties": {
+        "storageConfigurations": {
+          "$ref": "#/definitions/StorageAccount",
+          "description": "Storage account configurations"
+        },
+        "eventHubConfigurations": {
+          "$ref": "#/definitions/EventHub",
+          "description": "Event Hub configurations"
+        },
+        "monitorConfigurationsV2": {
+          "$ref": "#/definitions/MonitorLogV2",
+          "description": "Azure Monitor Log Ingestion (Data Collection Rule) configuration for this destination."
+        }
+      }
+    },
+    "LogIngestionSettingsProperties": {
+      "type": "object",
+      "description": "Log Ingestion Settings for a firewall (Azure Monitor Log Ingestion / Data Collection Rule based).",
+      "properties": {
+        "logType": {
+          "$ref": "#/definitions/LogType",
+          "description": "One of possible log type"
+        },
+        "logOption": {
+          "$ref": "#/definitions/LogOption",
+          "description": "Log option SAME/INDIVIDUAL"
+        },
+        "applicationInsights": {
+          "$ref": "#/definitions/ApplicationInsights",
+          "description": "Application Insight details"
+        },
+        "commonDestination": {
+          "$ref": "#/definitions/LogDestinationV2",
+          "description": "Common destination configurations"
+        },
+        "trafficLogDestination": {
+          "$ref": "#/definitions/LogDestinationV2",
+          "description": "Traffic destination configurations"
+        },
+        "threatLogDestination": {
+          "$ref": "#/definitions/LogDestinationV2",
+          "description": "Threat destination configurations"
+        },
+        "decryptLogDestination": {
+          "$ref": "#/definitions/LogDestinationV2",
+          "description": "Decrypt destination configurations"
+        }
+      }
+    },
+    "LogIngestionSettingsResource": {
+      "type": "object",
+      "description": "Log Ingestion Settings on a firewall (singleton — the name is always 'default'). This is the modern Azure Monitor Log Ingestion (Data Collection Rule based) surface that supersedes the legacy getLogProfile/saveLogProfile actions. Sync child resource — PUT/GET/DELETE forward to the partner synchronously; the caller does not poll a long-running operation.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LogIngestionSettingsProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "LogIngestionSettingsResourceListResult": {
+      "type": "object",
+      "description": "The response of a LogIngestionSettingsResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The LogIngestionSettingsResource items on this page",
+          "items": {
+            "$ref": "#/definitions/LogIngestionSettingsResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "LogOption": {
       "type": "string",
       "description": "Log options possible",
@@ -7984,6 +8292,34 @@
           "description": "Secondary Key value for Monitor"
         }
       }
+    },
+    "MonitorLogV2": {
+      "type": "object",
+      "description": "Log collection using the Azure Monitor Log Ingestion API (Data Collection Rule based).\nThis supersedes the legacy HTTP Data Collector `MonitorLog` for firewalls that have migrated\nto the modern DCR ingestion path. When this block is supplied, all four fields are required.",
+      "properties": {
+        "dcrId": {
+          "type": "string",
+          "description": "ARM resource ID of the Data Collection Rule (DCR) that governs how these logs are transformed and routed."
+        },
+        "logIngestionEndpoint": {
+          "type": "string",
+          "description": "HTTPS logs ingestion endpoint that receives the data (the DCR's logs ingestion endpoint or its Data Collection Endpoint)."
+        },
+        "dcrImmutableId": {
+          "type": "string",
+          "description": "Immutable ID of the Data Collection Rule (the value that begins with `dcr-`)."
+        },
+        "streamName": {
+          "type": "string",
+          "description": "DCR input stream that receives the data. For a custom table this is typically `Custom-<TableName>`."
+        }
+      },
+      "required": [
+        "dcrId",
+        "logIngestionEndpoint",
+        "dcrImmutableId",
+        "streamName"
+      ]
     },
     "NameDescriptionObject": {
       "type": "object",
