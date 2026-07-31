@@ -122,7 +122,7 @@ export function getVerifiedVersion(coverageContent) {
 /**
  * Extracts the pinned agent model from a gh-aw workflow's Markdown frontmatter.
  *
- * gh-aw v0.83.1 deprecated `engine.model` in favour of a top-level `model:`,
+ * gh-aw v0.83.1 deprecated `engine.model` in favor of a top-level `model:`,
  * so both spellings are accepted. The top-level form wins when both are
  * present, matching the compiler's own precedence.
  *
@@ -727,7 +727,7 @@ export async function checkReportFormatContract({ core, rootDir }) {
         if (!pattern) continue;
 
         // The bracketed finding form, in either spelling: a literal family
-        // prefix (`\[DP-`) or a generalised family character class
+        // prefix (`\[DP-`) or a generalized family character class
         // (`\[[A-Z]...`). The latter is what a format-TOLERANT grader uses --
         // one that accepts any severity heading glyph but still demands the
         // bracket, because the bracket is the only thing separating a raised

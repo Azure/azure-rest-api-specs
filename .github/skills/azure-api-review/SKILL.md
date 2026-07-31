@@ -187,7 +187,7 @@ silences a finding.**
 
 Read the statement you are citing. If it has no exception clause, **a rationale
 cannot waive it at all.** At most it affects severity, phrasing, or whether you
-raise a question instead of an assertion. Do not generalise the extensible-enum
+raise a question instead of an assertion. Do not generalize the extensible-enum
 `unless` into a universal escape hatch: it is an exception to _that_ rule, not a
 precedent that every rule bends to a well-written paragraph.
 
@@ -215,7 +215,7 @@ altogether. The exception is not earned, and the finding stands.
 
 Worse, the same spec defines a `QueryResultTooLarge` error for results that
 exceed a size limit. That is the service's own evidence that the collection
-**can** grow large — the spec answers the real question, in the author's favour
+**can** grow large — the spec answers the real question, in the author's favor
 against their own argument. Look for that kind of contradiction: a rationale is
 weakened most by the rest of the spec, not by your intuition.
 

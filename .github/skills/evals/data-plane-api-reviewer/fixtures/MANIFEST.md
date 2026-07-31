@@ -87,8 +87,8 @@ prose-length tell or an adjacent lifecycle question.
 
 ### `typespec-data-plane/tn-runtime-behavioral.tsp`
 
-Class 4, runtime-behavioral. Every `@doc` describes service runtime behaviour:
-sort ordering and its stability, retention windows, page-size behaviour,
+Class 4, runtime-behavioral. Every `@doc` describes service runtime behavior:
+sort ordering and its stability, retention windows, page-size behavior,
 validation semantics, conditional status codes, idempotency, `Retry-After`
 values, throttling, value preservation. None is statically checkable from a
 `.tsp`; all are 🚫 Runtime in the coverage map.
@@ -185,7 +185,7 @@ fine to 15 warnings.
 
 **True-negative fixtures must be linter-clean.** A TN whose cleanliness depends
 on the reviewer correctly consulting the interlock is measuring the interlock,
-not the reviewer's judgement. `tn-clean-service`, `tn-legitimate-deviation`,
+not the reviewer's judgment. `tn-clean-service`, `tn-legitimate-deviation`,
 `tn-runtime-behavioral`, and both files in `stable-additive-property` are
 therefore at zero warnings.
 `tn-linter-owned.tsp` is the deliberate exception: its whole purpose is to seed
@@ -216,5 +216,5 @@ No fixture is under `specification/`, and none is a real service.
 `checkFixtureLabelLeakage` in
 [`.github/workflows/src/data-plane-review-alignment.js`](../../../../workflows/src/data-plane-review-alignment.js)
 fails the build if any fixture reintroduces a label, a rule ID, a `VIOLATION`
-or `BREAKING` annotation, or a statement about expected reviewer behaviour.
+or `BREAKING` annotation, or a statement about expected reviewer behavior.
 Provenance belongs in this file, not in the fixture.

@@ -54,7 +54,7 @@ that has no `error` member.
 - **Severity:** Suggestion
 
 An operation that completes in well under a second is not a long-running
-operation, and modelling it as one imposes polling on every caller and every
+operation, and modeling it as one imposes polling on every caller and every
 SDK. Conversely, an operation that can take minutes but is modelled
 synchronously will time out at gateways and give callers no progress signal.
 
@@ -100,7 +100,7 @@ uses a bespoke vocabulary (`Finished`/`Broken`/...) and marks nothing fails
 compilation with `lro-status-missing` (**error**) plus
 `polling-operation-no-status-monitor` (warning). A service therefore cannot ship
 a custom monitor without either `@lroSucceeded`/`@lroFailed` or the literal
-`Succeeded`/`Failed` values the linter recognises by name. **Never raise a
+`Succeeded`/`Failed` values the linter recognizes by name. **Never raise a
 finding for a missing `@lroSucceeded` or `@lroFailed`** -- it is 🔒, the build
 has already failed, and repeating it helps nobody.
 
@@ -119,7 +119,7 @@ Raise, at Suggestion severity:
 
 - A status union with a cancellation state that is not marked `@lroCanceled`.
   It compiles clean, and a generated poller treats cancellation as an
-  unrecognised non-terminal state -- so the poller hangs on a cancelled
+  unrecognized non-terminal state -- so the poller hangs on a canceled
   operation.
 - A monitor producing a result or an error with no `@lroResult` /
   `@lroErrorResult`, so neither is typed for the SDK. This overlaps
@@ -164,7 +164,7 @@ earn no exception however well made:
 
 **Check the rest of the spec for evidence against the rationale.** A
 `...TooLarge` error, a `maxResults` cap that can be raised, or a documented
-truncation behaviour is the service's own statement that the collection can grow
+truncation behavior is the service's own statement that the collection can grow
 -- and it outweighs a paragraph asserting that it usually does not.
 
 **Do not flag** a non-paged list when the collection is provably bounded and

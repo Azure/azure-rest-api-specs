@@ -174,7 +174,7 @@ vocabulary.**
 ### Findings are never a table
 
 Emit findings in the bracketed form defined above — `**[RULE-ID] Title** --
-`file:line``— under a severity **heading**. Do not summarise them as a markdown
+`file:line``— under a severity **heading**. Do not summarize them as a markdown
 table with a`Severity`or`Rule ID` column, however tidy it looks. A table
 loses the bracketed anchor every grader keys on, moves severity out of heading
 position, and invites a glyph in a cell.

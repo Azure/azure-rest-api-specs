@@ -272,7 +272,7 @@ stimuli:
         config:
           pattern: "\\*\\*\\[[A-Z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)+\\]"
       - type: output-not-matches
-        name: "no runtime behaviour raised as a finding"
+        name: "no runtime behavior raised as a finding"
         config:
           pattern: "(?i)\\*\\*\\[[A-Z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)+\\][^*\\n]*\\b(sort order|sort ordering|ordering guarantee|retention (window|period|policy)|page size|throttl|rate limit|Retry-After|idempotenc|value preservation)\\b"
       - type: output-not-matches
@@ -281,11 +281,11 @@ stimuli:
           pattern: "(?is)^\\s*#{1,6}[^\\n]*\\bBlocking\\b[^\\n]*\\n(?:(?!\\s*#{1,6})[^\\n]*\\n)*?\\s*(?:[-*+]\\s*|\\d+[.)]\\s*)?\\*\\*\\[[A-Z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)+\\]"
       - type: prompt
     rubric:
-      - Every notable statement in this file is service runtime behaviour described in prose - sort ordering and its stability, a 90-day retention window, page-size behaviour, deduplication and idempotency, validation ordering relative to authorization, conditional 404-instead-of-403, Retry-After computation, throttling, and annotation value preservation.
+      - Every notable statement in this file is service runtime behavior described in prose - sort ordering and its stability, a 90-day retention window, page-size behavior, deduplication and idempotency, validation ordering relative to authorization, conditional 404-instead-of-403, Retry-After computation, throttling, and annotation value preservation.
       - None of it is statically checkable from a .tsp file. All of it is 🚫 Runtime in references/data-plane-linter-rule-coverage.md and explicitly out of scope.
       - The agent MUST NOT convert any of this prose into a finding, and MUST NOT assert that the service does or does not behave correctly. Any such finding is a test failure.
       - The agent MUST NOT report any Blocking (🔴) finding.
-      - "The documentation here is unusually good: it states behaviour a caller cannot otherwise discover. Praising it, or saying nothing, both score full marks."
+      - "The documentation here is unusually good: it states behavior a caller cannot otherwise discover. Praising it, or saying nothing, both score full marks."
 
   # TN-07 -- Preview-to-preview breaking change is permitted.
   - name: tn-preview-breaking-change-allowed

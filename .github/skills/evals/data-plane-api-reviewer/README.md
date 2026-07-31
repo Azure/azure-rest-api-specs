@@ -11,7 +11,7 @@ framework as the [ARM suite](../arm-api-reviewer/README.md).
 ## What this suite is actually for
 
 The ARM suite measures whether the reviewer **finds** things. This suite
-measures that too, but its centre of gravity is the opposite question:
+measures that too, but its center of gravity is the opposite question:
 whether the reviewer **stays quiet** when it should.
 
 That inversion is deliberate. The data-plane reviewer runs unattended against
@@ -319,7 +319,7 @@ positive stimulus it causes a silent false pass, which reads as evidence the
 reviewer works. All nine are affected: `DP-ERR-`, `DP-LRO-`, `DP-PAGE-`,
 `DP-NAME-`, `DP-DOC-`, `DP-MODEL-01`, `DP-MODEL-`, `DP-VERSION-`, `DP-VIS-`
 (×2). None has ever been executed — only the true-negative file has been run —
-so this is inference from observed agent behaviour, not a measured failure.
+so this is inference from observed agent behavior, not a measured failure.
 
 ### B. Negative graders trippable by legitimate mention — false FAIL
 
@@ -392,7 +392,7 @@ refutation.
 Where no bracketed form applies, the pattern was narrowed to phrasing that is
 _inherently_ an assertion (`should be camelCase`, `must not be nullable`), or
 replaced with "no finding of any kind was raised". Two graders that banned
-topic vocabulary — the runtime-behaviour word list and the linter rule names —
+topic vocabulary — the runtime-behavior word list and the linter rule names —
 could not be made sound at all, because the correct answer uses exactly that
 vocabulary to say what it is declining to flag; both were replaced with a
 bracketed-rule-ID ban, which as a bonus catches the one real false positive the
@@ -574,7 +574,7 @@ test.** The later six:
 
 Defect 8 is the sharpest of the ten. A single unquoted colon changed a rubric's
 _type_, and the resulting crash was reported in the same column as a genuine
-behavioural failure — so the headline number was wrong in the direction that
+behavioral failure — so the headline number was wrong in the direction that
 makes the reviewer look worse, and nothing in the output said "this is a harness
 fault".
 
@@ -625,7 +625,7 @@ regression probes proving the blocking gate is unchanged.
 Landing at the same time as the budget is the
 [two-step exception test](../../azure-api-review/SKILL.md) replacing the old
 "is the rationale plausible" rule. **They do not logically conflict, but they
-pull TN behaviour in opposite directions and the next run is the test:**
+pull TN behavior in opposite directions and the next run is the test:**
 
 - The two-step test makes the reviewer **less** willing to accept a stated
   rationale, which pushes toward _more_ findings on true negatives.
@@ -643,7 +643,7 @@ rule itself.
 If the next run shows those three degrading while the persuasive-rationale
 positive is now caught, the two-step test is right and mis-calibrated. If they
 hold and the positive is caught, both changes landed. **Neither has been
-verified behaviourally — only by tracing the guidance against the fixtures.**
+verified behaviorally — only by tracing the guidance against the fixtures.**
 
 ### Format tolerance in the graders
 
@@ -710,9 +710,9 @@ counts — it is not a false positive and must not be counted as one.
 
 Both suites, `claude-opus-4.6`, judge `claude-sonnet-4.6`. TN at `runs: 3`
 (21 trials), positives at `runs: 1` (10 trials). **31 trials, 981 AIU,
-43 min** — 33% over the ~740 AIU estimate, because de-labelled fixtures make
-the agent actually analyse rather than be told the answer (3.07M tokens on TN
-vs 2.44M in the labelled run).
+43 min** — 33% over the ~740 AIU estimate, because de-labeled fixtures make
+the agent actually analyze rather than be told the answer (3.07M tokens on TN
+vs 2.44M in the labeled run).
 
 ### Detection works — the first validated evidence
 
@@ -749,7 +749,7 @@ the worst profile for a gate.
   `colour`/`NotebookColour`; Azure uses US English. The agent was right, all
   three trials, and the judge agreed. **Those three trials are miscounted as
   false positives, so the true rate is better than 19%.** A second fixture had
-  the same defect (`analyse`); both are now corrected.
+  the same defect (`analyze`); both are now corrected.
 - **`DP-MODEL-04` appeared in 12 of 31 trials**, which looked like padding.
   It was a corpus artifact: 9 of 11 fixtures had no delete operation, so the
   agent was making a consistent, defensible observation about a uniform
@@ -782,7 +782,7 @@ soundly:
 | `no finding raised on a linter-owned file`           | no finding of any kind (was "no duplicate report") |
 | `no linter-owned rule raised as a finding`           | no linter rule name in **finding-title position**  |
 | `no finding raised on a runtime-behavioral file`     | no finding of any kind (was "not invented from…")  |
-| `no runtime behaviour raised as a finding`           | no runtime topic in **finding-title position**     |
+| `no runtime behavior raised as a finding`            | no runtime topic in **finding-title position**     |
 | `does not raise casing-style as a finding`           | `casing-style` in finding-title position           |
 | `does not raise documentation-required as a finding` | `documentation-required` in finding-title position |
 
@@ -815,7 +815,7 @@ Fixtures first, graders second.
 
 The two interact — grader patterns are written against what the agent actually
 emits, and what the agent emits was being shaped by the leaked labels. Tuning
-graders against leaked-fixture behaviour would have calibrated them to an
+graders against leaked-fixture behavior would have calibrated them to an
 artifact: an agent told "silence is correct" produces different, shorter output
 than one reasoning from the spec alone, so a grader that looked sound against
 the former could be unsound against the latter.
@@ -829,7 +829,7 @@ The ordering had no effect on the outcome in the end, because the hook turned
 out to come from the **report format** rather than from fixture content. But it
 would have mattered had the answer been "match the phrasing the agent tends to
 use", which was the other candidate and would have been calibrated to leaked
-behaviour.
+behavior.
 
 ## Known limitation: these evals test the skill, not the agent
 
@@ -1018,7 +1018,7 @@ future model's identifiers differ between the two, document the mapping next to
 both pins.
 
 The workflow pin was spelled `engine.model` until gh-aw v0.83.1 deprecated that
-form in favour of a top-level `model:`. The alignment check accepts both, so a
+form in favor of a top-level `model:`. The alignment check accepts both, so a
 rebase onto an older branch does not break the invariant.
 
 ### `judge_model` — frozen, deliberately not equal to production

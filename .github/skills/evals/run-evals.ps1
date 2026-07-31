@@ -208,7 +208,7 @@ $OutputEncoding = [System.Text.Encoding]::UTF8
 
     A retraction on the SAME LINE as a finding retracts that finding; one on its
     own line retracts the finding above it. Conflating the two silently
-    un-counts an innocent neighbouring finding and understates the metric.
+    un-counts an innocent neighboring finding and understates the metric.
 
     Returns a PSCustomObject with StimulusCount, Blocking, NonBlocking,
     Suggestion, SuggestionBudget, PerStimulusSuggestions, OverBudget, and
@@ -338,7 +338,7 @@ function Get-TrueNegativeFindingCounts {
             #   own line   -- a bare "(Retracted)" or "No Blocking findings"
             #                 line retracts the finding above it.
             # Treating the first as the second silently un-counts an innocent
-            # neighbour, which understates the false-positive metric.
+            # neighbor, which understates the false-positive metric.
             if ($ll -match '\(\s*Retracted\b' -or
                 $ll -match '^\s*\**\s*No\s+(Blocking|Warning|Suggestion)\s+findings\b') {
                 if ($ll -match $findingPattern) {

@@ -121,7 +121,7 @@ naming clarity as opposed to naming casing, documentation substance as
 opposed to documentation presence, error-code craftsmanship, LRO and paging
 shape, visibility and secret exposure, and breaking-change judgment. Rules
 that `@azure-tools/typespec-azure-core` already enforces mechanically are
-off-limits, and rules about service runtime behaviour are out of scope
+off-limits, and rules about service runtime behavior are out of scope
 entirely because a `.tsp` file cannot show them.
 
 Which is which is decided by the **linter interlock**,
@@ -156,7 +156,7 @@ mutating GitHub tools; `safe-outputs` is the only write channel.
 See
 [`evals/data-plane-api-reviewer/README.md`](evals/data-plane-api-reviewer/README.md).
 
-Unlike the ARM suite, the centre of gravity is false-positive resistance:
+Unlike the ARM suite, the center of gravity is false-positive resistance:
 true-negative stimuli are at least 40% of the suite, they run three times,
 and a single true-negative failure is treated as a regression rather than a
 flake. Promotion from summary comments to inline review comments is gated on
