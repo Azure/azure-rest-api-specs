@@ -77,6 +77,10 @@ model BaseModelReference {
   @doc("The HuggingFace `<org>/<repo>` id of the base model, e.g. `meta-llama/Llama-2-7b-chat`. Immutable after creation.")
   id: string;
 
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @doc("The total size of the model weights. eg `28.7Gi`.")
+  totalWeightSize?: string;
+
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "config.json is opaque upstream JSON"
   @visibility(Lifecycle.Create, Lifecycle.Read)
   @doc("The verbatim `config.json` of the base model, supplied by the customer. Stored by the platform and projected into the dataplane (ConfigMap) to determine GPU node count and vLLM configuration.")
