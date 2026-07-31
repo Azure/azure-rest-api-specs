@@ -57,3 +57,5 @@ using Microsoft.Solutions;
   "ManagedApplicationsListTokenRequestContent",
   "csharp"
 );
+@@clientName(Resource, "ManagedApplicationResourceInfo", "csharp");
+@@clientName(GenericResource, "GenericResourceInfo", "csharp");
