@@ -1,10 +1,13 @@
 import "@typespec/http";
 import "@typespec/rest";
+import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using Azure.Core;
+using Azure.Core.Traits;
 using Azure.ClientGenerator.Core;
 
 namespace ContentSafety;
@@ -264,4 +267,110 @@ model DetectTextProtectedMaterialResult {
 model TextProtectedMaterialAnalysisResult {
   @doc("Whether potential protected material is detected or not.")
   detected: boolean;
+}
+
+alias ProvenanceRetryAfterTrait = ResponseHeadersTrait<
+  Azure.Core.Foundations.RetryAfterHeader,
+  TraitContext.Read
+>;
+
+alias ProvenanceServiceTraits = NoRepeatableRequests &
+  NoConditionalRequests &
+  NoClientRequestId &
+  ProvenanceRetryAfterTrait;
+
+alias ProvenanceResourceOps = ResourceOperations<ProvenanceServiceTraits>;
+
+@added(ContentSafety.Versions.v2026_07_01_preview)
+@resource("operations")
+@doc("Status and result of an asynchronous Content Provenance Detection operation.")
+model ProvenanceDetectOperation
+  is Azure.Core.Foundations.OperationStatus<DetectProvenanceResult> {
+  @doc("Kind of Content Provenance Detection operation.")
+  @visibility(Lifecycle.Read)
+  kind: ProvenanceOperationKind;
+
+  @doc("Date and time (UTC) when the operation was created.")
+  @visibility(Lifecycle.Read)
+  createdAt?: utcDateTime;
+
+  @doc("Date and time (UTC) when the status was last updated.")
+  @visibility(Lifecycle.Read)
+  lastUpdatedAt?: utcDateTime;
+}
+
+@added(ContentSafety.Versions.v2026_07_01_preview)
+@doc("Kind of asynchronous Content Provenance Detection operation.")
+union ProvenanceOperationKind {
+  string,
+
+  /** Content Provenance Detection operation. */
+  Detect: "Detect",
+}
+
+@added(ContentSafety.Versions.v2026_07_01_preview)
+@doc("Source content descriptor for a Content Provenance Detection operation.")
+model ProvenanceContent {
+  @doc("Blob URI of the media to inspect. Media up to 100 MB is supported. Supported formats: image (JPEG, PNG, GIF, WebP), audio (MP3, WAV), and video (MP4).")
+  uri: url;
+}
+
+@added(ContentSafety.Versions.v2026_07_01_preview)
+@doc("Input describing the media to inspect using Content Provenance Detection.")
+model DetectProvenanceOptions {
+  @doc("Source content to inspect.")
+  content: ProvenanceContent;
+}
+
+@added(ContentSafety.Versions.v2026_07_01_preview)
+@doc("Top-level outcome of a Content Provenance Detection operation.")
+union DetectOutcome {
+  string,
+
+  /**
+   * No supported Microsoft-issued C2PA or imperceptible watermark signal was detected.
+   * This doesn't necessarily mean the content wasn't AI-generated; it means no supported signal was found.
+   */
+  NoProvenanceDetected: "NoProvenanceDetected",
+
+  /** At least one supported Microsoft-issued C2PA or imperceptible watermark signal was detected. */
+  ProvenanceDetected: "ProvenanceDetected",
+}
+
+@added(ContentSafety.Versions.v2026_07_01_preview)
+@doc("A Microsoft-issued provenance signal indicating the media was created or modified using AI.")
+model DetectedProvenance {
+  @doc("Detected provenance record type.")
+  type?: DetectedProvenanceType;
+
+  @doc("Identifier of the Microsoft provider that generated the content.")
+  provider?: string;
+
+  @doc("Identifier of the generating AI model when available.")
+  modelName?: string;
+
+  @doc("Generation timestamp recorded in the provenance signal.")
+  timestamp?: utcDateTime;
+}
+
+@added(ContentSafety.Versions.v2026_07_01_preview)
+@doc("Detected provenance record type.")
+union DetectedProvenanceType {
+  string,
+
+  /** Provenance came from a C2PA Content Credential (manifest). */
+  C2PA: "C2PA",
+
+  /** Provenance came from an imperceptible watermark. */
+  Watermark: "Watermark",
+}
+
+@added(ContentSafety.Versions.v2026_07_01_preview)
+@doc("Result of a Content Provenance Detection operation.")
+model DetectProvenanceResult {
+  @doc("Top-level outcome of the Content Provenance Detection operation.")
+  outcome: DetectOutcome;
+
+  @doc("Detected provenance signals. Empty or omitted when `outcome` is `NoProvenanceDetected`.")
+  results?: DetectedProvenance[];
 }
