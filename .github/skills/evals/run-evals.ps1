@@ -240,26 +240,32 @@ function Get-TrueNegativeFindingCounts {
     $blocking = 0
     $nonBlocking = 0
     $suggestion = 0
+    $unsectioned = 0
     $stimulusCount = 0
     $glyphSeen = $false
-    # stimulus name -> highest suggestion count seen in any one trial of it.
+    # stimulus name -> highest count seen in any one trial of it.
     $perStimulusSuggestions = @{}
+    $perStimulusUnsectioned = @{}
 
-    # A finding: bold-bracketed rule ID at the start of a line. Requires at
-    # least one hyphen so it cannot match bolded prose like **[Note]**, and
-    # tolerates mixed case so IDs like RPC-Put-V1-11 are not missed.
-    $findingPattern = '^\s*\*\*\[[A-Z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)+\]'
+    # A finding: bold-bracketed rule ID. Tolerates a bullet or a numbered list
+    # marker before it, because a numbered findings list is a presentation
+    # choice that costs a reader nothing. The BRACKET is not negotiable: the
+    # considered-rules table writes plain bold IDs without brackets, so the
+    # bracket is the only thing separating a raised finding from a declined one.
+    $findingPattern = '^\s*(?:[-*+]\s*|\d+[.)]\s*)?\*\*\[[A-Z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)+\]'
 
     if (-not (Test-Path $JsonlPath)) {
         return [PSCustomObject]@{
-            StimulusCount        = 0
-            Blocking             = 0
-            NonBlocking          = 0
-            Suggestion           = 0
-            SuggestionBudget     = $SuggestionBudget
+            StimulusCount          = 0
+            Blocking               = 0
+            NonBlocking            = 0
+            Suggestion             = 0
+            Unsectioned            = 0
+            SuggestionBudget       = $SuggestionBudget
             PerStimulusSuggestions = @{}
-            OverBudget           = @()
-            Observed             = $false
+            PerStimulusUnsectioned = @{}
+            OverBudget             = @()
+            Observed               = $false
         }
     }
 
@@ -295,9 +301,16 @@ function Get-TrueNegativeFindingCounts {
 
         # Walk the report in order so each finding is charged to the severity
         # section it appears under.
+        #
+        # Headings are matched by GLYPH or by WORD. The graders were made
+        # format-tolerant because presentation costs a human reader nothing,
+        # and the gate must not be blinded by the same variation: a report
+        # writing `### 🚫 Blocking` or `### Blocking Issues` is still declaring
+        # a blocking section, and findings under it are still blocking.
         $currentSeverity = 'unsectioned'
         $lastCharged = $null   # which bucket the previous finding went into
         $trialSuggestions = 0
+        $trialUnsectioned = 0
         foreach ($ll in ($output -split '\r?\n')) {
             if ($ll -match "^\s*(?:[-*+]\s*|#{1,6}\s*)?`u{1F534}") { $currentSeverity = 'blocking'; $glyphSeen = $true; continue }
             if ($ll -match "^\s*(?:[-*+]\s*|#{1,6}\s*)?`u{1F7E1}") { $currentSeverity = 'nonblocking'; $glyphSeen = $true; continue }
@@ -307,7 +320,12 @@ function Get-TrueNegativeFindingCounts {
             if ($ll -match "^\s*(?:[-*+]\s*|#{1,6}\s*)?`u{1F4A1}") { $currentSeverity = 'suggestion'; $glyphSeen = $true; continue }
             # A "Questions" heading ends the finding sections. Questions are
             # bullets rather than findings, and the rubrics permit them.
-            if ($ll -match '^\s*#{1,6}\s*Questions\b') { $currentSeverity = 'questions'; $lastCharged = $null; continue }
+            if ($ll -match '^\s*#{1,6}\s*.*\bQuestions\b') { $currentSeverity = 'questions'; $lastCharged = $null; continue }
+            # Glyph-less severity headings. Requires heading position, so prose
+            # like "No blocking findings" cannot open a section.
+            if ($ll -match '^\s*#{1,6}[^\r\n]*\bBlocking\b') { $currentSeverity = 'blocking'; continue }
+            if ($ll -match '^\s*#{1,6}[^\r\n]*\bWarning') { $currentSeverity = 'nonblocking'; continue }
+            if ($ll -match '^\s*#{1,6}[^\r\n]*\bSuggestion') { $currentSeverity = 'suggestion'; continue }
 
             # A retraction withdraws a finding. Un-count it: the report's own
             # conclusion is correct, so it is a format violation rather than a
@@ -357,7 +375,17 @@ function Get-TrueNegativeFindingCounts {
                 elseif ($currentSeverity -eq 'suggestion') {
                     $nonBlocking++; $suggestion++; $trialSuggestions++; $lastCharged = 'suggestion'
                 }
-                else { $nonBlocking++; $lastCharged = 'nonblocking' }
+                else {
+                    $nonBlocking++; $lastCharged = 'nonblocking'
+                    # A finding under no severity heading at all. Its severity
+                    # is genuinely unknowable, so it cannot be charged to the
+                    # blocking gate or the suggestion budget -- but it must not
+                    # vanish either. One real trial emitted a flat `### Findings`
+                    # list of nine, which scored zero suggestions and looked
+                    # clean to the budget. Reported as a FORMAT failure, which
+                    # is what it is.
+                    if ($currentSeverity -eq 'unsectioned') { $trialUnsectioned++ }
+                }
             }
         }
 
@@ -369,11 +397,25 @@ function Get-TrueNegativeFindingCounts {
             $perStimulusSuggestions[$stimName] -lt $trialSuggestions) {
             $perStimulusSuggestions[$stimName] = $trialSuggestions
         }
+        if ($trialUnsectioned -gt 0) {
+            if (-not $perStimulusUnsectioned.ContainsKey($stimName) -or
+                $perStimulusUnsectioned[$stimName] -lt $trialUnsectioned) {
+                $perStimulusUnsectioned[$stimName] = $trialUnsectioned
+            }
+            $unsectioned += $trialUnsectioned
+        }
 
         # Belt and braces for the gate: a blocking severity heading with no
         # parseable finding under it still counts as a blocking false positive,
         # so this metric can only ever be stricter than the glyph-only version
         # it replaced, never looser.
+        #
+        # Matches the heading by GLYPH **or by word**. The graders were made
+        # format-tolerant deliberately; the gate must not inherit that
+        # tolerance. A bracketless finding under `### 🚫 Blocking` escapes the
+        # graders by design -- it is a format failure, not a judgment failure --
+        # but it must not escape the gate, which asks only "did the reviewer
+        # declare something blocking on a clean spec".
         #
         # Suppressed when the report retracts a finding, otherwise this clause
         # would re-add the very finding the retraction handling just removed:
@@ -381,8 +423,9 @@ function Get-TrueNegativeFindingCounts {
         # two rules fight and the retraction loses.
         $hasRetraction = $output -match '\(\s*Retracted\b' -or
                          $output -match '(?m)^\s*\**\s*No\s+(Blocking|Warning|Suggestion)\s+findings\b'
-        if ($blocking -eq 0 -and -not $hasRetraction -and
-            $output -match "(?m)^\s*(?:[-*+]\s*|#{1,6}\s*)?`u{1F534}") { $blocking++ }
+        $declaresBlocking = $output -match "(?m)^\s*(?:[-*+]\s*|#{1,6}\s*)?`u{1F534}" -or
+                            $output -match '(?m)^\s*#{1,6}[^\r\n]*\bBlocking\b'
+        if ($blocking -eq 0 -and -not $hasRetraction -and $declaresBlocking) { $blocking++ }
     }
 
     $overBudget = @(
@@ -397,8 +440,10 @@ function Get-TrueNegativeFindingCounts {
         Blocking               = $blocking
         NonBlocking            = $nonBlocking
         Suggestion             = $suggestion
+        Unsectioned            = $unsectioned
         SuggestionBudget       = $SuggestionBudget
         PerStimulusSuggestions = $perStimulusSuggestions
+        PerStimulusUnsectioned = $perStimulusUnsectioned
         OverBudget             = $overBudget
         Observed               = $glyphSeen
     }
@@ -904,6 +949,20 @@ for ($runIndex = 1; $runIndex -le $Repeat; $runIndex++) {
                         $mark = if ($kv.Value -gt $budget) { "  <-- over" } else { "" }
                         Write-Host ("      {0,-42} {1}{2}" -f $kv.Key, $kv.Value, $mark) -ForegroundColor DarkGray
                     }
+                }
+
+                # Findings emitted under no severity heading at all. Their
+                # severity is unknowable, so they are charged to neither the
+                # blocking gate nor the suggestion budget -- but a flat list of
+                # nine on a clean spec is exactly the padding the budget exists
+                # to price, and it must not read as a clean run. Reported as the
+                # FORMAT failure it is.
+                if ($tnMetrics.Unsectioned -gt 0) {
+                    Write-Host ("    Unsectioned finds : {0}   [FORMAT -- severity unknowable, excluded from gate and budget]" -f $tnMetrics.Unsectioned) -ForegroundColor DarkYellow
+                    foreach ($kv in ($tnMetrics.PerStimulusUnsectioned.GetEnumerator() | Sort-Object -Property Value -Descending)) {
+                        Write-Host ("      {0,-42} {1}" -f $kv.Key, $kv.Value) -ForegroundColor DarkYellow
+                    }
+                    Write-Host "      A report with no severity headings cannot be scored for severity." -ForegroundColor DarkYellow
                 }
             } else {
                 Write-Host "    Blocking FPs      : UNMEASURED   [GATING -- treated as NOT met]" -ForegroundColor Red

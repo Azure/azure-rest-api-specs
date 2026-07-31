@@ -645,6 +645,52 @@ positive is now caught, the two-step test is right and mis-calibrated. If they
 hold and the positive is caught, both changes landed. **Neither has been
 verified behaviourally — only by tracing the guidance against the fixtures.**
 
+### Format tolerance in the graders
+
+**The strict report format exists so grading can be mechanical. It is not a
+product requirement.** A human reading a PR comment does not care whether the
+heading glyph is 🔴 or 🚫, or whether findings are numbered. Measured across two
+runs, format instability caused **more trial failures than judgment did** —
+roughly 1 trial in 20, migrating between stimuli. That is an instrument whose
+precision requirement exceeds the product's, so the instrument was loosened
+rather than the contract lengthened. More contract prose had already been tried
+and did not help.
+
+What was loosened, and what was not:
+
+| Element               | Before             | Now                                                                  |
+| --------------------- | ------------------ | -------------------------------------------------------------------- |
+| Severity heading      | `🔴` at line start | any heading containing the severity **word**, with any glyph or none |
+| Finding position      | line start only    | line start, bullet, or numbered list item                            |
+| **Bracketed rule ID** | **required**       | **still required — not negotiable**                                  |
+
+**The bracket is the discriminator and cannot be loosened.** The considered-rules
+table writes plain bold IDs without brackets —
+`| **DP-MODEL-01** (actions ≠ CRUD) | ✅ Pass |` — so accepting a bracketless
+bold ID would make correct silence indistinguishable from a finding. That is
+grader defect #2, which cost a full run.
+
+This has a consequence worth stating plainly: **the observed
+`stable-version-breaking-changes` regression is not fixed by tolerance.** That
+trial emitted _zero brackets anywhere_ — `**1. DP-VERSION-01 — Property type
+changed**` — while finding and explaining all four breaking changes correctly.
+Tolerance rescues glyph and position errors; it cannot rescue a dropped bracket
+without destroying the discriminator. That failure mode remains, and the honest
+position is that ~1 trial in 20 will fail on presentation.
+
+**Graders are tolerant; the gate is not.** The counter matches a Blocking
+heading by glyph **or word**, so a bracketless finding under `### 🚫 Blocking`
+escapes the graders — correctly, it is a format failure — but is still charged
+to the blocking gate, which asks only whether the reviewer declared something
+blocking on a clean spec. Verified by probe in both directions.
+
+**Unsectioned findings are reported, not silently absorbed.** A flat
+`### Findings` list with no severity heading has genuinely unknowable severity,
+so it is charged to neither the gate nor the suggestion budget — but it is now
+counted and printed as a format failure. This closes the budget blind spot in
+the right place: an unsectioned pile is a formatting violation, not a budgeting
+problem.
+
 ### Wall-clock ceiling
 
 The third run took **~2h for 40 trials**, against 54 min for 31 trials

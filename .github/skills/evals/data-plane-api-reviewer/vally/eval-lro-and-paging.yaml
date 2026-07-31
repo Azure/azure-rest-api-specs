@@ -118,7 +118,7 @@ stimuli:
       - type: output-not-matches
         name: "does not over-escalate the paging finding"
         config:
-          pattern: "(?im)^\\s*(?:[-*+]\\s*|#{1,6}\\s*)?🔴"
+          pattern: "(?is)^\\s*#{1,6}[^\\n]*\\bBlocking\\b[^\\n]*\\n(?:(?!\\s*#{1,6})[^\\n]*\\n)*?\\s*(?:[-*+]\\s*|\\d+[.)]\\s*)?\\*\\*\\[[A-Z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)+\\]"
       - type: prompt
     rubric:
       - The agent reports DP-PAGE-01 for a search over caller-populated documents whose result count can grow without a contractual bound, even though the operation's prose argues confidently for one atomic response.

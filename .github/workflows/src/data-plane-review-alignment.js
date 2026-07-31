@@ -726,12 +726,29 @@ export async function checkReportFormatContract({ core, rootDir }) {
         const pattern = grader.config?.pattern;
         if (!pattern) continue;
 
-        const targetsBracketedForm = /\\\[DP-/.test(pattern);
+        // The bracketed finding form, in either spelling: a literal family
+        // prefix (`\[DP-`) or a generalised family character class
+        // (`\[[A-Z]...`). The latter is what a format-TOLERANT grader uses --
+        // one that accepts any severity heading glyph but still demands the
+        // bracket, because the bracket is the only thing separating a raised
+        // finding from a considered-rules table entry, which writes plain bold
+        // IDs without brackets.
+        //
+        // Deliberately does NOT accept a bare `\[`: a grader matching any
+        // bracket at all would match prose and would not be asserting the
+        // finding form.
+        const targetsBracketedForm = /\\\[(?:DP-|\[A-Z)/.test(pattern);
         const targetsDefinedGlyph = ["🔴", "🟡", "💡"].some(
           (g) => pattern.includes(g) && contract.includes(g),
         );
+        // A severity WORD in heading position is an accepted alternative to the
+        // glyph: format instability costs nothing in production, and the
+        // contract names the severities in words as well as glyphs. Still
+        // requires the bracketed form above, so this only widens which
+        // *heading* shapes a grader may anchor on.
+        const targetsSeverityWord = /\\b(?:Blocking|Warning|Suggestion)\\b/.test(pattern);
 
-        if (!targetsBracketedForm && !targetsDefinedGlyph) {
+        if (!targetsBracketedForm && !targetsDefinedGlyph && !targetsSeverityWord) {
           problems.push(
             `${file} :: "${grader.name}" asserts a finding using a syntax the\n` +
               `      contract does not teach.\n` +

@@ -60,7 +60,7 @@ stimuli:
       - type: output-matches
         name: "raises stable-version breaking changes at blocking severity"
         config:
-          pattern: "(?im)^\\s*(?:[-*+]\\s*|#{1,6}\\s*)?🔴"
+          pattern: "(?is)^\\s*#{1,6}[^\\n]*\\bBlocking\\b[^\\n]*\\n(?:(?!\\s*#{1,6})[^\\n]*\\n)*?\\s*(?:[-*+]\\s*|\\d+[.)]\\s*)?\\*\\*\\[[A-Z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)+\\]"
       - type: prompt
     rubric:
       - "The agent identifies the removed response property `lastEvaluatedAt` as a breaking change against the previously shipped stable version."
