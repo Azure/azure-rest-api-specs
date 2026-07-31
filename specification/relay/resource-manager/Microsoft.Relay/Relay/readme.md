@@ -236,6 +236,12 @@ directive:
       - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Relay/availableClusterRegions"].get
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/clusters/{clusterName}/namespaces"].get
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/clusters/{clusterName}/skus"].get
+  - suppress: GetCollectionOnlyHasValueAndNextLink
+    reason: These Relay endpoints return complete non-paged collections and the service does not implement a nextLink continuation mechanism.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Relay/availableClusterRegions"].get.responses.200.schema.properties
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/clusters/{clusterName}/namespaces"].get.responses.200.schema.properties
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/clusters/{clusterName}/skus"].get.responses.200.schema.properties
   - suppress: NestedResourcesMustHaveListOperation
     reason: NetworkRuleSet is an inherited singleton child resource and the Relay service does not expose a list operation for it.
     where: $.definitions.NetworkRuleSet
