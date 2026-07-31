@@ -57,13 +57,17 @@ model AuditEvent {
   @visibility(Lifecycle.Read)
   recordedAt: utcDateTime;
 
-  @doc("Principal that performed the audited action.")
+  @doc("""
+    Principal that performed the audited action, as a Microsoft Entra object ID
+    in GUID form. Service-initiated actions use the reserved value `system`.
+    """)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   actor: string;
 
   @doc("""
-    Action that was performed, as a service-defined verb such as
-    `resource.create`.
+    Action that was performed, as a service-defined verb in `noun.verb` form,
+    such as `resource.create`. The set of verbs is registered per tenant and is
+    published in the service documentation rather than in this specification.
     """)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   action: string;
@@ -120,10 +124,9 @@ interface Events {
     `Repeatability-Request-ID` within the deduplication window of 24 hours
     returns the originally recorded event rather than creating a second one.
 
-    The service validates `action` against the set of verbs registered for the
-    tenant and rejects unknown verbs with 400. Validation is performed after
-    authorization, so an unauthorized caller receives 403 without learning
-    whether the verb is valid.
+    Ingestion is asynchronous downstream of the response: a recorded event is
+    durable when this call returns, but may not appear in `list` results for up
+    to 30 seconds under backlog.
     """)
   create is Operations.ResourceCreateWithServiceProvidedName<AuditEvent>;
 }

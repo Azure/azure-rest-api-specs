@@ -186,6 +186,17 @@ $OutputEncoding = [System.Text.Encoding]::UTF8
                       fail the run. Four true-negative rubrics deliberately
                       tolerate suggestion-severity output; this counts that
                       output without contradicting them.
+      Suggestion   -- GATING, but BUDGETED rather than banned. At most
+                      $SuggestionBudget (default 2) per true-negative TRIAL.
+                      Suggestions were previously free: TN graders are narrow by
+                      design, so a report could satisfy every one of them while
+                      burying the author in defensible 💡 findings. Padding is
+                      exactly that pile, so a gate pricing suggestions at zero
+                      cannot measure it. Banning them outright would contradict
+                      the rubrics that permit asking, at 💡, whether a value set
+                      is protocol-fixed -- hence a budget. Suggestions also roll
+                      into NonBlocking so that metric stays comparable with
+                      every previous run.
 
     Retracted findings are NOT counted. The reviewer has emitted a finding and
     then withdrawn it in the same report ("_(Retracted -- contact info, not a
@@ -195,7 +206,12 @@ $OutputEncoding = [System.Text.Encoding]::UTF8
     noise a reader actually experiences. A grader fails it on format grounds
     instead -- the same tracked-vs-gated split used for malformed Questions.
 
-    Returns a PSCustomObject with StimulusCount, Blocking, NonBlocking, and
+    A retraction on the SAME LINE as a finding retracts that finding; one on its
+    own line retracts the finding above it. Conflating the two silently
+    un-counts an innocent neighbouring finding and understates the metric.
+
+    Returns a PSCustomObject with StimulusCount, Blocking, NonBlocking,
+    Suggestion, SuggestionBudget, PerStimulusSuggestions, OverBudget, and
     Observed. `Observed` is $true when the agent spoke this report format's
     vocabulary at least once.
 
@@ -209,12 +225,25 @@ $OutputEncoding = [System.Text.Encoding]::UTF8
     in the agent file, which the eval harness never loads.
 #>
 function Get-TrueNegativeFindingCounts {
-    param([string]$JsonlPath)
+    param(
+        [string]$JsonlPath,
+        # At most this many Suggestion-severity findings per true-negative
+        # TRIAL. Suggestions were previously free: TN graders are narrow, so a
+        # pile of individually-defensible 💡 findings scored as a pass. Padding
+        # is exactly that pile, so a gate that prices it at zero cannot measure
+        # it. Banning suggestions outright is also wrong -- the rubrics
+        # explicitly permit asking, at 💡, whether a value set is protocol-fixed
+        # -- so this is a budget rather than a ban.
+        [int]$SuggestionBudget = 2
+    )
 
     $blocking = 0
     $nonBlocking = 0
+    $suggestion = 0
     $stimulusCount = 0
     $glyphSeen = $false
+    # stimulus name -> highest suggestion count seen in any one trial of it.
+    $perStimulusSuggestions = @{}
 
     # A finding: bold-bracketed rule ID at the start of a line. Requires at
     # least one hyphen so it cannot match bolded prose like **[Note]**, and
@@ -222,7 +251,16 @@ function Get-TrueNegativeFindingCounts {
     $findingPattern = '^\s*\*\*\[[A-Z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)+\]'
 
     if (-not (Test-Path $JsonlPath)) {
-        return [PSCustomObject]@{ StimulusCount = 0; Blocking = 0; NonBlocking = 0; Observed = $false }
+        return [PSCustomObject]@{
+            StimulusCount        = 0
+            Blocking             = 0
+            NonBlocking          = 0
+            Suggestion           = 0
+            SuggestionBudget     = $SuggestionBudget
+            PerStimulusSuggestions = @{}
+            OverBudget           = @()
+            Observed             = $false
+        }
     }
 
     foreach ($line in (Get-Content $JsonlPath)) {
@@ -259,21 +297,46 @@ function Get-TrueNegativeFindingCounts {
         # section it appears under.
         $currentSeverity = 'unsectioned'
         $lastCharged = $null   # which bucket the previous finding went into
+        $trialSuggestions = 0
         foreach ($ll in ($output -split '\r?\n')) {
             if ($ll -match "^\s*(?:[-*+]\s*|#{1,6}\s*)?`u{1F534}") { $currentSeverity = 'blocking'; $glyphSeen = $true; continue }
             if ($ll -match "^\s*(?:[-*+]\s*|#{1,6}\s*)?`u{1F7E1}") { $currentSeverity = 'nonblocking'; $glyphSeen = $true; continue }
-            if ($ll -match "^\s*(?:[-*+]\s*|#{1,6}\s*)?`u{1F4A1}") { $currentSeverity = 'nonblocking'; $glyphSeen = $true; continue }
+            # Suggestions are tracked separately so the budget can price them,
+            # but still roll into NonBlocking so that metric stays comparable
+            # with every previous run.
+            if ($ll -match "^\s*(?:[-*+]\s*|#{1,6}\s*)?`u{1F4A1}") { $currentSeverity = 'suggestion'; $glyphSeen = $true; continue }
             # A "Questions" heading ends the finding sections. Questions are
             # bullets rather than findings, and the rubrics permit them.
             if ($ll -match '^\s*#{1,6}\s*Questions\b') { $currentSeverity = 'questions'; $lastCharged = $null; continue }
 
-            # A retraction withdraws the finding that preceded it. Un-count it:
-            # the report's own conclusion is correct, so it is a format
-            # violation rather than a false positive. Graders fail it instead.
+            # A retraction withdraws a finding. Un-count it: the report's own
+            # conclusion is correct, so it is a format violation rather than a
+            # false positive. Graders fail it instead.
+            #
+            # Two shapes, and they retract DIFFERENT findings:
+            #   same line  -- `**[DP-X] title** -- `f:1` (Retracted)` retracts
+            #                 ITSELF. Skip it without charging, and leave the
+            #                 preceding finding alone.
+            #   own line   -- a bare "(Retracted)" or "No Blocking findings"
+            #                 line retracts the finding above it.
+            # Treating the first as the second silently un-counts an innocent
+            # neighbour, which understates the false-positive metric.
             if ($ll -match '\(\s*Retracted\b' -or
                 $ll -match '^\s*\**\s*No\s+(Blocking|Warning|Suggestion)\s+findings\b') {
+                if ($ll -match $findingPattern) {
+                    # Self-retracting: never charged, so nothing to reverse.
+                    $lastCharged = $null
+                    continue
+                }
                 if ($null -ne $lastCharged) {
-                    if ($lastCharged -eq 'blocking') { $blocking-- } else { $nonBlocking-- }
+                    if ($lastCharged -eq 'blocking') { $blocking-- }
+                    else {
+                        $nonBlocking--
+                        # A retracted suggestion must also leave the budget,
+                        # or a report that withdraws its own padding still
+                        # fails the gate for having written it.
+                        if ($lastCharged -eq 'suggestion') { $suggestion--; $trialSuggestions-- }
+                    }
                     $lastCharged = $null
                 }
                 continue
@@ -291,8 +354,20 @@ function Get-TrueNegativeFindingCounts {
                 # output that should be trended, but promoting it to the gate
                 # on the strength of a missing heading would be unfair.
                 if ($currentSeverity -eq 'blocking') { $blocking++; $lastCharged = 'blocking' }
+                elseif ($currentSeverity -eq 'suggestion') {
+                    $nonBlocking++; $suggestion++; $trialSuggestions++; $lastCharged = 'suggestion'
+                }
                 else { $nonBlocking++; $lastCharged = 'nonblocking' }
             }
+        }
+
+        # Record the worst trial for this stimulus. Worst rather than mean:
+        # the budget asks "can this stimulus provoke padding", and one trial
+        # that produces six suggestions is the answer regardless of what the
+        # other two did.
+        if (-not $perStimulusSuggestions.ContainsKey($stimName) -or
+            $perStimulusSuggestions[$stimName] -lt $trialSuggestions) {
+            $perStimulusSuggestions[$stimName] = $trialSuggestions
         }
 
         # Belt and braces for the gate: a blocking severity heading with no
@@ -310,11 +385,22 @@ function Get-TrueNegativeFindingCounts {
             $output -match "(?m)^\s*(?:[-*+]\s*|#{1,6}\s*)?`u{1F534}") { $blocking++ }
     }
 
+    $overBudget = @(
+        $perStimulusSuggestions.GetEnumerator() |
+            Where-Object { $_.Value -gt $SuggestionBudget } |
+            Sort-Object -Property Value -Descending |
+            ForEach-Object { [PSCustomObject]@{ Stimulus = $_.Key; Count = $_.Value } }
+    )
+
     return [PSCustomObject]@{
-        StimulusCount = $stimulusCount
-        Blocking      = $blocking
-        NonBlocking   = $nonBlocking
-        Observed      = $glyphSeen
+        StimulusCount          = $stimulusCount
+        Blocking               = $blocking
+        NonBlocking            = $nonBlocking
+        Suggestion             = $suggestion
+        SuggestionBudget       = $SuggestionBudget
+        PerStimulusSuggestions = $perStimulusSuggestions
+        OverBudget             = $overBudget
+        Observed               = $glyphSeen
     }
 }
 
@@ -785,6 +871,40 @@ for ($runIndex = 1; $runIndex -le $Repeat; $runIndex++) {
                 Write-Host ("    Non-blocking FPs  : {0}   [tracked, not gating -- watch the trend]" -f $tnMetrics.NonBlocking) -ForegroundColor DarkYellow
                 $fpPerStimulus = [math]::Round($tnMetrics.NonBlocking / $tnMetrics.StimulusCount, 2)
                 Write-Host ("    Non-blocking/stim : {0}" -f $fpPerStimulus) -ForegroundColor DarkYellow
+
+                # Suggestion budget. Padding is a pile of individually
+                # defensible suggestions, so it is invisible to a gate that
+                # prices suggestions at zero and to graders narrow enough to
+                # ignore them. Budgeted rather than banned: the rubrics
+                # explicitly allow asking, at 💡, whether a value set is
+                # protocol-fixed.
+                $budget = $tnMetrics.SuggestionBudget
+                $overBudget = @($tnMetrics.OverBudget)
+                $sugColor = if ($overBudget.Count -eq 0) { "Green" } else { "Red" }
+                Write-Host ("    Suggestion FPs    : {0}   [budget {1}/stimulus -- GATING]" -f $tnMetrics.Suggestion, $budget) -ForegroundColor $sugColor
+
+                if ($overBudget.Count -gt 0) {
+                    foreach ($ob in $overBudget) {
+                        Write-Host ("      OVER BUDGET: {0} -- {1} suggestion(s) in one trial, budget is {2}" -f $ob.Stimulus, $ob.Count, $budget) -ForegroundColor Red
+                    }
+                    Write-Host "      A true negative is a spec where the correct answer is silence." -ForegroundColor DarkYellow
+                    Write-Host "      Several defensible suggestions on one is what padding looks like." -ForegroundColor DarkYellow
+                }
+
+                # Per-stimulus trend, printed whether or not the budget is
+                # breached, so the number is trackable across runs rather than
+                # only visible on failure.
+                $withSuggestions = @(
+                    $tnMetrics.PerStimulusSuggestions.GetEnumerator() |
+                        Where-Object { $_.Value -gt 0 } | Sort-Object -Property Value -Descending
+                )
+                if ($withSuggestions.Count -gt 0) {
+                    Write-Host "    Suggestions/stim  :" -ForegroundColor DarkGray
+                    foreach ($kv in $withSuggestions) {
+                        $mark = if ($kv.Value -gt $budget) { "  <-- over" } else { "" }
+                        Write-Host ("      {0,-42} {1}{2}" -f $kv.Key, $kv.Value, $mark) -ForegroundColor DarkGray
+                    }
+                }
             } else {
                 Write-Host "    Blocking FPs      : UNMEASURED   [GATING -- treated as NOT met]" -ForegroundColor Red
                 Write-Host "    Non-blocking FPs  : UNMEASURED" -ForegroundColor Red
@@ -850,6 +970,20 @@ for ($runIndex = 1; $runIndex -le $Repeat; $runIndex++) {
     if ($tnGrader.FailedTrials -gt 0 -and $overallExitCode -eq 0) {
         Write-Host ("  [GATE] {0} true-negative trial(s) failed -- a single failure is blocking." -f $tnGrader.FailedTrials) -ForegroundColor Red
         $overallExitCode = 1
+    }
+
+    # Suggestion budget. Gating, and deliberately separate from the grader gate
+    # above: graders on a true negative are narrow by design, so a report can
+    # satisfy every one of them while burying the author in defensible
+    # suggestions. That is what padding is, and it is the failure mode most
+    # likely to get the bot muted in practice. Only enforced when the counts are
+    # trustworthy -- a blind counter must not manufacture a budget failure.
+    if (-not $tnGlyphBlind) {
+        $overBudgetFinal = @($tnMetrics.OverBudget)
+        if ($overBudgetFinal.Count -gt 0 -and $overallExitCode -eq 0) {
+            Write-Host ("  [GATE] {0} true-negative stimulus/stimuli exceeded the {1}-suggestion budget." -f $overBudgetFinal.Count, $tnMetrics.SuggestionBudget) -ForegroundColor Red
+            $overallExitCode = 1
+        }
     }
 
     # Cooldown between runs (skip after the final run). Gives Copilot agent

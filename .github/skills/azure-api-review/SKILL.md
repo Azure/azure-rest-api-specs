@@ -285,13 +285,19 @@ consistent naming` cannot tell you whether `cfg` is too opaque — the rule
   Warning and the body says `MUST`, the answer is Warning.
 
 Rules currently wording themselves `MUST` at Warning severity without citing an
-upstream anchor: `DP-ERR-01`, `DP-ERR-05`, `DP-LRO-01`, `DP-PAGE-02`,
-`DP-NAME-02`, `DP-NAME-04`, `DP-DOC-02`, `DP-MODEL-01`, `DP-VERSION-03`. Most
-do have a genuine upstream `DO` behind them — `DP-MODEL-01` restates
+upstream anchor: `DP-ERR-05`, `DP-LRO-01`, `DP-PAGE-02`, `DP-NAME-02`,
+`DP-NAME-04`, `DP-DOC-02`, `DP-MODEL-01`, `DP-VERSION-03`. Most do have a
+genuine upstream `DO` behind them — `DP-MODEL-01` restates
 `DO NOT use an action operation when the operation behavior could reasonably be
 defined as one of the standard REST … operations`, and `DP-NAME-02` restates
 `DO … include the time unit` — but until each carries its citation, treat the
 field as authoritative and the verb as emphasis.
+
+`DP-ERR-01` was on that list and has been rewritten: its enumeration trigger is
+now narrow and capped at Question, and it carries the
+`rest-error-use-default-response` citation that pushes **against** the stronger
+reading. It is the worked example of why the list matters — an uncited `MUST`
+turned out to fire on `Azure.Core.Foundations.Error` itself.
 
 ## Maintenance & Upstream Alignment
 

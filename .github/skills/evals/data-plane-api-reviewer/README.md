@@ -585,6 +585,66 @@ harness is only as trustworthy as the last time its graders were executed and
 its counter was tested against a report whose correct score you already knew —
 re-reading either one has never once found a defect that running it did not.
 
+### Suggestion budget on true negatives
+
+**At most 2 Suggestion-severity findings per true-negative trial. Gating.**
+
+Suggestions used to be free, and that was a hole in the measurement. TN graders
+are narrow by design — each names a specific trap — so a report could satisfy
+every grader while burying the author in individually-defensible 💡 findings.
+**Padding is precisely that pile.** A gate that prices suggestions at zero
+cannot measure the failure mode most likely to get the bot muted.
+
+Banning them outright would be the opposite error, and would contradict the
+rubrics: `eval-true-negatives.yaml` explicitly permits asking, at 💡, whether a
+value set is protocol-fixed. So it is a **budget, not a ban** — curiosity is
+affordable, a pile is not.
+
+Mechanics:
+
+- Counted per **trial**, not per stimulus-average. The per-stimulus number
+  reported is the **worst** trial, because the question is "can this stimulus
+  provoke padding", and one six-suggestion trial answers it.
+- Suggestions still roll into `NonBlocking`, so that metric stays comparable
+  with every earlier run.
+- A retracted suggestion leaves the budget, matching the existing
+  tracked-vs-gated split for retractions.
+- Enforced only when the counter is trustworthy — a blind counter (graders
+  failing while the glyph counter sees nothing) must not manufacture a budget
+  failure.
+- The per-stimulus count prints on every run, not only on breach, so it is a
+  **tracked trend** rather than a pass/fail flash.
+
+Verified against 7 crafted reports whose correct score was known in advance
+(exactly-at-budget passes, three fails, Questions are free, Warnings are not
+Suggestions, retraction leaves the budget, Blocking does not leak in), plus 5
+regression probes proving the blocking gate is unchanged.
+
+### Two changes that push in opposite directions — watch this in the next run
+
+Landing at the same time as the budget is the
+[two-step exception test](../../azure-api-review/SKILL.md) replacing the old
+"is the rationale plausible" rule. **They do not logically conflict, but they
+pull TN behaviour in opposite directions and the next run is the test:**
+
+- The two-step test makes the reviewer **less** willing to accept a stated
+  rationale, which pushes toward _more_ findings on true negatives.
+- The suggestion budget makes low-grade findings **more** costly, which pushes
+  toward fewer.
+
+Three TN stimuli depend on a rationale being accepted —
+`tn-closed-union-justified`, `tn-bounded-list-and-singleton`, and
+`tn-standard-mandated-route-segment`. In all three the rationale is genuinely
+_on-condition_ (the symbol set cannot grow; the collection is capped at 200; an
+external protocol dictates the path), so a **correct** application of the
+two-step test still accepts all three. The risk is over-application, not the
+rule itself.
+
+If the next run shows those three degrading while the persuasive-rationale
+positive is now caught, the two-step test is right and mis-calibrated. If they
+hold and the positive is caught, both changes landed. **Neither has been
+verified behaviourally — only by tracing the guidance against the fixtures.**
+
 ### Wall-clock ceiling
 
 The third run took **~2h for 40 trials**, against 54 min for 31 trials

@@ -67,9 +67,24 @@ duration type where one exists.
 - **Rule ID:** `DP-NAME-03`
 - **Severity:** Suggestion
 
-A `boolean` that encodes a mode is unextensible: adding a third state is a
-breaking change. Raise it as a question when the property name suggests a mode
-rather than a genuine yes/no (`isFullScan`, `useV2`, `enableAdvanced`).
+A `boolean` that encodes a mode narrows the design: a third state cannot be
+expressed in the property itself. Raise it as a question when the property name
+suggests a mode rather than a genuine yes/no (`isFullScan`, `useV2`,
+`enableAdvanced`).
+
+**Be accurate about the harm, which is smaller than it first appears.** This
+rule previously said that adding a third state is a breaking change. That is not
+how Azure services have actually evolved. The observed path is **additive**: the
+boolean is kept, and a richer type is added beside it — Language's
+`loggingOptOut?: boolean` still ships alongside
+`redactionPolicies?: BaseRedactionPolicy[]`, and its `RedactionPolicyKind` union
+(`noMask`, `characterMask`, `entityMask`, `syntheticReplacement`) was introduced
+without removing the flag. There is no case in the corpus of a boolean being
+replaced by a union.
+
+So the cost of guessing wrong is a slightly wider surface later, not a break.
+That is why this is a **Suggestion** and is phrased as a question — never a
+design demand, and never a claim that the spec will have to break compatibility.
 
 Genuine booleans -- `enabled`, `isDeleted` -- are fine. Do not flag every
 boolean; that is a noise generator.

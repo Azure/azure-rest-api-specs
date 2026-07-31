@@ -91,8 +91,11 @@ model Configuration {
   @doc("Default analysis mode used when a request omits `mode`.")
   defaultMode: AnalysisMode;
 
-  @doc("Whether to redact detected personal data from analysis results before returning them.")
-  redactPersonalData: boolean;
+  @doc("""
+    Whether the analyzer is enabled for this account. When false, analysis
+    requests are rejected and no configuration other than this flag applies.
+    """)
+  enabled: boolean;
 
   @doc("Time at which the configuration was last changed, in UTC.")
   @visibility(Lifecycle.Read)

@@ -22,31 +22,70 @@ failures is to string-match `message`, the error design has failed.
 
 ---
 
-## DP-ERR-01: Stable, documented `code` values
+## DP-ERR-01: Stable, distinguishable `code` values
 
 - **Rule ID:** `DP-ERR-01`
-- **Severity:** Warning
+- **Severity:** Warning — **except trigger 3 (enumeration), which is capped at
+  Question.** The field is the maximum for the rule; an individual trigger may
+  be capped lower, never higher.
 
-The `code` field is the machine-readable contract. It **MUST** be:
+The `code` field is the machine-readable contract. Three triggers, with
+different strengths, because they are not equally reliable to judge from a spec.
 
-- **Stable** -- treated as part of the API surface. Changing or removing a
-  `code` in a stable version is a breaking change (see `DP-VERSION-01` in
-  [`data-plane-resource-modeling.md`](data-plane-resource-modeling.md)).
-- **Enumerated and documented** -- the spec, or the operation's `@doc`, should
-  say which codes an operation can return. `code: string` with no documentation
-  anywhere means callers cannot branch on failure except by string matching.
-- **Distinct per condition** -- one `InvalidRequest` code covering eleven
-  different validation failures is not actionable.
+| #   | Trigger                                                                                                         | Severity     | Judge from the spec?                  |
+| --- | --------------------------------------------------------------------------------------------------------------- | ------------ | ------------------------------------- |
+| 1   | `code` values are unusable as discriminators -- free-form prose, numeric, locale-dependent, or not `PascalCase` | Warning      | Yes -- visible in the declared values |
+| 2   | One code covers many distinct failures (`InvalidRequest` for eleven validation errors)                          | Warning      | Yes, where the codes are declared     |
+| 3   | Distinct failure conditions are named, but no codes distinguish them                                            | **Question** | Only partly -- see below              |
 
-Flag: an error model with a bare undocumented `code: string`; an operation whose
-docs describe failure conditions in prose but never name the corresponding
-codes.
+**Trigger 1 -- unusable values.** `PascalCase`, no spaces, no punctuation, not a
+sentence, not an HTTP status number. `InvalidWidgetName` is a code;
+`Invalid widget name.` is a message and `400` is a status. Codes are also
+**stable**: changing or removing one in a stable version is a breaking change
+(see `DP-VERSION-01` in
+[`data-plane-resource-modeling.md`](data-plane-resource-modeling.md)).
 
-### `code` naming
+**Trigger 2 -- one code, many conditions.** Not actionable; the caller cannot
+tell what to do differently.
 
-`PascalCase`, no spaces, no punctuation, not a sentence, not an HTTP status
-number. `InvalidWidgetName` is a code; `Invalid widget name.` is a message and
-`400` is a status.
+**Trigger 3 -- enumeration. Narrow, and a Question.** Flag only when the spec
+**names distinct failure conditions requiring different caller remediation** and
+enumerates no codes that would let a caller tell them apart. The defect is the
+gap between "this operation fails in these several distinguishable ways" and
+"here is nothing to branch on" -- **not** the shape of the error model. Ask;
+do not assert. The author knows whether those conditions are actually distinct
+to a caller, and you are inferring it from prose.
+
+> **`Azure.Core.Foundations.Error` is never by itself a finding.** Its `code`
+> field is declared `code: string`, documented "One of a server-defined set of
+> error codes" -- verified in `typespec-azure-core` 0.70.0,
+> `lib/foundations.tsp`. Any spec using the standard Azure.Core error envelope
+> therefore has an unenumerated `code` **by construction**. A trigger that fires
+> on that fires on the platform, and on roughly 20 of 23 shipped data-plane
+> service groups. Only three (cognitiveservices Language, storage, translation)
+> bind a typed `union ErrorCode`, so the typed form is the corpus exception, not
+> the norm.
+
+**Do not flag** a bare `code: string`, an unmodified Azure.Core error envelope,
+or the absence of a typed `union ErrorCode`. Those are the ordinary state of a
+conforming data-plane spec.
+
+### The upstream tension -- do not "fix" this back
+
+Trigger 3 used to flag any undocumented `code: string` at Warning. That was
+mis-scoped, and the Guidelines point the other way on **venue**:
+
+> :warning: **YOU SHOULD NOT** document specific error status codes in your
+> OpenAPI/Swagger spec unless the `default` response cannot properly describe
+> the specific error response.
+
+(`rest-error-use-default-response`.) A single `default` error response is the
+**correct** shape, and real services publish their code strings in
+documentation rather than in the `.tsp`. The absence of enumerated codes in a
+spec is therefore frequently conformance, not a defect.
+
+A future maintainer may be tempted to restore the stronger trigger. Do not: it
+would fire on the platform's own primitive and on nearly every shipped service.
 
 ## DP-ERR-02: `target` identifies what failed
 
