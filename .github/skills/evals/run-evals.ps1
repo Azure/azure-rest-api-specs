@@ -697,10 +697,19 @@ for ($runIndex = 1; $runIndex -le $Repeat; $runIndex++) {
                 # Earlier versions of this script looked at $_.stimulusName and $_.stimulus.name
                 # at the top of the record; the JSONL schema actually nests them, so
                 # both lookups silently returned "(unknown)". Fixed paths:
+                #
+                # Each hop must be existence-checked, not just null-checked. An
+                # ERRORED trial (e.g. a session.idle timeout) emits a record whose
+                # `trajectory` has no `stimulus` property at all, and under
+                # Set-StrictMode accessing it throws rather than returning $null.
+                # That is why this only ever surfaced on the first run that
+                # contained an errored trial.
                 $name = '(unknown)'
                 if ($null -ne $_.PSObject.Properties['gradeResult'] -and $null -ne $_.gradeResult -and $null -ne $_.gradeResult.PSObject.Properties['stimulusName']) {
                     $name = $_.gradeResult.stimulusName
-                } elseif ($null -ne $_.PSObject.Properties['trajectory'] -and $null -ne $_.trajectory.stimulus -and $null -ne $_.trajectory.stimulus.name) {
+                } elseif ($null -ne $_.PSObject.Properties['trajectory'] -and $null -ne $_.trajectory -and
+                          $null -ne $_.trajectory.PSObject.Properties['stimulus'] -and $null -ne $_.trajectory.stimulus -and
+                          $null -ne $_.trajectory.stimulus.PSObject.Properties['name']) {
                     $name = $_.trajectory.stimulus.name
                 }
                 $evidence = if ($null -ne $_.PSObject.Properties['gradeResult'] -and $null -ne $_.gradeResult) { $_.gradeResult.evidence } elseif ($null -ne $_.PSObject.Properties['error']) { $_.error } else { "No result (timeout or error)" }

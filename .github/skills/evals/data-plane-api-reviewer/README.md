@@ -556,6 +556,27 @@ the only one that manufactured none.
 pull-request-time failure, but it can only test the properties someone thought
 to encode. Defect 4 passed it.
 
+### The pattern generalized: seven defects, none in the reviewer
+
+The four grader defects above are part of a larger and now unambiguous pattern.
+**Seven instrumentation defects have been found across this project's life, and
+every one was in the measurement apparatus rather than in the reviewer under
+test.** The later three:
+
+| #   | Defect                                                                                                                                                                                                      | Found by                                     |
+| --- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------- |
+| 5   | The finding counter's `else` branch swallowed `### Questions` bullets into the non-blocking count, so its documented Questions exclusion silently did nothing                                               | testing the counter against a crafted report |
+| 6   | A new grader used inline `(?i:...)` groups, which JS regex rejects outright, so the pattern never compiled                                                                                                  | `checkGraderSoundness`                       |
+| 7   | `DP-VERSION-04` was used as a _fabricated_ rule ID in `REAL_FINDINGS_PROBE`, then became a real rule — the probe would have read as that rule misfiring, and a `DP-VERSION-04` grader would have been inert | writing the rule that took the ID            |
+
+**Standing warning to whoever maintains this next:** when a measured run
+disagrees with your expectation, the prior should be that the instrument is
+wrong, not the reviewer. Seven for seven. The corollary is that a number from
+this harness is only as trustworthy as the last time its graders were executed
+and its counter was tested against a report whose correct score you already
+knew — re-reading either one has never once found a defect that running it did
+not.
+
 ## Second full run (2026-07-27) — first uncontaminated measurement
 
 Both suites, `claude-opus-4.6`, judge `claude-sonnet-4.6`. TN at `runs: 3`
