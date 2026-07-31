@@ -3305,6 +3305,10 @@ directive:
 
 ``` yaml
 suppressions:
+  - code: ResourceNameRestriction
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/topdatabases"]
+    reason: managedInstanceName is an ancestor resource name parameter. The pattern will be added for it across the RP in a future update.
   - code: MissingSegmentsInNestedResourceListOperation
     from: BackupShortTermRetentionPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/backupShortTermRetentionPolicies"]
