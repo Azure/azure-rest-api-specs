@@ -423,7 +423,12 @@ export const REAL_FINDINGS_PROBE = [
   "**[DP-VERSION-01] Property removed** -- `main.tsp:45`",
   "**[DP-VERSION-03] Missing @added on a new property** -- `main.tsp:47`",
   "**[DP-VERSION-04] Version segment in a newly-added route** -- `main.tsp:71`",
-  "**[DP-ERR-01] Undocumented error code** -- `main.tsp:24`",
+  // DP-ERR-01 trigger 2 (one code covering many distinct failures), which is
+  // Warning severity and therefore legitimately bracketed. Deliberately NOT
+  // trigger 3 (nothing enumerated): that trigger is capped at Question, so a
+  // bracketed form of it would be a contract violation rather than a real
+  // finding, and this probe exists to supply real findings.
+  "**[DP-ERR-01] One `InvalidRequest` code for eleven distinct failures** -- `main.tsp:24`",
   "**[DP-LRO-01] Status monitor has no error member** -- `main.tsp:30`",
   "**[DP-NAME-01] Non-obvious abbreviation** -- `main.tsp:29`",
   "**[DP-DOC-01] Tautological documentation** -- `main.tsp:24`",

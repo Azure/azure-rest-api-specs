@@ -56,6 +56,23 @@ gap between "this operation fails in these several distinguishable ways" and
 do not assert. The author knows whether those conditions are actually distinct
 to a caller, and you are inferring it from prose.
 
+> **Where trigger 3's output goes.** Question is a severity in
+> [`data-plane-report-format.md`](data-plane-report-format.md), and it has a
+> form: a plain bullet in the `### Questions` section, **never** a bracketed
+> `**[DP-ERR-01] ...**` finding. So a trigger-3 observation is written:
+>
+> ```markdown
+> ### Questions
+>
+> - `submitInvoice` documents three distinct failures (`inv.tsp:74`) but the
+>   error model enumerates no codes to tell them apart. Are these meant to be
+>   distinguishable programmatically, or is the distinction only for humans?
+> ```
+>
+> Triggers 1 and 2 are Warning and **are** bracketed findings. One rule, two
+> emission forms, decided by which trigger fired -- read the trigger table
+> before writing.
+
 > **`Azure.Core.Foundations.Error` is never by itself a finding.** Its `code`
 > field is declared `code: string`, documented "One of a server-defined set of
 > error codes" -- verified in `typespec-azure-core` 0.70.0,

@@ -134,6 +134,13 @@ because…" and be done:
   protocol fixes the value set — is that contractual?
 ```
 
+**A rule may also cap a single trigger at Question while the rule itself is
+Warning.** `DP-ERR-01` does: its "unusable code values" and "one code for many
+failures" triggers are bracketed Warning findings, while its "nothing enumerated
+to distinguish the conditions" trigger is a Questions bullet. The emission form
+follows **the trigger that fired**, not the rule's headline severity — check the
+rule's own trigger table before choosing a form.
+
 **Do not** write a Question as a bracketed finding, do not give it a severity
 glyph, and do not attach a `**Fix:**` block. If you are proposing the fix, you
 are not asking a question — you are making a finding, and it must meet the
