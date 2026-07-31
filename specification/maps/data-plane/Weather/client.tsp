@@ -6,113 +6,157 @@ using MapsWeather;
 
 namespace Customizations;
 
-@@clientName(HourlyForecast.date, "timestamp");
-@@clientName(HourlyForecast.ceiling, "cloudCeiling");
-@@clientName(HourlyForecast.uvIndexPhrase, "uvIndexDescription");
+@@clientName(HourlyForecast.date, "timestamp", "!autorest");
+@@clientName(HourlyForecast.ceiling, "cloudCeiling", "!autorest");
+@@clientName(HourlyForecast.uvIndexPhrase, "uvIndexDescription", "!autorest");
 
-@@clientName(WeatherValue.unit, "unitLabel");
+@@clientName(WeatherValue.unit, "unitLabel", "!autorest");
 
-@@clientName(WindDirection.localizedDescription, "description");
+@@clientName(WindDirection.localizedDescription, "description", "!autorest");
 
-@@clientName(MinuteForecastSummary.shortPhrase, "shortDescription");
-@@clientName(MinuteForecastSummary.briefPhrase, "briefDescription");
+@@clientName(
+  MinuteForecastSummary.shortPhrase,
+  "shortDescription",
+  "!autorest"
+);
+@@clientName(
+  MinuteForecastSummary.briefPhrase,
+  "briefDescription",
+  "!autorest"
+);
 
-@@clientName(IntervalSummary.shortPhrase, "shortDescription");
-@@clientName(IntervalSummary.briefPhrase, "briefDescription");
+@@clientName(IntervalSummary.shortPhrase, "shortDescription", "!autorest");
+@@clientName(IntervalSummary.briefPhrase, "briefDescription", "!autorest");
 
-@@clientName(ForecastInterval.dbz, "decibelRelativeToZ");
-@@clientName(ForecastInterval.shortPhrase, "shortDescription");
+@@clientName(ForecastInterval.dbz, "decibelRelativeToZ", "!autorest");
+@@clientName(ForecastInterval.shortPhrase, "shortDescription", "!autorest");
 
-@@clientName(QuarterDayForecast.date, "dateTime");
+@@clientName(QuarterDayForecast.date, "dateTime", "!autorest");
 
-@@clientName(CurrentConditions.phrase, "description");
-@@clientName(CurrentConditions.isDayTime, "isDaytime");
-@@clientName(CurrentConditions.uvIndexPhrase, "uvIndexDescription");
-@@clientName(CurrentConditions.ceiling, "cloudCeiling");
+@@clientName(CurrentConditions.phrase, "description", "!autorest");
+@@clientName(CurrentConditions.isDayTime, "isDaytime", "!autorest");
+@@clientName(
+  CurrentConditions.uvIndexPhrase,
+  "uvIndexDescription",
+  "!autorest"
+);
+@@clientName(CurrentConditions.ceiling, "cloudCeiling", "!autorest");
 
-@@clientName(PressureTendency.localizedDescription, "description");
+@@clientName(PressureTendency.localizedDescription, "description", "!autorest");
 
-@@clientName(DailyForecast.date, "dateTime");
-@@clientName(DailyForecast.degreeDaySummary, "meanTemperatureDeviation");
-@@clientName(DailyForecast.airAndPollen, "airQuality");
-@@clientName(DailyForecast.day, "daytimeForecast");
-@@clientName(DailyForecast.night, "nighttimeForecast");
+@@clientName(DailyForecast.date, "dateTime", "!autorest");
+@@clientName(
+  DailyForecast.degreeDaySummary,
+  "meanTemperatureDeviation",
+  "!autorest"
+);
+@@clientName(DailyForecast.airAndPollen, "airQuality", "!autorest");
+@@clientName(DailyForecast.day, "daytimeForecast", "!autorest");
+@@clientName(DailyForecast.night, "nighttimeForecast", "!autorest");
 
-@@clientName(AirAndPollen.name, "description");
-@@clientName(AirAndPollen.type, "airQualityType");
+@@clientName(AirAndPollen.name, "description", "!autorest");
+@@clientName(AirAndPollen.type, "airQualityType", "!autorest");
 
-@@clientName(DailyForecastDetail.shortPhrase, "shortDescription");
+@@clientName(DailyForecastDetail.shortPhrase, "shortDescription", "!autorest");
 
-@@clientName(WeatherHazards.hazardDetails, "details");
+@@clientName(WeatherHazards.hazardDetails, "details", "!autorest");
 
-@@clientName(HazardDetail.shortPhrase, "shortDescription");
+@@clientName(HazardDetail.shortPhrase, "shortDescription", "!autorest");
 
-@@clientName(WaypointForecast.shortPhrase, "shortDescription");
-@@clientName(WaypointForecast.isDayTime, "isDaytime");
+@@clientName(WaypointForecast.shortPhrase, "shortDescription", "!autorest");
+@@clientName(WaypointForecast.isDayTime, "isDaytime", "!autorest");
 
-@@clientName(WeatherNotification.shortPhrase, "shortDescription");
+@@clientName(WeatherNotification.shortPhrase, "shortDescription", "!autorest");
 
-@@clientName(SevereWeatherAlert.class, "classification");
-@@clientName(SevereWeatherAlert.alertAreas, "alertDetails");
+@@clientName(SevereWeatherAlert.class, "classification", "!autorest");
+@@clientName(SevereWeatherAlert.alertAreas, "alertDetails", "!autorest");
 
-@@clientName(SevereWeatherAlertDescription.localized, "description");
-@@clientName(SevereWeatherAlertDescription.english, "status");
+@@clientName(
+  SevereWeatherAlertDescription.localized,
+  "description",
+  "!autorest"
+);
+@@clientName(SevereWeatherAlertDescription.english, "status", "!autorest");
 
-@@clientName(AlertArea, "AlertDetails");
-@@clientName(AlertArea.summary, "description");
-@@clientName(AlertArea.alertDetails, "details");
-@@clientName(AlertArea.alertDetailsLanguageCode, "language");
+@@clientName(AlertArea, "AlertDetails", "!autorest");
+@@clientName(AlertArea.summary, "description", "!autorest");
+@@clientName(AlertArea.alertDetails, "details", "!autorest");
+@@clientName(AlertArea.alertDetailsLanguageCode, "language", "!autorest");
 
-@@clientName(DailyIndex.category, "categoryDescription");
-@@clientName(DailyIndex.ascending, "isAscending");
+@@clientName(DailyIndex.category, "categoryDescription", "!autorest");
+@@clientName(DailyIndex.ascending, "isAscending", "!autorest");
 
-@@clientName(ActiveStormResult.results, "activeStorms");
+@@clientName(ActiveStormResult.results, "activeStorms", "!autorest");
 
-@@clientName(StormSearchResult.results, "storms");
+@@clientName(StormSearchResult.results, "storms", "!autorest");
 
-@@clientName(StormForecastResult.results, "stormForecasts");
+@@clientName(StormForecastResult.results, "stormForecasts", "!autorest");
 
-@@clientName(StormForecast.dateTime, "timestamp");
-@@clientName(StormForecast.initializedDateTime, "initializedTimestamp");
-@@clientName(StormForecast.location, "coordinates");
-@@clientName(StormForecast.window, "weatherWindow");
+@@clientName(StormForecast.dateTime, "timestamp", "!autorest");
+@@clientName(
+  StormForecast.initializedDateTime,
+  "initializedTimestamp",
+  "!autorest"
+);
+@@clientName(StormForecast.location, "coordinates", "!autorest");
+@@clientName(StormForecast.window, "weatherWindow", "!autorest");
 
-@@clientName(WeatherWindow.left, "topLeft");
-@@clientName(WeatherWindow.right, "bottomRight");
-@@clientName(WeatherWindow.beginDateTime, "beginTimestamp");
-@@clientName(WeatherWindow.endDateTime, "endTimestamp");
+@@clientName(WeatherWindow.left, "topLeft", "!autorest");
+@@clientName(WeatherWindow.right, "bottomRight", "!autorest");
+@@clientName(WeatherWindow.beginDateTime, "beginTimestamp", "!autorest");
+@@clientName(WeatherWindow.endDateTime, "endTimestamp", "!autorest");
 
-@@clientName(StormWindRadiiSummary.dateTime, "timestamp");
+@@clientName(StormWindRadiiSummary.dateTime, "timestamp", "!autorest");
 
-@@clientName(RadiusSector.range, "radius");
+@@clientName(RadiusSector.range, "radius", "!autorest");
 
-@@clientName(StormLocationsResult.results, "stormLocations");
+@@clientName(StormLocationsResult.results, "stormLocations", "!autorest");
 
-@@clientName(StormLocation.dateTime, "timestamp");
-@@clientName(StormLocation.location, "coordinates");
+@@clientName(StormLocation.dateTime, "timestamp", "!autorest");
+@@clientName(StormLocation.location, "coordinates", "!autorest");
 
-@@clientName(AirQualityResult.results, "airQualityResults");
+@@clientName(AirQualityResult.results, "airQualityResults", "!autorest");
 
-@@clientName(AirQuality.dateTime, "timestamp");
+@@clientName(AirQuality.dateTime, "timestamp", "!autorest");
 
-@@clientName(DailyAirQualityForecastResult.results, "airQualityResults");
+@@clientName(
+  DailyAirQualityForecastResult.results,
+  "airQualityResults",
+  "!autorest"
+);
 
-@@clientName(DailyAirQuality.dateTime, "timestamp");
+@@clientName(DailyAirQuality.dateTime, "timestamp", "!autorest");
 
-@@clientName(DailyHistoricalActualsResult.results, "historicalActuals");
+@@clientName(
+  DailyHistoricalActualsResult.results,
+  "historicalActuals",
+  "!autorest"
+);
 
-@@clientName(DailyHistoricalActuals.date, "timestamp");
+@@clientName(DailyHistoricalActuals.date, "timestamp", "!autorest");
 
-@@clientName(DailyHistoricalRecordsResult.results, "historicalRecords");
+@@clientName(
+  DailyHistoricalRecordsResult.results,
+  "historicalRecords",
+  "!autorest"
+);
 
-@@clientName(DailyHistoricalRecords.date, "timestamp");
+@@clientName(DailyHistoricalRecords.date, "timestamp", "!autorest");
 
-@@clientName(DailyHistoricalNormalsResult.results, "historicalNormals");
+@@clientName(
+  DailyHistoricalNormalsResult.results,
+  "historicalNormals",
+  "!autorest"
+);
 
-@@clientName(DailyHistoricalNormals.date, "timestamp");
+@@clientName(DailyHistoricalNormals.date, "timestamp", "!autorest");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for SDK compatibility"
-@@Legacy.clientDefaultValue(ResponseFormatParameters.format, "json");
+@@Legacy.clientDefaultValue(
+  ResponseFormatParameters.format,
+  "json",
+  "!autorest"
+);
 
 // Flatten operations onto client instead of having an operation group attribute
 @client({
