@@ -28,6 +28,7 @@ import "./SessionHostConfiguration.tsp";
 import "./SessionHostUpdateStatus.tsp";
 import "./SessionHostProvisioningStatus.tsp";
 import "./back-compat.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -75,5 +76,5 @@ enum Versions {
    * The latest public preview API version.
    */
   @previewVersion
-  vLatestPreview: "2026-03-01-preview",
+  vLatestPreview: "2026-04-01-preview",
 }

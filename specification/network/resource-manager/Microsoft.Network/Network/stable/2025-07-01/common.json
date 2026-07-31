@@ -3799,42 +3799,6 @@
         ]
       }
     },
-    "CreatedByType": {
-      "type": "string",
-      "description": "The type of identity that created the resource.",
-      "enum": [
-        "User",
-        "Application",
-        "ManagedIdentity",
-        "Key"
-      ],
-      "x-ms-enum": {
-        "name": "CreatedByType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "User",
-            "value": "User",
-            "description": "User"
-          },
-          {
-            "name": "Application",
-            "value": "Application",
-            "description": "Application"
-          },
-          {
-            "name": "ManagedIdentity",
-            "value": "ManagedIdentity",
-            "description": "ManagedIdentity"
-          },
-          {
-            "name": "Key",
-            "value": "Key",
-            "description": "Key"
-          }
-        ]
-      }
-    },
     "CustomIpPrefixType": {
       "type": "string",
       "description": "Type of custom IP prefix. Should be Singular, Parent, or Child.",
@@ -7845,41 +7809,9 @@
           "readOnly": true
         },
         "systemData": {
-          "$ref": "#/definitions/SecurityPerimeterSystemData",
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
           "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
           "readOnly": true
-        }
-      }
-    },
-    "SecurityPerimeterSystemData": {
-      "type": "object",
-      "description": "Metadata pertaining to creation and last modification of the resource.",
-      "properties": {
-        "createdBy": {
-          "type": "string",
-          "description": "The identity that created the resource."
-        },
-        "createdByType": {
-          "$ref": "#/definitions/CreatedByType",
-          "description": "The type of identity that created the resource."
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp of resource creation (UTC)."
-        },
-        "lastModifiedBy": {
-          "type": "string",
-          "description": "The identity that last modified the resource."
-        },
-        "lastModifiedByType": {
-          "$ref": "#/definitions/CreatedByType",
-          "description": "The type of identity that last modified the resource."
-        },
-        "lastModifiedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp of resource last modification (UTC)"
         }
       }
     },

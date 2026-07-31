@@ -683,6 +683,31 @@ using Azure.ClientGenerator.Core;
 @@usage(AdminCredentialsForPatch, Usage.input, "csharp");
 
 // Preserve backward-compatible version enum member names
+@@clientName(
+  PostgresMajorVersion.`11`,
+  Azure.ClientGenerator.Core.exact("Ver11"),
+  "csharp"
+);
+@@clientName(
+  PostgresMajorVersion.`12`,
+  Azure.ClientGenerator.Core.exact("Ver12"),
+  "csharp"
+);
+@@clientName(
+  PostgresMajorVersion.`13`,
+  Azure.ClientGenerator.Core.exact("Ver13"),
+  "csharp"
+);
+@@clientName(
+  PostgresMajorVersion.`14`,
+  Azure.ClientGenerator.Core.exact("Ver14"),
+  "csharp"
+);
+@@clientName(
+  PostgresMajorVersion.`15`,
+  Azure.ClientGenerator.Core.exact("Ver15"),
+  "csharp"
+);
 @@clientName(PostgresMajorVersion.`16`, "Sixteen", "csharp");
 @@clientName(PostgresMajorVersion.`17`, "Seventeen", "csharp");
 @@clientName(PostgresMajorVersion.`18`, "Eighteen", "csharp");
@@ -745,3 +770,87 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 @@alternateType(ServerPropertiesForPatch.authConfig, AuthConfig, "csharp");
+
+// --- Blocking: Type suffix violations (SUFFIX003/SUFFIX005) ---
+@@clientName(
+  MaintenanceEventActionResponse,
+  "MaintenanceEventActionResult",
+  "csharp"
+);
+@@clientName(
+  MaintenanceEventRescheduleRequest,
+  "MaintenanceEventRescheduleContent",
+  "csharp"
+);
+@@clientName(
+  StartMajorVersionUpgradePrecheckRequest,
+  "StartMajorVersionUpgradePrecheckContent",
+  "csharp"
+);
+@@clientName(
+  StartMajorVersionUpgradePrecheckResponse,
+  "StartMajorVersionUpgradePrecheckResult",
+  "csharp"
+);
+
+// --- Blocking: Boolean property naming (verb prefix) ---
+@@clientName(
+  MaintenanceEventResourceProperties.deferrable,
+  "IsDeferrable",
+  "csharp"
+);
+@@clientName(
+  MaintenanceEventActionResponse.appliedNow,
+  "IsAppliedNow",
+  "csharp"
+);
+@@clientName(PolicyDetail.passed, "IsPassed", "csharp");
+
+// --- Non-blocking: Resource infix in Data/Collection types (RESINFIX001) ---
+@@clientName(MaintenanceEventResource, "MaintenanceEvent", "csharp");
+@@clientName(
+  MajorVersionUpgradePrecheckResource,
+  "MajorVersionUpgradePrecheck",
+  "csharp"
+);
+
+// --- Non-blocking: DateTimeOffset property suffixes (DATE001) ---
+@@clientName(
+  MaintenanceEventResourceProperties.deferralDeadline,
+  "DeferralDeadlineOn",
+  "csharp"
+);
+@@clientName(
+  MaintenanceEventResourceProperties.rescheduledFrom,
+  "RescheduledFromOn",
+  "csharp"
+);
+
+// --- Non-blocking: Generic/ambiguous type names (contextual naming) ---
+@@clientName(PolicyDetail, "MajorVersionUpgradePrecheckPolicyDetail", "csharp");
+@@clientName(
+  PrecheckErrorInfo,
+  "MajorVersionUpgradePrecheckErrorInfo",
+  "csharp"
+);
+@@clientName(PrecheckResult, "MajorVersionUpgradePrecheckResult", "csharp");
+@@clientName(
+  UpgradeSequence,
+  "PostgreSqlMajorVersionUpgradeSequence",
+  "csharp"
+);
+@@clientName(
+  MaintenanceType,
+  "PostgreSqlFlexibleServerMaintenanceType",
+  "csharp"
+);
+@@clientName(
+  MaintenanceEventResourceProperties,
+  "MaintenanceEventProperties",
+  "csharp"
+);
+@@clientName(
+  MajorVersionUpgradePrecheckResourceProperties,
+  "MajorVersionUpgradePrecheckProperties",
+  "csharp"
+);

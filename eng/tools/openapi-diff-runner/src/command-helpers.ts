@@ -3,16 +3,16 @@ import { getChangedFilesStatuses, swagger } from "@azure-tools/specs-shared/chan
 import { defaultLogger } from "@azure-tools/specs-shared/logger";
 import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import path from "node:path";
-import { logError, LogLevel, logMessage, logMessageAsync, setOutput } from "./log.js";
+import { logError, LogLevel, logMessage, logMessageAsync, setOutput } from "./log.ts";
 import {
   BreakingChangeReviewRequiredLabel,
-  BreakingChangesCheckType,
-  Context,
+  type BreakingChangesCheckType,
+  type Context,
   VersioningReviewRequiredLabel,
-} from "./types/breaking-change.js";
-import { ResultMessageRecord } from "./types/message.js";
-import { createOadMessageProcessor } from "./utils/oad-message-processor.js";
-import { createPullRequestProperties } from "./utils/pull-request.js";
+} from "./types/breaking-change.ts";
+import { type ResultMessageRecord } from "./types/message.ts";
+import { createOadMessageProcessor } from "./utils/oad-message-processor.ts";
+import { createPullRequestProperties } from "./utils/pull-request.ts";
 
 /**
  * Interface for parsed CLI arguments

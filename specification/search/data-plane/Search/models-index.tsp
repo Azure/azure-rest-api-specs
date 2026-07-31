@@ -781,10 +781,10 @@ model QueryAnswerResult is Record<unknown> {
 }
 
 /** Contains debugging information that can be used to further explore your search results. */
+@added(Versions.v2026_05_01_preview)
+@removed(Versions.v2026_04_01)
 model DebugInfo {
   /** Contains debugging information specific to query rewrites. */
-  @added(Versions.v2026_05_01_preview)
-  @removed(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
   queryRewrites?: QueryRewritesDebugInfo;
 }
@@ -1343,7 +1343,6 @@ model AutocompleteRequest {
   /** The comma-separated list of field names to consider when querying for auto-completed terms. Target fields must be included in the specified suggester. */
   #suppress "@azure-tools/typespec-autorest/unknown-format" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Pre-existing API contract"
-  #suppress "@azure-tools/typespec-autorest/unknown-format" "Pre-existing API contract"
   @encode(ArrayEncoding.commaDelimited)
   searchFields?: string[];
 

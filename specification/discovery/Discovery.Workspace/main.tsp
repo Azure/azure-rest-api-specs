@@ -1,7 +1,8 @@
 import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
-import "./shared.tsp";
+import "../Discovery.Common/shared.tsp";
+import "./versions.tsp";
 import "./common.tsp";
 import "./_project.tsp";
 import "./_investigation.tsp";
@@ -12,19 +13,12 @@ import "./_conversation_message_logs.tsp";
 import "./_tool.tsp";
 import "./_task.tsp";
 import "./_discovery_agent.tsp";
+import "./client.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
-@useAuth(
-  OAuth2Auth<[
-    {
-      type: OAuth2FlowType.implicit,
-      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
-      scopes: ["https://discovery.azure.com/.default"],
-    }
-  ]>
-)
+@useAuth(Microsoft.Discovery.Workspace.OAuth2Auth)
 @service(#{ title: "Microsoft.Discovery.Workspace service" })
 @versioned(Microsoft.Discovery.Workspace.Versions)
 @server(
@@ -38,3 +32,14 @@ using TypeSpec.Versioning;
   }
 )
 namespace Microsoft.Discovery.Workspace;
+
+/** OAuth2 implicit flow for authenticating with the Discovery Workspace API. Uses Azure Active Directory for authorization. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving OAuth2Auth name for backward compatibility with existing SDKs"
+model OAuth2Auth
+  is TypeSpec.Http.OAuth2Auth<[
+    {
+      type: OAuth2FlowType.implicit;
+      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize";
+      scopes: ["https://discovery.azure.com/.default"];
+    }
+  ]>;

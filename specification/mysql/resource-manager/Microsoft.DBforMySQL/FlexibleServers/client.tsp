@@ -13,8 +13,18 @@ using Microsoft.DBforMySQL;
 );
 @@clientName(Microsoft.DBforMySQL, "MySQLManagementClient", "python");
 
-@@clientName(ServerVersion.`5.7`, "Five7", "javascript,go,csharp");
-@@clientName(ServerVersion.`8.0.21`, "Eight021", "javascript,go,csharp");
+@@clientName(ServerVersion.`5.7`, "Five7", "javascript,go");
+@@clientName(ServerVersion.`8.0.21`, "Eight021", "javascript,go");
+@@clientName(
+  ServerVersion.`5.7`,
+  Azure.ClientGenerator.Core.exact("Ver5_7"),
+  "csharp"
+);
+@@clientName(
+  ServerVersion.`8.0.21`,
+  Azure.ClientGenerator.Core.exact("Ver8_0_21"),
+  "csharp"
+);
 @@clientName(ServerVersion.`5.7`, "FIVE7", "python");
 @@clientName(ServerVersion.`8.0.21`, "EIGHT0_21", "python");
 @@clientName(ServerVersion.`8.4`, "EIGHT4", "python");

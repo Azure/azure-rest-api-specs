@@ -21,7 +21,7 @@ export default async function updateLabels({ github, context, core }) {
  * @param {string} params.head_sha
  * @param {number} params.issue_number
  * @param {number} params.run_id
- * @param {(import("@octokit/core").Octokit & import("@octokit/plugin-rest-endpoint-methods/dist-types/types.js").Api & { paginate: import("@octokit/plugin-paginate-rest").PaginateInterface; })} params.github
+ * @param {(import("@octokit/core").Octokit & import("@octokit/plugin-rest-endpoint-methods").Api & { paginate: import("@octokit/plugin-paginate-rest").PaginateInterface; })} params.github
  * @param {typeof import("@actions/core")} params.core
  */
 export async function updateLabelsImpl({
