@@ -72,6 +72,21 @@ using Microsoft.Solutions;
 @@clientName(PlanPatchable, "ManagedApplicationsPlanPatch", "csharp");
 @@clientName(Status, "JitRequestStatus", "csharp");
 @@clientName(Substatus, "JitRequestSubstatus", "csharp");
+@@clientName(
+  RegistryPackage,
+  "ManagedApplicationsRegistryPackage",
+  "csharp"
+);
+@@clientName(
+  RegistryPackageLinks,
+  "ManagedApplicationsRegistryPackageLinks",
+  "csharp"
+);
+@@clientName(
+  RegistryPackagePlan,
+  "ManagedApplicationsRegistryPackagePlan",
+  "csharp"
+);
 @@alternateType(
   Identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
