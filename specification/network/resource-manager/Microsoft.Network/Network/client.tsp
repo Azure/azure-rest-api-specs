@@ -27,6 +27,10 @@ namespace CombineClient {
 
 // Define WritableSubResource in the ARM namespace for C# collection compatibility.
 namespace Azure.ResourceManager.Models {
+  model SubResource {
+    id?: armResourceIdentifier;
+  }
+
   model WritableSubResource {
     id?: armResourceIdentifier;
   }
@@ -5523,6 +5527,342 @@ op replaceprivateDnsZoneGroupsList(
   "csharp"
 );
 
+// Preserve ResourceType properties from the previous C# AutoRest projection.
+@@clientName(
+  Microsoft.Network.ApplicationGatewayAuthenticationCertificate.type,
+  "ResourceType",
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayAuthenticationCertificate.type,
+  Azure.Core.armResourceType,
+  "csharp"
+);
+@@clientName(
+  Common.ApplicationGatewayBackendAddressPool.type,
+  "ResourceType",
+  "csharp"
+);
+@@alternateType(
+  Common.ApplicationGatewayBackendAddressPool.type,
+  Azure.Core.armResourceType,
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ApplicationGatewayBackendHttpSettings.type,
+  "ResourceType",
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayBackendHttpSettings.type,
+  Azure.Core.armResourceType,
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ApplicationGatewayBackendSettings.type,
+  "ResourceType",
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayBackendSettings.type,
+  Azure.Core.armResourceType,
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ApplicationGatewayFrontendIPConfiguration.type,
+  "ResourceType",
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayFrontendIPConfiguration.type,
+  Azure.Core.armResourceType,
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ApplicationGatewayFrontendPort.type,
+  "ResourceType",
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayFrontendPort.type,
+  Azure.Core.armResourceType,
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ApplicationGatewayHttpListener.type,
+  "ResourceType",
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayHttpListener.type,
+  Azure.Core.armResourceType,
+  "csharp"
+);
+@@clientName(
+  Common.ApplicationGatewayIPConfiguration.type,
+  "ResourceType",
+  "csharp"
+);
+@@alternateType(
+  Common.ApplicationGatewayIPConfiguration.type,
+  Azure.Core.armResourceType,
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ApplicationGatewayListener.type,
+  "ResourceType",
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayListener.type,
+  Azure.Core.armResourceType,
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ApplicationGatewayLoadDistributionPolicy.type,
+  "ResourceType",
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayLoadDistributionPolicy.type,
+  Azure.Core.armResourceType,
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ApplicationGatewayLoadDistributionTarget.type,
+  "ResourceType",
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayLoadDistributionTarget.type,
+  Azure.Core.armResourceType,
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ApplicationGatewayPathRule.type,
+  "ResourceType",
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayPathRule.type,
+  Azure.Core.armResourceType,
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ApplicationGatewayPrivateLinkConfiguration.type,
+  "ResourceType",
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayPrivateLinkConfiguration.type,
+  Azure.Core.armResourceType,
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ApplicationGatewayPrivateLinkIpConfiguration.type,
+  "ResourceType",
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayPrivateLinkIpConfiguration.type,
+  Azure.Core.armResourceType,
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ApplicationGatewayProbe.type,
+  "ResourceType",
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayProbe.type,
+  Azure.Core.armResourceType,
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ApplicationGatewayRedirectConfiguration.type,
+  "ResourceType",
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayRedirectConfiguration.type,
+  Azure.Core.armResourceType,
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ApplicationGatewayRequestRoutingRule.type,
+  "ResourceType",
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayRequestRoutingRule.type,
+  Azure.Core.armResourceType,
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ApplicationGatewayRoutingRule.type,
+  "ResourceType",
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayRoutingRule.type,
+  Azure.Core.armResourceType,
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ApplicationGatewaySslCertificate.type,
+  "ResourceType",
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ApplicationGatewaySslCertificate.type,
+  Azure.Core.armResourceType,
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ApplicationGatewaySslProfile.type,
+  "ResourceType",
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ApplicationGatewaySslProfile.type,
+  Azure.Core.armResourceType,
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ApplicationGatewayTrustedClientCertificate.type,
+  "ResourceType",
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayTrustedClientCertificate.type,
+  Azure.Core.armResourceType,
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ApplicationGatewayTrustedRootCertificate.type,
+  "ResourceType",
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayTrustedRootCertificate.type,
+  Azure.Core.armResourceType,
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ApplicationGatewayUrlPathMap.type,
+  "ResourceType",
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayUrlPathMap.type,
+  Azure.Core.armResourceType,
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.AzureFirewallIPConfiguration.type,
+  "ResourceType",
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.AzureFirewallIPConfiguration.type,
+  Azure.Core.armResourceType,
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.BastionHostIPConfiguration.type,
+  "ResourceType",
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.BastionHostIPConfiguration.type,
+  Azure.Core.armResourceType,
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ContainerNetworkInterface.type,
+  "ResourceType",
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ContainerNetworkInterface.type,
+  Azure.Core.armResourceType,
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ContainerNetworkInterfaceConfiguration.type,
+  "ResourceType",
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ContainerNetworkInterfaceConfiguration.type,
+  Azure.Core.armResourceType,
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.DdosDetectionRule.type,
+  "ResourceType",
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.DdosDetectionRule.type,
+  Azure.Core.armResourceType,
+  "csharp"
+);
+@@clientName(Common.InboundNatPool.type, "ResourceType", "csharp");
+@@alternateType(
+  Common.InboundNatPool.type,
+  Azure.Core.armResourceType,
+  "csharp"
+);
+@@clientName(Common.IPConfigurationProfile.type, "ResourceType", "csharp");
+@@alternateType(
+  Common.IPConfigurationProfile.type,
+  Azure.Core.armResourceType,
+  "csharp"
+);
+@@clientName(
+  Common.PrivateLinkServiceConnection.type,
+  "ResourceType",
+  "csharp"
+);
+@@alternateType(
+  Common.PrivateLinkServiceConnection.type,
+  Azure.Core.armResourceType,
+  "csharp"
+);
+@@clientName(
+  Common.PrivateLinkServiceIpConfiguration.type,
+  "ResourceType",
+  "csharp"
+);
+@@alternateType(
+  Common.PrivateLinkServiceIpConfiguration.type,
+  Azure.Core.armResourceType,
+  "csharp"
+);
+@@clientName(Common.ResourceNavigationLink.type, "ResourceType", "csharp");
+@@alternateType(
+  Common.ResourceNavigationLink.type,
+  Azure.Core.armResourceType,
+  "csharp"
+);
+@@clientName(Common.ServiceAssociationLink.type, "ResourceType", "csharp");
+@@alternateType(
+  Common.ServiceAssociationLink.type,
+  Azure.Core.armResourceType,
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.VirtualNetworkApplianceIpConfiguration.type,
+  "ResourceType",
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.VirtualNetworkApplianceIpConfiguration.type,
+  Azure.Core.armResourceType,
+  "csharp"
+);
+
 // Preserve the old AutoRest-created writable subresource base for C#.
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility with the previous Network AutoRest C# hierarchy."
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
@@ -5562,6 +5902,97 @@ op replaceprivateDnsZoneGroupsList(
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility with the previous Network AutoRest C# hierarchy."
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   Common.Delegation,
+  Common.WritableSubResourceModel,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility with the previous Network AutoRest C# hierarchy."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Microsoft.Network.ApplicationGatewayEntraJWTValidationConfig,
+  Common.WritableSubResourceModel,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility with the previous Network AutoRest C# hierarchy."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Microsoft.Network.ApplicationGatewayRewriteRuleSet,
+  Common.WritableSubResourceModel,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility with the previous Network AutoRest C# hierarchy."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Microsoft.Network.AzureFirewallApplicationRuleCollection,
+  Common.WritableSubResourceModel,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility with the previous Network AutoRest C# hierarchy."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Microsoft.Network.AzureFirewallNatRuleCollection,
+  Common.WritableSubResourceModel,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility with the previous Network AutoRest C# hierarchy."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Microsoft.Network.AzureFirewallNetworkRuleCollection,
+  Common.WritableSubResourceModel,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility with the previous Network AutoRest C# hierarchy."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Microsoft.Network.Hub,
+  Common.WritableSubResourceModel,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility with the previous Network AutoRest C# hierarchy."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Common.IPConfiguration,
+  Common.WritableSubResourceModel,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility with the previous Network AutoRest C# hierarchy."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Microsoft.Network.P2SConnectionConfiguration,
+  Common.WritableSubResourceModel,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility with the previous Network AutoRest C# hierarchy."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Microsoft.Network.VirtualNetworkGatewayIPConfiguration,
+  Common.WritableSubResourceModel,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility with the previous Network AutoRest C# hierarchy."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Microsoft.Network.VirtualNetworkGatewayPolicyGroup,
+  Common.WritableSubResourceModel,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility with the previous Network AutoRest C# hierarchy."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Microsoft.Network.VngClientConnectionConfiguration,
+  Common.WritableSubResourceModel,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility with the previous Network AutoRest C# hierarchy."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Microsoft.Network.VpnClientRevokedCertificate,
+  Common.WritableSubResourceModel,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility with the previous Network AutoRest C# hierarchy."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Microsoft.Network.VpnClientRootCertificate,
   Common.WritableSubResourceModel,
   "csharp"
 );
@@ -6016,6 +6447,701 @@ op replaceprivateDnsZoneGroupsList(
   "csharp"
 );
 @@alternateType(Microsoft.Network.VpnSiteLink.etag, Azure.Core.eTag, "csharp");
+@@alternateType(
+  Common.ApplicationGatewayBackendAddressPool.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Common.ApplicationGatewayIPConfiguration.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Common.ApplicationSecurityGroup.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(Common.BackendAddressPool.etag, Azure.Core.eTag, "csharp");
+@@alternateType(Common.Delegation.etag, Azure.Core.eTag, "csharp");
+@@alternateType(Common.FlowLog.etag, Azure.Core.eTag, "csharp");
+@@alternateType(Common.FrontendIPConfiguration.etag, Azure.Core.eTag, "csharp");
+@@alternateType(Common.IPConfiguration.etag, Azure.Core.eTag, "csharp");
+@@alternateType(Common.IPConfigurationProfile.etag, Azure.Core.eTag, "csharp");
+@@alternateType(Common.InboundNatPool.etag, Azure.Core.eTag, "csharp");
+@@alternateType(Common.InboundNatRule.etag, Azure.Core.eTag, "csharp");
+@@alternateType(Common.LoadBalancer.etag, Azure.Core.eTag, "csharp");
+@@alternateType(Common.LoadBalancingRule.etag, Azure.Core.eTag, "csharp");
+@@alternateType(Common.NatGateway.etag, Azure.Core.eTag, "csharp");
+@@alternateType(Common.NetworkInterface.etag, Azure.Core.eTag, "csharp");
+@@alternateType(
+  Common.NetworkInterfaceTapConfiguration.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(Common.NetworkSecurityGroup.etag, Azure.Core.eTag, "csharp");
+@@alternateType(Common.NetworkWatcher.etag, Azure.Core.eTag, "csharp");
+@@alternateType(Common.OutboundRule.etag, Azure.Core.eTag, "csharp");
+@@alternateType(
+  Common.PrivateEndpointConnection.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Common.PrivateEndpointIPConfiguration.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Common.PrivateLinkServiceConnection.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Common.PrivateLinkServiceIpConfiguration.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(Common.Probe.etag, Azure.Core.eTag, "csharp");
+@@alternateType(Common.PublicIPAddress.etag, Azure.Core.eTag, "csharp");
+@@alternateType(Common.ResourceNavigationLink.etag, Azure.Core.eTag, "csharp");
+@@alternateType(Common.Route.etag, Azure.Core.eTag, "csharp");
+@@alternateType(Common.RouteTable.etag, Azure.Core.eTag, "csharp");
+@@alternateType(Common.ServiceAssociationLink.etag, Azure.Core.eTag, "csharp");
+@@alternateType(Common.ServiceEndpointPolicy.etag, Azure.Core.eTag, "csharp");
+@@alternateType(
+  Common.ServiceEndpointPolicyDefinition.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(Common.Subnet.etag, Azure.Core.eTag, "csharp");
+@@alternateType(Common.VirtualNetwork.etag, Azure.Core.eTag, "csharp");
+@@alternateType(Common.VirtualNetworkPeering.etag, Azure.Core.eTag, "csharp");
+@@alternateType(Common.VirtualNetworkTap.etag, Azure.Core.eTag, "csharp");
+@@alternateType(
+  Microsoft.Network.ApplicationGateway.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayAuthenticationCertificate.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayBackendHttpSettings.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayBackendSettings.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayEntraJWTValidationConfig.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayFrontendIPConfiguration.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayFrontendPort.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayHttpListener.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayListener.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayLoadDistributionPolicy.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayLoadDistributionTarget.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayPathRule.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayPrivateEndpointConnection.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayPrivateLinkConfiguration.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayPrivateLinkIpConfiguration.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayProbe.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayRedirectConfiguration.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayRequestRoutingRule.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayRewriteRuleSet.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayRoutingRule.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ApplicationGatewaySslCertificate.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ApplicationGatewaySslProfile.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayTrustedClientCertificate.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayTrustedRootCertificate.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayUrlPathMap.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.AzureFirewallApplicationRuleCollection.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.AzureFirewallIPConfiguration.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.AzureFirewallNatRuleCollection.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.AzureFirewallNetworkRuleCollection.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.BastionHostIPConfiguration.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ChildResource.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ContainerNetworkInterface.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ContainerNetworkInterfaceConfiguration.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ContainerNetworkInterfaceIpConfiguration.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.CustomIpPrefix.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.DdosCustomPolicy.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.DdosDetectionRule.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.DdosProtectionPlan.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.DscpConfiguration.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ExpressRouteCircuitAuthorization.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ExpressRouteCircuitPeering.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ExpressRouteCrossConnection.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ExpressRouteGateway.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ExpressRoutePort.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ExpressRoutePortAuthorization.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.FirewallPolicy.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.FirewallPolicyRuleCollectionGroup.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.HubIpConfiguration.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.HubRouteTable.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.HubVirtualNetworkConnection.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.InboundSecurityRule.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(Microsoft.Network.IpAllocation.etag, Azure.Core.eTag, "csharp");
+@@alternateType(Microsoft.Network.IpGroup.etag, Azure.Core.eTag, "csharp");
+@@alternateType(Microsoft.Network.IpamPool.etag, Azure.Core.eTag, "csharp");
+@@alternateType(
+  Microsoft.Network.LocalNetworkGateway.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.NetworkManager.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.NetworkProfile.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.NetworkVirtualAppliance.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.P2SConnectionConfiguration.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.P2SVpnGateway.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.PacketCaptureResult.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.PrivateDnsZoneGroup.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.PublicIPPrefix.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(Microsoft.Network.RouteFilter.etag, Azure.Core.eTag, "csharp");
+@@alternateType(
+  Microsoft.Network.RouteFilterRule.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(Microsoft.Network.RouteMap.etag, Azure.Core.eTag, "csharp");
+@@alternateType(
+  Microsoft.Network.RoutingIntent.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.SecurityPartnerProvider.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ServiceGateway.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.VerifierWorkspace.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.VirtualApplianceSite.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(Microsoft.Network.VirtualHub.etag, Azure.Core.eTag, "csharp");
+@@alternateType(
+  Microsoft.Network.VirtualHubRouteTableV2.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.VirtualNetworkAppliance.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.VirtualNetworkApplianceIpConfiguration.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.VirtualNetworkGateway.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.VirtualNetworkGatewayConnection.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.VirtualNetworkGatewayIPConfiguration.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.VirtualNetworkGatewayPolicyGroup.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.VirtualRouter.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(Microsoft.Network.VirtualWAN.etag, Azure.Core.eTag, "csharp");
+@@alternateType(
+  Microsoft.Network.VngClientConnectionConfiguration.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.VpnClientRevokedCertificate.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.VpnClientRootCertificate.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.VpnConnection.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(Microsoft.Network.VpnGateway.etag, Azure.Core.eTag, "csharp");
+@@alternateType(
+  Microsoft.Network.VpnGatewayNatRule.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.VpnServerConfiguration.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.VpnServerConfigurationPolicyGroup.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(Microsoft.Network.VpnSite.etag, Azure.Core.eTag, "csharp");
+@@alternateType(
+  Microsoft.Network.WebApplicationFirewallCustomRule.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.WebApplicationFirewallPolicy.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+
+// C# provisioning compatibility for scalar and reference types exposed by the
+// previous reflection-generated library.
+@@alternateType(
+  Common.ServiceAssociationLinkPropertiesFormat.locations,
+  Azure.Core.azureLocation[],
+  "csharp"
+);
+@@alternateType(
+  Common.ServiceEndpointPropertiesFormat.locations,
+  Azure.Core.azureLocation[],
+  "csharp"
+);
+@@alternateType(
+  Common.ServiceEndpointPolicyDefinitionPropertiesFormat.serviceResources,
+  armResourceIdentifier[],
+  "csharp"
+);
+@@alternateType(
+  Common.BackendAddressPoolPropertiesFormat.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.PerimeterBasedAccessRule.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.AzureFirewallIpGroups.id,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ConnectionMonitorDestination.resourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ConnectionMonitorEndpoint.resourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ConnectionMonitorSource.resourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.Hub.resourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.NetworkManagerSecurityGroupItem.networkGroupId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.PacketCaptureStorageLocation.storageId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  Common.TrafficAnalyticsConfigurationProperties.workspaceResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.VpnGatewayIpConfiguration.id,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  Common.ResourceNavigationLinkFormat.linkedResourceType,
+  Azure.Core.armResourceType,
+  "csharp"
+);
+@@alternateType(
+  Common.ServiceAssociationLinkPropertiesFormat.linkedResourceType,
+  Azure.Core.armResourceType,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayProbeHealthResponseMatch.body,
+  bytes,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.VpnServerConfigRadiusServerRootCertificate.publicCertData,
+  bytes,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.VpnServerConfigVpnClientRootCertificate.publicCertData,
+  bytes,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ConnectionMonitorEndpoint.subscriptionId,
+  uuid,
+  "csharp"
+);
+@@alternateType(Microsoft.Network.CrossTenantScopes.tenantId, uuid, "csharp");
+@@alternateType(
+  Microsoft.Network.PerimeterBasedAccessRule.perimeterGuid,
+  uuid,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayCustomError.customErrorPageUrl,
+  url,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.VirtualNetworkAppliancePropertiesFormat.bandwidthInGbps,
+  string,
+  "csharp"
+);
+@@alternateType(
+  Common.FlowLog.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+
+@@alternateType(
+  Microsoft.Network.CustomIpPrefixPropertiesFormat.publicIpPrefixes,
+  Azure.ResourceManager.Models.WritableSubResource[],
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.CustomIpPrefixPropertiesFormat.childCustomIpPrefixes,
+  Azure.ResourceManager.Models.WritableSubResource[],
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.DdosCustomPolicyPropertiesFormat.frontEndIpConfiguration,
+  Azure.ResourceManager.Models.WritableSubResource[],
+  "csharp"
+);
+@@alternateType(
+  Common.LoadBalancingRulePropertiesFormat.backendAddressPools,
+  Azure.ResourceManager.Models.WritableSubResource[],
+  "csharp"
+);
+@@alternateType(
+  Common.NatGatewayPropertiesFormat.publicIpAddresses,
+  Azure.ResourceManager.Models.WritableSubResource[],
+  "csharp"
+);
+@@alternateType(
+  Common.NatGatewayPropertiesFormat.publicIpAddressesV6,
+  Azure.ResourceManager.Models.WritableSubResource[],
+  "csharp"
+);
+@@alternateType(
+  Common.NatGatewayPropertiesFormat.publicIpPrefixes,
+  Azure.ResourceManager.Models.WritableSubResource[],
+  "csharp"
+);
+@@alternateType(
+  Common.NatGatewayPropertiesFormat.publicIpPrefixesV6,
+  Azure.ResourceManager.Models.WritableSubResource[],
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.NetworkVirtualAppliancePropertiesFormat.internetIngressPublicIps,
+  Azure.ResourceManager.Models.WritableSubResource[],
+  "csharp"
+);
+@@alternateType(
+  Common.SubnetPropertiesFormat.ipAllocations,
+  Azure.ResourceManager.Models.WritableSubResource[],
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.VirtualHubProperties.ipConfigurations,
+  Azure.ResourceManager.Models.WritableSubResource[],
+  "csharp"
+);
+@@alternateType(
+  Common.VirtualNetworkPropertiesFormat.ipAllocations,
+  Azure.ResourceManager.Models.WritableSubResource[],
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.VnetRoute.bgpConnections,
+  Azure.ResourceManager.Models.WritableSubResource[],
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.PublicIPPrefixPropertiesFormat.publicIPAddresses,
+  Azure.ResourceManager.Models.SubResource[],
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.WebApplicationFirewallPolicyPropertiesFormat.applicationGatewayForContainers,
+  Azure.ResourceManager.Models.SubResource[],
+  "csharp"
+);
 
 // C# naming mitigations for MPG migration hierarchy parity.
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Brownfield C# SDK resource hierarchy compatibility without generated Swagger changes."
