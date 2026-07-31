@@ -106,6 +106,10 @@ using Microsoft.ContainerRegistry;
 @@clientName(RunStatus, "ContainerRegistryTaskRunStatus", "csharp");
 @@clientName(TaskStatus, "ContainerRegistryTaskStatus", "csharp");
 @@clientName(TriggerStatus, "ContainerRegistryTaskTriggerStatus", "csharp");
+@@clientName(AgentPool, "ContainerRegistryAgentPool", "csharp");
+@@clientName(Run, "ContainerRegistryRun", "csharp");
+@@clientName(Task, "ContainerRegistryTask", "csharp");
+@@clientName(TaskRun, "ContainerRegistryTaskRun", "csharp");
 
 // C# client naming: fix enum value casing
 @@clientName(SecretObjectType.Vaultsecret, "VaultSecret", "csharp");
