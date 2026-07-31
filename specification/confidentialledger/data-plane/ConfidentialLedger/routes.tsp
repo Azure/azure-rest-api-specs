@@ -178,21 +178,21 @@ op createLedgerEntryWithWaitForCommit is ConfidentialLedgerCommon.LedgerOperatio
     tags?: string;
 
     /**
+     * Ledger entry.
+     */
+    @bodyRoot
+    entry: LedgerEntry;
+
+    /**
      * Whether to wait for the transaction to be globally committed before
      * returning. When true, the response includes the transaction receipt.
      */
     @query("waitForCommit")
     waitForCommit?: boolean = false;
-
-    /**
-     * Ledger entry.
-     */
-    @bodyRoot
-    entry: LedgerEntry;
   },
   LedgerWriteResultWithReceipt,
-  ConfidentialLedgerCommon.ConfidentialLedgerError
-    | TransactionRolledBackErrorResponse
+  | ConfidentialLedgerCommon.ConfidentialLedgerError
+  | TransactionRolledBackErrorResponse
 >;
 
 /**
