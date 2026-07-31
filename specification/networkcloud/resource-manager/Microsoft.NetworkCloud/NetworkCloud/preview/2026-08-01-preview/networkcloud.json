@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "NetworkCloud",
-    "version": "2026-07-01",
+    "version": "2026-08-01-preview",
     "description": "The Network Cloud APIs provide management of the Azure Operator Nexus compute resources such as on-premises clusters, hardware resources, and workload infrastructure resources.",
     "x-typespec-generated": [
       {
@@ -930,7 +930,8 @@
             "enum": [
               "Bastion",
               "PrivateVault",
-              "StorageDashboard"
+              "StorageDashboard",
+              "EdgeManagement"
             ],
             "x-ms-enum": {
               "name": "AccessBridgeAllowedName",
@@ -950,6 +951,11 @@
                   "name": "StorageDashboard",
                   "value": "StorageDashboard",
                   "description": "The access bridge for access to the storage dashboard."
+                },
+                {
+                  "name": "EdgeManagement",
+                  "value": "EdgeManagement",
+                  "description": "The access bridge for edge management."
                 }
               ]
             }
@@ -1000,7 +1006,8 @@
             "enum": [
               "Bastion",
               "PrivateVault",
-              "StorageDashboard"
+              "StorageDashboard",
+              "EdgeManagement"
             ],
             "x-ms-enum": {
               "name": "AccessBridgeAllowedName",
@@ -1020,6 +1027,11 @@
                   "name": "StorageDashboard",
                   "value": "StorageDashboard",
                   "description": "The access bridge for access to the storage dashboard."
+                },
+                {
+                  "name": "EdgeManagement",
+                  "value": "EdgeManagement",
+                  "description": "The access bridge for edge management."
                 }
               ]
             }
@@ -1063,6 +1075,9 @@
         "x-ms-examples": {
           "Create or update access bridge": {
             "$ref": "./examples/AccessBridges_CreateOrUpdate.json"
+          },
+          "Create or update edge management access bridge": {
+            "$ref": "./examples/AccessBridges_CreateOrUpdate_EdgeManagement.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1096,7 +1111,8 @@
             "enum": [
               "Bastion",
               "PrivateVault",
-              "StorageDashboard"
+              "StorageDashboard",
+              "EdgeManagement"
             ],
             "x-ms-enum": {
               "name": "AccessBridgeAllowedName",
@@ -1116,6 +1132,11 @@
                   "name": "StorageDashboard",
                   "value": "StorageDashboard",
                   "description": "The access bridge for access to the storage dashboard."
+                },
+                {
+                  "name": "EdgeManagement",
+                  "value": "EdgeManagement",
+                  "description": "The access bridge for edge management."
                 }
               ]
             }
@@ -1199,7 +1220,8 @@
             "enum": [
               "Bastion",
               "PrivateVault",
-              "StorageDashboard"
+              "StorageDashboard",
+              "EdgeManagement"
             ],
             "x-ms-enum": {
               "name": "AccessBridgeAllowedName",
@@ -1219,6 +1241,11 @@
                   "name": "StorageDashboard",
                   "value": "StorageDashboard",
                   "description": "The access bridge for access to the storage dashboard."
+                },
+                {
+                  "name": "EdgeManagement",
+                  "value": "EdgeManagement",
+                  "description": "The access bridge for edge management."
                 }
               ]
             }
@@ -2852,6 +2879,9 @@
         "x-ms-examples": {
           "Patch cluster manager": {
             "$ref": "./examples/ClusterManagers_Patch.json"
+          },
+          "Patch cluster manager rolloutRing": {
+            "$ref": "./examples/ClusterManagers_Patch_RolloutRing.json"
           }
         }
       },
@@ -3241,11 +3271,20 @@
           "Patch cluster location": {
             "$ref": "./examples/Clusters_Patch_Location.json"
           },
+          "Patch cluster secret archive to use Azure Key Vault (implicit default provider)": {
+            "$ref": "./examples/Clusters_Patch_SecretArchive_AzureKeyVault.json"
+          },
+          "Patch cluster secret archive with CyberArk provider": {
+            "$ref": "./examples/Clusters_Patch_SecretArchive.json"
+          },
+          "Patch cluster secret archive with HashiCorp Vault provider": {
+            "$ref": "./examples/Clusters_Patch_SecretArchive_HashiCorpVault.json"
+          },
+          "Patch cluster secret archive with OpenBao provider": {
+            "$ref": "./examples/Clusters_Patch_SecretArchive_OpenBao.json"
+          },
           "Patch runtime protection configuration": {
             "$ref": "./examples/Clusters_Patch_RuntimeProtectionConfiguration.json"
-          },
-          "Patch secret archive": {
-            "$ref": "./examples/Clusters_Patch_SecretArchive.json"
           },
           "Patch update strategy": {
             "$ref": "./examples/Clusters_Patch_UpdateStrategy.json"
@@ -12922,6 +12961,22 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "properties": {
+          "$ref": "#/definitions/ClusterManagerPatchProperties",
+          "description": "The list of cluster manager properties to patch."
+        }
+      }
+    },
+    "ClusterManagerPatchProperties": {
+      "type": "object",
+      "description": "ClusterManagerPatchProperties represents the cluster manager properties that may be patched.",
+      "properties": {
+        "rolloutRing": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The relative ordering group used to apply software updates to associated clusters. The minimum accepted value is 1; the service enforces the upper bound currently in effect, which may change over time.",
+          "minimum": 1
         }
       }
     },
@@ -13004,6 +13059,12 @@
           "$ref": "#/definitions/ClusterManagerRelayConfiguration",
           "description": "The relay configuration for the cluster manager.",
           "readOnly": true
+        },
+        "rolloutRing": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The relative ordering group used to apply software updates to associated clusters. The minimum accepted value is 1; the service enforces the upper bound currently in effect, which may change over time.",
+          "minimum": 1
         },
         "vmSize": {
           "type": "string",
@@ -13567,6 +13628,11 @@
         "detailedStatusMessage": {
           "type": "string",
           "description": "The descriptive message about the detailed status.",
+          "readOnly": true
+        },
+        "edgeManagementServiceCaCertificate": {
+          "$ref": "#/definitions/CertificateInfo",
+          "description": "The CA certificate of the edge management service.",
           "readOnly": true
         },
         "hybridAksExtendedLocation": {
@@ -14382,6 +14448,38 @@
         }
       }
     },
+    "CyberArkSecretArchiveProviderConfiguration": {
+      "type": "object",
+      "description": "The configuration for a CyberArk secret archive provider.",
+      "properties": {
+        "applicationId": {
+          "type": "string",
+          "description": "The CyberArk application ID."
+        },
+        "safeName": {
+          "type": "string",
+          "description": "The safe name for credential storage."
+        },
+        "folderName": {
+          "type": "string",
+          "description": "The folder name within the safe. Defaults to Root if not specified."
+        },
+        "objectNameTemplate": {
+          "type": "string",
+          "description": "The object naming pattern within the safe. The tokens `{namespace}` and `{name}` may appear in the template and are substituted at archive time."
+        }
+      },
+      "required": [
+        "applicationId",
+        "safeName"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SecretArchiveProviderConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "CyberArk"
+    },
     "DefaultGateway": {
       "type": "string",
       "description": "The indicator of whether this is the default gateway. Only one of the attached networks (including the CloudServicesNetwork attachment) for a single machine may be specified as True.",
@@ -14666,6 +14764,49 @@
           "readOnly": true
         }
       }
+    },
+    "HashiCorpVaultSecretArchiveProviderConfiguration": {
+      "type": "object",
+      "description": "The configuration for a HashiCorp Vault secret archive provider. Authentication credentials required by the selected authenticationMethod (for example, the AppRole secret, or client certificate and private key) are supplied out of band.",
+      "properties": {
+        "mountPath": {
+          "type": "string",
+          "description": "The key value secrets engine mount path. Defaults to secret if not specified."
+        },
+        "keyValueVersion": {
+          "$ref": "#/definitions/KeyValueVersion",
+          "description": "The key value engine version. Supports values `V1` and `V2`, defaults to `V2`."
+        },
+        "namespace": {
+          "type": "string",
+          "description": "The vault namespace."
+        },
+        "pathTemplate": {
+          "type": "string",
+          "description": "The secret path pattern. Defaults to `edge-credentials/{namespace}/{name}`."
+        },
+        "authenticationMethod": {
+          "$ref": "#/definitions/VaultAuthenticationMethod",
+          "description": "The authentication method used for the archive. When set to `AppRole`, `applicationRoleId` is required; when set to `ClientCertificate`, `applicationRoleId` is ignored."
+        },
+        "applicationRoleId": {
+          "type": "string",
+          "description": "The Role ID, required when `authenticationMethod` is `AppRole`; ignored for other authentication methods."
+        },
+        "authenticationMountPath": {
+          "type": "string",
+          "description": "The authentication method mount path in the archive."
+        }
+      },
+      "required": [
+        "authenticationMethod"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SecretArchiveProviderConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "HashiCorpVault"
     },
     "IdentitySelector": {
       "type": "object",
@@ -14975,6 +15116,30 @@
           "maxLength": 256,
           "readOnly": true
         }
+      }
+    },
+    "KeyValueVersion": {
+      "type": "string",
+      "description": "The version of the key value secrets engine. Supports values V1 and V2,\nwhich map to engine versions 1 and 2 respectively.",
+      "enum": [
+        "V1",
+        "V2"
+      ],
+      "x-ms-enum": {
+        "name": "KeyValueVersion",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "V1",
+            "value": "V1",
+            "description": "Key/value engine version 1."
+          },
+          {
+            "name": "V2",
+            "value": "V2",
+            "description": "Key/value engine version 2."
+          }
+        ]
       }
     },
     "KubernetesCluster": {
@@ -17183,6 +17348,49 @@
         }
       }
     },
+    "OpenBaoSecretArchiveProviderConfiguration": {
+      "type": "object",
+      "description": "The configuration for an OpenBao secret archive provider. Authentication credentials required by the selected authenticationMethod (for example, the AppRole secret, or client certificate and private key) are supplied out of band.",
+      "properties": {
+        "mountPath": {
+          "type": "string",
+          "description": "The key value secrets engine mount path. Defaults to secret if not specified."
+        },
+        "keyValueVersion": {
+          "$ref": "#/definitions/KeyValueVersion",
+          "description": "The key value engine version. Supports values `V1` and `V2`, defaults to `V2`."
+        },
+        "namespace": {
+          "type": "string",
+          "description": "The vault namespace."
+        },
+        "pathTemplate": {
+          "type": "string",
+          "description": "The secret path pattern. Defaults to `edge-credentials/{namespace}/{name}`."
+        },
+        "authenticationMethod": {
+          "$ref": "#/definitions/VaultAuthenticationMethod",
+          "description": "The authentication method used for the archive. When set to `AppRole`, `applicationRoleId` is required; when set to `ClientCertificate`, `applicationRoleId` is ignored."
+        },
+        "applicationRoleId": {
+          "type": "string",
+          "description": "The Role ID, required when `authenticationMethod` is `AppRole`; ignored for other authentication methods."
+        },
+        "authenticationMountPath": {
+          "type": "string",
+          "description": "The authentication method mount path in the archive."
+        }
+      },
+      "required": [
+        "authenticationMethod"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SecretArchiveProviderConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "OpenBao"
+    },
     "OperationStatusResult": {
       "type": "object",
       "description": "The current status of an async operation.",
@@ -18185,6 +18393,50 @@
         }
       }
     },
+    "SecretArchiveProviderConfiguration": {
+      "type": "object",
+      "description": "SecretArchiveProviderConfiguration represents the base configuration for a self-supplied secret archive provider.",
+      "properties": {
+        "provider": {
+          "$ref": "#/definitions/SecretArchiveProviderType",
+          "description": "The provider of the secret archive."
+        }
+      },
+      "discriminator": "provider",
+      "required": [
+        "provider"
+      ]
+    },
+    "SecretArchiveProviderType": {
+      "type": "string",
+      "description": "The provider of the secret archive. Absence of `providerConfiguration` on `SecretArchiveSettings` implies Azure Key Vault as the default provider; this enum enumerates only the self-supplied (non-Azure Key Vault) providers.",
+      "enum": [
+        "CyberArk",
+        "HashiCorpVault",
+        "OpenBao"
+      ],
+      "x-ms-enum": {
+        "name": "SecretArchiveProviderType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CyberArk",
+            "value": "CyberArk",
+            "description": "CyberArk secret archive provider."
+          },
+          {
+            "name": "HashiCorpVault",
+            "value": "HashiCorpVault",
+            "description": "HashiCorp Vault secret archive provider."
+          },
+          {
+            "name": "OpenBao",
+            "value": "OpenBao",
+            "description": "OpenBao secret archive provider."
+          }
+        ]
+      }
+    },
     "SecretArchiveReference": {
       "type": "object",
       "description": "SecretArchiveReference represents the reference to a secret in a key vault.",
@@ -18217,6 +18469,11 @@
           "type": "string",
           "description": "The version of the secret in the key vault.",
           "readOnly": true
+        },
+        "encryptionPublicKey": {
+          "type": "string",
+          "description": "The public key used by the platform to encrypt the archived credential before it was written to the secret archive.",
+          "readOnly": true
         }
       }
     },
@@ -18228,10 +18485,18 @@
           "$ref": "#/definitions/IdentitySelector",
           "description": "The selection of the managed identity to use with this vault URI. The identity type must be either system assigned or user assigned."
         },
+        "encryptionPublicKey": {
+          "type": "string",
+          "description": "The public key used to encrypt secrets that are archived into the key vault. Expected encoding is a PEM-encoded RSA public key with a minimum key size of 3072 bits. Additional key formats or sizes may be supported in future versions."
+        },
+        "providerConfiguration": {
+          "$ref": "#/definitions/SecretArchiveProviderConfiguration",
+          "description": "The configuration indicating the use of self-supplied secret archive software. Specification of a provider configuration indicates that the provided configuration will be used. Exclusion of any providerConfiguration indicates the use of Azure Key Vault. If providerConfiguration is included in a PATCH, the body must be a complete, valid configuration for the chosen provider, including all fields required for that provider; omit providerConfiguration from PATCH bodies that do not change it."
+        },
         "vaultUri": {
           "type": "string",
           "format": "uri",
-          "description": "The URI for the key vault used as the secret archive."
+          "description": "The URI for the key vault used as the secret archive. The URI must use the `https://` scheme."
         }
       }
     },
@@ -19613,6 +19878,30 @@
             "name": "PercentSuccess",
             "value": "PercentSuccess",
             "description": "The threshold is evaluated based on the percentage of successful operations."
+          }
+        ]
+      }
+    },
+    "VaultAuthenticationMethod": {
+      "type": "string",
+      "description": "The authentication method used to authenticate to a HashiCorp Vault or OpenBao secret archive.",
+      "enum": [
+        "AppRole",
+        "ClientCertificate"
+      ],
+      "x-ms-enum": {
+        "name": "VaultAuthenticationMethod",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AppRole",
+            "value": "AppRole",
+            "description": "AppRole authentication method."
+          },
+          {
+            "name": "ClientCertificate",
+            "value": "ClientCertificate",
+            "description": "Client certificate authentication method."
           }
         ]
       }
