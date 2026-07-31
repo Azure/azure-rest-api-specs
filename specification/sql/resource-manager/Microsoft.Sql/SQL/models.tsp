@@ -3014,7 +3014,7 @@ union ServerWorkspaceFeature {
 }
 
 /**
- * Whether or not to restrict outbound network access for this server.  Value is optional but if passed in, must be 'Enabled', 'Disabled', or 'SecuredByPerimeter'
+ * Whether or not to restrict outbound network access for this server.  Value is optional but if passed in, must be 'Enabled' or 'Disabled'
  */
 union ServerNetworkAccessFlag {
   string,
@@ -3030,7 +3030,7 @@ union ServerNetworkAccessFlag {
   Disabled: "Disabled",
 
   /**
-   * The network security perimeter configuration rules allow or disallow public network access to the resource. Requires an associated network security perimeter.
+   * SecuredByPerimeter
    */
   SecuredByPerimeter: "SecuredByPerimeter",
 }
