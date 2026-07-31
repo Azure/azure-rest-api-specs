@@ -1,5 +1,5 @@
 import "../common/service.tsp";
-import "../openai-responses/models.tsp";
+import "../openai/responses/models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
