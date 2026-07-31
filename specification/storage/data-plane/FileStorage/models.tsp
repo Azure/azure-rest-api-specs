@@ -960,7 +960,7 @@ model ShareSmbSettingsEncryptionInTransit {
   @Xml.name("Required") required?: boolean;
 }
 
-/** Settings for SMB protocol. */
+/** Settings for NFS protocol. */
 @Xml.name("NFS")
 model ShareNfsSettings {
   /** Enable or disable encryption in transit. */
