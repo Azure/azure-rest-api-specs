@@ -195,15 +195,8 @@ model RelayNamespaceIdListResult {
   /**
    * Relay namespace resource IDs assigned to the cluster.
    */
-  @pageItems
   @Azure.ResourceManager.identifiers(#["id"])
   value?: RelayNamespaceId[];
-
-  /**
-   * The link to the next page of results.
-   */
-  @nextLink
-  nextLink?: url;
 }
 
 /**
@@ -229,15 +222,8 @@ model AvailableRelayClustersList {
   /**
    * Regions containing available pre-provisioned Relay clusters.
    */
-  @pageItems
   @Azure.ResourceManager.identifiers(#["location"])
   value?: AvailableRelayCluster[];
-
-  /**
-   * The link to the next page of results.
-   */
-  @nextLink
-  nextLink?: url;
 }
 
 /**
@@ -259,19 +245,12 @@ model RelayClusterSkuListResult {
   /**
    * The SKUs supported by the Relay cluster.
    */
-  @pageItems
   @Azure.ResourceManager.identifiers(#[
     "resourceType",
     "/sku/name",
     "/sku/tier"
   ])
   value?: RelayClusterSkuInfo[];
-
-  /**
-   * The link to the next page of results.
-   */
-  @nextLink
-  nextLink?: url;
 }
 
 /**
@@ -425,7 +404,6 @@ interface Clusters {
    * Lists Relay namespace resource IDs assigned to a Relay cluster.
    */
   @get
-  @list
   @action("namespaces")
   listNamespaces is ArmResourceActionSync<
     RelayCluster,
@@ -438,7 +416,6 @@ interface Clusters {
    * Lists SKUs supported by a Relay cluster.
    */
   @get
-  @list
   @action("skus")
   listSkus is ArmResourceActionSync<
     RelayCluster,

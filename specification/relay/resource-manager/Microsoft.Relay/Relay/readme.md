@@ -211,6 +211,18 @@ directive:
   - suppress: XmsPageableForListCalls
     reason: The inherited private-link list does not implement continuation tokens; emitting x-ms-pageable would describe unsupported service behavior.
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/privateLinkResources"].get
+  - suppress: PageableOperation
+    reason: These Relay endpoints return their complete collections in one response and implement no continuation mechanism.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Relay/availableClusterRegions"].get
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/clusters/{clusterName}/namespaces"].get
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/clusters/{clusterName}/skus"].get
+  - suppress: XmsPageableForListCalls
+    reason: These Relay endpoints do not support continuation tokens, so emitting x-ms-pageable would advertise unsupported service behavior.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Relay/availableClusterRegions"].get
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/clusters/{clusterName}/namespaces"].get
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/clusters/{clusterName}/skus"].get
   - suppress: NestedResourcesMustHaveListOperation
     reason: NetworkRuleSet is an inherited singleton child resource and the Relay service does not expose a list operation for it.
     where: $.definitions.NetworkRuleSet

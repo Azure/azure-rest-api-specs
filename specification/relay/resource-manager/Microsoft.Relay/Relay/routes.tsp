@@ -36,7 +36,6 @@ interface ClustersOperationGroup {
    */
   @autoRoute
   @get
-  @list
   @action("availableClusterRegions")
   listAvailableClusterRegion is ArmProviderActionSync<
     Response = AvailableRelayClustersList,
