@@ -15,6 +15,7 @@ alias DateTimeInterval = ResourceGraphCommon.DateTimeInterval;
 /**
  * Describes a history request to be executed.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ResourcesHistoryRequest {
   /**
    * Azure subscriptions against which to execute the query.
@@ -40,6 +41,7 @@ model ResourcesHistoryRequest {
 /**
  * The options for history request evaluation
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ResourcesHistoryRequestOptions {
   /**
    * The time interval used to fetch history.
