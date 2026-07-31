@@ -83,7 +83,7 @@ union ModelSourceType {
 
 @added(Versions.v2026_05_02_preview)
 @doc("""
-  A credential value. Exactly one variant must be set.
+  A credential value.
   
   In the current API version, only the `inline` variant is supported. Future
   API versions are expected to add additional credential kinds (for example,

@@ -49,12 +49,8 @@ model CustomAIModelProperties {
   modelId: string;
 
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  @doc("""
-    The HuggingFace model identifier of the base model used to train
-    the custom model. This is the upstream `<org>/<repo>` id, e.g.
-    `meta-llama/Llama-2-7b-chat`. Immutable after creation.
-    """)
-  baseModelId: string;
+  @doc("The base model this custom model was trained from (id + config.json). Immutable after creation.")
+  baseModel: BaseModelReference;
 
   @visibility(Lifecycle.Create, Lifecycle.Read)
   @doc("Azure resource id of the ModelSource to use when pulling artifacts. Required for `MicrosoftFoundry` sources and for gated/private `HuggingFace` repositories; omitted for public models. Immutable after creation.")
@@ -73,6 +69,19 @@ model CustomAIModelProperties {
 @added(Versions.v2026_08_02_preview)
 @doc("Platform-resolved specification of a custom model. Extends `ModelSpec` with custom model-specific metadata. All fields are read-only.")
 model CustomAIModelSpec is ModelSpec;
+
+@added(Versions.v2026_08_02_preview)
+@doc("The base model a custom model was trained from. Supplied by the customer because the platform may lack access to private source repositories (e.g. private Foundry projects); consumed by the dataplane for GPU sizing and vLLM configuration.")
+model BaseModelReference {
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @doc("The HuggingFace `<org>/<repo>` id of the base model, e.g. `meta-llama/Llama-2-7b-chat`. Immutable after creation.")
+  id: string;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "config.json is opaque upstream JSON"
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @doc("The verbatim `config.json` of the base model, supplied by the customer. Stored by the platform and projected into the dataplane (ConfigMap) to determine GPU node count and vLLM configuration.")
+  config?: Record<unknown>;
+}
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "AIModel is a valid name"
 @added(Versions.v2026_08_02_preview)
