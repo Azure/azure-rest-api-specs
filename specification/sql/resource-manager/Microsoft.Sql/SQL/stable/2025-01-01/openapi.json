@@ -46516,6 +46516,156 @@
         ]
       }
     },
+    "Features": {
+      "type": "string",
+      "enum": [
+        "BackupShortTermRetentionPolicies",
+        "BlobAuditing",
+        "DatabaseAdvancedThreatProtectionSettings",
+        "DatabaseAdvisors",
+        "DatabaseAutomaticTuning",
+        "DatabaseColumns",
+        "DatabaseEncryptionProtectorRevalidate",
+        "DatabaseEncryptionProtectorRevert",
+        "DatabaseExtensions",
+        "DatabaseOperations",
+        "DatabaseRecommendedActions",
+        "Databases",
+        "DatabaseSchemas",
+        "DatabaseSecurityAlertPolicies",
+        "DatabaseSqlVulnerabilityAssessmentBaselines",
+        "DatabaseSqlVulnerabilityAssessmentExecuteScan",
+        "DatabaseSqlVulnerabilityAssessmentRuleBaselines",
+        "DatabaseSqlVulnerabilityAssessmentScanResult",
+        "DatabaseSqlVulnerabilityAssessmentScans",
+        "DatabaseSqlVulnerabilityAssessmentsSettings",
+        "DatabaseTables",
+        "DatabaseUsages",
+        "DatabaseVulnerabilityAssessmentRuleBaselines",
+        "DatabaseVulnerabilityAssessments",
+        "DatabaseVulnerabilityAssessmentScans",
+        "DataMaskingPolicies",
+        "DataMaskingRules",
+        "DataWarehouseUserActivities",
+        "DeletedServers",
+        "DistributedAvailabilityGroups",
+        "ElasticPoolOperations",
+        "ElasticPools",
+        "EncryptionProtectors",
+        "EndpointCertificates",
+        "FailoverGroups",
+        "FirewallRules",
+        "GeoBackupPolicies",
+        "InstanceFailoverGroups",
+        "InstancePoolOperations",
+        "InstancePools",
+        "IPv6FirewallRules",
+        "JobAgents",
+        "JobCredentials",
+        "JobExecutions",
+        "JobPrivateEndpoints",
+        "Jobs",
+        "JobStepExecutions",
+        "JobSteps",
+        "JobTargetExecutions",
+        "JobTargetGroups",
+        "JobVersions",
+        "LedgerDigestUploads",
+        "LocationCapabilities",
+        "LongTermRetentionBackups",
+        "LongTermRetentionManagedInstanceBackups",
+        "LongTermRetentionPolicies",
+        "MaintenanceWindowOptions",
+        "MaintenanceWindows",
+        "ManagedBackupShortTermRetentionPolicies",
+        "ManagedDatabaseAdvancedThreatProtectionSettings",
+        "ManagedDatabaseColumns",
+        "ManagedDatabaseMoveOperations",
+        "ManagedDatabaseQueries",
+        "ManagedDatabaseRestoreDetails",
+        "ManagedDatabases",
+        "ManagedDatabaseSchemas",
+        "ManagedDatabaseSecurityAlertPolicies",
+        "ManagedDatabaseSecurityEvents",
+        "ManagedDatabaseSensitivityLabels",
+        "ManagedDatabaseTables",
+        "ManagedDatabaseTransparentDataEncryption",
+        "ManagedDatabaseVulnerabilityAssessmentRuleBaselines",
+        "ManagedDatabaseVulnerabilityAssessments",
+        "ManagedDatabaseVulnerabilityAssessmentScans",
+        "ManagedInstanceAdministrators",
+        "ManagedInstanceAdvancedThreatProtectionSettings",
+        "ManagedInstanceAzureADOnlyAuthentications",
+        "ManagedInstanceDtcs",
+        "ManagedInstanceEncryptionProtectors",
+        "ManagedInstanceKeys",
+        "ManagedInstanceLongTermRetentionPolicies",
+        "ManagedInstanceOperations",
+        "ManagedInstancePrivateEndpointConnections",
+        "ManagedInstancePrivateLinkResources",
+        "ManagedInstances",
+        "ManagedInstanceTdeCertificates",
+        "ManagedInstanceVulnerabilityAssessments",
+        "ManagedLedgerDigestUploads",
+        "ManagedRestorableDroppedDatabaseBackupShortTermRetentionPolicies",
+        "ManagedServerDnsAliases",
+        "ManagedServerSecurityAlertPolicies",
+        "NetworkSecurityPerimeterConfigurations",
+        "Operations",
+        "OutboundFirewallRules",
+        "PrivateEndpointConnections",
+        "PrivateLinkResources",
+        "RecoverableDatabases",
+        "RecoverableManagedDatabases",
+        "ReplicationLinks",
+        "RestorableDroppedDatabases",
+        "RestorableDroppedManagedDatabases",
+        "RestorePoints",
+        "SensitivityLabels",
+        "ServerAdvancedThreatProtectionSettings",
+        "ServerAdvisors",
+        "ServerAutomaticTuning",
+        "ServerAzureADAdministrators",
+        "ServerAzureADOnlyAuthentications",
+        "ServerConfigurationOptions",
+        "ServerConnectionPolicies",
+        "ServerDevOpsAudit",
+        "ServerDnsAliases",
+        "ServerKeys",
+        "ServerOperations",
+        "Servers",
+        "ServerSecurityAlertPolicies",
+        "ServerTrustCertificates",
+        "ServerTrustGroups",
+        "ServerUsages",
+        "ServerVulnerabilityAssessments",
+        "SqlAgent",
+        "SqlVulnerabilityAssessmentBaseline",
+        "SqlVulnerabilityAssessmentExecuteScan",
+        "SqlVulnerabilityAssessmentRuleBaseline",
+        "SqlVulnerabilityAssessmentScanResult",
+        "SqlVulnerabilityAssessmentScans",
+        "SqlVulnerabilityAssessmentsSettings",
+        "StartStopManagedInstanceSchedules",
+        "SubscriptionUsages",
+        "SynapseLinkWorkspaces",
+        "SyncAgents",
+        "SyncGroups",
+        "SyncMembers",
+        "TdeCertificates",
+        "TimeZones",
+        "TransparentDataEncryptions",
+        "Usages",
+        "VirtualClusters",
+        "VirtualNetworkRules",
+        "WorkloadClassifiers",
+        "WorkloadGroups"
+      ],
+      "x-ms-enum": {
+        "name": "Features",
+        "modelAsString": false
+      }
+    },
     "FirewallRule": {
       "type": "object",
       "description": "A server firewall rule.",
@@ -57187,81 +57337,6 @@
         "endIpAddress": {
           "type": "string",
           "description": "The end IP address of the firewall rule. Must be IPv4 format. Must be greater than or equal to startIpAddress. Use value '0.0.0.0' for all Azure-internal IP addresses."
-        }
-      }
-    },
-    "ServerImportExportOperationResult": {
-      "type": "object",
-      "description": "A Server ImportExport operation result resource.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ServerImportExportOperationResultProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "ServerImportExportOperationResultProperties": {
-      "type": "object",
-      "description": "Contains the operation result properties for import/export operation.",
-      "properties": {
-        "requestId": {
-          "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "Request Id.",
-          "readOnly": true
-        },
-        "requestType": {
-          "type": "string",
-          "description": "Request type.",
-          "readOnly": true
-        },
-        "queuedTime": {
-          "type": "string",
-          "description": "Queued time.",
-          "readOnly": true
-        },
-        "lastModifiedTime": {
-          "type": "string",
-          "description": "Last modified time.",
-          "readOnly": true
-        },
-        "blobUri": {
-          "type": "string",
-          "description": "Blob Uri.",
-          "readOnly": true
-        },
-        "serverName": {
-          "type": "string",
-          "description": "Server name.",
-          "readOnly": true
-        },
-        "databaseName": {
-          "type": "string",
-          "description": "Database name.",
-          "readOnly": true
-        },
-        "status": {
-          "type": "string",
-          "description": "Operation status.",
-          "readOnly": true
-        },
-        "errorMessage": {
-          "type": "string",
-          "description": "Error message.",
-          "readOnly": true
-        },
-        "privateEndpointConnections": {
-          "type": "array",
-          "description": "Gets the status of private endpoints associated with this request.",
-          "items": {
-            "$ref": "#/definitions/PrivateEndpointConnectionRequestStatus"
-          },
-          "readOnly": true
         }
       }
     },
