@@ -46,22 +46,27 @@ model ScheduledEvent
  */
 union EventStatus {
   string,
+
   /**
    * The event is scheduled.
    */
   Scheduled: "Scheduled",
+
   /**
    * The event has started.
    */
   Started: "Started",
+
   /**
    * The event completed.
    */
   Completed: "Completed",
+
   /**
    * The event was cancelled.
    */
   Cancelled: "Cancelled",
+
   /**
    * The event failed.
    */
@@ -73,10 +78,12 @@ union EventStatus {
  */
 union ResourceType {
   string,
+
   /**
    * The event applies to a managed cluster.
    */
   ManagedCluster: "ManagedCluster",
+
   /**
    * The event applies to an agent pool.
    */
