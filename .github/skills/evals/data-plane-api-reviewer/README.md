@@ -556,26 +556,49 @@ the only one that manufactured none.
 pull-request-time failure, but it can only test the properties someone thought
 to encode. Defect 4 passed it.
 
-### The pattern generalized: seven defects, none in the reviewer
+### The pattern generalized: ten defects, none in the reviewer
 
 The four grader defects above are part of a larger and now unambiguous pattern.
-**Seven instrumentation defects have been found across this project's life, and
+**Ten instrumentation defects have been found across this project's life, and
 every one was in the measurement apparatus rather than in the reviewer under
-test.** The later three:
+test.** The later six:
 
-| #   | Defect                                                                                                                                                                                                      | Found by                                     |
-| --- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------- |
-| 5   | The finding counter's `else` branch swallowed `### Questions` bullets into the non-blocking count, so its documented Questions exclusion silently did nothing                                               | testing the counter against a crafted report |
-| 6   | A new grader used inline `(?i:...)` groups, which JS regex rejects outright, so the pattern never compiled                                                                                                  | `checkGraderSoundness`                       |
-| 7   | `DP-VERSION-04` was used as a _fabricated_ rule ID in `REAL_FINDINGS_PROBE`, then became a real rule — the probe would have read as that rule misfiring, and a `DP-VERSION-04` grader would have been inert | writing the rule that took the ID            |
+| #   | Defect                                                                                                                                                                                                                                                | Found by                                     |
+| --- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------- |
+| 5   | The finding counter's `else` branch swallowed `### Questions` bullets into the non-blocking count, so its documented Questions exclusion silently did nothing                                                                                         | testing the counter against a crafted report |
+| 6   | A new grader used inline `(?i:...)` groups, which JS regex rejects outright, so the pattern never compiled                                                                                                                                            | `checkGraderSoundness`                       |
+| 7   | `DP-VERSION-04` was used as a _fabricated_ rule ID in `REAL_FINDINGS_PROBE`, then became a real rule — the probe would have read as that rule misfiring, and a `DP-VERSION-04` grader would have been inert                                           | writing the rule that took the ID            |
+| 8   | A rubric item was silently a YAML **map**, not a string — an unquoted colon inside the sentence — and vally's judge calls `criterion.split()`, so the stimulus scored as a FAILURE on a grader crash while all three of its mechanical graders passed | third full run                               |
+| 9   | The failed-stimuli reporter threw `The property 'stimulus' cannot be found` on an errored trial: each hop was null-checked but not existence-checked, and StrictMode throws on a missing property                                                     | third full run — first with an errored trial |
+| 10  | Eval artifacts are gitignored, but Prettier does not read `.gitignore`, so `npm run format:check` failed locally for anyone who had run the suite; `session-state/` was not ignored at all                                                            | running `npm run check` after a suite        |
+
+Defect 8 is the sharpest of the ten. A single unquoted colon changed a rubric's
+_type_, and the resulting crash was reported in the same column as a genuine
+behavioural failure — so the headline number was wrong in the direction that
+makes the reviewer look worse, and nothing in the output said "this is a harness
+fault".
 
 **Standing warning to whoever maintains this next:** when a measured run
 disagrees with your expectation, the prior should be that the instrument is
-wrong, not the reviewer. Seven for seven. The corollary is that a number from
-this harness is only as trustworthy as the last time its graders were executed
-and its counter was tested against a report whose correct score you already
-knew — re-reading either one has never once found a defect that running it did
-not.
+wrong, not the reviewer. Ten for ten. The corollary is that a number from this
+harness is only as trustworthy as the last time its graders were executed and
+its counter was tested against a report whose correct score you already knew —
+re-reading either one has never once found a defect that running it did not.
+
+### Wall-clock ceiling
+
+The third run took **~2h for 40 trials**, against 54 min for 31 trials
+previously. Per-trial cost was **flat**, but per-trial **wall time nearly
+doubled** — 1.7 → 3.0 min. One trial hit the harness's 600s per-trial cap and
+errored: `Timeout after 600000ms waiting for session.idle`, on
+`tn-linter-owned`, the 28-warning fixture and the densest in the corpus.
+
+That is the ceiling to watch. It is a **wall-clock** limit, not a token or cost
+limit, so it bites the biggest fixtures first and does not show up in a cost
+estimate. If the corpus grows or fixtures get denser, raise `-Timeout` on
+`run-evals.ps1` (default 600000 ms) before starting a long run rather than
+discovering it 90 minutes in. An errored trial is excluded from the finding
+counts — it is not a false positive and must not be counted as one.
 
 ## Second full run (2026-07-27) — first uncontaminated measurement
 

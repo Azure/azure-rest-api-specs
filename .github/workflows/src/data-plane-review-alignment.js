@@ -668,6 +668,23 @@ export async function checkReportFormatContract({ core, rootDir }) {
     }
   }
 
+  // 1b. The contract must disambiguate the two emoji vocabularies. The skill
+  //     uses 🔴/🟡/💡 for severity and 🔒/⏳/📋/🤖/🚫/❓/🚷 for linter-interlock
+  //     status, and several rule files carry an interlock glyph within a few
+  //     lines of the rule text. A real run emitted `| 🚫 Blocking |` in a
+  //     findings table, borrowing a status glyph as a severity marker. Prose
+  //     alone rots, so the disambiguation is asserted here.
+  for (const statusGlyph of ["🚫", "🔒"]) {
+    if (!contract.includes(statusGlyph)) {
+      problems.push(
+        `${REPORT_FORMAT_FILE} does not warn that ${statusGlyph} is a linter-interlock\n` +
+          "      STATUS glyph and never a severity glyph. The reference files use both\n" +
+          "      vocabularies, and an agent that borrows one for the other emits a report\n" +
+          "      no grader can read.",
+      );
+    }
+  }
+
   // 2. The graders and the contract must speak the same syntax. Requiring the
   //    contract to carry an example for every rule family would be padding a
   //    document to satisfy a checker, so the assertion is structural instead:

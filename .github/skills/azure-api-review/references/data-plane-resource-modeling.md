@@ -244,9 +244,9 @@ it, and it costs nothing today and a major version later. That is the entire
 value you add here, so spend your effort on the new/pre-existing distinction
 rather than on detecting the segment.
 
-See
+See the "Not a rule" section of
 [`data-plane-linter-rule-coverage.md`](data-plane-linter-rule-coverage.md)
-🚷 for the measurement.
+for the measurement.
 
 #### Stay silent when
 
@@ -265,12 +265,30 @@ See
   third-party protocol is the general case; those two are simply the instances
   seen so far.
 
-- **The spec documents such a rationale.** Per the normative-strength rule in
-  [`SKILL.md`](../SKILL.md), a plausible documented rationale means **no finding
-  at all** -- not a downgraded one. Do not report a Suggestion "consider
-  removing `/v2/`" to a spec whose `@doc` already explains that the OCI spec
-  requires it. Judge whether the stated rationale is plausible, not whether it
-  matches the default.
+- **The spec documents such a rationale.** Note carefully what the condition is:
+  `versioning-no-version-in-path` is an unconditional `DO NOT` with **no
+  upstream exception clause**. The external-standard carve-out below is _this
+  skill's own_ narrow judgment, not a Guideline `unless`, and it is the only
+  rationale that earns silence here.
+
+  The condition is: **an external protocol the service does not control dictates
+  the path shape.** Nothing else qualifies. Apply it strictly, because a `DO NOT`
+  with a self-granted exception is exactly how a rule quietly stops meaning
+  anything.
+
+  | Rationale                                                                | Verdict                                                                                                     |
+  | ------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------- |
+  | "The OCI Distribution Spec defines the registry API as rooted at `/v2/`" | **Meets it.** Silent.                                                                                       |
+  | "Apache Atlas compatibility requires `/atlas/v2/`"                       | **Meets it.** Silent.                                                                                       |
+  | "Our evaluation engine is versioned separately from the service"         | **Fails.** An internal design preference. The `api-version` query parameter already carries version intent. |
+  | "Callers pin the engine build they tested against"                       | **Fails.** A real need, but it argues for _some_ versioning mechanism, not for one in the path.             |
+
+  A confident, well-written paragraph is not evidence of external conformance.
+  Ask what document mandates the shape and who publishes it; if the answer is
+  "we decided", the exception does not apply. Where the rationale fails, **say
+  so in the finding** -- name the argument and explain why an internal
+  preference cannot override a `DO NOT` -- rather than raising the finding as
+  though no rationale were offered.
 
 #### Severity
 

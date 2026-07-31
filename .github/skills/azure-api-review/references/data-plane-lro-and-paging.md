@@ -151,18 +151,39 @@ The condition is part of the rule. A collection the service fixes -- supported
 languages, regions, a documented and small sub-collection -- does not meet it,
 so an unpaged list there is **not a violation** and there is nothing to report.
 
+**The condition is "can it _ever_ grow very large", and nothing else.** That is
+the only question a rationale has to answer. Arguments that do not answer it
+earn no exception however well made:
+
+| Argument                                               | Why it does not answer the condition    |
+| ------------------------------------------------------ | --------------------------------------- |
+| "99.9% of requests return fewer than 250 items"        | Typical size, not maximum size.         |
+| "A snapshot is atomic; a cursor would let ranks shift" | Consistency, a different subject.       |
+| "Avoiding cursor state keeps the common path simple"   | Implementation cost, not size.          |
+| "The collection is capped at 200 by service policy"    | **Answers it.** Bounded, so no finding. |
+
+**Check the rest of the spec for evidence against the rationale.** A
+`...TooLarge` error, a `maxResults` cap that can be raised, or a documented
+truncation behaviour is the service's own statement that the collection can grow
+-- and it outweighs a paragraph asserting that it usually does not.
+
 **Do not flag** a non-paged list when the collection is provably bounded and
 small, and **do not flag it merely because the bound is stated in a `@doc`
 rather than enforced by the type system** -- a documented bound is exactly the
-evidence this exception asks for. Assess whether the stated bound is plausible;
-if it is, stay silent. If you doubt it, ask a question at Suggestion severity
-rather than asserting a violation. A reviewer that demands paging on every
-array is the archetypal noisy bot.
+evidence this exception asks for, because a bound is an answer to the condition.
+Judge whether the stated bound is **credible**; if it is, stay silent. If you
+doubt it, ask a question at Suggestion severity rather than asserting a
+violation. A reviewer that demands paging on every array is the archetypal noisy
+bot.
 
 Signals that paging is genuinely missing:
 
 - The collection is customer-populated, so its size is unbounded by definition.
-- The operation is a search or query.
+- **The operation is a search or query.** A search over customer data is
+  unbounded by construction: the caller chooses the predicate, so the service
+  cannot bound the result set. Treat a rationale that argues typical result size
+  here as failing the condition -- it is describing the common case of an
+  unbounded set, not bounding it.
 - A sibling list operation on the same service **is** paged -- inconsistency
   within one service is the strongest signal.
 

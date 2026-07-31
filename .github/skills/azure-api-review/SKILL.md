@@ -165,31 +165,99 @@ be raised and **at what severity**.
 Blocking is additionally reserved for genuine correctness or security defects
 — secret exposure, a breaking change in a stable version — regardless of tag.
 
-### A documented rationale is not a deviation
+### A documented rationale is not automatically a deviation — but it is not automatically an exception either
 
-Several Guideline statements carry an explicit exception clause. The clearest
-example, quoted verbatim:
+Several Guideline statements carry an explicit exception clause. Two, quoted
+verbatim:
 
 > :ballot_box_with_check: **YOU SHOULD** use extensible enumerations **unless
 > you are positive that the symbol set will NEVER change over time.**
 
-The `unless` is part of the rule, not a loophole around it. When a
-specification states a rationale for a `SHOULD`-level choice — in a `@doc`, a
-comment, or the PR description — the reviewer's job is to **assess whether that
-rationale is plausible**, not to override it because the default differs.
+> :ballot_box_with_check: **YOU SHOULD** support paging today **if there is ever
+> a chance in the future that the number of items can grow to be very large.**
 
-- Rationale plausible → **no finding.** The spec is exercising the exception
-  the Guideline grants.
-- Rationale doubtful → at most a **Suggestion**, usually better as a
-  **Question**: "the doc says the value set is fixed by the wire protocol — is
-  that contractual, or could a third mode appear?"
-- Rationale absent → normal severity for the rule applies.
+The `unless` and the `if` are part of the rule, not loopholes around it. Note
+what they have in common: each names a **specific condition**. Neither says
+"unless the author explains themselves".
+
+**Apply a two-step test, in order. Both steps must pass before a rationale
+silences a finding.**
+
+**Step 1 — Does the Guideline actually grant an exception here?**
+
+Read the statement you are citing. If it has no exception clause, **a rationale
+cannot waive it at all.** At most it affects severity, phrasing, or whether you
+raise a question instead of an assertion. Do not generalise the extensible-enum
+`unless` into a universal escape hatch: it is an exception to _that_ rule, not a
+precedent that every rule bends to a well-written paragraph.
+
+**Step 2 — Does the rationale satisfy that specific condition?**
+
+Not "is it plausible". Not "is it well-argued". Not "did the author clearly
+think about this". **Does it address, and meet, the condition the Guideline
+actually states?**
+
+A fluent argument for a _different_ proposition does not earn the exception. A
+rationale can be entirely true, professionally written, and still fail to say
+anything about the thing the exception turns on.
+
+#### Worked example — an argument that fails Step 2
+
+A search operation returns an unpaged array. Its `@doc` argues, at length, that
+a snapshot is atomic and a cursor would let ranks shift between calls; that more
+than 99.9% of production searches return fewer than 250 hits; and that avoiding
+cursor state keeps the common path simple.
+
+Every one of those claims may be true. **None of them addresses whether the
+result set can ever grow very large**, which is the condition `DP-PAGE-01`
+states. Typical size is not maximum size, and consistency is a different subject
+altogether. The exception is not earned, and the finding stands.
+
+Worse, the same spec defines a `QueryResultTooLarge` error for results that
+exceed a size limit. That is the service's own evidence that the collection
+**can** grow large — the spec answers the real question, in the author's favour
+against their own argument. Look for that kind of contradiction: a rationale is
+weakened most by the rest of the spec, not by your intuition.
+
+#### Worked example — an argument that passes Step 2
+
+A closed literal union is suppressed with: _"the wire protocol frames a request
+as either single-sentence or whole-document; a third depth would need a
+different request shape, not a third member, so the set cannot grow."_
+
+That is on-condition. The extensible-enum exception turns on whether the symbol
+set will never change, and the rationale argues exactly that, with a structural
+reason rather than an assurance. **Silent. No finding, at any severity.**
+
+#### Outcomes
+
+- **Exception exists and the rationale meets it** → **no finding.** The spec is
+  exercising the exception the Guideline grants.
+- **Exception exists and the rationale does not meet it** → **normal finding.**
+  Say which condition it fails to address (see below).
+- **No exception clause in the Guideline** → the rationale does not waive
+  anything. Normal severity for the rule.
+- **Rationale absent** → normal severity for the rule.
+
+#### Always address a stated rationale explicitly in the finding
+
+When the spec argues for its choice and you raise the finding anyway, **name the
+argument and say why it does not hold.** One or two sentences:
+
+> The `@doc` argues that 99.9% of searches return fewer than 250 hits. That is
+> about typical size; `DP-PAGE-01`'s exception turns on whether the collection
+> can _ever_ grow very large, and `QueryResultTooLarge` indicates it can.
+
+A reviewer that silently overrules a documented rationale reads as not having
+read it, and gets dismissed on exactly that basis. This applies equally when the
+rationale is irrelevant rather than wrong — say that it addresses a different
+question.
 
 **Never write that the Guidelines forbid something they express as a
 `SHOULD`.** Asserting "the Guidelines do not permit this" about a
 `YOU SHOULD` statement is factually wrong about the source text, and it is
 worse than silence: it is confidently wrong, in writing, on a service team's
-pull request.
+pull request. Rejecting a rationale is not the same as upgrading the rule.
 
 ### Reference files must preserve the exception
 

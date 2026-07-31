@@ -245,14 +245,20 @@ finding; it does not soften it.
 6. **Normative strength.** `YOU SHOULD` / `YOU SHOULD NOT` caps the finding at
    Warning. Blocking is for `DO` / `DO NOT` violations, secret exposure and
    breaking changes in a stable version.
-7. **Stated rationale.** A `@doc` explaining _why_ a `SHOULD`-level choice was
-   made -- a value set fixed by the wire protocol, a bounded collection, a
-   resource that cannot be deleted -- is the spec exercising an exception the
-   Guideline itself grants. Judge whether the rationale is **plausible**, not
-   whether it matches the default: plausible drops the finding, doubtful becomes
-   a Suggestion-severity question. Never assert the Guidelines forbid something
-   they express as a `SHOULD`. See "Normative strength and documented rationale"
-   in
+7. **Stated rationale -- two-step test, both steps required.** First: does the
+   Guideline you cite actually contain an exception clause? If not, a rationale
+   waives nothing; it may soften phrasing, not silence the finding. Second: does
+   the rationale meet **that specific condition** -- not "is it plausible", not
+   "is it well argued". A fluent case for a different proposition earns nothing.
+   `DP-PAGE-01` turns on whether a collection can _ever_ grow very large, so an
+   argument about typical size or snapshot consistency does not answer it; the
+   extensible-enum `unless` turns on the symbol set never changing, so "a third
+   value would need a different request shape" does. Check the rest of the spec
+   for evidence against the rationale -- a `...TooLarge` error is the service's
+   own admission that a collection grows. **When you raise a finding anyway,
+   name the rationale and say why it fails.** Never assert the Guidelines forbid
+   something they express as a `SHOULD`. See "Normative strength and documented
+   rationale" in
    [`SKILL.md`](../skills/azure-api-review/SKILL.md).
 8. Confirm the fix compiles as TypeSpec, at least structurally.
 
@@ -309,8 +315,10 @@ Confirm all six before emitting any finding:
 
 Two more decide severity rather than existence:
 
-7. Any rationale the spec states for the choice is **implausible**, not merely
-   different from the default. A plausible documented rationale means no finding.
+7. If the spec states a rationale, either the Guideline grants no exception at
+   all, or the rationale fails to meet the exception's stated condition. A
+   rationale that **meets** the condition means no finding; one that is merely
+   articulate does not.
 8. `YOU SHOULD` rather than `DO` upstream caps severity at Warning.
 
 Any "no" on 1--6 drops the finding. Dropping is cheap; being wrong is not.

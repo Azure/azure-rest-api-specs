@@ -661,6 +661,22 @@ describe("checkReportFormatContract", () => {
     expect(core.setFailed).toBeCalledWith(expect.stringContaining("🟡"));
   });
 
+  it("requires the contract to disambiguate severity glyphs from interlock status glyphs", async () => {
+    const core = createMockCore();
+    const rootDir = await createFixtureRepo();
+    // Defines all three severity glyphs but never mentions the interlock
+    // vocabulary -- the exact state that let a real run emit `| 🚫 Blocking |`.
+    await writeNested(
+      join(rootDir, REPORT_FORMAT_FILE),
+      "# Format\n\n**[DP-VIS-02] Title** -- `a.tsp:1`\n\n🔴 🟡 💡\n",
+    );
+    await writeNested(join(rootDir, AGENT_FILE), "See data-plane-report-format.md.\n");
+
+    await expect(checkReportFormatContract({ core, rootDir })).resolves.toBe(false);
+
+    expect(core.setFailed).toBeCalledWith(expect.stringContaining("🚫"));
+  });
+
   it("rejects an agent file that restates the template instead of deferring", async () => {
     const core = createMockCore();
     const rootDir = await createFixtureRepo();

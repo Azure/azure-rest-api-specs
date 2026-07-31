@@ -34,11 +34,15 @@ protocol or an external standard fixes, where adding a value would require a
 new request shape rather than a new member.
 
 **For reviewers:** a closed enum accompanied by a documented rationale is the
-Guideline's own exception being exercised, not a violation. Assess whether the
-rationale is plausible; if it is, raise nothing. If it is doubtful, ask a
-question or raise a Suggestion. **Never raise this Blocking, and never write
-that the Guidelines forbid a closed enum** — they do not. See "Normative
-strength and documented rationale" in [`SKILL.md`](../SKILL.md).
+Guideline's own exception being exercised, not a violation — **provided the
+rationale answers the condition the exception states**, which is whether the
+symbol set will _never_ change. A structural reason meets it ("a third value
+would require a different request shape, so the set cannot grow"); an assurance
+does not ("we have no plans to add more"), nor does an argument about a
+different subject. If it is doubtful, ask a question or raise a Suggestion.
+**Never raise this Blocking, and never write that the Guidelines forbid a closed
+enum** — they do not. See "Normative strength and documented rationale" in
+[`SKILL.md`](../SKILL.md).
 
 A closed enum with **no** stated rationale is a normal Warning-level finding.
 

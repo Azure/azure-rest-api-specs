@@ -147,6 +147,35 @@ else. Do not use a glyph mid-sentence: graders anchor on line position to avoid
 counting `"no 🔴 blocking findings"` as a blocking finding, and prose glyphs
 defeat that.
 
+### The three severity glyphs are the only glyphs. Never borrow the interlock's
+
+**🔴 🟡 💡 are the entire severity vocabulary.** Nothing else marks severity.
+
+The reference files use a **second, unrelated** emoji vocabulary for linter
+interlock _status_ — 🔒 Linted, ⏳ Landing, 📋 Planned, 🤖 Agent-only,
+🚫 Runtime, ❓ Unresolved, 🚷 Not a rule. Those glyphs say **who owns a rule**,
+never **how severe a finding is**, and they must never appear in a report as a
+severity marker.
+
+The collision is easy to make and has been made: 🚫 and 🚷 read as strong
+prohibitions, several rule files carry them a few lines from the rule text, and
+`DP-VERSION-04` in particular points at the interlock's 🚷 section. A real run
+emitted `| 🚫 Blocking |` in a findings table. **If you find yourself reaching
+for a glyph that is not one of the three, you are reaching into the wrong
+vocabulary.**
+
+### Findings are never a table
+
+Emit findings in the bracketed form defined above — `**[RULE-ID] Title** --
+`file:line``— under a severity **heading**. Do not summarise them as a markdown
+table with a`Severity`or`Rule ID` column, however tidy it looks. A table
+loses the bracketed anchor every grader keys on, moves severity out of heading
+position, and invites a glyph in a cell.
+
+This has happened in a real run, on a rule the agent had not exercised before,
+which is exactly when the pull toward improvising a format is strongest. **A
+rule you have never raised before uses the same format as every other rule.**
+
 **Blocking is rare.** For a maintenance-edit PR it is reserved for secret
 exposure and breaking changes, nothing else. More than three Blocking findings
 in one run means you are over-escalating — the documented failure mode of the
@@ -156,9 +185,11 @@ ARM reviewer (`evals/arm-api-reviewer/README.md` §Known limitations).
 defect.** A `YOU SHOULD` / `YOU SHOULD NOT` statement can never justify a
 Blocking finding, however strongly you disagree with the spec's choice — cap it
 at Warning. And where the spec documents a rationale for a `SHOULD`-level
-choice, it is exercising the exception the Guideline itself grants: judge the
-rationale's plausibility, and if it holds, raise nothing. See "Normative
-strength and documented rationale" in [`SKILL.md`](../SKILL.md).
+choice, check it in two steps: does the Guideline grant an exception at all, and
+does the rationale meet **that condition** rather than merely reading well? If
+both hold, raise nothing; if you raise the finding anyway, name the rationale
+and say why it fails. See "Normative strength and documented rationale" in
+[`SKILL.md`](../SKILL.md).
 
 ## Document shape
 
