@@ -74,6 +74,9 @@ union SkuMixPlacementZonalDistributionStrategy {
 
   /** Zones filled based on zone preferences/rank. Higher priority zones filled first. */
   Prioritized: "Prioritized",
+
+  /** Capacity allocated within a single zone on a best-effort basis; may spill across zones if single-zone capacity is insufficient. */
+  BestEffortSingleZone: "BestEffortSingleZone",
 }
 
 /** Reason for partial fulfillment of the requested capacity. */

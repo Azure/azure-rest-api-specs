@@ -702,7 +702,8 @@
       "description": "Strategy for distributing capacity across availability zones.",
       "enum": [
         "BestEffortBalanced",
-        "Prioritized"
+        "Prioritized",
+        "BestEffortSingleZone"
       ],
       "x-ms-enum": {
         "name": "SkuMixPlacementZonalDistributionStrategy",
@@ -717,6 +718,11 @@
             "name": "Prioritized",
             "value": "Prioritized",
             "description": "Zones filled based on zone preferences/rank. Higher priority zones filled first."
+          },
+          {
+            "name": "BestEffortSingleZone",
+            "value": "BestEffortSingleZone",
+            "description": "Capacity allocated within a single zone on a best-effort basis; may spill across zones if single-zone capacity is insufficient."
           }
         ]
       }
