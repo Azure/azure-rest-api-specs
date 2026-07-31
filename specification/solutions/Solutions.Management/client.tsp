@@ -59,3 +59,16 @@ using Microsoft.Solutions;
 );
 @@clientName(Resource, "ManagedApplicationResourceInfo", "csharp");
 @@clientName(GenericResource, "GenericResourceInfo", "csharp");
+@@clientName(
+  ApplicationJitAccessPolicy.jitAccessEnabled,
+  "IsJitAccessEnabled",
+  "csharp"
+);
+@@alternateType(
+  ApplicationJitAccessPolicy.maximumJitAccessDuration,
+  duration,
+  "csharp"
+);
+@@clientName(PlanPatchable, "ManagedApplicationsPlanPatch", "csharp");
+@@clientName(Status, "JitRequestStatus", "csharp");
+@@clientName(Substatus, "JitRequestSubstatus", "csharp");
