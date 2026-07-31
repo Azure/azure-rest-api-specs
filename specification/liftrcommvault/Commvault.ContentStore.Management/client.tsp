@@ -85,7 +85,8 @@ using Commvault.ContentStore;
 @@clientName(VmInfo.vmtags, "VmTags", "csharp");
 
 // [ACRONYM] "BackUp" should be treated as the compound word "Backup".
-@@clientName(BackUpType, "BackupType", "csharp");
+// [Contextual naming] "BackupType" is too generic; prefix with the RP name.
+@@clientName(BackUpType, "CommvaultBackupType", "csharp");
 
 // [Contextual naming] Avoid shadowing the .NET BCL type System.DayOfWeek.
 @@clientName(DayOfWeek, "CommvaultDayOfWeek", "csharp");
