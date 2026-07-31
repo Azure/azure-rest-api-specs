@@ -80,6 +80,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Get a sync database ID": {
+            "$ref": "./examples/SyncGroupGetSyncDatabaseId.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -129,6 +134,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List sync groups under a given database": {
+            "$ref": "./examples/SyncGroupListByDatabase.json"
           }
         },
         "x-ms-pageable": {
@@ -187,6 +197,14 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get a sync group": {
+            "$ref": "./examples/SyncGroupGet.json"
+          },
+          "Get a sync group with user assigned identity": {
+            "$ref": "./examples/SyncGroupGetWithIdentity.json"
           }
         }
       },
@@ -282,6 +300,17 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create a sync group": {
+            "$ref": "./examples/SyncGroupCreate.json"
+          },
+          "Create a sync group with user assigned identity": {
+            "$ref": "./examples/SyncGroupCreateWithIdentity.json"
+          },
+          "Update a sync group": {
+            "$ref": "./examples/SyncGroupUpdate.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/SyncGroup"
@@ -363,6 +392,17 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Update a sync group": {
+            "$ref": "./examples/SyncGroupPatch.json"
+          },
+          "Update a sync group with new user assigned identity and remove older assigned identity": {
+            "$ref": "./examples/SyncGroupPatchAddAndRemoveIdentity.json"
+          },
+          "Update a sync group with user assigned identity": {
+            "$ref": "./examples/SyncGroupPatchWithIdentity.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/SyncGroup"
@@ -435,6 +475,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Delete a sync group": {
+            "$ref": "./examples/SyncGroupDelete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -490,6 +535,11 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Cancel a sync group synchronization": {
+            "$ref": "./examples/SyncGroupCancelSync.json"
+          }
         }
       }
     },
@@ -544,6 +594,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get a hub database schema.": {
+            "$ref": "./examples/SyncGroupGetHubSchema.json"
           }
         },
         "x-ms-pageable": {
@@ -664,6 +719,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Get sync group logs": {
+            "$ref": "./examples/SyncGroupGetLog.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -733,6 +793,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Refresh a hub database schema.": {
+            "$ref": "./examples/SyncGroupRefreshHubSchema.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -787,6 +852,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Trigger a sync group synchronization.": {
+            "$ref": "./examples/SyncGroupTriggerSync.json"
           }
         }
       }

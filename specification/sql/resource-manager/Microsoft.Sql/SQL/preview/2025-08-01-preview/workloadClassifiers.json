@@ -97,6 +97,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Get the list of workload classifiers for a workload group": {
+            "$ref": "./examples/GetWorkloadClassifierList.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -160,6 +165,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a workload classifier for a data warehouse": {
+            "$ref": "./examples/GetWorkloadClassifier.json"
           }
         }
       },
@@ -262,6 +272,14 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create a workload group with all properties specified.": {
+            "$ref": "./examples/CreateOrUpdateWorkloadClassifierMax.json"
+          },
+          "Create a workload group with the required properties specified.": {
+            "$ref": "./examples/CreateOrUpdateWorkloadClassifierMin.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/WorkloadClassifier"
@@ -339,6 +357,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a workload classifier": {
+            "$ref": "./examples/DeleteWorkloadClassifier.json"
           }
         },
         "x-ms-long-running-operation-options": {

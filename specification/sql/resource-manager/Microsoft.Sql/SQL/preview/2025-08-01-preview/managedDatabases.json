@@ -83,6 +83,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List databases by managed instances": {
+            "$ref": "./examples/ManagedDatabaseListByManagedInstance.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -132,6 +137,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a managed database": {
+            "$ref": "./examples/ManagedDatabaseGet.json"
           }
         }
       },
@@ -220,6 +230,35 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Creates a new managed database by restoring from an external backup": {
+            "$ref": "./examples/ManagedDatabaseCreateRestoreExternalBackup.json"
+          },
+          "Creates a new managed database by restoring from an external backup using managed identity": {
+            "$ref": "./examples/ManagedDatabaseCreateRestoreExternalBackupManagedIdentity.json"
+          },
+          "Creates a new managed database from restoring a geo-replicated backup": {
+            "$ref": "./examples/ManagedDatabaseCreateRecovery.json"
+          },
+          "Creates a new managed database from restoring a long term retention backup": {
+            "$ref": "./examples/ManagedDatabaseCreateRestoreLtrBackup.json"
+          },
+          "Creates a new managed database using cross subscription point in time restore": {
+            "$ref": "./examples/ManagedDatabaseCreateCrossSubscriptionPointInTimeRestore.json"
+          },
+          "Creates a new managed database using point in time restore": {
+            "$ref": "./examples/ManagedDatabaseCreatePointInTimeRestore.json"
+          },
+          "Creates a new managed database with ledger on.": {
+            "$ref": "./examples/CreateManagedDatabaseLedger.json"
+          },
+          "Creates a new managed database with maximal properties": {
+            "$ref": "./examples/ManagedDatabaseCreateMax.json"
+          },
+          "Creates a new managed database with minimal properties": {
+            "$ref": "./examples/ManagedDatabaseCreateMin.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/ManagedDatabase"
@@ -294,6 +333,14 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Updates a managed database with maximal properties": {
+            "$ref": "./examples/ManagedDatabaseUpdateMax.json"
+          },
+          "Updates a managed database with minimal properties": {
+            "$ref": "./examples/ManagedDatabaseUpdateMin.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/ManagedDatabase"
@@ -357,6 +404,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Delete managed database": {
+            "$ref": "./examples/ManagedDatabaseDelete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -431,6 +483,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Cancels a managed database move.": {
+            "$ref": "./examples/ManagedDatabaseCancelMove.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -501,6 +558,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Completes a managed database move.": {
+            "$ref": "./examples/ManagedDatabaseCompleteMove.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -575,6 +637,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Completes a managed database external backup restore.": {
+            "$ref": "./examples/ManagedDatabaseCompleteExternalRestore.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -639,6 +706,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Reevaluate the inaccessibility state of a managed database.": {
+            "$ref": "./examples/ManagedDatabaseReevaluateInaccessibleDatabaseState.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -714,6 +786,14 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Starts a managed database move with all optional parameters specified.": {
+            "$ref": "./examples/ManagedDatabaseStartMoveMax.json"
+          },
+          "Starts a managed database move with no optional parameters specified.": {
+            "$ref": "./examples/ManagedDatabaseStartMoveMin.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -757,6 +837,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List inaccessible managed databases by managed instances": {
+            "$ref": "./examples/InaccessibleManagedDatabaseListByManagedInstance.json"
           }
         },
         "x-ms-pageable": {

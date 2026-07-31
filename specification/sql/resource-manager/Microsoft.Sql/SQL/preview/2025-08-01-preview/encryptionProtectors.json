@@ -83,6 +83,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List encryption protectors by server": {
+            "$ref": "./examples/EncryptionProtectorList.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -146,6 +151,14 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get the encryption protector": {
+            "$ref": "./examples/EncryptionProtectorGet.json"
+          },
+          "Get the encryption protector with versionless key": {
+            "$ref": "./examples/EncryptionProtectorGetWithVersionlessKey.json"
           }
         }
       },
@@ -231,6 +244,17 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Update the encryption protector to key vault": {
+            "$ref": "./examples/EncryptionProtectorCreateOrUpdateKeyVault.json"
+          },
+          "Update the encryption protector to key vault with versionless key": {
+            "$ref": "./examples/EncryptionProtectorCreateOrUpdateKeyVaultWithVersionlessKey.json"
+          },
+          "Update the encryption protector to service managed": {
+            "$ref": "./examples/EncryptionProtectorCreateOrUpdateServiceManaged.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/EncryptionProtector"
@@ -307,6 +331,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Revalidates the encryption protector": {
+            "$ref": "./examples/EncryptionProtectorRevalidate.json"
           }
         },
         "x-ms-long-running-operation-options": {

@@ -80,6 +80,14 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List managed instances": {
+            "$ref": "./examples/ManagedInstanceList.json"
+          },
+          "List managed instances with $expand=administrators/activedirectory": {
+            "$ref": "./examples/ManagedInstanceListWithExpandEqualsAdministrators.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -131,6 +139,14 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List managed instances by instance pool": {
+            "$ref": "./examples/ManagedInstanceListByInstancePool.json"
+          },
+          "List managed instances by instance pool with $expand=administrators/activedirectory": {
+            "$ref": "./examples/ManagedInstanceListByInstancePoolWithExpandEqualsAdministrators.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -173,6 +189,14 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List managed instances by resource group": {
+            "$ref": "./examples/ManagedInstanceListByResourceGroup.json"
+          },
+          "List managed instances by resource group with $expand=administrators/activedirectory": {
+            "$ref": "./examples/ManagedInstanceListByResourceGroupWithExpandEqualsAdministrators.json"
           }
         },
         "x-ms-pageable": {
@@ -224,6 +248,17 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get managed instance": {
+            "$ref": "./examples/ManagedInstanceGet.json"
+          },
+          "Get managed instance while resource is updating": {
+            "$ref": "./examples/ManagedInstanceGetWhileUpdating.json"
+          },
+          "Get managed instance with $expand=administrators/activedirectory": {
+            "$ref": "./examples/ManagedInstanceGetWithExpandEqualsAdministrators.json"
           }
         }
       },
@@ -305,6 +340,14 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create managed instance with all properties": {
+            "$ref": "./examples/ManagedInstanceCreateMax.json"
+          },
+          "Create managed instance with minimal properties": {
+            "$ref": "./examples/ManagedInstanceCreateMin.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/ManagedInstance"
@@ -372,6 +415,17 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Remove maintenance policy from managed instance (select default maintenance policy)": {
+            "$ref": "./examples/ManagedInstanceRemoveMaintenanceConfiguration.json"
+          },
+          "Update managed instance with all properties": {
+            "$ref": "./examples/ManagedInstanceUpdateMax.json"
+          },
+          "Update managed instance with minimal properties": {
+            "$ref": "./examples/ManagedInstanceUpdateMin.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/ManagedInstance"
@@ -428,6 +482,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Delete managed instance": {
+            "$ref": "./examples/ManagedInstanceDelete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -513,6 +572,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Failover a managed instance.": {
+            "$ref": "./examples/FailoverManagedInstance.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -556,6 +620,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the collection of outbound network dependencies for the given managed instance.": {
+            "$ref": "./examples/ListOutboundNetworkDependenciesByManagedInstance.json"
           }
         },
         "x-ms-pageable": {
@@ -611,6 +680,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Reevaluate inaccessibility states of all managed databases.": {
+            "$ref": "./examples/ManagedInstanceReevaluateInaccessibleDatabaseState.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -670,6 +744,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Refresh external governance enablement status.": {
+            "$ref": "./examples/ManagedInstanceRefreshExternalGovernanceStatus.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -732,6 +811,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Starts the managed instance.": {
+            "$ref": "./examples/StartManagedInstance.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/ManagedInstance"
@@ -790,6 +874,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Stops the managed instance.": {
+            "$ref": "./examples/StopManagedInstance.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -984,6 +1073,17 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Obtain list of instance's top resource consuming queries.": {
+            "$ref": "./examples/ManagedInstanceTopQueriesList.json"
+          },
+          "Obtain list of instance's top resource consuming queries. Full-blown request and response.": {
+            "$ref": "./examples/ManagedInstanceTopQueriesListMax.json"
+          },
+          "Obtain list of instance's top resource consuming queries. Minimal request and response.": {
+            "$ref": "./examples/ManagedInstanceTopQueriesListMin.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1046,6 +1146,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Validate the customer managed key.": {
+            "$ref": "./examples/ManagedInstancValidateAzureKeyVaultEncryptionKey.json"
           }
         },
         "x-ms-long-running-operation-options": {

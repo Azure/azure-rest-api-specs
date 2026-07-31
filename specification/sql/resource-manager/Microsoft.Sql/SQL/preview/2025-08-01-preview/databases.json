@@ -113,6 +113,17 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Gets a list of databases configured with enclave type.": {
+            "$ref": "./examples/ListVCoreDatabasesEnclaveTypeByServer.json"
+          },
+          "Gets a list of databases with OData filtering.": {
+            "$ref": "./examples/ListVCoreDatabasesByServerWithOdata.json"
+          },
+          "Gets a list of databases.": {
+            "$ref": "./examples/ListVCoreDatabasesByServer.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -176,6 +187,26 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a database configured with Default enclave type.": {
+            "$ref": "./examples/GetVCoreDatabaseDefaultEnclave.json"
+          },
+          "Gets a database configured with VBS enclave type.": {
+            "$ref": "./examples/GetVCoreDatabaseVBSEnclave.json"
+          },
+          "Gets a database with Availability zone specified.": {
+            "$ref": "./examples/GetDatabaseWithAvailabilityZone.json"
+          },
+          "Gets a database with database level keys expanded using versionless keys.": {
+            "$ref": "./examples/GetVCoreDatabaseWithExpandEqualsKeysWithVersionlessKeys.json"
+          },
+          "Gets a database with database level keys expanded.": {
+            "$ref": "./examples/GetVCoreDatabaseWithExpandEqualsKeys.json"
+          },
+          "Gets a database.": {
+            "$ref": "./examples/GetVCoreDatabase.json"
           }
         }
       },
@@ -259,6 +290,77 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Creates a VCore database by specifying service objective name.": {
+            "$ref": "./examples/CreateVCoreDatabaseByServiceObjective.json"
+          },
+          "Creates a VCore database by specifying sku name and capacity.": {
+            "$ref": "./examples/CreateVCoreDatabaseBySkuNameCapacity.json"
+          },
+          "Creates a data warehouse database as a cross-subscription restore from a backup of a dropped database.": {
+            "$ref": "./examples/CreateDwDatabaseCrossSubscriptionRestore.json"
+          },
+          "Creates a data warehouse database as a cross-subscription restore from a geo-backup.": {
+            "$ref": "./examples/CreateDwDatabaseCrossSubscriptionRecovery.json"
+          },
+          "Creates a data warehouse database as a cross-subscription restore from a restore point of an existing database.": {
+            "$ref": "./examples/CreateDwDatabaseCrossSubscriptionPITR.json"
+          },
+          "Creates a database as a copy.": {
+            "$ref": "./examples/CreateDatabaseCopyMode.json"
+          },
+          "Creates a database as a standby secondary.": {
+            "$ref": "./examples/CreateDatabaseStandbyMode.json"
+          },
+          "Creates a database as an on-line secondary.": {
+            "$ref": "./examples/CreateDatabaseSecondaryMode.json"
+          },
+          "Creates a database as named replica secondary.": {
+            "$ref": "./examples/CreateDatabaseNamedReplica.json"
+          },
+          "Creates a database from PointInTimeRestore.": {
+            "$ref": "./examples/CreateDatabasePITRMode.json"
+          },
+          "Creates a database with Default enclave type.": {
+            "$ref": "./examples/CreateDatabaseDefaultEnclave.json"
+          },
+          "Creates a database with VBS enclave type.": {
+            "$ref": "./examples/CreateDatabaseVBSEnclave.json"
+          },
+          "Creates a database with availability zone specified.": {
+            "$ref": "./examples/CreateDatabaseWithAvailabilityZone.json"
+          },
+          "Creates a database with database-level customer managed keys.": {
+            "$ref": "./examples/CreateDatabaseDefaultModeWithKeysAndEncryptionProtector.json"
+          },
+          "Creates a database with database-level versionless customer managed keys.": {
+            "$ref": "./examples/CreateDatabaseDefaultModeWithVersionlessKeysAndVersionlessEncryptionProtector.json"
+          },
+          "Creates a database with default mode.": {
+            "$ref": "./examples/CreateDatabaseDefaultMode.json"
+          },
+          "Creates a database with encryption protector auto rotation.": {
+            "$ref": "./examples/CreateDatabaseWithEncryptionProtectorAutoRotation.json"
+          },
+          "Creates a database with ledger on.": {
+            "$ref": "./examples/CreateDatabaseLedger.json"
+          },
+          "Creates a database with minimum number of parameters.": {
+            "$ref": "./examples/CreateDatabaseMin.json"
+          },
+          "Creates a database with preferred maintenance window.": {
+            "$ref": "./examples/CreateDatabaseMaintenanceConfiguration.json"
+          },
+          "Creates a database with specified backup storage redundancy.": {
+            "$ref": "./examples/CreateDatabaseConfiguredBackupStorageRedundancy.json"
+          },
+          "Updates a database to Hyperscale SLO with manual cutover": {
+            "$ref": "./examples/UpdateDatabaseHyperscaleMigrationWithManualCutover.json"
+          },
+          "Updates a database to Hyperscale tier by triggering manual cutover during Migration workflow": {
+            "$ref": "./examples/UpdateDatabaseHyperscaleMigrationPerformCutover.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/Database"
@@ -333,6 +435,26 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Assigns maintenance window to a database.": {
+            "$ref": "./examples/PatchVCoreDatabaseAssignMaintenanceConfiguration.json"
+          },
+          "Patch a database with database-level customer managed keys.": {
+            "$ref": "./examples/PatchVCoreDatabaseWithKeysAndEncryptionProtector.json"
+          },
+          "Resets maintenance window of a database to default.": {
+            "$ref": "./examples/PatchVCoreDatabaseResetMaintenanceConfiguration.json"
+          },
+          "Updates a database with Default enclave type.": {
+            "$ref": "./examples/PatchDatabaseDefaultEnclave.json"
+          },
+          "Updates a database with VBS enclave type.": {
+            "$ref": "./examples/PatchDatabaseVBSEnclave.json"
+          },
+          "Updates a database.": {
+            "$ref": "./examples/PatchVCoreDatabase.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/Database"
@@ -396,6 +518,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes a database.": {
+            "$ref": "./examples/DeleteDatabase.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -471,6 +598,17 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Exports a database, using Managed Identity to communicate with SQL server and storage account.": {
+            "$ref": "./examples/ExportDatabaseWithManagedIdentity.json"
+          },
+          "Exports a database, using private link to communicate with SQL server and storage account.": {
+            "$ref": "./examples/ExportDatabaseWithNetworkIsolation.json"
+          },
+          "Exports a database.": {
+            "$ref": "./examples/ExportDatabase.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -564,6 +702,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Failover an database": {
+            "$ref": "./examples/FailoverDatabase.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -639,6 +782,17 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Imports to an existing empty database, using Managed Identity to communicate with SQL server and storage account.": {
+            "$ref": "./examples/ImportDatabaseWithManagedIdentity.json"
+          },
+          "Imports to an existing empty database, using private link to communicate with SQL server and storage account.": {
+            "$ref": "./examples/ImportDatabaseWithNetworkIsolation.json"
+          },
+          "Imports to an existing empty database.": {
+            "$ref": "./examples/ImportDatabase.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "./common.json#/definitions/ImportExportOperationResult"
@@ -696,6 +850,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Renames a database.": {
+            "$ref": "./examples/RenameDatabase.json"
           }
         }
       }
@@ -758,6 +917,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Pauses a database.": {
+            "$ref": "./examples/PauseDatabase.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -827,6 +991,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Resumes a database.": {
+            "$ref": "./examples/ResumeDatabase.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/Database"
@@ -891,6 +1060,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Upgrades a data warehouse.": {
+            "$ref": "./examples/UpgradeDataWarehouse.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -943,6 +1117,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Gets a list of databases in an elastic pool.": {
+            "$ref": "./examples/ListDatabasesByElasticPool.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -985,6 +1164,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a list of inaccessible databases in a logical server": {
+            "$ref": "./examples/ListVCoreInaccessibleDatabasesByServer.json"
           }
         },
         "x-ms-pageable": {

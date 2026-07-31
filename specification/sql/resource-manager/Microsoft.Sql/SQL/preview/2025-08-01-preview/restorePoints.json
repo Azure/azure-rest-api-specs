@@ -90,6 +90,14 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List database restore points.": {
+            "$ref": "./examples/DatabaseRestorePointsListByDatabase.json"
+          },
+          "List datawarehouse database restore points.": {
+            "$ref": "./examples/DataWarehouseRestorePointsListByDatabase.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -169,6 +177,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Creates datawarehouse database restore point.": {
+            "$ref": "./examples/DatabaseRestorePointsPost.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/RestorePoint"
@@ -228,6 +241,14 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Gets a database restore point.": {
+            "$ref": "./examples/DatabaseRestorePointsGet.json"
+          },
+          "Gets a datawarehouse database restore point.": {
+            "$ref": "./examples/DataWarehouseRestorePointsGet.json"
+          }
         }
       },
       "delete": {
@@ -277,6 +298,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes a restore point.": {
+            "$ref": "./examples/DatabaseRestorePointsDelete.json"
           }
         }
       }

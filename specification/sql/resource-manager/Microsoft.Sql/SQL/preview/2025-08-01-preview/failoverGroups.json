@@ -83,6 +83,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List failover group": {
+            "$ref": "./examples/FailoverGroupList.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -132,6 +137,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get failover group": {
+            "$ref": "./examples/FailoverGroupGet.json"
           }
         }
       },
@@ -220,6 +230,14 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create failover group": {
+            "$ref": "./examples/FailoverGroupCreateOrUpdate.json"
+          },
+          "Create failover group with standby secondary database on partner server.": {
+            "$ref": "./examples/FailoverGroupCreateOrUpdateStandbySecondary.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/FailoverGroup"
@@ -294,6 +312,14 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Add database to failover group with standby secondary on partner server.": {
+            "$ref": "./examples/FailoverGroupUpdateStandbySecondary.json"
+          },
+          "Update failover group": {
+            "$ref": "./examples/FailoverGroupUpdate.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/FailoverGroup"
@@ -357,6 +383,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Delete failover group": {
+            "$ref": "./examples/FailoverGroupDelete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -423,6 +454,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Planned failover of a failover group": {
+            "$ref": "./examples/FailoverGroupFailover.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -492,6 +528,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Forced failover of a failover group allowing data loss": {
+            "$ref": "./examples/FailoverGroupForceFailoverAllowDataLoss.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/FailoverGroup"
@@ -557,6 +598,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Try planned before forced failover of a failover group": {
+            "$ref": "./examples/FailoverGroupTryPlannedBeforeForcedFailover.json"
           }
         },
         "x-ms-long-running-operation-options": {

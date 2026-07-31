@@ -97,6 +97,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List sync members under a sync group": {
+            "$ref": "./examples/SyncMemberListBySyncGroup.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -160,6 +165,14 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get a sync member": {
+            "$ref": "./examples/SyncMemberGet.json"
+          },
+          "Get a sync member with user assigned identity": {
+            "$ref": "./examples/SyncMemberGetWithIdentity.json"
           }
         }
       },
@@ -262,6 +275,17 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create a new sync member": {
+            "$ref": "./examples/SyncMemberCreate.json"
+          },
+          "Create a new sync member with user assigned identity": {
+            "$ref": "./examples/SyncMemberCreateWithIdentity.json"
+          },
+          "Update a sync member": {
+            "$ref": "./examples/SyncMemberUpdate.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/SyncMember"
@@ -350,6 +374,17 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Update an existing sync member": {
+            "$ref": "./examples/SyncMemberPatch.json"
+          },
+          "Update an existing sync member with new user assigned identity and removing older user assigned identity": {
+            "$ref": "./examples/SyncMemberPatchAddAndRemoveIdentity.json"
+          },
+          "Update an existing sync member with user assigned identity": {
+            "$ref": "./examples/SyncMemberPatchWithIdentity.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/SyncMember"
@@ -429,6 +464,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Delete a sync member": {
+            "$ref": "./examples/SyncMemberDelete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -506,6 +546,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Refresh a sync member database schema": {
+            "$ref": "./examples/SyncMemberRefreshSchema.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -570,6 +615,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get a sync member schema": {
+            "$ref": "./examples/SyncMemberGetSchema.json"
           }
         },
         "x-ms-pageable": {

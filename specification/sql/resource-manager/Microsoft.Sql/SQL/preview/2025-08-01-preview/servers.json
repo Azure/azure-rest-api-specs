@@ -81,6 +81,17 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Check for a server name that already exists": {
+            "$ref": "./examples/CheckNameAvailabilityServerAlreadyExists.json"
+          },
+          "Check for a server name that is available": {
+            "$ref": "./examples/CheckNameAvailabilityServerAvailable.json"
+          },
+          "Check for a server name that is invalid": {
+            "$ref": "./examples/CheckNameAvailabilityServerInvalid.json"
+          }
         }
       }
     },
@@ -118,6 +129,14 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List servers": {
+            "$ref": "./examples/ServerList.json"
+          },
+          "List servers with $expand=administrators/activedirectory": {
+            "$ref": "./examples/ServerListWithExpandEqualsAdministrators.json"
           }
         },
         "x-ms-pageable": {
@@ -162,6 +181,14 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List servers by resource group": {
+            "$ref": "./examples/ServerListByResourceGroup.json"
+          },
+          "List servers by resource group with $expand=administrators/activedirectory": {
+            "$ref": "./examples/ServerListByResourceGroupWithExpandEqualsAdministrators.json"
           }
         },
         "x-ms-pageable": {
@@ -213,6 +240,14 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get server": {
+            "$ref": "./examples/ServerGet.json"
+          },
+          "Get server with $expand=administrators/activedirectory": {
+            "$ref": "./examples/ServerGetWithExpandEqualsAdministrators.json"
           }
         }
       },
@@ -294,6 +329,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create server": {
+            "$ref": "./examples/ServerCreate.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/Server"
@@ -361,6 +401,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Update a server": {
+            "$ref": "./examples/ServerUpdate.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/Server"
@@ -417,6 +462,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Delete server": {
+            "$ref": "./examples/ServerDelete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -487,6 +537,17 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Imports to a new database, using Managed Identity for the SQL server and storage account.": {
+            "$ref": "./examples/ImportNewDatabaseWithManagedIdentity.json"
+          },
+          "Imports to a new database, using private link for the SQL server and storage account.": {
+            "$ref": "./examples/ImportNewDatabaseWithNetworkIsolation.json"
+          },
+          "Imports to a new database.": {
+            "$ref": "./examples/ImportNewDatabase.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "./common.json#/definitions/ImportExportOperationResult"
@@ -545,6 +606,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Refresh external governance enablement status.": {
+            "$ref": "./examples/RefreshExternalGovernanceStatus.json"
           }
         },
         "x-ms-long-running-operation-options": {
