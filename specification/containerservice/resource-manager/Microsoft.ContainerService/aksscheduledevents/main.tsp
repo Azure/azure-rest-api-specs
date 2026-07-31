@@ -2,11 +2,9 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
 
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
-using TypeSpec.OpenAPI;
 
 /**
  * The Container Service Scheduled Events data model.
@@ -44,6 +42,48 @@ model ScheduledEvent
 @@doc(ScheduledEvent.properties, "Properties for the event.");
 
 /**
+ * The status of the event.
+ */
+union EventStatus {
+  string,
+  /**
+   * The event is scheduled.
+   */
+  Scheduled: "Scheduled",
+  /**
+   * The event has started.
+   */
+  Started: "Started",
+  /**
+   * The event completed.
+   */
+  Completed: "Completed",
+  /**
+   * The event was cancelled.
+   */
+  Cancelled: "Cancelled",
+  /**
+   * The event failed.
+   */
+  Failed: "Failed",
+}
+
+/**
+ * The resource type of the event.
+ */
+union ResourceType {
+  string,
+  /**
+   * The event applies to a managed cluster.
+   */
+  ManagedCluster: "ManagedCluster",
+  /**
+   * The event applies to an agent pool.
+   */
+  AgentPool: "AgentPool",
+}
+
+/**
  * Properties for a scheduled event.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Preserves the existing scheduledEvents notification contract; this materialized notification data model does not include provisioningState."
@@ -66,16 +106,7 @@ model ScheduledEventProperties {
   /**
    * The status of the event.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserves the existing scheduledEvents swagger x-ms-enum metadata."
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Keeps the enum inline to preserve the existing scheduledEvents swagger shape."
-  @extension("x-ms-enum", #{ name: "eventStatus", modelAsString: true })
-  eventStatus?:
-    | "Scheduled"
-    | "Started"
-    | "Completed"
-    | "Cancelled"
-    | "Failed"
-    | string;
+  eventStatus?: EventStatus;
 
   /**
    * The details of the event.
@@ -83,7 +114,7 @@ model ScheduledEventProperties {
   eventDetails?: string;
 
   /**
-   * The time of the event is scheduled to start.
+   * The time the event is scheduled to start.
    */
   scheduledTime?: utcDateTime;
 
@@ -112,8 +143,5 @@ model ScheduledEventProperties {
   /**
    * The resource type of the event.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserves the existing scheduledEvents swagger x-ms-enum metadata."
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Keeps the enum inline to preserve the existing scheduledEvents swagger shape."
-  @extension("x-ms-enum", #{ name: "ResourceType", modelAsString: true })
-  resourceType?: "ManagedCluster" | "AgentPool" | string;
+  resourceType?: ResourceType;
 }
