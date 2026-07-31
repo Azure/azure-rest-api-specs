@@ -363,9 +363,9 @@
         }
       }
     },
-    "/{idScope}/registrations/{registrationId}/requestUpdates": {
+    "/{idScope}/registrations/{registrationId}/requestSoftwareUpdates": {
       "post": {
-        "operationId": "DeviceUpdate_RequestUpdates",
+        "operationId": "DeviceUpdate_RequestSoftwareUpdates",
         "summary": "Checks for an available device update (regular / operational path).",
         "description": "Checks for an available device update on the regular / operational path. The\ndevice selects this endpoint once it is provisioned.\n\nOn failure, ADU's `error.code` string is returned verbatim in the\n`x-ms-error-code` header and mirrored in the error body `info` dictionary\nunder `aduErrorCode` (plus `aduErrorTarget` when applicable). Devices should\nbranch on that code rather than the HTTP status.",
         "parameters": [
@@ -417,11 +417,11 @@
           }
         },
         "x-ms-examples": {
-          "DeviceUpdate_RequestUpdates_MaximumSet_Gen": {
-            "$ref": "./examples/DeviceUpdate_RequestUpdates_MaximumSet_Gen.json"
+          "DeviceUpdate_RequestSoftwareUpdates_MaximumSet_Gen": {
+            "$ref": "./examples/DeviceUpdate_RequestSoftwareUpdates_MaximumSet_Gen.json"
           },
-          "DeviceUpdate_RequestUpdates_MinimumSet_Gen": {
-            "$ref": "./examples/DeviceUpdate_RequestUpdates_MinimumSet_Gen.json"
+          "DeviceUpdate_RequestSoftwareUpdates_MinimumSet_Gen": {
+            "$ref": "./examples/DeviceUpdate_RequestSoftwareUpdates_MinimumSet_Gen.json"
           }
         }
       }

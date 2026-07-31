@@ -273,9 +273,9 @@ interface DeviceUpdate {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name mirrors the ADU device contract for pass-through compatibility"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Using Foundations.Operation for consistency with the existing DPS device API"
   @summary("Checks for an available device update (regular / operational path).")
-  @route("/{idScope}/registrations/{registrationId}/requestUpdates")
+  @route("/{idScope}/registrations/{registrationId}/requestSoftwareUpdates")
   @post
-  requestUpdates is Azure.Core.Foundations.Operation<
+  requestSoftwareUpdates is Azure.Core.Foundations.Operation<
     {
       /** The registration ID is alphanumeric, lowercase, and may contain hyphens. */
       @path
