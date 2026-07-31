@@ -148,8 +148,8 @@ using Microsoft.KubernetesConfiguration;
   "FluxServicePrincipalPatch",
   "csharp"
 );
-@@clientName(SubstituteFromDefinition, "SubstituteFrom", "csharp");
-@@clientName(SubstituteFromPatchDefinition, "SubstituteFromPatch", "csharp");
+@@clientName(SubstituteFromDefinition, "Substitution", "csharp");
+@@clientName(SubstituteFromPatchDefinition, "SubstitutionPatch", "csharp");
 @@clientName(TlsConfigDefinition, "TlsConfig", "csharp");
 @@clientName(TlsConfigPatchDefinition, "TlsConfigPatch", "csharp");
 @@clientName(VerifyDefinition, "OciRepositoryVerify", "csharp");
@@ -166,7 +166,7 @@ using Microsoft.KubernetesConfiguration;
   "csharp"
 );
 @@clientName(ObjectStatusDefinition, "ObjectStatus", "csharp");
-@@clientName(RepositoryRefDefinition, "RepositoryRef", "csharp");
+@@clientName(RepositoryRefDefinition, "RepositoryReference", "csharp");
 @@clientName(SourceKindType.OCIRepository, "OciRepository", "csharp");
 
 // Exclude OperationStatus APIs from C# SDK - they are built into the core library
