@@ -13,6 +13,42 @@ namespace Customization;
   "logCollectionId"
 );
 
+@@clientName(
+  DeviceManagementOperationGroup.listBestUpdatesForGroup,
+  "GetBestUpdatesForGroups",
+  "csharp"
+);
+@@clientName(
+  DeviceManagementOperationGroup.listDeploymentsForDeviceClassSubgroup,
+  "GetDeploymentsForDeviceClassSubgroups",
+  "csharp"
+);
+@@clientName(
+  DeviceManagementOperationGroup.listDeploymentsForGroup,
+  "GetDeploymentsForGroups",
+  "csharp"
+);
+@@clientName(
+  DeviceManagementOperationGroup.listDeviceClassSubgroupsForGroup,
+  "GetDeviceClassSubgroupsForGroups",
+  "csharp"
+);
+@@clientName(
+  DeviceManagementOperationGroup.listDeviceStatesForDeviceClassSubgroupDeployment,
+  "GetDeviceStatesForDeviceClassSubgroupDeployments",
+  "csharp"
+);
+@@clientName(
+  DeviceManagementOperationGroup.listInstallableUpdatesForDeviceClass,
+  "GetInstallableUpdatesForDeviceClasses",
+  "csharp"
+);
+@@clientName(
+  DeviceUpdateOperationGroup.importUpdate,
+  "StartImportUpdate",
+  "csharp"
+);
+
 // Hoist `instanceId` from per-operation parameter to client-constructor
 // parameter, matching the original swagger's
 // `x-ms-parameter-location: "client"` on `InstanceIdParameter`.
