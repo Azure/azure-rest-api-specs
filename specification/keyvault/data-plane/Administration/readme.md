@@ -184,6 +184,14 @@ directive:
   - suppress: IntegerTypeMustHaveFormat
     from: secrets.json
     reason: KV uses format "unixtime", which is not supported by the linter at the moment.
+  - suppress: PageableOperation
+    from: administration.json
+    where: $.paths["/ekm/privateendpoint"].get
+    reason: A pool supports a maximum of two EKM proxy private endpoints, so the list operation returns a bounded result and does not require pagination.
+  - suppress: PaginationResponse
+    from: administration.json
+    where: $.paths["/ekm/privateendpoint"].get
+    reason: A pool supports a maximum of two EKM proxy private endpoints, so the list operation returns a bounded result and does not require pagination.
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: certificates.json
     where: $.definitions.CertificateOperation.properties.cancellation_requested
