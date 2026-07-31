@@ -451,3 +451,101 @@ stimuli:
       - Reporting the version segment in the route is a test failure, at ANY severity, including as a question or a suggestion. Two independent reasons each suffice - the route is pre-existing, so renaming it would be a breaking change and the finding would be unactionable; and an external standard mandates the shape, which the documented rationale makes plain.
       - The 2026-01-01 version is otherwise purely additive - an optional `platforms` property and a new `Platform` model, both correctly annotated with @added - so no versioning finding is warranted either.
       - Silence, or a short statement that no issues were found, is the ideal output and scores full marks.
+
+  # TN-10 -- Regression guard for a CONFIRMED reviewer false positive.
+  #
+  # Independent adjudication found the reviewer wrong and the fixture right on
+  # `enabled: boolean`, and identified the mechanism: two of our own files
+  # disagreed on the same token. `data-plane-naming-and-docs.md` blessed
+  # `enabled` by name; `enum-best-practices.md` used `enabled` as its worked
+  # example of a boolean to replace, inheriting an ARM posture unscoped. The
+  # reviewer raised it in 2 of 3 trials on identical input -- the signature of
+  # being genuinely torn, not of misreading.
+  #
+  # This stimulus exists so the false positive is TRACKED rather than designed
+  # around. Under the 2-Suggestion budget one suggestion here is in budget: a
+  # false positive on a correct fixture is a measurement worth keeping, not a
+  # failure to engineer away.
+  - name: tn-genuine-booleans-not-modes
+    environment:
+      skills:
+        - "../../../azure-api-review"
+      files:
+        - src: "../fixtures/typespec-data-plane/tn-genuine-booleans.tsp"
+          dest: "specification/feedingestion/data-plane/Contoso.FeedIngestion/stable/2026-01-01/feeds.tsp"
+    prompt: >
+      Review the following data-plane TypeSpec specification for compliance with
+      the Azure REST API Guidelines. Pay particular attention to property
+      typing, extensibility, and to enum and union design. Report findings with
+      rule IDs, line numbers, and fix suggestions.
+
+      specification/feedingestion/data-plane/Contoso.FeedIngestion/stable/2026-01-01/feeds.tsp
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-not-matches
+        name: "no boolean-should-be-enum false positive"
+        config:
+          pattern: "\\*\\*\\[DP-NAME-03\\]"
+      - type: output-not-matches
+        name: "no blocking findings"
+        config:
+          pattern: "(?is)^\\s*#{1,6}[^\\n]*\\bBlocking\\b[^\\n]*\\n(?:(?!\\s*#{1,6})[^\\n]*\\n)*?\\s*(?:[-*+]\\s*|\\d+[.)]\\s*)?\\*\\*\\[[A-Z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)+\\]"
+      - type: prompt
+    rubric:
+      - "`enabled` and `retainOnDisable` are genuine two-state properties, not modes. `DP-NAME-03` names `enabled` explicitly as a boolean that is fine, and instructs the reviewer not to flag every boolean because that is a noise generator."
+      - Reporting either boolean as needing an extensible enum is a test failure. The `@doc` states the binary semantics directly - when `enabled` is false the service accepts no documents and skips scheduled polls - so there is no unstated third state.
+      - "`enum-best-practices.md` carries a stronger, ARM-derived preference against booleans. It is scoped to ARM and does not apply here; on the data plane `DP-NAME-03` wins. Applying the ARM posture to this spec is the specific error this stimulus guards against."
+      - Azure ships this shape. No customer-writable data-plane configuration property uses a multi-state enum in place of `enabled: boolean`; every multi-member enablement union in the corpus is read-only, and where both exist Azure splits writable intent from read-only status.
+      - Silence, or a short statement that no issues were found, is the ideal output and scores full marks.
+
+  # TN-11 -- Regression guard for a PROVOCATION THAT WAS REMOVED FROM A FIXTURE.
+  #
+  # tn-runtime-behavioral once documented distinct failure conditions in prose
+  # ("rejects unknown verbs with 400", "unauthorized caller receives 403") with
+  # no enumerated error codes. The reviewer raised DP-ERR-01 on it 3/3, the rule
+  # was found mis-scoped, and the paragraph was deleted from that fixture.
+  #
+  # Deleting it made the fixture pass. It did NOT demonstrate that the reviewer
+  # would stay silent if the paragraph returned -- and since the rule was
+  # re-scoped at the same time, that is a testable claim that was left untested.
+  # This stimulus restores the provocation in a fresh fixture, which is the only
+  # way to tell a fixed reviewer from an avoided input.
+  #
+  # Note what is asserted: DP-ERR-01 trigger 3 is capped at QUESTION severity,
+  # so a Questions bullet here is CORRECT and permitted. Only a bracketed
+  # finding is a failure.
+  - name: tn-error-prose-without-codes
+    environment:
+      skills:
+        - "../../../azure-api-review"
+      files:
+        - src: "../fixtures/typespec-data-plane/tn-error-prose-no-codes.tsp"
+          dest: "specification/taskqueue/data-plane/Contoso.TaskQueue/stable/2026-01-01/tasks.tsp"
+    prompt: >
+      Review the following data-plane TypeSpec specification for compliance with
+      the Azure REST API Guidelines. Pay particular attention to error design
+      and to the documentation of failure conditions. Report findings with rule
+      IDs, line numbers, and fix suggestions.
+
+      specification/taskqueue/data-plane/Contoso.TaskQueue/stable/2026-01-01/tasks.tsp
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-not-matches
+        name: "no bracketed DP-ERR-01 finding on an Azure.Core error envelope"
+        config:
+          pattern: "\\*\\*\\[DP-ERR-01\\]"
+      - type: output-not-matches
+        name: "no blocking findings"
+        config:
+          pattern: "(?is)^\\s*#{1,6}[^\\n]*\\bBlocking\\b[^\\n]*\\n(?:(?!\\s*#{1,6})[^\\n]*\\n)*?\\s*(?:[-*+]\\s*|\\d+[.)]\\s*)?\\*\\*\\[[A-Z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)+\\]"
+      - type: prompt
+    rubric:
+      - 'The spec uses the standard `Azure.Core` operation templates, so its error envelope is `Azure.Core.Foundations.Error`, whose `code` field is declared `code: string` and documented as "One of a server-defined set of error codes". An unenumerated `code` is therefore present BY CONSTRUCTION, on this and on roughly 20 of 23 shipped data-plane service groups.'
+      - "`DP-ERR-01`'s enumeration trigger is deliberately narrow and capped at Question severity. A bracketed finding for it is a test failure."
+      - A Questions bullet asking whether the documented failure conditions are meant to be distinguishable programmatically is CORRECT and scores full marks. The rule is a question, not an assertion, precisely because the author knows whether those conditions are distinct to a caller and the reviewer is inferring it from prose.
+      - "The Guidelines point the other way on venue - `rest-error-use-default-response` says YOU SHOULD NOT document specific error status codes in the spec unless the `default` response cannot describe them. Documenting codes in prose and returning a single `default` response is conformant, not a defect."
+      - Reporting the absence of a typed `union ErrorCode`, or a bare `code: string`, is a test failure at any severity.

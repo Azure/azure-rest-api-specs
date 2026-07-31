@@ -72,6 +72,17 @@ expressed in the property itself. Raise it as a question when the property name
 suggests a mode rather than a genuine yes/no (`isFullScan`, `useV2`,
 `enableAdvanced`).
 
+**Genuine booleans -- `enabled`, `isDeleted` -- are fine. Do not flag every
+boolean; that is a noise generator.** This sentence sits here, immediately after
+the trigger, on purpose: it is the guardrail, and a guardrail two paragraphs
+downstream of its trigger does not work. It was moved here after an expansion
+pushed it to the end of the section and a false positive on `enabled` followed.
+
+> **`enum-best-practices.md` says something stronger, and it is ARM-scoped.**
+> That file's "Prefer Enums Over Booleans" section derives from ARM Wiki
+> guidance and reads as a blanket preference. **On the data plane this rule
+> wins.** Do not raise a boolean finding merely because a boolean exists.
+
 **Be accurate about the harm, which is smaller than it first appears.** This
 rule previously said that adding a third state is a breaking change. That is not
 how Azure services have actually evolved. The observed path is **additive**: the
@@ -82,12 +93,17 @@ boolean is kept, and a richer type is added beside it — Language's
 without removing the flag. There is no case in the corpus of a boolean being
 replaced by a union.
 
+Nor is the enum form what Azure actually ships for customer-writable
+enablement. No customer-writable data-plane configuration property in the corpus
+uses a multi-state enum in place of `enabled: boolean`; every 3+-member
+enablement union found is **read-only** (`ProviderAvailability`,
+`EnablementStatus`, `DevBoxTunnelStatus`). Where both exist, Azure splits them —
+`managedOps.tsp` pairs a writable `DesiredEnablementState {Enable, Disable}`
+with a read-only `EnablementState {Enabled, InProgress, Failed, Disabled}`.
+
 So the cost of guessing wrong is a slightly wider surface later, not a break.
 That is why this is a **Suggestion** and is phrased as a question — never a
 design demand, and never a claim that the spec will have to break compatibility.
-
-Genuine booleans -- `enabled`, `isDeleted` -- are fine. Do not flag every
-boolean; that is a noise generator.
 
 ### DP-NAME-04: Cross-service and intra-service consistency
 

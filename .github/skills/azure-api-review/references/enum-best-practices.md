@@ -9,8 +9,10 @@
 # Enum Best Practices for Azure APIs
 
 Azure APIs should use extensible enums to allow new values to be added
-without breaking existing clients. Booleans should be avoided in favor
-of enums for better versioning.
+without breaking existing clients. **On ARM**, booleans should generally be
+avoided in favor of enums for better versioning; **on the data plane** that
+preference is narrower — see the scope note on "Prefer Enums Over Booleans"
+below, and `DP-NAME-03` for the data-plane rule.
 
 **Authoritative references:**
 
@@ -112,6 +114,27 @@ union ServiceStatus {
 
 ## Prefer Enums Over Booleans
 
+> **Scope: this section is ARM-derived.** It restates ARM Wiki
+> RPC-BestPractice-10/12 and OAPI015 (see the header), where the posture on
+> booleans is materially more aggressive than on the data plane. **ARM reviewers
+> apply it as written.**
+>
+> **Data-plane reviewers must not apply it as a blanket rule.** The data-plane
+> position is
+> [`data-plane-naming-and-docs.md`](data-plane-naming-and-docs.md) `DP-NAME-03`,
+> which flags a boolean only when the property name suggests a **mode** rather
+> than a genuine yes/no, and which explicitly blesses `enabled` and `isDeleted`.
+> Where this section and `DP-NAME-03` disagree on a data-plane spec,
+> **`DP-NAME-03` wins.**
+>
+> This is the same anti-inheritance trap as `guid-and-uuid-on-arm.md`: guidance
+> that is correct for ARM and wrong when inherited unscoped. It was found the
+> expensive way — this file used `enabled` as its worked example of a boolean to
+> replace, while `DP-NAME-03` named `enabled` as the archetype of a boolean to
+> leave alone. A data-plane reviewer reading both raised a false positive on
+> `enabled` in 2 of 3 trials on identical input: not a misreading, but a genuine
+> split between two of our own instructions.
+
 Booleans do not version well -- what starts as a two-state switch often needs additional states, leading to breaking changes.
 
 **Recommendations:**
@@ -124,7 +147,7 @@ Booleans do not version well -- what starts as a two-state switch often needs ad
   `backupsEnabled`, `isEncryptionEnabled` --
   not bare nouns like `backups` or `encryption`.
 - When multiple related two-state properties exist
-  (e.g., `enabled` and `appendMode`), consider combining them into a
+  (e.g., `rewriteEnabled` and `appendMode`), consider combining them into a
   single multi-state enum (e.g., `usageMode: [Disabled, Rewrite, Append]`).
 - Enum values replacing booleans **MUST** carry semantic meaning beyond
   `True`/`False`. Distribute meaning across both the property name and

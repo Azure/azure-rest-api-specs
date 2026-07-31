@@ -645,6 +645,68 @@ positive is now caught, the two-step test is right and mis-calibrated. If they
 hold and the positive is caught, both changes landed. **Neither has been
 verified behaviorally — only by tracing the guidance against the fixtures.**
 
+### Adjudicating a finding on a true negative — standing process
+
+A finding on a true negative has exactly three possible causes. **Name which one
+you are selecting, and say why you rejected the other two.** Writing it down is
+the point: the failure mode is not picking wrong once, it is picking the same
+way every time without noticing.
+
+| Cause              | Means                                                                               |
+| ------------------ | ----------------------------------------------------------------------------------- |
+| **Bad fixture**    | The fixture really does contain the defect. The reviewer was right.                 |
+| **Bad rule**       | The rule is mis-scoped or contradicts upstream. The reviewer applied it faithfully. |
+| **Noisy reviewer** | Fixture and rule are both fine. The reviewer was wrong.                             |
+
+**Presumption: any finding below 3/3 determinism is presumed reviewer noise
+until argued otherwise.** 2/3 on _identical input_ is definitionally noise in
+part — the same spec, the same rules, a different answer. It also carries
+information: on the `enabled` false positive, 2/3 was the signature of an agent
+genuinely torn between two of our own files, and chasing that split found a
+live contradiction. A deterministic 3/3, by contrast, means consistent
+reasoning, which points at the fixture or the rule.
+
+**Why this rule exists.** Across the first five adjudications on this project,
+"the reviewer was noisy" was selected **zero** times — five went to bad fixture,
+one to bad rule and only when explicitly directed. Every individual call was
+defensible and three were confirmed by independent review. But the mechanical
+consequence of never selecting the third cause is that **every contested
+construct eventually leaves the corpus.** Each edit is reasonable; the aggregate
+converges on the same place as deliberate bias would. You do not pass the
+measurement, you lose it.
+
+The counter-evidence is worth recording too, because the bias is narrower than
+it first looked: over the same period the corpus got measurably _harder_, not
+easier — TN prose blocks fell to 1.40/file against 0.92 for positives, from a
+12-to-1 separation — and the rule most often narrowed was the reviewer's own,
+under a newly gating Suggestion budget. The bias is in _attribution_, not in
+corpus difficulty.
+
+### Removing a provocation requires a regression stimulus
+
+**When a fixture is edited to remove the construct that provoked a finding, add
+a stimulus that keeps the original provocation and asserts the correct
+behaviour.**
+
+Deleting the provocation makes the fixture pass. It does not show the reviewer
+would now stay silent if the construct returned — and when the rule was
+re-scoped in the same change, that is a _testable claim left untested_. It is
+also the only way to distinguish **a fixed reviewer from an avoided input**,
+which is precisely the distinction this suite exists to make.
+
+Two such guards exist today, both retroactive:
+
+- `tn-genuine-booleans-not-modes` — keeps `enabled: boolean` after adjudication
+  found the reviewer wrong and the fixture right.
+- `tn-error-prose-without-codes` — restores the "distinct failure conditions in
+  prose, no enumerated codes" paragraph that was deleted from
+  `tn-runtime-behavioral` when `DP-ERR-01` was re-scoped. It asserts no
+  _bracketed_ `DP-ERR-01`; a Questions bullet is correct, because that trigger
+  is capped at Question severity.
+
+A false positive on a correct fixture is a **measurement worth keeping**. Under
+the Suggestion budget it costs one of two, which is affordable and is the point.
+
 ### Format tolerance in the graders
 
 **The strict report format exists so grading can be mechanical. It is not a

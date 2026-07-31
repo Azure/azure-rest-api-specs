@@ -119,7 +119,6 @@ shape, and against treating terse documentation as suspicious. Both files are
 linter-clean without depending on the interlock.
 
 ### `version-pairs/tn-standard-mandated-route/`
-
 Class 7, the linter→agent handoff. Every route carries a `/v2` prefix, applied
 at namespace level, and it is **identical in both versions** — this PR does not
 introduce it. The namespace `@doc` states that `/v2/` is fixed by the OCI
@@ -138,8 +137,42 @@ not making the distinction, it is flagging every `/v2/` it sees — the withdraw
 lint rule, reimplemented at higher cost. **Neither stimulus has ever been
 executed.**
 
-## Positive fixtures — findings are expected
+### `typespec-data-plane/tn-genuine-booleans.tsp`
 
+Class 8, a **regression guard for a confirmed reviewer false positive**. Two
+genuine booleans on a writable configuration resource: `enabled` and
+`retainOnDisable`. Each `@doc` states the binary semantics outright.
+
+Independent adjudication found the reviewer wrong and the fixture right when it
+flagged `enabled` on `tn-legitimate-deviation`, and found the mechanism — two of
+our own files disagreed on that exact token. `DP-NAME-03` blesses `enabled` by
+name; `enum-best-practices.md` used `enabled` as its worked example of a boolean
+to replace, having inherited an ARM posture unscoped. The 2/3 nondeterminism was
+the signature of an agent genuinely torn, not of misreading.
+
+The provoking property was **kept**, not removed, per the standing rule that a
+false positive on a correct fixture is a measurement worth keeping. Consumed by
+`tn-genuine-booleans-not-modes`.
+
+### `typespec-data-plane/tn-error-prose-no-codes.tsp`
+
+Class 8, a **regression guard for a provocation deleted from another fixture**.
+The `create` operation documents distinct failure conditions in prose — unknown
+queue rejected with 400, unauthorized caller receiving 403 without learning
+whether the queue exists, 413 on oversized payload, 429 on rate limit — while
+using the standard `Azure.Core` error envelope, whose `code` is `code: string`
+by construction.
+
+`tn-runtime-behavioral` once carried that paragraph and drew `DP-ERR-01` 3/3.
+The rule was re-scoped and the paragraph deleted, which made that fixture pass
+without ever showing the reviewer would now stay silent. This fixture restores
+the provocation so the claim is tested.
+
+Asserts no **bracketed** `DP-ERR-01`. A Questions bullet is correct and scores
+full marks — that trigger is capped at Question severity. Consumed by
+`tn-error-prose-without-codes`.
+
+## Positive fixtures — findings are expected
 The original fixtures are mostly dense capability probes. The two rationale
 fixtures are deliberately sparse: each has one supported design finding amid
 otherwise conventional surface.

@@ -431,6 +431,12 @@ export const REAL_FINDINGS_PROBE = [
   "**[DP-ERR-01] One `InvalidRequest` code for eleven distinct failures** -- `main.tsp:24`",
   "**[DP-LRO-01] Status monitor has no error member** -- `main.tsp:30`",
   "**[DP-NAME-01] Non-obvious abbreviation** -- `main.tsp:29`",
+  // DP-NAME-03 is Suggestion severity, so the bracketed form is correct for it.
+  // Present so the "no boolean-should-be-enum false positive" grader on
+  // tn-genuine-booleans is not inert -- a grader that can never fire has a
+  // vacuous verdict, and that guard exists precisely because this rule produced
+  // a confirmed false positive.
+  "**[DP-NAME-03] Boolean `enabled` where a union may belong** -- `main.tsp:31`",
   "**[DP-DOC-01] Tautological documentation** -- `main.tsp:24`",
   // A doc-retroactivity finding: changing an unversioned @doc is claimed to
   // alter the already-published version. Mechanically true, but there is no
