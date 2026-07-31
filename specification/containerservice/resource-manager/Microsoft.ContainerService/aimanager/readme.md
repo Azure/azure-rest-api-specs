@@ -71,6 +71,10 @@ suppressions:
     from: aimanagers.json
     where: $.definitions.ModelDeploymentOverrides.properties.values
     reason: Free-form override key/value pairs documented per release.
+  - code: AvoidAdditionalProperties
+    from: aimanagers.json
+    where: $.definitions.BaseModelReference.properties.config
+    reason: The verbatim `config.json` of the base model.
 ```
 
 ### Tag: package-2026-04-02-preview

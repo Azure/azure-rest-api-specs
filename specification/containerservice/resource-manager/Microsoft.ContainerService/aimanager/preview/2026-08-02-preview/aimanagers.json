@@ -2485,6 +2485,32 @@
       },
       "readOnly": true
     },
+    "BaseModelReference": {
+      "type": "object",
+      "description": "The base model a custom model was trained from. Supplied by the customer because the platform may lack access to private source repositories (e.g. private Foundry projects); consumed by the dataplane for GPU sizing and vLLM configuration.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The HuggingFace `<org>/<repo>` id of the base model, e.g. `meta-llama/Llama-2-7b-chat`. Immutable after creation.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "config": {
+          "type": "object",
+          "description": "The verbatim `config.json` of the base model, supplied by the customer. Stored by the platform and projected into the dataplane (ConfigMap) to determine GPU node count and vLLM configuration.",
+          "additionalProperties": {},
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
     "CalculateCostPlan": {
       "type": "object",
       "description": "A GPU SKU pricing plan returned by the `calculateCost` action. Describes the cost of running a single model replica on the specified `vmSize`. To estimate the cost of running multiple replicas, scale `totalHourlyPrice` by the desired replica count, bounded by `maxAvailableReplicas`.",
@@ -2622,7 +2648,7 @@
     },
     "CredentialValue": {
       "type": "object",
-      "description": "A credential value. Exactly one variant must be set.\n\nIn the current API version, only the `inline` variant is supported. Future\nAPI versions are expected to add additional credential kinds (for example,\nmanaged identity and Key Vault secret references) as sibling variants on\nthis model.",
+      "description": "A credential value.\n\nIn the current API version, only the `inline` variant is supported. Future\nAPI versions are expected to add additional credential kinds (for example,\nmanaged identity and Key Vault secret references) as sibling variants on\nthis model.",
       "properties": {
         "inline": {
           "$ref": "#/definitions/InlineCredential",
@@ -2692,9 +2718,9 @@
             "create"
           ]
         },
-        "baseModelId": {
-          "type": "string",
-          "description": "The HuggingFace model identifier of the base model used to train\nthe custom model. This is the upstream `<org>/<repo>` id, e.g.\n`meta-llama/Llama-2-7b-chat`. Immutable after creation.",
+        "baseModel": {
+          "$ref": "#/definitions/BaseModelReference",
+          "description": "The base model this custom model was trained from (id + config.json). Immutable after creation.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -2721,7 +2747,7 @@
       },
       "required": [
         "modelId",
-        "baseModelId"
+        "baseModel"
       ]
     },
     "CustomAIModelProvisioningState": {
