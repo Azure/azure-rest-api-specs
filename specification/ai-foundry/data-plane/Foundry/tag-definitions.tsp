@@ -68,7 +68,7 @@ using OpenAPI;
   },
   #{
     name: "EvaluatorGenerationJobs",
-    parent: "Platform APIs",
+    parent: "Evaluations",
     summary: "Evaluator generation jobs",
   },
   #{ name: "Evaluations" },
