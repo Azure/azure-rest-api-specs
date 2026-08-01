@@ -7,6 +7,8 @@ on:
       - synchronize
       - reopened
       - edited
+      - labeled
+      - unlabeled
 
 permissions:
   contents: read
@@ -45,11 +47,26 @@ jobs:
             Write-Host "  $typespecFolder"
           }
 
+      - name: Check for BreakingChangeApproved label
+        id: check-label
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          LABELS=$(gh pr view "${{ github.event.pull_request.number }}" --json labels --jq '.labels[].name')
+          if echo "$LABELS" | grep -q "^BreakingChangeApproved"; then
+            echo "approved=true" >> "$GITHUB_OUTPUT"
+            echo "Breaking change approved via label"
+          else
+            echo "approved=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Run TypeSpec breaking change analysis
         id: typespec-breaking-change-analyze
         shell: bash
         env:
           EMIT_ANNOTATIONS: ${{ github.event.action != 'edited' || github.event.changes.base != null }}
+          BREAKING_CHANGE_APPROVED: ${{ steps.check-label.outputs.approved }}
         run: |
           if [[ ! -s typespec-folders.txt ]]; then
             {
@@ -104,6 +121,10 @@ jobs:
           if [[ $has_errors -eq 1 ]]; then
             echo "breakingChangeReviewLabelName=BreakingChangeReviewRequired" >> "$GITHUB_OUTPUT"
             echo "breakingChangeReviewLabelValue=true" >> "$GITHUB_OUTPUT"
+            if [[ "$BREAKING_CHANGE_APPROVED" == "true" ]]; then
+              echo "Breaking changes detected but approved via BreakingChangeApproved label"
+              exit 0
+            fi
             exit 1
           fi
 

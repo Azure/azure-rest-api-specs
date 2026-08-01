@@ -1,7 +1,7 @@
 import { formatSuppressionHint } from "./suppression-guidance.js";
 import { resolveFindingLocation } from "./resolve-location.js";
 /** Default URL for the violations reference docs in the typespec-azure repo. */
-const DEFAULT_VIOLATIONS_REF_URL = "https://github.com/markcowl/typespec-azure/blob/main/packages/typespec-breaking-change/docs/violations-reference.md";
+const DEFAULT_VIOLATIONS_REF_URL = "https://github.com/markcowl/typespec-azure/blob/prototype/breaking-change-tool/packages/typespec-breaking-change/docs/violations-reference.md";
 /**
  * Render a Markdown summary suitable for PR comments.
  */
@@ -93,7 +93,7 @@ export function renderMarkdownSummary(result, options) {
 function fmtKindLink(kind, options) {
     const baseUrl = options?.violationsReferenceUrl ?? DEFAULT_VIOLATIONS_REF_URL;
     // Link to the Phase B summary table which lists all kinds
-    return `[\`${esc(kind)}\`](${baseUrl}#phase-b-summary-table)`;
+    return `[\`${esc(kind)}\`](${baseUrl}#phase-b-detailed-reference)`;
 }
 /** Format the identity as a link to the source file, or plain text if no link available. */
 function fmtIdentityLink(finding, options) {

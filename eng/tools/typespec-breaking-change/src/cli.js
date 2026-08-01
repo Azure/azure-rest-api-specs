@@ -198,9 +198,10 @@ export async function main(args) {
         if (options.githubAnnotations) {
             emitGithubAnnotations(result);
         }
-        // Exit code
+        // Exit code: fail if there are unsuppressed breaking changes OR new suppressions
         const hasErrors = result.findings.some((f) => f.severity === "error" && !f.suppressed);
-        if (options.failOnBreaking && hasErrors) {
+        const hasNewSuppressions = result.findings.some((f) => f.suppressed);
+        if (options.failOnBreaking && (hasErrors || hasNewSuppressions)) {
             return 1;
         }
         return hasErrors ? 1 : 0;
