@@ -40,20 +40,53 @@ export function resolveOrigin(type) {
 /**
  * Resolve origin for a ModelProperty.
  * Follows the sourceProperty chain (from spreads/intersections) to the original declaration.
+ * When sourceProperty is not set (e.g., visibility-filtered ARM models), uses AST node
+ * identity to find the canonical property in the versioned namespace.
  */
 function resolveModelPropertyOrigin(prop) {
     // Follow sourceProperty chain to the original
     const original = followSourcePropertyChain(prop);
     // Check if the original property lives on a named model
     if (original.model && isNamedDeclaration(original.model)) {
+        // If the model looks like a visibility-filtered copy (e.g., EmployeePropertiesCreateOrUpdate),
+        // trace back to the canonical model via AST node identity on the property.
+        const canonical = traceToCanonicalProperty(original);
+        const resolved = canonical ?? original;
         return {
-            declarationPath: buildDeclarationPath(original.model, original.name),
-            type: original,
-            sourceLocation: safeGetSourceLocation(original),
+            declarationPath: buildDeclarationPath(resolved.model, resolved.name),
+            type: resolved,
+            sourceLocation: safeGetSourceLocation(resolved),
         };
     }
     // Property is on an anonymous model — try climbing to a named ancestor
     return climbToNamedAncestor(original);
+}
+/**
+ * Trace a property back to its canonical declaration using AST node identity.
+ *
+ * HTTP canonicalization creates visibility-filtered model copies (e.g.,
+ * EmployeePropertiesCreateOrUpdate) without setting sourceProperty. However,
+ * the copied properties share the same AST node as the original. We use this
+ * to find the original property on the user-declared model in the namespace.
+ */
+function traceToCanonicalProperty(prop) {
+    const node = prop.node;
+    if (!node || !prop.model?.namespace)
+        return undefined;
+    // Look for a model in the same namespace whose same-named property shares this node
+    const ns = prop.model.namespace;
+    for (const [, model] of ns.models) {
+        if (model === prop.model)
+            continue;
+        const candidate = model.properties.get(prop.name);
+        if (candidate && candidate.node === node && model.name !== prop.model.name) {
+            // Found the canonical source — prefer the shorter-named model (the original)
+            if (model.name.length < prop.model.name.length) {
+                return candidate;
+            }
+        }
+    }
+    return undefined;
 }
 /**
  * Resolve origin for a Model type.

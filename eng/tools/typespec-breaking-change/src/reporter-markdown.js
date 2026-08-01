@@ -1,7 +1,7 @@
 import { formatSuppressionHint } from "./suppression-guidance.js";
 import { resolveFindingLocation } from "./resolve-location.js";
 /** Default URL for the violations reference docs in the typespec-azure repo. */
-const DEFAULT_VIOLATIONS_REF_URL = "https://github.com/Azure/typespec-azure/blob/main/packages/typespec-breaking-change/docs/violations-reference.md";
+const DEFAULT_VIOLATIONS_REF_URL = "https://github.com/markcowl/typespec-azure/blob/main/packages/typespec-breaking-change/docs/violations-reference.md";
 /**
  * Render a Markdown summary suitable for PR comments.
  */

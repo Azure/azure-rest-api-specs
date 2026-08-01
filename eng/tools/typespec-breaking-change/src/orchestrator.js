@@ -170,26 +170,29 @@ function buildSummary(servicesAnalyzed, comparisonsPerformed, options) {
  * type is available (e.g., service-level diffs like ApiVersionRemoved).
  */
 function deduplicateBySourceType(findings) {
-    const seenByType = new Map();
+    const seenByNode = new Map();
     const seenByString = new Set();
     const result = [];
     for (const f of findings) {
         const versionKey = `${f.versionPair.baseVersion}|${f.versionPair.headVersion}`;
         const kindVersionKey = `${f.diff.kind}|${versionKey}`;
-        if (f.diff.headType || f.diff.baseType) {
-            // Type-identity dedup: same source type object + same kind + same version pair
-            const sourceType = f.diff.headType ?? f.diff.baseType;
-            let kindSet = seenByType.get(sourceType);
+        const sourceType = f.diff.headType ?? f.diff.baseType;
+        // Use AST node identity for dedup — visibility-filtered model copies
+        // (e.g., EmployeePropertiesCreateOrUpdate.city) share the same node as
+        // the original declaration (EmployeeProperties.city).
+        const dedupKey = sourceType && sourceType.node ? sourceType.node : sourceType;
+        if (dedupKey) {
+            let kindSet = seenByNode.get(dedupKey);
             if (!kindSet) {
                 kindSet = new Set();
-                seenByType.set(sourceType, kindSet);
+                seenByNode.set(dedupKey, kindSet);
             }
             if (kindSet.has(kindVersionKey))
                 continue;
             kindSet.add(kindVersionKey);
         }
         else {
-            // String fallback for findings without headType
+            // String fallback for findings without source type
             const stringKey = `${f.diff.kind}|${f.diff.identity.element}|${versionKey}`;
             if (seenByString.has(stringKey))
                 continue;

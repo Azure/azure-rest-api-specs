@@ -87,6 +87,7 @@ function compareProperties(base, head, ctx) {
             diff.headType = head;
             diff.baseSourceLocation = getTypeSourceLocation(base);
             diff.headSourceLocation = getTypeSourceLocation(head);
+            diff.origin = resolveOrigin(head);
         }
     }
     diffs.push(...typeDiffs);
