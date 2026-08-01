@@ -1,0 +1,31 @@
+name: "TypeSpec Versioning Change - Set Status"
+
+on:
+  pull_request_target:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - labeled
+      - unlabeled
+  workflow_run:
+    workflows:
+      ["TypeSpec Versioning Change - Analyze Code"]
+    types: [completed]
+
+permissions: {}
+
+jobs:
+  typespec-versioning-change-status:
+    name: Set TypeSpec Versioning Change Status
+    permissions:
+      actions: read
+      contents: read
+      issues: read
+      pull-requests: read
+      statuses: write
+    uses: ./.github/workflows/_reusable-set-check-status.yaml
+    with:
+      monitored_workflow_name: "TypeSpec Versioning Change - Analyze Code"
+      required_check_name: "TypeSpec Versioning Change"
+      overriding_label: "Versioning-Approved-Benign,Versioning-Approved-BugFix,Versioning-Approved-PrivatePreview,Versioning-Approved-BranchPolicyException,Versioning-Approved-Previously,Versioning-Approved-Retired,Versioning-Approved-NotReleased"

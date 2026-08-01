@@ -1,4 +1,4 @@
-name: "TypeSpec Breaking Change - Analyze Code"
+name: "TypeSpec Versioning Change - Analyze Code"
 
 on:
   pull_request:
@@ -12,8 +12,8 @@ permissions:
   contents: read
 
 jobs:
-  typespec-breaking-change:
-    name: "TypeSpec Breaking Change - Analyze Code"
+  typespec-versioning-change:
+    name: "TypeSpec Versioning Change - Analyze Code"
     runs-on: ubuntu-24.04
 
     steps:
@@ -44,19 +44,19 @@ jobs:
             Write-Host "  $typespecFolder"
           }
 
-      - name: Run TypeSpec breaking change analysis
-        id: typespec-breaking-change-analyze
+      - name: Run TypeSpec Versioning Change analysis
+        id: typespec-versioning-change-analyze
         shell: bash
         env:
           EMIT_ANNOTATIONS: ${{ github.event.action != 'edited' || github.event.changes.base != null }}
         run: |
           if [[ ! -s typespec-folders.txt ]]; then
             {
-              echo "## TypeSpec Breaking Change Analysis"
+              echo "## TypeSpec Versioning Change Analysis"
               echo
               echo "No impacted TypeSpec folders were found."
             } > "$GITHUB_STEP_SUMMARY"
-            printf '{"findings":[],"summary":{"unsuppressedErrors":0}}\n' > "breaking-change-report.json"
+            printf '{"findings":[],"summary":{"unsuppressedErrors":0}}\n' > "versioning-change-report.json"
             exit 0
           fi
 
@@ -70,33 +70,33 @@ jobs:
           has_errors=0
           for folder in "${spec_folders[@]}"; do
             node eng/tools/typespec-breaking-change/src/cli.js "$folder" \
-              --phase cross-version \
-              --json-output "breaking-change-report.json" \
+              --phase same-version \
+              --json-output "versioning-change-report.json" \
               --markdown-output "$GITHUB_STEP_SUMMARY" \
               "${annotations_flag[@]}" \
               --fail-on-breaking || has_errors=1
           done
 
           if [[ $has_errors -eq 1 ]]; then
-            echo "breakingChangeReviewLabelName=BreakingChangeReviewRequired" >> "$GITHUB_OUTPUT"
+            echo "breakingChangeReviewLabelName=VersioningReviewRequired" >> "$GITHUB_OUTPUT"
             echo "breakingChangeReviewLabelValue=true" >> "$GITHUB_OUTPUT"
             exit 1
           fi
 
-      # Upload artifact for 'BreakingChangeReviewRequired' label
+      # Upload artifact for 'VersioningReviewRequired' label
       - if: |
           always() &&
-          (steps.typespec-breaking-change-analyze.outputs.breakingChangeReviewLabelName != '')
-        name: Upload artifact with BreakingChangeReviewRequired status
+          (steps.typespec-versioning-change-analyze.outputs.breakingChangeReviewLabelName != '')
+        name: Upload artifact with VersioningReviewRequired status
         uses: ./.github/actions/add-empty-artifact
         with:
-          name: "${{ steps.typespec-breaking-change-analyze.outputs.breakingChangeReviewLabelName }}"
-          value: "${{ steps.typespec-breaking-change-analyze.outputs.breakingChangeReviewLabelValue == 'true' }}"
+          name: "${{ steps.typespec-versioning-change-analyze.outputs.breakingChangeReviewLabelName }}"
+          value: "${{ steps.typespec-versioning-change-analyze.outputs.breakingChangeReviewLabelValue == 'true' }}"
 
       - name: Upload report artifact
         if: ${{ always() }}
         uses: actions/upload-artifact@v7
         with:
-          name: typespec-breaking-change-report
-          path: breaking-change-report.json
+          name: typespec-versioning-change-report
+          path: versioning-change-report.json
           if-no-files-found: ignore
