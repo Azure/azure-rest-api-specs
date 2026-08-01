@@ -1,0 +1,31 @@
+name: "TypeSpec Breaking Change - Set Status"
+
+on:
+  pull_request_target:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - labeled
+      - unlabeled
+  workflow_run:
+    workflows:
+      ["TypeSpec Breaking Change - Analyze Code"]
+    types: [completed]
+
+permissions: {}
+
+jobs:
+  typespec-breaking-change-status:
+    name: Set TypeSpec Breaking Change Status
+    permissions:
+      actions: read
+      contents: read
+      issues: read
+      pull-requests: read
+      statuses: write
+    uses: ./.github/workflows/_reusable-set-check-status.yaml
+    with:
+      monitored_workflow_name: "TypeSpec Breaking Change - Analyze Code"
+      required_check_name: "TypeSpec Breaking Change"
+      overriding_label: "BreakingChange-Approved-Benign,BreakingChange-Approved-BugFix,BreakingChange-Approved-UserImpact,BreakingChange-Approved-BranchPolicyException,BreakingChange-Approved-Previously,BreakingChange-Approved-Security,BreakingChange-Approved-Retired,Versioning-Approved-Benign,Versioning-Approved-BugFix,Versioning-Approved-PrivatePreview,Versioning-Approved-BranchPolicyException,Versioning-Approved-Previously,Versioning-Approved-Retired,Versioning-Approved-NotReleased"
