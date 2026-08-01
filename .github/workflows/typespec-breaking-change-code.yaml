@@ -10,6 +10,7 @@ on:
 
 permissions:
   contents: read
+  pull-requests: write
 
 jobs:
   typespec-breaking-change:
@@ -72,16 +73,36 @@ jobs:
             node eng/tools/typespec-breaking-change/src/cli.js "$folder" \
               --phase cross-version \
               --json-output "breaking-change-report.json" \
-              --markdown-output "$GITHUB_STEP_SUMMARY" \
+              --markdown-output "breaking-change-comment.md" \
               "${annotations_flag[@]}" \
               --fail-on-breaking || has_errors=1
           done
+
+          # Copy to step summary
+          if [[ -f "breaking-change-comment.md" ]]; then
+            cat "breaking-change-comment.md" >> "$GITHUB_STEP_SUMMARY"
+          fi
 
           if [[ $has_errors -eq 1 ]]; then
             echo "breakingChangeReviewLabelName=BreakingChangeReviewRequired" >> "$GITHUB_OUTPUT"
             echo "breakingChangeReviewLabelValue=true" >> "$GITHUB_OUTPUT"
             exit 1
           fi
+
+      - name: Post PR comment
+        if: always() && hashFiles('breaking-change-comment.md') != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          # Delete previous comment from this workflow if it exists
+          COMMENT_ID=$(gh api "repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/comments" \
+            --jq '.[] | select(.user.login == "github-actions[bot]" and (.body | startswith("## Breaking Change Analysis"))) | .id' \
+            2>/dev/null | head -1)
+          if [[ -n "$COMMENT_ID" ]]; then
+            gh api -X DELETE "repos/${{ github.repository }}/issues/comments/$COMMENT_ID" 2>/dev/null || true
+          fi
+          gh pr comment "${{ github.event.pull_request.number }}" --body-file breaking-change-comment.md
 
       # Upload artifact for 'BreakingChangeReviewRequired' label
       - if: |

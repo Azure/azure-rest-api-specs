@@ -42,6 +42,8 @@ function compareModels(base, head, ctx) {
             if (diff.headType === head.indexer.value || diff.baseType === base.indexer.value) {
                 diff.baseType = base;
                 diff.headType = head;
+                diff.baseSourceLocation = getTypeSourceLocation(base);
+                diff.headSourceLocation = getTypeSourceLocation(head);
             }
         }
         return diffs;
@@ -83,6 +85,8 @@ function compareProperties(base, head, ctx) {
         if (diff.headType === head.type || diff.baseType === base.type) {
             diff.baseType = base;
             diff.headType = head;
+            diff.baseSourceLocation = getTypeSourceLocation(base);
+            diff.headSourceLocation = getTypeSourceLocation(head);
         }
     }
     diffs.push(...typeDiffs);
@@ -145,6 +149,8 @@ function compareUnions(base, head, ctx) {
             if (diff.headType === headVariant.type || diff.baseType === baseVariant.type) {
                 diff.baseType = baseVariant;
                 diff.headType = headVariant;
+                diff.baseSourceLocation = getTypeSourceLocation(baseVariant);
+                diff.headSourceLocation = getTypeSourceLocation(headVariant);
             }
         }
         diffs.push(...variantDiffs);
@@ -168,6 +174,8 @@ function compareUnions(base, head, ctx) {
             if (diff.headType === headVariant.type || diff.baseType === baseVariant.type) {
                 diff.baseType = baseVariant;
                 diff.headType = headVariant;
+                diff.baseSourceLocation = getTypeSourceLocation(baseVariant);
+                diff.headSourceLocation = getTypeSourceLocation(headVariant);
             }
         }
         diffs.push(...anonDiffs);

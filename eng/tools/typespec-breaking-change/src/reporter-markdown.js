@@ -19,7 +19,12 @@ export function renderMarkdownSummary(result, options) {
         return lines.join("\n");
     }
     if (errors.length === 0) {
-        lines.push("✅ **No breaking changes detected**");
+        if (suppressed.length > 0) {
+            lines.push(`⚠️ **${suppressed.length} approved breaking change${suppressed.length === 1 ? "" : "s"}** — review required`);
+        }
+        else {
+            lines.push("✅ **No breaking changes detected**");
+        }
     }
     else {
         lines.push(`❌ **${errors.length} breaking change${errors.length === 1 ? "" : "s"} detected**`);
@@ -72,19 +77,19 @@ export function renderMarkdownSummary(result, options) {
         lines.push("");
         lines.push("</details>");
     }
-    // Suppressed (collapsed)
+    // Suppressed — these are new approved breaking changes that reviewers should see
     if (suppressed.length > 0) {
         lines.push("");
-        lines.push("<details>");
-        lines.push(`<summary>Suppressed findings (${suppressed.length})</summary>`);
+        lines.push("### Approved Breaking Changes");
         lines.push("");
-        lines.push("| Kind | Operation | Reason |");
-        lines.push("|------|-----------|--------|");
+        lines.push("The following breaking changes have been suppressed with `@approvedBreakingChange` decorators.");
+        lines.push("Reviewers should verify these changes are intentional and properly justified.");
+        lines.push("");
+        lines.push("| Kind | Operation | Element | Reason |");
+        lines.push("|------|-----------|---------|--------|");
         for (const finding of suppressed) {
-            lines.push(`| ${esc(finding.diff.kind)} | ${esc(fmtOp(finding))} | ${esc(finding.suppressionReason ?? "—")} |`);
+            lines.push(`| ${esc(finding.diff.kind)} | ${esc(fmtOp(finding))} | \`${esc(finding.diff.identity.element)}\` | ${esc(finding.suppressionReason ?? "—")} |`);
         }
-        lines.push("");
-        lines.push("</details>");
     }
     // Timing (collapsed)
     if (options?.showTiming) {
