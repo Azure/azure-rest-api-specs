@@ -14,7 +14,11 @@ namespace Microsoft.Sql;
 /**
  * A managed server security alert policy.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(ManagedInstance)
+@Azure.ResourceManager.Legacy.feature(
+  Features.ManagedServerSecurityAlertPolicies
+)
 model ManagedServerSecurityAlertPolicy
   is Azure.ResourceManager.ProxyResource<SecurityAlertsPolicyProperties> {
   ...ResourceNameParameter<
@@ -27,7 +31,11 @@ model ManagedServerSecurityAlertPolicy
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(
+  Features.ManagedServerSecurityAlertPolicies
+)
 interface ManagedServerSecurityAlertPolicies {
   /**
    * Get a managed server's threat detection policy.

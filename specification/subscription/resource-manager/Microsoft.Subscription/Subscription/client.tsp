@@ -7,11 +7,6 @@ using Azure.Core;
 namespace Microsoft.Subscription;
 
 @@clientName(Microsoft.Subscription, "SubscriptionClient", "python");
-@@clientName(
-  SubscriptionOperationGroup.acceptOwnership::parameters.body,
-  "requestbody_body",
-  "python"
-);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(PutAliasRequest.properties, "csharp");

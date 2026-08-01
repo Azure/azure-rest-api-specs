@@ -1784,6 +1784,7 @@ model IdentityDetails {
   /**
    * ARM URL for User Assigned Identity.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   userAssignedIdentityArmUrl?: string;
 }
 
@@ -2129,6 +2130,7 @@ model AzureBackupJob {
   /**
    * Url which contains job's progress
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   progressUrl?: string;
 
@@ -2482,6 +2484,7 @@ model ExportJobsResult {
   /**
    * URL of the blob into which the serialized string of list of jobs is exported.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   blobUrl?: string;
 
@@ -2495,6 +2498,7 @@ model ExportJobsResult {
   /**
    * URL of the blob into which the ExcelFile is uploaded.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   excelFileBlobUrl?: string;
 

@@ -13,8 +13,10 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.MachineLearningServices;
 
 @parentResource(OnlineEndpoint)
-model OnlineDeployment
-  is Azure.ResourceManager.TrackedResource<OnlineDeploymentProperties, false> {
+model OnlineDeployment is Azure.ResourceManager.TrackedResource<
+  OnlineDeploymentProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = OnlineDeployment,
     KeyName = "deploymentName",

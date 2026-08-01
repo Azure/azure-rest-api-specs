@@ -4,6 +4,10 @@ parameters:
 emit:
   - "@azure-tools/typespec-autorest"
 options:
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.AppService"
+    emitter-output-dir: "{output-dir}/sdk/websites/{namespace}"
+    enable-wire-path-attribute: true
   "@azure-tools/typespec-autorest":
     omit-unreachable-types: true
     emitter-output-dir: "{project-root}"
@@ -38,6 +42,7 @@ options:
       OpenIdConnectClientCredentialMethod: ClientCredentialMethod
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/arm-appservice"
+    treat-unknown-as-record: true
     flavor: "azure"
     compatibility-lro: true
     experimental-extensible-enums: true
@@ -46,7 +51,7 @@ options:
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/appservice"
     emitter-output-dir: "{output-dir}/{service-dir}/armappservice"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armappservice/v5"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armappservice/v6"
     fix-const-stuttering: false
     flavor: "azure"
     generate-samples: true
@@ -56,3 +61,4 @@ options:
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"

@@ -14,7 +14,9 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.Sql;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
+@Azure.ResourceManager.Legacy.feature(Features.DeletedServers)
 interface DeletedServersOperationGroup {
   /**
    * Gets a list of all deleted servers in a subscription.
@@ -31,7 +33,9 @@ interface DeletedServersOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
+@Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 interface CapabilitiesOperationGroup {
   /**
    * Gets the subscription capabilities available for the specified location.
@@ -49,7 +53,7 @@ interface CapabilitiesOperationGroup {
        */
       @path
       @segment("locations")
-      locationName: string;
+      locationName: Azure.Core.azureLocation;
 
       /**
        * If specified, restricts the response to only include the selected item.
@@ -61,7 +65,9 @@ interface CapabilitiesOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
+@Azure.ResourceManager.Legacy.feature(Features.LongTermRetentionBackups)
 interface LongTermRetentionBackupsOperationGroup {
   /**
    * Lists the long term retention backups for a given location.
@@ -80,7 +86,7 @@ interface LongTermRetentionBackupsOperationGroup {
        */
       @path
       @segment("locations")
-      locationName: string;
+      locationName: Azure.Core.azureLocation;
 
       /**
        * Whether or not to only get the latest backup for each database.
@@ -112,7 +118,7 @@ interface LongTermRetentionBackupsOperationGroup {
        */
       @path
       @segment("locations")
-      locationName: string;
+      locationName: Azure.Core.azureLocation;
 
       /**
        * The name of the server
@@ -151,7 +157,7 @@ interface LongTermRetentionBackupsOperationGroup {
        */
       @path
       @segment("locations")
-      locationName: string;
+      locationName: Azure.Core.azureLocation;
 
       /**
        * Whether or not to only get the latest backup for each database.
@@ -183,7 +189,7 @@ interface LongTermRetentionBackupsOperationGroup {
        */
       @path
       @segment("locations")
-      locationName: string;
+      locationName: Azure.Core.azureLocation;
 
       /**
        * The name of the server
@@ -208,7 +214,11 @@ interface LongTermRetentionBackupsOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
+@Azure.ResourceManager.Legacy.feature(
+  Features.LongTermRetentionManagedInstanceBackups
+)
 interface LongTermRetentionManagedInstanceBackupsOperationGroup {
   /**
    * Lists the long term retention backups for managed databases in a given location.
@@ -227,7 +237,7 @@ interface LongTermRetentionManagedInstanceBackupsOperationGroup {
        */
       @path
       @segment("locations")
-      locationName: string;
+      locationName: Azure.Core.azureLocation;
 
       /**
        * Whether or not to only get the latest backup for each database.
@@ -277,7 +287,7 @@ interface LongTermRetentionManagedInstanceBackupsOperationGroup {
        */
       @path
       @segment("locations")
-      locationName: string;
+      locationName: Azure.Core.azureLocation;
 
       /**
        * The name of the managed instance.
@@ -316,7 +326,7 @@ interface LongTermRetentionManagedInstanceBackupsOperationGroup {
        */
       @path
       @segment("locations")
-      locationName: string;
+      locationName: Azure.Core.azureLocation;
 
       /**
        * Whether or not to only get the latest backup for each database.
@@ -366,7 +376,7 @@ interface LongTermRetentionManagedInstanceBackupsOperationGroup {
        */
       @path
       @segment("locations")
-      locationName: string;
+      locationName: Azure.Core.azureLocation;
 
       /**
        * The name of the managed instance.
@@ -391,7 +401,9 @@ interface LongTermRetentionManagedInstanceBackupsOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
+@Azure.ResourceManager.Legacy.feature(Features.Servers)
 interface ServersOperationGroup {
   /**
    * Determines whether a resource can be created with the specified name.
@@ -406,7 +418,9 @@ interface ServersOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
+@Azure.ResourceManager.Legacy.feature(Features.SyncGroups)
 interface SyncGroupsOperationGroup {
   /**
    * Gets a collection of sync database ids.
@@ -425,7 +439,7 @@ interface SyncGroupsOperationGroup {
        */
       @path
       @segment("locations")
-      locationName: string;
+      locationName: Azure.Core.azureLocation;
     }
   >;
 }

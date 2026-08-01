@@ -4,6 +4,7 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 using Azure.Core;
 using Microsoft.DataBox;
+using TypeSpec.Http;
 
 @@scope(Operations.list, "!csharp");
 
@@ -439,3 +440,45 @@ using Microsoft.DataBox;
   "ArmErrorDetail",
   "go"
 );
+
+/** Request to mark devices for a given job as shipped */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "SDK customization override operation."
+op jobMarkDevicesShippedCustomized(
+  ...Azure.ResourceManager.ApiVersionParameter,
+  ...Azure.ResourceManager.SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.ProviderParameter<JobResource>,
+
+  /** The name of the job Resource within the specified resource group. job names must be between 3 and 24 characters in length and use any alphanumeric and underscore only */
+  @path
+  jobName: string,
+
+  ...Azure.ResourceManager.ResourceGroupParameter,
+
+  /** Mark Devices Shipped Request */
+  @body
+  markDevicesShippedRequest: MarkDevicesShippedRequest,
+): NoContentResponse | Microsoft.DataBox.ApiError;
+
+/** Request to mitigate for a given job */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "SDK customization override operation."
+op mitigateCustomized(
+  ...Azure.ResourceManager.ApiVersionParameter,
+  ...Azure.ResourceManager.SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.ProviderParameter<JobResource>,
+
+  /** The name of the job Resource within the specified resource group. job names must be between 3 and 24 characters in length and use any alphanumeric and underscore only */
+  @path
+  jobName: string,
+
+  ...Azure.ResourceManager.ResourceGroupParameter,
+
+  /** Mitigation Request */
+  @body
+  mitigateJobRequest: MitigateJobRequest,
+): NoContentResponse | Microsoft.DataBox.ApiError;
+
+@@override(JobResources.markDevicesShipped, jobMarkDevicesShippedCustomized);
+
+@@override(mitigate, mitigateCustomized);
+
+@@alternateType(OperationProperties, Record<unknown>, "javascript");

@@ -5,11 +5,41 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./scenario.models.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.Core;
 using Azure.Core.Traits;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Chaos;
+
+/**
+ * Indicates the scenario run is still in progress. Clients polling via the
+ * Location header should continue polling until a 200 response is returned.
+ * The body reflects the current run state at the time of the poll.
+ */
+model ScenarioRunInProgressResponse {
+  ...AcceptedResponse;
+
+  /**
+   * The URL where the status of the long-running operation can be polled.
+   */
+  @header("Location")
+  location: url;
+
+  /**
+   * The number of seconds the client should wait before polling again.
+   */
+  @minValue(0)
+  @maxValue(2147483647)
+  @header("Retry-After")
+  retryAfter?: int32;
+
+  /**
+   * The current scenario run state at the time of the poll.
+   */
+  @bodyRoot body: ScenarioRun;
+}
 
 /**
  * Model that represents the scenario run.
@@ -55,6 +85,16 @@ model ScenarioRunProperties {
   managedIdentityPrincipalId: string;
 
   /**
+   * The resource snapshot ID this run is pinned to. Resolved from the scenario's
+   * pinned evaluation snapshot (template scenarios) or the latest discovery
+   * snapshot (custom scenarios) at run creation, ensuring the run executes against
+   * the same set of discovered resources that produced the recommendation.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  resourceSnapshotId?: string;
+
+  /**
    * The scenario run status.
    */
   @visibility(Lifecycle.Read)
@@ -67,6 +107,16 @@ model ScenarioRunProperties {
   @visibility(Lifecycle.Read)
   @identifiers(#["id"])
   resources: ScenarioRunResource[];
+
+  /**
+   * Resources that matched the scenario's target resource types but were excluded
+   * from fault injection by the configuration's resource-targeting filters
+   * (for example zone, location, or explicit exclusions). These resources will not be impacted by the run.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  @identifiers(#["id"])
+  excludedResources?: ScenarioRunResource[];
 
   /**
    * System or infrastructure errors encountered during the scenario run.

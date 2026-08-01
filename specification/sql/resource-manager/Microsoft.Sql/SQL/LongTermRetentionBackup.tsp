@@ -13,7 +13,9 @@ namespace Microsoft.Sql;
 /**
  * A long term retention backup.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @subscriptionResource
+@Azure.ResourceManager.Legacy.feature(Features.LongTermRetentionBackups)
 model LongTermRetentionBackup
   is Azure.ResourceManager.ProxyResource<LongTermRetentionBackupProperties> {
   ...ResourceNameParameter<
@@ -39,7 +41,7 @@ alias LongTermRetentionBackupOps = Azure.ResourceManager.Legacy.LegacyOperations
     @path
     @segment("locations")
     @key
-    locationName: string;
+    locationName: Azure.Core.azureLocation;
 
     /** The name of the server */
     @path
@@ -59,10 +61,13 @@ alias LongTermRetentionBackupOps = Azure.ResourceManager.Legacy.LegacyOperations
     @segment("longTermRetentionBackups")
     @key
     backupName: string;
-  }
+  },
+  ResourceName = "SubscriptionLongTermRetentionBackup"
 >;
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.LongTermRetentionBackups)
 interface LongTermRetentionBackups {
   /**
    * Gets a long term retention backup.
@@ -194,7 +199,7 @@ alias LongTermRetentionBackupOperationGroupOps = Azure.ResourceManager.Legacy.Le
     @path
     @segment("locations")
     @key
-    locationName: string;
+    locationName: Azure.Core.azureLocation;
 
     /** The name of the server */
     @path
@@ -214,10 +219,13 @@ alias LongTermRetentionBackupOperationGroupOps = Azure.ResourceManager.Legacy.Le
     @segment("longTermRetentionBackups")
     @key
     backupName: string;
-  }
+  },
+  ResourceName = "ResourceGroupLongTermRetentionBackup"
 >;
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
+@Azure.ResourceManager.Legacy.feature(Features.LongTermRetentionBackups)
 interface LongTermRetentionBackupOperationGroup {
   /**
    * Gets a long term retention backup.

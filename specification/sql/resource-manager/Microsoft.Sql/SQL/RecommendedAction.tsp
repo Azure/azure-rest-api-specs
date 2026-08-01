@@ -39,7 +39,9 @@ model RecommendedAction
   location?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
+@Azure.ResourceManager.Legacy.feature(Features.DatabaseRecommendedActions)
 interface RecommendedActions {
   /**
    * Gets a database recommended action.

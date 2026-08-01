@@ -12,10 +12,10 @@ using Azure.ClientGenerator.Core;
 @@clientLocation(
   Microsoft.SerialConsole.SerialConsoleOperationGroup.disableConsole,
   Microsoft.SerialConsole,
-  "go"
+  "go,javascript,python"
 );
 @@clientLocation(
   Microsoft.SerialConsole.SerialConsoleOperationGroup.enableConsole,
   Microsoft.SerialConsole,
-  "go"
+  "go,javascript,python"
 );

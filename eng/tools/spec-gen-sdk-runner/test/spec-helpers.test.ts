@@ -6,17 +6,17 @@ import {
   detectChangedSpecConfigFiles,
   groupSpecConfigPaths,
   processTypeSpecProjectsV2FolderStructure,
-} from "../src/spec-helpers.js";
-import { SpecGenSdkCmdInput } from "../src/types.js";
+} from "../src/spec-helpers.ts";
+import { type SpecGenSdkCmdInput } from "../src/types.ts";
 import {
   type ChangedSpecs,
   type SpecConfigs,
   getChangedFiles,
   normalizePath,
-} from "../src/utils.js";
+} from "../src/utils.ts";
 
-vi.mock("../src/utils.js", async () => {
-  const actual = await vi.importActual<typeof import("../src/utils.js")>("../src/utils.js");
+vi.mock("../src/utils.ts", async () => {
+  const actual = await vi.importActual<typeof import("../src/utils.ts")>("../src/utils.ts");
 
   return {
     ...actual,

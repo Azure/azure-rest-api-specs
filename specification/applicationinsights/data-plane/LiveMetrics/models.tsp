@@ -303,6 +303,7 @@ model Request extends DocumentIngress {
   @maxLength(1024)
   Name?: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("Request URL with all query string parameters.")
   @maxLength(2048)
   Url?: url;
