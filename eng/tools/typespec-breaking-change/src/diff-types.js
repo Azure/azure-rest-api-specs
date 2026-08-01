@@ -39,8 +39,10 @@ function compareModels(base, head, ctx) {
         // Array item type changes — the violation is about the array model, not the inner item type
         const diffs = compareTypes(base.indexer.value, head.indexer.value, ctx);
         for (const diff of diffs) {
-            diff.baseType = base;
-            diff.headType = head;
+            if (diff.headType === head.indexer.value || diff.baseType === base.indexer.value) {
+                diff.baseType = base;
+                diff.headType = head;
+            }
         }
         return diffs;
     }
@@ -74,10 +76,14 @@ function compareProperties(base, head, ctx) {
     // Type-change findings from compareTypes store inner types (e.g., Scalars) as
     // baseType/headType, but the violation is about this property changing — the
     // ModelProperty should be the target for suppression lookup.
+    // Only override diffs whose target is still this property's direct .type value;
+    // diffs from deeper recursion already have their correct target set.
     const typeDiffs = compareTypes(base.type, head.type, ctx);
     for (const diff of typeDiffs) {
-        diff.baseType = base;
-        diff.headType = head;
+        if (diff.headType === head.type || diff.baseType === base.type) {
+            diff.baseType = base;
+            diff.headType = head;
+        }
     }
     diffs.push(...typeDiffs);
     return diffs;
@@ -136,8 +142,10 @@ function compareUnions(base, head, ctx) {
         // Union variant type changes — the violation is about the variant, not the inner type
         const variantDiffs = compareTypes(baseVariant.type, headVariant.type, { ...ctx, elementPath });
         for (const diff of variantDiffs) {
-            diff.baseType = baseVariant;
-            diff.headType = headVariant;
+            if (diff.headType === headVariant.type || diff.baseType === baseVariant.type) {
+                diff.baseType = baseVariant;
+                diff.headType = headVariant;
+            }
         }
         diffs.push(...variantDiffs);
     }
@@ -157,8 +165,10 @@ function compareUnions(base, head, ctx) {
         // Anonymous variant type changes — target the variant, not inner type
         const anonDiffs = compareTypes(baseVariant.type, headVariant.type, { ...ctx, elementPath });
         for (const diff of anonDiffs) {
-            diff.baseType = baseVariant;
-            diff.headType = headVariant;
+            if (diff.headType === headVariant.type || diff.baseType === baseVariant.type) {
+                diff.baseType = baseVariant;
+                diff.headType = headVariant;
+            }
         }
         diffs.push(...anonDiffs);
     }
