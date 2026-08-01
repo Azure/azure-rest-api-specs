@@ -30,8 +30,11 @@ export function analyzeProgram(program, options) {
             allFindings.push(...analyzePair(baseView, headView, pair, timing));
         }
     }
+    const dedupStart = Date.now();
+    const dedupedFindings = deduplicateBySourceType(allFindings);
+    timing.classifyMs += Date.now() - dedupStart;
     const suppressStart = Date.now();
-    const findings = applySuppressions(allFindings, program);
+    const findings = applySuppressions(dedupedFindings, program);
     timing.suppressMs += Date.now() - suppressStart;
     timing.totalMs = Date.now() - totalStart;
     const summary = buildSummary(servicesAnalyzed, comparisonsPerformed, options);
@@ -90,8 +93,11 @@ export function analyzeBaseAndHead(baseProgram, headProgram, options) {
             }
         }
     }
+    const dedupStart = Date.now();
+    const dedupedFindings = deduplicateBySourceType(allFindings);
+    timing.classifyMs += Date.now() - dedupStart;
     const suppressStart = Date.now();
-    const findings = applySuppressions(allFindings, headProgram);
+    const findings = applySuppressions(dedupedFindings, headProgram);
     timing.suppressMs += Date.now() - suppressStart;
     timing.totalMs = Date.now() - totalStart;
     const summary = buildSummary(servicesAnalyzed, comparisonsPerformed, options);
@@ -148,5 +154,49 @@ function buildSummary(servicesAnalyzed, comparisonsPerformed, options) {
         }
     }
     return summary;
+}
+/**
+ * Deduplicate findings that trace back to the same source type declaration.
+ *
+ * Source type tracing is fundamental to the design: headType/baseType on each
+ * finding points to the original TypeSpec declaration (ModelProperty, Scalar, etc.).
+ * When the same model property (e.g., `Employee.city`) appears in multiple
+ * operations (GET, PUT, PATCH), the diff engine produces separate findings
+ * for each. Since version projection reuses type objects, these findings share
+ * the same source type reference — enabling identity-based deduplication.
+ *
+ * Dedup key: source type reference identity + diff kind + version pair.
+ * Falls back to string key (kind + element + versions) only when no source
+ * type is available (e.g., service-level diffs like ApiVersionRemoved).
+ */
+function deduplicateBySourceType(findings) {
+    const seenByType = new Map();
+    const seenByString = new Set();
+    const result = [];
+    for (const f of findings) {
+        const versionKey = `${f.versionPair.baseVersion}|${f.versionPair.headVersion}`;
+        const kindVersionKey = `${f.diff.kind}|${versionKey}`;
+        if (f.diff.headType || f.diff.baseType) {
+            // Type-identity dedup: same source type object + same kind + same version pair
+            const sourceType = f.diff.headType ?? f.diff.baseType;
+            let kindSet = seenByType.get(sourceType);
+            if (!kindSet) {
+                kindSet = new Set();
+                seenByType.set(sourceType, kindSet);
+            }
+            if (kindSet.has(kindVersionKey))
+                continue;
+            kindSet.add(kindVersionKey);
+        }
+        else {
+            // String fallback for findings without headType
+            const stringKey = `${f.diff.kind}|${f.diff.identity.element}|${versionKey}`;
+            if (seenByString.has(stringKey))
+                continue;
+            seenByString.add(stringKey);
+        }
+        result.push(f);
+    }
+    return result;
 }
 //# sourceMappingURL=orchestrator.js.map

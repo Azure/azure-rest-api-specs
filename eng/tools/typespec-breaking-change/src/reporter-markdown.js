@@ -44,17 +44,14 @@ export function renderMarkdownSummary(result, options) {
     parts.push(`${result.summary.comparisonsPerformed} version pair${result.summary.comparisonsPerformed === 1 ? "" : "s"} compared`);
     lines.push("");
     lines.push(parts.join(" · "));
-    // Deduplicate findings — same kind + element + version pair across operations
-    const dedupedErrors = deduplicateFindings(errors);
-    const dedupedSuppressed = deduplicateFindings(suppressed);
     // Unsuppressed breaking changes
-    if (dedupedErrors.length > 0) {
+    if (errors.length > 0) {
         lines.push("");
         lines.push("### Unsuppressed Breaking Changes");
         lines.push("");
         lines.push("| Kind | Identity | Versions | Suppression |");
         lines.push("|------|----------|----------|-------------|");
-        for (const finding of dedupedErrors) {
+        for (const finding of errors) {
             const kind = fmtKindLink(finding.diff.kind, options);
             const identity = fmtIdentityLink(finding, options);
             const versions = esc(fmtVer(finding));
@@ -63,7 +60,7 @@ export function renderMarkdownSummary(result, options) {
         }
     }
     // New suppressed breaking changes
-    if (dedupedSuppressed.length > 0) {
+    if (suppressed.length > 0) {
         lines.push("");
         lines.push("### New Suppressed Breaking Changes");
         lines.push("");
@@ -72,7 +69,7 @@ export function renderMarkdownSummary(result, options) {
         lines.push("");
         lines.push("| Kind | Identity | Reason |");
         lines.push("|------|----------|--------|");
-        for (const finding of dedupedSuppressed) {
+        for (const finding of suppressed) {
             const kind = fmtKindLink(finding.diff.kind, options);
             const identity = fmtIdentityLink(finding, options);
             const reason = esc(finding.suppressionReason ?? "—");
@@ -91,23 +88,6 @@ export function renderMarkdownSummary(result, options) {
     }
     lines.push("");
     return lines.join("\n");
-}
-/**
- * Deduplicate findings that share the same kind, element path, and version pair
- * but differ only in operation (e.g., PUT vs PATCH for the same model property).
- * Keeps the first finding (which has the best source location).
- */
-function deduplicateFindings(findings) {
-    const seen = new Set();
-    const result = [];
-    for (const f of findings) {
-        const key = `${f.diff.kind}|${f.diff.identity.element}|${f.versionPair.baseVersion}|${f.versionPair.headVersion}`;
-        if (!seen.has(key)) {
-            seen.add(key);
-            result.push(f);
-        }
-    }
-    return result;
 }
 /** Format a DiffKind as a link to the violations reference docs. */
 function fmtKindLink(kind, options) {
