@@ -42,6 +42,10 @@ alias modelResourceNameRegex = "^[a-zA-Z][a-zA-Z0-9-]{1,42}[a-zA-Z0-9]$";
 @doc("String with regex validation to match the health model resource name requirements")
 scalar stringModelResourceName extends string;
 
+@added(Versions.v2026_09_01)
+@doc("An IP address or IP range in CIDR notation (IPv4 /0-/32 or IPv6 /0-/128).")
+scalar ipAddressOrRange extends string;
+
 // Regex for all our proxy resource name validations. Up to 260 characters, alphanumeric and hyphens, must start and end with an alphanumeric character
 alias proxyResourceNameRegex = "^[a-zA-Z0-9][a-zA-Z0-9-]{1,258}[a-zA-Z0-9]$";
 
@@ -66,6 +70,18 @@ model HealthModel is TrackedResource<HealthModelProperties> {
   ...ManagedServiceIdentityProperty;
 }
 
+@doc("State of the public network access.")
+@added(Versions.v2026_09_01)
+union PublicNetworkAccess {
+  string,
+
+  @doc("The public network access is enabled")
+  Enabled: "Enabled",
+
+  @doc("The public network access is disabled")
+  Disabled: "Disabled",
+}
+
 @doc("HealthModel properties")
 model HealthModelProperties {
   @removed(Versions.v2026_01_01_preview)
@@ -80,6 +96,20 @@ model HealthModelProperties {
   @removed(Versions.v2026_01_01_preview)
   @doc("Configure to automatically discover entities from a given scope, such as a Service Group. The discovered entities will be linked to the root entity of the health model.")
   discovery?: ModelDiscoverySettings;
+
+  @added(Versions.v2026_09_01)
+  @visibility(Lifecycle.Read)
+  @doc("The data plane endpoint URL for interacting with the health model's data.")
+  dataPlaneUri?: url;
+
+  @added(Versions.v2026_09_01)
+  @doc("IP addresses or CIDR ranges allowed to access the data plane. When set, only listed IPs/CIDRs can reach the data plane. An empty array blocks all traffic.")
+  @maxItems(100)
+  dataPlaneIpAllowList?: ipAddressOrRange[];
+
+  @added(Versions.v2026_09_01)
+  @doc("Allow or disallow public network access to data plane.")
+  publicNetworkAccess?: PublicNetworkAccess;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Self-explanatory"
