@@ -20,7 +20,7 @@ export function renderMarkdownSummary(result, options) {
     }
     if (errors.length === 0) {
         if (suppressed.length > 0) {
-            lines.push(`⚠️ **${suppressed.length} approved breaking change${suppressed.length === 1 ? "" : "s"}** — review required`);
+            lines.push(`⚠️ **${suppressed.length} new suppressed breaking change${suppressed.length === 1 ? "" : "s"}** — review required`);
         }
         else {
             lines.push("✅ **No breaking changes detected**");
@@ -48,7 +48,7 @@ export function renderMarkdownSummary(result, options) {
     // Errors table
     if (errors.length > 0) {
         lines.push("");
-        lines.push("### Breaking Changes");
+        lines.push("### Unsuppressed Breaking Changes");
         lines.push("");
         lines.push("| Kind | Operation | Element | Versions |");
         lines.push("|------|-----------|---------|----------|");
@@ -80,7 +80,7 @@ export function renderMarkdownSummary(result, options) {
     // Suppressed — these are new approved breaking changes that reviewers should see
     if (suppressed.length > 0) {
         lines.push("");
-        lines.push("### Approved Breaking Changes");
+        lines.push("### New Suppressed Breaking Changes");
         lines.push("");
         lines.push("The following breaking changes have been suppressed with `@approvedBreakingChange` decorators.");
         lines.push("Reviewers should verify these changes are intentional and properly justified.");
