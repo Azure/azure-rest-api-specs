@@ -69,14 +69,32 @@ jobs:
           fi
 
           has_errors=0
+          all_json_results=()
+          > "breaking-change-comment.md"
+
           for folder in "${spec_folders[@]}"; do
+            folder_json="${folder//\//_}-report.json"
+            folder_md="${folder//\//_}-report.md"
             node eng/tools/typespec-breaking-change/src/cli.js "$folder" \
               --phase cross-version \
-              --json-output "breaking-change-report.json" \
-              --markdown-output "breaking-change-comment.md" \
+              --json-output "$folder_json" \
+              --markdown-output "$folder_md" \
               "${annotations_flag[@]}" \
               --fail-on-breaking || has_errors=1
+
+            if [[ -f "$folder_md" ]]; then
+              cat "$folder_md" >> "breaking-change-comment.md"
+              echo "" >> "breaking-change-comment.md"
+            fi
+            if [[ -f "$folder_json" ]]; then
+              all_json_results+=("$folder_json")
+            fi
           done
+
+          # Use the last JSON report as the artifact (TODO: merge multiple)
+          if [[ ${#all_json_results[@]} -gt 0 ]]; then
+            cp "${all_json_results[-1]}" "breaking-change-report.json"
+          fi
 
           # Copy to step summary
           if [[ -f "breaking-change-comment.md" ]]; then
