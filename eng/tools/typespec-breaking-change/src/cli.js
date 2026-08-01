@@ -183,10 +183,12 @@ export async function main(args) {
             const mdPath = resolve(options.markdownOutput);
             await ensureParentDir(mdPath);
             const mdOptions = {
-                baseRevision: options.base,
-                headRevision: options.entry,
                 specPaths: [options.entry],
                 showTiming: true,
+                githubServerUrl: process.env.GITHUB_SERVER_URL,
+                githubRepository: process.env.GITHUB_REPOSITORY,
+                githubSha: process.env.GITHUB_SHA,
+                workspacePath: process.env.GITHUB_WORKSPACE,
             };
             const mdContent = renderMarkdownSummary(result, mdOptions);
             await writeFile(mdPath, mdContent);
