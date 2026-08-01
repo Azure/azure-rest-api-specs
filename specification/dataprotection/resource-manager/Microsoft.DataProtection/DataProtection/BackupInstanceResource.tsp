@@ -188,8 +188,8 @@ interface BackupInstanceResources {
    * This operation will resume protection for a stopped backup instance
    */
   @removed(Versions.v2026_04_01_preview)
-  @renamedFrom(Versions.v2026_04_01_preview, "resumeProtection")
-  resumeProtectionLegacy is BackupInstanceResourceOps.ActionAsync<
+  @added(Versions.v2026_07_01)
+  resumeProtection is BackupInstanceResourceOps.ActionAsync<
     BackupInstanceResource,
     void,
     OkResponse,
@@ -203,7 +203,9 @@ interface BackupInstanceResources {
    * This operation will resume protection for a stopped backup instance
    */
   @added(Versions.v2026_04_01_preview)
-  resumeProtection is BackupInstanceResourceOps.ActionAsync<
+  @removed(Versions.v2026_07_01)
+  @renamedFrom(Versions.v2026_07_01, "resumeProtection")
+  resumeProtectionWithRequest is BackupInstanceResourceOps.ActionAsync<
     BackupInstanceResource,
     ResumeProtectionRequest,
     OkResponse,

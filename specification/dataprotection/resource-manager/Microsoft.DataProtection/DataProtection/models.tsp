@@ -2348,6 +2348,7 @@ model AzureBackupRehydrationRequest {
  * Type of Datasource object, used to initialize the right inherited type
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_07_01)
 union ResumeProtectionRequestObjectType {
   string,
 
@@ -2360,6 +2361,7 @@ union ResumeProtectionRequestObjectType {
  */
 @discriminator("objectType")
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_07_01)
 model ResumeProtectionRequest {
   /**
    * Type of Datasource object, used to initialize the right inherited type
