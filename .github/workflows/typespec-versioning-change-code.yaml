@@ -61,32 +61,13 @@ jobs:
             echo "approved=false" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Extract base branch specs
-        shell: bash
-        run: |
-          # Create a directory with the base branch version of each impacted spec folder
-          BASE_SHA="${{ github.event.pull_request.base.sha }}"
-          mkdir -p base-specs
-
-          if [[ ! -s typespec-folders.txt ]]; then
-            exit 0
-          fi
-
-          while IFS= read -r folder; do
-            base_folder="base-specs/$folder"
-            mkdir -p "$base_folder"
-            # Extract the base version of the spec folder using git
-            git archive "$BASE_SHA" -- "$folder" 2>/dev/null | tar -x -C base-specs/ 2>/dev/null || {
-              echo "Warning: Could not extract base version of $folder (new folder?)"
-            }
-          done < typespec-folders.txt
-
       - name: Run TypeSpec Versioning Change analysis
         id: typespec-versioning-change-analyze
         shell: bash
         env:
           EMIT_ANNOTATIONS: ${{ github.event.action != 'edited' || github.event.changes.base != null }}
           VERSIONING_CHANGE_APPROVED: ${{ steps.check-label.outputs.approved }}
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
         run: |
           if [[ ! -s typespec-folders.txt ]]; then
             {
@@ -109,12 +90,28 @@ jobs:
           > "versioning-change-comment.md"
 
           for folder in "${spec_folders[@]}"; do
-            base_folder="base-specs/$folder"
             folder_md="${folder//\//_}-versioning-report.md"
             folder_json="${folder//\//_}-versioning-report.json"
 
+            # Save the head (PR) version of the spec folder
+            cp -r "$folder" "${folder}.head-backup"
+
+            # Check out the base version in-place (same repo root = same node_modules)
+            git checkout "$BASE_SHA" -- "$folder" 2>/dev/null
+            base_exists=$?
+
+            # Restore head version
+            rm -rf "$folder"
+            mv "${folder}.head-backup" "$folder"
+
             base_flag=()
-            if [[ -d "$base_folder" ]]; then
+            if [[ $base_exists -eq 0 ]]; then
+              # The base version was successfully checked out — save it
+              # alongside the head in the repo root so both compile identically
+              base_folder="${folder}.base"
+              git checkout "$BASE_SHA" -- "$folder" 2>/dev/null
+              mv "$folder" "$base_folder"
+              git checkout HEAD -- "$folder" 2>/dev/null
               base_flag=(--base "$base_folder")
             fi
 
@@ -126,6 +123,11 @@ jobs:
               --markdown-output "$folder_md" \
               "${annotations_flag[@]}" \
               --fail-on-breaking || has_errors=1
+
+            # Clean up base copy
+            if [[ -d "${folder}.base" ]]; then
+              rm -rf "${folder}.base"
+            fi
 
             if [[ -f "$folder_md" ]]; then
               cat "$folder_md" >> "versioning-change-comment.md"
