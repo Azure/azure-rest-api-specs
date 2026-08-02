@@ -9,8 +9,9 @@ export function renderMarkdownSummary(result, options) {
     const errors = result.findings.filter((f) => f.severity === "error" && !f.suppressed);
     const suppressed = result.findings.filter((f) => f.suppressed);
     const lines = [];
+    const title = options?.reportTitle ?? "Breaking Change Analysis";
     // Header
-    lines.push("## Breaking Change Analysis");
+    lines.push(`## ${title}`);
     lines.push("");
     // Spec path context
     if (options?.specPaths && options.specPaths.length > 0) {

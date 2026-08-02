@@ -57,6 +57,9 @@ export function parseArgs(args) {
             case "--show-ignored":
                 options.showIgnored = true;
                 break;
+            case "--report-title":
+                options.reportTitle = args[++i];
+                break;
             case "--help":
             case "-h":
                 printUsage();
@@ -190,6 +193,7 @@ export async function main(args) {
                 githubSha: process.env.GITHUB_SHA,
                 workspacePath: process.env.GITHUB_WORKSPACE,
                 violationsReferenceUrl: process.env.VIOLATIONS_REFERENCE_URL,
+                reportTitle: options.reportTitle,
             };
             const mdContent = renderMarkdownSummary(result, mdOptions);
             await writeFile(mdPath, mdContent);

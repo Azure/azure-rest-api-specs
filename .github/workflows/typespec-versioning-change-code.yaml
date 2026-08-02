@@ -7,9 +7,12 @@ on:
       - synchronize
       - reopened
       - edited
+      - labeled
+      - unlabeled
 
 permissions:
   contents: read
+  pull-requests: write
 
 jobs:
   typespec-versioning-change:
@@ -44,11 +47,46 @@ jobs:
             Write-Host "  $typespecFolder"
           }
 
+      - name: Check for VersioningChangeApproved label
+        id: check-label
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          LABELS=$(gh pr view "${{ github.event.pull_request.number }}" --json labels --jq '.labels[].name')
+          if echo "$LABELS" | grep -q "^VersioningChangeApproved"; then
+            echo "approved=true" >> "$GITHUB_OUTPUT"
+            echo "Versioning change approved via label"
+          else
+            echo "approved=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Extract base branch specs
+        shell: bash
+        run: |
+          # Create a directory with the base branch version of each impacted spec folder
+          BASE_SHA="${{ github.event.pull_request.base.sha }}"
+          mkdir -p base-specs
+
+          if [[ ! -s typespec-folders.txt ]]; then
+            exit 0
+          fi
+
+          while IFS= read -r folder; do
+            base_folder="base-specs/$folder"
+            mkdir -p "$base_folder"
+            # Extract the base version of the spec folder using git
+            git archive "$BASE_SHA" -- "$folder" 2>/dev/null | tar -x -C base-specs/ 2>/dev/null || {
+              echo "Warning: Could not extract base version of $folder (new folder?)"
+            }
+          done < typespec-folders.txt
+
       - name: Run TypeSpec Versioning Change analysis
         id: typespec-versioning-change-analyze
         shell: bash
         env:
           EMIT_ANNOTATIONS: ${{ github.event.action != 'edited' || github.event.changes.base != null }}
+          VERSIONING_CHANGE_APPROVED: ${{ steps.check-label.outputs.approved }}
         run: |
           if [[ ! -s typespec-folders.txt ]]; then
             {
@@ -68,20 +106,62 @@ jobs:
           fi
 
           has_errors=0
+          > "versioning-change-comment.md"
+
           for folder in "${spec_folders[@]}"; do
+            base_folder="base-specs/$folder"
+            folder_md="${folder//\//_}-versioning-report.md"
+            folder_json="${folder//\//_}-versioning-report.json"
+
+            base_flag=()
+            if [[ -d "$base_folder" ]]; then
+              base_flag=(--base "$base_folder")
+            fi
+
             node eng/tools/typespec-breaking-change/src/cli.js "$folder" \
+              "${base_flag[@]}" \
               --phase same-version \
-              --json-output "versioning-change-report.json" \
-              --markdown-output "$GITHUB_STEP_SUMMARY" \
+              --report-title "TypeSpec Versioning Change Analysis" \
+              --json-output "$folder_json" \
+              --markdown-output "$folder_md" \
               "${annotations_flag[@]}" \
               --fail-on-breaking || has_errors=1
+
+            if [[ -f "$folder_md" ]]; then
+              cat "$folder_md" >> "versioning-change-comment.md"
+              echo "" >> "versioning-change-comment.md"
+            fi
           done
+
+          # Copy to step summary
+          if [[ -f "versioning-change-comment.md" ]]; then
+            cat "versioning-change-comment.md" >> "$GITHUB_STEP_SUMMARY"
+          fi
 
           if [[ $has_errors -eq 1 ]]; then
             echo "breakingChangeReviewLabelName=VersioningReviewRequired" >> "$GITHUB_OUTPUT"
             echo "breakingChangeReviewLabelValue=true" >> "$GITHUB_OUTPUT"
+            if [[ "$VERSIONING_CHANGE_APPROVED" == "true" ]]; then
+              echo "Versioning changes detected but approved via VersioningChangeApproved label"
+              exit 0
+            fi
             exit 1
           fi
+
+      - name: Post PR comment
+        if: always() && hashFiles('versioning-change-comment.md') != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          # Delete previous comment from this workflow if it exists
+          COMMENT_ID=$(gh api "repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/comments" \
+            --jq '.[] | select(.user.login == "github-actions[bot]" and (.body | startswith("## TypeSpec Versioning"))) | .id' \
+            2>/dev/null | head -1)
+          if [[ -n "$COMMENT_ID" ]]; then
+            gh api -X DELETE "repos/${{ github.repository }}/issues/comments/$COMMENT_ID" 2>/dev/null || true
+          fi
+          gh pr comment "${{ github.event.pull_request.number }}" --body-file versioning-change-comment.md
 
       # Upload artifact for 'VersioningReviewRequired' label
       - if: |
