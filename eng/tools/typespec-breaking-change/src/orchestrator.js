@@ -47,7 +47,8 @@ export function analyzeProgram(program, options) {
     const suppressStart = Date.now();
     const suppressedFindings = applySuppressions(dedupedFindings, program);
     timing.suppressMs += Date.now() - suppressStart;
-    const findings = mergeRequestResponseToResource(suppressedFindings);
+    const merged = mergeRequestResponseToResource(suppressedFindings);
+    const findings = collapsePhaseADuplicates(merged);
     timing.totalMs = Date.now() - totalStart;
     const summary = buildSummary(servicesAnalyzed, comparisonsPerformed, versionComparisons, options);
     return { findings, timing, summary };
@@ -130,7 +131,8 @@ export function analyzeBaseAndHead(baseProgram, headProgram, options) {
     const suppressStart = Date.now();
     const suppressedFindings = applySuppressions(dedupedFindings, headProgram);
     timing.suppressMs += Date.now() - suppressStart;
-    const findings = mergeRequestResponseToResource(suppressedFindings);
+    const merged = mergeRequestResponseToResource(suppressedFindings);
+    const findings = collapsePhaseADuplicates(merged);
     timing.totalMs = Date.now() - totalStart;
     const summary = buildSummary(servicesAnalyzed, comparisonsPerformed, versionComparisons, options);
     return { findings, timing, summary };
@@ -318,5 +320,32 @@ function buildMergeKey(f, suffix) {
     const versionKey = `${f.versionPair.baseVersion}|${f.versionPair.headVersion}`;
     const suppressedKey = f.suppressed ? "s" : "u";
     return `${f.diff.identity.element}|${versionKey}|${suffix}|${suppressedKey}`;
+}
+/**
+ * Collapse Phase A findings that repeat across version pairs.
+ *
+ * In Phase A (same-version), an unversioned change like removing a property
+ * appears identically in every API version (e.g., once for 2021-10-01-preview
+ * and once for 2021-11-01). Since it's the same logical change, report it once.
+ *
+ * Only collapses findings with phase === "same-version". Phase B findings
+ * across different version pairs represent genuinely different comparisons.
+ */
+function collapsePhaseADuplicates(findings) {
+    const seen = new Set();
+    const result = [];
+    for (const f of findings) {
+        if (f.phase !== "same-version") {
+            result.push(f);
+            continue;
+        }
+        // For Phase A, dedup key excludes version pair — same element+kind = same change
+        const key = `${f.diff.kind}|${f.diff.identity.element}|${f.suppressed}`;
+        if (seen.has(key))
+            continue;
+        seen.add(key);
+        result.push(f);
+    }
+    return result;
 }
 //# sourceMappingURL=orchestrator.js.map
