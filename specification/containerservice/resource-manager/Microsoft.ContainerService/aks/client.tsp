@@ -111,6 +111,11 @@ using Microsoft.ContainerService;
   "count_ipv6",
   "python"
 );
+@@clientName(
+  ManagedClusterManagedOutboundIPProfile.countIPv6,
+  "count_ipv6",
+  "python"
+);
 
 @@clientName(
   ManagedClusterPodIdentityProvisioningError.error,
@@ -527,7 +532,6 @@ using Microsoft.ContainerService;
 );
 @@clientName(OutboundType, "ContainerServiceOutboundType", "csharp");
 @@clientName(OutboundType.managedNATGateway, "ManagedNatGateway", "csharp");
-@@clientName(OutboundType.managedNATGatewayV2, "ManagedNatGatewayV2", "csharp");
 @@clientName(
   OutboundType.userAssignedNATGateway,
   "UserAssignedNatGateway",
@@ -1110,11 +1114,6 @@ namespace Azure.ResourceManager.ContainerService.Models {
   "csharp"
 );
 @@clientName(
-  ManagedClusterAzureMonitorProfileContainerInsights.disableCustomMetrics,
-  "IsCustomMetricsDisabled",
-  "csharp"
-);
-@@clientName(
   ManagedClusterAzureMonitorProfileContainerInsights.disablePrometheusMetricsScraping,
   "IsPrometheusMetricsScrapingDisabled",
   "csharp"
@@ -1339,6 +1338,7 @@ namespace Azure.ResourceManager.ContainerService.Models {
 @@scope(ManagedClusters.operationStatusResultList, "!csharp");
 @@scope(ManagedClusters.operationStatusResultGet, "!csharp");
 @@scope(AgentPools.getByAgentPool, "!csharp");
+@@scope(AgentPools.listByAgentPool, "!csharp");
 @@scope(Operations.list, "!csharp");
 
 // we add this model in this namespace in order to replace some models with this model via alternateType decorator
