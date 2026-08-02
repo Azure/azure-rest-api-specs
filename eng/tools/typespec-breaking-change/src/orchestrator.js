@@ -10,6 +10,7 @@ export function analyzeProgram(program, options) {
     const totalStart = Date.now();
     const timing = createEmptyTiming();
     const allFindings = [];
+    const versionComparisons = [];
     let servicesAnalyzed = 0;
     let comparisonsPerformed = 0;
     for (const service of enumerateVersions(program)) {
@@ -17,6 +18,7 @@ export function analyzeProgram(program, options) {
             continue;
         }
         servicesAnalyzed++;
+        options?.log?.(`Analyzing service: ${service.service.name} (${service.versions.length} versions)`);
         if (options?.phase === "same-version") {
             continue;
         }
@@ -27,17 +29,27 @@ export function analyzeProgram(program, options) {
         for (const pair of pairs) {
             const baseView = timeVersionedView(program, service.service, pair.baseVersion, timing);
             const headView = timeVersionedView(program, service.service, pair.headVersion, timing);
-            allFindings.push(...analyzePair(baseView, headView, pair, timing));
+            const findings = analyzePair(baseView, headView, pair, timing);
+            allFindings.push(...findings);
+            versionComparisons.push({
+                serviceName: service.service.name,
+                baseVersion: pair.baseVersion,
+                headVersion: pair.headVersion,
+                phase: pair.phase,
+                findingCount: findings.length,
+            });
+            options?.log?.(`  Phase B: ${pair.baseVersion} \u2192 ${pair.headVersion} \u2014 ${formatComparisonResult(findings.length)}`);
         }
     }
     const dedupStart = Date.now();
     const dedupedFindings = deduplicateBySourceType(allFindings);
     timing.classifyMs += Date.now() - dedupStart;
     const suppressStart = Date.now();
-    const findings = applySuppressions(dedupedFindings, program);
+    const suppressedFindings = applySuppressions(dedupedFindings, program);
     timing.suppressMs += Date.now() - suppressStart;
+    const findings = mergeRequestResponseToResource(suppressedFindings);
     timing.totalMs = Date.now() - totalStart;
-    const summary = buildSummary(servicesAnalyzed, comparisonsPerformed, options);
+    const summary = buildSummary(servicesAnalyzed, comparisonsPerformed, versionComparisons, options);
     return { findings, timing, summary };
 }
 /**
@@ -47,6 +59,7 @@ export function analyzeBaseAndHead(baseProgram, headProgram, options) {
     const totalStart = Date.now();
     const timing = createEmptyTiming();
     const allFindings = [];
+    const versionComparisons = [];
     let servicesAnalyzed = 0;
     let comparisonsPerformed = 0;
     const baseServices = enumerateVersions(baseProgram);
@@ -55,6 +68,7 @@ export function analyzeBaseAndHead(baseProgram, headProgram, options) {
             continue;
         }
         servicesAnalyzed++;
+        options?.log?.(`Analyzing service: ${headService.service.name} (${headService.versions.length} versions)`);
         const baseService = baseServices.find((candidate) => candidate.service.name === headService.service.name);
         const changedVersions = [];
         if (!options?.phase || options.phase === "same-version") {
@@ -69,6 +83,14 @@ export function analyzeBaseAndHead(baseProgram, headProgram, options) {
                 const baseView = timeVersionedView(baseProgram, baseService.service, pair.baseVersion, timing);
                 const headView = timeVersionedView(headProgram, headService.service, pair.headVersion, timing);
                 const findings = analyzePair(baseView, headView, pair, timing);
+                versionComparisons.push({
+                    serviceName: headService.service.name,
+                    baseVersion: pair.baseVersion,
+                    headVersion: pair.headVersion,
+                    phase: pair.phase,
+                    findingCount: findings.length,
+                });
+                options?.log?.(`  Phase A: ${pair.headVersion} (base \u2192 head) \u2014 ${formatComparisonResult(findings.length)}`);
                 if (findings.length > 0) {
                     changedVersions.push(pair.headVersion);
                     allFindings.push(...findings);
@@ -88,7 +110,16 @@ export function analyzeBaseAndHead(baseProgram, headProgram, options) {
                 for (const pair of phaseBPairs) {
                     const baseView = timeVersionedView(headProgram, headService.service, pair.baseVersion, timing);
                     const headView = timeVersionedView(headProgram, headService.service, pair.headVersion, timing);
-                    allFindings.push(...analyzePair(baseView, headView, pair, timing));
+                    const findings = analyzePair(baseView, headView, pair, timing);
+                    allFindings.push(...findings);
+                    versionComparisons.push({
+                        serviceName: headService.service.name,
+                        baseVersion: pair.baseVersion,
+                        headVersion: pair.headVersion,
+                        phase: pair.phase,
+                        findingCount: findings.length,
+                    });
+                    options?.log?.(`  Phase B: ${pair.baseVersion} \u2192 ${pair.headVersion} \u2014 ${formatComparisonResult(findings.length)}`);
                 }
             }
         }
@@ -97,10 +128,11 @@ export function analyzeBaseAndHead(baseProgram, headProgram, options) {
     const dedupedFindings = deduplicateBySourceType(allFindings);
     timing.classifyMs += Date.now() - dedupStart;
     const suppressStart = Date.now();
-    const findings = applySuppressions(dedupedFindings, headProgram);
+    const suppressedFindings = applySuppressions(dedupedFindings, headProgram);
     timing.suppressMs += Date.now() - suppressStart;
+    const findings = mergeRequestResponseToResource(suppressedFindings);
     timing.totalMs = Date.now() - totalStart;
-    const summary = buildSummary(servicesAnalyzed, comparisonsPerformed, options);
+    const summary = buildSummary(servicesAnalyzed, comparisonsPerformed, versionComparisons, options);
     return { findings, timing, summary };
 }
 function analyzePair(baseView, headView, versionPair, timing) {
@@ -135,10 +167,12 @@ function createEmptyTiming() {
         totalMs: 0,
     };
 }
-function buildSummary(servicesAnalyzed, comparisonsPerformed, options) {
+function buildSummary(servicesAnalyzed, comparisonsPerformed, versionComparisons = [], options) {
     const summary = {
         servicesAnalyzed,
         comparisonsPerformed,
+        phase: options?.phase,
+        versionComparisons,
     };
     if (comparisonsPerformed === 0) {
         if (servicesAnalyzed === 0) {
@@ -154,6 +188,9 @@ function buildSummary(servicesAnalyzed, comparisonsPerformed, options) {
         }
     }
     return summary;
+}
+function formatComparisonResult(findingCount) {
+    return findingCount === 0 ? "no changes" : `${findingCount} finding${findingCount === 1 ? "" : "s"}`;
 }
 /**
  * Deduplicate findings that trace back to the same source type declaration.
@@ -201,5 +238,85 @@ function deduplicateBySourceType(findings) {
         result.push(f);
     }
     return result;
+}
+/**
+ * Mapping from Request/Response property kind suffixes to their Resource equivalent.
+ */
+const REQUEST_RESPONSE_PAIRS = {
+    PropertyAdded: "ResourcePropertyAdded",
+    PropertyRemoved: "ResourcePropertyRemoved",
+    PropertyRenamed: "ResourcePropertyRenamed",
+    PropertyTypeChanged: "ResourcePropertyTypeChanged",
+    PropertyTypeNarrowed: "ResourcePropertyTypeNarrowed",
+    PropertyTypeWidened: "ResourcePropertyTypeWidened",
+    PropertyMadeRequired: "ResourcePropertyMadeRequired",
+    PropertyMadeOptional: "ResourcePropertyMadeOptional",
+};
+/**
+ * Merge matching Request + Response findings into single Resource findings.
+ *
+ * When the same model property appears in both request and response bodies
+ * (common in ARM resources using TrackedResource<T>), the diff engine produces
+ * separate Request* and Response* findings. This merges them into a single
+ * Resource* finding to reduce noise.
+ *
+ * Match criteria: same AST node (or element path), same version pair,
+ * and kinds are the Request/Response pair (e.g., RequestPropertyRemoved +
+ * ResponsePropertyRemoved → ResourcePropertyRemoved).
+ */
+function mergeRequestResponseToResource(findings) {
+    const result = [];
+    const consumed = new Set();
+    // Index Response findings by (element + version + suffix + suppressed)
+    const responseIndex = new Map();
+    for (const f of findings) {
+        if (!f.diff.kind.startsWith("Response"))
+            continue;
+        const suffix = getPropertySuffix(f.diff.kind, "Response");
+        if (!suffix || !REQUEST_RESPONSE_PAIRS[suffix])
+            continue;
+        const key = buildMergeKey(f, suffix);
+        if (key)
+            responseIndex.set(key, f);
+    }
+    // First pass: find all Request findings that have a Response match
+    for (const f of findings) {
+        if (!f.diff.kind.startsWith("Request"))
+            continue;
+        const suffix = getPropertySuffix(f.diff.kind, "Request");
+        if (!suffix || !REQUEST_RESPONSE_PAIRS[suffix])
+            continue;
+        const key = buildMergeKey(f, suffix);
+        if (key) {
+            const match = responseIndex.get(key);
+            if (match && match.suppressed === f.suppressed) {
+                // Mark both as consumed, emit a Resource finding
+                consumed.add(f);
+                consumed.add(match);
+                const merged = {
+                    ...f,
+                    diff: { ...f.diff, kind: REQUEST_RESPONSE_PAIRS[suffix] },
+                };
+                result.push(merged);
+            }
+        }
+    }
+    // Second pass: emit all non-consumed findings in original order
+    for (const f of findings) {
+        if (!consumed.has(f)) {
+            result.push(f);
+        }
+    }
+    return result;
+}
+function getPropertySuffix(kind, prefix) {
+    if (!kind.startsWith(prefix))
+        return undefined;
+    return kind.substring(prefix.length);
+}
+function buildMergeKey(f, suffix) {
+    const versionKey = `${f.versionPair.baseVersion}|${f.versionPair.headVersion}`;
+    const suppressedKey = f.suppressed ? "s" : "u";
+    return `${f.diff.identity.element}|${versionKey}|${suffix}|${suppressedKey}`;
 }
 //# sourceMappingURL=orchestrator.js.map

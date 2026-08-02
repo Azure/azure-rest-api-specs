@@ -51,7 +51,11 @@ function formatSummary(result) {
     const errors = countErrors(result.findings);
     const suppressed = countSuppressed(result.findings);
     const ignored = countIgnored(result.findings);
-    return `Results: ${errors} errors, ${suppressed} suppressed, ${ignored} ignored`;
+    if (errors === 0) {
+        return formatNoFindingsSummary(result);
+    }
+    const phaseSuffix = result.summary.phase ? ` (${result.summary.phase})` : "";
+    return `Results: ${errors} errors, ${suppressed} suppressed, ${ignored} ignored${phaseSuffix}`;
 }
 function formatTiming(result) {
     const compileMs = result.timing.compileBaseMs + result.timing.compileHeadMs;
@@ -87,5 +91,17 @@ function formatLocation(location) {
 }
 function formatDuration(ms) {
     return `${(ms / 1000).toFixed(1)}s`;
+}
+function formatNoFindingsSummary(result) {
+    const pairCount = result.summary.comparisonsPerformed;
+    const pairLabel = `${pairCount} version pair${pairCount === 1 ? "" : "s"} compared`;
+    switch (result.summary.phase) {
+        case "same-version":
+            return `✅ No unversioned changes found (${pairLabel})`;
+        case "cross-version":
+            return `✅ No cross-version breaking changes found (${pairLabel})`;
+        default:
+            return `✅ No breaking changes found (${pairLabel})`;
+    }
 }
 //# sourceMappingURL=reporter-console.js.map

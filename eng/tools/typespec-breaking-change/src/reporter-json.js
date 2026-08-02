@@ -16,6 +16,13 @@ export function formatJsonReport(result, options) {
             servicesAnalyzed: result.summary.servicesAnalyzed,
             comparisonsPerformed: result.summary.comparisonsPerformed,
         },
+        summary: {
+            servicesAnalyzed: result.summary.servicesAnalyzed,
+            comparisonsPerformed: result.summary.comparisonsPerformed,
+            phase: result.summary.phase,
+            versionComparisons: result.summary.versionComparisons ?? [],
+            noComparisonReason: result.summary.noComparisonReason,
+        },
         noComparisonReason: result.summary.noComparisonReason,
         findings: result.findings.map(mapFinding),
         timing: result.timing,

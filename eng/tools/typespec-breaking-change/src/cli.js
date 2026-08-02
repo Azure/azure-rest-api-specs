@@ -154,6 +154,7 @@ export async function main(args) {
     const analysisOptions = {
         serviceName: options.service,
         phase: options.phase,
+        log: (message) => console.log(message),
     };
     try {
         let result;

@@ -69,6 +69,14 @@ const PHASE_B_RULES = {
     DefaultValueAdded: { severity: "ignore", rule: "default-value-change" },
     DefaultValueRemoved: { severity: "ignore", rule: "default-value-change" },
     DefaultValueChanged: { severity: "ignore", rule: "default-value-change" },
+    ResourcePropertyAdded: { severity: "error", rule: "resource-contract-change" },
+    ResourcePropertyRemoved: { severity: "error", rule: "resource-contract-change" },
+    ResourcePropertyRenamed: { severity: "error", rule: "resource-contract-change" },
+    ResourcePropertyTypeChanged: { severity: "error", rule: "resource-contract-change" },
+    ResourcePropertyTypeNarrowed: { severity: "error", rule: "resource-contract-change" },
+    ResourcePropertyTypeWidened: { severity: "error", rule: "resource-contract-change" },
+    ResourcePropertyMadeRequired: { severity: "error", rule: "resource-contract-change" },
+    ResourcePropertyMadeOptional: { severity: "error", rule: "resource-contract-change" },
 };
 /**
  * Classify an array of diffs into findings based on phase and directional rules.

@@ -28,7 +28,7 @@ export function renderMarkdownSummary(result, options) {
     }
     // Status badge
     if (errors.length === 0 && suppressed.length === 0) {
-        lines.push("✅ **No breaking changes detected**");
+        lines.push(`✅ **${formatNoFindingsMessage(result.summary.phase, result.summary.comparisonsPerformed)}**`);
     }
     else if (errors.length === 0) {
         lines.push(`⚠️ **${suppressed.length} new suppressed breaking change${suppressed.length === 1 ? "" : "s"}** — review required`);
@@ -76,6 +76,19 @@ export function renderMarkdownSummary(result, options) {
             const reason = esc(finding.suppressionReason ?? "—");
             lines.push(`| ${kind} | ${identity} | ${reason} |`);
         }
+    }
+    if (result.summary.versionComparisons.length > 0) {
+        lines.push("");
+        lines.push("<details>");
+        lines.push("<summary>Version Comparisons</summary>");
+        lines.push("");
+        lines.push("| Service | Version Pair | Phase | Result |");
+        lines.push("|---------|-------------|-------|--------|");
+        for (const comparison of result.summary.versionComparisons) {
+            lines.push(`| ${esc(comparison.serviceName)} | ${esc(formatComparisonPair(comparison.phase, comparison.baseVersion, comparison.headVersion))} | ${esc(comparison.phase)} | ${formatComparisonResult(comparison.findingCount)} |`);
+        }
+        lines.push("");
+        lines.push("</details>");
     }
     // Timing (collapsed)
     if (options?.showTiming) {
@@ -150,5 +163,27 @@ function fmtMs(ms) {
 }
 function esc(value) {
     return value.replace(/\|/g, "\\|").replace(/\r?\n/g, " ");
+}
+function formatNoFindingsMessage(phase, comparisonsPerformed) {
+    const pairLabel = `${comparisonsPerformed} version pair${comparisonsPerformed === 1 ? "" : "s"} compared`;
+    switch (phase) {
+        case "same-version":
+            return `No unversioned changes found (${pairLabel})`;
+        case "cross-version":
+            return `No cross-version breaking changes found (${pairLabel})`;
+        default:
+            return `No breaking changes found (${pairLabel})`;
+    }
+}
+function formatComparisonPair(phase, baseVersion, headVersion) {
+    if (phase === "same-version") {
+        return `${headVersion} (base → head)`;
+    }
+    return `${baseVersion} → ${headVersion}`;
+}
+function formatComparisonResult(findingCount) {
+    return findingCount === 0
+        ? "✅ No changes"
+        : `❌ ${findingCount} finding${findingCount === 1 ? "" : "s"}`;
 }
 //# sourceMappingURL=reporter-markdown.js.map
