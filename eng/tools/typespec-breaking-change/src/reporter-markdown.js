@@ -53,7 +53,7 @@ export function renderMarkdownSummary(result, options) {
         lines.push("| Kind | Identity | Versions | Suppression |");
         lines.push("|------|----------|----------|-------------|");
         for (const finding of errors) {
-            const kind = fmtKindLink(finding.diff.kind, options);
+            const kind = fmtKindLink(finding.diff.kind, finding.phase, options);
             const identity = fmtIdentityLink(finding, options);
             const versions = esc(fmtVer(finding));
             const hint = esc(formatSuppressionHint(finding));
@@ -71,7 +71,7 @@ export function renderMarkdownSummary(result, options) {
         lines.push("| Kind | Identity | Reason |");
         lines.push("|------|----------|--------|");
         for (const finding of suppressed) {
-            const kind = fmtKindLink(finding.diff.kind, options);
+            const kind = fmtKindLink(finding.diff.kind, finding.phase, options);
             const identity = fmtIdentityLink(finding, options);
             const reason = esc(finding.suppressionReason ?? "—");
             lines.push(`| ${kind} | ${identity} | ${reason} |`);
@@ -91,10 +91,12 @@ export function renderMarkdownSummary(result, options) {
     return lines.join("\n");
 }
 /** Format a DiffKind as a link to the violations reference docs. */
-function fmtKindLink(kind, options) {
+function fmtKindLink(kind, phase, options) {
     const baseUrl = options?.violationsReferenceUrl ?? DEFAULT_VIOLATIONS_REF_URL;
-    // Link to the Phase B summary table which lists all kinds
-    return `[\`${esc(kind)}\`](${baseUrl}#phase-b-detailed-reference)`;
+    const anchor = phase === "same-version"
+        ? "#phase-a-same-version-findings-are-projection-bugs-not-breaking-change-classifications"
+        : "#phase-b-detailed-reference";
+    return `[\`${esc(kind)}\`](${baseUrl}${anchor})`;
 }
 /** Format the identity as a link to the source file, or plain text if no link available. */
 function fmtIdentityLink(finding, options) {
@@ -128,6 +130,8 @@ function buildSourceUrl(location, options) {
     if (filePath.includes("node_modules/") || filePath.startsWith("/")) {
         return undefined;
     }
+    // Strip ".base" suffix from directory names (artifact of Phase A in-place compilation)
+    filePath = filePath.replace(/\.base([/\\])/g, "$1");
     const line = getLineNumber(location);
     const lineAnchor = line > 0 ? `#L${line}` : "";
     return `${server}/${options.githubRepository}/blob/${sha}/${filePath}${lineAnchor}`;
