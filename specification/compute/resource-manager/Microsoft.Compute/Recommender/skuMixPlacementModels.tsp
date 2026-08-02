@@ -227,7 +227,7 @@ model SkuMixPlacementItem {
   /** Lower range of recommended allocation capacity. */
   capacity: int32;
 
-  /** Upper range of recommended allocation capacity. Omitted when the calling client is ARM. */
+  /** Upper range of recommended allocation capacity. */
   capacityMax?: int32;
 
   /** Logical zone (e.g. "1", "2", "3"). Omitted or empty for regional deployments. */
