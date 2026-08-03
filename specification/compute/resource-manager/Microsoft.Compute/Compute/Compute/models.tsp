@@ -5772,7 +5772,7 @@ model ManagedDiskProperties {
   networkAccessPolicy?: NetworkAccessPolicy;
 
   /**
-   * ARM id of the DiskAccess resource for using private endpoints on disks.
+   * Azure resource Id of the DiskAccess resource for using private endpoints on disks.
    */
   diskAccessId?: string;
 
