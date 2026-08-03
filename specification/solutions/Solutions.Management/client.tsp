@@ -74,11 +74,7 @@ using Microsoft.Solutions;
 @@clientName(PlanPatchable, "ManagedApplicationsPlanPatch", "csharp");
 @@clientName(Status, "JitRequestStatus", "csharp");
 @@clientName(Substatus, "JitRequestSubstatus", "csharp");
-@@clientName(
-  RegistryPackage,
-  "ManagedApplicationsRegistryPackage",
-  "csharp"
-);
+@@clientName(RegistryPackage, "ManagedApplicationsRegistryPackage", "csharp");
 @@clientName(
   RegistryPackageLinks,
   "ManagedApplicationsRegistryPackageLinks",
