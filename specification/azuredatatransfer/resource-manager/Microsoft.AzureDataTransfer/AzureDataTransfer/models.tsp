@@ -850,49 +850,6 @@ model PipelineProperties {
 }
 
 /**
- * Connection body inside a pipeline
- */
-model PipelineConnection {
-  ...Record<unknown>;
-
-  /**
-   * Connection id inside pipeline
-   */
-  @visibility(Lifecycle.Read)
-  id: string;
-
-  /**
-   * Connection name inside pipeline
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * Connection type inside pipeline
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-
-  /**
-   * Connection location inside pipeline
-   */
-  @visibility(Lifecycle.Read)
-  location?: string;
-
-  /**
-   * Connection etag inside pipeline
-   */
-  @visibility(Lifecycle.Read)
-  etag?: string;
-
-  /**
-   * Metadata pertaining to creation and last modification of the resource.
-   */
-  @visibility(Lifecycle.Read)
-  systemData?: SystemData;
-}
-
-/**
  * Internal metadata of the connection inside pipeline.
  */
 model InternalMetadataProperties {
