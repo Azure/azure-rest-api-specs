@@ -207,6 +207,23 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 @@access(Storage.Blob.BlockBlob.upload, Access.internal, "rust");
 @@clientName(Storage.Blob.Blob.download, "download_internal", "rust");
 @@access(Storage.Blob.Blob.download, Access.internal, "rust");
+
+// Rust: hide the generated list operations; handwritten `list_blobs`/`list_blobs_raw` in
+// `clients/blob_container_client.rs` select the `accept` format and decode the raw Arrow/XML body.
+@@clientName(Storage.Blob.Container.listBlobs, "list_blobs_internal", "rust");
+@@access(Storage.Blob.Container.listBlobs, Access.internal, "rust");
+@@clientName(
+  Storage.Blob.Container.listBlobFlatSegmentApacheArrow,
+  "list_blobs_arrow_internal",
+  "rust"
+);
+@@access(Storage.Blob.Container.listBlobFlatSegmentApacheArrow, Access.internal, "rust");
+@@clientName(
+  Storage.Blob.Container.listBlobHierarchySegmentApacheArrow,
+  "list_blobs_hierarchical_arrow_internal",
+  "rust"
+);
+@@access(Storage.Blob.Container.listBlobHierarchySegmentApacheArrow, Access.internal, "rust");
 @@clientName(Storage.Blob.Service.findBlobsByTags, "findBlobsByTags", "rust");
 @@clientName(Storage.Blob.Container.findBlobsByTags, "findBlobsByTags", "rust");
 @@clientName(
@@ -1265,6 +1282,42 @@ op uploadPagesNoStructuredMessage is StorageOperationRequestBody<
 >;
 
 @@override(PageBlob.uploadPages, uploadPagesNoStructuredMessage, "rust");
+
+/** ----- Rust: settable-accept variant of the flat Apache Arrow list, so the handwritten
+ * convenience layer passes the `accept` value that the internal method sends and then decodes
+ * the raw Arrow/XML response. Replaces the spec's constant `accept` header with a settable one. ----- */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Keeping operation shape inline with existing service patterns"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Keeping operation shape inline with existing service patterns"
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Fixed set of content types returned by the service"
+@get
+@sharedRoute
+@route("?restype=container&comp=list")
+op listBlobFlatSegmentApacheArrowSettableAccept is StorageOperationResponseBody<
+  {
+    /** The Accept header indicating the desired response format: an Apache Arrow stream, falling back to XML. */
+    #suppress "@typespec/http/content-type-ignored" "Raw response, deserialized by client"
+    @header("accept")
+    accept: string;
+
+    ...PrefixParameter;
+    ...MarkerParameter;
+    ...MaxResultsParameter;
+    ...ListBlobsIncludeParameter;
+    ...TimeoutParameter;
+    ...ListBlobsStartFrom;
+    ...ListBlobsEndBefore;
+  },
+  {
+    @body body: bytes;
+  },
+  "application/vnd.apache.arrow.stream" | "application/xml"
+>;
+
+@@override(
+  Storage.Blob.Container.listBlobFlatSegmentApacheArrow,
+  listBlobFlatSegmentApacheArrowSettableAccept,
+  "rust"
+);
 
 /** An HTTP byte range, e.g. "bytes=0-1023". */
 @alternateType(
