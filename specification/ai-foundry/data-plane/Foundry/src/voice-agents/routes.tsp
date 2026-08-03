@@ -61,7 +61,7 @@ interface AgentEndpointConversations {
       /** The id of the conversation to delete. */
       @path conversation_id: string;
     },
-    VoiceDeletedConversation
+    NoContentResponse
   >;
 
   /**
@@ -310,7 +310,7 @@ interface VoiceAgents {
   createVoiceAgent is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     CreateVoiceAgentRequest,
-    VoiceAgentObject
+    ResourceCreatedResponse<VoiceAgentObject>
   >;
 
   /**
@@ -383,7 +383,7 @@ interface VoiceAgents {
       /** The name of the voice agent to delete. */
       @path agent_name: string;
     },
-    DeleteAgentResponse
+    NoContentResponse
   >;
 
   /**
@@ -531,6 +531,6 @@ interface VoiceAgents {
       /** The version of the voice agent to delete. */
       @path agent_version: string;
     },
-    DeleteAgentVersionResponse
+    NoContentResponse
   >;
 }

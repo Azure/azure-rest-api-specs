@@ -173,11 +173,11 @@ model VoiceAudioInputConfig {
   @doc("Input noise reduction. Set to null to disable.")
   noise_reduction?: VoiceNoiseReduction | null;
 
-  @doc("Turn (end-of-speech) detection. Set to null to disable server-side turn detection.")
+  @doc("Turn (end-of-speech) detection. Server-side turn detection is enabled by default; set to null to disable it, in which case the client must trigger responses manually.")
   turn_detection?: VoiceTurnDetection | null;
 
-  @doc("Optional asynchronous input-audio transcription configuration.")
-  transcription?: VoiceInputTranscription;
+  @doc("Asynchronous input-audio transcription. Set to null to disable transcription.")
+  transcription?: VoiceInputTranscription | null;
 }
 
 @doc("Output audio configuration for a voice agent.")
@@ -238,72 +238,207 @@ union VoiceNoiseReductionType {
   azure_deep_noise_suppression: "azure_deep_noise_suppression",
 }
 
-@doc("Turn (end-of-speech) detection configuration.")
-@discriminator("type")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
-model VoiceTurnDetection {
-  @doc("The turn detection strategy.")
-  type: VoiceTurnDetectionType;
-}
-
-@doc("The turn detection strategy. Values follow the OpenAI Realtime wire schema.")
+@doc("The turn-detection strategy. Additional values may be added over time.")
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
 union VoiceTurnDetectionType {
   string,
+
+  @doc("Server-side voice activity detection.")
   server_vad: "server_vad",
+
+  @doc("Semantic voice activity detection.")
   semantic_vad: "semantic_vad",
+
+  @doc("Azure semantic voice activity detection.")
+  azure_semantic_vad: "azure_semantic_vad",
+
+  @doc("English-optimized Azure semantic voice activity detection.")
+  azure_semantic_vad_en: "azure_semantic_vad_en",
+
+  @doc("Multilingual Azure semantic voice activity detection.")
+  azure_semantic_vad_multilingual: "azure_semantic_vad_multilingual",
 }
 
-@doc("Server-side voice activity detection (silence-based).")
+@doc("Turn-detection configuration for a voice agent.")
+@discriminator("type")
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
-model ServerVadTurnDetection extends VoiceTurnDetection {
-  type: VoiceTurnDetectionType.server_vad;
+model VoiceTurnDetection {
+  @doc("The turn-detection strategy.")
+  type: VoiceTurnDetectionType;
+}
 
-  @doc("Activation threshold (0-1). Higher requires louder audio to trigger.")
+@doc("Server-side voice activity detection.")
+@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+model VoiceServerVadTurnDetection extends VoiceTurnDetection {
+  ...OmitProperties<OpenAI.RealtimeTurnDetectionServerVad, "type">;
+  type: VoiceTurnDetectionType.server_vad;
+}
+
+@doc("Semantic voice activity detection.")
+@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+model VoiceSemanticVadTurnDetection extends VoiceTurnDetection {
+  ...OmitProperties<OpenAI.RealtimeTurnDetectionSemanticVad, "type">;
+  type: VoiceTurnDetectionType.semantic_vad;
+}
+
+@doc("The semantic end-of-utterance detection model.")
+@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+union VoiceEndOfUtteranceDetectionModel {
+  string,
+  semantic_detection_v1: "semantic_detection_v1",
+  semantic_detection_v1_en: "semantic_detection_v1_en",
+  semantic_detection_v1_multilingual: "semantic_detection_v1_multilingual",
+}
+
+@doc("The sensitivity threshold for semantic end-of-utterance detection.")
+@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+union VoiceEndOfUtteranceThresholdLevel {
+  string,
+  low: "low",
+  medium: "medium",
+  high: "high",
+  default: "default",
+}
+
+@doc("Semantic end-of-utterance detection configuration.")
+@discriminator("model")
+@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+model VoiceEndOfUtteranceDetection {
+  @doc("The semantic detection model.")
+  `model`: VoiceEndOfUtteranceDetectionModel;
+}
+
+alias VoiceAzureSemanticDetectionOptions = {
+  @doc("The sensitivity threshold.")
+  threshold_level?: VoiceEndOfUtteranceThresholdLevel;
+
+  @doc("The detection timeout in milliseconds.")
+  @minValue(0)
+  timeout_ms?: int32;
+};
+
+@doc("Default Azure semantic end-of-utterance detection.")
+model VoiceAzureSemanticDetection extends VoiceEndOfUtteranceDetection {
+  `model`: VoiceEndOfUtteranceDetectionModel.semantic_detection_v1;
+  ...VoiceAzureSemanticDetectionOptions;
+}
+
+@doc("English-optimized Azure semantic end-of-utterance detection.")
+model VoiceAzureSemanticDetectionEn extends VoiceEndOfUtteranceDetection {
+  `model`: VoiceEndOfUtteranceDetectionModel.semantic_detection_v1_en;
+  ...VoiceAzureSemanticDetectionOptions;
+}
+
+@doc("Multilingual Azure semantic end-of-utterance detection.")
+model VoiceAzureSemanticDetectionMultilingual
+  extends VoiceEndOfUtteranceDetection {
+  `model`: VoiceEndOfUtteranceDetectionModel.semantic_detection_v1_multilingual;
+  ...VoiceAzureSemanticDetectionOptions;
+}
+
+alias VoiceAzureSemanticVadOptions = {
+  @doc("Activation threshold for voice activity detection, from 0 to 1.")
   @minValue(0)
   @maxValue(1)
   threshold?: float32;
 
-  @doc("Audio (ms) to include before detected speech start.")
+  @doc("Audio to include before detected speech, in milliseconds.")
   prefix_padding_ms?: int32;
 
-  @doc("Silence (ms) used to detect speech stop.")
+  @doc("Silence required to end speech detection, in milliseconds.")
   silence_duration_ms?: int32;
 
-  @doc("Whether the server automatically creates a response when a turn ends. Defaults to true.")
-  create_response?: boolean = true;
+  @doc("Semantic end-of-utterance detection configuration.")
+  end_of_utterance_detection?: VoiceEndOfUtteranceDetection;
+
+  @doc("Minimum speech duration required to trigger detection, in milliseconds.")
+  speech_duration_ms?: int32;
+
+  @doc("Whether filler words are removed from transcription.")
+  remove_filler_words?: boolean = false;
+
+  @doc("Whether the input audio buffer is truncated automatically when speech stops.")
+  auto_truncate?: boolean = false;
+
+  @doc("Whether a response is created automatically when speech stops.")
+  create_response?: boolean = false;
+
+  @doc("Whether user speech may interrupt the agent's response.")
+  interrupt_response?: boolean = false;
+};
+
+@doc("Azure semantic voice activity detection.")
+@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+model VoiceAzureSemanticVadTurnDetection extends VoiceTurnDetection {
+  type: VoiceTurnDetectionType.azure_semantic_vad;
+  ...VoiceAzureSemanticVadOptions;
+
+  @doc("BCP-47 language codes used for speech detection.")
+  languages?: string[];
 }
 
-@doc("Semantic (model-based) turn detection.")
+@doc("English-optimized Azure semantic voice activity detection.")
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
-model SemanticVadTurnDetection extends VoiceTurnDetection {
-  type: VoiceTurnDetectionType.semantic_vad;
-
-  @doc("How eagerly the model ends the user's turn.")
-  eagerness?: VoiceTurnDetectionEagerness;
+model VoiceAzureSemanticVadEnTurnDetection extends VoiceTurnDetection {
+  type: VoiceTurnDetectionType.azure_semantic_vad_en;
+  ...VoiceAzureSemanticVadOptions;
 }
 
-@doc("How eagerly semantic turn detection ends the user's turn.")
+@doc("Multilingual Azure semantic voice activity detection.")
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
-union VoiceTurnDetectionEagerness {
+model VoiceAzureSemanticVadMultilingualTurnDetection
+  extends VoiceTurnDetection {
+  type: VoiceTurnDetectionType.azure_semantic_vad_multilingual;
+  ...VoiceAzureSemanticVadOptions;
+
+  @doc("BCP-47 language codes used for speech detection.")
+  languages?: string[];
+}
+
+@doc("""
+  The input-audio transcription model. Mirrors the transcription models supported by the managed
+  voice backend, covering the OpenAI Realtime transcription models plus the Azure and MAI models.
+  Additional values may be added over time.
+  """)
+@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+union VoiceInputTranscriptionModel {
   string,
-  auto: "auto",
-  low: "low",
-  medium: "medium",
-  high: "high",
+
+  @doc("OpenAI Whisper.")
+  whisper_1: "whisper-1",
+
+  @doc("OpenAI GPT-4o transcribe.")
+  gpt_4o_transcribe: "gpt-4o-transcribe",
+
+  @doc("OpenAI GPT-4o mini transcribe.")
+  gpt_4o_mini_transcribe: "gpt-4o-mini-transcribe",
+
+  @doc("OpenAI GPT-4o transcribe with speaker diarization.")
+  gpt_4o_transcribe_diarize: "gpt-4o-transcribe-diarize",
+
+  @doc("MAI transcription.")
+  mai_transcribe: "mai-transcribe",
+
+  @doc("Azure AI Speech to text.")
+  azure_speech: "azure-speech",
 }
 
-@doc("Asynchronous input-audio transcription configuration.")
+@doc("""
+  Asynchronous input-audio transcription configuration. Extends the OpenAI Realtime transcription
+  options with the Azure and MAI transcription models, custom speech models, and phrase hints.
+  """)
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
 model VoiceInputTranscription {
-  @doc("The transcription model deployment to use.")
-  `model`?: string;
+  ...OmitProperties<OpenAI.AudioTranscription, "model">;
 
-  @doc("The expected input language as a BCP-47 code (e.g. 'en-US'). Auto-detected when omitted.")
-  language?: string;
+  @doc("The transcription model to use.")
+  `model`?: VoiceInputTranscriptionModel;
 
-  @doc("Optional prompt to bias transcription toward domain terms.")
-  prompt?: string;
+  @doc("Optional custom speech model configuration, keyed by locale.")
+  custom_speech?: Record<string>;
+
+  @doc("Optional phrase hints that bias recognition toward domain terms.")
+  phrase_list?: string[];
 }
 
 @doc("A typed voice configuration accepted by a voice agent.")
@@ -577,8 +712,8 @@ model VoiceAvatarConfig {
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
 union VoiceAvatarType {
   string,
-  video_avatar: "video-avatar",
-  photo_avatar: "photo-avatar",
+  video_avatar: "video_avatar",
+  photo_avatar: "photo_avatar",
 }
 
 @doc("The transport used to deliver the avatar video stream.")
