@@ -149,10 +149,10 @@ interface ItemLevelRecoveryConnections {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Synchronous action that returns the mount scripts in the 200 response body."
   @added(Versions.v2026_08_01)
-  @action("listMountScripts")
-  listMountScripts is ArmResourceActionSync<
+  @action("fetchInstantItemRecoveryOperationResult")
+  fetchInstantItemRecoveryOperationResult is ArmResourceActionSync<
     RecoveryPointResource,
-    ListMountScriptsRequestResource,
+    InstantItemRecoveryOperationResultRequestResource,
     ArmResponse<InstantItemRecoveryTarget>
   >;
 }

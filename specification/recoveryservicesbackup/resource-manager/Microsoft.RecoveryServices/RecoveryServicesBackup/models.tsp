@@ -3110,25 +3110,25 @@ model ILRRequest {
 }
 
 /**
- * Request resource wrapping the parameters for the listMountScripts action.
+ * Request resource wrapping the parameters for the fetchInstantItemRecoveryOperationResult action.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Mirrors the sibling ILRRequestResource ARM request envelope."
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Mirrors the sibling ILRRequestResource ARM request envelope."
 @added(Versions.v2026_08_01)
-model ListMountScriptsRequestResource extends Resource {
+model InstantItemRecoveryOperationResultRequestResource extends Resource {
   ...ResourceProperties;
 
   /**
-   * ListMountScriptsRequestResource properties
+   * InstantItemRecoveryOperationResultRequestResource properties
    */
-  properties?: ListMountScriptsRequest;
+  properties?: InstantItemRecoveryOperationResultRequest;
 }
 
 /**
- * Parameters for the listMountScripts action.
+ * Parameters for the fetchInstantItemRecoveryOperationResult action.
  */
 @added(Versions.v2026_08_01)
-model ListMountScriptsRequest {
+model InstantItemRecoveryOperationResultRequest {
   /**
    * Operation ID returned by the prior provisionInstantItemRecovery action whose iSCSI mount scripts are to be retrieved.
    */
