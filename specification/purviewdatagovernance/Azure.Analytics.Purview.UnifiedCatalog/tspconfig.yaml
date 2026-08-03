@@ -15,3 +15,10 @@ options:
     examples-dir: "{project-root}/examples"
     output-file: "{azure-resource-provider-folder}/Azure.Analytics.Purview.UnifiedCatalog/{version-status}/{version}/CatalogApiService.json"
     omit-unreachable-types: true
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-purview-dataproducts"
+    namespace: "azure.purview.datamap"
+    package-mode: dataplane
+    flavor: azure
+    generate-test: true
+    generate-sample: true
