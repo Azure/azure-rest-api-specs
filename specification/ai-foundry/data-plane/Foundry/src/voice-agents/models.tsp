@@ -488,6 +488,29 @@ model TelephonyTransferTarget {
   destination: TelephonyTransferDestination;
 }
 
+@doc("The request to create a telephony transfer target for the voice agent named in the request path.")
+@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+model CreateTelephonyTransferTargetRequest {
+  @doc("The unique name exposed to the voice agent for this transfer target.")
+  name: string;
+
+  @doc("A description that helps the voice agent decide when to use this target.")
+  description: string;
+
+  @doc("The provider-specific transfer destination.")
+  destination: TelephonyTransferDestination;
+}
+
+@doc("The request to update an existing telephony transfer target.")
+@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+model UpdateTelephonyTransferTargetRequest {
+  @doc("A replacement description that helps the voice agent decide when to use this target.")
+  description?: string;
+
+  @doc("The replacement provider-specific transfer destination.")
+  destination?: TelephonyTransferDestination;
+}
+
 @doc("The request to bind a telephony identifier to the voice agent named in the request path.")
 @extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
 model CreateTelephonyBindingRequest {
@@ -496,9 +519,6 @@ model CreateTelephonyBindingRequest {
 
   @doc("The provider-specific dialed identifier, such as an Azure Communication Service resource-account identifier or E.164 phone number.")
   identifier: string;
-
-  @doc("The destinations to which the voice agent may transfer calls.")
-  transfer_targets?: TelephonyTransferTarget[];
 
   @doc("The Foundry connection that configures provider access. Azure Communication Service connections own the resource endpoint and identity. Twilio connections use the Account SID as their target and an ApiKey credential for the Auth Token.")
   connection_name: string;
@@ -512,9 +532,6 @@ model UpdateTelephonyBindingRequest {
 
   @doc("The new lifecycle status.")
   status?: TelephonyBindingStatus;
-
-  @doc("Replacement transfer targets. An empty array clears all targets.")
-  transfer_targets?: TelephonyTransferTarget[];
 
   @doc("The replacement Foundry connection that configures provider access.")
   connection_name?: string;
@@ -538,9 +555,6 @@ model TelephonyBinding {
   @doc("The lifecycle status.")
   status: TelephonyBindingStatus;
 
-  @doc("The destinations to which the voice agent may transfer calls.")
-  transfer_targets: TelephonyTransferTarget[];
-
   @doc("The Foundry connection that configures provider access. Secrets are referenced, not returned.")
   connection_name: string;
 
@@ -559,6 +573,21 @@ model TelephonyBindingList {
   data: TelephonyBinding[];
 
   @doc("Whether another page of bindings is available.")
+  has_more: boolean;
+
+  @doc("The cursor to pass as `after` to retrieve the next page.")
+  @continuationToken
+  next_cursor?: string;
+}
+
+@doc("A page of telephony transfer targets for one voice agent.")
+@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+model TelephonyTransferTargetList {
+  @doc("The telephony transfer targets in this page.")
+  @pageItems
+  data: TelephonyTransferTarget[];
+
+  @doc("Whether another page of transfer targets is available.")
   has_more: boolean;
 
   @doc("The cursor to pass as `after` to retrieve the next page.")

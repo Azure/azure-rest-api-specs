@@ -535,7 +535,7 @@ interface VoiceAgents {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Agent-scoped telephony bindings use a provider-specific identifier and custom page shape that do not match a standard resource operation template."
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Agent-scoped telephony resources use custom identifiers and page shapes that do not match a standard resource operation template."
 @tag("Agent Telephony")
 interface AgentTelephony {
   /** Creates a telephony binding for the voice agent named in the path. */
@@ -635,6 +635,101 @@ interface AgentTelephony {
 
       /** The binding identifier in `{provider}:{identifier}` form. */
       @path binding_id: string;
+    },
+    NoContentResponse
+  >;
+
+  /** Creates a transfer target for the voice agent named in the path. */
+  @summary("Create an agent telephony transfer target")
+  @post
+  @route("/agents/{agent_name}/telephony/transfer_targets")
+  @extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+  createTelephonyTransferTarget is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the voice agent that owns the transfer target. */
+      @path agent_name: string;
+
+      ...CreateTelephonyTransferTargetRequest;
+    },
+    TelephonyTransferTarget
+  >;
+
+  /** Returns the transfer targets owned by the voice agent named in the path. */
+  @summary("List agent telephony transfer targets")
+  @get
+  @list
+  @route("/agents/{agent_name}/telephony/transfer_targets")
+  @extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+  listTelephonyTransferTargets is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the voice agent whose transfer targets are listed. */
+      @path agent_name: string;
+
+      /** The maximum number of transfer targets to return. */
+      @minValue(1)
+      @maxValue(100)
+      @query
+      limit?: int32 = 100;
+
+      /** A cursor returned by the previous page. */
+      @query
+      @continuationToken
+      after?: string;
+    },
+    TelephonyTransferTargetList
+  >;
+
+  /** Retrieves a transfer target owned by the voice agent named in the path. */
+  @summary("Get an agent telephony transfer target")
+  @get
+  @route("/agents/{agent_name}/telephony/transfer_targets/{transfer_target_name}")
+  @extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+  getTelephonyTransferTarget is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the voice agent that owns the transfer target. */
+      @path agent_name: string;
+
+      /** The unique name of the transfer target. */
+      @path transfer_target_name: string;
+    },
+    TelephonyTransferTarget
+  >;
+
+  /** Updates a transfer target owned by the voice agent named in the path. */
+  @summary("Update an agent telephony transfer target")
+  @patch
+  @route("/agents/{agent_name}/telephony/transfer_targets/{transfer_target_name}")
+  @extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+  updateTelephonyTransferTarget is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the voice agent that owns the transfer target. */
+      @path agent_name: string;
+
+      /** The unique name of the transfer target. */
+      @path transfer_target_name: string;
+
+      ...UpdateTelephonyTransferTargetRequest;
+    },
+    TelephonyTransferTarget
+  >;
+
+  /** Deletes a transfer target owned by the voice agent named in the path. */
+  @summary("Delete an agent telephony transfer target")
+  @delete
+  @route("/agents/{agent_name}/telephony/transfer_targets/{transfer_target_name}")
+  @extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+  deleteTelephonyTransferTarget is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the voice agent that owns the transfer target. */
+      @path agent_name: string;
+
+      /** The unique name of the transfer target. */
+      @path transfer_target_name: string;
     },
     NoContentResponse
   >;
