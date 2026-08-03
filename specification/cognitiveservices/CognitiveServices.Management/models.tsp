@@ -4501,6 +4501,7 @@ model ManagedNetworkSettings {
    * Public IP address assigned to the Azure Firewall.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "'firewallPublicIpAddress' is nullable in 'ManagedNetworkSettings' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   firewallPublicIpAddress?: string | null;
 
@@ -5536,6 +5537,7 @@ model RaiBlockListResult {
  * The list of Cognitive Services RaiBlocklist Items for batch add.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Empty model 'RaiBlocklistItemsBulkAddRequest' preserved for backward compatibility with existing API surface"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @identifiers(#["name"])
 model RaiBlocklistItemsBulkAddRequest is Array<RaiBlocklistItemBulkRequest>;
 
@@ -5708,6 +5710,7 @@ model RaiPolicyListResult {
  * The list of Cognitive Services RaiBlocklist Items Names.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Empty model 'RaiBlocklistItemsBulkDeleteRequest' preserved for backward compatibility with existing API surface"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model RaiBlocklistItemsBulkDeleteRequest is Array<string>;
 
 /**
@@ -6085,6 +6088,7 @@ model ConnectivityEndpoints {
   /**
    * The public IP address of the compute instance.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   publicIpAddress?: string;
 

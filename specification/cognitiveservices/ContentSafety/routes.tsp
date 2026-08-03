@@ -146,3 +146,28 @@ interface TextBlocklists {
     ListQueryParametersTrait<StandardListQueryParameters>
   >;
 }
+
+@added(ContentSafety.Versions.v2026_07_01_preview)
+@route("/provenance")
+@doc("Content Provenance Detection operations that inspect media for Microsoft-issued C2PA and imperceptible watermark signals indicating the content was created or modified using AI.")
+interface ContentProvenanceOperations {
+  @summary("Get Content Provenance Detection Status")
+  @doc("Gets the status, result, or error of an asynchronous Content Provenance Detection operation.")
+  getOperationStatus is ProvenanceResourceOps.ResourceRead<ProvenanceDetectOperation>;
+
+  @summary("Start Content Provenance Detection")
+  @doc("Starts an asynchronous Content Provenance Detection operation that inspects the supplied media for Microsoft-issued C2PA and imperceptible watermark signals indicating the content was created or modified using AI.")
+  @route(":detect")
+  @pollingOperation(ContentProvenanceOperations.getOperationStatus)
+  detect is Azure.Core.LongRunningRpcOperation<
+    {
+      @doc("Options describing the media to inspect using Content Provenance Detection.")
+      @bodyRoot
+      options: DetectProvenanceOptions;
+    },
+    ProvenanceDetectOperation,
+    DetectProvenanceResult,
+    Azure.Core.Foundations.Error,
+    ProvenanceServiceTraits
+  >;
+}

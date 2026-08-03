@@ -252,6 +252,7 @@ model UserSecurityContext {
   endUserTenantId?: Azure.Core.uuid;
 
   /** Captures the original client's IP address, accepting both IPv4 and IPv6 formats. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @encodedName("application/json", "source_ip")
   sourceIp?: string;
 }
