@@ -108,13 +108,38 @@ union VoiceAgentTool {
   function: OpenAI.FunctionTool,
 
   @doc("An MCP tool executed by the service. The agent resolves authentication, for example through a Foundry connection.")
-  mcp: OpenAI.MCPTool,
+  mcp: VoiceAgentMcpTool,
 
   @doc("A service-managed control that acts on the active voice session.")
   system: VoiceSystemTool,
 
   @doc("A reference to a Foundry toolbox executed through its MCP endpoint.")
   toolbox: VoiceToolboxTool,
+}
+
+@doc("When an MCP invocation creates a follow-up response.")
+@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+union VoiceAgentMcpResponseScheduling {
+  @doc("Do not create a follow-up response after the MCP invocation completes.")
+  silent: "silent",
+
+  @doc("Create a follow-up response when the conversation is idle.")
+  when_idle: "when_idle",
+
+  @doc("Interrupt the active response and create a follow-up response.")
+  interrupt: "interrupt",
+
+  @doc("Create a follow-up response only when no response is active.")
+  skip_if_busy: "skip_if_busy",
+}
+
+@doc("An MCP tool available to a voice agent.")
+@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+model VoiceAgentMcpTool {
+  ...OpenAI.MCPTool;
+
+  @doc("When the MCP invocation creates a follow-up response. Defaults to `when_idle` so the agent continues after the tool call completes.")
+  response_scheduling?: VoiceAgentMcpResponseScheduling = VoiceAgentMcpResponseScheduling.when_idle;
 }
 
 @doc("A service-managed control that acts on the active voice session without customer code or external authentication.")

@@ -80988,6 +80988,161 @@
           ]
         }
       },
+      "VoiceAgentMcpResponseScheduling": {
+        "type": "string",
+        "enum": [
+          "silent",
+          "when_idle",
+          "interrupt",
+          "skip_if_busy"
+        ],
+        "description": "When an MCP invocation creates a follow-up response.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentMcpTool": {
+        "type": "object",
+        "required": [
+          "type",
+          "server_label"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "mcp"
+            ],
+            "description": "The type of the MCP tool. Always `mcp`.",
+            "x-stainless-const": true
+          },
+          "server_label": {
+            "type": "string",
+            "description": "A label for this MCP server, used to identify it in tool calls."
+          },
+          "server_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "The URL for the MCP server. One of `server_url`, `connector_id`, or\n  `tunnel_id` must be provided."
+          },
+          "connector_id": {
+            "type": "string",
+            "enum": [
+              "connector_dropbox",
+              "connector_gmail",
+              "connector_googlecalendar",
+              "connector_googledrive",
+              "connector_microsoftteams",
+              "connector_outlookcalendar",
+              "connector_outlookemail",
+              "connector_sharepoint"
+            ],
+            "description": "Identifier for service connectors, like those available in ChatGPT. One of\n  `server_url`, `connector_id`, or `tunnel_id` must be provided. Learn more\n  about service connectors [here](/docs/guides/tools-remote-mcp#connectors).\n  Currently supported `connector_id` values are:\n  - Dropbox: `connector_dropbox`\n  - Gmail: `connector_gmail`\n  - Google Calendar: `connector_googlecalendar`\n  - Google Drive: `connector_googledrive`\n  - Microsoft Teams: `connector_microsoftteams`\n  - Outlook Calendar: `connector_outlookcalendar`\n  - Outlook Email: `connector_outlookemail`\n  - SharePoint: `connector_sharepoint`"
+          },
+          "tunnel_id": {
+            "type": "string",
+            "pattern": "^tunnel_[a-z0-9]{32}$",
+            "description": "The Secure MCP Tunnel ID to use instead of a direct server URL. One of\n  `server_url`, `connector_id`, or `tunnel_id` must be provided."
+          },
+          "authorization": {
+            "type": "string",
+            "description": "An OAuth access token that can be used with a remote MCP server, either\n  with a custom MCP server URL or a service connector. Your application\n  must handle the OAuth authorization flow and provide the token here."
+          },
+          "server_description": {
+            "type": "string",
+            "description": "Optional description of the MCP server, used to provide more context."
+          },
+          "headers": {
+            "anyOf": [
+              {
+                "type": "object",
+                "unevaluatedProperties": {
+                  "type": "string"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "allowed_tools": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              {
+                "$ref": "#/components/schemas/OpenAI.MCPToolFilter"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "allowed_callers": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/OpenAI.CallableToolAllowedCaller"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "require_approval": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.MCPToolRequireApproval"
+              },
+              {
+                "type": "string",
+                "enum": [
+                  "always",
+                  "never"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": "always"
+          },
+          "defer_loading": {
+            "type": "boolean",
+            "description": "Whether this MCP tool is deferred and discovered via tool search."
+          },
+          "project_connection_id": {
+            "type": "string",
+            "description": "The connection ID in the project for the MCP server. The connection stores authentication and other connection details needed to connect to the MCP server."
+          },
+          "tool_configs": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "$ref": "#/components/schemas/ToolConfig"
+            },
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
+          },
+          "response_scheduling": {
+            "$ref": "#/components/schemas/VoiceAgentMcpResponseScheduling",
+            "description": "When the MCP invocation creates a follow-up response. Defaults to `when_idle` so the agent continues after the tool call completes.",
+            "default": "when_idle"
+          }
+        },
+        "description": "An MCP tool available to a voice agent.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
       "VoiceAgentObject": {
         "type": "object",
         "required": [
@@ -81072,7 +81227,7 @@
             "$ref": "#/components/schemas/OpenAI.FunctionTool"
           },
           {
-            "$ref": "#/components/schemas/OpenAI.MCPTool"
+            "$ref": "#/components/schemas/VoiceAgentMcpTool"
           },
           {
             "$ref": "#/components/schemas/VoiceSystemTool"
