@@ -11,54 +11,42 @@
           {
             "id": "/subscriptions/sub-a/resourceGroups/rg1/providers/Microsoft.KeyVault/vaults/myVault",
             "type": "Microsoft.KeyVault/vaults",
-            "properties": {
+            "serviceGroupParent": "/providers/Microsoft.Management/serviceGroups/root-sg",
+            "relationshipProperties": {
               "relationshipId": "/subscriptions/sub-a/resourceGroups/rg1/providers/Microsoft.KeyVault/vaults/myVault/providers/Microsoft.Relationships/serviceGroupMember/root-sg-myVault",
-              "relationshipType": "Microsoft.Relationships/serviceGroupMember",
-              "parent": {
-                "serviceGroupId": "/providers/Microsoft.Management/serviceGroups/root-sg"
-              }
+              "relationshipType": "Microsoft.Relationships/serviceGroupMember"
             }
           },
           {
             "id": "/subscriptions/sub-a/resourceGroups/rg2",
             "type": "Microsoft.Resources/resourceGroups",
-            "properties": {
+            "serviceGroupParent": "/providers/Microsoft.Management/serviceGroups/root-sg",
+            "relationshipProperties": {
               "relationshipId": "/subscriptions/sub-a/resourceGroups/rg2/providers/Microsoft.Relationships/serviceGroupMember/root-sg-rg2",
-              "relationshipType": "Microsoft.Relationships/serviceGroupMember",
-              "parent": {
-                "serviceGroupId": "/providers/Microsoft.Management/serviceGroups/root-sg"
-              }
+              "relationshipType": "Microsoft.Relationships/serviceGroupMember"
             }
           },
           {
             "id": "/subscriptions/sub-a/resourceGroups/rg2/providers/Microsoft.Storage/storageAccounts/myStorage",
             "type": "Microsoft.Storage/storageAccounts",
-            "properties": {
+            "serviceGroupParent": "/providers/Microsoft.Management/serviceGroups/root-sg",
+            "relationshipProperties": {
               "relationshipId": "/subscriptions/sub-a/resourceGroups/rg2/providers/Microsoft.Relationships/contains/root-sg-rg2",
-              "relationshipType": "Microsoft.Relationships/contains",
-              "parent": {
-                "serviceGroupId": "/providers/Microsoft.Management/serviceGroups/root-sg"
-              }
+              "relationshipType": "Microsoft.Relationships/contains"
             }
           },
           {
             "id": "/providers/Microsoft.Management/serviceGroups/child-sg",
             "type": "Microsoft.Management/serviceGroups",
-            "properties": {
-              "parent": {
-                "serviceGroupId": "/providers/Microsoft.Management/serviceGroups/root-sg"
-              }
-            }
+            "serviceGroupParent": "/providers/Microsoft.Management/serviceGroups/root-sg"
           },
           {
             "id": "/subscriptions/sub-b/resourceGroups/rg3/providers/Microsoft.Sql/servers/sqlServer1",
             "type": "Microsoft.Sql/servers",
-            "properties": {
+            "serviceGroupParent": "/providers/Microsoft.Management/serviceGroups/child-sg",
+            "relationshipProperties": {
               "relationshipId": "/subscriptions/sub-b/resourceGroups/rg3/providers/Microsoft.Sql/servers/sqlServer1/providers/Microsoft.Relationships/serviceGroupMember/child-sg-sqlServer1",
-              "relationshipType": "Microsoft.Relationships/serviceGroupMember",
-              "parent": {
-                "serviceGroupId": "/providers/Microsoft.Management/serviceGroups/child-sg"
-              }
+              "relationshipType": "Microsoft.Relationships/serviceGroupMember"
             }
           }
         ],

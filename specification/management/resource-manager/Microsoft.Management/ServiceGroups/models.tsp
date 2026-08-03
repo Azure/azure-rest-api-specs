@@ -257,17 +257,32 @@ model ServiceGroupMember {
   type?: string;
 
   /**
-   * The properties of the service group member.
+   * The fully qualified ID of the parent service group of this entry. For
+   * example, /providers/Microsoft.Management/serviceGroups/root-sg.
    */
   @visibility(Lifecycle.Read)
-  properties?: ServiceGroupMemberProperties;
+  serviceGroupParent?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Management/serviceGroups";
+    }
+  ]>;
+
+  /**
+   * Properties describing the relationship between this member and the queried
+   * service group. Populated only when this entry represents a member linked
+   * via a Microsoft.Relationships resource (a container such as a subscription
+   * or resource group, or an individual resource). Not populated when this
+   * entry is a descendant service group.
+   */
+  @visibility(Lifecycle.Read)
+  relationshipProperties?: ServiceGroupMemberRelationshipProperties;
 }
 
 /**
- * The properties of a service group member.
+ * Properties describing the relationship between a service group and one of its members.
  */
 @added(Versions.v2026_03_01_preview)
-model ServiceGroupMemberProperties {
+model ServiceGroupMemberRelationshipProperties {
   /**
    * The fully qualified ID of the relationship resource itself
    * (Microsoft.Relationships/serviceGroupMember or Microsoft.Relationships/contains)
@@ -278,31 +293,8 @@ model ServiceGroupMemberProperties {
   relationshipId?: Azure.Core.armResourceIdentifier;
 
   /**
-   * The relationship type between the service group and this member. Absent
-   * when the member is itself a descendant service group (Microsoft.Management/serviceGroups).
+   * The relationship type between the service group and this member.
    */
   @visibility(Lifecycle.Read)
   relationshipType?: RelationshipType;
-
-  /**
-   * The parent service group under which this member is enumerated.
-   */
-  @visibility(Lifecycle.Read)
-  parent?: ServiceGroupMemberParent;
-}
-
-/**
- * The parent service group of a service group member.
- */
-@added(Versions.v2026_03_01_preview)
-model ServiceGroupMemberParent {
-  /**
-   * The fully qualified ID of the parent service group. For example,
-   * /providers/Microsoft.Management/serviceGroups/root-sg.
-   */
-  serviceGroupId?: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.Management/serviceGroups";
-    }
-  ]>;
 }

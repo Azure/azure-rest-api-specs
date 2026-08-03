@@ -646,21 +646,11 @@
           "description": "The resource type of the member. For example,\nMicrosoft.Management/serviceGroups, Microsoft.Resources/resourceGroups, or\nMicrosoft.KeyVault/vaults.",
           "readOnly": true
         },
-        "properties": {
-          "$ref": "#/definitions/ServiceGroupMemberProperties",
-          "description": "The properties of the service group member.",
-          "readOnly": true
-        }
-      }
-    },
-    "ServiceGroupMemberParent": {
-      "type": "object",
-      "description": "The parent service group of a service group member.",
-      "properties": {
-        "serviceGroupId": {
+        "serviceGroupParent": {
           "type": "string",
           "format": "arm-id",
-          "description": "The fully qualified ID of the parent service group. For example,\n/providers/Microsoft.Management/serviceGroups/root-sg.",
+          "description": "The fully qualified ID of the parent service group of this entry. For\nexample, /providers/Microsoft.Management/serviceGroups/root-sg.",
+          "readOnly": true,
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
@@ -668,12 +658,17 @@
               }
             ]
           }
+        },
+        "relationshipProperties": {
+          "$ref": "#/definitions/ServiceGroupMemberRelationshipProperties",
+          "description": "Properties describing the relationship between this member and the queried\nservice group. Populated only when this entry represents a member linked\nvia a Microsoft.Relationships resource (a container such as a subscription\nor resource group, or an individual resource). Not populated when this\nentry is a descendant service group.",
+          "readOnly": true
         }
       }
     },
-    "ServiceGroupMemberProperties": {
+    "ServiceGroupMemberRelationshipProperties": {
       "type": "object",
-      "description": "The properties of a service group member.",
+      "description": "Properties describing the relationship between a service group and one of its members.",
       "properties": {
         "relationshipId": {
           "type": "string",
@@ -683,12 +678,7 @@
         },
         "relationshipType": {
           "$ref": "#/definitions/RelationshipType",
-          "description": "The relationship type between the service group and this member. Absent\nwhen the member is itself a descendant service group (Microsoft.Management/serviceGroups).",
-          "readOnly": true
-        },
-        "parent": {
-          "$ref": "#/definitions/ServiceGroupMemberParent",
-          "description": "The parent service group under which this member is enumerated.",
+          "description": "The relationship type between the service group and this member.",
           "readOnly": true
         }
       }
