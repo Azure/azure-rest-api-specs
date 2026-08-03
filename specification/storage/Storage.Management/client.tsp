@@ -448,7 +448,11 @@ op getDeletedAccountCustomizedForJs(
 
 // Keep ARM common identity model names distinct from long-standing Storage
 // models after introducing ManagedServiceIdentity on ContextCache resources.
-@@clientName(Azure.ResourceManager.CommonTypes.UserAssignedIdentity, "ArmUserAssignedIdentity", "python,java");
+@@clientName(
+  Azure.ResourceManager.CommonTypes.UserAssignedIdentity,
+  "ArmUserAssignedIdentity",
+  "python,java"
+);
 
 // Rename NspAccessRulePropertiesSubscriptionsItem to prevent the generator from mapping
 // it to ARM's SubResource type (which has an internal DeserializeSubResource method).
