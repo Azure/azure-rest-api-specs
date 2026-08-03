@@ -57,6 +57,7 @@ using Microsoft.Solutions;
   "ManagedApplicationsListTokenRequestContent",
   "csharp"
 );
+@@clientName(Application, "ManagedApplication", "csharp");
 @@clientName(Resource, "ManagedApplicationResourceInfo", "csharp");
 @@clientName(GenericResource, "GenericResourceInfo", "csharp");
 @@clientName(
@@ -69,6 +70,7 @@ using Microsoft.Solutions;
   duration,
   "csharp"
 );
+@@clientName(ApplicationPatchable, "ApplicationPatch", "csharp");
 @@clientName(PlanPatchable, "ManagedApplicationsPlanPatch", "csharp");
 @@clientName(Status, "JitRequestStatus", "csharp");
 @@clientName(Substatus, "JitRequestSubstatus", "csharp");
