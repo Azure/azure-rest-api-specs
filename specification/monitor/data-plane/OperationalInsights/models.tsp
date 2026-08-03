@@ -1,6 +1,7 @@
 namespace MonitorQueryLogs;
 
 /** The data type of a column. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union ColumnDataType {
   string,
 
@@ -36,6 +37,7 @@ union ColumnDataType {
 }
 
 /** Contains the tables, columns & rows resulting from a query. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model QueryResults {
   /** The results of the query in tabular format. */
   tables: Table[];
@@ -53,6 +55,7 @@ model QueryResults {
 }
 
 /** Contains the columns and rows for one table in a query response. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Table {
   /** The name of the table. */
   name: string;
@@ -65,6 +68,7 @@ model Table {
 }
 
 /** A column in a table. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Column {
   /** The name of this column. */
   name: string;
@@ -115,6 +119,7 @@ model ErrorDetail {
 }
 
 /** Contains details when the response code indicates an error. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @error
 model ErrorResponse {
   /** The error details. */
@@ -657,6 +662,7 @@ model BatchQueryResponse {
 }
 
 /** Contains the tables, columns & rows resulting from a query. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model BatchQueryResults {
   /** The results of the query in tabular format. */
   tables?: Table[];

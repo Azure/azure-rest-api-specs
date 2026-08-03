@@ -11,6 +11,7 @@ namespace ResourceGraphCommon;
 /**
  * An error response from the API.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @summary("Error response.")
 @error
 model ErrorResponse {
@@ -23,6 +24,7 @@ model ErrorResponse {
 /**
  * Error details.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @summary("Error info.")
 model Error {
   /**
@@ -45,6 +47,7 @@ model Error {
 /**
  * Error details.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @summary("Error details.")
 model ErrorDetails {
   ...Record<unknown>;

@@ -387,6 +387,7 @@ model AccountResource extends Azure.ResourceManager.CommonTypes.ProxyResource {
 /**
  * List of all the New relic accounts for the given user
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AccountProperties {
   /**
    * organization id

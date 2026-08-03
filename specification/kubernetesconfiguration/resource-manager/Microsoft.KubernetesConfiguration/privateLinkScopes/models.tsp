@@ -29,6 +29,7 @@ union PublicNetworkAccessType {
 /**
  * The provisioning state of the resource.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union ProvisioningState {
   string,
 

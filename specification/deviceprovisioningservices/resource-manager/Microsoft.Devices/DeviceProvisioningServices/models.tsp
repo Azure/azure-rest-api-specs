@@ -33,6 +33,7 @@ model OperationListResult {
 /**
  * Represents an operation.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Operation {
   /**
    * The name of the operation.
@@ -258,6 +259,7 @@ enum IpFilterTargetType {
 /**
  * Error details.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @error
 model ErrorDetails {
   /**
@@ -663,6 +665,7 @@ model ManagedServiceIdentity {
 /**
  * The common properties of an Azure resource.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Resource {
   /**
    * The resource identifier.

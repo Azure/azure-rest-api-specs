@@ -100,6 +100,7 @@ model DocumentDetectedLanguage {
 }
 
 /** Contains the details of the detected language for the text. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model DetectedLanguage {
   /** Long name of a detected language (e.g. English, French). */
   name: string;
@@ -533,6 +534,7 @@ model AzureContainerFolderDocumentLocation extends DocumentLocation {
 }
 
 /** Error response. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @error
 model ErrorResponse is Azure.Core.Foundations.ErrorResponseBase<Error>;
 

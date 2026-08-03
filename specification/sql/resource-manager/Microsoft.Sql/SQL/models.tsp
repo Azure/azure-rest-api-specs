@@ -12492,6 +12492,7 @@ model ManagedInstancePrivateLinkProperties {
 /**
  * Azure Active Directory identity configuration for a resource.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ResourceIdentity {
   /**
    * The resource ids of the user assigned identities to use
@@ -13385,6 +13386,7 @@ model NSPProvisioningIssueProperties {
  * SQL REST API operation definition.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @Azure.ResourceManager.Legacy.feature(Features.Operations)
 model Operation {
   /**

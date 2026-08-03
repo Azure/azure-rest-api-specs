@@ -383,6 +383,7 @@ union KeyEncryptionAlgorithm {
  * The type of the action. The value should be compared case-insensitively.
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Intentional enum; originally modelAsString=false"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 enum KeyRotationPolicyAction {
   /**
    * Rotate the key based on the key policy.
@@ -626,6 +627,7 @@ model Attributes {
 /**
  * The policy rules under which the key can be exported.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model KeyReleasePolicy {
   /**
    * Content type and version of key release policy
@@ -680,6 +682,7 @@ model KeyBundle {
 /**
  * As of http://tools.ietf.org/html/draft-ietf-jose-json-web-key-18
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model JsonWebKey {
   /**
    * Key identifier.
@@ -1216,6 +1219,7 @@ model DeletedKeyItem {
 /**
  * Management policy for a key.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model KeyRotationPolicy {
   /**
    * The key policy id.
@@ -1324,6 +1328,7 @@ model RandomBytes {
 /**
  * Properties of the key pair backing a certificate.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model KeyProperties {
   /**
    * Indicates if the private key can be exported. Release policy must be provided when creating the first version of an exportable key.

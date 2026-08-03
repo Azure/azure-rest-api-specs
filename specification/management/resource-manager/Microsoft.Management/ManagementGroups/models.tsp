@@ -122,6 +122,7 @@ enum Reason {
  * The users specific permissions to this item.
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 enum Permissions {
   /**
    * noaccess
@@ -201,6 +202,7 @@ model ManagementGroupListResult {
 /**
  * The management group resource.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ManagementGroupInfo {
   /**
    * The fully qualified ID for the management group.  For example, /providers/Microsoft.Management/managementGroups/0000000-0000-0000-0000-000000000000
@@ -244,6 +246,7 @@ model ManagementGroupInfoProperties {
 /**
  * The error object.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @error
 model ErrorResponse {
   /**
@@ -255,6 +258,7 @@ model ErrorResponse {
 /**
  * The details of the error.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ErrorDetails {
   /**
    * One of a server-defined set of error codes.
@@ -276,6 +280,7 @@ model ErrorDetails {
  * The generic properties of a management group.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ManagementGroupProperties {
   /**
    * The AAD Tenant ID associated with the management group. For example, 00000000-0000-0000-0000-000000000000
@@ -302,6 +307,7 @@ model ManagementGroupProperties {
 /**
  * The details of a management group.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ManagementGroupDetails {
   /**
    * The version number of the object.
@@ -783,6 +789,7 @@ model CreateOrUpdateSettingsProperties {
 /**
  * Operation supported by the Microsoft.Management resource provider.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Operation {
   /**
    * Operation name: {provider}/{resource}/{operation}.

@@ -71,6 +71,7 @@ model OperationList {
 /**
  * HANA operation information
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Operation {
   /**
    * The name of the operation being performed on this particular object. This name should match the action name that appears in RBAC / the event service.
@@ -122,6 +123,7 @@ model Display {
 /**
  * Describes the format of Error response.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @error
 model ErrorResponse {
   /**

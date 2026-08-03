@@ -121,6 +121,7 @@ enum LocationType {
  * The subscription state. Possible values are Enabled, Warned, PastDue, Disabled, and Deleted.
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 enum SubscriptionState {
   /**
    * Enabled
@@ -459,6 +460,7 @@ model Subscription {
 /**
  * Subscription policies.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model SubscriptionPolicies {
   /**
    * The subscription location placement ID. The ID indicates which regions are visible for a subscription. For example, a subscription with a location placement Id of Public_2014-09-01 has access to Azure public regions.
@@ -482,6 +484,7 @@ model SubscriptionPolicies {
 /**
  * Information about a tenant managing the subscription.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ManagedByTenant {
   /**
    * The tenant ID of the managing tenant. This is a GUID.
@@ -642,6 +645,7 @@ model Peers {
 /**
  * Name and Type of the Resource
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ResourceName {
   /**
    * Name of the resource

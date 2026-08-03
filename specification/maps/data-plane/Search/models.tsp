@@ -1791,6 +1791,7 @@ model AutocompleteProperties {
  * details for failed operations. (This also follows the OData error response
  * format.).
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @error
 model ErrorResponse {
   /**

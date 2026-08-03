@@ -287,6 +287,7 @@ union Aggregation {
   "Percentile9999",
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Metric unit.")
 union MetricUnit {
   string,
@@ -994,6 +995,7 @@ model TestRunInsightColumn {
   dataType: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Error details if there is any failure in load test run")
 model ErrorDetails {
   @doc("Error code if there is any failure in load test run.")
@@ -1185,6 +1187,7 @@ model MetricNamespaceCollection {
   value: MetricNamespace[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Metric namespace class specifies the metadata for a metric namespace.")
 model MetricNamespace {
   @doc("The namespace description.")
@@ -1200,6 +1203,7 @@ model MetricDefinitionCollection {
   value: MetricDefinition[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Metric definition")
 model MetricDefinition {
   @doc("List of dimensions")
@@ -1239,6 +1243,7 @@ model NameAndDescription {
   name?: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Metric availability specifies the time grain (aggregation interval or frequency)")
 model MetricAvailability {
   @doc("""
@@ -1281,6 +1286,7 @@ model TimeSeriesElement {
   dimensionValues?: DimensionValue[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Represents a metric value.")
 model MetricValue {
   @doc("The timestamp for the metric value in RFC 3339 format.")

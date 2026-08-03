@@ -96,6 +96,7 @@ model MultivariateBatchDetectionResultSummary {
   setupInfo: MultivariateBatchDetectionOptions;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Error information that the API returned.")
 @error
 model ErrorResponse {
@@ -402,6 +403,7 @@ model MultivariateLastDetectionResult {
   results?: AnomalyState[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Error response.")
 @error
 model ResponseError {

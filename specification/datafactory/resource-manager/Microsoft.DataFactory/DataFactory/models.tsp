@@ -3297,6 +3297,7 @@ model OperationListResponse {
 /**
  * Azure Data Factory API operation definition.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Operation {
   /**
    * Operation name: {provider}/{resource}/{operation}
@@ -28349,6 +28350,7 @@ model TumblingWindowTriggerTypeProperties {
 /**
  * Execution policy for an activity.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model RetryPolicy {
   /**
    * Maximum ordinary retry attempts. Default is 0. Type: integer (or Expression with resultType integer), minimum: 0.

@@ -94,6 +94,7 @@ model AnnotationError {
 /**
  * Inner error
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model InnerError {
   /**
    * Provides correlation for request

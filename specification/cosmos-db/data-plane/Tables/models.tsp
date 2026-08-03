@@ -215,6 +215,7 @@ model AccessPolicy {
 /// Service Properties
 
 /** The service properties. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @Xml.name("StorageServiceProperties")
 model TableServiceProperties {
   /** The logging properties. */

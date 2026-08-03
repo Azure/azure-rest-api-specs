@@ -31,6 +31,7 @@ model KeyVaultSecretReference {
  * The type of identity used for the virtual machine scale set. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the virtual machine scale set.
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 enum ResourceIdentityType {
   SystemAssigned,
@@ -102,6 +103,7 @@ union ZonePlacementPolicyType {
 /**
  * Describes the user-defined constraints for resource hardware placement.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 model Placement {
   /**

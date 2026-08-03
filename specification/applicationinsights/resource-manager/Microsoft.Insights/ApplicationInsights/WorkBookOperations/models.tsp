@@ -31,6 +31,7 @@ model OperationListResult {
 /**
  * Azure Workbooks REST API operation
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Operation {
   /**
    * Operation name: {provider}/{resource}/{operation}
@@ -66,6 +67,7 @@ model OperationDisplay {
 /**
  * Error response indicates Insights service is not able to process the incoming request. The reason is provided in the error message.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @error
 model ErrorResponse {
   /**

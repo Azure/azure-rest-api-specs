@@ -225,6 +225,7 @@ union MessageAttachmentToolDefinition {
 
 // Message content types: "text" | "image_file"
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @discriminator("type")
 @doc("An abstract representation of a single item of thread message content.")
 @added(Versions.v2025_05_01)

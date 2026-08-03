@@ -12,6 +12,7 @@ namespace Microsoft.Cache;
 /**
  * The type of Redis cache to deploy. Valid values: (Basic, Standard, Premium)
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union SkuName {
   string,
 
@@ -299,6 +300,7 @@ enum ReplicationRole {
 /**
  * REST API operation
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Operation {
   /**
    * Operation name: {provider}/{resource}/{operation}

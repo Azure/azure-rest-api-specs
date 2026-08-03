@@ -38,6 +38,7 @@ model MdsResource is TrackedResource<MdsResourceProperties> {
   ...ResourceSkuProperty;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("The status of the current operation.")
 @Azure.Core.lroStatus
 union ProvisioningState {

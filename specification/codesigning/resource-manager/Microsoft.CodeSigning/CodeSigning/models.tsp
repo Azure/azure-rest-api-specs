@@ -103,6 +103,7 @@ union RevocationStatus {
   Failed: "Failed",
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Name of the sku.")
 union SkuName {
   string,

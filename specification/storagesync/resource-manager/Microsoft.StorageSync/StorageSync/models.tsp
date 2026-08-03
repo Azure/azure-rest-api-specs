@@ -2611,6 +2611,7 @@ model LocationOperationStatus {
 /**
  * Subscription State object.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model SubscriptionState {
   /**
    * State of Azure Subscription

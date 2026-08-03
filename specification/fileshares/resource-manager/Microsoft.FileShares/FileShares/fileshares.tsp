@@ -72,6 +72,7 @@ union Protocol {
   NFS: "NFS",
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Share root squash enum.")
 union ShareRootSquash {
   string,

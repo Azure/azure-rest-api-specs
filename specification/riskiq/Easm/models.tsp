@@ -935,6 +935,7 @@ model HostCore {
   uuid?: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("This is an object containing more specific information than the current object about the error.")
 model InnerError {
   @doc("This is a more specific error code than was provided by the containing error.")

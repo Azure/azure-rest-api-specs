@@ -135,6 +135,7 @@ union AccessMode {
 /**
  * The name of SKU.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union SkuName {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -781,6 +782,7 @@ model Profile {
 /**
  * Azure resource
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Resource {
   /**
    * Specifies the resource ID.
@@ -852,6 +854,7 @@ model Sku {
 /**
  * Bot Service error object.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @error
 model Error {
   /**

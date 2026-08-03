@@ -371,6 +371,7 @@ union ProviderStackOsType {
 /**
  * Name of a resource type this recommendation applies, e.g. Subscription, ServerFarm, Site.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union ResourceScopeType {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -416,6 +417,7 @@ union InAvailabilityReasonType {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union SkuName {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -850,6 +852,7 @@ union Kind {
  * Provisioning state of the App Service Plan.
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 enum ProvisioningState {
   Succeeded,
   Failed,
@@ -5245,6 +5248,7 @@ model CertificateCollection is Azure.Core.Page<Certificate>;
  * Certificate resource specific properties
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model CertificateProperties {
   /**
    * Certificate password.
@@ -7421,6 +7425,7 @@ model Dimension {
 /**
  * Retention policy of a resource metric.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model MetricAvailability {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   timeGrain?: string;
@@ -14942,6 +14947,7 @@ model RepetitionIndex {
  * The operation result definition.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model OperationResult extends OperationResultProperties {
   /**
    * Gets the tracking id.
@@ -15784,6 +15790,7 @@ model CipherSuites {
 /**
  * Container App container definition.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Container {
   /**
    * Container image tag.
@@ -16073,6 +16080,7 @@ model ScaleRule {
  * Defines the desired state of an immutable revision.
  * Any changes to this section Will result in a new revision being created
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Template {
   /**
    * User friendly suffix that is appended to the revision name

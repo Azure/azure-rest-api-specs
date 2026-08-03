@@ -9,6 +9,7 @@ using TypeSpec.Versioning;
 
 namespace Azure.OpenAI;
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @added(ServiceApiVersions.v2023_06_01_Preview)
 @doc("Ratings for the intensity and risk level of harmful content.")
 union ContentFilterSeverity {
@@ -159,6 +160,7 @@ model ContentFilterResultsForPrompt {
   contentFilterResults: ContentFilterResultDetailsForPrompt;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @added(ServiceApiVersions.v2024_02_15_Preview)
 @doc("Represents the outcome of a detection operation performed by content filtering.")
 model ContentFilterDetectionResult {

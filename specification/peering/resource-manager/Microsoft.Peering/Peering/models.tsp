@@ -409,6 +409,7 @@ model CdnPeeringPrefixProperties {
 /**
  * The error response that indicates why an operation has failed.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @error
 model ErrorResponse {
   /**
@@ -790,6 +791,7 @@ model OperationListResult {
 /**
  * The peering API operation.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Operation {
   /**
    * The name of the operation.

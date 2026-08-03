@@ -258,6 +258,7 @@ model MaintenanceError {
 /**
  * An error response details received from the Azure Maintenance service.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ErrorDetails {
   /**
    * Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
@@ -422,6 +423,7 @@ model InputLinuxParameters {
 /**
  * Definition of a Resource
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Resource {
   /**
    * Fully qualified identifier of the resource

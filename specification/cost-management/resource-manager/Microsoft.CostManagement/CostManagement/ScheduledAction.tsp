@@ -13,6 +13,7 @@ namespace Microsoft.CostManagement;
 /**
  * Scheduled action definition.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @tenantResource
 model ScheduledAction
   is Azure.ResourceManager.ProxyResource<ScheduledActionProperties> {

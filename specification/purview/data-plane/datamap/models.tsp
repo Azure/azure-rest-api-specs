@@ -20,6 +20,7 @@ union BusinessAttributeUpdateBehavior {
   Merge: "merge",
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Status - can be active or deleted")
 union EntityStatus {
   string,

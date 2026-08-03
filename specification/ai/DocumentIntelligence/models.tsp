@@ -29,6 +29,7 @@ union StringIndexType {
   utf16CodeUnit: "utf16CodeUnit",
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Format of the content in analyzed result.")
 union DocumentContentFormat {
   string,
@@ -43,6 +44,7 @@ union DocumentContentFormat {
   markdown: "markdown",
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Document analysis features to enable.")
 union DocumentAnalysisFeature {
   string,
@@ -69,6 +71,7 @@ union DocumentAnalysisFeature {
   queryFields: "queryFields",
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("The unit used by the width, height, and polygon properties. For images, the unit is \"pixel\". For PDF, the unit is \"inch\".")
 union LengthUnit {
   string,
@@ -76,6 +79,7 @@ union LengthUnit {
   @doc("Length unit for PDF files.") "inch",
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("State of the selection mark.")
 union DocumentSelectionMarkState {
   string,
@@ -90,6 +94,7 @@ union DocumentSelectionMarkState {
   "unselected",
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Barcode kind.")
 union DocumentBarcodeKind {
   string,
@@ -146,6 +151,7 @@ union DocumentBarcodeKind {
   MaxiCode: "MaxiCode",
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Formula kind.")
 union DocumentFormulaKind {
   string,
@@ -153,6 +159,7 @@ union DocumentFormulaKind {
   @doc("A formula in display mode that takes up an entire line.") "display",
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Semantic role of the paragraph.")
 union ParagraphRole {
   string,
@@ -165,6 +172,7 @@ union ParagraphRole {
   @doc("A block of formulas, often with shared alignment.") "formulaBlock",
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Table cell kind.")
 union DocumentTableCellKind {
   string,
@@ -185,6 +193,7 @@ union DocumentTableCellKind {
   description: "description",
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Font style.")
 union DocumentFontStyle {
   string,
@@ -192,6 +201,7 @@ union DocumentFontStyle {
   @doc("Characters are visually slanted to the right.") "italic",
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Font weight.")
 union DocumentFontWeight {
   string,
@@ -199,6 +209,7 @@ union DocumentFontWeight {
   @doc("Characters are represented with thicker strokes.") "bold",
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Semantic data type of the field value.")
 union DocumentFieldType {
   string,
@@ -249,6 +260,7 @@ union DocumentFieldType {
   selectionGroup: "selectionGroup",
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Presence of signature.")
 union DocumentSignatureType {
   string,
@@ -256,6 +268,7 @@ union DocumentSignatureType {
   @doc("No signatures are detected.") "unsigned",
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Custom document model build mode.")
 union DocumentBuildMode {
   string,
@@ -293,6 +306,7 @@ union OperationKind {
   documentClassifierBuild: "documentClassifierBuild",
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Document splitting mode.")
 union SplitMode {
   string,
@@ -307,6 +321,7 @@ union SplitMode {
   perPage: "perPage",
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @lroStatus
 @doc("Operation status.")
 union DocumentIntelligenceOperationStatus {
@@ -335,6 +350,7 @@ union DocumentIntelligenceOperationStatus {
   skipped: "skipped",
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Type of content source.")
 union ContentSourceKind {
   string,
@@ -352,6 +368,7 @@ union ContentSourceKind {
   azureBlobFileList: "azureBlobFileList",
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Additional output to generate during analysis.")
 union AnalyzeOutputOption {
   string,
@@ -363,6 +380,7 @@ union AnalyzeOutputOption {
   "figures",
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Document analysis parameters.")
 model AnalyzeDocumentRequest {
   @doc("Document URL to analyze.  Either urlSource or base64Source must be specified.")
@@ -375,6 +393,7 @@ model AnalyzeDocumentRequest {
   base64Source?: bytes;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Batch document analysis parameters.")
 model AnalyzeBatchDocumentsRequest {
   @doc("""
@@ -407,6 +426,7 @@ model DocumentIntelligenceErrorResponse {
   error: DocumentIntelligenceError;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("The error object.")
 model DocumentIntelligenceError {
   @doc("One of a server-defined set of error codes.")
@@ -425,6 +445,7 @@ model DocumentIntelligenceError {
   innererror?: DocumentIntelligenceInnerError;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("An object containing more specific information about the error.")
 model DocumentIntelligenceInnerError {
   @doc("One of a server-defined set of error codes.")
@@ -437,6 +458,7 @@ model DocumentIntelligenceInnerError {
   innererror?: DocumentIntelligenceInnerError;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("The error object.")
 model DocumentIntelligenceWarning {
   @doc("One of a server-defined set of warning codes.")
@@ -468,6 +490,7 @@ model AnalyzeOperation {
   analyzeResult?: AnalyzeResult;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Status and result of the analyze batch operation.")
 model AnalyzeBatchOperation {
   @doc("Analyze batch operation result ID.")
@@ -495,6 +518,7 @@ model AnalyzeBatchOperation {
   result?: AnalyzeBatchResult;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Batch document analysis result.")
 model AnalyzeBatchResult {
   @doc("Number of documents that completed with status succeeded.")
@@ -510,6 +534,7 @@ model AnalyzeBatchResult {
   details?: AnalyzeBatchOperationDetail[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Operation detail for a document in a batch analysis.")
 model AnalyzeBatchOperationDetail {
   @doc("Analyze status.  succeeded, failed, or skipped")
@@ -527,6 +552,7 @@ model AnalyzeBatchOperationDetail {
   error?: DocumentIntelligenceError;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Document analysis result.")
 model AnalyzeResult {
   @doc("API version used to produce this result.")
@@ -579,6 +605,7 @@ model AnalyzeResult {
   warnings?: DocumentIntelligenceWarning[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Content and layout elements extracted from a page from the input.")
 model DocumentPage {
   @doc("1-based page number in the input document.")
@@ -629,6 +656,7 @@ model DocumentPage {
   formulas?: DocumentFormula[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("""
   Contiguous region of the concatenated content property, specified as an offset
   and length.
@@ -643,6 +671,7 @@ model DocumentSpan {
   length: int32;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("""
   A word object consisting of a contiguous sequence of characters.  For non-space
   delimited languages, such as Chinese, Japanese, and Korean, each character is
@@ -670,6 +699,7 @@ model DocumentWord {
   confidence: float32;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("""
   A selection mark object representing check boxes, radio buttons, and other
   elements indicating a selection.
@@ -695,6 +725,7 @@ model DocumentSelectionMark {
   confidence: float32;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("""
   A content line object consisting of an adjacent sequence of content elements,
   such as words and selection marks.
@@ -715,6 +746,7 @@ model DocumentLine {
   spans: DocumentSpan[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("A barcode object.")
 model DocumentBarcode {
   @doc("Barcode kind.")
@@ -740,6 +772,7 @@ model DocumentBarcode {
   confidence: float32;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("A formula object.")
 model DocumentFormula {
   @doc("Formula kind.")
@@ -765,6 +798,7 @@ model DocumentFormula {
   confidence: float32;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("""
   A paragraph object consisting with contiguous lines generally with common
   alignment and spacing.
@@ -783,6 +817,7 @@ model DocumentParagraph {
   spans: DocumentSpan[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Bounding polygon on a specific page of the input.")
 model BoundingRegion {
   @doc("1-based page number of page containing the bounding region.")
@@ -798,6 +833,7 @@ model BoundingRegion {
   polygon: float32[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("A table object consisting table cells arranged in a rectangular layout.")
 model DocumentTable {
   @doc("Number of rows in the table.")
@@ -824,6 +860,7 @@ model DocumentTable {
   footnotes?: DocumentFootnote[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("An object representing the location and content of a table cell.")
 model DocumentTableCell {
   @doc("Table cell kind.")
@@ -857,6 +894,7 @@ model DocumentTableCell {
   elements?: DocumentElement[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("An object representing a figure in the document.")
 model DocumentFigure {
   @doc("Bounding regions covering the figure.")
@@ -878,6 +916,7 @@ model DocumentFigure {
   id?: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("An object representing a section in the document.")
 model DocumentSection {
   @doc("Location of the section in the reading order concatenated content.")
@@ -887,6 +926,7 @@ model DocumentSection {
   elements?: DocumentElement[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("A caption object describing a table or figure.")
 model DocumentCaption {
   @doc("Content of the caption.")
@@ -902,6 +942,7 @@ model DocumentCaption {
   elements?: DocumentElement[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("A footnote object describing a table or figure.")
 model DocumentFootnote {
   @doc("Content of the footnote.")
@@ -923,6 +964,7 @@ model DocumentFootnote {
   """)
 scalar DocumentElement extends string;
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("""
   An object representing a form field with distinct field label (key) and field
   value (may be empty).
@@ -940,6 +982,7 @@ model DocumentKeyValuePair {
   confidence: float32;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("An object representing the field key or value in a key-value pair.")
 model DocumentKeyValueElement {
   @doc("Concatenated content of the key-value element in reading order.")
@@ -952,6 +995,7 @@ model DocumentKeyValueElement {
   spans: DocumentSpan[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("An object representing observed text styles.")
 model DocumentStyle {
   @doc("Is content handwritten?")
@@ -986,6 +1030,7 @@ model DocumentStyle {
   confidence: float32;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("An object representing the detected language for a given text span.")
 model DocumentLanguage {
   @doc("""
@@ -1006,6 +1051,7 @@ model DocumentLanguage {
   confidence: float32;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("An object describing the location and semantic content of a document.")
 model AnalyzedDocument {
   @doc("Document type.")
@@ -1028,6 +1074,7 @@ model AnalyzedDocument {
   confidence: float32;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("An object representing the content and location of a field value.")
 model DocumentField {
   @doc("Data type of the field value.")
@@ -1093,6 +1140,7 @@ model DocumentField {
   confidence?: float32;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Currency field value.")
 model CurrencyValue {
   @doc("Currency amount.")
@@ -1105,6 +1153,7 @@ model CurrencyValue {
   currencyCode?: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Address field value.")
 model AddressValue {
   @doc("House or building number.")
@@ -1153,6 +1202,7 @@ model AddressValue {
   level?: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Request body to build a new custom document model.")
 model BuildDocumentModelRequest {
   @doc("Unique document model name.")
@@ -1188,6 +1238,7 @@ model BuildDocumentModelRequest {
   allowOverwrite?: boolean = false;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Azure Blob Storage content.")
 model AzureBlobContentSource {
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
@@ -1198,6 +1249,7 @@ model AzureBlobContentSource {
   prefix?: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("File list in Azure Blob Storage.")
 model AzureBlobFileListContentSource {
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
@@ -1208,6 +1260,7 @@ model AzureBlobFileListContentSource {
   fileList: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Request body to create a composed document model from component document models.")
 model ComposeDocumentModelRequest {
   @doc("Unique document model name.")
@@ -1231,6 +1284,7 @@ model ComposeDocumentModelRequest {
   tags?: Record<string>;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Request body to authorize document model copy.")
 model AuthorizeCopyRequest {
   @doc("Unique document model name.")
@@ -1245,6 +1299,7 @@ model AuthorizeCopyRequest {
   tags?: Record<string>;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("""
   Authorization to copy a document model to the specified target resource and
   modelId.
@@ -1273,6 +1328,7 @@ model ModelCopyAuthorization {
   expirationDateTime: utcDateTime;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Request body to authorize document classifier copy.")
 model AuthorizeClassifierCopyRequest {
   @doc("Unique document classifier name.")
@@ -1287,6 +1343,7 @@ model AuthorizeClassifierCopyRequest {
   tags?: Record<string>;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("""
   Authorization to copy a document classifier to the specified target resource and
   classifierId.
@@ -1315,6 +1372,7 @@ model ClassifierCopyAuthorization {
   expirationDateTime: utcDateTime;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Operation info.")
 @resource("operations")
 @discriminator("kind")
@@ -1354,6 +1412,7 @@ model DocumentIntelligenceOperationDetails {
   error?: DocumentIntelligenceError;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @resource("documentModels")
 @doc("Document model info.")
 model DocumentModelDetails {
@@ -1423,6 +1482,7 @@ model DocumentModelDetails {
   trainingHours?: float32;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Document type info.")
 model DocumentTypeDetails {
   @doc("Document model description.")
@@ -1456,6 +1516,7 @@ model DocumentTypeDetails {
   maxDocumentsToAnalyze?: int32;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Description of the field semantic schema using a JSON Schema style syntax.")
 model DocumentFieldSchema {
   @doc("Semantic data type of the field value.")
@@ -1475,6 +1536,7 @@ model DocumentFieldSchema {
   properties?: Record<DocumentFieldSchema>;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Request body to build a new custom document classifier.")
 model BuildDocumentClassifierRequest {
   @doc("Unique document classifier name.")
@@ -1496,6 +1558,7 @@ model BuildDocumentClassifierRequest {
   allowOverwrite?: boolean = false;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Classifier document type info.")
 model ClassifierDocumentTypeDetails {
   @doc("Type of training data source.")
@@ -1516,6 +1579,7 @@ model ClassifierDocumentTypeDetails {
   azureBlobFileListSource?: AzureBlobFileListContentSource;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Document classifier info.")
 @resource("documentClassifiers")
 model DocumentClassifierDetails {
@@ -1554,6 +1618,7 @@ model DocumentClassifierDetails {
   warnings?: DocumentIntelligenceWarning[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Document classification parameters.")
 model ClassifyDocumentRequest {
   @doc("Document URL to classify.  Either urlSource or base64Source must be specified.")
@@ -1566,12 +1631,14 @@ model ClassifyDocumentRequest {
   base64Source?: bytes;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("General information regarding the current resource.")
 model DocumentIntelligenceResourceDetails {
   @doc("Details regarding custom document models.")
   customDocumentModels: CustomDocumentModelsDetails;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Details regarding custom document models.")
 model CustomDocumentModelsDetails {
   @doc("Number of custom document models in the current resource.")
@@ -1581,6 +1648,7 @@ model CustomDocumentModelsDetails {
   limit: int32;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Get Operation response object.")
 model DocumentModelBuildOperationDetails
   extends DocumentIntelligenceOperationDetails {
@@ -1592,6 +1660,7 @@ model DocumentModelBuildOperationDetails
   kind: OperationKind.documentModelBuild;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Get Operation response object.")
 model DocumentModelComposeOperationDetails
   extends DocumentIntelligenceOperationDetails {
@@ -1603,6 +1672,7 @@ model DocumentModelComposeOperationDetails
   kind: OperationKind.documentModelCompose;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Get Operation response object.")
 model DocumentModelCopyToOperationDetails
   extends DocumentIntelligenceOperationDetails {
@@ -1614,6 +1684,7 @@ model DocumentModelCopyToOperationDetails
   kind: OperationKind.documentModelCopyTo;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Get Operation response object.")
 model DocumentClassifierCopyToOperationDetails
   extends DocumentIntelligenceOperationDetails {
@@ -1625,6 +1696,7 @@ model DocumentClassifierCopyToOperationDetails
   kind: OperationKind.documentClassifierCopyTo;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Get Operation response object.")
 model DocumentClassifierBuildOperationDetails
   extends DocumentIntelligenceOperationDetails {

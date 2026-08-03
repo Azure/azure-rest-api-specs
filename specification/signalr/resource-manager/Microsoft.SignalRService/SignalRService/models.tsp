@@ -227,6 +227,7 @@ union ScaleType {
 /**
  * REST API operation supported by resource provider.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Operation {
   /**
    * Name of the operation with format: {provider}/{resource}/{operation}

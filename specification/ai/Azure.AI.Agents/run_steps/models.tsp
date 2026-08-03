@@ -595,6 +595,7 @@ model ActivityFunctionParameters {
   additionalProperties?: boolean;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("The function argument and description.")
 @added(Versions.v2025_05_15_preview)
 model FunctionArgument {

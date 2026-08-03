@@ -11,6 +11,7 @@ using Azure.ClientGenerator.Core;
 namespace Storage.Queues;
 
 /** Error codes returned by the service */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union StorageErrorCode {
   /** AccountAlreadyExists */
   AccountAlreadyExists: "AccountAlreadyExists",
@@ -194,6 +195,7 @@ enum ListQueuesIncludeType {
 }
 
 /** The service properties. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @Xml.name("StorageServiceProperties")
 model QueueServiceProperties {
   /** The logging properties. */
@@ -210,6 +212,7 @@ model QueueServiceProperties {
 }
 
 /** Azure Analytics Logging settings. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Logging {
   /** The version of the logging properties. */
   @Xml.name("Version") version: string;
@@ -228,6 +231,7 @@ model Logging {
 }
 
 /** The retention policy. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model RetentionPolicy {
   /** Whether to enable the retention policy. */
   @Xml.name("Enabled") enabled: boolean;
@@ -239,6 +243,7 @@ model RetentionPolicy {
 }
 
 /** The metrics properties. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Metrics {
   /** The version of the metrics properties. */
   @Xml.name("Version") version?: string;
@@ -254,6 +259,7 @@ model Metrics {
 }
 
 /** The CORS rules. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @Xml.name("CorsRule")
 model CorsRule {
   /** The allowed origins. */
@@ -275,6 +281,7 @@ model CorsRule {
 }
 
 /** The error response. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @error
 @mediaTypeHint("application/xml")
 model Error {
@@ -290,12 +297,14 @@ model Error {
 }
 
 /** Statistics for the storage queue service. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model QueueServiceStats {
   /** The geo replication stats. */
   @Xml.name("GeoReplication") geoReplication?: GeoReplication;
 }
 
 /** Geo replication information for the secondary storage location. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model GeoReplication {
   /** The status of the secondary location. */
   @Xml.name("Status") status: GeoReplicationStatus;
@@ -312,6 +321,7 @@ model GeoReplication {
 }
 
 /** The geo replication status. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union GeoReplicationStatus {
   /** The geo replication is live. */
   Live: "live",
@@ -355,6 +365,7 @@ model ListQueuesResponse {
 }
 
 /** An Azure Storage Queue. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @Xml.name("Queue")
 model QueueItem {
   /** The name of the queue. */
@@ -365,6 +376,7 @@ model QueueItem {
 }
 
 /** The signed identifier. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model SignedIdentifier {
   /** The unique ID for the signed identifier. */
   @Xml.name("Id") id: string;
@@ -374,6 +386,7 @@ model SignedIdentifier {
 }
 
 /** The access policy. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AccessPolicy {
   /** The date-time the policy is active. */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "rfc3339-fixed-width is required because the Queue service rejects timestamps that do not have exactly 7 fractional-second digits. Without this encoding the Rust time crate drops trailing zeros, producing variable precision (e.g. 6 digits instead of 7) which causes the service to return InvalidXmlDocument (HTTP 400)."
@@ -464,12 +477,14 @@ model PeekedMessages {
 }
 
 /** The queue message. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model QueueMessage {
   /** The content of the message. */
   @Xml.name("MessageText") messageText: string;
 }
 
 /** The sent queue message. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @Xml.name("QueueMessage")
 model SentMessage {
   /** The ID of the message. */
@@ -498,6 +513,7 @@ model SentMessage {
 }
 
 /** The peeked queue message. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @Xml.name("QueueMessage")
 model PeekedMessage {
   /** The ID of the message. */
@@ -675,6 +691,7 @@ model KeyInfo {
 }
 
 /** A user delegation key. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model UserDelegationKey {
   /** The Entra ID object ID in GUID format. */
   @Xml.name("SignedOid")

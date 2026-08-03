@@ -44,6 +44,7 @@ union PrincipalType {
 /**
  * Resource type of the destination tier override.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union ResourceType {
   string,
 

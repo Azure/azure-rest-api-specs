@@ -7023,6 +7023,7 @@ model SentinelOnboardingStatesList {
 /**
  * Operation provided by provider
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Operation {
   /**
    * Properties of the operation

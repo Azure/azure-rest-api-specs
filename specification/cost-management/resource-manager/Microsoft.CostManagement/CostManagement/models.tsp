@@ -791,6 +791,7 @@ union ReportGranularityType {
 /**
  * The name of the aggregation function to use.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union FunctionType {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -2601,6 +2602,7 @@ model ReportManifest {
 /**
  * The context of the Cost Details request.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model RequestContext {
   /**
    * The request scope of the request.

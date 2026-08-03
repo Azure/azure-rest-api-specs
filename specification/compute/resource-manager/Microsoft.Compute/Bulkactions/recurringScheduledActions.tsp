@@ -23,6 +23,7 @@ namespace Microsoft.Compute;
 
 // ------------------ Shared enums ------------------
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @added(Versions.`2026-07-06-preview`)
 @doc("The type of resource being targeted")
 union ResourceType {
@@ -542,6 +543,7 @@ model ScheduledActionResourceOperationResponse {
   resourcesStatuses: Array<ResourceStatus>;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @added(Versions.`2026-07-06-preview`)
 @doc("The scheduled action resource")
 model ScheduledAction is TrackedResource<ScheduledActionProperties> {

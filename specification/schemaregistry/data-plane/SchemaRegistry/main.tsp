@@ -201,6 +201,7 @@ alias SchemasContent = {
   schemaContent: bytes;
 };
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Metadata of a schema.")
 model SchemaProperties {
   @doc("URL location of schema, identified by schema group, schema name, and version.")

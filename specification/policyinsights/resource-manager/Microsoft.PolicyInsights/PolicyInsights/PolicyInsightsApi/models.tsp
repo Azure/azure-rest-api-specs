@@ -277,6 +277,7 @@ model ErrorDefinition {
 /**
  * Scenario specific error details.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model TypedErrorInfo {
   /**
    * The type of included error details.
@@ -295,6 +296,7 @@ model TypedErrorInfo {
 /**
  * Error response.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @error
 model ErrorResponse {
   /**
@@ -1816,6 +1818,7 @@ model ComponentExpressionEvaluationDetails {
 /**
  * Operation definition.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Operation {
   /**
    * Operation name.

@@ -444,6 +444,7 @@ union NGroupUpdateMode {
  * The type of identity used for the container group. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the container group.
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 enum ResourceIdentityType {
   /**
    * SystemAssigned
@@ -525,6 +526,7 @@ model ContainerGroupListResult is Azure.Core.Page<ListResultContainerGroup>;
  * The Resource model definition.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "For backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ContainerGroupUpdate {
   /**
    * The resource id.
@@ -1932,6 +1934,7 @@ model OperationListResult is Azure.Core.Page<Operation>;
 /**
  * An operation for Azure Container Instance service.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Operation {
   /**
    * The name of the operation.

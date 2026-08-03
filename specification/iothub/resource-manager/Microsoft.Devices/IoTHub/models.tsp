@@ -571,6 +571,7 @@ enum IotHubSkuTier {
  * The type of identity used for the resource. The type 'SystemAssigned,UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the service.
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "This is a fixed, closed set of identity types (modelAsString: false) in the published API; retained as a closed enum to preserve backward compatibility."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 enum ResourceIdentityType {
   /**
    * SystemAssigned
@@ -669,6 +670,7 @@ enum IotHubNameUnavailabilityReason {
 /**
  * IoT Hub REST API operation
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Operation {
   /**
    * Operation name: {provider}/{resource}/{read | write | action | delete}
@@ -714,6 +716,7 @@ model OperationDisplay {
 /**
  * Error details.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @error
 model ErrorDetails {
   /**
@@ -1915,6 +1918,7 @@ model SystemData {
 /**
  * The common properties of an Azure resource.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Resource {
   /**
    * The resource identifier.

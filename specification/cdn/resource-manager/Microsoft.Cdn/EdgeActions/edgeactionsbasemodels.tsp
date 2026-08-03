@@ -256,6 +256,7 @@ model EdgeActionOperationProperties {
 }
 
 /** Error details for operations */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ErrorDetails {
   @doc("Error code.")
   code: string;

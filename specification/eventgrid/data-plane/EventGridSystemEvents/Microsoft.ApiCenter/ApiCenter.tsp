@@ -3,6 +3,7 @@ import "./ApiCenterExample.tsp";
 namespace Microsoft.EventGrid.SystemEvents;
 
 /** Schema of the data property of an EventGridEvent for a Microsoft.ApiCenter.ApiDefinitionAdded event. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @example(ApiCenterApiDefinitionAddedExample)
 model ApiCenterApiDefinitionAddedEventData {
   /** API definition title. */
@@ -16,6 +17,7 @@ model ApiCenterApiDefinitionAddedEventData {
 }
 
 /** Schema of the data property of an EventGridEvent for a Microsoft.ApiCenter.ApiDefinitionUpdated event. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @example(ApiCenterApiDefinitionUpdatedExample)
 model ApiCenterApiDefinitionUpdatedEventData {
   /** API definition title. */
@@ -29,6 +31,7 @@ model ApiCenterApiDefinitionUpdatedEventData {
 }
 
 /** API specification details. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ApiCenterApiSpecification {
   /** Specification name. */
   name: string;

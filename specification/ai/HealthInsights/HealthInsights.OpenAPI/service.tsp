@@ -28,6 +28,7 @@ model EntraIdToken
   is Azure.Core.AadOauth2Auth<["https://cognitiveservices.azure.com/.default"]>;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "https://github.com/Azure/typespec-azure/issues/3107"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 enum ApiVersion {
   v2024_04_01: "2024-04-01",
   v2024_08_01_preview: "2024-08-01-preview",

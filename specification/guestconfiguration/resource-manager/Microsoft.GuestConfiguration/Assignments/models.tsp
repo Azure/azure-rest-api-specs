@@ -13,6 +13,7 @@ namespace Microsoft.GuestConfiguration;
 /**
  * Error response of an operation failure.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @error
 model ErrorResponse {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -518,6 +519,7 @@ model VmssvmInfo {
 /**
  * The core properties of ARM resources
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Resource {
   /**
    * ARM resource id of the guest configuration assignment.
@@ -705,6 +707,7 @@ model OperationList {
 /**
  * GuestConfiguration REST API operation.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Operation {
   /**
    * Operation name: For example, providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/write or read.

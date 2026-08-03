@@ -411,6 +411,7 @@ model Step {
 /**
  * Common error response.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @error
 model ErrorResponse {
   /**
@@ -422,6 +423,7 @@ model ErrorResponse {
 /**
  * Error details.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Error {
   /**
    * Server defined error code.
@@ -459,6 +461,7 @@ model Error {
  * An object containing more specific information than the current object about
  * the error.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model InnerError {
   /**
    * A more specific error code than what was provided by the containing error.

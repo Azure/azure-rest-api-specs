@@ -12,6 +12,7 @@ using Azure.ClientGenerator.Core;
 namespace Storage.File;
 
 /** Error codes returned by the service */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union StorageErrorCode {
   string,
 
@@ -248,6 +249,7 @@ union StorageErrorCode {
 }
 
 /** The access tier of the share. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union ShareAccessTier {
   string,
 
@@ -265,6 +267,7 @@ union ShareAccessTier {
 }
 
 /** The share token intent. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union ShareTokenIntent {
   string,
 
@@ -273,6 +276,7 @@ union ShareTokenIntent {
 }
 
 /** The NFS file type. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union NfsFileType {
   string,
 
@@ -312,6 +316,7 @@ enum AccessRight {
 
 /** The current lease status of the share. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 enum LeaseStatusType {
   /** locked */
   locked,
@@ -322,6 +327,7 @@ enum LeaseStatusType {
 
 /** Lease state of the share. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 enum LeaseStateType {
   /** available */
   available,
@@ -344,6 +350,7 @@ enum LeaseStateType {
  * duration.
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 enum LeaseDurationType {
   /** infinite */
   infinite,
@@ -354,6 +361,7 @@ enum LeaseDurationType {
 
 /** The root squash setting for the share. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 enum ShareRootSquash {
   /** NoRootSquash */
   NoRootSquash,
@@ -367,6 +375,7 @@ enum ShareRootSquash {
 
 /** The file permission format. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 enum FilePermissionFormat {
   /** Sddl */
   Sddl,
@@ -406,6 +415,7 @@ enum ListSharesIncludeType {
 
 /** The permission copy mode type. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 enum PermissionCopyModeType {
   /** source */
   source,
@@ -416,6 +426,7 @@ enum PermissionCopyModeType {
 
 /** The mode copy mode. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 enum ModeCopyMode {
   /** source */
   source,
@@ -426,6 +437,7 @@ enum ModeCopyMode {
 
 /** The owner copy mode. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 enum OwnerCopyMode {
   /** source */
   source,
@@ -446,6 +458,7 @@ enum DeleteSnapshotsOptionType {
 
 /** The file last written mode. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 enum FileLastWrittenMode {
   /** Now */
   Now,
@@ -907,6 +920,7 @@ model RetentionPolicy {
 }
 
 /** Settings for SMB multichannel */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @Xml.name("Multichannel")
 model SmbMultichannel {
   /** If SMB multichannel is enabled. */
@@ -934,6 +948,7 @@ model ClearRange {
 }
 
 /** Protocol settings */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @Xml.name("ProtocolSettings")
 model ShareProtocolSettings {
   /** Settings for SMB protocol. */
@@ -944,6 +959,7 @@ model ShareProtocolSettings {
 }
 
 /** Settings for SMB protocol. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @Xml.name("SMB")
 model ShareSmbSettings {
   /** Settings for SMB Multichannel. */
@@ -1014,6 +1030,7 @@ model ShareFileRangeListSegment {
  *
  * This defines the wire format only. Language SDKs wrap this in idiomatic error types.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @error
 @mediaTypeHint("application/xml")
 model Error {
@@ -1111,6 +1128,7 @@ model KeyInfo {
 }
 
 /** A user delegation key */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model UserDelegationKey {
   /** The Azure Active Directory object ID in GUID format. */
   @Xml.name("SignedOid") signedOid: string;
@@ -1144,6 +1162,7 @@ model UserDelegationKey {
 
 /** Specify one of the following options: - Update: Writes the bytes specified by the request body into the specified range. - Clear: Clears the specified range and releases the space used in storage for that range. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 enum FileRangeWriteType {
   /** Writes the bytes specified by the request body into the specified range. */
   update: "update",
@@ -1498,6 +1517,7 @@ alias PaidBurstingResponseHeaders = {
 
 /** The copy status. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 enum CopyStatus {
   /** The copy operation is pending. */
   Pending: "pending",

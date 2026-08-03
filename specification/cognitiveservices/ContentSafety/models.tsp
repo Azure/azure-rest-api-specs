@@ -12,6 +12,7 @@ using Azure.ClientGenerator.Core;
 
 namespace ContentSafety;
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("The harm category supported in Text content analysis.")
 union TextCategory {
   string,
@@ -29,6 +30,7 @@ union TextCategory {
   "Violence",
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("The harm category supported in Image content analysis.")
 union ImageCategory {
   string,
@@ -46,6 +48,7 @@ union ImageCategory {
   "Violence",
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("The type of text analysis output.")
 union AnalyzeTextOutputType {
   string,
@@ -57,6 +60,7 @@ union AnalyzeTextOutputType {
   EightSeverityLevels: "EightSeverityLevels",
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("The type of image analysis output.")
 union AnalyzeImageOutputType {
   string,
@@ -65,6 +69,7 @@ union AnalyzeImageOutputType {
   FourSeverityLevels: "FourSeverityLevels",
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("The text analysis request.")
 model AnalyzeTextOptions {
   @doc("The text to be analyzed. We support a maximum of 10k Unicode characters (Unicode code points) in the text of one request.")
@@ -84,6 +89,7 @@ model AnalyzeTextOptions {
   outputType?: AnalyzeTextOutputType = AnalyzeTextOutputType.FourSeverityLevels;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("The text analysis response.")
 model AnalyzeTextResult {
   @doc("The blocklist match details.")
@@ -93,6 +99,7 @@ model AnalyzeTextResult {
   categoriesAnalysis: TextCategoriesAnalysis[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("The result of blocklist match.")
 model TextBlocklistMatch {
   @doc("The name of the matched blocklist.")
@@ -108,6 +115,7 @@ model TextBlocklistMatch {
   blocklistItemText: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Text analysis result.")
 model TextCategoriesAnalysis {
   @doc("The text analysis category.")
@@ -117,6 +125,7 @@ model TextCategoriesAnalysis {
   severity?: int32;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("The image analysis request.")
 model AnalyzeImageOptions {
   @doc("The image to be analyzed.")
@@ -129,6 +138,7 @@ model AnalyzeImageOptions {
   outputType?: AnalyzeImageOutputType = AnalyzeImageOutputType.FourSeverityLevels;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("The image can be either base64 encoded bytes or a blob URL. You can choose only one of these options. If both are provided, the request will be refused. The maximum image size is 2048 x 2048 pixels and should not exceed 4 MB, while the minimum image size is 50 x 50 pixels.")
 @clientName("ContentSafetyImageData", "csharp")
 @clientName("ContentSafetyImageData", "java")
@@ -141,12 +151,14 @@ model ImageData {
   blobUrl?: url;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("The image analysis response.")
 model AnalyzeImageResult {
   @doc("Analysis result for categories.")
   categoriesAnalysis: ImageCategoriesAnalysis[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Image analysis result.")
 model ImageCategoriesAnalysis {
   @doc("The image analysis category.")
@@ -156,6 +168,7 @@ model ImageCategoriesAnalysis {
   severity?: int32;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Text Blocklist.")
 @resource("text/blocklists")
 model TextBlocklist {
@@ -173,6 +186,7 @@ model TextBlocklist {
   description?: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Item in a TextBlocklist.")
 @resource("blocklistItems")
 @parentResource(TextBlocklist)
@@ -196,18 +210,21 @@ model TextBlocklistItem {
   isRegex?: boolean;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("The request to add blocklistItems to a text blocklist.")
 model AddOrUpdateTextBlocklistItemsOptions {
   @doc("Array of blocklistItems to add.")
   blocklistItems: TextBlocklistItem[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("The response of adding blocklistItems to the text blocklist.")
 model AddOrUpdateTextBlocklistItemsResult {
   @doc("Array of blocklistItems have been added.")
   blocklistItems: TextBlocklistItem[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("The request to remove blocklistItems from a text blocklist.")
 model RemoveTextBlocklistItemsOptions {
   @doc("Array of blocklistItemIds to remove.")

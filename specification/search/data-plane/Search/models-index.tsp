@@ -10,6 +10,7 @@ using TypeSpec.Versioning;
 namespace Search;
 
 /** Allows the user to choose whether a semantic call should fail completely, or to return partial results. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union SemanticErrorMode {
   string,
 
@@ -21,6 +22,7 @@ union SemanticErrorMode {
 }
 
 /** This parameter is only valid if the query type is `semantic`. If set, the query returns answers extracted from key passages in the highest ranked documents. The number of answers returned can be configured by appending the pipe character `|` followed by the `count-<number of answers>` option after the answers parameter value, such as `extractive|count-3`. Default count is 1. The confidence threshold can be configured by appending the pipe character `|` followed by the `threshold-<confidence threshold>` option after the answers parameter value, such as `extractive|threshold-0.9`. Default threshold is 0.7. The maximum character length of answers can be configured by appending the pipe character '|' followed by the 'count-<number of maximum character length>', such as 'extractive|maxcharlength-600'. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union QueryAnswerType {
   string,
 
@@ -32,6 +34,7 @@ union QueryAnswerType {
 }
 
 /** This parameter is only valid if the query type is `semantic`. If set, the query returns captions extracted from key passages in the highest ranked documents. When Captions is set to `extractive`, highlighting is enabled by default, and can be configured by appending the pipe character `|` followed by the `highlight-<true/false>` option, such as `extractive|highlight-true`. Defaults to `None`. The maximum character length of captions can be configured by appending the pipe character '|' followed by the 'count-<number of maximum character length>', such as 'extractive|maxcharlength-600'. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union QueryCaptionType {
   string,
 
@@ -343,6 +346,7 @@ union VectorThresholdKind {
 }
 
 /** Determines whether or not filters are applied before or after the vector search is performed. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union VectorFilterMode {
   string,
 
@@ -382,6 +386,7 @@ union SemanticFieldState {
 }
 
 /** Reason that a partial response was returned for a semantic ranking request. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union SemanticErrorReason {
   string,
 
@@ -396,6 +401,7 @@ union SemanticErrorReason {
 }
 
 /** Type of partial response that was returned for a semantic ranking request. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union SemanticSearchResultsType {
   string,
 
@@ -432,6 +438,7 @@ union QueryType {
 
 /** Specifies whether any or all of the search terms must be matched in order to count the document as a match. */
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Closed enum by design"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union SearchMode {
   /** Any of the search terms must be matched in order to count the document as a match. */
   Any: "any",
@@ -442,6 +449,7 @@ union SearchMode {
 
 /** A value that specifies whether we want to calculate scoring statistics (such as document frequency) globally for more consistent scoring, or locally, for lower latency. The default is 'local'. Use 'global' to aggregate scoring statistics globally before scoring. Using global scoring statistics can increase latency of search queries. */
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Closed enum by design"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union ScoringStatistics {
   /** The scoring statistics will be calculated locally for lower latency. */
   Local: "local",
@@ -452,6 +460,7 @@ union ScoringStatistics {
 
 /** The operation to perform on a document in an indexing batch. */
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Closed enum by design"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union IndexActionType {
   /** Inserts the document into the index if it is new and updates it if it exists. All fields are replaced in the update case. */
   Upload: "upload",
@@ -468,6 +477,7 @@ union IndexActionType {
 
 /** Specifies the mode for Autocomplete. The default is 'oneTerm'. Use 'twoTerms' to get shingles and 'oneTermWithContext' to use the current context in producing autocomplete terms. */
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Closed enum by design"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union AutocompleteMode {
   /** Only one term is suggested. If the query has two terms, only the last term is completed. For example, if the input is 'washington medic', the suggested terms could include 'medicaid', 'medicare', and 'medicine'. */
   OneTerm: "oneTerm",
@@ -480,6 +490,7 @@ union AutocompleteMode {
 }
 
 /** Parameters grouped for search operations. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model SearchOptions {
   /** A value that specifies whether to fetch the total count of results. Default is false. Setting this value to true may have a performance impact. Note that the count returned is an approximation. */
   @query("$count")
@@ -611,6 +622,7 @@ model SearchOptions {
 }
 
 /** Parameters grouped for suggest operations. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model SuggestOptions {
   /** An OData expression that filters the documents considered for suggestions. */
   @query("$filter")
@@ -716,6 +728,7 @@ model SearchDocumentsResult {
 
 /** A single bucket of a facet query result. Reports the number of documents with a field value falling within a particular range or having a particular value or interval. */
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model FacetResult is Record<unknown> {
   /** The approximate count of documents falling within the bucket described by this facet. */
   @visibility(Lifecycle.Read)
@@ -761,6 +774,7 @@ model FacetResult is Record<unknown> {
 
 /** An answer is a text passage extracted from the contents of the most relevant documents that matched the query. Answers are extracted from the top search results. Answer candidates are scored and the top answers are selected. */
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model QueryAnswerResult is Record<unknown> {
   /** The score value represents how relevant the answer is to the query relative to other answers returned for the query. */
   @visibility(Lifecycle.Read)
@@ -944,6 +958,7 @@ model SearchRequest {
 }
 
 /** The query parameters for vector and hybrid search queries. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @discriminator("kind")
 model VectorQuery {
   /** Number of nearest neighbors to return as top hits. */
@@ -1040,6 +1055,7 @@ model SearchResult {
 
 /** Captions are the most representative passages from the document relatively to the search query. They are often used as document summary. Captions are only returned for queries of type `semantic`. */
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model QueryCaptionResult {
   ...Record<unknown>;
 
@@ -1240,6 +1256,7 @@ model SuggestRequest {
 }
 
 /** Contains a batch of document write actions to send to the index. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model IndexBatch {
   /** The actions in the batch. */
   value: IndexAction[];
@@ -1262,6 +1279,7 @@ model LookupDocument {
 }
 
 /** Response containing the status of operations for all documents in the indexing request. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model IndexDocumentsResult {
   /** Response containing the status of operations for all actions in the batch. */
   #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
@@ -1275,6 +1293,7 @@ model IndexDocumentsResult {
 }
 
 /** Status of an indexing operation for a single document. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model IndexingResult {
   /** The key of a document that was in the indexing request. */
   @visibility(Lifecycle.Read)
@@ -1294,6 +1313,7 @@ model IndexingResult {
 }
 
 /** The result of Autocomplete query. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AutocompleteResult {
   /** A value indicating the percentage of the index that was considered by the autocomplete request, or null if minimumCoverage was not specified in the request. */
   @encodedName("application/json", "@search.coverage")
@@ -1307,6 +1327,7 @@ model AutocompleteResult {
 }
 
 /** The result of Autocomplete requests. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AutocompleteItem {
   /** The completed term. */
   @visibility(Lifecycle.Read)
@@ -1354,6 +1375,7 @@ model AutocompleteRequest {
 }
 
 /** The query parameters to use for vector search when a raw vector value is provided. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model VectorizedQuery extends VectorQuery {
   /** The vector representation of a search query. */
   vector: float32[];
@@ -1363,6 +1385,7 @@ model VectorizedQuery extends VectorQuery {
 }
 
 /** The query parameters to use for vector search when a text value that needs to be vectorized is provided. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model VectorizableTextQuery extends VectorQuery {
   /** The text to be vectorized to perform a vector search query. */
   text: string;

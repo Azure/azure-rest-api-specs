@@ -134,6 +134,7 @@ union KeyUsageType {
  * The type of the action.
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Intentional enum; originally modelAsString=false"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 enum CertificatePolicyAction {
   /** A certificate policy that will email certificate contacts. */
   EmailContacts: "EmailContacts",
@@ -412,6 +413,7 @@ model PlatformManaged {
 /**
  * Properties of the key pair backing a certificate.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model KeyProperties {
   /**
    * Indicates if the private key can be exported. Release policy must be provided when creating the first version of an exportable key.
@@ -446,6 +448,7 @@ model KeyProperties {
 /**
  * Properties of the key backing a certificate.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model SecretProperties {
   /**
    * The media type (MIME type).

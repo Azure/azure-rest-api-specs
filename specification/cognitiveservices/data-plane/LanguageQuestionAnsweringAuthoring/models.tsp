@@ -373,6 +373,7 @@ model UpdateSourceFiles {
 /**
  * Represents the project.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @resource("authoring/query-knowledgebases/projects")
 model QuestionAnsweringProjectMetadata {
   /**
@@ -444,6 +445,7 @@ model ProjectSettings {
 /**
  * Error response.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @error
 model ErrorResponse is Azure.Core.Foundations.ErrorResponseBase<Error>;
 

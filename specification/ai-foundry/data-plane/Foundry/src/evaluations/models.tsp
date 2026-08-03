@@ -165,6 +165,7 @@ model AgentEvaluation {
   result?: Array<AgentEvaluationResult>;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Abstract base model representing a single message in a conversation.")
 @discriminator("role")
 @removed(Versions.v1)

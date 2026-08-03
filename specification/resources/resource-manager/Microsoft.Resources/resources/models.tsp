@@ -106,6 +106,7 @@ union ProviderAuthorizationConsentState {
 /**
  * The extended location type.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union ExtendedLocationType {
   string,
 
@@ -118,6 +119,7 @@ union ExtendedLocationType {
 /**
  * The output format for the exported resources.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union ExportTemplateOutputFormat {
   string,
 
@@ -195,6 +197,7 @@ enum AliasType {
  * The identity type.
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 enum ResourceIdentityType {
   /**
    * SystemAssigned
@@ -220,6 +223,7 @@ enum ResourceIdentityType {
 /**
  * Microsoft.Resources operation
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Operation {
   /**
    * Operation name: {provider}/{resource}/{operation}
@@ -271,6 +275,7 @@ model CloudError {
 }
 
 /** Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.) */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ErrorResponse {
   /** The error code. */
   @visibility(Lifecycle.Read)
@@ -338,6 +343,7 @@ model Provider {
 /**
  * Resource type managed by the resource provider.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ProviderResourceType {
   /**
    * The resource type.
@@ -525,6 +531,7 @@ model ZoneMapping {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ApiProfile {
   /**
    * The profile version.
@@ -792,6 +799,7 @@ model IdentityUserAssignedIdentitiesValue {
 /**
  * Specified resource.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Resource {
   /**
    * Resource ID

@@ -320,6 +320,7 @@ model InteractiveMessage {
   action: ActionBindings;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @added(Versions.c2025_01_15_Preview)
 @discriminator("kind")
 @doc("The message content object used to create interactive messages components.")
