@@ -12,6 +12,7 @@ import "../evaluators/routes.tsp";
 import "../insights/routes.tsp";
 import "../schedules/routes.tsp";
 import "../memory-stores/routes.tsp";
+import "../state-stores/routes.tsp";
 import "../routines/routes.tsp";
 import "../data_generation_jobs/routes.tsp";
 import "../toolboxes/models.tsp";
@@ -35,6 +36,17 @@ namespace Azure.AI.Projects;
 @@usage(MemoryStoreUpdateCompletedResult, Usage.output);
 @@access(MemoryStoreUpdateCompletedResult, Access.public);
 @@clientName(MemoryStoreUpdateCompletedResult, "MemoryUpdateResultDetails");
+
+@@clientName(StateStores.createStateStore, "create");
+@@clientName(StateStores.listStateStores, "list");
+@@clientName(StateStores.getStateStore, "get");
+@@clientName(StateStores.updateStateStore, "update");
+@@clientName(StateStores.deleteStateStore, "delete");
+@@clientName(StateStores.createStateStoreItem, "createItem");
+@@clientName(StateStores.listStateStoreItemKeys, "listKeys");
+@@clientName(StateStores.putStateStoreItem, "putItem");
+@@clientName(StateStores.getStateStoreItem, "getItem");
+@@clientName(StateStores.deleteStateStoreItem, "deleteItem");
 
 @@clientName(JobStatus, "ProjectsJobStatus");
 
