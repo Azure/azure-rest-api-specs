@@ -269,6 +269,15 @@ model ServiceGroupMember {
 @added(Versions.v2026_03_01_preview)
 model ServiceGroupMemberProperties {
   /**
+   * The fully qualified ID of the relationship resource itself
+   * (Microsoft.Relationships/serviceGroupMember or Microsoft.Relationships/contains)
+   * that links this member to the service group. Callers can use this ID with
+   * the Microsoft.Relationships RP to inspect or manage the relationship.
+   */
+  @visibility(Lifecycle.Read)
+  relationshipId?: Azure.Core.armResourceIdentifier;
+
+  /**
    * The relationship type between the service group and this member. Absent
    * when the member is itself a descendant service group (Microsoft.Management/serviceGroups).
    */

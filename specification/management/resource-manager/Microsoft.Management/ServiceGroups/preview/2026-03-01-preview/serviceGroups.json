@@ -675,6 +675,12 @@
       "type": "object",
       "description": "The properties of a service group member.",
       "properties": {
+        "relationshipId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The fully qualified ID of the relationship resource itself\n(Microsoft.Relationships/serviceGroupMember or Microsoft.Relationships/contains)\nthat links this member to the service group. Callers can use this ID with\nthe Microsoft.Relationships RP to inspect or manage the relationship.",
+          "readOnly": true
+        },
         "relationshipType": {
           "$ref": "#/definitions/RelationshipType",
           "description": "The relationship type between the service group and this member. Absent\nwhen the member is itself a descendant service group (Microsoft.Management/serviceGroups).",
