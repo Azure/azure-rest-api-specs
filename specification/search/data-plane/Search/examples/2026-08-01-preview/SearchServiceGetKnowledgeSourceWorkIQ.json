@@ -1,23 +1,25 @@
-{
+﻿{
   "operationId": "KnowledgeSources_Get",
   "title": "SearchServiceGetKnowledgeSourceWorkIQ",
   "parameters": {
-    "endpoint": "https://previewexampleservice.search.windows.net",
-    "sourceName": "ks-workiq-test",
+    "endpoint": "https://typespecpreviewexampleservice.search.windows.net",
+    "sourceName": "ks-preview-test",
     "api-version": "2026-08-01-preview",
+    "Accept": "application/json;odata.metadata=minimal",
     "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
         "@odata.etag": "0x1234568AE7E58A1",
-        "name": "ks-workiq-test",
+        "name": "ks-preview-test",
         "kind": "workIQ",
         "description": "Description of the WorkIQ knowledge source.",
         "encryptionKey": {
           "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
           "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
           "keyVaultUri": "https://myKeyVault.vault.azure.net",
+          "isServiceLevelKey": false,
           "accessCredentials": {
             "applicationId": "00000000-0000-0000-0000-000000000000",
             "applicationSecret": "<applicationSecret>"
@@ -25,9 +27,8 @@
         },
         "workIQParameters": {
           "entraAppAuthentication": {
-            "applicationId": "00000000-0000-0000-0000-000000000000",
-            "federatedCredentialId": "00000000-0000-0000-0000-000000000001",
-            "tenantId": "00000000-0000-0000-0000-000000000002"
+            "applicationId": "11111111-1111-1111-1111-111111111111",
+            "federatedCredentialId": "22222222-2222-2222-2222-222222222222"
           }
         }
       }

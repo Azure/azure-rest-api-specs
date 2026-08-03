@@ -2,8 +2,9 @@
   "operationId": "Indexes_Create",
   "title": "SearchServiceCreateIndex",
   "parameters": {
-    "endpoint": "https://previewexampleservice.search.windows.net",
+    "endpoint": "https://typespecpreviewexampleservice.search.windows.net",
     "api-version": "2026-08-01-preview",
+    "Accept": "application/json;odata.metadata=minimal",
     "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
     "index": {
       "name": "temp-preview-test",
@@ -121,13 +122,38 @@
           "permissionFilter": "userIds"
         },
         {
-          "name": "sensitivityLabels",
+          "name": "sensitivityLabelIds",
+          "type": "Collection(Edm.String)",
+          "retrievable": true,
+          "filterable": true,
+          "sortable": false,
+          "facetable": true,
+          "sensitivityLabelId": true
+        },
+        {
+          "name": "sensitivityLabelNames",
           "type": "Collection(Edm.String)",
           "retrievable": true,
           "filterable": true,
           "sortable": false,
           "facetable": true,
           "sensitivityLabelName": true
+        },
+        {
+          "name": "sourceDocumentId",
+          "type": "Edm.String",
+          "retrievable": true,
+          "filterable": true,
+          "sortable": false,
+          "sourceDocumentId": true
+        },
+        {
+          "name": "sharepointSiteUrl",
+          "type": "Edm.String",
+          "retrievable": true,
+          "filterable": true,
+          "sortable": false,
+          "sharepointSiteUrl": true
         }
       ],
       "scoringProfiles": [
@@ -143,12 +169,12 @@
           },
           "functions": [
             {
+              "fieldName": "category",
+              "boost": 2,
+              "type": "tag",
               "tag": {
                 "tagsParameter": "categoryTag"
-              },
-              "type": "tag",
-              "fieldName": "category",
-              "boost": 2
+              }
             }
           ]
         }
@@ -172,57 +198,57 @@
       ],
       "analyzers": [
         {
+          "@odata.type": "#Microsoft.Azure.Search.CustomAnalyzer",
+          "name": "tagsAnalyzer",
           "tokenizer": "standard_v2",
           "tokenFilters": [
             "common_grams"
           ],
           "charFilters": [
             "html_strip"
-          ],
-          "@odata.type": "#Microsoft.Azure.Search.CustomAnalyzer",
-          "name": "tagsAnalyzer"
+          ]
         }
       ],
       "tokenizers": [
         {
-          "maxTokenLength": 100,
           "@odata.type": "#Microsoft.Azure.Search.StandardTokenizerV2",
-          "name": "my_tokenizer"
+          "name": "my_tokenizer",
+          "maxTokenLength": 100
         }
       ],
       "tokenFilters": [
         {
-          "preserveOriginal": false,
           "@odata.type": "#Microsoft.Azure.Search.AsciiFoldingTokenFilter",
-          "name": "my_tokenFilter"
+          "name": "my_tokenFilter",
+          "preserveOriginal": false
         }
       ],
       "charFilters": [
         {
+          "@odata.type": "#Microsoft.Azure.Search.MappingCharFilter",
+          "name": "my_mapping",
           "mappings": [
             ".=>,",
             "_=>-"
-          ],
-          "@odata.type": "#Microsoft.Azure.Search.MappingCharFilter",
-          "name": "my_mapping"
+          ]
         }
       ],
       "normalizers": [
         {
+          "@odata.type": "#Microsoft.Azure.Search.CustomNormalizer",
+          "name": "my_normalizer",
           "tokenFilters": [
             "my_tokenFilter"
           ],
           "charFilters": [
             "my_mapping"
-          ],
-          "@odata.type": "#Microsoft.Azure.Search.CustomNormalizer",
-          "name": "my_normalizer"
+          ]
         }
       ],
       "similarity": {
+        "@odata.type": "#Microsoft.Azure.Search.BM25Similarity",
         "k1": 10,
-        "b": 0.1,
-        "@odata.type": "#Microsoft.Azure.Search.BM25Similarity"
+        "b": 0.1
       },
       "semantic": {
         "defaultConfiguration": "testconfig",
@@ -278,39 +304,41 @@
         ],
         "algorithms": [
           {
+            "name": "cosine",
+            "kind": "hnsw",
             "hnswParameters": {
               "metric": "cosine"
-            },
-            "name": "cosine",
-            "kind": "hnsw"
+            }
           },
           {
+            "name": "euclidean",
+            "kind": "hnsw",
             "hnswParameters": {
               "metric": "euclidean"
-            },
-            "name": "euclidean",
-            "kind": "hnsw"
+            }
           },
           {
+            "name": "dotProduct",
+            "kind": "hnsw",
             "hnswParameters": {
               "metric": "dotProduct"
-            },
-            "name": "dotProduct",
-            "kind": "hnsw"
+            }
           }
         ],
         "vectorizers": [
           {
+            "name": "openai",
+            "kind": "azureOpenAI",
             "azureOpenAIParameters": {
               "resourceUri": "https://test-sample.openai.azure.com/",
               "deploymentId": "model",
               "apiKey": "api-key",
               "modelName": "text-embedding-3-large"
-            },
-            "name": "openai",
-            "kind": "azureOpenAI"
+            }
           },
           {
+            "name": "custom-web-api",
+            "kind": "customWebApi",
             "customWebApiParameters": {
               "uri": "https://my-custom-endpoint.org/",
               "httpHeaders": {
@@ -323,71 +351,74 @@
               "authIdentity": {
                 "@odata.type": "#Microsoft.Azure.Search.DataNoneIdentity"
               }
-            },
-            "name": "custom-web-api",
-            "kind": "customWebApi"
+            }
           },
           {
+            "name": "aml",
+            "kind": "aml",
             "amlParameters": {
               "uri": "https://my-custom-endpoint.org/",
               "resourceId": "aml resource id",
               "timeout": "PT1M",
               "region": "aml region",
               "modelName": "OpenAI-CLIP-Image-Text-Embeddings-vit-base-patch32"
-            },
-            "name": "aml",
-            "kind": "aml"
+            }
           },
           {
+            "name": "aml-cohere",
+            "kind": "aml",
             "amlParameters": {
               "uri": "https://my-custom-endpoint.org/",
               "resourceId": "aml resource id",
               "timeout": "PT1M",
               "region": "aml region",
               "modelName": "Cohere-embed-v4"
-            },
-            "name": "aml-cohere",
-            "kind": "aml"
+            }
           }
         ],
         "compressions": [
           {
-            "scalarQuantizationParameters": {
-              "quantizedDataType": "int8"
-            },
             "name": "mySQ8",
-            "kind": "scalarQuantization",
             "rescoringOptions": {
               "enableRescoring": true,
               "defaultOversampling": 10,
               "rescoreStorageMethod": "preserveOriginals"
             },
-            "truncationDimension": 2
+            "truncationDimension": 2,
+            "kind": "scalarQuantization",
+            "scalarQuantizationParameters": {
+              "quantizedDataType": "int8"
+            }
           },
           {
             "name": "myBQC",
-            "kind": "binaryQuantization",
             "rescoringOptions": {
               "enableRescoring": true,
               "defaultOversampling": 10,
               "rescoreStorageMethod": "preserveOriginals"
             },
-            "truncationDimension": 2
+            "truncationDimension": 2,
+            "kind": "binaryQuantization"
           },
           {
             "name": "myBQWithoutOriginals",
-            "kind": "binaryQuantization",
             "rescoringOptions": {
               "enableRescoring": true,
               "defaultOversampling": 10,
               "rescoreStorageMethod": "discardOriginals"
             },
-            "truncationDimension": 2
+            "truncationDimension": 2,
+            "kind": "binaryQuantization"
           }
         ]
       },
       "permissionFilterOption": "enabled",
       "purviewEnabled": true,
+      "sharePointConnectorAppRegistration": {
+        "applicationId": "00000000-0000-0000-0000-000000000000",
+        "federatedCredentialId": "00000000-0000-0000-0000-000000000000",
+        "tenantId": "00000000-0000-0000-0000-000000000000"
+      },
       "@odata.etag": "0x1234568AE7E58A1"
     }
   },
@@ -575,7 +606,20 @@
             "synonymMaps": []
           },
           {
-            "name": "sensitivityLabels",
+            "name": "sensitivityLabelIds",
+            "type": "Collection(Edm.String)",
+            "searchable": true,
+            "filterable": true,
+            "retrievable": true,
+            "stored": true,
+            "sortable": false,
+            "facetable": true,
+            "key": false,
+            "sensitivityLabelId": true,
+            "synonymMaps": []
+          },
+          {
+            "name": "sensitivityLabelNames",
             "type": "Collection(Edm.String)",
             "searchable": true,
             "filterable": true,
@@ -585,6 +629,32 @@
             "facetable": true,
             "key": false,
             "sensitivityLabelName": true,
+            "synonymMaps": []
+          },
+          {
+            "name": "sourceDocumentId",
+            "type": "Edm.String",
+            "searchable": true,
+            "filterable": true,
+            "retrievable": true,
+            "stored": true,
+            "sortable": false,
+            "facetable": true,
+            "key": false,
+            "sourceDocumentId": true,
+            "synonymMaps": []
+          },
+          {
+            "name": "sharepointSiteUrl",
+            "type": "Edm.String",
+            "searchable": true,
+            "filterable": true,
+            "retrievable": true,
+            "stored": true,
+            "sortable": false,
+            "facetable": true,
+            "key": false,
+            "sharepointSiteUrl": true,
             "synonymMaps": []
           }
         ],
@@ -853,6 +923,11 @@
               }
             }
           ]
+        },
+        "sharePointConnectorAppRegistration": {
+          "applicationId": "00000000-0000-0000-0000-000000000000",
+          "federatedCredentialId": "00000000-0000-0000-0000-000000000000",
+          "tenantId": "00000000-0000-0000-0000-000000000000"
         }
       }
     }

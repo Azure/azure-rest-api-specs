@@ -2,58 +2,15 @@
   "operationId": "KnowledgeSources_CreateOrUpdate",
   "title": "SearchServiceCreateOrUpdateKnowledgeSourceIndexedSharePoint",
   "parameters": {
-    "endpoint": "https://previewexampleservice.search.windows.net",
+    "endpoint": "https://typespecpreviewexampleservice.search.windows.net",
     "sourceName": "ks-preview-test",
     "api-version": "2026-08-01-preview",
-    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
+    "Accept": "application/json;odata.metadata=minimal",
     "If-Match": null,
     "If-None-Match": null,
     "Prefer": "return=representation",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
     "knowledgeSource": {
-      "indexedSharePointParameters": {
-        "connectionString": "DefaultEndpointsProtocol=https;AccountName=myAccountName;AccountKey=myAccountKey;EndpointSuffix=core.windows.net ",
-        "containerName": "defaultSiteLibrary",
-        "query": "*.docx OR *.pdf",
-        "ingestionParameters": {
-          "identity": {
-            "userAssignedIdentity": "/my/userassigned/id",
-            "@odata.type": "#Microsoft.Azure.Search.DataUserAssignedIdentity"
-          },
-          "embeddingModel": {
-            "azureOpenAIParameters": {
-              "resourceUri": "https://test-sample.openai.azure.com/",
-              "deploymentId": "model",
-              "apiKey": "api-key",
-              "modelName": "text-embedding-3-large"
-            },
-            "kind": "azureOpenAI"
-          },
-          "chatCompletionModel": {
-            "azureOpenAIParameters": {
-              "resourceUri": "https://test-sample.openai.azure.com/",
-              "deploymentId": "myDeployment",
-              "apiKey": "api-key",
-              "modelName": "gpt-4o-mini"
-            },
-            "kind": "azureOpenAI"
-          },
-          "disableImageVerbalization": false,
-          "ingestionSchedule": {
-            "interval": "P1D",
-            "startTime": "2025-01-07T19:30:00Z"
-          },
-          "ingestionPermissionOptions": [
-            "userIds",
-            "groupIds",
-            "rbacScope"
-          ],
-          "contentExtractionMode": "standard",
-          "aiServices": {
-            "uri": "https://my-ai-service.azure.com/",
-            "apiKey": "api-key"
-          }
-        }
-      },
       "name": "ks-preview-test",
       "description": "Description of the SharePoint knowledge source.",
       "kind": "indexedSharePoint",
@@ -65,6 +22,83 @@
         "accessCredentials": {
           "applicationId": "00000000-0000-0000-0000-000000000000",
           "applicationSecret": "<applicationSecret>"
+        }
+      },
+      "indexedSharePointParameters": {
+        "connectionString": "DefaultEndpointsProtocol=https;AccountName=myAccountName;AccountKey=myAccountKey;EndpointSuffix=core.windows.net ",
+        "containerName": "defaultSiteLibrary",
+        "query": "*.docx OR *.pdf",
+        "ingestionParameters": {
+          "identity": {
+            "@odata.type": "#Microsoft.Azure.Search.DataUserAssignedIdentity",
+            "userAssignedIdentity": "/my/userassigned/id"
+          },
+          "embeddingModel": {
+            "kind": "azureOpenAI",
+            "azureOpenAIParameters": {
+              "resourceUri": "https://test-sample.openai.azure.com/",
+              "deploymentId": "model",
+              "apiKey": "api-key",
+              "modelName": "text-embedding-3-large"
+            }
+          },
+          "chatCompletionModel": {
+            "kind": "azureOpenAI",
+            "azureOpenAIParameters": {
+              "resourceUri": "https://test-sample.openai.azure.com/",
+              "deploymentId": "myDeployment",
+              "apiKey": "api-key",
+              "modelName": "gpt-4o-mini"
+            }
+          },
+          "disableImageVerbalization": false,
+          "ingestionSchedule": {
+            "interval": "P1D",
+            "startTime": "2025-01-07T19:30:00Z"
+          },
+          "ingestionPermissionOptions": [
+            "userIds",
+            "groupIds"
+          ],
+          "contentExtractionMode": "standard",
+          "aiServices": {
+            "uri": "https://my-ai-service.azure.com/",
+            "apiKey": "api-key"
+          },
+          "assetStore": {
+            "connectionString": "DefaultEndpointsProtocol=https;AccountName=myAccountName;AccountKey=myAccountKey;EndpointSuffix=core.windows.net ",
+            "containerName": "image-assets"
+          },
+          "freshnessPolicy": {
+            "boostingDuration": "P90D"
+          }
+        },
+        "queryHints": {
+          "filters": [
+            {
+              "field": "model",
+              "fieldValues": [
+                "Model-X100",
+                "Model-X200",
+                "Model-Pro"
+              ],
+              "filterInstructions": "Product model name."
+            }
+          ],
+          "boosts": [
+            {
+              "kind": "fieldValue",
+              "boostInstructions": "Document language; pick from the user's locale.",
+              "field": "language",
+              "fieldValues": [
+                "en",
+                "ja",
+                "fr",
+                "de"
+              ],
+              "boost": 2
+            }
+          ]
         }
       }
     }
@@ -80,6 +114,7 @@
           "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
           "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
           "keyVaultUri": "https://myKeyVault.vault.azure.net",
+          "isServiceLevelKey": false,
           "accessCredentials": {
             "applicationId": "00000000-0000-0000-0000-000000000000",
             "applicationSecret": "<applicationSecret>"
@@ -93,8 +128,7 @@
             "disableImageVerbalization": false,
             "ingestionPermissionOptions": [
               "userIds",
-              "groupIds",
-              "rbacScope"
+              "groupIds"
             ],
             "contentExtractionMode": "standard",
             "identity": {
@@ -123,10 +157,44 @@
               "interval": "P1D",
               "startTime": "2024-06-06T00:01:50.265Z"
             },
+            "assetStore": {
+              "connectionString": "DefaultEndpointsProtocol=https;AccountName=myAccountName;AccountKey=myAccountKey;EndpointSuffix=core.windows.net ",
+              "containerName": "image-assets"
+            },
             "aiServices": {
               "uri": "https://my-ai-service.azure.com/",
               "apiKey": "api-key"
+            },
+            "freshnessPolicy": {
+              "boostingDuration": "P90D"
             }
+          },
+          "queryHints": {
+            "filters": [
+              {
+                "field": "model",
+                "fieldValues": [
+                  "Model-X100",
+                  "Model-X200",
+                  "Model-Pro"
+                ],
+                "filterInstructions": "Product model name."
+              }
+            ],
+            "boosts": [
+              {
+                "kind": "fieldValue",
+                "field": "language",
+                "fieldValues": [
+                  "en",
+                  "ja",
+                  "fr",
+                  "de"
+                ],
+                "boost": 2.0,
+                "boostInstructions": "Document language; pick from the user's locale."
+              }
+            ]
           }
         }
       }
@@ -141,6 +209,7 @@
           "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
           "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
           "keyVaultUri": "https://myKeyVault.vault.azure.net",
+          "isServiceLevelKey": false,
           "accessCredentials": {
             "applicationId": "00000000-0000-0000-0000-000000000000",
             "applicationSecret": "<applicationSecret>"
@@ -154,8 +223,7 @@
             "disableImageVerbalization": false,
             "ingestionPermissionOptions": [
               "userIds",
-              "groupIds",
-              "rbacScope"
+              "groupIds"
             ],
             "contentExtractionMode": "standard",
             "identity": {
@@ -184,10 +252,44 @@
               "interval": "P1D",
               "startTime": "2024-06-06T00:01:50.265Z"
             },
+            "assetStore": {
+              "connectionString": "DefaultEndpointsProtocol=https;AccountName=myAccountName;AccountKey=myAccountKey;EndpointSuffix=core.windows.net ",
+              "containerName": "image-assets"
+            },
             "aiServices": {
               "uri": "https://my-ai-service.azure.com/",
               "apiKey": "api-key"
+            },
+            "freshnessPolicy": {
+              "boostingDuration": "P90D"
             }
+          },
+          "queryHints": {
+            "filters": [
+              {
+                "field": "model",
+                "fieldValues": [
+                  "Model-X100",
+                  "Model-X200",
+                  "Model-Pro"
+                ],
+                "filterInstructions": "Product model name."
+              }
+            ],
+            "boosts": [
+              {
+                "kind": "fieldValue",
+                "field": "language",
+                "fieldValues": [
+                  "en",
+                  "ja",
+                  "fr",
+                  "de"
+                ],
+                "boost": 2.0,
+                "boostInstructions": "Document language; pick from the user's locale."
+              }
+            ]
           }
         }
       }

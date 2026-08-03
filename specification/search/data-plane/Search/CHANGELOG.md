@@ -13,7 +13,7 @@ It is maintained for internal engineering reference and API Stewardship Board re
 
 **Summary**: Built on top of 2026-05-01-preview. Adds streaming (SSE) retrieval, an `auto` reasoning tier, search-index query hints, server-driven listing pagination, File-source upload enhancements, image serving, per-source controls, retrieve defaults, knowledge base tags, and WorkIQ on-behalf-of auth; restructures LLM activity-record metadata and the WorkIQ reference.
 
-### GA-to-Preview Changes (2026-04-01 → 2026-08-01-preview)
+### GA-to-Preview Changes (2026-04-01 -> 2026-08-01-preview)
 
 Cumulative: this view includes every change in the [2026-05-01-preview GA-to-Preview section](#2026-05-01-preview) plus this release's additions. CI (`openapi-diff`/OAD) diffs against the 2026-04-01 GA and re-reports the **full cumulative breaking set** on every run, so the Breaking Changes below carry the always-returned response fields first introduced in 2026-05-01-preview together with this release's new parameter-order shifts.
 
@@ -35,16 +35,16 @@ All items below are **wire-compatible** (a live caller is unaffected); they are 
 
 **New operations**:
 
-- **Streaming knowledge retrieval**: `KnowledgeRetrieval_RetrieveStream` (POST `.../knowledgebases('{knowledgeBaseName}')/retrieve` with `Accept: text/event-stream`) streams retrieval progress and results as server-sent events on the same route as `KnowledgeRetrieval_Retrieve`.
+- **Streaming knowledge retrieval**: `KnowledgeRetrieval_RetrieveStream` (POST `.../knowledgebases('{knowledgeBaseName}')/retrieve` with `Accept: text/event-stream`) streams retrieval progress and results as server-sent events on the same route as `KnowledgeRetrieval_Retrieve`. The current OpenAPI 2.0 projection exposes the `200` response as an untyped string, so generated C# provides a buffered protocol `Response` without typed per-event parsing; typed SSE code generation remains deferred before GA.
 - **File knowledge source file management**: `KnowledgeSources_UpdateFile` (PUT `.../files('{fileId}')`) and `KnowledgeSources_UploadFileMultipart` (POST `.../files`, `multipart/form-data`).
 
 **Server-driven listing pagination**:
 
-- Shared query parameters `search`, `pageSize` (1–3000), and `searchType` (`ListingSearchType`: `prefix`), plus `@odata.nextLink` continuation on the responses, added across the list operations (indexes, data sources, indexers, skillsets, synonym maps, aliases, knowledge bases, knowledge sources, and index-stats). On `Indexes_List`, `Indexes_ListWithSelectedProperties`, and `GetIndexStatsSummary` this supersedes the interim `$top`/`$skip`/`$count` OData paging introduced in 2026-05-01-preview (see Preview-to-Preview breaking changes).
+- Shared query parameters `search`, `pageSize` (1–3000), and `searchType` (`ListingSearchType`: `prefix`), plus `@odata.nextLink` continuation on the responses, added across the list operations (indexes, data sources, indexers, skillsets, synonym maps, aliases, knowledge bases, knowledge sources, and index-stats). The new `list`, `listWithSelectedProperties`, and `getIndexStatsSummary` TypeSpec operations replace the preview-only `listOffsetPaged`, `listWithSelectedPropertiesOffsetPaged`, and `getIndexStatsSummaryPaginated` operations, superseding their interim `$top`/`$skip`/`$count` OData paging introduced in 2026-05-01-preview (see Preview-to-Preview breaking changes).
 
 **Streaming event model**:
 
-- `KnowledgeBaseRetrievalStreamEvents` (`@events` server-sent-event union) with events `retrieval.started`, `activity.started`, `activity.completed`, `answer.delta`, `answer.completed`, `references.completed`, `error`, and the terminal `response.completed`. Event payloads: `KnowledgeBaseRetrievalStartedEvent`, `KnowledgeBaseActivityStartedEvent`, `KnowledgeBaseAnswerDeltaEvent`, `KnowledgeBaseStreamErrorEvent`, `KnowledgeBaseRetrievalEventStreamResponse`.
+- The TypeSpec source defines `KnowledgeBaseRetrievalStreamEvents` (`@events` server-sent-event union) with events `retrieval.started`, `activity.started`, `activity.completed`, `answer.completed`, `references.completed`, `error`, and the terminal `response.completed`. New event payloads: `KnowledgeBaseRetrievalStartedEvent`, `KnowledgeBaseActivityStartedEvent`, `KnowledgeBaseAnswerCompletedEvent`, `KnowledgeBaseStreamErrorEvent` (terminal `error`), and `KnowledgeBaseResponseCompletedEvent` (terminal `response.completed`, carrying `KnowledgeBaseRetrievalStatusCode`: `200` OK / `206` PartialContent); `activity.completed` reuses the existing `KnowledgeBaseActivityRecord` and `references.completed` reuses `KnowledgeBaseReference[]`. The per-event SSE data envelope is `KnowledgeBaseRetrievalEventStreamResponse`. These event types are not currently referenced by the generated OpenAPI response because upstream OpenAPI 2.0 and C# SSE code generation does not yet project `SSEStream<T>` as a typed event stream.
 
 **New reasoning effort tier**:
 
@@ -69,6 +69,7 @@ All items below are **wire-compatible** (a live caller is unaffected); they are 
 **LLM activity model metadata**:
 
 - `model` (`KnowledgeBaseActivityRecordModel`: `modelName`, `deploymentId`) on the query-planning, answer-synthesis, and web-summarization activity records.
+- `startedAt` and `completedAt` (`utcDateTime`) on `KnowledgeBaseActivityRecord`, reporting per-activity start and completion timestamps (alongside the existing `elapsedMs`).
 
 **WorkIQ authentication**:
 
@@ -82,9 +83,9 @@ All items below are **wire-compatible** (a live caller is unaffected); they are 
 - `FileKnowledgeSource`: `corsOptions`; `FileKnowledgeSourceParameters`: `queryHints`.
 - File upload/metadata: `FileUploadMetadata` (`fileName`, `metadata` — the service chooses parsing and extraction mode; the caller does not supply them), `FileKnowledgeSourceExtractionMode` (`minimal`, `standard`); `KnowledgeSourceFile`: `prefix`, `metadata`, `parsingMode`, `extractionMode`.
 - Service limits: `maxVectorIndexSizePerIndexInBytes` (per-index vector index memory quota, in bytes).
-- `AzureOpenAIModelName`: `gpt-5.6-sol`, `gpt-5.6-terra`, `gpt-5.6-luna`.
+- `AzureOpenAIModelName`: `Gpt56Sol` (`gpt-5.6-sol`), `Gpt56Terra` (`gpt-5.6-terra`), and `Gpt56Luna` (`gpt-5.6-luna`).
 
-### Preview-to-Preview Changes (2026-05-01-preview → 2026-08-01-preview)
+### Preview-to-Preview Changes (2026-05-01-preview -> 2026-08-01-preview)
 
 #### Breaking Changes
 
@@ -100,7 +101,7 @@ Breaking vs 2026-05-01-preview only — the affected models and parameters don't
 
 **RemovedParameter**:
 
-- `$top`, `$skip`, `$count` removed from `Indexes_List`, `Indexes_ListWithSelectedProperties`, and `GetIndexStatsSummary` (the OData paging added in 2026-05-01-preview); replaced by the server-driven `search`/`pageSize`/`searchType` + `@odata.nextLink` pagination.
+- `$top`, `$skip`, `$count` removed with the preview-only `listOffsetPaged`, `listWithSelectedPropertiesOffsetPaged`, and `getIndexStatsSummaryPaginated` TypeSpec operations (emitted as `Indexes_List`, `Indexes_ListWithSelectedProperties`, and `GetIndexStatsSummary`); replaced by the server-driven `search`/`pageSize`/`searchType` + `@odata.nextLink` pagination.
 
 **RemovedProperty / RemovedDefinition**:
 
