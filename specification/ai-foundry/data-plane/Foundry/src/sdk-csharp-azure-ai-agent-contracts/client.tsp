@@ -325,6 +325,7 @@ namespace Azure.AI.Projects {
   // To avoid conflicts with Azure.Response
   @@clientName(OpenAI.Response, "ResponseObject");
   @@clientName(OpenAI.CreateResponse, "CreateResponseBody");
+  @@clientName(OpenAI.Error, "ApiError");
 
   // Consume concrete models from their owning packages: official OpenAI response
   // models from OpenAI, and Azure-specific Foundry additions from
@@ -342,6 +343,12 @@ namespace Azure.AI.Projects {
   @@alternateType(OpenAI.ResponseErrorCode, { identity: "OpenAI.Responses.ResponseErrorCode", package: "OpenAI", minVersion: "2.12.0" }, "csharp");
   @@alternateType(OpenAI.CreateResponse, { identity: "OpenAI.Responses.CreateResponseOptions", package: "OpenAI", minVersion: "2.12.0" }, "csharp");
   @@alternateType(OpenAI.ResponseStreamEvent, { identity: "OpenAI.Responses.ResponseStreamEvent", package: "OpenAI", minVersion: "2.12.0" }, "csharp");
+  @@alternateType(OpenAI.ContainerNetworkPolicyParam, { identity: "OpenAI.Containers.ContainerNetworkPolicy", package: "OpenAI", minVersion: "2.12.0" }, "csharp");
+  @@alternateType(OpenAI.ContainerNetworkPolicyAllowlistParam, { identity: "OpenAI.Containers.ContainerAllowlistNetworkPolicy", package: "OpenAI", minVersion: "2.12.0" }, "csharp");
+  @@alternateType(OpenAI.ContainerNetworkPolicyDisabledParam, { identity: "OpenAI.Containers.ContainerDisabledNetworkPolicy", package: "OpenAI", minVersion: "2.12.0" }, "csharp");
+  @@alternateType(OpenAI.ContainerNetworkPolicyDomainSecretParam, { identity: "OpenAI.Containers.ContainerNetworkPolicyDomainSecret", package: "OpenAI", minVersion: "2.12.0" }, "csharp");
+  @@alternateType(OpenAI.ContainerMemoryLimit, { identity: "OpenAI.Containers.ContainerMemoryLimit", package: "OpenAI", minVersion: "2.12.0" }, "csharp");
+  @@alternateType(OpenAI.MCPToolFilter, { identity: "OpenAI.Responses.McpToolFilter", package: "OpenAI", minVersion: "2.12.0" }, "csharp");
 
   @@alternateType(AgentReference, { identity: "Azure.AI.Extensions.OpenAI.AgentReference", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
   @@alternateType(A2APreviewTool, { identity: "Azure.AI.Extensions.OpenAI.A2APreviewTool", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
@@ -363,6 +370,11 @@ namespace Azure.AI.Projects {
   @@alternateType(BrowserAutomationToolCall, { identity: "Azure.AI.Extensions.OpenAI.BrowserAutomationToolCall", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
   @@alternateType(BrowserAutomationToolCallOutput, { identity: "Azure.AI.Extensions.OpenAI.BrowserAutomationToolCallOutput", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
   @@alternateType(CaptureStructuredOutputsTool, { identity: "Azure.AI.Extensions.OpenAI.CaptureStructuredOutputsTool", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
+  @@alternateType(OpenAI.CustomToolParam, { identity: "Azure.AI.Extensions.OpenAI.ResponsesCustomToolParam", package: "Azure.AI.Extensions.OpenAI", minVersion: "2.1.0-beta.4" }, "csharp");
+  @@alternateType(OpenAI.CustomToolParamFormat, { identity: "Azure.AI.Extensions.OpenAI.ResponsesCustomToolParamFormat", package: "Azure.AI.Extensions.OpenAI", minVersion: "2.1.0-beta.4" }, "csharp");
+  @@alternateType(OpenAI.CustomTextFormatParam, { identity: "Azure.AI.Extensions.OpenAI.ResponsesCustomTextFormatParam", package: "Azure.AI.Extensions.OpenAI", minVersion: "2.1.0-beta.4" }, "csharp");
+  @@alternateType(OpenAI.CustomGrammarFormatParam, { identity: "Azure.AI.Extensions.OpenAI.CustomGrammarFormatParam", package: "Azure.AI.Extensions.OpenAI", minVersion: "2.1.0-beta.4" }, "csharp");
+  @@alternateType(OpenAI.GrammarSyntax1, { identity: "Azure.AI.Extensions.OpenAI.ResponsesGrammarSyntax", package: "Azure.AI.Extensions.OpenAI", minVersion: "2.1.0-beta.4" }, "csharp");
   @@alternateType(FabricDataAgentToolCall, { identity: "Azure.AI.Extensions.OpenAI.FabricDataAgentToolCall", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
   @@alternateType(FabricDataAgentToolCallOutput, { identity: "Azure.AI.Extensions.OpenAI.FabricDataAgentToolCallOutput", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
   @@alternateType(FabricIQPreviewTool, { identity: "Azure.AI.Extensions.OpenAI.FabricIQPreviewTool", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
@@ -421,6 +433,7 @@ namespace Azure.AI.Projects {
   @@usage(CreateAgentVersionRequest, Usage.input);
   @@access(OpenAI.ReasoningEffort, Access.public);
   @@usage(OpenAI.ReasoningEffort, Usage.input);
+  @@access(OpenAI.ToolChoiceParam, Access.public);
   @@access(UpdateAgentFromManifestRequest, Access.public);
   @@usage(UpdateAgentFromManifestRequest, Usage.input);
   @@access(UpdateAgentRequest, Access.public);
