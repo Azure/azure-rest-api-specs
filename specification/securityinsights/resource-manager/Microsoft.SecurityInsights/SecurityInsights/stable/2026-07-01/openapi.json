@@ -2460,6 +2460,9 @@
           "Get a PremiumMicrosoftDefenderForThreatIntelligence data connector": {
             "$ref": "./examples/dataConnectors/GetPremiumMicrosoftDefenderForThreatIntelligenceById.json"
           },
+          "Get a Push data connector": {
+            "$ref": "./examples/dataConnectors/GetPushDataConnectorById.json"
+          },
           "Get a RestApiPoller data connector": {
             "$ref": "./examples/dataConnectors/GetRestApiPollerById.json"
           },
@@ -2550,6 +2553,9 @@
           "Creates or updates a PremiumMicrosoftDefenderForThreatIntelligence data connector.": {
             "$ref": "./examples/dataConnectors/CreatePremiumMicrosoftDefenderForThreatIntelligenceDataConnector.json"
           },
+          "Creates or updates a Push data connector.": {
+            "$ref": "./examples/dataConnectors/CreatePushDataConnector.json"
+          },
           "Creates or updates an Office365 data connector.": {
             "$ref": "./examples/dataConnectors/CreateOfficeDataConnetor.json"
           },
@@ -2607,6 +2613,9 @@
           }
         },
         "x-ms-examples": {
+          "Delete a Push data connector.": {
+            "$ref": "./examples/dataConnectors/DeletePushDataConnector.json"
+          },
           "Delete an MicrosoftThreatIntelligence data connector": {
             "$ref": "./examples/dataConnectors/DeleteMicrosoftThreatIntelligenceDataConnector.json"
           },
@@ -8442,7 +8451,8 @@
         "GitHub",
         "ServiceBus",
         "Oracle",
-        "None"
+        "None",
+        "Push"
       ],
       "x-ms-enum": {
         "name": "CcpAuthType",
@@ -8502,6 +8512,11 @@
             "name": "None",
             "value": "None",
             "description": "None"
+          },
+          {
+            "name": "Push",
+            "value": "Push",
+            "description": "Push"
           }
         ]
       }
@@ -9268,7 +9283,8 @@
         "MicrosoftDefenderAdvancedThreatProtection",
         "MicrosoftThreatIntelligence",
         "PremiumMicrosoftDefenderForThreatIntelligence",
-        "RestApiPoller"
+        "RestApiPoller",
+        "Push"
       ],
       "x-ms-enum": {
         "name": "DataConnectorKind",
@@ -9328,6 +9344,11 @@
             "name": "RestApiPoller",
             "value": "RestApiPoller",
             "description": "RestApiPoller"
+          },
+          {
+            "name": "Push",
+            "value": "Push",
+            "description": "Push"
           }
         ]
       }
@@ -13652,6 +13673,64 @@
           }
         ]
       }
+    },
+    "PushAuthModel": {
+      "type": "object",
+      "description": "Model for API authentication for Push data connectors.",
+      "properties": {
+        "appId": {
+          "type": "string",
+          "description": "The Entra application (client) id used to push data to the data collection endpoint."
+        },
+        "servicePrincipalId": {
+          "type": "string",
+          "description": "The service principal id of the Entra application."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/CcpAuthConfig"
+        }
+      ],
+      "x-ms-discriminator-value": "Push"
+    },
+    "PushDataConnector": {
+      "type": "object",
+      "description": "Represents Push data connector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PushDataConnectorProperties",
+          "description": "Push data connector properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "x-ms-discriminator-value": "Push"
+    },
+    "PushDataConnectorProperties": {
+      "type": "object",
+      "description": "Push data connector properties.",
+      "properties": {
+        "connectorDefinitionName": {
+          "type": "string",
+          "description": "The connector definition name (the dataConnectorDefinition resource id)."
+        },
+        "auth": {
+          "$ref": "#/definitions/CcpAuthConfig",
+          "description": "The authentication model."
+        },
+        "dcrConfig": {
+          "$ref": "#/definitions/DCRConfiguration",
+          "description": "The DCR related properties."
+        }
+      },
+      "required": [
+        "connectorDefinitionName",
+        "auth"
+      ]
     },
     "RegistryHive": {
       "type": "string",
