@@ -144,14 +144,13 @@ interface StacCollectionThumbnails {
       @pattern(".*")
       collectionId: string;
     },
-
-      | ImagePngResponse
-      | ImageJpegResponse
-      | ImageJpgResponse
-      | ImageWebpResponse
-      | ImageJp2Response
-      | ImageTiffResponse
-      | ApplicationXbinaryResponse
+    | ImagePngResponse
+    | ImageJpegResponse
+    | ImageJpgResponse
+    | ImageWebpResponse
+    | ImageJp2Response
+    | ImageTiffResponse
+    | ApplicationXbinaryResponse
   >;
 }
 

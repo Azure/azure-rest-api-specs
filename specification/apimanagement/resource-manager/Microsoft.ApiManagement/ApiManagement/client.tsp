@@ -1,4 +1,5 @@
 import "./main.tsp";
+import "@typespec/http";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
@@ -197,7 +198,11 @@ op replaceGetByName(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...Azure.ResourceManager.Legacy.Provider,
+
+  @path
   serviceName: string,
+
+  @path
   location: Azure.Core.azureLocation,
 ):
   | Azure.ResourceManager.ArmResponse<Microsoft.ApiManagement.DeletedServiceContract>
@@ -214,11 +219,17 @@ op replaceGetByName(
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "matches the original DeletedServiceContracts.purge operation"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "matches the original DeletedServiceContracts.purge operation"
 op replacePurge(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...Azure.ResourceManager.Legacy.Provider,
+
+  @path
   serviceName: string,
+
+  @path
   location: Azure.Core.azureLocation,
 ):
   | ArmDeletedResponse
