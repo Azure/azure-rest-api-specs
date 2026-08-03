@@ -154,5 +154,6 @@ model VirtualMachineReimageParameters {
   /**
    * Specifies information required for reimaging the non-ephemeral OS disk.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osProfile?: OSProfileProvisioningData;
 }

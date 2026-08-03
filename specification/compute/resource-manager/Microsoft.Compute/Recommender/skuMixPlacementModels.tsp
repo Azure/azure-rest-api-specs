@@ -137,6 +137,7 @@ model SkuMixPlacementCapacityProfile {
   allocationStrategy: SkuMixPlacementAllocationStrategy;
 
   /** The OS type. Required when allocationStrategy is LowestPrice because pricing varies by OS. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osType?: SkuMixPlacementOSType;
 
   /** Zone allocation policy. Default: BestEffortBalanced. */
