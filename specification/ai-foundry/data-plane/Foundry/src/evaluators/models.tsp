@@ -188,12 +188,9 @@ model DimensionMetadata {
   change_detail?: string;
 }
 
-@doc("A dimension from the preceding evaluator version that is not present in the current rubric.")
+@doc("A complete snapshot of a dimension from the preceding evaluator version that is not present in the current rubric. Metadata, when present, reflects the dimension's last known lineage state.")
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
-model SupersededDimension {
-  @doc("The stable identifier of the superseded dimension.")
-  id: string;
-
+model SupersededDimension is Dimension {
   @doc("A bounded service-generated reason why the dimension was superseded.")
   reason: string;
 }

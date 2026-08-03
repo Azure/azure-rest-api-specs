@@ -37793,15 +37793,34 @@ components:
       type: object
       required:
         - id
+        - description
+        - weight
         - reason
       properties:
         id:
           type: string
-          description: The stable identifier of the superseded dimension.
+          description: Stable identifier for this dimension (snake_case, e.g., `correct_resolution`). Required. Provided by the user when manually creating a rubric evaluator or during human-in-the-loop review of a generated set; the generation pipeline produces an initial value the user can edit. Editable when saving new versions.
+        description:
+          type: string
+          description: What this dimension measures (e.g., 'Correctly identifies the user's reservation intent and pursues the appropriate workflow').
+        weight:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 10
+          description: Relative weight of this dimension (1-10). The generation pipeline assigns exactly one dimension weight 8-10; all others use 1-6. User edits are not constrained by this heuristic.
+        always_applicable:
+          type: boolean
+          description: When true, the LLM judge always scores this dimension regardless of relevance (skips applicability assessment). The service-generated general quality/policy dimension has this set to true and is non-editable. Users may set this on their own custom dimensions. The service defaults to `false` if a value is not specified by the caller.
+          default: false
+        metadata:
+          $ref: '#/components/schemas/DimensionMetadata'
+          description: Service-generated version lineage for this dimension. Present only when lineage tracking is available.
+          readOnly: true
         reason:
           type: string
           description: A bounded service-generated reason why the dimension was superseded.
-      description: A dimension from the preceding evaluator version that is not present in the current rubric.
+      description: A complete snapshot of a dimension from the preceding evaluator version that is not present in the current rubric. Metadata, when present, reflects the dimension's last known lineage state.
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
