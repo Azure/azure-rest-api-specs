@@ -147,7 +147,6 @@ model AgentObject {
   @visibility(Lifecycle.Read)
   state: AgentState;
 
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Type kept for backward compatibility"
   @doc("The latest version of the agent.")
   versions: {
     latest: AgentVersionObject;

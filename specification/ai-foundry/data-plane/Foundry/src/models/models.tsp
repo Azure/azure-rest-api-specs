@@ -238,7 +238,6 @@ model CreateModelVersionAsyncResponse {
   @header("Location")
   location?: url;
 
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Type kept for backward compatibility"
   @bodyRoot
   body: {
     @doc("URL to poll for operation status.")

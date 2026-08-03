@@ -2004,6 +2004,7 @@ model FrontendIPConfigurationPropertiesFormat {
 }
 
 /** DDoS protection settings for a frontend IP configuration. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @added(Versions.v2025_07_01)
 model DdosFrontendIpConfigurationSettings {
   /** The reference to the DDoS Custom Policy resource. */
@@ -3799,6 +3800,7 @@ model PrivateLinkServiceIpConfiguration extends SubResource {
 /**
  * Properties of private link service IP configuration.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model PrivateLinkServiceIpConfigurationProperties {
@@ -3887,6 +3889,7 @@ model RouteNextHopEcmp {
   /**
    * List of next hop IP addresses for ECMP routing. Must contain between 2 and 64 IP addresses.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @minItems(2)
   @maxItems(64)
   nextHopIpAddresses: string[];
@@ -4129,6 +4132,7 @@ model AddressSpace {
 /**
  * DhcpOptions contains an array of DNS servers available to VMs deployed in the virtual network. Standard DHCP option for a subnet overrides VNET DHCP options.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model DhcpOptions {
