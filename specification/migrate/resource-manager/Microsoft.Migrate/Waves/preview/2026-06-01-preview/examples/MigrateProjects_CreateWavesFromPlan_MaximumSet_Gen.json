@@ -1,0 +1,41 @@
+{
+  "title": "MigrateProjects_CreateWavesFromPlan_MaximumSet",
+  "operationId": "MigrateProjects_CreateWavesFromPlan",
+  "parameters": {
+    "api-version": "2026-06-01-preview",
+    "subscriptionId": "F628DFC8-CF82-400F-A6A9-ED3CEC3ECEAD",
+    "resourceGroupName": "rgwaves",
+    "projectName": "project1",
+    "body": {
+      "assessmentArmId": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/MyResourceGroup/providers/Microsoft.Migrate/assessmentProjects/p1/groups/g1/assessments/server/assessment1",
+      "migrationPath": "PaaSPreferred",
+      "waveSelection": [
+        {
+          "waveName": "wave-1",
+          "waveDisplayName": "Wave 1 - Pilot"
+        },
+        {
+          "waveName": "wave-3",
+          "waveDisplayName": "Wave 3 - Mainline"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "totalWaves": 10,
+        "succeededWaves": 9,
+        "failedWaves": 1,
+        "skippedWaves": 0,
+        "sasUri": "https://argstorage.blob.core.windows.net/wave-creation-reports/cw-7c1e9a30-2f4d-4b8e-9c11-83af52d6c1ab.csv?sv=2022-11-02&sr=b&sp=r&se=2026-05-23T23%3A00%3A00Z&sig=REDACTED",
+        "expirationTime": "2026-05-23T23:00:00Z"
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}

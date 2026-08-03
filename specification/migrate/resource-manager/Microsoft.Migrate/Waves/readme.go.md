@@ -12,6 +12,15 @@ modelerfour:
   lenient-model-deduplication: true
 ```
 
+### Tag: package-preview-2026-06 and go
+
+These settings apply only when `--tag=package-preview-2026-06 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+```yaml $(tag)=='package-preview-2026-06' && $(go)
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2026-06-01/$(namespace)
+```
+
 ### Tag: package-preview-2026-02 and go
 
 These settings apply only when `--tag=package-preview-2026-02 --go` is specified on the command line.

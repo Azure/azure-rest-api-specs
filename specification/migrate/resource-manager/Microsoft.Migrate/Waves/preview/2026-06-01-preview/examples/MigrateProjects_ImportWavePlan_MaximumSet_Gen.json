@@ -1,0 +1,33 @@
+{
+  "title": "MigrateProjects_ImportWavePlan_MaximumSet",
+  "operationId": "MigrateProjects_ImportWavePlan",
+  "parameters": {
+    "api-version": "2026-06-01-preview",
+    "subscriptionId": "F628DFC8-CF82-400F-A6A9-ED3CEC3ECEAD",
+    "resourceGroupName": "rgwaves",
+    "projectName": "project1",
+    "body": {
+      "assessmentArmId": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/MyResourceGroup/providers/Microsoft.Migrate/assessmentProjects/p1/groups/g1/assessments/server/assessment1",
+      "migrationPath": "PaaSPreferred",
+      "sasUri": "https://argstorage.blob.core.windows.net/csv-uploads/up-7c1e9a30-2f4d-4b8e-9c11-83af52d6c1ab.csv?sv=2022-11-02&sr=b&sp=cw&se=2026-05-23T22%3A30%3A00Z&sig=REDACTED"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "wavePlanName": "wp-f3d2c1a0-9b71-4e2f-8d5e-1a2b3c4d5e6f",
+        "provisioningState": "Succeeded",
+        "planSource": "Imported",
+        "assessmentArmId": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/MyResourceGroup/providers/Microsoft.Migrate/assessmentProjects/p1/groups/g1/assessments/server/assessment1",
+        "migrationPath": "PaaSPreferred",
+        "sasUri": "https://argstorage.blob.core.windows.net/waveplans/wp-f3d2c1a0-9b71-4e2f-8d5e-1a2b3c4d5e6f.json?sv=2022-11-02&sr=b&sp=r&se=2026-05-23T23%3A00%3A00Z&sig=REDACTED",
+        "expirationTime": "2026-05-23T23:00:00Z"
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}
