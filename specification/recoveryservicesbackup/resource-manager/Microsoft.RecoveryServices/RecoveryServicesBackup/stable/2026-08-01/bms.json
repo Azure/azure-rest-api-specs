@@ -2030,9 +2030,9 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/{recoveryPointId}/listMountScripts": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/{recoveryPointId}/fetchInstantItemRecoveryOperationResult": {
       "post": {
-        "operationId": "ItemLevelRecoveryConnections_ListMountScripts",
+        "operationId": "ItemLevelRecoveryConnections_FetchInstantItemRecoveryOperationResult",
         "tags": [
           "ItemLevelRecoveryConnections"
         ],
@@ -2088,7 +2088,7 @@
             "description": "The content of the action request",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ListMountScriptsRequestResource"
+              "$ref": "#/definitions/InstantItemRecoveryOperationResultRequestResource"
             }
           }
         ],
@@ -2107,8 +2107,8 @@
           }
         },
         "x-ms-examples": {
-          "List mount scripts for an active Instant Item Recovery session": {
-            "$ref": "./examples/AzureIaasVm/ListMountScripts.json"
+          "Fetch the Instant Item Recovery operation result (mount scripts) for an active ILR session": {
+            "$ref": "./examples/AzureIaasVm/FetchInstantItemRecoveryOperationResult.json"
           }
         }
       }
@@ -10581,6 +10581,49 @@
         }
       }
     },
+    "InstantItemRecoveryOperationResultRequest": {
+      "type": "object",
+      "description": "Parameters for the fetchInstantItemRecoveryOperationResult action.",
+      "properties": {
+        "operationId": {
+          "type": "string",
+          "description": "Operation ID returned by the prior provisionInstantItemRecovery action whose iSCSI mount scripts are to be retrieved."
+        }
+      },
+      "required": [
+        "operationId"
+      ]
+    },
+    "InstantItemRecoveryOperationResultRequestResource": {
+      "type": "object",
+      "description": "Request resource wrapping the parameters for the fetchInstantItemRecoveryOperationResult action.",
+      "properties": {
+        "location": {
+          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "description": "Resource location."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "eTag": {
+          "type": "string",
+          "description": "Optional ETag."
+        },
+        "properties": {
+          "$ref": "#/definitions/InstantItemRecoveryOperationResultRequest",
+          "description": "InstantItemRecoveryOperationResultRequestResource properties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ]
+    },
     "InstantItemRecoveryTarget": {
       "type": "object",
       "description": "Target details for file / folder restore.",
@@ -11025,49 +11068,6 @@
           }
         ]
       }
-    },
-    "ListMountScriptsRequest": {
-      "type": "object",
-      "description": "Parameters for the listMountScripts action.",
-      "properties": {
-        "operationId": {
-          "type": "string",
-          "description": "Operation ID returned by the prior provisionInstantItemRecovery action whose iSCSI mount scripts are to be retrieved."
-        }
-      },
-      "required": [
-        "operationId"
-      ]
-    },
-    "ListMountScriptsRequestResource": {
-      "type": "object",
-      "description": "Request resource wrapping the parameters for the listMountScripts action.",
-      "properties": {
-        "location": {
-          "$ref": "#/definitions/Azure.Core.azureLocation",
-          "description": "Resource location."
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "eTag": {
-          "type": "string",
-          "description": "Optional ETag."
-        },
-        "properties": {
-          "$ref": "#/definitions/ListMountScriptsRequest",
-          "description": "ListMountScriptsRequestResource properties"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
-        }
-      ]
     },
     "ListRecoveryPointsRecommendedForMoveRequest": {
       "type": "object",
