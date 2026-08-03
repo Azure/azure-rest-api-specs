@@ -510,6 +510,13 @@ model QueryResultReplacement
 @@clientName(QueryResult, "QueryResultTemp", "csharp");
 @@clientName(QueryResultReplacement, "QueryResult", "csharp");
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restore the Resource base type for C# backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  ExportRun,
+  Azure.ResourceManager.CommonTypes.Resource,
+  "csharp"
+);
+
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "flattenProperty is needed for C# backward compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   ExportDataset.configuration,
