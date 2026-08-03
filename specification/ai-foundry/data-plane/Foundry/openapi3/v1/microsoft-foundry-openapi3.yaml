@@ -78042,10 +78042,12 @@ components:
         prefix_padding_ms:
           type: integer
           format: int32
+          minimum: 0
           description: Audio to include before detected speech, in milliseconds.
         silence_duration_ms:
           type: integer
           format: int32
+          minimum: 0
           description: Silence required to end speech detection, in milliseconds.
         end_of_utterance_detection:
           $ref: '#/components/schemas/VoiceEndOfUtteranceDetection'
@@ -78094,10 +78096,12 @@ components:
         prefix_padding_ms:
           type: integer
           format: int32
+          minimum: 0
           description: Audio to include before detected speech, in milliseconds.
         silence_duration_ms:
           type: integer
           format: int32
+          minimum: 0
           description: Silence required to end speech detection, in milliseconds.
         end_of_utterance_detection:
           $ref: '#/components/schemas/VoiceEndOfUtteranceDetection'
@@ -78151,10 +78155,12 @@ components:
         prefix_padding_ms:
           type: integer
           format: int32
+          minimum: 0
           description: Audio to include before detected speech, in milliseconds.
         silence_duration_ms:
           type: integer
           format: int32
+          minimum: 0
           description: Silence required to end speech detection, in milliseconds.
         end_of_utterance_detection:
           $ref: '#/components/schemas/VoiceEndOfUtteranceDetection'
@@ -78470,6 +78476,7 @@ components:
         - type: string
           enum:
             - whisper-1
+            - gpt-realtime-whisper
             - gpt-4o-transcribe
             - gpt-4o-mini-transcribe
             - gpt-4o-transcribe-diarize

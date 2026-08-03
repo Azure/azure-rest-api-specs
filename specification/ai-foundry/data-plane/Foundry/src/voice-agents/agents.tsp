@@ -368,9 +368,11 @@ alias VoiceAzureSemanticVadOptions = {
   threshold?: float32;
 
   @doc("Audio to include before detected speech, in milliseconds.")
+  @minValue(0)
   prefix_padding_ms?: int32;
 
   @doc("Silence required to end speech detection, in milliseconds.")
+  @minValue(0)
   silence_duration_ms?: int32;
 
   @doc("Semantic end-of-utterance detection configuration.")
@@ -431,6 +433,9 @@ union VoiceInputTranscriptionModel {
 
   @doc("OpenAI Whisper.")
   whisper_1: "whisper-1",
+
+  @doc("OpenAI GPT Realtime Whisper.")
+  gpt_realtime_whisper: "gpt-realtime-whisper",
 
   @doc("OpenAI GPT-4o transcribe.")
   gpt_4o_transcribe: "gpt-4o-transcribe",
