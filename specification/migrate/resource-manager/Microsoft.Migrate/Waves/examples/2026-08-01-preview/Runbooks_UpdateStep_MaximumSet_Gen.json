@@ -1,0 +1,52 @@
+{
+  "title": "Runbooks_UpdateStep_MaximumSet",
+  "operationId": "Runbooks_UpdateStep",
+  "parameters": {
+    "api-version": "2026-08-01-preview",
+    "subscriptionId": "F628DFC8-CF82-400F-A6A9-ED3CEC3ECEAD",
+    "resourceGroupName": "rgwaves",
+    "projectName": "project1",
+    "runbookName": "runbook1",
+    "body": {
+      "stepId": "step-01",
+      "displayName": "Server prechecks updated",
+      "description": "Updated precheck instructions.",
+      "dependsOn": [
+        {
+          "mode": "MigrationEntity",
+          "stepId": "step-00",
+          "entityMap": [
+            {
+              "from": "me1",
+              "to": "me2"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "scope": {
+            "scopeType": "Wave",
+            "waveId": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/MyResourceGroup/providers/Microsoft.Migrate/migrateProjects/MyMigrateProject/waves/wave1"
+          },
+          "artifactId": "rb-art-1",
+          "state": "Ready",
+          "description": "kldbeqzmuoihpafvnxr"
+        },
+        "id": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/MyResourceGroup/providers/Microsoft.Migrate/migrateProjects/MyMigrateProject/runbooks/runbook1",
+        "name": "runbook1",
+        "type": "Microsoft.Migrate/migrateProjects/runbooks"
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}
