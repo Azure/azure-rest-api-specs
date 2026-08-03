@@ -26,6 +26,15 @@ input-file:
   - Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json
 ```
 
+### Tag: package-2026-08-01-preview
+
+These settings apply only when `--tag=package-2026-08-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-08-01-preview'
+input-file:
+  - Azure.Contoso.WidgetManager/preview/2026-08-01-preview/widgets.json
+```
+
 ### Suppress non-TypeSpec SDK related linting rules
 
 These set of linting rules aren't applicable to the new TypeSpec SDK code generators so suppressing them here. Eventually we will
