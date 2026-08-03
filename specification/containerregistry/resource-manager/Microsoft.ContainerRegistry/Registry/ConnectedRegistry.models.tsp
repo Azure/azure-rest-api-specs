@@ -508,9 +508,12 @@ model ConnectedRegistryUpdateParameters {
   /**
    * The user-assigned managed identity used to authenticate the connected registry with its parent during sync.
    */
-  @added(Versions.vLatestPreview)
-  identity?: IdentityProperties;
+  ...ManagedServiceIdentityProperty;
 }
+@@added(ConnectedRegistryUpdateParameters.identity, Versions.vLatestPreview);
+@@doc(ConnectedRegistryUpdateParameters.identity,
+"The user-assigned managed identity used to authenticate the connected registry with its parent during sync."
+);
 
 /**
  * The parameters for updating token properties.
