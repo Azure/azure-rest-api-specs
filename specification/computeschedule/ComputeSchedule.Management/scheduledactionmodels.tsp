@@ -193,6 +193,7 @@ model ScheduledActionResourceOperationResponse {
   resourcesStatuses: Array<ResourceStatus>;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 @doc("The scheduled action resource")
 model ScheduledAction is TrackedResource<ScheduledActionProperties> {
