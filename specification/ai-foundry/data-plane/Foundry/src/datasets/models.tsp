@@ -114,6 +114,7 @@ model BlobReference {
   credential: SasCredential;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Represents a reference to a blob for consumption")
 model AssetCredentialResponse {
   @doc("Credential info to access the storage account.")

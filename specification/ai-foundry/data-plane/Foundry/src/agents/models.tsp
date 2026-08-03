@@ -104,6 +104,7 @@ model UpdateAgentRequest {
   ...OmitProperties<CreateAgentVersionRequest, "draft">;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model PatchAgentRequest {
   @doc("The endpoint configuration for the agent")
   agent_endpoint?: AgentEndpointConfig;
@@ -802,6 +803,7 @@ model CreateAgentFromCodeContent {
  * can route to a zip-aware handler. Streaming is preserved (`bytes` body) regardless
  * of the content-type label.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DownloadAgentCodeResponse {
   @doc("The media type of the returned package content.")
   @header("Content-Type")
@@ -911,6 +913,7 @@ model AgentSessionResource {
 // ── Session Request Models ──────────────────────────────
 
 /** Request body for creating a new agent session. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Request to create a new agent session.")
 model CreateAgentSessionRequest {
   /** Optional caller-provided session ID. If specified, it must be unique within the agent endpoint. Auto-generated if omitted. */
