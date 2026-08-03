@@ -511,8 +511,9 @@ model ConnectedRegistryUpdateParameters {
   ...ManagedServiceIdentityProperty;
 }
 @@added(ConnectedRegistryUpdateParameters.identity, Versions.vLatestPreview);
-@@doc(ConnectedRegistryUpdateParameters.identity,
-"The user-assigned managed identity used to authenticate the connected registry with its parent during sync."
+@@doc(
+  ConnectedRegistryUpdateParameters.identity,
+  "The user-assigned managed identity used to authenticate the connected registry with its parent during sync."
 );
 
 /**
