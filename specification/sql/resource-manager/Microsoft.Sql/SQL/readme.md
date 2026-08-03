@@ -11379,7 +11379,7 @@ suppressions:
     from: deletedServers.json
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/deletedServers/{deletedServerName}"]
     reason: DeletedServer is an ARM proxy resource (subscription-scoped), not a tracked resource. The location property on DeletedServer is informational only and does not make it a tracked resource.
-  - code: AllTrackedResourcesMustHaveDeleteExpand
+  - code: AllTrackedResourcesMustHaveDelete
     from: deletedServers.json
     where: $.definitions.DeletedServer
     reason: DeletedServer is an ARM proxy resource, not a tracked resource. It does not require a delete operation.
