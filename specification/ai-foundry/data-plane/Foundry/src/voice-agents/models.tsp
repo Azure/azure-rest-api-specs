@@ -488,29 +488,6 @@ model TelephonyTransferTarget {
   destination: TelephonyTransferDestination;
 }
 
-@doc("The request to create a telephony transfer target for the voice agent named in the request path.")
-@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
-model CreateTelephonyTransferTargetRequest {
-  @doc("The unique name exposed to the voice agent for this transfer target.")
-  name: string;
-
-  @doc("A description that helps the voice agent decide when to use this target.")
-  description: string;
-
-  @doc("The provider-specific transfer destination.")
-  destination: TelephonyTransferDestination;
-}
-
-@doc("The request to update an existing telephony transfer target.")
-@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
-model UpdateTelephonyTransferTargetRequest {
-  @doc("A replacement description that helps the voice agent decide when to use this target.")
-  description?: string;
-
-  @doc("The replacement provider-specific transfer destination.")
-  destination?: TelephonyTransferDestination;
-}
-
 @doc("The request to bind a telephony identifier to the voice agent named in the request path.")
 @extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
 model CreateTelephonyBindingRequest {
@@ -580,17 +557,9 @@ model TelephonyBindingList {
   next_cursor?: string;
 }
 
-@doc("A page of telephony transfer targets for one voice agent.")
+@doc("The telephony transfer targets configured for one voice agent.")
 @extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
-model TelephonyTransferTargetList {
-  @doc("The telephony transfer targets in this page.")
-  @pageItems
-  data: TelephonyTransferTarget[];
-
-  @doc("Whether another page of transfer targets is available.")
-  has_more: boolean;
-
-  @doc("The cursor to pass as `after` to retrieve the next page.")
-  @continuationToken
-  next_cursor?: string;
+model TelephonyTransferTargets {
+  @doc("The complete set of destinations to which the voice agent may transfer calls. An empty array clears all targets when replacing the configuration.")
+  transfer_targets: TelephonyTransferTarget[];
 }

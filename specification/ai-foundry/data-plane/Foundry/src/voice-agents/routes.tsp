@@ -639,98 +639,33 @@ interface AgentTelephony {
     NoContentResponse
   >;
 
-  /** Creates a transfer target for the voice agent named in the path. */
-  @summary("Create an agent telephony transfer target")
-  @post
+  /** Returns all transfer targets configured for the voice agent named in the path. */
+  @summary("Get agent telephony transfer targets")
+  @get
   @route("/agents/{agent_name}/telephony/transfer_targets")
   @extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
-  createTelephonyTransferTarget is FoundryDataPlanePreviewOperation<
+  getTelephonyTransferTargets is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
-      /** The name of the voice agent that owns the transfer target. */
+      /** The name of the voice agent whose transfer targets are retrieved. */
       @path agent_name: string;
-
-      ...CreateTelephonyTransferTargetRequest;
     },
-    TelephonyTransferTarget
+    TelephonyTransferTargets
   >;
 
-  /** Returns the transfer targets owned by the voice agent named in the path. */
-  @summary("List agent telephony transfer targets")
-  @get
-  @list
+  /** Replaces all transfer targets configured for the voice agent named in the path. */
+  @summary("Replace agent telephony transfer targets")
+  @put
   @route("/agents/{agent_name}/telephony/transfer_targets")
   @extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
-  listTelephonyTransferTargets is FoundryDataPlanePreviewOperation<
+  replaceTelephonyTransferTargets is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
-      /** The name of the voice agent whose transfer targets are listed. */
+      /** The name of the voice agent whose transfer targets are replaced. */
       @path agent_name: string;
 
-      /** The maximum number of transfer targets to return. */
-      @minValue(1)
-      @maxValue(100)
-      @query
-      limit?: int32 = 100;
-
-      /** A cursor returned by the previous page. */
-      @query
-      @continuationToken
-      after?: string;
+      ...TelephonyTransferTargets;
     },
-    TelephonyTransferTargetList
-  >;
-
-  /** Retrieves a transfer target owned by the voice agent named in the path. */
-  @summary("Get an agent telephony transfer target")
-  @get
-  @route("/agents/{agent_name}/telephony/transfer_targets/{transfer_target_name}")
-  @extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
-  getTelephonyTransferTarget is FoundryDataPlanePreviewOperation<
-    AgentDefinitionOptInKeys.voice_agents_v1_preview,
-    {
-      /** The name of the voice agent that owns the transfer target. */
-      @path agent_name: string;
-
-      /** The unique name of the transfer target. */
-      @path transfer_target_name: string;
-    },
-    TelephonyTransferTarget
-  >;
-
-  /** Updates a transfer target owned by the voice agent named in the path. */
-  @summary("Update an agent telephony transfer target")
-  @patch
-  @route("/agents/{agent_name}/telephony/transfer_targets/{transfer_target_name}")
-  @extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
-  updateTelephonyTransferTarget is FoundryDataPlanePreviewOperation<
-    AgentDefinitionOptInKeys.voice_agents_v1_preview,
-    {
-      /** The name of the voice agent that owns the transfer target. */
-      @path agent_name: string;
-
-      /** The unique name of the transfer target. */
-      @path transfer_target_name: string;
-
-      ...UpdateTelephonyTransferTargetRequest;
-    },
-    TelephonyTransferTarget
-  >;
-
-  /** Deletes a transfer target owned by the voice agent named in the path. */
-  @summary("Delete an agent telephony transfer target")
-  @delete
-  @route("/agents/{agent_name}/telephony/transfer_targets/{transfer_target_name}")
-  @extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
-  deleteTelephonyTransferTarget is FoundryDataPlanePreviewOperation<
-    AgentDefinitionOptInKeys.voice_agents_v1_preview,
-    {
-      /** The name of the voice agent that owns the transfer target. */
-      @path agent_name: string;
-
-      /** The unique name of the transfer target. */
-      @path transfer_target_name: string;
-    },
-    NoContentResponse
+    TelephonyTransferTargets
   >;
 }

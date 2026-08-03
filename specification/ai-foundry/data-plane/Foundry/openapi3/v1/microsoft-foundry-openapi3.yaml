@@ -2986,10 +2986,10 @@ paths:
         conditional_previews:
           - VoiceAgents=V1Preview
   /agents/{agent_name}/telephony/transfer_targets:
-    post:
-      operationId: AgentTelephony_createTelephonyTransferTarget
-      summary: Create an agent telephony transfer target
-      description: Creates a transfer target for the voice agent named in the path.
+    get:
+      operationId: AgentTelephony_getTelephonyTransferTargets
+      summary: Get agent telephony transfer targets
+      description: Returns all transfer targets configured for the voice agent named in the path.
       parameters:
         - name: Foundry-Features
           in: header
@@ -3002,7 +3002,7 @@ paths:
         - name: agent_name
           in: path
           required: true
-          description: The name of the voice agent that owns the transfer target.
+          description: The name of the voice agent whose transfer targets are retrieved.
           schema:
             type: string
         - name: api-version
@@ -3018,7 +3018,57 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TelephonyTransferTarget'
+                $ref: '#/components/schemas/TelephonyTransferTargets'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Telephony
+      x-ms-foundry-meta:
+        conditional_previews:
+          - VoiceAgents=V1Preview
+    put:
+      operationId: AgentTelephony_replaceTelephonyTransferTargets
+      summary: Replace agent telephony transfer targets
+      description: Replaces all transfer targets configured for the voice agent named in the path.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - VoiceAgents=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the voice agent whose transfer targets are replaced.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TelephonyTransferTargets'
         4XX:
           description: Client error
           content:
@@ -3038,246 +3088,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateTelephonyTransferTargetRequest'
-      x-ms-foundry-meta:
-        conditional_previews:
-          - VoiceAgents=V1Preview
-    get:
-      operationId: AgentTelephony_listTelephonyTransferTargets
-      summary: List agent telephony transfer targets
-      description: Returns the transfer targets owned by the voice agent named in the path.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - VoiceAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the voice agent whose transfer targets are listed.
-          schema:
-            type: string
-        - name: limit
-          in: query
-          required: false
-          description: The maximum number of transfer targets to return.
-          schema:
-            type: integer
-            format: int32
-            minimum: 1
-            maximum: 100
-            default: 100
-          explode: false
-        - name: after
-          in: query
-          required: false
-          description: A cursor returned by the previous page.
-          schema:
-            type: string
-          explode: false
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TelephonyTransferTargetList'
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Telephony
-      x-ms-foundry-meta:
-        conditional_previews:
-          - VoiceAgents=V1Preview
-  /agents/{agent_name}/telephony/transfer_targets/{transfer_target_name}:
-    get:
-      operationId: AgentTelephony_getTelephonyTransferTarget
-      summary: Get an agent telephony transfer target
-      description: Retrieves a transfer target owned by the voice agent named in the path.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - VoiceAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the voice agent that owns the transfer target.
-          schema:
-            type: string
-        - name: transfer_target_name
-          in: path
-          required: true
-          description: The unique name of the transfer target.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TelephonyTransferTarget'
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Telephony
-      x-ms-foundry-meta:
-        conditional_previews:
-          - VoiceAgents=V1Preview
-    patch:
-      operationId: AgentTelephony_updateTelephonyTransferTarget
-      summary: Update an agent telephony transfer target
-      description: Updates a transfer target owned by the voice agent named in the path.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - VoiceAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the voice agent that owns the transfer target.
-          schema:
-            type: string
-        - name: transfer_target_name
-          in: path
-          required: true
-          description: The unique name of the transfer target.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TelephonyTransferTarget'
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Telephony
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UpdateTelephonyTransferTargetRequest'
-      x-ms-foundry-meta:
-        conditional_previews:
-          - VoiceAgents=V1Preview
-    delete:
-      operationId: AgentTelephony_deleteTelephonyTransferTarget
-      summary: Delete an agent telephony transfer target
-      description: Deletes a transfer target owned by the voice agent named in the path.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - VoiceAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the voice agent that owns the transfer target.
-          schema:
-            type: string
-        - name: transfer_target_name
-          in: path
-          required: true
-          description: The unique name of the transfer target.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '204':
-          description: There is no content to send for this request, but the headers may be useful.
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Telephony
+              $ref: '#/components/schemas/TelephonyTransferTargets'
       x-ms-foundry-meta:
         conditional_previews:
           - VoiceAgents=V1Preview
@@ -43156,26 +42967,6 @@ components:
       x-ms-foundry-meta:
         conditional_previews:
           - VoiceAgents=V1Preview
-    CreateTelephonyTransferTargetRequest:
-      type: object
-      required:
-        - name
-        - description
-        - destination
-      properties:
-        name:
-          type: string
-          description: The unique name exposed to the voice agent for this transfer target.
-        description:
-          type: string
-          description: A description that helps the voice agent decide when to use this target.
-        destination:
-          $ref: '#/components/schemas/TelephonyTransferDestination'
-          description: The provider-specific transfer destination.
-      description: The request to create a telephony transfer target for the voice agent named in the request path.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - VoiceAgents=V1Preview
     CreateVoiceAgentRequest:
       type: object
       required:
@@ -77845,24 +77636,17 @@ components:
       x-ms-foundry-meta:
         conditional_previews:
           - VoiceAgents=V1Preview
-    TelephonyTransferTargetList:
+    TelephonyTransferTargets:
       type: object
       required:
-        - data
-        - has_more
+        - transfer_targets
       properties:
-        data:
+        transfer_targets:
           type: array
           items:
             $ref: '#/components/schemas/TelephonyTransferTarget'
-          description: The telephony transfer targets in this page.
-        has_more:
-          type: boolean
-          description: Whether another page of transfer targets is available.
-        next_cursor:
-          type: string
-          description: The cursor to pass as `after` to retrieve the next page.
-      description: A page of telephony transfer targets for one voice agent.
+          description: The complete set of destinations to which the voice agent may transfer calls. An empty array clears all targets when replacing the configuration.
+      description: The telephony transfer targets configured for one voice agent.
       x-ms-foundry-meta:
         conditional_previews:
           - VoiceAgents=V1Preview
@@ -78516,19 +78300,6 @@ components:
           type: string
           description: The replacement Foundry connection that configures provider access.
       description: The request to update an existing telephony binding.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - VoiceAgents=V1Preview
-    UpdateTelephonyTransferTargetRequest:
-      type: object
-      properties:
-        description:
-          type: string
-          description: A replacement description that helps the voice agent decide when to use this target.
-        destination:
-          $ref: '#/components/schemas/TelephonyTransferDestination'
-          description: The replacement provider-specific transfer destination.
-      description: The request to update an existing telephony transfer target.
       x-ms-foundry-meta:
         conditional_previews:
           - VoiceAgents=V1Preview
