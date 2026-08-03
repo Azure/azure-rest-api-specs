@@ -231,8 +231,7 @@ describe("detect-namespaces (dual tsp compile)", () => {
     core = createMockCore();
     context = createMockContext();
     context.payload = { pull_request: { number: 46 }, action: "opened" };
-    const file =
-      "specification/ai/HealthInsights/HealthInsights.RadiologyInsights/tspconfig.yaml";
+    const file = "specification/ai/HealthInsights/HealthInsights.RadiologyInsights/tspconfig.yaml";
     mockFileStatuses([file]);
 
     execFileMock.mockClear();
