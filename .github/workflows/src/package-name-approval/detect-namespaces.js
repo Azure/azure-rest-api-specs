@@ -236,6 +236,13 @@ export default async function detectNamespaces({ context, core }) {
 
   for (const { file, basePath } of changedTspconfigs) {
     const tspConfigDir = dirname(join(cwd, file));
+    if (!existsSync(join(tspConfigDir, "main.tsp"))) {
+      core.warning(
+        `Skipping package name detection for ${file}: no main.tsp found in its directory`,
+      );
+      continue;
+    }
+
     core.info(`Running typespec-metadata emitter for: ${file}`);
 
     const prResult = await runMetadataEmitter(tspConfigDir, core);

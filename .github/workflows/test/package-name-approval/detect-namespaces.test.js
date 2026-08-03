@@ -227,6 +227,29 @@ describe("detect-namespaces (dual tsp compile)", () => {
     expect(core.setOutput).not.toHaveBeenCalled();
   });
 
+  it("should skip a tspconfig whose directory has no main.tsp", async () => {
+    core = createMockCore();
+    context = createMockContext();
+    context.payload = { pull_request: { number: 46 }, action: "opened" };
+    const file =
+      "specification/ai/HealthInsights/HealthInsights.RadiologyInsights/tspconfig.yaml";
+    mockFileStatuses([file]);
+
+    execFileMock.mockClear();
+    existsSyncMock.mockImplementation(
+      (/** @type {string} */ path) =>
+        !(path.includes("HealthInsights.RadiologyInsights") && path.endsWith("main.tsp")),
+    );
+
+    await detectNamespaces(args());
+
+    expect(execFileMock).not.toHaveBeenCalled();
+    expect(core.warning).toHaveBeenCalledWith(
+      `Skipping package name detection for ${file}: no main.tsp found in its directory`,
+    );
+    expect(core.setOutput).not.toHaveBeenCalled();
+  });
+
   it("should filter unchanged package names using dual tsp compile", async () => {
     core = createMockCore();
     context = createMockContext();
