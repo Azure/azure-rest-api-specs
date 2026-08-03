@@ -44,6 +44,7 @@ interface Geolocation {
        * The IP address. Both IPv4 and IPv6 are allowed.
        */
       @query("ip")
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
       ipAddress: string;
     },
     IpAddressToLocationResult,

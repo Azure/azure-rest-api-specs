@@ -39,6 +39,7 @@ model BatchErrorDatum {
 
 /** Defines the request to create a batch. */
 @added(ServiceApiVersions.v2024_07_01_Preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchCreateRequest {
   /** The API endpoint used by the batch. */
   endpoint: string;
@@ -58,6 +59,7 @@ model BatchCreateRequest {
 
 /** The requested new batch job. */
 @added(ServiceApiVersions.v2024_07_01_Preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchCreateResponse {
   // Customization note: the status code in OpenAI is 200.
   // Reference: https://github.com/openai/openai-openapi/blob/423e672461b3d17f9829711e4a858e777252f077/openapi.yaml#L6903-L6909

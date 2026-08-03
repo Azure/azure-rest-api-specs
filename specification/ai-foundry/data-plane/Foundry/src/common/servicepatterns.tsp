@@ -169,6 +169,7 @@ op FoundryDataPlaneRequiredPreviewOperation<
 // ============================================================================
 
 @doc("The response data for a requested list of items.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AgentsPagedResult<T> {
   /** The requested list of items. */
   @pageItems

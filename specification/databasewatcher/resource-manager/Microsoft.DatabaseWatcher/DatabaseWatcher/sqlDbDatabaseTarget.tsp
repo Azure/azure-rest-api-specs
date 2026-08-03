@@ -16,6 +16,7 @@ model SqlDbSingleDatabaseTargetProperties extends TargetProperties {
   targetType: "SqlDb";
 
   @doc("The Azure resource ID of an Azure SQL DB database target.")
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   sqlDbResourceId: armResourceIdentifier<[
     {
       type: "Microsoft.Sql/servers/databases";

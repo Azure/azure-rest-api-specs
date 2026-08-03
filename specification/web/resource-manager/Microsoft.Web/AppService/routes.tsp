@@ -109,6 +109,7 @@ op listBillingMeters is ArmProviderActionSync<
      * App Service OS type meters used for
      */
     @query("osType")
+    #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
     osType?: string;
   },
   Error = DefaultErrorResponse
@@ -332,6 +333,7 @@ interface ProviderOperationGroup {
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("osTypeSelected")
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
       osTypeSelected?: ProviderOsTypeSelected;
     },
     Error = DefaultErrorResponse
@@ -351,6 +353,7 @@ interface ProviderOperationGroup {
        * Stack OS Type
        */
       @query("stackOsType")
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
       stackOsType?: ProviderStackOsType;
     },
     Error = DefaultErrorResponse
@@ -372,6 +375,7 @@ interface ProviderOperationGroup {
        * Stack OS Type
        */
       @query("stackOsType")
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
       stackOsType?: ProviderStackOsType;
     },
     Error = DefaultErrorResponse
@@ -393,6 +397,7 @@ interface ProviderOperationGroup {
        * Stack OS Type
        */
       @query("stackOsType")
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
       stackOsType?: ProviderStackOsType;
     },
     Error = DefaultErrorResponse
@@ -412,6 +417,7 @@ interface ProviderOperationGroup {
        * Stack OS Type
        */
       @query("stackOsType")
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
       stackOsType?: ProviderStackOsType;
     },
     Error = DefaultErrorResponse
@@ -430,6 +436,7 @@ interface ProviderOperationGroup {
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("osTypeSelected")
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
       osTypeSelected?: ProviderOsTypeSelected;
     },
     Error = DefaultErrorResponse

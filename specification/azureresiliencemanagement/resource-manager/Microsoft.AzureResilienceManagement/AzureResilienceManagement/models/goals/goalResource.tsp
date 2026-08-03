@@ -65,6 +65,7 @@ model UpdateGoalResourceRequest {
 }
 
 @doc("Response model for update goal resource.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model UpdateGoalResourceResponse {
   @doc("List of update goal resource.")
   resources: GoalResource[];
@@ -82,6 +83,7 @@ model GoalResource is ProxyResource<GoalResourceProperties> {
 }
 
 @doc("Response model for refresh goal resources.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model RefreshGoalResourcesResponse {
   @doc("Total count of resources under the goal assignment after refresh.")
   resourceCount?: int32;

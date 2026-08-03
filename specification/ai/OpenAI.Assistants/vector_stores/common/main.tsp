@@ -8,6 +8,7 @@ namespace Azure.AI.OpenAI.Assistants;
 
 /** Options to configure a vector store static chunking strategy. */
 @added(ServiceApiVersions.v2024_07_01_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model VectorStoreStaticChunkingStrategyOptions {
   /** The maximum number of tokens in each chunk. The default value is 800. The minimum value is 100 and the maximum value is 4096. */
   @encodedName("application/json", "max_chunk_size_tokens")
@@ -34,6 +35,7 @@ union VectorStoreChunkingStrategyRequestType {
 /** An abstract representation of a vector store chunking strategy configuration. */
 @discriminator("type")
 @added(ServiceApiVersions.v2024_07_01_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model VectorStoreChunkingStrategyRequest {
   /** The object type. */
   type: VectorStoreChunkingStrategyRequestType;
@@ -43,6 +45,7 @@ model VectorStoreChunkingStrategyRequest {
  * The default strategy. This strategy currently uses a max_chunk_size_tokens of 800 and chunk_overlap_tokens of 400.
  */
 @added(ServiceApiVersions.v2024_07_01_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model VectorStoreAutoChunkingStrategyRequest
   extends VectorStoreChunkingStrategyRequest {
   /** The object type, which is always 'auto'. */
@@ -51,6 +54,7 @@ model VectorStoreAutoChunkingStrategyRequest
 
 /** A statically configured chunking strategy. */
 @added(ServiceApiVersions.v2024_07_01_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model VectorStoreStaticChunkingStrategyRequest
   extends VectorStoreChunkingStrategyRequest {
   /** The object type, which is always 'static'. */
@@ -71,6 +75,7 @@ union VectorStoreChunkingStrategyResponseType {
 /** An abstract representation of a vector store chunking strategy configuration. */
 @discriminator("type")
 @added(ServiceApiVersions.v2024_07_01_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model VectorStoreChunkingStrategyResponse {
   /** The object type. */
   type: VectorStoreChunkingStrategyResponseType;
@@ -80,6 +85,7 @@ model VectorStoreChunkingStrategyResponse {
  * This is returned when the chunking strategy is unknown. Typically, this is because the file was indexed before the chunking_strategy concept was introduced in the API.
  */
 @added(ServiceApiVersions.v2024_07_01_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model VectorStoreAutoChunkingStrategyResponse
   extends VectorStoreChunkingStrategyResponse {
   /** The object type, which is always 'other'. */
@@ -88,6 +94,7 @@ model VectorStoreAutoChunkingStrategyResponse
 
 /** A statically configured chunking strategy. */
 @added(ServiceApiVersions.v2024_07_01_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model VectorStoreStaticChunkingStrategyResponse
   extends VectorStoreChunkingStrategyResponse {
   /** The object type, which is always 'static'. */

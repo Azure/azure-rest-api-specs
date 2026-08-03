@@ -83,6 +83,7 @@ model LivenessSessionData {
 
   @added(Versions.v1_3_preview_1)
   @doc("Specify the expected IP address or CIDR block of the client that runs the liveness check.")
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   expectedClientIpAddress?: string;
 }
 
@@ -384,6 +385,7 @@ model LivenessSessionCommonData {
 
   @added(Versions.v1_3_preview_1)
   @doc("The expected IP address or CIDR block of the client that runs the liveness check.")
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   expectedClientIpAddress?: string;
 }
 
@@ -526,6 +528,7 @@ model LivenessError {
 @doc("The client information gathered during the liveness attempt.")
 model ClientInformation {
   @doc("The client ip address seen during the liveness attempt.")
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ip: string;
 }
 
@@ -568,6 +571,7 @@ model LivenessColorDecisionTarget {
 
 @added(Versions.v1_2)
 @doc("Request wrapper of liveness with verify session creation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CreateLivenessWithVerifySessionRequest {
   @doc("The content type for the operation. Always multipart/form-data for this operation.")
   @header("content-type")
@@ -623,6 +627,7 @@ model LivenessAbuseMonitoringSetting {
 
 @added(Versions.v1_3_preview_1)
 @doc("Response model for client assets access token.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ClientAssetsAccessTokenResponse {
   @doc("The expiry time of the access token.")
   expiry: utcDateTime;

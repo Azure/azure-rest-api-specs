@@ -8,6 +8,7 @@ namespace Azure.AI.Agents;
 
 /** Options to configure a vector store static chunking strategy. */
 @added(Versions.v2025_05_01)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model VectorStoreStaticChunkingStrategyOptions {
   /** The maximum number of tokens in each chunk. The default value is 800. The minimum value is 100 and the maximum value is 4096. */
   @encodedName("application/json", "max_chunk_size_tokens")
@@ -50,6 +51,7 @@ model VectorStoreAutoChunkingStrategyRequest
 
 /** A statically configured chunking strategy. */
 @added(Versions.v2025_05_01)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model VectorStoreStaticChunkingStrategyRequest
   extends VectorStoreChunkingStrategyRequest {
   /** The object type, which is always 'static'. */
@@ -69,6 +71,7 @@ union VectorStoreChunkingStrategyResponseType {
 /** An abstract representation of a vector store chunking strategy configuration. */
 @discriminator("type")
 @added(Versions.v2025_05_01)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model VectorStoreChunkingStrategyResponse {
   /** The object type. */
   type: VectorStoreChunkingStrategyResponseType;
@@ -78,6 +81,7 @@ model VectorStoreChunkingStrategyResponse {
  * This is returned when the chunking strategy is unknown. Typically, this is because the file was indexed before the chunking_strategy concept was introduced in the API.
  */
 @added(Versions.v2025_05_01)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model VectorStoreAutoChunkingStrategyResponse
   extends VectorStoreChunkingStrategyResponse {
   /** The object type, which is always 'other'. */
@@ -86,6 +90,7 @@ model VectorStoreAutoChunkingStrategyResponse
 
 /** A statically configured chunking strategy. */
 @added(Versions.v2025_05_01)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model VectorStoreStaticChunkingStrategyResponse
   extends VectorStoreChunkingStrategyResponse {
   /** The object type, which is always 'static'. */

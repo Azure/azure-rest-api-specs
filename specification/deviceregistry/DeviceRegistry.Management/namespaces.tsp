@@ -106,6 +106,7 @@ model NamespaceMigrateRequest {
 
 @added(Versions.v2025_07_01_preview)
 @doc("Response for the migrate asset resources operation into Namespace resource.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model NamespaceMigrateResponse {
   @doc("List of migrate results containing result of each asset migrate operation.")
   @identifiers(#["resourceId"])

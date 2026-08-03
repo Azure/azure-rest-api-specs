@@ -2286,6 +2286,7 @@ model PrepareDataMoveRequest {
  * Operation result response for Vault Storage Config
  */
 @discriminator("objectType")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model VaultStorageConfigOperationResultResponse {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -2660,6 +2661,7 @@ model OperationResultInfoBase {
 /**
  * This is the base class for operation result responses.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model OperationWorkerResponse {
   /**
    * HTTP Status Code of the operation.
@@ -2704,6 +2706,7 @@ model ValidateOperationRequestResource {
  * Base class for validate operation request.
  */
 @discriminator("objectType")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ValidateOperationRequest {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -2713,6 +2716,7 @@ model ValidateOperationRequest {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ValidateOperationsResponse {
   /**
    * Base class for validate operation response.
@@ -2723,6 +2727,7 @@ model ValidateOperationsResponse {
 /**
  * Base class for validate operation response.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ValidateOperationResponse {
   /**
    * Gets the validation result
@@ -3292,6 +3297,7 @@ model UnlockDeleteResponse {
 @added(Versions.v2026_03_31_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model UpdateRecoveryPointRequest {
   /**
    * Resource properties.
@@ -6821,6 +6827,7 @@ model OperationResultInfo extends OperationResultInfoBase {
 /**
  * Prepare DataMove Response
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model PrepareDataMoveResponse
   extends VaultStorageConfigOperationResultResponse {
   /**
@@ -6994,6 +7001,7 @@ model SimpleSchedulePolicyV2 extends SchedulePolicy {
  * AzureRestoreValidation request.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ValidateIaasVMRestoreOperationRequest extends ValidateOperationRequest {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -7013,6 +7021,7 @@ alias ValidateRestoreOperationRequestProperties = {
 /**
  * AzureRestoreValidation request.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ValidateRestoreOperationRequest extends ValidateOperationRequest {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -8294,6 +8303,7 @@ model ClientScriptForConnect {
   /**
    * OS type - Windows, Linux etc. for which this file / folder restore client script works.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osType?: string;
 
   /**
@@ -8867,6 +8877,7 @@ model FetchTieringCostSavingsInfoForVaultRequest
 /**
  * Operations List response which contains list of available APIs.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ClientDiscoveryResponse {
   /**
    * List of available operations.
@@ -8965,6 +8976,7 @@ model CrossTenantVaultMappingProperties {
 @added(Versions.v2026_03_31_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model RemoveCrossTenantVaultMappingRequest {
   /**
    * ResourceGuardOperationRequests on which LAC check will be performed.
@@ -8995,6 +9007,7 @@ union VaultMappingState {
 @added(Versions.v2026_03_31_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CrossTenantVaultMappingStatusResponse {
   /**
    * Mapping name (if mapped).
@@ -9013,6 +9026,7 @@ model CrossTenantVaultMappingStatusResponse {
 @added(Versions.v2026_03_31_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model VaultCredentialCertificateRequest {
   /**
    * Options for certificate generation.
@@ -9026,6 +9040,7 @@ model VaultCredentialCertificateRequest {
 @added(Versions.v2026_03_31_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model VaultCredentialCertificateCreateOptions {
   /**
    * Validity period of the generated certificate in hours.
@@ -9040,6 +9055,7 @@ model VaultCredentialCertificateCreateOptions {
 @added(Versions.v2026_03_31_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model VaultCredentialCertificateResponse
   is Azure.ResourceManager.ProxyResource<VaultCredentialCertificateProperties> {
   /**

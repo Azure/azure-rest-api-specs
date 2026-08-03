@@ -11,6 +11,7 @@ namespace VoiceLive;
 /** Base for session configuration shared between request and response. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style. // Service message format is snake_case to remain close to OpenAI style.
 @usage(RequestUsage)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model RequestSession {
   ...SessionBase;
 
@@ -139,6 +140,7 @@ union ReasoningEffort {
 /** Base for session configuration in the response. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(ResponseUsage)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ResponseSession is RequestSession {
   ...SessionBase;
 
@@ -667,6 +669,7 @@ union AudioInputTranscriptionModel {
 /** Configuration for input audio transcription. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(RequestUsage)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AudioInputTranscriptionOptions {
   /**
    * The transcription model to use. Supported values:
@@ -1056,6 +1059,7 @@ union AnimationOutputType {
 /** Configuration for animation outputs including blendshapes and visemes metadata. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(RequestUsage)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model Animation {
   /** The name of the animation model to use. */
   model_name?: string = "default";
@@ -1180,6 +1184,7 @@ model IceServer {
 /** Configuration for the agent. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(RequestUsage)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AgentConfig {
   /** The type of agent to use. */
   type: "agent";

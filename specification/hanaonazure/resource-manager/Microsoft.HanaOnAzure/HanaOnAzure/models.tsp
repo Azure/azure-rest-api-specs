@@ -123,6 +123,7 @@ model Display {
  * Describes the format of Error response.
  */
 @error
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ErrorResponse {
   /**
    * Describes the error object.

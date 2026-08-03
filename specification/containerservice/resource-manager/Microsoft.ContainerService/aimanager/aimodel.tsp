@@ -62,12 +62,14 @@ model ModelSpec {
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Reserved as an extensibility envelope so future versions can add optional filters without changing the SDK method signature."
 @added(Versions.v2026_05_02_preview)
 @doc("Request body for the AI model `calculateCost` action.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CalculateCostRequest {
   // intentionally empty for v1; future versions may add filters
 }
 
 @added(Versions.v2026_05_02_preview)
 @doc("Response body for the AI model `calculateCost` action.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CalculateCostResponse {
   @visibility(Lifecycle.Read)
   @doc("ISO 4217 currency code, e.g. \"USD\".")

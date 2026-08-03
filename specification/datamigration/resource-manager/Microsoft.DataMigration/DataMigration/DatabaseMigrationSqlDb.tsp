@@ -39,6 +39,7 @@ alias DatabaseMigrationSqlDbOps = Azure.ResourceManager.Legacy.ExtensionOperatio
     @path
     @segment("servers")
     @key
+    #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
     sqlDbInstanceName: string;
   },
   {},
@@ -49,6 +50,7 @@ alias DatabaseMigrationSqlDbOps = Azure.ResourceManager.Legacy.ExtensionOperatio
     @path
     @segment("databaseMigrations")
     @key
+    #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
     targetDbName: string;
   }
 >;
@@ -70,6 +72,7 @@ alias DatabaseMigrationSqlDbOpsWithPattern = Azure.ResourceManager.Legacy.Extens
     @segment("servers")
     @key
     @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,127}$")
+    #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
     sqlDbInstanceName: string;
   },
   {},
@@ -81,6 +84,7 @@ alias DatabaseMigrationSqlDbOpsWithPattern = Azure.ResourceManager.Legacy.Extens
     @segment("databaseMigrations")
     @key
     @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,127}$")
+    #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
     targetDbName: string;
   }
 >;

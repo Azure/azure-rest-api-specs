@@ -113,6 +113,7 @@ model GarnetClusterResourceProperties {
 /** Endpoint for clients to connect to the cluster. */
 model GarnetClusterResourcePropertiesEndPointsItem {
   /** Ipv4 address of the endpoint. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipAddress?: string;
 
   /** Port number. */
@@ -1370,6 +1371,7 @@ enum RoleDefinitionType {
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @added(Versions.v2026_04_01_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model chaosFaultListResponse is Azure.Core.Page<chaosFaultResource>;
 
 /**
@@ -5194,6 +5196,7 @@ model TableResource {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model TableGetPropertiesOptions extends OptionsResource {}
 
 /**

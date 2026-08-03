@@ -250,6 +250,7 @@ model MarketplaceSkuVersion {
 }
 
 @doc("Access token request object")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AccessTokenRequest {
   @doc("The name of the publisher.")
   publisherName?: string;
@@ -290,6 +291,7 @@ model DiskAccessToken {
 }
 
 @doc("Access token request object")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AccessTokenReadRequest {
   @doc("The name of the publisher.")
   requestId: string;

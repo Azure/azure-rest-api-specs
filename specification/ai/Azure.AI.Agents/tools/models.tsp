@@ -249,6 +249,7 @@ model BrowserAutomationToolConnectionParameters {
  * Ranking options for file search.
  */
 @added(Versions.v2025_05_01)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model FileSearchRankingOptions {
   @doc("File search ranker.")
   ranker: string;

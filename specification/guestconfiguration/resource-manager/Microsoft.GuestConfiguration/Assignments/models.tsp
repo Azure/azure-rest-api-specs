@@ -14,6 +14,7 @@ namespace Microsoft.GuestConfiguration;
  * Error response of an operation failure.
  */
 @error
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ErrorResponse {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   error?: {

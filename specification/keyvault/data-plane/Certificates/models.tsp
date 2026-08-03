@@ -518,6 +518,7 @@ model SubjectAlternativeNames {
    * IP addresses; supports IPv4 and IPv6.
    */
   @Versioning.added(KeyVault.Versions.v2025_06_01_preview)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipAddresses?: string[];
 }
 

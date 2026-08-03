@@ -14,6 +14,7 @@ namespace Microsoft.Migrate;
 
 @added(ApiVersions.v2025_03_30_preview)
 @doc("Task Summary Request model.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model TaskSummaryRequest {
   @doc("Task Scope ARM Id")
   scopeId: armResourceIdentifier<[
@@ -31,6 +32,7 @@ model TaskSummaryRequest {
 
 @added(ApiVersions.v2025_03_30_preview)
 @doc("Task Summary Response model.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model TaskSummaryResponse {
   @doc("List of Task Summary Items")
   @identifiers(#[])

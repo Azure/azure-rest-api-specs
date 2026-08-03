@@ -93,6 +93,7 @@ model AzureIaasVmSummary {
 
   @doc("OS licensing cost.")
   @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osLicensingCost?: float32;
 
   @doc("Estimated cost by offer.")
@@ -131,6 +132,7 @@ model AzureIaasSqlSummary {
 
   @doc("OS licensing cost.")
   @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osLicensingCost?: float32;
 
   @doc("Estimated cost by offer.")
@@ -187,6 +189,7 @@ model OnPremisesIaasSummary {
   @doc("The OS licensing details.")
   @visibility(Lifecycle.Read)
   @identifiers(#[])
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osLicensingDetails?: IaasOsLicensingDetails[];
 
   @doc("The distribution by operating system.")
@@ -205,6 +208,7 @@ model OnPremisesIaasSummary {
 
   @doc("Iaas OS Support Status Distribution.")
   @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   iaasOsSupportStatusDistribution?: SupportStatusDistribution;
 
   @doc("Iaas Sql Support Status Distribution.")
@@ -213,6 +217,7 @@ model OnPremisesIaasSummary {
 
   @doc("OS Service Pack Insight.")
   @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osServicePackInsight?: ServicePackInsight;
 
   @doc("Sql Service Pack Insight.")
@@ -244,9 +249,11 @@ model OnPremisesIaasSummary {
 }
 
 @doc("The Iaas OS licensing details.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model IaasOsLicensingDetails {
   @doc("The OS type.")
   @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osType?: string;
 
   @doc("The total cost.")

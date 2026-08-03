@@ -184,6 +184,7 @@ model AvsAssessedNetworkAdapter {
 
   @doc("IP V4 addresses for the machine.")
   @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipAddresses?: string[];
 
   @doc("Gets the display name of the network adapter.")

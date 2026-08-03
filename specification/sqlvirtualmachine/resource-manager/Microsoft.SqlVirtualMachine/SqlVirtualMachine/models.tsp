@@ -354,6 +354,7 @@ enum AssessmentDayOfWeek {
  * Operating System of the current SQL Virtual Machine.
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 enum OsType {
   Windows,
   Linux,
@@ -794,6 +795,7 @@ model SqlVirtualMachineProperties {
    * Operating System of the current SQL Virtual Machine.
    */
   @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osType?: OsType;
 }
 

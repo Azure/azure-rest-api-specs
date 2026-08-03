@@ -502,6 +502,7 @@ model AtlasEntityHeader {
 
 @doc("An error response from the service")
 @error
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AtlasErrorResponse {
   @doc("The request ID.")
   requestId?: Azure.Core.uuid;
@@ -581,6 +582,7 @@ model BulkImportResult {
 }
 
 @doc("Business metadata to send to the service")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BusinessMetadataOptions {
   @doc("InputStream of file")
   file: HttpPart<bytes>;

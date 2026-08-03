@@ -21,6 +21,7 @@ model BulkactionVMProperties {
   additionalCapabilities?: AdditionalCapabilities;
 
   @doc("Specifies the operating system settings used while creating the virtual machine. Some of the settings cannot be changed once VM is provisioned.")
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osProfile?: OSProfile;
 
   @doc("Specifies the network interfaces of the virtual machine.")
@@ -108,6 +109,7 @@ model StorageProfile {
   imageReference?: ImageReference;
 
   @doc("Specifies information about the operating system disk used by the virtual machine. For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/managed-disks-overview).")
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osDisk?: OSDisk;
 
   @doc("Specifies the parameters that are used to add a data disk to a virtual machine. For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/managed-disks-overview).")
@@ -165,6 +167,7 @@ model ImageReference extends SubResource {
 @doc("Specifies information about the operating system disk used by the virtual machine. For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/managed-disks-overview).")
 model OSDisk {
   @doc("This property allows you to specify the type of the OS that is included in the disk if creating a VM from user-image or a specialized VHD. Possible values are: Windows, Linux.")
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osType?: OperatingSystemTypes;
 
   @doc("Specifies the encryption settings for the OS Disk. Minimum compute api-version: 2015-06-15.")
@@ -956,6 +959,7 @@ model VirtualMachineNetworkInterfaceConfigurationProperties {
 
   @doc("Specifies the IP configurations of the network interface.")
   @identifiers(#["name"])
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipConfigurations: VirtualMachineNetworkInterfaceIPConfiguration[];
 
   @doc("The DSCP configuration for the network interface.")
@@ -1042,6 +1046,7 @@ model VirtualMachinePublicIPAddressConfigurationProperties {
 
   @doc("The list of IP tags associated with the public IP address.")
   @identifiers(#[])
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipTags?: VirtualMachineIpTag[];
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is an abbreviation for Internet Protocol"
@@ -1068,8 +1073,10 @@ model VirtualMachinePublicIPAddressDnsSettingsConfiguration {
 }
 
 @doc("Contains the IP tag associated with the public IP address.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model VirtualMachineIpTag {
   @doc("IP tag type. Example: FirstPartyUsage.")
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipTagType?: string;
 
   @doc("IP tag associated with the public IP. Example: SQL, Storage etc.")
@@ -1254,6 +1261,7 @@ model ScheduledEventsProfile {
   terminateNotificationProfile?: TerminateNotificationProfile;
 
   @doc("Specifies OS Image Scheduled Event related configurations.")
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osImageNotificationProfile?: OSImageNotificationProfile;
 }
 

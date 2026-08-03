@@ -109,6 +109,7 @@ union FilePurpose {
 
 @doc("The response data from a file list operation.")
 @added(ServiceApiVersions.v2024_07_01_Preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model FileListResponse {
   @doc("The object type, which is always 'list'.")
   object: "list";

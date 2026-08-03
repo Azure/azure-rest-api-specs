@@ -44,6 +44,7 @@ model AssessedSqlDatabaseV3Properties is AssessedWorkloadProperties<
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Need to mention MegaBytes and hence used GB, Mb would give Gigabits"
 @doc("The sql db source information")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model SqlDbExtendedDetails {
   @doc("The linked availability group overview.")
   @visibility(Lifecycle.Read)

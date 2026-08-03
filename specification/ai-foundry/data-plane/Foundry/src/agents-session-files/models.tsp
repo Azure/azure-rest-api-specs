@@ -67,6 +67,7 @@ alias DeleteSessionFileParams = {
 // ---------------------------------------------------------------------------
 
 @doc("Response from uploading a file to a session sandbox.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SessionFileWriteResponse {
   @doc("The path where the file was written, relative to the session home directory.")
   path: string;
@@ -92,6 +93,7 @@ model SessionDirectoryEntry {
   modified_time: utcDateTime;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SessionDirectoryListResponse {
   /** The first ID represented in this list. */
   first_id?: string;

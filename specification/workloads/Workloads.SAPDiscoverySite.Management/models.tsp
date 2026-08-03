@@ -360,6 +360,7 @@ model ServerInstanceProperties {
 /**
  * Defines the request body for updating Server Instances resource.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model UpdateServerInstanceRequest {
   /**
    * Server instances properties.
@@ -464,6 +465,7 @@ model ExcelPerformanceData extends PerformanceData {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "GB is short for Gigabytes."
   @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   totalSourceDbSizeGB?: int32;
 
   /**

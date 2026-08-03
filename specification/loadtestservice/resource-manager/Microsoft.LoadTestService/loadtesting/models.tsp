@@ -253,6 +253,7 @@ model LoadTestProperties {
 }
 
 @doc("Check quota availability response object.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CheckQuotaAvailabilityResponse {
   @doc("Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}")
   @visibility(Lifecycle.Read)

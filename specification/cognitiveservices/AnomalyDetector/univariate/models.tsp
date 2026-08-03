@@ -50,6 +50,7 @@ union TimeGranularity {
 }
 
 @doc("Request of the entire or last anomaly detection.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model UnivariateDetectionOptions {
   @doc("""
     Time series data points. Points should be sorted by time stamp in ascending
@@ -243,6 +244,7 @@ model UnivariateLastDetectionResult {
 }
 
 @doc("Request of change point detection.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model UnivariateChangePointDetectionOptions {
   @doc("""
     Time series data points. Points should be sorted by time stamp in ascending

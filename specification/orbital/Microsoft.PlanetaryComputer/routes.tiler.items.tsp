@@ -16,9 +16,11 @@ namespace Microsoft.PlanetaryComputer;
 model BandStatisticsMap is Record<BandStatistics>;
 
 @doc("Return dataset's statistics.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AssetStatisticsResponse is Record<BandStatisticsMap>;
 
 @doc("Return dataset's basic info.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model TilerInfoMapResponse is Record<TilerInfo>;
 
 @removed(Versions.v2026_04_15)

@@ -16,6 +16,7 @@ namespace Microsoft.Migrate;
 
 @doc("SQL Assessment REST resource.")
 @parentResource(AssessmentProject)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SqlGraphAssessmentOptions
   is ProxyResource<SqlGraphAssessmentOptionsProperties> {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Singleton resource"

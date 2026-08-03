@@ -113,6 +113,7 @@ model MessageImageUrlParam {
  * as provided during that thread's creation for its initial state.
  */
 @added(Versions.v2025_05_01)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ThreadMessageOptions {
   /**
    * The role of the entity that is creating the message. Allowed values include:

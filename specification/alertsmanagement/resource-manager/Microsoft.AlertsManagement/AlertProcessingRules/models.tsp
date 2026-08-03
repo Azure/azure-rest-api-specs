@@ -378,6 +378,7 @@ model Resource {
  * An error response from the service.
  */
 @error
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ErrorResponse {
   /**
    * Details of error response.

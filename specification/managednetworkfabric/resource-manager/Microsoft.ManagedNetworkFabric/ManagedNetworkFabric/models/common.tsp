@@ -409,6 +409,7 @@ model IpMatchConditionPatch {
   @minItems(1)
   @removed(Versions.v2025_07_15)
   @renamedFrom(Versions.v2025_07_15, "ipPrefixValues")
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipPrefixValuesDeprecated?: string[];
 
   @doc("The list of IP Prefixes that need to be matched.")
@@ -419,6 +420,7 @@ model IpMatchConditionPatch {
   @minItems(1)
   @removed(Versions.v2025_07_15)
   @renamedFrom(Versions.v2025_07_15, "ipGroupNames")
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipGroupNamesDeprecated?: string[];
 
   @doc("The List of IP Group Names that need to be matched.")

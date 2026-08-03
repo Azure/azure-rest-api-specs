@@ -15,6 +15,7 @@ namespace Language.Conversations;
 
 /** Error response. */
 @error
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ErrorResponse is Azure.Core.Foundations.ErrorResponseBase<Error>;
 
 /** The error object. */

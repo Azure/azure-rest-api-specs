@@ -189,6 +189,7 @@ model RunCompletionUsage {
 
 @doc("The details used when creating a new run of an agent thread.")
 @added(Versions.v2025_05_01)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CreateRunOptions {
   @doc("The ID of the agent that should run the thread.")
   @encodedName("application/json", "assistant_id")
@@ -386,6 +387,7 @@ model SubmitToolApprovalDetails {
 
 @doc("The details used when creating and immediately running a new agent thread.")
 @added(Versions.v2025_05_01)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CreateAndRunThreadOptions {
   @encodedName("application/json", "assistant_id")
   @doc("The ID of the agent for which the thread should be created.")

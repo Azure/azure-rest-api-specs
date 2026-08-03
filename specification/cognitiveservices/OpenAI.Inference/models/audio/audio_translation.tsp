@@ -38,6 +38,7 @@ union AudioTranslationFormat {
   The configuration information for an audio translation request.
   """)
 @added(ServiceApiVersions.v2024_02_15_Preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AudioTranslationOptions {
   @doc("""
     The audio data to translate. This must be the binary content of a file in one of the supported media formats:

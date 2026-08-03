@@ -141,6 +141,7 @@ model UsageSample {
  * Describes the format of Error response with a wrapper object
  */
 @error
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ErrorObjectResponse {
   /**
    * Wrapper object for error information
@@ -152,6 +153,7 @@ model ErrorObjectResponse {
  * Describes the format of Error response.
  */
 @error
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ErrorResponse {
   /**
    * Error code

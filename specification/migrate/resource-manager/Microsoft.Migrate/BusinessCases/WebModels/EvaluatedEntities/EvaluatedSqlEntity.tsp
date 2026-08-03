@@ -64,6 +64,7 @@ model EvaluatedSqlEntityProperties {
 
   @doc("DB count in instance.")
   @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   dbCount?: int32;
 
   @doc("End of Support status.")

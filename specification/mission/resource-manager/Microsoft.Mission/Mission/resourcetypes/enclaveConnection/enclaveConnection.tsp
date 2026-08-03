@@ -55,6 +55,7 @@ model EnclaveConnectionProperties {
   @removed(Microsoft.Mission.Versions.v2025_05_01_preview)
   @doc("Source IP group Resource Id.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipGroup?: IPGroupResourceId;
 
   @doc("Destination Endpoint Resource Id.")

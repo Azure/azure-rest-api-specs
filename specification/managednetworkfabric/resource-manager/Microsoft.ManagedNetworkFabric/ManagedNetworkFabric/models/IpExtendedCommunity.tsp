@@ -5,6 +5,7 @@ using TypeSpec.Versioning;
 namespace Microsoft.ManagedNetworkFabric;
 
 @doc("IP Extended Community Properties defines the resource properties.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model IpExtendedCommunityProperties {
   ...AnnotationResource;
   ...IpExtendedCommunityPatchableProperties;
@@ -37,6 +38,7 @@ model IpExtendedCommunityProperties {
 }
 
 @doc("IP Extended Community patchable properties.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model IpExtendedCommunityPatchableProperties {
   @doc("List of IP Extended Community Rules.")
   @Azure.ResourceManager.identifiers(#[])
@@ -66,6 +68,7 @@ model IpExtendedCommunityPatch extends TagsUpdate {
 }
 
 @doc("IP Extended Community patchable properties.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model IpExtendedCommunityPatchProperties {
   ...AnnotationResource;
 

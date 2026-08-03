@@ -686,6 +686,7 @@ model WorkspaceProperties {
 }
 
 @doc("Properties for generating an upload URL")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model GenerateUploadUrlRequest {
   @doc("A unique ID for the firmware to be uploaded.")
   firmwareId?: string;

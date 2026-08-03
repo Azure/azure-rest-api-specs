@@ -49,6 +49,7 @@ alias DatabaseMigrationSqlVmOps = Azure.ResourceManager.Legacy.ExtensionOperatio
     @path
     @segment("databaseMigrations")
     @key
+    #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
     targetDbName: string;
   }
 >;

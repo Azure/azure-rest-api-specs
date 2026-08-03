@@ -74,6 +74,7 @@ union PendingUploadCredentialType {
 }
 
 @doc("Represents a request for a pending upload.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model PendingUploadRequest {
   @doc("If PendingUploadId is not provided, a random GUID will be used.")
   pendingUploadId?: string;
@@ -86,6 +87,7 @@ model PendingUploadRequest {
 }
 
 @doc("Represents the response for a pending upload request")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model PendingUploadResponse {
   @doc("Container-level read, write, list SAS.")
   blobReference: BlobReference;
@@ -113,6 +115,7 @@ model BlobReference {
 }
 
 @doc("Represents a reference to a blob for consumption")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AssetCredentialResponse {
   @doc("Credential info to access the storage account.")
   blobReference: BlobReference;

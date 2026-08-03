@@ -63,6 +63,7 @@ union AnalyzeImageOutputType {
 }
 
 @doc("The text analysis request.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AnalyzeTextOptions {
   @doc("The text to be analyzed. We support a maximum of 10k Unicode characters (Unicode code points) in the text of one request.")
   @maxLength(10000)
@@ -115,6 +116,7 @@ model TextCategoriesAnalysis {
 }
 
 @doc("The image analysis request.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AnalyzeImageOptions {
   @doc("The image to be analyzed.")
   image: ImageData;
@@ -194,6 +196,7 @@ model TextBlocklistItem {
 }
 
 @doc("The request to add blocklistItems to a text blocklist.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AddOrUpdateTextBlocklistItemsOptions {
   @doc("Array of blocklistItems to add.")
   blocklistItems: TextBlocklistItem[];
@@ -206,6 +209,7 @@ model AddOrUpdateTextBlocklistItemsResult {
 }
 
 @doc("The request to remove blocklistItems from a text blocklist.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model RemoveTextBlocklistItemsOptions {
   @doc("Array of blocklistItemIds to remove.")
   blocklistItemIds: string[];
@@ -213,6 +217,7 @@ model RemoveTextBlocklistItemsOptions {
 
 @added(ContentSafety.Versions.v2024_09_01)
 @doc("The request of analyzing potential direct or indirect injection attacks.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ShieldPromptOptions {
   @doc("The user prompt to be analyzed, which may contain direct injection attacks.")
   userPrompt?: string;
@@ -247,6 +252,7 @@ model DocumentInjectionAnalysisResult {
 
 @added(ContentSafety.Versions.v2024_09_01)
 @doc("The request of detecting potential protected material present in the given text.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DetectTextProtectedMaterialOptions {
   @doc("The text to be analyzed, which may contain protected material. The characters will be counted in Unicode code points.")
   text: string;

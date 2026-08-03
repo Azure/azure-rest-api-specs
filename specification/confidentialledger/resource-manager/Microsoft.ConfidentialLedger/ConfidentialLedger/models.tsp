@@ -427,6 +427,7 @@ model ConfidentialLedgerRestore {
  * Object representing the restore response of a Confidential Ledger Resource.
  */
 @removed(Versions.v2026_02_23)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ConfidentialLedgerRestoreResponse {
   /**
    * Response body stating if the ledger is being restored.
@@ -562,6 +563,7 @@ model ManagedCCFBackup {
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @removed(Versions.v2026_02_23)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ManagedCCFBackupResponse {
   /**
    * Response body stating if the managed CCF resource is being backed up.
@@ -598,6 +600,7 @@ model ManagedCCFRestore {
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @removed(Versions.v2026_02_23)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ManagedCCFRestoreResponse {
   /**
    * Response body stating if the managed CCF resource is being restored.

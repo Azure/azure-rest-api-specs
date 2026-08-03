@@ -630,6 +630,7 @@ model HandleItem {
   @Xml.name("SessionId") sessionId: string;
 
   /** Client IP that opened the handle */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @Xml.name("ClientIp") clientIp: string;
 
   /** Name of the client machine where the share is being mounted */
@@ -654,6 +655,7 @@ model HandleItem {
 
 /** An enumeration of directories and files. */
 @Xml.name("EnumerationResults")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ListFilesAndDirectoriesSegmentResponse {
   /** The service endpoint. */
   @Xml.attribute
@@ -704,6 +706,7 @@ model ListFilesAndDirectoriesSegmentResponse {
 
 /** An enumeration of handles. */
 @Xml.name("EnumerationResults")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ListHandlesResponse {
   /** The handle list. */
   @pageItems
@@ -718,6 +721,7 @@ model ListHandlesResponse {
 
 /** An enumeration of shares. */
 @Xml.name("EnumerationResults")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ListSharesResponse {
   /** The service endpoint. */
   @Xml.attribute

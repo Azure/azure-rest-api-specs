@@ -115,6 +115,7 @@ model NodePoolProperties {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @minValue(30)
   @maxValue(2048)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osDiskSizeGb?: int32 = 120;
 
   @doc("The percent of disk usage before which image garbage collection is never run. This cannot be set higher than imageCacheUpperThreshold. The default is 40%")

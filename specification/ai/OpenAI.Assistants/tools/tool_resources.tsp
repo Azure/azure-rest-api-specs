@@ -66,6 +66,7 @@ model FileSearchToolResource {
  * tool requires a list of vector store IDs.
  */
 @added(ServiceApiVersions.v2024_05_01_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CreateToolResourcesOptions {
   /**
    * A list of file IDs made available to the `code_interpreter` tool. There can be a maximum of 20 files
@@ -83,6 +84,7 @@ model CreateToolResourcesOptions {
  * A set of resources that will be used by the `code_interpreter` tool. Request object.
  */
 @added(ServiceApiVersions.v2024_05_01_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CreateCodeInterpreterToolResourceOptions {
   /** A list of file IDs made available to the `code_interpreter` tool. */
   @maxItems(20)
@@ -112,6 +114,7 @@ union CreateFileSearchToolResourceOptions {
 
 /** File IDs associated to the vector store to be passed to the helper. */
 @added(ServiceApiVersions.v2024_05_01_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CreateFileSearchToolResourceVectorStoreOptions {
   /** A list of file IDs to add to the vector store. There can be a maximum of 10000 files in a vector store. */
   @encodedName("application/json", "file_ids")
@@ -139,6 +142,7 @@ model CreateFileSearchToolResourceVectorStoreOptions {
  * vector store IDs.
  */
 @added(ServiceApiVersions.v2024_05_01_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model UpdateToolResourcesOptions {
   /**
    * Overrides the list of file IDs made available to the `code_interpreter` tool. There can be a maximum of 20 files
@@ -154,6 +158,7 @@ model UpdateToolResourcesOptions {
 
 /** Request object to update `code_interpreted` tool resources. */
 @added(ServiceApiVersions.v2024_05_01_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model UpdateCodeInterpreterToolResourceOptions {
   /** A list of file IDs to override the current list of the assistant. */
   @encodedName("application/json", "file_ids")
@@ -163,6 +168,7 @@ model UpdateCodeInterpreterToolResourceOptions {
 
 /** Request object to update `file_search` tool resources. */
 @added(ServiceApiVersions.v2024_05_01_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model UpdateFileSearchToolResourceOptions {
   /** A list of vector store IDs to override the current list of the assistant. */
   @maxItems(1)

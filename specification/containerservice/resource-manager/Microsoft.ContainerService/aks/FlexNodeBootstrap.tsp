@@ -193,4 +193,5 @@ model BootstrapKubeletConfig {
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "The POST action accepts an empty JSON object for forward-compatible request shape."
 @added(Versions.v2026_05_02_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ListBootstrapDataRequest {}

@@ -335,6 +335,7 @@ model IncomingQuotaTransferProperties {
  * Request body for the donor cancel action.
  */
 @added(Versions.v2026_09_01_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model QuotaTransferCancelRequest {
   /**
    * Optional free-text reason recorded on the transfer.
@@ -347,6 +348,7 @@ model QuotaTransferCancelRequest {
  * Request body for the recipient approve action.
  */
 @added(Versions.v2026_09_01_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model IncomingQuotaTransferApproveRequest {
   /**
    * Optional free-text comment recorded on the transfer.
@@ -359,6 +361,7 @@ model IncomingQuotaTransferApproveRequest {
  * Request body for the recipient reject action.
  */
 @added(Versions.v2026_09_01_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model IncomingQuotaTransferRejectRequest {
   /**
    * Optional free-text reason recorded on the transfer.

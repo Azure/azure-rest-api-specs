@@ -85,6 +85,7 @@ model Assistant {
 
 @doc("The request details to use when creating a new assistant.")
 @added(ServiceApiVersions.v2024_02_15_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AssistantCreationOptions {
   @doc("The ID of the model to use.")
   `model`: string;
@@ -148,6 +149,7 @@ model AssistantCreationOptions {
 
 @doc("The request details to use when modifying an existing assistant.")
 @added(ServiceApiVersions.v2024_02_15_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model UpdateAssistantOptions {
   @path
   @doc("The ID of the assistant to modify.")

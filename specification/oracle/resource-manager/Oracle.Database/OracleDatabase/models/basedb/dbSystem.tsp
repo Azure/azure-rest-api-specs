@@ -112,6 +112,7 @@ model DbSystemBaseProperties {
 
   @doc("The DB system options.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   dbSystemOptions?: DbSystemOptions;
 
   @doc("The type of redundancy configured for the DB system. NORMAL is 2-way redundancy. HIGH is 3-way redundancy.")
@@ -310,6 +311,7 @@ union DbSystemSourceType {
 
 @added(Versions.v20250701_preview)
 @doc("DbSystemOptions resource properties.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DbSystemOptions {
   @doc("The storage option used in DB system. ASM - Automatic storage management, LVM - Logical Volume management.")
   storageManagement?: StorageManagementType;

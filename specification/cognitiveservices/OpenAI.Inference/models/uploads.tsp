@@ -8,6 +8,7 @@ using TypeSpec.Versioning;
 
 /** The request body of an upload creation operation. */
 @added(ServiceApiVersions.v2024_08_01_Preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CreateUploadRequest {
   /** The name of the file to upload. */
   filename: string;
@@ -35,6 +36,7 @@ model CreateUploadRequest {
 
 /** The multipart/form-data request body of a data part addition request for an upload. */
 @added(ServiceApiVersions.v2024_08_01_Preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AddUploadPartRequest {
   /** The chunk of bytes for this Part. */
   data: Http.HttpPart<bytes>;
@@ -42,6 +44,7 @@ model AddUploadPartRequest {
 
 /** The request body of an upload completion request. */
 @added(ServiceApiVersions.v2024_08_01_Preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CompleteUploadRequest {
   /** The ordered list of Part IDs. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "this represents the case-sensitive wire format"

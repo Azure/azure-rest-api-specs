@@ -188,6 +188,7 @@ union ManagedPrivateEndpointConnectionStatus {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ManagedGrafanaListResponse is Azure.Core.Page<ManagedGrafana>;
 
 /**
@@ -790,6 +791,7 @@ model GrafanaAvailablePlugin {
 /**
  * The list of managed private endpoints of a grafana resource
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ManagedPrivateEndpointModelListResponse
   is Azure.Core.Page<ManagedPrivateEndpointModel>;
 
@@ -877,6 +879,7 @@ model ManagedPrivateEndpointUpdateParameters {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model IntegrationFabricListResponse is Azure.Core.Page<IntegrationFabric>;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -928,6 +931,7 @@ model IntegrationFabricPropertiesUpdateParameters {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ManagedDashboardListResponse is Azure.Core.Page<ManagedDashboard>;
 
 /**
@@ -971,6 +975,7 @@ model ResourceSku {
  * The list response for dashboard definitions.
  */
 @added(Versions.v2025_09_01_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DashboardDefinitionListResponse is Azure.Core.Page<DashboardDefinition>;
 
 /**

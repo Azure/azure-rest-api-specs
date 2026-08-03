@@ -656,6 +656,7 @@ model ImageTemplateVmProfile {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @minValue(0)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osDiskSizeGB?: int32 = 0;
 
   /**

@@ -12,6 +12,7 @@ namespace JavaClient;
 
 // Get Application Operation
 @doc("Optional parameters for Get Application operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchApplicationGetOptions {
   ...Azure.Batch.CommonParameters;
 }
@@ -39,6 +40,7 @@ op getApplicationCustomization is Azure.Batch.ReadOperation<
 // List Applications Operation
 
 @doc("Optional parameters for List Applications operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchApplicationsListOptions {
   ...Azure.Batch.CommonListParameters;
 }
@@ -63,6 +65,7 @@ op listApplicationsCustomization is Azure.Batch.ListOperation<
 
 // List Pool Usage Metrics Operation
 @doc("Optional parameters for List Pool Usage Metrics operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchPoolUsageMetricsListOptions {
   ...Azure.Batch.CommonListParameters;
   ...Azure.Batch.ListPoolUsageMetricsOptionalParameters;
@@ -88,6 +91,7 @@ op listPoolUsageMetricsCustomization is Azure.Batch.ListOperation<
 
 // Create Pool Operation
 @doc("Optional parameters for Create Pool operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchPoolCreateOptions {
   ...Azure.Batch.CommonJsonParameters;
 }
@@ -110,6 +114,7 @@ op createPoolCustomization is Azure.Batch.CreateOperation<
 
 // List Pools Operation
 @doc("Optional parameters for List Pools operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchPoolsListOptions {
   ...Azure.Batch.CommonListParameters;
   ...Azure.Batch.ListPoolsOptionalParameters;
@@ -131,6 +136,7 @@ op listPoolsCustomization is Azure.Batch.ListOperation<
 
 // Delete Pool Operation
 @doc("Optional parameters for Delete Pool operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchPoolDeleteOptions {
   ...Azure.Batch.CommonParameters;
 }
@@ -155,6 +161,7 @@ op deletePoolCustomization is Azure.Batch.DeleteOperation<
 
 // Pool Exists Operation
 @doc("Optional parameters for Pool Exists operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchPoolExistsOptions {
   ...Azure.Batch.CommonParameters;
 }
@@ -181,6 +188,7 @@ op poolExistsCustomization is Azure.Batch.ResourceInfoOperationWithAdditionalRes
 
 // Get Pool Operation
 @doc("Optional parameters for Get Pool operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchPoolGetOptions {
   ...Azure.Batch.CommonParameters;
   ...Azure.Batch.GetPoolOptionalParameters;
@@ -206,6 +214,7 @@ op getPoolCustomization is Azure.Batch.ReadOperation<
 
 // Update Pool Operation
 @doc("Optional parameters for Update Pool operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchPoolUpdateOptions {
   ...Azure.Batch.CommonJsonParameters;
 }
@@ -230,6 +239,7 @@ op updatePoolCustomization is Azure.Batch.UpdateOperation<
 
 // Disable Pool Autoscale Operation
 @doc("Optional parameters for Disable Pool AutoScale operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchPoolDisableAutoScaleOptions {
   ...Azure.Batch.CommonParameters;
 }
@@ -256,6 +266,7 @@ op disablePoolAutoScaleCustomization is Azure.Batch.PostOperation<
 
 // Enable Pool Autoscale Operation
 @doc("Optional parameters for Enable Pool AutoScale operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchPoolEnableAutoScaleOptions {
   ...Azure.Batch.CommonJsonParameters;
 }
@@ -284,6 +295,7 @@ op enablePoolAutoScaleCustomization is Azure.Batch.PostOperation<
 
 // Evaluate Pool Autoscale Operation
 @doc("Optional parameters for Evaluate Pool AutoScale operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchPoolEvaluateAutoScaleOptions {
   ...Azure.Batch.CommonJsonParameters;
 }
@@ -310,6 +322,7 @@ op evaluatePoolAutoScaleCustomization is Azure.Batch.PostOperation<
 
 // Resize Pool Operation
 @doc("Optional parameters for Resize Pool operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchPoolResizeOptions {
   ...Azure.Batch.CommonJsonParameters;
 }
@@ -334,6 +347,7 @@ op resizePoolCustomization is Azure.Batch.PostOperation<
 
 // Stop Pool Resize Operation
 @doc("Optional parameters for Stop Pool Resize operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchPoolResizeStopOptions {
   ...Azure.Batch.CommonParameters;
 }
@@ -362,6 +376,7 @@ op stopPoolResizeCustomization is Azure.Batch.PostOperation<
 
 // Replace Pool Properties Operation
 @doc("Optional parameters for Replace Pool Properties operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchPoolPropertiesReplaceOptions {
   ...Azure.Batch.CommonJsonParameters;
 }
@@ -388,6 +403,7 @@ op replacePoolPropertiesCustomization is Azure.Batch.PostOperation<
 
 // Remove Nodes Operation
 @doc("Optional parameters for Remove Nodes operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchNodesRemoveOptions {
   ...Azure.Batch.CommonJsonParameters;
 }
@@ -412,6 +428,7 @@ op removeNodesCustomization is Azure.Batch.PostOperation<
 
 // List Supported Images Operation
 @doc("Optional parameters for List Supported Images operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SupportedBatchImagesListOptions {
   ...Azure.Batch.CommonListParameters;
   ...Azure.Batch.ListSupportedImagesOptionalParameters;
@@ -437,6 +454,7 @@ op listSupportedImagesCustomization is Azure.Batch.ListOperation<
 
 // List Pool Node Counts Operation
 @doc("Optional parameters for List Pool Node Counts operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchPoolNodeCountsListOptions {
   ...Azure.Batch.CommonListParameters;
   ...Azure.Batch.ListPoolNodeCountsOptionalParameters;
@@ -462,6 +480,7 @@ op listPoolNodeCountsCustomization is Azure.Batch.ListOperation<
 
 // Delete Job Operation
 @doc("Optional parameters for Delete Job operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchJobDeleteOptions {
   ...Azure.Batch.CommonParameters;
   ...Azure.Batch.DeleteJobOptionalParameters;
@@ -487,6 +506,7 @@ op deleteJobCustomization is Azure.Batch.DeleteOperation<
 
 // Get Job Operation
 @doc("Optional parameters for Get Job operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchJobGetOptions {
   ...Azure.Batch.CommonParameters;
   ...Azure.Batch.GetJobOptionalParameters;
@@ -512,6 +532,7 @@ op getJobCustomization is Azure.Batch.ReadOperation<
 
 // Update Job Operation
 @doc("Optional parameters for Update Job operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchJobUpdateOptions {
   ...Azure.Batch.CommonJsonParameters;
 }
@@ -536,6 +557,7 @@ op updateJobCustomization is Azure.Batch.UpdateOperation<
 
 // Replace Job Operation
 @doc("Optional parameters for Replace Job operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchJobReplaceOptions {
   ...Azure.Batch.CommonJsonParameters;
 }
@@ -560,6 +582,7 @@ op replaceJobCustomization is Azure.Batch.ReplaceOperation<
 
 // Disable Job Operation
 @doc("Optional parameters for Disable Job operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchJobDisableOptions {
   ...Azure.Batch.CommonJsonParameters;
 }
@@ -584,6 +607,7 @@ op disableJobCustomization is Azure.Batch.PostOperation<
 
 // Enable Job Operation
 @doc("Optional parameters for Enable Job operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchJobEnableOptions {
   ...Azure.Batch.CommonParameters;
 }
@@ -608,6 +632,7 @@ op enableJobCustomization is Azure.Batch.PostOperation<
 
 // Terminate Job Operation
 @doc("Optional parameters for Terminate Job operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchJobTerminateOptions {
   ...Azure.Batch.CommonJsonParameters;
   ...Azure.Batch.TerminateJobOptionalParameters;
@@ -633,6 +658,7 @@ op terminateJobCustomization is Azure.Batch.PostOperation<
 
 // Create Job Operation
 @doc("Optional parameters for Create Job operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchJobCreateOptions {
   ...Azure.Batch.CommonJsonParameters;
 }
@@ -655,6 +681,7 @@ op createJobCustomization is Azure.Batch.CreateOperation<
 
 // List Jobs Operation
 @doc("Optional parameters for List Jobs operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchJobsListOptions {
   ...Azure.Batch.CommonListParameters;
   ...Azure.Batch.ListJobsOptionalParameters;
@@ -676,6 +703,7 @@ op listJobsCustomization is Azure.Batch.ListOperation<
 
 // List Jobs From Schedule Operation
 @doc("Optional parameters for List Jobs From Schedule operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchJobsFromScheduleListOptions {
   ...Azure.Batch.CommonListParameters;
   ...Azure.Batch.ListJobsFromScheduleOptionalParameters;
@@ -703,6 +731,7 @@ op listJobsFromScheduleCustomization is Azure.Batch.ListOperation<
 
 // List Jobs Preparation and Release Task Status Operation
 @doc("Optional parameters for List Jobs From Schedule operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchJobPreparationAndReleaseTaskStatusListOptions {
   ...Azure.Batch.CommonListParameters;
   ...Azure.Batch.ListJobPreparationAndReleaseTaskStatusOptionalParameters;
@@ -730,6 +759,7 @@ op listJobPreparationAndReleaseTaskStatusCustomization is Azure.Batch.ListOperat
 
 // Get Job Task Counts Operation
 @doc("Optional parameters for Get Job Task Counts operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchJobTaskCountsGetOptions {
   ...Azure.Batch.CommonParameters;
 }
@@ -756,6 +786,7 @@ op getJobTaskCountsCustomization is Azure.Batch.ReadOperation<
 
 // Job Schedule Exists Operation
 @doc("Optional parameters for Job Schedule Exists operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchJobScheduleExistsOptions {
   ...Azure.Batch.CommonParameters;
 }
@@ -786,6 +817,7 @@ op jobScheduleExistsCustomization is Azure.Batch.ResourceInfoOperationWithAdditi
 
 // Delete Job Schedule Operation
 @doc("Optional parameters for Delete Job Schedule operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchJobScheduleDeleteOptions {
   ...Azure.Batch.CommonParameters;
   ...Azure.Batch.DeleteJobScheduleOptionalParameters;
@@ -815,6 +847,7 @@ op deleteJobScheduleCustomization is Azure.Batch.DeleteOperation<
 
 // Get Job Schedule Operation
 @doc("Optional parameters for Get Job Schedule operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchJobScheduleGetOptions {
   ...Azure.Batch.CommonParameters;
   ...Azure.Batch.GetJobScheduleOptionalParameters;
@@ -844,6 +877,7 @@ op getJobScheduleCustomization is Azure.Batch.ReadOperation<
 
 // Update Job Schedule Operation
 @doc("Optional parameters for Get Job Schedule operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchJobScheduleUpdateOptions {
   ...Azure.Batch.CommonJsonParameters;
 }
@@ -872,6 +906,7 @@ op updateJobScheduleCustomization is Azure.Batch.UpdateOperation<
 
 // Replace Job Schedule Operation
 @doc("Optional parameters for Replace Job Schedule operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchJobScheduleReplaceOptions {
   ...Azure.Batch.CommonJsonParameters;
 }
@@ -900,6 +935,7 @@ op replaceJobScheduleCustomization is Azure.Batch.ReplaceOperation<
 
 // Disable Job Schedule Operation
 @doc("Optional parameters for Disable Job Schedule operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchJobScheduleDisableOptions {
   ...Azure.Batch.CommonParameters;
 }
@@ -928,6 +964,7 @@ op disableJobScheduleCustomization is Azure.Batch.PostOperation<
 
 // Enable Job Schedule Operation
 @doc("Optional parameters for Enable Job Schedule operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchJobScheduleEnableOptions {
   ...Azure.Batch.CommonParameters;
 }
@@ -956,6 +993,7 @@ op enableJobScheduleCustomization is Azure.Batch.PostOperation<
 
 // Terminate Job Schedule Operation
 @doc("Optional parameters for Terminate Job Schedule operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchJobScheduleTerminateOptions {
   ...Azure.Batch.CommonParameters;
   ...Azure.Batch.TerminateJobScheduleOptionalParameters;
@@ -985,6 +1023,7 @@ op terminateJobScheduleCustomization is Azure.Batch.PostOperation<
 
 // Create Job Schedule Operation
 @doc("Optional parameters for Create Job Schedule operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchJobScheduleCreateOptions {
   ...Azure.Batch.CommonJsonParameters;
 }
@@ -1011,6 +1050,7 @@ op createJobScheduleCustomization is Azure.Batch.CreateOperation<
 
 // List Job Schedules Operation
 @doc("Optional parameters for List Job Schedules operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchJobSchedulesListOptions {
   ...Azure.Batch.CommonListParameters;
   ...Azure.Batch.ListJobSchedulesOptionalParameters;
@@ -1036,6 +1076,7 @@ op listJobSchedulesCustomization is Azure.Batch.ListOperation<
 
 // Create Task Operation
 @doc("Optional parameters for Create Task operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchTaskCreateOptions {
   ...Azure.Batch.CommonJsonParameters;
 }
@@ -1058,6 +1099,7 @@ op createTaskCustomization is Azure.Batch.CreateOperation<
 
 // List Tasks Operation
 @doc("Optional parameters for List Tasks operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchTasksListOptions {
   ...Azure.Batch.CommonListParameters;
   ...Azure.Batch.ListTasksOptionalParameters;
@@ -1081,6 +1123,7 @@ op listTasksCustomization is Azure.Batch.ListOperation<
 
 // Create Task Collection Operation
 @doc("Optional parameters for Create Task Collection operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchTaskCollectionCreateOptions {
   ...Azure.Batch.CommonJsonParameters;
 }
@@ -1107,6 +1150,7 @@ op createTaskCollectionCustomization is Azure.Batch.PostOperation<
 
 // Delete Task Operation
 @doc("Optional parameters for Delete Task operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchTaskDeleteOptions {
   ...Azure.Batch.CommonParameters;
 }
@@ -1131,6 +1175,7 @@ op deleteTaskCustomization is Azure.Batch.DeleteOperation<
 
 // Get Task Operation
 @doc("Optional parameters for Get Task operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchTaskGetOptions {
   ...Azure.Batch.CommonParameters;
   ...Azure.Batch.GetTaskOptionalParameters;
@@ -1156,6 +1201,7 @@ op getTaskCustomization is Azure.Batch.ReadOperation<
 
 // Replace Task Operation
 @doc("Optional parameters for Replace Task operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchTaskReplaceOptions {
   ...Azure.Batch.CommonJsonParameters;
 }
@@ -1180,6 +1226,7 @@ op replaceTaskCustomization is Azure.Batch.ReplaceOperation<
 
 // List SubTasks Operation
 @doc("Optional parameters for List SubTasks operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchSubTasksListOptions {
   ...Azure.Batch.CommonParameters;
   ...Azure.Batch.ListSubTasksOptionalParameters;
@@ -1204,6 +1251,7 @@ op listSubTasksCustomization is Azure.Batch.ReadOperation<
 
 // Terminate Task Operation
 @doc("Optional parameters for Terminate Task operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchTaskTerminateOptions {
   ...Azure.Batch.CommonParameters;
 }
@@ -1228,6 +1276,7 @@ op terminateTaskCustomization is Azure.Batch.PostOperation<
 
 // Reactivate Task Operation
 @doc("Optional parameters for Reactivate Task operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchTaskReactivateOptions {
   ...Azure.Batch.CommonParameters;
 }
@@ -1256,6 +1305,7 @@ op reactivateTaskCustomization is Azure.Batch.PostOperation<
 
 // Delete Task File Operation
 @doc("Optional parameters for Delete Task File operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchTaskFileDeleteOptions {
   ...Azure.Batch.CommonParameters;
   ...Azure.Batch.DeleteTaskFileOptionalParameters;
@@ -1283,6 +1333,7 @@ op deleteTaskFileCustomization is Azure.Batch.DeleteOperation<
 
 // Get Task File Operation
 @doc("Optional parameters for Get Task File operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchTaskFileGetOptions {
   ...Azure.Batch.CommonParameters;
   ...Azure.Batch.BatchModifiedSinceHeaders;
@@ -1307,6 +1358,7 @@ op getTaskFileCustomization is Azure.Batch.FileOperation<
 
 // Get Task File Properties Operation
 @doc("Optional parameters for Get Task File Properties operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchTaskFilePropertiesGetOptions {
   ...Azure.Batch.CommonParameters;
   ...Azure.Batch.BatchModifiedSinceHeaders;
@@ -1334,6 +1386,7 @@ op getTaskFilePropertiesCustomization is Azure.Batch.HeadFileOperation<
 
 // List Task Files Operation
 @doc("Optional parameters for List Task Files operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchTaskFilesListOptions {
   ...Azure.Batch.CommonListParameters;
   ...Azure.Batch.ListTaskFilesOptionalParameters;
@@ -1357,6 +1410,7 @@ op listTaskFilesCustomization is Azure.Batch.ListOperation<
 
 // Create Node User Operation
 @doc("Optional parameters for Create Node User operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchNodeUserCreateOptions {
   ...Azure.Batch.CommonJsonParameters;
 }
@@ -1383,6 +1437,7 @@ op createNodeUserCustomization is Azure.Batch.CreateOperation<
 
 // Delete Node User Operation
 @doc("Optional parameters for Delete Node User operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchNodeUserDeleteOptions {
   ...Azure.Batch.CommonParameters;
 }
@@ -1409,6 +1464,7 @@ op deleteNodeUserCustomization is Azure.Batch.DeleteOperation<
 
 // Replace Node User Operation
 @doc("Optional parameters for Replace Node User operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchNodeUserReplaceOptions {
   ...Azure.Batch.CommonJsonParameters;
 }
@@ -1435,6 +1491,7 @@ op replaceNodeUserCustomization is Azure.Batch.ReplaceOperation<
 
 // Get Node Operation
 @doc("Optional parameters for Get Node operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchNodeGetOptions {
   ...Azure.Batch.CommonParameters;
   ...Azure.Batch.GetNodeOptionalParameters;
@@ -1458,6 +1515,7 @@ op getNodeCustomization is Azure.Batch.ReadOperation<
 
 // Reboot Node Operation
 @doc("Optional parameters for Reboot Node operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchNodeRebootOptions {
   ...Azure.Batch.CommonJsonParameters;
   ...Azure.Batch.RebootNodeOptionalParameters;
@@ -1481,6 +1539,7 @@ op rebootNodeCustomization is Azure.Batch.PostOperation<
 
 // Start Node Operation
 @doc("Optional parameters for Start Node operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchNodeStartOptions {
   ...Azure.Batch.CommonParameters;
 }
@@ -1503,6 +1562,7 @@ op startNodeCustomization is Azure.Batch.PostOperation<
 
 // Deallocate Node Operation
 @doc("Optional parameters for Deallocate Node operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchNodeDeallocateOptions {
   ...Azure.Batch.CommonJsonParameters;
   ...Azure.Batch.DeallocateNodeOptionalParameters;
@@ -1530,6 +1590,7 @@ op deallocateNodeCustomization is Azure.Batch.PostOperation<
 
 // Reimage Node Operation
 @doc("Optional parameters for Reimage Node operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchNodeReimageOptions {
   ...Azure.Batch.CommonJsonParameters;
   ...Azure.Batch.ReimageNodeOptionalParameters;
@@ -1553,6 +1614,7 @@ op reimageNodeCustomization is Azure.Batch.PostOperation<
 
 // Disable Node Scheduling Operation
 @doc("Optional parameters for Disable Node Scheduling operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchNodeSchedulingDisableOptions {
   ...Azure.Batch.CommonJsonParameters;
   ...Azure.Batch.DisableNodeSchedulingOptionalParameters;
@@ -1580,6 +1642,7 @@ op disableNodeSchedulingCustomization is Azure.Batch.PostOperation<
 
 // Enable Node Scheduling Operation
 @doc("Optional parameters for Enable Node Scheduling operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchNodeSchedulingEnableOptions {
   ...Azure.Batch.CommonParameters;
 }
@@ -1606,6 +1669,7 @@ op enableNodeSchedulingCustomization is Azure.Batch.PostOperation<
 
 // Get Node Remote Login Settings Operation
 @doc("Optional parameters for Get Node Remote Login Settings operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchNodeRemoteLoginSettingsGetOptions {
   ...Azure.Batch.CommonParameters;
 }
@@ -1632,6 +1696,7 @@ op getNodeRemoteLoginSettingsCustomization is Azure.Batch.ReadOperation<
 
 // Upload Node Logs Operation
 @doc("Optional parameters for Upload Node Logs operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchNodeLogsUploadOptions {
   ...Azure.Batch.CommonJsonParameters;
 }
@@ -1658,6 +1723,7 @@ op uploadNodeLogsCustomization is Azure.Batch.PostOperation<
 
 // List Nodes Operation
 @doc("Optional parameters for List Nodes operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchNodesListOptions {
   ...Azure.Batch.CommonListParameters;
   ...Azure.Batch.ListNodesOptionalParameters;
@@ -1681,6 +1747,7 @@ op listNodesCustomization is Azure.Batch.ListOperation<
 
 // Get Node Extension Operation
 @doc("Optional parameters for Get Node Extension operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchNodeExtensionGetOptions {
   ...Azure.Batch.CommonParameters;
   ...Azure.Batch.GetNodeExtensionOptionalParameters;
@@ -1708,6 +1775,7 @@ op getNodeExtensionCustomization is Azure.Batch.ReadOperation<
 
 // List Node Extensions Operation
 @doc("Optional parameters for List Node Extensions operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchNodeExtensionsListOptions {
   ...Azure.Batch.CommonListParameters;
   ...Azure.Batch.ListNodeExtensionsOptionalParameters;
@@ -1735,6 +1803,7 @@ op listNodeExtensionsCustomization is Azure.Batch.ListOperation<
 
 // Delete Node File Operation
 @doc("Optional parameters for Delete Node File operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchNodeFileDeleteOptions {
   ...Azure.Batch.CommonParameters;
   ...Azure.Batch.DeleteNodeFileOptionalParameters;
@@ -1762,6 +1831,7 @@ op deleteNodeFileCustomization is Azure.Batch.DeleteOperation<
 
 // Get Node File Operation
 @doc("Optional parameters for Get Node File operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchNodeFileGetOptions {
   ...Azure.Batch.CommonParameters;
   ...Azure.Batch.BatchModifiedSinceHeaders;
@@ -1786,6 +1856,7 @@ op getNodeFileCustomization is Azure.Batch.FileOperation<
 
 // Get Node File Properties Operation
 @doc("Optional parameters for Get Node File Properties operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchNodeFilePropertiesGetOptions {
   ...Azure.Batch.CommonParameters;
   ...Azure.Batch.BatchModifiedSinceHeaders;
@@ -1813,6 +1884,7 @@ op getNodeFilePropertiesCustomization is Azure.Batch.HeadFileOperation<
 
 // List Node Files Operation
 @doc("Optional parameters for List Node Files operation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchNodeFilesListOptions {
   ...Azure.Batch.CommonListParameters;
   ...Azure.Batch.ListNodeFilesOptionalParameters;

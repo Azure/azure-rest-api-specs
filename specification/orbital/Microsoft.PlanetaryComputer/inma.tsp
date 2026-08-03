@@ -13,6 +13,7 @@ namespace Microsoft.PlanetaryComputer;
 
 @doc("Generic paged response model")
 @friendlyName("{name}PagedResponse", T)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model Page<T> {
   @doc("The items on the page")
   @pageItems

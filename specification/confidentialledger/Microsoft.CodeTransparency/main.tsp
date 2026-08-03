@@ -468,6 +468,7 @@ model AcceptCborHeader {
 
 @added(Versions.`2026-03-26`)
 @doc("Response containing COSE_Key_Set (array of COSE_Key maps) in CBOR format")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ScittKeysResponse {
   @doc("Content type is application/cbor")
   @header
@@ -480,6 +481,7 @@ model ScittKeysResponse {
 
 @added(Versions.`2026-03-26`)
 @doc("Response containing a single COSE_Key (map, not array) in CBOR format")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ScittKeyResponse {
   @doc("Content type is application/cbor")
   @header

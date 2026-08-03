@@ -115,6 +115,7 @@ model VectorStore {
 
 /** Request object for creating a vector store. */
 @added(ServiceApiVersions.v2024_05_01_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model VectorStoreOptions {
   /** A list of file IDs that the vector store should use. Useful for tools like `file_search` that can access files. */
   @maxItems(500)
@@ -138,6 +139,7 @@ model VectorStoreOptions {
 
 /** Request object for updating a vector store. */
 @added(ServiceApiVersions.v2024_05_01_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model VectorStoreUpdateOptions {
   /** The name of the vector store. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"

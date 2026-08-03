@@ -72,6 +72,7 @@ model AzureSearchChatExtensionParameters {
 
 @doc("Optional settings to control how fields are processed when using a configured Azure Search resource.")
 @added(ServiceApiVersions.v2024_02_15_Preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AzureSearchIndexFieldMappingOptions {
   @doc("The name of the index field to use as a title.")
   @clientName("TitleFieldName", "csharp")

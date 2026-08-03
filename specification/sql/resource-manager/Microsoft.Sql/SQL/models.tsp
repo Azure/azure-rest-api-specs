@@ -5185,6 +5185,7 @@ model DatabaseAutomaticTuningProperties {
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.DatabaseAutomaticTuning)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AutomaticTuningOptions {
   /**
    * Automatic tuning option desired state.
@@ -9058,6 +9059,7 @@ model JobStepOutput {
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.JobSteps)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model JobStepExecutionOptions {
   /**
    * Execution timeout for the job step.
@@ -13862,6 +13864,7 @@ model AutomaticTuningServerProperties {
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ServerAutomaticTuning)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AutomaticTuningServerOptions {
   /**
    * Automatic tuning option desired state.
@@ -14221,6 +14224,7 @@ model CheckNameAvailabilityRequest {
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.Servers)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CheckNameAvailabilityResponse {
   /**
    * The name whose availability was checked.

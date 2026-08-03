@@ -1603,6 +1603,7 @@ model ReservationRecommendationDetailsUsageProperties {
  *  * 503 ServiceUnavailable - Service is temporarily unavailable. Retry after waiting for the time specified in the "Retry-After" header.
  */
 @error
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model HighCasedErrorResponse {
   /**
    * The details of the error.

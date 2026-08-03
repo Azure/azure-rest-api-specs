@@ -180,6 +180,7 @@ model OptimizationAgentDefinition {
 
 @doc("Tuning knobs and run-mode for an optimization job.")
 @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model OptimizationOptions {
   @doc("Maximum number of optimization candidates to generate. Must be >= 1. Default: 5.")
   @minValue(1)

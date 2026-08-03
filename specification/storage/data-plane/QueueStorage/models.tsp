@@ -328,6 +328,7 @@ union GeoReplicationStatus {
 
 /** The list queues response. */
 @Xml.name("EnumerationResults")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ListQueuesResponse {
   /** The service endpoint. */
   @Xml.attribute

@@ -37,6 +37,7 @@ model NamespaceAsset is TrackedResource<NamespaceAssetProperties> {
 
 @added(Versions.v2026_04_01)
 @doc("The request body for the executeAction operation on NamespaceAsset.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model NamespaceAssetExecuteActionRequest {
   @doc("Name of the management action to be executed.")
   managementActionName: string;
@@ -69,6 +70,7 @@ union ManagementActionExecutionStatus {
 
 @added(Versions.v2026_04_01)
 @doc("The response body for the executeAction operation on NamespaceAsset.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model NamespaceAssetExecuteActionResponse {
   @doc("Status of the management action execution.")
   status: ManagementActionExecutionStatus;

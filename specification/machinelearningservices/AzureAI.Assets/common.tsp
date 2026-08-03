@@ -39,6 +39,7 @@ model OnlineRequestSettings {
 }
 
 @doc("LongRunningNullResponse")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model LongRunningNullResponse {
   @doc("Polling Uri.")
   @pollingLocation
@@ -46,6 +47,7 @@ model LongRunningNullResponse {
 }
 
 @doc("PutAssetLROResponse")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model PutAssetLROResponse {
   @doc("Response of completed put asset lro.")
   assetId: string;

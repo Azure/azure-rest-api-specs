@@ -637,6 +637,7 @@ model APIServerProfile {
    * The IP of the cluster API server.
    */
   @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ip?: string;
 }
 
@@ -658,6 +659,7 @@ model IngressProfile {
    * The IP of the ingress.
    */
   @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ip?: string;
 }
 

@@ -9,6 +9,7 @@ using TypeSpec.Versioning;
 
 /** A single message within an assistant thread, as provided during that thread's creation for its initial state. */
 @added(ServiceApiVersions.v2024_02_15_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ThreadMessageOptions {
   /**
    * The role of the entity that is creating the message. Allowed values include:

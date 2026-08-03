@@ -423,6 +423,7 @@ model Test {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is an abbervation and should be all caps"
   @added(APIVersions.v2023_04_01_preview)
   @doc("Inject load test engines without deploying public IP for outbound access")
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   publicIPDisabled?: boolean;
 
   @doc("Type of the managed identity referencing the Key vault.")
@@ -929,6 +930,7 @@ model TestRun {
   @added(APIVersions.v2023_04_01_preview)
   @doc("Inject load test engines without deploying public IP for outbound access")
   @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   publicIPDisabled?: boolean;
 
   @added(APIVersions.v2024_07_01_preview)
@@ -1164,6 +1166,7 @@ model ArtifactsContainerInfo {
 
 @doc("Request to clone an existing test into a new test.")
 @added(APIVersions.v2025_03_01_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CloneTestRequest {
   @doc("Unique identifier for the new test that will be created.")
   @pattern("^[a-z0-9_-]*$")
@@ -1316,6 +1319,7 @@ model DimensionValueList {
 }
 
 @doc("Metric Dimensions")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model MetricDimensionsRequest {
   @doc("Metric name")
   @query

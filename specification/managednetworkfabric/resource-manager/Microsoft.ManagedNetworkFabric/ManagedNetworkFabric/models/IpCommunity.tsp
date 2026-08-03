@@ -4,6 +4,7 @@ using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
 @doc("IP Community Properties defines the resource properties.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model IpCommunityProperties {
   ...AnnotationResource;
 
@@ -39,6 +40,7 @@ model IpCommunityProperties {
 }
 
 @doc("IP Community patchable properties.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model IpCommunityPatchableProperties {
   @doc("List of IP Community Rules.")
   @Azure.ResourceManager.identifiers(#[])

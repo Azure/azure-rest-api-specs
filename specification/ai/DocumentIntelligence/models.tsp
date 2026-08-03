@@ -364,6 +364,7 @@ union AnalyzeOutputOption {
 }
 
 @doc("Document analysis parameters.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AnalyzeDocumentRequest {
   @doc("Document URL to analyze.  Either urlSource or base64Source must be specified.")
   urlSource?: url;
@@ -376,6 +377,7 @@ model AnalyzeDocumentRequest {
 }
 
 @doc("Batch document analysis parameters.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AnalyzeBatchDocumentsRequest {
   @doc("""
     Azure Blob Storage location containing the batch documents.  Either
@@ -402,6 +404,7 @@ model AnalyzeBatchDocumentsRequest {
 
 @doc("Error response object.")
 @error
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DocumentIntelligenceErrorResponse {
   @doc("Error info.")
   error: DocumentIntelligenceError;
@@ -1154,6 +1157,7 @@ model AddressValue {
 }
 
 @doc("Request body to build a new custom document model.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BuildDocumentModelRequest {
   @doc("Unique document model name.")
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$")
@@ -1209,6 +1213,7 @@ model AzureBlobFileListContentSource {
 }
 
 @doc("Request body to create a composed document model from component document models.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ComposeDocumentModelRequest {
   @doc("Unique document model name.")
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$")
@@ -1232,6 +1237,7 @@ model ComposeDocumentModelRequest {
 }
 
 @doc("Request body to authorize document model copy.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AuthorizeCopyRequest {
   @doc("Unique document model name.")
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$")
@@ -1274,6 +1280,7 @@ model ModelCopyAuthorization {
 }
 
 @doc("Request body to authorize document classifier copy.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AuthorizeClassifierCopyRequest {
   @doc("Unique document classifier name.")
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$")
@@ -1476,6 +1483,7 @@ model DocumentFieldSchema {
 }
 
 @doc("Request body to build a new custom document classifier.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BuildDocumentClassifierRequest {
   @doc("Unique document classifier name.")
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$")
@@ -1555,6 +1563,7 @@ model DocumentClassifierDetails {
 }
 
 @doc("Document classification parameters.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ClassifyDocumentRequest {
   @doc("Document URL to classify.  Either urlSource or base64Source must be specified.")
   urlSource?: url;

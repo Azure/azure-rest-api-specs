@@ -641,6 +641,7 @@ model SuspendMode extends JobMatchingMode {
 @access(Access.public, "python")
 @access(Access.public, "java")
 @doc("Request payload for cancelling a job.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CancelJobOptions {
   @doc("A note that will be appended to a job's Notes collection with the current timestamp.")
   note?: string;
@@ -652,6 +653,7 @@ model CancelJobOptions {
 @access(Access.public, "python")
 @access(Access.public, "java")
 @doc("Request payload for completing jobs.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CompleteJobOptions {
   @doc("A note that will be appended to a job's Notes collection with the current timestamp.")
   note?: string;
@@ -660,6 +662,7 @@ model CompleteJobOptions {
 @access(Access.public, "python")
 @access(Access.public, "java")
 @doc("Request payload for closing jobs")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CloseJobOptions {
   @doc("Indicates the outcome of a job, populate this field with your own custom values.")
   dispositionCode?: string;
@@ -690,6 +693,7 @@ model RouterJobPositionDetails {
 }
 
 @doc("Request payload for unassigning a job.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model UnassignJobOptions {
   @doc("If SuspendMatching is true, then a job is not queued for re-matching with a worker.")
   suspendMatching?: boolean;
@@ -719,6 +723,7 @@ model AcceptJobOfferResult {
 @access(Access.public, "python")
 @access(Access.public, "java")
 @doc("Request payload for declining offers.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DeclineJobOfferOptions {
   @doc("If the RetryOfferAt is not provided, then this job will not be offered again to the worker who declined this job unless the worker is de-registered and re-registered.  If a RetryOfferAt time is provided, then the job will be re-matched to eligible workers at the retry time in UTC.  The worker that declined the job will also be eligible for the job at that time.")
   retryOfferAt?: utcDateTime;
@@ -876,6 +881,7 @@ model BestWorkerMode extends DistributionMode {
 }
 
 @doc("Encapsulates all options that can be passed as parameters for scoring rule with BestWorkerMode.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ScoringRuleOptions {
   @doc("Set batch size when 'isBatchScoringEnabled' is set to true. Defaults to 20 if not configured.")
   batchSize?: int32 = 20;
@@ -1205,6 +1211,7 @@ model WorkerWeightedAllocation {
 @clientName("ReclassifyJobOptionsInternal", "java")
 @access(Access.internal)
 @doc("Request payload for reclassifying jobs.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ReclassifyJobOptions {}
 
 @clientName("ReclassifyJobResultInternal", "java")
@@ -1213,6 +1220,7 @@ model ReclassifyJobOptions {}
 model ReclassifyJobResult {}
 
 @doc("OK Response payload from reclassifying a job.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ReclassifyJobResultWithOkResponse {
   @doc("Response payload from reclassifying a job.")
   @bodyRoot
@@ -1229,6 +1237,7 @@ model ReclassifyJobResultWithOkResponse {
 model CloseJobResult {}
 
 @doc("Response payload from closing a job synchronously.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CloseJobResultWithOkResponse {
   @doc("Response after closing a job.")
   @bodyRoot
@@ -1245,6 +1254,7 @@ model CloseJobResultWithOkResponse {
 model CancelJobResult {}
 
 @doc("OK Response payload from cancelling a job.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CancelJobResultWithOkResponse {
   @doc("Response after cancelling a job.")
   @bodyRoot
@@ -1261,6 +1271,7 @@ model CancelJobResultWithOkResponse {
 model CompleteJobResult {}
 
 @doc("OK Response payload from completing a job.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CompleteJobResultWithOkResponse {
   @doc("Response after completing a job.")
   @bodyRoot
@@ -1277,6 +1288,7 @@ model CompleteJobResultWithOkResponse {
 model DeclineJobOfferResult {}
 
 @doc("OK Response payload from declining a job.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DeclineJobOfferResultWithOkResponse {
   @doc("Response payload from declining a job.")
   @bodyRoot

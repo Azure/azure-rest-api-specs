@@ -54,6 +54,7 @@ model PhraseListProperties {
 
 #suppress "@azure-tools/typespec-autorest/unsupported-multipart-type" "Support streaming input files"
 @doc("Metadata for a transcription request.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model TranscriptionOptions {
   @doc("The URL of the audio to be transcribed. The audio must be shorter than 2 hours in audio duration and smaller than 250 MB in size. If both Audio and AudioUrl are provided, Audio is used.")
   @clientName("audioUri", "csharp")
@@ -82,6 +83,7 @@ model TranscriptionOptions {
 }
 
 @doc("The Speaker Diarization settings. Diarization settings must be specified to enable speaker diarization.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model TranscriptionDiarizationOptions {
   @doc("Enable speaker diarization. This is automatically set to true when maxSpeakers is specified.")
   @visibility(Lifecycle.Read)

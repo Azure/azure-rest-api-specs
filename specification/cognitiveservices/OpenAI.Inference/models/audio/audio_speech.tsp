@@ -60,6 +60,7 @@ union SpeechGenerationResponseFormat {
 
 @doc("A representation of the request options that control the behavior of a text-to-speech operation.")
 @added(ServiceApiVersions.v2024_02_15_Preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SpeechGenerationOptions {
   @doc("The text to generate audio for. The maximum length is 4096 characters.")
   @maxLength(4096)
@@ -89,6 +90,7 @@ model SpeechGenerationOptions {
 
 @doc("A representation of a response for a text-to-speech operation.")
 @added(ServiceApiVersions.v2024_02_15_Preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SpeechGenerationResponse {
   @doc("The content type of the response. Always application/octet-stream for audio/speech responses.")
   @header

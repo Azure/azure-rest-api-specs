@@ -254,6 +254,7 @@ model MarketingMaterial {
 }
 
 @doc("Search response object")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SearchResponse {
   @doc("The search facets")
   facets?: Record<FacetsItem>;
@@ -306,6 +307,7 @@ model SuggestionsItem {
 }
 
 @doc("Suggestions response object")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SuggestionsResponse {
   @doc("The search results")
   value: SuggestionsItem[];
@@ -315,6 +317,7 @@ model SuggestionsResponse {
 }
 
 @doc("Facets response object")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model FacetsResponse {
   @doc("The facet items results")
   value: Record<FacetsItem>;

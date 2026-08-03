@@ -15,6 +15,7 @@ namespace Microsoft.DevHub;
  */
 @singleton("default")
 @subscriptionResource
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AdooAuthResponse is Azure.ResourceManager.ProxyResource<ADOOAuth> {
   ...ResourceNameParameter<
     Resource = AdooAuthResponse,

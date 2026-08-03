@@ -28,6 +28,7 @@ union DataGenerationJobType {
 
 @doc("LLM model options for data generation jobs.")
 @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DataGenerationModelOptions {
   @doc("Base model name used to generate data.")
   `model`: string;
@@ -54,6 +55,7 @@ model DataGenerationJobInputs {
 
 @doc("Output options for data generation job.")
 @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DataGenerationJobOutputOptions {
   @doc("Name to assign to the output. Used as the filename for Azure OpenAI file outputs (fine-tuning scenarios) and as the dataset name for dataset outputs (evaluation scenario).")
   name?: string;
@@ -189,6 +191,7 @@ union DataGenerationJobScenario {
 @doc("Options for managing data generation jobs.")
 @discriminator("type")
 @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DataGenerationJobOptions {
   @doc("The data generation job type.")
   type: DataGenerationJobType;
@@ -207,6 +210,7 @@ model DataGenerationJobOptions {
 
 @doc("The options for a data generation job with SimpleQnA type.")
 @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SimpleQnADataGenerationJobOptions extends DataGenerationJobOptions {
   @doc("The data generation job type, which is SimpleQnA for this model.")
   type: "simple_qna";
@@ -217,6 +221,7 @@ model SimpleQnADataGenerationJobOptions extends DataGenerationJobOptions {
 
 @doc("The options for a data generation job with Traces type.")
 @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model TracesDataGenerationJobOptions extends DataGenerationJobOptions {
   @doc("The data generation job type, which is Traces for this model.")
   type: "traces";
@@ -224,6 +229,7 @@ model TracesDataGenerationJobOptions extends DataGenerationJobOptions {
 
 @doc("The options for a data generation job with ToolUse type. Used only for fine-tuning scenarios.")
 @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ToolUseFineTuningDataGenerationJobOptions
   extends DataGenerationJobOptions {
   @doc("The data generation job type, which is ToolUse for this model.")

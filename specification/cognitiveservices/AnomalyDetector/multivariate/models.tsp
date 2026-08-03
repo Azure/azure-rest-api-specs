@@ -98,6 +98,7 @@ model MultivariateBatchDetectionResultSummary {
 
 @doc("Error information that the API returned.")
 @error
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ErrorResponse {
   @doc("Error code.")
   code: string;
@@ -131,6 +132,7 @@ model VariableState {
   Detection request for batch inference. This is an asynchronous inference that
   will need another API to get detection results.
   """)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model MultivariateBatchDetectionOptions {
   @doc("""
     Source link to the input data to indicate an accessible Azure Storage URI.
@@ -366,6 +368,7 @@ model ModelList {
 }
 
 @doc("Request of the last detection.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model MultivariateLastDetectionOptions {
   @doc("""
     Contains the inference data, including the name, time stamps (ISO 8601), and

@@ -646,6 +646,7 @@ model FlexProperties {
   vmSizeProfiles: Array<VmSizeProfile>;
 
   @doc("The operating system type for the VMs")
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osType: OsType;
 
   @doc("The priority profile for VM allocation")

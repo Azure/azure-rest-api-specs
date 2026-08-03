@@ -12,6 +12,7 @@ namespace Microsoft.Migrate;
 
 @doc("WebApp assessment resource.")
 @parentResource(AssessmentProject)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model WepAppGraphAssessmentOptions
   is ProxyResource<WepAppGraphAssessmentOptionsProperties> {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Singleton resource"

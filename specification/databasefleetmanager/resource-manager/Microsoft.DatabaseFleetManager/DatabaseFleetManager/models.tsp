@@ -305,12 +305,14 @@ model FirewallRuleProperties {
    * Start IP address.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   startIpAddress?: string;
 
   /**
    * End IP address.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   endIpAddress?: string;
 
   /**

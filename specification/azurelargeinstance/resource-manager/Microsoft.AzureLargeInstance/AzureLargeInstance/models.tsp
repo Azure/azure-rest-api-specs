@@ -370,6 +370,7 @@ model StorageProfile {
   @renamedFrom(Versions.v2024_08_01_preview, "nfsIpAddress")
   @doc("IP Address to connect to storage.")
   @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   nfsIpAddressOld?: string;
 
   @added(Versions.v2024_08_01_preview)
@@ -411,6 +412,7 @@ model OsProfile {
   @renamedFrom(Versions.v2024_08_01_preview, "osType")
   @doc("This property allows you to specify the type of the OS.")
   @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osTypeOld?: string;
 
   @added(Versions.v2024_08_01_preview)

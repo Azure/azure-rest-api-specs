@@ -918,6 +918,7 @@ model ExtendedLocation {
 }
 
 @doc("The gallery images resource patch definition.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model GalleryImagesUpdateRequest {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags")
@@ -955,6 +956,7 @@ model LogicalNetworkProperties {
 }
 
 @doc("DhcpOptions contains an array of DNS servers available to VMs deployed in the logical network. Standard DHCP option for a subnet overrides logical network DHCP options.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model LogicalNetworkPropertiesDhcpOptions {
   @doc("The list of DNS servers IP addresses.")
   dnsServers?: string[];
@@ -1337,6 +1339,7 @@ model LogicalNetworkStatusProvisioningStatus {
 }
 
 @doc("The logical network resource patch definition.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model LogicalNetworksUpdateRequest {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags")
@@ -1369,6 +1372,7 @@ model VirtualNetworkAddressSpace {
 
 @added(Versions.v2025_09_01_preview)
 @doc("DHCP options for virtual networks")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model VirtualNetworkDhcpOptions {
   @doc("An array of DNS server IP addresses that VMs or wokloads in the vnet can inherit")
   dnsServers?: string[];
@@ -1825,6 +1829,7 @@ model LoadBalancerStatusProvisioningStatus {
 
 @doc("The virtual network subnet resource patch definition.")
 @added(Versions.v2025_09_01_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model VirtualNetworkSubnetUpdateRequest {
   @doc("properties to update")
   properties?: VirtualNetworkSubnetUpdateProperties;
@@ -1910,6 +1915,7 @@ model MarketplaceGalleryImageStatusDownloadStatus {
 }
 
 @doc("The marketplace gallery image resource patch definition.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model MarketplaceGalleryImagesUpdateRequest {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags")
@@ -1917,6 +1923,7 @@ model MarketplaceGalleryImagesUpdateRequest {
 }
 
 @doc("The network interface resource patch definition.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model NetworkInterfacesUpdateRequest {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags")
@@ -1993,6 +2000,7 @@ model StorageContainerStatusProvisioningStatus {
 }
 
 @doc("The storage container resource patch definition.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model StorageContainersUpdateRequest {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags")
@@ -2212,6 +2220,7 @@ model VirtualHardDiskUploadStatus {
 }
 
 @doc("The virtual hard disk resource patch definition.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model VirtualHardDisksUpdateRequest {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags")
@@ -2647,6 +2656,7 @@ model Identity {
 }
 
 @doc("The virtual machine instance resource patch definition.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model VirtualMachineInstanceUpdateRequest {
   @doc("Defines the resource properties for the update.")
   properties?: VirtualMachineInstanceUpdateProperties;
@@ -2828,6 +2838,7 @@ model GuestCredential {
 
 @added(Versions.v2026_04_01_preview)
 @doc("The operation gracefully shuts down a virtual machine by requesting the operating system to shut down. The virtual machine can be restarted with the same provisioned resources. To force an immediate shut down, see the skipShutdown flag.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model PowerOffVirtualMachineOptions {
   @doc("Indicates whether to perform an immediate shut down. When set to true, the VM is forcefully shut down. If not specified, the default value is false, and the operation attempts a graceful shut down of the VM.")
   skipShutdown?: boolean = false;

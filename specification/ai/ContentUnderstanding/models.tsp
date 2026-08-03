@@ -525,6 +525,7 @@ model AnalyzeParameters {
 }
 
 @doc("Analyze operation request.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AnalyzeRequest {
   ...AnalyzeParameters;
 
@@ -575,6 +576,7 @@ model AnalysisInput {
 }
 
 @doc("Analyze operation request directly from binary content.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AnalyzeBinaryRequest {
   ...AnalyzeParameters;
 
@@ -855,6 +857,7 @@ model ContentUnderstandingDefaults {
 
 @added(Versions.v2025_11_01)
 @doc("Copy operation request.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CopyRequest {
   @doc("Azure resource ID of the source analyzer location.  Defaults to the current resource.")
   sourceAzureResourceId?: string;
@@ -868,6 +871,7 @@ model CopyRequest {
 
 @added(Versions.v2025_11_01)
 @doc("Grant copy authorization request.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model GrantCopyAuthorizationRequest {
   @doc("Azure resource ID of the target analyzer location.")
   targetAzureResourceId: string;

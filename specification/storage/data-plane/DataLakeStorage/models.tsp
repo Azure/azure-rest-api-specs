@@ -293,6 +293,7 @@ model AclFailedEntry {
 }
 
 /** The response for set access control recursive operations. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SetAccessControlRecursiveResponse {
   /** The number of directories successfully processed. */
   directoriesSuccessful?: int32;
@@ -311,6 +312,7 @@ model SetAccessControlRecursiveResponse {
 
 /** An enumeration of blobs. */
 @Xml.name("EnumerationResults")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ListBlobsHierarchySegmentResponse {
   /** The service endpoint. */
   @Xml.attribute

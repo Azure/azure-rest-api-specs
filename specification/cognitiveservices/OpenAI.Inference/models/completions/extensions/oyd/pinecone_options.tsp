@@ -62,6 +62,7 @@ model PineconeChatExtensionParameters {
 
 @doc("Optional settings to control how fields are processed when using a configured Pinecone resource.")
 @added(ServiceApiVersions.v2024_02_15_Preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model PineconeFieldMappingOptions {
   @doc("The name of the index field to use as a title.")
   @clientName("TitleFieldName", "csharp")

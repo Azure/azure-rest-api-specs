@@ -410,6 +410,7 @@ model CdnPeeringPrefixProperties {
  * The error response that indicates why an operation has failed.
  */
 @error
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ErrorResponse {
   /**
    * The error detail that describes why an operation has failed.

@@ -514,6 +514,7 @@ model MachineNetworkProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @added(Versions.v2026_05_02_preview)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   enableNodePublicIP?: boolean;
 
   /**
@@ -521,6 +522,7 @@ model MachineNetworkProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @added(Versions.v2026_05_02_preview)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   nodePublicIPPrefixID?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Network/publicIPPrefixes";

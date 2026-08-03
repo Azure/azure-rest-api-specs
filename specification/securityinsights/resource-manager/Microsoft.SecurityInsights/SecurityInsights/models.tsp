@@ -5026,6 +5026,7 @@ model EnrichmentIpAddressBody {
   /**
    * The dotted-decimal or colon-separated string representation of the IP address
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipAddress?: string;
 }
 
@@ -5033,6 +5034,7 @@ model EnrichmentIpAddressBody {
  * Geodata information for a given IP address
  */
 @added(Versions.v2025_10_01_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model EnrichmentIpGeodata {
   /**
    * The autonomous system number associated with this IP address
@@ -5076,11 +5078,13 @@ model EnrichmentIpGeodata {
   /**
    * The dotted-decimal or colon-separated string representation of the IP address
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipAddr?: string;
 
   /**
    * A description of the connection type of this IP address
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipRoutingType?: string;
 
   /**
@@ -5432,6 +5436,7 @@ model EntityTimelineParameters {
  * The entity timeline result operation response.
  */
 @added(Versions.v2025_10_01_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model EntityTimelineResponse {
   /**
    * The metadata from the timeline operation results.
@@ -5522,6 +5527,7 @@ model EntityTimelineItem {
  * Retrieve queries for entity result operation response.
  */
 @added(Versions.v2025_10_01_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model GetQueriesResponse {
   /**
    * The query result values.
@@ -5594,6 +5600,7 @@ model EntityGetInsightsParameters {
  * The Get Insights result operation response.
  */
 @added(Versions.v2025_10_01_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model EntityGetInsightsResponse {
   /**
    * The metadata from the get insights operation results.
@@ -15463,6 +15470,7 @@ model IpEntity extends Entity {
  * Ip entity property bag.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model IpEntityProperties extends EntityCommonProperties {
   /**
    * The IP address as string, e.g. 127.0.0.1 (either in Ipv4 or Ipv6)
@@ -16238,6 +16246,7 @@ model NicEntityProperties extends EntityCommonProperties {
    * The IP entity id of this network interface
    */
   @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipAddressEntityId?: string;
 
   /**

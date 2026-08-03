@@ -24,6 +24,7 @@ model SharedResourcesDto {
   @doc("Gets the list of shared Temporary database disks.")
   @visibility(Lifecycle.Read)
   @identifiers(#[])
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   sharedTempDbDisks?: AzureManagedDiskSkuDto[];
 
   @doc("Gets number of mounts of shared disks.")
@@ -206,6 +207,7 @@ model AssessedNetworkAdaptersV3 {
 
   @doc("Gets the ip addresses.")
   @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipAddresses?: string[];
 
   @doc("Gets the megabytes per second received.")

@@ -105,6 +105,7 @@ union ImageGenerationResponseFormat {
 
 @doc("Represents the request data used to generate images.")
 @added(ServiceApiVersions.v2023_06_01_Preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ImageGenerationOptions {
   @doc("""
     The model name or Azure OpenAI model deployment name to use for image generation. If not specified, dall-e-2 will be
@@ -270,6 +271,7 @@ model ImageGenerations {
 @doc("A polling status update or final response payload for an image operation.")
 @added(ServiceApiVersions.v2023_06_01_Preview)
 @removed(ServiceApiVersions.v2024_02_15_Preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchImageGenerationOperationResponse {
   @doc("The ID of the operation.")
   id: string;

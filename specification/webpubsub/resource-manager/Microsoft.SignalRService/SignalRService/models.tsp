@@ -870,6 +870,7 @@ model WebPubSubNetworkACLs {
    */
   @maxItems(30)
   @identifiers(#[])
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipRules?: IPRule[];
 }
 

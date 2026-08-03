@@ -147,6 +147,7 @@ model JobDetails extends ItemDetails {
 @added(QuantumWorkspaceAPIVersion.v2025_09_01_preview)
 @parentResource(Quantum.Workspace.QuantumWorkspace)
 @resource("jobUpdateOptions")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model JobUpdateOptions {
   /** Id of the job. */
   #suppress "@azure-tools/typespec-azure-core/key-visibility-required" "False-positive"

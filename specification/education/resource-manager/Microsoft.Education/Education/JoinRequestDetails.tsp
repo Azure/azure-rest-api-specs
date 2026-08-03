@@ -13,6 +13,7 @@ namespace Microsoft.Education;
  * join requests.
  */
 @parentResource(LabDetails)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model JoinRequestDetails
   is Azure.ResourceManager.ProxyResource<JoinRequestProperties> {
   ...ResourceNameParameter<

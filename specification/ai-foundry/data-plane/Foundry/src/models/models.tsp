@@ -180,6 +180,7 @@ model LoraConfig {
 
 @doc("Request body for updating a model version. Only description and tags can be modified.")
 @extension("x-ms-foundry-meta", ModelsRequiredPreviews)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model UpdateModelVersionRequest {
   @doc("The asset description text.")
   description?: string;
@@ -190,6 +191,7 @@ model UpdateModelVersionRequest {
 
 @doc("Represents a request for a pending upload of a model version.")
 @extension("x-ms-foundry-meta", ModelsRequiredPreviews)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ModelPendingUploadRequest {
   @doc("If PendingUploadId is not provided, a random GUID will be used.")
   pendingUploadId?: string;
@@ -203,6 +205,7 @@ model ModelPendingUploadRequest {
 
 @doc("Represents the response for a model pending upload request.")
 @extension("x-ms-foundry-meta", ModelsRequiredPreviews)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ModelPendingUploadResponse {
   @doc("Container-level read, write, list SAS.")
   blobReference: BlobReference;
@@ -219,6 +222,7 @@ model ModelPendingUploadResponse {
 
 @doc("Request to fetch credentials for a model asset.")
 @extension("x-ms-foundry-meta", ModelsRequiredPreviews)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ModelCredentialRequest {
   @doc("Blob URI of the model asset to fetch credentials for.")
   blobUri: url;
@@ -226,6 +230,7 @@ model ModelCredentialRequest {
 
 @doc("Accepted response for asynchronous model version creation, with polling location.")
 @extension("x-ms-foundry-meta", ModelsRequiredPreviews)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CreateModelVersionAsyncResponse {
   @statusCode statusCode: 202;
 

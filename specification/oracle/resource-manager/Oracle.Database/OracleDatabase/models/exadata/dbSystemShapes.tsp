@@ -111,6 +111,7 @@ model DbSystemShapeProperties {
 
 @added(Versions.v20241201_preview)
 @doc("Provides GiMinorVersion query parameter for list operations.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model DbSystemShapeFilter {
   @query
   @doc("Filters the result for the given Azure Availability Zone")

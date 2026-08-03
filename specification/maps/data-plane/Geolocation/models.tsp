@@ -8,6 +8,7 @@ namespace MapsGeolocation;
  * This object is returned from a successful call to IP Address to country/region
  * API
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model IpAddressToLocationResult {
   /**
    * The object containing the country/region information.
@@ -19,6 +20,7 @@ model IpAddressToLocationResult {
    * The IP Address of the request.
    */
   @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipAddress?: string;
 }
 
@@ -42,6 +44,7 @@ model CountryRegion {
  * format.).
  */
 @error
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ErrorResponse {
   /**
    * The error object.

@@ -200,6 +200,7 @@ model ServerlessRuntimeDataDisk {
   type?: string;
 
   @doc("Server Host or IP Address")
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   serverHostOrIpAddress?: string;
 
   @doc("Source mount point")
@@ -448,6 +449,7 @@ model UserDetails {
 }
 
 @doc("Serverless Runtime environment Metadata response.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ServerlessMetadataResponse {
   @doc("type of the runtime environment.")
   type?: RuntimeType;

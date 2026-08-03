@@ -5,6 +5,7 @@ namespace Microsoft.Migrate;
 
 @doc("Data model of Download URL for wave recommendation report.")
 @added(ApiVersions.v2025_12_01_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model GenerateWavePlanRequest {
   @doc("ARM Id of the assessment for which the wave plan report is to be generated.")
   assessmentArmId?: string;
@@ -15,6 +16,7 @@ model GenerateWavePlanRequest {
 
 @doc("Data model of Download URL for wave recommendation report.")
 @added(ApiVersions.v2025_12_01_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model GenerateWavePlanResponse {
   @doc("Hyperlink to download report.")
   @visibility(Lifecycle.Read)

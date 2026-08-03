@@ -95,6 +95,7 @@ model AgentEvaluationRedactionConfiguration {
 
 @doc("Evaluation request for agent run.")
 @removed(Versions.v1)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AgentEvaluationRequest {
   @doc("Identifier of the agent run.")
   runId: string;

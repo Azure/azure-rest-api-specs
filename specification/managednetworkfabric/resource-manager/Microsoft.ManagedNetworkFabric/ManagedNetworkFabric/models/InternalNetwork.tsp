@@ -464,6 +464,7 @@ union IsMonitoringEnabled {
 
 @doc("Internal Network Administrative State Request")
 @added(Versions.v2024_06_15_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model InternalNetworkBgpAdministrativeStateRequest {
   @doc("NeighborAddress - Input should be either All or Specific Ipv4 Address or Specific Ipv6 Address.")
   neighborAddress?: string;
@@ -485,6 +486,7 @@ model InternalNetworkUpdateBgpAdministrativeStateRequest {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending common error response for InternalNetwork BGP Administrative State response"
 @doc("Internal Network Administrative State Response")
 @added(Versions.v2024_06_15_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model InternalNetworkBgpAdministrativeStateResponse
   extends CommonErrorResponse {
   // The response contains an array of objects. Each object contains the neighbor address and the state.
@@ -514,6 +516,7 @@ model InternalNetworkUpdateBgpAdministrativeStateResponseProperties {
 
 @doc("Internal Network BFD Administrative State request")
 @added(Versions.v2024_06_15_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model InternalNetworkBfdAdministrativeStateRequest {
   @doc("Route Type that helps to know which bfd we are updating.")
   routeType?: InternalNetworkRouteType;
@@ -558,6 +561,7 @@ model InternalNetworkUpdateBfdAdministrativeStateResponseProperties {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending common error response for InternalNetwork BFD Administrative State response"
 @doc("Internal Network BFD Administrative State response")
 @added(Versions.v2024_06_15_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model InternalNetworkBfdAdministrativeStateResponse
   extends CommonErrorResponse {
   // The response contains an array of objects. Each object contains the neighbor address and the state.
@@ -605,6 +609,7 @@ model InternalNetworkBmpPatchProperties {
   @minItems(1)
   @removed(Versions.v2025_07_15)
   @renamedFrom(Versions.v2025_07_15, "neighborIpExclusions")
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   neighborIpExclusionsDeprecated?: string[];
 
   @doc("Neighbor IP Address exclusions for BMP.")

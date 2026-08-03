@@ -175,6 +175,7 @@ alias DeleteSkillVersionRequest = {
 
 @doc("A deleted skill.")
 @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DeleteSkillResponse {
   @doc("The unique identifier of the deleted skill.")
   id: string;
@@ -188,6 +189,7 @@ model DeleteSkillResponse {
 
 @doc("A deleted skill version.")
 @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DeleteSkillVersionResponse {
   @doc("The unique identifier of the deleted skill version.")
   id: string;
@@ -204,6 +206,7 @@ model DeleteSkillVersionResponse {
 
 @doc("The response body for downloading a skill package.")
 @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DownloadSkillResponse {
   @doc("The media type of the returned package content.")
   @header("Content-Type")

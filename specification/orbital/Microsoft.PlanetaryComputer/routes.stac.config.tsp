@@ -10,6 +10,7 @@ namespace Microsoft.PlanetaryComputer;
 
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" "STAC queryable definitions contain mixed types (objects, booleans, strings)"
 @doc("Queryable definitions response.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model QueryableDefinitionsResponse is Record<unknown>;
 
 interface StacCollectionAssets {

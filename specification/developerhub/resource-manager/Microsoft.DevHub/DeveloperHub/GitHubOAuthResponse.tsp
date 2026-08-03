@@ -16,6 +16,7 @@ namespace Microsoft.DevHub;
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @singleton("default")
 @subscriptionResource
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model GitHubOAuthResponse
   is Azure.ResourceManager.ProxyResource<GitHubOAuthProperties> {
   ...ResourceNameParameter<

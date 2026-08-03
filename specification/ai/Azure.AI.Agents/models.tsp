@@ -80,6 +80,7 @@ model Agent {
 
 @doc("The request details to use when creating a new agent.")
 @added(Versions.v2025_05_01)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CreateAgentOptions {
   @doc("The ID of the model to use.")
   `model`: string;
@@ -139,6 +140,7 @@ model CreateAgentOptions {
 
 @doc("The request details to use when modifying an existing agent.")
 @added(Versions.v2025_05_01)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model UpdateAgentOptions {
   @path
   @doc("The ID of the agent to modify.")
@@ -209,6 +211,7 @@ model AgentDeletionStatus {
 
 @doc("The request details to use when retrieving an agent.")
 @added(Versions.v2025_05_01)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model GetAgentOptions {
   @doc("Identifier of the agent.")
   @path
@@ -217,6 +220,7 @@ model GetAgentOptions {
 
 @doc("The request details to use when deleting an agent.")
 @added(Versions.v2025_05_01)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DeleteAgentOptions {
   @doc("Identifier of the agent.")
   @path

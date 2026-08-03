@@ -37,6 +37,7 @@ model AgentThread {
 
 /** The details used to create a new agent thread. */
 @added(Versions.v2025_05_01)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AgentThreadCreationOptions {
   /** The initial messages to associate with the new thread. */
   messages?: ThreadMessageOptions[];
@@ -55,6 +56,7 @@ model AgentThreadCreationOptions {
 
 /** The details used to update an existing agent thread */
 @added(Versions.v2025_05_01)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model UpdateAgentThreadOptions {
   /** The ID of the thread to modify. */
   @path threadId: string;

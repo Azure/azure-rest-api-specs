@@ -378,6 +378,7 @@ model CertificateOrderContact {
  * App Service error response.
  */
 @error
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DefaultErrorResponse {
   /**
    * Error model.

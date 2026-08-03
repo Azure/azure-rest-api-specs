@@ -42,6 +42,7 @@ model DbVersionProperties {
   isLatestForMajorVersion?: boolean;
 
   @doc("True if this version of the Oracle Database software is the preview version.")
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   isPreviewDbVersion?: boolean;
 
   @doc("True if this version of the Oracle Database software is supported for Upgrade.")
@@ -53,15 +54,18 @@ model DbVersionProperties {
 
 @added(Versions.v20250701_preview)
 @doc("Provides DbVersion query parameter for list operations.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model DbVersionFilter {
   @query
   @doc("If provided, filters the results to the set of database versions which are supported for the given shape. e.g., VM.Standard.E5.Flex")
   @minLength(1)
   @maxLength(255)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   dbSystemShape?: BaseDbSystemShapes;
 
   @query
   @doc("The DB system AzureId. If provided, filters the results to the set of database versions which are supported for the DB system.")
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   dbSystemId?: DbSystemResourceId;
 
   @query

@@ -374,6 +374,7 @@ union IsManagementType {
 
 @doc("NNI Bidirectional Forwarding Detection (BFD) Administrative State request.")
 @added(Versions.v2024_06_15_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model NniBfdAdministrativeStateRequest {
   @doc("Route Type. Choose either Static or OptionA.")
   routeType?: RouteType;
@@ -385,6 +386,7 @@ model NniBfdAdministrativeStateRequest {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending common error response"
 @doc("NNI Bidirectional Forwarding Detection (BFD) Administrative State response.")
 @added(Versions.v2024_06_15_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model NniBfdAdministrativeStateResponse extends CommonErrorResponse {
   @doc("Route Type. Choose either Static or OptionA.")
   routeType?: RouteType;

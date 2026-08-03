@@ -197,6 +197,7 @@ union RunIncludes {
 
 @doc("The details used when creating a new run of an assistant thread.")
 @added(ServiceApiVersions.v2024_02_15_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CreateRunOptions {
   @doc("The ID of the assistant that should run the thread.")
   @encodedName("application/json", "assistant_id")
@@ -379,6 +380,7 @@ model SubmitToolOutputsDetails {
 
 @doc("The details used when creating and immediately running a new assistant thread.")
 @added(ServiceApiVersions.v2024_02_15_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CreateAndRunThreadOptions {
   @encodedName("application/json", "assistant_id")
   @doc("The ID of the assistant for which the thread should be created.")

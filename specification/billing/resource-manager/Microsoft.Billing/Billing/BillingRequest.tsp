@@ -14,6 +14,7 @@ namespace Microsoft.Billing;
  * A request submitted by a user to manage billing. Users with an owner role on the scope can approve or decline these requests.
  */
 @tenantResource
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BillingRequest
   is Azure.ResourceManager.ProxyResource<BillingRequestProperties> {
   ...ResourceNameParameter<

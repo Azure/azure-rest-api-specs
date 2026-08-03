@@ -559,6 +559,7 @@ model DrillEndRequest {
 }
 
 @doc("Response body of Drill actions")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DrillActionResponse {
   @doc("JobId of the Drill")
   @visibility(Lifecycle.Read)
@@ -611,6 +612,7 @@ model IncludeOrUpdateResource {
 
 @doc("Response body of the AddOrUpdateResources API.")
 @removed(Versions.v2026_04_01_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AddOrUpdateResourcesResponse {
   @doc("Failed Include resources.")
   @visibility(Lifecycle.Read)
@@ -830,6 +832,7 @@ model DrillResourceQualification {
 
 @doc("ValidateForExecution post action response.")
 @added(Versions.v2026_03_01_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ValidateForExecutionResponse {
   @doc("Qualification details of resources for the operation.")
   @added(Versions.v2026_03_01_preview)

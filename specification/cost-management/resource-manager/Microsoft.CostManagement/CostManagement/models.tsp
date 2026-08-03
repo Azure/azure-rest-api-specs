@@ -1428,6 +1428,7 @@ model CostAllocationProportion {
 /**
  * The cost allocation rule check name availability request
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CostAllocationRuleCheckNameAvailabilityRequest {
   /**
    * Rule name
@@ -1443,6 +1444,7 @@ model CostAllocationRuleCheckNameAvailabilityRequest {
 /**
  * The cost allocation rule check name availability response
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CostAllocationRuleCheckNameAvailabilityResponse {
   /**
    * Whether this rule name is available
@@ -2646,6 +2648,7 @@ model BlobInfo {
  *  * 503 ServiceUnavailable - Service is temporarily unavailable. Retry after waiting for the time specified in the "Retry-After" header.
  */
 @error
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model GenerateCostDetailsReportErrorResponse {
   /**
    * The details of the error.
@@ -2737,6 +2740,7 @@ model DownloadURL {
  *  * 503 ServiceUnavailable - Service is temporarily unavailable. Retry after waiting for the time specified in the "Retry-After" header.
  */
 @error
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model GenerateDetailedCostReportErrorResponse {
   /**
    * The details of the error.
@@ -4716,6 +4720,7 @@ model ViewListResult {
  * Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message. \n\nSome Error responses: \n\n * 429 TooManyRequests - Request is throttled. Retry after waiting for the time specified in the \"x-ms-ratelimit-microsoft.consumption-retry-after\" header. \n\n * 503 ServiceUnavailable - Service is temporarily unavailable. Retry after waiting for the time specified in the \"Retry-After\" header.
  */
 @error
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ErrorResponse {
   /**
    * The details of the error.

@@ -534,6 +534,7 @@ model AzureContainerFolderDocumentLocation extends DocumentLocation {
 
 /** Error response. */
 @error
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ErrorResponse is Azure.Core.Foundations.ErrorResponseBase<Error>;
 
 /** An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses. */

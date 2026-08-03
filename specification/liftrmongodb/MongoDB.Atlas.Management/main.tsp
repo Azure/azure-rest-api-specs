@@ -294,6 +294,7 @@ model ClusterProperties {
 
   @doc("MongoDB version running on the cluster.")
   @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   mongoDbVersion?: string;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Partner API returns explicit null for backups when undetermined, not absent."

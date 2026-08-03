@@ -80,6 +80,7 @@ model SaaSData {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is a well-known acronym"
 @doc("SaaS guid for Activate and Validate SaaS Resource")
 @added(Versions.v6_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ActivateSaaSParameterRequest {
   @doc("SaaS guid for Activate and Validate SaaS Resource")
   saaSGuid: string;
@@ -89,6 +90,7 @@ model ActivateSaaSParameterRequest {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is a well-known acronym"
 @doc("Marketplace SaaS resource details.")
 @added(Versions.v6_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SaaSResourceDetailsResponse
   extends Azure.ResourceManager.CommonTypes.ProxyResource {
   @doc("Id of the Marketplace SaaS Resource")
@@ -98,6 +100,7 @@ model SaaSResourceDetailsResponse
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is a well-known acronym"
 @doc("Response of get latest linked SaaS resource operation")
 @added(Versions.v6_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model LatestLinkedSaaSResponse {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is a well-known acronym"
   @doc("SaaS resource id")
@@ -772,6 +775,7 @@ union Operator {
 }
 
 @doc("The properties of StopBackupProtectionGroupRequest")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model StopBackupProtectionGroupRequest {
   @doc("The reason for stopping the backup")
   @visibility(Lifecycle.Read, Lifecycle.Create)
@@ -783,6 +787,7 @@ model StopBackupProtectionGroupRequest {
 }
 
 @doc("The properties of BackupProtectionGroupRequest")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BackupProtectionGroupRequest {
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "identifiers not applicable across version type change"
   @doc("The vm list details.")
@@ -797,6 +802,7 @@ model BackupProtectionGroupRequest {
 }
 
 @doc("Backup job response for a Protection Group")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BackupProtectionGroupResponse {
   @doc("The Commvault response for taskId")
   @visibility(Lifecycle.Read)
@@ -835,6 +841,7 @@ model VmGuid {
 }
 
 @doc("The backup options for the VM backup")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BackupOptions {
   @doc("Indicates whether to stop backup or not for the VM")
   @visibility(Lifecycle.Read, Lifecycle.Create)
@@ -1010,6 +1017,7 @@ model VmInfo {
 
   @doc("The identifier to check if to attach and swap disk of the VM.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   attachAndSwapOsDisk?: boolean;
 
   @doc("The GUID of target VM used in DISK ATTACH.")
@@ -1039,6 +1047,7 @@ model VmDestinationInfo {
 }
 
 @doc("The properties of RestoreProtectionItemRequest")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model RestoreProtectionItemRequest {
   @doc("Check whether inplace or out of place restore.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
@@ -1059,6 +1068,7 @@ model RestoreProtectionItemRequest {
 
 @doc("Response for count protected items operation.")
 @added(Versions.v7_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CountProtectedItemsResponse {
   @doc("The count of protected items.")
   count: string;
@@ -1066,6 +1076,7 @@ model CountProtectedItemsResponse {
 
 @doc("Request to count protected items for the provided CCA resource IDs across subscriptions.")
 @added(Versions.v7_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CountProtectedItemsRequest {
   @doc("The list of CCA resource IDs.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
@@ -1125,6 +1136,7 @@ model RestorePoints {
 }
 
 @doc("Restore resource response for a Protected Item")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model RestoreProtectionItemResponse {
   @doc("The Commvault response for taskId")
   @visibility(Lifecycle.Read)

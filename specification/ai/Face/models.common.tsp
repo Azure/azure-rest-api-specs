@@ -99,6 +99,7 @@ model BaseCollection {
 }
 
 @doc("Model for creating face collection.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CreateCollectionRequest {
   ...UserDefinedFields;
 
@@ -125,6 +126,7 @@ model BaseFace {
 }
 
 @doc("Query parameters for add face.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AddFaceOptions {
   @doc("A face rectangle to specify the target face to be added to a person, in the format of 'targetFace=left,top,width,height'.")
   @query
@@ -143,6 +145,7 @@ model AddFaceOptions {
 }
 
 @doc("Add face from stream request.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AddFaceRequest is AddFaceOptions {
   @doc("The format of the HTTP payload.")
   @header
@@ -154,6 +157,7 @@ model AddFaceRequest is AddFaceOptions {
 }
 
 @doc("Add face from url request.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AddFaceFromUrlRequest is AddFaceOptions {
   @clientName("uri", "csharp")
   @doc("URL of input image.")
@@ -313,6 +317,7 @@ model FaceError {
   message: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model FaceErrorResponse is Azure.Core.Foundations.ErrorResponseBase<FaceError>;
 
 alias BodyParameter<

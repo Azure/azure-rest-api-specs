@@ -16,6 +16,7 @@ const AllConditionalAgentDefinitionPreviews = #{
 };
 
 @extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CreateAgentVersionRequest {
   ...MetadataPropertyForRequest;
 
@@ -40,6 +41,7 @@ model CreateAgentVersionRequest {
   draft?: boolean = false;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CreateAgentVersionFromManifestRequest {
   ...MetadataPropertyForRequest;
 
@@ -54,6 +56,7 @@ model CreateAgentVersionFromManifestRequest {
   parameter_values: Record<unknown>;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CreateAgentFromManifestRequest {
   @doc("""
     The unique name that identifies the agent. Name can be used to retrieve/update/delete the agent.
@@ -67,11 +70,13 @@ model CreateAgentFromManifestRequest {
   ...CreateAgentVersionFromManifestRequest;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model UpdateAgentFromManifestRequest {
   ...CreateAgentVersionFromManifestRequest;
 }
 
 @extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CreateAgentRequest {
   @doc("""
     The unique name that identifies the agent. Name can be used to retrieve/update/delete the agent.
@@ -95,10 +100,12 @@ model CreateAgentRequest {
 }
 
 @extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model UpdateAgentRequest {
   ...OmitProperties<CreateAgentVersionRequest, "draft">;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model PatchAgentRequest {
   @doc("The endpoint configuration for the agent")
   agent_endpoint?: AgentEndpointConfig;
@@ -334,6 +341,7 @@ model PromptAgentDefinition extends AgentDefinition {
 /**
  * Configuration options for a text response from the model. Can be plain text or structured JSON data.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model PromptAgentDefinitionTextOptions {
   format?: OpenAI.TextResponseFormatConfiguration;
 }
@@ -494,6 +502,7 @@ alias ListAgentQueryParameters = {
 };
 
 @doc("A deleted agent Object")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DeleteAgentResponse {
   @doc("The object type. Always 'agent.deleted'.")
   object: AgentObjectType.agentDeleted;
@@ -506,6 +515,7 @@ model DeleteAgentResponse {
 }
 
 @doc("A deleted agent version Object")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DeleteAgentVersionResponse {
   @doc("The object type. Always 'agent.version.deleted'.")
   object: AgentObjectType.agentVersionDeleted;
@@ -781,6 +791,7 @@ model CreateAgentFromCodeContent {
  * can route to a zip-aware handler. Streaming is preserved (`bytes` body) regardless
  * of the content-type label.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DownloadAgentCodeResponse {
   @doc("The media type of the returned package content.")
   @header("Content-Type")
@@ -891,6 +902,7 @@ model AgentSessionResource {
 
 /** Request body for creating a new agent session. */
 @doc("Request to create a new agent session.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CreateAgentSessionRequest {
   /** Optional caller-provided session ID. If specified, it must be unique within the agent endpoint. Auto-generated if omitted. */
   agent_session_id?: string;

@@ -627,6 +627,7 @@ model FeatureFlagProperties {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending common error response"
 @doc("Arm Configuration Diff Response.")
 @added(Versions.v2024_06_15_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ArmConfigurationDiffResponse extends CommonErrorResponse {
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("Storage URL to the diff file.")
@@ -652,6 +653,7 @@ model ArmConfigurationDiffResponseProperties {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending common error response"
 @doc("View Device Configuration Response.")
 @added(Versions.v2024_06_15_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ViewDeviceConfigurationResponse extends CommonErrorResponse {
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("Storage URL to the device configuration file.")
@@ -713,6 +715,7 @@ model CommitBatchStatusRequest {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending common error response"
 @doc("Commit Batch Status Response.")
 @added(Versions.v2024_06_15_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CommitBatchStatusResponse extends CommonErrorResponse {
   @doc("Commit Batch Identifier.")
   commitBatchId?: string;
@@ -756,6 +759,7 @@ model DiscardCommitBatchRequest {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending common error response"
 @doc("Discard Commit Batch Response.")
 @added(Versions.v2024_06_15_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DiscardCommitBatchResponse extends CommonErrorResponse {
   @doc("Commit Batch Identifier.")
   commitBatchId?: string;

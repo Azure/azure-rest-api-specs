@@ -227,6 +227,7 @@ union MediaType {
  * format.).
  */
 @error
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ErrorResponse {
   /**
    * The error object.

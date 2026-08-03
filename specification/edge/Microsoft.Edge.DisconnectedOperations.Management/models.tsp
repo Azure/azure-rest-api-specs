@@ -322,6 +322,7 @@ model ImageUpdateProperties {
 
   @visibility(Lifecycle.Read)
   @doc("The operating system version provided by this image update.")
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osVersion: string;
 
   @visibility(Lifecycle.Read)

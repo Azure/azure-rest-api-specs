@@ -128,6 +128,7 @@ model CertificateProfileName {
 }
 
 @doc("The artifact request information to be signed by the service.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SigningPayloadOptions {
   @doc("The supported signature algorithm identifiers.")
   signatureAlgorithm: SignSignatureAlgorithm;
@@ -155,6 +156,7 @@ model SignStatusResult {
 }
 
 @doc("Signing option parameters corresponding to the account and certificate profile name.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SigningOptions {
   @doc("Signing account name.")
   @path

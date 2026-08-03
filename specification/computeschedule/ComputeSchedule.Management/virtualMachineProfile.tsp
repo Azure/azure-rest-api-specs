@@ -22,6 +22,7 @@ model BulkActionVMProperties {
   additionalCapabilities?: AdditionalCapabilities;
 
   @doc("Specifies the operating system settings used while creating the virtual machine. Some of the settings cannot be changed once VM is provisioned.")
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osProfile?: OSProfile;
 
   @doc("Specifies the network interfaces of the virtual machine.")
@@ -1015,6 +1016,7 @@ model VirtualMachineNetworkInterfaceConfigurationProperties {
 
   @doc("Specifies the IP configurations of the network interface.")
   @identifiers(#["name"])
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipConfigurations: VirtualMachineNetworkInterfaceIPConfiguration[];
 
   @doc("The DSCP configuration for the network interface.")
@@ -1106,6 +1108,7 @@ model VirtualMachinePublicIPAddressConfigurationProperties {
 
   @doc("The list of IP tags associated with the public IP address.")
   @identifiers(#[])
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipTags?: VirtualMachineIpTag[];
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is an abbreviation for Internet Protocol"
@@ -1134,8 +1137,10 @@ model VirtualMachinePublicIPAddressDnsSettingsConfiguration {
 
 @added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Contains the IP tag associated with the public IP address.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model VirtualMachineIpTag {
   @doc("IP tag type. Example: FirstPartyUsage.")
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipTagType?: string;
 
   @doc("IP tag associated with the public IP. Example: SQL, Storage etc.")

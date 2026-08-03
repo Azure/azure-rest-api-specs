@@ -58,6 +58,7 @@ model NetworkAccessIdentifierModel {
 
 @error
 @doc("A custom error response for APC.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ApcErrorResponse {
   @doc("Error returned by APC")
   error: ApcError;

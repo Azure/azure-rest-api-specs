@@ -260,6 +260,7 @@ union StringIndexType {
 /**
  * Parameters to query a knowledge base.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AnswersOptions {
   /**
    * Exact QnA ID to fetch from the knowledge base, this field takes priority over
@@ -388,6 +389,7 @@ model MetadataRecord {
 /**
  * To configure Answer span prediction feature.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ShortAnswerOptions {
   /**
    * Enable or disable Answer Span prediction.
@@ -587,6 +589,7 @@ model AnswerSpan {
  * Error response.
  */
 @error
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ErrorResponse is Azure.Core.Foundations.ErrorResponseBase<Error>;
 
 /** The error response object returned when the service encounters some errors during processing the request. */
@@ -643,6 +646,7 @@ model InnerErrorModel {
 /**
  * The question and text record parameters to answer.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AnswersFromTextOptions {
   /**
    * User question to query against the given text records.

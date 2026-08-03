@@ -151,6 +151,7 @@ model SecurityPolicyProperties {
 
   /** Ip Access Policy of the Traffic Controller Security Policy. Single Security Policy can have only one policy type set. */
   @added(Versions.v2025_03_01_preview)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipAccessRulesPolicy?: IpAccessRulesPolicy;
 
   /** Provisioning State of Traffic Controller SecurityPolicy Resource */

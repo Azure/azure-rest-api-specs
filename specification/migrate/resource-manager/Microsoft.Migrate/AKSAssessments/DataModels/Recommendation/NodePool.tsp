@@ -23,6 +23,7 @@ model NodePool {
 
   @doc("Gets os type.")
   @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osType: OSType;
 
   @doc("Gets arm sku name.")

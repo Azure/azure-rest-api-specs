@@ -334,10 +334,12 @@ model VirtualMachineTemplateProperties {
 
   /** Gets the type of the os. */
   @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osType?: OsType;
 
   /** Gets os name. */
   @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osName?: string;
 
   /** Gets computer name. */
@@ -568,6 +570,7 @@ model VirtualMachineInstanceProperties {
 
   /** OS properties. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osProfile?: OsProfileForVmInstance;
 
   /** Hardware properties. */
@@ -627,6 +630,7 @@ model AvailabilitySetListItem {
 }
 
 /** Defines the resource properties. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model OsProfileForVmInstance {
   /** Gets or sets the admin username. */
   @added(Versions.v2025_03_13)
@@ -642,14 +646,17 @@ model OsProfileForVmInstance {
 
   /** Gets the type of the os. */
   @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osType?: OsType;
 
   /** Gets os sku. */
   @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osSku?: string;
 
   /** Gets os version. */
   @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osVersion?: string;
 
   /** Gets or sets the domain name. */
@@ -827,6 +834,7 @@ model Checkpoint {
 }
 
 /** Defines the stop action properties. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model StopVirtualMachineOptions {
   /** Gets or sets a value indicating whether to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Defaults to false. */
   skipShutdown?: SkipShutdown = SkipShutdown.`false`;
@@ -953,10 +961,12 @@ model VirtualMachineTemplateInventoryItem extends InventoryItemProperties {
 
   /** Gets the type of the os. */
   @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osType?: OsType;
 
   /** Gets os name. */
   @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osName?: string;
 
   /** They inventory type. */
@@ -967,14 +977,17 @@ model VirtualMachineTemplateInventoryItem extends InventoryItemProperties {
 model VirtualMachineInventoryItem extends InventoryItemProperties {
   /** Gets the type of the os. */
   @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osType?: OsType;
 
   /** Gets os name. */
   @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osName?: string;
 
   /** Gets os version. */
   @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osVersion?: string;
 
   /** Gets the power state of the virtual machine. */
@@ -987,6 +1000,7 @@ model VirtualMachineInventoryItem extends InventoryItemProperties {
   generation?: int64;
 
   /** Gets or sets the nic ip addresses. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipAddresses?: string[];
 
   /** Cloud inventory resource details where the VM is present. */

@@ -347,6 +347,7 @@ model ExecuteTypeRequest {
 }
 
 @doc("Common model for operation response")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model OperationResponse {
   @doc("The description of the operation response")
   description: string;

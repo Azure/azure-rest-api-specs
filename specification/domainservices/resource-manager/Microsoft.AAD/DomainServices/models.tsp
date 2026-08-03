@@ -590,12 +590,14 @@ model ReplicaSet {
    * List of Domain Controller IP Address
    */
   @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   domainControllerIpAddress?: string[];
 
   /**
    * External access ip address.
    */
   @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   externalAccessIpAddress?: string;
 
   /**

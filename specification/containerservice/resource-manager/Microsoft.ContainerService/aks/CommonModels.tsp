@@ -1707,6 +1707,7 @@ model NodeImageVersion {
   /**
    * The operating system of the node image. Example: AKSUbuntu
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   os?: string;
 
   /**
@@ -2646,6 +2647,7 @@ model BastionProfile {
    * This field cannot be updated. To change IP address after creation, please disable and re-enable the managed bastion with the new public IP address.
    */
   @visibility(Lifecycle.Create, Lifecycle.Read)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   publicIpAddressId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Network/publicIPAddresses";

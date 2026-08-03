@@ -565,6 +565,7 @@ model NodeTypeProperties {
    * Specifies whether the node type should use a resilient ephemeral OS disk when using a supported SKU size. A resilient ephemeral OS disk provides improved reliability for ephemeral OS disks by enabling full caching.
    */
   @added(Versions.v2026_02_01)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   enableResilientEphemeralOsDisk?: boolean;
 
   /**

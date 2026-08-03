@@ -1092,6 +1092,7 @@ model ManagedMaintenanceWindowStatusContent {
  * Describes the request to apply a maintenance window on a Service Fabric Managed Cluster.
  */
 @added(Versions.v2026_05_01_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ApplyMaintenanceWindowRequest {
   /**
    * Effective start date of the maintenance window in yyyy-MM-dd HH:mm format. If not provided, defaults to the current time.

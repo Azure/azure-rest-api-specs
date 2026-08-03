@@ -13,6 +13,7 @@ namespace Microsoft.Migrate;
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @doc("ARM model of AKS Assessment Options.")
 @parentResource(AssessmentProject)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AKSAssessmentOptions is ProxyResource<AKSAssessmentOptionsProperties> {
   @doc("AKS Assessment Options Name.")
   @segment("aksAssessmentOptions")

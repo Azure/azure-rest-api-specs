@@ -36,6 +36,7 @@ model DeidentificationResult {
 
 // TODO: Add documentation link for customization options.
 @doc("Customizations options to override default service behaviors for synchronous usage.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DeidentificationCustomizationOptions {
   ...SharedCustomizationOptions;
 }

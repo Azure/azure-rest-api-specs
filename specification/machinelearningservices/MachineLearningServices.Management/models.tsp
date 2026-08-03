@@ -3926,6 +3926,7 @@ model VirtualMachineSize {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
   @summary("OS VHD Disk size")
   @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osVhdSizeMB?: int32;
 
   /**
@@ -4437,6 +4438,7 @@ model Endpoint {
    * Host IP over which the application is exposed from the container
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   hostIp?: string | null;
 }
 
@@ -4490,6 +4492,7 @@ model VolumeDefinition {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BindOptions {
   /**
    * Type of Bind Option
@@ -4511,6 +4514,7 @@ model BindOptions {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model VolumeOptions {
   /**
    * Indicate whether volume is nocopy
@@ -4520,6 +4524,7 @@ model VolumeOptions {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model TmpfsOptions {
   /**
    * Mention the Tmpfs size
@@ -4584,6 +4589,7 @@ model AmlComputeNodeInformation {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read)
   @summary("Private IP address.")
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   privateIpAddress?: string | null;
 
   /**
@@ -4592,6 +4598,7 @@ model AmlComputeNodeInformation {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read)
   @summary("Public IP address.")
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   publicIpAddress?: string | null;
 
   /**
@@ -6455,6 +6462,7 @@ model FeatureWindow {
 /**
  * Response payload for creating a backfill request for a given feature set version
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model FeaturesetVersionBackfillResponse {
   /**
    * List of jobs submitted as part of the backfill request.
@@ -8278,6 +8286,7 @@ model WorkspaceProperties {
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_15_preview)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipAllowlist?: string[];
 
   /**
@@ -8441,6 +8450,7 @@ model EncryptionProperty {
    * The byok cosmosdb account that customer brings to store customer's data
    * with encryption
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   cosmosDbResourceId?: string;
 
   /**
@@ -8567,6 +8577,7 @@ model ManagedNetworkSettings {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   firewallPublicIpAddress?: string | null;
 }
 
@@ -8627,6 +8638,7 @@ model NetworkAcls {
    * Rules governing the accessibility of a resource from a specific ip address or ip range.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Array items do not have stable identifiers"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipRules?: IPRule[];
 }
 
@@ -8739,10 +8751,12 @@ model ServerlessComputeSettings {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model ServiceManagedResourcesSettings {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   cosmosDb?: CosmosDbSettings;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model CosmosDbSettings {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   collectionsThroughput?: int32;
@@ -8891,6 +8905,7 @@ model WorkspacePropertiesUpdateParameters {
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_15_preview)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipAllowlist?: string[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
@@ -9249,6 +9264,7 @@ model RaiBlocklistProperties {
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Empty model used as placeholder in API"
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
 @OpenAPI.extension("x-ms-identifiers", #["name"])
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model RaiBlocklistItemsBulkAddRequest is RaiBlocklistItemBulkRequest[];
 
 /**
@@ -9992,6 +10008,7 @@ model SystemService {
    * Public IP address
    */
   @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   publicIpAddress?: string;
 
   /**
@@ -10676,18 +10693,21 @@ model ImageMetadata {
   /**
    * Specifies whether this compute instance is running on the latest operating system image.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   isLatestOsImageVersion?: boolean;
 
   /**
    * Metadata about the os patching.
    */
   @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osPatchingStatus?: OsPatchingStatus;
 }
 
 /**
  * Returns metadata about the os patching.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model OsPatchingStatus {
   /**
    * The os patching status.
@@ -10715,6 +10735,7 @@ model OsPatchingStatus {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   @OpenAPI.extension("x-ms-identifiers", #["/error/code"])
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osPatchingErrors?: ErrorResponse[] | null;
 }
 
@@ -10727,6 +10748,7 @@ model ComputeInstanceConnectivityEndpoints {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   publicIpAddress?: string | null;
 
   /**
@@ -10734,6 +10756,7 @@ model ComputeInstanceConnectivityEndpoints {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   privateIpAddress?: string | null;
 }
 

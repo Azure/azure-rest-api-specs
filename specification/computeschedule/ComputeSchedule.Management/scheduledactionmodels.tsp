@@ -83,6 +83,7 @@ model ScheduledActionResource {
 
 @@identifiers(ResourceListResponse.value, #[]);
 @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ResourceListResponse is Azure.Core.Page<ScheduledActionResource>;
 
 @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
@@ -184,6 +185,7 @@ model ScheduledActionsExtensionProperties {
 
 @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 @doc("The response from scheduled action resource requests, which contains the status of each resource")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ScheduledActionResourceOperationResponse {
   @doc("The total number of resources operated on")
   totalResources: int32;

@@ -370,6 +370,7 @@ model L3OptionAProperties {
 
 @doc("External Network Administrative State request")
 @added(Versions.v2024_06_15_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ExternalNetworkBfdAdministrativeStateRequest {
   @doc("Route Type that helps to know which bfd we are updating.")
   routeType?: ExternalNetworkRouteType;
@@ -381,6 +382,7 @@ model ExternalNetworkBfdAdministrativeStateRequest {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending common error response for ExternalNetwork BFD Administrative State response"
 @doc("External Network Administrative State response")
 @added(Versions.v2024_06_15_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ExternalNetworkBfdAdministrativeStateResponse
   extends CommonErrorResponse {
   @doc("Route Type that helps to know which bfd we are updating.")

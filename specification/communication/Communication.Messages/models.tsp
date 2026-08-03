@@ -840,6 +840,7 @@ union ParticipantKind {
 
 @added(Versions.c2025_04_01_Preview)
 @doc("Request payload for sending a conversation message.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SendConversationMessageOptions {
   @doc("Details of a send conversation message request.")
   request: ConversationMessageContent;
@@ -858,6 +859,7 @@ model SendConversationMessageResult {
 @added(Versions.c2025_04_01_Preview)
 @resource("messages/conversations")
 @doc("Request payload for creating a conversation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CreateConversationRequest {
   @key
   @visibility(Lifecycle.Create)
@@ -1027,6 +1029,7 @@ union MessagePlatformKind {
 
 @added(Versions.c2025_04_01_Preview)
 @doc("Request payload for adding participants to a conversation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AddParticipantsOptions {
   @doc("List of participants to add.")
   participants: ConversationParticipant[];
@@ -1034,6 +1037,7 @@ model AddParticipantsOptions {
 
 @added(Versions.c2025_04_01_Preview)
 @doc("Request payload for removing participants from a conversation.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model RemoveParticipantsOptions {
   @doc("The participant IDs to remove.")
   participantIds: string[];

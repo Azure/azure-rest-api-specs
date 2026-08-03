@@ -163,6 +163,7 @@ model ElasticVolumeDataProtectionPatchProperties {
 model ElasticMountTargetProperties {
   /** The mount target's IPv4 address, used to mount the volume */
   @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipAddress?: ipV4Address;
 
   /** The SMB server's Fully Qualified Domain Name, FQDN */

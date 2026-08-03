@@ -39,6 +39,7 @@ model VoiceLiveErrorDetails {
 /** Standard error response envelope. */
 @error
 @usage(ResponseUsage)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ErrorResponse {
   /** Error object returned in case of API failure. */
   error: VoiceLiveErrorDetails;
@@ -204,6 +205,7 @@ model ConversationItemBase {
 /** The response resource. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(ResponseUsage)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model Response {
   /** The unique ID of the response. */
   id?: string;

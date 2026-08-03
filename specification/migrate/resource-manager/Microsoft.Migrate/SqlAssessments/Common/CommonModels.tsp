@@ -276,6 +276,7 @@ model SqlMigrationGuideline {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @doc("SQL target options.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SqlPaaSTargetOptions {
   @doc("Gets or sets the Azure SQL compute tier.")
   computeTier?: ComputeTier;
@@ -303,6 +304,7 @@ model SqlMiSettings {
 }
 
 @doc("SQL database assessment settings.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model SqlDbSettings {
   @doc("Gets or sets the azure SQL service tier.")
   azureSqlServiceTier?: AzureSqlServiceTier;
@@ -327,6 +329,7 @@ model SqlMiSettingsV3 {
 }
 
 @doc("SQL database assessment settings V3.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model SqlDbSettingsV3 {
   @doc("Gets or sets the azure SQL service tier.")
   azureSqlServiceTier?: AzureSqlServiceTierV3;

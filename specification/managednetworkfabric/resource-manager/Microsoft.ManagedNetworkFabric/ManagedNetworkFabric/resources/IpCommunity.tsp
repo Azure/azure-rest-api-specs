@@ -17,6 +17,7 @@ model IpCommunity is Azure.ResourceManager.TrackedResource<
   @key("ipCommunityName")
   @segment("ipCommunities")
   @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   name: string;
 }
 

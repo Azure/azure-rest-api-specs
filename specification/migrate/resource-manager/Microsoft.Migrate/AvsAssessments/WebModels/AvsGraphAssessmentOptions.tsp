@@ -12,6 +12,7 @@ namespace Microsoft.Migrate;
 
 @doc("AVS Assessment Summary REST resource.")
 @parentResource(AssessmentProject)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AvsGraphAssessmentOptions
   is ProxyResource<AvsGraphAssessmentOptionsProperties> {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Singleton resource"

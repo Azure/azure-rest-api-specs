@@ -24,6 +24,7 @@ union DeidentificationOperationType {
 }
 
 @doc("Customizations options to override default service behaviors.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SharedCustomizationOptions {
   @maxLength(16)
   @minLength(1)

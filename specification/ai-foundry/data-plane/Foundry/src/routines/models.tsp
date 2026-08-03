@@ -258,6 +258,7 @@ model Routine {
 
 @doc("The request body used to create or update a routine.")
 @extension("x-ms-foundry-meta", RoutineRequiredPreviews)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model RoutineCreateOrUpdateRequest {
   @doc("A human-readable description of the routine.")
   @maxLength(1024)
@@ -303,6 +304,7 @@ model InvokeAgentInvocationsApiDispatchPayload extends RoutineDispatchPayload {
 
 @doc("Request body for the public dispatch_async route.")
 @extension("x-ms-foundry-meta", RoutineRequiredPreviews)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DispatchRoutineRequest {
   @doc("A direct action-input override sent downstream when testing a routine.")
   payload?: RoutineDispatchPayload;
@@ -310,6 +312,7 @@ model DispatchRoutineRequest {
 
 @doc("Identifiers returned after a routine dispatch is queued.")
 @extension("x-ms-foundry-meta", RoutineRequiredPreviews)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DispatchRoutineResponse {
   @doc("The dispatch identifier created for the routine dispatch.")
   dispatch_id?: string;

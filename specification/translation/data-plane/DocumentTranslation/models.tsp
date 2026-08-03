@@ -148,12 +148,14 @@ model StartTranslationDetails {
 
 @doc("Translation batch request options")
 @added(Versions.v2024_11_01_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchOptions {
   @doc("Translation text within an image option")
   translateTextWithinImage?: boolean = false;
 }
 
 @doc("Definition for the input batch translation request")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchRequest {
   @doc("Source of the input documents")
   source: SourceInput;
@@ -257,6 +259,7 @@ model Glossary {
   a controller.
   """)
 @error
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model TranslationErrorResponse {
   @doc("""
     This contains an outer error with error code, message, details, target and an
@@ -560,6 +563,7 @@ model StartTranslationBody {
 }
 
 @doc("Get Translations Status options")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model GetTranslationsStatusOptions {
   @doc("""
     top indicates the total number of records the user wants to be returned across
@@ -635,6 +639,7 @@ model GetTranslationsStatusOptions {
 }
 
 @doc("Get Documents Status options")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model GetDocumentsStatusOptions {
   @doc("Format - uuid.  The operation id")
   @path

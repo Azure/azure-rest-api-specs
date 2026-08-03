@@ -179,6 +179,7 @@ model EvaluationSuiteVersion {
 
 @doc("Request body for running an evaluation from a suite.")
 @extension("x-ms-foundry-meta", EvaluationSuitesRequiredPreviews)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model EvaluationSuiteRunRequest {
   @doc("Name for the evaluation. Default: '{suiteName}-runs'.")
   evaluation_name?: string;
@@ -192,6 +193,7 @@ model EvaluationSuiteRunRequest {
 
 @doc("Response from running an evaluation suite.")
 @extension("x-ms-foundry-meta", EvaluationSuitesRequiredPreviews)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model EvaluationSuiteRunResponse {
   @doc("The evaluation suite name used.")
   evaluation_suite_name: string;
@@ -332,6 +334,7 @@ model EvaluationSuiteGenerationJobInputs {
 
 @doc("Options for dataset generation within an evaluation suite generation job.")
 @extension("x-ms-foundry-meta", EvaluationSuitesRequiredPreviews)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model EvaluationSuiteDataGenerationOptions {
   @doc("The data generation type. Defaults to 'simple_qna' if not specified.")
   type?: EvaluationDataGenerationType;

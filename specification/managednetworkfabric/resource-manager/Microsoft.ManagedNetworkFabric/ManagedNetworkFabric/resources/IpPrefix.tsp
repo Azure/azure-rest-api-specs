@@ -17,6 +17,7 @@ model IpPrefix is Azure.ResourceManager.TrackedResource<
   @key("ipPrefixName")
   @segment("ipPrefixes")
   @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   name: string;
 }
 

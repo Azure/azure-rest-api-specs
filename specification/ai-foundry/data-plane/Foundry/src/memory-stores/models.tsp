@@ -49,6 +49,7 @@ model MemoryStoreObject {
 }
 
 @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DeleteMemoryStoreResponse {
   @doc("The object type. Always 'memory_store.deleted'.")
   object: MemoryStoreObjectType.memoryStoreDeleted;
@@ -98,6 +99,7 @@ model MemoryStoreDefaultDefinition extends MemoryStoreDefinition {
 
 @doc("Default memory store configurations.")
 @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model MemoryStoreDefaultOptions {
   @doc("Whether to enable user profile extraction and storage. Default is true.")
   user_profile_enabled: boolean = true;
@@ -144,6 +146,7 @@ union MemoryStoreUpdateStatus {
 
 @doc("Provides the status of a memory store update operation.")
 @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model MemoryStoreUpdateResponse {
   @doc("The unique ID of this update request. Use this value as previous_update_id in subsequent requests to perform incremental updates.")
   update_id: string;
@@ -203,6 +206,7 @@ union MemoryOperationKind {
 
 @doc("Memory search options.")
 @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model MemorySearchOptions {
   @doc("Maximum number of memory items to return.")
   max_memories?: int32;
@@ -210,6 +214,7 @@ model MemorySearchOptions {
 
 @doc("Memory search response.")
 @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model MemoryStoreSearchResponse {
   @doc("The unique ID of this search request. Use this value as previous_search_id in subsequent requests to perform incremental searches.")
   search_id: string;
@@ -286,6 +291,7 @@ model ProceduralMemoryItem extends MemoryItem {
 
 @doc("Response for deleting memories from a scope.")
 @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model MemoryStoreDeleteScopeResponse {
   @doc("The object type. Always 'memory_store.scope.deleted'.")
   object: MemoryStoreObjectType.memoryStoreScopeDeleted;
@@ -302,6 +308,7 @@ model MemoryStoreDeleteScopeResponse {
 
 @doc("Response for deleting a memory item from a memory store.")
 @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DeleteMemoryResponse {
   @doc("The object type. Always 'memory_store.item.deleted'.")
   object: MemoryStoreObjectType.memoryDeleted;

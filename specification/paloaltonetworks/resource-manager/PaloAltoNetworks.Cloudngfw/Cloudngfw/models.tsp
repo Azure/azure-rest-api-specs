@@ -2287,6 +2287,7 @@ model CustomCaptureConfigurationsFilter {
   protocol: CustomCaptureConfigurationsProtocol;
 
   @doc("Source IPv4 address in dotted format (e.g., 10.0.0.5).")
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   sourceIpAddress: string;
 
   @doc("Source port number (1-65535). Optional — omit to match any source port.")
@@ -2295,6 +2296,7 @@ model CustomCaptureConfigurationsFilter {
   sourcePort?: int32;
 
   @doc("Destination IPv4 address in dotted format (e.g., 52.39.204.87).")
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   destinationIpAddress: string;
 
   @doc("Destination port number (1-65535). Required.")
