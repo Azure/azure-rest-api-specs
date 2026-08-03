@@ -224,7 +224,7 @@ union RelationshipType {
   /**
    * The member was explicitly added to the service group.
    */
-  ServiceGroupMembers: "Microsoft.Relationships/serviceGroupMembers",
+  ServiceGroupMember: "Microsoft.Relationships/serviceGroupMember",
 
   /**
    * The member is included transitively because its container (for example, a
