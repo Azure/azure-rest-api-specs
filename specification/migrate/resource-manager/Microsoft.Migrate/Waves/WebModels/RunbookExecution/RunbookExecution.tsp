@@ -36,7 +36,6 @@ model RunbookExecutionProperties is AzureResourceProperties {
   executionArtifactId?: string;
 
   @doc("Current runbook execution status.")
-  @visibility(Lifecycle.Read)
   status?: string;
 
   @doc("Start time of runbook execution.")
