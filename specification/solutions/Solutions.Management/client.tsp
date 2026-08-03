@@ -2,6 +2,7 @@ import "@azure-tools/typespec-client-generator-core";
 import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
+using Azure.Core;
 using Microsoft.Solutions;
 
 @@clientName(
@@ -88,5 +89,57 @@ using Microsoft.Solutions;
 @@alternateType(
   Identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+
+@@alternateType(Resource.id, armResourceIdentifier, "csharp");
+@@alternateType(
+  ApplicationProperties.managedResourceGroupId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  ApplicationProperties.applicationDefinitionId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  ApplicationPropertiesPatchable.managedResourceGroupId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  ApplicationPropertiesPatchable.applicationDefinitionId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  JitRequestProperties.applicationResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  ApplicationDefinitionProperties.storageAccountId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  ApplicationPolicy.policyDefinitionId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  ApplicationAuthorization.roleDefinitionId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  JitAuthorizationPolicies.roleDefinitionId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  ManagedIdentityToken.resourceId,
+  armResourceIdentifier,
   "csharp"
 );
