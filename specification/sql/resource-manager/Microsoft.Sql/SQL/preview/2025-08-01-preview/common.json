@@ -2637,6 +2637,20 @@
         ]
       }
     },
+    "EndpointTrustedRootCertificateInfo": {
+      "type": "object",
+      "description": "Trusted root certificate required to validate the instance certificate",
+      "properties": {
+        "subject": {
+          "type": "string",
+          "description": "Root certificate subject name"
+        },
+        "publicBlob": {
+          "type": "string",
+          "description": "Root certificate public blob as DER encoded hex string"
+        }
+      }
+    },
     "ErrorType": {
       "type": "string",
       "description": "Error type (e.g. None, User).",
@@ -3775,6 +3789,30 @@
         ]
       }
     },
+    "LinkModeType": {
+      "type": "string",
+      "description": "Specifies whether the link operates in single-database or multi-database mode.",
+      "enum": [
+        "SingleDatabase",
+        "MultiDatabase"
+      ],
+      "x-ms-enum": {
+        "name": "LinkModeType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SingleDatabase",
+            "value": "SingleDatabase",
+            "description": "The link operates in single-database mode."
+          },
+          {
+            "name": "MultiDatabase",
+            "value": "MultiDatabase",
+            "description": "The link operates in multi-database mode."
+          }
+        ]
+      }
+    },
     "LinkRole": {
       "type": "string",
       "description": "SQL server side link role",
@@ -4063,6 +4101,36 @@
             "name": "DbCopying",
             "value": "DbCopying",
             "description": "DbCopying"
+          }
+        ]
+      }
+    },
+    "ManagedInstanceAdministratorPrincipalType": {
+      "type": "string",
+      "description": "Principal type of the managed instance administrator.",
+      "enum": [
+        "User",
+        "Group",
+        "Application"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedInstanceAdministratorPrincipalType",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "User",
+            "value": "User",
+            "description": "Indicates that the principal is a user."
+          },
+          {
+            "name": "Group",
+            "value": "Group",
+            "description": "Indicates that the principal is a group."
+          },
+          {
+            "name": "Application",
+            "value": "Application",
+            "description": "Indicates that the principal is an application."
           }
         ]
       }

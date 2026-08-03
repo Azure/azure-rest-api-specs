@@ -10,6 +10,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Sql;
 
@@ -99,6 +100,20 @@ interface LongTermRetentionBackupsOperationGroup {
        */
       @query("databaseState")
       databaseState?: DatabaseState;
+
+      /**
+       * An opaque token that identifies a starting point in the collection.
+       */
+      @query("$skiptoken")
+      @added(Versions.v2025_08_01_preview)
+      $skiptoken?: string;
+
+      /**
+       * The number of elements to return from the collection.
+       */
+      @query("$top")
+      @added(Versions.v2025_08_01_preview)
+      $top?: int64;
     }
   >;
   /**
@@ -138,6 +153,20 @@ interface LongTermRetentionBackupsOperationGroup {
        */
       @query("databaseState")
       databaseState?: DatabaseState;
+
+      /**
+       * An opaque token that identifies a starting point in the collection.
+       */
+      @query("$skiptoken")
+      @added(Versions.v2025_08_01_preview)
+      $skiptoken?: string;
+
+      /**
+       * The number of elements to return from the collection.
+       */
+      @query("$top")
+      @added(Versions.v2025_08_01_preview)
+      $top?: int64;
     }
   >;
   /**
@@ -170,6 +199,20 @@ interface LongTermRetentionBackupsOperationGroup {
        */
       @query("databaseState")
       databaseState?: DatabaseState;
+
+      /**
+       * An opaque token that identifies a starting point in the collection.
+       */
+      @query("$skiptoken")
+      @added(Versions.v2025_08_01_preview)
+      $skiptoken?: string;
+
+      /**
+       * The number of elements to return from the collection.
+       */
+      @query("$top")
+      @added(Versions.v2025_08_01_preview)
+      $top?: int64;
     }
   >;
   /**
@@ -209,6 +252,20 @@ interface LongTermRetentionBackupsOperationGroup {
        */
       @query("databaseState")
       databaseState?: DatabaseState;
+
+      /**
+       * An opaque token that identifies a starting point in the collection.
+       */
+      @query("$skiptoken")
+      @added(Versions.v2025_08_01_preview)
+      $skiptoken?: string;
+
+      /**
+       * The number of elements to return from the collection.
+       */
+      @query("$top")
+      @added(Versions.v2025_08_01_preview)
+      $top?: int64;
     }
   >;
 }
