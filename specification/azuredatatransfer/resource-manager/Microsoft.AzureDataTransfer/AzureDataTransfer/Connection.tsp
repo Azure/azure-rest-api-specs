@@ -25,8 +25,6 @@ model Connection
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
 
-model ArmConnectionResponse is ArmResponse<Connection>;
-
 @armResourceOperations
 interface Connections {
   /**
@@ -73,11 +71,7 @@ interface Connections {
   /**
    * Links the connection to its pending connection.
    */
-  link is ArmResourceActionAsync<
-    Connection,
-    ResourceBody,
-    ArmConnectionResponse
-  >;
+  link is ArmResourceActionAsync<Connection, ResourceBody, Connection>;
 
   /**
    * Lists all pending remote connections that are linkable to this connection.
