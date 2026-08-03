@@ -5737,7 +5737,7 @@ model AdditionalDiskProperties {
 @added(Versions.v2026_04_01)
 model ManagedDiskProperties {
   /**
-   * Performance tier of the disk (e.g, P4, S10) as described here: https://azure.microsoft.com/en-us/pricing/details/managed-disks/. Does not apply to Ultra disks.
+   * Performance tier of the disk (e.g., P4, S10) as described here: https://azure.microsoft.com/en-us/pricing/details/managed-disks/. Does not apply to Ultra disks.
    */
   tier?: string;
 
@@ -5752,7 +5752,7 @@ model ManagedDiskProperties {
   performancePlus?: boolean;
 
   /**
-   * Setting this property to true improves reliability and performance of data disks that are frequently (more than 5 times a day) by detached from one virtual machine and attached to another. This property should not be set for disks that are not detached and attached frequently as it causes the disks to not align with the fault domain of the virtual machine.
+   * Setting this property to true improves reliability and performance of data disks that are frequently (more than 5 times a day) detached from one virtual machine and attached to another. This property should not be set for disks that are not detached and attached frequently as it causes the disks to not align with the fault domain of the virtual machine.
    */
   optimizedForFrequentAttach?: boolean;
 
@@ -5789,7 +5789,7 @@ model ManagedDiskProperties {
   diskMBpsReadOnly?: int64;
 
   /**
-   * Logical sector size in bytes for Ultra disks. Supported values are 512 ad 4096. 4096 is the default.
+   * Logical sector size in bytes for Ultra Disks. Supported values are 512 and 4096. 4096 is the default.
    */
   logicalSectorSize?: int32;
 }
@@ -5800,7 +5800,7 @@ model ManagedDiskProperties {
 @added(Versions.v2026_04_01)
 model DiskAvailabilityPolicy {
   /**
-   * Determines on how to handle disks with slow I/O.
+   * Determines how to handle disks with slow I/O.
    */
   actionOnDiskDelay?: AvailabilityPolicyDiskDelay;
 }
@@ -5813,12 +5813,12 @@ union AvailabilityPolicyDiskDelay {
   string,
 
   /**
-   * Defaults to behavior without av policy specified, which is VM restart upon slow disk io.
+   * Defaults to behavior without availability policy specified, which is VM restart upon slow disk I/O.
    */
   None: "None",
 
   /**
-   * Upon a disk io failure or slow response, try detaching then reattaching the disk.
+   * Upon a disk I/O failure or slow response, try detaching then reattaching the disk.
    */
   AutomaticReattach: "AutomaticReattach",
 }
@@ -5831,12 +5831,12 @@ union NetworkAccessPolicy {
   string,
 
   /**
-   * The disk can be exported or uploaded to from any network.
+   * The disk can be exported or uploaded from any network.
    */
   AllowAll: "AllowAll",
 
   /**
-   * The disk can be exported or uploaded to using a DiskAccess resource's private endpoints.
+   * The disk can be exported or uploaded using a DiskAccess resource's private endpoints.
    */
   AllowPrivate: "AllowPrivate",
 
