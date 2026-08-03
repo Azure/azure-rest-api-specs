@@ -110,6 +110,7 @@ model DbSystemBaseProperties {
   @minValue(2)
   dataStorageSizeInGbs?: int32;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The DB system options.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   dbSystemOptions?: DbSystemOptions;
@@ -308,6 +309,7 @@ union DbSystemSourceType {
   string,
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v20250701_preview)
 @doc("DbSystemOptions resource properties.")
 model DbSystemOptions {
