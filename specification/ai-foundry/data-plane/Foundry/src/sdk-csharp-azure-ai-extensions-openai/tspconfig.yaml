@@ -8,6 +8,9 @@ options:
     emitter-output-dir: "{output-dir}/{service-dir}/{package-name}"
     package-name: Azure.AI.Extensions.OpenAI
     api-version: "v1"
+    sdk-context-options:
+      additionalDecorators:
+        - 'TypeSpec\.OpenAPI\.@extension'
     plugins:
       - "../codegen"
   "@azure-tools/typespec-client-generator-cli":

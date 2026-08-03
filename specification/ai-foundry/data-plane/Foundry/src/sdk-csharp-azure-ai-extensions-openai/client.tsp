@@ -507,7 +507,15 @@ namespace Azure.AI.Projects {
     },
     "csharp"
   );
-  @@alternateType(OpenAI.MCPToolRequireApproval, {  identity: "OpenAI.Responses.McpToolCallApprovalPolicy",  package: "OpenAI",  minVersion: "2.12.0"}, "csharp");
+  @@alternateType(
+    OpenAI.MCPToolRequireApproval,
+    {
+      identity: "OpenAI.Responses.McpToolCallApprovalPolicy",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
   @@alternateType(
     OpenAI.MCPToolFilter,
     {
@@ -953,7 +961,7 @@ namespace Azure.AI.Projects {
 
   @@usage(FabricIQPreviewTool, Usage.input | Usage.output);
   @@clientName(FabricIQPreviewTool.server_url, "ServerUri");
-  @@clientName(WebIQPreviewTool.server_url, "ServerUri");
+  //@@clientName(WebIQPreviewTool.server_url, "ServerUri");
   @@clientName(
     CaptureStructuredOutputsTool.outputs,
     "OutputDefinition",

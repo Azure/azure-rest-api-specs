@@ -6,6 +6,9 @@ options:
     emitter-output-dir: "{output-dir}/{service-dir}/{package-name}"
     package-name: Azure.AI.Projects
     api-version: "v1"
+    sdk-context-options:
+      additionalDecorators:
+        - 'TypeSpec\.OpenAPI\.@extension'
     plugins:
       - "../codegen"
   "typespec-extension-exporter":
