@@ -19,6 +19,9 @@ scoring:
 stimuli:
   # 160001 -- Subagent dispatch failure must produce auto-unavailable banner and no session-handoff prompt
   - name: critic-subagent-failure-auto-unavailable
+    environment:
+      skills:
+        - "../../../azure-api-review"
     prompt: |
       You are the ARM API Reviewer for PR Azure/azure-rest-api-specs#12345.
       Step 1 pinned session head SHA
@@ -63,6 +66,9 @@ stimuli:
 
   # 160002 -- Critic INVALIDATED kills the session and findings stay hidden
   - name: critic-invalidated-stops-session
+    environment:
+      skills:
+        - "../../../azure-api-review"
     prompt: |
       You are the ARM API Reviewer for PR Azure/azure-rest-api-specs#12345.
       Step 1 pinned session head SHA
@@ -139,6 +145,9 @@ stimuli:
 
   # 160003 -- Conflict-aware recommendations carry downstream-rule telemetry
   - name: downstream-ci-conflict-marker-required
+    environment:
+      skills:
+        - "../../../azure-api-review"
     prompt: |
       You are drafting a single ARM API review finding (Step 6 canonical body)
       where the recommendation is to switch a plain string property named
@@ -205,6 +214,9 @@ stimuli:
 
   # 160004 -- Happy-path: Critic PASS, READY TO POST report rendered with subagent marker
   - name: critic-pass-renders-ready-to-post
+    environment:
+      skills:
+        - "../../../azure-api-review"
     prompt: |
       You are the ARM API Reviewer for PR Azure/azure-rest-api-specs#54321.
       Step 1 pinned session head SHA
@@ -285,6 +297,9 @@ stimuli:
 
   # 160005 -- Step 1 SHA pinning emits the marker on the very first progress message
   - name: step1-pins-session-and-base-sha
+    environment:
+      skills:
+        - "../../../azure-api-review"
     prompt: >
       Start an ARM API review for pull request
       `https://github.com/Azure/azure-rest-api-specs/pull/77777`. Perform
@@ -334,6 +349,9 @@ stimuli:
 
   # 160006 -- Iteration 2 marker: re-rendered report after a Critic FAIL was reconciled
   - name: iteration-2-after-critic-reconciliation
+    environment:
+      skills:
+        - "../../../azure-api-review"
     prompt: |
       You are the ARM API Reviewer for PR Azure/azure-rest-api-specs#88888.
       Step 1 pinned session head SHA
@@ -410,6 +428,9 @@ stimuli:
 
   # 160007 -- Override-reason marker is emitted when human overrides a Critic FAIL
   - name: override-reason-marker-on-human-override
+    environment:
+      skills:
+        - "../../../azure-api-review"
     prompt: |
       You are the ARM API Reviewer for PR Azure/azure-rest-api-specs#99999.
       Step 1 pinned session head SHA
@@ -495,6 +516,9 @@ stimuli:
 
   # 160008 -- Telemetry-degraded fallback marker when a required field cannot be assembled
   - name: telemetry-degraded-fallback-marker
+    environment:
+      skills:
+        - "../../../azure-api-review"
     prompt: |
       Reply with exactly the following Markdown and nothing else. No
       preamble, no commentary, no refusal, no explanation. The first
@@ -557,6 +581,9 @@ stimuli:
 
   # 160009 -- critic: unknown emitted when per-finding verdict cannot be looked up
   - name: critic-unknown-fallback-value
+    environment:
+      skills:
+        - "../../../azure-api-review"
     prompt: |
       Reply with exactly the following Markdown and nothing else. No
       preamble, no commentary, no refusal, no explanation. The first
@@ -606,6 +633,9 @@ stimuli:
 
   # 160010 -- ARMChangesRequested label is NOT proposed when zero comments will post
   - name: armchanges-label-skipped-on-clean-plan
+    environment:
+      skills:
+        - "../../../azure-api-review"
     prompt: |
       You are the ARM API Reviewer for PR Azure/azure-rest-api-specs#54321.
       Step 1 pinned session head SHA
@@ -658,6 +688,9 @@ stimuli:
 
   # 160011 -- Empty Critic response must NOT be treated as a PASS
   - name: critic-subagent-failure-empty-response-not-pass
+    environment:
+      skills:
+        - "../../../azure-api-review"
     prompt: |
       You are the ARM API Reviewer for PR Azure/azure-rest-api-specs#12345.
       Step 1 pinned session head SHA

@@ -24,6 +24,8 @@ stimuli:
   # 150001 — Examples-only PR elects fast path
   - name: examples-only-pr-elects-fast-path
     environment:
+      skills:
+        - "../../../azure-api-review"
       files:
         - src: "../fixtures/examples/example-clean.json"
           dest: "specification/fastsvc/resource-manager/Microsoft.FastService/stable/2025-01-01/examples/Widgets_Get.json"
@@ -70,6 +72,8 @@ stimuli:
   # 150002 — Schema change forces full review (no fast path)
   - name: schema-change-forces-full-review
     environment:
+      skills:
+        - "../../../azure-api-review"
       files:
         - src: "../fixtures/arm-openapi/secret-property.json"
           dest: "specification/fpsvc/resource-manager/Microsoft.FpService/stable/2025-01-01/fpsvc.json"
@@ -120,6 +124,8 @@ stimuli:
   # 150003 — Uncertain qualification defaults to full review
   - name: uncertain-qualification-defaults-to-full-review
     environment:
+      skills:
+        - "../../../azure-api-review"
       files:
         - src: "../fixtures/arm-openapi/missing-descriptions.json"
           dest: "specification/descsvc/resource-manager/Microsoft.DescService/stable/2025-01-01/descsvc.json"

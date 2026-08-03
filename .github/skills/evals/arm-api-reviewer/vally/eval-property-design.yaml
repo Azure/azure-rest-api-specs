@@ -20,6 +20,8 @@ stimuli:
   # 020001 — Secret properties
   - name: detect-secret-properties
     environment:
+      skills:
+        - "../../../azure-api-review"
       files:
         - src: "../fixtures/arm-openapi/secret-property.json"
           dest: "specification/secretsvc/resource-manager/Microsoft.SecretService/stable/2025-01-01/secretsvc.json"
@@ -60,6 +62,8 @@ stimuli:
   # 020002 — Naming violations
   - name: detect-naming-violations
     environment:
+      skills:
+        - "../../../azure-api-review"
       files:
         - src: "../fixtures/arm-openapi/naming-violations.json"
           dest: "specification/namingsvc/resource-manager/Microsoft.NamingService/stable/2025-01-01/namingsvc.json"
@@ -91,6 +95,8 @@ stimuli:
   # 020003 — Missing descriptions
   - name: detect-missing-descriptions
     environment:
+      skills:
+        - "../../../azure-api-review"
       files:
         - src: "../fixtures/arm-openapi/missing-descriptions.json"
           dest: "specification/descrsvc/resource-manager/Microsoft.DescrService/stable/2025-01-01/descrsvc.json"
@@ -122,6 +128,8 @@ stimuli:
   # 020004 — Enum violations
   - name: detect-enum-violations
     environment:
+      skills:
+        - "../../../azure-api-review"
       files:
         - src: "../fixtures/arm-openapi/enum-violations.json"
           dest: "specification/enumsvc/resource-manager/Microsoft.EnumService/stable/2025-01-01/enumsvc.json"

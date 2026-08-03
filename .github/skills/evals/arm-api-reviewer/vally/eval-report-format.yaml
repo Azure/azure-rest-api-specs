@@ -20,6 +20,8 @@ stimuli:
   # 110001 — Report format structure
   - name: verify-report-format-structure
     environment:
+      skills:
+        - "../../../azure-api-review"
       files:
         - src: "../fixtures/arm-openapi/secret-property.json"
           dest: "specification/fmtsvc/resource-manager/Microsoft.FmtService/stable/2025-01-01/fmtsvc.json"
@@ -69,6 +71,8 @@ stimuli:
   # 110002 -- Critic process invisibility on the happy path
   - name: critic-invisible-on-clean-spec
     environment:
+      skills:
+        - "../../../azure-api-review"
       files:
         - src: "../fixtures/arm-openapi/clean-spec.json"
           dest: "specification/cleansvc/resource-manager/Microsoft.CleanService/stable/2025-01-01/cleansvc.json"

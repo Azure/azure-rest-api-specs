@@ -20,6 +20,8 @@ stimuli:
   # 080001 — checkNameAvailability with custom models and no input validation
   - name: detect-cna-violations
     environment:
+      skills:
+        - "../../../azure-api-review"
       files:
         - src: "../fixtures/arm-openapi/cna-violations.json"
           dest: "specification/cnatestsvc/resource-manager/Microsoft.CnaTest/stable/2025-01-01/cnatestsvc.json"

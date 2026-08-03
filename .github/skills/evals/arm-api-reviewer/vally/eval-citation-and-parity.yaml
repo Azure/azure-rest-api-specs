@@ -31,6 +31,8 @@ stimuli:
   # 130001 -- Rule IDs cited as markdown hyperlinks
   - name: rule-ids-cited-as-markdown-hyperlinks
     environment:
+      skills:
+        - "../../../azure-api-review"
       files:
         - src: "../fixtures/arm-openapi/secret-property.json"
           dest: "specification/citesvc/resource-manager/Microsoft.CiteService/stable/2025-01-01/citesvc.json"
@@ -123,6 +125,8 @@ stimuli:
   # 130002 -- Reviewer-posted parity: chat output contains complete canonical bodies
   - name: reviewer-posted-parity-canonical-bodies
     environment:
+      skills:
+        - "../../../azure-api-review"
       files:
         - src: "../fixtures/arm-openapi/secret-property.json"
           dest: "specification/paritysvc/resource-manager/Microsoft.ParityService/stable/2025-01-01/paritysvc.json"
@@ -217,6 +221,8 @@ stimuli:
   # 130003 -- Negative case: shortened/consolidated post is forbidden
   - name: reviewer-posted-parity-rejects-shortening
     environment:
+      skills:
+        - "../../../azure-api-review"
       files:
         - src: "../fixtures/arm-openapi/secret-property.json"
           dest: "specification/shortsvc/resource-manager/Microsoft.ShortService/stable/2025-01-01/shortsvc.json"

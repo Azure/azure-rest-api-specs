@@ -1,4 +1,7 @@
 paths:
+  # Discovery root only -- vally loads skills from `--skill-dir` or from a stimulus's
+  # `environment.skills`, never from `paths.skills` alone. Each stimulus in vally/eval-*.yaml
+  # declares `skills: ["../../../azure-api-review"]`; do not drop those blocks.
   skills: "../../../skills/"
   evals: vally/
 

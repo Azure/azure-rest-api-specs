@@ -20,6 +20,8 @@ stimuli:
   # 040001 — Removed property between versions
   - name: detect-breaking-removed-property
     environment:
+      skills:
+        - "../../../azure-api-review"
       files:
         - src: "../fixtures/version-pairs/removed-property/stable-2024-01-01.json"
           dest: "specification/widgetsvc/resource-manager/Microsoft.WidgetService/stable/2024-01-01/widgetsvc.json"
@@ -51,6 +53,8 @@ stimuli:
   # 040002 — Property type change between versions
   - name: detect-breaking-type-change
     environment:
+      skills:
+        - "../../../azure-api-review"
       files:
         - src: "../fixtures/version-pairs/type-change/stable-2024-01-01.json"
           dest: "specification/typechgsvc/resource-manager/Microsoft.TypeChgService/stable/2024-01-01/typechgsvc.json"
@@ -81,6 +85,8 @@ stimuli:
   # 040003 — Enum value narrowing between versions
   - name: detect-breaking-enum-narrowing
     environment:
+      skills:
+        - "../../../azure-api-review"
       files:
         - src: "../fixtures/version-pairs/enum-narrowing/stable-2024-01-01.json"
           dest: "specification/enumnarrow/resource-manager/Microsoft.EnumNarrow/stable/2024-01-01/enumnarrow.json"
@@ -109,6 +115,8 @@ stimuli:
   # 040004 — Optional property becomes required between versions
   - name: detect-breaking-added-required-property
     environment:
+      skills:
+        - "../../../azure-api-review"
       files:
         - src: "../fixtures/version-pairs/added-required-property/stable-2024-01-01.json"
           dest: "specification/reqpropsvc/resource-manager/Microsoft.RequiredProp/stable/2024-01-01/reqpropsvc.json"

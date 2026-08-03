@@ -20,6 +20,8 @@ stimuli:
   # 050001 — Suppressions without reason
   - name: detect-suppression-no-reason
     environment:
+      skills:
+        - "../../../azure-api-review"
       files:
         - src: "../fixtures/readme/readme-new-suppression-no-reason.md"
           dest: "specification/nosupprsvc/resource-manager/readme.md"
@@ -49,6 +51,8 @@ stimuli:
   # 050002 — Security rule suppressions
   - name: detect-suppression-security-rule
     environment:
+      skills:
+        - "../../../azure-api-review"
       files:
         - src: "../fixtures/readme/readme-security-suppression.md"
           dest: "specification/secsupprsvc/resource-manager/readme.md"

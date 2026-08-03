@@ -24,6 +24,8 @@ stimuli:
   # 140001 — New suppressions.yaml entry without a reason field
   - name: detect-suppressions-yaml-no-reason
     environment:
+      skills:
+        - "../../../azure-api-review"
       files:
         - src: "../fixtures/suppressions-yaml/suppressions-no-reason.yaml"
           dest: "specification/suppressions.yaml"
@@ -74,6 +76,8 @@ stimuli:
   # 140002 — New suppressions.yaml entry for a security-related rule
   - name: detect-suppressions-yaml-security-rule
     environment:
+      skills:
+        - "../../../azure-api-review"
       files:
         - src: "../fixtures/suppressions-yaml/suppressions-security-rule.yaml"
           dest: "specification/suppressions.yaml"
