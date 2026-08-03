@@ -313,6 +313,9 @@
           }
         },
         "x-ms-examples": {
+          "Update the databases of a distributed availability group.": {
+            "$ref": "./examples/DistributedAvailabilityGroupsUpdateDatabases.json"
+          },
           "Update the distributed availability group replication mode before deleting it.": {
             "$ref": "./examples/DistributedAvailabilityGroupsUpdate.json"
           }
@@ -753,6 +756,10 @@
         "seedingMode": {
           "$ref": "./common.json#/definitions/SeedingModeType",
           "description": "Database seeding mode – can be Automatic (default), or Manual for supported scenarios."
+        },
+        "linkMode": {
+          "$ref": "./common.json#/definitions/LinkModeType",
+          "description": "Specifies whether the link operates in single-database or multi-database mode."
         },
         "databases": {
           "type": "array",
